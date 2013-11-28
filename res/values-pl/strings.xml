@@ -6,6 +6,8 @@
     <string name="battery_style_circle">Koło</string>
     <string name="battery_style_circle_percent">Koło z procentami</string>
     <string name="battery_style_percent">Tekstowy wskaźnik baterii</string>
+    <string name="battery_style_kitkat">Wskaźnik baterii KitKat</string>
+    <string name="battery_style_kitkat_percent">Procentowy wsk. baterii KitKat</string>
     <string name="battery_style_none">Brak</string>
     <string name="vol_music_controls_title">Pomiń utwór przyciskiem głośności</string>
     <string name="vol_music_controls_summary">Długie przyciśnięcie pomija odtwarzany utwór gdy ekran jest wyłączony</string>
@@ -502,4 +504,14 @@
     <string name="pref_statusbar_icon_color_secondary_summary">Zastępuje domyślny pomarańczowy wskaźnik sygnału</string>
     <string name="pref_statusbar_data_activity_color_secondary_title">Kolor drugiego wskaźnika aktywności danych</string>
     <string name="pref_statusbar_data_activity_color_secondary_summary">Ustawia kolor dla drugiego wskaźnik aktywności transmisji danych</string>
+    <string name="pref_status_icon_style_title">Styl ikon statusu</string>
+    <string name="pref_status_icon_style_summary">Dotyczy ikon statusu takich jak cisza, wibracje, alarm, itp.</string>
+    <string name="icon_style_jb">JellyBean</string>
+    <string name="icon_style_kk">KitKat</string>
+    <string name="hwkey_back_doubletap_dialog_title">Akcja podwójnego kliknięcia BACK</string>
+    <string name="hwkey_action_home">Ekran HOME</string>
+    <string name="hwkey_action_back">Powrót</string>
+    <string name="pref_qs_tile_style_title">Styl kafelek</string>
+    <string name="pref_qs_tile_style_summary">Dotyczy tylko kafelek dodanych przez GravityBox (nie dotyczy typowych kafelek)</string>
+    <string name="pref_recent_clear_margin_bottom_title">Ustaw dolny margines</string>
 </resources>
