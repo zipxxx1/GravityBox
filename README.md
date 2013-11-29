@@ -6,7 +6,7 @@ XPosed Tweak Box for devices running Android 4.4 (KitKat)
 Visit official thread at XDA for more info:
 http://forum.xda-developers.com/showthread.php?t=2316070
 
-Copyright (C) 2013 Peter Gregus (gravitybox@ceco.sk.eu.org)
+Copyright (C) 2013 Peter Gregus (xgravitybox@gmail.com)
 You may not distribute nor sell this software or parts of it in 
 Source, Object nor in any other form without explicit permission obtained 
 from the original author. 
