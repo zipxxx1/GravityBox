@@ -157,6 +157,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_FIX_TTS_SETTINGS = "pref_fix_tts_settings";
     public static final String PREF_KEY_FIX_DEV_OPTS = "pref_fix_dev_opts";
     public static final String PREF_KEY_ABOUT_GRAVITYBOX = "pref_about_gb";
+    public static final String PREF_KEY_ABOUT_GPLUS = "pref_about_gplus";
     public static final String PREF_KEY_ABOUT_XPOSED = "pref_about_xposed";
     public static final String PREF_KEY_ABOUT_DONATE = "pref_about_donate";
     public static final String PREF_KEY_CRT_OFF_EFFECT = "pref_crt_off_effect";
@@ -641,6 +642,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private MultiSelectListPreference mQuickSettings;
         private ColorPickerPreference mStatusbarBgColor;
         private Preference mPrefAboutGb;
+        private Preference mPrefAboutGplus;
         private Preference mPrefAboutXposed;
         private Preference mPrefAboutDonate;
         private Preference mPrefEngMode;
@@ -794,6 +796,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefAboutGb.setTitle(getActivity().getTitle() + version);
             }
 
+            mPrefAboutGplus = (Preference) findPreference(PREF_KEY_ABOUT_GPLUS);
             mPrefAboutXposed = (Preference) findPreference(PREF_KEY_ABOUT_XPOSED);
             mPrefAboutDonate = (Preference) findPreference(PREF_KEY_ABOUT_DONATE);
 
@@ -1820,6 +1823,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (pref == mPrefAboutGb) {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_gravitybox)));
+            } else if (pref == mPrefAboutGplus) {
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_gplus)));
             } else if (pref == mPrefAboutXposed) {
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_xposed)));
             } else if (pref == mPrefAboutDonate) {
