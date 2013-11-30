@@ -703,10 +703,6 @@
     <string name="pref_navbar_key_color_title">Farbe der Navigationstaste</string>
     <string name="pref_navbar_key_glow_color_title">Leuchtfarbe der Navigationstaste</string>
     <string name="pref_navbar_bg_color_title">Hintergrundfarbe der Navigationsleiste</string>
-
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">Deaktiviert Sperrbildschirm-Schattierung</string>
-    <string name="pref_lockscreen_shade_disable_summary">Entfernt dunkle Tönung vom Sperrbildschirm</string>
 	
 	<!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Transparenz-Manager-Modus</string>

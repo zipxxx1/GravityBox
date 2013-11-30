@@ -725,11 +725,7 @@
     <string name="pref_navbar_key_color_title">虚拟按键颜色</string>
     <string name="pref_navbar_key_glow_color_title">虚拟按键发光颜色</string>
     <string name="pref_navbar_bg_color_title">虚拟按键背景颜色</string>
-    
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">禁用锁屏阴影</string>
-    <string name="pref_lockscreen_shade_disable_summary">锁屏后移除暗色调</string>
-    
+
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">透明度管理模式</string>
     <string name="pref_tm_mode_summary">需要重新启动</string>

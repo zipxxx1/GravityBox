@@ -459,8 +459,6 @@
     <string name="pref_navbar_key_color_title">Kolor klawisza nawigacyjnego</string>
     <string name="pref_navbar_key_glow_color_title">Poświata klawisza nawigacyjnego</string>
     <string name="pref_navbar_bg_color_title">Tło klawisza nawigacyjnego</string>
-    <string name="pref_lockscreen_shade_disable_title">Wyłącz przyciemnienie ekranu</string>
-    <string name="pref_lockscreen_shade_disable_summary">Usuwa przyciemnienie ekranu blokady</string>
     <string name="pref_tm_mode_title">Tryb przezroczystości</string>
     <string name="pref_tm_mode_summary">Wymaga ponownego uruchomienia</string>
     <string name="tm_mode_disabled">Wyłączony</string>

@@ -723,10 +723,6 @@
     <string name="pref_navbar_key_color_title">Navigációs gomb színe</string>
     <string name="pref_navbar_key_glow_color_title">Aktív navigációs gomb színe</string>
     <string name="pref_navbar_bg_color_title">Navigációs sáv háttérének színe</string>
-
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">Zárképernyő árnyékolás letiltása</string>
-    <string name="pref_lockscreen_shade_disable_summary">Eltávolítja a sötét árnyalatot a zárképernyőről</string>
 	
 	<!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Átlátszóság menedzser mód</string>

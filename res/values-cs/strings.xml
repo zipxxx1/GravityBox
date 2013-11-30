@@ -702,10 +702,6 @@
     <string name="pref_navbar_key_glow_color_title">Efekt tlačítek</string>
     <string name="pref_navbar_bg_color_title">Barva pozadí lišty</string>
 
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">Vypnout zatmavení</string>
-    <string name="pref_lockscreen_shade_disable_summary">Vypne zatmavení obrazovky uzamčení</string>
-
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Režim průhlednosti</string>
     <string name="pref_tm_mode_summary">Vyžaduje restart</string>

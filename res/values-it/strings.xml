@@ -677,11 +677,7 @@
     <string name="pref_navbar_key_glow_color_title">Colore tasto navigazione evidenziato</string>
     <string name="pref_navbar_bg_color_title">Colore sfondo tasto navigazione</string>
 
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">Disattiva ombreggiatura lockcreen</string>
-    <string name="pref_lockscreen_shade_disable_summary">Rimuovi tinte scure nel lockscreen</string>
-    
-        <!-- Transparency manager mode -->
+    <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Gestore trasparenze</string>
     <string name="pref_tm_mode_summary">Richiede riavvio</string>
     <string name="tm_mode_disabled">Disabilitato</string>

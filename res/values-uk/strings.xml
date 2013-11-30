@@ -454,6 +454,4 @@
     <string name="pref_navbar_key_color_title">Колір кнопок навігації</string>
     <string name="pref_navbar_key_glow_color_title">Колір тіні кнопок навігації</string>
     <string name="pref_navbar_bg_color_title">Колір фону паненлі навігації</string>
-    <string name="pref_lockscreen_shade_disable_title">Вимкнути тінь екрану блокування</string>
-    <string name="pref_lockscreen_shade_disable_summary">Видаляє темний відтінок</string>
 </resources>

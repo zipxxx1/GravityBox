@@ -726,10 +726,6 @@
     <string name="pref_navbar_key_glow_color_title">Warna tombol navigasi ketika menyala</string>
     <string name="pref_navbar_bg_color_title">Warna latar Navbar</string>
 
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">Matikan bayangan lockscreen</string>
-    <string name="pref_lockscreen_shade_disable_summary">Menghapus warna gelap dari lockscreen</string>
-
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Mode pengelola transparansi</string>
     <string name="pref_tm_mode_summary">Membutuhkan restart</string>

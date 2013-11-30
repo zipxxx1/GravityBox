@@ -711,10 +711,6 @@
     <string name="pref_navbar_key_glow_color_title">Cor das teclas ao pressionar</string>
     <string name="pref_navbar_bg_color_title">Cor de fundo da Barra de Navegação</string>
 
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">Remover sombreado</string>
-    <string name="pref_lockscreen_shade_disable_summary">Permite remover a tonalidade escura presente no ecrã de bloqueio</string>
-
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Modo de gestão de transparências</string>
     <string name="pref_tm_mode_summary">Permite definir o modo de gestão de transparências (necessário reiniciar)</string>

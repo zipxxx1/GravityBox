@@ -711,10 +711,6 @@
     <string name="pref_navbar_key_glow_color_title">ナビキーのグロー色</string>
     <string name="pref_navbar_bg_color_title">ナビバーの背景色</string>
 
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">ロック画面シェードを無効化</string>
-    <string name="pref_lockscreen_shade_disable_summary">ロック画面のシェードをなくします。</string>
-    
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">透過処理モード</string>
     <string name="pref_tm_mode_summary">変更後は再起動してください。</string>

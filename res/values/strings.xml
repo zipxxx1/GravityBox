@@ -726,10 +726,6 @@
     <string name="pref_navbar_key_glow_color_title">Navigation key glow color</string>
     <string name="pref_navbar_bg_color_title">Navigation bar background color</string>
 
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">Disable lockscreen shade</string>
-    <string name="pref_lockscreen_shade_disable_summary">Removes dark tint from lockscreen</string>
-
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Transparency manager mode</string>
     <string name="pref_tm_mode_summary">Requires reboot</string>

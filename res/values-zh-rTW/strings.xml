@@ -721,10 +721,6 @@
     <string name="pref_navbar_key_glow_color_title">海苔條光暈顏色</string>
     <string name="pref_navbar_bg_color_title">海苔條背景顏色</string>
 
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">停用鎖定螢幕的陰影</string>
-    <string name="pref_lockscreen_shade_disable_summary">移除螢幕鎖定畫面深色色調</string>
-    
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">透明度管理器模式</string>
     <string name="pref_tm_mode_summary">重新啟動裝置</string>
