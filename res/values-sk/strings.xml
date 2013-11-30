@@ -39,9 +39,6 @@
     <string name="fix_datetime_crash_title">Opraviť padanie dátumu a času</string>
     <string name="fix_datetime_crash_summary">Použiť v prípade, ak nastavenie dátumu a času padá (vyžaduje reštart)</string>
 
-    <string name="fix_calendar_title">Opraviť kalendár</string>
-    <string name="fix_calendar_summary">Použiť v prípade, ak dochádza k pravidelnému samozapínaniu sa obrazovky (vyžaduje reštart)</string>
-
     <string name="important">Dôležité</string>
 
     <string name="caller_fullscreen_photo_title">Foto volajúceho na celú obrazovku</string>

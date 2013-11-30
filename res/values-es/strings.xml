@@ -36,10 +36,7 @@
 	
     <string name="fix_datetime_crash_title">Reparar error de Fecha y Hora</string>
     <string name="fix_datetime_crash_summary">Habilitar en caso de experimentar errores al acceder a la configuración de Fecha y Hora (requiere reiniciar)</string>
-	
-    <string name="fix_calendar_title">Parche para el calendario</string>
-    <string name="fix_calendar_summary">Habilitar en caso de experimentar encendidos esporádicos de la pantalla (requiere reiniciar)</string>
-	
+
     <string name="important">Importante</string>
 	
     <string name="caller_fullscreen_photo_title">Fotografía a pantalla completa del contacto</string>

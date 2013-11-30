@@ -41,9 +41,6 @@
     <string name="fix_datetime_crash_title">Opravit padání datumu a času</string>
     <string name="fix_datetime_crash_summary">Použít v případě, když nastavení datumu a času padá (vyžaduje restart)</string>
 
-    <string name="fix_calendar_title">Opravit kalendář</string>
-    <string name="fix_calendar_summary">Použít v případě, kdy dochází k pravidelnému samozapínání obrazovky (vyžaduje restart)</string>
-
     <string name="important">Důležité</string>
 
     <string name="caller_fullscreen_photo_title">Foto volajícího na celou obrazovku</string>

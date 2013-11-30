@@ -54,9 +54,6 @@
     <string name="fix_datetime_crash_title">修正“日期与时间设置”崩溃</string>
     <string name="fix_datetime_crash_summary">当您进入日期与时间设置发生错误时，启用这个选项（需要重新启动）</string>
 
-    <string name="fix_calendar_title">修正日历应用程序</string>
-    <string name="fix_calendar_summary">若您周期性地遇到屏幕自动开启时，启用这个选项（需要重新启动）</string>
-
     <string name="important">重要</string>
 
     <string name="caller_fullscreen_photo_title">全屏来电者相片</string>

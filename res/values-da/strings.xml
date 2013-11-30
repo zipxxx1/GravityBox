@@ -37,9 +37,6 @@
     <string name="fix_datetime_crash_title">Fix crash i indstillinger for dato og tid</string>
     <string name="fix_datetime_crash_summary">Slå til hvis du oplever crash mens du tilgår indstillinger for dato og tid</string>
 
-    <string name="fix_calendar_title">Fix kalender-app</string>
-    <string name="fix_calendar_summary">Slå til hvis du oplever at skærmen tænder periodisk af sig selv (kræver genstart)</string>
-
     <string name="important">Vigtigt</string>
 
     <string name="caller_fullscreen_photo_title">Fuldskærmsbillede af den, som ringer</string>

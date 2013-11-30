@@ -27,8 +27,6 @@
     <string name="recents_clear_all_title">Закрити всі поточні завдання</string>
     <string name="fix_datetime_crash_title">Падіння діалогу Дата і час</string>
     <string name="fix_datetime_crash_summary">Включити, якщо при вході в налаштування Дати та часу відбувається падіння (Необхідна перезавантаження)</string>
-    <string name="fix_calendar_title">Додаток Календар</string>
-    <string name="fix_calendar_summary">Включити, якщо є проблема з періодично вмикаючимся екраном в сплячому режимі</string>
     <string name="important">Важливо</string>
     <string name="caller_fullscreen_photo_title">Фото того, хто телефонує на весь екран</string>
     <string name="caller_fullscreen_photo_summary">Відображати фото того, хто телефонує на весь екран при вимк.иках</string>

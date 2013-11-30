@@ -29,8 +29,6 @@
     <string name="recents_clear_all_title">Wyczyść wszystkie zadania</string>
     <string name="fix_datetime_crash_title">Napraw błędy w ustawieniach Daty i Czasu</string>
     <string name="fix_datetime_crash_summary">Włącz w przypadku wystąpienia błędu podczas dostępu do ustawień Daty i Czasu (wymagany restart)</string>
-    <string name="fix_calendar_title">Napraw aplikację kalendarza</string>
-    <string name="fix_calendar_summary">Włącz jeśli aplikacja powoduje samoczynne włączanie się ekranu (wymagany restart)</string>
     <string name="important">Ważne</string>
     <string name="caller_fullscreen_photo_title">Fotografia dzwoniącego na pełnym ekranie</string>
     <string name="caller_fullscreen_photo_summary">Wyświetla fotografię dzwoniącego na pełnym ekranie podczas rozmowy przychodzącej</string>

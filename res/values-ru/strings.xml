@@ -54,9 +54,6 @@
     <string name="fix_datetime_crash_title">Падения диалога Дата и время</string>
     <string name="fix_datetime_crash_summary">Включить, если при входе в настройки Даты и времени происходит падение (Необходима перезагрузка)</string>
 
-    <string name="fix_calendar_title">Приложение Календарь</string>
-    <string name="fix_calendar_summary">Включить, если есть проблема с периодически включающимся экраном в спящем режиме</string>
-
     <string name="important">Важно</string>
 
     <string name="caller_fullscreen_photo_title">Фото звонящего на весь экран</string>

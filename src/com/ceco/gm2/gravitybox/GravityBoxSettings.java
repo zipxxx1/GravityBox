@@ -120,7 +120,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_FIXES = "pref_cat_fixes";
     public static final String PREF_KEY_FIX_DATETIME_CRASH = "pref_fix_datetime_crash";
     public static final String PREF_KEY_FIX_MMS_WAKELOCK = "pref_mms_fix_wakelock";
-    public static final String PREF_KEY_FIX_CALENDAR = "pref_fix_calendar";
     public static final String PREF_CAT_KEY_STATUSBAR = "pref_cat_statusbar";
     public static final String PREF_CAT_KEY_STATUSBAR_QS = "pref_cat_statusbar_qs";
     public static final String PREF_CAT_KEY_STATUSBAR_COLORS = "pref_cat_statusbar_colors";
@@ -491,7 +490,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     private static final List<String> rebootKeys = new ArrayList<String>(Arrays.asList(
             PREF_KEY_FIX_DATETIME_CRASH,
-            PREF_KEY_FIX_CALENDAR,
             PREF_KEY_FIX_TTS_SETTINGS,
             PREF_KEY_BRIGHTNESS_MIN,
             PREF_KEY_LOCKSCREEN_MENU_KEY,
@@ -670,7 +668,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatFixes;
         private CheckBoxPreference mPrefFixDateTimeCrash;
         private CheckBoxPreference mPrefFixMmsWakelock;
-        private CheckBoxPreference mPrefFixCalendar;
         private CheckBoxPreference mPrefFixTtsSettings;
         private PreferenceScreen mPrefCatStatusbar;
         private PreferenceScreen mPrefCatStatusbarQs;
@@ -841,7 +838,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_FIXES);
             mPrefFixDateTimeCrash = (CheckBoxPreference) findPreference(PREF_KEY_FIX_DATETIME_CRASH);
             mPrefFixMmsWakelock = (CheckBoxPreference) findPreference(PREF_KEY_FIX_MMS_WAKELOCK);
-            mPrefFixCalendar = (CheckBoxPreference) findPreference(PREF_KEY_FIX_CALENDAR);
             mPrefFixTtsSettings = (CheckBoxPreference) findPreference(PREF_KEY_FIX_TTS_SETTINGS);
             mPrefCatStatusbar = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR);
             mPrefCatStatusbarQs = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_QS);

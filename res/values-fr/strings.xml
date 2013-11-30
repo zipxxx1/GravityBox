@@ -54,9 +54,6 @@
     <string name="fix_datetime_crash_title">Paramètre date et heure</string>
     <string name="fix_datetime_crash_summary">Activer si vous constatez un plantage lorsque vous accédez au paramètre date et heure (redémarrage nécessaire)</string>
 
-    <string name="fix_calendar_title">Application Agenda</string>
-    <string name="fix_calendar_summary">Activer si vous constatez que votre écran s\'allume de lui-même périodiquement (redémarrage nécessaire)</string>
-
     <string name="important">Important</string>
 
     <string name="caller_fullscreen_photo_title">Photo de l\'appelant plein écran</string>

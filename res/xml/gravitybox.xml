@@ -1207,12 +1207,6 @@
             android:defaultValue="false" />
 
         <CheckBoxPreference
-            android:key="pref_fix_calendar"
-            android:title="@string/fix_calendar_title"
-            android:summary="@string/fix_calendar_summary"
-            android:defaultValue="false" />
-
-        <CheckBoxPreference
             android:key="pref_fix_tts_settings"
             android:title="@string/fix_tts_settings_title"
             android:summary="@string/fix_tts_settings_summary"

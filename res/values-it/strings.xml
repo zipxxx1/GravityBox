@@ -38,9 +38,6 @@
     <string name="fix_datetime_crash_title">Fix crash modifica Data&amp;ora</string>
     <string name="fix_datetime_crash_summary">Abilita nel caso si verifichi un crash durante l\'accesso alle impostazione Data&amp;Ora (richiede riavvio)</string>
 
-    <string name="fix_calendar_title">Fix app calendario</string>
-    <string name="fix_calendar_summary">Abilita nel caso in cui si verifichino periodiche accensioni automatiche dello schermo (richiede riavvio)</string>
-
     <string name="important">Importante</string>
 
     <string name="caller_fullscreen_photo_title">Foto chiamante tutto schermo</string>

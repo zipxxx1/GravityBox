@@ -52,9 +52,6 @@
     <string name="fix_datetime_crash_title">Επιδιόρθωση ημερομηνίας&amp;Οι ρυθμίσεις της ώρας καταρρίπτονται</string>
     <string name="fix_datetime_crash_summary">Ενεργοποιήστε σε περίπτωση που παρατηρήσετε κατάρρευση κατά την πρόσβαση σε Ημερομηνία&amp;Ρυθμίσεις Ώρας (απαιτείται επανεκκίνηση)</string>
 
-    <string name="fix_calendar_title">Επιδιόρθωση εφαρμογής ημερολογίου</string>
-    <string name="fix_calendar_summary">Ενεργοποιήστε σε περίπτωση που παρατηρήσετε αυτόματη περιοδική ενεργοποίηση/απενεργοποίηση της οθόνης (απαιτείται επανεκκίνηση)</string>
-
     <string name="important">Σημαντικό</string>
 
     <string name="caller_fullscreen_photo_title">Εικόνα καλούντος σε πλήρη οθόνη</string>

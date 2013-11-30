@@ -52,9 +52,6 @@
     <string name="fix_datetime_crash_title">Javítja a Dátum és Idő beállítás hibáját</string>
     <string name="fix_datetime_crash_summary">Engedélyezze abban az esetben, ha összeomlást tapasztal a Dátum és Idő beállítás elérésekor (újraindítás szükséges)</string>
 
-    <string name="fix_calendar_title">Javítja a Naptár programot</string>
-    <string name="fix_calendar_summary">Engedélyezze abban az esetben, ha a képernyő rendszeresen bekapcsolja magát (újraindítás szükséges)</string>
-
     <string name="important">Fontos</string>
 
     <string name="caller_fullscreen_photo_title">Teljes képernyős hívó fotó</string>

@@ -39,9 +39,6 @@
     <string name="fix_datetime_crash_title">Corrigir problema nas definições de data e hora</string>
     <string name="fix_datetime_crash_summary">Selecionar caso tenha problemas ao aceder à configuração de data e hora nas definições do telefone (necessário reiniciar)</string>
 
-    <string name="fix_calendar_title">Corrigir problema na aplicação de calendário</string>
-    <string name="fix_calendar_summary">Selecionar caso verifique que o ecrã se liga sozinho periodicamente (necessário reiniciar)</string>
-
     <string name="important">Importante</string>
 
     <string name="caller_fullscreen_photo_title">Imagem do contato em ecrã completo</string>

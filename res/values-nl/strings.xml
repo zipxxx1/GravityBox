@@ -53,9 +53,6 @@
     <string name="fix_datetime_crash_title">Fix Date&amp;Time settings crash</string>
     <string name="fix_datetime_crash_summary">Enable in case you experience crash while accessing Date&amp;Time settings (requires reboot)</string>
 
-    <string name="fix_calendar_title">Fix calendar app</string>
-    <string name="fix_calendar_summary">Enable in case you experience periodic self-turning on of the screen (requires reboot)</string>
-
     <string name="important">Belangrijk</string>
 
     <string name="caller_fullscreen_photo_title">Volledig scherm beller foto</string>
