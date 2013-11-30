@@ -27,7 +27,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LayoutInflated;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
-import de.robv.android.xposed.callbacks.XC_LayoutInflated.LayoutInflatedParam;
 import android.app.Notification;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -38,7 +37,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -65,9 +63,7 @@ public class ModStatusBar {
     private static final String CLASS_TICKER = "com.android.systemui.statusbar.phone.PhoneStatusBar$MyTicker";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
-    private static final String CLASS_STATUSBAR_NOTIF = Build.VERSION.SDK_INT > 17 ?
-            "android.service.notification.StatusBarNotification" :
-            "com.android.internal.statusbar.StatusBarNotification";
+    private static final String CLASS_STATUSBAR_NOTIF = "android.service.notification.StatusBarNotification";
     private static final boolean DEBUG = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
@@ -254,19 +250,16 @@ public class ModStatusBar {
                     mClockLink = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LINK, null);
                     mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
 
-                    String iconAreaId = Build.VERSION.SDK_INT > 16 ?
-                            "system_icon_area" : "icons";
                     mIconArea = (ViewGroup) liparam.view.findViewById(
-                            liparam.res.getIdentifier(iconAreaId, "id", PACKAGE_NAME));
+                            liparam.res.getIdentifier("system_icon_area", "id", PACKAGE_NAME));
                     if (mIconArea == null) return;
 
                     mRootView = (ViewGroup) liparam.view.findViewById(
                             liparam.res.getIdentifier("status_bar", "id", PACKAGE_NAME));
                     if (mRootView == null) return;
 
-                    mSbContents = Build.VERSION.SDK_INT > 16 ?
-                            (ViewGroup) liparam.view.findViewById(liparam.res.getIdentifier(
-                                    "status_bar_contents", "id", PACKAGE_NAME)) : mIconArea;
+                    mSbContents = (ViewGroup) liparam.view.findViewById(liparam.res.getIdentifier(
+                                    "status_bar_contents", "id", PACKAGE_NAME));
 
                     // find statusbar clock
                     TextView clock = (TextView) mIconArea.findViewById(
@@ -288,22 +281,11 @@ public class ModStatusBar {
                     }
 
                     // find notification panel clock
-                    String panelHolderId = Build.VERSION.SDK_INT > 16 ?
-                            "panel_holder" : "notification_panel";
                     final ViewGroup panelHolder = (ViewGroup) liparam.view.findViewById(
-                            liparam.res.getIdentifier(panelHolderId, "id", PACKAGE_NAME));
+                            liparam.res.getIdentifier("panel_holder", "id", PACKAGE_NAME));
                     if (panelHolder != null) {
                         mClockExpanded = (TextView) panelHolder.findViewById(
                                 liparam.res.getIdentifier("clock", "id", PACKAGE_NAME));
-                        if (mClockExpanded != null && Build.VERSION.SDK_INT < 17) {
-                            mClockExpanded.setClickable(true);
-                            mClockExpanded.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    launchClockApp();
-                                }
-                            });
-                        }
                     }
                     
                     // inject new clock layout
@@ -512,25 +494,23 @@ public class ModStatusBar {
                 }
             });
 
-            if (Build.VERSION.SDK_INT > 16) {
-                XposedHelpers.findAndHookMethod(phoneStatusBarClass, "startActivityDismissingKeyguard", 
-                        Intent.class, boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mClockLink == null) return;
+            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "startActivityDismissingKeyguard", 
+                    Intent.class, boolean.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mClockLink == null) return;
 
-                        Intent i = (Intent) param.args[0];
-                        if (i != null && Intent.ACTION_QUICK_CLOCK.equals(i.getAction())) {
-                            final ComponentName cn = getComponentNameFromClockLink();
-                            if (cn != null) {
-                                i = new Intent();
-                                i.setComponent(cn);
-                                param.args[0] = i;
-                            }
+                    Intent i = (Intent) param.args[0];
+                    if (i != null && Intent.ACTION_QUICK_CLOCK.equals(i.getAction())) {
+                        final ComponentName cn = getComponentNameFromClockLink();
+                        if (cn != null) {
+                            i = new Intent();
+                            i.setComponent(cn);
+                            param.args[0] = i;
                         }
                     }
-                });
-            }
+                }
+            });
 
             XposedHelpers.findAndHookMethod(tickerClass, "tickerStarting", new XC_MethodHook() {
 
@@ -676,8 +656,7 @@ public class ModStatusBar {
                     if (mClockInSbContents) {
                         mSbContents.addView(mTrafficMeter);
                     } else {
-                        mIconArea.addView(mTrafficMeter, 
-                                Build.VERSION.SDK_INT > 16 ? 0 : 1);
+                        mIconArea.addView(mTrafficMeter, 0);
                     }
                 } else {
                     mLayoutClock.addView(mTrafficMeter);
@@ -690,8 +669,7 @@ public class ModStatusBar {
                 if (mClockInSbContents) {
                     mSbContents.addView(mTrafficMeter);
                 } else {
-                    mIconArea.addView(mTrafficMeter, 
-                            Build.VERSION.SDK_INT > 16 ? 0 : 1);
+                    mIconArea.addView(mTrafficMeter, 0);
                 }
                 break;
         }
@@ -719,8 +697,7 @@ public class ModStatusBar {
             i.setComponent(getComponentNameFromClockLink());
             mContext.startActivity(i);
             if (mPhoneStatusBar != null) {
-                XposedHelpers.callMethod(mPhoneStatusBar, Build.VERSION.SDK_INT > 16 ?
-                        "animateCollapsePanels" : "animateCollapse");
+                XposedHelpers.callMethod(mPhoneStatusBar, "animateCollapsePanels");
             }
         } catch (ActivityNotFoundException e) {
             log("Error launching assigned app for clock: " + e.getMessage());
@@ -765,9 +742,7 @@ public class ModStatusBar {
                     classSm, "getService", Context.POWER_SERVICE);
             Object power = XposedHelpers.callStaticMethod(classIpm, "asInterface", b);
             if (power != null) {
-                final String bcMethod = Build.VERSION.SDK_INT > 16 ?
-                        "setTemporaryScreenBrightnessSettingOverride" : "setBacklightBrightness";
-                XposedHelpers.callMethod(power, bcMethod, newBrightness);
+                XposedHelpers.callMethod(power, "setTemporaryScreenBrightnessSettingOverride", newBrightness);
                 Settings.System.putInt(mContext.getContentResolver(),
                         Settings.System.SCREEN_BRIGHTNESS, newBrightness);
             }
@@ -782,9 +757,8 @@ public class ModStatusBar {
             final int x = (int) event.getRawX();
             final int y = (int) event.getRawY();
             Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneStatusBar, "mHandler");
-            int notificationHeaderHeight = Build.VERSION.SDK_INT > 16 ?
-                    XposedHelpers.getIntField(mPhoneStatusBar, "mNotificationHeaderHeight") :
-                        XposedHelpers.getIntField(mPhoneStatusBar, "mNotificationPanelMinHeight");
+            int notificationHeaderHeight = 
+                    XposedHelpers.getIntField(mPhoneStatusBar, "mNotificat/ionHeaderHeight");
     
             if (action == MotionEvent.ACTION_DOWN) {
                 mLinger = 0;

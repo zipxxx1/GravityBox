@@ -21,7 +21,6 @@ import java.util.List;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Handler;
 import android.text.format.Formatter;
 import android.util.TypedValue;
@@ -78,13 +77,8 @@ public class ModClearAllRecents {
 
             mMemInfoReader = new MemInfoReader();
 
-            if (Build.VERSION.SDK_INT > 16) {
-                XposedHelpers.findAndHookMethod(recentPanelViewClass, "showImpl", 
-                        boolean.class, recentsPanelViewShowHook);
-            } else {
-                XposedHelpers.findAndHookMethod(recentPanelViewClass, "showIfReady", 
-                        recentsPanelViewShowHook);
-            }
+            XposedHelpers.findAndHookMethod(recentPanelViewClass, "showImpl", 
+                    boolean.class, recentsPanelViewShowHook);
 
             XposedBridge.hookAllConstructors(recentPanelViewClass, new XC_MethodHook() {
                 @Override
@@ -117,15 +111,6 @@ public class ModClearAllRecents {
                     View view = (View) param.thisObject;
                     Resources res = view.getResources();
                     ViewGroup vg = (ViewGroup) view.findViewById(res.getIdentifier("recents_bg_protect", "id", PACKAGE_NAME));
-
-                    // GM2 already has this image view so remove it if exists
-                    if (Build.DISPLAY.toLowerCase().contains("gravitymod")) {
-                        View rcv = vg.findViewById(res.getIdentifier("recents_clear", "id", PACKAGE_NAME));
-                        if (rcv != null) {
-                            if (DEBUG) log("recents_clear ImageView found (GM2?) - removing");
-                            vg.removeView(rcv);
-                        }
-                    }
 
                     // create and inject new ImageView and set onClick listener to handle action
                     mRecentsClearButton = new ImageView(vg.getContext());
@@ -190,10 +175,8 @@ public class ModClearAllRecents {
                     updateRambarHook);
             XposedHelpers.findAndHookMethod(recentPanelViewClass, "handleSwipe",
                     View.class, updateRambarHook);
-            if (Build.VERSION.SDK_INT > 16) {
-                XposedHelpers.findAndHookMethod(recentPanelViewClass, "refreshViews", 
-                        updateRambarHook);
-            }
+            XposedHelpers.findAndHookMethod(recentPanelViewClass, "refreshViews", 
+                    updateRambarHook);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -211,15 +194,8 @@ public class ModClearAllRecents {
     private static XC_MethodHook recentsPanelViewShowHook = new XC_MethodHook() {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-            try {
-                boolean show = false;
-                if (Build.VERSION.SDK_INT < 17) {
-                    show = XposedHelpers.getBooleanField(param.thisObject, "mWaitingToShow")
-                           && XposedHelpers.getBooleanField(param.thisObject, "mReadyToShow");
-                } else {
-                    show = (Boolean) param.args[0];
-                }
-                if (show) {
+            try { 
+                if ((Boolean) param.args[0]) {
                     mPrefs.reload();
                     updateButtonLayout((View) param.thisObject);
                     updateRamBarLayout();
@@ -238,9 +214,6 @@ public class ModClearAllRecents {
         List<?> recentTaskDescriptions = (List<?>) XposedHelpers.getObjectField(
                 container, "mRecentTaskDescriptions");
         boolean visible = (recentTaskDescriptions != null && recentTaskDescriptions.size() > 0);
-        if (Build.VERSION.SDK_INT < 17) {
-            visible |= XposedHelpers.getBooleanField(container, "mFirstScreenful");
-        }
         if (gravity != GravityBoxSettings.RECENT_CLEAR_OFF && visible) {
             FrameLayout.LayoutParams lparams = 
                     (FrameLayout.LayoutParams) mRecentsClearButton.getLayoutParams();

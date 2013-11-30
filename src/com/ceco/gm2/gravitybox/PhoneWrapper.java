@@ -15,12 +15,10 @@
 
 package com.ceco.gm2.gravitybox;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Message;
 import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
@@ -114,7 +112,6 @@ public class PhoneWrapper {
         }
     }
 
-    @SuppressLint("NewApi")
     private static void setPreferredNetworkType(int networkType) {
         Object defPhone = XposedHelpers.callStaticMethod(mClsPhoneFactory, "getDefaultPhone");
         if (defPhone == null) return;
@@ -128,11 +125,7 @@ public class PhoneWrapper {
                 XposedHelpers.callMethod(defPhone, "setPreferredNetworkTypeGemini", 
                         paramArgs, networkType, null, mSimSlot);
             } else {
-                if (Build.VERSION.SDK_INT > 16) {
-                    Settings.Global.putInt(mContext.getContentResolver(), PREFERRED_NETWORK_MODE, networkType);
-                } else {
-                    Settings.Secure.putInt(mContext.getContentResolver(), PREFERRED_NETWORK_MODE, networkType);
-                }
+                Settings.Global.putInt(mContext.getContentResolver(), PREFERRED_NETWORK_MODE, networkType);
                 Class<?>[] paramArgs = new Class<?>[2];
                 paramArgs[0] = int.class;
                 paramArgs[1] = Message.class;

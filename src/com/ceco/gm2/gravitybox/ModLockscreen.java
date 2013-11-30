@@ -34,7 +34,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
-import android.content.res.XResources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -43,7 +42,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -68,10 +66,9 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModLockscreen {
-    private static final String CLASS_PATH = Build.VERSION.SDK_INT > 18 ? 
-            "com.android.keyguard" : "com.android.internal.policy.impl.keyguard";
+    private static final String CLASS_PATH = "com.android.keyguard";
     private static final String TAG = "GB:ModLockscreen";
-    public static final String PACKAGE_NAME = Build.VERSION.SDK_INT > 18 ? "com.android.keyguard" : "android";
+    public static final String PACKAGE_NAME = "com.android.keyguard";
 
     private static final String CLASS_KGVIEW_MANAGER = CLASS_PATH + ".KeyguardViewManager";
     private static final String CLASS_KG_HOSTVIEW = CLASS_PATH + ".KeyguardHostView";
@@ -86,7 +83,6 @@ public class ModLockscreen {
     private static final String CLASS_KG_UPDATE_MONITOR_CB = CLASS_PATH + ".KeyguardUpdateMonitorCallback";
     private static final String CLASS_KG_UPDATE_MONITOR_BATTERY_STATUS = 
             CLASS_PATH + ".KeyguardUpdateMonitor.BatteryStatus";
-    private static final String CLASS_KG_VIEW_BASE = CLASS_PATH + ".KeyguardViewBase";
     private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
@@ -147,15 +143,7 @@ public class ModLockscreen {
             final Class<?> kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, classLoader);
             final Class<?> kgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, classLoader);
             final Class<?> kgUpdateMonitorCbClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR_CB, classLoader);
-            final Class<?> kgViewBaseClass = XposedHelpers.findClass(CLASS_KG_VIEW_BASE, classLoader);
             final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, classLoader);
-
-            boolean enableMenuKey = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, false);
-
-            if (Build.VERSION.SDK_INT < 19) {
-                XResources.setSystemWideReplacement(PACKAGE_NAME, "bool", "config_disableMenuKeyInLockScreen", !enableMenuKey);
-            }
 
             XposedHelpers.findAndHookMethod(kgViewManagerClass, "maybeCreateKeyguardLocked", 
                     boolean.class, boolean.class, Bundle.class, new XC_MethodHook() {
@@ -572,19 +560,6 @@ public class ModLockscreen {
                     }
                 }
             });
-
-            // TODO: KitKat
-            if (Build.VERSION.SDK_INT < 19) {
-                XposedHelpers.findAndHookMethod(kgViewBaseClass, "resetBackground", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHADE_DISABLE, false)) {
-                            ((View) param.thisObject).setBackground(null);
-                            param.setResult(null);
-                        }
-                    }
-                });
-            }
 
             XposedHelpers.findAndHookMethod(kgWidgetPagerClass, "onPageSwitched",
                     View.class, int.class, new XC_MethodHook() {

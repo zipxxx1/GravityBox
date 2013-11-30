@@ -29,7 +29,6 @@ import com.ceco.gm2.gravitybox.preference.SeekBarPreference;
 import com.ceco.gm2.gravitybox.quicksettings.TileOrderActivity;
 
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -976,29 +975,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbarQs.removePreference(mPrefQsTileBehaviourOverride);
             }
 
-            // Remove preferences not compatible with Android 4.1
-            if (Build.VERSION.SDK_INT < 17) {
-                getPreferenceScreen().removePreference(mPrefCatLockscreen);
-                mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
-                mPrefCatStatusbar.removePreference(mPrefCatNotifDrawerStyle);
-                mPrefCatDisplay.removePreference(mPrefCatBrightness);
-                mPrefCatDisplay.removePreference(mPrefCrtOff);
-                mPrefCatMedia.removePreference(mPrefSafeMediaVolume);
-            }
-
-            // Remove preferences not compatible with Android < 4.3+
-            if (Build.VERSION.SDK_INT < 18) {
-                mPrefCatHwKeyHome.removePreference(mPrefHomeDoubletapDisable);
-            }
-
-            // Remove preferences not compatible with KitKat
-            if (Build.VERSION.SDK_INT > 18) {
-                getPreferenceScreen().removePreference(mPrefCatTransparencyManager);
-                mPrefCatDisplay.removePreference(mPrefButtonBacklightNotif);
-                mPrefCatStatusbarColors.removePreference(mPrefSbFollowStockBattery);
-                mPrefCatStatusbarColors.removePreference(mStatusbarBgColor);
-                getPreferenceScreen().removePreference(mPrefCatPhone);
-            }
+//            TODO: rework for KitKat compatibility
+//            getPreferenceScreen().removePreference(mPrefCatTransparencyManager);
+//            mPrefCatDisplay.removePreference(mPrefButtonBacklightNotif);
+//            mPrefCatStatusbarColors.removePreference(mPrefSbFollowStockBattery);
+//            mPrefCatStatusbarColors.removePreference(mStatusbarBgColor);
+//            getPreferenceScreen().removePreference(mPrefCatPhone);
 
             // Remove more music volume steps option if necessary
             if (!Utils.shouldAllowMoreVolumeSteps()) {

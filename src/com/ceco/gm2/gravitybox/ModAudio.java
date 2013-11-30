@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.XResources;
-import android.os.Build;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -78,33 +77,31 @@ public class ModAudio {
                 }
             });
 
-            if (Build.VERSION.SDK_INT > 16) {
-                XResources.setSystemWideReplacement("android", "bool", "config_safe_media_volume_enabled", true);
-                mSafeMediaVolumeEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_SAFE_MEDIA_VOLUME, false);
-                if (DEBUG) log("Safe headset media volume set to: " + mSafeMediaVolumeEnabled);
-                XposedHelpers.findAndHookMethod(classAudioService, "enforceSafeMediaVolume", new XC_MethodHook() {
+            XResources.setSystemWideReplacement("android", "bool", "config_safe_media_volume_enabled", true);
+            mSafeMediaVolumeEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_SAFE_MEDIA_VOLUME, false);
+            if (DEBUG) log("Safe headset media volume set to: " + mSafeMediaVolumeEnabled);
+            XposedHelpers.findAndHookMethod(classAudioService, "enforceSafeMediaVolume", new XC_MethodHook() {
 
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (!mSafeMediaVolumeEnabled) {
-                            param.setResult(null);
-                            return;
-                        }
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!mSafeMediaVolumeEnabled) {
+                        param.setResult(null);
+                        return;
                     }
-                });
+                }
+            });
 
-                XposedHelpers.findAndHookMethod(classAudioService, "checkSafeMediaVolume", 
-                        int.class, int.class, int.class, new XC_MethodHook() {
-        
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (!mSafeMediaVolumeEnabled) {
-                            param.setResult(true);
-                            return;
-                        }
+            XposedHelpers.findAndHookMethod(classAudioService, "checkSafeMediaVolume", 
+                    int.class, int.class, int.class, new XC_MethodHook() {
+    
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!mSafeMediaVolumeEnabled) {
+                        param.setResult(true);
+                        return;
                     }
-                });
-            }
+                }
+            });
         } catch(Throwable t) {
             XposedBridge.log(t);
         }

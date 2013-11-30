@@ -22,7 +22,6 @@ import com.ceco.gm2.gravitybox.R;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 
-import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -55,14 +54,12 @@ public class NetworkModeTile extends AQuickSettingsTile {
             super(handler);
         }
 
-        @SuppressLint("NewApi")
         public void observe() {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(
                     Settings.Global.getUriFor(PhoneWrapper.PREFERRED_NETWORK_MODE), false, this);
         }
 
-        @SuppressLint("NewApi")
         @Override
         public void onChange(boolean selfChange) {
             ContentResolver cr = mContext.getContentResolver();
@@ -118,7 +115,6 @@ public class NetworkModeTile extends AQuickSettingsTile {
         };
     }
 
-    @SuppressLint("NewApi")
     @Override
     protected void onTileCreate() {
         mLabel = mGbResources.getString(R.string.qs_tile_network_mode);

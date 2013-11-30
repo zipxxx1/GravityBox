@@ -17,7 +17,6 @@ package com.ceco.gm2.gravitybox;
 
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -27,7 +26,6 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.provider.Settings;
 
 public class WifiManagerWrapper {
@@ -154,7 +152,6 @@ public class WifiManagerWrapper {
         return (getWifiApState() == WIFI_AP_STATE_ENABLED);
     }
 
-    @SuppressLint("NewApi")
     public void setWifiApEnabled(boolean enable) {
         try {
             final ContentResolver cr = mContext.getContentResolver();
@@ -163,11 +160,7 @@ public class WifiManagerWrapper {
             if (enable && (wifiState == WIFI_STATE_ENABLING ||
                     wifiState == WIFI_STATE_ENABLED)) {
                 setWifiEnabled(false);
-                if (Build.VERSION.SDK_INT > 16) {
-                    Settings.Global.putInt(cr, WIFI_SAVED_STATE, 1);
-                } else {
-                    Settings.Secure.putInt(cr, WIFI_SAVED_STATE, 1);
-                }
+                Settings.Global.putInt(cr, WIFI_SAVED_STATE, 1);
             }
 
             Class<?>[] paramArgs = new Class<?>[2];
@@ -178,21 +171,13 @@ public class WifiManagerWrapper {
             if (!enable) {
                 int wifiSavedState = 0;
                 try {
-                    if (Build.VERSION.SDK_INT > 16) {
-                        wifiSavedState = Settings.Global.getInt(cr, WIFI_SAVED_STATE);
-                    } else {
-                        wifiSavedState = Settings.Secure.getInt(cr, WIFI_SAVED_STATE);
-                    }
+                    wifiSavedState = Settings.Global.getInt(cr, WIFI_SAVED_STATE);
                 } catch (Settings.SettingNotFoundException e) {
                     //
                 }
                 if (wifiSavedState == 1) {
                     setWifiEnabled(true);
-                    if (Build.VERSION.SDK_INT > 16) {
-                        Settings.Global.putInt(cr, WIFI_SAVED_STATE, 0);
-                    } else {
-                        Settings.Secure.putInt(cr, WIFI_SAVED_STATE, 0);
-                    }
+                    Settings.Global.putInt(cr, WIFI_SAVED_STATE, 0);
                 }
             }
         } catch (Throwable t) {

@@ -32,7 +32,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 
 public class StatusBarIconManager implements BroadcastSubReceiver {
     private static final String TAG = "GB:StatusBarIconManager";
@@ -300,8 +299,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         if (mColorInfo.followStockBatteryColor && mColorInfo.stockBatteryColor != null) {
             return mColorInfo.stockBatteryColor;
         } else {
-            return (Build.VERSION.SDK_INT > 18 ? Color.WHITE :
-                mGbResources.getColor(android.R.color.holo_blue_dark));
+            return Color.WHITE;
         }
     }
 
@@ -318,16 +316,16 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     }
 
     public void setFollowStockBatteryColor(boolean follow) {
-        if (Build.VERSION.SDK_INT < 19 &&
-                mColorInfo.followStockBatteryColor != follow) {
-            mColorInfo.followStockBatteryColor = follow;
-            mColorInfo.defaultIconColor = getDefaultIconColor();
-            int flags = FLAG_FOLLOW_STOCK_BATTERY_COLOR_CHANGED;
-            if (!mColorInfo.coloringEnabled) {
-                flags |= FLAG_ICON_COLOR_CHANGED;
-            }
-            notifyListeners(flags);
-        }
+//        TODO: rework for KitKat compatibility
+//        if (mColorInfo.followStockBatteryColor != follow) {
+//            mColorInfo.followStockBatteryColor = follow;
+//            mColorInfo.defaultIconColor = getDefaultIconColor();
+//            int flags = FLAG_FOLLOW_STOCK_BATTERY_COLOR_CHANGED;
+//            if (!mColorInfo.coloringEnabled) {
+//                flags |= FLAG_ICON_COLOR_CHANGED;
+//            }
+//            notifyListeners(flags);
+//        }
     }
 
     public int getIconColor(int index) {

@@ -19,7 +19,6 @@ import com.ceco.gm2.gravitybox.R;
 
 import de.robv.android.xposed.XposedBridge;
 
-import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -129,7 +128,6 @@ public class StayAwakeTile extends AQuickSettingsTile {
             super(handler);
         }
 
-        @SuppressLint("NewApi")
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(

@@ -34,7 +34,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.BatteryManager;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -156,8 +155,7 @@ public class KitKatBattery extends View implements IconManagerListener {
         mBoltPoints = loadBoltPoints();
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
-        setColor(Build.VERSION.SDK_INT > 18 ? Color.WHITE :
-                context.getResources().getColor(android.R.color.holo_blue_dark));
+        setColor(Color.WHITE);
     }
 
     public void setColor(int mainColor) {

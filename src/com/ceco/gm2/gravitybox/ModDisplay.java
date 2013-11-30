@@ -87,6 +87,7 @@ public class ModDisplay {
                     mButtonBacklightMode = intent.getStringExtra(GravityBoxSettings.EXTRA_BB_MODE);
                     updateButtonBacklight();
                 }
+                //TODO: rework for KitKat compatibility
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_BB_NOTIF) && Build.VERSION.SDK_INT < 19) {
                     mButtonBacklightNotif = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BB_NOTIF, false);
                     if (!mButtonBacklightNotif) {
@@ -169,8 +170,8 @@ public class ModDisplay {
 
     public static void initZygote(final XSharedPreferences prefs) {
         try {
-            final Class<?> classDisplayPowerController = Build.VERSION.SDK_INT > 16 ?
-                    XposedHelpers.findClass(CLASS_DISPLAY_POWER_CONTROLLER, null) : null;
+            final Class<?> classDisplayPowerController =
+                    XposedHelpers.findClass(CLASS_DISPLAY_POWER_CONTROLLER, null);
             final Class<?> classLight = XposedHelpers.findClass(CLASS_LIGHT_SERVICE_LIGHT, null);
             final Class<?> classLightService = XposedHelpers.findClass(CLASS_LIGHT_SERVICE, null);
 
@@ -179,6 +180,7 @@ public class ModDisplay {
 
             mButtonBacklightMode = prefs.getString(
                     GravityBoxSettings.PREF_KEY_BUTTON_BACKLIGHT_MODE, GravityBoxSettings.BB_MODE_DEFAULT);
+            // TODO: rework for KitKat compatibility
             mButtonBacklightNotif = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS, false) &&
                     Build.VERSION.SDK_INT < 19;

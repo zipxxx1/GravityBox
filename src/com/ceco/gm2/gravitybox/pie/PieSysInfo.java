@@ -27,7 +27,6 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 //import android.net.wifi.WifiSsid;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -40,6 +39,7 @@ import de.robv.android.xposed.XposedHelpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * A slice that displays some basic system information and a clock.
@@ -181,9 +181,7 @@ public class PieSysInfo extends PieSliceContainer implements ValueAnimator.Anima
         if (wifiManager != null) {
             final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
             if (connectionInfo != null) {
-                final Object wifiSsid = Build.VERSION.SDK_INT > 16 ?
-                        XposedHelpers.callMethod(connectionInfo, "getWifiSsid") :
-                        XposedHelpers.callMethod(connectionInfo, "getSSID");
+                final Object wifiSsid = XposedHelpers.callMethod(connectionInfo, "getWifiSsid");
                 if (wifiSsid != null) {
                     ssid = wifiSsid.toString();
                 }
@@ -200,22 +198,11 @@ public class PieSysInfo extends PieSliceContainer implements ValueAnimator.Anima
 
     private SimpleDateFormat getTimeFormat() {
         String format = DateFormat.is24HourFormat(mContext) ? "HH:mm" : "h:mm a";
-        if (Build.VERSION.SDK_INT > 17) {
-            try {
-                format = (String) XposedHelpers.callStaticMethod(
-                        DateFormat.class, "getTimeFormatString", mContext);
-            } catch(Exception e) {
-                // ignore
-            }
-        } else {
-            int formatResId;
-            Resources res = mContext.getResources();
-            if (DateFormat.is24HourFormat(mContext)) {
-                formatResId = res.getIdentifier("twenty_four_hour_time_format", "string", "android");
-            } else {
-                formatResId = res.getIdentifier("twelve_hour_time_format", "string", "android");
-            }
-            if (formatResId != 0) format = mContext.getString(formatResId);
+        try {
+            format = (String) XposedHelpers.callStaticMethod(
+                    DateFormat.class, "getTimeFormatString", mContext);
+        } catch(Exception e) {
+            // ignore
         }
 
         if (format.equals(mTimeFormatString)) {
@@ -240,7 +227,7 @@ public class PieSysInfo extends PieSliceContainer implements ValueAnimator.Anima
         }
 
         mTimeFormatString = format;
-        mTimeFormat = new SimpleDateFormat(formatBuilder.toString().trim());
+        mTimeFormat = new SimpleDateFormat(formatBuilder.toString().trim(), Locale.getDefault());
         return mTimeFormat;
     }
 

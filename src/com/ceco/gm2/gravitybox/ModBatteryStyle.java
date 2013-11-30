@@ -15,20 +15,17 @@
 
 package com.ceco.gm2.gravitybox;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.BatteryManager;
-import android.os.Build;
 import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
@@ -107,7 +104,6 @@ public class ModBatteryStyle {
 
             resparam.res.hookLayout(PACKAGE_NAME, "layout", layout, new XC_LayoutInflated() {
 
-                @SuppressLint("NewApi")
                 @Override
                 public void handleLayoutInflated(LayoutInflatedParam liparam) throws Throwable {
 
@@ -136,24 +132,13 @@ public class ModBatteryStyle {
                         percentTextView.setLayoutParams(lParams);
                         percentTextView.setPadding(6, 0, 0, 0);
                         percentTextView.setTextSize(1, 16);
-                        percentTextView.setTextColor(Build.VERSION.SDK_INT > 18 ? Color.WHITE :
-                                vg.getContext().getResources().getColor(android.R.color.holo_blue_dark));
+                        percentTextView.setTextColor(Color.WHITE);
                         percentTextView.setVisibility(View.GONE);
                         mPercentText = new StatusbarBatteryPercentage(percentTextView);
                         vg.addView(mPercentText.getView());
                         if (DEBUG) log("Battery percent text injected");
                     }
                     ModStatusbarColor.registerIconManagerListener(mPercentText);
-
-                    // GM2 specific - if there's already view with id "circle_battery", remove it
-                    if (Build.DISPLAY.toLowerCase().contains("gravitymod")) {
-                        ImageView exView = (ImageView) vg.findViewById(liparam.res.getIdentifier(
-                                "circle_battery", "id", PACKAGE_NAME));
-                        if (exView != null) {
-                            if (DEBUG) log("GM2 circle_battery view found - removing");
-                            vg.removeView(exView);
-                        }
-                    }
 
                     // inject circle battery view
                     mCircleBattery = new CmCircleBattery(vg.getContext());
@@ -174,11 +159,7 @@ public class ModBatteryStyle {
                     final float density = liparam.res.getDisplayMetrics().density;
                     lParams = new LinearLayout.LayoutParams((int)(density * 10.5f), 
                             (int)(density * 16));
-                    if (Build.VERSION.SDK_INT > 16) {
-                        lParams.setMarginStart((int)(density * 4));
-                    } else {
-                        lParams.leftMargin = Math.round(density * 4);
-                    }
+                    lParams.setMarginStart((int)(density * 4));
                     if (Utils.hasGeminiSupport()) {
                         lParams.bottomMargin = 2;
                     }

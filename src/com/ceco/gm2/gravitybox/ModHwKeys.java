@@ -32,7 +32,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.hardware.input.InputManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -57,7 +56,6 @@ public class ModHwKeys {
     private static final String CLASS_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
-    private static final String CLASS_LOCAL_POWER_MANAGER = "android.os.LocalPowerManager";
     private static final boolean DEBUG = false;
 
     private static final int FLAG_WAKE = 0x00000001;
@@ -170,7 +168,7 @@ public class ModHwKeys {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE)) {
                     mHomeDoubletapDisabled = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE, false);
-                    if (Build.VERSION.SDK_INT > 17 && mPhoneWindowManager != null) {
+                    if (mPhoneWindowManager != null) {
                         try {
                             XposedHelpers.setIntField(mPhoneWindowManager, "mDoubleTapOnHomeBehavior",
                                     mHomeDoubletapDisabled ? 0 : mHomeDoubletapDefaultAction);
@@ -290,14 +288,8 @@ public class ModHwKeys {
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
             classActivityManagerNative = XposedHelpers.findClass(CLASS_ACTIVITY_MANAGER_NATIVE, null);
 
-            if (Build.VERSION.SDK_INT > 16) {
-                XposedHelpers.findAndHookMethod(classPhoneWindowManager, "init",
-                    Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS, phoneWindowManagerInitHook);
-            } else {
-                XposedHelpers.findAndHookMethod(classPhoneWindowManager, "init",
-                        Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS, 
-                        CLASS_LOCAL_POWER_MANAGER, phoneWindowManagerInitHook);
-            }
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "init",
+                Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS, phoneWindowManagerInitHook);
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "interceptKeyBeforeQueueing", 
                     KeyEvent.class, int.class, boolean.class, new XC_MethodHook(XCallback.PRIORITY_HIGHEST) {
@@ -522,46 +514,38 @@ public class ModHwKeys {
                         return null;
                     }
 
-                    if (Build.VERSION.SDK_INT > 17) {
-                        XposedHelpers.setBooleanField(param.thisObject, "mHomeConsumed", true);
-                    } else {
-                        XposedHelpers.setBooleanField(param.thisObject, "mHomeLongPressed", true);
-                    }
+                    XposedHelpers.setBooleanField(param.thisObject, "mHomeConsumed", true);
                     performAction(HwKeyTrigger.HOME_LONGPRESS);
 
                     return null;
                 }
             });
 
-            if (Build.VERSION.SDK_INT > 16) {
-                XposedHelpers.findAndHookMethod(classPhoneWindowManager, 
-                        "isWakeKeyWhenScreenOff", int.class, new XC_MethodHook() {
-    
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        int keyCode = (Integer) param.args[0];
-                        if (mVolumeRockerWakeDisabled && 
-                                (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ||
-                                 keyCode == KeyEvent.KEYCODE_VOLUME_UP)) {
-                            param.setResult(false);
-                        }
-                    }
-                });
-            }
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager, 
+                    "isWakeKeyWhenScreenOff", int.class, new XC_MethodHook() {
 
-            if (Build.VERSION.SDK_INT > 17) {
-                XposedHelpers.findAndHookMethod(classPhoneWindowManager, 
-                        "readConfigurationDependentBehaviors", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        mHomeDoubletapDefaultAction = XposedHelpers.getIntField(
-                                param.thisObject, "mDoubleTapOnHomeBehavior");
-                        if (mHomeDoubletapDisabled) {
-                            XposedHelpers.setIntField(param.thisObject, "mDoubleTapOnHomeBehavior", 0);
-                        }
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    int keyCode = (Integer) param.args[0];
+                    if (mVolumeRockerWakeDisabled && 
+                            (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ||
+                             keyCode == KeyEvent.KEYCODE_VOLUME_UP)) {
+                        param.setResult(false);
                     }
-                });
-            }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager, 
+                    "readConfigurationDependentBehaviors", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    mHomeDoubletapDefaultAction = XposedHelpers.getIntField(
+                            param.thisObject, "mDoubleTapOnHomeBehavior");
+                    if (mHomeDoubletapDisabled) {
+                        XposedHelpers.setIntField(param.thisObject, "mDoubleTapOnHomeBehavior", 0);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -697,9 +681,7 @@ public class ModHwKeys {
                 if (power != null) {
                     Settings.System.putInt(mContext.getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS_MODE, 0);
-                    final String bcMethod = Build.VERSION.SDK_INT > 16 ?
-                            "setTemporaryScreenBrightnessSettingOverride" : "setBacklightBrightness";
-                    XposedHelpers.callMethod(power, bcMethod, 100);
+                    XposedHelpers.callMethod(power, "setTemporaryScreenBrightnessSettingOverride", 100);
                     Settings.System.putInt(mContext.getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS, 100);
                     if (DEBUG) log("Screen brightness reset to manual with level set to 100");
@@ -929,14 +911,7 @@ public class ModHwKeys {
 
     private static void toggleRecentApps() {
         try {
-            if (Build.VERSION.SDK_INT > 17) {
-                XposedHelpers.callMethod(mPhoneWindowManager, "toggleRecentApps");
-            } else {
-                Object statusbar = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService");
-                if (statusbar != null) {
-                    XposedHelpers.callMethod(statusbar, "toggleRecentApps");
-                }
-            }
+            XposedHelpers.callMethod(mPhoneWindowManager, "toggleRecentApps");
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

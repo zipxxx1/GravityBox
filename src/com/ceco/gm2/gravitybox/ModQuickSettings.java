@@ -56,7 +56,6 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.TypedValue;
@@ -67,7 +66,6 @@ import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -1031,7 +1029,6 @@ public class ModQuickSettings {
                     tile.setTag(mAospTileTags.get("airplane_mode_textview"));
                     if (mOverrideTileKeys.contains("airplane_mode_textview")) {
                         tile.setOnClickListener(new View.OnClickListener() {
-                            @SuppressLint("NewApi")
                             @Override
                             public void onClick(View v) {
                                 final ContentResolver cr = mContext.getContentResolver();

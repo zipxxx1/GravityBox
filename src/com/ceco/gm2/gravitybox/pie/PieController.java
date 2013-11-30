@@ -34,7 +34,6 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.hardware.input.InputManager;
 import android.os.BatteryManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -599,9 +598,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
 
     private void launchAssistAction() {
         SearchManager sm = (SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE);
-        Intent intent = (Build.VERSION.SDK_INT > 17) ?
-                (Intent) XposedHelpers.callMethod(sm, "getAssistIntent", mContext, true) :
-                (Intent) XposedHelpers.callMethod(sm, "getAssistIntent", mContext);
+        Intent intent = (Intent) XposedHelpers.callMethod(sm, "getAssistIntent", mContext, true);
         Resources res = mContext.getResources();
 
         if (intent != null) {
