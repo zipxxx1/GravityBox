@@ -73,7 +73,7 @@
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_wifi_alt">Wi-Fi (CM štýl)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
-    <string name="qs_tile_gps">GPS</string>
+    <string name="qs_tile_gps">Poloha</string>
     <string name="qs_tile_gps_alt">GPS (CM štýl)</string> 
     <string name="qs_tile_mobile_data">Mobilné dáta</string>
     <string name="qs_tile_network_mode">Typ siete</string>

@@ -950,7 +950,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
                 mPrefCatMedia.removePreference(mPrefLinkVolumes);
             }
-            if (!isAppInstalled(APP_MESSAGING)) {
+            if (!isAppInstalled(APP_MESSAGING) && mPrefCatPhoneMessaging != null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
             }
             if (Utils.isWifiOnly(getActivity())) {
@@ -964,10 +964,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Remove MTK specific preferences for non-MTK devices
             if (!Utils.isMtkDevice()) {
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
-                mQuickSettings.setEntries(Build.VERSION.SDK_INT > 18 ? 
-                        R.array.qs_tile_aosp_entries_kk : R.array.qs_tile_aosp_entries);
-                mQuickSettings.setEntryValues(Build.VERSION.SDK_INT > 18 ?
-                        R.array.qs_tile_aosp_values_kk : R.array.qs_tile_aosp_values);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
             } else {
                 // Remove Gemini specific preferences for non-Gemini MTK devices
@@ -977,9 +973,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                     mPrefCatStatusbarColors.removePreference(mPrefSbDaColorSecondary);
                 }
-
-                mQuickSettings.setEntries(R.array.qs_tile_entries);
-                mQuickSettings.setEntryValues(R.array.qs_tile_values);
                 mPrefCatStatusbarQs.removePreference(mPrefQsTileBehaviourOverride);
             }
 
@@ -1106,21 +1099,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         }
 
         private void setDefaultValues() {
-            if (mPrefs.getStringSet(PREF_KEY_QUICK_SETTINGS, null) == null ||
-                    (Build.VERSION.SDK_INT > 18 && !mPrefs.getBoolean("qs_tiles_kitkat_set", false))) {
-                Editor e = mPrefs.edit();
-                String[] values = getResources().getStringArray(
-                        Utils.isMtkDevice() ? R.array.qs_tile_values : 
-                            Build.VERSION.SDK_INT > 18 ? 
-                                    R.array.qs_tile_aosp_values_kk : R.array.qs_tile_aosp_values);
-                Set<String> defVal = new HashSet<String>(Arrays.asList(values));
-                e.putStringSet(PREF_KEY_QUICK_SETTINGS, defVal);
-                e.putString(TileOrderActivity.PREF_KEY_TILE_ORDER, Utils.join(values, ","));
-                e.putBoolean("qs_tiles_kitkat_set", true);
-                e.commit();
-                mQuickSettings.setValues(defVal);
-            }
-
             boolean value = mPrefs.getBoolean(PREF_KEY_NAVBAR_ENABLE, sSystemProperties.hasNavigationBar);
             mPrefs.edit().putBoolean(PREF_KEY_NAVBAR_ENABLE, value).commit();
             mPrefNavbarEnable.setChecked(value);

@@ -174,7 +174,10 @@
             <MultiSelectListPreference 
                 android:key="pref_quick_settings2"
                 android:title="@string/quick_settings_title"
-                android:summary="@string/quick_settings_summary" />
+                android:summary="@string/quick_settings_summary"
+                android:entries="@array/qs_tile_aosp_entries_kk"
+                android:entryValues="@array/qs_tile_aosp_values_kk"
+                android:defaultValue="@array/qs_tile_aosp_values_kk" />
 
             <Preference
                 android:key="pref_qs_tile_order"

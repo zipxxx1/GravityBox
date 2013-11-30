@@ -40,17 +40,15 @@ public class GravityBoxTile extends AQuickSettingsTile {
             }
         };
 
-        if (Build.VERSION.SDK_INT > 16) {
-            mOnLongClick = new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    Intent i = new Intent();
-                    i.setClassName(GravityBox.PACKAGE_NAME, TileOrderActivity.class.getName());
-                    startActivity(i);
-                    return true;
-                }
-            };
-        }
+        mOnLongClick = new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent i = new Intent();
+                i.setClassName(GravityBox.PACKAGE_NAME, TileOrderActivity.class.getName());
+                startActivity(i);
+                return true;
+            }
+        };
     }
 
     @Override

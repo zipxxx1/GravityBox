@@ -357,7 +357,7 @@ public class ModQuickSettings {
                     }
     
                     // adjust layout in case it's AOSP 4.3+ tile
-                    if (Build.VERSION.SDK_INT > 17 && imgResId != 0 && rssiImgResId != 0) {
+                    if (imgResId != 0 && rssiImgResId != 0) {
                         View img = viewGroup.findViewById(imgResId);
                         if (img != null) {
                             // basic tile
@@ -469,31 +469,29 @@ public class ModQuickSettings {
                 tagAospTileViews(classLoader);
             }
 
-            if (Build.VERSION.SDK_INT > 18) {
-                final Class<?> rlControllerClass = XposedHelpers.findClass(CLASS_ROTATION_LOCK_CTRL, classLoader);
-                XposedHelpers.findAndHookMethod(rlControllerClass, "isRotationLockAffordanceVisible", 
-                        new XC_MethodReplacement() {
-                        @Override
-                        protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                            return mActiveTileKeys != null ? 
-                                    mActiveTileKeys.contains("auto_rotate_textview") :
-                                    XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+            final Class<?> rlControllerClass = XposedHelpers.findClass(CLASS_ROTATION_LOCK_CTRL, classLoader);
+            XposedHelpers.findAndHookMethod(rlControllerClass, "isRotationLockAffordanceVisible", 
+                    new XC_MethodReplacement() {
+                    @Override
+                    protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                        return mActiveTileKeys != null ? 
+                                mActiveTileKeys.contains("auto_rotate_textview") :
+                                XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                    }
+            });
+            final Class<?> rlPolicyClass = XposedHelpers.findClass(CLASS_ROTATION_POLICY, null);
+            XposedHelpers.findAndHookMethod(rlPolicyClass, "isRotationLockToggleSupported",
+                    Context.class, new XC_MethodReplacement() {
+                    @Override
+                    protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                        try {
+                            return XposedHelpers.callStaticMethod(rlPolicyClass, "isRotationSupported", param.args[0]);
+                        } catch (Throwable t) {
+                            XposedBridge.log(t);
+                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                         }
-                });
-                final Class<?> rlPolicyClass = XposedHelpers.findClass(CLASS_ROTATION_POLICY, null);
-                XposedHelpers.findAndHookMethod(rlPolicyClass, "isRotationLockToggleSupported",
-                        Context.class, new XC_MethodReplacement() {
-                        @Override
-                        protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                            try {
-                                return XposedHelpers.callStaticMethod(rlPolicyClass, "isRotationSupported", param.args[0]);
-                            } catch (Throwable t) {
-                                XposedBridge.log(t);
-                                return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                            }
-                        }
-                });
-            }
+                    }
+            });
 
             XposedHelpers.findAndHookMethod(phoneStatusBarClass, "removeNotification", IBinder.class, new XC_MethodHook() {
                 @Override
@@ -516,8 +514,7 @@ public class ModQuickSettings {
                         if (DEBUG) log("animateCollapsePanels called from removeNotification method");
 
                         boolean hasFlipSettings = XposedHelpers.getBooleanField(param.thisObject, "mHasFlipSettings");
-                        boolean animating = Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR1 ? false : 
-                                XposedHelpers.getBooleanField(param.thisObject, "mAnimating");
+                        boolean animating = XposedHelpers.getBooleanField(param.thisObject, "mAnimating");
                         View flipSettingsView = (View) XposedHelpers.getObjectField(param.thisObject, "mFlipSettingsView");
                         Object notificationData = XposedHelpers.getObjectField(mStatusBar, "mNotificationData");
                         int ndSize = (Integer) XposedHelpers.callMethod(notificationData, "size");
@@ -1002,19 +999,13 @@ public class ModQuickSettings {
         }
 
         try {
-            final XC_MethodHook addRotationLockTileHook = new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(classQsModel, "addRotationLockTile",
+                    CLASS_QS_TILEVIEW, CLASS_ROTATION_LOCK_CTRL, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     ((View)param.args[0]).setTag(mAospTileTags.get("auto_rotate_textview"));
                 }
-            };
-            if (Build.VERSION.SDK_INT > 18) {
-                XposedHelpers.findAndHookMethod(classQsModel, "addRotationLockTile",
-                        CLASS_QS_TILEVIEW, CLASS_ROTATION_LOCK_CTRL, CLASS_QS_MODEL_RCB, addRotationLockTileHook);
-            } else {
-                XposedHelpers.findAndHookMethod(classQsModel, "addRotationLockTile",
-                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRotationLockTileHook);
-            }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -1095,18 +1086,16 @@ public class ModQuickSettings {
             XposedBridge.log(t);
         }
 
-        if (Build.VERSION.SDK_INT > 18) {
-            try {
-                XposedHelpers.findAndHookMethod(classQsModel, "addLocationTile",
-                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                        ((View)param.args[0]).setTag(mAospTileTags.get("gps_textview"));
-                    }
-                });
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
+        try {
+            XposedHelpers.findAndHookMethod(classQsModel, "addLocationTile",
+                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    ((View)param.args[0]).setTag(mAospTileTags.get("gps_textview"));
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
     }
 }
