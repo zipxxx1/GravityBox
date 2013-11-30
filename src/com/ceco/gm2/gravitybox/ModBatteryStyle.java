@@ -20,7 +20,6 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.provider.Settings;
@@ -136,8 +135,8 @@ public class ModBatteryStyle {
                         percentTextView.setLayoutParams(lParams);
                         percentTextView.setPadding(6, 0, 0, 0);
                         percentTextView.setTextSize(1, 16);
-                        percentTextView.setTextColor(Build.VERSION.SDK_INT > 18 ? Color.WHITE :
-                                vg.getContext().getResources().getColor(android.R.color.holo_blue_dark));
+                        percentTextView.setTextColor(vg.getContext().getResources().getColor(
+                                android.R.color.holo_blue_dark));
                         percentTextView.setVisibility(View.GONE);
                         mPercentText = new StatusbarBatteryPercentage(percentTextView);
                         vg.addView(mPercentText.getView());
