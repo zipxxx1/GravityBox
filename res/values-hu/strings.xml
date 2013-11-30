@@ -207,10 +207,6 @@
     <string name="pref_lockscreen_menu_key_title">Menü gomb engedélyezése</string>
     <string name="pref_lockscreen_menu_key_summary">Lehetővé teszi a menü gombbal történő gyors feloldást a Zárképernyőn (újraindítás szükséges)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Javítja az üzenetek fogadásakori ébrentartást</string>
-    <string name="pref_mms_fix_wakelock_summary">Megakadályozza a képernyő bekapcsolását, ha új üzenet érkezik (újraindítás szükséges)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Óra középen</string>
 

@@ -194,10 +194,6 @@
     <string name="pref_lockscreen_menu_key_title">Povolit menu tlačítko</string>
     <string name="pref_lockscreen_menu_key_summary">Povolí menu tlačítko pro rychlé odemknutí obrazovky uzamčení (vyžaduje restart)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Opravit wakelock zpráv</string>
-    <string name="pref_mms_fix_wakelock_summary">Zamezí zapnutí obrazovky při obdržení nové SMS / MMS zprávy (vyžaduje restart)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Vycentrované hodiny</string>
 

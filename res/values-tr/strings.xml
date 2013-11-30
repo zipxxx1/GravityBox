@@ -206,10 +206,6 @@
     <string name="pref_lockscreen_menu_key_title">Menü tuşunu etkinleştir</string>
     <string name="pref_lockscreen_menu_key_summary">Menü tuşu ile kilit açmaya izin verir (yeniden başlatma gerektirir)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Mesajlaşma uyandırma kilidi düzeltmesi</string>
-    <string name="pref_mms_fix_wakelock_summary">Yeni mesaj alındığında ekranın açılmasını engeller (yeniden başlatma gerektirir)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Ortalı saat</string>
 

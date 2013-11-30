@@ -209,10 +209,6 @@
     <string name="pref_lockscreen_menu_key_title">Activation touche menu</string>
     <string name="pref_lockscreen_menu_key_summary">Permet d\'utiliser la touche menu pour un déverrouillage rapide à partir de l\'écran de déverrouillage (redémarrage nécessaire)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Allumage à réception de message</string>
-    <string name="pref_mms_fix_wakelock_summary">Permet de ne pas allumer l\'écran à la réception d\'un message (redémarrage nécessaire)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Centrer l\'horloge</string>
 

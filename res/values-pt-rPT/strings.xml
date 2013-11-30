@@ -194,10 +194,6 @@
     <string name="pref_lockscreen_menu_key_title">Desbloquear utilizando botão Menu</string>
     <string name="pref_lockscreen_menu_key_summary">O botão Menu pode ser utilizado para desbloquear o telefone rapidamente (necessário reiniciar)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Corrigir ligar de ecrã ao receber mensagem</string>
-    <string name="pref_mms_fix_wakelock_summary">Previne que o ecrã se ligue quando é recebida uma nova mensagem (necessário reiniciar)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Centrar relógio</string>
 

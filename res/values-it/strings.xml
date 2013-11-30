@@ -176,10 +176,6 @@
     <string name="pref_lockscreen_menu_key_title">Abilita tasto menu</string>
     <string name="pref_lockscreen_menu_key_summary">Permette di utilizzare il tasto menu per sbloccare velocemente il dispositivo durante il lockscreen (richiede riavvio)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Fix accensione messaggi</string>
-    <string name="pref_mms_fix_wakelock_summary">Impedisce allo schermo di accendersi all\'arrivo di un nuovo messaggio (richiede riavvio)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Centra orologio</string>
 

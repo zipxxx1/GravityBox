@@ -207,10 +207,6 @@
     <string name="pref_lockscreen_menu_key_title">Ενεργοποίηση του πλήκτρου Μενού</string>
     <string name="pref_lockscreen_menu_key_summary">Επιτρέπει στο πλήκτρο Μενού να χρησιμοποιείται για γρήγορο ξεκλείδωμα της συσκευής όταν είναι κλειδωμένη η οθόνη (απαιτείται επανεκκίνηση)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Επισκευή ξεκλειδώματος με μήνυμα</string>
-    <string name="pref_mms_fix_wakelock_summary">Εμποδίζει την ενεργοποίηση της οθόνης μετά από τη λήψη νέου μηνύματος (απαιτείται επανεκκίνηση)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Κεντρικό Ρολόι</string>
 

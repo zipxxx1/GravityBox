@@ -207,10 +207,6 @@
     <string name="pref_lockscreen_menu_key_title">تمكين مفتاح القائمة</string>
     <string name="pref_lockscreen_menu_key_summary">امكانية استخدام مفتاح القائمة لفتح شاشة القفل (يتطلب اعادة التشغيل)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">اصلاح الرسائل عند القفل</string>
-    <string name="pref_mms_fix_wakelock_summary">يمنع عرض الرسائل الواردة عند تأمين شاشة القفل (يتطلب اعادة التشغيل)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">توسيط الساعة</string>
 

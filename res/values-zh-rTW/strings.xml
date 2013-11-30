@@ -194,10 +194,6 @@
     <string name="pref_lockscreen_menu_key_title">啟用選單鍵</string>
     <string name="pref_lockscreen_menu_key_summary">令選單鍵在鎖定畫面可以用來快速地解鎖裝置（需要重新啟動）</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">修正訊息的喚醒鎖</string>
-    <string name="pref_mms_fix_wakelock_summary">避免在收到新訊息時喚醒螢幕（需要重新啟動）</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">狀態列時鐘置中</string>
 

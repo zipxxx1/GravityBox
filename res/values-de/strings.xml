@@ -194,10 +194,6 @@
     <string name="pref_lockscreen_menu_key_title">Aktiviere Menü-Taste</string>
     <string name="pref_lockscreen_menu_key_summary">Wenn aktiviert, kann die Menü-Taste zum schnellen Entsperren genutzt werden. (Neustart erforderlich)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Behebt aufwachen durch Nachrichten</string>
-    <string name="pref_mms_fix_wakelock_summary">Hindert den Bildschirm daran sich anzuschalten, wenn eine Nachricht eintrifft (Neustart erforderlich)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Uhrzeit in der Mitte</string>
 

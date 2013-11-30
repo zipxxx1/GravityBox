@@ -209,10 +209,6 @@
     <string name="pref_lockscreen_menu_key_title">Включить "Меню"</string>
     <string name="pref_lockscreen_menu_key_summary">Позволяет быстро разблокировать устройство с экрана блокировки клавишей "Меню" (Необходима перезагрузка)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Исправление просыпания пир входящих сообщениях</string>
-    <string name="pref_mms_fix_wakelock_summary">Предотвращает включение экрана при входящих сообщениях (Необходима перезагрузка)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Часы в центре</string>
 

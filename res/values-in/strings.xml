@@ -209,10 +209,6 @@
     <string name="pref_lockscreen_menu_key_title">Hidupkan tombol menu</string>
     <string name="pref_lockscreen_menu_key_summary">Membolehkan tombol menu digunakan untuk membuka kunci secara cepat ketika di lockscreen (membutuhkan reboot)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Perbaiki wakelock perpesanan</string>
-    <string name="pref_mms_fix_wakelock_summary">Menghindari hidupnya layar ketika ada pesan baru yang datang (membutuhkan reboot)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Jam di tengah</string>
 

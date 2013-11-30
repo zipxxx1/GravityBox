@@ -145,8 +145,6 @@
     <string name="pref_lockscreen_rotation_summary">УВАГА: може перемістити ярлики для кільця розблокування на деяких пристроях у разі, якщо екран блокування з AOSP був змінений виробником</string>
     <string name="pref_lockscreen_menu_key_title">Включити Меню</string>
     <string name="pref_lockscreen_menu_key_summary">Дозволяє швидко розблокувати пристрій з екрану блокування клавішею Меню (Необхідна перезавантаження)</string>
-    <string name="pref_mms_fix_wakelock_title">Виправлення прокидання бенкет вхідних повідомленнях</string>
-    <string name="pref_mms_fix_wakelock_summary">Запобігає включення екрану при вхідних повідомленнях (Необхідна перезавантаження)</string>
     <string name="pref_statusbar_center_clock_title">Годинник в центрі</string>
     <string name="pref_cat_media_title">Налаштування мультимедіа</string>
     <string name="pref_cat_media_summary">Містить різні налаштування для медіа-та аудіосистеми</string>

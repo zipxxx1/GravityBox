@@ -147,8 +147,6 @@
     <string name="pref_lockscreen_rotation_summary">UWAGA: Może zamienić cele na pierścieniu odblokowania w niektórych urządzeniach, gdy ekran blokady AOSP został zmodyfikowany przez sprzedawcę</string>
     <string name="pref_lockscreen_menu_key_title">Włącz klawisz menu</string>
     <string name="pref_lockscreen_menu_key_summary">Umożliwia wykorzystanie klawisza menu do szybkiego odblokowania urządzenia na Ekranie Blokady (wymagany restart)</string>
-    <string name="pref_mms_fix_wakelock_title">Napraw wybudzanie od Wiadomości</string>
-    <string name="pref_mms_fix_wakelock_summary">Zabezpiecza przed włączaniem się ekranu podczas odbierania nowych wiadomości (wymagany restart)</string>
     <string name="pref_statusbar_center_clock_title">Wycentruj zegar</string>
     <string name="pref_cat_media_title">Poprawki multimediów</string>
     <string name="pref_cat_media_summary">Zawiera dodatkowe poprawki związane z multimediami i dźwiękiem</string>

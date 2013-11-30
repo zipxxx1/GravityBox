@@ -118,7 +118,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_ROAMING_WARNING_DISABLE = "pref_roaming_warning_disable";
     public static final String PREF_KEY_NATIONAL_ROAMING = "pref_national_roaming";
     public static final String PREF_CAT_KEY_FIXES = "pref_cat_fixes";
-    public static final String PREF_KEY_FIX_MMS_WAKELOCK = "pref_mms_fix_wakelock";
     public static final String PREF_CAT_KEY_STATUSBAR = "pref_cat_statusbar";
     public static final String PREF_CAT_KEY_STATUSBAR_QS = "pref_cat_statusbar_qs";
     public static final String PREF_CAT_KEY_STATUSBAR_COLORS = "pref_cat_statusbar_colors";
@@ -489,7 +488,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     private static final List<String> rebootKeys = new ArrayList<String>(Arrays.asList(
             PREF_KEY_BRIGHTNESS_MIN,
             PREF_KEY_LOCKSCREEN_MENU_KEY,
-            PREF_KEY_FIX_MMS_WAKELOCK,
             PREF_KEY_MUSIC_VOLUME_STEPS,
             PREF_KEY_HOLO_BG_SOLID_BLACK,
             PREF_KEY_HOLO_BG_DITHER,
@@ -662,7 +660,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ColorPickerPreference mPrefSbIconColor;
         private ColorPickerPreference mPrefSbDaColor;
         private PreferenceScreen mPrefCatFixes;
-        private CheckBoxPreference mPrefFixMmsWakelock;
         private PreferenceScreen mPrefCatStatusbar;
         private PreferenceScreen mPrefCatStatusbarQs;
         private CheckBoxPreference mPrefAutoSwitchQs;
@@ -830,7 +827,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbSignalColorMode = (ListPreference) findPreference(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE);
 
             mPrefCatFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_FIXES);
-            mPrefFixMmsWakelock = (CheckBoxPreference) findPreference(PREF_KEY_FIX_MMS_WAKELOCK);
             mPrefCatStatusbar = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR);
             mPrefCatStatusbarQs = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_QS);
             mPrefCatStatusbarColors = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_COLORS);
@@ -970,7 +966,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (!isAppInstalled(APP_MESSAGING)) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
-                mPrefCatFixes.removePreference(mPrefFixMmsWakelock);
             }
             if (Utils.isWifiOnly(getActivity())) {
                 // Remove preferences that don't apply to wifi-only devices
@@ -979,8 +974,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatPhoneMobileData.removePreference(mPrefMobileDataSlow2gDisable);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
-                mPrefCatFixes.removePreference(mPrefFixMmsWakelock);
-           	}
+           }
 
             // Remove MTK specific preferences for non-MTK devices
             if (!Utils.isMtkDevice()) {

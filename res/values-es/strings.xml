@@ -185,11 +185,7 @@
 	<!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Activada tecla de menú</string>
     <string name="pref_lockscreen_menu_key_summary">Permite que la tecla de menú se utilice para desbloquear rápido el dispositivo, mientras que está en LockScreen (requiere reinicio)</string>
-	
-	<!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Fijar mensajería wakelock</string>
-    <string name="pref_mms_fix_wakelock_summary">Evita que la pantalla se encienda cuando llega un nuevo mensaje (requiere reinicio)</string>
-	
+
 	<!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Reloj en el Centro</string>
 	

@@ -194,10 +194,6 @@
     <string name="pref_lockscreen_menu_key_title">メニューキーを有効化</string>
     <string name="pref_lockscreen_menu_key_summary">ロック画面でメニューキーを押すとロックを解除するようにします。(要再起動)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">メッセージの画面点灯を修正</string>
-    <string name="pref_mms_fix_wakelock_summary">メッセージは届いたときに画面がオンになるのを防ぎます。(要再起動)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">時計の中央化</string>
 

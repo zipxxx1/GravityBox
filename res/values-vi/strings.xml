@@ -201,10 +201,6 @@
     <string name="pref_lockscreen_menu_key_title">Cho phép Phím menu</string>
     <string name="pref_lockscreen_menu_key_summary">Cho phép mở khóa bằng phím menu khi màn hình khóa đã hiện (Trang bị khởi động để thay đổi)</string>
 
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Sửa tin nhắn sáng màn hình</string>
-    <string name="pref_mms_fix_wakelock_summary">màn hình sẽ sáng lên khi có tin nhắn mới (Trang bị khởi động lại để cập nhật thay đổi)</string>
-
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Trung tâm đồng hồ</string>
 

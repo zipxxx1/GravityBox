@@ -112,12 +112,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         // MTK Specific
         if (Utils.isMtkDevice()) {
-
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_MMS_WAKELOCK, false) && 
-                    lpparam.packageName.equals(FixMmsWakelock.PACKAGE_NAME)) {
-                FixMmsWakelock.init(prefs, lpparam.classLoader);
-            }
-
             if (lpparam.packageName.equals(ModAudioSettings.PACKAGE_NAME)) {
                 ModAudioSettings.init(prefs, lpparam.classLoader);
             }
