@@ -115,10 +115,6 @@
     <string name="statusbar_bgcolor_title">Durum çubuğu arkaplan rengi</string>
     <string name="statusbar_bgcolor_summary">Durum çubuğu arkaplan rengini ve saydamlığı ayarla</string>
 
-    <!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Konuşma ayarlarını düzelt</string>
-    <string name="fix_tts_settings_summary">Dil&amp;Giriş - Sesli Arama ve Metinden-Sese ayarlarını düzeltir (yeniden başlatma gerektirir)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Durum çubuğu iyileştirmeleri</string>
     <string name="pref_cat_statusbar_summary">Çeşitli durum çubuğu iyileştirmelerini içerir</string>

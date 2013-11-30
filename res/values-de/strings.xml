@@ -102,10 +102,6 @@
     <string name="statusbar_bgcolor_title">Hintergrundfarbe der Statusleiste</string>
     <string name="statusbar_bgcolor_summary">Erlaubt es, die Hintergrundfarbe der Statusleiste zu ändern</string>
 
-    <!-- Fix speech settings -->
-    <string name="fix_tts_settings_title">Behebt Spracheingabe-Einstellungen</string>
-    <string name="fix_tts_settings_summary">Schaltet \'Sprachsuche\' und \'Text-in-Sprache-Ausgabe\' im \'Sprache &amp; Eingabe\'-Einstellungsmenü frei (Neustart erforderlich)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Statusleiste optimieren</string>
     <string name="pref_cat_statusbar_summary">Beinhaltet Optionen, um die Statusleiste anzupassen</string>

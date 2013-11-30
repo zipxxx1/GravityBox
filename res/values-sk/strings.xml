@@ -101,10 +101,6 @@
     <string name="statusbar_bgcolor_title">Farba pozadia stavového riadku</string>
     <string name="statusbar_bgcolor_summary">Umožní nastavenie farby a priehľadnosti pozadia stavového riadku</string>
 
-    <!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Opraviť nastavenia reči</string>
-    <string name="fix_tts_settings_summary">Odomkne nastavenia výstupu prevodu textu na reč v nastaveniach Jazyk&amp;vstup (vyžaduje reštart)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Nastavenia stavového riadku</string>
     <string name="pref_cat_statusbar_summary">Obsahuje rôzne nastavenia stavového riadku</string>

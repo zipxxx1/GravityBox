@@ -110,10 +110,6 @@
     <string name="statusbar_bgcolor_title">Màu nền thanh trạng thái</string>
     <string name="statusbar_bgcolor_summary">Cho phép đặt màu nền thanh trạng thái và trong suốt</string>
 
-    <!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Sửa cài đặt giọng nói</string>
-    <string name="fix_tts_settings_summary">Mở chức năng tìm kiếm giọng nói và văn bản thành giọng nói trong ngôn ngữ và phương thức nhập (Trang bị khởi động lại để thay đổi)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Tùy chỉnh thanh trạng thái</string>
     <string name="pref_cat_statusbar_summary">Tùy chỉnh các trạng thái khác nhau</string>

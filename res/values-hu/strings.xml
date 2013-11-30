@@ -115,10 +115,6 @@
     <string name="statusbar_bgcolor_title">Állapotsáv háttérszín</string>
     <string name="statusbar_bgcolor_summary">Lehetővé teszi az Állapotsáv háttérszínének a beállítását</string>
 
-    <!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Javítja a beszéd beállításokat</string>
-    <string name="fix_tts_settings_summary">Elérhetővé teszi a hangalapú keresést és a szövegfelolvasó kimenetet a Nyelv és Bevitel-ben (újraindítás szükséges)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Állapotsáv módosítások</string>
     <string name="pref_cat_statusbar_summary">Különféle Állapotsáv módosításokat tartalmaz</string>

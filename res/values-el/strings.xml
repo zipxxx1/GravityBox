@@ -115,10 +115,6 @@
     <string name="statusbar_bgcolor_title">Χρώμα φόντου Γραμμής Κατάστασης</string>
     <string name="statusbar_bgcolor_summary">Επιτρέπει να ορίσετε το χρώμα φόντου της Γραμμής Κατάστασης και τη διαφάνεια</string>
 
-    <!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Επιδιόρθωση ρυθμίσεων ομιλίας</string>
-    <string name="fix_tts_settings_summary">Ξεκλειδώνει τις ρυθμίσεις τη φωνητικής αναζήτησης και του κειμένου σε ομιλία στη Γλώσσα&amp;Εισαγωγής (απαιτείται επανεκκίνηση)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Βελτιώσεις της Γραμμής Κατάστασης</string>
     <string name="pref_cat_statusbar_summary">Περιέχει διάφορες βελτιώσεις της Γραμμής Κατάστασης</string>

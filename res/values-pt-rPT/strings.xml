@@ -102,10 +102,6 @@
     <string name="statusbar_bgcolor_title">Cor do fundo da Barra de Status</string>
     <string name="statusbar_bgcolor_summary">Permite escolher a cor do fundo</string>
 
-    <!-- Fix speech settings -->
-    <string name="fix_tts_settings_title">Desbloquear definições de voz</string>
-    <string name="fix_tts_settings_summary">Desbloqueia pesquisa por voz e configurações de texto para voz nas definições (necessário reiniciar)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Ajustes da Barra de Status</string>
     <string name="pref_cat_statusbar_summary">Contém vários ajustes relacionados com a Barra de Status</string>

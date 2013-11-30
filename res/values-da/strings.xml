@@ -77,10 +77,6 @@
     <string name="statusbar_bgcolor_title">Baggrundsfarve for statusbjælken</string>
     <string name="statusbar_bgcolor_summary">Tillader indstilling af statusbjælkens baggrundsfarve samt transparens</string>
 
-    <!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Fix taleindstillinger</string>
-    <string name="fix_tts_settings_summary">Oplåser indstillinger for for talestyret søgning samt tekst-til-tale i Sprog &amp; Input (kræver genstart)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Statusbjælke-tweaks</string>
     <string name="pref_cat_statusbar_summary">Indeholder diverse statusbjælke-tweaks</string>

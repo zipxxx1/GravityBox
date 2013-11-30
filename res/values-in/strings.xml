@@ -117,10 +117,6 @@
     <string name="statusbar_bgcolor_title">Warna latar Statusbar</string>
     <string name="statusbar_bgcolor_summary">Membolehkan untuk men-set warna latar statusbar</string>
 
-    <!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Perbaiki setting Bicara</string>
-    <string name="fix_tts_settings_summary">Membuka kunci setting pencarian suara dan text-to-speech di setting Bahasa&amp;Masukan (membutuhkan reboot)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Tweak statusbar</string>
     <string name="pref_cat_statusbar_summary">Berisi berbagai macam tweak untuk statusbar</string>

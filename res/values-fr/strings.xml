@@ -117,10 +117,6 @@
     <string name="statusbar_bgcolor_title">Couleur barre d\'état</string>
     <string name="statusbar_bgcolor_summary">Permet de choisir la couleur de fond de la barre d\'état</string>
 
-    <!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Paramètres liés à la parole</string>
-    <string name="fix_tts_settings_summary">Donne accès à la recherche vocale et au paramètre de saisie vocale dans les paramètres langage et saisie (redémarrage nécessaire)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Modifications barre d\'état</string>
     <string name="pref_cat_statusbar_summary">Regroupe diverses modifications de la barre d\'état</string>

@@ -1200,12 +1200,6 @@
             android:summary="@string/pref_mms_fix_wakelock_summary"
             android:defaultValue="false" />
 
-        <CheckBoxPreference
-            android:key="pref_fix_tts_settings"
-            android:title="@string/fix_tts_settings_title"
-            android:summary="@string/fix_tts_settings_summary"
-            android:defaultValue="false" />
-
     </PreferenceScreen>
 
     <Preference

@@ -117,10 +117,6 @@
     <string name="statusbar_bgcolor_title">Цвет панели уведомлений</string>
     <string name="statusbar_bgcolor_summary">Позволяет задать цвет и прозрачность панели уведомлений</string>
 
-    <!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Исправление речевых настроек</string>
-    <string name="fix_tts_settings_summary">Разблокирует голосовой поиск и распознавание речи в настройках Язык и ввод (Необходима перезагрузка)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Настройки статусбара</string>
     <string name="pref_cat_statusbar_summary">Содержит некоторые настройки статусбара</string>

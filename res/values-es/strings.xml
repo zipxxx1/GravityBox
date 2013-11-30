@@ -94,10 +94,6 @@
 	<!--  Statusbar background color -->
     <string name="statusbar_bgcolor_title">Color de fondo de la barra de estado</string>
     <string name="statusbar_bgcolor_summary">Permite seleccionar el color de la barra de estado y su transparencia</string>
-	
-	<!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Parche para las preferencias de habla</string>
-    <string name="fix_tts_settings_summary">Habilita la busqueda por voz y los ajustes de texto-a-voz&amp;en entrada. (requiere reiniciar)</string>
 
 	<!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Ajustes de la barra de estado</string>
