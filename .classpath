@@ -5,7 +5,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="ext/core-classes.jar"/>
 	<classpathentry kind="lib" path="ext/XposedBridgeApi.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
