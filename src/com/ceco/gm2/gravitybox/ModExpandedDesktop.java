@@ -22,12 +22,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.graphics.Rect;
-import android.os.Binder;
-import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.DisplayMetrics;
-import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import de.robv.android.xposed.XC_MethodHook;
@@ -40,7 +36,6 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModExpandedDesktop {
     private static final String TAG = "GB:ModExpandedDesktop";
     private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.internal.policy.impl.PhoneWindowManager";
-    private static final String CLASS_POLICY_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
 
@@ -51,7 +46,6 @@ public class ModExpandedDesktop {
     private static SettingsObserver mSettingsObserver;
     private static boolean mExpandedDesktop;
     private static int mExpandedDesktopMode;
-    private static Unhook mNavbarShowLwHook;
     private static Unhook mStatusbarShowLwHook;
     private static boolean mNavbarOverride;
     private static float mNavbarHeightScaleFactor = 1;
@@ -59,7 +53,6 @@ public class ModExpandedDesktop {
     private static float mNavbarWidthScaleFactor = 1;
 
     public static final String SETTING_EXPANDED_DESKTOP_STATE = "gravitybox_expanded_desktop_state";
-    private static final int SEND_NEW_CONFIGURATION = 18;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -92,11 +85,10 @@ public class ModExpandedDesktop {
                     && intent.hasExtra(GravityBoxSettings.EXTRA_ED_MODE)) {
                 final int expandedDesktopMode = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
-                final boolean forceUpdateDisplayMetrics = expandedDesktopMode != mExpandedDesktopMode;
                 mExpandedDesktopMode = expandedDesktopMode;
-                updateSettings(forceUpdateDisplayMetrics);
+                updateSettings();
             } else if (intent.getAction().equals(ModStatusbarColor.ACTION_PHONE_STATUSBAR_VIEW_MADE)) {
-                updateSettings(true);
+                updateSettings();
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
                     mNavbarHeightScaleFactor = 
@@ -110,16 +102,12 @@ public class ModExpandedDesktop {
                     mNavbarWidthScaleFactor = 
                             (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100) / 100f;
                 }
-                updateSettings(true);
+                updateSettings();
             }
         }
     };
 
     private static void updateSettings() {
-        updateSettings(false);
-    }
-
-    private static void updateSettings(boolean forceUpdateDisplayMetrics) {
         if (mContext == null || mPhoneWindowManager == null) return;
 
         try {
@@ -131,10 +119,8 @@ public class ModExpandedDesktop {
                     return;
             }
 
-            boolean updateDisplayMetrics = false | forceUpdateDisplayMetrics;
             if (mExpandedDesktop != expandedDesktop) {
                 mExpandedDesktop = expandedDesktop;
-                updateDisplayMetrics = true;
             }
 
             XposedHelpers.callMethod(mPhoneWindowManager, "updateSettings");
@@ -186,9 +172,6 @@ public class ModExpandedDesktop {
             XposedHelpers.setObjectField(mPhoneWindowManager, "mNavigationBarHeightForRotation", navigationBarHeightForRotation);
 
             XposedHelpers.callMethod(mPhoneWindowManager, "updateRotation", false);
-            if (updateDisplayMetrics) {
-                updateDisplayMetrics(XposedHelpers.getObjectField(mPhoneWindowManager, "mWindowManager"));
-            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -217,7 +200,31 @@ public class ModExpandedDesktop {
             }
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "init",
-                Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS, phoneWindowManagerInitHook);
+                Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    try {
+                        mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                        mPhoneWindowManager = param.thisObject;
+
+                        IntentFilter intentFilter = new IntentFilter();
+                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
+                        intentFilter.addAction(ModStatusbarColor.ACTION_PHONE_STATUSBAR_VIEW_MADE);
+                        if (mNavbarOverride) {
+                            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
+                        }
+                        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+
+                        mSettingsObserver = new SettingsObserver(
+                                (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler"));
+                        mSettingsObserver.observe();
+
+                        if (DEBUG) log("Phone window manager initialized");
+                    } catch (Throwable t) {
+                        XposedBridge.log(t);
+                    }
+                }
+            });
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "finishPostLayoutPolicyLw", new XC_MethodHook() {
                 @Override
@@ -227,14 +234,15 @@ public class ModExpandedDesktop {
 
                     mStatusbarShowLwHook = XposedHelpers.findAndHookMethod(
                             statusBar.getClass(), "showLw", boolean.class, new XC_MethodReplacement() {
-                                @Override
-                                protected Object replaceHookedMethod(MethodHookParam param2) throws Throwable {
-                                    if (param2.thisObject == statusBar) {
-                                        return XposedHelpers.callMethod(param2.thisObject, "hideLw", true);
-                                    } else {
-                                        return XposedBridge.invokeOriginalMethod(param2.method, param2.thisObject, param2.args);
-                                    }
-                                }
+                        @Override
+                        protected Object replaceHookedMethod(MethodHookParam param2) throws Throwable {
+                            if (param2.thisObject == statusBar) {
+                                if (DEBUG) log("finishPostLayoutPolicyLw: calling hideLw instead of showLw");
+                                return XposedHelpers.callMethod(param2.thisObject, "hideLw", true);
+                            } else {
+                                return XposedBridge.invokeOriginalMethod(param2.method, param2.thisObject, param2.args);
+                            }
+                        }
                     });
                 }
                 @Override
@@ -247,85 +255,21 @@ public class ModExpandedDesktop {
             });
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "beginLayoutLw",
-                    boolean.class, int.class, int.class, int.class, beginLayoutLwHook);
-
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "layoutWindowLw",
-                    CLASS_POLICY_WINDOW_STATE, WindowManager.LayoutParams.class, 
-                    CLASS_POLICY_WINDOW_STATE, new XC_MethodHook() {
+                    boolean.class, int.class, int.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    final boolean isDefaultDisplay = 
-                            (Boolean) XposedHelpers.callMethod(param.args[0], "isDefaultDisplay");
-                    if (!mExpandedDesktop
-                            || param.args[0] == XposedHelpers.getObjectField(param.thisObject, "mStatusBar")
-                            || param.args[0] == XposedHelpers.getObjectField(param.thisObject, "mNavigationBar")
-                            || !isDefaultDisplay) return;
+                    try {
+                        if (!(Boolean) param.args[0]) return;
 
-                    final WindowManager.LayoutParams attrs = (WindowManager.LayoutParams) param.args[1];
-                    if (attrs.type == WindowManager.LayoutParams.TYPE_INPUT_METHOD) return;
-
-                    final int fl = ((WindowManager.LayoutParams) param.args[1]).flags;
-                    final int sysUiFl = (Integer) XposedHelpers.callMethod(param.args[0], "getSystemUiVisibility");
-                    final Rect pf = (Rect) XposedHelpers.getObjectField(param.thisObject, "mTmpParentFrame");
-                    final Rect df = (Rect) XposedHelpers.getObjectField(param.thisObject, "mTmpDisplayFrame");
-                    final Rect cf = (Rect) XposedHelpers.getObjectField(param.thisObject, "mTmpContentFrame");
-                    final Rect vf = (Rect) XposedHelpers.getObjectField(param.thisObject, "mTmpVisibleFrame");
-                    final Rect of = (Rect) XposedHelpers.getObjectField(param.thisObject, "mTmpOverscanFrame");
-
-                    boolean shouldRecomputeFrame = false;
-                    if ((fl & (WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | 
-                               WindowManager.LayoutParams.FLAG_FULLSCREEN | 
-                               WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR))
-                            == (WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | 
-                                    WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR)
-                            && (sysUiFl & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                        if (param.args[2] == null
-                                && attrs.type >= WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW
-                                && attrs.type <= WindowManager.LayoutParams.LAST_SUB_WINDOW) {
-                            pf.left = df.left = XposedHelpers.getIntField(param.thisObject, "mOverscanScreenLeft");
-                            pf.right = df.right = pf.left + 
-                                    XposedHelpers.getIntField(param.thisObject, "mOverscanScreenWidth");
-                            pf.top = df.top = XposedHelpers.getIntField(param.thisObject, "mOverscanScreenTop");
-                            pf.bottom = df.bottom = pf.top + 
-                                    XposedHelpers.getIntField(param.thisObject, "mOverscanScreenHeight");
-                            of.left = XposedHelpers.getIntField(param.thisObject, "mUnrestrictedScreenLeft");
-                            of.top = XposedHelpers.getIntField(param.thisObject, "mUnrestrictedScreenTop");
-                            of.right = of.left + 
-                                    XposedHelpers.getIntField(param.thisObject, "mUnrestrictedScreenWidth");
-                            of.bottom = of.top + 
-                                    XposedHelpers.getIntField(param.thisObject, "mUnrestrictedScreenHeight");
-                            if (expandedDesktopHidesStatusbar()) {
-                                cf.top = pf.top;
+                        if (expandedDesktopHidesStatusbar()) {
+                            final Object statusBar = XposedHelpers.getObjectField(param.thisObject, "mStatusBar");
+                            if (statusBar != null) {
+                                if (DEBUG) log("beginLayoutLw: setting mStableTop to 0");
+                                XposedHelpers.setIntField(param.thisObject, "mStableTop", 0);
                             }
-                            shouldRecomputeFrame = true;
                         }
-                    } else if ((fl & WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN) != 0 || (sysUiFl
-                                & (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                           | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)) != 0) {
-                        if (attrs.type >= WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW
-                                && attrs.type <= WindowManager.LayoutParams.LAST_SUB_WINDOW) {
-                            pf.left = df.left =
-                                    XposedHelpers.getIntField(param.thisObject, "mOverscanScreenLeft");
-                            pf.right = df.right = pf.left +
-                                    XposedHelpers.getIntField(param.thisObject, "mOverscanScreenWidth");
-                            pf.top = df.top = 
-                                    XposedHelpers.getIntField(param.thisObject, "mOverscanScreenTop");
-                            pf.bottom = df.bottom = pf.top +
-                                    XposedHelpers.getIntField(param.thisObject, "mOverscanScreenHeight");
-                            of.set(pf);
-                            if (expandedDesktopHidesNavigationBar()) {
-                                cf.set(pf);
-                            }
-                            shouldRecomputeFrame = true;
-                        }
-                    }
-
-                    if (shouldRecomputeFrame) {
-                        XposedHelpers.callMethod(param.thisObject, "applyStableConstraints",
-                                sysUiFl, fl, cf);
-                        vf.set(cf);
-                        XposedHelpers.callMethod(param.args[0], "computeFrameLw", pf, df, of, cf, vf);
-                        if (DEBUG) log("layoutWindowLw recomputing frame");
+                    } catch (Throwable t) {
+                        XposedBridge.log(t);
                     }
                 }
             });
@@ -404,156 +348,6 @@ public class ModExpandedDesktop {
         }
     }
 
-    private static XC_MethodHook phoneWindowManagerInitHook = new XC_MethodHook() {
-        @Override
-        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-            try {
-                mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                mPhoneWindowManager = param.thisObject;
-
-                IntentFilter intentFilter = new IntentFilter();
-                intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
-                intentFilter.addAction(ModStatusbarColor.ACTION_PHONE_STATUSBAR_VIEW_MADE);
-                if (mNavbarOverride) {
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
-                }
-                mContext.registerReceiver(mBroadcastReceiver, intentFilter);
-
-                mSettingsObserver = new SettingsObserver(
-                        (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler"));
-                mSettingsObserver.observe();
-
-                if (DEBUG) log("Phone window manager initialized");
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
-        }
-    };
-
-    private static XC_MethodHook beginLayoutLwHook = new XC_MethodHook() {
-        @Override
-        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-            try {
-                final boolean isDefaultDisplay = (Boolean) param.args[0];
-                if (!isDefaultDisplay || !expandedDesktopHidesNavigationBar()) return;
-
-                final Object navigationBar = XposedHelpers.getObjectField(param.thisObject, "mNavigationBar");
-                if (navigationBar == null) return;
-
-                mNavbarShowLwHook = XposedHelpers.findAndHookMethod(navigationBar.getClass(), 
-                        "showLw", boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(final MethodHookParam param2) throws Throwable {
-                        if (param2.thisObject == navigationBar) {
-                            param2.setResult(false);
-                            XposedHelpers.callMethod(navigationBar, "hideLw", true);
-                            return;
-                        }
-                    }
-                });
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
-        }
-
-        @Override
-        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-            try {
-                if (mNavbarShowLwHook != null) {
-                    mNavbarShowLwHook.unhook();
-                    mNavbarShowLwHook = null;
-                }
-
-                final boolean isDefaultDisplay = (Boolean) param.args[0];
-                if (!isDefaultDisplay) return;
-
-                if (expandedDesktopHidesStatusbar()) {
-                    final Object statusBar = XposedHelpers.getObjectField(param.thisObject, "mStatusBar");
-                    if (statusBar != null) {
-                        XposedHelpers.setIntField(param.thisObject, "mStableTop", 0);
-                    }
-                }
-
-                if (expandedDesktopHidesNavigationBar()) {
-                    final Object navigationBar = XposedHelpers.getObjectField(param.thisObject, "mNavigationBar");
-                    if (navigationBar != null) {
-                        int overscanLeft = 0;
-                        int overscanTop = 0;
-                        int overscanRight = 0;
-                        int overscanBottom = 0;
-                        switch ((Integer) param.args[3]) {
-                            case Surface.ROTATION_90:
-                                overscanLeft = XposedHelpers.getIntField(param.thisObject, "mOverscanTop");
-                                overscanTop = XposedHelpers.getIntField(param.thisObject, "mOverscanRight");
-                                overscanRight = XposedHelpers.getIntField(param.thisObject, "mOverscanBottom");
-                                overscanBottom = XposedHelpers.getIntField(param.thisObject, "mOverscanLeft");
-                                break;
-                            case Surface.ROTATION_180:
-                                overscanLeft = XposedHelpers.getIntField(param.thisObject, "mOverscanRight");
-                                overscanTop = XposedHelpers.getIntField(param.thisObject, "mOverscanBottom");
-                                overscanRight = XposedHelpers.getIntField(param.thisObject, "mOverscanLeft");
-                                overscanBottom = XposedHelpers.getIntField(param.thisObject, "mOverscanTop");
-                                break;
-                            case Surface.ROTATION_270:
-                                overscanLeft = XposedHelpers.getIntField(param.thisObject, "mOverscanBottom");
-                                overscanTop = XposedHelpers.getIntField(param.thisObject, "mOverscanLeft");
-                                overscanRight = XposedHelpers.getIntField(param.thisObject, "mOverscanTop");
-                                overscanBottom = XposedHelpers.getIntField(param.thisObject, "mOverscanRight");
-                                break;
-                            default:
-                                overscanLeft = XposedHelpers.getIntField(param.thisObject, "mOverscanLeft");
-                                overscanTop = XposedHelpers.getIntField(param.thisObject, "mOverscanTop");
-                                overscanRight = XposedHelpers.getIntField(param.thisObject, "mOverscanRight");
-                                overscanBottom = XposedHelpers.getIntField(param.thisObject, "mOverscanBottom");
-                                break;
-                        }
-
-                        final boolean navbarOnBottom = XposedHelpers.getBooleanField(param.thisObject, "mNavigationBarOnBottom");
-                        final int displayWidth = (Integer)param.args[1];
-                        final int displayHeight = (Integer)param.args[2];
-                        if (navbarOnBottom) {
-                            XposedHelpers.setIntField(param.thisObject, "mDockBottom", 
-                                    (displayHeight - overscanBottom));
-                            XposedHelpers.setIntField(param.thisObject, "mRestrictedScreenHeight",
-                                    (displayHeight - overscanTop - overscanBottom));
-                            XposedHelpers.setIntField(param.thisObject, "mRestrictedOverscanScreenHeight",
-                                    displayHeight);
-                            XposedHelpers.setIntField(param.thisObject, "mSystemBottom", displayHeight);
-                            XposedHelpers.setIntField(param.thisObject, "mContentBottom", 
-                                    (displayHeight - overscanBottom));
-                            XposedHelpers.setIntField(param.thisObject, "mCurBottom", 
-                                    (displayHeight - overscanBottom));
-                        } else {
-                            XposedHelpers.setIntField(param.thisObject, "mDockRight", 
-                                    (displayWidth - overscanRight));
-                            XposedHelpers.setIntField(param.thisObject, "mRestrictedScreenWidth", 
-                                    (displayWidth - overscanLeft - overscanRight));
-                            if (Build.VERSION.SDK_INT > 17) {
-                                XposedHelpers.setIntField(param.thisObject, "mRestrictedOverscanScreenWidth",
-                                        displayWidth);
-                            }
-                            XposedHelpers.setIntField(param.thisObject, "mSystemRight", displayWidth);
-                            XposedHelpers.setIntField(param.thisObject, "mContentRight", 
-                                    (displayWidth - overscanRight));
-                            XposedHelpers.setIntField(param.thisObject, "mCurRight", 
-                                    (displayWidth - overscanRight));
-                        }
-                        Object tmpNavFrame = XposedHelpers.getObjectField(param.thisObject, "mTmpNavigationFrame");
-                        if (Build.VERSION.SDK_INT > 17) {
-                            XposedHelpers.callMethod(navigationBar, "computeFrameLw", 
-                                    tmpNavFrame, tmpNavFrame, tmpNavFrame, tmpNavFrame, tmpNavFrame);
-                        } else {
-                            XposedHelpers.callMethod(navigationBar, "computeFrameLw", 
-                                    tmpNavFrame, tmpNavFrame, tmpNavFrame, tmpNavFrame);
-                        }
-                    }
-                }
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
-        }
-    };
-
     private static boolean shouldHideNavigationBarLw(int systemUiVisibility) {
         if (expandedDesktopHidesNavigationBar()) {
             return true;
@@ -577,117 +371,5 @@ public class ModExpandedDesktop {
     private static boolean expandedDesktopHidesNavigationBar() {
         return (mExpandedDesktop
                 && (mExpandedDesktopMode & GravityBoxSettings.ED_NAVBAR) != 0);
-    }
-
-    private static class ApplicationDisplayMetrics {
-        boolean rotated;
-        int dh;
-        int dw;
-        int appWidth;
-        int appHeight;
-    }
-
-    private static void updateDisplayMetrics(Object windowManager) {
-        if (windowManager == null || Build.VERSION.SDK_INT < 17
-                || Build.VERSION.SDK_INT > 18) return;
-
-        final long origId = Binder.clearCallingIdentity();
-        boolean changed = false;
-
-        final Object windowMap = XposedHelpers.getObjectField(windowManager, "mWindowMap");
-        synchronized (windowMap) {
-            final Object displayContent = XposedHelpers.callMethod(windowManager, "getDefaultDisplayContentLocked");
-            final Object displayInfo = displayContent != null ?
-                    XposedHelpers.callMethod(displayContent, "getDisplayInfo") : null;
-            final int oldWidth = displayInfo != null ? XposedHelpers.getIntField(displayInfo, "appWidth") : -1;
-            final int oldHeight = displayInfo != null ? XposedHelpers.getIntField(displayInfo, "appHeight") : -1;
-            final ApplicationDisplayMetrics metrics = 
-                    updateApplicationDisplayMetricsLocked(windowManager, displayContent);
-
-            if (metrics != null && oldWidth >= 0  && oldHeight >= 0) {
-                changed = oldWidth != metrics.appWidth || oldHeight != metrics.appHeight;
-            }
-
-            if (changed) {
-                if (DEBUG ) log("Sending new configuration");
-                Handler h = (Handler) XposedHelpers.getObjectField(windowManager, "mH");
-                h.sendEmptyMessage(SEND_NEW_CONFIGURATION);
-            }
-
-            Binder.restoreCallingIdentity(origId);
-        }
-    }
-
-    private static ApplicationDisplayMetrics updateApplicationDisplayMetricsLocked(
-            Object windowManager, Object displayContent) {
-        if (!XposedHelpers.getBooleanField(windowManager, "mDisplayReady")) {
-            return null;
-        }
-
-        final ApplicationDisplayMetrics m = calculateDisplayMetrics(windowManager, displayContent);
-        final Object displayInfo = XposedHelpers.callMethod(displayContent, "getDisplayInfo");
-        final Object policy = XposedHelpers.getObjectField(windowManager, "mPolicy");
-        final int rotation = XposedHelpers.getIntField(windowManager, "mRotation");
-        
-        m.appWidth = (Integer) XposedHelpers.callMethod(policy, "getNonDecorDisplayWidth", m.dw, m.dh, rotation);
-        m.appHeight = (Integer) XposedHelpers.callMethod(policy, "getNonDecorDisplayHeight", m.dw, m.dh, rotation);
-
-        synchronized(XposedHelpers.getObjectField(displayContent, "mDisplaySizeLock")) {
-            XposedHelpers.setIntField(displayInfo, "rotation", rotation);
-            XposedHelpers.setIntField(displayInfo, "logicalWidth", m.dw);
-            XposedHelpers.setIntField(displayInfo, "logicalHeight", m.dh);
-            XposedHelpers.setIntField(displayInfo, "logicalDensityDpi",
-                    XposedHelpers.getIntField(displayContent, "mBaseDisplayDensity"));
-            XposedHelpers.setIntField(displayInfo, "appWidth", m.appWidth);
-            XposedHelpers.setIntField(displayInfo, "appHeight", m.appHeight);
-            Class<?>[] params = new Class<?>[2];
-            params[0] = DisplayMetrics.class;
-            params[1] = XposedHelpers.findClass("android.view.CompatibilityInfoHolder", null);
-            XposedHelpers.callMethod(displayInfo, "getLogicalMetrics", params,
-                    XposedHelpers.getObjectField(windowManager, "mRealDisplayMetrics"), null);
-            XposedHelpers.callMethod(displayInfo, "getAppMetrics", params,
-                    XposedHelpers.getObjectField(windowManager, "mDisplayMetrics"), null);
-            Object displayManagerService = XposedHelpers.getObjectField(windowManager, "mDisplayManagerService");
-            XposedHelpers.callMethod(displayManagerService, "setDisplayInfoOverrideFromWindowManager",
-                    XposedHelpers.callMethod(displayContent, "getDisplayId"), displayInfo);
-        }
-
-        if (DEBUG) log("updateApplicationDisplayMetricsLocked: m=" + m.toString());
-        return m;
-    }
-
-    private static ApplicationDisplayMetrics calculateDisplayMetrics(
-            Object windowManager, Object displayContent) {
-        final ApplicationDisplayMetrics dm = new ApplicationDisplayMetrics();
-
-        final int rotation = XposedHelpers.getIntField(windowManager, "mRotation");
-        dm.rotated = (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270);
-        final int realdw = dm.rotated ?
-                XposedHelpers.getIntField(displayContent, "mBaseDisplayHeight") :
-                    XposedHelpers.getIntField(displayContent, "mBaseDisplayWidth");
-        final int realdh = dm.rotated ?
-                XposedHelpers.getIntField(displayContent, "mBaseDisplayWidth") :
-                    XposedHelpers.getIntField(displayContent, "mBaseDisplayHeight");
-
-        dm.dw = realdw;
-        dm.dh = realdh;
-
-        if(XposedHelpers.getBooleanField(windowManager, "mAltOrientation")) {
-            if (realdw > realdh) {
-                // Turn landscape into portrait.
-                int maxw = (int)(realdh/1.3f);
-                if (maxw < realdw) {
-                    dm.dw = maxw;
-                }
-            } else {
-                // Turn portrait into landscape.
-                int maxh = (int)(realdw/1.3f);
-                if (maxh < realdh) {
-                    dm.dh = maxh;
-                }
-            }
-        }
-
-        return dm;
     }
 }
