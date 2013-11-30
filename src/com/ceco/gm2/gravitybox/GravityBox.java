@@ -51,15 +51,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         SystemWideResources.initResources(prefs);
 
-        // 4.2+ only
-        if (Build.VERSION.SDK_INT > 16) {
-            ModElectronBeam.initZygote(prefs);
-            if (Build.VERSION.SDK_INT < 19) {
-                ModLockscreen.init(prefs, null);
-            }
-        }
-
         // Common
+        ModElectronBeam.initZygote(prefs);
         ModVolumeKeySkipTrack.init(prefs);
         ModVolKeyCursor.initZygote(prefs);
         ModStatusbarColor.initZygote(prefs);
@@ -68,10 +61,9 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModDisplay.initZygote(prefs);
         ModAudio.initZygote(prefs);
         ModHwKeys.initZygote(prefs);
-        if (Build.VERSION.SDK_INT < 19) {
-            ModCallCard.initZygote();
-            ModPhone.initZygote(prefs);
-        }
+//        TODO: rework for KitKat compatibility
+//        ModCallCard.initZygote();
+//        ModPhone.initZygote(prefs);
         ModExpandedDesktop.initZygote(prefs);
         ConnectivityServiceWrapper.initZygote();
     }
@@ -79,8 +71,9 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     @Override
     public void handleInitPackageResources(InitPackageResourcesParam resparam) throws Throwable {
 
-        if (resparam.packageName.equals(ModBatteryStyle.PACKAGE_NAME))
+        if (resparam.packageName.equals(ModBatteryStyle.PACKAGE_NAME)) {
             ModBatteryStyle.initResources(prefs, resparam);
+        }
 
         if (resparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
             ModStatusBar.initResources(prefs, resparam);
@@ -90,15 +83,12 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModSettings.initPackageResources(prefs, resparam);
         }
 
-        if (Build.VERSION.SDK_INT > 16 && resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
+        if (resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
             ModQuickSettings.initResources(prefs, resparam);
         }
 
-        // KitKat
-        if (Build.VERSION.SDK_INT > 18) {
-            if (resparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
-                ModLockscreen.initPackageResources(prefs, resparam);
-            }
+        if (resparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
+            ModLockscreen.initPackageResources(prefs, resparam);
         }
     }
 
@@ -131,11 +121,12 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModPowerMenu.init(prefs, lpparam.classLoader);
         }
 
-        if (Build.VERSION.SDK_INT < 19 && lpparam.packageName.equals(ModCallCard.PACKAGE_NAME)) {
-            ModCallCard.init(prefs, lpparam.classLoader);
-        }
+//        TODO: rework for KitKat compatibility
+//        if (lpparam.packageName.equals(ModCallCard.PACKAGE_NAME)) {
+//            ModCallCard.init(prefs, lpparam.classLoader);
+//        }
 
-        if (Build.VERSION.SDK_INT > 16 && lpparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
+        if (lpparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
             ModQuickSettings.init(prefs, lpparam.classLoader);
         }
 
@@ -147,10 +138,11 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModStatusBar.init(prefs, lpparam.classLoader);
         }
 
-        if (Build.VERSION.SDK_INT < 19 && lpparam.packageName.equals(ModPhone.PACKAGE_NAME) &&
-                Utils.hasTelephonySupport()) {
-            ModPhone.init(prefs, lpparam.classLoader);
-        }
+//        TODO: rework for KitKat compatibility
+//        if (lpparam.packageName.equals(ModPhone.PACKAGE_NAME) &&
+//                Utils.hasTelephonySupport()) {
+//            ModPhone.init(prefs, lpparam.classLoader);
+//        }
 
         if (lpparam.packageName.equals(ModSettings.PACKAGE_NAME)) {
             ModSettings.init(prefs, lpparam.classLoader);
@@ -169,15 +161,13 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModNavigationBar.init(prefs, lpparam.classLoader);
         }
 
-        if (Build.VERSION.SDK_INT < 19 && lpparam.packageName.equals(ModMms.PACKAGE_NAME)) {
-            ModMms.init(prefs, lpparam.classLoader);
-        }
+//        TODO: remove
+//        if (lpparam.packageName.equals(ModMms.PACKAGE_NAME)) {
+//            ModMms.init(prefs, lpparam.classLoader);
+//        }
 
-        // KitKat
-        if (Build.VERSION.SDK_INT > 18) {
-            if (lpparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
-                ModLockscreen.init(prefs, lpparam.classLoader);
-            }
+        if (lpparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
+            ModLockscreen.init(prefs, lpparam.classLoader);
         }
     }
 }
