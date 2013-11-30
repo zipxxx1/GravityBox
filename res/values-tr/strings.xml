@@ -528,10 +528,6 @@
     <string name="unicode_stripping_non_encodable">Çevrilmeyen karakterleri çıkar</string>
     <string name="unicode_stripping_all">Tüm unicode karakterleri çıkar</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Yavaş 2G uyarısını devre dışı bırak</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">HızlıAyarlar mobil veriyi açarken, SIM için 2G modunda veri hızı uyarısını devre dışı bırak</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Pil rengiyle aynı renk yap</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Durum çubuğu saati, yüzdesi ve çember pildeki renkleri orijinal pil simgesi rengi ile aynı renk yapar. Simge renklendirme kapalıyken uygulanır.</string>

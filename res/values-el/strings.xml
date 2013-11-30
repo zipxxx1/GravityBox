@@ -530,10 +530,6 @@
     <string name="unicode_stripping_non_encodable">Strip non-encodable χαρακτήρες</string>
     <string name="unicode_stripping_all">Strip όλους τους χαρακτήρες unicode</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Απενεργοποίηση προειδοποίησης αργών 2G δεδομένων</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Απενεργοποιεί την προειδοποίηση για αργή ταχύτητα δεδομένων όταν τα δεδομένα κινητής είναι ενεργοποιημένα από QuickSettings για τις SIM σε 2G λειτουργία</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Follow προεπιλεγμένο χρώμα μπαταρίας</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">κάνει το ρολόι της statusbar, ποσοστό και κυκλική μπαταρία να χρησιμοποιεί το χρώμα του προεπιλεγμένου εικονίδιου μπαταρίας. Εφαρμόζεται όταν ο χρωματισμός του εικονιδίου είναι off.</string>

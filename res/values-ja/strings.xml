@@ -525,10 +525,6 @@
     <string name="unicode_stripping_non_encodable">エンコードできない文字を変換</string>
     <string name="unicode_stripping_all">全てのUnicode文字を変換</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">2Gでの速度低下警告を無効化</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">2G対応SIMでクイック設定からモバイルデータをオンにしたときの通信速度低下の警告を無効化します。</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">標準バッテリー色に合わせる</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">ステータスバーの時計、パーセント表示やサークルバッテリーアイコンの色を標準バッテリーアイコンの色にします。アイコンの色を変更していないときに適用されます。</string>

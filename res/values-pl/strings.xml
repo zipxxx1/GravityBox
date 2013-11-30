@@ -342,8 +342,6 @@
     <string name="unicode_stripping_leave_intact">Nie zmieniaj kodowania</string>
     <string name="unicode_stripping_non_encodable">Konwertuj nie kodowalne znaki</string>
     <string name="unicode_stripping_all">Konwertuj wszystkie znaki Unicode</string>
-    <string name="pref_mobile_data_slow2g_disable_title">Wyłącz ostrzeżenie o wolnej transmisji 2G</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Wyłącza ostrzeżenie o małej prędkości danych dla karty SIM w trybie 2G podczas włączania danych mobilnych w Szybkich Ustawieniach</string>
     <string name="pref_sbcolor_follow_stock_battery_title">Kopiowanie kolorów baterii</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Powoduje, że zegar, koło baterii i wskaźnik procentowy na pasku statusu używają typowych kolorów ikony baterii. Obowiązuje tylko, gdy kolorystyka icon jest wyłączona.</string>
     <string name="pref_network_mode_tile_mode_title">Kafelka trybu sieci</string>

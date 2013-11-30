@@ -536,10 +536,6 @@
     <string name="unicode_stripping_non_encodable">转换不可编码字符</string>
     <string name="unicode_stripping_all">转换所有Unicode字符</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">禁用低速2G网络数据警告</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">当在快速设置中为SIM卡启用2G移动数据时，禁用低速数据警告</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">保持原厂电池颜色</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">使状态栏时钟、百分比和圆形电池使用原厂电池图标的颜色。当图标颜色关闭时有效</string>

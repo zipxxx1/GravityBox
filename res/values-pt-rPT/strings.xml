@@ -521,10 +521,6 @@
     <string name="unicode_stripping_non_encodable">Remover caracteres não encriptáveis</string>
     <string name="unicode_stripping_all">Remover todos os caracteres unicode</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Desativar aviso ligação de dados lenta</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Desativa o aviso de ligação de dados lenta que ocorre quando se altera o modo de rede para 2G nas definições rápidas</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Associar cor padrão da bateria</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Permite forçar o uso da cor padrão para o indicador de bateria na fonte do relógio, percentagem e no indicador de bateria circular (aplicável quando a coloração dos indicadores está desativada)</string>

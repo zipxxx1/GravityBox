@@ -529,10 +529,6 @@
     <string name="unicode_stripping_non_encodable">Strip non-encodable characters</string>
     <string name="unicode_stripping_all">Strip all unicode characters</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">تعطيل التحذير عند استخدام الشبكة</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">تعطيل التحذير حول بطء سرعة نقل البيانات في وضع 2G</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">نفس لون البطارية</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">يجل لون الساعة والنسبة المئوية بنفس لون بطارية النظام . (يتم التفعيل عندما يكون الخيار التالي معطل)</string>

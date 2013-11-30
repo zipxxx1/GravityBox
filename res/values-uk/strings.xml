@@ -339,8 +339,6 @@
     <string name="unicode_stripping_leave_intact">Не скидати символи</string>
     <string name="unicode_stripping_non_encodable">Змінювати некодовані символи</string>
     <string name="unicode_stripping_all">Змінювати всі символи Unicode</string>
-    <string name="pref_mobile_data_slow2g_disable_title">Вимкнути 2G попередження</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Відключає попередження про повільної швидкості передачі даних коли у швидких налаштуваннях включений режим 2G для SIM-карти</string>
     <string name="pref_sbcolor_follow_stock_battery_title">Слідувати кольором батареї</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Дозволяє годинах в статусбаре, батареї і тексту з відсотками використовувати колір стокової батареї. Працює при вимкненому зміну кольорів іконок.</string>
     <string name="pref_network_mode_tile_mode_title">Режим тайла Режим мережі</string>

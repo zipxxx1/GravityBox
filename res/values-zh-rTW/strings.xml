@@ -528,10 +528,6 @@
     <string name="unicode_stripping_non_encodable">去除非可編碼字符</string>
     <string name="unicode_stripping_all">去除所有 unicode 字符</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">停用 2G 網路延遲警告</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">停用當 SIM 卡處於 2G 模式下開啟行動資料時網路遲緩警告</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">按照預設電池顏色</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">當圖示自訂顏色停用時讓狀態列上的時鐘，電量百分比與圓形電池顯示預設電池顏色.</string>

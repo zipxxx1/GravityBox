@@ -534,10 +534,6 @@
     <string name="unicode_stripping_non_encodable">Nem kódolható karakterek figyelmen kívül hagyása</string>
     <string name="unicode_stripping_all">Az összes unicode karakter figyelmen kívül hagyása</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Lassú 2G adatátviteli figyelmeztetés letiltása</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Kikapcsolja a lassú adatátviteli sebességgel kapcsolatos figyelmeztetést, amikor bekapcsolásra kerül a Gyorsbeállítások alatt a mobil adatátvitel SIM 2G módban.</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Gyári akkumlátor szín követése</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">A gyári akkumlátor ikon színét fogja használni az értesítési sávon az óra  illetve a százalékos és kör akkumlátor használat ikonjaihoz. Kikapcsolt ikonszínezés esetén használandó.</string>

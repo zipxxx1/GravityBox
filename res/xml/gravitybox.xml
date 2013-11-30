@@ -933,12 +933,6 @@
                 android:summary="@string/pref_national_roaming_summary"
                 android:defaultValue="false" />
 
-            <CheckBoxPreference 
-                android:key="pref_mobile_data_slow2g_disable"
-                android:title="@string/pref_mobile_data_slow2g_disable_title"
-                android:summary="@string/pref_mobile_data_slow2g_disable_summary"
-                android:defaultValue="false" />
-
         </PreferenceCategory>
 
     </PreferenceScreen>

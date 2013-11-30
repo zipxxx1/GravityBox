@@ -536,10 +536,6 @@
     <string name="unicode_stripping_non_encodable">Изменять некодируемые символы</string>
     <string name="unicode_stripping_all">Изменять все unicode символы</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Отключить 2g предупреждение</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Отключает предупреждение о низкойскорости передачи данных когда в быстрых настройках включен режим 2g для SIM-карты</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Следовать цвету батареи</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Позволяет часам в статусбаре, батарее и тексту с процентами использовать цвет стоковой батареи. Работает при выключенном изменении цветов иконок.</string>

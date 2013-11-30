@@ -510,10 +510,6 @@
     <string name="unicode_stripping_non_encodable">Quitar caracteres no codificables</string>
     <string name="unicode_stripping_all">Quita todos los caracteres unicode</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Deshabilitar advertencia 2G lento</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Deshabilita la advertencia sobre la lenta velocidad de datos cuando se activan los datos desde los Ajustes rapidos para SIMs en modo 2G</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Usar color de la bateria por defecto</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Hacer que el color del reloj, porcentaje y circulo de bateria usen el color del icono de bateria por defecto. Solo aplica si la coloración esta apagada</string>

@@ -495,10 +495,6 @@
     <string name="unicode_stripping_leave_intact">Lascia caratteri invariati</string>
     <string name="unicode_stripping_non_encodable">Elimina caratteri non convertibili</string>
     <string name="unicode_stripping_all">Elimina tutti i caratteri unicode</string>
-    
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Disabilita avviso di connessione lenta in 2G</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Disabilita avviso di velocità di connessione lenta causata dalla connessione in 2G, attivando la connessione da QuickSetting per SIM in modalità 2G</string>
 
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Segui il colore dell\'icona batteria stock</string>

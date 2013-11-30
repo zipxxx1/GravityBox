@@ -523,10 +523,6 @@
     <string name="unicode_stripping_non_encodable">Dải ký tự ko nguyên vẹn</string>
     <string name="unicode_stripping_all">Chuyển đổi toàn bộ unicode</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Tắt cảnh báo sử dụng dữ liệu 2G chậm</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Tắt cảnh báo sử dụng dữ liệu châm cho sim khi ở chế độ 2G</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Màu phần trăm pin gốc</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Thay đổi màu đồng hồ, phầm trăm và vòng tròn pin theo màu biểu tượng pin gốc, Áp dụng khi màu của biểu tượng tắt.</string>

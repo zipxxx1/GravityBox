@@ -536,10 +536,6 @@
     <string name="unicode_stripping_non_encodable">Hilangkan karakter yang tidak bisa dirubah</string>
     <string name="unicode_stripping_all">Hilangkan semua karakter unicode</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Hilangkan peringatan koneksi 2G yang lambat</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Mematikan peringatan tentang lambatnya koneksi ketika menghidupkan paket data untuk SIM dalam mode 2G di QuickSettings</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Ikuti warna baterai bawaan</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Membuat warna jam statusbar, persentase dan lingkaran baterai menggunakan warna baterai bawaan. Diterapkan saat pewaraan ikon mati.</string>

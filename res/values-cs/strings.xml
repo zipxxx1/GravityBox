@@ -513,10 +513,6 @@
     <string name="unicode_stripping_non_encodable">Konverze nekódovatelných znaků</string>
     <string name="unicode_stripping_all">Konverze všech znaků</string>
 
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Vypnout varování pomalých 2G dat</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Vypne varování o pomalých 2G datech pro SIM v režimu 2G, při zapnutí dat použitím dlaždice</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Kopírovat barvu stock baterie</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Nastaví barvu hodin, procent baterie a kruhového indikátoru podle barvy stock baterie (pokud je vypnuto vlastní vybarvování)</string>
