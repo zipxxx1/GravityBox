@@ -370,10 +370,6 @@
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Oberen Rand einstellen</string>
 
-    <!-- Disable roaming warnings -->
-    <string name="pref_roaming_warning_disable_title">Deaktiviere Roaming-Warnungen</string>
-    <string name="pref_roaming_warning_disable_summary">Deaktiviert Warnmeldungen, wenn während des Roamings eine Nachricht gesendet oder ein Anruf getätigt wird</string>
-
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Suche</string>
     <string name="app_picker_none">(Keine)</string>

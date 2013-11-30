@@ -367,10 +367,6 @@
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Přizpůsobit horní okraj</string>
 
-    <!-- Disable roaming warnings -->
-    <string name="pref_roaming_warning_disable_title">Vypnout roaming varování</string>
-    <string name="pref_roaming_warning_disable_summary">Vypne zobrazování varování při posílání zpráv a volání v roamingu</string>
-
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Hledat</string>
     <string name="app_picker_none">(Žádná)</string>

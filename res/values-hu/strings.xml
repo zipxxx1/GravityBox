@@ -387,10 +387,6 @@
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Felső szegély beállítása</string>
 
-    <!-- Disable roaming warnings -->
-    <string name="pref_roaming_warning_disable_title">Roaming figyelmeztetések letiltása</string>
-    <string name="pref_roaming_warning_disable_summary">Letiltja a roaming figyelmeztetéseket miközben üzenetet küld vagy telefonhívást kezdeményez roaming közben</string>
-
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Keresés</string>
     <string name="app_picker_none">(Semmi)</string>

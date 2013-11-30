@@ -255,8 +255,6 @@
     <string name="recent_clear_bottom_left">Dolny Lewy</string>
     <string name="recent_clear_bottom_right">Dolny Prawy</string>
     <string name="pref_recent_clear_margin_top_title">Ustaw górny margines</string>
-    <string name="pref_roaming_warning_disable_title">Wyłącz ostrzeżenia o roamingu</string>
-    <string name="pref_roaming_warning_disable_summary">Wyłącza ostrzeżenia podczas wysyłania wiadomości lub wykonywania połączeń telefonicznych w roamingu</string>
     <string name="app_picker_search">Wyszukaj</string>
     <string name="app_picker_none">(Żadna)</string>
     <string name="qs_tile_quickapp">Szybkie uruch. Aplikacji</string>

@@ -379,10 +379,6 @@
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">調整頂部邊距</string>
 
-    <!-- Disable roaming warnings -->
-    <string name="pref_roaming_warning_disable_title">關閉漫遊警告</string>
-    <string name="pref_roaming_warning_disable_summary">關閉當漫遊時傳送訊息或撥打電話的警告</string>
-
     <!-- AppPickerPreference -->
     <string name="app_picker_search">搜尋</string>
     <string name="app_picker_none">(無)</string>

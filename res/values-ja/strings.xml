@@ -378,10 +378,6 @@
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">ボタン上の余白の調整</string>
 
-    <!-- Disable roaming warnings -->
-    <string name="pref_roaming_warning_disable_title">ローミング警告の無効化</string>
-    <string name="pref_roaming_warning_disable_summary">ローミング中にメッセージを送信したり電話を発信したりするときの警告を無効化します。</string>
-
     <!-- AppPickerPreference -->
     <string name="app_picker_search">検索</string>
     <string name="app_picker_none">(なし)</string>

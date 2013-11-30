@@ -374,10 +374,6 @@
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ajustar margem superior</string>
 
-    <!-- Disable roaming warnings -->
-    <string name="pref_roaming_warning_disable_title">Desativar avisos de deslocamento</string>
-    <string name="pref_roaming_warning_disable_summary">Desativa os avisos aquando do envio de mensagens ou realização de chamadas em deslocamento</string>
-
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Pesquisa</string>
     <string name="app_picker_none">(Nenhuma)</string>

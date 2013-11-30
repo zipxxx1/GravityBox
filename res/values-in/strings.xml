@@ -389,10 +389,6 @@
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Tentukan batas atas</string>
 
-    <!-- Disable roaming warnings -->
-    <string name="pref_roaming_warning_disable_title">Matikan peringatan roaming</string>
-    <string name="pref_roaming_warning_disable_summary">Matikan peringatan roaming ketika mengirim pesan atau melakukan panggilan ketika roaming</string>
-
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Pencarian</string>
     <string name="app_picker_none">(Tidak ada)</string>

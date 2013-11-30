@@ -907,12 +907,6 @@
                 android:key="pref_caller_unknown_photo"
                 android:title="@string/pref_caller_unknown_photo_title" />
 
-            <CheckBoxPreference 
-                android:key="pref_roaming_warning_disable"
-                android:title="@string/pref_roaming_warning_disable_title"
-                android:summary="@string/pref_roaming_warning_disable_summary"
-                android:defaultValue="false" />
-
         </PreferenceCategory>
 
         <PreferenceCategory

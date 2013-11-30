@@ -365,11 +365,7 @@
 	
 	<!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ajuste el margen superior</string>
-	
-	<!-- Disable roaming warnings -->
-    <string name="pref_roaming_warning_disable_title">Deshabilitar las advertencias de itinerancia</string>
-    <string name="pref_roaming_warning_disable_summary">Deshabilita las advertencias de itinerancia al enviar mensajes o realizar llamadas telefónicas en itinerancia</string>
-	
+
 	<!-- AppPickerPreference -->
     <string name="app_picker_search">Buscar</string>
     <string name="app_picker_none">(Ninguno)</string>
