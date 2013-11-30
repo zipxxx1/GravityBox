@@ -1013,10 +1013,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getPreferenceScreen().removePreference(mPrefCatFixes);
                 mPrefCatStatusbar.removePreference(mSignalIconAutohide);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
-                mQuickSettings.setEntries(Build.VERSION.SDK_INT > 18 ? 
-                        R.array.qs_tile_aosp_entries_kk : R.array.qs_tile_aosp_entries);
-                mQuickSettings.setEntryValues(Build.VERSION.SDK_INT > 18 ?
-                        R.array.qs_tile_aosp_values_kk : R.array.qs_tile_aosp_values);
+                mQuickSettings.setEntries(R.array.qs_tile_aosp_entries);
+                mQuickSettings.setEntryValues(R.array.qs_tile_aosp_values);
                 mPrefCatPhoneTelephony.removePreference(mPrefRoamingWarningDisable);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
             } else {
