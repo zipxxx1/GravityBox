@@ -35,9 +35,6 @@
     <string name="recents_clear_all_title">Pulisci tutte le attività recenti</string>
     <string name="recents_clear_all_summary">Abilita il bottone per pulire tutte le attività recenti nella finestra \"Attività recenti\"</string>
 
-    <string name="fix_datetime_crash_title">Fix crash modifica Data&amp;ora</string>
-    <string name="fix_datetime_crash_summary">Abilita nel caso si verifichi un crash durante l\'accesso alle impostazione Data&amp;Ora (richiede riavvio)</string>
-
     <string name="important">Importante</string>
 
     <string name="caller_fullscreen_photo_title">Foto chiamante tutto schermo</string>

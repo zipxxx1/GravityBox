@@ -36,9 +36,6 @@
 
     <string name="recents_clear_all_title">「全てのアプリを終了」ボタン</string>
 
-    <string name="fix_datetime_crash_title">日付と時刻でのクラッシュを修正</string>
-    <string name="fix_datetime_crash_summary">設定で日付と時刻を開いたときにクラッシュする場合に有効にしてください。(要再起動)</string>
-
     <string name="important">重要</string>
 
     <string name="caller_fullscreen_photo_title">発信者の写真を全画面表示</string>

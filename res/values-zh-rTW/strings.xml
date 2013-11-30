@@ -36,9 +36,6 @@
 
     <string name="recents_clear_all_title">清除全部最近使用的應用程式</string>
 
-    <string name="fix_datetime_crash_title">修正「日期與時間」設定錯誤</string>
-    <string name="fix_datetime_crash_summary">當您進入日期與時間設定時發生錯誤時，啟用這個選項（需要重新啟動）</string>
-
     <string name="important">重要</string>
 
     <string name="caller_fullscreen_photo_title">全螢幕的來電者相片</string>

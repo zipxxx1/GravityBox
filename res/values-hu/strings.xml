@@ -49,9 +49,6 @@
 
     <string name="recents_clear_all_title">Nemrég használt alkalmazások törlése gomb</string>
 
-    <string name="fix_datetime_crash_title">Javítja a Dátum és Idő beállítás hibáját</string>
-    <string name="fix_datetime_crash_summary">Engedélyezze abban az esetben, ha összeomlást tapasztal a Dátum és Idő beállítás elérésekor (újraindítás szükséges)</string>
-
     <string name="important">Fontos</string>
 
     <string name="caller_fullscreen_photo_title">Teljes képernyős hívó fotó</string>

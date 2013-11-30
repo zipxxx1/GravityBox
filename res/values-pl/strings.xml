@@ -27,8 +27,6 @@
     <string name="vol_key_cursor_control_on">Głośność góra/dół porusza w lewo/prawo</string>
     <string name="vol_key_cursor_control_on_reverse">Głośność góra/dół porusza w prawo/lewo</string>
     <string name="recents_clear_all_title">Wyczyść wszystkie zadania</string>
-    <string name="fix_datetime_crash_title">Napraw błędy w ustawieniach Daty i Czasu</string>
-    <string name="fix_datetime_crash_summary">Włącz w przypadku wystąpienia błędu podczas dostępu do ustawień Daty i Czasu (wymagany restart)</string>
     <string name="important">Ważne</string>
     <string name="caller_fullscreen_photo_title">Fotografia dzwoniącego na pełnym ekranie</string>
     <string name="caller_fullscreen_photo_summary">Wyświetla fotografię dzwoniącego na pełnym ekranie podczas rozmowy przychodzącej</string>

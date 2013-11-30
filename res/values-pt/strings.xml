@@ -34,9 +34,6 @@
 
     <string name="recents_clear_all_title">Limpar todos os aplicativos recentes</string>
 
-    <string name="fix_datetime_crash_title">Corrigir erro de Data e Hora</string>
-    <string name="fix_datetime_crash_summary">Habilitar esta opção caso esteja tendo problema ao acessar a opção de Data e hora nas configurações (necessário reiniciar)</string>
-
     <string name="important">Importante</string>
 
     <string name="caller_fullscreen_photo_title">Foto do contato em tela cheia em ligação</string>

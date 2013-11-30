@@ -113,11 +113,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         // MTK Specific
         if (Utils.isMtkDevice()) {
 
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_DATETIME_CRASH, false) &&
-                    lpparam.packageName.equals(FixDateTimeCrash.PACKAGE_NAME)) {
-                FixDateTimeCrash.init(prefs, lpparam.classLoader);
-            }
-
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_TTS_SETTINGS, false) &&
                     lpparam.packageName.equals(FixTtsSettings.PACKAGE_NAME)) {
                 FixTtsSettings.init(prefs, lpparam.classLoader);

@@ -36,9 +36,6 @@
 
     <string name="recents_clear_all_title">Alle zuletzt geöffneten Anwendungen schließen</string>
 
-    <string name="fix_datetime_crash_title">\'Datum &amp; Uhrzeit\' Einstellungsabsturz beheben</string>
-    <string name="fix_datetime_crash_summary">Aktivieren, falls Abstürze beim Aufrufen des \'Datum &amp; Uhrzeit\' Einstellungsmenüs auftreten (Neustart erforderlich)</string>
-
     <string name="important">Wichtig</string>
 
     <string name="caller_fullscreen_photo_title">Foto des Anrufers im Vollbildmodus anzeigen</string>

@@ -25,8 +25,6 @@
     <string name="vol_key_cursor_control_on">Звук вгору/вниз для переміщення курсору вліво/вправо</string>
     <string name="vol_key_cursor_control_on_reverse">Звук вгору/вниз для переміщення курсору вправо/вліво</string>
     <string name="recents_clear_all_title">Закрити всі поточні завдання</string>
-    <string name="fix_datetime_crash_title">Падіння діалогу Дата і час</string>
-    <string name="fix_datetime_crash_summary">Включити, якщо при вході в налаштування Дати та часу відбувається падіння (Необхідна перезавантаження)</string>
     <string name="important">Важливо</string>
     <string name="caller_fullscreen_photo_title">Фото того, хто телефонує на весь екран</string>
     <string name="caller_fullscreen_photo_summary">Відображати фото того, хто телефонує на весь екран при вимк.иках</string>

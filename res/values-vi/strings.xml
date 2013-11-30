@@ -49,9 +49,6 @@
 
     <string name="recents_clear_all_title">Nút làm sạch tất cả ứng dụng gần đây</string>
 
-    <string name="fix_datetime_crash_title">Sửa lỗi cài đặt ngày giờ</string>
-    <string name="fix_datetime_crash_summary">Cho phép sửa lỗi khi cài đặt ngày giờ (cần trang bị khởi động lại để thay đổi)</string>
-
     <string name="important">Quan trọng</string>
 
     <string name="caller_fullscreen_photo_title">Ảnh người gọi toàn màn hình</string>

@@ -49,9 +49,6 @@
 
     <string name="recents_clear_all_title">Son görevlerin tümünü temizle</string>
 
-    <string name="fix_datetime_crash_title">Tarih&amp;Saat ayarı çökmesini düzelt</string>
-    <string name="fix_datetime_crash_summary">Tarih&amp;Saat ayarlarına erişirken çökme sorunu yaşıyorsanız etkinleştirin (yeniden başlatma gerektirir)</string>
-
     <string name="important">Önemli</string>
 
     <string name="caller_fullscreen_photo_title">Arayan tam ekran fotoğrafı</string>

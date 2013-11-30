@@ -33,9 +33,6 @@
     <string name="vol_key_cursor_control_on_reverse">El cursor se mueve derecha/izquierda</string>
 	
     <string name="recents_clear_all_title">Borrar todas las tareas recientes</string>
-	
-    <string name="fix_datetime_crash_title">Reparar error de Fecha y Hora</string>
-    <string name="fix_datetime_crash_summary">Habilitar en caso de experimentar errores al acceder a la configuración de Fecha y Hora (requiere reiniciar)</string>
 
     <string name="important">Importante</string>
 	

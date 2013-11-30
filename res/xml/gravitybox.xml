@@ -1194,12 +1194,6 @@
         android:title="@string/pref_cat_fixes_title"
         android:summary="@string/pref_cat_fixes_summary">
 
-    <CheckBoxPreference
-            android:key="pref_fix_datetime_crash"
-            android:title="@string/fix_datetime_crash_title"
-            android:summary="@string/fix_datetime_crash_summary"
-            android:defaultValue="false" />
-
         <CheckBoxPreference
             android:key="pref_mms_fix_wakelock"
             android:title="@string/pref_mms_fix_wakelock_title"

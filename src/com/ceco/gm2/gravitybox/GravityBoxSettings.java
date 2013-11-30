@@ -118,7 +118,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_ROAMING_WARNING_DISABLE = "pref_roaming_warning_disable";
     public static final String PREF_KEY_NATIONAL_ROAMING = "pref_national_roaming";
     public static final String PREF_CAT_KEY_FIXES = "pref_cat_fixes";
-    public static final String PREF_KEY_FIX_DATETIME_CRASH = "pref_fix_datetime_crash";
     public static final String PREF_KEY_FIX_MMS_WAKELOCK = "pref_mms_fix_wakelock";
     public static final String PREF_CAT_KEY_STATUSBAR = "pref_cat_statusbar";
     public static final String PREF_CAT_KEY_STATUSBAR_QS = "pref_cat_statusbar_qs";
@@ -489,7 +488,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     private static final int REQ_CALLER_PHOTO = 1027;
 
     private static final List<String> rebootKeys = new ArrayList<String>(Arrays.asList(
-            PREF_KEY_FIX_DATETIME_CRASH,
             PREF_KEY_FIX_TTS_SETTINGS,
             PREF_KEY_BRIGHTNESS_MIN,
             PREF_KEY_LOCKSCREEN_MENU_KEY,
@@ -666,7 +664,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ColorPickerPreference mPrefSbIconColor;
         private ColorPickerPreference mPrefSbDaColor;
         private PreferenceScreen mPrefCatFixes;
-        private CheckBoxPreference mPrefFixDateTimeCrash;
         private CheckBoxPreference mPrefFixMmsWakelock;
         private CheckBoxPreference mPrefFixTtsSettings;
         private PreferenceScreen mPrefCatStatusbar;
@@ -836,7 +833,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbSignalColorMode = (ListPreference) findPreference(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE);
 
             mPrefCatFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_FIXES);
-            mPrefFixDateTimeCrash = (CheckBoxPreference) findPreference(PREF_KEY_FIX_DATETIME_CRASH);
             mPrefFixMmsWakelock = (CheckBoxPreference) findPreference(PREF_KEY_FIX_MMS_WAKELOCK);
             mPrefFixTtsSettings = (CheckBoxPreference) findPreference(PREF_KEY_FIX_TTS_SETTINGS);
             mPrefCatStatusbar = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR);
@@ -1012,7 +1008,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
                 // Remove preferences not needed for ZTE V987
                 if (Build.MODEL.contains("V987") && Build.DISPLAY.contains("ZTE-CN-9B18D-P188F04")) {
-                    mPrefCatFixes.removePreference(mPrefFixDateTimeCrash);
                     mPrefCatFixes.removePreference(mPrefFixTtsSettings);
                 }
 
