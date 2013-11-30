@@ -39,14 +39,6 @@
     <string name="fix_datetime_crash_title">Opraviť padanie dátumu a času</string>
     <string name="fix_datetime_crash_summary">Použiť v prípade, ak nastavenie dátumu a času padá (vyžaduje reštart)</string>
 
-    <string name="fix_caller_id_phone_title">Opraviť identifikátor volajúceho</string>
-    <string name="fix_caller_id_phone_summary">Použiť v prípade, ak nie je číslo volajúceho identifikované počas prijímania hovoru (vyžaduje reštart)</string>
-    <string name="fix_caller_id_phone_alert">Aby sa oprava prejavila, je potrebné po reštarte vymazať a znova pridať kontakty! V Nastavenia / Aplikácie / Všetky, vyhľadajte \"Úložisko kontaktov\" a zvoľte vymazanie údajov. Uistite sa najprv, že máte zálohu kontaktov.</string>
-
-    <string name="fix_caller_id_mms_title">Opraviť identifikátor odosielateľa SMS</string>
-    <string name="fix_caller_id_mms_summary">Použiť v prípade ak dochádza pri prijatí SMS k vytváraniu duplicitných vlákien konverzácií pre ten istý kontakt (vyžaduje reštart)</string>
-    <string name="fix_caller_id_mms_alert">Aby sa oprava prejavila, je potrebné vymazať všetky existujúce duplicitné vlákna konverzácií!</string>
-
     <string name="fix_calendar_title">Opraviť kalendár</string>
     <string name="fix_calendar_summary">Použiť v prípade, ak dochádza k pravidelnému samozapínaniu sa obrazovky (vyžaduje reštart)</string>
 

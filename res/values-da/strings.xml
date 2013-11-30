@@ -37,14 +37,6 @@
     <string name="fix_datetime_crash_title">Fix crash i indstillinger for dato og tid</string>
     <string name="fix_datetime_crash_summary">Slå til hvis du oplever crash mens du tilgår indstillinger for dato og tid</string>
 
-    <string name="fix_caller_id_phone_title">Fix opkaldsinfo for telefonen</string>
-    <string name="fix_caller_id_phone_summary">Slå til hvis opkaldsinfo ikke matcher korrekt til kontakter (kræver genstart)</string>
-    <string name="fix_caller_id_phone_alert">Efter genstart skal kontaktlisten ryddes og kontakterne tilføjes igen, før ændringen virker. Benyt Indstillinger / Apps / Alle for at rydde kontaktforsynerens data</string>
-
-    <string name="fix_caller_id_mms_title">Fix afsender ID for beskeder</string>
-    <string name="fix_caller_id_mms_summary">Slå til hvis du oplever flere beskedtråde for den samme kontakt (kræver genstart)</string>
-    <string name="fix_caller_id_mms_alert">Efter genstart skal de berørte beskedtråde slettes, før ændringen virker</string>
-
     <string name="fix_calendar_title">Fix kalender-app</string>
     <string name="fix_calendar_summary">Slå til hvis du oplever at skærmen tænder periodisk af sig selv (kræver genstart)</string>
 

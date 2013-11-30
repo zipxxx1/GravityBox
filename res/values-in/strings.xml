@@ -54,14 +54,6 @@
     <string name="fix_datetime_crash_title">Perbaiki crash setting Tanggal&amp;Waktu</string>
     <string name="fix_datetime_crash_summary">Hidupkan jika anda mengalami crash ketika masuk ke setting Tanggal&amp;Waktu (membutuhkan reboot)</string>
 
-    <string name="fix_caller_id_phone_title">Perbaiki caller ID pada telepon</string>
-    <string name="fix_caller_id_phone_summary">Hidupkan jika kontak anda tidak cocok ketika menerima panggilan (membutuhkan reboot)</string>
-    <string name="fix_caller_id_phone_alert">Setelah reboot, harap bersihkan data dan mengisi ulang kontak ada agar perubahan bisa berjalan! Masuk ke Settings / Applications / All - untuk membersihkan data Contacts provider.</string>
-
-    <string name="fix_caller_id_mms_title">Perbaiki caller ID pada pesan</string>
-    <string name="fix_caller_id_mms_summary">Hidupkan jika anda mengalami percakapan yang terpisah-pisah untuk 1 kontak yang sama (membutuhkan reboot)</string>
-    <string name="fix_caller_id_mms_alert">Setelah reboot, harap hapus semua percakapan yang terpisah-pisah di aplikasi perpesanan agar perubahan bisa berjalan!</string>
-
     <string name="fix_calendar_title">Perbaiki aplikasi kalender</string>
     <string name="fix_calendar_summary">Hidupkan jika anda mengalami layar yang hidup sendiri secara berkala (membutuhkan reboot)</string>
 

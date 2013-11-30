@@ -38,14 +38,6 @@
     <string name="fix_datetime_crash_title">Fix crash modifica Data&amp;ora</string>
     <string name="fix_datetime_crash_summary">Abilita nel caso si verifichi un crash durante l\'accesso alle impostazione Data&amp;Ora (richiede riavvio)</string>
 
-    <string name="fix_caller_id_phone_title">Fix ID chiamante per telefono</string>
-    <string name="fix_caller_id_phone_summary">Abilita nel caso in cui il tuo contatto non corrisponda durante la ricezione di chiamate (richiede riavvio)</string>
-    <string name="fix_caller_id_phone_alert">Dopo il riavvio, dovresti pulire e riaggiungere i tuoi contatti affinchè la modifica abbia affetto! Usa Impostazioni / Applicazioni / Tutte - per pulire i dati del fornitore di contatti.</string>
-
-    <string name="fix_caller_id_mms_title">Fix ID chiamante messaggi</string>
-    <string name="fix_caller_id_mms_summary">Abilita nel caso in cui ci siano più conversazioni divise per lo stesso contatto (richiede riavvio)</string>
-    <string name="fix_caller_id_mms_alert">Dopo il riavvio, dovresti eliminare tutti la conversazioni divise nelle applicazioni di messaggistica affinchè la modifica abbia effetto!</string>
-
     <string name="fix_calendar_title">Fix app calendario</string>
     <string name="fix_calendar_summary">Abilita nel caso in cui si verifichino periodiche accensioni automatiche dello schermo (richiede riavvio)</string>
 

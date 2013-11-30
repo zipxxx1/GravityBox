@@ -29,12 +29,6 @@
     <string name="recents_clear_all_title">Wyczyść wszystkie zadania</string>
     <string name="fix_datetime_crash_title">Napraw błędy w ustawieniach Daty i Czasu</string>
     <string name="fix_datetime_crash_summary">Włącz w przypadku wystąpienia błędu podczas dostępu do ustawień Daty i Czasu (wymagany restart)</string>
-    <string name="fix_caller_id_phone_title">Napraw błędną identyfikację dzwoniącego</string>
-    <string name="fix_caller_id_phone_summary">Włącz gdy kontakt z książki nie jest rozpoznawany podczas dzwonienia telefonu (wymagany restart)</string>
-    <string name="fix_caller_id_phone_alert">Po restarcie usuń i dodaj ponownie kontakty aby zmiana dała efekt! W menu Ustawienia / Aplikacje / Wszystkie - usuń dane aplikacji Contacts provider.</string>
-    <string name="fix_caller_id_mms_title">Napraw ID nadawcy w wiadomościach</string>
-    <string name="fix_caller_id_mms_summary">Włącz gdy w Wiadomościach pojawiają się osobne wątki dla tego samego nadawcy (wymagany restart)</string>
-    <string name="fix_caller_id_mms_alert">Po restarcie usuń podwójne wątki aby zmiana dała efekt!</string>
     <string name="fix_calendar_title">Napraw aplikację kalendarza</string>
     <string name="fix_calendar_summary">Włącz jeśli aplikacja powoduje samoczynne włączanie się ekranu (wymagany restart)</string>
     <string name="important">Ważne</string>

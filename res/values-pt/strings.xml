@@ -37,14 +37,6 @@
     <string name="fix_datetime_crash_title">Corrigir erro de Data e Hora</string>
     <string name="fix_datetime_crash_summary">Habilitar esta opção caso esteja tendo problema ao acessar a opção de Data e hora nas configurações (necessário reiniciar)</string>
 
-    <string name="fix_caller_id_phone_title">Corrigir contatos em ligação</string>
-    <string name="fix_caller_id_phone_summary">Habilitar caso um contato não seja reconhecido quando recebendo uma ligação (necessário reiniciar)</string>
-    <string name="fix_caller_id_phone_alert">Após reiniciar, você deve limpar e readicionar seus contatos para ter efeito! Para tal, vá em \"Ajustes / Aplicativos / Todos\" para limpar os dados do Armazenamento de contatos.</string>
-
-    <string name="fix_caller_id_mms_title">Corrigir contatos em mensagem</string>
-    <string name="fix_caller_id_mms_summary">Habilitar caso tenha problemas de conversas divididas em varios tópicos do mesmo contato (necessário reiniciar)</string>
-    <string name="fix_caller_id_mms_alert">Após reiniciarlizar, é necessário deletar todos os tópicos divididos para ter efeito!</string>
-
     <string name="fix_calendar_title">Corrigir programa de calendário</string>
     <string name="fix_calendar_summary">Habilitar caso esteja acontecendo da tela ligar sozinha em tempos periódicos (necessário reiniciar)</string>
 

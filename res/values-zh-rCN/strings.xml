@@ -54,14 +54,6 @@
     <string name="fix_datetime_crash_title">修正“日期与时间设置”崩溃</string>
     <string name="fix_datetime_crash_summary">当您进入日期与时间设置发生错误时，启用这个选项（需要重新启动）</string>
 
-    <string name="fix_caller_id_phone_title">修正通话的来电显示</string>
-    <string name="fix_caller_id_phone_summary">若您来电画面上显示的联系人与您的通讯录不符，启用这个选项（需要重新启动）</string>
-    <string name="fix_caller_id_phone_alert">为了让更改生效，您应该在重新启动后清除并重新添加所有联系人（使用 设置/应用程序/全部，找到“联系人存储”，清除数据）</string>
-
-    <string name="fix_caller_id_mms_title">修正短信的来电显示</string>
-    <string name="fix_caller_id_mms_summary">如果来自同一个人的短信被分成不同的会话，启用这个选项（需要重新启动）</string>
-    <string name="fix_caller_id_mms_alert">为了让更动生效，您应该在重新启动后，在“短信”应用程序内删除全部分散的会话</string>
-
     <string name="fix_calendar_title">修正日历应用程序</string>
     <string name="fix_calendar_summary">若您周期性地遇到屏幕自动开启时，启用这个选项（需要重新启动）</string>
 

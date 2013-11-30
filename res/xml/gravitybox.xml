@@ -1201,18 +1201,6 @@
             android:defaultValue="false" />
 
         <CheckBoxPreference
-            android:key="pref_fix_caller_id_phone"
-            android:title="@string/fix_caller_id_phone_title"
-            android:summary="@string/fix_caller_id_phone_summary"
-            android:defaultValue="false" />
-
-        <CheckBoxPreference
-            android:key="pref_fix_caller_id_mms"
-            android:title="@string/fix_caller_id_mms_title"
-            android:summary="@string/fix_caller_id_mms_summary"
-            android:defaultValue="false" />
-
-        <CheckBoxPreference
             android:key="pref_mms_fix_wakelock"
             android:title="@string/pref_mms_fix_wakelock_title"
             android:summary="@string/pref_mms_fix_wakelock_summary"

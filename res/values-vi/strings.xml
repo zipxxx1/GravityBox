@@ -52,14 +52,6 @@
     <string name="fix_datetime_crash_title">Sửa lỗi cài đặt ngày giờ</string>
     <string name="fix_datetime_crash_summary">Cho phép sửa lỗi khi cài đặt ngày giờ (cần trang bị khởi động lại để thay đổi)</string>
 
-    <string name="fix_caller_id_phone_title">Sửa lỗi mã vùng hiển thị cuộc gọi</string>
-    <string name="fix_caller_id_phone_summary">Cho phép sửa lỗi danh bạ không hiển thị tên người dùng khi nhận cuộc gọi (cần trang bị khởi động lại để thay đổi)</string>
-    <string name="fix_caller_id_phone_alert">Sau khi khởi động lại, bạn cần làm sạch và thêm danh bạ của bạn lại để thay đổi có hiệu lực, Đi đến cài đặt/ứng dụng/Tất cả - để xóa dữ liệu Contacts provider.</string>
-
-    <string name="fix_caller_id_mms_title">Sửa lỗi hiển thị danh bạ tin nhắn</string>
-    <string name="fix_caller_id_mms_summary">Sửa lỗi hiển thị khi các số có mã vùng nhắn tin tới trên tin nhắn không hiển thị được tên người gửi trong danh bạ (Cần trang bị khởi động lại để thay đổi)</string>
-    <string name="fix_caller_id_mms_alert">Sau khi khởi động lại, bạn cần xóa sạch hết các tin nhắn để thay đổi có hiệu lực</string>
-
     <string name="fix_calendar_title">Sửa lỗi Lịch</string>
     <string name="fix_calendar_summary">Cho phép sửa khi bạn gặp vấn đề tự xoay đang tải trên màn hình (cần trang bị khởi động lại để thay đổi)</string>
 

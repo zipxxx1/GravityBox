@@ -52,14 +52,6 @@
     <string name="fix_datetime_crash_title">Javítja a Dátum és Idő beállítás hibáját</string>
     <string name="fix_datetime_crash_summary">Engedélyezze abban az esetben, ha összeomlást tapasztal a Dátum és Idő beállítás elérésekor (újraindítás szükséges)</string>
 
-    <string name="fix_caller_id_phone_title">Javítja a telefon hívóazonosítóját</string>
-    <string name="fix_caller_id_phone_summary">Engedélyezze abban az esetben, ha a hívó nem egyezik a hívás fogadásakor (újraindítás szükséges)</string>
-    <string name="fix_caller_id_phone_alert">A változások életbe lépéséhez az újraindítás után a kapcsolatokat törölni kell és újra hozzáadni! Használja a Beállítások / Alkalmazások / Összes menüpontot a Névjegyzék szolgáltató adatainak törléséhez.</string>
-
-    <string name="fix_caller_id_mms_title">Javítja az üzenetek hívóazonosítóját</string>
-    <string name="fix_caller_id_mms_summary">Engedélyezze abban az esetben, ha különválasztott üzenetváltásokat tapasztal egyazon partnertől (újraindítás szükséges)</string>
-    <string name="fix_caller_id_mms_alert">A változások életbe lépéséhez az újraindítás után törölni kell az összes különválasztott üzenetet az Üzenetküldő alkalmazásban!</string>
-
     <string name="fix_calendar_title">Javítja a Naptár programot</string>
     <string name="fix_calendar_summary">Engedélyezze abban az esetben, ha a képernyő rendszeresen bekapcsolja magát (újraindítás szükséges)</string>
 

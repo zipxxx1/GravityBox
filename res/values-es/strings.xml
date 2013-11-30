@@ -37,14 +37,6 @@
     <string name="fix_datetime_crash_title">Reparar error de Fecha y Hora</string>
     <string name="fix_datetime_crash_summary">Habilitar en caso de experimentar errores al acceder a la configuración de Fecha y Hora (requiere reiniciar)</string>
 	
-    <string name="fix_caller_id_phone_title">Parche para el ID de llamada</string>
-    <string name="fix_caller_id_phone_summary">Habilitar si no se muestra correctamente el contacto al recibir una llamada (requiere reiniciar)</string>
-    <string name="fix_caller_id_phone_alert">¡Después de reiniciar, se deben borrar y restaurar los contactos para que el cambio haga efecto! Seleccione Ajustes / Aplicaciones / Todas y borre los datos de la aplicación de contactos.</string>
-	
-    <string name="fix_caller_id_mms_title">Parche para el ID de contacto en mensajes</string>
-    <string name="fix_caller_id_mms_summary">Habilitar en caso de experimentar conversaciones separadas para un mismo contacto (requiere reiniciar)</string>
-    <string name="fix_caller_id_mms_alert">¡Después de reiniciar, debe borrar todas las conversaciones en la aplicación de mensajería para que se apliquen los cambios!</string>
-	
     <string name="fix_calendar_title">Parche para el calendario</string>
     <string name="fix_calendar_summary">Habilitar en caso de experimentar encendidos esporádicos de la pantalla (requiere reiniciar)</string>
 	

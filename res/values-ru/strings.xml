@@ -54,14 +54,6 @@
     <string name="fix_datetime_crash_title">Падения диалога Дата и время</string>
     <string name="fix_datetime_crash_summary">Включить, если при входе в настройки Даты и времени происходит падение (Необходима перезагрузка)</string>
 
-    <string name="fix_caller_id_phone_title">Определения номера для звонка</string>
-    <string name="fix_caller_id_phone_summary">Включить, если номер звонящего не сопоставляется с контактом при входящем звонке (Необходима перезагрузка)</string>
-    <string name="fix_caller_id_phone_alert">После перезагрузки необходимо удалить и заново добавить контакты, чтобы изменения вступили в силу! Используйте Настройки - Приложения - Хранилище контактов - Стереть данные.</string>
-
-    <string name="fix_caller_id_mms_title">Определителя номера для сообщений</string>
-    <string name="fix_caller_id_mms_summary">Включить, если наблюдается проблема нескольких веток сообщений для одного контакта (Необходима перезагрузка)</string>
-    <string name="fix_caller_id_mms_alert">После перезагрузки необходимо удалить все раздельные ветки в приложении Сообщения, чтобы изменения вступили в силу!</string>
-
     <string name="fix_calendar_title">Приложение Календарь</string>
     <string name="fix_calendar_summary">Включить, если есть проблема с периодически включающимся экраном в спящем режиме</string>
 

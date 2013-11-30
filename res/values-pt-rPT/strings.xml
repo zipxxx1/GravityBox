@@ -39,14 +39,6 @@
     <string name="fix_datetime_crash_title">Corrigir problema nas definições de data e hora</string>
     <string name="fix_datetime_crash_summary">Selecionar caso tenha problemas ao aceder à configuração de data e hora nas definições do telefone (necessário reiniciar)</string>
 
-    <string name="fix_caller_id_phone_title">Corrigir problema na identificação de contatos na aplicação de telefone</string>
-    <string name="fix_caller_id_phone_summary">Selecionar caso um contato não seja reconhecido quando recebe uma chamada (necessário reiniciar)</string>
-    <string name="fix_caller_id_phone_alert">Após reiniciar o telefone, deve limpar e readicionar os seus contatos para que a alteração possa ter efeito! Para isso, aceda a \"Definições / Aplicações / Todas\" para limpar os dados do Armazenamento de contatos.</string>
-
-    <string name="fix_caller_id_mms_title">Corrigir problema na aplicação de mensagens</string>
-    <string name="fix_caller_id_mms_summary">Selecionar caso obtenha conversações divididas em varios tópicos para o mesmo contato (necessário reiniciar)</string>
-    <string name="fix_caller_id_mms_alert">Após reiniciar o telefone, deve limpar todas as conversações divididas para que a alteração possa ter efeito!</string>
-
     <string name="fix_calendar_title">Corrigir problema na aplicação de calendário</string>
     <string name="fix_calendar_summary">Selecionar caso verifique que o ecrã se liga sozinho periodicamente (necessário reiniciar)</string>
 

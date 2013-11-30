@@ -53,10 +53,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         // MTK specific
         if (Utils.isMtkDevice()) {
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_CALLER_ID_PHONE, false)) {
-                FixCallerIdPhone.initZygote(prefs);
-            }
-
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_DEV_OPTS, false)) {
                 FixDevOptions.initZygote();
             }
@@ -123,10 +119,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         // MTK Specific
         if (Utils.isMtkDevice()) {
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_CALLER_ID_MMS, false) &&
-                    lpparam.packageName.equals(FixCallerIdMms.PACKAGE_NAME)) {
-                FixCallerIdMms.init(prefs, lpparam.classLoader);
-            }
 
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_CALENDAR, false) &&
                     lpparam.packageName.equals(FixCalendar.PACKAGE_NAME)) {

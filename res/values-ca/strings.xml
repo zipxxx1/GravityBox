@@ -36,14 +36,6 @@
     <string name="fix_datetime_crash_title">Fixa una aturada del sistema quan es canvia la Data/Hora</string>
     <string name="fix_datetime_crash_summary">Activau en cas d\'aturada del sistema en entrar a la configuració de Data/hora (Heu d\'arrencar de nou)</string>
 
-    <string name="fix_caller_id_phone_title">Fixa l\'ID de trucada</string>
-    <string name="fix_caller_id_phone_summary">Activau si no es mostra correctament el contacte en rebre una trucada (Heu d\'arrencar de nou)</string>
-    <string name="fix_caller_id_phone_alert">Després d\'arrencar de nou, heu d\'esborrar i tornar a afegir els contactes per que el pedaç faci efecte! Configuració - Aplicacions - Totes i triar l\'aplicació Contactes.</string>
-
-    <string name="fix_caller_id_mms_title">Fixa l\'ID de l\'emissor dels missatges</string>
-    <string name="fix_caller_id_mms_summary">Activau si les converses de missatges d\'un mateix emissor compareixen separades (Heu d\'arrencar de nou)</string>
-    <string name="fix_caller_id_mms_alert">Després d\'arrencar de nou, heu d\'esborrar les converses separades per que el pedaç faci efecte!</string>
-
     <string name="fix_calendar_title">Fixa el Calendari</string>
     <string name="fix_calendar_summary">Activau si, de tant en tant, la pantalla s\'engega tot sola (Heu d\'arrencar de nou)</string>
 

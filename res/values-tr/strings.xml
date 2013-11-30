@@ -52,14 +52,6 @@
     <string name="fix_datetime_crash_title">Tarih&amp;Saat ayarı çökmesini düzelt</string>
     <string name="fix_datetime_crash_summary">Tarih&amp;Saat ayarlarına erişirken çökme sorunu yaşıyorsanız etkinleştirin (yeniden başlatma gerektirir)</string>
 
-    <string name="fix_caller_id_phone_title">Telefon için Arayan Kimliğini düzelt</string>
-    <string name="fix_caller_id_phone_summary">Kişiniz çağrı geldiğinde rehberle eşleşmiyorsa etkinleştirin (yeniden başlatma gerektirir)</string>
-    <string name="fix_caller_id_phone_alert">Değişikliklerin etkili olması için cihazı yeniden başlattıktan sonra kişilerinizi temizlemeniz ve yeniden eklemeniz önerilir. Ayarlar / Uygulamalar / Tümü / Kişiler Sağlayıcısı / Verileri Temizle</string>
-
-    <string name="fix_caller_id_mms_title">Mesajlar için Arayan Kimliğini düzelt</string>
-    <string name="fix_caller_id_mms_summary">Aynı kişi için ayrı sohbet penceresi görünüyorsa etkinleştirin (yeniden başlatma gerektirir)</string>
-    <string name="fix_caller_id_mms_alert">Değişikliklerin etkili olması için ayrı görünen sohbet mesajlarını silmeniz önerilir.</string>
-
     <string name="fix_calendar_title">Takvim uygulamasını düzelt</string>
     <string name="fix_calendar_summary">Ekran kendi kendine açılıyorsa etkinleştirin (yeniden başlatma gerektirir)</string>
 

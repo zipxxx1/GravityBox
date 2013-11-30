@@ -119,8 +119,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NATIONAL_ROAMING = "pref_national_roaming";
     public static final String PREF_CAT_KEY_FIXES = "pref_cat_fixes";
     public static final String PREF_KEY_FIX_DATETIME_CRASH = "pref_fix_datetime_crash";
-    public static final String PREF_KEY_FIX_CALLER_ID_PHONE = "pref_fix_caller_id_phone";
-    public static final String PREF_KEY_FIX_CALLER_ID_MMS = "pref_fix_caller_id_mms";
     public static final String PREF_KEY_FIX_MMS_WAKELOCK = "pref_mms_fix_wakelock";
     public static final String PREF_KEY_FIX_CALENDAR = "pref_fix_calendar";
     public static final String PREF_CAT_KEY_STATUSBAR = "pref_cat_statusbar";
@@ -495,8 +493,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     private static final List<String> rebootKeys = new ArrayList<String>(Arrays.asList(
             PREF_KEY_FIX_DATETIME_CRASH,
             PREF_KEY_FIX_CALENDAR,
-            PREF_KEY_FIX_CALLER_ID_PHONE,
-            PREF_KEY_FIX_CALLER_ID_MMS,
             PREF_KEY_FIX_TTS_SETTINGS,
             PREF_KEY_FIX_DEV_OPTS,
             PREF_KEY_BRIGHTNESS_MIN,
@@ -675,8 +671,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ColorPickerPreference mPrefSbDaColor;
         private PreferenceScreen mPrefCatFixes;
         private CheckBoxPreference mPrefFixDateTimeCrash;
-        private CheckBoxPreference mPrefFixCallerIDPhone;
-        private CheckBoxPreference mPrefFixCallerIDMms;
         private CheckBoxPreference mPrefFixMmsWakelock;
         private CheckBoxPreference mPrefFixCalendar;
         private CheckBoxPreference mPrefFixTtsSettings;
@@ -849,8 +843,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCatFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_FIXES);
             mPrefFixDateTimeCrash = (CheckBoxPreference) findPreference(PREF_KEY_FIX_DATETIME_CRASH);
-            mPrefFixCallerIDPhone = (CheckBoxPreference) findPreference(PREF_KEY_FIX_CALLER_ID_PHONE);
-            mPrefFixCallerIDMms = (CheckBoxPreference) findPreference(PREF_KEY_FIX_CALLER_ID_MMS);
             mPrefFixMmsWakelock = (CheckBoxPreference) findPreference(PREF_KEY_FIX_MMS_WAKELOCK);
             mPrefFixCalendar = (CheckBoxPreference) findPreference(PREF_KEY_FIX_CALENDAR);
             mPrefFixTtsSettings = (CheckBoxPreference) findPreference(PREF_KEY_FIX_TTS_SETTINGS);
@@ -991,11 +983,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.hasTelephonySupport(getActivity())) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
                 mPrefCatMedia.removePreference(mPrefLinkVolumes);
-                mPrefCatFixes.removePreference(mPrefFixCallerIDPhone);
             }
             if (!isAppInstalled(APP_MESSAGING)) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
-                mPrefCatFixes.removePreference(mPrefFixCallerIDMms);
                 mPrefCatFixes.removePreference(mPrefFixMmsWakelock);
             }
             if (Utils.isWifiOnly(getActivity())) {
@@ -1005,8 +995,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatPhoneMobileData.removePreference(mPrefMobileDataSlow2gDisable);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
-                mPrefCatFixes.removePreference(mPrefFixCallerIDPhone);
-                mPrefCatFixes.removePreference(mPrefFixCallerIDMms);
                 mPrefCatFixes.removePreference(mPrefFixMmsWakelock);
            	}
 
@@ -1746,25 +1734,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (intent.getAction() != null) {
                 getActivity().sendBroadcast(intent);
-            }
-
-            if (key.equals(PREF_KEY_FIX_CALLER_ID_PHONE) ||
-                    key.equals(PREF_KEY_FIX_CALLER_ID_MMS)) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(R.string.important);
-                int msgId = (key.equals(PREF_KEY_FIX_CALLER_ID_PHONE)) ?
-                        R.string.fix_caller_id_phone_alert : R.string.fix_caller_id_mms_alert;
-                builder.setMessage(msgId);
-                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        Toast.makeText(getActivity(), getString(R.string.reboot_required), Toast.LENGTH_SHORT).show();
-                    }
-                });
-                mDialog = builder.create();
-                mDialog.show();
             }
 
             if (key.equals(PREF_KEY_BRIGHTNESS_MIN) &&
