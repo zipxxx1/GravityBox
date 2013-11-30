@@ -86,7 +86,7 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
                 GravityBoxSettings.PREF_KEY_NOTIF_COLOR_MODE,
                 GravityBoxSettings.NOTIF_BG_COLOR_MODE_OVERLAY));
         setAlpha(prefs.getInt(
-                GravityBoxSettings.PREF_KEY_NOTIF_BACKGROUND_ALPHA, 60));
+                GravityBoxSettings.PREF_KEY_NOTIF_BACKGROUND_ALPHA, 0));
         mNotificationPanelView.addView(this);
         updateNotificationPanelBackground();
     }
@@ -229,7 +229,7 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
                 setColor(intent.getIntExtra(GravityBoxSettings.EXTRA_BG_COLOR, Color.BLACK));
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BG_ALPHA)) {
-                setAlpha(intent.getIntExtra(GravityBoxSettings.EXTRA_BG_ALPHA, 60));
+                setAlpha(intent.getIntExtra(GravityBoxSettings.EXTRA_BG_ALPHA, 0));
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BG_COLOR_MODE)) {
                 setColorMode(intent.getStringExtra(GravityBoxSettings.EXTRA_BG_COLOR_MODE));
