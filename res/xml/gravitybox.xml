@@ -380,7 +380,8 @@
                 interval="5"
                 monitorBoxEnabled="true"
                 monitorBoxUnit="%"
-                android:order="6" />
+                android:order="6"
+                android:defaultValue="0" />
 
         </PreferenceScreen>
 
