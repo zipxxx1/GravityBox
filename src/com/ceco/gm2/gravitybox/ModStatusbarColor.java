@@ -596,7 +596,7 @@ public class ModStatusbarColor {
     }
 
     private static void setStatusbarBgColor(int color) {
-        if (Build.VERSION.SDK_INT < 19 && mPanelBar != null) {
+        if (mPanelBar != null) {
             if (Utils.isXperiaDevice()) {
                 if (!(mPanelBar.getBackground() instanceof ColorDrawable)) {
                     ColorDrawable colorDrawable = new ColorDrawable(color);
