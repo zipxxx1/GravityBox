@@ -90,7 +90,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int BATTERY_WARNING_POPUP = 1;
     public static final int BATTERY_WARNING_SOUND = 2;
 
-    public static final String PREF_KEY_SIGNAL_ICON_AUTOHIDE = "pref_signal_icon_autohide";
     public static final String PREF_KEY_DISABLE_ROAMING_INDICATORS = "pref_disable_roaming_indicators";
     public static final String ACTION_DISABLE_ROAMING_INDICATORS_CHANGED = "gravitybox.intent.action.DISABLE_ROAMING_INDICATORS_CHANGED";
     public static final String EXTRA_INDICATORS_DISABLED = "indicatorsDisabled";
@@ -363,7 +362,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String FILE_THEME_DARK_FLAG = "theme_dark";
 
     public static final String ACTION_PREF_BATTERY_STYLE_CHANGED = "gravitybox.intent.action.BATTERY_STYLE_CHANGED";
-    public static final String ACTION_PREF_SIGNAL_ICON_AUTOHIDE_CHANGED = "gravitybox.intent.action.SIGNAL_ICON_AUTOHIDE_CHANGED";
 
     public static final String ACTION_PREF_STATUSBAR_COLOR_CHANGED = "gravitybox.intent.action.STATUSBAR_COLOR_CHANGED";
     public static final String EXTRA_SB_BG_COLOR = "bgColor";
@@ -636,7 +634,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mBatteryStyle;
         private CheckBoxPreference mPrefBatteryPercent;
         private ListPreference mLowBatteryWarning;
-        private MultiSelectListPreference mSignalIconAutohide;
         private SharedPreferences mPrefs;
         private AlertDialog mDialog;
         private MultiSelectListPreference mQuickSettings;
@@ -780,7 +777,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mBatteryStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_STYLE);
             mPrefBatteryPercent = (CheckBoxPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT);
             mLowBatteryWarning = (ListPreference) findPreference(PREF_KEY_LOW_BATTERY_WARNING_POLICY);
-            mSignalIconAutohide = (MultiSelectListPreference) findPreference(PREF_KEY_SIGNAL_ICON_AUTOHIDE);
             mQuickSettings = (MultiSelectListPreference) findPreference(PREF_KEY_QUICK_SETTINGS);
             mStatusbarBgColor = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_BGCOLOR);
 
@@ -1006,7 +1002,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 // Remove preferences that don't apply to wifi-only devices
                 getPreferenceScreen().removePreference(mPrefCatPhone);
                 mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileMode);
-                mPrefCatStatusbar.removePreference(mSignalIconAutohide);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatPhoneMobileData.removePreference(mPrefMobileDataSlow2gDisable);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
@@ -1018,7 +1013,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Remove MTK specific preferences for non-MTK devices
             if (!Utils.isMtkDevice()) {
                 getPreferenceScreen().removePreference(mPrefCatFixes);
-                mPrefCatStatusbar.removePreference(mSignalIconAutohide);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mQuickSettings.setEntries(Build.VERSION.SDK_INT > 18 ? 
                         R.array.qs_tile_aosp_entries_kk : R.array.qs_tile_aosp_entries);
@@ -1029,17 +1023,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else {
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {
-                    mPrefCatStatusbar.removePreference(mSignalIconAutohide);
                     mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                     mPrefCatPhoneMobileData.removePreference(mPrefMobileDataSlow2gDisable);
                     mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                     mPrefCatStatusbarColors.removePreference(mPrefSbDaColorSecondary);
-                }
-
-                // Remove preferences not needed for MT6572
-                if (Utils.isMt6572Device()) {
-                    mPrefCatStatusbar.removePreference(mSignalIconAutohide);
                 }
 
                 // Remove preferences not needed for ZTE V987
@@ -1208,26 +1196,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_LOW_BATTERY_WARNING_POLICY)) {
                 mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_SIGNAL_ICON_AUTOHIDE)) {
-                Set<String> autoHide =  mSignalIconAutohide.getValues();
-                String summary = "";
-                if (autoHide.contains("notifications_disabled")) {
-                    summary += getString(R.string.sim_disable_notifications_summary);
-                }
-                if (autoHide.contains("sim1")) {
-                    if (!summary.isEmpty()) summary += ", ";
-                    summary += getString(R.string.sim_slot_1);
-                }
-                if (autoHide.contains("sim2")) {
-                    if (!summary.isEmpty()) summary += ", ";
-                    summary += getString(R.string.sim_slot_2);
-                }
-                if (summary.isEmpty()) {
-                    summary = getString(R.string.signal_icon_autohide_summary);
-                }
-                mSignalIconAutohide.setSummary(summary);
             }
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_BACKGROUND)) {
@@ -1451,10 +1419,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT)) {
                 intent.setAction(ACTION_PREF_BATTERY_STYLE_CHANGED);
                 intent.putExtra("batteryPercent", prefs.getBoolean(PREF_KEY_BATTERY_PERCENT_TEXT, false));
-            } else if (key.equals(PREF_KEY_SIGNAL_ICON_AUTOHIDE)) {
-                intent.setAction(ACTION_PREF_SIGNAL_ICON_AUTOHIDE_CHANGED);
-                String[] autohidePrefs = mSignalIconAutohide.getValues().toArray(new String[0]);
-                intent.putExtra("autohidePrefs", autohidePrefs);
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_PREFS, TileOrderActivity.updateTileList(prefs));

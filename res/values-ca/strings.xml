@@ -20,13 +20,6 @@
 
     <string name="reboot_required">Es necessari arrencar de nou</string>
 
-    <string name="signal_icon_autohide_title">Auto-amagar les icones de senyal</string>
-    <string name="signal_icon_autohide_summary">Amaga les icones de senyal de les ranures SIM quan no hi ha cap SIM inserida.  Desactiva les notificacions \"SIM no inserida\"</string>
-    <string name="sim_slot_1">Auto-amaga l\'icona de la ranura SIM 1</string>
-    <string name="sim_slot_2">Auto-amaga l\'icona de la ranura SIM 2</string>
-    <string name="sim_disable_notifications">Desactiva les notificacions</string>
-    <string name="sim_disable_notifications_summary">Desactiva les notificacions \"SIM no inserida\"</string>
-
     <string name="poweroff_advanced_title">Menú d\'apagat avançat</string>
     <string name="poweroff_advanced_summary">Habilita el menú d\'apagat avançat i l\'opció de d\'arrencar en mode de recuperació</string>
     <string name="poweroff_recovery">Mode de recuperació</string>    

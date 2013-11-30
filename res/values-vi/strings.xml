@@ -36,13 +36,6 @@
 
     <string name="reboot_required">Thay đổi cần trang bị khởi động lại</string>
 
-    <string name="signal_icon_autohide_title">Tự động ẩn biểu tượng sóng</string>
-    <string name="signal_icon_autohide_summary">Tự động ẩn biểu tượng sóng vị trí SIM khi không có SIM, tắt thông báo không có SIM trên thanh trạng thái</string>
-    <string name="sim_slot_1">Tự động ẩn cho SIM 1</string>
-    <string name="sim_slot_2">Tự động ẩn cho SIM 2</string>
-    <string name="sim_disable_notifications">Tắt thông báo</string>
-    <string name="sim_disable_notifications_summary">\"SIM chưa được lắp\" Thông báo đã được tắt</string>
-
     <string name="poweroff_advanced_title">Tùy chọn Reboot nâng cao</string>
     <string name="poweroff_advanced_summary">Cho phép thêm tùy chọn Reboot và reboot tới recovery</string>
     <string name="poweroff_recovery">Reboot tới Recovery</string>

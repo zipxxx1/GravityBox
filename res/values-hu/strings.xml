@@ -36,13 +36,6 @@
 
     <string name="reboot_required">A változtatás csak újraindítás után lesz alkalmazva</string>
 
-    <string name="signal_icon_autohide_title">Jelszint ikonok automatikus elrejtése</string>
-    <string name="signal_icon_autohide_summary">Jelszint ikonok automatikus elrejtése a nem használt SIM foglalatnál, ha a SIM kártya nincs behelyezve, "SIM nem található" figyelmeztetés letiltása</string>
-    <string name="sim_slot_1">SIM 1 foglalat automatikus elrejtése</string>
-    <string name="sim_slot_2">SIM 2 foglalat automatikus elrejtése</string>
-    <string name="sim_disable_notifications">Figyelmeztetés letiltása</string>
-    <string name="sim_disable_notifications_summary">"SIM nem található" figyelmeztetés letiltása</string>
-
     <string name="poweroff_advanced_title">Haladó kikapcsoló menü</string>
     <string name="poweroff_advanced_summary">Engedélyezi a haladó kikapcsoló menüt újraindítás Recovery-be opcióval</string>
     <string name="poweroff_recovery">Recovery</string>    

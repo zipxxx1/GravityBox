@@ -23,13 +23,6 @@
 
     <string name="reboot_required">Änderungen werden nach einem Neustart übernommen</string>
 
-    <string name="signal_icon_autohide_title">Empfangsanzeige automatisch verstecken</string>
-    <string name="signal_icon_autohide_summary">Empfangsanzeige für ausgewählte Sim Karte verstecken, wenn diese nicht eingelegt ist, deaktiviert \"Steckplatz 2: Keine SIM-Karte erkannt\" Benachrichtigungen</string>
-    <string name="sim_slot_1">Empfangsanzeige von SIM1 automatisch verstecken</string>
-    <string name="sim_slot_2">Empfangsanzeige von SIM2 automatisch verstecken</string>
-    <string name="sim_disable_notifications">Deaktiviere Benachrichtigungen</string>
-    <string name="sim_disable_notifications_summary">\"Keine SIM-Karte erkannt\" Benachrichtigungen deaktiviert</string>
-
     <string name="poweroff_advanced_title">Erweitertes Neustart-Menü</string>
     <string name="poweroff_advanced_summary">Aktiviert erweitertes Neustart-Menü mit der Option direkt die Recovery zu starten</string>
     <string name="poweroff_recovery">Recovery</string>

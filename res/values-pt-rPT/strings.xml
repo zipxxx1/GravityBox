@@ -23,13 +23,6 @@
 
     <string name="reboot_required">As alterações serão aplicadas após reiniciar o sistema</string>
 
-    <string name="signal_icon_autohide_title">Ocultar barras de sinal</string>
-    <string name="signal_icon_autohide_summary">Ocultar as barras de sinal do cartão SIM escolhido quando este não estiver inserido. Desativa as notificações de \"O SIM não está inserido.\"</string>
-    <string name="sim_slot_1">Ocultar barras de sinal do cartão SIM 1</string>
-    <string name="sim_slot_2">Ocultar barras de sinal do cartão SIM 2</string>
-    <string name="sim_disable_notifications">Desativar notificações</string>
-    <string name="sim_disable_notifications_summary">Notificações \"O SIM não está inserido.\" desativadas</string>
-
     <string name="poweroff_advanced_title">Menu Desligar avançado</string>
     <string name="poweroff_advanced_summary">Adiciona opções para reiniciar em modo de recuperação ao Menu Desligar</string>
     <string name="poweroff_recovery">Modo de recuperação</string>

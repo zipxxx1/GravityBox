@@ -20,14 +20,7 @@
     <string name="low_battery_warning_off">Desactivado</string>
 	
     <string name="reboot_required">Los cambios se aplicarán después de reiniciar</string>
-	
-    <string name="signal_icon_autohide_title">Ocultar iconos de señal</string>
-    <string name="signal_icon_autohide_summary">Ocultar iconos de señal para las ranuras SIM cuando no hay SIM insertada, desactiva las notificaciones \"SIM no insertada\"</string>
-    <string name="sim_slot_1">Ocultar ranura SIM 1</string>
-    <string name="sim_slot_2">Ocultar ranura SIM 2</string>
-    <string name="sim_disable_notifications">Desactivar notificaciones</string>
-    <string name="sim_disable_notifications_summary">Desactivar las notificaciones \"SIM no insertada\"</string>
-	
+		
     <string name="poweroff_advanced_title">Menú avanzado de apagado</string>
     <string name="poweroff_advanced_summary">Habilita el menú avanzado de apagado, con la opción de reiniciar en modo recuperación</string>
     <string name="poweroff_recovery">Modo recuperación</string>

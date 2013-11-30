@@ -38,13 +38,6 @@
 
     <string name="reboot_required">重新启动以后设置才会启用</string>
 
-    <string name="signal_icon_autohide_title">自动隐藏信号强度图标</string>
-    <string name="signal_icon_autohide_summary">当SIM卡未插入时自动隐藏指定SIM卡的信号强度图标并停用“SIM卡未插入”通知</string>
-    <string name="sim_slot_1">自动隐藏SIM卡1</string>
-    <string name="sim_slot_2">自动隐藏SIM卡2</string>
-    <string name="sim_disable_notifications">禁用通知</string>
-    <string name="sim_disable_notifications_summary">“SIM卡未插入”提醒已停用</string>
-
     <string name="poweroff_advanced_title">高级重新启动菜单</string>
     <string name="poweroff_advanced_summary">启用重新启动和Recovery选项高级菜单</string>
     <string name="poweroff_recovery">Recovery</string>

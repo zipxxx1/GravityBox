@@ -37,13 +37,6 @@
 
     <string name="reboot_required">Verandering zal na een herstart worden toegepast</string>
 
-    <string name="signal_icon_autohide_title">Automatisch signaal iconen verbergen</string>
-    <string name="signal_icon_autohide_summary">Automatisch verbergen van signaal iconen voor geselecteerde SIM-slots als SIM-kaart niet is geplaatst, schakelt \ "SIM niet geplaatst \" meldingen</string>
-    <string name="sim_slot_1">Automatisch verbergen SIM Slot 1</string>
-    <string name="sim_slot_2">Automatisch verbergen SIM Slot 2</string>
-    <string name="sim_disable_notifications">Meldingen uitschakelen</string>
-    <string name="sim_disable_notifications_summary">\"SIM niet geplaatst\" meldingen uitgeschakeld</string>
-
     <string name="poweroff_advanced_title">Geavanceerde herstart menu</string>
     <string name="poweroff_advanced_summary">Maakt geavanceerde herstart menu met opties om te herstarten naar recovery</string>
     <string name="poweroff_recovery">Recovery</string>

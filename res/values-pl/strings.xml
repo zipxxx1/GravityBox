@@ -17,12 +17,6 @@
     <string name="low_battery_warning_sound">Tylko dźwięk</string>
     <string name="low_battery_warning_off">Wyłączone</string>
     <string name="reboot_required">Zmiany będą zastosowane po restarcie</string>
-    <string name="signal_icon_autohide_title">Auto-ukrywanie ikon sygnału</string>
-    <string name="signal_icon_autohide_summary">Automatycznie ukrywa ikony sygnału dla wybranego gniazda SIM gdy karta SIM nie została włożona oraz blokuje komunikaty \"Brak karty SIM\"</string>
-    <string name="sim_slot_1">Auto-ukrywanie dla gniazda SIM 1</string>
-    <string name="sim_slot_2">Auto-ukrywanie dla gniazda SIM 2</string>
-    <string name="sim_disable_notifications">Zablokuj powiadomienia</string>
-    <string name="sim_disable_notifications_summary">Powiadomienia \"Brak karty SIM\" zablokowane</string>
     <string name="poweroff_advanced_title">Zaawansowane menu wyłączania</string>
     <string name="poweroff_advanced_summary">Włącza dodatkowe opcje dotyczące restartu telefonu (Recovery)</string>
     <string name="poweroff_recovery">Recovery</string>

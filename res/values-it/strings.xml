@@ -22,13 +22,6 @@
 
     <string name="reboot_required">Le modifiche saranno applicate dopo il riavvio</string>
 
-    <string name="signal_icon_autohide_title">Notifica Sim assente</string>
-    <string name="signal_icon_autohide_summary">Nascondi automaticamente le icone di segnalazione per gli slot SIM selezionati se la SIM non è inserita, Disabilita la notifica \"SIM non inserita\"</string>
-    <string name="sim_slot_1">Nascondi automaticamente lo slot SIM 1</string>
-    <string name="sim_slot_2">Nascondi automaticamente lo slot SIM 2</string>
-    <string name="sim_disable_notifications">Disabilita le notifiche</string>
-    <string name="sim_disable_notifications_summary">Notifica di \"SIM non inserita\" disabilitata</string>
-
     <string name="poweroff_advanced_title">Menu Power-off avanzato</string>
     <string name="poweroff_advanced_summary">Abilita il menu power-off avanzato con l\'opzione per riavviare in ripristino</string>
     <string name="poweroff_recovery">Riavvia in Recovery</string>

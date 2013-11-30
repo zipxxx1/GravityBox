@@ -23,13 +23,6 @@
 
     <string name="reboot_required">重啟裝置後更改將被套用</string>
 
-    <string name="signal_icon_autohide_title">自動隱藏訊號圖示</string>
-    <string name="signal_icon_autohide_summary">自動隱藏訊號圖示時選定的SIM卡插槽，SIM卡未插入, 停用 \"SIM 卡未插入\" 通知</string>
-    <string name="sim_slot_1">自動隱藏 SIM 卡槽 1</string>
-    <string name="sim_slot_2">自動隱藏 SIM 卡槽 2</string>
-    <string name="sim_disable_notifications">停用通知</string>
-    <string name="sim_disable_notifications_summary">\"SIM 卡未插入\" 通知已停用</string>
-
     <string name="poweroff_advanced_title">進階重啟選單</string>
     <string name="poweroff_advanced_summary">啟用進階重啟選單，將有重啟至 recovery 模式選項</string>
     <string name="poweroff_recovery">Recovery</string>

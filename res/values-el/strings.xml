@@ -36,13 +36,6 @@
 
     <string name="reboot_required">Οι αλλαγές θα εφαρμοστούν μετά από επανεκκίνηση</string>
 
-    <string name="signal_icon_autohide_title">Αυτόματη απόκρυψη προειδοποιητικών εικονιδίων</string>
-    <string name="signal_icon_autohide_summary">Αποκρύπτει αυτόματα προειδοποιητικά εικονίδια για τις θέσεις των καρτών SIM όταν κάποια κάρτα SIM δεν έχει εισαχθεί, απενεργοποιεί ειδοποιήσεις \"Δεν έχει εισαχθεί κάρτα SIM\"</string>
-    <string name="sim_slot_1">Αυτόματη απόκρυψη θέσης SIM 1</string>
-    <string name="sim_slot_2">Αυτόματη απόκρυψη θέσης SIM 2</string>
-    <string name="sim_disable_notifications">Απενεργοποίηση ειδοποιήσεων</string>
-    <string name="sim_disable_notifications_summary">\"Δεν έχει εισαχθεί κάρτα SIM\" ειδοποιήσεις απενεργοποιήθηκαν</string>
-
     <string name="poweroff_advanced_title">Μενού επανεκκίνησης για προχωρημένους</string>
     <string name="poweroff_advanced_summary">Ενεργοποιεί το μενού επανεκκίνησης για προχωρημένους με επιλογές για επανεκκίνιση σε recovery</string>
     <string name="poweroff_recovery">Recovery</string>

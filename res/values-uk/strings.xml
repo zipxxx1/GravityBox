@@ -15,12 +15,6 @@
     <string name="low_battery_warning_sound">Тільки звук</string>
     <string name="low_battery_warning_off">Не попереджати</string>
     <string name="reboot_required">Зміни набудуть чинності після перезавантаження</string>
-    <string name="signal_icon_autohide_title">Автоматично приховувати іконку антени</string>
-    <string name="signal_icon_autohide_summary">Автоматично приховує іконку антени для вибраного SIM-слота коли SIM-карта в цьому слоті відсутня, відключає повідомлення \"Відсутня SIM\"</string>
-    <string name="sim_slot_1">Приховувати перший слот</string>
-    <string name="sim_slot_2">Приховувати другий слот</string>
-    <string name="sim_disable_notifications">Вимкнути сповіщення</string>
-    <string name="sim_disable_notifications_summary">Сповіщення \"Відсутня SIM\" відключені</string>
     <string name="poweroff_advanced_title">Розширене меню перезавантаження</string>
     <string name="poweroff_advanced_summary">Включає розширене меню перезавантаження з можливістю перезавантаження у відновлення</string>
     <string name="poweroff_recovery">Відновлення</string>

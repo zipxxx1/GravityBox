@@ -38,13 +38,6 @@
 
     <string name="reboot_required">Изменения вступят в силу после перезагрузки</string>
 
-    <string name="signal_icon_autohide_title">Автоматически скрывать иконку антенны</string>
-    <string name="signal_icon_autohide_summary">Автоматически скрывает иконку антенны для выбранного SIM-слота когда SIM-карта в этом слоте отсутствует, отключает уведомление \"Отсутствует SIM\"</string>
-    <string name="sim_slot_1">Скрывать первый слот</string>
-    <string name="sim_slot_2">Скрывать второй слот</string>
-    <string name="sim_disable_notifications">Отключить уведомления</string>
-    <string name="sim_disable_notifications_summary">Уведомления \"Отсутствует SIM\" отключены</string>
-
     <string name="poweroff_advanced_title">Расширенное меню перезагрузки</string>
     <string name="poweroff_advanced_summary">Включает расширенное меню перезагрузки с возможностью перезагрузки в Recovery</string>
     <string name="poweroff_recovery">Recovery</string>

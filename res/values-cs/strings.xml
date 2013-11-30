@@ -22,14 +22,6 @@
     <string name="low_battery_warning_off">Vypnuté</string>
 
     <string name="reboot_required">Změna se projeví po restartu</string>
-
-    <string name="signal_icon_autohide_title">Zobrazení ikon signálu</string>
-    <string name="signal_icon_autohide_summary">Umožní zapnutí automatického skrývání ikon signálu pro prázdné SIM sloty, umožní vypnout \"SIM není vložená\" hlášení</string>
-    <string name="sim_slot_1">Automaticky skrýt pro SIM 1</string>
-    <string name="sim_slot_2">Automaticky skrýt pro SIM 2</string>
-    <string name="sim_disable_notifications">Vypnout \"SIM není vložená\" hlášení</string>
-    <string name="sim_disable_notifications_summary">\"SIM není vložená\" hlášení vypnuté</string>
-
     <string name="poweroff_advanced_title">Rozšířené restart menu</string>
     <string name="poweroff_advanced_summary">Aktivuje rozšířené restart menu s možností restartu do recovery</string>
     <string name="poweroff_recovery">Recovery</string>    

@@ -38,13 +38,6 @@
 
     <string name="reboot_required">Le changement sera pris en compte après redémarrage</string>
 
-    <string name="signal_icon_autohide_title">Masquer les icônes de signal</string>
-    <string name="signal_icon_autohide_summary">Cache automatiquement les icônes de signal pour l\'emplacement SIM sélectionné lorsque la carte SIM n\'est pas insérée, désactive la notification  \"SIM non insérée\"</string>
-    <string name="sim_slot_1">Cacher automatiquement la carte SIM n°1</string>
-    <string name="sim_slot_2">Cacher automatiquement la carte SIM n°2</string>
-    <string name="sim_disable_notifications">Désactiver les notifications</string>
-    <string name="sim_disable_notifications_summary">Message \"SIM non insérée\" désactivé</string>
-
     <string name="poweroff_advanced_title">Menu avancé de redémarrage</string>
     <string name="poweroff_advanced_summary">Active le menu avancé de redémarrage avec la possibilité de redémarrer en mode récupération</string>
     <string name="poweroff_recovery">Récupération</string>

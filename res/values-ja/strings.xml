@@ -23,13 +23,6 @@
 
     <string name="reboot_required">変更は再起動後に適用されます。</string>
 
-    <string name="signal_icon_autohide_title">電波アイコンを自動非表示</string>
-    <string name="signal_icon_autohide_summary">選択したSIMスロットにSIMが入っていないときに電波アイコンを非表示にして「SIMが挿入されていません」の通知を無効化します。</string>
-    <string name="sim_slot_1">SIMスロット1を自動非表示</string>
-    <string name="sim_slot_2">SIMスロット2を自動非表示</string>
-    <string name="sim_disable_notifications">通知を無効化</string>
-    <string name="sim_disable_notifications_summary">「SIMが挿入されていません」の通知を無効化しました。</string>
-
     <string name="poweroff_advanced_title">再起動オプション</string>
     <string name="poweroff_advanced_summary">電源メニューに再起動オプションを追加します。</string>
     <string name="poweroff_recovery">リカバリ</string>

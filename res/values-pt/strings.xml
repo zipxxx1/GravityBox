@@ -21,13 +21,6 @@
 
     <string name="reboot_required">Mudanças serão aplicadas após reiniciar o dispositivo.</string>
 
-    <string name="signal_icon_autohide_title">Esconder automaticamente os icones de sinal</string>
-    <string name="signal_icon_autohide_summary">Esconder o icone de sinal para o slot SIM escolhido quando este não estiver inserido. Desabilita notificações de \"SIM não inserido\"</string>
-    <string name="sim_slot_1">Esconder automaticamente SIM Slot 1</string>
-    <string name="sim_slot_2">Esconder automaticamente SIM Slot 2</string>
-    <string name="sim_disable_notifications">Desabilitar notificações</string>
-    <string name="sim_disable_notifications_summary">Notificações \"SIM não inserido\" desabilitadas</string>
-
     <string name="poweroff_advanced_title">Menu de Desligar avançado</string>
     <string name="poweroff_advanced_summary">Adiciona opções para reiniciar em modo de recuperação ao menu de desligar</string>
     <string name="poweroff_recovery">Recuperação</string>

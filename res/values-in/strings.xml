@@ -38,13 +38,6 @@
 
     <string name="reboot_required">Perubahan akan diterapkan setelah reboot</string>
 
-    <string name="signal_icon_autohide_title">Otomatis sembunyikan ikon sinyal</string>
-    <string name="signal_icon_autohide_summary">Otomatis menyembunyikan ikon sinyal dari SIM yang dipilih, mematikan peringatan \"SIM not inserted\"</string>
-    <string name="sim_slot_1">Otomatis sembunyikan SIM Slot 1</string>
-    <string name="sim_slot_2">Otomatis sembunyikan SIM Slot 2</string>
-    <string name="sim_disable_notifications">Matikan peringatan</string>
-    <string name="sim_disable_notifications_summary">Peringatan \"SIM not inserted\" dimatikan</string>
-
     <string name="poweroff_advanced_title">Menu reboot tingkat lanjut</string>
     <string name="poweroff_advanced_summary">Menghidupkan menu reboot tingkat lanjut dengan opsi untuk reboot ke recovery</string>
     <string name="poweroff_recovery">Recovery</string>    

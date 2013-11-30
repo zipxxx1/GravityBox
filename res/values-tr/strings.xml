@@ -36,13 +36,6 @@
 
     <string name="reboot_required">Yeniden başlatıldığında değişiklik uygulanacak</string>
 
-    <string name="signal_icon_autohide_title">Sinyal simgelerini otomatik gizle</string>
-    <string name="signal_icon_autohide_summary">Seçilen SIM yuvaları takılmadığında \"SIM takılı değil\" uyarılarını gizle</string>
-    <string name="sim_slot_1">SIM Yuvası 1</string>
-    <string name="sim_slot_2">SIM Yuvası 2</string>
-    <string name="sim_disable_notifications">Bildirimleri kapat</string>
-    <string name="sim_disable_notifications_summary">\"SIM takılı değil\" bildirimlerini kapat</string>
-
     <string name="poweroff_advanced_title">Gelişmiş yeniden başlatma menüsü</string>
     <string name="poweroff_advanced_summary">Gelişmiş yeniden başlatma menüsüne Kurtar seçeneğini ekler</string>
     <string name="poweroff_recovery">Recovery</string>

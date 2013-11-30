@@ -36,13 +36,6 @@
 
     <string name="reboot_required">سيتم تطبيق المتغيرات بعد اعادة التشغيل</string>
 
-    <string name="signal_icon_autohide_title">اخفاء تلقائي لأيقونة الشبكة</string>
-    <string name="signal_icon_autohide_summary">Auto-hides signal icons for selected SIM slots when SIM card is not inserted, disables \"SIM not inserted\" notifications</string>
-    <string name="sim_slot_1">Auto-hide SIM Slot 1</string>
-    <string name="sim_slot_2">Auto-hide SIM Slot 2</string>
-    <string name="sim_disable_notifications">تعطيل الاشعارات</string>
-    <string name="sim_disable_notifications_summary">\"SIM not inserted\" notifications disabled</string>
-
     <string name="poweroff_advanced_title">قائمة اعادة التشغيل المتقدمة</string>
     <string name="poweroff_advanced_summary">Enables advanced reboot menu with options to reboot to recovery</string>
     <string name="poweroff_recovery">Recovery</string>
