@@ -125,10 +125,6 @@
     <string name="fix_tts_settings_title">Επιδιόρθωση ρυθμίσεων ομιλίας</string>
     <string name="fix_tts_settings_summary">Ξεκλειδώνει τις ρυθμίσεις τη φωνητικής αναζήτησης και του κειμένου σε ομιλία στη Γλώσσα&amp;Εισαγωγής (απαιτείται επανεκκίνηση)</string>
 
-    <!--  Advanced developer options -->
-    <string name="fix_dev_opts_title">Προχωρημένες επιλογές προγραμματιστή</string>
-    <string name="fix_dev_opts_summary">Ξεκλειδώνει προχωρημένες επιλογές προγραμματιστή (απαιτείται επανεκκίνηση)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Βελτιώσεις της Γραμμής Κατάστασης</string>
     <string name="pref_cat_statusbar_summary">Περιέχει διάφορες βελτιώσεις της Γραμμής Κατάστασης</string>

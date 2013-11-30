@@ -89,8 +89,6 @@
     <string name="statusbar_bgcolor_summary">Umożliwia wybór tła i przezroczystości paska statusu</string>
     <string name="fix_tts_settings_title">Napraw ustawienia mowy</string>
     <string name="fix_tts_settings_summary">Odblokowuje Wyszukiwanie Głosowe i Przetwarzanie Tekstu Na Mowę w ustawieniach Język, Klawiatura, Głos (wymagany restart)</string>
-    <string name="fix_dev_opts_title">Zaawansowane opcje deweloperskie</string>
-    <string name="fix_dev_opts_summary">Odblokowuje dodatkowe opcje deweloperskie (wymagany restart)</string>
     <string name="pref_cat_statusbar_title">Ustawienia paska statusu</string>
     <string name="pref_cat_statusbar_summary">Zawiera różne dodatkowe ustawienia dla paska statusu</string>
     <string name="pref_cat_misc_title">Różne ulepszenia</string>

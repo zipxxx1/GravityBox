@@ -96,10 +96,6 @@
     <string name="fix_tts_settings_title">Fix impostazioni voce</string>
     <string name="fix_tts_settings_summary">Sblocca la ricerca vocale e le impostazioni text-to-speech in \"Lingua e immissione\" (richiede riavvio)</string>
 
-    <!-- Advanced developer options -->
-    <string name="fix_dev_opts_title">Opzioni sviluppatore</string>
-    <string name="fix_dev_opts_summary">Sblocca impostazioni sviluppatore avanzate (richiede riavvio)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Modifiche statusbar</string>
     <string name="pref_cat_statusbar_summary">Contiene varie modifiche alla statusbar</string>

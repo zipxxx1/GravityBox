@@ -15,8 +15,10 @@
 
 package com.ceco.gm2.gravitybox;
 
+import android.content.res.XModuleResources;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModSettings {
     private static final String TAG = "GB:ModSettings";
@@ -25,6 +27,26 @@ public class ModSettings {
 
     private static void log (String message) {
         XposedBridge.log(TAG + ": " + message);
+    }
+
+    public static void initPackageResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
+        try {
+            XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
+            resparam.res.setReplacement(PACKAGE_NAME, "array", "window_animation_scale_entries",
+                    modRes.fwd(R.array.window_animation_scale_entries));
+            resparam.res.setReplacement(PACKAGE_NAME, "array", "window_animation_scale_values",
+                    modRes.fwd(R.array.window_animation_scale_values));
+            resparam.res.setReplacement(PACKAGE_NAME, "array", "transition_animation_scale_entries",
+                    modRes.fwd(R.array.transition_animation_scale_entries));
+            resparam.res.setReplacement(PACKAGE_NAME, "array", "transition_animation_scale_values",
+                    modRes.fwd(R.array.transition_animation_scale_values));
+            resparam.res.setReplacement(PACKAGE_NAME, "array", "animator_duration_scale_entries",
+                    modRes.fwd(R.array.animator_duration_scale_entries));
+            resparam.res.setReplacement(PACKAGE_NAME, "array", "animator_duration_scale_values",
+                    modRes.fwd(R.array.animator_duration_scale_values));
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {

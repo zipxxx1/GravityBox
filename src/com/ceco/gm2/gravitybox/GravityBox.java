@@ -51,13 +51,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         SystemWideResources.initResources(prefs);
 
-        // MTK specific
-        if (Utils.isMtkDevice()) {
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_DEV_OPTS, false)) {
-                FixDevOptions.initZygote();
-            }
-        }
-
         // 4.2+ only
         if (Build.VERSION.SDK_INT > 16) {
             ModElectronBeam.initZygote(prefs);
@@ -94,8 +87,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModStatusBar.initResources(prefs, resparam);
         }
 
-        if (resparam.packageName.equals(FixDevOptions.PACKAGE_NAME)) {
-            FixDevOptions.initPackageResources(prefs, resparam);
+        if (resparam.packageName.equals(ModSettings.PACKAGE_NAME)) {
+            ModSettings.initPackageResources(prefs, resparam);
         }
 
         if (Build.VERSION.SDK_INT > 16 && resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
@@ -133,11 +126,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_TTS_SETTINGS, false) &&
                     lpparam.packageName.equals(FixTtsSettings.PACKAGE_NAME)) {
                 FixTtsSettings.init(prefs, lpparam.classLoader);
-            }
-
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_DEV_OPTS, false) &&
-                    lpparam.packageName.equals(FixDevOptions.PACKAGE_NAME)) {
-                FixDevOptions.init(prefs, lpparam.classLoader);
             }
 
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_MMS_WAKELOCK, false) && 

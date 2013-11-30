@@ -112,10 +112,6 @@
     <string name="fix_tts_settings_title">スピーチ設定の表示</string>
     <string name="fix_tts_settings_summary">設定の言語と入力で音声検索とTTSの項目を表示します。(要再起動)</string>
 
-    <!--  Advanced developer options -->
-    <string name="fix_dev_opts_title">開発者オプションの表示</string>
-    <string name="fix_dev_opts_summary">開発者オプションを表示します。(要再起動)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">ステータスバー設定</string>
     <string name="pref_cat_statusbar_summary">ステータスバーに関連した設定を変更します。</string>

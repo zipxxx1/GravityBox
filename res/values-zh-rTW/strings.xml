@@ -112,10 +112,6 @@
     <string name="fix_tts_settings_title">修正語音設定</string>
     <string name="fix_tts_settings_summary">解鎖位在語言與輸入設定內的「文字轉語音輸出」設定（需要重新啟動）</string>
 
-    <!--  Advanced developer options -->
-    <string name="fix_dev_opts_title">進階的開發人員選項</string>
-    <string name="fix_dev_opts_summary">解鎖進階的開發人員選項（需要重新啟動）</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">狀態列校正</string>
     <string name="pref_cat_statusbar_summary">包含各種狀態列的校正選項</string>

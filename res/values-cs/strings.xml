@@ -113,10 +113,6 @@
     <string name="fix_tts_settings_title">Opravit nastavení řeči</string>
     <string name="fix_tts_settings_summary">Odemkne nastavení výstupu převodu textu na řeč v nastavení Jazyk&amp;vstup (vyžaduje restart)</string>
 
-    <!--  Advanced developer options -->
-    <string name="fix_dev_opts_title">Rozšířené možnosti pro vývojáře</string>
-    <string name="fix_dev_opts_summary">Odemkne rozšířené nastavení pro vývojáře (vyžaduje restart)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Nastavení stavového řádku</string>
     <string name="pref_cat_statusbar_summary">Obsahuje různá nastavení stavového řádku</string>

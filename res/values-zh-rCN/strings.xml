@@ -127,10 +127,6 @@
     <string name="fix_tts_settings_title">修正语音设置</string>
     <string name="fix_tts_settings_summary">解锁语言与输入设置内的“语音搜索”及“文字转语音输出”设置（需要重新启动）</string>
 
-    <!--  Advanced developer options -->
-    <string name="fix_dev_opts_title">高级开发人员选项</string>
-    <string name="fix_dev_opts_summary">解锁高级开发人员选项（需要重新启动）</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">状态栏调整</string>
     <string name="pref_cat_statusbar_summary">包含各种状态栏的调整选项</string>

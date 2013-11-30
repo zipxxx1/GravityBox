@@ -125,10 +125,6 @@
     <string name="fix_tts_settings_title">Javítja a beszéd beállításokat</string>
     <string name="fix_tts_settings_summary">Elérhetővé teszi a hangalapú keresést és a szövegfelolvasó kimenetet a Nyelv és Bevitel-ben (újraindítás szükséges)</string>
 
-    <!--  Advanced developer options -->
-    <string name="fix_dev_opts_title">Fejlett fejlesztői lehetőségek</string>
-    <string name="fix_dev_opts_summary">Elérhetővé teszi a fejlett fejlesztői lehetőségeket (újraindítás szükséges)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Állapotsáv módosítások</string>
     <string name="pref_cat_statusbar_summary">Különféle Állapotsáv módosításokat tartalmaz</string>

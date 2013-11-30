@@ -121,10 +121,6 @@
     <string name="fix_tts_settings_title">Fix spraak instellingen</string>
     <string name="fix_tts_settings_summary">Ontsluit voice search en text-to-speech instellingen in Taal&amp;Invoer (vereist herstart)</string>
 
-    <!--  Advanced developer options -->
-    <string name="fix_dev_opts_title">Geavanceerde ontwikkelaars opties</string>
-    <string name="fix_dev_opts_summary">Ontgrendelt geavanceerde developer opties (vereist herstart)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Statusbalk tweaks</string>
     <string name="pref_cat_statusbar_summary">Bevat verschillende statusbalk tweaks</string>

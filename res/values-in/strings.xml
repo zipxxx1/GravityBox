@@ -127,10 +127,6 @@
     <string name="fix_tts_settings_title">Perbaiki setting Bicara</string>
     <string name="fix_tts_settings_summary">Membuka kunci setting pencarian suara dan text-to-speech di setting Bahasa&amp;Masukan (membutuhkan reboot)</string>
 
-    <!--  Advanced developer options -->
-    <string name="fix_dev_opts_title">Opsi pengembang tingkat lanjut</string>
-    <string name="fix_dev_opts_summary">Membuka kunci opsi pengembang tingkat lanjut (membutuhkan reboot)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Tweak statusbar</string>
     <string name="pref_cat_statusbar_summary">Berisi berbagai macam tweak untuk statusbar</string>
