@@ -516,13 +516,6 @@
     <string name="pref_cat_phone_messaging_title">Tin nhắn</string>
     <string name="pref_cat_phone_mobile_data_title">Dữ liệu</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Chuyển ký tự unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Chuyển đổi ký tự unicode sang ký tự thường. Giảm dung lượng tin nhắn.</string>
-    <string name="unicode_stripping_leave_intact">Để ký tự nguyên vẹn</string>
-    <string name="unicode_stripping_non_encodable">Dải ký tự ko nguyên vẹn</string>
-    <string name="unicode_stripping_all">Chuyển đổi toàn bộ unicode</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Màu phần trăm pin gốc</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Thay đổi màu đồng hồ, phầm trăm và vòng tròn pin theo màu biểu tượng pin gốc, Áp dụng khi màu của biểu tượng tắt.</string>

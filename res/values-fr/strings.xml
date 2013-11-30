@@ -533,13 +533,6 @@
     <string name="pref_cat_phone_messaging_title">Messagerie</string>
     <string name="pref_cat_phone_mobile_data_title">Données mobile</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Alléger unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Convertit les caractères unicode en caractères normaux. Réduit la taille globale du message</string>
-    <string name="unicode_stripping_leave_intact">Laisser les caractères tels quels</string>
-    <string name="unicode_stripping_non_encodable">Alléger les caractères non-encodables</string>
-    <string name="unicode_stripping_all">Alléger tous les caractères unicode</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Adopter la couleur de batterie d\'origine</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Permet d\'utiliser la couleur de l\'icône de la batterie d\'origine dans la barre d\'état pour l\'horloge, la batterie circulaire et le pourcentage. Valable lorsque la coloration personnalisée des icônes est désactivée</string>

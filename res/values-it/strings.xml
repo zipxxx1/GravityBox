@@ -489,13 +489,6 @@
     <string name="pref_cat_phone_telephony_title">Telefonate</string>
     <string name="pref_cat_phone_messaging_title">Messaggistica</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Elimina Unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Converte i caratteri unicode in normali caratteri. Diminuisce la dimensione totale del messaggio.</string>
-    <string name="unicode_stripping_leave_intact">Lascia caratteri invariati</string>
-    <string name="unicode_stripping_non_encodable">Elimina caratteri non convertibili</string>
-    <string name="unicode_stripping_all">Elimina tutti i caratteri unicode</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Segui il colore dell\'icona batteria stock</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Imposta colore dell\'orologio nella barra di stato, percentuale, e icona batteria come quello dell\'icona stock. Attivabile se impostazioni colore icone è spento.</string>

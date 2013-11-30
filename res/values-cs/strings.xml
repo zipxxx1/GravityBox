@@ -506,13 +506,6 @@
     <string name="pref_cat_phone_messaging_title">Zprávy</string>
     <string name="pref_cat_phone_mobile_data_title">Mobilní data</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Konverze diakritiky</string>
-    <string name="pref_mms_unicode_stripping_summary">Odstraní diakritiku ze zprávy před jejím odesláním. Snižuje nároky na počet znaků zprávy.</string>
-    <string name="unicode_stripping_leave_intact">Ponechat výchozí</string>
-    <string name="unicode_stripping_non_encodable">Konverze nekódovatelných znaků</string>
-    <string name="unicode_stripping_all">Konverze všech znaků</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Kopírovat barvu stock baterie</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Nastaví barvu hodin, procent baterie a kruhového indikátoru podle barvy stock baterie (pokud je vypnuto vlastní vybarvování)</string>

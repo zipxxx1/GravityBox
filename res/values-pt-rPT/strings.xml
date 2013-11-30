@@ -514,13 +514,6 @@
     <string name="pref_cat_phone_messaging_title">Mensagens</string>
     <string name="pref_cat_phone_mobile_data_title">Dados móveis</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Remover unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Converte caracteres unicode em caracteres normais, permitindo reduzir o tamanho da mensagem</string>
-    <string name="unicode_stripping_leave_intact">Não alterar os caracteres</string>
-    <string name="unicode_stripping_non_encodable">Remover caracteres não encriptáveis</string>
-    <string name="unicode_stripping_all">Remover todos os caracteres unicode</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Associar cor padrão da bateria</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Permite forçar o uso da cor padrão para o indicador de bateria na fonte do relógio, percentagem e no indicador de bateria circular (aplicável quando a coloração dos indicadores está desativada)</string>

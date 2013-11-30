@@ -521,13 +521,6 @@
     <string name="pref_cat_phone_messaging_title">訊息</string>
     <string name="pref_cat_phone_mobile_data_title">行動資料</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">去除 unicode 字符</string>
-    <string name="pref_mms_unicode_stripping_summary">正常字符轉換成 unicode 字符。降低整體郵件大小.</string>
-    <string name="unicode_stripping_leave_intact">保留字符不變</string>
-    <string name="unicode_stripping_non_encodable">去除非可編碼字符</string>
-    <string name="unicode_stripping_all">去除所有 unicode 字符</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">按照預設電池顏色</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">當圖示自訂顏色停用時讓狀態列上的時鐘，電量百分比與圓形電池顯示預設電池顏色.</string>

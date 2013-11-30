@@ -334,11 +334,6 @@
     <string name="pref_cat_phone_telephony_title">Телефонія</string>
     <string name="pref_cat_phone_messaging_title">Повідомлення</string>
     <string name="pref_cat_phone_mobile_data_title">Передача даних</string>
-    <string name="pref_mms_unicode_stripping_title">Змінювати Unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Конвертує Unicode символи в звичайні символи. Зменшує загальний розмір повідомлення.</string>
-    <string name="unicode_stripping_leave_intact">Не скидати символи</string>
-    <string name="unicode_stripping_non_encodable">Змінювати некодовані символи</string>
-    <string name="unicode_stripping_all">Змінювати всі символи Unicode</string>
     <string name="pref_sbcolor_follow_stock_battery_title">Слідувати кольором батареї</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Дозволяє годинах в статусбаре, батареї і тексту з відсотками використовувати колір стокової батареї. Працює при вимкненому зміну кольорів іконок.</string>
     <string name="pref_network_mode_tile_mode_title">Режим тайла Режим мережі</string>

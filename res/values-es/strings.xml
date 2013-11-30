@@ -503,13 +503,6 @@
     <string name="pref_cat_phone_messaging_title">Mensajería</string>
     <string name="pref_cat_phone_mobile_data_title">Datos Móviles</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Quitar unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Convierte caracteres unicode a caracteres normales. Disminuye el tamaño del mensaje.</string>
-    <string name="unicode_stripping_leave_intact">Dejar caracteres intactos</string>
-    <string name="unicode_stripping_non_encodable">Quitar caracteres no codificables</string>
-    <string name="unicode_stripping_all">Quita todos los caracteres unicode</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Usar color de la bateria por defecto</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Hacer que el color del reloj, porcentaje y circulo de bateria usen el color del icono de bateria por defecto. Solo aplica si la coloración esta apagada</string>

@@ -425,11 +425,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED = "gravitybox.intent.action.STATUSBAR_BRIGHTNESS_CHANGED";
     public static final String EXTRA_SB_BRIGHTNESS = "sbBrightness";
 
-    public static final String PREF_KEY_MMS_UNICODE_STRIPPING = "pref_mms_unicode_stripping";
-    public static final String UNISTR_LEAVE_INTACT = "leave_intact";
-    public static final String UNISTR_NON_ENCODABLE = "non_encodable";
-    public static final String UNISTR_ALL = "all";
-
     public static final String PREF_CAT_KEY_PHONE_TELEPHONY = "pref_cat_phone_telephony";
     public static final String PREF_CAT_KEY_PHONE_MESSAGING = "pref_cat_phone_messaging";
     public static final String PREF_CAT_KEY_PHONE_MOBILE_DATA = "pref_cat_phone_mobile_data";

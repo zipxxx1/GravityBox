@@ -507,13 +507,6 @@
     <string name="pref_cat_phone_messaging_title">Mensagens</string>
     <string name="pref_cat_phone_mobile_data_title">Dados móveis</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Strip unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Converts unicode characters to normal characters. Decreases overall message size.</string>
-    <string name="unicode_stripping_leave_intact">Leave characters intact</string>
-    <string name="unicode_stripping_non_encodable">Strip non-encodable characters</string>
-    <string name="unicode_stripping_all">Strip all unicode characters</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Follow stock battery color</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Makes statusbar clock, percentage and circle battery use the color of stock battery icon. Applies when icon coloring is off.</string>

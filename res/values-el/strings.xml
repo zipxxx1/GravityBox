@@ -523,13 +523,6 @@
     <string name="pref_cat_phone_messaging_title">Μηνυμάτων</string>
     <string name="pref_cat_phone_mobile_data_title">δεδομένων κινητής</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Strip unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">μετατρέπει τους χαρακτήρες unicode characters σε κανονικούς. Μειώνει το μέγεθος του μηνύματος.</string>
-    <string name="unicode_stripping_leave_intact">Χαρακτήρες ανέπαφοι</string>
-    <string name="unicode_stripping_non_encodable">Strip non-encodable χαρακτήρες</string>
-    <string name="unicode_stripping_all">Strip όλους τους χαρακτήρες unicode</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Follow προεπιλεγμένο χρώμα μπαταρίας</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">κάνει το ρολόι της statusbar, ποσοστό και κυκλική μπαταρία να χρησιμοποιεί το χρώμα του προεπιλεγμένου εικονίδιου μπαταρίας. Εφαρμόζεται όταν ο χρωματισμός του εικονιδίου είναι off.</string>

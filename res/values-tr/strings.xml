@@ -521,13 +521,6 @@
     <string name="pref_cat_phone_messaging_title">Mesajlaşma</string>
     <string name="pref_cat_phone_mobile_data_title">Mobil veri</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Unicode çıkar</string>
-    <string name="pref_mms_unicode_stripping_summary">Unicode karakterleri normal karakterlere çevirir. Mesaj boyutunu azaltır.</string>
-    <string name="unicode_stripping_leave_intact">Karakterleri olduğu gibi bırak</string>
-    <string name="unicode_stripping_non_encodable">Çevrilmeyen karakterleri çıkar</string>
-    <string name="unicode_stripping_all">Tüm unicode karakterleri çıkar</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Pil rengiyle aynı renk yap</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Durum çubuğu saati, yüzdesi ve çember pildeki renkleri orijinal pil simgesi rengi ile aynı renk yapar. Simge renklendirme kapalıyken uygulanır.</string>

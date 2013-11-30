@@ -529,13 +529,6 @@
     <string name="pref_cat_phone_messaging_title">Сообщения</string>
     <string name="pref_cat_phone_mobile_data_title">Передача данных</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Изменять unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Конвертирует unicode символы в обычные символы. Уменьшает общий размер сообщения.</string>
-    <string name="unicode_stripping_leave_intact">Не изменять символы</string>
-    <string name="unicode_stripping_non_encodable">Изменять некодируемые символы</string>
-    <string name="unicode_stripping_all">Изменять все unicode символы</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Следовать цвету батареи</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Позволяет часам в статусбаре, батарее и тексту с процентами использовать цвет стоковой батареи. Работает при выключенном изменении цветов иконок.</string>

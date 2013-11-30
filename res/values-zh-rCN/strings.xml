@@ -529,13 +529,6 @@
     <string name="pref_cat_phone_messaging_title">短信</string>
     <string name="pref_cat_phone_mobile_data_title">移动数据</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">转换Unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">将Unicode字符转换为普通字符，减少整体信息大小</string>
-    <string name="unicode_stripping_leave_intact">保留字符不变</string>
-    <string name="unicode_stripping_non_encodable">转换不可编码字符</string>
-    <string name="unicode_stripping_all">转换所有Unicode字符</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">保持原厂电池颜色</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">使状态栏时钟、百分比和圆形电池使用原厂电池图标的颜色。当图标颜色关闭时有效</string>

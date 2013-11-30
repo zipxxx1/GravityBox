@@ -527,13 +527,6 @@
     <string name="pref_cat_phone_messaging_title">Üzenetküldés</string>
     <string name="pref_cat_phone_mobile_data_title">Mobil adatátvitel</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Unicode figyelmen kívül hagyása</string>
-    <string name="pref_mms_unicode_stripping_summary">Átkonvertálja az unicode karaktereket normál karakterekké. Csökkenti a teljes üzenet méretét.</string>
-    <string name="unicode_stripping_leave_intact">Karakterek érintetlenül hagyása</string>
-    <string name="unicode_stripping_non_encodable">Nem kódolható karakterek figyelmen kívül hagyása</string>
-    <string name="unicode_stripping_all">Az összes unicode karakter figyelmen kívül hagyása</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Gyári akkumlátor szín követése</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">A gyári akkumlátor ikon színét fogja használni az értesítési sávon az óra  illetve a százalékos és kör akkumlátor használat ikonjaihoz. Kikapcsolt ikonszínezés esetén használandó.</string>

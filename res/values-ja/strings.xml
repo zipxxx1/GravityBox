@@ -518,13 +518,6 @@
     <string name="pref_cat_phone_messaging_title">メッセージ</string>
     <string name="pref_cat_phone_mobile_data_title">モバイルデータ</string>
 
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Unicode変換</string>
-    <string name="pref_mms_unicode_stripping_summary">Unicode文字を通常の文字に変換します。メッセージサイズを削減します。</string>
-    <string name="unicode_stripping_leave_intact">そのままにする</string>
-    <string name="unicode_stripping_non_encodable">エンコードできない文字を変換</string>
-    <string name="unicode_stripping_all">全てのUnicode文字を変換</string>
-
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">標準バッテリー色に合わせる</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">ステータスバーの時計、パーセント表示やサークルバッテリーアイコンの色を標準バッテリーアイコンの色にします。アイコンの色を変更していないときに適用されます。</string>
