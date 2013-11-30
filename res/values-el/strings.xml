@@ -120,8 +120,6 @@
     <string name="pref_cat_statusbar_summary">Περιέχει διάφορες βελτιώσεις της Γραμμής Κατάστασης</string>
     <string name="pref_cat_misc_title">Διάφορες βελτιώσεις</string>
     <string name="pref_cat_misc_summary">Περιλαμβάνει όσες βελτιώσεις δεν ανήκουν σε συγκεκριμένη κατηγορία</string>
-    <string name="pref_cat_fixes_title">Γενικές επιδιορθώσεις</string>
-    <string name="pref_cat_fixes_summary">Περιλαμβάνει συγκεκριμένες επιδιορθώσεις του MTK6589. Μόνο εάν είναι απαραίτητο.</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">Σχετικά</string>

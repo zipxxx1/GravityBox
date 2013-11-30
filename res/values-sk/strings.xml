@@ -106,8 +106,6 @@
     <string name="pref_cat_statusbar_summary">Obsahuje rôzne nastavenia stavového riadku</string>
     <string name="pref_cat_misc_title">Rôzne nastavenia</string>
     <string name="pref_cat_misc_summary">Obsahuje všetky ostatné nastavenia nespadajúce do inej špecifickej kategórie</string>
-    <string name="pref_cat_fixes_title">Všeobecné opravy</string>
-    <string name="pref_cat_fixes_summary">Obsahuje všeobecné opravy špecifické pre MTK6589. Použiť len v prípade potreby</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">O aplikácii</string>

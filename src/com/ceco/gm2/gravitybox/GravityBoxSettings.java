@@ -117,7 +117,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_CALLER_UNKNOWN_PHOTO = "pref_caller_unknown_photo";
     public static final String PREF_KEY_ROAMING_WARNING_DISABLE = "pref_roaming_warning_disable";
     public static final String PREF_KEY_NATIONAL_ROAMING = "pref_national_roaming";
-    public static final String PREF_CAT_KEY_FIXES = "pref_cat_fixes";
     public static final String PREF_CAT_KEY_STATUSBAR = "pref_cat_statusbar";
     public static final String PREF_CAT_KEY_STATUSBAR_QS = "pref_cat_statusbar_qs";
     public static final String PREF_CAT_KEY_STATUSBAR_COLORS = "pref_cat_statusbar_colors";
@@ -659,7 +658,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefSbIconColorEnable;
         private ColorPickerPreference mPrefSbIconColor;
         private ColorPickerPreference mPrefSbDaColor;
-        private PreferenceScreen mPrefCatFixes;
         private PreferenceScreen mPrefCatStatusbar;
         private PreferenceScreen mPrefCatStatusbarQs;
         private CheckBoxPreference mPrefAutoSwitchQs;
@@ -826,7 +824,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbColorSkipBattery = (CheckBoxPreference) findPreference(PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY);
             mPrefSbSignalColorMode = (ListPreference) findPreference(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE);
 
-            mPrefCatFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_FIXES);
             mPrefCatStatusbar = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR);
             mPrefCatStatusbarQs = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_QS);
             mPrefCatStatusbarColors = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_COLORS);
@@ -978,7 +975,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             // Remove MTK specific preferences for non-MTK devices
             if (!Utils.isMtkDevice()) {
-                getPreferenceScreen().removePreference(mPrefCatFixes);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mQuickSettings.setEntries(Build.VERSION.SDK_INT > 18 ? 
                         R.array.qs_tile_aosp_entries_kk : R.array.qs_tile_aosp_entries);

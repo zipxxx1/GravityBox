@@ -122,8 +122,6 @@
     <string name="pref_cat_statusbar_summary">Berisi berbagai macam tweak untuk statusbar</string>
     <string name="pref_cat_misc_title">Tweak lain-lain</string>
     <string name="pref_cat_misc_summary">Berisi semua tweak yang tidak berada di dalam kategori spesifik</string>
-    <string name="pref_cat_fixes_title">Perbaikan umum</string>
-    <string name="pref_cat_fixes_summary">Berisi perbaikan umum yang dikhususkan untuk MTK6589. Gunakan hanya jika dibutuhkan.</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">Tentang</string>

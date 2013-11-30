@@ -120,8 +120,6 @@
     <string name="pref_cat_statusbar_summary">Különféle Állapotsáv módosításokat tartalmaz</string>
     <string name="pref_cat_misc_title">Különféle módosítások</string>
     <string name="pref_cat_misc_summary">Tartalmaz minden egyéb módosítást, ami nem tartozik a többi konkrét kategóriába</string>
-    <string name="pref_cat_fixes_title">Általános javítások</string>
-    <string name="pref_cat_fixes_summary">Általános MTK6589 specifikus javításokat tartalmaz. Csak akkor használja, ha szükséges.</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">A programról...</string>

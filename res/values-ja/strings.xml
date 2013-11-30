@@ -107,8 +107,6 @@
     <string name="pref_cat_statusbar_summary">ステータスバーに関連した設定を変更します。</string>
     <string name="pref_cat_misc_title">その他の設定</string>
     <string name="pref_cat_misc_summary">特定のカテゴリに振り分けられない設定を変更します。</string>
-    <string name="pref_cat_fixes_title">全体的な修正</string>
-    <string name="pref_cat_fixes_summary">MTK6589向けの修正を適用します。必要な場合のみ適用してください。</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">このアプリについて</string>

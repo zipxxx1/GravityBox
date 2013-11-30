@@ -107,8 +107,6 @@
     <string name="pref_cat_statusbar_summary">Contém vários ajustes relacionados com a Barra de Status</string>
     <string name="pref_cat_misc_title">Ajustes diversos</string>
     <string name="pref_cat_misc_summary">Contém todos os ajustes que não são classificados numa categoria específica</string>
-    <string name="pref_cat_fixes_title">Ajustes gerais</string>
-    <string name="pref_cat_fixes_summary">Contém correções gerais para dispositivos baseados no MTK6589. Utilizar apenas caso seja necessário!</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">Acerca</string>

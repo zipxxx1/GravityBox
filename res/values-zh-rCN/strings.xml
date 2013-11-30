@@ -122,8 +122,6 @@
     <string name="pref_cat_statusbar_summary">包含各种状态栏的调整选项</string>
     <string name="pref_cat_misc_title">杂项调整</string>
     <string name="pref_cat_misc_summary">包含所有不属于特定类别的调整选项</string>
-    <string name="pref_cat_fixes_title">通用修正</string>
-    <string name="pref_cat_fixes_summary">包含MTK6589的通用修正，请在有需要时使用</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">关于</string>

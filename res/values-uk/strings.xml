@@ -85,8 +85,6 @@
     <string name="pref_cat_statusbar_summary">Містить деякі налаштування статусбара</string>
     <string name="pref_cat_misc_title">Різні налаштування</string>
     <string name="pref_cat_misc_summary">Містить налаштування, що не відносяться до інших категорій</string>
-    <string name="pref_cat_fixes_title">Загальні налаштування</string>
-    <string name="pref_cat_fixes_summary">"Містить загальні налаштування, пов'язані з MTK6589. Використовувати тільки при необхідності."</string>
     <string name="pref_cat_about_title">Про програму</string>
     <string name="about_gb_summary">Кодується C3C076@XDA. Натисніть для переходу до офіційної темі.</string>
     <string name="about_xposed_title">Експоузд рамках</string>

@@ -122,8 +122,6 @@
     <string name="pref_cat_statusbar_summary">Содержит некоторые настройки статусбара</string>
     <string name="pref_cat_misc_title">Различные настройки</string>
     <string name="pref_cat_misc_summary">Содержит настройки, не относящиеся к другим категориям</string>
-    <string name="pref_cat_fixes_title">Общие настройки</string>
-    <string name="pref_cat_fixes_summary">Содержит общие настройки, относящиеся к MTK6589. Использовать только при необходимости.</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">О программе</string>

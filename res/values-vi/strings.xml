@@ -115,8 +115,6 @@
     <string name="pref_cat_statusbar_summary">Tùy chỉnh các trạng thái khác nhau</string>
     <string name="pref_cat_misc_title">Tùy chỉnh khác</string>
     <string name="pref_cat_misc_summary">Gồm tất cả các tinh chỉnh khác không thuộc thể loại cụ thể</string>
-    <string name="pref_cat_fixes_title">Sửa lỗi chung</string>
-    <string name="pref_cat_fixes_summary">Gồm các lỗi chung MTK6589. Chỉ sử dụng nếu cần thiết.</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">Giới thiệu</string>

@@ -100,8 +100,6 @@
     <string name="pref_cat_statusbar_summary">Contiene diversos ajustes relacionados a la barra de estado</string>
     <string name="pref_cat_misc_title">Personalizaciones varias</string>
     <string name="pref_cat_misc_summary">Personalizaciones que no tienen cabida en otras categorias</string>
-    <string name="pref_cat_fixes_title">Parches generales</string>
-    <string name="pref_cat_fixes_summary">Parches para MTK6589. Usar solo en caso necesario.</string>
 	
 	<!-- About -->
     <string name="pref_cat_about_title">Acerca de</string>

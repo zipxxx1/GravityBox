@@ -122,8 +122,6 @@
     <string name="pref_cat_statusbar_summary">Regroupe diverses modifications de la barre d\'état</string>
     <string name="pref_cat_misc_title">Autres modifications</string>
     <string name="pref_cat_misc_summary">Regroupe toutes les modifications ne correspondant pas aux autres catégories</string>
-    <string name="pref_cat_fixes_title">Corrections générales de bugs</string>
-    <string name="pref_cat_fixes_summary">Regroupe les corrections générales de bugs spécifiques au MTK6589</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">À propos</string>

@@ -91,8 +91,6 @@
     <string name="pref_cat_statusbar_summary">Contiene varie modifiche alla statusbar</string>
     <string name="pref_cat_misc_title">Modifiche varie</string>
     <string name="pref_cat_misc_summary">Contiene tutte le altre modifiche che non ricadono in categorie specifiche</string>
-    <string name="pref_cat_fixes_title">Fix generali</string>
-    <string name="pref_cat_fixes_summary">Contiene fix generali per MTK6589. Usa solo se necessario.</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">About</string>

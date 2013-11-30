@@ -1189,13 +1189,6 @@
 
     </PreferenceScreen>
 
-    <PreferenceScreen 
-        android:key="pref_cat_fixes"
-        android:title="@string/pref_cat_fixes_title"
-        android:summary="@string/pref_cat_fixes_summary">
-
-    </PreferenceScreen>
-
     <Preference
         android:key="pref_dual_sim_ringer"
         android:title="@string/dual_sim_ringer_title"
