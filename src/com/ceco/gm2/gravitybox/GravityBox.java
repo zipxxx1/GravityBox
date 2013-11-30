@@ -68,7 +68,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         // 4.2+ only
         if (Build.VERSION.SDK_INT > 16) {
-            FixTraceFlood.initZygote();
             ModElectronBeam.initZygote(prefs);
             if (Build.VERSION.SDK_INT < 19) {
                 ModLockscreen.init(prefs, null);
