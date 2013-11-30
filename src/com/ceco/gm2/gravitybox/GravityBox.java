@@ -70,9 +70,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         if (Build.VERSION.SDK_INT > 16) {
             FixTraceFlood.initZygote();
             ModElectronBeam.initZygote(prefs);
-            if (Build.VERSION.SDK_INT < 19) {
-                ModLockscreen.init(prefs, null);
-            }
+            ModLockscreen.initZygote(prefs);
         }
 
         // Common
@@ -107,13 +105,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         if (Build.VERSION.SDK_INT > 16 && resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
             ModQuickSettings.initResources(prefs, resparam);
-        }
-
-        // KitKat
-        if (Build.VERSION.SDK_INT > 18) {
-            if (resparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
-                ModLockscreen.initPackageResources(prefs, resparam);
-            }
         }
     }
 
@@ -233,13 +224,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         if (lpparam.packageName.equals(ModMms.PACKAGE_NAME)) {
             ModMms.init(prefs, lpparam.classLoader);
-        }
-
-        // KitKat
-        if (Build.VERSION.SDK_INT > 18) {
-            if (lpparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
-                ModLockscreen.init(prefs, lpparam.classLoader);
-            }
         }
     }
 }
