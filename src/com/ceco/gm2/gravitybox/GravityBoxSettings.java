@@ -974,11 +974,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
 //            TODO: rework for KitKat compatibility
-//            getPreferenceScreen().removePreference(mPrefCatTransparencyManager);
-//            mPrefCatDisplay.removePreference(mPrefButtonBacklightNotif);
-//            mPrefCatStatusbarColors.removePreference(mPrefSbFollowStockBattery);
-//            mPrefCatStatusbarColors.removePreference(mStatusbarBgColor);
-//            getPreferenceScreen().removePreference(mPrefCatPhone);
+            getPreferenceScreen().removePreference(mPrefCatTransparencyManager);
+            mPrefCatDisplay.removePreference(mPrefButtonBacklightNotif);
+            mPrefCatStatusbarColors.removePreference(mPrefSbFollowStockBattery);
+            mPrefCatStatusbarColors.removePreference(mStatusbarBgColor);
+            getPreferenceScreen().removePreference(mPrefCatPhone);
 
             // Remove more music volume steps option if necessary
             if (!Utils.shouldAllowMoreVolumeSteps()) {
