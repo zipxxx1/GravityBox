@@ -1609,7 +1609,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         PREF_KEY_NOTIF_COLOR_MODE, NOTIF_BG_COLOR_MODE_OVERLAY));
             } else if (key.equals(PREF_KEY_NOTIF_BACKGROUND_ALPHA)) {
                 intent.setAction(ACTION_NOTIF_BACKGROUND_CHANGED);
-                intent.putExtra(EXTRA_BG_ALPHA, prefs.getInt(PREF_KEY_NOTIF_BACKGROUND_ALPHA, 60));
+                intent.putExtra(EXTRA_BG_ALPHA, prefs.getInt(PREF_KEY_NOTIF_BACKGROUND_ALPHA, 0));
             } else if (key.equals(PREF_KEY_DISABLE_ROAMING_INDICATORS)) {
                 intent.setAction(ACTION_DISABLE_ROAMING_INDICATORS_CHANGED);
                 intent.putExtra(EXTRA_INDICATORS_DISABLED,
