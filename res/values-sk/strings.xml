@@ -504,10 +504,6 @@
     <string name="pref_cat_phone_messaging_title">Správy</string>
     <string name="pref_cat_phone_mobile_data_title">Mobilné dáta</string>
 
-    <!-- Follow stock battery color -->
-    <string name="pref_sbcolor_follow_stock_battery_title">Kopírovať farbu stock batérie</string>
-    <string name="pref_sbcolor_follow_stock_battery_summary">Nastaví farbu hodín, percent batérie a kruhového indikátora podľa farby stock batérie (v prípade ak je vypnuté vlastné vyfarbovanie)</string>
-
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Režim dlaždice typu mobilnej siete</string>
 

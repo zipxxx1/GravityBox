@@ -27,8 +27,6 @@ import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -48,21 +46,19 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     public static final int FLAG_COLORING_ENABLED_CHANGED = 1 << 0;
     public static final int FLAG_SKIP_BATTERY_ICON_CHANGED = 1 << 1;
     public static final int FLAG_SIGNAL_ICON_MODE_CHANGED = 1 << 2;
-    public static final int FLAG_FOLLOW_STOCK_BATTERY_COLOR_CHANGED = 1 << 3;
-    public static final int FLAG_ICON_COLOR_CHANGED = 1 << 4;
-    public static final int FLAG_ICON_COLOR_SECONDARY_CHANGED = 1 << 5;
-    public static final int FLAG_DATA_ACTIVITY_COLOR_CHANGED = 1 << 6;
-    public static final int FLAG_LOW_PROFILE_CHANGED = 1 << 7;
-    public static final int FLAG_ICON_STYLE_CHANGED = 1 << 8;
-    public static final int FLAG_ICON_ALPHA_CHANGED = 1 << 9;
-    private static final int FLAG_ALL = 0x3FF;
+    public static final int FLAG_ICON_COLOR_CHANGED = 1 << 3;
+    public static final int FLAG_ICON_COLOR_SECONDARY_CHANGED = 1 << 4;
+    public static final int FLAG_DATA_ACTIVITY_COLOR_CHANGED = 1 << 5;
+    public static final int FLAG_LOW_PROFILE_CHANGED = 1 << 6;
+    public static final int FLAG_ICON_STYLE_CHANGED = 1 << 7;
+    public static final int FLAG_ICON_ALPHA_CHANGED = 1 << 8;
+    private static final int FLAG_ALL = 0x1FF;
 
     private Context mContext;
     private Resources mGbResources;
     private Resources mSystemUiRes;
     private Map<String, Integer> mWifiIconIds;
     private Map<String, Integer> mMobileIconIds;
-    private Map<String, Integer> mBatteryIconIds;
     private Map<String, Integer[]> mBasicIconIds;
     private Map<String, SoftReference<Drawable>> mIconCache;
     private boolean[] mAllowMobileIconChange;
@@ -79,10 +75,8 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         int[] iconColor;
         int defaultDataActivityColor;
         int[] dataActivityColor;
-        Integer stockBatteryColor;
         int signalIconMode;
         boolean skipBatteryIcon;
-        boolean followStockBatteryColor;
         boolean lowProfile;
         int iconStyle;
         float alphaSignalCluster;
@@ -138,25 +132,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
             mMobileIconIds = Collections.unmodifiableMap(tmpMap);
         }
 
-        tmpMap = new HashMap<String, Integer>();
-        tmpMap.put("stat_sys_battery_0", R.drawable.stat_sys_battery_0);
-        tmpMap.put("stat_sys_battery_15", R.drawable.stat_sys_battery_15);
-        tmpMap.put("stat_sys_battery_35", R.drawable.stat_sys_battery_28);
-        tmpMap.put("stat_sys_battery_49", R.drawable.stat_sys_battery_43);
-        tmpMap.put("stat_sys_battery_60", R.drawable.stat_sys_battery_57);
-        tmpMap.put("stat_sys_battery_75", R.drawable.stat_sys_battery_71);
-        tmpMap.put("stat_sys_battery_90", R.drawable.stat_sys_battery_85);
-        tmpMap.put("stat_sys_battery_100", R.drawable.stat_sys_battery_100);
-        tmpMap.put("stat_sys_battery_charge_anim0", R.drawable.stat_sys_battery_charge_anim0);
-        tmpMap.put("stat_sys_battery_charge_anim15", R.drawable.stat_sys_battery_charge_anim15);
-        tmpMap.put("stat_sys_battery_charge_anim35", R.drawable.stat_sys_battery_charge_anim28);
-        tmpMap.put("stat_sys_battery_charge_anim49", R.drawable.stat_sys_battery_charge_anim43);
-        tmpMap.put("stat_sys_battery_charge_anim60", R.drawable.stat_sys_battery_charge_anim57);
-        tmpMap.put("stat_sys_battery_charge_anim75", R.drawable.stat_sys_battery_charge_anim71);
-        tmpMap.put("stat_sys_battery_charge_anim90", R.drawable.stat_sys_battery_charge_anim85);
-        tmpMap.put("stat_sys_battery_charge_anim100", R.drawable.stat_sys_battery_charge_anim100);
-        mBatteryIconIds = Collections.unmodifiableMap(tmpMap);
-
         Map<String, Integer[]> basicIconMap = new HashMap<String, Integer[]>();
         basicIconMap.put("stat_sys_data_bluetooth", new Integer[] 
                 { R.drawable.stat_sys_data_bluetooth, R.drawable.stat_sys_data_bluetooth });
@@ -189,31 +164,11 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mColorInfo.iconColor = new int[2];
         mColorInfo.defaultDataActivityColor = DEFAULT_DATA_ACTIVITY_COLOR;
         mColorInfo.dataActivityColor = new int[2];
-        mColorInfo.followStockBatteryColor = false;
         mColorInfo.signalIconMode = SI_MODE_STOCK;
         mColorInfo.lowProfile = false;
         mColorInfo.iconStyle = KITKAT;
         mColorInfo.alphaSignalCluster = 1;
         mColorInfo.alphaTextAndBattery = 1;
-        initStockBatteryColor();
-    }
-
-    private void initStockBatteryColor() {
-        try {
-            final int resId = mSystemUiRes.getIdentifier(
-                    "stat_sys_battery_100", "drawable", "com.android.systemui");
-            if (resId != 0) {
-                final Bitmap b = BitmapFactory.decodeResource(mSystemUiRes, resId);
-                final int x = b.getWidth() / 2;
-                final int y = b.getHeight() / 2;
-                mColorInfo.stockBatteryColor = b.getPixel(x, y);
-            }
-            if (DEBUG) log("mStockBatteryColor = " + 
-                    ((mColorInfo.stockBatteryColor != null ) ? 
-                            Integer.toHexString(mColorInfo.stockBatteryColor) : "NULL"));
-        } catch (Throwable t) {
-            log("Error initializing stock battery color: " + t.getMessage());
-        }
     }
 
     @Override
@@ -240,9 +195,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 setColoringEnabled(intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_SB_ICON_COLOR_ENABLE, false));
                 if (DEBUG) log("Icon colors master switch set to: " + isColoringEnabled());
-            } else if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_COLOR_FOLLOW)) {
-                setFollowStockBatteryColor(intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_SB_COLOR_FOLLOW, false));
             } else if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_COLOR_SKIP_BATTERY)) {
                 setSkipBatteryIcon(intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_SB_COLOR_SKIP_BATTERY, false));
@@ -301,11 +253,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     }
 
     public int getDefaultIconColor() {
-        if (mColorInfo.followStockBatteryColor && mColorInfo.stockBatteryColor != null) {
-            return mColorInfo.stockBatteryColor;
-        } else {
-            return Color.WHITE;
-        }
+        return Color.WHITE;
     }
 
     public void setSignalIconMode(int mode) {
@@ -318,19 +266,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
 
     public int getSignalIconMode() {
         return mColorInfo.signalIconMode;
-    }
-
-    public void setFollowStockBatteryColor(boolean follow) {
-//        TODO: rework for KitKat compatibility
-//        if (mColorInfo.followStockBatteryColor != follow) {
-//            mColorInfo.followStockBatteryColor = follow;
-//            mColorInfo.defaultIconColor = getDefaultIconColor();
-//            int flags = FLAG_FOLLOW_STOCK_BATTERY_COLOR_CHANGED;
-//            if (!mColorInfo.coloringEnabled) {
-//                flags |= FLAG_ICON_COLOR_CHANGED;
-//            }
-//            notifyListeners(flags);
-//        }
     }
 
     public int getIconColor(int index) {
@@ -523,47 +458,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
 
     public boolean isMobileIconChangeAllowed() {
         return isMobileIconChangeAllowed(0);
-    }
-
-    public Drawable getBatteryIcon(int level, boolean plugged) {
-        String key = getKeyForBatteryStatus(level, plugged);
-
-        Drawable cd = getCachedDrawable(key);
-        if (cd != null) return cd;
-
-        if (mBatteryIconIds.containsKey(key)) {
-            Drawable d = mGbResources.getDrawable(mBatteryIconIds.get(key)).mutate();
-            d = applyColorFilter(d);
-            setCachedDrawable(key, d);
-            return d;
-        }
-
-        if (DEBUG) log("getBatteryIcon: no drawable for key: " + key);
-        return null;
-    }
-
-    private String getKeyForBatteryStatus(int level, boolean plugged) {
-        String key = plugged ? "stat_sys_battery_charge_anim" : "stat_sys_battery_";
-
-        if (level <= 4) {
-            key += "0";
-        } else if (level <= 15) {
-            key += "15";
-        } else if (level <= 35) {
-            key += "35";
-        } else if (level <= 49) {
-            key += "49";
-        } else if (level <= 60) {
-            key += "60";
-        } else if (level <= 75) {
-            key += "75";
-        } else if (level <= 90) {
-            key += "90";
-        } else if (level <= 100) {
-            key += "100";
-        }
-
-        return key;
     }
 
     public Drawable getBasicIcon(int resId) {

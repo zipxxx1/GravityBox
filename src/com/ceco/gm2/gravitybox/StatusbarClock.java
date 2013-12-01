@@ -47,11 +47,7 @@ public class StatusbarClock implements IconManagerListener {
             if (colorInfo.coloringEnabled) {
                 mClock.setTextColor(colorInfo.iconColor[0]);
             } else {
-                if (colorInfo.followStockBatteryColor && colorInfo.stockBatteryColor != null) {
-                    mClock.setTextColor(colorInfo.stockBatteryColor);
-                } else {
-                    mClock.setTextColor(mDefaultClockColor);
-                }
+                mClock.setTextColor(mDefaultClockColor);
             }
         }
     }

@@ -171,7 +171,8 @@ public class ModBatteryStyle {
                             liparam.res.getIdentifier("battery", "id", PACKAGE_NAME));
                     if (mStockBattery != null) {
                         mStockBattery.setTag("stock_battery");
-                        ModStatusbarColor.setBattery(mStockBattery);
+                        StatusbarBattery sbb = new StatusbarBattery(mStockBattery);
+                        ModStatusbarColor.registerIconManagerListener(sbb);
                     }
                 }
                 

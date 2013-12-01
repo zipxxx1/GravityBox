@@ -503,10 +503,6 @@
     <string name="pref_cat_phone_messaging_title">Mensajería</string>
     <string name="pref_cat_phone_mobile_data_title">Datos Móviles</string>
 
-    <!-- Follow stock battery color -->
-    <string name="pref_sbcolor_follow_stock_battery_title">Usar color de la bateria por defecto</string>
-    <string name="pref_sbcolor_follow_stock_battery_summary">Hacer que el color del reloj, porcentaje y circulo de bateria usen el color del icono de bateria por defecto. Solo aplica si la coloración esta apagada</string>
-
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Modo del ajuste modo de red</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>

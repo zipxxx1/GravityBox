@@ -29,7 +29,6 @@ import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.BatteryManager;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +53,6 @@ public class ModStatusbarColor {
     private static final String CLASS_SIGNAL_CLUSTER_VIEW = Utils.hasGeminiSupport() ? 
             "com.android.systemui.statusbar.SignalClusterViewGemini" :
             "com.android.systemui.statusbar.SignalClusterView";
-    private static final String CLASS_BATTERY_CONTROLLER = "com.android.systemui.statusbar.policy.BatteryController";
     private static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
     private static final String CLASS_POLICY_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
     private static final String CLASS_WINDOW_STATE = "com.android.server.wm.WindowState";
@@ -68,10 +66,6 @@ public class ModStatusbarColor {
 
     private static View mPanelBar;
     private static StatusBarIconManager mIconManager;
-    private static View mBattery;
-    private static int mBatteryLevel;
-    private static boolean mBatteryPlugged;
-    private static Object mBatteryController;
     private static TransparencyManager mTransparencyManager;
     private static Context mContextPwm;
     private static int[] mTransparencyValuesPwm = new int[] { 0, 0, 0, 0};
@@ -82,17 +76,8 @@ public class ModStatusbarColor {
     private static Object mPhoneStatusBar;
     private static StatusbarSignalCluster mSignalCluster;
 
-    static {
-        mBatteryLevel = 0;
-        mBatteryPlugged = false;
-    }
-
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
-    }
-
-    public static void setBattery(View battery) {
-        mBattery = battery;
     }
 
     public static void registerIconManagerListener(IconManagerListener listener) {
@@ -345,7 +330,6 @@ public class ModStatusbarColor {
             final Class<?> phoneStatusbarViewClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_VIEW, classLoader);
             final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
             final Class<?> signalClusterViewClass = XposedHelpers.findClass(CLASS_SIGNAL_CLUSTER_VIEW, classLoader);
-            final Class<?> batteryControllerClass = XposedHelpers.findClass(CLASS_BATTERY_CONTROLLER, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
             final Class<?> statusbarIconViewClass = XposedHelpers.findClass(CLASS_STATUSBAR_ICON_VIEW, classLoader);
             final Class<?> sbTransitionsClass = XposedHelpers.findClass(CLASS_SB_TRANSITIONS, classLoader);
@@ -386,8 +370,6 @@ public class ModStatusbarColor {
                     mIconManager.setDataActivityColor(1,
                             prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, 
                                     StatusBarIconManager.DEFAULT_DATA_ACTIVITY_COLOR));
-                    mIconManager.setFollowStockBatteryColor(prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_STATUSBAR_COLOR_FOLLOW_STOCK_BATTERY, false));
                     try {
                         int signalIconMode = Integer.valueOf(prefs.getString(
                                 GravityBoxSettings.PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "1"));
@@ -440,7 +422,6 @@ public class ModStatusbarColor {
 //                        mBroadcastSubReceivers.add(mTransparencyManager);
 //                    }
 
-                    mBatteryController = XposedHelpers.getObjectField(param.thisObject, "mBatteryController");
                     int bgColor = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_BGCOLOR, Color.BLACK);
                     setStatusbarBgColor(bgColor);
                     if (mIconManager != null) {
@@ -479,30 +460,6 @@ public class ModStatusbarColor {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mTransparencyManager != null) {
                         mTransparencyManager.update();
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(batteryControllerClass, "onReceive",
-                    Context.class, Intent.class, new XC_MethodHook(XCallback.PRIORITY_HIGHEST) {
-
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    Intent intent = (Intent) param.args[1];
-                    if (Intent.ACTION_BATTERY_CHANGED.equals(intent.getAction())) {
-                        mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-                        int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, 
-                                BatteryManager.BATTERY_STATUS_UNKNOWN);
-                        mBatteryPlugged = (status == BatteryManager.BATTERY_STATUS_CHARGING ||
-                                status == BatteryManager.BATTERY_STATUS_FULL);
-                        if (mIconManager != null && mIconManager.isColoringEnabled() && 
-                                !mIconManager.shouldSkipBatteryIcon() && mBattery != null &&
-                                (mBattery instanceof ImageView)) {
-                            Drawable d = mIconManager.getBatteryIcon(mBatteryLevel, mBatteryPlugged);
-                            if (d != null) {
-                                ((ImageView)mBattery).setImageDrawable(d);
-                            }
-                        }
                     }
                 }
             });
@@ -582,35 +539,14 @@ public class ModStatusbarColor {
     private static IconManagerListener mIconManagerListener = new IconManagerListener() {
         @Override
         public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-            final boolean updateBattery = (flags & 
-                    (StatusBarIconManager.FLAG_ICON_COLOR_CHANGED |
-                            StatusBarIconManager.FLAG_SKIP_BATTERY_ICON_CHANGED)) != 0;
             final boolean updateStatusIcons = (flags & 
                     (StatusBarIconManager.FLAG_ICON_COLOR_CHANGED |
                             StatusBarIconManager.FLAG_ICON_STYLE_CHANGED)) != 0;
-            if (updateBattery) {
-                updateBattery();
-            }
             if (updateStatusIcons) {
                 updateStatusIcons();
             }
         }
     };
-
-    private static void updateBattery() {
-        if (mBatteryController != null && mBattery != null) {
-            Intent intent = new Intent(Intent.ACTION_BATTERY_CHANGED);
-            intent.putExtra(BatteryManager.EXTRA_LEVEL, mBatteryLevel);
-            intent.putExtra(BatteryManager.EXTRA_STATUS, mBatteryPlugged ? 
-                    BatteryManager.BATTERY_STATUS_CHARGING :
-                        BatteryManager.BATTERY_STATUS_UNKNOWN);
-            try {
-                XposedHelpers.callMethod(mBatteryController, "onReceive", mBattery.getContext(), intent);
-            } catch (Throwable t) {
-                log("Incompatible battery controller: " + t.getMessage());
-            }
-        }
-    }
 
     private static void updateStatusIcons() {
         if (mPhoneStatusBar == null) return;

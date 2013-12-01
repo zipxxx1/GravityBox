@@ -39,11 +39,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener {
             if (colorInfo.coloringEnabled) {
                 mPercentage.setTextColor(colorInfo.iconColor[0]);
             } else {
-                if (colorInfo.followStockBatteryColor && colorInfo.stockBatteryColor != null) {
-                    mPercentage.setTextColor(colorInfo.stockBatteryColor);
-                } else {
-                    mPercentage.setTextColor(mDefaultColor);
-                }
+                mPercentage.setTextColor(mDefaultColor);
             }
         } else if ((flags & StatusBarIconManager.FLAG_LOW_PROFILE_CHANGED) != 0) {
             mPercentage.setAlpha(colorInfo.lowProfile ? 0.5f : 1);

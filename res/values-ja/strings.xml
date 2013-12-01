@@ -518,10 +518,6 @@
     <string name="pref_cat_phone_messaging_title">メッセージ</string>
     <string name="pref_cat_phone_mobile_data_title">モバイルデータ</string>
 
-    <!-- Follow stock battery color -->
-    <string name="pref_sbcolor_follow_stock_battery_title">標準バッテリー色に合わせる</string>
-    <string name="pref_sbcolor_follow_stock_battery_summary">ステータスバーの時計、パーセント表示やサークルバッテリーアイコンの色を標準バッテリーアイコンの色にします。アイコンの色を変更していないときに適用されます。</string>
-
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">ネットワークモードのタイル</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
