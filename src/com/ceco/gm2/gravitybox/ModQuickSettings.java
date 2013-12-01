@@ -31,6 +31,7 @@ import com.ceco.gm2.gravitybox.quicksettings.AQuickSettingsTile;
 import com.ceco.gm2.gravitybox.quicksettings.ExpandedDesktopTile;
 import com.ceco.gm2.gravitybox.quicksettings.GpsTile;
 import com.ceco.gm2.gravitybox.quicksettings.NetworkModeTile;
+import com.ceco.gm2.gravitybox.quicksettings.NfcTile;
 import com.ceco.gm2.gravitybox.quicksettings.QuickAppTile;
 import com.ceco.gm2.gravitybox.quicksettings.QuickRecordTile;
 import com.ceco.gm2.gravitybox.quicksettings.RingerModeTile;
@@ -129,7 +130,8 @@ public class ModQuickSettings {
             R.id.stay_awake_tileview,
             R.id.screenshot_tileview,
             R.id.gps_tileview,
-            R.id.ringer_mode_tileview
+            R.id.ringer_mode_tileview,
+            R.id.nfc_tileview
         ));
 
         Map<String, Integer> tmpMap = new HashMap<String, Integer>();
@@ -571,6 +573,12 @@ public class ModQuickSettings {
                 LayoutInflater inflater = (LayoutInflater) param.args[1];
 
                 mTiles = new ArrayList<AQuickSettingsTile>();
+
+                if (Utils.hasNfc(mContext)) {
+                    NfcTile nfcTile = new NfcTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                    nfcTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                    mTiles.add(nfcTile);
+                }
 
                 if (Utils.hasGPS(mContext)) {
                     GpsTile gpsTile = new GpsTile(mContext, mGbContext, mStatusBar, mPanelBar);
