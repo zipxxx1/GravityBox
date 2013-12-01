@@ -274,6 +274,8 @@ public class TrafficMeter extends TextView implements IconManagerListener {
                     colorInfo.iconColor[0] : colorInfo.defaultIconColor);
         } else if ((flags & StatusBarIconManager.FLAG_LOW_PROFILE_CHANGED) != 0) {
             setAlpha(colorInfo.lowProfile ? 0 : 1);
+        } else if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
+            setAlpha(colorInfo.alphaTextAndBattery);
         }
     }
 }

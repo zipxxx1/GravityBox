@@ -61,6 +61,7 @@ public class ModStatusbarColor {
     private static final String CLASS_WINDOW_MANAGER_SERVICE = "com.android.server.wm.WindowManagerService";
     private static final String CLASS_STATUSBAR_ICON_VIEW = "com.android.systemui.statusbar.StatusBarIconView";
     private static final String CLASS_STATUSBAR_ICON = "com.android.internal.statusbar.StatusBarIcon";
+    private static final String CLASS_SB_TRANSITIONS = "com.android.systemui.statusbar.phone.PhoneStatusBarTransitions";
     private static final boolean DEBUG = false;
 
     public static final String ACTION_PHONE_STATUSBAR_VIEW_MADE = "gravitybox.intent.action.PHONE_STATUSBAR_VIEW_MADE";
@@ -347,6 +348,7 @@ public class ModStatusbarColor {
             final Class<?> batteryControllerClass = XposedHelpers.findClass(CLASS_BATTERY_CONTROLLER, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
             final Class<?> statusbarIconViewClass = XposedHelpers.findClass(CLASS_STATUSBAR_ICON_VIEW, classLoader);
+            final Class<?> sbTransitionsClass = XposedHelpers.findClass(CLASS_SB_TRANSITIONS, classLoader);
 
             mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
 
@@ -535,6 +537,19 @@ public class ModStatusbarColor {
                 }
             });
 
+            XposedHelpers.findAndHookMethod(sbTransitionsClass, "applyMode",
+                    int.class, boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mIconManager != null) {
+                        final float signalClusterAlpha = (Float) XposedHelpers.callMethod(
+                                param.thisObject, "getNonBatteryClockAlphaFor", (Integer) param.args[0]);
+                        final float textAndBatteryAlpha = (Float) XposedHelpers.callMethod(
+                                param.thisObject, "getBatteryClockAlpha", (Integer) param.args[0]);
+                        mIconManager.setIconAlpha(signalClusterAlpha, textAndBatteryAlpha);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

@@ -54,7 +54,8 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     public static final int FLAG_DATA_ACTIVITY_COLOR_CHANGED = 1 << 6;
     public static final int FLAG_LOW_PROFILE_CHANGED = 1 << 7;
     public static final int FLAG_ICON_STYLE_CHANGED = 1 << 8;
-    private static final int FLAG_ALL = 0x1FF;
+    public static final int FLAG_ICON_ALPHA_CHANGED = 1 << 9;
+    private static final int FLAG_ALL = 0x3FF;
 
     private Context mContext;
     private Resources mGbResources;
@@ -84,6 +85,8 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         boolean followStockBatteryColor;
         boolean lowProfile;
         int iconStyle;
+        float alphaSignalCluster;
+        float alphaTextAndBattery;
     }
 
     private static void log(String message) {
@@ -190,6 +193,8 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mColorInfo.signalIconMode = SI_MODE_STOCK;
         mColorInfo.lowProfile = false;
         mColorInfo.iconStyle = KITKAT;
+        mColorInfo.alphaSignalCluster = 1;
+        mColorInfo.alphaTextAndBattery = 1;
         initStockBatteryColor();
     }
 
@@ -370,6 +375,15 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
             mColorInfo.iconStyle = style;
             clearCache();
             notifyListeners(FLAG_ICON_STYLE_CHANGED);
+        }
+    }
+
+    public void setIconAlpha(float alphaSignalCluster, float alphaTextAndBattery) {
+        if (mColorInfo.alphaSignalCluster != alphaSignalCluster ||
+                mColorInfo.alphaTextAndBattery != alphaTextAndBattery) {
+            mColorInfo.alphaSignalCluster = alphaSignalCluster;
+            mColorInfo.alphaTextAndBattery = alphaTextAndBattery;
+            notifyListeners(FLAG_ICON_ALPHA_CHANGED);
         }
     }
 

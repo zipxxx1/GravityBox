@@ -387,6 +387,8 @@ public class CmCircleBattery extends ImageView implements IconManagerListener {
                     colorInfo.iconColor[0] : colorInfo.defaultIconColor);
         } else if ((flags & StatusBarIconManager.FLAG_LOW_PROFILE_CHANGED) != 0) {
             setLowProfile(colorInfo.lowProfile);
+        } else if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
+            setAlpha(colorInfo.alphaTextAndBattery);
         }
     }
 }

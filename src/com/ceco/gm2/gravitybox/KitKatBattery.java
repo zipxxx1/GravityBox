@@ -324,5 +324,8 @@ public class KitKatBattery extends View implements IconManagerListener {
             setColor(colorInfo.coloringEnabled ?
                     colorInfo.iconColor[0] : colorInfo.defaultIconColor);
         }
+        if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
+            setAlpha(colorInfo.alphaTextAndBattery);
+        }
     }
 }
