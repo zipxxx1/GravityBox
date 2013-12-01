@@ -388,7 +388,7 @@ public class ModStatusbarColor {
                             GravityBoxSettings.PREF_KEY_STATUSBAR_COLOR_FOLLOW_STOCK_BATTERY, false));
                     try {
                         int signalIconMode = Integer.valueOf(prefs.getString(
-                                GravityBoxSettings.PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "0"));
+                                GravityBoxSettings.PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "1"));
                         mIconManager.setSignalIconMode(signalIconMode);
                     } catch (NumberFormatException nfe) {
                         log("Invalid value for PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE preference");

@@ -1379,7 +1379,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_SIGNAL_COLOR_MODE,
-                        Integer.valueOf(prefs.getString(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "0")));
+                        Integer.valueOf(prefs.getString(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "1")));
             } else if (key.equals(PREF_KEY_TM_STATUSBAR_LAUNCHER)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_TM_SB_LAUNCHER, prefs.getInt(PREF_KEY_TM_STATUSBAR_LAUNCHER, 0));

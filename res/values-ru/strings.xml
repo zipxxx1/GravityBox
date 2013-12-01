@@ -672,8 +672,8 @@
 
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">Режим цвета сигнала</string>
-    <string name="signal_color_mode_gb">Использовать иконки GB (с поддержкой уровня)</string>
-    <string name="signal_color_mode_stock">Использовать станд. иконки (без поддержки уровня)</string>
+    <string name="signal_color_mode_gb">Использовать иконки GB</string>
+    <string name="signal_color_mode_stock">Использовать станд. иконки</string>
     <string name="signal_color_mode_disabled">Не применять цвет</string>
 
     <!-- Application launcher -->

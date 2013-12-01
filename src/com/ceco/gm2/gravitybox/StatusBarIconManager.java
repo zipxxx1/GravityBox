@@ -187,7 +187,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mColorInfo.defaultDataActivityColor = DEFAULT_DATA_ACTIVITY_COLOR;
         mColorInfo.dataActivityColor = new int[2];
         mColorInfo.followStockBatteryColor = false;
-        mColorInfo.signalIconMode = SI_MODE_GB;
+        mColorInfo.signalIconMode = SI_MODE_STOCK;
         mColorInfo.lowProfile = false;
         mColorInfo.iconStyle = JELLYBEAN;
         initStockBatteryColor();
