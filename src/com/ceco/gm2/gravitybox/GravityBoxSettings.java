@@ -954,6 +954,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.isMtkDevice()) {
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
+                mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
+                mPrefCatStatusbarColors.removePreference(mPrefSbDaColorSecondary);
             } else {
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {
