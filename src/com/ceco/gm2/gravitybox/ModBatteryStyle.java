@@ -135,7 +135,7 @@ public class ModBatteryStyle {
                         percentTextView.setTextColor(Color.WHITE);
                         percentTextView.setVisibility(View.GONE);
                         mPercentText = new StatusbarBatteryPercentage(percentTextView);
-                        vg.addView(mPercentText.getView());
+                        vg.addView(mPercentText.getView(), vg.getChildCount()-1);
                         if (DEBUG) log("Battery percent text injected");
                     }
                     ModStatusbarColor.registerIconManagerListener(mPercentText);
