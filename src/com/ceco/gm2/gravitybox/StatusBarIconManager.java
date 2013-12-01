@@ -44,15 +44,14 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     public static final int KITKAT = 1;
 
     public static final int FLAG_COLORING_ENABLED_CHANGED = 1 << 0;
-    public static final int FLAG_SKIP_BATTERY_ICON_CHANGED = 1 << 1;
-    public static final int FLAG_SIGNAL_ICON_MODE_CHANGED = 1 << 2;
-    public static final int FLAG_ICON_COLOR_CHANGED = 1 << 3;
-    public static final int FLAG_ICON_COLOR_SECONDARY_CHANGED = 1 << 4;
-    public static final int FLAG_DATA_ACTIVITY_COLOR_CHANGED = 1 << 5;
-    public static final int FLAG_LOW_PROFILE_CHANGED = 1 << 6;
-    public static final int FLAG_ICON_STYLE_CHANGED = 1 << 7;
-    public static final int FLAG_ICON_ALPHA_CHANGED = 1 << 8;
-    private static final int FLAG_ALL = 0x1FF;
+    public static final int FLAG_SIGNAL_ICON_MODE_CHANGED = 1 << 1;
+    public static final int FLAG_ICON_COLOR_CHANGED = 1 << 2;
+    public static final int FLAG_ICON_COLOR_SECONDARY_CHANGED = 1 << 3;
+    public static final int FLAG_DATA_ACTIVITY_COLOR_CHANGED = 1 << 4;
+    public static final int FLAG_LOW_PROFILE_CHANGED = 1 << 5;
+    public static final int FLAG_ICON_STYLE_CHANGED = 1 << 6;
+    public static final int FLAG_ICON_ALPHA_CHANGED = 1 << 7;
+    private static final int FLAG_ALL = 0xFF;
 
     private Context mContext;
     private Resources mGbResources;
@@ -76,7 +75,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         int defaultDataActivityColor;
         int[] dataActivityColor;
         int signalIconMode;
-        boolean skipBatteryIcon;
         boolean lowProfile;
         int iconStyle;
         float alphaSignalCluster;
@@ -195,9 +193,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 setColoringEnabled(intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_SB_ICON_COLOR_ENABLE, false));
                 if (DEBUG) log("Icon colors master switch set to: " + isColoringEnabled());
-            } else if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_COLOR_SKIP_BATTERY)) {
-                setSkipBatteryIcon(intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_SB_COLOR_SKIP_BATTERY, false));
             } else if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_SIGNAL_COLOR_MODE)) {
                 setSignalIconMode(intent.getIntExtra(
                         GravityBoxSettings.EXTRA_SB_SIGNAL_COLOR_MODE,
@@ -239,17 +234,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
             mColorInfo.lowProfile = lowProfile;
             notifyListeners(FLAG_LOW_PROFILE_CHANGED);
         }
-    }
-
-    public void setSkipBatteryIcon(boolean skip) {
-        if (mColorInfo.skipBatteryIcon != skip) {
-            mColorInfo.skipBatteryIcon = skip;
-            notifyListeners(FLAG_SKIP_BATTERY_ICON_CHANGED);
-        }
-    }
-
-    public boolean shouldSkipBatteryIcon() {
-        return mColorInfo.skipBatteryIcon;
     }
 
     public int getDefaultIconColor() {

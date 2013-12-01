@@ -125,7 +125,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR = "pref_statusbar_data_activity_color";
     public static final String PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY = 
             "pref_statusbar_data_activity_color_secondary";
-    public static final String PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY = "pref_statusbar_color_skip_battery";
     public static final String PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE = "pref_statusbar_signal_color_mode";
     public static final String PREF_KEY_STATUSBAR_CENTER_CLOCK = "pref_statusbar_center_clock";
     public static final String PREF_KEY_STATUSBAR_CLOCK_DOW = "pref_statusbar_clock_dow2";
@@ -358,7 +357,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_SB_ICON_COLOR_SECONDARY = "iconColorSecondary";
     public static final String EXTRA_SB_DATA_ACTIVITY_COLOR = "dataActivityColor";
     public static final String EXTRA_SB_DATA_ACTIVITY_COLOR_SECONDARY = "dataActivityColorSecondary";
-    public static final String EXTRA_SB_COLOR_SKIP_BATTERY = "skipBattery";
     public static final String EXTRA_SB_SIGNAL_COLOR_MODE = "signalColorMode";
     public static final String EXTRA_TM_SB_LAUNCHER = "tmSbLauncher";
     public static final String EXTRA_TM_SB_LOCKSCREEN = "tmSbLockscreen";
@@ -696,7 +694,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefNetworkModeTileMode;
         private MultiSelectListPreference mPrefQsTileBehaviourOverride;
         private ListPreference mPrefQsNetworkModeSimSlot;
-        private CheckBoxPreference mPrefSbColorSkipBattery;
         private ListPreference mPrefSbSignalColorMode;
         private CheckBoxPreference mPrefUnplugTurnsOnScreen;
         private MultiSelectListPreference mPrefCallVibrations;
@@ -805,7 +802,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbIconColorEnable = (CheckBoxPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE);
             mPrefSbIconColor = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR);
             mPrefSbDaColor = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR);
-            mPrefSbColorSkipBattery = (CheckBoxPreference) findPreference(PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY);
             mPrefSbSignalColorMode = (ListPreference) findPreference(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE);
 
             mPrefCatStatusbar = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR);
@@ -1157,7 +1153,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE)) {
                 mPrefSbIconColor.setEnabled(mPrefSbIconColorEnable.isChecked());
                 mPrefSbDaColor.setEnabled(mPrefSbIconColorEnable.isChecked());
-                mPrefSbColorSkipBattery.setEnabled(mPrefSbIconColorEnable.isChecked());
                 mPrefSbSignalColorMode.setEnabled(mPrefSbIconColorEnable.isChecked());
                 mPrefSbIconColorSecondary.setEnabled(mPrefSbIconColorEnable.isChecked());
                 mPrefSbDaColorSecondary.setEnabled(mPrefSbIconColorEnable.isChecked());
@@ -1363,10 +1358,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_DATA_ACTIVITY_COLOR_SECONDARY,
                         prefs.getInt(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, Color.WHITE));
-            } else if (key.equals(PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY)) {
-                intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
-                intent.putExtra(EXTRA_SB_COLOR_SKIP_BATTERY,
-                        prefs.getBoolean(PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY, false));
             } else if (key.equals(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_SIGNAL_COLOR_MODE,

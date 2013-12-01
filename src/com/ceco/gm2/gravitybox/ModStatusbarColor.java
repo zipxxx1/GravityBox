@@ -377,8 +377,6 @@ public class ModStatusbarColor {
                     } catch (NumberFormatException nfe) {
                         log("Invalid value for PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE preference");
                     }
-                    mIconManager.setSkipBatteryIcon(prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY, false));
                     mIconManager.setColoringEnabled(prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE, false));
                     mBroadcastSubReceivers.add(mIconManager);

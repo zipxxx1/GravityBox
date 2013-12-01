@@ -526,10 +526,6 @@
     <string name="pie_controls_enabled_expanded">Len počas rozšírenej plochy</string>
     <string name="pie_controls_enabled_expanded_navbar">V prípade ak režim rozšírenej plochy skryje navigačnú lištu</string>
 
-    <!-- Icon coloring: preserve stock battery icon -->
-    <string name="pref_statusbar_color_skip_battery_title">Nevyfarbovať stock ikonu batérie</string>
-    <string name="pref_statusbar_color_skip_battery_summary">Použiť v prípade, ak bola stock ikona batérie nahradená inou (napr. použitím externého modu batérie)</string>
-
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">Odpojenie napájania zapne obrazovku</string>
     <string name="pref_unplug_turns_on_screen_summary">Ak aktívne, obrazovka sa zapne automaticky po pripojení/odpojení usb kábla (vyžaduje reštart)</string>

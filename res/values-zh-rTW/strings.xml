@@ -548,11 +548,6 @@
     <string name="pie_controls_enabled_expanded">當全螢幕模式開啟時</string>
     <string name="pie_controls_enabled_expanded_navbar">當全螢幕模式隱藏導航欄時</string>
 
-    <!-- Icon coloring: preserve stock battery icon -->
-    <string name="pref_statusbar_color_skip_battery_title">完整保持預設電池圖示</string>
-    <string name="pref_statusbar_color_skip_battery_summary">當預設電池圖是被換成第三方電池圖示時使用</string>
-
-
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">取消外接傳輸時開啟螢幕</string>
     <string name="pref_unplug_turns_on_screen_summary">啟用時，如果您插入/拔出 USB 傳輸線/電源/其他輸入輸出裝置，螢幕將會開啟 (需要重新啟動)</string>
