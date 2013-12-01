@@ -1358,7 +1358,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUS_ICON_STYLE)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_ICON_STYLE, Integer.valueOf(
-                        prefs.getString(PREF_KEY_STATUS_ICON_STYLE, "0"))); 
+                        prefs.getString(PREF_KEY_STATUS_ICON_STYLE, "1"))); 
             } else if (key.equals(PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_ICON_COLOR_SECONDARY, 

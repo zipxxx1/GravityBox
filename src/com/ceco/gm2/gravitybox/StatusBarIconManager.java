@@ -161,11 +161,11 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 R.drawable.stat_sys_data_bluetooth_connected, 
                 R.drawable.stat_sys_data_bluetooth_connected });
         basicIconMap.put("stat_sys_alarm", new Integer[] {
-                null, R.drawable.stat_sys_alarm_kk });
+                R.drawable.stat_sys_alarm_jb, null });
         basicIconMap.put("stat_sys_ringer_vibrate", new Integer[] { 
-                null, R.drawable.stat_sys_ringer_vibrate_kk });
+                R.drawable.stat_sys_ringer_vibrate_jb, null });
         basicIconMap.put("stat_sys_ringer_silent", new Integer[] {
-                R.drawable.stat_sys_ringer_silent_jb, R.drawable.stat_sys_ringer_silent_kk });
+                R.drawable.stat_sys_ringer_silent_jb, null });
         basicIconMap.put("stat_sys_headset_with_mic", new Integer[] {
                 R.drawable.stat_sys_headset_with_mic_jb, null });
         basicIconMap.put("stat_sys_headset_without_mic", new Integer[] {
@@ -189,7 +189,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mColorInfo.followStockBatteryColor = false;
         mColorInfo.signalIconMode = SI_MODE_STOCK;
         mColorInfo.lowProfile = false;
-        mColorInfo.iconStyle = JELLYBEAN;
+        mColorInfo.iconStyle = KITKAT;
         initStockBatteryColor();
     }
 

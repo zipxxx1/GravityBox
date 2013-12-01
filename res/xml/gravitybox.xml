@@ -290,7 +290,7 @@
                 android:entries="@array/status_icon_style_entries"
                 android:entryValues="@array/status_icon_style_values"
                 android:dependency="pref_statusbar_icon_color_enable"
-                android:defaultValue="0" />
+                android:defaultValue="1" />
 
             <net.margaritov.preference.colorpicker.ColorPickerPreference 
                 android:key="pref_statusbar_icon_color_secondary"

@@ -370,7 +370,7 @@ public class ModStatusbarColor {
                                     mIconManager.getDefaultIconColor()));
                     try {
                         int iconStyle = Integer.valueOf(
-                                prefs.getString(GravityBoxSettings.PREF_KEY_STATUS_ICON_STYLE, "0"));
+                                prefs.getString(GravityBoxSettings.PREF_KEY_STATUS_ICON_STYLE, "1"));
                         mIconManager.setIconStyle(iconStyle);
                     } catch(NumberFormatException nfe) {
                         log("Invalid value for PREF_KEY_STATUS_ICON_STYLE preference");
