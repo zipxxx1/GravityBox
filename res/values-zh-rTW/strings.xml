@@ -747,9 +747,5 @@
     <!-- HW Key Actions: Home and Back actions -->
     <string name="hwkey_action_home">前往桌面</string>
     <string name="hwkey_action_back">返回</string>
-
-    <!-- QS Tile Style -->
-    <string name="pref_qs_tile_style_title">瓷貼風格</string>
-    <string name="pref_qs_tile_style_summary">僅適用於 GravityBox 所推出的瓷貼 (不支援系統預設的瓷貼)</string>
  
 </resources>

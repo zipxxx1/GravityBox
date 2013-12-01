@@ -43,13 +43,10 @@ import com.ceco.gm2.gravitybox.quicksettings.GravityBoxTile;
 import com.ceco.gm2.gravitybox.quicksettings.SyncTile;
 import com.ceco.gm2.gravitybox.quicksettings.VolumeTile;
 import com.ceco.gm2.gravitybox.quicksettings.WifiApTile;
-import com.ceco.gm2.gravitybox.quicksettings.WifiTile;
 
-import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -57,7 +54,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
-import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -106,7 +102,6 @@ public class ModQuickSettings {
     private static boolean mAutoSwitch = false;
     private static int mQuickPulldown = GravityBoxSettings.QUICK_PULLDOWN_OFF;
     private static Method methodGetColumnSpan;
-    private static List<String> mCustomSystemTileKeys;
     private static List<Integer> mCustomGbTileKeys;
     private static Map<String, Integer> mAospTileTags;
     private static Object mQuickSettings;
@@ -120,22 +115,6 @@ public class ModQuickSettings {
     private static List<BroadcastSubReceiver> mBroadcastSubReceivers;
 
     static {
-        mCustomSystemTileKeys = new ArrayList<String>(Arrays.asList(
-            "user_textview",
-            "airplane_mode_textview",
-            "battery_textview",
-            "wifi_textview",
-            "bluetooth_textview",
-            "gps_textview",
-            "data_conn_textview",
-            "rssi_textview",
-            "audio_profile_textview",
-            "brightness_textview",
-            "timeout_textview",
-            "auto_rotate_textview",
-            "settings"
-        ));
-
         mCustomGbTileKeys = new ArrayList<Integer>(Arrays.asList(
             R.id.sync_tileview,
             R.id.wifi_ap_tileview,
@@ -152,9 +131,6 @@ public class ModQuickSettings {
             R.id.gps_tileview,
             R.id.ringer_mode_tileview
         ));
-        if (Utils.isMtkDevice()) {
-            mCustomGbTileKeys.add(R.id.wifi_tileview);
-        }
 
         Map<String, Integer> tmpMap = new HashMap<String, Integer>();
         tmpMap.put("user_textview", 1);
@@ -210,26 +186,34 @@ public class ModQuickSettings {
         }
     };
 
-    private static String getTileKey(View view) {
+    private static String getAospTileKey(View view) {
         if (view == null) return null;
 
-        Resources res = mContext.getResources();
-        for (String key : mCustomSystemTileKeys) {
-            int resId = res.getIdentifier(key, "id", PACKAGE_NAME);
-            if (view.findViewById(resId) != null || 
-                    view.findViewWithTag(mAospTileTags.get(key)) != null) {
+        for (String key : mAospTileTags.keySet()) {
+            if (view.findViewWithTag(mAospTileTags.get(key)) != null) {
                 return key;
             }
         }
+        return null;
+    }
 
-        res = mGbContext.getResources();
-        for (Integer key : mCustomGbTileKeys) {
-            if (view.findViewById(key) != null) {
-                return res.getResourceEntryName(key);
+    private static String getTileKey(View view) {
+        if (view == null) return null;
+
+        String key = null;
+        key = getAospTileKey(view);
+
+        if (key == null) {
+            final Resources res = mGbContext.getResources();
+            for (Integer ikey : mCustomGbTileKeys) {
+                if (view.findViewById(ikey) != null) {
+                    key = res.getResourceEntryName(ikey);
+                    break;
+                }
             }
         }
 
-        return null;
+        return key;
     }
 
     private static void updateTileOrderAndVisibility() {
@@ -297,51 +281,63 @@ public class ModQuickSettings {
         return textView;
     }
 
-    private static void updateTileLayout(FrameLayout container, int orientation) {
-        if (container == null) return;
+    public static class TileLayout {
+        public int numColumns;
+        public int textSize;
+        public int imageSize;
+        public int imageMarginTop;
+        public int imageMarginBottom;
 
-        try {
-            int textSize = 12;
-            final Resources res = container.getResources();
-
-            int imgMarginTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    27, res.getDisplayMetrics());
-            int imgMarginBottom = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    17, res.getDisplayMetrics());
+        public TileLayout(Context context, int numColumns, int orientation) {
+            final Resources res = context.getResources();
+            textSize = 12;
             try {
-                imgMarginTop = res.getDimensionPixelSize(
+                imageMarginTop = res.getDimensionPixelSize(
                         res.getIdentifier("qs_tile_margin_above_icon", "dimen", PACKAGE_NAME));
-                imgMarginBottom = res.getDimensionPixelSize(
+                imageMarginBottom = res.getDimensionPixelSize(
                         res.getIdentifier("qs_tile_margin_below_icon", "dimen", PACKAGE_NAME));
+                imageSize = res.getDimensionPixelSize(
+                        res.getIdentifier("qs_tile_icon_size", "dimen", PACKAGE_NAME));
             } catch (Resources.NotFoundException rnfe) {
-                //
+                final Resources gbRes = mGbContext.getResources();
+                imageMarginTop = gbRes.getDimensionPixelSize(R.dimen.qs_tile_margin_above_icon);
+                imageMarginBottom = gbRes.getDimensionPixelSize(R.dimen.qs_tile_margin_below_icon);
+                imageSize = gbRes.getDimensionPixelSize(R.dimen.qs_tile_icon_size);
             }
-
-            final int imgResId = res.getIdentifier("image", "id", PACKAGE_NAME);
-            final int rssiImgResId = res.getIdentifier("rssi_image", "id", PACKAGE_NAME);
-
             if (orientation == Configuration.ORIENTATION_PORTRAIT) {
                 switch (mNumColumns) {
                     case 4: 
                         textSize = 10;
-                        imgMarginTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                17, res.getDisplayMetrics());
-                        imgMarginBottom = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                11, res.getDisplayMetrics());
+                        imageMarginTop = Math.round(imageMarginTop * 0.6f);
+                        imageMarginBottom = Math.round(imageMarginBottom * 0.6f);
                         break;
                     case 5:
-                        imgMarginTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                10, res.getDisplayMetrics());
-                        imgMarginBottom = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                5, res.getDisplayMetrics());
-                        textSize = 8; 
-                        break;
-                    case 3:
-                    default:
-                        textSize = 12;
+                        textSize = 8;
+                        imageMarginTop = Math.round(imageMarginTop * 0.3f);
+                        imageMarginBottom = Math.round(imageMarginBottom * 0.3f);
                         break;
                 }
             }
+        }
+    }
+
+    private static void updateTileLayout(FrameLayout container, int orientation) {
+        if (container == null) return;
+
+        try {
+            TileLayout tl = new TileLayout(container.getContext(), mNumColumns, orientation);
+
+            // update GB tiles layout
+            if (mTiles != null) {
+                for(AQuickSettingsTile t : mTiles) {
+                    t.updateLayout(tl);
+                }
+            }
+
+            // update AOSP tiles layout
+            final Resources res = container.getResources();
+            final int imgResId = res.getIdentifier("image", "id", PACKAGE_NAME);
+            final int rssiImgResId = res.getIdentifier("rssi_image", "id", PACKAGE_NAME);
 
             final int tileCount = container.getChildCount();
             for(int i = 0; i < tileCount; i++) {
@@ -349,35 +345,34 @@ public class ModQuickSettings {
                 if (viewGroup != null) {
                     TextView textView = findTileTextView(viewGroup);
                     if (textView != null) {
-                        textView.setTextSize(1, textSize);
-                        textView.setSingleLine(false);
-                        textView.setAllCaps(true);
+                        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, tl.textSize);
                     }
-    
-                    // adjust layout in case it's AOSP 4.3+ tile
-                    if (imgResId != 0 && rssiImgResId != 0) {
-                        View img = viewGroup.findViewById(imgResId);
+
+                    // basic tile
+                    View img = null;
+                    if (imgResId != 0) {
+                        img = viewGroup.findViewById(imgResId);
                         if (img != null) {
-                            // basic tile
                             if (img.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
                                 ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) img.getLayoutParams();
-                                lp.topMargin = imgMarginTop;
-                                lp.bottomMargin = imgMarginBottom;
+                                lp.topMargin = tl.imageMarginTop;
+                                lp.bottomMargin = tl.imageMarginBottom;
                                 img.setLayoutParams(lp);
                                 img.requestLayout();
                             }
-                        } else {
-                            // RSSI special tile
-                            img = viewGroup.findViewById(rssiImgResId);
-                            if (img != null && img.getParent() instanceof FrameLayout) {
-                                FrameLayout fl = (FrameLayout) img.getParent();
-                                if (fl.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-                                    ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) fl.getLayoutParams();
-                                    lp.topMargin = imgMarginTop;
-                                    lp.bottomMargin = imgMarginBottom;
-                                    fl.setLayoutParams(lp);
-                                    fl.requestLayout();
-                                }
+                        }
+                    }
+                    // RSSI special tile
+                    if (img == null && rssiImgResId != 0) {
+                        img = viewGroup.findViewById(rssiImgResId);
+                        if (img != null && img.getParent() instanceof FrameLayout) {
+                            FrameLayout fl = (FrameLayout) img.getParent();
+                            if (fl.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+                                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) fl.getLayoutParams();
+                                lp.topMargin = tl.imageMarginTop;
+                                lp.bottomMargin = tl.imageMarginBottom;
+                                fl.setLayoutParams(lp);
+                                fl.requestLayout();
                             }
                         }
                     }
@@ -512,13 +507,12 @@ public class ModQuickSettings {
                         if (DEBUG) log("animateCollapsePanels called from removeNotification method");
 
                         boolean hasFlipSettings = XposedHelpers.getBooleanField(param.thisObject, "mHasFlipSettings");
-                        boolean animating = XposedHelpers.getBooleanField(param.thisObject, "mAnimating");
                         View flipSettingsView = (View) XposedHelpers.getObjectField(param.thisObject, "mFlipSettingsView");
                         Object notificationData = XposedHelpers.getObjectField(mStatusBar, "mNotificationData");
                         int ndSize = (Integer) XposedHelpers.callMethod(notificationData, "size");
                         boolean isShowingSettings = hasFlipSettings && flipSettingsView.getVisibility() == View.VISIBLE;
 
-                        if (ndSize == 0 && !animating && !isShowingSettings) {
+                        if (ndSize == 0 && !isShowingSettings) {
                             // let the original method finish its work
                         } else {
                             if (DEBUG) log("animateCollapsePanels: all notifications removed " +
@@ -577,12 +571,6 @@ public class ModQuickSettings {
                 LayoutInflater inflater = (LayoutInflater) param.args[1];
 
                 mTiles = new ArrayList<AQuickSettingsTile>();
-
-                if (Utils.isMtkDevice()) {
-                    WifiTile wt = new WifiTile(mContext, mGbContext, mStatusBar, mPanelBar, mWifiManager);
-                    wt.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
-                    mTiles.add(wt);
-                }
 
                 if (Utils.hasGPS(mContext)) {
                     GpsTile gpsTile = new GpsTile(mContext, mGbContext, mStatusBar, mPanelBar);
@@ -1027,21 +1015,6 @@ public class ModQuickSettings {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final View tile = (View) param.args[0];
                     tile.setTag(mAospTileTags.get("airplane_mode_textview"));
-                    if (mOverrideTileKeys.contains("airplane_mode_textview")) {
-                        tile.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                final ContentResolver cr = mContext.getContentResolver();
-                                final boolean amOn = Settings.Global.getInt(cr,
-                                        Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
-                                Settings.Global.putInt(cr, Settings.Global.AIRPLANE_MODE_ON,
-                                        amOn ? 0 : 1);
-                                Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-                                intent.putExtra("state", !amOn);
-                                mContext.sendBroadcast(intent);
-                            }
-                        });
-                    }
                 }
             });
         } catch (Throwable t) {

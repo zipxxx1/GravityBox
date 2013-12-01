@@ -26,19 +26,14 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class NetworkModeTile extends AQuickSettingsTile {
+public class NetworkModeTile extends BasicTile {
     private static final String TAG = "GB:NetworkModeTile";
     private static final boolean DEBUG = false;
 
-    private TextView mTextView;
     private int mNetworkType;
     private int mDefaultNetworkType;
     private boolean mAllow3gOnly;
@@ -76,7 +71,6 @@ public class NetworkModeTile extends AQuickSettingsTile {
         super(context, gbContext, statusBar, panelBar);
 
         mOnClick = new View.OnClickListener() {
-            
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(PhoneWrapper.ACTION_CHANGE_NETWORK_TYPE);
@@ -113,25 +107,25 @@ public class NetworkModeTile extends AQuickSettingsTile {
                 }
             }
         };
-    }
 
-    @Override
-    protected void onTileCreate() {
         mLabel = mGbResources.getString(R.string.qs_tile_network_mode);
-
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_network_mode, mTile);
-
-        mTextView = (TextView) mTile.findViewById(R.id.network_mode_tileview);
-
         mDefaultNetworkType = PhoneWrapper.getDefaultNetworkType();
-
         ContentResolver cr = mContext.getContentResolver();
         mNetworkType = Settings.Global.getInt(cr, 
                 PhoneWrapper.PREFERRED_NETWORK_MODE, mDefaultNetworkType);
+    }
 
+    @Override
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_network_mode;
+    }
+
+    @Override
+    protected void onTilePostCreate() {
         SettingsObserver observer = new SettingsObserver(new Handler());
         observer.observe();
+
+        super.onTilePostCreate();
     }
 
     @Override
@@ -186,14 +180,7 @@ public class NetworkModeTile extends AQuickSettingsTile {
                 break;
         }
 
-        mTextView.setText(mLabel);
-        if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
-        }
+        super.updateTile();
     }
 
     private boolean hasLte() {

@@ -28,17 +28,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Environment;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class QuickRecordTile extends AQuickSettingsTile {
+public class QuickRecordTile extends BasicTile {
     private static final String TAG = "GB:QuickRecordTile";
     private static final boolean DEBUG = false;
 
@@ -52,7 +48,6 @@ public class QuickRecordTile extends AQuickSettingsTile {
     private int mRecordingState = STATE_IDLE;
     private MediaPlayer mPlayer;
     private Handler mHandler;
-    private TextView mTextView;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -147,13 +142,16 @@ public class QuickRecordTile extends AQuickSettingsTile {
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_quickrecord, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.quickrecord_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_quickrecord;
+    }
 
+    @Override
+    protected void onTilePostCreate() {
         IntentFilter intentFilter = new IntentFilter(RecordingService.ACTION_RECORDING_STATUS_CHANGED);
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+
+        super.onTilePostCreate();
     }
 
     @Override
@@ -189,14 +187,7 @@ public class QuickRecordTile extends AQuickSettingsTile {
                 break;
         }
 
-        mTextView.setText(mLabel);
-        if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
-        }
+        super.updateTile();
     }
 
     final Runnable autoStopRecord = new Runnable() {

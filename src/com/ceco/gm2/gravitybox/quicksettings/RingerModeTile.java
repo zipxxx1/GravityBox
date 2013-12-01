@@ -26,17 +26,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class RingerModeTile extends AQuickSettingsTile {
+public class RingerModeTile extends BasicTile {
     private static final String TAG = "GB:RingerModeTile";
     private static final boolean DEBUG = false;
 
@@ -53,7 +49,6 @@ public class RingerModeTile extends AQuickSettingsTile {
     private int mRingersIndex;
     private int[] mRingerValues;
     private int mRingerValuesIndex;
-    private TextView mTextView;
     private boolean mHasVibrator;
 
     private AudioManager mAudioManager;
@@ -107,17 +102,20 @@ public class RingerModeTile extends AQuickSettingsTile {
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_ringer_mode, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.ringer_mode_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_ringer_mode;
+    }
 
+    @Override
+    protected void onTilePostCreate() {
         mSettingsObserver = new SettingsObserver(new Handler());
         mSettingsObserver.observe();
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+
+        super.onTilePostCreate();
     }
 
     @Override
@@ -150,15 +148,7 @@ public class RingerModeTile extends AQuickSettingsTile {
             }
         }
 
-        mTextView.setText(mLabel);
-        if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(mDrawableId == R.drawable.ic_qs_ring_off ?
-                    KK_COLOR_OFF : KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
-        }
+        super.updateTile();
     }
 
     protected void toggleState() {
