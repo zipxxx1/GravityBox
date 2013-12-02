@@ -71,6 +71,12 @@ public class SystemPropertyProvider {
                                             getSystemConfigBool(res, "config_showNavigationBar"));
                                     data.putBoolean("unplugTurnsOnScreen", 
                                             getSystemConfigBool(res, "config_unplugTurnsOnScreen"));
+                                    if (DEBUG) {
+                                        log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
+                                        log("isTablet: " + data.getBoolean("isTablet"));
+                                        log("hasNavigationBar: " + data.getBoolean("hasNavigationBar"));
+                                        log("unplugTurnsOnScreen: " + data.getBoolean("unplugTurnsOnScreen"));
+                                    }
                                     receiver.send(RESULT_SYSTEM_PROPERTIES, data);
                                 }
                             }
