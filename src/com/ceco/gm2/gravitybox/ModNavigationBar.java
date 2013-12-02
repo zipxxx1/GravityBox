@@ -43,6 +43,11 @@ public class ModNavigationBar {
     private static final String CLASS_NAVBAR_VIEW = "com.android.systemui.statusbar.phone.NavigationBarView";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_KEY_BUTTON_VIEW = "com.android.systemui.statusbar.policy.KeyButtonView";
+    private static final String CLASS_NAVBAR_TRANSITIONS = 
+            "com.android.systemui.statusbar.phone.NavigationBarTransitions";
+
+    private static final int MODE_OPAQUE = 0;
+    private static final int MODE_LIGHTS_OUT = 3;
 
     private static boolean mAlwaysShowMenukey;
     private static View mNavigationBarView;
@@ -157,6 +162,7 @@ public class ModNavigationBar {
         try {
             final Class<?> navbarViewClass = XposedHelpers.findClass(CLASS_NAVBAR_VIEW, classLoader);
             final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
+            final Class<?> navbarTransitionsClass = XposedHelpers.findClass(CLASS_NAVBAR_TRANSITIONS, classLoader);
 
             mAlwaysShowMenukey = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_MENUKEY, false);
 
@@ -327,6 +333,22 @@ public class ModNavigationBar {
                                 param.thisObject, "mNavigationIconHints");
                         if ((Integer) param.args[0] != navigationIconHints || (Boolean)param.args[1]) {
                             setKeyColor();
+                        }
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(navbarTransitionsClass, "applyMode",
+                    int.class, boolean.class, boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    final int mode = (Integer) param.args[0];
+                    final boolean animate = (Boolean) param.args[1];
+                    final boolean isOpaque = mode == MODE_OPAQUE || mode == MODE_LIGHTS_OUT;
+                    final float alpha = isOpaque ? KeyButtonView.DEFAULT_QUIESCENT_ALPHA : 1f;
+                    for(int i = 0; i < mNavbarViewInfo.length; i++) {
+                        if (mNavbarViewInfo[i] != null && mNavbarViewInfo[i].appLauncherView != null) {
+                            mNavbarViewInfo[i].appLauncherView.setQuiescentAlpha(alpha, animate);
                         }
                     }
                 }
