@@ -99,6 +99,8 @@
     <string name="quick_settings_wifi_off">Wi-Fi off</string>
     <string name="quick_settings_wifi_not_connected">Non connecté</string>
     <string name="quick_settings_wifi_turning_on">Mise en route&#8230;</string>
+    <string name="quick_settings_nfc_on">NFC on</string>
+    <string name="quick_settings_nfc_off">NFC off</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Touches des paramètres rapides</string>
@@ -129,6 +131,7 @@
     <string name="qs_tile_expanded_desktop">Bureau étendu</string>
     <string name="qs_tile_stay_awake">Rester allumé</string>
     <string name="qs_tile_screenshot">Capture d\'écran</string>
+    <string name="qs_tile_nfc">NFC</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -814,4 +817,11 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ajuster la marge inférieure</string>
 
+    <!-- Google Plus -->
+    <string name="pref_about_gplus_title">Communauté Google+</string>
+    <string name="pref_about_gplus_summary">Touchez pour accéder à la communauté GravityBox sur Google+</string>
+ 
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">Permettre le mode réseau LTE</string>
+ 
 </resources>
