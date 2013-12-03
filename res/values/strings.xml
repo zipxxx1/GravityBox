@@ -818,4 +818,7 @@
     <string name="pref_about_gplus_title">Google+ community</string>
     <string name="pref_about_gplus_summary">Touch to visit GravityBox Google+ community</string>
 
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">Allow LTE network mode</string>
+
 </resources>
