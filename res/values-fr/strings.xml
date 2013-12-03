@@ -392,10 +392,6 @@
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ajuster la marge supérieure</string>
 
-    <!-- Disable roaming warnings -->
-    <string name="pref_roaming_warning_disable_title">Avertissements en itinérance</string>
-    <string name="pref_roaming_warning_disable_summary">Désactiver les avertissements lors de l\'envoi de messages ou de l\'émission d\'appels en itinérance</string>
-
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Rechercher</string>
     <string name="app_picker_none">(Aucun)</string>
