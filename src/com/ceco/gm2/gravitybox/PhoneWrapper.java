@@ -148,4 +148,9 @@ public class PhoneWrapper {
             return NT_WCDMA_PREFERRED;
         }
     }
+
+    public static boolean isLteNetworkType(int networkType) {
+        return (networkType >= NT_LTE_CDMA_EVDO &&
+                networkType < NT_MODE_UNKNOWN);
+    }
 }

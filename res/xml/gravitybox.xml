@@ -233,6 +233,11 @@
                 android:entryValues="@array/network_mode_tile_mode_values"
                 android:defaultValue="0" />
 
+            <CheckBoxPreference 
+                android:key="pref_network_mode_tile_lte"
+                android:title="@string/pref_network_mode_tile_lte_title"
+                android:defaultValue="false" />
+
             <ListPreference
                 android:key="pref_qs_network_mode_sim_slot" 
                 android:title="@string/pref_qs_network_mode_sim_slot_title"
