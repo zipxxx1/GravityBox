@@ -84,6 +84,8 @@
     <string name="quick_settings_wifi_off">Wi-Fi vyp</string>
     <string name="quick_settings_wifi_not_connected">Nepripojené</string>
     <string name="quick_settings_wifi_turning_on">Zapína sa&#8230;</string>
+    <string name="quick_settings_nfc_on">NFC zap</string>
+    <string name="quick_settings_nfc_off">NFC vyp</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Dlaždice QuickSettings panelu</string>
@@ -112,7 +114,8 @@
     <string name="qs_tile_volume">Hlasitosť</string>
     <string name="qs_tile_expanded_desktop">Rozšírená plocha</string>
     <string name="qs_tile_stay_awake">Bdenie</string>
-    <string name="qs_tile_screenshot">Screenshot</string>  
+    <string name="qs_tile_screenshot">Screenshot</string>
+    <string name="qs_tile_nfc">NFC</string>  
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Výber farby</string>
@@ -778,5 +781,19 @@
     <!-- HW Key Actions: Home and Back actions -->
     <string name="hwkey_action_home">Domov</string>
     <string name="hwkey_action_back">Späť</string>
+
+    <!-- QS Tile Style -->
+    <string name="pref_qs_tile_style_title">Štýl dlaždíc</string>
+    <string name="pref_qs_tile_style_summary">Týka sa len dlaždíc pridaných z GB (nemá vplyv na originál dlaždice)</string>
+
+    <!-- Clear all recents bottom margin -->
+    <string name="pref_recent_clear_margin_bottom_title">Prispôsobiť spodný okraj</string>
+
+    <!-- Google Plus -->
+    <string name="pref_about_gplus_title">Google+ komunita</string>
+    <string name="pref_about_gplus_summary">Dotykom otvoríte GravityBox Google+ komunitu</string>
+
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">Povoliť LTE typ siete</string>
 
 </resources>
