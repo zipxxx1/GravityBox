@@ -1304,14 +1304,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE)) {
                 mPrefCallerUnknownPhoto.setEnabled(mPrefCallerUnknownPhotoEnable.isChecked());
             }
-
-            if (key == null || key.equals(PREF_KEY_TM_MODE)) {
-                final int tmMode = Integer.valueOf(mPrefs.getString(PREF_KEY_TM_MODE, "3"));
-                mPrefTmSbLauncher.setEnabled((tmMode & TransparencyManager.MODE_STATUSBAR) != 0);
-                mPrefTmSbLockscreen.setEnabled((tmMode & TransparencyManager.MODE_STATUSBAR) != 0);
-                mPrefTmNbLauncher.setEnabled((tmMode & TransparencyManager.MODE_NAVBAR) != 0);
-                mPrefTmNbLockscreen.setEnabled((tmMode & TransparencyManager.MODE_NAVBAR) != 0);
-            }
         }
 
         @Override
