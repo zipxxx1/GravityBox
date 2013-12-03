@@ -43,6 +43,7 @@ public class Utils {
     private static int mDeviceType = -1;
     private static Boolean mIsMtkDevice = null;
     private static Boolean mIsXperiaDevice = null;
+    private static Boolean mIsMotoXtDevice = null;
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     
@@ -125,6 +126,14 @@ public class Utils {
         mIsXperiaDevice = Build.MANUFACTURER.equalsIgnoreCase("sony")
                 && !isMtkDevice();
         return mIsXperiaDevice;
+    }
+
+    public static boolean isMotoXtDevice() {
+        if (mIsMotoXtDevice != null) return mIsMotoXtDevice;
+
+        mIsMotoXtDevice = Build.MANUFACTURER.equalsIgnoreCase("motorola") &&
+                Build.MODEL.toLowerCase().contains("xt10");
+        return mIsMotoXtDevice;
     }
 
     public static boolean hasGeminiSupport() {

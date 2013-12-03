@@ -344,6 +344,14 @@ public class ModQuickSettings {
             final int tileCount = container.getChildCount();
             for(int i = 0; i < tileCount; i++) {
                 ViewGroup viewGroup = (ViewGroup) mContainerView.getChildAt(i);
+                // skip layout update for wifi and signal tiles in case of Moto X
+                // TODO: resolve this temporary hack
+                if (Utils.isMotoXtDevice()) {
+                    final String key = getAospTileKey(viewGroup);
+                    if ("wifi_textview".equals(key) || "rssi_textview".equals(key)) {
+                        continue;
+                    }
+                }
                 if (viewGroup != null) {
                     TextView textView = findTileTextView(viewGroup);
                     if (textView != null) {
