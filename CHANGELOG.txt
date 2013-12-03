@@ -1,3 +1,19 @@
+Changelog 2.8.0 - 03/12/2013
+--------------------------------------
+- Removed previously added KitKat functionality (thanks to bgcngm)
+- Added restriction for max supported SDK - module now can't be installed on KitKat
+- Network mode tile: improved support for LTE
+- Network mode tile: added option to choose whether to use LTE or not
+- Added NFC tile
+- Fixed crash in Autobrightness dialog
+- About: added shortcut to GB Google+ community 
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated French translation (thanks to ch-vox)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Greek translations (thanks to CTCaer) 
+
 Changelog 2.7.6 - 26/11/2013
 --------------------------------------
 - Secondary signal icon color overrides stock orange signal icon independently of SIM Slot (MTK Dual SIMs)
