@@ -799,4 +799,11 @@
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ajustar margem inferior</string>
 
+    <!-- Google Plus -->
+    <string name="pref_about_gplus_title">Comunidade Google+</string>
+    <string name="pref_about_gplus_summary">Carregue para visitar a comunidade GravityBox no Google+</string>
+
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">Permitir modo de rede 4G (LTE)</string>
+
 </resources>
