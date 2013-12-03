@@ -84,6 +84,8 @@
     <string name="quick_settings_wifi_off">Wi-Fi desativado</string>
     <string name="quick_settings_wifi_not_connected">Não ligado</string>
     <string name="quick_settings_wifi_turning_on">A ligar&#8230;</string>
+    <string name="quick_settings_nfc_on">NFC ativado</string>
+    <string name="quick_settings_nfc_off">NFC desativado</string>
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Definições rápidas na Barra de Status</string>
@@ -114,6 +116,7 @@
     <string name="qs_tile_expanded_desktop">Ambiente de trabalho expandido</string>
     <string name="qs_tile_stay_awake">Manter ligado</string>
     <string name="qs_tile_screenshot">Captura de ecrã</string>
+    <string name="qs_tile_nfc">NFC</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Escolher cor</string>
