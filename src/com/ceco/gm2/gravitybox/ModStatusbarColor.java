@@ -276,11 +276,12 @@ public class ModStatusbarColor {
     private static IconManagerListener mIconManagerListener = new IconManagerListener() {
         @Override
         public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-            final boolean updateStatusIcons = (flags & 
-                    (StatusBarIconManager.FLAG_ICON_COLOR_CHANGED |
-                            StatusBarIconManager.FLAG_ICON_STYLE_CHANGED)) != 0;
-            if (updateStatusIcons) {
+            if ((flags & (StatusBarIconManager.FLAG_ICON_COLOR_CHANGED |
+                    StatusBarIconManager.FLAG_ICON_STYLE_CHANGED)) != 0) {
                 updateStatusIcons();
+            }
+            if ((flags & StatusBarIconManager.FLAG_COLORING_ENABLED_CHANGED) != 0) {
+                setStatusbarBgColor();
             }
         }
     };
