@@ -610,7 +610,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SharedPreferences mPrefs;
         private AlertDialog mDialog;
         private MultiSelectListPreference mQuickSettings;
-        private ColorPickerPreference mStatusbarBgColor;
         private Preference mPrefAboutGb;
         private Preference mPrefAboutGplus;
         private Preference mPrefAboutXposed;
@@ -740,7 +739,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefBatteryPercent = (CheckBoxPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT);
             mLowBatteryWarning = (ListPreference) findPreference(PREF_KEY_LOW_BATTERY_WARNING_POLICY);
             mQuickSettings = (MultiSelectListPreference) findPreference(PREF_KEY_QUICK_SETTINGS);
-            mStatusbarBgColor = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_BGCOLOR);
 
             mPrefAboutGb = (Preference) findPreference(PREF_KEY_ABOUT_GRAVITYBOX);
             
@@ -975,7 +973,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // TODO: rework for KitKat compatibility
             getPreferenceScreen().removePreference(mPrefCatTransparencyManager);
             mPrefCatDisplay.removePreference(mPrefButtonBacklightNotif);
-            mPrefCatStatusbarColors.removePreference(mStatusbarBgColor);
             getPreferenceScreen().removePreference(mPrefCatPhone);
 
             // Features not relevant for KitKat but keep them for potential future use

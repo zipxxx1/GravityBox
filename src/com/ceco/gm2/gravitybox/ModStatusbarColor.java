@@ -38,6 +38,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.XC_MethodHook.MethodHookParam;
 import de.robv.android.xposed.callbacks.XCallback;
 
 public class ModStatusbarColor {
@@ -52,15 +53,20 @@ public class ModStatusbarColor {
     private static final String CLASS_STATUSBAR_ICON_VIEW = "com.android.systemui.statusbar.StatusBarIconView";
     private static final String CLASS_STATUSBAR_ICON = "com.android.internal.statusbar.StatusBarIcon";
     private static final String CLASS_SB_TRANSITIONS = "com.android.systemui.statusbar.phone.PhoneStatusBarTransitions";
+    private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
     private static final boolean DEBUG = false;
 
     public static final String ACTION_PHONE_STATUSBAR_VIEW_MADE = "gravitybox.intent.action.PHONE_STATUSBAR_VIEW_MADE";
+
+    private static final int MODE_OPAQUE = 0;
+    private static final int MODE_LIGHTS_OUT = 3;
 
     private static View mPanelBar;
     private static StatusBarIconManager mIconManager;
     private static List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private static Object mPhoneStatusBar;
     private static StatusbarSignalCluster mSignalCluster;
+    private static int mStatusbarBgColor;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -79,8 +85,8 @@ public class ModStatusbarColor {
             if (DEBUG) log("received broadcast: " + intent.toString());
             if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_COLOR_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_BG_COLOR)) {
-                    int bgColor = intent.getIntExtra(GravityBoxSettings.EXTRA_SB_BG_COLOR, Color.BLACK);
-                    setStatusbarBgColor(bgColor);
+                    mStatusbarBgColor = intent.getIntExtra(GravityBoxSettings.EXTRA_SB_BG_COLOR, Color.BLACK);
+                    setStatusbarBgColor();
                 }
             }
 
@@ -99,6 +105,7 @@ public class ModStatusbarColor {
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
             final Class<?> statusbarIconViewClass = XposedHelpers.findClass(CLASS_STATUSBAR_ICON_VIEW, classLoader);
             final Class<?> sbTransitionsClass = XposedHelpers.findClass(CLASS_SB_TRANSITIONS, classLoader);
+            final Class<?> barTransitionsClass = XposedHelpers.findClass(CLASS_BAR_TRANSITIONS, classLoader);
 
             mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
 
@@ -170,8 +177,7 @@ public class ModStatusbarColor {
                     mPhoneStatusBar = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
-                    int bgColor = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_BGCOLOR, Color.BLACK);
-                    setStatusbarBgColor(bgColor);
+                    mStatusbarBgColor = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_BGCOLOR, Color.BLACK);
                     if (mIconManager != null) {
                         mIconManager.registerListener(mIconManagerListener);
                         mIconManager.refreshState();
@@ -236,33 +242,35 @@ public class ModStatusbarColor {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(barTransitionsClass, "getBackgroundColor",
+                    int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mIconManager != null && mIconManager.isColoringEnabled()) {
+                        final Object view = XposedHelpers.getObjectField(param.thisObject, "mView");
+                        final int mode = (Integer) param.args[0];
+                        if (view == mPanelBar && (mode == MODE_OPAQUE || mode == MODE_LIGHTS_OUT)) {
+                            param.setResult(mStatusbarBgColor);
+                        }
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    private static void setStatusbarBgColor(int color) {
-//        TODO: rework for KitKat compatibility
-//        if (mPanelBar != null) {
-//            if (Utils.isXperiaDevice()) {
-//                if (!(mPanelBar.getBackground() instanceof ColorDrawable)) {
-//                    ColorDrawable colorDrawable = new ColorDrawable(color);
-//                    mPanelBar.setBackground(colorDrawable);
-//                    if (DEBUG) log("statusbar view backround replaced with ColorDrawable");
-//                } else {
-//                    ((ColorDrawable) mPanelBar.getBackground()).setColor(color);
-//                }
-//            } else {
-//                if (!(mPanelBar.getBackground() instanceof BackgroundAlphaColorDrawable)) {
-//                    BackgroundAlphaColorDrawable colorDrawable = new BackgroundAlphaColorDrawable(color);
-//                    mPanelBar.setBackground(colorDrawable);
-//                    if (DEBUG) log("statusbar view backround replaced with BackgroundAlphaColorDrawable");
-//                } else {
-//                    ((BackgroundAlphaColorDrawable) mPanelBar.getBackground()).setBgColor(color);
-//                }
-//            }
-//            if (DEBUG) log("statusbar background color set to: " + color);
-//        }
+    private static void setStatusbarBgColor() {
+        if (mPanelBar == null) return;
+
+        try {
+            final Object barTransitions = XposedHelpers.getObjectField(mPanelBar, "mBarTransitions");
+            final int currentMode = (Integer) XposedHelpers.callMethod(barTransitions, "getMode");
+            XposedHelpers.callMethod(barTransitions, "applyModeBackground", -1, currentMode, false);
+        } catch (Throwable t) {
+            log("Error setting statusbar background color: " + t.getMessage());
+        }
     }
 
     private static IconManagerListener mIconManagerListener = new IconManagerListener() {

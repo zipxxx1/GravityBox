@@ -265,16 +265,17 @@
             android:key="pref_cat_statusbar_colors"
             android:title="@string/pref_cat_statusbar_colors_title">
 
-            <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                android:key="pref_statusbar_bgcolor2"
-                android:title="@string/statusbar_bgcolor_title" 
-                android:summary="@string/statusbar_bgcolor_summary"
-                android:defaultValue="@integer/COLOR_BLACK" />
-
             <CheckBoxPreference 
                 android:key="pref_statusbar_icon_color_enable"
                 android:title="@string/pref_statusbar_icon_color_enable_title"
                 android:defaultValue="false" />
+
+            <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                android:key="pref_statusbar_bgcolor2"
+                android:title="@string/statusbar_bgcolor_title" 
+                android:summary="@string/statusbar_bgcolor_summary"
+                android:defaultValue="@integer/COLOR_BLACK"
+                android:dependency="pref_statusbar_icon_color_enable" />
 
             <net.margaritov.preference.colorpicker.ColorPickerPreference 
                 android:key="pref_statusbar_icon_color"
