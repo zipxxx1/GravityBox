@@ -25,7 +25,6 @@ import com.ceco.gm2.gravitybox.R;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.DialogPreference;
@@ -95,7 +94,7 @@ public class AutoBrightnessDialogPreference extends DialogPreference
 
     @Override
     protected void onDialogClosed(boolean positiveResult) {
-        if (positiveResult) {
+        if (positiveResult && mLuxArray != null && mBrightnessArray != null) {
             saveConfig();
             Intent intent = new Intent();
             intent.setAction(ModDisplay.ACTION_SET_AUTOBRIGHTNESS_CONFIG);
