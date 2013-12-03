@@ -758,7 +758,7 @@ public class ModStatusBar {
             final int y = (int) event.getRawY();
             Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneStatusBar, "mHandler");
             int notificationHeaderHeight = 
-                    XposedHelpers.getIntField(mPhoneStatusBar, "mNotificat/ionHeaderHeight");
+                    XposedHelpers.getIntField(mPhoneStatusBar, "mNotificationHeaderHeight");
     
             if (action == MotionEvent.ACTION_DOWN) {
                 mLinger = 0;
