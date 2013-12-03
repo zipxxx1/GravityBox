@@ -52,6 +52,7 @@ public class Utils {
     private static Boolean mHasVibrator = null;
     private static Boolean mHasFlash = null;
     private static Boolean mHasGPS = null;
+    private static Boolean mHasNfc = null;
 
     // Supported MTK devices
     private static final Set<String> MTK_DEVICES = new HashSet<String>(Arrays.asList(
@@ -210,6 +211,19 @@ public class Utils {
             return mHasGPS;
         } catch (Throwable t) {
             mHasGPS = null;
+            return false;
+        }
+    }
+
+    public static boolean hasNfc(Context con) {
+        if (mHasNfc != null) return mHasNfc;
+
+        try {
+            PackageManager pm = con.getPackageManager();
+            mHasNfc = pm.hasSystemFeature(PackageManager.FEATURE_NFC);
+            return mHasNfc;
+        } catch (Throwable t) {
+            mHasNfc = null;
             return false;
         }
     }

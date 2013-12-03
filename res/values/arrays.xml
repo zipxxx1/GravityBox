@@ -81,6 +81,7 @@
         <item>@string/qs_tile_wifi</item>
         <item>@string/qs_tile_wifi_alt</item>
         <item>@string/qs_tile_bluetooth</item>
+        <item>@string/qs_tile_nfc</item>
         <item>@string/qs_tile_gps</item>
         <item>@string/qs_tile_gps_alt</item>
         <item>@string/qs_tile_mobile_data</item>
@@ -111,6 +112,7 @@
         <item>wifi_textview</item>
         <item>wifi_tileview</item>
         <item>bluetooth_textview</item>
+        <item>nfc_tileview</item>
         <item>gps_textview</item>
         <item>gps_tileview</item>
         <item>data_conn_textview</item>
@@ -144,6 +146,7 @@
         <item>@string/qs_tile_battery</item>
         <item>@string/qs_tile_airplane_mode</item>
         <item>@string/qs_tile_bluetooth</item>
+        <item>@string/qs_tile_nfc</item>
         <item>@string/qs_tile_gps</item>
         <item>@string/qs_tile_ringer_mode</item>
         <item>@string/qs_tile_volume</item>
@@ -170,6 +173,7 @@
         <item>battery_textview</item>
         <item>airplane_mode_textview</item>
         <item>bluetooth_textview</item>
+        <item>nfc_tileview</item>
         <item>gps_tileview</item>
         <item>ringer_mode_tileview</item>
         <item>volume_tileview</item>

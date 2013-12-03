@@ -1106,6 +1106,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     if (qsPrefs.contains("network_mode_tileview")) qsPrefs.remove("network_mode_tileview");
                 }
             }
+            if (!Utils.hasNfc(getActivity())) {
+                qsEntries.remove(getString(R.string.qs_tile_nfc));
+                qsEntryValues.remove("nfc_tileview");
+                if (qsPrefs != null && qsPrefs.contains("nfc_tileview")) {
+                    qsPrefs.remove("nfc_tileview");
+                }
+            }
             // and update saved prefs in case it was previously checked in previous versions
             mPrefs.edit().putStringSet(PREF_KEY_QUICK_SETTINGS, qsPrefs).commit();
             mQuickSettings.setEntries(qsEntries.toArray(new CharSequence[qsEntries.size()]));
