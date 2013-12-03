@@ -38,6 +38,13 @@
 
     <string name="reboot_required">Le changement sera pris en compte après redémarrage</string>
 
+    <string name="signal_icon_autohide_title">Masquer les icônes de signal</string>
+    <string name="signal_icon_autohide_summary">Cache automatiquement les icônes de signal pour l\'emplacement SIM sélectionné lorsque la carte SIM n\'est pas insérée, désactive la notification  \"SIM non insérée\"</string>
+    <string name="sim_slot_1">Cacher automatiquement la carte SIM n°1</string>
+    <string name="sim_slot_2">Cacher automatiquement la carte SIM n°2</string>
+    <string name="sim_disable_notifications">Désactiver les notifications</string>
+    <string name="sim_disable_notifications_summary">Message \"SIM non insérée\" désactivé</string>
+
     <string name="poweroff_advanced_title">Menu avancé de redémarrage</string>
     <string name="poweroff_advanced_summary">Active le menu avancé de redémarrage avec la possibilité de redémarrer en mode récupération</string>
     <string name="poweroff_recovery">Récupération</string>
@@ -50,6 +57,20 @@
     <string name="vol_key_cursor_control_on_reverse">Volume haut/bas déplace le curseur à droite/gauche</string>
 
     <string name="recents_clear_all_title">Effacer les tâches récentes</string>
+
+    <string name="fix_datetime_crash_title">Paramètre date et heure</string>
+    <string name="fix_datetime_crash_summary">Activer si vous constatez un plantage lorsque vous accédez au paramètre date et heure (redémarrage nécessaire)</string>
+
+    <string name="fix_caller_id_phone_title">Identification de l\'appelant en téléphonie</string>
+    <string name="fix_caller_id_phone_summary">Activer si vous constatez qu\'un contact enregistré n\'est pas identifié lors d\'un appel entrant (redémarrage nécessaire)</string>
+    <string name="fix_caller_id_phone_alert">Après redémarrage, vous devrez supprimer puis ajouter de nouveau vos contacts pour que le changement prenne effet. Allez dans Paramètres / Applications / Toutes / Liste des contacts / Effacer les données</string>
+
+    <string name="fix_caller_id_mms_title">Identification de l\'émetteur d\'un message</string>
+    <string name="fix_caller_id_mms_summary">Activer si vous constatez plusieurs fils de discussion pour un même contact enregistré (redémarrage nécessaire)</string>
+    <string name="fix_caller_id_mms_alert">Après redémarrage, vous devrez supprimer tous les fils de discussion séparés dans votre messagerie pour que le changement prenne effet</string>
+
+    <string name="fix_calendar_title">Application Agenda</string>
+    <string name="fix_calendar_summary">Activer si vous constatez que votre écran s\'allume de lui-même périodiquement (redémarrage nécessaire)</string>
 
     <string name="important">Important</string>
 
@@ -78,6 +99,8 @@
     <string name="quick_settings_wifi_off">Wi-Fi off</string>
     <string name="quick_settings_wifi_not_connected">Non connecté</string>
     <string name="quick_settings_wifi_turning_on">Mise en route&#8230;</string>
+    <string name="quick_settings_nfc_on">NFC on</string>
+    <string name="quick_settings_nfc_off">NFC off</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Touches des paramètres rapides</string>
@@ -108,6 +131,7 @@
     <string name="qs_tile_expanded_desktop">Bureau étendu</string>
     <string name="qs_tile_stay_awake">Rester allumé</string>
     <string name="qs_tile_screenshot">Capture d\'écran</string>
+    <string name="qs_tile_nfc">NFC</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -117,11 +141,21 @@
     <string name="statusbar_bgcolor_title">Couleur barre d\'état</string>
     <string name="statusbar_bgcolor_summary">Permet de choisir la couleur de fond de la barre d\'état</string>
 
+    <!--  Fix speech settings -->
+    <string name="fix_tts_settings_title">Paramètres liés à la parole</string>
+    <string name="fix_tts_settings_summary">Donne accès à la recherche vocale et au paramètre de saisie vocale dans les paramètres langage et saisie (redémarrage nécessaire)</string>
+
+    <!--  Advanced developer options -->
+    <string name="fix_dev_opts_title">Options avancées (développeurs)</string>
+    <string name="fix_dev_opts_summary">Donne accès aux options avancées pour les développeurs (redémarrage nécessaire)</string>
+
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Modifications barre d\'état</string>
     <string name="pref_cat_statusbar_summary">Regroupe diverses modifications de la barre d\'état</string>
     <string name="pref_cat_misc_title">Autres modifications</string>
     <string name="pref_cat_misc_summary">Regroupe toutes les modifications ne correspondant pas aux autres catégories</string>
+    <string name="pref_cat_fixes_title">Corrections générales de bugs</string>
+    <string name="pref_cat_fixes_summary">Regroupe les corrections générales de bugs spécifiques au MTK6589</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">À propos</string>
@@ -206,6 +240,10 @@
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Activation touche menu</string>
     <string name="pref_lockscreen_menu_key_summary">Permet d\'utiliser la touche menu pour un déverrouillage rapide à partir de l\'écran de déverrouillage (redémarrage nécessaire)</string>
+
+    <!-- Fix messaging wakelock -->
+    <string name="pref_mms_fix_wakelock_title">Allumage à réception de message</string>
+    <string name="pref_mms_fix_wakelock_summary">Permet de ne pas allumer l\'écran à la réception d\'un message (redémarrage nécessaire)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Centrer l\'horloge</string>
@@ -533,6 +571,21 @@
     <string name="pref_cat_phone_messaging_title">Messagerie</string>
     <string name="pref_cat_phone_mobile_data_title">Données mobile</string>
 
+    <!-- Messaging: Strip unicode -->
+    <string name="pref_mms_unicode_stripping_title">Alléger unicode</string>
+    <string name="pref_mms_unicode_stripping_summary">Convertit les caractères unicode en caractères normaux. Réduit la taille globale du message</string>
+    <string name="unicode_stripping_leave_intact">Laisser les caractères tels quels</string>
+    <string name="unicode_stripping_non_encodable">Alléger les caractères non-encodables</string>
+    <string name="unicode_stripping_all">Alléger tous les caractères unicode</string>
+
+    <!-- Disable slow 2G data warning -->
+    <string name="pref_mobile_data_slow2g_disable_title">Désactiver l\'avertissement faible débit 2G</string>
+    <string name="pref_mobile_data_slow2g_disable_summary">Désactive l\'avertissement lié au faible débit des données lorsque l\'on active les données mobile dans les paramètres rapides de SIM en mode 2G</string>
+
+    <!-- Follow stock battery color -->
+    <string name="pref_sbcolor_follow_stock_battery_title">Adopter la couleur de batterie d\'origine</string>
+    <string name="pref_sbcolor_follow_stock_battery_summary">Permet d\'utiliser la couleur de l\'icône de la batterie d\'origine dans la barre d\'état pour l\'horloge, la batterie circulaire et le pourcentage. Valable lorsque la coloration personnalisée des icônes est désactivée</string>
+
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Modalités touche mode réseau</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
@@ -557,6 +610,10 @@
     <string name="pie_controls_enabled_always">Toujours</string>
     <string name="pie_controls_enabled_expanded">Quand le bureau étendu est actif</string>
     <string name="pie_controls_enabled_expanded_navbar">Quand le bureau étendu masque la barre de navigation</string>
+
+    <!-- Icon coloring: preserve stock battery icon -->
+    <string name="pref_statusbar_color_skip_battery_title">Laisser l\'icône d\'origine de la batterie intacte</string>
+    <string name="pref_statusbar_color_skip_battery_summary">À utiliser dans la cas où l\'icône originelle de la batterie serait remplacée par une batterie modifiée de tierce partie</string>
 
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">Activer l\'écran au débranchement</string>
@@ -668,8 +725,8 @@
  
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">Mode couleur pour le signal</string>
-    <string name="signal_color_mode_gb">Utiliser les icônes GravityBox</string>
-    <string name="signal_color_mode_stock">Utiliser les icônes par défaut</string>
+    <string name="signal_color_mode_gb">Utiliser les icônes GravityBox (niveau du signal supporté)</string>
+    <string name="signal_color_mode_stock">Utiliser les icônes par défaut (niveau du signal non supporté)</string>
     <string name="signal_color_mode_disabled">Ne pas modifier les couleurs</string>
  
     <!-- Application launcher -->
@@ -721,6 +778,10 @@
     <string name="pref_navbar_key_color_title">Couleur touche de navigation</string>
     <string name="pref_navbar_key_glow_color_title">Couleur brillance touche de navigation</string>
     <string name="pref_navbar_bg_color_title">Couleur de fond barre de navigation</string>
+
+    <!-- Disable lockscreen shade -->
+    <string name="pref_lockscreen_shade_disable_title">Désactiver le voile sur écran de déverrouillage</string>
+    <string name="pref_lockscreen_shade_disable_summary">Supprime la tinte sombre de l\'écran de déverrouillage</string>
  
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Mode de gestion de la transparence</string>
@@ -748,8 +809,19 @@
     <!-- HW Key Actions: Home and Back actions -->
     <string name="hwkey_action_home">Aller à l\'écran Home</string>
     <string name="hwkey_action_back">Retour</string>
+
+    <!-- QS Tile Style -->
+    <string name="pref_qs_tile_style_title">Style de touche</string>
+    <string name="pref_qs_tile_style_summary">S\'applique uniquement aux touches induites par GravityBox (n\'affecte pas les touches par défaut)</string>
  
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ajuster la marge inférieure</string>
 
+    <!-- Google Plus -->
+    <string name="pref_about_gplus_title">Communauté Google+</string>
+    <string name="pref_about_gplus_summary">Touchez pour accéder à la communauté GravityBox sur Google+</string>
+ 
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">Permettre le mode réseau LTE</string>
+ 
 </resources>
