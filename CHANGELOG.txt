@@ -1,3 +1,38 @@
+Changelog 2.8.0 - 03/12/2013
+--------------------------------------
+- QuickSettings tiles revamped to match KitKat layout
+--- still not perfect on MotoX due to differences in stock ROM. Wifi and Mobile signal should be visible but layout may be broken on Tiles Per Row other than 3
+- Added NFC tile
+- Network mode tile:
+--- better support for LTE
+--- added option to choose whether to use LTE mode or not
+- Added KitKat statusbar alpha transitions to GravityBox statusbar elements
+--- circle battery, traffic meter, battery percentage now follow stock icon alpha transitions
+- Added coloring support to stock battery
+- Adjusted layout of custom KitKat battery style to match stock one
+- Circle battery style adjusted to match size of stock battery icon
+- Fixed position of battery percent text (to the left of stock battery icon)
+- Added KitKat navigation bar alpha transitions to "Navbar app launcher key"
+- Fixed option for setting statusbar background color
+- Fixed option for setting navigation bar background color
+- Fixed "mWifiGroup" errors flooding debug.log on Moto X devices
+--- should also fix signal icon coloring
+- Fixed Expanded Desktop
+- Fixed "Status icon style" option
+- Fixed option for setting more music volume steps
+- Fixed crash in Autobrightness dialog
+- Increased max value of margins for recent tasks elements (RAM bar + clear all recents)
+- Fixed custom lockscreen wallpaper covering album art when music is playing 
+- Removed obsolete functionality not relevant for KitKat
+- Plenty of other small KitKat compatibility fixes and adjustments 
+- About: added shortcut to Google+ GravityBox community
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated French translation (thanks to ch-vox)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Greek translations (thanks to CTCaer) 
+
 Changelog 2.7.6 - 26/11/2013
 --------------------------------------
 - Secondary signal icon color overrides stock orange signal icon independently of SIM Slot (MTK Dual SIMs)
