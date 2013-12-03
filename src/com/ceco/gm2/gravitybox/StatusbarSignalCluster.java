@@ -15,6 +15,8 @@
 
 package com.ceco.gm2.gravitybox;
 
+import java.lang.reflect.Field;
+
 import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
 
@@ -31,10 +33,12 @@ import android.widget.LinearLayout;
 
 public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManagerListener {
     public static final String TAG = "GB:StatusbarSignalCluster";
+    private static final boolean DEBUG = false;
 
     protected LinearLayout mView;
     protected StatusBarIconManager mIconManager;
     protected Resources mResources;
+    private Field mFldWifiGroup;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -54,6 +58,18 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         mView = view;
         mIconManager = iconManager;
         mResources = mView.getResources();
+
+        try {
+            mFldWifiGroup = XposedHelpers.findField(mView.getClass(), "mWifiGroup");
+            if (DEBUG) log("mWifiGroup field found");
+        } catch (NoSuchFieldError nfe) {
+            try {
+                mFldWifiGroup = XposedHelpers.findField(mView.getClass(), "mWifiViewGroup");
+                if (DEBUG) log("mWifiViewGroup field found");
+            } catch (NoSuchFieldError nfe2) {
+                log("Couldn't find WifiGroup field");
+            }
+        }
 
         if (mView != null) {
             try {
@@ -88,7 +104,11 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     protected void apply() {
         try {
-            if (XposedHelpers.getObjectField(mView, "mWifiGroup") != null) {
+            boolean doApply = true;
+            if (mFldWifiGroup != null) {
+                doApply = mFldWifiGroup.get(mView) != null;
+            }
+            if (doApply) {
                 if (mIconManager.isColoringEnabled()) {
                     updateWiFiIcon();
                     if (!XposedHelpers.getBooleanField(mView, "mIsAirplaneMode")) {
