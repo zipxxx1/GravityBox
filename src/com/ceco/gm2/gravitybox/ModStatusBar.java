@@ -100,6 +100,7 @@ public class ModStatusBar {
     private static TrafficMeter mTrafficMeter;
     private static ViewGroup mSbContents;
     private static boolean mClockInSbContents = false;
+    private static boolean mDisableDataNetworkTypeIcons = false;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -402,17 +403,23 @@ public class ModStatusBar {
 
                     // MTK Dual SIMs: reduce space between wifi and signal icons
                     if (Utils.hasGeminiSupport()) {
-                        final int scvResId = liparam.res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
-                        if (scvResId != 0) {
-                            final View scView = liparam.view.findViewById(scvResId);
-                            if (scView != null) {
-                                final int spacerResId = liparam.res.getIdentifier("spacer", "id", PACKAGE_NAME);
-                                final View spacer = scView.findViewById(spacerResId);
-                                if (spacer != null &&
-                                        (spacer.getLayoutParams() instanceof LinearLayout.LayoutParams)) {
-                                    final int spacerSize = (int) spacer.getContext()
-                                            .getResources().getDisplayMetrics().density * 6;
-                                    spacer.setLayoutParams(new LinearLayout.LayoutParams(spacerSize, spacerSize));
+                        prefs.reload();
+                        mDisableDataNetworkTypeIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
+
+                        // but only when data network type icons are not showing
+                        if (mDisableDataNetworkTypeIcons) {
+                            final int scvResId = liparam.res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
+                            if (scvResId != 0) {
+                                final View scView = liparam.view.findViewById(scvResId);
+                                if (scView != null) {
+                                    final int spacerResId = liparam.res.getIdentifier("spacer", "id", PACKAGE_NAME);
+                                    final View spacer = scView.findViewById(spacerResId);
+                                    if (spacer != null &&
+                                            (spacer.getLayoutParams() instanceof LinearLayout.LayoutParams)) {
+                                        final int spacerSize = (int) spacer.getContext()
+                                                .getResources().getDisplayMetrics().density * 6;
+                                        spacer.setLayoutParams(new LinearLayout.LayoutParams(spacerSize, spacerSize));
+                                    }
                                 }
                             }
                         }
@@ -453,9 +460,9 @@ public class ModStatusBar {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         prefs.reload();
-                        boolean hide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
+                        mDisableDataNetworkTypeIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
 
-                        if (hide) param.setResult(-1);
+                        if (mDisableDataNetworkTypeIcons) param.setResult(-1);
                     }
                 });
             }
