@@ -68,6 +68,7 @@ public class ModStatusBar {
     private static final String CLASS_STATUSBAR_NOTIF = Build.VERSION.SDK_INT > 17 ?
             "android.service.notification.StatusBarNotification" :
             "com.android.internal.statusbar.StatusBarNotification";
+    private static final String CLASS_DEFAULT_STATUSBAR_PLUGIN = "com.mediatek.systemui.ext.DefaultStatusBarPlugin";
     private static final boolean DEBUG = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
@@ -443,6 +444,21 @@ public class ModStatusBar {
             final Class<?> phoneStatusBarPolicyClass = 
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_POLICY, classLoader);
             final Class<?> powerManagerClass = XposedHelpers.findClass(CLASS_POWER_MANAGER, classLoader);
+
+            if (Utils.hasGeminiSupport()) {
+                final Class<?> defSBPluginClass = XposedHelpers.findClass(CLASS_DEFAULT_STATUSBAR_PLUGIN, classLoader);
+
+                XposedHelpers.findAndHookMethod(defSBPluginClass, "getDataNetworkTypeIconGemini",
+                        "com.mediatek.systemui.ext.NetworkType", int.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        prefs.reload();
+                        boolean hide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
+
+                        if (hide) param.setResult(-1);
+                    }
+                });
+            }
 
             final Class<?>[] loadAnimParamArgs = new Class<?>[2];
             loadAnimParamArgs[0] = int.class;

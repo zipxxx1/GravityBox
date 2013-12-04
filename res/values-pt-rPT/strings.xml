@@ -809,4 +809,8 @@
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Permitir modo de rede 4G (LTE)</string>
 
+    <!-- Disable data network type icons -->
+    <string name="pref_disable_data_network_type_icons_title">Desativar indicadores de tipo de rede</string>
+    <string name="pref_disable_data_network_type_icons_summary">Permite desativar os indicadores 3G/G que se encontram ao lado das barras de sinal</string>
+
 </resources>

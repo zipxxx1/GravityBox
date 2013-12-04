@@ -91,6 +91,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int BATTERY_WARNING_SOUND = 2;
 
     public static final String PREF_KEY_SIGNAL_ICON_AUTOHIDE = "pref_signal_icon_autohide";
+    public static final String PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS = "pref_disable_data_network_type_icons";
     public static final String PREF_KEY_DISABLE_ROAMING_INDICATORS = "pref_disable_roaming_indicators";
     public static final String ACTION_DISABLE_ROAMING_INDICATORS_CHANGED = "gravitybox.intent.action.DISABLE_ROAMING_INDICATORS_CHANGED";
     public static final String EXTRA_INDICATORS_DISABLED = "indicatorsDisabled";
@@ -694,6 +695,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private Preference mPrefNotifImagePortrait;
         private Preference mPrefNotifImageLandscape;
         private ListPreference mPrefNotifColorMode;
+        private CheckBoxPreference mPrefDisableDataNetworkTypeIcons;
         private CheckBoxPreference mPrefDisableRoamingIndicators;
         private ListPreference mPrefButtonBacklightMode;
         private ListPreference mPrefPieEnabled;
@@ -870,6 +872,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNotifImageLandscape = (Preference) findPreference(PREF_KEY_NOTIF_IMAGE_LANDSCAPE);
             mPrefNotifColorMode = (ListPreference) findPreference(PREF_KEY_NOTIF_COLOR_MODE);
 
+            mPrefDisableDataNetworkTypeIcons = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS);
             mPrefDisableRoamingIndicators = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_ROAMING_INDICATORS);
             mPrefButtonBacklightMode = (ListPreference) findPreference(PREF_KEY_BUTTON_BACKLIGHT_MODE);
 
@@ -1017,6 +1020,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.isMtkDevice()) {
                 getPreferenceScreen().removePreference(mPrefCatFixes);
                 mPrefCatStatusbar.removePreference(mSignalIconAutohide);
+                mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mQuickSettings.setEntries(R.array.qs_tile_aosp_entries);
                 mQuickSettings.setEntryValues(R.array.qs_tile_aosp_values);
@@ -1026,6 +1030,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {
                     mPrefCatStatusbar.removePreference(mSignalIconAutohide);
+                    mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
                     mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                     mPrefCatPhoneMobileData.removePreference(mPrefMobileDataSlow2gDisable);
                     mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);

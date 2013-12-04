@@ -824,4 +824,8 @@
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Allow LTE network mode</string>
 
+    <!-- Disable data network type icons -->
+    <string name="pref_disable_data_network_type_icons_title">Disable data network type indicators</string>
+    <string name="pref_disable_data_network_type_icons_summary">Allows to disable 3G/G indicators next to signal bars</string>
+
 </resources>
