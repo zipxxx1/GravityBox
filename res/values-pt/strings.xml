@@ -222,11 +222,11 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Habilitar tecla de Menu</string>
-    <string name="pref_lockscreen_menu_key_summary">Permite que a tecla de Menu seja usada para um desbloqueio rápido da tela de bloqueio. (requer reinício)</string>
+    <string name="pref_lockscreen_menu_key_summary">Permite que a tecla de Menu seja usada para um desbloqueio rápido da tela de bloqueio (necessário reiniciar)</string>
 
     <!-- Fix messaging wakelock -->
     <string name="pref_mms_fix_wakelock_title">Corrigir wakelock ao receber mensagem</string>
-    <string name="pref_mms_fix_wakelock_summary">Previne que a tela ligue ao receber uma nova mensagem (requer reinício)</string>
+    <string name="pref_mms_fix_wakelock_summary">Previne que a tela ligue ao receber uma nova mensagem (necessário reiniciar)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Centrar relógio</string>
@@ -237,7 +237,7 @@
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">Níveis de volume adicionais</string>
-    <string name="pref_music_volume_steps_summary">Adiciona mais níveis de volumes para os fluxbos de música (requer reinício)</string>
+    <string name="pref_music_volume_steps_summary">Adiciona mais níveis de volumes para os fluxos de música (necessário reiniciar)</string>
 
     <!-- Safe headset media volume -->
     <string name="pref_safe_media_volume_title">Volume de segurança do fone de ouvido</string>
@@ -283,7 +283,7 @@
 
     <!--  Solid black Holo background -->
     <string name="pref_holo_bg_solid_black_title">Fundo preto sólido</string>
-    <string name="pref_holo_bg_solid_black_summary">Usa um fundo preto sólido para o tema Holo padrão do sistema em vez de gradiente de preto-cinza (requer reinício)</string>
+    <string name="pref_holo_bg_solid_black_summary">Usa um fundo preto sólido para o tema Holo padrão do sistema em vez de gradiente de preto-cinza (necessário reiniciar)</string>
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Painéis por linha</string>
@@ -382,11 +382,11 @@
 
     <!-- Hide navigation bar for pie -->
     <string name="pref_navbar_disable_title">Esconder barra de navegação</string>
-    <string name="pref_navbar_disable_summary">Esconde a barra de navegação enquanto os controles circulares estão ativos (Para dispositivos que possuem barra de navegação, requer reinício)</string>
+    <string name="pref_navbar_disable_summary">Esconde a barra de navegação enquanto os controles circulares estão ativos. Para dispositivos que possuem barra de navegação (necessário reiniciar)</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Fundo pontilhado</string>
-    <string name="pref_holo_bg_dither_summary">Substituir o fundo do tema Holo padrão por um pontilhado (requer reinício)</string>
+    <string name="pref_holo_bg_dither_summary">Substituir o fundo do tema Holo padrão por um pontilhado (necessário reiniciar)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Desativar botões de navegação</string>
@@ -458,7 +458,7 @@
 
     <!-- Screen dim level -->
     <string name="pref_screen_dim_level_title">Nível de brilho dim</string>
-    <string name="pref_screen_dim_level_summary">Nível de brilho dim - quando a tela está perto de desligar (requer reinício)</string>
+    <string name="pref_screen_dim_level_summary">Nível de brilho dim - quando a tela está perto de desligar (necessário reiniciar)</string>
 
     <!-- Device type -->
     <string name="device_phone">telefone</string>
@@ -467,7 +467,7 @@
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Configurações de brilho</string>
     <string name="pref_brightness_master_switch_title">habilitar configurações de brilho</string>
-    <string name="pref_brightness_master_switch_summary">Use apenas caso seu dispositivo suporte os recursos padrões de brilho do Android. Mantenha desativado se você tiver problemas de brilho relacionados. (Requer reinício)</string>
+    <string name="pref_brightness_master_switch_summary">Use apenas caso seu dispositivo suporte os recursos padrões de brilho do Android. Mantenha desativado se você tiver problemas de brilho relacionados (necessário reiniciar)</string>
 
     <!-- HW Key Action: Recent apps -->
     <string name="hwkey_action_recent_apps">Exibir aplicativos recentes</string>
@@ -682,7 +682,7 @@
 
     <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
     <string name="pref_hwkey_home_longpress_keyguard_title">Tocha ao manter a tecla Home pressionada</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Liga/Desliga a tocha quando o dispositivo está bloqueado.</string>. A tela tem que estar ligada caso a tocha não se ligue ao pressionar a tecla Home</string>
+    <string name="pref_hwkey_home_longpress_keyguard_summary">Liga/desliga a tocha quando o dispositivo está bloqueado. A tela tem que estar ligada caso a tocha não se ligue ao pressionar a tecla Home.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Expandir automaticamente</string>
