@@ -258,6 +258,16 @@ public class Utils {
         return buf;
     }
 
+    public static boolean isAppInstalled(Context context, String appUri) {
+        try {
+            PackageManager pm = context.getPackageManager();
+            pm.getPackageInfo(appUri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     static class SystemProp extends Utils {
         
         private SystemProp() {

@@ -544,6 +544,23 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
         super.onCreate(savedInstanceState);
 
+        // refuse to run if there's GB with old package name still installed
+        if (Utils.isAppInstalled(this, "com.ceco.gm2.gravitybox")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+            .setTitle("ATTENTION")
+            .setMessage("Old GravityBox with obsolete package name found installed. " +
+            		"You have to completely uninstall it in order to use the new one!")
+            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+            mAlertDialog = builder.create();
+            mAlertDialog.show();
+        }
+
         if (savedInstanceState == null || sSystemProperties == null) {
             mReceiver = new GravityBoxResultReceiver(new Handler());
             mReceiver.setReceiver(this);
@@ -758,12 +775,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefAboutDonate = (Preference) findPreference(PREF_KEY_ABOUT_DONATE);
 
             mPrefEngMode = (Preference) findPreference(PREF_KEY_ENGINEERING_MODE);
-            if (!isAppInstalled(APP_ENGINEERING_MODE)) {
+            if (!Utils.isAppInstalled(getActivity(), APP_ENGINEERING_MODE)) {
                 getPreferenceScreen().removePreference(mPrefEngMode);
             }
 
             mPrefDualSimRinger = (Preference) findPreference(PREF_KEY_DUAL_SIM_RINGER);
-            if (!isAppInstalled(APP_DUAL_SIM_RINGER)) {
+            if (!Utils.isAppInstalled(getActivity(), APP_DUAL_SIM_RINGER)) {
                 getPreferenceScreen().removePreference(mPrefDualSimRinger);
             }
 
@@ -942,7 +959,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
                 mPrefCatMedia.removePreference(mPrefLinkVolumes);
             }
-            if (!isAppInstalled(APP_MESSAGING) && mPrefCatPhoneMessaging != null) {
+            if (!Utils.isAppInstalled(getActivity(), APP_MESSAGING) && mPrefCatPhoneMessaging != null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
             }
             if (Utils.isWifiOnly(getActivity())) {
@@ -1729,16 +1746,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             return super.onPreferenceTreeClick(prefScreen, pref);
-        }
-
-        private boolean isAppInstalled(String appUri) {
-            PackageManager pm = getActivity().getPackageManager();
-            try {
-                pm.getPackageInfo(appUri, PackageManager.GET_ACTIVITIES);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
         }
 
         @SuppressWarnings("deprecation")
