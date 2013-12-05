@@ -483,7 +483,7 @@
     <string name="expanded_desktop_disabled">Désactivé</string>
     <string name="expanded_desktop_statusbar">Masquer la barre d\'état</string>
     <string name="expanded_desktop_navbar">Masquer la barre de navigation</string>
-    <string name="expanded_desktop_both">Masquer les deux</string>
+    <string name="expanded_desktop_both">Masquer toutes les barres</string>
     <string name="action_expanded_desktop_title">Bureau étendu</string>
     <string name="action_expanded_desktop_on">Bureau étendu : ON</string>
     <string name="action_expanded_desktop_off">Bureau étendu : OFF</string>
