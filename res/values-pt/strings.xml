@@ -218,7 +218,7 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Habilitar rotação da tela de bloqueio</string>
-    <string name="pref_lockscreen_rotation_summary">WARNING: can swap unlock ring targets on some devices in case AOSP lockscreen has been modified by vendor</string>
+    <string name="pref_lockscreen_rotation_summary">AVISO: Pode rodar o anel de desbloqueio em alguns dispositivo caso a tela de bloqueio do AOSP tenha sido modificada pelo fornecedor</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Habilitar tecla de Menu</string>
@@ -297,16 +297,16 @@
     <string name="pref_volume_panel_expandable_summary">Habilita o painel de volume expansível com a habilidade de definir volumes para diferentes fluxos</string>
 
     <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Link ringtone &amp; notifications volumes</string>
-    <string name="pref_link_volumes_summary">When disabled, volumes for ringtone and notifications can be set independently</string>
+    <string name="pref_link_volumes_title">Unir volumes de ringtone &amp; notificações</string>
+    <string name="pref_link_volumes_summary">Quando desabilitado, os volumes para ringtone e notificações são definidos individualmente</string>
 
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Auto-switch QuickSettings</string>
-    <string name="pref_auto_switch_qs_summary">QuickSettings will show automatically when status bar is pulled down while there are no notifications</string>
+    <string name="pref_auto_switch_qs_summary">As configurações rápidas serão exbidas automaticamente quando a barra de status é puxada para baixo enquando não houver notificações</string>
 
     <!-- Quick pulldown -->
-    <string name="pref_quick_pulldown_title">Quick pulldown</string>
-    <string name="pref_quick_pulldown_summary">Edge of the status bar pulls down QuickSettings</string>
+    <string name="pref_quick_pulldown_title">Pulldown rápido</string>
+    <string name="pref_quick_pulldown_summary">A borda da barra de estatus puxa abaixo as configurações rápidas</string>
     <string name="quick_pulldown_off">Desabilitado</string>
     <string name="quick_pulldown_right">Direita</string>
     <string name="quick_pulldown_left">Esquerda</string>
@@ -484,16 +484,16 @@
     <string name="hwkey_action_custom_app_missing">Aplicativo não encontrado!</string>
 
     <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">Notification panel clock app</string>
-    <string name="pref_clock_link_summary">Links notification panel clock to a specified app instead of Date&amp;Time settings</string>
+    <string name="pref_clock_link_title">Aplicativo de relógio do painel de notificações</string>
+    <string name="pref_clock_link_summary">Une o relógio do painel de notificações com um aplicativo de configurações de Data&amp;Hora</string>
 
     <!-- GravityBox settings startup handling -->
-    <string name="gb_startup_progress">Waiting for response from GravityBox system framework&#8230;</string>
-    <string name="gb_startup_error">GravityBox system framework not responding. Exiting.</string>
+    <string name="gb_startup_progress">Esperar for resposta do framework do GravityBox</string>
+    <string name="gb_startup_error">O framework do GravityBox não responde. saindo.</string>
 
     <!-- National data roaming -->
-    <string name="pref_national_roaming_title">National data roaming</string>
-    <string name="pref_national_roaming_summary">Connect to data services when nationally roaming</string>
+    <string name="pref_national_roaming_title">Roaming nacional de dados</string>
+    <string name="pref_national_roaming_summary">Conecta aos serviçoes de dados em roaming nacional</string>
 
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Modo de área de trabalho expandida</string>
@@ -518,31 +518,31 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Ajustes da Barra de Navegação</string>
     <string name="pref_cat_navigation_bar_summary">Contém diversos ajustes relacionados com a Barra de Navegação</string>
-    <string name="pref_navbar_override_title">Override system defaults</string>
-    <string name="pref_navbar_override_summary">Master switch for navigation bar tweaks (requires reboot)</string>
-    <string name="pref_navbar_enable_title">Enable navigation bar</string>
-    <string name="pref_navbar_enable_summary">Requires reboot</string>
-    <string name="pref_navbar_height_title">Navigation bar height</string>
-    <string name="pref_navbar_height_summary">Applies to horizontal navigation bar and portrait orientation</string>
-    <string name="pref_navbar_height_landscape_summary">Applies to horizontal navigation bar and landscape orientation</string>
-    <string name="pref_navbar_width_title">Navigation bar width</string>
-    <string name="pref_navbar_width_summary">Applies to vertical navigation bar</string>
-    <string name="pref_navbar_menukey_title">Always show menu key</string>
+    <string name="pref_navbar_override_title">Substituir padrões do sistema</string>
+    <string name="pref_navbar_override_summary">Interruptor principal para os tweaks da barra de navegação (Necessário reiniciar)</string>
+    <string name="pref_navbar_enable_title">Habilitar barra de navegação</string>
+    <string name="pref_navbar_enable_summary">Necessário reiniciar</string>
+    <string name="pref_navbar_height_title">Altura da barra de navegação</string>
+    <string name="pref_navbar_height_summary">Aplicável a barra de navegação horizontal e em modo retrato</string>
+    <string name="pref_navbar_height_landscape_summary">Aplicável a barra de navegação horizontal e em modo paisagem</string>
+    <string name="pref_navbar_width_title">Largura da barra de navegação</string>
+    <string name="pref_navbar_width_summary">aplicável a barra de navegação vertical</string>
+    <string name="pref_navbar_menukey_title">Sempre mostrar a tecla de Menu</string>
 
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Captura de tela no Menu de Desligar</string>
 
     <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Unlock ring settings</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Enable unlock ring targets</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Master switch for unlock ring targets</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Target application %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Unlock ring vertical offset</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Unlock ring horizontal offset</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">Desbloquear configurações do anel</string>
+    <string name="pref_lockscreen_ring_targets_enable_title">Ativar desbloqueio dos alvos do anel</string>
+    <string name="pref_lockscreen_ring_targets_enable_summary">Controle principal para desbloquear alvos do anel</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Aplicativo alvo %s</string>
+    <string name="pref_lockscreen_ring_vertical_offset_title">Desbloquear deslocamento vertical do anel</string>
+    <string name="pref_lockscreen_ring_horizontal_offset_title">Desbloquear deslocamento horizontal do anel</string>
 
     <!-- Statusbar brightness control -->
-    <string name="pref_statusbar_brightness_title">Enable brightness control</string>
-    <string name="pref_statusbar_brightness_summary">Adjusts brightness by sliding over statusbar (requires automatic brightness to be disabled)</string>
+    <string name="pref_statusbar_brightness_title">Habilitar controle de brilho</string>
+    <string name="pref_statusbar_brightness_summary">Ajusta o brilho ao deslizar sobre a barra de status (Necessário que o brilho automático esteja desabilitado)</string>
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Celular</string>
@@ -550,22 +550,22 @@
     <string name="pref_cat_phone_mobile_data_title">Dados móveis</string>
 
     <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Strip unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Converts unicode characters to normal characters. Decreases overall message size.</string>
-    <string name="unicode_stripping_leave_intact">Leave characters intact</string>
-    <string name="unicode_stripping_non_encodable">Strip non-encodable characters</string>
-    <string name="unicode_stripping_all">Strip all unicode characters</string>
+    <string name="pref_mms_unicode_stripping_title">Retirar unicode</string>
+    <string name="pref_mms_unicode_stripping_summary">Converte carateres unicode em carateres normais. Reduz o tamanho da mensagem.</string>
+    <string name="unicode_stripping_leave_intact">Deixar os carateres intáctos</string>
+    <string name="unicode_stripping_non_encodable">Retirar carateres não decodificáveis</string>
+    <string name="unicode_stripping_all">Retirar todos os carateres unicode</string>
 
     <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Disable slow 2G data warning</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Disables warning about slow data speed when turning on mobile data in QuickSettings for SIM in 2G mode</string>
+    <string name="pref_mobile_data_slow2g_disable_title">Desabilitar aviso de dados 2G lentos</string>
+    <string name="pref_mobile_data_slow2g_disable_summary">Desabilita aviso sobre dados lentos ao mudar em dados móveis nas configurações rápidas para SIM em modo 2G</string>
 
     <!-- Follow stock battery color -->
-    <string name="pref_sbcolor_follow_stock_battery_title">Follow stock battery color</string>
-    <string name="pref_sbcolor_follow_stock_battery_summary">Makes statusbar clock, percentage and circle battery use the color of stock battery icon. Applies when icon coloring is off.</string>
+    <string name="pref_sbcolor_follow_stock_battery_title">Seguir as cores padrões da bateria</string>
+    <string name="pref_sbcolor_follow_stock_battery_summary">Fazer o relógio, a porcentagem, e o circulo da bateria na barra de status usar a cor do icone de bateria padrão. Aplicável quando a coloração de ícones está desativada.</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Network mode tile mode</string>
+    <string name="pref_network_mode_tile_mode_title">Modo de rede modo de bloco</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
     <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
     <string name="nm_tile_mode3">2G/3G/(LTE)</string>
@@ -574,12 +574,12 @@
     <string name="pref_display_allow_all_rotations_title">Permitir todas as rotações</string>
 
     <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">Override default tile behaviour</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Overrides touch/long-touch behaviour for selected tiles (requires reboot)</string>
+    <string name="pref_qs_tile_behaviour_override_title">Substituir o comportamento padrão do bloco</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Substitue o comportamento do toque/toque-longo para blocos selecionados (necessário reiniciar)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">Network mode tile SIM slot</string>
-    <string name="pref_qs_network_mode_sim_slot_summary">Defines SIM slot to which network mode tile applies (%s)</string>
+    <string name="pref_qs_network_mode_sim_slot_title">Bloco do modo de Rede do SIM</string>
+    <string name="pref_qs_network_mode_sim_slot_summary">Define o slot do SIM que o modo de Rede se aplica (%s)</string>
     <string name="sim_slot1">SIM slot 1</string>
     <string name="sim_slot2">SIM slot 2</string>
 
@@ -590,41 +590,41 @@
     <string name="pie_controls_enabled_expanded_navbar">Quando a área de trabalho expandida esconder a barra de navegação</string>
 
     <!-- Icon coloring: preserve stock battery icon -->
-    <string name="pref_statusbar_color_skip_battery_title">Leave stock battery icon intact</string>
-    <string name="pref_statusbar_color_skip_battery_summary">Use in case stock battery icon was replaced with 3rd party battery mod</string>
+    <string name="pref_statusbar_color_skip_battery_title">Deixe o ícone de bateria padrão intácto</string>
+    <string name="pref_statusbar_color_skip_battery_summary">Use caso a bateria padrão tenha sido substituída por aplicativos de terceiros</string>
 
     <!-- Unplug turns on screen -->
-    <string name="pref_unplug_turns_on_screen_title">Unplug turns on screen</string>
-    <string name="pref_unplug_turns_on_screen_summary">If enabled, the screen will come on when you plug/unplug usb/power/whatever (requires reboot)</string>
+    <string name="pref_unplug_turns_on_screen_title">Desplugar liga a tela</string>
+    <string name="pref_unplug_turns_on_screen_summary">Se habilitado, a tela vai ligar quando você plugar/desplugar usb/energia/ou-seja-lá-o-que-for (requer reinício)</string>
 
     <!-- Mute volume adjust sound -->
-    <string name="pref_volume_adjust_mute_title">Mute volume adjust sound</string>
-    <string name="pref_volume_adjust_mute_summary">Disables sound played when adjusting volume using volume keys</string>
+    <string name="pref_volume_adjust_mute_title">Mutar o volume dos ajustes de som</string>
+    <string name="pref_volume_adjust_mute_summary">Desabilita o som tocado ao ajustar o volume usando as teclas de volume</string>
 
     <!-- Call vibrations -->
-    <string name="pref_call_vibrations_title">Call vibrations</string>
-    <string name="call_vibration_connected">On call connected</string>
-    <string name="call_vibration_disconnected">On call disconnected</string>
-    <string name="call_vibration_waiting">On call waiting</string>
-    <string name="call_vibration_periodic">Every 45th second during outgoing call</string>
+    <string name="pref_call_vibrations_title">Vibração de chamada</string>
+    <string name="call_vibration_connected">Quando a chamada for conectada</string>
+    <string name="call_vibration_disconnected">Quando a chamada for desconectada</string>
+    <string name="call_vibration_waiting">Quando uma chamada está em espera</string>
+    <string name="call_vibration_periodic">A cada 45 segundos durante chamadas realizadas</string>
 
     <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Tile reordering</string>
-    <string name="pref_qs_tile_order_summary">Allows reordering of QuickSettings tiles</string>
+    <string name="pref_qs_tile_order_title">Reordenar blocos</string>
+    <string name="pref_qs_tile_order_summary">Permite reordenar bloco das configuraçoes rápidas</string>
 
     <!-- Ongoing notifications -->
-    <string name="pref_ongoing_notifications_title">Ongoing notification blocker</string>
-    <string name="pref_ongoing_notifications_summary">Allows blocking of selected ongoing notifications</string>
-    <string name="ongoing_notif_info">The list will get populated automatically for every ongoing notification that occurs.
-        You can then decide whether to block ongoing notification next time it occurs. Use with caution.</string>
-    <string name="ongoing_notif_reset_list">Reset list</string>
-    <string name="ongoing_notif_reset_alert">Are you sure you want to reset list? 
-        This will clear current list and unblock all ongoing notifications previously blocked.</string>
-    <string name="ongoing_notif_list_empty">(list is empty)</string>
+    <string name="pref_ongoing_notifications_title">Bloqueador de notificações</string>
+    <string name="pref_ongoing_notifications_summary">Permite o bloqueio das notificações selecionadas</string>
+    <string name="ongoing_notif_info">A lista será preenchida automaticamente a cada notificação recebida.
+        Você pode decidir se quer bloquea-la na próxima vez que ocorrer. Use com cuidado.</string>
+    <string name="ongoing_notif_reset_list">Resetar lista</string>
+    <string name="ongoing_notif_reset_alert">Você quer mesmo resetar a lista? 
+        Isso vai limpar a lista atual e desbloquear todas as notificações bloqueadas anteriormente.</string>
+    <string name="ongoing_notif_list_empty">(A lista está vazia)</string>
 
     <!-- Quick unlock -->
-    <string name="pref_lockscreen_quick_unlock_title">Quick unlock</string>
-    <string name="pref_lockscreen_quick_unlock_summary">Unlock automatically when the correct PIN/password is entered</string>
+    <string name="pref_lockscreen_quick_unlock_title">Desbloqueio rápido</string>
+    <string name="pref_lockscreen_quick_unlock_summary">Desbloqueia automaticamente quando o PIN/senha correta é inserida.</string>
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">Desabilitado</string>
@@ -633,10 +633,10 @@
     <string name="clock_dow_uppercase">Maiúsculas</string>
 
     <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">Statusbar lock policy</string>
-    <string name="sbl_policy_default">Default</string>
-    <string name="sbl_policy_unlocked">Unlocked if keyguard insecured</string>
-    <string name="sbl_policy_locked">Locked</string>
+    <string name="pref_statusbar_lock_policy_title">Politica de bloqueio da barra de status</string>
+    <string name="sbl_policy_default">Padrão</string>
+    <string name="sbl_policy_unlocked">Desbloqueada se o keyguard for inseguro</string>
+    <string name="sbl_policy_locked">Bloqueada</string>
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitor de tráfego de dados</string>
@@ -709,7 +709,7 @@
 
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">Lançador de aplicativos</string>
-    <string name="pref_cat_app_launcher_summary">Dialog allowing to define up to 8 apps which can be assigned as HW Key Action or used as additional navigation bar key</string>
+    <string name="pref_cat_app_launcher_summary">Permite definit 8 aplicativos que podem ser atribuídos a ações de teclas físicas ou usados em teclas adicionais na barra de navegação</string>
     <string name="pref_app_launcher_slot_title">Aplicativo na posição %d</string>
     <string name="app_launcher_no_apps">Nenhum aplicativo definido. Use o menu Lançador de aplicativos do GravityBox para definir.</string>
 
