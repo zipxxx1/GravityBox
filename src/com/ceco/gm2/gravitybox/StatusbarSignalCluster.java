@@ -16,6 +16,8 @@
 package com.ceco.gm2.gravitybox;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
@@ -39,9 +41,21 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected StatusBarIconManager mIconManager;
     protected Resources mResources;
     private Field mFldWifiGroup;
+    private Field mFldMobileView;
+    private Field mFldMobileTypeView;
+    private Field mFldWifiView;
+    private Field mFldAirplaneView;
+    private List<String> mErrorsLogged = new ArrayList<String>();
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
+    }
+
+    private void logAndMute(String key, Throwable t) {
+        if (!mErrorsLogged.contains(key)) {
+            XposedBridge.log(t);
+            mErrorsLogged.add(key);
+        }
     }
 
     public static StatusbarSignalCluster create(LinearLayout view, StatusBarIconManager iconManager) {
@@ -59,17 +73,11 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         mIconManager = iconManager;
         mResources = mView.getResources();
 
-        try {
-            mFldWifiGroup = XposedHelpers.findField(mView.getClass(), "mWifiGroup");
-            if (DEBUG) log("mWifiGroup field found");
-        } catch (NoSuchFieldError nfe) {
-            try {
-                mFldWifiGroup = XposedHelpers.findField(mView.getClass(), "mWifiViewGroup");
-                if (DEBUG) log("mWifiViewGroup field found");
-            } catch (NoSuchFieldError nfe2) {
-                log("Couldn't find WifiGroup field");
-            }
-        }
+        mFldWifiGroup = resolveField("mWifiGroup", "mWifiViewGroup");
+        mFldMobileView = resolveField("mMobile", "mMobileStrengthView");
+        mFldMobileTypeView = resolveField("mMobileType", "mMobileTypeView");
+        mFldWifiView = resolveField("mWifi", "mWifiStrengthView");
+        mFldAirplaneView = resolveField("mAirplane", "mAirplaneView");
 
         if (mView != null) {
             try {
@@ -85,6 +93,20 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
 
         mIconManager.registerListener(this);
+    }
+
+    private Field resolveField(String... fieldNames) {
+        Field field = null;
+        for (String fieldName : fieldNames) {
+            try {
+                field = XposedHelpers.findField(mView.getClass(), fieldName);
+                if (DEBUG) log(fieldName + " field found");
+                break;
+            } catch (NoSuchFieldError nfe) {
+                if (DEBUG) log(fieldName + " field NOT found");
+            }
+        }
+        return field;
     }
 
     @Override
@@ -118,7 +140,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 updateAirplaneModeIcon();
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("apply", t);
         }
     }
 
@@ -126,7 +148,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         try {
             if (XposedHelpers.getBooleanField(mView, "mWifiVisible") &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
-                ImageView wifiIcon = (ImageView) XposedHelpers.getObjectField(mView, "mWifi");
+                ImageView wifiIcon = (ImageView) mFldWifiView.get(mView);
                 if (wifiIcon != null) {
                     int resId = XposedHelpers.getIntField(mView, "mWifiStrengthId");
                     Drawable d = mIconManager.getWifiIcon(resId);
@@ -134,7 +156,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("updateWiFiIcon", t);
         }
     }
 
@@ -142,14 +164,14 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         try {
             if (XposedHelpers.getBooleanField(mView, "mMobileVisible") &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
-                ImageView mobile = (ImageView) XposedHelpers.getObjectField(mView, "mMobile");
+                ImageView mobile = (ImageView) mFldMobileView.get(mView);
                 if (mobile != null) {
                     int resId = XposedHelpers.getIntField(mView, "mMobileStrengthId");
                     Drawable d = mIconManager.getMobileIcon(resId);
                     if (d != null) mobile.setImageDrawable(d);
                 }
                 if (mIconManager.isMobileIconChangeAllowed()) {
-                    ImageView mobileType = (ImageView) XposedHelpers.getObjectField(mView, "mMobileType");
+                    ImageView mobileType = (ImageView) mFldMobileTypeView.get(mView);
                     if (mobileType != null) {
                         try {
                             int resId = XposedHelpers.getIntField(mView, "mMobileTypeId");
@@ -163,13 +185,13 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("updateMobileIcon", t);
         }
     }
 
     protected void updateAirplaneModeIcon() {
         try {
-            ImageView airplaneModeIcon = (ImageView) XposedHelpers.getObjectField(mView, "mAirplane");
+            ImageView airplaneModeIcon = (ImageView) mFldAirplaneView.get(mView);
             if (airplaneModeIcon != null) {
                 Drawable d = airplaneModeIcon.getDrawable();
                 if (mIconManager.isColoringEnabled()) {
@@ -180,7 +202,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 airplaneModeIcon.setImageDrawable(d);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("updateAirplaneModeIcon", t);
         }
     }
 
