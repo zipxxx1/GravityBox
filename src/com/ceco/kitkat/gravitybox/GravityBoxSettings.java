@@ -1734,6 +1734,21 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (pref == mPrefCallerUnknownPhoto) {
                 setCustomCallerImage();
                 return true;
+            } else if (PREF_CAT_HWKEY_ACTIONS.equals(pref.getKey()) &&
+                    !mPrefs.getBoolean(PREF_KEY_NAVBAR_OVERRIDE, false) &&
+                    !mPrefs.getBoolean("hw_keys_navbar_warning_shown", false)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.app_name)
+                .setMessage(R.string.hwkey_navbar_warning)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        mPrefs.edit().putBoolean("hw_keys_navbar_warning_shown", true).commit();
+                    }
+                });
+                mDialog = builder.create();
+                mDialog.show();
             }
 
             if (intent != null) {
