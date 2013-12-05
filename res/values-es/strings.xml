@@ -472,17 +472,34 @@
     <string name="hwkey_action_expanded_desktop_disabled">El escritorio expandido está desactivado</string>
 
     <!-- Navigation bar tweaks category -->
-    <string name="pref_cat_navigation_bar_title">Ajustes de la barra de notificación</string>
-    <string name="pref_cat_navigation_bar_summary">Contiene diversos ajustes relacionados a la barra de notificación</string>
-    <string name="pref_navbar_override_title">Ignorar ajustes del sistema por defecto</string>
-    <string name="pref_navbar_override_summary">Switch principal de ajustes de barra de notificación (requiere reiniciar)</string>
+    <string name="pref_cat_navigation_bar_title">Ajustes de la barra de navegación</string>
+    <string name="pref_cat_navigation_bar_summary">Contiene diversos ajustes relacionados a la barra de navegación</string>
+    <string name="pref_navbar_override_title">Ignorar ajustes del sistema</string>
+    <string name="pref_navbar_override_summary">Permite que la aplicación tome el control del entorno del sistema (requiere reiniciar)</string>
     <string name="pref_navbar_enable_title">Habilitar barra de navegación</string>
     <string name="pref_navbar_enable_summary">Requiere reiniciar</string>
     <string name="pref_navbar_height_title">Altura barra de navegación</string>
     <string name="pref_navbar_height_summary">Se aplica a la orientación retrato</string>
-    <string name="pref_navbar_width_title">Ancho barra de notificación</string>
-    <string name="pref_navbar_width_summary">Se aplica a la orientación paisaje</string>
+    <string name="pref_navbar_height_landscape_summary">Se aplica a la orientación paisaje</string>
+    <string name="pref_navbar_width_title">Ancho barra de navegación</string>
+    <string name="pref_navbar_width_summary">Se aplica al modo vertical</string>
     <string name="pref_navbar_menukey_title">Siempre mostrar tecla menú</string>
+    
+    <!-- Navbar tweaks categories -->
+    <string name="pref_cat_navbar_general_title">General</string>
+    <string name="pref_cat_navbar_keys_title">Botones</string>
+    <string name="pref_cat_navbar_color_title">Colores</string>
+    <string name="pref_cat_navbar_dimen_title">Dimensiones</string>
+
+    <!-- Navigation bar colors -->
+    <string name="pref_navbar_color_enable_title">Habilitar colores</string>
+    <string name="pref_navbar_color_enable_summary">Requiere reiniciar para inhabilitar</string>
+    <string name="pref_navbar_key_color_title">Color de los botones</string>
+    <string name="pref_navbar_key_glow_color_title">Color del resplandor</string>
+    <string name="pref_navbar_bg_color_title">Color de fondo</string>
+    
+    <!-- Navigation bar app launcher key -->
+    <string name="pref_navbar_launcher_enable_title">Mostrar lanzador de apps</string>
 
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Captura de pantalla en el menú de apagado</string>
