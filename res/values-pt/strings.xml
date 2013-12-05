@@ -7,6 +7,8 @@
     <string name="battery_style_stock">Indicador de bateria padrão</string>
     <string name="battery_style_circle">Indicador de bateria circular</string>
     <string name="battery_style_circle_percent">Indicador de bateria circular com porcentagem</string>
+    <string name="battery_style_kitkat">Bateria do KitKat</string>
+    <string name="battery_style_kitkat_percent">Bateria do KitKat com porcentagem</string>
     <string name="battery_style_percent">Texto da porcentagem de bateria</string>
     <string name="battery_style_none">Nenhum</string>
 
@@ -296,6 +298,10 @@
     <string name="pref_volume_panel_expandable_title">Painel de volume expansível</string>
     <string name="pref_volume_panel_expandable_summary">Habilita o painel de volume expansível com a habilidade de definir volumes para diferentes fluxos</string>
 
+    <!-- Fully expandable volume panel -->
+    <string name="pref_volume_panel_expandable_fully_title">Painel de volume totalmente expansível</string>
+    <string name="pref_volume_panel_expandable_fully_summary">Permite ao painel de volume usar todo o espaço disponível</string>
+    
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Unir volumes de ringtone &amp; notificações</string>
     <string name="pref_link_volumes_summary">Quando desabilitado, os volumes para ringtone e notificações são definidos individualmente</string>
@@ -448,6 +454,7 @@
 
     <!-- Transparency management -->
     <string name="pref_cat_transparency_manager_title">Gerenciamento de transparências</string>
+    <string name="pref_cat_transparency_manager_summary">Gerencia a transparência da barra de status e da barra de navegação</string>
     <string name="pref_tm_statusbar_launcher_title">Barra de Status no inicializador</string>
     <string name="pref_tm_statusbar_lockscreen_title">Barra de Status na tela de bloqueio</string>
     <string name="pref_tm_navbar_launcher_title">Barra de Navegação no inicializador</string>
@@ -743,5 +750,67 @@
     <!-- Minimum screen brightness warning -->
     <string name="screen_brightness_min_warning">Sua tela pode não suportar valores de brilho inferior a 20. Se sua tela não ligar,
         mantenha pressionada a tecla de volume+ por pelo menos 7 segundos para resetar os valores de brilho e ajuste os valores de brilho mínimo para um valor maior</string>
+
+    <!-- Navbar tweaks categories -->
+    <string name="pref_cat_navbar_general_title">Geral</string>
+    <string name="pref_cat_navbar_keys_title">Teclas de navegação</string>
+    <string name="pref_cat_navbar_color_title">Colores</string>
+    <string name="pref_cat_navbar_dimen_title">Dimensões</string>
+
+    <!-- Navigation bar colors -->
+    <string name="pref_navbar_color_enable_title">Habilitar cores da barra de navegação</string>
+    <string name="pref_navbar_color_enable_summary">Pode ser necessário reiniciar após desabilitar</string>
+    <string name="pref_navbar_key_color_title">Cor da tecla de navegação</string>
+    <string name="pref_navbar_key_glow_color_title">Cor crescente da tecla de navegação</string>
+    <string name="pref_navbar_bg_color_title">Cor de fundo da barra de navegação</string>
+
+    <!-- Disable lockscreen shade -->
+    <string name="pref_lockscreen_shade_disable_title">Desabilitar sombra da tela de bloqueio</string>
+    <string name="pref_lockscreen_shade_disable_summary">Remove a tonalidade escura da tela de bloqueio</string>
+
+    <!-- Transparency manager mode -->
+    <string name="pref_tm_mode_title">Modo de gerenciamento de transparências</string>
+    <string name="pref_tm_mode_summary">Necessário reiniciar</string>
+    <string name="tm_mode_disabled">Desabilitado</string>
+    <string name="tm_mode_statusbar">Barra de status</string>
+    <string name="tm_mode_navbar">Barra de navegação</string>
+    <string name="tm_mode_full">Ambos</string>
+
+    <!-- Secondary signal icon color for MTK Dual SIMs -->
+    <string name="pref_statusbar_icon_color_secondary_title">Cor secundário do sinal</string>
+    <string name="pref_statusbar_icon_color_secondary_summary">Substituir o icone amarelo de sinal padrão</string>
+    <string name="pref_statusbar_data_activity_color_secondary_title">Cor secundária da atividade de dados</string>
+    <string name="pref_statusbar_data_activity_color_secondary_summary">Define cor secundára para os indicadores de atividade de dados</string>
+
+    <!-- Status icon style -->
+    <string name="pref_status_icon_style_title">Estilo do ícone de status</string>
+    <string name="pref_status_icon_style_summary">Aplicável a ícones de status como silencioso, vibrar, alarme, etc.</string>
+    <string name="icon_style_jb">JellyBean</string>
+    <string name="icon_style_kk">KitKat</string>
+
+    <!-- HW Key Actions: Back double-tap -->
+    <string name="hwkey_back_doubletap_dialog_title">Ação do toque duplo na tecla Voltar</string>
+
+    <!-- HW Key Actions: Home and Back actions -->
+    <string name="hwkey_action_home">Ir para Home</string>
+    <string name="hwkey_action_back">Voltar</string>
+
+    <!-- QS Tile Style -->
+    <string name="pref_qs_tile_style_title">Estilo da caixa</string>
+    <string name="pref_qs_tile_style_summary">Aplicável somente a caixas introduzidas pelo GravityBox (Isso não afeta as caixas do sistema)</string>
+
+    <!-- Clear all recents bottom margin -->
+    <string name="pref_recent_clear_margin_bottom_title">Ajuste da margem inferior</string>
+
+    <!-- Google Plus -->
+    <string name="pref_about_gplus_title">Comunidade no Google+</string>
+    <string name="pref_about_gplus_summary">Toque para visitar a comunidade do GravityBox no Google+</string>
+
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">Permitir modo de rede LTE</string>
+
+    <!-- Disable data network type icons -->
+    <string name="pref_disable_data_network_type_icons_title">Desabilitar os indicadores de dados do tipo de rede</string>
+    <string name="pref_disable_data_network_type_icons_summary">Permite desabilitar os indicadores 3G/G próximos a barra de sinal</string>
 
 </resources>
