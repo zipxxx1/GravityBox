@@ -65,9 +65,9 @@ public class UnicodeFilter {
                 // above technique.
                 s = s.replace("Œ", "OE");
                 s = s.replace("œ", "oe");
-                s = s.replace("�?", "L");
+                s = s.replace("Ł", "L");
                 s = s.replace("ł", "l");
-                s = s.replace("�?", "DJ");
+                s = s.replace("Đ", "DJ");
                 s = s.replace("đ", "dj");
                 s = s.replace("Α", "A");
                 s = s.replace("Β", "B");
@@ -90,7 +90,7 @@ public class UnicodeFilter {
                 s = s.replace("ε", "E");
                 s = s.replace("ζ", "Z");
                 s = s.replace("η", "H");
-                s = s.replace("θ", "�?");
+                s = s.replace("θ", "Θ");
                 s = s.replace("ι", "I");
                 s = s.replace("κ", "K");
                 s = s.replace("λ", "Λ");
@@ -99,13 +99,13 @@ public class UnicodeFilter {
                 s = s.replace("ξ", "Ξ");
                 s = s.replace("ο", "O");
                 s = s.replace("π", "Π");
-                s = s.replace("�?", "P");
-                s = s.replace("�?", "Σ");
+                s = s.replace("ρ", "P");
+                s = s.replace("σ", "Σ");
                 s = s.replace("τ", "T");
                 s = s.replace("υ", "Y");
                 s = s.replace("φ", "Φ");
                 s = s.replace("χ", "X");
-                s = s.replace("�?", "Ψ");
+                s = s.replace("ψ", "Ψ");
                 s = s.replace("ω", "Ω");
                 s = s.replace("ς", "Σ");
 
