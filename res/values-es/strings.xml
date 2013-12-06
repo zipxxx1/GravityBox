@@ -340,7 +340,7 @@
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Desactivar indicadores de roaming</string>
-    <string name="pref_disable_roaming_indicators_summary">Cuando se desactiva, el icono 'R' no será visible en roaming. Usar con precaución.</string>
+    <string name="pref_disable_roaming_indicators_summary">Cuando se desactiva, el icono \'R\' no será visible en roaming. Usar con precaución.</string>
 
     <!-- Battery status in pie controls -->
     <string name="pie_battery_status_charging">Cargando (<xliff:g id="percent">%d</xliff:g>%%)</string>
@@ -353,8 +353,8 @@
     <string name="pie_phone_status_emergency_only">Solo llamadas de emergencia</string>
 
     <!-- Pie Controls settings -->
-    <string name="pie_control_title">Controles 'Pie'</string>
-    <string name="pie_control_enable_title">Activar controles 'Pie'</string>
+    <string name="pie_control_title">Controles \'Pie\'</string>
+    <string name="pie_control_enable_title">Activar controles \'Pie\'</string>
     <string name="pie_control_size_title">Tamaño del botón de navegación</string>
     <string name="pie_control_trigger_positions_title">Posiciones del accionador</string>
     <string name="pie_control_trigger_left">Borde izquierdo de la pantalla</string>
@@ -372,15 +372,15 @@
 
     <!-- Hide navigation bar for pie -->
     <string name="pref_navbar_disable_title">Ocultar barra de navegación</string>
-    <string name="pref_navbar_disable_summary">Oculta la barra de navegación cuando se activan los controles 'Pie' (para dispositivos con barra de navegación. Requiere reinicio)</string>
+    <string name="pref_navbar_disable_summary">Oculta la barra de navegación cuando se activan los controles \'Pie\' (para dispositivos con barra de navegación. Requiere reinicio)</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Fondo Holo interpolado</string>
-    <string name="pref_holo_bg_dither_summary">Reemplaza el fondo Holo estándar con otro interpolado para suprimir el 'color banding' (requiere reinicio)</string>
+    <string name="pref_holo_bg_dither_summary">Reemplaza el fondo Holo estándar con otro interpolado para suprimir el \'color banding\' (requiere reinicio)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Desactivar botones de navegación</string>
-    <string name="pref_hwkeys_disable_summary">Desactiva la pulsación en los botones al activar los controles 'Pie'</string>
+    <string name="pref_hwkeys_disable_summary">Desactiva la pulsación en los botones al activar los controles \'Pie\'</string>
 
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Usar tema Holo oscuro</string>
@@ -694,7 +694,7 @@
     <string name="pie_custom_key_app_launcher">Lanzador de aplicación</string>
 
     <!-- Pie colors -->
-    <string name="pref_cat_pie_colors_title">Colores de 'Pie'</string>
+    <string name="pref_cat_pie_colors_title">Colores de \'Pie\'</string>
     <string name="pref_pie_color_bg_title">Color de fondo</string>
     <string name="pref_pie_color_fg_title">Color principal</string>
     <string name="pref_pie_color_outline_title">Color del contorno</string>
