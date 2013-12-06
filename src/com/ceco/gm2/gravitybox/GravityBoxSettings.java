@@ -92,6 +92,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_SIGNAL_ICON_AUTOHIDE = "pref_signal_icon_autohide";
     public static final String PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS = "pref_disable_data_network_type_icons";
+    public static final String ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED = "gravitybox.intent.action.DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED";
+    public static final String EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED = "dataNetworkTypeIconsDisabled";
     public static final String PREF_KEY_DISABLE_ROAMING_INDICATORS = "pref_disable_roaming_indicators";
     public static final String ACTION_DISABLE_ROAMING_INDICATORS_CHANGED = "gravitybox.intent.action.DISABLE_ROAMING_INDICATORS_CHANGED";
     public static final String EXTRA_INDICATORS_DISABLED = "indicatorsDisabled";
@@ -1627,6 +1629,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_NOTIF_BACKGROUND_ALPHA)) {
                 intent.setAction(ACTION_NOTIF_BACKGROUND_CHANGED);
                 intent.putExtra(EXTRA_BG_ALPHA, prefs.getInt(PREF_KEY_NOTIF_BACKGROUND_ALPHA, 0));
+            } else if (key.equals(PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS)) {
+                intent.setAction(ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED);
+                intent.putExtra(EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED,
+                        prefs.getBoolean(PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false));
             } else if (key.equals(PREF_KEY_DISABLE_ROAMING_INDICATORS)) {
                 intent.setAction(ACTION_DISABLE_ROAMING_INDICATORS_CHANGED);
                 intent.putExtra(EXTRA_INDICATORS_DISABLED,

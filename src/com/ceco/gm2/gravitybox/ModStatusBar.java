@@ -162,6 +162,10 @@ public class ModStatusBar {
                         XposedHelpers.callMethod(mPhoneStatusBarPolicy, "updateAlarm", i);
                     }
                 }
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED)
+                    && intent.hasExtra(GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED)) {
+                mDisableDataNetworkTypeIcons = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED, false);
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED)
                     && intent.hasExtra(GravityBoxSettings.EXTRA_SB_BRIGHTNESS)) {
                 mBrightnessControlEnabled = intent.getBooleanExtra(
@@ -255,6 +259,7 @@ public class ModStatusBar {
                     mClockHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_HIDE, false);
                     mClockLink = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LINK, null);
                     mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
+                    mDisableDataNetworkTypeIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
 
                     String iconAreaId = Build.VERSION.SDK_INT > 16 ?
                             "system_icon_area" : "icons";
@@ -403,9 +408,6 @@ public class ModStatusBar {
 
                     // MTK Dual SIMs: reduce space between wifi and signal icons
                     if (Utils.hasGeminiSupport()) {
-                        prefs.reload();
-                        mDisableDataNetworkTypeIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
-
                         // but only when data network type icons are not showing
                         if (mDisableDataNetworkTypeIcons) {
                             final int scvResId = liparam.res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
@@ -459,9 +461,6 @@ public class ModStatusBar {
                         "com.mediatek.systemui.ext.NetworkType", int.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        prefs.reload();
-                        mDisableDataNetworkTypeIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
-
                         if (mDisableDataNetworkTypeIcons) param.setResult(-1);
                     }
                 });
@@ -517,6 +516,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
