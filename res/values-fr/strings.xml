@@ -758,4 +758,8 @@
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Permettre le mode réseau LTE</string>
  
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">Pour permettre d\'activer le support des actions de la barre de navigation, il est nécessaire
+        de remplacer les paramètres système par défaut dans le menu Modifications barre de navigation</string>
+
 </resources>
