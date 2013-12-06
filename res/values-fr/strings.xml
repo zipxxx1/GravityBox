@@ -828,4 +828,8 @@
     <string name="pref_disable_data_network_type_icons_title">Désactiver les indicateurs du type de réseau</string>
     <string name="pref_disable_data_network_type_icons_summary">Permet de désactiver les indicateurs G/3G contigus aux barres de signal</string>
 
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">Pour permettre d\'activer le support des actions de la barre de navigation, il est nécessaire
+        de remplacer les paramètres système par défaut dans le menu Modifications barre de navigation</string>
+
 </resources>
