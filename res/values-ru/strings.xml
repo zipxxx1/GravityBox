@@ -828,4 +828,8 @@
     <string name="pref_disable_data_network_type_icons_title">Отключить индикаторы типа сети</string>
     <string name="pref_disable_data_network_type_icons_summary">Позволяет отключить индикаторы 3G/G рядом с лесенкой сигнала</string>
     
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">При включении поддержки действия для панели навигации необходимо 
+        переписать настройки по умолчанию в меню настройки панели навигации</string>
+    
 </resources>
