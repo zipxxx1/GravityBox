@@ -83,7 +83,7 @@
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">状态栏快速设置</string>
-    <string name="quick_settings_summary">允许在状态栏中显示或隐藏快速设置方块</string>
+    <string name="quick_settings_summary">允许在状态栏中显示或隐藏快速设置标题</string>
     <string name="qs_tile_user_profile">用户配置文件</string>
     <string name="qs_tile_airplane_mode">飞行模式</string>
     <string name="qs_tile_battery">电池状态</string>
@@ -268,8 +268,8 @@
     <string name="pref_holo_bg_solid_black_summary">在默认的Holo系统主题内使用纯黑色的背景而不是黑-灰色的渐变（需要重新启动）</string>
     
     <!-- QuickSettings tiles per row -->
-    <string name="pref_qs_tiles_per_row_title">每行方块数</string>
-    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个方块，开关会根据您的设置自动缩放，适用于竖屏</string>
+    <string name="pref_qs_tiles_per_row_title">每行标题数</string>
+    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个标题，开关会根据您的设置自动缩放，适用于竖屏</string>
     
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">显示周</string>
@@ -398,7 +398,7 @@
 
     <!-- QuickApp tile settings -->
     <string name="qs_tile_quickapp">快速应用</string>
-    <string name="pref_cat_quickapp_tile_title">快速应用方块设置</string>
+    <string name="pref_cat_quickapp_tile_title">快速应用标题设置</string>
     <string name="pref_quickapp_default_title">主应用</string>
     <string name="pref_quickapp_slot1_title">长按应用槽 1</string>
     <string name="pref_quickapp_slot2_title">长按应用槽 2</string>
@@ -542,12 +542,12 @@
     <string name="pref_display_allow_all_rotations_title">允许所有旋转方向</string>
 
     <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">覆盖默认方块行为</string>
-    <string name="pref_qs_tile_behaviour_override_summary">覆盖触摸/长按选定方块的行为（需要重新启动）</string>
+    <string name="pref_qs_tile_behaviour_override_title">覆盖默认标题行为</string>
+    <string name="pref_qs_tile_behaviour_override_summary">覆盖触摸/长按选定标题的行为（需要重新启动）</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">网络模式方块SIM卡插槽</string>
-    <string name="pref_qs_network_mode_sim_slot_summary">定义的网络模式方块应用的SIM卡插槽（%s）</string>
+    <string name="pref_qs_network_mode_sim_slot_title">网络模式标题SIM卡插槽</string>
+    <string name="pref_qs_network_mode_sim_slot_summary">定义的网络模式标题应用的SIM卡插槽（%s）</string>
     <string name="sim_slot1">SIM 卡1</string>
     <string name="sim_slot2">SIM 卡2</string>
 
@@ -747,23 +747,34 @@
     <!-- HW Key Actions: Home and Back actions -->
     <string name="hwkey_action_home">转到桌面</string>
     <string name="hwkey_action_back">返回</string>
-
-    <!-- QS Tile Style -->
-    <string name="pref_qs_tile_style_title">标题风格</string>
-    <string name="pref_qs_tile_style_summary">仅适用于由GravityBox修改的标题(不影响原厂标题)</string>
-
-    <!-- Clear all recents bottom margin -->
-    <string name="pref_recent_clear_margin_bottom_title">调整底部边距</string>
 	
-	<!-- Google Plus -->
+	<!-- Clear all recents bottom margin -->
+    <string name="pref_recent_clear_margin_bottom_title">调整底部边距</string>
+
+    <!-- Google Plus -->
     <string name="pref_about_gplus_title">Google+ 社交</string>
     <string name="pref_about_gplus_summary">点击这里进入GravityBox的Google+ 社交</string>
 
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">允许LTE网络模式</string>
 
-    <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">禁用数据网络类型指示</string>
-    <string name="pref_disable_data_network_type_icons_summary">允许禁用信号条旁边的3G/G指示</string>
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">为了使虚拟键操作支持，这需要
+        覆盖系统默认虚拟键中的调整菜单</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog">找到已安装过时的GravityBox软件包。
+	使用新的软件包之前它必须先卸载。
+	GB现在将尝试从旧GB设置转移到您新的GB设置然后卸载。
+	出现提示时，您必须确认卸载。卸载后，激活Xposed安装器中的新模块并立即重新启动，
+	否则你可能会遇到系统的稳定性问题。</string>
+    <string name="gb_new_package_settings_transfer_ok">GravityBox设置转移成功</string>
+    <string name="gb_new_package_settings_transfer_failed">GravityBox设置转移失败</string>
+
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">锁屏触摸</string>
+    <string name="hwkey_ls_torch_disabled">禁用</string>
+    <string name="hwkey_ls_torch_home_longpress">长按主页键</string>
+    <string name="hwkey_ls_torch_voldown_longpress">长按音量键-</string>
 
 </resources>
