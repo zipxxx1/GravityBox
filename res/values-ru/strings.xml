@@ -139,7 +139,7 @@
 
     <!--  Statusbar background color -->
     <string name="statusbar_bgcolor_title">Цвет панели уведомлений</string>
-    <string name="statusbar_bgcolor_summary">Позволяет задать цвет и прозрачность панели уведомлений</string>
+    <string name="statusbar_bgcolor_summary">Позволяет задать цвет панели уведомлений</string>
 
     <!--  Fix speech settings -->
     <string name="fix_tts_settings_title">Исправление речевых настроек</string>
@@ -631,7 +631,7 @@
     <string name="call_vibration_periodic">Каждые 45 секунд при исходящем</string>
     
     <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Сортирвока тайлов</string>
+    <string name="pref_qs_tile_order_title">Сортировка тайлов</string>
     <string name="pref_qs_tile_order_summary">Позволяет сортировать тайлы</string>
     
     <!-- Ongoing notifications -->
@@ -769,7 +769,7 @@
     <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">Общие</string>
     <string name="pref_cat_navbar_keys_title">Кнопки навигации</string>
-    <string name="pref_cat_navbar_color_title">Цвет и прозрачность</string>
+    <string name="pref_cat_navbar_color_title">Цвет</string>
     <string name="pref_cat_navbar_dimen_title">Размеры</string>
 
     <!-- Navigation bar colors -->
@@ -823,5 +823,13 @@
 
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Разрешить режим LTE</string>
+    
+    <!-- Disable data network type icons -->
+    <string name="pref_disable_data_network_type_icons_title">Отключить индикаторы типа сети</string>
+    <string name="pref_disable_data_network_type_icons_summary">Позволяет отключить индикаторы 3G/G рядом с лесенкой сигнала</string>
+    
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">При включении поддержки действия для панели навигации необходимо 
+        переписать настройки по умолчанию в меню настройки панели навигации</string>
     
 </resources>
