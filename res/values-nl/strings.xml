@@ -17,7 +17,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox</string>
+    <string name="app_name">GravityBox [KK]</string>
 
     <string name="battery_style_title">Batterij indicator stijl</string>	
     <string name="battery_style_stock">Standaard batterij indicator</string>
