@@ -758,4 +758,8 @@
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Разрешить режим LTE</string>
     
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">При включении поддержки действия для панели навигации необходимо 
+        переписать настройки по умолчанию в меню настройки панели навигации</string>
+        
 </resources>
