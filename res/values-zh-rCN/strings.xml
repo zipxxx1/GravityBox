@@ -827,5 +827,9 @@
     <!-- Disable data network type icons -->
     <string name="pref_disable_data_network_type_icons_title">禁用数据网络类型指示</string>
     <string name="pref_disable_data_network_type_icons_summary">允许禁用信号条旁边的3G/G指示</string>
+    
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">为了使虚拟键操作支持，这需要
+        覆盖系统默认虚拟键中的调整菜单</string>
 
 </resources>
