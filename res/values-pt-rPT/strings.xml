@@ -31,8 +31,8 @@
     <string name="vol_key_cursor_control_title">Teclas de volume controlam cursor</string>
     <string name="vol_key_cursor_control_summary">As teclas de volume controlam o cursor em campos de texto</string>
     <string name="vol_key_cursor_control_off">Desativado</string>
-    <string name="vol_key_cursor_control_on">Teclas de volume +/- movem o cursor para a esquerda/direita</string>
-    <string name="vol_key_cursor_control_on_reverse">Teclas de volume +/- movem o cursor para a direita/esquerda</string>
+    <string name="vol_key_cursor_control_on">Teclas Volume +/- movem o cursor para a esquerda/direita</string>
+    <string name="vol_key_cursor_control_on_reverse">Teclas Volume +/- movem o cursor para a direita/esquerda</string>
 
     <string name="recents_clear_all_title">Limpar todas as aplicações recentes</string>
 
@@ -455,7 +455,7 @@
     <string name="pref_expanded_desktop_title">Modo ambiente de trabalho expandido</string>
     <string name="expanded_desktop_disabled">Desativado</string>
     <string name="expanded_desktop_navbar">Ocultar Barra de Navegação</string>
-    <string name="expanded_desktop_both">Ocultar ambas</string>
+    <string name="expanded_desktop_both">Ocultar todas as barras</string>
     <string name="action_expanded_desktop_title">Ambiente de trabalho expandido</string>
     <string name="action_expanded_desktop_on">Ambiente de trabalho expandido ativado</string>
     <string name="action_expanded_desktop_off">Ambiente de trabalho expandido desativado</string>
@@ -673,7 +673,7 @@
 
     <!-- Minimum screen brightness warning -->
     <string name="screen_brightness_min_warning">O ecrã poderá não suportar valores de brilho inferiores a 20. Caso o ecrã não se ligue após a alteração,
-        mantenha a tecla de volume + pressionada durante pelo menos 7 segundos para repor o valor pré-definido e poder reajustar o nível de brilho mínimo para um valor superior.</string>
+        mantenha a tecla Volume + pressionada durante pelo menos 7 segundos para repor o valor pré-definido e poder reajustar o nível de brilho mínimo para um valor superior.</string>
 
     <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">Geral</string>
@@ -724,5 +724,23 @@
 
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Permitir modo de rede 4G (LTE)</string>
+
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">Para ativar ações relacionadas com a Barra de Navegação, é necessário 
+        ignorar predefinições de sistema no menu de ajustes da Barra de Navegação</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog">Foi detetada uma instalação obsoleta do GravityBox, sendo necessário proceder à sua
+        desinstalação antes de usar a nova aplicação. Será efetuada uma tentativa de transferência de configurações entre instalações.
+        DEVERÁ confirmar a desinstalação quando solicitado. Após a desinstalação, ative o novo módulo utilizando o Xposed Installer 
+        e REINICIE IMEDIATAMENTE, caso contŕaio poderá experienciar problemas de instabilidade no sistema.</string>
+    <string name="gb_new_package_settings_transfer_ok">Configurações do GravityBox transferidas com sucesso</string>
+    <string name="gb_new_package_settings_transfer_failed">Transferência das configurações do GravityBox falhada</string>
+
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Ligar lanterna no ecrã de bloqueio</string>
+    <string name="hwkey_ls_torch_disabled">Desativada</string>
+    <string name="hwkey_ls_torch_home_longpress">Ao manter pressionada a tecla Casa</string>
+    <string name="hwkey_ls_torch_voldown_longpress">Ao manter pressionada a tecla Volume -</string>
 
 </resources>
