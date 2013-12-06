@@ -234,6 +234,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HWKEY_KILL_DELAY = "pref_hwkey_kill_delay";
     public static final String PREF_CAT_HWKEY_VOLUME = "pref_cat_hwkey_volume";
     public static final String PREF_KEY_VOLUME_ROCKER_WAKE_DISABLE = "pref_volume_rocker_wake_disable";
+    public static final String PREF_KEY_HWKEY_LOCKSCREEN_TORCH = "pref_hwkey_lockscreen_torch";
+    public static final String PREF_CAT_KEY_HWKEY_ACTIONS_OTHERS = "pref_cat_hwkey_actions_others";
     public static final int HWKEY_ACTION_DEFAULT = 0;
     public static final int HWKEY_ACTION_SEARCH = 1;
     public static final int HWKEY_ACTION_VOICE_SEARCH = 2;
@@ -251,6 +253,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int HWKEY_ACTION_BACK = 14;
     public static final int HWKEY_DOUBLETAP_SPEED_DEFAULT = 400;
     public static final int HWKEY_KILL_DELAY_DEFAULT = 1000;
+    public static final int HWKEY_TORCH_DISABLED = 0;
+    public static final int HWKEY_TORCH_HOME_LONGPRESS = 1;
+    public static final int HWKEY_TORCH_VOLDOWN_LONGPRESS = 2;
     public static final String ACTION_PREF_HWKEY_MENU_LONGPRESS_CHANGED = "gravitybox.intent.action.HWKEY_MENU_LONGPRESS_CHANGED";
     public static final String ACTION_PREF_HWKEY_MENU_DOUBLETAP_CHANGED = "gravitybox.intent.action.HWKEY_MENU_DOUBLETAP_CHANGED";
     public static final String ACTION_PREF_HWKEY_HOME_LONGPRESS_CHANGED = "gravitybox.intent.action.HWKEY_HOME_LONGPRESS_CHANGED";
@@ -262,10 +267,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_HWKEY_DOUBLETAP_SPEED_CHANGED = "gravitybox.intent.action.HWKEY_DOUBLETAP_SPEED_CHANGED";
     public static final String ACTION_PREF_HWKEY_KILL_DELAY_CHANGED = "gravitybox.intent.action.HWKEY_KILL_DELAY_CHANGED";
     public static final String ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED = "gravitybox.intent.action.VOLUME_ROCKER_WAKE_CHANGED";
+    public static final String ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED = "gravitybox.intent.action.HWKEY_LOCKSCREEN_TORCH_CHANGED";
     public static final String EXTRA_HWKEY_VALUE = "hwKeyValue";
     public static final String EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE = "hwKeyHomeDoubletapDisable";
     public static final String EXTRA_HWKEY_HOME_LONGPRESS_KG = "hwKeyHomeLongpressKeyguard";
     public static final String EXTRA_VOLUME_ROCKER_WAKE_DISABLE = "volumeRockerWakeDisable";
+    public static final String EXTRA_HWKEY_TORCH = "hwKeyTorch";
 
     public static final String PREF_KEY_PHONE_FLIP = "pref_phone_flip";
     public static final int PHONE_FLIP_ACTION_NONE = 0;
@@ -771,6 +778,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ColorPickerPreference mPrefSbIconColorSecondary;
         private ColorPickerPreference mPrefSbDaColorSecondary;
         private PreferenceScreen mPrefCatTransparencyManager;
+        private ListPreference mPrefHwKeyLockscreenTorch;
+        private PreferenceCategory mPrefCatHwKeyOthers;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -835,7 +844,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefHwKeyMenuDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_DOUBLETAP);
             mPrefCatHwKeyHome = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_HOME);
             mPrefHwKeyHomeLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_HOME_LONGPRESS);
-            mPrefHwKeyHomeLongpressKeyguard = (CheckBoxPreference) findPreference(PREF_KEY_HWKEY_HOME_LONGPRESS_KEYGUARD);
+            //mPrefHwKeyHomeLongpressKeyguard = (CheckBoxPreference) findPreference(PREF_KEY_HWKEY_HOME_LONGPRESS_KEYGUARD);
             mPrefCatHwKeyBack = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_BACK);
             mPrefHwKeyBackLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_LONGPRESS);
             mPrefHwKeyBackDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_DOUBLETAP);
@@ -846,6 +855,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefHwKeyKillDelay = (ListPreference) findPreference(PREF_KEY_HWKEY_KILL_DELAY);
             mPrefCatHwKeyVolume = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_VOLUME);
             mPrefHomeDoubletapDisable = (CheckBoxPreference) findPreference(PREF_KEY_HWKEY_HOME_DOUBLETAP_DISABLE);
+            mPrefHwKeyLockscreenTorch = (ListPreference) findPreference(PREF_KEY_HWKEY_LOCKSCREEN_TORCH);
+            mPrefCatHwKeyOthers = (PreferenceCategory) findPreference(PREF_CAT_KEY_HWKEY_ACTIONS_OTHERS);
 
             mPrefPhoneFlip = (ListPreference) findPreference(PREF_KEY_PHONE_FLIP);
 
@@ -981,7 +992,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {
-                mPrefCatHwKeyHome.removePreference(mPrefHwKeyHomeLongpressKeyguard);
+                mPrefCatHwKeyOthers.removePreference(mPrefHwKeyLockscreenTorch);
             }
             if (!Utils.hasVibrator(getActivity())) {
                 mPrefCatPhoneTelephony.removePreference(mPrefCallVibrations);
@@ -1350,6 +1361,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE)) {
                 mPrefCallerUnknownPhoto.setEnabled(mPrefCallerUnknownPhotoEnable.isChecked());
             }
+
+            if (key == null || key.equals(PREF_KEY_HWKEY_LOCKSCREEN_TORCH)) {
+                mPrefHwKeyLockscreenTorch.setSummary(mPrefHwKeyLockscreenTorch.getEntry());
+            }
         }
 
         @Override
@@ -1496,6 +1511,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED);
                 intent.putExtra(EXTRA_VOLUME_ROCKER_WAKE_DISABLE,
                         prefs.getBoolean(PREF_KEY_VOLUME_ROCKER_WAKE_DISABLE, false));
+            } else if (key.equals(PREF_KEY_HWKEY_LOCKSCREEN_TORCH)) {
+                intent.setAction(ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_TORCH, Integer.valueOf(
+                        prefs.getString(PREF_KEY_HWKEY_LOCKSCREEN_TORCH, "0")));
             } else if (key.equals(PREF_KEY_VOLUME_PANEL_EXPANDABLE)) {
                 intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
                 intent.putExtra(EXTRA_EXPANDABLE,

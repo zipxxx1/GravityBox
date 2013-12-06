@@ -771,4 +771,10 @@
     <string name="gb_new_package_settings_transfer_ok">GravityBox settings transferred successfully</string>
     <string name="gb_new_package_settings_transfer_failed">Transfer of GravityBox settings failed</string>
 
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Lockscreen torch</string>
+    <string name="hwkey_ls_torch_disabled">Disabled</string>
+    <string name="hwkey_ls_torch_home_longpress">On Home long-press</string>
+    <string name="hwkey_ls_torch_voldown_longpress">On volume down long-press</string>
+
 </resources>
