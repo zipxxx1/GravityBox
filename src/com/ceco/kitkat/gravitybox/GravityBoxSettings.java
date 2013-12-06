@@ -551,11 +551,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
             .setCancelable(false)
             .setTitle("ATTENTION")
-            .setMessage("Old GravityBox with obsolete package name found installed. " +
-                    "It has to be uninstalled before new package can be used. GB will now try to " +
-                    "transfer your existing settings from old GB into new GB and then uninstall old GB. You MUST " +
-                    "confirm uninstallation when prompted. After uninstallation, activate new module in Xposed Installer " +
-                    "and REBOOT IMMEDIATELLY otherwise you might experience system stability issues.")
+            .setMessage(R.string.gb_new_package_dialog)
             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -581,7 +577,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         }
                     }
                     Toast.makeText(GravityBoxSettings.this, copied ? 
-                            "GravityBox settings transferred successfully" : "Transfer of GravityBox settings failed",
+                            getString(R.string.gb_new_package_settings_transfer_ok) : 
+                                getString(R.string.gb_new_package_settings_transfer_failed),
                             Toast.LENGTH_LONG).show();
                     // try to uninstall old package
                     Uri oldGbUri = Uri.parse("package:com.ceco.gm2.gravitybox");
