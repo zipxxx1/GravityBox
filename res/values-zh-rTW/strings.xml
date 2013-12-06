@@ -85,6 +85,8 @@
     <string name="quick_settings_wifi_off">Wi-Fi 關閉</string>
     <string name="quick_settings_wifi_not_connected">沒有連線</string>
     <string name="quick_settings_wifi_turning_on">開啟中&#8230;</string>
+    <string name="quick_settings_nfc_on">NFC 開啟</string>
+    <string name="quick_settings_nfc_off">NFC 關閉</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">狀態列快速設定磁貼</string>
@@ -115,6 +117,7 @@
     <string name="qs_tile_expanded_desktop">全螢幕功能</string>
     <string name="qs_tile_stay_awake">保持清醒</string>
     <string name="qs_tile_screenshot">螢幕截圖</string>
+    <string name="qs_tile_nfc">NFC</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">顏色選擇器</string>
@@ -820,5 +823,8 @@
     <!-- Disable data network type icons -->
     <string name="pref_disable_data_network_type_icons_title">停用網路類型指示</string>
     <string name="pref_disable_data_network_type_icons_summary">允許在訊號欄停用 3G/G 指示</string>
+    
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">為了能夠支援海苔條操作控制，在海苔條調整選單中覆蓋系統預設值是必須的</string>
  
 </resources>
