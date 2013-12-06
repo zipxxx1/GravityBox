@@ -99,6 +99,8 @@
     <string name="quick_settings_wifi_off">Wi-Fi关闭</string>
     <string name="quick_settings_wifi_not_connected">未连接</string>
     <string name="quick_settings_wifi_turning_on">正在打开&#8230;</string>
+	<string name="quick_settings_nfc_on">NFC开启</string>
+    <string name="quick_settings_nfc_off">NFC关闭</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">状态栏快速设置</string>
@@ -129,6 +131,7 @@
     <string name="qs_tile_expanded_desktop">扩展桌面</string>
     <string name="qs_tile_stay_awake">保持唤醒</string>
     <string name="qs_tile_screenshot">屏幕截图</string>
+	<string name="qs_tile_nfc">NFC</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">颜色选择器</string>
@@ -169,7 +172,7 @@
 
     <!-- CRT effect screen off animation -->
     <string name="crt_off_effect_title">CRT屏幕关闭特效</string>
-    <string name="crt_off_effect_summary">当屏幕关闭时，使用旧式CRT屏幕关闭时的特效</string>
+    <string name="crt_off_effect_summary">当屏幕关闭时使用旧式CRT屏幕关闭时的特效</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">工程模式</string>
@@ -239,7 +242,7 @@
     <string name="pref_lockscreen_menu_key_summary">使菜单键在锁定画面时可以用来快速地解锁装置（需要重新启动）</string>
 
     <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">修正短信唤醒锁</string>
+    <string name="pref_mms_fix_wakelock_title">修正短信唤醒</string>
     <string name="pref_mms_fix_wakelock_summary">避免在收到新短信时唤醒屏幕（需要重新启动）</string>
 
     <!-- Statusbar center clock -->
@@ -310,7 +313,7 @@
     <string name="pref_volume_panel_expandable_title">可扩展音量面板</string>
     <string name="pref_volume_panel_expandable_summary">启用此选项使你可以调整不同的媒体音量</string>
         
-        <!-- Fully expandable volume panel -->
+    <!-- Fully expandable volume panel -->
     <string name="pref_volume_panel_expandable_fully_title">完整的可扩展音量面板</string>
     <string name="pref_volume_panel_expandable_fully_summary">允许音量面板占用所有提供的空间</string>
 
@@ -320,7 +323,7 @@
 
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">自动切换快速菜单</string>
-    <string name="pref_auto_switch_qs_summary">没有通知时，下拉状态栏自动切换成快速设置菜单</string>
+    <string name="pref_auto_switch_qs_summary">没有通知时下拉状态栏自动切换成快速设置菜单</string>
 
     <!-- Quick pulldown -->
     <string name="pref_quick_pulldown_title">快速设置菜单下拉位置</string>
@@ -466,7 +469,7 @@
 
     <!-- Transparency management -->
     <string name="pref_cat_transparency_manager_title">透明度调整</string>
-        <string name="pref_cat_transparency_manager_summary">管理状态栏和虚拟键透明度</string>
+    <string name="pref_cat_transparency_manager_summary">管理状态栏和虚拟键透明度</string>
     <string name="pref_tm_statusbar_launcher_title">启动器下的状态栏透明度</string>
     <string name="pref_tm_statusbar_lockscreen_title">锁屏画面时的状态栏透明度</string>
     <string name="pref_tm_navbar_launcher_title">启动器下的虚拟键透明度</string>
@@ -477,7 +480,7 @@
 
     <!-- Screen dim level -->
     <string name="pref_screen_dim_level_title">屏幕暗淡级别</string>
-    <string name="pref_screen_dim_level_summary">当屏幕将被关闭时，削减的亮度值（需要重新启动）</string>
+    <string name="pref_screen_dim_level_summary">当屏幕将被关闭时削减的亮度值（需要重新启动）</string>
 
     <!-- Device type -->
     <string name="device_phone">手机</string>
@@ -504,11 +507,11 @@
 
     <!-- Link notification panel clock to Deskclock -->
     <string name="pref_clock_link_title">通知面板时钟应用</string>
-    <string name="pref_clock_link_summary">启用后状态栏的时间将链接到指定应用，而不是日期与时间设置</string>
+    <string name="pref_clock_link_summary">启用后状态栏的时间将链接到指定应用而不是日期与时间设置</string>
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">等待GravityBox系统框架的响应&#8230;</string>
-    <string name="gb_startup_error">GravityBoy系统框架未响应  退出中&#8230;</string>
+    <string name="gb_startup_error">GravityBoy系统框架未响应 退出中&#8230;</string>
 
     <!-- National data roaming -->
     <string name="pref_national_roaming_title">国内数据漫游</string>
@@ -570,14 +573,14 @@
 
     <!-- Messaging: Strip unicode -->
     <string name="pref_mms_unicode_stripping_title">转换Unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">将Unicode字符转换为普通字符，减少整体信息大小</string>
+    <string name="pref_mms_unicode_stripping_summary">将Unicode字符转换为普通字符减少整体信息大小</string>
     <string name="unicode_stripping_leave_intact">保留字符不变</string>
     <string name="unicode_stripping_non_encodable">转换不可编码字符</string>
     <string name="unicode_stripping_all">转换所有Unicode字符</string>
 
     <!-- Disable slow 2G data warning -->
     <string name="pref_mobile_data_slow2g_disable_title">禁用低速2G网络数据警告</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">当在快速设置中为SIM卡启用2G移动数据时，禁用低速数据警告</string>
+    <string name="pref_mobile_data_slow2g_disable_summary">当在快速设置中为SIM卡启用2G移动数据时禁用低速数据警告</string>
 
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">保持原厂电池颜色</string>
@@ -628,8 +631,8 @@
     <string name="call_vibration_periodic">通话期间每45秒振动一次</string>
 
     <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">方块重新排序</string>
-    <string name="pref_qs_tile_order_summary">允许快速设置方块重新排序</string>
+    <string name="pref_qs_tile_order_title">标题重新排序</string>
+    <string name="pref_qs_tile_order_summary">允许标题快速设置重新排序</string>
 
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">进行中通拦截器</string>
@@ -643,7 +646,7 @@
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">快速解锁</string>
-    <string name="pref_lockscreen_quick_unlock_summary">当输入正确的PIN/密码时，自动解锁</string>
+    <string name="pref_lockscreen_quick_unlock_summary">当输入正确的PIN/密码时自动解锁</string>
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">禁用</string>
@@ -680,9 +683,9 @@
     
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
-    <string name="service_background_processes">空闲:<xliff:g id="memory">%1$s</xliff:g></string>
+    <string name="service_background_processes"> 可用:<xliff:g id="memory">%1$s</xliff:g></string>
     <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
-    <string name="service_foreground_processes">可用:<xliff:g id="memory">%1$s</xliff:g></string>
+    <string name="service_foreground_processes">已用:<xliff:g id="memory">%1$s</xliff:g></string>
     <string name="pref_rambar_title">最近任务内存栏</string>
     <string name="rambar_off">关闭</string>
     <string name="rambar_top">置顶</string>
@@ -726,7 +729,7 @@
     <string name="signal_color_mode_stock">使用原厂图标（无信号等级）</string>
     <string name="signal_color_mode_disabled">不使用颜色</string>
         
-        <!-- Application launcher -->
+    <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">应用启动器</string>
     <string name="pref_cat_app_launcher_summary">对话框允许定义最多8个应用程序，可以分配硬件按键或作为额外的虚拟键</string>
     <string name="pref_app_launcher_slot_title">应用程序槽 %d</string>
@@ -766,7 +769,7 @@
     <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">普通</string>
     <string name="pref_cat_navbar_keys_title">虚拟按键</string>
-    <string name="pref_cat_navbar_color_title">颜色和透明度</string>
+    <string name="pref_cat_navbar_color_title">颜色</string>
     <string name="pref_cat_navbar_dimen_title">大小</string>
     
     <!-- Navigation bar colors -->
@@ -795,7 +798,7 @@
     <string name="pref_statusbar_data_activity_color_secondary_summary">设置为辅助数据活动的指示颜色</string>
     
     <!-- Status icon style -->
-    <string name="pref_status_icon_style_title">状态图标风格</string>
+    <string name="pref_status_icon_style_title">状态栏图标风格</string>
     <string name="pref_status_icon_style_summary">适用于无声,震动,闹钟等状态图标</string>
     <string name="icon_style_jb">JellyBean</string>
     <string name="icon_style_kk">KitKat</string>
@@ -809,9 +812,20 @@
 
     <!-- QS Tile Style -->
     <string name="pref_qs_tile_style_title">标题风格</string>
-    <string name="pref_qs_tile_style_summary">仅适用于由GravityBox修改标题(不影响原厂标题)</string>
+    <string name="pref_qs_tile_style_summary">仅适用于由GravityBox修改的标题(不影响原厂标题)</string>
 
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">调整底部边距</string>
+	
+	<!-- Google Plus -->
+    <string name="pref_about_gplus_title">Google+ 社交</string>
+    <string name="pref_about_gplus_summary">点击这里进入GravityBox的Google+ 社交</string>
+
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">允许LTE网络模式</string>
+
+    <!-- Disable data network type icons -->
+    <string name="pref_disable_data_network_type_icons_title">禁用数据网络类型指示</string>
+    <string name="pref_disable_data_network_type_icons_summary">允许禁用信号条旁边的3G/G指示</string>
 
 </resources>
