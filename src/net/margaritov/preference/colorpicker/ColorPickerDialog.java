@@ -29,7 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import com.ceco.gm2.gravitybox.R;
+import com.ceco.kitkat.gravitybox.R;
 
 public class ColorPickerDialog 
 	extends 

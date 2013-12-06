@@ -31,32 +31,32 @@
                 android:summary="@string/pref_lockscreen_ring_targets_enable_summary"
                 android:defaultValue="false" />
 
-            <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+            <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                 android:key="pref_lockscreen_ring_targets_app0"
                 android:title="@string/pref_lockscreen_ring_targets_app_title"
                 android:summary="@string/app_picker_none" />
 
-            <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+            <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                 android:key="pref_lockscreen_ring_targets_app1"
                 android:title="@string/pref_lockscreen_ring_targets_app_title"
                 android:summary="@string/app_picker_none" />
 
-            <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+            <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                 android:key="pref_lockscreen_ring_targets_app2"
                 android:title="@string/pref_lockscreen_ring_targets_app_title"
                 android:summary="@string/app_picker_none" />
 
-            <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+            <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                 android:key="pref_lockscreen_ring_targets_app3"
                 android:title="@string/pref_lockscreen_ring_targets_app_title"
                 android:summary="@string/app_picker_none" />
 
-            <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+            <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                 android:key="pref_lockscreen_ring_targets_app4"
                 android:title="@string/pref_lockscreen_ring_targets_app_title"
                 android:summary="@string/app_picker_none" />
 
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_lockscreen_ring_targets_vertical_offset"
                 android:title="@string/pref_lockscreen_ring_vertical_offset_title"
                 minimum="-50"
@@ -66,7 +66,7 @@
                 monitorBoxUnit="px" 
                 android:defaultValue="0" />
 
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_lockscreen_ring_targets_horizontal_offset"
                 android:title="@string/pref_lockscreen_ring_horizontal_offset_title"
                 minimum="-30"
@@ -199,27 +199,27 @@
                 android:key="pref_cat_quick_app_tile"
                 android:title="@string/pref_cat_quickapp_tile_title">
 
-                <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                     android:key="pref_quickapp_default"
                     android:title="@string/pref_quickapp_default_title"
                     android:summary="@string/app_picker_none" />
 
-                <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                     android:key="pref_quickapp_slot1"
                     android:title="@string/pref_quickapp_slot1_title"
                     android:summary="@string/app_picker_none" />
 
-                <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                     android:key="pref_quickapp_slot2"
                     android:title="@string/pref_quickapp_slot2_title"
                     android:summary="@string/app_picker_none" />
 
-                <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                     android:key="pref_quickapp_slot3"
                     android:title="@string/pref_quickapp_slot3_title"
                     android:summary="@string/app_picker_none" />
 
-                <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                     android:key="pref_quickapp_slot4"
                     android:title="@string/pref_quickapp_slot4_title"
                     android:summary="@string/app_picker_none" />
@@ -355,7 +355,7 @@
                 android:defaultValue="overlay"
                 android:order="5" />
 
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_notif_background_alpha"
                 android:title="@string/pref_notif_background_alpha_title"
                 minimum="0"
@@ -398,7 +398,7 @@
                 android:entryValues="@array/pie_control_trigger_position_values"
                 android:defaultValue="@array/pie_control_trigger_position_default" />
 
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                     android:key="pref_pie_control_trigger_size"
                     android:title="@string/pie_control_trigger_size_title"
                     minimum="2"
@@ -408,7 +408,7 @@
                     monitorBoxUnit="px"
                     android:defaultValue="5" />
 
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                     android:key="pref_pie_control_size"
                     android:title="@string/pie_control_size_title"
                     minimum="500"
@@ -491,7 +491,7 @@
                 android:title="@string/pref_clock_hide_title"
                 android:defaultValue="false" />
 
-            <com.ceco.gm2.gravitybox.preference.AppPickerPreference 
+            <com.ceco.kitkat.gravitybox.preference.AppPickerPreference 
                 android:key="pref_clock_link_app"
                 android:title="@string/pref_clock_link_title"
                 android:summary="@string/pref_clock_link_summary" />
@@ -529,7 +529,7 @@
 
         </PreferenceScreen>
 
-        <com.ceco.gm2.gravitybox.preference.OngoingNotifPreference
+        <com.ceco.kitkat.gravitybox.preference.OngoingNotifPreference
             android:key="pref_ongoing_notifications"
             android:title="@string/pref_ongoing_notifications_title"
             android:summary="@string/pref_ongoing_notifications_summary" />
@@ -635,7 +635,7 @@
             android:key="pref_cat_navbar_dimen"
             android:title="@string/pref_cat_navbar_dimen_title">
 
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_navbar_height"
                 android:title="@string/pref_navbar_height_title"
                 android:summary="@string/pref_navbar_height_summary"
@@ -646,7 +646,7 @@
                 monitorBoxUnit="%"
                 android:defaultValue="100" />
 
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_navbar_height_landscape"
                 android:title="@string/pref_navbar_height_title"
                 android:summary="@string/pref_navbar_height_landscape_summary"
@@ -657,7 +657,7 @@
                 monitorBoxUnit="%"
                 android:defaultValue="100" />
 
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_navbar_width"
                 android:title="@string/pref_navbar_width_title"
                 android:summary="@string/pref_navbar_width_summary"
@@ -685,7 +685,7 @@
             android:entryValues="@array/tm_mode_values"
             android:defaultValue="3" />
 
-        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+        <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
             android:key="pref_tm_statusbar_launcher"
             android:title="@string/pref_tm_statusbar_launcher_title"
             minimum="0"
@@ -694,7 +694,7 @@
             monitorBoxEnabled="true"
             monitorBoxUnit="%" />
 
-        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+        <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
             android:key="pref_tm_statusbar_lockscreen"
             android:title="@string/pref_tm_statusbar_lockscreen_title"
             minimum="0"
@@ -703,7 +703,7 @@
             monitorBoxEnabled="true"
             monitorBoxUnit="%" />
 
-        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+        <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
             android:key="pref_tm_navbar_launcher"
             android:title="@string/pref_tm_navbar_launcher_title"
             minimum="0"
@@ -712,7 +712,7 @@
             monitorBoxEnabled="true"
             monitorBoxUnit="%" />
 
-        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+        <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
             android:key="pref_tm_navbar_lockscreen"
             android:title="@string/pref_tm_navbar_lockscreen_title"
             minimum="0"
@@ -782,7 +782,7 @@
                 android:summary="@string/pref_brightness_master_switch_summary"
                 android:defaultValue="false" />
 
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_brightness_min2"
                 android:title="@string/pref_brightness_min_title"
                 android:summary="@string/pref_brightness_min_summary"
@@ -792,7 +792,7 @@
                 monitorBoxEnabled="true"
                 android:defaultValue="20" />
 
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_screen_dim_level"
                 android:title="@string/pref_screen_dim_level_title"
                 android:summary="@string/pref_screen_dim_level_summary"
@@ -802,7 +802,7 @@
                 monitorBoxEnabled="true"
                 android:defaultValue="10" />
 
-            <com.ceco.gm2.gravitybox.preference.AutoBrightnessDialogPreference
+            <com.ceco.kitkat.gravitybox.preference.AutoBrightnessDialogPreference
                 android:key="pref_autobrightness" 
                 android:title="@string/pref_ab_title"
                 android:summary="@string/pref_ab_summary" />
@@ -1075,12 +1075,12 @@
             android:key="pref_cat_hwkey_actions_others"
             android:title="@string/pref_cat_hwkey_actions_others">
 
-            <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+            <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                 android:key="pref_hwkey_custom_app"
                 android:title="@string/pref_hwkey_custom_app_title"
                 android:summary="@string/app_picker_none" />
 
-            <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+            <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                 android:key="pref_hwkey_custom_app2"
                 android:title="@string/pref_hwkey_custom_app_title2"
                 android:summary="@string/app_picker_none" />
@@ -1133,7 +1133,7 @@
             android:entryValues="@array/rambar_values"
             android:defaultValue="0" />
 
-        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+        <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_recent_clear_margin_top"
                 android:title="@string/pref_recent_clear_margin_top_title"
                 minimum="0"
@@ -1143,7 +1143,7 @@
                 monitorBoxUnit="px"
                 android:defaultValue="20" />
 
-        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+        <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_recent_clear_margin_bottom"
                 android:title="@string/pref_recent_clear_margin_bottom_title"
                 minimum="0"
