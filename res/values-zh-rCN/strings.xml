@@ -104,7 +104,7 @@
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">状态栏快速设置</string>
-    <string name="quick_settings_summary">允许在状态栏中显示或隐藏快速设置方块</string>
+    <string name="quick_settings_summary">允许在状态栏中显示或隐藏快速设置标题</string>
     <string name="qs_tile_user_profile">用户配置文件</string>
     <string name="qs_tile_airplane_mode">飞行模式</string>
     <string name="qs_tile_battery">电池状态</string>
@@ -303,8 +303,8 @@
     <string name="pref_holo_bg_solid_black_summary">在默认的Holo系统主题内使用纯黑色的背景而不是黑-灰色的渐变（需要重新启动）</string>
     
     <!-- QuickSettings tiles per row -->
-    <string name="pref_qs_tiles_per_row_title">每行方块数</string>
-    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个方块，开关会根据您的设置自动缩放，适用于竖屏</string>
+    <string name="pref_qs_tiles_per_row_title">每行标题数</string>
+    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个标题，开关会根据您的设置自动缩放，适用于竖屏</string>
     
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">显示周</string>
@@ -437,7 +437,7 @@
 
     <!-- QuickApp tile settings -->
     <string name="qs_tile_quickapp">快速应用</string>
-    <string name="pref_cat_quickapp_tile_title">快速应用方块设置</string>
+    <string name="pref_cat_quickapp_tile_title">快速应用标题设置</string>
     <string name="pref_quickapp_default_title">主应用</string>
     <string name="pref_quickapp_slot1_title">长按应用槽 1</string>
     <string name="pref_quickapp_slot2_title">长按应用槽 2</string>
@@ -596,12 +596,12 @@
     <string name="pref_display_allow_all_rotations_title">允许所有旋转方向</string>
 
     <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">覆盖默认方块行为</string>
-    <string name="pref_qs_tile_behaviour_override_summary">覆盖触摸/长按选定方块的行为（需要重新启动）</string>
+    <string name="pref_qs_tile_behaviour_override_title">覆盖默认标题行为</string>
+    <string name="pref_qs_tile_behaviour_override_summary">覆盖触摸/长按选定标题的行为（需要重新启动）</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">网络模式方块SIM卡插槽</string>
-    <string name="pref_qs_network_mode_sim_slot_summary">定义的网络模式方块应用的SIM卡插槽（%s）</string>
+    <string name="pref_qs_network_mode_sim_slot_title">网络模式标题SIM卡插槽</string>
+    <string name="pref_qs_network_mode_sim_slot_summary">定义的网络模式标题应用的SIM卡插槽（%s）</string>
     <string name="sim_slot1">SIM 卡1</string>
     <string name="sim_slot2">SIM 卡2</string>
 
