@@ -832,4 +832,10 @@
     <string name="hwkey_navbar_warning">为了使虚拟键操作支持，这需要
         覆盖系统默认虚拟键中的调整菜单</string>
 
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">锁屏触摸</string>
+    <string name="hwkey_ls_torch_disabled">禁用</string>
+    <string name="hwkey_ls_torch_home_longpress">长按主页键</string>
+    <string name="hwkey_ls_torch_voldown_longpress">长按音量键-</string>
+
 </resources>

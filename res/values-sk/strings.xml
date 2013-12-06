@@ -796,4 +796,10 @@
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Povoliť LTE typ siete</string>
 
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Ovládanie LED svetla na obrazovke uzamknutia</string>
+    <string name="hwkey_ls_torch_disabled">Vypnuté</string>
+    <string name="hwkey_ls_torch_home_longpress">Na dlhé podržanie Domov</string>
+    <string name="hwkey_ls_torch_voldown_longpress">Na dlhé podržanie Hlasitosť-</string>
+
 </resources>

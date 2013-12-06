@@ -87,7 +87,7 @@ public class ModHwKeys {
     private static int mMenuLongpressAction = 0;
     private static int mMenuDoubletapAction = 0;
     private static int mHomeLongpressAction = 0;
-    private static int mHomeLongpressActionKeyguard = 0;
+    private static int mLockscreenTorch = 0;
     private static boolean mHomeDoubletapDisabled;
     private static int mHomeDoubletapDefaultAction;
     private static int mBackLongpressAction = 0;
@@ -128,7 +128,6 @@ public class ModHwKeys {
         MENU_LONGPRESS,
         MENU_DOUBLETAP,
         HOME_LONGPRESS,
-        HOME_LONGPRESS_KEYGUARD,
         BACK_LONGPRESS,
         BACK_DOUBLETAP,
         RECENTS_SINGLETAP,
@@ -157,14 +156,6 @@ public class ModHwKeys {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE)) {
                     mHomeLongpressAction = value;
                     if (DEBUG) log("Home long-press action set to: " + value);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_HOME_LONGPRESS_KG)) {
-                    mHomeLongpressActionKeyguard = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_HWKEY_HOME_LONGPRESS_KG, false) ?
-                                    GravityBoxSettings.HWKEY_ACTION_TORCH : 
-                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT;
-                    if (DEBUG) log("Home long-press action while keyguard on set to: " + 
-                                        mHomeLongpressActionKeyguard);
                 }
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_HOME_DOUBLETAP_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE)) {
@@ -202,6 +193,12 @@ public class ModHwKeys {
                 mVolumeRockerWakeDisabled = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_DISABLE, false);
                 if (DEBUG) log("mVolumeRockerWakeDisabled set to: " + mVolumeRockerWakeDisabled);
+            } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED)) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
+                    mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
+                            GravityBoxSettings.HWKEY_TORCH_DISABLED);
+                    if (DEBUG) log("Lockscreen torch set to: " + mLockscreenTorch);
+                }
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE)) {
                     mHwKeysEnabled = !intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE, false);
@@ -259,13 +256,12 @@ public class ModHwKeys {
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_DOUBLETAP_SPEED, "400"));
                 mKillDelay = Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_KILL_DELAY, "1000"));
+                mLockscreenTorch = Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_LOCKSCREEN_TORCH, "0"));
             } catch (NumberFormatException e) {
                 XposedBridge.log(e);
             }
 
-            mHomeLongpressActionKeyguard = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS_KEYGUARD, false) ?
-                            GravityBoxSettings.HWKEY_ACTION_TORCH : GravityBoxSettings.HWKEY_ACTION_DEFAULT;
             mHomeDoubletapDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_HWKEY_HOME_DOUBLETAP_DISABLE, false);
             mVolumeRockerWakeDisabled = prefs.getBoolean(
@@ -321,6 +317,19 @@ public class ModHwKeys {
                         }
                     }
 
+                    if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && keyguardOn &&
+                            mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_VOLDOWN_LONGPRESS &&
+                            !(Boolean) XposedHelpers.callMethod(param.thisObject, "isMusicActive")) {
+                        if (!down) {
+                            handler.removeCallbacks(mLockscreenTorchRunnable);
+                        } else {
+                            if (event.getRepeatCount() == 0) {
+                                handler.postDelayed(mLockscreenTorchRunnable, 
+                                        ViewConfiguration.getLongPressTimeout());
+                            }
+                        }
+                    }
+
                     if (mVolumeRockerWakeDisabled && 
                             (keyCode == KeyEvent.KEYCODE_VOLUME_UP ||
                                     keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)) {
@@ -333,7 +342,7 @@ public class ModHwKeys {
 
                     if (keyCode == KeyEvent.KEYCODE_HOME) {
                         if (!down) {
-                            handler.removeCallbacks(mHomeLongPressKeyguard);
+                            handler.removeCallbacks(mLockscreenTorchRunnable);
                             if (mIsHomeLongPressed) {
                                 mIsHomeLongPressed = false;
                                 param.setResult(0);
@@ -349,12 +358,12 @@ public class ModHwKeys {
                         } else if (keyguardOn) {
                             if (event.getRepeatCount() == 0) {
                                 mIsHomeLongPressed = false;
-                                if (mHomeLongpressActionKeyguard != GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                    handler.postDelayed(mHomeLongPressKeyguard, 
-                                            getLongpressTimeoutForAction(mHomeLongpressActionKeyguard));
+                                if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
+                                    handler.postDelayed(mLockscreenTorchRunnable, 
+                                            getLongpressTimeoutForAction(GravityBoxSettings.HWKEY_ACTION_TORCH));
                                 }
                             } else {
-                                if (mHomeLongpressActionKeyguard != GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
                                     param.setResult(0);
                                 }
                                 return;
@@ -603,6 +612,7 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_SHOW_POWER_MENU);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
+            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -674,13 +684,15 @@ public class ModHwKeys {
         }
     };
 
-    private static Runnable mHomeLongPressKeyguard = new Runnable() {
+    private static Runnable mLockscreenTorchRunnable = new Runnable() {
 
         @Override
         public void run() {
-            if (DEBUG) log("mHomeLongPressKeyguard runnable launched");
-            mIsHomeLongPressed = true;
-            performAction(HwKeyTrigger.HOME_LONGPRESS_KEYGUARD);
+            if (DEBUG) log("mLockscreenTorchRunnable runnable launched");
+            if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
+                mIsHomeLongPressed = true;
+            }
+            toggleTorch();
         }
     };
 
@@ -719,8 +731,6 @@ public class ModHwKeys {
             action = mMenuDoubletapAction;
         } else if (keyTrigger == HwKeyTrigger.HOME_LONGPRESS) {
             action = mHomeLongpressAction;
-        } else if (keyTrigger == HwKeyTrigger.HOME_LONGPRESS_KEYGUARD) {
-            action = mHomeLongpressActionKeyguard;
         } else if (keyTrigger == HwKeyTrigger.BACK_LONGPRESS) {
             action = mBackLongpressAction;
         } else if (keyTrigger == HwKeyTrigger.BACK_DOUBLETAP) {

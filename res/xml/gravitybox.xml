@@ -1055,11 +1055,13 @@
                 android:dialogTitle="@string/hwkey_home_longpress_dialog_title"
                 android:defaultValue="0"/>
 
+            <!-- 
             <CheckBoxPreference
                 android:key="pref_hwkey_home_longpress_keyguard"
                 android:title="@string/pref_hwkey_home_longpress_keyguard_title"
                 android:summary="@string/pref_hwkey_home_longpress_keyguard_summary"
                 android:defaultValue="false" />
+            -->
 
             <CheckBoxPreference
                 android:key="pref_hwkey_home_doubletap_disable"
@@ -1127,6 +1129,13 @@
         <PreferenceCategory
             android:key="pref_cat_hwkey_actions_others"
             android:title="@string/pref_cat_hwkey_actions_others">
+
+            <ListPreference
+                android:key="pref_hwkey_lockscreen_torch"
+                android:title="@string/pref_hwkey_lockscreen_torch_title"
+                android:entries="@array/hwkey_ls_torch_entries"
+                android:entryValues="@array/hwkey_ls_torch_values"
+                android:defaultValue="0" />
 
             <com.ceco.gm2.gravitybox.preference.AppPickerPreference
                 android:key="pref_hwkey_custom_app"

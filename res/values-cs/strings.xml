@@ -801,4 +801,10 @@
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Povolit LTE typ sítě</string>
 
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Ovládání LED světla na obrazovce uzamčení</string>
+    <string name="hwkey_ls_torch_disabled">Vypnuto</string>
+    <string name="hwkey_ls_torch_home_longpress">Na dlouhé podržení Domů</string>
+    <string name="hwkey_ls_torch_voldown_longpress">Na dlouhé podržení Hlasitost-</string>
+
 </resources>

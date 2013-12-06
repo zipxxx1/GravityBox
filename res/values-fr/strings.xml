@@ -832,4 +832,10 @@
     <string name="hwkey_navbar_warning">Pour permettre d\'activer le support des actions de la barre de navigation, il est nécessaire
         de remplacer les paramètres système par défaut dans le menu Modifications barre de navigation</string>
 
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Torche depuis écran de déverrouillage</string>
+    <string name="hwkey_ls_torch_disabled">Désactivée</string>
+    <string name="hwkey_ls_torch_home_longpress">Par appui long sur Home</string>
+    <string name="hwkey_ls_torch_voldown_longpress">Par appui long sur volume -</string>
+
 </resources>
