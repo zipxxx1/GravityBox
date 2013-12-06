@@ -98,6 +98,9 @@ public class ModStatusBar {
     private static SettingsObserver mSettingsObserver;
     private static String mOngoingNotif;
     private static TrafficMeter mTrafficMeter;
+    private static View mSpacer;
+    private static LayoutParams mSpacerDefLayoutParams; 
+    private static LayoutParams mSpacerAltLayoutParams; 
     private static ViewGroup mSbContents;
     private static boolean mClockInSbContents = false;
     private static boolean mDisableDataNetworkTypeIcons = false;
@@ -166,6 +169,7 @@ public class ModStatusBar {
                     && intent.hasExtra(GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED)) {
                 mDisableDataNetworkTypeIcons = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED, false);
+                updateSpacer();
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED)
                     && intent.hasExtra(GravityBoxSettings.EXTRA_SB_BRIGHTNESS)) {
                 mBrightnessControlEnabled = intent.getBooleanExtra(
@@ -408,20 +412,19 @@ public class ModStatusBar {
 
                     // MTK Dual SIMs: reduce space between wifi and signal icons
                     if (Utils.hasGeminiSupport()) {
-                        // but only when data network type icons are not showing
-                        if (mDisableDataNetworkTypeIcons) {
-                            final int scvResId = liparam.res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
-                            if (scvResId != 0) {
-                                final View scView = liparam.view.findViewById(scvResId);
-                                if (scView != null) {
-                                    final int spacerResId = liparam.res.getIdentifier("spacer", "id", PACKAGE_NAME);
-                                    final View spacer = scView.findViewById(spacerResId);
-                                    if (spacer != null &&
-                                            (spacer.getLayoutParams() instanceof LinearLayout.LayoutParams)) {
-                                        final int spacerSize = (int) spacer.getContext()
-                                                .getResources().getDisplayMetrics().density * 6;
-                                        spacer.setLayoutParams(new LinearLayout.LayoutParams(spacerSize, spacerSize));
-                                    }
+                        final int scvResId = liparam.res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
+                        if (scvResId != 0) {
+                            final View scView = liparam.view.findViewById(scvResId);
+                            if (scView != null) {
+                                final int spacerResId = liparam.res.getIdentifier("spacer", "id", PACKAGE_NAME);
+                                mSpacer = scView.findViewById(spacerResId);
+                                if (mSpacer != null && 
+                                        (mSpacer.getLayoutParams() instanceof LinearLayout.LayoutParams)) {
+                                    mSpacerDefLayoutParams = mSpacer.getLayoutParams();
+                                    final int spacerSize = (int) mSpacer.getContext()
+                                            .getResources().getDisplayMetrics().density * 6;
+                                    mSpacerAltLayoutParams = new LinearLayout.LayoutParams(spacerSize, spacerSize);
+                                    updateSpacer();
                                 }
                             }
                         }
@@ -717,6 +720,17 @@ public class ModStatusBar {
                             Build.VERSION.SDK_INT > 16 ? 0 : 1);
                 }
                 break;
+        }
+    }
+
+    private static void updateSpacer() {
+        if (mSpacer == null) return;
+
+         // Only reduce space when data network type icons are not showing
+        if (mDisableDataNetworkTypeIcons) {
+            mSpacer.setLayoutParams(mSpacerAltLayoutParams);
+        } else {
+            mSpacer.setLayoutParams(mSpacerDefLayoutParams);
         }
     }
 
