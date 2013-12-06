@@ -15,6 +15,8 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import java.lang.reflect.Field;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -74,6 +76,8 @@ public class ModNavigationBar {
     private static int mKeyColor;
     private static int mKeyGlowColor;
     private static int mNavbarBgColor;
+    private static Integer mNavbarBgColorOriginal;
+    private static Object mBarBackground;;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -297,6 +301,7 @@ public class ModNavigationBar {
                     setAppKeyVisibility(mAppLauncherEnabled);
                     updateRecentsKeyCode();
                     updateHomeKeyLongpressSupport();
+                    setNavbarBgColor();
                 }
             });
 
@@ -354,17 +359,19 @@ public class ModNavigationBar {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(barTransitionsClass, "getBackgroundColor",
-                    int.class, new XC_MethodHook() {
+            XposedBridge.hookAllConstructors(barTransitionsClass, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mNavbarColorsEnabled) {
-                        final Object view = XposedHelpers.getObjectField(param.thisObject, "mView");
-                        final int mode = (Integer) param.args[0];
-                        if (view == mNavigationBarView && 
-                                (mode == MODE_OPAQUE || mode == MODE_LIGHTS_OUT)) {
-                            param.setResult(mNavbarBgColor);
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (XposedHelpers.getObjectField(param.thisObject, "mView") == mNavigationBarView) {
+                        try {
+                            Field barBg = XposedHelpers.findField(param.thisObject.getClass(), "mBarBackground");
+                            mBarBackground = barBg.get(param.thisObject);
+                            if (DEBUG) log("BarTransitions appear to be Android 4.4.1");
+                        } catch (NoSuchFieldError nfe) {
+                            mBarBackground = param.thisObject;
+                            if (DEBUG) log("BarTransitions appear to be Android 4.4");
                         }
+                        
                     }
                 }
             });
@@ -547,12 +554,24 @@ public class ModNavigationBar {
     }
 
     private static void setNavbarBgColor() {
-        if (mNavigationBarView == null) return;
+        if (mNavigationBarView == null || 
+                mBarBackground == null) return;
 
         try {
-            final Object barTransitions = XposedHelpers.getObjectField(mNavigationBarView, "mBarTransitions");
-            final int currentMode = (Integer) XposedHelpers.callMethod(barTransitions, "getMode");
-            XposedHelpers.callMethod(barTransitions, "applyModeBackground", -1, currentMode, false);
+            if (mNavbarBgColorOriginal == null) {
+                mNavbarBgColorOriginal = XposedHelpers.getIntField(mBarBackground, "mOpaque");
+                if (DEBUG) log("Saved original navbar background color");
+            }
+            int bgColor = mNavbarColorsEnabled ? 
+                    mNavbarBgColor : mNavbarBgColorOriginal;
+            XposedHelpers.setIntField(mBarBackground, "mOpaque", bgColor);
+            if (mBarBackground instanceof Drawable) {
+                ((Drawable) mBarBackground).invalidateSelf();
+            } else {
+                final Object barTransitions = XposedHelpers.getObjectField(mNavigationBarView, "mBarTransitions");
+                final int currentMode = (Integer) XposedHelpers.callMethod(barTransitions, "getMode");
+                XposedHelpers.callMethod(barTransitions, "applyModeBackground", -1, currentMode, false);
+            }
         } catch (Throwable t) {
             log("Error setting navbar background color: " + t.getMessage());
         }
