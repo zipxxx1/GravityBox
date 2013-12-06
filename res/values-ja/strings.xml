@@ -59,10 +59,6 @@
     <string name="quick_settings_expanded_desktop_expanded">展開中</string>
     <string name="quick_settings_stay_awake_on">常時点灯オン</string>
     <string name="quick_settings_stay_awake_off">常時点灯オフ</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fiオフ</string>
-    <string name="quick_settings_wifi_not_connected">未接続</string>
-    <string name="quick_settings_wifi_turning_on">オンにしています&#8230;</string> 
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">ステータスバークイック設定タイル</string>
@@ -71,16 +67,13 @@
     <string name="qs_tile_airplane_mode">機内モード</string>
     <string name="qs_tile_battery">バッテリー状態</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (CMスタイル)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (CMスタイル)</string>
     <string name="qs_tile_mobile_data">モバイルデータ</string>
     <string name="qs_tile_network_mode">ネットワークモード</string>
     <string name="qs_tile_data_usage">データ使用</string>
-    <string name="qs_tile_audio">オーディオプロファイル</string>
     <string name="qs_tile_brightness">画面の明るさ</string>
-    <string name="qs_tile_screen_timeout">消灯までの時間</string>
     <string name="qs_tile_autorotation">画面の自動回転</string>
     <string name="qs_tile_sync">自動同期</string>
     <string name="qs_tile_wifi_ap">Wi-Fiアクセスポイント</string>
@@ -242,10 +235,6 @@
     <string name="phone_flip_action_mute">着信音を無音化</string>
     <string name="phone_flip_action_dismiss">拒否</string>
 
-    <!-- Disable vibrate on call connect -->
-    <string name="pref_phone_call_connect_vibrate_disable_title">着信時のバイブを無効化</string>
-    <string name="pref_phone_call_connect_vibrate_disable_summary">着信したときのバイブを無効化します。</string>
-
     <!-- Soft reboot -->
     <string name="reboot_soft">ソフトリブート</string>
 
@@ -351,10 +340,6 @@
     <string name="button_backlight_mode_always_on">画面オン中は常時点灯</string>
     <string name="pref_button_backlight_notifications_title">ボタンバックライトで通知</string>
     <string name="pref_button_backlight_notifications_summary">実験的です! 通知があるときにボタンのバックライトを点滅させます。通知LEDがない端末でご使用ください。バッテリーを消費します。</string>
-
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">ナビバーを非表示</string>
-    <string name="pref_navbar_disable_summary">パイ操作が有効なときナビバーを非表示にします。(ナビバーがある端末向け、要再起動)</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">ディザHolo背景</string>
@@ -467,7 +452,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">拡張デスクトップモード</string>
     <string name="expanded_desktop_disabled">無効</string>
-    <string name="expanded_desktop_statusbar">ステータスバー非表示</string>
     <string name="expanded_desktop_navbar">ナビバーを非表示</string>
     <string name="expanded_desktop_both">両方非表示</string>
     <string name="action_expanded_desktop_title">拡張デスクトップ</string>
@@ -515,7 +499,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">電話</string>
-    <string name="pref_cat_phone_messaging_title">メッセージ</string>
     <string name="pref_cat_phone_mobile_data_title">モバイルデータ</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
@@ -625,10 +608,6 @@
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">トーチトグル</string>
-
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">ホームキー長押しでトーチオン</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">端末をロックしているときにトーチのオンオフをします。ホームキーで画面をオンにする機能がない場合は画面をオンにしないといけません。</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">自動的に展開</string>

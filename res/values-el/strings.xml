@@ -38,13 +38,6 @@
 
     <string name="reboot_required">Οι αλλαγές θα εφαρμοστούν μετά από επανεκκίνηση</string>
 
-    <string name="signal_icon_autohide_title">Αυτόματη απόκρυψη εικονιδίων σήματος</string>
-    <string name="signal_icon_autohide_summary">Αποκρύπτει αυτόματα τα εικονίδια σήματος για τις κάρτες SIM όταν κάποια κάρτα SIM δεν έχει εισαχθεί, απενεργοποιεί ειδοποιήσεις \"Δεν έχει εισαχθεί κάρτα SIM\"</string>
-    <string name="sim_slot_1">Αυτόματη απόκρυψη SIM 1</string>
-    <string name="sim_slot_2">Αυτόματη απόκρυψη SIM 2</string>
-    <string name="sim_disable_notifications">Απενεργοποίηση ειδοποιήσεων</string>
-    <string name="sim_disable_notifications_summary">Οι ειδοποιήσεις \"Δεν έχει εισαχθεί κάρτα SIM\" απενεργοποιήθηκαν</string>
-
     <string name="poweroff_advanced_title">Μενού επανεκκίνησης για προχωρημένους</string>
     <string name="poweroff_advanced_summary">Ενεργοποιεί το μενού επανεκκίνησης για προχωρημένους με επιλογές για επανεκκίνηση σε λειτουργία Recovery</string>
     <string name="poweroff_recovery">Λειτ. Recovery</string>
@@ -57,20 +50,6 @@
     <string name="vol_key_cursor_control_on_reverse">Πλήκτρο έντασης Πάνω/Κάτω μετακινεί τον κέρσορα Δεξιά/Αριστερά</string>
 
     <string name="recents_clear_all_title">Εκκαθάριση όλων των πρόσφατων εργασιών</string>
-
-    <string name="fix_datetime_crash_title">Επιδιόρθωση σφάλματος των ρυθμίσεων Ημερομηνίας &amp; Ώρας</string>
-    <string name="fix_datetime_crash_summary">Ενεργοποιήστε σε περίπτωση που παρατηρήσετε κρασαρίσματα κατά την πρόσβαση στις ρυθμίσεις Ημερομηνίας &amp; Ώρας (απαιτείται επανεκκίνηση)</string>
-
-    <string name="fix_caller_id_phone_title">Επιδιόρθωση αναγνώρισης καλούντος για κλήσεις</string>
-    <string name="fix_caller_id_phone_summary">Ενεργοποιήστε σε περίπτωση που η επαφή δεν συμπίπτει με την εισερχόμενη κλήση (απαιτείται επανεκκίνηση)</string>
-    <string name="fix_caller_id_phone_alert">Μετά την επανεκκίνηση, θα πρέπει να καθαρίσετε και να προσθέσετε εκ νέου τις επαφές σας για να τεθεί σε ισχύ η αλλαγή ! Χρησιμοποιήστε Ρυθμίσεις / Εφαρμογές / Όλες - για εκκαθάριση δεδομένων των Επαφών.</string>
-
-    <string name="fix_caller_id_mms_title">Επιδιόρθωση αναγνώρισης καλούντος για μηνύματα</string>
-    <string name="fix_caller_id_mms_summary">Ενεργοποιήστε σε περίπτωση που παρατηρήσετε χωρισμένες συνομιλίες με την ίδια επαφή (απαιτείται επανεκκίνηση)</string>
-    <string name="fix_caller_id_mms_alert">Μετά την επανεκκίνηση, πρέπει να διαγράψετε όλες τις χωρισμένες συνομιλίες για την αλλαγή να τεθεί σε ισχύ!</string>
-
-    <string name="fix_calendar_title">Επιδιόρθωση εφαρμογής ημερολογίου</string>
-    <string name="fix_calendar_summary">Ενεργοποιήστε σε περίπτωση που παρατηρήσετε αυτόματη περιοδική ενεργοποίηση/απενεργοποίηση της οθόνης (απαιτείται επανεκκίνηση)</string>
 
     <string name="important">Σημαντικό</string>
 
@@ -95,10 +74,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Διευρυμένο</string>
     <string name="quick_settings_stay_awake_on">Επαγρύπνηση ενεργή</string>
     <string name="quick_settings_stay_awake_off">Επαγρύπνηση ανενεργή</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi ανενεργό</string>
-    <string name="quick_settings_wifi_not_connected">Αποσυνδεδεμένο</string>
-    <string name="quick_settings_wifi_turning_on">Ενεργοποίηση...</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Επιλογές πλακιδίων QuickSettings</string>
@@ -107,16 +82,13 @@
     <string name="qs_tile_airplane_mode">Λειτουργία πτήσης</string>
     <string name="qs_tile_battery">Κατάσταση μπαταρίας</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (CM style)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (CM style)</string>
     <string name="qs_tile_mobile_data">Δεδομένα</string>
     <string name="qs_tile_network_mode">Λειτουργία δικτύου</string>
     <string name="qs_tile_data_usage">Χρήση δεδομένων</string>
-    <string name="qs_tile_audio">Προφίλ ήχου</string>
     <string name="qs_tile_brightness">Φωτεινότητα</string>
-    <string name="qs_tile_screen_timeout">Χρονικό όριο οθόνης</string>
     <string name="qs_tile_autorotation">Αυτόματη περιστροφή</string>
     <string name="qs_tile_sync">Συγχρονισμός</string>
     <string name="qs_tile_wifi_ap">Σημείο πρόσβασης Wi-Fi</string>
@@ -138,21 +110,11 @@
     <string name="statusbar_bgcolor_title">Χρώμα φόντου Γραμμής Κατάστασης</string>
     <string name="statusbar_bgcolor_summary">Επιτρέπει να ορίσετε το χρώμα και τη διαφάνεια φόντου της Γραμμής Κατάστασης</string>
 
-    <!--  Fix speech settings -->
-    <string name="fix_tts_settings_title">Επιδιόρθωση ρυθμίσεων ομιλίας</string>
-    <string name="fix_tts_settings_summary">Ξεκλειδώνει τις ρυθμίσεις τη φωνητικής αναζήτησης και του κειμένου σε ομιλία στη Γλώσσα &amp; Εισαγωγή (απαιτείται επανεκκίνηση)</string>
-
-    <!--  Advanced developer options -->
-    <string name="fix_dev_opts_title">Προχωρημένες επιλογές για προγραμματιστές</string>
-    <string name="fix_dev_opts_summary">Ξεκλειδώνει προχωρημένες επιλογές για προγραμματιστές (απαιτείται επανεκκίνηση)</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Γραμμή Κατάστασης</string>
     <string name="pref_cat_statusbar_summary">Περιέχει διάφορες βελτιώσεις της Γραμμής Κατάστασης</string>
     <string name="pref_cat_misc_title">Διάφορες</string>
     <string name="pref_cat_misc_summary">Περιλαμβάνει όσες βελτιώσεις δεν ανήκουν σε συγκεκριμένη κατηγορία</string>
-    <string name="pref_cat_fixes_title">Γενικές επιδιορθώσεις</string>
-    <string name="pref_cat_fixes_summary">Περιλαμβάνει συγκεκριμένες επιδιορθώσεις του MTK6589. Χρήση μόνο εάν είναι απαραίτητο.</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">Σχετικά</string>
@@ -237,10 +199,6 @@
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Ενεργοποίηση του πλήκτρου Μενού</string>
     <string name="pref_lockscreen_menu_key_summary">Επιτρέπει στο πλήκτρο Μενού να χρησιμοποιείται για γρήγορο ξεκλείδωμα της συσκευής όταν είναι κλειδωμένη η οθόνη (απαιτείται επανεκκίνηση)</string>
-
-    <!-- Fix messaging wakelock -->
-    <string name="pref_mms_fix_wakelock_title">Επισκευή wakelock μηνύματος</string>
-    <string name="pref_mms_fix_wakelock_summary">Εμποδίζει την ενεργοποίηση της οθόνης μετά από τη λήψη νέου μηνύματος (απαιτείται επανεκκίνηση)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Κεντρικό Ρολόι</string>
@@ -398,10 +356,6 @@
     <string name="pref_button_backlight_notifications_title">Ειδοποιήσεις φωτισμού πλήκτρου</string>
     <string name="pref_button_backlight_notifications_summary">ΠΕΙΡΑΜΑΤΙΚΟ! Αναβοσβήνει τον οπίσθιο φωτισμό πλήκτρου όταν υπάρχει μία ειδοποίηση. Χρησιμοποιήστε σε περίπτωση που η συσκευή σας δεν έχει LED ειδοποιήσεων. Ενδέχεται να καταναλώσει μπαταρία.</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Απόκρυψη μπάρας ειδοποιήσεων</string>
-    <string name="pref_navbar_disable_summary">Απόκρυψη μπάρας ειδοποιήσεων όταν τα Pie controls είναι ενεργοποιημένα (για συσκευές που έχουν μπάρα ειδοποιήσεων, απαιτείται επανεκκίνηση)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Dithering φόντου Holo</string>
     <string name="pref_holo_bg_dither_summary">Αντικαθιστά το βασικό Holo φόντο με ένα dithered για να καταπιέσει τον διαχωρισμό των χρωματικών ζωνών (απαιτείται επανεκκίνηση)</string>
@@ -423,10 +377,6 @@
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ρύθμιση πάνω ορίου</string>
-
-    <!-- Disable roaming warnings -->
-    <string name="pref_roaming_warning_disable_title">Απενεργοποίηση ειδοποιήσεων περιαγωγής</string>
-    <string name="pref_roaming_warning_disable_summary">Απενεργοποιεί τις ειδοποιήσεις περιαγωγής κατά την αποστολή μηνυμάτων ή πραγματοποίηση τηλεφωνικών κλήσεων κατά τη διάρκεια περιαγωγής</string>
 
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Αναζήτηση</string>
@@ -517,7 +467,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Λειτουργία διευρυμένης οθόνης</string>
     <string name="expanded_desktop_disabled">Απενεργοποιημένη</string>
-    <string name="expanded_desktop_statusbar">Απόκρυψη γραμμής κατάστασης</string>
     <string name="expanded_desktop_navbar">Απόκρυψη γραμμής πλοήγησης</string>
     <string name="expanded_desktop_both">Απόκρυψη και των δύο</string>
     <string name="action_expanded_desktop_title">Διευρυμένη οθόνη</string>
@@ -565,23 +514,7 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Κλήσεις</string>
-    <string name="pref_cat_phone_messaging_title">Μηνύματα</string>
     <string name="pref_cat_phone_mobile_data_title">Δεδομένα κινητής</string>
-
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Αφαίρεση unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Μετατρέπει τους χαρακτήρες unicode σε GSM αλφάβητο. Μειώνει το μέγεθος του μηνύματος.</string>
-    <string name="unicode_stripping_leave_intact">Καμία αλλαγή</string>
-    <string name="unicode_stripping_non_encodable">Αφαίρεση μη κωδικοποιημένων χαρακτήρων</string>
-    <string name="unicode_stripping_all">Αφαίρεση όλων των χαρακτήρων unicode</string>
-
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Απενεργοποίηση προειδοποίησης αργών δεδομένων 2G</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Απενεργοποιεί την προειδοποίηση για αργή ταχύτητα δεδομένων όταν τα δεδομένα κινητής είναι ενεργοποιημένα από QuickSettings για τις SIM σε 2G λειτουργία</string>
-
-    <!-- Follow stock battery color -->
-    <string name="pref_sbcolor_follow_stock_battery_title">Ίδιο με εργοστασιακό χρώμα μπαταρίας</string>
-    <string name="pref_sbcolor_follow_stock_battery_summary">Κάνει το ρολόι της γραμμής κατάστασης, το ποσοστό και τη κυκλική μπαταρία να χρησιμοποιεί το χρώμα του προεπιλεγμένου εικονίδιου μπαταρίας. Εφαρμόζεται όταν ο χρωματισμός του εικονιδίου είναι ανενεργός.</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Λειτ. πλακιδίου κιν. δικτύου</string>
@@ -607,10 +540,6 @@
     <string name="pie_controls_enabled_always">Πάντα</string>
     <string name="pie_controls_enabled_expanded">Όταν είναι ενεργοποιημένο η διευρυμένη οθόνη</string>
     <string name="pie_controls_enabled_expanded_navbar">Όταν η διευρυμένη οθόνη αποκρύπτει τη γραμμή πλοήγησης</string>
-
-    <!-- Icon coloring: preserve stock battery icon -->
-    <string name="pref_statusbar_color_skip_battery_title">Αφήνει το προεπιλεγμένο εικονίδιο μπαταρίας άθικτο</string>
-    <string name="pref_statusbar_color_skip_battery_summary">Χρησιμοποιήστε σε περίπτωση που το προεπιλεγμένο εικονίδιο μπαταρίας έχει αντικατασταθεί από εικονίδιο άλλης εφαρμογής</string>
 
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">Η αποσύνδεση ενεργοποιεί την οθόνη</string>
@@ -699,10 +628,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Διακόπτης φακού</string>
 
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Φακός ενεργός με παρατεταμένο πάτημα του πλήκτρου κεντρικής οθόνης</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Ανάβει/Σβήνει τον φακό όταν η συσκευή είναι κλειδωμένη. Η συσκευή πρέπει να είναι ενεργή αν δεν υποστηρίζει άνοιγμα μέσω πλήκτρου κεντρικής οθόνης.</string>
-
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Ανάπτυξη αυτόματα</string>
 
@@ -776,10 +701,6 @@
     <string name="pref_navbar_key_glow_color_title">Χρώμα λάμψης πλήκτρου πλοήγησης</string>
     <string name="pref_navbar_bg_color_title">Χρώμα φόντου μπάρας πλοήγησης</string>
 
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">Απενεργοποίηση σκιάς κλειδώματος οθόνης</string>
-    <string name="pref_lockscreen_shade_disable_summary">Αφαιρεί την σκοτεινή απόχρωση από το κλείδωμα οθόνης</string>
-
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Διαχείριση διαφάνειας</string>
     <string name="pref_tm_mode_summary">Απαιτείται επανεκκίνηση</string>
@@ -806,10 +727,6 @@
     <!-- HW Key Actions: Home and Back actions -->
     <string name="hwkey_action_home">Κεντρική οθόνη</string>
     <string name="hwkey_action_back">Επιστροφή</string>
-
-    <!-- QS Tile Style -->
-    <string name="pref_qs_tile_style_title">Τύπος πλακιδίων</string>
-    <string name="pref_qs_tile_style_summary">Ισχύει μόνο για πλακίδια του GravityBox (δεν επηρεάζει τα εργοστ. πλακίδια)</string>
 
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ρύθμιση κάτω ορίου</string>

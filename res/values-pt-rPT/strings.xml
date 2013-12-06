@@ -59,10 +59,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Expandido</string>
     <string name="quick_settings_stay_awake_on">Manter ligado</string>
     <string name="quick_settings_stay_awake_off">Não manter ligado</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi desativado</string>
-    <string name="quick_settings_wifi_not_connected">Não ligado</string>
-    <string name="quick_settings_wifi_turning_on">A ligar&#8230;</string>
     <string name="quick_settings_nfc_on">NFC ativado</string>
     <string name="quick_settings_nfc_off">NFC desativado</string>
 
@@ -73,16 +69,13 @@
     <string name="qs_tile_airplane_mode">Modo de avião</string>
     <string name="qs_tile_battery">Estado da bateria</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (estilo CM)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Localização</string>
     <string name="qs_tile_gps_alt">GPS (estilo CM)</string>
     <string name="qs_tile_mobile_data">Dados móveis</string>
     <string name="qs_tile_network_mode">Modo de Rede</string>
     <string name="qs_tile_data_usage">Utilização de dados</string>
-    <string name="qs_tile_audio">Perfis de áudio</string>
     <string name="qs_tile_brightness">Brilho</string>
-    <string name="qs_tile_screen_timeout">Tempo limite do ecrã</string>
     <string name="qs_tile_autorotation">Rodar ecrã automaticamente</string>
     <string name="qs_tile_sync">Sincronização</string>
     <string name="qs_tile_wifi_ap">Ponto de Acesso Wi-Fi</string>
@@ -350,10 +343,6 @@
     <string name="pref_button_backlight_notifications_title">Notificações por retro-iluminação das teclas</string>
     <string name="pref_button_backlight_notifications_summary">EXPERIMENTAL! Permite utilizar a retro-iluminação das teclas de forma intermitente para alerta de notificações. Utilizar caso o dispositivo não possua luz de notificações (pode consumir bateria)</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Ocultar Barra de Navegação</string>
-    <string name="pref_navbar_disable_summary">Oculta a Barra de Navegação quando os controlos Pie estão ativados (para dispositivos com Barra de Navegação, necessário reiniciar)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Fundo pontilhado</string>
     <string name="pref_holo_bg_dither_summary">Substituir o fundo do tema padrão por um pontilhado por forma a evitar o efeito de bandas de cores (necessário reiniciar)</string>
@@ -465,7 +454,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Modo ambiente de trabalho expandido</string>
     <string name="expanded_desktop_disabled">Desativado</string>
-    <string name="expanded_desktop_statusbar">Ocultar Barra de Status</string>
     <string name="expanded_desktop_navbar">Ocultar Barra de Navegação</string>
     <string name="expanded_desktop_both">Ocultar ambas</string>
     <string name="action_expanded_desktop_title">Ambiente de trabalho expandido</string>
@@ -513,7 +501,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telefone</string>
-    <string name="pref_cat_phone_messaging_title">Mensagens</string>
     <string name="pref_cat_phone_mobile_data_title">Dados móveis</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
@@ -627,10 +614,6 @@
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Comutar lanterna</string>
-
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Lanterna ao manter pressionada</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Liga/desliga a lanterna quando o dispositivo está bloqueado. O ecrã tem de estar ligado caso o dispositivo não se ligue ao pressionar a tecla Casa.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Expandir automaticamente</string>

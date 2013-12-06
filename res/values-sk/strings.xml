@@ -34,7 +34,6 @@
     <string name="vol_key_cursor_control_on_reverse">Tlačidlo hore/dole pohybuje kurzorom doprava/doľava</string>
 
     <string name="recents_clear_all_title">Ukončenie aktuálnych aplikácií</string>
-    <string name="recents_clear_all_summary">Zobrazí tlačidlo, ktoré umožní ukončenie všetkých aplikácií naraz, v zozname aktuálnych aplikácií</string>
 
     <string name="important">Dôležité</string>
 
@@ -59,10 +58,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Rozšírená plocha</string>
     <string name="quick_settings_stay_awake_on">Bdenie zap</string>
     <string name="quick_settings_stay_awake_off">Bdenie vyp</string> 
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi vyp</string>
-    <string name="quick_settings_wifi_not_connected">Nepripojené</string>
-    <string name="quick_settings_wifi_turning_on">Zapína sa&#8230;</string>
     <string name="quick_settings_nfc_on">NFC zap</string>
     <string name="quick_settings_nfc_off">NFC vyp</string>
 
@@ -73,16 +68,13 @@
     <string name="qs_tile_airplane_mode">Režim v lietadle</string>
     <string name="qs_tile_battery">Stav batérie</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (CM štýl)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Poloha</string>
     <string name="qs_tile_gps_alt">GPS (CM štýl)</string> 
     <string name="qs_tile_mobile_data">Mobilné dáta</string>
     <string name="qs_tile_network_mode">Typ siete</string>
     <string name="qs_tile_data_usage">Využitie dát</string>
-    <string name="qs_tile_audio">Zvukové profily</string>
     <string name="qs_tile_brightness">Jas</string>
-    <string name="qs_tile_screen_timeout">Časovač obrazovky</string>
     <string name="qs_tile_autorotation">Automatické otáčanie obrazovky</string>
     <string name="qs_tile_sync">Synchronizácia</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Prístupový Bod</string>
@@ -342,10 +334,6 @@
     <string name="pref_button_backlight_notifications_title">Notifikácie podsvietením</string>
     <string name="pref_button_backlight_notifications_summary">EXPERIMENTÁLNE! Zapne podsvietenie tlačidiel v prípade novej notifikácie počas vypnutej obrazovky. Použiť v prípade, ak zariadenie nemá notifikačnú LED.</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Skryť navigačnú lištu</string>
-    <string name="pref_navbar_disable_summary">Skryje navigačnú lištu pokiaľ je zapnutý koláč (pre zariadenia s navigačnou lištou, vyžaduje reštart)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Vyhladené Holo pozadie</string>
     <string name="pref_holo_bg_dither_summary">Nahradí štandardné Holo pozadie vyhladeným obrázkom za účelom eliminácie pruhov farebného prechodu (vyžaduje reštart)</string>
@@ -456,7 +444,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Režim rozšírenej plochy</string>
     <string name="expanded_desktop_disabled">Vypnuté</string>
-    <string name="expanded_desktop_statusbar">Skryť stavový riadok</string>
     <string name="expanded_desktop_navbar">Skryť navigačnú lištu</string>
     <string name="expanded_desktop_both">Skryť stavový riadok aj navigačnú lištu</string>
     <string name="action_expanded_desktop_title">Rozšírená plocha</string>
@@ -504,7 +491,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telefón</string>
-    <string name="pref_cat_phone_messaging_title">Správy</string>
     <string name="pref_cat_phone_mobile_data_title">Mobilné dáta</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
@@ -610,11 +596,6 @@
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Zapnúť/vypnúť svetlo</string>
-
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Ovládanie svetla tlačidlom Domov</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Zapne/vypne svetlo dlhým podržaním tlačidla Domov na obrazovke uzamknutia. 
-        Ak zariadenie nemá natívnu podporu prebudenia tlačidlom Domov, obrazovka musí byť počas prepínanie zapnutá.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Rozšíriť automaticky</string>

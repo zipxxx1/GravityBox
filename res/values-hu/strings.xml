@@ -72,10 +72,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Kiterjesztett</string>
 	<string name="quick_settings_stay_awake_on">Ébrentartás bekapcsolva</string>
     <string name="quick_settings_stay_awake_off">Ébrentartás kikapcsolva</string>
-	<string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi kikapcsolva</string>
-    <string name="quick_settings_wifi_not_connected">Nincs csatlakozva</string>
-	<string name="quick_settings_wifi_turning_on">Bekapcsolás&#8230;</string>
 	
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Állapotsáv Gyorsbeállítások csempéi</string>
@@ -84,16 +80,13 @@
     <string name="qs_tile_airplane_mode">Repülő üzemmód</string>
     <string name="qs_tile_battery">Akkumlátor státusz</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-	<string name="qs_tile_wifi_alt">Wi-Fi (CM stílus)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
 	<string name="qs_tile_gps_alt">GPS (CM stílus)</string>
     <string name="qs_tile_mobile_data">Mobil adatátvitel</string>
     <string name="qs_tile_network_mode">Hálózati üzemmód</string>
     <string name="qs_tile_data_usage">Adat használat</string>
-    <string name="qs_tile_audio">Audió profilok</string>
     <string name="qs_tile_brightness">Fényerő</string>
-    <string name="qs_tile_screen_timeout">Képernyő időtúllépés</string>
     <string name="qs_tile_autorotation">Automatikus elforgatás</string>
     <string name="qs_tile_sync">Szinkronizálás</string>
     <string name="qs_tile_wifi_ap">Wi-Fi hozzáférési pont</string>
@@ -122,7 +115,7 @@
     <string name="pref_cat_misc_summary">Tartalmaz minden egyéb módosítást, ami nem tartozik a többi konkrét kategóriába</string>
 
     <!-- About -->
-    <string name="pref_cat_about_title">A programról...</string>
+    <string name="pref_cat_about_title">A programról&#8230;</string>
     <string name="about_gb_summary">Fejlesztette C3C076@XDA. Érintse meg a hivatalos fórum meglátogatásához.</string>
     <string name="about_xposed_title">Xposed framework</string>
     <string name="about_xposed_summary">Fejlesztette rovo89@XDA. Érintse meg a hivatalos fórum meglátogatásához.</string>
@@ -192,7 +185,7 @@
     <string name="pref_ab_number_error_negative">Az értékek nem lehetnek kisebbek vagy egyenlőek 0-val</string>
     <string name="pref_ab_number_not_ascending">A kisebb szintek értékei nem lehetnek nagyobbak mint a nagyobb szintek értékei.</string>
     <string name="pref_ab_number_not_descending">A nagyobb szintek értékei nem lehetnek kisebbek mint az alacsonyabb szintek értékei.</string>
-    <string name="pref_ab_values_set">Értékek %-os megadása</string>
+    <string name="pref_ab_values_set">Értékek %s-os megadása</string>
     <string name="pref_ab_config_saved">Új automatikus fényerő konfiguráció elmentve</string>
     <string name="pref_ab_config_cancelled">Automatikus fényerő konfiguráció NINCS elmentve</string>
 	<string name="pref_ab_button_set">Beállít</string>
@@ -361,10 +354,6 @@
     <string name="pref_button_backlight_notifications_title">Gomb háttérvilágítás értesítések</string>
     <string name="pref_button_backlight_notifications_summary">KÍSÉRLETI! Villogtatja a gomb háttérvilágítást amikor értesítés érkezik. Abban az esetben használd, ha az eszközödből hiányzik az értesítési LED. Fogyaszhtatja az akkumlátort.</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Navigációs sáv elrejtése</string>
-    <string name="pref_navbar_disable_summary">Elrejti a Navigációs sávot, ha a Pie Vezérlők engedélyezve vannak -azon eszközök részére, amelyben van navigációs sáv- (újraindítás szükséges)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Nagyobb színmélységű Holo háttér</string>
     <string name="pref_holo_bg_dither_summary">Lecseréli a szabvány Holo hátteret nagyobb színmélységű típusra a színátmenetek folyamatosságának megtörése ellen (újraindítás szükséges)</string>
@@ -476,7 +465,6 @@
 	 <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Kiterjesztett asztal üzemmód</string>
     <string name="expanded_desktop_disabled">Letiltva</string>
-    <string name="expanded_desktop_statusbar">Állapotsáv elrejtése</string>
     <string name="expanded_desktop_navbar">Navigációs sáv elrejtése</string>
     <string name="expanded_desktop_both">Mindkettő elrejtése</string>
     <string name="action_expanded_desktop_title">Kiterjesztett asztal</string>
@@ -524,7 +512,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telefonálás</string>
-    <string name="pref_cat_phone_messaging_title">Üzenetküldés</string>
     <string name="pref_cat_phone_mobile_data_title">Mobil adatátvitel</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
@@ -638,10 +625,6 @@
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Zseblámpa ki-bekapcsolása</string>
-
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Zseblámpa bekapcsolása a kezdőlap gomb hosszú érintésével</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Be-kikapcsolja a zseblámpát zárolt eszköznél. A képernyőnek bekapcsolva kell lennie, ha az eszközből gyárilag hiányzik az ébresztés kezdőlap gomb segítségével funkció.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Automatikus bővített panel</string>

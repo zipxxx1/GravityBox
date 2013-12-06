@@ -72,10 +72,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Genişletilmiş</string>
     <string name="quick_settings_stay_awake_on">Uyanık kal</string>
     <string name="quick_settings_stay_awake_off">Uyu</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi kapalı</string>
-    <string name="quick_settings_wifi_not_connected">Bağlı değil</string>
-    <string name="quick_settings_wifi_turning_on">Açılıyor...</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Durum çubuğu HızlıAyarlar kareleri</string>
@@ -84,16 +80,13 @@
     <string name="qs_tile_airplane_mode">Uçak modu</string>
     <string name="qs_tile_battery">Pil durumu</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (CM stili)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (CM stili)</string>
     <string name="qs_tile_mobile_data">Mobil veri</string>
     <string name="qs_tile_network_mode">Ağ modu</string>
     <string name="qs_tile_data_usage">Veri kullanımı</string>
-    <string name="qs_tile_audio">Ses profilleri</string>
     <string name="qs_tile_brightness">Parlaklık</string>
-    <string name="qs_tile_screen_timeout">Ekran zamanaşımı</string>
     <string name="qs_tile_autorotation">Otomatik döndür</string>
     <string name="qs_tile_sync">Senkronizasyon</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Erişim Noktası</string>
@@ -356,10 +349,6 @@
     <string name="pref_button_backlight_notifications_title">Tuş arka ışığı bildirimleri</string>
     <string name="pref_button_backlight_notifications_summary">DENEYİMSEL! Bildirim varken arka ışıklar yanıp söner. Aygıtınızın LED bildirimi yoksa kullanın. Pili tüketebilir.</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Gezinme çubuğunu gizle</string>
-    <string name="pref_navbar_disable_summary">Pasta Dilimleri etkinse gezinme çubuğunu gizler (Gezinme çubuğu olan aygıtlar içindir ve yeniden başlatma gerektirir)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Holo Renk Bandı</string>
     <string name="pref_holo_bg_dither_summary">Holo arkaplanını rengi bandı olmayan bir arkaplanla değiştirir (yeniden başlatma gerektirir)</string>
@@ -470,7 +459,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Genişletilmiş masaüstü modu</string>
     <string name="expanded_desktop_disabled">Etkin değil</string>
-    <string name="expanded_desktop_statusbar">Durum çubuğunu gizle</string>
     <string name="expanded_desktop_navbar">Gezinme çubuğunu gizle</string>
     <string name="expanded_desktop_both">İkisini de gizle</string>
     <string name="action_expanded_desktop_title">Genişletilmiş masaüstü</string>
@@ -518,7 +506,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telefon</string>
-    <string name="pref_cat_phone_messaging_title">Mesajlaşma</string>
     <string name="pref_cat_phone_mobile_data_title">Mobil veri</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->

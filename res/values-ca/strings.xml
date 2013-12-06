@@ -31,7 +31,6 @@
     <string name="vol_key_cursor_control_on_reverse">Volum superior/inferior mou el cursor dreta/esquerra</string>
 
     <string name="recents_clear_all_title">Suprimir totes les tasques recents</string>
-    <string name="recents_clear_all_summary">Habilita un botó per suprimir totes les tasques recents d\'un sol cop, a la finestra de tasques</string>
 
     <string name="important">Important</string>
 
@@ -55,9 +54,7 @@
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_mobile_data">Dades mòbils</string>
     <string name="qs_tile_data_usage">Estadistiques de dades</string>
-    <string name="qs_tile_audio">Perfils de so</string>
     <string name="qs_tile_brightness">Brillantor</string>
-    <string name="qs_tile_screen_timeout">Temps d\'apagat de pantalla</string>
     <string name="qs_tile_autorotation">Auto rotació</string>
     <string name="qs_tile_sync">Sincronització</string>
     <string name="qs_tile_wifi_ap">Punt d\'accés Wi-Fi</string>

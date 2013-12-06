@@ -86,9 +86,7 @@
     <string name="qs_tile_mobile_data">Kết nối dữ liệu</string>
     <string name="qs_tile_network_mode">Chế độ mạng</string>
     <string name="qs_tile_data_usage">Sử dụng dữ liệu</string>
-    <string name="qs_tile_audio">Cấu hình âm thanh</string>
     <string name="qs_tile_brightness">Độ sáng</string>
-    <string name="qs_tile_screen_timeout">C.độ chờ</string>
     <string name="qs_tile_autorotation">Auto rotation</string>
     <string name="qs_tile_sync">Đồng bộ</string>
     <string name="qs_tile_wifi_ap">Điểm phát wifi</string>
@@ -351,10 +349,6 @@
     <string name="pref_button_backlight_notifications_title">Nút back sáng thông báo</string>
     <string name="pref_button_backlight_notifications_summary">Nhấp nháy đèn nền nút khi có thông báo, sử dụng khi thiết bị của bạn ko có đèn led thông báo cân thay thế và lưu ý có thể hao pin.</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Ẩn thanh điều hướng</string>
-    <string name="pref_navbar_disable_summary">Ẩn thanh điều hướng khi bật bảng điều khiển Pie (cho các thiết bị có thanh điều hướng, yêu cầu khởi động lại)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Hòa sắc nền Holo</string>
     <string name="pref_holo_bg_dither_summary">Thay thế hóa sắc chuẩn Holo với màu được lựa chọn trong chế độ hòa sắc (yêu cầu khởi động lại)</string>
@@ -465,7 +459,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Chế độ Desktop mở rộng</string>
     <string name="expanded_desktop_disabled">Đã tắt</string>
-    <string name="expanded_desktop_statusbar">Ẩn thanh trạng thái</string>
     <string name="expanded_desktop_navbar">Ẩn thanh điều hướng</string>
     <string name="expanded_desktop_both">Ẩn cả hai</string>
     <string name="action_expanded_desktop_title">Mở rộng desktop</string>
@@ -513,7 +506,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Điện thoại</string>
-    <string name="pref_cat_phone_messaging_title">Tin nhắn</string>
     <string name="pref_cat_phone_mobile_data_title">Dữ liệu</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->

@@ -74,10 +74,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Expanded</string>
     <string name="quick_settings_stay_awake_on">Stay awake on</string>
     <string name="quick_settings_stay_awake_off">Stay awake off</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi off</string>
-    <string name="quick_settings_wifi_not_connected">Not connected</string>
-    <string name="quick_settings_wifi_turning_on">Turning on&#8230;</string>
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
 
@@ -88,16 +84,13 @@
     <string name="qs_tile_airplane_mode">Airplane mode</string>
     <string name="qs_tile_battery">Battery status</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (CM style)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Location</string>
     <string name="qs_tile_gps_alt">GPS (CM style)</string>
     <string name="qs_tile_mobile_data">Mobile data</string>
     <string name="qs_tile_network_mode">Network mode</string>
     <string name="qs_tile_data_usage">Data usage</string>
-    <string name="qs_tile_audio">Audio profiles</string>
     <string name="qs_tile_brightness">Brightness</string>
-    <string name="qs_tile_screen_timeout">Screen timeout</string>
     <string name="qs_tile_autorotation">Auto rotation</string>
     <string name="qs_tile_sync">Synchronization</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Access Point</string>
@@ -366,10 +359,6 @@
     <string name="pref_button_backlight_notifications_title">Button backlight notifications</string>
     <string name="pref_button_backlight_notifications_summary">EXPERIMENTAL! Blinks button backlight when there is a notification. Use in case your device lacks notification LED. May consume battery.</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Hide navigation bar</string>
-    <string name="pref_navbar_disable_summary">Hides navigation bar while Pie Controls are enabled (for devices that have navigation bar, requires reboot)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Dithered Holo background</string>
     <string name="pref_holo_bg_dither_summary">Replaces standard Holo background with dithered one to suppress color banding (requires reboot)</string>
@@ -481,7 +470,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Expanded desktop mode</string>
     <string name="expanded_desktop_disabled">Disabled</string>
-    <string name="expanded_desktop_statusbar">Hide statusbar</string>
     <string name="expanded_desktop_navbar">Hide navigation bar</string>
     <string name="expanded_desktop_both">Hide all bars</string>
     <string name="action_expanded_desktop_title">Expanded desktop</string>
@@ -529,7 +517,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telephony</string>
-    <string name="pref_cat_phone_messaging_title">Messaging</string>
     <string name="pref_cat_phone_mobile_data_title">Mobile data</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
@@ -643,10 +630,6 @@
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Toggle torch</string>
-
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Torch on home key long-press</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Toggles torch on/off when device locked. Screen has to be turned on if device lacks native wake by home key support.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Expand automatically</string>
