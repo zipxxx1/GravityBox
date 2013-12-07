@@ -392,7 +392,7 @@ public class ModPowerMenu {
                 handleReboot(mContext, mRebootStr, 0);
                 return true;
             } else if (methodName.equals("showDuringKeyguard")) {
-                return true;
+                return false;
             } else if (methodName.equals("showBeforeProvisioning")) {
                 return true;
             } else if (methodName.equals("isEnabled")) {
