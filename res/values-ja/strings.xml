@@ -277,10 +277,6 @@
     <string name="phone_flip_action_mute">着信音を無音化</string>
     <string name="phone_flip_action_dismiss">拒否</string>
 
-    <!-- Disable vibrate on call connect -->
-    <string name="pref_phone_call_connect_vibrate_disable_title">着信時のバイブを無効化</string>
-    <string name="pref_phone_call_connect_vibrate_disable_summary">着信したときのバイブを無効化します。</string>
-
     <!-- Soft reboot -->
     <string name="reboot_soft">ソフトリブート</string>
 

@@ -41,7 +41,6 @@
     <string name="vol_key_cursor_control_on_reverse">Tlačidlo hore/dole pohybuje kurzorom doprava/doľava</string>
 
     <string name="recents_clear_all_title">Ukončenie aktuálnych aplikácií</string>
-    <string name="recents_clear_all_summary">Zobrazí tlačidlo, ktoré umožní ukončenie všetkých aplikácií naraz, v zozname aktuálnych aplikácií</string>
 
     <string name="fix_datetime_crash_title">Opraviť padanie dátumu a času</string>
     <string name="fix_datetime_crash_summary">Použiť v prípade, ak nastavenie dátumu a času padá (vyžaduje reštart)</string>

@@ -281,10 +281,6 @@
     <string name="phone_flip_action_mute">鈴聲靜音</string>
     <string name="phone_flip_action_dismiss">拒接電話</string>
 
-    <!-- Disable vibrate on call connect -->
-    <string name="pref_phone_call_connect_vibrate_disable_title">停用接通時的震動</string>
-    <string name="pref_phone_call_connect_vibrate_disable_summary">停用在通話接通時所觸發的震動</string>
-
     <!-- Soft reboot -->
     <string name="reboot_soft">軟重啟</string>
 
@@ -579,9 +575,6 @@
     <string name="pref_network_mode_tile_mode_title">網路模式的瓷貼模式</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G</string>
     <string name="nm_tile_mode2">2G/2G+3G</string>
-
-    <!-- Disable GPS notifications -->
-    <string name="pref_gps_notif_disable_title">停用 GPS 通知</string>
 
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允許螢幕可以所有角度的旋轉</string>

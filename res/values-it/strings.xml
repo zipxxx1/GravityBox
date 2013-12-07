@@ -40,7 +40,6 @@
     <string name="vol_key_cursor_control_on_reverse">Volume su/giu muove il cursore a destra/sinistra</string>
 
     <string name="recents_clear_all_title">Pulisci tutte le attività recenti</string>
-    <string name="recents_clear_all_summary">Abilita il bottone per pulire tutte le attività recenti nella finestra \"Attività recenti\"</string>
 
     <string name="fix_datetime_crash_title">Fix crash modifica Data&amp;ora</string>
     <string name="fix_datetime_crash_summary">Abilita nel caso si verifichi un crash durante l\'accesso alle impostazione Data&amp;Ora (richiede riavvio)</string>
@@ -258,10 +257,6 @@
     <string name="phone_flip_action_none">Non fare niente</string>
     <string name="phone_flip_action_mute">Silenzia</string>
     <string name="phone_flip_action_dismiss">Rifiuta chiamata</string>
-
-    <!-- Disable vibrate on call connect -->
-    <string name="pref_phone_call_connect_vibrate_disable_title">Disabilita vibrazione alla risposta</string>
-    <string name="pref_phone_call_connect_vibrate_disable_summary">Disabilita la vibrazione quando si risponde ad una chiamata</string>
 
     <!-- Soft reboot -->
     <string name="reboot_soft">Riavvio soft</string>

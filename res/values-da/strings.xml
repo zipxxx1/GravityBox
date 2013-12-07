@@ -7,7 +7,6 @@
     <string name="battery_style_stock">Standard batteriindikator</string>
     <string name="battery_style_circle">Cirkel-batteriindikator med procenttal</string>
     <string name="battery_style_percent">Store procenttal</string>
-    <string name="battery_style_percent_stock">Store procenttal med standard batteriikon</string>
     <string name="battery_style_none">Ingen</string>
 
     <string name="vol_music_controls_title">Volumentaster skifter melodi</string>
@@ -39,7 +38,6 @@
     <string name="vol_key_cursor_control_on_reverse">Volumen op/ned bevæger markøren til højre/venstre</string>
 
     <string name="recents_clear_all_title">Ryd alle seneste apps</string>
-    <string name="recents_clear_all_summary">Aktiverer knap som rydder alle seneste opgaver i \"seneste apps\"-dialogen</string>
 
     <string name="fix_datetime_crash_title">Fix crash i indstillinger for dato og tid</string>
     <string name="fix_datetime_crash_summary">Slå til hvis du oplever crash mens du tilgår indstillinger for dato og tid</string>
@@ -249,10 +247,6 @@
     <string name="phone_flip_action_none">Gør intet</string>
     <string name="phone_flip_action_mute">Ringetone fra</string>
     <string name="phone_flip_action_dismiss">Afvis opkaldet</string>
-
-    <!-- Disable vibrate on call connect -->
-    <string name="pref_phone_call_connect_vibrate_disable_title">Vibration ved forbundet opkald fra</string>
-    <string name="pref_phone_call_connect_vibrate_disable_summary">Slår vibration ved forbundet opkald fra</string>
 
     <!-- Soft reboot -->
     <string name="reboot_soft">blød genstart</string>
