@@ -1000,9 +1000,9 @@ public class ModHwKeys {
                     if (edMode == GravityBoxSettings.ED_DISABLED) {
                         Toast.makeText(mContext, mStrExpandedDesktopDisabled, Toast.LENGTH_SHORT).show();
                     } else {
-                        final int edState = Settings.System.getInt(resolver,
+                        final int edState = Settings.Global.getInt(resolver,
                                 ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0);
-                        Settings.System.putInt(resolver, 
+                        Settings.Global.putInt(resolver, 
                                 ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
                                 (edState == 1) ? 0 : 1);
                     }

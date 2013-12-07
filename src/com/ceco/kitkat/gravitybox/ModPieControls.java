@@ -365,7 +365,7 @@ public class ModPieControls {
 
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(Settings.System.getUriFor(
+            resolver.registerContentObserver(Settings.Global.getUriFor(
                     ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE), false, this);
         }
 
@@ -389,13 +389,13 @@ public class ModPieControls {
             case PIE_ENABLED_ED:
             case PIE_ENABLED_ED_NAVBAR_HIDDEN:
                 if (DEBUG) log("isPieEnabled: SETTING_EXPANDED_DESKTOP_MODE = " + expandedDesktopMode);
-                final boolean edEnabled = Settings.System.getInt(
+                final boolean edEnabled = Settings.Global.getInt(
                         cr, ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0) == 1;
                 if (DEBUG) log("isPieEnabled: SETTING_EXPANDED_DESKTOP_STATE = " + edEnabled);
                 return edEnabled && (pieMode == PIE_ENABLED_ED ||
                         (pieMode == PIE_ENABLED_ED_NAVBAR_HIDDEN 
-                            && (expandedDesktopMode == GravityBoxSettings.ED_NAVBAR ||
-                                    expandedDesktopMode == GravityBoxSettings.ED_BOTH)));
+                            && (expandedDesktopMode == GravityBoxSettings.ED_HIDE_NAVBAR ||
+                                    expandedDesktopMode == GravityBoxSettings.ED_SEMI_IMMERSIVE)));
             default: return false;
         }
     }

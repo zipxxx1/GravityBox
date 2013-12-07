@@ -18,6 +18,7 @@ package com.ceco.kitkat.gravitybox;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -29,6 +30,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.view.Surface;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
@@ -107,7 +109,7 @@ public class ModExpandedDesktop {
 
         void observe() {
             final ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(Settings.System.getUriFor(
+            resolver.registerContentObserver(Settings.Global.getUriFor(
                     SETTING_EXPANDED_DESKTOP_STATE), false, this);
             updateSettings();
         }
@@ -152,10 +154,10 @@ public class ModExpandedDesktop {
         if (mContext == null || mPhoneWindowManager == null) return;
 
         try {
-            final boolean expandedDesktop = Settings.System.getInt(mContext.getContentResolver(), 
+            final boolean expandedDesktop = Settings.Global.getInt(mContext.getContentResolver(), 
                     SETTING_EXPANDED_DESKTOP_STATE, 0) == 1;
             if (mExpandedDesktopMode == GravityBoxSettings.ED_DISABLED && expandedDesktop) {
-                    Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.Global.putInt(mContext.getContentResolver(),
                             SETTING_EXPANDED_DESKTOP_STATE, 0);
                     return;
             }
@@ -270,7 +272,7 @@ public class ModExpandedDesktop {
                     WindowManager.LayoutParams.class, Rect.class, new XC_MethodReplacement() {
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!mExpandedDesktop) {
+                    if (!expandedDesktopHidesNavigationBar()) {
                         return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                     }
 
@@ -327,7 +329,7 @@ public class ModExpandedDesktop {
                     boolean.class, int.class, int.class, int.class, new XC_MethodReplacement() {
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!mExpandedDesktop) {
+                    if (!expandedDesktopHidesNavigationBar()) {
                         return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                     }
 
@@ -624,7 +626,7 @@ public class ModExpandedDesktop {
                     int.class, int.class, Rect.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mExpandedDesktop) {
+                    if (expandedDesktopHidesNavigationBar()) {
                         param.args[1] = updateWindowManagerVisibilityFlagsForExpandedDesktop((Integer)param.args[1]);
                     }
                 }
@@ -634,7 +636,7 @@ public class ModExpandedDesktop {
                     CLASS_POLICY_WINDOW_STATE, WindowManager.LayoutParams.class, CLASS_POLICY_WINDOW_STATE, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mExpandedDesktop) {
+                    if (expandedDesktopHidesNavigationBar()) {
                         WindowManager.LayoutParams attrs = (WindowManager.LayoutParams) param.args[1];
                         if (attrs.type == WindowManager.LayoutParams.TYPE_INPUT_METHOD) {
                             param.setObjectExtra("gbDockRight", Integer.valueOf(getInt("mDockRight")));
@@ -688,7 +690,7 @@ public class ModExpandedDesktop {
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "updateSystemUiVisibilityLw", new XC_MethodReplacement() {
                 @Override
                 protected Object replaceHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!mExpandedDesktop) {
+                    if (!expandedDesktopHidesNavigationBar()) {
                         return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                     }
 
@@ -789,7 +791,7 @@ public class ModExpandedDesktop {
                     CLASS_POLICY_WINDOW_STATE, int.class, int.class, new XC_MethodReplacement() {
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!mExpandedDesktop) {
+                    if (!expandedDesktopHidesNavigationBar()) {
                         return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                     }
 
@@ -879,6 +881,43 @@ public class ModExpandedDesktop {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(Activity.class, "onResume", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    Activity activity = (Activity) param.thisObject;
+                    prefs.reload();
+                    if (isImmersiveModeActive(activity, prefs)) {
+                        if (DEBUG) log("Setting immersive mode for: " + activity.getPackageName());
+                        Window window = activity.getWindow();
+                        View decorView = window.getDecorView();
+                        if (XposedHelpers.getAdditionalInstanceField(activity, "gbSysUiFlags") == null) {
+                            if (DEBUG) log("Backing up sysUiFlags for: " + activity.getPackageName());
+                            int[] gbSysUiFlags = new int[] {
+                                    window.getAttributes().flags,
+                                    decorView.getSystemUiVisibility()
+                            };
+                            XposedHelpers.setAdditionalInstanceField(activity, "gbSysUiFlags", gbSysUiFlags);
+                        }
+                        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                        decorView.setSystemUiVisibility(
+                                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                        | ViewConst.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                    } else {
+                        int[] gbSysUiFlags = (int[]) XposedHelpers.getAdditionalInstanceField(
+                                activity, "gbSysUiFlags");
+                        if (gbSysUiFlags != null) {
+                            if (DEBUG) log("Restoring sysUiFlags for: " + activity.getPackageName());
+                            Window window = activity.getWindow();
+                            View decorView = window.getDecorView();
+                            window.setFlags(gbSysUiFlags[0], WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                            decorView.setSystemUiVisibility(gbSysUiFlags[1]);
+                            XposedHelpers.removeAdditionalInstanceField(activity, "gbSysUiFlags");
+                        }
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -919,12 +958,21 @@ public class ModExpandedDesktop {
 
     private static boolean expandedDesktopHidesStatusbar() {
         return (mExpandedDesktop
-                && (mExpandedDesktopMode & GravityBoxSettings.ED_STATUSBAR) != 0);
+                && mExpandedDesktopMode == GravityBoxSettings.ED_SEMI_IMMERSIVE);
     }
 
     private static boolean expandedDesktopHidesNavigationBar() {
         return (mExpandedDesktop
-                && (mExpandedDesktopMode & GravityBoxSettings.ED_NAVBAR) != 0);
+                && (mExpandedDesktopMode == GravityBoxSettings.ED_HIDE_NAVBAR ||
+                mExpandedDesktopMode == GravityBoxSettings.ED_SEMI_IMMERSIVE));
+    }
+
+    private static boolean isImmersiveModeActive(Context context, XSharedPreferences prefs) {
+        return ((Settings.Global.getInt(context.getContentResolver(), 
+                    SETTING_EXPANDED_DESKTOP_STATE, 0) == 1) && 
+                    Integer.valueOf(prefs.getString(
+                            GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"))
+                            == GravityBoxSettings.ED_IMMERSIVE);
     }
 
     private static int updateSystemUiVisibilityFlagsForExpandedDesktop(int vis) {
