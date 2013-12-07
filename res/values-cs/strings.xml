@@ -444,7 +444,8 @@
     <string name="pref_expanded_desktop_title">Režim rozšířené plochy</string>
     <string name="expanded_desktop_disabled">Vypnuto</string>
     <string name="expanded_desktop_navbar">Skrýt navigační lištu</string>
-    <string name="expanded_desktop_both">Skrýt stavový řádek i navigační lištu</string>
+    <string name="expanded_desktop_both">Semi-imerzivní režim</string>
+    <string name="expanded_desktop_immersive">Imerzivní režim</string>
     <string name="action_expanded_desktop_title">Rozšířená plocha</string>
     <string name="action_expanded_desktop_on">Rozšířená plocha je ZAP</string>
     <string name="action_expanded_desktop_off">Rozšířená plocha je VYP</string>
