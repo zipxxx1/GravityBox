@@ -444,8 +444,6 @@
     <string name="pref_lockscreen_battery_arc_title">Pokaż wskaźnik stanu baterii</string>
     <string name="pref_lockscreen_battery_arc_summary">Pokazuje stan baterii w kształcie łuku wokół przycisku pierścienia odblokowania</string>
     <string name="hwkey_action_torch">Przełącz latarkę</string>
-    <string name="pref_hwkey_home_longpress_keyguard_title">Latarka przy długim nac. HOME</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Umożliwia przełączanie latarki klawiszem HOME gdy urządzenie jest zablokowane. Ekran musi być włączony, jeśli urządzenie nie posiada natywnego wsparcia dla wybudzania klawiszem HOME.</string>
     <string name="pref_volume_panel_autoexpand_title">Rozszerz automatycznie panel głośności</string>
     <string name="pref_cat_hwkey_menu_title">Klawisz MENU</string>
     <string name="pref_cat_hwkey_home_title">Klawisz HOME</string>

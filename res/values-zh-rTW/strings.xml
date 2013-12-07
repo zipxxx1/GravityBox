@@ -302,8 +302,7 @@
     <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">可擴展音量面板</string>
     <string name="pref_volume_panel_expandable_summary">啟用此選項使您可以調整不同串流的音量</string>
-    
-    
+
     <!-- Fully expandable volume panel -->
     <string name="pref_volume_panel_expandable_fully_title">完全擴展音量調節面板</string>
     <string name="pref_volume_panel_expandable_fully_summary">允許音量調節面板使用所有可提供的空間</string>
@@ -527,7 +526,6 @@
     <string name="hwkey_action_expanded_desktop">切換全螢幕功能</string>
     <string name="hwkey_action_expanded_desktop_disabled">全螢幕模式已關閉！</string>
 
-
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">海苔條調整</string>
     <string name="pref_cat_navigation_bar_summary">包含各種海苔條的個性化配置選項</string>
@@ -542,10 +540,8 @@
     <string name="pref_navbar_width_summary">套用於垂直海苔條</string>
     <string name="pref_navbar_menukey_title">永遠顯示選單鍵</string>
 
-
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">電源選單顯示"螢幕截圖"選項</string>
-
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">解鎖環設定</string>
@@ -609,7 +605,6 @@
     <!-- Icon coloring: preserve stock battery icon -->
     <string name="pref_statusbar_color_skip_battery_title">完整保持預設電池圖示</string>
     <string name="pref_statusbar_color_skip_battery_summary">當預設電池圖是被換成第三方電池圖示時使用</string>
-
 
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">取消外接傳輸時開啟螢幕</string>
@@ -698,13 +693,9 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">切換手電筒</string>
 
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">長按 Home 鍵開啟手電筒</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">當裝置被鎖定時切換手電筒的開關. 如果裝置並沒有支援 Home 鍵喚醒功能，裝置必須在螢幕開啟的狀態下才可切換手電筒開關.</string>
-
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">自動展開音量面板</string>
-    
+
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">選單鍵</string>
     <string name="pref_cat_hwkey_home_title">Home 鍵</string>
@@ -766,8 +757,7 @@
     <string name="pref_cat_navbar_keys_title">海苔條按鍵</string>
     <string name="pref_cat_navbar_color_title">顏色</string>
     <string name="pref_cat_navbar_dimen_title">尺寸</string>
-    
-    
+
     <!-- Navigation bar colors -->
     <string name="pref_navbar_color_enable_title">啟用海苔條顏色</string>
     <string name="pref_navbar_color_enable_summary">停用後需要重新啟動</string>
@@ -778,7 +768,7 @@
     <!-- Disable lockscreen shade -->
     <string name="pref_lockscreen_shade_disable_title">停用鎖定螢幕的陰影</string>
     <string name="pref_lockscreen_shade_disable_summary">移除螢幕鎖定畫面深色色調</string>
-    
+
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">透明度管理器模式</string>
     <string name="pref_tm_mode_summary">重新啟動裝置</string>
@@ -786,19 +776,19 @@
     <string name="tm_mode_statusbar">狀態列</string>
     <string name="tm_mode_navbar">海苔條</string>
     <string name="tm_mode_full">兩者</string>
-    
+
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">輔助訊號顏色</string>
     <string name="pref_statusbar_icon_color_secondary_summary">覆蓋預設橘色訊號圖示</string>
     <string name="pref_statusbar_data_activity_color_secondary_title">輔助資料連接活動顏色</string>
     <string name="pref_statusbar_data_activity_color_secondary_summary">設定輔助資料連接指示符顏色</string>
- 
+
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">狀態列圖示風格</string>
     <string name="pref_status_icon_style_summary">套用於無聲，震動，報警等狀態圖示.</string>
     <string name="icon_style_jb">JellyBean</string>
     <string name="icon_style_kk">KitKat</string>
-    
+
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">返回鍵雙擊操作</string>
 
@@ -809,7 +799,7 @@
     <!-- QS Tile Style -->
     <string name="pref_qs_tile_style_title">瓷貼風格</string>
     <string name="pref_qs_tile_style_summary">僅適用於 GravityBox 所推出的瓷貼 (不支援系統預設的瓷貼)</string>
-    
+
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">調整按鍵邊距</string>
 
@@ -823,7 +813,7 @@
     <!-- Disable data network type icons -->
     <string name="pref_disable_data_network_type_icons_title">停用網路類型指示</string>
     <string name="pref_disable_data_network_type_icons_summary">允許在訊號欄停用 3G/G 指示</string>
-    
+
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">為了能夠支援海苔條操作控制，在海苔條調整選單中覆蓋系統預設值是必須的</string>
  

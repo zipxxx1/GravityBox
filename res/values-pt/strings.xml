@@ -687,10 +687,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Alternar tocha</string>
 
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Tocha ao manter a tecla Home pressionada</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Liga/desliga a tocha quando o dispositivo está bloqueado. A tela tem que estar ligada caso a tocha não se ligue ao pressionar a tecla Home.</string>
-
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Expandir automaticamente</string>
 

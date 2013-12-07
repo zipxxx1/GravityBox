@@ -699,10 +699,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Διακόπτης φακού</string>
 
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Φακός ενεργός με παρατεταμένο πάτημα του πλήκτρου κεντρικής οθόνης</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Ανάβει/Σβήνει τον φακό όταν η συσκευή είναι κλειδωμένη. Η συσκευή πρέπει να είναι ενεργή αν δεν υποστηρίζει άνοιγμα μέσω πλήκτρου κεντρικής οθόνης.</string>
-
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Ανάπτυξη αυτόματα</string>
 

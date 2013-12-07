@@ -441,8 +441,6 @@
     <string name="pref_lockscreen_battery_arc_title">Статус батареї</string>
     <string name="pref_lockscreen_battery_arc_summary">Показувати арку батареї, намальовану навколо кільця розблокування</string>
     <string name="hwkey_action_torch">Включити ліхтарик</string>
-    <string name="pref_hwkey_home_longpress_keyguard_title">Ліхтарик по довгому натисненню Головна</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Включити ліхтарик при заблокованому пристрої. Екран повинен бути включений, якщо пристрій не може зчитувати натискання кнопки у сні</string>
     <string name="pref_volume_panel_autoexpand_title">Розширювати автоматично</string>
     <string name="pref_cat_hwkey_menu_title">Кнопка Меню</string>
     <string name="pref_cat_hwkey_home_title">Кнопка Додому</string>

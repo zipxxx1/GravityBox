@@ -648,10 +648,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Des/activar linterna</string>
 
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Linterna con pulsación prolongada en botón de inicio</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Des/activa la linterna con el dispositivo bloqueado. La pantalla debe estar encendida si el dispositivo no permite despertar desde botón de inicio.</string>
-
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Expandir automáticamente</string>
 

@@ -1055,14 +1055,6 @@
                 android:dialogTitle="@string/hwkey_home_longpress_dialog_title"
                 android:defaultValue="0"/>
 
-            <!-- 
-            <CheckBoxPreference
-                android:key="pref_hwkey_home_longpress_keyguard"
-                android:title="@string/pref_hwkey_home_longpress_keyguard_title"
-                android:summary="@string/pref_hwkey_home_longpress_keyguard_summary"
-                android:defaultValue="false" />
-            -->
-
             <CheckBoxPreference
                 android:key="pref_hwkey_home_doubletap_disable"
                 android:title="@string/pref_hwkey_doubletap_disable_title"
