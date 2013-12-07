@@ -561,8 +561,12 @@ public class ModStatusbarColor {
     
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        ViewGroup vg = (ViewGroup) param.thisObject;
+                        int resId = vg.getResources().getIdentifier("exclude_close_handle", "id", PACKAGE_NAME);
+                        ViewGroup ech = (ViewGroup) vg.findViewById(resId);
+
                         NotificationWallpaper nw = 
-                                new NotificationWallpaper((FrameLayout) param.thisObject, prefs);
+                                new NotificationWallpaper((resId == 0) ? vg : ech, prefs);
                         mBroadcastSubReceivers.add(nw);
                     }
                 });

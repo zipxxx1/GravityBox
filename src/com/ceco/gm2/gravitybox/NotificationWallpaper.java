@@ -32,6 +32,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.Display;
+import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
 import android.view.Surface;
@@ -43,7 +44,7 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
     private static final String PACKAGE_NAME = "com.android.systemui";
     private static final String TAG = "GB:NotificationWallpaper";
 
-    private FrameLayout mNotificationPanelView;
+    private ViewGroup mNotificationPanelView;
     private ImageView mNotificationWallpaperImage;
     private String mNotifBgImagePathPortrait;
     private String mNotifBgImagePathLandscape;
@@ -54,7 +55,7 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
     private Context mContext;
     Bitmap mBitmapWallpaper = null;
 
-    public NotificationWallpaper(FrameLayout container, XSharedPreferences prefs) {
+    public NotificationWallpaper(ViewGroup container, XSharedPreferences prefs) {
         super(container.getContext());
         mNotificationPanelView = container;
         mContext = mNotificationPanelView.getContext();
