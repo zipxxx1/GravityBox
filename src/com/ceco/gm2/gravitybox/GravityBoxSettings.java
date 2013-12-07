@@ -811,12 +811,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefAboutDonate = (Preference) findPreference(PREF_KEY_ABOUT_DONATE);
 
             mPrefEngMode = (Preference) findPreference(PREF_KEY_ENGINEERING_MODE);
-            if (!isAppInstalled(APP_ENGINEERING_MODE)) {
+            if (!Utils.isAppInstalled(getActivity(), APP_ENGINEERING_MODE)) {
                 getPreferenceScreen().removePreference(mPrefEngMode);
             }
 
             mPrefDualSimRinger = (Preference) findPreference(PREF_KEY_DUAL_SIM_RINGER);
-            if (!isAppInstalled(APP_DUAL_SIM_RINGER)) {
+            if (!Utils.isAppInstalled(getActivity(), APP_DUAL_SIM_RINGER)) {
                 getPreferenceScreen().removePreference(mPrefDualSimRinger);
             }
 
@@ -1007,7 +1007,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatMedia.removePreference(mPrefLinkVolumes);
                 mPrefCatFixes.removePreference(mPrefFixCallerIDPhone);
             }
-            if (!isAppInstalled(APP_MESSAGING)) {
+            if (!Utils.isAppInstalled(getActivity(), APP_MESSAGING)) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
                 mPrefCatFixes.removePreference(mPrefFixCallerIDMms);
                 mPrefCatFixes.removePreference(mPrefFixMmsWakelock);
@@ -1927,16 +1927,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             return super.onPreferenceTreeClick(prefScreen, pref);
-        }
-
-        private boolean isAppInstalled(String appUri) {
-            PackageManager pm = getActivity().getPackageManager();
-            try {
-                pm.getPackageInfo(appUri, PackageManager.GET_ACTIVITIES);
-                return true;
-            } catch (Exception e) {
-                return false;
-            }
         }
 
         @SuppressWarnings("deprecation")
