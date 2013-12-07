@@ -171,6 +171,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_DUAL_SIM_RINGER = "pref_dual_sim_ringer";
     public static final String APP_DUAL_SIM_RINGER = "dualsim.ringer";
     public static final String APP_DUAL_SIM_RINGER_CLASS = "dualsim.ringer.main";
+    public static final String LENOVO_FRAMEWORK = "com.lenovo";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN = "pref_cat_lockscreen";
     public static final String PREF_CAT_KEY_LOCKSCREEN_BACKGROUND = "pref_cat_lockscreen_background";
@@ -1063,6 +1064,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mQuickSettings.setEntries(R.array.qs_tile_entries);
                 mQuickSettings.setEntryValues(R.array.qs_tile_values);
                 mPrefCatStatusbarQs.removePreference(mPrefQsTileBehaviourOverride);
+
+                // Remove preferences not compatible with stock Lenovo ROMs
+                if (Utils.isAppInstalled(getActivity(), LENOVO_FRAMEWORK)) {
+                    mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
+                }
             }
 
             // Remove preferences not compatible with Android 4.1
