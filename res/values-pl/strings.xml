@@ -47,6 +47,8 @@
     <string name="quick_settings_expanded_desktop_expanded">Rozszerzony</string>
     <string name="quick_settings_stay_awake_on">Blokowanie uśpienia włączone</string>
     <string name="quick_settings_stay_awake_off">Blokowanie uśpienia wyłączone</string>
+    <string name="quick_settings_nfc_on">NFC Włączone</string>
+    <string name="quick_settings_nfc_off">NFC Wyłączone</string>
     <string name="quick_settings_title">Kafelki Szybkich Ustawień</string>
     <string name="quick_settings_summary">Pozwala wyświetlić lub ukryć Kafelki Szybkich Ustawień na pasku statusu</string>
     <string name="qs_tile_user_profile">Profil użytkownika</string>
@@ -460,4 +462,15 @@
     <string name="hwkey_action_home">Ekran HOME</string>
     <string name="hwkey_action_back">Powrót</string>
     <string name="pref_recent_clear_margin_bottom_title">Ustaw dolny margines</string>
+    <string name="pref_about_gplus_title">Społeczność Google+</string>
+    <string name="pref_about_gplus_summary">Kliknij aby odwiedzić społeczność GravityBox na Google+</string>
+    <string name="pref_network_mode_tile_lte_title">Zezwalaj na tryb sieci LTE</string>
+    <string name="hwkey_navbar_warning">Aby włączyć obsługę akcji dla paska nawigacyjnego, konieczne jest zastąpienie domyślnych ustawień systemowych w menu Poprawek paska nawigacyjnego</string>
+    <string name="gb_new_package_dialog">Znaleziono stary GravityBox zainstalowany z przestarzałego pakietu. Należy go odinstalować przed użyciem nowego pakietu. GB spróbuje teraz przenieść istniejące ustawienia ze starego do nowego GB a następnie odinstalować starą wersję GB. Musisz potwierdzić deinstalację, gdy pojawi się monit. Po deinstalacji aktywuj nowy moduł w Instalatorze Xposed i uruchom ponownie urządzenie gdyż inaczej mogą wystąpić problemy ze stabilnością systemu.</string>
+    <string name="gb_new_package_settings_transfer_ok">Ustawienia GravityBox przeniesione pomyślnie</string>
+    <string name="gb_new_package_settings_transfer_failed">Przeniesienie ustawień GravityBox nie powiodło się</string>
+    <string name="pref_hwkey_lockscreen_torch_title">Latarka przy ekranie blokady</string>
+    <string name="hwkey_ls_torch_disabled">Wyłączona</string>
+    <string name="hwkey_ls_torch_home_longpress">Przy długim naciśnięciu HOME</string>
+    <string name="hwkey_ls_torch_voldown_longpress">Przy długim naciśnięciu Vol- </string>
 </resources>
