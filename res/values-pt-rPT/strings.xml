@@ -88,6 +88,7 @@
     <string name="qs_tile_expanded_desktop">Ambiente de trabalho expandido</string>
     <string name="qs_tile_stay_awake">Manter ligado</string>
     <string name="qs_tile_screenshot">Captura de ecrã</string>
+    <string name="qs_tile_nfc">NFC</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Escolher cor</string>
@@ -455,7 +456,8 @@
     <string name="pref_expanded_desktop_title">Modo ambiente de trabalho expandido</string>
     <string name="expanded_desktop_disabled">Desativado</string>
     <string name="expanded_desktop_navbar">Ocultar Barra de Navegação</string>
-    <string name="expanded_desktop_both">Ocultar todas as barras</string>
+    <string name="expanded_desktop_both">Semi-imersivo</string>
+    <string name="expanded_desktop_immersive">Imersivo</string>
     <string name="action_expanded_desktop_title">Ambiente de trabalho expandido</string>
     <string name="action_expanded_desktop_on">Ambiente de trabalho expandido ativado</string>
     <string name="action_expanded_desktop_off">Ambiente de trabalho expandido desativado</string>
