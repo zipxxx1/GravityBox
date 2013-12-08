@@ -453,6 +453,8 @@
     <string name="pref_expanded_desktop_title">拡張デスクトップモード</string>
     <string name="expanded_desktop_disabled">無効</string>
     <string name="expanded_desktop_navbar">ナビバーを非表示</string>
+    <string name="expanded_desktop_both">半没入モード</string>
+    <string name="expanded_desktop_immersive">没入モード</string>
     <string name="expanded_desktop_both">両方非表示</string>
     <string name="action_expanded_desktop_title">拡張デスクトップ</string>
     <string name="action_expanded_desktop_on">拡張デスクトップはオンです</string>
@@ -709,5 +711,26 @@
 
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">ボタン下の余白を調整</string>
+    
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">LTEモードを使用</string>
+
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">ナビバーのアクションを有効化するには
+        ナビバー設定でシステムの初期値を上書きしないといけません。</string>
+    
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog">JB向けのGravityBoxがインストールされています。 
+        新しいバージョンを使用する前にアンインストールしないといけません。 古いGBから新しいGBへと設定をコピーし、古いGBをアンインストールします。
+        プロンプトが出たらアンインストールを選んでください。アンインストール後はXposedインストーラで
+        有効にして再起動してください。再起動しない場合システムが不安定になります。</string>
+    <string name="gb_new_package_settings_transfer_ok">GravityBox設定のコピーが完了しました。</string>
+    <string name="gb_new_package_settings_transfer_failed">GravityBox設定のコピーが失敗しました。</string>
+    
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">ロック画面のトーチ</string>
+    <string name="hwkey_ls_torch_disabled">無効</string>
+    <string name="hwkey_ls_torch_home_longpress">ホームボタン長押し</string>
+    <string name="hwkey_ls_torch_voldown_longpress">音量下ボタン長押し</string>
     
 </resources>
