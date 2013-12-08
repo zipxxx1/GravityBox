@@ -1,3 +1,28 @@
+Changelog 2.8.1 - 08/12/2013
+--------------------------------------
+- Torch improvements
+--- added partial wakelock that prevents torch from turning off when screen is off on some devices (thanks to Adam3Sixty for testing)
+--- requires new permission: "Prevents phone from sleeping" - but only while torch is on
+- HW Key Actions:
+--- option to choose activation of torch on lockscreen (either by home key long-press or volume down long-press)
+--- added info dialog telling about required "Override system defaults" option to be enabled to support actions on navigation bar
+- Reboot menu prevented from being accessible while keyguard is showing (security)
+- Added option to disable data network type icons (MTK only) (thanks to bgcngm)
+--- allows to disable 3G/G indicators next to signal bars
+- Fixed wifi and signal cluster spacing (thanks to bgcngm)
+- Compatibility fixes for MT6582 devices (thanks to bgcngm)
+- Improved compatibility with Lenovo devices running stock ROMs (thanks to bgcngm)
+--- fixed notification panel layout
+--- removed preferences not compatible with it
+- Updated French translation (thanks to ch-vox)
+- Updated Russian translations (thanks to smb.roman AKA romashko)
+- Updated Spanish translations (thanks to Pr0wleR and jvbferrer)
+- Updated Portuguese (BR) translation (thanks to LaraCraft304)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translations (thanks to Eric850130) 
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Japanese translations (thanks to WedyDQ10)
+
 Changelog 2.8.0 - 03/12/2013
 --------------------------------------
 - Removed previously added KitKat functionality (thanks to bgcngm)
