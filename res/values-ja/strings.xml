@@ -83,7 +83,9 @@
     <string name="quick_settings_wifi">Wi-Fi</string>
     <string name="quick_settings_wifi_off">Wi-Fiオフ</string>
     <string name="quick_settings_wifi_not_connected">未接続</string>
-    <string name="quick_settings_wifi_turning_on">オンにしています&#8230;</string> 
+    <string name="quick_settings_wifi_turning_on">オンにしています&#8230;</string>
+    <string name="quick_settings_nfc_on">NFC オン</string>
+    <string name="quick_settings_nfc_off">NFC オフ</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">ステータスバークイック設定タイル</string>
@@ -788,5 +790,26 @@
 
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">ボタン下の余白を調整</string>
+    
+    <!-- Google Plus -->
+    <string name="pref_about_gplus_title">Google+コミュニティ</string>
+    <string name="pref_about_gplus_summary">タッチでGravityBox Google+コミュニティにアクセスします。</string>
+
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">LTEモードを使用</string>
+
+    <!-- Disable data network type icons -->
+    <string name="pref_disable_data_network_type_icons_title">データ通信形式アイコンの無効化</string>
+    <string name="pref_disable_data_network_type_icons_summary">電波アイコンの上にある3G/G表示を非表示にします。</string>
+
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">ナビバーのアクションを有効化するには
+        ナビバー設定でシステムの初期値を上書きしないといけません。</string>
+
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">ロック画面のトーチ</string>
+    <string name="hwkey_ls_torch_disabled">無効</string>
+    <string name="hwkey_ls_torch_home_longpress">ホームボタン長押し</string>
+    <string name="hwkey_ls_torch_voldown_longpress">音量下ボタン長押し</string>
     
 </resources>
