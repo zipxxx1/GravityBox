@@ -455,7 +455,6 @@
     <string name="expanded_desktop_navbar">ナビバーを非表示</string>
     <string name="expanded_desktop_both">半没入モード</string>
     <string name="expanded_desktop_immersive">没入モード</string>
-    <string name="expanded_desktop_both">両方非表示</string>
     <string name="action_expanded_desktop_title">拡張デスクトップ</string>
     <string name="action_expanded_desktop_on">拡張デスクトップはオンです</string>
     <string name="action_expanded_desktop_off">拡張デスクトップはオフです</string>
