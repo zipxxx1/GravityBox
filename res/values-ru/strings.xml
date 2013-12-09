@@ -761,5 +761,13 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">При включении поддержки действия для панели навигации необходимо 
         переписать настройки по умолчанию в меню настройки панели навигации</string>
-        
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog">Установлен устаревший GB. 
+        Он будет удален перед установкой новой версии. GB попробует перенести настройки из старой инсталляции в новую. Вы ОБЯЗАНЫ
+        подтвердить переустанвку при запросе. После переустановки активируйте модуль в XPosed и НЕМЕДЛЕННО ПЕРЕЗАГРУЗИТЕСЬ, 
+        иначе можете столкнуться с нестабильностью системы.</string>
+    <string name="gb_new_package_settings_transfer_ok">Настройки GravityBox успешно перенесены</string>
+    <string name="gb_new_package_settings_transfer_failed">Неудачный перенос настроек GravityBox</string>
+
 </resources>
