@@ -828,4 +828,10 @@
     <string name="hwkey_navbar_warning">При включении поддержки действия для панели навигации необходимо 
         переписать настройки по умолчанию в меню настройки панели навигации</string>
     
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Фонарик на экране блокировки</string>
+    <string name="hwkey_ls_torch_disabled">Отключен</string>
+    <string name="hwkey_ls_torch_home_longpress">По долгому нажатию Home</string>
+    <string name="hwkey_ls_torch_voldown_longpress">По долгому нажатию Громкость-</string>
+    
 </resources>
