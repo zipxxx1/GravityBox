@@ -409,7 +409,7 @@
     <string name="recent_clear_bottom_right">右下</string>
 
     <!-- Clear all recents top margin -->
-    <string name="pref_recent_clear_margin_top_title">ボタン上の余白の調整</string>
+    <string name="pref_recent_clear_margin_top_title">ボタン上の余白</string>
 
     <!-- Disable roaming warnings -->
     <string name="pref_roaming_warning_disable_title">ローミング警告の無効化</string>
@@ -548,7 +548,7 @@
     
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">明るさ操作を有効化</string>
-    <string name="pref_statusbar_brightness_summary">ステータスバー上でスライドして明るさ調整する</string>
+    <string name="pref_statusbar_brightness_summary">ステータスバー上でスライドして明るさ調整できるようにします。</string>
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">電話</string>
@@ -789,7 +789,7 @@
     <string name="pref_qs_tile_style_summary">GravityBoxで追加したタイルにのみ適用されます。(標準タイルは変更されません)</string>
 
     <!-- Clear all recents bottom margin -->
-    <string name="pref_recent_clear_margin_bottom_title">ボタン下の余白を調整</string>
+    <string name="pref_recent_clear_margin_bottom_title">ボタン下の余白</string>
     
     <!-- Google Plus -->
     <string name="pref_about_gplus_title">Google+コミュニティ</string>
