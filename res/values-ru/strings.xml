@@ -471,7 +471,8 @@
     <string name="pref_expanded_desktop_title">Расширенный рабочий стол</string>
     <string name="expanded_desktop_disabled">Отключено</string>
     <string name="expanded_desktop_navbar">Спрятать панель навигации</string>
-    <string name="expanded_desktop_both">Прятать все</string>
+    <string name="expanded_desktop_both">Semi-immersive</string>
+    <string name="expanded_desktop_immersive">Immersive</string>
     <string name="action_expanded_desktop_title">Расширенный рабочий стол</string>
     <string name="action_expanded_desktop_on">Расшренный рабочий стол ВКЛЮЧЕН</string>
     <string name="action_expanded_desktop_off">Расшренный рабочий стол ВЫКЛЮЧЕН</string>
@@ -744,5 +745,20 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">При включении поддержки действия для панели навигации необходимо 
         переписать настройки по умолчанию в меню настройки панели навигации</string>
-        
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog">Установлен устаревший GB. 
+        Он будет удален перед установкой новой версии. GB попробует перенести настройки из старой инсталляции в новую. Вы ОБЯЗАНЫ
+        подтвердить переустанвку при запросе. После переустановки активируйте модуль в XPosed и 
+        НЕМЕДЛЕННО ПЕРЕЗАГРУЗИТЕСЬ, 
+        иначе можете столкнуться с нестабильностью системы.</string>
+    <string name="gb_new_package_settings_transfer_ok">Настройки GravityBox успешно перенесены</string>
+    <string name="gb_new_package_settings_transfer_failed">Неудачный перенос настроек GravityBox</string>
+    
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Фонарик на экране блокировки</string>
+    <string name="hwkey_ls_torch_disabled">Отключен</string>
+    <string name="hwkey_ls_torch_home_longpress">По долгому нажатию Home</string>
+    <string name="hwkey_ls_torch_voldown_longpress">По долгому нажатию Громкость-</string>
+    
 </resources>
