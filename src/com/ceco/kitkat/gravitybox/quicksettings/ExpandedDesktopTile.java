@@ -54,7 +54,7 @@ public class ExpandedDesktopTile extends BasicTile {
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Settings.System.putInt(mGbContext.getContentResolver(),
+                            Settings.Global.putInt(mGbContext.getContentResolver(),
                                     ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
                                     (mExpanded ? 0 : 1));
                         }
@@ -76,7 +76,7 @@ public class ExpandedDesktopTile extends BasicTile {
 
         public void observe() {
             ContentResolver cr = mContext.getContentResolver();
-            cr.registerContentObserver(Settings.System.getUriFor(
+            cr.registerContentObserver(Settings.Global.getUriFor(
                    ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE), false, this);
         }
 
@@ -97,7 +97,7 @@ public class ExpandedDesktopTile extends BasicTile {
 
     @Override
     protected synchronized void updateTile() {
-        mExpanded = (Settings.System.getInt(mContext.getContentResolver(),
+        mExpanded = (Settings.Global.getInt(mContext.getContentResolver(),
                 ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0) == 1)
                 && (mMode > 0);
 

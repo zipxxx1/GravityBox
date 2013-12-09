@@ -72,10 +72,6 @@
     <string name="quick_settings_expanded_desktop_expanded">موسع</string>
     <string name="quick_settings_stay_awake_on">ابقاء الشاشة تعمل</string>
     <string name="quick_settings_stay_awake_off">اطفاء</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi off</string>
-    <string name="quick_settings_wifi_not_connected">غير متصل</string>
-    <string name="quick_settings_wifi_turning_on">جاري الاتصال ...</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">أيقونات الاعدادات السريعة</string>
@@ -84,16 +80,13 @@
     <string name="qs_tile_airplane_mode">وضع الطيران</string>
     <string name="qs_tile_battery">البطارية</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (CM style)</string>
     <string name="qs_tile_bluetooth">البلوتوث</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (CM style)</string>
     <string name="qs_tile_mobile_data">بيانات الجوال</string>
     <string name="qs_tile_network_mode">وضع الشبكة</string>
     <string name="qs_tile_data_usage">استخدام البيانات</string>
-    <string name="qs_tile_audio">Audio profiles</string>
     <string name="qs_tile_brightness">الاضاءة</string>
-    <string name="qs_tile_screen_timeout">مهلة الشاشة</string>
     <string name="qs_tile_autorotation">دوران تلقائي</string>
     <string name="qs_tile_sync">تزامن</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Access Point</string>
@@ -357,10 +350,6 @@
     <string name="pref_button_backlight_notifications_title">اضاءة الاشعارات</string>
     <string name="pref_button_backlight_notifications_summary">تفعيل الاضاءة عند وصول اشعار والشاشة مطفأة</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">اخفاء شريط التنقل</string>
-    <string name="pref_navbar_disable_summary">اخفاء شريط التنقل أثناء تفعيل اعدادات Pie (يتطلب اعادة التشغيل)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">خلفية متدرجة</string>
     <string name="pref_holo_bg_dither_summary">استخدام خلفية متدرجة لثيم النظام (يتطلب اعادة التشغيل)</string>
@@ -471,7 +460,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">وضع سطح المكتب الموسع</string>
     <string name="expanded_desktop_disabled">معطل</string>
-    <string name="expanded_desktop_statusbar">احفاء شريط الحالة</string>
     <string name="expanded_desktop_navbar">اخفاء شريط التنقل</string>
     <string name="expanded_desktop_both">اخفاء الكل</string>
     <string name="action_expanded_desktop_title">سطح المكتب الموسع</string>
@@ -519,7 +507,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">المكالمات</string>
-    <string name="pref_cat_phone_messaging_title">الرسائل</string>
     <string name="pref_cat_phone_mobile_data_title">بيانات الجوال</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->

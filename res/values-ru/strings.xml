@@ -74,10 +74,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Расширенный</string>
     <string name="quick_settings_stay_awake_on">Не засыпать вкл.</string>
     <string name="quick_settings_stay_awake_off">Не засыпать выкл.</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi выкл</string>
-    <string name="quick_settings_wifi_not_connected">Не подключено</string>
-    <string name="quick_settings_wifi_turning_on">Включение…</string>
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
     
@@ -88,16 +84,13 @@
     <string name="qs_tile_airplane_mode">Режим полета</string>
     <string name="qs_tile_battery">Заряд батареи</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (CM style)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (CM style)</string>
     <string name="qs_tile_mobile_data">Мобильный интернет</string>
     <string name="qs_tile_network_mode">Режим сети (2g/3g)</string>
     <string name="qs_tile_data_usage">Передача данных (статистика)</string>
-    <string name="qs_tile_audio">Профили звука</string>
     <string name="qs_tile_brightness">Яркость</string>
-    <string name="qs_tile_screen_timeout">Таймер отключения экрана</string>
     <string name="qs_tile_autorotation">Автоповорот</string>
     <string name="qs_tile_sync">Синхронизация</string>
     <string name="qs_tile_wifi_ap">Точка доступа Wi-Fi</string>
@@ -366,10 +359,6 @@
     <string name="pref_button_backlight_notifications_title">Уведомления подсветкой клавиш</string>
     <string name="pref_button_backlight_notifications_summary">ЭКСПЕРИМЕНТАЛЬНО! Моргающая подсветка клавиш при уведомлениях. Использовать только в случае отсутствия LED индикатора. Может привести к ухудшению жизни батареи.</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Скрыть панель навигации</string>
-    <string name="pref_navbar_disable_summary">Скрывает панель навигации, когда включено веерное меню (для устройств с программными кнопками навигации, необходима перезагрузка)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Сглаженный Holo фон</string>
     <string name="pref_holo_bg_dither_summary">Заменяет стандартный фон на сглаженный для избежания неплавного градиента (необходима перезагрузка)</string>
@@ -481,7 +470,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Расширенный рабочий стол</string>
     <string name="expanded_desktop_disabled">Отключено</string>
-    <string name="expanded_desktop_statusbar">Спрятать статусбар</string>
     <string name="expanded_desktop_navbar">Спрятать панель навигации</string>
     <string name="expanded_desktop_both">Прятать все</string>
     <string name="action_expanded_desktop_title">Расширенный рабочий стол</string>
@@ -529,7 +517,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Телефония</string>
-    <string name="pref_cat_phone_messaging_title">Сообщения</string>
     <string name="pref_cat_phone_mobile_data_title">Передача данных</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
@@ -643,10 +630,6 @@
     
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Включить фонарик</string>
-
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Фонарик по долгому нажатию Home</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Включить фонарек при заблокированном устройстве. "кран должен быть включен если устройство не может считывать нажатие кнопки во сне</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Расширять автоматически</string>

@@ -386,10 +386,12 @@
         <item>@string/expanded_desktop_disabled</item>
         <item>@string/expanded_desktop_navbar</item>
         <item>@string/expanded_desktop_both</item>
+        <item>@string/expanded_desktop_immersive</item>
     </string-array>
 
     <string-array name="expanded_desktop_values" translatable="false">
         <item>0</item>
+        <item>1</item>
         <item>2</item>
         <item>3</item>
     </string-array>
@@ -552,6 +554,18 @@
     <string-array name="status_icon_style_values" translatable="false">
         <item>0</item>
         <item>1</item>
+    </string-array>
+
+    <string-array name="hwkey_ls_torch_entries" translatable="false">
+        <item>@string/hwkey_ls_torch_disabled</item>
+        <item>@string/hwkey_ls_torch_home_longpress</item>
+        <item>@string/hwkey_ls_torch_voldown_longpress</item>
+    </string-array>
+
+    <string-array name="hwkey_ls_torch_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
 </resources>

@@ -393,7 +393,7 @@ public class ModPowerMenu {
                 handleReboot(mContext, mRebootStr, 0);
                 return true;
             } else if (methodName.equals("showDuringKeyguard")) {
-                return true;
+                return false;
             } else if (methodName.equals("showBeforeProvisioning")) {
                 return true;
             } else if (methodName.equals("isEnabled")) {
@@ -426,7 +426,7 @@ public class ModPowerMenu {
         }
 
         public static boolean isExpandedDesktopOn(Context context) {
-            return (Settings.System.getInt(context.getContentResolver(),
+            return (Settings.Global.getInt(context.getContentResolver(),
                     ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0) == 1);
         }
 
@@ -440,7 +440,7 @@ public class ModPowerMenu {
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Settings.System.putInt(mContext.getContentResolver(),
+                        Settings.Global.putInt(mContext.getContentResolver(),
                                 ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
                                 isExpandedDesktopOn(mContext) ? 0 : 1);
                         updateStatus();

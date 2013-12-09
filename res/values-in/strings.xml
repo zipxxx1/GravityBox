@@ -74,10 +74,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Diperluas</string>
     <string name="quick_settings_stay_awake_on">Tetap menyala hidup</string>
     <string name="quick_settings_stay_awake_off">Tetap menyala mati</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi mati</string>
-    <string name="quick_settings_wifi_not_connected">Tidak terkoneksi</string>
-    <string name="quick_settings_wifi_turning_on">Menghidupkan&#8230;</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Kotak-kotak QuickSettings Statusbar</string>
@@ -86,16 +82,13 @@
     <string name="qs_tile_airplane_mode">Mode pesawat terbang</string>
     <string name="qs_tile_battery">Status baterai</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (CM style)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (CM style)</string>
     <string name="qs_tile_mobile_data">Data Paket</string>
     <string name="qs_tile_network_mode">Mode jaringan</string>
     <string name="qs_tile_data_usage">Penggunaan Data</string>
-    <string name="qs_tile_audio">Profil Suara</string>
     <string name="qs_tile_brightness">Kecerahan</string>
-    <string name="qs_tile_screen_timeout">Screen timeout</string>
     <string name="qs_tile_autorotation">Rotasi otomatis</string>
     <string name="qs_tile_sync">Sinkronisasi</string>
     <string name="qs_tile_wifi_ap">Akses Poin Wi-Fi</string>
@@ -363,10 +356,6 @@
     <string name="pref_button_backlight_notifications_title">Notifikasi lampu latar tombol</string>
     <string name="pref_button_backlight_notifications_summary">EKSPERIMENTAL! Membuat lampu latar tombol berkedip ketika ada notifikasi. Gunakan jika perangkat anda tidak menyediakan LED notifikasi. Dapat menguras batrei.</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Sembunyikan bar navigasi</string>
-    <string name="pref_navbar_disable_summary">Menyembunyikan bar navigasi ketika kontrol Pie dihidupkan (untuk perangkat yang memiliki bar navigasi, membutuhkan restart)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Latar belakang Holo dithered</string>
     <string name="pref_holo_bg_dither_summary">Ganti latar belakang standar Holo dengan versi yang dithered untuk mengurangi pita warna (requires reboot)</string>
@@ -478,7 +467,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Mode perluasan desktop</string>
     <string name="expanded_desktop_disabled">Dimatikan</string>
-    <string name="expanded_desktop_statusbar">Sembunyikan statusbar</string>
     <string name="expanded_desktop_navbar">Sembunyikan navigation bar</string>
     <string name="expanded_desktop_both">Sembunyikan keduanya</string>
     <string name="action_expanded_desktop_title">Perluasan desktop</string>
@@ -513,11 +501,11 @@
     <string name="pref_powermenu_screenshot_title">Screenshot di menu power</string>
 
     <!-- Lockscreen targets -->
-    <string name="pref_cat_lockscreen_targets_title">Target Lockscreen</string>
-    <string name="pref_lockscreen_targets_enable_title">Hidupkan target lockscreen</string>
-    <string name="pref_lockscreen_targets_enable_summary">Hidupkan pengaturan target lockscreen</string>
-    <string name="pref_lockscreen_targets_app_title">Aplikasi target %s</string>
-    <string name="pref_lockscreen_targets_bottom_offset_title">Jarak bawah cincin unlock</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">Target Lockscreen</string>
+    <string name="pref_lockscreen_ring_targets_enable_title">Hidupkan target lockscreen</string>
+    <string name="pref_lockscreen_ring_targets_enable_summary">Hidupkan pengaturan target lockscreen</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Aplikasi target %s</string>
+    <string name="pref_lockscreen_ring_vertical_offset_title">Jarak bawah cincin unlock</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Jarak samping cincin unlock</string>
 
     <!-- Statusbar brightness control -->
@@ -526,7 +514,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telepon</string>
-    <string name="pref_cat_phone_messaging_title">Perpesanan</string>
     <string name="pref_cat_phone_mobile_data_title">Paket data</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
@@ -640,10 +627,6 @@
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Hidup/Matikan Senter</string>
-
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Hidupkan senter ketika tombol Home ditahan</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Hidup/Matikan senter ketika perangkat terkunci. Layar harus dihidupkan terlebih dahulu jika perangkat tidak memiliki fitur untuk menghidupkan layar dengan tombol home.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Membesar secara otomatis</string>

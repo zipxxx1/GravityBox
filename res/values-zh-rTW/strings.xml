@@ -59,10 +59,6 @@
     <string name="quick_settings_expanded_desktop_expanded">擴展</string>
     <string name="quick_settings_stay_awake_on">開啟保持清醒</string>
     <string name="quick_settings_stay_awake_off">關閉保持清醒</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi 關閉</string>
-    <string name="quick_settings_wifi_not_connected">沒有連線</string>
-    <string name="quick_settings_wifi_turning_on">開啟中&#8230;</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">狀態列快速設定磁貼</string>
@@ -71,16 +67,13 @@
     <string name="qs_tile_airplane_mode">飛航模式</string>
     <string name="qs_tile_battery">電池狀態</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (CM 風格)</string>
     <string name="qs_tile_bluetooth">藍牙</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (CM 風格)</string>
     <string name="qs_tile_mobile_data">行動資料</string>
     <string name="qs_tile_network_mode">網路模式</string>
     <string name="qs_tile_data_usage">資料用量</string>
-    <string name="qs_tile_audio">情景模式</string>
     <string name="qs_tile_brightness">亮度</string>
-    <string name="qs_tile_screen_timeout">螢幕休眠時間</string>
     <string name="qs_tile_autorotation">自動旋轉</string>
     <string name="qs_tile_sync">同步功能</string>
     <string name="qs_tile_wifi_ap">Wi-Fi 行動熱點</string>
@@ -242,10 +235,6 @@
     <string name="phone_flip_action_mute">鈴聲靜音</string>
     <string name="phone_flip_action_dismiss">拒接電話</string>
 
-    <!-- Disable vibrate on call connect -->
-    <string name="pref_phone_call_connect_vibrate_disable_title">停用接通時的震動</string>
-    <string name="pref_phone_call_connect_vibrate_disable_summary">停用在通話接通時所觸發的震動</string>
-
     <!-- Soft reboot -->
     <string name="reboot_soft">軟重啟</string>
 
@@ -352,10 +341,6 @@
     <string name="button_backlight_mode_always_on">當螢幕喚醒時背光燈永遠打開</string>
     <string name="pref_button_backlight_notifications_title">背光燈通知效果</string>
     <string name="pref_button_backlight_notifications_summary">這個設定是實驗性的！當收到通知時背光燈會閃爍提醒。建議當您的裝置沒有 LED 通知燈時才開啟，此功能可能會消耗部分電量</string>
-
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">隱藏海苔條</string>
-    <string name="pref_navbar_disable_summary">當 Pie 控制 啟用時隱藏海苔條（需要重新啟動）</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">優化 Holo 背景</string>
@@ -467,7 +452,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">全螢幕模式</string>
     <string name="expanded_desktop_disabled">關閉</string>
-    <string name="expanded_desktop_statusbar">隱藏狀態列</string>
     <string name="expanded_desktop_navbar">隱藏海苔條</string>
     <string name="expanded_desktop_both">隱藏狀態列與海苔條</string>
     <string name="action_expanded_desktop_title">全螢幕功能</string>
@@ -518,16 +502,12 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">電話</string>
-    <string name="pref_cat_phone_messaging_title">訊息</string>
     <string name="pref_cat_phone_mobile_data_title">行動資料</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">網路模式的瓷貼模式</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G</string>
     <string name="nm_tile_mode2">2G/2G+3G</string>
-
-    <!-- Disable GPS notifications -->
-    <string name="pref_gps_notif_disable_title">停用 GPS 通知</string>
 
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允許所有旋轉</string>
@@ -634,10 +614,6 @@
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">切換手電筒</string>
-
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">長按 Home 鍵開啟手電筒</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">當裝置被鎖定時切換手電筒的開關. 如果裝置並沒有支援 Home 鍵喚醒功能，裝置必須在螢幕開啟的狀態下才可切換手電筒開關.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">自動展開音量面板</string>

@@ -74,10 +74,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Étendu</string>
     <string name="quick_settings_stay_awake_on">Rester allumé on</string>
     <string name="quick_settings_stay_awake_off">Rester allumé off</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi off</string>
-    <string name="quick_settings_wifi_not_connected">Non connecté</string>
-    <string name="quick_settings_wifi_turning_on">Mise en route&#8230;</string>
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
 
@@ -88,16 +84,13 @@
     <string name="qs_tile_airplane_mode">Mode avion</string>
     <string name="qs_tile_battery">Niveau de batterie</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (style CM)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (style CM)</string>
     <string name="qs_tile_mobile_data">Connexion de données</string>
     <string name="qs_tile_network_mode">Mode réseau</string>
     <string name="qs_tile_data_usage">Consommation de données</string>
-    <string name="qs_tile_audio">Profils audio</string>
     <string name="qs_tile_brightness">Luminosité</string>
-    <string name="qs_tile_screen_timeout">Délai d\'attente</string>
     <string name="qs_tile_autorotation">Rotation automatique</string>
     <string name="qs_tile_sync">Synchronisation</string>
     <string name="qs_tile_wifi_ap">Hotspot Wi-Fi</string>
@@ -366,10 +359,6 @@
     <string name="pref_button_backlight_notifications_title">Notification via bouton rétroéclairé</string>
     <string name="pref_button_backlight_notifications_summary">EXPÉRIMENTAL ! Fais clignoter le rétroéclairage du bouton lorsqu\'il y a une notification. À utiliser en l\'absence de LED de notification. Peut augmenter la consommation de batterie</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Masquer la barre de navigation</string>
-    <string name="pref_navbar_disable_summary">Masque la barre de navigation lorsque les touches flottantes sont activées (pour les appareils qui ont une barre de navigation, nécessite un redémarrage)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Arrière-plan Holo tramé</string>
     <string name="pref_holo_bg_dither_summary">Remplace l\'arrière-plan Holo standard par un arrière-plan tramé pour supprimer les bandes de couleur (nécessite un redémarrage)</string>
@@ -481,7 +470,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Mode bureau étendu</string>
     <string name="expanded_desktop_disabled">Désactivé</string>
-    <string name="expanded_desktop_statusbar">Masquer la barre d\'état</string>
     <string name="expanded_desktop_navbar">Masquer la barre de navigation</string>
     <string name="expanded_desktop_both">Masquer toutes les barres</string>
     <string name="action_expanded_desktop_title">Bureau étendu</string>
@@ -529,7 +517,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Téléphonie</string>
-    <string name="pref_cat_phone_messaging_title">Messagerie</string>
     <string name="pref_cat_phone_mobile_data_title">Données mobile</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
@@ -644,10 +631,6 @@
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Commuter la torche</string>
 
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Torche par appui long sur la touche Home</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Interrupteur on/off pour allumer la torche lorsque l\'appareil est verrouillé. L\'écran doit être allumé si l\'appareil ne supporte pas nativement la réactivation via la touche Home</string>
-
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Développer automatiquement</string>
 
@@ -761,5 +744,20 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Pour permettre d\'activer le support des actions de la barre de navigation, il est nécessaire
         de remplacer les paramètres système par défaut dans le menu Modifications barre de navigation</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog">Une ancienne version de GravityBox avec un nom de paquet obsolète a été trouvée. 
+        Elle doit être désinstallée avant que le nouveau paquet puisse être utilisé. GB va maintenant essayer de
+        transférer vos paramètres existants depuis l\'ancienne config vers la nouvelle, l\'ancienne sera ensuite désinstallée.
+        Vous DEVEZ confirmer la désinstallation lorsque cela vous sera demandé. Après la désinstallation, activez le nouveau module
+        dans l\'installateur de Xposed et REDÉMARREZ IMMÉDIATEMENT sinon vous risquez de recontrer des problèmes de stabilité du système</string>
+    <string name="gb_new_package_settings_transfer_ok">Paramètres de GravityBox transférés avec succès</string>
+    <string name="gb_new_package_settings_transfer_failed">Le transfert des paramètres de GravityBox a échoué</string>
+
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Torche depuis écran de déverrouillage</string>
+    <string name="hwkey_ls_torch_disabled">Désactivée</string>
+    <string name="hwkey_ls_torch_home_longpress">Par appui long sur Home</string>
+    <string name="hwkey_ls_torch_voldown_longpress">Par appui long sur volume -</string>
 
 </resources>

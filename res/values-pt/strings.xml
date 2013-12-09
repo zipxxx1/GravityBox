@@ -59,10 +59,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Expandido</string>
     <string name="quick_settings_stay_awake_on">Manter ligado</string>
     <string name="quick_settings_stay_awake_off">Não manter ligado</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi desativado</string>
-    <string name="quick_settings_wifi_not_connected">Não conectado</string>
-    <string name="quick_settings_wifi_turning_on">Ligando&#8230;</string>
     <string name="quick_settings_nfc_on">NFC ativado</string>
     <string name="quick_settings_nfc_off">NFC desativado</string>
 
@@ -73,16 +69,13 @@
     <string name="qs_tile_airplane_mode">Modo Avião</string>
     <string name="qs_tile_battery">Status da Bateria</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-    <string name="qs_tile_wifi_alt">Wi-Fi (estilo CM)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (estilo CM)</string>
     <string name="qs_tile_mobile_data">Dados móveis</string>
     <string name="qs_tile_network_mode">Modo de Rede</string>
     <string name="qs_tile_data_usage">Uso de dados</string>
-    <string name="qs_tile_audio">Perfis de áudio</string>
     <string name="qs_tile_brightness">Brilho</string>
-    <string name="qs_tile_screen_timeout">Tempo limite de tela</string>
     <string name="qs_tile_autorotation">Auto rotação</string>
     <string name="qs_tile_sync">Sincronização</string>
     <string name="qs_tile_wifi_ap">Ponto de Acesso Wi-Fi</string>
@@ -351,10 +344,6 @@
     <string name="pref_button_backlight_notifications_title">Notificações de luz de fundo</string>
     <string name="pref_button_backlight_notifications_summary">EXPERIMENTAL! Pisca luz de fundo ao receber notificações. Use caso seu dispositivo não tenha LED de notificações. Pode consumir bateria.</string>
 
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Esconder barra de navegação</string>
-    <string name="pref_navbar_disable_summary">Esconde a barra de navegação enquanto os controles circulares estão ativos. Para dispositivos que possuem barra de navegação (necessário reiniciar)</string>
-
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Fundo pontilhado</string>
     <string name="pref_holo_bg_dither_summary">Substituir o fundo do tema Holo padrão por um pontilhado (necessário reiniciar)</string>
@@ -466,7 +455,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Modo de área de trabalho expandida</string>
     <string name="expanded_desktop_disabled">Desabilitado</string>
-    <string name="expanded_desktop_statusbar">Esconder barra de status</string>
     <string name="expanded_desktop_navbar">Esconder barra de navegação</string>
     <string name="expanded_desktop_both">Esconder ambos</string>
     <string name="action_expanded_desktop_title">Área de trabalho expandida</string>
@@ -514,7 +502,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Celular</string>
-    <string name="pref_cat_phone_messaging_title">Mensagens</string>
     <string name="pref_cat_phone_mobile_data_title">Dados móveis</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
@@ -628,10 +615,6 @@
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Alternar tocha</string>
-
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Tocha ao manter a tecla Home pressionada</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Liga/desliga a tocha quando o dispositivo está bloqueado. A tela tem que estar ligada caso a tocha não se ligue ao pressionar a tecla Home.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Expandir automaticamente</string>

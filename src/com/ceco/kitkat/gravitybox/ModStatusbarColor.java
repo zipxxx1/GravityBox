@@ -15,6 +15,7 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.XC_MethodHook.MethodHookParam;
 import de.robv.android.xposed.callbacks.XCallback;
 
 public class ModStatusbarColor {
@@ -58,15 +58,14 @@ public class ModStatusbarColor {
 
     public static final String ACTION_PHONE_STATUSBAR_VIEW_MADE = "gravitybox.intent.action.PHONE_STATUSBAR_VIEW_MADE";
 
-    private static final int MODE_OPAQUE = 0;
-    private static final int MODE_LIGHTS_OUT = 3;
-
     private static View mPanelBar;
     private static StatusBarIconManager mIconManager;
     private static List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private static Object mPhoneStatusBar;
     private static StatusbarSignalCluster mSignalCluster;
     private static int mStatusbarBgColor;
+    private static Object mBarBackground;
+    private static Integer mStatusbarBgColorOriginal;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -182,6 +181,7 @@ public class ModStatusbarColor {
                         mIconManager.registerListener(mIconManagerListener);
                         mIconManager.refreshState();
                     }
+                    setStatusbarBgColor();
 
                     Intent i = new Intent(ACTION_PHONE_STATUSBAR_VIEW_MADE);
                     context.sendBroadcast(i);
@@ -243,16 +243,19 @@ public class ModStatusbarColor {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(barTransitionsClass, "getBackgroundColor",
-                    int.class, new XC_MethodHook() {
+            XposedBridge.hookAllConstructors(barTransitionsClass, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mIconManager != null && mIconManager.isColoringEnabled()) {
-                        final Object view = XposedHelpers.getObjectField(param.thisObject, "mView");
-                        final int mode = (Integer) param.args[0];
-                        if (view == mPanelBar && (mode == MODE_OPAQUE || mode == MODE_LIGHTS_OUT)) {
-                            param.setResult(mStatusbarBgColor);
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (XposedHelpers.getObjectField(param.thisObject, "mView") == mPanelBar) {
+                        try {
+                            Field barBg = XposedHelpers.findField(param.thisObject.getClass(), "mBarBackground");
+                            mBarBackground = barBg.get(param.thisObject);
+                            if (DEBUG) log("BarTransitions appear to be Android 4.4.1");
+                        } catch (NoSuchFieldError nfe) {
+                            mBarBackground = param.thisObject;
+                            if (DEBUG) log("BarTransitions appear to be Android 4.4");
                         }
+                        
                     }
                 }
             });
@@ -262,12 +265,25 @@ public class ModStatusbarColor {
     }
 
     private static void setStatusbarBgColor() {
-        if (mPanelBar == null) return;
+        if (mPanelBar == null || 
+                mBarBackground == null ||
+                mIconManager == null) return;
 
         try {
-            final Object barTransitions = XposedHelpers.getObjectField(mPanelBar, "mBarTransitions");
-            final int currentMode = (Integer) XposedHelpers.callMethod(barTransitions, "getMode");
-            XposedHelpers.callMethod(barTransitions, "applyModeBackground", -1, currentMode, false);
+            if (mStatusbarBgColorOriginal == null) {
+                mStatusbarBgColorOriginal = XposedHelpers.getIntField(mBarBackground, "mOpaque");
+                if (DEBUG) log("Saved original statusbar background color");
+            }
+            int bgColor = mIconManager.isColoringEnabled() ? 
+                    mStatusbarBgColor : mStatusbarBgColorOriginal;
+            XposedHelpers.setIntField(mBarBackground, "mOpaque", bgColor);
+            if (mBarBackground instanceof Drawable) {
+                ((Drawable) mBarBackground).invalidateSelf();
+            } else {
+                final Object barTransitions = XposedHelpers.getObjectField(mPanelBar, "mBarTransitions");
+                final int currentMode = (Integer) XposedHelpers.callMethod(barTransitions, "getMode");
+                XposedHelpers.callMethod(barTransitions, "applyModeBackground", -1, currentMode, false);
+            }
         } catch (Throwable t) {
             log("Error setting statusbar background color: " + t.getMessage());
         }

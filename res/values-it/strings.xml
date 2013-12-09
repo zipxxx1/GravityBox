@@ -33,7 +33,6 @@
     <string name="vol_key_cursor_control_on_reverse">Volume su/giu muove il cursore a destra/sinistra</string>
 
     <string name="recents_clear_all_title">Pulisci tutte le attività recenti</string>
-    <string name="recents_clear_all_summary">Abilita il bottone per pulire tutte le attività recenti nella finestra \"Attività recenti\"</string>
 
     <string name="important">Importante</string>
 
@@ -66,9 +65,7 @@
     <string name="qs_tile_mobile_data">Dati mobili</string>
     <string name="qs_tile_network_mode">Network mode</string>
     <string name="qs_tile_data_usage">Utilizzo dati</string>
-    <string name="qs_tile_audio">Profili audio</string>
     <string name="qs_tile_brightness">Luminosità</string>
-    <string name="qs_tile_screen_timeout">Timout schermo</string>
     <string name="qs_tile_autorotation">Rotazione auto</string>
     <string name="qs_tile_sync">Sincronia</string>
     <string name="qs_tile_wifi_ap">Punto d\'accesso Wi-Fi</string>
@@ -224,10 +221,6 @@
     <string name="phone_flip_action_mute">Silenzia</string>
     <string name="phone_flip_action_dismiss">Rifiuta chiamata</string>
 
-    <!-- Disable vibrate on call connect -->
-    <string name="pref_phone_call_connect_vibrate_disable_title">Disabilita vibrazione alla risposta</string>
-    <string name="pref_phone_call_connect_vibrate_disable_summary">Disabilita la vibrazione quando si risponde ad una chiamata</string>
-
     <!-- Soft reboot -->
     <string name="reboot_soft">Riavvio soft</string>
 
@@ -329,10 +322,6 @@
     <string name="button_backlight_mode_always_on">Sempre accesa se lo schermo è acceso</string>
     <string name="pref_button_backlight_notifications_title">Notifiche mediante illuminazione tasti</string>
     <string name="pref_button_backlight_notifications_summary">SPERIMENTALE! Accendi tasti se c\'è una notifica e lo schermo è spento. Usare nel caso il telefono non abbia led di notifica.</string>
-
-    <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">Nascondi barra di navigazione</string>
-    <string name="pref_navbar_disable_summary">Nascondi barra di navigazione quando è attivo il PIE CONTROL (per telefoni che hanno la barra di navigazione, necessario il riavvio)</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Dithered Holo background</string>
@@ -441,7 +430,6 @@
      <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Modalità Desktop espanso</string>
     <string name="expanded_desktop_disabled">Disattivato</string>
-    <string name="expanded_desktop_statusbar">Nascondi statusbar</string>
     <string name="expanded_desktop_navbar">Nascondi barra di navigazione</string>
     <string name="expanded_desktop_both">Nascondi entrambe</string>
     <string name="action_expanded_desktop_title">Desktop esteso</string>
@@ -487,7 +475,6 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telefonate</string>
-    <string name="pref_cat_phone_messaging_title">Messaggistica</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Modalità attivazione reti nella relativa icona dei quicksetting</string>
@@ -593,10 +580,6 @@
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Torcia attiva/disattiva</string>
-
-    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
-    <string name="pref_hwkey_home_longpress_keyguard_title">Torcia su pressione lunga tasto home</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Torcia on/off se telefono bloccato. Lo schermo deve essere acceso se il telefono non supporta nativamente lo sblocco usando il tasto home.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Espandi automaticamente</string>
