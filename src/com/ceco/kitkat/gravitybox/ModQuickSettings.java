@@ -536,6 +536,9 @@ public class ModQuickSettings {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(mQuickSettingsTileViewClass, "setColumnSpan",
+                    int.class, XC_MethodReplacement.DO_NOTHING);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
