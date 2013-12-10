@@ -25,9 +25,9 @@
             android:key="pref_cat_lockscreen_ring_settings"
             android:title="@string/pref_cat_lockscreen_ring_settings_title">
 
-            <CheckBoxPreference 
+            <SwitchPreference 
                 android:key="pref_lockscreen_ring_targets_enable"
-                android:title="@string/pref_lockscreen_ring_targets_enable_title"
+                android:title=""
                 android:summary="@string/pref_lockscreen_ring_targets_enable_summary"
                 android:defaultValue="false" />
 
