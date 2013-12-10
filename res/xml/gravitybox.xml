@@ -281,9 +281,9 @@
             android:key="pref_cat_statusbar_colors"
             android:title="@string/pref_cat_statusbar_colors_title">
 
-            <CheckBoxPreference 
+            <SwitchPreference 
                 android:key="pref_statusbar_icon_color_enable"
-                android:title="@string/pref_statusbar_icon_color_enable_title"
+                android:summary="@string/pref_statusbar_icon_color_enable_title"
                 android:defaultValue="false" />
 
             <net.margaritov.preference.colorpicker.ColorPickerPreference 
