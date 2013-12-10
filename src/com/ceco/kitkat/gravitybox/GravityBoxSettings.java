@@ -68,6 +68,7 @@ import android.graphics.Rect;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class GravityBoxSettings extends Activity implements GravityBoxResultReceiver.Receiver {
+    public static final String PREF_KEY_QUICK_SETTINGS_ENABLE = "pref_qs_management_enable";
     public static final String PREF_KEY_QUICK_SETTINGS = "pref_quick_settings2";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_ORDER = "pref_qs_tile_order";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row";
@@ -493,7 +494,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_NAVBAR_ENABLE,
             PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE,
             PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
-            PREF_KEY_TM_MODE
+            PREF_KEY_TM_MODE,
+            PREF_KEY_QUICK_SETTINGS_ENABLE
     ));
 
     private static final class SystemProperties {
