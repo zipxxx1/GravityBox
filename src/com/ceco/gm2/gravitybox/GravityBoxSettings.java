@@ -39,6 +39,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
@@ -682,7 +683,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefHwKeyDoubletapSpeed;
         private ListPreference mPrefHwKeyKillDelay;
         private ListPreference mPrefPhoneFlip;
-        private CheckBoxPreference mPrefSbIconColorEnable;
+        private CheckBoxPreference mPrefSbColorFollowStockBattery;
+        private SwitchPreference mPrefSbIconColorEnable;
         private ColorPickerPreference mPrefSbIconColor;
         private ColorPickerPreference mPrefSbDaColor;
         private PreferenceScreen mPrefCatFixes;
@@ -856,7 +858,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefPhoneFlip = (ListPreference) findPreference(PREF_KEY_PHONE_FLIP);
 
-            mPrefSbIconColorEnable = (CheckBoxPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE);
+            mPrefSbColorFollowStockBattery = (CheckBoxPreference) findPreference(PREF_KEY_STATUSBAR_COLOR_FOLLOW_STOCK_BATTERY);
+            mPrefSbIconColorEnable = (SwitchPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE);
             mPrefSbIconColor = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR);
             mPrefSbDaColor = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR);
             mPrefSbColorSkipBattery = (CheckBoxPreference) findPreference(PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY);
@@ -1303,6 +1306,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefSbSignalColorMode.setEnabled(mPrefSbIconColorEnable.isChecked());
                 mPrefSbIconColorSecondary.setEnabled(mPrefSbIconColorEnable.isChecked());
                 mPrefSbDaColorSecondary.setEnabled(mPrefSbIconColorEnable.isChecked());
+                mPrefSbColorFollowStockBattery.setEnabled(!mPrefSbIconColorEnable.isChecked());
             }
 
             if (key == null || key.equals(PREF_KEY_NOTIF_BACKGROUND)) {
