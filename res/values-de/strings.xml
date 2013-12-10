@@ -4,16 +4,16 @@
     <string name="app_name">GravityBox [KK]</string>
 
     <string name="battery_style_title">Akkuanzeige-Stil</string>        
-    <string name="battery_style_stock">Standard Akkuanzeige</string>
+    <string name="battery_style_stock">Standard-Akkuanzeige</string>
     <string name="battery_style_circle">Runde Akkuanzeige</string>
     <string name="battery_style_circle_percent">Runde Akkuanzeige mit Prozentwert</string>
-	<string name="battery_style_kitkat">KitKat Akkuanzeige</string>
-    <string name="battery_style_kitkat_percent">KitKat Akkuanzeige mit Prozentwert</string>
+	<string name="battery_style_kitkat">KitKat-Akkuanzeige</string>
+    <string name="battery_style_kitkat_percent">KitKat-Akkuanzeige mit Prozentwert</string>
     <string name="battery_style_percent">Nur Prozentwert</string>
     <string name="battery_style_none">Keine Anzeige</string>
 
     <string name="vol_music_controls_title">Lautstärketasten überspringen Musiktitel</string>
-    <string name="vol_music_controls_summary">Überspringe Musiktitel durch langes drücken der Lautstärketasten, während der Bildschirm abgeschaltet ist</string>
+    <string name="vol_music_controls_summary">Überspringe Musiktitel durch langes Drücken der Lautstärketasten, während der Bildschirm abgeschaltet ist</string>
 
     <string name="low_battery_warning_policy_title">Warnung bei niedrigem Akkustand</string>
     <string name="low_battery_warning_full">Benachrichtigung und Warnton</string>
@@ -123,14 +123,14 @@
     <string name="engineering_mode_summary">Startet die Engineering-Modus Anwendung</string>
 
     <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">Dual-SIM Lautstärke</string>
+    <string name="dual_sim_ringer_title">Dual-SIM-Lautstärke</string>
     <string name="dual_sim_ringer_summary">Startet eine Anwendung, die es erlaubt, für die beiden SIM-Karten unterschiedliche Rufton- und Benachrichtigungslautstärken einzustellen</string>
 
     <!-- Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Sperrbildschirm optimieren</string>
     <string name="pref_cat_lockscreen_summary">Beinhaltet Optionen, um den Sperrbildschirm anzupassen</string>
     <string name="pref_cat_lockscreen_background_title">Sperrbildschirm-Hintergrund</string>
-    <string name="pref_lockscreen_background_title">Hintergrund-Stil</string>
+    <string name="pref_lockscreen_background_title">Hintergrundstil</string>
     <string name="lockscreen_bg_default">Standard-Hintergrundbild</string>
     <string name="lockscreen_bg_color">Benutzerdefinierte Farbe</string>
     <string name="lockscreen_bg_image">Eigenes Bild</string>
@@ -164,14 +164,14 @@
     <string name="pref_ab_title">Automatische Helligkeitsstufen</string>
     <string name="pref_ab_summary">Erlaubt es, für eine bestimmte Umgebungshelligkeit die Bildschirmhelligkeit zu bestimmen</string>
     <string name="level">Helligkeitsstufe</string>
-    <string name="pref_ab_lux_max_label">Lux max</string>
+    <string name="pref_ab_lux_max_label">Lux max.</string>
     <string name="pref_ab_brighness_label">Helligkeit (%d &#8211; 255)</string>
     <string name="pref_ab_number_error_general">Eingegebener Wert ist ungültig</string>
     <string name="pref_ab_brightness_too_low">Es wird nicht empfohlen, die Helligkeitsstufe unter %d einzustellen</string>
     <string name="pref_ab_brightness_too_high">Die Helligkeitsstufe kann nicht höher als 255 eingestellt werden</string>
     <string name="pref_ab_number_error_negative">Werte können nicht 0 oder kleiner sein</string>
-    <string name="pref_ab_number_not_ascending">Werte in niedrigeren Helligkeitsstufen können nicht größer sein, als Werte in höheren Helligkeitsstufen</string>
-    <string name="pref_ab_number_not_descending">Werte in höheren Helligkeitsstufen können nicht niedriger sein, als Werte in niedrigeren Helligkeitsstufen</string>
+    <string name="pref_ab_number_not_ascending">Werte in niedrigeren Helligkeitsstufen können nicht größer sein als Werte in höheren Helligkeitsstufen</string>
+    <string name="pref_ab_number_not_descending">Werte in höheren Helligkeitsstufen können nicht niedriger sein als Werte in niedrigeren Helligkeitsstufen</string>
     <string name="pref_ab_values_set">Werte für %s gesetzt</string>
     <string name="pref_ab_config_saved">Neue automatische Helligkeitsregelung gespeichert</string>
     <string name="pref_ab_config_cancelled">Neue automatische Helligkeitsregelung nicht gespeichert</string>
@@ -182,8 +182,8 @@
     <string name="pref_lockscreen_rotation_summary">Achtung: Möglicherweise werden die Entsperr-Ring-Apps getauscht, wenn der AOSP-Sperrbildschirm vom Hersteller verändert wurde</string>
 
     <!-- Lockscreen menu key -->
-    <string name="pref_lockscreen_menu_key_title">Aktiviere Menü-Taste</string>
-    <string name="pref_lockscreen_menu_key_summary">Wenn aktiviert, kann die Menü-Taste zum schnellen Entsperren genutzt werden. (Neustart erforderlich)</string>
+    <string name="pref_lockscreen_menu_key_title">Aktiviere Menütaste</string>
+    <string name="pref_lockscreen_menu_key_summary">Wenn aktiviert, kann die Menütaste zum schnellen Entsperren genutzt werden. (Neustart erforderlich)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Uhrzeit in der Mitte</string>
@@ -244,14 +244,14 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Verknüpfungen pro Reihe</string>
-    <string name="pref_qs_tiles_per_row_summary">Legt fest, wie viele Schnelleinstellungs-Verknüpfungen in einer Reihe angezeigt werden sollen. Die Verknüpfungen werden in der Größe angepasst. Betrifft den Portrait-Modus (Hochformat).</string>
+    <string name="pref_qs_tiles_per_row_summary">Legt fest, wie viele Schnelleinstellungs-Verknüpfungen in einer Reihe angezeigt werden sollen. Die Verknüpfungen werden in der Größe angepasst. Betrifft den Porträt-Modus (Hochformat).</string>
 
     <!-- Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Zeige den Wochentag an</string>
 
     <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">Erweiterbare Lautstärke Anzeige</string>
-    <string name="pref_volume_panel_expandable_summary">Aktiviert eine erweiterbare Lautstärke Anzeige, die es ermöglicht, unterschiedliche Lautstärkestufen für die verschiedenen Quellen einzustellen (Benachrichtigungen, Anrufton)</string>
+    <string name="pref_volume_panel_expandable_title">Erweiterbare Lautstärkeanzeige</string>
+    <string name="pref_volume_panel_expandable_summary">Aktiviert eine erweiterbare Lautstärkeanzeige, die es ermöglicht, unterschiedliche Lautstärkestufen für die verschiedenen Quellen einzustellen (Benachrichtigungen, Anrufton)</string>
 
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Verbinde Anruf &amp; Benachrichtigungs Lautstärke</string>
@@ -298,7 +298,7 @@
     <string name="notif_background_color_fill">Benutzerdefinierte Farbe</string>
     <string name="notif_background_custom_image">Benutzerdefiniertes Bild</string>
     <string name="pref_notif_color_title">Wähle Hintergrundfarbe</string>
-    <string name="pref_notif_image_portrait_title">Wähle Portrait-Bild (Hochformat)</string>
+    <string name="pref_notif_image_portrait_title">Wähle Porträt-Bild (Hochformat)</string>
     <string name="pref_notif_image_landscape_title">Wähle Landscape-Bild (Querformat)</string>
     <string name="pref_notif_background_alpha_title">Hintergrund-Transparenz</string>
     <string name="pref_notif_color_mode_title">Hintergrund-Modus</string>
@@ -320,8 +320,8 @@
     <string name="pie_phone_status_emergency_only">Nur Notrufe</string>
 
     <!-- Pie Controls settings -->
-    <string name="pie_control_title">Pie-Steuerung</string>
-    <string name="pie_control_enable_title">Aktiviere Pie-Steuerung</string>
+    <string name="pie_control_title">PIE-Steuerung</string>
+    <string name="pie_control_enable_title">Aktiviere PIE-Steuerung</string>
     <string name="pie_control_size_title">Größe der Navigationstasten</string>
     <string name="pie_control_trigger_positions_title">Auslöse-Positionen</string>
     <string name="pie_control_trigger_left">linker Bildschirmrand</string>
@@ -473,9 +473,9 @@
     <string name="pref_navbar_enable_summary">Neustart erforderlich</string>
     <string name="pref_navbar_height_title">Höhe der Navigationsleiste</string>
     <string name="pref_navbar_height_summary">Applies to horizontal navigation bar and portrait orientation</string>
-    <string name="pref_navbar_height_landscape_summary">Applies to horizontal navigation bar and landscape orientation</string>
+    <string name="pref_navbar_height_landscape_summary">Betrifft horizontale Navigationsleiste und Querformat</string>
     <string name="pref_navbar_width_title">Breite der Navigationsleiste</string>
-    <string name="pref_navbar_width_summary">Applies to vertical navigation bar</string>
+    <string name="pref_navbar_width_summary">Betrifft vertikale Navigationsleiste</string>
     <string name="pref_navbar_menukey_title">Menü-Taste immer anzeigen</string>
 
     <!-- Screenshot in power menu -->
@@ -485,7 +485,7 @@
     <string name="pref_cat_lockscreen_ring_settings_title">Entsperr-Ring Einstellungen</string>
     <string name="pref_lockscreen_ring_targets_enable_title">Enable unlock ring targets</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Master switch for unlock ring targets</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Target application %s</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Zielanwendung %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Unlock ring vertical offset</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Unlock ring horizontal offset</string>
 
@@ -511,7 +511,7 @@
     <string name="pref_qs_tile_behaviour_override_summary">Überschreibt das Verhalten ausgewählter Kacheln beim Drücken/langen Drücken (Neustart erforderlich)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">Netzmodus-Kachel SIM-Steckplatz</string>
+    <string name="pref_qs_network_mode_sim_slot_title">Netzmodus-Kachel-SIM-Steckplatz</string>
     <string name="pref_qs_network_mode_sim_slot_summary">Definiert SIM-Steckplatz, den die Netzmodus-Kachel verwendet (%s)</string>
     <string name="sim_slot1">SIM-Steckplatz 1</string>
     <string name="sim_slot2">SIM-Steckplatz 2</string>
@@ -605,10 +605,10 @@
     <string name="pref_lockscreen_battery_arc_summary">Zeigt einen Akkustatus-Bogen, der um den Entsperr-Ring angeordnet ist</string>
 
     <!-- HW Key Actions: toggle torch -->
-    <string name="hwkey_action_torch">Toggle torch</string>
+    <string name="hwkey_action_torch">Taschenlampe an/aus</string>
 
     <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Automatisches expandieren</string>
+    <string name="pref_volume_panel_autoexpand_title">Automatisches Expandieren</string>
 
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Menü-Taste</string>
@@ -649,7 +649,7 @@
     <string name="pie_custom_key_app_launcher">App-Launcher</string>
 
     <!-- Pie colors -->
-    <string name="pref_cat_pie_colors_title">Pie-Farben</string>
+    <string name="pref_cat_pie_colors_title">PIE-Farben</string>
     <string name="pref_pie_color_bg_title">Hintergrundfarbe</string>
     <string name="pref_pie_color_fg_title">Vordergrundfarbe</string>
     <string name="pref_pie_color_outline_title">Konturfarbe</string>
@@ -688,9 +688,9 @@
     <string name="tm_mode_full">Beide</string>
  
     <!-- Secondary signal icon color for MTK Dual SIMs -->
-    <string name="pref_statusbar_icon_color_secondary_title">Secondary signal color</string>
-    <string name="pref_statusbar_icon_color_secondary_summary">Overrides stock orange signal icon</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">Secondary data activity color</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Sets color for secondary data activity indicators</string>
+    <string name="pref_statusbar_icon_color_secondary_title">Sekundäre Signalfarbe</string>
+    <string name="pref_statusbar_icon_color_secondary_summary">Überschreibt das orange Standard-Signalicon</string>
+    <string name="pref_statusbar_data_activity_color_secondary_title">Sekundäre Datenaktivitätsfarbe</string>
+    <string name="pref_statusbar_data_activity_color_secondary_summary">Legt die Farbe für sekundäre Datenverkehrsindikatoren fest</string>
 	
 </resources>
