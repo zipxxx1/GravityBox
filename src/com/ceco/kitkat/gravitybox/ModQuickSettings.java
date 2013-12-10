@@ -340,53 +340,56 @@ public class ModQuickSettings {
             // update AOSP tiles layout
             final Resources res = container.getResources();
             final int imgResId = res.getIdentifier("image", "id", PACKAGE_NAME);
+            final int textResId = res.getIdentifier("text", "id", PACKAGE_NAME);
             final int rssiImgResId = res.getIdentifier("rssi_image", "id", PACKAGE_NAME);
+            final int rssiTextResId = res.getIdentifier("rssi_textview", "id", PACKAGE_NAME);
+            // Moto XT
+            final int imgGroupResId = res.getIdentifier("image_group", "id", PACKAGE_NAME);
+            final int rssiSlotIdResId = res.getIdentifier("rssi_slot_id", "id", PACKAGE_NAME);
 
             final int tileCount = container.getChildCount();
             for(int i = 0; i < tileCount; i++) {
-                ViewGroup viewGroup = (ViewGroup) mContainerView.getChildAt(i);
-                // skip layout update for wifi and signal tiles in case of Moto X
-                // TODO: resolve this temporary hack
-                if (Utils.isMotoXtDevice()) {
-                    final String key = getAospTileKey(viewGroup);
-                    if ("wifi_textview".equals(key) || "rssi_textview".equals(key)) {
-                        continue;
-                    }
-                }
-                if (viewGroup != null) {
-                    TextView textView = findTileTextView(viewGroup);
-                    if (textView != null) {
-                        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, tl.textSize);
-                    }
+                final ViewGroup viewGroup = (ViewGroup) mContainerView.getChildAt(i);
+                if (viewGroup == null) continue;
 
+                // look for layout view and tile text view
+                View layoutView = null;
+                TextView tileTextView = null;
+                final String key = getAospTileKey(viewGroup);
+                if (Utils.isMotoXtDevice() && "wifi_textview".equals(key) && imgGroupResId != 0) {
+                    layoutView = viewGroup.findViewById(imgGroupResId);
+                    tileTextView = (TextView) viewGroup.findViewById(textResId);
+                } else if (Utils.isMotoXtDevice() && "rssi_textview".equals(key) && rssiSlotIdResId != 0) {
+                    final View slotIdView = viewGroup.findViewById(rssiSlotIdResId);
+                    if (slotIdView != null && slotIdView.getParent() instanceof View) {
+                        layoutView = (View) slotIdView.getParent();
+                    }
+                    tileTextView = (TextView) viewGroup.findViewById(rssiTextResId);
+                } else {
+                    tileTextView = findTileTextView(viewGroup);
                     // basic tile
-                    View img = null;
                     if (imgResId != 0) {
-                        img = viewGroup.findViewById(imgResId);
-                        if (img != null) {
-                            if (img.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-                                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) img.getLayoutParams();
-                                lp.topMargin = tl.imageMarginTop;
-                                lp.bottomMargin = tl.imageMarginBottom;
-                                img.setLayoutParams(lp);
-                                img.requestLayout();
-                            }
-                        }
+                        layoutView = viewGroup.findViewById(imgResId);
                     }
                     // RSSI special tile
-                    if (img == null && rssiImgResId != 0) {
-                        img = viewGroup.findViewById(rssiImgResId);
-                        if (img != null && img.getParent() instanceof FrameLayout) {
-                            FrameLayout fl = (FrameLayout) img.getParent();
-                            if (fl.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-                                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) fl.getLayoutParams();
-                                lp.topMargin = tl.imageMarginTop;
-                                lp.bottomMargin = tl.imageMarginBottom;
-                                fl.setLayoutParams(lp);
-                                fl.requestLayout();
-                            }
+                    if (layoutView == null && rssiImgResId != 0) {
+                        final View rssiView = viewGroup.findViewById(rssiImgResId);
+                        if (rssiView != null && rssiView.getParent() instanceof View) {
+                            layoutView = (View) rssiView.getParent();
                         }
                     }
+                }
+
+                // update views we found
+                if (tileTextView != null) {
+                    tileTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, tl.textSize);
+                }
+                if (layoutView != null && layoutView.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+                    ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) layoutView.getLayoutParams();
+                    lp.topMargin = tl.imageMarginTop;
+                    lp.bottomMargin = tl.imageMarginBottom;
+                    layoutView.setLayoutParams(lp);
+                    layoutView.requestLayout();
                 }
             }
         } catch (Throwable t) {
