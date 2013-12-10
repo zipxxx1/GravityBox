@@ -171,16 +171,25 @@
             android:key="pref_cat_statusbar_qs"
             android:title="@string/pref_cat_statusbar_qs_title">
 
+            <SwitchPreference
+                android:key="pref_qs_management_enable"
+                android:title=""
+                android:summary="@string/pref_qs_management_enable_summary"
+                android:defaultValue="true" />
+
             <MultiSelectListPreference 
                 android:key="pref_quick_settings2"
                 android:title="@string/quick_settings_title"
-                android:summary="@string/quick_settings_summary" />
+                android:summary="@string/quick_settings_summary"
+                android:defaultValue="@array/empty_array"
+                android:dependency="pref_qs_management_enable" />
 
             <Preference
                 android:key="pref_qs_tile_order"
                 android:title="@string/pref_qs_tile_order_title"
                 android:summary="@string/pref_qs_tile_order_summary"
-                android:persistent="false" />
+                android:persistent="false"
+                android:dependency="pref_qs_management_enable" />
 
             <ListPreference
                 android:key="pref_qs_tiles_per_row" 
@@ -188,7 +197,8 @@
                 android:summary="@string/pref_qs_tiles_per_row_summary" 
                 android:entries="@array/qs_tiles_per_row_entries"
                 android:entryValues="@array/qs_tiles_per_row_values"
-                android:defaultValue="3" />
+                android:defaultValue="3"
+                android:dependency="pref_qs_management_enable" />
 
             <ListPreference
                 android:key="pref_qs_tile_style" 
@@ -196,7 +206,8 @@
                 android:summary="@string/pref_qs_tile_style_summary"
                 android:entries="@array/status_icon_style_entries"
                 android:entryValues="@array/status_icon_style_values"
-                android:defaultValue="0" />
+                android:defaultValue="0"
+                android:dependency="pref_qs_management_enable" />
 
             <MultiSelectListPreference 
                 android:key="pref_qs_tile_behaviour_override"
@@ -204,11 +215,13 @@
                 android:summary="@string/pref_qs_tile_behaviour_override_summary"
                 android:entries="@array/qs_tile_override_entries"
                 android:entryValues="@array/qs_tile_override_values"
-                android:defaultValue="@array/empty_array" />
+                android:defaultValue="@array/empty_array"
+                android:dependency="pref_qs_management_enable" />
 
             <PreferenceScreen
                 android:key="pref_cat_quick_app_tile"
-                android:title="@string/pref_cat_quickapp_tile_title">
+                android:title="@string/pref_cat_quickapp_tile_title"
+                android:dependency="pref_qs_management_enable">
 
                 <com.ceco.gm2.gravitybox.preference.AppPickerPreference
                     android:key="pref_quickapp_default"
@@ -242,25 +255,29 @@
                 android:title="@string/pref_network_mode_tile_mode_title"
                 android:entries="@array/network_mode_tile_mode_entries"
                 android:entryValues="@array/network_mode_tile_mode_values"
-                android:defaultValue="0" />
+                android:defaultValue="0"
+                android:dependency="pref_qs_management_enable" />
 
             <CheckBoxPreference 
                 android:key="pref_network_mode_tile_lte"
                 android:title="@string/pref_network_mode_tile_lte_title"
-                android:defaultValue="false" />
+                android:defaultValue="false"
+                android:dependency="pref_qs_management_enable" />
 
             <ListPreference
                 android:key="pref_qs_network_mode_sim_slot" 
                 android:title="@string/pref_qs_network_mode_sim_slot_title"
                 android:entries="@array/network_mode_sim_slot_entries"
                 android:entryValues="@array/network_mode_sim_slot_values"
-                android:defaultValue="0" />
+                android:defaultValue="0"
+                android:dependency="pref_qs_management_enable" />
 
             <CheckBoxPreference 
                 android:key="pref_auto_switch_qs"
                 android:title="@string/pref_auto_switch_qs_title"
                 android:summary="@string/pref_auto_switch_qs_summary"
-                android:defaultValue="false" />
+                android:defaultValue="false"
+                android:dependency="pref_qs_management_enable" />
     
             <ListPreference
                 android:key="pref_quick_pulldown" 
@@ -268,7 +285,8 @@
                 android:summary="@string/pref_quick_pulldown_summary"
                 android:entries="@array/quick_pulldown_entries"
                 android:entryValues="@array/quick_pulldown_values"
-                android:defaultValue="0" />
+                android:defaultValue="0"
+                android:dependency="pref_qs_management_enable" />
 
         </PreferenceScreen>
 

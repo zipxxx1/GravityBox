@@ -834,4 +834,7 @@
     <string name="hwkey_ls_torch_home_longpress">On Home long-press</string>
     <string name="hwkey_ls_torch_voldown_longpress">On volume down long-press</string>
 
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">Master switch for QuickSettings management (requires reboot)</string>
+
 </resources>
