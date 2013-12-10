@@ -78,8 +78,6 @@ public class ModLockscreen {
             "com.android.internal.policy.impl.keyguard.KeyguardAbsKeyInputView";
     private static final String CLASS_KGVIEW_MEDIATOR = "com.android.internal.policy.impl.keyguard.KeyguardViewMediator";
     private static final String CLASS_KG_UPDATE_MONITOR = "com.android.internal.policy.impl.keyguard.KeyguardUpdateMonitor";
-    private static final String CLASS_KG_UPDATE_MONITOR_CB = 
-            "com.android.internal.policy.impl.keyguard.KeyguardUpdateMonitorCallback";
     private static final String CLASS_KG_UPDATE_MONITOR_BATTERY_STATUS =
             "com.android.internal.policy.impl.keyguard.KeyguardUpdateMonitor.BatteryStatus";
     private static final String CLASS_KG_VIEW_BASE = "com.android.internal.policy.impl.keyguard.KeyguardViewBase";
@@ -112,7 +110,6 @@ public class ModLockscreen {
     private static Paint mArcPaint;
     private static RectF mArcRect;
     private static float mArcAngle = 0f;
-    private static Object mInfoCallback;
     private static float mBatteryLevel;
     private static boolean mArcVisible;
     private static boolean mArcEnabled;
@@ -132,7 +129,6 @@ public class ModLockscreen {
             final Class<?> kgAbsKeyInputViewClass = XposedHelpers.findClass(CLASS_KG_ABS_KEY_INPUT_VIEW, null);
             final Class<?> kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, null);
             final Class<?> kgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, null);
-            final Class<?> kgUpdateMonitorCbClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR_CB, null);
             final Class<?> kgViewBaseClass = XposedHelpers.findClass(CLASS_KG_VIEW_BASE, null);
             final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, null);
 
@@ -291,8 +287,7 @@ public class ModLockscreen {
                         if (mHandleDrawable == null) {
                             mHandleDrawable = new HandleDrawable(
                                     XposedHelpers.getObjectField(mGlowPadView, "mHandleDrawable"));
-                            mInfoCallback = XposedHelpers.newInstance(kgUpdateMonitorCbClass);
-        
+
                             mArcPaint = new Paint();
                             mArcPaint.setStrokeWidth(10.0f);
                             mArcPaint.setStyle(Paint.Style.STROKE); 
@@ -511,47 +506,12 @@ public class ModLockscreen {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(kgUpdateMonitorCbClass, "onRefreshBatteryInfo",
+            XposedHelpers.findAndHookMethod(kgUpdateMonitorClass, "handleBatteryUpdate",
                     CLASS_KG_UPDATE_MONITOR_BATTERY_STATUS, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mArcEnabled && mInfoCallback == param.thisObject) {
-                        updateLockscreenBattery(param.args[0]);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgSelectorViewClass, "onPause", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mArcEnabled && mInfoCallback != null) {
-                        final View view = (View) param.thisObject;
-                        final Object kgUpdateMonitor = XposedHelpers.callStaticMethod(
-                                kgUpdateMonitorClass, "getInstance", view.getContext());
-                        XposedHelpers.callMethod(kgUpdateMonitor, "removeCallback", mInfoCallback);
-                        if (DEBUG_ARC) log("onPause: mInfoCallback removed");
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgSelectorViewClass, "onResume", int.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mArcEnabled && mInfoCallback != null) {
-                        final View view = (View) param.thisObject;
-                        final Object kgUpdateMonitor = XposedHelpers.callStaticMethod(
-                                kgUpdateMonitorClass, "getInstance", view.getContext());
-                        XposedHelpers.callMethod(kgUpdateMonitor, "registerCallback", mInfoCallback);
-                        if (DEBUG_ARC) log("onResume: mInfoCallback registered");
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgSelectorViewClass, "updateTargets", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mArcEnabled) {
-                        updateLockscreenBattery(null);
+                        updateLockscreenBattery(param.args[0]);
                     }
                 }
             });
@@ -747,6 +707,7 @@ public class ModLockscreen {
     private static void updateLockscreenBattery(Object status) {
         if (status != null) { 
             mBatteryLevel = XposedHelpers.getFloatField(status, "level");
+            if (DEBUG_ARC) log("BatteryStatus: mBatteryLevel = " + mBatteryLevel);
         }
 
         float cappedBattery = mBatteryLevel;
