@@ -179,7 +179,9 @@ public class ModStatusbarColor {
                     mStatusbarBgColor = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_BGCOLOR, Color.BLACK);
                     if (mIconManager != null) {
                         mIconManager.registerListener(mIconManagerListener);
-                        mIconManager.refreshState();
+                        if (mIconManager.isColoringEnabled()) {
+                            mIconManager.refreshState();
+                        }
                     }
                     setStatusbarBgColor();
 
