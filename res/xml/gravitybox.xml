@@ -813,9 +813,9 @@
             android:key="pref_cat_brightness"
             android:title="@string/pref_cat_brightness_title">
 
-            <CheckBoxPreference 
+            <SwitchPreference 
                 android:key="pref_brightness_master_switch"
-                android:title="@string/pref_brightness_master_switch_title"
+                android:title=""
                 android:summary="@string/pref_brightness_master_switch_summary"
                 android:defaultValue="false" />
 
@@ -827,7 +827,8 @@
                 maximum="80"
                 interval="1"
                 monitorBoxEnabled="true"
-                android:defaultValue="20" />
+                android:defaultValue="20"
+                android:dependency="pref_brightness_master_switch" />
 
             <com.ceco.gm2.gravitybox.preference.SeekBarPreference
                 android:key="pref_screen_dim_level"
@@ -837,12 +838,14 @@
                 maximum="15"
                 interval="1"
                 monitorBoxEnabled="true"
-                android:defaultValue="10" />
+                android:defaultValue="10"
+                android:dependency="pref_brightness_master_switch" />
 
             <com.ceco.gm2.gravitybox.preference.AutoBrightnessDialogPreference
                 android:key="pref_autobrightness" 
                 android:title="@string/pref_ab_title"
-                android:summary="@string/pref_ab_summary" />
+                android:summary="@string/pref_ab_summary"
+                android:dependency="pref_brightness_master_switch" />
 
         </PreferenceScreen>
 

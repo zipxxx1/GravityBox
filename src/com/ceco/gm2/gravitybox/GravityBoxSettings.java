@@ -722,7 +722,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefRambar;
         private PreferenceScreen mPrefCatPhone;
         private CheckBoxPreference mPrefRoamingWarningDisable;
-        private CheckBoxPreference mPrefBrightnessMasterSwitch;
         private SeekBarPreference mPrefBrightnessMin;
         private SeekBarPreference mPrefScreenDimLevel;
         private AutoBrightnessDialogPreference mPrefAutoBrightness;
@@ -910,7 +909,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatPhone = (PreferenceScreen) findPreference(PREF_CAT_KEY_PHONE);
             mPrefRoamingWarningDisable = (CheckBoxPreference) findPreference(PREF_KEY_ROAMING_WARNING_DISABLE);
 
-            mPrefBrightnessMasterSwitch = (CheckBoxPreference) findPreference(PREF_KEY_BRIGHTNESS_MASTER_SWITCH);
             mPrefBrightnessMin = (SeekBarPreference) findPreference(PREF_KEY_BRIGHTNESS_MIN);
             mPrefBrightnessMin.setMinimum(getResources().getInteger(R.integer.screen_brightness_min));
             mPrefScreenDimLevel = (SeekBarPreference) findPreference(PREF_KEY_SCREEN_DIM_LEVEL);
@@ -1357,13 +1355,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_RAMBAR)) {
                 mPrefRambar.setSummary(mPrefRambar.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_BRIGHTNESS_MASTER_SWITCH)) {
-                final boolean enabled = mPrefBrightnessMasterSwitch.isChecked();
-                mPrefBrightnessMin.setEnabled(enabled);
-                mPrefScreenDimLevel.setEnabled(enabled);
-                mPrefAutoBrightness.setEnabled(enabled);
             }
 
             if (key == null || key.equals(PREF_KEY_EXPANDED_DESKTOP)) {
