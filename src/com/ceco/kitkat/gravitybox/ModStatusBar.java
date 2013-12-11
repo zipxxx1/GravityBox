@@ -19,8 +19,6 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import com.ceco.kitkat.gravitybox.preference.AppPickerPreference;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -28,9 +26,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LayoutInflated;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import android.app.Notification;
-import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -502,11 +498,9 @@ public class ModStatusBar {
 
                     Intent i = (Intent) param.args[0];
                     if (i != null && Intent.ACTION_QUICK_CLOCK.equals(i.getAction())) {
-                        final ComponentName cn = getComponentNameFromClockLink();
-                        if (cn != null) {
-                            i = new Intent();
-                            i.setComponent(cn);
-                            param.args[0] = i;
+                        final Intent intent = getIntentFromClockLink();
+                        if (intent != null) {
+                            param.args[0] = intent;
                         }
                     }
                 }
@@ -675,34 +669,14 @@ public class ModStatusBar {
         }
     }
 
-    private static ComponentName getComponentNameFromClockLink() {
+    private static Intent getIntentFromClockLink() {
         if (mClockLink == null) return null;
 
         try {
-            String[] splitValue = mClockLink.split(AppPickerPreference.SEPARATOR);
-            ComponentName cn = new ComponentName(splitValue[0], splitValue[1]);
-            return cn;
+            return Intent.parseUri(mClockLink, Intent.URI_INTENT_SCHEME);
         } catch (Exception e) {
             log("Error getting ComponentName from clock link: " + e.getMessage());
             return null;
-        }
-    }
-
-    private static void launchClockApp() {
-        if (mContext == null || mClockLink == null) return;
-
-        try {
-            Intent i = new Intent();
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.setComponent(getComponentNameFromClockLink());
-            mContext.startActivity(i);
-            if (mPhoneStatusBar != null) {
-                XposedHelpers.callMethod(mPhoneStatusBar, "animateCollapsePanels");
-            }
-        } catch (ActivityNotFoundException e) {
-            log("Error launching assigned app for clock: " + e.getMessage());
-        } catch (Throwable t) {
-            XposedBridge.log(t);
         }
     }
 

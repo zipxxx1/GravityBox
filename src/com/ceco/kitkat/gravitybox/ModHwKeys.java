@@ -23,7 +23,6 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -63,8 +62,6 @@ public class ModHwKeys {
     private static final int FLAG_WAKE_DROPPED = 0x00000002;
     public static final String ACTION_SCREENSHOT = "gravitybox.intent.action.SCREENSHOT";
     public static final String ACTION_SHOW_POWER_MENU = "gravitybox.intent.action.SHOW_POWER_MENU";
-
-    private static final String SEPARATOR = "#C3C0#";
 
     private static Class<?> classActivityManagerNative;
     private static Object mPhoneWindowManager;
@@ -946,11 +943,8 @@ public class ModHwKeys {
                             return;
                         }
 
-                        String[] splitValue = appInfo.split(SEPARATOR);
-                        ComponentName cn = new ComponentName(splitValue[0], splitValue[1]);
-                        Intent i = new Intent();
+                        Intent i = Intent.parseUri(appInfo, Intent.URI_INTENT_SCHEME);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i.setComponent(cn);
                         mContext.startActivity(i);
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(mContext, mStrCustomAppMissing, Toast.LENGTH_SHORT).show();
