@@ -26,7 +26,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 import android.app.Dialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -47,7 +46,6 @@ import android.widget.TextView;
 
 public class QuickAppTile extends AQuickSettingsTile {
     private static final String TAG = "GB:QuickAppTile";
-    private static final String SEPARATOR = "#C3C0#";
     private static final boolean DEBUG = false;
 
     public static final String SETTING_QUICKAPP_DEFAULT = "quick_app_default";
@@ -67,13 +65,12 @@ public class QuickAppTile extends AQuickSettingsTile {
     }
 
     private final class AppInfo {
-        private String mPackageName;
-        private String mClassName;
         private String mAppName;
         private Drawable mAppIcon;
         private Drawable mAppIconSmall;
         private String mValue;
         private int mResId;
+        private Intent mIntent;
 
         public AppInfo(int resId) {
             mResId = resId;
@@ -103,16 +100,13 @@ public class QuickAppTile extends AQuickSettingsTile {
         }
 
         public Intent getIntent() {
-            if (mPackageName == null || mClassName == null) return null;
-
-            Intent i = new Intent(Intent.ACTION_MAIN);
-            i.setClassName(mPackageName, mClassName);
-            return i;
+            return mIntent;
         }
 
         private void reset() {
-            mValue = mPackageName = mClassName = mAppName = null;
+            mValue = mAppName = null;
             mAppIcon = mAppIconSmall = null;
+            mIntent = null;
         }
 
         public void initAppInfo(String value) {
@@ -123,11 +117,8 @@ public class QuickAppTile extends AQuickSettingsTile {
             }
 
             try {
-                String[] splitValue = value.split(SEPARATOR);
-                mPackageName = splitValue[0];
-                mClassName = splitValue[1];
-                ComponentName cn = new ComponentName(mPackageName, mClassName);
-                ActivityInfo ai = mPm.getActivityInfo(cn, 0);
+                mIntent = Intent.parseUri(value, Intent.URI_INTENT_SCHEME);
+                ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
                 mAppName = ai.loadLabel(mPm).toString();
                 Bitmap appIcon = ((BitmapDrawable)ai.loadIcon(mPm)).getBitmap();
                 int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 
@@ -141,7 +132,7 @@ public class QuickAppTile extends AQuickSettingsTile {
                 mAppIconSmall = new BitmapDrawable(mResources, scaledIcon);
                 if (DEBUG) log("AppInfo initialized for: " + getAppName());
             } catch (NameNotFoundException e) {
-                log("App not found: " + ((mPackageName == null) ? "NULL" : mPackageName.toString()));
+                log("App not found: " + mIntent);
                 reset();
             } catch (Exception e) {
                 log("Unexpected error: " + e.getMessage());

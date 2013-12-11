@@ -41,6 +41,7 @@ import android.preference.DialogPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.LruCache;
 import android.util.TypedValue;
 import android.view.View;
@@ -51,6 +52,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 public class AppPickerPreference extends DialogPreference implements OnItemClickListener {
+    private static final String TAG = "GB:AppPickerPreference";
     public static final String SEPARATOR = "#C3C0#";
 
     private Context mContext;
@@ -139,6 +141,9 @@ public class AppPickerPreference extends DialogPreference implements OnItemClick
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
         if (restoreValue) {
             String value = getPersistedString(null);
+            if (value != null && value.contains(SEPARATOR)) {
+                value = convertOldValueFormat(value);
+            }
             String appName = getAppNameFromValue(value);
             setSummary(appName == null ? mDefaultSummaryText : appName);
         } else {
@@ -146,6 +151,23 @@ public class AppPickerPreference extends DialogPreference implements OnItemClick
             setSummary(mDefaultSummaryText);
         }
     } 
+
+    private String convertOldValueFormat(String oldValue) {
+        try {
+            String[] splitValue = oldValue.split(SEPARATOR);
+            ComponentName cn = new ComponentName(splitValue[0], splitValue[1]);
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            intent.setComponent(cn);
+            String newValue = intent.toUri(Intent.URI_INTENT_SCHEME);
+            setValue(newValue);
+            Log.d(TAG, "Converted old AppPickerPreference value: " + newValue);
+            return newValue;
+        } catch(Exception e) {
+            Log.e(TAG, "Error converting old AppPickerPreference value: " + e.getMessage());
+            return null;
+        }
+    }
 
     public void setDefaultSummary(String summary) {
         mDefaultSummaryText = summary;
@@ -218,8 +240,8 @@ public class AppPickerPreference extends DialogPreference implements OnItemClick
         if (value == null) return null;
 
         try {
-            String[] splitValue = value.split(SEPARATOR);
-            ComponentName cn = new ComponentName(splitValue[0], splitValue[1]);
+            Intent intent = Intent.parseUri(value, Intent.URI_INTENT_SCHEME);
+            ComponentName cn = intent.getComponent();
             ActivityInfo ai = mPackageManager.getActivityInfo(cn, 0);
             return (ai.loadLabel(mPackageManager).toString());
         } catch (Exception e) {
@@ -229,27 +251,21 @@ public class AppPickerPreference extends DialogPreference implements OnItemClick
     }
 
     class AppItem implements IIconListAdapterItem {
-        private String mPackageName;
-        private String mClassName;
         private String mAppName;
         private BitmapDrawable mAppIcon;
         private ResolveInfo mResolveInfo;
+        private Intent mIntent;
 
         public AppItem(String appName, ResolveInfo ri) {
             mAppName = appName;
             mResolveInfo = ri;
             if (mResolveInfo != null) {
-                mPackageName = mResolveInfo.activityInfo.packageName;
-                mClassName = mResolveInfo.activityInfo.name;
+                mIntent = new Intent(Intent.ACTION_MAIN);
+                mIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+                ComponentName cn = new ComponentName(mResolveInfo.activityInfo.packageName,
+                        mResolveInfo.activityInfo.name);
+                mIntent.setComponent(cn);
             }
-        }
-
-        public String getPackageName() {
-            return mPackageName;
-        }
-
-        public String getClassName() {
-            return mClassName;
         }
 
         public String getAppName() {
@@ -257,9 +273,7 @@ public class AppPickerPreference extends DialogPreference implements OnItemClick
         }
 
         public String getValue() {
-            if (mPackageName == null || mClassName == null) return null;
-
-            return String.format("%1$s%2$s%3$s", mPackageName, SEPARATOR, mClassName);
+            return (mIntent == null ? null : mIntent.toUri(Intent.URI_INTENT_SCHEME));
         }
 
         @Override

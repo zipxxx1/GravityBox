@@ -24,7 +24,6 @@ import de.robv.android.xposed.XposedHelpers;
 
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -48,7 +47,6 @@ import android.widget.Toast;
 
 public class AppLauncher {
     private static final String TAG = "GB:AppLauncher";
-    private static final String SEPARATOR = "#C3C0#";
     private static final boolean DEBUG = false;
 
     private Context mContext;
@@ -238,12 +236,11 @@ public class AppLauncher {
     }
 
     private final class AppInfo {
-        private String mPackageName;
-        private String mClassName;
         private String mAppName;
         private Drawable mAppIcon;
         private String mValue;
         private int mResId;
+        private Intent mIntent;
 
         public AppInfo(int resId) {
             mResId = resId;
@@ -267,16 +264,13 @@ public class AppLauncher {
         }
 
         public Intent getIntent() {
-            if (mPackageName == null || mClassName == null) return null;
-
-            Intent i = new Intent();
-            i.setClassName(mPackageName, mClassName);
-            return i;
+            return mIntent;
         }
 
         private void reset() {
-            mValue = mPackageName = mClassName = mAppName = null;
+            mValue = mAppName = null;
             mAppIcon = null;
+            mIntent = null;
         }
 
         public void initAppInfo(String value) {
@@ -287,11 +281,8 @@ public class AppLauncher {
             }
 
             try {
-                String[] splitValue = value.split(SEPARATOR);
-                mPackageName = splitValue[0];
-                mClassName = splitValue[1];
-                ComponentName cn = new ComponentName(mPackageName, mClassName);
-                ActivityInfo ai = mPm.getActivityInfo(cn, 0);
+                mIntent = Intent.parseUri(value, Intent.URI_INTENT_SCHEME);
+                ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
                 mAppName = ai.loadLabel(mPm).toString();
                 Bitmap appIcon = ((BitmapDrawable)ai.loadIcon(mPm)).getBitmap();
                 int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 
@@ -300,7 +291,7 @@ public class AppLauncher {
                 mAppIcon = new BitmapDrawable(mResources, scaledIcon);
                 if (DEBUG) log("AppInfo initialized for: " + getAppName());
             } catch (NameNotFoundException e) {
-                log("App not found: " + ((mPackageName == null) ? "NULL" : mPackageName.toString()));
+                log("App not found: " + mIntent);
                 reset();
             } catch (Exception e) {
                 log("Unexpected error: " + e.getMessage());

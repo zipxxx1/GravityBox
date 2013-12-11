@@ -628,16 +628,11 @@ public class ModLockscreen {
 
             AppInfo appInfo = new AppInfo();
             appInfo.key = app;
-
-            String[] splitValue = app.split(AppPickerPreference.SEPARATOR);
-            ComponentName cn = new ComponentName(splitValue[0], splitValue[1]);
-            Intent i = new Intent(Intent.ACTION_MAIN);
-            i.setComponent(cn);
-            appInfo.intent = i;
+            appInfo.intent = Intent.parseUri(app, Intent.URI_INTENT_SCHEME);
 
             PackageManager pm = context.getPackageManager();
             Resources res = context.getResources();
-            ActivityInfo ai = pm.getActivityInfo(cn, 0);
+            ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
             appInfo.name = (String) ai.loadLabel(pm);
             Bitmap appIcon = ((BitmapDrawable)ai.loadIcon(pm)).getBitmap();
             int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 
