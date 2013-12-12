@@ -62,6 +62,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
@@ -505,6 +506,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
     private static final int REQ_CALLER_PHOTO = 1027;
+    private static final int REQ_OBTAIN_SHORTCUT = 1028;
 
     private static final List<String> rebootKeys = new ArrayList<String>(Arrays.asList(
             PREF_KEY_FIX_DATETIME_CRASH,
@@ -789,6 +791,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             addPreferencesFromResource(R.xml.gravitybox);
 
             mPrefs = getPreferenceScreen().getSharedPreferences();
+            AppPickerPreference.sPrefsFragment = this;
 
             mBatteryStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_STYLE);
             mPrefBatteryPercent = (CheckBoxPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT);
@@ -2083,6 +2086,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
         }
 
+        public interface ShortcutHandler {
+            Intent getCreateShortcutIntent();
+            void onHandleShortcut(Intent intent, String name, Bitmap icon);
+            void onShortcutCancelled();
+        }
+
+        private ShortcutHandler mShortcutHandler;
+        public void obtainShortcut(ShortcutHandler handler) {
+            if (handler == null) return;
+
+            mShortcutHandler = handler;
+            startActivityForResult(mShortcutHandler.getCreateShortcutIntent(), REQ_OBTAIN_SHORTCUT);
+        }
+
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             if (requestCode == REQ_LOCKSCREEN_BACKGROUND) {
@@ -2156,6 +2173,31 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     Toast.makeText(getActivity(), getString(
                             R.string.caller_unkown_photo_result_not_successful),
                             Toast.LENGTH_SHORT).show();
+                }
+            } else if (requestCode == REQ_OBTAIN_SHORTCUT && mShortcutHandler != null) {
+                if (resultCode == Activity.RESULT_OK) {
+                    Bitmap b = null;
+                    Intent.ShortcutIconResource siRes = data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
+                    if (siRes != null) {
+                        try {
+                            final Context extContext = getActivity().createPackageContext(
+                                    siRes.packageName, Context.CONTEXT_IGNORE_SECURITY);
+                            final Resources extRes = extContext.getResources();
+                            final int drawableResId = extRes.getIdentifier(siRes.resourceName, "drawable", siRes.packageName);
+                            b = BitmapFactory.decodeResource(extRes, drawableResId);
+                        } catch (NameNotFoundException e) {
+                            //
+                        }
+                    }
+                    if (b == null) {
+                        b = (Bitmap)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
+                    }
+
+                    mShortcutHandler.onHandleShortcut(
+                            (Intent)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT),
+                            data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME), b);
+                } else {
+                    mShortcutHandler.onShortcutCancelled();
                 }
             }
         }

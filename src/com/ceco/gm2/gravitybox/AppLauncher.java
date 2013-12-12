@@ -15,8 +15,12 @@
 
 package com.ceco.gm2.gravitybox;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ceco.gm2.gravitybox.preference.AppPickerPreference;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -32,6 +36,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -223,8 +228,7 @@ public class AppLauncher {
     };
 
     private void startActivity(Context context, Intent intent) {
-        intent.setAction(Intent.ACTION_MAIN);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
     }
 
@@ -281,14 +285,33 @@ public class AppLauncher {
             }
 
             try {
-                mIntent = Intent.parseUri(value, Intent.URI_INTENT_SCHEME);
-                ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
-                mAppName = ai.loadLabel(mPm).toString();
-                Bitmap appIcon = ((BitmapDrawable)ai.loadIcon(mPm)).getBitmap();
-                int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 
-                        mResources.getDisplayMetrics());
-                Bitmap scaledIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
-                mAppIcon = new BitmapDrawable(mResources, scaledIcon);
+                mIntent = Intent.parseUri(value, 0);
+                if (!mIntent.hasExtra("mode")) {
+                    reset();
+                    return;
+                }
+                final int mode = mIntent.getIntExtra("mode", AppPickerPreference.MODE_APP);
+                Bitmap appIcon = null;
+                if (mode == AppPickerPreference.MODE_APP) {
+                    ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
+                    mAppName = ai.loadLabel(mPm).toString();
+                    appIcon = ((BitmapDrawable)ai.loadIcon(mPm)).getBitmap();
+                } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
+                    mAppName = mIntent.getStringExtra("label");
+                    final String appIconPath = mIntent.getStringExtra("icon");
+                    if (appIconPath != null) {
+                        File f = new File(appIconPath);
+                        FileInputStream fis = new FileInputStream(f);
+                        appIcon = BitmapFactory.decodeStream(fis);
+                        fis.close();
+                    }
+                }
+                if (appIcon != null) {
+                    int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 
+                            mResources.getDisplayMetrics());
+                    Bitmap scaledIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
+                    mAppIcon = new BitmapDrawable(mResources, scaledIcon);
+                }
                 if (DEBUG) log("AppInfo initialized for: " + getAppName());
             } catch (NameNotFoundException e) {
                 log("App not found: " + mIntent);

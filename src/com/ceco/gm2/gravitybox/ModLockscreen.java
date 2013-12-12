@@ -15,6 +15,8 @@
 
 package com.ceco.gm2.gravitybox;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -27,7 +29,6 @@ import com.ceco.gm2.gravitybox.preference.AppPickerPreference;
 import android.app.Activity;
 import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetProviderInfo;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -628,17 +629,34 @@ public class ModLockscreen {
 
             AppInfo appInfo = new AppInfo();
             appInfo.key = app;
-            appInfo.intent = Intent.parseUri(app, Intent.URI_INTENT_SCHEME);
-
-            PackageManager pm = context.getPackageManager();
-            Resources res = context.getResources();
-            ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
-            appInfo.name = (String) ai.loadLabel(pm);
-            Bitmap appIcon = ((BitmapDrawable)ai.loadIcon(pm)).getBitmap();
-            int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 
-                    res.getDisplayMetrics());
-            appIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
-            appInfo.icon = new BitmapDrawable(res, appIcon);
+            appInfo.intent = Intent.parseUri(app, 0);
+            if (!appInfo.intent.hasExtra("mode")) {
+                return null;
+            }
+            final int mode = appInfo.intent.getIntExtra("mode", AppPickerPreference.MODE_APP);
+            Bitmap appIcon = null;
+            final Resources res = context.getResources();
+            if (mode == AppPickerPreference.MODE_APP) {
+                PackageManager pm = context.getPackageManager();
+                ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
+                appInfo.name = (String) ai.loadLabel(pm);
+                appIcon = ((BitmapDrawable)ai.loadIcon(pm)).getBitmap();
+            } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
+                appInfo.name = appInfo.intent.getStringExtra("label");
+                final String appIconPath = appInfo.intent.getStringExtra("icon");
+                if (appIconPath != null) {
+                    File f = new File(appIconPath);
+                    FileInputStream fis = new FileInputStream(f);
+                    appIcon = BitmapFactory.decodeStream(fis);
+                    fis.close();
+                }
+            }
+            if (appIcon != null) {
+                int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 
+                        res.getDisplayMetrics());
+                appIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
+                appInfo.icon = new BitmapDrawable(res, appIcon);
+            }
 
             mAppInfoCache.put(appInfo.key, appInfo);
             if (DEBUG) log("AppInfo: storing to cache for " + app);
