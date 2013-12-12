@@ -197,11 +197,11 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">启用锁屏画面旋转</string>
-    <string name="pref_lockscreen_rotation_summary">警告：若AOSP的锁定屏幕曾被厂商修改，某些装置的解锁环目标可能遭到互换</string>
+    <string name="pref_lockscreen_rotation_summary">警告：若AOSP的锁定屏幕曾被厂商修改，某些设备的解锁环目标可能遭到互换</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">启用菜单键</string>
-    <string name="pref_lockscreen_menu_key_summary">使菜单键在锁定画面时可以用来快速地解锁装置（需要重新启动）</string>
+    <string name="pref_lockscreen_menu_key_summary">使菜单键在锁定画面时可以用来快速地解锁设备（需要重新启动）</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">时间居中</string>
@@ -342,9 +342,9 @@
     <string name="pie_phone_status_emergency_only">仅限紧急呼叫</string>
 
     <!-- Pie Controls settings -->
-    <string name="pie_control_title">Pie Controls虚拟键</string>
-    <string name="pie_control_enable_title">启用Pie Controls虚拟键</string>
-    <string name="pie_control_size_title">虚拟键大小</string>
+    <string name="pie_control_title">Pie Controls虚拟按键</string>
+    <string name="pie_control_enable_title">启用Pie Controls虚拟按键</string>
+    <string name="pie_control_size_title">虚拟按键大小</string>
     <string name="pie_control_trigger_positions_title">触发位置</string>
     <string name="pie_control_trigger_left">屏幕左边缘</string>
     <string name="pie_control_trigger_bottom">屏幕下边缘</string>
@@ -357,7 +357,7 @@
     <string name="button_backlight_mode_disable">禁用按键背光</string>
     <string name="button_backlight_mode_always_on">当屏幕亮起时常亮背光灯</string>
     <string name="pref_button_backlight_notifications_title">背光灯通知</string>
-    <string name="pref_button_backlight_notifications_summary">这个设置是实验性的！当收到通知时背光灯会闪烁提醒。建议当您的装置没有LED通知灯时才开启，此功能可能会消耗部分电量</string>
+    <string name="pref_button_backlight_notifications_summary">这个设置是实验性的！当收到通知时背光灯会闪烁提醒。建议当您的设备没有LED通知灯时才开启，此功能可能会消耗部分电量</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">优化Holo背景</string>
@@ -365,7 +365,7 @@
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">禁用实体按键</string>
-    <string name="pref_hwkeys_disable_summary">当Pie Controls虚拟键启用时将会禁用实体按键</string>
+    <string name="pref_hwkeys_disable_summary">当Pie Controls虚拟按键启用时将会禁用实体按键</string>
 
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">使用Holo黑色背景主题</string>
@@ -419,11 +419,11 @@
 
     <!-- Transparency management -->
     <string name="pref_cat_transparency_manager_title">透明度调整</string>
-    <string name="pref_cat_transparency_manager_summary">管理状态栏和虚拟键透明度</string>
+    <string name="pref_cat_transparency_manager_summary">管理状态栏和虚拟按键透明度</string>
     <string name="pref_tm_statusbar_launcher_title">启动器下的状态栏透明度</string>
     <string name="pref_tm_statusbar_lockscreen_title">锁屏画面时的状态栏透明度</string>
-    <string name="pref_tm_navbar_launcher_title">启动器下的虚拟键透明度</string>
-    <string name="pref_tm_navbar_lockscreen_title">锁屏画面时的虚拟键透明度</string>
+    <string name="pref_tm_navbar_launcher_title">启动器下的虚拟按键透明度</string>
+    <string name="pref_tm_navbar_lockscreen_title">锁屏画面时的虚拟按键透明度</string>
 
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">隐藏闹钟图标</string>
@@ -470,7 +470,7 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">扩展桌面模式</string>
     <string name="expanded_desktop_disabled">禁用</string>
-    <string name="expanded_desktop_navbar">隐藏虚拟键</string>
+    <string name="expanded_desktop_navbar">隐藏虚拟按键</string>
     <string name="expanded_desktop_both">隐藏两者</string>
     <string name="action_expanded_desktop_title">扩展桌面功能</string>
     <string name="action_expanded_desktop_on">扩展桌面已开启</string>
@@ -542,7 +542,7 @@
     <string name="pie_controls_disabled">从不</string>
     <string name="pie_controls_enabled_always">总是</string>
     <string name="pie_controls_enabled_expanded">当扩展桌面开启时</string>
-    <string name="pie_controls_enabled_expanded_navbar">当扩展桌面隐藏虚拟键时</string>
+    <string name="pie_controls_enabled_expanded_navbar">当扩展桌面隐藏虚拟按键时</string>
 
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">拔下电源线开启屏幕</string>
@@ -656,7 +656,7 @@
         
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">应用启动器</string>
-    <string name="pref_cat_app_launcher_summary">对话框允许定义最多8个应用程序，可以分配硬件按键或作为额外的虚拟键</string>
+    <string name="pref_cat_app_launcher_summary">对话框允许定义最多8个应用程序，可以分配实体按键或作为额外的虚拟按键</string>
     <string name="pref_app_launcher_slot_title">应用程序槽 %d</string>
     <string name="app_launcher_no_apps">没有应用程序被分配，请使用GravityBox应用启动器来分配应用程序</string>
 
@@ -742,8 +742,7 @@
     <string name="pref_network_mode_tile_lte_title">允许LTE网络模式</string>
 
     <!-- HW Keys Navigation Bar warning -->
-    <string name="hwkey_navbar_warning">为了使虚拟键操作支持，这需要
-        覆盖系统默认虚拟键中的调整菜单</string>
+    <string name="hwkey_navbar_warning">为了使实体按键操作支持，这需要覆盖系统默认实体按键中的调整菜单</string>
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog">找到已安装过时的GravityBox软件包。
