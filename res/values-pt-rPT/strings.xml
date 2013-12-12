@@ -283,7 +283,7 @@
     <string name="pref_cat_statusbar_colors_title">Cores da Barra de Status</string>
 
     <!-- Enable icon colors -->
-    <string name="pref_statusbar_icon_color_enable_title">Ativar coloração de indicadores</string>
+    <string name="pref_statusbar_icon_color_enable_title">Ativação da coloração de indicadores</string>
 
     <!-- Statusbar icon color -->
     <string name="pref_statusbar_icon_color_title">Cor dos indicadores</string>
@@ -476,7 +476,7 @@
     <string name="pref_cat_navigation_bar_title">Ajustes da Barra de Navegação</string>
     <string name="pref_cat_navigation_bar_summary">Contém vários ajustes relacionados com a Barra de Navegação</string>
     <string name="pref_navbar_override_title">Ignorar predefinições de sistema</string>
-    <string name="pref_navbar_override_summary">Ativação global dos ajustes da Barra de Navegação (necessário reiniciar)</string>
+    <string name="pref_navbar_override_summary">Ativação global dos ajustes (necessário reiniciar)</string>
     <string name="pref_navbar_enable_title">Ativar Barra de Navegação</string>
     <string name="pref_navbar_enable_summary">Permite ativar Barra de Navegação (necessário reiniciar)</string>
     <string name="pref_navbar_height_title">Altura da Barra de Navegação</string>
@@ -492,7 +492,7 @@
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Definições do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_enable_title">Ativar alvos do anel de desbloqueio</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Permite definir até cinco aplicações como alvo no anel de desbloqueio</string>
+    <string name="pref_lockscreen_ring_targets_enable_summary">Ativação global dos alvos do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_app_title">Aplicação %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Desvio vertical do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Desvio horizontal do anel de desbloqueio</string>
@@ -744,5 +744,14 @@
     <string name="hwkey_ls_torch_disabled">Desativada</string>
     <string name="hwkey_ls_torch_home_longpress">Ao manter pressionada a tecla Casa</string>
     <string name="hwkey_ls_torch_voldown_longpress">Ao manter pressionada a tecla Volume -</string>
+
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">Ativação global da gestão das definições rápidas (necessário reiniciar)</string>
+
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Aplicações</string>
+    <string name="app_picker_shortcuts">Atalhos</string>
+    <string name="app_picker_shortcut_null_intent">Impossível criar atalho pelo fato da actividade não retornar a intenção</string>
+    <string name="app_picker_shortcut_cancelled">Criação de atalho cancelada pela aplicação</string>
 
 </resources>
