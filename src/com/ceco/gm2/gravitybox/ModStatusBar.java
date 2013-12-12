@@ -68,7 +68,7 @@ public class ModStatusBar {
     private static final String CLASS_STATUSBAR_NOTIF = Build.VERSION.SDK_INT > 17 ?
             "android.service.notification.StatusBarNotification" :
             "com.android.internal.statusbar.StatusBarNotification";
-    private static final String CLASS_DEFAULT_STATUSBAR_PLUGIN = "com.mediatek.systemui.ext.DefaultStatusBarPlugin";
+    private static final String CLASS_PLUGINFACTORY = "com.mediatek.systemui.ext.PluginFactory";
     private static final boolean DEBUG = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
@@ -104,6 +104,8 @@ public class ModStatusBar {
     private static ViewGroup mSbContents;
     private static boolean mClockInSbContents = false;
     private static boolean mDisableDataNetworkTypeIcons = false;
+    private static Object mStatusBarPlugin;
+    private static Object mGetDataNetworkTypeIconGeminiHook;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -457,18 +459,6 @@ public class ModStatusBar {
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_POLICY, classLoader);
             final Class<?> powerManagerClass = XposedHelpers.findClass(CLASS_POWER_MANAGER, classLoader);
 
-            if (Utils.hasGeminiSupport()) {
-                final Class<?> defSBPluginClass = XposedHelpers.findClass(CLASS_DEFAULT_STATUSBAR_PLUGIN, classLoader);
-
-                XposedHelpers.findAndHookMethod(defSBPluginClass, "getDataNetworkTypeIconGemini",
-                        "com.mediatek.systemui.ext.NetworkType", int.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (mDisableDataNetworkTypeIcons) param.setResult(-1);
-                    }
-                });
-            }
-
             final Class<?>[] loadAnimParamArgs = new Class<?>[2];
             loadAnimParamArgs[0] = int.class;
             loadAnimParamArgs[1] = Animation.AnimationListener.class;
@@ -644,6 +634,33 @@ public class ModStatusBar {
                     if (mOngoingNotif.contains(notifData)) {
                         param.setResult(null);
                         if (DEBUG) log("Ongoing notification " + notifData + " blocked.");
+                    }
+                }
+            });
+        }
+        catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    public static void initMtkPlugin(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        try {
+            final Class<?> pluginFactoryClass = XposedHelpers.findClass(CLASS_PLUGINFACTORY, classLoader);
+
+            XposedHelpers.findAndHookMethod(pluginFactoryClass, "getStatusBarPlugin",
+                    "android.content.Context", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    mStatusBarPlugin = XposedHelpers.getStaticObjectField(pluginFactoryClass, "mStatusBarPlugin");
+
+                    if (mGetDataNetworkTypeIconGeminiHook == null) {
+                        mGetDataNetworkTypeIconGeminiHook = XposedHelpers.findAndHookMethod(mStatusBarPlugin.getClass(),
+                                "getDataNetworkTypeIconGemini", "com.mediatek.systemui.ext.NetworkType", int.class, new XC_MethodHook() {
+                            @Override
+                            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                if (mDisableDataNetworkTypeIcons) param.setResult(-1);
+                            }
+                        });
                     }
                 }
             });
