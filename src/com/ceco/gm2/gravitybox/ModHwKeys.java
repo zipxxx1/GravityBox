@@ -63,6 +63,8 @@ public class ModHwKeys {
     private static final int FLAG_WAKE_DROPPED = 0x00000002;
     public static final String ACTION_SCREENSHOT = "gravitybox.intent.action.SCREENSHOT";
     public static final String ACTION_SHOW_POWER_MENU = "gravitybox.intent.action.SHOW_POWER_MENU";
+    public static final String ACTION_TOGGLE_EXPANDED_DESKTOP = 
+            "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP";
 
     private static Class<?> classActivityManagerNative;
     private static Object mPhoneWindowManager;
@@ -227,6 +229,8 @@ public class ModHwKeys {
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
                 mExpandedDesktopMode = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
+            } else if (action.equals(ACTION_TOGGLE_EXPANDED_DESKTOP) && mPhoneWindowManager != null) {
+                toggleExpandedDesktop();
             }
         }
     };
