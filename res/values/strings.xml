@@ -764,4 +764,10 @@
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Master switch for QuickSettings management (requires reboot)</string>
 
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Applications</string>
+    <string name="app_picker_shortcuts">Shortcuts</string>
+    <string name="app_picker_shortcut_null_intent">Impossible to create launchable shortcut because activity did not return shortcut intent</string>
+    <string name="app_picker_shortcut_cancelled">Shortcut creation cancelled by target app</string>
+
 </resources>

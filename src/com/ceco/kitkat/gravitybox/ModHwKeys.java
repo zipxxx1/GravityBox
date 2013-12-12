@@ -943,8 +943,8 @@ public class ModHwKeys {
                             return;
                         }
 
-                        Intent i = Intent.parseUri(appInfo, Intent.URI_INTENT_SCHEME);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        Intent i = Intent.parseUri(appInfo, 0);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         mContext.startActivity(i);
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(mContext, mStrCustomAppMissing, Toast.LENGTH_SHORT).show();

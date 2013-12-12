@@ -673,7 +673,7 @@ public class ModStatusBar {
         if (mClockLink == null) return null;
 
         try {
-            return Intent.parseUri(mClockLink, Intent.URI_INTENT_SCHEME);
+            return Intent.parseUri(mClockLink, 0);
         } catch (Exception e) {
             log("Error getting ComponentName from clock link: " + e.getMessage());
             return null;
