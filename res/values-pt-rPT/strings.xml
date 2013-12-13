@@ -814,7 +814,7 @@
         ignorar predefinições de sistema no menu de ajustes da Barra de Navegação</string>
 
     <!-- Lockscreen Torch -->
-    <string name="pref_hwkey_lockscreen_torch_title">Ligar lanterna no ecrã de bloqueio</string>
+    <string name="pref_hwkey_lockscreen_torch_title">Comutar lanterna no ecrã de bloqueio</string>
     <string name="hwkey_ls_torch_disabled">Desativada</string>
     <string name="hwkey_ls_torch_home_longpress">Ao manter pressionada a tecla Casa</string>
     <string name="hwkey_ls_torch_voldown_longpress">Ao manter pressionada a tecla Volume -</string>
@@ -827,5 +827,15 @@
     <string name="app_picker_shortcuts">Atalhos</string>
     <string name="app_picker_shortcut_null_intent">Impossível criar atalho pelo fato da actividade não retornar a intenção</string>
     <string name="app_picker_shortcut_cancelled">Criação de atalho cancelada pela aplicação</string>
+
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">Trocar posição teclas Atrás e Aplicações recentes</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">Comutar lanterna</string>
+    <string name="pref_lockscreen_ring_torch_summary">Comuta a lanterna quando o anel de desbloqueio é mantido pressionado</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Temporização do painel de volume</string>
 
 </resources>
