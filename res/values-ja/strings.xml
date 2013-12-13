@@ -732,4 +732,13 @@
     <string name="hwkey_ls_torch_home_longpress">ホームボタン長押し</string>
     <string name="hwkey_ls_torch_voldown_longpress">音量下ボタン長押し</string>
     
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">クイック設定タイル管理を有効/無効にします。(要再起動)</string>
+
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">アプリ</string>
+    <string name="app_picker_shortcuts">ショートカット</string>
+    <string name="app_picker_shortcut_null_intent">アクティビティがインテントを返さなかったためショートカットを作成できません。</string>
+    <string name="app_picker_shortcut_cancelled">ショートカットの作成がキャンセルされました。</string>
+    
 </resources>
