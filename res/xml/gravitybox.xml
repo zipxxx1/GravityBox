@@ -121,6 +121,12 @@
                 android:summary="@string/pref_lockscreen_battery_arc_summary"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference
+                android:key="pref_lockscreen_ring_torch"
+                android:title="@string/pref_lockscreen_ring_torch_title"
+                android:summary="@string/pref_lockscreen_ring_torch_summary"
+                android:defaultValue="false" />
+
             <CheckBoxPreference 
                 android:key="pref_lockscreen_maximize_widgets"
                 android:title="@string/pref_lockscreen_maximize_widgets_title"
