@@ -479,14 +479,7 @@ public class ModQuickSettings {
 
             final Class<?> rlControllerClass = XposedHelpers.findClass(CLASS_ROTATION_LOCK_CTRL, classLoader);
             XposedHelpers.findAndHookMethod(rlControllerClass, "isRotationLockAffordanceVisible", 
-                    new XC_MethodReplacement() {
-                    @Override
-                    protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                        return mActiveTileKeys != null ? 
-                                mActiveTileKeys.contains("auto_rotate_textview") :
-                                XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                    }
-            });
+                    XC_MethodReplacement.returnConstant(true));
             final Class<?> rlPolicyClass = XposedHelpers.findClass(CLASS_ROTATION_POLICY, null);
             XposedHelpers.findAndHookMethod(rlPolicyClass, "isRotationLockToggleSupported",
                     Context.class, new XC_MethodReplacement() {
