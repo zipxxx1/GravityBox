@@ -826,11 +826,21 @@
     
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">为了使实体按键操作支持，这需要覆盖系统默认实体按键中的调整菜单</string>
+    
 
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">锁屏手电筒</string>
     <string name="hwkey_ls_torch_disabled">禁用</string>
     <string name="hwkey_ls_torch_home_longpress">长按主页键</string>
     <string name="hwkey_ls_torch_voldown_longpress">长按音量键下</string>
+    
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">管理快速设置主开关（需要重新启动）</string>
+    
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">应用程序</string>
+    <string name="app_picker_shortcuts">快捷方式</string>
+    <string name="app_picker_shortcut_null_intent">不能创建可启动的快捷方式，因为目标没有返回快捷方式</string>
+    <string name="app_picker_shortcut_cancelled">取消目标应用程序创建快捷方式</string>
 
 </resources>
