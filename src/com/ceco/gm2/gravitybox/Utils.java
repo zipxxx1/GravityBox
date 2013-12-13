@@ -352,5 +352,15 @@ public class Utils {
             }
             return ret;
         }
+
+        // Set the value for the given key
+        public static void set(String key, String val) {
+            try{
+                Class<?> classSystemProperties = findClass("android.os.SystemProperties", null);
+                callStaticMethod(classSystemProperties, "set", key, val);
+            } catch (Throwable t) {
+                log("SystemProp.set failed: " + t.getMessage());
+            }
+        }
     }
 }
