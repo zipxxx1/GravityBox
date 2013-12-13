@@ -654,4 +654,22 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="volume_panel_timeout_entries" translatable="false">
+        <item>500ms</item>
+        <item>1000ms</item>
+        <item>1500ms</item>
+        <item>2000ms</item>
+        <item>2500ms</item>
+        <item>3000ms</item>
+    </string-array>
+
+    <string-array name="volume_panel_timeout_values" translatable="false">
+        <item>500</item>
+        <item>1000</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>2500</item>
+        <item>3000</item>
+    </string-array>
+
 </resources>

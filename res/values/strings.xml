@@ -850,4 +850,7 @@
     <string name="pref_lockscreen_ring_torch_title">Enable torch</string>
     <string name="pref_lockscreen_ring_torch_summary">Toggles torch when unlock ring handle is long-pressed</string>
 
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
+
 </resources>
