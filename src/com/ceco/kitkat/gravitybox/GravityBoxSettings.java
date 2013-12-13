@@ -209,11 +209,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_VOLUME_PANEL_FULLY_EXPANDABLE = "pref_volume_panel_expand_fully";
     public static final String PREF_KEY_VOLUME_PANEL_AUTOEXPAND = "pref_volume_panel_autoexpand";
     public static final String PREF_KEY_VOLUME_ADJUST_MUTE = "pref_volume_adjust_mute";
+    public static final String PREF_KEY_VOLUME_PANEL_TIMEOUT = "pref_volume_panel_timeout";
     public static final String ACTION_PREF_VOLUME_PANEL_MODE_CHANGED = "gravitybox.intent.action.VOLUME_PANEL_MODE_CHANGED";
     public static final String EXTRA_EXPANDABLE = "expandable";
     public static final String EXTRA_EXPANDABLE_FULLY = "expandable_fully";
     public static final String EXTRA_AUTOEXPAND = "autoExpand";
     public static final String EXTRA_MUTED = "muted";
+    public static final String EXTRA_TIMEOUT = "timeout";
     public static final String PREF_KEY_LINK_VOLUMES = "pref_link_volumes";
     public static final String ACTION_PREF_LINK_VOLUMES_CHANGED = "gravitybox.intent.action.LINK_VOLUMES_CHANGED";
     public static final String EXTRA_LINKED = "linked";
@@ -771,6 +773,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefVolumePanelExpandable;
         private CheckBoxPreference mPrefVolumePanelFullyExpandable;
         private CheckBoxPreference mPrefVolumePanelAutoexpand;
+        private ListPreference mPrefVolumePanelTimeout;
         private CheckBoxPreference mPrefHomeDoubletapDisable;
         private PreferenceScreen mPrefCatAppLauncher;
         private AppPickerPreference[] mPrefAppLauncherSlot;
@@ -929,6 +932,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefVolumePanelExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_EXPANDABLE);
             mPrefVolumePanelFullyExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_FULLY_EXPANDABLE);
             mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
+            mPrefVolumePanelTimeout = (ListPreference) findPreference(PREF_KEY_VOLUME_PANEL_TIMEOUT);
 
             mPrefExpandedDesktop = (ListPreference) findPreference(PREF_KEY_EXPANDED_DESKTOP);
 
@@ -1371,6 +1375,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_HWKEY_LOCKSCREEN_TORCH)) {
                 mPrefHwKeyLockscreenTorch.setSummary(mPrefHwKeyLockscreenTorch.getEntry());
             }
+
+            if (key == null || key.equals(PREF_KEY_VOLUME_PANEL_TIMEOUT)) {
+                mPrefVolumePanelTimeout.setSummary(mPrefVolumePanelTimeout.getEntry());
+            }
         }
 
         @Override
@@ -1536,6 +1544,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_VOLUME_ADJUST_MUTE)) {
                 intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
                 intent.putExtra(EXTRA_MUTED, prefs.getBoolean(PREF_KEY_VOLUME_ADJUST_MUTE, false));
+            } else if (key.equals(PREF_KEY_VOLUME_PANEL_TIMEOUT)) {
+                intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
+                intent.putExtra(EXTRA_TIMEOUT, Integer.valueOf(
+                        prefs.getString(PREF_KEY_VOLUME_PANEL_TIMEOUT, "3000")));
             } else if (key.equals(PREF_KEY_LINK_VOLUMES)) {
                 intent.setAction(ACTION_PREF_LINK_VOLUMES_CHANGED);
                 intent.putExtra(EXTRA_LINKED,

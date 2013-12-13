@@ -23,12 +23,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -42,8 +44,9 @@ public class ModVolumePanel {
     private static final String CLASS_VIEW_GROUP = "android.view.ViewGroup";
     private static final boolean DEBUG = false;
 
-    private static int STREAM_RING = 2;
-    private static int STREAM_NOTIFICATION = 5;
+    private static final int STREAM_RING = 2;
+    private static final int STREAM_NOTIFICATION = 5;
+    private static final int MSG_TIMEOUT = 5;
 
     private static Object mVolumePanel;
     private static Object mAudioService;
@@ -54,6 +57,7 @@ public class ModVolumePanel {
     private static boolean mExpandable;
     private static boolean mExpandFully;
     private static boolean mAutoExpand;
+    private static int mTimeout;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -78,6 +82,9 @@ public class ModVolumePanel {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_MUTED)) {
                     mVolumeAdjustMuted = intent.getBooleanExtra(GravityBoxSettings.EXTRA_MUTED, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_TIMEOUT)) {
+                    mTimeout = intent.getIntExtra(GravityBoxSettings.EXTRA_TIMEOUT, 3000);
                 }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
                 mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
@@ -115,6 +122,14 @@ public class ModVolumePanel {
 
                     mAutoExpand = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_AUTOEXPAND, false);
                     mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
+
+                    mTimeout = 3000;
+                    try {
+                        mTimeout = Integer.valueOf(prefs.getString(
+                                GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TIMEOUT, "3000"));
+                    } catch (NumberFormatException nfe) {
+                        log("Invalid value for PREF_KEY_VOLUME_PANEL_TIMEOUT preference");
+                    }
 
                     Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(classVolumePanel, "STREAMS");
                     XposedHelpers.setBooleanField(streams[1], "show", 
@@ -264,6 +279,21 @@ public class ModVolumePanel {
                         }
                     }
                 }
+            });
+
+            XposedHelpers.findAndHookMethod(classVolumePanel, "resetTimeout", new XC_MethodReplacement() {
+                @Override
+                protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                    try {
+                        Handler h = (Handler) param.thisObject;
+                        h.removeMessages(MSG_TIMEOUT);
+                        h.sendMessageDelayed(h.obtainMessage(MSG_TIMEOUT), mTimeout);
+                        return null;
+                    } catch(Throwable t) {
+                        return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                    }
+                }
+                
             });
         } catch (Throwable t) {
             XposedBridge.log(t);
