@@ -257,6 +257,13 @@
                 android:defaultValue="false"
                 android:dependency="pref_qs_management_enable" />
 
+            <MultiSelectListPreference 
+                android:key="pref_qs_ringer_mode"
+                android:title="@string/pref_qs_ringer_mode_title"
+                android:entries="@array/ringer_mode_entries"
+                android:entryValues="@array/ringer_mode_values"
+                android:defaultValue="@array/ringer_mode_values" />
+
             <ListPreference
                 android:key="pref_qs_network_mode_sim_slot" 
                 android:title="@string/pref_qs_network_mode_sim_slot_title"

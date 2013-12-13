@@ -54,6 +54,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.util.TypedValue;
@@ -559,6 +560,7 @@ public class ModQuickSettings {
             IntentFilter intentFilter = new IntentFilter(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
+            intentFilter.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
         }
     };
