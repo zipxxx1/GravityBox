@@ -45,6 +45,7 @@ public class ModExpandedDesktop {
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
     private static final String CLASS_POLICY_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
+    private static final String CLASS_IMMERSIVE_MODE_CONFIRM = "com.android.internal.policy.impl.ImmersiveModeConfirmation";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
@@ -222,6 +223,7 @@ public class ModExpandedDesktop {
     public static void initZygote(final XSharedPreferences prefs) {
         try {
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
+            final Class<?> classImmersiveModeConfirm = XposedHelpers.findClass(CLASS_IMMERSIVE_MODE_CONFIRM, null);
 
             mNavbarOverride = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false);
             if (mNavbarOverride) {
@@ -918,6 +920,23 @@ public class ModExpandedDesktop {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(classImmersiveModeConfirm, "immersiveModeChanged",
+                    String.class, boolean.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (param.args[0] == null) return;
+                    Object confirmedPackages = 
+                            XposedHelpers.getObjectField(param.thisObject, "mConfirmedPackages");
+                    if (confirmedPackages != null) {
+                        if (!(Boolean)XposedHelpers.callMethod(confirmedPackages, "contains", param.args[0])) {
+                            XposedHelpers.callMethod(confirmedPackages, "add", param.args[0]);
+                            if (DEBUG) log(param.args[0] + " added to mConfirmedPackages list");
+                        }
+                    }
+                }
+            });
+
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
