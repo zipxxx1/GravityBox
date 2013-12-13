@@ -471,7 +471,8 @@
     <string name="pref_expanded_desktop_title">扩展桌面模式</string>
     <string name="expanded_desktop_disabled">禁用</string>
     <string name="expanded_desktop_navbar">隐藏虚拟按键</string>
-    <string name="expanded_desktop_both">隐藏两者</string>
+    <string name="expanded_desktop_both">Semi-immersive</string>
+    <string name="expanded_desktop_immersive">Immersive</string>
     <string name="action_expanded_desktop_title">扩展桌面功能</string>
     <string name="action_expanded_desktop_on">扩展桌面已开启</string>
     <string name="action_expanded_desktop_off">扩展桌面已关闭</string>
@@ -730,8 +731,8 @@
     <!-- HW Key Actions: Home and Back actions -->
     <string name="hwkey_action_home">转到桌面</string>
     <string name="hwkey_action_back">返回</string>
-	
-	<!-- Clear all recents bottom margin -->
+    
+    <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">调整底部边距</string>
 
     <!-- Google Plus -->
@@ -743,6 +744,7 @@
 
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">为了使实体按键操作支持，这需要覆盖系统默认实体按键中的调整菜单</string>
+    
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog">找到已安装过时的GravityBox软件包。
@@ -761,5 +763,14 @@
     
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">管理快速设置主开关（需要重新启动）</string>
+    
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">应用程序</string>
+    <string name="app_picker_shortcuts">快捷方式</string>
+    <string name="app_picker_shortcut_null_intent">不能创建可启动的快捷方式，因为目标没有返回快捷方式</string>
+    <string name="app_picker_shortcut_cancelled">取消目标应用程序创建快捷方式</string>
+
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">交换返回键和最近任务键</string>
 
 </resources>
