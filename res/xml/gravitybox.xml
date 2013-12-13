@@ -651,6 +651,11 @@
                 android:title="@string/pref_navbar_launcher_enable_title"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference 
+                android:key="pref_navbar_swap_keys"
+                android:title="@string/pref_navbar_swap_keys_title"
+                android:defaultValue="false" />
+
         </PreferenceCategory>
 
         <PreferenceCategory

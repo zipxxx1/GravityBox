@@ -149,6 +149,8 @@ public class ModNavigationBar {
                     intent.hasExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE)) {
                 mHwKeysEnabled = !intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE, false);
                 updateRecentsKeyCode();
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_SWAP_KEYS)) {
+                swapBackAndRecents();
             }
         }
     };
@@ -205,6 +207,7 @@ public class ModNavigationBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_RECENTS_LONGPRESS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_HOME_LONGPRESS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_PIE_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_SWAP_KEYS);
                     context.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("NavigationBarView constructed; Broadcast receiver registered");
                 }
@@ -291,6 +294,10 @@ public class ModNavigationBar {
                     updateRecentsKeyCode();
                     updateHomeKeyLongpressSupport();
                     setNavbarBgColor();
+
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_SWAP_KEYS, false)) {
+                        swapBackAndRecents();
+                    }
                 }
             });
 
@@ -542,6 +549,32 @@ public class ModNavigationBar {
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static void swapBackAndRecents() {
+        try {
+            final int backButtonResId = mResources.getIdentifier("back", "id", PACKAGE_NAME);
+            final int recentAppsResId = mResources.getIdentifier("recent_apps", "id", PACKAGE_NAME);
+            for (int i = 0; i < 2; i++) {
+                if (mNavbarViewInfo[i].navButtons == null) continue;
+                View backKey = mNavbarViewInfo[i].navButtons.findViewById(backButtonResId);
+                View recentsKey = mNavbarViewInfo[i].navButtons.findViewById(recentAppsResId);
+                int backPos = mNavbarViewInfo[i].navButtons.indexOfChild(backKey);
+                int recentsPos = mNavbarViewInfo[i].navButtons.indexOfChild(recentsKey);
+                mNavbarViewInfo[i].navButtons.removeView(backKey);
+                mNavbarViewInfo[i].navButtons.removeView(recentsKey);
+                if (backPos < recentsPos) {
+                    mNavbarViewInfo[i].navButtons.addView(recentsKey, backPos);
+                    mNavbarViewInfo[i].navButtons.addView(backKey, recentsPos);
+                } else {
+                    mNavbarViewInfo[i].navButtons.addView(backKey, recentsPos);
+                    mNavbarViewInfo[i].navButtons.addView(recentsKey, backPos);
+                }
+            }
+        }
+        catch (Throwable t) {
+            log("Error swapping back and recents key: " + t.getMessage());
         }
     }
 }
