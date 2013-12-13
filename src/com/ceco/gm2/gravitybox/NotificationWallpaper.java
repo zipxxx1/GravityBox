@@ -78,6 +78,10 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
         setLayoutParams(lp);
+        setPadding(mNotificationPanelView.getPaddingLeft(),
+                mNotificationPanelView.getPaddingTop(),
+                mNotificationPanelView.getPaddingRight(),
+                mNotificationPanelView.getPaddingBottom());
         setType(prefs.getString(
                 GravityBoxSettings.PREF_KEY_NOTIF_BACKGROUND,
                 GravityBoxSettings.NOTIF_BG_DEFAULT));
