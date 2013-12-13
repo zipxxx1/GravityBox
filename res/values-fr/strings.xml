@@ -764,4 +764,10 @@
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Interrupteur principal pour la gestion des Paramètres Rapides (nécessite un redémarrage)</string>
 
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Applications</string>
+    <string name="app_picker_shortcuts">Raccourcis</string>
+    <string name="app_picker_shortcut_null_intent">Impossible de créer un raccourci efficace car l\'activité n\'a pas renvoyé d\'intention de raccourci</string>
+    <string name="app_picker_shortcut_cancelled">La création du raccourci a été annulée par l\'application cible</string>
+
 </resources>
