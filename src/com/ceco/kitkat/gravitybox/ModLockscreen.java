@@ -48,6 +48,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View.OnLongClickListener;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.View;
@@ -105,6 +106,9 @@ public class ModLockscreen {
             { Intent.class, boolean.class, boolean.class, Handler.class, Runnable.class };
     private static Constructor<?> mTargetDrawableConstructor;
     private static Object mKeyguardHostView;
+    private static Handler mHandler;
+    private static Context mGbContext;
+    private static boolean mTorchEnabled;
 
     // Battery Arc
     private static HandleDrawable mHandleDrawable;
@@ -182,8 +186,12 @@ public class ModLockscreen {
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND, 
                             GravityBoxSettings.LOCKSCREEN_BG_DEFAULT);
 
+                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    if (context != null && mGbContext == null) {
+                        mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+                    }
+
                     if (!bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_DEFAULT)) {
-                        Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                         FrameLayout flayout = new FrameLayout(context);
                         flayout.setTag("gb_wallpaper");
                         flayout.setLayoutParams(new LayoutParams(
@@ -195,8 +203,7 @@ public class ModLockscreen {
                             flayout.setBackgroundColor(color);
                             if (DEBUG) log("inflateKeyguardView: background color set");
                         } else if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_IMAGE)) {
-                            Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
-                            String wallpaperFile = gbContext.getFilesDir() + "/lockwallpaper";
+                            String wallpaperFile = mGbContext.getFilesDir() + "/lockwallpaper";
                             Bitmap background = BitmapFactory.decodeFile(wallpaperFile);
                             Drawable d = new BitmapDrawable(context.getResources(), background);
                             ImageView mLockScreenWallpaperImage = new ImageView(context);
@@ -302,6 +309,8 @@ public class ModLockscreen {
                     } catch (Throwable t) {
                         log("Lockscreen targets: error while trying to modify GlowPadView layout" + t.getMessage());
                     }
+
+                    mTorchEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_RING_TORCH, false);
 
                     mArcEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BATTERY_ARC, false);
                     // prepare Battery Arc
@@ -416,6 +425,9 @@ public class ModLockscreen {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (DEBUG) log("GlowPadView.OnTriggerListener; index=" + ((Integer) param.args[1]));
+                    if (mHandler != null) {
+                        mHandler.removeCallbacks(mToggleTorchRunnable);
+                    }
                     prefs.reload();
                     if (!prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_ENABLE, false)) return;
@@ -591,6 +603,13 @@ public class ModLockscreen {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             mArcVisible = false;
+
+            if (mTorchEnabled) {
+                if (mHandler == null) {
+                    mHandler = new Handler();
+                }
+                mHandler.postDelayed(mToggleTorchRunnable, ViewConfiguration.getLongPressTimeout()*2);
+            }
         }
     };
 
@@ -598,6 +617,22 @@ public class ModLockscreen {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             mArcVisible = true;
+            if (mHandler != null) {
+                mHandler.removeCallbacks(mToggleTorchRunnable);
+            }
+        }
+    };
+
+    private static Runnable mToggleTorchRunnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                Intent intent = new Intent(mGbContext, TorchService.class);
+                intent.setAction(TorchService.ACTION_TOGGLE_TORCH);
+                mGbContext.startService(intent);
+            } catch (Throwable t) {
+                log("Error toggling Torch: " + t.getMessage());
+            }
         }
     };
 

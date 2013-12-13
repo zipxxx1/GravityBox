@@ -169,7 +169,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String LOCKSCREEN_BG_COLOR = "color";
     public static final String LOCKSCREEN_BG_IMAGE = "image";
 
+    public static final String PREF_CAT_KEY_LOCKSCREEN_OTHER = "pref_cat_lockscreen_other";
     public static final String PREF_KEY_LOCKSCREEN_BATTERY_ARC = "pref_lockscreen_battery_arc";
+    public static final String PREF_KEY_LOCKSCREEN_RING_TORCH = "pref_lockscreen_ring_torch";
     public static final String PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "pref_lockscreen_maximize_widgets";
     public static final String PREF_KEY_LOCKSCREEN_WIDGET_LIMIT_DISABLE = "pref_lockscreen_widget_limit_disable";
     public static final String PREF_KEY_LOCKSCREEN_ROTATION = "pref_lockscreen_rotation";
@@ -785,6 +787,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatTransparencyManager;
         private ListPreference mPrefHwKeyLockscreenTorch;
         private PreferenceCategory mPrefCatHwKeyOthers;
+        private PreferenceCategory mPrefCatLsOther;
+        private CheckBoxPreference mPrefLsRingTorch;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -989,6 +993,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbIconColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY);
             mPrefSbDaColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY);
 
+            mPrefCatLsOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_OTHER);
+            mPrefLsRingTorch = (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_RING_TORCH);
+
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
                 mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
@@ -998,6 +1005,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {
                 mPrefCatHwKeyOthers.removePreference(mPrefHwKeyLockscreenTorch);
+                mPrefCatLsOther.removePreference(mPrefLsRingTorch);
             }
             if (!Utils.hasVibrator(getActivity())) {
                 mPrefCatPhoneTelephony.removePreference(mPrefCallVibrations);

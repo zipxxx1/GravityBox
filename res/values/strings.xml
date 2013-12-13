@@ -773,4 +773,8 @@
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Swap Back and Recents keys</string>
 
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">Enable torch</string>
+    <string name="pref_lockscreen_ring_torch_summary">Toggles torch when unlock ring handle is long-pressed</string>
+
 </resources>
