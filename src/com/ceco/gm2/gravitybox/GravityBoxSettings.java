@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -465,8 +466,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_NETWORK_MODE_TILE_MODE = "pref_network_mode_tile_mode";
     public static final String PREF_KEY_NETWORK_MODE_TILE_LTE = "pref_network_mode_tile_lte";
+    public static final String PREF_KEY_RINGER_MODE_TILE_MODE = "pref_qs_ringer_mode";
     public static final String EXTRA_NMT_MODE = "networkModeTileMode";
     public static final String EXTRA_NMT_LTE = "networkModeTileLte";
+    public static final String EXTRA_RMT_MODE = "ringerModeTileMode";
 
     public static final String PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS = "pref_display_allow_all_rotations";
     public static final String ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED = 
@@ -1805,6 +1808,17 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_NETWORK_MODE_TILE_LTE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_NMT_LTE, prefs.getBoolean(PREF_KEY_NETWORK_MODE_TILE_LTE, false));
+            } else if (key.equals(PREF_KEY_RINGER_MODE_TILE_MODE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                Set<String> modes = prefs.getStringSet(PREF_KEY_RINGER_MODE_TILE_MODE,
+                        new HashSet<String>(Arrays.asList(new String[] { "0", "1", "2", "3" })));
+                List<String> lmodes = new ArrayList<String>(modes);
+                Collections.sort(lmodes);
+                int[] imodes = new int[lmodes.size()];
+                for (int i = 0; i < lmodes.size(); i++) {
+                    imodes[i] = Integer.valueOf(lmodes.get(i));
+                }
+                intent.putExtra(EXTRA_RMT_MODE, imodes);
             } else if (key.equals(PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS)) {
                 intent.setAction(ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED);
                 intent.putExtra(EXTRA_ALLOW_ALL_ROTATIONS, 
