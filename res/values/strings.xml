@@ -770,4 +770,7 @@
     <string name="app_picker_shortcut_null_intent">Impossible to create launchable shortcut because activity did not return shortcut intent</string>
     <string name="app_picker_shortcut_cancelled">Shortcut creation cancelled by target app</string>
 
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">Swap Back and Recents keys</string>
+
 </resources>
