@@ -731,4 +731,30 @@
     <string name="hwkey_ls_torch_home_longpress">Na dlhé podržanie Domov</string>
     <string name="hwkey_ls_torch_voldown_longpress">Na dlhé podržanie Hlasitosť-</string>
 
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">Hlavný prepínač pre QuickSettings nastavenia (vyžaduje reštart)</string>
+
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Aplikácie</string>
+    <string name="app_picker_shortcuts">Skratky</string>
+    <string name="app_picker_shortcut_null_intent">Nie je možné vytvoriť spustiteľnú skratku, pretože ju aplikácia nešpecifikovala</string>
+    <string name="app_picker_shortcut_cancelled">Vytvorenie skratky bolo zrušené cieľovou aplikáciou</string>
+
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">Prehodiť tlačidlá Späť a Zoznam spustených úloh</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">Povoliť LED svetlo</string>
+    <string name="pref_lockscreen_ring_torch_summary">Dlhé podržanie odomykacieho prstenca prepne LED svetlo</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Časovač panela hlasitosti</string>
+
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">Nastavenia dlaždice Režimu zvonenia</string>
+    <string name="ringer_mode_silent">Tichý</string>
+    <string name="ringer_mode_vibrate">Vibrovať</string>
+    <string name="ringer_mode_sound">Zvoniť</string>
+    <string name="ringer_mode_sound_vibrate">Zvoniť a vibrovať</string>
+
 </resources>
