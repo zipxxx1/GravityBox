@@ -591,70 +591,70 @@ public class ModQuickSettings {
 
                 if (Utils.hasNfc(mContext)) {
                     NfcTile nfcTile = new NfcTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    nfcTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                    nfcTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                     mTiles.add(nfcTile);
                 }
 
                 if (Utils.hasGPS(mContext)) {
                     GpsTile gpsTile = new GpsTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    gpsTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                    gpsTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                     mTiles.add(gpsTile);
                 }
 
                 RingerModeTile rmTile = new RingerModeTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                rmTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                rmTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(rmTile);
 
                 VolumeTile volTile = new VolumeTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                volTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                volTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(volTile);
 
                 if (!Utils.isWifiOnly(mContext)) {
                     NetworkModeTile nmTile = new NetworkModeTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    nmTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                    nmTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                     mTiles.add(nmTile);
                 }
 
                 SyncTile syncTile = new SyncTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                syncTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                syncTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(syncTile);
 
                 WifiApTile wifiApTile = new WifiApTile(mContext, mGbContext, mStatusBar, mPanelBar, mWifiManager);
-                wifiApTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                wifiApTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(wifiApTile);
 
                 if (Utils.hasFlash(mContext)) {
                     TorchTile torchTile = new TorchTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    torchTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                    torchTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                     mTiles.add(torchTile);
                 }
 
                 SleepTile sleepTile = new SleepTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                sleepTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                sleepTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(sleepTile);
 
                 StayAwakeTile swTile = new StayAwakeTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                swTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                swTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(swTile);
 
                 QuickRecordTile qrTile = new QuickRecordTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                qrTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                qrTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(qrTile);
 
                 QuickAppTile qAppTile = new QuickAppTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                qAppTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                qAppTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(qAppTile);
 
                 ExpandedDesktopTile edTile = new ExpandedDesktopTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                edTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                edTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(edTile);
 
                 ScreenshotTile ssTile = new ScreenshotTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                ssTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                ssTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(ssTile);
 
                 GravityBoxTile gbTile = new GravityBoxTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                gbTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs);
+                gbTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(gbTile);
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();

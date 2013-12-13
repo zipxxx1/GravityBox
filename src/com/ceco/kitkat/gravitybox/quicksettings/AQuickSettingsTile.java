@@ -19,6 +19,7 @@ import com.ceco.kitkat.gravitybox.BroadcastSubReceiver;
 import com.ceco.kitkat.gravitybox.ModQuickSettings.TileLayout;
 
 import de.robv.android.xposed.XSharedPreferences;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 import android.content.Context;
@@ -43,6 +44,7 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
     protected Resources mGbResources;
     protected Object mStatusBar;
     protected Object mPanelBar;
+    protected Object mQuickSettings;
 
     public AQuickSettingsTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         mContext = context;
@@ -53,7 +55,9 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
         mPanelBar = panelBar;
     }
 
-    public void setupQuickSettingsTile(ViewGroup viewGroup, LayoutInflater inflater, XSharedPreferences prefs) {
+    public void setupQuickSettingsTile(ViewGroup viewGroup, LayoutInflater inflater, 
+            XSharedPreferences prefs, Object quickSettings) {
+        mQuickSettings = quickSettings;
         int layoutId = mResources.getIdentifier("quick_settings_tile", "layout", PACKAGE_NAME);
         mTile = (FrameLayout) inflater.inflate(layoutId, viewGroup, false);
         onTileCreate();
@@ -103,12 +107,21 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
     }
 
     protected void startActivity(Intent intent) {
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        mContext.startActivity(intent);
-        collapsePanels();
+        try {
+            XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", intent);
+        } catch (Throwable t) {
+            // fallback in case of troubles
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            mContext.startActivity(intent);
+            collapsePanels();
+        }
     }
 
     protected void collapsePanels() {
-        XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+        try {
+            XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+        } catch (Throwable t) {
+            XposedBridge.log("Error calling animateCollapsePanels: " + t.getMessage());
+        }
     }
 }
