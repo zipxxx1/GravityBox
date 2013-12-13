@@ -166,7 +166,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
                 ModMtkToolbar.init(prefs, lpparam.classLoader);
             }
 
-            if (lpparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
+            if (Utils.hasGeminiSupport()
+                    && lpparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
                 ModStatusBar.initMtkPlugin(prefs, lpparam.classLoader);
             }
         }
