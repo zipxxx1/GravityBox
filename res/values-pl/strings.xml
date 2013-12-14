@@ -814,5 +814,31 @@
     <string name="hwkey_ls_torch_disabled">Wyłączona</string>
     <string name="hwkey_ls_torch_home_longpress">Przy długim naciśnięciu HOME</string>
     <string name="hwkey_ls_torch_voldown_longpress">Przy długim naciśnięciu Vol- </string>
+    
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">Główny wyłącznik dla Zarządzania Szybkimi Ustawieniami (wymagany restart)</string>
+
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Aplikacje</string>
+    <string name="app_picker_shortcuts">Skróty</string>
+    <string name="app_picker_shortcut_null_intent">Nie można utworzyć skrótu gdyż nie określono jego celu</string>
+    <string name="app_picker_shortcut_cancelled">Tworzenie skrótu anulowane przez aplikację docelową</string>
+
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">Zamień miejscami klawisze BACK i Ostatnich Aplikacji</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">Włącz latarkę</string>
+    <string name="pref_lockscreen_ring_torch_summary">Przełącza latarkę przy długim naciśnięciu przycisku pierścienia odblokowania</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Czas wyświetlania panelu głośności</string>
+
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">Ustawienia kafelki trybu dzwonka</string>
+    <string name="ringer_mode_silent">Cisza</string>
+    <string name="ringer_mode_vibrate">Wibracje</string>
+    <string name="ringer_mode_sound">Dźwięk</string>
+    <string name="ringer_mode_sound_vibrate">Dźwięk i Wibracje</string>
 
 </resources>
