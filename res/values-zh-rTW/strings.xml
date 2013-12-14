@@ -96,8 +96,8 @@
     <string name="statusbar_bgcolor_summary">可在此設定狀態列的背景顏色與透明度</string>
 
     <!-- Main preference categories -->
-    <string name="pref_cat_statusbar_title">狀態列校正</string>
-    <string name="pref_cat_statusbar_summary">包含各種狀態列的校正選項</string>
+    <string name="pref_cat_statusbar_title">狀態列調整</string>
+    <string name="pref_cat_statusbar_summary">包含各種狀態列的個性化配置選項</string>
     <string name="pref_cat_misc_title">其他選項</string>
     <string name="pref_cat_misc_summary">包含所有不屬於特定類別的調校選項</string>
 
@@ -127,8 +127,8 @@
     <string name="dual_sim_ringer_summary">啟動可以設定各個 SIM 卡的鈴聲與通知音效的應用程式</string>
 
     <!--  Lockscreen tweaks -->
-    <string name="pref_cat_lockscreen_title">鎖定畫面校正</string>
-    <string name="pref_cat_lockscreen_summary">包含各種鎖定畫面的校正選項</string>
+    <string name="pref_cat_lockscreen_title">鎖定畫面調整</string>
+    <string name="pref_cat_lockscreen_summary">包含各種鎖定畫面的個性化配置選項</string>
     <string name="pref_cat_lockscreen_background_title">鎖定畫面背景</string>
     <string name="pref_lockscreen_background_title">背景樣式</string>
     <string name="lockscreen_bg_default">預設桌布</string>
@@ -145,16 +145,16 @@
     <string name="pref_lockscreen_maximize_widgets_summary">若啟用這個選項，鎖定畫面的小工具預設都會被最大化</string>
 
     <!--  Power tweaks category -->
-    <string name="pref_cat_power_title">電源校正</string>
-    <string name="pref_cat_power_summary">包含各種電源相關的校正選項</string>
+    <string name="pref_cat_power_title">電源選項調整</string>
+    <string name="pref_cat_power_summary">包含各種電源相關的個性化配置選項</string>
 
     <!--  Low battery LED flashing -->
     <string name="pref_flashing_led_disable_title">停用 LED 呼吸燈閃爍</string>
     <string name="pref_flashing_led_disable_summary">停掉當低電量且未充電時會出現的擾人 LED 呼吸燈閃爍</string>
 
     <!-- Display tweaks category -->
-    <string name="pref_cat_display_title">顯示校正</string>
-    <string name="pref_cat_display_summary">包含各種顯示相關的校正選項</string>
+    <string name="pref_cat_display_title">顯示選項</string>
+    <string name="pref_cat_display_summary">包含各種顯示相關的個性化配置選項</string>
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">最低亮度等級</string>
@@ -189,8 +189,8 @@
     <string name="pref_statusbar_center_clock_title">狀態列時鐘置中</string>
 
     <!-- Media tweaks category -->
-    <string name="pref_cat_media_title">媒體校正</string>
-    <string name="pref_cat_media_summary">包含各種媒體與聲音系統的校正選項</string>
+    <string name="pref_cat_media_title">媒體選項調整</string>
+    <string name="pref_cat_media_summary">包含各種媒體與聲音系統個性化配置選項</string>
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">更多音樂音量的調整段數</string>
@@ -205,8 +205,8 @@
     <string name="pref_charging_led_disable_summary">停用當充電時會亮起的 LED 燈號</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">實體按鍵動作</string>
-    <string name="pref_cat_hwkey_actions_summary">可在此為實體按鍵設定自訂的動作</string>
+    <string name="pref_cat_hwkey_actions_title">實體按鍵操作調整</string>
+    <string name="pref_cat_hwkey_actions_summary">包含各種實體按鍵操作的個性化配置選項</string>
     <string name="hwkey_menu_longpress_dialog_title">選單鍵長按動作</string>
     <string name="hwkey_menu_doubletap_dialog_title">選單鍵雙擊動作</string>
     <string name="hwkey_back_longpress_dialog_title">返回鍵長按動作</string>
@@ -225,8 +225,8 @@
     <string name="no_previous_app_found">找不到上一個應用程式</string>
 
     <!--  Phone tweaks category -->
-    <string name="pref_cat_phone_title">電話校正</string>
-    <string name="pref_cat_phone_summary">包含各種通話的校正選項</string>
+    <string name="pref_cat_phone_title">電話選項調整</string>
+    <string name="pref_cat_phone_summary">包含各種通話的個性化配置選項</string>
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">響鈴時的手機翻轉動作</string>
@@ -401,7 +401,7 @@
 
     <!-- Transparency management -->
     <string name="pref_cat_transparency_manager_title">透明度調整</string>
-    <string name="pref_cat_transparency_manager_summary">管理海苔條與狀態列透明度</string>
+    <string name="pref_cat_transparency_manager_summary">包含海苔條與狀態列透明度個性化配置選項</string>
     <string name="pref_tm_statusbar_launcher_title">啟動器下的狀態列</string>
     <string name="pref_tm_statusbar_lockscreen_title">鎖定螢幕下的狀態列</string>
     <string name="pref_tm_navbar_launcher_title">啟動器下的海苔條</string>
@@ -470,8 +470,8 @@
 
 
     <!-- Navigation bar tweaks category -->
-    <string name="pref_cat_navigation_bar_title">海苔條校正</string>
-    <string name="pref_cat_navigation_bar_summary">包含各種關於海苔條的校正</string>
+    <string name="pref_cat_navigation_bar_title">海苔條調整</string>
+    <string name="pref_cat_navigation_bar_summary">包含各種有關海苔條的個性配置選項</string>
     <string name="pref_navbar_override_title">覆蓋系統預設值</string>
     <string name="pref_navbar_override_summary">新增海苔條校正的主控鍵（需要重新啟動）</string>
     <string name="pref_navbar_enable_title">啟用海苔條功能</string>
@@ -510,7 +510,7 @@
     <string name="nm_tile_mode2">2G/2G+3G</string>
 
     <!-- Display: allow all rotations -->
-    <string name="pref_display_allow_all_rotations_title">允許所有旋轉</string>
+    <string name="pref_display_allow_all_rotations_title">允許螢幕可以所有角度的旋轉</string>
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">覆蓋預設瓷貼操作</string>
@@ -714,5 +714,59 @@
     <!-- HW Key Actions: Home and Back actions -->
     <string name="hwkey_action_home">前往桌面</string>
     <string name="hwkey_action_back">返回</string>
- 
+    
+    <!-- Clear all recents bottom margin -->
+    <string name="pref_recent_clear_margin_bottom_title">調整底部邊距</string>
+
+    <!-- Google Plus -->
+    <string name="pref_about_gplus_title">Google+ 社群</string>
+    <string name="pref_about_gplus_summary">輕觸這裡來拜訪 GravityBox 位在 Google+ 的社群</string>
+
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">允許 LTE 網路模式</string>
+
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">為了能夠支援海苔條操作控制，在海苔條調整選單中覆蓋系統預設值是必須的</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog">已偵測到舊版的 GravityBox 被安裝. 
+        舊版必須要被解除安裝才能安裝新版的 GB . 新版 GB 將要嘗試解除安裝舊版，
+        從 GB 傳輸您的配置與設定到新版 GB，然後解除安裝舊版 GB. 您必須在出現
+        "解除安裝"提示時按下"確認". 解除安裝後，請前往 Xposed 安裝器啟用新模組
+        然後重新啟動 IMMEDIATELLY 否則，您將有可能遭遇到系統相容穩定性的問題.</string>
+    <string name="gb_new_package_settings_transfer_ok">GravityBox 設定傳輸成功</string>
+    <string name="gb_new_package_settings_transfer_failed">GravityBox 設定傳輸失敗</string>
+
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">鎖定螢幕手電筒</string>
+    <string name="hwkey_ls_torch_disabled">停用</string>
+    <string name="hwkey_ls_torch_home_longpress">長按 Home 鍵</string>
+    <string name="hwkey_ls_torch_voldown_longpress">音量鍵(下)長按</string>
+    
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">切換快速設定總管 (需要重新啟動)</string>
+  
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">應用程式</string>
+    <string name="app_picker_shortcuts">快捷方式</string>
+    <string name="app_picker_shortcut_null_intent">無法建立可用的快捷方式，由於該活動不支援返回快捷方式</string>
+    <string name="app_picker_shortcut_cancelled">目標程式快捷方式已經取消</string>
+  
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">切換返回鍵與近期鍵</string>
+   
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">啟用手電筒</string>
+    <string name="pref_lockscreen_ring_torch_summary">當長按解鎖環時啟用手電筒</string>
+   
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">音量面板逾時時間</string>
+   
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">響鈴模式瓷貼模式</string>
+    <string name="ringer_mode_silent">靜音</string>
+    <string name="ringer_mode_vibrate">震動</string>
+    <string name="ringer_mode_sound">聲音</string>
+    <string name="ringer_mode_sound_vibrate">聲音與震動</string>
+   
 </resources>
