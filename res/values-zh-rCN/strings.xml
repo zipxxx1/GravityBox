@@ -842,5 +842,22 @@
     <string name="app_picker_shortcuts">快捷方式</string>
     <string name="app_picker_shortcut_null_intent">不能创建可启动的快捷方式，因为目标没有返回快捷方式</string>
     <string name="app_picker_shortcut_cancelled">取消目标应用程序创建快捷方式</string>
+    
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">交换返回键和最近任务键</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">开启手电筒</string>
+    <string name="pref_lockscreen_ring_torch_summary">解锁时长按切换手电筒</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">音量面板超时</string>
+
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">铃声模式</string>
+    <string name="ringer_mode_silent">无声</string>
+    <string name="ringer_mode_vibrate">振动</string>
+    <string name="ringer_mode_sound">声音</string>
+    <string name="ringer_mode_sound_vibrate">声音和振动</string>
 
 </resources>
