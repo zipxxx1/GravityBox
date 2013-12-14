@@ -144,7 +144,7 @@
     <string name="reboot_confirm_bootloader">El %s se reiniciará al bootloader.</string>
 
     <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Efecto de apagado de pantalla CRT</string>
+    <string name="crt_off_effect_title">Efecto apagado de pantalla CRT</string>
     <string name="crt_off_effect_summary">Activa la animación que simula el antiguo efecto de apagado de pantallas CRT</string>
 
     <!-- Engineering mode shortcut -->
@@ -207,7 +207,7 @@
     <string name="pref_ab_button_set">Establecer</string>
 
     <!-- Lockscreen rotation -->
-    <string name="pref_lockscreen_rotation_title">Establecer rotación en pantalla de bloqueo</string>
+    <string name="pref_lockscreen_rotation_title">Rotar en pantalla de bloqueo</string>
     <string name="pref_lockscreen_rotation_summary">ADVERTENCIA: puede cambiar los objetivos del anillo de desbloqueo en el caso de que la pantalla de bloqueo AOSP haya sido modificada por el fabricante</string>
 
     <!-- Lockscreen menu key -->
@@ -219,14 +219,14 @@
 
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Ajustes multimedia</string>
-    <string name="pref_cat_media_summary">Contiene ajustes para el sistema multimedia</string>
+    <string name="pref_cat_media_summary">Contiene ajustes del sistema multimedia</string>
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">Más niveles de volumen multimedia</string>
-    <string name="pref_music_volume_steps_summary">Añadie más niveles de volumen multimedia(requiere reinicio)</string>
+    <string name="pref_music_volume_steps_summary">Añade más niveles de volumen multimedia (requiere reinicio)</string>
 
     <!-- Safe headset media volume -->
-    <string name="pref_safe_media_volume_title">Volumen multimedia máximo seguro con auriculares</string>
+    <string name="pref_safe_media_volume_title">Advertir volumen excesivo con auriculares</string>
     <string name="pref_safe_media_volume_summary">Activa o desactiva la notificación de volumen multimedia máximo con auriculares</string>
 
     <!-- Disable charging LED -->
@@ -234,8 +234,8 @@
     <string name="pref_charging_led_disable_summary">Desactiva el LED mientras se carga</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Acciones botones físicos</string>
-    <string name="pref_cat_hwkey_actions_summary">Permite establecer acciones personalizadas en las teclas físicas del dispositivo</string>
+    <string name="pref_cat_hwkey_actions_title">Acciones en botones físicos</string>
+    <string name="pref_cat_hwkey_actions_summary">Permite establecer acciones personalizadas en los botones físicos del dispositivo</string>
     <string name="hwkey_menu_longpress_dialog_title">Acción al hacer pulsación larga sobre botón menú</string>
     <string name="hwkey_menu_doubletap_dialog_title">Acción al hacer dos pulsaciones rápidas sobre botón menú</string>
     <string name="hwkey_back_longpress_dialog_title">Acción al hacer pulsación larga sobre botón retroceso</string>
@@ -245,12 +245,12 @@
     <string name="hwkey_action_prev_app">Cambiar a aplicación anterior</string>
     <string name="hwkey_action_kill">Detener aplicación en primer plano</string>
     <string name="hwkey_action_sleep">Apagar pantalla</string>
-    <string name="pref_hwkey_kill_delay_title">Tiempo de pulsación para detener aplicación</string>
+    <string name="pref_hwkey_kill_delay_title">Tiempo de pulsación para detener app</string>
     <string name="pref_hwkey_kill_delay_summary">Se aplica a la acción de detener aplicación en primer plano. Define cuánto tiempo se debe presionar el botón para que se ejecute la acción.</string>
     <string name="pref_hwkey_doubletap_speed_title">Velocidad de doble pulsación</string>
     <string name="pref_hwkey_doubletap_speed_summary">Se aplica a la doble pulsación sobre el botón menú. Define cómo de rápido se debe pulsar para que se ejecute la acción</string>
     <string name="app_killed">%s detenidas</string>
-    <string name="nothing_to_kill">No hay aplicaciónes que detener</string>
+    <string name="nothing_to_kill">No hay aplicaciones que detener</string>
     <string name="no_previous_app_found">No hay ninguna aplicación anterior</string>
 
     <!--  Phone tweaks category -->
@@ -287,7 +287,7 @@
     <string name="pref_volume_panel_expandable_fully_summary">El panel ocupará todo el espacio libre posible</string>
 
     <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Enlazar volumen del tono de llamada con el de notificaciones</string>
+    <string name="pref_link_volumes_title">Enlazar vol. del tono de llamada con notificaciones</string>
     <string name="pref_link_volumes_summary">Cuando se desactiva, el volumen del tono de llamada se configura independientemente del de las notificaciones</string>
 
     <!-- Auto-switch QuickSettings -->
@@ -302,7 +302,7 @@
     <string name="quick_pulldown_left">Izquierda</string>
 
     <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Desactivar despertar con botones de volumen</string>
+    <string name="pref_volume_rocker_wake_disable_title">No despertar con botones de volumen</string>
     <string name="pref_volume_rocker_wake_disable_summary">Para dispositivos como el G3s o G4 en los que la pantalla se enciende con las teclas de volumen</string>
 
     <!-- Statusbar colors category -->
@@ -384,7 +384,7 @@
 
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Usar tema Holo oscuro</string>
-    <string name="pref_gb_theme_dark_summary">Cambiar la interfaz de Gingerbread para usar el tema Holo oscuro en lugar del claro</string>
+    <string name="pref_gb_theme_dark_summary">Cambiar la interfaz de GravityBox a colores oscuros</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Desactivado</string>
@@ -394,7 +394,7 @@
     <string name="recent_clear_bottom_right">Inferior derecha</string>
 
     <!-- Clear all recents top margin -->
-    <string name="pref_recent_clear_margin_top_title">Ajuster margen superior</string>
+    <string name="pref_recent_clear_margin_top_title">Ajustar margen superior</string>
 
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Buscar</string>
@@ -402,7 +402,7 @@
 
     <!-- QuickApp tile settings -->
     <string name="qs_tile_quickapp">Aplicación rápida</string>
-    <string name="pref_cat_quickapp_tile_title">Ajustes de las casillas de aplicaciónes rápidas</string>
+    <string name="pref_cat_quickapp_tile_title">Ajustes de las casillas de aplicaciones rápidas</string>
     <string name="pref_quickapp_default_title">Aplicación principal</string>
     <string name="pref_quickapp_slot1_title">Pulsación larga en aplicación 1</string>
     <string name="pref_quickapp_slot2_title">Pulsación larga en aplicación 2</string>
@@ -476,7 +476,7 @@
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Esperando respuesta del framework del sistema GravityBox&#8230;</string>
-    <string name="gb_startup_error">Framework del sistema GravityBox no responde. Saliendo...</string>
+    <string name="gb_startup_error">Framework del sistema GravityBox no responde. Saliendo&#8230;</string>
 
     <!-- National data roaming -->
     <string name="pref_national_roaming_title">Roaming de datos nacional</string>
@@ -638,8 +638,8 @@
     <string name="rambar_bottom">Abajo</string>
 
     <!-- HW Key actions for recents button -->
-    <string name="hwkey_recents_singletap_dialog_title">Acción con una pulsación en el botón de recientes</string>
-    <string name="hwkey_recents_longpress_dialog_title">Acción con pulsación prolongada en botón de recientes</string>
+    <string name="hwkey_recents_singletap_dialog_title">Acción con una pulsación en el botón multitarea</string>
+    <string name="hwkey_recents_longpress_dialog_title">Acción con pulsación prolongada en botón multitarea</string>
 
     <!-- Lockscreen battery arc -->
     <string name="pref_lockscreen_battery_arc_title">Mostrar arco de batería</string>
@@ -654,8 +654,8 @@
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Botón menú</string>
     <string name="pref_cat_hwkey_home_title">Botón inicio</string>
-    <string name="pref_cat_hwkey_back_title">Botón retroceso</string>
-    <string name="pref_cat_hwkey_recents_title">Botón recientes</string>
+    <string name="pref_cat_hwkey_back_title">Botón atrás</string>
+    <string name="pref_cat_hwkey_recents_title">Botón multitarea</string>
     <string name="pref_cat_hwkey_volume_title">Botones de volumen</string>
     <string name="pref_cat_hwkey_actions_others">Otros ajustes</string>
     <string name="pref_hwkey_longpress_title">Acción con pulsación prolongada</string>
@@ -672,8 +672,8 @@
     <string name="signal_color_mode_disabled">No aplicar color</string>
 
     <!-- Application launcher -->
-    <string name="pref_cat_app_launcher_title">Lanzador de aplicaciónes</string>
-    <string name="pref_cat_app_launcher_summary">Diálogo que permite definir hasta 8 aplicaciónes que pueden ser asignada a botones físicos o usadas como botones adicionales en la barra de navegación</string>
+    <string name="pref_cat_app_launcher_title">Lanzador de aplicaciones</string>
+    <string name="pref_cat_app_launcher_summary">Diálogo que permite definir hasta 8 aplicaciones que pueden ser asignada a botones físicos o usadas como botones adicionales en la barra de navegación</string>
     <string name="pref_app_launcher_slot_title">Aplicación %d</string>
     <string name="app_launcher_no_apps">No hay aplicaciones asignadas. Us GravityBox / menú de lanzador de aplicaciones para asignar apps.</string>
 
@@ -757,5 +757,25 @@
 
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Permitir modo de red LTE</string>
+	
+	<!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">Para habilitar el soporte de acciones en la barra de navegación, es necesario 
+        sobreescribir los ajustes predeterminados desde el menú de ajustes de la barra de navegación</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog">Se ha encontrado una versión antigua de GravityBox con nombre de paquete obsoleto. 
+        Ha de ser desinstalado para poder utilizar la nueva versión. GB intentará 
+        transferir tus antiguos ajustes a la nueva versión y después desinstalará la antigua. DEBES 
+        confirmar la desinstalación cuando se te pregunte. Después, activa el nuevo módulo en el Instalador Xposed 
+        y REINICIA INMEDIATAMENTE o experimentarás problemas de estabilidad del sistema.</string>
+    <string name="gb_new_package_settings_transfer_ok">Ajustes de GravityBox transferidos correctamente</string>
+    <string name="gb_new_package_settings_transfer_failed">La transferencia de ajustes a la nueva versión ha fallado</string>
+
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Linterna en pantalla de bloqueo</string>
+    <string name="hwkey_ls_torch_disabled">Desactivada</string>
+    <string name="hwkey_ls_torch_home_longpress">Con pulsación larga en botón inicio</string>
+    <string name="hwkey_ls_torch_voldown_longpress">Con pulsación larga en botón de bajar volumen</string>
+
 
 </resources>
