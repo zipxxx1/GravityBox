@@ -1,3 +1,30 @@
+Changelog 2.8.2 - 14/12/2013
+--------------------------------------
+- Added support for shortcuts to all App Picker preferences
+--- allows launching shortcuts from App Launcher, HW key actions, QuickApp tile, etc.
+- QuickSettings management:
+--- Added master switch for turning QS management on/off
+--- Option to choose modes of Ringer Mode tile (silent/vibrate/sound/sound&vibrate)
+--- Fixed Wifi and Mobile tile layout for Moto X (thanks to natezire71 for testing)
+--- Disabled tile spanning in landscape mode
+--- Fixed launching apps from QS panel while keyguard is showing
+--- Fixed rotation lock tile not showing until rebooted
+- Added "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP" to be utilized by taskers
+- Suppressed annoying immersive mode confirmations
+- Navigation Bar: option to swap Back and Recents keys
+- Lockscreen: Option to toggle torch on unlock ring handle long-press
+- Option to set dialog timeout of Volume Panel
+- Fixed Battery Arc level indication issues
+- Fixed layout of RAM bar and Clear All Recents button on landscape orientation
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Russian translations (thanks to smb.roman AKA romashko)
+- Updated French translation (thanks to ch-vox)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translations (thanks to Eric850130)
+- Updated German translations (thanks to Cthulhux & Napzter)
+
 Changelog 2.8.1 - 07/12/2013
 --------------------------------------
 - Changed package name to com.ceco.kitkat.gravitybox
