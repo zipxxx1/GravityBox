@@ -604,7 +604,7 @@ public class ModLockscreen {
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             mArcVisible = false;
 
-            if (mTorchEnabled) {
+            if (param.thisObject == mGlowPadView && mTorchEnabled) {
                 if (mHandler == null) {
                     mHandler = new Handler();
                 }
@@ -617,7 +617,7 @@ public class ModLockscreen {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             mArcVisible = true;
-            if (mHandler != null) {
+            if (param.thisObject == mGlowPadView && mHandler != null) {
                 mHandler.removeCallbacks(mToggleTorchRunnable);
             }
         }
