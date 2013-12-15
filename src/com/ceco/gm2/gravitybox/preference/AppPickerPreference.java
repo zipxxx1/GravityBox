@@ -28,6 +28,7 @@ import java.util.UUID;
 import com.ceco.gm2.gravitybox.GravityBoxSettings.PrefsFragment;
 import com.ceco.gm2.gravitybox.GravityBoxSettings.PrefsFragment.ShortcutHandler;
 import com.ceco.gm2.gravitybox.R;
+import com.ceco.gm2.gravitybox.Utils;
 import com.ceco.gm2.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.gm2.gravitybox.adapters.IconListAdapter;
 
@@ -384,7 +385,7 @@ public class AppPickerPreference extends DialogPreference
                 final String key = getKey();
                 mAppIcon = sAppIconCache.get(key);
                 if (mAppIcon == null) {
-                    Bitmap bitmap = ((BitmapDrawable)mResolveInfo.loadIcon(mPackageManager)).getBitmap();
+                    Bitmap bitmap = Utils.drawableToBitmap(mResolveInfo.loadIcon(mPackageManager));
                     bitmap = Bitmap.createScaledBitmap(bitmap, mAppIconSizePx, mAppIconSizePx, false);
                     mAppIcon = new BitmapDrawable(mResources, bitmap);
                     sAppIconCache.put(key, mAppIcon);
