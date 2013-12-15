@@ -39,7 +39,7 @@
     <string name="reboot_required">重新启动以后设置才会启用</string>
 
     <string name="poweroff_advanced_title">高级重新启动菜单</string>
-    <string name="poweroff_advanced_summary">启用重新启动 Recovery 选项高级菜单</string>
+    <string name="poweroff_advanced_summary">启用重新启和 Recovery 选项高级菜单</string>
     <string name="poweroff_recovery">Recovery</string>
     <string name="poweroff_bootloader">Bootloader</string>
 
@@ -168,7 +168,7 @@
 
     <!--  Low battery LED flashing -->
     <string name="pref_flashing_led_disable_title">停用 LED 闪烁</string>
-    <string name="pref_flashing_led_disable_summary">停掉当低电量且未充电时会出现扰人的 LED 闪烁</string>
+    <string name="pref_flashing_led_disable_summary">停用当低电量且未充电时会出现扰人的 LED 闪烁</string>
 
     <!-- Display tweaks category -->
     <string name="pref_cat_display_title">显示调整</string>
@@ -531,7 +531,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">覆盖默认磁贴行为</string>
-    <string name="pref_qs_tile_behaviour_override_summary">覆盖触摸/长按对应磁贴的行为（需要重新启动）</string>
+    <string name="pref_qs_tile_behaviour_override_summary">覆盖单击/长按对应磁贴的行为（需要重新启动）</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">网络模式磁贴 SIM 卡插槽</string>
