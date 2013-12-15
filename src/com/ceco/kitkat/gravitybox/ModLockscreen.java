@@ -687,7 +687,7 @@ public class ModLockscreen {
                 PackageManager pm = context.getPackageManager();
                 ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
                 appInfo.name = (String) ai.loadLabel(pm);
-                appIcon = ((BitmapDrawable)ai.loadIcon(pm)).getBitmap();
+                appIcon = Utils.drawableToBitmap(ai.loadIcon(pm));
             } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                 appInfo.name = appInfo.intent.getStringExtra("label");
                 final String appIconPath = appInfo.intent.getStringExtra("icon");

@@ -22,6 +22,7 @@ import java.util.List;
 
 import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.Utils;
 import com.ceco.kitkat.gravitybox.preference.AppPickerPreference;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -131,7 +132,7 @@ public class QuickAppTile extends BasicTile {
                 if (mode == AppPickerPreference.MODE_APP) {
                     ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
                     mAppName = ai.loadLabel(mPm).toString();
-                    appIcon = ((BitmapDrawable)ai.loadIcon(mPm)).getBitmap();
+                    appIcon = Utils.drawableToBitmap(ai.loadIcon(mPm));
                 } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                     mAppName = mIntent.getStringExtra("label");
                     final String appIconPath = mIntent.getStringExtra("icon");

@@ -28,6 +28,7 @@ import java.util.UUID;
 import com.ceco.kitkat.gravitybox.GravityBoxSettings.PrefsFragment;
 import com.ceco.kitkat.gravitybox.GravityBoxSettings.PrefsFragment.ShortcutHandler;
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.Utils;
 import com.ceco.kitkat.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.kitkat.gravitybox.adapters.IconListAdapter;
 
@@ -384,7 +385,7 @@ public class AppPickerPreference extends DialogPreference
                 final String key = getKey();
                 mAppIcon = sAppIconCache.get(key);
                 if (mAppIcon == null) {
-                    Bitmap bitmap = ((BitmapDrawable)mResolveInfo.loadIcon(mPackageManager)).getBitmap();
+                    Bitmap bitmap = Utils.drawableToBitmap(mResolveInfo.loadIcon(mPackageManager));
                     bitmap = Bitmap.createScaledBitmap(bitmap, mAppIconSizePx, mAppIconSizePx, false);
                     mAppIcon = new BitmapDrawable(mResources, bitmap);
                     sAppIconCache.put(key, mAppIcon);
