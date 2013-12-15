@@ -52,8 +52,8 @@
     <string name="quick_settings_torch_on">Ліхтарик увімк.</string>
     <string name="quick_settings_torch_off">Ліхтарик вимк.</string>
     <string name="quick_settings_torch_off_notif">Натисніть для вимкнення</string>
-    <string name="quick_settings_qr_playing">Відтворення...</string>
-    <string name="quick_settings_qr_recording">Запис...</string>
+    <string name="quick_settings_qr_playing">Відтворення&#8230;</string>
+    <string name="quick_settings_qr_recording">Запис&#8230;</string>
     <string name="quick_settings_qr_recorded">Записано</string>
     <string name="quick_settings_qr_record">Утримаєте для запису</string>
     <string name="quick_settings_qr_recording_notif">Торкніться щоб зупинити запис</string>
@@ -65,7 +65,7 @@
     <string name="quick_settings_wifi">Wi-Fi</string>
     <string name="quick_settings_wifi_off">Wi-Fi вимк.</string>
     <string name="quick_settings_wifi_not_connected">Чи не підключено</string>
-    <string name="quick_settings_wifi_turning_on">Включення...</string>
+    <string name="quick_settings_wifi_turning_on">Включення&#8230;</string>
     <string name="quick_settings_title">Іконки швидких налаштувань статусбару</string>
     <string name="quick_settings_summary">Дозволяє вмикати/вимикати іконки швидких налаштувань в статусбаре</string>
     <string name="qs_tile_user_profile">Профіль користувача</string>
@@ -321,7 +321,7 @@
     <string name="hwkey_action_custom_app_missing">Додаток не знайдено!</string>
     <string name="pref_clock_link_title">Додаток-годинник для панелі повідомлень</string>
     <string name="pref_clock_link_summary">"Пов'язує годинник на статусбаре з обраним додатком замість налаштувань Дати та часу"</string>
-    <string name="gb_startup_progress">Очікування відгуку від системного фреймворку GravityBox...</string>
+    <string name="gb_startup_progress">Очікування відгуку від системного фреймворку GravityBox&#8230;</string>
     <string name="gb_startup_error">Системний фреймворк GravityBox не відповідає. Вихід.</string>
     <string name="pref_national_roaming_title">Національний роумінг</string>
     <string name="pref_national_roaming_summary">Підключатися до служб передачі даних в національному роумінгу</string>
@@ -442,8 +442,6 @@
     <string name="pref_lockscreen_battery_arc_title">Статус батареї</string>
     <string name="pref_lockscreen_battery_arc_summary">Показувати арку батареї, намальовану навколо кільця розблокування</string>
     <string name="hwkey_action_torch">Включити ліхтарик</string>
-    <string name="pref_hwkey_home_longpress_keyguard_title">Ліхтарик по довгому натисненню Головна</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Включити ліхтарик при заблокованому пристрої. Екран повинен бути включений, якщо пристрій не може зчитувати натискання кнопки у сні</string>
     <string name="pref_volume_panel_autoexpand_title">Розширювати автоматично</string>
     <string name="pref_cat_hwkey_menu_title">Кнопка Меню</string>
     <string name="pref_cat_hwkey_home_title">Кнопка Додому</string>
