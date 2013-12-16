@@ -64,6 +64,11 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_DEV_OPTS, false)) {
                 FixDevOptions.initZygote();
             }
+
+            if ((Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR1) &&
+                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_FIX_LOCATION, false)) {
+                FixLocation.initZygote();
+            }
         }
 
         // 4.2+ only

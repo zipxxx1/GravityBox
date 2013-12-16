@@ -1304,6 +1304,12 @@
             android:summary="@string/fix_dev_opts_summary"
             android:defaultValue="false" />
 
+        <CheckBoxPreference
+            android:key="pref_fix_location"
+            android:title="@string/fix_location_title"
+            android:summary="@string/fix_location_summary"
+            android:defaultValue="false" />
+
     </PreferenceScreen>
 
     <Preference
