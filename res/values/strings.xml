@@ -787,4 +787,16 @@
     <string name="ringer_mode_sound">Sound</string>
     <string name="ringer_mode_sound_vibrate">Sound and vibrate</string>
 
+    <!-- Screen recording -->
+    <string name="screenrecord_notif_ticker">Screen is being recorded</string>
+    <string name="screenrecord_notif_title">Recording screen</string>
+    <string name="screenrecord_notif_stop">Stop</string>
+    <string name="screenrecord_notif_pointer">Toggle pointer</string>
+    <string name="screenrecord_toast_error">Unable to record screen</string>
+    <string name="screenrecord_toast_processing">Cannot start new recording as previous recording is still being processed</string>
+    <string name="screenrecord_toast_saved">Recording saved as %s</string>
+    <string name="screenrecord_toast_save_error">Unable to save recording to output file</string>
+    <string name="action_screenrecord">Screen record</string>
+    <string name="pref_powermenu_screenrecord_title">Screen record in power menu</string>
+
 </resources>

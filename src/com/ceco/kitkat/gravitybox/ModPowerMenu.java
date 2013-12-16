@@ -70,6 +70,7 @@ public class ModPowerMenu {
     private static Drawable mBootloaderIcon;
     private static Drawable mExpandedDesktopIcon;
     private static Drawable mScreenshotIcon;
+    private static Drawable mScreenrecordIcon;
     private static List<IIconListAdapterItem> mRebootItemList;
     private static String mRebootConfirmStr;
     private static String mRebootConfirmRecoveryStr;
@@ -78,10 +79,12 @@ public class ModPowerMenu {
     private static String mExpandedDesktopOnStr;
     private static String mExpandedDesktopOffStr;
     private static String mScreenshotStr;
+    private static String mScreenrecordStr;
     private static Unhook mRebootActionHook;
     private static Object mRebootActionItem;
     private static boolean mRebootActionItemStockExists;
     private static Object mScreenshotAction;
+    private static Object mScreenrecordAction;
     private static Object mExpandedDesktopAction;
 
     private static void log(String message) {
@@ -116,6 +119,7 @@ public class ModPowerMenu {
                    mExpandedDesktopOnStr = gbRes.getString(R.string.action_expanded_desktop_on);
                    mExpandedDesktopOffStr = gbRes.getString(R.string.action_expanded_desktop_off);
                    mScreenshotStr = gbRes.getString(R.string.screenshot);
+                   mScreenrecordStr = gbRes.getString(R.string.action_screenrecord);
 
                    mRebootIcon = gbRes.getDrawable(R.drawable.ic_lock_reboot);
                    mRebootSoftIcon = gbRes.getDrawable(R.drawable.ic_lock_reboot_soft);
@@ -123,6 +127,7 @@ public class ModPowerMenu {
                    mBootloaderIcon = gbRes.getDrawable(R.drawable.ic_lock_bootloader);
                    mExpandedDesktopIcon = gbRes.getDrawable(R.drawable.ic_lock_expanded_desktop);
                    mScreenshotIcon = gbRes.getDrawable(R.drawable.ic_lock_screenshot);
+                   mScreenrecordIcon = gbRes.getDrawable(R.drawable.ic_lock_screen_record);
 
                    mRebootItemList = new ArrayList<IIconListAdapterItem>();
                    mRebootItemList.add(new BasicIconListItem(mRebootStr, null, mRebootIcon, null));
@@ -249,6 +254,16 @@ public class ModPowerMenu {
                             if (DEBUG) log("mScreenshotAction created");
                         }
                         mItems.add(index++, mScreenshotAction);
+                    }
+
+                    // Add screenrecord action if enabled
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWERMENU_SCREENRECORD, false)) {
+                        if (mScreenrecordAction == null) {
+                            mScreenrecordAction = Proxy.newProxyInstance(classLoader, new Class<?>[] { actionClass },
+                                new ScreenrecordAction());
+                            if (DEBUG) log("mScreenrecordAction created");
+                        }
+                        mItems.add(index++, mScreenrecordAction);
                     }
 
                     // Add Expanded Desktop action if enabled
@@ -558,6 +573,69 @@ public class ModPowerMenu {
                 return true;
             } else {
                 log("ScreenshotAction: Unhandled invocation method: " + methodName);
+                return null;
+            }
+        }
+    }
+
+    private static class ScreenrecordAction implements InvocationHandler {
+        private Context mContext;
+
+        public ScreenrecordAction() {
+        }
+
+        private void takeScreenrecord() {
+            try {
+                Context gbContext = mContext.createPackageContext(
+                        GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+                Intent intent = new Intent(gbContext, ScreenRecordingService.class);
+                intent.setAction(ScreenRecordingService.ACTION_SCREEN_RECORDING_START);
+                gbContext.startService(intent);
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+        }
+
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            String methodName = method.getName();
+
+            if (methodName.equals("create")) {
+                mContext = (Context) args[0];
+                Resources res = mContext.getResources();
+                LayoutInflater li = (LayoutInflater) args[3];
+                int layoutId = res.getIdentifier(
+                        "global_actions_item", "layout", "android");
+                View v = li.inflate(layoutId, (ViewGroup) args[2], false);
+
+                ImageView icon = (ImageView) v.findViewById(res.getIdentifier(
+                        "icon", "id", "android"));
+                icon.setImageDrawable(mScreenrecordIcon);
+
+                TextView messageView = (TextView) v.findViewById(res.getIdentifier(
+                        "message", "id", "android"));
+                messageView.setText(mScreenrecordStr);
+
+                TextView statusView = (TextView) v.findViewById(res.getIdentifier(
+                        "status", "id", "android"));
+                statusView.setVisibility(View.GONE);
+
+                return v;
+            } else if (methodName.equals("onPress")) {
+                takeScreenrecord();
+                return null;
+            } else if (methodName.equals("onLongPress")) {
+                return true;
+            } else if (methodName.equals("showDuringKeyguard")) {
+                return true;
+            } else if (methodName.equals("showBeforeProvisioning")) {
+                return true;
+            } else if (methodName.equals("isEnabled")) {
+                return true;
+            } else if (methodName.equals("showConditional")) {
+                return true;
+            } else {
+                log("ScreenrecordAction: Unhandled invocation method: " + methodName);
                 return null;
             }
         }

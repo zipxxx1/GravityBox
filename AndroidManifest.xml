@@ -71,6 +71,8 @@
             </intent-filter>
         </service>
 
+        <service android:name="com.ceco.kitkat.gravitybox.ScreenRecordingService" />
+
         <meta-data
             android:name="xposedmodule"
             android:value="true" />
