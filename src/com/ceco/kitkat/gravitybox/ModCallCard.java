@@ -15,13 +15,21 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -33,6 +41,7 @@ public class ModCallCard {
         "com.google.android.dialer", "com.android.dialer"));
 
     private static final String CLASS_GLOWPAD_WRAPPER = "com.android.incallui.GlowPadWrapper";
+    private static final String CLASS_CALL_CARD_FRAGMENT = "com.android.incallui.CallCardFragment";
     private static final boolean DEBUG = false;
 
     private static void log(String message) {
@@ -55,6 +64,34 @@ public class ModCallCard {
                         ColorDrawable cd = new ColorDrawable(Color.argb(iAlpha, 0, 0, 0));
                         v.setBackground(cd);
                         if (DEBUG) log("GlowPadWrapper onFinishInflate: background color set");
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            final Class<?> classCallCardFragment = XposedHelpers.findClass(CLASS_CALL_CARD_FRAGMENT, classLoader);
+
+            XposedHelpers.findAndHookMethod(classCallCardFragment, "setDrawableToImageView",
+                    ImageView.class, Drawable.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE, false) ||
+                            param.args[1] != null) return;
+
+                    final Context context = ((View) param.args[0]).getContext();
+                    final Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+                    final String path = gbContext.getFilesDir() + "/caller_photo";
+                    File f = new File(path);
+                    if (f.exists() && f.canRead()) {
+                        Bitmap b = BitmapFactory.decodeFile(path);
+                        if (b != null) {
+                            param.args[1] = new BitmapDrawable(context.getResources(), b);
+                            if (DEBUG) log("Unknow caller photo set");
+                        }
                     }
                 }
             });

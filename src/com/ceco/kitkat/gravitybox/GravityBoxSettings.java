@@ -1058,8 +1058,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatPhone.removePreference(mPrefCatPhoneMobileData);
             mPrefCatPhoneTelephony.removePreference(mPrefPhoneFlip);
             mPrefCatPhoneTelephony.removePreference(mPrefCallVibrations);
-            mPrefCatPhoneTelephony.removePreference(mPrefCallerUnknownPhotoEnable);
-            mPrefCatPhoneTelephony.removePreference(mPrefCallerUnknownPhoto);
 
             // Features not relevant for KitKat but keep them for potential future use
             mPrefCatStatusbarColors.removePreference(mPrefSbDaColor);
