@@ -35,8 +35,8 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class ModCallCard {
-    private static final String TAG = "GB:ModCallCard";
+public class ModDialer {
+    private static final String TAG = "GB:ModDialer";
     public static final List<String> PACKAGE_NAMES = new ArrayList<String>(Arrays.asList(
         "com.google.android.dialer", "com.android.dialer"));
 
