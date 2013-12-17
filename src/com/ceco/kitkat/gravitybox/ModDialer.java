@@ -19,7 +19,9 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +31,8 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.view.View;
 import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
@@ -46,20 +50,138 @@ public class ModDialer {
     private static final String CLASS_DIALTACTS_ACTIVITY = "com.android.dialer.DialtactsActivity";
     private static final String CLASS_DIALTACTS_ACTIVITY_GOOGLE = 
             "com.google.android.dialer.extensions.GoogleDialtactsActivity";
+    private static final String CLASS_IN_CALL_PRESENTER = "com.android.incallui.InCallPresenter";
+    private static final String ENUM_IN_CALL_STATE = "com.android.incallui.InCallPresenter$InCallState";
+    private static final String CLASS_CALL_LIST = "com.android.incallui.CallList";
+    private static final String CLASS_CALL_CMD_CLIENT = "com.android.incallui.CallCommandClient";
     private static final boolean DEBUG = false;
+
+    private static XSharedPreferences mPrefsPhone;
+    private static int mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
+    private static Set<String> mCallVibrations;
+    private static Context mContext;
+    private static SensorManager mSensorManager;
+    private static boolean mSensorListenerAttached = false;
+    private static Object mIncomingCall;
+    private static Class<?> mClassCallCmdClient;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    private static PhoneSensorEventListener mPhoneSensorEventListener = 
+            new PhoneSensorEventListener(new PhoneSensorEventListener.ActionHandler() {
+        @Override
+        public void onFaceUp() {
+            if (DEBUG) log("PhoneSensorEventListener.onFaceUp");
+            // do nothing
+        }
+
+        @Override
+        public void onFaceDown() {
+            if (DEBUG) log("PhoneSensorEventListener.onFaceDown");
+
+            try {
+                switch (mFlipAction) {
+                    case GravityBoxSettings.PHONE_FLIP_ACTION_MUTE:
+                        if (DEBUG) log("Muting call");
+                        silenceRinger();
+                        break;
+                    case GravityBoxSettings.PHONE_FLIP_ACTION_DISMISS:
+                        if (DEBUG) log("Rejecting call");
+                        rejectCall(mIncomingCall);
+                        break;
+                    case GravityBoxSettings.PHONE_FLIP_ACTION_NONE:
+                    default:
+                        // do nothing
+                }
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+        }
+    });
+
+    private static void attachSensorListener() {
+        if (mSensorManager == null || 
+                mSensorListenerAttached ||
+                mFlipAction == GravityBoxSettings.PHONE_FLIP_ACTION_NONE) return;
+
+        mPhoneSensorEventListener.reset();
+        mSensorManager.registerListener(mPhoneSensorEventListener, 
+                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), 
+                SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorListenerAttached = true;
+
+        if (DEBUG) log("Sensor listener attached");
+    }
+
+    private static void detachSensorListener() {
+        if (mSensorManager == null || !mSensorListenerAttached) return;
+
+        mSensorManager.unregisterListener(mPhoneSensorEventListener);
+        mSensorListenerAttached = false;
+
+        if (DEBUG) log("Sensor listener detached");
+    }
+
+    private static void silenceRinger() {
+        try {
+            final Class<?> classSm = XposedHelpers.findClass("android.os.ServiceManager", null);
+            final Class<?> classITelephony = XposedHelpers.findClass(
+                    "com.android.internal.telephony.ITelephony.Stub", null);
+            final Object ts = XposedHelpers.callStaticMethod(classSm, "checkService", Context.TELEPHONY_SERVICE);            
+            final Object its = XposedHelpers.callStaticMethod(classITelephony, "asInterface", ts);
+            XposedHelpers.callMethod(its, "silenceRinger");
+        } catch(Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void rejectCall(Object call) {
+        if (call == null || 
+                mClassCallCmdClient == null) return;
+
+        try {
+            final Object callCmdClient = 
+                    XposedHelpers.callStaticMethod(mClassCallCmdClient, "getInstance");
+            if (callCmdClient != null) {
+                Class<?>[] pArgs = new Class<?>[] { call.getClass(), boolean.class, String.class };
+                XposedHelpers.callMethod(callCmdClient, "rejectCall", pArgs,
+                        call, false, null);
+                if (DEBUG) log("Call rejected");
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void refreshPhonePrefs() {
+        if (mPrefsPhone != null) {
+            mPrefsPhone.reload();
+            mCallVibrations = mPrefsPhone.getStringSet(
+                    GravityBoxSettings.PREF_KEY_CALL_VIBRATIONS, new HashSet<String>());
+            if (DEBUG) log("mCallVibrations = " + mCallVibrations.toString());
+
+            mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
+            try {
+                mFlipAction = Integer.valueOf(mPrefsPhone.getString(
+                        GravityBoxSettings.PREF_KEY_PHONE_FLIP, "0"));
+                if (DEBUG) log("mFlipAction = " + mFlipAction);
+            } catch (NumberFormatException e) {
+                XposedBridge.log(e);
+            }
+        }
+    }
+
     public static void init(final XSharedPreferences prefs, ClassLoader classLoader) {
+        mPrefsPhone = prefs;
+
         try {
             final Class<?> glowpadWrapperClass = XposedHelpers.findClass(CLASS_GLOWPAD_WRAPPER, classLoader);
 
             XposedHelpers.findAndHookMethod(glowpadWrapperClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    prefs.reload();
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false)) {
                         final View v = (View) param.thisObject;
                         float alpha = (float) prefs.getInt(
@@ -109,7 +231,7 @@ public class ModDialer {
             XposedHelpers.findAndHookMethod(classDialtactsActivity, "displayFragment", Intent.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    prefs.reload();
+                    refreshPhonePrefs();
                     if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_DIALER_SHOW_DIALPAD, false)) return;
 
                     Object dpFrag = XposedHelpers.getObjectField(param.thisObject, "mDialpadFragment");
@@ -128,6 +250,43 @@ public class ModDialer {
                 }
             });
         } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            final Class<?> classInCallPresenter = XposedHelpers.findClass(CLASS_IN_CALL_PRESENTER, classLoader);
+            final Class<? extends Enum> enumInCallState = (Class<? extends Enum>)
+                    XposedHelpers.findClass(ENUM_IN_CALL_STATE, classLoader);
+            mClassCallCmdClient = XposedHelpers.findClass(CLASS_CALL_CMD_CLIENT, classLoader);
+
+            XposedBridge.hookAllMethods(classInCallPresenter, "setUp", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    mContext = (Context) param.args[0];
+                    if (mSensorManager == null) {
+                        mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
+                        if (DEBUG) log("InCallPresenter.setUp(); mSensorManager created");
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classInCallPresenter, "getPotentialStateFromCallList",
+                    CLASS_CALL_LIST, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    Object state = param.getResult();
+                    if (DEBUG) log("InCallPresenter.getPotentialStateFromCallList(); InCallState = " + state);
+                    if (state == Enum.valueOf(enumInCallState, "INCOMING")) {
+                        refreshPhonePrefs();
+                        mIncomingCall = XposedHelpers.callMethod(param.args[0], "getIncomingCall");
+                        attachSensorListener();
+                    } else {
+                        mIncomingCall = null;
+                        detachSensorListener();
+                    }
+                }
+            });
+        } catch(Throwable t) {
             XposedBridge.log(t);
         }
     }
