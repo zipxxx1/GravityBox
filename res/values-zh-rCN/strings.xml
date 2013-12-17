@@ -104,7 +104,7 @@
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">状态栏快速设置</string>
-    <string name="quick_settings_summary">允许在状态栏中显示或隐藏快速设置标题</string>
+    <string name="quick_settings_summary">允许在状态栏中显示或隐藏快速设置磁贴</string>
     <string name="qs_tile_user_profile">用户配置文件</string>
     <string name="qs_tile_airplane_mode">飞行模式</string>
     <string name="qs_tile_battery">电池状态</string>
@@ -151,7 +151,7 @@
 
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">状态栏调整</string>
-    <string name="pref_cat_statusbar_summary">包含各种状态栏的调整选项</string>
+    <string name="pref_cat_statusbar_summary">包含各种关于状态栏的调整选项</string>
     <string name="pref_cat_misc_title">杂项调整</string>
     <string name="pref_cat_misc_summary">包含所有不属于特定类别的调整选项</string>
     <string name="pref_cat_fixes_title">通用修正</string>
@@ -184,7 +184,7 @@
 
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">锁屏画面调整</string>
-    <string name="pref_cat_lockscreen_summary">包含各种锁屏画面的调整选项</string>
+    <string name="pref_cat_lockscreen_summary">包含各种关于锁屏画面的调整选项</string>
     <string name="pref_cat_lockscreen_background_title">锁屏画面背景</string>
     <string name="pref_lockscreen_background_title">背景风格</string>
     <string name="lockscreen_bg_default">默认壁纸</string>
@@ -202,7 +202,7 @@
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">电源调整</string>
-    <string name="pref_cat_power_summary">包含各种电源相关的调整选项</string>
+    <string name="pref_cat_power_summary">包含各种关于电源相关的调整选项</string>
 
     <!--  Low battery LED flashing -->
     <string name="pref_flashing_led_disable_title">停用LED闪烁</string>
@@ -210,7 +210,7 @@
 
     <!-- Display tweaks category -->
     <string name="pref_cat_display_title">显示调整</string>
-    <string name="pref_cat_display_summary">包含各种显示相关的调整选项</string>
+    <string name="pref_cat_display_summary">包含各种关于显示相关的调整选项</string>
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">最低亮度级别</string>
@@ -250,7 +250,7 @@
 
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">媒体调整</string>
-    <string name="pref_cat_media_summary">包含各种媒体与声音系统的调整选项</string>
+    <string name="pref_cat_media_summary">包含各种关于媒体和声音系统的调整选项</string>
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">更多音量段数</string>
@@ -286,7 +286,7 @@
 
     <!--  Phone tweaks category -->
     <string name="pref_cat_phone_title">电话调整</string>
-    <string name="pref_cat_phone_summary">包含各种通话的调整选项</string>
+    <string name="pref_cat_phone_summary">包含各种关于通话的调整选项</string>
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">响铃时的手机翻转动作</string>
@@ -303,8 +303,8 @@
     <string name="pref_holo_bg_solid_black_summary">在默认的Holo系统主题内使用纯黑色的背景而不是黑-灰色的渐变（需要重新启动）</string>
 
     <!-- QuickSettings tiles per row -->
-    <string name="pref_qs_tiles_per_row_title">每行标题数</string>
-    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个标题，开关会根据您的设置自动缩放，适用于竖屏</string>
+    <string name="pref_qs_tiles_per_row_title">每行磁贴数</string>
+    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，开关会根据您的设置自动缩放，适用于竖屏</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">显示周</string>
@@ -334,7 +334,7 @@
 
     <!-- Disable volume rocker wake -->
     <string name="pref_volume_rocker_wake_disable_title">禁用音量键唤醒屏幕</string>
-    <string name="pref_volume_rocker_wake_disable_summary">佳域G3s和G4的实体音量键会唤醒屏幕</string>
+    <string name="pref_volume_rocker_wake_disable_summary">用于类似佳域G3s和G4的设备实体音量键会唤醒屏幕</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">状态栏颜色</string>
@@ -437,7 +437,7 @@
 
     <!-- QuickApp tile settings -->
     <string name="qs_tile_quickapp">快速应用</string>
-    <string name="pref_cat_quickapp_tile_title">快速应用标题设置</string>
+    <string name="pref_cat_quickapp_tile_title">快速应用磁贴设置</string>
     <string name="pref_quickapp_default_title">主应用</string>
     <string name="pref_quickapp_slot1_title">长按应用槽 1</string>
     <string name="pref_quickapp_slot2_title">长按应用槽 2</string>
@@ -596,12 +596,12 @@
     <string name="pref_display_allow_all_rotations_title">允许所有旋转方向</string>
 
     <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">覆盖默认标题行为</string>
-    <string name="pref_qs_tile_behaviour_override_summary">覆盖触摸/长按选定标题的行为（需要重新启动）</string>
+    <string name="pref_qs_tile_behaviour_override_title">覆盖默认磁贴行为</string>
+    <string name="pref_qs_tile_behaviour_override_summary">覆盖单击/长按选定磁贴的行为（需要重新启动）</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">网络模式标题SIM卡插槽</string>
-    <string name="pref_qs_network_mode_sim_slot_summary">定义的网络模式标题应用的SIM卡插槽（%s）</string>
+    <string name="pref_qs_network_mode_sim_slot_title">网络模式磁贴SIM卡插槽</string>
+    <string name="pref_qs_network_mode_sim_slot_summary">定义网络模式磁贴应用到SIM卡插槽（%s）</string>
     <string name="sim_slot1">SIM 卡1</string>
     <string name="sim_slot2">SIM 卡2</string>
 
@@ -621,7 +621,7 @@
 
     <!-- Mute volume adjust sound -->
     <string name="pref_volume_adjust_mute_title">静音音量调节音效</string>
-    <string name="pref_volume_adjust_mute_summary">禁用调节音量时发出音效</string>
+    <string name="pref_volume_adjust_mute_summary">禁用使用音量键调节音量时发出的提示音</string>
 
     <!-- Call vibrations -->
     <string name="pref_call_vibrations_title">通话振动</string>
@@ -631,8 +631,8 @@
     <string name="call_vibration_periodic">通话期间每45秒振动一次</string>
 
     <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">标题重新排序</string>
-    <string name="pref_qs_tile_order_summary">允许标题快速设置重新排序</string>
+    <string name="pref_qs_tile_order_title">磁贴重新排序</string>
+    <string name="pref_qs_tile_order_summary">允许磁贴快速设置重新排序</string>
 
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">应用通知拦截器</string>
@@ -646,7 +646,7 @@
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">快速解锁</string>
-    <string name="pref_lockscreen_quick_unlock_summary">当输入正确的PIN/密码时自动解锁</string>
+    <string name="pref_lockscreen_quick_unlock_summary">当输入正确的PIN或密码时自动解锁</string>
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">禁用</string>
@@ -657,7 +657,7 @@
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">状态栏锁定策略</string>
     <string name="sbl_policy_default">默认</string>
-    <string name="sbl_policy_unlocked">非保密锁定时可以解锁</string>
+    <string name="sbl_policy_unlocked">不安全锁定时可以解锁</string>
     <string name="sbl_policy_locked">锁定</string>
 
     <!-- Data traffic monitor -->
@@ -692,8 +692,8 @@
     <string name="rambar_bottom">底部</string>
 
     <!-- HW Key actions for recents button -->
-    <string name="hwkey_recents_singletap_dialog_title">单击最近键行为</string>
-    <string name="hwkey_recents_longpress_dialog_title">长按最近键行为</string>
+    <string name="hwkey_recents_singletap_dialog_title">单击最近任务键行为</string>
+    <string name="hwkey_recents_longpress_dialog_title">长按最近任务键行为</string>
 
     <!-- Lockscreen battery arc -->
     <string name="pref_lockscreen_battery_arc_title">显示电池弧光</string>
@@ -709,7 +709,7 @@
     <string name="pref_cat_hwkey_menu_title">菜单键</string>
     <string name="pref_cat_hwkey_home_title">主页键</string>
     <string name="pref_cat_hwkey_back_title">返回键</string>
-    <string name="pref_cat_hwkey_recents_title">最近键</string>
+    <string name="pref_cat_hwkey_recents_title">最近任务键</string>
     <string name="pref_cat_hwkey_volume_title">音量键</string>
     <string name="pref_cat_hwkey_actions_others">其它设置</string>
     <string name="pref_hwkey_longpress_title">长按动作</string>
@@ -726,7 +726,7 @@
     <string name="signal_color_mode_disabled">不使用颜色</string>
 
     <!-- Application launcher -->
-    <string name="pref_cat_app_launcher_title">应用启动器</string>
+    <string name="pref_cat_app_launcher_title">程序启动器</string>
     <string name="pref_cat_app_launcher_summary">对话框允许定义最多8个应用程序，可以分配实体按键或作为额外的虚拟按键</string>
     <string name="pref_app_launcher_slot_title">应用程序槽 %d</string>
     <string name="app_launcher_no_apps">没有应用程序被分配，请使用GravityBox程序启动器来分配应用</string>
@@ -807,8 +807,8 @@
     <string name="hwkey_action_back">返回</string>
 
     <!-- QS Tile Style -->
-    <string name="pref_qs_tile_style_title">标题风格</string>
-    <string name="pref_qs_tile_style_summary">仅适用于由GravityBox修改的标题(不影响原厂标题)</string>
+    <string name="pref_qs_tile_style_title">磁贴风格</string>
+    <string name="pref_qs_tile_style_summary">仅适用于由GravityBox修改的磁贴(不影响原厂磁贴)</string>
 
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">调整底部边距</string>
