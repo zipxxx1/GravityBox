@@ -33,6 +33,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Handler;
+import android.os.PowerManager;
+import android.os.Vibrator;
+import android.os.PowerManager.WakeLock;
 import android.view.View;
 import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
@@ -56,6 +60,10 @@ public class ModDialer {
     private static final String CLASS_CALL_CMD_CLIENT = "com.android.incallui.CallCommandClient";
     private static final boolean DEBUG = false;
 
+    private static final int CALL_STATE_ACTIVE = 2;
+    private static final int CALL_STATE_INCOMING = 3;
+    private static final int CALL_STATE_WAITING = 4;
+
     private static XSharedPreferences mPrefsPhone;
     private static int mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
     private static Set<String> mCallVibrations;
@@ -64,6 +72,10 @@ public class ModDialer {
     private static boolean mSensorListenerAttached = false;
     private static Object mIncomingCall;
     private static Class<?> mClassCallCmdClient;
+    private static Object mPreviousCallState;
+    private static Vibrator mVibrator;
+    private static Handler mHandler;
+    private static WakeLock mWakeLock;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -154,6 +166,28 @@ public class ModDialer {
             XposedBridge.log(t);
         }
     }
+
+    private static void vibrate(int v1, int p1, int v2) {
+        if (mVibrator == null) return;
+
+        long[] pattern = new long[] { 0, v1, p1, v2 };
+        mVibrator.vibrate(pattern, -1);
+    }
+
+    private static Runnable mPeriodicVibrator = new Runnable() {
+        @Override
+        public void run() {
+            if (mWakeLock != null) {
+                if (mWakeLock.isHeld()) {
+                    mWakeLock.release();
+                }
+                mWakeLock.acquire(61000);
+                if (DEBUG) log("Partial Wake Lock timeout extended");
+            }
+            vibrate(70, 0, 0);
+            mHandler.postDelayed(this, 60000);
+        }
+    };
 
     private static void refreshPhonePrefs() {
         if (mPrefsPhone != null) {
@@ -267,6 +301,43 @@ public class ModDialer {
                         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
                         if (DEBUG) log("InCallPresenter.setUp(); mSensorManager created");
                     }
+                    if (mVibrator == null) {
+                        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+                        if (DEBUG) log("InCallPresenter.setUp(); mVibrator created");
+                    }
+                    if (mHandler == null) {
+                        mHandler = new Handler();
+                    }
+                    if (mWakeLock == null) {
+                        PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+                        mWakeLock  = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+                    }
+                    mPreviousCallState = null;
+                }
+            });
+
+            XposedBridge.hookAllMethods(classInCallPresenter, "onIncomingCall", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    Integer state = (Integer) XposedHelpers.callMethod(param.args[0], "getState");
+                    if (DEBUG) log("onIncomingCall: state = " + state);
+                    if (state == CALL_STATE_INCOMING) {
+                        mIncomingCall = param.args[0];
+                        attachSensorListener();
+                    } else if (state == CALL_STATE_WAITING &&
+                            mCallVibrations.contains(GravityBoxSettings.CV_WAITING)) {
+                        vibrate(200, 300, 500);
+                    }
+                }
+            });
+
+            XposedBridge.hookAllMethods(classInCallPresenter, "onDisconnect", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mCallVibrations.contains(GravityBoxSettings.CV_DISCONNECTED)) {
+                        if (DEBUG) log("Call disconnected; executing vibrate on call disconnected");
+                        vibrate(50, 100, 50);
+                    }
                 }
             });
 
@@ -276,14 +347,51 @@ public class ModDialer {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Object state = param.getResult();
                     if (DEBUG) log("InCallPresenter.getPotentialStateFromCallList(); InCallState = " + state);
-                    if (state == Enum.valueOf(enumInCallState, "INCOMING")) {
+                    if (mPreviousCallState == null || 
+                            (mPreviousCallState == Enum.valueOf(enumInCallState, "NO_CALLS") &&
+                                state != Enum.valueOf(enumInCallState, "NO_CALLS"))) {
                         refreshPhonePrefs();
-                        mIncomingCall = XposedHelpers.callMethod(param.args[0], "getIncomingCall");
-                        attachSensorListener();
-                    } else {
+                    }
+
+                    if (state != Enum.valueOf(enumInCallState, "INCOMING")) {
                         mIncomingCall = null;
                         detachSensorListener();
+                    } 
+
+                    if (state == Enum.valueOf(enumInCallState, "INCALL")) {
+                        Object activeCall = XposedHelpers.callMethod(param.args[0], "getActiveCall");
+                        if (activeCall != null) {
+                            final int callState = (Integer) XposedHelpers.callMethod(activeCall, "getState");
+                            if (DEBUG) log("Call state is: " + callState);
+                            final boolean activeOutgoing = (callState == CALL_STATE_ACTIVE &&
+                                    mPreviousCallState == Enum.valueOf(enumInCallState, "OUTGOING"));
+                            if (activeOutgoing) {
+                                if (mCallVibrations.contains(GravityBoxSettings.CV_CONNECTED)) {
+                                    if (DEBUG) log("Outgoing call connected; executing vibrate on call connected");
+                                    vibrate(100, 0, 0);
+                                }
+                                if (mCallVibrations.contains(GravityBoxSettings.CV_PERIODIC) &&
+                                        mHandler != null) {
+                                    if (DEBUG) log("Outgoing call connected; starting periodic vibrations");
+                                    mHandler.postDelayed(mPeriodicVibrator, 45000);
+                                    if (mWakeLock != null) {
+                                        mWakeLock.acquire(46000);
+                                        if (DEBUG) log("Partial Wake Lock acquired");
+                                    }
+                                }
+                            }
+                        }
+                    } else if (state == Enum.valueOf(enumInCallState, "NO_CALLS")) {
+                        if (mHandler != null) {
+                            mHandler.removeCallbacks(mPeriodicVibrator);
+                        }
+                        if (mWakeLock != null && mWakeLock.isHeld()) {
+                            mWakeLock.release();
+                            if (DEBUG) log("Partial Wake Lock released");
+                        }
                     }
+
+                    mPreviousCallState = state;
                 }
             });
         } catch(Throwable t) {
