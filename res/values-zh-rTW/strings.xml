@@ -842,4 +842,8 @@
     <string name="ringer_mode_sound">聲音</string>
     <string name="ringer_mode_sound_vibrate">聲音與震動</string>
  
+    <!-- Fix location issue (Android 4.2.1 JIT bug) -->
+    <string name="fix_location_title">修正位置問題</string>
+    <string name="fix_location_summary">如果您發現您所安裝的運動應用程式計數器無法正確跟隨您的距離，請啟用此選項(需要重新啟動)</string>
+ 
 </resources>
