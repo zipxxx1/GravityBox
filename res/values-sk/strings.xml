@@ -822,4 +822,8 @@
     <string name="ringer_mode_sound">Zvoniť</string>
     <string name="ringer_mode_sound_vibrate">Zvoniť a vibrovať</string>
 
+    <!-- Fix location issue (Android 4.2.1 JIT bug) -->
+    <string name="fix_location_title">Opraviť GPS vzdialenosti</string>
+    <string name="fix_location_summary">Použiť v prípade zlého prepočítavania vzdialeností v treking aplikáciách (vyžaduje reštart)</string>
+
 </resources>
