@@ -1,3 +1,34 @@
+Changelog 2.8.2 - 17/12/2013
+--------------------------------------
+- Fix for wrong distance calculation (Android 4.2.1 and MTK only) (thanks to bgcngm)
+--- implements a workaround for Android 4.2.1 JIT bug, which mainly affects sports tracking apps
+--- no need for disabling Dalvik JIT anymore
+- Added support for shortcuts to all App Picker preferences
+--- allows launching shortcuts from App Launcher, HW key actions, QuickApp tile, etc.
+- Improved 'disable data network type icons' feature (thanks to bgcngm)
+--- now supports and overrides behaviour of any operator plugin (OPxxPlugin.apk) installed
+- QuickSettings management:
+--- Added master switch for turning QS management on/off
+--- Option to choose modes of Ringer Mode tile (silent/vibrate/sound/sound&vibrate)
+--- Disabled tile spanning in landscape mode
+--- Fixed launching apps from QS panel while keyguard is showing
+- Added "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP" to be utilized by taskers
+- Navigation Bar: option to swap Back and Recents keys
+- Further compatibility improvements for Lenovo devices running stock ROMs (thanks to bgcngm)
+--- another (eventual) fix for notification panel layout
+- Lockscreen: Option to toggle torch on unlock ring handle long-press
+- Option to set dialog timeout of Volume Panel
+- Fixed Battery Arc level indication issues
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Russian translations (thanks to smb.roman AKA romashko)
+- Updated French translation (thanks to ch-vox)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translations (thanks to Eric850130)
+- Updated German translations (thanks to Cthulhux & Napzter)
+- Updated Spanish translations (thanks to jvbferrer)
+
 Changelog 2.8.1 - 08/12/2013
 --------------------------------------
 - Torch improvements
