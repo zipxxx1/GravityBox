@@ -840,5 +840,9 @@
     <string name="ringer_mode_vibrate">Wibracje</string>
     <string name="ringer_mode_sound">Dźwięk</string>
     <string name="ringer_mode_sound_vibrate">Dźwięk i Wibracje</string>
+    
+    <!-- Fix location issue (Android 4.2.1 JIT bug) -->
+    <string name="fix_location_title">Napraw problem lokalizacji GPS</string>
+    <string name="fix_location_summary">Włącz w przypadku stwierdzenia, że odległość nie jest poprawnie obliczana przy użyciu aplikacji Sports Tracker (wymagny restart)</string>
 
 </resources>
