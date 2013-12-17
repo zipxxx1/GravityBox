@@ -62,7 +62,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModAudio.initZygote(prefs);
         ModHwKeys.initZygote(prefs);
 //        TODO: rework for KitKat compatibility
-//        ModCallCard.initZygote();
 //        ModPhone.initZygote(prefs);
         ModExpandedDesktop.initZygote(prefs);
         ConnectivityServiceWrapper.initZygote();
@@ -122,10 +121,9 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModPowerMenu.init(prefs, lpparam.classLoader);
         }
 
-//        TODO: rework for KitKat compatibility
-//        if (lpparam.packageName.equals(ModCallCard.PACKAGE_NAME)) {
-//            ModCallCard.init(prefs, lpparam.classLoader);
-//        }
+        if (ModCallCard.PACKAGE_NAMES.contains(lpparam.packageName)) {
+            ModCallCard.init(prefs, lpparam.classLoader);
+        }
 
         if (lpparam.packageName.equals(ModQuickSettings.PACKAGE_NAME) &&
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, true)) {

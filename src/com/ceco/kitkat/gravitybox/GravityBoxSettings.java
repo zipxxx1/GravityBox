@@ -117,6 +117,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_CAT_KEY_PHONE = "pref_cat_phone";
     public static final String PREF_KEY_CALLER_FULLSCREEN_PHOTO = "pref_caller_fullscreen_photo";
+    public static final String PREF_KEY_CALLER_PHOTO_VISIBILITY = "pref_caller_photo_visibility";
     public static final String PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE = "pref_caller_unknown_photo_enable";
     public static final String PREF_KEY_CALLER_UNKNOWN_PHOTO = "pref_caller_unknown_photo";
     public static final String PREF_KEY_NATIONAL_ROAMING = "pref_national_roaming";
@@ -1054,7 +1055,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // TODO: rework for KitKat compatibility
             getPreferenceScreen().removePreference(mPrefCatTransparencyManager);
             mPrefCatDisplay.removePreference(mPrefButtonBacklightNotif);
-            getPreferenceScreen().removePreference(mPrefCatPhone);
+            mPrefCatPhone.removePreference(mPrefCatPhoneMobileData);
+            mPrefCatPhoneTelephony.removePreference(mPrefPhoneFlip);
+            mPrefCatPhoneTelephony.removePreference(mPrefCallVibrations);
+            mPrefCatPhoneTelephony.removePreference(mPrefCallerUnknownPhotoEnable);
+            mPrefCatPhoneTelephony.removePreference(mPrefCallerUnknownPhoto);
 
             // Features not relevant for KitKat but keep them for potential future use
             mPrefCatStatusbarColors.removePreference(mPrefSbDaColor);
