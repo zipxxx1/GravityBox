@@ -946,6 +946,12 @@
                 android:key="pref_caller_unknown_photo"
                 android:title="@string/pref_caller_unknown_photo_title" />
 
+            <CheckBoxPreference 
+                android:key="pref_dialer_show_dialpad"
+                android:title="@string/pref_dialer_show_dialpad_title"
+                android:summary="@string/pref_dialer_show_dialpad_summary"
+                android:defaultValue="false" />
+
         </PreferenceCategory>
 
         <!--

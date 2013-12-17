@@ -16,18 +16,19 @@
 package com.ceco.kitkat.gravitybox;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
@@ -42,6 +43,9 @@ public class ModDialer {
 
     private static final String CLASS_GLOWPAD_WRAPPER = "com.android.incallui.GlowPadWrapper";
     private static final String CLASS_CALL_CARD_FRAGMENT = "com.android.incallui.CallCardFragment";
+    private static final String CLASS_DIALTACTS_ACTIVITY = "com.android.dialer.DialtactsActivity";
+    private static final String CLASS_DIALTACTS_ACTIVITY_GOOGLE = 
+            "com.google.android.dialer.extensions.GoogleDialtactsActivity";
     private static final boolean DEBUG = false;
 
     private static void log(String message) {
@@ -91,6 +95,34 @@ public class ModDialer {
                         if (b != null) {
                             param.args[1] = new BitmapDrawable(context.getResources(), b);
                             if (DEBUG) log("Unknow caller photo set");
+                        }
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            final Class<?> classDialtactsActivity = XposedHelpers.findClass(CLASS_DIALTACTS_ACTIVITY, classLoader);
+
+            XposedHelpers.findAndHookMethod(classDialtactsActivity, "displayFragment", Intent.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    prefs.reload();
+                    if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_DIALER_SHOW_DIALPAD, false)) return;
+
+                    Object dpFrag = XposedHelpers.getObjectField(param.thisObject, "mDialpadFragment");
+                    if (dpFrag != null) {
+                        final String realClassName = param.thisObject.getClass().getName();
+                        if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY)) {
+                            XposedHelpers.callMethod(param.thisObject, "showDialpadFragment", false);
+                            if (DEBUG) log("showDialpadFragment() called within " + realClassName);
+                        } else if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY_GOOGLE)) {
+                            final Class<?> superc = param.thisObject.getClass().getSuperclass();
+                            Method m = XposedHelpers.findMethodExact(superc, "showDialpadFragment", boolean.class);
+                            m.invoke(param.thisObject, false);
+                            if (DEBUG) log("showDialpadFragment() called within " + realClassName);
                         }
                     }
                 }
