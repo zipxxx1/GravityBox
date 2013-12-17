@@ -763,5 +763,24 @@
     <string name="ringer_mode_vibrate">Wibracje</string>
     <string name="ringer_mode_sound">Dźwięk</string>
     <string name="ringer_mode_sound_vibrate">Dźwięk i Wibracje</string>
+    
+    <!-- Screen recording -->
+    <string name="screenrecord_notif_ticker">Ekran jest nagrywany</string>
+    <string name="screenrecord_notif_title">Nagrywanie ekranu</string>
+    <string name="screenrecord_notif_stop">Stop</string>
+    <string name="screenrecord_notif_pointer">Przełącz wskaźnik</string>
+    <string name="screenrecord_toast_error">Nie można nagrywać ekranu</string>
+    <string name="screenrecord_toast_processing">Nie można rozpocząć nowego nagrania jeśli poprzednie nagranie jest nadal przetwarzane</string>
+    <string name="screenrecord_toast_saved">Nagranie zapisane jako %s</string>
+    <string name="screenrecord_toast_save_error">Nie można zapisać nagrania do pliku wyjściowego</string>
+    <string name="action_screenrecord">Nagrywanie ekranu</string>
+    <string name="pref_powermenu_screenrecord_title">Nagrywanie ekranu w menu zasilania</string>
+
+    <!-- Full screen caller visibility level -->
+    <string name="pref_caller_photo_visibility_title">Poziom widoczności zdjęcia</string>
+
+    <!-- Show dialpad automatically -->
+    <string name="pref_dialer_show_dialpad_title">Automatycznie pokaż klawiaturę telefonu</string>
+    <string name="pref_dialer_show_dialpad_summary">Automatycznie pokazuje klawiaturę telefonu po otwarciu aplikacji dialera</string>
 
 </resources>
