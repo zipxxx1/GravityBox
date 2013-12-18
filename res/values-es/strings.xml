@@ -12,15 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *
- * ******** TRANSLATION TO SPANISH (SPAIN) BY google.com/+JoseVicenteBustosFerrer
- *
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [KK]</string>
+    <string name="app_name">GravityBox</string>
 
     <string name="battery_style_title">Indicador de batería</string>	
     <string name="battery_style_stock">Predeterminado</string>
@@ -78,6 +74,10 @@
     <string name="quick_settings_expanded_desktop_expanded">Expandido</string>
     <string name="quick_settings_stay_awake_on">Permanecer despierto activado</string>
     <string name="quick_settings_stay_awake_off">Permanecer despierto desactivado</string>
+    <string name="quick_settings_wifi">Wi-Fi</string>
+    <string name="quick_settings_wifi_off">Wi-Fi desactivado</string>
+    <string name="quick_settings_wifi_not_connected">No conectado</string>
+    <string name="quick_settings_wifi_turning_on">Activando&#8230;</string>
     <string name="quick_settings_nfc_on">NFC activado</string>
     <string name="quick_settings_nfc_off">NFC desactivado</string>
 
@@ -87,12 +87,15 @@
     <string name="qs_tile_user_profile">Perfil de usuario</string>
     <string name="qs_tile_airplane_mode">Modo avión</string>
     <string name="qs_tile_battery">Estado de batería</string>
+    <string name="qs_tile_wifi">Wi-Fi</string>
+    <string name="qs_tile_wifi_alt">Wi-Fi (estilo CM)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Ubicación</string>
     <string name="qs_tile_gps_alt">GPS (estilo CM)</string>
     <string name="qs_tile_mobile_data">Datos móviles</string>
     <string name="qs_tile_network_mode">Modo de red</string>
     <string name="qs_tile_data_usage">Uso de datos</string>
+    <string name="qs_tile_audio">Perfiles de sonido</string>
     <string name="qs_tile_brightness">Brillo</string>
     <string name="qs_tile_screen_timeout">Tiempo de espera de pantalla</string>
     <string name="qs_tile_autorotation">Rotación automática</string>
@@ -363,6 +366,10 @@
     <string name="pref_button_backlight_notifications_title">Notificaciones en el botón de luz de fondo</string>
     <string name="pref_button_backlight_notifications_summary">EXPERIMENTAL! Blinks button backlight when there is a notification. Use in case your device lacks notification LED. May consume battery.</string>
 
+    <!-- Hide navigation bar for pie -->
+    <string name="pref_navbar_disable_title">Ocultar barra de navegación</string>
+    <string name="pref_navbar_disable_summary">Oculta la barra de navegación cuando se activan los controles \'Pie\' (para dispositivos con barra de navegación. Requiere reinicio)</string>
+
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Fondo Holo interpolado</string>
     <string name="pref_holo_bg_dither_summary">Reemplaza el fondo Holo estándar con otro interpolado para suprimir el \'color banding\' (requiere reinicio)</string>
@@ -465,7 +472,7 @@
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Esperando respuesta del framework del sistema GravityBox&#8230;</string>
-    <string name="gb_startup_error">Framework del sistema GravityBox no responde. Saliendo&#8230;</string>
+    <string name="gb_startup_error">Framework del sistema GravityBox no responde. Saliendo...</string>
 
     <!-- National data roaming -->
     <string name="pref_national_roaming_title">Roaming de datos nacional</string>
@@ -474,6 +481,7 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Modo escritorio expandido</string>
     <string name="expanded_desktop_disabled">Desactivado</string>
+    <string name="expanded_desktop_statusbar">Ocultar barra de estado</string>
     <string name="expanded_desktop_navbar">Ocultar barra de navegación</string>
     <string name="expanded_desktop_both">Ocultar ambas</string>
     <string name="action_expanded_desktop_title">Escritorio expandido</string>
@@ -521,6 +529,7 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telefonía</string>
+    <string name="pref_cat_phone_messaging_title">Mensajería</string>
     <string name="pref_cat_phone_mobile_data_title">Datos móviles</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
@@ -634,6 +643,10 @@
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Des/activar linterna</string>
+
+    <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
+    <string name="pref_hwkey_home_longpress_keyguard_title">Linterna con pulsación prolongada en botón de inicio</string>
+    <string name="pref_hwkey_home_longpress_keyguard_summary">Des/activa la linterna con el dispositivo bloqueado. La pantalla debe estar encendida si el dispositivo no permite despertar desde botón de inicio.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Expandir automáticamente</string>
@@ -764,5 +777,48 @@
     <string name="hwkey_ls_torch_home_longpress">Con pulsación larga en botón inicio</string>
     <string name="hwkey_ls_torch_voldown_longpress">Con pulsación larga en botón de bajar volumen</string>
 
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">Interruptor principal de la gestión de ajustes rápidos (requiere reinicio)</string>
 
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Aplicaciones</string>
+    <string name="app_picker_shortcuts">Accesos directos</string>
+    <string name="app_picker_shortcut_null_intent">Imposible crear acceso directo porque la actividad no devolvió el propósito del acceso directo</string>
+    <string name="app_picker_shortcut_cancelled">Creacción de acceso directo cancelada por la aplicación objetivo</string>
+
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">Intercambiar botones Atrás y Multitarea</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">Activar linterna</string>
+    <string name="pref_lockscreen_ring_torch_summary">Des/activa la linterna cuando se pulsa prolongadamente el anillo de desbloqueo</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Tiempo de espera del panel de volumen</string>
+
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">Modos de la casilla de modo de tono</string>
+    <string name="ringer_mode_silent">Silencio</string>
+    <string name="ringer_mode_vibrate">Vibrar</string>
+    <string name="ringer_mode_sound">Sonar</string>
+    <string name="ringer_mode_sound_vibrate">Sonar y vibrar</string>
+	
+	<!-- Screen recording -->
+    <string name="screenrecord_notif_ticker">Se está grabando la pantalla</string>
+    <string name="screenrecord_notif_title">Grabando pantalla</string>
+    <string name="screenrecord_notif_stop">Parar</string>
+    <string name="screenrecord_notif_pointer">Alternar puntero</string>
+    <string name="screenrecord_toast_error">Imposible grabar pantalla</string>
+    <string name="screenrecord_toast_processing">No se puede grabar aún porque la grabación anterior se está procesando</string>
+    <string name="screenrecord_toast_saved">Grabación guardada como %s</string>
+    <string name="screenrecord_toast_save_error">Imposible guardar grabación en el archivo de salida</string>
+    <string name="action_screenrecord">Grabar pantalla</string>
+    <string name="pref_powermenu_screenrecord_title">Grabar pantalla en menú de apagado</string>
+
+	<!-- Full screen caller visibility level -->
+    <string name="pref_caller_photo_visibility_title">Nivel de visibilidad de la foto</string>
+
+    <!-- Show dialpad automatically -->
+    <string name="pref_dialer_show_dialpad_title">Mostrar teclado numérico automáticamente</string>
+    <string name="pref_dialer_show_dialpad_summary">Muestra el teclado automáticamente al abrir la aplicación Teléfono</string>
 </resources>
