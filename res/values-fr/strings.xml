@@ -806,7 +806,7 @@
     <string name="pref_dialer_show_dialpad_summary">Affiche le pavé numérique automatiquement à l\'ouverture de l\'application de numérotation</string>
 
     <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Système par défaut</string>
+    <string name="screen_off_effect_default">Valeur système par défaut</string>
     <string name="screen_off_effect_crt">CRT</string>
     <string name="screen_off_effect_fade">Fondu</string>
 
