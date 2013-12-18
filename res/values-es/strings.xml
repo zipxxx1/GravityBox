@@ -16,7 +16,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox</string>
+    <string name="app_name">GravityBox [KK]</string>
 
     <string name="battery_style_title">Indicador de batería</string>	
     <string name="battery_style_stock">Predeterminado</string>
@@ -472,7 +472,7 @@
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Esperando respuesta del framework del sistema GravityBox&#8230;</string>
-    <string name="gb_startup_error">Framework del sistema GravityBox no responde. Saliendo...</string>
+    <string name="gb_startup_error">Framework del sistema GravityBox no responde. Saliendo&#8230;</string>
 
     <!-- National data roaming -->
     <string name="pref_national_roaming_title">Roaming de datos nacional</string>
@@ -821,4 +821,10 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostrar teclado numérico automáticamente</string>
     <string name="pref_dialer_show_dialpad_summary">Muestra el teclado automáticamente al abrir la aplicación Teléfono</string>
+	
+	    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">Predeterminado</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Difuminar</string>
+
 </resources>
