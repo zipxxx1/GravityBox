@@ -12,10 +12,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *
- * ******** TRANSLATION TO SPANISH (SPAIN) BY google.com/+JoseVicenteBustosFerrer
- *
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -767,6 +763,36 @@
     <string name="hwkey_ls_torch_disabled">Desactivada</string>
     <string name="hwkey_ls_torch_home_longpress">Con pulsación larga en botón inicio</string>
     <string name="hwkey_ls_torch_voldown_longpress">Con pulsación larga en botón de bajar volumen</string>
+
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">Interruptor principal de la gestión de ajustes rápidos (requiere reinicio)</string>
+
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Aplicaciones</string>
+    <string name="app_picker_shortcuts">Accesos directos</string>
+    <string name="app_picker_shortcut_null_intent">Imposible crear acceso directo porque la actividad no devolvió el propósito del acceso directo</string>
+    <string name="app_picker_shortcut_cancelled">Creacción de acceso directo cancelada por la aplicación objetivo</string>
+
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">Intercambiar botones Atrás y Multitarea</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">Activar linterna</string>
+    <string name="pref_lockscreen_ring_torch_summary">Des/activa la linterna cuando se pulsa prolongadamente el anillo de desbloqueo</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Tiempo de espera del panel de volumen</string>
+
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">Modos de la casilla de modo de tono</string>
+    <string name="ringer_mode_silent">Silencio</string>
+    <string name="ringer_mode_vibrate">Vibrar</string>
+    <string name="ringer_mode_sound">Sonar</string>
+    <string name="ringer_mode_sound_vibrate">Sonar y vibrar</string>
+     
+    <!-- Fix location issue (Android 4.2.1 JIT bug) -->
+    <string name="fix_location_title">Corregir problema de ubicación</string>
+    <string name="fix_location_summary">Actívalo si notas que la distancia no se calcula correctamente al usar aplicaciones deportivas de seguimiento (requiere reinicio)</string>
 
 
 </resources>
