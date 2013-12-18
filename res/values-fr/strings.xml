@@ -133,7 +133,7 @@
     <string name="reboot_confirm_bootloader">Votre %s va redémarrer en mode bootloader</string>
     
     <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Effet d\'extinction de l'écran</string>
+    <string name="crt_off_effect_title">Effet d\'extinction de l\'écran</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Mode ingénierie</string>
