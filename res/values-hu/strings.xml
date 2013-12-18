@@ -165,10 +165,6 @@
     <string name="reboot_confirm_recovery">A telefon Recovery módba fog újraindulni.</string>
     <string name="reboot_confirm_bootloader">A telefon Bootloader módba fog újraindulni.</string>
 	
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT kikapcsolási effekt</string>
-    <string name="crt_off_effect_summary">Animáció engedélyezése, ami a régi CRT kikapcsolási effektet szimulálja a képernyő kikapcsolásakor</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Tervező üzemmód</string>
     <string name="engineering_mode_summary">Elindítja a Tervező üzemmód programot</string>

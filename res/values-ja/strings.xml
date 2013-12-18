@@ -154,10 +154,6 @@
     <string name="reboot_confirm_recovery">%s をリカバリへ再起動します。</string>
     <string name="reboot_confirm_bootloader">%s をbootloaderへ再起動します。</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT画面オフ効果</string>
-    <string name="crt_off_effect_summary">画目オフ時にブラウン管テレビをオフにしたときのようなアニメーションを再生します。</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">開発者モード</string>
     <string name="engineering_mode_summary">開発者モードアプリを起動します。</string>

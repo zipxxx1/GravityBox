@@ -156,10 +156,6 @@
     <string name="reboot_confirm_recovery">您的 %s 將重新啟動至 Recovery 模式</string>
     <string name="reboot_confirm_bootloader">您的 %s 將重新啟動至 Bootloader 模式</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT 螢幕關閉特效</string>
-    <string name="crt_off_effect_summary">當螢幕關閉時，使用舊式 CRT 螢幕關閉時的特效</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">工程模式</string>
     <string name="engineering_mode_summary">啟動「工程模式」應用程式</string>

@@ -170,10 +170,6 @@
     <string name="reboot_confirm_recovery">Your %s will reboot into recovery.</string>
     <string name="reboot_confirm_bootloader">Your %s will reboot into bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT screen off effect</string>
-    <string name="crt_off_effect_summary">Enables animation that simulates old CRT off effect when turning off the screen</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
     <string name="engineering_mode_summary">Launches Engineering mode application</string>
@@ -872,5 +868,11 @@
     <string name="pref_launcher_desktop_grid_rows_title">Number of rows</string>
     <string name="pref_launcher_desktop_grid_cols_title">Number of columns</string>
     <string name="desktop_grid_default">Default</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_title">Screen off effect</string>
+    <string name="screen_off_effect_default">System default</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Fade</string>
 
 </resources>

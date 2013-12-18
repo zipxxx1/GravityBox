@@ -165,10 +165,6 @@
     <string name="reboot_confirm_recovery">Your %s will reboot into recovery.</string>
     <string name="reboot_confirm_bootloader">Your %s will reboot into bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">تأثير اطفاء الشاشة</string>
-    <string name="crt_off_effect_summary">تمكين الحركة التي تحاكي اطفاء شاشة التلفزيون القديم</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
     <string name="engineering_mode_summary">Launches Engineering mode application</string>

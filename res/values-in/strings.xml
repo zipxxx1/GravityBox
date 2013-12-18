@@ -167,10 +167,6 @@
     <string name="reboot_confirm_recovery">%s anda akan reboot ke recovery</string>
     <string name="reboot_confirm_bootloader">%s anda akan reboot ke bootloader</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Animasi layar mati CRT</string>
-    <string name="crt_off_effect_summary">Menhidupkan animasi yang meniru matinya layar CRT lama layar dimatikan</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
     <string name="engineering_mode_summary">Membuka aplikasi Engineering mode</string>

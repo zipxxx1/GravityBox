@@ -170,10 +170,6 @@
     <string name="reboot_confirm_recovery">Votre %s va redémarrer en mode récupération</string>
     <string name="reboot_confirm_bootloader">Votre %s va redémarrer en mode bootloader</string>
     
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Effet écran CRT</string>
-    <string name="crt_off_effect_summary">Active l\'animation qui simule l\'extinction des vieux moniteurs cathodiques lorsque vous éteignez l\'écran</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Mode ingénierie</string>
     <string name="engineering_mode_summary">Lance l\'application du mode ingénierie</string>

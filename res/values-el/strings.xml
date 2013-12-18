@@ -167,10 +167,6 @@
     <string name="reboot_confirm_recovery">Το %s θα κάνει επανεκκίνηση σε λειτ. Recovery.</string>
     <string name="reboot_confirm_bootloader">Το %s θα κάνει επανεκκίνηση σε λειτ. Bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Εφέ κλεισίματος CRT οθόνης</string>
-    <string name="crt_off_effect_summary">Ενεργοποιεί το εφέ προσομοίωσης σβησίματος παλιάς οθόνης CRT</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
     <string name="engineering_mode_summary">Ανοίγει την εφαρμογή Engineering mode</string>

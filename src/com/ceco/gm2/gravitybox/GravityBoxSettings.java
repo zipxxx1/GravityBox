@@ -166,7 +166,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_ABOUT_GPLUS = "pref_about_gplus";
     public static final String PREF_KEY_ABOUT_XPOSED = "pref_about_xposed";
     public static final String PREF_KEY_ABOUT_DONATE = "pref_about_donate";
-    public static final String PREF_KEY_CRT_OFF_EFFECT = "pref_crt_off_effect";
+    public static final String PREF_KEY_SCREEN_OFF_EFFECT = "pref_screen_off_effect";
     public static final String PREF_KEY_UNPLUG_TURNS_ON_SCREEN = "pref_unplug_turns_on_screen";
     public static final String PREF_KEY_ENGINEERING_MODE = "pref_engineering_mode";
     public static final String APP_MESSAGING = "com.android.mms";
@@ -749,7 +749,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatLockscreen;
         private PreferenceScreen mPrefCatDisplay;
         private PreferenceScreen mPrefCatBrightness;
-        private CheckBoxPreference mPrefCrtOff;
+        private ListPreference mPrefScreenOffEffect;
         private PreferenceScreen mPrefCatMedia;
         private CheckBoxPreference mPrefSafeMediaVolume;
         private ListPreference mPrefExpandedDesktop;
@@ -947,7 +947,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatLockscreen = (PreferenceScreen) findPreference(PREF_CAT_KEY_LOCKSCREEN);
             mPrefCatDisplay = (PreferenceScreen) findPreference(PREF_CAT_KEY_DISPLAY);
             mPrefCatBrightness = (PreferenceScreen) findPreference(PREF_CAT_KEY_BRIGHTNESS);
-            mPrefCrtOff = (CheckBoxPreference) findPreference(PREF_KEY_CRT_OFF_EFFECT);
+            mPrefScreenOffEffect = (ListPreference) findPreference(PREF_KEY_SCREEN_OFF_EFFECT);
             mPrefUnplugTurnsOnScreen = (CheckBoxPreference) findPreference(PREF_KEY_UNPLUG_TURNS_ON_SCREEN);
             mPrefCatMedia = (PreferenceScreen) findPreference(PREF_CAT_KEY_MEDIA);
             mPrefSafeMediaVolume = (CheckBoxPreference) findPreference(PREF_KEY_SAFE_MEDIA_VOLUME);
@@ -1125,7 +1125,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
                 mPrefCatStatusbar.removePreference(mPrefCatNotifDrawerStyle);
                 mPrefCatDisplay.removePreference(mPrefCatBrightness);
-                mPrefCatDisplay.removePreference(mPrefCrtOff);
+                mPrefCatDisplay.removePreference(mPrefScreenOffEffect);
                 mPrefCatMedia.removePreference(mPrefSafeMediaVolume);
             }
 
@@ -1497,6 +1497,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_VOLUME_PANEL_TIMEOUT)) {
                 mPrefVolumePanelTimeout.setSummary(mPrefVolumePanelTimeout.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_SCREEN_OFF_EFFECT)) {
+                mPrefScreenOffEffect.setSummary(mPrefScreenOffEffect.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS)) {

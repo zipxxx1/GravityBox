@@ -161,10 +161,6 @@
     <string name="reboot_confirm_recovery">Uw %s wilt herstarten in recovery.</string>
     <string name="reboot_confirm_bootloader">Uw %s wilt herstarten in bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT scherm uit effect</string>
-    <string name="crt_off_effect_summary">Stelt animatie die oude CRT simuleert off effect bij het uitzetten van het scherm</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Ingenieurs modus</string>
     <string name="engineering_mode_summary">Lanceert ingenieurs modus applicatie</string>

@@ -155,10 +155,6 @@
     <string name="reboot_confirm_recovery">O seu %s irá reiniciar em modo de recuperação.</string>
     <string name="reboot_confirm_bootloader">O seu %s irá reiniciar em modo bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Efeito CRT ao desligar</string>
-    <string name="crt_off_effect_summary">Simula o efeito CRT ao desligar o ecrã</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modo de Engenharia</string>
     <string name="engineering_mode_summary">Inicia aplicação Modo de Engenharia</string>

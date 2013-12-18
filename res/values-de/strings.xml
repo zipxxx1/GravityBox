@@ -152,10 +152,6 @@
     <string name="reboot_confirm_recovery">%s startet in die Recovery.</string>
     <string name="reboot_confirm_bootloader">%s startet in den Bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT-Effekt beim Ausschalten des Bildschirms</string>
-    <string name="crt_off_effect_summary">Aktiviert eine Animation, die das Ausschalten eines Röhrenmonitors simuliert, sobald der Bildschirm ausgeschaltet wird</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Entwicklermodus</string>
     <string name="engineering_mode_summary">Startet die Anwendung für den Entwicklermodus</string>

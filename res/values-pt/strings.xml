@@ -155,10 +155,6 @@
     <string name="reboot_confirm_recovery">O seu %s irá reiniciar em modo recuperação.</string>
     <string name="reboot_confirm_bootloader">O seu %s irá reiniciar em modo bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Efeito de TV antiga desligando</string>
-    <string name="crt_off_effect_summary">Habilita o efeito que simula tv antiga desligando quando desligar a tela</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modo Engenharia</string>
     <string name="engineering_mode_summary">Roda o aplicativo Modo Engenharia</string>

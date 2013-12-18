@@ -165,10 +165,6 @@
     <string name="reboot_confirm_recovery">%s Kurtarma modunda başlatılacak.</string>
     <string name="reboot_confirm_bootloader">%s Bootloader modunda başlatılacak.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Ekran kapanma efekti</string>
-    <string name="crt_off_effect_summary">Ekran kapandığında eski televizyonlardaki CRT kapanış efektini etkinleştirir</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Mühendis modu</string>
     <string name="engineering_mode_summary">Mühendis modu uygulamasını başlatır</string>

@@ -154,10 +154,6 @@
     <string name="reboot_confirm_recovery">Il %s si riavvierà in ripristino</string>
     <string name="reboot_confirm_bootloader">Il %s si riavvierà in Bootloader</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Effetto spegni schermo CRT</string>
-    <string name="crt_off_effect_summary">Abilita un\'animazione che simula l\'effetto spegnimento dei vecchi schermi CRT</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modalità Engineer</string>
     <string name="engineering_mode_summary">Lancia l\'applicazione Modalità Engineer</string>
