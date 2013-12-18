@@ -132,9 +132,8 @@
     <string name="reboot_confirm_recovery">Your %s will reboot into recovery.</string>
     <string name="reboot_confirm_bootloader">Your %s will reboot into bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT screen off effect</string>
-    <string name="crt_off_effect_summary">Enables animation that simulates old CRT off effect when turning off the screen</string>
+    <!-- Screen off effect -->
+    <string name="crt_off_effect_title">Screen off effect</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
@@ -805,5 +804,10 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Show dialpad automatically</string>
     <string name="pref_dialer_show_dialpad_summary">Shows dialpad automatically upon opening dialer app</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">System default</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Fade</string>
 
 </resources>

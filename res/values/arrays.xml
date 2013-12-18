@@ -600,4 +600,16 @@
         <item>3</item>
     </string-array>
 
+    <string-array name="screen_off_effect_entries" translatable="false">
+        <item>@string/screen_off_effect_default</item>
+        <item>@string/screen_off_effect_crt</item>
+        <item>@string/screen_off_effect_fade</item>
+    </string-array>
+
+    <string-array name="screen_off_effect_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>
