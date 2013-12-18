@@ -472,7 +472,7 @@
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Esperando respuesta del framework del sistema GravityBox&#8230;</string>
-    <string name="gb_startup_error">Framework del sistema GravityBox no responde. Saliendo...</string>
+    <string name="gb_startup_error">Framework del sistema GravityBox no responde. Saliendo&#8230;</string>
 
     <!-- National data roaming -->
     <string name="pref_national_roaming_title">Roaming de datos nacional</string>
@@ -803,7 +803,7 @@
     <string name="ringer_mode_sound">Sonar</string>
     <string name="ringer_mode_sound_vibrate">Sonar y vibrar</string>
 	
-	<!-- Screen recording -->
+    <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Se está grabando la pantalla</string>
     <string name="screenrecord_notif_title">Grabando pantalla</string>
     <string name="screenrecord_notif_stop">Parar</string>
@@ -815,10 +815,16 @@
     <string name="action_screenrecord">Grabar pantalla</string>
     <string name="pref_powermenu_screenrecord_title">Grabar pantalla en menú de apagado</string>
 
-	<!-- Full screen caller visibility level -->
+    <!-- Full screen caller visibility level -->
     <string name="pref_caller_photo_visibility_title">Nivel de visibilidad de la foto</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostrar teclado numérico automáticamente</string>
     <string name="pref_dialer_show_dialpad_summary">Muestra el teclado automáticamente al abrir la aplicación Teléfono</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">Predeterminado</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Difuminar</string>
+    
 </resources>
