@@ -184,7 +184,7 @@ public class ModDialer {
                 mWakeLock.acquire(61000);
                 if (DEBUG) log("Partial Wake Lock timeout extended");
             }
-            vibrate(70, 0, 0);
+            vibrate(50, 0, 0);
             mHandler.postDelayed(this, 60000);
         }
     };
