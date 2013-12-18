@@ -117,9 +117,8 @@
     <string name="reboot_confirm_recovery">O seu %s irá reiniciar em modo de recuperação.</string>
     <string name="reboot_confirm_bootloader">O seu %s irá reiniciar em modo bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Efeito CRT ao desligar</string>
-    <string name="crt_off_effect_summary">Simula o efeito CRT ao desligar o ecrã</string>
+    <!-- Screen off effect -->
+    <string name="crt_off_effect_title">Efeito ao desligar</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modo de Engenharia</string>
@@ -770,5 +769,29 @@
     <string name="ringer_mode_vibrate">Vibrar</string>
     <string name="ringer_mode_sound">Tocar</string>
     <string name="ringer_mode_sound_vibrate">Tocar e vibrar</string>
+
+    <!-- Screen recording -->
+    <string name="screenrecord_notif_ticker">Gravação de ecrã a decorrer</string>
+    <string name="screenrecord_notif_title">A gravar</string>
+    <string name="screenrecord_notif_stop">Parar</string>
+    <string name="screenrecord_notif_pointer">Comutar ponteiro</string>
+    <string name="screenrecord_toast_error">Não foi possível iniciar gravação</string>
+    <string name="screenrecord_toast_processing">Não é possível iniciar uma nova gravação enquanto a anterior estiver a ser processada</string>
+    <string name="screenrecord_toast_saved">Gravação guardada como %s</string>
+    <string name="screenrecord_toast_save_error">Não foi possível guardar gravação no ficheiro destino</string>
+    <string name="action_screenrecord">Gravação de ecrã</string>
+    <string name="pref_powermenu_screenrecord_title">Gravação de ecrã no Menu Desligar</string>
+
+    <!-- Full screen caller visibility level -->
+    <string name="pref_caller_photo_visibility_title">Visibilidade da imagem de contato</string>
+
+    <!-- Show dialpad automatically -->
+    <string name="pref_dialer_show_dialpad_title">Mostar marcador automaticamente</string>
+    <string name="pref_dialer_show_dialpad_summary">Permite mostrar o marcador automaticamente após lançar a aplicação de telefone</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">Padrão</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Desvanescente</string>
 
 </resources>
