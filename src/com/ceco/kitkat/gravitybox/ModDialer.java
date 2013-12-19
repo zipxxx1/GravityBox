@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -58,6 +59,7 @@ public class ModDialer {
     private static final String ENUM_IN_CALL_STATE = "com.android.incallui.InCallPresenter$InCallState";
     private static final String CLASS_CALL_LIST = "com.android.incallui.CallList";
     private static final String CLASS_CALL_CMD_CLIENT = "com.android.incallui.CallCommandClient";
+    private static final String CLASS_CALL_BUTTON_FRAGMENT = "com.android.incallui.CallButtonFragment";
     private static final boolean DEBUG = false;
 
     private static final int CALL_STATE_ACTIVE = 2;
@@ -207,11 +209,24 @@ public class ModDialer {
         }
     }
 
-    public static void init(final XSharedPreferences prefs, ClassLoader classLoader) {
+    public static void init(final XSharedPreferences prefs, ClassLoader classLoader, final String packageName) {
         mPrefsPhone = prefs;
 
         try {
             final Class<?> glowpadWrapperClass = XposedHelpers.findClass(CLASS_GLOWPAD_WRAPPER, classLoader);
+            final Class<?> classCallButtonFragment = XposedHelpers.findClass(CLASS_CALL_BUTTON_FRAGMENT, classLoader); 
+
+            XposedHelpers.findAndHookMethod(classCallButtonFragment, "setEnabled", boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    final View view = ((Fragment)param.thisObject).getView();
+                    if (view != null) {
+                        final boolean shouldHide = !(Boolean) param.args[0] &&
+                                prefs.getBoolean(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false);
+                        view.setVisibility(shouldHide ? View.GONE : View.VISIBLE);
+                    }
+                }
+            });
 
             XposedHelpers.findAndHookMethod(glowpadWrapperClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
