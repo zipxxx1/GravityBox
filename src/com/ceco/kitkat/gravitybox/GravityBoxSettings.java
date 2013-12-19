@@ -158,6 +158,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_UNPLUG_TURNS_ON_SCREEN = "pref_unplug_turns_on_screen";
     public static final String PREF_KEY_ENGINEERING_MODE = "pref_engineering_mode";
     public static final String APP_MESSAGING = "com.android.mms";
+    public static final String APP_STOCK_LAUNCHER = "com.android.launcher3";
+    public static final String APP_GOOGLE_HOME = "com.google.android.launcher";
+    public static final String APP_GOOGLE_NOW = "com.google.android.googlequicksearchbox";
     public static final String APP_ENGINEERING_MODE = "com.mediatek.engineermode";
     public static final String APP_ENGINEERING_MODE_CLASS = "com.mediatek.engineermode.EngineerMode";
     public static final String PREF_KEY_DUAL_SIM_RINGER = "pref_dual_sim_ringer";
@@ -491,6 +494,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_APP_LAUNCHER_SLOT = "appLauncherSlot";
     public static final String EXTRA_APP_LAUNCHER_APP = "appLauncherApp";
 
+    public static final String PREF_CAT_LAUNCHER_TWEAKS = "pref_cat_launcher_tweaks";
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS = "pref_launcher_desktop_grid_rows";
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS = "pref_launcher_desktop_grid_cols";
 
@@ -802,6 +806,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceCategory mPrefCatHwKeyOthers;
         private PreferenceCategory mPrefCatLsOther;
         private CheckBoxPreference mPrefLsRingTorch;
+        private PreferenceScreen mPrefCatLauncherTweaks;
         private ListPreference mPrefLauncherDesktopGridRows;
         private ListPreference mPrefLauncherDesktopGridCols;
 
@@ -1012,6 +1017,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatLsOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_OTHER);
             mPrefLsRingTorch = (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_RING_TORCH);
 
+            mPrefCatLauncherTweaks = (PreferenceScreen) findPreference(PREF_CAT_LAUNCHER_TWEAKS);
             mPrefLauncherDesktopGridRows = (ListPreference) findPreference(PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS);
             mPrefLauncherDesktopGridCols = (ListPreference) findPreference(PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS);
 
@@ -1035,6 +1041,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (!Utils.isAppInstalled(getActivity(), APP_MESSAGING) && mPrefCatPhoneMessaging != null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
+            }
+            if ((Utils.isAppInstalled(getActivity(), APP_GOOGLE_NOW) &
+                    !Utils.isAppInstalled(getActivity(), APP_GOOGLE_HOME)) &&
+                    !Utils.isAppInstalled(getActivity(), APP_STOCK_LAUNCHER)) {
+                getPreferenceScreen().removePreference(mPrefCatLauncherTweaks);
             }
             if (Utils.isWifiOnly(getActivity())) {
                 // Remove preferences that don't apply to wifi-only devices
