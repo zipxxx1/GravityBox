@@ -50,7 +50,6 @@ public class ModDialer {
     public static final List<String> PACKAGE_NAMES = new ArrayList<String>(Arrays.asList(
         "com.google.android.dialer", "com.android.dialer"));
 
-    private static final String CLASS_GLOWPAD_WRAPPER = "com.android.incallui.GlowPadWrapper";
     private static final String CLASS_CALL_CARD_FRAGMENT = "com.android.incallui.CallCardFragment";
     private static final String CLASS_DIALTACTS_ACTIVITY = "com.android.dialer.DialtactsActivity";
     private static final String CLASS_DIALTACTS_ACTIVITY_GOOGLE = 
@@ -60,6 +59,7 @@ public class ModDialer {
     private static final String CLASS_CALL_LIST = "com.android.incallui.CallList";
     private static final String CLASS_CALL_CMD_CLIENT = "com.android.incallui.CallCommandClient";
     private static final String CLASS_CALL_BUTTON_FRAGMENT = "com.android.incallui.CallButtonFragment";
+    private static final String CLASS_ANSWER_FRAGMENT = "com.android.incallui.AnswerFragment";
     private static final boolean DEBUG = false;
 
     private static final int CALL_STATE_ACTIVE = 2;
@@ -213,7 +213,7 @@ public class ModDialer {
         mPrefsPhone = prefs;
 
         try {
-            final Class<?> glowpadWrapperClass = XposedHelpers.findClass(CLASS_GLOWPAD_WRAPPER, classLoader);
+            final Class<?> classAnswerFragment = XposedHelpers.findClass(CLASS_ANSWER_FRAGMENT, classLoader);
             final Class<?> classCallButtonFragment = XposedHelpers.findClass(CLASS_CALL_BUTTON_FRAGMENT, classLoader); 
 
             XposedHelpers.findAndHookMethod(classCallButtonFragment, "setEnabled", boolean.class, new XC_MethodHook() {
@@ -228,18 +228,22 @@ public class ModDialer {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(glowpadWrapperClass, "onFinishInflate", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(classAnswerFragment, "showAnswerUi", boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!(Boolean) param.args[0]) return;
+
+                    refreshPhonePrefs();
+                    final View v = ((Fragment) param.thisObject).getView();
+                    int iAlpha = 255;
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false)) {
-                        final View v = (View) param.thisObject;
                         float alpha = (float) prefs.getInt(
                                 GravityBoxSettings.PREF_KEY_CALLER_PHOTO_VISIBILITY, 50) / 100f;
-                        int iAlpha = alpha == 0 ? 255 : (int) ((1-alpha)*255);
-                        ColorDrawable cd = new ColorDrawable(Color.argb(iAlpha, 0, 0, 0));
-                        v.setBackground(cd);
-                        if (DEBUG) log("GlowPadWrapper onFinishInflate: background color set");
+                        iAlpha = alpha == 0 ? 255 : (int) ((1-alpha)*255);
                     }
+                    ColorDrawable cd = new ColorDrawable(Color.argb(iAlpha, 0, 0, 0));
+                    v.setBackground(cd);
+                    if (DEBUG) log("AnswerFragment showAnswerUi: background color set");
                 }
             });
         } catch (Throwable t) {
