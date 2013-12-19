@@ -641,11 +641,11 @@
     <string name="pref_lockscreen_battery_arc_summary">Muestra un arco con el estado de la batería alrededor del anillo de desbloqueo</string>
 
     <!-- HW Key Actions: toggle torch -->
-    <string name="hwkey_action_torch">Des/activar linterna</string>
+    <string name="hwkey_action_torch">Activar/desactivar linterna</string>
 
     <!-- HW Key Actions: toggle torch on home key long-press while on lockscreen -->
     <string name="pref_hwkey_home_longpress_keyguard_title">Linterna con pulsación prolongada en botón de inicio</string>
-    <string name="pref_hwkey_home_longpress_keyguard_summary">Des/activa la linterna con el dispositivo bloqueado. La pantalla debe estar encendida si el dispositivo no permite despertar desde botón de inicio.</string>
+    <string name="pref_hwkey_home_longpress_keyguard_summary">Activa/desactiva la linterna con el dispositivo bloqueado. La pantalla debe estar encendida si el dispositivo no permite despertar desde botón de inicio.</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Expandir automáticamente</string>
@@ -790,7 +790,7 @@
 
     <!-- Unlock ring Torch -->
     <string name="pref_lockscreen_ring_torch_title">Activar linterna</string>
-    <string name="pref_lockscreen_ring_torch_summary">Des/activa la linterna cuando se pulsa prolongadamente el anillo de desbloqueo</string>
+    <string name="pref_lockscreen_ring_torch_summary">Activa/desactiva la linterna cuando se pulsa prolongadamente el anillo de desbloqueo</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Tiempo de espera del panel de volumen</string>
@@ -825,5 +825,17 @@
     <string name="screen_off_effect_default">Predeterminado</string>
     <string name="screen_off_effect_crt">CRT</string>
     <string name="screen_off_effect_fade">Difuminar</string>
+    
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Ajustes del lanzador</string>
+    <string name="pref_cat_launcher_tweaks_summary">Se aplica al lanzador predeterminado y a Google Experience Launcher</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Cuadrícula del escritorio</string>
+    <string name="pref_launcher_desktop_grid_info_title">Cambiar los valores predeterminados podría desajustar la posición y/o tamaño de los widgets. Requiere reiniciar el lanzador.</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Número de filas</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Número de columnas</string>
+    <string name="desktop_grid_default">Predeterminado</string>
+
+    <!-- HW Key Acctions: toggle screen recording -->
+    <string name="hwkey_action_screen_recording">Activar/desactivar grabar pantalla</string>
     
 </resources>
