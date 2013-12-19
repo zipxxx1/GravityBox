@@ -490,6 +490,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_APP_LAUNCHER_SLOT = "appLauncherSlot";
     public static final String EXTRA_APP_LAUNCHER_APP = "appLauncherApp";
 
+    public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS = "pref_launcher_desktop_grid_rows";
+    public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS = "pref_launcher_desktop_grid_cols";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -798,6 +801,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceCategory mPrefCatHwKeyOthers;
         private PreferenceCategory mPrefCatLsOther;
         private CheckBoxPreference mPrefLsRingTorch;
+        private ListPreference mPrefLauncherDesktopGridRows;
+        private ListPreference mPrefLauncherDesktopGridCols;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1005,6 +1010,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCatLsOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_OTHER);
             mPrefLsRingTorch = (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_RING_TORCH);
+
+            mPrefLauncherDesktopGridRows = (ListPreference) findPreference(PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS);
+            mPrefLauncherDesktopGridCols = (ListPreference) findPreference(PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS);
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
@@ -1388,6 +1396,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_CRT_OFF_EFFECT)) {
                 mPrefCrtOff.setSummary(mPrefCrtOff.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS)) {
+                mPrefLauncherDesktopGridRows.setSummary(mPrefLauncherDesktopGridRows.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS)) {
+                mPrefLauncherDesktopGridCols.setSummary(mPrefLauncherDesktopGridCols.getEntry());
             }
         }
 
