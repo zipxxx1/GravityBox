@@ -114,9 +114,8 @@
     <string name="reboot_confirm_recovery">%s をリカバリへ再起動します。</string>
     <string name="reboot_confirm_bootloader">%s をbootloaderへ再起動します。</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT画面オフ効果</string>
-    <string name="crt_off_effect_summary">画目オフ時にブラウン管テレビをオフにしたときのようなアニメーションを再生します。</string>
+    <!-- Screen off effect -->
+    <string name="crt_off_effect_title">画面オフ効果</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">開発者モード</string>
@@ -741,4 +740,57 @@
     <string name="app_picker_shortcut_null_intent">アクティビティがインテントを返さなかったためショートカットを作成できません。</string>
     <string name="app_picker_shortcut_cancelled">ショートカットの作成がキャンセルされました。</string>
     
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">バックと最近のアプリのキーを入れ替える</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">ライトの有効化</string>
+    <string name="pref_lockscreen_ring_torch_summary">ロック解除リングが長押しされた時にライトの有効/無効を切り替えます。</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">音量パネルを非表示にするまでの時間</string>
+
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">着信音モードタイル</string>
+    <string name="ringer_mode_silent">サイレント</string>
+    <string name="ringer_mode_vibrate">マナーモード</string>
+    <string name="ringer_mode_sound">通常</string>
+    <string name="ringer_mode_sound_vibrate">通常＋バイブ</string>
+
+    <!-- Screen recording -->
+    <string name="screenrecord_notif_ticker">画面を録画中です</string>
+    <string name="screenrecord_notif_title">画面録画中</string>
+    <string name="screenrecord_notif_stop">停止</string>
+    <string name="screenrecord_notif_pointer">ポインタトグル</string>
+    <string name="screenrecord_toast_error">録画できません</string>
+    <string name="screenrecord_toast_processing">前回の録画が進行中なので録画できません。</string>
+    <string name="screenrecord_toast_saved">録画を保存しました： %s</string>
+    <string name="screenrecord_toast_save_error">録画を保存できませんでした</string>
+    <string name="action_screenrecord">画面の録画</string>
+    <string name="pref_powermenu_screenrecord_title">電源メニューに画面の録画を追加</string>
+
+    <!-- Full screen caller visibility level -->
+    <string name="pref_caller_photo_visibility_title">写真の表示レベル</string>
+
+    <!-- Show dialpad automatically -->
+    <string name="pref_dialer_show_dialpad_title">ダイアルパッドを自動表示</string>
+    <string name="pref_dialer_show_dialpad_summary">電話アプリを開いた時に自動的にダイアルパッドを表示します。</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">デフォルト</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">フェード</string>
+
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">ランチャー調整</string>
+    <string name="pref_cat_launcher_tweaks_summary">標準ランチャーとGoogle Experience launcherに適用されます。</string>
+    <string name="pref_cat_launcher_desktop_grid_title">グリッド</string>
+    <string name="pref_launcher_desktop_grid_info_title">デフォルト以外の値を使うとウィジェットのレイアウトが崩れる場合があります。変更後はランチャーを再起動してください。</string>
+    <string name="pref_launcher_desktop_grid_rows_title">行数</string>
+    <string name="pref_launcher_desktop_grid_cols_title">段数</string>
+    <string name="desktop_grid_default">デフォルト</string>
+
+    <!-- HW Key Acctions: toggle screen recording -->
+    <string name="hwkey_action_screen_recording">画面録画のトグル</string>
+
 </resources>
