@@ -794,4 +794,16 @@
     <string name="screen_off_effect_crt">CRT</string>
     <string name="screen_off_effect_fade">Desvanescente</string>
 
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Ajustes do inicializador</string>
+    <string name="pref_cat_launcher_tweaks_summary">Contém ajustes relacionados com o inicializador, aplicável ao padrão ou ao Google Experience</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Grelha do ambiente de trabalho</string>
+    <string name="pref_launcher_desktop_grid_info_title">A utilização de valores diferentes dos pré-definidos pode causar problemas nos widgets, por isso use sabiamente. Após efetuar as alterações é necessário reiniciar o inicializador.</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Número de linhas</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Número de colunas</string>
+    <string name="desktop_grid_default">Padrão</string>
+
+    <!-- HW Key Actions: toggle screen recording -->
+    <string name="hwkey_action_screen_recording">Comutar gravação de ecrã</string>
+
 </resources>
