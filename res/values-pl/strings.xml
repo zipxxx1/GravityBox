@@ -748,7 +748,7 @@
     <string name="app_picker_shortcut_cancelled">Tworzenie skrótu anulowane przez aplikację docelową</string>
 
     <!-- Navigation bar: swap back and recents key -->
-    <string name="pref_navbar_swap_keys_title">Zamień miejscami klawisze BACK i Ostatnich Aplikacji</string>
+    <string name="pref_navbar_swap_keys_title">Zamień BACK z kl.Ostatnich Aplikacji</string>
 
     <!-- Unlock ring Torch -->
     <string name="pref_lockscreen_ring_torch_title">Włącz latarkę</string>
@@ -782,5 +782,22 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Automatycznie pokaż klawiaturę telefonu</string>
     <string name="pref_dialer_show_dialpad_summary">Automatycznie pokazuje klawiaturę telefonu po otwarciu aplikacji dialera</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">Domyślny systemu</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Przygasanie</string>
+
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Poprawki Startera Aplikacji</string>
+    <string name="pref_cat_launcher_tweaks_summary">Dotyczy standardowego startera aplikacji oraz Google Experience Launcher</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Siatka pulpitu</string>
+    <string name="pref_launcher_desktop_grid_info_title">Użycie wartości innych niż domyślne może zaburzyć układ widżetów. Należy używać rozważnie. Zmiany wymagają ponownego uruchomienia startera aplikacji</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Ilość wierszy</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Ilość kolumn</string>
+    <string name="desktop_grid_default">Domyślne</string>
+
+    <!-- HW Key Acctions: toggle screen recording -->
+    <string name="hwkey_action_screen_recording">Przełącz nagrywanie ekranu</string>
 
 </resources>
