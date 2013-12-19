@@ -864,4 +864,13 @@
     <string name="fix_location_title">Fix location issue</string>
     <string name="fix_location_summary">Enable in case you notice that distance is not being correctly calculated when using sports tracking apps (requires reboot)</string>
 
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Launcher tweaks</string>
+    <string name="pref_cat_launcher_tweaks_summary">Applies to Google Experience launcher only</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Desktop grid</string>
+    <string name="pref_launcher_desktop_grid_info_title">Using other values than default may break widgets\' layout. Use wisely. Changes require launcher to be restarted.</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Number of rows</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Number of columns</string>
+    <string name="desktop_grid_default">Default</string>
+
 </resources>
