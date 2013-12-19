@@ -838,4 +838,8 @@
     <string name="ringer_mode_sound">通常</string>
     <string name="ringer_mode_sound_vibrate">通常＋バイブ</string>
     
+    <!-- Fix location issue (Android 4.2.1 JIT bug) -->
+    <string name="fix_location_title">位置情報バグの修正</string>
+    <string name="fix_location_summary">スポーツ記録アプリなどで距離が正しく計算されない場合に有効にしてください。(要再起動)</string>
+    
 </resources>
