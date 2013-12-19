@@ -819,4 +819,7 @@
     <string name="pref_launcher_desktop_grid_cols_title">Number of columns</string>
     <string name="desktop_grid_default">Default</string>
 
+    <!-- HW Key Acctions: toggle screen recording -->
+    <string name="hwkey_action_screen_recording">Toggle screen recording</string>
+
 </resources>

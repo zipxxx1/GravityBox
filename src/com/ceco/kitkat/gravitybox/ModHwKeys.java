@@ -787,6 +787,8 @@ public class ModHwKeys {
             injectKey(KeyEvent.KEYCODE_HOME);
         } else if (action == GravityBoxSettings.HWKEY_ACTION_BACK) {
             injectKey(KeyEvent.KEYCODE_BACK);
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_SCREEN_RECORDING) {
+            toggleScreenRecording();
         }
     }
 
@@ -1032,5 +1034,15 @@ public class ModHwKeys {
                 mAppLauncher.showDialog();
             }
         });
+    }
+
+    private static void toggleScreenRecording() {
+        try {
+            Intent intent = new Intent(mGbContext, ScreenRecordingService.class);
+            intent.setAction(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING);
+            mGbContext.startService(intent);
+        } catch (Throwable t) {
+            log("Error toggling screen recording: " + t.getMessage());
+        }
     }
 }
