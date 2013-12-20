@@ -39,8 +39,7 @@
     <string name="important">Ważne</string>
 
     <string name="caller_fullscreen_photo_title">Fotografia dzwoniącego na pełnym ekranie</string>
-    <string name="caller_fullscreen_photo_summary">Wyświetla fotografię dzwoniącego na pełnym ekranie podczas rozmowy przychodzącej</string>
-
+ 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Włączono synchronizację</string>
     <string name="quick_settings_sync_off">Wyłączono synchronizację</string>
@@ -117,9 +116,8 @@
     <string name="reboot_confirm_recovery">Twój %s zostanie zrestartowany do trybu Recovery.</string>
     <string name="reboot_confirm_bootloader">Twój %s zostanie zrestartowany do trybu Bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Efekt wyłączenia ekranu CRT</string>
-    <string name="crt_off_effect_summary">Włącza animację imitującą efekt wyłączania ekranu CRT podczas wygaszania ekranu</string>
+    <!-- Screen off effect -->
+    <string name="crt_off_effect_title">Efekt wygaszania ekranu</string> 
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Tryb inżynierski</string>
@@ -776,9 +774,6 @@
     <string name="action_screenrecord">Nagrywanie ekranu</string>
     <string name="pref_powermenu_screenrecord_title">Nagrywanie ekranu w menu zasilania</string>
 
-    <!-- Full screen caller visibility level -->
-    <string name="pref_caller_photo_visibility_title">Poziom widoczności zdjęcia</string>
-
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Automatycznie pokaż klawiaturę telefonu</string>
     <string name="pref_dialer_show_dialpad_summary">Automatycznie pokazuje klawiaturę telefonu po otwarciu aplikacji dialera</string>
@@ -799,5 +794,10 @@
 
     <!-- HW Key Acctions: toggle screen recording -->
     <string name="hwkey_action_screen_recording">Przełącz nagrywanie ekranu</string>
+    
+    <!-- Full screen caller photo modes -->
+    <string name="fullscreen_caller_disabled">Wyłączona</string>
+    <string name="fullscreen_caller_partial">Fragment</string>
+    <string name="fullscreen_caller_full">Pełna</string>
 
 </resources>
