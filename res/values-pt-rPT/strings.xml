@@ -9,7 +9,6 @@
     <string name="battery_style_circle_percent">Indicador de bateria circular com percentagem</string>
     <string name="battery_style_kitkat">Indicador de bateria do KitKat</string>
     <string name="battery_style_kitkat_percent">Indicador de bateria do KitKat com percentagem</string>
-    <string name="battery_percent_text_title">Texto de percentagem de bateria</string>
     <string name="battery_style_none">Nenhum</string>
 
     <string name="vol_music_controls_title">Mudar de faixa utilizando teclas de volume</string>
@@ -859,5 +858,13 @@
     <string name="screen_off_effect_default">Padrão</string>
     <string name="screen_off_effect_crt">CRT</string>
     <string name="screen_off_effect_fade">Desvanescente</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">Texto de percentagem de bateria</string>
+    <string name="battery_percent_text_size_title">Tamanho do tipo de letra da percentagem</string>
+    <string name="battery_percent_text_size_normal">Normal</string>
+    <string name="battery_percent_text_size_smaller">Pequeno</string>
+    <string name="battery_percent_text_size_even_smaller">Mais pequeno</string>
+    <string name="battery_percent_text_size_smallest">Mínimo</string>
 
 </resources>
