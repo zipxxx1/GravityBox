@@ -830,4 +830,7 @@
     <string name="battery_percent_text_size_even_smaller">Even smaller</string>
     <string name="battery_percent_text_size_smallest">Smallest</string>
 
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">Battery settings</string>
+
 </resources>
