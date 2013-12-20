@@ -51,7 +51,7 @@
     <string name="fix_caller_id_phone_alert">Após reiniciar o telefone, deve limpar e readicionar os seus contatos para que a alteração possa ter efeito! Para isso, aceda a \"Definições / Aplicações / Todas\" para limpar os dados do Armazenamento de contatos.</string>
 
     <string name="fix_caller_id_mms_title">Corrigir problema na aplicação de mensagens</string>
-    <string name="fix_caller_id_mms_summary">Selecionar caso obtenha conversações divididas em varios tópicos para o mesmo contato (necessário reiniciar)</string>
+    <string name="fix_caller_id_mms_summary">Selecionar caso verifique que existem conversações divididas em vários tópicos para o mesmo contato (necessário reiniciar)</string>
     <string name="fix_caller_id_mms_alert">Após reiniciar o telefone, deve limpar todas as conversações divididas para que a alteração possa ter efeito!</string>
 
     <string name="fix_calendar_title">Corrigir problema na aplicação de calendário</string>
@@ -855,6 +855,7 @@
     <string name="desktop_grid_default">Padrão</string>
 
     <!-- Screen off effects -->
+    <string name="screen_off_effect_title">Efeito ao desligar ecrã</string>
     <string name="screen_off_effect_default">Padrão</string>
     <string name="screen_off_effect_crt">CRT</string>
     <string name="screen_off_effect_fade">Desvanescente</string>
