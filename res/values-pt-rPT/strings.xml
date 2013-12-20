@@ -39,7 +39,6 @@
     <string name="important">Importante</string>
 
     <string name="caller_fullscreen_photo_title">Imagem do contato em ecrã completo</string>
-    <string name="caller_fullscreen_photo_summary">Mostra a imagem do contato em ecrã completo quando recebe uma chamada</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sinc. ativada</string>
@@ -782,9 +781,6 @@
     <string name="action_screenrecord">Gravação de ecrã</string>
     <string name="pref_powermenu_screenrecord_title">Gravação de ecrã no Menu Desligar</string>
 
-    <!-- Full screen caller visibility level -->
-    <string name="pref_caller_photo_visibility_title">Visibilidade da imagem de contato</string>
-
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostar marcador automaticamente</string>
     <string name="pref_dialer_show_dialpad_summary">Permite mostrar o marcador automaticamente após lançar a aplicação de telefone</string>
@@ -805,5 +801,10 @@
 
     <!-- HW Key Actions: toggle screen recording -->
     <string name="hwkey_action_screen_recording">Comutar gravação de ecrã</string>
+
+    <!-- Full screen caller photo modes -->
+    <string name="fullscreen_caller_disabled">Desativado</string>
+    <string name="fullscreen_caller_partial">Parcial</string>
+    <string name="fullscreen_caller_full">Completo</string>
 
 </resources>
