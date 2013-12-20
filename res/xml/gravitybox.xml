@@ -519,6 +519,32 @@
         </PreferenceScreen>
 
         <PreferenceScreen
+            android:key="pref_cat_battery_settings"
+            android:title="@string/pref_cat_battery_settings_title">
+
+            <ListPreference
+                android:key="pref_battery_style" 
+                android:title="@string/battery_style_title" 
+                android:entries="@array/battery_style_entries"
+                android:entryValues="@array/battery_style_values"
+                android:defaultValue="1" />
+
+            <CheckBoxPreference 
+                android:key="pref_battery_percent_text"
+                android:title="@string/battery_percent_text_title"
+                android:defaultValue="false" />
+
+            <ListPreference
+                android:key="pref_battery_percent_text_size"
+                android:title="@string/battery_percent_text_size_title" 
+                android:entries="@array/battery_percent_text_size_entries"
+                android:entryValues="@array/battery_percent_text_size_values"
+                android:dependency="pref_battery_percent_text"
+                android:defaultValue="16" />
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
             android:key="pref_cat_clock_settings"
             android:title="@string/pref_cat_clock_settings_title">
 
@@ -588,26 +614,6 @@
             android:key="pref_ongoing_notifications"
             android:title="@string/pref_ongoing_notifications_title"
             android:summary="@string/pref_ongoing_notifications_summary" />
-
-        <ListPreference
-            android:key="pref_battery_style" 
-            android:title="@string/battery_style_title" 
-            android:entries="@array/battery_style_entries"
-            android:entryValues="@array/battery_style_values"
-            android:defaultValue="1" />
-
-        <CheckBoxPreference 
-            android:key="pref_battery_percent_text"
-            android:title="@string/battery_percent_text_title"
-            android:defaultValue="false" />
-
-        <ListPreference
-            android:key="pref_battery_percent_text_size"
-            android:title="@string/battery_percent_text_size_title" 
-            android:entries="@array/battery_percent_text_size_entries"
-            android:entryValues="@array/battery_percent_text_size_values"
-            android:dependency="pref_battery_percent_text"
-            android:defaultValue="16" />
 
         <CheckBoxPreference 
             android:key="pref_statusbar_brightness"
