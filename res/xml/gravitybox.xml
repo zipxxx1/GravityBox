@@ -921,11 +921,12 @@
                 android:entryValues="@array/call_vibration_values"
                 android:defaultValue="@array/empty_array" />
 
-            <CheckBoxPreference 
-                android:key="pref_caller_fullscreen_photo"
+            <ListPreference 
+                android:key="pref_caller_fullscreen_photo2"
                 android:title="@string/caller_fullscreen_photo_title"
-                android:summary="@string/caller_fullscreen_photo_summary"
-                android:defaultValue="false" />
+                android:entries="@array/fullscreen_caller_entries"
+                android:entryValues="@array/fullscreen_caller_values"
+                android:defaultValue="disabled" />
 
             <CheckBoxPreference 
                 android:key="pref_caller_unknown_photo_enable"

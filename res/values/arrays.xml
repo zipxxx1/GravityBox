@@ -640,4 +640,16 @@
         <item>6</item>
     </string-array>
 
+    <string-array name="fullscreen_caller_entries" translatable="false">
+        <item>@string/fullscreen_caller_disabled</item>
+        <item>@string/fullscreen_caller_partial</item>
+        <item>@string/fullscreen_caller_full</item>
+    </string-array>
+
+    <string-array name="fullscreen_caller_values" translatable="false">
+        <item>disabled</item>
+        <item>partial</item>
+        <item>full</item>
+    </string-array>
+
 </resources>

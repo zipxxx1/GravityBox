@@ -38,7 +38,6 @@
     <string name="important">Dôležité</string>
 
     <string name="caller_fullscreen_photo_title">Foto volajúceho na celú obrazovku</string>
-    <string name="caller_fullscreen_photo_summary">Zobrazí foto volajúceho na celú obrazovku počas prijímania hovoru</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Synch zap</string>

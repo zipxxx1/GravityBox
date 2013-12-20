@@ -221,10 +221,11 @@ public class ModDialer {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final View view = ((Fragment)param.thisObject).getView();
-                    if (view != null) {
-                        final boolean shouldHide = !(Boolean) param.args[0] &&
-                                prefs.getBoolean(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false);
-                        view.setVisibility(shouldHide ? View.GONE : View.VISIBLE);
+                    final String fscPref = prefs.getString(
+                            GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, "disabled");
+                    if (view != null && !(Boolean)param.args[0] && !fscPref.equals("disabled")) {
+                        final int visibility = fscPref.equals("partial") ? View.INVISIBLE : View.GONE;
+                        view.setVisibility(visibility);
                     }
                 }
             });
@@ -236,8 +237,8 @@ public class ModDialer {
 
                     refreshPhonePrefs();
                     final View v = ((Fragment) param.thisObject).getView();
-                    int color = prefs.getBoolean(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false) ?
-                            0 : Color.BLACK; 
+                    int color = prefs.getString(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, 
+                            "disabled").equals("disabled") ? Color.BLACK : 0; 
                     v.setBackgroundColor(color);
                     if (DEBUG) log("AnswerFragment showAnswerUi: background color set");
                 }
