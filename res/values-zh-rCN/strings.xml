@@ -54,7 +54,6 @@
     <string name="important">重要</string>
 
     <string name="caller_fullscreen_photo_title">全屏来电者照片</string>
-    <string name="caller_fullscreen_photo_summary">在来电画面内全屏显示来电者的照片</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">同步开启</string>
@@ -74,7 +73,7 @@
     <string name="quick_settings_expanded_desktop_expanded">扩展</string>
     <string name="quick_settings_stay_awake_on">保持唤醒开启</string>
     <string name="quick_settings_stay_awake_off">保持唤醒关闭</string>
-	<string name="quick_settings_nfc_on">NFC 开启</string>
+    <string name="quick_settings_nfc_on">NFC 开启</string>
     <string name="quick_settings_nfc_off">NFC 关闭</string>
 
     <!--  QuickSettings settings -->
@@ -103,7 +102,7 @@
     <string name="qs_tile_expanded_desktop">扩展桌面</string>
     <string name="qs_tile_stay_awake">保持唤醒</string>
     <string name="qs_tile_screenshot">屏幕截图</string>
-	<string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_nfc">NFC</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">颜色选择器</string>
@@ -131,10 +130,9 @@
     <string name="reboot_confirm">您的%s将重新启动</string>
     <string name="reboot_confirm_recovery">您的%s将重新启动至 Recovery</string>
     <string name="reboot_confirm_bootloader">您的%s将重新启动至 Bootloader</string>
-
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT 屏幕关闭特效</string>
-    <string name="crt_off_effect_summary">当屏幕关闭时使用旧式 CRT 屏幕关闭时的特效</string>
+    
+    <!-- Screen off effect -->
+    <string name="crt_off_effect_title">关闭屏幕效果</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">工程模式</string>
@@ -753,6 +751,7 @@
 	请在 Xposed 安装器中激活新模块并立即重新启动，否则你可能会遇到系统的稳定性问题。</string>
     <string name="gb_new_package_settings_transfer_ok">GravityBox 设置转移成功</string>
     <string name="gb_new_package_settings_transfer_failed">GravityBox 设置转移失败</string>
+    
 
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">锁屏手电筒</string>
@@ -798,11 +797,30 @@
     <string name="action_screenrecord">屏幕录制</string>
     <string name="pref_powermenu_screenrecord_title">电源键菜单屏幕录制</string>
 
-    <!-- Full screen caller visibility level -->
-    <string name="pref_caller_photo_visibility_title">照片能见度级别</string>
-
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">自动显示拨号盘</string>
     <string name="pref_dialer_show_dialpad_summary">打开拨号程序时自动显示拨号盘</string>
+    
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">系统默认</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">淡出</string>
+
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">启动器调整</string>
+    <string name="pref_cat_launcher_tweaks_summary">仅适用于谷歌体验启动器</string>
+    <string name="pref_cat_launcher_desktop_grid_title">桌面网格</string>
+    <string name="pref_launcher_desktop_grid_info_title">使用其他值可以突破默认值小部件布局，明智地使用，更改后启动器需要重新启动</string>
+    <string name="pref_launcher_desktop_grid_rows_title">行数</string>
+    <string name="pref_launcher_desktop_grid_cols_title">列数</string>
+    <string name="desktop_grid_default">默认</string>
+
+    <!-- HW Key Acctions: toggle screen recording -->
+    <string name="hwkey_action_screen_recording">切换屏幕录制</string>
+
+    <!-- Full screen caller photo modes -->
+    <string name="fullscreen_caller_disabled">禁用</string>
+    <string name="fullscreen_caller_partial">部分</string>
+    <string name="fullscreen_caller_full">完全</string>
 
 </resources>
