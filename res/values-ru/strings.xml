@@ -24,7 +24,7 @@
     <string name="battery_style_circle_percent">Круглый индикатор с процентами</string>
     <string name="battery_style_kitkat">Батарея KitKat</string>
     <string name="battery_style_kitkat_percent">Батарея KitKat с процентами</string>
-    <string name="battery_style_percent">Индикатор с процентами</string>
+    <string name="battery_percent_text_title">Индикатор с процентами</string>
     <string name="battery_style_none">Не показывать</string>
 
     <string name="vol_music_controls_title">Пропуск трека с помощь клавиш громкости</string>

@@ -9,7 +9,7 @@
     <string name="battery_style_circle_percent">Koło z procentami</string>
     <string name="battery_style_kitkat">Wskaźnik baterii KitKat</string>
     <string name="battery_style_kitkat_percent">Procentowy wsk. baterii KitKat</string>
-    <string name="battery_style_percent">Tekstowy wskaźnik baterii</string>
+    <string name="battery_percent_text_title">Tekstowy wskaźnik baterii</string>
     <string name="battery_style_none">Brak</string>
 
     <string name="vol_music_controls_title">Pomiń utwór przyciskiem głośności</string>

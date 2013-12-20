@@ -82,6 +82,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT = "pref_battery_percent_text";
+    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_SIZE = "pref_battery_percent_text_size";
     public static final int BATTERY_STYLE_STOCK = 1;
     public static final int BATTERY_STYLE_CIRCLE = 2;
     public static final int BATTERY_STYLE_CIRCLE_PERCENT = 3;
@@ -382,6 +383,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String FILE_THEME_DARK_FLAG = "theme_dark";
 
     public static final String ACTION_PREF_BATTERY_STYLE_CHANGED = "gravitybox.intent.action.BATTERY_STYLE_CHANGED";
+    public static final String EXTRA_BATTERY_STYLE = "batteryStyle";
+    public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED =
+            "gravitybox.intent.action.BATTERY_PERCENT_TEXT_CHANGED";
+    public static final String EXTRA_BATTERY_PERCENT_TEXT = "batteryPercentText";
+    public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED =
+            "gravitybox.intent.action.BATTERY_PERCENT_TEXT_SIZE_CHANGED";
+    public static final String EXTRA_BATTERY_PERCENT_TEXT_SIZE = "batteryPercentTextSize";
     public static final String ACTION_PREF_SIGNAL_ICON_AUTOHIDE_CHANGED = "gravitybox.intent.action.SIGNAL_ICON_AUTOHIDE_CHANGED";
 
     public static final String ACTION_PREF_STATUSBAR_COLOR_CHANGED = "gravitybox.intent.action.STATUSBAR_COLOR_CHANGED";
@@ -1443,8 +1451,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefs.edit().putBoolean(PREF_KEY_BATTERY_PERCENT_TEXT, false).commit();
                     mPrefBatteryPercent.setChecked(false);
                     Intent intent = new Intent();
-                    intent.setAction(ACTION_PREF_BATTERY_STYLE_CHANGED);
-                    intent.putExtra("batteryPercent", false);
+                    intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
+                    intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT, false);
                     getActivity().sendBroadcast(intent);
                 }
                 mPrefBatteryPercent.setEnabled(!mtkBatteryPercent);
@@ -1522,8 +1530,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 int batteryStyle = Integer.valueOf(prefs.getString(PREF_KEY_BATTERY_STYLE, "1"));
                 intent.putExtra("batteryStyle", batteryStyle);
             } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT)) {
-                intent.setAction(ACTION_PREF_BATTERY_STYLE_CHANGED);
-                intent.putExtra("batteryPercent", prefs.getBoolean(PREF_KEY_BATTERY_PERCENT_TEXT, false));
+                intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT, prefs.getBoolean(PREF_KEY_BATTERY_PERCENT_TEXT, false));
+            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE)) {
+                intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_SIZE, Integer.valueOf(
+                        prefs.getString(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
             } else if (key.equals(PREF_KEY_SIGNAL_ICON_AUTOHIDE)) {
                 intent.setAction(ACTION_PREF_SIGNAL_ICON_AUTOHIDE_CHANGED);
                 String[] autohidePrefs = mSignalIconAutohide.getValues().toArray(new String[0]);

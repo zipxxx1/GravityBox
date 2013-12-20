@@ -22,7 +22,7 @@
     <string name="battery_style_stock">Gyári akkumlátor kijezlő</string>
     <string name="battery_style_circle">Kör akkumlátor kijezlő</string>
     <string name="battery_style_circle_percent">Kör akkumlátor kijezlő százalékkal</string>
-    <string name="battery_style_percent">Szöveges százalékos kijezlő</string>
+    <string name="battery_percent_text_title">Szöveges százalékos kijezlő</string>
     <string name="battery_style_none">Semmilyen, nincs akkumlátor kijelzés</string>
 
     <string name="vol_music_controls_title">Hangerő gombok átugorják a számot</string>

@@ -22,7 +22,7 @@
     <string name="battery_style_stock">Kiểu pin gốc</string>
     <string name="battery_style_circle">Pin vòng tròn</string>
     <string name="battery_style_circle_percent">Pin vòng tròn với phần trăm</string>
-    <string name="battery_style_percent">Chữ phần trăm pin</string>
+    <string name="battery_percent_text_title">Chữ phần trăm pin</string>
     <string name="battery_style_none">Không</string>
 
     <string name="vol_music_controls_title">Phím âm lượng chuyển bài hát</string>

@@ -6,7 +6,7 @@
     <string name="battery_style_title">Valg af batteriindikator</string>	
     <string name="battery_style_stock">Standard batteriindikator</string>
     <string name="battery_style_circle">Cirkel-batteriindikator med procenttal</string>
-    <string name="battery_style_percent">Store procenttal</string>
+    <string name="battery_percent_text_title">Store procenttal</string>
     <string name="battery_style_none">Ingen</string>
 
     <string name="vol_music_controls_title">Volumentaster skifter melodi</string>
