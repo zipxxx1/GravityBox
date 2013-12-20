@@ -180,9 +180,7 @@ public class ModQuickSettings {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS)) {
                     mNumColumns = intent.getIntExtra(GravityBoxSettings.EXTRA_QS_COLS, 3);
-                    if (mContainerView != null) {
-                        XposedHelpers.callMethod(mContainerView, "updateResources");
-                    }
+                    updateTileLayout();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_AUTOSWITCH)) {
                     mAutoSwitch = intent.getBooleanExtra(
@@ -272,7 +270,7 @@ public class ModQuickSettings {
             }
     
             // trigger layout refresh
-            XposedHelpers.callMethod(mContainerView, "updateResources");
+            updateTileLayout();
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -338,11 +336,14 @@ public class ModQuickSettings {
         }
     }
 
-    private static void updateTileLayout(FrameLayout container, int orientation) {
-        if (container == null) return;
+    private static void updateTileLayout() {
+        if (mContainerView == null) return;
 
         try {
-            TileLayout tl = new TileLayout(container.getContext(), mNumColumns, orientation);
+            final Resources res = mContainerView.getResources();
+            final int orientation = res.getConfiguration().orientation;
+
+            TileLayout tl = new TileLayout(mContainerView.getContext(), mNumColumns, orientation);
 
             // update GB tiles layout
             if (mTiles != null) {
@@ -352,7 +353,6 @@ public class ModQuickSettings {
             }
 
             // update AOSP tiles layout
-            final Resources res = container.getResources();
             final int imgResId = res.getIdentifier("image", "id", PACKAGE_NAME);
             final int textResId = res.getIdentifier("text", "id", PACKAGE_NAME);
             final int rssiImgResId = res.getIdentifier("rssi_image", "id", PACKAGE_NAME);
@@ -361,7 +361,7 @@ public class ModQuickSettings {
             final int imgGroupResId = res.getIdentifier("image_group", "id", PACKAGE_NAME);
             final int rssiSlotIdResId = res.getIdentifier("rssi_slot_id", "id", PACKAGE_NAME);
 
-            final int tileCount = container.getChildCount();
+            final int tileCount = mContainerView.getChildCount();
             for(int i = 0; i < tileCount; i++) {
                 final ViewGroup viewGroup = (ViewGroup) mContainerView.getChildAt(i);
                 if (viewGroup == null) continue;
@@ -405,6 +405,11 @@ public class ModQuickSettings {
                     layoutView.setLayoutParams(lp);
                     layoutView.requestLayout();
                 }
+            }
+
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                XposedHelpers.setIntField(mContainerView, "mNumColumns", mNumColumns);
+                ((FrameLayout)mContainerView).requestLayout();
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -475,13 +480,12 @@ public class ModQuickSettings {
                     phoneStatusBarClass, quickSettingsSetServiceHook);
             XposedHelpers.findAndHookMethod(quickSettingsClass, "addSystemTiles", 
                     ViewGroup.class, LayoutInflater.class, quickSettingsAddSystemTilesHook);
-            XposedHelpers.findAndHookMethod(quickSettingsClass, "updateResources", quickSettingsUpdateResourcesHook);
             XposedHelpers.findAndHookMethod(notifPanelViewClass, "onTouchEvent", 
                     MotionEvent.class, notificationPanelViewOnTouchEvent);
             XposedHelpers.findAndHookMethod(phoneStatusBarClass, "makeStatusBarView", 
                     makeStatusBarViewHook);
-            XposedHelpers.findAndHookMethod(quickSettingsContainerViewClass, "updateResources", 
-                    qsContainerViewUpdateResources);
+            XposedHelpers.findAndHookMethod(quickSettingsClass, "updateResources", 
+                    qsUpdateResources);
             XposedHelpers.findAndHookMethod(quickSettingsContainerViewClass, "onMeasure",
                     int.class, int.class, qsContainerViewOnMeasure);
 
@@ -596,6 +600,7 @@ public class ModQuickSettings {
                 LayoutInflater inflater = (LayoutInflater) param.args[1];
 
                 mTiles = new ArrayList<AQuickSettingsTile>();
+                mAllTileViews.clear();
 
                 if (Utils.hasNfc(mContext)) {
                     NfcTile nfcTile = new NfcTile(mContext, mGbContext, mStatusBar, mPanelBar);
@@ -677,9 +682,9 @@ public class ModQuickSettings {
         }
     };
 
-    private static XC_MethodHook quickSettingsUpdateResourcesHook = new XC_MethodHook() {
+    private static XC_MethodHook qsUpdateResources = new XC_MethodHook() {
         @Override
-        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             if (DEBUG) log("updateResources - updating all tiles");
 
             for (AQuickSettingsTile t : mTiles) {
@@ -941,21 +946,6 @@ public class ModQuickSettings {
                 } catch (NoSuchFieldError e) {
                     //
                 }
-            }
-        }
-    };
-
-    private static XC_MethodHook qsContainerViewUpdateResources = new XC_MethodHook() {
-        @Override
-        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-            if (DEBUG) log("qsContainerView updateResources called");
-            // do this only for portrait mode
-            FrameLayout fl = (FrameLayout) param.thisObject;
-            final int orientation = fl.getContext().getResources().getConfiguration().orientation;
-            updateTileLayout(fl, orientation);
-            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                XposedHelpers.setIntField(param.thisObject, "mNumColumns", mNumColumns);
-                fl.requestLayout();
             }
         }
     };
