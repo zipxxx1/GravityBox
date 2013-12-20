@@ -63,6 +63,7 @@ public class AppLauncher {
     private PackageManager mPm;
     private List<AppInfo> mAppSlots;
     private View mAppView;
+    private XSharedPreferences mPrefs;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -88,6 +89,11 @@ public class AppLauncher {
                     if (DEBUG) log("appSlot=" + slot + "; app=" + app);
                     updateAppSlot(slot, app);
                 }
+            } else if(intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
+                for (int i = 0; i < GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.size(); i++) {
+                    updateAppSlot(i, mPrefs.getString(
+                            GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.get(i), null));
+                }
             }
         }
     };
@@ -95,6 +101,7 @@ public class AppLauncher {
     public AppLauncher(Context context, XSharedPreferences prefs) {
         mContext = context;
         mResources = mContext.getResources();
+        mPrefs = prefs;
         try {
             mGbContext = mContext.createPackageContext(
                     GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
@@ -114,13 +121,9 @@ public class AppLauncher {
         mAppSlots.add(new AppInfo(R.id.quickapp7));
         mAppSlots.add(new AppInfo(R.id.quickapp8));
 
-        for (int i = 0; i < GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.size(); i++) {
-            updateAppSlot(i, prefs.getString(
-                    GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.get(i), null));
-        }
-
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED);
+        intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
     }
 
