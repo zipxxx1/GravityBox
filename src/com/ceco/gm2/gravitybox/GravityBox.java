@@ -108,7 +108,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             FixDevOptions.initPackageResources(prefs, resparam);
         }
 
-        if (Build.VERSION.SDK_INT > 16 && resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
+        if (Build.VERSION.SDK_INT > 16 && !Utils.isLenovoSmartphone() &&
+                resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
             ModQuickSettings.initResources(prefs, resparam);
         }
     }
