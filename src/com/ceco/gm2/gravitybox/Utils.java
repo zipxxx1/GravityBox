@@ -48,6 +48,7 @@ public class Utils {
     private static int mDeviceType = -1;
     private static Boolean mIsMtkDevice = null;
     private static Boolean mIsXperiaDevice = null;
+    private static Boolean mIsLenovoSmartphone = null;
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     
@@ -131,6 +132,19 @@ public class Utils {
         mIsXperiaDevice = Build.MANUFACTURER.equalsIgnoreCase("sony")
                 && !isMtkDevice();
         return mIsXperiaDevice;
+    }
+
+    public static boolean isLenovoSmartphone() {
+        if (mIsLenovoSmartphone != null) return mIsLenovoSmartphone;
+
+        // The goal after all is to check if phone (doesn't apply to tablets) is running a stock Lenovo ROM
+        // (due to deep changes usually made to UI)
+
+        // TODO: implement a better way of doing this as the actual check may provide false positives
+        // in case of ported ROMs which may be more close to AOSP but where property was set so that
+        // device will show up as being Lenovo
+        mIsLenovoSmartphone = !isTablet() && Build.MANUFACTURER.equalsIgnoreCase("lenovo");
+        return mIsLenovoSmartphone;
     }
 
     public static boolean hasGeminiSupport() {
