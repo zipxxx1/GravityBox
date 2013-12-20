@@ -798,9 +798,6 @@
     <string name="action_screenrecord">Screen record</string>
     <string name="pref_powermenu_screenrecord_title">Screen record in power menu</string>
 
-    <!-- Full screen caller visibility level -->
-    <string name="pref_caller_photo_visibility_title">Photo visibility level</string>
-
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Show dialpad automatically</string>
     <string name="pref_dialer_show_dialpad_summary">Shows dialpad automatically upon opening dialer app</string>

@@ -236,14 +236,9 @@ public class ModDialer {
 
                     refreshPhonePrefs();
                     final View v = ((Fragment) param.thisObject).getView();
-                    int iAlpha = 255;
-                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false)) {
-                        float alpha = (float) prefs.getInt(
-                                GravityBoxSettings.PREF_KEY_CALLER_PHOTO_VISIBILITY, 50) / 100f;
-                        iAlpha = alpha == 0 ? 255 : (int) ((1-alpha)*255);
-                    }
-                    ColorDrawable cd = new ColorDrawable(Color.argb(iAlpha, 0, 0, 0));
-                    v.setBackground(cd);
+                    int color = prefs.getBoolean(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false) ?
+                            0 : Color.BLACK; 
+                    v.setBackgroundColor(color);
                     if (DEBUG) log("AnswerFragment showAnswerUi: background color set");
                 }
             });
