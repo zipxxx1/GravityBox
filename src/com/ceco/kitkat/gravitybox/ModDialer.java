@@ -26,6 +26,7 @@ import java.util.Set;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -258,18 +259,29 @@ public class ModDialer {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (!prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE, false) ||
-                            param.args[1] != null) return;
+                            GravityBoxSettings.PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE, false)) return;
 
-                    final Context context = ((View) param.args[0]).getContext();
-                    final Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
-                    final String path = gbContext.getFilesDir() + "/caller_photo";
-                    File f = new File(path);
-                    if (f.exists() && f.canRead()) {
-                        Bitmap b = BitmapFactory.decodeFile(path);
-                        if (b != null) {
-                            param.args[1] = new BitmapDrawable(context.getResources(), b);
-                            if (DEBUG) log("Unknow caller photo set");
+                    boolean shouldShowUnknownPhoto = param.args[1] == null;
+                    if (param.args[1] != null) {
+                        final Fragment frag = (Fragment) param.thisObject;
+                        final Resources res = frag.getResources();
+                        Drawable picUnknown = res.getDrawable(res.getIdentifier("picture_unknown", "drawable",
+                                        res.getResourcePackageName(frag.getId())));
+                        shouldShowUnknownPhoto = ((Drawable)param.args[1]).getConstantState().equals(
+                                                    picUnknown.getConstantState());
+                    }
+
+                    if (shouldShowUnknownPhoto) {
+                        final Context context = ((View) param.args[0]).getContext();
+                        final Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+                        final String path = gbContext.getFilesDir() + "/caller_photo";
+                        File f = new File(path);
+                        if (f.exists() && f.canRead()) {
+                            Bitmap b = BitmapFactory.decodeFile(path);
+                            if (b != null) {
+                                param.args[1] = new BitmapDrawable(context.getResources(), b);
+                                if (DEBUG) log("Unknow caller photo set");
+                            }
                         }
                     }
                 }
