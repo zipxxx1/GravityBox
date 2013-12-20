@@ -860,4 +860,18 @@
     <string name="fix_location_title">Problème de localisation GPS</string>
     <string name="fix_location_summary">Activer dans le cas où les valeurs (distance, vitesse...) ne sont pas correctement calculés par des applications de tracking sportif (redémarrage nécessaire)</string>
 
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Modifications du lanceur</string>
+    <string name="pref_cat_launcher_tweaks_summary">Ne s\'applique qu\'au lanceur Google Experience</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Grille du bureau</string>
+    <string name="pref_launcher_desktop_grid_info_title">Utiliser des valeurs autres que celles par défaut peut perturber l\'agencement des widgets. Utiliser à bon escient. Il faut redémarrer le lanceur pour que les changements prennent effet</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Nombre de lignes</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Nombre de colonnes</string>
+    <string name="desktop_grid_default">Par défaut</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">Valeur système par défaut</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Fondu</string>
+
 </resources>
