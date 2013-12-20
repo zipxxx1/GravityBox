@@ -47,8 +47,8 @@
     <string name="fix_datetime_crash_summary">Abilita nel caso si verifichi un crash durante l\'accesso alle impostazione Data&amp;Ora (richiede riavvio)</string>
 
     <string name="fix_caller_id_phone_title">Fix ID chiamante per telefono</string>
-    <string name="fix_caller_id_phone_summary">Abilita nel caso in cui il tuo contatto non corrisponda durante la ricezione di chiamate (richiede riavvio)</string>
-    <string name="fix_caller_id_phone_alert">Dopo il riavvio, dovresti pulire e riaggiungere i tuoi contatti affinchè la modifica abbia affetto! Usa Impostazioni / Applicazioni / Tutte - per pulire i dati del fornitore di contatti.</string>
+    <string name="fix_caller_id_phone_summary">Abilita nel caso in cui il tuo contatto non venga collegato al numero durante la ricezione-effettuazione di chiamate (richiede riavvio)</string>
+    <string name="fix_caller_id_phone_alert">Dopo il riavvio, dovresti rimuovere e riaggiungere i tuoi contatti affinchè la modifica abbia affetto! Usa Impostazioni / Applicazioni / Tutte - per pulire i dati del fornitore di contatti.</string>
 
     <string name="fix_caller_id_mms_title">Fix ID chiamante messaggi</string>
     <string name="fix_caller_id_mms_summary">Abilita nel caso in cui ci siano più conversazioni divise per lo stesso contatto (richiede riavvio)</string>
@@ -478,8 +478,10 @@
     <string name="hwkey_home_longpress_dialog_title">Azione per pressione prolungata tasto Home</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">Avvia applicazione specifica</string>
-    <string name="pref_hwkey_custom_app_title">Imposta applicazione specifica</string>
+    <string name="hwkey_action_custom_app">Avvia applicazione personalizzata</string>
+    <string name="pref_hwkey_custom_app_title">Imposta applicazione personalizzata</string>
+    <string name="hwkey_action_custom_app2">Avvia applicazione personalizzata 2</string>
+    <string name="pref_hwkey_custom_app_title2">Imposta applicazione personalizzata 2</string>
     <string name="hwkey_action_custom_app_none">Nessuna applicazione personale assegnata!</string>
     <string name="hwkey_action_custom_app_missing">Applicazione personalizzata non trovata!</string>
 
@@ -522,7 +524,8 @@
     <string name="pref_navbar_override_summary">Attivazione ottimizzaioni barra di navigazione (richiede riavvio)</string>
     <string name="pref_navbar_enable_title">Abilita Barra di navigazione</string>
     <string name="pref_navbar_enable_summary">Richiede riavvio</string>
-    <string name="pref_navbar_height_title">Altezza Barra di navigazione</string>
+    <string name="pref_navbar_height_title">Altezza Barra di navigazione nella visualizzazione verticale</string>
+    <string name="pref_navbar_height_landscape_summary">Altezza Barra di navigazione in visualizzazione orizzontale</string>
     <string name="pref_navbar_height_summary">Applica alla visualizzaione verticale</string>
     <string name="pref_navbar_width_title">Larghezza Barra di navigazione</string>
     <string name="pref_navbar_width_summary">Applica alla visualizzazione orizzontale</string>
@@ -840,5 +843,19 @@
     <!-- Fix location issue (Android 4.2.1 JIT bug) -->
     <string name="fix_location_title">Problema di localizzazione del GPS</string>
     <string name="fix_location_summary">Attivare se i valori di distanza non vengono calcolati correttamente dalle applicazioni di monitoraggio GPS (es. sportive) (è necessario riavviare)</string>
+    
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Modifiche nel launcher</string>
+    <string name="pref_cat_launcher_tweaks_summary">Si applica solo al launcher Google Experience</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Griglia</string>
+    <string name="pref_launcher_desktop_grid_info_title">Utilizzare valori diversi da quelli predefiniti possono disturbare la disposizione dei widget. Usalo con saggezza. È necessario riavviare il launcher per le modifiche abbiano effetto</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Numero di linee</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Numero di colonne</string>
+    <string name="desktop_grid_default">Default</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">Default</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Dissolvenza</string>
 
 </resources>
