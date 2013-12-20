@@ -54,7 +54,6 @@
     <string name="important">Importante</string>
 
     <string name="caller_fullscreen_photo_title">Foto del llamador a pantalla completa</string>
-    <string name="caller_fullscreen_photo_summary">Muestra la foto del que llama a pantalla completa en una llamada entrante</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sincronización activada</string>
@@ -814,9 +813,6 @@
     <string name="action_screenrecord">Grabar pantalla</string>
     <string name="pref_powermenu_screenrecord_title">Grabar pantalla en menú de apagado</string>
 
-    <!-- Full screen caller visibility level -->
-    <string name="pref_caller_photo_visibility_title">Nivel de visibilidad de la foto</string>
-
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostrar teclado numérico automáticamente</string>
     <string name="pref_dialer_show_dialpad_summary">Muestra el teclado automáticamente al abrir la aplicación Teléfono</string>
@@ -837,5 +833,10 @@
 
     <!-- HW Key Acctions: toggle screen recording -->
     <string name="hwkey_action_screen_recording">Activar/desactivar grabar pantalla</string>
+    
+    <!-- Full screen caller photo modes -->
+    <string name="fullscreen_caller_disabled">Desactivado</string>
+    <string name="fullscreen_caller_partial">Parcial</string>
+    <string name="fullscreen_caller_full">Completo</string>
 
 </resources>
