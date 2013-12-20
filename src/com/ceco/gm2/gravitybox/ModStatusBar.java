@@ -653,7 +653,8 @@ public class ModStatusBar {
                                 "getDataNetworkTypeIconGemini", "com.mediatek.systemui.ext.NetworkType", int.class, new XC_MethodHook() {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                if (mDisableDataNetworkTypeIcons) param.setResult(-1);
+                                if (mDisableDataNetworkTypeIcons)
+                                    param.setResult(Utils.isLenovoSmartphone() ? 0 : -1);
                             }
                         });
                     }
