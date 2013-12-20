@@ -804,7 +804,7 @@
 
     <!-- QS Tile Style -->
     <string name="pref_qs_tile_style_title">磁贴风格</string>
-    <string name="pref_qs_tile_style_summary">仅适用于由GravityBox修改的磁贴(不影响原厂磁贴)</string>
+    <string name="pref_qs_tile_style_summary">仅适用于由GravityBox修改的磁贴（不影响原厂磁贴）</string>
 
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">调整底部边距</string>
@@ -859,5 +859,20 @@
     <!-- Fix location issue (Android 4.2.1 JIT bug) -->
     <string name="fix_location_title">修复位置问题</string>
     <string name="fix_location_summary">如果你发现运动跟踪应用程序不能正常使用请启用（需要重新启动）</string>
+    
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">启动器调整</string>
+    <string name="pref_cat_launcher_tweaks_summary">仅适用于谷歌体验启动器</string>
+    <string name="pref_cat_launcher_desktop_grid_title">桌面网格</string>
+    <string name="pref_launcher_desktop_grid_info_title">使用其他值可以突破默认值小部件布局，明智地使用，更改后启动器需要重新启动</string>
+    <string name="pref_launcher_desktop_grid_rows_title">行数</string>
+    <string name="pref_launcher_desktop_grid_cols_title">列数</string>
+    <string name="desktop_grid_default">默认</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_title">关闭屏幕效果</string>
+    <string name="screen_off_effect_default">系统默认</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">淡出</string>
 
 </resources>
