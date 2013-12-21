@@ -9,7 +9,6 @@
     <string name="battery_style_circle_percent">Kruhový s procenty</string>
     <string name="battery_style_kitkat">KitKat bez procent</string>
     <string name="battery_style_kitkat_percent">KitKat s procenty</string>
-    <string name="battery_percent_text_title">Procentuální text stavu baterie</string>
     <string name="battery_style_none">Žádný</string>
 
     <string name="vol_music_controls_title">Ovládání hudby tlačítky hlasitosti</string>
@@ -823,5 +822,30 @@
     <!-- Fix location issue (Android 4.2.1 JIT bug) -->
     <string name="fix_location_title">Opravit GPS vzdálenosti</string>
     <string name="fix_location_summary">Použít v případě špatného přepočítávání vzdáleností v treking aplikacích (vyžaduje restart)</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">Výchozí</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Ztmavit</string>
+
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Nastavení spouštěče</string>
+    <string name="pref_cat_launcher_tweaks_summary">Vztahuje se na standardní spouštěč</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Mřížka plochy</string>
+    <string name="pref_launcher_desktop_grid_info_title">Použití jiných než výchozích hodnot může způsobit narušení vzhledu widgetů. Změny vyžadují restart spouštěče.</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Počet řádků</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Počet sloupců</string>
+    <string name="desktop_grid_default">Standardní</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">Procentuální text stavu baterie</string>
+    <string name="battery_percent_text_size_title">Velikost textu</string>
+    <string name="battery_percent_text_size_normal">Normální</string>
+    <string name="battery_percent_text_size_smaller">Menší</string>
+    <string name="battery_percent_text_size_even_smaller">Ještě menší</string>
+    <string name="battery_percent_text_size_smallest">Nejmenší</string>
+
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">Nastavení indikátoru baterie</string>
 
 </resources>
