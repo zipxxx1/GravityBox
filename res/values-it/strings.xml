@@ -378,7 +378,7 @@
     <string name="button_backlight_mode_disable">Disabilita retroilluminazione tasti</string>
     <string name="button_backlight_mode_always_on">Sempre accesa se lo schermo è acceso</string>
     <string name="pref_button_backlight_notifications_title">Notifiche mediante illuminazione tasti</string>
-    <string name="pref_button_backlight_notifications_summary">SPERIMENTALE! Accendi tasti se c\'è una notifica e lo schermo è spento. Usare nel caso il telefono non abbia led di notifica.</string>
+    <string name="pref_button_backlight_notifications_summary">SPERIMENTALE! Accendi tasti se c\'è una notifica e lo schermo è spento. Usare nel caso in cui il telefono non abbia led di notifica.</string>
 
     <!-- Hide navigation bar for pie -->
     <string name="pref_navbar_disable_title">Nascondi barra di navigazione</string>
@@ -499,7 +499,7 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Modalità Desktop espanso</string>
     <string name="expanded_desktop_disabled">Disattivato</string>
-    <string name="expanded_desktop_statusbar">Nascondi statusbar</string>
+    <string name="expanded_desktop_statusbar">Nascondi barra di stato</string>
     <string name="expanded_desktop_navbar">Nascondi barra di navigazione</string>
     <string name="expanded_desktop_both">Nascondi entrambe</string>
     <string name="action_expanded_desktop_title">Desktop esteso</string>
@@ -534,7 +534,7 @@
     <string name="pref_powermenu_screenshot_title">Abilita Fotografa schermo nel menu apegnimento</string>
 
     <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Applicazioni in Sblocco schermo</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">Applicazioni in sblocco schermo</string>
     <string name="pref_lockscreen_ring_targets_enable_title">Abilita app in sblocco schermo</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Attivazione Applicazioni in sblocco schermo</string>
     <string name="pref_lockscreen_ring_targets_app_title">Applicazione %s</string>
@@ -658,7 +658,7 @@
 
     <!-- Disable lockscreen widget limit -->
     <string name="pref_lockscreen_widget_limit_disable_title">Disabilita limitazione widget</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Consenti numero illimitato widget in lockscreen</string>
+    <string name="pref_lockscreen_widget_limit_disable_summary">Consenti numero illimitato widget in schermata di blocco</string>
 
     <!-- RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -860,7 +860,7 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Testo Batteria percentuale</string>
-    <string name="battery_percent_text_size_title">Dimensione percentual batteria</string>
+    <string name="battery_percent_text_size_title">Dimensione percentuale batteria</string>
     <string name="battery_percent_text_size_normal">Normale</string>
     <string name="battery_percent_text_size_smaller">Piccolo</string>
     <string name="battery_percent_text_size_even_smaller">Ancora più piccolo</string>
