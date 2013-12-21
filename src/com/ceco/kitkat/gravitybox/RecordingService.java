@@ -15,6 +15,11 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -22,17 +27,22 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaRecorder;
+import android.os.Environment;
 import android.os.IBinder;
+import android.util.Log;
+
 import com.ceco.kitkat.gravitybox.R;
 
 public class RecordingService extends Service {
+    private static final String TAG = "GB:RecordingService";
+
     public static final String ACTION_RECORDING_START = "gravitybox.intent.action.RECORDING_START";
     public static final String ACTION_RECORDING_STOP = "gravitybox.intent.action.RECORDING_STOP";
     public static final String ACTION_RECORDING_STATUS_CHANGED = "gravitybox.intent.action.RECORDING_STATUS_CHANGED";
     public static final String EXTRA_RECORDING_STATUS = "recordingStatus";
     public static final String EXTRA_STATUS_MESSAGE = "statusMessage";
     public static final String EXTRA_AUDIO_FILENAME = "audioFileName";
-    
+
     public static final int RECORDING_STATUS_IDLE = 0;
     public static final int RECORDING_STATUS_STARTED = 1;
     public static final int RECORDING_STATUS_STOPPED = 2;
@@ -69,10 +79,8 @@ public class RecordingService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && intent.getAction() != null) {
-            if (intent.getAction().equals(ACTION_RECORDING_START) &&
-                    intent.hasExtra(EXTRA_AUDIO_FILENAME)) {
-                String audioFileName = intent.getStringExtra(EXTRA_AUDIO_FILENAME);
-                startRecording(audioFileName);
+            if (intent.getAction().equals(ACTION_RECORDING_START)) {
+                startRecording();
                 return START_STICKY;
             } else if (intent.getAction().equals(ACTION_RECORDING_STOP)) {
                 stopRecording();
@@ -99,8 +107,22 @@ public class RecordingService extends Service {
         }
     };
 
-    private void startRecording(String audioFileName) {
+    private String prepareOutputFile() {
+        File outputDir = new File(Environment.getExternalStorageDirectory() + "/AudioRecordings");
+        if (!outputDir.exists()) {
+            if (!outputDir.mkdir()) {
+                Log.e(TAG, "Cannot create AudioRecordings directory");
+                return null;
+            }
+        }
+        String fileName = "AUDIO_" + new SimpleDateFormat(
+                "yyyyMMdd_HHmmss", Locale.US).format(new Date()) + ".3gp";
+        return (outputDir.getAbsolutePath() + "/" + fileName);
+    }
+
+    private void startRecording() {
         String statusMessage = "";
+        String audioFileName = prepareOutputFile();
         try {
             mRecorder = new MediaRecorder();
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -119,8 +141,11 @@ public class RecordingService extends Service {
         } finally {
             Intent i = new Intent(ACTION_RECORDING_STATUS_CHANGED);
             i.putExtra(EXTRA_RECORDING_STATUS, mRecordingStatus);
-            i.putExtra(EXTRA_STATUS_MESSAGE, statusMessage);
-            sendBroadcast(i);        
+            if (mRecordingStatus == RECORDING_STATUS_STARTED) {
+                i.putExtra(EXTRA_AUDIO_FILENAME, audioFileName);
+            }
+            i.putExtra(EXTRA_STATUS_MESSAGE, statusMessage); 
+            sendBroadcast(i);
         }
     }
 

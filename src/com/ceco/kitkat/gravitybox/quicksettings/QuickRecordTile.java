@@ -30,7 +30,6 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.os.Environment;
 import android.os.Handler;
 import android.view.View;
 
@@ -69,6 +68,7 @@ public class QuickRecordTile extends BasicTile {
                         break;
                     case RecordingService.RECORDING_STATUS_STARTED:
                         mRecordingState = STATE_RECORDING;
+                        mAudioFileName = intent.getStringExtra(RecordingService.EXTRA_AUDIO_FILENAME);
                         mHandler.postDelayed(autoStopRecord, 3600000);
                         if (DEBUG) log("Audio recording started");
                         break;
@@ -94,17 +94,19 @@ public class QuickRecordTile extends BasicTile {
     public QuickRecordTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
 
-        mAudioFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mAudioFileName += "/quickrecord.3gp";
         mHandler = new Handler();
 
         mOnClick = new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                File file = new File(mAudioFileName);
-                if (!file.exists()) {
+                if (mAudioFileName == null) {
                     mRecordingState = STATE_NO_RECORDING;
+                } else {
+                    File file = new File(mAudioFileName);
+                    if (!file.exists()) {
+                        mRecordingState = STATE_NO_RECORDING;
+                    }
                 }
 
                 switch (mRecordingState) {
@@ -158,9 +160,13 @@ public class QuickRecordTile extends BasicTile {
     protected void updateTile() {
         final Resources res = mGbContext.getResources();
 
-        File file = new File(mAudioFileName);
-        if (!file.exists()) {
+        if (mAudioFileName == null) {
             mRecordingState = STATE_NO_RECORDING;
+        } else {
+            File file = new File(mAudioFileName);
+            if (!file.exists()) {
+                mRecordingState = STATE_NO_RECORDING;
+            }
         }
 
         switch (mRecordingState) {
@@ -229,7 +235,6 @@ public class QuickRecordTile extends BasicTile {
     private void startRecording() {
         Intent si = new Intent(mGbContext, RecordingService.class);
         si.setAction(RecordingService.ACTION_RECORDING_START);
-        si.putExtra(RecordingService.EXTRA_AUDIO_FILENAME, mAudioFileName);
         mGbContext.startService(si);
     }
 
