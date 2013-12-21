@@ -83,6 +83,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT = "pref_battery_percent_text";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_SIZE = "pref_battery_percent_text_size";
+    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STYLE = "pref_battery_percent_text_style";
     public static final int BATTERY_STYLE_STOCK = 1;
     public static final int BATTERY_STYLE_CIRCLE = 2;
     public static final int BATTERY_STYLE_CIRCLE_PERCENT = 3;
@@ -378,6 +379,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED =
             "gravitybox.intent.action.BATTERY_PERCENT_TEXT_SIZE_CHANGED";
     public static final String EXTRA_BATTERY_PERCENT_TEXT_SIZE = "batteryPercentTextSize";
+    public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED =
+            "gravitybox.intent.action.BATTERY_PERCENT_TEXT_SIZE_CHANGED";
+    public static final String EXTRA_BATTERY_PERCENT_TEXT_STYLE = "batteryPercentTextStyle";
 
     public static final String ACTION_PREF_STATUSBAR_COLOR_CHANGED = "gravitybox.intent.action.STATUSBAR_COLOR_CHANGED";
     public static final String EXTRA_SB_BG_COLOR = "bgColor";
@@ -1448,6 +1452,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_SIZE, Integer.valueOf(
                         prefs.getString(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
+            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_STYLE)) {
+                intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STYLE,
+                        prefs.getString(PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_PREFS, TileOrderActivity.updateTileList(prefs));

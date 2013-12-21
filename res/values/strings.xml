@@ -829,6 +829,9 @@
     <string name="battery_percent_text_size_smaller">Smaller</string>
     <string name="battery_percent_text_size_even_smaller">Even smaller</string>
     <string name="battery_percent_text_size_smallest">Smallest</string>
+    <string name="battery_percent_text_style_title">Battery percent text style</string>
+    <string name="battery_percent_text_style_default">Default</string>
+    <string name="battery_percent_text_style_numbers_only">Numbers only (no percent sign)</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Battery settings</string>
