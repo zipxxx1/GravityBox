@@ -231,7 +231,7 @@ public class ModBatteryStyle {
                     mPercentTextSize = Integer.valueOf(prefs.getString(
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16"));
                     mPercentSign = prefs.getString(
-                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "&");
+                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%");
 
                     Context context = (Context) param.args[0];
                     mMtkPercentTextEnabled = Utils.isMtkDevice() ?
