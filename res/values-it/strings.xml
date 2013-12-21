@@ -9,7 +9,6 @@
     <string name="battery_style_circle_percent">Batteria circolare con percentuale</string>
     <string name="battery_style_kitkat">Batteria KitKat</string>
     <string name="battery_style_kitkat_percent">Batteria KitKat con percentuale</string>
-    <string name="battery_percent_text_title">Batteria con percentuale</string>
     <string name="battery_style_none">Nessuno</string>
 
     <string name="vol_music_controls_title">Tasto vol cambia traccia</string>
@@ -708,7 +707,7 @@
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">Avvio applicazioni</string>
     <string name="pref_cat_app_launcher_summary">Consente di definire fino a 8 app che possono essere assegnate a azioni tasti hardware or usate come barra di navigazione aggiuntiva</string>
-    <string name="pref_app_launcher_slot_title">Application slot %d</string>
+    <string name="pref_app_launcher_slot_title">Slot Applicazione %d</string>
     <string name="app_launcher_no_apps">Nessuna app assegnata. Usa GravityBox / Menu Launcher Applicazioni per assegnare le applicazioni.</string>
 
     <!-- Navigation bar app launcher key -->
@@ -756,8 +755,8 @@
     <string name="pref_navbar_bg_color_title">Colore sfondo tasto navigazione</string>
 
     <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">Disattiva ombreggiatura lockcreen</string>
-    <string name="pref_lockscreen_shade_disable_summary">Rimuovi tinte scure nel lockscreen</string>
+    <string name="pref_lockscreen_shade_disable_title">Disattiva ombreggiatura schermata di blocco</string>
+    <string name="pref_lockscreen_shade_disable_summary">Rimuovi tinte scure nella schermata di blocco</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Gestore trasparenze</string>
@@ -854,8 +853,17 @@
     <string name="desktop_grid_default">Default</string>
 
     <!-- Screen off effects -->
+    <string name="screen_off_effect_title">Effetto spegni schermo</string>
     <string name="screen_off_effect_default">Default</string>
     <string name="screen_off_effect_crt">CRT</string>
     <string name="screen_off_effect_fade">Dissolvenza</string>
+    
+     <!-- Battery percent text -->
+ +    <string name="battery_percent_text_title">Testo Batteria percentuale</string>
+ +    <string name="battery_percent_text_size_title">Dimensione percentual batteria</string>
+ +    <string name="battery_percent_text_size_normal">Normale</string>
+ +    <string name="battery_percent_text_size_smaller">Piccolo</string>
+ +    <string name="battery_percent_text_size_even_smaller">Ancora più piccolo</string>
+ +    <string name="battery_percent_text_size_smallest">Minore</string>
 
 </resources>
