@@ -687,9 +687,12 @@ public class ModQuickSettings {
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             if (DEBUG) log("updateResources - updating all tiles");
 
-            for (AQuickSettingsTile t : mTiles) {
-                t.updateResources();
+            if (mTiles != null) {
+                for (AQuickSettingsTile t : mTiles) {
+                    t.updateResources();
+                }
             }
+            updateTileLayout();
         }
     };
 
