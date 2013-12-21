@@ -206,6 +206,10 @@ class ScreenRecordingService extends Service {
         super.onDestroy();
     }
 
+    private boolean isIdle() {
+        return (mRecordingStatus == STATUS_IDLE);
+    }
+
     private boolean isRecording() {
         return (mRecordingStatus == STATUS_RECORDING);
     }
@@ -337,12 +341,13 @@ class ScreenRecordingService extends Service {
                 new MediaScannerConnection.OnScanCompletedListener() {
                 public void onScanCompleted(String path, Uri uri) {
                     Log.i(TAG, "MediaScanner done scanning " + path);
+                    if (isIdle()) {
+                        stopSelf();
+                    }
                 }
             });
 
             updateStatus(STATUS_IDLE);
-
-            stopSelf();
         } }, 2000);
     }
 
