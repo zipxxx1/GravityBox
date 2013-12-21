@@ -24,7 +24,6 @@
     <string name="battery_style_circle_percent">圆形电量图标含百分比</string>
     <string name="battery_style_kitkat">KitKat电量图标</string>
     <string name="battery_style_kitkat_percent">KitKat电量图标含百分比</string>
-    <string name="battery_percent_text_title">电量百分比</string>
     <string name="battery_style_none">无</string>
 
     <string name="vol_music_controls_title">音量键切换歌曲</string>
@@ -84,7 +83,7 @@
     <string name="qs_tile_battery">电池状态</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">蓝牙</string>
-    <string name="qs_tile_gps">位置</string>
+    <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS（CM风格）</string>
     <string name="qs_tile_mobile_data">移动数据</string>
     <string name="qs_tile_network_mode">网络模式</string>
@@ -822,5 +821,19 @@
     <string name="fullscreen_caller_disabled">禁用</string>
     <string name="fullscreen_caller_partial">部分</string>
     <string name="fullscreen_caller_full">完全</string>
+    
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">电量百分比</string>
+    <string name="battery_percent_text_size_title">电池百分比大小</string>
+    <string name="battery_percent_text_size_normal">标准</string>
+    <string name="battery_percent_text_size_smaller">小</string>
+    <string name="battery_percent_text_size_even_smaller">更小</string>
+    <string name="battery_percent_text_size_smallest">最小</string>
+    <string name="battery_percent_text_style_title">电量百分比风格</string>
+    <string name="battery_percent_text_style_default">默认</string>
+    <string name="battery_percent_text_style_numbers_only">只有数字（没百分号）</string>
+
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">电量设置</string>
 
 </resources>
