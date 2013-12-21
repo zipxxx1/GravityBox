@@ -842,6 +842,9 @@
     <string name="battery_percent_text_size_smaller">Menšia</string>
     <string name="battery_percent_text_size_even_smaller">Ešte menšia</string>
     <string name="battery_percent_text_size_smallest">Najmenšia</string>
+    <string name="battery_percent_text_style_title">Štýl textu</string>
+    <string name="battery_percent_text_style_default">Predvolený</string>
+    <string name="battery_percent_text_style_numbers_only">Len číselný (bez %% znaku)</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Nastavenia indikátora batérie</string>
