@@ -1,3 +1,34 @@
+Changelog 2.8.3 - 21/12/2013
+--------------------------------------
+- QuickSettings:
+--- Swipe notification panel handle to switch between notifications/tiles
+--- QuickRecord tile will create new file for each new recording. Recordings are stored under "AudioRecordings" dir
+- Screen-off effect:
+--- Now uses system default by default
+--- Allows choosing between CRT or Fade effects
+- Launcher tweaks:
+--- Option to choose desktop grid size
+--- Applies to Google Experience Launcher only
+--- Menu available only when GEL is installed (thanks to bgcngm)
+- Option to set battery percent text size (thanks to bgcngm)
+- Option to set battery percent text style (with or without % sign) (thanks to bgcngm)
+- Battery indicator related tweaks moved under dedicated preference screen (thanks to bgcngm)
+- Fixed Lockscreen Torch being dependent on Battery Arc option
+- Improved App Launcher initialization (potential fix for paid apps not being visible after reboot)
+- Further improvements regarding support of Lenovo devices (thanks to bgcngm)
+--- Don't load QS submodule on smartphones due to different implementation
+--- Fix data network type icons hiding
+- Updated French translation (thanks to ch-vox)
+- Updated Chinese (Traditional) translations (thanks to Eric850130)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Hungarian translation (thanks to benjoe1)
+- Updated Italian translation (thanks to pesa1234)
+- Updated Slovak and Czech translations
+
 Changelog 2.8.2 - 17/12/2013
 --------------------------------------
 - Fix for wrong distance calculation (Android 4.2.1 and MTK only) (thanks to bgcngm)
