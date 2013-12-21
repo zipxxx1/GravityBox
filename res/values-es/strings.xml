@@ -24,7 +24,6 @@
     <string name="battery_style_circle_percent">Circular con porcentaje</string>
     <string name="battery_style_kitkat">KitKat</string>
     <string name="battery_style_kitkat_percent">KitKat con porcentaje</string>
-    <string name="battery_percent_text_title">Porcentaje de batería en texto</string>
     <string name="battery_style_none">Ninguno</string>
 
     <string name="vol_music_controls_title">Botones de volumen cambian la canción</string>
@@ -266,7 +265,7 @@
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Casillas por fila</string>
     <string name="pref_qs_tiles_per_row_summary">Define cuántas casillas de ajustes se mostrarán por fila. Las casillas se redimensionan automáticamente. Se aplica en el modo retrato.</string>
-	
+
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Mostrar día de la semana</string>
 
@@ -749,8 +748,8 @@
 
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Permitir modo de red LTE</string>
-	
-	<!-- HW Keys Navigation Bar warning -->
+
+    <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Para habilitar el soporte de acciones en la barra de navegación, es necesario 
         sobreescribir los ajustes predeterminados desde el menú de ajustes de la barra de navegación</string>
 
@@ -785,10 +784,35 @@
     <string name="ringer_mode_vibrate">Vibrar</string>
     <string name="ringer_mode_sound">Sonar</string>
     <string name="ringer_mode_sound_vibrate">Sonar y vibrar</string>
-     
+
     <!-- Fix location issue (Android 4.2.1 JIT bug) -->
     <string name="fix_location_title">Corregir problema de ubicación</string>
     <string name="fix_location_summary">Actívalo si notas que la distancia no se calcula correctamente al usar aplicaciones deportivas de seguimiento (requiere reinicio)</string>
 
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Ajustes del lanzador</string>
+    <string name="pref_cat_launcher_tweaks_summary">Se aplica al lanzador predeterminado y a Google Experience Launcher</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Cuadrícula del escritorio</string>
+    <string name="pref_launcher_desktop_grid_info_title">Cambiar los valores predeterminados podría desajustar la posición y/o tamaño de los widgets. Requiere reiniciar el lanzador.</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Número de filas</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Número de columnas</string>
+    <string name="desktop_grid_default">Predeterminado</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_title">Efecto de apagado de pantalla</string>
+    <string name="screen_off_effect_default">Predeterminado</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Desvanecer</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">Indicador de batería en porcentaje</string>
+    <string name="battery_percent_text_size_title">Tamaño del texto del indicador</string>
+    <string name="battery_percent_text_size_normal">Normal</string>
+    <string name="battery_percent_text_size_smaller">Pequeño</string>
+    <string name="battery_percent_text_size_even_smaller">Muy pequeño</string>
+    <string name="battery_percent_text_size_smallest">Diminuto</string>
+
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">Ajustes de batería</string>
 
 </resources>
