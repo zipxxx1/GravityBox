@@ -857,13 +857,13 @@
     <string name="screen_off_effect_default">Default</string>
     <string name="screen_off_effect_crt">CRT</string>
     <string name="screen_off_effect_fade">Dissolvenza</string>
-    
-     <!-- Battery percent text -->
- +    <string name="battery_percent_text_title">Testo Batteria percentuale</string>
- +    <string name="battery_percent_text_size_title">Dimensione percentual batteria</string>
- +    <string name="battery_percent_text_size_normal">Normale</string>
- +    <string name="battery_percent_text_size_smaller">Piccolo</string>
- +    <string name="battery_percent_text_size_even_smaller">Ancora più piccolo</string>
- +    <string name="battery_percent_text_size_smallest">Minore</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">Testo Batteria percentuale</string>
+    <string name="battery_percent_text_size_title">Dimensione percentual batteria</string>
+    <string name="battery_percent_text_size_normal">Normale</string>
+    <string name="battery_percent_text_size_smaller">Piccolo</string>
+    <string name="battery_percent_text_size_even_smaller">Ancora più piccolo</string>
+    <string name="battery_percent_text_size_smallest">Minore</string>
 
 </resources>
