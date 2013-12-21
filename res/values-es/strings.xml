@@ -24,7 +24,7 @@
     <string name="battery_style_circle_percent">Circular con porcentaje</string>
     <string name="battery_style_kitkat">KitKat</string>
     <string name="battery_style_kitkat_percent">KitKat con porcentaje</string>
-    <string name="battery_style_percent">Porcentaje de batería en texto</string>
+    <string name="battery_percent_text_title">Porcentaje de batería en texto</string>
     <string name="battery_style_none">Ninguno</string>
 
     <string name="vol_music_controls_title">Botones de volumen cambian la canción</string>

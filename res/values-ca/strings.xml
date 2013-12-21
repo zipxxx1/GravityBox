@@ -6,7 +6,7 @@
     <string name="battery_style_title">Indicador de la bateria</string>
     <string name="battery_style_stock">Indicador predeterminat</string>
     <string name="battery_style_circle">Cercle amb percentatge</string>
-    <string name="battery_style_percent">Text gran amb el percentatge</string>
+    <string name="battery_percent_text_title">Text gran amb el percentatge</string>
     <string name="battery_style_none">No mostrar cap</string>
 
     <string name="vol_music_controls_title">Tecles de volum per canviar la pista</string>

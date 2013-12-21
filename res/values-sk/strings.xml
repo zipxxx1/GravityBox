@@ -9,7 +9,7 @@
     <string name="battery_style_circle_percent">Kruhový s percentami</string>
     <string name="battery_style_kitkat">KitKat</string>
     <string name="battery_style_kitkat_percent">KitKat s percentami</string>
-    <string name="battery_style_percent">Percentuálny text stavu batérie</string>
+    <string name="battery_percent_text_title">Percentuálny text stavu batérie</string>
     <string name="battery_style_none">Žiadny</string>
 
     <string name="vol_music_controls_title">Ovládanie hudby tlačidlami hlasitosti</string>

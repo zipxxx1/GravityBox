@@ -24,7 +24,6 @@
     <string name="battery_style_circle_percent">Circle battery with percentage</string>
     <string name="battery_style_kitkat">KitKat battery</string>
     <string name="battery_style_kitkat_percent">KitKat battery with percentage</string>
-    <string name="battery_style_percent">Battery percent text</string>
     <string name="battery_style_none">None</string>
 
     <string name="vol_music_controls_title">Volume keys skip track</string>
@@ -822,5 +821,13 @@
     <string name="fullscreen_caller_disabled">Disabled</string>
     <string name="fullscreen_caller_partial">Partial</string>
     <string name="fullscreen_caller_full">Full</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">Battery percent text</string>
+    <string name="battery_percent_text_size_title">Battery percent text size</string>
+    <string name="battery_percent_text_size_normal">Normal</string>
+    <string name="battery_percent_text_size_smaller">Smaller</string>
+    <string name="battery_percent_text_size_even_smaller">Even smaller</string>
+    <string name="battery_percent_text_size_smallest">Smallest</string>
 
 </resources>

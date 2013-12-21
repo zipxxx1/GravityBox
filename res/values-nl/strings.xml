@@ -23,7 +23,7 @@
     <string name="battery_style_stock">Standaard batterij indicator</string>
     <string name="battery_style_circle">Cirkel battery</string>
     <string name="battery_style_circle_percent">Cirkel batterij met percentage</string>
-    <string name="battery_style_percent">Batterij percentage tekst</string>
+    <string name="battery_percent_text_title">Batterij percentage tekst</string>
     <string name="battery_style_none">Geen</string>
 
     <string name="vol_music_controls_title">Volume knoppen slaan liedje over</string>

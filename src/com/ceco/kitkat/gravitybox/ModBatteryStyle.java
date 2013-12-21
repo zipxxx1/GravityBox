@@ -52,6 +52,7 @@ public class ModBatteryStyle {
     private static boolean mBatteryPercentTextEnabled;
     private static boolean mMtkPercentTextEnabled;
     private static StatusbarBatteryPercentage mPercentText;
+    private static int mPercentTextSize;
     private static CmCircleBattery mCircleBattery;
     private static View mStockBattery;
     private static KitKatBattery mKitKatBattery;
@@ -64,16 +65,22 @@ public class ModBatteryStyle {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED)) {
-                if (intent.hasExtra("batteryStyle")) {
-                    mBatteryStyle = intent.getIntExtra("batteryStyle", 1);
+            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE)) {
+                    mBatteryStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE, 1);
                     if (DEBUG) log("mBatteryStyle changed to: " + mBatteryStyle);
-                }
-                if (intent.hasExtra("batteryPercent")) {
-                    mBatteryPercentTextEnabled = intent.getBooleanExtra("batteryPercent", false);
-                    if (DEBUG) log("mBatteryPercentText changed to: " + mBatteryPercentTextEnabled);
-                }
-                updateBatteryStyle(null);
+                    updateBatteryStyle(null);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT)) {
+                    mBatteryPercentTextEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT, false);
+                    if (DEBUG) log("mPercentText changed to: " + mBatteryPercentTextEnabled);
+                    updateBatteryStyle(null);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_SIZE)) {
+                    mPercentTextSize = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_SIZE, 16);
+                    if (mPercentText != null && mBatteryPercentTextEnabled)
+                        mPercentText.getView().setTextSize(1, mPercentTextSize);
+                    if (DEBUG) log("mPercentTextSize changed to: " + mPercentTextSize);
             } else if (intent.getAction().equals(ACTION_MTK_BATTERY_PERCENTAGE_SWITCH)) {
                 mMtkPercentTextEnabled = intent.getIntExtra(EXTRA_MTK_BATTERY_PERCENTAGE_STATE, 0) == 1;
                 if (DEBUG) log("mMtkPercentText changed to: " + mMtkPercentTextEnabled);
@@ -197,6 +204,8 @@ public class ModBatteryStyle {
                             GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
                     mBatteryPercentTextEnabled = prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT, false);
+                    mPercentTextSize = Integer.valueOf(prefs.getString(
+                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16"));
 
                     Context context = (Context) param.args[0];
                     mMtkPercentTextEnabled = Utils.isMtkDevice() ?
@@ -205,6 +214,8 @@ public class ModBatteryStyle {
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED);
                     if (Utils.isMtkDevice()) {
                         intentFilter.addAction(ACTION_MTK_BATTERY_PERCENTAGE_SWITCH);
                     }
@@ -259,6 +270,7 @@ public class ModBatteryStyle {
             if (mPercentText != null) {
                 if (level != null) {
                     mPercentText.getView().setText(level + "%");
+                    mPercentText.getView().setTextSize(1, mPercentTextSize);
                 }
                 mPercentText.getView().setVisibility(
                         (mBatteryPercentTextEnabled || mMtkPercentTextEnabled) ?

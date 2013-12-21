@@ -7,7 +7,9 @@
     <string name="battery_style_stock">Indicatore batteria stock</string>
     <string name="battery_style_circle">Batteria circolare no percentuale</string>
     <string name="battery_style_circle_percent">Batteria circolare con percentuale</string>
-    <string name="battery_style_percent">Testo percentuale largo</string>
+    <string name="battery_style_kitkat">Batteria KitKat</string>
+    <string name="battery_style_kitkat_percent">Batteria KitKat con percentuale</string>
+    <string name="battery_percent_text_title">Batteria con percentuale</string>
     <string name="battery_style_none">Nessuno</string>
 
     <string name="vol_music_controls_title">Tasto vol cambia traccia</string>

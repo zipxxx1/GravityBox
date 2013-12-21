@@ -22,7 +22,7 @@
     <string name="battery_style_stock">Orijinal</string>
     <string name="battery_style_circle">Çember</string>
     <string name="battery_style_circle_percent">Yüzdeli çember</string>
-    <string name="battery_style_percent">Yüzde metni</string>
+    <string name="battery_percent_text_title">Yüzde metni</string>
     <string name="battery_style_none">Hiçbiri</string>
 
     <string name="vol_music_controls_title">Ses tuşlarıyla müzik kontrolü</string>

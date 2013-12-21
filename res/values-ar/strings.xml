@@ -22,7 +22,7 @@
     <string name="battery_style_stock">افتراضي</string>
     <string name="battery_style_circle">دائري</string>
     <string name="battery_style_circle_percent">دائري مع نسبة مئوية</string>
-    <string name="battery_style_percent">نسبة مئوية</string>
+    <string name="battery_percent_text_title">نسبة مئوية</string>
     <string name="battery_style_none">لا شيء</string>
 
     <string name="vol_music_controls_title">تنقل بمفاتيح الصوت</string>
