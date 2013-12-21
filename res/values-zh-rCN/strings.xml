@@ -329,9 +329,9 @@
     <string name="pref_disable_roaming_indicators_summary">禁用后漫游指示器上（R）不可见，请小心使用</string>
 
     <!-- Battery status in pie controls -->
-    <string name="pie_battery_status_charging">正在充电:（<xliff:g id="percent">%d</xliff:g>%%）</string>
+    <string name="pie_battery_status_charging">正在充电:<xliff:g id="percent">%d</xliff:g>%%</string>
     <string name="pie_battery_status_full">已充满!</string>
-    <string name="pie_battery_status_discharging">剩余电量：<xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="pie_battery_status_discharging">剩余电量:<xliff:g id="percent">%d</xliff:g>%%</string>
 
     <!-- Phone status in pie controls -->
     <string name="pie_phone_status_no_service">无服务</string>
@@ -824,7 +824,7 @@
     
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">电量百分比</string>
-    <string name="battery_percent_text_size_title">电池百分比大小</string>
+    <string name="battery_percent_text_size_title">电量百分比大小</string>
     <string name="battery_percent_text_size_normal">标准</string>
     <string name="battery_percent_text_size_smaller">小</string>
     <string name="battery_percent_text_size_even_smaller">更小</string>
