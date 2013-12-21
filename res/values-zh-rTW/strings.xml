@@ -842,4 +842,30 @@
     <string name="fix_location_title">修正位置問題</string>
     <string name="fix_location_summary">如果您發現您所安裝的運動應用程式計數器無法正確跟隨您的距離，請啟用此選項(需要重新啟動)</string>
  
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">啟動器調整</string>
+    <string name="pref_cat_launcher_tweaks_summary">包含各種僅套用於 Google 啟動器的個性化配置選項</string>
+    <string name="pref_cat_launcher_desktop_grid_title">桌面網格</string>
+    <string name="pref_launcher_desktop_grid_info_title">當預設數值會破壞到小工具的版面，請使用其他數值，並請明智的使用此選項(需要重新啟動).</string>
+    <string name="pref_launcher_desktop_grid_rows_title">行數</string>
+    <string name="pref_launcher_desktop_grid_cols_title">列數</string>
+    <string name="desktop_grid_default">預設</string>
+    
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_title">螢幕關閉效果</string>
+    <string name="screen_off_effect_default">系統預設</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">淡出</string>
+    
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">電池電量百分比文字</string>
+    <string name="battery_percent_text_size_title">電池電量百分比文字大小</string>
+    <string name="battery_percent_text_size_normal">正常</string>
+    <string name="battery_percent_text_size_smaller">較小</string>
+    <string name="battery_percent_text_size_even_smaller">更小</string>
+    <string name="battery_percent_text_size_smallest">最小</string>
+    
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">電池設定</string>
+ 
 </resources>
