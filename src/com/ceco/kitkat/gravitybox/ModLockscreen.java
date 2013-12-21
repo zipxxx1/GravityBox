@@ -293,6 +293,10 @@ public class ModLockscreen {
                     final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     final Resources res = context.getResources();
                     mGlowPadView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowPadView");
+                    XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "showTargets",
+                            boolean.class, glowPadViewShowTargetsHook);
+                    XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "hideTargets",
+                            boolean.class, boolean.class, glowPadViewHideTargetsHook);
 
                     // apply custom bottom/right margin to shift unlock ring upwards/left
                     try {
@@ -330,11 +334,6 @@ public class ModLockscreen {
 
                             XposedHelpers.findAndHookMethod(
                                     mGlowPadView.getClass(), "onDraw", Canvas.class, glowPadViewOnDrawHook);
-                            XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "showTargets",
-                                    boolean.class, glowPadViewShowTargetsHook);
-                            XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "hideTargets",
-                                    boolean.class, boolean.class, glowPadViewHideTargetsHook);
-
                             if (DEBUG_ARC) log("Battery Arc initialized");
                         }
                         if (DEBUG_ARC) log("Battery Arc ready");
