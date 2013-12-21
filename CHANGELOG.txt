@@ -1,3 +1,43 @@
+Changelog 2.8.3 - 21/12/2013
+--------------------------------------
+- Screen recording:
+--- Accessible from power menu (when Power tweaks / Screen record in power menu enabled)
+--- Toggleable via Hardware Key Actions
+--- Toggleable from tasker apps by sending "gravitybox.intent.action.TOGGLE_SCREEN_RECORDING" intent
+--- Allows turning on pointer to show touches
+- Dialer tweaks:
+--- Flip action while ringing to mute or reject incoming call
+--- Call vibrations (on call connected,disconnected,waiting; vibrate at 45th second)
+--- Fullscreen caller photo (allows 2 modes: partial or full)
+--- Unknown caller photo
+--- Option to show dialpad automatically upon opening Dialer app
+- QuickSettings:
+--- Swipe notification panel handle to switch between notifications/tiles
+--- QuickRecord tile will create new file for each new recording. Recordings are stored under "AudioRecordings" dir
+--- Improved compatibility with OmniROM - fixes blank tiles
+--- Fixed known SystemUI crash on AOSPA
+- Screen-off effect:
+--- Now uses system default by default
+--- Allows choosing between CRT or Fade effects
+- Launcher tweaks:
+--- Option to choose desktop grid size
+--- Applies to stock KitKat launcher and GEL
+--- Menu available only when there are supported launchers installed (thanks to bgcngm)
+- Option to set battery percent text size (thanks to bgcngm)
+- Option to set battery percent text style (with or without % sign) (thanks to bgcngm)
+- Battery indicator related tweaks moved under dedicated preference screen (thanks to bgcngm)
+- Fixed Lockscreen Torch being activated on navigation ring
+- Fixed Lockscreen Torch being dependent on Battery Arc option
+- Improved App Launcher initialization (potential fix for paid apps not being visible after reboot)
+- Updated French translation (thanks to ch-vox)
+- Updated Chinese (Traditional) translations (thanks to EdiTurn)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Slovak and Czech translations
+
 Changelog 2.8.2 - 14/12/2013
 --------------------------------------
 - Added support for shortcuts to all App Picker preferences
