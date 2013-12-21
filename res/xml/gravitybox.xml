@@ -542,6 +542,14 @@
                 android:dependency="pref_battery_percent_text"
                 android:defaultValue="16" />
 
+            <ListPreference
+                android:key="pref_battery_percent_text_style"
+                android:title="@string/battery_percent_text_style_title" 
+                android:entries="@array/battery_percent_text_style_entries"
+                android:entryValues="@array/battery_percent_text_style_values"
+                android:dependency="pref_battery_percent_text"
+                android:defaultValue="%" />
+
         </PreferenceScreen>
 
         <PreferenceScreen
