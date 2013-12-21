@@ -811,6 +811,9 @@
     <string name="battery_percent_text_size_smaller">Pequeño</string>
     <string name="battery_percent_text_size_even_smaller">Muy pequeño</string>
     <string name="battery_percent_text_size_smallest">Diminuto</string>
+    <string name="battery_percent_text_style_title">Estilo de indicador en texto</string>
+    <string name="battery_percent_text_style_default">Predeterminado</string>
+    <string name="battery_percent_text_style_numbers_only">Solo números (sin icono de porcentaje)</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Ajustes de batería</string>
