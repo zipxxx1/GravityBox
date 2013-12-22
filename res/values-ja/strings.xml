@@ -9,7 +9,6 @@
     <string name="battery_style_circle_percent">サークル＋パーセントアイコン</string>
     <string name="battery_style_kitkat">KitKatアイコン</string>
     <string name="battery_style_kitkat_percent">KitKatアイコン＋パーセント</string>
-    <string name="battery_percent_text_title">バッテリーパーセントテキスト</string>
     <string name="battery_style_none">なし</string>
 
     <string name="vol_music_controls_title">音量キーで曲操作</string>
