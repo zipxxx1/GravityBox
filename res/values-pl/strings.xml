@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">GravityBox</string>
 
@@ -69,8 +69,8 @@
     <string name="quick_settings_torch_on">Latarka włączona</string>
     <string name="quick_settings_torch_off">Latarka wyłączona</string>
     <string name="quick_settings_torch_off_notif">Dotknij aby wyłączyć</string>
-    <string name="quick_settings_qr_playing">Odtwarzam...</string>
-    <string name="quick_settings_qr_recording">Nagrywam...</string>
+    <string name="quick_settings_qr_playing">Odtwarzam&#8230;</string>
+    <string name="quick_settings_qr_recording">Nagrywam&#8230;</string>
     <string name="quick_settings_qr_recorded">Nagrano</string>
     <string name="quick_settings_qr_record">Przytrzymaj aby nagrać</string>
     <string name="quick_settings_qr_recording_notif">Dotknij aby zatrzymać</string>
@@ -82,7 +82,7 @@
     <string name="quick_settings_wifi">Wi-Fi</string>
     <string name="quick_settings_wifi_off">Wi-Fi Wyłączone</string>
     <string name="quick_settings_wifi_not_connected">Nie podłączony</string>
-    <string name="quick_settings_wifi_turning_on">Włączanie...</string>
+    <string name="quick_settings_wifi_turning_on">Włączanie&#8230;</string>
     <string name="quick_settings_nfc_on">NFC Włączone</string>
     <string name="quick_settings_nfc_off">NFC Wyłączone</string>
 
@@ -354,9 +354,9 @@
     <string name="pref_disable_roaming_indicators_summary">Gdy wyłączone, wskaźnik R nie będzie widoczny podczas roamingu. Używaj rozważnie.</string>
 
     <!-- Battery status in pie controls -->
-    <string name="pie_battery_status_charging">Ładowanie (%d%%)</string>
+    <string name="pie_battery_status_charging">Ładowanie (<xliff:g id="percent">%d</xliff:g>%%)</string>
     <string name="pie_battery_status_full">Naładowana</string>
-    <string name="pie_battery_status_discharging">pozostało %d%%</string>
+    <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% pozostało</string>
 
     <!-- Phone status in pie controls -->
     <string name="pie_phone_status_no_service">Brak usługi</string>
@@ -490,7 +490,7 @@
     <string name="pref_clock_link_summary">Link zegara na panelu powiadomień do aplikacji Zegara zamiast do ustawień Daty i Czasu</string>
 
     <!-- GravityBox settings startup handling -->
-    <string name="gb_startup_progress">Czekam na odpowiedź z GravityBox framework...</string>
+    <string name="gb_startup_progress">Czekam na odpowiedź z GravityBox framework&#8230;</string>
     <string name="gb_startup_error">GravityBox framework nie odpowiada. Kończenie.</string>
 
     <!-- National data roaming -->
@@ -661,9 +661,9 @@
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
-    <string name="service_background_processes">%1$s wolne</string>
+    <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> wolne</string>
     <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
-    <string name="service_foreground_processes">%1$s w użyciu</string>
+    <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> w użyciu</string>
     <string name="pref_rambar_title">Pasek RAM listy ostatnich aplikacji</string>
     <string name="rambar_off">Wyłączony</string>
     <string name="rambar_top">Na górze</string>
@@ -865,7 +865,7 @@
     <string name="battery_percent_text_style_title">Styl tekstowego wskaźnika baterii</string>
     <string name="battery_percent_text_style_default">Domyślny</string>
     <string name="battery_percent_text_style_numbers_only">Tylko cyfry (bez symbolu procentów)</string>
-  
+
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Ustawienia baterii</string>
 
