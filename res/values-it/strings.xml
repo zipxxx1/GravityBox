@@ -121,8 +121,8 @@
     <string name="press_color_to_apply">Premi sul colore per applicare</string>
 
     <!-- Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Colore sfondo statusbar</string>
-    <string name="statusbar_bgcolor_summary">Permette di impostare il colore di sfondo della statusbar e la trasparenza</string>
+    <string name="statusbar_bgcolor_title">Colore sfondo barra di stato</string>
+    <string name="statusbar_bgcolor_summary">Permette di impostare il colore di sfondo della barra di stato e la trasparenza</string>
 
     <!-- Fix speech settings -->
     <string name="fix_tts_settings_title">Fix impostazioni voce</string>
@@ -133,8 +133,8 @@
     <string name="fix_dev_opts_summary">Sblocca impostazioni sviluppatore avanzate (richiede riavvio)</string>
 
     <!-- Main preference categories -->
-    <string name="pref_cat_statusbar_title">Modifiche statusbar</string>
-    <string name="pref_cat_statusbar_summary">Contiene varie modifiche alla statusbar</string>
+    <string name="pref_cat_statusbar_title">Modifiche barra di stato</string>
+    <string name="pref_cat_statusbar_summary">Contiene varie modifiche alla barra di stato</string>
     <string name="pref_cat_misc_title">Modifiche varie</string>
     <string name="pref_cat_misc_summary">Contiene tutte le altre modifiche che non ricadono in categorie specifiche</string>
     <string name="pref_cat_fixes_title">Fix generali</string>
@@ -162,22 +162,22 @@
     <string name="dual_sim_ringer_summary">Lancia l\'applicazione che consente di impostare suonerie e notifiche specifiche per ogni SIM</string>
 
     <!-- Lockscreen tweaks -->
-    <string name="pref_cat_lockscreen_title">Modifiche Lockscreen</string>
-    <string name="pref_cat_lockscreen_summary">Contiene varie modifiche al lockscreen</string>
-    <string name="pref_cat_lockscreen_background_title">Sfondo Lockscreen</string>
+    <string name="pref_cat_lockscreen_title">Modifiche schermata di blocco</string>
+    <string name="pref_cat_lockscreen_summary">Contiene varie modifiche alla schermata di blocco</string>
+    <string name="pref_cat_lockscreen_background_title">Sfondo schermata di blocco</string>
     <string name="pref_lockscreen_background_title">Stile sfondo</string>
-    <string name="lockscreen_bg_default">Wallpaper di default</string>
+    <string name="lockscreen_bg_default">Sfondo di default</string>
     <string name="lockscreen_bg_color">Colore di riempimento</string>
     <string name="lockscreen_bg_image">Immagine personalizzata</string>
     <string name="pref_lockscreen_bg_color_title">Imposta colore personalizzato</string>
-    <string name="pref_lockscreen_bg_color_summary">Consente di impostare un colore di sfondo personalizzato per il lockscreen</string>
+    <string name="pref_lockscreen_bg_color_summary">Consente di impostare un colore di sfondo personalizzato per la schermata di blocco</string>
     <string name="pref_lockscreen_bg_image_title">Imposta immagine personalizzata</string>
-    <string name="pref_lockscreen_bg_image_summary">Consente di impostare una immagine di sfondo personalizzata per il lockscreen</string>
+    <string name="pref_lockscreen_bg_image_summary">Consente di impostare una immagine di sfondo personalizzata per la schermata di blocco</string>
     <string name="lockscreen_background_result_successful">Sfondo cambiato</string>
     <string name="lockscreen_background_result_not_successful">Sfondo non cambiato</string>
     <string name="pref_cat_lockscreen_other_title">Altro</string>
     <string name="pref_lockscreen_maximize_widgets_title">Massimizza i widget</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Se abilitato, i widget del lockscreen verranno massimizzati di default</string>
+    <string name="pref_lockscreen_maximize_widgets_summary">Se abilitato, i widget della schermata di blocco verranno massimizzati di default</string>
 
     <!-- Power tweaks category -->
     <string name="pref_cat_power_title">Modifiche batteria</string>
@@ -196,7 +196,7 @@
     <string name="pref_brightness_min_summary">Permette di impostare il livello di luminosità minimo. Si applica all\'impostazione manuale (richiede riavvio)</string>
 
     <!-- Autobrightness levels -->
-    <string name="pref_ab_title">Livelli Autobrightness</string>
+    <string name="pref_ab_title">Livelli Auto luminosità</string>
     <string name="pref_ab_summary">Permette di impostare la luminosità dello schermo in base alla luce ambientale (lux)</string>
     <string name="level">Livello</string>
     <string name="pref_ab_lux_max_label">Lux massima</string>
@@ -209,12 +209,12 @@
     <string name="pref_ab_number_not_descending">I valori dei livelli alti non possono essere inferiori a quelli dei livelli più bassi</string>
     <string name="pref_ab_values_set">Valori per %s impostati</string>
     <string name="pref_ab_config_saved">Nuova configurazione autobrightness salvata</string>
-    <string name="pref_ab_config_cancelled">Configurazione Autobrightness NON salvata</string>
+    <string name="pref_ab_config_cancelled">Configurazione Auto luminosità NON salvata</string>
     <string name="pref_ab_button_set">Applica</string>
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Abilita rotazione lockscreen</string>
-    <string name="pref_lockscreen_rotation_summary">ATTENZIONE: potrebbe scambiare gli anelli di sblocco sui dispositivi in cui il lockscreen AOSP sia stato modificato dal produttore</string>
+    <string name="pref_lockscreen_rotation_summary">ATTENZIONE: potrebbe scambiare gli anelli di sblocco sui dispositivi in cui la schermata di blocco AOSP sia stato modificata dal produttore</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Abilita tasto menu</string>
@@ -236,15 +236,15 @@
     <string name="pref_music_volume_steps_summary">Aggiunge più step volume per lo strem musicale (richiede riavvio)</string>
 
     <!-- Safe headset media volume -->
-    <string name="pref_safe_media_volume_title">Safe headset media volume</string>
-    <string name="pref_safe_media_volume_summary">Attiva o disattiva la feature safe headset media volume</string>
+    <string name="pref_safe_media_volume_title">Volume sicuro in cuffia</string>
+    <string name="pref_safe_media_volume_summary">Attiva o disattiva la funzione volume sicuro in cuffia</string>
 
     <!-- Disable charging LED -->
     <string name="pref_charging_led_disable_title">Disabilita LED in carica</string>
     <string name="pref_charging_led_disable_summary">Disabilita LED durante la carica</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Azioni tasti Hardware</string>
+    <string name="pref_cat_hwkey_actions_title">Azioni tasti fisici</string>
     <string name="pref_cat_hwkey_actions_summary">Permette di impostare azioni personalizzate per la pressione dei stasti hardware</string>
     <string name="hwkey_menu_longpress_dialog_title">Azione per tasto MENU premuto a lungo</string>
     <string name="hwkey_menu_doubletap_dialog_title">Azione per il doppio-tap del tasto MENU</string>
@@ -306,7 +306,7 @@
 
     <!-- Quick pulldown -->
     <string name="pref_quick_pulldown_title">Visualizzazione rapida</string>
-    <string name="pref_quick_pulldown_summary">Trascinando un bordo dello schermo appariranno direttamente i QuickSettings</string>
+    <string name="pref_quick_pulldown_summary">Trascinando un bordo superiore verso il basso appariranno direttamente i QuickSettings</string>
     <string name="quick_pulldown_off">Spento</string>
     <string name="quick_pulldown_right">Destra</string>
     <string name="quick_pulldown_left">Sinistra</string>
@@ -865,5 +865,12 @@
     <string name="battery_percent_text_size_smaller">Piccolo</string>
     <string name="battery_percent_text_size_even_smaller">Ancora più piccolo</string>
     <string name="battery_percent_text_size_smallest">Minore</string>
+    <string name="battery_percent_text_style_title">Stile visualizzazione batteria percentuale</string>
+    <string name="battery_percent_text_style_default">Default</string>
+    <string name="battery_percent_text_style_numbers_only">Solo numero no percentuale</string>
+
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">Settaggi visualizzazione batteria</string>
+
 
 </resources>
