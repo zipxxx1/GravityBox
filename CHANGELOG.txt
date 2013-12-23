@@ -1,3 +1,14 @@
+Changelog 2.8.4 - 23/12/2013
+--------------------------------------
+- AppLaucnher: fix missing apps after reboot on some devices
+- Fixed launching custom app from Notification Panel Clock on Android 4.1
+- Updated Italian translation (thanks to pesa1234)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Polish translations (thanks to xtrem007)
+- Updated French translation (thanks to ch-vox)
+
 Changelog 2.8.3 - 21/12/2013
 --------------------------------------
 - QuickSettings:
