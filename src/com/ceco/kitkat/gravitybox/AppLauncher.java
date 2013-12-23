@@ -121,6 +121,11 @@ public class AppLauncher {
         mAppSlots.add(new AppInfo(R.id.quickapp7));
         mAppSlots.add(new AppInfo(R.id.quickapp8));
 
+        for (int i = 0; i < GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.size(); i++) {
+            updateAppSlot(i, mPrefs.getString(
+                    GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.get(i), null));
+        }
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED);
         intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
