@@ -776,7 +776,7 @@
     <string name="pref_lockscreen_ring_torch_summary">Des/activa la linterna cuando se pulsa prolongadamente el anillo de desbloqueo</string>
 
     <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">Tiempo de espera del panel de volumen</string>
+    <string name="pref_volume_panel_timeout_title">Ocultar panel de volumen tras</string>
 
     <!-- Ringer tile modes -->
     <string name="pref_qs_ringer_mode_title">Modos de la casilla de modo de tono</string>
@@ -811,6 +811,9 @@
     <string name="battery_percent_text_size_smaller">Pequeño</string>
     <string name="battery_percent_text_size_even_smaller">Muy pequeño</string>
     <string name="battery_percent_text_size_smallest">Diminuto</string>
+    <string name="battery_percent_text_style_title">Estilo de indicador en texto</string>
+    <string name="battery_percent_text_style_default">Predeterminado</string>
+    <string name="battery_percent_text_style_numbers_only">Solo números (sin icono de porcentaje)</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Ajustes de batería</string>
