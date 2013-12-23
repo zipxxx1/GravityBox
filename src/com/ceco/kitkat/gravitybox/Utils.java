@@ -56,6 +56,7 @@ public class Utils {
     private static Boolean mIsMtkDevice = null;
     private static Boolean mIsXperiaDevice = null;
     private static Boolean mIsMotoXtDevice = null;
+    private static Boolean mIsExynosDevice = null;
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     
@@ -146,6 +147,13 @@ public class Utils {
         mIsMotoXtDevice = Build.MANUFACTURER.equalsIgnoreCase("motorola") &&
                 Build.MODEL.toLowerCase().contains("xt10");
         return mIsMotoXtDevice;
+    }
+
+    public static boolean isExynosDevice() {
+        if (mIsExynosDevice != null) return mIsExynosDevice;
+
+        mIsExynosDevice = Build.HARDWARE.toLowerCase().contains("smdk");
+        return mIsExynosDevice;
     }
 
     public static boolean hasGeminiSupport() {
