@@ -7,7 +7,7 @@
     <string name="battery_style_stock">Standard</string>
     <string name="battery_style_circle">Rund</string>
     <string name="battery_style_circle_percent">Rund mit Prozentwert</string>
-        <string name="battery_style_kitkat">KitKat</string>
+    <string name="battery_style_kitkat">KitKat</string>
     <string name="battery_style_kitkat_percent">KitKat mit Prozentwert</string>
     <string name="battery_percent_text_title">Nur Prozentwert</string>
     <string name="battery_style_none">Keine Anzeige</string>
@@ -666,7 +666,7 @@
     <!-- Minimum screen brightness warning -->
     <string name="screen_brightness_min_warning">Ihr Bildschirm unterstützt möglicherweise keine Werte, die kleiner als 20 sind. Falls Ihr Bildschirm nicht aufleuchtet, halten Sie bitte die Lautstärke-Lauter-Taste für mindestens 7 Sekunden gedrückt, um die Helligkeit zurückzusetzen. Anschließend können Sie die minimale Helligkeit einstellen, um höhere Werte zu verwenden.</string>
 
-        <!-- Navbar tweaks categories -->
+    <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">Allgemein</string>
     <string name="pref_cat_navbar_keys_title">Navigationstasten</string>
     <string name="pref_cat_navbar_color_title">Farben</string>
@@ -679,7 +679,7 @@
     <string name="pref_navbar_key_glow_color_title">Leuchtfarbe der Navigationstasten</string>
     <string name="pref_navbar_bg_color_title">Hintergrundfarbe der Navigationsleiste</string>
         
-        <!-- Transparency manager mode -->
+    <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Transparenz-Manager-Modus</string>
     <string name="pref_tm_mode_summary">Erfordert Neustart</string>
     <string name="tm_mode_disabled">Deaktiviert</string>
