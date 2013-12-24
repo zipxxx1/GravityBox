@@ -764,6 +764,7 @@ public class ModStatusBar {
         try {
             final Intent intent = getIntentFromClockLink();
             if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mContext.startActivity(intent);
                 if (mPhoneStatusBar != null) {
                     XposedHelpers.callMethod(mPhoneStatusBar, Build.VERSION.SDK_INT > 16 ?

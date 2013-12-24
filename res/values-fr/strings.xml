@@ -857,7 +857,7 @@
 
     <!-- Fix location issue (Android 4.2.1 JIT bug) -->
     <string name="fix_location_title">Problème de localisation GPS</string>
-    <string name="fix_location_summary">Activer dans le cas où les valeurs (distance, vitesse...) ne sont pas correctement calculés par des applications de tracking sportif (redémarrage nécessaire)</string>
+    <string name="fix_location_summary">Activer dans le cas où les valeurs (distance, vitesse...) ne sont pas correctement calculées par des applications de tracking sportif (redémarrage nécessaire)</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Modifications du lanceur</string>
