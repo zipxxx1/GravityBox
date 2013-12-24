@@ -54,6 +54,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -88,10 +89,22 @@ class ScreenRecordingService extends Service {
 
     private class CaptureThread extends Thread {
         public void run() {
-            Runtime rt = Runtime.getRuntime();
-            String[] cmds = new String[] {"/system/bin/screenrecord", TMP_PATH};
             try {
-                Process proc = rt.exec(cmds);
+                // Firstly, make sure we are able to get to pid field of ProcessImpl class
+                final Class<?> classProcImpl = Class.forName("java.lang.ProcessManager$ProcessImpl");
+                final Field fieldPid = classProcImpl.getDeclaredField("pid");
+                fieldPid.setAccessible(true);
+
+                // construct and start the process
+                ProcessBuilder pb = new ProcessBuilder();
+                pb.command("/system/bin/screenrecord", TMP_PATH);
+                pb.redirectErrorStream(true);
+                Process proc = pb.start();
+
+                // Get process PID to be used with native kill later
+                final int pid = fieldPid.getInt(proc);
+                Log.d(TAG, "Screenrecord PID = " + pid);
+
                 BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 
                 while (!isInterrupted()) {
@@ -115,14 +128,29 @@ class ScreenRecordingService extends Service {
                 }
 
                 // Terminate the recording process
-                // HACK: There is no way to send SIGINT to a process, so we... hack
-                rt.exec(new String[]{"killall", "-2", "screenrecord"});
+                Runtime.getRuntime().exec(new String[]{ "kill", "-2", String.valueOf(pid) });
             } catch (IOException e) {
                 // Notify something went wrong
                 Message msg = Message.obtain(mHandler, MSG_TASK_ERROR, 0, 0, e.getMessage());
                 mHandler.sendMessage(msg);
 
                 // Log the error as well
+                Log.e(TAG, "Error while starting the screenrecord process", e);
+            } catch (NoSuchFieldException e) {
+                Message msg = Message.obtain(mHandler, MSG_TASK_ERROR, 0, 0, e.getMessage());
+                mHandler.sendMessage(msg);
+                Log.e(TAG, "Error while starting the screenrecord process", e);
+            } catch (IllegalArgumentException e) {
+                Message msg = Message.obtain(mHandler, MSG_TASK_ERROR, 0, 0, e.getMessage());
+                mHandler.sendMessage(msg);
+                Log.e(TAG, "Error while starting the screenrecord process", e);
+            } catch (IllegalAccessException e) {
+                Message msg = Message.obtain(mHandler, MSG_TASK_ERROR, 0, 0, e.getMessage());
+                mHandler.sendMessage(msg);
+                Log.e(TAG, "Error while starting the screenrecord process", e);
+            } catch (ClassNotFoundException e) {
+                Message msg = Message.obtain(mHandler, MSG_TASK_ERROR, 0, 0, e.getMessage());
+                mHandler.sendMessage(msg);
                 Log.e(TAG, "Error while starting the screenrecord process", e);
             }
         }
@@ -264,12 +292,37 @@ class ScreenRecordingService extends Service {
         }
     }
 
+    private boolean isScreenrecordSupported() {
+        // Exynos devices are currently known to have issues
+        if (Utils.isExynosDevice()) {
+            Log.e(TAG, "isScreenrecordSupported: screen recording not supported on Exynos devices");
+        }
+        // check if screenrecord and kill binaries exist and are executable
+        File f = new File("/system/bin/screenrecord");
+        final boolean scrBinaryOk = f.exists() && f.canExecute();
+        if (!scrBinaryOk) {
+            Log.e(TAG, "isScreenrecordSupported: screenrecord binary doesn't exist or is not executable");
+        }
+        f = new File("/system/bin/kill");
+        final boolean killBinaryOk = f.exists() && f.canExecute();
+        if (!killBinaryOk) {
+            Log.e(TAG, "isScreenrecordSupported: kill binary doesn't exist or is not executable");
+        }
+        return (!Utils.isExynosDevice() && scrBinaryOk && killBinaryOk);
+    }
+
     private void startScreenrecord() {
+        if (!isScreenrecordSupported()) {
+            Log.e(TAG, "startScreenrecord: System does not support screen recording");
+            Toast.makeText(this, "Your system does not support screen recording", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (isRecording()) {
-            Log.e(TAG, "Recording is already running, ignoring screenrecord start request");
+            Log.e(TAG, "startScreenrecord: Recording is already running, ignoring screenrecord start request");
             return;
         } else if (isProcessing()) {
-            Log.e(TAG, "Previous recording is still being processed, ignoring screenrecord start request");
+            Log.e(TAG, "startScreenrecord: Previous recording is still being processed, " +
+            		"ignoring screenrecord start request");
             Toast.makeText(this, R.string.screenrecord_toast_processing, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -341,9 +394,6 @@ class ScreenRecordingService extends Service {
                 new MediaScannerConnection.OnScanCompletedListener() {
                 public void onScanCompleted(String path, Uri uri) {
                     Log.i(TAG, "MediaScanner done scanning " + path);
-                    if (isIdle()) {
-                        stopSelf();
-                    }
                 }
             });
 

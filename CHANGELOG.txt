@@ -1,3 +1,15 @@
+Changelog 2.8.4 - 23/12/2013
+--------------------------------------
+- Improved Screen Recording
+--- now can be used without busybox installed
+--- detects if device supports screen recording
+- AppLauncher: fix missing apps after reboot on some devices
+- Fixed Screen Off Effect not respecting system default
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Italian translations (thanks to pesa1234)
+
 Changelog 2.8.3 - 21/12/2013
 --------------------------------------
 - Screen recording:
