@@ -327,10 +327,6 @@
     <string name="quick_pulldown_right">Droit</string>
     <string name="quick_pulldown_left">Gauche</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Désactiver sortie de veille</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Pour les modèles tels que Jiayu G3s, G4, permet de désactiver la sortie de veille par les touches de volume</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Couleurs barre d\'état</string>
 
