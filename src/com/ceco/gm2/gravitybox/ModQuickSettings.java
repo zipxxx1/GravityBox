@@ -28,6 +28,7 @@ import java.util.Set;
 
 import com.ceco.gm2.gravitybox.Utils.MethodState;
 import com.ceco.gm2.gravitybox.quicksettings.AQuickSettingsTile;
+import com.ceco.gm2.gravitybox.quicksettings.CameraTile;
 import com.ceco.gm2.gravitybox.quicksettings.ExpandedDesktopTile;
 import com.ceco.gm2.gravitybox.quicksettings.GpsTile;
 import com.ceco.gm2.gravitybox.quicksettings.NetworkModeTile;
@@ -165,7 +166,8 @@ public class ModQuickSettings {
             R.id.screenshot_tileview,
             R.id.gps_tileview,
             R.id.ringer_mode_tileview,
-            R.id.nfc_tileview
+            R.id.nfc_tileview,
+            R.id.camera_tileview
         ));
         if (Utils.isMtkDevice()) {
             mCustomGbTileKeys.add(R.id.wifi_tileview);
@@ -629,6 +631,10 @@ public class ModQuickSettings {
                 GravityBoxTile gbTile = new GravityBoxTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 gbTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(gbTile);
+
+                CameraTile camTile = new CameraTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                camTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                mTiles.add(camTile);
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {

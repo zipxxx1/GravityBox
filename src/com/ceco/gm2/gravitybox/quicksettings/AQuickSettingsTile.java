@@ -54,6 +54,7 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
     protected Object mPanelBar;
     protected int mTileStyle;
     protected Object mQuickSettings;
+    protected ViewGroup mContainer;
 
     public AQuickSettingsTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         mContext = context;
@@ -67,6 +68,7 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
 
     public void setupQuickSettingsTile(ViewGroup viewGroup, LayoutInflater inflater, 
             XSharedPreferences prefs, Object quickSettings) {
+        mContainer = viewGroup;
         mQuickSettings = quickSettings;
         int layoutId = mResources.getIdentifier("quick_settings_tile", "layout", PACKAGE_NAME);
         mTile = (FrameLayout) inflater.inflate(layoutId, viewGroup, false);
