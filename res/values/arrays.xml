@@ -676,4 +676,16 @@
         <item>full</item>
     </string-array>
 
+    <string-array name="volume_rocker_wake_entries" translatable="false">
+        <item>@string/volume_rocker_wake_default</item>
+        <item>@string/volume_rocker_wake_enabled</item>
+        <item>@string/volume_rocker_wake_disabled</item>
+    </string-array>
+
+    <string-array name="volume_rocker_wake_values" translatable="false">
+        <item>default</item>
+        <item>enabled</item>
+        <item>disabled</item>
+    </string-array>
+
 </resources>
