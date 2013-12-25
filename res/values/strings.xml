@@ -74,6 +74,7 @@
     <string name="quick_settings_stay_awake_off">Stay awake off</string>
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
+    <string name="quick_settings_camera_error_connect">Can\'t connect to camera</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Statusbar QuickSettings tiles</string>
@@ -102,6 +103,7 @@
     <string name="qs_tile_stay_awake">Stay awake</string>
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Camera</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>

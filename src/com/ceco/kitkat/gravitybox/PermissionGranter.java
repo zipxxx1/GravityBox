@@ -30,6 +30,7 @@ public class PermissionGranter {
 
     private static final String PERM_ACCESS_SURFACE_FLINGER = "android.permission.ACCESS_SURFACE_FLINGER";
     private static final String PERM_WRITE_SETTINGS = "android.permission.WRITE_SETTINGS";
+    private static final String PERM_CAMERA = "android.permission.CAMERA";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -45,6 +46,8 @@ public class PermissionGranter {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final String pkgName = (String) XposedHelpers.getObjectField(param.args[0], "packageName");
+
+                    // GravityBox
                     if (GravityBox.PACKAGE_NAME.equals(pkgName)) {
                         final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
                         final HashSet<String> grantedPerms = 
@@ -75,14 +78,37 @@ public class PermissionGranter {
                             gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
                                     "appendInts", gpGids, bpGids);
 
-                            if (DEBUG) log("Permission added: " + pWriteSettings);
+                            if (DEBUG) log(pkgName + ": Permission added: " + pWriteSettings);
                         }
 
                         if (DEBUG) {
                             log("List of permissions: ");
                             for (String perm : grantedPerms) {
-                                log(perm);
+                                log(pkgName + ": " + perm);
                             }
+                        }
+                    }
+
+                    // SystemUI
+                    if (pkgName.equals("com.android.systemui")) {
+                        final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
+                        final Object sharedUser = XposedHelpers.getObjectField(extras, "sharedUser");
+                        final HashSet<String> grantedPerms = 
+                                (HashSet<String>) XposedHelpers.getObjectField(sharedUser, "grantedPermissions");
+                        final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
+                        final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
+
+                        // Add android.permission.CAMERA needed by camera tile
+                        if (!grantedPerms.contains(PERM_CAMERA)) {
+                            final Object pCamera = XposedHelpers.callMethod(permissions, "get",
+                                    PERM_CAMERA);
+                            grantedPerms.add(PERM_CAMERA);
+                            int[] gpGids = (int[]) XposedHelpers.getObjectField(sharedUser, "gids");
+                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCamera, "gids");
+                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
+                                    "appendInts", gpGids, bpGids);
+
+                            if (DEBUG) log(pkgName + ": Permission added: " + pCamera);
                         }
                     }
                 }
