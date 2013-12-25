@@ -677,7 +677,7 @@
                 android:title="@string/pref_navbar_key_color_title"
                 android:defaultValue="@color/navbar_key_color"
                 android:dependency="pref_navbar_color_enable"
-                alphaSlider="true" />
+                alphaSlider="false" />
 
             <net.margaritov.preference.colorpicker.ColorPickerPreference 
                 android:key="pref_navbar_key_glow_color"
