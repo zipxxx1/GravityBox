@@ -654,6 +654,12 @@
                 android:title="@string/pref_navbar_swap_keys_title"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference 
+                android:key="pref_navbar_cursor_control"
+                android:title="@string/pref_navbar_cursor_control_title"
+                android:summary="@string/pref_navbar_cursor_control_summary"
+                android:defaultValue="false" />
+
         </PreferenceCategory>
 
         <PreferenceCategory
