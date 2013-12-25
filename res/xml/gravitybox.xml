@@ -654,6 +654,12 @@
                 android:title="@string/pref_navbar_swap_keys_title"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference 
+                android:key="pref_navbar_cursor_control"
+                android:title="@string/pref_navbar_cursor_control_title"
+                android:summary="@string/pref_navbar_cursor_control_summary"
+                android:defaultValue="false" />
+
         </PreferenceCategory>
 
         <PreferenceCategory
@@ -671,7 +677,7 @@
                 android:title="@string/pref_navbar_key_color_title"
                 android:defaultValue="@color/navbar_key_color"
                 android:dependency="pref_navbar_color_enable"
-                alphaSlider="true" />
+                alphaSlider="false" />
 
             <net.margaritov.preference.colorpicker.ColorPickerPreference 
                 android:key="pref_navbar_key_glow_color"
@@ -1178,11 +1184,12 @@
                 android:entryValues="@array/vol_key_cursor_control_values"
                 android:defaultValue="0" />
 
-            <CheckBoxPreference
-                android:key="pref_volume_rocker_wake_disable"
-                android:title="@string/pref_volume_rocker_wake_disable_title"
-                android:summary="@string/pref_volume_rocker_wake_disable_summary"
-                android:defaultValue="false" />
+            <ListPreference
+                android:key="pref_volume_rocker_wake"
+                android:title="@string/pref_volume_rocker_wake_title"
+                android:entries="@array/volume_rocker_wake_entries"
+                android:entryValues="@array/volume_rocker_wake_values"
+                android:defaultValue="default" />
 
         </PreferenceCategory>
 

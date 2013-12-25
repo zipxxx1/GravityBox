@@ -43,6 +43,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -84,6 +85,7 @@ class ScreenRecordingService extends Service {
     private Handler mHandler;
     private Notification mRecordingNotif;
     private int mRecordingStatus;
+    private int mShowTouchesDefault = 0;
 
     private CaptureThread mCaptureThread;
 
@@ -252,7 +254,7 @@ class ScreenRecordingService extends Service {
             startForeground(SCREENRECORD_NOTIFICATION_ID, mRecordingNotif);
         } else {
             stopForeground(true);
-            disableShowTouches();
+            resetShowTouches();
         }
 
         Intent intent = new Intent(ACTION_SCREEN_RECORDING_STATUS_CHANGED);
@@ -276,9 +278,9 @@ class ScreenRecordingService extends Service {
         }
     }
 
-    private void disableShowTouches() {
+    private void resetShowTouches() {
         try {
-            Settings.System.putInt(getContentResolver(), SETTING_SHOW_TOUCHES, 0);
+            Settings.System.putInt(getContentResolver(), SETTING_SHOW_TOUCHES, mShowTouchesDefault);
         } catch (Throwable t) {
             Log.e(TAG, "Error disabling SHOW_TOUCHES: " + t.getMessage());
         }
@@ -327,6 +329,11 @@ class ScreenRecordingService extends Service {
             return;
         }
 
+        try {
+            mShowTouchesDefault = Settings.System.getInt(getContentResolver(), SETTING_SHOW_TOUCHES);
+        } catch (SettingNotFoundException e) {
+            //
+        }
         mCaptureThread = new CaptureThread();
         mCaptureThread.start();
         updateStatus(STATUS_RECORDING);

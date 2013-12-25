@@ -29,6 +29,7 @@ import java.util.Set;
 import com.ceco.kitkat.gravitybox.R;
 import com.ceco.kitkat.gravitybox.Utils.MethodState;
 import com.ceco.kitkat.gravitybox.quicksettings.AQuickSettingsTile;
+import com.ceco.kitkat.gravitybox.quicksettings.CameraTile;
 import com.ceco.kitkat.gravitybox.quicksettings.ExpandedDesktopTile;
 import com.ceco.kitkat.gravitybox.quicksettings.GpsTile;
 import com.ceco.kitkat.gravitybox.quicksettings.GravityBoxTile;
@@ -144,7 +145,8 @@ public class ModQuickSettings {
             R.id.screenshot_tileview,
             R.id.gps_tileview,
             R.id.ringer_mode_tileview,
-            R.id.nfc_tileview
+            R.id.nfc_tileview,
+            R.id.camera_tileview
         ));
 
         Map<String, Integer> tmpMap = new HashMap<String, Integer>();
@@ -669,6 +671,10 @@ public class ModQuickSettings {
                 GravityBoxTile gbTile = new GravityBoxTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 gbTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(gbTile);
+
+                CameraTile camTile = new CameraTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                camTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                mTiles.add(camTile);
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {

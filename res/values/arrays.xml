@@ -112,6 +112,7 @@
         <item>@string/qs_tile_expanded_desktop</item>
         <item>@string/qs_tile_screenshot</item>
         <item>@string/qs_tile_gravitybox</item>
+        <item>@string/qs_tile_camera</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_values_kk" translatable="false">
@@ -140,6 +141,7 @@
         <item>expanded_tileview</item>
         <item>screenshot_tileview</item>
         <item>gravitybox_tileview</item>
+        <item>camera_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_override_entries" translatable="false">
@@ -674,6 +676,18 @@
         <item>disabled</item>
         <item>partial</item>
         <item>full</item>
+    </string-array>
+
+    <string-array name="volume_rocker_wake_entries" translatable="false">
+        <item>@string/volume_rocker_wake_default</item>
+        <item>@string/volume_rocker_wake_enabled</item>
+        <item>@string/volume_rocker_wake_disabled</item>
+    </string-array>
+
+    <string-array name="volume_rocker_wake_values" translatable="false">
+        <item>default</item>
+        <item>enabled</item>
+        <item>disabled</item>
     </string-array>
 
 </resources>
