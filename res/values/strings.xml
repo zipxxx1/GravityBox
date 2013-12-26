@@ -897,4 +897,11 @@
     <!-- Advanced reboot menu: require confirmation -->
     <string name="pref_reboot_confirm_required_title">Require reboot confirmation</string>
 
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Power menu</string>
+    <string name="pref_cat_power_other_title">Other</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Allow on lockscreen</string>
+
 </resources>
