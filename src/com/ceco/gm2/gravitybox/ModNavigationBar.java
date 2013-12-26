@@ -45,7 +45,7 @@ public class ModNavigationBar {
     private static final String CLASS_KEY_BUTTON_VIEW = "com.android.systemui.statusbar.policy.KeyButtonView";
 
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 3;
-    private static final int STATUS_BAR_DISABLE_HOME = 0x00200000;
+    private static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
 
     private static boolean mAlwaysShowMenukey;
     private static View mNavigationBarView;
@@ -450,7 +450,7 @@ public class ModNavigationBar {
         try {
             final int disabledFlags = XposedHelpers.getIntField(mNavigationBarView, "mDisabledFlags");
             final boolean visible = mAppLauncherEnabled &&
-                    !((disabledFlags & STATUS_BAR_DISABLE_HOME) != 0);
+                    !((disabledFlags & STATUS_BAR_DISABLE_RECENT) != 0);
             for (int i = 0; i <= 1; i++) {
                 if (mNavbarViewInfo[i].visible == visible) continue;
 
@@ -481,7 +481,7 @@ public class ModNavigationBar {
             final boolean showMenu = XposedHelpers.getBooleanField(mNavigationBarView, "mShowMenu");
             final int disabledFlags = XposedHelpers.getIntField(mNavigationBarView, "mDisabledFlags");
             final boolean visible = (showMenu || mAlwaysShowMenukey) &&
-                    !((disabledFlags & STATUS_BAR_DISABLE_HOME) != 0);
+                    !((disabledFlags & STATUS_BAR_DISABLE_RECENT) != 0);
             int menuResId = mResources.getIdentifier("menu", "id", PACKAGE_NAME);
             for (int i = 0; i <= 1; i++) {
                 View v = mNavbarViewInfo[i].navButtons.findViewById(menuResId);
@@ -501,7 +501,7 @@ public class ModNavigationBar {
         try {
             final int iconHints = XposedHelpers.getIntField(mNavigationBarView, "mNavigationIconHints");
             final int disabledFlags = XposedHelpers.getIntField(mNavigationBarView, "mDisabledFlags");
-            mDpadKeysVisible = !((disabledFlags & STATUS_BAR_DISABLE_HOME) != 0) && 
+            mDpadKeysVisible = !((disabledFlags & STATUS_BAR_DISABLE_RECENT) != 0) && 
                     (iconHints & NAVIGATION_HINT_BACK_ALT) != 0;
 
             for (int i = 0; i <= 1; i++) {
