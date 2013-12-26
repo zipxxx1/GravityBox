@@ -844,4 +844,7 @@
     <string name="volume_rocker_wake_enabled">Enabled</string>
     <string name="volume_rocker_wake_disabled">Disabled</string>
 
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Require reboot confirmation</string>
+
 </resources>

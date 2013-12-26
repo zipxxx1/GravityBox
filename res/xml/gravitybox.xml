@@ -799,6 +799,12 @@
             android:defaultValue="false" />
 
         <CheckBoxPreference 
+            android:key="pref_reboot_confirm_required"
+            android:title="@string/pref_reboot_confirm_required_title"
+            android:defaultValue="true"
+            android:dependency="pref_poweroff_advanced" />
+
+        <CheckBoxPreference 
             android:key="pref_powermenu_screenshot"
             android:title="@string/pref_powermenu_screenshot_title"
             android:defaultValue="false" />
