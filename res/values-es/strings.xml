@@ -867,4 +867,11 @@
     <string name="pref_qs_hide_on_change_title">Ocultar al cambiar</string>
     <string name="pref_qs_hide_on_change_summary">Cierra la barra de estado automáticamente al pulsar en una casilla. Funciona en casillas de GravityBox y casillas predeterminadas modificadas.</string>
 
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Menú de apagado</string>
+    <string name="pref_cat_power_other_title">Otro</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Permitir en pantalla de bloqueo</string>
+    
 </resources>
