@@ -87,6 +87,7 @@ public class ModPowerMenu {
     private static Object mScreenrecordAction;
     private static Object mExpandedDesktopAction;
     private static boolean mRebootConfirmRequired;
+    private static boolean mRebootAllowOnLockscreen;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -167,6 +168,8 @@ public class ModPowerMenu {
                     prefs.reload();
                     mRebootConfirmRequired = prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_REBOOT_CONFIRM_REQUIRED, true);
+                    mRebootAllowOnLockscreen = prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_REBOOT_ALLOW_ON_LOCKSCREEN, false);
 
                     @SuppressWarnings("unchecked")
                     List<Object> mItems = (List<Object>) XposedHelpers.getObjectField(param.thisObject, "mItems");
@@ -419,7 +422,7 @@ public class ModPowerMenu {
                 handleReboot(mContext, mRebootStr, 0);
                 return true;
             } else if (methodName.equals("showDuringKeyguard")) {
-                return false;
+                return mRebootAllowOnLockscreen;
             } else if (methodName.equals("showBeforeProvisioning")) {
                 return true;
             } else if (methodName.equals("isEnabled")) {
