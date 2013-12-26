@@ -121,6 +121,7 @@ public class ModQuickSettings {
     private static WifiManagerWrapper mWifiManager;
     private static Set<String> mOverrideTileKeys;
     private static XSharedPreferences mPrefs;
+    private static boolean mHideOnChange;
 
     private static float mGestureStartX;
     private static float mGestureStartY;
@@ -217,6 +218,9 @@ public class ModQuickSettings {
                     mQuickPulldown = intent.getIntExtra(
                             GravityBoxSettings.EXTRA_QUICK_PULLDOWN, 
                             GravityBoxSettings.QUICK_PULLDOWN_OFF);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
+                    mHideOnChange = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
                 }
             }
 
@@ -428,6 +432,7 @@ public class ModQuickSettings {
             }
 
             mAutoSwitch = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, false);
+            mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
 
             try {
                 mQuickPulldown = Integer.valueOf(mPrefs.getString(
@@ -1106,11 +1111,11 @@ public class ModQuickSettings {
                                 final boolean mobileDataEnabled = 
                                         (Boolean) XposedHelpers.callMethod(cm, "getMobileDataEnabled");
 
-                                if (Utils.isXperiaDevice()) {
-                                    if (!mobileDataEnabled && mStatusBar != null) {
-                                        XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
-                                    }
+                                if ((mHideOnChange || !mobileDataEnabled) && mStatusBar != null) {
+                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                }
 
+                                if (Utils.isXperiaDevice()) {
                                     Intent i = new Intent(ConnectivityServiceWrapper.ACTION_XPERIA_MOBILE_DATA_TOGGLE);
                                     mContext.sendBroadcast(i);
                                     return;

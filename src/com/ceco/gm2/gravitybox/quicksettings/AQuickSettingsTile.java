@@ -55,6 +55,8 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
     protected int mTileStyle;
     protected Object mQuickSettings;
     protected ViewGroup mContainer;
+    protected boolean mSupportsHideOnChange;
+    private boolean mHideOnChange;
 
     public AQuickSettingsTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         mContext = context;
@@ -64,6 +66,7 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
         mStatusBar = statusBar;
         mPanelBar = panelBar;
         mTileStyle = JELLYBEAN;
+        mSupportsHideOnChange = true;
     }
 
     public void setupQuickSettingsTile(ViewGroup viewGroup, LayoutInflater inflater, 
@@ -78,7 +81,7 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
             onPreferenceInitialize(prefs);
         }
         updateResources();
-        mTile.setOnClickListener(mOnClick);
+        mTile.setOnClickListener(this);
         mTile.setOnLongClickListener(mOnLongClick);
         onTilePostCreate();
     }
@@ -96,6 +99,7 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
         } catch (NumberFormatException nfe) {
             //
         }
+        mHideOnChange = prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
     }
 
     @Override
@@ -104,6 +108,8 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_TILE_STYLE)) {
                 mTileStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_QS_TILE_STYLE, JELLYBEAN);
                 updateResources();
+            } else if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
+                mHideOnChange = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
             }
         }
     }
@@ -115,8 +121,13 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
     }
 
     @Override
-    public final void onClick(View v) {
-        mOnClick.onClick(v);
+    public void onClick(View v) {
+        if (mOnClick != null) {
+            mOnClick.onClick(v);
+        }
+        if (mSupportsHideOnChange && mHideOnChange) {
+            collapsePanels();
+        }
     }
 
     protected void startActivity(String action){
