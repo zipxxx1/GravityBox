@@ -78,6 +78,7 @@
     <string name="quick_settings_wifi_turning_on">Activando&#8230;</string>
     <string name="quick_settings_nfc_on">NFC activado</string>
     <string name="quick_settings_nfc_off">NFC desactivado</string>
+    <string name="quick_settings_camera_error_connect">Imposible conectar con la cámara</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Ajustes rápidos de la barra de estado</string>
@@ -109,6 +110,7 @@
     <string name="qs_tile_stay_awake">Mantener despierto</string>
     <string name="qs_tile_screenshot">Captura de pantalla</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Cámara</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de color</string>
@@ -293,10 +295,6 @@
     <string name="quick_pulldown_off">Desactivado</string>
     <string name="quick_pulldown_right">Derecha</string>
     <string name="quick_pulldown_left">Izquierda</string>
-
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">No despertar con botones de volumen</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Para dispositivos como el G3s o G4 en los que la pantalla se enciende con las teclas de volumen</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Colores de la barra de estado</string>
@@ -851,5 +849,15 @@
     
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Ajustes de batería</string>
+    
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Teclas de control del cursor</string>
+    <string name="pref_navbar_cursor_control_summary">Activa las teclas de control del cursor en la barra de navegación cuando se muestra el teclado</string>
 
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Despertar con botones de volumen</string>
+    <string name="volume_rocker_wake_default">Predeterminado</string>
+    <string name="volume_rocker_wake_enabled">Activado</string>
+    <string name="volume_rocker_wake_disabled">Desactivado</string>
+    
 </resources>
