@@ -74,6 +74,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICK_SETTINGS = "pref_quick_settings2";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_ORDER = "pref_qs_tile_order";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row";
+    public static final String PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE = "pref_qs_hide_on_change";
     public static final String PREF_KEY_QUICK_SETTINGS_AUTOSWITCH = "pref_auto_switch_qs";
     public static final String PREF_KEY_QUICK_PULLDOWN = "pref_quick_pulldown";
     public static final int QUICK_PULLDOWN_OFF = 0;
@@ -99,6 +100,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_DISABLE_ROAMING_INDICATORS_CHANGED = "gravitybox.intent.action.DISABLE_ROAMING_INDICATORS_CHANGED";
     public static final String EXTRA_INDICATORS_DISABLED = "indicatorsDisabled";
     public static final String PREF_KEY_POWEROFF_ADVANCED = "pref_poweroff_advanced";
+    public static final String PREF_KEY_REBOOT_CONFIRM_REQUIRED = "pref_reboot_confirm_required";
     public static final String PREF_KEY_POWERMENU_SCREENSHOT = "pref_powermenu_screenshot";
     public static final String PREF_KEY_POWERMENU_SCREENRECORD = "pref_powermenu_screenrecord";
 
@@ -403,6 +405,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_QS_AUTOSWITCH = "qsAutoSwitch";
     public static final String EXTRA_QUICK_PULLDOWN = "quickPulldown";
     public static final String EXTRA_QS_TILE_STYLE = "qsTileStyle";
+    public static final String EXTRA_QS_HIDE_ON_CHANGE = "qsHideOnChange";
 
     public static final String ACTION_PREF_CLOCK_CHANGED = "gravitybox.intent.action.CENTER_CLOCK_CHANGED";
     public static final String EXTRA_CENTER_CLOCK = "centerClock";
@@ -1472,6 +1475,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_COLS, Integer.valueOf(
                         prefs.getString(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "3")));
+            } else if (key.equals(PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QS_HIDE_ON_CHANGE,
+                        prefs.getBoolean(PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_AUTOSWITCH,

@@ -202,6 +202,13 @@
                 android:defaultValue="3"
                 android:dependency="pref_qs_management_enable" />
 
+            <CheckBoxPreference 
+                android:key="pref_qs_hide_on_change"
+                android:title="@string/pref_qs_hide_on_change_title"
+                android:summary="@string/pref_qs_hide_on_change_summary"
+                android:defaultValue="false"
+                android:dependency="pref_qs_management_enable" />
+
             <MultiSelectListPreference 
                 android:key="pref_qs_tile_behaviour_override"
                 android:title="@string/pref_qs_tile_behaviour_override_title"
@@ -797,6 +804,12 @@
             android:title="@string/poweroff_advanced_title"
             android:summary="@string/poweroff_advanced_summary"
             android:defaultValue="false" />
+
+        <CheckBoxPreference 
+            android:key="pref_reboot_confirm_required"
+            android:title="@string/pref_reboot_confirm_required_title"
+            android:defaultValue="true"
+            android:dependency="pref_poweroff_advanced" />
 
         <CheckBoxPreference 
             android:key="pref_powermenu_screenshot"

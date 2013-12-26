@@ -61,8 +61,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModDisplay.initZygote(prefs);
         ModAudio.initZygote(prefs);
         ModHwKeys.initZygote(prefs);
-//        TODO: rework for KitKat compatibility
-//        ModPhone.initZygote(prefs);
         ModExpandedDesktop.initZygote(prefs);
         ConnectivityServiceWrapper.initZygote();
         PermissionGranter.initZygote();
@@ -99,10 +97,9 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             SystemPropertyProvider.init(lpparam.classLoader);
         }
 
-//        TODO: make AOSP compatible
-//        if (lpparam.packageName.equals(ModAudioSettings.PACKAGE_NAME)) {
-//            ModAudioSettings.init(prefs, lpparam.classLoader);
-//        }
+        if (lpparam.packageName.equals(ModAudioSettings.PACKAGE_NAME)) {
+            ModAudioSettings.init(prefs, lpparam.classLoader);
+        }
 
         // Common
         if (lpparam.packageName.equals(ModBatteryStyle.PACKAGE_NAME)) {
@@ -137,12 +134,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         if (lpparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
             ModStatusBar.init(prefs, lpparam.classLoader);
         }
-
-//        TODO: rework for KitKat compatibility
-//        if (lpparam.packageName.equals(ModPhone.PACKAGE_NAME) &&
-//                Utils.hasTelephonySupport()) {
-//            ModPhone.init(prefs, lpparam.classLoader);
-//        }
 
         if (lpparam.packageName.equals(ModSettings.PACKAGE_NAME)) {
             ModSettings.init(prefs, lpparam.classLoader);

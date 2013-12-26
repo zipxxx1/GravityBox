@@ -16,6 +16,7 @@
 package com.ceco.kitkat.gravitybox.quicksettings;
 
 import com.ceco.kitkat.gravitybox.BroadcastSubReceiver;
+import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.ModQuickSettings.TileLayout;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -46,6 +47,8 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
     protected Object mPanelBar;
     protected Object mQuickSettings;
     protected ViewGroup mContainer;
+    protected boolean mSupportsHideOnChange;
+    private boolean mHideOnChange;
 
     public AQuickSettingsTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         mContext = context;
@@ -54,6 +57,7 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
         mGbResources = mGbContext.getResources();
         mStatusBar = statusBar;
         mPanelBar = panelBar;
+        mSupportsHideOnChange = true;
     }
 
     public void setupQuickSettingsTile(ViewGroup viewGroup, LayoutInflater inflater, 
@@ -68,7 +72,7 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
             onPreferenceInitialize(prefs);
         }
         updateResources();
-        mTile.setOnClickListener(mOnClick);
+        mTile.setOnClickListener(this);
         mTile.setOnLongClickListener(mOnLongClick);
         onTilePostCreate();
     }
@@ -87,10 +91,17 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
 
     protected abstract void updateTile();
 
-    protected void onPreferenceInitialize(XSharedPreferences prefs) { };
+    protected void onPreferenceInitialize(XSharedPreferences prefs) {
+        mHideOnChange = prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
+    }
 
     @Override
-    public void onBroadcastReceived(Context context, Intent intent) { };
+    public void onBroadcastReceived(Context context, Intent intent) {
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
+            mHideOnChange = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
+        }
+    }
 
     public void updateResources() {
         if (mTile != null) {
@@ -99,8 +110,13 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
     }
 
     @Override
-    public final void onClick(View v) {
-        mOnClick.onClick(v);
+    public void onClick(View v) {
+        if (mOnClick != null) {
+            mOnClick.onClick(v);
+        }
+        if (mSupportsHideOnChange && mHideOnChange) {
+            collapsePanels();
+        }
     }
 
     protected void startActivity(String action){

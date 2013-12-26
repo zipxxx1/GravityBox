@@ -844,4 +844,11 @@
     <string name="volume_rocker_wake_enabled">Enabled</string>
     <string name="volume_rocker_wake_disabled">Disabled</string>
 
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Require reboot confirmation</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Hide on change</string>
+    <string name="pref_qs_hide_on_change_summary">Collapses statusbar automatically on tile single-tap. Applies to GravityBox tiles and overriden stock tiles.</string>
+
 </resources>

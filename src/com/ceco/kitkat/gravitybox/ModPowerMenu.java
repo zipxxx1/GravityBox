@@ -86,6 +86,7 @@ public class ModPowerMenu {
     private static Object mScreenshotAction;
     private static Object mScreenrecordAction;
     private static Object mExpandedDesktopAction;
+    private static boolean mRebootConfirmRequired;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -164,6 +165,8 @@ public class ModPowerMenu {
                     if (mContext == null) return;
 
                     prefs.reload();
+                    mRebootConfirmRequired = prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_REBOOT_CONFIRM_REQUIRED, true);
 
                     @SuppressWarnings("unchecked")
                     List<Object> mItems = (List<Object>) XposedHelpers.getObjectField(param.thisObject, "mItems");
@@ -327,50 +330,58 @@ public class ModPowerMenu {
             }
         }
 
-        private static void handleReboot(Context context, String caption, final int mode) {
+        private static void doReboot(Context context, int mode) {
+            final PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            if (mode == 0) {
+                pm.reboot(null);
+            } else if (mode == 1) {
+                Class<?> classSm = XposedHelpers.findClass("android.os.ServiceManager", null);
+                Class<?> classIpm = XposedHelpers.findClass("android.os.IPowerManager.Stub", null);
+                IBinder b = (IBinder) XposedHelpers.callStaticMethod(
+                        classSm, "getService", Context.POWER_SERVICE);
+                Object ipm = XposedHelpers.callStaticMethod(classIpm, "asInterface", b);
+                XposedHelpers.callMethod(ipm, "crash", "Hot reboot");
+            } else if (mode == 2) {
+                pm.reboot("recovery");
+            } else if (mode == 3) {
+                pm.reboot("bootloader");
+            }
+        }
+
+        private static void handleReboot(final Context context, String caption, final int mode) {
             try {
-                final PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-                String message = mRebootConfirmStr;
-                if (mode == 2) {
-                    message = mRebootConfirmRecoveryStr;
-                } else if (mode == 3) {
-                    message = mRebootConfirmBootloaderStr;
-                }
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                    .setTitle(caption)
-                    .setMessage(message)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            if (mode == 0) {
-                                pm.reboot(null);
-                            } else if (mode == 1) {
-                                Class<?> classSm = XposedHelpers.findClass("android.os.ServiceManager", null);
-                                Class<?> classIpm = XposedHelpers.findClass("android.os.IPowerManager.Stub", null);
-                                IBinder b = (IBinder) XposedHelpers.callStaticMethod(
-                                        classSm, "getService", Context.POWER_SERVICE);
-                                Object ipm = XposedHelpers.callStaticMethod(classIpm, "asInterface", b);
-                                XposedHelpers.callMethod(ipm, "crash", "Hot reboot");
-                            } else if (mode == 2) {
-                                pm.reboot("recovery");
-                            } else if (mode == 3) {
-                                pm.reboot("bootloader");
+                if (!mRebootConfirmRequired) {
+                    doReboot(context, mode);
+                } else {
+                    String message = mRebootConfirmStr;
+                    if (mode == 2) {
+                        message = mRebootConfirmRecoveryStr;
+                    } else if (mode == 3) {
+                        message = mRebootConfirmBootloaderStr;
+                    }
+    
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                        .setTitle(caption)
+                        .setMessage(message)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+    
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                doReboot(context, mode);
                             }
-                        }
-                    })
-                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                        
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                AlertDialog dialog = builder.create();
-                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
-                dialog.show();
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                    AlertDialog dialog = builder.create();
+                    dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+                    dialog.show();
+                }
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }

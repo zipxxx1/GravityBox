@@ -94,6 +94,7 @@ public class QuickRecordTile extends BasicTile {
     public QuickRecordTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
 
+        mSupportsHideOnChange = false;
         mHandler = new Handler();
 
         mOnClick = new View.OnClickListener() {
