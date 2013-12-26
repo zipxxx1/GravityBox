@@ -860,4 +860,11 @@
     <string name="volume_rocker_wake_enabled">Activado</string>
     <string name="volume_rocker_wake_disabled">Desactivado</string>
     
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Requerir confirmación para reiniciar</string>
+    
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Ocultar al cambiar</string>
+    <string name="pref_qs_hide_on_change_summary">Cierra la barra de estado automáticamente al pulsar en una casilla. Funciona en casillas de GravityBox y casillas predeterminadas modificadas.</string>
+
 </resources>
