@@ -599,6 +599,14 @@
                 android:defaultValue="14"
                 android:dependency="pref_data_traffic_enable" />
 
+            <ListPreference
+                android:key="pref_data_traffic_inactivity_mode"
+                android:title="@string/pref_data_traffic_inactivity_mode_title" 
+                android:entries="@array/data_traffic_inactivity_mode_entries"
+                android:entryValues="@array/data_traffic_inactivity_mode_values"
+                android:defaultValue="0"
+                android:dependency="pref_data_traffic_enable" />
+
         </PreferenceScreen>
 
         <com.ceco.kitkat.gravitybox.preference.OngoingNotifPreference

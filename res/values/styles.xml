@@ -13,7 +13,7 @@
  * limitations under the License.
 -->
 
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -42,6 +42,16 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:paddingStart">6dp</item>
         <item name="android:paddingEnd">6dp</item>
+    </style>
+
+    <style name="AppLauncherTextView">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">11dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:background">@drawable/app_launcher_item_bg</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">4dp</item>
     </style>
 
 </resources>

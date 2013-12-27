@@ -828,4 +828,10 @@
     <!-- Advanced reboot menu: Allow on lockscreen -->
     <string name="pref_reboot_allow_on_lockscreen_title">Povoliť na obrazovke uzamknutia</string>
 
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Režim počas nečinnosti</string>
+    <string name="inactivity_mode_default">Predvolený</string>
+    <string name="inactivity_mode_hide">Skryť počas nečinnosti</string>
+    <string name="inactivity_mode_summary">Zobraziť štatistiku a skryť</string>
+
 </resources>
