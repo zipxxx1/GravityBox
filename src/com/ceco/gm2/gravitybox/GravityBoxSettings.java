@@ -103,6 +103,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_DISABLE_ROAMING_INDICATORS_CHANGED = "gravitybox.intent.action.DISABLE_ROAMING_INDICATORS_CHANGED";
     public static final String EXTRA_INDICATORS_DISABLED = "indicatorsDisabled";
     public static final String PREF_KEY_POWEROFF_ADVANCED = "pref_poweroff_advanced";
+    public static final String PREF_KEY_REBOOT_ALLOW_ON_LOCKSCREEN = "pref_reboot_allow_on_lockscreen";
     public static final String PREF_KEY_REBOOT_CONFIRM_REQUIRED = "pref_reboot_confirm_required";
     public static final String PREF_KEY_POWERMENU_SCREENSHOT = "pref_powermenu_screenshot";
 
@@ -514,11 +515,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int DT_POSITION_LEFT = 1;
     public static final int DT_POSITION_RIGHT = 2;
     public static final String PREF_KEY_DATA_TRAFFIC_SIZE = "pref_data_traffic_size";
+    public static final String PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE = "pref_data_traffic_inactivity_mode";
     public static final String ACTION_PREF_DATA_TRAFFIC_CHANGED = 
             "gravitybox.intent.action.DATA_TRAFFIC_CHANGED";
     public static final String EXTRA_DT_ENABLE = "dtEnable";
     public static final String EXTRA_DT_POSITION = "dtPosition";
     public static final String EXTRA_DT_SIZE = "dtSize";
+    public static final String EXTRA_DT_INACTIVITY_MODE = "dtInactivityMode";
 
     public static final String PREF_CAT_KEY_APP_LAUNCHER = "pref_cat_app_launcher";
     public static final List<String> PREF_KEY_APP_LAUNCHER_SLOT = new ArrayList<String>(Arrays.asList(
@@ -793,6 +796,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefSbLockPolicy;
         private ListPreference mPrefDataTrafficPosition;
         private ListPreference mPrefDataTrafficSize;
+        private ListPreference mPrefDataTrafficInactivityMode;
         private CheckBoxPreference mPrefLinkVolumes;
         private CheckBoxPreference mPrefVolumePanelExpandable;
         private CheckBoxPreference mPrefVolumePanelFullyExpandable;
@@ -1014,6 +1018,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbLockPolicy = (ListPreference) findPreference(PREF_KEY_STATUSBAR_LOCK_POLICY);
             mPrefDataTrafficPosition = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_POSITION);
             mPrefDataTrafficSize = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_SIZE);
+            mPrefDataTrafficInactivityMode = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE);
 
             mPrefCatAppLauncher = (PreferenceScreen) findPreference(PREF_CAT_KEY_APP_LAUNCHER);
             mPrefAppLauncherSlot = new AppPickerPreference[PREF_KEY_APP_LAUNCHER_SLOT.size()];
@@ -1532,6 +1537,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_VOLUME_ROCKER_WAKE)) {
                 mPrefVolumeRockerWake.setSummary(mPrefVolumeRockerWake.getEntry());
             }
+
+            if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE)) {
+                mPrefDataTrafficInactivityMode.setSummary(mPrefDataTrafficInactivityMode.getEntry());
+            }
         }
 
         @Override
@@ -1910,6 +1919,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
                 intent.putExtra(EXTRA_DT_SIZE, Integer.valueOf(
                         prefs.getString(PREF_KEY_DATA_TRAFFIC_SIZE, "14")));
+            } else if (key.equals(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE)) {
+                intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
+                intent.putExtra(EXTRA_DT_INACTIVITY_MODE, Integer.valueOf(
+                        prefs.getString(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE, "0")));
             }
             if (intent.getAction() != null) {
                 getActivity().sendBroadcast(intent);

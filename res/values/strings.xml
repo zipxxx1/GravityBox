@@ -897,4 +897,17 @@
     <!-- Advanced reboot menu: require confirmation -->
     <string name="pref_reboot_confirm_required_title">Require reboot confirmation</string>
 
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Power menu</string>
+    <string name="pref_cat_power_other_title">Other</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Allow on lockscreen</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Inactivity mode</string>
+    <string name="inactivity_mode_default">Default</string>
+    <string name="inactivity_mode_hide">Hide on inactivity</string>
+    <string name="inactivity_mode_summary">Show summary and hide on inactivity</string>
+
 </resources>
