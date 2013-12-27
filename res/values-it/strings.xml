@@ -65,6 +65,7 @@
     <string name="quick_settings_wifi_turning_on">Avvio&#8230;</string>
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
+    <string name="quick_settings_camera_error_connect">Fotocamera non trovata</string>
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Caselle Statusbar QuickSettings</string>
@@ -75,9 +76,9 @@
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
-    <string name="qs_tile_gps_alt">GPS (style CM)</string>
+    <string name="qs_tile_gps_alt">GPS (stile CM)</string>
     <string name="qs_tile_mobile_data">Dati mobili</string>
-    <string name="qs_tile_network_mode">Network mode</string>
+    <string name="qs_tile_network_mode">Modalità di rete</string>
     <string name="qs_tile_data_usage">Utilizzo dati</string>
     <string name="qs_tile_audio">Profili audio</string>
     <string name="qs_tile_brightness">Luminosità</string>
@@ -87,15 +88,15 @@
     <string name="qs_tile_wifi_ap">Punto d\'accesso Wi-Fi</string>
     <string name="qs_tile_torch">Torcia</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
-    <string name="qs_tile_sleep">Sleep</string>
+    <string name="qs_tile_sleep">Sospendi dispositivo</string>
     <string name="qs_tile_quickrecord">Registra</string>
     <string name="qs_tile_settings">Parametri</string>
     <string name="qs_tile_volume">Volume</string>
     <string name="qs_tile_expanded_desktop">Desktop esteso</string>
     <string name="qs_tile_stay_awake">Rimane acceso</string>
-    <string name="qs_tile_screenshot">Screenshot</string>
+    <string name="qs_tile_screenshot">Fotografa schermo</string>
     <string name="qs_tile_nfc">NFC</string>
-
+    <string name="qs_tile_camera">Fotocamera</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Scegli colore</string>
@@ -121,7 +122,8 @@
 
     <!-- Reboot confirmation -->
     <string name="reboot_confirm">Il %s si riavvierà</string>
-    <string name="reboot_confirm_recovery">Il %s si riavvierà in ripristino</string>
+    <string name="reboot_confirm_recovery">Il %s si riavvierà in Recovery</string>
+    <string name="reboot_confirm_bootloader">Il %s si riavvierà in Bootloader.</string>
 
     <!-- CRT effect screen off animation -->
     <string name="crt_off_effect_title">Effetto spegni schermo CRT</string>
@@ -136,11 +138,11 @@
     <string name="dual_sim_ringer_summary">Lancia l\'applicazione che consente di impostare suonerie e notifiche specifiche per ogni SIM</string>
 
     <!-- Lockscreen tweaks -->
-    <string name="pref_cat_lockscreen_title">Modifiche Lockscreen</string>
+    <string name="pref_cat_lockscreen_title">Modifiche schermata di blocco</string>
     <string name="pref_cat_lockscreen_summary">Contiene varie modifiche al lockscreen</string>
-    <string name="pref_cat_lockscreen_background_title">Sfondo Lockscreen</string>
+    <string name="pref_cat_lockscreen_background_title">Sfondo schermata di blocco</string>
     <string name="pref_lockscreen_background_title">Stile sfondo</string>
-    <string name="lockscreen_bg_default">Wallpaper di default</string>
+    <string name="lockscreen_bg_default">Sfondo di default</string>
     <string name="lockscreen_bg_color">Colore di riempimento</string>
     <string name="lockscreen_bg_image">Immagine personalizzata</string>
     <string name="pref_lockscreen_bg_color_title">Imposta colore personalizzato</string>
@@ -351,7 +353,7 @@
     <string name="pref_button_backlight_notifications_summary">SPERIMENTALE! Accendi tasti se c\'è una notifica e lo schermo è spento. Usare nel caso il telefono non abbia led di notifica.</string>
 
     <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Dithered Holo background</string>
+    <string name="pref_holo_bg_dither_title">Sfondo Dithered Holo</string>
     <string name="pref_holo_bg_dither_summary">Sostituisce lo sfondo Holo standard con uno dithered per eliminare la distorsione dei colori (necessario il riavvio)</string>
 
     <!-- Disable hardware keys for pie -->
@@ -613,7 +615,7 @@
     <string name="dt_size_normal">Normale</string>
     <string name="dt_size_smaller">Più piccola</string>
     <string name="dt_size_smallest">Ancora più piccola</string>
-    <string name="byte_abbr">b</string>
+    <string name="byte_abbr">B</string>
     <string name="kilobyte_abbr">Kb</string>
     <string name="megabyte_abbr">Mb</string>
     <string name="second_abbr">s</string>
@@ -627,7 +629,7 @@
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> liberi</string>
     <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
     <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> usati</string>
-    <string name="pref_rambar_title">Memoria Applicazioni recenti</string>
+    <string name="pref_rambar_title">Mem. App recenti</string>
     <string name="rambar_off">Spento</string>
     <string name="rambar_top">In alto</string>
     <string name="rambar_bottom">In basso</string>
@@ -768,6 +770,18 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Per consentire di abilitare il supporto per le azioni della barra di navigazione è necessario
         sostituire le impostazioni di sistema predefinite nella barra dei menu di navigazione</string>
+        
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog">Vecchia versione di Gravitybox trovata installata.
+        Deve essere disinstallato prima di usare una nuova versione. GB tenterà ora di
+        trasferire le impostazioni esistenti dal vecchio GB nel nuovo GB e quindi,
+        disinstallare la vecchia versione di GB.
+        Si DEVE confermare la disinstallazione quando richiesto.
+        Dopo la disinstallazione, attiva il nuovo modulo in Xposed Installer e riavvia immediatamente,
+        altrimenti si potrebbe incorrere in problemi di stabilità del sistema.</string>
+    <string name="gb_new_package_settings_transfer_ok">Settaggi GravityBox trasferiti correttamente</string>
+    <string name="gb_new_package_settings_transfer_failed">Trasferimento dei settaggi GravityBox fallita</string>
+
 
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Torcia dalla schermata di sblocco</string>
@@ -801,9 +815,21 @@
     <string name="ringer_mode_sound">Suoneria</string>
     <string name="ringer_mode_sound_vibrate">Suoneria e vibrazione</string>
 
-    <!-- Fix location issue (Android 4.2.1 JIT bug) -->
-    <string name="fix_location_title">Problema di localizzazione del GPS</string>
-    <string name="fix_location_summary">Attivare se i valori di distanza non vengono calcolati correttamente dalle applicazioni di monitoraggio GPS (es. sportive) (è necessario riavviare)</string>
+    <!-- Screen recording -->
+    <string name="screenrecord_notif_ticker">Schermo registrato</string>
+    <string name="screenrecord_notif_title">Schermo in registrazione</string>
+    <string name="screenrecord_notif_stop">Stop</string>
+    <string name="screenrecord_notif_pointer">Togli il puntatore</string>
+    <string name="screenrecord_toast_error">Impossibile registrare lo schermo</string>
+    <string name="screenrecord_toast_processing">Non si può iniziare una nuova registrazione perchè già in corso</string>
+    <string name="screenrecord_toast_saved">Registrazione salvata come %s</string>
+    <string name="screenrecord_toast_save_error">Impossibile salvare</string>
+    <string name="action_screenrecord">Registrazione schermo</string>
+    <string name="pref_powermenu_screenrecord_title">Registrazione schermo nel menù power</string>
+
+    <!-- Show dialpad automatically -->
+    <string name="pref_dialer_show_dialpad_title">Visualizza tastierino numerico</string>
+    <string name="pref_dialer_show_dialpad_summary">Visualizza tastierino numerico automaticamente appena si accede al telefono</string>
     
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Modifiche nel launcher</string>
@@ -813,6 +839,14 @@
     <string name="pref_launcher_desktop_grid_rows_title">Numero di linee</string>
     <string name="pref_launcher_desktop_grid_cols_title">Numero di colonne</string>
     <string name="desktop_grid_default">Default</string>
+    
+    <!-- HW Key Acctions: toggle screen recording -->
+    <string name="hwkey_action_screen_recording">Togli registrazione schermo</string>
+
+    <!-- Full screen caller photo modes -->
+    <string name="fullscreen_caller_disabled">Disabilitato</string>
+    <string name="fullscreen_caller_partial">Parziale</string>
+    <string name="fullscreen_caller_full">Pieno</string>
 
     <!-- Screen off effects -->
     <string name="screen_off_effect_title">Effetto spegni schermo</string>
@@ -833,6 +867,30 @@
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Settaggi visualizzazione batteria</string>
+    
+    
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Freccie di navigazione</string>
+    <string name="pref_navbar_cursor_control_summary">Abilita le frecce nella barra di navigazione durante la visualizzazione della tastiera</string>
+    
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Volume rocker wake (acc. display tramite tasti volume)</string>
+    <string name="volume_rocker_wake_default">Default</string>
+    <string name="volume_rocker_wake_enabled">Abilitato</string>
+    <string name="volume_rocker_wake_disabled">Disabilitato</string>
 
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Richiedi conferma di riavvio</string>
+    
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Nascondi al cambio</string>
+    <string name="pref_qs_hide_on_change_summary">Togli la barra di stato automaticamente al tocco sulle icone. Si applica solo alle icone GravityBox e sovrascrive le icone stock.</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Power menu</string>
+    <string name="pref_cat_power_other_title">Altri</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Permetti nella schermata di blocco</string>
 
 </resources>
