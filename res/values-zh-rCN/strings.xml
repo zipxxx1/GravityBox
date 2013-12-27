@@ -74,6 +74,7 @@
     <string name="quick_settings_stay_awake_off">保持唤醒关闭</string>
     <string name="quick_settings_nfc_on">NFC 开启</string>
     <string name="quick_settings_nfc_off">NFC 关闭</string>
+    <string name="quick_settings_camera_error_connect">无法连接相机</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">状态栏快速设置</string>
@@ -102,6 +103,7 @@
     <string name="qs_tile_stay_awake">保持唤醒</string>
     <string name="qs_tile_screenshot">屏幕截图</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">相机</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">颜色选择器</string>
@@ -286,10 +288,6 @@
     <string name="quick_pulldown_off">关闭</string>
     <string name="quick_pulldown_right">右侧</string>
     <string name="quick_pulldown_left">左侧</string>
-
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">禁用音量键唤醒屏幕</string>
-    <string name="pref_volume_rocker_wake_disable_summary">用于类似佳域 G3s 和 G4 这样实体音量键会唤醒屏幕的设备</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">状态栏颜色</string>
@@ -835,5 +833,29 @@
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">电量设置</string>
+    
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">控制光标键</string>
+    <string name="pref_navbar_cursor_control_summary">允许在导航栏显示光标键控制键盘</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">音量键唤醒</string>
+    <string name="volume_rocker_wake_default">系统默认</string>
+    <string name="volume_rocker_wake_enabled">启用</string>
+    <string name="volume_rocker_wake_disabled">禁用</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">要求重启确认</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">隐藏更改</string>
+    <string name="pref_qs_hide_on_change_summary">单击瓷贴会自动收起状态栏，适用于GravityBox瓷贴和覆盖原厂瓷贴。</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">电源菜单</string>
+    <string name="pref_cat_power_other_title">其它</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">允许锁屏</string>
 
 </resources>
