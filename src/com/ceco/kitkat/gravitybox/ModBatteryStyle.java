@@ -159,7 +159,7 @@ public class ModBatteryStyle {
                             LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
                     lParams.gravity = Gravity.CENTER_VERTICAL;
                     mCircleBattery.setLayoutParams(lParams);
-                    mCircleBattery.setPadding(4, 0, 0, 0);
+                    mCircleBattery.setPadding(6, 0, 0, 0);
                     mCircleBattery.setVisibility(View.GONE);
                     ModStatusbarColor.registerIconManagerListener(mCircleBattery);
                     vg.addView(mCircleBattery);
