@@ -904,4 +904,10 @@
     <!-- Advanced reboot menu: Allow on lockscreen -->
     <string name="pref_reboot_allow_on_lockscreen_title">Allow on lockscreen</string>
 
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Inactivity mode</string>
+    <string name="inactivity_mode_default">Default</string>
+    <string name="inactivity_mode_hide">Hide on inactivity</string>
+    <string name="inactivity_mode_summary">Show summary and hide on inactivity</string>
+
 </resources>
