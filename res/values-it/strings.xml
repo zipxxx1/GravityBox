@@ -881,6 +881,21 @@
     <!-- Advanced reboot menu: require confirmation -->
     <string name="pref_reboot_confirm_required_title">Richiedi conferma di riavvio</string>
 
+   <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Nascondi al cambio</string>
+    <string name="pref_qs_hide_on_change_summary">Togli la barra di stato automaticamente al tocco sulle icone. Si applica solo alle icone GravityBox e sovrascrive le icone stock.</string>
 
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Menu accensione</string>
+    <string name="pref_cat_power_other_title">Altro</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Permetti su schermata di blocco</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Modalità inattiva</string>
+    <string name="inactivity_mode_default">Default</string>
+    <string name="inactivity_mode_hide">Nascondi in inattività</string>
+    <string name="inactivity_mode_summary">Mostra il sommario e nascondi in inattività</string>
 
 </resources>
