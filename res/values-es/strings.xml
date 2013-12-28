@@ -29,7 +29,7 @@
     <string name="vol_music_controls_title">Botones de volumen cambian la canción</string>
     <string name="vol_music_controls_summary">Cambiar canción con pulsación larga sobre los botones de volumen con la pantalla apagada</string>
 
-    <string name="low_battery_warning_policy_title">Advertencia de batería baja</string>
+    <string name="low_battery_warning_policy_title">Aviso de batería baja</string>
     <string name="low_battery_warning_full">Aviso y sonido</string>
     <string name="low_battery_warning_popup">Solo aviso</string>
     <string name="low_battery_warning_sound">Solo sonido</string>
@@ -79,6 +79,7 @@
     <string name="quick_settings_wifi_turning_on">Activando&#8230;</string>
     <string name="quick_settings_nfc_on">NFC activado</string>
     <string name="quick_settings_nfc_off">NFC desactivado</string>
+    <string name="quick_settings_camera_error_connect">Imposible conectar con la cámara</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Ajustes rápidos de la barra de estado</string>
@@ -110,6 +111,7 @@
     <string name="qs_tile_stay_awake">Mantener despierto</string>
     <string name="qs_tile_screenshot">Captura de pantalla</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Cámara</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de color</string>
@@ -389,7 +391,7 @@
 
     <!-- QuickApp tile settings -->
     <string name="qs_tile_quickapp">Aplicación rápida</string>
-    <string name="pref_cat_quickapp_tile_title">Ajustes de las casillas de aplicaciones rápidas</string>
+    <string name="pref_cat_quickapp_tile_title">Ajustes de casillas de apps rápidas</string>
     <string name="pref_quickapp_default_title">Aplicación principal</string>
     <string name="pref_quickapp_slot1_title">Pulsación larga en aplicación 1</string>
     <string name="pref_quickapp_slot2_title">Pulsación larga en aplicación 2</string>
@@ -524,7 +526,7 @@
     <string name="pref_cat_phone_mobile_data_title">Datos móviles</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Modos de red disponibles en ajustes rápidos</string>
+    <string name="pref_network_mode_tile_mode_title">Alternación de modos de red</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
     <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
     <string name="nm_tile_mode3">2G/3G/(LTE)</string>
@@ -802,14 +804,14 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Indicador de batería en porcentaje</string>
-    <string name="battery_percent_text_size_title">Tamaño del texto del indicador</string>
+    <string name="battery_percent_text_size_title">Tamaño del indicador</string>
     <string name="battery_percent_text_size_normal">Normal</string>
     <string name="battery_percent_text_size_smaller">Pequeño</string>
     <string name="battery_percent_text_size_even_smaller">Muy pequeño</string>
     <string name="battery_percent_text_size_smallest">Diminuto</string>
-    <string name="battery_percent_text_style_title">Estilo de indicador en texto</string>
+    <string name="battery_percent_text_style_title">Mostrar símbolo de porcentaje</string>
     <string name="battery_percent_text_style_default">Predeterminado</string>
-    <string name="battery_percent_text_style_numbers_only">Solo números (sin icono de porcentaje)</string>
+    <string name="battery_percent_text_style_numbers_only">No mostrar</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Ajustes de batería</string>
@@ -827,6 +829,10 @@
     <!-- Advanced reboot menu: require confirmation -->
     <string name="pref_reboot_confirm_required_title">Requerir confirmación para reiniciar</string>
     
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Cerrar al pulsar</string>
+    <string name="pref_qs_hide_on_change_summary">Cierra la barra de estado automáticamente al pulsar en una casilla. Funciona en casillas de GravityBox y casillas predeterminadas modificadas.</string>
+  
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menú de apagado</string>
     <string name="pref_cat_power_other_title">Otro</string>
