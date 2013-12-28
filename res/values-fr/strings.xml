@@ -859,7 +859,7 @@
     <string name="pref_reboot_allow_on_lockscreen_title">Actif sur écran de déverrouillage</string>
 
     <!-- Data traffic monitor enhancements -->
-    <string name="pref_data_traffic_inactivity_mode_title">Mode d’inactivité</string>
+    <string name="pref_data_traffic_inactivity_mode_title">Mode d\’inactivité</string>
     <string name="inactivity_mode_default">Par défaut</string>
     <string name="inactivity_mode_hide">Masquer durant inactivité</string>
     <string name="inactivity_mode_summary">Afficher un résumé puis masquer durant l\'inactivité</string>
