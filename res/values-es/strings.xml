@@ -37,6 +37,13 @@
 
     <string name="reboot_required">Los cambios se aplicarán después de reiniciar</string>
 
+    <string name="signal_icon_autohide_title">Ocultar auto. iconos de señal</string>
+    <string name="signal_icon_autohide_summary">Oculta automáticamente los iconos de señal de la SIM seleccionada cuando no hay ninguna SIM insertada, desactiva la notificación de \"SIM no insertada\"</string>
+    <string name="sim_slot_1">Ocultar auto. SIM Slot 1</string>
+    <string name="sim_slot_2">Ocultar auto. SIM Slot 2</string>
+    <string name="sim_disable_notifications">Desactivar notificaciones</string>
+    <string name="sim_disable_notifications_summary">Notificación de \"SIM no insertada\" desactivada</string>
+    
     <string name="poweroff_advanced_title">Menú de reinicio avanzado</string>
     <string name="poweroff_advanced_summary">Activa menú de reinicio avanzado con opción para reiniciar en modo recuperación</string>
     <string name="poweroff_recovery">Modo recuperación</string>
@@ -49,6 +56,20 @@
     <string name="vol_key_cursor_control_on_reverse">Volumen arriba/abajo mueve el cursor a derecha/izquierda</string>
 
     <string name="recents_clear_all_title">Eliminar tareas recientes</string>
+    
+    <string name="fix_datetime_crash_title">Arreglar error en ajustes de fecha y hora</string>
+    <string name="fix_datetime_crash_summary">Activar en caso de que se produzca un cierre inesperado en los ajustes de fecha y hora (requiere reinicio)</string>
+
+    <string name="fix_caller_id_phone_title">Fix caller ID for phone</string> <!-- STILL UNTRANSLATED -->
+    <string name="fix_caller_id_phone_summary">Activar si el contacto guardado no coincide cuando recibes su llamada (requiere reinicio)</string>
+    <string name="fix_caller_id_phone_alert">Tras el reinicio deberías volver a añadir tus contactos para que los cambios tengan efecto. Usa Ajustes / Aplicaciones / Todas - para eliminar los datos del proveedor de Contactos.</string>
+
+    <string name="fix_caller_id_mms_title">Fix caller ID for messages</string> <!-- STILL UNTRANSLATED -->
+    <string name="fix_caller_id_mms_summary">Enable in case you experience splitted conversation threads for the same contact (requires reboot)</string> <!-- STILL UNTRANSLATED -->
+    <string name="fix_caller_id_mms_alert">After reboot, you should delete all splitted threads in messaging app for change to take effect!</string> <!-- STILL UNTRANSLATED -->
+
+    <string name="fix_calendar_title">Arreglar aplicación calendario</string>
+    <string name="fix_calendar_summary">Activar si la pantalla se enciende sola periódicamente (requiere reinicio)</string>
 
     <string name="important">Importante</string>
 
@@ -117,10 +138,18 @@
     <string name="dialog_color_picker">Selector de color</string>
     <string name="press_color_to_apply">Pulsa en el color para aplicar</string>
 
-    <!--  Statusbar background color -->
+    <!-- Statusbar background color -->
     <string name="statusbar_bgcolor_title">Color de fondo de la barra de estado</string>
     <string name="statusbar_bgcolor_summary">Permite establecer un color de fondo a la barra de estado</string>
+    
+    <!--  Fix speech settings -->
+    <string name="fix_tts_settings_title">Fix speech settings</string> <!-- STILL UNTRANSLATED -->
+    <string name="fix_tts_settings_summary">Unlocks voice search and text-to-speech settings in Language&amp;Input (requires reboot)</string> <!-- STILL UNTRANSLATED -->
 
+    <!--  Advanced developer options -->
+    <string name="fix_dev_opts_title">Opciones avanzadas de desarrollo</string>
+    <string name="fix_dev_opts_summary">Desbloquea las opciones avanzadas de desarrollo (requiere reinicio)</string>
+    
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Ajustes de la barra de estado</string>
     <string name="pref_cat_statusbar_summary">Contiene varios ajustes de la barra de estado</string>
