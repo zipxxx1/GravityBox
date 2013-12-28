@@ -849,7 +849,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">隐藏更改</string>
-    <string name="pref_qs_hide_on_change_summary">单击瓷贴会自动收起状态栏，适用于GravityBox瓷贴和覆盖原厂瓷贴。</string>
+    <string name="pref_qs_hide_on_change_summary">单击瓷贴会自动收起状态栏，适用于GravityBox瓷贴和覆盖原厂瓷贴</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">电源菜单</string>
@@ -857,5 +857,11 @@
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
     <string name="pref_reboot_allow_on_lockscreen_title">允许锁屏</string>
+    
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">闲置模式</string>
+    <string name="inactivity_mode_default">默认</string>
+    <string name="inactivity_mode_hide">隐藏不活动</string>
+    <string name="inactivity_mode_summary">显示摘要和隐藏不活动</string>
 
 </resources>
