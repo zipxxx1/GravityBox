@@ -23,7 +23,7 @@ import de.robv.android.xposed.XposedHelpers;
 
 public class PermissionGranter {
     public static final String TAG = "GB:PermissionGranter";
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     private static final String CLASS_PACKAGE_MANAGER_SERVICE = "com.android.server.pm.PackageManagerService";
     private static final String CLASS_PACKAGE_PARSER_PACKAGE = "android.content.pm.PackageParser.Package";
