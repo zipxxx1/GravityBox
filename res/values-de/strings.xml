@@ -59,6 +59,9 @@
     <string name="quick_settings_expanded_desktop_expanded">Erweitert</string>
     <string name="quick_settings_stay_awake_on">Wachhalten an</string>
     <string name="quick_settings_stay_awake_off">Wachhalten aus</string>
+    <string name="quick_settings_nfc_on">NFC an</string>
+    <string name="quick_settings_nfc_off">NFC aus</string>
+    <string name="quick_settings_camera_error_connect">Kamera nicht erreichbar</string>
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Schnelleinstellungen in Statusleiste</string>
@@ -86,6 +89,7 @@
     <string name="qs_tile_expanded_desktop">Erweiterter Desktop</string>
     <string name="qs_tile_stay_awake">Wachhalten</string>
     <string name="qs_tile_screenshot">Screenshot</string>
+    <string name="qs_tile_camera">Kamera</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Farbauswahl</string>
@@ -692,5 +696,16 @@
     <string name="pref_statusbar_icon_color_secondary_summary">Überschreibt das orange Standardsignalsymbol</string>
     <string name="pref_statusbar_data_activity_color_secondary_title">Sekundäre Datenaktivitätsfarbe</string>
     <string name="pref_statusbar_data_activity_color_secondary_summary">Legt die Farbe für sekundäre Datenaktivitäten fest</string>
-        
+      
+    <!-- Screen recording -->
+    <string name="screenrecord_notif_ticker">Bildschirm wird aufgezeichnet</string>
+    <string name="screenrecord_notif_title">Zeichne auf</string>
+    <string name="screenrecord_notif_stop">Stop</string>
+    <string name="screenrecord_notif_pointer">Berührungen umschalten</string>
+    <string name="screenrecord_toast_error">Bildschirmaufzeichnung nicht möglich</string>
+    <string name="screenrecord_toast_processing">Neue Aufzeichnung nicht möglich, da die letzte Aufzeichnung noch verarbeitet wird</string>
+    <string name="screenrecord_toast_saved">Aufzeichnung gespeichert als %s</string>
+    <string name="screenrecord_toast_save_error">Speichern in Ausgabedatei nicht möglich</string>
+    <string name="action_screenrecord">Bildschirmaufzeichnung</string>
+    <string name="pref_powermenu_screenrecord_title">Bildschirmaufzeichnung im Power Menü</string>  
 </resources>

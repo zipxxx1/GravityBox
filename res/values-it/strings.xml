@@ -868,7 +868,6 @@
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Settaggi visualizzazione batteria</string>
     
-    
     <!-- Cursor control in navigation bar -->
     <string name="pref_navbar_cursor_control_title">Freccie di navigazione</string>
     <string name="pref_navbar_cursor_control_summary">Abilita le frecce nella barra di navigazione durante la visualizzazione della tastiera</string>
@@ -887,10 +886,16 @@
     <string name="pref_qs_hide_on_change_summary">Togli la barra di stato automaticamente al tocco sulle icone. Si applica solo alle icone GravityBox e sovrascrive le icone stock.</string>
 
     <!-- Power tweaks categories -->
-    <string name="pref_cat_power_menu_title">Power menu</string>
+    <string name="pref_cat_power_menu_title">Menu Power</string>
     <string name="pref_cat_power_other_title">Altri</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
     <string name="pref_reboot_allow_on_lockscreen_title">Permetti nella schermata di blocco</string>
+    
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Modalità inattiva</string>
+    <string name="inactivity_mode_default">Default</string>
+    <string name="inactivity_mode_hide">Nascondi in inattività</string>
+    <string name="inactivity_mode_summary">Mostra il sommario e nascondi in inattività</string>
 
 </resources>

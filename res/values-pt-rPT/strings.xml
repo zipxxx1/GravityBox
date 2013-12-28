@@ -22,8 +22,8 @@
 
     <string name="reboot_required">As alterações serão aplicadas após reiniciar o sistema</string>
 
-    <string name="poweroff_advanced_title">Menu Desligar avançado</string>
-    <string name="poweroff_advanced_summary">Adiciona opções para reiniciar em modo de recuperação ao Menu Desligar</string>
+    <string name="poweroff_advanced_title">Menu Reiniciar avançado</string>
+    <string name="poweroff_advanced_summary">Adiciona opções para reiniciar em modo de recuperação</string>
     <string name="poweroff_recovery">Modo de recuperação</string>
     <string name="poweroff_bootloader">Modo bootloader</string>
 
@@ -819,5 +819,35 @@
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Definições da bateria</string>
+
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Teclas de controlo do cursor</string>
+    <string name="pref_navbar_cursor_control_summary">Ativa as teclas de controlo do cursor na Barra de Navegação quando o teclado está visível</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Ligar ecrã com teclas de volume</string>
+    <string name="volume_rocker_wake_default">Padrão</string>
+    <string name="volume_rocker_wake_enabled">Ativado</string>
+    <string name="volume_rocker_wake_disabled">Desativado</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Solicitar confirmação para reiniciar</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Ocultar ao tocar</string>
+    <string name="pref_qs_hide_on_change_summary">Permite ocultar a Barra de Status automaticamente assim que tocar num painel. Aplicável apenas aos painéis adicionados pelo GravityBox.</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Menu Desligar</string>
+    <string name="pref_cat_power_other_title">Outros</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Permitir no ecrã de bloqueio</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Modo de inatividade</string>
+    <string name="inactivity_mode_default">Por defeito</string>
+    <string name="inactivity_mode_hide">Ocultar por inatividade</string>
+    <string name="inactivity_mode_summary">Mostar sumário e ocultar por inatividade</string>
 
 </resources>
