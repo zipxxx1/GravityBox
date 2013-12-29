@@ -715,9 +715,6 @@
     <string name="pref_app_launcher_slot_title">Aplikasi slot %d</string>
     <string name="app_launcher_no_apps">Tidak ada aplikasi yang ditetapkan. Gunakan GravityBox / menu Launcher Aplikasi untuk menetapkan aplikasi.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Tunjukkan tombol Launcher Aplikasi</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Tunjukkan Launcher Aplikasi</string>
 
