@@ -103,8 +103,8 @@ public class ModHwKeys {
     private static boolean mMenuKeyPressed;
     private static boolean mBackKeyPressed;
     private static int mCustomKeySingletapAction = GravityBoxSettings.HWKEY_ACTION_APP_LAUNCHER;
-    private static int mCustomKeyLongpressAction = GravityBoxSettings.HWKEY_ACTION_SEARCH;
-    private static int mCustomKeyDoubletapAction = GravityBoxSettings.HWKEY_ACTION_TORCH;
+    private static int mCustomKeyLongpressAction = GravityBoxSettings.HWKEY_ACTION_DEFAULT;
+    private static int mCustomKeyDoubletapAction = GravityBoxSettings.HWKEY_ACTION_DEFAULT;
     private static boolean mIsCustomKeyLongPressed = false;
     private static boolean mCustomKeyDoubletapPending = false;
     private static boolean mWasCustomKeyDoubletap = false;
