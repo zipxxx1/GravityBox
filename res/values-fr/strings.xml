@@ -724,9 +724,6 @@
     <string name="pref_app_launcher_slot_title">Application de l\'emplacement %d</string>
     <string name="app_launcher_no_apps">Aucune application assignée. Utiliser l\'item GravityBox / Lanceur d\'applications pour assigner des applications</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Afficher la touche lanceur d\'appli</string>
-    
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Afficher le lanceur d\'application</string>
 

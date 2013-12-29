@@ -706,9 +706,6 @@
     <string name="pref_app_launcher_slot_title">應用程式槽 %d</string>
     <string name="app_launcher_no_apps">沒有應用程式被分配. 使用 GravityBox / 程式啟動器選單來分配應用程式.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">顯示程式啟動器按鍵</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">顯示應用程式啟動器</string>
 
