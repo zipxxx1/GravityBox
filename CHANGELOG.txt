@@ -34,6 +34,7 @@ Changelog 2.8.5 - 29/12/2013
 - Updated Russian translations (thanks to smb.roman AKA romashko)
 - Updated Italian translations (thanks to pesa1234)
 - Updated Slovak and Czech translations
+- Updated Indonesian translation (thanks to awaaas)
 
 Changelog 2.8.4 - 23/12/2013
 --------------------------------------
