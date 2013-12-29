@@ -831,4 +831,8 @@
     <string name="inactivity_mode_hide">Skryť počas nečinnosti</string>
     <string name="inactivity_mode_summary">Zobraziť štatistiku a skryť</string>
 
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Voliteľné tlačidlo</string>
+    <string name="pref_navbar_custom_key_enable_title">Povoliť voliteľné tlačidlo</string>
+
 </resources>
