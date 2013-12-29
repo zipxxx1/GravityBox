@@ -1142,7 +1142,7 @@ public class ModQuickSettings {
                                 final boolean mobileDataEnabled = 
                                         (Boolean) XposedHelpers.callMethod(cm, "getMobileDataEnabled");
 
-                                if ((mHideOnChange || !mobileDataEnabled) && mStatusBar != null) {
+                                if (mHideOnChange && mStatusBar != null) {
                                     XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
                                 }
 
