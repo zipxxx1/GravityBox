@@ -622,9 +622,6 @@
     <string name="pref_app_launcher_slot_title">Aplikácia %d</string>
     <string name="app_launcher_no_apps">Nie sú priradené žiadne aplikácie. Použite GravityBox / Spúšťač aplikácií pre priradenie aplikácií.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Tlačidlo spúštača aplikácií</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Zobraziť spúšťač aplikácií</string>
 
