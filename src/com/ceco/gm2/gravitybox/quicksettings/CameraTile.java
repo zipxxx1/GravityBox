@@ -33,8 +33,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -45,7 +43,6 @@ import android.provider.MediaStore.Images;
 import android.provider.MediaStore.Images.ImageColumns;
 import android.provider.MediaStore.MediaColumns;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -54,10 +51,9 @@ import android.view.View;
 import android.view.ViewParent;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class CameraTile extends AQuickSettingsTile {
+public class CameraTile extends BasicTile {
     private static final String DEFAULT_IMAGE_FILE_NAME_FORMAT = "'IMG'_yyyyMMdd_HHmmss";
     private static final int CAMERA_ID = 0;
 
@@ -68,7 +64,6 @@ public class CameraTile extends AQuickSettingsTile {
     private View mFlashView;
     private Object mContainingPanel;
 
-    private TextView mTextView;
     private Camera mCamera;
     private CameraOrientationListener mCameraOrientationListener = null;
     private int mOrientation;
@@ -114,8 +109,9 @@ public class CameraTile extends AQuickSettingsTile {
             }
         };
 
-        mDrawableId = R.drawable.ic_qs_screenshot;
+        mDrawableId = R.drawable.ic_qs_camera;
         mLabel = mGbContext.getString(R.string.qs_tile_camera);
+        mTileColor = KK_COLOR_ON;
 
         String imageFileNameFormat = DEFAULT_IMAGE_FILE_NAME_FORMAT;
         try {
@@ -133,10 +129,8 @@ public class CameraTile extends AQuickSettingsTile {
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_camera, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.camera_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_camera;
     }
 
     @Override
@@ -146,18 +140,6 @@ public class CameraTile extends AQuickSettingsTile {
         mFlashView = mTile.findViewById(R.id.camera_surface_flash_overlay);
 
         super.onTilePostCreate();
-    }
-
-    @Override
-    protected synchronized void updateTile() {
-        mTextView.setText(mLabel);
-        if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
-        }
     }
 
     private Runnable mStartRunnable = new Runnable() {

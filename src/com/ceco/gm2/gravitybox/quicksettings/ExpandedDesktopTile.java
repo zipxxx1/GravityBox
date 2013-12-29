@@ -26,18 +26,13 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class ExpandedDesktopTile extends AQuickSettingsTile {
+public class ExpandedDesktopTile extends BasicTile {
     private static final String TAG = "GB:ExpandedDesktopTile";
 
-    private TextView mTextView;
     private int mMode;
     private boolean mExpanded;
     private Handler mHandler;
@@ -87,14 +82,17 @@ public class ExpandedDesktopTile extends AQuickSettingsTile {
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_expanded_desktop, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.expanded_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_expanded_desktop;
+    }
 
+    @Override
+    protected void onTilePostCreate() {
         mHandler = new Handler();
         mSettingsObserver = new SettingsObserver(mHandler);
         mSettingsObserver.observe();
+
+        super.onTilePostCreate();
     }
 
     @Override
@@ -106,21 +104,16 @@ public class ExpandedDesktopTile extends AQuickSettingsTile {
         if (mExpanded) {
             mLabel = mGbContext.getString(R.string.quick_settings_expanded_desktop_expanded);
             mDrawableId = R.drawable.ic_qs_expanded_desktop_on;
+            mTileColor = KK_COLOR_ON;
         } else {
             mLabel = (mMode == GravityBoxSettings.ED_DISABLED) ? 
                     mGbContext.getString(R.string.quick_settings_expanded_desktop_disabled) :
                         mGbContext.getString(R.string.quick_settings_expanded_desktop_normal);
             mDrawableId = R.drawable.ic_qs_expanded_desktop_off;
+            mTileColor = KK_COLOR_OFF;
         }
 
-        mTextView.setText(mLabel);
-        if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(mExpanded ? KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
-        }
+        super.updateTile();
     }
 
     @Override

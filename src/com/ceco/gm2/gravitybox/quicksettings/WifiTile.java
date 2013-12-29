@@ -33,12 +33,9 @@ import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class WifiTile extends AQuickSettingsTile implements WifiStateChangeListener {
+public class WifiTile extends BasicTile implements WifiStateChangeListener {
     private static final String TAG = "GB:WifiTile";
     private static final String CLASS_NCG_SIGNAL_CLUSTER = Utils.hasGeminiSupport() ?
             "com.android.systemui.statusbar.policy.NetworkControllerGemini.SignalCluster" :
@@ -47,7 +44,6 @@ public class WifiTile extends AQuickSettingsTile implements WifiStateChangeListe
     private static final boolean DEBUG = false;
 
     private WifiManagerWrapper mWifiManager;
-    private TextView mTextView;
     private Map<String,Integer> mDrawableMap;
     private boolean mTurningOn = false;
 
@@ -58,6 +54,8 @@ public class WifiTile extends AQuickSettingsTile implements WifiStateChangeListe
     public WifiTile(Context context, Context gbContext, Object statusBar, Object panelBar,
             WifiManagerWrapper wifiManager) {
         super(context, gbContext, statusBar, panelBar);
+
+        mTileColor = KK_COLOR_ON;
 
         mWifiManager = wifiManager;
         mWifiManager.setWifiStateChangeListener(this);
@@ -83,10 +81,8 @@ public class WifiTile extends AQuickSettingsTile implements WifiStateChangeListe
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_wifi, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.wifi_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_wifi;
     }
 
     @SuppressWarnings("unchecked")
@@ -115,10 +111,10 @@ public class WifiTile extends AQuickSettingsTile implements WifiStateChangeListe
         if (mTileStyle == KITKAT && (mDrawableId == R.drawable.ic_qs_wifi_full_1 ||
                 mDrawableId == R.drawable.ic_qs_wifi_full_2 ||
                 mDrawableId == R.drawable.ic_qs_wifi_full_3 ||
-                        mDrawableId == R.drawable.ic_qs_wifi_full_4)) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
+                mDrawableId == R.drawable.ic_qs_wifi_full_4)) {
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(mTileColor, PorterDuff.Mode.SRC_ATOP);
+            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, mDrawable, null, null);
         } else {
             mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
         }
