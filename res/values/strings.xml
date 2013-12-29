@@ -901,7 +901,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Hide on change</string>
-    <string name="pref_qs_hide_on_change_summary">Collapses statusbar automatically on tile single-tap. Applies to GravityBox tiles only.</string>
+    <string name="pref_qs_hide_on_change_summary">Collapses statusbar automatically on tile single-tap. Applies to GravityBox tiles and overriden stock tiles.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Power menu</string>
