@@ -864,5 +864,15 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Ajustes de botón personalizado</string>
     <string name="pref_navbar_custom_key_enable_title">Activar botón personalizado</string>
+
+    <!-- Signal cluster settings -->
+    <string name="pref_cat_signal_cluster_title">Ajustes de señal de red</string>
+    <string name="pref_signal_cluster_connection_state_title">Activar estado de conexión</string>
+    <string name="pref_signal_cluster_connection_state_summary">Indica el estado de conexión (parcial o completo) en los iconos de señal y WiFi (requiere reinicio)</string>
+    <string name="pref_signal_cluster_data_activity_title">Activar indicadores de actividad de datos</string>
+    <string name="pref_signal_cluster_data_activity_summary">Indica la actividad de datos en los iconos de señal y WiFi (requiere reinicio)</string>
+ 
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Usar modos de red CDMA</string>
     
 </resources>
