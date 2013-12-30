@@ -913,4 +913,8 @@
     <string name="inactivity_mode_hide">Masquer durant inactivité</string>
     <string name="inactivity_mode_summary">Afficher un résumé puis masquer durant l\'inactivité</string>
 
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Paramètres touche personnalisée</string>
+    <string name="pref_navbar_custom_key_enable_title">Active la touche personnalisée</string>
+
 </resources>
