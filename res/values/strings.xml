@@ -872,4 +872,7 @@
     <string name="pref_signal_cluster_data_activity_title">Enable data activity</string>
     <string name="pref_signal_cluster_data_activity_summary">Indicates data activity on mobile and WiFi icons (requires reboot)</string>
 
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Use CDMA network modes</string>
+
 </resources>
