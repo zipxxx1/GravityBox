@@ -894,7 +894,7 @@
     <string name="volume_rocker_wake_disabled">禁用</string>
 
     <!-- Advanced reboot menu: require confirmation -->
-    <string name="pref_reboot_confirm_required_title">要求重启确认</string>
+    <string name="pref_reboot_confirm_required_title">重启需要确认</string>
     
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">隐藏更改</string>
@@ -912,5 +912,12 @@
     <string name="inactivity_mode_default">默认</string>
     <string name="inactivity_mode_hide">隐藏不活动</string>
     <string name="inactivity_mode_summary">显示摘要和隐藏不活动</string>
+    
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">自定义键设置</string>
+    <string name="pref_navbar_custom_key_enable_title">启用自定义键</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">使用CDMA网络模式</string>
 
 </resources>
