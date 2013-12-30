@@ -917,4 +917,7 @@
     <string name="pref_cat_navbar_custom_key_title">Ajustes de botón personalizado</string>
     <string name="pref_navbar_custom_key_enable_title">Activar botón personalizado</string>
     
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Usar modos de red CDMA</string>
+    
 </resources>
