@@ -852,4 +852,14 @@
     <string name="inactivity_mode_hide">Ocultar por inatividade</string>
     <string name="inactivity_mode_summary">Mostar sumário e ocultar por inatividade</string>
 
+    <!-- Signal cluster settings -->
+    <string name="pref_cat_signal_cluster_title">Definições do agregador de sinal</string>
+    <string name="pref_signal_cluster_connection_state_title">Ativar estado da ligação</string>
+    <string name="pref_signal_cluster_connection_state_summary">Permite exibir o estado (parcial/total) da ligação nos indicadores de dados moóvel e WiFi (necessário reiniciar)</string>
+    <string name="pref_signal_cluster_data_activity_title">Ativar atividade de dados</string>
+    <string name="pref_signal_cluster_data_activity_summary">Permite exibir a atividade de dados nos indicadores de dados moóvel e WiFi (necessário reiniciar)</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Utilizar modos de rede CDMA</string>
+
 </resources>
