@@ -902,4 +902,7 @@
     <string name="pref_cat_navbar_custom_key_title">Definições de tecla personalizável</string>
     <string name="pref_navbar_custom_key_enable_title">Ativar tecla personalizável</string>
 
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Utilizar modos de rede CDMA</string>
+
 </resources>
