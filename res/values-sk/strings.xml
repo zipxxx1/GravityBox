@@ -831,4 +831,18 @@
     <string name="inactivity_mode_hide">Skryť počas nečinnosti</string>
     <string name="inactivity_mode_summary">Zobraziť štatistiku a skryť</string>
 
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Voliteľné tlačidlo</string>
+    <string name="pref_navbar_custom_key_enable_title">Povoliť voliteľné tlačidlo</string>
+
+    <!-- Signal cluster settings -->
+    <string name="pref_cat_signal_cluster_title">Nastavenia ikon signálu</string>
+    <string name="pref_signal_cluster_connection_state_title">Stav pripojenia</string>
+    <string name="pref_signal_cluster_connection_state_summary">Indikácia čiastočného/úplného stavu pripojenia mobilných dát a WiFi (vyžaduje reštart)</string>
+    <string name="pref_signal_cluster_data_activity_title">Indikátory dátového prenosu</string>
+    <string name="pref_signal_cluster_data_activity_summary">Indikácia dátového prenosu v ikonách mobilných dát a WiFi (vyžaduje reštart)</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Použiť CDMA režimy siete</string>
+
 </resources>

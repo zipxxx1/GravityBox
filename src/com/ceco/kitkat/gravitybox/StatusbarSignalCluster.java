@@ -16,6 +16,9 @@
 package com.ceco.kitkat.gravitybox;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +31,15 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -37,15 +47,26 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     public static final String TAG = "GB:StatusbarSignalCluster";
     private static final boolean DEBUG = false;
 
+    protected static XSharedPreferences sPrefs;
+
     protected LinearLayout mView;
     protected StatusBarIconManager mIconManager;
     protected Resources mResources;
+    protected Resources mGbResources;
     private Field mFldWifiGroup;
+    private Field mFldMobileGroup;
     private Field mFldMobileView;
     private Field mFldMobileTypeView;
     private Field mFldWifiView;
     private Field mFldAirplaneView;
     private List<String> mErrorsLogged = new ArrayList<String>();
+
+    // Connection state and data activity
+    protected boolean mConnectionStateEnabled;
+    protected boolean mDataActivityEnabled;
+    protected Object mNetworkControllerCallback;
+    protected SignalActivity mWifiActivity;
+    protected SignalActivity mMobileActivity;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -58,7 +79,96 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     }
 
-    public static StatusbarSignalCluster create(LinearLayout view, StatusBarIconManager iconManager) {
+    // Signal activity
+    enum SignalType { WIFI, MOBILE };
+    class SignalActivity {
+        boolean enabled;
+        boolean fullyConnected = true;
+        boolean activityIn;
+        boolean activityOut;
+        Drawable imageDataIn;
+        Drawable imageDataOut;
+        Drawable imageDataInOut;
+        ImageView activityView;
+        SignalType signalType;
+
+        public SignalActivity(ViewGroup container, SignalType type) {
+            signalType = type;
+            if (mDataActivityEnabled) {
+                activityView = new ImageView(container.getContext());
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+                lp.gravity = Gravity.CENTER | Gravity.BOTTOM;
+                activityView.setLayoutParams(lp);
+                container.addView(activityView);
+                if (type == SignalType.WIFI) {
+                    imageDataIn = mGbResources.getDrawable(R.drawable.stat_sys_wifi_in);
+                    imageDataOut = mGbResources.getDrawable(R.drawable.stat_sys_wifi_out);
+                    imageDataInOut = mGbResources.getDrawable(R.drawable.stat_sys_wifi_inout);
+                } else if (type == SignalType.MOBILE) {
+                    imageDataIn = mGbResources.getDrawable(R.drawable.stat_sys_signal_in);
+                    imageDataOut = mGbResources.getDrawable(R.drawable.stat_sys_signal_out);
+                    imageDataInOut = mGbResources.getDrawable(R.drawable.stat_sys_signal_inout);
+                }
+            }
+        }
+
+        public void update(boolean enabled, boolean fully, boolean in, boolean out) throws Throwable {
+            this.enabled = enabled;
+            fullyConnected = fully;
+            activityIn = in;
+            activityOut = out;
+
+            // partially/fully connected state
+            if (mConnectionStateEnabled) {
+                if (mIconManager.isColoringEnabled() &&
+                        mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
+                    StatusbarSignalCluster.this.update();
+                } else {
+                    ImageView signalIcon = signalType == SignalType.WIFI ?
+                            (ImageView) mFldWifiView.get(mView) : (ImageView) mFldMobileView.get(mView);
+                    if (signalIcon != null && signalIcon.getDrawable() != null) {
+                        Drawable d = signalIcon.getDrawable();
+                        if (!fullyConnected) {
+                            d.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
+                        } else {
+                            d.clearColorFilter();
+                        }
+                        signalIcon.setImageDrawable(d);
+                    }
+                    if (signalType == SignalType.MOBILE) {
+                        ImageView dataTypeIcon = (ImageView) mFldMobileTypeView.get(mView);
+                        if (dataTypeIcon != null && dataTypeIcon.getDrawable() != null) {
+                            Drawable dti = dataTypeIcon.getDrawable();
+                            if (!fullyConnected) {
+                                dti.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
+                            } else {
+                                dti.clearColorFilter();
+                            }
+                            dataTypeIcon.setImageDrawable(dti);
+                        }
+                    }
+                }
+            }
+
+            // in/out activity
+            if (mDataActivityEnabled) {
+                if (activityIn && activityOut) {
+                    activityView.setImageDrawable(imageDataInOut);
+                } else if (activityIn) {
+                    activityView.setImageDrawable(imageDataIn);
+                } else if (activityOut) {
+                    activityView.setImageDrawable(imageDataOut);
+                }
+                activityView.setVisibility(activityIn || activityOut ?
+                        View.VISIBLE : View.GONE);
+            }
+        }
+    } 
+
+    public static StatusbarSignalCluster create(LinearLayout view, StatusBarIconManager iconManager,
+            XSharedPreferences prefs) {
+        sPrefs = prefs;
         if (Utils.isMt6572Device()) {
             return new StatusbarSignalClusterMt6572(view, iconManager);
         } else if (Utils.isMtkDevice()) {
@@ -72,25 +182,22 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         mView = view;
         mIconManager = iconManager;
         mResources = mView.getResources();
+        try {
+            mGbResources = mView.getContext().createPackageContext(
+                    GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY).getResources();
+        } catch (NameNotFoundException e) {
+            XposedBridge.log(e);
+        }
 
         mFldWifiGroup = resolveField("mWifiGroup", "mWifiViewGroup");
+        mFldMobileGroup = resolveField("mMobileGroup", "mMobileViewGroup");
         mFldMobileView = resolveField("mMobile", "mMobileStrengthView");
         mFldMobileTypeView = resolveField("mMobileType", "mMobileTypeView");
         mFldWifiView = resolveField("mWifi", "mWifiStrengthView");
         mFldAirplaneView = resolveField("mAirplane", "mAirplaneView");
 
-        if (mView != null) {
-            try {
-                XposedHelpers.findAndHookMethod(mView.getClass(), "apply", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        apply();
-                    }
-                });
-            } catch (Throwable t) {
-                log("Error hooking apply() method: " + t.getMessage());
-            }
-        }
+        initPreferences();
+        createHooks();
 
         mIconManager.registerListener(this);
     }
@@ -109,10 +216,78 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         return field;
     }
 
+    private void createHooks() {
+        try {
+            XposedHelpers.findAndHookMethod(mView.getClass(), "apply", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    apply();
+                }
+            });
+        } catch (Throwable t) {
+            log("Error hooking apply() method: " + t.getMessage());
+        }
+
+        if (mConnectionStateEnabled || mDataActivityEnabled) {
+            try {
+                final ClassLoader classLoader = mView.getContext().getClassLoader();
+                final Class<?> networkCtrlClass = XposedHelpers.findClass(
+                        "com.android.systemui.statusbar.policy.NetworkController", classLoader);
+                final Class<?> networkCtrlCbClass = XposedHelpers.findClass(
+                        "com.android.systemui.statusbar.policy.NetworkController.NetworkSignalChangedCallback", 
+                            classLoader);
+                XposedHelpers.findAndHookMethod(mView.getClass(), "setNetworkController",
+                        networkCtrlClass, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        mNetworkControllerCallback = Proxy.newProxyInstance(classLoader, 
+                            new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallback());
+                        XposedHelpers.callMethod(param.args[0], "addNetworkSignalChangedCallback",
+                                mNetworkControllerCallback);
+                        if (DEBUG) log("setNetworkController: callback registered");
+                    }
+                });
+    
+                XposedHelpers.findAndHookMethod(mView.getClass(), "onAttachedToWindow", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        ViewGroup wifiGroup = (ViewGroup) mFldWifiGroup.get(param.thisObject);
+                        if (wifiGroup != null) {
+                            mWifiActivity = new SignalActivity(wifiGroup, SignalType.WIFI);
+                            if (DEBUG) log("onAttachedToWindow: mWifiActivity created");
+                        }
+    
+                        ViewGroup mobileGroup = (ViewGroup) mFldMobileGroup.get(param.thisObject);
+                        if (mobileGroup != null) {
+                            mMobileActivity = new SignalActivity(mobileGroup, SignalType.MOBILE);
+                            if (DEBUG) log("onAttachedToWindow: mMobileActivity created");
+                        }
+                    }
+                });
+    
+                XposedHelpers.findAndHookMethod(mView.getClass(), "onDetachedFromWindow", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        mWifiActivity = null;
+                        mMobileActivity = null;
+                        if (DEBUG) log("onDetachedFromWindow: signal activities destoyed");
+                    }
+                });
+            } catch (Throwable t) {
+                log("Error hooking SignalActivity related methods: " + t.getMessage());
+            }
+        }
+    }
+
     @Override
     public void onBroadcastReceived(Context context, Intent intent) { }
 
-    public void initPreferences(XSharedPreferences prefs) { }
+    protected void initPreferences() { 
+        mConnectionStateEnabled = sPrefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE, false);
+        mDataActivityEnabled = sPrefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
+    }
 
     private void update() {
         if (mView != null) {
@@ -151,7 +326,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 ImageView wifiIcon = (ImageView) mFldWifiView.get(mView);
                 if (wifiIcon != null) {
                     int resId = XposedHelpers.getIntField(mView, "mWifiStrengthId");
-                    Drawable d = mIconManager.getWifiIcon(resId);
+                    Drawable d = mIconManager.getWifiIcon(resId, 
+                            mWifiActivity != null ? mWifiActivity.fullyConnected : true);
                     if (d != null) wifiIcon.setImageDrawable(d);
                 }
             }
@@ -167,7 +343,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 ImageView mobile = (ImageView) mFldMobileView.get(mView);
                 if (mobile != null) {
                     int resId = XposedHelpers.getIntField(mView, "mMobileStrengthId");
-                    Drawable d = mIconManager.getMobileIcon(resId);
+                    Drawable d = mIconManager.getMobileIcon(resId,
+                            mMobileActivity != null ? mMobileActivity.fullyConnected : true);
                     if (d != null) mobile.setImageDrawable(d);
                 }
                 if (mIconManager.isMobileIconChangeAllowed()) {
@@ -213,6 +390,44 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 StatusBarIconManager.FLAG_ICON_COLOR_SECONDARY_CHANGED |
                 StatusBarIconManager.FLAG_SIGNAL_ICON_MODE_CHANGED)) != 0) {
             update();
+        }
+    }
+
+    protected class NetworkControllerCallback implements InvocationHandler {
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) {
+            String methodName = method.getName();
+
+            try {
+                if (methodName.equals("onWifiSignalChanged")) {
+                    if (mWifiActivity != null) {
+                        boolean fullyConnected = true;
+                        final int wifiIconId = (Integer)args[1];
+                        if (mConnectionStateEnabled && wifiIconId != 0) {
+                            String wifiIconName = mResources.getResourceEntryName(wifiIconId);
+                            fullyConnected = wifiIconName.contains("full");
+                        }
+                        mWifiActivity.update((Boolean)args[0], fullyConnected, 
+                                (Boolean)args[2], (Boolean)args[3]);
+                    }
+                } else if (methodName.equals("onMobileDataSignalChanged")) {
+                    if (mMobileActivity != null) {
+                        boolean fullyConnected = true;
+                        final int mobileIconId = (Integer)args[1];
+                        final int dataActivityIconId = (Integer)args[3];
+                        if (mConnectionStateEnabled && mobileIconId != 0 && dataActivityIconId != 0) {
+                            String mobileIconName = mResources.getResourceEntryName(mobileIconId);
+                            fullyConnected = mWifiActivity.enabled || mobileIconName.contains("full");
+                        }
+                        mMobileActivity.update((Boolean)args[0], fullyConnected, 
+                                (Boolean)args[4], (Boolean)args[5]);
+                    }
+                }
+            } catch (Throwable t) {
+                log("Error in NetworkControllerCallback proxy: " + t.getMessage());
+            }
+
+            return null;
         }
     }
 }

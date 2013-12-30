@@ -160,10 +160,11 @@ public class ModStatusbarColor {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     LinearLayout view = (LinearLayout) param.thisObject;
-                    mSignalCluster = StatusbarSignalCluster.create(view, mIconManager);
-                    mSignalCluster.initPreferences(prefs);
-                    mBroadcastSubReceivers.add(mSignalCluster);
-                    if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
+                    if (mSignalCluster == null) {
+                        mSignalCluster = StatusbarSignalCluster.create(view, mIconManager, prefs);
+                        mBroadcastSubReceivers.add(mSignalCluster);
+                        if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
+                    }
                 }
             });
 

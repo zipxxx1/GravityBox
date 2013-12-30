@@ -865,4 +865,14 @@
     <string name="pref_cat_navbar_custom_key_title">Custom key settings</string>
     <string name="pref_navbar_custom_key_enable_title">Enable custom key</string>
 
+    <!-- Signal cluster settings -->
+    <string name="pref_cat_signal_cluster_title">Signal cluster settings</string>
+    <string name="pref_signal_cluster_connection_state_title">Enable connection state</string>
+    <string name="pref_signal_cluster_connection_state_summary">Indicates partially/fully connected state on mobile and WiFi icons (requires reboot)</string>
+    <string name="pref_signal_cluster_data_activity_title">Enable data activity</string>
+    <string name="pref_signal_cluster_data_activity_summary">Indicates data activity on mobile and WiFi icons (requires reboot)</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Use CDMA network modes</string>
+
 </resources>

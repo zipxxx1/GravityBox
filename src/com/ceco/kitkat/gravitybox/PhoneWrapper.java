@@ -30,10 +30,13 @@ public class PhoneWrapper {
     private static final String TAG = "GB:PhoneWrapper";
     private static final boolean DEBUG = false;
 
-    public static final int NT_WCDMA_PREFERRED = 0;
-    public static final int NT_GSM_ONLY = 1;
-    public static final int NT_WCDMA_ONLY = 2;
-    public static final int NT_GSM_WCDMA_AUTO = 3;
+    public static final int NT_WCDMA_PREFERRED = 0;             // GSM/WCDMA (WCDMA preferred) (2g/3g)
+    public static final int NT_GSM_ONLY = 1;                    // GSM Only (2g)
+    public static final int NT_WCDMA_ONLY = 2;                  // WCDMA ONLY (3g)
+    public static final int NT_GSM_WCDMA_AUTO = 3;              // GSM/WCDMA Auto (2g/3g)
+    public static final int NT_CDMA_EVDO = 4;                   // CDMA/EVDO Auto (2g/3g)
+    public static final int NT_CDMA_ONLY = 5;                   // CDMA Only (2G)
+    public static final int NT_EVDO_ONLY = 6;                   // Evdo Only (3G)
     public static final int NT_LTE_CDMA_EVDO = 8; 
     public static final int NT_LTE_GSM_WCDMA = 9;
     public static final int NT_LTE_CMDA_EVDO_GSM_WCDMA = 10;
