@@ -1,3 +1,28 @@
+Changelog 2.8.6 - 30/12/2013
+--------------------------------------
+- Statusbar tweaks/Signal cluster settings:
+--- Option to indicate partially/fully connected state on statusbar mobile and WiFi icons
+--- Option to indicate data activity on statusbar mobile and WiFi icons
+- QuickSettings:
+--- Fixed Mobile signal tile hiding panels when Hide on Change off
+--- Network mode tile: option to use CDMA network modes instead of GSM
+- Navigation bar:
+--- AppLauncher key turned into fully customizable navigation bar key
+--- Allows user-defined actions to be performed on single-tap, long-press, double-tap
+- Clear all recents:
+--- Long-press on clear all recents button removes all but current task 
+------ Current task will be automatically brought into front after clearing
+--- Fixed margins on Tablet devices (having navbar on bottom on landscape orientation)
+- Fixed screenshot from Power Menu and Tile for Moto X devices
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated German translations (thanks to Wikiwix)
+- Updated Italian translations (thanks to pesa1234)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated French translation (thanks to ch-vox)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Polish translations (thanks to xtrem007)
+
 Changelog 2.8.5 - 27/12/2013
 --------------------------------------
 - Navigation bar: implemented cursor control keys
