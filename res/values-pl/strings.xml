@@ -862,7 +862,7 @@
     <string name="battery_percent_text_style_numbers_only">Tylko cyfry (bez symbolu procentów)</string>
 
     <!-- Battery settings category -->
-    <string name="pref_cat_battery_settings_title">Ustawienia baterii</string>
+    <string name="pref_cat_battery_settings_title">Ustawienia wskaźnika baterii</string>
 
     <!-- Cursor control in navigation bar -->
     <string name="pref_navbar_cursor_control_title">Klawisze sterowania kursorem</string>
@@ -897,5 +897,8 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Ustawienia opcjonalnego przycisku</string>
     <string name="pref_navbar_custom_key_enable_title">Włącz opcjonalny przycisk</string>
+    
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Użyj trybów sieci CDMA</string>
     
 </resources>
