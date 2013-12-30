@@ -23,18 +23,23 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.os.PowerManager;
 import android.os.Process;
+import android.os.RemoteException;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.view.HapticFeedbackConstants;
@@ -215,11 +220,7 @@ public class ModHwKeys {
                     mPieMode = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_ENABLE, 0);
                 }
             } else if (action.equals(ACTION_SCREENSHOT) && mPhoneWindowManager != null) {
-                try {
-                    XposedHelpers.callMethod(mPhoneWindowManager, "takeScreenshot");
-                } catch (Throwable t) {
-                    log("Error executing PhoneWindowManager.takeScreenshot(): " + t.getMessage());
-                }
+                takeScreenshot();
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED)) {
                 final boolean allowAllRotations = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_ALLOW_ALL_ROTATIONS, false);
@@ -1155,4 +1156,72 @@ public class ModHwKeys {
             log("Error toggling screen recording: " + t.getMessage());
         }
     }
+
+    private static final Object mScreenshotLock = new Object();
+    private static ServiceConnection mScreenshotConnection = null;  
+    private static void takeScreenshot() {
+        final Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
+        if (handler == null) return;
+
+        synchronized (mScreenshotLock) {  
+            if (mScreenshotConnection != null) {  
+                return;  
+            }  
+            ComponentName cn = new ComponentName("com.android.systemui",  
+                    "com.android.systemui.screenshot.TakeScreenshotService");  
+            Intent intent = new Intent();  
+            intent.setComponent(cn);  
+            ServiceConnection conn = new ServiceConnection() {  
+                @Override  
+                public void onServiceConnected(ComponentName name, IBinder service) {  
+                    synchronized (mScreenshotLock) {  
+                        if (mScreenshotConnection != this) {  
+                            return;  
+                        }  
+                        Messenger messenger = new Messenger(service);  
+                        Message msg = Message.obtain(null, 1);  
+                        final ServiceConnection myConn = this;  
+                                                
+                        Handler h = new Handler(handler.getLooper()) {  
+                            @Override  
+                            public void handleMessage(Message msg) {  
+                                synchronized (mScreenshotLock) {  
+                                    if (mScreenshotConnection == myConn) {  
+                                        mContext.unbindService(mScreenshotConnection);  
+                                        mScreenshotConnection = null;  
+                                        handler.removeCallbacks(mScreenshotTimeout);  
+                                    }  
+                                }  
+                            }  
+                        };  
+                        msg.replyTo = new Messenger(h);  
+                        msg.arg1 = msg.arg2 = 0;  
+                        try {  
+                            messenger.send(msg);  
+                        } catch (RemoteException e) {
+                            XposedBridge.log(e);
+                        }  
+                    }  
+                }  
+                @Override  
+                public void onServiceDisconnected(ComponentName name) {}  
+            };  
+            if (mContext.bindService(intent, conn, Context.BIND_AUTO_CREATE)) {  
+                mScreenshotConnection = conn;  
+                handler.postDelayed(mScreenshotTimeout, 10000);  
+            }  
+        }
+    }
+    
+    private static final Runnable mScreenshotTimeout = new Runnable() {
+        @Override
+        public void run() {
+            synchronized (mScreenshotLock) {
+                if (mScreenshotConnection != null) {
+                    mContext.unbindService(mScreenshotConnection);
+                    mScreenshotConnection = null;
+                }
+            }
+        }
+    };
 }
