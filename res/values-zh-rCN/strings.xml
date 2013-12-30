@@ -656,9 +656,6 @@
     <string name="pref_app_launcher_slot_title">应用程序槽 %d</string>
     <string name="app_launcher_no_apps">没有应用程序被分配，请使用 GravityBox 或应用程序启动器来分配应用程序。</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">显示应用程序启动器按键</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">显示应用程序启动器</string>
 
@@ -863,5 +860,19 @@
     <string name="inactivity_mode_default">默认</string>
     <string name="inactivity_mode_hide">隐藏不活动</string>
     <string name="inactivity_mode_summary">显示摘要和隐藏不活动</string>
+    
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">自定义键设置</string>
+    <string name="pref_navbar_custom_key_enable_title">启用自定义键</string>
+
+    <!-- Signal cluster settings -->
+    <string name="pref_cat_signal_cluster_title">信号活动设置</string>
+    <string name="pref_signal_cluster_connection_state_title">启用连接状态</string>
+    <string name="pref_signal_cluster_connection_state_summary">在移动和WiFi图标部分/完全标记连接状态（需要重新启动）</string>
+    <string name="pref_signal_cluster_data_activity_title">启用数据活动</string>
+    <string name="pref_signal_cluster_data_activity_summary">在移动和WiFi图标标记数据活动（需要重新启动）</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">使用CDMA网络模式</string>
 
 </resources>
