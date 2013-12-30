@@ -524,6 +524,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS = "pref_launcher_desktop_grid_rows";
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS = "pref_launcher_desktop_grid_cols";
 
+    public static final String PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE = "pref_signal_cluster_connection_state";
+    public static final String PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY = "pref_signal_cluster_data_activity";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -543,7 +546,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE,
             PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
             PREF_KEY_TM_MODE,
-            PREF_KEY_QUICK_SETTINGS_ENABLE
+            PREF_KEY_QUICK_SETTINGS_ENABLE,
+            PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE,
+            PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY
     ));
 
     private static final class SystemProperties {

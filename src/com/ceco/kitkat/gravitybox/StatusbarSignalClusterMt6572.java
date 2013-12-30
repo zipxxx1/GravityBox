@@ -29,7 +29,7 @@ public class StatusbarSignalClusterMt6572 extends StatusbarSignalClusterMtk {
                 if (mobile != null) {
                     Object[][] mobileIconIds = (Object[][]) XposedHelpers.getObjectField(mView, "mMobileStrengthId");
                     int resId = (Integer) XposedHelpers.callMethod(mobileIconIds[slot][0], "getIconId");
-                    Drawable d = mIconManager.getMobileIcon(slot, resId);
+                    Drawable d = mIconManager.getMobileIcon(slot, resId, true);
                     if (d != null) mobile.setImageDrawable(d);
                 }
                 if (mIconManager.isMobileIconChangeAllowed(slot)) {

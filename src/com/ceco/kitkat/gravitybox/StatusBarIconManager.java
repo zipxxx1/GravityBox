@@ -353,12 +353,15 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         if (DEBUG) log("setCachedDrawable('" + key + "') - storing to cache");
     }
 
-    public Drawable getWifiIcon(int resId) {
+    public Drawable getWifiIcon(int resId, boolean fullyConnected) {
         Drawable cd;
         String key;
 
         try {
             key = mSystemUiRes.getResourceEntryName(resId);
+            if (!fullyConnected && key.endsWith("_fully")) {
+                key = key.substring(0, key.length() - "_fully".length());
+            }
         } catch (Resources.NotFoundException nfe) {
             return null;
         }
@@ -390,12 +393,15 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         }
     }
 
-    public Drawable getMobileIcon(int index, int resId) {
+    public Drawable getMobileIcon(int index, int resId, boolean fullyConnected) {
         Drawable cd;
         String key;
 
         try {
             key = mSystemUiRes.getResourceEntryName(resId);
+            if (!fullyConnected && key.endsWith("_fully")) {
+                key = key.substring(0, key.length() - "_fully".length());
+            }
         } catch (Resources.NotFoundException nfe) {
             return null;
         }
@@ -433,8 +439,8 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         }
     }
 
-    public Drawable getMobileIcon(int resId) {
-        return getMobileIcon(0, resId);
+    public Drawable getMobileIcon(int resId, boolean fullyConnected) {
+        return getMobileIcon(0, resId, fullyConnected);
     }
 
     public boolean isMobileIconChangeAllowed(int index) {

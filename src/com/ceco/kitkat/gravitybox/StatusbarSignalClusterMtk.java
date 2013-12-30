@@ -1,6 +1,5 @@
 package com.ceco.kitkat.gravitybox;
 
-import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
@@ -31,10 +30,10 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     }
 
     @Override
-    public void initPreferences(XSharedPreferences prefs) {
-        super.initPreferences(prefs);
+    protected void initPreferences() {
+        super.initPreferences();
 
-        mRoamingIndicatorsDisabled = prefs.getBoolean(
+        mRoamingIndicatorsDisabled = sPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_DISABLE_ROAMING_INDICATORS, false);
     }
 
@@ -63,7 +62,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                 if (mobile != null) {
                     int resId = (Integer) XposedHelpers.callMethod(Utils.hasGeminiSupport() ?
                                     mobileIconIds[0] : mobileIconId, "getIconId");
-                    Drawable d = mIconManager.getMobileIcon(resId);
+                    Drawable d = mIconManager.getMobileIcon(resId, true);
                     if (d != null) mobile.setImageDrawable(d);
                 }
                 if (mIconManager.isMobileIconChangeAllowed()) {
@@ -115,7 +114,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                 ImageView mobile = (ImageView) XposedHelpers.getObjectField(mView, "mMobileGemini");
                 if (mobile != null) {
                     int resId = (Integer) XposedHelpers.callMethod(mobileIconIdsGemini[0], "getIconId");
-                    Drawable d = mIconManager.getMobileIcon(1, resId);
+                    Drawable d = mIconManager.getMobileIcon(1, resId, true);
                     if (d != null) mobile.setImageDrawable(d);
                 }
                 if (mIconManager.isMobileIconChangeAllowed(1)) {
