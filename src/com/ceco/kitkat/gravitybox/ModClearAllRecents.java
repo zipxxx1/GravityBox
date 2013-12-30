@@ -216,6 +216,7 @@ public class ModClearAllRecents {
     private static void updateButtonLayout(View container) {
         if (mRecentsClearButton == null) return;
 
+        final Context context = mRecentsClearButton.getContext();
         int gravity = Integer.valueOf(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL, "53"));
         List<?> recentTaskDescriptions = (List<?>) XposedHelpers.getObjectField(
@@ -231,17 +232,20 @@ public class ModClearAllRecents {
                 int marginTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                         mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_TOP, 0), 
                         res.getDisplayMetrics());
-                int marginRight = (gravity == 53 && orientation == Configuration.ORIENTATION_LANDSCAPE) ?
+                int marginRight = (gravity == 53 && orientation == Configuration.ORIENTATION_LANDSCAPE
+                        && Utils.isPhoneUI(context)) ?
                         (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                                 mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
                                 res.getDisplayMetrics()): 0;
                 lparams.setMargins(0, marginTop, marginRight, 0);
             } else {
-                int marginBottom = (orientation == Configuration.ORIENTATION_PORTRAIT) ?
+                int marginBottom = (orientation == Configuration.ORIENTATION_PORTRAIT || 
+                                        !Utils.isPhoneUI(context)) ?
                         (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                         mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
                         res.getDisplayMetrics()) : 0;
-                int marginRight = (gravity == 85 && orientation == Configuration.ORIENTATION_LANDSCAPE) ?
+                int marginRight = (gravity == 85 && orientation == Configuration.ORIENTATION_LANDSCAPE
+                        && Utils.isPhoneUI(context)) ?
                         (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                                 mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
                                 res.getDisplayMetrics()): 0;
@@ -310,6 +314,7 @@ public class ModClearAllRecents {
         if (rbGravity == 0) {
             mRamUsageBar.setVisibility(View.GONE);
         } else {
+            final Context context = mRamUsageBar.getContext();
             final Resources res = mRamUsageBar.getResources();
             final int orientation = res.getConfiguration().orientation;
             final int caGravity = Integer.valueOf(mPrefs.getString(
@@ -322,11 +327,13 @@ public class ModClearAllRecents {
             final int marginTop = rbOnTop ? (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                     mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_TOP, 0), 
                     res.getDisplayMetrics()) : 0;
-            final int marginBottom = (!rbOnTop && orientation == Configuration.ORIENTATION_PORTRAIT) ? 
+            final int marginBottom = (!rbOnTop && (orientation == Configuration.ORIENTATION_PORTRAIT ||
+                                                    !Utils.isPhoneUI(context))) ? 
                     (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                     mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
                     res.getDisplayMetrics()) : 0;
-            final int marginRight = orientation == Configuration.ORIENTATION_LANDSCAPE ?
+            final int marginRight = orientation == Configuration.ORIENTATION_LANDSCAPE && 
+                                                        Utils.isPhoneUI(context) ?
                             (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                                     mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
                                     res.getDisplayMetrics()) : 0;
