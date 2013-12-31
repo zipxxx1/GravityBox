@@ -706,6 +706,6 @@
     <string name="screenrecord_toast_processing">Neue Aufzeichnung nicht möglich, da die letzte Aufzeichnung noch verarbeitet wird</string>
     <string name="screenrecord_toast_saved">Aufzeichnung gespeichert als %s</string>
     <string name="screenrecord_toast_save_error">Speichern in Ausgabedatei nicht möglich</string>
-    <string name="action_screenrecord">Bildschirmaufzeichnung</string>
+    <string name="action_screenrecord">Bildschirmaufname</string>
     <string name="pref_powermenu_screenrecord_title">Bildschirmaufzeichnung im Power Menü</string>  
 </resources>
