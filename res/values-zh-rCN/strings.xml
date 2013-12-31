@@ -789,7 +789,7 @@
     <string name="screenrecord_toast_saved">录制保存为 %s</string>
     <string name="screenrecord_toast_save_error">无法保存录制到文件</string>
     <string name="action_screenrecord">屏幕录制</string>
-    <string name="pref_powermenu_screenrecord_title">电源键菜单中的屏幕录制</string>
+    <string name="pref_powermenu_screenrecord_title">电源键菜单屏幕录制</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">自动显示拨号盘</string>
