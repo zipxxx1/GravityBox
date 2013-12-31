@@ -286,7 +286,7 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Ilość kafelek w rzędzie</string>
-    <string name="pref_qs_tiles_per_row_summary">Określa ile Kefelek Szybkich Ustawień wyświetlić w jednym rzędzie. Rozmiar Kafelek zostanie odpowiednio zmieniony. Dotyczy trybu Portret.</string>
+    <string name="pref_qs_tiles_per_row_summary">Określa ile Kefelek Szybkich Ustawień wyświetlić w jednym rzędzie przy czym rozmiar kafelek zostanie odpowiednio zmieniony (dotyczy trybu portretowego dla telefonów lub dowolnej orientacji ekranu dla tabletów)</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Pokaż dzień tygodnia</string>
