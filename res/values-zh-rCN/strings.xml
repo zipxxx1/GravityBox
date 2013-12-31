@@ -868,9 +868,9 @@
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">信号活动设置</string>
     <string name="pref_signal_cluster_connection_state_title">启用连接状态</string>
-    <string name="pref_signal_cluster_connection_state_summary">在移动和 WiFi 图标中显示部分/完全连接状态（需要重新启动）</string>
+    <string name="pref_signal_cluster_connection_state_summary">在移动和 WiFi 图标上显示部分/完全连接状态（需要重新启动）</string>
     <string name="pref_signal_cluster_data_activity_title">启用数据活动</string>
-    <string name="pref_signal_cluster_data_activity_summary">在移动和 WiFi 图标中显示数据活动（需要重新启动）</string>
+    <string name="pref_signal_cluster_data_activity_summary">在移动和 WiFi 图标上显示数据活动（需要重新启动）</string>
 
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">使用 CDMA 网络模式</string>
