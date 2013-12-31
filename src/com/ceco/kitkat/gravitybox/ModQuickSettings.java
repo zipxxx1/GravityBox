@@ -325,7 +325,7 @@ public class ModQuickSettings {
                 imageMarginBottom = gbRes.getDimensionPixelSize(R.dimen.qs_tile_margin_below_icon);
                 imageSize = gbRes.getDimensionPixelSize(R.dimen.qs_tile_icon_size);
             }
-            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (orientation == Configuration.ORIENTATION_PORTRAIT || Utils.isTabletUI(context)) {
                 switch (mNumColumns) {
                     case 4: 
                         textSize = 10;
@@ -347,6 +347,7 @@ public class ModQuickSettings {
 
         try {
             final Resources res = mContainerView.getResources();
+            final Context context = mContainerView.getContext();
             final int orientation = res.getConfiguration().orientation;
 
             TileLayout tl = new TileLayout(mContainerView.getContext(), mNumColumns, orientation);
@@ -413,7 +414,7 @@ public class ModQuickSettings {
                 }
             }
 
-            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (orientation == Configuration.ORIENTATION_PORTRAIT || Utils.isTabletUI(context)) {
                 XposedHelpers.setIntField(mContainerView, "mNumColumns", mNumColumns);
                 ((FrameLayout)mContainerView).requestLayout();
             }
