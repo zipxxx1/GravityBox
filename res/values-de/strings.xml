@@ -9,7 +9,7 @@
     <string name="battery_style_circle_percent">Rund mit Prozentwert</string>
     <string name="battery_style_kitkat">KitKat</string>
     <string name="battery_style_kitkat_percent">KitKat mit Prozentwert</string>
-    <string name="battery_percent_text_title">Nur Prozentwert</string>
+    <string name="battery_percent_text_title">Prozentwert</string>
     <string name="battery_style_none">Keine Anzeige</string>
 
     <string name="vol_music_controls_title">Titelsprung mittels Lautstärketasten</string>
@@ -706,6 +706,6 @@
     <string name="screenrecord_toast_processing">Neue Aufzeichnung nicht möglich, da die letzte Aufzeichnung noch verarbeitet wird</string>
     <string name="screenrecord_toast_saved">Aufzeichnung gespeichert als %s</string>
     <string name="screenrecord_toast_save_error">Speichern in Ausgabedatei nicht möglich</string>
-    <string name="action_screenrecord">Bildschirmaufname</string>
+    <string name="action_screenrecord">Bildschirmaufnahme</string>
     <string name="pref_powermenu_screenrecord_title">Bildschirmaufzeichnung im Power Menü</string>  
 </resources>
