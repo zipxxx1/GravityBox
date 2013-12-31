@@ -286,7 +286,7 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Painéis por linha</string>
-    <string name="pref_qs_tiles_per_row_summary">Permite definir quantos painéis são mostrados por linha nas definições rápidas, sendo o seu tamanho ajustado automaticamente de acordo com a escolha (aplicável à orientação de ecrã vertical)</string>
+    <string name="pref_qs_tiles_per_row_summary">Permite definir quantos painéis são mostrados por cada linha nas definições rápidas, sendo o seu tamanho ajustado automaticamente de acordo com a escolha (aplicável à orientação de ecrã vertical em telefones ou qualquer orientação em tablets)</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Mostrar dia da semana</string>
