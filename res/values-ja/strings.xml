@@ -891,4 +891,11 @@
     <string name="inactivity_mode_hide">非表示にする</string>
     <string name="inactivity_mode_summary">概要を表示して通信無しなら非表示にする</string>
     
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">カスタムキー設定</string>
+    <string name="pref_navbar_custom_key_enable_title">カスタムキーの有効化</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">CDMA方式を使用</string>
+    
 </resources>
