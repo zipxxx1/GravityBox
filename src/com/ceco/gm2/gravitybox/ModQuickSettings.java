@@ -328,7 +328,7 @@ public class ModQuickSettings {
         final int imgResId = res.getIdentifier("image", "id", PACKAGE_NAME);
         final int rssiImgResId = res.getIdentifier("rssi_image", "id", PACKAGE_NAME);
 
-        if (orientation == Configuration.ORIENTATION_PORTRAIT || Utils.isTabletUI(context)) {
+        if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(context)) {
             switch (mNumColumns) {
                 case 4: 
                     textSize = 10;
@@ -931,7 +931,7 @@ public class ModQuickSettings {
             final Context context = fl.getContext();
             final int orientation = context.getResources().getConfiguration().orientation;
             updateTileLayout(fl, orientation);
-            if (orientation == Configuration.ORIENTATION_PORTRAIT || Utils.isTabletUI(context)) {
+            if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(context)) {
                 XposedHelpers.setIntField(param.thisObject, "mNumColumns", mNumColumns);
                 fl.requestLayout();
             }
@@ -969,7 +969,7 @@ public class ModQuickSettings {
                         lp.width = (int) ((colSpan * cellWidth) + (colSpan - 1) * mCellGap);
     
                         if (mLpOriginalHeight == -1) mLpOriginalHeight = lp.height;
-                        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(mContext)) {
                             if (numColumns > 3) {
                                 lp.height = (lp.width * numColumns-1) / numColumns;
                             } else {
