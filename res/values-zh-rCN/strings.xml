@@ -22,8 +22,8 @@
     <string name="battery_style_stock">原厂电量图标</string>
     <string name="battery_style_circle">圆形电量图标</string>
     <string name="battery_style_circle_percent">圆形电量图标含百分比</string>
-    <string name="battery_style_kitkat">KitKat电量图标</string>
-    <string name="battery_style_kitkat_percent">KitKat电量图标含百分比</string>
+    <string name="battery_style_kitkat">KitKat 电量图标</string>
+    <string name="battery_style_kitkat_percent">KitKat 电量图标含百分比</string>
     <string name="battery_style_none">无</string>
 
     <string name="vol_music_controls_title">音量键切换歌曲</string>
@@ -115,7 +115,7 @@
 
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">状态栏调整</string>
-    <string name="pref_cat_statusbar_summary">包含各种与状态栏相关的调整选项</string>
+    <string name="pref_cat_statusbar_summary">包含各种状态栏的调整选项</string>
     <string name="pref_cat_misc_title">杂项调整</string>
     <string name="pref_cat_misc_summary">包含所有不属于特定类别的调整选项</string>
 
@@ -145,7 +145,7 @@
 
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">锁屏画面调整</string>
-    <string name="pref_cat_lockscreen_summary">包含各种与锁屏画面相关的调整选项</string>
+    <string name="pref_cat_lockscreen_summary">包含各种锁屏画面的调整选项</string>
     <string name="pref_cat_lockscreen_background_title">锁屏画面背景</string>
     <string name="pref_lockscreen_background_title">背景风格</string>
     <string name="lockscreen_bg_default">默认壁纸</string>
@@ -207,7 +207,7 @@
 
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">媒体调整</string>
-    <string name="pref_cat_media_summary">包含各种与媒体和声音系统相关的调整选项</string>
+    <string name="pref_cat_media_summary">包含各种媒体和声音系统的调整选项</string>
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">更多音量段数</string>
@@ -243,7 +243,7 @@
 
     <!--  Phone tweaks category -->
     <string name="pref_cat_phone_title">电话调整</string>
-    <string name="pref_cat_phone_summary">包含各种与通话相关的调整选项</string>
+    <string name="pref_cat_phone_summary">包含各种通话的调整选项</string>
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">响铃时的手机翻转动作</string>
@@ -327,9 +327,9 @@
     <string name="pref_disable_roaming_indicators_summary">禁用后漫游指示器上（R）不可见，请小心使用</string>
 
     <!-- Battery status in pie controls -->
-    <string name="pie_battery_status_charging">正在充电:<xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="pie_battery_status_charging">正在充电：<xliff:g id="percent">%d</xliff:g>%%</string>
     <string name="pie_battery_status_full">已充满!</string>
-    <string name="pie_battery_status_discharging">剩余电量:<xliff:g id="percent">%d</xliff:g>%%</string>
+    <string name="pie_battery_status_discharging">剩余电量：<xliff:g id="percent">%d</xliff:g>%%</string>
 
     <!-- Phone status in pie controls -->
     <string name="pie_phone_status_no_service">无服务</string>
@@ -656,9 +656,6 @@
     <string name="pref_app_launcher_slot_title">应用程序槽 %d</string>
     <string name="app_launcher_no_apps">没有应用程序被分配，请使用 GravityBox 或应用程序启动器来分配应用程序。</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">显示应用程序启动器按键</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">显示应用程序启动器</string>
 
@@ -783,14 +780,14 @@
     <string name="ringer_mode_sound_vibrate">声音和振动</string>
     
     <!-- Screen recording -->
-    <string name="screenrecord_notif_ticker">屏幕已录制</string>
+    <string name="screenrecord_notif_ticker">屏幕已开始录制</string>
     <string name="screenrecord_notif_title">屏幕录制中</string>
     <string name="screenrecord_notif_stop">停止</string>
     <string name="screenrecord_notif_pointer">切换指针</string>
     <string name="screenrecord_toast_error">无法录制屏幕</string>
-    <string name="screenrecord_toast_processing">无法开始新的录制，之前的记录仍在处理中</string>
+    <string name="screenrecord_toast_processing">无法开始新的录制，之前的录制仍在处理中</string>
     <string name="screenrecord_toast_saved">录制保存为 %s</string>
-    <string name="screenrecord_toast_save_error">无法保存录制文件</string>
+    <string name="screenrecord_toast_save_error">无法保存录制到文件</string>
     <string name="action_screenrecord">屏幕录制</string>
     <string name="pref_powermenu_screenrecord_title">电源键菜单屏幕录制</string>
 
@@ -805,9 +802,9 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">启动器调整</string>
-    <string name="pref_cat_launcher_tweaks_summary">仅适用于谷歌体验启动器</string>
+    <string name="pref_cat_launcher_tweaks_summary">仅适用于原生启动器和谷歌启动器</string>
     <string name="pref_cat_launcher_desktop_grid_title">桌面网格</string>
-    <string name="pref_launcher_desktop_grid_info_title">使用其他值可以突破默认值小部件布局，明智地使用，更改后启动器需要重新启动</string>
+    <string name="pref_launcher_desktop_grid_info_title">使用非默认的值可能破坏小部件的布局，请谨慎使用。改动将在启动器重新启动后生效</string>
     <string name="pref_launcher_desktop_grid_rows_title">行数</string>
     <string name="pref_launcher_desktop_grid_cols_title">列数</string>
     <string name="desktop_grid_default">默认</string>
@@ -821,22 +818,22 @@
     <string name="fullscreen_caller_full">完全</string>
     
     <!-- Battery percent text -->
-    <string name="battery_percent_text_title">电量百分比</string>
-    <string name="battery_percent_text_size_title">电量百分比大小</string>
-    <string name="battery_percent_text_size_normal">标准</string>
+    <string name="battery_percent_text_title">电量百分比文字</string>
+    <string name="battery_percent_text_size_title">电量百分比文字大小</string>
+    <string name="battery_percent_text_size_normal">正常</string>
     <string name="battery_percent_text_size_smaller">小</string>
     <string name="battery_percent_text_size_even_smaller">更小</string>
     <string name="battery_percent_text_size_smallest">最小</string>
-    <string name="battery_percent_text_style_title">电量百分比风格</string>
+    <string name="battery_percent_text_style_title">电量百分比文字风格</string>
     <string name="battery_percent_text_style_default">默认</string>
-    <string name="battery_percent_text_style_numbers_only">只有数字（没百分号）</string>
+    <string name="battery_percent_text_style_numbers_only">仅数字（没有百分号）</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">电量设置</string>
     
     <!-- Cursor control in navigation bar -->
-    <string name="pref_navbar_cursor_control_title">控制光标键</string>
-    <string name="pref_navbar_cursor_control_summary">允许在导航栏显示光标键控制键盘</string>
+    <string name="pref_navbar_cursor_control_title">光标控制键</string>
+    <string name="pref_navbar_cursor_control_summary">当显示键盘时，在导航栏中启用光标控制键</string>
 
     <!-- Volume rocker wake -->
     <string name="pref_volume_rocker_wake_title">音量键唤醒</string>
@@ -848,20 +845,34 @@
     <string name="pref_reboot_confirm_required_title">要求重启确认</string>
 
     <!-- Tiles: Hide on change -->
-    <string name="pref_qs_hide_on_change_title">隐藏更改</string>
-    <string name="pref_qs_hide_on_change_summary">单击瓷贴会自动收起状态栏，适用于GravityBox瓷贴和覆盖原厂瓷贴</string>
+    <string name="pref_qs_hide_on_change_title">更改时隐藏</string>
+    <string name="pref_qs_hide_on_change_summary">单击磁贴后自动收起快速设置。适用于 GravityBox 磁贴和被覆盖的原厂磁贴。</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">电源菜单</string>
     <string name="pref_cat_power_other_title">其它</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">允许锁屏</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">允许锁屏显示</string>
     
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">闲置模式</string>
     <string name="inactivity_mode_default">默认</string>
-    <string name="inactivity_mode_hide">隐藏不活动</string>
-    <string name="inactivity_mode_summary">显示摘要和隐藏不活动</string>
+    <string name="inactivity_mode_hide">不活动时隐藏</string>
+    <string name="inactivity_mode_summary">显示摘要且在不活动时隐藏</string>
+    
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">自定义键设置</string>
+    <string name="pref_navbar_custom_key_enable_title">启用自定义键</string>
+
+    <!-- Signal cluster settings -->
+    <string name="pref_cat_signal_cluster_title">信号活动设置</string>
+    <string name="pref_signal_cluster_connection_state_title">启用连接状态</string>
+    <string name="pref_signal_cluster_connection_state_summary">在移动和 WiFi 图标上显示部分/完全连接状态（需要重新启动）</string>
+    <string name="pref_signal_cluster_data_activity_title">启用数据活动</string>
+    <string name="pref_signal_cluster_data_activity_summary">在移动和 WiFi 图标上显示数据活动（需要重新启动）</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">使用 CDMA 网络模式</string>
 
 </resources>
