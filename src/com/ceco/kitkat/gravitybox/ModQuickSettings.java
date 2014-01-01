@@ -325,7 +325,7 @@ public class ModQuickSettings {
                 imageMarginBottom = gbRes.getDimensionPixelSize(R.dimen.qs_tile_margin_below_icon);
                 imageSize = gbRes.getDimensionPixelSize(R.dimen.qs_tile_icon_size);
             }
-            if (orientation == Configuration.ORIENTATION_PORTRAIT || Utils.isTabletUI(context)) {
+            if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(context)) {
                 switch (mNumColumns) {
                     case 4: 
                         textSize = 10;
@@ -414,7 +414,7 @@ public class ModQuickSettings {
                 }
             }
 
-            if (orientation == Configuration.ORIENTATION_PORTRAIT || Utils.isTabletUI(context)) {
+            if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(context)) {
                 XposedHelpers.setIntField(mContainerView, "mNumColumns", mNumColumns);
                 ((FrameLayout)mContainerView).requestLayout();
             }
@@ -996,7 +996,7 @@ public class ModQuickSettings {
                         lp.width = (int) ((colSpan * cellWidth) + (colSpan - 1) * mCellGap);
     
                         if (mLpOriginalHeight == -1) mLpOriginalHeight = lp.height;
-                        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(mContext)) {
                             if (numColumns > 3) {
                                 lp.height = (lp.width * numColumns-1) / numColumns;
                             } else {
