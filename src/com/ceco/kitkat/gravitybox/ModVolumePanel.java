@@ -49,11 +49,9 @@ public class ModVolumePanel {
     private static final int MSG_TIMEOUT = 5;
 
     private static Object mVolumePanel;
-    private static Object mAudioService;
     private static boolean mVolumesLinked;
     private static Unhook mViewGroupAddViewHook;
     private static boolean mVolumeAdjustMuted;
-    private static boolean mVoiceCapable;
     private static boolean mExpandable;
     private static boolean mExpandFully;
     private static boolean mAutoExpand;
@@ -89,17 +87,39 @@ public class ModVolumePanel {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
                 mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
                 if (DEBUG) log("mVolumesLinked set to: " + mVolumesLinked);
-                updateStreamVolumeAlias();
+                if (mVolumePanel != null) {
+                    try {
+                        updateStreamVolumeAlias(XposedHelpers.getObjectField(mVolumePanel, "mAudioService"));
+                    } catch (Throwable t) {
+                        XposedBridge.log(t);
+                    }
+                }
             }
         }
         
     };
 
+    public static void initZygote(final XSharedPreferences prefs) {
+        try {
+            final Class<?> classAudioService = XposedHelpers.findClass(CLASS_AUDIO_SERVICE, null);
+            XposedHelpers.findAndHookMethod(classAudioService, "updateStreamVolumeAlias",
+                    boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (DEBUG) log("AudioService.updateStreamVolumeAlias() called");
+                    mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
+                    updateStreamVolumeAlias(param.thisObject);
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> classVolumePanel = XposedHelpers.findClass(CLASS_VOLUME_PANEL, classLoader);
             final Class<?> classStreamControl = XposedHelpers.findClass(CLASS_STREAM_CONTROL, classLoader);
-            final Class<?> classAudioService = XposedHelpers.findClass(CLASS_AUDIO_SERVICE, classLoader);
             final Class<?> classViewGroup = XposedHelpers.findClass(CLASS_VIEW_GROUP, classLoader);
 
             mVolumeAdjustMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_MUTE, false);
@@ -109,7 +129,6 @@ public class ModVolumePanel {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mVolumePanel = param.thisObject;
-                    mVoiceCapable = XposedHelpers.getBooleanField(param.thisObject, "mVoiceCapable");
                     Context context = (Context) XposedHelpers.getObjectField(mVolumePanel, "mContext");
                     if (DEBUG) log("VolumePanel constructed; mVolumePanel set");
 
@@ -148,7 +167,6 @@ public class ModVolumePanel {
                     XposedHelpers.findAndHookMethod(classVolumePanel, "inflateUi", new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            mVoiceCapable = XposedHelpers.getBooleanField(param.thisObject, "mVoiceCapable");
                             updateVolumePanelMode();
                         }
                     });
@@ -256,17 +274,6 @@ public class ModVolumePanel {
                 }
             });
 
-            XposedBridge.hookAllConstructors(classAudioService, new XC_MethodHook() {
-
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    mAudioService = param.thisObject;
-                    mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
-                    if (DEBUG) log("AudioService constructed: mAudioService set");
-                    updateStreamVolumeAlias();
-                }
-            });
-
             XposedHelpers.findAndHookMethod(classVolumePanel, "onShowVolumeChanged", 
                     int.class, int.class, new XC_MethodHook() {
                 @Override
@@ -322,37 +329,41 @@ public class ModVolumePanel {
         if (DEBUG) log("VolumePanel mode changed to: " + ((mExpandable) ? "EXPANDABLE" : "SIMPLE"));
     }
 
-    private static boolean shouldLinkVolumes() {
-        return mVolumesLinked && mVoiceCapable;
-    }
-
     private static void hideNotificationSliderIfLinked() {
-        if (mVolumePanel == null || !shouldLinkVolumes()) return;
-
-        @SuppressWarnings("unchecked")
-        Map<Integer, Object> streamControls = 
-                (Map<Integer, Object>) XposedHelpers.getObjectField(mVolumePanel, "mStreamControls");
-        if (streamControls == null) return;
-
-        for (Object o : streamControls.values()) {
-            if ((Integer) XposedHelpers.getIntField(o, "streamType") == STREAM_NOTIFICATION) {
-                View v = (View) XposedHelpers.getObjectField(o, "group");
-                if (v != null) {
-                    v.setVisibility(View.GONE);
-                    if (DEBUG) log("Notification volume slider hidden");
-                    break;
+        if (mVolumePanel != null &&
+                mVolumesLinked && 
+                XposedHelpers.getBooleanField(mVolumePanel, "mVoiceCapable")) {
+            @SuppressWarnings("unchecked")
+            Map<Integer, Object> streamControls = 
+                    (Map<Integer, Object>) XposedHelpers.getObjectField(mVolumePanel, "mStreamControls");
+            if (streamControls == null) return;
+    
+            for (Object o : streamControls.values()) {
+                if ((Integer) XposedHelpers.getIntField(o, "streamType") == STREAM_NOTIFICATION) {
+                    View v = (View) XposedHelpers.getObjectField(o, "group");
+                    if (v != null) {
+                        v.setVisibility(View.GONE);
+                        if (DEBUG) log("Notification volume slider hidden");
+                        break;
+                    }
                 }
             }
         }
     }
 
-    private static void updateStreamVolumeAlias() {
-        if (mAudioService == null) return;
+    private static void updateStreamVolumeAlias(Object audioService) {
+        if (audioService == null) return;
 
-        int[] streamVolumeAlias = (int[]) XposedHelpers.getObjectField(mAudioService, "mStreamVolumeAlias");
-        streamVolumeAlias[STREAM_NOTIFICATION] = shouldLinkVolumes() ? STREAM_RING : STREAM_NOTIFICATION;
-        XposedHelpers.setObjectField(mAudioService, "mStreamVolumeAlias", streamVolumeAlias);
-        if (DEBUG) log("AudioService mStreamVolumeAlias updated, STREAM_NOTIFICATION set to: " + 
-                streamVolumeAlias[STREAM_NOTIFICATION]);
+        try {
+            final boolean shouldLink  = mVolumesLinked && 
+                    XposedHelpers.getBooleanField(audioService, "mVoiceCapable");
+            int[] streamVolumeAlias = (int[]) XposedHelpers.getObjectField(audioService, "mStreamVolumeAlias");
+            streamVolumeAlias[STREAM_NOTIFICATION] = shouldLink ? STREAM_RING : STREAM_NOTIFICATION;
+            XposedHelpers.setObjectField(audioService, "mStreamVolumeAlias", streamVolumeAlias);
+            if (DEBUG) log("AudioService mStreamVolumeAlias updated, STREAM_NOTIFICATION set to: " + 
+                    streamVolumeAlias[STREAM_NOTIFICATION]);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 }
