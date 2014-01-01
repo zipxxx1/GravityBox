@@ -860,7 +860,7 @@
     <string name="battery_percent_text_size_normal">Normal</string>
     <string name="battery_percent_text_size_smaller">Pequeno</string>
     <string name="battery_percent_text_size_even_smaller">Minúsculo</string>
-    <string name="battery_percent_text_size_smallest">Microscópio</string></string>
+    <string name="battery_percent_text_size_smallest">Microscópio</string>
     <string name="battery_percent_text_style_title">Estilo do texto de porcentagem da bateria</string>
     <string name="battery_percent_text_style_default">Padrão</string>
     <string name="battery_percent_text_style_numbers_only">Somente números (sem porcentagem)</string>
