@@ -261,7 +261,7 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Casillas por fila</string>
-    <string name="pref_qs_tiles_per_row_summary">Define cuántas casillas de ajustes se mostrarán por fila. Las casillas se redimensionan automáticamente. Se aplica en el modo retrato.</string>
+    <string name="pref_qs_tiles_per_row_summary">Define cuántas casillas de ajustes se mostrarán por fila, redimensionándose automáticamente (se aplica en el modo retrato en móviles o en cualquier orientación en tablets)</string>
 	
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Mostrar día de la semana</string>
@@ -526,7 +526,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">Cambiar comportamiento predeterminado de las casillas de ajustes</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Cambia el comportamiento de pulsación/larga pulsación en los ajustes seleccionados (requiere reinicio)</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Cambia el comportamiento de larga pulsación a una pulsación y añade \'Cerrar al pulsar\' en los ajustes seleccionados (requiere reinicio)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Slots de SIM correspondientes a ajustes de red</string>
@@ -875,4 +875,18 @@
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">Usar modos de red CDMA</string>
     
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Alternar rotación automática</string>
+    <string name="hwkey_action_auto_rotation_enabled">Rotación automática activada</string>
+    <string name="hwkey_action_auto_rotation_disabled">Rotación automática desactivada</string>
+    
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Permitir cualquier widget</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Permite colocar en la pantalla de bloqueo los widgets que solo pueden ser usados en el lanzador</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Mostrar menú de apagado</string>
+    <string name="hwkey_action_expand_notifications">Expandir panel de notificaciones</string>
+    <string name="hwkey_action_expand_quicksettings">Expandir panel de de ajustes rápidos</string>
+
 </resources>
