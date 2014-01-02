@@ -76,6 +76,8 @@ public class ModHwKeys {
     private static String mStrCustomAppNone;
     private static String mStrCustomAppMissing;
     private static String mStrExpandedDesktopDisabled;
+    private static String mStrAutoRotationEnabled;
+    private static String mStrAutoRotationDisabled;
     private static boolean mIsMenuLongPressed = false;
     private static boolean mIsMenuDoubleTap = false;
     private static boolean mIsBackLongPressed = false;
@@ -677,6 +679,8 @@ public class ModHwKeys {
             mStrCustomAppNone = res.getString(R.string.hwkey_action_custom_app_none);
             mStrCustomAppMissing = res.getString(R.string.hwkey_action_custom_app_missing);
             mStrExpandedDesktopDisabled = res.getString(R.string.hwkey_action_expanded_desktop_disabled);
+            mStrAutoRotationEnabled = res.getString(R.string.hwkey_action_auto_rotation_enabled);
+            mStrAutoRotationDisabled =  res.getString(R.string.hwkey_action_auto_rotation_disabled);
 
             mAppLauncher = new AppLauncher(mContext, mPrefs);
 
@@ -911,6 +915,8 @@ public class ModHwKeys {
             injectKey(KeyEvent.KEYCODE_HOME);
         } else if (action == GravityBoxSettings.HWKEY_ACTION_BACK) {
             injectKey(KeyEvent.KEYCODE_BACK);
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_AUTO_ROTATION) {
+            toggleAutoRotation();
         }
     }
 
@@ -1163,5 +1169,28 @@ public class ModHwKeys {
                 mAppLauncher.showDialog();
             }
         });
+    }
+
+    private static void toggleAutoRotation() {
+        try {
+            Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    final Class<?> rlPolicyClass = XposedHelpers.findClass(
+                            "com.android.internal.view.RotationPolicy", null);
+                    final boolean locked = (Boolean) XposedHelpers.callStaticMethod(
+                            rlPolicyClass, "isRotationLocked", mContext);
+                    XposedHelpers.callStaticMethod(rlPolicyClass, "setRotationLock", mContext, !locked);
+                    if (locked) {
+                        Toast.makeText(mContext, mStrAutoRotationEnabled, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mContext, mStrAutoRotationDisabled, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            log("Error toggling auto rotation: " + t.getMessage());
+        }
     }
 }
