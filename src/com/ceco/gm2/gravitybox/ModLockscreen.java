@@ -28,12 +28,12 @@ import com.ceco.gm2.gravitybox.preference.AppPickerPreference;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetHostView;
+import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.XResources;
 import android.graphics.Bitmap;
@@ -68,22 +68,23 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class ModLockscreen {
+    private static final String CLASS_PATH = "com.android.internal.policy.impl.keyguard";
     private static final String TAG = "GB:ModLockscreen";
-    private static final String CLASS_KGVIEW_MANAGER = "com.android.internal.policy.impl.keyguard.KeyguardViewManager";
-    private static final String CLASS_KG_HOSTVIEW = "com.android.internal.policy.impl.keyguard.KeyguardHostView";
-    private static final String CLASS_KG_SELECTOR_VIEW = "com.android.internal.policy.impl.keyguard.KeyguardSelectorView";
+
+    private static final String CLASS_KGVIEW_MANAGER = CLASS_PATH + ".KeyguardViewManager";
+    private static final String CLASS_KG_HOSTVIEW = CLASS_PATH + ".KeyguardHostView";
+    private static final String CLASS_KG_SELECTOR_VIEW = CLASS_PATH + ".KeyguardSelectorView";
     private static final String CLASS_TARGET_DRAWABLE = Utils.isMtkDevice() ?
-            "com.android.internal.policy.impl.keyguard.TargetDrawable" :
-            "com.android.internal.widget.multiwaveview.TargetDrawable";
-    private static final String CLASS_TRIGGER_LISTENER = "com.android.internal.policy.impl.keyguard.KeyguardSelectorView$1";
-    private static final String CLASS_KG_ABS_KEY_INPUT_VIEW =
-            "com.android.internal.policy.impl.keyguard.KeyguardAbsKeyInputView";
-    private static final String CLASS_KGVIEW_MEDIATOR = "com.android.internal.policy.impl.keyguard.KeyguardViewMediator";
-    private static final String CLASS_KG_UPDATE_MONITOR = "com.android.internal.policy.impl.keyguard.KeyguardUpdateMonitor";
-    private static final String CLASS_KG_UPDATE_MONITOR_BATTERY_STATUS =
-            "com.android.internal.policy.impl.keyguard.KeyguardUpdateMonitor.BatteryStatus";
-    private static final String CLASS_KG_VIEW_BASE = "com.android.internal.policy.impl.keyguard.KeyguardViewBase";
-    private static final String CLASS_KG_WIDGET_PAGER = "com.android.internal.policy.impl.keyguard.KeyguardWidgetPager";
+            CLASS_PATH + ".TargetDrawable" : "com.android.internal.widget.multiwaveview.TargetDrawable";
+    private static final String CLASS_TRIGGER_LISTENER = CLASS_PATH + ".KeyguardSelectorView$1";
+    private static final String CLASS_KG_ABS_KEY_INPUT_VIEW = CLASS_PATH + ".KeyguardAbsKeyInputView";
+    private static final String CLASS_KGVIEW_MEDIATOR = CLASS_PATH + ".KeyguardViewMediator";
+    private static final String CLASS_KG_UPDATE_MONITOR = CLASS_PATH + ".KeyguardUpdateMonitor";
+    private static final String CLASS_KG_UPDATE_MONITOR_BATTERY_STATUS = 
+            CLASS_PATH + ".KeyguardUpdateMonitor.BatteryStatus";
+    private static final String CLASS_KG_VIEW_BASE = CLASS_PATH + ".KeyguardViewBase";
+    private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
+    private static final String CLASS_KG_ACTIVITY_LAUNCHER = CLASS_PATH + ".KeyguardActivityLauncher";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
 
@@ -136,6 +137,7 @@ public class ModLockscreen {
             final Class<?> kgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, null);
             final Class<?> kgViewBaseClass = XposedHelpers.findClass(CLASS_KG_VIEW_BASE, null);
             final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, null);
+            final Class<?> kgActivityLauncherClass = XposedHelpers.findClass(CLASS_KG_ACTIVITY_LAUNCHER, null);
 
             boolean enableMenuKey = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, false);
@@ -556,6 +558,25 @@ public class ModLockscreen {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(kgActivityLauncherClass, "launchActivity",
+                    Intent.class, boolean.class, boolean.class, Handler.class, Runnable.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    Intent intent = (Intent) param.args[0];
+                    if ("android.appwidget.action.KEYGUARD_APPWIDGET_PICK".equals(intent.getAction()) &&
+                            prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ALLOW_ANY_WIDGET, false)) {
+                        intent.removeExtra("categoryFilter");
+                        intent.putExtra("categoryFilter", AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN);
+                        Bundle options = new Bundle();
+                        options.putInt(AppWidgetManager.OPTION_APPWIDGET_HOST_CATEGORY,
+                                AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN);
+                        intent.removeExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
+                        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS, options);
+                    }
+                }
+            });
+
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
