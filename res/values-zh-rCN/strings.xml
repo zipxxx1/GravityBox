@@ -526,7 +526,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">覆盖默认磁贴行为</string>
-    <string name="pref_qs_tile_behaviour_override_summary">覆盖单击/长按对应磁贴的行为（需要重新启动）</string>
+    <string name="pref_qs_tile_behaviour_override_summary"></string>交换单击/长按行为，并增加'隐藏变更'选定磁贴的支持（需要重新启动）</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">网络模式磁贴 SIM 卡插槽</string>
@@ -842,7 +842,7 @@
     <string name="volume_rocker_wake_disabled">禁用</string>
 
     <!-- Advanced reboot menu: require confirmation -->
-    <string name="pref_reboot_confirm_required_title">要求重启确认</string>
+    <string name="pref_reboot_confirm_required_title">重启需要确认</string>
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">更改时隐藏</string>
@@ -853,7 +853,7 @@
     <string name="pref_cat_power_other_title">其它</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">允许锁屏显示</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">允许在锁屏显示</string>
     
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">闲置模式</string>
@@ -874,5 +874,17 @@
 
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">使用 CDMA 网络模式</string>
+    
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">切换自动旋转</string>
+    <string name="hwkey_action_auto_rotation_enabled">启用自动旋转</string>
+    <string name="hwkey_action_auto_rotation_disabled">停用自动旋转</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">允许任何小部件</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">允许在锁屏显示小部件，一般可于桌面启动器</string>
+
+    <!--  HW Key Action: Show power menu -->
+    <string name="hwkey_action_show_power_menu">显示电源菜单</string>
 
 </resources>
