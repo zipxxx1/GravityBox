@@ -929,4 +929,7 @@
     <string name="pref_lockscreen_allow_any_widget_title">Allow any widget</string>
     <string name="pref_lockscreen_allow_any_widget_summary">Allows those widgets on lockscreen that can normally be used within launcher only</string>
 
+    <!--  HW Key Action: Show power menu -->
+    <string name="hwkey_action_show_power_menu">Show power menu</string>
+
 </resources>

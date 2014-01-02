@@ -71,6 +71,8 @@ public class ModHwKeys {
     public static final String ACTION_TOGGLE_EXPANDED_DESKTOP = 
             "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP";
 
+    public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
+
     private static Class<?> classActivityManagerNative;
     private static Object mPhoneWindowManager;
     private static Context mContext;
@@ -234,11 +236,7 @@ public class ModHwKeys {
                     log("Error settings PhoneWindowManager.mAllowAllRotations: " + t.getMessage());
                 }
             } else if (action.equals(ACTION_SHOW_POWER_MENU) && mPhoneWindowManager != null) {
-                try {
-                    XposedHelpers.callMethod(mPhoneWindowManager, "showGlobalActionsDialog");
-                } catch (Throwable t) {
-                    log("Error executing PhoneWindowManager.showGlobalActionsDialog(): " + t.getMessage());
-                }
+                showGlobalActionsDialog();
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
                 mExpandedDesktopMode = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
@@ -918,6 +916,8 @@ public class ModHwKeys {
             injectKey(KeyEvent.KEYCODE_BACK);
         } else if (action == GravityBoxSettings.HWKEY_ACTION_AUTO_ROTATION) {
             toggleAutoRotation();
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_SHOW_POWER_MENU) {
+            showGlobalActionsDialog();
         }
     }
 
@@ -1262,4 +1262,20 @@ public class ModHwKeys {
             }
         }
     };
+
+    private static void showGlobalActionsDialog() {
+        try {
+            Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    XposedHelpers.callMethod(mPhoneWindowManager, "sendCloseSystemWindows", 
+                            SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS);
+                    XposedHelpers.callMethod(mPhoneWindowManager, "showGlobalActionsDialog");
+                }
+            });
+        } catch (Throwable t) {
+            log("Error executing PhoneWindowManager.showGlobalActionsDialog(): " + t.getMessage());
+        }
+    }
 }
