@@ -121,9 +121,9 @@
 
     <!-- About -->
     <string name="pref_cat_about_title">关于</string>
-    <string name="about_gb_summary">由 C3C076@XDA 编写，点击这里进入官方讨论链接。</string>
+    <string name="about_gb_summary">由 C3C076@XDA 编写，点击这里进入官方讨论链接</string>
     <string name="about_xposed_title">Xposed 框架</string>
-    <string name="about_xposed_summary">由 rovo89@XDA 编写，点击这里进入官方讨论链接。</string>
+    <string name="about_xposed_summary">由 rovo89@XDA 编写，点击这里进入官方讨论链接</string>
     <string name="about_donate_title">捐助</string>
     <string name="about_donate_summary">支持开发，点击这里进入 PayPal 捐赠</string>
 
@@ -261,7 +261,7 @@
     
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">每行磁贴数</string>
-    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，开关会根据您的设置自动缩放，适用于竖屏。</string>
+    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，开关会根据您的设置自动缩放（适用于手机在纵向模式或平板上的任何方向模式）</string>
     
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">显示星期几</string>
@@ -352,7 +352,7 @@
     <string name="button_backlight_mode_disable">禁用按键背光</string>
     <string name="button_backlight_mode_always_on">屏幕亮起时使背光常亮</string>
     <string name="pref_button_backlight_notifications_title">背光灯通知</string>
-    <string name="pref_button_backlight_notifications_summary">这个设置是实验性的！当收到通知时背光灯会闪烁提醒。建议当您的设备没有 LED 通知灯时才开启，此功能可能会消耗部分电量。</string>
+    <string name="pref_button_backlight_notifications_summary">这个设置是实验性的！当收到通知时背光灯会闪烁提醒。建议当您的设备没有 LED 通知灯时才开启，此功能可能会消耗部分电量</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">优化 Holo 背景</string>
@@ -434,7 +434,7 @@
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">亮度设置</string>
     <string name="pref_brightness_master_switch_title">启用亮度设置</string>
-    <string name="pref_brightness_master_switch_summary">这个功能只能在您的设备支持标准的 Android 亮度调整功能才启用。如果遇到任何亮度问题请关闭此选项。（需要重新启动）</string>
+    <string name="pref_brightness_master_switch_summary">这个功能只能在您的设备支持标准的 Android 亮度调整功能才启用。如果遇到任何亮度问题请关闭此选项（需要重新启动）</string>
 
     <!-- HW Key Action: Recent apps -->
     <string name="hwkey_action_recent_apps">显示最近使用的应用程序</string>
@@ -654,7 +654,7 @@
     <string name="pref_cat_app_launcher_title">应用程序启动器</string>
     <string name="pref_cat_app_launcher_summary">允许定义最多 8 个应用程序，并分配至实体按键行为或作为额外的导航栏按键</string>
     <string name="pref_app_launcher_slot_title">应用程序槽 %d</string>
-    <string name="app_launcher_no_apps">没有应用程序被分配，请使用 GravityBox 或应用程序启动器来分配应用程序。</string>
+    <string name="app_launcher_no_apps">没有应用程序被分配，请使用 GravityBox 或应用程序启动器来分配应用程序</string>
 
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">显示应用程序启动器</string>
@@ -682,7 +682,7 @@
 
     <!-- Minimum screen brightness warning -->
     <string name="screen_brightness_min_warning">您的屏幕可能不支持低于 20 的值。如果您的屏幕无法点亮，
-        按住“音量+”键至少 7 秒钟将来还原亮度，然后将最小亮度调整为更大的值。</string>
+        按住“音量+”键至少 7 秒钟将来还原亮度，然后将最小亮度调整为更大的值</string>
         
     <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">普通</string>
@@ -846,7 +846,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">更改时隐藏</string>
-    <string name="pref_qs_hide_on_change_summary">单击磁贴后自动收起快速设置。适用于 GravityBox 磁贴和被覆盖的原厂磁贴。</string>
+    <string name="pref_qs_hide_on_change_summary">单击磁贴后自动收起快速设置。适用于 GravityBox 磁贴和被覆盖的原厂磁贴</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">电源键菜单</string>
