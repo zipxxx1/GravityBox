@@ -918,6 +918,10 @@ public class ModHwKeys {
             toggleAutoRotation();
         } else if (action == GravityBoxSettings.HWKEY_ACTION_SHOW_POWER_MENU) {
             showGlobalActionsDialog();
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_EXPAND_NOTIFICATIONS) {
+            expandNotificationsPanel();
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_EXPAND_QUICKSETTINGS) {
+            expandSettingsPanel();
         }
     }
 
@@ -1276,6 +1280,24 @@ public class ModHwKeys {
             });
         } catch (Throwable t) {
             log("Error executing PhoneWindowManager.showGlobalActionsDialog(): " + t.getMessage());
+        }
+    }
+
+    private static void expandNotificationsPanel() {
+        try {
+            final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService"); 
+            XposedHelpers.callMethod(sbService, "expandNotificationsPanel");
+        } catch (Throwable t) {
+            log("Error executing expandNotificationsPanel(): " + t.getMessage());
+        }
+    }
+
+    private static void expandSettingsPanel() {
+        try {
+            final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService"); 
+            XposedHelpers.callMethod(sbService, "expandSettingsPanel");
+        } catch (Throwable t) {
+            log("Error executing expandSettingsPanel(): " + t.getMessage());
         }
     }
 }
