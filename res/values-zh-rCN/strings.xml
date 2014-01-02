@@ -198,8 +198,8 @@
     <string name="pref_lockscreen_maximize_widgets_summary">若启用这个选项，锁屏画面的小工具默认都会被最大化</string>
 
     <!--  Power tweaks category -->
-    <string name="pref_cat_power_title">电源调整</string>
-    <string name="pref_cat_power_summary">包含各种与电源相关的调整选项</string>
+    <string name="pref_cat_power_title">电源键调整</string>
+    <string name="pref_cat_power_summary">包含各种与电源键相关的调整选项</string>
 
     <!--  Low battery LED flashing -->
     <string name="pref_flashing_led_disable_title">停用LED闪烁</string>
@@ -858,7 +858,7 @@
     <string name="pref_cat_launcher_tweaks_title">启动器调整</string>
     <string name="pref_cat_launcher_tweaks_summary">仅适用于谷歌体验启动器</string>
     <string name="pref_cat_launcher_desktop_grid_title">桌面网格</string>
-    <string name="pref_launcher_desktop_grid_info_title">使用其他值可以突破默认值小部件布局，明智地使用，更改后启动器需要重新启动</string>
+    <string name="pref_launcher_desktop_grid_info_title">使用非默认的值可能破坏小部件的布局，请谨慎使用。改动将在启动器重新启动后生效</string>
     <string name="pref_launcher_desktop_grid_rows_title">行数</string>
     <string name="pref_launcher_desktop_grid_cols_title">列数</string>
     <string name="desktop_grid_default">默认</string>
@@ -878,14 +878,14 @@
     <string name="battery_percent_text_size_smallest">最小</string>
     <string name="battery_percent_text_style_title">电量百分比风格</string>
     <string name="battery_percent_text_style_default">默认</string>
-    <string name="battery_percent_text_style_numbers_only">只有数字（没百分号）</string>
+    <string name="battery_percent_text_style_numbers_only">仅数字（没百分号）</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">电量设置</string>
     
     <!-- Cursor control in navigation bar -->
-    <string name="pref_navbar_cursor_control_title">控制光标键</string>
-    <string name="pref_navbar_cursor_control_summary">允许在虚拟按键显示光标键控制键盘</string>
+    <string name="pref_navbar_cursor_control_title">光标控制键</string>
+    <string name="pref_navbar_cursor_control_summary">当显示键盘时，在虚拟按键中启用光标控制键</string>
 
     <!-- Volume rocker wake -->
     <string name="pref_volume_rocker_wake_title">音量键唤醒</string>
@@ -897,15 +897,15 @@
     <string name="pref_reboot_confirm_required_title">重启需要确认</string>
     
     <!-- Tiles: Hide on change -->
-    <string name="pref_qs_hide_on_change_title">隐藏更改</string>
-    <string name="pref_qs_hide_on_change_summary">单击瓷贴会自动收起状态栏，适用于GravityBox瓷贴和覆盖原厂瓷贴</string>
+    <string name="pref_qs_hide_on_change_title">更改时隐藏</string>
+    <string name="pref_qs_hide_on_change_summary">单击磁贴后自动收起快速设置。适用于GravityBox磁贴和被覆盖的原厂磁贴</string>
 
     <!-- Power tweaks categories -->
-    <string name="pref_cat_power_menu_title">电源菜单</string>
+    <string name="pref_cat_power_menu_title">电源键菜单</string>
     <string name="pref_cat_power_other_title">其它</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">允许锁屏显示</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">允许在锁屏显示</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">闲置模式</string>
