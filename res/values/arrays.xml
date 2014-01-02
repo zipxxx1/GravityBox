@@ -192,6 +192,7 @@
         <item>@string/hwkey_action_torch</item>
         <item>@string/hwkey_action_screen_recording</item>
         <item>@string/hwkey_action_auto_rotation</item>
+        <item>@string/hwkey_action_show_power_menu</item>
     </string-array>
 
     <string-array name="hwkey_action_values" translatable="false">
@@ -211,7 +212,8 @@
         <item>10</item>
         <item>11</item>
         <item>15</item>
-        <item >16</item>
+        <item>16</item>
+        <item>17</item>
     </string-array>
 
     <string-array name="hwkey_doubletap_speed_entries" translatable="false">
