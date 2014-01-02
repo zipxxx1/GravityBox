@@ -511,7 +511,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">Zmień domyślne zachowanie kafelek</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Zastępuje zachowanie wybranych kafelek przy krótkim i długim naciśnięciu (wymagany restart)</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Zamienia akcje krótkiego i długiego naciśnięcia oraz dodaje wsparcie \'Ukryj po zmianie\' dla wybranych kafelek (wymagany restart)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Gniazdo SIM Kafelki trybu sieci</string>
@@ -851,5 +851,19 @@
 
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">Użyj trybów sieci CDMA</string>
+    
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Przełącz auto-obracanie</string>
+    <string name="hwkey_action_auto_rotation_enabled">Auto-obracanie włączone</string>
+    <string name="hwkey_action_auto_rotation_disabled">Auto-obracanie wyłączone</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Dozwolony dowolny widżet</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Pozwala umieścić na Ekranie Blokady widżety, które normalnie mogą być używane tylko na ekranie Startera Aplikacji</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Pokaż menu Zasilania</string>
+    <string name="hwkey_action_expand_notifications">Rozwiń panel Powiadomień</string>
+    <string name="hwkey_action_expand_quicksettings">Rozwiń panel Szybkich Ustawień</string>
 
 </resources>
