@@ -552,6 +552,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS = "pref_launcher_desktop_grid_rows";
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS = "pref_launcher_desktop_grid_cols";
 
+    public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
+    public static final String PREF_KEY_NAVBAR_RING_TARGETS_ENABLE = "pref_navbar_ring_targets_enable";
+    public static final List<String> PREF_KEY_NAVBAR_RING_TARGET = new ArrayList<String>(Arrays.asList(
+            "pref_navbar_ring_target0", "pref_navbar_ring_target1", "pref_navbar_ring_target2",
+            "pref_navbar_ring_target3", "pref_navbar_ring_target4"));
+    public static final String ACTION_PREF_NAVBAR_RING_TARGET_CHANGED = "gravitybox.intent.action.NAVBAR_RING_TARGET_CHANGED";
+    public static final String EXTRA_RING_TARGET_INDEX = "ringTargetIndex";
+    public static final String EXTRA_RING_TARGET_APP = "ringTargetApp";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -579,7 +588,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE,
             PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
             PREF_KEY_TM_MODE,
-            PREF_KEY_QUICK_SETTINGS_ENABLE
+            PREF_KEY_QUICK_SETTINGS_ENABLE,
+            PREF_KEY_NAVBAR_RING_TARGETS_ENABLE
     ));
 
     private static final class SystemProperties {
@@ -844,6 +854,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefNavbarCustomKeySingletap;
         private ListPreference mPrefNavbarCustomKeyLongpress;
         private ListPreference mPrefNavbarCustomKeyDoubletap;
+        private PreferenceScreen mPrefCatNavbarRingTargets;
+        private SwitchPreference mPrefNavbarRingTargetsEnable;
+        private AppPickerPreference[] mPrefNavbarRingTarget;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1076,6 +1089,21 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefLauncherDesktopGridCols = (ListPreference) findPreference(PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS);
 
             mPrefVolumeRockerWake = (ListPreference) findPreference(PREF_KEY_VOLUME_ROCKER_WAKE);
+
+            mPrefCatNavbarRingTargets = (PreferenceScreen) findPreference(PREF_CAT_KEY_NAVBAR_RING_TARGETS);
+            mPrefNavbarRingTargetsEnable = (SwitchPreference) findPreference(PREF_KEY_NAVBAR_RING_TARGETS_ENABLE);
+            mPrefNavbarRingTarget = new AppPickerPreference[PREF_KEY_NAVBAR_RING_TARGET.size()];
+            for (int i = 0; i < mPrefNavbarRingTarget.length; i++) {
+                AppPickerPreference appPref = new AppPickerPreference(getActivity(), null);
+                appPref.setKey(PREF_KEY_NAVBAR_RING_TARGET.get(i));
+                appPref.setTitle(String.format(
+                        getActivity().getString(R.string.pref_navbar_ring_target_title), i + 1));
+                appPref.setDialogTitle(appPref.getTitle());
+                appPref.setDefaultSummary(getActivity().getString(R.string.app_picker_none));
+                appPref.setSummary(getActivity().getString(R.string.app_picker_none));
+                mPrefNavbarRingTarget[i] = appPref;
+                mPrefCatNavbarRingTargets.addPreference(mPrefNavbarRingTarget[i]);
+            }
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
@@ -1586,6 +1614,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP)) {
                 mPrefNavbarCustomKeyDoubletap.setSummary(mPrefNavbarCustomKeyDoubletap.getEntry());
             }
+
+            if (key == null || key.equals(PREF_KEY_NAVBAR_RING_TARGETS_ENABLE)) {
+                final boolean enabled = mPrefNavbarRingTargetsEnable.isChecked();
+                for (int i = 0; i < mPrefNavbarRingTarget.length; i++) {
+                    mPrefNavbarRingTarget[i].setEnabled(enabled);
+                }
+            }
         }
 
         @Override
@@ -1916,6 +1951,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_CURSOR_CONTROL,
                         prefs.getBoolean(PREF_KEY_NAVBAR_CURSOR_CONTROL, false));
+            } else if (PREF_KEY_NAVBAR_RING_TARGET.contains(key)) {
+                intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
+                intent.putExtra(EXTRA_RING_TARGET_INDEX,
+                        PREF_KEY_NAVBAR_RING_TARGET.indexOf(key));
+                intent.putExtra(EXTRA_RING_TARGET_APP, prefs.getString(key, null));
             } else if (key.equals(PREF_KEY_NAVBAR_COLOR_ENABLE)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_COLOR_ENABLE,
