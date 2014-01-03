@@ -52,7 +52,6 @@
     <string name="important">Quan trọng</string>
 
     <string name="caller_fullscreen_photo_title">Ảnh người gọi toàn màn hình</string>
-    <string name="caller_fullscreen_photo_summary">Hiển thị ảnh người gọi đến toàn màn hình</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Đ.bộ bật</string>
@@ -129,7 +128,6 @@
 
     <!-- CRT effect screen off animation -->
     <string name="crt_off_effect_title">Tắt hiệu ứng TV cũ</string>
-    <string name="crt_off_effect_summary">Cho phép sử dụng hiệu ứng tắt TV cũ khi khóa màn hình</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
@@ -202,7 +200,7 @@
 
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Cài đặt đa phương tiện</string>
-    <string name="pref_cat_media_summary">Các tùy chỉnh về âm thanh, hình ảnh,... của hệ thống</string>
+    <string name="pref_cat_media_summary">Các tùy chỉnh về âm thanh, hình ảnh,&#8230; của hệ thống</string>
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">Tăng bước điều chỉnh âm lượng</string>
@@ -279,10 +277,6 @@
     <string name="quick_pulldown_off">Tắt</string>
     <string name="quick_pulldown_right">Phải</string>
     <string name="quick_pulldown_left">Trái</string>
-
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Tắt phím âm lượng mở khóa màn hình</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Cho thiết bị như là Jiayu G3s,G4 cái mà có thể dùng phím âm lượng mở khóa màn hình</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Màu thanh trạng thái</string>
@@ -427,7 +421,6 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Cài đặt độ sáng</string>
-    <string name="pref_brightness_master_switch_title">Cài đặt độ sáng</string>
     <string name="pref_brightness_master_switch_summary">Chỉ sử dụng trong trường hợp thiết bị của bạn hỗ trợ tính năng độ sáng tiêu chuẩn Android. Tiếp tục vô hiệu hóa nếu bạn gặp các vấn đề liên quan đến độ sáng. (cần khởi động lại cho thay đổi)</string>
 
     <!-- HW Key Action: Recent apps -->
@@ -478,7 +471,6 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Cài đặt thanh diều hướng</string>
     <string name="pref_cat_navigation_bar_summary">Các cài đặt liên quan tới thanh điều hướng</string>
-    <string name="pref_navbar_override_title">Ghi đè lên mặc định hệ thống</string>
     <string name="pref_navbar_override_summary">Chuyển đổi chính cho cài đặt thanh điều hướng (cần khởi động lại máy để thay đổi)</string>
     <string name="pref_navbar_enable_title">Bật thanh điều hướng</string>
     <string name="pref_navbar_enable_summary">Trang bị khởi động lại</string>
@@ -494,7 +486,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Thiết lập vòng tròn mở khóa</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Cho phép mở khóa với mở các đối tượng</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Chuyển tới các đối tượng mở khóa chính</string>
     <string name="pref_lockscreen_ring_targets_app_title">Cài đặt Ứng dụng chuyển tới %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Vòng mở khóa dọc</string>

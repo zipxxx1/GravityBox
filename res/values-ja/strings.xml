@@ -38,7 +38,6 @@
     <string name="important">重要</string>
 
     <string name="caller_fullscreen_photo_title">発信者の写真を全画面表示</string>
-    <string name="caller_fullscreen_photo_summary">着信時に発信者の写真を全画面表示します。</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">同期オン</string>
@@ -274,10 +273,6 @@
     <string name="quick_pulldown_right">右</string>
     <string name="quick_pulldown_left">左</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">音量キーでの画面オンを無効化</string>
-    <string name="pref_volume_rocker_wake_disable_summary">音量キーでの画面オンを無効化します。</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">ステータスバーの色</string>
 
@@ -422,7 +417,6 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">明るさ設定</string>
-    <string name="pref_brightness_master_switch_title">明るさ設定を有効化</string>
     <string name="pref_brightness_master_switch_summary">Android標準の輝度調整機能に対応している場合のみ有効にしてください。明るさ関連の問題が起きた場合は無効にしてください。(要再起動)</string>
 
     <!-- HW Key Action: Recent apps -->
@@ -474,7 +468,6 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">ナビバー設定</string>
     <string name="pref_cat_navigation_bar_summary">ナビバーに関連した設定を変更します。</string>
-    <string name="pref_navbar_override_title">システムの初期値を上書き</string>
     <string name="pref_navbar_override_summary">ナビバーの設定を有効化します。(要再起動)</string>
     <string name="pref_navbar_enable_title">ナビバーの有効化</string>
     <string name="pref_navbar_enable_summary">再起動が必要です。</string>
@@ -490,7 +483,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">ロック画面ターゲット</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">ロック画面ターゲットを有効化</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">ロック画面設定を有効化します。</string>
     <string name="pref_lockscreen_ring_targets_app_title">ターゲットアプリ %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">ロック解除リングの縦のオフセット</string>
@@ -576,7 +568,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">データ通信量モニター</string>
-    <string name="pref_data_traffic_enable_title">監視を有効にする</string>
     <string name="pref_data_traffic_enable_summary">データ通信をしているときにデータ通信量モニターを表示します。</string>
     <string name="pref_data_traffic_position_title">位置</string>
     <string name="dt_position_auto">自動(時計の位置に従う)</string>
@@ -640,9 +631,6 @@
     <string name="pref_cat_app_launcher_summary">HWキーアクションやナビバーのボタンとして使える、アプリを8個まで登録できるダイアログです。</string>
     <string name="pref_app_launcher_slot_title">アプリスロット %d</string>
     <string name="app_launcher_no_apps">アプリが登録されていません。GravityBox / アプリランチャーで登録してください。</string>
-
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">アプリランチャーキー</string>
 
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">アプリランチャーを表示</string>
@@ -771,9 +759,6 @@
     <string name="screenrecord_toast_save_error">録画を保存できませんでした</string>
     <string name="action_screenrecord">画面の録画</string>
     <string name="pref_powermenu_screenrecord_title">電源メニューに画面の録画を追加</string>
-
-    <!-- Full screen caller visibility level -->
-    <string name="pref_caller_photo_visibility_title">写真の表示レベル</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">ダイアルパッドを自動表示</string>

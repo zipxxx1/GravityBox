@@ -433,7 +433,6 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Ajustes de brillo</string>
-    <string name="pref_brightness_master_switch_title">Habilitar ajustes de brillo</string>
     <string name="pref_brightness_master_switch_summary">Usar solo cuando tu dispositivo soporte características estándar de brillo de Android. Deshabilitar si experimentas problemas relacionados con el brillo (requiere reinicio).</string>
 
     <!-- HW Key Action: Recent apps -->
@@ -465,7 +464,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Modo escritorio expandido</string>
     <string name="expanded_desktop_disabled">Desactivado</string>
-    <string name="expanded_desktop_statusbar">Ocultar barra de estado</string>
     <string name="expanded_desktop_navbar">Ocultar barra de navegación</string>
     <string name="expanded_desktop_both">Ocultar ambas</string>
     <string name="action_expanded_desktop_title">Escritorio expandido</string>
@@ -485,7 +483,6 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Ajustes de la barra de navegación</string>
     <string name="pref_cat_navigation_bar_summary">Contiene diversos ajustes relacionados con la barra de navegación</string>
-    <string name="pref_navbar_override_title">Sobreescribir ajustes predeterminados</string>
     <string name="pref_navbar_override_summary">Interruptor principal para ajustes de la barra de navegación (requiere reinicio)</string>
     <string name="pref_navbar_enable_title">Habilitar barra de navegación</string>
     <string name="pref_navbar_enable_summary">Requiere reinicio</string>
@@ -501,7 +498,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Ajustes del anillo de desbloqueo</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Habilitar disparadores en anillo de desbloqueo</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Interruptor principal para los disparadores del anillo de desbloqueo</string>
     <string name="pref_lockscreen_ring_targets_app_title">Aplicación destino %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Unlock ring vertical offset</string>
@@ -587,7 +583,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitor de tráfico de datos</string>
-    <string name="pref_data_traffic_enable_title">Habilitar monitorización</string>
     <string name="pref_data_traffic_enable_summary">Muestra el monitor de tráfico automáticamente cuando se activa una conexión de datos</string>
     <string name="pref_data_traffic_position_title">Posición</string>
     <string name="dt_position_auto">Automática (centro o derecha dependiendo de la posición del reloj)</string>
@@ -887,6 +882,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Mostrar menú de apagado</string>
     <string name="hwkey_action_expand_notifications">Expandir panel de notificaciones</string>
-    <string name="hwkey_action_expand_quicksettings">Expandir panel de de ajustes rápidos</string>
+    <string name="hwkey_action_expand_quicksettings">Expandir panel de ajustes rápidos</string>
 
 </resources>

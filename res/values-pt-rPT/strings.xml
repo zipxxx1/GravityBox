@@ -274,10 +274,6 @@
     <string name="quick_pulldown_right">Direita</string>
     <string name="quick_pulldown_left">Esquerda</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Inibir ligação de ecrã</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Para dispositivos onde as teclas de volume ligam inadvertidamente o ecrã</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Cores da Barra de Status</string>
 
@@ -422,7 +418,6 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Definições de brilho</string>
-    <string name="pref_brightness_master_switch_title">Ativar definições de brilho</string>
     <string name="pref_brightness_master_switch_summary">Utilizar apenas caso o dispositivo suporte as funcionalidades de brilho padrão do Android. Manter desativado caso verifique problemas relacionados com o brilho (necessário reiniciar)</string>
 
     <!-- HW Key Action: Recent apps -->
@@ -474,7 +469,6 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Ajustes da Barra de Navegação</string>
     <string name="pref_cat_navigation_bar_summary">Contém vários ajustes relacionados com a Barra de Navegação</string>
-    <string name="pref_navbar_override_title">Ignorar predefinições de sistema</string>
     <string name="pref_navbar_override_summary">Ativação global dos ajustes (necessário reiniciar)</string>
     <string name="pref_navbar_enable_title">Ativar Barra de Navegação</string>
     <string name="pref_navbar_enable_summary">Permite ativar Barra de Navegação (necessário reiniciar)</string>
@@ -490,7 +484,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Definições do anel de desbloqueio</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Ativar alvos do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Ativação global dos alvos do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_app_title">Aplicação %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Desvio vertical do anel de desbloqueio</string>
@@ -576,7 +569,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitorização de tráfego de dados</string>
-    <string name="pref_data_traffic_enable_title">Ativar monitorização</string>
     <string name="pref_data_traffic_enable_summary">Permite monitorizar o tráfego de dados automaticamente sempre que exista uma ligação de dados estabelecida</string>
     <string name="pref_data_traffic_position_title">Posicionamento</string>
     <string name="dt_position_auto">Automático (centrado ou alinhado à direita, dependendo do posicionamento do relógio)</string>
@@ -644,9 +636,6 @@
     <string name="pref_cat_app_launcher_summary">Permite definir até 8 aplicações como ações para as teclas físicas ou para mostrar em botão adicional na Barra de Navegação</string>
     <string name="pref_app_launcher_slot_title">Aplicação posição %d</string>
     <string name="app_launcher_no_apps">Nenhuma aplicação definida. Aceda a \"GravityBox / Lançador de aplicações\" para definir aplicações.</string>
-
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Mostrar botão Lançador aplicações</string>
 
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Mostrar lançador de aplicações</string>

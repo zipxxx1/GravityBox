@@ -39,7 +39,6 @@
     <string name="important">Importante</string>
 
     <string name="caller_fullscreen_photo_title">Foto chiamante tutto schermo</string>
-    <string name="caller_fullscreen_photo_summary">Mostra la foto del chiamante a tutto schermo per le chiamate in arrivo</string>
 
         <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sync on</string>
@@ -59,10 +58,6 @@
     <string name="quick_settings_expanded_desktop_expanded">Esteso</string>
     <string name="quick_settings_stay_awake_on">Rimane acceso ON</string>
     <string name="quick_settings_stay_awake_off">Rimane spento OFF</string>
-    <string name="quick_settings_wifi">Wi-Fi</string>
-    <string name="quick_settings_wifi_off">Wi-Fi off</string>
-    <string name="quick_settings_wifi_not_connected">Non connesso</string>
-    <string name="quick_settings_wifi_turning_on">Avvio&#8230;</string>
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
     <string name="quick_settings_camera_error_connect">Fotocamera non trovata</string>
@@ -80,9 +75,7 @@
     <string name="qs_tile_mobile_data">Dati mobili</string>
     <string name="qs_tile_network_mode">Modalità di rete</string>
     <string name="qs_tile_data_usage">Utilizzo dati</string>
-    <string name="qs_tile_audio">Profili audio</string>
     <string name="qs_tile_brightness">Luminosità</string>
-    <string name="qs_tile_screen_timeout">Timout schermo</string>
     <string name="qs_tile_autorotation">Rotazione auto</string>
     <string name="qs_tile_sync">Sincronia</string>
     <string name="qs_tile_wifi_ap">Punto d\'accesso Wi-Fi</string>
@@ -124,10 +117,6 @@
     <string name="reboot_confirm">Il %s si riavvierà</string>
     <string name="reboot_confirm_recovery">Il %s si riavvierà in Recovery</string>
     <string name="reboot_confirm_bootloader">Il %s si riavvierà in Bootloader.</string>
-
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Effetto spegni schermo CRT</string>
-    <string name="crt_off_effect_summary">Abilita un\'animazione che simula l\'effetto spegnimento dei vecchi schermi CRT</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modalità Engineer</string>
@@ -283,10 +272,6 @@
     <string name="quick_pulldown_right">Destra</string>
     <string name="quick_pulldown_left">Sinistra</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Disabilita sblocco schermo con tasti volume</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Per modelli come Jiayu G3s,G4 in cui i tasti volume accendono lo schermo</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Colori Barra di stato</string>
 
@@ -431,7 +416,6 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Impostazioni luminosità</string>
-    <string name="pref_brightness_master_switch_title">Abilita impostazioni luminosità</string>
     <string name="pref_brightness_master_switch_summary">Usare solo nel caso in cui il proprio terminale supporti le impostazioni di luminosità standard di Android. Lascia disattivato se riscontri problemi con impostazione attivata. (richiede riavvio)</string>
 
     <!-- HW Key Action: Recent apps -->
@@ -463,7 +447,6 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Modalità Desktop espanso</string>
     <string name="expanded_desktop_disabled">Disattivato</string>
-    <string name="expanded_desktop_statusbar">Nascondi barra di stato</string>
     <string name="expanded_desktop_navbar">Nascondi barra di navigazione</string>
     <string name="expanded_desktop_both">Nascondi entrambe</string>
     <string name="action_expanded_desktop_title">Desktop esteso</string>
@@ -483,7 +466,6 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Ottimizzazioni barra di navigazione</string>
     <string name="pref_cat_navigation_bar_summary">Contiene varie ottimizzaioni relative alla barra di navigazione</string>
-    <string name="pref_navbar_override_title">Sovrascrivi i valori standard di sistema</string>
     <string name="pref_navbar_override_summary">Attivazione ottimizzaioni barra di navigazione (richiede riavvio)</string>
     <string name="pref_navbar_enable_title">Abilita Barra di navigazione</string>
     <string name="pref_navbar_enable_summary">Richiede riavvio</string>
@@ -499,7 +481,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Applicazioni in sblocco schermo</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Abilita app in sblocco schermo</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Attivazione Applicazioni in sblocco schermo</string>
     <string name="pref_lockscreen_ring_targets_app_title">Applicazione %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Scostamento inferiore dell\'anello di sblocco</string>
@@ -511,23 +492,7 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telefonate</string>
-    <string name="pref_cat_phone_messaging_title">Messaggistica</string>
     <string name="pref_cat_phone_mobile_data_title">Dati Mobili</string>
-
-    <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Elimina Unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Converte i caratteri unicode in normali caratteri. Diminuisce la dimensione totale del messaggio.</string>
-    <string name="unicode_stripping_leave_intact">Lascia caratteri invariati</string>
-    <string name="unicode_stripping_non_encodable">Elimina caratteri non convertibili</string>
-    <string name="unicode_stripping_all">Elimina tutti i caratteri unicode</string>
-
-    <!-- Disable slow 2G data warning -->
-    <string name="pref_mobile_data_slow2g_disable_title">Disabilita avviso di connessione lenta in 2G</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Disabilita avviso di velocità di connessione lenta causata dalla connessione in 2G, attivando la connessione da QuickSetting per SIM in modalità 2G</string>
-
-    <!-- Follow stock battery color -->
-    <string name="pref_sbcolor_follow_stock_battery_title">Segui il colore dell\'icona batteria stock</string>
-    <string name="pref_sbcolor_follow_stock_battery_summary">Imposta colore dell\'orologio nella barra di stato, percentuale, e icona batteria come quello dell\'icona stock. Attivabile se impostazioni colore icone è spento.</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Modalità attivazione reti nella relativa icona dei quicksetting</string>
@@ -553,10 +518,6 @@
     <string name="pie_controls_enabled_always">Sempre</string>
     <string name="pie_controls_enabled_expanded">Se desktop esteso attivo</string>
     <string name="pie_controls_enabled_expanded_navbar">Se desktop esteso nasconde la barra di navigazione</string>
-
-    <!-- Icon coloring: preserve stock battery icon -->
-    <string name="pref_statusbar_color_skip_battery_title">Lascia icona batteria stock inalterata</string>
-    <string name="pref_statusbar_color_skip_battery_summary">Usa nel caso in cui l\'icona batteria stock sia stata sostituita da app alternative</string>
 
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">Scollega cavo fa accendere lo schermo</string>
@@ -605,7 +566,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Controllo traffico dati</string>
-    <string name="pref_data_traffic_enable_title">Abilita controllo traffico</string>
     <string name="pref_data_traffic_enable_summary">Mostra automaticamente il controllo traffico dati appena la connessione dati viene attivata</string>
     <string name="pref_data_traffic_position_title">Posizione</string>
     <string name="dt_position_auto">Auto (centrata o a destra, a seconda della posizione dell\'orologio)</string>
@@ -674,9 +634,6 @@
     <string name="pref_app_launcher_slot_title">Slot Applicazione %d</string>
     <string name="app_launcher_no_apps">Nessuna app assegnata. Usa GravityBox / Menu Launcher Applicazioni per assegnare le applicazioni.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Mostra Tasto Avvio Applicazioni</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Mostra Launcher app</string>
 
@@ -718,10 +675,6 @@
     <string name="pref_navbar_key_glow_color_title">Colore tasto navigazione evidenziato</string>
     <string name="pref_navbar_bg_color_title">Colore sfondo tasto navigazione</string>
 
-    <!-- Disable lockscreen shade -->
-    <string name="pref_lockscreen_shade_disable_title">Disattiva ombreggiatura schermata di blocco</string>
-    <string name="pref_lockscreen_shade_disable_summary">Rimuovi tinte scure nella schermata di blocco</string>
-
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Gestore trasparenze</string>
     <string name="pref_tm_mode_summary">Richiede riavvio</string>
@@ -749,10 +702,6 @@
     <string name="hwkey_action_home">Vai a schermata Home</string>
     <string name="hwkey_action_back">Torna indietro</string>
 
-    <!-- QS Tile Style -->
-    <string name="pref_qs_tile_style_title">Pulsante Style</string>
-    <string name="pref_qs_tile_style_summary">Si applica solo ai tasti Gravitybox (non incide tasti predefiniti)</string>
-
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Regolare il margine inferiore</string>
 
@@ -763,10 +712,6 @@
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Consenti modalità di rete LTE</string>
  
-    <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">Accendere gli indicatori del tipo di rete</string>
-    <string name="pref_disable_data_network_type_icons_summary">Disabilita gli indicatori G/3G adiacenti alle barre del segnale</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Per consentire di abilitare il supporto per le azioni della barra di navigazione è necessario
         sostituire le impostazioni di sistema predefinite nella barra dei menu di navigazione</string>
@@ -849,7 +794,6 @@
     <string name="fullscreen_caller_full">Pieno</string>
 
     <!-- Screen off effects -->
-    <string name="screen_off_effect_title">Effetto spegni schermo</string>
     <string name="screen_off_effect_default">Default</string>
     <string name="screen_off_effect_crt">CRT</string>
     <string name="screen_off_effect_fade">Dissolvenza</string>

@@ -35,7 +35,6 @@
     <string name="important">Vigtigt</string>
 
     <string name="caller_fullscreen_photo_title">Fuldskærmsbillede af den, som ringer</string>
-    <string name="caller_fullscreen_photo_summary">Viser fuldskærmsbillede af den som ringer ved indgående kald</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Synkronisering til</string>
@@ -93,7 +92,6 @@
 
     <!-- CRT effect screen off animation -->
     <string name="crt_off_effect_title">Billedrørsskærms-slukkeeffekt</string>
-    <string name="crt_off_effect_summary">Slår animation til som simulerer gammeldags billedrørs-slukkeeffekt når skærmen slukkes</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Ingeniørtilstand</string>

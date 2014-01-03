@@ -54,7 +54,6 @@
     <string name="important">Σημαντικό</string>
 
     <string name="caller_fullscreen_photo_title">Εικόνα καλούντος σε πλήρη οθόνη</string>
-    <string name="caller_fullscreen_photo_summary">Εμφανίζει την εικόνα καλούντος σε πλήρη οθόνη κατά την κλήση</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Συγχρονισμός Ενεργός</string>
@@ -131,7 +130,6 @@
 
     <!-- CRT effect screen off animation -->
     <string name="crt_off_effect_title">Εφέ κλεισίματος CRT οθόνης</string>
-    <string name="crt_off_effect_summary">Ενεργοποιεί το εφέ προσομοίωσης σβησίματος παλιάς οθόνης CRT</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
@@ -287,10 +285,6 @@
     <string name="quick_pulldown_right">Δεξιά</string>
     <string name="quick_pulldown_left">Αριστερά</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Απενεργοποίηση ξυπνήματος με πλήκτρα έντασης</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Για συσκευές όπως τα Jiayu G3s,G4 όπου τα πλήκτρα έντασης ενεργοποιούν την οθόνη</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Χρώματα γραμμής κατάστασης</string>
 
@@ -435,7 +429,6 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Ρυθμίσεις φωτεινότητας</string>
-    <string name="pref_brightness_master_switch_title">Ενεργοποίηση ρυθμίσεων φωτεινότητας</string>
     <string name="pref_brightness_master_switch_summary">Χρήση μόνο σε περίπτωση που η συσκευή σας υποστηρίζει τα βασικά χαρακτηριστικά φωτεινότητας Android. Κρατήστε απενεργοποιημένο αν παρατηρήσετε θέματα με τη φωτεινότητα. (απαιτείται επανεκκίνηση)</string>
 
     <!-- HW Key Action: Recent apps -->
@@ -486,7 +479,6 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Γραμμή πλοήγησης</string>
     <string name="pref_cat_navigation_bar_summary">Περιλαμβάνει διάφορες βελτιώσεις της γραμμής πλοήγησης</string>
-    <string name="pref_navbar_override_title">Παράκαμψη προεπιλεγμένων συστήματος</string>
     <string name="pref_navbar_override_summary">Γενικός διακόπτης βελτιώσεων για τη γραμμή πλοήγησης (απαιτείται επανεκκίνηση)</string>
     <string name="pref_navbar_enable_title">Ενεργοποίηση γραμμής πλοήγησης</string>
     <string name="pref_navbar_enable_summary">Απαιτείται επανεκκίνηση</string>
@@ -502,7 +494,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Ρυθμίσεων δακτυλίου ξεκλειδώματος</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Ενεργοποίηση στόχων δακτυλίου ξεκλειδώματος</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Γενικός διακόπτης στόχων δακτυλίου ξεκλειδώματος</string>
     <string name="pref_lockscreen_ring_targets_app_title">Επιλεγμένη εφαρμογή %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Κάθετη αντιστάθμιση δακτυλίου ξεκλειδώματος</string>
@@ -588,7 +579,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Παρακολούθηση κίνησης δεδομένων</string>
-    <string name="pref_data_traffic_enable_title">Ενεργοποίηση παρακολούθησης</string>
     <string name="pref_data_traffic_enable_summary">Προβάλει την παρακολούθηση κίνησης δεδομένων αυτομάτως μόλις ενεργοποιηθεί η κίνηση δεδομένων</string>
     <string name="pref_data_traffic_position_title">Θέση</string>
     <string name="dt_position_auto">Αυτόματα (κεντρικά ή δεξιά αναλόγως τη θέση του ρολογιού)</string>
@@ -656,9 +646,6 @@
     <string name="pref_cat_app_launcher_summary">Διάλογος που επιτρέπει τον ορισμό μέχρι 8 εφαρμογών που μπορεί να ανατεθεί ως λειτουργία φυσικού πλήκτρου ή ως εξτρά κουμπί στην γραμμή πλοήγησης</string>
     <string name="pref_app_launcher_slot_title">Θέση εφαρμογής %d</string>
     <string name="app_launcher_no_apps">Καμία εφαρμογή. Χρησιμοποιήστε το μενού GravityBox / Εκκίνηση εφαρμογών να ορίσετε εφαρμογές.</string>
-
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Εμφάνιση πλήκτρου εκκίνησης εφαρμογών</string>
 
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Εμφάνιση εκκίνησης εφαρμογών</string>

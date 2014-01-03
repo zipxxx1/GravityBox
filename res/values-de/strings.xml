@@ -39,7 +39,6 @@
     <string name="important">Wichtig</string>
 
     <string name="caller_fullscreen_photo_title">Foto des Anrufers im Vollbildmodus</string>
-    <string name="caller_fullscreen_photo_summary">Zeigt das Foto des Anrufers im Vollbildmodus an</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sync an</string>
@@ -120,7 +119,6 @@
 
     <!-- CRT effect screen off animation -->
     <string name="crt_off_effect_title">CRT-Effekt beim Ausschalten des Bildschirms</string>
-    <string name="crt_off_effect_summary">Aktiviert eine Animation, die das Ausschalten eines Röhrenmonitors simuliert, sobald der Bildschirm ausgeschaltet wird</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Entwicklermodus</string>
@@ -272,10 +270,6 @@
     <string name="quick_pulldown_right">Rechts</string>
     <string name="quick_pulldown_left">Links</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Aufwachen durch Lautstärketasten deaktivieren</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Für Geräte (z.B. Jiayu G3s, G4), bei denen die Lautstärketasten den Bildschirm anschalten</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Farbe der Benachrichtigungsleiste</string>
 
@@ -314,7 +308,7 @@
     <string name="pref_disable_roaming_indicators_summary">Wenn deaktiviert, wird das \'R\'-Symbol während des Roamings nicht angezeigt (bitte mit Vorsicht benutzen)</string>
 
     <!-- Battery status in pie controls -->
-    <string name="pie_battery_status_charging">Lädt... (<xliff:g id="percent">%d</xliff:g>%%)</string>
+    <string name="pie_battery_status_charging">Lädt&#8230; (<xliff:g id="percent">%d</xliff:g>%%)</string>
     <string name="pie_battery_status_full">Aufgeladen</string>
     <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% verbleibend</string>
 
@@ -420,7 +414,6 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Helligkeitseinstellungen</string>
-    <string name="pref_brightness_master_switch_title">Helligkeitseinstellungen aktivieren</string>
     <string name="pref_brightness_master_switch_summary">Nur anwenden, falls Ihr Gerät standardmäßig Helligkeitsfunktionalitäten unterstützt, ansonsten bei auftretenden Problemen bitte wieder deaktivieren (Neustart erforderlich)</string>
 
     <!-- HW Key Action: Recent apps -->
@@ -471,7 +464,6 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Navigationsleiste anpassen</string>
     <string name="pref_cat_navigation_bar_summary">Beinhaltet Optionen, um die Navigationsleiste anzupassen</string>
-    <string name="pref_navbar_override_title">System-Standardeinstellungen überschreiben</string>
     <string name="pref_navbar_override_summary">Hauptschalter für Optimierungen der Navigationsleiste (Neustart erforderlich)</string>
     <string name="pref_navbar_enable_title">Navigationsleiste aktivieren</string>
     <string name="pref_navbar_enable_summary">Neustart erforderlich</string>
@@ -487,7 +479,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Entsperrringeinstellungen</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Entsperrringanwendungen aktivieren</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Hauptschalter für Entsperrringanwendungen</string>
     <string name="pref_lockscreen_ring_targets_app_title">Zielanwendung %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Vertikaler Versatz des Entsperrrings</string>
@@ -571,7 +562,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Datenverbrauchsanzeige</string>
-    <string name="pref_data_traffic_enable_title">Überwachung aktivieren</string>
     <string name="pref_data_traffic_enable_summary">Blendet automatisch die Datenverbrauchsanzeige ein, sobald die Datenverbindung aktiv ist</string>
     <string name="pref_data_traffic_position_title">Position</string>
     <string name="dt_position_auto">Auto (zentriert oder rechts, abhängig von der Uhrposition)</string>
@@ -639,9 +629,6 @@
     <string name="pref_cat_app_launcher_summary">Es lassen sich bis zu 8 Anwendungen definieren, die zur Ausführung den Hardware-Tasten zugeordnet oder als zusätzliche Navigationstasten genutzt werden können</string>
     <string name="pref_app_launcher_slot_title">Anwendungsplatz %d</string>
     <string name="app_launcher_no_apps">Keine Apps zugeordnet. Bitte verwenden Sie das GravityBox/App-Launcher-Menü, um Apps zuzuordnen.</string>
-
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">App-Launcher-Taste anzeigen</string>
 
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">App-Launcher anzeigen</string>

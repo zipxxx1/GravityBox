@@ -54,7 +54,6 @@
     <string name="important">Penting</string>
 
     <string name="caller_fullscreen_photo_title">Foto pemanggil fullscreen</string>
-    <string name="caller_fullscreen_photo_summary">Tampilkan foto pemanggil secara fullscreen pada layar panggilan masuk</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sinkron hidup</string>
@@ -131,7 +130,6 @@
 
     <!-- CRT effect screen off animation -->
     <string name="crt_off_effect_title">Animasi layar mati CRT</string>
-    <string name="crt_off_effect_summary">Menhidupkan animasi yang meniru matinya layar CRT lama layar dimatikan</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
@@ -287,10 +285,6 @@
     <string name="quick_pulldown_right">Kanan</string>
     <string name="quick_pulldown_left">Kiri</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Matikan tombol volume untuk menghidupkan layar</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Untuk perangkat seperti Jiayu G3s,G4 yang mana tombol volume bisa digunakan untuk menghidupkan layar</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Warna Statusbar</string>
 
@@ -435,7 +429,6 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Pengaturan kecerahan</string>
-    <string name="pref_brightness_master_switch_title">Hidupkan pengaturan kecerahan</string>
     <string name="pref_brightness_master_switch_summary">Gunakan hanya jika perangkat anda mendukung fitur kecerahan bawaan Android. Tetap matikan jika anda mengalami masalah yang terkait dengan kecerahan. (membutuhkan restart)</string>
 
     <!-- HW Key Action: Recent apps -->
@@ -486,7 +479,6 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Tweak navigation bar</string>
     <string name="pref_cat_navigation_bar_summary">Memuat berbagai tweak yang berkaitan dengan navigation bar</string>
-    <string name="pref_navbar_override_title">Acuhkan aturan bawaan sistem</string>
     <string name="pref_navbar_override_summary">Tombol utama untuk tweak navigation bar (membutuhkan restart)</string>
     <string name="pref_navbar_enable_title">Hidupkan navigation bar</string>
     <string name="pref_navbar_enable_summary">Membutuhkan reboot</string>
@@ -502,7 +494,6 @@
 
     <!-- Lockscreen targets -->
     <string name="pref_cat_lockscreen_ring_settings_title">Target Lockscreen</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Hidupkan target lockscreen</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Hidupkan pengaturan target lockscreen</string>
     <string name="pref_lockscreen_ring_targets_app_title">Aplikasi target %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Jarak bawah cincin unlock</string>
@@ -588,7 +579,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitor lalu-lintas paket data</string>
-    <string name="pref_data_traffic_enable_title">Hidupkan monitor</string>
     <string name="pref_data_traffic_enable_summary">Menunjukkan monitor lalu-lintas paket data kapanpun paket data sedang aktif</string>
     <string name="pref_data_traffic_position_title">Posisi</string>
     <string name="dt_position_auto">Otomatis (tengah atau kanan, bergantung posisi jam)</string>
@@ -656,9 +646,6 @@
     <string name="pref_cat_app_launcher_summary">Dialog yang memperbolehkan pengguna menetapkan sampai 8 aplikasi yang bisa ditetapkan sebagai aksi tombol fisik atau tombol tambahan di navbar.</string>
     <string name="pref_app_launcher_slot_title">Aplikasi slot %d</string>
     <string name="app_launcher_no_apps">Tidak ada aplikasi yang ditetapkan. Gunakan GravityBox / menu Launcher Aplikasi untuk menetapkan aplikasi.</string>
-
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Tunjukkan tombol Launcher Aplikasi</string>
 
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Tunjukkan Launcher Aplikasi</string>

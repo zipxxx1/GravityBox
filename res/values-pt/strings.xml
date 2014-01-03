@@ -39,7 +39,6 @@
     <string name="important">Importante</string>
 
     <string name="caller_fullscreen_photo_title">Foto do contato em tela cheia em ligação</string>
-    <string name="caller_fullscreen_photo_summary">Mostra a foto do contato em tela cheia quando recebe ligação</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sinc. ativada</string>
@@ -119,7 +118,6 @@
 
     <!-- CRT effect screen off animation -->
     <string name="crt_off_effect_title">Efeito de TV antiga desligando</string>
-    <string name="crt_off_effect_summary">Habilita o efeito que simula tv antiga desligando quando desligar a tela</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modo Engenharia</string>
@@ -275,10 +273,6 @@
     <string name="quick_pulldown_right">Direita</string>
     <string name="quick_pulldown_left">Esquerda</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Desabilitar ligação de tela</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Para dispositivos onde as teclas de volume ligam inadvertidamente a tela</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Cores da Barra de Status</string>
 
@@ -423,7 +417,6 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Configurações de brilho</string>
-    <string name="pref_brightness_master_switch_title">habilitar configurações de brilho</string>
     <string name="pref_brightness_master_switch_summary">Use apenas caso seu dispositivo suporte os recursos padrões de brilho do Android. Mantenha desativado se você tiver problemas de brilho relacionados (necessário reiniciar)</string>
 
     <!-- HW Key Action: Recent apps -->
@@ -474,7 +467,6 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Ajustes da Barra de Navegação</string>
     <string name="pref_cat_navigation_bar_summary">Contém diversos ajustes relacionados com a Barra de Navegação</string>
-    <string name="pref_navbar_override_title">Substituir padrões do sistema</string>
     <string name="pref_navbar_override_summary">Interruptor principal para os tweaks da barra de navegação (Necessário reiniciar)</string>
     <string name="pref_navbar_enable_title">Habilitar barra de navegação</string>
     <string name="pref_navbar_enable_summary">Necessário reiniciar</string>
@@ -490,7 +482,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Desbloquear configurações do anel</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Ativar desbloqueio dos alvos do anel</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Controle principal para desbloquear alvos do anel</string>
     <string name="pref_lockscreen_ring_targets_app_title">Aplicativo alvo %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Desbloquear deslocamento vertical do anel</string>
@@ -576,7 +567,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitor de tráfego de dados</string>
-    <string name="pref_data_traffic_enable_title">Habilitar monitorização</string>
     <string name="pref_data_traffic_enable_summary">Mostra um monitor de tráfego sempre que uma conexão for encontrada</string>
     <string name="pref_data_traffic_position_title">Posição</string>
     <string name="dt_position_auto">Auto (centro ou direita, dependendo da posição do relógio)</string>
@@ -644,9 +634,6 @@
     <string name="pref_cat_app_launcher_summary">Permite definit 8 aplicativos que podem ser atribuídos a ações de teclas físicas ou usados em teclas adicionais na barra de navegação</string>
     <string name="pref_app_launcher_slot_title">Aplicativo na posição %d</string>
     <string name="app_launcher_no_apps">Nenhum aplicativo definido. Use o menu Lançador de aplicativos do GravityBox para definir.</string>
-
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Exibir botão Lançador aplicativos</string>
 
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Exibir lançador de aplicativos</string>

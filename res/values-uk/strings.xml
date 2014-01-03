@@ -28,7 +28,6 @@
     <string name="recents_clear_all_title">Закрити всі поточні завдання</string>
     <string name="important">Важливо</string>
     <string name="caller_fullscreen_photo_title">Фото того, хто телефонує на весь екран</string>
-    <string name="caller_fullscreen_photo_summary">Відображати фото того, хто телефонує на весь екран при вимк.иках</string>
     <string name="quick_settings_sync_on">Синхрон. увімк.</string>
     <string name="quick_settings_sync_off">Синхрон. вимк.</string>
     <string name="quick_settings_wifi_ap_on">ТД Wi-Fi увімк.</string>
@@ -36,8 +35,8 @@
     <string name="quick_settings_torch_on">Ліхтарик увімк.</string>
     <string name="quick_settings_torch_off">Ліхтарик вимк.</string>
     <string name="quick_settings_torch_off_notif">Натисніть для вимкнення</string>
-    <string name="quick_settings_qr_playing">Відтворення...</string>
-    <string name="quick_settings_qr_recording">Запис...</string>
+    <string name="quick_settings_qr_playing">Відтворення&#8230;</string>
+    <string name="quick_settings_qr_recording">Запис&#8230;</string>
     <string name="quick_settings_qr_recorded">Записано</string>
     <string name="quick_settings_qr_record">Утримаєте для запису</string>
     <string name="quick_settings_qr_recording_notif">Торкніться щоб зупинити запис</string>
@@ -89,7 +88,6 @@
     <string name="reboot_confirm_recovery">%s буде перезавантажений у відновленні.</string>
     <string name="reboot_confirm_bootloader">%s буде перезавантажений в завантажувач.</string>
     <string name="crt_off_effect_title">Ефект кіноскопу вимкнення екрану</string>
-    <string name="crt_off_effect_summary">Дозволяє включити анімацію, яка імітує вимикання старих ЕПТ-моніторів, при вимк.юченні екрану</string>
     <string name="engineering_mode_title">Інженерне меню</string>
     <string name="engineering_mode_summary">Дозволяє запустити Інженерне меню</string>
     <string name="dual_sim_ringer_title">Мелодія дзвінка для 2-х SIM</string>
@@ -190,8 +188,6 @@
     <string name="quick_pulldown_off">Вимкнено</string>
     <string name="quick_pulldown_right">Праворуч</string>
     <string name="quick_pulldown_left">Зліва</string>
-    <string name="pref_volume_rocker_wake_disable_title">Відключення виходу зі сну клавішами гучності</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Для пристроїв на зразок Jiayu G3s, G4 де зміна звуку будить пристрій</string>
     <string name="pref_cat_statusbar_colors_title">Кольори статусбара</string>
     <string name="pref_statusbar_icon_color_enable_title">Включити кольору іконок</string>
     <string name="pref_statusbar_icon_color_title">Колір іконок статусбара</string>
@@ -274,7 +270,6 @@
     <string name="device_phone">Телефон</string>
     <string name="device_tablet">Планшет</string>
     <string name="pref_cat_brightness_title">Налаштування яскравості</string>
-    <string name="pref_brightness_master_switch_title">Увімкнути налаштування яскравості</string>
     <string name="pref_brightness_master_switch_summary">"Включити тільки у випадку, якщо пристрій використовує стандартний механізм Android для регулювання яскравості. Залиште вимкненим, якщо є проблеми, якось пов'язані з яскравістю. (Необхідна перезавантаження)"</string>
     <string name="hwkey_action_recent_apps">Показати нещодавні додатки</string>
     <string name="hwkey_home_longpress_dialog_title">Дія за довгому натисненню Головна</string>
@@ -286,7 +281,7 @@
     <string name="hwkey_action_custom_app_missing">Додаток не знайдено!</string>
     <string name="pref_clock_link_title">Додаток-годинник для панелі повідомлень</string>
     <string name="pref_clock_link_summary">"Пов'язує годинник на статусбаре з обраним додатком замість налаштувань Дати та часу"</string>
-    <string name="gb_startup_progress">Очікування відгуку від системного фреймворку GravityBox...</string>
+    <string name="gb_startup_progress">Очікування відгуку від системного фреймворку GravityBox&#8230;</string>
     <string name="gb_startup_error">Системний фреймворк GravityBox не відповідає. Вихід.</string>
     <string name="pref_national_roaming_title">Національний роумінг</string>
     <string name="pref_national_roaming_summary">Підключатися до служб передачі даних в національному роумінгу</string>
@@ -303,7 +298,6 @@
     <string name="hwkey_action_expanded_desktop_disabled">Розширений робочий стіл відключений!</string>
     <string name="pref_cat_navigation_bar_title">Налаштування панелі навігації</string>
     <string name="pref_cat_navigation_bar_summary">Містить різні налаштування панелі навігації</string>
-    <string name="pref_navbar_override_title">Переписати налаштування за замовчуванням</string>
     <string name="pref_navbar_override_summary">Дозволяє включити всі твіки панелі навігації (Необхідна перезавантаження)</string>
     <string name="pref_navbar_enable_title">Включити панель навігації</string>
     <string name="pref_navbar_enable_summary">Необхідне перезавантаження</string>
@@ -315,7 +309,6 @@
     <string name="pref_navbar_menukey_title">Завжди показувати кнопку меню</string>
     <string name="pref_powermenu_screenshot_title">Скріншот в меню вимкнення</string>
     <string name="pref_cat_lockscreen_ring_settings_title">ярлики екрану блокування</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Включити ярлики екрану блокування</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Загальний перемикач ярликів екрану блокування</string>
     <string name="pref_lockscreen_ring_targets_app_title">Додаток %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Вертикальний зсув кільця розблокування</string>
@@ -367,7 +360,6 @@
     <string name="sbl_policy_unlocked">Розблоковано якщо блокування клавіатури ненадіне</string>
     <string name="sbl_policy_locked">Заблокований</string>
     <string name="pref_cat_data_traffic_title">Монітор трафіку</string>
-    <string name="pref_data_traffic_enable_title">Включити моніторинг</string>
     <string name="pref_data_traffic_enable_summary">Показує трафік завжди, коли включена передача даних</string>
     <string name="pref_data_traffic_position_title">Позиція</string>
     <string name="dt_position_auto">Автоматично (у центрі або праворуч залежно від позиції годин)</string>
@@ -413,7 +405,6 @@
     <string name="pref_cat_app_launcher_summary">Діалог, що дозволяє вибрати до 8 додатків, які можна призначити для дій кнопок або помістити на панель навігації</string>
     <string name="pref_app_launcher_slot_title">Слот додатки %d</string>
     <string name="app_launcher_no_apps">Додатки не вибрані. Використовуйте GravityBox/Запуск додатків для вибору додатків.</string>
-    <string name="pref_navbar_launcher_enable_title">Показувати кнопку запуску програми</string>
     <string name="hwkey_action_app_launcher">Запустити програму</string>
     <string name="pref_pie_control_custom_key_title">Показати призначену для користувача кнопку</string>
     <string name="pie_custom_key_off">Відключено</string>

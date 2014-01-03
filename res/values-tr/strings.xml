@@ -52,7 +52,6 @@
     <string name="important">Önemli</string>
 
     <string name="caller_fullscreen_photo_title">Arayan tam ekran fotoğrafı</string>
-    <string name="caller_fullscreen_photo_summary">Çağrı geldiğinde arayan kişinin fotoğrafını tam ekran göster</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sync açık</string>
@@ -129,7 +128,6 @@
 
     <!-- CRT effect screen off animation -->
     <string name="crt_off_effect_title">Ekran kapanma efekti</string>
-    <string name="crt_off_effect_summary">Ekran kapandığında eski televizyonlardaki CRT kapanış efektini etkinleştirir</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Mühendis modu</string>
@@ -280,10 +278,6 @@
     <string name="quick_pulldown_right">Sağ</string>
     <string name="quick_pulldown_left">Sol</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Ses tuşuyla uyandırmayı devre dışı bırak</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Ses tuşlarına basıldığında ekranı açma</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Durum çubuğu renkleri</string>
 
@@ -427,7 +421,6 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Parlaklık ayarları</string>
-    <string name="pref_brightness_master_switch_title">Parlaklık ayarlarını etkinleştir</string>
     <string name="pref_brightness_master_switch_summary">Aygıtınız sadece standart Android parlaklık özelliğini destekliyorsa kullanın. Parlaklıkla ilgili sorun yaşarsanız devre dışı bırakın. (yeniden başlatma gerektirir)</string>
 
     <!-- HW Key Action: Recent apps -->
@@ -478,7 +471,6 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Gezinme çubuğu iyileştirmeleri</string>
     <string name="pref_cat_navigation_bar_summary">Gezinme çubuğu ile ilgili iyileştirmeler</string>
-    <string name="pref_navbar_override_title">Sistem varsayılanlarının üzerine yaz</string>
     <string name="pref_navbar_override_summary">Gezinme çubuğu iyileştirmeleri için ana tuş (yeniden başlatma gerektirir)</string>
     <string name="pref_navbar_enable_title">Gezinme çubuğunu etkinleştir</string>
     <string name="pref_navbar_enable_summary">Yeniden başlatma gerektirir</string>
@@ -494,7 +486,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Kilit açma halkası ayarları</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Kilit açma halkası hedeflerini etkinleştir</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Kilit açma halkası hedefleri ana tuş</string>
     <string name="pref_lockscreen_ring_targets_app_title">Hedef uygulama %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Kilit açma halkası dikey offset</string>
@@ -579,7 +570,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Veri kullanımı izleme</string>
-    <string name="pref_data_traffic_enable_title">Veri kullanımı izlemeyi etkinleştir</string>
     <string name="pref_data_traffic_enable_summary">Veri etkinleştirildiğinde otomatik olarak veri kullanımını gösterir</string>
     <string name="pref_data_traffic_position_title">Konum</string>
     <string name="dt_position_auto">Otomatik (saatin konumuna göre ortaya ve sağa)</string>
