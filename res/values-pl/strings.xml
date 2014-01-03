@@ -900,5 +900,10 @@
     
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">Użyj trybów sieci CDMA</string>
-    
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Przełącz auto-obracanie</string>
+    <string name="hwkey_action_auto_rotation_enabled">Auto-obracanie włączone</string>
+    <string name="hwkey_action_auto_rotation_disabled">Auto-obracanie wyłączone</string>
+
 </resources>
