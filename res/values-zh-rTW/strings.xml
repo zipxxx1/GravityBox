@@ -901,5 +901,10 @@
     
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">使用 CDMA 網路模式</string>
+    
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">切換自動旋轉</string>
+    <string name="hwkey_action_auto_rotation_enabled">自動旋轉已啟用</string>
+    <string name="hwkey_action_auto_rotation_disabled">自動旋轉已停用</string>
  
 </resources>
