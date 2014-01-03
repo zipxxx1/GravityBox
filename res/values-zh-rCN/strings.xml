@@ -842,7 +842,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">更改时隐藏</string>
-    <string name="pref_qs_hide_on_change_summary">单击磁贴后自动收起快速设置。适用于 GravityBox 磁贴和被覆盖的原厂磁贴</string>
+    <string name="pref_qs_hide_on_change_summary">单击磁贴后自动收起快速设置，适用于 GravityBox 磁贴和被覆盖的原厂磁贴</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">电源键菜单</string>
@@ -884,5 +884,10 @@
     <string name="hwkey_action_show_power_menu">显示电源键菜单</string>
     <string name="hwkey_action_expand_notifications">展开通知面板</string>
     <string name="hwkey_action_expand_quicksettings">展开快速设置面板</string>
+    
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">导航栏环目标</string>
+    <string name="pref_navbar_ring_targets_enable_summary">导航栏环目标主开关（需要重新启动）</string>
+    <string name="pref_navbar_ring_target_title">环目标 %d</string>
 
 </resources>
