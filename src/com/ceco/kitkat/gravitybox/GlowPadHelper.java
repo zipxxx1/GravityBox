@@ -126,14 +126,14 @@ public class GlowPadHelper {
         switch (bgStyle) {
             case CIRCLE:
                 int bitmapSize = Math.max(bitmap.getWidth(), bitmap.getHeight());
-                int marginSize = bitmapSize / 2;
+                int marginSize = Math.round(bitmapSize / 2.2f);
                 int size = bitmapSize + marginSize;
 
                 Bitmap b = Bitmap.createBitmap(size, size, Config.ARGB_8888);
                 Canvas canvas = new Canvas(b);
                 final Paint paint = new Paint();
                 paint.setAntiAlias(true);
-                paint.setColor(Color.argb(190, 255, 255, 255));
+                paint.setColor(Color.argb(230, 255, 255, 255));
                 paint.setFilterBitmap(true);
                 canvas.drawCircle(size/2, size/2, size/2, paint);
                 canvas.drawBitmap(bitmap, marginSize/2f, marginSize/2f, null);
