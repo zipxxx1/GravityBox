@@ -18,6 +18,7 @@ package com.ceco.gm2.gravitybox.shortcuts;
 import java.util.ArrayList;
 
 import com.ceco.gm2.gravitybox.R;
+import com.ceco.gm2.gravitybox.Utils;
 import com.ceco.gm2.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.gm2.gravitybox.adapters.IconListAdapter;
 import com.ceco.gm2.gravitybox.shortcuts.AShortcut.CreateShortcutListener;
@@ -111,7 +112,8 @@ public class ShortcutActivity extends ListActivity {
             list.add(new ExpandQuicksettingsShortcut(mContext));
         list.add(new ExpandedDesktopShortcut(mContext));
         list.add(new ScreenshotShortcut(mContext));
-        list.add(new TorchShortcut(mContext));
+        if (Utils.hasFlash(mContext))
+            list.add(new TorchShortcut(mContext));
 
         mListAdapter = new IconListAdapter(mContext, list);
         setListAdapter(mListAdapter);
