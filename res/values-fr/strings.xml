@@ -908,7 +908,7 @@
     <string name="pref_reboot_allow_on_lockscreen_title">Actif sur écran de déverrouillage</string>
 
     <!-- Data traffic monitor enhancements -->
-    <string name="pref_data_traffic_inactivity_mode_title">Mode d’inactivité</string>
+    <string name="pref_data_traffic_inactivity_mode_title">Mode d\'inactivité</string>
     <string name="inactivity_mode_default">Par défaut</string>
     <string name="inactivity_mode_hide">Masquer durant inactivité</string>
     <string name="inactivity_mode_summary">Afficher un résumé puis masquer durant l\'inactivité</string>
@@ -928,5 +928,10 @@
     <!-- Allow any widget on Lockscreen -->
     <string name="pref_lockscreen_allow_any_widget_title">Autoriser tous les widgets</string>
     <string name="pref_lockscreen_allow_any_widget_summary">Autorise tous les widgets qui ne sont habituellement utilisés que dans le lanceur</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Afficher le menu d\'extinction</string>
+    <string name="hwkey_action_expand_notifications">Développer le panneau de notifications</string>
+    <string name="hwkey_action_expand_quicksettings">Développer le panneau Paramètres Rapides</string>
 
 </resources>
