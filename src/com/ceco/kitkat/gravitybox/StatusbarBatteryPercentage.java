@@ -118,7 +118,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
 
     @Override
     public void onBatteryStatusChanged(BatteryData batteryData) {
-        if (batteryData.charging) {
+        if (batteryData.charging && batteryData.level < 100) {
             startChargingAnimation();
         } else {
             stopChargingAnimation();
