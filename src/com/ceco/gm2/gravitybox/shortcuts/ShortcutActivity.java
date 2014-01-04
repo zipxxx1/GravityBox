@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class ShortcutActivity extends ListActivity {
@@ -36,7 +37,8 @@ public class ShortcutActivity extends ListActivity {
 
     private Context mContext;
     private IconListAdapter mListAdapter;
-    
+    private Button mBtnCancel;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,13 @@ public class ShortcutActivity extends ListActivity {
             return;
         } else if (intent.getAction().equals(Intent.ACTION_CREATE_SHORTCUT)) {
             setContentView(R.layout.shortcut_activity);
+            mBtnCancel = (Button) findViewById(R.id.btnCancel);
+            mBtnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
             return;
         } else if (intent.getAction().equals(ACTION_LAUNCH_ACTION) &&
                 intent.hasExtra(EXTRA_ACTION)) {
