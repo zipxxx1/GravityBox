@@ -69,6 +69,7 @@ public class ModHwKeys {
     public static final String ACTION_SHOW_POWER_MENU = "gravitybox.intent.action.SHOW_POWER_MENU";
     public static final String ACTION_TOGGLE_EXPANDED_DESKTOP = 
             "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP";
+    public static final String ACTION_EXPAND_NOTIFICATIONS = "gravitybox.intent.action.EXPAND_NOTIFICATIONS";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
 
@@ -262,6 +263,8 @@ public class ModHwKeys {
                                 GravityBoxSettings.HWKEY_ACTION_DEFAULT);
                     if (DEBUG) log("mCustomKeyDoubletapAction set to: " + mCustomKeyDoubletapAction);
                 }
+            } else if (action.equals(ACTION_EXPAND_NOTIFICATIONS) && mPhoneWindowManager != null) {
+                expandNotificationsPanel();
             }
         }
     };
@@ -691,6 +694,7 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_TOGGLE_EXPANDED_DESKTOP);
             intentFilter.addAction(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
+            intentFilter.addAction(ACTION_EXPAND_NOTIFICATIONS);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
