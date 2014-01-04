@@ -575,7 +575,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">Zmień domyślne zachowanie kafelek</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Zastępuje zachowanie wybranych kafelek przy krótkim i długim naciśnięciu (wymagany restart)</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Zamienia akcje krótkiego i długiego naciśnięcia oraz dodaje wsparcie \'Ukryj po zmianie\' dla wybranych kafelek (wymagany restart)</string>
  
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Gniazdo SIM Kafelki trybu sieci</string>
@@ -905,5 +905,19 @@
     <string name="hwkey_action_auto_rotation">Przełącz auto-obracanie</string>
     <string name="hwkey_action_auto_rotation_enabled">Auto-obracanie włączone</string>
     <string name="hwkey_action_auto_rotation_disabled">Auto-obracanie wyłączone</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Dozwolony dowolny widżet</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Pozwala umieścić na Ekranie Blokady widżety, które normalnie mogą być używane tylko na ekranie Startera Aplikacji</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Pokaż Menu Zasilania</string>
+    <string name="hwkey_action_expand_notifications">Rozwiń Panel Powiadomień</string>
+    <string name="hwkey_action_expand_quicksettings">Rozwiń Panel Szybkich Ustawień</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Cele pierścienia nawigacji</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Główny wyłącznik celów pierścienia nawigacji (wymagany restart)</string>
+    <string name="pref_navbar_ring_target_title">Cel pierścienia %d</string>
 
 </resources>
