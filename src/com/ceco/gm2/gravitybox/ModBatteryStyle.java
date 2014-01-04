@@ -57,6 +57,8 @@ public class ModBatteryStyle {
     private static View mStockBattery;
     private static KitKatBattery mKitKatBattery;
 
+    private static XSharedPreferences mPrefs;
+
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
@@ -87,6 +89,11 @@ public class ModBatteryStyle {
                         if (DEBUG) log("PercentText sign changed to: " + percentSign);
             } else if (intent.getAction().equals(ACTION_MTK_BATTERY_PERCENTAGE_SWITCH)) {
                 mMtkPercentTextEnabled = intent.getIntExtra(EXTRA_MTK_BATTERY_PERCENTAGE_STATE, 0) == 1;
+                mPrefs.reload();
+                mPercentText.setTextSize(mMtkPercentTextEnabled ? 16 : Integer.valueOf(mPrefs.getString(
+                        GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
+                mPercentText.setPercentSign(mMtkPercentTextEnabled ? "%" : mPrefs.getString(
+                        GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
                 if (DEBUG) log("mMtkPercentText changed to: " + mMtkPercentTextEnabled);
                 updateBatteryStyle();
             }
@@ -122,6 +129,10 @@ public class ModBatteryStyle {
                     ViewGroup vg = (ViewGroup) liparam.view.findViewById(
                             liparam.res.getIdentifier("signal_battery_cluster", "id", PACKAGE_NAME));
 
+                    mMtkPercentTextEnabled = Utils.isMtkDevice() ?
+                            Settings.Secure.getInt(vg.getContext().getContentResolver(), 
+                                    SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1 : false;
+
                     // inject percent text if it doesn't exist
                     for (String bptId : batteryPercentTextIds) {
                         final int bptResId = liparam.res.getIdentifier(
@@ -151,9 +162,9 @@ public class ModBatteryStyle {
                         vg.addView(mPercentText.getView());
                         if (DEBUG) log("Battery percent text injected");
                     }
-                    mPercentText.setTextSize(Integer.valueOf(prefs.getString(
+                    mPercentText.setTextSize(mMtkPercentTextEnabled ? 16 : Integer.valueOf(prefs.getString(
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
-                    mPercentText.setPercentSign(prefs.getString(
+                    mPercentText.setPercentSign(mMtkPercentTextEnabled ? "%" : prefs.getString(
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
                     ModStatusbarColor.registerIconManagerListener(mPercentText);
 
@@ -216,6 +227,7 @@ public class ModBatteryStyle {
 
     public static void init(final XSharedPreferences prefs, ClassLoader classLoader) {
         if (DEBUG) log("init");
+        mPrefs = prefs;
 
         try {
             Class<?> batteryControllerClass = XposedHelpers.findClass(CLASS_BATTERY_CONTROLLER, classLoader);
@@ -231,10 +243,6 @@ public class ModBatteryStyle {
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT, false);
 
                     Context context = (Context) param.args[0];
-                    mMtkPercentTextEnabled = Utils.isMtkDevice() ?
-                            Settings.Secure.getInt(context.getContentResolver(), 
-                                    SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1 : false;
-
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
