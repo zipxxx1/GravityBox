@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.BatteryManager;
 
-public class BatteryInfo {
+public class BatteryInfoManager {
     private BatteryData mBatteryData;
     private ArrayList<BatteryStatusListener> mListeners;
 
@@ -33,7 +33,7 @@ public class BatteryInfo {
         void onBatteryStatusChanged(BatteryData batteryData);
     }
 
-    public BatteryInfo() {
+    public BatteryInfoManager() {
         mBatteryData = new BatteryData();
         mBatteryData.charging = false;
         mBatteryData.level = 0;

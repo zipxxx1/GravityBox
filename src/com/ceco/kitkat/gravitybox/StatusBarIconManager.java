@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ceco.kitkat.gravitybox.BatteryInfo.BatteryStatusListener;
+import com.ceco.kitkat.gravitybox.BatteryInfoManager.BatteryStatusListener;
 import com.ceco.kitkat.gravitybox.R;
 import de.robv.android.xposed.XposedBridge;
 
@@ -65,7 +65,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     private boolean[] mAllowMobileIconChange;
     private ColorInfo mColorInfo;
     private List<IconManagerListener> mListeners;
-    private BatteryInfo mBatteryInfo;
+    private BatteryInfoManager mBatteryInfo;
 
     public interface IconManagerListener {
         void onIconManagerStatusChanged(int flags, ColorInfo colorInfo);
@@ -154,7 +154,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mIconCache = new HashMap<String, SoftReference<Drawable>>();
 
         initColorInfo();
-        mBatteryInfo = new BatteryInfo();
+        mBatteryInfo = new BatteryInfoManager();
 
         mListeners = new ArrayList<IconManagerListener>();
     }

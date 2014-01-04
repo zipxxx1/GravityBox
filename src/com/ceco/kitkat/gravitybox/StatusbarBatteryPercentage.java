@@ -15,8 +15,8 @@
 
 package com.ceco.kitkat.gravitybox;
 
-import com.ceco.kitkat.gravitybox.BatteryInfo.BatteryData;
-import com.ceco.kitkat.gravitybox.BatteryInfo.BatteryStatusListener;
+import com.ceco.kitkat.gravitybox.BatteryInfoManager.BatteryData;
+import com.ceco.kitkat.gravitybox.BatteryInfoManager.BatteryStatusListener;
 import com.ceco.kitkat.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.kitkat.gravitybox.StatusBarIconManager.IconManagerListener;
 
