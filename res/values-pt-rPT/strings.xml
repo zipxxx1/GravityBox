@@ -536,7 +536,7 @@
     <string name="pref_cat_lockscreen_ring_settings_title">Definições do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_enable_title">Ativar alvos do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Ativação global dos alvos do anel de desbloqueio</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Aplicação %s</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Alvo número %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Desvio vertical do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Desvio horizontal do anel de desbloqueio</string>
 
@@ -575,7 +575,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">Substituir comportamento padrão dos painéis</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Permite substituir o comportamento padrão dos painéis selecionados ao tocar / manter pressionado (necessário reiniciar)</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Permite substituir o comportamento padrão dos painéis selecionados ao tocar / manter pressionado e adiciona suporte para a função \'Ocultar ao tocar\' (necessário reiniciar)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Modo de Rede por cartão SIM</string>
@@ -904,5 +904,27 @@
 
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">Utilizar modos de rede CDMA</string>
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Comutar rotação automática</string>
+    <string name="hwkey_action_auto_rotation_enabled">Rotação automática ativada</string>
+    <string name="hwkey_action_auto_rotation_disabled">Rotação automática desativada</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Permitir qualquer widget</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Permite a colocação de qualquer tipo de widget no ecrã de bloqueio, mesmo aqueles que normalmente só podem ser utilizados no inicializador</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Mostrar Menu Desligar</string>
+    <string name="hwkey_action_expand_notifications">Expandir painel de notificações</string>
+    <string name="hwkey_action_expand_quicksettings">Expandir painel de definições rápidas</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Alvos do anel de navegação</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Ativação global dos alvos do anel de navegação (necessário reiniciar)</string>
+    <string name="pref_navbar_ring_target_title">Alvo número %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Ações GravityBox</string>
 
 </resources>
