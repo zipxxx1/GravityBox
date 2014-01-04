@@ -929,4 +929,9 @@
     <string name="pref_lockscreen_allow_any_widget_title">Autoriser tous les widgets</string>
     <string name="pref_lockscreen_allow_any_widget_summary">Autorise tous les widgets qui ne sont habituellement utilisés que dans le lanceur</string>
 
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Afficher le menu d\'extinction</string>
+    <string name="hwkey_action_expand_notifications">Développer le panneau de notifications</string>
+    <string name="hwkey_action_expand_quicksettings">Développer le panneau Paramètres Rapides</string>
+
 </resources>
