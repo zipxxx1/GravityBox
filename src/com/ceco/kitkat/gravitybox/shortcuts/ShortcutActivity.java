@@ -80,6 +80,8 @@ public class ShortcutActivity extends ListActivity {
             ShowPowerMenuShortcut.launchAction(mContext, intent);
         } else if (action.equals(ExpandNotificationsShortcut.ACTION)) {
             ExpandNotificationsShortcut.launchAction(mContext, intent);
+        } else if (action.equals(ExpandQuicksettingsShortcut.ACTION)) {
+            ExpandQuicksettingsShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -98,6 +100,7 @@ public class ShortcutActivity extends ListActivity {
         ArrayList<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShowPowerMenuShortcut(mContext));
         list.add(new ExpandNotificationsShortcut(mContext));
+        list.add(new ExpandQuicksettingsShortcut(mContext));
 
         mListAdapter = new IconListAdapter(mContext, list);
         setListAdapter(mListAdapter);
