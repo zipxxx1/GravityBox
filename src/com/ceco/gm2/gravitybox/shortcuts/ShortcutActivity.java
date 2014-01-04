@@ -25,6 +25,7 @@ import com.ceco.gm2.gravitybox.shortcuts.AShortcut.CreateShortcutListener;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -102,7 +103,8 @@ public class ShortcutActivity extends ListActivity {
         ArrayList<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShowPowerMenuShortcut(mContext));
         list.add(new ExpandNotificationsShortcut(mContext));
-        list.add(new ExpandQuicksettingsShortcut(mContext));
+        if (Build.VERSION.SDK_INT > 16)
+            list.add(new ExpandQuicksettingsShortcut(mContext));
         list.add(new ExpandedDesktopShortcut(mContext));
 
         mListAdapter = new IconListAdapter(mContext, list);
