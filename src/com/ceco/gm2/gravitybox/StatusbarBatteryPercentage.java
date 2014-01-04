@@ -26,17 +26,21 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.widget.TextView;
 
 public class StatusbarBatteryPercentage implements IconManagerListener, BatteryStatusListener {
     private TextView mPercentage;
     private int mDefaultColor;
     private int mIconColor;
+    private String mPercentSign;
+    private BatteryData mBatteryData;
     private ValueAnimator mChargeAnim;
 
     public StatusbarBatteryPercentage(TextView clockView) {
         mPercentage = clockView;
         mDefaultColor = mIconColor = mPercentage.getCurrentTextColor();
+        mPercentSign = "";
     }
 
     private boolean startChargingAnimation() {
@@ -101,6 +105,31 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
         }
     }
 
+    public void setTextSize(int size) {
+        mPercentage.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
+    }
+
+    public void setPercentSign(String percentSign) {
+        mPercentSign = percentSign;
+        update();
+    }
+
+    public void update() {
+        if (mBatteryData == null) return;
+
+        mPercentage.setText(mBatteryData.level + mPercentSign);
+
+        if (mBatteryData.charging && mBatteryData.level < 100) {
+            startChargingAnimation();
+        } else {
+            stopChargingAnimation();
+        }
+    }
+
+    public void setVisibility(int visibility) {
+        mPercentage.setVisibility(visibility);
+    }
+
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
@@ -120,10 +149,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
 
     @Override
     public void onBatteryStatusChanged(BatteryData batteryData) {
-        if (batteryData.charging && batteryData.level < 100) {
-            startChargingAnimation();
-        } else {
-            stopChargingAnimation();
-        }
+        mBatteryData = batteryData;
+        update();
     }
 }
