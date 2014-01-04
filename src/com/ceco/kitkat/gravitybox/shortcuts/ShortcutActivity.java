@@ -115,7 +115,9 @@ public class ShortcutActivity extends ListActivity {
         list.add(new ExpandedDesktopShortcut(mContext));
         list.add(new ScreenshotShortcut(mContext));
         list.add(new ScreenrecordShortcut(mContext));
-        list.add(new TorchShortcut(mContext));
+        if (Utils.hasFlash(mContext)) {
+            list.add(new TorchShortcut(mContext));
+        }
         if (!Utils.isWifiOnly(mContext)) {
             list.add(new NetworkModeShortcut(mContext));
         }
