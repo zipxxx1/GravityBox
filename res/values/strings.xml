@@ -893,4 +893,7 @@
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">GravityBox Actions</string>
 
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Switch network mode</string>
+
 </resources>

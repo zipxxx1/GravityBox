@@ -18,6 +18,7 @@ package com.ceco.kitkat.gravitybox.shortcuts;
 import java.util.ArrayList;
 
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.Utils;
 import com.ceco.kitkat.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.kitkat.gravitybox.adapters.IconListAdapter;
 import com.ceco.kitkat.gravitybox.shortcuts.AShortcut.CreateShortcutListener;
@@ -43,7 +44,7 @@ public class ShortcutActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mContext = getApplicationContext();
+        mContext = this;
         onNewIntent(getIntent());
     }
 
@@ -90,6 +91,8 @@ public class ShortcutActivity extends ListActivity {
             ScreenrecordShortcut.launchAction(mContext, intent);
         } else if (action.equals(TorchShortcut.ACTION)) {
             TorchShortcut.launchAction(mContext, intent);
+        } else if (action.equals(NetworkModeShortcut.ACTION)) {
+            NetworkModeShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -113,6 +116,9 @@ public class ShortcutActivity extends ListActivity {
         list.add(new ScreenshotShortcut(mContext));
         list.add(new ScreenrecordShortcut(mContext));
         list.add(new TorchShortcut(mContext));
+        if (!Utils.isWifiOnly(mContext)) {
+            list.add(new NetworkModeShortcut(mContext));
+        }
 
         mListAdapter = new IconListAdapter(mContext, list);
         setListAdapter(mListAdapter);
