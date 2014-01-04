@@ -30,4 +30,17 @@
         android:drawSelectorOnTop="false"
         android:fastScrollEnabled="true" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/background_dark" />
+
+    <Button
+        style="?android:attr/buttonBarButtonStyle"
+        android:id="@+id/btnCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@android:string/cancel" />
+
 </LinearLayout>
