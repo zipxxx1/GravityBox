@@ -536,7 +536,7 @@
     <string name="pref_cat_lockscreen_ring_settings_title">Ustawienia Pierścienia Odblokowania</string>
     <string name="pref_lockscreen_ring_targets_enable_title">Włącz Cele Ekranu Blokady</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Główny wyłącznik Celów Ekranu Blokady</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Aplikacja docelowa %s</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Cel pierścienia %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Pionowe przesunięcie pierścienia</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Poziome przesunięcie pierścienia</string>
 
@@ -919,5 +919,8 @@
     <string name="pref_cat_navbar_ring_targets_title">Cele pierścienia nawigacji</string>
     <string name="pref_navbar_ring_targets_enable_summary">Główny wyłącznik celów pierścienia nawigacji (wymagany restart)</string>
     <string name="pref_navbar_ring_target_title">Cel pierścienia %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Akcje GravityBox</string>
 
 </resources>
