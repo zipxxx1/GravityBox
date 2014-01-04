@@ -17,10 +17,10 @@ package com.ceco.gm2.gravitybox.shortcuts;
 
 import java.util.ArrayList;
 
-import com.ceco.gm2.gravitybox.shortcuts.AShortcut.CreateShortcutListener;
 import com.ceco.gm2.gravitybox.R;
 import com.ceco.gm2.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.gm2.gravitybox.adapters.IconListAdapter;
+import com.ceco.gm2.gravitybox.shortcuts.AShortcut.CreateShortcutListener;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -38,7 +38,7 @@ public class ShortcutActivity extends ListActivity {
     private Context mContext;
     private IconListAdapter mListAdapter;
     private Button mBtnCancel;
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +80,8 @@ public class ShortcutActivity extends ListActivity {
             ShowPowerMenuShortcut.launchAction(mContext, intent);
         } else if (action.equals(ExpandNotificationsShortcut.ACTION)) {
             ExpandNotificationsShortcut.launchAction(mContext, intent);
+        } else if (action.equals(ExpandQuicksettingsShortcut.ACTION)) {
+            ExpandQuicksettingsShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -98,6 +100,7 @@ public class ShortcutActivity extends ListActivity {
         ArrayList<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShowPowerMenuShortcut(mContext));
         list.add(new ExpandNotificationsShortcut(mContext));
+        list.add(new ExpandQuicksettingsShortcut(mContext));
 
         mListAdapter = new IconListAdapter(mContext, list);
         setListAdapter(mListAdapter);
