@@ -755,5 +755,123 @@
     <string name="ringer_mode_vibrate">震動</string>
     <string name="ringer_mode_sound">聲音</string>
     <string name="ringer_mode_sound_vibrate">聲音與震動</string>
+    
+     <!-- Screen recording -->
+    <string name="screenrecord_notif_ticker">螢幕已被錄製</string>
+    <string name="screenrecord_notif_title">正在錄製螢幕中</string>
+    <string name="screenrecord_notif_stop">停止</string>
+    <string name="screenrecord_notif_pointer">切換指標</string>
+    <string name="screenrecord_toast_error">無法錄製螢幕</string>
+    <string name="screenrecord_toast_processing">無法開始新的錄製，前一個錄製正在處理中</string>
+    <string name="screenrecord_toast_saved">螢幕錄製已儲存至 %s</string>
+    <string name="screenrecord_toast_save_error">無法將螢幕錄製輸出成檔案</string>
+    <string name="action_screenrecord">螢幕錄製</string>
+    <string name="pref_powermenu_screenrecord_title">電源選單顯示螢幕錄製</string>
+
+    <!-- Show dialpad automatically -->
+    <string name="pref_dialer_show_dialpad_title">自動顯示撥號鍵盤</string>
+    <string name="pref_dialer_show_dialpad_summary">當開啟撥號程式時自動開啟撥號鍵盤</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">系統預設</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">淡出</string>
+
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">啟動器模組</string>
+    <string name="pref_cat_launcher_tweaks_summary">僅套用於原生啟動器與 Google Experience 啟動器</string>
+    <string name="pref_cat_launcher_desktop_grid_title">桌面網格</string>
+    <string name="pref_launcher_desktop_grid_info_title">預設數值將有可能導致小工具版面發生崩潰，請使用其他數值，請謹慎使用(需要重新啟動).</string>
+    <string name="pref_launcher_desktop_grid_rows_title">行數</string>
+    <string name="pref_launcher_desktop_grid_cols_title">列數</string>
+    <string name="desktop_grid_default">預設</string>
+
+    <!-- HW Key Acctions: toggle screen recording -->
+    <string name="hwkey_action_screen_recording">切換螢幕錄製</string>
+
+    <!-- Full screen caller photo modes -->
+    <string name="fullscreen_caller_disabled">停用</string>
+    <string name="fullscreen_caller_partial">局部</string>
+    <string name="fullscreen_caller_full">全螢幕</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">電池電量百分比文字</string>
+    <string name="battery_percent_text_size_title">電池電量百分比文字大小</string>
+    <string name="battery_percent_text_size_normal">正常</string>
+    <string name="battery_percent_text_size_smaller">較小</string>
+    <string name="battery_percent_text_size_even_smaller">更小</string>
+    <string name="battery_percent_text_size_smallest">最小</string>
+    <string name="battery_percent_text_style_title">電池電量百分比文字風格</string>
+    <string name="battery_percent_text_style_default">預設</string>
+    <string name="battery_percent_text_style_numbers_only">僅有數字 (沒有百分比符號)</string>
+
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">電池設定</string>
+
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">方向控制鍵</string>
+    <string name="pref_navbar_cursor_control_summary">在海苔條上與鍵盤上啟用方向控制鍵</string>
+    
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">音量鍵喚醒</string>
+    <string name="volume_rocker_wake_default">系統預設</string>
+    <string name="volume_rocker_wake_enabled">啟用</string>
+    <string name="volume_rocker_wake_disabled">停用</string>
+
+   <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">要求重新啟動確認</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">隱藏在變更</string>
+    <string name="pref_qs_hide_on_change_summary">瓷貼單點選，狀態列自動發生崩潰，適用於 GravityBox 所推出的瓷貼與原生瓷貼.</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">電源選單</string>
+    <string name="pref_cat_power_other_title">其他</string>
+
+     <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">允許在鎖定螢幕上</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">閒置模式</string>
+    <string name="inactivity_mode_default">預設</string>
+    <string name="inactivity_mode_hide">在閒置模式中隱藏</string>
+    <string name="inactivity_mode_summary">顯示摘要並且隱藏在閒置模式中</string>
+
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">自訂按鍵設定</string>
+    <string name="pref_navbar_custom_key_enable_title">啟用自訂按鍵</string>
+
+    <!-- Signal cluster settings -->
+    <string name="pref_cat_signal_cluster_title">訊號指示符設定</string>
+    <string name="pref_signal_cluster_connection_state_title">啟用連接狀態</string>
+    <string name="pref_signal_cluster_connection_state_summary">在手機上顯示 Wi-Fi 圖示的部分/完全連接狀態 (需要重新啟動)</string>
+    <string name="pref_signal_cluster_data_activity_title">啟用資料連結活動</string>
+    <string name="pref_signal_cluster_data_activity_summary">在手機和 Wi-Fi 圖示上顯示資料連結活動 (需要重新啟動)</string>
+
+  <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">使用 CDMA 網路模式</string>
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">切換自動旋轉</string>
+    <string name="hwkey_action_auto_rotation_enabled">自動旋轉已啟用</string>
+    <string name="hwkey_action_auto_rotation_disabled">自動旋轉已停用</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">允許任小何工具</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">允許鎖定畫面桌面小工具，僅可使用於一般桌面啟動器</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">顯示電源選單</string>
+    <string name="hwkey_action_expand_notifications">展開通知面板</string>
+    <string name="hwkey_action_expand_quicksettings">展開 QuickSettings 面板</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">導航環目標</string>
+    <string name="pref_navbar_ring_targets_enable_summary">滑動導航環目標總管 (需要重新啟動)</string>
+    <string name="pref_navbar_ring_target_title">導航環目標 %d</string>
+    
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">GravityBox 操作</string>
    
 </resources>
