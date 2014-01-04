@@ -60,7 +60,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-class ScreenRecordingService extends Service {
+public class ScreenRecordingService extends Service {
     private static final String TAG = "GB:ScreenRecordingService";
 
     private static final int SCREENRECORD_NOTIFICATION_ID = 3;
