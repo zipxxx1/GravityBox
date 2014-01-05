@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -39,8 +40,11 @@ public class ConnectivityServiceWrapper {
     public static final String ACTION_TOGGLE_WIFI = "gravitybox.intent.action.TOGGLE_WIFI";
     public static final String ACTION_TOGGLE_BLUETOOTH = "gravitybox.intent.action.TOGGLE_BLUETOOTH";
     public static final String ACTION_TOGGLE_WIFI_AP = "gravitybox.intent.action.TOGGLE_WIFI_AP";
+    public static final String ACTION_SET_LOCATION_MODE = "gravitybox.intent.action.SET_LOCATION_MODE";
+    public static final String EXTRA_LOCATION_MODE = "locationMode";
     public static final String EXTRA_ENABLED = "enabled";
 
+    private static Context mContext;
     private static Object mConnectivityService;
     private static WifiManagerWrapper mWifiManager;
 
@@ -64,6 +68,10 @@ public class ConnectivityServiceWrapper {
                 toggleBluetooth();
             } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI_AP)) {
                 toggleWiFiAp();
+            } else if (intent.getAction().equals(ACTION_SET_LOCATION_MODE) &&
+                    intent.hasExtra(EXTRA_LOCATION_MODE)) {
+                setLocationMode(intent.getIntExtra(EXTRA_LOCATION_MODE,
+                        Settings.Secure.LOCATION_MODE_BATTERY_SAVING));
             }
         }
     };
@@ -86,6 +94,7 @@ public class ConnectivityServiceWrapper {
                     }
                     
                     if (context != null) {
+                        mContext = context;
                         mWifiManager = new WifiManagerWrapper(context);
 
                         IntentFilter intentFilter = new IntentFilter();
@@ -94,6 +103,7 @@ public class ConnectivityServiceWrapper {
                         intentFilter.addAction(ACTION_TOGGLE_WIFI);
                         intentFilter.addAction(ACTION_TOGGLE_BLUETOOTH);
                         intentFilter.addAction(ACTION_TOGGLE_WIFI_AP);
+                        intentFilter.addAction(ACTION_SET_LOCATION_MODE);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
@@ -150,6 +160,16 @@ public class ConnectivityServiceWrapper {
             } else {
                 btAdapter.enable();
             }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void setLocationMode(int mode) {
+        if (mContext == null) return;
+        try {
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.LOCATION_MODE, mode);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
