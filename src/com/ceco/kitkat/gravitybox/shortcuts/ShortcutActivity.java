@@ -95,6 +95,8 @@ public class ShortcutActivity extends ListActivity {
             NetworkModeShortcut.launchAction(mContext, intent);
         } else if (action.equals(RecentAppsShortcut.ACTION)) {
             RecentAppsShortcut.launchAction(mContext, intent);
+        } else if (action.equals(AppLauncherShortcut.ACTION)) {
+            AppLauncherShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -124,6 +126,7 @@ public class ShortcutActivity extends ListActivity {
             list.add(new NetworkModeShortcut(mContext));
         }
         list.add(new RecentAppsShortcut(mContext));
+        list.add(new AppLauncherShortcut(mContext));
 
         mListAdapter = new IconListAdapter(mContext, list);
         setListAdapter(mListAdapter);
