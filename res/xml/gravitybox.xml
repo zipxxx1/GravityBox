@@ -741,6 +741,14 @@
 
                 <!-- Ring target prefs will be generated dynamically at runtime -->
 
+                <ListPreference
+                    android:key="pref_navbar_ring_targets_bg_style"
+                    android:title="@string/pref_navbar_ring_targets_bg_style_title"
+                    android:entries="@array/nrt_bg_style_entries"
+                    android:entryValues="@array/nrt_bg_style_values"
+                    android:defaultValue="NONE"
+                    android:dependency="pref_navbar_ring_targets_enable" />
+
             </PreferenceScreen>
 
         </PreferenceCategory>

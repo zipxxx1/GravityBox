@@ -918,4 +918,11 @@
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">Toggle NFC</string>
 
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Target background style</string>
+    <string name="nrt_bg_style_none">None</string>
+    <string name="nrt_bg_style_light">Light</string>
+    <string name="nrt_bg_style_dark">Dark</string>
+    <string name="nrt_bg_style_black">Black</string>
+
 </resources>

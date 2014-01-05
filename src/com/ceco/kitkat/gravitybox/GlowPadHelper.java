@@ -62,8 +62,15 @@ public class GlowPadHelper {
     }
 
     public enum BgStyle {
-        NONE,
-        CIRCLE
+        NONE("NONE"),
+        LIGHT("LIGHT"),
+        DARK("DARK"),
+        BLACK("BLACK");
+
+        private String mValue;
+        BgStyle(String value) {
+            mValue = value;
+        }
     }
 
     public static AppInfo getAppInfo(Context context, String app) {
@@ -124,16 +131,20 @@ public class GlowPadHelper {
         bitmap = Bitmap.createScaledBitmap(bitmap, sizePx, sizePx, true);
 
         switch (bgStyle) {
-            case CIRCLE:
+            case LIGHT:
+            case DARK:
+            case BLACK:
                 int bitmapSize = Math.max(bitmap.getWidth(), bitmap.getHeight());
-                int marginSize = Math.round(bitmapSize / 2.2f);
+                int marginSize = Math.round(bitmapSize / 2.4f);
                 int size = bitmapSize + marginSize;
 
                 Bitmap b = Bitmap.createBitmap(size, size, Config.ARGB_8888);
                 Canvas canvas = new Canvas(b);
                 final Paint paint = new Paint();
                 paint.setAntiAlias(true);
-                paint.setColor(Color.argb(230, 255, 255, 255));
+                paint.setColor(bgStyle == BgStyle.LIGHT ?
+                        Color.argb(230, 255, 255, 255) : bgStyle == BgStyle.DARK ?
+                            Color.argb(230, 60, 60, 60) : Color.argb(230, 0, 0, 0));
                 paint.setFilterBitmap(true);
                 canvas.drawCircle(size/2, size/2, size/2, paint);
                 canvas.drawBitmap(bitmap, marginSize/2f, marginSize/2f, null);
