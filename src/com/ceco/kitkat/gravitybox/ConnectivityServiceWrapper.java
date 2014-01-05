@@ -38,6 +38,7 @@ public class ConnectivityServiceWrapper {
             "gravitybox.intent.action.TOGGLE_MOBILE_DATA";
     public static final String ACTION_TOGGLE_WIFI = "gravitybox.intent.action.TOGGLE_WIFI";
     public static final String ACTION_TOGGLE_BLUETOOTH = "gravitybox.intent.action.TOGGLE_BLUETOOTH";
+    public static final String ACTION_TOGGLE_WIFI_AP = "gravitybox.intent.action.TOGGLE_WIFI_AP";
     public static final String EXTRA_ENABLED = "enabled";
 
     private static Object mConnectivityService;
@@ -61,6 +62,8 @@ public class ConnectivityServiceWrapper {
                 toggleWiFi();
             } else if (intent.getAction().equals(ACTION_TOGGLE_BLUETOOTH)) {
                 toggleBluetooth();
+            } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI_AP)) {
+                toggleWiFiAp();
             }
         }
     };
@@ -90,6 +93,7 @@ public class ConnectivityServiceWrapper {
                         intentFilter.addAction(ACTION_TOGGLE_MOBILE_DATA);
                         intentFilter.addAction(ACTION_TOGGLE_WIFI);
                         intentFilter.addAction(ACTION_TOGGLE_BLUETOOTH);
+                        intentFilter.addAction(ACTION_TOGGLE_WIFI_AP);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
@@ -124,6 +128,15 @@ public class ConnectivityServiceWrapper {
         if (mWifiManager == null) return;
         try {
             mWifiManager.toggleWifiEnabled();
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void toggleWiFiAp() {
+        if (mWifiManager == null) return;
+        try {
+            mWifiManager.toggleWifiApEnabled();
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

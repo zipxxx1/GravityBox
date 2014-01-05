@@ -107,6 +107,8 @@ public class ShortcutActivity extends ListActivity {
             WifiShortcut.launchAction(mContext, intent);
         } else if (action.equals(BluetoothShortcut.ACTION)) {
             BluetoothShortcut.launchAction(mContext, intent);
+        } else if (action.equals(WifiApShortcut.ACTION)) {
+            WifiApShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -133,6 +135,7 @@ public class ShortcutActivity extends ListActivity {
             list.add(new TorchShortcut(mContext));
         }
         list.add(new WifiShortcut(mContext));
+        list.add(new WifiApShortcut(mContext));
         if (!Utils.isWifiOnly(mContext)) {
             list.add(new MobileDataShortcut(mContext));
             list.add(new NetworkModeShortcut(mContext));
