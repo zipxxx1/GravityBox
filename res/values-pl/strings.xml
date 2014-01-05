@@ -870,4 +870,19 @@
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">Akcje GravityBox</string>
 
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Przełącznik trybu sieci</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Przełącznik transmisji danych</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Przełącznik WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Przełącznik Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Przełącznik WiFi AP</string>
+
 </resources>
