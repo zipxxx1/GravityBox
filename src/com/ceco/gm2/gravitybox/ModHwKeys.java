@@ -75,6 +75,7 @@ public class ModHwKeys {
     public static final String ACTION_TOGGLE_TORCH = "gravitybox.intent.action.TOGGLE_TORCH";
     public static final String ACTION_SHOW_RECENT_APPS = "gravitybox.intent.action.SHOW_RECENT_APPS";
     public static final String ACTION_SHOW_APP_LAUCNHER = "gravitybox.intent.action.SHOW_APP_LAUNCHER";
+    public static final String ACTION_TOGGLE_ROTATION_LOCK = "gravitybox.intent.action.TOGGLE_ROTATION_LOCK";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
 
@@ -276,6 +277,8 @@ public class ModHwKeys {
                 toggleRecentApps();
             } else if (action.equals(ACTION_SHOW_APP_LAUCNHER)) {
                 showAppLauncher();
+            } else if (action.equals(ACTION_TOGGLE_ROTATION_LOCK)) {
+                toggleAutoRotation();
             }
         }
     };
@@ -723,6 +726,7 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_TOGGLE_TORCH);
             intentFilter.addAction(ACTION_SHOW_RECENT_APPS);
             intentFilter.addAction(ACTION_SHOW_APP_LAUCNHER);
+            intentFilter.addAction(ACTION_TOGGLE_ROTATION_LOCK);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
