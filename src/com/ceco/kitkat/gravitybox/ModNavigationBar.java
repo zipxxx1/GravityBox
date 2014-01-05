@@ -17,6 +17,7 @@ package com.ceco.kitkat.gravitybox;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -457,11 +458,26 @@ public class ModNavigationBar {
                 XposedHelpers.findAndHookMethod(searchPanelViewClass, "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        prefs.reload();
                         mGlowPadView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowPadView");
                         setRingTargets();
                     }
                 });
-    
+
+                XposedHelpers.findAndHookMethod(navbarViewClass, "reorient", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (DEBUG) log("Navigation bar view reorient");
+                        if (mGlowPadView != null) {
+                            boolean vertical = XposedHelpers.getBooleanField(param.thisObject, "mVertical");
+                            XposedHelpers.setAdditionalInstanceField(mGlowPadView, "mGbVertical", vertical);
+                            if (vertical) {
+                                rotateRingTargets();
+                            }
+                        }
+                    }
+                });
+
                 XposedHelpers.findAndHookMethod(glowPadTriggerListenerClass, "onTrigger",
                         View.class, int.class, new XC_MethodHook() {
                     @Override
@@ -785,10 +801,14 @@ public class ModNavigationBar {
             final ArrayList<String> newDirections = new ArrayList<String>();
             final int iconSizeDp = mRingTargetsBgStyle == BgStyle.NONE ? 50 : 45;
 
-            newTargets.add(GlowPadHelper.createTargetDrawable(res, null));
-            newDescriptions.add(null);
-            newDirections.add(null);
-            for (int i = 0; i < 11; i++) {
+            final int dummySlotCount = isGlowPadVertical() ? 4 : 1;
+            for (int i = 0; i < dummySlotCount; i++) {
+                newTargets.add(GlowPadHelper.createTargetDrawable(res, null));
+                newDescriptions.add(null);
+                newDirections.add(null);
+            }
+
+            for (int i = 0; i < (12 - dummySlotCount); i++) {
                 if (i < GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGET.size()) {
                     String app = mPrefs.getString(
                             GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGET.get(i), null);
@@ -824,6 +844,9 @@ public class ModNavigationBar {
                     (ArrayList<String>)XposedHelpers.getObjectField(mGlowPadView, "mTargetDescriptions");
             final int iconSizeDp = mRingTargetsBgStyle == BgStyle.NONE ? 50 : 45;
             index++; // take dummy drawable at position 0 into account
+            if (isGlowPadVertical()) {
+                index += 3;
+            }
 
             AppInfo ai = GlowPadHelper.getAppInfo(context, app, iconSizeDp, mRingTargetsBgStyle);
             if (targets != null && targets.size() > index) {
@@ -835,6 +858,26 @@ public class ModNavigationBar {
             }
             mGlowPadView.requestLayout();
         } catch(Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static boolean isGlowPadVertical() {
+        Boolean vertical = (Boolean) XposedHelpers.getAdditionalInstanceField(mGlowPadView, "mGbVertical");
+        return (vertical != null && vertical.booleanValue());
+    }
+
+    private static void rotateRingTargets() {
+        try {
+            final ArrayList<Object> targets = 
+                    (ArrayList<Object>) XposedHelpers.getObjectField(mGlowPadView, "mTargetDrawables");
+            final ArrayList<String> descs = 
+                    (ArrayList<String>)XposedHelpers.getObjectField(mGlowPadView, "mTargetDescriptions");
+
+            if (targets != null) Collections.rotate(targets, 3);
+            if (descs != null) Collections.rotate(descs, 3);
+            mGlowPadView.requestLayout();
+        } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
