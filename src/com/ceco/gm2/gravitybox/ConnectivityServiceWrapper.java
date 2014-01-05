@@ -15,6 +15,7 @@
 
 package com.ceco.gm2.gravitybox;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +37,7 @@ public class ConnectivityServiceWrapper {
     public static final String ACTION_TOGGLE_MOBILE_DATA = 
             "gravitybox.intent.action.TOGGLE_MOBILE_DATA";
     public static final String ACTION_TOGGLE_WIFI = "gravitybox.intent.action.TOGGLE_WIFI";
+    public static final String ACTION_TOGGLE_BLUETOOTH = "gravitybox.intent.action.TOGGLE_BLUETOOTH";
     public static final String EXTRA_ENABLED = "enabled";
 
     private static Object mConnectivityService;
@@ -57,6 +59,8 @@ public class ConnectivityServiceWrapper {
                 toggleMobileData();
             } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI)) {
                 toggleWiFi();
+            } else if (intent.getAction().equals(ACTION_TOGGLE_BLUETOOTH)) {
+                toggleBluetooth();
             }
         }
     };
@@ -85,6 +89,7 @@ public class ConnectivityServiceWrapper {
                         intentFilter.addAction(ACTION_SET_MOBILE_DATA_ENABLED);
                         intentFilter.addAction(ACTION_TOGGLE_MOBILE_DATA);
                         intentFilter.addAction(ACTION_TOGGLE_WIFI);
+                        intentFilter.addAction(ACTION_TOGGLE_BLUETOOTH);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
@@ -119,6 +124,19 @@ public class ConnectivityServiceWrapper {
         if (mWifiManager == null) return;
         try {
             mWifiManager.toggleWifiEnabled();
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void toggleBluetooth() {
+        try {
+            BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+            if (btAdapter.isEnabled()) {
+                btAdapter.disable();
+            } else {
+                btAdapter.enable();
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

@@ -951,4 +951,7 @@
     <!-- Toggle WiFi shortcut -->
     <string name="shortcut_wifi">Toggle WiFi</string>
 
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Toggle Bluetooth</string>
+
 </resources>
