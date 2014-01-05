@@ -899,4 +899,7 @@
     <!-- Toggle mobile data shortcut -->
     <string name="shortcut_mobile_data">Toggle mobile data</string>
 
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Toggle WiFi</string>
+
 </resources>

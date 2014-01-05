@@ -103,6 +103,8 @@ public class ShortcutActivity extends ListActivity {
             SleepShortcut.launchAction(mContext, intent);
         } else if (action.equals(MobileDataShortcut.ACTION)) {
             MobileDataShortcut.launchAction(mContext, intent);
+        } else if (action.equals(WifiShortcut.ACTION)) {
+            WifiShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -128,6 +130,7 @@ public class ShortcutActivity extends ListActivity {
         if (Utils.hasFlash(mContext)) {
             list.add(new TorchShortcut(mContext));
         }
+        list.add(new WifiShortcut(mContext));
         if (!Utils.isWifiOnly(mContext)) {
             list.add(new MobileDataShortcut(mContext));
             list.add(new NetworkModeShortcut(mContext));
