@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+* Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.nfc.NfcAdapter;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -39,8 +40,15 @@ public class ConnectivityServiceWrapper {
     public static final String ACTION_TOGGLE_WIFI = "gravitybox.intent.action.TOGGLE_WIFI";
     public static final String ACTION_TOGGLE_BLUETOOTH = "gravitybox.intent.action.TOGGLE_BLUETOOTH";
     public static final String ACTION_TOGGLE_WIFI_AP = "gravitybox.intent.action.TOGGLE_WIFI_AP";
+    public static final String ACTION_TOGGLE_NFC = "gravitybox.intent.action.TOGGLE_NFC";
     public static final String EXTRA_ENABLED = "enabled";
 
+    private static final int NFC_STATE_OFF = 1;
+    private static final int NFC_STATE_TURNING_ON = 2;
+    private static final int NFC_STATE_ON = 3;
+    private static final int NFC_STATE_TURNING_OFF = 4;
+
+    private static Context mContext;
     private static Object mConnectivityService;
     private static WifiManagerWrapper mWifiManager;
 
@@ -64,6 +72,8 @@ public class ConnectivityServiceWrapper {
                 toggleBluetooth();
             } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI_AP)) {
                 toggleWiFiAp();
+            } else if (intent.getAction().equals(ACTION_TOGGLE_NFC)) {
+                toggleNfc();
             }
         }
     };
@@ -94,6 +104,7 @@ public class ConnectivityServiceWrapper {
                         intentFilter.addAction(ACTION_TOGGLE_WIFI);
                         intentFilter.addAction(ACTION_TOGGLE_BLUETOOTH);
                         intentFilter.addAction(ACTION_TOGGLE_WIFI_AP);
+                        intentFilter.addAction(ACTION_TOGGLE_NFC);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
@@ -149,6 +160,29 @@ public class ConnectivityServiceWrapper {
                 btAdapter.disable();
             } else {
                 btAdapter.enable();
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void toggleNfc() {
+        if (mContext == null) return;
+        try {
+            NfcAdapter adapter = (NfcAdapter) XposedHelpers.callStaticMethod(
+                    NfcAdapter.class, "getNfcAdapter", mContext);
+            if (adapter != null) {
+                int nfcState = (Integer) XposedHelpers.callMethod(adapter, "getAdapterState");
+                switch (nfcState) {
+                    case NFC_STATE_TURNING_ON:
+                    case NFC_STATE_ON:
+                        XposedHelpers.callMethod(adapter, "disable");
+                        break;
+                    case NFC_STATE_TURNING_OFF:
+                    case NFC_STATE_OFF:
+                        XposedHelpers.callMethod(adapter, "enable");
+                        break;
+                }
             }
         } catch (Throwable t) {
             XposedBridge.log(t);

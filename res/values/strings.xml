@@ -957,4 +957,7 @@
     <!-- Toggle WiFi AP shortcut -->
     <string name="shortcut_wifi_ap">Toggle WiFi AP</string>
 
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Toggle NFC</string>
+
 </resources>

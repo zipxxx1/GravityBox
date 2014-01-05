@@ -108,6 +108,8 @@ public class ShortcutActivity extends ListActivity {
             BluetoothShortcut.launchAction(mContext, intent);
         } else if (action.equals(WifiApShortcut.ACTION)) {
             WifiApShortcut.launchAction(mContext, intent);
+        } else if (action.equals(NfcShortcut.ACTION)) {
+            NfcShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -139,6 +141,8 @@ public class ShortcutActivity extends ListActivity {
             list.add(new MobileDataShortcut(mContext));
         }
         list.add(new BluetoothShortcut(mContext));
+        if (Utils.hasNfc(mContext))
+            list.add(new NfcShortcut(mContext));
         list.add(new RecentAppsShortcut(mContext));
         list.add(new AppLauncherShortcut(mContext));
         list.add(new RotationLockShortcut(mContext));
