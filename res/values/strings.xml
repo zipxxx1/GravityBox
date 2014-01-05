@@ -915,4 +915,7 @@
     <string name="location_mode_device_only">Device only</string>
     <string name="location_mode_off">Location off</string>
 
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Toggle NFC</string>
+
 </resources>
