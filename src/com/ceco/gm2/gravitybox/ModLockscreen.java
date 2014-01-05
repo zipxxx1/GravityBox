@@ -91,7 +91,9 @@ public class ModLockscreen {
             "com.android.deskclock",
             "com.dvtonder.chronus",
             "net.nurik.roman.dashclock",
-            "com.roymam.android.notificationswidget"
+            "com.roymam.android.notificationswidget",
+            "org.zooper.zwfree",
+            "com.devexpert.weather"
     ));
 
     private static XSharedPreferences mPrefs;
