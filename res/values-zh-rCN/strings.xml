@@ -894,6 +894,15 @@
     <string name="shortcut_activity_title">GravityBox 动作</string>
 
     <!-- Network mode shortcut -->
-    <string name="shortcut_network_mode">切换网络模式</string>
+    <string name="shortcut_network_mode">交换网络模式</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">切换移动数据</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">切换 WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">切换蓝牙</string>
 
 </resources>
