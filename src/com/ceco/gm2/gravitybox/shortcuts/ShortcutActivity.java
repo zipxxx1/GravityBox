@@ -92,6 +92,8 @@ public class ShortcutActivity extends ListActivity {
             TorchShortcut.launchAction(mContext, intent);
         } else if (action.equals(NetworkModeShortcut.ACTION)) {
             NetworkModeShortcut.launchAction(mContext, intent);
+        } else if (action.equals(RecentAppsShortcut.ACTION)) {
+            RecentAppsShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -118,6 +120,7 @@ public class ShortcutActivity extends ListActivity {
             list.add(new TorchShortcut(mContext));
         if (!Utils.isWifiOnly(mContext))
             list.add(new NetworkModeShortcut(mContext));
+        list.add(new RecentAppsShortcut(mContext));
 
         mListAdapter = new IconListAdapter(mContext, list);
         setListAdapter(mListAdapter);
