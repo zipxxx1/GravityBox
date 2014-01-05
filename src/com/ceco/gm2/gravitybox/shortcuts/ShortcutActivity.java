@@ -98,6 +98,8 @@ public class ShortcutActivity extends ListActivity {
             AppLauncherShortcut.launchAction(mContext, intent);
         } else if (action.equals(RotationLockShortcut.ACTION)) {
             RotationLockShortcut.launchAction(mContext, intent);
+        } else if (action.equals(SleepShortcut.ACTION)) {
+            SleepShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -127,6 +129,7 @@ public class ShortcutActivity extends ListActivity {
         list.add(new RecentAppsShortcut(mContext));
         list.add(new AppLauncherShortcut(mContext));
         list.add(new RotationLockShortcut(mContext));
+        list.add(new SleepShortcut(mContext));
 
         mListAdapter = new IconListAdapter(mContext, list);
         setListAdapter(mListAdapter);
