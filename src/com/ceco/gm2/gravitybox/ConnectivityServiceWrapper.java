@@ -35,9 +35,11 @@ public class ConnectivityServiceWrapper {
             "com.android.phone.intent.ACTION_DATA_TRAFFIC_SWITCH";
     public static final String ACTION_TOGGLE_MOBILE_DATA = 
             "gravitybox.intent.action.TOGGLE_MOBILE_DATA";
+    public static final String ACTION_TOGGLE_WIFI = "gravitybox.intent.action.TOGGLE_WIFI";
     public static final String EXTRA_ENABLED = "enabled";
 
     private static Object mConnectivityService;
+    private static WifiManagerWrapper mWifiManager;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -53,6 +55,8 @@ public class ConnectivityServiceWrapper {
                 setMobileDataEnabled(enabled);
             } else if (intent.getAction().equals(ACTION_TOGGLE_MOBILE_DATA)) {
                 toggleMobileData();
+            } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI)) {
+                toggleWiFi();
             }
         }
     };
@@ -75,9 +79,12 @@ public class ConnectivityServiceWrapper {
                     }
                     
                     if (context != null) {
+                        mWifiManager = new WifiManagerWrapper(context);
+
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(ACTION_SET_MOBILE_DATA_ENABLED);
                         intentFilter.addAction(ACTION_TOGGLE_MOBILE_DATA);
+                        intentFilter.addAction(ACTION_TOGGLE_WIFI);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
@@ -103,6 +110,15 @@ public class ConnectivityServiceWrapper {
             final boolean enabled = 
                     (Boolean) XposedHelpers.callMethod(mConnectivityService, "getMobileDataEnabled");
             setMobileDataEnabled(!enabled);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void toggleWiFi() {
+        if (mWifiManager == null) return;
+        try {
+            mWifiManager.toggleWifiEnabled();
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
