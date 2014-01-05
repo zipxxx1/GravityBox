@@ -500,7 +500,7 @@
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Cibles de l\'écran de déverrouillage</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Interrupteur général pour les cibles de l\'écran de déverrouillage</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Application cible %s</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Cible %s de l\'anneau</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Marge verticale anneau de déverrouillage</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Marge horizontale anneau de déverrouillage</string>
 
@@ -891,6 +891,9 @@
     <string name="pref_navbar_ring_target_title">Cible %d sur l\'anneau</string>
 
     <!-- Shortcut activity title -->
-    <string name="shortcut_activity_title">Les actions de GravityBox</string>
+    <string name="shortcut_activity_title">Actions de GravityBox</string>
 
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Commutateur de mode réseau</string>
+  
 </resources>
