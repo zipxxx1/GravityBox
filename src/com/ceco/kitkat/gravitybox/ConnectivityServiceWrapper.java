@@ -33,6 +33,8 @@ public class ConnectivityServiceWrapper {
             "gravitybox.intent.action.SET_MOBILE_DATA_ENABLED";
     public static final String ACTION_XPERIA_MOBILE_DATA_TOGGLE =
             "com.android.phone.intent.ACTION_DATA_TRAFFIC_SWITCH";
+    public static final String ACTION_TOGGLE_MOBILE_DATA = 
+            "gravitybox.intent.action.TOGGLE_MOBILE_DATA";
     public static final String EXTRA_ENABLED = "enabled";
 
     private static Object mConnectivityService;
@@ -49,6 +51,8 @@ public class ConnectivityServiceWrapper {
             if (intent.getAction().equals(ACTION_SET_MOBILE_DATA_ENABLED)) {
                 final boolean enabled = intent.getBooleanExtra(EXTRA_ENABLED, false);
                 setMobileDataEnabled(enabled);
+            } else if (intent.getAction().equals(ACTION_TOGGLE_MOBILE_DATA)) {
+                toggleMobileData();
             }
         }
     };
@@ -73,6 +77,7 @@ public class ConnectivityServiceWrapper {
                     if (context != null) {
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(ACTION_SET_MOBILE_DATA_ENABLED);
+                        intentFilter.addAction(ACTION_TOGGLE_MOBILE_DATA);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
@@ -87,6 +92,17 @@ public class ConnectivityServiceWrapper {
         try {
             XposedHelpers.callMethod(mConnectivityService, "setMobileDataEnabled", enabled);
             if (DEBUG) log("setMobileDataEnabled called");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void toggleMobileData() {
+        if (mConnectivityService == null) return;
+        try {
+            final boolean enabled = 
+                    (Boolean) XposedHelpers.callMethod(mConnectivityService, "getMobileDataEnabled");
+            setMobileDataEnabled(!enabled);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

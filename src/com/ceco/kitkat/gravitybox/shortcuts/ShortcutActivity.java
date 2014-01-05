@@ -101,6 +101,8 @@ public class ShortcutActivity extends ListActivity {
             RotationLockShortcut.launchAction(mContext, intent);
         } else if (action.equals(SleepShortcut.ACTION)) {
             SleepShortcut.launchAction(mContext, intent);
+        } else if (action.equals(MobileDataShortcut.ACTION)) {
+            MobileDataShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -127,6 +129,7 @@ public class ShortcutActivity extends ListActivity {
             list.add(new TorchShortcut(mContext));
         }
         if (!Utils.isWifiOnly(mContext)) {
+            list.add(new MobileDataShortcut(mContext));
             list.add(new NetworkModeShortcut(mContext));
         }
         list.add(new RecentAppsShortcut(mContext));

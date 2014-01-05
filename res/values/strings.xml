@@ -896,4 +896,7 @@
     <!-- Network mode shortcut -->
     <string name="shortcut_network_mode">Switch network mode</string>
 
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Toggle mobile data</string>
+
 </resources>
