@@ -895,5 +895,42 @@
 
     <!-- Network mode shortcut -->
     <string name="shortcut_network_mode">Commutateur de mode réseau</string>
-  
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Interrupteur données mobile</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Interrupteur WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Interrupteur Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Interrupteur Hotspot WiFi</string>
+
+    <!-- Location mode shortcut -->
+    <string name="shortcut_location_mode">Paramètrer le mode de localisation</string>
+    <string name="location_mode_high_accuracy">Haute précision</string>
+    <string name="location_mode_battery_saving">Économie de batterie</string>
+    <string name="location_mode_device_only">Appareil uniquement</string>
+    <string name="location_mode_off">Localisation désactivée</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Interrupteur NFC</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Style d\'arrière plan pour la cible</string>
+    <string name="nrt_bg_style_none">Aucun</string>
+    <string name="nrt_bg_style_light">Clair</string>
+    <string name="nrt_bg_style_dark">Sombre</string>
+    <string name="nrt_bg_style_black">Noir</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Ne rien faire</string>
+    <string name="smart_radio_action_summary">Commuter en %s</string>
+    <string name="pref_cat_smart_radio_title">Réseau intelligent</string>
+    <string name="pref_smart_radio_experimental_summary">EXPÉRIMENTAL ! Peut affecter la gestion manuelle du mode réseau</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Données mobile activées</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Données mobile désactivées</string>
+
 </resources>
