@@ -961,6 +961,9 @@
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">Toggle NFC</string>
 
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">Toggle GPS</string>
+
     <!-- Navigation bar ring targets background style -->
     <string name="pref_navbar_ring_targets_bg_style_title">Target background style</string>
     <string name="nrt_bg_style_none">None</string>

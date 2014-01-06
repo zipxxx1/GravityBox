@@ -110,6 +110,8 @@ public class ShortcutActivity extends ListActivity {
             WifiApShortcut.launchAction(mContext, intent);
         } else if (action.equals(NfcShortcut.ACTION)) {
             NfcShortcut.launchAction(mContext, intent);
+        } else if (action.equals(GpsShortcut.ACTION)) {
+            GpsShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -134,6 +136,8 @@ public class ShortcutActivity extends ListActivity {
         list.add(new ScreenshotShortcut(mContext));
         if (Utils.hasFlash(mContext))
             list.add(new TorchShortcut(mContext));
+        if (Utils.hasGPS(mContext))
+            list.add(new GpsShortcut(mContext));
         list.add(new WifiShortcut(mContext));
         list.add(new WifiApShortcut(mContext));
         if (!Utils.isWifiOnly(mContext)) {

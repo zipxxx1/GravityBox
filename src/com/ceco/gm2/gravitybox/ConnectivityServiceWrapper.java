@@ -20,7 +20,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.LocationManager;
 import android.nfc.NfcAdapter;
+import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -41,6 +43,7 @@ public class ConnectivityServiceWrapper {
     public static final String ACTION_TOGGLE_BLUETOOTH = "gravitybox.intent.action.TOGGLE_BLUETOOTH";
     public static final String ACTION_TOGGLE_WIFI_AP = "gravitybox.intent.action.TOGGLE_WIFI_AP";
     public static final String ACTION_TOGGLE_NFC = "gravitybox.intent.action.TOGGLE_NFC";
+    public static final String ACTION_TOGGLE_GPS = "gravitybox.intent.action.TOGGLE_GPS";
     public static final String EXTRA_ENABLED = "enabled";
 
     private static final int NFC_STATE_OFF = 1;
@@ -74,6 +77,8 @@ public class ConnectivityServiceWrapper {
                 toggleWiFiAp();
             } else if (intent.getAction().equals(ACTION_TOGGLE_NFC)) {
                 toggleNfc();
+            } else if (intent.getAction().equals(ACTION_TOGGLE_GPS)) {
+                toggleGps();
             }
         }
     };
@@ -96,6 +101,7 @@ public class ConnectivityServiceWrapper {
                     }
                     
                     if (context != null) {
+                        mContext = context;
                         mWifiManager = new WifiManagerWrapper(context);
 
                         IntentFilter intentFilter = new IntentFilter();
@@ -105,6 +111,7 @@ public class ConnectivityServiceWrapper {
                         intentFilter.addAction(ACTION_TOGGLE_BLUETOOTH);
                         intentFilter.addAction(ACTION_TOGGLE_WIFI_AP);
                         intentFilter.addAction(ACTION_TOGGLE_NFC);
+                        intentFilter.addAction(ACTION_TOGGLE_GPS);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
@@ -184,6 +191,18 @@ public class ConnectivityServiceWrapper {
                         break;
                 }
             }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void toggleGps() {
+        if (mContext == null) return;
+        try {
+            boolean mGpsEnabled = Settings.Secure.isLocationProviderEnabled(
+                    mContext.getContentResolver(), LocationManager.GPS_PROVIDER);
+            Settings.Secure.setLocationProviderEnabled(
+                    mContext.getContentResolver(), LocationManager.GPS_PROVIDER, !mGpsEnabled);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
