@@ -846,7 +846,7 @@
     <string name="pref_signal_cluster_connection_state_title">Ativar estado da ligação</string>
     <string name="pref_signal_cluster_connection_state_summary">Permite exibir o estado (parcial/total) da ligação nos indicadores de dados moóvel e WiFi (necessário reiniciar)</string>
     <string name="pref_signal_cluster_data_activity_title">Ativar atividade de dados</string>
-    <string name="pref_signal_cluster_data_activity_summary">Permite exibir a atividade de dados nos indicadores de dados moóvel e WiFi (necessário reiniciar)</string>
+    <string name="pref_signal_cluster_data_activity_summary">Permite exibir a atividade de dados nos indicadores de dados moóvel e Wi-Fi (necessário reiniciar)</string>
 
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">Utilizar modos de rede CDMA</string>
@@ -872,5 +872,48 @@
 
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">Ações GravityBox</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Alternar modo de rede</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Comutar dados móveis</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Comutar Wi-Fi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Comutar Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Comutar Ponto de Acesso Wi-Fi</string>
+
+    <!-- Location mode shortcut -->
+    <string name="shortcut_location_mode">Definir modo de localização</string>
+    <string name="location_mode_high_accuracy">Alta precisão</string>
+    <string name="location_mode_battery_saving">Poupança de bateria</string>
+    <string name="location_mode_device_only">Apenas dispositivo</string>
+    <string name="location_mode_off">Localização desativada</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Comutar NFC</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Estilo do fundo do alvo</string>
+    <string name="nrt_bg_style_none">Nenhum</string>
+    <string name="nrt_bg_style_light">Claro</string>
+    <string name="nrt_bg_style_dark">Escuro</string>
+    <string name="nrt_bg_style_black">Preto</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Não fazer nada</string>
+    <string name="smart_radio_action_summary">Alternar para %s</string>
+    <string name="pref_cat_smart_radio_title">Radio inteligente</string>
+    <string name="pref_smart_radio_experimental_summary">EXPERIMENTAL! Poderá afetar a comutação manual do modo de rede</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Quando dados móveis ativados</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Quando dados móveis desativados</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Contém várias definições relacionadas com os controlos Pie</string>
 
 </resources>
