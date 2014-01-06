@@ -942,4 +942,7 @@
     <string name="pref_smart_radio_on_data_enabled_title">Po zapnutí mobilních dat</string>
     <string name="pref_smart_radio_on_data_disabled_title">Po vypnutí mobilních dat</string>
 
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Obsahuje nastavení týkající se koláče</string>
+
 </resources>
