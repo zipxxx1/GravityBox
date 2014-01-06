@@ -800,6 +800,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Texto de percentagem de bateria</string>
     <string name="battery_percent_text_size_title">Tamanho do tipo de letra da percentagem</string>
+    <string name="battery_percent_text_size_larger">Grande</string>
     <string name="battery_percent_text_size_normal">Normal</string>
     <string name="battery_percent_text_size_smaller">Pequeno</string>
     <string name="battery_percent_text_size_even_smaller">Mais pequeno</string>
