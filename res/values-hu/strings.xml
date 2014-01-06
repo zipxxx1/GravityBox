@@ -866,4 +866,80 @@
     <string name="screen_off_effect_crt">CRT effekt</string>
     <string name="screen_off_effect_fade">Elhalványulás</string>
 
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">Akkumlátor százalék szövege</string>
+    <string name="battery_percent_text_size_title">Akkumlátor százalék szöveg mérete</string>
+    <string name="battery_percent_text_size_normal">Normál</string>
+    <string name="battery_percent_text_size_smaller">Kisebb</string>
+    <string name="battery_percent_text_size_even_smaller">Még kisebb</string>
+    <string name="battery_percent_text_size_smallest">Legkisebb</string>
+    <string name="battery_percent_text_style_title">Akkumlátor százalék szöveg stílusa</string>
+    <string name="battery_percent_text_style_default">Alapértelmezett</string>
+    <string name="battery_percent_text_style_numbers_only">Csak számok (százalékos jelző nélkül)</string>
+
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">Akkumlátor beállítások</string>
+
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Kurzor irányítás gombok</string>
+    <string name="pref_navbar_cursor_control_summary">Engedélyezi a kurzor irányító gombokat a navigációs sávon aktív billentyűzetnél</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Ébresztés hangerő gombokkal</string>
+    <string name="volume_rocker_wake_default">Gyári beállítás</string>
+    <string name="volume_rocker_wake_enabled">Engedélyezve</string>
+    <string name="volume_rocker_wake_disabled">Letiltva</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Újraindítási visszaigazolás szükséges</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Elrejtés változtatás után</string>
+    <string name="pref_qs_hide_on_change_summary">Automatikusan összecsukja az értesítési sávot csempe egyszeri érintésre. GravityBox és felülírt gyári csempékre vonatkozik.</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Kikapcsoló menü</string>
+    <string name="pref_cat_power_other_title">Egyéb</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Engedélyezés zárképernyőnél</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Inaktivitás mód</string>
+    <string name="inactivity_mode_default">Alapértelmezett</string>
+    <string name="inactivity_mode_hide">Elrejtés inaktivitáskor</string>
+    <string name="inactivity_mode_summary">Összegzés mutatása és elrejtés inaktivitáskor</string>
+
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Egyedi gomb (alkalmazásindító) beállítások</string>
+    <string name="pref_navbar_custom_key_enable_title">Egyedi gomb engedélyezése</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">CDMA hálózati módok használata</string>
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Automata elforgatás ki-bekapcsolása</string>
+    <string name="hwkey_action_auto_rotation_enabled">Automata elforgatás engedélyezve</string>
+    <string name="hwkey_action_auto_rotation_disabled">Automata elforgatás letiltva</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Bámely widget engedélyezése</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Engedélyezi azon widget-ek használatát a zárképernyőn, amelyek normál esetben csak Indítón belül használhatóak</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Kikapcsoló menü mutatása</string>
+    <string name="hwkey_action_expand_notifications">Állaptsáv panel kiterjesztése</string>
+    <string name="hwkey_action_expand_quicksettings">Gyorsbeállítások panel kiterjesztése</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Navigációs sáv kör célpontok</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Főkapcsoló a navigációs sáv kör célpontokhoz (újraindítás szükséges)</string>
+    <string name="pref_navbar_ring_target_title">Kör célpont %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">GravityBox Műveletek</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Hálózati mód váltás</string>
+
 </resources>
