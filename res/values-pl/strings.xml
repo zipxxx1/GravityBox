@@ -853,6 +853,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Tekstowy wskaźnik baterii</string>
     <string name="battery_percent_text_size_title">Wielkość tekstowego wskaźnika baterii</string>
+    <string name="battery_percent_text_size_larger">Większy</string>
     <string name="battery_percent_text_size_normal">Normalny</string>
     <string name="battery_percent_text_size_smaller">Mały</string>
     <string name="battery_percent_text_size_even_smaller">Mniejszy</string>
@@ -925,5 +926,35 @@
 
     <!-- Network mode shortcut -->
     <string name="shortcut_network_mode">Przełącznik trybu sieci</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Przełącznik transmisji danych</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Przełącznik WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Przełącznik Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Przełącznik WiFi AP</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Przełącznik NFC</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Styl tła celów</string>
+    <string name="nrt_bg_style_none">Żaden</string>
+    <string name="nrt_bg_style_light">Jasny</string>
+    <string name="nrt_bg_style_dark">Ciemny</string>
+    <string name="nrt_bg_style_black">Czarny</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Nie rób nic</string>
+    <string name="smart_radio_action_summary">Przełącz na %s</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_experimental_summary">EKSPERYMENTALNE! Może mieć wpływ na ręczne przełączanie trybu sieciowego</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Przy włączonej transmisji danych</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Przy wyłączonej transmisji danych</string>
 
 </resources>
