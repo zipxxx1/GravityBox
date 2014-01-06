@@ -933,4 +933,7 @@
     <string name="pref_smart_radio_on_data_enabled_title">On mobile data enabled</string>
     <string name="pref_smart_radio_on_data_disabled_title">On mobile data disabled</string>
 
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Contains Pie related settings</string>
+
 </resources>
