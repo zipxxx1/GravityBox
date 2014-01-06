@@ -817,6 +817,7 @@
     <string name="battery_percent_text_title">Texte pourcentage de batterie</string>
     <string name="battery_percent_text_size_title">Taille du texte pourcentage de batterie</string>
     <string name="battery_percent_text_size_normal">Normal</string>
+    <string name="battery_percent_text_size_larger">Plus grand</string>
     <string name="battery_percent_text_size_smaller">Plus petit</string>
     <string name="battery_percent_text_size_even_smaller">Encore plus petit</string>
     <string name="battery_percent_text_size_smallest">Le plus petit possible</string>
@@ -932,5 +933,8 @@
     <string name="pref_smart_radio_experimental_summary">EXPÉRIMENTAL ! Peut affecter la gestion manuelle du mode réseau</string>
     <string name="pref_smart_radio_on_data_enabled_title">Données mobile activées</string>
     <string name="pref_smart_radio_on_data_disabled_title">Données mobile désactivées</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Contient les paramètres liés aux touches flottantes (Pie control)</string>
 
 </resources>
