@@ -545,6 +545,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_RING_TARGET_APP = "ringTargetApp";
     public static final String EXTRA_RING_TARGET_BG_STYLE = "ringTargetBgStyle";
 
+    public static final String PREF_KEY_SMART_RADIO_ON_DATA_ENABLED = "pref_smart_radio_on_data_enabled";
+    public static final String PREF_KEY_SMART_RADIO_ON_DATA_DISABLED = "pref_smart_radio_on_data_disabled";
+    public static final String ACTION_PREF_SMART_RADIO_CHANGED = "gravitybox.intent.action.SMART_RADIO_CHANGED";
+    public static final String EXTRA_SR_ON_DATA_ENABLED = "smartRadioOnDataEnabled";
+    public static final String EXTRA_SR_ON_DATA_DISABLED = "smartRadioOnDataDisabled";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -1164,7 +1170,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // TODO: rework for KitKat compatibility
             getPreferenceScreen().removePreference(mPrefCatTransparencyManager);
             mPrefCatDisplay.removePreference(mPrefButtonBacklightNotif);
-            mPrefCatPhone.removePreference(mPrefCatPhoneMobileData);
 
             // Features not relevant for KitKat but keep them for potential future use
             mPrefCatStatusbarColors.removePreference(mPrefSbDaColor);
@@ -1940,6 +1945,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
                 intent.putExtra(EXTRA_DT_INACTIVITY_MODE, Integer.valueOf(
                         prefs.getString(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE, "0")));
+            } else if (key.equals(PREF_KEY_SMART_RADIO_ON_DATA_ENABLED)) {
+                intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
+                intent.putExtra(EXTRA_SR_ON_DATA_ENABLED,
+                        prefs.getInt(PREF_KEY_SMART_RADIO_ON_DATA_ENABLED, -1));
+            } else if (key.equals(PREF_KEY_SMART_RADIO_ON_DATA_DISABLED)) {
+                intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
+                intent.putExtra(EXTRA_SR_ON_DATA_DISABLED,
+                        prefs.getInt(PREF_KEY_SMART_RADIO_ON_DATA_DISABLED, -1));
             }
             if (intent.getAction() != null) {
                 getActivity().sendBroadcast(intent);

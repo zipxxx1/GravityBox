@@ -1100,11 +1100,38 @@
             android:key="pref_cat_phone_mobile_data"
             android:title="@string/pref_cat_phone_mobile_data_title">
 
+            <PreferenceScreen
+                android:key="pref_cat_smart_radio"
+                android:title="@string/pref_cat_smart_radio_title"
+                android:summary="@string/pref_smart_radio_experimental_summary">
+
+                <Preference
+                    android:key="pref_smart_radio_experimental"
+                    android:title=""
+                    android:summary="@string/pref_smart_radio_experimental_summary"
+                    android:persistent="false" />
+
+                <com.ceco.kitkat.gravitybox.preference.NetworkModePreference
+                    android:key="pref_smart_radio_on_data_enabled"
+                    android:title="@string/pref_smart_radio_on_data_enabled_title"
+                    android:summary="@string/smart_radio_action_do_nothing"
+                    android:defaultValue="-1" />
+
+                <com.ceco.kitkat.gravitybox.preference.NetworkModePreference
+                    android:key="pref_smart_radio_on_data_disabled"
+                    android:title="@string/pref_smart_radio_on_data_disabled_title"
+                    android:summary="@string/smart_radio_action_do_nothing"
+                    android:defaultValue="-1" />
+
+            </PreferenceScreen>
+
+            <!--
             <CheckBoxPreference 
                 android:key="pref_national_roaming"
                 android:title="@string/pref_national_roaming_title"
                 android:summary="@string/pref_national_roaming_summary"
                 android:defaultValue="false" />
+            -->
 
         </PreferenceCategory>
 

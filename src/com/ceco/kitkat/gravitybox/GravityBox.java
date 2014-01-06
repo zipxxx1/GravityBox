@@ -160,5 +160,9 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         if (ModLauncher.PACKAGE_NAMES.contains(lpparam.packageName)) {
             ModLauncher.init(prefs, lpparam.classLoader);
         }
+
+        if (lpparam.packageName.equals(ModSmartRadio.PACKAGE_NAME)) {
+            ModSmartRadio.init(prefs, lpparam.classLoader);
+        }
     }
 }

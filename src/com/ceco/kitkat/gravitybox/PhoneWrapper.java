@@ -58,6 +58,21 @@ public class PhoneWrapper {
         XposedBridge.log(TAG + ": " + msg);
     }
 
+    public static String getNetworkModeNameFromValue(int networkMode) {
+        switch(networkMode) {
+            case NT_GSM_ONLY: return "GSM (2G)";
+            case NT_WCDMA_PREFERRED:
+            case NT_GSM_WCDMA_AUTO: return "GSM/WCDMA Auto (2G/3G)";
+            case NT_WCDMA_ONLY: return "WCDMA (3G)";
+            case NT_CDMA_EVDO: return "CDMA/EvDo Auto";
+            case NT_CDMA_ONLY: return "CDMA";
+            case NT_EVDO_ONLY: return "EvDo";
+            case NT_LTE_CDMA_EVDO: return "LTE (CDMA)";
+            case NT_LTE_GSM_WCDMA: return "LTE (GSM)";
+            default: return "Undefined";
+        }
+    }
+
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
 
         @Override
