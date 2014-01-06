@@ -793,6 +793,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Tekstowy wskaźnik baterii</string>
     <string name="battery_percent_text_size_title">Wielkość tekstowego wskaźnika baterii</string>
+    <string name="battery_percent_text_size_larger">Większy</string>
     <string name="battery_percent_text_size_normal">Normalny</string>
     <string name="battery_percent_text_size_smaller">Mały</string>
     <string name="battery_percent_text_size_even_smaller">Mniejszy</string>
