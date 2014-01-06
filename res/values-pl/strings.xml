@@ -942,6 +942,9 @@
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">Przełącznik NFC</string>
 
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">Przełącznik GPS</string>
+
     <!-- Navigation bar ring targets background style -->
     <string name="pref_navbar_ring_targets_bg_style_title">Styl tła celów</string>
     <string name="nrt_bg_style_none">Żaden</string>
@@ -956,5 +959,8 @@
     <string name="pref_smart_radio_experimental_summary">EKSPERYMENTALNE! Może mieć wpływ na ręczne przełączanie trybu sieciowego</string>
     <string name="pref_smart_radio_on_data_enabled_title">Przy włączonej transmisji danych</string>
     <string name="pref_smart_radio_on_data_disabled_title">Przy wyłączonej transmisji danych</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Zawiera ustawienia związane z Pie</string>
 
 </resources>
