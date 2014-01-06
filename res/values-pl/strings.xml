@@ -285,8 +285,8 @@
     <string name="pref_holo_bg_solid_black_summary">Użyj jednolitego czarnego tła zamiast czarno-szarego gradientu dla domyślnego tematu Holo (wymagany restart)</string>
 
     <!-- QuickSettings tiles per row -->
-    <string name="pref_qs_tiles_per_row_title">Ilość kafelek w rzędzie</string>
-    <string name="pref_qs_tiles_per_row_summary">Określa ile Kefelek Szybkich Ustawień wyświetlić w jednym rzędzie przy czym rozmiar kafelek zostanie odpowiednio zmieniony (dotyczy trybu portretowego dla telefonów lub dowolnej orientacji ekranu dla tabletów)</string>
+    <string name="pref_qs_tiles_per_row_title">Ilość kafelków w rzędzie</string>
+    <string name="pref_qs_tiles_per_row_summary">Określa ile Kafelków Szybkich Ustawień wyświetlić w jednym rzędzie przy czym rozmiar kafelków zostanie odpowiednio zmieniony (dotyczy trybu portretowego dla telefonów lub dowolnej orientacji ekranu dla tabletów)</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Pokaż dzień tygodnia</string>
@@ -565,7 +565,7 @@
     <string name="pref_sbcolor_follow_stock_battery_summary">Powoduje, że zegar, koło baterii i wskaźnik procentowy na pasku statusu używają typowych kolorów ikony baterii. Obowiązuje tylko, gdy kolorystyka icon jest wyłączona.</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Kafelka trybu sieci</string>
+    <string name="pref_network_mode_tile_mode_title">Kafelek trybu sieci</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
     <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
     <string name="nm_tile_mode3">2G/3G/(LTE)</string>
@@ -574,12 +574,12 @@
     <string name="pref_display_allow_all_rotations_title">Zezwalaj na pełen obrót</string>
 
     <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">Zmień domyślne zachowanie kafelek</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Zamienia akcje krótkiego i długiego naciśnięcia oraz dodaje wsparcie \'Ukryj po zmianie\' dla wybranych kafelek (wymagany restart)</string>
+    <string name="pref_qs_tile_behaviour_override_title">Zmień domyślne zachowanie kafelków</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Zamienia akcje krótkiego i długiego naciśnięcia oraz dodaje wsparcie \'Ukryj po zmianie\' dla wybranych kafelków (wymagany restart)</string>
  
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">Gniazdo SIM Kafelki trybu sieci</string>
-    <string name="pref_qs_network_mode_sim_slot_summary">Definiuje gniazdo SIM którego dotyczy Kafelka trybu sieci (%s)</string>
+    <string name="pref_qs_network_mode_sim_slot_title">Gniazdo SIM dla Kafelka trybu sieci</string>
+    <string name="pref_qs_network_mode_sim_slot_summary">Definiuje gniazdo SIM którego dotyczy Kafelek trybu sieci (%s)</string>
     <string name="sim_slot1">Gniazdo SIM 1</string>
     <string name="sim_slot2">Gniazdo SIM 2</string>
 
@@ -609,8 +609,8 @@
     <string name="call_vibration_periodic">Co 45 sek. podczas połączenia wychodzącego</string>
 
     <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Zmiana kolejności kafelek</string>
-    <string name="pref_qs_tile_order_summary">Umożliwia zmianę kolejności kafelek Szybkich Ustawień</string>
+    <string name="pref_qs_tile_order_title">Zmiana kolejności kafelków</string>
+    <string name="pref_qs_tile_order_summary">Umożliwia zmianę kolejności kafelków Szybkich Ustawień</string>
 
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Blokowanie bieżących powiadomień</string>
@@ -779,8 +779,8 @@
     <string name="hwkey_action_back">Powrót</string>
 
     <!-- QS Tile Style -->
-    <string name="pref_qs_tile_style_title">Styl kafelek</string>
-    <string name="pref_qs_tile_style_summary">Dotyczy tylko kafelek dodanych przez GravityBox (nie dotyczy typowych kafelek)</string>
+    <string name="pref_qs_tile_style_title">Styl kafelków</string>
+    <string name="pref_qs_tile_style_summary">Dotyczy tylko kafelków dodanych przez GravityBox (nie dotyczy typowych kafelków)</string>
 
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ustaw dolny margines</string>
@@ -825,7 +825,7 @@
     <string name="pref_volume_panel_timeout_title">Czas wyświetlania panelu głośności</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Ustawienia kafelki trybu dzwonka</string>
+    <string name="pref_qs_ringer_mode_title">Ustawienia kafelka trybu dzwonka</string>
     <string name="ringer_mode_silent">Cisza</string>
     <string name="ringer_mode_vibrate">Wibracje</string>
     <string name="ringer_mode_sound">Dźwięk</string>
@@ -879,7 +879,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Ukryj po zmianie</string>
-    <string name="pref_qs_hide_on_change_summary">Zwija automatycznie pasek satusu przy pojedynczym kliknięciu kafelki. Dotyczy kafelek GravityBox i kafelek zastąpionych.</string>
+    <string name="pref_qs_hide_on_change_summary">Zwija automatycznie pasek satusu przy pojedynczym kliknięciu kafelka. Dotyczy kafelków GravityBox i kafelków zastąpionych.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menu zasilania</string>
