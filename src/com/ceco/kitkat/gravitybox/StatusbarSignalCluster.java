@@ -305,7 +305,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             try {
                 XposedHelpers.callMethod(mView, "apply");
             } catch (Throwable t) {
-                log("Error invoking apply() method: " + t.getMessage());
+                logAndMute("invokeApply", t);
             }
         }
     }
@@ -437,7 +437,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     }
                 }
             } catch (Throwable t) {
-                log("Error in NetworkControllerCallback proxy: " + t.getMessage());
+                logAndMute("NetworkControllerCallback", t);
             }
 
             return null;
