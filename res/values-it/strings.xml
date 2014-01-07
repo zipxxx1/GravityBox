@@ -879,6 +879,43 @@
     <string name="shortcut_activity_title">Azioni GravityBox</string>
  
     <!-- Network mode shortcut -->
-    <string name="shortcut_network_mode">Interruttore modalità di rete</string>
+    <string name="shortcut_network_mode">Modalità di rete</string>
+    
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Dati Mobili</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">WiFi AP</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Stile sfondo anello pulsanti</string>
+    <string name="nrt_bg_style_none">Nessuno</string>
+    <string name="nrt_bg_style_light">Chiaro</string>
+    <string name="nrt_bg_style_dark">Scuro</string>
+    <string name="nrt_bg_style_black">Nero</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Non fare nulla</string>
+    <string name="smart_radio_action_summary">Cambia a %s</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_experimental_summary">SPERIMENTALE! Potrebbe avere effetti sul cambio della modalità di rete manuale.</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Dati Mobili abilitati</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Dati Mobili disabilitati</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Settaggi controllo Pie</string>
+
 
 </resources>
