@@ -193,7 +193,7 @@ public class KitKatBattery extends View implements IconManagerListener, BatteryS
 
     @Override
     public void draw(Canvas c) {
-        if (mBatteryData.level < 0) return;
+        if (mBatteryData == null || mBatteryData.level < 0) return;
 
         float drawFrac = (float) mBatteryData.level / 100f;
         final int pt = getPaddingTop();
