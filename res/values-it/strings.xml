@@ -964,6 +964,6 @@
     <string name="pref_smart_radio_on_data_disabled_title">Dati Mobili disabilitati</string>
 
     <!-- Pie category summary -->
-    <string name="pie_control_summary">Contains Pie related settings</string>
+    <string name="pie_control_summary">Settaggi Pie Controls</string>
 
 </resources>
