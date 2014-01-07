@@ -935,6 +935,9 @@
     <string name="pref_smart_radio_on_data_disabled_title">Données mobile désactivées</string>
 
     <!-- Pie category summary -->
-    <string name="pie_control_summary">Contient les paramètres liés aux touches flottantes (Pie control)</string>
+    <string name="pie_control_summary">Regroupe les paramètres liés aux touches flottantes (Pie control)</string>
+
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Activer l\'animation lors du chargement</string>
 
 </resources>
