@@ -36,6 +36,7 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
     private String mPercentSign;
     private BatteryData mBatteryData;
     private ValueAnimator mChargeAnim;
+    private boolean mChargeAnimEnabled;
 
     public StatusbarBatteryPercentage(TextView clockView) {
         mPercentage = clockView;
@@ -114,12 +115,17 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
         update();
     }
 
+    public void setChargeAnimEnabled(boolean enabled) {
+        mChargeAnimEnabled = enabled;
+        update();
+    }
+
     public void update() {
         if (mBatteryData == null) return;
 
         mPercentage.setText(mBatteryData.level + mPercentSign);
 
-        if (mBatteryData.charging && mBatteryData.level < 100) {
+        if (mChargeAnimEnabled && mBatteryData.charging && mBatteryData.level < 100) {
             startChargingAnimation();
         } else {
             stopChargingAnimation();

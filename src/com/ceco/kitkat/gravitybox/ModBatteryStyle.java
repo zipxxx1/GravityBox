@@ -78,11 +78,18 @@ public class ModBatteryStyle {
                         int textSize = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_SIZE, 16);
                         mPercentText.setTextSize(textSize);
                         if (DEBUG) log("PercentText size changed to: " + textSize);
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STYLE) && mPercentText != null) {
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED)
+                           && mPercentText != null) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STYLE)) {
                         String percentSign = intent.getStringExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STYLE);
                         mPercentText.setPercentSign(percentSign);
                         if (DEBUG) log("PercentText sign changed to: " + percentSign);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_ANIM)) {
+                    boolean animENabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_ANIM, false);
+                    mPercentText.setChargeAnimEnabled(animENabled);
+                    if (DEBUG) log("PercentText charge anim changed to: " + animENabled);
+                }
             } else if (intent.getAction().equals(ACTION_MTK_BATTERY_PERCENTAGE_SWITCH)) {
                 mMtkPercentTextEnabled = intent.getIntExtra(EXTRA_MTK_BATTERY_PERCENTAGE_STATE, 0) == 1;
                 if (DEBUG) log("mMtkPercentText changed to: " + mMtkPercentTextEnabled);
@@ -151,6 +158,8 @@ public class ModBatteryStyle {
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
                     mPercentText.setPercentSign(prefs.getString(
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
+                    mPercentText.setChargeAnimEnabled(prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_ANIM, false));
                     ModStatusbarColor.registerIconManagerListener(mPercentText);
 
                     // inject circle battery view
