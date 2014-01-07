@@ -945,4 +945,7 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">Obsahuje nastavení týkající se koláče</string>
 
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Zapnout indikaci nabíjení</string>
+
 </resources>
