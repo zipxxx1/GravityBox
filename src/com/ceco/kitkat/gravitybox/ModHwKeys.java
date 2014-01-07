@@ -1288,9 +1288,15 @@ public class ModHwKeys {
 
     private static void showGlobalActionsDialog() {
         try {
-            XposedHelpers.callMethod(mPhoneWindowManager, "sendCloseSystemWindows", 
-                    SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS);
-            XposedHelpers.callMethod(mPhoneWindowManager, "showGlobalActionsDialog");
+            Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    XposedHelpers.callMethod(mPhoneWindowManager, "sendCloseSystemWindows", 
+                            SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS);
+                    XposedHelpers.callMethod(mPhoneWindowManager, "showGlobalActionsDialog");
+                }
+            });
         } catch (Throwable t) {
             log("Error executing PhoneWindowManager.showGlobalActionsDialog(): " + t.getMessage());
         }
