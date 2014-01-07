@@ -499,7 +499,7 @@
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Ajustes del anillo de desbloqueo</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Activador de los disparadores del anillo de desbloqueo</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Aplicación destino %s</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Destino desde el anillo %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Unlock ring vertical offset</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Unlock ring horizontal offset</string>
 
@@ -815,6 +815,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Indicador de batería en porcentaje</string>
     <string name="battery_percent_text_size_title">Tamaño del indicador</string>
+    <string name="battery_percent_text_size_larger">Grande</string>
     <string name="battery_percent_text_size_normal">Normal</string>
     <string name="battery_percent_text_size_smaller">Pequeño</string>
     <string name="battery_percent_text_size_even_smaller">Muy pequeño</string>
@@ -889,4 +890,49 @@
     <string name="pref_navbar_ring_targets_enable_summary">Activador de objetivos en el anillo de barra de navegación (requiere reinicio)</string>
     <string name="pref_navbar_ring_target_title">Objetivo de anillo %d</string>
 
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Acciones de GravityBox</string>
+    
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Cambiar modo de red</string>
+    
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Activar/desactivar datos móviles</string>
+    
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Activar/desactivar WiFi</string>
+    
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Activar/desactivar Bluetooth</string>
+    
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Activar/desactivar punto de acceso WiFi</string>
+    
+    <!-- Location mode shortcut -->
+    <string name="shortcut_location_mode">Establecer modo de ubicación</string>
+    <string name="location_mode_high_accuracy">Alta precisión</string>
+    <string name="location_mode_battery_saving">Ahorro de batería</string>
+    <string name="location_mode_device_only">Solo en dispositivo</string>
+    <string name="location_mode_off">Desactivada</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Activar/desactivar NFC</string>
+    
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Estilo de fondo del objetivo</string>
+    <string name="nrt_bg_style_none">Ninguno</string>
+    <string name="nrt_bg_style_light">Claro</string>
+    <string name="nrt_bg_style_dark">Oscuro</string>
+    <string name="nrt_bg_style_black">Negro</string>
+    
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">No hacer nada</string>
+    <string name="smart_radio_action_summary">Cambiar a %s</string>
+    <string name="pref_cat_smart_radio_title">Modo de red inteligente</string>
+    <string name="pref_smart_radio_experimental_summary">¡EXPERIMENTAL! Podría afectar al cambio manual de modo de red</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Con datos móviles activados</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Con datos móviles desactivados</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Contiene los ajustes relacionados con los controles \'Pie\'</string>
 </resources>
