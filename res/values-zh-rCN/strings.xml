@@ -823,7 +823,7 @@
     <string name="battery_percent_text_size_smallest">最小</string>
     <string name="battery_percent_text_style_title">电量百分比文字风格</string>
     <string name="battery_percent_text_style_default">默认</string>
-    <string name="battery_percent_text_style_numbers_only">仅数字（没有百分号）</string>
+    <string name="battery_percent_text_style_numbers_only">仅数字（没百分比）</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">电量设置</string>
@@ -929,12 +929,12 @@
     <!-- Smart Radio -->
     <string name="smart_radio_action_do_nothing">什么也不做</string>
     <string name="smart_radio_action_summary">切换到 %s</string>
-    <string name="pref_cat_smart_radio_title">智能收音机</string>
-    <string name="pref_smart_radio_experimental_summary">试验！可能会影响网络的手动切换模式</string>
+    <string name="pref_cat_smart_radio_title">智能网络</string>
+    <string name="pref_smart_radio_experimental_summary">试验中！可能会影响网络的手动切换模式</string>
     <string name="pref_smart_radio_on_data_enabled_title">启用移动数据</string>
     <string name="pref_smart_radio_on_data_disabled_title">禁用移动数据</string>
 
     <!-- Pie category summary -->
-    <string name="pie_control_summary">包含 Pie 相关设置</string>
+    <string name="pie_control_summary">包含 Pie 控制相关设置</string>
 
 </resources>
