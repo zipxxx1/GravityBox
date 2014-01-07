@@ -1,3 +1,15 @@
+Changelog 2.9.1 - 07/01/2014
+--------------------------------------
+- Added option for enabling/disabling Battery Percent Text charging animation
+- Fixed System UI crash appearing on boot when KitKat battery style is chosen
+- Fixed launching of Show Power Menu action
+- Suppressed logging of MotoX Signal Cluster related error messages to avoid log flooding
+- Updated Italian translations (thanks to pesa1234)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated French translation (thanks to ch-vox)
+
 Changelog 2.9.0 - 07/01/2014
 --------------------------------------
 - Introducing GravityBox Actions
