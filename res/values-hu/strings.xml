@@ -943,22 +943,22 @@
 
     <!-- Network mode shortcut -->
     <string name="shortcut_network_mode">Hálózati mód váltás</string>
-    
+
     <!-- Toggle mobile data shortcut -->
     <string name="shortcut_mobile_data">Mobil adatátvitel ki-bekapcsolása</string>
-    
+
     <!-- Toggle WiFi shortcut -->
     <string name="shortcut_wifi">WiFi ki-bekapcsolása</string>
-    
+
     <!-- Toggle Bluetooth shortcut -->
     <string name="shortcut_bluetooth">Bluetooth ki-bekapcsolása</string>
-    
+
     <!-- Toggle WiFi AP shortcut -->
     <string name="shortcut_wifi_ap">WiFi hozzáférési pont ki-bekapcsolása</string>
-    
+
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">NFC ki-bekapcsolása</string>
-    
+
     <!-- Toggle GPS shortcut -->
     <string name="shortcut_gps">GPS ki-bekapcsolása</string>
 
@@ -967,7 +967,7 @@
     <string name="nrt_bg_style_none">Semmi</string>
     <string name="nrt_bg_style_light">Világos</string>
     <string name="nrt_bg_style_dark">Sötét</string>
-    <string name="nrt_bg_style_black">Fekete</string></string>
+    <string name="nrt_bg_style_black">Fekete</string>
 
     <!-- Smart Radio -->
     <string name="smart_radio_action_do_nothing">Ne tegyen semmit</string>
