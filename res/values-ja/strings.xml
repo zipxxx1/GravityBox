@@ -462,7 +462,7 @@
     <string name="hwkey_action_menu">メニューを表示</string>
 
     <!-- HW Key Action: Expanded desktop -->
-    <string name="hwkey_action_expanded_desktop">拡張デスクトップを切り替え</string>
+    <string name="hwkey_action_expanded_desktop">拡張デスクトップトグル</string>
     <string name="hwkey_action_expanded_desktop_disabled">拡張デスクトップモードは無効です!</string>
 
     <!-- Navigation bar tweaks category -->
@@ -789,6 +789,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">バッテリー％テキスト</string>
     <string name="battery_percent_text_size_title">バッテリー％テキストサイズ</string>
+    <string name="battery_percent_text_size_larger">大</string>
     <string name="battery_percent_text_size_normal">中</string>
     <string name="battery_percent_text_size_smaller">小</string>
     <string name="battery_percent_text_size_even_smaller">極小</string>
@@ -867,6 +868,49 @@
     <string name="shortcut_activity_title">GravityBoxアクション</string>
 
     <!-- Network mode shortcut -->
-    <string name="shortcut_network_mode">ネットワークモードの切り替え</string>
+    <string name="shortcut_network_mode">ネットワークモードトグル</string>
+    
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">データ通信トグル</string>
 
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">WiFiトグル</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Bluetoothトグル</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">テザリングトグル</string>
+    
+    <!-- Location mode shortcut -->
+    <string name="shortcut_location_mode">位置情報モード</string>
+    <string name="location_mode_high_accuracy">高精度</string>
+    <string name="location_mode_battery_saving">省電力</string>
+    <string name="location_mode_device_only">端末のみ</string>
+    <string name="location_mode_off">位置情報オフ</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">NFCトグル</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">ターゲット背景スタイル</string>
+    <string name="nrt_bg_style_none">なし</string>
+    <string name="nrt_bg_style_light">明るめ</string>
+    <string name="nrt_bg_style_dark">暗め</string>
+    <string name="nrt_bg_style_black">黒</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">何もしない</string>
+    <string name="smart_radio_action_summary">%sに切り替え</string>
+    <string name="pref_cat_smart_radio_title">スマートモード</string>
+    <string name="pref_smart_radio_experimental_summary">実験的です!手動でのネットワークモードの変更に影響します。</string>
+    <string name="pref_smart_radio_on_data_enabled_title">データ通信有効化時</string>
+    <string name="pref_smart_radio_on_data_disabled_title">データ通信無効化時</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">パイ関連の設定を変更します。</string>
+
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">充電中にアニメーションする</string>
+    
 </resources>
