@@ -857,6 +857,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Testo Batteria percentuale</string>
     <string name="battery_percent_text_size_title">Dimensione percentuale batteria</string>
+    <string name="battery_percent_text_size_larger">Grande</string>
     <string name="battery_percent_text_size_normal">Normale</string>
     <string name="battery_percent_text_size_smaller">Piccolo</string>
     <string name="battery_percent_text_size_even_smaller">Ancora più piccolo</string>
