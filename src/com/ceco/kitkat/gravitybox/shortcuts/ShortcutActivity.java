@@ -120,6 +120,8 @@ public class ShortcutActivity extends ListActivity {
             LocationModeShortcut.launchAction(mContext, intent);
         } else if (action.equals(NfcShortcut.ACTION)) {
             NfcShortcut.launchAction(mContext, intent);
+        } else if (action.equals(GoogleNowShortcut.ACTION)) {
+            GoogleNowShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -140,6 +142,7 @@ public class ShortcutActivity extends ListActivity {
         list.add(new ExpandNotificationsShortcut(mContext));
         list.add(new ExpandQuicksettingsShortcut(mContext));
         list.add(new ExpandedDesktopShortcut(mContext));
+        list.add(new GoogleNowShortcut(mContext));
         list.add(new ScreenshotShortcut(mContext));
         list.add(new ScreenrecordShortcut(mContext));
         if (Utils.hasFlash(mContext)) {

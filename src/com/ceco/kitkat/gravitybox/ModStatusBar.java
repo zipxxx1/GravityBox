@@ -68,6 +68,8 @@ public class ModStatusBar {
     private static final int STATUS_BAR_DISABLE_EXPAND = 0x00010000;
     public static final String SETTING_ONGOING_NOTIFICATIONS = "gb_ongoing_notifications";
 
+    public static final String ACTION_START_SEARCH_ASSIST = "gravitybox.intent.action.START_SEARCH_ASSIST";
+
     private static ViewGroup mIconArea;
     private static ViewGroup mRootView;
     private static LinearLayout mLayoutClock;
@@ -189,6 +191,8 @@ public class ModStatusBar {
                     mTrafficMeter.setInactivityMode(intent.getIntExtra(
                             GravityBoxSettings.EXTRA_DT_INACTIVITY_MODE, 0));
                 }
+            } else if (intent.getAction().equals(ACTION_START_SEARCH_ASSIST)) {
+                startSearchAssist();
             }
         }
     };
@@ -484,6 +488,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
+                    intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
@@ -782,6 +787,20 @@ public class ModStatusBar {
                 mVelocityTracker = null;
                 handler.removeCallbacks(mLongPressBrightnessChange);
                 mLinger = 0;
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void startSearchAssist() {
+        if (mPhoneStatusBar == null) return;
+
+        try {
+            final Object searchPanelView = 
+                    XposedHelpers.getObjectField(mPhoneStatusBar, "mSearchPanelView");
+            if (searchPanelView != null) {
+                XposedHelpers.callMethod(searchPanelView, "startAssistActivity");
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
