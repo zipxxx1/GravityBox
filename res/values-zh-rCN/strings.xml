@@ -936,5 +936,8 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">包含 Pie 控制相关设置</string>
+    
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">启用充电动画</string>
 
 </resources>
