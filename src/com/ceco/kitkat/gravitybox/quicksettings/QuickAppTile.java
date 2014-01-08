@@ -24,11 +24,11 @@ import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.R;
 import com.ceco.kitkat.gravitybox.Utils;
 import com.ceco.kitkat.gravitybox.preference.AppPickerPreference;
+import com.ceco.kitkat.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -272,6 +272,19 @@ public class QuickAppTile extends BasicTile {
         mLabel = mMainApp.getAppName();
         mTextView.setText(mLabel);
         mImageView.setImageDrawable(mMainApp.getAppIconSmall());
+    }
+
+    @Override
+    protected void startActivity(Intent intent) {
+        // if intent is a GB action of broadcast type, handle it directly here
+        if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
+            Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+            newIntent.putExtras(intent);
+            mContext.sendBroadcast(newIntent);
+        // otherwise let super class handle it
+        } else {
+            super.startActivity(intent);
+        }
     }
 
     @Override

@@ -46,7 +46,10 @@ import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 import android.widget.Toast;
+
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.shortcuts.ShortcutActivity;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
@@ -1108,8 +1111,16 @@ public class ModHwKeys {
                         }
 
                         Intent i = Intent.parseUri(appInfo, 0);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        mContext.startActivity(i);
+                        // if intent is a GB action of broadcast type, handle it directly here
+                        if (ShortcutActivity.isGbBroadcastShortcut(i)) {
+                            Intent newIntent = new Intent(i.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+                            newIntent.putExtras(i);
+                            mContext.sendBroadcast(newIntent);
+                        // otherwise start activity
+                        } else {
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            mContext.startActivity(i);
+                        }
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(mContext, mStrCustomAppMissing, Toast.LENGTH_SHORT).show();
                     } catch (Throwable t) {

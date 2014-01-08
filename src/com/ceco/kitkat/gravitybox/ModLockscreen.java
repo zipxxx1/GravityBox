@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.ceco.kitkat.gravitybox.GlowPadHelper.AppInfo;
+import com.ceco.kitkat.gravitybox.shortcuts.ShortcutActivity;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetHostView;
@@ -435,10 +436,19 @@ public class ModLockscreen {
 
                     AppInfo appInfo = (AppInfo) XposedHelpers.getAdditionalInstanceField(td, "mGbAppInfo");
                     if (appInfo != null) {
-                        final Object activityLauncher = XposedHelpers.getObjectField(
-                                XposedHelpers.getSurroundingThis(param.thisObject), "mActivityLauncher");
-                        XposedHelpers.callMethod(activityLauncher, "launchActivity", mLaunchActivityArgs,
-                                appInfo.intent, false, true, null, null);
+                        // if intent is a GB action of broadcast type, handle it directly here
+                        if (ShortcutActivity.isGbBroadcastShortcut(appInfo.intent)) {
+                            Intent newIntent = new Intent(appInfo.intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+                            newIntent.putExtras(appInfo.intent);
+                            mGlowPadView.getContext().sendBroadcast(newIntent);
+                            XposedHelpers.callMethod(mGlowPadView, "doFinish");
+                        // otherwise start activity
+                        } else {
+                            final Object activityLauncher = XposedHelpers.getObjectField(
+                                    XposedHelpers.getSurroundingThis(param.thisObject), "mActivityLauncher");
+                            XposedHelpers.callMethod(activityLauncher, "launchActivity", mLaunchActivityArgs,
+                                    appInfo.intent, false, true, null, null);
+                        }
                     }
                 }
             });

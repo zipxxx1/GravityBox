@@ -38,6 +38,7 @@ import android.widget.ImageView.ScaleType;
 import com.ceco.kitkat.gravitybox.GlowPadHelper.BgStyle;
 import com.ceco.kitkat.gravitybox.R;
 import com.ceco.kitkat.gravitybox.GlowPadHelper.AppInfo;
+import com.ceco.kitkat.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -498,9 +499,17 @@ public class ModNavigationBar {
                                 XposedHelpers.callMethod(activityManagerNative, "dismissKeyguardOnNextActivity");
                             } catch (Throwable t) {}
                             Intent intent = appInfo.intent;
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            mGlowPadView.getContext().startActivity(intent);
-                            mGlowPadView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                            // if intent is a GB action of broadcast type, handle it directly here
+                            if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
+                                Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+                                newIntent.putExtras(intent);
+                                mGlowPadView.getContext().sendBroadcast(newIntent);
+                            // otherwise start activity
+                            } else {
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                mGlowPadView.getContext().startActivity(intent);
+                                mGlowPadView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                            }
                         }
                     }
                 });
