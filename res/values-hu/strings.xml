@@ -930,7 +930,7 @@
 
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Kikapcsoló menü mutatása</string>
-    <string name="hwkey_action_expand_notifications">Állaptsáv panel kiterjesztése</string>
+    <string name="hwkey_action_expand_notifications">Állapotsáv panel kiterjesztése</string>
     <string name="hwkey_action_expand_quicksettings">Gyorsbeállítások panel kiterjesztése</string>
 
     <!-- Navigation bar ring targets -->
@@ -979,5 +979,8 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Pie vezérlővel kapcsolatos beállítások</string>
+    
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Töltés animáció engedélyezve</string>
 
 </resources>
