@@ -79,8 +79,8 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sincronización activada</string>
     <string name="quick_settings_sync_off">Sincronización desactivada</string>
-    <string name="quick_settings_wifi_ap_on">Punto de acceso Wi-Fi activado</string>
-    <string name="quick_settings_wifi_ap_off">Punto de acceso Wi-Fi desactivado</string>
+    <string name="quick_settings_wifi_ap_on">Compartir Wi-Fi activado</string>
+    <string name="quick_settings_wifi_ap_off">No se comparte Wi-Fi</string>
     <string name="quick_settings_torch_on">Linterna activada</string>
     <string name="quick_settings_torch_off">Linterna desactivada</string>
     <string name="quick_settings_torch_off_notif">Toca para desactivar</string>
@@ -446,7 +446,7 @@
     <string name="pie_control_menu_title">Mostrar siempre botón de menú</string>
 
     <!-- Ringer mode tile (for non-MTK) -->
-    <string name="qs_tile_ringer_mode">Modo de tono de llamada</string>
+    <string name="qs_tile_ringer_mode">Modo de sonido</string>
 
     <!-- Clock settings category -->
     <string name="pref_cat_clock_settings_title">Ajustes del reloj</string>
@@ -982,4 +982,10 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contiene los ajustes relacionados con los controles \'Pie\'</string>
 
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Activar animación de carga</string>
+
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+    
 </resources>
