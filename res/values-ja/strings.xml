@@ -850,6 +850,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">バッテリー％テキスト</string>
     <string name="battery_percent_text_size_title">バッテリー％テキストサイズ</string>
+    <string name="battery_percent_text_size_larger">大</string>
     <string name="battery_percent_text_size_normal">中</string>
     <string name="battery_percent_text_size_smaller">小</string>
     <string name="battery_percent_text_size_even_smaller">極小</string>
