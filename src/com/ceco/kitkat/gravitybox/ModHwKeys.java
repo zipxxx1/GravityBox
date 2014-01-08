@@ -78,6 +78,7 @@ public class ModHwKeys {
     public static final String ACTION_SLEEP = "gravitybox.intent.action.SLEEP";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
+    public static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
 
     private static Class<?> classActivityManagerNative;
     private static Object mPhoneWindowManager;
@@ -1075,9 +1076,16 @@ public class ModHwKeys {
 
     private static void toggleRecentApps() {
         try {
-            XposedHelpers.callMethod(mPhoneWindowManager, "toggleRecentApps");
+            XposedHelpers.callMethod(mPhoneWindowManager, "sendCloseSystemWindows", 
+                    SYSTEM_DIALOG_REASON_RECENT_APPS);
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            log("Error executing sendCloseSystemWindows(SYSTEM_DIALOG_REASON_RECENT_APPS): " + t.getMessage());
+        }
+        try {
+            final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService"); 
+            XposedHelpers.callMethod(sbService, "toggleRecentApps");
+        } catch (Throwable t) {
+            log("Error executing toggleRecentApps(): " + t.getMessage());
         }
     }
 
