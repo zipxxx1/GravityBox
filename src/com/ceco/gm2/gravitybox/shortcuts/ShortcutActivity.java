@@ -33,14 +33,21 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class ShortcutActivity extends ListActivity {
-    protected static final String ACTION_LAUNCH_ACTION = "gravitybox.intent.action.LAUNCH_ACTION";
-    protected static final String EXTRA_ACTION = "action";
-    protected static final String EXTRA_DATA = "actionData";
+    public static final String ACTION_LAUNCH_ACTION = "gravitybox.intent.action.LAUNCH_ACTION";
+    public static final String EXTRA_ACTION = "action";
+    public static final String EXTRA_ACTION_TYPE = "actionType";
 
     private Context mContext;
     private IconListAdapter mListAdapter;
     private Button mBtnCancel;
-    
+
+    public static boolean isGbBroadcastShortcut(Intent intent) {
+        return (intent != null && intent.getAction() != null &&
+                intent.getAction().equals(ShortcutActivity.ACTION_LAUNCH_ACTION) &&
+                intent.hasExtra(ShortcutActivity.EXTRA_ACTION_TYPE) &&
+                intent.getStringExtra(ShortcutActivity.EXTRA_ACTION_TYPE).equals("broadcast"));
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
