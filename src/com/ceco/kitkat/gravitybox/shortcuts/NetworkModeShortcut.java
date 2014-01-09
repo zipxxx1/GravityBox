@@ -93,6 +93,7 @@ public class NetworkModeShortcut extends AShortcut {
                     launchIntent.setAction(ShortcutActivity.ACTION_LAUNCH_ACTION);
                     launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION, getAction());
                     launchIntent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, item.getNetworkMode());
+                    launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION_TYPE, getActionType());
                     launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                     Intent intent = new Intent();

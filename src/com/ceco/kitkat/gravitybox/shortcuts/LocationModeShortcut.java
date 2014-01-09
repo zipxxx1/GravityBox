@@ -85,6 +85,7 @@ public class LocationModeShortcut extends AShortcut {
                     Intent launchIntent = new Intent(mContext, ShortcutActivity.class);
                     launchIntent.setAction(ShortcutActivity.ACTION_LAUNCH_ACTION);
                     launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION, getAction());
+                    launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION_TYPE, getActionType());
                     launchIntent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE, item.getLocationMode());
                     launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
