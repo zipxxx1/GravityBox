@@ -946,4 +946,10 @@
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Background opacity</string>
 
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Media control</string>
+    <string name="shortcut_media_play_pause">Play/pause</string>
+    <string name="shortcut_media_previous">Previous</string>
+    <string name="shortcut_media_next">Next</string>
+
 </resources>
