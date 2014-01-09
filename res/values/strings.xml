@@ -985,4 +985,10 @@
     <!-- Battery percent text: option for charging animation -->
     <string name="battery_percent_text_anim_title">Enable charging animation</string>
 
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Statusbar clock visibility</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Hide on known clock-related widgets</string>
+    <string name="lockscreen_sb_clock_always_hide">Always hide</string>
+    <string name="lockscreen_sb_clock_always_show">Always show</string>
+
 </resources>

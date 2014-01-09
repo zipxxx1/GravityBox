@@ -204,6 +204,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_ROTATION = "pref_lockscreen_rotation";
     public static final String PREF_KEY_LOCKSCREEN_MENU_KEY = "pref_lockscreen_menu_key";
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
+    public static final String PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK = "pref_lockscreen_statusbar_clock";
     public static final String PREF_KEY_STATUSBAR_LOCK_POLICY = "pref_statusbar_lock_policy";
     public static final int SBL_POLICY_DEFAULT = 0;
     public static final int SBL_POLICY_UNLOCKED = 1;
@@ -815,6 +816,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private AppPickerPreference[] mPrefLockscreenTargetsApp;
         private SeekBarPreference mPrefLockscreenTargetsVerticalOffset;
         private SeekBarPreference mPrefLockscreenTargetsHorizontalOffset;
+        private ListPreference mPrefLockscreenSbClock;
         private CheckBoxPreference mPrefMobileDataSlow2gDisable;
         private PreferenceCategory mPrefCatPhoneTelephony;
         private PreferenceCategory mPrefCatPhoneMessaging;
@@ -1047,6 +1049,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     PREF_KEY_LOCKSCREEN_TARGETS_VERTICAL_OFFSET);
             mPrefLockscreenTargetsHorizontalOffset = (SeekBarPreference) findPreference(
                     PREF_KEY_LOCKSCREEN_TARGETS_HORIZONTAL_OFFSET);
+            mPrefLockscreenSbClock = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK);
 
             mPrefCatPhoneTelephony = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_TELEPHONY);
             mPrefCatPhoneMessaging = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_MESSAGING);
@@ -1395,6 +1398,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 } else if (option.equals(LOCKSCREEN_BG_IMAGE)) {
                     mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgImage);
                 }
+            }
+
+            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK)) {
+                mPrefLockscreenSbClock.setSummary(mPrefLockscreenSbClock.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_HWKEY_MENU_LONGPRESS)) {
