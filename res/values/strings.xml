@@ -937,9 +937,6 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contains Pie related settings</string>
 
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Enable charging animation</string>
-
     <!-- Shortcut for Google Now -->
     <string name="shortcut_google_now">Google Now</string>
 
@@ -951,5 +948,11 @@
     <string name="shortcut_media_play_pause">Play/pause</string>
     <string name="shortcut_media_previous">Previous</string>
     <string name="shortcut_media_next">Next</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Charging indication</string>
+    <string name="bpt_charging_none">None</string>
+    <string name="bpt_charging_static">Static</string>
+    <string name="bpt_charging_animated">Animated</string>
 
 </resources>

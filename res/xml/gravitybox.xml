@@ -477,11 +477,13 @@
                 android:dependency="pref_battery_percent_text"
                 android:defaultValue="%" />
 
-            <CheckBoxPreference 
-                android:key="pref_battery_percent_text_anim"
-                android:title="@string/battery_percent_text_anim_title"
+            <ListPreference 
+                android:key="battery_percent_text_charging"
+                android:title="@string/battery_percent_text_charging_title"
                 android:dependency="pref_battery_percent_text"
-                android:defaultValue="false" />
+                android:entries="@array/bpt_charging_entries"
+                android:entryValues="@array/bpt_charging_values"
+                android:defaultValue="0" />
 
         </PreferenceScreen>
 

@@ -85,7 +85,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT = "pref_battery_percent_text";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_SIZE = "pref_battery_percent_text_size";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STYLE = "pref_battery_percent_text_style";
-    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_ANIM = "pref_battery_percent_text_anim";
+    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING = "battery_percent_text_charging";
     public static final int BATTERY_STYLE_STOCK = 1;
     public static final int BATTERY_STYLE_CIRCLE = 2;
     public static final int BATTERY_STYLE_CIRCLE_PERCENT = 3;
@@ -392,7 +392,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED =
             "gravitybox.intent.action.BATTERY_PERCENT_TEXT_SIZE_CHANGED";
     public static final String EXTRA_BATTERY_PERCENT_TEXT_STYLE = "batteryPercentTextStyle";
-    public static final String EXTRA_BATTERY_PERCENT_TEXT_ANIM = "batteryPercentTextAnim";
+    public static final String EXTRA_BATTERY_PERCENT_TEXT_CHARGING = "batteryPercentTextCharging";
 
     public static final String ACTION_PREF_STATUSBAR_COLOR_CHANGED = "gravitybox.intent.action.STATUSBAR_COLOR_CHANGED";
     public static final String EXTRA_SB_BG_COLOR = "bgColor";
@@ -745,6 +745,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
         private ListPreference mBatteryStyle;
         private CheckBoxPreference mPrefBatteryPercent;
+        private ListPreference mPrefBatteryPercentCharging;
         private ListPreference mLowBatteryWarning;
         private SharedPreferences mPrefs;
         private AlertDialog mDialog;
@@ -897,6 +898,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mBatteryStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_STYLE);
             mPrefBatteryPercent = (CheckBoxPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT);
+            mPrefBatteryPercentCharging = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING);
             mLowBatteryWarning = (ListPreference) findPreference(PREF_KEY_LOW_BATTERY_WARNING_POLICY);
             mQuickSettings = (MultiSelectListPreference) findPreference(PREF_KEY_QUICK_SETTINGS);
 
@@ -1561,6 +1563,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE)) {
                 mPrefNavbarRingTargetsBgStyle.setSummary(mPrefNavbarRingTargetsBgStyle.getEntry());
             }
+
+            if (key == null || key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING)) {
+                mPrefBatteryPercentCharging.setSummary(mPrefBatteryPercentCharging.getEntry());
+            }
         }
 
         @Override
@@ -1583,10 +1589,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STYLE,
                         prefs.getString(PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
-            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_ANIM)) {
+            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING)) {
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_ANIM,
-                        prefs.getBoolean(PREF_KEY_BATTERY_PERCENT_TEXT_ANIM, false));
+                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_CHARGING, Integer.valueOf(
+                        prefs.getString(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING, "0")));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_PREFS, TileOrderActivity.updateTileList(prefs));
