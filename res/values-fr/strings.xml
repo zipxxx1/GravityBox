@@ -510,7 +510,7 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Téléphonie</string>
-    <string name="pref_cat_phone_mobile_data_title">Données mobile</string>
+    <string name="pref_cat_phone_mobile_data_title">Données mobiles</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Modalités touche mode réseau</string>
@@ -898,7 +898,7 @@
     <string name="shortcut_network_mode">Commutateur de mode réseau</string>
 
     <!-- Toggle mobile data shortcut -->
-    <string name="shortcut_mobile_data">Interrupteur données mobile</string>
+    <string name="shortcut_mobile_data">Interrupteur données mobiles</string>
 
     <!-- Toggle WiFi shortcut -->
     <string name="shortcut_wifi">Interrupteur WiFi</string>
@@ -931,8 +931,8 @@
     <string name="smart_radio_action_summary">Commuter en %s</string>
     <string name="pref_cat_smart_radio_title">Réseau intelligent</string>
     <string name="pref_smart_radio_experimental_summary">EXPÉRIMENTAL ! Peut affecter la gestion manuelle du mode réseau</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Données mobile activées</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Données mobile désactivées</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Données mobiles activées</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Données mobiles désactivées</string>
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Regroupe les paramètres liés aux touches flottantes (Pie control)</string>
