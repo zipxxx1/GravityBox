@@ -967,7 +967,4 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contém várias definições relacionadas com os controlos Pie</string>
 
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Ativar animação durante carga</string>
-
 </resources>

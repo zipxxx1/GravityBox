@@ -979,8 +979,5 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Pie vezérlővel kapcsolatos beállítások</string>
-    
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Töltés animáció engedélyezve</string>
 
 </resources>
