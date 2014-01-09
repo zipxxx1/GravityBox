@@ -57,8 +57,8 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sincronización activada</string>
     <string name="quick_settings_sync_off">Sincronización desactivada</string>
-    <string name="quick_settings_wifi_ap_on">Punto de acceso Wi-Fi</string>
-    <string name="quick_settings_wifi_ap_off">Punto de acceso Wi-Fi</string>
+    <string name="quick_settings_wifi_ap_on">Punto de acceso Wi-Fi activado</string>
+    <string name="quick_settings_wifi_ap_off">Punto de acceso Wi-Fi desactivado</string>
     <string name="quick_settings_torch_on">Linterna activada</string>
     <string name="quick_settings_torch_off">Linterna desactivada</string>
     <string name="quick_settings_torch_off_notif">Toca para desactivar</string>
@@ -588,7 +588,7 @@
     <string name="dt_position_auto">Automática (centro o derecha dependiendo de la posición del reloj)</string>
     <string name="dt_position_left">Izquierda</string>
     <string name="dt_position_right">Derecha</string>
-    <string name="pref_data_traffic_size_title">Tamaños</string>
+    <string name="pref_data_traffic_size_title">Tamaño</string>
     <string name="dt_size_normal">Normal</string>
     <string name="dt_size_smaller">Pequeño</string>
     <string name="dt_size_smallest">Muy pequeño</string>
