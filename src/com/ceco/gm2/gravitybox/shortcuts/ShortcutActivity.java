@@ -121,6 +121,8 @@ public class ShortcutActivity extends ListActivity {
             GpsShortcut.launchAction(mContext, intent);
         } else if (action.equals(GoogleNowShortcut.ACTION)) {
             GoogleNowShortcut.launchAction(mContext, intent);
+        } else if (action.equals(MediaControlShortcut.ACTION)) {
+            MediaControlShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -157,6 +159,7 @@ public class ShortcutActivity extends ListActivity {
         list.add(new BluetoothShortcut(mContext));
         if (Utils.hasNfc(mContext))
             list.add(new NfcShortcut(mContext));
+        list.add(new MediaControlShortcut(mContext));
         list.add(new RecentAppsShortcut(mContext));
         list.add(new AppLauncherShortcut(mContext));
         list.add(new RotationLockShortcut(mContext));

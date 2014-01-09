@@ -991,6 +991,12 @@
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Background opacity</string>
 
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Media control</string>
+    <string name="shortcut_media_play_pause">Play/pause</string>
+    <string name="shortcut_media_previous">Previous</string>
+    <string name="shortcut_media_next">Next</string>
+
     <!-- Lockscreen statusbar clock visibility -->
     <string name="pref_lockscreen_sb_clock_title">Statusbar clock visibility</string>
     <string name="lockscreen_sb_clock_hide_on_widget">Hide on known clock-related widgets</string>
