@@ -937,7 +937,22 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">Regroupe les paramètres liés aux touches flottantes (Pie control)</string>
 
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Activer l\'animation lors du chargement</string>
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Opacité du fond d\'écran</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Contrôle des médias</string>
+    <string name="shortcut_media_play_pause">Lecture/pause</string>
+    <string name="shortcut_media_previous">Précédent</string>
+    <string name="shortcut_media_next">Suivant</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Indication de charge</string>
+    <string name="bpt_charging_none">Aucune</string>
+    <string name="bpt_charging_static">Statique</string>
+    <string name="bpt_charging_animated">Animée</string>
 
 </resources>
