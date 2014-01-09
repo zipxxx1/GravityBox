@@ -109,6 +109,17 @@
                 android:summary="@string/pref_lockscreen_shade_disable_summary"
                 android:defaultValue="false" />
 
+            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+                android:key="pref_lockscreen_bg_opacity"
+                android:title="@string/pref_lockscreen_bg_opacity_title"
+                minimum="0"
+                maximum="100"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="%" 
+                android:defaultValue="50"
+                android:order="4" />
+
         </PreferenceCategory>
 
         <PreferenceCategory

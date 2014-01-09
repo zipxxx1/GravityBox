@@ -204,11 +204,14 @@ public class ModLockscreen {
                             flayout.addView(mLockScreenWallpaperImage, -1, -1);
                             keyguardView.addView(flayout,0);
                             if (DEBUG) log("inflateKeyguardView: background image set");
-                         }
-                         keyguardView.addView(flayout,0);
-                     }
-                 }
-             });
+                        }
+                        final float opacity = prefs.getInt(
+                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 50) / 100f;
+                        flayout.setAlpha(opacity);
+                        keyguardView.addView(flayout,0);
+                    }
+                }
+            });
 
             XposedHelpers.findAndHookMethod(kgViewManagerClass, 
                     "shouldEnableScreenRotation", new XC_MethodReplacement() {

@@ -191,6 +191,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR = "pref_lockscreen_bg_color";
     public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_IMAGE = "pref_lockscreen_bg_image";
     public static final String PREF_KEY_LOCKSCREEN_SHADE_DISABLE = "pref_lockscreen_shade_disable";
+    public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY = "pref_lockscreen_bg_opacity";
     public static final String LOCKSCREEN_BG_DEFAULT = "default";
     public static final String LOCKSCREEN_BG_COLOR = "color";
     public static final String LOCKSCREEN_BG_IMAGE = "image";
@@ -738,6 +739,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefLockscreenBg;
         private ColorPickerPreference mPrefLockscreenBgColor;
         private Preference mPrefLockscreenBgImage;
+        private SeekBarPreference mPrefLockscreenBgOpacity;
         private File wallpaperImage;
         private File wallpaperTemporary;
         private File notifBgImagePortrait;
@@ -924,6 +926,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     (ColorPickerPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR);
             mPrefLockscreenBgImage = 
                     (Preference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_IMAGE);
+            mPrefLockscreenBgOpacity = 
+                    (SeekBarPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY);
 
             wallpaperImage = new File(getActivity().getFilesDir() + "/lockwallpaper"); 
             wallpaperTemporary = new File(getActivity().getCacheDir() + "/lockwallpaper.tmp");
@@ -1392,7 +1396,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefLockscreenBg.setSummary(mPrefLockscreenBg.getEntry());
                 mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgColor);
                 mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgImage);
+                mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgOpacity);
                 String option = mPrefs.getString(PREF_KEY_LOCKSCREEN_BACKGROUND, LOCKSCREEN_BG_DEFAULT);
+                if (!option.equals(LOCKSCREEN_BG_DEFAULT)) {
+                    mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgOpacity);
+                }
                 if (option.equals(LOCKSCREEN_BG_COLOR)) {
                     mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgColor);
                 } else if (option.equals(LOCKSCREEN_BG_IMAGE)) {
