@@ -57,8 +57,8 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sincronización activada</string>
     <string name="quick_settings_sync_off">Sincronización desactivada</string>
-    <string name="quick_settings_wifi_ap_on">Punto de acceso Wi-Fi activado</string>
-    <string name="quick_settings_wifi_ap_off">Punto de acceso Wi-Fi desactivado</string>
+    <string name="quick_settings_wifi_ap_on">Punto de acceso Wi-Fi</string>
+    <string name="quick_settings_wifi_ap_off">Punto de acceso Wi-Fi</string>
     <string name="quick_settings_torch_on">Linterna activada</string>
     <string name="quick_settings_torch_off">Linterna desactivada</string>
     <string name="quick_settings_torch_off_notif">Toca para desactivar</string>
@@ -66,12 +66,12 @@
     <string name="quick_settings_qr_recording">Grabando&#8230;</string>
     <string name="quick_settings_qr_recorded">Grabado</string>
     <string name="quick_settings_qr_record">Mantén pulsado para grabar</string>
-    <string name="quick_settings_qr_recording_notif">Toca para parar de grabar</string>
+    <string name="quick_settings_qr_recording_notif">Toca para parar grabación</string>
     <string name="quick_settings_expanded_desktop_disabled">Desactivado</string>
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Expandido</string>
-    <string name="quick_settings_stay_awake_on">Permanecer despierto activado</string>
-    <string name="quick_settings_stay_awake_off">Permanecer despierto desactivado</string>
+    <string name="quick_settings_stay_awake_on">Permanecer despierto</string>
+    <string name="quick_settings_stay_awake_off">No permanecer despierto</string>
     <string name="quick_settings_nfc_on">NFC activado</string>
     <string name="quick_settings_nfc_off">NFC desactivado</string>
     <string name="quick_settings_camera_error_connect">Imposible conectar con la cámara</string>
@@ -935,4 +935,23 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contiene los ajustes relacionados con los controles \'Pie\'</string>
+
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+    
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Opacidad del fondo</string>
+    
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Control multimedia</string>
+    <string name="shortcut_media_play_pause">Reproducir/pausa</string>
+    <string name="shortcut_media_previous">Anterior</string>
+    <string name="shortcut_media_next">Siguiente</string>
+ 
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Indicación de carga</string>
+    <string name="bpt_charging_none">Ninguna</string>
+    <string name="bpt_charging_static">Estática</string>
+    <string name="bpt_charging_animated">Animada</string>
+    
 </resources>
