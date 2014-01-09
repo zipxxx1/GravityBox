@@ -4,14 +4,14 @@
     <string name="app_name">GravityBox [KK]</string>
 
     <string name="battery_style_title">Stile indicatore batteria</string>
-    <string name="battery_style_stock">Indicatore batteria stock</string>
+    <string name="battery_style_stock">Indicatore batteria predefinito</string>
     <string name="battery_style_circle">Batteria circolare no percentuale</string>
     <string name="battery_style_circle_percent">Batteria circolare con percentuale</string>
     <string name="battery_style_kitkat">Batteria KitKat</string>
     <string name="battery_style_kitkat_percent">Batteria KitKat con percentuale</string>
     <string name="battery_style_none">Nessuno</string>
 
-    <string name="vol_music_controls_title">Tasto vol cambia traccia</string>
+    <string name="vol_music_controls_title">Cambia traccia con volume</string>
     <string name="vol_music_controls_summary">Cambia traccia alla pressione prolungata dei tasti volume a schermo spento</string>
 
     <string name="low_battery_warning_policy_title">Avviso per poca batteria</string>
@@ -38,7 +38,7 @@
 
     <string name="important">Importante</string>
 
-    <string name="caller_fullscreen_photo_title">Foto chiamante tutto schermo</string>
+    <string name="caller_fullscreen_photo_title">Foto chiamante a schermo intero</string>
 
         <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sync on</string>
@@ -114,9 +114,9 @@
     <string name="about_donate_summary">Fai una donazione a me se credi che questa app se la meriti! Considera anche una donazione a rovo89 per il suo eccellente framework Xposed.</string>
 
     <!-- Reboot confirmation -->
-    <string name="reboot_confirm">Il %s si riavvierà</string>
-    <string name="reboot_confirm_recovery">Il %s si riavvierà in Recovery</string>
-    <string name="reboot_confirm_bootloader">Il %s si riavvierà in Bootloader.</string>
+    <string name="reboot_confirm">Il %s verrà riavviato</string>
+    <string name="reboot_confirm_recovery">Il %s verrà riavviato in Recovery</string>
+    <string name="reboot_confirm_bootloader">Il %s verrà riavviato in Bootloader.</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modalità Engineer</string>
@@ -161,9 +161,9 @@
     <string name="pref_brightness_min_summary">Permette di impostare il livello di luminosità minimo. Si applica all\'impostazione manuale (richiede riavvio)</string>
 
     <!-- Autobrightness levels -->
-    <string name="pref_ab_title">Livelli Auto luminosità</string>
+    <string name="pref_ab_title">Valori luminosità automatica</string>
     <string name="pref_ab_summary">Permette di impostare la luminosità dello schermo in base alla luce ambientale (lux)</string>
-    <string name="level">Livello</string>
+    <string name="level">Valore</string>
     <string name="pref_ab_lux_max_label">Lux massima</string>
     <string name="pref_ab_brighness_label">Luminosità (%d &#8211; 255)</string>
     <string name="pref_ab_number_error_general">Il numero specificato non è valido</string>
@@ -197,8 +197,8 @@
     <string name="pref_music_volume_steps_summary">Aggiunge più step volume per lo stream musicale (richiede riavvio)</string>
 
     <!-- Safe headset media volume -->
-    <string name="pref_safe_media_volume_title">Volume sicuro in cuffia</string>
-    <string name="pref_safe_media_volume_summary">Attiva o disattiva la funzione volume sicuro in cuffia</string>
+    <string name="pref_safe_media_volume_title">Volume sicurezza cuffie</string>
+    <string name="pref_safe_media_volume_summary">Attiva o disattiva la riduzione automatica del volume quando si inseriscono le cuffie nel jack audio</string>
 
     <!-- Disable charging LED -->
     <string name="pref_charging_led_disable_title">Disabilita LED in carica</string>
@@ -206,7 +206,7 @@
 
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Tasti hardware</string>
-    <string name="pref_cat_hwkey_actions_summary">Permette di impostare azioni personalizzate alla pressione dei tasti hardware</string>
+    <string name="pref_cat_hwkey_actions_summary">Permette di impostare azioni personalizzate alla pressione dei tasti fisici o virtuali</string>
     <string name="hwkey_menu_longpress_dialog_title">Azione per la pressione prolungata del tasto MENU</string>
     <string name="hwkey_menu_doubletap_dialog_title">Azione per il doppio-tap del tasto MENU</string>
     <string name="hwkey_back_longpress_dialog_title">Azione per la pressione prolungata del tasto INDIETRO</string>
@@ -300,7 +300,7 @@
     <string name="pref_notif_color_title">Imposta colore sfondo</string>
     <string name="pref_notif_image_portrait_title">Imposta immagine verticale</string>
     <string name="pref_notif_image_landscape_title">Imposta immagine orizzontale</string>
-    <string name="pref_notif_background_alpha_title">Sfondo trasparente</string>
+    <string name="pref_notif_background_alpha_title">Trasparenza sfondo</string>
     <string name="pref_notif_color_mode_title">Tipo di sfondo</string>
     <string name="color_fill_overlay">sovrastante</string>
     <string name="color_fill_underlay">sottostante</string>
@@ -335,7 +335,7 @@
     <string name="button_backlight_mode_disable">Disabilita retroilluminazione tasti</string>
     <string name="button_backlight_mode_always_on">Sempre attiva se lo schermo è acceso</string>
     <string name="pref_button_backlight_notifications_title">Notifiche mediante illuminazione tasti</string>
-    <string name="pref_button_backlight_notifications_summary">SPERIMENTALE! Accendi tasti se c\'è una notifica e lo schermo è spento. Usare nel caso il telefono non abbia LED</string>
+    <string name="pref_button_backlight_notifications_summary">SPERIMENTALE! Accendi tasti se c\'è una notifica e lo schermo è spento. Usare nel caso il telefono non abbia il LED</string>
 	
 	    <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Sfondo Dithered Holo</string>
@@ -343,21 +343,21 @@
 
     <!-- Disable hardware keys for pie -->
     <string name="pref_hwkeys_disable_title">Disabilita tasti hardware</string>
-    <string name="pref_hwkeys_disable_summary">Disabilita MENU, BACK, HOME se Pie control attivo. Le azioni dei tasti HW  continueranno a funzionare. (per telefoni che hanno tasti HW)</string>
+    <string name="pref_hwkeys_disable_summary">Disabilita MENU, BACK, HOME se Pie control attivo. Le azioni dei tasti HW continueranno a funzionare. (per telefoni che hanno tasti HW)</string>
 
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Usa il tema Holo Dark</string>
     <string name="pref_gb_theme_dark_summary">Cambia interfaccia di GB, usa il tema Holo Dark invece di Holo Light</string>
 
     <!-- Clear all recents positions -->
-    <string name="recent_clear_off">Off</string>
+    <string name="recent_clear_off">Non mostrare</string>
     <string name="recent_clear_top_left">Alto sinistra</string>
     <string name="recent_clear_top_right">Alto destra</string>
     <string name="recent_clear_bottom_left">Basso sinistra</string>
     <string name="recent_clear_bottom_right">Basso destra</string>
 
     <!-- Clear all recents top margin -->
-    <string name="pref_recent_clear_margin_top_title">Modifica margine superiore</string>
+    <string name="pref_recent_clear_margin_top_title">Margine superiore</string>
 
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Cerca</string>
@@ -544,7 +544,7 @@
     <string name="ongoing_notif_info">L\'elenco sarà automaticamente riempito con ogni notifica che apparirà.
         Puoi decidere se bloccare tali notifiche la prossima volta che appariranno. Funzione da usare con cautela.</string>
     <string name="ongoing_notif_reset_list">Pulisci elenco</string>
-    <string name="ongoing_notif_reset_alert">Sei sicuro di voler pulire l\'elenco??
+    <string name="ongoing_notif_reset_alert">Sei sicuro di voler pulire l\'elenco?
         Verrà pulito l\'elenco attuale e sbloccate tutte le notifiche precedentemente bloccate.</string>
     <string name="ongoing_notif_list_empty">(elenco vuoto)</string>
 
@@ -589,7 +589,7 @@
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> liberi</string>
     <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
     <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> usati</string>
-    <string name="pref_rambar_title">Mem. App recenti</string>
+    <string name="pref_rambar_title">Indicatore RAM in attività recenti</string>
     <string name="rambar_off">Spento</string>
     <string name="rambar_top">In alto</string>
     <string name="rambar_bottom">In basso</string>
@@ -672,7 +672,7 @@
     <string name="pref_navbar_color_enable_title">Attiva colori barra di navigazione</string>
     <string name="pref_navbar_color_enable_summary">Richiede il riavvio dopo la disattivazione</string>
     <string name="pref_navbar_key_color_title">Colore tasto navigazione</string>
-    <string name="pref_navbar_key_glow_color_title">Colore tasto navigazione evidenziato</string>
+    <string name="pref_navbar_key_glow_color_title">Colore tasto navigazione selezionato</string>
     <string name="pref_navbar_bg_color_title">Colore sfondo barra navigazione</string>
 
     <!-- Transparency manager mode -->
@@ -691,7 +691,7 @@
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Stile icone barra di stato</string>
-    <string name="pref_status_icon_style_summary">Si applica a Silenzioso, Vibrazione, Allarme, ecc</string>
+    <string name="pref_status_icon_style_summary">Si applica a Silenzioso, Vibrazione, Sveglia, ecc.</string>
     <string name="icon_style_jb">JellyBean</string>
     <string name="icon_style_kk">KitKat</string>
 
@@ -703,7 +703,7 @@
     <string name="hwkey_action_back">Torna indietro</string>
 
     <!-- Clear all recents bottom margin -->
-    <string name="pref_recent_clear_margin_bottom_title">Regolare il margine inferiore</string>
+    <string name="pref_recent_clear_margin_bottom_title">Margine inferiore</string>
 
     <!-- Google Plus -->
     <string name="pref_about_gplus_title">Google+</string>
@@ -770,7 +770,7 @@
     <string name="screenrecord_toast_saved">Registrazione salvata come %s</string>
     <string name="screenrecord_toast_save_error">Impossibile salvare</string>
     <string name="action_screenrecord">Registra schermo</string>
-    <string name="pref_powermenu_screenrecord_title">Registrazione schermo nel menù spegnimento</string>
+    <string name="pref_powermenu_screenrecord_title">Registrazione schermo in menù spegnimento</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostra sempre tastierino numerico</string>
@@ -828,7 +828,7 @@
     
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Nascondi al tocco</string>
-    <string name="pref_qs_hide_on_change_summary">Al tocco di una casella Quicksetting verrà nascosta automaticamente la barra di stato. Si applica solo alle caselle modificate con GravityBox.</string>
+    <string name="pref_qs_hide_on_change_summary">Al tocco di una casella Quicksetting verrà nascosto automaticamente il pannello notifiche. Si applica solo alle caselle modificate con GravityBox.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menù spegnimento</string>
