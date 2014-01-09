@@ -943,4 +943,7 @@
     <!-- Shortcut for Google Now -->
     <string name="shortcut_google_now">Google Now</string>
 
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Background opacity</string>
+
 </resources>
