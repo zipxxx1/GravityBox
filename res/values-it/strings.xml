@@ -916,12 +916,33 @@
     <string name="pref_smart_radio_on_data_disabled_title">Dati mobili disabilitati</string>
 
     <!-- Pie category summary -->
-    <string name="pie_control_summary">Configurazione Pie control</string>
+    <string name="pie_control_summary">Contiene impostazioni relative al Pie control</string>
     
     <!-- Battery percent text: option for charging animation -->
     <string name="battery_percent_text_anim_title">Abilita animazione in carica</string>
 
 	<!-- Shortcut for Google Now -->
     <string name="shortcut_google_now">Google Now</string>
-	
+    
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Trasparenza sfondo</string>
+
+     <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Controlli multimediali</string>
+    <string name="shortcut_media_play_pause">Play/pausa</string>
+    <string name="shortcut_media_previous">Precedente</string>
+    <string name="shortcut_media_next">Successivo</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Animazione in carica</string>
+    <string name="bpt_charging_none">Nessuna</string>
+    <string name="bpt_charging_static">Statica</string>
+    <string name="bpt_charging_animated">Animata</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Visibilità orologio barra di stato</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Nascondi con widget orologio noti</string>
+    <string name="lockscreen_sb_clock_always_hide">Nascondi sempre</string>
+    <string name="lockscreen_sb_clock_always_show">Mostra sempre</string>
+
 </resources>
