@@ -167,6 +167,7 @@ public class ShortcutActivity extends ListActivity {
         list.add(new RecentAppsShortcut(mContext));
         if (mInvokedFromGb) {
             list.add(new KillAppShortcut(mContext));
+            list.add(new SwitchAppShortcut(mContext));
         }
         list.add(new AppLauncherShortcut(mContext));
         list.add(new RotationLockShortcut(mContext));
