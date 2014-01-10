@@ -570,10 +570,14 @@ public class ModLockscreen {
                                     ((AppWidgetHostView) vg.getChildAt(0)).getAppWidgetInfo();
                             final String widgetPackage = info.provider.getPackageName();
                             if (DEBUG) log("onPageSwitched: widget package = " + widgetPackage);
-                            if (CLOCK_WIDGETS.contains(widgetPackage)) {
-                                final View v = (View) param.thisObject; 
-                                v.setSystemUiVisibility(v.getSystemUiVisibility() | STATUSBAR_DISABLE_CLOCK);
-                            }
+                            final boolean disableClock = (Integer.valueOf(mPrefs.getString(
+                                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK, "0")) == 0
+                                    && CLOCK_WIDGETS.contains(widgetPackage)) ||
+                                    Integer.valueOf(mPrefs.getString(
+                                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK, "0")) == 1;
+                            final View v = (View) param.thisObject;
+                            v.setSystemUiVisibility(v.getSystemUiVisibility() |
+                                    (disableClock ? STATUSBAR_DISABLE_CLOCK : 0));
                         }
                     }
                 }
