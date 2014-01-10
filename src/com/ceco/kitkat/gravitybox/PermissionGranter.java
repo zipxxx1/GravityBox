@@ -31,6 +31,7 @@ public class PermissionGranter {
     private static final String PERM_ACCESS_SURFACE_FLINGER = "android.permission.ACCESS_SURFACE_FLINGER";
     private static final String PERM_WRITE_SETTINGS = "android.permission.WRITE_SETTINGS";
     private static final String PERM_CAMERA = "android.permission.CAMERA";
+    private static final String PERM_CHANGE_NETWORK_STATE = "android.permission.CHANGE_NETWORK_STATE";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -109,6 +110,19 @@ public class PermissionGranter {
                                     "appendInts", gpGids, bpGids);
 
                             if (DEBUG) log(pkgName + ": Permission added: " + pCamera);
+                        }
+
+                        // Add android.permission.CHANGE_NETWORK_STATE needed by Usb Tethering Tile
+                        if (!grantedPerms.contains(PERM_CHANGE_NETWORK_STATE)) {
+                            final Object pCns = XposedHelpers.callMethod(permissions, "get",
+                                    PERM_CHANGE_NETWORK_STATE);
+                            grantedPerms.add(PERM_CHANGE_NETWORK_STATE);
+                            int[] gpGids = (int[]) XposedHelpers.getObjectField(sharedUser, "gids");
+                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCns, "gids");
+                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
+                                    "appendInts", gpGids, bpGids);
+
+                            if (DEBUG) log(pkgName + ": Permission added: " + pCns);
                         }
                     }
                 }
