@@ -75,7 +75,10 @@
     <string name="quick_settings_nfc_on">NFC activado</string>
     <string name="quick_settings_nfc_off">NFC desactivado</string>
     <string name="quick_settings_camera_error_connect">Imposible conectar con la cámara</string>
-
+    <string name="quick_settings_usb_tether_off">Desconectado</string>
+    <string name="quick_settings_usb_tether_connected">Tethering off</string>
+    <string name="quick_settings_usb_tether_on">Tethering</string>
+ 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Ajustes rápidos de la barra de estado</string>
     <string name="quick_settings_summary">Permite mostrar u ocultar los ajustes rápidos en la barra de estado</string>
@@ -104,6 +107,7 @@
     <string name="qs_tile_screenshot">Captura de pantalla</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Cámara</string>
+    <string name="qs_tile_usb_tethering">USB Tethering</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de color</string>
@@ -398,7 +402,7 @@
     <string name="pie_control_menu_title">Mostrar siempre botón de menú</string>
 
     <!-- Ringer mode tile (for non-MTK) -->
-    <string name="qs_tile_ringer_mode">Modo de tono de llamada</string>
+    <string name="qs_tile_ringer_mode">Modo de sonido de llamada</string>
 
     <!-- Clock settings category -->
     <string name="pref_cat_clock_settings_title">Ajustes del reloj</string>
@@ -616,8 +620,8 @@
     <string name="hwkey_recents_longpress_dialog_title">Acción con pulsación prolongada en botón multitarea</string>
 
     <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Mostrar arco de batería</string>
-    <string name="pref_lockscreen_battery_arc_summary">Muestra un arco con el estado de la batería alrededor del anillo de desbloqueo</string>
+    <string name="pref_lockscreen_battery_arc_title">Mostrar batería circular</string>
+    <string name="pref_lockscreen_battery_arc_summary">Muestra un círculo con el estado de la batería alrededor del anillo de desbloqueo</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Activar/desactivar linterna</string>
@@ -768,7 +772,7 @@
     <string name="pref_volume_panel_timeout_title">Ocultar panel de volumen tras</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Modos de la casilla de modo de tono</string>
+    <string name="pref_qs_ringer_mode_title">Modos de la casilla de modo de sonido</string>
     <string name="ringer_mode_silent">Silencio</string>
     <string name="ringer_mode_vibrate">Vibrar</string>
     <string name="ringer_mode_sound">Sonar</string>
@@ -954,4 +958,18 @@
     <string name="bpt_charging_static">Estática</string>
     <string name="bpt_charging_animated">Animada</string>
     
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Visibilidad del reloj de la barra de estado</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Ocultar con widgets con reloj</string>
+    <string name="lockscreen_sb_clock_always_hide">Ocultar siempre</string>
+    <string name="lockscreen_sb_clock_always_show">Mostrar siempre</string>
+    
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Ajustes de la casilla de app rápida 2</string>
+    <string name="qs_tile_quickapp_2">Aplicación rápida 2</string>
+    
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Forzar control de volumen de multimedia</string>
+    <string name="pref_vol_force_music_control_summary">Al activarlo, los botones de volumen controlan el volumen multimedia en lugar del de llamadas</string>
+
 </resources>
