@@ -289,7 +289,7 @@ public class ModHwKeys {
                 goToSleep();
             } else if (action.equals(ACTION_MEDIA_CONTROL) && intent.hasExtra(EXTRA_MEDIA_CONTROL)) {
                 final int keyCode = intent.getIntExtra(EXTRA_MEDIA_CONTROL, 0);
-                log("MEDIA CONTROL: keycode=" + keyCode);
+                if (DEBUG) log("MEDIA CONTROL: keycode=" + keyCode);
                 if (keyCode == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE ||
                         keyCode == KeyEvent.KEYCODE_MEDIA_PREVIOUS ||
                         keyCode == KeyEvent.KEYCODE_MEDIA_NEXT) {
