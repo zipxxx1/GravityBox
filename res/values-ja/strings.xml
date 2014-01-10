@@ -959,5 +959,26 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">パイ関連の設定を変更します。</string>
+    
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">背景の透過度</string>
 
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">メディア操作</string>
+    <string name="shortcut_media_play_pause">再生/一時停止</string>
+    <string name="shortcut_media_previous">前へ</string>
+    <string name="shortcut_media_next">次へ</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">充電中の表示</string>
+    <string name="bpt_charging_none">なし</string>
+    <string name="bpt_charging_static">静止</string>
+    <string name="bpt_charging_animated">アニメ</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">ステータスバーの時計表示</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">時計ウィジェットがあれば非表示</string>
+    <string name="lockscreen_sb_clock_always_hide">非表示</string>
+    <string name="lockscreen_sb_clock_always_show">表示</string>
+    
 </resources>
