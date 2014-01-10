@@ -965,4 +965,8 @@
     <string name="lockscreen_sb_clock_always_hide">Always hide</string>
     <string name="lockscreen_sb_clock_always_show">Always show</string>
 
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">QuickApp tile 2 settings</string>
+    <string name="qs_tile_quickapp_2">Quick App 2</string>
+
 </resources>
