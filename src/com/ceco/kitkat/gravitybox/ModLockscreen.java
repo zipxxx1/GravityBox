@@ -563,19 +563,22 @@ public class ModLockscreen {
                     View.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (param.args[0] instanceof ViewGroup) {
+                    final View v = (View) param.thisObject;
+                    final int visibilityMode = Integer.valueOf(mPrefs.getString(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK, "0"));
+
+                    if (visibilityMode != 0) {
+                        v.setSystemUiVisibility(visibilityMode == 1 ?
+                                v.getSystemUiVisibility() | STATUSBAR_DISABLE_CLOCK :
+                                    v.getSystemUiVisibility() & ~STATUSBAR_DISABLE_CLOCK);
+                    } else if (param.args[0] instanceof ViewGroup) {
                         final ViewGroup vg = (ViewGroup) param.args[0];
                         if (vg.getChildAt(0) instanceof AppWidgetHostView) {
                             final AppWidgetProviderInfo info = 
                                     ((AppWidgetHostView) vg.getChildAt(0)).getAppWidgetInfo();
                             final String widgetPackage = info.provider.getPackageName();
                             if (DEBUG) log("onPageSwitched: widget package = " + widgetPackage);
-                            final boolean disableClock = (Integer.valueOf(mPrefs.getString(
-                                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK, "0")) == 0
-                                    && CLOCK_WIDGETS.contains(widgetPackage)) ||
-                                    Integer.valueOf(mPrefs.getString(
-                                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK, "0")) == 1;
-                            final View v = (View) param.thisObject;
+                            final boolean disableClock = CLOCK_WIDGETS.contains(widgetPackage);
                             v.setSystemUiVisibility(v.getSystemUiVisibility() |
                                     (disableClock ? STATUSBAR_DISABLE_CLOCK : 0));
                         }
