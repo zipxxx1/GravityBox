@@ -170,7 +170,8 @@ public class ModQuickSettings {
             R.id.ringer_mode_tileview,
             R.id.nfc_tileview,
             R.id.camera_tileview,
-            R.id.usb_tether_tileview
+            R.id.usb_tether_tileview,
+            R.id.quickapp_tileview_2
         ));
         if (Utils.isMtkDevice()) {
             mCustomGbTileKeys.add(R.id.wifi_tileview);
@@ -534,6 +535,7 @@ public class ModQuickSettings {
 
             IntentFilter intentFilter = new IntentFilter(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED);
+            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_2);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
             intentFilter.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
             intentFilter.addAction(UsbTetherTile.ACTION_TETHER_STATE_CHANGED);
@@ -631,6 +633,10 @@ public class ModQuickSettings {
                 QuickAppTile qAppTile = new QuickAppTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 qAppTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(qAppTile);
+
+                QuickAppTile qAppTile2 = new QuickAppTile(mContext, mGbContext, mStatusBar, mPanelBar, 2);
+                qAppTile2.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                mTiles.add(qAppTile2);
 
                 ExpandedDesktopTile edTile = new ExpandedDesktopTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 edTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
