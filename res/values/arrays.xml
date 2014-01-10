@@ -130,6 +130,7 @@
         <item>@string/qs_tile_screenshot</item>
         <item>@string/qs_tile_gravitybox</item>
         <item>@string/qs_tile_camera</item>
+        <item>@string/qs_tile_usb_tethering</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
@@ -162,6 +163,7 @@
         <item>screenshot_tileview</item>
         <item>gravitybox_tileview</item>
         <item>camera_tileview</item>
+        <item>usb_tether_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_entries" translatable="false">
@@ -190,6 +192,7 @@
         <item>@string/qs_tile_screenshot</item>
         <item>@string/qs_tile_gravitybox</item>
         <item>@string/qs_tile_camera</item>
+        <item>@string/qs_tile_usb_tethering</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_values" translatable="false">
@@ -218,6 +221,7 @@
         <item>screenshot_tileview</item>
         <item>gravitybox_tileview</item>
         <item>camera_tileview</item>
+        <item>usb_tether_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_override_entries" translatable="false">

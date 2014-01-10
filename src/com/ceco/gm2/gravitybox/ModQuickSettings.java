@@ -43,6 +43,7 @@ import com.ceco.gm2.gravitybox.quicksettings.TileOrderActivity;
 import com.ceco.gm2.gravitybox.quicksettings.TorchTile;
 import com.ceco.gm2.gravitybox.quicksettings.GravityBoxTile;
 import com.ceco.gm2.gravitybox.quicksettings.SyncTile;
+import com.ceco.gm2.gravitybox.quicksettings.UsbTetherTile;
 import com.ceco.gm2.gravitybox.quicksettings.VolumeTile;
 import com.ceco.gm2.gravitybox.quicksettings.WifiApTile;
 import com.ceco.gm2.gravitybox.quicksettings.WifiTile;
@@ -168,7 +169,8 @@ public class ModQuickSettings {
             R.id.gps_tileview,
             R.id.ringer_mode_tileview,
             R.id.nfc_tileview,
-            R.id.camera_tileview
+            R.id.camera_tileview,
+            R.id.usb_tether_tileview
         ));
         if (Utils.isMtkDevice()) {
             mCustomGbTileKeys.add(R.id.wifi_tileview);
@@ -534,6 +536,10 @@ public class ModQuickSettings {
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
             intentFilter.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
+            intentFilter.addAction(UsbTetherTile.ACTION_TETHER_STATE_CHANGED);
+            intentFilter.addAction(UsbTetherTile.ACTION_USB_STATE);
+            intentFilter.addAction(Intent.ACTION_MEDIA_SHARED);
+            intentFilter.addAction(UsbTetherTile.ACTION_MEDIA_UNSHARED);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
         }
     };
@@ -641,6 +647,10 @@ public class ModQuickSettings {
                 CameraTile camTile = new CameraTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 camTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(camTile);
+
+                UsbTetherTile utTile = new UsbTetherTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                utTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                mTiles.add(utTile);
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {
