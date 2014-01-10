@@ -877,14 +877,14 @@
     <string name="battery_percent_text_size_smallest">Legkisebb</string>
     <string name="battery_percent_text_style_title">Akkumlátor százalék szöveg stílusa</string>
     <string name="battery_percent_text_style_default">Alapértelmezett</string>
-    <string name="battery_percent_text_style_numbers_only">Csak számok (százalékos jelző nélkül)</string>
+    <string name="battery_percent_text_style_numbers_only">Csak számok (százalékos ikon nélkül)</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Akkumlátor beállítások</string>
 
     <!-- Cursor control in navigation bar -->
     <string name="pref_navbar_cursor_control_title">Kurzor irányítás gombok</string>
-    <string name="pref_navbar_cursor_control_summary">Engedélyezi a kurzor irányító gombokat a navigációs sávon aktív billentyűzetnél</string>
+    <string name="pref_navbar_cursor_control_summary">Megjeleníti a kurzor mozgató gombokat a navigációs sávon a billentyűzet használatakor</string>
 
     <!-- Volume rocker wake -->
     <string name="pref_volume_rocker_wake_title">Ébresztés hangerő gombokkal</string>
@@ -979,5 +979,29 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Pie vezérlővel kapcsolatos beállítások</string>
+    
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Háttér átlátszóság</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Média vezérlő</string>
+    <string name="shortcut_media_play_pause">Lejátszás/Szünet</string>
+    <string name="shortcut_media_previous">Előző</string>
+    <string name="shortcut_media_next">Következő</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Töltés kijelzés</string>
+    <string name="bpt_charging_none">Semmilyen</string>
+    <string name="bpt_charging_static">Statikus</string>
+    <string name="bpt_charging_animated">Animált</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Óra láthatósága az állapotsávon</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Elrejtve ismert, órához kapcsolódó widget esetén</string>
+    <string name="lockscreen_sb_clock_always_hide">Mindig elrejtve</string>
+    <string name="lockscreen_sb_clock_always_show">Mindig mutatva</string>
 
 </resources>
