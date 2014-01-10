@@ -81,8 +81,8 @@
     <string name="quick_settings_sync_off">同步关闭</string>
     <string name="quick_settings_wifi_ap_on">Wi-Fi AP开启</string>
     <string name="quick_settings_wifi_ap_off">Wi-Fi AP关闭</string>
-    <string name="quick_settings_torch_on">手电筒开启</string>
-    <string name="quick_settings_torch_off">手电筒关闭</string>
+    <string name="quick_settings_torch_on">手电筒已开启</string>
+    <string name="quick_settings_torch_off">手电筒已关闭</string>
     <string name="quick_settings_torch_off_notif">按下以关闭</string>
     <string name="quick_settings_qr_playing">播放中&#8230;</string>
     <string name="quick_settings_qr_recording">录音中&#8230;</string>
@@ -503,8 +503,8 @@
     <string name="pref_clock_link_summary">启用后状态栏的时间将链接到指定应用而不是日期与时间设置</string>
 
     <!-- GravityBox settings startup handling -->
-    <string name="gb_startup_progress">等待GravityBox系统框架的响应&#8230;</string>
-    <string name="gb_startup_error">GravityBoy系统框架未响应 退出中&#8230;</string>
+    <string name="gb_startup_progress">正在等待GravityBox系统框架的响应&#8230;</string>
+    <string name="gb_startup_error">GravityBoy系统框架未响应，退出中&#8230;</string>
 
     <!-- National data roaming -->
     <string name="pref_national_roaming_title">国内数据漫游</string>
@@ -631,7 +631,7 @@
     <string name="pref_ongoing_notifications_title">应用通知拦截器</string>
     <string name="pref_ongoing_notifications_summary">允许拦截选定应用的通知</string>
     <string name="ongoing_notif_info">当一个应用的通知出现时，它将被添加到此列表中。
-        你可以决定当应用的通知下一次出现时是否将其拦截。请小心使用</string>
+        你可以决定当应用的通知下一次出现时是否将其拦截，请小心使用</string>
     <string name="ongoing_notif_reset_list">重置列表</string>
     <string name="ongoing_notif_reset_alert">是否确实要重置列表？
         这将清空当前列表，并且解除所有之前被拦截的应用通知</string>
@@ -750,7 +750,7 @@
 
     <!-- Minimum screen brightness warning -->
     <string name="screen_brightness_min_warning">您的屏幕可能不支持低于20的值。如果您的屏幕亮不起来，
-        按住”音量+”键至少7秒钟将会还原亮度，调整亮度请使用更大的值</string>
+        按住“音量+”键至少 7 秒钟将来还原亮度，然后将最小亮度调整为更大的值</tring>
 
     <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">普通</string>
@@ -858,7 +858,7 @@
     <string name="pref_cat_launcher_tweaks_title">启动器调整</string>
     <string name="pref_cat_launcher_tweaks_summary">仅适用于谷歌体验启动器</string>
     <string name="pref_cat_launcher_desktop_grid_title">桌面网格</string>
-    <string name="pref_launcher_desktop_grid_info_title">使用非默认的值可能破坏小部件的布局，请谨慎使用。改动将在启动器重新启动后生效</string>
+    <string name="pref_launcher_desktop_grid_info_title">使用非默认的值可能破坏小部件的布局，请谨慎使用，改动将在启动器重新启动后生效</string>
     <string name="pref_launcher_desktop_grid_rows_title">行数</string>
     <string name="pref_launcher_desktop_grid_cols_title">列数</string>
     <string name="desktop_grid_default">默认</string>
@@ -981,5 +981,29 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">包含Pie控制相关设置</string>
+    
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">背景不透明度</string>
+    
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">媒体控制</string>
+    <string name="shortcut_media_play_pause">播放/暂停</string>
+    <string name="shortcut_media_previous">上一首</string>
+    <string name="shortcut_media_next">下一首</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">充电指示</string>
+    <string name="bpt_charging_none">无</string>
+    <string name="bpt_charging_static">静止</string>
+    <string name="bpt_charging_animated">动画</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">状态栏时钟能见度</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">隐藏已知时钟相关部件</string>
+    <string name="lockscreen_sb_clock_always_hide">总是隐藏</string>
+    <string name="lockscreen_sb_clock_always_show">总是显示</string>
 
 </resources>
