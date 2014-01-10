@@ -75,7 +75,7 @@
     <string name="quick_settings_nfc_on">NFC 开启</string>
     <string name="quick_settings_nfc_off">NFC 关闭</string>
     <string name="quick_settings_camera_error_connect">无法连接相机</string>
-    <string name="quick_settings_usb_tether_off">断开的</string>
+    <string name="quick_settings_usb_tether_off">已断开</string>
     <string name="quick_settings_usb_tether_connected">共享关闭</string>
     <string name="quick_settings_usb_tether_on">共享</string>
 
@@ -261,7 +261,7 @@
     
     <!--  Solid black Holo background -->
     <string name="pref_holo_bg_solid_black_title">纯黑色背景</string>
-    <string name="pref_holo_bg_solid_black_summary">在默认的 Holo 系统主题内使用纯黑色的背景而不是黑-灰色的渐变（需要重新启动）</string>
+    <string name="pref_holo_bg_solid_black_summary">在默认的 Holo 系统主题内使用纯黑色的背景而不是黑-灰色渐变（需要重新启动）</string>
     
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">每行磁贴数</string>
@@ -437,7 +437,7 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">亮度设置</string>
-    <string name="pref_brightness_master_switch_summary">这个功能只能在您的设备支持标准的 Android 亮度调整功能才启用。如果遇到任何亮度问题请关闭此选项（需要重新启动）</string>
+    <string name="pref_brightness_master_switch_summary">这个功能只能在您的设备支持标准的 Android 亮度调整功能才启用，如果遇到任何亮度问题请关闭此选项（需要重新启动）</string>
 
     <!-- HW Key Action: Recent apps -->
     <string name="hwkey_action_recent_apps">显示最近使用的应用程序</string>
@@ -681,9 +681,9 @@
     <string name="caller_unkown_photo_result_not_successful">照片未更改</string>
 
     <!-- Minimum screen brightness warning -->
-    <string name="screen_brightness_min_warning">您的屏幕可能不支持低于 20 的值。如果您的屏幕无法点亮，
-        按住“音量+”键至少 7 秒钟将来还原亮度，然后将最小亮度调整为更大的值</string>
-        
+    <string name="screen_brightness_min_warning">您的屏幕可能不支持低于 20 的值。如果您的屏幕无法点亮，按住“音量+”键至少 7 秒钟将来还原亮度，然后将最小亮度调整为更大的值</string>
+    
+    
     <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">普通</string>
     <string name="pref_cat_navbar_keys_title">导航键</string>
@@ -742,7 +742,7 @@
     <string name="gb_new_package_dialog">已安装使用废弃软件包名的旧版 GravityBox。
 	使用新的软件包之前必须将其卸载。GravityBox 将尝试从旧 GravityBox 中转移设置
 	到新版 GravityBox，然后将其卸载。出现提示时，您必须确认卸载。卸载后，
-	请在 Xposed 安装器中激活新模块并立即重新启动，否则你可能会遇到系统的稳定性问题。</string>
+	请在 Xposed 安装器中激活新模块并立即重新启动，否则你可能会遇到系统的稳定性问题</string>
     <string name="gb_new_package_settings_transfer_ok">GravityBox 设置转移成功</string>
     <string name="gb_new_package_settings_transfer_failed">GravityBox 设置转移失败</string>
     
@@ -964,5 +964,13 @@
     <string name="lockscreen_sb_clock_hide_on_widget">隐藏已知时钟相关部件</string>
     <string name="lockscreen_sb_clock_always_hide">总是隐藏</string>
     <string name="lockscreen_sb_clock_always_show">总是显示</string>
+    
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">快速程序磁贴 2 设置</string>
+    <string name="qs_tile_quickapp_2">快速程序磁贴 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">强制媒体音量控制</string>
+    <string name="pref_vol_force_music_control_summary">当启用时音量键控制媒体的音量而不是铃声音量</string>
 
 </resources>
