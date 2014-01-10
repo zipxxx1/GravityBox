@@ -81,6 +81,7 @@ public class ModHwKeys {
     public static final String ACTION_SLEEP = "gravitybox.intent.action.SLEEP";
     public static final String ACTION_MEDIA_CONTROL = "gravitybox.intent.action.MEDIA_CONTROL";
     public static final String EXTRA_MEDIA_CONTROL = "mediaControl";
+    public static final String ACTION_KILL_FOREGROUND_APP = "gravitybox.intent.action.KILL_FOREGROUND_APP";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
     public static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
@@ -297,6 +298,8 @@ public class ModHwKeys {
                         keyCode == KeyEvent.KEYCODE_MEDIA_NEXT) {
                     injectKey(keyCode);
                 }
+            } else if (action.equals(ACTION_KILL_FOREGROUND_APP) && mPhoneWindowManager != null) {
+                killForegroundApp();
             }
         }
     };
@@ -734,6 +737,7 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_TOGGLE_ROTATION_LOCK);
             intentFilter.addAction(ACTION_SLEEP);
             intentFilter.addAction(ACTION_MEDIA_CONTROL);
+            intentFilter.addAction(ACTION_KILL_FOREGROUND_APP);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
