@@ -59,8 +59,8 @@
     <string name="quick_settings_sync_off">同步关闭</string>
     <string name="quick_settings_wifi_ap_on">Wi-Fi AP 开启</string>
     <string name="quick_settings_wifi_ap_off">Wi-Fi AP 关闭</string>
-    <string name="quick_settings_torch_on">手电筒开启</string>
-    <string name="quick_settings_torch_off">手电筒关闭</string>
+    <string name="quick_settings_torch_on">手电筒已开启</string>
+    <string name="quick_settings_torch_off">手电筒已关闭</string>
     <string name="quick_settings_torch_off_notif">按下以关闭</string>
     <string name="quick_settings_qr_playing">播放中&#8230;</string>
     <string name="quick_settings_qr_recording">录音中&#8230;</string>
@@ -75,6 +75,9 @@
     <string name="quick_settings_nfc_on">NFC 开启</string>
     <string name="quick_settings_nfc_off">NFC 关闭</string>
     <string name="quick_settings_camera_error_connect">无法连接相机</string>
+    <string name="quick_settings_usb_tether_off">断开的</string>
+    <string name="quick_settings_usb_tether_connected">共享关闭</string>
+    <string name="quick_settings_usb_tether_on">共享</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">状态栏快速设置</string>
@@ -104,6 +107,7 @@
     <string name="qs_tile_screenshot">屏幕截图</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">相机</string>
+    <string name="qs_tile_usb_tethering">USB 共享</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">颜色选择器</string>
@@ -328,7 +332,7 @@
 
     <!-- Battery status in pie controls -->
     <string name="pie_battery_status_charging">正在充电：<xliff:g id="percent">%d</xliff:g>%%</string>
-    <string name="pie_battery_status_full">已充满!</string>
+    <string name="pie_battery_status_full">已充满！</string>
     <string name="pie_battery_status_discharging">剩余电量：<xliff:g id="percent">%d</xliff:g>%%</string>
 
     <!-- Phone status in pie controls -->
@@ -454,8 +458,8 @@
     <string name="pref_clock_link_summary">启用后状态栏的时间将链接到指定应用而不是日期与时间设置</string>
 
     <!-- GravityBox settings startup handling -->
-    <string name="gb_startup_progress">等待 GravityBox 系统框架的响应&#8230;</string>
-    <string name="gb_startup_error">GravityBox 系统框架未响应。退出中&#8230;</string>
+    <string name="gb_startup_progress">正在等待 GravityBox 系统框架的响应&#8230;</string>
+    <string name="gb_startup_error">GravityBox 系统框架未响应，退出中&#8230;</string>
 
     <!-- National data roaming -->
     <string name="pref_national_roaming_title">国内数据漫游</string>
@@ -560,7 +564,7 @@
     <string name="pref_ongoing_notifications_title">应用通知拦截器</string>
     <string name="pref_ongoing_notifications_summary">允许拦截选定应用的通知</string>
     <string name="ongoing_notif_info">当一个应用的通知出现时，它将被添加到此列表中。
-        你可以决定当应用的通知下一次出现时是否将其拦截。请小心使用</string>
+        你可以决定当应用的通知下一次出现时是否将其拦截，请小心使用</string>
     <string name="ongoing_notif_reset_list">重置列表</string>
     <string name="ongoing_notif_reset_alert">是否确实要重置列表？
         这将清空当前列表，并且解除所有之前被拦截的应用通知</string>
@@ -800,7 +804,7 @@
     <string name="pref_cat_launcher_tweaks_title">启动器调整</string>
     <string name="pref_cat_launcher_tweaks_summary">仅适用于原生启动器和谷歌启动器</string>
     <string name="pref_cat_launcher_desktop_grid_title">桌面网格</string>
-    <string name="pref_launcher_desktop_grid_info_title">使用非默认的值可能破坏小部件的布局，请谨慎使用。改动将在启动器重新启动后生效</string>
+    <string name="pref_launcher_desktop_grid_info_title">使用非默认的值可能破坏小部件的布局，请谨慎使用，改动将在启动器重新启动后生效</string>
     <string name="pref_launcher_desktop_grid_rows_title">行数</string>
     <string name="pref_launcher_desktop_grid_cols_title">列数</string>
     <string name="desktop_grid_default">默认</string>
@@ -937,7 +941,28 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">包含 Pie 控制相关设置</string>
     
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">启用充电动画</string>
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">背景不透明度</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">媒体控制</string>
+    <string name="shortcut_media_play_pause">播放/暂停</string>
+    <string name="shortcut_media_previous">上一首</string>
+    <string name="shortcut_media_next">下一首</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">充电指示</string>
+    <string name="bpt_charging_none">无</string>
+    <string name="bpt_charging_static">静止</string>
+    <string name="bpt_charging_animated">动画</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">状态栏时钟能见度</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">隐藏已知时钟相关部件</string>
+    <string name="lockscreen_sb_clock_always_hide">总是隐藏</string>
+    <string name="lockscreen_sb_clock_always_show">总是显示</string>
 
 </resources>
