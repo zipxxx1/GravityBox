@@ -17,7 +17,6 @@ package com.ceco.kitkat.gravitybox.shortcuts;
 
 import java.util.ArrayList;
 
-import com.ceco.kitkat.gravitybox.ModHwKeys;
 import com.ceco.kitkat.gravitybox.R;
 import com.ceco.kitkat.gravitybox.Utils;
 import com.ceco.kitkat.gravitybox.adapters.IIconListAdapterItem;
@@ -40,6 +39,7 @@ public class ShortcutActivity extends ListActivity {
     private Context mContext;
     private IconListAdapter mListAdapter;
     private Button mBtnCancel;
+    private boolean mInvokedFromGb;
 
     public static boolean isGbBroadcastShortcut(Intent intent) {
         return (intent != null && intent.getAction() != null &&
@@ -70,6 +70,7 @@ public class ShortcutActivity extends ListActivity {
                     finish();
                 }
             });
+            mInvokedFromGb = intent.hasExtra("gravitybox");
             return;
         } else if (intent.getAction().equals(ACTION_LAUNCH_ACTION) &&
                 intent.hasExtra(EXTRA_ACTION)) {
@@ -123,8 +124,6 @@ public class ShortcutActivity extends ListActivity {
             NfcShortcut.launchAction(mContext, intent);
         } else if (action.equals(GoogleNowShortcut.ACTION)) {
             GoogleNowShortcut.launchAction(mContext, intent);
-        } else if (action.equals(MediaControlShortcut.ACTION)) {
-            MediaControlShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -162,7 +161,9 @@ public class ShortcutActivity extends ListActivity {
         if (Utils.hasNfc(mContext)) {
             list.add(new NfcShortcut(mContext));
         }
-        list.add(new MediaControlShortcut(mContext));
+        if (mInvokedFromGb) {
+            list.add(new MediaControlShortcut(mContext));
+        }
         list.add(new RecentAppsShortcut(mContext));
         list.add(new AppLauncherShortcut(mContext));
         list.add(new RotationLockShortcut(mContext));
