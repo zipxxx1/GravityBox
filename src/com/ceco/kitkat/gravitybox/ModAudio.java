@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.XResources;
+import android.media.AudioManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -28,11 +29,14 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModAudio {
     private static final String TAG = "GB:ModAudio";
     private static final String CLASS_AUDIO_SERVICE = "android.media.AudioService";
-    private static final int STREAM_MUSIC = 3;
-    private static final int VOLUME_STEPS = 30;
     private static final boolean DEBUG = false;
 
+    private static final int STREAM_MUSIC = 3;
+    private static final int VOLUME_STEPS = 30;
+    private static final int DEFAULT_STREAM_TYPE_OVERRIDE_DELAY_MS = 5000;
+
     private static boolean mSafeMediaVolumeEnabled;
+    private static boolean mVolForceMusicControl;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -47,6 +51,10 @@ public class ModAudio {
                 mSafeMediaVolumeEnabled = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_SAFE_MEDIA_VOLUME_ENABLED, false);
                 if (DEBUG) log("Safe headset media volume set to: " + mSafeMediaVolumeEnabled);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED)) {
+                mVolForceMusicControl = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_VOL_FORCE_MUSIC_CONTROL, false);
+                if (DEBUG) log("Force music volume control set to: " + mVolForceMusicControl);
             }
         }
     };
@@ -72,6 +80,7 @@ public class ModAudio {
                     if (context != null) {
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SAFE_MEDIA_VOLUME_CHANGED);
+                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                         if (DEBUG) log("AudioService constructed. Broadcast receiver registered");
                     }
@@ -100,6 +109,35 @@ public class ModAudio {
                     if (!mSafeMediaVolumeEnabled) {
                         param.setResult(true);
                         return;
+                    }
+                }
+            });
+
+            mVolForceMusicControl = prefs.getBoolean(
+                    GravityBoxSettings.PREF_KEY_VOL_FORCE_MUSIC_CONTROL, false);
+            XposedHelpers.findAndHookMethod(classAudioService, "getActiveStreamType",
+                    int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mVolForceMusicControl &&
+                            (Integer) param.args[0] == AudioManager.USE_DEFAULT_STREAM_TYPE) {
+                        final boolean voiceCapable = XposedHelpers.getBooleanField(
+                                param.thisObject, "mVoiceCapable");
+                        final boolean isInComm = (Boolean) XposedHelpers.callMethod(
+                                param.thisObject, "isInCommunication");
+                        final boolean activeMusic = (Boolean) XposedHelpers.callMethod(
+                                param.thisObject, "isAfMusicActiveRecently",
+                                DEFAULT_STREAM_TYPE_OVERRIDE_DELAY_MS);
+                        final Object mediaFocusControl = XposedHelpers.getObjectField(
+                                param.thisObject, "mMediaFocusControl");
+                        final boolean isRemoteMusic = (Boolean) XposedHelpers.callMethod(
+                                mediaFocusControl, "checkUpdateRemoteStateIfActive",
+                                    STREAM_MUSIC);
+
+                        if (voiceCapable && !isInComm && !activeMusic && !isRemoteMusic) {
+                            param.setResult(STREAM_MUSIC);
+                            if (DEBUG) log("getActiveStreamType: Forcing music stream");
+                        }
                     }
                 }
             });
