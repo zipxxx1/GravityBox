@@ -734,11 +734,11 @@
 
     <string name="shortcut_wifi_ap">Wi-Fi 핫스팟 ON/OFF</string>
 
-    <string name="shortcut_location_mode">지리 정보 모드</string>
+    <string name="shortcut_location_mode">위치 정보 모드</string>
     <string name="location_mode_high_accuracy">높은 정확도</string>
     <string name="location_mode_battery_saving">배터리 절약</string>
     <string name="location_mode_device_only">GPS 센서 전용</string>
-    <string name="location_mode_off">지리 정보 비활성화</string>
+    <string name="location_mode_off">위치 정보 비활성화</string>
 
     <string name="shortcut_nfc">NFC ON/OFF</string>
 
