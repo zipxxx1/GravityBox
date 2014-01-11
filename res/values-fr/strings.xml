@@ -101,6 +101,9 @@
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
     <string name="quick_settings_camera_error_connect">Pas de connexion à l\'appareil</string>
+    <string name="quick_settings_usb_tether_off">Déconnecté</string>
+    <string name="quick_settings_usb_tether_connected">Partage de connexion off</string>
+    <string name="quick_settings_usb_tether_on">Partage de connexion</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Touches des paramètres rapides</string>
@@ -133,6 +136,7 @@
     <string name="qs_tile_screenshot">Capture d\'écran</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Appareil photo</string>
+    <string name="qs_tile_usb_tethering">Partage de connexion USB</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -981,5 +985,37 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contient les paramètres liés aux touches flottantes (Pie control)</string>
+
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Opacité du fond d\'écran</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Contrôle des médias</string>
+    <string name="shortcut_media_play_pause">Lecture/pause</string>
+    <string name="shortcut_media_previous">Précédent</string>
+    <string name="shortcut_media_next">Suivant</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Indication de charge</string>
+    <string name="bpt_charging_none">Aucune</string>
+    <string name="bpt_charging_static">Statique</string>
+    <string name="bpt_charging_animated">Animée</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Visibilité horlage barre d\'état</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Masquer lors de l\'affichage de widgets relatifs à l\'horloge</string>
+    <string name="lockscreen_sb_clock_always_hide">Toujours masquée</string>
+    <string name="lockscreen_sb_clock_always_show">Toujours affichée</string>
+
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Paramètres touche Appli Rapide 2</string>
+    <string name="qs_tile_quickapp_2">Appli Rapide 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Forcer le contrôle du volume de la musique</string>
+    <string name="pref_vol_force_music_control_summary">Si activé, les touches de volume contrôlent le volume de la musique au lieu de celui de la sonnerie</string>
 
 </resources>
