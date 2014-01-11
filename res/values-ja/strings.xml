@@ -86,6 +86,9 @@
     <string name="quick_settings_nfc_on">NFC オン</string>
     <string name="quick_settings_nfc_off">NFC オフ</string>
     <string name="quick_settings_camera_error_connect">カメラ接続不可</string>
+    <string name="quick_settings_usb_tether_off">未接続</string>
+    <string name="quick_settings_usb_tether_connected">テザリングオフ</string>
+    <string name="quick_settings_usb_tether_on">テザリング</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">ステータスバークイック設定タイル</string>
@@ -117,6 +120,7 @@
     <string name="qs_tile_stay_awake">画面常時点灯</string>
     <string name="qs_tile_screenshot">スクリーンショット</string>
     <string name="qs_tile_camera">カメラ</string>
+    <string name="qs_tile_usb_tethering">USBテザリング</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">カラーピッカー</string>
@@ -414,7 +418,7 @@
 
     <!-- QuickApp tile settings -->
     <string name="qs_tile_quickapp">クイックアプリ</string>
-    <string name="pref_cat_quickapp_tile_title">クイックアプリタイル設定</string>
+    <string name="pref_cat_quickapp_tile_title">クイックアプリタイルの設定</string>
     <string name="pref_quickapp_default_title">メインアプリ</string>
     <string name="pref_quickapp_slot1_title">長押しアプリスロット1</string>
     <string name="pref_quickapp_slot2_title">長押しアプリスロット2</string>
@@ -980,5 +984,13 @@
     <string name="lockscreen_sb_clock_hide_on_widget">時計ウィジェットがあれば非表示</string>
     <string name="lockscreen_sb_clock_always_hide">非表示</string>
     <string name="lockscreen_sb_clock_always_show">表示</string>
+    
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">クイックアプリタイル2の設定</string>
+    <string name="qs_tile_quickapp_2">クイックアプリ2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">音楽の音量操作を強制</string>
+    <string name="pref_vol_force_music_control_summary">有効にすると音量キーで着信音の代わりに音楽の音量を変更します。</string>
     
 </resources>
