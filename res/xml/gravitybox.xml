@@ -1472,21 +1472,25 @@
         android:title="@string/pref_cat_misc_title"
         android:summary="@string/pref_cat_misc_summary">
 
-        <ListPreference 
-            android:key="pref_recents_clear_all2"
-            android:title="@string/recents_clear_all_title"
-            android:entries="@array/recents_clear_entries"
-            android:entryValues="@array/recents_clear_values"
-            android:defaultValue="53" />
+        <PreferenceCategory
+            android:key="pref_cat_misc_recents_panel"
+            android:title="@string/pref_cat_misc_recents_panel_title">
 
-        <ListPreference 
-            android:key="pref_rambar"
-            android:title="@string/pref_rambar_title"
-            android:entries="@array/rambar_entries"
-            android:entryValues="@array/rambar_values"
-            android:defaultValue="0" />
+            <ListPreference 
+                android:key="pref_recents_clear_all2"
+                android:title="@string/recents_clear_all_title"
+                android:entries="@array/recents_clear_entries"
+                android:entryValues="@array/recents_clear_values"
+                android:defaultValue="53" />
 
-        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <ListPreference 
+                android:key="pref_rambar"
+                android:title="@string/pref_rambar_title"
+                android:entries="@array/rambar_entries"
+                android:entryValues="@array/rambar_values"
+                android:defaultValue="0" />
+
+            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
                 android:key="pref_recent_clear_margin_top"
                 android:title="@string/pref_recent_clear_margin_top_title"
                 minimum="0"
@@ -1496,7 +1500,7 @@
                 monitorBoxUnit="px"
                 android:defaultValue="0" />
 
-        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
                 android:key="pref_recent_clear_margin_bottom"
                 android:title="@string/pref_recent_clear_margin_bottom_title"
                 minimum="0"
@@ -1505,6 +1509,8 @@
                 monitorBoxEnabled="true"
                 monitorBoxUnit="px"
                 android:defaultValue="0" />
+
+        </PreferenceCategory>
 
     </PreferenceScreen>
 
