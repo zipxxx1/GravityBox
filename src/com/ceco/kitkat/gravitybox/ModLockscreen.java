@@ -35,6 +35,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -44,7 +45,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View.OnLongClickListener;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.View;
@@ -105,6 +105,9 @@ public class ModLockscreen {
     private static Handler mHandler;
     private static Context mGbContext;
     private static boolean mTorchEnabled;
+    private static int mPrevGlowPadState;
+    private static PointF mStartGlowPadPoint;
+    private static float mDisplayDensity;
 
     // Battery Arc
     private static HandleDrawable mHandleDrawable;
@@ -297,6 +300,9 @@ public class ModLockscreen {
                             boolean.class, glowPadViewShowTargetsHook);
                     XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "hideTargets",
                             boolean.class, boolean.class, glowPadViewHideTargetsHook);
+                    XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "switchToState", 
+                            int.class, float.class, float.class, glowPadViewSwitchToStateHook);
+                    mHandler = new Handler();
 
                     // apply custom bottom/right margin to shift unlock ring upwards/left
                     try {
@@ -424,9 +430,6 @@ public class ModLockscreen {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (DEBUG) log("GlowPadView.OnTriggerListener; index=" + ((Integer) param.args[1]));
-                    if (mHandler != null) {
-                        mHandler.removeCallbacks(mToggleTorchRunnable);
-                    }
                     prefs.reload();
                     if (!prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_ENABLE, false)) return;
@@ -637,13 +640,6 @@ public class ModLockscreen {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             mArcVisible = false;
-
-            if (param.thisObject == mGlowPadView && mTorchEnabled) {
-                if (mHandler == null) {
-                    mHandler = new Handler();
-                }
-                mHandler.postDelayed(mToggleTorchRunnable, 3000);
-            }
         }
     };
 
@@ -651,8 +647,36 @@ public class ModLockscreen {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             mArcVisible = true;
-            if (param.thisObject == mGlowPadView && mHandler != null) {
-                mHandler.removeCallbacks(mToggleTorchRunnable);
+        }
+    };
+
+    private static XC_MethodHook glowPadViewSwitchToStateHook = new XC_MethodHook() {
+        @Override
+        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+            if (mTorchEnabled && mHandler != null && param.thisObject == mGlowPadView) {
+                final int state = (Integer) param.args[0];
+                final float x = (Float) param.args[1];
+                final float y = (Float) param.args[2];
+                if (DEBUG) log("state=" + state + "; x=" + x + "; y=" + y);
+
+                if (state == 2) {
+                    mHandler.postDelayed(mToggleTorchRunnable, 1000);
+                } else if (state == 3) {
+                    if (mPrevGlowPadState == 2) {
+                        mStartGlowPadPoint = new PointF(x,y);
+                        mDisplayDensity = mGlowPadView.getResources().getDisplayMetrics().density;
+                    } else {
+                        double distance = Math.sqrt(Math.pow(x - mStartGlowPadPoint.x,2) +
+                                Math.pow(y - mStartGlowPadPoint.y, 2)) / mDisplayDensity;
+                        if (DEBUG) log("distance=" + distance);
+                        if (distance > 15) {
+                            mHandler.removeCallbacks(mToggleTorchRunnable);
+                        }
+                    }
+                } else {
+                    mHandler.removeCallbacks(mToggleTorchRunnable);
+                }
+                mPrevGlowPadState = state;
             }
         }
     };
