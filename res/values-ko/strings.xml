@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-	<!-- Application Name string deleted, app name must be static to English. -->
-    <string name="battery_style_title">배터리 아이콘 스타일</string>	
+    <!-- Application Name string deleted, app name must be static to English. -->
+    <string name="battery_style_title">배터리 아이콘 스타일</string>
     <string name="battery_style_stock">순정 배터리 아이콘</string>
     <string name="battery_style_circle">원형 배터리</string>
     <string name="battery_style_circle_percent">원형 배터리 (퍼센트 표시)</string>
@@ -19,13 +19,13 @@
     <string name="low_battery_warning_off">알리지 않음</string>
 
     <string name="reboot_required">변경된 사항은 재시작 후에 적용됩니다.</string>
-	
-	<string name="signal_icon_autohide_title">신호 표시기 아이콘 자동 숨기기</string>
-	<string name="signal_icon_autohide_summary">SIM 카드가 장착되지 않은 슬롯이 있으면, 자동으로 신호 표시기 아이콘을 숨깁니다.</string>
-	<string name="sim_slot_1">SIM 슬롯 1번 자동 숨기기</string>
-	<string name="sim_slot_2">SIM 슬롯 2번 자동 숨기기</string>
-	<string name="sim_disable_notifications">알림 숨기기</string>
-	<string name="sim_disable_notifications_summary">\"SIM 카드가 장착되지 않음\" 알림을 숨깁니다.</string>
+
+    <string name="signal_icon_autohide_title">신호 표시기 아이콘 자동 숨기기</string>
+    <string name="signal_icon_autohide_summary">SIM 카드가 장착되지 않은 슬롯이 있으면, 자동으로 신호 표시기 아이콘을 숨깁니다.</string>
+    <string name="sim_slot_1">SIM 슬롯 1번 자동 숨기기</string>
+    <string name="sim_slot_2">SIM 슬롯 2번 자동 숨기기</string>
+    <string name="sim_disable_notifications">알림 숨기기</string>
+    <string name="sim_disable_notifications_summary">\"SIM 카드가 장착되지 않음\" 알림을 숨깁니다.</string>
 
     <string name="poweroff_advanced_title">고급 종료 창 (Advanced Reboot)</string>
     <string name="poweroff_advanced_summary">기본 재시작과 복구 모드(리커버리)로 재시작할 수 있는 고급 종료 창을 활성화합니다.</string>
@@ -39,25 +39,25 @@
     <string name="vol_key_cursor_control_on_reverse">볼륨 증가/감소 버튼을 누르면 커서가 오른쪽/왼쪽으로 이동합니다.</string>
 
     <string name="recents_clear_all_title">최근 실행한 앱 목록 비우기</string>
-	
-	<string name="fix_datetime_crash_title">날짜 및 시간 설정 크래시 수정</string>
-	<string name="fix_datetime_crash_summary">날짜 및 시간 설정에 진입하려 할 때 충돌이 일어나면 활성화하여 고칩니다. (재시작 필요)</string>
 
-	<string name="fix_caller_id_phone_title">전화 중 발신자 전화번호 수정</string>
-	<string name="fix_caller_id_phone_summary">전화가 올 때 발신자 전화번호가 제대로 표시되지 않을 때 활성화하여 고칩니다. (재시작 필요)</string>
-	<string name="fix_caller_id_phone_alert">재시작 후, 연락처의 데이터를 모두 지우고 다시 추가해야 효과가 일어납니다.</string>
-	
-	<string name="fix_caller_id_mms_title">메세지 중 발신자 전화번호 수정</string>
-	<string name="fix_caller_id_mms_summary">메세지에서 한 전화번호가 2개 이상의 대화기록이 있으면 활성화하여 고칩니다. (재시작 필요)</string>
-	<string name="fix_caller_id_mms_alert">재시작 후, 대화기록을 전부 지워야 효과가 일어납니다.</string>
-	
-	<string name="fix_calendar_title">달력 앱 수정</string>
-	<string name="fix_calendar_summary">화면이 주기적으로 자동 회전이 발생하는 경우에 활성화하여 고칩니다. (재시작 필요)</string>
+    <string name="fix_datetime_crash_title">날짜 및 시간 설정 크래시 수정</string>
+    <string name="fix_datetime_crash_summary">날짜 및 시간 설정에 진입하려 할 때 충돌이 일어나면 활성화하여 고칩니다. (재시작 필요)</string>
+
+    <string name="fix_caller_id_phone_title">전화 중 발신자 전화번호 수정</string>
+    <string name="fix_caller_id_phone_summary">전화가 올 때 발신자 전화번호가 제대로 표시되지 않을 때 활성화하여 고칩니다. (재시작 필요)</string>
+    <string name="fix_caller_id_phone_alert">재시작 후, 연락처의 데이터를 모두 지우고 다시 추가해야 효과가 일어납니다.</string>
+
+    <string name="fix_caller_id_mms_title">메세지 중 발신자 전화번호 수정</string>
+    <string name="fix_caller_id_mms_summary">메세지에서 한 전화번호가 2개 이상의 대화기록이 있으면 활성화하여 고칩니다. (재시작 필요)</string>
+    <string name="fix_caller_id_mms_alert">재시작 후, 대화기록을 전부 지워야 효과가 일어납니다.</string>
+
+    <string name="fix_calendar_title">달력 앱 수정</string>
+    <string name="fix_calendar_summary">화면이 주기적으로 자동 회전이 발생하는 경우에 활성화하여 고칩니다. (재시작 필요)</string>
 
     <string name="important">중요</string>
 
     <string name="caller_fullscreen_photo_title">발신자 이미지 확대</string>
-	<string name="caller_fullscreen_photo_summary">발신 전화에서 발신자의 이미지를 전체 화면으로 확대합니다.</string>
+    <string name="caller_fullscreen_photo_summary">발신 전화에서 발신자의 이미지를 전체 화면으로 확대합니다.</string>
 
     <string name="quick_settings_sync_on">동기화 활성화</string>
     <string name="quick_settings_sync_off">동기화 비활성화</string>
@@ -76,10 +76,10 @@
     <string name="quick_settings_expanded_desktop_expanded">확장됨</string>
     <string name="quick_settings_stay_awake_on">화면 꺼짐 비활성화</string>
     <string name="quick_settings_stay_awake_off">화면 꺼짐 활성화</string>
-	<string name="quick_settings_wifi">Wi-Fi</string>
-	<string name="quick_settings_wifi_off">Wi-Fi 비활성화</string>
-	<string name="quick_settings_wifi_not_connected">연결되지 않음</string>
-	<string name="quick_settings_wifi_turning_on">켜는 중&#8230;</string>
+    <string name="quick_settings_wifi">Wi-Fi</string>
+    <string name="quick_settings_wifi_off">Wi-Fi 비활성화</string>
+    <string name="quick_settings_wifi_not_connected">연결되지 않음</string>
+    <string name="quick_settings_wifi_turning_on">켜는 중&#8230;</string>
     <string name="quick_settings_nfc_on">NFC 활성화</string>
     <string name="quick_settings_nfc_off">NFC 비활성화</string>
     <string name="quick_settings_camera_error_connect">카메라에 연결할 수 없습니다!</string>
@@ -90,16 +90,16 @@
     <string name="qs_tile_airplane_mode">비행기 모드</string>
     <string name="qs_tile_battery">배터리 상태</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
-	<string name="qs_tile_wifi_alt">Wi-Fi (CM 스타일)</string>
+    <string name="qs_tile_wifi_alt">Wi-Fi (CM 스타일)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (CM 스타일)</string>
     <string name="qs_tile_mobile_data">모바일 데이터</string>
     <string name="qs_tile_network_mode">네트워크 모드</string>
     <string name="qs_tile_data_usage">데이터 사용 상태</string>
-	<string name="qs_tile_audio">오디오 프로파일</string>
+    <string name="qs_tile_audio">오디오 프로파일</string>
     <string name="qs_tile_brightness">밝기</string>
-	<string name="qs_tile_screen_timeout">화면 타임아웃</string>
+    <string name="qs_tile_screen_timeout">화면 타임아웃</string>
     <string name="qs_tile_autorotation">자동 회전</string>
     <string name="qs_tile_sync">동기화</string>
     <string name="qs_tile_wifi_ap">Wi-Fi 핫스팟</string>
@@ -120,18 +120,18 @@
     <string name="statusbar_bgcolor_title">상단바 배경 색깔</string>
     <string name="statusbar_bgcolor_summary">상단바 배경 색깔을 변경합니다.</string>
 
-	<string name="fix_tts_settings_title">TTS 설정 수정</string>
-	<string name="fix_tts_settings_summary">언어 및 키보드 설정에서 음성 검색과 TTS 옵션을 추가합니다. (재시작 필요)</string>
-	
-	<string name="fix_dev_opts_title">고급 개발자 옵션</string>
-	<string name="fix_dev_opts_summary">고급적인 개발자 옵션을 활성화합니다. (재시작 필요)</string>
+    <string name="fix_tts_settings_title">TTS 설정 수정</string>
+    <string name="fix_tts_settings_summary">언어 및 키보드 설정에서 음성 검색과 TTS 옵션을 추가합니다. (재시작 필요)</string>
+
+    <string name="fix_dev_opts_title">고급 개발자 옵션</string>
+    <string name="fix_dev_opts_summary">고급적인 개발자 옵션을 활성화합니다. (재시작 필요)</string>
 
     <string name="pref_cat_statusbar_title">상단바 트윅</string>
     <string name="pref_cat_statusbar_summary">상단바의 기능들과 외형을 변경할 수 있습니다.</string>
     <string name="pref_cat_misc_title">기타 트윅</string>
     <string name="pref_cat_misc_summary">특정 카테고리에 들지 않는 기능들이 있습니다.</string>
-	<string name="pref_cat_fixes_title">MTK6589 수정 옵션</string>
-	<string name="pref_cat_fixes_summary">MTK6589 칩셋에 관련된 수정 옵션들이 있습니다. 필요하시면 사용하세요.</string>
+    <string name="pref_cat_fixes_title">MTK6589 수정 옵션</string>
+    <string name="pref_cat_fixes_summary">MTK6589 칩셋에 관련된 수정 옵션들이 있습니다. 필요하시면 사용하세요.</string>
 
     <string name="pref_cat_about_title">어플리케이션 정보</string>
     <string name="about_gb_summary">C3C076@XDA가 개발함. 터치하여 공식 스레드로 이동해보세요.</string>
@@ -200,11 +200,11 @@
 
     <string name="pref_lockscreen_menu_key_title">잠금 화면에서 메뉴 키 사용</string>
     <string name="pref_lockscreen_menu_key_summary">잠금 화면에서 메뉴 키를 길게 눌러서 잠금을 더 빨리 해제할 수 있습니다. (재시작 필요)</string>
-	
-	<string name="pref_mms_fix_wakelock_title">메세지 수신 시 화면 켜짐 방지</string>
-	<string name="pref_mms_fix_wakelock_summary">메세지를 수신했을 때 화면이 켜지는 점을 수정하여 방지합니다. (재시작 필요)</string>
-    
-	<string name="pref_statusbar_center_clock_title">시계 중앙</string>
+
+    <string name="pref_mms_fix_wakelock_title">메세지 수신 시 화면 켜짐 방지</string>
+    <string name="pref_mms_fix_wakelock_summary">메세지를 수신했을 때 화면이 켜지는 점을 수정하여 방지합니다. (재시작 필요)</string>
+
+    <string name="pref_statusbar_center_clock_title">시계 중앙</string>
 
     <string name="pref_cat_media_title">미디어 트윅</string>
     <string name="pref_cat_media_summary">소리와 오디오 시스템에 관한 트윅이 포함되어 있습니다.</string>
@@ -327,10 +327,10 @@
     <string name="pref_button_backlight_notifications_title">버튼 백라이트 알림</string>
     <string name="pref_button_backlight_notifications_summary">실험적인 기능입니다! 이 기능은 LED가 없는 기기나 LED가 고장난 기기에서 사용하시면 좋습니다. 그러나 배터리를 많이 소비합니다.</string>
 
-	<string name="pref_navbar_disable_title">네비게이션 바 숨기기</string>
-	<string name="pref_navbar_disable_summary">Pie 컨트롤이 활성화 되어있으면 네비게이션 바를 숨깁니다. (재시작 필요)</string>
-    
-	<string name="pref_holo_bg_dither_title">Holo 테마 배경 디더</string>
+    <string name="pref_navbar_disable_title">네비게이션 바 숨기기</string>
+    <string name="pref_navbar_disable_summary">Pie 컨트롤이 활성화 되어있으면 네비게이션 바를 숨깁니다. (재시작 필요)</string>
+
+    <string name="pref_holo_bg_dither_title">Holo 테마 배경 디더</string>
     <string name="pref_holo_bg_dither_summary">기본적인 Holo 테마의 배경화면을 디더(Dither) 처리한 배경화면으로 교체합니다. (재시작 필요)</string>
 
     <string name="pref_hwkeys_disable_title">하드웨어 키 비활성화</string>
@@ -346,11 +346,11 @@
     <string name="recent_clear_bottom_right">하단 오른쪽</string>
 
     <string name="pref_recent_clear_margin_top_title">상단의 여유공간(Margin) 설정</string>
-	
-	<string name="pref_roaming_warning_disable_title">로밍 주의 알림 비활성화</string>
-	<string name="pref_roaming_warning_disable_summary">로밍 중일 때 메세지를 전송할 때, 전화를 발신할 때 뜨는 주의 알림을 비활성화 합니다.</string>
-    
-	<string name="app_picker_search">검색</string>
+
+    <string name="pref_roaming_warning_disable_title">로밍 주의 알림 비활성화</string>
+    <string name="pref_roaming_warning_disable_summary">로밍 중일 때 메세지를 전송할 때, 전화를 발신할 때 뜨는 주의 알림을 비활성화 합니다.</string>
+
+    <string name="app_picker_search">검색</string>
     <string name="app_picker_none">(없음)</string>
 
     <string name="qs_tile_quickapp">앱 바로가기</string>
@@ -393,7 +393,7 @@
     <string name="device_tablet">태블릿</string>
 
     <string name="pref_cat_brightness_title">밝기 설정</string>
-	<string name="pref_brightness_master_switch_title">밝기 설정 활성화</string>
+    <string name="pref_brightness_master_switch_title">밝기 설정 활성화</string>
     <string name="pref_brightness_master_switch_summary">이 기기가 안드로이드의 기본 밝기 설정을 지원할 때만 사용하세요. 만약 이로 인해 문제가 생기면 이 기능을 비활성화 해주세요. (재시작 필요)</string>
 
     <string name="hwkey_action_recent_apps">최근에 실행한 앱 보이기</string>
@@ -418,9 +418,9 @@
 
     <string name="pref_expanded_desktop_title">화면 확장 모드</string>
     <string name="expanded_desktop_disabled">비활성화</string>
-	<string name="expanded_desktop_statusbar">상단바 숨기기</string>
+    <string name="expanded_desktop_statusbar">상단바 숨기기</string>
     <string name="expanded_desktop_navbar">네비게이션 바 숨기기</string>
-	<string name="expanded_desktop_both">둘 다 숨기기</string>
+    <string name="expanded_desktop_both">둘 다 숨기기</string>
     <string name="action_expanded_desktop_title">화면 확장 모드</string>
     <string name="action_expanded_desktop_on">화면 확장이 활성화 되었습니다.</string>
     <string name="action_expanded_desktop_off">화면 확장이 비활성화 되었습니다.</string>
@@ -434,7 +434,7 @@
 
     <string name="pref_cat_navigation_bar_title">네비게이션 바 트윅</string>
     <string name="pref_cat_navigation_bar_summary">네비게이션 바와 관련된 설정들이 있습니다.</string>
-	<string name="pref_navbar_override_title">시스템 기본값 덮어쓰기</string>
+    <string name="pref_navbar_override_title">시스템 기본값 덮어쓰기</string>
     <string name="pref_navbar_override_summary">GB에서 네비게이션 바 담당하기 (재시작 필요)</string>
     <string name="pref_navbar_enable_title">네비게이션 바 활성화</string>
     <string name="pref_navbar_enable_summary">재시작 필요</string>
@@ -448,7 +448,7 @@
     <string name="pref_powermenu_screenshot_title">전원 옵션에서 스크린샷 표시</string>
 
     <string name="pref_cat_lockscreen_ring_settings_title">잠금 해제 고리 설정</string>
-	<string name="pref_lockscreen_ring_targets_enable_title">잠금 해제 고리 타겟 설정 활성화</string>
+    <string name="pref_lockscreen_ring_targets_enable_title">잠금 해제 고리 타겟 설정 활성화</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">GB에서 잠금 해제 고리 옵션 담당하기</string>
     <string name="pref_lockscreen_ring_targets_app_title">바로가기 타겟 %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">잠금 해제 고리 세로 오프셋</string>
@@ -458,20 +458,20 @@
     <string name="pref_statusbar_brightness_summary">상단바를 슬라이드하면 밝기가 조절됩니다. (자동 밝기 조절이 비활성화 되어야함)</string>
 
     <string name="pref_cat_phone_telephony_title">전화</string>
-	<string name="pref_cat_phone_messaging_title">메세지</string>
+    <string name="pref_cat_phone_messaging_title">메세지</string>
     <string name="pref_cat_phone_mobile_data_title">모바일 데이터</string>
 
-	<string name="pref_mms_unicode_stripping_title">유니코드 스트립</string>
-	<string name="pref_mms_unicode_stripping_summary">유니코드 글자를 일반 글자로 바꿉니다. 텍스트의 크기가 줄어들 수 있습니다.</string>
-	<string name="unicode_stripping_leave_intact">그대로 전송하기</string>
-	<string name="unicode_stripping_non_encodable">인코딩이 불가능한 텍스트만</string>
-	<string name="unicode_stripping_all">유니코드 글자를 모두 인코딩</string>
-	
-	<string name="pref_mobile_data_slow2g_disable_title">느린 2G 데이터 경고 비활성화</string>
-	<string name="pref_mobile_data_slow2g_disable_summary">2G 데이터 연결 시 느리다는 경고를 비활성화 합니다.</string>
+    <string name="pref_mms_unicode_stripping_title">유니코드 스트립</string>
+    <string name="pref_mms_unicode_stripping_summary">유니코드 글자를 일반 글자로 바꿉니다. 텍스트의 크기가 줄어들 수 있습니다.</string>
+    <string name="unicode_stripping_leave_intact">그대로 전송하기</string>
+    <string name="unicode_stripping_non_encodable">인코딩이 불가능한 텍스트만</string>
+    <string name="unicode_stripping_all">유니코드 글자를 모두 인코딩</string>
 
-	<string name="pref_sbcolor_follow_stock_battery_title">순정 배터리 아이콘 색깔 사용</string>
-	<string name="pref_sbcolor_follow_stock_battery_summary">상단바 시계, 배터리 잔량, 둥근 배터리의 색깔이 순정 배터리 아이콘의 색깔을 따릅니다.</string>
+    <string name="pref_mobile_data_slow2g_disable_title">느린 2G 데이터 경고 비활성화</string>
+    <string name="pref_mobile_data_slow2g_disable_summary">2G 데이터 연결 시 느리다는 경고를 비활성화 합니다.</string>
+
+    <string name="pref_sbcolor_follow_stock_battery_title">순정 배터리 아이콘 색깔 사용</string>
+    <string name="pref_sbcolor_follow_stock_battery_summary">상단바 시계, 배터리 잔량, 둥근 배터리의 색깔이 순정 배터리 아이콘의 색깔을 따릅니다.</string>
 
     <string name="pref_network_mode_tile_mode_title">네트워크 모드 타일 설정</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
@@ -492,11 +492,11 @@
     <string name="pie_controls_enabled_always">항상 활성화</string>
     <string name="pie_controls_enabled_expanded">화면 확장 모드가 실행 중일 때만</string>
     <string name="pie_controls_enabled_expanded_navbar">화면 확장 모드가 네비게이션 바를 숨길 때</string>
-	
-	<string name="pref_statusbar_color_skip_battery_title">순정 배터리 아이콘 사용</string>
-	<string name="pref_statusbar_color_skip_battery_summary">다른 배터리 모드에 의해 배터리 아이콘이 변경되었다면 활성화하세요.</string>
-    
-	<string name="pref_unplug_turns_on_screen_title">충전기 분리 시 화면 켜기</string>
+
+    <string name="pref_statusbar_color_skip_battery_title">순정 배터리 아이콘 사용</string>
+    <string name="pref_statusbar_color_skip_battery_summary">다른 배터리 모드에 의해 배터리 아이콘이 변경되었다면 활성화하세요.</string>
+
+    <string name="pref_unplug_turns_on_screen_title">충전기 분리 시 화면 켜기</string>
     <string name="pref_unplug_turns_on_screen_summary">배터리 충전 중 충전기를 분리할 때 화면을 켭니다. (재시작 필요)</string>
 
     <string name="pref_volume_adjust_mute_title">음소거 소리</string>
@@ -534,7 +534,7 @@
     <string name="sbl_policy_locked">잠금</string>
 
     <string name="pref_cat_data_traffic_title">데이터 트래픽 모니터</string>
-	<string name="pref_data_traffic_enable_title">모니터링 활성화</string>
+    <string name="pref_data_traffic_enable_title">모니터링 활성화</string>
     <string name="pref_data_traffic_enable_summary">데이터 트래픽이 감지되면 상단바에 트래픽 속도를 표시합니다.</string>
     <string name="pref_data_traffic_position_title">위치</string>
     <string name="dt_position_auto">자동 (시계의 위치에 따라 정해짐)</string>
@@ -627,8 +627,8 @@
     <string name="pref_navbar_key_glow_color_title">네비게이션 키 터치 색깔</string>
     <string name="pref_navbar_bg_color_title">네비게이션 바 배경색</string>
 
-	<string name="pref_lockscreen_shade_disable_title">잠금 화면 그림자 비활성화</string>
-	<string name="pref_lockscreen_shade_disable_summary">잠금 화면에 존재하는 그림자를 비활성화합니다.</string>
+    <string name="pref_lockscreen_shade_disable_title">잠금 화면 그림자 비활성화</string>
+    <string name="pref_lockscreen_shade_disable_summary">잠금 화면에 존재하는 그림자를 비활성화합니다.</string>
 
     <string name="pref_tm_mode_title">투명도 설정</string>
     <string name="pref_tm_mode_summary">재시작 필요</string>
@@ -652,8 +652,8 @@
     <string name="hwkey_action_home">홈으로 이동</string>
     <string name="hwkey_action_back">뒤로 이동</string>
 
-	<string name="pref_qs_tile_style_title">타일 스타일</string>
-	<string name="pref_qs_tile_style_summary">GravityBox에 의해 설정된 타일에만 적용됩니다. (순정 타일은 적용되지 않음)</string>
+    <string name="pref_qs_tile_style_title">타일 스타일</string>
+    <string name="pref_qs_tile_style_summary">GravityBox에 의해 설정된 타일에만 적용됩니다. (순정 타일은 적용되지 않음)</string>
 
     <string name="pref_recent_clear_margin_bottom_title">하단 여백 설정</string>
 
@@ -661,9 +661,9 @@
     <string name="pref_about_gplus_summary">GravityBox Google+ 커뮤니티에 접속하려면 터치하세요.</string>
 
     <string name="pref_network_mode_tile_lte_title">LTE 네트워크 모드 활성화</string>
-	
-	<string name="pref_disable_data_network_type_icons_title">데이터 네트워크 종류 아이콘 비활성화</string>
-	<string name="pref_disable_data_network_type_icons_summary">신호 표시기 아이콘 주변에 있는 3G/G/4G 아이콘을 비활성화합니다.</string>
+
+    <string name="pref_disable_data_network_type_icons_title">데이터 네트워크 종류 아이콘 비활성화</string>
+    <string name="pref_disable_data_network_type_icons_summary">신호 표시기 아이콘 주변에 있는 3G/G/4G 아이콘을 비활성화합니다.</string>
 
     <string name="hwkey_navbar_warning">In order to enable actions support for navigation bar, it is necessary 
         to override system defaults in Navigation bar tweaks menu</string>
@@ -693,8 +693,8 @@
     <string name="ringer_mode_sound">소리</string>
     <string name="ringer_mode_sound_vibrate">소리와 진동</string>
 
-	<string name="fix_location_title">위치 문제 수정</string>
-	<string name="fix_location_summary">스포츠 트래킹 앱에서 거리를 계산하지 못하는 버그를 수정합니다. (재시작 필요)</string>
+    <string name="fix_location_title">위치 문제 수정</string>
+    <string name="fix_location_summary">스포츠 트래킹 앱에서 거리를 계산하지 못하는 버그를 수정합니다. (재시작 필요)</string>
 
     <string name="pref_cat_launcher_tweaks_title">홈 런처 트윅</string>
     <string name="pref_cat_launcher_tweaks_summary">Google Experience 런처의 설정을 수정합니다.</string>
@@ -704,10 +704,10 @@
     <string name="pref_launcher_desktop_grid_cols_title">행 갯수 (가로)</string>
     <string name="desktop_grid_default">기본값</string>
 
-	<string name="screen_off_effect_title">화면 꺼짐 효과</string>
-	<string name="screen_off_effect_default">시스템 기본</string>
-	<string name="screen_off_effect_crt">CRT</string>
-	<string name="screen_off_effect_fade">페이드</string>
+    <string name="screen_off_effect_title">화면 꺼짐 효과</string>
+    <string name="screen_off_effect_default">시스템 기본</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">페이드</string>
 
     <string name="battery_percent_text_title">배터리 잔량 표시</string>
     <string name="battery_percent_text_size_title">배터리 잔량 표시기 크기</string>
@@ -778,8 +778,8 @@
     <string name="shortcut_wifi_ap">Wi-Fi 핫스팟 ON/OFF</string>
 
     <string name="shortcut_nfc">NFC ON/OFF</string>
-	
-	<string name="shortcut_gps">GPS ON/OFF</string>
+
+    <string name="shortcut_gps">GPS ON/OFF</string>
 
     <string name="pref_navbar_ring_targets_bg_style_title">타겟 배경화면 스타일</string>
     <string name="nrt_bg_style_none">없음</string>
@@ -796,8 +796,6 @@
 
     <string name="pie_control_summary">Pie 컨트롤 관련 기능들이 있습니다.</string>
 
-    <string name="battery_percent_text_anim_title">충전 애니메이션 활성화</string>
-	
     <string name="shortcut_google_now">Google Now</string>
 
     <string name="pref_lockscreen_bg_opacity_title">배경화면 투명도</string>
