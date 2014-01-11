@@ -1504,6 +1504,17 @@
                 android:title="@string/pref_ime_fullscreen_disable_title"
                 android:defaultValue="false" />
 
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+                android:key="pref_torch_auto_off"
+                android:title="@string/pref_torch_auto_off_title"
+                android:summary="@string/pref_torch_auto_off_summary"
+                minimum="0"
+                maximum="60"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="m"
+                android:defaultValue="10" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>
