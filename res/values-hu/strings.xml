@@ -429,13 +429,13 @@
     <string name="app_picker_none">(Semmi)</string>
 
     <!-- QuickApp tile settings -->
-    <string name="qs_tile_quickapp">Gyors Program elérés</string>
-    <string name="pref_cat_quickapp_tile_title">Gyors Program elérés csempe beállítások</string>
+    <string name="qs_tile_quickapp">Gyors Programelérés</string>
+    <string name="pref_cat_quickapp_tile_title">Gyors Programelérés csempe beállítások</string>
     <string name="pref_quickapp_default_title">Elsődleges program</string>
-    <string name="pref_quickapp_slot1_title">Hosszú érintés program hely 1</string>
-    <string name="pref_quickapp_slot2_title">Hosszú érintés program hely 2</string>
-    <string name="pref_quickapp_slot3_title">Hosszú érintés program hely 3</string>
-    <string name="pref_quickapp_slot4_title">Hosszú érintés program hely 4</string>
+    <string name="pref_quickapp_slot1_title">Hosszú érintés programhely 1</string>
+    <string name="pref_quickapp_slot2_title">Hosszú érintés programhely 2</string>
+    <string name="pref_quickapp_slot3_title">Hosszú érintés programhely 3</string>
+    <string name="pref_quickapp_slot4_title">Hosszú érintés programhely 4</string>
 
     <!-- GPS Tile (for non-MTK) -->
     <string name="qs_tile_gps_enabled">GPS bekapcsolva</string>
@@ -1003,5 +1003,22 @@
     <string name="lockscreen_sb_clock_hide_on_widget">Elrejtve ismert, órához kapcsolódó widget esetén</string>
     <string name="lockscreen_sb_clock_always_hide">Mindig elrejtve</string>
     <string name="lockscreen_sb_clock_always_show">Mindig mutatva</string>
+    
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Gyors Programelérés csempe 2 beállítások</string>
+    <string name="qs_tile_quickapp_2">Gyors Programelérés 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Zene hangerő vezérlés kényszerítés</string>
+    <string name="pref_vol_force_music_control_summary">Ha engedélyezve van, a hangerő gombok a zene hangerőt vezérlik a csengés hangerő helyett</string>
+
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">Nemrég használt alkalmazások panel</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">Egyéb beállítások</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">Teljes képernyős billentyűzet letiltása</string>
 
 </resources>
