@@ -630,7 +630,7 @@ public class ModLockscreen {
                 if (mHandler == null) {
                     mHandler = new Handler();
                 }
-                mHandler.postDelayed(mToggleTorchRunnable, ViewConfiguration.getLongPressTimeout()*2);
+                mHandler.postDelayed(mToggleTorchRunnable, 3000);
             }
         }
     };
