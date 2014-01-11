@@ -299,6 +299,15 @@ public class Utils {
         return bitmap;
     }
 
+    public static void performSoftReboot() {
+        try {
+            SystemProp.set("ctl.restart", "surfaceflinger");
+            SystemProp.set("ctl.restart", "zygote");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
     static class SystemProp extends Utils {
         
         private SystemProp() {
