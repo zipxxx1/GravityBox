@@ -205,7 +205,6 @@ public class ModLockscreen {
                             mLockScreenWallpaperImage.setScaleType(ScaleType.CENTER_CROP);
                             mLockScreenWallpaperImage.setImageDrawable(d);
                             flayout.addView(mLockScreenWallpaperImage, -1, -1);
-                            keyguardView.addView(flayout,0);
                             if (DEBUG) log("inflateKeyguardView: background image set");
                         }
                         final float opacity = prefs.getInt(
