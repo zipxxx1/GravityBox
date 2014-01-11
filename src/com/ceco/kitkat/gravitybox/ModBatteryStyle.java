@@ -183,7 +183,7 @@ public class ModBatteryStyle {
                     lParams = new LinearLayout.LayoutParams((int)(density * 10.5f), 
                             (int)(density * 16));
                     lParams.setMarginStart((int)(density * 4));
-                    lParams.bottomMargin = 2;
+                    lParams.bottomMargin = Math.round(density * 0.33f);
                     mKitKatBattery.setLayoutParams(lParams);
                     mKitKatBattery.setVisibility(View.GONE);
                     ModStatusbarColor.registerIconManagerListener(mKitKatBattery);
