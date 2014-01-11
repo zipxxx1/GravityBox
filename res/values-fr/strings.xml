@@ -101,7 +101,7 @@
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
     <string name="quick_settings_camera_error_connect">Pas de connexion à l\'appareil</string>
-    <string name="quick_settings_usb_tether_off">Déconntecté</string>
+    <string name="quick_settings_usb_tether_off">Déconnecté</string>
     <string name="quick_settings_usb_tether_connected">Partage de connexion off</string>
     <string name="quick_settings_usb_tether_on">Partage de connexion</string>
 
