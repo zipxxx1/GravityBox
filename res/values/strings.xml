@@ -1027,4 +1027,8 @@
     <!-- Disable fullscreen keyboard -->
     <string name="pref_ime_fullscreen_disable_title">Disable fullscreen keyboard</string>
 
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Torch auto off</string>
+    <string name="pref_torch_auto_off_summary">Turns off torch after specified amount of time. Set to 0 to disable (not recommended)</string>
+
 </resources>

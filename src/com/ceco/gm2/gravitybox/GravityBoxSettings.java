@@ -584,6 +584,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_SR_ON_DATA_DISABLED = "smartRadioOnDataDisabled";
 
     public static final String PREF_KEY_IME_FULLSCREEN_DISABLE = "pref_ime_fullscreen_disable";
+    public static final String PREF_KEY_TORCH_AUTO_OFF = "pref_torch_auto_off";
 
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
