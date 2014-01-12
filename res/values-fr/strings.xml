@@ -1005,13 +1005,13 @@
     <string name="bpt_charging_animated">Animée</string>
 
     <!-- Lockscreen statusbar clock visibility -->
-    <string name="pref_lockscreen_sb_clock_title">Visibilité horlage barre d\'état</string>
+    <string name="pref_lockscreen_sb_clock_title">Visibilité horloge barre d\'état</string>
     <string name="lockscreen_sb_clock_hide_on_widget">Masquer lors de l\'affichage de widgets relatifs à l\'horloge</string>
     <string name="lockscreen_sb_clock_always_hide">Toujours masquée</string>
     <string name="lockscreen_sb_clock_always_show">Toujours affichée</string>
 
     <!-- QuickApp Tile #2 -->
-    <string name="pref_cat_quickapp_tile_2_title">Paramètres touche Appli Rapide 2</string>
+    <string name="pref_cat_quickapp_tile_2_title">Paramètres de la touche Appli Rapide 2</string>
     <string name="qs_tile_quickapp_2">Appli Rapide 2</string>
 
     <!-- Force music volume control -->
