@@ -961,5 +961,13 @@
 
     <!-- Disable fullscreen keyboard -->
     <string name="pref_ime_fullscreen_disable_title">Disabilita tastiera a schermo intero</string>
+    
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Spegni torcia automaticamente</string>
+    <string name="pref_torch_auto_off_summary">Spegne la torcia automaticamente dopo un certo perido di tempo. Mettere 0 per disabilitare (non raccomandato)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Inverti tasti volume</string>
+    <string name="pref_vol_swap_keys_summary">Inverti tasti volume quando lo schermo è ruotato</string>
 
 </resources>
