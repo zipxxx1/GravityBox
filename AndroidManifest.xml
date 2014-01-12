@@ -16,8 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ceco.kitkat.gravitybox"
-    android:versionCode="61"
-    android:versionName="2.9.1" >
+    android:versionCode="62"
+    android:versionName="2.9.2" >
 
     <uses-sdk
         android:minSdkVersion="19"

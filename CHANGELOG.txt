@@ -1,3 +1,39 @@
+Changelog 2.9.2 - 12/01/2014
+--------------------------------------
+- GravityBox Actions:
+--- Improved handling of launching actions (e.g. actions performed on unlock ring won't dismiss keyguard)
+--- Added action for launching Google Now
+--- Added actions for media control: play/pause,previous,next (available within GB features only)
+--- Added action for killing foreground app (available within GB features only)
+--- Added action for switching to previous app (available withn GB features only)
+- QuickSettings management:
+--- Added USB Tethering tile
+--- Added secondary QuickApp tile
+--- Allow maximum of two lines for GB tile labels (prevents text from going outside of tile's bottom edge)
+- Added battery percent text charging styles: None, Static, Animated
+- Lockscreen tweaks: 
+--- Added option for adjusting opacity of custom background
+--- Option for setting statusbar clock visibility policy
+--- Improved handling of unlock ring torch: prevents torch from turning on when swiping across unlock ring
+- Media tweaks:
+--- Option to force control of music volume instead of ringer volume
+--- Option for volume keys swap based on display rotation (thanks to evant)
+- Misc tweaks:
+--- Option to disable fullscreen keyboard
+--- Option for defining Torch Auto Off (LED protection)
+- Improved soft reboot function for better compatibility with different devices
+- Fixed show recent apps issues on Moto X devices (untested)
+- Fixed bottom alignment of GB's KitKat battery style to match 4.4.2 layout
+- Added Korean translations (thanks to SDKoongchi)
+- Updated French translation (thanks to ch-vox)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Italian translations (thanks to pesa1234, valerioscifoni)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Chinese (Traditional) translations (thanks to EdiTurn)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+
 Changelog 2.9.1 - 07/01/2014
 --------------------------------------
 - Added option for enabling/disabling Battery Percent Text charging animation
