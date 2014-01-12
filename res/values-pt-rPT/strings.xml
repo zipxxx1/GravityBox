@@ -962,4 +962,12 @@
     <!-- Disable fullscreen keyboard -->
     <string name="pref_ime_fullscreen_disable_title">Desativar teclado em ecrã completo</string>
 
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Desligar lanterna automaticamente</string>
+    <string name="pref_torch_auto_off_summary">Permite definir o tempo durante o qual a lanterna permanece ligada. O valor 0 desativa a funcionalidade (não recomendável)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Reorientar teclas de volume</string>
+    <string name="pref_vol_swap_keys_summary">Troca ação das teclas de volume quando o ecrã é rodado</string>
+
 </resources>
