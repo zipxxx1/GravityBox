@@ -1031,4 +1031,8 @@
     <string name="pref_torch_auto_off_title">Torch auto off</string>
     <string name="pref_torch_auto_off_summary">Turns off torch after specified amount of time. Set to 0 to disable (not recommended)</string>
 
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Reorient volume keys</string>
+    <string name="pref_vol_swap_keys_summary">Swap volume keys when the screen is rotated</string>
+
 </resources>

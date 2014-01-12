@@ -1244,6 +1244,12 @@
             android:summary="@string/pref_vol_force_music_control_summary"
             android:defaultValue="false" />
 
+        <CheckBoxPreference
+            android:key="pref_vol_swap_keys"
+            android:title="@string/pref_vol_swap_keys_title"
+            android:summary="@string/pref_vol_swap_keys_summary"
+            android:defaultValue="false" />
+
         <CheckBoxPreference 
             android:key="pref_safe_media_volume"
             android:title="@string/pref_safe_media_volume_title"

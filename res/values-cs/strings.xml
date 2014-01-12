@@ -990,4 +990,8 @@
     <!-- Disable fullscreen keyboard -->
     <string name="pref_ime_fullscreen_disable_title">Zakázat klávesnici na celou obrazovku</string>
 
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Převrátit tlačítka hlasistosti</string>
+    <string name="pref_vol_swap_keys_summary">V případě otočení obrazovky bude převráceno ovládání tlačítek hlasitosti</string>
+
 </resources>

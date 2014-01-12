@@ -235,6 +235,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_MUSIC_VOLUME_STEPS = "pref_music_volume_steps";
     public static final String PREF_KEY_VOL_FORCE_MUSIC_CONTROL = "pref_vol_force_music_control";
     public static final String PREF_KEY_SAFE_MEDIA_VOLUME = "pref_safe_media_volume";
+    public static final String PREF_KEY_VOL_SWAP_KEYS = "pref_vol_swap_keys";
     public static final String PREF_KEY_VOLUME_PANEL_EXPANDABLE = "pref_volume_panel_expandable";
     public static final String PREF_KEY_VOLUME_PANEL_FULLY_EXPANDABLE = "pref_volume_panel_expand_fully";
     public static final String PREF_KEY_VOLUME_PANEL_AUTOEXPAND = "pref_volume_panel_autoexpand";
@@ -252,6 +253,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED = 
             "gravitybox.intent.action.VOL_FORCE_MUSIC_CONTROL_CHANGED";
     public static final String EXTRA_VOL_FORCE_MUSIC_CONTROL = "volForceMusicControl";
+    public static final String ACTION_PREF_VOL_SWAP_KEYS_CHANGED = 
+            "gravitybox.intent.action.VOL_SWAP_KEYS_CHANGED";
+    public static final String EXTRA_VOL_SWAP_KEYS = "volKeysSwap";
 
     public static final String PREF_CAT_HWKEY_ACTIONS = "pref_cat_hwkey_actions";
     public static final String PREF_CAT_HWKEY_MENU = "pref_cat_hwkey_menu";
@@ -1806,6 +1810,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED);
                 intent.putExtra(EXTRA_VOL_FORCE_MUSIC_CONTROL,
                         prefs.getBoolean(PREF_KEY_VOL_FORCE_MUSIC_CONTROL, false));
+            } else if (key.equals(PREF_KEY_VOL_SWAP_KEYS)) {
+                intent.setAction(ACTION_PREF_VOL_SWAP_KEYS_CHANGED);
+                intent.putExtra(EXTRA_VOL_SWAP_KEYS,
+                        prefs.getBoolean(PREF_KEY_VOL_SWAP_KEYS, false));
             } else if (key.equals(PREF_KEY_SAFE_MEDIA_VOLUME)) {
                 intent.setAction(ACTION_PREF_SAFE_MEDIA_VOLUME_CHANGED);
                 intent.putExtra(EXTRA_SAFE_MEDIA_VOLUME_ENABLED,
