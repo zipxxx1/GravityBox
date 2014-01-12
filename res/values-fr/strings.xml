@@ -1027,4 +1027,12 @@
     <!-- Disable fullscreen keyboard -->
     <string name="pref_ime_fullscreen_disable_title">Désactiver le clavier plein écran</string>
 
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Extinction auto de la torche</string>
+    <string name="pref_torch_auto_off_summary">Éteind la torche après un laps de temps spécifié. Mettre 0 pour désactiver (non recommandé)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Réorientation des touches de volume</string>
+    <string name="pref_vol_swap_keys_summary">Permute les touches de volume après une rotation d\'écran</string>
+
 </resources>
