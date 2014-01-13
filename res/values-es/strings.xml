@@ -990,4 +990,7 @@
     <string name="pref_vol_swap_keys_title">Reorientar botones de volumen</string>
     <string name="pref_vol_swap_keys_summary">Intercambiar botones de volumen cuando se rota la pantalla</string>
     
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Efecto de desenfoque</string>
+ 
 </resources>
