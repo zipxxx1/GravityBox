@@ -1026,5 +1026,13 @@
 
     <!-- Disable fullscreen keyboard -->
     <string name="pref_ime_fullscreen_disable_title">禁用全屏键盘</string>
+    
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">自动关闭手电筒</string>
+    <string name="pref_torch_auto_off_summary">设置时间自动关闭手电筒，设置为0将禁用（不推荐）</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">重新调整音量键</string>
+    <string name="pref_vol_swap_keys_summary">当屏幕旋转时交换音量键</string>
 
 </resources>
