@@ -1020,5 +1020,13 @@
 
     <!-- Disable fullscreen keyboard -->
     <string name="pref_ime_fullscreen_disable_title">Teljes képernyős billentyűzet letiltása</string>
+    
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Zseblámpa automatikus kikapcsolása</string>
+    <string name="pref_torch_auto_off_summary">Kikapcsolja a zseblámpát meghatározott idő után. Letiltáshoz állíts be 0-t (nem javasolt)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Hangerőszabályzó gombok megfordítása</string>
+    <string name="pref_vol_swap_keys_summary">Felcseréli a hangerőszabályzó gombokat elforgatott képernyőnél</string>
 
 </resources>
