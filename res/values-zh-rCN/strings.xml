@@ -883,7 +883,7 @@
 
     <!-- Allow any widget on Lockscreen -->
     <string name="pref_lockscreen_allow_any_widget_title">允许任何小部件</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">允许在锁屏界面显示一般仅适用于启动器的小部件</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">允许在锁屏界面显示，一般仅适用于启动器的小部件</string>
 
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">显示电源键菜单</string>
@@ -946,6 +946,7 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">背景不透明度</string>
+    <string name="pref_lockscreen_bg_opacity_summary">只适用于自定义墙纸和专辑封面</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">媒体控制</string>
@@ -977,9 +978,20 @@
     <string name="pref_cat_misc_recents_panel_title">最近应用面板</string>
 
     <!-- Misc tweaks: category for other settings -->
-    <string name="pref_cat_misc_other_title">其他设置</string>
+    <string name="pref_cat_misc_other_title">其它设置</string>
 
     <!-- Disable fullscreen keyboard -->
     <string name="pref_ime_fullscreen_disable_title">禁用全屏键盘</string>
+    
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">自动关闭手电筒</string>
+    <string name="pref_torch_auto_off_summary">设置时间自动关闭手电筒，设置为 0 将禁用（不推荐）</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">重新调整音量键</string>
+    <string name="pref_vol_swap_keys_summary">当屏幕旋转时交换音量键</string>
+
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">模糊效果</string>
 
 </resources>
