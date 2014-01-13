@@ -993,4 +993,21 @@
     <string name="pref_vol_force_music_control_title">音楽の音量操作を強制</string>
     <string name="pref_vol_force_music_control_summary">有効にすると音量キーで着信音の代わりに音楽の音量を変更します。</string>
     
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">最近のアプリパネル</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">その他の設定</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">全画面キーボードを無効化</string>
+
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">ライトの自動オフ</string>
+    <string name="pref_torch_auto_off_summary">指定した時間が経った後ライトを自動的にオフにします。0にすると無効にします。(非推奨)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">回転時音量キー入れ替え</string>
+    <string name="pref_vol_swap_keys_summary">画面を回転した時音量キーを入れ替えます。</string>
+    
 </resources>
