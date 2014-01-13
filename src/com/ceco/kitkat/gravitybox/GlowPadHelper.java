@@ -36,6 +36,7 @@ import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 
 import com.ceco.kitkat.gravitybox.preference.AppPickerPreference;
+import com.ceco.kitkat.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -96,6 +97,7 @@ public class GlowPadHelper {
             final int mode = appInfo.intent.getIntExtra("mode", AppPickerPreference.MODE_APP);
             Bitmap appIcon = null;
             final Resources res = context.getResources();
+            boolean isGbShortcut = false;
             if (mode == AppPickerPreference.MODE_APP) {
                 PackageManager pm = context.getPackageManager();
                 ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
@@ -110,11 +112,12 @@ public class GlowPadHelper {
                     appIcon = BitmapFactory.decodeStream(fis);
                     fis.close();
                 }
+                isGbShortcut = appInfo.intent.getAction().equals(ShortcutActivity.ACTION_LAUNCH_ACTION);
             }
             if (appIcon != null) {
-                int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, iconSizeDp, 
-                        res.getDisplayMetrics());
-                appIcon = createStyledBitmap(appIcon, sizePx, bgStyle);
+                int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                        isGbShortcut ? 60 : iconSizeDp, res.getDisplayMetrics());
+                appIcon = createStyledBitmap(appIcon, sizePx, bgStyle, isGbShortcut);
                 appInfo.icon = new BitmapDrawable(res, appIcon);
             }
 
@@ -127,7 +130,7 @@ public class GlowPadHelper {
         }
     }
 
-    private static Bitmap createStyledBitmap(Bitmap bitmap, int sizePx, BgStyle bgStyle) {
+    private static Bitmap createStyledBitmap(Bitmap bitmap, int sizePx, BgStyle bgStyle, boolean isGbShortcut) {
         bitmap = Bitmap.createScaledBitmap(bitmap, sizePx, sizePx, true);
 
         switch (bgStyle) {
@@ -135,7 +138,7 @@ public class GlowPadHelper {
             case DARK:
             case BLACK:
                 int bitmapSize = Math.max(bitmap.getWidth(), bitmap.getHeight());
-                int marginSize = Math.round(bitmapSize / 2.4f);
+                int marginSize = Math.round(bitmapSize / (isGbShortcut ? 16f : 2.4f));
                 int size = bitmapSize + marginSize;
 
                 Bitmap b = Bitmap.createBitmap(size, size, Config.ARGB_8888);
