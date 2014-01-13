@@ -1035,4 +1035,7 @@
     <string name="pref_vol_swap_keys_title">Reorient volume keys</string>
     <string name="pref_vol_swap_keys_summary">Swap volume keys when the screen is rotated</string>
 
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Blur effect</string>
+
 </resources>

@@ -104,10 +104,10 @@
                 android:order="3" />
 
             <CheckBoxPreference
-                android:key="pref_lockscreen_shade_disable"
-                android:title="@string/pref_lockscreen_shade_disable_title"
-                android:summary="@string/pref_lockscreen_shade_disable_summary"
-                android:defaultValue="false" />
+                android:key="pref_lockscreen_bg_blur_effect"
+                android:title="@string/pref_lockscreen_bg_blur_effect_title"
+                android:defaultValue="false"
+                android:order="4" />
 
             <com.ceco.gm2.gravitybox.preference.SeekBarPreference
                 android:key="pref_lockscreen_bg_opacity"
@@ -118,7 +118,13 @@
                 monitorBoxEnabled="true"
                 monitorBoxUnit="%" 
                 android:defaultValue="50"
-                android:order="4" />
+                android:order="5" />
+
+            <CheckBoxPreference
+                android:key="pref_lockscreen_shade_disable"
+                android:title="@string/pref_lockscreen_shade_disable_title"
+                android:summary="@string/pref_lockscreen_shade_disable_summary"
+                android:defaultValue="false" />
 
         </PreferenceCategory>
 

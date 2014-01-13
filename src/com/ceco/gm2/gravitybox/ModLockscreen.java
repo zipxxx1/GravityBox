@@ -40,6 +40,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -192,20 +193,25 @@ public class ModLockscreen {
                         flayout.setLayoutParams(new LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT, 
                                 ViewGroup.LayoutParams.MATCH_PARENT));
+                        Bitmap customBg = null;
                         if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_COLOR)) {
                             int color = mPrefs.getInt(
                                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR, Color.BLACK);
-                            flayout.setBackgroundColor(color);
-                            if (DEBUG) log("inflateKeyguardView: background color set");
+                            customBg = Utils.drawableToBitmap(new ColorDrawable(color));
                         } else if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_IMAGE)) {
                             String wallpaperFile = mGbContext.getFilesDir() + "/lockwallpaper";
-                            Bitmap background = BitmapFactory.decodeFile(wallpaperFile);
-                            Drawable d = new BitmapDrawable(context.getResources(), background);
+                            customBg = BitmapFactory.decodeFile(wallpaperFile);
+                        }
+                        if (customBg != null) {
+                            if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
+                                customBg = Utils.blurBitmap(context, customBg);
+                            }
+                            Drawable d = new BitmapDrawable(context.getResources(), customBg);
                             ImageView mLockScreenWallpaperImage = new ImageView(context);
                             mLockScreenWallpaperImage.setScaleType(ScaleType.CENTER_CROP);
                             mLockScreenWallpaperImage.setImageDrawable(d);
                             flayout.addView(mLockScreenWallpaperImage, -1, -1);
-                            if (DEBUG) log("inflateKeyguardView: background image set");
+                            if (DEBUG) log("inflateKeyguardView: custom background set");
                         }
                         final float opacity = prefs.getInt(
                                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 50) / 100f;
