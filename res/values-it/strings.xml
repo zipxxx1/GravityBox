@@ -30,7 +30,7 @@
     <string name="sim_disable_notifications_summary">Notifica di \"SIM non inserita\" disabilitata</string>
 
     <string name="poweroff_advanced_title">Menù spegnimento avanzato</string>
-    <string name="poweroff_advanced_summary">Abilita il menu spegnimento avanzato con l\'opzione per riavviare in Recovery o Veloce</string>
+    <string name="poweroff_advanced_summary">Abilita il menù di spegnimento avanzato con l\'opzione per riavviare in recovery</string>
     <string name="poweroff_recovery">Riavvia in Recovery</string>
     <string name="poweroff_bootloader">Riavvia in Bootloader</string>
 
@@ -88,8 +88,8 @@
     <string name="quick_settings_camera_error_connect">Impossibile avviare fotocamera</string>
 
     <!-- QuickSettings settings -->
-    <string name="quick_settings_title">Caselle QuickSettings</string>
-    <string name="quick_settings_summary">Permette di mostrare o nascondere la caselle QuickSettings nella barra di stato</string>
+    <string name="quick_settings_title">Caselle QuickSetting</string>
+    <string name="quick_settings_summary">Permette di mostrare o nascondere la caselle QuickSetting nella barra di stato</string>
     <string name="qs_tile_user_profile">Profilo utente</string>
     <string name="qs_tile_airplane_mode">Modalità Aereo</string>
     <string name="qs_tile_battery">Stato batteria</string>
@@ -158,7 +158,7 @@
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modalità Engineer</string>
-    <string name="engineering_mode_summary">Lancia l\'applicazione Modalità Engineer</string>
+    <string name="engineering_mode_summary">Lancia l\'applicazione in Modalità Engineer</string>
 
     <!-- Dual SIM ringer -->
     <string name="dual_sim_ringer_title">Suoneria Dual SIM</string>
@@ -216,8 +216,8 @@
     <string name="pref_ab_button_set">Applica</string>
 
     <!-- Lockscreen rotation -->
-    <string name="pref_lockscreen_rotation_title">Abilita rotazione lockscreen</string>
-    <string name="pref_lockscreen_rotation_summary">ATTENZIONE: potrebbe scambiare gli anelli di sblocco sui dispositivi in cui la schermata di blocco AOSP sia stato modificata dal produttore</string>
+    <string name="pref_lockscreen_rotation_title">Abilita rotazione</string>
+    <string name="pref_lockscreen_rotation_summary">ATTENZIONE: nei dispositivi in cui il produttore ha modificato la schermata di blocco, gli anelli potrebbero risultare invertiti</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Abilita tasto menù</string>
@@ -530,7 +530,7 @@
     <string name="pref_navbar_menukey_title">Mostra sempre tasto menu</string>
 
     <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Abilita screenshot nel menu spegnimento</string>
+    <string name="pref_powermenu_screenshot_title">Abilita screenshot nel menù spegnimento</string>
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Scorciatoie schermata di blocco</string>
@@ -610,7 +610,7 @@
 
     <!-- QuickSettings tile order -->
     <string name="pref_qs_tile_order_title">Disposizione caselle</string>
-    <string name="pref_qs_tile_order_summary">Consente di riordinare le caselle Quicksettings</string>
+    <string name="pref_qs_tile_order_summary">Consente di riordinare le caselle Quicksetting</string>
 
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Blocca notifiche in corso</string>
@@ -618,7 +618,7 @@
     <string name="ongoing_notif_info">L\'elenco sarà automaticamente riempito con ogni notifica che apparirà.
         Puoi decidere se bloccare tali notifiche la prossima volta che appariranno. Funzione da usare con cautela.</string>
     <string name="ongoing_notif_reset_list">Pulisci elenco</string>
-    <string name="ongoing_notif_reset_alert">Sei sicuro di voler puliree l\'elenco?
+    <string name="ongoing_notif_reset_alert">Sei sicuro di voler pulire l\'elenco?
         Verrà pulito l\'elenco attuale e sbloccate tutte le notifiche precedentemente bloccate.</string>
     <string name="ongoing_notif_list_empty">(elenco vuoto)</string>
 
@@ -639,8 +639,8 @@
     <string name="sbl_policy_locked">Bloccato</string>
 
     <!-- Data traffic monitor -->
-    <string name="pref_cat_data_traffic_title">Controllo traffico dati</string>
-    <string name="pref_data_traffic_enable_title">Abilita controllo traffico</string>
+    <string name="pref_cat_data_traffic_title">Contatore traffico dati</string>
+    <string name="pref_data_traffic_enable_title">Abilita contatore traffico</string>
     <string name="pref_data_traffic_enable_summary">Mostra automaticamente un contatore del traffico dati appena la connessione dati viene attivata</string>
     <string name="pref_data_traffic_position_title">Posizione</string>
     <string name="dt_position_auto">Auto (centrata o a destra, a seconda della posizione dell\'orologio)</string>
@@ -664,7 +664,7 @@
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> liberi</string>
     <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
     <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> usati</string>
-    <string name="pref_rambar_title">Indicatore RAM in attività</string>
+    <string name="pref_rambar_title">Indicatore RAM in attività recenti</string>
     <string name="rambar_off">Spento</string>
     <string name="rambar_top">In alto</string>
     <string name="rambar_bottom">In basso</string>
@@ -855,14 +855,14 @@
     <string name="screen_off_effect_fade">Dissolvenza</string>
 
     <!-- Battery percent text -->
-    <string name="battery_percent_text_title">Mostra percentuale batteri</string>
+    <string name="battery_percent_text_title">Mostra percentuale batteria</string>
     <string name="battery_percent_text_size_title">Dimensione percentuale batteria</string>
     <string name="battery_percent_text_size_larger">Grande</string>
     <string name="battery_percent_text_size_normal">Normale</string>
     <string name="battery_percent_text_size_smaller">Piccolo</string>
     <string name="battery_percent_text_size_even_smaller">Più piccolo</string>
     <string name="battery_percent_text_size_smallest">Minuscolo</string>
-    <string name="battery_percent_text_style_title">Stile visualizzazione batteria percentuale</string>
+    <string name="battery_percent_text_style_title">Stile testo percentuale batteria</string>
     <string name="battery_percent_text_style_default">Predefinito</string>
     <string name="battery_percent_text_style_numbers_only">Solo numero no percentuale</string>
 
@@ -950,7 +950,7 @@
     <string name="shortcut_gps">GPS</string>
 
     <!-- Navigation bar ring targets background style -->
-    <string name="pref_navbar_ring_targets_bg_style_title">Stile sfondo anello pulsanti</string>
+    <string name="pref_navbar_ring_targets_bg_style_title">Stile sfondo pulsanti anello</string>
     <string name="nrt_bg_style_none">Nessuno</string>
     <string name="nrt_bg_style_light">Chiaro</string>
     <string name="nrt_bg_style_dark">Scuro</string>
@@ -1010,7 +1010,7 @@
 
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Spegni torcia automaticamente</string>
-    <string name="pref_torch_auto_off_summary">Spegne la torcia automaticamente dopo un certo perido di tempo. Mettere 0 per disabilitare (non raccomandato)</string>
+    <string name="pref_torch_auto_off_summary">Spegne la torcia automaticamente dopo il periodo di tempo impostato. Impostare 0 per disabilitare (non consigliato)</string>
 
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Inverti tasti volume</string>
