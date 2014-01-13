@@ -172,6 +172,9 @@ public class ModLockscreen {
                     }
 
                     if (customBg != null) {
+                        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
+                            customBg = Utils.blurBitmap(context, customBg);
+                        }
                         Object kgUpdateMonitor = XposedHelpers.callStaticMethod(kgUpdateMonitorClass, 
                                 "getInstance", context);
                         XposedHelpers.callMethod(kgUpdateMonitor, "dispatchSetBackground", customBg);

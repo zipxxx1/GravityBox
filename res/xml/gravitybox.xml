@@ -103,16 +103,23 @@
                 android:summary="@string/pref_lockscreen_bg_image_summary"
                 android:order="3" />
 
+            <CheckBoxPreference
+                android:key="pref_lockscreen_bg_blur_effect"
+                android:title="@string/pref_lockscreen_bg_blur_effect_title"
+                android:defaultValue="false"
+                android:order="4" />
+
             <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_lockscreen_bg_opacity"
                 android:title="@string/pref_lockscreen_bg_opacity_title"
+                android:summary="@string/pref_lockscreen_bg_opacity_summary"
                 minimum="0"
                 maximum="100"
                 interval="1"
                 monitorBoxEnabled="true"
                 monitorBoxUnit="%" 
                 android:defaultValue="50"
-                android:order="4" />
+                android:order="5" />
 
         </PreferenceCategory>
 
