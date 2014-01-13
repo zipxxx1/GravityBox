@@ -402,7 +402,7 @@
     <string name="pie_control_menu_title">Mostrar siempre botón de menú</string>
 
     <!-- Ringer mode tile (for non-MTK) -->
-    <string name="qs_tile_ringer_mode">Modo de sonido de llamada</string>
+    <string name="qs_tile_ringer_mode">Modo de sonido</string>
 
     <!-- Clock settings category -->
     <string name="pref_cat_clock_settings_title">Ajustes del reloj</string>
@@ -945,6 +945,7 @@
     
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Opacidad del fondo</string>
+    <string name="pref_lockscreen_bg_opacity_summary">Solo se aplica a un fondo personalizado y album art</string>
     
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Control multimedia</string>
@@ -981,4 +982,12 @@
     <!-- Disable fullscreen keyboard -->
     <string name="pref_ime_fullscreen_disable_title">Desactivar teclado a pantalla completa</string>
  
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Apagar linterna automáticamente</string>
+    <string name="pref_torch_auto_off_summary">Apaga la linterna tras el tiempo especificado. Establecer a 0 para desactivar (no recomendado)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Reorientar botones de volumen</string>
+    <string name="pref_vol_swap_keys_summary">Intercambiar botones de volumen cuando se rota la pantalla</string>
+    
 </resources>
