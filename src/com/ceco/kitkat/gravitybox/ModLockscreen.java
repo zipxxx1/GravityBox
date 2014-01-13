@@ -36,8 +36,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,14 +47,9 @@ import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.View;
-import android.view.ViewManager;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -68,6 +64,7 @@ public class ModLockscreen {
     public static final String PACKAGE_NAME = "com.android.keyguard";
 
     private static final String CLASS_KGVIEW_MANAGER = CLASS_PATH + ".KeyguardViewManager";
+    private static final String CLASS_KGVIEW_MANAGER_HOST = CLASS_KGVIEW_MANAGER + ".ViewManagerHost";
     private static final String CLASS_KG_HOSTVIEW = CLASS_PATH + ".KeyguardHostView";
     private static final String CLASS_KG_SELECTOR_VIEW = CLASS_PATH + ".KeyguardSelectorView";
     private static final String CLASS_TRIGGER_LISTENER = CLASS_PATH + ".KeyguardSelectorView$1";
@@ -145,6 +142,7 @@ public class ModLockscreen {
             final Class<?> kgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, classLoader);
             final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, classLoader);
             final Class<?> kgActivityLauncherClass = XposedHelpers.findClass(CLASS_KG_ACTIVITY_LAUNCHER, classLoader);
+            final Class<?> kgViewManagerHostClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER_HOST, classLoader);
 
             XposedHelpers.findAndHookMethod(kgViewManagerClass, "maybeCreateKeyguardLocked", 
                     boolean.class, boolean.class, Bundle.class, new XC_MethodHook() {
@@ -152,89 +150,49 @@ public class ModLockscreen {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mPrefs.reload();
-                    ViewManager viewManager = (ViewManager) XposedHelpers.getObjectField(
-                            param.thisObject, "mViewManager");
-                    FrameLayout keyGuardHost = (FrameLayout) XposedHelpers.getObjectField(
-                            param.thisObject, "mKeyguardHost");
-                    WindowManager.LayoutParams windowLayoutParams = (WindowManager.LayoutParams) 
-                            XposedHelpers.getObjectField(param.thisObject, "mWindowLayoutParams");
+
+                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    if (mGbContext == null) {
+                        mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+                        if (DEBUG) log("mGbContext created");
+                    }
 
                     final String bgType = prefs.getString(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND,
                             GravityBoxSettings.LOCKSCREEN_BG_DEFAULT);
 
-                    if (!bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_DEFAULT)) {
-                        windowLayoutParams.flags &= ~WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER;
-                    } else {
-                        windowLayoutParams.flags |= WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER;
-                    }
-                    viewManager.updateViewLayout(keyGuardHost, windowLayoutParams);
-                    if (DEBUG) log("maybeCreateKeyguardLocked: layout updated");
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgViewManagerClass, "inflateKeyguardView",
-                    Bundle.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    mPrefs.reload();
-
-                    FrameLayout keyguardView = (FrameLayout) XposedHelpers.getObjectField(
-                            param.thisObject, "mKeyguardView");
-
-                    final String bgType = mPrefs.getString(
-                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND, 
-                            GravityBoxSettings.LOCKSCREEN_BG_DEFAULT);
-
-                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    if (context != null && mGbContext == null) {
-                        mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+                    Bitmap customBg = null;
+                    if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_COLOR)) {
+                        int color = mPrefs.getInt(
+                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR, Color.BLACK);
+                        customBg = Utils.drawableToBitmap(new ColorDrawable(color));
+                    } else if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_IMAGE)) {
+                        String wallpaperFile = mGbContext.getFilesDir() + "/lockwallpaper";
+                        customBg = BitmapFactory.decodeFile(wallpaperFile);
                     }
 
-                    if (!bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_DEFAULT)) {
-                        FrameLayout flayout = new FrameLayout(context);
-                        flayout.setTag("gb_wallpaper");
-                        flayout.setLayoutParams(new LayoutParams(
-                                ViewGroup.LayoutParams.MATCH_PARENT, 
-                                ViewGroup.LayoutParams.MATCH_PARENT));
-                        if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_COLOR)) {
-                            int color = mPrefs.getInt(
-                                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR, Color.BLACK);
-                            flayout.setBackgroundColor(color);
-                            if (DEBUG) log("inflateKeyguardView: background color set");
-                        } else if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_IMAGE)) {
-                            String wallpaperFile = mGbContext.getFilesDir() + "/lockwallpaper";
-                            Bitmap background = BitmapFactory.decodeFile(wallpaperFile);
-                            Drawable d = new BitmapDrawable(context.getResources(), background);
-                            ImageView mLockScreenWallpaperImage = new ImageView(context);
-                            mLockScreenWallpaperImage.setScaleType(ScaleType.CENTER_CROP);
-                            mLockScreenWallpaperImage.setImageDrawable(d);
-                            flayout.addView(mLockScreenWallpaperImage, -1, -1);
-                            if (DEBUG) log("inflateKeyguardView: background image set");
-                        }
-                        final float opacity = prefs.getInt(
-                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 50) / 100f;
-                        flayout.setAlpha(opacity);
-                        keyguardView.addView(flayout,0);
+                    if (customBg != null) {
+                        Object kgUpdateMonitor = XposedHelpers.callStaticMethod(kgUpdateMonitorClass, 
+                                "getInstance", context);
+                        XposedHelpers.callMethod(kgUpdateMonitor, "dispatchSetBackground", customBg);
+                        if (DEBUG) log("maybeCreateKeyguardLocked: custom wallpaper set");
                     }
                 }
             });
 
-            XposedHelpers.findAndHookMethod(kgViewManagerClass, "updateShowWallpaper",
-                    boolean.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(kgViewManagerHostClass, "setCustomBackground",
+                    Drawable.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    final boolean show = (Boolean) param.args[0];
-                    if (DEBUG) log("updateShowWallpaper: " + show);
-
-                    FrameLayout keyguardView = (FrameLayout) XposedHelpers.getObjectField(
-                            param.thisObject, "mKeyguardView");
-                    if (keyguardView != null && !show) {
-                        View wp = keyguardView.findViewWithTag("gb_wallpaper");
-                        if (wp != null) {
-                            keyguardView.removeView(wp);
-                            if (DEBUG) log("Custom wallpaper removed");
-                        }
+                    final Drawable d = (Drawable) param.args[0];
+                    if (d != null) {
+                        d.clearColorFilter();
+                        final int alpha = (int) ((1 - prefs.getInt(
+                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 50) / 100f) * 255);
+                        final int overlayColor = Color.argb(alpha, 0, 0, 0);
+                        d.setColorFilter(overlayColor, PorterDuff.Mode.SRC_OVER);
+                        ((View)param.thisObject).invalidate();
+                        if (DEBUG) log("setCustomBackground: custom background opacity set");
                     }
                 }
             });

@@ -1337,7 +1337,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefLockscreenBg.setSummary(mPrefLockscreenBg.getEntry());
                 mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgColor);
                 mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgImage);
-                mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgOpacity);
                 String option = mPrefs.getString(PREF_KEY_LOCKSCREEN_BACKGROUND, LOCKSCREEN_BG_DEFAULT);
                 if (!option.equals(LOCKSCREEN_BG_DEFAULT)) {
                     mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgOpacity);
