@@ -154,7 +154,7 @@
 
     <!-- Display tweaks category -->
     <string name="pref_cat_display_title">Display e Luminosità</string>
-    <string name="pref_cat_display_summary">Contiene modifiche allo schermo e alla luminosità</string>
+    <string name="pref_cat_display_summary">Contiene modifiche allo schermo ed alla luminosità</string>
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">Livello luminosità minimo</string>
@@ -178,7 +178,7 @@
     <string name="pref_ab_button_set">Applica</string>
 
     <!-- Lockscreen rotation -->
-    <string name="pref_lockscreen_rotation_title">Abilita rotazione schermata di blocco</string>
+    <string name="pref_lockscreen_rotation_title">Abilita rotazione</string>
     <string name="pref_lockscreen_rotation_summary">ATTENZIONE: nei dispositivi in cui il produttore ha modificato la schermata di blocco, gli anelli potrebbero risultare invertiti</string>
 
     <!-- Lockscreen menu key -->
@@ -335,7 +335,7 @@
     <string name="button_backlight_mode_disable">Disabilita retroilluminazione tasti</string>
     <string name="button_backlight_mode_always_on">Sempre attiva se lo schermo è acceso</string>
     <string name="pref_button_backlight_notifications_title">Notifiche mediante illuminazione tasti</string>
-    <string name="pref_button_backlight_notifications_summary">SPERIMENTALE! Accendi tasti se c\'è una notifica e lo schermo è spento. Usare nel caso il telefono non abbia il LED</string>
+    <string name="pref_button_backlight_notifications_summary">SPERIMENTALE! Accendi tasti se c\'è una notifica e lo schermo è spento. Usare nel caso il telefono non abbia il LED di notifica</string>
 	
 	    <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Sfondo Dithered Holo</string>
@@ -536,7 +536,7 @@
 
     <!-- QuickSettings tile order -->
     <string name="pref_qs_tile_order_title">Disposizione caselle</string>
-    <string name="pref_qs_tile_order_summary">Consente di riordinare le caselle Quicksettings</string>
+    <string name="pref_qs_tile_order_summary">Consente di riordinare le caselle Quicksetting</string>
 
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Blocca notifiche in corso</string>
@@ -565,7 +565,7 @@
     <string name="sbl_policy_locked">Bloccato</string>
 
     <!-- Data traffic monitor -->
-    <string name="pref_cat_data_traffic_title">Controllo traffico dati</string>
+    <string name="pref_cat_data_traffic_title">Contatore traffico dati</string>
     <string name="pref_data_traffic_enable_summary">Mostra automaticamente un contatore del traffico dati appena la connessione dati viene attivata</string>
     <string name="pref_data_traffic_position_title">Posizione</string>
     <string name="dt_position_auto">Auto (centrata o a destra, a seconda della posizione dell\'orologio)</string>
@@ -925,7 +925,7 @@
     <string name="shortcut_google_now">Google Now</string>
     
     <!-- Lockscreen background opacity -->
-    <string name="pref_lockscreen_bg_opacity_title">Trasparenza sfondo</string>
+    <string name="pref_lockscreen_bg_opacity_title">Luminosità sfondo</string>
 
      <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Controlli multimediali</string>
@@ -964,7 +964,7 @@
     
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Spegni torcia automaticamente</string>
-    <string name="pref_torch_auto_off_summary">Spegne la torcia automaticamente dopo un certo perido di tempo. Mettere 0 per disabilitare (non raccomandato)</string>
+    <string name="pref_torch_auto_off_summary">Spegne la torcia automaticamente dopo il periodo di tempo impostato. Impostare 0 per disabilitare (non consigliato)</string>
 
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Inverti tasti volume</string>
