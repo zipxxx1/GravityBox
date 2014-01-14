@@ -123,6 +123,7 @@ public class ModQuickSettings {
     private static Set<String> mOverrideTileKeys;
     private static XSharedPreferences mPrefs;
     private static boolean mHideOnChange;
+    private static boolean mQsTileSpanDisable;
 
     private static float mGestureStartX;
     private static float mGestureStartY;
@@ -224,6 +225,9 @@ public class ModQuickSettings {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
                     mHideOnChange = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_TILE_SPAN_DISABLE)) {
+                    mQsTileSpanDisable = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_TILE_SPAN_DISABLE, false);
                 }
             }
 
@@ -437,6 +441,7 @@ public class ModQuickSettings {
 
             mAutoSwitch = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, false);
             mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
+            mQsTileSpanDisable = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_TILE_SPAN_DISABLE, false);
 
             try {
                 mQuickPulldown = Integer.valueOf(mPrefs.getString(
@@ -515,7 +520,14 @@ public class ModQuickSettings {
             });
 
             XposedHelpers.findAndHookMethod(mQuickSettingsTileViewClass, "setColumnSpan",
-                    int.class, XC_MethodReplacement.DO_NOTHING);
+                    int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mQsTileSpanDisable) {
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
