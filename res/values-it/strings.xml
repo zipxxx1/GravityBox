@@ -188,7 +188,7 @@
 
     <!-- Low battery LED flashing -->
     <string name="pref_flashing_led_disable_title">Disabilita LED intermittente</string>
-    <string name="pref_flashing_led_disable_summary">Disabilita l'intermittenza del LED di notifica quando il livello batteria è basso e non è in carica</string>
+    <string name="pref_flashing_led_disable_summary">Disabilita l\'intermittenza del LED di notifica quando il livello batteria è basso e non è in carica</string>
 
     <!-- Display tweaks category -->
     <string name="pref_cat_display_title">Display e Luminosità</string>
@@ -232,7 +232,7 @@
 
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">Audio e Volume</string>
-    <string name="pref_cat_media_summary">Contiene modifiche per l'audio e il volume</string>
+    <string name="pref_cat_media_summary">Contiene modifiche per l\'audio e il volume</string>
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">Più step volume</string>
@@ -764,7 +764,7 @@
 
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Colore segnale sim2</string>
-    <string name="pref_statusbar_icon_color_secondary_summary">Sovrascrivi il colore predefinito arancione dell'icona</string>
+    <string name="pref_statusbar_icon_color_secondary_summary">Sovrascrivi il colore predefinito arancione dell\'icona</string>
     <string name="pref_statusbar_data_activity_color_secondary_title">Colore icona dati sim2</string>
     <string name="pref_statusbar_data_activity_color_secondary_summary">Imposta colore icone dati sim2</string>
 
