@@ -16,6 +16,7 @@
 package com.ceco.gm2.gravitybox;
 
 import de.robv.android.xposed.XposedBridge;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -315,6 +316,7 @@ public class Utils {
         return bitmap;
     }
 
+    @SuppressLint("NewApi")
     public static Bitmap blurBitmap(Context context, Bitmap bmp) {
         Bitmap out = Bitmap.createBitmap(bmp);
         RenderScript rs = RenderScript.create(context);
