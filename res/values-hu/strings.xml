@@ -101,6 +101,9 @@
     <string name="quick_settings_nfc_on">NFC bekapcsolva</string>
     <string name="quick_settings_nfc_off">NFC kikapcsolva</string>
     <string name="quick_settings_camera_error_connect">Nem lehetséges a kamerához való csatlakozás</string>
+    <string name="quick_settings_usb_tether_off">Szétkapcsolva</string>
+    <string name="quick_settings_usb_tether_connected">Megosztás kikapcsolva</string>
+    <string name="quick_settings_usb_tether_on">Megosztás</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Állapotsáv Gyorsbeállítások csempéi</string>
@@ -133,6 +136,7 @@
     <string name="qs_tile_screenshot">Képernyőkép</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Kamera</string>
+    <string name="qs_tile_usb_tethering">USB internetmegosztás</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Szín választó</string>
@@ -1028,5 +1032,8 @@
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Hangerőszabályzó gombok megfordítása</string>
     <string name="pref_vol_swap_keys_summary">Felcseréli a hangerőszabályzó gombokat elforgatott képernyőnél</string>
+    
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Elmosódás effekt</string>
 
 </resources>
