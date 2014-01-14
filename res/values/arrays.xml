@@ -303,6 +303,7 @@
     </string-array>
 
     <string-array name="hwkey_doubletap_speed_entries" translatable="false">
+        <item>100ms</item>
         <item>200ms</item>
         <item>300ms</item>
         <item>400ms</item>
@@ -310,6 +311,7 @@
     </string-array>
 
     <string-array name="hwkey_doubletap_speed_values" translatable="false">
+        <item>100</item>
         <item>200</item>
         <item>300</item>
         <item>400</item>
