@@ -43,6 +43,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         XposedBridge.log("GB:Device type: " + (Utils.isTablet() ? "tablet" : "phone"));
         XposedBridge.log("GB:Is MTK device: " + Utils.isMtkDevice());
         XposedBridge.log("GB:Is Xperia device: " + Utils.isXperiaDevice());
+        XposedBridge.log("GB:Has Lenovo custom UI: " + Utils.hasLenovoCustomUI());
         XposedBridge.log("GB:Has telephony support: " + Utils.hasTelephonySupport());
         XposedBridge.log("GB:Has Gemini support: " + Utils.hasGeminiSupport());
         XposedBridge.log("GB:Android SDK: " + Build.VERSION.SDK_INT);
@@ -112,7 +113,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             FixDevOptions.initPackageResources(prefs, resparam);
         }
 
-        if (Build.VERSION.SDK_INT > 16 && !Utils.isLenovoSmartphone() &&
+        if (Build.VERSION.SDK_INT > 16 && !Utils.hasLenovoCustomUI() &&
                 resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
             ModQuickSettings.initResources(prefs, resparam);
         }
@@ -203,7 +204,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModCallCard.init(prefs, lpparam.classLoader);
         }
 
-        if (Build.VERSION.SDK_INT > 16 && !Utils.isLenovoSmartphone() &&
+        if (Build.VERSION.SDK_INT > 16 && !Utils.hasLenovoCustomUI() &&
                 lpparam.packageName.equals(ModQuickSettings.PACKAGE_NAME) &&
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, true)) {
             ModQuickSettings.init(prefs, lpparam.classLoader);

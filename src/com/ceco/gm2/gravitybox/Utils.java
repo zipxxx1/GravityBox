@@ -36,6 +36,8 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import java.io.File;
 import java.util.*;
 
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
@@ -54,7 +56,7 @@ public class Utils {
     private static int mDeviceType = -1;
     private static Boolean mIsMtkDevice = null;
     private static Boolean mIsXperiaDevice = null;
-    private static Boolean mIsLenovoSmartphone = null;
+    private static Boolean mHasLenovoCustomUI = null;
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     
@@ -153,17 +155,12 @@ public class Utils {
         return mIsXperiaDevice;
     }
 
-    public static boolean isLenovoSmartphone() {
-        if (mIsLenovoSmartphone != null) return mIsLenovoSmartphone;
+    public static boolean hasLenovoCustomUI() {
+        if (mHasLenovoCustomUI != null) return mHasLenovoCustomUI;
 
-        // The goal after all is to check if phone (doesn't apply to tablets) is running a stock Lenovo ROM
-        // (due to deep changes usually made to UI)
-
-        // TODO: implement a better way of doing this as the actual check may provide false positives
-        // in case of ported ROMs which may be more close to AOSP but where property was set so that
-        // device will show up as being Lenovo
-        mIsLenovoSmartphone = !isTablet() && Build.MANUFACTURER.equalsIgnoreCase("lenovo");
-        return mIsLenovoSmartphone;
+        File f = new File("/system/framework/lenovo-res.apk");
+        mHasLenovoCustomUI = f.exists();
+        return mHasLenovoCustomUI;
     }
 
     public static boolean hasGeminiSupport() {

@@ -671,7 +671,7 @@ public class ModStatusBar {
                             @Override
                             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                                 if (mDisableDataNetworkTypeIcons)
-                                    param.setResult(Utils.isLenovoSmartphone() ? 0 : -1);
+                                    param.setResult(Utils.hasLenovoCustomUI() ? 0 : -1);
                             }
                         });
                     }
