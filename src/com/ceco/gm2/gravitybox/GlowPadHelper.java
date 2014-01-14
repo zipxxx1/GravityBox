@@ -78,7 +78,7 @@ public class GlowPadHelper {
     }
 
     public static AppInfo getAppInfo(Context context, String app) {
-        return getAppInfo(context, app, 40, BgStyle.NONE);
+        return getAppInfo(context, app, 50, BgStyle.NONE);
     }
 
     public static AppInfo getAppInfo(Context context, String app, int iconSizeDp, BgStyle bgStyle) {
