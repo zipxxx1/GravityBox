@@ -63,9 +63,9 @@
     <string name="quick_settings_sync_off">동기화 비활성화</string>
     <string name="quick_settings_wifi_ap_on">Wi-Fi 핫스팟 활성화</string>
     <string name="quick_settings_wifi_ap_off">Wi-Fi 핫스팟 비활성화</string>
-    <string name="quick_settings_torch_on">손전등 활성화</string>
-    <string name="quick_settings_torch_off">손전등 비활성화</string>
-    <string name="quick_settings_torch_off_notif">터치하여 손전등을 비활성화합니다</string>
+    <string name="quick_settings_torch_on">손전등이 켜짐</string>
+    <string name="quick_settings_torch_off">손전등이 꺼짐</string>
+    <string name="quick_settings_torch_off_notif">터치하여 손전등을 끕니다.</string>
     <string name="quick_settings_qr_playing">&#8230; 재생 중</string>
     <string name="quick_settings_qr_recording">&#8230; 녹음 중</string>
     <string name="quick_settings_qr_recorded">녹음 완료</string>
@@ -314,7 +314,7 @@
     <string name="pie_control_title">Pie 컨트롤</string>
     <string name="pie_control_enable_title">Pie 컨트롤 활성화</string>
     <string name="pie_control_size_title">네비게이션 키 크기</string>
-    <string name="pie_control_trigger_positions_title">트리거 장소</string>
+    <string name="pie_control_trigger_positions_title">트리거 위치</string>
     <string name="pie_control_trigger_left">화면의 왼쪽 경계</string>
     <string name="pie_control_trigger_bottom">화면의 아래쪽 경계</string>
     <string name="pie_control_trigger_right">화면의 오른쪽 경계</string>
@@ -345,7 +345,7 @@
     <string name="recent_clear_bottom_left">하단 왼쪽</string>
     <string name="recent_clear_bottom_right">하단 오른쪽</string>
 
-    <string name="pref_recent_clear_margin_top_title">상단의 여유공간(Margin) 설정</string>
+    <string name="pref_recent_clear_margin_top_title">상단 여백</string>
 
     <string name="pref_roaming_warning_disable_title">로밍 주의 알림 비활성화</string>
     <string name="pref_roaming_warning_disable_summary">로밍 중일 때 메세지를 전송할 때, 전화를 발신할 때 뜨는 주의 알림을 비활성화 합니다.</string>
@@ -478,7 +478,7 @@
     <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
     <string name="nm_tile_mode3">2G/3G/(LTE)</string>
 
-    <string name="pref_display_allow_all_rotations_title">모든 회전 허용</string>
+    <string name="pref_display_allow_all_rotations_title">모든 방향 회전 허용</string>
 
     <string name="pref_qs_tile_behaviour_override_title">GB에서 타일 행동 담당하기</string>
     <string name="pref_qs_tile_behaviour_override_summary">타일의 행동을 담당합니다. (클릭이나 길게 누르기 등) (재시작 필요)</string>
@@ -556,7 +556,7 @@
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> 남음</string>
     <!-- [CHAR LIMIT=10] -->
     <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> 사용 중</string>
-    <string name="pref_rambar_title">최근 실행한 앱 목록에 RAM 상태 표시</string>
+    <string name="pref_rambar_title">RAM 상태바 표시</string>
     <string name="rambar_off">숨기기</string>
     <string name="rambar_top">상단</string>
     <string name="rambar_bottom">하단</string>
@@ -655,7 +655,7 @@
     <string name="pref_qs_tile_style_title">타일 스타일</string>
     <string name="pref_qs_tile_style_summary">GravityBox에 의해 설정된 타일에만 적용됩니다. (순정 타일은 적용되지 않음)</string>
 
-    <string name="pref_recent_clear_margin_bottom_title">하단 여백 설정</string>
+    <string name="pref_recent_clear_margin_bottom_title">하단 여백</string>
 
     <string name="pref_about_gplus_title">Google+ 커뮤니티</string>
     <string name="pref_about_gplus_summary">GravityBox Google+ 커뮤니티에 접속하려면 터치하세요.</string>
@@ -680,7 +680,7 @@
     <string name="app_picker_shortcut_null_intent">바로가기로 선택했을 때 Intent 정보를 넘겨줄 수 없기 때문에 실행이 불가능 할 수 있습니다.</string>
     <string name="app_picker_shortcut_cancelled">타겟 앱에 의해 바로가기 생성 취소</string>
 
-    <string name="pref_navbar_swap_keys_title">Back 키와 Recent 키의 자리 교체</string>
+    <string name="pref_navbar_swap_keys_title">Back 키 &amp; Recent 키 자리 변경</string>
 
     <string name="pref_lockscreen_ring_torch_title">손전등 활성화</string>
     <string name="pref_lockscreen_ring_torch_summary">잠금 해제 고리를 길게 누르면 손전등이 활성화 됩니다.</string>
@@ -826,4 +826,12 @@
     <string name="pref_cat_misc_other_title">기타 설정</string>
 
     <string name="pref_ime_fullscreen_disable_title">전체 화면 키보드 비활성화</string>
+    
+    <string name="pref_torch_auto_off_title">손전등 자동 꺼짐</string>
+    <string name="pref_torch_auto_off_summary">손전등이 사용자가 설정한 시간이 지나면 자동으로 꺼집니다. 0으로 설정하면 비활성화됩니다. (추천하지 않음)</string>
+ 
+    <string name="pref_vol_swap_keys_title">볼륨 키 위치 변경</string>
+    <string name="pref_vol_swap_keys_summary">화면이 회전될 때 볼륨키의 위치도 같이 바뀝니다.</string>
+
+    <string name="pref_lockscreen_bg_blur_effect_title">흐림 효과</string>
 </resources>
