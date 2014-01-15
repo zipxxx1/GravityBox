@@ -65,6 +65,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ConnectivityServiceWrapper.initZygote();
         PermissionGranter.initZygote();
         ModVolumePanel.initZygote(prefs);
+        ModViewConfig.initZygote(prefs);
     }
 
     @Override
