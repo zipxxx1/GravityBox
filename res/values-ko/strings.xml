@@ -246,7 +246,7 @@
     <string name="phone_flip_action_mute">벨소리 음소거</string>
     <string name="phone_flip_action_dismiss">전화 거절</string>
 
-    <string name="reboot_soft">부드러운 재시작</string>
+    <string name="reboot_soft">빠른 재시작</string>
 
     <string name="pref_holo_bg_solid_black_title">단색 배경화면</string>
     <string name="pref_holo_bg_solid_black_summary">Holo 테마를 사용하는 어플리케이션의 배경화면을 단색으로 변경합니다. (재시작 필요)</string>
@@ -834,4 +834,8 @@
     <string name="pref_vol_swap_keys_summary">화면이 회전될 때 볼륨키의 위치도 같이 바뀝니다.</string>
 
     <string name="pref_lockscreen_bg_blur_effect_title">흐림 효과</string>
+
+    <string name="pref_qs_tile_span_disable_title">타일 스패닝 비활성화</string>
+    <string name="pref_qs_tile_span_disable_summary">사용자, 밝기, 설정 타일의 스패닝을 비활성화합니다.</string>
+
 </resources>
