@@ -27,8 +27,10 @@ import android.app.Activity;
 import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -77,6 +79,7 @@ public class ModLockscreen {
     private static final String CLASS_KG_ACTIVITY_LAUNCHER = CLASS_PATH + ".KeyguardActivityLauncher";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
+    private static final boolean DEBUG_KIS = false;
 
     private static final int STATUSBAR_DISABLE_RECENT = 0x01000000;
     private static final int STATUSBAR_DISABLE_NOTIFICATION_TICKER = 0x00080000;
@@ -105,6 +108,8 @@ public class ModLockscreen {
     private static int mPrevGlowPadState;
     private static PointF mStartGlowPadPoint;
     private static float mDisplayDensity;
+    private static boolean mReceiverRegistered;
+    private static Class<?> mKgUpdateMonitorClass;
 
     // Battery Arc
     private static HandleDrawable mHandleDrawable;
@@ -119,6 +124,16 @@ public class ModLockscreen {
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
+
+    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED)) {
+                setLastScreenBackground(context);
+                if (DEBUG_KIS) log("ACTION_KEYGUARD_IMAGE_UPDATED: custom wallpaper set");
+            }
+        }
+    };
 
     public static void initPackageResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
         try {
@@ -139,7 +154,7 @@ public class ModLockscreen {
             final Class<?> triggerListenerClass = XposedHelpers.findClass(CLASS_TRIGGER_LISTENER, classLoader);
             final Class<?> kgAbsKeyInputViewClass = XposedHelpers.findClass(CLASS_KG_ABS_KEY_INPUT_VIEW, classLoader);
             final Class<?> kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, classLoader);
-            final Class<?> kgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, classLoader);
+            mKgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, classLoader);
             final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, classLoader);
             final Class<?> kgActivityLauncherClass = XposedHelpers.findClass(CLASS_KG_ACTIVITY_LAUNCHER, classLoader);
             final Class<?> kgViewManagerHostClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER_HOST, classLoader);
@@ -152,6 +167,11 @@ public class ModLockscreen {
                     mPrefs.reload();
 
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    if (!mReceiverRegistered) {
+                        IntentFilter intentFilter = new IntentFilter();
+                        intentFilter.addAction(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED);
+                        context.registerReceiver(mBroadcastReceiver, intentFilter);
+                    }
                     if (mGbContext == null) {
                         mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
                         if (DEBUG) log("mGbContext created");
@@ -169,13 +189,15 @@ public class ModLockscreen {
                     } else if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_IMAGE)) {
                         String wallpaperFile = mGbContext.getFilesDir() + "/lockwallpaper";
                         customBg = BitmapFactory.decodeFile(wallpaperFile);
+                    } else if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN)) {
+                        setLastScreenBackground(context);
                     }
 
                     if (customBg != null) {
                         if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
                             customBg = Utils.blurBitmap(context, customBg);
                         }
-                        Object kgUpdateMonitor = XposedHelpers.callStaticMethod(kgUpdateMonitorClass, 
+                        Object kgUpdateMonitor = XposedHelpers.callStaticMethod(mKgUpdateMonitorClass, 
                                 "getInstance", context);
                         XposedHelpers.callMethod(kgUpdateMonitor, "dispatchSetBackground", customBg);
                         if (DEBUG) log("maybeCreateKeyguardLocked: custom wallpaper set");
@@ -513,7 +535,7 @@ public class ModLockscreen {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(kgUpdateMonitorClass, "handleBatteryUpdate",
+            XposedHelpers.findAndHookMethod(mKgUpdateMonitorClass, "handleBatteryUpdate",
                     CLASS_KG_UPDATE_MONITOR_BATTERY_STATUS, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
@@ -733,5 +755,22 @@ public class ModLockscreen {
             mGlowPadView.invalidate();
         }
         if (DEBUG_ARC) log("Lockscreen battery arc updated");
+    }
+
+    private static void setLastScreenBackground(Context context) {
+        try {
+            String kisImageFile = mGbContext.getFilesDir() + "/kis_image.png";
+            Bitmap customBg = BitmapFactory.decodeFile(kisImageFile);
+            if (customBg != null) {
+                if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
+                    customBg = Utils.blurBitmap(context, customBg);
+                }
+                Object kgUpdateMonitor = XposedHelpers.callStaticMethod(mKgUpdateMonitorClass, 
+                        "getInstance", context);
+                XposedHelpers.callMethod(kgUpdateMonitor, "dispatchSetBackground", customBg);
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 }

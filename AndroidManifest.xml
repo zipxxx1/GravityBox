@@ -85,6 +85,7 @@
         </service>
 
         <service android:name="com.ceco.kitkat.gravitybox.ScreenRecordingService" />
+        <service android:name="com.ceco.kitkat.gravitybox.KeyguardImageService" />
 
         <meta-data
             android:name="xposedmodule"
