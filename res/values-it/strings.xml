@@ -452,7 +452,7 @@
     <string name="expanded_desktop_disabled">Disattivato</string>
     <string name="expanded_desktop_navbar">Nascondi barra di navigazione</string>
     <string name="expanded_desktop_both">Nascondi entrambe</string>
-	<string name="expanded_desktop_immersive">Modalità Immersive</string>
+    <string name="expanded_desktop_immersive">Modalità Immersive</string>
     <string name="action_expanded_desktop_title">Desktop esteso</string>
     <string name="action_expanded_desktop_on">Desktop esteso è ACCESO</string>
     <string name="action_expanded_desktop_off">Desktop esteso è SPENTO</string>
