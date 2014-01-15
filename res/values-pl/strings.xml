@@ -140,6 +140,7 @@
     <string name="lockscreen_bg_default">Domyślna tapeta</string>
     <string name="lockscreen_bg_color">Wypełnij kolorem</string>
     <string name="lockscreen_bg_image">Zdefiniowany obrazek</string>
+    <string name="lockscreen_bg_last_screen">Ostatni ekran</string>
     <string name="pref_lockscreen_bg_color_title">Ustaw kolor</string>
     <string name="pref_lockscreen_bg_color_summary">Pozwala ustawić własny kolor ekranu blokady</string>
     <string name="pref_lockscreen_bg_image_title">Ustaw własny obraz</string>
