@@ -1015,5 +1015,13 @@
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Inverti tasti volume</string>
     <string name="pref_vol_swap_keys_summary">Inverti tasti volume quando lo schermo è ruotato</string>
+    
+     <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Effetto sfocato</string>
+    
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Disabilita espansione caselle</string>
+    <string name="pref_qs_tile_span_disable_summary">Non permette alle caselle Profilo Utente, Luminosità, Impostazioni di ingrandirsi in modalità orizzontale</string>
+
 
 </resources>
