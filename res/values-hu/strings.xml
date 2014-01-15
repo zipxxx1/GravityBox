@@ -1035,5 +1035,9 @@
     
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Elmosódás effekt</string>
+    
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Csempe kiterjeszkedés letiltása</string>
+    <string name="pref_qs_tile_span_disable_summary">Letiltja a tulajdonos, fényerő és a beállítások csempék két csempeszélességre való kiterjeszkedését fekvő tájolásnál</string>
 
 </resources>
