@@ -593,6 +593,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_IME_FULLSCREEN_DISABLE = "pref_ime_fullscreen_disable";
     public static final String PREF_KEY_TORCH_AUTO_OFF = "pref_torch_auto_off";
+    public static final String PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON = "pref_force_overflow_menu_button";
 
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
@@ -623,6 +624,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_TM_MODE,
             PREF_KEY_QUICK_SETTINGS_ENABLE,
             PREF_KEY_NAVBAR_RING_TARGETS_ENABLE,
+            PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON,
             PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM
     ));
 

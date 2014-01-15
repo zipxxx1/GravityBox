@@ -1557,6 +1557,12 @@
                 monitorBoxUnit="m"
                 android:defaultValue="10" />
 
+            <CheckBoxPreference
+                android:key="pref_force_overflow_menu_button"
+                android:title="@string/pref_force_overflow_menu_button_title"
+                android:summary="@string/pref_force_overflow_menu_button_summary"
+                android:defaultValue="false" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>
