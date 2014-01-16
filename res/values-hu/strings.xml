@@ -977,7 +977,7 @@
     <string name="smart_radio_action_do_nothing">Ne tegyen semmit</string>
     <string name="smart_radio_action_summary">Kapcsoljon ide %s</string>
     <string name="pref_cat_smart_radio_title">Okos rádió</string>
-    <string name="pref_smart_radio_experimental_summary">KÍSÉRLETI! Hatással lehet a kézi hálózati mód váltásra</string>
+    <string name="pref_smart_radio_experimental_summary">KÍSÉRLETI! Hatással lehet a kézi hálózati mód váltásra. Automatikusan kapcsolja a kiválasztott hálózati üzemmódot, amikor a mobil adatátvitel be- vagy kikapcsolásra kerül (például automatikussá tehető a 3G-re váltás a mobil adatátvitel bekapcsolásakor és a 2G-re váltás mobil adatátvitel kikapcsolásakor az akkumlátor üzemidejének megóvása céljából)</string>
     <string name="pref_smart_radio_on_data_enabled_title">Mobil adatátvitel esetén engedélyezve</string>
     <string name="pref_smart_radio_on_data_disabled_title">Mobil adatátvitel esetén letiltva</string>
 
