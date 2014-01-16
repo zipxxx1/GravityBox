@@ -364,6 +364,8 @@ public class ModDisplay {
                     CLASS_DISPLAY_POWER_REQUEST, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (!mLsBgLastScreenEnabled || mKeyguardManager.isKeyguardLocked()) return;
+
                     final boolean waitForNegativeProximity = (Boolean) param.args[1];
                     final boolean pendingWaitForNegativeProximity = 
                             XposedHelpers.getBooleanField(param.thisObject, "mPendingWaitForNegativeProximityLocked");
@@ -371,9 +373,9 @@ public class ModDisplay {
                             XposedHelpers.getObjectField(param.thisObject, "mPendingRequestLocked");
                     final int requestedScreenState = XposedHelpers.getIntField(param.args[0], "screenState");
 
-                    if (mLsBgLastScreenEnabled && (waitForNegativeProximity && !pendingWaitForNegativeProximity ||
+                    if ((waitForNegativeProximity && !pendingWaitForNegativeProximity ||
                             pendingRequestLocked == null || !pendingRequestLocked.equals(param.args[0])) &&
-                            requestedScreenState == 0 && !mKeyguardManager.isKeyguardLocked()) {
+                            requestedScreenState == 0) {
                         final Object displayManager = XposedHelpers.getObjectField(param.thisObject, "mDisplayManager");
                         final int display0 = ((int[])XposedHelpers.callMethod(displayManager, "getDisplayIds"))[0];
                         Object displayInfo = XposedHelpers.callMethod(displayManager, "getDisplayInfo", display0);
