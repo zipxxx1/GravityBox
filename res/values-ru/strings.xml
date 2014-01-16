@@ -39,7 +39,7 @@
 
     <string name="poweroff_advanced_title">Расширенная перезагрузка</string>
     <string name="poweroff_advanced_summary">Включение расширенного меню перезагрузки с возможностью перезагрузки в режим восстановления</string>
-    <string name="poweroff_recovery">Режим  восстановления</string>
+    <string name="poweroff_recovery">Режим восстановления</string>
     <string name="poweroff_bootloader">Загрузчик</string>    
 
     <string name="vol_key_cursor_control_title">Управление курсором</string>
@@ -119,15 +119,15 @@
 
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Настройки строки состояния</string>
-    <string name="pref_cat_statusbar_summary">Содержит различные настройки строки состояния</string>
+    <string name="pref_cat_statusbar_summary">Различные настройки строки состояния</string>
     <string name="pref_cat_misc_title">Прочие настройки</string>
-    <string name="pref_cat_misc_summary">Содержит настройки, не относящиеся к другим категориям</string>
+    <string name="pref_cat_misc_summary">Настройки, не относящиеся к другим категориям</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">О программе</string>
-    <string name="about_gb_summary">Coded by C3C076@XDA. Нажмите для перехода в официальный форум.</string>
+    <string name="about_gb_summary">Разработка C3C076@XDA. Нажмите для перехода в официальный форум.</string>
     <string name="about_xposed_title">Xposed framework</string>
-    <string name="about_xposed_summary">Coded by rovo89@XDA. Нажмите для перехода в официальный форум.</string>
+    <string name="about_xposed_summary">Разработка rovo89@XDA. Нажмите для перехода в официальный форум.</string>
     <string name="about_donate_title">Пожертвовать</string>
     <string name="about_donate_summary">Пожертвуйте через PayPal для поддержки разработки</string>
 
@@ -145,7 +145,7 @@
 
     <!-- Dual SIM ringer -->
     <string name="dual_sim_ringer_title">Мелодия звонка для 2-х SIM</string>
-    <string name="dual_sim_ringer_summary">Запускает приложение, которое позволяет установить мелодию звонка и уведомлений отдельно для каждой SIM-карты</string>
+    <string name="dual_sim_ringer_summary">Запуск приложения, которое позволяет установить мелодию звонка и уведомлений отдельно для каждой SIM-карты</string>
 
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Настройки экрана блокировки</string>
@@ -168,7 +168,7 @@
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Настройки питания</string>
-    <string name="pref_cat_power_summary">Содержит различные настройки, связанные с питанием</string>
+    <string name="pref_cat_power_summary">Различные настройки, связанные с питанием</string>
 
     <!--  Low battery LED flashing -->
     <string name="pref_flashing_led_disable_title">Отключить вспышку</string>
@@ -194,7 +194,7 @@
     <string name="pref_ab_number_error_negative">Значение не должно быть меньше или равным 0</string>
     <string name="pref_ab_number_not_ascending">Значение на нижнем уровне не может быть выше значений на верхних уровнях</string>
     <string name="pref_ab_number_not_descending">Значение на верхнем уровне не может быть ниже значений на нижних уровнях</string>
-    <string name="pref_ab_values_set">Значения для %s установлено</string>
+    <string name="pref_ab_values_set">Значения для %s установлены</string>
     <string name="pref_ab_config_saved">Новая конфигурация автояркости сохранена</string>
     <string name="pref_ab_config_cancelled">Конфигурация автояркости НЕ БЫЛА сохранена</string>
     <string name="pref_ab_button_set">Установить</string>
@@ -224,7 +224,7 @@
 
     <!-- Disable charging LED -->
     <string name="pref_charging_led_disable_title">Отключить индикацию</string>
-    <string name="pref_charging_led_disable_summary">Позволяет отключить светодиод индикации во время зарядки</string>
+    <string name="pref_charging_led_disable_summary">Отключение светодиода индикации во время зарядки</string>
     
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Физические кнопки</string>
@@ -248,7 +248,7 @@
 
     <!--  Phone tweaks category -->
     <string name="pref_cat_phone_title">Настройки телефонии</string>
-    <string name="pref_cat_phone_summary">Содержит различные настройки телефонии</string>
+    <string name="pref_cat_phone_summary">Различные настройки телефонии</string>
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">Переворот во время звонка</string>
@@ -361,7 +361,7 @@
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Сглаженный Holo фон</string>
-    <string name="pref_holo_bg_dither_summary">Заменяет стандартный фон на сглаженный для устранения полосок градиента (необходима перезагрузка)</string>
+    <string name="pref_holo_bg_dither_summary">Замена стандартного фона на сглаженный для устранения полосок градиента (необходима перезагрузка)</string>
 
     <!-- Disable hardware keys for pie -->
     <string name="pref_hwkeys_disable_title">Отключить нав. кнопки</string>
@@ -473,8 +473,8 @@
     <string name="expanded_desktop_both">Полупогружение</string>
     <string name="expanded_desktop_immersive">Погружение</string>
     <string name="action_expanded_desktop_title">Расширенный рабочий стол</string>
-    <string name="action_expanded_desktop_on">Расшренный рабочий стол ВКЛ</string>
-    <string name="action_expanded_desktop_off">Расшренный рабочий стол ВЫКЛ</string>
+    <string name="action_expanded_desktop_on">Расширенный рабочий стол ВКЛ</string>
+    <string name="action_expanded_desktop_off">Расширенный рабочий стол ВЫКЛ</string>
 
     <!-- Power menu screenshot -->
     <string name="screenshot">Снимок экрана</string>
@@ -504,7 +504,7 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Ярлыки кольца блокировки</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Общий переключатель ярлыков кольца блокировки</string>
+    <string name="pref_lockscreen_ring_targets_enable_summary">Включение ярлыков кольца блокировки</string>
     <string name="pref_lockscreen_ring_targets_app_title">Целевое приложение %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Вертик. смещение кольца</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Гориз. смещение кольца</string>
@@ -548,7 +548,7 @@
 
     <!-- Mute volume adjust sound -->
     <string name="pref_volume_adjust_mute_title">Откл. звук рег. громкости</string>
-    <string name="pref_volume_adjust_mute_summary">Отключает звук, воспроизводимый при регулировке громкости</string>
+    <string name="pref_volume_adjust_mute_summary">Отключение звука, воспроизводимого при регулировке громкости</string>
 
     <!-- Call vibrations -->
     <string name="pref_call_vibrations_title">Вибрация при вызове</string>
@@ -563,7 +563,7 @@
     
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Блокировка уведомлений</string>
-    <string name="pref_ongoing_notifications_summary">Позволяет блокировать выбранные уведомления</string>
+    <string name="pref_ongoing_notifications_summary">Блокировка выбранных уведомлений</string>
     <string name="ongoing_notif_info">Список формируется автоматически при появлении уведомления.
         Вы можете решить позже, какое уведомление блокировать. Используйте с осторожностью.</string>
     <string name="ongoing_notif_reset_list">Сбросить список</string>
@@ -589,7 +589,7 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Монитор трафика</string>
-    <string name="pref_data_traffic_enable_summary">Показывает трафик всегда, когда включена передача данных</string>
+    <string name="pref_data_traffic_enable_summary">Отображение трафика всегда, когда включена передача данных</string>
     <string name="pref_data_traffic_position_title">Позиция</string>
     <string name="dt_position_auto">Автоматически (в центре или справа в зависимости от положения часов)</string>
     <string name="dt_position_left">Слева</string>
@@ -612,7 +612,7 @@
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> свободно</string>
     <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
     <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> использовано</string>
-    <string name="pref_rambar_title">Панель памяти в недавнихч</string>
+    <string name="pref_rambar_title">Панель памяти в недавних</string>
     <string name="rambar_off">Выключено</string>
     <string name="rambar_top">Сверху</string>
     <string name="rambar_bottom">Снизу</string>
@@ -682,7 +682,7 @@
     <string name="caller_unkown_photo_result_not_successful">Фото не изменено</string>
 
     <!-- Minimum screen brightness warning -->
-    <string name="screen_brightness_min_warning">Ваш экран может не поддерживать значения меньше 20. Если ваш экран не загорается,
+    <string name="screen_brightness_min_warning">Ваш экран может не поддерживать значения меньше 20. Если Ваш экран не загорается,
         зажмите кнопку Громкость+ как минимум на 7 секунд для сброса яркости и затем исправьте значение яркости на большее.</string>
     
     <!-- Navbar tweaks categories -->
@@ -729,7 +729,7 @@
     <string name="pref_recent_clear_margin_bottom_title">Изменить нижний отступ</string>
 
     <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Google+ community</string>
+    <string name="pref_about_gplus_title">Сообщество Google+</string>
     <string name="pref_about_gplus_summary">Нажмите для перехода в сообщество Google+</string>
 
     <!-- Network mode tile: Allow LTE network mode -->
@@ -755,7 +755,7 @@
     <string name="hwkey_ls_torch_voldown_longpress">При удержании громкости-</string>
     
     <!-- QuickSettings management master switch -->
-    <string name="pref_qs_management_enable_summary">Общий переключатель быстрых настроек (необходима перезагрузка)</string>
+    <string name="pref_qs_management_enable_summary">Включение быстрых настроек (необходима перезагрузка)</string>
 
     <!-- AppPickerPreference: shortcut support -->
     <string name="app_picker_applications">Приложения</string>
@@ -794,7 +794,7 @@
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Показвать панель набора</string>
-    <string name="pref_dialer_show_dialpad_summary">Показывать панель набора номера автоматически при открытии приложения телефона</string>
+    <string name="pref_dialer_show_dialpad_summary">Автоматическое отображение панели набора номера при открытии приложения телефона</string>
         
     <!-- Screen off effects -->
     <string name="screen_off_effect_default">По умолчанию</string>
@@ -835,7 +835,7 @@
 
     <!-- Cursor control in navigation bar -->
     <string name="pref_navbar_cursor_control_title">Кнопки управления курсором</string>
-    <string name="pref_navbar_cursor_control_summary">Включить кнопки управления курсором в панели навигации при включенной клавиатуре</string>
+    <string name="pref_navbar_cursor_control_summary">Включение кнопок управления курсором в панели навигации при работающей клавиатуре</string>
 
     <!-- Volume rocker wake -->
     <string name="pref_volume_rocker_wake_title">Пробуждение громкостью</string>
@@ -848,7 +848,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Скрыть после изменения</string>
-    <string name="pref_qs_hide_on_change_summary">Скрывает строку состояния по одиночному нажатию на плитке. Применимо к плиткам GravityBox и изменённым системным.</string>
+    <string name="pref_qs_hide_on_change_summary">Скрытие строки состояния по одиночному нажатию на плитке. Применимо к плиткам GravityBox и изменённым системным.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Меню выключения</string>
@@ -870,9 +870,9 @@
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Настройки сигнала</string>
     <string name="pref_signal_cluster_connection_state_title">Вкл состояние соединения</string>
-    <string name="pref_signal_cluster_connection_state_summary">Показывает состояние частичного/полного соединения в значках мобильного сигнала и  WiFi (необходима перезагрузка)</string>
+    <string name="pref_signal_cluster_connection_state_summary">Отображение состояния частичного/полного соединения в значках мобильного сигнала и  WiFi (необходима перезагрузка)</string>
     <string name="pref_signal_cluster_data_activity_title">Вкл активность данных</string>
-    <string name="pref_signal_cluster_data_activity_summary">Показывает активность данных в значках мобильного сигнала и  WiFi (необходима перезагрузка)</string>
+    <string name="pref_signal_cluster_data_activity_summary">Отображение активности данных в значках мобильного сигнала и  WiFi (необходима перезагрузка)</string>
     
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">Использовать режимы сети CDMA</string>
@@ -893,7 +893,7 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Ярлыки нав.кольца</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Общий переключатель ярлыков навигационного кольца (необходима перезагрузка)</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Включение ярлыков навигационного кольца (необходима перезагрузка)</string>
     <string name="pref_navbar_ring_target_title">Ярлык кольца %d</string>
 
     <!-- Shortcut activity title -->
@@ -903,16 +903,16 @@
     <string name="shortcut_network_mode">Переключение режима сети</string>
 
     <!-- Toggle mobile data shortcut -->
-    <string name="shortcut_mobile_data">Переключение моб. данных</string>
+    <string name="shortcut_mobile_data">Включение моб. данных</string>
 
     <!-- Toggle WiFi shortcut -->
-    <string name="shortcut_wifi">Переключение WiFi</string>
+    <string name="shortcut_wifi">Включение WiFi</string>
 
     <!-- Toggle Bluetooth shortcut -->
-    <string name="shortcut_bluetooth">Переключение Bluetooth</string>
+    <string name="shortcut_bluetooth">Включение Bluetooth</string>
 
     <!-- Toggle WiFi AP shortcut -->
-    <string name="shortcut_wifi_ap">Переключение ТД WiFi</string>
+    <string name="shortcut_wifi_ap">Включение ТД WiFi</string>
 
     <!-- Location mode shortcut -->
     <string name="shortcut_location_mode">Настройка местоположения</string>
@@ -922,7 +922,7 @@
     <string name="location_mode_off">Местоположение выкл</string>
 
     <!-- Toggle NFC shortcut -->
-    <string name="shortcut_nfc">Переключение NFC</string>
+    <string name="shortcut_nfc">Включение NFC</string>
 
     <!-- Navigation bar ring targets background style -->
     <string name="pref_navbar_ring_targets_bg_style_title">Стиль фона ярлыка</string>
@@ -947,7 +947,7 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Непрозрачность фона</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Применимо только к пользовательским обоям и оформлению альбомов</string>
+    <string name="pref_lockscreen_bg_opacity_summary">Применимо только к пользовательским обоям и обложкам альбомов</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Управление медиа</string>
@@ -959,7 +959,7 @@
     <string name="battery_percent_text_charging_title">Индикация зарядки</string>
     <string name="bpt_charging_none">Нет</string>
     <string name="bpt_charging_static">Статичная</string>
-    <string name="bpt_charging_animated">Анимированая</string>
+    <string name="bpt_charging_animated">Анимированная</string>
 
     <!-- Lockscreen statusbar clock visibility -->
     <string name="pref_lockscreen_sb_clock_title">Часы в строке состояния</string>
@@ -986,11 +986,11 @@
 
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Автоотключение фонарика</string>
-    <string name="pref_torch_auto_off_summary">Отключает фонарик через определённый промежуток времени. Установите 0 для деактивации функции (не рекомендуется)</string>
+    <string name="pref_torch_auto_off_summary">Отключение фонарика через определённый промежуток времени. Установите 0 для деактивации функции (не рекомендуется)</string>
 
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Поменять кнопки громкости</string>
-    <string name="pref_vol_swap_keys_summary">Поменять кнопки громкости при повороте экрана</string>
+    <string name="pref_vol_swap_keys_summary">Кнопки громкости при повороте экрана меняются местами</string>
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Эффект размытия</string>
