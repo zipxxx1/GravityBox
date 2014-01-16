@@ -136,11 +136,11 @@
     <string name="reboot_confirm_recovery">%s будет перезагружен в режим восстановления.</string>
     <string name="reboot_confirm_bootloader">%s будет перезагружен в загрузчик.</string>
 
-    <!-- CRT effect screen off animation -->
+    <!-- Screen off effect -->
     <string name="crt_off_effect_title">Эффект выключения экрана</string>
 
     <!-- Engineering mode shortcut -->
-    <string name="engineering_mode_title">Инженерное меню</string>
+    <string name="engineering_mode_title">Инженерный режим</string>
     <string name="engineering_mode_summary">Запуск приложения в инженерном режиме</string>
 
     <!-- Dual SIM ringer -->
@@ -155,6 +155,7 @@
     <string name="lockscreen_bg_default">Стандартные обои</string>
     <string name="lockscreen_bg_color">Заполнение цветом</string>
     <string name="lockscreen_bg_image">Пользовательское изображение</string>
+    <string name="lockscreen_bg_last_screen">Последний экран</string>
     <string name="pref_lockscreen_bg_color_title">Задать цвет</string>
     <string name="pref_lockscreen_bg_color_summary">Установка цвета фона для экрана блокировки</string>
     <string name="pref_lockscreen_bg_image_title">Задать изображение</string>
@@ -997,5 +998,9 @@
     <!-- Tiles: Disable tile spanning -->
     <string name="pref_qs_tile_span_disable_title">Откл расширение плиток</string>
     <string name="pref_qs_tile_span_disable_summary">Предотвращение расширения плиток пользователя, яркости и настроек в ландшафтном режиме</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Принуд. троеточие меню</string>
+    <string name="pref_force_overflow_menu_button_summary">Необходима перезагрузка</string>
 
 </resources>
