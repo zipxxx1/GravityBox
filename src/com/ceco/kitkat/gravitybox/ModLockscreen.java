@@ -110,6 +110,8 @@ public class ModLockscreen {
     private static float mDisplayDensity;
     private static boolean mReceiverRegistered;
     private static Class<?> mKgUpdateMonitorClass;
+    private static boolean mBackgroundAlreadySet;
+    private static boolean mIsLastScreenBackground;
 
     // Battery Arc
     private static HandleDrawable mHandleDrawable;
@@ -129,8 +131,8 @@ public class ModLockscreen {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED)) {
+                if (DEBUG_KIS) log("ACTION_KEYGUARD_IMAGE_UPDATED received");
                 setLastScreenBackground(context);
-                if (DEBUG_KIS) log("ACTION_KEYGUARD_IMAGE_UPDATED: custom wallpaper set");
             }
         }
     };
@@ -182,6 +184,7 @@ public class ModLockscreen {
                             GravityBoxSettings.LOCKSCREEN_BG_DEFAULT);
 
                     Bitmap customBg = null;
+                    mBackgroundAlreadySet = false;
                     if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_COLOR)) {
                         int color = mPrefs.getInt(
                                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR, Color.BLACK);
@@ -211,6 +214,7 @@ public class ModLockscreen {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final Drawable d = (Drawable) param.args[0];
                     if (d != null) {
+                        mBackgroundAlreadySet = !mIsLastScreenBackground;
                         d.clearColorFilter();
                         final int alpha = (int) ((1 - prefs.getInt(
                                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 50) / 100f) * 255);
@@ -219,6 +223,7 @@ public class ModLockscreen {
                         ((View)param.thisObject).invalidate();
                         if (DEBUG) log("setCustomBackground: custom background opacity set");
                     }
+                    mIsLastScreenBackground = false;
                 }
             });
 
@@ -758,6 +763,10 @@ public class ModLockscreen {
     }
 
     private static void setLastScreenBackground(Context context) {
+        if (mBackgroundAlreadySet) {
+            if (DEBUG_KIS) log("setLastScreenBackground: Background has been already set (album art?)");
+            return;
+        }
         try {
             String kisImageFile = mGbContext.getFilesDir() + "/kis_image.png";
             Bitmap customBg = BitmapFactory.decodeFile(kisImageFile);
@@ -767,7 +776,9 @@ public class ModLockscreen {
                 }
                 Object kgUpdateMonitor = XposedHelpers.callStaticMethod(mKgUpdateMonitorClass, 
                         "getInstance", context);
+                mIsLastScreenBackground = true;
                 XposedHelpers.callMethod(kgUpdateMonitor, "dispatchSetBackground", customBg);
+                if (DEBUG_KIS) log("setLastScreenBackground: Last screen background updated");
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
