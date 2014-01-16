@@ -15,20 +15,18 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import android.view.ViewConfiguration;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class ModViewConfig {
-    private static final String CLASS_VIEW_CONFIG = "android.view.ViewConfiguration";
 
     public static void initZygote(final XSharedPreferences prefs) {
         try {
-            final Class<?> classViewConfig = XposedHelpers.findClass(CLASS_VIEW_CONFIG, null);
-
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON, false)) {
-                XposedHelpers.findAndHookMethod(classViewConfig, "hasPermanentMenuKey",
+                XposedHelpers.findAndHookMethod(ViewConfiguration.class, "hasPermanentMenuKey",
                         XC_MethodReplacement.returnConstant(false));
             }
         } catch (Throwable t) {
