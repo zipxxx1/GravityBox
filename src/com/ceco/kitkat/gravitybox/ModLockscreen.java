@@ -267,6 +267,15 @@ public class ModLockscreen {
                 }
             });
 
+            XposedHelpers.findAndHookMethod(kgHostViewClass, "onScreenTurnedOn", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    Object slidingChallenge = XposedHelpers.getObjectField(
+                            param.thisObject, "mSlidingChallengeLayout");
+                    minimizeChallengeIfDesired(slidingChallenge);
+                }
+            });
+
             XposedHelpers.findAndHookMethod(kgSelectorViewClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
