@@ -89,6 +89,7 @@ public class ModNavigationBar {
     private static Resources mResources;
     private static Context mGbContext;
     private static NavbarViewInfo[] mNavbarViewInfo = new NavbarViewInfo[2];
+    private static boolean mCustomKeySwapEnabled;
 
     // Colors
     private static boolean mNavbarColorsEnabled;
@@ -123,6 +124,7 @@ public class ModNavigationBar {
         KeyButtonView dpadRight;
         int customKeyPosition;
         boolean visible;
+        boolean menuCustomSwapped;
     }
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -165,6 +167,11 @@ public class ModNavigationBar {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CURSOR_CONTROL)) {
                     mCursorControlEnabled = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_NAVBAR_CURSOR_CONTROL, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_SWAP)) {
+                    mCustomKeySwapEnabled = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_SWAP, false);
+                    setCustomKeyVisibility();
                 }
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_RECENTS_SINGLETAP_CHANGED)) {
@@ -260,6 +267,8 @@ public class ModNavigationBar {
                     GravityBoxSettings.PREF_KEY_NAVBAR_CURSOR_CONTROL, false);
             mAlwaysOnBottom = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM, false);
+            mCustomKeySwapEnabled = prefs.getBoolean(
+                    GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP, false);
 
             XposedBridge.hookAllConstructors(navbarViewClass, new XC_MethodHook() {
                 @Override
@@ -706,6 +715,15 @@ public class ModNavigationBar {
             final boolean visible = mCustomKeyEnabled &&
                     !((disabledFlags & STATUS_BAR_DISABLE_RECENT) != 0);
             for (int i = 0; i <= 1; i++) {
+                // swap / unswap with menu key if necessary
+                if ((!mCustomKeyEnabled || !mCustomKeySwapEnabled) && 
+                        mNavbarViewInfo[i].menuCustomSwapped) {
+                    swapMenuAndCustom(mNavbarViewInfo[i]);
+                } else if (mCustomKeyEnabled && mCustomKeySwapEnabled && 
+                        !mNavbarViewInfo[i].menuCustomSwapped) {
+                    swapMenuAndCustom(mNavbarViewInfo[i]);
+                }
+
                 if (mNavbarViewInfo[i].visible == visible) continue;
 
                 if (mNavbarViewInfo[i].originalView != null) {
@@ -900,6 +918,32 @@ public class ModNavigationBar {
         }
         catch (Throwable t) {
             log("Error swapping back and recents key: " + t.getMessage());
+        }
+    }
+
+    private static void swapMenuAndCustom(NavbarViewInfo nvi) {
+        if (!nvi.customKey.isAttachedToWindow()) return;
+
+        try {
+            final int menuButtonResId = mResources.getIdentifier("menu", "id", PACKAGE_NAME);
+            View menuKey = nvi.navButtons.findViewById(menuButtonResId);
+            View customKey = nvi.customKey;
+            int menuPos = nvi.navButtons.indexOfChild(menuKey);
+            int customPos = nvi.customKeyPosition;
+            nvi.navButtons.removeView(menuKey);
+            nvi.navButtons.removeView(customKey);
+            if (menuPos < customPos) {
+                nvi.navButtons.addView(customKey, menuPos);
+                nvi.navButtons.addView(menuKey, customPos);
+            } else {
+                nvi.navButtons.addView(menuKey, customPos);
+                nvi.navButtons.addView(customKey, menuPos);
+            }
+            nvi.customKeyPosition = menuPos;
+            nvi.menuCustomSwapped = !nvi.menuCustomSwapped;
+        }
+        catch (Throwable t) {
+            log("Error swapping menu and custom key: " + t.getMessage());
         }
     }
 

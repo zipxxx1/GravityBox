@@ -461,6 +461,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP = "pref_navbar_custom_key_singletap";
     public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS = "pref_navbar_custom_key_longpress";
     public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP = "pref_navbar_custom_key_doubletap";
+    public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP = "pref_navbar_custom_key_swap";
     public static final String PREF_KEY_NAVBAR_SWAP_KEYS = "pref_navbar_swap_keys";
     public static final String PREF_KEY_NAVBAR_CURSOR_CONTROL = "pref_navbar_cursor_control";
     public static final String PREF_KEY_NAVBAR_COLOR_ENABLE = "pref_navbar_color_enable";
@@ -482,6 +483,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_SINGLETAP = "navbarCustomKeySingletap";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_LONGPRESS = "navbarCustomKeyLongpress";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_DOUBLETAP = "navbarCustomKeyDoubletap";
+    public static final String EXTRA_NAVBAR_CUSTOM_KEY_SWAP = "navbarCustomKeySwap";
 
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_ENABLE = "pref_lockscreen_ring_targets_enable";
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_APP[] = new String[] {
@@ -1934,8 +1936,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_NAVBAR_MENUKEY, prefs.getBoolean(PREF_KEY_NAVBAR_MENUKEY, false));
             } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_ENABLE,
-                        prefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false));
+                boolean enable = prefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false);
+                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_ENABLE, enable);
+                if (!enable) {
+                    prefs.edit().putBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP, false);
+                    ((CheckBoxPreference)getPreferenceScreen().findPreference(
+                            PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP)).setChecked(false);
+                }
             } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_SINGLETAP,
@@ -1948,6 +1955,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_DOUBLETAP,
                         Integer.valueOf(prefs.getString(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP, "0")));
+            } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP)) {
+                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
+                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_SWAP,
+                        prefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP, false));
             } else if (key.equals(PREF_KEY_NAVBAR_SWAP_KEYS)) {
                 intent.setAction(ACTION_PREF_NAVBAR_SWAP_KEYS);
             } else if (key.equals(PREF_KEY_NAVBAR_CURSOR_CONTROL)) {
