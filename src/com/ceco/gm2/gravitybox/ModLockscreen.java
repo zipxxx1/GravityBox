@@ -690,7 +690,6 @@ public class ModLockscreen {
     private static void minimizeChallengeIfDesired(Object challenge) {
         if (challenge == null) return;
 
-        mPrefs.reload();
         if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS, false)) {
             if (DEBUG) log("minimizeChallengeIfDesired: challenge minimized");
             XposedHelpers.callMethod(challenge, "showChallenge", false);
