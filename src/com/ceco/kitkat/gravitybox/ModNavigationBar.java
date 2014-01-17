@@ -36,7 +36,6 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ImageView.ScaleType;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.Space;
 
 import com.ceco.kitkat.gravitybox.GlowPadHelper.BgStyle;
@@ -63,6 +62,7 @@ public class ModNavigationBar {
     private static final String CLASS_SEARCH_PANEL_VIEW = "com.android.systemui.SearchPanelView";
     private static final String CLASS_GLOWPAD_TRIGGER_LISTENER = CLASS_SEARCH_PANEL_VIEW + "$GlowPadTriggerListener";
     private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.internal.policy.impl.PhoneWindowManager";
+    private static final String CLASS_GLOWPAD_VIEW = "com.android.internal.widget.multiwaveview.GlowPadView";
 
     private static final int MODE_OPAQUE = 0;
     private static final int MODE_LIGHTS_OUT = 3;
@@ -82,6 +82,7 @@ public class ModNavigationBar {
     private static boolean mCursorControlEnabled;
     private static boolean mDpadKeysVisible;
     private static boolean mAlwaysOnBottom;
+    private static boolean mNavbarVertical;
 
     // Custom key
     private static boolean mCustomKeyEnabled;
@@ -494,6 +495,7 @@ public class ModNavigationBar {
             if (mRingTargetsEnabled) {
                 final Class<?> searchPanelViewClass = XposedHelpers.findClass(CLASS_SEARCH_PANEL_VIEW, classLoader);
                 final Class<?> glowPadTriggerListenerClass = XposedHelpers.findClass(CLASS_GLOWPAD_TRIGGER_LISTENER, classLoader);
+                final Class<?> glowPasViewClass = XposedHelpers.findClass(CLASS_GLOWPAD_VIEW, classLoader);
 
                 mRingTargetsBgStyle = BgStyle.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE, "NONE"));
@@ -507,14 +509,24 @@ public class ModNavigationBar {
                     }
                 });
 
+                XposedHelpers.findAndHookMethod(glowPasViewClass, "showTargets", boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (param.thisObject == mGlowPadView) {
+                            if (mNavbarVertical && !isGlowPadVertical()) {
+                                rotateRingTargets();
+                            }
+                        }
+                    }
+                });
+
                 XposedHelpers.findAndHookMethod(navbarViewClass, "reorient", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if (DEBUG) log("Navigation bar view reorient");
                         if (mGlowPadView != null) {
-                            boolean vertical = XposedHelpers.getBooleanField(param.thisObject, "mVertical");
-                            XposedHelpers.setAdditionalInstanceField(mGlowPadView, "mGbVertical", vertical);
-                            if (vertical) {
+                            mNavbarVertical = XposedHelpers.getBooleanField(param.thisObject, "mVertical");
+                            if (mNavbarVertical && !isGlowPadVertical()) {
                                 rotateRingTargets();
                             }
                         }
@@ -979,6 +991,7 @@ public class ModNavigationBar {
             if (targets != null) Collections.rotate(targets, 3);
             if (descs != null) Collections.rotate(descs, 3);
             mGlowPadView.requestLayout();
+            XposedHelpers.setAdditionalInstanceField(mGlowPadView, "mGbVertical", true);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
