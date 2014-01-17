@@ -653,6 +653,13 @@
                 android:title="@string/pref_navbar_enable_title"
                 android:summary="@string/pref_navbar_enable_summary" />
 
+            <CheckBoxPreference 
+                android:key="pref_navbar_always_on_bottom"
+                android:title="@string/pref_navbar_always_on_bottom_title"
+                android:summary="@string/pref_navbar_always_on_bottom_summary"
+                android:defaultValue="false"
+                android:dependency="pref_navbar_override" />
+
         </PreferenceCategory>
 
         <PreferenceCategory
