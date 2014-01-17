@@ -155,6 +155,7 @@
     <string name="lockscreen_bg_default">Imagen de fondo predeterminada</string>
     <string name="lockscreen_bg_color">Relleno de color</string>
     <string name="lockscreen_bg_image">Imagen personalizada</string>
+    <string name="lockscreen_bg_last_screen">Última pantalla</string>
     <string name="pref_lockscreen_bg_color_title">Establecer color personalizado</string>
     <string name="pref_lockscreen_bg_color_summary">Permite establecer un color de fondo personalizado en la pantalla de bloqueo</string>
     <string name="pref_lockscreen_bg_image_title">Establecer imagen personalizada</string>
@@ -996,4 +997,15 @@
     <string name="pref_qs_tile_span_disable_title">Desactivar espaciado de casillas</string>
     <string name="pref_qs_tile_span_disable_summary">Desactiva el espaciado de las casillas de usuario, brillo y ajustes en modo paisaje</string>
 
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Forzar desbordamiento del botón menú</string>
+    <string name="pref_force_overflow_menu_button_summary">Requiere reinicio</string>
+    
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Siempre abajo</string>
+    <string name="pref_navbar_always_on_bottom_summary">Fuerza a la barra de navegación a permanecer abajo en orientación panorámica (requiere reinicio)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">No se puede usar mientras estén activados los objetivos en el anillo de la barra de navegación</string>
+	
 </resources>
