@@ -218,7 +218,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotace obrazovky uzamčení</string>
-    <string name="pref_lockscreen_rotation_summary">POZOR: může přehodit zkratky odemykacího prstence na některých zařízeních, pokud byla obrazovka uzamčení modifikována výrobcem</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Povolit menu tlačítko</string>

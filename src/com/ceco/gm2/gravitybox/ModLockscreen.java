@@ -30,6 +30,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.XResources;
 import android.graphics.Bitmap;
@@ -403,7 +404,10 @@ public class ModLockscreen {
                     XposedHelpers.setObjectField(mGlowPadView, "mTargetDrawables", newTargets);
                     XposedHelpers.setObjectField(mGlowPadView, "mTargetDescriptions", newDescriptions);
                     XposedHelpers.setObjectField(mGlowPadView, "mDirectionDescriptions", newDirections);
-                    XposedHelpers.callMethod(param.thisObject, "updateTargets");
+                    if (res.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        XposedHelpers.setFloatField(mGlowPadView, "mFirstItemOffset", 0);
+                    }
+                    mGlowPadView.requestLayout();
                 }
             });
 

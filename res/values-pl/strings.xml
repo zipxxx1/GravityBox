@@ -221,7 +221,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Włącz obracanie Ekranu blokady</string>
-    <string name="pref_lockscreen_rotation_summary">UWAGA: Może zamienić cele na pierścieniu odblokowania w niektórych urządzeniach, gdy ekran blokady AOSP został zmodyfikowany przez sprzedawcę</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Włącz klawisz menu</string>

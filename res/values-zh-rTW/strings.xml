@@ -218,7 +218,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">啟用鎖定畫面旋轉</string>
-    <string name="pref_lockscreen_rotation_summary">警告：若 AOSP 的鎖定螢幕曾被廠商修改，某些裝置的解鎖環目標可能遭到互換</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">啟用選單鍵</string>

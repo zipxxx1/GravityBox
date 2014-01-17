@@ -221,7 +221,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Ativar rotação no ecrã de bloqueio</string>
-    <string name="pref_lockscreen_rotation_summary">AVISO: poderá alterar a selecção do anel de desbloqueio caso o fabricante tenha modificado profundamente o ecrã de bloqueio</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Desbloquear utilizando botão Menu</string>

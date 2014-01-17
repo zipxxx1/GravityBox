@@ -232,7 +232,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotar en pantalla de bloqueo</string>
-    <string name="pref_lockscreen_rotation_summary">ADVERTENCIA: puede cambiar los objetivos del anillo de desbloqueo en el caso de que la pantalla de bloqueo AOSP haya sido modificada por el fabricante</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Activar botón menú</string>
