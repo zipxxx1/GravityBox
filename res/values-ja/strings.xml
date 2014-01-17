@@ -139,6 +139,7 @@
     <string name="lockscreen_bg_default">標準壁紙</string>
     <string name="lockscreen_bg_color">塗りつぶし</string>
     <string name="lockscreen_bg_image">カスタム画像</string>
+    <string name="lockscreen_bg_last_screen">消灯前の画面</string>
     <string name="pref_lockscreen_bg_color_title">色をセット</string>
     <string name="pref_lockscreen_bg_color_summary">ロック画面の背景に使う色をセットします。</string>
     <string name="pref_lockscreen_bg_image_title">画像をセット</string>
@@ -919,6 +920,7 @@
     
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">背景の透過度</string>
+    <string name="pref_lockscreen_bg_opacity_summary">カスタム壁紙とアルバムアートにのみ適用されます。</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">メディア操作</string>
@@ -943,8 +945,8 @@
     <string name="qs_tile_quickapp_2">クイックアプリ2</string>
 
     <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">音楽の音量操作を強制</string>
-    <string name="pref_vol_force_music_control_summary">有効にすると音量キーで着信音の代わりに音楽の音量を変更します。</string>
+    <string name="pref_vol_force_music_control_title">メディア音量操作を強制</string>
+    <string name="pref_vol_force_music_control_summary">有効にすると音量キーで着信音の代わりにメディアの音量を変更します。</string>
     
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">最近のアプリパネル</string>
@@ -962,5 +964,16 @@
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">回転時音量キー入れ替え</string>
     <string name="pref_vol_swap_keys_summary">画面を回転した時音量キーを入れ替えます。</string>
+    
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">ぼかし効果</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">タイルのスペースを無効化</string>
+    <string name="pref_qs_tile_span_disable_summary">横画面でのユーザー、画面の明るさと設定タイルのスペースを無くします。</string>
+    
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">メニューボタン表示を強制</string>
+    <string name="pref_force_overflow_menu_button_summary">再起動すると反映されます。</string>
     
 </resources>
