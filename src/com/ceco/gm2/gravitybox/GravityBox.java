@@ -97,6 +97,10 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModPhone.initZygote(prefs);
         ModExpandedDesktop.initZygote(prefs);
         ConnectivityServiceWrapper.initZygote();
+
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false)) {
+            ModNavigationBar.initZygote(prefs);
+        }
     }
 
     @Override

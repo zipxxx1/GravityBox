@@ -27,13 +27,17 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.Space;
 
 import com.ceco.gm2.gravitybox.GlowPadHelper.AppInfo;
 import com.ceco.gm2.gravitybox.GlowPadHelper.BgStyle;
@@ -54,6 +58,7 @@ public class ModNavigationBar {
     private static final String CLASS_KEY_BUTTON_VIEW = "com.android.systemui.statusbar.policy.KeyButtonView";
     private static final String CLASS_SEARCH_PANEL_VIEW = "com.android.systemui.SearchPanelView";
     private static final String CLASS_GLOWPAD_TRIGGER_LISTENER = CLASS_SEARCH_PANEL_VIEW + "$GlowPadTriggerListener";
+    private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.internal.policy.impl.PhoneWindowManager";
 
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 3;
     private static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
@@ -69,6 +74,7 @@ public class ModNavigationBar {
     private static boolean mHwKeysEnabled;
     private static boolean mCursorControlEnabled;
     private static boolean mDpadKeysVisible;
+    private static boolean mAlwaysOnBottom;
 
     // Custom key
     private static boolean mCustomKeyEnabled;
@@ -184,6 +190,37 @@ public class ModNavigationBar {
         }
     };
 
+    public static void initZygote(final XSharedPreferences prefs) {
+        try {
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM, false)) {
+                final Class<?> phoneWindowManagerClass = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
+
+                XposedHelpers.findAndHookMethod(phoneWindowManagerClass, "setInitialDisplaySize",
+                        Display.class, int.class, int.class, int.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        XposedHelpers.setBooleanField(param.thisObject, "mNavigationBarCanMove", false);
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(Resources.class, "loadXmlResourceParser",
+                        String.class, int.class, int.class, String.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if ("res/layout/navigation_bar.xml".equals(param.args[0])) {
+                            param.args[0] = "res/layout-sw600dp/navigation_bar.xml";
+                        } else if ("res/layout/status_bar_search_panel.xml".equals(param.args[0]) ||
+                                "res/layout-land/status_bar_search_panel.xml".equals(param.args[0])) {
+                            param.args[0] = "res/layout-sw600dp/status_bar_search_panel.xml";
+                        }
+                    }
+                });
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
@@ -210,6 +247,8 @@ public class ModNavigationBar {
             mHwKeysEnabled = !prefs.getBoolean(GravityBoxSettings.PREF_KEY_HWKEYS_DISABLE, false);
             mCursorControlEnabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_NAVBAR_CURSOR_CONTROL, false);
+            mAlwaysOnBottom = prefs.getBoolean(
+                    GravityBoxSettings.PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM, false);
 
             XposedBridge.hookAllConstructors(navbarViewClass, new XC_MethodHook() {
                 @Override
@@ -272,6 +311,9 @@ public class ModNavigationBar {
                         mHomeKeys = new HomeKeyInfo[rotatedViews.length];
                         int index = 0;
                         for(View v : rotatedViews) {
+                            if (mAlwaysOnBottom && v.getId() == mResources.getIdentifier("rot0", "id", PACKAGE_NAME)) {
+                                adjustPortraitLayout(v);
+                            }
                             if (backButtonResId != 0) { 
                                 ImageView backButton = (ImageView) v.findViewById(backButtonResId);
                                 if (backButton != null) {
@@ -464,6 +506,57 @@ public class ModNavigationBar {
                 });
             }
         } catch(Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void adjustPortraitLayout(View rView) {
+        // we loaded navbar layout from layout-sw600dp which portrait mode
+        // is not suitable for small screens, thus we have to make some adjustments
+        try {
+            ViewGroup vg = (ViewGroup) rView.findViewById(mResources.getIdentifier(
+                    "nav_buttons", "id", PACKAGE_NAME));
+            int keyWidth = mResources.getDimensionPixelSize(
+                    mResources.getIdentifier("navigation_key_width", "dimen", PACKAGE_NAME));
+            int menuKeyWidth = mResources.getDimensionPixelSize(
+                    mResources.getIdentifier("navigation_menu_key_width", "dimen", PACKAGE_NAME));
+            int backKeyResId = mResources.getIdentifier("back", "id", PACKAGE_NAME);
+            int homeKeyResId = mResources.getIdentifier("home", "id", PACKAGE_NAME);
+            int menuKeyResId = mResources.getIdentifier("menu", "id", PACKAGE_NAME);
+            int otherViewWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                    40, mResources.getDisplayMetrics());
+
+            // remove all space widgets first
+            int childCount = vg.getChildCount();
+            for (int i = (childCount-1); i <=0 ; i--) {
+                View v = vg.getChildAt(i);
+                if (v instanceof Space) {
+                    vg.removeView(v);
+                }
+            }
+            // adjust layout
+            for (int i = 0; i < vg.getChildCount(); i++) {
+                View v = vg.getChildAt(i);
+                MarginLayoutParams mlp = (MarginLayoutParams) v.getLayoutParams();
+                if (v.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW)) {
+                    final int resId = v.getId();
+                    mlp.width = resId == menuKeyResId ? menuKeyWidth : keyWidth;
+                    v.setPadding(0, 0, 0, 0);
+                    if (resId == backKeyResId || resId == homeKeyResId) {
+                        View space = new View(rView.getContext());
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT, 
+                                LinearLayout.LayoutParams.MATCH_PARENT);
+                        lp.weight=1;
+                        space.setLayoutParams(lp);
+                        vg.addView(space, i+1);
+                    }
+                } else if (mlp.width != MarginLayoutParams.MATCH_PARENT) {
+                    mlp.width = otherViewWidth;
+                }
+                v.setLayoutParams(mlp);
+            }
+        } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
