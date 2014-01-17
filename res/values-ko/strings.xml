@@ -161,7 +161,6 @@
     <string name="pref_ab_button_set">설정</string>
 
     <string name="pref_lockscreen_rotation_title">잠금 화면 회전</string>
-    <string name="pref_lockscreen_rotation_summary">주의 : OEM에 의해 잠금 화면이 수정되었다면 각종 버그가 발생할 수 있습니다.</string>
 
     <string name="pref_lockscreen_menu_key_title">잠금 화면에서 메뉴 키 사용</string>
     <string name="pref_lockscreen_menu_key_summary">잠금 화면에서 메뉴 키를 길게 눌러서 잠금을 더 빨리 해제할 수 있습니다. (재시작 필요)</string>

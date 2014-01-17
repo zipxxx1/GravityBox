@@ -185,7 +185,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">ロック画面での回転を有効化</string>
-    <string name="pref_lockscreen_rotation_summary">警告: AOSPロック画面がキャリアにより改変されている場合ロックをスキップできてしまう可能性があります。</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">メニューキーを有効化</string>

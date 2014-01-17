@@ -192,7 +192,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Zárképernyő elforgatás engedélyezése</string>
-    <string name="pref_lockscreen_rotation_summary">FIGYELEM: megfordíthatja a feloldó kör célirányát olyan eszközön, ahol AOSP zárképernyő már a gyártó által módosítva van</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Menü gomb engedélyezése</string>

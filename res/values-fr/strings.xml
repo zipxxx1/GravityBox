@@ -201,7 +201,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotation écran de déverrouillage</string>
-    <string name="pref_lockscreen_rotation_summary">ATTENTION : peut modifier les cibles de l\'anneau de déverrouillage sur certains appareils dans le cas où l\'écran de déverrouillage aurait été personnalisé par le fabricant</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Activation touche menu</string>

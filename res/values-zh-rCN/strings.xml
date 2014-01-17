@@ -200,7 +200,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">启用锁屏画面旋转</string>
-    <string name="pref_lockscreen_rotation_summary">警告：若 AOSP 的锁定屏幕曾被厂商修改，某些设备的解锁环目标可能遭到互换</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">启用菜单键</string>

@@ -189,7 +189,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Cho phép xoay trong màn hình khóa</string>
-    <string name="pref_lockscreen_rotation_summary">cảnh báo: Có thể lệch màn hình khóa, có thể lệch cho cách kéo mở đối tượng trong màn hình khóa</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Cho phép Phím menu</string>

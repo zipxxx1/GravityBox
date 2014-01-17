@@ -185,7 +185,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Habilitar rotação da tela de bloqueio</string>
-    <string name="pref_lockscreen_rotation_summary">AVISO: Pode rodar o anel de desbloqueio em alguns dispositivo caso a tela de bloqueio do AOSP tenha sido modificada pelo fornecedor</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Habilitar tecla de Menu</string>
