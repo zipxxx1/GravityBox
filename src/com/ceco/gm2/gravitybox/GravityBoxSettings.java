@@ -1681,6 +1681,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 for (int i = 0; i < mPrefNavbarRingTarget.length; i++) {
                     mPrefNavbarRingTarget[i].setEnabled(enabled);
                 }
+                if (enabled) {
+                    mPrefHwKeyHomeLongpress.setEnabled(false);
+                    mPrefs.edit().putString(PREF_KEY_HWKEY_HOME_LONGPRESS, "0").commit();
+                    mPrefHwKeyHomeLongpress.setValue("0");
+                    mPrefHwKeyHomeLongpress.setSummary(getString(R.string.pref_hwkey_home_longpress_disabled_summary));
+                } else {
+                    mPrefHwKeyHomeLongpress.setEnabled(true);
+                    mPrefHwKeyHomeLongpress.setSummary(mPrefHwKeyHomeLongpress.getEntry());
+                }
             }
 
             if (key == null || key.equals(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE)) {
