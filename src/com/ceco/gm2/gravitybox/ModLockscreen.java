@@ -28,8 +28,10 @@ import android.app.Activity;
 import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.XResources;
@@ -183,15 +185,41 @@ public class ModLockscreen {
                         } else if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_IMAGE)) {
                             String wallpaperFile = mGbContext.getFilesDir() + "/lockwallpaper";
                             customBg = BitmapFactory.decodeFile(wallpaperFile);
+                        } else if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN)) {
+                            String kisImageFile = mGbContext.getFilesDir() + "/kis_image.png";
+                            customBg = BitmapFactory.decodeFile(kisImageFile);
                         }
                         if (customBg != null) {
-                            if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                                customBg = Utils.blurBitmap(context, customBg);
-                            }
-                            Drawable d = new BitmapDrawable(context.getResources(), customBg);
                             mLockScreenWallpaperImage = new ImageView(context);
                             mLockScreenWallpaperImage.setScaleType(ScaleType.CENTER_CROP);
-                            mLockScreenWallpaperImage.setImageDrawable(d);
+                            if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN)) {
+                                context.registerReceiver(new BroadcastReceiver() {
+                                    @Override
+                                    public void onReceive(final Context context, Intent intent) {
+                                        String kisImageFile = mGbContext.getFilesDir() + "/kis_image.png";
+                                        Bitmap customBg = BitmapFactory.decodeFile(kisImageFile);
+                                        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
+                                            customBg = Utils.blurBitmap(context, customBg);
+                                        }
+                                        final Drawable d = new BitmapDrawable(context.getResources(), customBg);
+                                        // We have to make sure view is updated on UI thread
+                                        mLockScreenWallpaperImage.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                mLockScreenWallpaperImage.setImageDrawable(d);
+                                                log("Last screen background updated");
+                                            }
+                                        });
+                                        context.unregisterReceiver(this);
+                                    }
+                                }, new IntentFilter(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED));
+                            } else {
+                                if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
+                                    customBg = Utils.blurBitmap(context, customBg);
+                                }
+                                Drawable d = new BitmapDrawable(context.getResources(), customBg);
+                                mLockScreenWallpaperImage.setImageDrawable(d);
+                            }
                             flayout.addView(mLockScreenWallpaperImage, -1, -1);
                             if (DEBUG) log("maybeCreateKeyguardLocked: custom background set");
                         }

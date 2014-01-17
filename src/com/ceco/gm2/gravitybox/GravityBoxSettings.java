@@ -196,6 +196,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String LOCKSCREEN_BG_DEFAULT = "default";
     public static final String LOCKSCREEN_BG_COLOR = "color";
     public static final String LOCKSCREEN_BG_IMAGE = "image";
+    public static final String LOCKSCREEN_BG_LAST_SCREEN = "last_screen";
+    public static final String ACTION_PREF_LOCKSCREEN_BG_CHANGED = "gravitybox.intent.action.LOCKSCREEN_BG_CHANGED";
+    public static final String EXTRA_LOCKSCREEN_BG = "lockscreenBg";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN_OTHER = "pref_cat_lockscreen_other";
     public static final String PREF_KEY_LOCKSCREEN_BATTERY_ARC = "pref_lockscreen_battery_arc";
@@ -2161,6 +2164,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
                 intent.putExtra(EXTRA_SR_ON_DATA_DISABLED,
                         prefs.getInt(PREF_KEY_SMART_RADIO_ON_DATA_DISABLED, -1));
+            } else if (key.equals(PREF_KEY_LOCKSCREEN_BACKGROUND)) {
+                intent.setAction(ACTION_PREF_LOCKSCREEN_BG_CHANGED);
+                intent.putExtra(EXTRA_LOCKSCREEN_BG,
+                        prefs.getString(PREF_KEY_LOCKSCREEN_BACKGROUND, LOCKSCREEN_BG_DEFAULT));
             }
             if (intent.getAction() != null) {
                 getActivity().sendBroadcast(intent);

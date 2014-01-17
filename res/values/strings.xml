@@ -191,6 +191,7 @@
     <string name="lockscreen_bg_default">Default wallpaper</string>
     <string name="lockscreen_bg_color">Color fill</string>
     <string name="lockscreen_bg_image">Custom image</string>
+    <string name="lockscreen_bg_last_screen">Last screen</string>
     <string name="pref_lockscreen_bg_color_title">Set custom color</string>
     <string name="pref_lockscreen_bg_color_summary">Allows to set custom background color for lockscreen</string>
     <string name="pref_lockscreen_bg_image_title">Set custom image</string>

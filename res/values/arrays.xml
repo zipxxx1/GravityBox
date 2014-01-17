@@ -250,12 +250,14 @@
         <item>@string/lockscreen_bg_default</item>
         <item>@string/lockscreen_bg_color</item>
         <item>@string/lockscreen_bg_image</item>
+        <item>@string/lockscreen_bg_last_screen</item>
     </string-array>
 
     <string-array name="lockscreen_bg_values" translatable="false">
         <item>default</item>
         <item>color</item>
         <item>image</item>
+        <item>last_screen</item>
     </string-array>
 
     <string-array name="hwkey_action_entries" tanslatable="false">

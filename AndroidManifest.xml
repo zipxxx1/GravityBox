@@ -85,6 +85,8 @@
             </intent-filter>
         </service>
 
+        <service android:name=".KeyguardImageService" />
+
         <meta-data
             android:name="xposedmodule"
             android:value="true" />
