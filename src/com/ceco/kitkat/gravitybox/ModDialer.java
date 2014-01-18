@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.Set;
 
 import android.app.Fragment;
+import android.app.KeyguardManager;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -31,7 +34,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -42,6 +44,8 @@ import android.os.PowerManager.WakeLock;
 import android.view.View;
 import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodHook.Unhook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -61,6 +65,8 @@ public class ModDialer {
     private static final String CLASS_CALL_CMD_CLIENT = "com.android.incallui.CallCommandClient";
     private static final String CLASS_CALL_BUTTON_FRAGMENT = "com.android.incallui.CallButtonFragment";
     private static final String CLASS_ANSWER_FRAGMENT = "com.android.incallui.AnswerFragment";
+    private static final String CLASS_STATUSBAR_NOTIFIER = "com.android.incallui.StatusBarNotifier";
+    private static final String CLASS_CALL = "com.android.services.telephony.common.Call";
     private static final boolean DEBUG = false;
 
     private static final int CALL_STATE_ACTIVE = 2;
@@ -79,6 +85,8 @@ public class ModDialer {
     private static Vibrator mVibrator;
     private static Handler mHandler;
     private static WakeLock mWakeLock;
+    private static Unhook mSetFullscreenIntentHook;
+    private static boolean mNonIntrusiveIncomingCall;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -207,6 +215,9 @@ public class ModDialer {
             } catch (NumberFormatException e) {
                 XposedBridge.log(e);
             }
+
+            mNonIntrusiveIncomingCall = mPrefsPhone.getBoolean(
+                    GravityBoxSettings.PREF_KEY_PHONE_NONINTRUSIVE_INCOMING_CALL, false);
         }
     }
 
@@ -351,6 +362,13 @@ public class ModDialer {
                     if (state == CALL_STATE_INCOMING) {
                         mIncomingCall = param.args[0];
                         attachSensorListener();
+                        if (mNonIntrusiveIncomingCall) {
+                            final Object callCmdClient = 
+                                    XposedHelpers.callStaticMethod(mClassCallCmdClient, "getInstance");
+                            if (callCmdClient != null) {
+                                XposedHelpers.callMethod(callCmdClient, "setSystemBarNavigationEnabled", true);
+                            }
+                        }
                     } else if (state == CALL_STATE_WAITING &&
                             mCallVibrations.contains(GravityBoxSettings.CV_WAITING)) {
                         vibrate(200, 300, 500);
@@ -422,6 +440,37 @@ public class ModDialer {
                 }
             });
         } catch(Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            final Class<?> classStatusbarNotifier = XposedHelpers.findClass(CLASS_STATUSBAR_NOTIFIER, classLoader);
+
+            XposedHelpers.findAndHookMethod(classStatusbarNotifier, "configureFullScreenIntent",
+                    Notification.Builder.class, PendingIntent.class, CLASS_CALL, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!mNonIntrusiveIncomingCall) return;
+
+                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+                    KeyguardManager kg = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+                    if (pm.isScreenOn() && !kg.isKeyguardLocked()) {
+                        if (DEBUG) log("Enforcing non-intrusive call notification");
+                        mSetFullscreenIntentHook = XposedHelpers.findAndHookMethod(Notification.Builder.class,
+                                "setFullScreenIntent", PendingIntent.class, boolean.class, 
+                                    XC_MethodReplacement.DO_NOTHING);
+                    }
+                }
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mSetFullscreenIntentHook != null) {
+                        mSetFullscreenIntentHook.unhook();
+                        mSetFullscreenIntentHook = null;
+                    }
+                }
+            });
+        } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
