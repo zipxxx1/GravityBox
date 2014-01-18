@@ -268,6 +268,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_HWKEY_HOME = "pref_cat_hwkey_home";
     public static final String PREF_KEY_HWKEY_HOME_LONGPRESS = "pref_hwkey_home_longpress";
     public static final String PREF_KEY_HWKEY_HOME_DOUBLETAP_DISABLE = "pref_hwkey_home_doubletap_disable";
+    public static final String PREF_KEY_HWKEY_HOME_DOUBLETAP = "pref_hwkey_home_doubletap";
     public static final String PREF_CAT_HWKEY_BACK = "pref_cat_hwkey_back";
     public static final String PREF_KEY_HWKEY_BACK_LONGPRESS = "pref_hwkey_back_longpress";
     public static final String PREF_KEY_HWKEY_BACK_DOUBLETAP = "pref_hwkey_back_doubletap";
@@ -320,6 +321,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED = "gravitybox.intent.action.HWKEY_LOCKSCREEN_TORCH_CHANGED";
     public static final String EXTRA_HWKEY_VALUE = "hwKeyValue";
     public static final String EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE = "hwKeyHomeDoubletapDisable";
+    public static final String EXTRA_HWKEY_HOME_DOUBLETAP = "hwKeyHomeDoubletap";
     public static final String EXTRA_HWKEY_HOME_LONGPRESS_KG = "hwKeyHomeLongpressKeyguard";
     public static final String EXTRA_VOLUME_ROCKER_WAKE = "volumeRockerWake";
     public static final String EXTRA_HWKEY_TORCH = "hwKeyTorch";
@@ -781,6 +783,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefHwKeyMenuDoubletap;
         private PreferenceCategory mPrefCatHwKeyHome;
         private ListPreference mPrefHwKeyHomeLongpress;
+        private ListPreference mPrefHwKeyHomeDoubletap;
         private PreferenceCategory mPrefCatHwKeyBack;
         private ListPreference mPrefHwKeyBackLongpress;
         private ListPreference mPrefHwKeyBackDoubletap;
@@ -975,6 +978,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefHwKeyMenuDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_DOUBLETAP);
             mPrefCatHwKeyHome = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_HOME);
             mPrefHwKeyHomeLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_HOME_LONGPRESS);
+            mPrefHwKeyHomeDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_HOME_DOUBLETAP);
             mPrefCatHwKeyBack = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_BACK);
             mPrefHwKeyBackLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_LONGPRESS);
             mPrefHwKeyBackDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_DOUBLETAP);
@@ -1268,6 +1272,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Remove preferences not compatible with Android < 4.3+
             if (Build.VERSION.SDK_INT < 18) {
                 mPrefCatHwKeyHome.removePreference(mPrefHomeDoubletapDisable);
+                mPrefCatHwKeyHome.removePreference(mPrefHwKeyHomeDoubletap);
             }
 
             // Remove more music volume steps option if necessary
@@ -1343,6 +1348,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefHwKeyMenuDoubletap.setEntryValues(actionEntryValues);
             mPrefHwKeyHomeLongpress.setEntries(actionEntries);
             mPrefHwKeyHomeLongpress.setEntryValues(actionEntryValues);
+            mPrefHwKeyHomeDoubletap.setEntries(actionEntries);
+            mPrefHwKeyHomeDoubletap.setEntryValues(actionEntryValues);
             mPrefHwKeyBackLongpress.setEntries(actionEntries);
             mPrefHwKeyBackLongpress.setEntryValues(actionEntryValues);
             mPrefHwKeyBackDoubletap.setEntries(actionEntries);
@@ -1706,6 +1713,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING)) {
                 mPrefBatteryPercentCharging.setSummary(mPrefBatteryPercentCharging.getEntry());
             }
+
+            if (key == null || key.equals(PREF_KEY_HWKEY_HOME_DOUBLETAP)) {
+                mPrefHwKeyHomeDoubletap.setSummary(mPrefHwKeyHomeDoubletap.getEntry());
+            }
         }
 
         @Override
@@ -1860,6 +1871,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_HWKEY_HOME_DOUBLETAP_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE,
                         prefs.getBoolean(PREF_KEY_HWKEY_HOME_DOUBLETAP_DISABLE, false));
+            } else if (key.equals(PREF_KEY_HWKEY_HOME_DOUBLETAP)) {
+                intent.setAction(ACTION_PREF_HWKEY_HOME_DOUBLETAP_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_HOME_DOUBLETAP, Integer.valueOf(
+                        prefs.getString(PREF_KEY_HWKEY_HOME_DOUBLETAP, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_BACK_LONGPRESS)) {
                 intent.setAction(ACTION_PREF_HWKEY_BACK_LONGPRESS_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
