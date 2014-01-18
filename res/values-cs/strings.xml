@@ -61,6 +61,8 @@
     <string name="quick_settings_usb_tether_off">Odpojeno</string>
     <string name="quick_settings_usb_tether_connected">Sdílení vyp</string>
     <string name="quick_settings_usb_tether_on">Sdílení zap</string>
+    <string name="quick_settings_music_play">Přehrát</string>
+    <string name="quick_settings_music_pause">Zastavit</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Dlaždice QuickSettings panelu</string>
@@ -90,6 +92,7 @@
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Fotoaparát</string>
     <string name="qs_tile_usb_tethering">USB přístupový bod</string>
+    <string name="qs_tile_music">Hudba</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Výběr barvy</string>
@@ -136,6 +139,7 @@
     <string name="lockscreen_bg_default">Výchozí tapeta</string>
     <string name="lockscreen_bg_color">Barevná výplň</string>
     <string name="lockscreen_bg_image">Vlastní obrázek</string>
+    <string name="lockscreen_bg_last_screen">Poslední obrazovka</string>
     <string name="pref_lockscreen_bg_color_title">Nastavení barevné výplně</string>
     <string name="pref_lockscreen_bg_color_summary">Umožňuje nastavení barvy pozadí obrazovky uzamčení</string>
     <string name="pref_lockscreen_bg_image_title">Nastavení vlastního obrázku</string>
@@ -956,5 +960,27 @@
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Převrátit tlačítka hlasistosti</string>
     <string name="pref_vol_swap_keys_summary">V případě otočení obrazovky bude převráceno ovládání tlačítek hlasitosti</string>
+
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Efekt rozostření</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Vypnout roztažení dlaždic</string>
+    <string name="pref_qs_tile_span_disable_summary">Vypne roztahování dlaždic kontaktu, jasu a nastavení v režimu na šířku</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Vynucené menu tlačítko</string>
+    <string name="pref_force_overflow_menu_button_summary">Vynutí zobrazení menu tlačítka v aplikacích (vyžaduje restart)</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Vždy na spodku</string>
+    <string name="pref_navbar_always_on_bottom_summary">Vynutí zobrazení navigační lišty na spodku obrazovky v režimu na šířku (vyžaduje restart)</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Přehodit s menu tlačítkem</string>
+
+    <!-- Phone: Non-intrusive incoming call -->
+    <string name="pref_phone_nonintrusive_incoming_call_title">Příchozí hovor v pozadí</string>
+    <string name="pref_phone_nonintrusive_incoming_call_summary">V případě, že se zařízení používá, bude příchozí hovor oznámen jen upozorněním</string>
 
 </resources>
