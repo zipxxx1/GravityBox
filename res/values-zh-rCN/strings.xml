@@ -78,6 +78,8 @@
     <string name="quick_settings_usb_tether_off">已断开</string>
     <string name="quick_settings_usb_tether_connected">共享关闭</string>
     <string name="quick_settings_usb_tether_on">共享</string>
+    <string name="quick_settings_music_play">播放</string>
+    <string name="quick_settings_music_pause">暂停</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">状态栏快速设置</string>
@@ -108,6 +110,7 @@
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">相机</string>
     <string name="qs_tile_usb_tethering">USB 共享</string>
+    <string name="qs_tile_music">音乐</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">颜色选择器</string>
@@ -155,6 +158,7 @@
     <string name="lockscreen_bg_default">默认壁纸</string>
     <string name="lockscreen_bg_color">纯色</string>
     <string name="lockscreen_bg_image">自定义图像</string>
+    <string name="lockscreen_bg_last_screen">最近的画面</string>
     <string name="pref_lockscreen_bg_color_title">设置自定义颜色</string>
     <string name="pref_lockscreen_bg_color_summary">可以为锁屏画面设置自定义的背景颜色</string>
     <string name="pref_lockscreen_bg_image_title">设置自定义图像</string>
@@ -992,5 +996,24 @@
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">模糊效果</string>
+    
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">禁用磁贴扩充</string>
+    <string name="pref_qs_tile_span_disable_summary">禁用磁贴扩充在横向时的亮度和设置</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">强制弹出菜单按钮</string>
+    <string name="pref_force_overflow_menu_button_summary">需要重新启动</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">总是在底部</string>
+    <string name="pref_navbar_always_on_bottom_summary">横向时强制导航栏在底部（需要重新启动）</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">交换菜单键</string>
+
+    <!-- Phone: Non-intrusive incoming call -->
+    <string name="pref_phone_nonintrusive_incoming_call_title">非打扰的来电</string>
+    <string name="pref_phone_nonintrusive_incoming_call_summary">来电时用户交互过程中保持在后台</string>
 
 </resources>
