@@ -332,6 +332,10 @@ public class Utils {
     }
 
     public static Bitmap blurBitmap(Context context, Bitmap bmp) {
+        return blurBitmap(context, bmp, 14);
+    }
+
+    public static Bitmap blurBitmap(Context context, Bitmap bmp, float radius) {
         Bitmap out = Bitmap.createBitmap(bmp);
         RenderScript rs = RenderScript.create(context);
 
@@ -341,7 +345,7 @@ public class Utils {
 
         ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
         script.setInput(input);
-        script.setRadius(bmp.getWidth() < 900 ? 14 : 18);
+        script.setRadius(radius);
         script.forEach(output);
 
         output.copyTo(out);
