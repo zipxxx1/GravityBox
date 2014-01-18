@@ -986,10 +986,16 @@
     
      <!-- Navbar: always on bottom -->
     <string name="pref_navbar_always_on_bottom_title">Sempre in fondo</string>
-    <string name="pref_navbar_always_on_bottom_summary">Forza posizionamento barra di navigazione in fondo per la visualizzazione orizzontale (richiede riavvio)</string>
+    <string name="pref_navbar_always_on_bottom_summary">Forza posizionamento barra di navigazione nella parte inferiore in modalità orizzontale (richiede riavvio)</string>
 
     <!-- Summary for Home key long-press action disabled because of navring targets -->
-    <string name="pref_hwkey_home_longpress_disabled_summary">Non può essere usato mentre sono abilitati i pulsanti anello nella barra di navigazione</string>
+    <string name="pref_hwkey_home_longpress_disabled_summary">Non può essere usato se gli anelli della barra di navigazione sono abilitati</string>
 
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Scambia con tasto menù</string>
+
+    <!-- Phone: Non-intrusive incoming call -->
+    <string name="pref_phone_nonintrusive_incoming_call_title">Chiamate in entrata non invasive</string>
+    <string name="pref_phone_nonintrusive_incoming_call_summary">Mette le chiamate in entrata in secondo piano durante l\'interazione utente</string>
 
 </resources>
