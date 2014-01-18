@@ -113,6 +113,7 @@ public class ModLockscreen {
     private static PointF mStartGlowPadPoint;
     private static float mDisplayDensity;
     private static ImageView mLockScreenWallpaperImage;
+    private static boolean mFirstRun;
 
     // Battery Arc
     private static HandleDrawable mHandleDrawable;
@@ -131,6 +132,8 @@ public class ModLockscreen {
     public static void initZygote(final XSharedPreferences prefs) {
         try {
             mPrefs = prefs;
+            mFirstRun = true;
+
             final Class<?> kgViewManagerClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER, null);
             final Class<?> kgHostViewClass = XposedHelpers.findClass(CLASS_KG_HOSTVIEW, null);
             final Class<?> kgSelectorViewClass = XposedHelpers.findClass(CLASS_KG_SELECTOR_VIEW, null);
@@ -192,7 +195,7 @@ public class ModLockscreen {
                         if (customBg != null) {
                             mLockScreenWallpaperImage = new ImageView(context);
                             mLockScreenWallpaperImage.setScaleType(ScaleType.CENTER_CROP);
-                            if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN)) {
+                            if (bgType.equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN) && !mFirstRun) {
                                 context.registerReceiver(new BroadcastReceiver() {
                                     @Override
                                     public void onReceive(final Context context, Intent intent) {
@@ -233,6 +236,7 @@ public class ModLockscreen {
 
                     viewManager.updateViewLayout(keyGuardHost, windowLayoutParams);
                     if (DEBUG) log("maybeCreateKeyguardLocked: layout updated");
+                    mFirstRun = false;
                 }
             });
 
