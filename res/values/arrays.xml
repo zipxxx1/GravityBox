@@ -117,6 +117,7 @@
         <item>@string/qs_tile_gravitybox</item>
         <item>@string/qs_tile_camera</item>
         <item>@string/qs_tile_usb_tethering</item>
+        <item>@string/qs_tile_music</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_values_kk" translatable="false">
@@ -148,6 +149,7 @@
         <item>gravitybox_tileview</item>
         <item>camera_tileview</item>
         <item>usb_tether_tileview</item>
+        <item>music_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_override_entries" translatable="false">

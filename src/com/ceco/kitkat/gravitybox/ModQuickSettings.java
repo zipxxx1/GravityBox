@@ -33,6 +33,7 @@ import com.ceco.kitkat.gravitybox.quicksettings.CameraTile;
 import com.ceco.kitkat.gravitybox.quicksettings.ExpandedDesktopTile;
 import com.ceco.kitkat.gravitybox.quicksettings.GpsTile;
 import com.ceco.kitkat.gravitybox.quicksettings.GravityBoxTile;
+import com.ceco.kitkat.gravitybox.quicksettings.MusicTile;
 import com.ceco.kitkat.gravitybox.quicksettings.NetworkModeTile;
 import com.ceco.kitkat.gravitybox.quicksettings.NfcTile;
 import com.ceco.kitkat.gravitybox.quicksettings.QuickAppTile;
@@ -151,7 +152,8 @@ public class ModQuickSettings {
             R.id.nfc_tileview,
             R.id.camera_tileview,
             R.id.usb_tether_tileview,
-            R.id.quickapp_tileview_2
+            R.id.quickapp_tileview_2,
+            R.id.music_tileview
         ));
 
         Map<String, Integer> tmpMap = new HashMap<String, Integer>();
@@ -709,6 +711,10 @@ public class ModQuickSettings {
                 UsbTetherTile utTile = new UsbTetherTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 utTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(utTile);
+
+                MusicTile musicTile = new MusicTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                musicTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                mTiles.add(musicTile);
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {

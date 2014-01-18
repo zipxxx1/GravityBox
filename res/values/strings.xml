@@ -78,6 +78,8 @@
     <string name="quick_settings_usb_tether_off">Disconnected</string>
     <string name="quick_settings_usb_tether_connected">Tethering off</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
+    <string name="quick_settings_music_play">Play</string>
+    <string name="quick_settings_music_pause">Pause</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Statusbar QuickSettings tiles</string>
@@ -108,6 +110,7 @@
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Camera</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
+    <string name="qs_tile_music">Music</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
