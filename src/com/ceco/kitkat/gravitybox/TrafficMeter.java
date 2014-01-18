@@ -194,7 +194,7 @@ public class TrafficMeter extends TextView implements IconManagerListener {
             ConnectivityManager connectivityManager = (ConnectivityManager) mContext
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
 
-            return connectivityManager.getActiveNetworkInfo().isConnected() || getTotalReceivedBytes() != 0;
+            return connectivityManager.getActiveNetworkInfo().isConnected();
         } catch (Exception ignored) {
         }
         return false;
@@ -217,6 +217,11 @@ public class TrafficMeter extends TextView implements IconManagerListener {
                 // So let's check by another way
                 currentRxBytes = getTotalReceivedBytes();
                 newBytes = currentRxBytes - mTotalRxBytes;
+            }
+
+            if (newBytes < 0) {
+                currentRxBytes = 0;
+                newBytes = 0;
             }
 
             if (mTrafficMeterHide && newBytes == 0) {
