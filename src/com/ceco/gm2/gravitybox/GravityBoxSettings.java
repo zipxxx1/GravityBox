@@ -1227,8 +1227,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatStatusbarColors.removePreference(mPrefSbDaColorSecondary);
                 }
 
-                // Remove preferences not needed for MT65x2
-                if (Utils.isMt65x2Device()) {
+                // Remove preferences not needed for MT6572
+                if (Utils.isMt6572Device()) {
                     mPrefCatStatusbar.removePreference(mSignalIconAutohide);
                 }
 
