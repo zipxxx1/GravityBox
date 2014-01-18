@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.XResources;
 import android.graphics.Bitmap;
@@ -367,6 +368,8 @@ public class ModDisplay {
                     final Object pendingRequestLocked = 
                             XposedHelpers.getObjectField(param.thisObject, "mPendingRequestLocked");
                     final int requestedScreenState = XposedHelpers.getIntField(param.args[0], "screenState");
+                    final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    final int orientation = context.getResources().getConfiguration().orientation;
 
                     if ((waitForNegativeProximity && !pendingWaitForNegativeProximity || 
                             pendingRequestLocked == null || !pendingRequestLocked.equals(param.args[0])) &&
@@ -379,8 +382,10 @@ public class ModDisplay {
                             Display display = (Display) XposedHelpers.callMethod(displayManager, "getDisplay", display0);
                             DisplayMetrics outMetrics = new DisplayMetrics();
                             display.getMetrics(outMetrics);
-                            width = outMetrics.widthPixels;
-                            height = outMetrics.heightPixels;
+                            width = (orientation == Configuration.ORIENTATION_PORTRAIT) ?
+                                    outMetrics.widthPixels : outMetrics.heightPixels;
+                            height = (orientation == Configuration.ORIENTATION_PORTRAIT) ?
+                                    outMetrics.heightPixels : outMetrics.widthPixels;
                         } else {
                             Object displayInfo = XposedHelpers.callMethod(displayManager, "getDisplayInfo", display0);
                             width = (Integer) XposedHelpers.callMethod(displayInfo, "getNaturalWidth");
