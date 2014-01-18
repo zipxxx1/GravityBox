@@ -191,6 +191,7 @@
     <string name="lockscreen_bg_default">Alapértelmezett háttérkép</string>
     <string name="lockscreen_bg_color">Szín kitöltés</string>
     <string name="lockscreen_bg_image">Egyéni kép</string>
+    <string name="lockscreen_bg_last_screen">Képernyő kikapcsoláskori háttér</string>
     <string name="pref_lockscreen_bg_color_title">Egyéni szín beállítása</string>
     <string name="pref_lockscreen_bg_color_summary">Lehetővé teszi egyéni háttérszín beállítását a Zárképernyőhöz</string>
     <string name="pref_lockscreen_bg_image_title">Egyéni kép beállítása</string>
@@ -1012,8 +1013,8 @@
     <string name="qs_tile_quickapp_2">Gyors Programelérés 2</string>
 
     <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">Zene hangerő vezérlés kényszerítés</string>
-    <string name="pref_vol_force_music_control_summary">Ha engedélyezve van, a hangerő gombok a zene hangerőt vezérlik a csengés hangerő helyett</string>
+    <string name="pref_vol_force_music_control_title">Média hangerő vezérlés kényszerítés</string>
+    <string name="pref_vol_force_music_control_summary">Ha engedélyezve van, a hangerő gombok a média hangerőt vezérlik a csengés hangerő helyett</string>
 
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">Nemrég használt alkalmazások panel</string>
@@ -1038,5 +1039,19 @@
     <!-- Tiles: Disable tile spanning -->
     <string name="pref_qs_tile_span_disable_title">Csempe kiterjeszkedés letiltása</string>
     <string name="pref_qs_tile_span_disable_summary">Letiltja a tulajdonos, fényerő és a beállítások csempék két csempeszélességre való kiterjeszkedését fekvő tájolásnál</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Overflow menü gomb kényszerítése</string>
+    <string name="pref_force_overflow_menu_button_summary">Újraindítás szükséges</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Mindig alul</string>
+    <string name="pref_navbar_always_on_bottom_summary">Navigációs sáv alsó pozícióba kényszerítése fekvő tájolásnál (újraindítás szükséges)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Nem használható, ha a navigációs sáv kör célpontok funkció engedélyeze van</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Pozíció felcserélése menü gombbal</string>
 
 </resources>
