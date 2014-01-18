@@ -149,12 +149,7 @@ public class TrafficMeter extends TextView implements IconManagerListener {
 
     public void startTrafficUpdates() {
         if (mAttached && getConnectAvailable()) {
-            mTotalRxBytes = TrafficStats.getTotalRxBytes();
-            if (mTotalRxBytes == 0) {
-                // On some old devices, the traffic status will stick on 0B/s
-                // So let's check by another way
-                mTotalRxBytes = getTotalReceivedBytes();
-            }
+            mTotalRxBytes = getTotalReceivedBytes();
             mLastUpdateTime = SystemClock.elapsedRealtime();
             mTrafficBurstStartTime = Long.MIN_VALUE;
 
@@ -208,20 +203,8 @@ public class TrafficMeter extends TextView implements IconManagerListener {
                 return;
             }
 
-            long currentRxBytes = TrafficStats.getTotalRxBytes();
+            long currentRxBytes = getTotalReceivedBytes();
             long newBytes = currentRxBytes - mTotalRxBytes;
-
-            if (newBytes <= 0) {
-                // On some old devices, the traffic status will stick on 0B/s
-                // So let's check by another way
-                currentRxBytes = getTotalReceivedBytes();
-                newBytes = currentRxBytes - mTotalRxBytes;
-            }
-
-            if (newBytes < 0) {
-                currentRxBytes = 0;
-                newBytes = 0;
-            }
 
             if (mTrafficMeterHide && newBytes == 0) {
                 long trafficBurstBytes = currentRxBytes - mTrafficBurstStartBytes;
