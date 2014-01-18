@@ -1377,7 +1377,14 @@
             <CheckBoxPreference
                 android:key="pref_hwkey_home_doubletap_disable"
                 android:title="@string/pref_hwkey_doubletap_disable_title"
-                android:defaultValue="false" />
+                android:defaultValue="false"
+                android:disableDependentsState="true" />
+
+            <ListPreference
+                android:key="pref_hwkey_home_doubletap"
+                android:title="@string/pref_hwkey_doubletap_title"
+                android:defaultValue="0"
+                android:dependency="pref_hwkey_home_doubletap_disable" />
 
         </PreferenceCategory>
 

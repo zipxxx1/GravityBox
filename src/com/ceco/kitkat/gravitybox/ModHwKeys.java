@@ -112,6 +112,7 @@ public class ModHwKeys {
     private static int mLockscreenTorch = 0;
     private static boolean mHomeDoubletapDisabled;
     private static int mHomeDoubletapDefaultAction;
+    private static int mHomeDoubletapAction = 0;
     private static int mBackLongpressAction = 0;
     private static int mBackDoubletapAction = 0;
     private static int mRecentsSingletapAction = 0;
@@ -158,6 +159,7 @@ public class ModHwKeys {
         MENU_LONGPRESS,
         MENU_DOUBLETAP,
         HOME_LONGPRESS,
+        HOME_DOUBLETAP,
         BACK_LONGPRESS,
         BACK_DOUBLETAP,
         RECENTS_SINGLETAP,
@@ -197,12 +199,27 @@ public class ModHwKeys {
                     if (mPhoneWindowManager != null) {
                         try {
                             XposedHelpers.setIntField(mPhoneWindowManager, "mDoubleTapOnHomeBehavior",
-                                    mHomeDoubletapDisabled ? 0 : mHomeDoubletapDefaultAction);
+                                    mHomeDoubletapDisabled ? 0 : 
+                                        mHomeDoubletapAction == 0 ? mHomeDoubletapDefaultAction : 1);
                         } catch (Throwable t) {
                             log("PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: " +
                                     t.getMessage());
                         }
                     }
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP)) {
+                    mHomeDoubletapAction = intent.getIntExtra(
+                            GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP, 0);
+                    if (mPhoneWindowManager != null) {
+                        try {
+                            XposedHelpers.setIntField(mPhoneWindowManager, "mDoubleTapOnHomeBehavior",
+                                    mHomeDoubletapAction == 0 ? mHomeDoubletapDefaultAction : 1);
+                        } catch (Throwable t) {
+                            log("PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: " +
+                                    t.getMessage());
+                        }
+                    }
+                    if (DEBUG) log("Home double-tap action set to: " + mHomeDoubletapAction);
                 }
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_BACK_LONGPRESS_CHANGED)) {
                 mBackLongpressAction = value;
@@ -317,6 +334,8 @@ public class ModHwKeys {
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_MENU_DOUBLETAP, "0"));
                 mHomeLongpressAction = Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS, "0"));
+                mHomeDoubletapAction = Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_DOUBLETAP, "0"));
                 mBackLongpressAction = Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_BACK_LONGPRESS, "0"));
                 mBackDoubletapAction = Integer.valueOf(
@@ -648,7 +667,7 @@ public class ModHwKeys {
 
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!hasAction(HwKey.HOME)) {
+                    if (mHomeLongpressAction == GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
                         XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                         return null;
                     }
@@ -682,6 +701,20 @@ public class ModHwKeys {
                             param.thisObject, "mDoubleTapOnHomeBehavior");
                     if (mHomeDoubletapDisabled) {
                         XposedHelpers.setIntField(param.thisObject, "mDoubleTapOnHomeBehavior", 0);
+                    } else if (mHomeDoubletapAction != GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                        XposedHelpers.setIntField(param.thisObject, "mDoubleTapOnHomeBehavior", 1);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager,
+                    "handleDoubleTapOnHome", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mHomeDoubletapAction != GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                        XposedHelpers.setBooleanField(param.thisObject, "mHomeConsumed", true);
+                        performAction(HwKeyTrigger.HOME_DOUBLETAP);
+                        param.setResult(null);
                     }
                 }
             });
@@ -886,6 +919,8 @@ public class ModHwKeys {
             action = mCustomKeyLongpressAction;
         } else if (keyTrigger == HwKeyTrigger.CUSTOM_DOUBLETAP) {
             action = mCustomKeyDoubletapAction;
+        } else if (keyTrigger == HwKeyTrigger.HOME_DOUBLETAP) {
+            action = mHomeDoubletapAction;
         }
 
         if (DEBUG) log("Action for HWKEY trigger " + keyTrigger + " = " + action);
