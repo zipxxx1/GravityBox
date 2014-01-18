@@ -1009,9 +1009,6 @@
     <string name="pref_navbar_always_on_bottom_title">Toujours en bas</string>
     <string name="pref_navbar_always_on_bottom_summary">Force la barre de navigation à être en bas d\'écran en orientation paysage (nécessite un redémarrage)</string>
 
-    <!-- Summary for Home key long-press action disabled because of navring targets -->
-    <string name="pref_hwkey_home_longpress_disabled_summary">Ne peut pas être utilisé lorsque les cibles de la barre de navigation sont actives</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Intervertir avec la touche menu</string>
 

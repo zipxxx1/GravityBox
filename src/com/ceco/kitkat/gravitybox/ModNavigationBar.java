@@ -54,7 +54,6 @@ public class ModNavigationBar {
     private static final boolean DEBUG = false;
 
     private static final String CLASS_NAVBAR_VIEW = "com.android.systemui.statusbar.phone.NavigationBarView";
-    private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_KEY_BUTTON_VIEW = "com.android.systemui.statusbar.policy.KeyButtonView";
     private static final String CLASS_NAVBAR_TRANSITIONS = 
             "com.android.systemui.statusbar.phone.NavigationBarTransitions";
@@ -242,7 +241,6 @@ public class ModNavigationBar {
             mPrefs = prefs;
 
             final Class<?> navbarViewClass = XposedHelpers.findClass(CLASS_NAVBAR_VIEW, classLoader);
-            final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
             final Class<?> navbarTransitionsClass = XposedHelpers.findClass(CLASS_NAVBAR_TRANSITIONS, classLoader);
             final Class<?> barTransitionsClass = XposedHelpers.findClass(CLASS_BAR_TRANSITIONS, classLoader);
 
@@ -421,17 +419,6 @@ public class ModNavigationBar {
 
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_SWAP_KEYS, false)) {
                         swapBackAndRecents();
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(phoneStatusbarClass, 
-                    "shouldDisableNavbarGestures", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mHomeLongpressAction != 0) {
-                        param.setResult(true);
-                        return;
                     }
                 }
             });

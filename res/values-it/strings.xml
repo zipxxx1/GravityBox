@@ -988,9 +988,6 @@
     <string name="pref_navbar_always_on_bottom_title">Sempre in fondo</string>
     <string name="pref_navbar_always_on_bottom_summary">Forza posizionamento barra di navigazione nella parte inferiore in modalità orizzontale (richiede riavvio)</string>
 
-    <!-- Summary for Home key long-press action disabled because of navring targets -->
-    <string name="pref_hwkey_home_longpress_disabled_summary">Non può essere usato se gli anelli della barra di navigazione sono abilitati</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Scambia con tasto menù</string>
 

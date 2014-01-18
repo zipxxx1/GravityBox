@@ -1005,7 +1005,4 @@
     <string name="pref_navbar_always_on_bottom_title">Siempre abajo</string>
     <string name="pref_navbar_always_on_bottom_summary">Fuerza a la barra de navegación a permanecer abajo en orientación panorámica (requiere reinicio)</string>
 
-    <!-- Summary for Home key long-press action disabled because of navring targets -->
-    <string name="pref_hwkey_home_longpress_disabled_summary">No se puede usar mientras estén activados los objetivos en el anillo de la barra de navegación</string>
-	
 </resources>
