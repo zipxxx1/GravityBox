@@ -191,6 +191,7 @@
     <string name="lockscreen_bg_default">默认壁纸</string>
     <string name="lockscreen_bg_color">纯色</string>
     <string name="lockscreen_bg_image">自定义图像</string>
+    <string name="lockscreen_bg_last_screen">最后的画面</string>
     <string name="pref_lockscreen_bg_color_title">设置自定义颜色</string>
     <string name="pref_lockscreen_bg_color_summary">可以为锁屏画面设置自定义的背景颜色</string>
     <string name="pref_lockscreen_bg_image_title">设置自定义图像</string>
@@ -1033,5 +1034,26 @@
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">重新调整音量键</string>
     <string name="pref_vol_swap_keys_summary">当屏幕旋转时交换音量键</string>
+    
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">模糊效果</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">禁用磁贴扩充</string>
+    <string name="pref_qs_tile_span_disable_summary">禁用磁贴扩充在横向时的亮度和设置</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">强制弹出菜单按钮</string>
+    <string name="pref_force_overflow_menu_button_summary">需要重新启动</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">总是在底部</string>
+    <string name="pref_navbar_always_on_bottom_summary">横向时强制虚拟按键在底部（需要重新启动）</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">启用虚拟按键的环目标</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">交换菜单键</string>
 
 </resources>
