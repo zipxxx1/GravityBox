@@ -726,6 +726,12 @@
                     android:defaultValue="0"
                     android:dependency="pref_navbar_custom_key_enable" />
 
+                <CheckBoxPreference 
+                    android:key="pref_navbar_custom_key_swap"
+                    android:title="@string/pref_navbar_custom_key_swap_title"
+                    android:defaultValue="false"
+                    android:dependency="pref_navbar_custom_key_enable" />
+
             </PreferenceScreen>
 
             <PreferenceScreen 
