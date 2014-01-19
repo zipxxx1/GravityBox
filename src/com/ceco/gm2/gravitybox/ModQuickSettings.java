@@ -231,8 +231,10 @@ public class ModQuickSettings {
                 }
             }
 
-            for (BroadcastSubReceiver bsr : mBroadcastSubReceivers) {
-                bsr.onBroadcastReceived(context, intent);
+            if (mBroadcastSubReceivers != null) {
+                for (BroadcastSubReceiver bsr : mBroadcastSubReceivers) {
+                    bsr.onBroadcastReceived(context, intent);
+                }
             }
         }
     };
