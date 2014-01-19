@@ -63,6 +63,8 @@
     <string name="quick_settings_usb_tether_off">Desligado</string>
     <string name="quick_settings_usb_tether_connected">Associação desativada</string>
     <string name="quick_settings_usb_tether_on">Associação ativada</string>
+    <string name="quick_settings_music_play">Tocar</string>
+    <string name="quick_settings_music_pause">Pausa</string>
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Definições rápidas na Barra de Status</string>
@@ -93,6 +95,7 @@
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Câmara</string>
     <string name="qs_tile_usb_tethering">Associação USB</string>
+    <string name="qs_tile_music">Música</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Escolher cor</string>
@@ -140,6 +143,7 @@
     <string name="lockscreen_bg_default">Fundo padrão</string>
     <string name="lockscreen_bg_color">Preencher com cor</string>
     <string name="lockscreen_bg_image">Imagem personalizada</string>
+    <string name="lockscreen_bg_last_screen">Última imagem de ecrã</string>
     <string name="pref_lockscreen_bg_color_title">Escolher cor</string>
     <string name="pref_lockscreen_bg_color_summary">Permite definir uma cor para o ecrã de bloqueio</string>
     <string name="pref_lockscreen_bg_image_title">Escolha uma imagem</string>
@@ -210,8 +214,8 @@
     <string name="pref_charging_led_disable_summary">Desativa a luz vermelha quando a bateria está a carregar</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Ações para teclas físicas</string>
-    <string name="pref_cat_hwkey_actions_summary">Permite personalizar ações para as teclas físicas</string>
+    <string name="pref_cat_hwkey_actions_title">Ações para teclas de navegação</string>
+    <string name="pref_cat_hwkey_actions_summary">Permite personalizar ações para as teclas navegação (físicas ou virtuais)</string>
     <string name="hwkey_menu_longpress_dialog_title">Ação ao manter pressionada a tecla Menu</string>
     <string name="hwkey_menu_doubletap_dialog_title">Ação após dupla pressão da tecla Menu</string>
     <string name="hwkey_back_longpress_dialog_title">Ação ao manter pressionada a tecla Atrás</string>
@@ -925,7 +929,7 @@
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">Opacidade do fundo</string>
-    <string name="pref_lockscreen_bg_opacity_summary">Aplicável apenas a imagens de fundo personalizadas ou de albuns musicais</string>
+    <string name="pref_lockscreen_bg_opacity_summary">Aplicável apenas a imagens de fundo personalizadas ou de álbuns musicais</string>
 
     <!-- GB Actions: Media control shorctut -->
     <string name="shortcut_media_control">Controlo multimédia</string>
@@ -976,5 +980,23 @@
     <!-- Tiles: Disable tile spanning -->
     <string name="pref_qs_tile_span_disable_title">Desativar reajuste de painéis</string>
     <string name="pref_qs_tile_span_disable_summary">Permite desativar o redimensionamento dos painéis de Perfil de utilizador, Brilho e Definições em orientação de ecrã horizontal</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Forçar botão de estouro</string>
+    <string name="pref_force_overflow_menu_button_summary">Necessário reiniciar</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Sempre em baixo</string>
+    <string name="pref_navbar_always_on_bottom_summary">Força a Barra de Navegação a ficar sempre em baixo na orientação de ecrã horizontal (necessário reiniciar)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Não pode ser utilizado quando os alvos do anel de navegação estão ativados</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Trocar posição com tecla Menu</string>
+
+    <!-- Phone: Non-intrusive incoming call -->
+    <string name="pref_phone_nonintrusive_incoming_call_title">Chamada a receber não intrusiva</string>
+    <string name="pref_phone_nonintrusive_incoming_call_summary">Mantém as chamadas a receber em plano de fundo durante a interação do utilizador</string>
 
 </resources>
