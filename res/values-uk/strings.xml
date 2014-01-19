@@ -157,7 +157,7 @@
     <string name="pref_hwkey_kill_delay_title">Затримка довгого натискання для закриття програми</string>
     <string name="pref_hwkey_kill_delay_summary">Застосовується до кнопці Закрити поточний додаток. Визначає, як довго потрібно тримати кнопку щоб закрити програму</string>
     <string name="pref_hwkey_doubletap_speed_title">Швидкість подвійного натискання</string>
-    <string name="pref_hwkey_doubletap_speed_summary">Застосовується до подвійному натисненню Меню. Визначає, як швидко потрібно натиснути на кнопку Меню для спрацьовування подвійного натискання.</string>
+    <string name="pref_hwkey_doubletap_speed_summary">Визначає, як швидко потрібно натиснути на кнопку Меню для спрацьовування подвійного натискання</string>
     <string name="app_killed">Додаток %s закрито</string>
     <string name="nothing_to_kill">Нема чого закривати</string>
     <string name="no_previous_app_found">Попереднє додаток не знайдено</string>

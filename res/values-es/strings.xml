@@ -240,7 +240,7 @@
     <string name="pref_hwkey_kill_delay_title">Tiempo de pulsación para detener app</string>
     <string name="pref_hwkey_kill_delay_summary">Se aplica a la acción de detener aplicación en primer plano. Define cuánto tiempo se debe presionar el botón para que se ejecute la acción.</string>
     <string name="pref_hwkey_doubletap_speed_title">Velocidad de doble pulsación</string>
-    <string name="pref_hwkey_doubletap_speed_summary">Se aplica a la doble pulsación sobre el botón menú. Define cómo de rápido se debe pulsar para que se ejecute la acción</string>
+    <string name="pref_hwkey_doubletap_speed_summary">Define cómo de rápido se debe pulsar para que se ejecute la acción</string>
     <string name="app_killed">%s detenidas</string>
     <string name="nothing_to_kill">No hay aplicaciones que detener</string>
     <string name="no_previous_app_found">No hay ninguna aplicación anterior</string>

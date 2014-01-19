@@ -193,7 +193,7 @@
     <string name="pref_hwkey_kill_delay_title">앱 종료 지연시간</string>
     <string name="pref_hwkey_kill_delay_summary">현재 앱 종료 기능에 해당됩니다. 종료되기까지 걸리는 지연시간을 설정합니다.</string>
     <string name="pref_hwkey_doubletap_speed_title">두 번 터치 속도</string>
-    <string name="pref_hwkey_doubletap_speed_summary">두 번 터치할 때 일어나는 액션에 해당됩니다. 두 번 터치를 인식하는 시간을 설정합니다.</string>
+    <string name="pref_hwkey_doubletap_speed_summary">두 번 터치를 인식하는 시간을 설정합니다</string>
     <string name="app_killed">%s 종료됨</string>
     <string name="nothing_to_kill">종료 할 어플리케이션 없음</string>
     <string name="no_previous_app_found">이전 어플리케이션이 없음</string>
