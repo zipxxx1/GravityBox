@@ -176,6 +176,7 @@
     <string name="lockscreen_bg_default">Domyślna tapeta</string>
     <string name="lockscreen_bg_color">Wypełnij kolorem</string>
     <string name="lockscreen_bg_image">Zdefiniowany obrazek</string>
+    <string name="lockscreen_bg_last_screen">Ostatni ekran</string>
     <string name="pref_lockscreen_bg_color_title">Ustaw kolor</string>
     <string name="pref_lockscreen_bg_color_summary">Pozwala ustawić własny kolor ekranu blokady</string>
     <string name="pref_lockscreen_bg_image_title">Ustaw własny obraz</string>
@@ -250,8 +251,8 @@
     <string name="pref_charging_led_disable_summary">Wyłącza sygnalizację LED podczas ładowania</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Działanie przycisków sprzętowych</string>
-    <string name="pref_cat_hwkey_actions_summary">Pozwala ustawić niestandardowe działania przycisków sprzętowych</string>
+    <string name="pref_cat_hwkey_actions_title">Działanie przycisków nawigacyjnych</string>
+    <string name="pref_cat_hwkey_actions_summary">Pozwala ustawić niestandardowe działania przycisków nawigacyjnych (sprzętowych i programowych)</string>
     <string name="hwkey_menu_longpress_dialog_title">Akcja długiego naciśnięcia MENU</string>
     <string name="hwkey_menu_doubletap_dialog_title">Akcja podwójnego przyciśnięcia MENU</string>
     <string name="hwkey_back_longpress_dialog_title">Akcja długiego naciśnięcia BACK</string>
@@ -1021,5 +1022,19 @@
     <!-- Tiles: Disable tile spanning -->
     <string name="pref_qs_tile_span_disable_title">Wyłącz rozciąganie kafelków</string>
     <string name="pref_qs_tile_span_disable_summary">Wyłącza rozciąganie kafelków użytkownika, jasności i ustawień dla poziomej orientacji ekranu</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Wymuś przycisk Overflow</string>
+    <string name="pref_force_overflow_menu_button_summary">Wymusza wyświetlanie przycisku z trzema kropkami w menu aplikacji (wymagany restart)</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Zawsze na dole</string>
+    <string name="pref_navbar_always_on_bottom_summary">Wymusza położenie paska nawigacji na dole w przypadku orientacji poziomej ekranu (wymagany restart)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Nie można używać, gdy cele pierścienia nawigacji są włączone</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Zamień z przyciskiem MENU</string>
 
 </resources>
