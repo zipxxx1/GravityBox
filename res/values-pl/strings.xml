@@ -63,6 +63,8 @@
     <string name="quick_settings_usb_tether_off">Rozłączony</string>
     <string name="quick_settings_usb_tether_connected">Tethering wyłączony</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
+    <string name="quick_settings_music_play">Play</string>
+    <string name="quick_settings_music_pause">Pauza</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Kafelki Szybkich Ustawień</string>
@@ -93,6 +95,7 @@
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Aparat</string>
     <string name="qs_tile_usb_tethering">Tethering USB</string>
+    <string name="qs_tile_music">Muzyka</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Wybór koloru</string>
@@ -211,8 +214,8 @@
     <string name="pref_charging_led_disable_summary">Wyłącza sygnalizację LED podczas ładowania</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Działanie przycisków sprzętowych</string>
-    <string name="pref_cat_hwkey_actions_summary">Pozwala ustawić niestandardowe działania przycisków sprzętowych</string>
+    <string name="pref_cat_hwkey_actions_title">Działanie przycisków nawigacyjnych</string>
+    <string name="pref_cat_hwkey_actions_summary">Pozwala ustawić niestandardowe działania przycisków nawigacyjnych (sprzętowych i programowych)</string>
     <string name="hwkey_menu_longpress_dialog_title">Akcja długiego naciśnięcia MENU</string>
     <string name="hwkey_menu_doubletap_dialog_title">Akcja podwójnego przyciśnięcia MENU</string>
     <string name="hwkey_back_longpress_dialog_title">Akcja długiego naciśnięcia BACK</string>
@@ -978,5 +981,16 @@
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Wymuś przycisk Overflow</string>
     <string name="pref_force_overflow_menu_button_summary">Wymusza wyświetlanie przycisku z trzema kropkami w menu aplikacji (wymagany restart)</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Zawsze na dole</string>
+    <string name="pref_navbar_always_on_bottom_summary">Wymusza położenie paska nawigacji na dole w przypadku orientacji poziomej ekranu (wymagany restart)</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Zamień z przyciskiem MENU</string>
+
+    <!-- Phone: Non-intrusive incoming call -->
+    <string name="pref_phone_nonintrusive_incoming_call_title">Nieinwazyjne połączenie przychodzące</string>
+    <string name="pref_phone_nonintrusive_incoming_call_summary">Utrzymuje połączenia przychodzące w tle w trakcie interakcji użytkownika</string>
 
 </resources>
