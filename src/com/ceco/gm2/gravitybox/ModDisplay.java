@@ -57,7 +57,7 @@ public class ModDisplay {
     private static final String CLASS_LIGHT_SERVICE = "com.android.server.LightsService";
     private static final String CLASS_DISPLAY_POWER_REQUEST = "com.android.server.power.DisplayPowerRequest";
     private static final boolean DEBUG = false;
-    private static final boolean DEBUG_KIS = true;
+    private static final boolean DEBUG_KIS = false;
 
     public static final String ACTION_GET_AUTOBRIGHTNESS_CONFIG = "gravitybox.intent.action.GET_AUTOBRIGHTNESS_CONFIG";
     public static final String ACTION_SET_AUTOBRIGHTNESS_CONFIG = "gravitybox.intent.action.SET_AUTOBRIGHTNESS_CONFIG";
