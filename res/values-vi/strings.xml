@@ -279,7 +279,7 @@
     <string name="pref_hwkey_kill_delay_title">Thời gian chạm-giữ để tắt ứng dụng</string>
     <string name="pref_hwkey_kill_delay_summary">Áp dụng với lệnh tắt ứng dụng đang chạy. Chỉ định thời gian chạm-giữ trước khi tiến hành tắt</string>
     <string name="pref_hwkey_doubletap_speed_title">Tốc độ chạm kép</string>
-    <string name="pref_hwkey_doubletap_speed_summary">Áp dụng khi chạm kép nút Menu. Chỉ định thời gian giữa hai lần chạm của thao tác chạm kép</string>
+    <string name="pref_hwkey_doubletap_speed_summary">Chỉ định thời gian giữa hai lần chạm của thao tác chạm kép</string>
     <string name="app_killed">Đã tắt %s</string>
     <string name="nothing_to_kill">Không có ứng dụng nào để tắt</string>
     <string name="no_previous_app_found">Không có ứng dụng trước nào</string>

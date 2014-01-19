@@ -271,7 +271,7 @@
     <string name="pref_hwkey_kill_delay_title">Καθυστέρηση παρατεταμένου πατήματος διακοπής εφαρμογής</string>
     <string name="pref_hwkey_kill_delay_summary">Αφορά την ενέργεια διακοπής εφαρμογής παρασκηνίου. Ορίζει τη διάρκεια πίεσης του πλήκτρου για να ενεργοποιήσει τη διακοπή</string>
     <string name="pref_hwkey_doubletap_speed_title">Ταχύτητα διπλού χτυπήματος</string>
-    <string name="pref_hwkey_doubletap_speed_summary">Αφορά την ενέργεια του διπλού χτυπήματος του πλήκτρου Μενού. Ορίζει την ταχύτητα χτυπήματος του πλήκτρου για να ενεργοποιηθεί το διπλό χτύπημα</string>
+    <string name="pref_hwkey_doubletap_speed_summary">Ορίζει την ταχύτητα χτυπήματος του πλήκτρου για να ενεργοποιηθεί το διπλό χτύπημα</string>
     <string name="app_killed">Διακόπηκε η εφαρμογή %s</string>
     <string name="nothing_to_kill">Δεν υπάρχει κάτι για διακοπή</string>
     <string name="no_previous_app_found">Δεν βρέθηκε προηγούμενη εφαρμογή</string>
