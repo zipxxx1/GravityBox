@@ -90,6 +90,8 @@
     <string name="qs_tile_screenshot">Fotografa schermo</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Fotocamera</string>
+    <string name="qs_tile_usb_tethering">Tethering USB</string>
+    <string name="qs_tile_music">Musica</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Scegli colore</string>
