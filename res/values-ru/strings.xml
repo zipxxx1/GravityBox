@@ -78,6 +78,8 @@
     <string name="quick_settings_usb_tether_off">Отключено</string>
     <string name="quick_settings_usb_tether_connected">Раздача выкл</string>
     <string name="quick_settings_usb_tether_on">Раздача</string>
+    <string name="quick_settings_music_play">Воспр.</string>
+    <string name="quick_settings_music_pause">Пауза</string>
     
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Плитки в панели уведомлений</string>
@@ -108,6 +110,7 @@
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Камера</string>
     <string name="qs_tile_usb_tethering">Раздача по USB</string>
+    <string name="qs_tile_music">Музыка</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбор цвета</string>
@@ -226,8 +229,8 @@
     <string name="pref_charging_led_disable_summary">Отключение светодиода индикации во время зарядки</string>
     
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Физические кнопки</string>
-    <string name="pref_cat_hwkey_actions_summary">Установка своих действий для физических кнопок телефона</string>
+    <string name="pref_cat_hwkey_actions_title">Кнопки навигации</string>
+    <string name="pref_cat_hwkey_actions_summary">Установка своих действий для кнопок навигации (физических и программных)</string>
     <string name="hwkey_menu_longpress_dialog_title">Удержание Меню</string>
     <string name="hwkey_menu_doubletap_dialog_title">Двойное нажатие Меню</string>
     <string name="hwkey_back_longpress_dialog_title">Удержание Назад</string>
@@ -1008,5 +1011,9 @@
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Поменять местами с меню</string>
+
+    <!-- Phone: Non-intrusive incoming call -->
+    <string name="pref_phone_nonintrusive_incoming_call_title">Деликатный входящий</string>
+    <string name="pref_phone_nonintrusive_incoming_call_summary">Получение входящих вызовов в фоне во время действий пользователя </string>
 
 </resources>
