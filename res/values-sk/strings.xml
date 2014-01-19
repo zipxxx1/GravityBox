@@ -173,6 +173,7 @@
     <string name="lockscreen_bg_default">Predvolená tapeta</string>
     <string name="lockscreen_bg_color">Farebná výplň</string>
     <string name="lockscreen_bg_image">Vlastný obrázok</string>
+    <string name="lockscreen_bg_last_screen">Posledná obrazovka</string>
     <string name="pref_lockscreen_bg_color_title">Nastavenie farebnej výplne</string>
     <string name="pref_lockscreen_bg_color_summary">Umožňuje nastavenie farby pozadia obrazovky uzamknutia</string>
     <string name="pref_lockscreen_bg_image_title">Nastavenie vlastného obrázka</string>
@@ -990,5 +991,23 @@
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Prevrátiť tlačidlá hlasistosti</string>
     <string name="pref_vol_swap_keys_summary">V prípade otočenia obrazovky bude prevrátené ovládanie tlačidiel hlasitosti</string>
+
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Efekt rozostrenia</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Vypnúť roztiahnutie dlaždíc</string>
+    <string name="pref_qs_tile_span_disable_summary">Vypne rozťahovanie dlaždíc kontaktu, jasu a nastavenia v režime na šírku</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Vynútené menu tlačidlo</string>
+    <string name="pref_force_overflow_menu_button_summary">Vynúti zobrazenie menu tlačidla v aplikáciách (vyžaduje reštart)</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Vždy na spodku</string>
+    <string name="pref_navbar_always_on_bottom_summary">Vynúti zobrazenie navigačnej lišty na spodku obrazovky v režime na šírku (vyžaduje reštart)</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Prehodiť s menu tlačidlom</string>
 
 </resources>
