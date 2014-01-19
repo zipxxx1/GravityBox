@@ -31,7 +31,8 @@ Changelog 2.9.3 - 19/01/2014
 - Updated Spanish translations (thanks to jvbferrer)
 - Updated Chinese (Simplified) translations (thanks to liveasx)
 - Updated Korean translations (thanks to SDKoongchi)
-- Updated Portuguese (PT) translation (thanks to bgcngm, RaphaDroid)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Portuguese (BR) translation (thanks to RaphaDroid)
 - Updated Russian translations (thanks to gaich)
 - Updated Slovak and Czech translations
 
