@@ -78,6 +78,8 @@
     <string name="quick_settings_usb_tether_off">Desconectado</string>
     <string name="quick_settings_usb_tether_connected">Tethering off</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
+    <string name="quick_settings_music_play">Reproducir</string>
+    <string name="quick_settings_music_pause">Pausar</string>
  
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Ajustes rápidos de la barra de estado</string>
@@ -108,6 +110,7 @@
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Cámara</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
+    <string name="qs_tile_music">Música</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de color</string>
@@ -226,8 +229,8 @@
     <string name="pref_charging_led_disable_summary">Desactiva el LED mientras se carga</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Acciones en botones físicos</string>
-    <string name="pref_cat_hwkey_actions_summary">Permite establecer acciones personalizadas en los botones físicos del dispositivo</string>
+    <string name="pref_cat_hwkey_actions_title">Acciones en botones de navegación</string>
+    <string name="pref_cat_hwkey_actions_summary">Permite establecer acciones personalizadas en los botones de navegación del dispositivo (físicos y en pantalla)</string>
     <string name="hwkey_menu_longpress_dialog_title">Acción al hacer pulsación larga sobre botón menú</string>
     <string name="hwkey_menu_doubletap_dialog_title">Acción al hacer dos pulsaciones rápidas sobre botón menú</string>
     <string name="hwkey_back_longpress_dialog_title">Acción al hacer pulsación larga sobre botón retroceso</string>
@@ -240,7 +243,7 @@
     <string name="pref_hwkey_kill_delay_title">Tiempo de pulsación para detener app</string>
     <string name="pref_hwkey_kill_delay_summary">Se aplica a la acción de detener aplicación en primer plano. Define cuánto tiempo se debe presionar el botón para que se ejecute la acción.</string>
     <string name="pref_hwkey_doubletap_speed_title">Velocidad de doble pulsación</string>
-    <string name="pref_hwkey_doubletap_speed_summary">Define cómo de rápido se debe pulsar para que se ejecute la acción</string>
+    <string name="pref_hwkey_doubletap_speed_summary">Define cómo de rápido se ha de hacer la doble pulsación para que se ejecute la acción</string>
     <string name="app_killed">%s detenidas</string>
     <string name="nothing_to_kill">No hay aplicaciones que detener</string>
     <string name="no_previous_app_found">No hay ninguna aplicación anterior</string>
@@ -1004,5 +1007,12 @@
     <!-- Navbar: always on bottom -->
     <string name="pref_navbar_always_on_bottom_title">Siempre abajo</string>
     <string name="pref_navbar_always_on_bottom_summary">Fuerza a la barra de navegación a permanecer abajo en orientación panorámica (requiere reinicio)</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Intercambiar con botón menú</string>
+    
+    <!-- Phone: Non-intrusive incoming call -->
+    <string name="pref_phone_nonintrusive_incoming_call_title">Llamada entrante no intrusiva</string>
+    <string name="pref_phone_nonintrusive_incoming_call_summary">Mantiene las llamadas entrantes en segundo plano mientras el usuario esté usando el dispositivo</string>
 
 </resources>
