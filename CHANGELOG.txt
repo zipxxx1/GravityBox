@@ -1,3 +1,41 @@
+Changelog 2.9.3 - 19/01/2014
+--------------------------------------
+- Lockscreen tweaks:
+--- Added option for blur effect - applicable to any custom background style
+--- New custom background style: Last screen (captures screen while it's turning off and uses it as custom background)
+--- Fixed unlock ring targets positions for lockscreen in landscape mode
+- Navigation bar tweaks:
+--- Option to make navbar always on bottom regardless orientation
+--- Option to swap positions of menu key and custom key (custom key on the right now possible)
+--- Fixed issues with ring targets positions in landscape mode
+- QuickSettings management:
+--- Disabling tile spanning in landscape mode is now optional
+--- Option brought back to Lenovo smartphones (thanks to bgcngm)
+- Hardware/software key actions:
+--- Added 100ms and 150ms options for double-tap speed
+--- Native home key double-tap is now customizable (4.3 only)
+- GravityBox Actions: redesigned icons (requires redefining of existing shortcuts)
+- Larger icons on navigation bar ring and unlock ring
+- Option for forcing menu overflow button
+- Data traffic monitor improved to support older devices (thanks to PeterCxy)
+- Improved titles and summaries of GravityBox settings menu items
+- Added support for MT6592 (thanks to bgcngm)
+- Enabled auto-hide signal icons feature on MT6582 (thanks to bgcngm)
+- Updated French translation (thanks to ch-vox)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Italian translations (thanks to pesa1234, valerioscifoni)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translations (thanks to Eric850130)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Korean translations (thanks to SDKoongchi)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Portuguese (BR) translation (thanks to RaphaDroid)
+- Updated Russian translations (thanks to gaich)
+- Updated Vietnamese translations (thanks to alienyd)
+- Updated Hungarian translation (thanks to benjoe1)
+- Updated Slovak and Czech translations
+
 Changelog 2.9.2 - 12/01/2014
 --------------------------------------
 - GravityBox Actions:
