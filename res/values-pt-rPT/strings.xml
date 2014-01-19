@@ -176,6 +176,7 @@
     <string name="lockscreen_bg_default">Fundo padrão</string>
     <string name="lockscreen_bg_color">Preencher com cor</string>
     <string name="lockscreen_bg_image">Imagem personalizada</string>
+    <string name="lockscreen_bg_last_screen">Última imagem de ecrã</string>
     <string name="pref_lockscreen_bg_color_title">Escolher cor</string>
     <string name="pref_lockscreen_bg_color_summary">Permite definir uma cor para o ecrã de bloqueio</string>
     <string name="pref_lockscreen_bg_image_title">Escolha uma imagem</string>
@@ -250,8 +251,8 @@
     <string name="pref_charging_led_disable_summary">Desativa a luz vermelha quando a bateria está a carregar</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Ações para teclas físicas</string>
-    <string name="pref_cat_hwkey_actions_summary">Permite personalizar ações para as teclas físicas</string>
+    <string name="pref_cat_hwkey_actions_title">Ações para teclas de navegação</string>
+    <string name="pref_cat_hwkey_actions_summary">Permite personalizar ações para as teclas navegação (físicas ou virtuais)</string>
     <string name="hwkey_menu_longpress_dialog_title">Ação ao manter pressionada a tecla Menu</string>
     <string name="hwkey_menu_doubletap_dialog_title">Ação após dupla pressão da tecla Menu</string>
     <string name="hwkey_back_longpress_dialog_title">Ação ao manter pressionada a tecla Atrás</string>
@@ -1025,5 +1026,19 @@
     <!-- Tiles: Disable tile spanning -->
     <string name="pref_qs_tile_span_disable_title">Desativar reajuste de painéis</string>
     <string name="pref_qs_tile_span_disable_summary">Permite desativar o redimensionamento dos painéis de Perfil de utilizador, Brilho e Definições em orientação de ecrã horizontal</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Forçar botão de estouro</string>
+    <string name="pref_force_overflow_menu_button_summary">Necessário reiniciar</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Sempre em baixo</string>
+    <string name="pref_navbar_always_on_bottom_summary">Força a Barra de Navegação a ficar sempre em baixo na orientação de ecrã horizontal (necessário reiniciar)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Não pode ser utilizado quando os alvos do anel de navegação estão ativados</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Trocar posição com tecla Menu</string>
 
 </resources>
