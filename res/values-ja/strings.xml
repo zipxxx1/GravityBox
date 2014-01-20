@@ -249,8 +249,8 @@
     <string name="pref_charging_led_disable_summary">充電中のLED点灯を無効化します。</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">ハードキーアクション</string>
-    <string name="pref_cat_hwkey_actions_summary">ハードキーのアクションを変更します。</string>
+    <string name="pref_cat_hwkey_actions_title">ナビキーアクション</string>
+    <string name="pref_cat_hwkey_actions_summary">ハード/ソフトキーのアクションを変更します。</string>
     <string name="hwkey_menu_longpress_dialog_title">メニューキー長押し</string>
     <string name="hwkey_menu_doubletap_dialog_title">メニューキーダブルタップ</string>
     <string name="hwkey_back_longpress_dialog_title">戻るキー長押し</string>
@@ -263,7 +263,7 @@
     <string name="pref_hwkey_kill_delay_title">アプリ終了の長押し時間</string>
     <string name="pref_hwkey_kill_delay_summary">前面アプリの終了をするまでにどれぐらいキーを押しっぱなしにするか設定します。</string>
     <string name="pref_hwkey_doubletap_speed_title">ダブルタップ速度</string>
-    <string name="pref_hwkey_doubletap_speed_summary">メニューキーダブルタップでどれぐらいの速度のタップを認識するか設定します。</string>
+    <string name="pref_hwkey_doubletap_speed_summary">どれぐらいの速度のタップをダブルタップとして認識するか設定します。</string>
     <string name="app_killed">%s アプリを終了しました。</string>
     <string name="nothing_to_kill">終了するアプリがありません。</string>
     <string name="no_previous_app_found">前のアプリはありません。</string>
@@ -341,6 +341,7 @@
     <string name="notif_background_default">標準の背景</string>
     <string name="notif_background_color_fill">塗りつぶし</string>
     <string name="notif_background_custom_image">カスタム画像</string>
+    <string name="lockscreen_bg_last_screen">消灯前の画面</string>
     <string name="pref_notif_color_title">色のセット</string>
     <string name="pref_notif_image_portrait_title">縦画面の画像をセット</string>
     <string name="pref_notif_image_landscape_title">横画面の画像をセット</string>
@@ -1026,5 +1027,8 @@
 
     <!-- Summary for Home key long-press action disabled because of navring targets -->
     <string name="pref_hwkey_home_longpress_disabled_summary">ナビバーリングターゲットが有効なため使用できません。</string>
+    
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">メニューキーと入れ替え</string>
     
 </resources>
