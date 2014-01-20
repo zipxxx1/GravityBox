@@ -63,6 +63,8 @@
     <string name="quick_settings_usb_tether_off">未接続</string>
     <string name="quick_settings_usb_tether_connected">テザリングオフ</string>
     <string name="quick_settings_usb_tether_on">テザリング</string>
+    <string name="quick_settings_music_play">再生</string>
+    <string name="quick_settings_music_pause">一時停止</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">ステータスバークイック設定タイル</string>
@@ -92,6 +94,7 @@
     <string name="qs_tile_screenshot">スクリーンショット</string>
     <string name="qs_tile_camera">カメラ</string>
     <string name="qs_tile_usb_tethering">USBテザリング</string>
+    <string name="qs_tile_music">音楽</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">カラーピッカー</string>
@@ -210,8 +213,8 @@
     <string name="pref_charging_led_disable_summary">充電中のLED点灯を無効化します。</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">ハードキーアクション</string>
-    <string name="pref_cat_hwkey_actions_summary">ハードキーのアクションを変更します。</string>
+    <string name="pref_cat_hwkey_actions_title">ナビキーアクション</string>
+    <string name="pref_cat_hwkey_actions_summary">ハード/ソフトキーのアクションを変更します。</string>
     <string name="hwkey_menu_longpress_dialog_title">メニューキー長押し</string>
     <string name="hwkey_menu_doubletap_dialog_title">メニューキーダブルタップ</string>
     <string name="hwkey_back_longpress_dialog_title">戻るキー長押し</string>
@@ -224,7 +227,7 @@
     <string name="pref_hwkey_kill_delay_title">アプリ終了の長押し時間</string>
     <string name="pref_hwkey_kill_delay_summary">前面アプリの終了をするまでにどれぐらいキーを押しっぱなしにするか設定します。</string>
     <string name="pref_hwkey_doubletap_speed_title">ダブルタップ速度</string>
-    <string name="pref_hwkey_doubletap_speed_summary">メニューキーダブルタップでどれぐらいの速度のタップを認識するか設定します。</string>
+    <string name="pref_hwkey_doubletap_speed_summary">どれぐらいの速度のタップをダブルタップとして認識するか設定します。</string>
     <string name="app_killed">%s アプリを終了しました。</string>
     <string name="nothing_to_kill">終了するアプリがありません。</string>
     <string name="no_previous_app_found">前のアプリはありません。</string>
@@ -982,4 +985,7 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">メニューキーと入れ替え</string>
 
+    <!-- Phone: Non-intrusive incoming call -->
+    <string name="pref_phone_nonintrusive_incoming_call_title">着信画面を最小化</string>
+    <string name="pref_phone_nonintrusive_incoming_call_summary">操作の邪魔にならないよう着信画面をバックグラウンドにします。</string>
 </resources>
