@@ -373,8 +373,8 @@
     <string name="app_picker_none">(Żadna)</string>
 
     <!-- QuickApp tile settings -->
-    <string name="qs_tile_quickapp">Szybkie uruch. Aplikacji</string>
-    <string name="pref_cat_quickapp_tile_title">Ustawienia szybkiego uruch. Aplikacji</string>
+    <string name="qs_tile_quickapp">Szybkie uruch. Aplikacji 1</string>
+    <string name="pref_cat_quickapp_tile_title">Ustawienia kafelka Aplikacji 1</string>
     <string name="pref_quickapp_default_title">Aplikacja Główna</string>
     <string name="pref_quickapp_slot1_title">Naciśnij długo slot 1 apl.</string>
     <string name="pref_quickapp_slot2_title">Naciśnij długo slot 2 apl.</string>
@@ -947,8 +947,8 @@
     <string name="lockscreen_sb_clock_always_show">Zawsze pokazuj</string>
 
     <!-- QuickApp Tile #2 -->
-    <string name="pref_cat_quickapp_tile_2_title">Ustawienia kafelka Szybkiej Aplikacji 2</string>
-    <string name="qs_tile_quickapp_2">Szybka Aplikacja 2</string>
+    <string name="pref_cat_quickapp_tile_2_title">Ustawienia kafelka Aplikacji 2</string>
+    <string name="qs_tile_quickapp_2">Szybkie uruch. Aplikacji 2</string>
 
     <!-- Force music volume control -->
     <string name="pref_vol_force_music_control_title">Wymuś kontrolę głośności mediów</string>
