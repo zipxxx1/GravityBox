@@ -206,8 +206,16 @@ public class TrafficMeter extends TextView implements IconManagerListener {
             long currentRxBytes = getTotalReceivedBytes();
             long newBytes = currentRxBytes - mTotalRxBytes;
 
+            boolean disconnected = false;
+            if (newBytes < 0) {
+                // It's impossible to get a speed under 0
+                currentRxBytes = 0;
+                newBytes = 0;
+                disconnected = true;
+            }
+
             if (mTrafficMeterHide && newBytes == 0) {
-                long trafficBurstBytes = currentRxBytes - mTrafficBurstStartBytes;
+                long trafficBurstBytes = disconnected ? mTotalRxBytes - mTrafficBurstStartBytes : currentRxBytes - mTrafficBurstStartBytes;
 
                 if (trafficBurstBytes != 0 && mTrafficMeterSummaryTime != 0) {
                     setText(formatTraffic(trafficBurstBytes, false));
