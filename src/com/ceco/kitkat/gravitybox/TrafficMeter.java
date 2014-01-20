@@ -251,7 +251,7 @@ public class TrafficMeter extends TextView implements IconManagerListener {
                 }
             }
 
-            mTotalRxBytes = currentRxBytes;
+            mTotalRxBytes = disconnected ? mTotalRxBytes : currentRxBytes;
             mLastUpdateTime = SystemClock.elapsedRealtime();
             getHandler().postDelayed(mRunnable, 1000);
         }
