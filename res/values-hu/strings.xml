@@ -187,7 +187,7 @@
     <string name="pref_cat_lockscreen_title">Zárképernyő módosítások</string>
     <string name="pref_cat_lockscreen_summary">Különböző Zárképernyő módosításokat tartalmaz</string>
     <string name="pref_cat_lockscreen_background_title">Zárképernyő háttér</string>
-    <string name="pref_lockscreen_background_title">Háttér sítlus</string>
+    <string name="pref_lockscreen_background_title">Háttér stílus</string>
     <string name="lockscreen_bg_default">Alapértelmezett háttérkép</string>
     <string name="lockscreen_bg_color">Szín kitöltés</string>
     <string name="lockscreen_bg_image">Egyéni kép</string>
@@ -266,8 +266,8 @@
     <string name="pref_charging_led_disable_summary">Letiltja a LED-et töltés közben</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Hardver gombok műveletei</string>
-    <string name="pref_cat_hwkey_actions_summary">Lehetővé teszi a hardver gombokhoz egyedi műveletek beállítását</string>
+    <string name="pref_cat_hwkey_actions_title">Navigációs gombok műveletei</string>
+    <string name="pref_cat_hwkey_actions_summary">Lehetővé teszi egyedi műveletek beállítását a hardveres és szoftveres navigációs gombokhoz</string>
     <string name="hwkey_menu_longpress_dialog_title">Menü gomb hosszú érintés művelete</string>
     <string name="hwkey_menu_doubletap_dialog_title">Menü gomb dupla érintés művelete</string>
     <string name="hwkey_back_longpress_dialog_title">Vissza gomb hosszú érintés művelete</string>
