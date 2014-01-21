@@ -480,7 +480,7 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">解鎖環設定</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">主切換解鎖環目標</string>
+    <string name="pref_lockscreen_ring_targets_enable_summary">切換解鎖環目標總管</string>
     <string name="pref_lockscreen_ring_targets_app_title">目標應用程式 %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">解鎖環垂直偏移量</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">解鎖環水平偏移量</string>
@@ -828,7 +828,7 @@
     <string name="pref_cat_power_other_title">其他</string>
 
      <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">允許在鎖定螢幕上</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">允許在鎖定螢幕顯示電源選單</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">閒置模式</string>
@@ -959,5 +959,30 @@
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">重新調整音量鍵</string>
     <string name="pref_vol_swap_keys_summary">當螢幕已經旋轉時切換音量鍵</string>
+    
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">模糊效果</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">停用瓷貼跨轉</string>
+    <string name="pref_qs_tile_span_disable_summary">使用者停用，亮度和設定瓷磚橫向跨轉</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">強制溢位選單鍵</string>
+    <string name="pref_force_overflow_menu_button_summary">需要重新啟動</string>
+ 
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">總是在底部</string>
+    <string name="pref_navbar_always_on_bottom_summary">強制讓海苔條顯示在橫向底部 (需要重新啟動)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">當導航環目標被啟用將無法使用</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">切換選單鍵</string>
+    
+    <!-- Phone: Non-intrusive incoming call -->
+    <string name="pref_phone_nonintrusive_incoming_call_title">非侵入性來電</string>
+    <string name="pref_phone_nonintrusive_incoming_call_summary">使用者互動過程中保持背景來電</string>
    
 </resources>
