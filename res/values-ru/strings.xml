@@ -240,10 +240,10 @@
     <string name="hwkey_action_prev_app">Переключиться на предыдущее приложение</string>
     <string name="hwkey_action_kill">Завершить текущее приложение</string>
     <string name="hwkey_action_sleep">Отключить экран</string>
-    <string name="pref_hwkey_kill_delay_title">Задержка удержания для закрытия приложения</string>
+    <string name="pref_hwkey_kill_delay_title">Время удержания для завершения</string>
     <string name="pref_hwkey_kill_delay_summary">Применимо к действию Завершить текущее приложение. Определяет, как долго нужно удерживать нажатие на кнопке, чтобы завершить приложение</string>
     <string name="pref_hwkey_doubletap_speed_title">Скорость двойного нажатия</string>
-    <string name="pref_hwkey_doubletap_speed_summary">Определяет, как быстро нужно нажать на кнопку для срабатывания двойного нажатия</string>
+    <string name="pref_hwkey_doubletap_speed_summary">Определяет, как быстро нужно нажать на кнопку для срабатывания двойного нажатия.</string>
     <string name="app_killed">Приложение %s завершено</string>
     <string name="nothing_to_kill">Нет приложений для завершения</string>
     <string name="no_previous_app_found">Предыдущее приложение не найдено</string>
@@ -728,7 +728,7 @@
     <string name="hwkey_action_back">Назад</string>
     
     <!-- Clear all recents bottom margin -->
-    <string name="pref_recent_clear_margin_bottom_title">Изменить нижний отступ</string>
+    <string name="pref_recent_clear_margin_bottom_title">Настроить отступ снизу</string>
 
     <!-- Google Plus -->
     <string name="pref_about_gplus_title">Сообщество Google+</string>
@@ -795,7 +795,7 @@
     <string name="pref_powermenu_screenrecord_title">Запись экрана в меню</string>
 
     <!-- Show dialpad automatically -->
-    <string name="pref_dialer_show_dialpad_title">Показвать панель набора</string>
+    <string name="pref_dialer_show_dialpad_title">Показать панель набора</string>
     <string name="pref_dialer_show_dialpad_summary">Автоматическое отображение панели набора номера при открытии приложения телефона</string>
         
     <!-- Screen off effects -->
@@ -846,7 +846,7 @@
     <string name="volume_rocker_wake_disabled">Выключено</string>
 
     <!-- Advanced reboot menu: require confirmation -->
-    <string name="pref_reboot_confirm_required_title">Подтверждение перезагрузки</string>
+    <string name="pref_reboot_confirm_required_title">Подтверждать перезагрузку</string>
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Скрыть после изменения</string>
