@@ -441,6 +441,7 @@
     <string-array name="expanded_desktop_entries" translatable="false">
         <item>@string/expanded_desktop_disabled</item>
         <item>@string/expanded_desktop_navbar</item>
+        <item>@string/expanded_desktop_immersive_statusbar</item>
         <item>@string/expanded_desktop_both</item>
         <item>@string/expanded_desktop_immersive</item>
     </string-array>
@@ -448,6 +449,7 @@
     <string-array name="expanded_desktop_values" translatable="false">
         <item>0</item>
         <item>1</item>
+        <item>4</item>
         <item>2</item>
         <item>3</item>
     </string-array>
