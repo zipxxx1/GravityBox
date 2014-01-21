@@ -652,8 +652,8 @@
     <!-- Pie colors -->
     <string name="pref_cat_pie_colors_title">Colori Pie</string>
     <string name="pref_pie_color_bg_title">Colore sfondo</string>
-    <string name="pref_pie_color_fg_title">Colore primo piano</string>
-    <string name="pref_pie_color_outline_title">Colore sottolineatura</string>
+    <string name="pref_pie_color_fg_title">Colore tasti</string>
+    <string name="pref_pie_color_outline_title">Colore contorno</string>
     <string name="pref_pie_color_selected_title">Colore tasto selezionato</string>
     <string name="pref_pie_color_text_title">Colore testo</string>
     <string name="pref_pie_color_reset_title">Reimposta colori</string>
