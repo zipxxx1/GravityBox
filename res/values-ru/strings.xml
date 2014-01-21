@@ -471,7 +471,8 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">Расширенный рабочий стол</string>
     <string name="expanded_desktop_disabled">Отключено</string>
-    <string name="expanded_desktop_navbar">Спрятать панель навигации</string>
+    <string name="expanded_desktop_navbar">Скрыть панель навигации</string>
+    <string name="expanded_desktop_immersive_statusbar">Погружение для стр.состояния</string>
     <string name="expanded_desktop_both">Полупогружение</string>
     <string name="expanded_desktop_immersive">Погружение</string>
     <string name="action_expanded_desktop_title">Расширенный рабочий стол</string>
