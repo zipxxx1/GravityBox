@@ -975,14 +975,6 @@
     <string name="nrt_bg_style_dark">Sombre</string>
     <string name="nrt_bg_style_black">Noir</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Ne rien faire</string>
-    <string name="smart_radio_action_summary">Commuter en %s</string>
-    <string name="pref_cat_smart_radio_title">Réseau intelligent</string>
-    <string name="pref_smart_radio_experimental_summary">EXPÉRIMENTAL ! Peut affecter la gestion manuelle du mode réseau</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Données mobiles activées</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Données mobiles désactivées</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contient les paramètres liés aux touches flottantes (Pie control)</string>
 

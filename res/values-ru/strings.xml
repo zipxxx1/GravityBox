@@ -975,14 +975,6 @@
     <string name="nrt_bg_style_dark">Тёмный</string>
     <string name="nrt_bg_style_black">Чёрный</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Ничего не делать</string>
-    <string name="smart_radio_action_summary">Переключиться на %s</string>
-    <string name="pref_cat_smart_radio_title">Умный радиомодуль</string>
-    <string name="pref_smart_radio_experimental_summary">ЭКСПЕРИМЕНТАЛЬНАЯ ФУНКЦИЯ! Может стать причиной некорректного переключения режима сети вручную</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Мобильные данные вкл</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Мобильные данные выкл</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Настройки веерного меню</string>
 

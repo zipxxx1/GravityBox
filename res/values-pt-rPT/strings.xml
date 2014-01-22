@@ -960,14 +960,6 @@
     <string name="nrt_bg_style_dark">Escuro</string>
     <string name="nrt_bg_style_black">Preto</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Não fazer nada</string>
-    <string name="smart_radio_action_summary">Alternar para %s</string>
-    <string name="pref_cat_smart_radio_title">Rádio inteligente</string>
-    <string name="pref_smart_radio_experimental_summary">EXPERIMENTAL! Poderá afetar a comutação manual do modo de rede</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Quando dados móveis ativados</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Quando dados móveis desativados</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contém várias definições relacionadas com os controlos Pie</string>
 

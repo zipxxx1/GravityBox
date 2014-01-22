@@ -19,9 +19,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -36,90 +35,158 @@ public class ModSmartRadio {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    private static enum State { UNKNOWN, NORMAL, POWER_SAVING };
+
     private static Context mContext;
-    private static Handler mHandler;
-    private static int mOnDataEnabledMode;
-    private static int mOnDataDisabledMode;
-    private static int mPreviousState;
-    private static boolean mBlockStateChange;
+    private static int mNormalMode;
+    private static int mPowerSavingMode;
+    private static ConnectivityManager mConnManager;
+    private static boolean mWasMobileDataEnabled;
+    private static State mCurrentState = State.UNKNOWN;
+    private static boolean mIsScreenOff;
+    private static boolean mPowerSaveWhenScreenOff;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_SMART_RADIO_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_ON_DATA_ENABLED)) {
-                    mOnDataEnabledMode = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_ON_DATA_ENABLED, -1);
-                    if (DEBUG) log("mOnDataEnabledMode = " + mOnDataEnabledMode);
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_NORMAL_MODE)) {
+                    setNewModeValue(State.NORMAL, 
+                            intent.getIntExtra(GravityBoxSettings.EXTRA_SR_NORMAL_MODE, -1));
+                    if (DEBUG) log("mNormalMode = " + mNormalMode);
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_ON_DATA_DISABLED)) {
-                    mOnDataDisabledMode = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_ON_DATA_DISABLED, -1);
-                    if (DEBUG) log("mOnDataDisabledMode = " + mOnDataDisabledMode);
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_POWER_SAVING_MODE)) {
+                    setNewModeValue(State.POWER_SAVING,
+                            intent.getIntExtra(GravityBoxSettings.EXTRA_SR_POWER_SAVING_MODE, -1));
+                    if (DEBUG) log("mPowerSavingMode = " + mPowerSavingMode);
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF)) {
+                    mPowerSaveWhenScreenOff = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF, false);
+                    if (DEBUG) log("mPowerSaveWhenScreenOff = " + mPowerSaveWhenScreenOff);
+                }
+            } else if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+                boolean mobileDataEnabled = isMobileDataEnabled(); 
+                int nwType = intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, -1);
+                if (nwType == -1) return;
+                NetworkInfo nwInfo = mConnManager.getNetworkInfo(nwType);
+                if (nwType == ConnectivityManager.TYPE_WIFI) {
+                    if (DEBUG) log("Network type: WIFI; connected: " + nwInfo.isConnected());
+                    if (nwInfo.isConnected()) {
+                        switchToState(State.POWER_SAVING);
+                    } else if (mobileDataEnabled && !(mIsScreenOff && mPowerSaveWhenScreenOff)) {
+                        switchToState(State.NORMAL);
+                    }
+                } else if (nwType == ConnectivityManager.TYPE_MOBILE) {
+                    if (DEBUG) log("Network type: MOBILE; connected: " + nwInfo.isConnected());
+                    boolean wifiConnected = isWifiConnected();
+                    if (!mWasMobileDataEnabled && mobileDataEnabled && !wifiConnected) {
+                        if (DEBUG) log("Mobile data got enabled and wifi not connected");
+                        switchToState(State.NORMAL);
+                    } else if (mWasMobileDataEnabled && !mobileDataEnabled) {
+                        if (DEBUG) log("Mobile data got disabled");
+                        switchToState(State.POWER_SAVING);
+                    }
+                    mWasMobileDataEnabled = mobileDataEnabled;
+                }
+            } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+                if (DEBUG) log("Screen turning off");
+                if (mPowerSaveWhenScreenOff) {
+                    switchToState(State.POWER_SAVING, true);
+                }
+                mIsScreenOff = true;
+            } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+                if (DEBUG) log("Screen turning on");
+                if (isMobileDataEnabled() && !isWifiConnected()) {
+                    switchToState(State.NORMAL);
+                }
+                mIsScreenOff = false;
             }
         }
     };
 
-    private static Runnable mUnblockStateChange = new Runnable() {
-        @Override
-        public void run() {
-            mBlockStateChange = false;
+    private static boolean isMobileDataEnabled() {
+        try {
+            return (Boolean) XposedHelpers.callMethod(mConnManager, "getMobileDataEnabled");
+        } catch (Throwable t) {
+            return false;
         }
-    };
+    }
 
-    private static PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
-        @Override
-        public void onDataConnectionStateChanged(int state, int networkType) {
-            if (DEBUG) log("onDataConnectionStateChanged; state=" + state);
+    private static boolean isWifiConnected() {
+        try {
+            return mConnManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+        } catch (Throwable t) {
+            return false;
+        }
+    }
 
-            if (state == mPreviousState) {
-                if (DEBUG) log("state == previousState: ignoring");
-                return;
+    private static void switchToState(State newState) {
+        switchToState(newState, false);
+    }
+
+    private static void switchToState(State newState, boolean force) {
+        if (mCurrentState == newState && !force) {
+            if (DEBUG) log("switchToState: new state == previous state - ignoring");
+            return;
+        } else if (DEBUG) {
+            log("Switching to state: " + newState);
+        }
+
+        try {
+            int networkMode = -1;
+            switch (newState) {
+                case NORMAL: networkMode = mNormalMode; break;
+                case POWER_SAVING: networkMode = mPowerSavingMode; break;
+                default: break;
             }
-
-            if (mBlockStateChange) {
-                if (DEBUG) log("state change blocked: ignoring");
-                return;
-            }
-
-            Intent intent = null;
-            if (state == TelephonyManager.DATA_CONNECTED && mOnDataEnabledMode != -1) {
-                intent = new Intent(PhoneWrapper.ACTION_CHANGE_NETWORK_TYPE);
-                intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, mOnDataEnabledMode);
-            } else if (state == TelephonyManager.DATA_DISCONNECTED && mOnDataDisabledMode != -1) {
-                intent = new Intent(PhoneWrapper.ACTION_CHANGE_NETWORK_TYPE);
-                intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, mOnDataDisabledMode);
-            }
-            if (intent != null) {
+            if (networkMode != -1) {
+                Intent intent = new Intent(PhoneWrapper.ACTION_CHANGE_NETWORK_TYPE);
+                intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, networkMode);
                 mContext.sendBroadcast(intent);
             }
-
-            mBlockStateChange = true;
-            mHandler.postDelayed(mUnblockStateChange, 3000);
-            mPreviousState = state;
+            mCurrentState = newState;
+        } catch (Throwable t) {
+            log("switchToState: " + t.getMessage());
         }
-    };
+    }
+
+    private static void setNewModeValue(State state, int mode) {
+        int currentMode = state == State.NORMAL ? mNormalMode : mPowerSavingMode;
+        if (mode != currentMode) {
+            if (state == State.NORMAL) {
+                mNormalMode = mode; 
+            } else {
+                mPowerSavingMode = mode;
+            }
+            if (mCurrentState == state) {
+                switchToState(state, true);
+            }
+        }
+    }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> classSystemUIService = XposedHelpers.findClass(
                     "com.android.systemui.SystemUIService", classLoader);
 
-            mOnDataEnabledMode = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_ON_DATA_ENABLED, -1);
-            mOnDataDisabledMode = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_ON_DATA_DISABLED, -1);
+            mNormalMode = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_NORMAL_MODE, -1);
+            mPowerSavingMode = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_POWER_SAVING_MODE, -1);
+            mPowerSaveWhenScreenOff = prefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_SCREEN_OFF, false);
 
             XposedHelpers.findAndHookMethod(classSystemUIService, "onCreate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mContext = (Context) param.thisObject;
                     if (mContext != null) {
-                        if (DEBUG) log("SystemUIService created. Registering phone state listener");
-                        mHandler = new Handler();
-                        TelephonyManager phone = 
-                                (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-                        phone.listen(mPhoneStateListener, PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
+                        if (DEBUG) log("Initializing SmartRadio");
+
+                        mConnManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SMART_RADIO_CHANGED);
+                        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+                        intentFilter.addAction(Intent.ACTION_SCREEN_ON);
+                        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
@@ -127,5 +194,5 @@ public class ModSmartRadio {
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
-    }
+    } 
 }

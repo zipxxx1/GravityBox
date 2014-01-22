@@ -975,14 +975,6 @@
     <string name="nrt_bg_style_dark">Dark</string>
     <string name="nrt_bg_style_black">Black</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Do nothing</string>
-    <string name="smart_radio_action_summary">Switch to %s</string>
-    <string name="pref_cat_smart_radio_title">Smart radio</string>
-    <string name="pref_smart_radio_experimental_summary">EXPERIMENTAL! May affect manual network mode switching</string>
-    <string name="pref_smart_radio_on_data_enabled_title">On mobile data enabled</string>
-    <string name="pref_smart_radio_on_data_disabled_title">On mobile data disabled</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contains Pie related settings</string>
 
@@ -1055,5 +1047,15 @@
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Swap with menu key</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Undefined</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_enable_summary">This will automatically switch your radio to user-defined power saving mode or normal mode 
+        depending on mobile data and WiFi connection states (requires reboot)</string>
+    <string name="pref_smart_radio_normal_mode_title">Normal network mode</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Power saving network mode</string>
+    <string name="pref_smart_radio_screen_off_title">When screen turns off</string>
+    <string name="pref_smart_radio_screen_off_summary">Activates power saving mode when screen turns off regardless if mobile data is enabled or disabled</string>
 
 </resources>
