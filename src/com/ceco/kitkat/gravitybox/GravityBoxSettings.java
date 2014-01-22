@@ -578,11 +578,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_RING_TARGET_APP = "ringTargetApp";
     public static final String EXTRA_RING_TARGET_BG_STYLE = "ringTargetBgStyle";
 
-    public static final String PREF_KEY_SMART_RADIO_ON_DATA_ENABLED = "pref_smart_radio_on_data_enabled";
-    public static final String PREF_KEY_SMART_RADIO_ON_DATA_DISABLED = "pref_smart_radio_on_data_disabled";
+    public static final String PREF_KEY_SMART_RADIO_ENABLE = "pref_smart_radio_enable";
+    public static final String PREF_KEY_SMART_RADIO_NORMAL_MODE = "pref_smart_radio_normal_mode";
+    public static final String PREF_KEY_SMART_RADIO_POWER_SAVING_MODE = "pref_smart_radio_power_saving_mode";
+    public static final String PREF_KEY_SMART_RADIO_SCREEN_OFF = "pref_smart_radio_screen_off";
     public static final String ACTION_PREF_SMART_RADIO_CHANGED = "gravitybox.intent.action.SMART_RADIO_CHANGED";
-    public static final String EXTRA_SR_ON_DATA_ENABLED = "smartRadioOnDataEnabled";
-    public static final String EXTRA_SR_ON_DATA_DISABLED = "smartRadioOnDataDisabled";
+    public static final String EXTRA_SR_NORMAL_MODE = "smartRadioNormalMode";
+    public static final String EXTRA_SR_POWER_SAVING_MODE = "smartRadioPowerSavingMode";
+    public static final String EXTRA_SR_SCREEN_OFF = "smartRadioScreenOff";
 
     public static final String PREF_KEY_IME_FULLSCREEN_DISABLE = "pref_ime_fullscreen_disable";
     public static final String PREF_KEY_TORCH_AUTO_OFF = "pref_torch_auto_off";
@@ -612,7 +615,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY,
             PREF_KEY_NAVBAR_RING_TARGETS_ENABLE,
             PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON,
-            PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM
+            PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM,
+            PREF_KEY_SMART_RADIO_ENABLE
     ));
 
     private static final class SystemProperties {
@@ -2058,14 +2062,18 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
                 intent.putExtra(EXTRA_DT_INACTIVITY_MODE, Integer.valueOf(
                         prefs.getString(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE, "0")));
-            } else if (key.equals(PREF_KEY_SMART_RADIO_ON_DATA_ENABLED)) {
+            } else if (key.equals(PREF_KEY_SMART_RADIO_NORMAL_MODE)) {
                 intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
-                intent.putExtra(EXTRA_SR_ON_DATA_ENABLED,
-                        prefs.getInt(PREF_KEY_SMART_RADIO_ON_DATA_ENABLED, -1));
-            } else if (key.equals(PREF_KEY_SMART_RADIO_ON_DATA_DISABLED)) {
+                intent.putExtra(EXTRA_SR_NORMAL_MODE,
+                        prefs.getInt(PREF_KEY_SMART_RADIO_NORMAL_MODE, -1));
+            } else if (key.equals(PREF_KEY_SMART_RADIO_POWER_SAVING_MODE)) {
                 intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
-                intent.putExtra(EXTRA_SR_ON_DATA_DISABLED,
-                        prefs.getInt(PREF_KEY_SMART_RADIO_ON_DATA_DISABLED, -1));
+                intent.putExtra(EXTRA_SR_POWER_SAVING_MODE,
+                        prefs.getInt(PREF_KEY_SMART_RADIO_POWER_SAVING_MODE, -1));
+            } else if (key.equals(PREF_KEY_SMART_RADIO_SCREEN_OFF)) {
+                intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
+                intent.putExtra(EXTRA_SR_SCREEN_OFF,
+                        prefs.getBoolean(PREF_KEY_SMART_RADIO_SCREEN_OFF, false));
             } else if (key.equals(PREF_KEY_LOCKSCREEN_BACKGROUND)) {
                 intent.setAction(ACTION_PREF_LOCKSCREEN_BG_CHANGED);
                 intent.putExtra(EXTRA_LOCKSCREEN_BG,

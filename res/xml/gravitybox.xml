@@ -1193,26 +1193,34 @@
 
             <PreferenceScreen
                 android:key="pref_cat_smart_radio"
-                android:title="@string/pref_cat_smart_radio_title"
-                android:summary="@string/pref_smart_radio_experimental_summary">
+                android:title="@string/pref_cat_smart_radio_title" >
 
-                <Preference
-                    android:key="pref_smart_radio_experimental"
+                <SwitchPreference
+                    android:key="pref_smart_radio_enable"
                     android:title=""
-                    android:summary="@string/pref_smart_radio_experimental_summary"
-                    android:persistent="false" />
+                    android:summary="@string/pref_smart_radio_enable_summary"
+                    android:defaultValue="false" />
 
                 <com.ceco.kitkat.gravitybox.preference.NetworkModePreference
-                    android:key="pref_smart_radio_on_data_enabled"
-                    android:title="@string/pref_smart_radio_on_data_enabled_title"
-                    android:summary="@string/smart_radio_action_do_nothing"
-                    android:defaultValue="-1" />
+                    android:key="pref_smart_radio_normal_mode"
+                    android:title="@string/pref_smart_radio_normal_mode_title"
+                    android:summary="@string/smart_radio_action_undefined"
+                    android:defaultValue="-1"
+                    android:dependency="pref_smart_radio_enable" />
 
                 <com.ceco.kitkat.gravitybox.preference.NetworkModePreference
-                    android:key="pref_smart_radio_on_data_disabled"
-                    android:title="@string/pref_smart_radio_on_data_disabled_title"
-                    android:summary="@string/smart_radio_action_do_nothing"
-                    android:defaultValue="-1" />
+                    android:key="pref_smart_radio_power_saving_mode"
+                    android:title="@string/pref_smart_radio_power_saving_mode_title"
+                    android:summary="@string/smart_radio_action_undefined"
+                    android:defaultValue="-1"
+                    android:dependency="pref_smart_radio_enable" />
+
+                <CheckBoxPreference 
+                    android:key="pref_smart_radio_screen_off"
+                    android:title="@string/pref_smart_radio_screen_off_title"
+                    android:summary="@string/pref_smart_radio_screen_off_summary"
+                    android:defaultValue="false"
+                    android:dependency="pref_smart_radio_enable" />
 
             </PreferenceScreen>
 

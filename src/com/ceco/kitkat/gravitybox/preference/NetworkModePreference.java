@@ -118,9 +118,8 @@ public class NetworkModePreference extends DialogPreference implements OnItemCli
     }
 
     private String getSummaryFromValue(int value) {
-        return (value == -1 ? mDefaultSummaryText :
-            String.format(mContext.getString(R.string.smart_radio_action_summary),
-                    PhoneWrapper.getNetworkModeNameFromValue(value)));
+        return (value == -1 ? 
+                mDefaultSummaryText : PhoneWrapper.getNetworkModeNameFromValue(value));
     }
 
     class NetworkModeItem implements IIconListAdapterItem {
@@ -135,9 +134,8 @@ public class NetworkModePreference extends DialogPreference implements OnItemCli
         @Override
         public String getText() {
             return mNetworkMode == -1 ? 
-                    mContext.getString(R.string.smart_radio_action_do_nothing) :
-                        String.format(mContext.getString(R.string.smart_radio_action_summary,
-                                PhoneWrapper.getNetworkModeNameFromValue(mNetworkMode)));
+                    mContext.getString(R.string.smart_radio_action_undefined) :
+                        PhoneWrapper.getNetworkModeNameFromValue(mNetworkMode);
         }
 
         @Override
