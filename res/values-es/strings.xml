@@ -1011,8 +1011,8 @@
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">No definidio</string>
     <string name="pref_cat_smart_radio_title">Modo de red inteligente</string>
-    <string name="pref_smart_radio_enable_summary">Esto cambiará automáticamente tu modo de red a un perfil de ahorro de energía definido por el usuario o a modo normal 
-        dependiendo en el estado de conexión con datos móviles y WiFi (requiere reinicio)</string>
+    <string name="pref_smart_radio_enable_summary">Se cambiará automáticamente el modo de red al perfil de ahorro de energía definido por el usuario o al modo normal 
+        dependiendo en el estado de conexión de los datos móviles y WiFi (requiere reinicio)</string>
     <string name="pref_smart_radio_normal_mode_title">Modo de red normal</string>
     <string name="pref_smart_radio_power_saving_mode_title">Modo de red en ahorro de energía</string>
     <string name="pref_smart_radio_screen_off_title">Cuando la pantalla se apague</string>
