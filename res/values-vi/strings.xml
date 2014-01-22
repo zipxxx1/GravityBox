@@ -542,7 +542,7 @@
     <string name="pref_navbar_enable_summary">Cần khởi động lại</string>
     <string name="pref_navbar_height_title">Chiều cao thanh điều hướng</string>
     <string name="pref_navbar_height_summary">Áp dụng cho thanh điều hướng ngang và thiết bị đứng</string>
-    <string name="pref_navbar_height_landscape_summary">Áp dụng cho thanh điều hướng ngang và thiết bị nằm</string>
+    <string name="pref_navbar_hCho phép đặt màu nền cho thanh trạng tháieight_landscape_summary">Áp dụng cho thanh điều hướng ngang và thiết bị nằm</string>
     <string name="pref_navbar_width_title">Chiều rộng thanh điều hướng</string>
     <string name="pref_navbar_width_summary">Áp dụng cho thanh điều hướng dọc</string>
     <string name="pref_navbar_menukey_title">Luôn hiện nút Menu</string>
@@ -1033,5 +1033,26 @@
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Đổi chỗ nút âm lượng</string>
     <string name="pref_vol_swap_keys_summary">Hoán đổi vị trí hai nút âm lượng khi xoay màn hình</string>
+
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Hiệu ứng mờ</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Không giãn ô</string>
+    <string name="pref_qs_tile_span_disable_summary">Tắt tính năng giãn các ô người dùng, độ sáng và thiết lập khi nằm ngang</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Bắt buộc hiện nút Menu mở rộng</string>
+    <string name="pref_force_overflow_menu_button_summary">Cần khởi động lại</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Luôn ở dưới</string>
+    <string name="pref_navbar_always_on_bottom_summary">Bắt buộc hiện thanh điều hướng hiện ở phía dưới khi nằm ngang (cần khởi động lại)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Không thể dùng khi sử dụng các điểm trên vòng điều hướng</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Đổi chỗ với nút Menu</string>
 
 </resources>
