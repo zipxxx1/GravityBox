@@ -455,7 +455,8 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">拡張デスクトップモード</string>
     <string name="expanded_desktop_disabled">無効</string>
-    <string name="expanded_desktop_navbar">ナビバーを非表示</string>
+    <string name="expanded_desktop_navbar">ナビバーを隠す</string>
+    <string name="expanded_desktop_immersive_statusbar">ステータスバーのみ没入モード</string>
     <string name="expanded_desktop_both">半没入モード</string>
     <string name="expanded_desktop_immersive">没入モード</string>
     <string name="action_expanded_desktop_title">拡張デスクトップ</string>
