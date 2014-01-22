@@ -934,14 +934,6 @@
     <string name="nrt_bg_style_dark">Sombre</string>
     <string name="nrt_bg_style_black">Noir</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Ne rien faire</string>
-    <string name="smart_radio_action_summary">Commuter en %s</string>
-    <string name="pref_cat_smart_radio_title">Réseau intelligent</string>
-    <string name="pref_smart_radio_experimental_summary">EXPÉRIMENTAL ! Peut affecter la gestion manuelle du mode réseau</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Données mobiles activées</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Données mobiles désactivées</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Regroupe les paramètres liés aux touches flottantes (Pie control)</string>
 
@@ -1016,5 +1008,24 @@
     <!-- Phone: Non-intrusive incoming call -->
     <string name="pref_phone_nonintrusive_incoming_call_title">Appel entrant non-intrusif</string>
     <string name="pref_phone_nonintrusive_incoming_call_summary">Laisse les appels entrants en fond de tâche lors d\'interaction de l\'utilisateur</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Non défini</string>
+    <string name="pref_cat_smart_radio_title">Ondes radio intelligentes</string>
+    <string name="pref_smart_radio_enable_summary">Cela va automatiquement commuter vos paramètres de ROM radio soit en mode économie d\'énergie défini par l\'utilisateur soit en mode normal,
+        selon l\'état des connexions de données mobiles et Wifi (redémarrage nécessaire)</string>
+    <string name="pref_smart_radio_normal_mode_title">Mode réseau normal</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Mode réseau économie d\'énergie</string>
+    <string name="pref_smart_radio_screen_off_title">Lorsque l\'écran s\'éteint</string>
+    <string name="pref_smart_radio_screen_off_summary">Active le mode économie d\'énergie lorsque l\'écran s\'éteint sans tenir compte si les données mobiles sont activées ou non</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Personnaliser le texte du nom d\'opérateur</string>
+    <string name="carrier_text_default">Par défaut</string>
+    <string name="carrier_text_empty">Rien</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">Son pour batterie chargée</string>
+    <string name="pref_battery_charged_sound_summary">Joue un son lorsque la batterie est complètement chargée</string>
 
 </resources>
