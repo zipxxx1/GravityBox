@@ -934,14 +934,6 @@
     <string name="nrt_bg_style_dark">Тёмный</string>
     <string name="nrt_bg_style_black">Чёрный</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Ничего не делать</string>
-    <string name="smart_radio_action_summary">Переключиться на %s</string>
-    <string name="pref_cat_smart_radio_title">Умный радиомодуль</string>
-    <string name="pref_smart_radio_experimental_summary">ЭКСПЕРИМЕНТАЛЬНАЯ ФУНКЦИЯ! Может стать причиной некорректного переключения режима сети вручную</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Мобильные данные вкл</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Мобильные данные выкл</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Настройки веерного меню</string>
 
@@ -1016,5 +1008,15 @@
     <!-- Phone: Non-intrusive incoming call -->
     <string name="pref_phone_nonintrusive_incoming_call_title">Деликатный входящий</string>
     <string name="pref_phone_nonintrusive_incoming_call_summary">Получение входящих вызовов в фоне во время действий пользователя </string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Не определено</string>
+    <string name="pref_cat_smart_radio_title">Умное радио</string>
+    <string name="pref_smart_radio_enable_summary">Автоматическое переключение радиомодуля на установленный пользователем экономный или обычный режим, 
+        в зависимости от передачи мобильных данных и состояния соединения WiFi (необходима перезагрузка)</string>
+    <string name="pref_smart_radio_normal_mode_title">Обычный сетевой режим</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Экономный сетевой режим</string>
+    <string name="pref_smart_radio_screen_off_title">При отключении экрана</string>
+    <string name="pref_smart_radio_screen_off_summary">Активация экономного режима при отключении экрана, независимо от того, включена или выключена мобильная передача данных</string>
 
 </resources>
