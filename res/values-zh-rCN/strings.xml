@@ -472,6 +472,7 @@
     <string name="pref_expanded_desktop_title">扩展桌面模式</string>
     <string name="expanded_desktop_disabled">禁用</string>
     <string name="expanded_desktop_navbar">隐藏导航栏</string>
+    <string name="expanded_desktop_immersive_statusbar">浸式状态栏</string>
     <string name="expanded_desktop_both">半沉浸式</string>
     <string name="expanded_desktop_immersive">沉浸式</string>
     <string name="action_expanded_desktop_title">扩展桌面</string>
@@ -933,14 +934,6 @@
     <string name="nrt_bg_style_dark">暗</string>
     <string name="nrt_bg_style_black">黑</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">什么也不做</string>
-    <string name="smart_radio_action_summary">切换到 %s</string>
-    <string name="pref_cat_smart_radio_title">智能网络</string>
-    <string name="pref_smart_radio_experimental_summary">试验中！可能会影响网络的手动切换模式</string>
-    <string name="pref_smart_radio_on_data_enabled_title">启用移动数据</string>
-    <string name="pref_smart_radio_on_data_disabled_title">禁用移动数据</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">包含与 Pie 控制相关的设置</string>
     
@@ -1015,5 +1008,20 @@
     <!-- Phone: Non-intrusive incoming call -->
     <string name="pref_phone_nonintrusive_incoming_call_title">非打扰的来电</string>
     <string name="pref_phone_nonintrusive_incoming_call_summary">来电时用户交互过程中保持在后台</string>
+    
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">未定义</string>
+    <string name="pref_cat_smart_radio_title">智能网络</string>
+    <string name="pref_smart_radio_enable_summary">这会自动切换你的网络到用户自定义省电模式或正常模式 
+        根据移动数据和无线网络连接状态（需要重新启动）</string>
+    <string name="pref_smart_radio_normal_mode_title">正常网络模式</string>
+    <string name="pref_smart_radio_power_saving_mode_title">省电网络模式</string>
+    <string name="pref_smart_radio_screen_off_title">当屏幕关闭</string>
+    <string name="pref_smart_radio_screen_off_summary">当屏幕关闭激活省电模式，不管移动数据已启用或禁用</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">自定义载体文本</string>
+    <string name="carrier_text_default">默认</string>
+    <string name="carrier_text_empty">空</string>
 
 </resources>
