@@ -910,14 +910,6 @@
     <string name="nrt_bg_style_dark">Ciemny</string>
     <string name="nrt_bg_style_black">Czarny</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Nie rób nic</string>
-    <string name="smart_radio_action_summary">Przełącz na %s</string>
-    <string name="pref_cat_smart_radio_title">Smart radio</string>
-    <string name="pref_smart_radio_experimental_summary">EKSPERYMENTALNE!  Może mieć wpływ na ręczne przełączanie trybu sieciowego</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Przy włączonej transmisji danych</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Przy wyłączonej transmisji danych</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Zawiera ustawienia związane z Pie</string>
 
@@ -992,5 +984,23 @@
     <!-- Phone: Non-intrusive incoming call -->
     <string name="pref_phone_nonintrusive_incoming_call_title">Nieinwazyjne połączenie przychodzące</string>
     <string name="pref_phone_nonintrusive_incoming_call_summary">Utrzymuje połączenia przychodzące w tle w trakcie interakcji użytkownika</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Nieokreślone</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_enable_summary">Automatycznie przełącza radio w zdefiniowany przez użytkownika tryb oszczędzania energii lub tryb normalny, zależnie od stanu połączenia transmisji danych i WiFi (wymagany restart)</string>
+    <string name="pref_smart_radio_normal_mode_title">Normalny tryb sieci</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Tryb oszczędzania energii</string>
+    <string name="pref_smart_radio_screen_off_title">Gdy gaśnie ekran</string>
+    <string name="pref_smart_radio_screen_off_summary">Włącza tryb oszczędzania energii gdy gaśnie ekran, niezależnie od tego czy transmisja danych jest włączona lub wyłączona</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Własny tekst operatora</string>
+    <string name="carrier_text_default">Domyślny</string>
+    <string name="carrier_text_empty">Pusty</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">Dźwięk naładowanej baterii</string>
+    <string name="pref_battery_charged_sound_summary">Odtwarza dźwięk gdy bateria zostanie w pełni naładowana</string>
 
 </resources>
