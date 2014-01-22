@@ -193,6 +193,11 @@
                 android:entryValues="@array/lockscreen_sb_clock_values"
                 android:defaultValue="0" />
 
+            <EditTextPreference 
+                android:key="pref_lockscreen_carrier_text"
+                android:title="@string/pref_lockscreen_carrier_text_title"
+                android:defaultValue="" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>
