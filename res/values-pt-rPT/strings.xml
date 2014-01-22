@@ -457,6 +457,7 @@
     <string name="pref_expanded_desktop_title">Modo ambiente de trabalho expandido</string>
     <string name="expanded_desktop_disabled">Desativado</string>
     <string name="expanded_desktop_navbar">Ocultar Barra de Navegação</string>
+    <string name="expanded_desktop_immersive_statusbar">Barra de Status imersiva</string>
     <string name="expanded_desktop_both">Semi-imersivo</string>
     <string name="expanded_desktop_immersive">Imersivo</string>
     <string name="action_expanded_desktop_title">Ambiente de trabalho expandido</string>
@@ -913,14 +914,6 @@
     <string name="nrt_bg_style_dark">Escuro</string>
     <string name="nrt_bg_style_black">Preto</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Não fazer nada</string>
-    <string name="smart_radio_action_summary">Alternar para %s</string>
-    <string name="pref_cat_smart_radio_title">Rádio inteligente</string>
-    <string name="pref_smart_radio_experimental_summary">EXPERIMENTAL! Poderá afetar a comutação manual do modo de rede</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Quando dados móveis ativados</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Quando dados móveis desativados</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contém várias definições relacionadas com os controlos Pie</string>
 
@@ -998,5 +991,20 @@
     <!-- Phone: Non-intrusive incoming call -->
     <string name="pref_phone_nonintrusive_incoming_call_title">Chamada a receber não intrusiva</string>
     <string name="pref_phone_nonintrusive_incoming_call_summary">Mantém as chamadas a receber em plano de fundo durante a interação do utilizador</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Indefinido</string>
+    <string name="pref_cat_smart_radio_title">Rádio inteligente</string>
+    <string name="pref_smart_radio_enable_summary">Permite comutar automaticamente o modo de rede para modo de poupança de energia definido pelo utilizador ou modo normal 
+        tendo em consideração o estado da ligação de dados móvel ou Wi-Fi (necessário reiniciar)</string>
+    <string name="pref_smart_radio_normal_mode_title">Modo de rede normal</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Modo de rede com poupança de energia</string>
+    <string name="pref_smart_radio_screen_off_title">Quando o ecrã se desliga</string>
+    <string name="pref_smart_radio_screen_off_summary">Ativa o modo de poupança de energia quando o ecrã se desliga, indepentemente da ligação de dados móvel estar ativada ou desativada</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Nome do operador</string>
+    <string name="carrier_text_default">Padrão</string>
+    <string name="carrier_text_empty">Nenhum</string>
 
 </resources>
