@@ -17,12 +17,17 @@ package com.ceco.kitkat.gravitybox;
 
 import java.util.ArrayList;
 
+import de.robv.android.xposed.XposedBridge;
+import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.BatteryManager;
 
 public class BatteryInfoManager {
     private BatteryData mBatteryData;
     private ArrayList<BatteryStatusListener> mListeners;
+    private Context mGbContext;
+    private boolean mChargedSoundEnabled;
 
     class BatteryData {
         boolean charging;
@@ -33,11 +38,13 @@ public class BatteryInfoManager {
         void onBatteryStatusChanged(BatteryData batteryData);
     }
 
-    public BatteryInfoManager() {
+    public BatteryInfoManager(Context gbContext) {
+        mGbContext = gbContext;
         mBatteryData = new BatteryData();
         mBatteryData.charging = false;
         mBatteryData.level = 0;
         mListeners = new ArrayList<BatteryStatusListener>();
+        mChargedSoundEnabled = false;
     }
 
     public void registerListener(BatteryStatusListener listener) {
@@ -59,9 +66,26 @@ public class BatteryInfoManager {
         boolean newCharging = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
 
         if (mBatteryData.level != newLevel || mBatteryData.charging != newCharging) {
+            if (mChargedSoundEnabled && newLevel == 100 && mBatteryData.level == 99) {
+                playChargedSound();
+            }
+
             mBatteryData.level = newLevel;
             mBatteryData.charging = newCharging;
             notifyListeners();
+        }
+    }
+
+    public void setChargedSoundEnabled(boolean enabled) {
+        mChargedSoundEnabled = enabled;
+    }
+
+    private void playChargedSound() {
+        try {
+            MediaPlayer mp = MediaPlayer.create(mGbContext, R.raw.battery_charged);
+            mp.start();
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
     }
 }

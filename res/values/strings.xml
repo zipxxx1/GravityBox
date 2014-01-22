@@ -1024,4 +1024,8 @@
     <string name="carrier_text_default">Default</string>
     <string name="carrier_text_empty">Empty</string>
 
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">Battery charged sound</string>
+    <string name="pref_battery_charged_sound_summary">Plays sound when battery gets fully charged</string>
+
 </resources>

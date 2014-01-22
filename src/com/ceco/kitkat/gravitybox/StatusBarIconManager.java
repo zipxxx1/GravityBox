@@ -154,7 +154,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mIconCache = new HashMap<String, SoftReference<Drawable>>();
 
         initColorInfo();
-        mBatteryInfo = new BatteryInfoManager();
+        mBatteryInfo = new BatteryInfoManager(gbContext);
 
         mListeners = new ArrayList<IconManagerListener>();
     }
@@ -204,7 +204,15 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
             }
         } else if (intent.getAction().equals(Intent.ACTION_BATTERY_CHANGED)) {
             mBatteryInfo.updateBatteryInfo(intent);
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_CHARGED_SOUND_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_CHARGED_SOUND)) {
+            mBatteryInfo.setChargedSoundEnabled(intent.getBooleanExtra(
+                    GravityBoxSettings.EXTRA_BATTERY_CHARGED_SOUND, false));
         }
+    }
+
+    public BatteryInfoManager getBatteryInfoManager() {
+        return mBatteryInfo;
     }
 
     public void registerListener(IconManagerListener listener) {
