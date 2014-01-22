@@ -78,6 +78,8 @@ public class ModLockscreen {
             CLASS_PATH + ".KeyguardUpdateMonitor.BatteryStatus";
     private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
     private static final String CLASS_KG_ACTIVITY_LAUNCHER = CLASS_PATH + ".KeyguardActivityLauncher";
+    private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
+
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
     private static final boolean DEBUG_KIS = false;
@@ -161,6 +163,7 @@ public class ModLockscreen {
             final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, classLoader);
             final Class<?> kgActivityLauncherClass = XposedHelpers.findClass(CLASS_KG_ACTIVITY_LAUNCHER, classLoader);
             final Class<?> kgViewManagerHostClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER_HOST, classLoader);
+            final Class<?> carrierTextClass = XposedHelpers.findClass(CLASS_CARRIER_TEXT, classLoader);
 
             XposedHelpers.findAndHookMethod(kgViewManagerClass, "maybeCreateKeyguardLocked", 
                     boolean.class, boolean.class, Bundle.class, new XC_MethodHook() {
@@ -599,6 +602,15 @@ public class ModLockscreen {
                 }
             });
 
+            XposedBridge.hookAllMethods(carrierTextClass, "getCarrierTextForSimState", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    String carrierText = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
+                    if (carrierText != null && !carrierText.isEmpty()) {
+                        param.setResult(carrierText.trim());
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

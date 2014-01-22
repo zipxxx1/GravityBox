@@ -34,6 +34,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
@@ -199,6 +200,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_MENU_KEY = "pref_lockscreen_menu_key";
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
     public static final String PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK = "pref_lockscreen_statusbar_clock";
+    public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
     public static final String PREF_KEY_STATUSBAR_LOCK_POLICY = "pref_statusbar_lock_policy";
     public static final int SBL_POLICY_DEFAULT = 0;
     public static final int SBL_POLICY_UNLOCKED = 1;
@@ -802,6 +804,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private Preference mPrefLockscreenBgImage;
         private SeekBarPreference mPrefLockscreenBgOpacity;
         private CheckBoxPreference mPrefLockscreenBgBlurEffect;
+        private EditTextPreference mPrefLockscreenCarrierText;
         private File wallpaperImage;
         private File wallpaperTemporary;
         private File notifBgImagePortrait;
@@ -982,6 +985,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     (SeekBarPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY);
             mPrefLockscreenBgBlurEffect =
                     (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT);
+            mPrefLockscreenCarrierText = 
+                    (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER_TEXT);
 
             wallpaperImage = new File(getActivity().getFilesDir() + "/lockwallpaper"); 
             wallpaperTemporary = new File(getActivity().getCacheDir() + "/lockwallpaper.tmp");
@@ -1623,6 +1628,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_HWKEY_HOME_DOUBLETAP)) {
                 mPrefHwKeyHomeDoubletap.setSummary(mPrefHwKeyHomeDoubletap.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_CARRIER_TEXT)) {
+                String carrierText = mPrefLockscreenCarrierText.getText();
+                if (carrierText == null || carrierText.isEmpty()) {
+                    carrierText = getString(R.string.carrier_text_default);
+                } else if (carrierText.trim().isEmpty()) {
+                    carrierText = getString(R.string.carrier_text_empty);
+                }
+                mPrefLockscreenCarrierText.setSummary(carrierText);
             }
         }
 

@@ -1019,4 +1019,9 @@
     <string name="pref_smart_radio_screen_off_title">When screen turns off</string>
     <string name="pref_smart_radio_screen_off_summary">Activates power saving mode when screen turns off regardless if mobile data is enabled or disabled</string>
 
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Custom carrier text</string>
+    <string name="carrier_text_default">Default</string>
+    <string name="carrier_text_empty">Empty</string>
+
 </resources>
