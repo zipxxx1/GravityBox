@@ -542,7 +542,7 @@
     <string name="pref_navbar_enable_summary">Cần khởi động lại</string>
     <string name="pref_navbar_height_title">Chiều cao thanh điều hướng</string>
     <string name="pref_navbar_height_summary">Áp dụng cho thanh điều hướng ngang và thiết bị đứng</string>
-    <string name="pref_navbar_hCho phép đặt màu nền cho thanh trạng tháieight_landscape_summary">Áp dụng cho thanh điều hướng ngang và thiết bị nằm</string>
+    <string name="pref_navbar_height_landscape_summary">Áp dụng cho thanh điều hướng ngang và thiết bị nằm</string>
     <string name="pref_navbar_width_title">Chiều rộng thanh điều hướng</string>
     <string name="pref_navbar_width_summary">Áp dụng cho thanh điều hướng dọc</string>
     <string name="pref_navbar_menukey_title">Luôn hiện nút Menu</string>
@@ -788,7 +788,7 @@
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Kiểu biểu tượng trạng thái</string>
-    <string name="pref_status_icon_style_summary">Áp dụng cho các biểu tượng trạng thái như im lặng, rung, báo thức, vv...</string>
+    <string name="pref_status_icon_style_summary">Áp dụng cho các biểu tượng trạng thái như im lặng, rung, báo thức, vv&#8230;</string>
     <string name="icon_style_jb">JellyBean</string>
     <string name="icon_style_kk">KitKat</string>
 
