@@ -172,6 +172,7 @@
     <string name="lockscreen_bg_default">Sfondo predefinito</string>
     <string name="lockscreen_bg_color">Colore di riempimento</string>
     <string name="lockscreen_bg_image">Immagine personalizzata</string>
+    <string name="lockscreen_bg_last_screen">Ultima schermata</string>
     <string name="pref_lockscreen_bg_color_title">Imposta colore personalizzato</string>
     <string name="pref_lockscreen_bg_color_summary">Consente di impostare un colore di sfondo personalizzato per la schermata di blocco</string>
     <string name="pref_lockscreen_bg_image_title">Imposta immagine personalizzata</string>
@@ -991,8 +992,8 @@
     <string name="lockscreen_sb_clock_always_show">Visualizza sempre</string>
 
     <!-- QuickApp Tile #2 -->
-    <string name="pref_cat_quickapp_tile_2_title">impostazioni QuickApp 2</string>
-    <string name="qs_tile_quickapp_2">Quick App 2</string>
+    <string name="pref_cat_quickapp_tile_2_title">Impostazioni App Rapide 2</string>
+    <string name="qs_tile_quickapp_2">App Rapide 2</string>
 
     <!-- Force music volume control -->
     <string name="pref_vol_force_music_control_title">Forza controllo volume musica</string>
