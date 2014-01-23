@@ -1030,4 +1030,13 @@
     <string name="pref_battery_charged_sound_title">Battery charged sound</string>
     <string name="pref_battery_charged_sound_summary">Plays sound when battery gets fully charged</string>
 
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">Long-press actions</string>
+    <string name="pref_pie_back_longpress_title">Back key</string>
+    <string name="pref_pie_home_longpress_title">Home key</string>
+    <string name="pref_pie_recents_longpress_title">Recents key</string>
+    <string name="pref_pie_search_longpress_title">Search key</string>
+    <string name="pref_pie_menu_longpress_title">Menu key</string>
+    <string name="pref_pie_app_longpress_title">App launcher key</string>
+
 </resources>

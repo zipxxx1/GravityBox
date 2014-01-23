@@ -28,6 +28,7 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 
 import com.ceco.kitkat.gravitybox.R;
@@ -412,8 +413,10 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
                     }
                 }
                 if (newItem != mActiveItem) {
+                    removeCallbacks(mOnLongPressRunnable);
                     if (newItem != null) {
                         newItem.setSelected(true);
+                        postDelayed(mOnLongPressRunnable, ViewConfiguration.getLongPressTimeout());
                     }
                     if (mActiveItem != null) {
                         mActiveItem.setSelected(false);
@@ -438,6 +441,17 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
         }
         return true;
     }
+
+    private Runnable mOnLongPressRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mActiveItem != null) {
+                if (mActiveItem.onLongPressCall()) {
+                    PieLayout.this.exit();
+                }
+            }
+        }
+    };
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {

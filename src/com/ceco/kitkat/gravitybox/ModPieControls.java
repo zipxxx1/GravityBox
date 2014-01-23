@@ -153,6 +153,11 @@ public class ModPieControls {
                     mPieController.setTextColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_TEXT,
                             mGbContext.getResources().getColor(R.color.pie_text_color)));
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_BUTTON) &&
+                        intent.hasExtra(GravityBoxSettings.EXTRA_PIE_LONGPRESS_ACTION)) {
+                    mPieController.setLongPressAction(intent.getStringExtra(GravityBoxSettings.EXTRA_PIE_BUTTON),
+                            intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_LONGPRESS_ACTION, 0));
+                }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
                 mExpandedDesktopMode = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
