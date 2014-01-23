@@ -46,6 +46,7 @@ public class ModSmartRadio {
     private static State mCurrentState = State.UNKNOWN;
     private static boolean mIsScreenOff;
     private static boolean mPowerSaveWhenScreenOff;
+    private static boolean mIgnoreWhileLocked;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -64,6 +65,10 @@ public class ModSmartRadio {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF)) {
                     mPowerSaveWhenScreenOff = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF, false);
                     if (DEBUG) log("mPowerSaveWhenScreenOff = " + mPowerSaveWhenScreenOff);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_IGNORE_LOCKED)) {
+                    mIgnoreWhileLocked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SR_IGNORE_LOCKED, true);
+                    if (DEBUG) log("mIgnoreWhileLocked = " + mIgnoreWhileLocked);
                 }
             } else if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 boolean mobileDataEnabled = isMobileDataEnabled(); 
@@ -103,10 +108,15 @@ public class ModSmartRadio {
                 mIsScreenOff = true;
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
                 if (DEBUG) log("Screen turning on");
-                if (isMobileDataEnabled() && !isWifiConnected()) {
+                if (!mIgnoreWhileLocked && isMobileDataEnabled() && !isWifiConnected()) {
                     switchToState(State.NORMAL);
                 }
                 mIsScreenOff = false;
+            } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
+                if (DEBUG) log("Keyguard unlocked");
+                if (mIgnoreWhileLocked && isMobileDataEnabled() && !isWifiConnected()) {
+                    switchToState(State.NORMAL);
+                }
             }
         }
     };
@@ -190,6 +200,7 @@ public class ModSmartRadio {
             mNormalMode = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_NORMAL_MODE, -1);
             mPowerSavingMode = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_POWER_SAVING_MODE, -1);
             mPowerSaveWhenScreenOff = prefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_SCREEN_OFF, false);
+            mIgnoreWhileLocked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_IGNORE_LOCKED, true);
 
             XposedHelpers.findAndHookMethod(classSystemUIService, "onCreate", new XC_MethodHook() {
                 @Override
@@ -205,6 +216,7 @@ public class ModSmartRadio {
                         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
                         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
                         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+                        intentFilter.addAction(Intent.ACTION_USER_PRESENT);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
