@@ -1075,6 +1075,10 @@
     <string name="pref_pie_menu_longpress_title">Menu key</string>
     <string name="pref_pie_app_longpress_title">App launcher key</string>
 
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">Pulse notification delay</string>
+    <string name="pref_pulse_notification_delay_summary">Requires reboot</string>
+
     <!-- Key Action: Take screenshot -->
     <string name="hwkey_action_screenshot">Take screenshot</string>
 
