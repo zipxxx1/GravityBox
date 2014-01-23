@@ -1018,6 +1018,8 @@
     <string name="pref_smart_radio_power_saving_mode_title">Mode réseau économie d\'énergie</string>
     <string name="pref_smart_radio_screen_off_title">Lorsque l\'écran s\'éteint</string>
     <string name="pref_smart_radio_screen_off_summary">Active le mode économie d\'énergie lorsque l\'écran s\'éteint sans tenir compte si les données mobiles sont activées ou non</string>
+    <string name="pref_smart_radio_ignore_locked_title">Ignorer si verrouillé</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Lorsque l\'écran s\'allume, le mode économie d\'énergie ne sera pas désactivé avant que l\'appareil ne soit déverrouillé</string>
 
     <!-- Lockscreen: custom carrier text -->
     <string name="pref_lockscreen_carrier_text_title">Personnaliser le texte du nom d\'opérateur</string>
@@ -1027,5 +1029,14 @@
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Son pour batterie chargée</string>
     <string name="pref_battery_charged_sound_summary">Joue un son lorsque la batterie est complètement chargée</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">Actions avec appui long</string>
+    <string name="pref_pie_back_longpress_title">Touche Retour</string>
+    <string name="pref_pie_home_longpress_title">Touche Home</string>
+    <string name="pref_pie_recents_longpress_title">Touche Appli Récentes</string>
+    <string name="pref_pie_search_longpress_title">Touche Rechercher</string>
+    <string name="pref_pie_menu_longpress_title">Touche Menu</string>
+    <string name="pref_pie_app_longpress_title">Touche Lanceur d\'Appli</string>
 
 </resources>
