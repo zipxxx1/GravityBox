@@ -888,6 +888,42 @@
                 android:defaultValue="false" />
 
         <PreferenceCategory
+            android:key="pref_cat_pie_long_press"
+            android:title="@string/pref_cat_pie_long_press_title" >
+
+            <ListPreference
+                android:key="pref_pie_back_longpress"
+                android:title="@string/pref_pie_back_longpress_title"
+                android:defaultValue="0"/>
+
+            <ListPreference
+                android:key="pref_pie_home_longpress"
+                android:title="@string/pref_pie_home_longpress_title"
+                android:defaultValue="0"/>
+
+            <ListPreference
+                android:key="pref_pie_recents_longpress"
+                android:title="@string/pref_pie_recents_longpress_title"
+                android:defaultValue="0"/>
+
+            <ListPreference
+                android:key="pref_pie_search_longpress"
+                android:title="@string/pref_pie_search_longpress_title"
+                android:defaultValue="0"/>
+
+            <ListPreference
+                android:key="pref_pie_menu_longpress"
+                android:title="@string/pref_pie_menu_longpress_title"
+                android:defaultValue="0"/>
+
+            <ListPreference
+                android:key="pref_pie_app_longpress"
+                android:title="@string/pref_pie_app_longpress_title"
+                android:defaultValue="0"/>
+
+        </PreferenceCategory>
+
+        <PreferenceCategory
             android:key="pref_cat_pie_colors"
             android:title="@string/pref_cat_pie_colors_title">
 

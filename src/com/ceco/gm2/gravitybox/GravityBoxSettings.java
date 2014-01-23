@@ -370,6 +370,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_PIE_COLOR_SELECTED = "pref_pie_color_selected";
     public static final String PREF_KEY_PIE_COLOR_TEXT = "pref_pie_color_text";
     public static final String PREF_KEY_PIE_COLOR_RESET = "pref_pie_color_reset";
+    public static final String PREF_KEY_PIE_BACK_LONGPRESS = "pref_pie_back_longpress";
+    public static final String PREF_KEY_PIE_HOME_LONGPRESS = "pref_pie_home_longpress";
+    public static final String PREF_KEY_PIE_RECENTS_LONGPRESS = "pref_pie_recents_longpress";
+    public static final String PREF_KEY_PIE_SEARCH_LONGPRESS = "pref_pie_search_longpress";
+    public static final String PREF_KEY_PIE_MENU_LONGPRESS = "pref_pie_menu_longpress";
+    public static final String PREF_KEY_PIE_APP_LONGPRESS = "pref_pie_app_longpress";
     public static final int PIE_CUSTOM_KEY_OFF = 0;
     public static final int PIE_CUSTOM_KEY_SEARCH = 1;
     public static final int PIE_CUSTOM_KEY_APP_LAUNCHER = 2;
@@ -386,6 +392,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_PIE_COLOR_OUTLINE = "pieColorOutline";
     public static final String EXTRA_PIE_COLOR_SELECTED = "pieColorSelected";
     public static final String EXTRA_PIE_COLOR_TEXT = "pieColorText";
+    public static final String EXTRA_PIE_BUTTON = "pieButton";
+    public static final String EXTRA_PIE_LONGPRESS_ACTION = "pieLongpressAction";
 
     public static final String PREF_KEY_BUTTON_BACKLIGHT_MODE = "pref_button_backlight_mode";
     public static final String PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS = "pref_button_backlight_notifications";
@@ -840,6 +848,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ColorPickerPreference mPrefPieColorSelected;
         private ColorPickerPreference mPrefPieColorText;
         private Preference mPrefPieColorReset;
+        private ListPreference mPrefPieBackLongpress;
+        private ListPreference mPrefPieHomeLongpress;
+        private ListPreference mPrefPieRecentsLongpress;
+        private ListPreference mPrefPieSearchLongpress;
+        private ListPreference mPrefPieMenuLongpress;
+        private ListPreference mPrefPieAppLongpress;
         private CheckBoxPreference mPrefGbThemeDark;
         private ListPreference mPrefRecentClear;
         private ListPreference mPrefRambar;
@@ -1047,6 +1061,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefPieColorSelected = (ColorPickerPreference) findPreference(PREF_KEY_PIE_COLOR_SELECTED);
             mPrefPieColorText = (ColorPickerPreference) findPreference(PREF_KEY_PIE_COLOR_TEXT);
             mPrefPieColorReset = (Preference) findPreference(PREF_KEY_PIE_COLOR_RESET);
+            mPrefPieBackLongpress = (ListPreference) findPreference(PREF_KEY_PIE_BACK_LONGPRESS);
+            mPrefPieHomeLongpress = (ListPreference) findPreference(PREF_KEY_PIE_HOME_LONGPRESS);
+            mPrefPieRecentsLongpress = (ListPreference) findPreference(PREF_KEY_PIE_RECENTS_LONGPRESS);
+            mPrefPieSearchLongpress = (ListPreference) findPreference(PREF_KEY_PIE_SEARCH_LONGPRESS);
+            mPrefPieMenuLongpress = (ListPreference) findPreference(PREF_KEY_PIE_MENU_LONGPRESS);
+            mPrefPieAppLongpress = (ListPreference) findPreference(PREF_KEY_PIE_APP_LONGPRESS);
 
             mPrefGbThemeDark = (CheckBoxPreference) findPreference(PREF_KEY_GB_THEME_DARK);
             File file = new File(getActivity().getFilesDir() + "/" + FILE_THEME_DARK_FLAG);
@@ -1370,6 +1390,30 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNavbarCustomKeyLongpress.setEntryValues(actionEntryValues);
             mPrefNavbarCustomKeyDoubletap.setEntries(actionEntries);
             mPrefNavbarCustomKeyDoubletap.setEntryValues(actionEntryValues);
+
+            // remove unsupported actions for pie keys
+            actEntries.remove(getString(R.string.hwkey_action_back));
+            actEntryValues.remove(String.valueOf(HWKEY_ACTION_BACK));
+            actEntries.remove(getString(R.string.hwkey_action_home));
+            actEntryValues.remove(String.valueOf(HWKEY_ACTION_HOME));
+            actEntries.remove(getString(R.string.hwkey_action_menu));
+            actEntryValues.remove(String.valueOf(HWKEY_ACTION_MENU));
+            actEntries.remove(getString(R.string.hwkey_action_recent_apps));
+            actEntryValues.remove(String.valueOf(HWKEY_ACTION_RECENT_APPS));
+            actionEntries = actEntries.toArray(new CharSequence[actEntries.size()]);
+            actionEntryValues = actEntryValues.toArray(new CharSequence[actEntryValues.size()]);
+            mPrefPieBackLongpress.setEntries(actionEntries);
+            mPrefPieBackLongpress.setEntryValues(actionEntryValues);
+            mPrefPieHomeLongpress.setEntries(actionEntries);
+            mPrefPieHomeLongpress.setEntryValues(actionEntryValues);
+            mPrefPieRecentsLongpress.setEntries(actionEntries);
+            mPrefPieRecentsLongpress.setEntryValues(actionEntryValues);
+            mPrefPieSearchLongpress.setEntries(actionEntries);
+            mPrefPieSearchLongpress.setEntryValues(actionEntryValues);
+            mPrefPieMenuLongpress.setEntries(actionEntries);
+            mPrefPieMenuLongpress.setEntryValues(actionEntryValues);
+            mPrefPieAppLongpress.setEntries(actionEntries);
+            mPrefPieAppLongpress.setEntryValues(actionEntryValues);
 
             setDefaultValues();
         }
@@ -1723,6 +1767,25 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_HWKEY_HOME_DOUBLETAP)) {
                 mPrefHwKeyHomeDoubletap.setSummary(mPrefHwKeyHomeDoubletap.getEntry());
             }
+
+            if (key == null || key.equals(PREF_KEY_PIE_BACK_LONGPRESS)) {
+                mPrefPieBackLongpress.setSummary(mPrefPieBackLongpress.getEntry());
+            }
+            if (key == null || key.equals(PREF_KEY_PIE_HOME_LONGPRESS)) {
+                mPrefPieHomeLongpress.setSummary(mPrefPieHomeLongpress.getEntry());
+            }
+            if (key == null || key.equals(PREF_KEY_PIE_RECENTS_LONGPRESS)) {
+                mPrefPieRecentsLongpress.setSummary(mPrefPieRecentsLongpress.getEntry());
+            }
+            if (key == null || key.equals(PREF_KEY_PIE_SEARCH_LONGPRESS)) {
+                mPrefPieSearchLongpress.setSummary(mPrefPieSearchLongpress.getEntry());
+            }
+            if (key == null || key.equals(PREF_KEY_PIE_MENU_LONGPRESS)) {
+                mPrefPieMenuLongpress.setSummary(mPrefPieMenuLongpress.getEntry());
+            }
+            if (key == null || key.equals(PREF_KEY_PIE_APP_LONGPRESS)) {
+                mPrefPieAppLongpress.setSummary(mPrefPieAppLongpress.getEntry());
+            }
         }
 
         @Override
@@ -2007,6 +2070,36 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_COLOR_TEXT, prefs.getInt(PREF_KEY_PIE_COLOR_TEXT, 
                         getResources().getColor(R.color.pie_text_color)));
+            } else if (key.equals(PREF_KEY_PIE_BACK_LONGPRESS)) {
+                intent.setAction(ACTION_PREF_PIE_CHANGED);
+                intent.putExtra(EXTRA_PIE_BUTTON, "BACK");
+                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                        prefs.getString(PREF_KEY_PIE_BACK_LONGPRESS, "0")));
+            } else if (key.equals(PREF_KEY_PIE_HOME_LONGPRESS)) {
+                intent.setAction(ACTION_PREF_PIE_CHANGED);
+                intent.putExtra(EXTRA_PIE_BUTTON, "HOME");
+                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                        prefs.getString(PREF_KEY_PIE_HOME_LONGPRESS, "0")));
+            } else if (key.equals(PREF_KEY_PIE_RECENTS_LONGPRESS)) {
+                intent.setAction(ACTION_PREF_PIE_CHANGED);
+                intent.putExtra(EXTRA_PIE_BUTTON, "RECENT");
+                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                        prefs.getString(PREF_KEY_PIE_RECENTS_LONGPRESS, "0")));
+            } else if (key.equals(PREF_KEY_PIE_SEARCH_LONGPRESS)) {
+                intent.setAction(ACTION_PREF_PIE_CHANGED);
+                intent.putExtra(EXTRA_PIE_BUTTON, "SEARCH");
+                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                        prefs.getString(PREF_KEY_PIE_SEARCH_LONGPRESS, "0")));
+            } else if (key.equals(PREF_KEY_PIE_MENU_LONGPRESS)) {
+                intent.setAction(ACTION_PREF_PIE_CHANGED);
+                intent.putExtra(EXTRA_PIE_BUTTON, "MENU");
+                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                        prefs.getString(PREF_KEY_PIE_MENU_LONGPRESS, "0")));
+            } else if (key.equals(PREF_KEY_PIE_APP_LONGPRESS)) {
+                intent.setAction(ACTION_PREF_PIE_CHANGED);
+                intent.putExtra(EXTRA_PIE_BUTTON, "APP_LAUNCHER");
+                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                        prefs.getString(PREF_KEY_PIE_APP_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_BUTTON_BACKLIGHT_MODE)) {
                 intent.setAction(ACTION_PREF_BUTTON_BACKLIGHT_CHANGED);
                 intent.putExtra(EXTRA_BB_MODE, prefs.getString(

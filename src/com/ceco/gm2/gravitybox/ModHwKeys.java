@@ -84,6 +84,10 @@ public class ModHwKeys {
     public static final String EXTRA_MEDIA_CONTROL = "mediaControl";
     public static final String ACTION_KILL_FOREGROUND_APP = "gravitybox.intent.action.KILL_FOREGROUND_APP";
     public static final String ACTION_SWITCH_PREVIOUS_APP = "gravitybox.intent.action.SWICTH_PREVIOUS_APP";
+    public static final String ACTION_SEARCH = "gravitybox.intent.action.SEARCH";
+    public static final String ACTION_VOICE_SEARCH = "gravitybox.intent.action.VOICE_SEARCH";
+    public static final String ACTION_LAUNCH_APP = "gravitybox.intent.action.LAUNCH_APP";
+    public static final String EXTRA_APP_ID = "launchAppId";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
 
@@ -318,6 +322,12 @@ public class ModHwKeys {
                 killForegroundApp();
             } else if (action.equals(ACTION_SWITCH_PREVIOUS_APP) && mPhoneWindowManager != null) {
                 switchToLastApp();
+            } else if (action.equals(ACTION_SEARCH)) {
+                launchSearchActivity();
+            } else if (action.equals(ACTION_VOICE_SEARCH)) {
+                launchVoiceSearchActivity();
+            } else if (action.equals(ACTION_LAUNCH_APP) && intent.hasExtra(EXTRA_APP_ID)) {
+                launchCustomApp(intent.getIntExtra(EXTRA_APP_ID, GravityBoxSettings.HWKEY_ACTION_CUSTOM_APP));
             }
         }
     };
@@ -786,6 +796,9 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_MEDIA_CONTROL);
             intentFilter.addAction(ACTION_KILL_FOREGROUND_APP);
             intentFilter.addAction(ACTION_SWITCH_PREVIOUS_APP);
+            intentFilter.addAction(ACTION_SEARCH);
+            intentFilter.addAction(ACTION_VOICE_SEARCH);
+            intentFilter.addAction(ACTION_LAUNCH_APP);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
