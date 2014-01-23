@@ -60,6 +60,7 @@ public class ModStatusBar {
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
     private static final String CLASS_STATUSBAR_NOTIF = "android.service.notification.StatusBarNotification";
+    private static final String CLASS_NETWORK_CONTROLLER = "com.android.systemui.statusbar.policy.NetworkController";
     private static final boolean DEBUG = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
@@ -93,6 +94,8 @@ public class ModStatusBar {
     private static TrafficMeter mTrafficMeter;
     private static ViewGroup mSbContents;
     private static boolean mClockInSbContents = false;
+    private static TextView mCarrierTextView;
+    private static String mCarrierText;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -193,6 +196,10 @@ public class ModStatusBar {
                 }
             } else if (intent.getAction().equals(ACTION_START_SEARCH_ASSIST)) {
                 startSearchAssist();
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_CARRIER_TEXT_CHANGED) &&
+                    intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_CARRIER_TEXT)) {
+                mCarrierText = intent.getStringExtra(GravityBoxSettings.EXTRA_NOTIF_CARRIER_TEXT);
+                updateCarrierTextView();
             }
         }
     };
@@ -437,6 +444,7 @@ public class ModStatusBar {
             final Class<?> phoneStatusBarPolicyClass = 
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_POLICY, classLoader);
             final Class<?> powerManagerClass = XposedHelpers.findClass(CLASS_POWER_MANAGER, classLoader);
+            final Class<?> networkControllerClass = XposedHelpers.findClass(CLASS_NETWORK_CONTROLLER, classLoader);
 
             final Class<?>[] loadAnimParamArgs = new Class<?>[2];
             loadAnimParamArgs[0] = int.class;
@@ -445,6 +453,7 @@ public class ModStatusBar {
             mBrightnessControlEnabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_STATUSBAR_BRIGHTNESS, false);
             mOngoingNotif = prefs.getString(GravityBoxSettings.PREF_KEY_ONGOING_NOTIFICATIONS, "");
+            mCarrierText = prefs.getString(GravityBoxSettings.PREF_KEY_NOTIF_CARRIER_TEXT, null);
 
             XposedBridge.hookAllConstructors(phoneStatusBarPolicyClass, new XC_MethodHook() {
                 @Override
@@ -477,6 +486,7 @@ public class ModStatusBar {
                     mAnimPushUpOut = res.getIdentifier("push_up_out", "anim", "android");
                     mAnimPushDownIn = res.getIdentifier("push_down_in", "anim", "android");
                     mAnimFadeIn = res.getIdentifier("fade_in", "anim", "android");
+                    mCarrierTextView = (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierLabel");
 
                     mScreenWidth = (float) res.getDisplayMetrics().widthPixels;
                     mMinBrightness = res.getInteger(res.getIdentifier(
@@ -489,6 +499,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER_TEXT_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
@@ -609,6 +620,22 @@ public class ModStatusBar {
                     if (mOngoingNotif.contains(notifData)) {
                         param.setResult(null);
                         if (DEBUG) log("Ongoing notification " + notifData + " blocked.");
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(networkControllerClass, "refreshViews", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mCarrierTextView == null || mCarrierText == null ||
+                            mCarrierText.isEmpty()) return;
+
+                    if (mCarrierText.trim().isEmpty()) {
+                        mCarrierTextView.setText("");
+                        mCarrierTextView.setVisibility(View.GONE);
+                    } else {
+                        mCarrierTextView.setText(mCarrierText);
+                        mCarrierTextView.setVisibility(View.VISIBLE);
                     }
                 }
             });
@@ -804,6 +831,19 @@ public class ModStatusBar {
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static void updateCarrierTextView() {
+        if (mPhoneStatusBar == null) return;
+
+        try {
+            Object nwCtrl = XposedHelpers.getObjectField(mPhoneStatusBar, "mNetworkController");
+            if (nwCtrl != null) {
+                XposedHelpers.callMethod(nwCtrl, "refreshViews");
+            }
+        } catch (Throwable t) {
+            log("Error updating carrier text view: " + t.getMessage());
         }
     }
 }
