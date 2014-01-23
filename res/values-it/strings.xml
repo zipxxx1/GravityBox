@@ -453,6 +453,7 @@
     <string name="pref_expanded_desktop_title">Modalità Desktop esteso</string>
     <string name="expanded_desktop_disabled">Disattivato</string>
     <string name="expanded_desktop_navbar">Nascondi barra di navigazione</string>
+    <string name="expanded_desktop_immersive_statusbar">Barra di stato Immersive</string>
     <string name="expanded_desktop_both">Nascondi entrambe</string>
     <string name="expanded_desktop_immersive">Modalità Immersive</string>
     <string name="action_expanded_desktop_title">Desktop esteso</string>
@@ -913,14 +914,6 @@
     <string name="nrt_bg_style_dark">Scuro</string>
     <string name="nrt_bg_style_black">Nero</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Non fare nulla</string>
-    <string name="smart_radio_action_summary">Cambia a %s</string>
-    <string name="pref_cat_smart_radio_title">Modem intelligente</string>
-    <string name="pref_smart_radio_experimental_summary">SPERIMENTALE! Potrebbe interferire se si cambia manualmente la modalità di rete.</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Dati mobili abilitati</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Dati mobili disabilitati</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Attiva e personalizza il Pie control</string>
     
@@ -998,5 +991,24 @@
     <!-- Phone: Non-intrusive incoming call -->
     <string name="pref_phone_nonintrusive_incoming_call_title">Chiamate in entrata non invasive</string>
     <string name="pref_phone_nonintrusive_incoming_call_summary">Mette le chiamate in entrata in secondo piano durante l\'interazione utente</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Invariato</string>
+    <string name="pref_cat_smart_radio_title">Modem intelligente</string>
+    <string name="pref_smart_radio_enable_summary">Questa funzione permette al modem del proprio dispositivo di passare automaticamente da un profilo personale di risparmio energetico alla modalità normale
+        a seconda dello stato di connessione della rete mobile o Wi-Fi (richiede riavvio)</string>
+    <string name="pref_smart_radio_normal_mode_title">Modalità rete normale</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Modalità rete risparmio energetico</string>
+    <string name="pref_smart_radio_screen_off_title">A schermo spento</string>
+    <string name="pref_smart_radio_screen_off_summary">Attiva la modalità risparmio energetivo quando lo schermo viene spento a prescindere che i dati mobili siano attivi o meno</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Testo operatore personalizzato</string>
+    <string name="carrier_text_default">Predefinito</string>
+    <string name="carrier_text_empty">Vuoto</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">Notifica batteria carica</string>
+    <string name="pref_battery_charged_sound_summary">Riproduce un suono quando la batteria raggiunge il livello massimo di carica</string>
 
 </resources>
