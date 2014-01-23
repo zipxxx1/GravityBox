@@ -1325,8 +1325,8 @@ public class ModHwKeys {
                         if (mScreenshotConnection != this) {  
                             return;  
                         }  
-                        Messenger messenger = new Messenger(service);  
-                        Message msg = Message.obtain(null, 1);  
+                        final Messenger messenger = new Messenger(service);  
+                        final Message msg = Message.obtain(null, 1);  
                         final ServiceConnection myConn = this;  
                                                 
                         Handler h = new Handler(handler.getLooper()) {  
@@ -1343,11 +1343,16 @@ public class ModHwKeys {
                         };  
                         msg.replyTo = new Messenger(h);  
                         msg.arg1 = msg.arg2 = 0;  
-                        try {  
-                            messenger.send(msg);  
-                        } catch (RemoteException e) {
-                            XposedBridge.log(e);
-                        }  
+                        h.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    messenger.send(msg);
+                                } catch (RemoteException e) {
+                                    XposedBridge.log(e);
+                                }
+                            }
+                        }, 1000);
                     }  
                 }  
                 @Override  

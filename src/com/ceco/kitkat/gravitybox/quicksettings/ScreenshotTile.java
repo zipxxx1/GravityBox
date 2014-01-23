@@ -20,7 +20,6 @@ import com.ceco.kitkat.gravitybox.R;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.view.View;
 
 public class ScreenshotTile extends BasicTile {
@@ -32,13 +31,8 @@ public class ScreenshotTile extends BasicTile {
             @Override
             public void onClick(View v) {
                 collapsePanels();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
-                        mContext.sendBroadcast(intent);
-                    }
-                }, 1000);
+                Intent intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
+                mContext.sendBroadcast(intent);
             }
         };
 
