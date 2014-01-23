@@ -611,6 +611,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_TORCH_AUTO_OFF = "pref_torch_auto_off";
     public static final String PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON = "pref_force_overflow_menu_button";
 
+    public static final String PREF_KEY_PULSE_NOTIFICATION_DELAY = "pref_pulse_notification_delay";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -637,7 +639,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_NAVBAR_RING_TARGETS_ENABLE,
             PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON,
             PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM,
-            PREF_KEY_SMART_RADIO_ENABLE
+            PREF_KEY_SMART_RADIO_ENABLE,
+            PREF_KEY_PULSE_NOTIFICATION_DELAY
     ));
 
     private static final class SystemProperties {
@@ -645,6 +648,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public boolean isTablet;
         public boolean hasNavigationBar;
         public boolean unplugTurnsOnScreen;
+        public int defaultNotificationLedOff;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -658,6 +662,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (data.containsKey("unplugTurnsOnScreen")) {
                 unplugTurnsOnScreen = data.getBoolean("unplugTurnsOnScreen");
+            }
+            if (data.containsKey("defaultNotificationLedOff")) {
+                defaultNotificationLedOff = data.getInt("defaultNotificationLedOff");
             }
         }
     }
@@ -955,6 +962,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SwitchPreference mPrefNavbarRingTargetsEnable;
         private AppPickerPreference[] mPrefNavbarRingTarget;
         private ListPreference mPrefNavbarRingTargetsBgStyle;
+        private SeekBarPreference mPrefPulseNotificationDelay;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1209,6 +1217,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatNavbarRingTargets.addPreference(mPrefNavbarRingTarget[i]);
             }
 
+            mPrefPulseNotificationDelay = (SeekBarPreference) findPreference(PREF_KEY_PULSE_NOTIFICATION_DELAY);
+
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
                 mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
@@ -1415,6 +1425,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             value = mPrefs.getBoolean(PREF_KEY_UNPLUG_TURNS_ON_SCREEN, sSystemProperties.unplugTurnsOnScreen);
             mPrefs.edit().putBoolean(PREF_KEY_UNPLUG_TURNS_ON_SCREEN, value).commit();
             mPrefUnplugTurnsOnScreen.setChecked(value);
+
+            if (!mPrefs.getBoolean(PREF_KEY_PULSE_NOTIFICATION_DELAY + "_set", false)) {
+                int delay = Math.min(Math.max(sSystemProperties.defaultNotificationLedOff/1000, 1), 20);
+                Editor editor = mPrefs.edit();
+                editor.putInt(PREF_KEY_PULSE_NOTIFICATION_DELAY, delay);
+                editor.putBoolean(PREF_KEY_PULSE_NOTIFICATION_DELAY + "_set", true);
+                editor.commit();
+                mPrefPulseNotificationDelay.setDefaultValue(delay);
+                mPrefPulseNotificationDelay.setValue(delay);
+            }
         }
 
         private void updatePreferences(String key) {

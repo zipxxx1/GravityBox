@@ -120,7 +120,7 @@ public class SeekBarPreference extends Preference
         mMinimum = minimum >= mMaximum ? mMaximum - 1 : minimum;
     }
 
-    private void setValue(int progress){
+    public void setValue(int progress){
         mValue = progress;
         persistInt(mValue);
         if (mBar != null)
