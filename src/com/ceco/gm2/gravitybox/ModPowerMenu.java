@@ -31,7 +31,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -58,7 +57,6 @@ public class ModPowerMenu {
     private static final boolean DEBUG = false;
 
     private static Context mContext;
-    private static Handler mHandler;
     private static String mRebootStr;
     private static String mRebootSoftStr;
     private static String mRecoveryStr;
@@ -99,7 +97,6 @@ public class ModPowerMenu {
                @Override
                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                    mContext = (Context) param.args[0];
-                   mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
                    Context gbContext = mContext.createPackageContext(
                            GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
                    Resources res = mContext.getResources();
@@ -250,7 +247,7 @@ public class ModPowerMenu {
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWERMENU_SCREENSHOT, false)) {
                         if (mScreenshotAction == null) {
                             mScreenshotAction = Proxy.newProxyInstance(classLoader, new Class<?>[] { actionClass },
-                                new ScreenshotAction(mHandler));
+                                new ScreenshotAction());
                             if (DEBUG) log("mScreenshotAction created");
                         }
                         mItems.add(index++, mScreenshotAction);
@@ -509,21 +506,10 @@ public class ModPowerMenu {
 
     private static class ScreenshotAction implements InvocationHandler {
         private Context mContext;
-        private Handler mHandler;
-
-        public ScreenshotAction(Handler handler) {
-            mHandler = handler;
-        }
 
         private void takeScreenshot() {
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
-                    mContext.sendBroadcast(intent);
-                }
-                
-            }, 1000);
+            Intent intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
+            mContext.sendBroadcast(intent);
         }
 
         @Override

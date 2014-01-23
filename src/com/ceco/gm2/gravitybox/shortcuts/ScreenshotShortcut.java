@@ -57,14 +57,7 @@ public class ScreenshotShortcut extends AShortcut {
     }
 
     public static void launchAction(final Context context, Intent intent) {
-        // delay screenshot by half a second
-        Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent launchIntent = new Intent(ACTION);
-                context.sendBroadcast(launchIntent);
-            }
-        }, 500);
+        Intent launchIntent = new Intent(ACTION);
+        context.sendBroadcast(launchIntent);
     }
 }
