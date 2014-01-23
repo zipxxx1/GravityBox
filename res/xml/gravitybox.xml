@@ -1234,6 +1234,13 @@
                     android:defaultValue="false"
                     android:dependency="pref_smart_radio_enable" />
 
+                <CheckBoxPreference 
+                    android:key="pref_smart_radio_ignore_locked"
+                    android:title="@string/pref_smart_radio_ignore_locked_title"
+                    android:summary="@string/pref_smart_radio_ignore_locked_summary"
+                    android:defaultValue="true"
+                    android:dependency="pref_smart_radio_enable" />
+
             </PreferenceScreen>
 
             <!--

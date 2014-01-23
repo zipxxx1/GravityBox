@@ -1057,5 +1057,7 @@
     <string name="pref_smart_radio_power_saving_mode_title">Power saving network mode</string>
     <string name="pref_smart_radio_screen_off_title">When screen turns off</string>
     <string name="pref_smart_radio_screen_off_summary">Activates power saving mode when screen turns off regardless if mobile data is enabled or disabled</string>
+    <string name="pref_smart_radio_ignore_locked_title">Ignore while locked</string>
+    <string name="pref_smart_radio_ignore_locked_summary">When screen turns on, power saving mode won\'t be deactivated until keyuguard is unlocked</string>
 
 </resources>
