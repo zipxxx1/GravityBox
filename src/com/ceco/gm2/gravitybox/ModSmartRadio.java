@@ -42,6 +42,7 @@ public class ModSmartRadio {
     private static int mPowerSavingMode;
     private static ConnectivityManager mConnManager;
     private static boolean mWasMobileDataEnabled;
+    private static boolean mWasMobileNetworkAvailable;
     private static State mCurrentState = State.UNKNOWN;
     private static boolean mIsScreenOff;
     private static boolean mPowerSaveWhenScreenOff;
@@ -66,6 +67,7 @@ public class ModSmartRadio {
                 }
             } else if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 boolean mobileDataEnabled = isMobileDataEnabled(); 
+                boolean mobileNetworkAvailable = isMobileNetworkAvailable();
                 int nwType = intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, -1);
                 if (nwType == -1) return;
                 NetworkInfo nwInfo = mConnManager.getNetworkInfo(nwType);
@@ -85,8 +87,13 @@ public class ModSmartRadio {
                     } else if (mWasMobileDataEnabled && !mobileDataEnabled) {
                         if (DEBUG) log("Mobile data got disabled");
                         switchToState(State.POWER_SAVING);
+                    } else if (!mWasMobileNetworkAvailable && mobileNetworkAvailable &&
+                            mobileDataEnabled && !wifiConnected) {
+                        if (DEBUG) log("Mobile network got available and data active");
+                        switchToState(State.NORMAL, true);
                     }
                     mWasMobileDataEnabled = mobileDataEnabled;
+                    mWasMobileNetworkAvailable = mobileNetworkAvailable;
                 }
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
                 if (DEBUG) log("Screen turning off");
@@ -112,6 +119,14 @@ public class ModSmartRadio {
         }
     }
 
+    private static boolean isMobileNetworkAvailable() {
+        try {
+            return mConnManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isAvailable();
+        } catch (Throwable t) {
+            return false;
+        }
+    }
+
     private static boolean isWifiConnected() {
         try {
             return mConnManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
@@ -127,6 +142,9 @@ public class ModSmartRadio {
     private static void switchToState(State newState, boolean force) {
         if (mCurrentState == newState && !force) {
             if (DEBUG) log("switchToState: new state == previous state - ignoring");
+            return;
+        } else if (!isMobileNetworkAvailable()) {
+            if (DEBUG) log("switchToState: mobile network unavailable - ignoring");
             return;
         } else if (DEBUG) {
             log("Switching to state: " + newState);
