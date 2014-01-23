@@ -1018,5 +1018,16 @@
     <string name="pref_smart_radio_power_saving_mode_title">Экономный сетевой режим</string>
     <string name="pref_smart_radio_screen_off_title">При отключении экрана</string>
     <string name="pref_smart_radio_screen_off_summary">Активация экономного режима при отключении экрана, независимо от того, включена или выключена мобильная передача данных</string>
+    <string name="pref_smart_radio_ignore_locked_title">Игнорировать при блокировке</string>
+    <string name="pref_smart_radio_ignore_locked_summary">При включении экрана экономный режим не активируется, пока экран не будет разблокирован</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Свой текст в поле оператора</string>
+    <string name="carrier_text_default">По умолчанию</string>
+    <string name="carrier_text_empty">Пусто</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">Оповещение о зарядке</string>
+    <string name="pref_battery_charged_sound_summary">Воспроизведение звукового оповещения, когда батарея полностью заряжена</string>
 
 </resources>
