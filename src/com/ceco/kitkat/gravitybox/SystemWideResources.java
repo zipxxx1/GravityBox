@@ -30,6 +30,11 @@ public class SystemWideResources {
 
             XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, null);
 
+            int translucentDecor = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_TRANSLUCENT_DECOR, "0"));
+            if (translucentDecor != 0) {
+                XResources.setSystemWideReplacement("android", "bool", "config_enableTranslucentDecor", translucentDecor == 1);
+            }
+
             boolean holoBgDither = prefs.getBoolean(GravityBoxSettings.PREF_KEY_HOLO_BG_DITHER, false);
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_HOLO_BG_SOLID_BLACK, false)) {
                 XResources.setSystemWideReplacement(
