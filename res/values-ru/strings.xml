@@ -1067,4 +1067,7 @@
     <!-- Key Action: Take screenshot -->
     <string name="hwkey_action_screenshot">Снимок экрана</string>
 
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">Панель громкости</string>
+
 </resources>
