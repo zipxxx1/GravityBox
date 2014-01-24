@@ -1029,5 +1029,17 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Inverti con il tasto menù</string>
 
+     <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Invariato</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_enable_summary">Questa funzione permette al modem del proprio dispositivo di passare automaticamente da un profilo personale di risparmio energetico alla modalità normale
+        a seconda dello stato di connessione della rete mobile o Wi-Fi (richiede riavvio)</string>
+    <string name="pref_smart_radio_normal_mode_title">Modalità rete normale</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Modalità rete risparmio energetico</string>
+    <string name="pref_smart_radio_screen_off_title">A schermo spento</string>
+    <string name="pref_smart_radio_screen_off_summary">Attiva la modalità risparmio energetivo quando lo schermo viene spento a prescindere che i dati mobili siano attivi o meno</string>
+    <string name="pref_smart_radio_ignore_locked_title">Ignora mentre è bloccato</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Quando lo schermo si accende la modalità risparmio energetico non sarà disattivata fino a quando non lo si è sbloccato</string>
+
 
 </resources>
