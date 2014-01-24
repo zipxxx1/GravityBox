@@ -1023,4 +1023,15 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">メニューキーと入れ替え</string>
     
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">未定義</string>
+    <string name="pref_cat_smart_radio_title">スマートネットワーク</string>
+    <string name="pref_smart_radio_enable_summary">モバイルデータ通信とWi-Fi接続状況に応じてネットワークモードを自動的に省電力モードか通常モードに切り替える機能です。(要再起動)</string>
+    <string name="pref_smart_radio_normal_mode_title">通常モード</string>
+    <string name="pref_smart_radio_power_saving_mode_title">省電力モード</string>
+    <string name="pref_smart_radio_screen_off_title">画面オフ時</string>
+    <string name="pref_smart_radio_screen_off_summary">モバイルデータ通信の有効/無効に関わらず画面がオフになったときに省電力モードに変更します。</string>
+    <string name="pref_smart_radio_ignore_locked_title">ロック中は無視する</string>
+    <string name="pref_smart_radio_ignore_locked_summary">画面がオンになったときロックを解除するまで通常モードに変更しないようにします。</string>
+    
 </resources>
