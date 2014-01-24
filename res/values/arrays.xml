@@ -206,6 +206,7 @@
         <item>@string/hwkey_action_show_power_menu</item>
         <item>@string/hwkey_action_expand_notifications</item>
         <item>@string/hwkey_action_expand_quicksettings</item>
+        <item>@string/hwkey_action_volume_panel</item>
     </string-array>
 
     <string-array name="hwkey_action_values" translatable="false">
@@ -230,6 +231,7 @@
         <item>17</item>
         <item>18</item>
         <item>19</item>
+        <item>21</item>
     </string-array>
 
     <string-array name="hwkey_doubletap_speed_entries" translatable="false">
