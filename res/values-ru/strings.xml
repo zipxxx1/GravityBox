@@ -747,10 +747,10 @@
     <string name="pref_pie_color_reset_title">Сбросить цвета</string>
 
     <!-- Custom unknown caller photo -->
-    <string name="pref_caller_unknown_photo_enable_title">Включить фото неизвестного</string>
-    <string name="pref_caller_unknown_photo_title">Задать фото</string>
-    <string name="caller_unknown_photo_result_successful">Фото изменено</string>
-    <string name="caller_unkown_photo_result_not_successful">Фото не изменено</string>
+    <string name="pref_caller_unknown_photo_enable_title">Изображ.на контакт без фото</string>
+    <string name="pref_caller_unknown_photo_title">Задать изображение</string>
+    <string name="caller_unknown_photo_result_successful">Изображение изменено</string>
+    <string name="caller_unkown_photo_result_not_successful">Изображение не изменено</string>
 
     <!-- Minimum screen brightness warning -->
     <string name="screen_brightness_min_warning">Ваш экран может не поддерживать значения меньше 20. Если Ваш экран не загорается,
