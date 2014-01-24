@@ -1049,7 +1049,7 @@
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Nem meghatározott</string>
     <string name="pref_cat_smart_radio_title">Okos rádiókapcsolat</string>
-    <string name="pref_smart_radio_enable_summary">Automatikusan átkapcsolja a rádiókapcsolatot felhasználó által definiált energiatakarékos üzemmódba vagy normál üzemmódba a Mobil adatátvitel és Wifi kapcsolatok állapotától függően (újraindítás szükséges)/string>
+    <string name="pref_smart_radio_enable_summary">Automatikusan átkapcsolja a rádiókapcsolatot felhasználó által definiált energiatakarékos üzemmódba vagy normál üzemmódba a Mobil adatátvitel és Wifi kapcsolatok állapotától függően (újraindítás szükséges)</string>
     <string name="pref_smart_radio_normal_mode_title">Normál hálózati üzemmód</string>
     <string name="pref_smart_radio_power_saving_mode_title">Energiatakarékos hálózati üzemmód</string>
     <string name="pref_smart_radio_screen_off_title">Képernyő kikapcsolásakor</string>
