@@ -1020,6 +1020,8 @@
     <string name="pref_smart_radio_screen_off_summary">当屏幕关闭激活省电模式，不管移动数据已启用或禁用</string>
     <string name="pref_smart_radio_ignore_locked_title">忽略锁定</string>
     <string name="pref_smart_radio_ignore_locked_summary">当屏幕开启时省电模式不会被停用，直到键盘锁定解锁</string>
+    <string name="pref_smart_radio_mode_change_delay_title">网络模式改变延迟</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">网络模式改变延迟指定秒数</string>
 
     <!-- Lockscreen: custom carrier text -->
     <string name="pref_lockscreen_carrier_text_title">自定义载体文本</string>
@@ -1048,5 +1050,24 @@
     <!-- Pulse notification delay -->
     <string name="pref_pulse_notification_delay_title">跳动延迟通知</string>
     <string name="pref_pulse_notification_delay_summary">需要重新启动</string>
+    
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">清除所有最近任务动作</string>
+    <string name="pref_clear_recents_mode_0">单击清除全部，长按清除目前所有</string>
+    <string name="pref_clear_recents_mode_1">单击清除目前所有，长按清除全部</string>
+
+    <!-- Powe menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">禁用锁屏上的电源菜单</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">系统默认</string>
+    <string name="overflow_menu_enabled">强制开启</string>
+    <string name="overflow_menu_disabled">强制关闭</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">使用截图</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">显示音量面板</string>
 
 </resources>
