@@ -1046,4 +1046,15 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Pozíció felcserélése menü gombbal</string>
 
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Nem meghatározott</string>
+    <string name="pref_cat_smart_radio_title">Okos rádiókapcsolat</string>
+    <string name="pref_smart_radio_enable_summary">Automatikusan átkapcsolja a rádiókapcsolatot felhasználó által definiált energiatakarékos üzemmódba vagy normál üzemmódba a Mobil adatátvitel és Wifi kapcsolatok állapotától függően (újraindítás szükséges)/string>
+    <string name="pref_smart_radio_normal_mode_title">Normál hálózati üzemmód</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Energiatakarékos hálózati üzemmód</string>
+    <string name="pref_smart_radio_screen_off_title">Képernyő kikapcsolásakor</string>
+    <string name="pref_smart_radio_screen_off_summary">Aktiválja az energiatakarékos üzemmódot a képernyő kikapcsolásakor függetlenül attól, hogy a mobil adatátvitel engedélyezve van, vagy letiltva</string>
+    <string name="pref_smart_radio_ignore_locked_title">Figyelmen kívül hagy, amíg zárolva van</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Képernyő bekapcsoláskor az energiatakarékos üzemmód nem kerül kikapcsolára, amíg a billentyűzár kioldásra nem kerül</string>
+
 </resources>
