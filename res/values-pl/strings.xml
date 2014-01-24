@@ -993,6 +993,10 @@
     <string name="pref_smart_radio_power_saving_mode_title">Tryb oszczędzania energii</string>
     <string name="pref_smart_radio_screen_off_title">Gdy gaśnie ekran</string>
     <string name="pref_smart_radio_screen_off_summary">Włącza tryb oszczędzania energii gdy gaśnie ekran, niezależnie od tego czy transmisja danych jest włączona lub wyłączona</string>
+    <string name="pref_smart_radio_ignore_locked_title">Ignoruj​​, gdy zablokowany</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Po włączeniu ekranu tryb oszczędzania energii pozostanie aktywny aż do momentu odblokowania</string>
+    <string name="pref_smart_radio_mode_change_delay_title">Opóźnienie zmiany trybu sieciowego</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">Opóźnia zmianę trybu sieciowego o określoną liczbę sekund</string>
 
     <!-- Lockscreen: custom carrier text -->
     <string name="pref_lockscreen_carrier_text_title">Własny tekst operatora</string>
@@ -1002,5 +1006,43 @@
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Dźwięk naładowanej baterii</string>
     <string name="pref_battery_charged_sound_summary">Odtwarza dźwięk gdy bateria zostanie w pełni naładowana</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">Akcje długiego naciśnięcia</string>
+    <string name="pref_pie_back_longpress_title">Klawisz BACK</string>
+    <string name="pref_pie_home_longpress_title">Klawisz HOME</string>
+    <string name="pref_pie_recents_longpress_title">Klawisz RECENTS</string>
+    <string name="pref_pie_search_longpress_title">Klawisz SEARCH</string>
+    <string name="pref_pie_menu_longpress_title">Klawisz MENU</string>
+    <string name="pref_pie_app_longpress_title">Klawisz startera aplikacji</string>
+
+    <!-- Translucent decor options -->
+    <string name="pref_translucent_decor_title">Półprzezroczysty motyw</string>
+    <string name="pref_translucent_decor_default">Domyślny systemu</string>
+    <string name="pref_translucent_decor_enabled">Włączony</string>
+    <string name="pref_translucent_decor_disabled">Wyłączony</string>
+
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">Opóźnienie impulsów powiadomień LED </string>
+    <string name="pref_pulse_notification_delay_summary">Wymagany restart</string>
+
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">Sposób czyszczenia aktualnych zadań</string>
+    <string name="pref_clear_recents_mode_0">Dotknij, aby usunąć wszystkie lub przytrzymaj, aby usunąć wszystkie z wyjątkiem bieżącego zadania</string>
+    <string name="pref_clear_recents_mode_1">Dotknij, aby usunąć wszystkie z wyjątkiem bieżącego zadania lub przytrzymaj, aby usunąć wszystkie</string>
+
+    <!-- Powe menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">Wyłącz menu zasilania na ekranie blokady</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">Domyślne systemu</string>
+    <string name="overflow_menu_enabled">Wymuś włączone</string>
+    <string name="overflow_menu_disabled">Wymuś wyłączone</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">Zrzut ekranu</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">Pokaż panel głośności</string>
 
 </resources>
