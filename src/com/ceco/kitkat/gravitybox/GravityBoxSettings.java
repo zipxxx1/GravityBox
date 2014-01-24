@@ -112,6 +112,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_REBOOT_CONFIRM_REQUIRED = "pref_reboot_confirm_required";
     public static final String PREF_KEY_POWERMENU_SCREENSHOT = "pref_powermenu_screenshot";
     public static final String PREF_KEY_POWERMENU_SCREENRECORD = "pref_powermenu_screenrecord";
+    public static final String PREF_KEY_POWERMENU_DISABLE_ON_LOCKSCREEN = "pref_powermenu_disable_on_lockscreen";
 
     public static final String PREF_KEY_VOL_KEY_CURSOR_CONTROL = "pref_vol_key_cursor_control";
     public static final int VOL_KEY_CURSOR_CONTROL_OFF = 0;

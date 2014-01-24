@@ -1020,6 +1020,11 @@
             android:title="@string/pref_cat_power_menu_title">
 
             <CheckBoxPreference 
+                android:key="pref_powermenu_disable_on_lockscreen"
+                android:title="@string/pref_powermenu_disable_on_lockscreen_title"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference 
                 android:key="pref_poweroff_advanced"
                 android:title="@string/poweroff_advanced_title"
                 android:summary="@string/poweroff_advanced_summary"
