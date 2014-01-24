@@ -87,7 +87,7 @@
     <string name="qs_tile_volume">Volume</string>
     <string name="qs_tile_expanded_desktop">Desktop esteso</string>
     <string name="qs_tile_stay_awake">Rimane acceso</string>
-    <string name="qs_tile_screenshot">Fotografa schermo</string>
+    <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Fotocamera</string>
     <string name="qs_tile_usb_tethering">Tethering USB</string>
@@ -461,7 +461,7 @@
     <string name="action_expanded_desktop_off">Desktop esteso è SPENTO</string>
 
     <!-- Power menu screenshot -->
-    <string name="screenshot">Fotografa schermo</string>
+    <string name="screenshot">Screenshot</string>
 
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Mostra menù</string>
@@ -484,7 +484,7 @@
     <string name="pref_navbar_menukey_title">Mostra sempre tasto menù</string>
 
     <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Fotografa schermo in menù spegnimento</string>
+    <string name="pref_powermenu_screenshot_title">Screenshot in menù spegnimento</string>
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Scorciatoie schermata di blocco</string>
@@ -1001,6 +1001,10 @@
     <string name="pref_smart_radio_power_saving_mode_title">Modalità rete risparmio energetico</string>
     <string name="pref_smart_radio_screen_off_title">A schermo spento</string>
     <string name="pref_smart_radio_screen_off_summary">Attiva la modalità risparmio energetivo quando lo schermo viene spento a prescindere che i dati mobili siano attivi o meno</string>
+    <string name="pref_smart_radio_ignore_locked_title">Ignora quando bloccato</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Quando lo schermo viene acceso, la modalità risparmio energetico non verrà disattivata fino a quando non si inserirà il codice di sblocco</string>
+    <string name="pref_smart_radio_mode_change_delay_title">Ritardo cambio modalità rete</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">Specifica i secondi da attendere prima del cambio della modalità di rete</string>
 
     <!-- Lockscreen: custom carrier text -->
     <string name="pref_lockscreen_carrier_text_title">Testo operatore personalizzato</string>
@@ -1010,5 +1014,43 @@
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Notifica batteria carica</string>
     <string name="pref_battery_charged_sound_summary">Riproduce un suono quando la batteria raggiunge il livello massimo di carica</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">Azione pressione prolungata</string>
+    <string name="pref_pie_back_longpress_title">Tasto Indietro</string>
+    <string name="pref_pie_home_longpress_title">Tasto Home</string>
+    <string name="pref_pie_recents_longpress_title">Tasto Recenti</string>
+    <string name="pref_pie_search_longpress_title">Tasto Cerca</string>
+    <string name="pref_pie_menu_longpress_title">Tasto Menù</string>
+    <string name="pref_pie_app_longpress_title">Tasto personalizzato</string>
+
+    <!-- Translucent decor options -->
+    <string name="pref_translucent_decor_title">Trasparenza barra stato e navigazione</string>
+    <string name="pref_translucent_decor_default">Predefinito di sistema</string>
+    <string name="pref_translucent_decor_enabled">Abilitato</string>
+    <string name="pref_translucent_decor_disabled">Disabilitato</string>
+
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">Ritardo LED di notifica</string>
+    <string name="pref_pulse_notification_delay_summary">Richiede riavvio</string>
+
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">Modalità pulisci attività recenti</string>
+    <string name="pref_clear_recents_mode_0">Tocca per pulire tutto, pressione prolungata per pulire tutto tranne quella corrente</string>
+    <string name="pref_clear_recents_mode_1">Tocca per pulire tutto tranne quella corrente, pressione prolungata per pulire tutto</string>
+
+    <!-- Powe menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">Disabilita menù spegnimento in schermata di blocco</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">Predefinito di sistema</string>
+    <string name="overflow_menu_enabled">Forza attivazione</string>
+    <string name="overflow_menu_disabled">Forza disattivazione</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">Acquisisci screenshot</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">Mostra pannello volume</string>
 
 </resources>
