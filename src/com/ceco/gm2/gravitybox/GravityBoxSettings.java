@@ -305,6 +305,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int HWKEY_ACTION_SHOW_POWER_MENU = 16;
     public static final int HWKEY_ACTION_EXPAND_NOTIFICATIONS = 17;
     public static final int HWKEY_ACTION_EXPAND_QUICKSETTINGS = 18;
+    public static final int HWKEY_ACTION_SCREENSHOT = 19;
     public static final int HWKEY_DOUBLETAP_SPEED_DEFAULT = 400;
     public static final int HWKEY_KILL_DELAY_DEFAULT = 1000;
     public static final int HWKEY_TORCH_DISABLED = 0;
