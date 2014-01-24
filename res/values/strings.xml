@@ -1092,6 +1092,11 @@
     <!-- Power menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Disable power menu on lockscreen</string>
 
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">System default</string>
+    <string name="overflow_menu_enabled">Force enable</string>
+    <string name="overflow_menu_disabled">Force disable</string>
+
     <!-- Key Action: Take screenshot -->
     <string name="hwkey_action_screenshot">Take screenshot</string>
 
