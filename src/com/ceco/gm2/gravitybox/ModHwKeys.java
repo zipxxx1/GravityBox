@@ -34,6 +34,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.os.Build;
+import android.media.AudioManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -88,6 +89,7 @@ public class ModHwKeys {
     public static final String ACTION_VOICE_SEARCH = "gravitybox.intent.action.VOICE_SEARCH";
     public static final String ACTION_LAUNCH_APP = "gravitybox.intent.action.LAUNCH_APP";
     public static final String EXTRA_APP_ID = "launchAppId";
+    public static final String ACTION_SHOW_VOLUME_PANEL = "gravitybox.intent.action.SHOW_VOLUME_PANEL";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
 
@@ -328,6 +330,8 @@ public class ModHwKeys {
                 launchVoiceSearchActivity();
             } else if (action.equals(ACTION_LAUNCH_APP) && intent.hasExtra(EXTRA_APP_ID)) {
                 launchCustomApp(intent.getIntExtra(EXTRA_APP_ID, GravityBoxSettings.HWKEY_ACTION_CUSTOM_APP));
+            } else if (action.equals(ACTION_SHOW_VOLUME_PANEL)) {
+                showVolumePanel();
             }
         }
     };
@@ -799,6 +803,7 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_SEARCH);
             intentFilter.addAction(ACTION_VOICE_SEARCH);
             intentFilter.addAction(ACTION_LAUNCH_APP);
+            intentFilter.addAction(ACTION_SHOW_VOLUME_PANEL);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -1022,6 +1027,8 @@ public class ModHwKeys {
             expandSettingsPanel();
         } else if (action == GravityBoxSettings.HWKEY_ACTION_SCREENSHOT) {
             takeScreenshot();
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_VOLUME_PANEL) {
+            showVolumePanel();
         }
     }
 
@@ -1411,6 +1418,21 @@ public class ModHwKeys {
             XposedHelpers.callMethod(sbService, "expandSettingsPanel");
         } catch (Throwable t) {
             log("Error executing expandSettingsPanel(): " + t.getMessage());
+        }
+    }
+
+    private static void showVolumePanel() {
+        try {
+            Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+                    am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
+                }
+            });
+        } catch (Throwable t) {
+            log("Error executing showVolumePanel: " + t.getMessage());
         }
     }
 }
