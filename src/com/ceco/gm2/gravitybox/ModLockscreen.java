@@ -39,6 +39,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -50,6 +51,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.Surface;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -201,6 +203,20 @@ public class ModLockscreen {
                                     public void onReceive(final Context context, Intent intent) {
                                         String kisImageFile = mGbContext.getFilesDir() + "/kis_image.png";
                                         Bitmap customBg = BitmapFactory.decodeFile(kisImageFile);
+
+                                        int rotation = Utils.SystemProp.getInt("ro.sf.hwrotation", 0);
+                                        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                                        switch (wm.getDefaultDisplay().getRotation()) {
+                                            case Surface.ROTATION_90: rotation -= 90; break;
+                                            case Surface.ROTATION_270: rotation += 90; break;
+                                            case Surface.ROTATION_180: rotation -= 180; break;
+                                        }
+                                        if (rotation != 0) {
+                                            Matrix matrix = new Matrix();
+                                            matrix.postRotate(rotation);
+                                            customBg = Bitmap.createBitmap(customBg, 0, 0, customBg.getWidth(), 
+                                                    customBg.getHeight(), matrix, true);
+                                        }
                                         if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
                                             customBg = Utils.blurBitmap(context, customBg);
                                         }
