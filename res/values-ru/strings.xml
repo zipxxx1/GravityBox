@@ -1048,4 +1048,16 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Поменять местами с меню</string>
 
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Не определено</string>
+    <string name="pref_cat_smart_radio_title">Умное радио</string>
+    <string name="pref_smart_radio_enable_summary">Автоматическое переключение радиомодуля на установленный пользователем экономный или обычный режим, 
+        в зависимости от передачи мобильных данных и состояния соединения WiFi (необходима перезагрузка)</string>
+    <string name="pref_smart_radio_normal_mode_title">Обычный сетевой режим</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Экономный сетевой режим</string>
+    <string name="pref_smart_radio_screen_off_title">При отключении экрана</string>
+    <string name="pref_smart_radio_screen_off_summary">Активация экономного режима при отключении экрана, независимо от того, включена или выключена мобильная передача данных</string>
+    <string name="pref_smart_radio_ignore_locked_title">Игнорировать при блокировке</string>
+    <string name="pref_smart_radio_ignore_locked_summary">При включении экрана экономный режим не активируется, пока экран не будет разблокирован</string>
+
 </resources>
