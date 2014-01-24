@@ -1009,6 +1009,8 @@ public class ModHwKeys {
             expandNotificationsPanel();
         } else if (action == GravityBoxSettings.HWKEY_ACTION_EXPAND_QUICKSETTINGS) {
             expandSettingsPanel();
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_SCREENSHOT) {
+            takeScreenshot();
         }
     }
 

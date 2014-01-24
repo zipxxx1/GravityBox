@@ -1064,4 +1064,7 @@
     <string name="overflow_menu_enabled">Force enable</string>
     <string name="overflow_menu_disabled">Force disable</string>
 
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">Take screenshot</string>
+
 </resources>
