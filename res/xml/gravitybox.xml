@@ -1227,6 +1227,18 @@
                     android:defaultValue="-1"
                     android:dependency="pref_smart_radio_enable" />
 
+                <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+                    android:key="pref_smart_radio_mode_change_delay"
+                    android:title="@string/pref_smart_radio_mode_change_delay_title"
+                    android:summary="@string/pref_smart_radio_mode_change_delay_summary"
+                    minimum="0"
+                    maximum="20"
+                    interval="1"
+                    monitorBoxEnabled="true"
+                    monitorBoxUnit="s" 
+                    android:defaultValue="5"
+                    android:dependency="pref_smart_radio_enable" />
+
                 <CheckBoxPreference 
                     android:key="pref_smart_radio_screen_off"
                     android:title="@string/pref_smart_radio_screen_off_title"
