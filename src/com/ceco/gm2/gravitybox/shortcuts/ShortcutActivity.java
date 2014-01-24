@@ -123,6 +123,8 @@ public class ShortcutActivity extends ListActivity {
             GpsShortcut.launchAction(mContext, intent);
         } else if (action.equals(GoogleNowShortcut.ACTION)) {
             GoogleNowShortcut.launchAction(mContext, intent);
+        } else if (action.equals(VolumePanelShortcut.ACTION)) {
+            VolumePanelShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -162,6 +164,7 @@ public class ShortcutActivity extends ListActivity {
         if (mInvokedFromGb) {
             list.add(new MediaControlShortcut(mContext));
         }
+        list.add(new VolumePanelShortcut(mContext));
         list.add(new RecentAppsShortcut(mContext));
         if (mInvokedFromGb) {
             list.add(new KillAppShortcut(mContext));
