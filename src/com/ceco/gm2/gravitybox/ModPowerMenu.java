@@ -156,7 +156,6 @@ public class ModPowerMenu {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mContext == null) return;
 
-                    prefs.reload();
                     mRebootConfirmRequired = prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_REBOOT_CONFIRM_REQUIRED, true);
                     mRebootAllowOnLockscreen = prefs.getBoolean(
@@ -265,6 +264,18 @@ public class ModPowerMenu {
                     }
 
                     mAdapter.notifyDataSetChanged();
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(globalActionsClass, "showDialog", 
+                    boolean.class, boolean.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    prefs.reload();
+                    if ((Boolean) param.args[0] && prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_POWERMENU_DISABLE_ON_LOCKSCREEN, false)) {
+                        param.setResult(null);
+                    }
                 }
             });
         } catch (Throwable t) {
