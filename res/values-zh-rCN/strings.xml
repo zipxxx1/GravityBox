@@ -481,7 +481,7 @@
 
     <!-- Device type -->
     <string name="device_phone">手机</string>
-    <string name="device_tablet">平板</string>
+    <string name="device_tablet">平板电脑</string>
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">亮度设置</string>
@@ -1047,5 +1047,17 @@
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">交换菜单键</string>
+    
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">未定义</string>
+    <string name="pref_cat_smart_radio_title">智能网络</string>
+    <string name="pref_smart_radio_enable_summary">这会自动切换你的网络到用户自定义省电模式或正常模式 
+        根据移动数据和无线网络连接状态（需要重新启动）</string>
+    <string name="pref_smart_radio_normal_mode_title">正常网络模式</string>
+    <string name="pref_smart_radio_power_saving_mode_title">省电网络模式</string>
+    <string name="pref_smart_radio_screen_off_title">当屏幕关闭</string>
+    <string name="pref_smart_radio_screen_off_summary">当屏幕关闭激活省电模式，不管移动数据已启用或禁用</string>
+    <string name="pref_smart_radio_ignore_locked_title">忽略锁定</string>
+    <string name="pref_smart_radio_ignore_locked_summary">当屏幕开启时省电模式不会被停用，直到键盘锁定解锁</string>
 
 </resources>
