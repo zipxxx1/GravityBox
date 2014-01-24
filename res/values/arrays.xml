@@ -792,4 +792,16 @@
         <item>1</item>
     </string-array>
 
+    <string-array name="overflow_menu_entries" translatable="false">
+        <item>@string/overflow_menu_default</item>
+        <item>@string/overflow_menu_enabled</item>
+        <item>@string/overflow_menu_disabled</item>
+    </string-array>
+
+    <string-array name="overflow_menu_values" translatable="false">
+        <item>default</item>
+        <item>enabled</item>
+        <item>disabled</item>
+    </string-array>
+
 </resources>

@@ -25,9 +25,10 @@ public class ModViewConfig {
 
     public static void initZygote(final XSharedPreferences prefs) {
         try {
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON, false)) {
+            final String mode = prefs.getString(GravityBoxSettings.PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON, "default");
+            if (!"default".equals(mode)) {
                 XposedHelpers.findAndHookMethod(ViewConfiguration.class, "hasPermanentMenuKey",
-                        XC_MethodReplacement.returnConstant(false));
+                        XC_MethodReplacement.returnConstant(!"enabled".equals(mode)));
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
