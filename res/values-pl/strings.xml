@@ -834,7 +834,7 @@
     <string name="pref_cat_power_other_title">Inne</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">Dozwolone na ekranie blokady</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">Dozwolony restart na ekranie blokady</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">Tryb braku aktywności</string>
@@ -993,14 +993,14 @@
     <string name="pref_smart_radio_power_saving_mode_title">Tryb oszczędzania energii</string>
     <string name="pref_smart_radio_screen_off_title">Gdy gaśnie ekran</string>
     <string name="pref_smart_radio_screen_off_summary">Włącza tryb oszczędzania energii gdy gaśnie ekran, niezależnie od tego czy transmisja danych jest włączona lub wyłączona</string>
-    <string name="pref_smart_radio_ignore_locked_title">Ignoruj​​, gdy zablokowany</string>
+    <string name="pref_smart_radio_ignore_locked_title">Ignoruj, gdy zablokowany</string>
     <string name="pref_smart_radio_ignore_locked_summary">Po włączeniu ekranu tryb oszczędzania energii pozostanie aktywny aż do momentu odblokowania</string>
     <string name="pref_smart_radio_mode_change_delay_title">Opóźnienie zmiany trybu sieciowego</string>
     <string name="pref_smart_radio_mode_change_delay_summary">Opóźnia zmianę trybu sieciowego o określoną liczbę sekund</string>
 
     <!-- Lockscreen: custom carrier text -->
     <string name="pref_lockscreen_carrier_text_title">Własny tekst operatora</string>
-    <string name="carrier_text_default">Domyślny</string>
+    <string name="carrier_text_default">Oryginalny</string>
     <string name="carrier_text_empty">Pusty</string>
 
     <!-- Battery charged sound -->
@@ -1036,8 +1036,8 @@
 
     <!-- Extended force overflow menu button option -->
     <string name="overflow_menu_default">Domyślne systemu</string>
-    <string name="overflow_menu_enabled">Wymuś włączone</string>
-    <string name="overflow_menu_disabled">Wymuś wyłączone</string>
+    <string name="overflow_menu_enabled">Włączone</string>
+    <string name="overflow_menu_disabled">Wyłączone</string>
 
     <!-- Key Action: Take screenshot -->
     <string name="hwkey_action_screenshot">Zrzut ekranu</string>
@@ -1045,4 +1045,7 @@
     <!-- Key Action: Show volume panel -->
     <string name="hwkey_action_volume_panel">Pokaż panel głośności</string>
 
+    <!-- Blur effect intensity -->
+    <string name="pref_lockscreen_bg_blur_intensity_title">Intensywność efektu rozmycia</string>
+    
 </resources>
