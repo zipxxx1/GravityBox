@@ -221,7 +221,8 @@ public class ModLockscreen {
                                                     customBg.getHeight(), matrix, true);
                                         }
                                         if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                                            customBg = Utils.blurBitmap(context, customBg);
+                                            customBg = Utils.blurBitmap(context, customBg, mPrefs.getInt(
+                                                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
                                         }
                                         final Drawable d = new BitmapDrawable(context.getResources(), customBg);
                                         // We have to make sure view is updated on UI thread
@@ -237,7 +238,8 @@ public class ModLockscreen {
                                 }, new IntentFilter(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED));
                             } else {
                                 if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                                    customBg = Utils.blurBitmap(context, customBg);
+                                    customBg = Utils.blurBitmap(context, customBg, mPrefs.getInt(
+                                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
                                 }
                                 Drawable d = new BitmapDrawable(context.getResources(), customBg);
                                 mLockScreenWallpaperImage.setImageDrawable(d);
