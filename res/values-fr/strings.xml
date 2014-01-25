@@ -858,7 +858,7 @@
     <string name="pref_cat_power_other_title">Autre</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">Actif sur écran de déverrouillage</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">Redémarrage autorisé depuis l\'écran de déverrouillage</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">Mode d\'inactivité</string>
@@ -1020,6 +1020,8 @@
     <string name="pref_smart_radio_screen_off_summary">Active le mode économie d\'énergie lorsque l\'écran s\'éteint sans tenir compte si les données mobiles sont activées ou non</string>
     <string name="pref_smart_radio_ignore_locked_title">Ignorer si verrouillé</string>
     <string name="pref_smart_radio_ignore_locked_summary">Lorsque l\'écran s\'allume, le mode économie d\'énergie ne sera pas désactivé avant que l\'appareil ne soit déverrouillé</string>
+    <string name="pref_smart_radio_mode_change_delay_title">Délai pour le changement de mode réseau</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">Retarde le changement de mode réseau par le nombre de secondes indiqué</string>
 
     <!-- Lockscreen: custom carrier text -->
     <string name="pref_lockscreen_carrier_text_title">Personnaliser le texte du nom d\'opérateur</string>
@@ -1038,5 +1040,34 @@
     <string name="pref_pie_search_longpress_title">Touche Rechercher</string>
     <string name="pref_pie_menu_longpress_title">Touche Menu</string>
     <string name="pref_pie_app_longpress_title">Touche Lanceur d\'Appli</string>
+
+    <!-- Translucent decor options -->
+    <string name="pref_translucent_decor_title">Décor translucide</string>
+    <string name="pref_translucent_decor_default">Valeur système par défaut</string>
+    <string name="pref_translucent_decor_enabled">Activé</string>
+    <string name="pref_translucent_decor_disabled">Désactivé</string>
+
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">Délai pulsation de notification</string>
+    <string name="pref_pulse_notification_delay_summary">Redémarrace nécessaire</string>
+
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">Comportement nettoyage de toutes les tâches récentes</string>
+    <string name="pref_clear_recents_mode_0">Taper pour tout nettoyer, appui long pour tout nettoyer sauf tâche en cours</string>
+    <string name="pref_clear_recents_mode_1">Taper pour tout nettoyer sauf tâche en cours, appui long pour tout nettoyer</string>
+
+    <!-- Powe menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">Désactiver le menu de redémarrage depuis écran de déverrouillage</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">Valeur système par défaut</string>
+    <string name="overflow_menu_enabled">Forcer l\'activation</string>
+    <string name="overflow_menu_disabled">Forcer la désactivation</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">Prendre une capture d\'écran</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">Afficher le panneau de volume</string>
 
 </resources>
