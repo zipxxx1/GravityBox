@@ -43,6 +43,7 @@ import com.ceco.gm2.gravitybox.GlowPadHelper.BgStyle;
 import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -212,14 +213,22 @@ public class ModNavigationBar {
                 });
 
                 XposedHelpers.findAndHookMethod(Resources.class, "loadXmlResourceParser",
-                        String.class, int.class, int.class, String.class, new XC_MethodHook() {
+                        String.class, int.class, int.class, String.class, new XC_MethodReplacement() {
                     @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if ("res/layout/navigation_bar.xml".equals(param.args[0])) {
-                            param.args[0] = "res/layout-sw600dp/navigation_bar.xml";
-                        } else if ("res/layout/status_bar_search_panel.xml".equals(param.args[0]) ||
-                                "res/layout-land/status_bar_search_panel.xml".equals(param.args[0])) {
-                            param.args[0] = "res/layout-sw600dp/status_bar_search_panel.xml";
+                    protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                        final String originalResPath = (String) param.args[0];
+                        try {
+                            if ("res/layout/navigation_bar.xml".equals(param.args[0])) {
+                                param.args[0] = "res/layout-sw600dp/navigation_bar.xml";
+                            } else if ("res/layout/status_bar_search_panel.xml".equals(param.args[0]) ||
+                                    "res/layout-land/status_bar_search_panel.xml".equals(param.args[0])) {
+                                param.args[0] = "res/layout-sw600dp/status_bar_search_panel.xml";
+                            }
+                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                        } catch (Throwable t) {
+                            log("loadXmlResourceParser throwing exception. Invoking original method.");
+                            param.args[0] = originalResPath;
+                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                         }
                     }
                 });

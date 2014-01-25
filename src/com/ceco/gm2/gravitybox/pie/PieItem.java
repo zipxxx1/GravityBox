@@ -70,7 +70,14 @@ public class PieItem extends PieLayout.PieDrawable {
          */
         public void onClick(PieItem item);
     }
+    public interface PieOnLongPressListener {
+        /**
+         * @param item is the item that was "long-pressed" by the user.
+         */
+        public boolean onLongPress(PieItem item);
+    }
     private PieOnClickListener mOnClickListener = null;
+    private PieOnLongPressListener mOnLongPressListener = null;
 
     /** 
      * The item is selected / has the focus from the gesture. 
@@ -102,6 +109,10 @@ public class PieItem extends PieLayout.PieDrawable {
 
     public void setOnClickListener(PieOnClickListener onClickListener) {
         mOnClickListener = onClickListener;
+    }
+
+    public void setOnLongPressListener(PieOnLongPressListener onLongPressListener) {
+        mOnLongPressListener = onLongPressListener;
     }
 
     public void show(boolean show) {
@@ -206,6 +217,13 @@ public class PieItem extends PieLayout.PieDrawable {
         }
     }
 
+    /* package */ boolean onLongPressCall() {
+        if (mOnLongPressListener != null) {
+            return mOnLongPressListener.onLongPress(this);
+        }
+        return false;
+    }
+
     private boolean hit(float alpha, int radius) { 
         return (alpha > mStart) && (alpha < mStart + mSweep) 
                 && (radius > mInner && radius < mOuter); 
@@ -225,5 +243,9 @@ public class PieItem extends PieLayout.PieDrawable {
         path.close();
 
         return path;
+    }
+
+    public PieLayout getLayout() {
+        return mPieLayout;
     }
 }

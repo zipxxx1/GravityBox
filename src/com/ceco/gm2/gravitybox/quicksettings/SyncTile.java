@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.SyncStatusObserver;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.View;
 
 public class SyncTile extends BasicTile {
@@ -43,6 +44,14 @@ public class SyncTile extends BasicTile {
             @Override
             public void onClick(View v) {
                 toggleState();
+            }
+        };
+
+        mOnLongClick = new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startActivity(Settings.ACTION_SYNC_SETTINGS);
+                return true;
             }
         };
 

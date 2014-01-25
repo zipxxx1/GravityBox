@@ -121,6 +121,16 @@ public class NetworkModeTile extends BasicTile {
             }
         };
 
+        mOnLongClick = new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName("com.android.phone", "com.android.phone.Settings");
+                startActivity(intent);
+                return true;
+            }
+        };
+
         mLabel = mGbResources.getString(R.string.qs_tile_network_mode);
         mTileColor = KK_COLOR_ON;
         mDefaultNetworkType = PhoneWrapper.getDefaultNetworkType();

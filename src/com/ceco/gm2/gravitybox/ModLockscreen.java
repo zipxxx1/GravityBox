@@ -39,6 +39,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -50,6 +51,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.Surface;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -83,6 +85,8 @@ public class ModLockscreen {
     private static final String CLASS_KG_VIEW_BASE = CLASS_PATH + ".KeyguardViewBase";
     private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
     private static final String CLASS_KG_ACTIVITY_LAUNCHER = CLASS_PATH + ".KeyguardActivityLauncher";
+    private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
+
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
 
@@ -144,6 +148,7 @@ public class ModLockscreen {
             final Class<?> kgViewBaseClass = XposedHelpers.findClass(CLASS_KG_VIEW_BASE, null);
             final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, null);
             final Class<?> kgActivityLauncherClass = XposedHelpers.findClass(CLASS_KG_ACTIVITY_LAUNCHER, null);
+            final Class<?> carrierTextClass = XposedHelpers.findClass(CLASS_CARRIER_TEXT, null);
 
             boolean enableMenuKey = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, false);
@@ -201,8 +206,23 @@ public class ModLockscreen {
                                     public void onReceive(final Context context, Intent intent) {
                                         String kisImageFile = mGbContext.getFilesDir() + "/kis_image.png";
                                         Bitmap customBg = BitmapFactory.decodeFile(kisImageFile);
+
+                                        int rotation = Utils.SystemProp.getInt("ro.sf.hwrotation", 0);
+                                        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                                        switch (wm.getDefaultDisplay().getRotation()) {
+                                            case Surface.ROTATION_90: rotation -= 90; break;
+                                            case Surface.ROTATION_270: rotation += 90; break;
+                                            case Surface.ROTATION_180: rotation -= 180; break;
+                                        }
+                                        if (rotation != 0) {
+                                            Matrix matrix = new Matrix();
+                                            matrix.postRotate(rotation);
+                                            customBg = Bitmap.createBitmap(customBg, 0, 0, customBg.getWidth(), 
+                                                    customBg.getHeight(), matrix, true);
+                                        }
                                         if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                                            customBg = Utils.blurBitmap(context, customBg);
+                                            customBg = Utils.blurBitmap(context, customBg, mPrefs.getInt(
+                                                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
                                         }
                                         final Drawable d = new BitmapDrawable(context.getResources(), customBg);
                                         // We have to make sure view is updated on UI thread
@@ -218,7 +238,8 @@ public class ModLockscreen {
                                 }, new IntentFilter(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED));
                             } else {
                                 if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                                    customBg = Utils.blurBitmap(context, customBg);
+                                    customBg = Utils.blurBitmap(context, customBg, mPrefs.getInt(
+                                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
                                 }
                                 Drawable d = new BitmapDrawable(context.getResources(), customBg);
                                 mLockScreenWallpaperImage.setImageDrawable(d);
@@ -622,6 +643,15 @@ public class ModLockscreen {
                 }
             });
 
+            XposedBridge.hookAllMethods(carrierTextClass, "getCarrierTextForSimState", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    String carrierText = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
+                    if (carrierText != null && !carrierText.isEmpty()) {
+                        param.setResult(carrierText.trim());
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

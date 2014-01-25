@@ -44,6 +44,11 @@ public class SystemPropertyProvider {
         return (resId == 0 ? false : res.getBoolean(resId));
     }
 
+    public static int getSystemConfigInteger(Resources res, String name) {
+        final int resId = res.getIdentifier(name, "integer", "android");
+        return (resId == 0 ? -1 : res.getInteger(resId));
+    }
+
     public static void init(final ClassLoader classLoader) {
         try {
             final Class<?> classSystemUIService = XposedHelpers.findClass(
@@ -71,6 +76,15 @@ public class SystemPropertyProvider {
                                             getSystemConfigBool(res, "config_showNavigationBar"));
                                     data.putBoolean("unplugTurnsOnScreen", 
                                             getSystemConfigBool(res, "config_unplugTurnsOnScreen"));
+                                    data.putInt("defaultNotificationLedOff",
+                                            getSystemConfigInteger(res, "config_defaultNotificationLedOff"));
+                                    if (DEBUG) {
+                                        log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
+                                        log("isTablet: " + data.getBoolean("isTablet"));
+                                        log("hasNavigationBar: " + data.getBoolean("hasNavigationBar"));
+                                        log("unplugTurnsOnScreen: " + data.getBoolean("unplugTurnsOnScreen"));
+                                        log("defaultNotificationLedOff: " + data.getInt("defaultNotificationLedOff"));
+                                    }
                                     receiver.send(RESULT_SYSTEM_PROPERTIES, data);
                                 }
                             }

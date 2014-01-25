@@ -871,7 +871,7 @@
     <string name="pref_cat_power_other_title">Ostatné</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">Povoliť na obrazovke uzamknutia</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">Povoliť reštart na obrazovke uzamknutia</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">Režim počas nečinnosti</string>
@@ -935,14 +935,6 @@
     <string name="nrt_bg_style_light">Svetlý</string>
     <string name="nrt_bg_style_dark">Tmavý</string>
     <string name="nrt_bg_style_black">Čierny</string>
-
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Žiadna akcia</string>
-    <string name="smart_radio_action_summary">Prepnúť na %s</string>
-    <string name="pref_cat_smart_radio_title">Inteligentný režim</string>
-    <string name="pref_smart_radio_experimental_summary">EXPERIMENTÁLNE! Môže ovlyvniť manuálne nastavenie režimu mobilnej siete</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Po zapnutí mobilných dát</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Po vypnutí mobilných dát</string>
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Obsahuje nastavenia týkajúce sa koláča</string>

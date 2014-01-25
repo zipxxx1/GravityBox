@@ -399,6 +399,7 @@ public class ModStatusbarColor {
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_BACKGROUND_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_DISABLE_ROAMING_INDICATORS_CHANGED);
                     intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_CHARGED_SOUND_CHANGED);
                     mPanelBar.getContext().registerReceiver(mBroadcastReceiver, intentFilter);
 
                     Context gbContext = mPanelBar.getContext().createPackageContext(GravityBox.PACKAGE_NAME,
@@ -436,6 +437,8 @@ public class ModStatusbarColor {
                             GravityBoxSettings.PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY, false));
                     mIconManager.setColoringEnabled(prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE, false));
+                    mIconManager.getBatteryInfoManager().setChargedSoundEnabled(prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_BATTERY_CHARGED_SOUND, false));
                     mBroadcastSubReceivers.add(mIconManager);
                 }
             });

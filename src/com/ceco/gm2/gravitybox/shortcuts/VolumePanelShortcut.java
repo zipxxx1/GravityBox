@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,23 +22,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
 
-public class ScreenshotShortcut extends AShortcut {
-    protected static final String ACTION =  ModHwKeys.ACTION_SCREENSHOT;
+public class VolumePanelShortcut extends AShortcut {
+    protected static final String ACTION =  ModHwKeys.ACTION_SHOW_VOLUME_PANEL;
 
-    public ScreenshotShortcut(Context context) {
+    public VolumePanelShortcut(Context context) {
         super(context);
     }
 
     @Override
     public String getText() {
-        return mContext.getString(R.string.qs_tile_screenshot);
+        return mContext.getString(R.string.hwkey_action_volume_panel);
     }
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_screenshot);
+        return mResources.getDrawable(R.drawable.shortcut_volume_panel);
     }
 
     @Override
@@ -53,7 +52,7 @@ public class ScreenshotShortcut extends AShortcut {
 
     @Override
     protected ShortcutIconResource getIconResource() {
-        return ShortcutIconResource.fromContext(mContext, R.drawable.shortcut_screenshot);
+        return ShortcutIconResource.fromContext(mContext, R.drawable.shortcut_volume_panel);
     }
 
     public static void launchAction(final Context context, Intent intent) {

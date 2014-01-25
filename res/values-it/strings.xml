@@ -172,6 +172,7 @@
     <string name="lockscreen_bg_default">Sfondo predefinito</string>
     <string name="lockscreen_bg_color">Colore di riempimento</string>
     <string name="lockscreen_bg_image">Immagine personalizzata</string>
+    <string name="lockscreen_bg_last_screen">Ultima schermata</string>
     <string name="pref_lockscreen_bg_color_title">Imposta colore personalizzato</string>
     <string name="pref_lockscreen_bg_color_summary">Consente di impostare un colore di sfondo personalizzato per la schermata di blocco</string>
     <string name="pref_lockscreen_bg_image_title">Imposta immagine personalizzata</string>
@@ -955,14 +956,6 @@
     <string name="nrt_bg_style_dark">Scuro</string>
     <string name="nrt_bg_style_black">Nero</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Non fare nulla</string>
-    <string name="smart_radio_action_summary">Cambia a %s</string>
-    <string name="pref_cat_smart_radio_title">Smart radio</string>
-    <string name="pref_smart_radio_experimental_summary">SPERIMENTALE! Potrebbe avere effetti sul cambio della modalità di rete manuale.</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Dati Mobili abilitati</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Dati Mobili disabilitati</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Settaggi Pie Controls</string>
     
@@ -991,8 +984,8 @@
     <string name="lockscreen_sb_clock_always_show">Visualizza sempre</string>
 
     <!-- QuickApp Tile #2 -->
-    <string name="pref_cat_quickapp_tile_2_title">impostazioni QuickApp 2</string>
-    <string name="qs_tile_quickapp_2">Quick App 2</string>
+    <string name="pref_cat_quickapp_tile_2_title">Impostazioni App Rapide 2</string>
+    <string name="qs_tile_quickapp_2">App Rapide 2</string>
 
     <!-- Force music volume control -->
     <string name="pref_vol_force_music_control_title">Forza controllo volume musica</string>
@@ -1021,6 +1014,32 @@
     <!-- Tiles: Disable tile spanning -->
     <string name="pref_qs_tile_span_disable_title">Disabilita espansione caselle</string>
     <string name="pref_qs_tile_span_disable_summary">Non permette alle caselle Profilo Utente, Luminosità, Impostazioni di ingrandirsi in modalità orizzontale</string>
+    
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Visualizza tasto menù overflow</string>
+    <string name="pref_force_overflow_menu_button_summary">Visualizza il tasto con tre punti con funzione menù nelle applicazioni (richiede riavvio)</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Sempre in fondo</string>
+    <string name="pref_navbar_always_on_bottom_summary">Forza posizionamento barra di navigazione nella parte inferiore in modalità orizzontale (richiede riavvio)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Non può essere usato quando i pulsanti su anello sono attivati</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Inverti con il tasto menù</string>
+
+     <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Invariato</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_enable_summary">Questa funzione permette al modem del proprio dispositivo di passare automaticamente da un profilo personale di risparmio energetico alla modalità normale
+        a seconda dello stato di connessione della rete mobile o Wi-Fi (richiede riavvio)</string>
+    <string name="pref_smart_radio_normal_mode_title">Modalità rete normale</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Modalità rete risparmio energetico</string>
+    <string name="pref_smart_radio_screen_off_title">A schermo spento</string>
+    <string name="pref_smart_radio_screen_off_summary">Attiva la modalità risparmio energetivo quando lo schermo viene spento a prescindere che i dati mobili siano attivi o meno</string>
+    <string name="pref_smart_radio_ignore_locked_title">Ignora mentre è bloccato</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Quando lo schermo si accende la modalità risparmio energetico non sarà disattivata fino a quando non lo si è sbloccato</string>
 
 
 </resources>

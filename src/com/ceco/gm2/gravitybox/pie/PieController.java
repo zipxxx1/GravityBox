@@ -79,7 +79,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     public static final boolean DEBUG = false;
 
-    private enum ButtonType {
+    protected enum ButtonType {
         BACK,
         HOME,
         RECENT,
@@ -120,6 +120,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private int mCustomKeyMode = GravityBoxSettings.PIE_CUSTOM_KEY_OFF;
     private Drawable mBackIcon;
     private Drawable mBackAltIcon;
+    private PieLongPressHandler mLongPressHandler;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -295,6 +296,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mContext = context;
         mGbContext = gbContext;
         mGbResources = gbContext.getResources();
+        mLongPressHandler = new PieLongPressHandler(context, prefs);
 
         mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -414,6 +416,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         view.setLayoutParams(lp);
         PieItem item = new PieItem(mContext, mGbContext, mPieContainer, 0, width, type, view, mColorInfo);
         item.setOnClickListener(this);
+        item.setOnLongPressListener(mLongPressHandler);
         return item;
     }
 
@@ -711,6 +714,12 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
 
         if (mSysInfo != null) {
             mSysInfo.setColor(mColorInfo);
+        }
+    }
+
+    public void setLongPressAction(String button, int action) {
+        if (mLongPressHandler != null) {
+            mLongPressHandler.setLongPressAction(button, action);
         }
     }
 }

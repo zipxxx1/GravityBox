@@ -55,7 +55,7 @@
     <string name="vol_key_cursor_control_on">Hangerő fel/le a kurzort balra/jobbra mozgatja</string>
     <string name="vol_key_cursor_control_on_reverse">Hangerő fel/le a kurzort jobbra/balra mozgatja</string>
 
-    <string name="recents_clear_all_title">Nemrég használt alkalmazások törlése gomb</string>
+    <string name="recents_clear_all_title">Nemrég használt alkalmazások kiürítése gomb</string>
 
     <string name="fix_datetime_crash_title">Javítja a Dátum és Idő beállítás hibáját</string>
     <string name="fix_datetime_crash_summary">Engedélyezze abban az esetben, ha összeomlást tapasztal a Dátum és Idő beállítás elérésekor (újraindítás szükséges)</string>
@@ -187,7 +187,7 @@
     <string name="pref_cat_lockscreen_title">Zárképernyő módosítások</string>
     <string name="pref_cat_lockscreen_summary">Különböző Zárképernyő módosításokat tartalmaz</string>
     <string name="pref_cat_lockscreen_background_title">Zárképernyő háttér</string>
-    <string name="pref_lockscreen_background_title">Háttér sítlus</string>
+    <string name="pref_lockscreen_background_title">Háttér stílus</string>
     <string name="lockscreen_bg_default">Alapértelmezett háttérkép</string>
     <string name="lockscreen_bg_color">Szín kitöltés</string>
     <string name="lockscreen_bg_image">Egyéni kép</string>
@@ -266,8 +266,8 @@
     <string name="pref_charging_led_disable_summary">Letiltja a LED-et töltés közben</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Hardver gombok műveletei</string>
-    <string name="pref_cat_hwkey_actions_summary">Lehetővé teszi a hardver gombokhoz egyedi műveletek beállítását</string>
+    <string name="pref_cat_hwkey_actions_title">Navigációs gombok műveletei</string>
+    <string name="pref_cat_hwkey_actions_summary">Lehetővé teszi egyedi műveletek beállítását a hardveres és szoftveres navigációs gombokhoz</string>
     <string name="hwkey_menu_longpress_dialog_title">Menü gomb hosszú érintés művelete</string>
     <string name="hwkey_menu_doubletap_dialog_title">Menü gomb dupla érintés művelete</string>
     <string name="hwkey_back_longpress_dialog_title">Vissza gomb hosszú érintés művelete</string>
@@ -908,7 +908,7 @@
     <string name="pref_cat_power_other_title">Egyéb</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">Engedélyezés zárképernyőnél</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">Újraindítás engedélyezése zárképernyőnél</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">Inaktivitás mód</string>
@@ -973,14 +973,6 @@
     <string name="nrt_bg_style_dark">Sötét</string>
     <string name="nrt_bg_style_black">Fekete</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Ne tegyen semmit</string>
-    <string name="smart_radio_action_summary">Kapcsoljon ide %s</string>
-    <string name="pref_cat_smart_radio_title">Okos rádió</string>
-    <string name="pref_smart_radio_experimental_summary">KÍSÉRLETI! Hatással lehet a kézi hálózati mód váltásra. Automatikusan kapcsolja a kiválasztott hálózati üzemmódot, amikor a mobil adatátvitel be- vagy kikapcsolásra kerül (például automatikussá tehető a 3G-re váltás a mobil adatátvitel bekapcsolásakor és a 2G-re váltás mobil adatátvitel kikapcsolásakor az akkumlátor üzemidejének megóvása céljából)</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Mobil adatátvitel esetén engedélyezve</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Mobil adatátvitel esetén letiltva</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Pie vezérlővel kapcsolatos beállítások</string>
     
@@ -1013,7 +1005,7 @@
     <string name="qs_tile_quickapp_2">Gyors Programelérés 2</string>
 
     <!-- Force music volume control -->
-    <string name="pref_vol_force_music_control_title">Média hangerő vezérlés kényszerítés</string>
+    <string name="pref_vol_force_music_control_title">Kényszerített média hangerő vezérlés</string>
     <string name="pref_vol_force_music_control_summary">Ha engedélyezve van, a hangerő gombok a média hangerőt vezérlik a csengés hangerő helyett</string>
 
     <!-- Misc tweaks: category for recents panel related tweaks -->
@@ -1041,7 +1033,7 @@
     <string name="pref_qs_tile_span_disable_summary">Letiltja a tulajdonos, fényerő és a beállítások csempék két csempeszélességre való kiterjeszkedését fekvő tájolásnál</string>
 
     <!-- Force overflow menu button -->
-    <string name="pref_force_overflow_menu_button_title">Overflow menü gomb kényszerítése</string>
+    <string name="pref_force_overflow_menu_button_title">Kényszerített overflow menü gomb</string>
     <string name="pref_force_overflow_menu_button_summary">Újraindítás szükséges</string>
 
     <!-- Navbar: always on bottom -->
@@ -1053,5 +1045,59 @@
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Pozíció felcserélése menü gombbal</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Nem meghatározott</string>
+    <string name="pref_cat_smart_radio_title">Okos rádiókapcsolat</string>
+    <string name="pref_smart_radio_enable_summary">Automatikusan átkapcsolja a rádiókapcsolatot felhasználó által definiált energiatakarékos üzemmódba vagy normál üzemmódba a Mobil adatátvitel és Wifi kapcsolatok állapotától függően (újraindítás szükséges)</string>
+    <string name="pref_smart_radio_normal_mode_title">Normál hálózati üzemmód</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Energiatakarékos hálózati üzemmód</string>
+    <string name="pref_smart_radio_screen_off_title">Képernyő kikapcsolásakor</string>
+    <string name="pref_smart_radio_screen_off_summary">Aktiválja az energiatakarékos üzemmódot a képernyő kikapcsolásakor függetlenül attól, hogy a mobil adatátvitel engedélyezve van, vagy letiltva</string>
+    <string name="pref_smart_radio_ignore_locked_title">Figyelmen kívül hagy, amíg zárolva van</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Képernyő bekapcsoláskor az energiatakarékos üzemmód nem kerül kikapcsolára, amíg a billentyűzár kioldásra nem kerül</string>
+    <string name="pref_smart_radio_mode_change_delay_title">Hálózati üzemmód váltás késleltetése</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">Késlelteti a hálózati üzemmód váltását meghatározott számú másodperccel</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Egyéni szolgáltatónév szöveg</string>
+    <string name="carrier_text_default">Alapértelmezett</string>
+    <string name="carrier_text_empty">Üres</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">Akkumlátor feltöltve jelzőhang</string>
+    <string name="pref_battery_charged_sound_summary">Hang lejtászása, amikor az akkumlátor eléri a teljes töltöttséget</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">Hosszú érintés műveletek</string>
+    <string name="pref_pie_back_longpress_title">Vissza gomb</string>
+    <string name="pref_pie_home_longpress_title">Kezdőlap gomb</string>
+    <string name="pref_pie_recents_longpress_title">Nemrég használt alkalmazások gomb</string>
+    <string name="pref_pie_search_longpress_title">Keresés gomb</string>
+    <string name="pref_pie_menu_longpress_title">Menü gomb</string>
+    <string name="pref_pie_app_longpress_title">Alkalmazás indító gomb</string>
+
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">Értesítés villogtatás késleltetése</string>
+    <string name="pref_pulse_notification_delay_summary">Újraindítás szükséges</string>
+
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">Nemrég használt alkalmazások kiürítésének viselkedése</string>
+    <string name="pref_clear_recents_mode_0">Egyszeri érintésre mindent kiürít, hosszú érintésre mindent, kivéve az aktuálisat</string>
+    <string name="pref_clear_recents_mode_1">Egyszeri érintésre mindent kiürít, kivéve az aktuálisat, hosszú érintésre mindent</string>
+
+    <!-- Power menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">Kikapcsoló menü letiltása zárképernyőnél</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">Rendszer alapértelmezett</string>
+    <string name="overflow_menu_enabled">Kényszerített engedélyezés</string>
+    <string name="overflow_menu_disabled">Kényszerített letiltás</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">Képernyőkép készítése</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">Hangerő panel mutatása</string>
 
 </resources>

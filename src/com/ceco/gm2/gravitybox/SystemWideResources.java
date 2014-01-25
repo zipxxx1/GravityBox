@@ -58,6 +58,15 @@ public class SystemWideResources {
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
                             SystemPropertyProvider.getSystemConfigBool(systemRes,
                                     "config_unplugTurnsOnScreen")));
+
+            int pulseNotificationDelay = prefs.getInt(GravityBoxSettings.PREF_KEY_PULSE_NOTIFICATION_DELAY, -1);
+            if (pulseNotificationDelay != -1) {
+                XResources.setSystemWideReplacement("android", "integer", "config_defaultNotificationLedOff",
+                        (pulseNotificationDelay*1000));;
+            }
+
+            XResources.setSystemWideReplacement("android", "bool", "config_sip_wifi_only", false);
+
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

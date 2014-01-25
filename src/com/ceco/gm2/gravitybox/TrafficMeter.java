@@ -32,6 +32,7 @@ import java.text.NumberFormat;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.File;
 
 import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
@@ -50,6 +51,7 @@ public class TrafficMeter extends TextView implements IconManagerListener {
     boolean mAttached;
     boolean mTrafficMeterEnable;
     boolean mTrafficMeterHide = false;
+    boolean mCanReadFromFile = true;
     int mTrafficMeterSummaryTime = 0;
     long mTotalRxBytes;
     long mLastUpdateTime;
@@ -80,6 +82,7 @@ public class TrafficMeter extends TextView implements IconManagerListener {
     public TrafficMeter(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mContext = context;
+        mCanReadFromFile = canReadFromFile();
 
         try {
             Context gbContext = mContext.createPackageContext(
@@ -203,11 +206,19 @@ public class TrafficMeter extends TextView implements IconManagerListener {
                 return;
             }
 
-            long currentRxBytes = getTotalReceivedBytes();
+            long currentRxBytes = mCanReadFromFile ? getTotalReceivedBytes() : TrafficStats.getTotalRxBytes();
             long newBytes = currentRxBytes - mTotalRxBytes;
 
+            boolean disconnected = false;
+            if (mCanReadFromFile && newBytes < 0) {
+                // It's impossible to get a speed under 0
+                currentRxBytes = 0;
+                newBytes = 0;
+                disconnected = true;
+            }
+
             if (mTrafficMeterHide && newBytes == 0) {
-                long trafficBurstBytes = currentRxBytes - mTrafficBurstStartBytes;
+                long trafficBurstBytes = (mCanReadFromFile && disconnected) ? mTotalRxBytes - mTrafficBurstStartBytes : currentRxBytes - mTrafficBurstStartBytes;
 
                 if (trafficBurstBytes != 0 && mTrafficMeterSummaryTime != 0) {
                     setText(formatTraffic(trafficBurstBytes, false));
@@ -242,7 +253,7 @@ public class TrafficMeter extends TextView implements IconManagerListener {
                 }
             }
 
-            mTotalRxBytes = currentRxBytes;
+            mTotalRxBytes = (mCanReadFromFile && disconnected) ? mTotalRxBytes : currentRxBytes;
             mLastUpdateTime = SystemClock.elapsedRealtime();
             getHandler().postDelayed(mRunnable, 1000);
         }
@@ -261,6 +272,10 @@ public class TrafficMeter extends TextView implements IconManagerListener {
         }
     }
 
+    private boolean canReadFromFile() {
+        return new File("/proc/net/dev").exists();
+    }
+
     private long getTotalReceivedBytes() {
         String line;
         String[] segs;
@@ -270,10 +285,10 @@ public class TrafficMeter extends TextView implements IconManagerListener {
         boolean isNum;
         try {
             FileReader fr = new FileReader("/proc/net/dev");
-            BufferedReader in = new BufferedReader(fr, 500);
+            BufferedReader in = new BufferedReader(fr);
             while ((line = in.readLine()) != null) {
                 line = line.trim();
-                if (line.startsWith("rmnet") || line.startsWith("eth") || line.startsWith("wlan")) {
+                if (line.contains(":") && !line.startsWith("lo")) {
                     segs = line.split(":")[1].split(" ");
                     for (i = 0; i < segs.length; i++) {
                         isNum = true;

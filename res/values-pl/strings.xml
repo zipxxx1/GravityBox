@@ -176,6 +176,7 @@
     <string name="lockscreen_bg_default">Domyślna tapeta</string>
     <string name="lockscreen_bg_color">Wypełnij kolorem</string>
     <string name="lockscreen_bg_image">Zdefiniowany obrazek</string>
+    <string name="lockscreen_bg_last_screen">Ostatni ekran</string>
     <string name="pref_lockscreen_bg_color_title">Ustaw kolor</string>
     <string name="pref_lockscreen_bg_color_summary">Pozwala ustawić własny kolor ekranu blokady</string>
     <string name="pref_lockscreen_bg_image_title">Ustaw własny obraz</string>
@@ -250,8 +251,8 @@
     <string name="pref_charging_led_disable_summary">Wyłącza sygnalizację LED podczas ładowania</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Działanie przycisków sprzętowych</string>
-    <string name="pref_cat_hwkey_actions_summary">Pozwala ustawić niestandardowe działania przycisków sprzętowych</string>
+    <string name="pref_cat_hwkey_actions_title">Działanie przycisków nawigacyjnych</string>
+    <string name="pref_cat_hwkey_actions_summary">Pozwala ustawić niestandardowe działania przycisków nawigacyjnych (sprzętowych i programowych)</string>
     <string name="hwkey_menu_longpress_dialog_title">Akcja długiego naciśnięcia MENU</string>
     <string name="hwkey_menu_doubletap_dialog_title">Akcja podwójnego przyciśnięcia MENU</string>
     <string name="hwkey_back_longpress_dialog_title">Akcja długiego naciśnięcia BACK</string>
@@ -417,8 +418,8 @@
     <string name="app_picker_none">(Żadna)</string>
 
     <!-- QuickApp tile settings -->
-    <string name="qs_tile_quickapp">Szybkie uruch. Aplikacji</string>
-    <string name="pref_cat_quickapp_tile_title">Ustawienia szybkiego uruch. Aplikacji</string>
+    <string name="qs_tile_quickapp">Szybkie uruch. Aplikacji 1</string>
+    <string name="pref_cat_quickapp_tile_title">Ustawienia kafelka Aplikacji 1</string>
     <string name="pref_quickapp_default_title">Aplikacja Główna</string>
     <string name="pref_quickapp_slot1_title">Naciśnij długo slot 1 apl.</string>
     <string name="pref_quickapp_slot2_title">Naciśnij długo slot 2 apl.</string>
@@ -955,14 +956,6 @@
     <string name="nrt_bg_style_dark">Ciemny</string>
     <string name="nrt_bg_style_black">Czarny</string>
 
-    <!-- Smart Radio -->
-    <string name="smart_radio_action_do_nothing">Nie rób nic</string>
-    <string name="smart_radio_action_summary">Przełącz na %s</string>
-    <string name="pref_cat_smart_radio_title">Smart radio</string>
-    <string name="pref_smart_radio_experimental_summary">EKSPERYMENTALNE! Może mieć wpływ na ręczne przełączanie trybu sieciowego</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Przy włączonej transmisji danych</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Przy wyłączonej transmisji danych</string>
-
     <!-- Pie category summary -->
     <string name="pie_control_summary">Zawiera ustawienia związane z Pie</string>
 
@@ -991,8 +984,8 @@
     <string name="lockscreen_sb_clock_always_show">Zawsze pokazuj</string>
 
     <!-- QuickApp Tile #2 -->
-    <string name="pref_cat_quickapp_tile_2_title">Ustawienia kafelka Szybkiej Aplikacji 2</string>
-    <string name="qs_tile_quickapp_2">Szybka Aplikacja 2</string>
+    <string name="pref_cat_quickapp_tile_2_title">Ustawienia kafelka Aplikacji 2</string>
+    <string name="qs_tile_quickapp_2">Szybkie uruch. Aplikacji 2</string>
 
     <!-- Force music volume control -->
     <string name="pref_vol_force_music_control_title">Wymuś kontrolę głośności mediów</string>
@@ -1021,5 +1014,30 @@
     <!-- Tiles: Disable tile spanning -->
     <string name="pref_qs_tile_span_disable_title">Wyłącz rozciąganie kafelków</string>
     <string name="pref_qs_tile_span_disable_summary">Wyłącza rozciąganie kafelków użytkownika, jasności i ustawień dla poziomej orientacji ekranu</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Wymuś przycisk Overflow</string>
+    <string name="pref_force_overflow_menu_button_summary">Wymusza wyświetlanie przycisku z trzema kropkami w menu aplikacji (wymagany restart)</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Zawsze na dole</string>
+    <string name="pref_navbar_always_on_bottom_summary">Wymusza położenie paska nawigacji na dole w przypadku orientacji poziomej ekranu (wymagany restart)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Nie można używać, gdy cele pierścienia nawigacji są włączone</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Zamień z przyciskiem MENU</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Nieokreślone</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_enable_summary">Automatycznie przełącza radio w zdefiniowany przez użytkownika tryb oszczędzania energii lub tryb normalny, zależnie od stanu połączenia transmisji danych i WiFi (wymagany restart)</string>
+    <string name="pref_smart_radio_normal_mode_title">Normalny tryb sieci</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Tryb oszczędzania energii</string>
+    <string name="pref_smart_radio_screen_off_title">Gdy gaśnie ekran</string>
+    <string name="pref_smart_radio_screen_off_summary">Włącza tryb oszczędzania energii gdy gaśnie ekran, niezależnie od tego czy transmisja danych jest włączona lub wyłączona</string>
+    <string name="pref_smart_radio_ignore_locked_title">Ignoruj​​, gdy zablokowany</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Po włączeniu ekranu tryb oszczędzania energii pozostanie aktywny aż do momentu odblokowania</string>
 
 </resources>
