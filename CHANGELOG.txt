@@ -1,3 +1,53 @@
+Changelog 2.9.4 - 25/01/2014
+--------------------------------------
+- Expanded desktop revised:
+--- Immersive mode now fully working without the need of reentering app
+--- Immersive navbars now re-hides itself correctly in apps where it previously didn't
+--- Added new mode: Immersive status bar - keeps navbar in normal mode and statusbar in immersive mode
+- Smart Radio reworked from scratch - based on connectivity manager events
+--- Option to force power saving mode when screen turns off
+--- Option to ignore switching to normal mode after screen turns on until device is unlocked
+--- Option to set delay of network mode change to filter out temporary connection state changes
+- Lockscreen tweaks:
+--- Added option for custom carrier text (default/custom/empty: when space entered as value)
+--- Fixed crop size when cropping image for custom lockscreen background
+--- Last screen: 
+------- preserves original orientation regardless of lockscreen orientation (won't rotate with lockscreen)
+------- fixed orientation for devices having flipped screen (thanks to superdragonpt for hints)
+--- Added option for specifying blur effect intensity
+- QuickSettings tiles:
+--- Sync tile: added long-press action to open sync settings
+--- Network mode tile: added long-press action to open mobile network settings
+- Pie Controls: Implemented support for handling long-press on pie keys
+- Phone tweaks
+--- Added answer/dismiss call actions to non-intrusive incoming call notification
+--- Unblocked SIP calls over mobile network
+- Power tweaks: Added option for battery charged sound
+- Key actions and GB Actions:
+--- Added action for taking screenshot
+--- Added action for showing volume panel
+- Display tweaks: 
+--- Added option for controlling pulse notification light delay (frequency)
+--- Added option for enabling/disabling translucent decors (thanks to scaryuncledevin)
+- Misc tweaks:
+--- Added setting to change tap vs long-press modes of clearing recent tasks (thanks to scaryuncledevin)
+--- Extended option for controlling overflow menu button
+- Notification drawer style: Added option for custom carrier text
+- Added option to disable power menu on lockscreen
+- Added delay to screenshot action
+- Hide 'Torch auto off' option if device has no flash (thanks to bgcngm)
+- Fixed data traffic monitor not showing values on some devices (thanks to PeterCxy)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Italian translations (thanks to pesa1234, valerioscifoni)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Russian translations (thanks to gaich)
+- Updated French translation (thanks to ch-vox)
+- Updated Chinese (Traditional) translations (thanks to Eric850130)
+- Updated Slovak and Czech translations
+
 Changelog 2.9.3 - 19/01/2014
 --------------------------------------
 - Lockscreen tweaks:
