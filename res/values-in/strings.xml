@@ -100,6 +100,10 @@
     <string name="quick_settings_wifi_turning_on">Menghidupkan&#8230;</string>
     <string name="quick_settings_nfc_on">NFC hidup</string>
     <string name="quick_settings_nfc_off">NFC mati</string>
+    <string name="quick_settings_camera_error_connect">Tidak terkoneksi dengan kamera</string>
+    <string name="quick_settings_usb_tether_off">Terputus</string>
+    <string name="quick_settings_usb_tether_connected">Penambatan mati</string>
+    <string name="quick_settings_usb_tether_on">Menambatkan</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Kotak-kotak QuickSettings Statusbar</string>
@@ -131,6 +135,8 @@
     <string name="qs_tile_stay_awake">Tetap menyala</string>
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Kamera</string>
+    <string name="qs_tile_usb_tethering">Penambatan USB</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Pilihan Warna</string>
@@ -916,5 +922,139 @@
 
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">Gunakan mode jaringan CDMA</string>
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Hidup/matikan rotasi otomatis</string>
+    <string name="hwkey_action_auto_rotation_enabled">Rotasi otomatis hidup</string>
+    <string name="hwkey_action_auto_rotation_disabled">Rotasi otomatis mati</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Bolehkan widget apapun</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Membolehkan widget-widget yang biasanya hanya bisa digunakan di launcher untuk digunakan di lockscreen</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Tunjukkan menu power</string>
+    <string name="hwkey_action_expand_notifications">Buka panel notifikasi</string>
+    <string name="hwkey_action_expand_quicksettings">Buka panel QuickSettings</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Target cincin navigasi</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Hidupkan pengaturan target cincin naviagasi (membutuhkan restart)</string>
+    <string name="pref_navbar_ring_target_title">Target cincin %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Aksi GravityBox</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Ubah mode jaringan</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Hidup/matikan paket data</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Hidup/matikan WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Hidup/matikan Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Hidup/matikan WiFi AP</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Hidup/matikan NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">Hidup/matikan GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Gaya latar belakang target</string>
+    <string name="nrt_bg_style_none">Tidak ada</string>
+    <string name="nrt_bg_style_light">Cerah</string>
+    <string name="nrt_bg_style_dark">Gelap</string>
+    <string name="nrt_bg_style_black">Hitam</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Menampung pengaturan berkaitan dengan kontrol pie</string>
+
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Kebeningan latar belakang</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Kontrol media</string>
+    <string name="shortcut_media_play_pause">Mainkan/jeda</string>
+    <string name="shortcut_media_previous">Sebelumnya</string>
+    <string name="shortcut_media_next">Selanjutnya</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Indikasi pengisian</string>
+    <string name="bpt_charging_none">Tidak ada</string>
+    <string name="bpt_charging_static">Statis</string>
+    <string name="bpt_charging_animated">Animasi</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Penampakan jam di statusbar</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Sembunyikan widget yang diketahui berkaitan dengan jam</string>
+    <string name="lockscreen_sb_clock_always_hide">Selalu sembunyikan</string>
+    <string name="lockscreen_sb_clock_always_show">Selalu tunjukkan</string>
+
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Pengaturan kotak QuickApp 2</string>
+    <string name="qs_tile_quickapp_2">Quick App 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Paksakan kontrol volume media</string>
+    <string name="pref_vol_force_music_control_summary">Ketika dihidupkan, tombol volume akan mengontrol media ketimbang volume dering</string>
+
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">Panel recents</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">Pengaturan lainnya</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">Matikan papan ketik fullscreen</string>
+
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Otomatis matikan senter</string>
+    <string name="pref_torch_auto_off_summary">Mematikan senter setelah waktu yang ditentukan. Atur ke 0 untuk mematikan (tidak direkomendasikan)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Orientasikan kembali tombol volume</string>
+    <string name="pref_vol_swap_keys_summary">Tukar tombol volume ketika layar diputar</string>
+
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Efek kabur</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Matikan rentangan kotak</string>
+    <string name="pref_qs_tile_span_disable_summary">Mematikan rentangan dari kotak pengguna, kecerahan dan pengaturan kotak ketika mode tidur</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Paksakan tombol menu overflow</string>
+    <string name="pref_force_overflow_menu_button_summary">Membutuhkan restart</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Selalu di bawah</string>
+    <string name="pref_navbar_always_on_bottom_summary">Memaksakan navbar untuk selalu berada di bawah ketika dalam mode tidur (membutuhkan restart)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Tidak bisa digunakan ketika target cincin navbar dihidupkan</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Tukar dengan tombol menu</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Tidak ditentukan</string>
+    <string name="pref_cat_smart_radio_title">Radio pintar</string>
+    <string name="pref_smart_radio_enable_summary">Hal ini akan secara otomatis mengubah mode radio ke mode penghematan daya atau normal sesuai yang ditetapkan pengguna 
+        bergantung pada kondisi koneksi paket data dan WiFi (membutuhkan restart)</string>
+    <string name="pref_smart_radio_normal_mode_title">Mode jarinagan normal</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Mode jaringan penghematan daya</string>
+    <string name="pref_smart_radio_screen_off_title">Ketika layar dimatikan</string>
+    <string name="pref_smart_radio_screen_off_summary">Menghidupkan mode pengematan daya ketika layar dimatikan, tanpa memperhatikan apakah paket data dihidupkan atau tidak</string>
+    <string name="pref_smart_radio_ignore_locked_title">Hiraukan bila terkunci</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Ketika layar dihidupkan, mode penghematan daya tidak akan dimatikan sampai kunci layar dibuka</string>
 
 </resources>
