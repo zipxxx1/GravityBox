@@ -1059,5 +1059,40 @@
     <string name="pref_smart_radio_screen_off_summary">Активация экономного режима при отключении экрана, независимо от того, включена или выключена мобильная передача данных</string>
     <string name="pref_smart_radio_ignore_locked_title">Игнорировать при блокировке</string>
     <string name="pref_smart_radio_ignore_locked_summary">При включении экрана экономный режим не активируется, пока экран не будет разблокирован</string>
+    <string name="pref_smart_radio_mode_change_delay_title">Задержка смены режима</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">Задержка при смене сетевого режима на определённое число секунд</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Свой текст в поле оператора</string>
+    <string name="carrier_text_default">По умолчанию</string>
+    <string name="carrier_text_empty">Пусто</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">Оповещение о зарядке</string>
+    <string name="pref_battery_charged_sound_summary">Воспроизведение звукового оповещения, когда батарея полностью заряжена</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">Действия при удержании</string>
+    <string name="pref_pie_back_longpress_title">Назад</string>
+    <string name="pref_pie_home_longpress_title">Домой</string>
+    <string name="pref_pie_recents_longpress_title">Недавние</string>
+    <string name="pref_pie_search_longpress_title">Поиск</string>
+    <string name="pref_pie_menu_longpress_title">Меню</string>
+    <string name="pref_pie_app_longpress_title">Запуск приложений</string>
+
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">Задержка индикации</string>
+    <string name="pref_pulse_notification_delay_summary">Необходима перезагрузка</string>
+
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">Поведение при очистке всего</string>
+    <string name="pref_clear_recents_mode_0">Нажатие для очистки всего, удержание для очистки всего, кроме текущей задачи</string>
+    <string name="pref_clear_recents_mode_1">Нажатие для очистки всего, кроме текущей задачи, удержание для очистки всего</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">Снимок экрана</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">Панель громкости</string>
 
 </resources>
