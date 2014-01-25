@@ -630,6 +630,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_TORCH_AUTO_OFF = "pref_torch_auto_off";
     public static final String PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON = "pref_force_overflow_menu_button2";
 
+    public static final String PREF_CAT_KEY_MISC_OTHER = "pref_cat_misc_other";
     public static final String PREF_KEY_PULSE_NOTIFICATION_DELAY = "pref_pulse_notification_delay";
 
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
@@ -953,6 +954,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private AppPickerPreference[] mPrefNavbarRingTarget;
         private ListPreference mPrefNavbarRingTargetsBgStyle;
         private SeekBarPreference mPrefPulseNotificationDelay;
+        private PreferenceCategory mPrefCatMiscOther;
+        private SeekBarPreference mPrefTorchAutoOff;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1223,6 +1226,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefPulseNotificationDelay = (SeekBarPreference) findPreference(PREF_KEY_PULSE_NOTIFICATION_DELAY);
 
+            mPrefCatMiscOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_MISC_OTHER);
+            mPrefTorchAutoOff = (SeekBarPreference) findPreference(PREF_KEY_TORCH_AUTO_OFF);
+
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
                 mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
@@ -1233,6 +1239,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.hasFlash(getActivity())) {
                 mPrefCatHwKeyOthers.removePreference(mPrefHwKeyLockscreenTorch);
                 mPrefCatLsOther.removePreference(mPrefLsRingTorch);
+                mPrefCatMiscOther.removePreference(mPrefTorchAutoOff);
             }
             if (!Utils.hasVibrator(getActivity())) {
                 mPrefCatPhoneTelephony.removePreference(mPrefCallVibrations);
