@@ -205,7 +205,8 @@ public class ModLockscreen {
 
                     if (customBg != null) {
                         if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                            customBg = Utils.blurBitmap(context, customBg);
+                            customBg = Utils.blurBitmap(context, customBg, mPrefs.getInt(
+                                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
                         }
                         Object kgUpdateMonitor = XposedHelpers.callStaticMethod(mKgUpdateMonitorClass, 
                                 "getInstance", context);
@@ -803,7 +804,8 @@ public class ModLockscreen {
                             customBg.getHeight(), matrix, true);
                 }
                 if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
-                    customBg = Utils.blurBitmap(context, customBg);
+                    customBg = Utils.blurBitmap(context, customBg, mPrefs.getInt(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
                 }
                 Object kgUpdateMonitor = XposedHelpers.callStaticMethod(mKgUpdateMonitorClass, 
                         "getInstance", context);

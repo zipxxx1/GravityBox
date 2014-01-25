@@ -338,6 +338,7 @@ public class Utils {
     public static Bitmap blurBitmap(Context context, Bitmap bmp, float radius) {
         Bitmap out = Bitmap.createBitmap(bmp);
         RenderScript rs = RenderScript.create(context);
+        radius = Math.min(Math.max(radius, 0), 25);
 
         Allocation input = Allocation.createFromBitmap(
                 rs, bmp, MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
