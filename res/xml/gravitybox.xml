@@ -1045,14 +1045,12 @@
             <CheckBoxPreference 
                 android:key="pref_powermenu_screenshot"
                 android:title="@string/pref_powermenu_screenshot_title"
-                android:defaultValue="false"
-                android:dependency="pref_poweroff_advanced" />
+                android:defaultValue="false" />
 
             <CheckBoxPreference 
                 android:key="pref_powermenu_screenrecord"
                 android:title="@string/pref_powermenu_screenrecord_title"
-                android:defaultValue="false"
-                android:dependency="pref_poweroff_advanced" />
+                android:defaultValue="false" />
 
         </PreferenceCategory>
 
