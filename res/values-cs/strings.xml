@@ -1012,4 +1012,61 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Přehodit s menu tlačítkem</string>
 
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Nedefinovaný</string>
+    <string name="pref_smart_radio_enable_summary">Tato funkce dokáže automaticky přepínat mezi definovaným normálním režimem 
+         mobilní sítě a úsporným režimem mobilní sítě na základě stavu připojení mobilních dat a WiFi (vyžaduje restart)</string>
+    <string name="pref_smart_radio_normal_mode_title">Normální režim sítě</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Úsporný režim sítě</string>
+    <string name="pref_smart_radio_screen_off_title">Po vypnutí obrazovky</string>
+    <string name="pref_smart_radio_screen_off_summary">Aktivuje úsporný režim mobilní sítě po vypnutí obrazovky bez ohledu na stav připojení mobilních dat</string>
+    <string name="pref_smart_radio_ignore_locked_title">Ignorovat během uzamčení</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Po zapnutí obrazovky, bude úsporný režim deaktivován až po odemknutí uzamykací obrazovky</string>
+    <string name="pref_smart_radio_mode_change_delay_title">Zpoždění změny režimu</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">Opozdí změnu režimu mobilní sítě o zadaný počet sekund</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Vlastní text operátora</string>
+    <string name="carrier_text_default">Původní</string>
+    <string name="carrier_text_empty">Prázdný</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">Upozornění nabití baterie</string>
+    <string name="pref_battery_charged_sound_summary">Přehraje zvukové upozornění po úplném nabití baterie</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">Akce na dlouhé podržení</string>
+    <string name="pref_pie_back_longpress_title">Tlačítko Zpět</string>
+    <string name="pref_pie_home_longpress_title">Tlačítko Domů</string>
+    <string name="pref_pie_recents_longpress_title">Tlačítko Seznam úkolů</string>
+    <string name="pref_pie_search_longpress_title">Tlačítko Vyhledávání</string>
+    <string name="pref_pie_menu_longpress_title">Tlačítko Menu</string>
+    <string name="pref_pie_app_longpress_title">Tlačítko Spouštěč aplikací</string>
+
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">Frekvence blikání LED</string>
+    <string name="pref_pulse_notification_delay_summary">Vyžaduje restart</string>
+
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">Chování tlačítka ukončení úkolů</string>
+    <string name="pref_clear_recents_mode_0">Ťuknutím zrušit všechny úkoly, dlouhým podržením zrušit všechny úkoly kromě aktuálního</string>
+    <string name="pref_clear_recents_mode_1">Ťuknutím zrušit všechny úkoly kromě aktuálního, dlouhým podržením zrušit všechny úlohy</string>
+
+    <!-- Powe menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">Zakázat nabídku napájení na obrazovce uzamčení</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">Výchozí</string>
+    <string name="overflow_menu_enabled">Vynutit</string>
+    <string name="overflow_menu_disabled">Zakázat</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">Vyfotit obrazovku</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">Zobrazit panel nastavení hlasitosti</string>
+
+    <!-- Blur effect intensity -->
+    <string name="pref_lockscreen_bg_blur_intensity_title">Intenzita efektu rozmazání</string>
+
 </resources>
