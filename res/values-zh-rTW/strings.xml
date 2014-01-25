@@ -1024,5 +1024,62 @@
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">切換選單鍵</string>
+    
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">未定義</string>
+    <string name="pref_cat_smart_radio_title">智慧無線</string>
+    <string name="pref_smart_radio_enable_summary">根據行動數據和無線網絡連接狀態，這會自動切換您自訂的省電模式或正常模式 (需要重新啟動)</string>
+    <string name="pref_smart_radio_normal_mode_title">正常網路模式</string>
+    <string name="pref_smart_radio_power_saving_mode_title">節省電力網路模式</string>
+    <string name="pref_smart_radio_screen_off_title">當螢幕關閉</string>
+    <string name="pref_smart_radio_screen_off_summary">當螢幕關閉，無論行動數據是否已被啟用或停用，啟動省電模式</string>
+    <string name="pref_smart_radio_ignore_locked_title">當鎖定時忽略</string>
+    <string name="pref_smart_radio_ignore_locked_summary">當螢幕開啟時，省電模式將不會停用，直到鍵盤鎖定被解除</string>
+    <string name="pref_smart_radio_mode_change_delay_title">網路模式變更延遲</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">設定指定的秒數來延遲變更網路模式</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">自訂載體文字</string>
+    <string name="carrier_text_default">預設</string>
+    <string name="carrier_text_empty">空的</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">電池充電音效</string>
+    <string name="pref_battery_charged_sound_summary">當電池充滿電池播放音效</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">長按操作</string>
+    <string name="pref_pie_back_longpress_title">返回鍵</string>
+    <string name="pref_pie_home_longpress_title">Home 鍵</string>
+    <string name="pref_pie_recents_longpress_title">近期鍵</string>
+    <string name="pref_pie_search_longpress_title">搜尋鍵</string>
+    <string name="pref_pie_menu_longpress_title">選單鍵</string>
+    <string name="pref_pie_app_longpress_title">應用程式啟動器鍵</string>
+
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">跳動通知延遲</string>
+    <string name="pref_pulse_notification_delay_summary">需要重新啟動</string>
+
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">清除所有近期任務操作</string>
+    <string name="pref_clear_recents_mode_0">點選清除全部, 長按清除全部，除了當前操作</string>
+    <string name="pref_clear_recents_mode_1">點選清除全部，除了當前操作, 長按清除全部</string>
+
+    <!-- Power menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">鎖定畫面停用電源選單</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">系統預設</string>
+    <string name="overflow_menu_enabled">強制啟用</string>
+    <string name="overflow_menu_disabled">強制停用</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">擷取螢幕截圖</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">顯示音量面板</string>
+
+    <!-- Blur effect intensity -->
+    <string name="pref_lockscreen_bg_blur_intensity_title">模糊效果強度</string>
  
 </resources>
