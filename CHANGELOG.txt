@@ -1,3 +1,50 @@
+Changelog 2.9.4 - 25/01/2014
+--------------------------------------
+- Smart Radio reworked from scratch - based on connectivity manager events
+--- Option to force power saving mode when screen turns off
+--- Option to ignore switching to normal mode after screen turns on until device is unlocked
+--- Option to set delay of network mode change to filter out temporary connection state changes
+- Lockscreen tweaks:
+--- Added option for custom carrier text (default/custom/empty: when space entered as value)
+--- Last screen: 
+------- preserves original orientation regardless of lockscreen orientation (won't rotate with lockscreen)
+------- fixed orientation for devices having flipped screen (thanks to superdragonpt for hints)
+--- Added option for specifying blur effect intensity
+- QuickSettings tiles:
+--- Sync tile: added long-press action to open sync settings
+--- Network mode tile: added long-press action to open mobile network settings
+- Pie Controls: Implemented support for handling long-press on pie keys
+- Phone tweaks
+--- Unblocked SIP calls over mobile network
+- Power tweaks: Added option for battery charged sound
+- Key actions and GB Actions:
+--- Added action for taking screenshot
+--- Added action for showing volume panel
+- Display tweaks: 
+--- Added option for controlling pulse notification light delay (frequency)
+- Misc tweaks:
+--- Added setting to change tap vs long-press modes of clearing recent tasks (thanks to scaryuncledevin)
+--- Extended option for controlling overflow menu button
+- Notification drawer style:
+--- Added option for custom carrier text
+- Added option to disable power menu on lockscreen
+- Added delay to screenshot action
+- Hide 'Torch auto off' option if device has no flash (thanks to bgcngm)
+- Fixed data traffic monitor not showing values on some devices (thanks to PeterCxy)
+- Fixed button backlight issues on Android 4.1
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Indonesian translation (thanks to awaaas)
+- Updated Vietnamese translation (thanks to alienyd)
+- Updated Spanish translation (thanks to jvbferrer)
+- Updated Polish translation (thanks to xtrem007)
+- Updated Chinese (Simplified) translation (thanks to liveasx)
+- Updated Chinese (Traditional) translation (thanks to Eric850130)
+- Updated Italian translation (thanks to pesa1234, valerioscifoni)
+- Updated Japanese translation (thanks to WedyDQ10)
+- Updated Russian translation (thanks to gaich)
+- Updated French translation (thanks to ch-vox)
+- Updated Slovak and Czech translations
+
 Changelog 2.9.3 - 19/01/2014
 --------------------------------------
 - Lockscreen tweaks:
