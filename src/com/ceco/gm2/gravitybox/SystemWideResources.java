@@ -65,6 +65,8 @@ public class SystemWideResources {
                         (pulseNotificationDelay*1000));;
             }
 
+            XResources.setSystemWideReplacement("android", "bool", "config_sip_wifi_only", false);
+
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
