@@ -1,4 +1,4 @@
-Changelog 2.9.4 - 25/01/2014
+Changelog 2.9.4 - 26/01/2014
 --------------------------------------
 - Smart Radio reworked from scratch - based on connectivity manager events
 --- Option to force power saving mode when screen turns off
@@ -9,6 +9,7 @@ Changelog 2.9.4 - 25/01/2014
 --- Last screen: 
 ------- preserves original orientation regardless of lockscreen orientation (won't rotate with lockscreen)
 ------- fixed orientation for devices having flipped screen (thanks to superdragonpt for hints)
+------- fixed blank screen on some 4.2.1 devices
 --- Added option for specifying blur effect intensity
 - QuickSettings tiles:
 --- Sync tile: added long-press action to open sync settings
@@ -43,6 +44,7 @@ Changelog 2.9.4 - 25/01/2014
 - Updated Japanese translation (thanks to WedyDQ10)
 - Updated Russian translation (thanks to gaich)
 - Updated French translation (thanks to ch-vox)
+- Updated Hungarian translation (thanks to benjoe1)
 - Updated Slovak and Czech translations
 
 Changelog 2.9.3 - 19/01/2014
