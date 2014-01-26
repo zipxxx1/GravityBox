@@ -1052,5 +1052,8 @@
 
     <!-- Key Action: Show volume panel -->
     <string name="hwkey_action_volume_panel">Mostra pannello volume</string>
+    
+    <!-- Blur effect intensity -->
+    <string name="pref_lockscreen_bg_blur_intensity_title">Intensità effetto sfocato</string>
 
 </resources>
