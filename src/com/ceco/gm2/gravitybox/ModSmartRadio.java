@@ -101,17 +101,10 @@ public class ModSmartRadio {
                     } else if (mWasMobileDataEnabled && !mobileDataEnabled) {
                         if (DEBUG) log("Mobile data got disabled");
                         switchToState(State.POWER_SAVING);
-                    } else if (!mWasMobileNetworkAvailable && mobileNetworkAvailable) {
-                        if (mobileDataEnabled && !wifiConnected) {
-                            if (DEBUG) log("Mobile network got available and data active");
-                            switchToState(State.NORMAL, true);
-                        } else {
-                            if (DEBUG) log("Mobile network got available but data not active");
-                            switchToState(State.POWER_SAVING, true);
-                        }
-                    } else if (mWasMobileNetworkAvailable && !mobileNetworkAvailable) {
-                        if (DEBUG) log("Mobile network unavailable. Resetting state to POWER_SAVING.");
-                        switchToState(State.POWER_SAVING);
+                    } else if (!mWasMobileNetworkAvailable && mobileNetworkAvailable 
+                         && mobileDataEnabled && !wifiConnected) {
+                         if (DEBUG) log("Mobile network got available and data active");
+                         switchToState(State.NORMAL, true);
                     }
                     mWasMobileDataEnabled = mobileDataEnabled;
                     mWasMobileNetworkAvailable = mobileNetworkAvailable;
@@ -174,10 +167,8 @@ public class ModSmartRadio {
             if (DEBUG) log("switchToState: new state == previous state - ignoring");
             return;
         } else if (!isMobileNetworkAvailable()) {
-            // force power saving state no matter what so we start with it when mobile network is available again
-            if (DEBUG) log("switchToState: mobile network unavailable - resetting to POWER_SAVING state");
-            mWasMobileNetworkAvailable = false;
-            newState = State.POWER_SAVING;
+            if (DEBUG) log("switchToState: mobile network unavailable - ignoring");
+            return;
         } else if (DEBUG) {
             log("Switching to state: " + newState);
         }
