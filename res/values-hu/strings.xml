@@ -1099,5 +1099,8 @@
 
     <!-- Key Action: Show volume panel -->
     <string name="hwkey_action_volume_panel">Hangerő panel mutatása</string>
+    
+    <!-- Blur effect intensity -->
+    <string name="pref_lockscreen_bg_blur_intensity_title">Elmosódás effekt intenzitás</string>
 
 </resources>
