@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -82,7 +83,13 @@ public class ModSmartRadio {
             } else if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 boolean mobileDataEnabled = isMobileDataEnabled(); 
                 boolean mobileNetworkAvailable = isMobileNetworkAvailable();
-                int nwType = intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, -1);
+                int nwType = -1;
+                if (Build.VERSION.SDK_INT > 16) {
+                    nwType = intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, -1);
+                } else {
+                    NetworkInfo ni = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
+                    if (ni != null) nwType = ni.getType();
+                }
                 if (nwType == -1) return;
                 NetworkInfo nwInfo = mConnManager.getNetworkInfo(nwType);
                 if (nwType == ConnectivityManager.TYPE_WIFI) {
