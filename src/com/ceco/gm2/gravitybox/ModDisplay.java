@@ -44,6 +44,7 @@ import android.os.PowerManager.WakeLock;
 import android.os.ResultReceiver;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.WindowManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
@@ -378,11 +379,9 @@ public class ModDisplay {
                                 pendingRequestLocked == null || !pendingRequestLocked.equals(param.args[0])) &&
                                 requestedScreenState == 0) {
                             int width, height = 0;
-                            final Object displayManager = XposedHelpers.getObjectField(param.thisObject, "mDisplayManager");
-                            final int display0 = ((int[])XposedHelpers.callMethod(Build.VERSION.RELEASE.equals("4.2.1") ?
-                                    XposedHelpers.getObjectField(displayManager, "mGlobal") : displayManager, "getDisplayIds"))[0];
                             if (Build.VERSION.RELEASE.equals("4.2.1")) {
-                                Display display = (Display) XposedHelpers.callMethod(displayManager, "getDisplay", display0);
+                                WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                                Display display = wm.getDefaultDisplay();
                                 DisplayMetrics outMetrics = new DisplayMetrics();
                                 display.getMetrics(outMetrics);
                                 width = (orientation == Configuration.ORIENTATION_PORTRAIT) ?
@@ -390,6 +389,8 @@ public class ModDisplay {
                                 height = (orientation == Configuration.ORIENTATION_PORTRAIT) ?
                                         outMetrics.heightPixels : outMetrics.widthPixels;
                             } else {
+                                final Object displayManager = XposedHelpers.getObjectField(param.thisObject, "mDisplayManager");
+                                final int display0 = ((int[])XposedHelpers.callMethod(displayManager, "getDisplayIds"))[0];
                                 Object displayInfo = XposedHelpers.callMethod(displayManager, "getDisplayInfo", display0);
                                 width = (Integer) XposedHelpers.callMethod(displayInfo, "getNaturalWidth");
                                 height = (Integer) XposedHelpers.callMethod(displayInfo, "getNaturalHeight");
