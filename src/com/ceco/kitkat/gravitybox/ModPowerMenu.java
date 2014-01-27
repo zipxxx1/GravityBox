@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Locale;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -290,6 +291,10 @@ public class ModPowerMenu {
                     prefs.reload();
                     if ((Boolean) param.args[0] && prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_POWERMENU_DISABLE_ON_LOCKSCREEN, false)) {
+                        Dialog d = (Dialog) XposedHelpers.getObjectField(param.thisObject, "mDialog");
+                        if (d == null) {
+                            XposedHelpers.callMethod(param.thisObject, "createDialog");
+                        }
                         param.setResult(null);
                     }
                 }
