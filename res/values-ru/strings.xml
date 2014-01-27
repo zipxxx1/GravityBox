@@ -215,7 +215,7 @@
     <string name="pref_cat_display_summary">Различные настройки экрана</string>
 
     <!-- Minimum brightness level -->
-    <string name="pref_brightness_min_title">Минимальный уровень яркости</string>
+    <string name="pref_brightness_min_title">Минимальный уровень</string>
     <string name="pref_brightness_min_summary">Установка минимального уровня яркости при ручной настройке (необходима перезагрузка)</string>
 
     <!--  Autobrightness levels -->
@@ -480,8 +480,8 @@
     <string name="pref_screen_dim_level_summary">Яркость для приглушенной подсветки - когда экран почти выключился (необходима перезагрузка)</string>
 
     <!-- Device type -->
-    <string name="device_phone">телефон</string>
-    <string name="device_tablet">планшет</string>
+    <string name="device_phone">Телефон</string>
+    <string name="device_tablet">Планшет</string>
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Настройки яркости</string>
@@ -1035,7 +1035,7 @@
     <string name="pref_qs_tile_span_disable_summary">Предотвращение расширения плиток пользователя, яркости и настроек в ландшафтном режиме</string>
 
     <!-- Force overflow menu button -->
-    <string name="pref_force_overflow_menu_button_title">Принуд. троеточие меню</string>
+    <string name="pref_force_overflow_menu_button_title">Отображение троеточия меню</string>
     <string name="pref_force_overflow_menu_button_summary">Необходима перезагрузка</string>
 
     <!-- Navbar: always on bottom -->
@@ -1057,7 +1057,7 @@
     <string name="pref_smart_radio_power_saving_mode_title">Экономный сетевой режим</string>
     <string name="pref_smart_radio_screen_off_title">При отключении экрана</string>
     <string name="pref_smart_radio_screen_off_summary">Активация экономного режима при отключении экрана, независимо от того, включена или выключена мобильная передача данных</string>
-    <string name="pref_smart_radio_ignore_locked_title">Игнорировать при блокировке</string>
+    <string name="pref_smart_radio_ignore_locked_title">Игнорир. при блокировке</string>
     <string name="pref_smart_radio_ignore_locked_summary">При включении экрана экономный режим не активируется, пока экран не будет разблокирован</string>
     <string name="pref_smart_radio_mode_change_delay_title">Задержка смены режима</string>
     <string name="pref_smart_radio_mode_change_delay_summary">Задержка при смене сетевого режима на определённое число секунд</string>
@@ -1090,12 +1090,12 @@
     <string name="pref_clear_recents_mode_1">Нажатие для очистки всего, кроме текущей задачи, удержание для очистки всего</string>
 
      <!-- Power menu: disable on lockscreen -->
-    <string name="pref_powermenu_disable_on_lockscreen_title">Без меню выкл.на экр.блок.</string>
+    <string name="pref_powermenu_disable_on_lockscreen_title">Откл меню на экр.блокировки</string>
 
     <!-- Extended force overflow menu button option -->
     <string name="overflow_menu_default">По умолчанию</string>
-    <string name="overflow_menu_enabled">Принудит. вкл</string>
-    <string name="overflow_menu_disabled">Принудит. выкл</string>
+    <string name="overflow_menu_enabled">Принудительно вкл</string>
+    <string name="overflow_menu_disabled">Принудительно выкл</string>
 
     <!-- Key Action: Take screenshot -->
     <string name="hwkey_action_screenshot">Снимок экрана</string>
