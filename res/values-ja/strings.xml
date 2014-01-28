@@ -888,7 +888,7 @@
     <string name="pref_cat_power_other_title">その他</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">ロック画面でも許可</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">ロック画面で再起動を許可</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">通信無し時の挙動</string>
@@ -1033,5 +1033,51 @@
     <string name="pref_smart_radio_screen_off_summary">モバイルデータ通信の有効/無効に関わらず画面がオフになったときに省電力モードに変更します。</string>
     <string name="pref_smart_radio_ignore_locked_title">ロック中は無視する</string>
     <string name="pref_smart_radio_ignore_locked_summary">画面がオンになったときロックを解除するまで通常モードに変更しないようにします。</string>
+    <string name="pref_smart_radio_mode_change_delay_title">モード変更の遅延</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">ネットワークモードの変更を指定した秒数だけ遅らせます。</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">カスタムキャリアラベル</string>
+    <string name="carrier_text_default">デフォルト</string>
+    <string name="carrier_text_empty">空白</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">満充電時に音声通知</string>
+    <string name="pref_battery_charged_sound_summary">バッテリーの充電が完了した時に音を鳴らします。</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">長押しアクション</string>
+    <string name="pref_pie_back_longpress_title">バックキー</string>
+    <string name="pref_pie_home_longpress_title">ホームキー</string>
+    <string name="pref_pie_recents_longpress_title">最近のアプリキー</string>
+    <string name="pref_pie_search_longpress_title">検索キー</string>
+    <string name="pref_pie_menu_longpress_title">メニューキー</string>
+    <string name="pref_pie_app_longpress_title">アプリ起動キー</string>
+
+   <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">通知LED点滅の遅延</string>
+    <string name="pref_pulse_notification_delay_summary">再起動すると反映されます。</string>
+
+    <!-- Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">全てのアプリを終了するボタンの動作</string>
+    <string name="pref_clear_recents_mode_0">タップで全て終了、長押しで現在のアプリ以外終了</string>
+    <string name="pref_clear_recents_mode_1">長押しで全て終了、タップで現在のアプリ以外終了</string>
+
+    <!-- Power menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">ロック画面で電源メニューを無効化</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">デフォルト</string>
+    <string name="overflow_menu_enabled">有効化</string>
+    <string name="overflow_menu_disabled">無効化</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">スクリーンショット</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">音量パネルを表示</string>
+
+    <!-- Blur effect intensity -->
+    <string name="pref_lockscreen_bg_blur_intensity_title">ぼかし効果の強さ</string>
     
 </resources>
