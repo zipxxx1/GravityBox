@@ -505,6 +505,7 @@ public class ModDialer {
 
         try {
             final Class<?> classStatusbarNotifier = XposedHelpers.findClass(CLASS_STATUSBAR_NOTIFIER, classLoader);
+            final Class<?> classCallList = XposedHelpers.findClass(CLASS_CALL_LIST, classLoader);
 
             XposedHelpers.findAndHookMethod(classStatusbarNotifier, "configureFullScreenIntent",
                     Notification.Builder.class, PendingIntent.class, CLASS_CALL, new XC_MethodHook() {
@@ -541,8 +542,17 @@ public class ModDialer {
             XposedHelpers.findAndHookMethod(classStatusbarNotifier, "buildAndSendNotification",
                     CLASS_CALL, CLASS_CONTACT_CACHE_ENTRY, boolean.class, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (!mNonIntrusiveIncomingCall) return;
+
+                    final Object callList = XposedHelpers.callStaticMethod(classCallList, "getInstance");
+                    final Object call = XposedHelpers.callMethod(param.thisObject, "getCallToShow", callList);
+                    final int callId = (Integer) XposedHelpers.callMethod(call, "getCallId");
+                    final int origCallId = (Integer) XposedHelpers.callMethod(param.args[0], "getCallId");
+                    if (call == null || callId != origCallId) {
+                        if (DEBUG) log("call is null or call ID != original call ID");
+                        return;
+                    }
 
                     final int state = (Integer) XposedHelpers.callMethod(param.args[0], "getState");
                     if (state == CALL_STATE_INCOMING) {
@@ -578,6 +588,12 @@ public class ModDialer {
                                 Intent iDismiss = new Intent(ACTION_DISMISS_INCOMING_CALL);
                                 PendingIntent piDismiss = PendingIntent.getBroadcast(context, 0, iDismiss, 0);
                                 b.addAction(iconId, label, piDismiss);
+                                // set ticker
+                                final boolean isConference = 
+                                        (Boolean) XposedHelpers.callMethod(call, "isConferenceCall");
+                                final String contentTitle = (String) XposedHelpers.callMethod(
+                                        param.thisObject, "getContentTitle", param.args[1], isConference);
+                                b.setTicker(contentTitle);
                             }
                         });
                     }
