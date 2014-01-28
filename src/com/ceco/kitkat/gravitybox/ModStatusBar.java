@@ -486,7 +486,15 @@ public class ModStatusBar {
                     mAnimPushUpOut = res.getIdentifier("push_up_out", "anim", "android");
                     mAnimPushDownIn = res.getIdentifier("push_down_in", "anim", "android");
                     mAnimFadeIn = res.getIdentifier("fade_in", "anim", "android");
-                    mCarrierTextView = (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierLabel");
+
+                    Object carrierTextView = XposedHelpers.getObjectField(param.thisObject, "mCarrierLabel");
+                    if (carrierTextView instanceof TextView[]) {
+                        if (((TextView[])carrierTextView).length > 0) {
+                            mCarrierTextView = (TextView) ((TextView[])carrierTextView)[0];
+                        }
+                    } else if (carrierTextView instanceof TextView) {
+                        mCarrierTextView = (TextView) carrierTextView;
+                    }
 
                     mScreenWidth = (float) res.getDisplayMetrics().widthPixels;
                     mMinBrightness = res.getInteger(res.getIdentifier(
