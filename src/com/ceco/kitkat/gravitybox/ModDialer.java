@@ -99,6 +99,7 @@ public class ModDialer {
     private static boolean mBroadcastReceiverRegistered;
     private static Class<?> mClassInCallPresenter;
     private static boolean mNonIntrusiveIncomingCallBlocked;
+    private static boolean mIsCallUiInBackground;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -414,7 +415,7 @@ public class ModDialer {
                     if (state == CALL_STATE_INCOMING) {
                         mIncomingCall = param.args[0];
                         attachSensorListener();
-                        if (mNonIntrusiveIncomingCall) {
+                        if (mIsCallUiInBackground) {
                             final Object callCmdClient = 
                                     XposedHelpers.callStaticMethod(mClassCallCmdClient, "getInstance");
                             if (callCmdClient != null) {
@@ -424,6 +425,13 @@ public class ModDialer {
                     } else if (state == CALL_STATE_WAITING &&
                             mCallVibrations.contains(GravityBoxSettings.CV_WAITING)) {
                         vibrate(200, 300, 500);
+                        if (mIsCallUiInBackground) {
+                            final Object callCmdClient = 
+                                    XposedHelpers.callStaticMethod(mClassCallCmdClient, "getInstance");
+                            if (callCmdClient != null) {
+                                XposedHelpers.callMethod(callCmdClient, "setSystemBarNavigationEnabled", true);
+                            }
+                        }
                     }
                 }
             });
@@ -503,6 +511,7 @@ public class ModDialer {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     refreshPhonePrefs();
+                    mIsCallUiInBackground = false;
                     if (!mNonIntrusiveIncomingCall) return;
                     if (mNonIntrusiveIncomingCallBlocked) {
                         mNonIntrusiveIncomingCallBlocked = false;
@@ -517,6 +526,7 @@ public class ModDialer {
                         mSetFullscreenIntentHook = XposedHelpers.findAndHookMethod(Notification.Builder.class,
                                 "setFullScreenIntent", PendingIntent.class, boolean.class, 
                                     XC_MethodReplacement.DO_NOTHING);
+                        mIsCallUiInBackground = true; 
                     }
                 }
                 @Override
