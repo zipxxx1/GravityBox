@@ -605,12 +605,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SMART_RADIO_NORMAL_MODE = "pref_smart_radio_normal_mode";
     public static final String PREF_KEY_SMART_RADIO_POWER_SAVING_MODE = "pref_smart_radio_power_saving_mode";
     public static final String PREF_KEY_SMART_RADIO_SCREEN_OFF = "pref_smart_radio_screen_off";
+    public static final String PREF_KEY_SMART_RADIO_SCREEN_OFF_DELAY = "pref_smart_radio_screen_off_delay";
     public static final String PREF_KEY_SMART_RADIO_IGNORE_LOCKED = "pref_smart_radio_ignore_locked";
     public static final String PREF_KEY_SMART_RADIO_MODE_CHANGE_DELAY = "pref_smart_radio_mode_change_delay";
     public static final String ACTION_PREF_SMART_RADIO_CHANGED = "gravitybox.intent.action.SMART_RADIO_CHANGED";
     public static final String EXTRA_SR_NORMAL_MODE = "smartRadioNormalMode";
     public static final String EXTRA_SR_POWER_SAVING_MODE = "smartRadioPowerSavingMode";
     public static final String EXTRA_SR_SCREEN_OFF = "smartRadioScreenOff";
+    public static final String EXTRA_SR_SCREEN_OFF_DELAY = "smartRadioScreenOffDelay";
     public static final String EXTRA_SR_IGNORE_LOCKED = "smartRadioIgnoreLocked";
     public static final String EXTRA_SR_MODE_CHANGE_DELAY = "smartRadioModeChangeDelay";
 
@@ -2260,6 +2262,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
                 intent.putExtra(EXTRA_SR_SCREEN_OFF,
                         prefs.getBoolean(PREF_KEY_SMART_RADIO_SCREEN_OFF, false));
+            } else if (key.equals(PREF_KEY_SMART_RADIO_SCREEN_OFF_DELAY)) {
+                intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
+                intent.putExtra(EXTRA_SR_SCREEN_OFF_DELAY,
+                        prefs.getInt(PREF_KEY_SMART_RADIO_SCREEN_OFF_DELAY, 0));
             } else if (key.equals(PREF_KEY_SMART_RADIO_IGNORE_LOCKED)) {
                 intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
                 intent.putExtra(EXTRA_SR_IGNORE_LOCKED,
