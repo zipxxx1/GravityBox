@@ -95,7 +95,7 @@ public class ModSmartRadio {
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
                 if (DEBUG) log("Screen turning off");
                 mIsScreenOff = true;
-                if (mPowerSaveWhenScreenOff) {
+                if (mPowerSaveWhenScreenOff && !isTetheringViaMobileNetwork()) {
                     switchToState(State.POWER_SAVING, true);
                 }
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
@@ -137,6 +137,47 @@ public class ModSmartRadio {
         }
     }
 
+    private static boolean isTetheringViaMobileNetwork() {
+        try {
+            String[] wifiRegexs = (String[]) XposedHelpers.callMethod(mConnManager, "getTetherableWifiRegexs");
+            String[] usbRegexs = (String[]) XposedHelpers.callMethod(mConnManager, "getTetherableUsbRegexs");
+            String[] btRegexes = (String[]) XposedHelpers.callMethod(mConnManager, "getTetherableBluetoothRegexs");
+            String[] tetheredIfaces = (String[]) XposedHelpers.callMethod(mConnManager, "getTetheredIfaces");
+
+            for (String tiface : tetheredIfaces) {
+                // if wifi tethering active it's obvious it goes via mobile network
+                for (String regex : wifiRegexs) {
+                    if (tiface.matches(regex)) {
+                        if (DEBUG) log("isTetheringViaMobileNetwork: WiFi tethering enabled");
+                        return true;
+                    }
+                }
+
+                // if not WiFi connected check for USB and BT tethering
+                if (!isWifiConnected()) {
+                    for (String regex : usbRegexs) {
+                        if (tiface.matches(regex)) {
+                            if (DEBUG) log("isTetheringViaMobileNetwork: USB tethering enabled and WiFi not connected");
+                            return true;
+                        }
+                    }
+                    for (String regex : btRegexes) {
+                        if (tiface.matches(regex)) {
+                            if (DEBUG) log("isTetheringViaMobileNetwork: BT tethering enabled and WiFi not connected");
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            if (DEBUG) log("isTetheringViaMobileNetwork: nope");
+            return false;
+        } catch (Throwable t) {
+            log("isTetheringViaMobileNetwork: " + t.getMessage());
+            return false;
+        }
+    }
+
     private static boolean isKeyguardLocked() {
         try {
             return mKeyguardManager.isKeyguardLocked();
@@ -146,11 +187,17 @@ public class ModSmartRadio {
     }
 
     private static boolean shouldSwitchToNormalState() {
-        return isMobileNetworkAvailable() && 
-                isMobileDataEnabled() &&
-                !isWifiConnected() &&
-                !(mIsScreenOff && mPowerSaveWhenScreenOff) &&
-                !(isKeyguardLocked() && mIgnoreWhileLocked);
+        // basic rules
+        boolean shouldSwitch = isMobileNetworkAvailable() && 
+                                   isMobileDataEnabled() &&
+                                   !isWifiConnected();
+        // additional rules
+        if (!isTetheringViaMobileNetwork()) {
+            shouldSwitch &= !(mIsScreenOff && mPowerSaveWhenScreenOff);
+            shouldSwitch &= !(isKeyguardLocked() && mIgnoreWhileLocked);
+        }
+
+        return shouldSwitch;
     }
 
     private static void switchToState(State newState) {
