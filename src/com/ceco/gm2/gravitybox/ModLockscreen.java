@@ -62,6 +62,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -72,6 +73,7 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModLockscreen {
     private static final String CLASS_PATH = "com.android.internal.policy.impl.keyguard";
     private static final String TAG = "GB:ModLockscreen";
+    public static final String PACKAGE_NAME = "com.android.keyguard";
 
     private static final String CLASS_KGVIEW_MANAGER = CLASS_PATH + ".KeyguardViewManager";
     private static final String CLASS_KG_HOSTVIEW = CLASS_PATH + ".KeyguardHostView";
@@ -87,6 +89,7 @@ public class ModLockscreen {
     private static final String CLASS_KG_ACTIVITY_LAUNCHER = CLASS_PATH + ".KeyguardActivityLauncher";
     private static final String CLASS_CARRIER_TEXT = Utils.isMtkDevice() ?
             CLASS_PATH + ".MediatekCarrierText" : CLASS_PATH + ".CarrierText";
+    private static final String ENUM_SECURITY_MODE = CLASS_PATH + ".KeyguardSecurityModel.SecurityMode";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
@@ -151,6 +154,8 @@ public class ModLockscreen {
             final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, null);
             final Class<?> kgActivityLauncherClass = XposedHelpers.findClass(CLASS_KG_ACTIVITY_LAUNCHER, null);
             final Class<?> carrierTextClass = XposedHelpers.findClass(CLASS_CARRIER_TEXT, null);
+            final Class<? extends Enum> kgSecurityModeEnum = 
+                    (Class<? extends Enum>) XposedHelpers.findClass(ENUM_SECURITY_MODE, null);
 
             boolean enableMenuKey = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, false);
@@ -449,6 +454,21 @@ public class ModLockscreen {
                         XposedHelpers.setFloatField(mGlowPadView, "mFirstItemOffset", 0);
                     }
                     mGlowPadView.requestLayout();
+
+                    // bring emergency button on slider lockscreen to front when keyguard is secured
+                    // and we are showing slide to unlock because of ring targets
+                    final Object lockPatternUtils = XposedHelpers.getObjectField(param.thisObject, "mLockPatternUtils");
+                    if (lockPatternUtils != null && 
+                            (Boolean) XposedHelpers.callMethod(lockPatternUtils, "isSecure")) {
+                        int fcResId = res.getIdentifier("keyguard_selector_fade_container", "id", PACKAGE_NAME);
+                        if (fcResId != 0) {
+                            LinearLayout ecaContainer = 
+                                    (LinearLayout) ((View)param.thisObject).findViewById(fcResId);
+                            if (ecaContainer != null) {
+                                ecaContainer.bringToFront();
+                            }
+                        }
+                    }
                 }
             });
 
@@ -716,6 +736,30 @@ public class ModLockscreen {
                     }
                 });
             }
+
+            XposedHelpers.findAndHookMethod(kgHostViewClass, "showPrimarySecurityScreen",
+                    boolean.class, new XC_MethodHook() {
+                @SuppressWarnings("unchecked")
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_ENABLE, false)) return;
+
+                    final Object currentSecuritySelection = 
+                            XposedHelpers.getObjectField(param.thisObject, "mCurrentSecuritySelection");
+                    final boolean isSimOrAccount = 
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum,
+                                    Utils.isMtkDevice() ? "SimPinPuk1" : "SimPin") ||
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum,
+                                    Utils.isMtkDevice() ? "SimPinPuk2" : "SimPuk") ||
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "Account") ||
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "Invalid");
+                    if (!isSimOrAccount) {
+                        XposedHelpers.callMethod(param.thisObject, "showSecurityScreen",
+                                Enum.valueOf(kgSecurityModeEnum, "None"));
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
