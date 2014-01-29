@@ -15,6 +15,7 @@
 
 package com.ceco.gm2.gravitybox;
 
+import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -45,14 +46,13 @@ public class ModSmartRadio {
     private static int mNormalMode;
     private static int mPowerSavingMode;
     private static ConnectivityManager mConnManager;
-    private static boolean mWasMobileDataEnabled;
-    private static boolean mWasMobileNetworkAvailable;
     private static State mCurrentState = State.UNKNOWN;
     private static boolean mIsScreenOff;
     private static boolean mPowerSaveWhenScreenOff;
     private static boolean mIgnoreWhileLocked;
     private static NetworkModeChanger mNetworkModeChanger;
     private static int mModeChangeDelay;
+    private static KeyguardManager mKeyguardManager;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -81,8 +81,6 @@ public class ModSmartRadio {
                     if (DEBUG) log("mModeChangeDelay = " + mModeChangeDelay);
                 }
             } else if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                boolean mobileDataEnabled = isMobileDataEnabled(); 
-                boolean mobileNetworkAvailable = isMobileNetworkAvailable();
                 int nwType = -1;
                 if (Build.VERSION.SDK_INT > 16) {
                     nwType = intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, -1);
@@ -92,45 +90,30 @@ public class ModSmartRadio {
                 }
                 if (nwType == -1) return;
                 NetworkInfo nwInfo = mConnManager.getNetworkInfo(nwType);
-                if (nwType == ConnectivityManager.TYPE_WIFI) {
-                    if (DEBUG) log("Network type: WIFI; connected: " + nwInfo.isConnected());
-                    if (nwInfo.isConnected()) {
-                        switchToState(State.POWER_SAVING);
-                    } else if (mobileDataEnabled && !(mIsScreenOff && mPowerSaveWhenScreenOff)) {
+                if (nwType == ConnectivityManager.TYPE_WIFI ||
+                        nwType == ConnectivityManager.TYPE_MOBILE) {
+                    if (DEBUG) log("Network type: " + nwType + "; connected: " + nwInfo.isConnected());
+                    if (shouldSwitchToNormalState()) {
                         switchToState(State.NORMAL);
-                    }
-                } else if (nwType == ConnectivityManager.TYPE_MOBILE) {
-                    if (DEBUG) log("Network type: MOBILE; connected: " + nwInfo.isConnected());
-                    boolean wifiConnected = isWifiConnected();
-                    if (!mWasMobileDataEnabled && mobileDataEnabled && !wifiConnected) {
-                        if (DEBUG) log("Mobile data got enabled and wifi not connected");
-                        switchToState(State.NORMAL);
-                    } else if (mWasMobileDataEnabled && !mobileDataEnabled) {
-                        if (DEBUG) log("Mobile data got disabled");
-                        switchToState(State.POWER_SAVING);
-                    } else if (!mWasMobileNetworkAvailable && mobileNetworkAvailable 
-                         && mobileDataEnabled && !wifiConnected) {
-                         if (DEBUG) log("Mobile network got available and data active");
+                    } else {
                          switchToState(State.NORMAL, true);
                     }
-                    mWasMobileDataEnabled = mobileDataEnabled;
-                    mWasMobileNetworkAvailable = mobileNetworkAvailable;
                 }
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
                 if (DEBUG) log("Screen turning off");
-                if (mPowerSaveWhenScreenOff) {
-                    switchToState(State.POWER_SAVING, true, true);
-                }
                 mIsScreenOff = true;
+                if (mPowerSaveWhenScreenOff) {
+                    switchToState(State.POWER_SAVING, true);
+                }
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
                 if (DEBUG) log("Screen turning on");
-                if (!mIgnoreWhileLocked && isMobileDataEnabled() && !isWifiConnected()) {
+                mIsScreenOff = false;
+                if (shouldSwitchToNormalState()) {
                     switchToState(State.NORMAL);
                 }
-                mIsScreenOff = false;
             } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
                 if (DEBUG) log("Keyguard unlocked");
-                if (mIgnoreWhileLocked && isMobileDataEnabled() && !isWifiConnected()) {
+                if (shouldSwitchToNormalState()) {
                     switchToState(State.NORMAL);
                 }
             }
@@ -161,15 +144,27 @@ public class ModSmartRadio {
         }
     }
 
+    private static boolean isKeyguardLocked() {
+        try {
+            return mKeyguardManager.isKeyguardLocked();
+        } catch (Throwable t) {
+            return false;
+        }
+    }
+
+    private static boolean shouldSwitchToNormalState() {
+        return isMobileNetworkAvailable() && 
+                isMobileDataEnabled() &&
+                !isWifiConnected() &&
+                !(mIsScreenOff && mPowerSaveWhenScreenOff) &&
+                !(isKeyguardLocked() && mIgnoreWhileLocked);
+    }
+
     private static void switchToState(State newState) {
-        switchToState(newState, false, false);
+        switchToState(newState, false);
     }
 
     private static void switchToState(State newState, boolean force) {
-        switchToState(newState, force, false);
-    }
-
-    private static void switchToState(State newState, boolean force, boolean withWakeLock) {
         if (mCurrentState == newState && !force) {
             if (DEBUG) log("switchToState: new state == previous state - ignoring");
             return;
@@ -187,8 +182,8 @@ public class ModSmartRadio {
                 case POWER_SAVING: networkMode = mPowerSavingMode; break;
                 default: break;
             }
-            mNetworkModeChanger.changeNetworkMode(networkMode, withWakeLock);
             mCurrentState = newState;
+            mNetworkModeChanger.changeNetworkMode(networkMode);
         } catch (Throwable t) {
             log("switchToState: " + t.getMessage());
         }
@@ -236,7 +231,7 @@ public class ModSmartRadio {
             releaseWakeLockIfHeld();
         }
 
-        public void changeNetworkMode(int networkMode, boolean withWakeLock) {
+        public void changeNetworkMode(int networkMode) {
             mHandler.removeCallbacks(this);
             releaseWakeLockIfHeld();
             if (networkMode == -1 || networkMode == mCurrentNetworkMode) return;
@@ -245,7 +240,7 @@ public class ModSmartRadio {
                 run();
             } else {
                 if (DEBUG) log("NetworkModeChanger: scheduling network mode change");
-                if (withWakeLock) {
+                if (mIsScreenOff) {
                     mWakeLock.acquire(mModeChangeDelay*1000+1000);
                     if (DEBUG) log("NetworkModeChanger: Wake Lock acquired");
                 }
@@ -280,6 +275,7 @@ public class ModSmartRadio {
                         if (DEBUG) log("Initializing SmartRadio");
 
                         mConnManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+                        mKeyguardManager = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
                         mNetworkModeChanger = new NetworkModeChanger(mContext);
 
                         IntentFilter intentFilter = new IntentFilter();
