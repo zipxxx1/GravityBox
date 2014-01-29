@@ -1073,4 +1073,9 @@
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Intensité de l\'effet de floutage</string>
 
+    <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">Économie d\'énergie différée</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Diffère la bascule en mode économie d\'énergie lorsque l\'écran s\'éteint. 
+        Remplace le délai par défaut pour le changement de mode réseau si la valeur n\'est pas nulle</string>
+
 </resources>
