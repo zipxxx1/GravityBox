@@ -15,7 +15,9 @@
 
 package com.ceco.gm2.gravitybox;
 
+import android.app.AlarmManager;
 import android.app.KeyguardManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +55,7 @@ public class ModSmartRadio {
     private static NetworkModeChanger mNetworkModeChanger;
     private static int mModeChangeDelay;
     private static KeyguardManager mKeyguardManager;
+    private static int mScreenOffDelay;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -79,6 +82,10 @@ public class ModSmartRadio {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_MODE_CHANGE_DELAY)) {
                     mModeChangeDelay = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_MODE_CHANGE_DELAY, 5);
                     if (DEBUG) log("mModeChangeDelay = " + mModeChangeDelay);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF_DELAY)) {
+                    mScreenOffDelay = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_SCREEN_OFF_DELAY, 0);
+                    if (DEBUG) log("mScreenOffDelay = " + mScreenOffDelay);
                 }
             } else if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 int nwType = -1;
@@ -116,6 +123,10 @@ public class ModSmartRadio {
                 if (shouldSwitchToNormalState()) {
                     switchToState(State.NORMAL);
                 }
+            }
+
+            if (mNetworkModeChanger != null) {
+                mNetworkModeChanger.onBroadcastReceived(context, intent);
             }
         }
     };
@@ -250,18 +261,22 @@ public class ModSmartRadio {
         }
     }
 
-    private static class NetworkModeChanger implements Runnable {
+    private static class NetworkModeChanger implements Runnable, BroadcastSubReceiver {
+        public static final String ACTION_CHANGE_MODE_ALARM = "gravitybox.smartradio.intent.action.CHANGE_MODE_ALARM";
         private Context mContext;
         private Handler mHandler;
         private int mNextNetworkMode;
         private int mCurrentNetworkMode;
         private WakeLock mWakeLock;
+        private AlarmManager mAlarmManager;
+        private PendingIntent mPendingIntent;
 
         public NetworkModeChanger(Context context) {
             mContext = context;
             mHandler = new Handler();
             mNextNetworkMode = -1;
             mCurrentNetworkMode = -1;
+            mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
 
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GB:SmartRadio");
@@ -281,17 +296,26 @@ public class ModSmartRadio {
         public void changeNetworkMode(int networkMode) {
             mHandler.removeCallbacks(this);
             releaseWakeLockIfHeld();
+            cancelPendingAlarm();
             if (networkMode == -1 || networkMode == mCurrentNetworkMode) return;
             mNextNetworkMode = networkMode;
-            if (mModeChangeDelay == 0) {
-                run();
+            if (mIsScreenOff && mNextNetworkMode == mPowerSavingMode && mScreenOffDelay != 0) {
+                if (DEBUG) log("NetworkModeChanger: scheduling alarm for switching to power saving mode");
+                Intent intent = new Intent(ACTION_CHANGE_MODE_ALARM);
+                mPendingIntent = PendingIntent.getBroadcast(mContext, 1, intent, PendingIntent.FLAG_ONE_SHOT);
+                long triggerAtMillis = System.currentTimeMillis() + mScreenOffDelay*60*1000;
+                mAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, mPendingIntent);
             } else {
-                if (DEBUG) log("NetworkModeChanger: scheduling network mode change");
-                if (mIsScreenOff) {
-                    mWakeLock.acquire(mModeChangeDelay*1000+1000);
-                    if (DEBUG) log("NetworkModeChanger: Wake Lock acquired");
+                if (mModeChangeDelay == 0) {
+                    run();
+                } else {
+                    if (DEBUG) log("NetworkModeChanger: scheduling network mode change");
+                    if (mIsScreenOff) {
+                        mWakeLock.acquire(mModeChangeDelay*1000+1000);
+                        if (DEBUG) log("NetworkModeChanger: Wake Lock acquired");
+                    }
+                    mHandler.postDelayed(this, mModeChangeDelay*1000);
                 }
-                mHandler.postDelayed(this, mModeChangeDelay*1000);
             }
         }
 
@@ -299,6 +323,21 @@ public class ModSmartRadio {
             if (mWakeLock != null && mWakeLock.isHeld()) {
                 mWakeLock.release();
                 if (DEBUG) log("NetworkModeChanger: Wake Lock released");
+            }
+        }
+
+        private void cancelPendingAlarm() {
+            if (mAlarmManager != null && mPendingIntent != null) {
+                mAlarmManager.cancel(mPendingIntent);
+            }
+        }
+
+        @Override
+        public void onBroadcastReceived(Context context, Intent intent) {
+            if (intent.getAction().equals(ACTION_CHANGE_MODE_ALARM)) {
+                if (DEBUG) log("ACTION_CHANGE_MODE_ALARM received");
+                run();
+                mPendingIntent = null;
             }
         }
     }
@@ -313,6 +352,7 @@ public class ModSmartRadio {
             mPowerSaveWhenScreenOff = prefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_SCREEN_OFF, false);
             mIgnoreWhileLocked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_IGNORE_LOCKED, true);
             mModeChangeDelay = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_MODE_CHANGE_DELAY, 5);
+            mScreenOffDelay = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_SCREEN_OFF_DELAY, 0);
 
             XposedHelpers.findAndHookMethod(classSystemUIService, "onCreate", new XC_MethodHook() {
                 @Override
@@ -331,6 +371,7 @@ public class ModSmartRadio {
                         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
                         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                         intentFilter.addAction(Intent.ACTION_USER_PRESENT);
+                        intentFilter.addAction(NetworkModeChanger.ACTION_CHANGE_MODE_ALARM);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
@@ -338,5 +379,5 @@ public class ModSmartRadio {
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
-    } 
+    }
 }
