@@ -56,6 +56,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -82,6 +83,7 @@ public class ModLockscreen {
     private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
     private static final String CLASS_KG_ACTIVITY_LAUNCHER = CLASS_PATH + ".KeyguardActivityLauncher";
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
+    private static final String ENUM_SECURITY_MODE = CLASS_PATH + ".KeyguardSecurityModel.SecurityMode";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
@@ -167,6 +169,8 @@ public class ModLockscreen {
             final Class<?> kgActivityLauncherClass = XposedHelpers.findClass(CLASS_KG_ACTIVITY_LAUNCHER, classLoader);
             final Class<?> kgViewManagerHostClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER_HOST, classLoader);
             final Class<?> carrierTextClass = XposedHelpers.findClass(CLASS_CARRIER_TEXT, classLoader);
+            final Class<? extends Enum> kgSecurityModeEnum = 
+                    (Class<? extends Enum>) XposedHelpers.findClass(ENUM_SECURITY_MODE, classLoader);
 
             XposedHelpers.findAndHookMethod(kgViewManagerClass, "maybeCreateKeyguardLocked", 
                     boolean.class, boolean.class, Bundle.class, new XC_MethodHook() {
@@ -421,6 +425,21 @@ public class ModLockscreen {
                         XposedHelpers.setFloatField(mGlowPadView, "mFirstItemOffset", 0);
                     }
                     mGlowPadView.requestLayout();
+
+                    // bring emergency button on slider lockscreen to front when keyguard is secured
+                    // and we are showing slide to unlock because of ring targets
+                    final Object lockPatternUtils = XposedHelpers.getObjectField(param.thisObject, "mLockPatternUtils");
+                    if (lockPatternUtils != null && 
+                            (Boolean) XposedHelpers.callMethod(lockPatternUtils, "isSecure")) {
+                        int fcResId = res.getIdentifier("keyguard_selector_fade_container", "id", PACKAGE_NAME);
+                        if (fcResId != 0) {
+                            LinearLayout ecaContainer = 
+                                    (LinearLayout) ((View)param.thisObject).findViewById(fcResId);
+                            if (ecaContainer != null) {
+                                ecaContainer.bringToFront();
+                            }
+                        }
+                    }
                 }
             });
 
@@ -612,6 +631,28 @@ public class ModLockscreen {
                     String carrierText = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
                     if (carrierText != null && !carrierText.isEmpty()) {
                         param.setResult(carrierText.trim());
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(kgHostViewClass, "showPrimarySecurityScreen",
+                    boolean.class, new XC_MethodHook() {
+                @SuppressWarnings("unchecked")
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_ENABLE, false)) return;
+
+                    final Object currentSecuritySelection = 
+                            XposedHelpers.getObjectField(param.thisObject, "mCurrentSecuritySelection");
+                    final boolean isSimOrAccount = 
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "SimPin") ||
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "SimPuk") ||
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "Account") ||
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "Invalid");
+                    if (!isSimOrAccount) {
+                        XposedHelpers.callMethod(param.thisObject, "showSecurityScreen",
+                                Enum.valueOf(kgSecurityModeEnum, "None"));
+                        param.setResult(null);
                     }
                 }
             });
