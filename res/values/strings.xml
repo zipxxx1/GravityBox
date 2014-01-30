@@ -1078,4 +1078,16 @@
     <string name="pref_smart_radio_screen_off_delay_summary">Delays switching to power saving mode when screen turns off. 
         Overrides default network mode change delay if value is non-zero.</string>
 
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Backup settings</string>
+    <string name="pref_settings_restore_title">Restore settings</string>
+    <string name="settings_backup_failed">Backup failed</string>
+    <string name="settings_backup_no_prefs">Preferences file not found</string>
+    <string name="settings_backup_success">Backup successful</string>
+    <string name="settings_restore_no_backup">There\'s no backup to restore</string>
+    <string name="settings_restore_confirm">Your current preferences will be replaced. Are you sure?</string>
+    <string name="settings_restore_failed">Restore failed</string>
+    <string name="settings_restore_success">Restore successful</string>
+    <string name="settings_restore_reboot">Please, reboot your device</string>
+
 </resources>

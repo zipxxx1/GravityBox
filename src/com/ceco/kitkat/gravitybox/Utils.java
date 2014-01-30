@@ -304,10 +304,10 @@ public class Utils {
             int bytesRead; 
             while ((bytesRead = input.read(buf)) > 0) { 
                 output.write(buf, 0, bytesRead); 
-            } 
-        } finally { 
-            input.close(); 
-            output.close(); 
+            }
+        } finally {
+            if (input != null) input.close(); 
+            if (output != null) output.close(); 
         } 
     } 
 
