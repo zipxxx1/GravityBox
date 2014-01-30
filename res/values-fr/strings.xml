@@ -1078,4 +1078,16 @@
     <string name="pref_smart_radio_screen_off_delay_summary">Diffère la bascule en mode économie d\'énergie lorsque l\'écran s\'éteint. 
         Remplace le délai par défaut pour le changement de mode réseau si la valeur n\'est pas nulle</string>
 
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Sauvegarder les paramètres</string>
+    <string name="pref_settings_restore_title">Restaurer les paramètres</string>
+    <string name="settings_backup_failed">La sauvegarde a échoué</string>
+    <string name="settings_backup_no_prefs">Fichier de préférences introuvable</string>
+    <string name="settings_backup_success">La sauvegarde a été réalisée</string>
+    <string name="settings_restore_no_backup">Il n\'y a pas de sauvegarde à restaurer</string>
+    <string name="settings_restore_confirm">Vos préférences actuelles vont être remplacées. Êtes-vous sûr ?</string>
+    <string name="settings_restore_failed">La restauration a échoué</string>
+    <string name="settings_restore_success">La restauration a été effectuée</string>
+    <string name="settings_restore_reboot">S\'il vous plait, redémarrer votre appareil</string>
+
 </resources>
