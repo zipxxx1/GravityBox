@@ -1795,6 +1795,16 @@
             android:persistent="false"
             android:defaultValue="false" />
 
+        <Preference
+            android:key="pref_settings_backup"
+            android:title="@string/pref_settings_backup_title"
+            android:persistent="false" />
+
+        <Preference
+            android:key="pref_settings_restore"
+            android:title="@string/pref_settings_restore_title"
+            android:persistent="false" />
+
     </PreferenceScreen>
 
 </PreferenceScreen>

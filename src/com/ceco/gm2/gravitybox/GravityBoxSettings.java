@@ -32,6 +32,7 @@ import com.ceco.gm2.gravitybox.quicksettings.TileOrderActivity;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -635,6 +636,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_CAT_KEY_MISC_OTHER = "pref_cat_misc_other";
     public static final String PREF_KEY_PULSE_NOTIFICATION_DELAY = "pref_pulse_notification_delay";
+
+    private static final String PREF_KEY_SETTINGS_BACKUP = "pref_settings_backup";
+    private static final String PREF_KEY_SETTINGS_RESTORE = "pref_settings_restore";
 
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
@@ -2515,6 +2519,47 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 });
                 mDialog = builder.create();
                 mDialog.show();
+            } else if (PREF_KEY_SETTINGS_BACKUP.equals(pref.getKey())) {
+                SettingsManager.getInstance(getActivity()).backupSettings();
+            } else if (PREF_KEY_SETTINGS_RESTORE.equals(pref.getKey())) {
+                final SettingsManager sm = SettingsManager.getInstance(getActivity());
+                if (sm.isBackupAvailable()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.app_name)
+                    .setMessage(R.string.settings_restore_confirm)
+                    .setCancelable(true)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            if (sm.restoreSettings()) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                                .setTitle(R.string.app_name)
+                                .setMessage(R.string.settings_restore_reboot)
+                                .setCancelable(false)
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        getActivity().finish();
+                                    }
+                                });
+                                mDialog = builder.create();
+                                mDialog.show();
+                            }
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    mDialog = builder.create();
+                    mDialog.show();
+                } else {
+                    Toast.makeText(getActivity(), R.string.settings_restore_no_backup, Toast.LENGTH_SHORT).show();
+                }
             }
 
             if (intent != null) {
