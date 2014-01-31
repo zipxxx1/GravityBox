@@ -22,6 +22,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -34,6 +35,12 @@ public class SystemPropertyProvider {
     public static final String ACTION_GET_SYSTEM_PROPERTIES = 
             "gravitybox.intent.action.ACTION_GET_SYSTEM_PROPERTIES";
     public static final int RESULT_SYSTEM_PROPERTIES = 1025;
+    public static final String ACTION_REGISTER_UUID = 
+            "gravitybox.intent.action.ACTION_REGISTER_UUID";
+    public static final String EXTRA_UUID = "uuid";
+    private static final String SETTING_GRAVITYBOX_UUID = "gravitybox_uuid";
+
+    private static String mSettingsUuid;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -61,12 +68,14 @@ public class SystemPropertyProvider {
                         if (DEBUG) log("SystemUIService created. Registering BroadcastReceiver");
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(ACTION_GET_SYSTEM_PROPERTIES);
+                        intentFilter.addAction(ACTION_REGISTER_UUID);
                         context.registerReceiver(new BroadcastReceiver() {
                             @Override
                             public void onReceive(Context context, Intent intent) {
                                 if (DEBUG) log("Broadcast received: " + intent.toString());
                                 if (intent.getAction().equals(ACTION_GET_SYSTEM_PROPERTIES)
                                         && intent.hasExtra("receiver")) {
+                                    mSettingsUuid = intent.getStringExtra("settings_uuid");
                                     final Resources res = context.getResources();
                                     ResultReceiver receiver = intent.getParcelableExtra("receiver");
                                     Bundle data = new Bundle();
@@ -78,14 +87,23 @@ public class SystemPropertyProvider {
                                             getSystemConfigBool(res, "config_unplugTurnsOnScreen"));
                                     data.putInt("defaultNotificationLedOff",
                                             getSystemConfigInteger(res, "config_defaultNotificationLedOff"));
+                                    data.putBoolean("uuidRegistered", (mSettingsUuid != null &&
+                                            mSettingsUuid.equals(Settings.System.getString(
+                                                    context.getContentResolver(), SETTING_GRAVITYBOX_UUID))));
                                     if (DEBUG) {
                                         log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
                                         log("isTablet: " + data.getBoolean("isTablet"));
                                         log("hasNavigationBar: " + data.getBoolean("hasNavigationBar"));
                                         log("unplugTurnsOnScreen: " + data.getBoolean("unplugTurnsOnScreen"));
                                         log("defaultNotificationLedOff: " + data.getInt("defaultNotificationLedOff"));
+                                        log("uuidRegistered: " + data.getBoolean("uuidRegistered"));
                                     }
                                     receiver.send(RESULT_SYSTEM_PROPERTIES, data);
+                                } else if (intent.getAction().equals(ACTION_REGISTER_UUID) && 
+                                            intent.hasExtra(EXTRA_UUID) && 
+                                            intent.getStringExtra(EXTRA_UUID).equals(mSettingsUuid)) {
+                                    Settings.System.putString(context.getContentResolver(), 
+                                                SETTING_GRAVITYBOX_UUID, mSettingsUuid);
                                 }
                             }
                         }, intentFilter);
