@@ -1072,4 +1072,39 @@
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Grado de desenfoque</string>
  
+    <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">Esperar antes de activar ahorro de energía</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Retrasa el cambio al modo de ahorro de energía cuando la pantalla se apaga. 
+       Reemplaza al retraso para cambiar de modo de red predeterminado cuando el valor no es cero.</string>
+       
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Guardar configuración</string>
+    <string name="pref_settings_restore_title">Restaurar configuración</string>
+    <string name="settings_backup_failed">Fallo al guardar</string>
+    <string name="settings_backup_no_prefs">No se ha encontrado el archivo de preferencias</string>
+    <string name="settings_backup_success">Guardada correctamente</string>
+    <string name="settings_restore_no_backup">No hay ninguna configuración que restaurar</string>
+    <string name="settings_restore_confirm">Se reemplazarán tus preferencias actuales. ¿Estás seguro?</string>
+    <string name="settings_restore_failed">Fallo al restaurar</string>
+    <string name="settings_restore_success">Restaurada correctamente</string>
+    <string name="settings_restore_reboot">Por favor, reinicia tu dispositivo</string>
+    
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">Error al generar código hash específico de la aplicación</string>
+    <string name="wsc_parse_response_error">Error al analizar los datos obtenidos del servicio web</string>
+    <string name="wsc_hash_invalid">El servicio web ha rechazado la conexión porque el hash no coincide. Suele ocurrir si 
+        utilizas una versión no oficial o el APK de GravityBox ha sido modificado por terceras partes.</string>
+    <string name="wsc_please_wait">Espera&#8230;</string>
+    <string name="wsc_error">Error al comunicar con el servicio web: %s</string>
+    <string name="wsc_task_cancelled">Operación del servicio web cancelada</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">Error al analizar los datos de transacción obtenidos del servicio web</string>
+    <string name="wsc_trans_valid">Verificación de ID de transacción correcta. Las características Premium se desbloquearán al reiniciar GravityBox.</string>
+    <string name="wsc_trans_invalid">No se ha podido encontrar el registro de la ID de transacción especificada</string>
+    <string name="wsc_trans_violation">La ID de transacción especificada se ha registrado demasiadas veces. Ponte en contacto con el desarrollador de GravityBox para solucionarlo.</string>
+    <string name="wsc_trans_blocked">La ID de transacción especificada se ha bloqueado. Ponte en contacto con el desarrollador de GravityBox para solucionarlo.</string>
+    <string name="pref_trans_verification_title">ID de transacción de PayPal</string>
+    <string name="pref_trans_verification_summary">Si has donado, puedes introducir la ID de la transacción de PayPal para desbloquear las características Premium</string>
+    <string name="wsc_trans_required_summary">Esta característica requiere una ID de transacción de PayPal válida</string>
 </resources>
