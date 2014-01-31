@@ -17,9 +17,19 @@ package com.ceco.gm2.gravitybox;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.Toast;
 
 public class SettingsManager {
@@ -212,5 +222,16 @@ public class SettingsManager {
 
         Toast.makeText(mContext, R.string.settings_restore_success, Toast.LENGTH_SHORT).show();
         return true;
+    }
+
+    public String getOrCreateUuid() {
+        final String prefsName = mContext.getPackageName() + "_preferences";
+        SharedPreferences prefs = mContext.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
+        String uuid = prefs.getString("settings_uuid", null);
+        if (uuid == null) {
+            uuid = UUID.randomUUID().toString();
+            prefs.edit().putString("settings_uuid", uuid).commit();
+        }
+        return uuid;
     }
 }

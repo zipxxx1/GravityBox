@@ -22,17 +22,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import com.ceco.gm2.gravitybox.preference.AppPickerPreference;
 import com.ceco.gm2.gravitybox.preference.AutoBrightnessDialogPreference;
 import com.ceco.gm2.gravitybox.preference.SeekBarPreference;
 import com.ceco.gm2.gravitybox.quicksettings.TileOrderActivity;
+import com.ceco.gm2.gravitybox.webserviceclient.RequestParams;
+import com.ceco.gm2.gravitybox.webserviceclient.TransactionResult;
+import com.ceco.gm2.gravitybox.webserviceclient.TransactionResult.TransactionStatus;
+import com.ceco.gm2.gravitybox.webserviceclient.WebServiceClient;
+import com.ceco.gm2.gravitybox.webserviceclient.WebServiceClient.WebServiceTaskListener;
 
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -640,6 +645,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     private static final String PREF_KEY_SETTINGS_BACKUP = "pref_settings_backup";
     private static final String PREF_KEY_SETTINGS_RESTORE = "pref_settings_restore";
 
+    private static final String PREF_KEY_TRANS_VERIFICATION = "pref_trans_verification"; 
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -681,6 +688,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public boolean hasNavigationBar;
         public boolean unplugTurnsOnScreen;
         public int defaultNotificationLedOff;
+        public boolean uuidRegistered;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -697,6 +705,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (data.containsKey("defaultNotificationLedOff")) {
                 defaultNotificationLedOff = data.getInt("defaultNotificationLedOff");
+            }
+            if (data.containsKey("uuidRegistered")) {
+                uuidRegistered = data.getBoolean("uuidRegistered");
             }
         }
     }
@@ -741,6 +752,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             Intent intent = new Intent();
             intent.setAction(SystemPropertyProvider.ACTION_GET_SYSTEM_PROPERTIES);
             intent.putExtra("receiver", mReceiver);
+            intent.putExtra("settings_uuid", SettingsManager.getInstance(this).getOrCreateUuid());
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setIndeterminate(true);
             mProgressDialog.setTitle(R.string.app_name);
@@ -964,6 +976,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefPulseNotificationDelay;
         private PreferenceCategory mPrefCatMiscOther;
         private SeekBarPreference mPrefTorchAutoOff;
+        private WebServiceClient<TransactionResult> mTransWebServiceClient;
+        private Preference mPrefBackup;
+        private Preference mPrefRestore;
+        private EditTextPreference mPrefTransVerification;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1238,6 +1254,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatMiscOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_MISC_OTHER);
             mPrefTorchAutoOff = (SeekBarPreference) findPreference(PREF_KEY_TORCH_AUTO_OFF);
 
+            mPrefBackup = findPreference(PREF_KEY_SETTINGS_BACKUP);
+            mPrefRestore = findPreference(PREF_KEY_SETTINGS_RESTORE);
+
+            mPrefTransVerification = (EditTextPreference) findPreference(PREF_KEY_TRANS_VERIFICATION);
+
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
                 mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
@@ -1477,6 +1498,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public void onPause() {
             mPrefs.unregisterOnSharedPreferenceChangeListener(this);
 
+            if (mTransWebServiceClient != null) {
+                mTransWebServiceClient.abortTaskIfRunning();
+            }
+
             if (mDialog != null && mDialog.isShowing()) {
                 mDialog.dismiss();
                 mDialog = null;
@@ -1514,6 +1539,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefPulseNotificationDelay.setDefaultValue(delay);
                 mPrefPulseNotificationDelay.setValue(delay);
             }
+
+            if (!sSystemProperties.uuidRegistered) {
+                mPrefBackup.setEnabled(false);
+                mPrefBackup.setSummary(R.string.wsc_trans_required_summary);
+                mPrefRestore.setEnabled(false);
+                mPrefRestore.setSummary(R.string.wsc_trans_required_summary);
+                mPrefs.edit().putString(PREF_KEY_TRANS_VERIFICATION, null).commit();
+                mPrefTransVerification.getEditText().setText(null);
+            } else {
+                mPrefTransVerification.setEnabled(false);
+                mPrefTransVerification.setSummary(mPrefs.getString(PREF_KEY_TRANS_VERIFICATION,
+                        getString(R.string.pref_trans_verification_summary)));
+            }
+            WebServiceClient.getAppSignatureHash(getActivity());
         }
 
         private void updatePreferences(String key) {
@@ -2399,6 +2438,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_BATTERY_CHARGED_SOUND_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_CHARGED_SOUND,
                         prefs.getBoolean(PREF_KEY_BATTERY_CHARGED_SOUND, false));
+            } else if (key.equals(PREF_KEY_TRANS_VERIFICATION)) {
+                String transId = prefs.getString(key, null);
+                if (transId != null && !transId.trim().isEmpty()) {
+                    checkTransaction(transId.toUpperCase(Locale.US));
+                }
             }
             if (intent.getAction() != null) {
                 getActivity().sendBroadcast(intent);
@@ -2840,6 +2884,62 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mShortcutHandler.onShortcutCancelled();
                 }
             }
+        }
+
+        private void checkTransaction(String transactionId) {
+            mTransWebServiceClient = new WebServiceClient<TransactionResult>(getActivity(),
+                    new WebServiceTaskListener<TransactionResult>() {
+                        @Override
+                        public void onWebServiceTaskCompleted(final TransactionResult result) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.app_name)
+                            .setMessage(result.getTransactionStatusMessage())
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    if (result.getTransactionStatus() == TransactionStatus.TRANSACTION_VALID) {
+                                        Intent intent = new Intent(SystemPropertyProvider.ACTION_REGISTER_UUID);
+                                        intent.putExtra(SystemPropertyProvider.EXTRA_UUID,
+                                                SettingsManager.getInstance(getActivity()).getOrCreateUuid());
+                                        getActivity().sendBroadcast(intent);
+                                        getActivity().finish();
+                                    }
+                                }
+                            });
+                            mDialog = builder.create();
+                            mDialog.show();
+                        }
+
+                        @Override
+                        public void onWebServiceTaskCancelled() { 
+                            Toast.makeText(getActivity(), R.string.wsc_task_cancelled, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public TransactionResult obtainWebServiceResultInstance() {
+                            return new TransactionResult(getActivity());
+                        }
+
+                        @Override
+                        public void onWebServiceTaskError(TransactionResult result) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                            .setTitle(R.string.app_name)
+                            .setMessage(result.getMessage())
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            mDialog = builder.create();
+                            mDialog.show();
+                        }
+                    });
+            RequestParams params = new RequestParams(getActivity());
+            params.setAction("checkTransaction");
+            params.addParam("transactionId", transactionId);
+            mTransWebServiceClient.execute(params);
         }
     }
 }
