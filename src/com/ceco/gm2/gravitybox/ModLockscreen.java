@@ -85,7 +85,8 @@ public class ModLockscreen {
     private static final String CLASS_KG_VIEW_BASE = CLASS_PATH + ".KeyguardViewBase";
     private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
     private static final String CLASS_KG_ACTIVITY_LAUNCHER = CLASS_PATH + ".KeyguardActivityLauncher";
-    private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
+    private static final String CLASS_CARRIER_TEXT = Utils.isMtkDevice() ?
+            CLASS_PATH + ".MediatekCarrierText" : CLASS_PATH + ".CarrierText";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
@@ -118,6 +119,7 @@ public class ModLockscreen {
     private static float mDisplayDensity;
     private static ImageView mLockScreenWallpaperImage;
     private static boolean mFirstRun;
+    private static String mCarrierText[];
 
     // Battery Arc
     private static HandleDrawable mHandleDrawable;
@@ -643,15 +645,77 @@ public class ModLockscreen {
                 }
             });
 
-            XposedBridge.hookAllMethods(carrierTextClass, "getCarrierTextForSimState", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    String carrierText = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
-                    if (carrierText != null && !carrierText.isEmpty()) {
-                        param.setResult(carrierText.trim());
-                    }
+            if (Utils.isMtkDevice()) {
+                if (Utils.hasGeminiSupport()) {
+                    XposedHelpers.findAndHookMethod(carrierTextClass, "showOrHideCarrier", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                            TextView carrierDivider = (TextView) XposedHelpers.getObjectField(
+                                    param.thisObject, "mCarrierDivider");
+                            mCarrierText = new String[] {
+                                    prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null),
+                                    prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER2_TEXT, null)};
+
+                            if (carrierDivider != null && mCarrierText != null) {
+                                if ((!mCarrierText[0].isEmpty() && mCarrierText[0].trim().isEmpty()) ||
+                                        (!mCarrierText[1].isEmpty() && mCarrierText[1].trim().isEmpty()))
+                                    carrierDivider.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+
+                    XposedHelpers.findAndHookMethod(carrierTextClass, "updateCarrierTextGemini",
+                            "com.android.internal.telephony.IccCardConstants$State", CharSequence.class, CharSequence.class,
+                            int.class, new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                            TextView carrierTextView[] = new TextView[] {
+                                    (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierView"),
+                                    (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierGeminiView")};
+
+                            if (carrierTextView != null && mCarrierText != null) {
+                                for (int i=0; i<2; i++) {
+                                    if (mCarrierText[i].isEmpty()) {
+                                        carrierTextView[i].setVisibility(View.VISIBLE);
+                                    } else {
+                                        if (mCarrierText[i].trim().isEmpty()) {
+                                            carrierTextView[i].setText("");
+                                            carrierTextView[i].setVisibility(View.GONE);
+                                            carrierTextView[i == 0 ? 1 : 0].setGravity(0x11);
+                                        } else {
+                                            carrierTextView[i].setText(mCarrierText[i]);
+                                            carrierTextView[i].setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    XposedHelpers.findAndHookMethod(carrierTextClass, "updateCarrierText",
+                            "com.android.internal.telephony.IccCardConstants$State", CharSequence.class, CharSequence.class,
+                            new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                            TextView carrierTextView = (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierView");
+                            String carrierText = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
+                            if (carrierText != null && !carrierText.isEmpty()) {
+                                carrierTextView.setText(carrierText.trim());
+                            }
+                        }
+                    });
                 }
-            });
+            } else {
+                XposedBridge.hookAllMethods(carrierTextClass, "getCarrierTextForSimState", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        String carrierText = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
+                        if (carrierText != null && !carrierText.isEmpty()) {
+                            param.setResult(carrierText.trim());
+                        }
+                    }
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

@@ -224,6 +224,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
     public static final String PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK = "pref_lockscreen_statusbar_clock";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
+    public static final String PREF_KEY_LOCKSCREEN_CARRIER2_TEXT = "pref_lockscreen_carrier2_text";
     public static final String PREF_KEY_STATUSBAR_LOCK_POLICY = "pref_statusbar_lock_policy";
     public static final int SBL_POLICY_DEFAULT = 0;
     public static final int SBL_POLICY_UNLOCKED = 1;
@@ -831,6 +832,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefLockscreenBgBlurEffect;
         private SeekBarPreference mPrefLockscreenBlurIntensity;
         private EditTextPreference mPrefLockscreenCarrierText;
+        private EditTextPreference mPrefLockscreenCarrier2Text;
         private File wallpaperImage;
         private File wallpaperTemporary;
         private File notifBgImagePortrait;
@@ -1043,6 +1045,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     (SeekBarPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY);
             mPrefLockscreenCarrierText = 
                     (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER_TEXT);
+            mPrefLockscreenCarrier2Text = 
+                    (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER2_TEXT);
 
             wallpaperImage = new File(getActivity().getFilesDir() + "/lockwallpaper"); 
             wallpaperTemporary = new File(getActivity().getCacheDir() + "/lockwallpaper.tmp");
@@ -1323,7 +1327,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                     mPrefCatStatusbarColors.removePreference(mPrefSbDaColorSecondary);
-                    mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text); 
+                    mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text);
+                    mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
                 }
 
                 // Remove preferences not needed for MT6572
@@ -1878,6 +1883,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     carrierText = getString(R.string.carrier_text_empty);
                 }
                 mPrefLockscreenCarrierText.setSummary(carrierText);
+            }
+
+            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_CARRIER2_TEXT)) {
+                String carrier2Text = mPrefLockscreenCarrier2Text.getText();
+                if (carrier2Text == null || carrier2Text.isEmpty()) {
+                    carrier2Text = getString(R.string.carrier_text_default);
+                } else if (carrier2Text.trim().isEmpty()) {
+                    carrier2Text = getString(R.string.carrier_text_empty);
+                }
+                mPrefLockscreenCarrier2Text.setSummary(carrier2Text);
             }
 
             if (key == null || key.equals(PREF_KEY_NOTIF_CARRIER_TEXT)) {
