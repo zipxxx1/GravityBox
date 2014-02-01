@@ -1116,4 +1116,10 @@
     <string name="pref_pie_longpress_delay_title">Délai appui long</string>
     <string name="pie_longpress_delay_default">Valeur système par défaut</string>
 
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">Tiroir de lancement d\'appli</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Afficher le tiroir de lancement d\'appli</string>
+
 </resources>
