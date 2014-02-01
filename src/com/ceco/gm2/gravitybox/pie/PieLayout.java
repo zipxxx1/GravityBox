@@ -79,6 +79,7 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
     private Point mCenter = new Point(0, 0);
     private Position mPosition = Position.BOTTOM;
     private Position mLayoutDoneForPosition;
+    private boolean mSysinfoDisabled;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -560,7 +561,9 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
 
         mBackgroundFraction = 0.0f;
         mBackgroundAnimator.setStartDelay(TIME_FADEIN_DELAY);
-        mBackgroundAnimator.start();
+        if (!mSysinfoDisabled) {
+            mBackgroundAnimator.start();
+        }
 
         setVisibility(View.VISIBLE);
 
@@ -618,5 +621,9 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
         mPieScale = (float) pieSize / 1000f;
         getDimensions();
         setupSnapPoints(getWidth(), getHeight());
+    }
+
+    public void setSysinfoDisabled(boolean disabled) {
+        mSysinfoDisabled = disabled;
     }
 }

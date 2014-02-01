@@ -1145,4 +1145,7 @@
     <string name="pref_trans_verification_summary">In case you donated, you can enter your PayPal donation transaction ID to unlock premium features</string>
     <string name="wsc_trans_required_summary">This feature requires valid PayPal transaction ID</string>
 
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Disable system info</string>
+
 </resources>

@@ -121,6 +121,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private Drawable mBackIcon;
     private Drawable mBackAltIcon;
     private PieLongPressHandler mLongPressHandler;
+    private boolean mSysinfoDisabled;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -317,6 +318,8 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
             XposedBridge.log(e);
         }
 
+        mSysinfoDisabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_SYSINFO_DISABLE, false);
+
         mColorInfo = new ColorInfo();
         mColorInfo.bgColor = prefs.getInt(GravityBoxSettings.PREF_KEY_PIE_COLOR_BG, 
                 mGbResources.getColor(R.color.pie_background_color));
@@ -339,6 +342,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     public void attachTo(PieLayout container) {
         mPieContainer = container;
         mPieContainer.clearSlices();
+        mPieContainer.setSysinfoDisabled(mSysinfoDisabled);
 
         if (DEBUG) {
             log("Attaching to container: " + container);
@@ -720,6 +724,13 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     public void setLongPressAction(String button, int action) {
         if (mLongPressHandler != null) {
             mLongPressHandler.setLongPressAction(button, action);
+        }
+    }
+
+    public void setSysinfoDisabled(boolean disabled) {
+        mSysinfoDisabled = disabled;
+        if (mPieContainer != null) {
+            mPieContainer.setSysinfoDisabled(disabled);
         }
     }
 }

@@ -157,6 +157,10 @@ public class ModPieControls {
                     mPieController.setLongPressAction(intent.getStringExtra(GravityBoxSettings.EXTRA_PIE_BUTTON),
                             intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_LONGPRESS_ACTION, 0));
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_SYSINFO_DISABLE)) {
+                    mPieController.setSysinfoDisabled(intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_PIE_SYSINFO_DISABLE, false));
+                }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
                 mExpandedDesktopMode = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
