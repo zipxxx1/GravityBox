@@ -1305,6 +1305,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatFixes.removePreference(mPrefFixCallerIDPhone);
                 mPrefCatFixes.removePreference(mPrefFixCallerIDMms);
                 mPrefCatFixes.removePreference(mPrefFixMmsWakelock);
+                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
+                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text);
+                mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
+                mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
            	}
 
             // Remove MTK specific preferences for non-MTK devices
