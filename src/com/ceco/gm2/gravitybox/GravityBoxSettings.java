@@ -354,6 +354,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NOTIF_IMAGE_LANDSCAPE = "pref_notif_image_landscape";
     public static final String PREF_KEY_NOTIF_BACKGROUND_ALPHA = "pref_notif_background_alpha";
     public static final String PREF_KEY_NOTIF_CARRIER_TEXT = "pref_notif_carrier_text";
+    public static final String PREF_KEY_NOTIF_CARRIER2_TEXT = "pref_notif_carrier2_text";
     public static final String NOTIF_BG_DEFAULT = "default";
     public static final String NOTIF_BG_COLOR = "color";
     public static final String NOTIF_BG_IMAGE = "image";
@@ -361,11 +362,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String NOTIF_BG_COLOR_MODE_UNDERLAY = "underlay";
     public static final String ACTION_NOTIF_BACKGROUND_CHANGED = "gravitybox.intent.action.NOTIF_BACKGROUND_CHANGED";
     public static final String ACTION_NOTIF_CARRIER_TEXT_CHANGED = "gravitybox.intent.action.NOTIF_CARRIER_TEXT_CHANGED";
+    public static final String ACTION_NOTIF_CARRIER2_TEXT_CHANGED = "gravitybox.intent.action.NOTIF_CARRIER2_TEXT_CHANGED";
     public static final String EXTRA_BG_TYPE = "bgType";
     public static final String EXTRA_BG_COLOR = "bgColor";
     public static final String EXTRA_BG_COLOR_MODE = "bgColorMode";
     public static final String EXTRA_BG_ALPHA = "bgAlpha";
     public static final String EXTRA_NOTIF_CARRIER_TEXT = "notifCarrierText";
+    public static final String EXTRA_NOTIF_CARRIER2_TEXT = "notifCarrier2Text";
 
     public static final String PREF_KEY_PIE_CONTROL_ENABLE = "pref_pie_control_enable2";
     public static final String PREF_KEY_PIE_CONTROL_CUSTOM_KEY = "pref_pie_control_custom_key";
@@ -858,6 +861,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefNotifColorMode;
         private CheckBoxPreference mPrefDisableDataNetworkTypeIcons;
         private EditTextPreference mPrefNotifCarrierText;
+        private EditTextPreference mPrefNotifCarrier2Text;
         private CheckBoxPreference mPrefDisableRoamingIndicators;
         private ListPreference mPrefButtonBacklightMode;
         private ListPreference mPrefPieEnabled;
@@ -1077,6 +1081,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNotifImageLandscape = (Preference) findPreference(PREF_KEY_NOTIF_IMAGE_LANDSCAPE);
             mPrefNotifColorMode = (ListPreference) findPreference(PREF_KEY_NOTIF_COLOR_MODE);
             mPrefNotifCarrierText = (EditTextPreference) findPreference(PREF_KEY_NOTIF_CARRIER_TEXT);
+            mPrefNotifCarrier2Text = (EditTextPreference) findPreference(PREF_KEY_NOTIF_CARRIER2_TEXT);
 
             mPrefDisableDataNetworkTypeIcons = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS);
             mPrefDisableRoamingIndicators = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_ROAMING_INDICATORS);
@@ -1293,6 +1298,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                     mPrefCatStatusbarColors.removePreference(mPrefSbDaColorSecondary);
+                    mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text); 
                 }
 
                 // Remove preferences not needed for MT6572
@@ -1841,6 +1847,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefNotifCarrierText.setSummary(carrierText);
             }
 
+            if (key == null || key.equals(PREF_KEY_NOTIF_CARRIER2_TEXT)) {
+                String carrier2Text = mPrefNotifCarrier2Text.getText();
+                if (carrier2Text == null || carrier2Text.isEmpty()) {
+                    carrier2Text = getString(R.string.carrier_text_default);
+                } else if (carrier2Text.trim().isEmpty()) {
+                    carrier2Text = getString(R.string.carrier_text_empty);
+                }
+                mPrefNotifCarrier2Text.setSummary(carrier2Text);
+            }
+
             if (key == null || key.equals(PREF_KEY_PIE_BACK_LONGPRESS)) {
                 mPrefPieBackLongpress.setSummary(mPrefPieBackLongpress.getEntry());
             }
@@ -2094,6 +2110,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_NOTIF_CARRIER_TEXT_CHANGED);
                 intent.putExtra(EXTRA_NOTIF_CARRIER_TEXT,
                         prefs.getString(PREF_KEY_NOTIF_CARRIER_TEXT, null));
+            } else if (key.equals(PREF_KEY_NOTIF_CARRIER2_TEXT)) {
+                intent.setAction(ACTION_NOTIF_CARRIER2_TEXT_CHANGED);
+                intent.putExtra(EXTRA_NOTIF_CARRIER2_TEXT,
+                        prefs.getString(PREF_KEY_NOTIF_CARRIER2_TEXT, null));
             } else if (key.equals(PREF_KEY_DISABLE_ROAMING_INDICATORS)) {
                 intent.setAction(ACTION_DISABLE_ROAMING_INDICATORS_CHANGED);
                 intent.putExtra(EXTRA_INDICATORS_DISABLED,

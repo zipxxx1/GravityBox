@@ -1106,4 +1106,7 @@
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Blur effect intensity</string>
 
+    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
+    <string name="pref_lockscreen_carrier2_text_title">Custom secondary carrier text</string>
+
 </resources>

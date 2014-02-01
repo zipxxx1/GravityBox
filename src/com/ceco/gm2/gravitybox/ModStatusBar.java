@@ -52,6 +52,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -66,7 +67,9 @@ public class ModStatusBar {
             "android.service.notification.StatusBarNotification" :
             "com.android.internal.statusbar.StatusBarNotification";
     private static final String CLASS_PLUGINFACTORY = "com.mediatek.systemui.ext.PluginFactory";
-    private static final String CLASS_NETWORK_CONTROLLER = "com.android.systemui.statusbar.policy.NetworkController";
+    private static final String CLASS_NETWORK_CONTROLLER = Utils.hasGeminiSupport() ? 
+            "com.android.systemui.statusbar.policy.NetworkControllerGemini" :
+            "com.android.systemui.statusbar.policy.NetworkController";
     private static final boolean DEBUG = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
@@ -106,8 +109,9 @@ public class ModStatusBar {
     private static boolean mDisableDataNetworkTypeIcons = false;
     private static Object mStatusBarPlugin;
     private static Object mGetDataNetworkTypeIconGeminiHook;
-    private static TextView mCarrierTextView;
-    private static String mCarrierText;
+    private static TextView mCarrierTextView[];
+    private static ImageView mCarrierDividerImageView;
+    private static String mCarrierText[];
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -213,9 +217,12 @@ public class ModStatusBar {
                 }
             } else if (intent.getAction().equals(ACTION_START_SEARCH_ASSIST)) {
                 startSearchAssist();
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_CARRIER_TEXT_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_CARRIER_TEXT)) {
-                mCarrierText = intent.getStringExtra(GravityBoxSettings.EXTRA_NOTIF_CARRIER_TEXT);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_CARRIER_TEXT_CHANGED) ||
+                    intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_CARRIER2_TEXT_CHANGED)) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_CARRIER_TEXT))
+                    mCarrierText[0] = intent.getStringExtra(GravityBoxSettings.EXTRA_NOTIF_CARRIER_TEXT);
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_CARRIER2_TEXT))
+                    mCarrierText[1] = intent.getStringExtra(GravityBoxSettings.EXTRA_NOTIF_CARRIER2_TEXT);
                 updateCarrierTextView();
             }
         }
@@ -474,7 +481,9 @@ public class ModStatusBar {
             mBrightnessControlEnabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_STATUSBAR_BRIGHTNESS, false);
             mOngoingNotif = prefs.getString(GravityBoxSettings.PREF_KEY_ONGOING_NOTIFICATIONS, "");
-            mCarrierText = prefs.getString(GravityBoxSettings.PREF_KEY_NOTIF_CARRIER_TEXT, null);
+            mCarrierText = new String[] {
+                    prefs.getString(GravityBoxSettings.PREF_KEY_NOTIF_CARRIER_TEXT, null),
+                    prefs.getString(GravityBoxSettings.PREF_KEY_NOTIF_CARRIER2_TEXT, null)};
 
             XposedBridge.hookAllConstructors(phoneStatusBarPolicyClass, new XC_MethodHook() {
                 @Override
@@ -507,7 +516,20 @@ public class ModStatusBar {
                     mAnimPushUpOut = res.getIdentifier("push_up_out", "anim", "android");
                     mAnimPushDownIn = res.getIdentifier("push_down_in", "anim", "android");
                     mAnimFadeIn = res.getIdentifier("fade_in", "anim", "android");
-                    mCarrierTextView = (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierLabel");
+                    if (Utils.hasGeminiSupport()) {
+                        LinearLayout carrierLabelGemini = (LinearLayout) XposedHelpers.getObjectField(
+                                param.thisObject, "mCarrierLabelGemini");
+                        mCarrierTextView = new TextView[] {
+                                (TextView) carrierLabelGemini.findViewById(
+                                        res.getIdentifier("carrier1", "id", PACKAGE_NAME)),
+                                (TextView) carrierLabelGemini.findViewById(
+                                        res.getIdentifier("carrier2", "id", PACKAGE_NAME))};
+                        mCarrierDividerImageView = (ImageView) carrierLabelGemini.findViewById(
+                                res.getIdentifier("carrier_divider", "id", PACKAGE_NAME));
+                    } else {
+                        mCarrierTextView = new TextView[] {(TextView) XposedHelpers.getObjectField(
+                                param.thisObject, "mCarrierLabel")};
+                    }
 
                     mScreenWidth = (float) res.getDisplayMetrics().widthPixels;
                     mMinBrightness = res.getInteger(res.getIdentifier(
@@ -522,6 +544,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED);
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER_TEXT_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER2_TEXT_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
@@ -651,15 +674,46 @@ public class ModStatusBar {
             XposedHelpers.findAndHookMethod(networkControllerClass, "refreshViews", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mCarrierTextView == null || mCarrierText == null ||
-                            mCarrierText.isEmpty()) return;
+                    if (mCarrierTextView == null || mCarrierText == null) return;
 
-                    if (mCarrierText.trim().isEmpty()) {
-                        mCarrierTextView.setText("");
-                        mCarrierTextView.setVisibility(View.GONE);
+                    if (Utils.hasGeminiSupport()) {
+                        final String networkName = (String) XposedHelpers.getObjectField(
+                                param.thisObject, "mNetworkName");
+                        final String networkNameGemini = (String) XposedHelpers.getObjectField(
+                                param.thisObject, "mNetworkNameGemini");
+
+                        for (int i=0; i<2; i++) {
+                            if (mCarrierText[i].isEmpty()) {
+                                mCarrierTextView[i].setText(i == 0 ? networkName : networkNameGemini);
+                                mCarrierTextView[i].setVisibility(View.VISIBLE);
+                            } else {
+                                if (mCarrierText[i].trim().isEmpty()) {
+                                    mCarrierTextView[i].setText("");
+                                    mCarrierTextView[i].setVisibility(View.GONE);
+                                    mCarrierTextView[i == 0 ? 1 : 0].setGravity(0x11);
+                                    mCarrierDividerImageView.setVisibility(View.GONE);
+                                } else {
+                                    mCarrierTextView[i].setText(mCarrierText[i]);
+                                    mCarrierTextView[i].setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+                        if (mCarrierTextView[0].getVisibility() == View.VISIBLE &&
+                                mCarrierTextView[1].getVisibility() == View.VISIBLE) {
+                            mCarrierTextView[0].setGravity(0x05);
+                            mCarrierTextView[1].setGravity(0x03);
+                            mCarrierDividerImageView.setVisibility(View.VISIBLE);
+                        }
                     } else {
-                        mCarrierTextView.setText(mCarrierText);
-                        mCarrierTextView.setVisibility(View.VISIBLE);
+                        if (mCarrierText[0].isEmpty()) return;
+
+                        if (mCarrierText[0].trim().isEmpty()) {
+                            mCarrierTextView[0].setText("");
+                            mCarrierTextView[0].setVisibility(View.GONE);
+                        } else {
+                            mCarrierTextView[0].setText(mCarrierText[0]);
+                            mCarrierTextView[0].setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             });
@@ -926,7 +980,8 @@ public class ModStatusBar {
         if (mPhoneStatusBar == null) return;
 
         try {
-            Object nwCtrl = XposedHelpers.getObjectField(mPhoneStatusBar, "mNetworkController");
+            Object nwCtrl = XposedHelpers.getObjectField(mPhoneStatusBar, Utils.hasGeminiSupport() ? 
+                    "mNetworkControllerGemini" : "mNetworkController");
             if (nwCtrl != null) {
                 XposedHelpers.callMethod(nwCtrl, "refreshViews");
             }
