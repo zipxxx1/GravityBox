@@ -1090,4 +1090,23 @@
     <string name="settings_restore_success">Восстановление успешно</string>
     <string name="settings_restore_reboot">Пожалуйста, перезагрузите устройство</string>
 
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">Ошибка создания уникального хаш-кода приложения</string>
+    <string name="wsc_parse_response_error">Ошибка обработки данных, полученных от сетевой службы</string>
+    <string name="wsc_hash_invalid">Сетевая служба отказала в соединении из-за несовпадения хэш-кода. Обычно это происходит,если 
+        Вы используете неофициальную версию, или apk-файл GravityBox был модифицирован третьей стороной.</string>
+    <string name="wsc_please_wait">Пожалуйста, подождите&#8230;</string>
+    <string name="wsc_error">Ошибка связи с сетевой службой: %s</string>
+    <string name="wsc_task_cancelled">Операция сетевой службы отменена</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">Ошибка обработки данных транзакции, полученных от сетевой службы</string>
+    <string name="wsc_trans_valid">Подтверждение ID транзакции успешно. Премиум-функции будут разблокированы после перезагрузки GravityBox.</string>
+    <string name="wsc_trans_invalid">Не удалось найти запись для ID указанной транзакции</string>
+    <string name="wsc_trans_violation">Указанный ID транзакции был использован слишком много раз. Свяжитесь с разработчиком GravityBox для решения проблемы.</string>
+    <string name="wsc_trans_blocked">Указанный ID транзакции заблокирован. Свяжитесь с разработчиком GravityBox для решения проблемы.</string>
+    <string name="pref_trans_verification_title">ID транзакции PayPal</string>
+    <string name="pref_trans_verification_summary">Если Вы внесли пожертвование, можете ввести ID транзакции пожертвования PayPal для разблокировки премиум-функции</string>
+    <string name="wsc_trans_required_summary">Функция требует действительного ID транзакции PayPal</string>
+
 </resources>
