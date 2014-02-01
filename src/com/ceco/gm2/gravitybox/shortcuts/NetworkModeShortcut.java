@@ -83,6 +83,8 @@ public class NetworkModeShortcut extends AShortcut {
                 PhoneWrapper.NT_LTE_CDMA_EVDO));
         list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_lte_gsm, 
                 PhoneWrapper.NT_LTE_GSM_WCDMA));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_lte_global, 
+                PhoneWrapper.NT_LTE_CMDA_EVDO_GSM_WCDMA));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
             .setTitle(getText())

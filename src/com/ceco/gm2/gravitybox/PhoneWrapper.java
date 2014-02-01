@@ -71,6 +71,7 @@ public class PhoneWrapper {
             case NT_EVDO_ONLY: return "EvDo";
             case NT_LTE_CDMA_EVDO: return "LTE (CDMA)";
             case NT_LTE_GSM_WCDMA: return "LTE (GSM)";
+            case NT_LTE_CMDA_EVDO_GSM_WCDMA: return "LTE (Global)";
             default: return "Undefined";
         }
     }
