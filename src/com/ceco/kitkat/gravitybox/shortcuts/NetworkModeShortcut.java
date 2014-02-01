@@ -65,22 +65,24 @@ public class NetworkModeShortcut extends AShortcut {
     @Override
     protected void createShortcut(final CreateShortcutListener listener) {
         final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
-        list.add(new NetworkModeItem("GSM (2G)", 
-                R.drawable.shortcut_network_mode_2g, PhoneWrapper.NT_GSM_ONLY));
-        list.add(new NetworkModeItem("GSM/WCDMA Auto (2G/3G)",
-                R.drawable.shortcut_network_mode_2g3g, PhoneWrapper.NT_GSM_WCDMA_AUTO));
-        list.add(new NetworkModeItem("WCDMA (3G)",
-                R.drawable.shortcut_network_mode_3g, PhoneWrapper.NT_WCDMA_ONLY));
-        list.add(new NetworkModeItem("CDMA/EvDo Auto",
-                R.drawable.shortcut_network_mode_cdma_evdo, PhoneWrapper.NT_CDMA_EVDO));
-        list.add(new NetworkModeItem("CDMA",
-                R.drawable.shortcut_network_mode_cdma, PhoneWrapper.NT_CDMA_ONLY));
-        list.add(new NetworkModeItem("EvDo",
-                R.drawable.shortcut_network_mode_evdo, PhoneWrapper.NT_EVDO_ONLY));
-        list.add(new NetworkModeItem("LTE (CDMA)",
-                R.drawable.shortcut_network_mode_lte_cdma, PhoneWrapper.NT_LTE_CDMA_EVDO));
-        list.add(new NetworkModeItem("LTE (GSM)",
-                R.drawable.shortcut_network_mode_lte_gsm, PhoneWrapper.NT_LTE_GSM_WCDMA));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_2g, 
+                PhoneWrapper.NT_GSM_ONLY));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_2g3g, 
+                PhoneWrapper.NT_GSM_WCDMA_AUTO));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_3g2g, 
+                PhoneWrapper.NT_WCDMA_PREFERRED));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_3g, 
+                PhoneWrapper.NT_WCDMA_ONLY));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_cdma_evdo, 
+                PhoneWrapper.NT_CDMA_EVDO));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_cdma, 
+                PhoneWrapper.NT_CDMA_ONLY));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_evdo, 
+                PhoneWrapper.NT_EVDO_ONLY));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_lte_cdma, 
+                PhoneWrapper.NT_LTE_CDMA_EVDO));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_lte_gsm, 
+                PhoneWrapper.NT_LTE_GSM_WCDMA));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
             .setTitle(getText())
@@ -123,19 +125,17 @@ public class NetworkModeShortcut extends AShortcut {
     }
 
     class NetworkModeItem implements IIconListAdapterItem {
-        private String mLabel;
         private int mIconResId;
         private int mNetworkMode;
 
-        public NetworkModeItem(String text, int iconResId, int networkMode) {
-            mLabel = text;
+        public NetworkModeItem(int iconResId, int networkMode) {
             mIconResId = iconResId;
             mNetworkMode = networkMode;
         }
 
         @Override
         public String getText() {
-            return mLabel;
+            return PhoneWrapper.getNetworkModeNameFromValue(mNetworkMode);
         }
 
         @Override

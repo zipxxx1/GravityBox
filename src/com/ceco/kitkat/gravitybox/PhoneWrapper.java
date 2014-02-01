@@ -61,7 +61,7 @@ public class PhoneWrapper {
     public static String getNetworkModeNameFromValue(int networkMode) {
         switch(networkMode) {
             case NT_GSM_ONLY: return "GSM (2G)";
-            case NT_WCDMA_PREFERRED:
+            case NT_WCDMA_PREFERRED: return "GSM/WCDMA Preferred (3G/2G)";
             case NT_GSM_WCDMA_AUTO: return "GSM/WCDMA Auto (2G/3G)";
             case NT_WCDMA_ONLY: return "WCDMA (3G)";
             case NT_CDMA_EVDO: return "CDMA/EvDo Auto";
