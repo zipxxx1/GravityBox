@@ -53,6 +53,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
+import android.view.ViewConfiguration;
 import android.view.Window;
 import android.widget.Toast;
 import android.app.Activity;
@@ -387,6 +388,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_PIE_MENU_LONGPRESS = "pref_pie_menu_longpress";
     public static final String PREF_KEY_PIE_APP_LONGPRESS = "pref_pie_app_longpress";
     public static final String PREF_KEY_PIE_SYSINFO_DISABLE = "pref_pie_sysinfo_disable";
+    public static final String PREF_KEY_PIE_LONGPRESS_DELAY = "pref_pie_longpress_delay";
     public static final int PIE_CUSTOM_KEY_OFF = 0;
     public static final int PIE_CUSTOM_KEY_SEARCH = 1;
     public static final int PIE_CUSTOM_KEY_APP_LAUNCHER = 2;
@@ -406,6 +408,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_PIE_BUTTON = "pieButton";
     public static final String EXTRA_PIE_LONGPRESS_ACTION = "pieLongpressAction";
     public static final String EXTRA_PIE_SYSINFO_DISABLE = "pieSysinfoDisable";
+    public static final String EXTRA_PIE_LONGPRESS_DELAY = "pieLongpressDelay";
 
     public static final String PREF_KEY_BUTTON_BACKLIGHT_MODE = "pref_button_backlight_mode";
     public static final String PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS = "pref_button_backlight_notifications";
@@ -914,6 +917,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefPieSearchLongpress;
         private ListPreference mPrefPieMenuLongpress;
         private ListPreference mPrefPieAppLongpress;
+        private ListPreference mPrefPieLongpressDelay;
         private CheckBoxPreference mPrefGbThemeDark;
         private ListPreference mPrefRecentClear;
         private ListPreference mPrefClearRecentMode;
@@ -1128,6 +1132,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefPieSearchLongpress = (ListPreference) findPreference(PREF_KEY_PIE_SEARCH_LONGPRESS);
             mPrefPieMenuLongpress = (ListPreference) findPreference(PREF_KEY_PIE_MENU_LONGPRESS);
             mPrefPieAppLongpress = (ListPreference) findPreference(PREF_KEY_PIE_APP_LONGPRESS);
+            mPrefPieLongpressDelay = (ListPreference) findPreference(PREF_KEY_PIE_LONGPRESS_DELAY);
 
             mPrefGbThemeDark = (CheckBoxPreference) findPreference(PREF_KEY_GB_THEME_DARK);
             File file = new File(getActivity().getFilesDir() + "/" + FILE_THEME_DARK_FLAG);
@@ -1823,6 +1828,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_PIE_APP_LONGPRESS)) {
                 mPrefPieAppLongpress.setSummary(mPrefPieAppLongpress.getEntry());
             }
+            if (key == null || key.equals(PREF_KEY_PIE_LONGPRESS_DELAY)) {
+                mPrefPieLongpressDelay.setSummary(mPrefPieLongpressDelay.getEntry());
+            }
         }
 
         @Override
@@ -2129,6 +2137,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_SYSINFO_DISABLE,
                         prefs.getBoolean(PREF_KEY_PIE_SYSINFO_DISABLE, false));
+            } else if (key.equals(PREF_KEY_PIE_LONGPRESS_DELAY)) {
+                intent.setAction(ACTION_PREF_PIE_CHANGED);
+                intent.putExtra(EXTRA_PIE_LONGPRESS_DELAY, Integer.valueOf(
+                        prefs.getString(PREF_KEY_PIE_LONGPRESS_DELAY, "0")));
             } else if (key.equals(PREF_KEY_BUTTON_BACKLIGHT_MODE)) {
                 intent.setAction(ACTION_PREF_BUTTON_BACKLIGHT_CHANGED);
                 intent.putExtra(EXTRA_BB_MODE, prefs.getString(

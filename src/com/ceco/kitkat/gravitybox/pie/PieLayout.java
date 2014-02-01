@@ -55,7 +55,6 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
     private long mActivateStartDebug = 0;
 
     private static final int TIME_FADEIN = 600;
-    private static final int TIME_FADEIN_DELAY = 1000;
 
     private Context mContext;
     private Resources mGbResources;
@@ -80,6 +79,7 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
     private Position mPosition = Position.BOTTOM;
     private Position mLayoutDoneForPosition;
     private boolean mSysinfoDisabled;
+    private int mLongpressDelay;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -417,7 +417,7 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
                     removeCallbacks(mOnLongPressRunnable);
                     if (newItem != null) {
                         newItem.setSelected(true);
-                        postDelayed(mOnLongPressRunnable, ViewConfiguration.getLongPressTimeout());
+                        postDelayed(mOnLongPressRunnable, mLongpressDelay);
                     }
                     if (mActiveItem != null) {
                         mActiveItem.setSelected(false);
@@ -560,7 +560,7 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
         }
 
         mBackgroundFraction = 0.0f;
-        mBackgroundAnimator.setStartDelay(TIME_FADEIN_DELAY);
+        mBackgroundAnimator.setStartDelay(mLongpressDelay+500);
         if (!mSysinfoDisabled) {
             mBackgroundAnimator.start();
         }
@@ -625,5 +625,9 @@ public class PieLayout extends FrameLayout implements View.OnTouchListener {
 
     public void setSysinfoDisabled(boolean disabled) {
         mSysinfoDisabled = disabled;
+    }
+
+    public void setLongpressDelay(int delay) {
+        mLongpressDelay = delay;
     }
 }
