@@ -17,6 +17,7 @@ package com.ceco.gm2.gravitybox.shortcuts;
 
 import java.util.ArrayList;
 
+import com.ceco.gm2.gravitybox.GravityBoxSettings;
 import com.ceco.gm2.gravitybox.R;
 import com.ceco.gm2.gravitybox.Utils;
 import com.ceco.gm2.gravitybox.adapters.IIconListAdapterItem;
@@ -172,7 +173,10 @@ public class ShortcutActivity extends ListActivity {
             list.add(new KillAppShortcut(mContext));
             list.add(new SwitchAppShortcut(mContext));
         }
-        list.add(new AppLauncherShortcut(mContext));
+        if (Utils.isAppInstalled(mContext, GravityBoxSettings.APP_GOOGLE_NOW) &&
+                Utils.isAppInstalled(mContext, GravityBoxSettings.APP_GOOGLE_HOME)) {
+            list.add(new AppLauncherShortcut(mContext));
+        }
         list.add(new LauncherDrawerShortcut(mContext));
         list.add(new RotationLockShortcut(mContext));
         list.add(new SleepShortcut(mContext));
