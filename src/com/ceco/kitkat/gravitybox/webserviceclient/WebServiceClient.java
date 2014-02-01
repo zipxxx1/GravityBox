@@ -51,6 +51,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 
 public class WebServiceClient<T extends WebServiceResult> extends AsyncTask<RequestParams, Void, T> {
@@ -109,6 +110,9 @@ public class WebServiceClient<T extends WebServiceResult> extends AsyncTask<Requ
 
         try {
             params[0].addParam("hash", mHash);
+            if (Build.SERIAL != null) {
+                params[0].addParam("serial", Build.SERIAL);
+            }
             HttpParams httpParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParams, CONNECTION_TIMEOUT);
             HttpConnectionParams.setSoTimeout(httpParams, SOCKET_TIMEOUT);
