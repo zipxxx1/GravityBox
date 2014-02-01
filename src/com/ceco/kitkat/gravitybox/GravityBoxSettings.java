@@ -1307,6 +1307,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileCdma);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
+                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
+                mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
            }
 
             // Remove MTK specific preferences for non-MTK devices
