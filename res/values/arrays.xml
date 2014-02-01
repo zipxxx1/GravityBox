@@ -269,6 +269,7 @@
         <item>@string/hwkey_action_sleep</item>
         <item>@string/hwkey_action_recent_apps</item>
         <item>@string/hwkey_action_app_launcher</item>
+        <item>@string/hwkey_action_launcher_drawer</item>
         <item>@string/hwkey_action_custom_app</item>
         <item>@string/hwkey_action_custom_app2</item>
         <item>@string/hwkey_action_menu</item>
@@ -293,6 +294,7 @@
         <item>5</item>
         <item>6</item>
         <item>12</item>
+        <item>21</item>
         <item>7</item>
         <item>8</item>
         <item>9</item>

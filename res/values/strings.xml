@@ -1155,4 +1155,7 @@
     <!-- GB Actions: Launcher drawer shortcut -->
     <string name="shortcut_launcher_drawer">Launcher drawer</string>
 
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Show launcher app drawer</string>
+
 </resources>

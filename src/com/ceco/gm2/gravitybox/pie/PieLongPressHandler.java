@@ -20,6 +20,7 @@ import java.util.Map;
 
 import com.ceco.gm2.gravitybox.GravityBoxSettings;
 import com.ceco.gm2.gravitybox.ModHwKeys;
+import com.ceco.gm2.gravitybox.ModLauncher;
 import com.ceco.gm2.gravitybox.pie.PieController.ButtonType;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -126,6 +127,9 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
                 break;
             case GravityBoxSettings.HWKEY_ACTION_VOLUME_PANEL:
                 intent = new Intent(ModHwKeys.ACTION_SHOW_VOLUME_PANEL);
+                break;
+            case GravityBoxSettings.HWKEY_ACTION_LAUNCHER_DRAWER:
+                intent = new Intent(ModLauncher.ACTION_SHOW_APP_DRAWER);
                 break;
             case GravityBoxSettings.HWKEY_ACTION_DEFAULT:
             default: return false;
