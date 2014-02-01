@@ -1107,4 +1107,19 @@
     <string name="pref_trans_verification_title">ID de transacción de PayPal</string>
     <string name="pref_trans_verification_summary">Si has donado, puedes introducir la ID de la transacción de PayPal para desbloquear las características Premium</string>
     <string name="wsc_trans_required_summary">Esta característica requiere una ID de transacción de PayPal válida</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Desactivar información del sistema</string>
+	
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Tiempo de pulsación larga</string>
+    <string name="pie_longpress_delay_default">Predeterminado</string>
+    
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">Cajón de aplicaciones</string> <!-- launcher drawer -->
+    
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Mostrar cajón de aplicaciones</string> <!-- Show launcher app drawer -->
+
+	
 </resources>
