@@ -19,6 +19,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.view.View;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -30,15 +38,31 @@ public class ModLauncher {
     private static final String TAG = "GB:ModLauncher";
 
     private static final String CLASS_DYNAMIC_GRID = "com.android.launcher3.DynamicGrid";
+    private static final String CLASS_LAUNCHER = "com.android.launcher3.Launcher";
     private static final boolean DEBUG = false;
+
+    public static final String ACTION_SHOW_APP_DRAWER = "gravitybox.launcher.intent.action.SHOW_APP_DRAWER";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    private static boolean mShouldShowAppDrawer;
+
+    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Intent i = new Intent(Intent.ACTION_MAIN);
+            i.addCategory(Intent.CATEGORY_HOME);
+            i.putExtra("showAppDrawer", true);
+            context.startActivity(i);
+        }
+    };
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> classDynamicGrid = XposedHelpers.findClass(CLASS_DYNAMIC_GRID, classLoader);
+            final Class<?> classLauncher = XposedHelpers.findClass(CLASS_LAUNCHER, classLoader);
 
             XposedBridge.hookAllConstructors(classDynamicGrid, new XC_MethodHook() { 
                 @Override
@@ -58,6 +82,33 @@ public class ModLauncher {
                             XposedHelpers.setIntField(profile, "numColumns", cols);
                             if (DEBUG) log("Launcher cols set to: " + cols);
                         }
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classLauncher, "onCreate", Bundle.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    IntentFilter intentFilter = new IntentFilter(ACTION_SHOW_APP_DRAWER);
+                    ((Activity)param.thisObject).registerReceiver(mBroadcastReceiver, intentFilter);
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classLauncher, "onNewIntent", Intent.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    Intent i = (Intent) param.args[0];
+                    mShouldShowAppDrawer = (i != null && i.hasExtra("showAppDrawer"));
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classLauncher, "onResume", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mShouldShowAppDrawer) {
+                        mShouldShowAppDrawer = false;
+                        XposedHelpers.callMethod(param.thisObject, "onClickAllAppsButton", 
+                                new Class<?>[] { View.class }, (Object)null);
                     }
                 }
             });
