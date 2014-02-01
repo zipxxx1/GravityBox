@@ -47,6 +47,7 @@ import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
@@ -122,6 +123,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private Drawable mBackAltIcon;
     private PieLongPressHandler mLongPressHandler;
     private boolean mSysinfoDisabled;
+    private int mLongpressDelay;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -319,6 +321,8 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         }
 
         mSysinfoDisabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_SYSINFO_DISABLE, false);
+        setLongpressDelay(Integer.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_PIE_LONGPRESS_DELAY, "0")));;
 
         mColorInfo = new ColorInfo();
         mColorInfo.bgColor = prefs.getInt(GravityBoxSettings.PREF_KEY_PIE_COLOR_BG, 
@@ -343,6 +347,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mPieContainer = container;
         mPieContainer.clearSlices();
         mPieContainer.setSysinfoDisabled(mSysinfoDisabled);
+        mPieContainer.setLongpressDelay(mLongpressDelay);
 
         if (DEBUG) {
             log("Attaching to container: " + container);
@@ -731,6 +736,16 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mSysinfoDisabled = disabled;
         if (mPieContainer != null) {
             mPieContainer.setSysinfoDisabled(disabled);
+        }
+    }
+
+    public void setLongpressDelay(int delay) {
+        mLongpressDelay = delay;
+        if (mLongpressDelay == 0) {
+            mLongpressDelay = ViewConfiguration.getLongPressTimeout();
+        }
+        if (mPieContainer != null) {
+            mPieContainer.setLongpressDelay(mLongpressDelay);
         }
     }
 }

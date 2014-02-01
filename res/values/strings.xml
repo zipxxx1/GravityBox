@@ -1148,4 +1148,8 @@
     <!-- Pie: disable system info -->
     <string name="pref_pie_sysinfo_disable_title">Disable system info</string>
 
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Long-press delay</string>
+    <string name="pie_longpress_delay_default">System default</string>
+
 </resources>

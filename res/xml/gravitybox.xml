@@ -958,6 +958,13 @@
                 android:title="@string/pref_pie_app_longpress_title"
                 android:defaultValue="0"/>
 
+            <ListPreference
+                android:key="pref_pie_longpress_delay"
+                android:title="@string/pref_pie_longpress_delay_title"
+                android:entries="@array/pie_longpress_delay_entries"
+                android:entryValues="@array/pie_longpress_delay_values"
+                android:defaultValue="0"/>
+
         </PreferenceCategory>
 
         <PreferenceCategory
