@@ -1109,4 +1109,11 @@
     <string name="pref_trans_verification_summary">Dans le cas où vous avez fait une donation, vous pouvez saisir le n° de transaction unique Paypal pour avoir accès aux éléments de la version Premium</string>
     <string name="wsc_trans_required_summary">Cet élément nécessite un n° de transaction unique Paypal</string>
 
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Désactiver les infos système</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Délai appui long</string>
+    <string name="pie_longpress_delay_default">Valeur système par défaut</string>
+
 </resources>
