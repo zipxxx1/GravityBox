@@ -125,6 +125,8 @@ public class ShortcutActivity extends ListActivity {
             GoogleNowShortcut.launchAction(mContext, intent);
         } else if (action.equals(VolumePanelShortcut.ACTION)) {
             VolumePanelShortcut.launchAction(mContext, intent);
+        } else if (action.equals(LauncherDrawerShortcut.ACTION)) {
+            LauncherDrawerShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -171,6 +173,7 @@ public class ShortcutActivity extends ListActivity {
             list.add(new SwitchAppShortcut(mContext));
         }
         list.add(new AppLauncherShortcut(mContext));
+        list.add(new LauncherDrawerShortcut(mContext));
         list.add(new RotationLockShortcut(mContext));
         list.add(new SleepShortcut(mContext));
 
