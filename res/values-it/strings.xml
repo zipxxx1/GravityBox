@@ -1002,7 +1002,7 @@
     <string name="pref_smart_radio_screen_off_title">A schermo spento</string>
     <string name="pref_smart_radio_screen_off_summary">Attiva la modalità risparmio energetivo quando lo schermo viene spento a prescindere che i dati mobili siano attivi o meno</string>
     <string name="pref_smart_radio_ignore_locked_title">Ignora quando bloccato</string>
-    <string name="pref_smart_radio_ignore_locked_summary">Quando lo schermo viene acceso, la modalità risparmio energetico non verrà disattivata fino a quando non si inserirà il codice di sblocco</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Quando lo schermo viene acceso, la modalità risparmio energetico non verrà disattivata fino a quando non verrà sbloccato lo schermo</string>
     <string name="pref_smart_radio_mode_change_delay_title">Ritardo cambio modalità rete</string>
     <string name="pref_smart_radio_mode_change_delay_summary">Specifica i secondi da attendere prima del cambio della modalità di rete</string>
 
@@ -1055,5 +1055,41 @@
     
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Intensità effetto sfocato</string>
+
+ <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">Ritardo risparmio energetico</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Ritarda l\'attivazione della modalità risparmio energetico quando lo schermo viene spento. 
+        Sovrascrive il ritardo cambio modalità di rete normale se il valore è diverso da zero.</string>
+
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Backup impostazioni</string>
+    <string name="pref_settings_restore_title">Riprostino impostazioni</string>
+    <string name="settings_backup_failed">Backup non riuscito</string>
+    <string name="settings_backup_no_prefs">File preferenze non trovato</string>
+    <string name="settings_backup_success">Backup riuscito</string>
+    <string name="settings_restore_no_backup">Non ci sono backup da ripristinare</string>
+    <string name="settings_restore_confirm">Le impostazioni attuali saranno sostituite. Continuare?</string>
+    <string name="settings_restore_failed">Ripristino non riuscito</string>
+    <string name="settings_restore_success">Ripristino riuscito</string>
+    <string name="settings_restore_reboot">Per favore, riavvia il tuo dispositivo</string>
+
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">Errore nel generare il codice hash specifico per l\'app</string>
+    <string name="wsc_parse_response_error">Errore nell\'analisi dei dati ottenuti dal servizio web</string>
+    <string name="wsc_hash_invalid">Non è stato possibile comunicare con il servizio web poichè il codice hash non corrisponde. Questo in genere succede quando 
+        hai una versione non ufficiale o l\'APK di GravityBox viene modificato da terzi.</string>
+    <string name="wsc_please_wait">Attendere prego&#8230;</string>
+    <string name="wsc_error">Non è stato possibile comunicare con il servizio Web: %s</string>
+    <string name="wsc_task_cancelled">Operazione servizio Web annullata</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">Errore nell\'analisi dei dati della transazione ottenuti dal servizio web</string>
+    <string name="wsc_trans_valid">Verifica ID transazione riuscita. Riavvia GravityBox per sbloccare le funzioni premium.</string>
+    <string name="wsc_trans_invalid">Nessuna voce trovata per l\'ID transazione specificato</string>
+    <string name="wsc_trans_violation">L\'ID transazione specificato è stato registrato troppe volte. Contatta lo sviluppatore di GravityBox per risolvere il problema.</string>
+    <string name="wsc_trans_blocked">L\'ID transazione specificato è stato bloccato. Contatta lo sviluppatore di GravityBox per risolvere il problema.</string>
+    <string name="pref_trans_verification_title">ID transazione PayPal</string>
+    <string name="pref_trans_verification_summary">Se hai donato, puoi inserire l\'ID transazione della donazione per sbloccare le funzioni premium</string>
+    <string name="wsc_trans_required_summary">Questa funzione richiede un ID transazione PayPal valido</string>
 
 </resources>
