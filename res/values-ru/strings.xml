@@ -473,6 +473,7 @@
     <string name="expanded_desktop_disabled">Отключено</string>
     <string name="expanded_desktop_navbar">Скрыть панель навигации</string>
     <string name="expanded_desktop_immersive_statusbar">Погружение только для строки состояния</string>
+    <string name="expanded_desktop_immersive_navbar">Погружение только для панели навигации</string>
     <string name="expanded_desktop_both">Полупогружение</string>
     <string name="expanded_desktop_immersive">Погружение</string>
     <string name="action_expanded_desktop_title">Расширенный рабочий стол</string>
@@ -1108,5 +1109,23 @@
     <string name="pref_trans_verification_title">ID транзакции PayPal</string>
     <string name="pref_trans_verification_summary">Если Вы внесли пожертвование, можете ввести ID транзакции пожертвования PayPal для разблокировки премиум-функции</string>
     <string name="wsc_trans_required_summary">Функция требует действительного ID транзакции PayPal</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Откл системную информацию</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Задержка удержания</string>
+    <string name="pie_longpress_delay_default">Системная по умолчанию</string>
+
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">Панель лончера</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Показать панель приложений лончера</string>
+
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Другое</string>
+    <string name="pref_launcher_resize_widget_title">Изменение размера виджетов</string>
+    <string name="pref_launcher_resize_widget_summary">Возможность изменять размеры любого виджета на домашнем экране (необходима перезагрузка лончера)</string>
 
 </resources>
