@@ -852,7 +852,8 @@ public class ModExpandedDesktop {
     private static boolean isNavbarImmersive() {
         return (mExpandedDesktop
                 && (mExpandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE ||
-                mExpandedDesktopMode == GravityBoxSettings.ED_SEMI_IMMERSIVE));
+                mExpandedDesktopMode == GravityBoxSettings.ED_SEMI_IMMERSIVE ||
+                mExpandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE_NAVBAR));
     }
 
     private static boolean isNavbarHidden() {

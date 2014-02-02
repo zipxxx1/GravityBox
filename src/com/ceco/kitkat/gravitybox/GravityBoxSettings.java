@@ -230,6 +230,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int ED_SEMI_IMMERSIVE = 2;
     public static final int ED_IMMERSIVE = 3;
     public static final int ED_IMMERSIVE_STATUSBAR = 4;
+    public static final int ED_IMMERSIVE_NAVBAR = 5;
     public static final String ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED = "gravitybox.intent.action.EXPANDED_DESKTOP_MODE_CHANGED";
     public static final String EXTRA_ED_MODE = "expandedDesktopMode";
     public static final String PREF_CAT_KEY_BRIGHTNESS = "pref_cat_brightness";

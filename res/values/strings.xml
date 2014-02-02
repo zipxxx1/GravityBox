@@ -473,6 +473,7 @@
     <string name="expanded_desktop_disabled">Disabled</string>
     <string name="expanded_desktop_navbar">Hide navigation bar</string>
     <string name="expanded_desktop_immersive_statusbar">Immersive status bar</string>
+    <string name="expanded_desktop_immersive_navbar">Immersive navigation bar</string>
     <string name="expanded_desktop_both">Semi-immersive</string>
     <string name="expanded_desktop_immersive">Immersive</string>
     <string name="action_expanded_desktop_title">Expanded desktop</string>
