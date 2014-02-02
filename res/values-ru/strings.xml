@@ -1106,4 +1106,61 @@
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Интенсивность размытия</string>
 
+ <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">Задержка экономн.режима</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Задержка переключения в экономный режим при отключении экрана. 
+        Изменяет задержку смены режима по умолчанию, ели величина не равна нулю.</string>
+
+    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
+    <string name="pref_lockscreen_carrier2_text_title">Свой текст второго оператора</string>
+
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Резервное копирование</string>
+    <string name="pref_settings_restore_title">Восстановление</string>
+    <string name="settings_backup_failed">Сбой резервного копирования</string>
+    <string name="settings_backup_no_prefs">Файл установок не найден</string>
+    <string name="settings_backup_success">Резервное копирование успешно</string>
+    <string name="settings_restore_no_backup">Нет резервной копии для восстановления</string>
+    <string name="settings_restore_confirm">Ваши текущие установки будут изменены. Вы уверены?</string>
+    <string name="settings_restore_failed">Сбой восстановления</string>
+    <string name="settings_restore_success">Восстановление успешно</string>
+    <string name="settings_restore_reboot">Пожалуйста, перезагрузите устройство</string>
+
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">Ошибка создания уникального хаш-кода приложения</string>
+    <string name="wsc_parse_response_error">Ошибка обработки данных, полученных от сетевой службы</string>
+    <string name="wsc_hash_invalid">Сетевая служба отказала в соединении из-за несовпадения хэш-кода. Обычно это происходит,если 
+        Вы используете неофициальную версию, или apk-файл GravityBox был модифицирован третьей стороной.</string>
+    <string name="wsc_please_wait">Пожалуйста, подождите&#8230;</string>
+    <string name="wsc_error">Ошибка связи с сетевой службой: %s</string>
+    <string name="wsc_task_cancelled">Операция сетевой службы отменена</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">Ошибка обработки данных транзакции, полученных от сетевой службы</string>
+    <string name="wsc_trans_valid">Подтверждение ID транзакции успешно. Премиум-функции будут разблокированы после перезагрузки GravityBox.</string>
+    <string name="wsc_trans_invalid">Не удалось найти запись для ID указанной транзакции</string>
+    <string name="wsc_trans_violation">Указанный ID транзакции был использован слишком много раз. Свяжитесь с разработчиком GravityBox для решения проблемы.</string>
+    <string name="wsc_trans_blocked">Указанный ID транзакции заблокирован. Свяжитесь с разработчиком GravityBox для решения проблемы.</string>
+    <string name="pref_trans_verification_title">ID транзакции PayPal</string>
+    <string name="pref_trans_verification_summary">Если Вы внесли пожертвование, можете ввести ID транзакции пожертвования PayPal для разблокировки премиум-функции</string>
+    <string name="wsc_trans_required_summary">Функция требует действительного ID транзакции PayPal</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Откл системную информацию</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Задержка удержания</string>
+    <string name="pie_longpress_delay_default">Системная по умолчанию</string>
+
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">Панель лончера</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Показать панель приложений лончера</string>
+
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Другое</string>
+    <string name="pref_launcher_resize_widget_title">Изменение размера виджетов</string>
+    <string name="pref_launcher_resize_widget_summary">Возможность изменять размеры любого виджета на домашнем экране (необходима перезагрузка лончера)</string>
+
 </resources>
