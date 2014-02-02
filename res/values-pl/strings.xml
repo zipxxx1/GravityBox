@@ -457,6 +457,8 @@
     <string name="pref_expanded_desktop_title">Tryb pulpitu rozszerzonego</string>
     <string name="expanded_desktop_disabled">Wyłączony</string>
     <string name="expanded_desktop_navbar">Ukryj pasek nawigacyjny</string>
+    <string name="expanded_desktop_immersive_statusbar">Immersyjny pasek statusu</string>
+    <string name="expanded_desktop_immersive_navbar">Immersyjny pasek nawigacji</string>
     <string name="expanded_desktop_both">Semi-immersyjny</string>
     <string name="expanded_desktop_immersive">Immersyjny</string>
     <string name="action_expanded_desktop_title">Rozszerzony pulpit</string>
