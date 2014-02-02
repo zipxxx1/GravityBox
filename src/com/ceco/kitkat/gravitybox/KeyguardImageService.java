@@ -15,11 +15,17 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -37,7 +43,8 @@ public class KeyguardImageService extends Service {
 
     private File mKisImageFile;
     private boolean mWriteInProgress;
-    private FileOutputStream mFileOutputStream;
+    private ByteArrayOutputStream mOutputStream;
+    private SharedPreferences mPrefs;
 
     final Messenger mMessenger = new Messenger(new ClientHandler());
 
@@ -48,7 +55,7 @@ public class KeyguardImageService extends Service {
                 case MSG_BEGIN_OUTPUT:
                     if (mWriteInProgress) return;
                     try {
-                        mFileOutputStream = new FileOutputStream(mKisImageFile);
+                        mOutputStream = new ByteArrayOutputStream();
                         mWriteInProgress = true;
                         msg.replyTo.send(Message.obtain(null, MSG_GET_NEXT_CHUNK));
                     } catch (Throwable t) {
@@ -61,7 +68,7 @@ public class KeyguardImageService extends Service {
                 case MSG_WRITE_OUTPUT:
                     try {
                         byte[] data = msg.getData().getByteArray("data");
-                        mFileOutputStream.write(data);
+                        mOutputStream.write(data);
                         data = null;
                         msg.replyTo.send(Message.obtain(null, MSG_GET_NEXT_CHUNK));
                     } catch (Throwable t) {
@@ -73,10 +80,11 @@ public class KeyguardImageService extends Service {
                     break;
                 case MSG_FINISH_OUTPUT:
                     try {
-                        mFileOutputStream.close();
-                        mKisImageFile.setReadable(true, false);
-                        Intent intent = new Intent(ACTION_KEYGUARD_IMAGE_UPDATED);
-                        sendBroadcast(intent);
+                        mOutputStream.close();
+                        if (saveImage()) {
+                            Intent intent = new Intent(ACTION_KEYGUARD_IMAGE_UPDATED);
+                            sendBroadcast(intent);
+                        }
                     } catch (Throwable t) {
                         t.printStackTrace();
                     }
@@ -89,10 +97,33 @@ public class KeyguardImageService extends Service {
     public void onCreate() {
         super.onCreate();
         mKisImageFile = new File(getFilesDir() + "/kis_image.png");
+        final String prefsName = getPackageName() + "_preferences";
+        mPrefs = getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         return mMessenger.getBinder();
+    }
+
+    private boolean saveImage() {
+        try {
+            Bitmap tmpBmp = BitmapFactory.decodeStream(
+                    new ByteArrayInputStream(mOutputStream.toByteArray()));
+            if (tmpBmp != null) {
+                if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT, false)) {
+                    tmpBmp = Utils.blurBitmap(this, tmpBmp, mPrefs.getInt(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY, 14));
+                }
+                tmpBmp.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(mKisImageFile));
+                mKisImageFile.setReadable(true, false);
+                tmpBmp.recycle();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
