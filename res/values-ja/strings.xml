@@ -1045,4 +1045,56 @@
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">ぼかし効果の強さ</string>
     
+    <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">省電力モードの遅延</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">画面がオフになった時の省電力モードへの切り替えを遅らせます。
+        値が0以外の場合はデフォルトの遅延を上書きします。</string>
+
+    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
+    <string name="pref_lockscreen_carrier2_text_title">カスタムセカンダリキャリアラベル</string>
+
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">設定のバックアップ</string>
+    <string name="pref_settings_restore_title">設定のリストア</string>
+    <string name="settings_backup_failed">バックアップ失敗</string>
+    <string name="settings_backup_no_prefs">設定ファイルが見つかりません</string>
+    <string name="settings_backup_success">バックアップしました</string>
+    <string name="settings_restore_no_backup">リストアするファイルがありません</string>
+    <string name="settings_restore_confirm">現在の設定が置き換えられます。続行しますか?</string>
+    <string name="settings_restore_failed">リストア失敗</string>
+    <string name="settings_restore_success">リストアしました</string>
+    <string name="settings_restore_reboot">端末を再起動してください</string>
+
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">アプリ個別ハッシュコードの生成に失敗しました</string>
+    <string name="wsc_parse_response_error">ウェブサービスから得たデータの解析に失敗しました</string>
+    <string name="wsc_hash_invalid">ハッシュが一致しないためウェブサービスと接続できません。 
+        これは非公式バージョンか第三者に改変されたGravityBox APKを使用している場合に発生します。</string>
+    <string name="wsc_please_wait">お待ちください&#8230;</string>
+    <string name="wsc_error">ウェブサービス接続中エラー: %s</string>
+    <string name="wsc_task_cancelled">キャンセルされました</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">取引ID番号データの解析に失敗しました</string>
+    <string name="wsc_trans_valid">取引ID番号の認証をしました。GravityBoxを再起動するとプレミアム機能が使用できるようになります。</string>
+    <string name="wsc_trans_invalid">取引ID番号の記録を見つけられませんでした。</string>
+    <string name="wsc_trans_violation">指定した取引ID番号は何回も登録されています。GravityBoxの開発者に連絡してください。</string>
+    <string name="wsc_trans_blocked">指定した取引ID番号はブロックされました。GravityBoxの開発者に連絡してください。</string>
+    <string name="pref_trans_verification_title">PayPal取引ID番号</string>
+    <string name="pref_trans_verification_summary">寄付した場合、Paypalの取引ID番号を入力するとプレミアム機能を使用できるようになります。</string>
+    <string name="wsc_trans_required_summary">この機能はPayPal取引ID番号を認証しないと使えません。</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">システム情報を表示しない</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">長押しの遅延</string>
+    <string name="pie_longpress_delay_default">デフォルト</string>
+
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">ホームアプリのドロワー</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">ホームアプリのドロワーを表示</string>
+    
 </resources>
