@@ -458,6 +458,7 @@
     <string name="expanded_desktop_disabled">Desativado</string>
     <string name="expanded_desktop_navbar">Ocultar Barra de Navegação</string>
     <string name="expanded_desktop_immersive_statusbar">Barra de Status imersiva</string>
+    <string name="expanded_desktop_immersive_navbar">Barra de Navegação imersiva</string>
     <string name="expanded_desktop_both">Semi-imersivo</string>
     <string name="expanded_desktop_immersive">Imersivo</string>
     <string name="action_expanded_desktop_title">Ambiente de trabalho expandido</string>
@@ -1055,5 +1056,59 @@
 
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Intensidade do efeito de desfocagem</string>
+
+    <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">Atraso para modo poupança</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Permite definir o tempo de espera antes de comutar para o modo de poupança de energia quando o ecrã se desliga 
+        (sobrepõe-se ao atraso pré-definido para comutar modo de rede se o valor escolhido for diferente de zero)</string>
+
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Guardar definições</string>
+    <string name="pref_settings_restore_title">Restaurar definições</string>
+    <string name="settings_backup_failed">Falha ao guardar definições</string>
+    <string name="settings_backup_no_prefs">Ficheiro de preferências não encontrado</string>
+    <string name="settings_backup_success">Definições guardadas com sucesso</string>
+    <string name="settings_restore_no_backup">Não existem definições guardadas para restaurar</string>
+    <string name="settings_restore_confirm">As preferências atuais serão substituídas. Tem a certeza?</string>
+    <string name="settings_restore_failed">Falha ao restaurar definições</string>
+    <string name="settings_restore_success">Definições restauradas com sucesso</string>
+    <string name="settings_restore_reboot">Por favor reinicie o seu dispositivo</string>
+
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">Erro ao gerar valor hash da aplicação</string>
+    <string name="wsc_parse_response_error">Erro ao processar dados obtidos através do serviço Web</string>
+    <string name="wsc_hash_invalid">O serviço Web recusou comunicação devido a incompatibilidade de hashes. Tipicamente acontece quando 
+        se corre uma versão não oficial do GravityBox, modificada por terceiros.</string>
+    <string name="wsc_please_wait">Por favor aguarde&#8230;</string>
+    <string name="wsc_error">Erro na comunicação com o serviço Web: %s</string>
+    <string name="wsc_task_cancelled">Cancelada operação do serviço Web</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">Erro ao processar dados da transação obtidos através do serviço Web</string>
+    <string name="wsc_trans_valid">Verificação da transação concluída com sucesso. As funcionalidades avançadas serão desbloqueadas após reiniciar o GravityBox.</string>
+    <string name="wsc_trans_invalid">Registo da transação especificada não encontrado</string>
+    <string name="wsc_trans_violation">A transação especificada foi usada demasiadas vezes. Contacte o autor do GravityBox para resolução.</string>
+    <string name="wsc_trans_blocked">A transação especificada foi bloqueada. Contacte o autor do GravityBox para resolução.</string>
+    <string name="pref_trans_verification_title">Transação PayPal</string>
+    <string name="pref_trans_verification_summary">Caso tenha enviado algum contributo, pode introduzir o número de identificação da transação PayPal para desbloquear as funcionalidades avançadas</string>
+    <string name="wsc_trans_required_summary">Esta funcionalidade requer uma transação PayPal válida</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Desativar informação do sistema</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Atraso ao manter pressionado</string>
+    <string name="pie_longpress_delay_default">Padrão</string>
+
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">Lista de aplicações</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Mostrar lista de aplicações</string>
+
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Outros</string>
+    <string name="pref_launcher_resize_widget_title">Redimensionar qualquer widget</string>
+    <string name="pref_launcher_resize_widget_summary">Permite redimensionar qualquer tipo de widget para qualquer tamanho no ambiente de trabalho (necessário reiniciar o inicializador)</string>
 
 </resources>
