@@ -1122,4 +1122,9 @@
     <!-- Key Actions: Show launcher drawer -->
     <string name="hwkey_action_launcher_drawer">Show launcher app drawer</string>
 
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Other</string>
+    <string name="pref_launcher_resize_widget_title">Resize any widget</string>
+    <string name="pref_launcher_resize_widget_summary">Resize any widget to any size on the homescreen (requires launcher restart)</string>
+
 </resources>
