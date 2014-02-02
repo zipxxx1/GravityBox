@@ -1122,4 +1122,9 @@
     <!-- Key Actions: Show launcher drawer -->
     <string name="hwkey_action_launcher_drawer">Afficher le tiroir de lancement d\'appli</string>
 
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Autre</string>
+    <string name="pref_launcher_resize_widget_title">Redimensionner tout widget</string>
+    <string name="pref_launcher_resize_widget_summary">Permet de redimensionner n\'importe quel widget à n\'importe quelle taille sur l\'écran d\'accueil (nécessite de redémarrer le lanceur d\'applications)</string>
+
 </resources>
