@@ -1047,5 +1047,57 @@
 
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Intensywność efektu rozmycia</string>
-    
+
+    <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">Opóźnione oszczędzanie energii</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Opóźnia przełączanie w tryb oszczędzania energii przy wyłączaniu ekranu. Zastępuje opóźnienie zmiany domyślnego trybu sieci, jeśli wartość jest różna od zera.</string>
+
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Ustawienia kopii zapasowej</string>
+    <string name="pref_settings_restore_title">Ustawienia przywracania</string>
+    <string name="settings_backup_failed">Tworzenie kopii zapasowej nie powiodło się</string>
+    <string name="settings_backup_no_prefs">Nie znaleziono pliku preferencji</string>
+    <string name="settings_backup_success">Pomyślnie utworzono kopię zapasową</string>
+    <string name="settings_restore_no_backup">Brak kopii zapasowej do przywrócenia</string>
+    <string name="settings_restore_confirm">Twoje obecne preferencje zostaną zastąpione. Czy jesteś pewien?</string>
+    <string name="settings_restore_failed">Przywracanie nie powiodło się</string>
+    <string name="settings_restore_success">Przywracanie udane</string>
+    <string name="settings_restore_reboot">Proszę ponownie uruchomić urządzenie</string>
+
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">Błąd generowania specyficznego hash kodu aplikacji</string>
+    <string name="wsc_parse_response_error">Błąd parsowania danych uzyskanych z usługi internetowej</string>
+    <string name="wsc_hash_invalid">Serwis internetowy odmówił komunikacji z powodu niezgodności hash kodu. Zazwyczaj zdarza się to w przypadku uruchomienia nieoficjalnej wersji aplikacji GravityBox lub zmodyfikowanej przez osoby trzecie.</string>
+    <string name="wsc_please_wait">Proszę czekać&#8230;</string>
+    <string name="wsc_error">Błąd komunikacji z usługą sieci Web: %s</string>
+    <string name="wsc_task_cancelled">Działanie serwisu Web anulowane</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">Błąd parsowania danych transakcji uzyskanych z usługi internetowej</string>
+    <string name="wsc_trans_valid">Weryfikacja ID transakcji powiodła się. Funkcje Premium zostaną odblokowane po ponownym uruchomieniu GravityBox.</string>
+    <string name="wsc_trans_invalid">Nie można odnaleźć rekordu dla określonego ID transakcji</string>
+    <string name="wsc_trans_violation">Określony ID transakcji został zarejestrowana zbyt wiele razy. Skontaktuj się z autorem GravityBox, aby rozwiązać problem.</string>
+    <string name="wsc_trans_blocked">Określony ID transakcji został zablokowany. Skontaktuj się z autorem GravityBox, aby rozwiązać problem.</string>
+    <string name="pref_trans_verification_title">ID transakcji PayPal</string>
+    <string name="pref_trans_verification_summary">W przypadku dokonania wpłaty, możesz wprowadzić swój ID transakcji PayPal, aby odblokować dodatkowe funkcje</string>
+    <string name="wsc_trans_required_summary">Ta funkcja wymaga poprawnego ID transakcji PayPal</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Wyłącz informacje o systemie</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Opóźnienie długiego naciśnięcia</string>
+    <string name="pie_longpress_delay_default">Domyślne systemu</string>
+
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">Zasobnik aplikacji startera</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Pokaż zasobnik aplikacji startera</string>
+
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Inne</string>
+    <string name="pref_launcher_resize_widget_title">Zmiana rozmiaru widżetu</string>
+    <string name="pref_launcher_resize_widget_summary">Zmieniaj dowolnie rozmiar każdego widżetu na ekranie głównym (wymagane ponowne uruchomienie startera aplikacji)</string>
+
 </resources>
