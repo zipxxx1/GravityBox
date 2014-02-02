@@ -1055,7 +1055,7 @@
     <string name="pref_smart_radio_screen_off_title">Képernyő kikapcsolásakor</string>
     <string name="pref_smart_radio_screen_off_summary">Aktiválja az energiatakarékos üzemmódot a képernyő kikapcsolásakor függetlenül attól, hogy a mobil adatátvitel engedélyezve van, vagy letiltva</string>
     <string name="pref_smart_radio_ignore_locked_title">Figyelmen kívül hagy, amíg zárolva van</string>
-    <string name="pref_smart_radio_ignore_locked_summary">Képernyő bekapcsoláskor az energiatakarékos üzemmód nem kerül kikapcsolára, amíg a billentyűzár kioldásra nem kerül</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Képernyő bekapcsoláskor az energiatakarékos üzemmód nem kerül kikapcsolásra, amíg a billentyűzár kioldásra nem kerül</string>
     <string name="pref_smart_radio_mode_change_delay_title">Hálózati üzemmód váltás késleltetése</string>
     <string name="pref_smart_radio_mode_change_delay_summary">Késlelteti a hálózati üzemmód váltását meghatározott számú másodperccel</string>
 
@@ -1102,5 +1102,60 @@
     
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Elmosódás effekt intenzitás</string>
+    
+    <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">Késleltetett energiatakarékosság</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Késlelteti az energiatakarékos üzemmódba váltást a képernyő kikapcsolásakor. Felülírja az alapértelmezett hálózati üzemmód váltáskori késleltetést, ha a beállított érték nem nulla.</string>
+
+    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
+    <string name="pref_lockscreen_carrier2_text_title">Egyéni másodlagos szolgáltatónév szöveg</string>
+
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Beállítások mentése</string>
+    <string name="pref_settings_restore_title">Beállítások visszaállítása</string>
+    <string name="settings_backup_failed">A mentés nem sikerült</string>
+    <string name="settings_backup_no_prefs">A beállításokat tartalmazó fájl nem található</string>
+    <string name="settings_backup_success">A mentés sikerült</string>
+    <string name="settings_restore_no_backup">Nem található mentés a visszaállításhoz</string>
+    <string name="settings_restore_confirm">Az aktuális beállítások lecserélésre fognak kerülni. Biztos benne?</string>
+    <string name="settings_restore_failed">A visszaállítás nem sikerült</string>
+    <string name="settings_restore_success">A visszaállítás sikerült</string>
+    <string name="settings_restore_reboot">Kérem indítsa újra a készülékét.</string>
+
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">Hiba történt az alkalmazás specifikus hash kód létrehozásakor</string>
+    <string name="wsc_parse_response_error">Hiba történt a web szolgáltatástól kapott adatok elemzése során</string>
+    <string name="wsc_hash_invalid">A web szolgáltatás megtagadta a kommunikációt hash eltérés miatt. Ez általában akkor történik meg, ha nem hivatalos verziót futtat, vagy a Gravitybox APK harmadik fél által módosításra került.</string>
+    <string name="wsc_please_wait">Kérem vájon&#8230;</string>
+    <string name="wsc_error">Hiba történt a Web szolgáltatással való kommunikáció során: %s</string>
+    <string name="wsc_task_cancelled">A web szolgáltatás működése törölve</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">Hiba történt a web szolgáltatástól kapott tranzakciós adat elemzése során</string>
+    <string name="wsc_trans_valid">A tranzakció-azonosító ellenőrzése sikerült. A pérmium funkciók a Gravitybox újraindítása után kerülnek feloldásra.</string>
+    <string name="wsc_trans_invalid">Nem található feljegyzés a megadott tranzakció-azonosítóhoz.</string>
+    <string name="wsc_trans_violation">A megadott tranzakció-azonosító túl sokszor került regisztrálásra. A probléma megoldásához lépjen kapcsolatba a GravityBox fejlesztőivel.</string>
+    <string name="wsc_trans_blocked">A megadott tranzakció-azonosító blokkolásra került. A probléma megoldásához lépjen kapcsolatba a GravityBox fejlesztőivel.</string>
+    <string name="pref_trans_verification_title">PayPal tranzakció-azonosító</string>
+    <string name="pref_trans_verification_summary">Amennyiben adományozott, beírhatja a PayPal adományozási tranzakció-azonosítóját a prémium funkciók feloldásához.</string>
+    <string name="wsc_trans_required_summary">Ehhez a funkcióhoz érvényes PayPal tranzakció-azonosító szükséges</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Rendszerinformációs gomb letiltása</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Hosszú érintés késleltetése</string>
+    <string name="pie_longpress_delay_default">Gyári beállítás</string>
+
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">Indító alkalmazástár</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Indító alkalmazástár mutatása</string>
+
+	<!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Egyéb</string>
+    <string name="pref_launcher_resize_widget_title">Bármely widget átméretezése</string>
+    <string name="pref_launcher_resize_widget_summary">Átméretezi bármelyik widget-et bármely méretre a kezdőképernyőn (Indító alkalmazás újraindítása szükséges)</string>
 
 </resources>
