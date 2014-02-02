@@ -34,6 +34,7 @@ public class ModLauncher {
 
     private static final String CLASS_DYNAMIC_GRID = "com.android.launcher3.DynamicGrid";
     private static final String CLASS_LAUNCHER = "com.android.launcher3.Launcher";
+    private static final String CLASS_APP_WIDGET_HOST_VIEW = "android.appwidget.AppWidgetHostView";
     private static final boolean DEBUG = false;
 
     public static final String ACTION_SHOW_APP_DRAWER = "gravitybox.launcher.intent.action.SHOW_APP_DRAWER";
@@ -58,6 +59,7 @@ public class ModLauncher {
         try {
             final Class<?> classDynamicGrid = XposedHelpers.findClass(CLASS_DYNAMIC_GRID, classLoader);
             final Class<?> classLauncher = XposedHelpers.findClass(CLASS_LAUNCHER, classLoader);
+            final Class<?> classAppWidgetHostView = XposedHelpers.findClass(CLASS_APP_WIDGET_HOST_VIEW, classLoader);
 
             XposedBridge.hookAllConstructors(classDynamicGrid, new XC_MethodHook() { 
                 @Override
@@ -104,6 +106,21 @@ public class ModLauncher {
                         mShouldShowAppDrawer = false;
                         XposedHelpers.callMethod(param.thisObject, "onClickAllAppsButton", 
                                 new Class<?>[] { View.class }, (Object)null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classAppWidgetHostView, "getAppWidgetInfo", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_LAUNCHER_RESIZE_WIDGET, false)) {
+                        Object info = XposedHelpers.getObjectField(param.thisObject, "mInfo");
+                        if (info != null) {
+                            XposedHelpers.setIntField(info, "resizeMode", 3);
+                            XposedHelpers.setIntField(info, "minResizeWidth", 40);
+                            XposedHelpers.setIntField(info, "minResizeHeight", 40);
+                        }
                     }
                 }
             });
