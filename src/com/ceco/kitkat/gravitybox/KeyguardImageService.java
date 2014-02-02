@@ -80,11 +80,11 @@ public class KeyguardImageService extends Service {
                     break;
                 case MSG_FINISH_OUTPUT:
                     try {
-                        mOutputStream.close();
                         if (saveImage()) {
                             Intent intent = new Intent(ACTION_KEYGUARD_IMAGE_UPDATED);
                             sendBroadcast(intent);
                         }
+                        mOutputStream.close();
                     } catch (Throwable t) {
                         t.printStackTrace();
                     }
