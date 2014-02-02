@@ -279,7 +279,7 @@ public class KitKatBattery extends View implements IconManagerListener, BatteryS
             mTextPaint.setTextSize(height *
                     (SINGLE_DIGIT_PERCENT ? 0.75f
                             : (mBatteryData.level == 100 ? 0.38f : 0.5f)));
-            mTextPaint.setColor(mBatteryData.level <= 38 ? Color.WHITE : Color.BLACK);
+            mTextPaint.setColor(mBatteryData.level <= 40 ? Color.WHITE : Color.BLACK);
             mTextHeight = -mTextPaint.getFontMetrics().ascent;
 
             final String str = String.valueOf(SINGLE_DIGIT_PERCENT ? 
