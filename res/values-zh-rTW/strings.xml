@@ -1082,7 +1082,7 @@
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">模糊效果強度</string>
     
-     <!-- Smart radio: independent delay for screen off power save event -->
+    <!-- Smart radio: independent delay for screen off power save event -->
     <string name="pref_smart_radio_screen_off_delay_title">延遲省電</string>
     <string name="pref_smart_radio_screen_off_delay_summary">當螢幕關閉時，延遲切換到省電模式。
       如果數值不為零，替代預設網路模式改變的延遲.</string>
