@@ -690,10 +690,15 @@ public class ModLockscreen {
                                     (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierView"),
                                     (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierGeminiView")};
 
+                            int[] origVisibility = new int[] {
+                                    carrierTextView[0] == null ? View.GONE : carrierTextView[0].getVisibility(),
+                                    carrierTextView[1] == null ? View.GONE : carrierTextView[1].getVisibility()
+                            };
+
                             if (carrierTextView != null && mCarrierText != null) {
                                 for (int i=0; i<2; i++) {
                                     if (mCarrierText[i].isEmpty()) {
-                                        carrierTextView[i].setVisibility(View.VISIBLE);
+                                        carrierTextView[i].setVisibility(origVisibility[i]);
                                     } else {
                                         if (mCarrierText[i].trim().isEmpty()) {
                                             carrierTextView[i].setText("");
