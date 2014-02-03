@@ -1081,5 +1081,62 @@
 
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">模糊效果強度</string>
+    
+    <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">延遲省電</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">當螢幕關閉時，延遲切換到省電模式。
+      如果數值不為零，替代預設網路模式改變的延遲.</string>
+
+    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
+    <string name="pref_lockscreen_carrier2_text_title">自訂第二載波文字</string>
+
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">備份設定</string>
+    <string name="pref_settings_restore_title">還原設定</string>
+    <string name="settings_backup_failed">備份失敗</string>
+    <string name="settings_backup_no_prefs">自訂文件未找到</string>
+    <string name="settings_backup_success">備份成功</string>
+    <string name="settings_restore_no_backup">這裡沒有任何備份與還原檔案</string>
+    <string name="settings_restore_confirm">您當前的自訂文件將被更換. 您確定嗎?</string>
+    <string name="settings_restore_failed">還原失敗</string>
+    <string name="settings_restore_success">還原成功</string>
+    <string name="settings_restore_reboot">請重啟您的裝置</string>
+
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">錯誤產生應用程式特定的散列碼</string>
+    <string name="wsc_parse_response_error">從 Web 服務獲得的錯誤剖析資料</string>
+    <string name="wsc_hash_invalid">由於散列碼不符 Web 遭服務拒絕通信，。這通常發生在以下情況
+      您運行非官方版或 GravityBox APK 已經被第三方修改.</string>
+    <string name="wsc_please_wait">請稍後&#8230;</string>
+    <string name="wsc_error">與 Web 服務通信錯誤: %s</string>
+    <string name="wsc_task_cancelled">Web 服務操作取消</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">從Web服務獲得的錯誤剖析交易資料</string>
+    <string name="wsc_trans_valid">交易ID驗證成功。 GravityBox重新啟動後的進階功能將被解鎖.</string>
+    <string name="wsc_trans_invalid">無法找到指定的交易ID記錄</string>
+    <string name="wsc_trans_violation">指定的交易ID已經註冊過很多次。請聯絡 GravityBox 開發者來解決.</string>
+    <string name="wsc_trans_blocked">指定交易ID已被封鎖。請聯絡 GravityBox 開發者來解決.</string>
+    <string name="pref_trans_verification_title">PayPal 交易 ID</string>
+    <string name="pref_trans_verification_summary">如果您想要捐贈，您可以輸入您的 PayPal 捐贈交易ID來解鎖進階功能</string>
+    <string name="wsc_trans_required_summary">此功能需要有效的 PayPal 交易 ID</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">停用系統資訊</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">長按延遲</string>
+    <string name="pie_longpress_delay_default">系統預設</string>
+
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">啟動器抽屜</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">顯示啟動器程式抽屜</string>
+
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">其他</string>
+    <string name="pref_launcher_resize_widget_title">調整任何小工具</string>
+    <string name="pref_launcher_resize_widget_summary">調整主畫面上的任何小工具至任何大小 (需要重新啟動啟動器)</string>
  
 </resources>
