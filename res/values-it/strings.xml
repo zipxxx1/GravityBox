@@ -454,6 +454,7 @@
     <string name="expanded_desktop_disabled">Disattivato</string>
     <string name="expanded_desktop_navbar">Nascondi barra di navigazione</string>
     <string name="expanded_desktop_immersive_statusbar">Barra di stato Immersive</string>
+    <string name="expanded_desktop_immersive_navbar">Barra di navigazione Immersive</string>
     <string name="expanded_desktop_both">Nascondi entrambe</string>
     <string name="expanded_desktop_immersive">Modalità Immersive</string>
     <string name="action_expanded_desktop_title">Desktop esteso</string>
@@ -1097,13 +1098,13 @@
  
      <!-- Pie: long press delay -->
      <string name="pref_pie_longpress_delay_title">Ritardo pressione prolungata</string>
-     <string name="pie_longpress_delay_default">Predefinito di sistemat</string>
+     <string name="pie_longpress_delay_default">Predefinito di sistema</string>
  
      <!-- GB Actions: Launcher drawer shortcut -->
-     <string name="shortcut_launcher_drawer">Pannello launcher</string>
+     <string name="shortcut_launcher_drawer">App drawer del launcher</string>
  
      <!-- Key Actions: Show launcher drawer -->
-     <string name="hwkey_action_launcher_drawer">Visualizza app nel pannello launcher</string>
+     <string name="hwkey_action_launcher_drawer">Visualizza app drawer del launcher</string>
  
      <!-- Launcher tweaks: resize any widget -->
      <string name="pref_cat_launcher_other_title">Altro</string>
