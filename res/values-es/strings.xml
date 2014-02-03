@@ -473,6 +473,7 @@
     <string name="expanded_desktop_disabled">Desactivado</string>
     <string name="expanded_desktop_navbar">Ocultar barra de navegación</string>
     <string name="expanded_desktop_immersive_statusbar">Barra de estado inmersiva</string>
+    <string name="expanded_desktop_immersive_navbar">Barra de navegación inmersiva</string>
     <string name="expanded_desktop_both">Ocultar ambas</string>
     <string name="action_expanded_desktop_title">Escritorio expandido</string>
     <string name="action_expanded_desktop_on">El escritorio expandido está ACTIVADO</string>
@@ -1121,5 +1122,9 @@
     <!-- Key Actions: Show launcher drawer -->
     <string name="hwkey_action_launcher_drawer">Mostrar cajón de aplicaciones</string> <!-- Show launcher app drawer -->
 
-	
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Otro</string>
+    <string name="pref_launcher_resize_widget_title">Redimensionar cualquier widget</string>
+    <string name="pref_launcher_resize_widget_summary">Redimensiona cualquier widget a cualquier tamaño en la pantalla de inicio (requiere reiniciar el lanzador)</string>
+ 
 </resources>
