@@ -695,8 +695,9 @@ public class ModLockscreen {
                                     carrierTextView[1] == null ? View.GONE : carrierTextView[1].getVisibility()
                             };
 
-                            if (carrierTextView != null && mCarrierText != null) {
+                            if (mCarrierText != null) {
                                 for (int i=0; i<2; i++) {
+                                    if (carrierTextView[i] == null) continue;
                                     if (mCarrierText[i].isEmpty()) {
                                         carrierTextView[i].setVisibility(origVisibility[i]);
                                     } else {
