@@ -191,6 +191,7 @@
     <string name="lockscreen_bg_default">Wallpaper bawaan</string>
     <string name="lockscreen_bg_color">Diisi warna</string>
     <string name="lockscreen_bg_image">Gambar kustom</string>
+    <string name="lockscreen_bg_last_screen">Layar terakhir</string>
     <string name="pref_lockscreen_bg_color_title">Tentukan warna kustom</string>
     <string name="pref_lockscreen_bg_color_summary">Membolehkan anda untuk men-set warna kustom sebagai latar belakang Lockscreen</string>
     <string name="pref_lockscreen_bg_image_title">Tentukan gambar kustom</string>
@@ -875,6 +876,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Teks persentase baterai</string>
     <string name="battery_percent_text_size_title">Ukuran teks persentase baterai</string>
+    <string name="battery_percent_text_size_larger">Lebih besar</string>
     <string name="battery_percent_text_size_normal">Normal</string>
     <string name="battery_percent_text_size_smaller">Lebih kecil</string>
     <string name="battery_percent_text_size_even_smaller">Lebih kecil lagi</string>
@@ -1056,5 +1058,108 @@
     <string name="pref_smart_radio_screen_off_summary">Menghidupkan mode pengematan daya ketika layar dimatikan, tanpa memperhatikan apakah paket data dihidupkan atau tidak</string>
     <string name="pref_smart_radio_ignore_locked_title">Hiraukan bila terkunci</string>
     <string name="pref_smart_radio_ignore_locked_summary">Ketika layar dihidupkan, mode penghematan daya tidak akan dimatikan sampai kunci layar dibuka</string>
+    <string name="pref_smart_radio_mode_change_delay_title">Jeda pergantian mode jaringan</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">Berikan jeda antara pergantian mode jaringan sesuai banyaknya detik yang ditentukan</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Teks operator kustom</string>
+    <string name="carrier_text_default">Bawaan</string>
+    <string name="carrier_text_empty">Kosong</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">Suara ketika selesai mengisi baterai</string>
+    <string name="pref_battery_charged_sound_summary">Mainkan suara ketika baterai selesai terisi secara penuh</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">Aksi ketika ditahan</string>
+    <string name="pref_pie_back_longpress_title">Tombol kembali</string>
+    <string name="pref_pie_home_longpress_title">Tombol Home</string>
+    <string name="pref_pie_recents_longpress_title">Tombol Recents</string>
+    <string name="pref_pie_search_longpress_title">Tombol pencarian</string>
+    <string name="pref_pie_menu_longpress_title">Tombol menu</string>
+    <string name="pref_pie_app_longpress_title">Tombol App launcher</string>
+
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">Jeda denyutan notifikasi</string>
+    <string name="pref_pulse_notification_delay_summary">Membutuhkan reboot</string>
+
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">Kelakuan ketika membersihkan semua tugas</string>
+    <string name="pref_clear_recents_mode_0">Sentuh untuk menutup semua, Tahan untuk menutup semua kecuali yang baru dijalankan</string>
+    <string name="pref_clear_recents_mode_1">Sentuh untuk menutup semua kecuali yang baru dijalankan, tahan untuk menutup semua</string>
+
+    <!-- Power menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">Disable power menu on lockscreen</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">Bawaan sistem</string>
+    <string name="overflow_menu_enabled">Paksa hidup</string>
+    <string name="overflow_menu_disabled">Paksa matikan</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">Ambil screenshot</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">Tunjukkan panel volume</string>
+
+    <!-- Blur effect intensity -->
+    <string name="pref_lockscreen_bg_blur_intensity_title">Intensitas efek buram</string>
+
+    <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">Penghematan daya berjedaDelayed power save</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Beri jeda ketika berubah ke mode penghematan daya ketika layar dimatikan. 
+        Memaksa jeda perubahan mode jaringan bawaan jika nilainya tidak nol.</string>
+
+    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
+    <string name="pref_lockscreen_carrier2_text_title">Teks operator kedua kustom</string>
+
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Pengaturan pencadangan</string>
+    <string name="pref_settings_restore_title">Pengaturan pemulihan</string>
+    <string name="settings_backup_failed">Pencadangan gagal</string>
+    <string name="settings_backup_no_prefs">Berkas pengaturan tidak ditemukan</string>
+    <string name="settings_backup_success">Pencadangan sukses</string>
+    <string name="settings_restore_no_backup">Tidak ada cadangan untuk dipulihkan</string>
+    <string name="settings_restore_confirm">Pengaturan anda yang sekarang akan ditimpa. Apakah anda yakin?</string>
+    <string name="settings_restore_failed">Pemulihan gagal</string>
+    <string name="settings_restore_success">Pemulihan sukses</string>
+    <string name="settings_restore_reboot">Mohon restart perangkat anda</string>
+
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">Terjadi kesalahan ketika menghasilkan kode hash aplikasi</string>
+    <string name="wsc_parse_response_error">Terjadi kesalahan ketika menguraikan data dari layanan web</string>
+    <string name="wsc_hash_invalid">Layanan web menolak untuk berkomunikasi dikarenakan kode hash tidak cocok. Hal ini biasanya terjadi 
+        ketika anda menjalankan versi GravityBox yang tidak resmi atau yang telah dimodifikasi oleh pihak ketiga.</string>
+    <string name="wsc_please_wait">Mohon tunggu&#8230;</string>
+    <string name="wsc_error">Terjadi kesalahan ketika berkomunikasi dengan layanan web: %s</string>
+    <string name="wsc_task_cancelled">Operasi layanan web dibatalkan</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">Terjadi kesalahan ketika menguraikan data yang didapat dari layanan web</string>
+    <string name="wsc_trans_valid">Verifikasi ID transaksi berhasil. Fitur premium akan terbuka setelah GravityBox di restart.</string>
+    <string name="wsc_trans_invalid">Tidak dapat menemukan catatan ID transaksi yang ditentukan</string>
+    <string name="wsc_trans_violation">ID transaksi yang ditentukan telah terregistrasi berulang-kali. Kontak pengembang GravityBox untuk mengatasi hal ini.</string>
+    <string name="wsc_trans_blocked">ID transaksi yang ditentukan telah diblokir. Kontak pengembang GravityBox untuk mengatasi hal ini.</string>
+    <string name="pref_trans_verification_title">PayPal transaction ID</string>
+    <string name="pref_trans_verification_summary">Jika anda telah melakukan donasi, anda bisa memasukkan ID transaksi PayPal anda untuk membuka fitur premium</string>
+    <string name="wsc_trans_required_summary">Fitur ini membutuhkan ID transaksi PayPal yang valid</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Matikan info sistem</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Jeda ketika ditahan</string>
+    <string name="pie_longpress_delay_default">Bawaan sistem</string>
+
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">Kotak peluncur</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Tunjukkan Kotak peluncur aplikasi</string>
+
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Lainnya</string>
+    <string name="pref_launcher_resize_widget_title">Ubah ukuran semua widget</string>
+    <string name="pref_launcher_resize_widget_summary">Rubah ukuran semua widget ke semua ukuran di homescreen (Membutuhkan Launcher untuk di restart)</string>
 
 </resources>
