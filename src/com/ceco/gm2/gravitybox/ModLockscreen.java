@@ -670,10 +670,10 @@ public class ModLockscreen {
                             TextView carrierDivider = (TextView) XposedHelpers.getObjectField(
                                     param.thisObject, "mCarrierDivider");
                             mCarrierText = new String[] {
-                                    prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null),
-                                    prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER2_TEXT, null)};
+                                    prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, ""),
+                                    prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER2_TEXT, "")};
 
-                            if (carrierDivider != null && mCarrierText != null) {
+                            if (carrierDivider != null) {
                                 if ((!mCarrierText[0].isEmpty() && mCarrierText[0].trim().isEmpty()) ||
                                         (!mCarrierText[1].isEmpty() && mCarrierText[1].trim().isEmpty()))
                                     carrierDivider.setVisibility(View.GONE);
