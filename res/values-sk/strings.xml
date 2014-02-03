@@ -1059,4 +1059,62 @@
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Intenzita efektu rozmazania</string>
 
+    <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">Oneskorený úsporný režim</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Oneskorí prepnutie do úsporného režimu po vypnutí obrazovky. 
+         V prípade hodnoty 0, platí štandardné nastavenie oneskorenia zmeny režimu.</string>
+
+    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
+    <string name="pref_lockscreen_carrier2_text_title">Vlastný text operátora 2</string>
+
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Zálohovať nastavenia</string>
+    <string name="pref_settings_restore_title">Obnoviť nastavenia</string>
+    <string name="settings_backup_failed">Zálohovanie nastavení zlyhalo</string>
+    <string name="settings_backup_no_prefs">Súbor nastavení neexistuje</string>
+    <string name="settings_backup_success">Zálohovanie nastavení bolo úspešné</string>
+    <string name="settings_restore_no_backup">Neexistuje záloha pre obnovenie</string>
+    <string name="settings_restore_confirm">Vaše súčasné nastavenia budú prepísané. Skutočne obnoviť?</string>
+    <string name="settings_restore_failed">Obnovenie nastavení zlyhalo</string>
+    <string name="settings_restore_success">Obnovenie nastavení bolo úspešné</string>
+    <string name="settings_restore_reboot">Prosím, reštartujte zariadenie</string>
+
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">Chyba generovania aplikačného hash kódu</string>
+    <string name="wsc_parse_response_error">Chyba spracovania údajov webovej služby</string>
+    <string name="wsc_hash_invalid">Web sužba odmietla komunikovať kvôli nezhode aplikačného hash kódu. 
+        Stáva sa v prípade ak používate neoficiálnu verziu GravityBox alebo ak bol APK súbor modifikovaný treťou stranou.</string>
+    <string name="wsc_please_wait">Prosím čakajte&#8230;</string>
+    <string name="wsc_error">Chyba komunikácie s webovou službou: %s</string>
+    <string name="wsc_task_cancelled">Operácia bola zrušená</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">Chyba spracovania transakčných údajov z webovej služby</string>
+    <string name="wsc_trans_valid">Verifikácia ID transakcie prebehla úspešne. Prémiové funkcie budú odomknuté po reštartovaní GravityBox.</string>
+    <string name="wsc_trans_invalid">Zadané ID transakcie neexistuje</string>
+    <string name="wsc_trans_violation">Zadané ID transakcie bolo pravdepodobne zneužité. Kontaktuje vývojára aplikácie.</string>
+    <string name="wsc_trans_blocked">Zadané ID transakcie bolo zablokované. Kontaktuje vývojára aplikácie.</string>
+    <string name="pref_trans_verification_title">ID PayPal transakcie</string>
+    <string name="pref_trans_verification_summary">V prípade, ak ste podporili projekt príspevkom cez PayPal, 
+        môžete použiť ID PayPal transakcie na odomknutie prémiových funkcií</string>
+    <string name="wsc_trans_required_summary">Táto funkcia vyžaduje platné ID PayPal transakcie</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Vypnúť systémové informácie</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Oneskorenie dlhého podržania</string>
+    <string name="pie_longpress_delay_default">Systémové</string>
+
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">Zoznam aplikácií spúšťača</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Otvoriť zoznam aplikácií spúšťača</string>
+
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Iné</string>
+    <string name="pref_launcher_resize_widget_title">Zmena veľkosti widgetov</string>
+    <string name="pref_launcher_resize_widget_summary">Povolí zmenu veľkosti widgetov na obrazovkách spúšťača (vyžaduje reštart spúšťača)</string>
+
 </resources>
