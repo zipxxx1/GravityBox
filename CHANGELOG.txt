@@ -1,3 +1,42 @@
+Changelog 2.9.5 - 02/02/2014
+--------------------------------------
+- Fixed crash when power menu disabled on lockscreen
+- Fixed notification drawer carrier text compatibility with Moto X
+--- also fixes other statusbar related issues like broken brightness control
+- Smart Radio:
+--- improved and simplified decision logic
+--- won't switch to power saving mode while tethering over mobile network is active
+--- independent option to delay switch to power saving mode after screen turns off (up to 30 minutes)
+--- added GSM/WCDMA preferred and LTE Global modes
+- Non-intrusive call: 
+--- added ticker to show calling contact info
+--- keep navigation unblocked when new non-intrusive call notification arrives while there's already another ongoing call in progress
+- Lockscreen: Allows slide to unlock before security unlock when unlock ring targets are enabled (ported from SlimKat)
+- Pie controls:
+--- added option to disable system info slice
+--- added option for adjusting long-press delay
+- GravityBox Actions:
+--- added shortcut for GSM/WCDMA preferred network mode (type 0)
+--- added shortcut for LTE Global network mode (type 10)
+--- added shortcut for opening launcher's app drawer
+- Navigation key actions:
+--- added action for opening launcher's app drawer
+- Launcher tweaks: added option to resize any widget (thanks to JayT5)
+- Expanded desktop: added new mode: Immersive navbar - keeps statusbar intact and makes navbar immersive
+--- (issue: statusbar can't be fully expanded - leaves gap at the bottom - no solution for this)
+- Notification drawer custom carrier text: hide option for WiFi-only devices (thanks to bgcngm)
+- Added premium backup and restore settings feature (requires valid PayPal transaction ID)
+- Implemented interface for verifying PayPal transaction IDs to unlock premium features (requires internet access)
+- Updated French translation (thanks to ch-vox)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated Russian translations (thanks to gaich)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Slovak and Czech translations
+
 Changelog 2.9.4 - 25/01/2014
 --------------------------------------
 - Expanded desktop revised:
