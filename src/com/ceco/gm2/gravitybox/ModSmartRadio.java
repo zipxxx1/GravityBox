@@ -103,7 +103,7 @@ public class ModSmartRadio {
                     if (shouldSwitchToNormalState()) {
                         switchToState(State.NORMAL);
                     } else {
-                         switchToState(State.NORMAL, true);
+                        switchToState(State.POWER_SAVING, true);
                     }
                 }
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
