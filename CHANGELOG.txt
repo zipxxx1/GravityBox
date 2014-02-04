@@ -1,3 +1,43 @@
+Changelog 2.9.5 - 04/02/2014
+--------------------------------------
+- Fixed crash when power menu disabled on lockscreen
+- Smart Radio:
+--- improved and simplified decision logic
+--- won't switch to power saving mode while tethering over mobile network is active
+--- independent option to delay switch to power saving mode after screen turns off (up to 30 minutes)
+--- added GSM/WCDMA preferred and LTE Global modes
+--- fixed compatibility with Android 4.1 (EXPERIMENTAL)
+- Lockscreen tweaks:
+--- Allows slide to unlock before security unlock when unlock ring targets are enabled (ported from SlimKat)
+--- Last screen: 
+------- remove overhead from lockscreen by performing blur immediately after screen is captured 
+- Pie controls:
+--- added option to disable system info slice
+--- added option for adjusting long-press delay
+- GravityBox Actions:
+--- added shortcut for GSM/WCDMA preferred network mode (type 0)
+--- added shortcut for LTE Global network mode (type 10)
+--- added shortcut for opening launcher's app drawer
+- Navigation key actions:
+--- added action for opening launcher's app drawer
+- Launcher tweaks: added option to resize any widget (thanks to JayT5)
+- Custom carrier texts (on Lockscreen / Notification drawer):
+--- added support for Mediatek devices (thanks to bgcngm)
+--- hide options for WiFi-only devices (thanks to bgcngm)
+- Added premium backup and restore settings feature (requires valid PayPal transaction ID)
+- Implemented interface for verifying PayPal transaction IDs to unlock premium features (requires internet access)
+- Updated French translation (thanks to ch-vox)
+- Updated Italian translation (thanks to pesa1234, valerioscifoni)
+- Updated Russian translations (thanks to gaich)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Spanish translations (thanks to jvbferrer, herbeerth)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translation (thanks to Eric850130)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Indonesian translation (thanks to awaaas)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Slovak and Czech translations
+
 Changelog 2.9.4 - 26/01/2014
 --------------------------------------
 - Smart Radio reworked from scratch - based on connectivity manager events
