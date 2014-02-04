@@ -1093,11 +1093,11 @@
         Sovrascrive il ritardo cambio modalità di rete normale se il valore è diverso da zero.</string>
         
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">Testo operatore personalizzato seconda sim</string>
+    <string name="pref_lockscreen_carrier2_text_title">Testo operatore personalizzato sim2</string>
 
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">Backup impostazioni</string>
-    <string name="pref_settings_restore_title">Riprostino impostazioni</string>
+    <string name="pref_settings_restore_title">Ripristino impostazioni</string>
     <string name="settings_backup_failed">Backup non riuscito</string>
     <string name="settings_backup_no_prefs">File preferenze non trovato</string>
     <string name="settings_backup_success">Backup riuscito</string>
