@@ -1064,7 +1064,7 @@
 
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">Backup impostazioni</string>
-    <string name="pref_settings_restore_title">Riprostino impostazioni</string>
+    <string name="pref_settings_restore_title">Ripristino impostazioni</string>
     <string name="settings_backup_failed">Backup non riuscito</string>
     <string name="settings_backup_no_prefs">File preferenze non trovato</string>
     <string name="settings_backup_success">Backup riuscito</string>
