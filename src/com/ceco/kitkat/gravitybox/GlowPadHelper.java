@@ -82,6 +82,7 @@ public class GlowPadHelper {
         if (context == null || app == null) return null;
 
         try {
+            Resources gbRes = context.createPackageContext(GravityBox.PACKAGE_NAME, 0).getResources();
             final String key = app + "_" + bgStyle.toString();
             if (mAppInfoCache.containsKey(key)) {
                 if (DEBUG) log("AppInfo: returning from cache for " + key);
@@ -95,6 +96,7 @@ public class GlowPadHelper {
                 return null;
             }
             final int mode = appInfo.intent.getIntExtra("mode", AppPickerPreference.MODE_APP);
+            final int iconResId = appInfo.intent.getIntExtra("iconResId", 0);
             Bitmap appIcon = null;
             final Resources res = context.getResources();
             boolean isGbShortcut = false;
@@ -102,15 +104,23 @@ public class GlowPadHelper {
                 PackageManager pm = context.getPackageManager();
                 ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
                 appInfo.name = (String) ai.loadLabel(pm);
-                appIcon = Utils.drawableToBitmap(ai.loadIcon(pm));
+                if (iconResId != 0) {
+                    appIcon = Utils.drawableToBitmap(gbRes.getDrawable(iconResId));
+                } else {
+                    appIcon = Utils.drawableToBitmap(ai.loadIcon(pm));
+                }
             } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                 appInfo.name = appInfo.intent.getStringExtra("label");
-                final String appIconPath = appInfo.intent.getStringExtra("icon");
-                if (appIconPath != null) {
-                    File f = new File(appIconPath);
-                    FileInputStream fis = new FileInputStream(f);
-                    appIcon = BitmapFactory.decodeStream(fis);
-                    fis.close();
+                if (iconResId != 0) {
+                    appIcon = Utils.drawableToBitmap(gbRes.getDrawable(iconResId));
+                } else {
+                    final String appIconPath = appInfo.intent.getStringExtra("icon");
+                    if (appIconPath != null) {
+                        File f = new File(appIconPath);
+                        FileInputStream fis = new FileInputStream(f);
+                        appIcon = BitmapFactory.decodeStream(fis);
+                        fis.close();
+                    }
                 }
                 isGbShortcut = appInfo.intent.getAction().equals(ShortcutActivity.ACTION_LAUNCH_ACTION);
             }
