@@ -134,19 +134,28 @@ public class QuickAppTile extends BasicTile {
                     return;
                 }
                 final int mode = mIntent.getIntExtra("mode", AppPickerPreference.MODE_APP);
+                final int iconResId = mIntent.getIntExtra("iconResId", 0);
                 Bitmap appIcon = null;
                 if (mode == AppPickerPreference.MODE_APP) {
                     ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
                     mAppName = ai.loadLabel(mPm).toString();
-                    appIcon = Utils.drawableToBitmap(ai.loadIcon(mPm));
+                    if (iconResId != 0) {
+                        appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                    } else {
+                        appIcon = Utils.drawableToBitmap(ai.loadIcon(mPm));
+                    }
                 } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                     mAppName = mIntent.getStringExtra("label");
-                    final String appIconPath = mIntent.getStringExtra("icon");
-                    if (appIconPath != null) {
-                        File f = new File(appIconPath);
-                        FileInputStream fis = new FileInputStream(f);
-                        appIcon = BitmapFactory.decodeStream(fis);
-                        fis.close();
+                    if (iconResId != 0) {
+                        appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                    } else {
+                        final String appIconPath = mIntent.getStringExtra("icon");
+                        if (appIconPath != null) {
+                            File f = new File(appIconPath);
+                            FileInputStream fis = new FileInputStream(f);
+                            appIcon = BitmapFactory.decodeStream(fis);
+                            fis.close();
+                        }
                     }
                 }
                 if (appIcon != null) {
