@@ -701,6 +701,31 @@ public class ModHwKeys {
                 }
             });
 
+            if (Utils.isLenovoROW()) {
+                //Lenovo has stupid hack for their ROW firmware - HOME is "hard" linked to run launchAssistAction method
+                XposedHelpers.findAndHookMethod(classPhoneWindowManager, "launchAssistAction", new XC_MethodReplacement() {
+
+                    @Override
+                    protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                        Boolean homeIsLong = XposedHelpers.getBooleanField(param.thisObject, "mHomeLongPressed");
+
+                        if (mHomeLongpressAction != GravityBoxSettings.HWKEY_ACTION_DEFAULT 
+                                && mHomeLongpressAction != GravityBoxSettings.HWKEY_ACTION_SEARCH 
+                                && homeIsLong) {
+                            XposedHelpers.callMethod(param.thisObject, "handleLongPressOnHome");
+                            if (DEBUG) log("HOME performAction.");
+                            performAction(HwKeyTrigger.HOME_LONGPRESS);
+
+                            return null;
+                        }
+                        XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                        if (DEBUG) log("launchAssistAction invokeOriginalMethod.");
+
+                        return null;
+                    }
+                });
+            }
+
             if (Build.VERSION.SDK_INT > 16) {
                 XposedHelpers.findAndHookMethod(classPhoneWindowManager, 
                         "isWakeKeyWhenScreenOff", int.class, new XC_MethodHook() {
