@@ -1183,4 +1183,13 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Разблокировка</string>
 
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">Кольцо перед блокировкой</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">Возможность использования ярлыков кольца перед разблокировкой пин/графическим ключом</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">Виджеты</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">Кольцо разблокировки</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Строка состояния</string>
+
 </resources>
