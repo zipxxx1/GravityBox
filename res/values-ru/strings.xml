@@ -82,7 +82,7 @@
     <string name="quick_settings_music_pause">Пауза</string>
     
     <!--  QuickSettings settings -->
-    <string name="quick_settings_title">Плитки в панели уведомлений</string>
+    <string name="quick_settings_title">Плитки быстрых настроек</string>
     <string name="quick_settings_summary">Включение/отключение плиток быстрых настроек для панели уведомлений</string>
     <string name="qs_tile_user_profile">Профиль пользователя</string>
     <string name="qs_tile_airplane_mode">Режим полёта</string>
@@ -93,7 +93,7 @@
     <string name="qs_tile_gps_alt">GPS (стиль CM)</string>
     <string name="qs_tile_mobile_data">Моб. данные</string>
     <string name="qs_tile_network_mode">Режим сети</string>
-    <string name="qs_tile_data_usage">Использование данных</string>
+    <string name="qs_tile_data_usage">Мобильные данные</string>
     <string name="qs_tile_brightness">Яркость</string>
     <string name="qs_tile_autorotation">Автоповорот</string>
     <string name="qs_tile_sync">Синхронизация</string>
@@ -402,7 +402,7 @@
     <string name="qs_tile_gps_locked">GPS блок</string>
 
     <!-- Pie control: always show menu button -->
-    <string name="pie_control_menu_title">Всегда показывать меню</string>
+    <string name="pie_control_menu_title">Показывать кнопку меню</string>
 
     <!-- Ringer mode tile (for non-MTK) -->
     <string name="qs_tile_ringer_mode">Режим звонка</string>
@@ -476,9 +476,9 @@
     <string name="expanded_desktop_immersive_navbar">Погружение только для панели навигации</string>
     <string name="expanded_desktop_both">Полупогружение</string>
     <string name="expanded_desktop_immersive">Погружение</string>
-    <string name="action_expanded_desktop_title">Расширенный рабочий стол</string>
-    <string name="action_expanded_desktop_on">Расширенный рабочий стол ВКЛ</string>
-    <string name="action_expanded_desktop_off">Расширенный рабочий стол ВЫКЛ</string>
+    <string name="action_expanded_desktop_title">Расшир.рабочий стол</string>
+    <string name="action_expanded_desktop_on">Расшир.рабочий стол ВКЛ</string>
+    <string name="action_expanded_desktop_off">Расшир.рабочий стол ВЫКЛ</string>
 
     <!-- Power menu screenshot -->
     <string name="screenshot">Снимок экрана</string>
@@ -487,8 +487,8 @@
     <string name="hwkey_action_menu">Показать меню</string>
 
     <!-- HW Key Action: Expanded desktop -->
-    <string name="hwkey_action_expanded_desktop">Вкл расширенный рабочий стол</string>
-    <string name="hwkey_action_expanded_desktop_disabled">Расширенный рабочий стол отключен!</string>
+    <string name="hwkey_action_expanded_desktop">Вкл расшир.рабочий стол</string>
+    <string name="hwkey_action_expanded_desktop_disabled">Расшир.рабочий стол отключен!</string>
 
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Настройки панели навигации</string>
@@ -501,7 +501,7 @@
     <string name="pref_navbar_height_landscape_summary">Применимо для горизонтальной и вертикальной ориентаций</string>
     <string name="pref_navbar_width_title">Ширина панели навигации</string>
     <string name="pref_navbar_width_summary">Применимо к вертикальной панели</string>
-    <string name="pref_navbar_menukey_title">Всегда показывать меню</string>
+    <string name="pref_navbar_menukey_title">Показывать кнопку меню</string>
 
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Снимок экрана в меню</string>
@@ -544,7 +544,7 @@
     <string name="pie_controls_disabled">Никогда</string>
     <string name="pie_controls_enabled_always">Всегда</string>
     <string name="pie_controls_enabled_expanded">При вкл расш.рабочем столе</string>
-    <string name="pie_controls_enabled_expanded_navbar">Когда расширенный раб.стол без панели навигации</string>
+    <string name="pie_controls_enabled_expanded_navbar">Когда расшир.раб.стол без панели навигации</string>
 
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">Вкл. экран при подключении</string>
@@ -859,7 +859,7 @@
     <string name="pref_cat_power_other_title">Другое</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">На экране блокировки</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">Расшир.на экр.блокировки</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">Неактивный режим</string>
@@ -869,7 +869,7 @@
 
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Пользовательская кнопка</string>
-    <string name="pref_navbar_custom_key_enable_title">Включить пользовательскую кнопку</string>
+    <string name="pref_navbar_custom_key_enable_title">Включить польз. кнопку</string>
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Настройки сигнала</string>
@@ -879,7 +879,7 @@
     <string name="pref_signal_cluster_data_activity_summary">Отображение активности данных в значках мобильного сигнала и  WiFi (необходима перезагрузка)</string>
     
     <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Использовать режимы сети CDMA</string>
+    <string name="pref_network_mode_tile_cdma_title">Режимы сети CDMA</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Включить автоповорот</string>
@@ -923,7 +923,7 @@
     <string name="location_mode_high_accuracy">Высокая точность</string>
     <string name="location_mode_battery_saving">Экономия батареи</string>
     <string name="location_mode_device_only">Только устройство</string>
-    <string name="location_mode_off">Местоположение выкл</string>
+    <string name="location_mode_off">Местополож. выкл</string>
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">Включение NFC</string>
@@ -1058,7 +1058,7 @@
     <string name="pref_clear_recents_mode_1">Нажатие для очистки всего, кроме текущей задачи, удержание для очистки всего</string>
 
     <!-- Powe menu: disable on lockscreen -->
-    <string name="pref_powermenu_disable_on_lockscreen_title">Откл меню на экр.блокировки</string>
+    <string name="pref_powermenu_disable_on_lockscreen_title">Откл на экране блокировки</string>
 
     <!-- Extended force overflow menu button option -->
     <string name="overflow_menu_default">По умолчанию</string>
@@ -1111,7 +1111,7 @@
     <string name="wsc_trans_required_summary">Функция требует действительного ID транзакции PayPal</string>
 
     <!-- Pie: disable system info -->
-    <string name="pref_pie_sysinfo_disable_title">Откл системную информацию</string>
+    <string name="pref_pie_sysinfo_disable_title">Откл системн.информацию</string>
 
     <!-- Pie: long press delay -->
     <string name="pref_pie_longpress_delay_title">Задержка удержания</string>
@@ -1125,7 +1125,62 @@
 
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Другое</string>
-    <string name="pref_launcher_resize_widget_title">Изменение размера виджетов</string>
+    <string name="pref_launcher_resize_widget_title">Изменение виджетов</string>
     <string name="pref_launcher_resize_widget_summary">Возможность изменять размеры любого виджета на домашнем экране (необходима перезагрузка лончера)</string>
+
+    <!-- Icon picker -->
+    <string name="icon_picker_choose_icon_title">Выбрать значок</string>
+    <string name="shortcuts_icon_picker_alarm">Будильник</string>
+    <string name="shortcuts_icon_picker_andy">Andy</string>
+    <string name="shortcuts_icon_picker_battery">Батарея</string>
+    <string name="shortcuts_icon_picker_browser">Браузер</string>
+    <string name="shortcuts_icon_picker_calendar">Календарь</string>
+    <string name="shortcuts_icon_picker_camera">Камера</string>
+    <string name="shortcuts_icon_picker_cloud">Облако</string>
+    <string name="shortcuts_icon_picker_contact">Контакт</string>
+    <string name="shortcuts_icon_picker_directdial">Быстрый набор</string>
+    <string name="shortcuts_icon_picker_directmessage">Быстрое СМС</string>
+    <string name="shortcuts_icon_picker_drive">Диск</string>
+    <string name="shortcuts_icon_picker_dropbox">Dropbox</string>
+    <string name="shortcuts_icon_picker_email">Почта</string>
+    <string name="shortcuts_icon_picker_email2">Почта другой</string>
+    <string name="shortcuts_icon_picker_evernote">Evernote</string>
+    <string name="shortcuts_icon_picker_facebook">Facebook</string>
+    <string name="shortcuts_icon_picker_favorite">Избранное</string>
+    <string name="shortcuts_icon_picker_file_browser">Файл-менеджер</string>
+    <string name="shortcuts_icon_picker_file_browser2">Файл-менеджер другой</string>
+    <string name="shortcuts_icon_picker_fitness">Фитнес</string>
+    <string name="shortcuts_icon_picker_gallery">Галерея</string>
+    <string name="shortcuts_icon_picker_gears">Gears</string>
+    <string name="shortcuts_icon_picker_google_small">Google</string>
+    <string name="shortcuts_icon_picker_gplus">Google+</string>
+    <string name="shortcuts_icon_picker_gtalk">Hangouts</string>
+    <string name="shortcuts_icon_picker_help">Помощь</string>
+    <string name="shortcuts_icon_picker_joystick">Джойстик</string>
+    <string name="shortcuts_icon_picker_key">Ключи/уч.записи</string>
+    <string name="shortcuts_icon_picker_laptop">Лэптоп</string>
+    <string name="shortcuts_icon_picker_notes">Заметки</string>
+    <string name="shortcuts_icon_picker_luggage">Путешествие</string>
+    <string name="shortcuts_icon_picker_maps">Карты</string>
+    <string name="shortcuts_icon_picker_market">Маркет</string>
+    <string name="shortcuts_icon_picker_movie">Фильмы</string>
+    <string name="shortcuts_icon_picker_music">Музыка</string>
+    <string name="shortcuts_icon_picker_nav">Навигация</string>
+    <string name="shortcuts_icon_picker_phone">Телефон</string>
+    <string name="shortcuts_icon_picker_package">Пакет</string>
+    <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
+    <string name="shortcuts_icon_picker_play">Play</string>
+    <string name="shortcuts_icon_picker_pocket">Карман</string>
+    <string name="shortcuts_icon_picker_quicksettings">Быстр.настройки</string>
+    <string name="shortcuts_icon_picker_rss">RSS</string>
+    <string name="shortcuts_icon_picker_sdcard">SD-карта</string>
+    <string name="shortcuts_icon_picker_search">Поиск</string>
+    <string name="shortcuts_icon_picker_sms">Сообщения</string>
+    <string name="shortcuts_icon_picker_tasks">Задачи</string>
+    <string name="shortcuts_icon_picker_terminal">Терминал</string>
+    <string name="shortcuts_icon_picker_transit">Транзит</string>
+    <string name="shortcuts_icon_picker_tv">ТВ</string>
+    <string name="shortcuts_icon_picker_twitter">Twitter</string>
+    <string name="shortcuts_icon_picker_unlock">Разблокировка</string>
 
 </resources>
