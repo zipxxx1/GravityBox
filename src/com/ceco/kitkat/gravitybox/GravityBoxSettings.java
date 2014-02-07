@@ -361,6 +361,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NOTIF_IMAGE_LANDSCAPE = "pref_notif_image_landscape";
     public static final String PREF_KEY_NOTIF_BACKGROUND_ALPHA = "pref_notif_background_alpha";
     public static final String PREF_KEY_NOTIF_CARRIER_TEXT = "pref_notif_carrier_text";
+    public static final String PREF_KEY_NOTIF_EXPAND_ALL = "pref_notif_expand_all";
     public static final String NOTIF_BG_DEFAULT = "default";
     public static final String NOTIF_BG_COLOR = "color";
     public static final String NOTIF_BG_IMAGE = "image";
@@ -368,11 +369,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String NOTIF_BG_COLOR_MODE_UNDERLAY = "underlay";
     public static final String ACTION_NOTIF_BACKGROUND_CHANGED = "gravitybox.intent.action.NOTIF_BACKGROUND_CHANGED";
     public static final String ACTION_NOTIF_CARRIER_TEXT_CHANGED = "gravitybox.intent.action.NOTIF_CARRIER_TEXT_CHANGED";
+    public static final String ACTION_NOTIF_EXPAND_ALL_CHANGED = "gravitybox.intent.action.NOTIF_EXPAND_ALL_CHANGED";
     public static final String EXTRA_BG_TYPE = "bgType";
     public static final String EXTRA_BG_COLOR = "bgColor";
     public static final String EXTRA_BG_COLOR_MODE = "bgColorMode";
     public static final String EXTRA_BG_ALPHA = "bgAlpha";
     public static final String EXTRA_NOTIF_CARRIER_TEXT = "notifCarrierText";
+    public static final String EXTRA_NOTIF_EXPAND_ALL = "notifExpandAll";
 
     public static final String PREF_KEY_PIE_CONTROL_ENABLE = "pref_pie_control_enable2";
     public static final String PREF_KEY_PIE_CONTROL_CUSTOM_KEY = "pref_pie_control_custom_key";
@@ -2053,6 +2056,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_NOTIF_CARRIER_TEXT_CHANGED);
                 intent.putExtra(EXTRA_NOTIF_CARRIER_TEXT,
                         prefs.getString(PREF_KEY_NOTIF_CARRIER_TEXT, null));
+            } else if (key.equals(PREF_KEY_NOTIF_EXPAND_ALL)) {
+                intent.setAction(ACTION_NOTIF_EXPAND_ALL_CHANGED);
+                intent.putExtra(EXTRA_NOTIF_EXPAND_ALL,
+                        prefs.getBoolean(PREF_KEY_NOTIF_EXPAND_ALL, false));
             } else if (key.equals(PREF_KEY_DISABLE_ROAMING_INDICATORS)) {
                 intent.setAction(ACTION_DISABLE_ROAMING_INDICATORS_CHANGED);
                 intent.putExtra(EXTRA_INDICATORS_DISABLED,

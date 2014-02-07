@@ -61,6 +61,7 @@ public class ModStatusBar {
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
     private static final String CLASS_STATUSBAR_NOTIF = "android.service.notification.StatusBarNotification";
     private static final String CLASS_NETWORK_CONTROLLER = "com.android.systemui.statusbar.policy.NetworkController";
+    private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
     private static final boolean DEBUG = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
@@ -96,6 +97,7 @@ public class ModStatusBar {
     private static boolean mClockInSbContents = false;
     private static TextView mCarrierTextView;
     private static String mCarrierText;
+    private static boolean mNotifExpandAll;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -200,6 +202,9 @@ public class ModStatusBar {
                     intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_CARRIER_TEXT)) {
                 mCarrierText = intent.getStringExtra(GravityBoxSettings.EXTRA_NOTIF_CARRIER_TEXT);
                 updateCarrierTextView();
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
+                    intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
+                mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
             }
         }
     };
@@ -445,6 +450,7 @@ public class ModStatusBar {
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_POLICY, classLoader);
             final Class<?> powerManagerClass = XposedHelpers.findClass(CLASS_POWER_MANAGER, classLoader);
             final Class<?> networkControllerClass = XposedHelpers.findClass(CLASS_NETWORK_CONTROLLER, classLoader);
+            final Class<?> expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
 
             final Class<?>[] loadAnimParamArgs = new Class<?>[2];
             loadAnimParamArgs[0] = int.class;
@@ -454,6 +460,7 @@ public class ModStatusBar {
                     GravityBoxSettings.PREF_KEY_STATUSBAR_BRIGHTNESS, false);
             mOngoingNotif = prefs.getString(GravityBoxSettings.PREF_KEY_ONGOING_NOTIFICATIONS, "");
             mCarrierText = prefs.getString(GravityBoxSettings.PREF_KEY_NOTIF_CARRIER_TEXT, null);
+            mNotifExpandAll = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NOTIF_EXPAND_ALL, false);
 
             XposedBridge.hookAllConstructors(phoneStatusBarPolicyClass, new XC_MethodHook() {
                 @Override
@@ -508,6 +515,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER_TEXT_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
@@ -644,6 +652,15 @@ public class ModStatusBar {
                     } else {
                         mCarrierTextView.setText(mCarrierText);
                         mCarrierTextView.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(expandableNotifRowClass, "isUserExpanded", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mNotifExpandAll) {
+                        param.setResult(true);
                     }
                 }
             });

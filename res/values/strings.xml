@@ -1197,4 +1197,8 @@
     <string name="qs_auto_switch_mode1">When there are no notifications</string>
     <string name="qs_auto_switch_mode2">When there are no clearable notifications</string>
 
+    <!-- Notification drawer: expand all notifications -->
+    <string name="pref_notif_expand_all_title">Expand all notifications</string>
+    <string name="pref_notif_expand_all_summary">Expands all notifications automatically when enabled</string>
+
 </resources>
