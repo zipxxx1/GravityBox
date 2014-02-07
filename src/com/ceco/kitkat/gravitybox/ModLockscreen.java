@@ -382,24 +382,24 @@ public class ModLockscreen {
                     // create and fill custom targets with proper layout based on number of targets
                     switch(appInfoList.size()) {
                         case 1:
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, null));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, null));
                             newDescriptions.add(null);
                             newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(0)));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(0)));
                             newDescriptions.add(appInfoList.get(0).name);
                             newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, null));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, null));
                             newDescriptions.add(null);
                             newDirections.add(null);
                             break;
                         case 2:
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(0)));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(0)));
                             newDescriptions.add(appInfoList.get(0).name);
                             newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(1)));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(1)));
                             newDescriptions.add(appInfoList.get(1).name);
                             newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, null));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, null));
                             newDescriptions.add(null);
                             newDirections.add(null);
                             break;
@@ -408,10 +408,10 @@ public class ModLockscreen {
                         case 5:
                             for (int i=0; i<=4; i++) {
                                 if (i >= appInfoList.size()) {
-                                    newTargets.add(GlowPadHelper.createTargetDrawable(res, null));
+                                    newTargets.add(GlowPadHelper.createTargetDrawable(context, null));
                                     newDescriptions.add(null);
                                 } else {
-                                    newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(i)));
+                                    newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(i)));
                                     newDescriptions.add(appInfoList.get(i).name);
                                 }
                                 newDirections.add(null);

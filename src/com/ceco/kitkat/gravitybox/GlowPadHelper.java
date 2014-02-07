@@ -30,9 +30,12 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.util.TypedValue;
 
 import com.ceco.kitkat.gravitybox.preference.AppPickerPreference;
@@ -50,6 +53,7 @@ public class GlowPadHelper {
 
     private static Hashtable<String, AppInfo> mAppInfoCache = new Hashtable<String, AppInfo>();
     private static Constructor<?> mTargetDrawableConstructor;
+    private static Resources mGbResources;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -74,6 +78,10 @@ public class GlowPadHelper {
         }
     }
 
+    public static void clearAppInfoCache() {
+        mAppInfoCache.clear();
+    }
+
     public static AppInfo getAppInfo(Context context, String app) {
         return getAppInfo(context, app, 50, BgStyle.NONE);
     }
@@ -82,7 +90,9 @@ public class GlowPadHelper {
         if (context == null || app == null) return null;
 
         try {
-            Resources gbRes = context.createPackageContext(GravityBox.PACKAGE_NAME, 0).getResources();
+            if (mGbResources == null) {
+                mGbResources = context.createPackageContext(GravityBox.PACKAGE_NAME, 0).getResources();
+            }
             final String key = app + "_" + bgStyle.toString();
             if (mAppInfoCache.containsKey(key)) {
                 if (DEBUG) log("AppInfo: returning from cache for " + key);
@@ -105,14 +115,14 @@ public class GlowPadHelper {
                 ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
                 appInfo.name = (String) ai.loadLabel(pm);
                 if (iconResId != 0) {
-                    appIcon = Utils.drawableToBitmap(gbRes.getDrawable(iconResId));
+                    appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
                 } else {
                     appIcon = Utils.drawableToBitmap(ai.loadIcon(pm));
                 }
             } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                 appInfo.name = appInfo.intent.getStringExtra("label");
                 if (iconResId != 0) {
-                    appIcon = Utils.drawableToBitmap(gbRes.getDrawable(iconResId));
+                    appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
                 } else {
                     final String appIconPath = appInfo.intent.getStringExtra("icon");
                     if (appIconPath != null) {
@@ -167,23 +177,68 @@ public class GlowPadHelper {
         }
     }
 
-    public static Object createTargetDrawable(Resources res, AppInfo appInfo) throws Throwable {
+    public static Object createTargetDrawable(Context  context, AppInfo appInfo) throws Throwable {
         try {
             if (mTargetDrawableConstructor == null) {
                 mTargetDrawableConstructor = XposedHelpers.findConstructorExact(
                         XposedHelpers.findClass(CLASS_TARGET_DRAWABLE, null), 
                         Resources.class, int.class);
             }
-    
-            final Object td = mTargetDrawableConstructor.newInstance(res, 0);
+            final Object td = mTargetDrawableConstructor.newInstance(context.getResources(), 0);
             if (appInfo != null) {
-                Drawable d = appInfo.icon == null ? null : appInfo.icon.mutate();
-                XposedHelpers.setObjectField(td, "mDrawable", d);
+                StateListDrawable sld = createStateListDrawable(context, appInfo);
+                XposedHelpers.setObjectField(td, "mDrawable", sld);
                 XposedHelpers.callMethod(td, "resizeDrawables");
                 XposedHelpers.setAdditionalInstanceField(td, "mGbAppInfo", appInfo);
             }
 
             return td;
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return null;
+        }
+    }
+
+    public static StateListDrawable createStateListDrawable(Context context, AppInfo appInfo) {
+        if (appInfo.icon == null) return null;
+
+        try {
+            if (mGbResources == null) {
+                mGbResources = context.createPackageContext(GravityBox.PACKAGE_NAME, 0).getResources();
+            }
+
+            Paint paint = null;
+            if (appInfo.intent.getIntExtra("iconResId", 0) != 0) {
+                paint = new Paint();
+                paint.setColorFilter(new LightingColorFilter(0xFF585858, 1));
+            }
+
+            Bitmap bg = Utils.drawableToBitmap(mGbResources.getDrawable(R.drawable.target_background));
+            Bitmap fg = Utils.drawableToBitmap(appInfo.icon.mutate());
+            float left = (bg.getWidth() - fg.getWidth()) / 2f;
+            float top = (bg.getHeight() - fg.getHeight()) / 2f;
+            RectF fgRect = new RectF(left, top, left+fg.getWidth(), top+fg.getHeight());
+
+            Bitmap bNormal = Bitmap.createBitmap(bg.getWidth(), bg.getHeight(), Config.ARGB_8888);
+            Canvas canvasNormal = new Canvas(bNormal);
+            canvasNormal.drawBitmap(fg, null, fgRect, null);
+            Drawable normalDrawable = new BitmapDrawable(context.getResources(), bNormal);
+
+            Bitmap bActive = Bitmap.createBitmap(bg.getWidth(), bg.getHeight(), Config.ARGB_8888);
+            Canvas canvasActive = new Canvas(bActive);
+            canvasActive.drawBitmap(bg, 0, 0, null);
+            canvasActive.drawBitmap(fg, null, fgRect, paint);
+            Drawable activeDrawable = new BitmapDrawable(context.getResources(), bActive);
+
+            StateListDrawable sld = new StateListDrawable();
+            sld.addState(new int[] { android.R.attr.state_enabled, -android.R.attr.state_active, 
+                    -android.R.attr.state_focused }, normalDrawable);
+            sld.addState(new int[] { android.R.attr.state_enabled, android.R.attr.state_active, 
+                    -android.R.attr.state_focused }, activeDrawable);
+            sld.addState(new int[] { android.R.attr.state_enabled, -android.R.attr.state_active, 
+                    android.R.attr.state_focused}, activeDrawable);
+
+            return sld;
         } catch (Throwable t) {
             XposedBridge.log(t);
             return null;
