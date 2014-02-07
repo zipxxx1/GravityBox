@@ -188,6 +188,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_DUAL_SIM_RINGER = "pref_dual_sim_ringer";
     public static final String APP_DUAL_SIM_RINGER = "dualsim.ringer";
     public static final String APP_DUAL_SIM_RINGER_CLASS = "dualsim.ringer.main";
+    public static final String ACTION_PREF_TELEPHONY_CHANGED = "gravity.intent.action.TELEPHONY_CHANGED";
+    public static final String EXTRA_TELEPHONY_NATIONAL_ROAMING = "nationalRoaming";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN = "pref_cat_lockscreen";
     public static final String PREF_CAT_KEY_LOCKSCREEN_BACKGROUND = "pref_cat_lockscreen_background";
@@ -2349,6 +2351,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 if (transId != null && !transId.trim().isEmpty()) {
                     checkTransaction(transId.toUpperCase(Locale.US));
                 }
+            } else if (key.equals(PREF_KEY_NATIONAL_ROAMING)) {
+                intent.setAction(ACTION_PREF_TELEPHONY_CHANGED);
+                intent.putExtra(EXTRA_TELEPHONY_NATIONAL_ROAMING,
+                        prefs.getBoolean(PREF_KEY_NATIONAL_ROAMING, false));
             }
             if (intent.getAction() != null) {
                 getActivity().sendBroadcast(intent);
