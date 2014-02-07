@@ -748,7 +748,7 @@ public class ModLockscreen {
                 @SuppressWarnings("unchecked")
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_ENABLE, false)) return;
+                    if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SLIDE_BEFORE_UNLOCK, false)) return;
 
                     final Object currentSecuritySelection = 
                             XposedHelpers.getObjectField(param.thisObject, "mCurrentSecuritySelection");
