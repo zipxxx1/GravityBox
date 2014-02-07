@@ -507,7 +507,7 @@
     <string name="pref_powermenu_screenshot_title">电源键菜单屏幕截图</string>
 
     <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">解锁环设置</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">解锁环目标</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">解锁环目标总开关</string>
     <string name="pref_lockscreen_ring_targets_app_title">目标应用 %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">解锁环垂直偏移</string>
