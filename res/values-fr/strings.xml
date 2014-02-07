@@ -507,7 +507,7 @@
     <string name="pref_powermenu_screenshot_title">Capture d\'écran dans le menu d\'extinction</string>
 
     <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Cibles de l\'écran de déverrouillage</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">Cibles de l\'anneau de déverrouillage</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Interrupteur général pour les cibles de l\'écran de déverrouillage</string>
     <string name="pref_lockscreen_ring_targets_app_title">Cible %s de l\'anneau</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Marge verticale anneau de déverrouillage</string>
@@ -1182,5 +1182,14 @@
     <string name="shortcuts_icon_picker_tv">TV</string>
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Ouvrir</string>
+
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">Faire glisser avant de déverrouiller</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">Permet d\'utiliser la glissière de déverrouillage avec les cibles de l\'anneau en même temps que l\'anneau de déverrouillage</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">Glisser pour déverrouiller</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Barre d\'état</string>
 
 </resources>
