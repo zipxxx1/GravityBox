@@ -544,7 +544,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Ρυθμίσεων δακτυλίου ξεκλειδώματος</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Ενεργοποίηση στόχων δακτυλίου ξεκλειδώματος</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Γενικός διακόπτης στόχων δακτυλίου ξεκλειδώματος</string>
     <string name="pref_lockscreen_ring_targets_app_title">Επιλεγμένη εφαρμογή %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Κάθετη αντιστάθμιση δακτυλίου ξεκλειδώματος</string>

@@ -346,7 +346,6 @@
     <string name="pref_navbar_menukey_title">Завжди показувати кнопку меню</string>
     <string name="pref_powermenu_screenshot_title">Скріншот в меню вимкнення</string>
     <string name="pref_cat_lockscreen_ring_settings_title">ярлики екрану блокування</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Включити ярлики екрану блокування</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Загальний перемикач ярликів екрану блокування</string>
     <string name="pref_lockscreen_ring_targets_app_title">Додаток %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Вертикальний зсув кільця розблокування</string>
