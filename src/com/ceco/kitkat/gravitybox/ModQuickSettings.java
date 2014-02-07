@@ -108,7 +108,7 @@ public class ModQuickSettings {
     private static Class<?> mQuickSettingsTileViewClass;
     private static int mNumColumns = 3;
     private static int mLpOriginalHeight = -1;
-    private static boolean mAutoSwitch = false;
+    private static int mAutoSwitch;
     private static int mQuickPulldown = GravityBoxSettings.QUICK_PULLDOWN_OFF;
     private static Method methodGetColumnSpan;
     private static List<Integer> mCustomGbTileKeys;
@@ -191,8 +191,7 @@ public class ModQuickSettings {
                     updateTileLayout();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_AUTOSWITCH)) {
-                    mAutoSwitch = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_QS_AUTOSWITCH, false);
+                    mAutoSwitch = intent.getIntExtra(GravityBoxSettings.EXTRA_QS_AUTOSWITCH, 0);
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QUICK_PULLDOWN)) {
                     mQuickPulldown = intent.getIntExtra(
@@ -471,7 +470,8 @@ public class ModQuickSettings {
                 log("Invalid preference for tiles per row: " + e.getMessage());
             }
 
-            mAutoSwitch = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, false);
+            mAutoSwitch = Integer.valueOf(
+                    mPrefs.getString(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, "0"));
             mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
             mQsTileSpanDisable = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_TILE_SPAN_DISABLE, false);
 
@@ -774,8 +774,9 @@ public class ModQuickSettings {
                                     mGestureStartY > height - handleBarHeight - paddingBottom;
                             okToFlip = (expandedHeight == 0);
                             XposedHelpers.setBooleanField(param.thisObject, "mOkToFlip", okToFlip);
-                            if (mAutoSwitch && 
-                                    (Integer)XposedHelpers.callMethod(notificationData, "size") == 0) {
+                            if (mAutoSwitch == 1 && !notifDataHasVisibleItems(notificationData)) {
+                                shouldFlip = true;
+                            } else if (mAutoSwitch == 2 && !notifDataHasClearableItems(notificationData)) {
                                 shouldFlip = true;
                             } else if (mQuickPulldown == GravityBoxSettings.QUICK_PULLDOWN_RIGHT
                                         && (event.getX(0) > (width * 
@@ -878,6 +879,39 @@ public class ModQuickSettings {
             }
         }
     };
+
+    private static boolean notifDataHasVisibleItems(Object notifData) {
+        try {
+            ArrayList<Object> entries = (ArrayList<Object>) XposedHelpers.getObjectField(notifData, "mEntries");
+            for (Object e : entries) {
+                if (XposedHelpers.getObjectField(e, "expanded") != null) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return false;
+        }
+    }
+
+    private static boolean notifDataHasClearableItems(Object notifData) {
+        try {
+            ArrayList<Object> entries = (ArrayList<Object>) XposedHelpers.getObjectField(notifData, "mEntries");
+            for (Object e : entries) {
+                if (XposedHelpers.getObjectField(e, "expanded") != null) {
+                    Object notif = XposedHelpers.getObjectField(e, "notification");
+                    if ((Boolean)XposedHelpers.callMethod(notif, "isClearable")) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return false;
+        }
+    }
 
     private static Object getObj(String name) {
         return XposedHelpers.getObjectField(mStatusBar, name);

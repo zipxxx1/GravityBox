@@ -85,7 +85,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_ORDER = "pref_qs_tile_order";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row";
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE = "pref_qs_hide_on_change";
-    public static final String PREF_KEY_QUICK_SETTINGS_AUTOSWITCH = "pref_auto_switch_qs";
+    public static final String PREF_KEY_QUICK_SETTINGS_AUTOSWITCH = "pref_auto_switch_qs2";
     public static final String PREF_KEY_QUICK_PULLDOWN = "pref_quick_pulldown";
     public static final int QUICK_PULLDOWN_OFF = 0;
     public static final int QUICK_PULLDOWN_RIGHT = 1;
@@ -897,7 +897,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ColorPickerPreference mPrefSbDaColor;
         private PreferenceScreen mPrefCatStatusbar;
         private PreferenceScreen mPrefCatStatusbarQs;
-        private CheckBoxPreference mPrefAutoSwitchQs;
+        private ListPreference mPrefAutoSwitchQs;
         private ListPreference mPrefQuickPulldown;
         private PreferenceScreen mPrefCatNotifDrawerStyle;
         private ListPreference mPrefNotifBackground;
@@ -1108,7 +1108,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatStatusbar = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR);
             mPrefCatStatusbarQs = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_QS);
             mPrefCatStatusbarColors = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_COLORS);
-            mPrefAutoSwitchQs = (CheckBoxPreference) findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
+            mPrefAutoSwitchQs = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
             mPrefQuickPulldown = (ListPreference) findPreference(PREF_KEY_QUICK_PULLDOWN);
 
             mPrefCatNotifDrawerStyle = (PreferenceScreen) findPreference(PREF_CAT_KEY_NOTIF_DRAWER_STYLE);
@@ -1873,8 +1873,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         prefs.getBoolean(PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_QS_AUTOSWITCH,
-                        prefs.getBoolean(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, false));
+                intent.putExtra(EXTRA_QS_AUTOSWITCH, Integer.valueOf(
+                        prefs.getString(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, "0")));
             } else if (key.equals(PREF_KEY_QUICK_PULLDOWN)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QUICK_PULLDOWN, Integer.valueOf(

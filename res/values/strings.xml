@@ -1192,4 +1192,9 @@
     <string name="pref_cat_lockscreen_sliding_challenge_title">Sliding challenge</string>
     <string name="pref_cat_lockscreen_statusbar_title">Status bar</string>
 
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">Disabled</string>
+    <string name="qs_auto_switch_mode1">When there are no notifications</string>
+    <string name="qs_auto_switch_mode2">When there are no clearable notifications</string>
+
 </resources>
