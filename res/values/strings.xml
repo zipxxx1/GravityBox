@@ -1183,4 +1183,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Unlock</string>
 
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">Slide before unlock</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">Allows using sliding challenge with ring targets together with security lock</string>
+
 </resources>

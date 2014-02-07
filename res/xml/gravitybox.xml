@@ -184,6 +184,12 @@
                 android:summary="@string/pref_lockscreen_quick_unlock_summary"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference 
+                android:key="pref_lockscreen_slide_before_unlock"
+                android:title="@string/pref_lockscreen_slide_before_unlock_title"
+                android:summary="@string/pref_lockscreen_slide_before_unlock_summary"
+                android:defaultValue="false" />
+
             <ListPreference 
                 android:key="pref_statusbar_lock_policy"
                 android:title="@string/pref_statusbar_lock_policy_title"
