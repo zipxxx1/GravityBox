@@ -410,11 +410,13 @@
                 android:defaultValue="0"
                 android:dependency="pref_qs_management_enable" />
 
-            <CheckBoxPreference 
-                android:key="pref_auto_switch_qs"
+            <ListPreference 
+                android:key="pref_auto_switch_qs2"
                 android:title="@string/pref_auto_switch_qs_title"
                 android:summary="@string/pref_auto_switch_qs_summary"
-                android:defaultValue="false"
+                android:entries="@array/qs_auto_switch_entries"
+                android:entryValues="@array/qs_auto_switch_values"
+                android:defaultValue="0"
                 android:dependency="pref_qs_management_enable" />
     
             <ListPreference

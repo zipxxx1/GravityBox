@@ -884,4 +884,16 @@
         <item>2000</item>
     </string-array>
 
+    <string-array name="qs_auto_switch_entries" translatable="false">
+        <item>@string/qs_auto_switch_disabled</item>
+        <item>@string/qs_auto_switch_mode1</item>
+        <item>@string/qs_auto_switch_mode2</item>
+    </string-array>
+
+    <string-array name="qs_auto_switch_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>
