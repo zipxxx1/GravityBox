@@ -295,6 +295,7 @@ public class ModLockscreen {
                                 View v = vg.getChildAt(i);
                                 if (v instanceof ImageButton) {
                                     v.setOnLongClickListener(mLockButtonLongClickListener);
+                                    v.bringToFront();
                                     break;
                                 }
                             }
@@ -756,8 +757,7 @@ public class ModLockscreen {
                                     Utils.isMtkDevice() ? "SimPinPuk1" : "SimPin") ||
                             currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum,
                                     Utils.isMtkDevice() ? "SimPinPuk2" : "SimPuk") ||
-                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "Account") ||
-                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "Invalid");
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "Account");
                     if (!isSimOrAccount) {
                         XposedHelpers.callMethod(param.thisObject, "showSecurityScreen",
                                 Enum.valueOf(kgSecurityModeEnum, "None"));
