@@ -133,6 +133,7 @@ public class ModLockscreen {
     private static boolean mArcVisible;
     private static boolean mArcEnabled;
     private static View mGlowPadView;
+    private static Class<? extends View> mGlowPadViewClass;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -322,11 +323,12 @@ public class ModLockscreen {
                     final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     final Resources res = context.getResources();
                     mGlowPadView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowPadView");
-                    XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "showTargets",
+                    mGlowPadViewClass = mGlowPadView.getClass();
+                    XposedHelpers.findAndHookMethod(mGlowPadViewClass, "showTargets",
                             boolean.class, glowPadViewShowTargetsHook);
-                    XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "hideTargets",
+                    XposedHelpers.findAndHookMethod(mGlowPadViewClass, "hideTargets",
                             boolean.class, boolean.class, glowPadViewHideTargetsHook);
-                    XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "switchToState", 
+                    XposedHelpers.findAndHookMethod(mGlowPadViewClass, "switchToState", 
                             int.class, float.class, float.class, glowPadViewSwitchToStateHook);
                     mHandler = new Handler();
 
@@ -365,7 +367,7 @@ public class ModLockscreen {
                                     mHandleDrawable.getPositionY() + mHandleDrawable.getHeight()/2);
 
                             XposedHelpers.findAndHookMethod(
-                                    mGlowPadView.getClass(), "onDraw", Canvas.class, glowPadViewOnDrawHook);
+                                    mGlowPadViewClass, "onDraw", Canvas.class, glowPadViewOnDrawHook);
                             if (DEBUG_ARC) log("Battery Arc initialized");
                         }
                         if (DEBUG_ARC) log("Battery Arc ready");
@@ -408,24 +410,24 @@ public class ModLockscreen {
                     // create and fill custom targets with proper layout based on number of targets
                     switch(appInfoList.size()) {
                         case 1:
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, null, mGlowPadView.getClass()));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadViewClass));
                             newDescriptions.add(null);
                             newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(0), mGlowPadView.getClass()));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(0), mGlowPadViewClass));
                             newDescriptions.add(appInfoList.get(0).name);
                             newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, null, mGlowPadView.getClass()));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadViewClass));
                             newDescriptions.add(null);
                             newDirections.add(null);
                             break;
                         case 2:
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(0), mGlowPadView.getClass()));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(0), mGlowPadViewClass));
                             newDescriptions.add(appInfoList.get(0).name);
                             newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(1), mGlowPadView.getClass()));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(1), mGlowPadViewClass));
                             newDescriptions.add(appInfoList.get(1).name);
                             newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(res, null, mGlowPadView.getClass()));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadViewClass));
                             newDescriptions.add(null);
                             newDirections.add(null);
                             break;
@@ -434,10 +436,10 @@ public class ModLockscreen {
                         case 5:
                             for (int i=0; i<=4; i++) {
                                 if (i >= appInfoList.size()) {
-                                    newTargets.add(GlowPadHelper.createTargetDrawable(res, null, mGlowPadView.getClass()));
+                                    newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadViewClass));
                                     newDescriptions.add(null);
                                 } else {
-                                    newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(i), mGlowPadView.getClass()));
+                                    newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(i), mGlowPadViewClass));
                                     newDescriptions.add(appInfoList.get(i).name);
                                 }
                                 newDirections.add(null);
