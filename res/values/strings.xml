@@ -507,7 +507,7 @@
     <string name="pref_powermenu_screenshot_title">Screenshot in power menu</string>
 
     <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Unlock ring settings</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">Unlock ring targets</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Master switch for unlock ring targets</string>
     <string name="pref_lockscreen_ring_targets_app_title">Ring target %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Unlock ring vertical offset</string>
@@ -1186,5 +1186,10 @@
     <!-- Lockscreen: Slide before unlock -->
     <string name="pref_lockscreen_slide_before_unlock_title">Slide before unlock</string>
     <string name="pref_lockscreen_slide_before_unlock_summary">Allows using sliding challenge with ring targets together with security lock</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">Sliding challenge</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Status bar</string>
 
 </resources>

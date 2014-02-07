@@ -204,6 +204,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_LOCKSCREEN_BG_CHANGED = "gravitybox.intent.action.LOCKSCREEN_BG_CHANGED";
     public static final String EXTRA_LOCKSCREEN_BG = "lockscreenBg";
 
+    public static final String PREF_CAT_KEY_LOCKSCREEN_SLIDING_CHALLENGE = "pref_cat_lockscreen_sliding_challenge";
     public static final String PREF_CAT_KEY_LOCKSCREEN_OTHER = "pref_cat_lockscreen_other";
     public static final String PREF_KEY_LOCKSCREEN_BATTERY_ARC = "pref_lockscreen_battery_arc";
     public static final String PREF_KEY_LOCKSCREEN_RING_TORCH = "pref_lockscreen_ring_torch";
@@ -944,8 +945,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefNavbarEnable;
         private CheckBoxPreference mPrefMusicVolumeSteps;
         private AppPickerPreference[] mPrefLockscreenTargetsApp;
-        private SeekBarPreference mPrefLockscreenTargetsVerticalOffset;
-        private SeekBarPreference mPrefLockscreenTargetsHorizontalOffset;
         private ListPreference mPrefLockscreenSbClock;
         private PreferenceCategory mPrefCatPhoneTelephony;
         private PreferenceCategory mPrefCatPhoneMessaging;
@@ -986,6 +985,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatTransparencyManager;
         private ListPreference mPrefHwKeyLockscreenTorch;
         private PreferenceCategory mPrefCatHwKeyOthers;
+        private PreferenceCategory mPrefCatLsSlidingChallenge;
         private PreferenceCategory mPrefCatLsOther;
         private CheckBoxPreference mPrefLsRingTorch;
         private PreferenceScreen mPrefCatLauncherTweaks;
@@ -1189,10 +1189,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefLockscreenTargetsApp[i].setTitle(title);
                 mPrefLockscreenTargetsApp[i].setDialogTitle(title);
             }
-            mPrefLockscreenTargetsVerticalOffset = (SeekBarPreference) findPreference(
-                    PREF_KEY_LOCKSCREEN_TARGETS_VERTICAL_OFFSET);
-            mPrefLockscreenTargetsHorizontalOffset = (SeekBarPreference) findPreference(
-                    PREF_KEY_LOCKSCREEN_TARGETS_HORIZONTAL_OFFSET);
             mPrefLockscreenSbClock = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK);
 
             mPrefCatPhoneTelephony = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_TELEPHONY);
@@ -1240,6 +1236,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbIconColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY);
             mPrefSbDaColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY);
 
+            mPrefCatLsSlidingChallenge = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_SLIDING_CHALLENGE);
             mPrefCatLsOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_OTHER);
             mPrefLsRingTorch = (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_RING_TORCH);
 
@@ -1284,7 +1281,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {
                 mPrefCatHwKeyOthers.removePreference(mPrefHwKeyLockscreenTorch);
-                mPrefCatLsOther.removePreference(mPrefLsRingTorch);
+                mPrefCatLsSlidingChallenge.removePreference(mPrefLsRingTorch);
                 mPrefCatMiscOther.removePreference(mPrefTorchAutoOff);
             }
             if (!Utils.hasVibrator(getActivity())) {
@@ -1669,8 +1666,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     p.setEnabled(enabled);
                 }
             }
-            mPrefLockscreenTargetsVerticalOffset.setEnabled(true);
-            mPrefLockscreenTargetsHorizontalOffset.setEnabled(true);
 
             if (key == null || key.equals(PREF_KEY_NETWORK_MODE_TILE_MODE)) {
                 mPrefNetworkModeTileMode.setSummary(mPrefNetworkModeTileMode.getEntry());
