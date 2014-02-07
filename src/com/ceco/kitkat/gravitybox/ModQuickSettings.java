@@ -106,7 +106,6 @@ public class ModQuickSettings {
     private static Object mStatusBar;
     private static List<String> mActiveTileKeys;
     private static Class<?> mQuickSettingsTileViewClass;
-    private static Object mSimSwitchPanelView;
     private static int mNumColumns = 3;
     private static int mLpOriginalHeight = -1;
     private static boolean mAutoSwitch = false;
@@ -500,8 +499,6 @@ public class ModQuickSettings {
                     ViewGroup.class, LayoutInflater.class, quickSettingsAddSystemTilesHook);
             XposedHelpers.findAndHookMethod(notifPanelViewClass, "onTouchEvent", 
                     MotionEvent.class, notificationPanelViewOnTouchEvent);
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "makeStatusBarView", 
-                    makeStatusBarViewHook);
             XposedHelpers.findAndHookMethod(quickSettingsClass, "updateResources", 
                     qsUpdateResources);
             XposedHelpers.findAndHookMethod(quickSettingsContainerViewClass, "onMeasure",
@@ -778,8 +775,7 @@ public class ModQuickSettings {
                             okToFlip = (expandedHeight == 0);
                             XposedHelpers.setBooleanField(param.thisObject, "mOkToFlip", okToFlip);
                             if (mAutoSwitch && 
-                                    (Integer)XposedHelpers.callMethod(notificationData, "size") == 0 &&
-                                    !isSimSwitchPanelShowing()) {
+                                    (Integer)XposedHelpers.callMethod(notificationData, "size") == 0) {
                                 shouldFlip = true;
                             } else if (mQuickPulldown == GravityBoxSettings.QUICK_PULLDOWN_RIGHT
                                         && (event.getX(0) > (width * 
@@ -982,23 +978,6 @@ public class ModQuickSettings {
         }
     }
 
-    private static XC_MethodHook makeStatusBarViewHook = new XC_MethodHook() {
-        @Override
-        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-            if (Utils.isMtkDevice()) {
-                try {
-                    Object toolbarView = XposedHelpers.getObjectField(param.thisObject, "mToolBarView");
-                    if (toolbarView != null) {
-                        mSimSwitchPanelView = XposedHelpers.getObjectField(toolbarView, "mSimSwitchPanelView");
-                        if (DEBUG) log("makeStatusBarView: SimSwitchPanelView found");
-                    }
-                } catch (NoSuchFieldError e) {
-                    //
-                }
-            }
-        }
-    };
-
     private static XC_MethodReplacement qsContainerViewOnMeasure = new XC_MethodReplacement() {
 
         @Override
@@ -1082,12 +1061,6 @@ public class ModQuickSettings {
             }
         }
     };
-
-    private static boolean isSimSwitchPanelShowing() {
-        if (mSimSwitchPanelView == null) return false;
-
-        return (Boolean) XposedHelpers.callMethod(mSimSwitchPanelView, "isPanelShowing");
-    }
 
     private static void tagAospTileViews(ClassLoader classLoader) {
         final Class<?> classQsModel = XposedHelpers.findClass(CLASS_QS_MODEL, classLoader);
