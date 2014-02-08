@@ -21,6 +21,7 @@ import com.ceco.kitkat.gravitybox.ModQuickSettings.TileLayout;
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -68,6 +69,9 @@ public abstract class BasicTile extends AQuickSettingsTile {
     @Override
     protected void onLayoutUpdated(TileLayout tileLayout) {
         mTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, tileLayout.textSize);
+        mTextView.setAllCaps(tileLayout.labelStyle == TileLayout.LabelStyle.ALLCAPS);
+        mTextView.setVisibility(tileLayout.labelStyle == TileLayout.LabelStyle.HIDDEN ?
+                View.GONE : View.VISIBLE);
         ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mImageView.getLayoutParams();
         lp.width = lp.height = tileLayout.imageSize;
         lp.topMargin = tileLayout.imageMarginTop;

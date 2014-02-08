@@ -119,6 +119,7 @@ public class ModQuickSettings {
     private static XSharedPreferences mPrefs;
     private static boolean mHideOnChange;
     private static boolean mQsTileSpanDisable;
+    private static TileLayout.LabelStyle mQsTileLabelStyle = TileLayout.LabelStyle.ALLCAPS;
 
     private static float mGestureStartX;
     private static float mGestureStartY;
@@ -203,6 +204,11 @@ public class ModQuickSettings {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_TILE_SPAN_DISABLE)) {
                     mQsTileSpanDisable = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_TILE_SPAN_DISABLE, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_TILE_LABEL_STYLE)) {
+                    mQsTileLabelStyle = TileLayout.LabelStyle.valueOf(
+                            intent.getStringExtra(GravityBoxSettings.EXTRA_QS_TILE_LABEL_STYLE));
+                    updateTileLayout();
                 }
             }
 
@@ -315,8 +321,14 @@ public class ModQuickSettings {
         public int imageSize;
         public int imageMarginTop;
         public int imageMarginBottom;
+        public LabelStyle labelStyle;
 
-        public TileLayout(Context context, int numColumns, int orientation) {
+        public enum LabelStyle { NORMAL, ALLCAPS, HIDDEN };
+
+        public TileLayout(Context context, int numCols, int orientation, LabelStyle lStyle) {
+            numColumns = numCols;
+            labelStyle = lStyle;
+
             final Resources res = context.getResources();
             textSize = 12;
             try {
@@ -333,7 +345,7 @@ public class ModQuickSettings {
                 imageSize = gbRes.getDimensionPixelSize(R.dimen.qs_tile_icon_size);
             }
             if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(context)) {
-                switch (mNumColumns) {
+                switch (numColumns) {
                     case 4: 
                         textSize = 10;
                         imageMarginTop = Math.round(imageMarginTop * 0.6f);
@@ -346,6 +358,11 @@ public class ModQuickSettings {
                         break;
                 }
             }
+
+            if (labelStyle == LabelStyle.HIDDEN) {
+                imageMarginTop += TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, textSize,
+                        res.getDisplayMetrics());
+            }
         }
     }
 
@@ -357,7 +374,8 @@ public class ModQuickSettings {
             final Context context = mContainerView.getContext();
             final int orientation = res.getConfiguration().orientation;
 
-            TileLayout tl = new TileLayout(mContainerView.getContext(), mNumColumns, orientation);
+            TileLayout tl = new TileLayout(mContainerView.getContext(), mNumColumns, orientation,
+                    mQsTileLabelStyle);
 
             // update GB tiles layout
             if (mTiles != null) {
@@ -411,6 +429,9 @@ public class ModQuickSettings {
                 // update views we found
                 if (tileTextView != null) {
                     tileTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, tl.textSize);
+                    tileTextView.setAllCaps(tl.labelStyle == TileLayout.LabelStyle.ALLCAPS);
+                    tileTextView.setVisibility(tl.labelStyle == TileLayout.LabelStyle.HIDDEN ?
+                            View.GONE : View.VISIBLE);
                 }
                 if (layoutView != null && layoutView.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
                     ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) layoutView.getLayoutParams();
@@ -474,6 +495,8 @@ public class ModQuickSettings {
                     mPrefs.getString(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, "0"));
             mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
             mQsTileSpanDisable = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_TILE_SPAN_DISABLE, false);
+            mQsTileLabelStyle = TileLayout.LabelStyle.valueOf(
+                    prefs.getString(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE, "DEFAULT"));
 
             try {
                 mQuickPulldown = Integer.valueOf(mPrefs.getString(
