@@ -1224,4 +1224,10 @@
     <!-- Key Actions: Show brightness dialog -->
     <string name="hwkey_action_brightness_dialog">Show brightness dialog</string>
 
+    <!-- Navbar ring: Haptic feedback -->
+    <string name="pref_navbar_ring_haptic_feedback_title">Haptic feedback</string>
+    <string name="navring_haptic_feedback_default">Default</string>
+    <string name="navring_haptic_feedback_enabled">Enabled</string>
+    <string name="navring_haptic_feedback_disabled">Disabled</string>
+
 </resources>

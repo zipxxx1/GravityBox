@@ -804,6 +804,14 @@
                     android:defaultValue="NONE"
                     android:dependency="pref_navbar_ring_targets_enable" />
 
+                <ListPreference
+                    android:key="pref_navbar_ring_haptic_feedback"
+                    android:title="@string/pref_navbar_ring_haptic_feedback_title"
+                    android:entries="@array/navring_haptic_feedback_entries"
+                    android:entryValues="@array/navring_haptic_feedback_values"
+                    android:defaultValue="DEFAULT"
+                    android:dependency="pref_navbar_ring_targets_enable" />
+
             </PreferenceScreen>
 
         </PreferenceCategory>

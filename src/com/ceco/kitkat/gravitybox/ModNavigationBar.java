@@ -103,9 +103,12 @@ public class ModNavigationBar {
     private static Object mBarBackground;;
 
     // Ring targets
+    private static enum RingHapticFeedback { DEFAULT, ENABLED, DISABLED };
     private static boolean mRingTargetsEnabled;
     private static View mGlowPadView;
     private static BgStyle mRingTargetsBgStyle;
+    private static RingHapticFeedback mRingHapticFeedback;
+    private static Integer mRingVibrateDurationOrig;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -202,6 +205,11 @@ public class ModNavigationBar {
                             intent.getStringExtra(GravityBoxSettings.EXTRA_RING_TARGET_BG_STYLE));
                     GlowPadHelper.clearAppInfoCache();
                     setRingTargets();
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_RING_HAPTIC_FEEDBACK)) {
+                    mRingHapticFeedback = RingHapticFeedback.valueOf(
+                            intent.getStringExtra(GravityBoxSettings.EXTRA_RING_HAPTIC_FEEDBACK));
+                    setRingHapticFeedback();
                 }
             }
         }
@@ -505,14 +513,15 @@ public class ModNavigationBar {
 
                 mRingTargetsBgStyle = BgStyle.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE, "NONE"));
+                mRingHapticFeedback = RingHapticFeedback.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_RING_HAPTIC_FEEDBACK, "DEFAULT"));
 
                 XposedHelpers.findAndHookMethod(searchPanelViewClass, "onFinishInflate", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         prefs.reload();
                         mGlowPadView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowPadView");
-                        XposedHelpers.setIntField(mGlowPadView, "mVibrationDuration", 20);
-                        XposedHelpers.callMethod(mGlowPadView, "setVibrateEnabled", true);
+                        setRingHapticFeedback();
                         setRingTargets();
                     }
                 });
@@ -1034,6 +1043,28 @@ public class ModNavigationBar {
             if (descs != null) Collections.rotate(descs, 3);
             mGlowPadView.requestLayout();
             XposedHelpers.setAdditionalInstanceField(mGlowPadView, "mGbVertical", true);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void setRingHapticFeedback() {
+        if (mGlowPadView == null) return;
+
+        try {
+            if (mRingVibrateDurationOrig == null) {
+                mRingVibrateDurationOrig = XposedHelpers.getIntField(mGlowPadView, "mVibrationDuration");
+                if (mRingHapticFeedback == RingHapticFeedback.DEFAULT) return;
+            }
+            int vibrateDuration;
+            switch (mRingHapticFeedback) {
+                case ENABLED: vibrateDuration = 20; break;
+                case DISABLED: vibrateDuration = 0; break;
+                default:
+                case DEFAULT: vibrateDuration = mRingVibrateDurationOrig; break;
+            }
+            XposedHelpers.setIntField(mGlowPadView, "mVibrationDuration", vibrateDuration);
+            XposedHelpers.callMethod(mGlowPadView, "setVibrateEnabled", vibrateDuration > 0);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
