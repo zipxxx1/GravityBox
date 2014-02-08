@@ -128,6 +128,8 @@ public class ShortcutActivity extends ListActivity {
             VolumePanelShortcut.launchAction(mContext, intent);
         } else if (action.equals(LauncherDrawerShortcut.ACTION)) {
             LauncherDrawerShortcut.launchAction(mContext, intent);
+        } else if (action.equals(BrightnessDialogShortcut.ACTION)) {
+            BrightnessDialogShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -168,6 +170,9 @@ public class ShortcutActivity extends ListActivity {
             list.add(new MediaControlShortcut(mContext));
         }
         list.add(new VolumePanelShortcut(mContext));
+        if (Build.VERSION.SDK_INT > 17) {
+            list.add(new BrightnessDialogShortcut(mContext));
+        }
         list.add(new RecentAppsShortcut(mContext));
         if (mInvokedFromGb) {
             list.add(new KillAppShortcut(mContext));
