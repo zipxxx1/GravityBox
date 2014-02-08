@@ -1301,8 +1301,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatFixes.removePreference(mPrefFixCallerIDMms);
                 mPrefCatFixes.removePreference(mPrefFixMmsWakelock);
             }
-            if (Utils.isAppInstalled(getActivity(), APP_GOOGLE_NOW) &
-                    !Utils.isAppInstalled(getActivity(), APP_GOOGLE_HOME)) {
+            if (!(Utils.isAppInstalled(getActivity(), APP_GOOGLE_NOW) &&
+                    Utils.isAppInstalled(getActivity(), APP_GOOGLE_HOME))) {
                 getPreferenceScreen().removePreference(mPrefCatLauncherTweaks);
             }
             if (Utils.isWifiOnly(getActivity())) {
@@ -1322,7 +1322,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text);
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
-           	}
+            }
 
             // Remove MTK specific preferences for non-MTK devices
             if (!Utils.isMtkDevice()) {
