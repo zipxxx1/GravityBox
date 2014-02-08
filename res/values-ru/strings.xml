@@ -1201,4 +1201,27 @@
     <string name="pref_notif_expand_all_title">Раскрыть все уведомления</string>
     <string name="pref_notif_expand_all_summary">Автоматическое раскрытие всех уведомлений, если включено</string>
 
+    <!-- Statusbar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">Двойное нажатие для сна</string>
+    <string name="pref_statusbar_dt2s_summary">Двойное нажатие на строке состояния переводит устройство в режим сна</string>
+
+    <!-- Animation scales -->
+    <string name="animation_scale0">Анимация выкл</string>
+    <string name="animation_scale1">Масштаб .25x</string>
+    <string name="animation_scale2">Масштаб .5x</string>
+    <string name="animation_scale3">Масштаб 1x</string>
+    <string name="animation_scale4">Масштаб 1.5x</string>
+    <string name="animation_scale5">Масштаб 2x</string>
+    <string name="animation_scale6">Масштаб 5x</string>
+    <string name="animation_scale7">Масштаб 10x</string>
+
+    <!-- QS Tiles: Tile label style -->
+    <string name="pref_qs_tile_label_style_title">Стиль ярлыков плиток</string>
+    <string name="tile_label_style_normal">Обычный</string>
+    <string name="tile_label_style_allcaps">Заглавные</string>
+    <string name="tile_label_style_hidden">Скрыто</string>
+
+    <!-- Key Actions: Show brightness dialog -->
+    <string name="hwkey_action_brightness_dialog">Окно настройки яркости</string>
+
 </resources>
