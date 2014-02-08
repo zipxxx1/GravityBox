@@ -14,6 +14,12 @@
  * limitations under the License.
 -->
 
+<!--
+* Greek translation by:
+* vagosofron@xda
+* CTCaer@xda
+-->
+
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">GravityBox</string>
@@ -24,7 +30,6 @@
     <string name="battery_style_circle_percent">Κυκλική μπαταρία με ποσοστό</string>
     <string name="battery_style_kitkat">KitKat μπαταρία</string>
     <string name="battery_style_kitkat_percent">KitKat μπαταρία με ποσοστό</string>
-    <string name="battery_percent_text_title">Ποσοστό μπαταρίας</string>
     <string name="battery_style_none">Καμία</string>
 
     <string name="vol_music_controls_title">Αλλαγή μουσικής μέσω πλήκτρων έντασης</string>
@@ -50,11 +55,11 @@
     <string name="poweroff_recovery">Λειτ. Recovery</string>
     <string name="poweroff_bootloader">Λειτ. Bootloader</string>
 
-    <string name="vol_key_cursor_control_title">Έλεγχος του κέρσορα με πλήκτρα έντασης</string>
-    <string name="vol_key_cursor_control_summary">Ελέγχει τον κέρσορα χρησιμοποιώντας τα πλήκτρα έντασης σε πεδία κειμένου</string>
+    <string name="vol_key_cursor_control_title">Έλεγχος του δρομέα με πλήκτρα έντασης</string>
+    <string name="vol_key_cursor_control_summary">Ελέγχει τον δρομέα χρησιμοποιώντας τα πλήκτρα έντασης σε πεδία κειμένου</string>
     <string name="vol_key_cursor_control_off">Απενεργοποιημένο</string>
-    <string name="vol_key_cursor_control_on">Πλήκτρο έντασης Πάνω/Κάτω μετακινεί τον κέρσορα Αριστερά/Δεξιά</string>
-    <string name="vol_key_cursor_control_on_reverse">Πλήκτρο έντασης Πάνω/Κάτω μετακινεί τον κέρσορα Δεξιά/Αριστερά</string>
+    <string name="vol_key_cursor_control_on">Πλήκτρο έντασης Πάνω/Κάτω μετακινεί τον δρομέα Αριστερά/Δεξιά</string>
+    <string name="vol_key_cursor_control_on_reverse">Πλήκτρο έντασης Πάνω/Κάτω μετακινεί τον δρομέα Δεξιά/Αριστερά</string>
 
     <string name="recents_clear_all_title">Εκκαθάριση όλων των πρόσφατων εργασιών</string>
 
@@ -78,27 +83,33 @@
     <string name="caller_fullscreen_photo_summary">Εμφανίζει την εικόνα καλούντος σε πλήρη οθόνη κατά την κλήση</string>
 
     <!-- QuickSettings strings -->
-    <string name="quick_settings_sync_on">Συγχρονισμός Ενεργός</string>
-    <string name="quick_settings_sync_off">Συγχρονισμός Ανενεργός</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP Ενεργό</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP Ανενεργό</string>
-    <string name="quick_settings_torch_on">Φακός Ενεργός</string>
-    <string name="quick_settings_torch_off">Φακός Ανενεργός</string>
-    <string name="quick_settings_torch_off_notif">Αγγίξτε για απενεργοποίηση</string>
-    <string name="quick_settings_qr_playing">Αναπαραγωγή&#8230;</string>
-    <string name="quick_settings_qr_recording">Καταγραφή&#8230;</string>
-    <string name="quick_settings_qr_recorded">Καταγράφηκε</string>
-    <string name="quick_settings_qr_record">Παρατετ. άγγιγμα για εγγραφή</string>
-    <string name="quick_settings_qr_recording_notif">Άγγιγμα για διακοπή</string>
-    <string name="quick_settings_expanded_desktop_disabled">Απενεργοποιημένο</string>
-    <string name="quick_settings_expanded_desktop_normal">Κλασσικό</string>
-    <string name="quick_settings_expanded_desktop_expanded">Διευρυμένο</string>
-    <string name="quick_settings_stay_awake_on">Επαγρύπνηση ενεργή</string>
-    <string name="quick_settings_stay_awake_off">Επαγρύπνηση ανενεργή</string>
+    <string name="quick_settings_sync_on">Συγχρονισμος Ενεργος</string>
+    <string name="quick_settings_sync_off">Συγχρονισμος Ανενεργος</string>
+    <string name="quick_settings_wifi_ap_on">Wi-Fi AP Ενεργο</string>
+    <string name="quick_settings_wifi_ap_off">Wi-Fi AP Ανενεργο</string>
+    <string name="quick_settings_torch_on">Φακος Ενεργος</string>
+    <string name="quick_settings_torch_off">Φακος Ανενεργος</string>
+    <string name="quick_settings_torch_off_notif">Αγγιξτε για απενεργοποιηση</string>
+    <string name="quick_settings_qr_playing">Αναπαραγωγη&#8230;</string>
+    <string name="quick_settings_qr_recording">Καταγραφη&#8230;</string>
+    <string name="quick_settings_qr_recorded">Καταγραφηκε</string>
+    <string name="quick_settings_qr_record">Παρατετ. αγγιγμα για εγγραφη</string>
+    <string name="quick_settings_qr_recording_notif">Αγγιγμα για διακοπη</string>
+    <string name="quick_settings_expanded_desktop_disabled">Απενεργοποιημενο</string>
+    <string name="quick_settings_expanded_desktop_normal">Κλασικο</string>
+    <string name="quick_settings_expanded_desktop_expanded">Διευρυμενο</string>
+    <string name="quick_settings_stay_awake_on">Επαγρυπνηση ενεργη</string>
+    <string name="quick_settings_stay_awake_off">Επαγρυπνηση ανενεργη</string>
     <string name="quick_settings_wifi">Wi-Fi</string>
     <string name="quick_settings_wifi_off">Wi-Fi ανενεργό</string>
     <string name="quick_settings_wifi_not_connected">Αποσυνδεδεμένο</string>
-    <string name="quick_settings_wifi_turning_on">Ενεργοποίηση...</string>
+    <string name="quick_settings_wifi_turning_on">Ενεργοποίηση&#8230;</string>
+    <string name="quick_settings_nfc_on">NFC Ενεργο</string>
+    <string name="quick_settings_nfc_off">NFC ανενεργό</string>
+    <string name="quick_settings_camera_error_connect">Αδυναμία σύνδεσης με κάμερα</string>
+    <string name="quick_settings_usb_tether_off">Αποσυνδεθηκε</string>
+    <string name="quick_settings_usb_tether_connected">Tethering ανεργο</string>
+    <string name="quick_settings_usb_tether_on">Tethering</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Επιλογές πλακιδίων QuickSettings</string>
@@ -129,6 +140,9 @@
     <string name="qs_tile_expanded_desktop">Διευρυμένη οθόνη</string>
     <string name="qs_tile_stay_awake">Σε επαγρύπνηση</string>
     <string name="qs_tile_screenshot">Στιγμιότυπο οθόνης</string>
+    <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Κάμερα</string>
+    <string name="qs_tile_usb_tethering">USB Tethering</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Επιλογέας χρώματος</string>
@@ -156,9 +170,9 @@
 
     <!-- About -->
     <string name="pref_cat_about_title">Σχετικά</string>
-    <string name="about_gb_summary">Προγραμματισμός από C3C076@XDA. Αγγίξτε για να επισκεφθείτε το επίσημο φόρουμ.</string>
+    <string name="about_gb_summary">Προγραμματισμός από C3C076@XDA. Μετάφραση από vagosofron@XDA και CTCaer@XDA. Αγγίξτε για το επίσημο φόρουμ.</string>
     <string name="about_xposed_title">Xposed framework</string>
-    <string name="about_xposed_summary">Προγραμματισμός από rovo89@XDA. Αγγίξτε για να επισκεφθείτε το επίσημο φόρουμ.</string>
+    <string name="about_xposed_summary">Προγραμματισμός από rovo89@XDA. Αγγίξτε για το επίσημο φόρουμ.</string>
     <string name="about_donate_title">Δωρεά</string>
     <string name="about_donate_summary">Αγγίξτε για να βοηθήσετε στην ανάπτυξη της εφαρμογής με δωρεά μέσω PayPal.</string>
 
@@ -168,8 +182,8 @@
     <string name="reboot_confirm_bootloader">Το %s θα κάνει επανεκκίνηση σε λειτ. Bootloader.</string>
 
     <!-- Engineering mode shortcut -->
-    <string name="engineering_mode_title">Engineering mode</string>
-    <string name="engineering_mode_summary">Ανοίγει την εφαρμογή Engineering mode</string>
+    <string name="engineering_mode_title">ΜΤΚ Engineering mode</string>
+    <string name="engineering_mode_summary">Ανοίγει την εφαρμογή ΜΤΚ Engineering mode</string>
 
     <!-- Dual SIM ringer -->
     <string name="dual_sim_ringer_title">Ήχος κλήσης για Dual SIM</string>
@@ -183,6 +197,7 @@
     <string name="lockscreen_bg_default">Προεπιλεγμένη  ταπετσαρία</string>
     <string name="lockscreen_bg_color">Γέμισμα χρώματος</string>
     <string name="lockscreen_bg_image">Προσαρμοσμένη εικόνα</string>
+    <string name="lockscreen_bg_last_screen">Τελευταία οθόνη</string>
     <string name="pref_lockscreen_bg_color_title">Ορισμός προσαρμοσμένου χρώματος</string>
     <string name="pref_lockscreen_bg_color_summary">Επιτρέπει τον ορισμό προσαρμοσμένου χρώματος φόντου για το κλείδωμα οθόνης</string>
     <string name="pref_lockscreen_bg_image_title">Ορισμός προσαρμοσμένης εικόνας</string>
@@ -195,7 +210,7 @@
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Ενέργεια</string>
-    <string name="pref_cat_power_summary">Περιλαμβάνει διάφορες βελτιώσεις σχετικές με την Ενέργεια</string>
+    <string name="pref_cat_power_summary">Περιλαμβάνει διάφορες βελτιώσεις σχετικές με την λειτουργία της συσκευής</string>
 
     <!--  Low battery LED flashing -->
     <string name="pref_flashing_led_disable_title">Απενεργοποίηση LED φωτεινής ένδειξης</string>
@@ -257,7 +272,7 @@
     <string name="pref_charging_led_disable_summary">Απενεργοποιεί το LED κατά τη διάρκεια της φόρτισης</string>
 
     <!-- Hardware key actions -->
-    <string name="pref_cat_hwkey_actions_title">Ενέργειες των φυσικών πλήκτρων</string>
+    <string name="pref_cat_hwkey_actions_title">Ενέργειες φυσικών πλήκτρων</string>
     <string name="pref_cat_hwkey_actions_summary">Επιτρέπει τη ρύθμιση προσαρμοσμένων ενεργειών για τα φυσικά πλήκτρα</string>
     <string name="hwkey_menu_longpress_dialog_title">Ενέργεια παρατεταμένου πατήματος του Πλήκτρου Μενού</string>
     <string name="hwkey_menu_doubletap_dialog_title">Ενέργεια διπλού πατήματος του Πλήκτρου Μενού</string>
@@ -397,7 +412,7 @@
     <string name="pref_holo_bg_dither_title">Dithering φόντου Holo</string>
     <string name="pref_holo_bg_dither_summary">Αντικαθιστά το βασικό Holo φόντο με ένα dithered για να καταπιέσει τον διαχωρισμό των χρωματικών ζωνών (απαιτείται επανεκκίνηση)</string>
 
-    <!-- Disable hardware keys for pie -->
+    <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Απενεργοποίηση φυσικών πλήκτρων</string>
     <string name="pref_hwkeys_disable_summary">Απενεργοποιεί τα ΜΕΝΟΥ, ΕΠΙΣΤΡΟΦΗ, ΚΕΝΤΡΙΚΗΣ ΟΘΟΝΗΣ όταν τα Pie controls είναι ενεργοποιημένα. Οι ενέργειες των πλήκτρων HW θα συνεχίσουν να λειτουργούν. (για συσκευές που έχουν πλήκτρα HW)</string>
 
@@ -421,10 +436,10 @@
 
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Αναζήτηση</string>
-    <string name="app_picker_none">(Τίποτα)</string>
+    <string name="app_picker_none">(Κενή)</string>
 
     <!-- QuickApp tile settings -->
-    <string name="qs_tile_quickapp">QuickApp</string>
+    <string name="qs_tile_quickapp">Quick App</string>
     <string name="pref_cat_quickapp_tile_title">Ρυθμίσεις πλακιδίου QuickApp</string>
     <string name="pref_quickapp_default_title">Κύρια εφαρμογή</string>
     <string name="pref_quickapp_slot1_title">Εφαρμογή παρατετ. πατήμ. θέσης 1</string>
@@ -494,7 +509,7 @@
     <string name="hwkey_action_custom_app_missing">Η προσαρμ. εφαρμογή δεν βρέθηκε!</string>
 
     <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">Εφαρμογής ρολογιού πεδίου ειδοποιήσεων</string>
+    <string name="pref_clock_link_title">Εφαρμογή ρολογιού πεδίου ειδοποιήσεων</string>
     <string name="pref_clock_link_summary">Συνδέει το πεδίο ειδοποιήσεων του ρολογιού με μία συγκεκριμένη εφαρμογή αντί για τις ρυθμίσεις Ημερομηνία &amp; Ώρα ρυθμίσεις</string>
 
     <!-- GravityBox settings startup handling -->
@@ -526,10 +541,10 @@
     <string name="hwkey_action_expanded_desktop_disabled">Η διευρυμένη οθόνη είναι απενεργοποιημένη!</string>
 
     <!-- Navigation bar tweaks category -->
-    <string name="pref_cat_navigation_bar_title">Γραμμή πλοήγησης</string>
+    <string name="pref_cat_navigation_bar_title">Γραμμή Πλοήγησης</string>
     <string name="pref_cat_navigation_bar_summary">Περιλαμβάνει διάφορες βελτιώσεις της γραμμής πλοήγησης</string>
     <string name="pref_navbar_override_title">Παράκαμψη προεπιλεγμένων συστήματος</string>
-    <string name="pref_navbar_override_summary">Γενικός διακόπτης βελτιώσεων για τη γραμμή πλοήγησης (απαιτείται επανεκκίνηση)</string>
+    <string name="pref_navbar_override_summary">Διαχείριση γραμμής πλοήγησης (απαιτείται επανεκκίνηση)</string>
     <string name="pref_navbar_enable_title">Ενεργοποίηση γραμμής πλοήγησης</string>
     <string name="pref_navbar_enable_summary">Απαιτείται επανεκκίνηση</string>
     <string name="pref_navbar_height_title">Ύψος γραμμής πλοήγησης</string>
@@ -543,8 +558,8 @@
     <string name="pref_powermenu_screenshot_title">Στιγμιότυπο οθόνης στο μενού λειτουργίας</string>
 
     <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Ρυθμίσεων δακτυλίου ξεκλειδώματος</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Γενικός διακόπτης στόχων δακτυλίου ξεκλειδώματος</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">Δακτύλιος ξεκλειδώματος</string>
+    <string name="pref_lockscreen_ring_targets_enable_summary">Διαχείριση στόχων δακτυλίου ξεκλειδώματος</string>
     <string name="pref_lockscreen_ring_targets_app_title">Επιλεγμένη εφαρμογή %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Κάθετη αντιστάθμιση δακτυλίου ξεκλειδώματος</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Οριζόντια αντιστάθμιση δακτυλίου ξεκλειδώματος</string>
@@ -595,7 +610,7 @@
     <!-- Intelligent pie -->
     <string name="pie_controls_disabled">Ποτέ</string>
     <string name="pie_controls_enabled_always">Πάντα</string>
-    <string name="pie_controls_enabled_expanded">Όταν είναι ενεργοποιημένο η διευρυμένη οθόνη</string>
+    <string name="pie_controls_enabled_expanded">Όταν είναι ενεργοποιημένη η διευρυμένη οθόνη</string>
     <string name="pie_controls_enabled_expanded_navbar">Όταν η διευρυμένη οθόνη αποκρύπτει τη γραμμή πλοήγησης</string>
 
     <!-- Icon coloring: preserve stock battery icon -->
@@ -657,8 +672,8 @@
     <string name="dt_position_right">Δεξιά</string>
     <string name="pref_data_traffic_size_title">Μέγεθος</string>
     <string name="dt_size_normal">Κανονικό</string>
-    <string name="dt_size_smaller">Μικρότερο</string>
-    <string name="dt_size_smallest">Το μικρότερο</string>
+    <string name="dt_size_smaller">Μικρό</string>
+    <string name="dt_size_smallest">Μικρότερο</string>
     <string name="byte_abbr">B</string>
     <string name="kilobyte_abbr">KB</string>
     <string name="megabyte_abbr">MB</string>
@@ -754,7 +769,7 @@
 
     <!-- Navigation bar colors -->
     <string name="pref_navbar_color_enable_title">Ενεργ. χρωμάτων γραμ. πλοήγησης</string>
-    <string name="pref_navbar_color_enable_summary">Μπορεί να χρειαστεί επαννεκίνηση μετά από απενεργοποίηση</string>
+    <string name="pref_navbar_color_enable_summary">Μπορεί να χρειαστεί επανεκκίνηση μετά από απενεργοποίηση</string>
     <string name="pref_navbar_key_color_title">Χρώμα πλήκτρου πλοήγησης</string>
     <string name="pref_navbar_key_glow_color_title">Χρώμα λάμψης πλήκτρου πλοήγησης</string>
     <string name="pref_navbar_bg_color_title">Χρώμα φόντου μπάρας πλοήγησης</string>
@@ -796,5 +811,422 @@
 
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ρύθμιση κάτω ορίου</string>
+
+    <!-- Google Plus -->
+    <string name="pref_about_gplus_title">Κοινότητα Google+</string>
+    <string name="pref_about_gplus_summary">Αγγίξτε για την GravityBox Google+ κοινότητα</string>
+
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">Επιτρέψτε τη λειτουργία του δικτύου LTE</string>
+
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">Για να ενεργοποιήσετε τις ενέργιες για την γραμμή πλοήγησης, πρέπει να 
+        παρακάμψετε τις προεπιλογές συστήματος στο μενού της Γραμμής Κατάστασης</string>
+
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Φακός κλειδώματος οθόνης</string>
+    <string name="hwkey_ls_torch_disabled">Απενεργοποιημένος</string>
+    <string name="hwkey_ls_torch_home_longpress">Παρατετ. πάτημα Αρχικής Οθόνης</string>
+    <string name="hwkey_ls_torch_voldown_longpress">Παρατετ. πάτημα Έντασης-Κάτω</string>
+
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">Διαχείριση βελτιώσεων QuickSettings (απαιτείται επανεκκίνηση)</string>
+
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Εφαρμογές</string>
+    <string name="app_picker_shortcuts">Συντομεύσεις</string>
+    <string name="app_picker_shortcut_null_intent">Αδυναμία δημιουργίας λειτουργικής συντόμευσης διότι η δραστηριότητα δεν επέστρεψε πρόθεση συντομέυσεων</string>
+    <string name="app_picker_shortcut_cancelled">Η δημιουργία συντόμευσης ακυρώθηκε από την επιλεγμένη εφαρμογή</string>
+
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">Εναλλαγή πλήκτρων Επιστροφής και Πρόσφατα</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">Ενεργοποίηση φακού</string>
+    <string name="pref_lockscreen_ring_torch_summary">Εναλλάσσει τον φακό όταν αγγίξετε παρατεταμένα τον δαχτύλιο ξεκλειδώματος</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Χρονικό όριο πεδίου έντασης</string>
+
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">Τύπος πλακιδίου κουδουνίσματος</string>
+    <string name="ringer_mode_silent">Σιωπηλό</string>
+    <string name="ringer_mode_vibrate">Δόνηση</string>
+    <string name="ringer_mode_sound">Ήχος</string>
+    <string name="ringer_mode_sound_vibrate">Ήχος και δόνηση</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">Προεπιλογή συστήματος</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Εξασθένιση</string>
+
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Αρχική οθόνη</string>
+    <string name="pref_cat_launcher_tweaks_summary">Ισχύει για την stock Αρχική οθόνη και για την Αρχική οθόνη Google Experience</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Πλέγμα αρχικής οθόνης</string>
+    <string name="pref_launcher_desktop_grid_info_title">Η χρήση άλλων τιμών από των προκαθορισμένων μπορεί να χαλάσει την διάταξη των widget. Χρήση με προσοχή. Οι αλλαγές χρειάζονται επανεκκίνηση της αρχικής οθόνης.</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Αριθμός γραμμών</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Αριθμός στύλων</string>
+    <string name="desktop_grid_default">Προεπιλεγμένο</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">Ποσοστό μπαταρίας</string>
+    <string name="battery_percent_text_size_title">Μέγεθος κειμένου ποσοστού μπαταρίας</string>
+    <string name="battery_percent_text_size_larger">Μεγάλο</string>
+    <string name="battery_percent_text_size_normal">Κανονικό</string>
+    <string name="battery_percent_text_size_smaller">Μικρό</string>
+    <string name="battery_percent_text_size_even_smaller">Μικρότερο</string>
+    <string name="battery_percent_text_size_smallest">Ελάχιστο</string>
+    <string name="battery_percent_text_style_title">Τρόπος ένδειξης ποσοστού</string>
+    <string name="battery_percent_text_style_default">Προεπιλεγμένο</string>
+    <string name="battery_percent_text_style_numbers_only">Μόνο αριθμοί (όχι σήμα ποσοστού)</string>
+
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">Ρυθμίσεις μπαταρίας</string>
+
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Πλήκτρα ελέγχου δρομέα</string>
+    <string name="pref_navbar_cursor_control_summary">Ενεργοποιεί τον έλεγχο του δρομέα με πλήκτρα στην γραμμή πλοήγησης όταν φαίνεται το πληκτρολόγιο</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Ξύπνημα μέσω πλήκτρων έντασης</string>
+    <string name="volume_rocker_wake_default">Προεπιλεγμένο συστήματος</string>
+    <string name="volume_rocker_wake_enabled">Ενεργοποιημένο</string>
+    <string name="volume_rocker_wake_disabled">Απενεργοποιημένο</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Χρειάζεται επιβεβαίωση επανεκκίνησης</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Απόκρυψη σε αλλαγή</string>
+    <string name="pref_qs_hide_on_change_summary">Κρύβει την γραμμή κατάστασης αυτόματα στο άγγιγμα πλακιδίου. Εφαρμόζεται στα πλακίδια GravityBox και στα πλακίδια συστήματος που έχουν παρακαμφθεί.</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Μενού λειτουργίας</string>
+    <string name="pref_cat_power_other_title">Δίαφορα</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Επιτρέπεται επανεκκίνηση στο κλείδωμα οθόνης</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Τύπος αδράνειας</string>
+    <string name="inactivity_mode_default">Προεπιλεγμένο</string>
+    <string name="inactivity_mode_hide">Απόκρυψη</string>
+    <string name="inactivity_mode_summary">Εμφάνιση περίληψης και απόκρυψη</string>
+
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Ρυθμίσεις προσαρμοσμένoυ πλήκτρoυ</string>
+    <string name="pref_navbar_custom_key_enable_title">Ενεργοποίηση προσαρμοσμένoυ πλήκτρoυ</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Χρήση CDMA δικτύων</string>
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Εναλλαγή αυτόμ. περιστροφής</string>
+    <string name="hwkey_action_auto_rotation_enabled">Η αυτόμ. περιστροφή ενεργοποιήθηκε</string>
+    <string name="hwkey_action_auto_rotation_disabled">Η αυτόμ. περιστροφή απενεργοποιήθηκε</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Επιτρέπονται όλα τα widget</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Επιτρέπει την χρήση widget αρχικής οθόνης στο κλείδωμα οθόνης</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Εμφάνιση μενού λειτουργίας</string>
+    <string name="hwkey_action_expand_notifications">Εμφάνιση πεδίου ειδοποίησεων</string>
+    <string name="hwkey_action_expand_quicksettings">Εμφάνιση πεδίου QuickSettings</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Στόχοι δακτυλίου πλοήγησης</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Διαχείριση στόχων δακτυλίου πλοήγησης (απαιτείται επανεκκίνηση)</string>
+    <string name="pref_navbar_ring_target_title">Στόχος δακτυλίου %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Ενέργειες GravityBox</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Αλλαγή τύπου δικτύου</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Εναλλαγή δεδομένων κινητής</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Εναλλαγή WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Εναλλαγή Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Εναλλαγή WiFi AP</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Εναλλαγή NFC</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Στυλ φόντου στόχου</string>
+    <string name="nrt_bg_style_none">Κανένα</string>
+    <string name="nrt_bg_style_light">Ανοιχτό</string>
+    <string name="nrt_bg_style_dark">Σκούρο</string>
+    <string name="nrt_bg_style_black">Μαύρο</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Περιέχει ρυθμίσεις για το Pie Control</string>
+
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Διαφάνεια φόντου</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Έλεγχος πολυμέσων</string>
+    <string name="shortcut_media_play_pause">Αναπ./παύση</string>
+    <string name="shortcut_media_previous">Προηγούμενο</string>
+    <string name="shortcut_media_next">Επόμενο</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Ένδειξη φόρτισης</string>
+    <string name="bpt_charging_none">Καμία</string>
+    <string name="bpt_charging_static">Στατική</string>
+    <string name="bpt_charging_animated">Κινούμενη</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Προβολή ρολογιού γραμμής κατάστασης</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Απόκρυψη σε γνωστά widget ρολογιού</string>
+    <string name="lockscreen_sb_clock_always_hide">Πάντα απόκρυψη</string>
+    <string name="lockscreen_sb_clock_always_show">Πάντα εμφάνιση</string>
+
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Ρυθμίσεις πλακιδίου Quick App 2</string>
+    <string name="qs_tile_quickapp_2">Quick App 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Επιβολή ελέγχου έντασης πολυμέσων</string>
+    <string name="pref_vol_force_music_control_summary">Όταν είναι ενεργό, τα πλήκτρα έντασης ελέγχουν την ένταση πολυμέσων αντί για το κουδούνισμα</string>
+
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">Πίνακας πρόσφατων</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">Άλλες ρυθμίσεις</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">Απενεργοποίηση πληκτρολογίου πλήρης οθόνης</string>
+
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Αυτομ. απενεργ. φακού</string>
+    <string name="pref_torch_auto_off_summary">Απενεργοποιεί τον φακό μετά από τον καθορισμένο χρόνο. Ορίστε σε 0 για απενεργοποίηση (δεν συνιστάται)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Αλλαγή προσανατολισμού πλήκτρων έντασης</string>
+    <string name="pref_vol_swap_keys_summary">Swap volume keys when the screen is rotated</string>
+
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Εφέ θολώματος</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Απενεργοποίηση εκτεταμένων πλακιδίων</string>
+    <string name="pref_qs_tile_span_disable_summary">Απενεργοποιεί την επέκταση των πλακιδίων χρήστη, φωτεινότητας και ρυθμίσεων στον οριζόντιο προσανατολισμό</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Επιβολή υπερχείλισης πλήκτρου μενού</string>
+    <string name="pref_force_overflow_menu_button_summary">Απαιτείται επανεκκίνηση</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Πάντα στο κάτω μέρος</string>
+    <string name="pref_navbar_always_on_bottom_summary">Επιβάλει την γραμμή πλοήγησης να βρίσκεται πάντα στο κάτω μέρος για τον οριζόντιο προσανατολισμό (απαιτείται επανεκκίνηση)</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Αλλαγή με πλήκτρο μενού</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">Απροσδιόριστο</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_enable_summary">Αυτό θα αλλάξει αυτόματα την κεραία σας σε λειτ. εξοικ. ενέργειας ή την κανονική λειτ.
+        ανάλογα με τα δεδομένα κινητής και την κατάσταση WiFi (απαιτείται επανεκκίνηση)</string>
+    <string name="pref_smart_radio_normal_mode_title">Κανονική λειτ. δικτύου</string>
+    <string name="pref_smart_radio_power_saving_mode_title">Λειτ. δικτύου εξοικ. ενέργειας</string>
+    <string name="pref_smart_radio_screen_off_title">Όταν η οθόνη απενεργοποιείται</string>
+    <string name="pref_smart_radio_screen_off_summary">Ενεργοποιεί τη λειτουργία εξοικονόμησης ενέργειας όταν η οθόνη απενεργοποιείται ανεξάρτητα από το εάν τα δεδομένα κινητής είναι ενεργά ή απενεργοποιημένα</string>
+    <string name="pref_smart_radio_ignore_locked_title">Παράβλεψη σε κλείδωμα οθόνης</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Όταν η οθόνη ενεργοποιείται, η λειτ. εξοικ. ενέργειας δεν θα απενεργοποιηθεί μέχρι το κλείδωμα πληκτρολογίου να ξεκλειδωθεί</string>
+    <string name="pref_smart_radio_mode_change_delay_title">Καθυστέρηση αλλαγής λειτ. δικτύου</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">Καθυστερεί την αλλαγή της λειτ. δικτύου κατά τον καθορισμένο αριθμό δευτερολέπτων</string>
+
+    <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">Προσαρμοσμένο κείμενο φορέα</string>
+    <string name="carrier_text_default">Προεπιλογή</string>
+    <string name="carrier_text_empty">Άδειο</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">Ήχος πλήρης μπαταρίας</string>
+    <string name="pref_battery_charged_sound_summary">Αναπαράγει ήχο όταν η μπαταρία είναι πλήρης</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">Ενέργειες παρατετ. αγγίγματος</string>
+    <string name="pref_pie_back_longpress_title">Πλήκτρο επιστροφής</string>
+    <string name="pref_pie_home_longpress_title">Πλήκτρο αρχικής οθόνης</string>
+    <string name="pref_pie_recents_longpress_title">Πλήκτρο πρόσφατων</string>
+    <string name="pref_pie_search_longpress_title">Πλήκτρο αναζήτησης</string>
+    <string name="pref_pie_menu_longpress_title">Πλήκτρο μενού</string>
+    <string name="pref_pie_app_longpress_title">Προσαρμοσμένο πλήκτρο</string>
+
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">Καθυστέρηση φωτεινής ένδειξης</string>
+    <string name="pref_pulse_notification_delay_summary">Απαιτείται επανεκκίνηση</string>
+
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">Συμπεριφορά εκκαθάρισης πρόσφατων εφαρμογών</string>
+    <string name="pref_clear_recents_mode_0">Άγγιγμα για εκκαθ. όλων, παρατετ. άγγιγμα για εκκαθ. όλων εκτός τρέχουσας</string>
+    <string name="pref_clear_recents_mode_1">Άγγιγμα για εκκαθ. όλων εκτός τρέχουσας, παρατετ. άγγιγμα για εκκαθ. όλων</string>
+
+    <!-- Powe menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">Απενεργοποίηση του μενού λειτουργίας στο κλείδωμα οθόνης</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">Προεπιλεγμένο συστήματος</string>
+    <string name="overflow_menu_enabled">Επιβολή ενεργοποίησης</string>
+    <string name="overflow_menu_disabled">Επιβολή απενεργοποίησης</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">Λήψη στιγμιότυπου οθόνης</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">Εμφάνιση πεδίου εντάσεων</string>
+
+    <!-- Blur effect intensity -->
+    <string name="pref_lockscreen_bg_blur_intensity_title">Έντασης εφέ θολώματος</string>
+
+    <!-- Smart radio: independent delay for screen off power save event -->
+    <string name="pref_smart_radio_screen_off_delay_title">Καθυστέρηση εξοικ. ενέργειας</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Καθυστερεί την αλλαγή σε λειτ. εξοικ. ενέργειας όταν η οθόνης έιναι ανενεργή. 
+        Παρακάμπτει την προεπιλεγμένη καθυστέρηση αλλαγής λειτ. δικτύου  αν η τιμή είναι μη μηδενική.</string>
+
+    <!-- Backup and restore settings -->
+    <string name="pref_settings_backup_title">Ρυθμίσεις αντιγρ. ασφαλείας</string>
+    <string name="pref_settings_restore_title">Ρυθμίσεις επαναφοράς</string>
+    <string name="settings_backup_failed">Η δημιουργίας αντιγρ. ασφαλείας απέτυχε</string>
+    <string name="settings_backup_no_prefs">Το αρχείο ρυθμίσεων δεν βρέθηκε</string>
+    <string name="settings_backup_success">Η δημιουργία αντιγρ. ασφαλείας ήταν επιτυχής</string>
+    <string name="settings_restore_no_backup">Δεν υπάρχει αντίγραφο για επαναφορά</string>
+    <string name="settings_restore_confirm">Οι τρέχουσες ρυθμίσεις θα αντικατασταθούν. θέλετε να συνεχίσετε;</string>
+    <string name="settings_restore_failed">Η επαναφορά απέτυχε</string>
+    <string name="settings_restore_success">Η επαναφορά έγινε με επιτυχία</string>
+    <string name="settings_restore_reboot">Παρακαλώ επανεκκινήστε την συσκευή σας</string>
+
+    <!-- Web service client strings -->
+    <string name="wsc_hash_creation_failed">Αδυναμία δημιουργίας hash κώδικα εφαρμογής</string>
+    <string name="wsc_parse_response_error">Αδυναμία ανάλυσης δεδομένων που λήφθηκαν από την υπηρεσία διαδικτύου</string>
+    <string name="wsc_hash_invalid">Η υπηρεσία διαδικτύου αρνήθηκε να επικοινωνήσει λόγω ασυμφωνίας του κώδικα hash. Αυτό συμβαίνει συνήθως 
+        όταν έχετε ανεπίσημη έκδοση ή το GravityBox APK τροποποιήθηκε από τρίτους.</string>
+    <string name="wsc_please_wait">Παρακαλώ περιμένετε&#8230;</string>
+    <string name="wsc_error">Αδυναμία επικοινωνίας με την υπηρεσία διαδικτύου: %s</string>
+    <string name="wsc_task_cancelled">Η ενέργεια της υπηρεσίας διαδικτύου ακυρώθηκε</string>
+
+    <!-- Transaction verification -->
+    <string name="wsc_trans_parse_response_error">Αδυναμία ανάλυσης δεδομένων συναλλαγής από την υπηρεσία διαδικτύου</string>
+    <string name="wsc_trans_valid">Επιτυχής επαλήθευση ταυτότητας συναλλαγής. Τα premium χαρακτηριστικά θα ενεργοποιηθούν μετά απο επανεκκίνηση του GravityBox.</string>
+    <string name="wsc_trans_invalid">Αδυναμία εύρεσης Unable to find εγγραφής στο μητρώο για αυτήν την ταυτότητα συναλλαγής</string>
+    <string name="wsc_trans_violation">Η συγκεκριμένη ταυτότητα συναλλαγής έχει καταχωρηθεί αρκετές φορές. Επικοινωνήστε με τον προγραμματιστή του GravityBox για επίλυση.</string>
+    <string name="wsc_trans_blocked">Η συγκεκριμένη ταυτότητα συναλλαγής έχει μπλοκαριστεί. Επικοινωνήστε με τον προγραμματιστή του GravityBox για επίλυση.</string>
+    <string name="pref_trans_verification_title">Ταυτότητα συναλλαγής PayPal</string>
+    <string name="pref_trans_verification_summary">Σε περίπτωση που κάνατε δωρεά, μπορείτε να εισάγετε την ταυτότητα συναλλαγής δωρεάς PayPal για να ξεκλειδώσετε τα premium χαρακτηριστικά</string>
+    <string name="wsc_trans_required_summary">Αυτό το χαρακτηριστικό απαιτεί έγκυρη Ταυτότητα συναλλαγής PayPal</string>
+
+    <!-- Pie: disable system info -->
+    <string name="pref_pie_sysinfo_disable_title">Απενεργοποίηση πληροφοριών συστήματος</string>
+
+    <!-- Pie: long press delay -->
+    <string name="pref_pie_longpress_delay_title">Καθυστέριση παρατετ. αγγίγματος</string>
+    <string name="pie_longpress_delay_default">Προεπιλογή συστήματος</string>
+
+    <!-- GB Actions: Launcher drawer shortcut -->
+    <string name="shortcut_launcher_drawer">Συρτάρι εφαρμογών</string>
+
+    <!-- Key Actions: Show launcher drawer -->
+    <string name="hwkey_action_launcher_drawer">Εμφάνιση του συρταριού εφαρμογών</string>
+
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">Άλλα</string>
+    <string name="pref_launcher_resize_widget_title">Αλλαγή μεγέθους σε όλα τα widget</string>
+    <string name="pref_launcher_resize_widget_summary">Αλλάξτε το μέγεθος οποιουδήποτε widget σε οποιοδήποτε μέγεθος στην αρχική οθόνη (απαιτείται επανεκκίνηση αρχικής οθόνης)</string>
+
+    <!-- Icon picker -->
+    <string name="icon_picker_choose_icon_title">Επιλογή εικονιδίου</string>
+    <string name="shortcuts_icon_picker_alarm">Αφύπνηση</string>
+    <string name="shortcuts_icon_picker_andy">Andy</string>
+    <string name="shortcuts_icon_picker_battery">Μπαταρία</string>
+    <string name="shortcuts_icon_picker_browser">Περιηγητής</string>
+    <string name="shortcuts_icon_picker_calendar">Ημερολόγιο</string>
+    <string name="shortcuts_icon_picker_camera">Κάμερα</string>
+    <string name="shortcuts_icon_picker_cloud">Σύννεφο</string>
+    <string name="shortcuts_icon_picker_contact">Επαφή</string>
+    <string name="shortcuts_icon_picker_directdial">Απευθείας κλήση</string>
+    <string name="shortcuts_icon_picker_directmessage">Απευθείας μήνυμα</string>
+    <string name="shortcuts_icon_picker_drive">Drive</string>
+    <string name="shortcuts_icon_picker_dropbox">Dropbox</string>
+    <string name="shortcuts_icon_picker_email">Email</string>
+    <string name="shortcuts_icon_picker_email2">Εναλλακτικό email</string>
+    <string name="shortcuts_icon_picker_evernote">Evernote</string>
+    <string name="shortcuts_icon_picker_facebook">Facebook</string>
+    <string name="shortcuts_icon_picker_favorite">Αγαπημένο</string>
+    <string name="shortcuts_icon_picker_file_browser">Διαχείρηση αρχείων</string>
+    <string name="shortcuts_icon_picker_file_browser2">Εναλλακτική διαχείρηση αρχείων</string>
+    <string name="shortcuts_icon_picker_fitness">Fitness</string>
+    <string name="shortcuts_icon_picker_gallery">Συλλογή</string>
+    <string name="shortcuts_icon_picker_gears">Gears</string>
+    <string name="shortcuts_icon_picker_google_small">Google</string>
+    <string name="shortcuts_icon_picker_gplus">Google Plus</string>
+    <string name="shortcuts_icon_picker_gtalk">Hangouts</string>
+    <string name="shortcuts_icon_picker_help">Βοήθεια</string>
+    <string name="shortcuts_icon_picker_joystick">Χειριστήριο</string>
+    <string name="shortcuts_icon_picker_key">Κλειδιά/Λογαριασμοί</string>
+    <string name="shortcuts_icon_picker_laptop">Laptop</string>
+    <string name="shortcuts_icon_picker_notes">Σημειώσεις</string>
+    <string name="shortcuts_icon_picker_luggage">Ταξίδι</string>
+    <string name="shortcuts_icon_picker_maps">Χάρτες</string>
+    <string name="shortcuts_icon_picker_market">Market</string>
+    <string name="shortcuts_icon_picker_movie">Ταινίες</string>
+    <string name="shortcuts_icon_picker_music">Μουσική</string>
+    <string name="shortcuts_icon_picker_nav">Πλοήγηση</string>
+    <string name="shortcuts_icon_picker_phone">Τηλέφωνο</string>
+    <string name="shortcuts_icon_picker_package">Πακέτο</string>
+    <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
+    <string name="shortcuts_icon_picker_play">Αναπαραγωγή</string>
+    <string name="shortcuts_icon_picker_pocket">Τσέπη</string>
+    <string name="shortcuts_icon_picker_quicksettings">Quick Settings</string>
+    <string name="shortcuts_icon_picker_rss">RSS Feed</string>
+    <string name="shortcuts_icon_picker_sdcard">Κάρτα SD</string>
+    <string name="shortcuts_icon_picker_search">Αναζήτηση</string>
+    <string name="shortcuts_icon_picker_sms">Μηνύματα</string>
+    <string name="shortcuts_icon_picker_tasks">Εργασίες</string>
+    <string name="shortcuts_icon_picker_terminal">Terminal</string>
+    <string name="shortcuts_icon_picker_transit">Διέλευση</string>
+    <string name="shortcuts_icon_picker_tv">TV</string>
+    <string name="shortcuts_icon_picker_twitter">Twitter</string>
+    <string name="shortcuts_icon_picker_unlock">Ξεκλείδωμα</string>
+
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">Ολίσθηση πριν το ξεκλείδωμα</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">Επιτρέπει την χρήση του κλειδώματος ολίσθησης μαζί με το κλείδωμα ασφαλείας</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">Πρόκληση ολίσθησης</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Γραμμή κατάστασης</string>
+
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">Απενεργοποιημένο</string>
+    <string name="qs_auto_switch_mode1">Όταν δεν υπάρχουν ειδοποιήσεις</string>
+    <string name="qs_auto_switch_mode2">Όταν δεν υπάρχουν εκκαθαριζόμενες ειδοποιήσεις</string>
+
+    <!-- Animation scales -->
+    <string name="animation_scale0">Κίνηση ανενεργή</string>
+    <string name="animation_scale1">Κλίμακα κίνησης .25x</string>
+    <string name="animation_scale2">Κλίμακα κίνησης .5x</string>
+    <string name="animation_scale3">Κλίμακα κίνησης 1x</string>
+    <string name="animation_scale4">Κλίμακα κίνησης 1.5x</string>
+    <string name="animation_scale5">Κλίμακα κίνησης 2x</string>
+    <string name="animation_scale6">Κλίμακα κίνησης 5x</string>
+    <string name="animation_scale7">Κλίμακα κίνησης 10x</string>
 
 </resources>
