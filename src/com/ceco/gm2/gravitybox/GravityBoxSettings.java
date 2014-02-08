@@ -550,8 +550,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_HORIZONTAL_OFFSET = "pref_lockscreen_ring_targets_horizontal_offset";
 
     public static final String PREF_KEY_STATUSBAR_BRIGHTNESS = "pref_statusbar_brightness";
+    public static final String PREF_KEY_STATUSBAR_DT2S = "pref_statusbar_dt2s";
     public static final String ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED = "gravitybox.intent.action.STATUSBAR_BRIGHTNESS_CHANGED";
+    public static final String ACTION_PREF_STATUSBAR_DT2S_CHANGED = "gravitybox.intent.action.STATUSBAR_DT2S_CHANGED";
     public static final String EXTRA_SB_BRIGHTNESS = "sbBrightness";
+    public static final String EXTRA_SB_DT2S = "sbDt2s";
 
     public static final String PREF_KEY_MMS_UNICODE_STRIPPING = "pref_mms_unicode_stripping";
     public static final String UNISTR_LEAVE_INTACT = "leave_intact";
@@ -2399,6 +2402,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_BRIGHTNESS)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED);
                 intent.putExtra(EXTRA_SB_BRIGHTNESS, prefs.getBoolean(PREF_KEY_STATUSBAR_BRIGHTNESS, false));
+            } else if (key.equals(PREF_KEY_STATUSBAR_DT2S)) {
+                intent.setAction(ACTION_PREF_STATUSBAR_DT2S_CHANGED);
+                intent.putExtra(EXTRA_SB_DT2S, prefs.getBoolean(PREF_KEY_STATUSBAR_DT2S, false));
             } else if (key.equals(PREF_KEY_NETWORK_MODE_TILE_MODE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_NMT_MODE, Integer.valueOf(

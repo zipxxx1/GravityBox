@@ -701,6 +701,12 @@
             android:defaultValue="false" />
 
         <CheckBoxPreference 
+            android:key="pref_statusbar_dt2s"
+            android:title="@string/pref_statusbar_dt2s_title"
+            android:summary="@string/pref_statusbar_dt2s_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference 
             android:key="pref_disable_roaming_indicators"
             android:title="@string/pref_disable_roaming_indicators_title"
             android:summary="@string/pref_disable_roaming_indicators_summary"

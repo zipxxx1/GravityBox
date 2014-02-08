@@ -1231,4 +1231,8 @@
     <string name="qs_auto_switch_mode1">When there are no notifications</string>
     <string name="qs_auto_switch_mode2">When there are no clearable notifications</string>
 
+    <!-- Statusbar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">Enable double-tap to sleep</string>
+    <string name="pref_statusbar_dt2s_summary">Double-tap on status bar puts device to sleep</string>
+
 </resources>
