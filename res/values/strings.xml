@@ -1235,4 +1235,14 @@
     <string name="pref_statusbar_dt2s_title">Enable double-tap to sleep</string>
     <string name="pref_statusbar_dt2s_summary">Double-tap on status bar puts device to sleep</string>
 
+    <!-- Animation scales -->
+    <string name="animation_scale0">Animation off</string>
+    <string name="animation_scale1">Animation scale .25x</string>
+    <string name="animation_scale2">Animation scale .5x</string>
+    <string name="animation_scale3">Animation scale 1x</string>
+    <string name="animation_scale4">Animation scale 1.5x</string>
+    <string name="animation_scale5">Animation scale 2x</string>
+    <string name="animation_scale6">Animation scale 5x</string>
+    <string name="animation_scale7">Animation scale 10x</string>
+
 </resources>
