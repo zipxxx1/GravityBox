@@ -90,6 +90,7 @@ public class ModHwKeys {
     public static final String ACTION_LAUNCH_APP = "gravitybox.intent.action.LAUNCH_APP";
     public static final String EXTRA_APP_ID = "launchAppId";
     public static final String ACTION_SHOW_VOLUME_PANEL = "gravitybox.intent.action.SHOW_VOLUME_PANEL";
+    public static final String ACTION_SHOW_BRIGHTNESS_DIALOG = "gravitybox.intent.action.SHOW_BRIGHTNESS_DIALOG";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
 
@@ -332,6 +333,8 @@ public class ModHwKeys {
                 launchCustomApp(intent.getIntExtra(EXTRA_APP_ID, GravityBoxSettings.HWKEY_ACTION_CUSTOM_APP));
             } else if (action.equals(ACTION_SHOW_VOLUME_PANEL)) {
                 showVolumePanel();
+            } else if (action.equals(ACTION_SHOW_BRIGHTNESS_DIALOG)) {
+                showBrightnessDialog();
             }
         }
     };
@@ -829,6 +832,7 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_VOICE_SEARCH);
             intentFilter.addAction(ACTION_LAUNCH_APP);
             intentFilter.addAction(ACTION_SHOW_VOLUME_PANEL);
+            intentFilter.addAction(ACTION_SHOW_BRIGHTNESS_DIALOG);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -1056,6 +1060,8 @@ public class ModHwKeys {
             showVolumePanel();
         } else if (action == GravityBoxSettings.HWKEY_ACTION_LAUNCHER_DRAWER) {
             showLauncherDrawer();
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_BRIGHTNESS_DIALOG) {
+            showBrightnessDialog();
         }
     }
 
@@ -1469,6 +1475,15 @@ public class ModHwKeys {
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
             log("Error executing showLauncherDrawer: " + t.getMessage());
+        }
+    }
+
+    private static void showBrightnessDialog() {
+        try {
+            Intent intent = new Intent("android.intent.action.SHOW_BRIGHTNESS_DIALOG");
+            mContext.sendBroadcast(intent);
+        } catch (Throwable t) {
+            log("Error executing showBrightnessDialog: " + t.getMessage());
         }
     }
 }

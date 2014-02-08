@@ -323,6 +323,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int HWKEY_ACTION_SCREENSHOT = 19;
     public static final int HWKEY_ACTION_VOLUME_PANEL = 20;
     public static final int HWKEY_ACTION_LAUNCHER_DRAWER = 21;
+    public static final int HWKEY_ACTION_BRIGHTNESS_DIALOG = 22;
     public static final int HWKEY_DOUBLETAP_SPEED_DEFAULT = 400;
     public static final int HWKEY_KILL_DELAY_DEFAULT = 1000;
     public static final int HWKEY_TORCH_DISABLED = 0;
@@ -1453,6 +1454,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.hasFlash(getActivity())) {
                 actEntries.remove(getString(R.string.hwkey_action_torch));
                 actEntryValues.remove("11");
+            }
+            if (Build.VERSION.SDK_INT < 18) {
+                actEntries.remove(getString(R.string.hwkey_action_brightness_dialog));
+                actEntryValues.remove("22");
             }
             CharSequence[] actionEntries = actEntries.toArray(new CharSequence[actEntries.size()]);
             CharSequence[] actionEntryValues = actEntryValues.toArray(new CharSequence[actEntryValues.size()]);

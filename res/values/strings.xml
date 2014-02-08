@@ -1245,4 +1245,7 @@
     <string name="animation_scale6">Animation scale 5x</string>
     <string name="animation_scale7">Animation scale 10x</string>
 
+    <!-- Key Actions: Show brightness dialog -->
+    <string name="hwkey_action_brightness_dialog">Show brightness dialog</string>
+
 </resources>
