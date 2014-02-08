@@ -1192,4 +1192,13 @@
     <string name="pref_cat_lockscreen_sliding_challenge_title">Кольцо разблокировки</string>
     <string name="pref_cat_lockscreen_statusbar_title">Строка состояния</string>
 
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">Отключено</string>
+    <string name="qs_auto_switch_mode1">При отсутствии уведомлений</string>
+    <string name="qs_auto_switch_mode2">При отсутствии очищаемых уведомлений</string>
+
+    <!-- Notification drawer: expand all notifications -->
+    <string name="pref_notif_expand_all_title">Раскрыть все уведомления</string>
+    <string name="pref_notif_expand_all_summary">Автоматическое раскрытие всех уведомлений, если включено</string>
+
 </resources>
