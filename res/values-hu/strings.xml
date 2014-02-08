@@ -552,7 +552,7 @@
     <string name="pref_powermenu_screenshot_title">Képernyőkép a kikapcsoló menüben</string>    
 
     <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Feloldó kör beállítások</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">Feloldó kör célpontok</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Feloldó kör célpontok főkapcsoló</string>
     <string name="pref_lockscreen_ring_targets_app_title">Célpont alkalmazás %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Feloldó kör függőleges eltolása</string>
@@ -642,7 +642,7 @@
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">Gyors feloldás</string>
-    <string name="pref_lockscreen_quick_unlock_summary">Automatikuson feloldás, amikor a helyes PIN/jelszó megadásra kerül</string>
+    <string name="pref_lockscreen_quick_unlock_summary">Automatikus feloldás, amikor a helyes PIN/jelszó megadásra kerül</string>
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">Letiltva</string>
@@ -1151,10 +1151,79 @@
 
     <!-- Key Actions: Show launcher drawer -->
     <string name="hwkey_action_launcher_drawer">Indító alkalmazástár mutatása</string>
-
-	<!-- Launcher tweaks: resize any widget -->
+    
+    <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Egyéb</string>
     <string name="pref_launcher_resize_widget_title">Bármely widget átméretezése</string>
     <string name="pref_launcher_resize_widget_summary">Átméretezi bármelyik widget-et bármely méretre a kezdőképernyőn (Indító alkalmazás újraindítása szükséges)</string>
+
+    <!-- Icon picker -->
+    <string name="icon_picker_choose_icon_title">Ikon kiválasztása</string>
+    <string name="shortcuts_icon_picker_alarm">Ébresztés</string>
+    <string name="shortcuts_icon_picker_andy">Android robot</string>
+    <string name="shortcuts_icon_picker_battery">Akkumlátor</string>
+    <string name="shortcuts_icon_picker_browser">Böngésző</string>
+    <string name="shortcuts_icon_picker_calendar">Naptár</string>
+    <string name="shortcuts_icon_picker_camera">Kamera</string>
+    <string name="shortcuts_icon_picker_cloud">Felhő</string>
+    <string name="shortcuts_icon_picker_contact">Kapcsolat</string>
+    <string name="shortcuts_icon_picker_directdial">Közvetlen Hívás</string>
+    <string name="shortcuts_icon_picker_directmessage">Közvetlen Üzenet</string>
+    <string name="shortcuts_icon_picker_drive">Drive</string>
+    <string name="shortcuts_icon_picker_dropbox">Dropbox</string>
+    <string name="shortcuts_icon_picker_email">Email</string>
+    <string name="shortcuts_icon_picker_email2">Alternatív Email</string>
+    <string name="shortcuts_icon_picker_evernote">Evernote</string>
+    <string name="shortcuts_icon_picker_facebook">Facebook</string>
+    <string name="shortcuts_icon_picker_favorite">Kedvencek</string>
+    <string name="shortcuts_icon_picker_file_browser">Fájlkezelő</string>
+    <string name="shortcuts_icon_picker_file_browser2">Alternatív Fájlkezelő</string>
+    <string name="shortcuts_icon_picker_fitness">Fitness</string>
+    <string name="shortcuts_icon_picker_gallery">Galéria</string>
+    <string name="shortcuts_icon_picker_gears">Beállítások</string>
+    <string name="shortcuts_icon_picker_google_small">Google</string>
+    <string name="shortcuts_icon_picker_gplus">Google Plus</string>
+    <string name="shortcuts_icon_picker_gtalk">Hangouts</string>
+    <string name="shortcuts_icon_picker_help">Súgó</string>
+    <string name="shortcuts_icon_picker_joystick">Joystick</string>
+    <string name="shortcuts_icon_picker_key">Jelszavak/Fiókok</string>
+    <string name="shortcuts_icon_picker_laptop">Laptop</string>
+    <string name="shortcuts_icon_picker_notes">Jegyzetek</string>
+    <string name="shortcuts_icon_picker_luggage">Utazás</string>
+    <string name="shortcuts_icon_picker_maps">Térképek</string>
+    <string name="shortcuts_icon_picker_market">Áruház</string>
+    <string name="shortcuts_icon_picker_movie">Filmek</string>
+    <string name="shortcuts_icon_picker_music">Zene</string>
+    <string name="shortcuts_icon_picker_nav">Navigáció</string>
+    <string name="shortcuts_icon_picker_phone">Telefon</string>
+    <string name="shortcuts_icon_picker_package">Csomag</string>
+    <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
+    <string name="shortcuts_icon_picker_play">Play</string>
+    <string name="shortcuts_icon_picker_pocket">Táska</string>
+    <string name="shortcuts_icon_picker_quicksettings">Gyorsbeállítások</string>
+    <string name="shortcuts_icon_picker_rss">RSS Feed</string>
+    <string name="shortcuts_icon_picker_sdcard">SD kártya</string>
+    <string name="shortcuts_icon_picker_search">Keresés</string>
+    <string name="shortcuts_icon_picker_sms">Üzenetkezelés</string>
+    <string name="shortcuts_icon_picker_tasks">Feladatok</string>
+    <string name="shortcuts_icon_picker_terminal">Terminál</string>
+    <string name="shortcuts_icon_picker_transit">Utazás</string>
+    <string name="shortcuts_icon_picker_tv">TV</string>
+    <string name="shortcuts_icon_picker_twitter">Twitter</string>
+    <string name="shortcuts_icon_picker_unlock">Feloldás</string>
+
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">Csúsztatás feloldás előtt</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">Lehetővé teszi a feloldó kör célpontok és a biztonsági feloldás együttes, csúsztatással való használatát</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">Widget-ek</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">Csúsztatási művelet</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Értesítési sáv</string>
+
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">Letiltva</string>
+    <string name="qs_auto_switch_mode1">Amikor nincsenek értesítések</string>
+    <string name="qs_auto_switch_mode2">Amikor nincsenek törölhető értesítések</string>
 
 </resources>
