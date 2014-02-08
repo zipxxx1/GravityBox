@@ -293,15 +293,15 @@
     </string-array>
 
     <!-- Titles for window animation scale preference. [CHAR LIMIT=35] -->
-    <string-array name="window_animation_scale_entries">
-        <item>Animation off</item>
-        <item>Animation scale .25x</item>
-        <item>Animation scale .5x</item>
-        <item>Animation scale 1x</item>
-        <item>Animation scale 1.5x</item>
-        <item>Animation scale 2x</item>
-        <item>Animation scale 5x</item>
-        <item>Animation scale 10x</item>
+    <string-array name="window_animation_scale_entries" translatable="false">
+        <item>@string/animation_scale0</item>
+        <item>@string/animation_scale1</item>
+        <item>@string/animation_scale2</item>
+        <item>@string/animation_scale3</item>
+        <item>@string/animation_scale4</item>
+        <item>@string/animation_scale5</item>
+        <item>@string/animation_scale6</item>
+        <item>@string/animation_scale7</item>
     </string-array>
 
     <!-- Values for window animation scale preference. -->
@@ -317,15 +317,15 @@
     </string-array>
 
     <!-- Titles for transition animation scale preference. [CHAR LIMIT=35] -->
-    <string-array name="transition_animation_scale_entries">
-        <item>Animation off</item>
-        <item>Animation scale .25x</item>
-        <item>Animation scale .5x</item>
-        <item>Animation scale 1x</item>
-        <item>Animation scale 1.5x</item>
-        <item>Animation scale 2x</item>
-        <item>Animation scale 5x</item>
-        <item>Animation scale 10x</item>
+    <string-array name="transition_animation_scale_entries" translatable="false">
+        <item>@string/animation_scale0</item>
+        <item>@string/animation_scale1</item>
+        <item>@string/animation_scale2</item>
+        <item>@string/animation_scale3</item>
+        <item>@string/animation_scale4</item>
+        <item>@string/animation_scale5</item>
+        <item>@string/animation_scale6</item>
+        <item>@string/animation_scale7</item>
     </string-array>
 
     <!-- Values for transition animation scale preference. -->
@@ -342,14 +342,14 @@
 
     <!-- Titles for animator duration scale preference. [CHAR LIMIT=35] -->
     <string-array name="animator_duration_scale_entries">
-        <item>Animation off</item>
-        <item>Animation scale .25x</item>
-        <item>Animation scale .5x</item>
-        <item>Animation scale 1x</item>
-        <item>Animation scale 1.5x</item>
-        <item>Animation scale 2x</item>
-        <item>Animation scale 5x</item>
-        <item>Animation scale 10x</item>
+        <item>@string/animation_scale0</item>
+        <item>@string/animation_scale1</item>
+        <item>@string/animation_scale2</item>
+        <item>@string/animation_scale3</item>
+        <item>@string/animation_scale4</item>
+        <item>@string/animation_scale5</item>
+        <item>@string/animation_scale6</item>
+        <item>@string/animation_scale7</item>
     </string-array>
 
     <!-- Values for animator duration scale preference. -->
