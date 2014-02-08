@@ -40,6 +40,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.format.DateFormat;
 import android.text.style.RelativeSizeSpan;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
@@ -62,6 +63,7 @@ public class ModStatusBar {
     private static final String CLASS_STATUSBAR_NOTIF = "android.service.notification.StatusBarNotification";
     private static final String CLASS_NETWORK_CONTROLLER = "com.android.systemui.statusbar.policy.NetworkController";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
+    private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
     private static final boolean DEBUG = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
@@ -98,6 +100,8 @@ public class ModStatusBar {
     private static TextView mCarrierTextView;
     private static String mCarrierText;
     private static boolean mNotifExpandAll;
+    private static boolean mDt2sEnabled;
+    private static GestureDetector mDoubletapGesture;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -205,6 +209,9 @@ public class ModStatusBar {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
                 mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_DT2S_CHANGED) &&
+                    intent.hasExtra(GravityBoxSettings.EXTRA_SB_DT2S)) {
+                mDt2sEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_DT2S, false);
             }
         }
     };
@@ -451,6 +458,7 @@ public class ModStatusBar {
             final Class<?> powerManagerClass = XposedHelpers.findClass(CLASS_POWER_MANAGER, classLoader);
             final Class<?> networkControllerClass = XposedHelpers.findClass(CLASS_NETWORK_CONTROLLER, classLoader);
             final Class<?> expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
+            final Class<?> phoneStatusbarViewClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_VIEW, classLoader);
 
             final Class<?>[] loadAnimParamArgs = new Class<?>[2];
             loadAnimParamArgs[0] = int.class;
@@ -461,6 +469,7 @@ public class ModStatusBar {
             mOngoingNotif = prefs.getString(GravityBoxSettings.PREF_KEY_ONGOING_NOTIFICATIONS, "");
             mCarrierText = prefs.getString(GravityBoxSettings.PREF_KEY_NOTIF_CARRIER_TEXT, null);
             mNotifExpandAll = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NOTIF_EXPAND_ALL, false);
+            mDt2sEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DT2S, false);
 
             XposedBridge.hookAllConstructors(phoneStatusBarPolicyClass, new XC_MethodHook() {
                 @Override
@@ -516,6 +525,7 @@ public class ModStatusBar {
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER_TEXT_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DT2S_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
@@ -661,6 +671,34 @@ public class ModStatusBar {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mNotifExpandAll) {
                         param.setResult(true);
+                    }
+                }
+            });
+
+            XposedBridge.hookAllConstructors(phoneStatusbarViewClass, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    final Context context = (Context) param.args[0];
+                    if (context == null) return;
+
+                    mDoubletapGesture = new GestureDetector(context, 
+                            new GestureDetector.SimpleOnGestureListener() {
+                        @Override
+                        public boolean onDoubleTap(MotionEvent e) {
+                            Intent intent = new Intent(ModHwKeys.ACTION_SLEEP);
+                            context.sendBroadcast(intent);
+                            return true;
+                        }
+                    });
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(phoneStatusbarViewClass, "onTouchEvent",
+                    MotionEvent.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mDt2sEnabled && mDoubletapGesture != null) {
+                        mDoubletapGesture.onTouchEvent((MotionEvent)param.args[0]);
                     }
                 }
             });
