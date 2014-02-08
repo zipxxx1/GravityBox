@@ -649,6 +649,7 @@ public class ModHwKeys {
                         if (!hasAction(HwKey.RECENTS) && areHwKeysEnabled()) return;
 
                         if (!down) {
+                            cancelPreloadRecentApps();
                             mHandler.removeCallbacks(mRecentsLongPress);
                             if (!mIsRecentsLongPressed) {
                                 if (!areHwKeysEnabled() &&
@@ -668,6 +669,11 @@ public class ModHwKeys {
                         } else {
                             if (event.getRepeatCount() == 0) {
                                 mIsRecentsLongPressed = false;
+                                if (mRecentsSingletapAction == GravityBoxSettings.HWKEY_ACTION_DEFAULT ||
+                                        mRecentsSingletapAction == GravityBoxSettings.HWKEY_ACTION_RECENT_APPS ||
+                                        mRecentsLongpressAction == GravityBoxSettings.HWKEY_ACTION_RECENT_APPS) {
+                                    preloadRecentApps();
+                                }
                                 if (mRecentsLongpressAction != GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
                                     mHandler.postDelayed(mRecentsLongPress, 
                                             getLongpressTimeoutForAction(mRecentsLongpressAction));
@@ -1458,6 +1464,33 @@ public class ModHwKeys {
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
             log("Error executing showBrightnessDialog: " + t.getMessage());
+        }
+    }
+
+    private static boolean mPreloadedRecentApps;
+    private static void preloadRecentApps() {
+        mPreloadedRecentApps = true;
+        try {
+            final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService");
+            if (sbService != null) {
+                XposedHelpers.callMethod(sbService, "preloadRecentApps");
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void cancelPreloadRecentApps() {
+        if (mPreloadedRecentApps) {
+            mPreloadedRecentApps = false;
+            try {
+                final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService");
+                if (sbService != null) {
+                    XposedHelpers.callMethod(sbService, "cancelPreloadRecentApps");
+                }
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
     }
 }
