@@ -178,11 +178,11 @@ public class ShortcutActivity extends ListActivity {
             list.add(new KillAppShortcut(mContext));
             list.add(new SwitchAppShortcut(mContext));
         }
+        list.add(new AppLauncherShortcut(mContext));
         if (Utils.isAppInstalled(mContext, GravityBoxSettings.APP_GOOGLE_NOW) &&
                 Utils.isAppInstalled(mContext, GravityBoxSettings.APP_GOOGLE_HOME)) {
-            list.add(new AppLauncherShortcut(mContext));
+            list.add(new LauncherDrawerShortcut(mContext));
         }
-        list.add(new LauncherDrawerShortcut(mContext));
         list.add(new RotationLockShortcut(mContext));
         list.add(new SleepShortcut(mContext));
 
