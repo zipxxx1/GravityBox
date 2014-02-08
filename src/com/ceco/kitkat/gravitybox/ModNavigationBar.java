@@ -511,8 +511,10 @@ public class ModNavigationBar {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         prefs.reload();
                         mGlowPadView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowPadView");
-                        XposedHelpers.setIntField(mGlowPadView, "mVibrationDuration", 20);
-                        XposedHelpers.callMethod(mGlowPadView, "setVibrateEnabled", true);
+                        if (XposedHelpers.getIntField(mGlowPadView, "mVibrationDuration") == 0) {
+                            XposedHelpers.setIntField(mGlowPadView, "mVibrationDuration", 20);
+                            XposedHelpers.callMethod(mGlowPadView, "setVibrateEnabled", true);
+                        }
                         setRingTargets();
                     }
                 });
