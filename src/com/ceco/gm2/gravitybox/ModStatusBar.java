@@ -721,7 +721,7 @@ public class ModStatusBar {
                                 if (mCarrierText[i].trim().isEmpty()) {
                                     mCarrierTextView[i].setText("");
                                     mCarrierTextView[i].setVisibility(View.GONE);
-                                    mCarrierTextView[i == 0 ? 1 : 0].setGravity(0x11);
+                                    mCarrierTextView[i == 0 ? 1 : 0].setGravity(Gravity.CENTER);
                                     mCarrierDividerImageView.setVisibility(View.GONE);
                                 } else {
                                     mCarrierTextView[i].setText(mCarrierText[i]);
@@ -731,8 +731,8 @@ public class ModStatusBar {
                         }
                         if (mCarrierTextView[0].getVisibility() == View.VISIBLE &&
                                 mCarrierTextView[1].getVisibility() == View.VISIBLE) {
-                            mCarrierTextView[0].setGravity(0x05);
-                            mCarrierTextView[1].setGravity(0x03);
+                            mCarrierTextView[0].setGravity(Gravity.RIGHT);
+                            mCarrierTextView[1].setGravity(Gravity.LEFT);
                             mCarrierDividerImageView.setVisibility(View.VISIBLE);
                         } else {
                             mCarrierDividerImageView.setVisibility(View.GONE);

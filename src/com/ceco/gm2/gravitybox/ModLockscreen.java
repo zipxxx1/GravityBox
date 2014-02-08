@@ -55,6 +55,7 @@ import android.view.Surface;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewManager;
 import android.view.WindowManager;
@@ -707,7 +708,7 @@ public class ModLockscreen {
                                         if (mCarrierText[i].trim().isEmpty()) {
                                             carrierTextView[i].setText("");
                                             carrierTextView[i].setVisibility(View.GONE);
-                                            carrierTextView[i == 0 ? 1 : 0].setGravity(0x11);
+                                            carrierTextView[i == 0 ? 1 : 0].setGravity(Gravity.CENTER);
                                         } else {
                                             carrierTextView[i].setText(mCarrierText[i]);
                                             carrierTextView[i].setVisibility(View.VISIBLE);
