@@ -815,9 +815,9 @@
     
     <!-- Disable data network type icons -->
     <string name="pref_disable_data_network_type_icons_title">Откл индикаторы типа сети</string>
-
-<string name="pref_disable_data_network_type_icons_summary">Отключение индикаторов 3G/G рядом с сигналом</string>
-                            <!-- HW Keys Navigation Bar warning -->
+    <string name="pref_disable_data_network_type_icons_summary">Отключение индикаторов 3G/G рядом с сигналом</string>
+	
+    <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Для включения поддержки действий для панели навигации, необходимо 
         переписать системные умолчания в меню настроек навигационной панели</string>
     
@@ -1216,5 +1216,19 @@
     <string name="shortcuts_icon_picker_tv">ТВ</string>
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Разблокировка</string>
+
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">Кольцо перед блокировкой</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">Возможность использования ярлыков кольца перед разблокировкой пин/графическим ключом</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">Виджеты</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">Кольцо разблокировки</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Строка состояния</string>
+
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">Отключено</string>
+    <string name="qs_auto_switch_mode1">При отсутствии уведомлений</string>
+    <string name="qs_auto_switch_mode2">При отсутствии очищаемых уведомлений</string>
 
 </resources>
