@@ -1455,6 +1455,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 actEntries.remove(getString(R.string.hwkey_action_torch));
                 actEntryValues.remove("11");
             }
+            if (Build.VERSION.SDK_INT < 17) {
+                actEntries.remove(getString(R.string.hwkey_action_expand_quicksettings));
+                actEntryValues.remove("18");
+            }
             if (!(Utils.isAppInstalled(getActivity(), APP_GOOGLE_NOW) &&
                     Utils.isAppInstalled(getActivity(), APP_GOOGLE_HOME))) {
                 actEntries.remove(getString(R.string.hwkey_action_launcher_drawer));
