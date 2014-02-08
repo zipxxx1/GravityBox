@@ -537,7 +537,7 @@
     <string name="pref_powermenu_screenshot_title">Captura de ecrã no Menu Desligar</string>
 
     <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Definições do anel de desbloqueio</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">Alvos do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Ativação global dos alvos do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_app_title">Alvo número %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Desvio vertical do anel de desbloqueio</string>
@@ -1146,5 +1146,88 @@
     <string name="pref_cat_launcher_other_title">Outros</string>
     <string name="pref_launcher_resize_widget_title">Redimensionar qualquer widget</string>
     <string name="pref_launcher_resize_widget_summary">Permite redimensionar qualquer tipo de widget para qualquer tamanho no ambiente de trabalho (necessário reiniciar o inicializador)</string>
+
+    <!-- Icon picker -->
+    <string name="icon_picker_choose_icon_title">Escolha um ícone</string>
+    <string name="shortcuts_icon_picker_alarm">Alarme</string>
+    <string name="shortcuts_icon_picker_andy">Andy</string>
+    <string name="shortcuts_icon_picker_battery">Bateria</string>
+    <string name="shortcuts_icon_picker_browser">Navegador</string>
+    <string name="shortcuts_icon_picker_calendar">Calendário</string>
+    <string name="shortcuts_icon_picker_camera">Câmara</string>
+    <string name="shortcuts_icon_picker_cloud">Nuvem</string>
+    <string name="shortcuts_icon_picker_contact">Contato</string>
+    <string name="shortcuts_icon_picker_directdial">Ligação direta</string>
+    <string name="shortcuts_icon_picker_directmessage">Mensagem direta</string>
+    <string name="shortcuts_icon_picker_drive">Drive</string>
+    <string name="shortcuts_icon_picker_dropbox">Dropbox</string>
+    <string name="shortcuts_icon_picker_email">Email</string>
+    <string name="shortcuts_icon_picker_email2">Email alternativo</string>
+    <string name="shortcuts_icon_picker_evernote">Evernote</string>
+    <string name="shortcuts_icon_picker_facebook">Facebook</string>
+    <string name="shortcuts_icon_picker_favorite">Favorito</string>
+    <string name="shortcuts_icon_picker_file_browser">Explorador de ficheiros</string>
+    <string name="shortcuts_icon_picker_file_browser2">Explorador de ficheiros alternativo</string>
+    <string name="shortcuts_icon_picker_fitness">Fitness</string>
+    <string name="shortcuts_icon_picker_gallery">Galeria</string>
+    <string name="shortcuts_icon_picker_gears">Gears</string>
+    <string name="shortcuts_icon_picker_google_small">Google</string>
+    <string name="shortcuts_icon_picker_gplus">Google+</string>
+    <string name="shortcuts_icon_picker_gtalk">Hangouts</string>
+    <string name="shortcuts_icon_picker_help">Ajuda</string>
+    <string name="shortcuts_icon_picker_joystick">Joystick</string>
+    <string name="shortcuts_icon_picker_key">Contas</string>
+    <string name="shortcuts_icon_picker_laptop">Portátil</string>
+    <string name="shortcuts_icon_picker_notes">Notas</string>
+    <string name="shortcuts_icon_picker_luggage">Viagens</string>
+    <string name="shortcuts_icon_picker_maps">Mapas</string>
+    <string name="shortcuts_icon_picker_market">Loja</string>
+    <string name="shortcuts_icon_picker_movie">Filmes</string>
+    <string name="shortcuts_icon_picker_music">Música</string>
+    <string name="shortcuts_icon_picker_nav">Navegação</string>
+    <string name="shortcuts_icon_picker_phone">Telefone</string>
+    <string name="shortcuts_icon_picker_package">Pacote</string>
+    <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
+    <string name="shortcuts_icon_picker_play">Play</string>
+    <string name="shortcuts_icon_picker_pocket">Pocket</string>
+    <string name="shortcuts_icon_picker_quicksettings">Definições rápidas</string>
+    <string name="shortcuts_icon_picker_rss">Ligação RSS</string>
+    <string name="shortcuts_icon_picker_sdcard">Cartão SD</string>
+    <string name="shortcuts_icon_picker_search">Pesquisa</string>
+    <string name="shortcuts_icon_picker_sms">Mensagens</string>
+    <string name="shortcuts_icon_picker_tasks">Tarefas</string>
+    <string name="shortcuts_icon_picker_terminal">Terminal</string>
+    <string name="shortcuts_icon_picker_transit">Trânsito</string>
+    <string name="shortcuts_icon_picker_tv">Televisão</string>
+    <string name="shortcuts_icon_picker_twitter">Twitter</string>
+    <string name="shortcuts_icon_picker_unlock">Desbloqueio</string>
+
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">Deslizar antes de desbloquear</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">Permiter mostrar método de deslizar para desbloquear (com alvos de desbloqueio) antes do método de bloqueio seguro</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">Deslizar para desbloquear</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Barra de Status</string>
+
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">Desativada</string>
+    <string name="qs_auto_switch_mode1">Sempre que não existirem notificações</string>
+    <string name="qs_auto_switch_mode2">Sempre que não existirem notificações possíveis de limpar</string>
+
+    <!-- Statusbar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">Ativar dupla pressão para hibernar</string>
+    <string name="pref_statusbar_dt2s_summary">Permite hibernar o dispositivo após dupla pressão da Barra de Status</string>
+
+    <!-- Animation scales -->
+    <string name="animation_scale0">Animação desligada</string>
+    <string name="animation_scale1">Animação escala .25x</string>
+    <string name="animation_scale2">Animação escala .5x</string>
+    <string name="animation_scale3">Animação escala 1x</string>
+    <string name="animation_scale4">Animação escala 1.5x</string>
+    <string name="animation_scale5">Animação escala 2x</string>
+    <string name="animation_scale6">Animação escala 5x</string>
+    <string name="animation_scale7">Animação escala 10x</string>
 
 </resources>
