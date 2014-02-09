@@ -1198,4 +1198,22 @@
     <string name="animation_scale6">Animação escala 5x</string>
     <string name="animation_scale7">Animação escala 10x</string>
 
+    <!-- QS Tiles: Tile label style -->
+    <string name="pref_qs_tile_label_style_title">Estilo do texto dos painéis</string>
+    <string name="tile_label_style_normal">Normal</string>
+    <string name="tile_label_style_allcaps">Tudo em maiúsculas</string>
+    <string name="tile_label_style_hidden">Oculto</string>
+
+    <!-- Key Actions: Show brightness dialog -->
+    <string name="hwkey_action_brightness_dialog">Mostrar controlo de brilho</string>
+
+    <!-- Navbar ring: Haptic feedback -->
+    <string name="pref_navbar_ring_haptic_feedback_title">Reconhecimento tátil</string>
+    <string name="navring_haptic_feedback_default">Padrão</string>
+    <string name="navring_haptic_feedback_enabled">Ativado</string>
+    <string name="navring_haptic_feedback_disabled">Desativado</string>
+
+    <!-- Quick pull down size -->
+    <string name="pref_quick_pulldown_size_title">Àrea de acesso rápido</string>
+
 </resources>
