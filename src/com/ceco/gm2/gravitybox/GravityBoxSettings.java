@@ -85,6 +85,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE = "pref_qs_hide_on_change";
     public static final String PREF_KEY_QUICK_SETTINGS_AUTOSWITCH = "pref_auto_switch_qs2";
     public static final String PREF_KEY_QUICK_PULLDOWN = "pref_quick_pulldown";
+    public static final String PREF_KEY_QUICK_PULLDOWN_SIZE = "pref_quick_pulldown_size";
     public static final int QUICK_PULLDOWN_OFF = 0;
     public static final int QUICK_PULLDOWN_RIGHT = 1;
     public static final int QUICK_PULLDOWN_LEFT = 2;
@@ -489,6 +490,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_QS_COLS = "qsCols";
     public static final String EXTRA_QS_AUTOSWITCH = "qsAutoSwitch";
     public static final String EXTRA_QUICK_PULLDOWN = "quickPulldown";
+    public static final String EXTRA_QUICK_PULLDOWN_SIZE = "quickPulldownSize";
     public static final String EXTRA_QS_TILE_STYLE = "qsTileStyle";
     public static final String EXTRA_QS_HIDE_ON_CHANGE = "qsHideOnChange";
 
@@ -888,6 +890,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatStatusbarQs;
         private ListPreference mPrefAutoSwitchQs;
         private ListPreference mPrefQuickPulldown;
+        private SeekBarPreference mPrefQuickPulldownSize;
         private PreferenceScreen mPrefCatNotifDrawerStyle;
         private ListPreference mPrefNotifBackground;
         private ColorPickerPreference mPrefNotifColor;
@@ -1115,6 +1118,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatStatusbarColors = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_COLORS);
             mPrefAutoSwitchQs = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
             mPrefQuickPulldown = (ListPreference) findPreference(PREF_KEY_QUICK_PULLDOWN);
+            mPrefQuickPulldownSize = (SeekBarPreference) findPreference(PREF_KEY_QUICK_PULLDOWN_SIZE);
 
             mPrefCatNotifDrawerStyle = (PreferenceScreen) findPreference(PREF_CAT_KEY_NOTIF_DRAWER_STYLE);
             mPrefNotifBackground = (ListPreference) findPreference(PREF_KEY_NOTIF_BACKGROUND);
@@ -1284,6 +1288,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (sSystemProperties.isTablet) {
                 mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
                 mPrefCatStatusbarQs.removePreference(mPrefQuickPulldown);
+                mPrefCatStatusbarQs.removePreference(mPrefQuickPulldownSize);
             }
 
             // Filter preferences according to feature availability 
@@ -1972,6 +1977,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_PIE_LONGPRESS_DELAY)) {
                 mPrefPieLongpressDelay.setSummary(mPrefPieLongpressDelay.getEntry());
             }
+
+            if (key == null || key.equals(PREF_KEY_QUICK_PULLDOWN)) {
+                mPrefQuickPulldownSize.setEnabled(!"0".equals(mPrefQuickPulldown.getValue()));
+            }
         }
 
         @Override
@@ -2021,6 +2030,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QUICK_PULLDOWN, Integer.valueOf(
                         prefs.getString(PREF_KEY_QUICK_PULLDOWN, "0")));
+            } else if (key.equals(PREF_KEY_QUICK_PULLDOWN_SIZE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QUICK_PULLDOWN_SIZE,
+                        prefs.getInt(PREF_KEY_QUICK_PULLDOWN_SIZE, 15));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_TILE_STYLE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_TILE_STYLE, Integer.valueOf(

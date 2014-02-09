@@ -60,6 +60,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.PointF;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
@@ -96,8 +97,6 @@ public class ModQuickSettings {
     private static final String CLASS_QS_MODEL_STATE = "com.android.systemui.statusbar.phone.QuickSettingsModel.State";
     private static final boolean DEBUG = false;
 
-    private static final float STATUS_BAR_SETTINGS_FLIP_PERCENTAGE_RIGHT = 0.15f;
-    private static final float STATUS_BAR_SETTINGS_FLIP_PERCENTAGE_LEFT = 0.85f;
     private static final float STATUS_BAR_SWIPE_VERTICAL_MAX_PERCENTAGE = 0.025f;
     private static final float STATUS_BAR_SWIPE_TRIGGER_PERCENTAGE = 0.05f;
     private static final float STATUS_BAR_SWIPE_MOVE_PERCENTAGE = 0.2f;
@@ -131,6 +130,7 @@ public class ModQuickSettings {
     private static float mSwipeDirection;
     private static boolean mTrackingSwipe;
     private static boolean mSwipeTriggered;
+    private static PointF mQuickPulldownSize = new PointF(0.85f, 0.15f);
 
     private static ArrayList<AQuickSettingsTile> mTiles;
     private static Map<String, View> mAllTileViews;
@@ -227,6 +227,11 @@ public class ModQuickSettings {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_TILE_SPAN_DISABLE)) {
                     mQsTileSpanDisable = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_TILE_SPAN_DISABLE, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QUICK_PULLDOWN_SIZE)) {
+                    float size = intent.getIntExtra(GravityBoxSettings.EXTRA_QUICK_PULLDOWN_SIZE, 15) / 100f;
+                    mQuickPulldownSize.set(1-size, size);
+                    if (DEBUG) log("mQuickPulldownSize=" + mQuickPulldownSize);
                 }
             }
 
@@ -444,6 +449,9 @@ public class ModQuickSettings {
                     mPrefs.getString(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, "0"));
             mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
             mQsTileSpanDisable = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_TILE_SPAN_DISABLE, false);
+
+            float size = mPrefs.getInt(GravityBoxSettings.PREF_KEY_QUICK_PULLDOWN_SIZE, 15) / 100f;
+            mQuickPulldownSize.set(1-size, size);
 
             try {
                 mQuickPulldown = Integer.valueOf(mPrefs.getString(
@@ -737,12 +745,10 @@ public class ModQuickSettings {
                                     !isSimSwitchPanelShowing()) {
                                 shouldFlip = true;
                             } else if (mQuickPulldown == GravityBoxSettings.QUICK_PULLDOWN_RIGHT
-                                        && (event.getX(0) > (width * 
-                                        (1.0f - STATUS_BAR_SETTINGS_FLIP_PERCENTAGE_RIGHT)))) {
+                                        && (mGestureStartX > (width * (1.0f - mQuickPulldownSize.y)))) {
                                 shouldFlip = true;
                             } else if (mQuickPulldown == GravityBoxSettings.QUICK_PULLDOWN_LEFT
-                                        && (event.getX(0) < (width *
-                                        (1.0f - STATUS_BAR_SETTINGS_FLIP_PERCENTAGE_LEFT)))) {
+                                        && (mGestureStartX < (width * (1.0f - mQuickPulldownSize.x)))) {
                                 shouldFlip = true;
                             }
                             break;
