@@ -1204,4 +1204,7 @@
     <string name="navring_haptic_feedback_enabled">Włączone</string>
     <string name="navring_haptic_feedback_disabled">Wyłączone</string>
 
+    <!-- Quick pull down size -->
+    <string name="pref_quick_pulldown_size_title">Rozmiar aktywnego obszaru</string>
+
 </resources>
