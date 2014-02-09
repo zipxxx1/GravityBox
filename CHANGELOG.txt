@@ -1,3 +1,46 @@
+Changelog 2.9.6 - 09/02/2014
+--------------------------------------
+- Application picker: added support for alternative icons
+--- allows to assign alternative icons from the predefined list
+- Lockscreen/navbar ring targets: implemented dynamic icon highlighting (focusing)
+- Lockscreen tweaks:
+--- fixed freeze when slide before security unlock used in combination with maximized widgets
+--- fixed unlock ring size issues when slide before security unlock is active
+--- added independent option for slide before security unlock
+--- reorganized Lockscreen tweaks menu
+- Navbar ring: added option for Haptic feedback
+- Quick Settings:
+--- Auto-switch QS extended: added option that ignores persistent notifications
+--- added option to specify Quick pulldown size
+- Statusbar tweaks:
+--- added option for double-tap to sleep
+- Launcher tweaks:
+--- added additional options for desktop grid size
+--- fixed intent receiver leak introduced by "Show launcher drawer" action
+- Key Actions:
+--- added action to open brightness dialog (4.3 only)
+--- action for expanding QS hidden on Android 4.1 (thanks to bgcngm)
+--- action for opening app drawer hidden if supported launchers are not installed (thanks to bgcngm)
+- GB Actions: added shortcut to open brightness dialog (4.3 only)
+- Compatibility improvements for Lenovo devices (thanks to mrjavum)
+--- Included detection of Vibe UI and ROW firmware
+--- Fixed disabling data network type icons on devices with Vibe UI
+--- Fixed bug that prevented the use of custom actions on HOME button on devices running ROW firmware
+- Fixed issues with recents soft key occurring on some devices when key remapped (thanks natezire71 for testing)
+- Fixed issues with recents soft key when double-tap on home enabled
+- Added Hebrew translations (thanks to daxgirl)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Italian translations (thanks to pesa1234, valerioscifoni)
+- Updated French translation (thanks to ch-vox)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Russian translations (thanks to gaich)
+- Updated Greek translations (thanks to CTCaer)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Hungarian translation (thanks to benjoe1)
+- Updated Slovak and Czech translations
+
 Changelog 2.9.5 - 04/02/2014
 --------------------------------------
 - Fixed crash when power menu disabled on lockscreen
