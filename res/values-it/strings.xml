@@ -1057,7 +1057,7 @@
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Intensità effetto sfocato</string>
 
- <!-- Smart radio: independent delay for screen off power save event -->
+    <!-- Smart radio: independent delay for screen off power save event -->
     <string name="pref_smart_radio_screen_off_delay_title">Ritardo risparmio energetico</string>
     <string name="pref_smart_radio_screen_off_delay_summary">Ritarda l\'attivazione della modalità risparmio energetico quando lo schermo viene spento. 
         Sovrascrive il ritardo cambio modalità di rete normale se il valore è diverso da zero.</string>
@@ -1093,7 +1093,7 @@
     <string name="pref_trans_verification_summary">Se hai donato, puoi inserire l\'ID transazione della donazione per sbloccare le funzioni premium</string>
     <string name="wsc_trans_required_summary">Questa funzione richiede un ID transazione PayPal valido</string>
     
-    <!-- Pie: disable system info -->
+     <!-- Pie: disable system info -->
      <string name="pref_pie_sysinfo_disable_title">Disabilita informazioni di sistema</string>
  
      <!-- Pie: long press delay -->
@@ -1212,5 +1212,8 @@
     <string name="navring_haptic_feedback_default">Predefinito</string>
     <string name="navring_haptic_feedback_enabled">Abilitato</string>
     <string name="navring_haptic_feedback_disabled">Disabilitato</string>
-
+    
+    <!-- Quick pull down size -->
+    <string name="pref_quick_pulldown_size_title">Dimensione bordo visualizzazione rapida</string>
+    
 </resources>
