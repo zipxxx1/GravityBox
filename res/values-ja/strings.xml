@@ -1131,4 +1131,101 @@
     <!-- Key Actions: Show launcher drawer -->
     <string name="hwkey_action_launcher_drawer">ホームアプリのドロワーを表示</string>
     
+    <!-- Launcher tweaks: resize any widget -->
+    <string name="pref_cat_launcher_other_title">その他</string>
+    <string name="pref_launcher_resize_widget_title">ウィジェトをリサイズ可能にする</string>
+    <string name="pref_launcher_resize_widget_summary">ホーム画面でどのウィジェトでもリサイズできるようにします。 (要ホームアプリの再起動)</string>
+
+    <!-- Icon picker -->
+    <string name="icon_picker_choose_icon_title">アイコンの選択</string>
+    <string name="shortcuts_icon_picker_alarm">アラーム</string>
+    <string name="shortcuts_icon_picker_andy">ドロイド君</string>
+    <string name="shortcuts_icon_picker_battery">バッテリー</string>
+    <string name="shortcuts_icon_picker_browser">ブラウザ</string>
+    <string name="shortcuts_icon_picker_calendar">カレンダー</string>
+    <string name="shortcuts_icon_picker_camera">カメラ</string>
+    <string name="shortcuts_icon_picker_cloud">クラウド</string>
+    <string name="shortcuts_icon_picker_contact">連絡先</string>
+    <string name="shortcuts_icon_picker_directdial">直接発信</string>
+    <string name="shortcuts_icon_picker_directmessage">メッセージ</string>
+    <string name="shortcuts_icon_picker_drive">ドライブ</string>
+    <string name="shortcuts_icon_picker_dropbox">Dropbox</string>
+    <string name="shortcuts_icon_picker_email">メール</string>
+    <string name="shortcuts_icon_picker_email2">メール(別ver.)</string>
+    <string name="shortcuts_icon_picker_evernote">Evernote</string>
+    <string name="shortcuts_icon_picker_facebook">Facebook</string>
+    <string name="shortcuts_icon_picker_favorite">お気に入り</string>
+    <string name="shortcuts_icon_picker_file_browser">ファイルブラウザ</string>
+    <string name="shortcuts_icon_picker_file_browser2">ファイルブラウザ(別ver.)</string>
+    <string name="shortcuts_icon_picker_fitness">フィットネス</string>
+    <string name="shortcuts_icon_picker_gallery">ギャラリー</string>
+    <string name="shortcuts_icon_picker_gears">歯車</string>
+    <string name="shortcuts_icon_picker_google_small">Google</string>
+    <string name="shortcuts_icon_picker_gplus">Google Plus</string>
+    <string name="shortcuts_icon_picker_gtalk">ハングアウト</string>
+    <string name="shortcuts_icon_picker_help">ヘルプ</string>
+    <string name="shortcuts_icon_picker_joystick">ジョイスティック</string>
+    <string name="shortcuts_icon_picker_key">キー/アカウント</string>
+    <string name="shortcuts_icon_picker_laptop">ラップトップ</string>
+    <string name="shortcuts_icon_picker_notes">ノート</string>
+    <string name="shortcuts_icon_picker_luggage">旅行</string>
+    <string name="shortcuts_icon_picker_maps">地図</string>
+    <string name="shortcuts_icon_picker_market">マーケット</string>
+    <string name="shortcuts_icon_picker_movie">映画</string>
+    <string name="shortcuts_icon_picker_music">音楽</string>
+    <string name="shortcuts_icon_picker_nav">ナビ</string>
+    <string name="shortcuts_icon_picker_phone">電話</string>
+    <string name="shortcuts_icon_picker_package">パッケージ</string>
+    <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
+    <string name="shortcuts_icon_picker_play">Play</string>
+    <string name="shortcuts_icon_picker_pocket">ポケット</string>
+    <string name="shortcuts_icon_picker_quicksettings">クイック設定</string>
+    <string name="shortcuts_icon_picker_rss">RSSフィード</string>
+    <string name="shortcuts_icon_picker_sdcard">SDカード</string>
+    <string name="shortcuts_icon_picker_search">検索</string>
+    <string name="shortcuts_icon_picker_sms">SMS</string>
+    <string name="shortcuts_icon_picker_tasks">タスク</string>
+    <string name="shortcuts_icon_picker_terminal">ターミナル</string>
+    <string name="shortcuts_icon_picker_transit">乗り換え案内</string>
+    <string name="shortcuts_icon_picker_tv">TV</string>
+    <string name="shortcuts_icon_picker_twitter">Twitter</string>
+    <string name="shortcuts_icon_picker_unlock">ロック解除</string>
+
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">ロック解除前にスライド</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">リングターゲットの使用とロック解除を同時にできるようにします。</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">ウィジェト</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">スライド</string>
+    <string name="pref_cat_lockscreen_statusbar_title">ステータスバー</string>
+
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">無効</string>
+    <string name="qs_auto_switch_mode1">通知がないとき</string>
+    <string name="qs_auto_switch_mode2">削除できる通知がないとき</string>
+
+    <!-- Statusbar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">ダブルタップで消灯</string>
+    <string name="pref_statusbar_dt2s_summary">ステータスバーをダブルタップすると消灯するようにします。</string>
+
+    <!-- Animation scales -->
+    <string name="animation_scale0">アニメーション無し</string>
+    <string name="animation_scale1">アニメーション速度.25倍</string>
+    <string name="animation_scale2">アニメーション速度.5倍</string>
+    <string name="animation_scale3">アニメーション速度1倍</string>
+    <string name="animation_scale4">アニメーション速度1.5倍</string>
+    <string name="animation_scale5">アニメーション速度2倍</string>
+    <string name="animation_scale6">アニメーション速度5倍</string>
+    <string name="animation_scale7">アニメーション速度10倍</string>
+
+    <!-- Key Actions: Show brightness dialog -->
+    <string name="hwkey_action_brightness_dialog">画面の明るさダイアログを表示</string>
+
+    <!-- Navbar ring: Haptic feedback -->
+    <string name="pref_navbar_ring_haptic_feedback_title">操作時バイブレーション</string>
+    <string name="navring_haptic_feedback_default">デフォルト</string>
+    <string name="navring_haptic_feedback_enabled">有効</string>
+    <string name="navring_haptic_feedback_disabled">無効</string>
+    
 </resources>
