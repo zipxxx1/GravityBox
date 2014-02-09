@@ -1225,5 +1225,28 @@
     <string name="qs_auto_switch_disabled">Letiltva</string>
     <string name="qs_auto_switch_mode1">Amikor nincsenek értesítések</string>
     <string name="qs_auto_switch_mode2">Amikor nincsenek törölhető értesítések</string>
+    
+    <!-- Statusbar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">Dupla érintésre alvás engedélyezése</string>
+    <string name="pref_statusbar_dt2s_summary">Az értesítési sávon történő dupla érintés alvó állapotba helyezi a készüléket</string>
+
+    <!-- Animation scales -->
+    <string name="animation_scale0">Animáció kikapcsolva</string>
+    <string name="animation_scale1">Animáció lépték .25x</string>
+    <string name="animation_scale2">Animáció lépték .5x</string>
+    <string name="animation_scale3">Animáció lépték 1x</string>
+    <string name="animation_scale4">Animáció lépték 1.5x</string>
+    <string name="animation_scale5">Animáció lépték 2x</string>
+    <string name="animation_scale6">Animáció lépték 5x</string>
+    <string name="animation_scale7">Animáció lépték 10x</string>
+
+    <!-- Key Actions: Show brightness dialog -->
+    <string name="hwkey_action_brightness_dialog">Fényerő párbeszédablak mutatása</string>
+
+    <!-- Navbar ring: Haptic feedback -->
+    <string name="pref_navbar_ring_haptic_feedback_title">Érintéskori rezgő visszajelzés</string>
+    <string name="navring_haptic_feedback_default">Alapértelmezett</string>
+    <string name="navring_haptic_feedback_enabled">Engedélyezve</string>
+    <string name="navring_haptic_feedback_disabled">Letiltva</string>
 
 </resources>
