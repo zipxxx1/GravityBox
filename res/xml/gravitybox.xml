@@ -419,6 +419,16 @@
                 android:defaultValue="0"
                 android:dependency="pref_qs_management_enable" />
 
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+                android:key="pref_quick_pulldown_size"
+                android:title="@string/pref_quick_pulldown_size_title"
+                minimum="10"
+                maximum="40"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="%" 
+                android:defaultValue="15" />
+
         </PreferenceScreen>
 
         <PreferenceScreen
