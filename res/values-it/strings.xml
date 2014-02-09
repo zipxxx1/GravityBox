@@ -213,7 +213,7 @@
     <string name="pref_cat_hwkey_actions_title">Tasti hardware</string>
     <string name="pref_cat_hwkey_actions_summary">Permette di impostare azioni personalizzate alla pressione dei tasti fisici o virtuali</string>
     <string name="hwkey_menu_longpress_dialog_title">Azione per la pressione prolungata del tasto MENU</string>
-    <string name="hwkey_menu_doubletap_dialog_title">Azione per il doppio-tap del tasto MENU</string>
+    <string name="hwkey_menu_doubletap_dialog_title">Azione per il doppio tap del tasto MENU</string>
     <string name="hwkey_back_longpress_dialog_title">Azione per la pressione prolungata del tasto INDIETRO</string>
     <string name="hwkey_action_default">Predefinito</string>
     <string name="hwkey_action_search">Cerca</string>
@@ -481,7 +481,7 @@
     <string name="pref_navbar_height_summary">Applica alla visualizzazione verticale</string>
     <string name="pref_navbar_height_landscape_summary">Applica alla visualizzazione orizzontale</string>
     <string name="pref_navbar_width_title">Larghezza barra di navigazione</string>
-    <string name="pref_navbar_width_summary">Applica alla visualizzazzione orizzontale</string>
+    <string name="pref_navbar_width_summary">Applica alla visualizzazione orizzontale</string>
     <string name="pref_navbar_menukey_title">Mostra sempre tasto menù</string>
 
     <!-- Screenshot in power menu -->
@@ -1057,7 +1057,7 @@
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Intensità effetto sfocato</string>
 
- <!-- Smart radio: independent delay for screen off power save event -->
+    <!-- Smart radio: independent delay for screen off power save event -->
     <string name="pref_smart_radio_screen_off_delay_title">Ritardo risparmio energetico</string>
     <string name="pref_smart_radio_screen_off_delay_summary">Ritarda l\'attivazione della modalità risparmio energetico quando lo schermo viene spento. 
         Sovrascrive il ritardo cambio modalità di rete normale se il valore è diverso da zero.</string>
@@ -1093,7 +1093,7 @@
     <string name="pref_trans_verification_summary">Se hai donato, puoi inserire l\'ID transazione della donazione per sbloccare le funzioni premium</string>
     <string name="wsc_trans_required_summary">Questa funzione richiede un ID transazione PayPal valido</string>
     
-    <!-- Pie: disable system info -->
+     <!-- Pie: disable system info -->
      <string name="pref_pie_sysinfo_disable_title">Disabilita informazioni di sistema</string>
  
      <!-- Pie: long press delay -->
@@ -1104,11 +1104,116 @@
      <string name="shortcut_launcher_drawer">App drawer del launcher</string>
  
      <!-- Key Actions: Show launcher drawer -->
-     <string name="hwkey_action_launcher_drawer">Visualizza app drawer del launcher</string>
+     <string name="hwkey_action_launcher_drawer">Mostra app drawer del launcher</string>
  
      <!-- Launcher tweaks: resize any widget -->
      <string name="pref_cat_launcher_other_title">Altro</string>
      <string name="pref_launcher_resize_widget_title">Ridimensiona qualsiasi widget</string>
      <string name="pref_launcher_resize_widget_summary">Ridimensiona qualsiasi widget in qualsiasi dimensione nella schermata principale. (Riavvio del launcher richiesto)</string>
  
+    <!-- Icon picker -->
+    <string name="icon_picker_choose_icon_title">Scegli icona</string>
+    <string name="shortcuts_icon_picker_alarm">Sveglia</string>
+    <string name="shortcuts_icon_picker_andy">Androide</string>
+    <string name="shortcuts_icon_picker_battery">Batteria</string>
+    <string name="shortcuts_icon_picker_browser">Browser</string>
+    <string name="shortcuts_icon_picker_calendar">Calendario</string>
+    <string name="shortcuts_icon_picker_camera">Fotocamera</string>
+    <string name="shortcuts_icon_picker_cloud">Cloud</string>
+    <string name="shortcuts_icon_picker_contact">Contatto</string>
+    <string name="shortcuts_icon_picker_directdial">Chiamata rapida</string>
+    <string name="shortcuts_icon_picker_directmessage">Messaggio rapido</string>
+    <string name="shortcuts_icon_picker_drive">Drive</string>
+    <string name="shortcuts_icon_picker_dropbox">Dropbox</string>
+    <string name="shortcuts_icon_picker_email">Email</string>
+    <string name="shortcuts_icon_picker_email2">Email 2</string>
+    <string name="shortcuts_icon_picker_evernote">Evernote</string>
+    <string name="shortcuts_icon_picker_facebook">Facebook</string>
+    <string name="shortcuts_icon_picker_favorite">Preferito</string>
+    <string name="shortcuts_icon_picker_file_browser">Gestore file</string>
+    <string name="shortcuts_icon_picker_file_browser2">Gestore file 2</string>
+    <string name="shortcuts_icon_picker_fitness">Fitness</string>
+    <string name="shortcuts_icon_picker_gallery">Galleria</string>
+    <string name="shortcuts_icon_picker_gears">Ingranaggio</string>
+    <string name="shortcuts_icon_picker_google_small">Google</string>
+    <string name="shortcuts_icon_picker_gplus">Google Plus</string>
+    <string name="shortcuts_icon_picker_gtalk">Hangouts</string>
+    <string name="shortcuts_icon_picker_help">Aiuto</string>
+    <string name="shortcuts_icon_picker_joystick">Joystick</string>
+    <string name="shortcuts_icon_picker_key">Chiavi/Account</string>
+    <string name="shortcuts_icon_picker_laptop">Laptop</string>
+    <string name="shortcuts_icon_picker_notes">Note</string>
+    <string name="shortcuts_icon_picker_luggage">Viaggi</string>
+    <string name="shortcuts_icon_picker_maps">Maps</string>
+    <string name="shortcuts_icon_picker_market">Market</string>
+    <string name="shortcuts_icon_picker_movie">Film</string>
+    <string name="shortcuts_icon_picker_music">Musica</string>
+    <string name="shortcuts_icon_picker_nav">Navigazione</string>
+    <string name="shortcuts_icon_picker_phone">Telefono</string>
+    <string name="shortcuts_icon_picker_package">Pacchetto</string>
+    <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
+    <string name="shortcuts_icon_picker_play">Play</string>
+    <string name="shortcuts_icon_picker_pocket">Pocket</string>
+    <string name="shortcuts_icon_picker_quicksettings">Quick Setting</string>
+    <string name="shortcuts_icon_picker_rss">Feed RSS</string>
+    <string name="shortcuts_icon_picker_sdcard">SD Card</string>
+    <string name="shortcuts_icon_picker_search">Ricerca</string>
+    <string name="shortcuts_icon_picker_sms">Messaggi</string>
+    <string name="shortcuts_icon_picker_tasks">Task</string>
+    <string name="shortcuts_icon_picker_terminal">Terminale</string>
+    <string name="shortcuts_icon_picker_transit">Trasporto pubblico</string>
+    <string name="shortcuts_icon_picker_tv">TV</string>
+    <string name="shortcuts_icon_picker_twitter">Twitter</string>
+    <string name="shortcuts_icon_picker_unlock">Sblocco</string>
+
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">Fai scorrere con sblocco sicuro</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">Permette di usare gli anelli di sblocco anche quando si usa PIN/password/segno</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">Widget</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">Sliding challenge</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Barra di stato</string>
+
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">Disattivata</string>
+    <string name="qs_auto_switch_mode1">Quando non ci sono notifiche</string>
+    <string name="qs_auto_switch_mode2">Quando non ci sono notifiche removibili</string>
+
+    <!-- Notification drawer: expand all notifications -->
+    <string name="pref_notif_expand_all_title">Espandi notifiche</string>
+    <string name="pref_notif_expand_all_summary">Espande automaticamente tutte le notifiche</string>
+
+    <!-- Statusbar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">Spegni schermo con doppio tap</string>
+    <string name="pref_statusbar_dt2s_summary">Tocca due volte la barra di stato per far spegnere lo schermo del dispositivo</string>
+
+    <!-- Animation scales -->
+    <string name="animation_scale0">Disattiva animazioni</string>
+    <string name="animation_scale1">Scala animazione .25x</string>
+    <string name="animation_scale2">Scala animazione .5x</string>
+    <string name="animation_scale3">Scala animazione 1x</string>
+    <string name="animation_scale4">Scala animazione 1.5x</string>
+    <string name="animation_scale5">Scala animazione 2x</string>
+    <string name="animation_scale6">Scala animazione 5x</string>
+    <string name="animation_scale7">Scala animazione 10x</string>
+
+    <!-- QS Tiles: Tile label style -->
+    <string name="pref_qs_tile_label_style_title">Stile testo caselle</string>
+    <string name="tile_label_style_normal">Normale</string>
+    <string name="tile_label_style_allcaps">Tutto maiuscolo</string>
+    <string name="tile_label_style_hidden">Nascosto</string>
+
+    <!-- Key Actions: Show brightness dialog -->
+    <string name="hwkey_action_brightness_dialog">Mostra pannello luminosità</string>
+
+    <!-- Navbar ring: Haptic feedback -->
+    <string name="pref_navbar_ring_haptic_feedback_title">Feedback tattile</string>
+    <string name="navring_haptic_feedback_default">Predefinito</string>
+    <string name="navring_haptic_feedback_enabled">Abilitato</string>
+    <string name="navring_haptic_feedback_disabled">Disabilitato</string>
+    
+    <!-- Quick pull down size -->
+    <string name="pref_quick_pulldown_size_title">Dimensione bordo visualizzazione rapida</string>
+    
 </resources>
