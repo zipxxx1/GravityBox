@@ -552,7 +552,7 @@
     <string name="pref_powermenu_screenshot_title">电源键菜单屏幕截图</string>
 
     <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">解锁环设置</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">解锁环目标</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">解锁环目标总开关</string>
     <string name="pref_lockscreen_ring_targets_app_title">目标应用 %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">解锁环垂直偏移</string>
@@ -1216,5 +1216,42 @@
     <string name="shortcuts_icon_picker_tv">电视</string>
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">解锁</string>
+    
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">滑动解锁前</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">允许使用滑动对环目标和安全锁一起更改</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">小部件</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">滑动调整</string>
+    <string name="pref_cat_lockscreen_statusbar_title">状态栏</string>
+
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">禁用</string>
+    <string name="qs_auto_switch_mode1">当没有通知</string>
+    <string name="qs_auto_switch_mode2">当没有清除通知</string>
+
+    <!-- Statusbar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">启用双击休眠</string>
+    <string name="pref_statusbar_dt2s_summary">在状态栏上双击将设备休眠</string>
+
+    <!-- Animation scales -->
+    <string name="animation_scale0">动画关闭</string>
+    <string name="animation_scale1">动画大小 .25x</string>
+    <string name="animation_scale2">动画大小 .5x</string>
+    <string name="animation_scale3">动画大小 1x</string>
+    <string name="animation_scale4">动画大小 1.5x</string>
+    <string name="animation_scale5">动画大小 2x</string>
+    <string name="animation_scale6">动画大小 5x</string>
+    <string name="animation_scale7">动画大小 10x</string>
+
+    <!-- Key Actions: Show brightness dialog -->
+    <string name="hwkey_action_brightness_dialog">显示亮度对话框</string>
+
+    <!-- Navbar ring: Haptic feedback -->
+    <string name="pref_navbar_ring_haptic_feedback_title">触感反馈</string>
+    <string name="navring_haptic_feedback_default">默认</string>
+    <string name="navring_haptic_feedback_enabled">启用</string>
+    <string name="navring_haptic_feedback_disabled">禁用</string>
 
 </resources>
