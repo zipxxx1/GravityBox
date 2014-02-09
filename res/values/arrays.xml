@@ -682,6 +682,8 @@
 
     <string-array name="desktop_grid_row_entries" translatable="false">
         <item>@string/desktop_grid_default</item>
+        <item>3</item>
+        <item>4</item>
         <item>5</item>
         <item>6</item>
         <item>7</item>
@@ -689,6 +691,8 @@
 
     <string-array name="desktop_grid_row_values" translatable="false">
         <item>0</item>
+        <item>3</item>
+        <item>4</item>
         <item>5</item>
         <item>6</item>
         <item>7</item>
@@ -696,6 +700,7 @@
 
     <string-array name="desktop_grid_col_entries" translatable="false">
         <item>@string/desktop_grid_default</item>
+        <item>3</item>
         <item>4</item>
         <item>5</item>
         <item>6</item>
@@ -703,6 +708,7 @@
 
     <string-array name="desktop_grid_col_values" translatable="false">
         <item>0</item>
+        <item>3</item>
         <item>4</item>
         <item>5</item>
         <item>6</item>
