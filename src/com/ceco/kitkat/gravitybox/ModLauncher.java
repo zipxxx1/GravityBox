@@ -49,6 +49,7 @@ public class ModLauncher {
     }
 
     private static boolean mShouldShowAppDrawer;
+    private static boolean mReceiverRegistered;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -93,6 +94,17 @@ public class ModLauncher {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     IntentFilter intentFilter = new IntentFilter(ACTION_SHOW_APP_DRAWER);
                     ((Activity)param.thisObject).registerReceiver(mBroadcastReceiver, intentFilter);
+                    mReceiverRegistered = true;
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classLauncher, "onDestroy", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mReceiverRegistered) {
+                        ((Activity)param.thisObject).unregisterReceiver(mBroadcastReceiver);
+                        mReceiverRegistered = false;
+                    }
                 }
             });
 
