@@ -276,7 +276,7 @@
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">Akcja odwrócenia podczas dzwonienia</string>
-    <string name="pref_phone_flip_summary">Pozwala określić akcję do wykonania gdy urządzenie zosatanie odwrócone wyświetlaczem w dół podczas dzwonienia.</string>
+    <string name="pref_phone_flip_summary">Pozwala określić akcję do wykonania gdy urządzenie zostanie odwrócone wyświetlaczem w dół podczas dzwonienia.</string>
     <string name="phone_flip_action_none">Nic nie rób</string>
     <string name="phone_flip_action_mute">Wycisz dzwonek</string>
     <string name="phone_flip_action_dismiss">Odrzuć połączenie</string>
@@ -537,7 +537,7 @@
     <string name="pref_powermenu_screenshot_title">Zrzut ekranu w menu zasilania</string>
 
     <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Ustawienia Pierścienia Odblokowania</string>
+    <string name="pref_cat_lockscreen_ring_settings_title">Cele Pierścienia Odblokowania</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Główny wyłącznik Celów Ekranu Blokady</string>
     <string name="pref_lockscreen_ring_targets_app_title">Cel pierścienia %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Pionowe przesunięcie pierścienia</string>
@@ -1135,5 +1135,97 @@
     <string name="pref_cat_launcher_other_title">Inne</string>
     <string name="pref_launcher_resize_widget_title">Zmiana rozmiaru widżetu</string>
     <string name="pref_launcher_resize_widget_summary">Zmieniaj dowolnie rozmiar każdego widżetu na ekranie głównym (wymagane ponowne uruchomienie startera aplikacji)</string>
+
+    <!-- Icon picker -->
+    <string name="icon_picker_choose_icon_title">Wybierz ikonę</string>
+    <string name="shortcuts_icon_picker_alarm">Alarm</string>
+    <string name="shortcuts_icon_picker_andy">Logo Androida</string>
+    <string name="shortcuts_icon_picker_battery">Bateria</string>
+    <string name="shortcuts_icon_picker_browser">Przeglądarka internetowa</string>
+    <string name="shortcuts_icon_picker_calendar">Kalendarz</string>
+    <string name="shortcuts_icon_picker_camera">Aparat</string>
+    <string name="shortcuts_icon_picker_cloud">Chmura</string>
+    <string name="shortcuts_icon_picker_contact">Kontakt</string>
+    <string name="shortcuts_icon_picker_directdial">Bezpośrednie wybieranie numeru</string>
+    <string name="shortcuts_icon_picker_directmessage">Bezpośrednia wiadomość</string>
+    <string name="shortcuts_icon_picker_drive">Napęd</string>
+    <string name="shortcuts_icon_picker_dropbox">Dropbox</string>
+    <string name="shortcuts_icon_picker_email">Email</string>
+    <string name="shortcuts_icon_picker_email2">Alternatywny Email</string>
+    <string name="shortcuts_icon_picker_evernote">Evernote</string>
+    <string name="shortcuts_icon_picker_facebook">Facebook</string>
+    <string name="shortcuts_icon_picker_favorite">Ulubione</string>
+    <string name="shortcuts_icon_picker_file_browser">Przeglądarka plików</string>
+    <string name="shortcuts_icon_picker_file_browser2">Alternatywna Przeglądarka plików</string>
+    <string name="shortcuts_icon_picker_fitness">Fitness</string>
+    <string name="shortcuts_icon_picker_gallery">Galeria</string>
+    <string name="shortcuts_icon_picker_gears">Koło zębate</string>
+    <string name="shortcuts_icon_picker_google_small">Google</string>
+    <string name="shortcuts_icon_picker_gplus">Google Plus</string>
+    <string name="shortcuts_icon_picker_gtalk">Hangouts</string>
+    <string name="shortcuts_icon_picker_help">Pomoc</string>
+    <string name="shortcuts_icon_picker_joystick">Joystick</string>
+    <string name="shortcuts_icon_picker_key">Klucze/Konta</string>
+    <string name="shortcuts_icon_picker_laptop">Laptop</string>
+    <string name="shortcuts_icon_picker_notes">Notatki</string>
+    <string name="shortcuts_icon_picker_luggage">Podróż</string>
+    <string name="shortcuts_icon_picker_maps">Mapy</string>
+    <string name="shortcuts_icon_picker_market">Sklep</string>
+    <string name="shortcuts_icon_picker_movie">Filmy</string>
+    <string name="shortcuts_icon_picker_music">Muzyka</string>
+    <string name="shortcuts_icon_picker_nav">Nawigacja</string>
+    <string name="shortcuts_icon_picker_phone">Telefon</string>
+    <string name="shortcuts_icon_picker_package">Paczka</string>
+    <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
+    <string name="shortcuts_icon_picker_play">Odtwórz</string>
+    <string name="shortcuts_icon_picker_pocket">Kieszeń</string>
+    <string name="shortcuts_icon_picker_quicksettings">Szybkie ustawienia</string>
+    <string name="shortcuts_icon_picker_rss">Kanał RSS</string>
+    <string name="shortcuts_icon_picker_sdcard">Karta SD</string>
+    <string name="shortcuts_icon_picker_search">Wyszukiwanie</string>
+    <string name="shortcuts_icon_picker_sms">Wiadomości</string>
+    <string name="shortcuts_icon_picker_tasks">Zadania</string>
+    <string name="shortcuts_icon_picker_terminal">Terminal</string>
+    <string name="shortcuts_icon_picker_transit">Tranzyt</string>
+    <string name="shortcuts_icon_picker_tv">TV</string>
+    <string name="shortcuts_icon_picker_twitter">Twitter</string>
+    <string name="shortcuts_icon_picker_unlock">Odblokowanie</string>
+
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">Przesuń przed odblokowaniem</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">Umożliwia korzystanie z celów pierścienia odblokowania przed odblokowaniem wzorem graficznym lub kodem</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">Widżety</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">Odblokowanie przesunięciem</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Pasek stanu</string>
+
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">Wyłączony</string>
+    <string name="qs_auto_switch_mode1">Gdy nie ma żadnych powiadomień</string>
+    <string name="qs_auto_switch_mode2">Gdy nie ma usuwalnych powiadomień</string>
+
+    <!-- Statusbar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">Uśpij po podwójnym kliknięciu</string>
+    <string name="pref_statusbar_dt2s_summary">Podwójne kliknięcie na pasku stanu usypia urządzenie</string>
+
+    <!-- Animation scales -->
+    <string name="animation_scale0">Animacja wyłączona</string>
+    <string name="animation_scale1">Skala animacji .25x</string>
+    <string name="animation_scale2">Skala animacji .5x</string>
+    <string name="animation_scale3">Skala animacji 1x</string>
+    <string name="animation_scale4">Skala animacji 1.5x</string>
+    <string name="animation_scale5">Skala animacji 2x</string>
+    <string name="animation_scale6">Skala animacji 5x</string>
+    <string name="animation_scale7">Skala animacji 10x</string>
+
+    <!-- Key Actions: Show brightness dialog -->
+    <string name="hwkey_action_brightness_dialog">Pokaż dialog jasności</string>
+
+    <!-- Navbar ring: Haptic feedback -->
+    <string name="pref_navbar_ring_haptic_feedback_title">Wibracje przy dotknięciu</string>
+    <string name="navring_haptic_feedback_default">Domyślne</string>
+    <string name="navring_haptic_feedback_enabled">Włączone</string>
+    <string name="navring_haptic_feedback_disabled">Wyłączone</string>
 
 </resources>
