@@ -1094,4 +1094,109 @@
     <string name="pref_launcher_resize_widget_title">Zmena veľkosti widgetov</string>
     <string name="pref_launcher_resize_widget_summary">Povolí zmenu veľkosti widgetov na obrazovkách spúšťača (vyžaduje reštart spúšťača)</string>
 
+    <!-- Icon picker -->
+    <string name="icon_picker_choose_icon_title">Vyberte ikonu</string>
+    <string name="shortcuts_icon_picker_alarm">Alarm</string>
+    <string name="shortcuts_icon_picker_andy">Andy</string>
+    <string name="shortcuts_icon_picker_battery">Batéria</string>
+    <string name="shortcuts_icon_picker_browser">Prehliadač</string>
+    <string name="shortcuts_icon_picker_calendar">Kalendár</string>
+    <string name="shortcuts_icon_picker_camera">Fotoaparát</string>
+    <string name="shortcuts_icon_picker_cloud">Cloud</string>
+    <string name="shortcuts_icon_picker_contact">Kontakt</string>
+    <string name="shortcuts_icon_picker_directdial">Priame vytáčanie</string>
+    <string name="shortcuts_icon_picker_directmessage">Priama správa</string>
+    <string name="shortcuts_icon_picker_drive">Google drive</string>
+    <string name="shortcuts_icon_picker_dropbox">Dropbox</string>
+    <string name="shortcuts_icon_picker_email">Email</string>
+    <string name="shortcuts_icon_picker_email2">Email 2</string>
+    <string name="shortcuts_icon_picker_evernote">Evernote</string>
+    <string name="shortcuts_icon_picker_facebook">Facebook</string>
+    <string name="shortcuts_icon_picker_favorite">Obľúbené</string>
+    <string name="shortcuts_icon_picker_file_browser">Súborový prehliadač</string>
+    <string name="shortcuts_icon_picker_file_browser2">Súborový prehliadač 2</string>
+    <string name="shortcuts_icon_picker_fitness">Fitness</string>
+    <string name="shortcuts_icon_picker_gallery">Galéria</string>
+    <string name="shortcuts_icon_picker_gears">Prevody</string>
+    <string name="shortcuts_icon_picker_google_small">Google</string>
+    <string name="shortcuts_icon_picker_gplus">Google Plus</string>
+    <string name="shortcuts_icon_picker_gtalk">Hangouts</string>
+    <string name="shortcuts_icon_picker_help">Pomoc</string>
+    <string name="shortcuts_icon_picker_joystick">Joystick</string>
+    <string name="shortcuts_icon_picker_key">Kľúče/Kontá</string>
+    <string name="shortcuts_icon_picker_laptop">Laptop</string>
+    <string name="shortcuts_icon_picker_notes">Poznámky</string>
+    <string name="shortcuts_icon_picker_luggage">Cestovanie</string>
+    <string name="shortcuts_icon_picker_maps">Mapy</string>
+    <string name="shortcuts_icon_picker_market">Obchod</string>
+    <string name="shortcuts_icon_picker_movie">Filmy</string>
+    <string name="shortcuts_icon_picker_music">Hudba</string>
+    <string name="shortcuts_icon_picker_nav">Navigácia</string>
+    <string name="shortcuts_icon_picker_phone">Telefón</string>
+    <string name="shortcuts_icon_picker_package">Balík</string>
+    <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
+    <string name="shortcuts_icon_picker_play">Prehrať</string>
+    <string name="shortcuts_icon_picker_pocket">Vrecko</string>
+    <string name="shortcuts_icon_picker_quicksettings">Rýchle nastavenia</string>
+    <string name="shortcuts_icon_picker_rss">RSS Feed</string>
+    <string name="shortcuts_icon_picker_sdcard">SD karta</string>
+    <string name="shortcuts_icon_picker_search">Hľadať</string>
+    <string name="shortcuts_icon_picker_sms">Správy</string>
+    <string name="shortcuts_icon_picker_tasks">Úlohy</string>
+    <string name="shortcuts_icon_picker_terminal">Terminál</string>
+    <string name="shortcuts_icon_picker_transit">Tranzit</string>
+    <string name="shortcuts_icon_picker_tv">TV</string>
+    <string name="shortcuts_icon_picker_twitter">Twitter</string>
+    <string name="shortcuts_icon_picker_unlock">Odomknúť</string>
+
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">Prstenec pred odomknutím</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">Umožňuje použiť odomykací prstenec a jeho skratky aj v prípade bezpečnostného zámku</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">Widgety</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">Odomykací prstenec</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Stavová lišta</string>
+
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">Vypnuté</string>
+    <string name="qs_auto_switch_mode1">Ak neexistujú notifikácie</string>
+    <string name="qs_auto_switch_mode2">Ak neexistujú zmazateľné notifikácie</string>
+
+    <!-- Notification drawer: expand all notifications -->
+    <string name="pref_notif_expand_all_title">Rozšíriť všetky notifikácie</string>
+    <string name="pref_notif_expand_all_summary">Rozšíri všetky notifikácie automaticky</string>
+
+    <!-- Statusbar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">Uspať dvojitým ťuknutím</string>
+    <string name="pref_statusbar_dt2s_summary">Dvojité ťuknutie na stavovú lištu uspí zariadenie</string>
+
+    <!-- Animation scales -->
+    <string name="animation_scale0">Animácie vypnuté</string>
+    <string name="animation_scale1">Mierka animácie .25x</string>
+    <string name="animation_scale2">Mierka animácie .5x</string>
+    <string name="animation_scale3">Mierka animácie 1x</string>
+    <string name="animation_scale4">Mierka animácie 1.5x</string>
+    <string name="animation_scale5">Mierka animácie 2x</string>
+    <string name="animation_scale6">Mierka animácie 5x</string>
+    <string name="animation_scale7">Mierka animácie 10x</string>
+
+    <!-- QS Tiles: Tile label style -->
+    <string name="pref_qs_tile_label_style_title">Štýl textu dlaždice</string>
+    <string name="tile_label_style_normal">Normálny</string>
+    <string name="tile_label_style_allcaps">Veľké písmená</string>
+    <string name="tile_label_style_hidden">Skryť</string>
+
+    <!-- Key Actions: Show brightness dialog -->
+    <string name="hwkey_action_brightness_dialog">Otvoriť nastavenie jasu</string>
+
+    <!-- Navbar ring: Haptic feedback -->
+    <string name="pref_navbar_ring_haptic_feedback_title">Hmatová odozva</string>
+    <string name="navring_haptic_feedback_default">Pôvodná</string>
+    <string name="navring_haptic_feedback_enabled">Zapnutá</string>
+    <string name="navring_haptic_feedback_disabled">Vypnutá</string>
+
+    <!-- Quick pull down size -->
+    <string name="pref_quick_pulldown_size_title">Šírka aktívneho okraja</string>
+
 </resources>
