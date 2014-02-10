@@ -713,6 +713,7 @@ public class ModStatusBar {
                         }
 
                         for (int i=0; i<2; i++) {
+                            if (mCarrierTextView[i] == null) continue;
                             if (mCarrierText[i].isEmpty()) {
                                 mCarrierTextView[i].setText(i == 0 ? networkName : networkNameGemini);
                                 mCarrierTextView[i].setVisibility(mCarrierTextViewOrigVisibility[i]);
@@ -721,23 +722,32 @@ public class ModStatusBar {
                                 if (mCarrierText[i].trim().isEmpty()) {
                                     mCarrierTextView[i].setText("");
                                     mCarrierTextView[i].setVisibility(View.GONE);
-                                    mCarrierTextView[i == 0 ? 1 : 0].setGravity(Gravity.CENTER);
-                                    mCarrierDividerImageView.setVisibility(View.GONE);
+                                    int j = i == 0 ? 1 : 0;
+                                    if (mCarrierTextView[j] != null) {
+                                        mCarrierTextView[j].setGravity(Gravity.CENTER);
+                                    }
+                                    if (mCarrierDividerImageView != null) {
+                                        mCarrierDividerImageView.setVisibility(View.GONE);
+                                    }
                                 } else {
                                     mCarrierTextView[i].setText(mCarrierText[i]);
                                     mCarrierTextView[i].setVisibility(View.VISIBLE);
                                 }
                             }
                         }
-                        if (mCarrierTextView[0].getVisibility() == View.VISIBLE &&
-                                mCarrierTextView[1].getVisibility() == View.VISIBLE) {
+                        if ((mCarrierTextView[0] != null &&
+                             mCarrierTextView[0].getVisibility() == View.VISIBLE) &&
+                             (mCarrierTextView[1] != null && 
+                              mCarrierTextView[1].getVisibility() == View.VISIBLE)) {
                             mCarrierTextView[0].setGravity(Gravity.RIGHT);
                             mCarrierTextView[1].setGravity(Gravity.LEFT);
-                            mCarrierDividerImageView.setVisibility(View.VISIBLE);
-                        } else {
+                            if (mCarrierDividerImageView != null) {
+                                mCarrierDividerImageView.setVisibility(View.VISIBLE);
+                            }
+                        } else if (mCarrierDividerImageView != null) {
                             mCarrierDividerImageView.setVisibility(View.GONE);
                         }
-                    } else {
+                    } else if (mCarrierTextView[0] != null) {
                         if (mCarrierText[0].isEmpty()) return;
 
                         if (mCarrierText[0].trim().isEmpty()) {
