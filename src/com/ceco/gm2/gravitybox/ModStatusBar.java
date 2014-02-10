@@ -722,13 +722,6 @@ public class ModStatusBar {
                                 if (mCarrierText[i].trim().isEmpty()) {
                                     mCarrierTextView[i].setText("");
                                     mCarrierTextView[i].setVisibility(View.GONE);
-                                    int j = i == 0 ? 1 : 0;
-                                    if (mCarrierTextView[j] != null) {
-                                        mCarrierTextView[j].setGravity(Gravity.CENTER);
-                                    }
-                                    if (mCarrierDividerImageView != null) {
-                                        mCarrierDividerImageView.setVisibility(View.GONE);
-                                    }
                                 } else {
                                     mCarrierTextView[i].setText(mCarrierText[i]);
                                     mCarrierTextView[i].setVisibility(View.VISIBLE);
@@ -744,8 +737,16 @@ public class ModStatusBar {
                             if (mCarrierDividerImageView != null) {
                                 mCarrierDividerImageView.setVisibility(View.VISIBLE);
                             }
-                        } else if (mCarrierDividerImageView != null) {
-                            mCarrierDividerImageView.setVisibility(View.GONE);
+                        } else {
+                            if (mCarrierDividerImageView != null) {
+                                mCarrierDividerImageView.setVisibility(View.GONE);
+                            }
+                            if (mCarrierTextView[0] != null) {
+                                mCarrierTextView[0].setGravity(Gravity.CENTER);
+                            }
+                            if (mCarrierTextView[1] != null) {
+                                mCarrierTextView[1].setGravity(Gravity.CENTER);
+                            }
                         }
                     } else if (mCarrierTextView[0] != null) {
                         if (mCarrierText[0].isEmpty()) return;
