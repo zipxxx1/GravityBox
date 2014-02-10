@@ -1207,13 +1207,13 @@
 
     <!-- Animation scales -->
     <string name="animation_scale0">动画关闭</string>
-    <string name="animation_scale1">动画大小 .25x</string>
-    <string name="animation_scale2">动画大小 .5x</string>
-    <string name="animation_scale3">动画大小 1x</string>
-    <string name="animation_scale4">动画大小 1.5x</string>
-    <string name="animation_scale5">动画大小 2x</string>
-    <string name="animation_scale6">动画大小 5x</string>
-    <string name="animation_scale7">动画大小 10x</string>
+    <string name="animation_scale1">动画缩放 .25x</string>
+    <string name="animation_scale2">动画缩放 .5x</string>
+    <string name="animation_scale3">动画缩放 1x</string>
+    <string name="animation_scale4">动画缩放 1.5x</string>
+    <string name="animation_scale5">动画缩放 2x</string>
+    <string name="animation_scale6">动画缩放 5x</string>
+    <string name="animation_scale7">动画缩放 10x</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">瓷砖标签风格</string>
@@ -1229,5 +1229,8 @@
     <string name="navring_haptic_feedback_default">默认</string>
     <string name="navring_haptic_feedback_enabled">启用</string>
     <string name="navring_haptic_feedback_disabled">禁用</string>
+    
+    <!-- Quick pull down size -->
+    <string name="pref_quick_pulldown_size_title">快速下拉栏大小</string>
 
 </resources>
