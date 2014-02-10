@@ -610,15 +610,19 @@ public class ModLockscreen {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(kgViewBaseClass, "resetBackground", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHADE_DISABLE, false)) {
-                        ((View) param.thisObject).setBackground(null);
-                        param.setResult(null);
+            try {
+                XposedHelpers.findAndHookMethod(kgViewBaseClass, "resetBackground", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHADE_DISABLE, false)) {
+                            ((View) param.thisObject).setBackground(null);
+                            param.setResult(null);
+                        }
                     }
-                }
-            });
+                });
+            } catch (Throwable t) {
+                log("resetBackground: No such method");
+            }
 
             XposedHelpers.findAndHookMethod(kgWidgetPagerClass, "onPageSwitched",
                     View.class, int.class, new XC_MethodHook() {
