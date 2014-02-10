@@ -412,11 +412,18 @@ public class ModDisplay {
                                     final WakeLock wakeLock = mPm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
                                     wakeLock.acquire(10000);
                                     Bitmap tmpBmp = bmp;
-                                    // scale image if its too large
-                                    if (bmp.getWidth() > 900) {
-                                        tmpBmp = Bitmap.createScaledBitmap(bmp, 900, 1600, true);
+                                    int width = bmp.getWidth();
+                                    int height = bmp.getHeight();
+                                    // scale image (keeping aspect ratio) if it is too large
+                                    if (width * height > 1440000) {
+                                        int newWidth = (width < height) ? 900 : 1600;
+                                        float factor = newWidth / (float) width;
+                                        int newHeight = (int) (height * factor);
+                                        if (DEBUG_KIS) log("requestPowerState: scaled image res (WxH):"
+                                                + newWidth + "x" + newHeight);
+                                        tmpBmp = Bitmap.createScaledBitmap(bmp, newWidth, newHeight, true);
                                     }
-    
+
                                     final ByteArrayOutputStream os = new ByteArrayOutputStream();
                                     tmpBmp.compress(CompressFormat.PNG, 80, os);
                                     try {
