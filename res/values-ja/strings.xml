@@ -1204,4 +1204,7 @@
     <string name="navring_haptic_feedback_enabled">有効</string>
     <string name="navring_haptic_feedback_disabled">無効</string>
     
+    <!-- Quick pull down size -->
+    <string name="pref_quick_pulldown_size_title">クイックプルダウンのサイズ</string>
+    
 </resources>
