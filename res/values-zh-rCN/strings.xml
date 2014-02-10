@@ -166,8 +166,8 @@
     <string name="lockscreen_background_result_successful">背景已更改</string>
     <string name="lockscreen_background_result_not_successful">背景未更改</string>
     <string name="pref_cat_lockscreen_other_title">其它</string>
-    <string name="pref_lockscreen_maximize_widgets_title">最大化小工具</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">若启用这个选项，锁屏画面的小工具将会默认被最大化</string>
+    <string name="pref_lockscreen_maximize_widgets_title">最大化小部件</string>
+    <string name="pref_lockscreen_maximize_widgets_summary">若启用这个选项，锁屏画面的小部件将会默认被最大化</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">电源键调整</string>
@@ -239,7 +239,7 @@
     <string name="hwkey_action_voice_search">语音搜索</string>
     <string name="hwkey_action_prev_app">切换到上一个应用程序</string>
     <string name="hwkey_action_kill">结束前台应用程序</string>
-    <string name="hwkey_action_sleep">使设备休眠</string>
+    <string name="hwkey_action_sleep">使设备睡眠</string>
     <string name="pref_hwkey_kill_delay_title">结束应用程序的长按延迟</string>
     <string name="pref_hwkey_kill_delay_summary">适用于“结束正在使用的应用程序”动作，定义按键需要按下持续多久才会触发动作</string>
     <string name="pref_hwkey_doubletap_speed_title">双击速度</string>
@@ -268,14 +268,14 @@
     
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">每行磁贴数</string>
-    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，开关会根据您的设置自动缩放（适用于手机在纵向模式或平板上的任何方向模式）</string>
+    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，磁贴会根据您的设置自动缩放（适用于手机在纵向模式或平板上的任何方向模式）</string>
     
     <!--  Status bar clock - show day of week -->
-    <string name="pref_statusbar_clock_dow_title">显示星期几</string>
+    <string name="pref_statusbar_clock_dow_title">显示星期(周)</string>
     
     <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">可扩展音量面板</string>
-    <string name="pref_volume_panel_expandable_summary">启用此选项使你可以调整不同的媒体音量</string>
+    <string name="pref_volume_panel_expandable_summary">启用此选项使您可以调整不同的媒体音量</string>
         
     <!-- Fully expandable volume panel -->
     <string name="pref_volume_panel_expandable_fully_title">可完全扩展的音量面板</string>
@@ -344,7 +344,7 @@
     <string name="pie_phone_status_emergency_only">仅限紧急呼叫</string>
 
     <!-- Pie Controls settings -->
-    <string name="pie_control_title">Pie Controls 虚拟按键</string>
+    <string name="pie_control_title">Pie Controls虚拟按键</string>
     <string name="pie_control_enable_title">启用 Pie Controls 虚拟按键</string>
     <string name="pie_control_size_title">虚拟按键大小</string>
     <string name="pie_control_trigger_positions_title">触发位置</string>
@@ -397,8 +397,8 @@
     <string name="pref_quickapp_slot4_title">长按应用槽 4</string>
 
     <!-- GPS Tile (for non-MTK) -->
-    <string name="qs_tile_gps_enabled">GPS 已开启</string>
-    <string name="qs_tile_gps_disabled">GPS 已关闭</string>
+    <string name="qs_tile_gps_enabled">开启 GPS</string>
+    <string name="qs_tile_gps_disabled">关闭 GPS</string>
     <string name="qs_tile_gps_locked">GPS 已定位</string>
 
     <!-- Pie control: always show menu button -->
@@ -548,7 +548,7 @@
 
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">拔下电缆时开启屏幕</string>
-    <string name="pref_unplug_turns_on_screen_summary">如果启用，当你插入或拔出 USB 线/电源线时会亮起屏幕（需要重新启动）</string>
+    <string name="pref_unplug_turns_on_screen_summary">如果启用，当您插入或拔出 USB 线/电源线时会亮起屏幕（需要重新启动）</string>
 
     <!-- Mute volume adjust sound -->
     <string name="pref_volume_adjust_mute_title">禁用音量调节音效</string>
@@ -569,7 +569,7 @@
     <string name="pref_ongoing_notifications_title">应用通知拦截器</string>
     <string name="pref_ongoing_notifications_summary">允许拦截选定应用的通知</string>
     <string name="ongoing_notif_info">当一个应用的通知出现时，它将被添加到此列表中。
-        你可以决定当应用的通知下一次出现时是否将其拦截，请小心使用</string>
+        您可以决定当应用的通知下一次出现时是否将其拦截，请小心使用</string>
     <string name="ongoing_notif_reset_list">重置列表</string>
     <string name="ongoing_notif_reset_alert">是否确实要重置列表？
         这将清空当前列表，并且解除所有之前被拦截的应用通知</string>
@@ -657,7 +657,7 @@
         
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">应用程序启动器</string>
-    <string name="pref_cat_app_launcher_summary">允许定义最多 8 个应用程序，并分配至实体按键行为或作为额外的导航栏按键</string>
+    <string name="pref_cat_app_launcher_summary">允许定义最多8个应用程序，并分配至实体按键行为或作为额外的导航栏按键</string>
     <string name="pref_app_launcher_slot_title">应用程序槽 %d</string>
     <string name="app_launcher_no_apps">没有应用程序被分配，请使用 GravityBox 或应用程序启动器来分配应用程序</string>
 
@@ -747,7 +747,7 @@
     <string name="gb_new_package_dialog">已安装使用废弃软件包名的旧版 GravityBox。
 	使用新的软件包之前必须将其卸载。GravityBox 将尝试从旧 GravityBox 中转移设置
 	到新版 GravityBox，然后将其卸载。出现提示时，您必须确认卸载。卸载后，
-	请在 Xposed 安装器中激活新模块并立即重新启动，否则你可能会遇到系统的稳定性问题</string>
+	请在 Xposed 安装器中激活新模块并立即重新启动，否则您可能会遇到系统的稳定性问题</string>
     <string name="gb_new_package_settings_transfer_ok">GravityBox 设置转移成功</string>
     <string name="gb_new_package_settings_transfer_failed">GravityBox 设置转移失败</string>
     
@@ -778,21 +778,21 @@
     <string name="pref_volume_panel_timeout_title">音量面板超时</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">铃声与磁贴模式</string>
+    <string name="pref_qs_ringer_mode_title">铃声模式</string>
     <string name="ringer_mode_silent">无声</string>
     <string name="ringer_mode_vibrate">振动</string>
     <string name="ringer_mode_sound">声音</string>
     <string name="ringer_mode_sound_vibrate">声音和振动</string>
     
     <!-- Screen recording -->
-    <string name="screenrecord_notif_ticker">屏幕已开始录制</string>
+    <string name="screenrecord_notif_ticker">屏幕录制已开始</string>
     <string name="screenrecord_notif_title">屏幕录制中</string>
     <string name="screenrecord_notif_stop">停止</string>
     <string name="screenrecord_notif_pointer">切换指针</string>
     <string name="screenrecord_toast_error">无法录制屏幕</string>
     <string name="screenrecord_toast_processing">无法开始新的录制，之前的录制仍在处理中</string>
-    <string name="screenrecord_toast_saved">录制保存为 %s</string>
-    <string name="screenrecord_toast_save_error">无法保存录制到文件</string>
+    <string name="screenrecord_toast_saved">录制文件已保存到 %s</string>
+    <string name="screenrecord_toast_save_error">无法保存录制文件</string>
     <string name="action_screenrecord">屏幕录制</string>
     <string name="pref_powermenu_screenrecord_title">电源键菜单屏幕录制</string>
 
@@ -936,7 +936,7 @@
     <string name="nrt_bg_style_black">黑</string>
 
     <!-- Pie category summary -->
-    <string name="pie_control_summary">包含与 Pie 控制相关的设置</string>
+    <string name="pie_control_summary">包含与Pie Controls控制相关的调整选项</string>
     
     <!-- Shortcut for Google Now -->
     <string name="shortcut_google_now">Google Now</string>
@@ -964,7 +964,7 @@
     <string name="lockscreen_sb_clock_always_show">总是显示</string>
     
     <!-- QuickApp Tile #2 -->
-    <string name="pref_cat_quickapp_tile_2_title">快速应用磁贴 2 设置</string>
+    <string name="pref_cat_quickapp_tile_2_title">快速应用磁贴2设置</string>
     <string name="qs_tile_quickapp_2">快速应用磁贴 2</string>
 
     <!-- Force music volume control -->
@@ -1013,7 +1013,7 @@
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">未定义</string>
     <string name="pref_cat_smart_radio_title">智能网络</string>
-    <string name="pref_smart_radio_enable_summary">这会自动切换你的网络到用户自定义省电模式或正常模式 
+    <string name="pref_smart_radio_enable_summary">这会自动切换您的网络到用户自定义省电模式或正常模式 
         根据移动数据和无线网络连接状态（需要重新启动）</string>
     <string name="pref_smart_radio_normal_mode_title">正常网络模式</string>
     <string name="pref_smart_radio_power_saving_mode_title">省电网络模式</string>
@@ -1025,7 +1025,7 @@
     <string name="pref_smart_radio_mode_change_delay_summary">网络模式改变延迟指定秒数</string>
 
     <!-- Lockscreen: custom carrier text -->
-    <string name="pref_lockscreen_carrier_text_title">自定义载体文字</string>
+    <string name="pref_lockscreen_carrier_text_title">自定义机主信息</string>
     <string name="carrier_text_default">默认</string>
     <string name="carrier_text_empty">空</string>
     
@@ -1086,7 +1086,7 @@
     <string name="settings_backup_no_prefs">首选项文件未找到</string>
     <string name="settings_backup_success">备份成功</string>
     <string name="settings_restore_no_backup">没有备份恢复</string>
-    <string name="settings_restore_confirm">您当前的设置将被替换，你确定吗？</string>
+    <string name="settings_restore_confirm">您当前的设置将被替换，您确定吗？</string>
     <string name="settings_restore_failed">恢复失败</string>
     <string name="settings_restore_success">恢复成功</string>
     <string name="settings_restore_reboot">请重新启动您的设备</string>
@@ -1107,7 +1107,7 @@
     <string name="wsc_trans_violation">指定交易ID已经注册过很多次，请联系 GravityBox 开发者解决</string>
     <string name="wsc_trans_blocked">指定交易ID已被封锁，请联系 GravityBox 开发者解决</string>
     <string name="pref_trans_verification_title">PayPal 交易ID</string>
-    <string name="pref_trans_verification_summary">如果你已捐赠，你可以输入你的 PayPal 捐赠交易ID来解锁高级功能</string>
+    <string name="pref_trans_verification_summary">如果您已捐赠，您可以输入您的 PayPal 捐赠交易ID来解锁高级功能</string>
     <string name="wsc_trans_required_summary">此功能需要有效的 PayPal 交易ID</string>
 
     <!-- Pie: disable system info -->
@@ -1202,8 +1202,8 @@
     <string name="pref_notif_expand_all_summary">当启用时自动展开所有通知</string>
 
     <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">启用双击休眠</string>
-    <string name="pref_statusbar_dt2s_summary">在状态栏上双击将设备休眠</string>
+    <string name="pref_statusbar_dt2s_title">启用双击睡眠</string>
+    <string name="pref_statusbar_dt2s_summary">在状态栏上双击将设备睡眠</string>
 
     <!-- Animation scales -->
     <string name="animation_scale0">动画关闭</string>
