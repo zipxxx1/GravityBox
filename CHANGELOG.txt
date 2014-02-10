@@ -1,4 +1,4 @@
-Changelog 2.9.6 - 09/02/2014
+Changelog 2.9.6 - 10/02/2014
 --------------------------------------
 - Application picker: added support for alternative icons
 --- allows to assign alternative icons from the predefined list
@@ -28,6 +28,7 @@ Changelog 2.9.6 - 09/02/2014
 --- Fixed bug that prevented the use of custom actions on HOME button on devices running ROW firmware
 - Fixed issues with recents soft key occurring on some devices when key remapped (thanks natezire71 for testing)
 - Fixed issues with recents soft key when double-tap on home enabled
+- Fixed issues with custom carrier texts
 - Added Hebrew translations (thanks to daxgirl)
 - Updated Chinese (Simplified) translations (thanks to liveasx)
 - Updated Spanish translations (thanks to jvbferrer)
@@ -40,6 +41,7 @@ Changelog 2.9.6 - 09/02/2014
 - Updated Japanese translations (thanks to WedyDQ10)
 - Updated Hungarian translation (thanks to benjoe1)
 - Updated Slovak and Czech translations
+- Updated Indonesian translation (thanks to awaaas)
 
 Changelog 2.9.5 - 04/02/2014
 --------------------------------------
