@@ -712,11 +712,24 @@ public class ModLockscreen {
                                         if (mCarrierText[i].trim().isEmpty()) {
                                             carrierTextView[i].setText("");
                                             carrierTextView[i].setVisibility(View.GONE);
-                                            carrierTextView[i == 0 ? 1 : 0].setGravity(Gravity.CENTER);
                                         } else {
                                             carrierTextView[i].setText(mCarrierText[i]);
                                             carrierTextView[i].setVisibility(View.VISIBLE);
                                         }
+                                    }
+                                }
+                                if ((carrierTextView[0] != null &&
+                                     carrierTextView[0].getVisibility() == View.VISIBLE) &&
+                                    (carrierTextView[1] != null && 
+                                     carrierTextView[1].getVisibility() == View.VISIBLE)) {
+                                    carrierTextView[0].setGravity(Gravity.RIGHT);
+                                    carrierTextView[1].setGravity(Gravity.LEFT);
+                                } else {
+                                    if (carrierTextView[0] != null) {
+                                        carrierTextView[0].setGravity(Gravity.CENTER);
+                                    }
+                                    if (carrierTextView[1] != null) {
+                                        carrierTextView[1].setGravity(Gravity.CENTER);
                                     }
                                 }
                             }
