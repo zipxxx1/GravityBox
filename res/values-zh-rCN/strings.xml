@@ -308,7 +308,7 @@
     <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，开关会根据您的设置自动缩放（适用于手机在纵向模式或平板上的任何方向模式）</string>
 
     <!--  Status bar clock - show day of week -->
-    <string name="pref_statusbar_clock_dow_title">显示周</string>
+    <string name="pref_statusbar_clock_dow_title">显示星期(周)</string>
 
     <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">可扩展音量面板</string>
@@ -1237,13 +1237,13 @@
 
     <!-- Animation scales -->
     <string name="animation_scale0">动画关闭</string>
-    <string name="animation_scale1">动画大小 .25x</string>
-    <string name="animation_scale2">动画大小 .5x</string>
-    <string name="animation_scale3">动画大小 1x</string>
-    <string name="animation_scale4">动画大小 1.5x</string>
-    <string name="animation_scale5">动画大小 2x</string>
-    <string name="animation_scale6">动画大小 5x</string>
-    <string name="animation_scale7">动画大小 10x</string>
+    <string name="animation_scale1">动画缩放 .25x</string>
+    <string name="animation_scale2">动画缩放 .5x</string>
+    <string name="animation_scale3">动画缩放 1x</string>
+    <string name="animation_scale4">动画缩放 1.5x</string>
+    <string name="animation_scale5">动画缩放 2x</string>
+    <string name="animation_scale6">动画缩放 5x</string>
+    <string name="animation_scale7">动画缩放 10x</string>
 
     <!-- Key Actions: Show brightness dialog -->
     <string name="hwkey_action_brightness_dialog">显示亮度对话框</string>
@@ -1253,5 +1253,8 @@
     <string name="navring_haptic_feedback_default">默认</string>
     <string name="navring_haptic_feedback_enabled">启用</string>
     <string name="navring_haptic_feedback_disabled">禁用</string>
+    
+    <!-- Quick pull down size -->
+    <string name="pref_quick_pulldown_size_title">快速下拉大小</string>
 
 </resources>
