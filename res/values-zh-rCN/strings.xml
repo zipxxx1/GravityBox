@@ -253,7 +253,7 @@
     <string name="pref_cat_phone_summary">包含各种通话的调整选项</string>
 
     <!-- Flip action while ringing -->
-    <string name="pref_phone_flip_title">响铃时的手机翻转动作</string>
+    <string name="pref_phone_flip_title">响铃时手机翻转动作</string>
     <string name="pref_phone_flip_summary">可定义在响铃时，翻转使屏幕向下时执行的动作</string>
     <string name="phone_flip_action_none">无</string>
     <string name="phone_flip_action_mute">铃声静音</string>
@@ -278,12 +278,12 @@
     <string name="pref_volume_panel_expandable_summary">启用此选项使您可以调整不同的媒体音量</string>
         
     <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">可完全扩展的音量面板</string>
+    <string name="pref_volume_panel_expandable_fully_title">完整的可扩展音量面板</string>
     <string name="pref_volume_panel_expandable_fully_summary">允许音量面板占用所有提供的空间</string>
 
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">合并铃声音量与通知音量</string>
-    <string name="pref_link_volumes_summary">禁用时铃声音量与通知音量将可以分别调整</string>
+    <string name="pref_link_volumes_summary">禁用后铃声音量与通知音量将可以分别调整</string>
 
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">自动切换快速菜单</string>
@@ -969,7 +969,7 @@
 
     <!-- Force music volume control -->
     <string name="pref_vol_force_music_control_title">强制媒体音量控制</string>
-    <string name="pref_vol_force_music_control_summary">当启用时音量键控制媒体的音量而不是铃声音量</string>
+    <string name="pref_vol_force_music_control_summary">启用后音量键控制媒体的音量而不是铃声音量</string>
     
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">最近使用面板</string>
@@ -1058,7 +1058,7 @@
     <string name="pref_clear_recents_mode_1">单击清除目前所有，长按清除全部</string>
 
     <!-- Powe menu: disable on lockscreen -->
-    <string name="pref_powermenu_disable_on_lockscreen_title">禁用锁屏上的电源菜单</string>
+    <string name="pref_powermenu_disable_on_lockscreen_title">在锁屏上禁用电源键菜单</string>
 
     <!-- Extended force overflow menu button option -->
     <string name="overflow_menu_default">系统默认</string>
@@ -1216,7 +1216,7 @@
     <string name="animation_scale7">动画缩放 10x</string>
 
     <!-- QS Tiles: Tile label style -->
-    <string name="pref_qs_tile_label_style_title">瓷砖标签风格</string>
+    <string name="pref_qs_tile_label_style_title">瓷砖标签文字风格</string>
     <string name="tile_label_style_normal">正常</string>
     <string name="tile_label_style_allcaps">所有</string>
     <string name="tile_label_style_hidden">隐藏</string>
