@@ -22,6 +22,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class ModViewConfig {
+    private static final String CLASS_ACTIONBAR_POLICY = "com.android.internal.view.ActionBarPolicy";
 
     public static void initZygote(final XSharedPreferences prefs) {
         try {
@@ -29,6 +30,10 @@ public class ModViewConfig {
             if (!"default".equals(mode)) {
                 XposedHelpers.findAndHookMethod(ViewConfiguration.class, "hasPermanentMenuKey",
                         XC_MethodReplacement.returnConstant(!"enabled".equals(mode)));
+
+                final Class<?> actionBarPolicyClass = XposedHelpers.findClass(CLASS_ACTIONBAR_POLICY, null);
+                XposedHelpers.findAndHookMethod(actionBarPolicyClass, "showsOverflowMenuButton",
+                        XC_MethodReplacement.returnConstant("enabled".equals(mode)));
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
