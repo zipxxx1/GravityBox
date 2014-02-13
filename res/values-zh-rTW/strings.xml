@@ -1042,5 +1042,100 @@
     <string name="pref_cat_launcher_other_title">其他</string>
     <string name="pref_launcher_resize_widget_title">調整任何小工具</string>
     <string name="pref_launcher_resize_widget_summary">調整主畫面上的任何小工具至任何大小 (需要重新啟動啟動器)</string>
- 
+
+   <!-- Icon picker -->
+    <string name="icon_picker_choose_icon_title">選擇圖示</string>
+    <string name="shortcuts_icon_picker_alarm">鬧鐘</string>
+    <string name="shortcuts_icon_picker_andy">Andy</string>
+    <string name="shortcuts_icon_picker_battery">電池</string>
+    <string name="shortcuts_icon_picker_browser">瀏覽器</string>
+    <string name="shortcuts_icon_picker_calendar">計算機</string>
+    <string name="shortcuts_icon_picker_camera">相機</string>
+    <string name="shortcuts_icon_picker_cloud">雲端</string>
+    <string name="shortcuts_icon_picker_contact">聯絡人</string>
+    <string name="shortcuts_icon_picker_directdial">直接撥號</string>
+    <string name="shortcuts_icon_picker_directmessage">直接訊息</string>
+    <string name="shortcuts_icon_picker_drive">Drive</string>
+    <string name="shortcuts_icon_picker_dropbox">Dropbox</string>
+    <string name="shortcuts_icon_picker_email">Email</string>
+    <string name="shortcuts_icon_picker_email2">Email Alternate</string>
+    <string name="shortcuts_icon_picker_evernote">Evernote</string>
+    <string name="shortcuts_icon_picker_facebook">Facebook</string>
+    <string name="shortcuts_icon_picker_favorite">Favorite</string>
+    <string name="shortcuts_icon_picker_file_browser">檔案管理</string>
+    <string name="shortcuts_icon_picker_file_browser2">File Browser Alternate</string>
+    <string name="shortcuts_icon_picker_fitness">Fitness</string>
+    <string name="shortcuts_icon_picker_gallery">圖片庫</string>
+    <string name="shortcuts_icon_picker_gears">Gears</string>
+    <string name="shortcuts_icon_picker_google_small">Google</string>
+    <string name="shortcuts_icon_picker_gplus">Google Plus</string>
+    <string name="shortcuts_icon_picker_gtalk">Hangouts</string>
+    <string name="shortcuts_icon_picker_help">幫助</string>
+    <string name="shortcuts_icon_picker_joystick">Joystick</string>
+    <string name="shortcuts_icon_picker_key">Keys/Accounts</string>
+    <string name="shortcuts_icon_picker_laptop">Laptop</string>
+    <string name="shortcuts_icon_picker_notes">Notes</string>
+    <string name="shortcuts_icon_picker_luggage">Travel</string>
+    <string name="shortcuts_icon_picker_maps">地圖</string>
+    <string name="shortcuts_icon_picker_market">市場</string>
+    <string name="shortcuts_icon_picker_movie">電影</string>
+    <string name="shortcuts_icon_picker_music">音樂</string>
+    <string name="shortcuts_icon_picker_nav">Navigation</string>
+    <string name="shortcuts_icon_picker_phone">電話</string>
+    <string name="shortcuts_icon_picker_package">安裝包</string>
+    <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
+    <string name="shortcuts_icon_picker_play">Play</string>
+    <string name="shortcuts_icon_picker_pocket">Pocket</string>
+    <string name="shortcuts_icon_picker_quicksettings">Quick Settings</string>
+    <string name="shortcuts_icon_picker_rss">RSS Feed</string>
+    <string name="shortcuts_icon_picker_sdcard">SDCard</string>
+    <string name="shortcuts_icon_picker_search">搜尋</string>
+    <string name="shortcuts_icon_picker_sms">電子郵件</string>
+    <string name="shortcuts_icon_picker_tasks">任務</string>
+    <string name="shortcuts_icon_picker_terminal">Terminal</string>
+    <string name="shortcuts_icon_picker_transit">Transit</string>
+    <string name="shortcuts_icon_picker_tv">TV</string>
+    <string name="shortcuts_icon_picker_twitter">Twitter</string>
+    <string name="shortcuts_icon_picker_unlock">解鎖</string>
+
+    <!-- Lockscreen: Slide before unlock -->
+    <string name="pref_lockscreen_slide_before_unlock_title">解鎖前滑動</string>
+    <string name="pref_lockscreen_slide_before_unlock_summary">允許使用滑動難題與解鎖環目標安全鎖</string>
+
+    <!-- Lockscreen tweaks: option categories -->
+    <string name="pref_cat_lockscreen_widgets_title">小工具</string>
+    <string name="pref_cat_lockscreen_sliding_challenge_title">滑動難題</string>
+    <string name="pref_cat_lockscreen_statusbar_title">狀態列</string>
+
+    <!-- Quick settings: Auto-switch extended -->
+    <string name="qs_auto_switch_disabled">已停用</string>
+    <string name="qs_auto_switch_mode1">當沒有通知時</string>
+    <string name="qs_auto_switch_mode2">當沒有清除的通知時</string>
+
+    <!-- Statusbar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">啟用 雙擊 休眠</string>
+    <string name="pref_statusbar_dt2s_summary">雙擊狀態列來使裝置休眠</string>
+
+    <!-- Animation scales -->
+    <string name="animation_scale0">動畫關閉</string>
+    <string name="animation_scale1">動畫刻度 .25x</string>
+    <string name="animation_scale2">動畫刻度 .5x</string>
+    <string name="animation_scale3">動畫刻度 1x</string>
+    <string name="animation_scale4">動畫刻度 1.5x</string>
+    <string name="animation_scale5">動畫刻度 2x</string>
+    <string name="animation_scale6">動畫刻度 5x</string>
+    <string name="animation_scale7">動畫刻度 10x</string>
+
+    <!-- Key Actions: Show brightness dialog -->
+    <string name="hwkey_action_brightness_dialog">顯示亮度對話框</string>
+
+    <!-- Navbar ring: Haptic feedback -->
+    <string name="pref_navbar_ring_haptic_feedback_title">觸控反饋</string>
+    <string name="navring_haptic_feedback_default">預設</string>
+    <string name="navring_haptic_feedback_enabled">已啟用</string>
+    <string name="navring_haptic_feedback_disabled">已停用</string>
+
+    <!-- Quick pull down size -->
+    <string name="pref_quick_pulldown_size_title">快速下拉大小</string>
+    
 </resources>
