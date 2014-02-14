@@ -15,6 +15,8 @@
 
 package com.ceco.gm2.gravitybox.quicksettings;
 
+import java.util.concurrent.TimeUnit;
+
 import com.ceco.gm2.gravitybox.R;
 
 import de.robv.android.xposed.XposedBridge;
@@ -33,17 +35,40 @@ public class StayAwakeTile extends BasicTile {
 
     private static final int NEVER_SLEEP = Integer.MAX_VALUE;
     private static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
-    public static final String SETTING_USER_TIMEOUT = "gb_stay_awake_tile_user_timeout";
+
+    private static ScreenTimeout[] SCREEN_TIMEOUT = new ScreenTimeout[] {
+        new ScreenTimeout(15000, R.string.stay_awake_15s),
+        new ScreenTimeout(30000, R.string.stay_awake_30s),
+        new ScreenTimeout(60000, R.string.stay_awake_1m),
+        new ScreenTimeout(120000, R.string.stay_awake_2m),
+        new ScreenTimeout(300000, R.string.stay_awake_5m),
+        new ScreenTimeout(600000, R.string.stay_awake_10m),
+        new ScreenTimeout(1800000, R.string.stay_awake_30m),
+        new ScreenTimeout(NEVER_SLEEP, R.string.quick_settings_stay_awake_on),
+    };
 
     private SettingsObserver mSettingsObserver;
-    private int mCurrentTimeout;
+    private int mCurrentTimeoutIndex;
+    private int mPreviousTimeoutIndex;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    private static class ScreenTimeout {
+        final int mMillis;
+        final int mLabelResId;
+
+        public ScreenTimeout(int millis, int labelResId) {
+            mMillis = millis;
+            mLabelResId = labelResId;
+        }
+    }
+
     public StayAwakeTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
+
+        mDrawableId = R.drawable.ic_qs_stayawake_on;
 
         mOnClick = new View.OnClickListener() {
             @Override
@@ -55,14 +80,28 @@ public class StayAwakeTile extends BasicTile {
         mOnLongClick = new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                startActivity(android.provider.Settings.ACTION_DISPLAY_SETTINGS);
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.SCREEN_OFF_TIMEOUT,
+                            FALLBACK_SCREEN_TIMEOUT_VALUE) == NEVER_SLEEP) {
+                    toggleStayAwake(mPreviousTimeoutIndex);
+                } else {
+                    mPreviousTimeoutIndex = mCurrentTimeoutIndex == -1 ?
+                            getIndexFromValue(FALLBACK_SCREEN_TIMEOUT_VALUE) : mCurrentTimeoutIndex;
+                    toggleStayAwake(getIndexFromValue(NEVER_SLEEP));
+                }
                 return true;
             }
         };
 
-        mCurrentTimeout = Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
-        if (DEBUG) log("mCurrentTimeout = " + mCurrentTimeout);
+        mCurrentTimeoutIndex = getIndexFromValue(Settings.System.getInt(mContext.getContentResolver(), 
+                Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE));
+
+        mPreviousTimeoutIndex = mCurrentTimeoutIndex == -1 || 
+                SCREEN_TIMEOUT[mCurrentTimeoutIndex].mMillis == NEVER_SLEEP ?
+                        getIndexFromValue(FALLBACK_SCREEN_TIMEOUT_VALUE) : mCurrentTimeoutIndex;
+
+        if (DEBUG) log("mCurrentTimeoutIndex = " + mCurrentTimeoutIndex +
+                "; mPreviousTimeoutIndex = " + mPreviousTimeoutIndex);
     }
 
     @Override
@@ -80,35 +119,43 @@ public class StayAwakeTile extends BasicTile {
 
     @Override
     protected synchronized void updateTile() {
-        if (mCurrentTimeout == NEVER_SLEEP) {
-            mLabel = mGbContext.getString(R.string.quick_settings_stay_awake_on);
-            mDrawableId = R.drawable.ic_qs_stayawake_on;
+        if (mCurrentTimeoutIndex == -1) {
+            mLabel = String.format("%ds", TimeUnit.MILLISECONDS.toSeconds(
+                    Settings.System.getInt(mContext.getContentResolver(), 
+                            Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE)));;
         } else {
-            mLabel = mGbContext.getString(R.string.quick_settings_stay_awake_off);
-            mDrawableId = R.drawable.ic_qs_stayawake_off;
+            mLabel = mGbContext.getString(SCREEN_TIMEOUT[mCurrentTimeoutIndex].mLabelResId);
         }
-
-        mTileColor = (mCurrentTimeout == NEVER_SLEEP ?
-                KK_COLOR_ON : KK_COLOR_OFF);
+        mTileColor = KK_COLOR_ON;
 
         super.updateTile();
     }
 
     private void toggleStayAwake() {
-        ContentResolver cr = mContext.getContentResolver();
-        if (mCurrentTimeout == NEVER_SLEEP) {
-            if (DEBUG) log("disabling never sleep");
-            Settings.System.putInt(cr,
-                    Settings.System.SCREEN_OFF_TIMEOUT,
-                    Settings.System.getInt(cr, SETTING_USER_TIMEOUT, 
-                            FALLBACK_SCREEN_TIMEOUT_VALUE));
+        toggleStayAwake(-1);
+    }
+
+    private void toggleStayAwake(int index) {
+        if (index != -1) {
+            mCurrentTimeoutIndex = index;
         } else {
-            if (DEBUG) log("enabling never sleep");
-            Settings.System.putInt(cr,
-                    SETTING_USER_TIMEOUT, mCurrentTimeout);
-            Settings.System.putInt(cr,
-                    Settings.System.SCREEN_OFF_TIMEOUT, NEVER_SLEEP);
+            if (++mCurrentTimeoutIndex >= SCREEN_TIMEOUT.length) {
+                mCurrentTimeoutIndex = 0;
+            }
         }
+        if (DEBUG) log("mCurrentTimeoutIndex = " + mCurrentTimeoutIndex);
+        Settings.System.putInt(mContext.getContentResolver(), 
+                Settings.System.SCREEN_OFF_TIMEOUT,
+                    SCREEN_TIMEOUT[mCurrentTimeoutIndex].mMillis);
+    }
+
+    private int getIndexFromValue(int value) {
+        for (int i = 0; i < SCREEN_TIMEOUT.length; i++) {
+            if (SCREEN_TIMEOUT[i].mMillis == value) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     class SettingsObserver extends ContentObserver {
@@ -127,9 +174,10 @@ public class StayAwakeTile extends BasicTile {
 
         @Override
         public void onChange(boolean selfChange) {
-            mCurrentTimeout = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
-            if (DEBUG) log("SettingsObserver onChange; mCurrentTimeout = " + mCurrentTimeout);
+            mCurrentTimeoutIndex = getIndexFromValue(
+                    Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE));
+            if (DEBUG) log("SettingsObserver onChange; mCurrentTimeoutIndex = " + mCurrentTimeoutIndex);
             updateResources();
         }
     }

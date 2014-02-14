@@ -1257,4 +1257,13 @@
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Quick pulldown size</string>
 
+    <!-- Stay Awake Tile modes -->
+    <string name="stay_awake_15s">15s</string>
+    <string name="stay_awake_30s">30s</string>
+    <string name="stay_awake_1m">1m</string>
+    <string name="stay_awake_2m">2m</string>
+    <string name="stay_awake_5m">5m</string>
+    <string name="stay_awake_10m">10m</string>
+    <string name="stay_awake_30m">30m</string>
+
 </resources>
