@@ -800,6 +800,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             return;
         }
 
+        // prepare alternative screenrecord binary if doesn't exist yet
+        File srBinary = new File(getFilesDir() + "/screenrecord");
+        if (!srBinary.exists()) {
+            Utils.writeAssetToFile(this, "screenrecord", srBinary);
+        }
+        if (srBinary.exists()) {
+            srBinary.setExecutable(true);
+        }
+
         if (savedInstanceState == null || sSystemProperties == null) {
             mReceiver = new GravityBoxResultReceiver(new Handler());
             mReceiver.setReceiver(this);

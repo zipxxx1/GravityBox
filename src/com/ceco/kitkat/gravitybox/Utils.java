@@ -18,6 +18,7 @@ package com.ceco.kitkat.gravitybox;
 import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.content.res.XResources;
 import android.graphics.Bitmap;
@@ -310,6 +311,25 @@ public class Utils {
             if (output != null) output.close(); 
         } 
     } 
+
+    public static boolean writeAssetToFile(Context context, String assetName, File outFile) {
+        try {
+            AssetManager am = context.getAssets();
+            InputStream input = am.open(assetName);
+            FileOutputStream output = new FileOutputStream(outFile);
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = input.read(buffer)) > 0){
+                output.write(buffer, 0, len);
+            }
+            input.close();
+            output.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public static Bitmap drawableToBitmap (Drawable drawable) {
         if (drawable == null) return null;

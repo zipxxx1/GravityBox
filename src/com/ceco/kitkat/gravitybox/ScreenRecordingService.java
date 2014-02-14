@@ -57,7 +57,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class ScreenRecordingService extends Service {
@@ -97,9 +99,20 @@ public class ScreenRecordingService extends Service {
                 final Field fieldPid = classProcImpl.getDeclaredField("pid");
                 fieldPid.setAccessible(true);
 
+                // choose screenrecord binary and prepare command
+                List<String> command = new ArrayList<String>();
+                File srBinary = new File(ScreenRecordingService.this.getFilesDir() + "/screenrecord");
+                if (srBinary.exists() && srBinary.canExecute()) {
+                    command.add(srBinary.getAbsolutePath());
+                    command.add("--microphone");
+                } else {
+                    command.add("/system/bin/screenrecord");
+                }
+                command.add(TMP_PATH);
+
                 // construct and start the process
                 ProcessBuilder pb = new ProcessBuilder();
-                pb.command("/system/bin/screenrecord", TMP_PATH);
+                pb.command(command);
                 pb.redirectErrorStream(true);
                 Process proc = pb.start();
 
@@ -301,7 +314,8 @@ public class ScreenRecordingService extends Service {
         }
         // check if screenrecord and kill binaries exist and are executable
         File f = new File("/system/bin/screenrecord");
-        final boolean scrBinaryOk = f.exists() && f.canExecute();
+        File fAlt = new File(getFilesDir() + "/screenrecord");
+        final boolean scrBinaryOk = f.exists() && f.canExecute() || fAlt.exists() && fAlt.canExecute();
         if (!scrBinaryOk) {
             Log.e(TAG, "isScreenrecordSupported: screenrecord binary doesn't exist or is not executable");
         }
