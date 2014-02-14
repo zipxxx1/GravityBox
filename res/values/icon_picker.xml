@@ -64,12 +64,14 @@
         <item>@string/shortcuts_icon_picker_sdcard</item>
         <item>@string/shortcuts_icon_picker_search</item>
         <item>@string/shortcuts_icon_picker_sms</item>
+        <item>@string/shortcuts_icon_picker_tapatalk</item>
         <item>@string/shortcuts_icon_picker_tasks</item>
         <item>@string/shortcuts_icon_picker_terminal</item>
         <item>@string/shortcuts_icon_picker_transit</item>
         <item>@string/shortcuts_icon_picker_tv</item>
         <item>@string/shortcuts_icon_picker_twitter</item>
         <item>@string/shortcuts_icon_picker_unlock</item>
+        <item>@string/shortcuts_icon_picker_whatsapp</item>
     </string-array>
 
     <string-array name="shortcut_icon_picker_icons" translatable="false">
@@ -119,12 +121,14 @@
         <item>@drawable/ic_shortcut_sdcard</item>
         <item>@drawable/ic_shortcut_search</item>
         <item>@drawable/ic_shortcut_sms</item>
+        <item>@drawable/ic_shortcut_tapatalk</item>
         <item>@drawable/ic_shortcut_tasks</item>
         <item>@drawable/ic_shortcut_terminal</item>
         <item>@drawable/ic_shortcut_transit</item>
         <item>@drawable/ic_shortcut_tv</item>
         <item>@drawable/ic_shortcut_twitter</item>
         <item>@drawable/ic_shortcut_unlock</item>
+        <item>@drawable/ic_shortcut_whatsapp</item>
     </string-array>
 
 </resources>

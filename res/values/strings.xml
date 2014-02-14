@@ -1266,4 +1266,8 @@
     <string name="stay_awake_10m">10m</string>
     <string name="stay_awake_30m">30m</string>
 
+    <!-- Icon picker: new icons -->
+    <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
+    <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
+
 </resources>
