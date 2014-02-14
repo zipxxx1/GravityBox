@@ -27,6 +27,7 @@ import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.io.IOException;
@@ -314,6 +315,10 @@ public class TrafficMeter extends TextView implements IconManagerListener {
     public void setTrafficMeterEnabled(boolean enabled) {
         mTrafficMeterEnable = enabled;
         updateState();
+    }
+
+    public boolean getTrafficMeterEnabled() {
+        return mTrafficMeterEnable;
     }
 
     public void setTrafficMeterPosition(int position) {
