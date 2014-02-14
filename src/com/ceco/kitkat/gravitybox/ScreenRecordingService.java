@@ -35,7 +35,9 @@ package com.ceco.kitkat.gravitybox;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -88,6 +90,7 @@ public class ScreenRecordingService extends Service {
     private Notification mRecordingNotif;
     private int mRecordingStatus;
     private int mShowTouchesDefault = 0;
+    private SharedPreferences mPrefs;
 
     private CaptureThread mCaptureThread;
 
@@ -104,10 +107,24 @@ public class ScreenRecordingService extends Service {
                 File srBinary = new File(ScreenRecordingService.this.getFilesDir() + "/screenrecord");
                 if (srBinary.exists() && srBinary.canExecute()) {
                     command.add(srBinary.getAbsolutePath());
-                    command.add("--microphone");
+                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENRECORD_MICROPHONE, true)) {
+                        command.add("--microphone");
+                    }
                 } else {
                     command.add("/system/bin/screenrecord");
                 }
+                String prefVal = mPrefs.getString(GravityBoxSettings.PREF_KEY_SCREENRECORD_SIZE, "default");
+                if (!prefVal.equals("default")) {
+                    command.add("--size"); command.add(prefVal);
+                }
+                prefVal = String.valueOf(mPrefs.getInt(GravityBoxSettings.PREF_KEY_SCREENRECORD_BITRATE, 4)*1000000);
+                command.add("--bit-rate"); command.add(prefVal);
+                prefVal = String.valueOf(mPrefs.getInt(GravityBoxSettings.PREF_KEY_SCREENRECORD_TIMELIMIT, 3)*60);
+                command.add("--time-limit"); command.add(prefVal);
+                if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENRECORD_ROTATE, false)) {
+                    command.add("--rotate");
+                }
+
                 command.add(TMP_PATH);
 
                 // construct and start the process
@@ -179,6 +196,9 @@ public class ScreenRecordingService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        final String prefsName = getPackageName() + "_preferences";
+        mPrefs = getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
 
         mHandler = new Handler() {
             public void handleMessage(Message msg) {

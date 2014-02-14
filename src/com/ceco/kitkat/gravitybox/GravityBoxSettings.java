@@ -659,6 +659,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     private static final String PREF_KEY_TRANS_VERIFICATION = "pref_trans_verification"; 
 
+    public static final String PREF_KEY_SCREENRECORD_SIZE = "pref_screenrecord_size";
+    public static final String PREF_KEY_SCREENRECORD_BITRATE = "pref_screenrecord_bitrate";
+    public static final String PREF_KEY_SCREENRECORD_TIMELIMIT = "pref_screenrecord_timelimit";
+    public static final String PREF_KEY_SCREENRECORD_ROTATE = "pref_screenrecord_rotate";
+    public static final String PREF_KEY_SCREENRECORD_MICROPHONE = "pref_screenrecord_microphone";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -1034,6 +1040,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private Preference mPrefBackup;
         private Preference mPrefRestore;
         private EditTextPreference mPrefTransVerification;
+        private ListPreference mPrefScreenrecordSize;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1301,6 +1308,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefRestore = findPreference(PREF_KEY_SETTINGS_RESTORE);
 
             mPrefTransVerification = (EditTextPreference) findPreference(PREF_KEY_TRANS_VERIFICATION);
+
+            mPrefScreenrecordSize = (ListPreference) findPreference(PREF_KEY_SCREENRECORD_SIZE);
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
@@ -1874,6 +1883,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_QUICK_PULLDOWN)) {
                 mPrefQuickPulldownSize.setEnabled(!"0".equals(mPrefQuickPulldown.getValue()));
+            }
+
+            if (key == null || key.equals(PREF_KEY_SCREENRECORD_SIZE)) {
+                mPrefScreenrecordSize.setSummary(mPrefScreenrecordSize.getEntry());
             }
         }
 

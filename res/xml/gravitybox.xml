@@ -1706,6 +1706,52 @@
 
     </PreferenceScreen>
 
+    <PreferenceScreen
+        android:key="pref_cat_screenrecord_options"
+        android:title="@string/pref_cat_screenrecord_options_title"
+        android:summary="@string/pref_cat_screenrecord_options_summary">
+
+        <ListPreference
+            android:key="pref_screenrecord_size"
+            android:title="@string/pref_screenrecord_size_title"
+            android:entries="@array/scr_size_entries"
+            android:entryValues="@array/scr_size_values"
+            android:defaultValue="default" />
+
+        <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+            android:key="pref_screenrecord_bitrate"
+            android:title="@string/pref_screenrecord_bitrate_title"
+            minimum="1"
+            maximum="20"
+            interval="1"
+            monitorBoxEnabled="true"
+            monitorBoxUnit="MBps" 
+            android:defaultValue="4" />
+
+        <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+            android:key="pref_screenrecord_timelimit"
+            android:title="@string/pref_screenrecord_timelimit_title"
+            minimum="1"
+            maximum="30"
+            interval="1"
+            monitorBoxEnabled="true"
+            monitorBoxUnit="m" 
+            android:defaultValue="3" />
+
+        <CheckBoxPreference 
+            android:key="pref_screenrecord_rotate"
+            android:title="@string/pref_screenrecord_rotate_title"
+            android:summary="@string/pref_screenrecord_rotate_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference 
+            android:key="pref_screenrecord_microphone"
+            android:title="@string/pref_screenrecord_microphone_title"
+            android:summary="@string/pref_screenrecord_microphone_summary"
+            android:defaultValue="true" />
+
+    </PreferenceScreen>
+
     <PreferenceScreen 
         android:key="pref_cat_misc"
         android:title="@string/pref_cat_misc_title"

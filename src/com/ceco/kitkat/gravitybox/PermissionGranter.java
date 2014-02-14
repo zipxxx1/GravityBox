@@ -33,6 +33,7 @@ public class PermissionGranter {
     private static final String PERM_CAMERA = "android.permission.CAMERA";
     private static final String PERM_CHANGE_NETWORK_STATE = "android.permission.CHANGE_NETWORK_STATE";
     private static final String PERM_MODIFY_AUDIO_SETTINGS = "android.permission.MODIFY_AUDIO_SETTINGS";
+    private static final String PERM_CAPTURE_AUDIO_OUTPUT = "android.permission.CAPTURE_AUDIO_OUTPUT";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -94,6 +95,19 @@ public class PermissionGranter {
                                     "appendInts", gpGids, bpGids);
 
                             if (DEBUG) log(pkgName + ": Permission added: " + pAccessAudioSettings);
+                        }
+
+                        // Add android.permission.CAPTURE_AUDIO_OUTPUT needed by screen recorder
+                        if (!grantedPerms.contains(PERM_CAPTURE_AUDIO_OUTPUT)) {
+                            final Object pCaptureAudioOutput = XposedHelpers.callMethod(permissions, "get",
+                                    PERM_CAPTURE_AUDIO_OUTPUT);
+                            grantedPerms.add(PERM_CAPTURE_AUDIO_OUTPUT);
+                            int[] gpGids = (int[]) XposedHelpers.getObjectField(extras, "gids");
+                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCaptureAudioOutput, "gids");
+                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
+                                    "appendInts", gpGids, bpGids);
+
+                            if (DEBUG) log(pkgName + ": Permission added: " + pCaptureAudioOutput);
                         }
 
                         if (DEBUG) {

@@ -872,4 +872,18 @@
         <item>DISABLED</item>
     </string-array>
 
+    <string-array name="scr_size_entries" translatable="false">
+        <item>@string/scr_size_default</item>
+        <item>@string/scr_size_sd</item>
+        <item>@string/scr_size_hd</item>
+        <item>@string/scr_size_full_hd</item>
+    </string-array>
+
+    <string-array name="scr_size_values" translatable="false">
+        <item>default</item>
+        <item>360x640</item>
+        <item>720x1280</item>
+        <item>1080x1920</item>
+    </string-array>
+
 </resources>
