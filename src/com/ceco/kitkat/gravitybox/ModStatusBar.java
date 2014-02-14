@@ -106,6 +106,7 @@ public class ModStatusBar {
     private static boolean mNotifExpandAll;
     private static boolean mDt2sEnabled;
     private static GestureDetector mDoubletapGesture;
+    private static View mIconMergerView;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -190,6 +191,7 @@ public class ModStatusBar {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_ENABLE)) {
                     mTrafficMeter.setTrafficMeterEnabled(intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_DT_ENABLE, false));
+                    updateTrafficMeterPosition();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_POSITION)) {
                     mTrafficMeter.setTrafficMeterPosition(intent.getIntExtra(
@@ -412,9 +414,9 @@ public class ModStatusBar {
                     }
                     mTrafficMeter.setInactivityMode(inactivityMode);
                     ModStatusbarColor.registerIconManagerListener(mTrafficMeter);
-                    updateTrafficMeterPosition();
                     mTrafficMeter.setTrafficMeterEnabled(prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_ENABLE, false));
+                    updateTrafficMeterPosition();
 
                     // MTK Dual SIMs: reduce space between wifi and signal icons
                     if (Utils.hasGeminiSupport()) {
@@ -715,7 +717,12 @@ public class ModStatusBar {
                         int.class, int.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (!mClockCentered || mClock == null || mContext == null) return;
+                        if (mIconMergerView == null) {
+                            mIconMergerView = (View) param.thisObject;
+                        }
+
+                        if (mClock == null || mContext == null || mLayoutClock == null || 
+                                mLayoutClock.getChildCount() == 0) return;
 
                         Resources res = mContext.getResources();
                         int totalWidth = res.getDisplayMetrics().widthPixels;
@@ -734,6 +741,7 @@ public class ModStatusBar {
                                     param.thisObject, "gbSbIconPad");
                         }
 
+                        // use clock for basic measurement
                         Paint p = mClock.getView().getPaint();
                         int clockWidth = (int) p.measureText(mClock.getView().getText().toString()) + iconSize;
                         int availWidth = totalWidth/2 - clockWidth/2 - iconSize/2;
@@ -758,8 +766,8 @@ public class ModStatusBar {
                         int.class, new XC_MethodReplacement() {
                     @Override
                     protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                        if (!mClockCentered || mClock == null || XposedHelpers.getAdditionalInstanceField(
-                                param.thisObject, "gbAvailWidth") == null) {
+                        if (mLayoutClock == null || mLayoutClock.getChildCount() == 0 ||
+                                XposedHelpers.getAdditionalInstanceField(param.thisObject, "gbAvailWidth") == null) {
                             return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                         }
 
@@ -823,7 +831,6 @@ public class ModStatusBar {
                 mIconArea.removeView(mClock.getView());
             }
             mLayoutClock.addView(mClock.getView());
-            mLayoutClock.setVisibility(View.VISIBLE);
             if (DEBUG) log("Clock set to center position");
         } else {
             mClock.getView().setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
@@ -836,7 +843,6 @@ public class ModStatusBar {
             } else {
                 mIconArea.addView(mClock.getView());
             }
-            mLayoutClock.setVisibility(View.GONE);
             if (DEBUG) log("Clock set to normal position");
         }
 
@@ -851,28 +857,35 @@ public class ModStatusBar {
         mLayoutClock.removeView(mTrafficMeter);
         mIconArea.removeView(mTrafficMeter);
 
-        switch(mTrafficMeter.getTrafficMeterPosition()) {
-            case GravityBoxSettings.DT_POSITION_AUTO:
-                if (mClockCentered) {
+        if (mTrafficMeter.getTrafficMeterEnabled()) {
+            switch(mTrafficMeter.getTrafficMeterPosition()) {
+                case GravityBoxSettings.DT_POSITION_AUTO:
+                    if (mClockCentered) {
+                        if (mClockInSbContents) {
+                            mSbContents.addView(mTrafficMeter);
+                        } else {
+                            mIconArea.addView(mTrafficMeter, 0);
+                        }
+                    } else {
+                        mLayoutClock.addView(mTrafficMeter);
+                    }
+                    break;
+                case GravityBoxSettings.DT_POSITION_LEFT:
+                    mSbContents.addView(mTrafficMeter, 0);
+                    break;
+                case GravityBoxSettings.DT_POSITION_RIGHT:
                     if (mClockInSbContents) {
                         mSbContents.addView(mTrafficMeter);
                     } else {
                         mIconArea.addView(mTrafficMeter, 0);
                     }
-                } else {
-                    mLayoutClock.addView(mTrafficMeter);
-                }
-                break;
-            case GravityBoxSettings.DT_POSITION_LEFT:
-                mSbContents.addView(mTrafficMeter, 0);
-                break;
-            case GravityBoxSettings.DT_POSITION_RIGHT:
-                if (mClockInSbContents) {
-                    mSbContents.addView(mTrafficMeter);
-                } else {
-                    mIconArea.addView(mTrafficMeter, 0);
-                }
-                break;
+                    break;
+            }
+        }
+
+        if (mIconMergerView != null) {
+            mIconMergerView.requestLayout();
+            mIconMergerView.invalidate();
         }
     }
 
