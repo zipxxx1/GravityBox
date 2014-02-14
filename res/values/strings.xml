@@ -1257,4 +1257,8 @@
     <string name="pref_screenrecord_microphone_title">Use microphone</string>
     <string name="pref_screenrecord_microphone_summary">Whether to use microphone for audio input</string>
 
+    <!-- Icon picker: new icons -->
+    <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
+    <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
+
 </resources>
