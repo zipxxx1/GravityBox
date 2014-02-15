@@ -402,7 +402,7 @@ public class ModDisplay {
                                  }
         
                                  final ByteArrayOutputStream os = new ByteArrayOutputStream();
-                                 tmpBmp.compress(CompressFormat.PNG, 80, os);
+                                 tmpBmp.compress(CompressFormat.PNG, 100, os);
                                  try {
                                     os.close();
                                  } catch (IOException e1) { }
