@@ -102,6 +102,7 @@ public class AppPickerPreference extends DialogPreference
     private AppInfo mAppInfo;
     private int mAppIconPreviewSizePx;
     private Dialog mIconPickerDialog;
+    private boolean mIconPickerEnabled = true;
 
     private static LruCache<String, BitmapDrawable> sAppIconCache;
     static {
@@ -135,6 +136,10 @@ public class AppPickerPreference extends DialogPreference
         mPackageManager = mContext.getPackageManager();
         mMode = MODE_APP;
         mAppInfo = new AppInfo();
+
+        if (attrs != null) {
+            mIconPickerEnabled = attrs.getAttributeBooleanValue(null, "iconPickerEnabled", true);
+        }
 
         setDialogLayoutResource(R.layout.app_picker_preference);
         setPositiveButtonText(null);
@@ -174,7 +179,11 @@ public class AppPickerPreference extends DialogPreference
         mBtnAppIcon.setScaleType(ScaleType.CENTER_CROP);
         mBtnAppIcon.setImageDrawable(mAppInfo.icon);
         mBtnAppIcon.setFocusable(false);
-        mBtnAppIcon.setOnClickListener(this);
+        if (mIconPickerEnabled) {
+            mBtnAppIcon.setOnClickListener(this);
+        } else {
+            mBtnAppIcon.setEnabled(false);
+        }
         widgetFrameView.addView(mBtnAppIcon);
         widgetFrameView.setVisibility(View.VISIBLE);
     }
