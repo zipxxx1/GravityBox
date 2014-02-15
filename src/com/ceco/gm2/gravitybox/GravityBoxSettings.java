@@ -82,6 +82,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_ORDER = "pref_qs_tile_order";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_STYLE = "pref_qs_tile_style";
+    public static final String PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE = "pref_qs_tile_label_style";
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE = "pref_qs_hide_on_change";
     public static final String PREF_KEY_QUICK_SETTINGS_AUTOSWITCH = "pref_auto_switch_qs2";
     public static final String PREF_KEY_QUICK_PULLDOWN = "pref_quick_pulldown";
@@ -496,6 +497,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_QUICK_PULLDOWN = "quickPulldown";
     public static final String EXTRA_QUICK_PULLDOWN_SIZE = "quickPulldownSize";
     public static final String EXTRA_QS_TILE_STYLE = "qsTileStyle";
+    public static final String EXTRA_QS_TILE_LABEL_STYLE = "qsTileLabelStyle";
     public static final String EXTRA_QS_HIDE_ON_CHANGE = "qsHideOnChange";
 
     public static final String ACTION_PREF_CLOCK_CHANGED = "gravitybox.intent.action.CENTER_CLOCK_CHANGED";
@@ -961,6 +963,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefUnplugTurnsOnScreen;
         private MultiSelectListPreference mPrefCallVibrations;
         private Preference mPrefQsTileOrder;
+        private ListPreference mPrefQsTileLabelStyle;
         private ListPreference mPrefSbClockDow;
         private ListPreference mPrefSbLockPolicy;
         private ListPreference mPrefDataTrafficPosition;
@@ -1224,6 +1227,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     (MultiSelectListPreference) findPreference(PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE);
             mPrefQsNetworkModeSimSlot = (ListPreference) findPreference(PREF_KEY_QS_NETWORK_MODE_SIM_SLOT);
             mPrefQsTileOrder = (Preference) findPreference(PREF_KEY_QUICK_SETTINGS_TILE_ORDER);
+            mPrefQsTileLabelStyle = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE);
 
             mPrefSbClockDow = (ListPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_DOW);
             mPrefSbLockPolicy = (ListPreference) findPreference(PREF_KEY_STATUSBAR_LOCK_POLICY);
@@ -1984,6 +1988,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefPieLongpressDelay.setSummary(mPrefPieLongpressDelay.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE)) {
+                mPrefQsTileLabelStyle.setSummary(mPrefQsTileLabelStyle.getEntry());
+            }
+
             if (key == null || key.equals(PREF_KEY_QUICK_PULLDOWN)) {
                 mPrefQuickPulldownSize.setEnabled(!"0".equals(mPrefQuickPulldown.getValue()));
             }
@@ -2044,6 +2052,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_TILE_STYLE, Integer.valueOf(
                         prefs.getString(PREF_KEY_QUICK_SETTINGS_TILE_STYLE, "0")));
+            } else if (key.equals(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QS_TILE_LABEL_STYLE,
+                        prefs.getString(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE, "ALLCAPS"));
             } else if (key.equals(PREF_KEY_STATUSBAR_BGCOLOR)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_BG_COLOR, prefs.getInt(PREF_KEY_STATUSBAR_BGCOLOR, Color.BLACK));

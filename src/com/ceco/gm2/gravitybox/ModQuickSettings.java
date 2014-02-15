@@ -123,6 +123,8 @@ public class ModQuickSettings {
     private static XSharedPreferences mPrefs;
     private static boolean mHideOnChange;
     private static boolean mQsTileSpanDisable;
+    private static LabelStyle mQsTileLabelStyle = LabelStyle.ALLCAPS;
+    private enum LabelStyle { NORMAL, ALLCAPS };
 
     private static float mGestureStartX;
     private static float mGestureStartY;
@@ -210,9 +212,7 @@ public class ModQuickSettings {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS)) {
                     mNumColumns = intent.getIntExtra(GravityBoxSettings.EXTRA_QS_COLS, 3);
-                    if (mContainerView != null) {
-                        XposedHelpers.callMethod(mContainerView, "updateResources");
-                    }
+                    updateResources();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_AUTOSWITCH)) {
                     mAutoSwitch = intent.getIntExtra(GravityBoxSettings.EXTRA_QS_AUTOSWITCH, 0);
@@ -227,6 +227,11 @@ public class ModQuickSettings {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_TILE_SPAN_DISABLE)) {
                     mQsTileSpanDisable = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_TILE_SPAN_DISABLE, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_TILE_LABEL_STYLE)) {
+                    mQsTileLabelStyle = LabelStyle.valueOf(
+                            intent.getStringExtra(GravityBoxSettings.EXTRA_QS_TILE_LABEL_STYLE));
+                    updateResources();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QUICK_PULLDOWN_SIZE)) {
                     float size = intent.getIntExtra(GravityBoxSettings.EXTRA_QUICK_PULLDOWN_SIZE, 15) / 100f;
@@ -303,7 +308,13 @@ public class ModQuickSettings {
         }
 
         // trigger layout refresh
-        XposedHelpers.callMethod(mContainerView, "updateResources");
+        updateResources();
+    }
+
+    private static void updateResources() {
+        if (mContainerView != null) {
+            XposedHelpers.callMethod(mContainerView, "updateResources");
+        }
     }
 
     private static TextView findTileTextView(ViewGroup viewGroup) {
@@ -371,7 +382,7 @@ public class ModQuickSettings {
                 if (textView != null) {
                     textView.setTextSize(1, textSize);
                     textView.setSingleLine(false);
-                    textView.setAllCaps(true);
+                    textView.setAllCaps(mQsTileLabelStyle == LabelStyle.ALLCAPS);
                 }
 
                 // adjust layout in case it's AOSP 4.3 tile
@@ -449,6 +460,8 @@ public class ModQuickSettings {
                     mPrefs.getString(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, "0"));
             mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
             mQsTileSpanDisable = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_TILE_SPAN_DISABLE, false);
+            mQsTileLabelStyle = LabelStyle.valueOf(
+                    prefs.getString(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE, "ALLCAPS"));
 
             float size = mPrefs.getInt(GravityBoxSettings.PREF_KEY_QUICK_PULLDOWN_SIZE, 15) / 100f;
             mQuickPulldownSize.set(1-size, size);
@@ -475,7 +488,8 @@ public class ModQuickSettings {
                     phoneStatusBarClass, quickSettingsSetServiceHook);
             XposedHelpers.findAndHookMethod(quickSettingsClass, "addSystemTiles", 
                     ViewGroup.class, LayoutInflater.class, quickSettingsAddSystemTilesHook);
-            XposedHelpers.findAndHookMethod(quickSettingsClass, "updateResources", quickSettingsUpdateResourcesHook);
+            XposedHelpers.findAndHookMethod(quickSettingsClass, "updateResources",
+                    quickSettingsUpdateResourcesHook);
             XposedHelpers.findAndHookMethod(notifPanelViewClass, "onTouchEvent", 
                     MotionEvent.class, notificationPanelViewOnTouchEvent);
             XposedHelpers.findAndHookMethod(phoneStatusBarClass, "makeStatusBarView", 

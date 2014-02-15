@@ -1248,6 +1248,11 @@
     <string name="animation_scale6">Animation scale 5x</string>
     <string name="animation_scale7">Animation scale 10x</string>
 
+    <!-- QS Tiles: Tile label style -->
+    <string name="pref_qs_tile_label_style_title">Tile label style</string>
+    <string name="tile_label_style_normal">Normal</string>
+    <string name="tile_label_style_allcaps">All capitals</string>
+
     <!-- Key Actions: Show brightness dialog -->
     <string name="hwkey_action_brightness_dialog">Show brightness dialog</string>
 
