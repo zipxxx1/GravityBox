@@ -53,6 +53,8 @@ import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.Surface;
 import android.view.View.OnLongClickListener;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Gravity;
@@ -124,6 +126,7 @@ public class ModLockscreen {
     private static ImageView mLockScreenWallpaperImage;
     private static boolean mFirstRun;
     private static String mCarrierText[];
+    private static GestureDetector mDoubletapGesture;
 
     // Battery Arc
     private static HandleDrawable mHandleDrawable;
@@ -332,7 +335,21 @@ public class ModLockscreen {
                             boolean.class, boolean.class, glowPadViewHideTargetsHook);
                     XposedHelpers.findAndHookMethod(mGlowPadViewClass, "switchToState", 
                             int.class, float.class, float.class, glowPadViewSwitchToStateHook);
+                    XposedHelpers.findAndHookMethod(mGlowPadViewClass, "onTouchEvent",
+                            MotionEvent.class, glowPadViewOnTouchEventHook);
                     mHandler = new Handler();
+
+                    if (mDoubletapGesture == null) {
+                        mDoubletapGesture = new GestureDetector(context, 
+                                new GestureDetector.SimpleOnGestureListener() {
+                            @Override
+                            public boolean onDoubleTap(MotionEvent e) {
+                                Intent intent = new Intent(ModHwKeys.ACTION_SLEEP);
+                                context.sendBroadcast(intent);
+                                return true;
+                            }
+                        });
+                    }
 
                     // apply custom bottom/right margin to shift unlock ring upwards/left
                     try {
@@ -853,6 +870,16 @@ public class ModLockscreen {
                     mHandler.removeCallbacks(mToggleTorchRunnable);
                 }
                 mPrevGlowPadState = state;
+            }
+        }
+    };
+
+    private static XC_MethodHook glowPadViewOnTouchEventHook = new XC_MethodHook() {
+        @Override
+        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+            if (param.thisObject == mGlowPadView && mDoubletapGesture != null &&
+                    mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_RING_DT2S, false)) {
+                mDoubletapGesture.onTouchEvent((MotionEvent)param.args[0]);
             }
         }
     };

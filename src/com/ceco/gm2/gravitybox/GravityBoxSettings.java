@@ -229,6 +229,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER2_TEXT = "pref_lockscreen_carrier2_text";
     public static final String PREF_KEY_LOCKSCREEN_SLIDE_BEFORE_UNLOCK = "pref_lockscreen_slide_before_unlock";
+    public static final String PREF_KEY_LOCKSCREEN_RING_DT2S = "pref_lockscreen_ring_dt2s";
     public static final String PREF_KEY_STATUSBAR_LOCK_POLICY = "pref_statusbar_lock_policy";
     public static final int SBL_POLICY_DEFAULT = 0;
     public static final int SBL_POLICY_UNLOCKED = 1;
