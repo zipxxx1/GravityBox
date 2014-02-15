@@ -662,12 +662,14 @@
                 <com.ceco.gm2.gravitybox.preference.AppPickerPreference 
                     android:key="pref_clock_link_app"
                     android:title="@string/pref_clock_link_title"
-                    android:summary="@string/pref_clock_link_summary" />
+                    android:summary="@string/pref_clock_link_summary"
+                    iconPickerEnabled="false" />
 
                 <com.ceco.gm2.gravitybox.preference.AppPickerPreference 
                     android:key="pref_clock_longpress_link"
                     android:title="@string/pref_clock_longpress_link_title"
-                    android:summary="@string/app_picker_none" />
+                    android:summary="@string/app_picker_none"
+                    iconPickerEnabled="false" />
 
             </PreferenceCategory>
 
@@ -1700,12 +1702,14 @@
             <com.ceco.gm2.gravitybox.preference.AppPickerPreference
                 android:key="pref_hwkey_custom_app"
                 android:title="@string/pref_hwkey_custom_app_title"
-                android:summary="@string/app_picker_none" />
+                android:summary="@string/app_picker_none"
+                iconPickerEnabled="false" />
 
             <com.ceco.gm2.gravitybox.preference.AppPickerPreference
                 android:key="pref_hwkey_custom_app2"
                 android:title="@string/pref_hwkey_custom_app_title2"
-                android:summary="@string/app_picker_none" />
+                android:summary="@string/app_picker_none"
+                iconPickerEnabled="false" />
 
             <ListPreference
                 android:key="pref_hwkey_doubletap_speed"
