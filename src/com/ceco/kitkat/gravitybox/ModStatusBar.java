@@ -28,6 +28,7 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LayoutInflated;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import android.app.Notification;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -107,6 +108,7 @@ public class ModStatusBar {
     private static boolean mDt2sEnabled;
     private static GestureDetector mDoubletapGesture;
     private static View mIconMergerView;
+    private static String mClockLongpressLink;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -157,6 +159,9 @@ public class ModStatusBar {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_LINK)) {
                     mClockLink = intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_LINK);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK)) {
+                    mClockLongpressLink = intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_LONGPRESS_LINK);
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_ALARM_HIDE)) {
                     mAlarmHide = intent.getBooleanExtra(GravityBoxSettings.EXTRA_ALARM_HIDE, false);
@@ -277,6 +282,8 @@ public class ModStatusBar {
                     mAmPmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_AMPM_HIDE, false);
                     mClockHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_HIDE, false);
                     mClockLink = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LINK, null);
+                    mClockLongpressLink = prefs.getString(
+                            GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK, null);
                     mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
 
                     mIconArea = (ViewGroup) liparam.view.findViewById(
@@ -316,7 +323,7 @@ public class ModStatusBar {
                         mClockExpanded = (TextView) panelHolder.findViewById(
                                 liparam.res.getIdentifier("clock", "id", PACKAGE_NAME));
                     }
-                    
+
                     // inject new clock layout
                     mLayoutClock = new LinearLayout(liparam.view.getContext());
                     mLayoutClock.setLayoutParams(new LinearLayout.LayoutParams(
@@ -516,6 +523,17 @@ public class ModStatusBar {
                         }
                     } else if (carrierTextView instanceof TextView) {
                         mCarrierTextView = (TextView) carrierTextView;
+                    }
+
+                    View dtView = (View) XposedHelpers.getObjectField(param.thisObject, "mDateTimeView");
+                    if (dtView != null) {
+                        dtView.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View v) {
+                                launchClockLongpressApp();
+                                return true;
+                            }
+                        });
                     }
 
                     mScreenWidth = (float) res.getDisplayMetrics().widthPixels;
@@ -1020,6 +1038,25 @@ public class ModStatusBar {
             }
         } catch (Throwable t) {
             log("Error updating carrier text view: " + t.getMessage());
+        }
+    }
+
+    private static void launchClockLongpressApp() {
+        if (mContext == null || mClockLongpressLink == null) return;
+
+        try {
+            final Intent intent = Intent.parseUri(mClockLongpressLink, 0);
+            if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mContext.startActivity(intent);
+                if (mPhoneStatusBar != null) {
+                    XposedHelpers.callMethod(mPhoneStatusBar, "animateCollapsePanels");
+                }
+            }
+        } catch (ActivityNotFoundException e) {
+            log("Error launching assigned app for long-press on clock: " + e.getMessage());
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
     }
 }
