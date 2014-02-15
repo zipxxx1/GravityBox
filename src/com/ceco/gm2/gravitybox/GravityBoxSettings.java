@@ -704,7 +704,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON,
             PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM,
             PREF_KEY_SMART_RADIO_ENABLE,
-            PREF_KEY_PULSE_NOTIFICATION_DELAY
+            PREF_KEY_PULSE_NOTIFICATION_DELAY,
+            PREF_KEY_SCREEN_OFF_EFFECT
     ));
 
     private static final class SystemProperties {
