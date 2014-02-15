@@ -1261,4 +1261,8 @@
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
 
+    <!-- Unlock ring: double-tap to sleep -->
+    <string name="pref_lockscreen_ring_dt2s_title">Enable double-tap to sleep</string>
+    <string name="pref_lockscreen_ring_dt2s_summary">Double-tap on unlock ring puts device to sleep</string>
+
 </resources>

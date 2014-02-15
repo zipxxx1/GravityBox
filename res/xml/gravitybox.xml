@@ -135,6 +135,12 @@
                 android:summary="@string/pref_lockscreen_slide_before_unlock_summary"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference 
+                android:key="pref_lockscreen_ring_dt2s"
+                android:title="@string/pref_lockscreen_ring_dt2s_title"
+                android:summary="@string/pref_lockscreen_ring_dt2s_summary"
+                android:defaultValue="false" />
+
             <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_lockscreen_ring_targets_vertical_offset"
                 android:title="@string/pref_lockscreen_ring_vertical_offset_title"
