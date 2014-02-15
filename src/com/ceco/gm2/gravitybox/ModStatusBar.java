@@ -15,11 +15,13 @@
 
 package com.ceco.gm2.gravitybox;
 
+import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -35,6 +37,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -77,6 +80,7 @@ public class ModStatusBar {
             "com.android.systemui.statusbar.policy.NetworkControllerGemini" :
             "com.android.systemui.statusbar.policy.NetworkController";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
+    private static final String CLASS_ICON_MERGER = "com.android.systemui.statusbar.phone.IconMerger";
     private static final boolean DEBUG = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
@@ -789,6 +793,100 @@ public class ModStatusBar {
                     }
                 }
             });
+
+            // fragment that takes care of notification icon layout for center clock
+            try {
+                final Class<?> classIconMerger = XposedHelpers.findClass(CLASS_ICON_MERGER, classLoader);
+
+                XposedHelpers.findAndHookMethod(classIconMerger, "onMeasure", 
+                        int.class, int.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (!mClockCentered || mClock == null || mContext == null) return;
+
+                        Resources res = mContext.getResources();
+                        int totalWidth = res.getDisplayMetrics().widthPixels;
+                        int iconSize = XposedHelpers.getIntField(param.thisObject, "mIconSize");
+                        Integer sbIconPad = (Integer) XposedHelpers.getAdditionalInstanceField(
+                                param.thisObject, "gbSbIconPad");
+                        if (sbIconPad == null) {
+                            sbIconPad = 0;
+                            int sbIconPadResId = res.getIdentifier("status_bar_icon_padding", "dimen", PACKAGE_NAME);
+                            if (sbIconPadResId != 0) {
+                                sbIconPad = res.getDimensionPixelSize(sbIconPadResId);
+                            }
+                            XposedHelpers.setAdditionalInstanceField(param.thisObject, "gbSbIconPad", sbIconPad);
+                        } else {
+                            sbIconPad = (Integer) XposedHelpers.getAdditionalInstanceField(
+                                    param.thisObject, "gbSbIconPad");
+                        }
+
+                        Paint p = mClock.getView().getPaint();
+                        int clockWidth = (int) p.measureText(mClock.getView().getText().toString()) + iconSize;
+                        int availWidth = totalWidth/2 - clockWidth/2 - iconSize/2;
+                        XposedHelpers.setAdditionalInstanceField(param.thisObject, "gbAvailWidth", availWidth);
+                        int newWidth = availWidth - (availWidth % (iconSize + 2 * sbIconPad));
+
+                        Field fMeasuredWidth = View.class.getDeclaredField("mMeasuredWidth");
+                        fMeasuredWidth.setAccessible(true);
+                        Field fMeasuredHeight = View.class.getDeclaredField("mMeasuredHeight");
+                        fMeasuredHeight.setAccessible(true);
+                        Field fPrivateFlags = View.class.getDeclaredField("mPrivateFlags");
+                        fPrivateFlags.setAccessible(true); 
+                        fMeasuredWidth.setInt(param.thisObject, newWidth);
+                        fMeasuredHeight.setInt(param.thisObject, ((View)param.thisObject).getMeasuredHeight());
+                        int privateFlags = fPrivateFlags.getInt(param.thisObject);
+                        privateFlags |= 0x00000800;
+                        fPrivateFlags.setInt(param.thisObject, privateFlags);
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(classIconMerger, "checkOverflow",
+                        int.class, new XC_MethodReplacement() {
+                    @Override
+                    protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                        if (!mClockCentered || mClock == null || XposedHelpers.getAdditionalInstanceField(
+                                param.thisObject, "gbAvailWidth") == null) {
+                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                        }
+
+                        try {
+                            final View moreView = (View) XposedHelpers.getObjectField(param.thisObject, "mMoreView");
+                            if (moreView == null) return null;
+    
+                            int iconSize = XposedHelpers.getIntField(param.thisObject, "mIconSize");
+                            int availWidth = (Integer) XposedHelpers.getAdditionalInstanceField(
+                                    param.thisObject, "gbAvailWidth");
+                            int sbIconPad = (Integer) XposedHelpers.getAdditionalInstanceField(
+                                    param.thisObject, "gbSbIconPad");
+    
+                            LinearLayout layout = (LinearLayout) param.thisObject;
+                            final int N = layout.getChildCount();
+                            int visibleChildren = 0;
+                            for (int i=0; i<N; i++) {
+                                if (layout.getChildAt(i).getVisibility() != View.GONE) visibleChildren++;
+                            }
+    
+                            final boolean overflowShown = (moreView.getVisibility() == View.VISIBLE);
+                            final boolean moreRequired = visibleChildren * (iconSize + 2 * sbIconPad) > availWidth;
+                            if (moreRequired != overflowShown) {
+                                layout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        moreView.setVisibility(moreRequired ? View.VISIBLE : View.GONE);
+                                    }
+                                });
+                            }
+                            return null;
+                        } catch (Throwable t) {
+                            log("Error in IconMerger.checkOverflow: " + t.getMessage());
+                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);;
+            }
         }
         catch (Throwable t) {
             XposedBridge.log(t);
@@ -840,6 +938,7 @@ public class ModStatusBar {
                 mIconArea.removeView(mClock.getView());
             }
             mLayoutClock.addView(mClock.getView());
+            mLayoutClock.setVisibility(View.VISIBLE);
             if (DEBUG) log("Clock set to center position");
         } else {
             mClock.getView().setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
@@ -852,6 +951,7 @@ public class ModStatusBar {
             } else {
                 mIconArea.addView(mClock.getView());
             }
+            mLayoutClock.setVisibility(View.GONE);
             if (DEBUG) log("Clock set to normal position");
         }
 
