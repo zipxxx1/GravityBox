@@ -1165,6 +1165,12 @@
                 android:defaultValue="false" />
 
             <CheckBoxPreference 
+                android:key="pref_charger_plugged_sound"
+                android:title="@string/pref_charger_plugged_sound_title"
+                android:summary="@string/pref_charger_plugged_sound_summary"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference 
                 android:key="pref_flashing_led_disable"
                 android:title="@string/pref_flashing_led_disable_title"
                 android:summary="@string/pref_flashing_led_disable_summary"

@@ -28,10 +28,12 @@ public class BatteryInfoManager {
     private ArrayList<BatteryStatusListener> mListeners;
     private Context mGbContext;
     private boolean mChargedSoundEnabled;
+    private boolean mPluggedSoundEnabled;
 
     class BatteryData {
         boolean charging;
         int level;
+        int powerSource;
     }
 
     public interface BatteryStatusListener {
@@ -43,8 +45,10 @@ public class BatteryInfoManager {
         mBatteryData = new BatteryData();
         mBatteryData.charging = false;
         mBatteryData.level = 0;
+        mBatteryData.powerSource = 0;
         mListeners = new ArrayList<BatteryStatusListener>();
         mChargedSoundEnabled = false;
+        mPluggedSoundEnabled = false;
     }
 
     public void registerListener(BatteryStatusListener listener) {
@@ -63,15 +67,26 @@ public class BatteryInfoManager {
         int newLevel = (int)(100f
                 * intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
                 / intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100));
-        boolean newCharging = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
+        int newPowerSource = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+        boolean newCharging = newPowerSource != 0;
 
-        if (mBatteryData.level != newLevel || mBatteryData.charging != newCharging) {
+        if (mBatteryData.level != newLevel || mBatteryData.charging != newCharging ||
+                mBatteryData.powerSource != newPowerSource) {
             if (mChargedSoundEnabled && newLevel == 100 && mBatteryData.level == 99) {
-                playChargedSound();
+                playSound(R.raw.battery_charged);
+            }
+
+            if (mPluggedSoundEnabled && mBatteryData.powerSource != newPowerSource) {
+                if (newPowerSource == 0) {
+                    playSound(R.raw.charger_unplugged);
+                } else if (newPowerSource != BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+                    playSound(R.raw.charger_plugged);
+                }
             }
 
             mBatteryData.level = newLevel;
             mBatteryData.charging = newCharging;
+            mBatteryData.powerSource = newPowerSource;
             notifyListeners();
         }
     }
@@ -80,9 +95,13 @@ public class BatteryInfoManager {
         mChargedSoundEnabled = enabled;
     }
 
-    private void playChargedSound() {
+    public void setPluggedSoundEnabled(boolean enabled) {
+        mPluggedSoundEnabled = enabled;
+    }
+
+    private void playSound(int soundResId) {
         try {
-            MediaPlayer mp = MediaPlayer.create(mGbContext, R.raw.battery_charged);
+            MediaPlayer mp = MediaPlayer.create(mGbContext, soundResId);
             mp.start();
         } catch (Throwable t) {
             XposedBridge.log(t);

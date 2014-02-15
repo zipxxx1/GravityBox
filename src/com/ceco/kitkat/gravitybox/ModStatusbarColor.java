@@ -155,6 +155,8 @@ public class ModStatusbarColor {
                             GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE, false));
                     mIconManager.getBatteryInfoManager().setChargedSoundEnabled(prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_BATTERY_CHARGED_SOUND, false));
+                    mIconManager.getBatteryInfoManager().setPluggedSoundEnabled(prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_CHARGER_PLUGGED_SOUND, false));
                     mBroadcastSubReceivers.add(mIconManager);
                 }
             });
