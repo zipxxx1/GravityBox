@@ -279,7 +279,7 @@ public class ModHwKeys {
                 mExpandedDesktopMode = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
             } else if (action.equals(ACTION_TOGGLE_EXPANDED_DESKTOP) && mPhoneWindowManager != null) {
-                toggleExpandedDesktop();
+                toggleExpandedDesktop(value);
             } else if (action.equals(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING)) {
                 toggleScreenRecording();
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED)) {
@@ -1246,6 +1246,10 @@ public class ModHwKeys {
     }
 
     private static void toggleExpandedDesktop() {
+        toggleExpandedDesktop(GravityBoxSettings.HWKEY_ACTION_DEFAULT);
+    }
+
+    private static void toggleExpandedDesktop(final int value) {
         Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
         if (handler == null) return;
 
@@ -1259,11 +1263,22 @@ public class ModHwKeys {
                     if (edMode == GravityBoxSettings.ED_DISABLED) {
                         Toast.makeText(mContext, mStrExpandedDesktopDisabled, Toast.LENGTH_SHORT).show();
                     } else {
-                        final int edState = Settings.Global.getInt(resolver,
-                                ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0);
-                        Settings.Global.putInt(resolver, 
-                                ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
-                                (edState == 1) ? 0 : 1);
+                        if (value == GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                            final int edState = Settings.Global.getInt(resolver,
+                                    ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0);
+                            Settings.Global.putInt(resolver, 
+                                    ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
+                                    (edState == 1) ? 0 : 1);
+                        } else {
+                            // action = "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP"
+                            // extra = "hwKeyValue:0" (ED toggle)
+                            // extra = "hwKeyValue:1" (ED on)
+                            // extra = "hwKeyValue:-1" (ED off), (any value not 0 or 1),
+                            // no extra = (ED toggle, like GB shortcut)
+                            Settings.Global.putInt(resolver, 
+                                    ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
+                                        (value == 1) ? 0 : 1);
+                        }
                     }
                 } catch (Throwable t) {
                         XposedBridge.log(t);
