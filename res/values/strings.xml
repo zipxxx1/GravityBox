@@ -1252,6 +1252,7 @@
     <string name="pref_qs_tile_label_style_title">Tile label style</string>
     <string name="tile_label_style_normal">Normal</string>
     <string name="tile_label_style_allcaps">All capitals</string>
+    <string name="tile_label_style_hidden">Hidden</string>
 
     <!-- Key Actions: Show brightness dialog -->
     <string name="hwkey_action_brightness_dialog">Show brightness dialog</string>

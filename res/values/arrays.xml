@@ -909,11 +909,13 @@
     <string-array name="tile_label_style_entries" translatable="false">
         <item>@string/tile_label_style_normal</item>
         <item>@string/tile_label_style_allcaps</item>
+        <item>@string/tile_label_style_hidden</item>
     </string-array>
 
     <string-array name="tile_label_style_values" translatable="false">
         <item>NORMAL</item>
         <item>ALLCAPS</item>
+        <item>HIDDEN</item>
     </string-array>
 
     <string-array name="navring_haptic_feedback_entries" translatable="false">

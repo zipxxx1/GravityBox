@@ -124,7 +124,7 @@ public class ModQuickSettings {
     private static boolean mHideOnChange;
     private static boolean mQsTileSpanDisable;
     private static LabelStyle mQsTileLabelStyle = LabelStyle.ALLCAPS;
-    private enum LabelStyle { NORMAL, ALLCAPS };
+    private enum LabelStyle { NORMAL, ALLCAPS, HIDDEN };
 
     private static float mGestureStartX;
     private static float mGestureStartY;
@@ -373,6 +373,12 @@ public class ModQuickSettings {
                     textSize = 12;
                     break;
             }
+        }
+
+        if (mQsTileLabelStyle == LabelStyle.HIDDEN) {
+            imgMarginTop += TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, textSize,
+                    res.getDisplayMetrics());
+            textSize = 0;
         }
 
         for(int i = 0; i < tileCount; i++) {
