@@ -1232,5 +1232,33 @@
     
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">快速下拉栏大小</string>
+    
+    <!-- Stay Awake Tile modes -->
+    <string name="stay_awake_15s">15秒</string>
+    <string name="stay_awake_30s">30秒</string>
+    <string name="stay_awake_1m">1分钟</string>
+    <string name="stay_awake_2m">2分钟</string>
+    <string name="stay_awake_5m">5分钟</string>
+    <string name="stay_awake_10m">10分钟</string>
+    <string name="stay_awake_30m">30分钟</string>
+
+    <!-- Screen recording options -->
+    <string name="pref_cat_screenrecord_options_title">屏幕录制</string>
+    <string name="pref_cat_screenrecord_options_summary">包含各种与屏幕录制相关的调整选项</string>
+    <string name="pref_screenrecord_size_title">视频大小</string>
+    <string name="scr_size_default">设备默认</string>
+    <string name="scr_size_sd">标清 (360x640px)</string>
+    <string name="scr_size_hd">高清 (720x1280px)</string>
+    <string name="scr_size_full_hd">全高清 (1080x1920px)</string>
+    <string name="pref_screenrecord_bitrate_title">视频比特率</string>
+    <string name="pref_screenrecord_timelimit_title">限时</string>
+    <string name="pref_screenrecord_rotate_title">旋转视频</string>
+    <string name="pref_screenrecord_rotate_summary">旋转90度输出</string>
+    <string name="pref_screenrecord_microphone_title">使用麦克风</string>
+    <string name="pref_screenrecord_microphone_summary">是否使用麦克风音频输入</string>
+
+    <!-- Icon picker: new icons -->
+    <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
+    <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
 
 </resources>
