@@ -1257,4 +1257,17 @@
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Размер зоны вытягивания</string>
 
+    <!-- Stay Awake Tile modes -->
+    <string name="stay_awake_15s">15с</string>
+    <string name="stay_awake_30s">30с</string>
+    <string name="stay_awake_1m">1м</string>
+    <string name="stay_awake_2m">2м</string>
+    <string name="stay_awake_5m">5м</string>
+    <string name="stay_awake_10m">10м</string>
+    <string name="stay_awake_30m">30м</string>
+
+    <!-- Icon picker: new icons -->
+    <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
+    <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
+
 </resources>
