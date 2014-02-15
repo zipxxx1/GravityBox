@@ -555,8 +555,10 @@ public class ModStatusBar {
                         mCarrierDividerImageView = (ImageView) carrierLabelGemini.findViewById(
                                 res.getIdentifier("carrier_divider", "id", PACKAGE_NAME));
                     } else {
-                        mCarrierTextView = new TextView[] {(TextView) XposedHelpers.getObjectField(
-                                param.thisObject, "mCarrierLabel")};
+                        Object o = XposedHelpers.getObjectField(param.thisObject, "mCarrierLabel");
+                        if (o instanceof TextView) {
+                            mCarrierTextView = new TextView[] {(TextView)o};
+                        }
                     }
 
                     View dtView = (View) XposedHelpers.getObjectField(param.thisObject, "mDateTimeView");
