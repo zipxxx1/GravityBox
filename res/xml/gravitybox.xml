@@ -622,37 +622,54 @@
             android:key="pref_cat_clock_settings"
             android:title="@string/pref_cat_clock_settings_title">
 
-            <CheckBoxPreference 
-                android:key="pref_statusbar_center_clock"
-                android:title="@string/pref_statusbar_center_clock_title"
-                android:defaultValue="false" />
+            <PreferenceCategory 
+                android:key="pref_cat_statusbar_clock"
+                android:title="@string/pref_cat_statusbar_clock_title">
 
-            <ListPreference 
-                android:key="pref_statusbar_clock_dow2"
-                android:title="@string/pref_statusbar_clock_dow_title"
-                android:entries="@array/clock_dow_entries"
-                android:entryValues="@array/clock_dow_values"
-                android:defaultValue="0" />
+                <CheckBoxPreference 
+                    android:key="pref_statusbar_center_clock"
+                    android:title="@string/pref_statusbar_center_clock_title"
+                    android:defaultValue="false" />
 
-            <CheckBoxPreference 
-                android:key="pref_clock_ampm_hide"
-                android:title="@string/pref_clock_ampm_hide_title"
-                android:defaultValue="false" />
+                <ListPreference 
+                    android:key="pref_statusbar_clock_dow2"
+                    android:title="@string/pref_statusbar_clock_dow_title"
+                    android:entries="@array/clock_dow_entries"
+                    android:entryValues="@array/clock_dow_values"
+                    android:defaultValue="0" />
 
-            <CheckBoxPreference 
-                android:key="pref_clock_hide"
-                android:title="@string/pref_clock_hide_title"
-                android:defaultValue="false" />
+                <CheckBoxPreference 
+                    android:key="pref_clock_ampm_hide"
+                    android:title="@string/pref_clock_ampm_hide_title"
+                    android:defaultValue="false" />
 
-            <com.ceco.gm2.gravitybox.preference.AppPickerPreference 
-                android:key="pref_clock_link_app"
-                android:title="@string/pref_clock_link_title"
-                android:summary="@string/pref_clock_link_summary" />
+                <CheckBoxPreference 
+                    android:key="pref_clock_hide"
+                    android:title="@string/pref_clock_hide_title"
+                    android:defaultValue="false" />
 
-            <CheckBoxPreference 
-                android:key="pref_alarm_icon_hide"
-                android:title="@string/pref_alarm_icon_hide_title"
-                android:defaultValue="false" />
+                <CheckBoxPreference 
+                    android:key="pref_alarm_icon_hide"
+                    android:title="@string/pref_alarm_icon_hide_title"
+                    android:defaultValue="false" />
+
+            </PreferenceCategory>
+
+            <PreferenceCategory 
+                android:key="pref_cat_notif_panel_clock"
+                android:title="@string/pref_cat_notif_panel_clock_title">
+
+                <com.ceco.gm2.gravitybox.preference.AppPickerPreference 
+                    android:key="pref_clock_link_app"
+                    android:title="@string/pref_clock_link_title"
+                    android:summary="@string/pref_clock_link_summary" />
+
+                <com.ceco.gm2.gravitybox.preference.AppPickerPreference 
+                    android:key="pref_clock_longpress_link"
+                    android:title="@string/pref_clock_longpress_link_title"
+                    android:summary="@string/app_picker_none" />
+
+            </PreferenceCategory>
 
         </PreferenceScreen>
 

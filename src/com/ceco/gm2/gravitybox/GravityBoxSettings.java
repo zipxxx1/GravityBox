@@ -176,6 +176,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_STATUSBAR_CLOCK_AMPM_HIDE = "pref_clock_ampm_hide";
     public static final String PREF_KEY_STATUSBAR_CLOCK_HIDE = "pref_clock_hide";
     public static final String PREF_KEY_STATUSBAR_CLOCK_LINK = "pref_clock_link_app";
+    public static final String PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK = "pref_clock_longpress_link";
     public static final String PREF_KEY_ALARM_ICON_HIDE = "pref_alarm_icon_hide";
     public static final String PREF_KEY_TM_MODE = "pref_tm_mode";
     public static final String PREF_KEY_TM_STATUSBAR_LAUNCHER = "pref_tm_statusbar_launcher";
@@ -503,6 +504,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_AMPM_HIDE = "ampmHide";
     public static final String EXTRA_CLOCK_HIDE = "clockHide";
     public static final String EXTRA_CLOCK_LINK = "clockLink";
+    public static final String EXTRA_CLOCK_LONGPRESS_LINK = "clockLongpressLink";
     public static final String EXTRA_ALARM_HIDE = "alarmHide";
 
     public static final String ACTION_PREF_SAFE_MEDIA_VOLUME_CHANGED = "gravitybox.intent.action.SAFE_MEDIA_VOLUME_CHANGED";
@@ -2111,6 +2113,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_LINK)) {
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_CLOCK_LINK, prefs.getString(PREF_KEY_STATUSBAR_CLOCK_LINK, null));
+            } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK)) {
+                intent.setAction(ACTION_PREF_CLOCK_CHANGED);
+                intent.putExtra(EXTRA_CLOCK_LONGPRESS_LINK,
+                        prefs.getString(PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK, null));
             } else if (key.equals(PREF_KEY_ALARM_ICON_HIDE)) {
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_ALARM_HIDE, prefs.getBoolean(PREF_KEY_ALARM_ICON_HIDE, false));
