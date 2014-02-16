@@ -88,6 +88,8 @@
     <string name="quick_settings_usb_tether_off">Odpojené</string>
     <string name="quick_settings_usb_tether_connected">Zdieľanie vyp</string>
     <string name="quick_settings_usb_tether_on">Zdieľanie zap</string>
+    <string name="quick_settings_smart_radio_on">Smart Radio zap</string>
+    <string name="quick_settings_smart_radio_off">Smart Radio vyp</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Dlaždice QuickSettings panelu</string>
@@ -120,6 +122,7 @@
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Fotoaparát</string>
     <string name="qs_tile_usb_tethering">USB prístupový bod</string>
+    <string name="qs_tile_smart_radio">Smart Radio</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Výber farby</string>
@@ -476,9 +479,12 @@
     <string name="hwkey_action_custom_app_none">Aplikácia nie je nastavená!</string>
     <string name="hwkey_action_custom_app_missing">Aplikácia nebola nájdená!</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">Aplikácia hodín notifikačného panelu</string>
+    <!-- Notification panel clock -->
+    <string name="pref_cat_statusbar_clock_title">Hodiny stavovej lišty</string>
+    <string name="pref_cat_notif_panel_clock_title">Hodiny panelu oznámení</string>
+    <string name="pref_clock_link_title">Aplikácia na ťuknutie</string>
     <string name="pref_clock_link_summary">Naviaže hodiny notifikačného panelu na zvolenú aplikáciu namiesto nastavenia dátumu a času</string>
+    <string name="pref_clock_longpress_link_title">Aplikácia na dlhé podržanie</string>
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Čakám na odpoveď zo systémového modulu GravityBox&#8230;</string>
@@ -1199,6 +1205,12 @@
     <string name="animation_scale6">Mierka animácie 5x</string>
     <string name="animation_scale7">Mierka animácie 10x</string>
 
+    <!-- QS Tiles: Tile label style -->
+    <string name="pref_qs_tile_label_style_title">Štýl textu dlaždice</string>
+    <string name="tile_label_style_normal">Normálny</string>
+    <string name="tile_label_style_allcaps">Veľké písmená</string>
+    <string name="tile_label_style_hidden">Skryť</string>
+
     <!-- Key Actions: Show brightness dialog -->
     <string name="hwkey_action_brightness_dialog">Otvoriť nastavenie jasu</string>
 
@@ -1210,5 +1222,29 @@
 
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Šírka aktívneho okraja</string>
+
+    <!-- Stay Awake Tile modes -->
+    <string name="stay_awake_15s">15s</string>
+    <string name="stay_awake_30s">30s</string>
+    <string name="stay_awake_1m">1m</string>
+    <string name="stay_awake_2m">2m</string>
+    <string name="stay_awake_5m">5m</string>
+    <string name="stay_awake_10m">10m</string>
+    <string name="stay_awake_30m">30m</string>
+
+    <!-- Icon picker: new icons -->
+    <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
+    <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
+
+    <!-- Unlock ring: double-tap to sleep -->
+    <string name="pref_lockscreen_ring_dt2s_title">Uspať dvojitým ťuknutím</string>
+    <string name="pref_lockscreen_ring_dt2s_summary">Dvojité ťuknutie na odomykací prstenec uspí zariadenie</string>
+
+    <!-- Charger plugged/unplugged sound -->
+    <string name="pref_charger_plugged_sound_title">Zvuk pripojenia napájania</string>
+    <string name="pref_charger_plugged_sound_summary">Prehrá zvuk pri pripojení/odpojení napájania</string>
+
+    <!-- GB Actions: Toggle Smart Radio -->
+    <string name="shortcut_smart_radio_toggle">Prepnúť Smart Radio</string>
 
 </resources>
