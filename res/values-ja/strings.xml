@@ -440,9 +440,12 @@
     <string name="hwkey_action_custom_app_none">セットされていません!</string>
     <string name="hwkey_action_custom_app_missing">アプリが見つかりません!</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">通知領域の時計でアプリ起動</string>
-    <string name="pref_clock_link_summary">通知領域の時計をタップした時に日付と時刻ではなく別のアプリを起動するようにします。</string>
+    <!-- Notification panel clock -->
+    <string name="pref_cat_statusbar_clock_title">ステータスバーの時計</string>
+    <string name="pref_cat_notif_panel_clock_title">通知領域の時計</string>
+    <string name="pref_clock_link_title">タップで起動するアプリ</string>
+    <string name="pref_clock_link_summary">時計をタップしたときに日付と時刻設定ではなく指定したアプリを起動するようにします。</string>
+    <string name="pref_clock_longpress_link_title">長押しで起動するアプリ</string>
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">GravityBoxフレームワークの応答を待っています&#8230;</string>
@@ -1234,5 +1237,13 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
+    
+    <!-- Unlock ring: double-tap to sleep -->
+    <string name="pref_lockscreen_ring_dt2s_title">ダブルタップで消灯を有効化</string>
+    <string name="pref_lockscreen_ring_dt2s_summary">ロック解除リングをダブルタップすると画面を消灯するようにします。</string>
+
+    <!-- Charger plugged/unplugged sound -->
+    <string name="pref_charger_plugged_sound_title">充電器接続時の効果音</string>
+    <string name="pref_charger_plugged_sound_summary">充電器を接続/接続解除したときに効果音を再生します。</string>
     
 </resources>
