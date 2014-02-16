@@ -104,6 +104,8 @@
     <string name="quick_settings_usb_tether_off">Szétkapcsolva</string>
     <string name="quick_settings_usb_tether_connected">Megosztás kikapcsolva</string>
     <string name="quick_settings_usb_tether_on">Megosztás</string>
+    <string name="quick_settings_smart_radio_on">Okos rádiókapcsolat be</string>
+    <string name="quick_settings_smart_radio_off">Okos rádiókapcsolat ki</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Állapotsáv Gyorsbeállítások csempéi</string>
@@ -137,6 +139,7 @@
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Kamera</string>
     <string name="qs_tile_usb_tethering">USB internetmegosztás</string>
+    <string name="qs_tile_smart_radio">Okos rádiókapcsolat</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Szín választó</string>
@@ -502,9 +505,12 @@
     <string name="hwkey_action_custom_app_none">Nincs engedélyezve egyéni alkalmazás!</string>
     <string name="hwkey_action_custom_app_missing">Az egyéni alkalmazás nem található!</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">Értesítési panel óra alkalmazás</string>
+    <!-- Notification panel clock -->
+    <string name="pref_cat_statusbar_clock_title">Értesítési sáv óra alkalmazás</string>
+    <string name="pref_cat_notif_panel_clock_title">Értesítési panel óra alkalmazás</string>
+    <string name="pref_clock_link_title">Egyszeri érintés alkalmazása</string>
     <string name="pref_clock_link_summary">Az értesítési panel órájának megérintésével egy meghatározott alkalmazás megnyitása a Dátum&amp;Idő beállításai helyett</string>
+    <string name="pref_clock_longpress_link_title">Hosszú érintés alkalmazása</string>
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Várakozás a GravityBox keretrendszer válaszára&#8230;</string>
@@ -1239,6 +1245,12 @@
     <string name="animation_scale5">Animáció lépték 2x</string>
     <string name="animation_scale6">Animáció lépték 5x</string>
     <string name="animation_scale7">Animáció lépték 10x</string>
+    
+     <!-- QS Tiles: Tile label style -->
+    <string name="pref_qs_tile_label_style_title">Csempe felirat stílus</string>
+    <string name="tile_label_style_normal">Nomál</string>
+    <string name="tile_label_style_allcaps">Minden nagybetűvel</string>
+    <string name="tile_label_style_hidden">Rejtett</string>
 
     <!-- Key Actions: Show brightness dialog -->
     <string name="hwkey_action_brightness_dialog">Fényerő párbeszédablak mutatása</string>
@@ -1248,5 +1260,32 @@
     <string name="navring_haptic_feedback_default">Alapértelmezett</string>
     <string name="navring_haptic_feedback_enabled">Engedélyezve</string>
     <string name="navring_haptic_feedback_disabled">Letiltva</string>
+
+    <!-- Quick pull down size -->
+    <string name="pref_quick_pulldown_size_title">Gyors legördítés mérete</string>
+
+    <!-- Stay Awake Tile modes -->
+    <string name="stay_awake_15s">15s</string>
+    <string name="stay_awake_30s">30s</string>
+    <string name="stay_awake_1m">1m</string>
+    <string name="stay_awake_2m">2m</string>
+    <string name="stay_awake_5m">5m</string>
+    <string name="stay_awake_10m">10m</string>
+    <string name="stay_awake_30m">30m</string>
+
+    <!-- Icon picker: new icons -->
+    <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
+    <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
+
+    <!-- Unlock ring: double-tap to sleep -->
+    <string name="pref_lockscreen_ring_dt2s_title">Dupla érintésre alvás engedélyezése</string>
+    <string name="pref_lockscreen_ring_dt2s_summary">A feloldó körön történő dupla érintés alvó állapotba helyezi a készüléket</string>
+
+    <!-- Charger plugged/unplugged sound -->
+    <string name="pref_charger_plugged_sound_title">Töltő csatlakoztatása hang</string>
+    <string name="pref_charger_plugged_sound_summary">Hang lejátszása a töltő fel/lecsatlakoztatásakor</string>
+
+    <!-- GB Actions: Toggle Smart Radio -->
+    <string name="shortcut_smart_radio_toggle">Okos rádiókapcsolat ki-bekapcsolása</string>
 
 </resources>
