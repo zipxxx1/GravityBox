@@ -1290,4 +1290,7 @@
     <string name="pref_charger_plugged_sound_title">Charger plugged sound</string>
     <string name="pref_charger_plugged_sound_summary">Plays sound when charger is plugged/unplugged</string>
 
+    <!-- GB Actions: Toggle Smart Radio -->
+    <string name="shortcut_smart_radio_toggle">Toggle Smart Radio</string>
+
 </resources>
