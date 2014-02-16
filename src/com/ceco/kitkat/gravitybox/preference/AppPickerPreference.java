@@ -283,7 +283,8 @@ public class AppPickerPreference extends DialogPreference
                             if (intent.hasExtra("icon")) {
                                 intent.removeExtra("icon");
                             }
-                            intent.putExtra("iconResId", item.getIconLeftId());
+                            intent.putExtra("iconResName", mResources.getResourceEntryName(
+                                    item.getIconLeftId()));
                             setValue(intent.toUri(0));
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -428,7 +429,9 @@ public class AppPickerPreference extends DialogPreference
 
         try {
             Intent intent = Intent.parseUri(value, 0);
-            int iconResId = intent.getIntExtra("iconResId", 0);
+            int iconResId = intent.getStringExtra("iconResName") != null ?
+                    mResources.getIdentifier(intent.getStringExtra("iconResName"),
+                    "drawable", mContext.getPackageName()) : 0;
             int mode = intent.getIntExtra("mode", MODE_APP);
             if (mode == MODE_APP) {
                 ComponentName cn = intent.getComponent();
