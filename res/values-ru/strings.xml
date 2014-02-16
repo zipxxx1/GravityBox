@@ -456,9 +456,12 @@
     <string name="hwkey_action_custom_app_none">Приложение не выбрано!</string>
     <string name="hwkey_action_custom_app_missing">Приложение не найдено!</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">Приложение для часов</string>
+    <!-- Notification panel clock -->
+    <string name="pref_cat_statusbar_clock_title">Часы в строке состояния</string>
+    <string name="pref_cat_notif_panel_clock_title">Часы в панели уведомлений</string>
+    <string name="pref_clock_link_title">Нажатие на часах</string>
     <string name="pref_clock_link_summary">Связывает часы в строке состояния с выбранным приложением вместо настроек даты и времени</string>
+    <string name="pref_clock_longpress_link_title">Удержание на часах</string>
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Ожидание отклика от системного фреймворка GravityBox&#8230;</string>
@@ -1260,5 +1263,13 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
+
+    <!-- Unlock ring: double-tap to sleep -->
+    <string name="pref_lockscreen_ring_dt2s_title">Двойное нажатие для сна</string>
+    <string name="pref_lockscreen_ring_dt2s_summary">Двойное нажатие на кольце разблокировки переводит устройство в режим сна</string>
+
+    <!-- Charger plugged/unplugged sound -->
+    <string name="pref_charger_plugged_sound_title">Звук при подключении ЗУ</string>
+    <string name="pref_charger_plugged_sound_summary">Воспроизведение звука при подключении/отключении зарядного устройства</string>
 
 </resources>
