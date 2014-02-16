@@ -1444,11 +1444,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (Utils.isWifiOnly(getActivity())) {
                 qsEntries.remove(getString(R.string.qs_tile_mobile_data));
                 qsEntries.remove(getString(R.string.qs_tile_network_mode));
+                qsEntries.remove(getString(R.string.qs_tile_smart_radio));
                 qsEntryValues.remove("data_conn_textview");
                 qsEntryValues.remove("network_mode_tileview");
+                qsEntryValues.remove("smart_radio_tileview");
                 if (qsPrefs != null) {
                     if (qsPrefs.contains("data_conn_textview")) qsPrefs.remove("data_conn_textview");
                     if (qsPrefs.contains("network_mode_tileview")) qsPrefs.remove("network_mode_tileview");
+                    if (qsPrefs.contains("smart_radio_tileview")) qsPrefs.remove("smart_radio_tileview");
                 }
             }
             if (!Utils.hasNfc(getActivity())) {
