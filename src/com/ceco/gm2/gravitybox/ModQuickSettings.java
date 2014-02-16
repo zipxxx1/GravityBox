@@ -38,6 +38,7 @@ import com.ceco.gm2.gravitybox.quicksettings.QuickRecordTile;
 import com.ceco.gm2.gravitybox.quicksettings.RingerModeTile;
 import com.ceco.gm2.gravitybox.quicksettings.ScreenshotTile;
 import com.ceco.gm2.gravitybox.quicksettings.SleepTile;
+import com.ceco.gm2.gravitybox.quicksettings.SmartRadioTile;
 import com.ceco.gm2.gravitybox.quicksettings.StayAwakeTile;
 import com.ceco.gm2.gravitybox.quicksettings.TileOrderActivity;
 import com.ceco.gm2.gravitybox.quicksettings.TorchTile;
@@ -174,7 +175,8 @@ public class ModQuickSettings {
             R.id.nfc_tileview,
             R.id.camera_tileview,
             R.id.usb_tether_tileview,
-            R.id.quickapp_tileview_2
+            R.id.quickapp_tileview_2,
+            R.id.smart_radio_tileview
         ));
         if (Utils.isMtkDevice()) {
             mCustomGbTileKeys.add(R.id.wifi_tileview);
@@ -699,6 +701,12 @@ public class ModQuickSettings {
                 UsbTetherTile utTile = new UsbTetherTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 utTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(utTile);
+
+                if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false)) {
+                    SmartRadioTile srTile = new SmartRadioTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                    srTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                    mTiles.add(srTile);
+                }
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {
