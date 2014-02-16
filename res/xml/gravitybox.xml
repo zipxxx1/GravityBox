@@ -1453,7 +1453,7 @@
                     android:title="@string/pref_smart_radio_ignore_locked_title"
                     android:summary="@string/pref_smart_radio_ignore_locked_summary"
                     android:defaultValue="true"
-                    android:dependency="pref_smart_radio_enable" />
+                    android:dependency="pref_smart_radio_screen_off" />
 
             </PreferenceScreen>
 

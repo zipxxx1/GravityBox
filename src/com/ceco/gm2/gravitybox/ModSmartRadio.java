@@ -210,8 +210,8 @@ public class ModSmartRadio {
                                    isMobileDataEnabled() &&
                                    !isWifiConnected();
         // additional rules
-        if (!isTetheringViaMobileNetwork()) {
-            shouldSwitch &= !(mIsScreenOff && mPowerSaveWhenScreenOff);
+        if (mPowerSaveWhenScreenOff && !isTetheringViaMobileNetwork()) {
+            shouldSwitch &= !mIsScreenOff;
             shouldSwitch &= !(isKeyguardLocked() && mIgnoreWhileLocked);
         }
 
