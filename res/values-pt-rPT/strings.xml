@@ -65,6 +65,8 @@
     <string name="quick_settings_usb_tether_on">Associação ativada</string>
     <string name="quick_settings_music_play">Tocar</string>
     <string name="quick_settings_music_pause">Pausa</string>
+    <string name="quick_settings_smart_radio_on">Rádio inteligente ativado</string>
+    <string name="quick_settings_smart_radio_off">Rádio inteligente desativado</string>
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Definições rápidas na barra de status</string>
@@ -96,6 +98,7 @@
     <string name="qs_tile_camera">Câmara</string>
     <string name="qs_tile_usb_tethering">Associação USB</string>
     <string name="qs_tile_music">Música</string>
+    <string name="qs_tile_smart_radio">Rádio inteligente</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Escolher cor</string>
@@ -1239,5 +1242,8 @@
     <!-- Charger plugged/unplugged sound -->
     <string name="pref_charger_plugged_sound_title">Som de ligação do carregador</string>
     <string name="pref_charger_plugged_sound_summary">Emite um som quando o carregador é ligado / desligado</string>
+
+    <!-- GB Actions: Toggle Smart Radio -->
+    <string name="shortcut_smart_radio_toggle">Comutar rádio inteligente</string>
 
 </resources>
