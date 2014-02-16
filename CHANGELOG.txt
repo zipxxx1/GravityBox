@@ -1,3 +1,42 @@
+Changelog 2.9.7 - 16/02/2014
+--------------------------------------
+- Fixed option for enabling/disabling menu overflow button
+- Fixed notification icons overlapping with centered clock
+- QuickSettings management:
+--- Stay Awake tile extended to allow cycling through common screen timeout modes (long-press switches directly to Stay Awake and back)
+--- Added tile for toggling Smart Radio feature on/off on the fly (relevant when Smart Radio master switch is enabled)
+--- Default (English) labels adjusted to be consistent with AOSP tile labels
+- Screen recording:
+--- Added support for audio recording (via audio out mix (default) or via microphone)
+--- Added options for controlling screen recording: video size, bitrate, time limit, etc.
+- Icon Picker:
+--- Improved alternative icon handling to maintain used icons across GB updates (change requires to set currently used icons again)
+--- Created and added icons for Tapatalk and Whatsapp
+- Lockscreen: added option for double-tap to sleep on unlock ring
+- Power tweaks:
+--- Added option for charger plugged/unplugged sound (plugged sound relevant only for AC/USB as wireless has its own sound)
+--- Changed battery charged sound for more audible one
+- Smart radio:
+--- Fixed undesired switching to power saving mode when "Power save when screen off" disabled
+--- Implemented toggle for toggling Smart Radio feature on/off on the fly (using tile or GB action)
+- Statusbar: Added option for assigning app/action to long-press on notification panel clock
+- Brightness settings: Allow lower values for minimum brightness level (changed from 5 to 1 - use with caution)
+- GB Actions:
+--- Added action for toggling Smart Radio feature on/off on the fly (relevant when Smart Radio master switch is enabled)
+--- Added intent extra for setting expanded desktop on/off explicitly for better usability with tasker (thanks to alogblog)
+------ action: gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP
+------ extra: hwKeyValue (values: 0=toggle, 1=on, -1=off) (falls back to 0 when unspecified)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Italian translations (thanks to pesa1234, valerioscifoni)
+- Updated French translation (thanks to ch-vox)
+- Updated Russian translations (thanks to gaich)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Chinese (Traditional) translations (thanks to Eric850130)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Slovak and Czech translations
+
 Changelog 2.9.6 - 09/02/2014
 --------------------------------------
 - Application picker: added support for alternative icons
