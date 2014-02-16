@@ -130,6 +130,8 @@ public class ShortcutActivity extends ListActivity {
             LauncherDrawerShortcut.launchAction(mContext, intent);
         } else if (action.equals(BrightnessDialogShortcut.ACTION)) {
             BrightnessDialogShortcut.launchAction(mContext, intent);
+        } else if (action.equals(SmartRadioShortcut.ACTION)) {
+            SmartRadioShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -162,6 +164,7 @@ public class ShortcutActivity extends ListActivity {
         if (!Utils.isWifiOnly(mContext)) {
             list.add(new MobileDataShortcut(mContext));
             list.add(new NetworkModeShortcut(mContext));
+            list.add(new SmartRadioShortcut(mContext));
         }
         list.add(new BluetoothShortcut(mContext));
         if (Utils.hasNfc(mContext)) {
