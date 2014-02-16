@@ -1231,6 +1231,21 @@
     <string name="stay_awake_10m">10m</string>
     <string name="stay_awake_30m">30m</string>
 
+    <!-- Screen recording options -->
+    <string name="pref_cat_screenrecord_options_title">Gravação de ecrã</string>
+    <string name="pref_cat_screenrecord_options_summary">Contém opções relacionadas com a gravação de ecrã</string>
+    <string name="pref_screenrecord_size_title">Dimensão do vídeo</string>
+    <string name="scr_size_default">Padrão</string>
+    <string name="scr_size_sd">SD (360x640px)</string>
+    <string name="scr_size_hd">HD (720x1280px)</string>
+    <string name="scr_size_full_hd">Full HD (1080x1920px)</string>
+    <string name="pref_screenrecord_bitrate_title">Qualidade do vídeo</string>
+    <string name="pref_screenrecord_timelimit_title">Tempo limite</string>
+    <string name="pref_screenrecord_rotate_title">Rotação de ecrã</string>
+    <string name="pref_screenrecord_rotate_summary">Permite aplicar rotação de 90 graus à gravação</string>
+    <string name="pref_screenrecord_microphone_title">Usar microfone</string>
+    <string name="pref_screenrecord_microphone_summary">Permite usar o microfone para gravação com áudio</string>
+
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
