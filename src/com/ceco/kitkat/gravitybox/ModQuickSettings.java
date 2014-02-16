@@ -41,6 +41,7 @@ import com.ceco.kitkat.gravitybox.quicksettings.QuickRecordTile;
 import com.ceco.kitkat.gravitybox.quicksettings.RingerModeTile;
 import com.ceco.kitkat.gravitybox.quicksettings.ScreenshotTile;
 import com.ceco.kitkat.gravitybox.quicksettings.SleepTile;
+import com.ceco.kitkat.gravitybox.quicksettings.SmartRadioTile;
 import com.ceco.kitkat.gravitybox.quicksettings.StayAwakeTile;
 import com.ceco.kitkat.gravitybox.quicksettings.SyncTile;
 import com.ceco.kitkat.gravitybox.quicksettings.TileOrderActivity;
@@ -153,7 +154,8 @@ public class ModQuickSettings {
             R.id.camera_tileview,
             R.id.usb_tether_tileview,
             R.id.quickapp_tileview_2,
-            R.id.music_tileview
+            R.id.music_tileview,
+            R.id.smart_radio_tileview
         ));
 
         Map<String, Integer> tmpMap = new HashMap<String, Integer>();
@@ -743,6 +745,12 @@ public class ModQuickSettings {
                 MusicTile musicTile = new MusicTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 musicTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(musicTile);
+
+                if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false)) {
+                    SmartRadioTile srTile = new SmartRadioTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                    srTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                    mTiles.add(srTile);
+                }
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {
