@@ -41,12 +41,12 @@
     <string name="caller_fullscreen_photo_title">Foto chiamante a schermo intero</string>
 
         <!-- QuickSettings strings -->
-    <string name="quick_settings_sync_on">Sync on</string>
-    <string name="quick_settings_sync_off">Sync off</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP on</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP off</string>
-    <string name="quick_settings_torch_on">Torcia accesa</string>
-    <string name="quick_settings_torch_off">Torcia spenta</string>
+    <string name="quick_settings_sync_on">Sync On</string>
+    <string name="quick_settings_sync_off">Sync Off</string>
+    <string name="quick_settings_wifi_ap_on">Wi-Fi AP On</string>
+    <string name="quick_settings_wifi_ap_off">Wi-Fi AP Off</string>
+    <string name="quick_settings_torch_on">Torcia Accesa</string>
+    <string name="quick_settings_torch_off">Torcia Spenta</string>
     <string name="quick_settings_torch_off_notif">Tocca per spegnere</string>
     <string name="quick_settings_qr_playing">In riproduzione&#8230;</string>
     <string name="quick_settings_qr_recording">Registrazione&#8230;</string>
@@ -56,27 +56,34 @@
     <string name="quick_settings_expanded_desktop_disabled">Disattivato</string>
     <string name="quick_settings_expanded_desktop_normal">Normale</string>
     <string name="quick_settings_expanded_desktop_expanded">Esteso</string>
-    <string name="quick_settings_stay_awake_on">Rimane acceso ON</string>
-    <string name="quick_settings_stay_awake_off">Rimane spento OFF</string>
-    <string name="quick_settings_nfc_on">NFC on</string>
-    <string name="quick_settings_nfc_off">NFC off</string>
+    <string name="quick_settings_stay_awake_on">Sempre acceso On</string>
+    <string name="quick_settings_stay_awake_off">Sempre acceso Off</string>
+    <string name="quick_settings_nfc_on">NFC On</string>
+    <string name="quick_settings_nfc_off">NFC Off</string>
     <string name="quick_settings_camera_error_connect">Fotocamera non trovata</string>
+    <string name="quick_settings_usb_tether_off">Disconnesso</string>
+    <string name="quick_settings_usb_tether_connected">Tethering Off</string>
+    <string name="quick_settings_usb_tether_on">Tethering On</string>
+    <string name="quick_settings_music_play">Play</string>
+    <string name="quick_settings_music_pause">Pausa</string>
+    <string name="quick_settings_smart_radio_on">Modem Intelligente On</string>
+    <string name="quick_settings_smart_radio_off">Modem Intelligente Off</string>
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Caselle QuickSetting</string>
     <string name="quick_settings_summary">Permette di mostrare o nascondere le caselle QuickSetting nella barra di stato</string>
-    <string name="qs_tile_user_profile">Profilo utente</string>
+    <string name="qs_tile_user_profile">Profilo Utente</string>
     <string name="qs_tile_airplane_mode">Modalità Aereo</string>
-    <string name="qs_tile_battery">Stato batteria</string>
+    <string name="qs_tile_battery">Stato Batteria</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (stile CM)</string>
-    <string name="qs_tile_mobile_data">Dati mobili</string>
-    <string name="qs_tile_network_mode">Modalità rete</string>
-    <string name="qs_tile_data_usage">Utilizzo dati</string>
+    <string name="qs_tile_mobile_data">Dati Mobili</string>
+    <string name="qs_tile_network_mode">Modalità Rete</string>
+    <string name="qs_tile_data_usage">Utilizzo Dati</string>
     <string name="qs_tile_brightness">Luminosità</string>
-    <string name="qs_tile_autorotation">Rotazione automatica</string>
+    <string name="qs_tile_autorotation">Rotazione Automatica</string>
     <string name="qs_tile_sync">Sincronizzazione</string>
     <string name="qs_tile_wifi_ap">Punto d\'accesso Wi-Fi</string>
     <string name="qs_tile_torch">Torcia</string>
@@ -85,13 +92,14 @@
     <string name="qs_tile_quickrecord">Registra</string>
     <string name="qs_tile_settings">Impostazioni</string>
     <string name="qs_tile_volume">Volume</string>
-    <string name="qs_tile_expanded_desktop">Desktop esteso</string>
-    <string name="qs_tile_stay_awake">Rimane acceso</string>
+    <string name="qs_tile_expanded_desktop">Desktop Esteso</string>
+    <string name="qs_tile_stay_awake">Timeout Display</string>
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Fotocamera</string>
     <string name="qs_tile_usb_tethering">Tethering USB</string>
     <string name="qs_tile_music">Musica</string>
+    <string name="qs_tile_smart_radio">Modem Intelligente</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Scegli colore</string>
@@ -378,15 +386,15 @@
     <string name="pref_quickapp_slot4_title">Pressione prolungata slot 4</string>
 
     <!-- GPS Tile (for non-MTK) -->
-    <string name="qs_tile_gps_enabled">GPS acceso</string>
-    <string name="qs_tile_gps_disabled">GPS spento</string>
-    <string name="qs_tile_gps_locked">GPS agganciato</string>
+    <string name="qs_tile_gps_enabled">GPS Acceso</string>
+    <string name="qs_tile_gps_disabled">GPS Spento</string>
+    <string name="qs_tile_gps_locked">GPS Agganciato</string>
 
     <!-- Pie control: always show menu button -->
     <string name="pie_control_menu_title">Mostra sempre tasto menù</string>
 
     <!-- Ringer mode tile (for non-MTK) -->
-    <string name="qs_tile_ringer_mode">Modalità suoneria</string>
+    <string name="qs_tile_ringer_mode">Modalità Suoneria</string>
 
     <!-- Clock settings category -->
     <string name="pref_cat_clock_settings_title">Impostazioni orologio</string>
@@ -437,10 +445,13 @@
     <string name="hwkey_action_custom_app_none">Nessuna applicazione personale assegnata!</string>
     <string name="hwkey_action_custom_app_missing">Applicazione personalizzata non trovata!</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">Collegamento ad app Orologio</string>
-    <string name="pref_clock_link_summary">Collega l\'orologio del pannello notifiche all\'applicazione Orologio invece delle Impostazioni data&amp;ora</string>
-
+     <!-- Notification panel clock -->
+    <string name="pref_cat_statusbar_clock_title">Orologio barra di stato</string>
+    <string name="pref_cat_notif_panel_clock_title">Orologio pannello delle notifiche</string>
+    <string name="pref_clock_link_title">Collegamento app orologio</string>
+    <string name="pref_clock_link_summary">Collega l\'orologio del pannello delle notifiche ad un\'app specifica invece delle impostazioni data&amp;ora</string>
+    <string name="pref_clock_longpress_link_title">Collegamento pressione prolungata orologio</string>
+    
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">In attesa di risposta dal modulo GravityBox&#8230;</string>
     <string name="gb_startup_error">Il modulo GravityBox non risponde, Chiusura in corso.</string>
