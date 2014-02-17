@@ -82,6 +82,7 @@ public class ModDisplay {
     private static Messenger mKisClient;
     private static KeyguardManager mKeyguardManager;
     private static boolean mLsBgLastScreenEnabled;
+    private static boolean mIsUserPresent;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -128,6 +129,8 @@ public class ModDisplay {
                 mLsBgLastScreenEnabled = intent.getStringExtra(GravityBoxSettings.EXTRA_LOCKSCREEN_BG)
                         .equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN);
                 if (DEBUG_KIS) log ("mLsBgLastScreenEnabled = " + mLsBgLastScreenEnabled);
+            } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
+                mIsUserPresent = true;
             }
         }
     };
@@ -260,6 +263,7 @@ public class ModDisplay {
                             intentFilter.addAction(ACTION_SET_AUTOBRIGHTNESS_CONFIG);
                         }
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
+                        intentFilter.addAction(Intent.ACTION_USER_PRESENT);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 });
@@ -364,7 +368,7 @@ public class ModDisplay {
                         CLASS_DISPLAY_POWER_REQUEST, boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                        if (!mLsBgLastScreenEnabled || mKeyguardManager.isKeyguardLocked()) return;
+                        if (!mIsUserPresent || !mLsBgLastScreenEnabled || mKeyguardManager.isKeyguardLocked()) return;
     
                         final boolean waitForNegativeProximity = (Boolean) param.args[1];
                         final boolean pendingWaitForNegativeProximity = 
