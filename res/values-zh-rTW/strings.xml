@@ -57,6 +57,17 @@
     <string name="quick_settings_expanded_desktop_expanded">擴展</string>
     <string name="quick_settings_stay_awake_on">開啟保持清醒</string>
     <string name="quick_settings_stay_awake_off">關閉保持清醒</string>
+    <string name="quick_settings_nfc_on">NFC 開啟</string>
+    <string name="quick_settings_nfc_off">NFC 關閉</string>
+    <string name="quick_settings_camera_error_connect">無法連結至相機</string>
+    <string name="quick_settings_usb_tether_off">中斷連結</string>
+    <string name="quick_settings_usb_tether_connected">數據連線關閉</string>
+    <string name="quick_settings_usb_tether_on">數據連線</string>
+    <string name="quick_settings_music_play">播放</string>
+    <string name="quick_settings_music_pause">暫停</string>
+    <string name="quick_settings_smart_radio_on">Smart Radio 開啟</string>
+    <string name="quick_settings_smart_radio_off">Smart Radio 關閉</string>
+
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">狀態列快速設定磁貼</string>
@@ -84,6 +95,11 @@
     <string name="qs_tile_expanded_desktop">全螢幕功能</string>
     <string name="qs_tile_stay_awake">保持清醒</string>
     <string name="qs_tile_screenshot">螢幕截圖</string>
+    <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">相機</string>
+    <string name="qs_tile_usb_tethering">USB 連結</string>
+    <string name="qs_tile_music">音樂</string>
+    <string name="qs_tile_smart_radio">Smart Radio</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">顏色選擇器</string>
@@ -593,8 +609,8 @@
     <string name="rambar_bottom">按鍵</string>
     
     <!-- HW Key actions for recents button -->
-    <string name="hwkey_recents_singletap_dialog_title">近期鍵單擊操作</string>
-    <string name="hwkey_recents_longpress_dialog_title">近期鍵長按操作</string>
+    <string name="hwkey_recents_singletap_dialog_title">多工鍵單擊操作</string>
+    <string name="hwkey_recents_longpress_dialog_title">多工鍵長按操作</string>
 
     <!-- Lockscreen battery arc -->
     <string name="pref_lockscreen_battery_arc_title">顯示電池狀態圓弧</string>
@@ -610,7 +626,7 @@
     <string name="pref_cat_hwkey_menu_title">選單鍵</string>
     <string name="pref_cat_hwkey_home_title">Home 鍵</string>
     <string name="pref_cat_hwkey_back_title">返回鍵</string>
-    <string name="pref_cat_hwkey_recents_title">近期鍵</string>
+    <string name="pref_cat_hwkey_recents_title">多工鍵</string>
     <string name="pref_cat_hwkey_volume_title">音量鍵</string>
     <string name="pref_cat_hwkey_actions_others">其他設定</string>
     <string name="pref_hwkey_longpress_title">長按操作</string>
@@ -738,7 +754,7 @@
     <string name="app_picker_shortcut_cancelled">目標程式快捷方式已經取消</string>
   
     <!-- Navigation bar: swap back and recents key -->
-    <string name="pref_navbar_swap_keys_title">切換返回鍵與近期鍵</string>
+    <string name="pref_navbar_swap_keys_title">切換返回鍵與多工鍵</string>
    
     <!-- Unlock ring Torch -->
     <string name="pref_lockscreen_ring_torch_title">啟用手電筒</string>
@@ -944,7 +960,7 @@
     <string name="pref_vol_force_music_control_summary">當啟用時，音量鍵將可控制音樂音量而不是鈴聲音量</string>
 
     <!-- Misc tweaks: category for recents panel related tweaks -->
-    <string name="pref_cat_misc_recents_panel_title">近期版面</string>
+    <string name="pref_cat_misc_recents_panel_title">多工版面</string>
 
     <!-- Misc tweaks: category for other settings -->
     <string name="pref_cat_misc_other_title">其他設定</string>
@@ -985,14 +1001,67 @@
     <string name="pref_phone_nonintrusive_incoming_call_title">非侵入性來電</string>
     <string name="pref_phone_nonintrusive_incoming_call_summary">使用者互動過程中保持背景來電</string>
    
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_undefined">未定義</string>
+    <string name="pref_cat_smart_radio_title">Smart Radio</string>
+    <string name="pref_smart_radio_enable_summary">根據行動數據和無線網絡連接狀態，這會自動切換您自訂的省電模式或正常模式 (需要重新啟動)</string>
+    <string name="pref_smart_radio_normal_mode_title">正常網路模式</string>
+    <string name="pref_smart_radio_power_saving_mode_title">節省電力網路模式</string>
+    <string name="pref_smart_radio_screen_off_title">當螢幕關閉</string>
+    <string name="pref_smart_radio_screen_off_summary">當螢幕關閉，無論行動數據是否已被啟用或停用，啟動省電模式</string>
+    <string name="pref_smart_radio_ignore_locked_title">當鎖定時忽略</string>
+    <string name="pref_smart_radio_ignore_locked_summary">當螢幕開啟時，省電模式將不會停用，直到鍵盤鎖定被解除</string>
+    <string name="pref_smart_radio_mode_change_delay_title">網路模式變更延遲</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">設定指定的秒數來延遲變更網路模式</string>
+
+     <!-- Lockscreen: custom carrier text -->
+    <string name="pref_lockscreen_carrier_text_title">自訂第一卡槽標題文字</string>
+    <string name="carrier_text_default">預設</string>
+    <string name="carrier_text_empty">空的</string>
+
+    <!-- Battery charged sound -->
+    <string name="pref_battery_charged_sound_title">電池充電音效</string>
+    <string name="pref_battery_charged_sound_summary">當電池充滿電池播放音效</string>
+
+    <!-- Pie long-press actions -->
+    <string name="pref_cat_pie_long_press_title">長按操作</string>
+    <string name="pref_pie_back_longpress_title">返回鍵</string>
+    <string name="pref_pie_home_longpress_title">Home 鍵</string>
+    <string name="pref_pie_recents_longpress_title">多工鍵</string>
+    <string name="pref_pie_search_longpress_title">搜尋鍵</string>
+    <string name="pref_pie_menu_longpress_title">選單鍵</string>
+    <string name="pref_pie_app_longpress_title">應用程式啟動器鍵</string>
+
+    <!-- Pulse notification delay -->
+    <string name="pref_pulse_notification_delay_title">跳動通知延遲</string>
+    <string name="pref_pulse_notification_delay_summary">需要重新啟動</string>
+
+    <!--  Clear recents modes -->
+    <string name="pref_clear_recents_mode_title">清除所有近期任務操作</string>
+    <string name="pref_clear_recents_mode_0">點選清除全部, 長按清除全部，除了當前操作</string>
+    <string name="pref_clear_recents_mode_1">點選清除全部，除了當前操作, 長按清除全部</string>
+
+    <!-- Power menu: disable on lockscreen -->
+    <string name="pref_powermenu_disable_on_lockscreen_title">鎖定畫面停用電源選單</string>
+
+    <!-- Extended force overflow menu button option -->
+    <string name="overflow_menu_default">系統預設</string>
+    <string name="overflow_menu_enabled">強制啟用</string>
+    <string name="overflow_menu_disabled">強制停用</string>
+
+    <!-- Key Action: Take screenshot -->
+    <string name="hwkey_action_screenshot">擷取螢幕截圖</string>
+
+    <!-- Key Action: Show volume panel -->
+    <string name="hwkey_action_volume_panel">顯示音量面板</string>
+
+    <!-- Blur effect intensity -->
+    <string name="pref_lockscreen_bg_blur_intensity_title">模糊效果強度</string>
    
-       <!-- Smart radio: independent delay for screen off power save event -->
+    <!-- Smart radio: independent delay for screen off power save event -->
     <string name="pref_smart_radio_screen_off_delay_title">延遲省電</string>
     <string name="pref_smart_radio_screen_off_delay_summary">當螢幕關閉時，延遲切換到省電模式。
       如果數值不為零，替代預設網路模式改變的延遲.</string>
-
-    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">自訂第二載波文字</string>
 
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">備份設定</string>
@@ -1137,5 +1206,29 @@
 
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">快速下拉大小</string>
+    
+    <!-- Stay Awake Tile modes -->
+    <string name="stay_awake_15s">15秒</string>
+    <string name="stay_awake_30s">30秒</string>
+    <string name="stay_awake_1m">1分鐘</string>
+    <string name="stay_awake_2m">2分鐘</string>
+    <string name="stay_awake_5m">5分鐘</string>
+    <string name="stay_awake_10m">10分鐘</string>
+    <string name="stay_awake_30m">30分鐘</string>
+
+    <!-- Icon picker: new icons -->
+    <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
+    <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
+
+    <!-- Unlock ring: double-tap to sleep -->
+    <string name="pref_lockscreen_ring_dt2s_title">啟用 雙擊 休眠</string>
+    <string name="pref_lockscreen_ring_dt2s_summary">雙點擊解鎖環使裝置進入休眠</string>
+
+    <!-- Charger plugged/unplugged sound -->
+    <string name="pref_charger_plugged_sound_title">充電器插入音效</string>
+    <string name="pref_charger_plugged_sound_summary">當充電器插入/拔除時播放音效</string>
+
+    <!-- GB Actions: Toggle Smart Radio -->
+    <string name="shortcut_smart_radio_toggle">切換 Smart Radio</string>
     
 </resources>
