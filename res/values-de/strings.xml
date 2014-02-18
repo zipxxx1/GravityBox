@@ -113,7 +113,7 @@
     <string name="qs_tile_camera">Kamera</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
     <string name="qs_tile_music">Musik</string>
-    <string name="qs_tile_smart_radio">Funknetz automat.</string>
+    <string name="qs_tile_smart_radio">Funknetz Automatik</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Farbauswahl</string>
