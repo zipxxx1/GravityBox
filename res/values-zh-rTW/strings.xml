@@ -87,6 +87,11 @@
     <string name="quick_settings_nfc_on">NFC 開啟</string>
     <string name="quick_settings_nfc_off">NFC 關閉</string>
     <string name="quick_settings_camera_error_connect">無法連結相機</string>
+    <string name="quick_settings_usb_tether_off">中斷連結</string>
+    <string name="quick_settings_usb_tether_connected">資料連結關閉</string>
+    <string name="quick_settings_usb_tether_on">資料連結</string>
+    <string name="quick_settings_smart_radio_on">Smart Radio 開啟</string>
+    <string name="quick_settings_smart_radio_off">Smart Radio 關閉</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">狀態列快速設定磁貼</string>
@@ -119,6 +124,8 @@
     <string name="qs_tile_screenshot">螢幕截圖</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">相機</string>
+    <string name="qs_tile_usb_tethering">USB 資料連結</string>
+    <string name="qs_tile_smart_radio">Smart Radio</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">顏色選擇器</string>
