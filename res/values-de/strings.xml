@@ -150,7 +150,7 @@
     <string name="engineering_mode_summary">Startet die Anwendung für den Entwicklermodus</string>
 
     <!-- Dual SIM ringer -->
-    <string name="dual_sim_ringer_title">Dual-SIM-Klingelton &amp Lautstärke</string>
+    <string name="dual_sim_ringer_title">Dual-SIM-Klingelton &amp; Lautstärke</string>
     <string name="dual_sim_ringer_summary">Startet eine Anwendung die es erlaubt für beide SIM-Karten unterschiedliche Rufton- und Benachrichtigungslautstärken einzustellen</string>
 
     <!-- Lockscreen tweaks -->
