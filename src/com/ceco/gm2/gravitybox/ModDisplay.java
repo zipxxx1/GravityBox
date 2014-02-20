@@ -230,7 +230,6 @@ public class ModDisplay {
                         }
     
                         mDisplayPowerController = param.thisObject;
-                        mKeyguardManager = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
     
                         if (brightnessSettingsEnabled) {
                             mScreenBrightnessRangeMinimum = XposedHelpers.getIntField(
@@ -368,7 +367,12 @@ public class ModDisplay {
                         CLASS_DISPLAY_POWER_REQUEST, boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                        if (!mIsUserPresent || !mLsBgLastScreenEnabled || mKeyguardManager.isKeyguardLocked()) return;
+                        if (!mIsUserPresent || !mLsBgLastScreenEnabled) return;
+
+                        if (mKeyguardManager == null) {
+                            mKeyguardManager = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
+                        }
+                        if (mKeyguardManager == null || mKeyguardManager.isKeyguardLocked()) return;
     
                         final boolean waitForNegativeProximity = (Boolean) param.args[1];
                         final boolean pendingWaitForNegativeProximity = 
