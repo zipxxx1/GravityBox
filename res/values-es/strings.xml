@@ -76,10 +76,12 @@
     <string name="quick_settings_nfc_off">NFC desactivado</string>
     <string name="quick_settings_camera_error_connect">Imposible conectar con la cámara</string>
     <string name="quick_settings_usb_tether_off">Desconectado</string>
-    <string name="quick_settings_usb_tether_connected">Tethering off</string>
-    <string name="quick_settings_usb_tether_on">Tethering</string>
+    <string name="quick_settings_usb_tether_connected">Tethering desactivado</string>
+    <string name="quick_settings_usb_tether_on">Tethering activado</string>
     <string name="quick_settings_music_play">Reproducir</string>
     <string name="quick_settings_music_pause">Pausar</string>
+    <string name="quick_settings_smart_radio_on">Modo de red inteligente activado</string>
+    <string name="quick_settings_smart_radio_off">Modo de red inteligente desactivado</string>
  
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Ajustes rápidos de la barra de estado</string>
@@ -109,8 +111,9 @@
     <string name="qs_tile_screenshot">Captura de pantalla</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Cámara</string>
-    <string name="qs_tile_usb_tethering">USB Tethering</string>
+    <string name="qs_tile_usb_tethering">Tethering por USB</string>
     <string name="qs_tile_music">Música</string>
+    <string name="qs_tile_smart_radio">Modo de red inteligente</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de color</string>
@@ -456,9 +459,12 @@
     <string name="hwkey_action_custom_app_none">Aplicación no asignada</string>
     <string name="hwkey_action_custom_app_missing">Aplicación no encontrada</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">App del reloj del panel de notificaciones</string>
+    <!-- Notification panel clock -->
+    <string name="pref_cat_statusbar_clock_title">Reloj de la barra de estado</string>
+    <string name="pref_cat_notif_panel_clock_title">Reloj del panel de notificaciones</string>
+    <string name="pref_clock_link_title">App al clickar el reloj</string>
     <string name="pref_clock_link_summary">Enlaza el reloj que hay en el panel de notificaciones a una app específica en lugar de a los ajustes de fecha y hora</string>
+    <string name="pref_clock_longpress_link_title">App manteniendo pulsado el reloj</string>
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Esperando respuesta del framework del sistema GravityBox&#8230;</string>
@@ -1234,4 +1240,43 @@
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Área para desplegar ajustes rápidos</string>
  
+    <!-- Stay Awake Tile modes -->
+    <string name="stay_awake_15s">15s</string>
+    <string name="stay_awake_30s">30s</string>
+    <string name="stay_awake_1m">1m</string>
+    <string name="stay_awake_2m">2m</string>
+    <string name="stay_awake_5m">5m</string>
+    <string name="stay_awake_10m">10m</string>
+    <string name="stay_awake_30m">30m</string>
+ 
+    <!-- Screen recording options -->
+    <string name="pref_cat_screenrecord_options_title">Grabación de pantalla</string>
+    <string name="pref_cat_screenrecord_options_summary">Contiene opciones para la grabación de pantalla</string>
+    <string name="pref_screenrecord_size_title">Tamaño de video</string>
+    <string name="scr_size_default">Predeterminado del dispositivo</string>
+    <string name="scr_size_sd">SD (360x640px)</string>
+    <string name="scr_size_hd">HD (720x1280px)</string>
+    <string name="scr_size_full_hd">Full HD (1080x1920px)</string>
+    <string name="pref_screenrecord_bitrate_title">Bitrate del vídeo</string>
+    <string name="pref_screenrecord_timelimit_title">Límite de tiempo</string>
+    <string name="pref_screenrecord_rotate_title">Rotar imagen</string>
+    <string name="pref_screenrecord_rotate_summary">Rota la imagen del vídeo 90 grados</string>
+    <string name="pref_screenrecord_microphone_title">Usar micrófono</string>
+    <string name="pref_screenrecord_microphone_summary">Usar micrófono para la entrada de audio</string>
+
+    <!-- Icon picker: new icons -->
+    <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
+    <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
+    
+    <!-- Unlock ring: double-tap to sleep -->
+    <string name="pref_lockscreen_ring_dt2s_title">Activar doble pulsación para suspender</string>
+    <string name="pref_lockscreen_ring_dt2s_summary">Doble pulsación en el anillo de desbloqueo suspende el dispositivo</string>
+ 
+    <!-- Charger plugged/unplugged sound -->
+    <string name="pref_charger_plugged_sound_title">Sonido al conectar cargador</string>
+    <string name="pref_charger_plugged_sound_summary">Reproduce un sonido cuando el cargador se conecta/desconecta</string>
+ 
+    <!-- GB Actions: Toggle Smart Radio -->
+    <string name="shortcut_smart_radio_toggle">Activar/desactivar modo de red inteligente</string>
+
 </resources>
