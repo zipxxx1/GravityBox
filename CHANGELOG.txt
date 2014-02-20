@@ -1,3 +1,44 @@
+Changelog 2.9.7 - 20/02/2014
+--------------------------------------
+- Fixed mysterious bootloops occurring since 'Last screen' feature was added 
+- Fixed option for enabling/disabling menu overflow button
+- Fixed notification icons overlapping with centered clock
+- QuickSettings management:
+--- Stay Awake tile extended to allow cycling through common screen timeout modes (long-press switches directly to Stay Awake and back)
+--- Added tile for toggling Smart Radio feature on/off on the fly (relevant when Smart Radio master switch is enabled)
+--- Default (English) labels adjusted to be consistent with AOSP tile labels
+--- Fixed coloring on USB tethering tile (thanks to bgcngm)
+- Icon Picker:
+--- Improved alternative icon handling to maintain used icons across GB updates (change requires to set currently used icons again)
+--- Created and added icons for Tapatalk and Whatsapp
+- Lockscreen tweaks:
+--- Added option for double-tap to sleep on unlock ring
+--- Last screen: 
+------- don't reduce image quality
+------- fixed scaled images (thanks to bgcngm)
+- Power tweaks:
+--- Added option for charger plugged/unplugged sound (plugged sound relevant only for AC/USB as wireless has its own sound)
+--- Changed battery charged sound for more audible one
+- Smart radio:
+--- Fixed undesired switching to power saving mode when "Power save when screen off" disabled
+--- Implemented toggle for toggling Smart Radio feature on/off on the fly (using tile or GB action)
+- Statusbar: Added option for assigning app/action to long-press on notification panel clock
+- Brightness settings: Allow lower values for minimum brightness level (changed from 5 to 1 - use with caution)
+- GB Actions:
+--- Added action for toggling Smart Radio feature on/off on the fly (relevant when Smart Radio master switch is enabled)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Italian translations (thanks to pesa1234, valerioscifoni)
+- Updated French translation (thanks to ch-vox)
+- Updated Russian translations (thanks to gaich)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Chinese (Traditional) translations (thanks to Eric850130)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Indonesian translation (thanks to awaaas)
+- Updated Hungarian translation (thanks to benjoe1)
+- Updated Slovak and Czech translations
+
 Changelog 2.9.6 - 10/02/2014
 --------------------------------------
 - Application picker: added support for alternative icons
