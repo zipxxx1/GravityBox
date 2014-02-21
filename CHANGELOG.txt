@@ -38,6 +38,7 @@ Changelog 2.9.7 - 20/02/2014
 - Updated Indonesian translation (thanks to awaaas)
 - Updated Hungarian translation (thanks to benjoe1)
 - Updated Slovak and Czech translations
+- Updated Vietnamese translations (thanks to alienyd)
 
 Changelog 2.9.6 - 10/02/2014
 --------------------------------------
