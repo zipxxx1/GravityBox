@@ -65,6 +65,8 @@
     <string name="quick_settings_usb_tether_on">テザリング</string>
     <string name="quick_settings_music_play">再生</string>
     <string name="quick_settings_music_pause">一時停止</string>
+    <string name="quick_settings_smart_radio_on">スマートネットワークオン</string>
+    <string name="quick_settings_smart_radio_off">スマートネットワークオフ</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">ステータスバークイック設定タイル</string>
@@ -95,6 +97,7 @@
     <string name="qs_tile_camera">カメラ</string>
     <string name="qs_tile_usb_tethering">USBテザリング</string>
     <string name="qs_tile_music">音楽</string>
+    <string name="qs_tile_smart_radio">スマートネットワーク</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">カラーピッカー</string>
@@ -1245,5 +1248,8 @@
     <!-- Charger plugged/unplugged sound -->
     <string name="pref_charger_plugged_sound_title">充電器接続時の効果音</string>
     <string name="pref_charger_plugged_sound_summary">充電器を接続/接続解除したときに効果音を再生します。</string>
+    
+    <!-- GB Actions: Toggle Smart Radio -->
+    <string name="shortcut_smart_radio_toggle">スマートネットワークトグル</string>
     
 </resources>
