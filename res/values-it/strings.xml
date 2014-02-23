@@ -18,7 +18,6 @@
     <string name="low_battery_warning_full">Pop-up e suono</string>
     <string name="low_battery_warning_popup">Solo pop-up</string>
     <string name="low_battery_warning_sound">Solo suono</string>
-
     <string name="low_battery_warning_off">Nessun avviso</string>
 
     <string name="reboot_required">Le modifiche saranno applicate dopo il riavvio</string>
@@ -107,7 +106,7 @@
 
     <!-- Statusbar background color -->
     <string name="statusbar_bgcolor_title">Colore sfondo barra di stato</string>
-    <string name="statusbar_bgcolor_summary">Permette di impostare il colore di sfondo e la trasparenza della barra di stato</string>
+    <string name="statusbar_bgcolor_summary">Permette di impostare il colore di sfondo della barra di stato</string>
 
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Barra di stato</string>
@@ -125,7 +124,7 @@
 
     <!-- Reboot confirmation -->
     <string name="reboot_confirm">Il %s verrà riavviato</string>
-    <string name="reboot_confirm_recovery">Il %s verrà riavviato in Recovery</string>
+    <string name="reboot_confirm_recovery">Il %s verrà riavviato in Recovery.</string>
     <string name="reboot_confirm_bootloader">Il %s verrà riavviato in Bootloader.</string>
 
     <!-- Screen off effect -->
@@ -795,6 +794,11 @@
     <string name="pref_dialer_show_dialpad_title">Mostra sempre tastierino numerico</string>
     <string name="pref_dialer_show_dialpad_summary">Mostra sempre il tastierino numerico appena si accede all\'app telefono</string>
     
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_default">Predefinito</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Dissolvenza</string>
+    
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Launcher</string>
     <string name="pref_cat_launcher_tweaks_summary">Si applica solo al launcher Google Experience</string>
@@ -812,15 +816,10 @@
     <string name="fullscreen_caller_partial">Parziale</string>
     <string name="fullscreen_caller_full">Schermo intero</string>
 
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Predefinito</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Dissolvenza</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Mostra percentuale batteria</string>
     <string name="battery_percent_text_size_title">Dimensione percentuale batteria</string>
-	<string name="battery_percent_text_size_larger">Grande</string>
+    <string name="battery_percent_text_size_larger">Grande</string>
     <string name="battery_percent_text_size_normal">Normale</string>
     <string name="battery_percent_text_size_smaller">Piccolo</string>
     <string name="battery_percent_text_size_even_smaller">Più piccolo</string>
@@ -912,12 +911,16 @@
 
     <!-- Toggle WiFi AP shortcut -->
     <string name="shortcut_wifi_ap">WiFi AP</string>
+    
+    <!-- Location mode shortcut -->
+    <string name="shortcut_location_mode">Imposta modalita geolocalizzazione</string>
+    <string name="location_mode_high_accuracy">Alta precisione</string>
+    <string name="location_mode_battery_saving">Basso consumo</string>
+    <string name="location_mode_device_only">Solo del dispositivo</string>
+    <string name="location_mode_off">Geolocalizzazione off</string>
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">NFC</string>
-
-    <!-- Toggle GPS shortcut -->
-    <string name="shortcut_gps">GPS</string>
 
     <!-- Navigation bar ring targets background style -->
     <string name="pref_navbar_ring_targets_bg_style_title">Stile sfondo pulsanti anello</string>
@@ -929,10 +932,7 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">Attiva e personalizza il Pie control</string>
     
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Abilita animazione in carica</string>
-
-	<!-- Shortcut for Google Now -->
+    	<!-- Shortcut for Google Now -->
     <string name="shortcut_google_now">Google Now</string>
     
     <!-- Lockscreen background opacity -->
