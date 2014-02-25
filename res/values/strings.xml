@@ -1296,4 +1296,8 @@
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Master switch</string>
 
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">Disable volume adjust vibrate</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Disables vibrate when adjusting notification/ringtone volume using volume keys</string>
+
 </resources>
