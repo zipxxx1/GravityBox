@@ -1106,7 +1106,7 @@
     <string name="wsc_trans_valid">Überprüfung des Transaktionscodes erfolgreich. Premiumfunktionen werden freigeschaltet nachdem GravityBox neugestartet wurde.</string>
     <string name="wsc_trans_invalid">Zum angegebenen Transaktionscode wurde kein Eintrag gefunden</string>
     <string name="wsc_trans_violation">Der angegebene Transaktionscode wurde zu oft registriert. Kontaktieren Sie bei Bedarf den GravityBox-Entwickler (Englisch).</string>
-    <string name="wsc_trans_blocked">Der angegebene Transaktionscode ist blockiert. Kontaktieren Sie bei Bedarf den GravityBox-Entwickler (Englisch).</</string>
+    <string name="wsc_trans_blocked">Der angegebene Transaktionscode ist blockiert. Kontaktieren Sie bei Bedarf den GravityBox-Entwickler (Englisch).</string>
     <string name="pref_trans_verification_title">Paypal Transaktionscode</string>
     <string name="pref_trans_verification_summary">Sollten Sie gespendet haben, können Sie mit Ihrem Paypal Transaktionscode Premiumfunktionen freischalten</string>
     <string name="wsc_trans_required_summary">Diese Funktion benötigt einen gültigen PayPal Transaktionscode.</string>
