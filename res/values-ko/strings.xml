@@ -997,7 +997,7 @@
     <string name="qs_auto_switch_mode1">알림이 없을 때</string>
     <string name="qs_auto_switch_mode2">지울 수 있는 알림이 없을 때</string>
 
-    <string name="pref_statusbar_dt2s_title"두 번 터치하여 잠금</string>
+    <string name="pref_statusbar_dt2s_title">두 번 터치하여 잠금</string>
     <string name="pref_statusbar_dt2s_summary">상단바를 두 번 터치하여 화면을 끕니다.</string>
 
     <string name="animation_scale0">애니메이션 없음</string>
