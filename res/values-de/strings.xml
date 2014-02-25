@@ -27,7 +27,7 @@
     <string name="battery_style_none">Keine Anzeige</string>
 
     <string name="vol_music_controls_title">Titelsprung mittels Lautstärketasten</string>
-    <string name="vol_music_controls_summary">Musiktitel durch langes Drücken der Lautstärketasten überspringen während der Bildschirm abgeschaltet ist</string>
+    <string name="vol_music_controls_summary">Musiktitel bei inaktivem Bildschirm durch langes Drücken der Lautstärketasten überspringen</string>
 
     <string name="low_battery_warning_policy_title">Warnung bei niedrigem Akkustand</string>
     <string name="low_battery_warning_full">Benachrichtigung und Warnton</string>
@@ -48,7 +48,7 @@
     <string name="vol_key_cursor_control_on">Lautstärketasten hoch/runter bewegen den Textcursor nach links/RECHTS</string>
     <string name="vol_key_cursor_control_on_reverse">Lautstärketasten hoch/runter bewegen den Textcursor nach RECHTS/links</string>
 
-    <string name="recents_clear_all_title">Alle zuletzt geöffneten Anwendungen schließen</string>
+    <string name="recents_clear_all_title">Zuletzt Geöffnete schließen</string>
 
     <string name="important">Wichtig</string>
 
@@ -120,8 +120,8 @@
     <string name="press_color_to_apply">Zur Bestätigung auf Farbfeld drücken</string>
 
     <!-- Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Hintergrundfarbe der Statusleiste</string>
-    <string name="statusbar_bgcolor_summary">Erlaubt es die Hintergrundfarbe der Statusleiste zu ändern</string>
+    <string name="statusbar_bgcolor_title">Farbe der Statusleiste</string>
+    <string name="statusbar_bgcolor_summary">Farbe für die Statusleiste auswählen</string>
 
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Statusleiste anpassen</string>
@@ -143,7 +143,7 @@
     <string name="reboot_confirm_bootloader">%s startet in den Bootloader.</string>
 
     <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Effekt beim Ausschalten des Bildschirms</string>
+    <string name="crt_off_effect_title">Bildschirmeffekt beim Ausschalten</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Entwicklermodus</string>
@@ -206,7 +206,7 @@
     <string name="pref_ab_button_set">Übernehmen</string>
 
     <!-- Lockscreen rotation -->
-    <string name="pref_lockscreen_rotation_title">Sperrbildschirm automatisch ausrichten</string>
+    <string name="pref_lockscreen_rotation_title">Autom. Ausrichtung</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Menü-Taste aktivieren</string>
@@ -252,12 +252,12 @@
     <string name="no_previous_app_found">Keine vorherige App gefunden</string>
 
     <!-- Phone tweaks category -->
-    <string name="pref_cat_phone_title">Anrufeinstellungen anpassen</string>
+    <string name="pref_cat_phone_title">Telefoneinstellungen anpassen</string>
     <string name="pref_cat_phone_summary"></string>
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">Umdrehaktion beim Klingeln</string>
-    <string name="pref_phone_flip_summary">Erlaubt die Auswahl der durchzuführenden Aktion wenn das Telefon bei einem eingehenden Anruf mit dem Bildschirm nach unten gedreht wird</string>
+    <string name="pref_phone_flip_summary">Erlaubt das Durchführen einer Aktion wenn das Telefon bei einem eingehenden Anruf mit dem Bildschirm nach unten gedreht wird</string>	
 	
     <string name="phone_flip_action_none">Keine Aktion ausführen</string>
     <string name="phone_flip_action_mute">Auf lautlos stellen</string>
@@ -290,11 +290,11 @@
     <string name="pref_link_volumes_summary">Wenn deaktiviert lassen sich die Lautstärkestufen für Anrufe und Benachrichtigungen separat einstellen</string>
 
     <!-- Auto-switch QuickSettings -->
-    <string name="pref_auto_switch_qs_title">Schnelleinstellungen automatisch anzeigen</string>
+    <string name="pref_auto_switch_qs_title">Autom. anzeigen</string>
     <string name="pref_auto_switch_qs_summary">Schnelleinstellungen werden automatisch angezeigt wenn die Benachrichtigungsleiste heruntergezogen wird und keine Benachrichtigungen vorliegen</string>
 
     <!-- Quick pulldown -->
-    <string name="pref_quick_pulldown_title">Schnelleinstellungen herunterziehen</string>
+    <string name="pref_quick_pulldown_title">Schnelles herunterziehen</string>
     <string name="pref_quick_pulldown_summary">Schnelleinstellungen werden automatisch angezeigt wenn die Benachrichtigungsleiste an der Ecke heruntergezogen wird</string>
     <string name="quick_pulldown_off">Aus</string>
     <string name="quick_pulldown_right">Rechts</string>
@@ -304,10 +304,10 @@
     <string name="pref_cat_statusbar_colors_title">Farbe der Statusleiste</string>
 
     <!-- Enable icon colors -->
-    <string name="pref_statusbar_icon_color_enable_title">Farbige Symbole aktivieren</string>
+    <string name="pref_statusbar_icon_color_enable_title">Farbige Statusleiste</string>
 
     <!-- Statusbar icon color -->
-    <string name="pref_statusbar_icon_color_title">Farbe der Symbole auswählen</string>
+    <string name="pref_statusbar_icon_color_title">Farbe der Symbole</string>
     <string name="pref_statusbar_icon_color_summary">Farbe für die Symbole und die Uhr in der Statusleiste auswählen</string>
 
     <!-- Statusbar data activity color -->
@@ -482,7 +482,7 @@
     <string name="expanded_desktop_immersive_statusbar">Immersive Benachrichtigungsleiste</string>
     <string name="expanded_desktop_immersive_navbar">Immersive Navigationsleiste</string>    
     <string name="expanded_desktop_both">Semi-Immersiv</string>
-    <string name="expanded_desktop_immersive">Vollständig Immersiv (beide Leisten aus)</string>
+    <string name="expanded_desktop_immersive">Vollständig immersiv (beide Leisten aus)</string>
     <string name="action_expanded_desktop_title">Erweiterter Desktop</string>
     <string name="action_expanded_desktop_on">Erweiterter Desktop ist AN</string>
     <string name="action_expanded_desktop_off">Erweiterter Desktop ist AUS</string>
@@ -553,12 +553,12 @@
     <!-- Intelligent pie -->
     <string name="pie_controls_disabled">Nie</string>
     <string name="pie_controls_enabled_always">Immer</string>
-    <string name="pie_controls_enabled_expanded">Wenn erweiterter Desktop aktiviert ist</string>
-    <string name="pie_controls_enabled_expanded_navbar">Wenn erweiterter Desktop die Navigationsleiste versteckt</string>
+    <string name="pie_controls_enabled_expanded">Bei erweitertem Desktop</string>
+    <string name="pie_controls_enabled_expanded_navbar">Bei erweitertem Desktop und versteckter Navigationsleiste</string>
 
     <!-- Unplug turns on screen -->
-    <string name="pref_unplug_turns_on_screen_title">Mit Kabelverbindung Bildschirm einschalten</string>
-    <string name="pref_unplug_turns_on_screen_summary">Schaltet den Bildschirm an/nicht an sobald man ein Kabel (USB/Strom/Sonstiges) verbindet oder trennt (erfordert Neustart)</string>
+    <string name="pref_unplug_turns_on_screen_title">Kabelverbindung aktiviert Bildschirm</string>
+    <string name="pref_unplug_turns_on_screen_summary">Schaltet den Bildschirm an/nicht an sobald man ein Kabel (USB/Strom/etc.) verbindet oder trennt (erfordert Neustart)</string>
 
     <!-- Mute volume adjust sound -->
     <string name="pref_volume_adjust_mute_title">Signaltöne der Lautstärketasten stummschalten</string>
@@ -625,7 +625,7 @@
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> frei</string>
     <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
     <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> verwendet</string>
-    <string name="pref_rambar_title">RAM-Anzeige für kürzlich geöffnete Apps</string>
+    <string name="pref_rambar_title">RAM-Anzeige im Fenster</string>
     <string name="rambar_off">Aus</string>
     <string name="rambar_top">Oben</string>
     <string name="rambar_bottom">Unten</string>
@@ -704,11 +704,11 @@
     <string name="pref_cat_navbar_dimen_title">Abmessungen</string>
  
     <!-- Navigation bar colors -->
-    <string name="pref_navbar_color_enable_title">Farbige Navigationsleiste aktivieren</string>
+    <string name="pref_navbar_color_enable_title">Farbige Navigationsleiste</string>
     <string name="pref_navbar_color_enable_summary">Erfordert nach Deaktivierung eventuell einen Neustart</string>
     <string name="pref_navbar_key_color_title">Farbe der Navigationstasten</string>
-    <string name="pref_navbar_key_glow_color_title">Leuchtfarbe der Navigationstasten</string>
-    <string name="pref_navbar_bg_color_title">Hintergrundfarbe der Navigationsleiste</string>
+    <string name="pref_navbar_key_glow_color_title">Leuchtfarbe der Tasten</string>
+    <string name="pref_navbar_bg_color_title">Farbe der Navigationsleiste</string>
         
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Transparenz-Manager-Modus</string>
@@ -741,8 +741,8 @@
     <string name="pref_recent_clear_margin_bottom_title">Unteren Rand einstellen</string>
 
     <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Google+ community</string>
-    <string name="pref_about_gplus_summary">Berühren um die GravityBox Google+ community zu besuchen</string>
+    <string name="pref_about_gplus_title">Google+ Community</string>
+    <string name="pref_about_gplus_summary">Berühren um die Community von GravityBox auf Google+ zu besuchen</string>
 
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">LTE Netzmodus erlauben</string>
@@ -751,13 +751,13 @@
     <string name="hwkey_navbar_warning">Um Aktionen in der Statusleiste zu erlauben ist es nötig die Standardeinstellungen im Navigationsleisten-Menü anzupassen</string>
 
     <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">Altes GravityBox mit veraltetem Paketnamen gefunden. 
-        Die alte Version muss zuerst deinstalliert werden. GB wird jetzt versuchen Ihre alten Einstellungen zu kopieren und dann die alte GB-Versino zu deinstallieren. Sie müssen Sie die Deinstallation bestätigen! Nach der Deinstallation muss das neue GB-Modul erneut im Xposed-Installer aktiviert werden. Ebenso muss anschließend ein NEUSTART duchgeführt werden.</string>
+    <string name="gb_new_package_dialog">Altes GravityBox mit veraltetem Paketnamen gefunden.
+        Die alte Version muss zuerst deinstalliert werden. GB wird jetzt versuchen Ihre alten Einstellungen zu kopieren und dann die alte GB-Version zu deinstallieren. Sie müssen Sie die Deinstallation bestätigen! Nach der Deinstallation muss das neue GB-Modul erneut im Xposed-Installer aktiviert werden. Anschließend sollte umgehend ein NEUSTART duchgeführt werden.</string>
     <string name="gb_new_package_settings_transfer_ok">GravityBox Einstellungen erfolgreich kopiert</string>
     <string name="gb_new_package_settings_transfer_failed">Kopieren der GravityBox Einstellungen fehlgeschlagen.</string>
 
     <!-- Lockscreen Torch -->
-    <string name="pref_hwkey_lockscreen_torch_title">Sperrbildschirm Taschenlampe</string>
+    <string name="pref_hwkey_lockscreen_torch_title">Taschenlampe im Sperrbildschirm</string>
     <string name="hwkey_ls_torch_disabled">Deaktiviert</string>
     <string name="hwkey_ls_torch_home_longpress">Langes Drücken der Home Taste</string>
     <string name="hwkey_ls_torch_voldown_longpress">Langes Drücken der Lautstärke-runter Taste</string>
@@ -768,8 +768,8 @@
     <!-- AppPickerPreference: shortcut support -->
     <string name="app_picker_applications">Anwendungen</string>
     <string name="app_picker_shortcuts">Verknüpfungen</string>
-    <string name="app_picker_shortcut_null_intent">es war unmöglich eine Verknüpfung zu erstellen weil die entspr. Aktivität den Shortcode Intent nicht zurückgeliefert hat.</string>
-    <string name="app_picker_shortcut_cancelled">Verknüpfungseinstellung von Zielanwendung abgebrochen</string>
+    <string name="app_picker_shortcut_null_intent">Erstellen der Verknüpfung nicht möglich da die Aktivität keinen Shortcut Intent zurückliefert</string>
+    <string name="app_picker_shortcut_cancelled">Erstellen der Verknüpfung von Zielanwendung abgebrochen</string>
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Zurück- und Zuletzt Geöffnet-Tasten vertauschen</string>
@@ -846,13 +846,13 @@
     <string name="pref_navbar_cursor_control_summary">Aktiviert während der Tastaturanzeige die Tasten zur Cursorsteuerung in der Navigationszeile </string>
 
     <!-- Volume rocker wake -->
-    <string name="pref_volume_rocker_wake_title">Lautstärketasten schalten Bildschirm ein</string>
+    <string name="pref_volume_rocker_wake_title">Lautstärketasten aktivieren Bildschirm</string>
     <string name="volume_rocker_wake_default">Standard</string>
     <string name="volume_rocker_wake_enabled">Aktiviert</string>
     <string name="volume_rocker_wake_disabled">Deaktiviert</string>
 
     <!-- Advanced reboot menu: require confirmation -->
-    <string name="pref_reboot_confirm_required_title">Neustartbestätigung erforderlich</string>
+    <string name="pref_reboot_confirm_required_title">Neustart nach Bestätigung</string>
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Nach Änderung verstecken</string>
@@ -872,8 +872,8 @@
     <string name="inactivity_mode_summary">Zusammenfassung zeigen und bei Inaktivität verstecken</string>
 
     <!-- Navigation bar custom key (previously as App launcher key) -->
-    <string name="pref_cat_navbar_custom_key_title">Eigene Tasten</string>
-    <string name="pref_navbar_custom_key_enable_title">Eigene Tasten aktivieren</string>
+    <string name="pref_cat_navbar_custom_key_title">Zusatztaste</string>
+    <string name="pref_navbar_custom_key_enable_title">Zusätzliche Taste aktivieren</string>
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Netzwerkaktivität</string>
@@ -900,7 +900,7 @@
     <string name="hwkey_action_expand_quicksettings">Schnelleinstellungenleiste erweitern</string>
 
     <!-- Navigation bar ring targets -->
-    <string name="pref_cat_navbar_ring_targets_title">Anwendungen des Navigationsrings</string>
+    <string name="pref_cat_navbar_ring_targets_title">Anwendungen des Navigationsringes</string>
     <string name="pref_navbar_ring_targets_enable_summary">Aktiviert/Deaktiviert die Anwendungen im Navigationsring (erfordert Neustart)</string>
     <string name="pref_navbar_ring_target_title">Anwendung %d</string>
 
@@ -976,7 +976,7 @@
     <string name="pref_vol_force_music_control_summary">Wenn aktiviert bewirkt das Drücken der Lautstärketasten eine Änderung der Medien- anstelle der Klingeltonlautstärke</string>
 
     <!-- Misc tweaks: category for recents panel related tweaks -->
-    <string name="pref_cat_misc_recents_panel_title">Zuletzt Geöffn. Fenster</string>
+    <string name="pref_cat_misc_recents_panel_title">Anzeige der zuletzt Geöffneten</string>
 
     <!-- Misc tweaks: category for other settings -->
     <string name="pref_cat_misc_other_title">Andere Einstellungen</string>
@@ -985,8 +985,9 @@
     <string name="pref_ime_fullscreen_disable_title">Vollbild-Tastatur deaktivieren</string>
 
     <!-- Torch auto-off -->
-    <string name="pref_torch_auto_off_title">Taschenlampe automat. aus</string>
-    <string name="pref_torch_auto_off_summary">Schaltet die Taschenlampe nach der eingesteltten Nutzungsdauer automatisch aus. Auf 0 setzen zum deaktivieren (nicht empfohlen)</string>
+    <string name="pref_torch_auto_off_title">Taschenlampe autom. aus</string>
+    <string name="pref_torch_auto_off_summary">Schaltet die Taschenlampe nach der eingestellten Nutzungsdauer automatisch ab. Wert 0 verhindert autom. Abschalten. (nicht empfohlen)</string>
+	
 
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Lautstärketasten umorientieren</string>
@@ -996,8 +997,8 @@
     <string name="pref_lockscreen_bg_blur_effect_title">Hintergrund weichzeichnen</string>
 
     <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Disable tile spanning</string>
-    <string name="pref_qs_tile_span_disable_summary">Disables spanning of user, brightness and settings tiles in landscape</string>
+    <string name="pref_qs_tile_span_disable_title">Symbolvergrößerung deaktiveren</string>
+    <string name="pref_qs_tile_span_disable_summary">Verhindert im Querformat das Vergößern der Schnelleinstellungen für das Benutzerprofil, die Helligkeit und die Systemeinstellungen</string>
 
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Overflow-Menü immer anzeigen</string>
@@ -1021,11 +1022,13 @@
     <string name="pref_smart_radio_normal_mode_title">Normaler Netzmodus</string>
     <string name="pref_smart_radio_power_saving_mode_title">Energiesparmodus</string>
     <string name="pref_smart_radio_screen_off_title">Wenn Bildschirm aus</string>
-    <string name="pref_smart_radio_screen_off_summary">Aktiviert Energiesparmodus wenn Bildschirm aus, unabhängig ob Mobile Daten an oder aus</string>
-    <string name="pref_smart_radio_ignore_locked_title">Ignorieren wenn gesperrt</string>
-    <string name="pref_smart_radio_ignore_locked_summary">Wenn Bildschirm an. wird der Energiesparmodus erst beendet wenn der Sperrbildschirm überwunden wurde.</string>
-    <string name="pref_smart_radio_mode_change_delay_title">Netzmodus Verzögerung</string>
-    <string name="pref_smart_radio_mode_change_delay_summary">Verzögert das Umschalten des Netzmodus mit der angegebenen Anzahl von Sekunden</string>
+    <string name="pref_smart_radio_screen_off_summary">Aktiviert den Energiesparmodus bei abgeschaltetem Bildschirm unabhängig von den mobilen Daten</string>
+    <string name="pref_smart_radio_ignore_locked_title">Sperrbildschirm ignorieren
+	</string>
+    <string name="pref_smart_radio_ignore_locked_summary">Bei aktivem Bildschirm wird der Energiesparmodus erst nach Entsperrung beendet
+	</string>
+    <string name="pref_smart_radio_mode_change_delay_title">Wechselverzögerung</string>
+    <string name="pref_smart_radio_mode_change_delay_summary">Verzögert das Umschalten des Netzmodus um die angegebene Anzahl von Sekunden</string>
 
     <!-- Lockscreen: custom carrier text -->
     <string name="pref_lockscreen_carrier_text_title">Eigener Providertext</string>
@@ -1056,12 +1059,12 @@
     <string name="pref_pulse_notification_delay_summary">Erfordert Neustart</string>
 
     <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">Zuletzt Geöffn. Verhalten</string>
-    <string name="pref_clear_recents_mode_0">Berühren um alle Tasks zu beenden, langes Drücken um alles bis auf laufende Tasks zu beenden</string>
-    <string name="pref_clear_recents_mode_1">Berühren um alles bis auf laufende Tasks zu beenden, langes Drücken um alle zu beenden</string>
+    <string name="pref_clear_recents_mode_title">Verhalten der Schließen-Taste</string>
+	<string name="pref_clear_recents_mode_0">Drücken beendet alle Tasks, langes Drücken beendet alle außer den Laufenden</string>
+    <string name="pref_clear_recents_mode_1">Drücken beendet alle Tasks außer den Laufenden, langes Drücken beendet alle</string>
 
     <!-- Powe menu: disable on lockscreen -->
-    <string name="pref_powermenu_disable_on_lockscreen_title">Ausschaltmenü auf Sperrbildschirm deaktivieren</string>
+    <string name="pref_powermenu_disable_on_lockscreen_title">Auf Sperrbildschirm deaktivieren</string>
 
     <!-- Extended force overflow menu button option -->
     <string name="overflow_menu_default">Standard</string>
@@ -1078,8 +1081,8 @@
     <string name="pref_lockscreen_bg_blur_intensity_title">Stärke des Weichzeichnens</string>
 
     <!-- Smart radio: independent delay for screen off power save event -->
-    <string name="pref_smart_radio_screen_off_delay_title">Verzögerte Energiesparmodus</string>
-    <string name="pref_smart_radio_screen_off_delay_summary">Verzögert das Schalten in den Energiesparmodus wenn der Bildschirm ausgeht. Überschreibt die Standard-Netzwerkmodus-Verzögerung wenn der eingegebene Wert nicht 0 ist.</string>
+    <string name="pref_smart_radio_screen_off_delay_title">Verzögerter Energiesparmodus</string>
+    <string name="pref_smart_radio_screen_off_delay_summary">Verzögert das Schalten in den Energiesparmodus wenn der Bildschirm ausgeht. Überschreibt die obige Verzögerung wenn der folgende Wert nicht 0 ist</string>
 
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">Sichern der Einstellungen</string>
@@ -1112,7 +1115,7 @@
     <string name="wsc_trans_required_summary">Diese Funktion benötigt einen gültigen PayPal Transaktionscode.</string>
 
     <!-- Pie: disable system info -->
-    <string name="pref_pie_sysinfo_disable_title">Systeminformationen deaktivieren</string>
+    <string name="pref_pie_sysinfo_disable_title">Systeminfo deaktivieren</string>
 
     <!-- Pie: long press delay -->
     <string name="pref_pie_longpress_delay_title">Lang-drücken Verzögerung</string>
@@ -1199,11 +1202,11 @@
     <string name="qs_auto_switch_mode2">Wenn keine entfernbaren Benachrichtigungen</string>
 
     <!-- Notification drawer: expand all notifications -->
-    <string name="pref_notif_expand_all_title">Erweitere alle Benachrichtigungen</string>
-    <string name="pref_notif_expand_all_summary">Erweitert automatisch alle Benachrichtigungen wenn aktiviert</string>
+    <string name="pref_notif_expand_all_title">Benachrichtigungen erweitern</string>
+    <string name="pref_notif_expand_all_summary">Wenn aktiviert werden alle Benachrichtigungen automatisch erweitert</string>
 
     <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Doppeltes Tippen für Standbymodus</string>
+    <string name="pref_statusbar_dt2s_title">Doppelt Tippen für Standby</string>
     <string name="pref_statusbar_dt2s_summary">Doppeltes Antippen der Statusleiste schickt Gerät in den Standbymodus</string>
 
     <!-- Animation scales -->
@@ -1255,16 +1258,16 @@
     <string name="pref_screenrecord_timelimit_title">Zeitbegrenzung</string>
     <string name="pref_screenrecord_rotate_title">Bild drehen</string>
     <string name="pref_screenrecord_rotate_summary">Dreht das Bild um 90°</string>
-    <string name="pref_screenrecord_microphone_title">Mikrofon aufnehmen</string>
-    <string name="pref_screenrecord_microphone_summary">Mikrofon aufnehmen</string>
+    <string name="pref_screenrecord_microphone_title">Mikrofon benutzen</string>
+    <string name="pref_screenrecord_microphone_summary">Ton mit dem Mikrofon aufnehmen</string>
 
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
 
     <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">Doppeltes Tippen für Schlafen</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">Doppeltes Tippen im Entsperring schickt Gerät in den Standbymodus</string>
+    <string name="pref_lockscreen_ring_dt2s_title">Doppelt Tippen für Standby</string>
+    <string name="pref_lockscreen_ring_dt2s_summary">Doppeltes Antippen des Entsperrrings schickt Gerät in den Standbymodus</string>
 
     <!-- Charger plugged/unplugged sound -->
     <string name="pref_charger_plugged_sound_title">Ton bei verbundenem Ladegerät</string>
