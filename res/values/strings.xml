@@ -560,7 +560,7 @@
     <string name="pref_volume_adjust_mute_title">Mute volume adjust sound</string>
     <string name="pref_volume_adjust_mute_summary">Disables sound played when adjusting volume using volume keys</string>
 
-	<!-- Mute volume adjust vibrate -->
+    <!-- Mute volume adjust vibrate -->
     <string name="pref_volume_adjust_vibrate_mute_title">Disable volume adjust vibrate</string>
     <string name="pref_volume_adjust_vibrate_mute_summary">Disables vibrate when adjusting notification/ringtone volume using volume keys</string>
     

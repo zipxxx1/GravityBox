@@ -1522,7 +1522,7 @@
             android:summary="@string/pref_volume_adjust_mute_summary"
             android:defaultValue="false" />
             
-         <CheckBoxPreference 
+        <CheckBoxPreference 
             android:key="pref_volume_adjust_vibrate_mute"
             android:title="@string/pref_volume_adjust_vibrate_mute_title"
             android:summary="@string/pref_volume_adjust_vibrate_mute_summary"
