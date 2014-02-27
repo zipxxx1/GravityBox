@@ -133,7 +133,7 @@
     <string name="pref_cat_fixes_title">MTK6589 수정 옵션</string>
     <string name="pref_cat_fixes_summary">MTK6589 칩셋에 관련된 수정 옵션들이 있습니다. 필요하시면 사용하세요.</string>
 
-    <string name="pref_cat_about_title">어플리케이션 정보</string>
+    <string name="pref_cat_about_title">애플리케이션 정보</string>
     <string name="about_gb_summary">C3C076@XDA가 개발함. 터치하여 공식 스레드로 이동해보세요.</string>
     <string name="about_xposed_title">Xposed 프레임워크</string>
     <string name="about_xposed_summary">rovo89@XDA가 개발함. 터치하여 공식 스레드로 이동해보세요.</string>
@@ -145,7 +145,7 @@
     <string name="reboot_confirm_bootloader">%s이(가) 곧 부트로더로 재시작됩니다.</string>
 
     <string name="engineering_mode_title">엔지니어링 모드</string>
-    <string name="engineering_mode_summary">엔지니어링 모드 어플리케이션을 실행합니다.</string>
+    <string name="engineering_mode_summary">엔지니어링 모드 애플리케이션을 실행합니다.</string>
 
     <string name="dual_sim_ringer_title">듀얼 SIM 벨소리</string>
     <string name="dual_sim_ringer_summary">SIM에 따라서 다른 벨소리 및 알림음이 나오도록 설정합니다.</string>
@@ -225,7 +225,7 @@
     <string name="hwkey_action_default">기본 액션</string>
     <string name="hwkey_action_search">검색</string>
     <string name="hwkey_action_voice_search">음성 검색</string>
-    <string name="hwkey_action_prev_app">이전 어플리케이션으로 전환</string>
+    <string name="hwkey_action_prev_app">이전 애플리케이션으로 전환</string>
     <string name="hwkey_action_kill">현재 앱 종료</string>
     <string name="hwkey_action_sleep">화면 끄기</string>
     <string name="pref_hwkey_kill_delay_title">앱 종료 지연시간</string>
@@ -233,8 +233,8 @@
     <string name="pref_hwkey_doubletap_speed_title">두 번 터치 속도</string>
     <string name="pref_hwkey_doubletap_speed_summary">두 번 터치를 인식하는 시간을 설정합니다</string>
     <string name="app_killed">%s 종료됨</string>
-    <string name="nothing_to_kill">종료 할 어플리케이션 없음</string>
-    <string name="no_previous_app_found">이전 어플리케이션이 없음</string>
+    <string name="nothing_to_kill">종료 할 애플리케이션 없음</string>
+    <string name="no_previous_app_found">이전 애플리케이션이 없음</string>
 
     <string name="pref_cat_phone_title">기기 트윅</string>
     <string name="pref_cat_phone_summary">기기 및 네트워크 망에 관련된 트윅들이 있습니다.</string>
@@ -248,7 +248,7 @@
     <string name="reboot_soft">빠른 재시작</string>
 
     <string name="pref_holo_bg_solid_black_title">단색 배경화면</string>
-    <string name="pref_holo_bg_solid_black_summary">Holo 테마를 사용하는 어플리케이션의 배경화면을 단색으로 변경합니다. (재시작 필요)</string>
+    <string name="pref_holo_bg_solid_black_summary">Holo 테마를 사용하는 애플리케이션의 배경화면을 단색으로 변경합니다. (재시작 필요)</string>
 
     <string name="pref_qs_tiles_per_row_title">한 줄당 표시할 타일</string>
     <string name="pref_qs_tiles_per_row_summary">한 줄당 표시될 퀵세팅 타일의 갯수를 선택합니다. (태블릿을 제외한 기기에서는 세로 화면만 적용.)</string>
@@ -354,7 +354,7 @@
 
     <string name="qs_tile_quickapp">앱 바로가기</string>
     <string name="pref_cat_quickapp_tile_title">앱 바로가기 타일 설정</string>
-    <string name="pref_quickapp_default_title">주요 어플리케이션</string>
+    <string name="pref_quickapp_default_title">주요 애플리케이션</string>
     <string name="pref_quickapp_slot1_title">길게 누르기 앱 슬롯 1</string>
     <string name="pref_quickapp_slot2_title">길게 누르기 앱 슬롯 2</string>
     <string name="pref_quickapp_slot3_title">길게 누르기 앱 슬롯 3</string>
@@ -407,7 +407,7 @@
     <string name="hwkey_action_custom_app_missing">사용자 지정 앱을 찾을 수 없습니다!</string>
 
     <string name="pref_clock_link_title">알림 패널 시계 설정</string>
-    <string name="pref_clock_link_summary">알림 패널에 있는 시계를 누를 때 연결되는 어플리케이션을 설정합니다.</string>
+    <string name="pref_clock_link_summary">알림 패널에 있는 시계를 누를 때 연결되는 애플리케이션을 설정합니다.</string>
 
     <string name="gb_startup_progress">GravityBox에서 사용할 시스템 프레임워크의 반응을 기다리는 중입니다.</string>
     <string name="gb_startup_error">GravityBox에서 사용해야 할 시스템 프레임워크가 반응이 없습니다. 앱이 종료됩니다.</string>
@@ -673,7 +673,7 @@
 
     <string name="pref_qs_management_enable_summary">GB에서 퀵세팅 설정을 담당하기 (재시작 필요)</string>
 
-    <string name="app_picker_applications">어플리케이션</string>
+    <string name="app_picker_applications">애플리케이션</string>
     <string name="app_picker_shortcuts">바로가기</string>
     <string name="app_picker_shortcut_null_intent">바로가기로 선택했을 때 Intent 정보를 넘겨줄 수 없기 때문에 실행이 불가능 할 수 있습니다.</string>
     <string name="app_picker_shortcut_cancelled">타겟 앱에 의해 바로가기 생성 취소</string>
