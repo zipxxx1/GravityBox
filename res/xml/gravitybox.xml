@@ -746,7 +746,7 @@
 
             <SwitchPreference 
                 android:key="pref_navbar_override"
-                android:title=""
+                android:title="@string/pref_masterswitch_title"
                 android:summary="@string/pref_navbar_override_summary"
                 android:defaultValue="false" />
 
