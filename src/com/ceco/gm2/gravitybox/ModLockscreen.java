@@ -329,10 +329,18 @@ public class ModLockscreen {
                     final Resources res = context.getResources();
                     mGlowPadView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowPadView");
                     mGlowPadViewClass = mGlowPadView.getClass();
-                    XposedHelpers.findAndHookMethod(mGlowPadViewClass, "showTargets",
-                            boolean.class, glowPadViewShowTargetsHook);
-                    XposedHelpers.findAndHookMethod(mGlowPadViewClass, "hideTargets",
-                            boolean.class, boolean.class, glowPadViewHideTargetsHook);
+                    try {
+                        XposedHelpers.findAndHookMethod(mGlowPadViewClass, "showTargets",
+                                boolean.class, glowPadViewShowTargetsHook);
+                    } catch(NoSuchMethodError nme) {
+                        if (DEBUG) log("showTargets method doesn't exist (ZTE modified lockscreen?)");
+                    }
+                    try {
+                        XposedHelpers.findAndHookMethod(mGlowPadViewClass, "hideTargets",
+                                boolean.class, boolean.class, glowPadViewHideTargetsHook);
+                    } catch(NoSuchMethodError nme) {
+                        if (DEBUG) log("hideTargets method doesn't exist (ZTE modified lockscreen?)");
+                    }
                     XposedHelpers.findAndHookMethod(mGlowPadViewClass, "switchToState", 
                             int.class, float.class, float.class, glowPadViewSwitchToStateHook);
                     XposedHelpers.findAndHookMethod(mGlowPadViewClass, "onTouchEvent",
