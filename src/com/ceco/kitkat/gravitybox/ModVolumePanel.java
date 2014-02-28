@@ -128,7 +128,7 @@ public class ModVolumePanel {
 
             mVolumeAdjustMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_MUTE, false);
             mVolumeAdjustVibrateMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE, false);
-            
+
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
 
                 @Override
@@ -278,15 +278,6 @@ public class ModVolumePanel {
                     }
                 }
             });
-            
-            XposedHelpers.findAndHookMethod(classVolumePanel, "onVibrate", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mVolumeAdjustVibrateMuted) {
-                        param.setResult(null);
-                    }
-                }
-            });
 
             XposedHelpers.findAndHookMethod(classVolumePanel, "onShowVolumeChanged", 
                     int.class, int.class, new XC_MethodHook() {
@@ -315,6 +306,15 @@ public class ModVolumePanel {
                     }
                 }
                 
+            });
+
+            XposedHelpers.findAndHookMethod(classVolumePanel, "onVibrate", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mVolumeAdjustVibrateMuted) {
+                        param.setResult(null);
+                    }
+                }
             });
         } catch (Throwable t) {
             XposedBridge.log(t);
