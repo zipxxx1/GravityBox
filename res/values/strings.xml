@@ -1303,6 +1303,9 @@
     <!-- Clock settings master switch -->
     <string name="pref_sb_clock_masterswitch_summary">Toggles status bar clock settings (requires reboot)</string>
 
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Day of week size</string>
+
     <!-- Navigation bar ring category -->
     <string name="pref_cat_navbar_ring_title">Navigation bar ring</string>
 
