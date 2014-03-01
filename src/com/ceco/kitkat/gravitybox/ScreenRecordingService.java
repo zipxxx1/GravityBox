@@ -91,6 +91,7 @@ public class ScreenRecordingService extends Service {
     private int mRecordingStatus;
     private int mShowTouchesDefault = 0;
     private SharedPreferences mPrefs;
+    private boolean mUseStockBinary;
 
     private CaptureThread mCaptureThread;
 
@@ -104,14 +105,10 @@ public class ScreenRecordingService extends Service {
 
                 // choose screenrecord binary and prepare command
                 List<String> command = new ArrayList<String>();
-                File srBinary = new File(ScreenRecordingService.this.getFilesDir() + "/screenrecord");
-                if (srBinary.exists() && srBinary.canExecute()) {
-                    command.add(srBinary.getAbsolutePath());
-                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENRECORD_MICROPHONE, true)) {
-                        command.add("--microphone");
-                    }
-                } else {
-                    command.add("/system/bin/screenrecord");
+                command.add(getBinaryPath());
+                if (!mUseStockBinary && 
+                        mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENRECORD_MICROPHONE, true)) {
+                    command.add("--microphone");
                 }
                 String prefVal = mPrefs.getString(GravityBoxSettings.PREF_KEY_SCREENRECORD_SIZE, "default");
                 if (!prefVal.equals("default")) {
@@ -119,8 +116,10 @@ public class ScreenRecordingService extends Service {
                 }
                 prefVal = String.valueOf(mPrefs.getInt(GravityBoxSettings.PREF_KEY_SCREENRECORD_BITRATE, 4)*1000000);
                 command.add("--bit-rate"); command.add(prefVal);
-                prefVal = String.valueOf(mPrefs.getInt(GravityBoxSettings.PREF_KEY_SCREENRECORD_TIMELIMIT, 3)*60);
-                command.add("--time-limit"); command.add(prefVal);
+                if (!mUseStockBinary) {
+                    prefVal = String.valueOf(mPrefs.getInt(GravityBoxSettings.PREF_KEY_SCREENRECORD_TIMELIMIT, 3)*60);
+                    command.add("--time-limit"); command.add(prefVal);
+                }
                 if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENRECORD_ROTATE, false)) {
                     command.add("--rotate");
                 }
@@ -333,9 +332,8 @@ public class ScreenRecordingService extends Service {
             Log.e(TAG, "isScreenrecordSupported: screen recording not supported on Exynos devices");
         }
         // check if screenrecord and kill binaries exist and are executable
-        File f = new File("/system/bin/screenrecord");
-        File fAlt = new File(getFilesDir() + "/screenrecord");
-        final boolean scrBinaryOk = f.exists() && f.canExecute() || fAlt.exists() && fAlt.canExecute();
+        File f = new File(getBinaryPath());
+        final boolean scrBinaryOk = f.exists() && f.canExecute();
         if (!scrBinaryOk) {
             Log.e(TAG, "isScreenrecordSupported: screenrecord binary doesn't exist or is not executable");
         }
@@ -348,6 +346,7 @@ public class ScreenRecordingService extends Service {
     }
 
     private void startScreenrecord() {
+        mUseStockBinary = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENRECORD_USE_STOCK, false);
         if (!isScreenrecordSupported()) {
             Log.e(TAG, "startScreenrecord: System does not support screen recording");
             Toast.makeText(this, "Your system does not support screen recording", Toast.LENGTH_SHORT).show();
@@ -439,7 +438,11 @@ public class ScreenRecordingService extends Service {
             });
 
             updateStatus(STATUS_IDLE);
-        } }, 2000);
+        } }, 3000);
+    }
+
+    private String getBinaryPath() {
+        return (mUseStockBinary ? "/system/bin/screenrecord" : getFilesDir() + "/screenrecord");
     }
 
     private static void copyFileUsingStream(File source, File dest) throws IOException {

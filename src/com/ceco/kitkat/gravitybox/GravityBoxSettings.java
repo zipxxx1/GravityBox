@@ -671,6 +671,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SCREENRECORD_TIMELIMIT = "pref_screenrecord_timelimit";
     public static final String PREF_KEY_SCREENRECORD_ROTATE = "pref_screenrecord_rotate";
     public static final String PREF_KEY_SCREENRECORD_MICROPHONE = "pref_screenrecord_microphone";
+    public static final String PREF_KEY_SCREENRECORD_USE_STOCK = "pref_screenrecord_use_stock";
 
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
