@@ -166,6 +166,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int DOW_STANDARD = 1;
     public static final int DOW_LOWERCASE = 2;
     public static final int DOW_UPPERCASE = 3;
+    public static final String PREF_KEY_STATUSBAR_CLOCK_DOW_SIZE = "pref_sb_clock_dow_size";
     public static final String PREF_KEY_STATUSBAR_CLOCK_AMPM_HIDE = "pref_clock_ampm_hide";
     public static final String PREF_KEY_STATUSBAR_CLOCK_HIDE = "pref_clock_hide";
     public static final String PREF_KEY_STATUSBAR_CLOCK_LINK = "pref_clock_link_app";
@@ -499,6 +500,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_CLOCK_CHANGED = "gravitybox.intent.action.CENTER_CLOCK_CHANGED";
     public static final String EXTRA_CENTER_CLOCK = "centerClock";
     public static final String EXTRA_CLOCK_DOW = "clockDow";
+    public static final String EXTRA_CLOCK_DOW_SIZE = "clockDowSize";
     public static final String EXTRA_AMPM_HIDE = "ampmHide";
     public static final String EXTRA_CLOCK_HIDE = "clockHide";
     public static final String EXTRA_CLOCK_LINK = "clockLink";
@@ -2007,6 +2009,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_CLOCK_DOW, Integer.valueOf(
                         prefs.getString(PREF_KEY_STATUSBAR_CLOCK_DOW, "0")));
+            } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_DOW_SIZE)) {
+                intent.setAction(ACTION_PREF_CLOCK_CHANGED);
+                intent.putExtra(EXTRA_CLOCK_DOW_SIZE, 
+                        prefs.getInt(PREF_KEY_STATUSBAR_CLOCK_DOW_SIZE, 70));
             } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_AMPM_HIDE)) {
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_AMPM_HIDE, prefs.getBoolean(

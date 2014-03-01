@@ -46,6 +46,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
     private boolean mAmPmHide;
     private int mClockShowDow = GravityBoxSettings.DOW_DISABLED;
     private boolean mClockHidden;
+    private float mDowSize;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -56,6 +57,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                 prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_DOW, "0"));
         mAmPmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_AMPM_HIDE, false);
         mClockHidden = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_HIDE, false);
+        mDowSize = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_DOW_SIZE, 70) / 100f;
     }
 
     public TextView getClock() {
@@ -160,7 +162,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                     }
                     clockText = dow + clockText;
                     SpannableStringBuilder sb = new SpannableStringBuilder(clockText);
-                    sb.setSpan(new RelativeSizeSpan(0.7f), 0, dow.length(), 
+                    sb.setSpan(new RelativeSizeSpan(mDowSize), 0, dow.length(), 
                             Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
                     if (amPmIndex > -1) {
                         int offset = Character.isWhitespace(clockText.charAt(dow.length() + amPmIndex - 1)) ?
@@ -216,6 +218,10 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
             if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_HIDE)) {
                 mClockHidden = intent.getBooleanExtra(GravityBoxSettings.EXTRA_CLOCK_HIDE, false);
                 setClockVisibility();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_DOW_SIZE)) {
+                mDowSize = intent.getIntExtra(GravityBoxSettings.EXTRA_CLOCK_DOW_SIZE, 70) / 100f;
+                updateClock();
             }
         }
     }
