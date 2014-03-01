@@ -544,7 +544,7 @@
     <string name="pref_cat_navigation_bar_title">Настройки панели навигации</string>
     <string name="pref_cat_navigation_bar_summary">Различные настройки панели навигации</string>
     <string name="pref_navbar_override_title">Изменение значений по умолчанию</string>
-    <string name="pref_navbar_override_summary">Включить все твики панели навигации (необходима перезагрузка)</string>
+    <string name="pref_navbar_override_summary">Включение настроек панели навигации (необходима перезагрузка)</string>
     <string name="pref_navbar_enable_title">Включить панель навигации</string>
     <string name="pref_navbar_enable_summary">Необходима перезагрузка</string>
     <string name="pref_navbar_height_title">Высота панели навигации</string>
@@ -1292,5 +1292,12 @@
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Включение умного радио</string>
+
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">Главный переключатель</string>
+
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">Откл.вибр.при регулировке</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Отключение вибрации при регулировке громкости уведомлений/звонка клавишами громкости</string>
 
 </resources>
