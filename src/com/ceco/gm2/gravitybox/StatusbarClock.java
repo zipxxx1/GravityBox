@@ -47,6 +47,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
     private int mClockShowDow = GravityBoxSettings.DOW_DISABLED;
     private boolean mClockHidden;
     private float mDowSize;
+    private float mAmPmSize;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -58,6 +59,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         mAmPmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_AMPM_HIDE, false);
         mClockHidden = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_HIDE, false);
         mDowSize = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_DOW_SIZE, 70) / 100f;
+        mAmPmSize = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_AMPM_SIZE, 70) / 100f;
     }
 
     public TextView getClock() {
@@ -167,7 +169,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                     if (amPmIndex > -1) {
                         int offset = Character.isWhitespace(clockText.charAt(dow.length() + amPmIndex - 1)) ?
                                 1 : 0;
-                        sb.setSpan(new RelativeSizeSpan(0.7f), dow.length() + amPmIndex - offset, 
+                        sb.setSpan(new RelativeSizeSpan(mAmPmSize), dow.length() + amPmIndex - offset, 
                                 dow.length() + amPmIndex + amPm.length(), 
                                 Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
                     }
@@ -226,6 +228,11 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
             if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_DOW_SIZE)) {
                 mDowSize = intent.getIntExtra(GravityBoxSettings.EXTRA_CLOCK_DOW_SIZE, 70) / 100f;
                 updateClock();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_AMPM_SIZE)) {
+                mAmPmSize = intent.getIntExtra(GravityBoxSettings.EXTRA_AMPM_SIZE, 70) / 100f;
+                updateClock();
+                updateExpandedClock();
             }
         }
     }

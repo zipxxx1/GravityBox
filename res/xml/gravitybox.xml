@@ -671,6 +671,17 @@
                     android:defaultValue="false"
                     android:dependency="pref_sb_clock_masterswitch" />
 
+                <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+                    android:key="pref_sb_clock_ampm_size"
+                    android:title="@string/pref_sb_clock_ampm_size_title"
+                    minimum="40"
+                    maximum="100"
+                    interval="1"
+                    monitorBoxEnabled="true"
+                    monitorBoxUnit="%"
+                    android:defaultValue="70"
+                    android:dependency="pref_sb_clock_masterswitch" />
+
                 <CheckBoxPreference 
                     android:key="pref_clock_hide"
                     android:title="@string/pref_clock_hide_title"

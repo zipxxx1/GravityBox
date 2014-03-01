@@ -176,6 +176,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int DOW_UPPERCASE = 3;
     public static final String PREF_KEY_STATUSBAR_CLOCK_DOW_SIZE = "pref_sb_clock_dow_size";
     public static final String PREF_KEY_STATUSBAR_CLOCK_AMPM_HIDE = "pref_clock_ampm_hide";
+    public static final String PREF_KEY_STATUSBAR_CLOCK_AMPM_SIZE = "pref_sb_clock_ampm_size";
     public static final String PREF_KEY_STATUSBAR_CLOCK_HIDE = "pref_clock_hide";
     public static final String PREF_KEY_STATUSBAR_CLOCK_LINK = "pref_clock_link_app";
     public static final String PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK = "pref_clock_longpress_link";
@@ -509,6 +510,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_CLOCK_DOW = "clockDow";
     public static final String EXTRA_CLOCK_DOW_SIZE = "clockDowSize";
     public static final String EXTRA_AMPM_HIDE = "ampmHide";
+    public static final String EXTRA_AMPM_SIZE = "ampmSize";
     public static final String EXTRA_CLOCK_HIDE = "clockHide";
     public static final String EXTRA_CLOCK_LINK = "clockLink";
     public static final String EXTRA_CLOCK_LONGPRESS_LINK = "clockLongpressLink";
@@ -2139,6 +2141,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_AMPM_HIDE, prefs.getBoolean(
                         PREF_KEY_STATUSBAR_CLOCK_AMPM_HIDE, false));
+            } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_AMPM_SIZE)) {
+                intent.setAction(ACTION_PREF_CLOCK_CHANGED);
+                intent.putExtra(EXTRA_AMPM_SIZE, prefs.getInt(
+                        PREF_KEY_STATUSBAR_CLOCK_AMPM_SIZE, 70));
             } else if (key.equals(PREF_KEY_STATUSBAR_CLOCK_HIDE)) {
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_CLOCK_HIDE, prefs.getBoolean(PREF_KEY_STATUSBAR_CLOCK_HIDE, false));
