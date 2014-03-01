@@ -1277,5 +1277,13 @@
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Attiva/disattiva Modem intelligente</string> 
+    
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">Interruttore principale</string>
+
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">Disattiva vibrazione regolazione volume</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Disattiva la vibrazione durante la regolazione del volume</string>
+
 
 </resources>
