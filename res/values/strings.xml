@@ -1300,6 +1300,9 @@
     <string name="pref_volume_adjust_vibrate_mute_title">Disable volume adjust vibrate</string>
     <string name="pref_volume_adjust_vibrate_mute_summary">Disables vibrate when adjusting notification/ringtone volume using volume keys</string>
 
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Toggles status bar clock settings (requires reboot)</string>
+
     <!-- Navigation bar ring category -->
     <string name="pref_cat_navbar_ring_title">Navigation bar ring</string>
 

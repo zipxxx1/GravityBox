@@ -280,48 +280,48 @@ public class ModStatusBar {
                             (ViewGroup) liparam.view.findViewById(liparam.res.getIdentifier(
                                     "status_bar_contents", "id", PACKAGE_NAME)) : mIconArea;
 
-                    mClock = new StatusbarClock(prefs);
-                    ModStatusbarColor.registerIconManagerListener(mClock);
-                    mBroadcastSubReceivers.add(mClock);
-
-                    // find statusbar clock
-                    TextView clock = (TextView) mIconArea.findViewById(
-                            liparam.res.getIdentifier("clock", "id", PACKAGE_NAME));
-                    // the second attempt
-                    if (clock == null && mSbContents != null) {
-                        clock = (TextView) mSbContents.findViewById(
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH, true)) {
+                        // find statusbar clock
+                        TextView clock = (TextView) mIconArea.findViewById(
                                 liparam.res.getIdentifier("clock", "id", PACKAGE_NAME));
-                        mClockInSbContents = clock != null;
-                    }
-                    if (clock != null) {
-                        mClock.setClock(clock);
-                    }
-
-                    // find notification panel clock
-                    String panelHolderId = Build.VERSION.SDK_INT > 16 ?
-                            "panel_holder" : "notification_panel";
-                    final ViewGroup panelHolder = (ViewGroup) liparam.view.findViewById(
-                            liparam.res.getIdentifier(panelHolderId, "id", PACKAGE_NAME));
-                    if (panelHolder != null) {
-                        TextView clockExpanded = (TextView) panelHolder.findViewById(
-                                liparam.res.getIdentifier("clock", "id", PACKAGE_NAME));
-                        if (clockExpanded != null) {
-                            mClock.setExpandedClock(clockExpanded);
-                            if (Build.VERSION.SDK_INT < 17) {
-                                clockExpanded.setClickable(true);
-                                clockExpanded.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        launchClockApp();
+                        // the second attempt
+                        if (clock == null && mSbContents != null) {
+                            clock = (TextView) mSbContents.findViewById(
+                                    liparam.res.getIdentifier("clock", "id", PACKAGE_NAME));
+                            mClockInSbContents = clock != null;
+                        }
+                        if (clock != null) {
+                            mClock = new StatusbarClock(prefs);
+                            mClock.setClock(clock);
+                            ModStatusbarColor.registerIconManagerListener(mClock);
+                            mBroadcastSubReceivers.add(mClock);
+                            // find notification panel clock
+                            String panelHolderId = Build.VERSION.SDK_INT > 16 ?
+                                    "panel_holder" : "notification_panel";
+                            final ViewGroup panelHolder = (ViewGroup) liparam.view.findViewById(
+                                    liparam.res.getIdentifier(panelHolderId, "id", PACKAGE_NAME));
+                            if (panelHolder != null) {
+                                TextView clockExpanded = (TextView) panelHolder.findViewById(
+                                        liparam.res.getIdentifier("clock", "id", PACKAGE_NAME));
+                                if (clockExpanded != null) {
+                                    mClock.setExpandedClock(clockExpanded);
+                                    if (Build.VERSION.SDK_INT < 17) {
+                                        clockExpanded.setClickable(true);
+                                        clockExpanded.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                launchClockApp();
+                                            }
+                                        });
+                                        clockExpanded.setOnLongClickListener(new View.OnLongClickListener() {
+                                            @Override
+                                            public boolean onLongClick(View v) {
+                                                launchClockLongpressApp();
+                                                return true;
+                                            }
+                                        });
                                     }
-                                });
-                                clockExpanded.setOnLongClickListener(new View.OnLongClickListener() {
-                                    @Override
-                                    public boolean onLongClick(View v) {
-                                        launchClockLongpressApp();
-                                        return true;
-                                    }
-                                });
+                                }
                             }
                         }
                     }
@@ -512,14 +512,16 @@ public class ModStatusBar {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "showClock", boolean.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mClock != null) {
-                        mClock.setClockVisibility((Boolean)param.args[0]);
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH, true)) {
+                XposedHelpers.findAndHookMethod(phoneStatusBarClass, "showClock", boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mClock != null) {
+                            mClock.setClockVisibility((Boolean)param.args[0]);
+                        }
                     }
-                }
-            });
+                });
+            }
 
             if (Build.VERSION.SDK_INT > 16) {
                 XposedHelpers.findAndHookMethod(phoneStatusBarClass, "startActivityDismissingKeyguard", 
@@ -743,8 +745,9 @@ public class ModStatusBar {
                             mIconMergerView = (View) param.thisObject;
                         }
 
-                        if (mClock == null || mContext == null || mLayoutClock == null || 
-                                mLayoutClock.getChildCount() == 0) return;
+                        if ((mClock == null && mTrafficMeter == null) || 
+                                mContext == null || mLayoutClock == null || 
+                                    mLayoutClock.getChildCount() == 0) return;
 
                         Resources res = mContext.getResources();
                         int totalWidth = res.getDisplayMetrics().widthPixels;
@@ -763,9 +766,18 @@ public class ModStatusBar {
                                     param.thisObject, "gbSbIconPad");
                         }
 
-                        // use clock for basic measurement
-                        Paint p = mClock.getClock().getPaint();
-                        int clockWidth = (int) p.measureText(mClock.getClock().getText().toString()) + iconSize;
+                        // use clock or traffic meter for basic measurement
+                        Paint p;
+                        String text;
+                        if (mClock != null) {
+                            p = mClock.getClock().getPaint();
+                            text = mClock.getClock().getText().toString();
+                        } else {
+                            p = mTrafficMeter.getPaint();
+                            text = "00000000"; // dummy text in case traffic meter is used for measurement
+                        }
+
+                        int clockWidth = (int) p.measureText(text) + iconSize;
                         int availWidth = totalWidth/2 - clockWidth/2 - iconSize/2;
                         XposedHelpers.setAdditionalInstanceField(param.thisObject, "gbAvailWidth", availWidth);
                         int newWidth = availWidth - (availWidth % (iconSize + 2 * sbIconPad));
