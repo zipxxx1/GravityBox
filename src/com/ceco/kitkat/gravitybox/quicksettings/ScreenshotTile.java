@@ -17,12 +17,19 @@ package com.ceco.kitkat.gravitybox.quicksettings;
 
 import com.ceco.kitkat.gravitybox.ModHwKeys;
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.ScreenRecordingService;
 
+import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
 public class ScreenshotTile extends BasicTile {
+    private static final String TAG = "GB:ScreenshotTile";
+
+    private static void log(String message) {
+        XposedBridge.log(TAG + ": " + message);
+    }
 
     public ScreenshotTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
@@ -33,6 +40,21 @@ public class ScreenshotTile extends BasicTile {
                 collapsePanels();
                 Intent intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
                 mContext.sendBroadcast(intent);
+            }
+        };
+
+        mOnLongClick = new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                collapsePanels();
+                try {
+                    Intent intent = new Intent(mGbContext, ScreenRecordingService.class);
+                    intent.setAction(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING);
+                    mGbContext.startService(intent);
+                } catch (Throwable t) {
+                    log("Error toggling screen recording: " + t.getMessage());
+                } 
+                return true;
             }
         };
 

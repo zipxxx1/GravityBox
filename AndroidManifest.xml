@@ -85,7 +85,12 @@
             </intent-filter>
         </service>
 
-        <service android:name="com.ceco.kitkat.gravitybox.ScreenRecordingService" />
+        <service android:name="com.ceco.kitkat.gravitybox.ScreenRecordingService">
+            <intent-filter>
+                <action android:name="gravitybox.intent.action.TOGGLE_SCREEN_RECORDING" />
+            </intent-filter>
+        </service>
+
         <service android:name="com.ceco.kitkat.gravitybox.KeyguardImageService" />
 
         <meta-data
