@@ -1292,5 +1292,12 @@
     
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">切换智能网络</string>
+    
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">总开关</string>
+
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">禁用音量调整震动</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">禁止使用音量键调整通知/铃声音量时振动</string>
 
 </resources>
