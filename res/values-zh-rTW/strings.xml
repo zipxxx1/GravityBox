@@ -1289,5 +1289,12 @@
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">切換智慧網路</string>
+    
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">主控開關</string>
+
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">停用音量調節震動</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">停用當使用音量鍵調整通知/鈴聲音量時產生振動</string>
 
 </resources>
