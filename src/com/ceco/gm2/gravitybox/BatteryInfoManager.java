@@ -22,13 +22,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.BatteryManager;
+import android.telephony.TelephonyManager;
 
 public class BatteryInfoManager {
     private BatteryData mBatteryData;
     private ArrayList<BatteryStatusListener> mListeners;
+    private Context mContext;
     private Context mGbContext;
     private boolean mChargedSoundEnabled;
     private boolean mPluggedSoundEnabled;
+    private TelephonyManager mTelephonyManager;
 
     class BatteryData {
         boolean charging;
@@ -40,7 +43,8 @@ public class BatteryInfoManager {
         void onBatteryStatusChanged(BatteryData batteryData);
     }
 
-    public BatteryInfoManager(Context gbContext) {
+    public BatteryInfoManager(Context context, Context gbContext) {
+        mContext = context;
         mGbContext = gbContext;
         mBatteryData = new BatteryData();
         mBatteryData.charging = false;
@@ -100,11 +104,25 @@ public class BatteryInfoManager {
     }
 
     private void playSound(int soundResId) {
+        if (!isPhoneIdle()) return;
         try {
             MediaPlayer mp = MediaPlayer.create(mGbContext, soundResId);
             mp.start();
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private boolean isPhoneIdle() {
+        if (Utils.isWifiOnly(mContext)) return true;
+        try {
+            if (mTelephonyManager == null) {
+                mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+            }
+            return (mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return true;
         }
     }
 }
