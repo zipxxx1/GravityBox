@@ -1290,4 +1290,7 @@
     <string name="pref_screenrecord_use_stock_summary">When enabled, stock screenrecord binary is used for recording. 
         Use in case alternative binary causes issues. Note, that stock binary doesn\'t support audio and recordings longer than 3 minutes.</string>
 
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Toggles status bar clock settings (requires reboot)</string>
+
 </resources>
