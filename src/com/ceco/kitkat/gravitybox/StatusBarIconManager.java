@@ -154,7 +154,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mIconCache = new HashMap<String, SoftReference<Drawable>>();
 
         initColorInfo();
-        mBatteryInfo = new BatteryInfoManager(gbContext);
+        mBatteryInfo = new BatteryInfoManager(context, gbContext);
 
         mListeners = new ArrayList<IconManagerListener>();
     }
