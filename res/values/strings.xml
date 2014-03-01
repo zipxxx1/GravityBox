@@ -1296,4 +1296,7 @@
     <!-- Clock: day of week size -->
     <string name="pref_sb_clock_dow_size_title">Day of week size</string>
 
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">AM/PM size</string>
+
 </resources>
