@@ -1253,8 +1253,8 @@
     <string name="pref_cat_screenrecord_options_summary">包含各种与屏幕录制相关的调整选项</string>
     <string name="pref_screenrecord_size_title">视频大小</string>
     <string name="scr_size_default">设备默认</string>
-    <string name="scr_size_sd">标清 (360x640px)</string>
-    <string name="scr_size_hd">高清 (720x1280px)</string>
+    <string name="scr_size_sd">标清(360x640px)</string>
+    <string name="scr_size_hd">高清(720x1280px)</string>
     <string name="scr_size_full_hd">全高清 (1080x1920px)</string>
     <string name="pref_screenrecord_bitrate_title">视频比特率</string>
     <string name="pref_screenrecord_timelimit_title">限时</string>
@@ -1277,5 +1277,12 @@
     
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">切换智能网络</string>
+    
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">总开关</string>
+
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">禁用音量调整震动</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">禁止使用音量键调整通知/铃声音量时振动</string>
 
 </resources>
