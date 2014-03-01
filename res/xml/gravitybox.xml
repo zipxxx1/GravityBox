@@ -625,7 +625,7 @@
                 android:key="pref_cat_statusbar_clock"
                 android:title="@string/pref_cat_statusbar_clock_title">
 
-                <CheckBoxPreference 
+                <SwitchPreference 
                     android:key="pref_sb_clock_masterswitch"
                     android:title="@string/pref_masterswitch_title"
                     android:summary="@string/pref_sb_clock_masterswitch_summary"
