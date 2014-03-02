@@ -1253,4 +1253,32 @@
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Přepnout Smart Radio</string>
 
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">Hlavní přepínač</string>
+
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">Vypnout vibrace nastavení hlasitosti</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Vypne vibrace při změně režimu hlasitosti vyzvánění/oznámení tlačítky ovládání hlasitosti</string>
+
+    <!-- ScreenRecord: use stock binary -->
+    <string name="pref_screenrecord_use_stock_title">Použít originální nahrávač</string>
+    <string name="pref_screenrecord_use_stock_summary">Pokud zapnuto, pro nahrávání bude použit originální nahrávač. 
+        Použít v případě, že alternativní nahrávač způsobuje problémy. 
+        Originální nahrávač nepodporuje nahrávání zvuku a nahrávky dlhší než 3 minuty.</string>
+
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Hlavní přepínač pro nastavení hodin (vyžaduje restart)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Velikost dne v týdnu</string>
+
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">Velikost AM/PM</string>
+
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Prstenec navigační lišty</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Vypnout prstenec</string>
+
 </resources>
