@@ -1299,4 +1299,10 @@
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">Размер AM/PM</string>
 
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Навигационное кольцо</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Отключить нав.кольцо</string>
+
 </resources>
