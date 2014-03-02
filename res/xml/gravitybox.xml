@@ -841,9 +841,22 @@
 
             </PreferenceScreen>
 
+        </PreferenceCategory>
+
+        <PreferenceCategory 
+            android:key="pref_cat_navbar_ring"
+            android:title="@string/pref_cat_navbar_ring_title">
+
+            <CheckBoxPreference 
+                android:key="pref_navbar_ring_disable"
+                android:title="@string/pref_navbar_ring_disable_title"
+                android:defaultValue="false"
+                android:disableDependentsState="true" />
+
             <PreferenceScreen 
                 android:key="pref_cat_navbar_ring_targets"
-                android:title="@string/pref_cat_navbar_ring_targets_title">
+                android:title="@string/pref_cat_navbar_ring_targets_title"
+                android:dependency="pref_navbar_ring_disable" >
 
                 <SwitchPreference 
                     android:key="pref_navbar_ring_targets_enable"
