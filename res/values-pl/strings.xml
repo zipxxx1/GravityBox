@@ -529,7 +529,7 @@
     <string name="pref_cat_navigation_bar_title">Poprawki paska nawigacyjnego</string>
     <string name="pref_cat_navigation_bar_summary">Zawiera różne poprawki związane z paskiem nawigacyjnym</string>
     <string name="pref_navbar_override_title">Zastępowanie domyślnych ust. systemowych</string>
-    <string name="pref_navbar_override_summary">Główny wyłącznik poprawek paska nawigacyjnego (wymagany restart)</string>
+    <string name="pref_navbar_override_summary">Przełącza poprawki paska nawigacyjnego (wymagany restart)</string>
     <string name="pref_navbar_enable_title">Włącz pasek nawigacyjny</string>
     <string name="pref_navbar_enable_summary">Wymaga ponownego uruchomienia</string>
     <string name="pref_navbar_height_title">Wysokość paska nawigacji</string>
@@ -544,7 +544,7 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Cele Pierścienia Odblokowania</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Główny wyłącznik Celów Ekranu Blokady</string>
+    <string name="pref_lockscreen_ring_targets_enable_summary">Przełącza Cele Ekranu Blokady</string>
     <string name="pref_lockscreen_ring_targets_app_title">Cel pierścienia %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Pionowe przesunięcie pierścienia</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Poziome przesunięcie pierścienia</string>
@@ -815,7 +815,7 @@
     <string name="hwkey_ls_torch_voldown_longpress">Przy długim naciśnięciu Vol- </string>
 
     <!-- QuickSettings management master switch -->
-    <string name="pref_qs_management_enable_summary">Główny wyłącznik dla Zarządzania Szybkimi Ustawieniami (wymagany restart)</string>
+    <string name="pref_qs_management_enable_summary">Przełącza zarządzanie Szybkimi Ustawieniami (wymagany restart)</string>
 
     <!-- AppPickerPreference: shortcut support -->
     <string name="app_picker_applications">Aplikacje</string>
@@ -927,7 +927,7 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Cele pierścienia nawigacji</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Główny wyłącznik celów pierścienia nawigacji (wymagany restart)</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Przełącza cele pierścienia nawigacji (wymagany restart)</string>
     <string name="pref_navbar_ring_target_title">Cel pierścienia %d</string>
 
     <!-- Shortcut activity title -->
@@ -1270,5 +1270,12 @@
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Przełącz Smart Radio</string>
+
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">Główny wyłącznik</string>
+
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">Wyłącz wibracje regulacji głośności</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Wyłącza wibracje podczas regulacji głośności powiadomień/dzwonka za pomocą klawiszy głośności</string>
 
 </resources>
