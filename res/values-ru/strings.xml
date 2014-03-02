@@ -1290,4 +1290,13 @@
     <string name="pref_screenrecord_use_stock_summary">Если включено, для записи экрана будет использоваться стоковый бинарный файл. 
         Активируйте при проблемах с альтернативным бинарным файлом. Имейте в виду, что стоковый файл не поддерживает аудио и запись более 3 минут.</string>
 
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Включение настроек часов в строке состояния (необходима перезагрузка)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Размер дня недели</string>
+
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">Размер AM/PM</string>
+
 </resources>
