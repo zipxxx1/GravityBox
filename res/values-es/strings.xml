@@ -1279,4 +1279,27 @@
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Activar/desactivar modo de red inteligente</string>
 
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">Desactivar vibración al ajustar volumen</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Desactiva la vibración al ajustar el volumen de notificación/llamada usando los botones de volumen</string>
+
+    <!-- ScreenRecord: use stock binary -->
+    <string name="pref_screenrecord_use_stock_title">Usar binario predeterminado</string>
+    <string name="pref_screenrecord_use_stock_summary">Al activar, se usará el binario predeterminado para grabar la pantalla.      
+    Usar en caso de que el binario alternativo cause problemas. Ten en cuenta que no graba audio ni vídeos de más de 3 minutos</string>
+
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Activa/desactiva los ajustes del reloj de la barra de estado (requiere reinicio)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Tamaño del día de la semana</string>
+ 
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">Tamaño de AM/PM</string>
+ 
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Anillo de la barra de navegación</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Desactivar anillo de la barra de navegación</string>
 </resources>
