@@ -513,6 +513,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_SAFE_MEDIA_VOLUME_ENABLED = "enabled";
 
     public static final String PREF_CAT_KEY_NAVBAR_KEYS = "pref_cat_navbar_keys";
+    public static final String PREF_CAT_KEY_NAVBAR_RING = "pref_cat_navbar_ring";
     public static final String PREF_CAT_KEY_NAVBAR_COLOR = "pref_cat_navbar_color";
     public static final String PREF_CAT_KEY_NAVBAR_DIMEN = "pref_cat_navbar_dimen";
     public static final String PREF_KEY_NAVBAR_OVERRIDE = "pref_navbar_override";
@@ -534,6 +535,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NAVBAR_KEY_COLOR = "pref_navbar_key_color";
     public static final String PREF_KEY_NAVBAR_KEY_GLOW_COLOR = "pref_navbar_key_glow_color";
     public static final String PREF_KEY_NAVBAR_BG_COLOR = "pref_navbar_bg_color";
+    public static final String PREF_KEY_NAVBAR_RING_DISABLE = "pref_navbar_ring_disable";
     public static final String ACTION_PREF_NAVBAR_CHANGED = "gravitybox.intent.action.ACTION_NAVBAR_CHANGED";
     public static final String ACTION_PREF_NAVBAR_SWAP_KEYS = "gravitybox.intent.action.ACTION_NAVBAR_SWAP_KEYS";
     public static final String EXTRA_NAVBAR_HEIGHT = "navbarHeight";
@@ -550,6 +552,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_LONGPRESS = "navbarCustomKeyLongpress";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_DOUBLETAP = "navbarCustomKeyDoubletap";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_SWAP = "navbarCustomKeySwap";
+    public static final String EXTRA_NAVBAR_RING_DISABLE = "navbarRingDisable";
 
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_ENABLE = "pref_lockscreen_ring_targets_enable";
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_APP[] = new String[] {
@@ -986,6 +989,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefSafeMediaVolume;
         private ListPreference mPrefExpandedDesktop;
         private PreferenceCategory mPrefCatNavbarKeys;
+        private PreferenceCategory mPrefCatNavbarRing;
         private PreferenceCategory mPrefCatNavbarColor;
         private PreferenceCategory mPrefCatNavbarDimen;
         private CheckBoxPreference mPrefNavbarEnable;
@@ -1222,6 +1226,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefExpandedDesktop = (ListPreference) findPreference(PREF_KEY_EXPANDED_DESKTOP);
 
             mPrefCatNavbarKeys = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_KEYS);
+            mPrefCatNavbarRing = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_RING);
             mPrefCatNavbarColor = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_COLOR);
             mPrefCatNavbarDimen = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_DIMEN);
             mPrefNavbarEnable = (CheckBoxPreference) findPreference(PREF_KEY_NAVBAR_ENABLE);
@@ -1714,6 +1719,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 final boolean override = mPrefs.getBoolean(PREF_KEY_NAVBAR_OVERRIDE, false);
                 mPrefNavbarEnable.setEnabled(override);
                 mPrefCatNavbarKeys.setEnabled(override && mPrefNavbarEnable.isChecked());
+                mPrefCatNavbarRing.setEnabled(override && mPrefNavbarEnable.isChecked());
                 mPrefCatNavbarColor.setEnabled(override && mPrefNavbarEnable.isChecked());
                 mPrefCatNavbarDimen.setEnabled(override && mPrefNavbarEnable.isChecked());
             }
@@ -2329,6 +2335,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_CURSOR_CONTROL,
                         prefs.getBoolean(PREF_KEY_NAVBAR_CURSOR_CONTROL, false));
+            } else if (key.equals(PREF_KEY_NAVBAR_RING_DISABLE)) {
+                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
+                intent.putExtra(EXTRA_NAVBAR_RING_DISABLE,
+                        prefs.getBoolean(PREF_KEY_NAVBAR_RING_DISABLE, false));
             } else if (PREF_KEY_NAVBAR_RING_TARGET.contains(key)) {
                 intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
                 intent.putExtra(EXTRA_RING_TARGET_INDEX,

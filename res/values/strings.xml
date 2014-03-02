@@ -1299,4 +1299,10 @@
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">AM/PM size</string>
 
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Navigation bar ring</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Disable navigation ring</string>
+
 </resources>
