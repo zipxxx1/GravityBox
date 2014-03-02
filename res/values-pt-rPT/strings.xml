@@ -484,7 +484,7 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Ajustes da barra de navegação</string>
     <string name="pref_cat_navigation_bar_summary">Contém vários ajustes relacionados com a barra de navegação</string>
-    <string name="pref_navbar_override_summary">Ativação global dos ajustes (necessário reiniciar)</string>
+    <string name="pref_navbar_override_summary">Gestão dos ajustes (necessário reiniciar)</string>
     <string name="pref_navbar_enable_title">Ativar barra de navegação</string>
     <string name="pref_navbar_enable_summary">Permite ativar barra de navegação (necessário reiniciar)</string>
     <string name="pref_navbar_height_title">Altura da barra de navegação</string>
@@ -499,7 +499,7 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Alvos do anel de desbloqueio</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Ativação global dos alvos do anel de desbloqueio</string>
+    <string name="pref_lockscreen_ring_targets_enable_summary">Definição dos alvos do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_app_title">Alvo número %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Desvio vertical do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Desvio horizontal do anel de desbloqueio</string>
@@ -749,7 +749,7 @@
     <string name="hwkey_ls_torch_voldown_longpress">Ao manter pressionada a tecla Volume -</string>
 
     <!-- QuickSettings management master switch -->
-    <string name="pref_qs_management_enable_summary">Ativação global da gestão das definições rápidas (necessário reiniciar)</string>
+    <string name="pref_qs_management_enable_summary">Gestão das definições rápidas (necessário reiniciar)</string>
 
     <!-- AppPickerPreference: shortcut support -->
     <string name="app_picker_applications">Aplicações</string>
@@ -883,7 +883,7 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Alvos do anel de navegação</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Ativação global dos alvos do anel de navegação (necessário reiniciar)</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Definição dos alvos do anel de navegação (necessário reiniciar)</string>
     <string name="pref_navbar_ring_target_title">Alvo número %d</string>
 
     <!-- Shortcut activity title -->
@@ -1260,5 +1260,32 @@
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Comutar rádio inteligente</string>
+
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">Interruptor</string>
+
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">Desativar vibração no ajuste de volume</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Permite desativar a vibração durante o ajuste do volume das notificações / toques de chamada com as teclas de volume</string>
+
+    <!-- ScreenRecord: use stock binary -->
+    <string name="pref_screenrecord_use_stock_title">Usar executável de origem</string>
+    <string name="pref_screenrecord_use_stock_summary">Quando ativado, o executável de origem da gravação de ecrã é utilizado para efetuar gravações. 
+        Utilizar caso o executável alternativo cause problemas. De notar que o executável de origem não suporta gravação com áudio nem gravações superiores a 3 minutos.</string>
+
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Gestão das definições do relógio (necessário reiniciar)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Tamanho da letra do dia da semana</string>
+
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">Tamanho da letra AM/PM</string>
+
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Anel da barra de navegação</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Desativar anel de navegação</string>
 
 </resources>
