@@ -1276,6 +1276,6 @@
     <string name="pref_cat_navbar_ring_title">Pierścień paska nawigacji</string>
 
     <!-- Navbar ring: option to disable -->
-    <string name="pref_navbar_ring_disable_title">Wyłącz pierścień paska nawigacji/string>
+    <string name="pref_navbar_ring_disable_title">Wyłącz pierścień paska nawigacji</string>
 
 </resources>
