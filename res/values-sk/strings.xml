@@ -1247,4 +1247,26 @@
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Prepnúť Smart Radio</string>
 
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">Hlavný prepínač</string>
+
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">Vypnúť vibrácie nastavenia hlasitosti</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Vypne vibrácie pri zmene režimu hlasitosti vyzváňania/oznámení tlačidlami ovládania hlasitosti</string>
+
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Hlavný prepínač pre nastavenia hodín (vyžaduje reštart)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Veľkosť dňa v týždni</string>
+
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">Veľkosť AM/PM</string>
+
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Prstenec navigačnej lišty</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Vypnúť prstenec</string>
+
 </resources>
