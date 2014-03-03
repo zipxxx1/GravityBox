@@ -1270,4 +1270,23 @@
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">有効/無効の切り替え</string>
     
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">音量変更時のバイブを無効化</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">音量キーで音量を変更したときのバイブを無効化します。</string>
+
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">ステータスバーの時計設定の有効/無効を切り替えます。(要再起動)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">曜日のサイズ</string>
+
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">午前/午後のサイズ</string>
+
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">ナビバーリング</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">ナビバーリングの無効化</string>
+    
 </resources>
