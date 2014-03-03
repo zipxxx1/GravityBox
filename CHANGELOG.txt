@@ -1,3 +1,34 @@
+Changelog 2.9.8 - 03/03/2014
+--------------------------------------
+- Last screen: fixed scaling of images (thanks to bgcngm)
+- Volume Panel: option to disable volume adjust vibrate (thanks to JayT5)
+- Added title line for master switches in GB settings (thanks to Minty123)
+- Don't play Battery charged/Charger plugged/unplugged sounds when Phone's not idle (e.g. while in call)
+- Fixed undesired back/recents keys actions triggering when swiping for navbar ring
+- Screen Recording: option to choose stock screenrecord binary instead of alternative (to be used in case device's incompatible with alternate binary)
+- QuickSettings management:
+--- Ringer Mode Tile: preserve vibrate state when switching to silent mode (thanks to jacknicholson for pointing out)
+--- Screenshot Tile: toggle screen recording on long-press on tile (thanks to natezire71 for idea)
+- Statusbar tweaks / Clock settings: 
+--- Added master switch for Clock settings
+--- Added option for controlling day of week text size
+--- Added option for controlling AM/PM text size
+- Navigation bar tweaks: option to disable navigation bar ring (disables navbar gesture)
+- Lockscreen tweaks / Unlock ring targets: 
+--- Added 2 more unlock ring targets
+--- Disabled magnetic targets (targets won't snap to current touch position)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Italian translations (thanks to pesa1234, valerioscifoni)
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translations (thanks to Eric850130, knight00931)
+- Updated German translations (thanks to Minty123, calav3ra)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Korean translations (thanks to SDKoongchi)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Slovak and Czech translations
+
 Changelog 2.9.7 - 16/02/2014
 --------------------------------------
 - Fixed option for enabling/disabling menu overflow button
