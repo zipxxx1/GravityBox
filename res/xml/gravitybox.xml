@@ -115,6 +115,16 @@
                     android:title="@string/pref_lockscreen_ring_targets_app_title"
                     android:summary="@string/app_picker_none" />
 
+                <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
+                    android:key="pref_lockscreen_ring_targets_app5"
+                    android:title="@string/pref_lockscreen_ring_targets_app_title"
+                    android:summary="@string/app_picker_none" />
+
+                <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
+                    android:key="pref_lockscreen_ring_targets_app6"
+                    android:title="@string/pref_lockscreen_ring_targets_app_title"
+                    android:summary="@string/app_picker_none" />
+
             </PreferenceScreen>
 
             <CheckBoxPreference
