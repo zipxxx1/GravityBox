@@ -445,6 +445,10 @@ public class ModLockscreen {
                     if (res.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                         XposedHelpers.setFloatField(mGlowPadView, "mFirstItemOffset", 0);
                     }
+
+                    // disable magnetic targets - targets won't snap to current touch position
+                    XposedHelpers.setBooleanField(mGlowPadView, "mMagneticTargets", false);
+
                     mGlowPadView.requestLayout();
 
                     // bring emergency button on slider lockscreen to front when keyguard is secured
