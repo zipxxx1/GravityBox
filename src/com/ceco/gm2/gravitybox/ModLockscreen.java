@@ -670,8 +670,13 @@ public class ModLockscreen {
                     XposedHelpers.findAndHookMethod(carrierTextClass, "showOrHideCarrier", new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                            TextView carrierDivider = (TextView) XposedHelpers.getObjectField(
-                                    param.thisObject, "mCarrierDivider");
+                            TextView carrierDivider;
+                            Object divider = XposedHelpers.getObjectField(param.thisObject, "mCarrierDivider");
+                            if (divider instanceof TextView[]) {
+                                carrierDivider = (TextView) ((TextView[])divider)[0];
+                            } else {
+                                carrierDivider = (TextView) divider;
+                            }
                             mCarrierText = new String[] {
                                     prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, ""),
                                     prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER2_TEXT, "")};
@@ -689,9 +694,16 @@ public class ModLockscreen {
                             int.class, new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                            TextView carrierTextView[] = new TextView[] {
-                                    (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierView"),
-                                    (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierGeminiView")};
+                            TextView carrierTextView[] = new TextView[2];
+                            Object carrierView = XposedHelpers.getObjectField(param.thisObject, "mCarrierView");
+                            if (carrierView instanceof TextView[]) {
+                                carrierTextView[0] = (TextView) ((TextView[])carrierView)[0];
+                                carrierTextView[1] = (TextView) ((TextView[])carrierView)[1];
+                            } else {
+                                carrierTextView[0] = (TextView) carrierView;
+                                carrierTextView[1] = (TextView) XposedHelpers.getObjectField(
+                                        param.thisObject, "mCarrierGeminiView");
+                            }
 
                             int[] origVisibility = new int[] {
                                     carrierTextView[0] == null ? View.GONE : carrierTextView[0].getVisibility(),
