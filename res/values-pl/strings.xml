@@ -1278,4 +1278,19 @@
     <string name="pref_volume_adjust_vibrate_mute_title">Wyłącz wibracje regulacji głośności</string>
     <string name="pref_volume_adjust_vibrate_mute_summary">Wyłącza wibracje podczas regulacji głośności powiadomień/dzwonka za pomocą klawiszy głośności</string>
 
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Przełącza ustawienia zegara paska stanu (wymagany restart)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Rozmiar Dnia Tygodnia</string>
+
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">Rozmiar AM/PM</string>
+
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Pierścień paska nawigacji</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Wyłącz pierścień paska nawigacji</string>
+
 </resources>
