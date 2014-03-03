@@ -1300,4 +1300,19 @@
     <string name="pref_volume_adjust_vibrate_mute_title">Откл.вибр.при регулировке</string>
     <string name="pref_volume_adjust_vibrate_mute_summary">Отключение вибрации при регулировке громкости уведомлений/звонка клавишами громкости</string>
 
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Включение настроек часов в строке состояния (необходима перезагрузка)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Размер дня недели</string>
+
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">Размер AM/PM</string>
+
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Навигационное кольцо</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Отключить нав.кольцо</string>
+
 </resources>
