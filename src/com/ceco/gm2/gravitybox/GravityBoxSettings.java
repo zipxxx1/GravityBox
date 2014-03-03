@@ -564,7 +564,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_ENABLE = "pref_lockscreen_ring_targets_enable";
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_APP[] = new String[] {
         "pref_lockscreen_ring_targets_app0", "pref_lockscreen_ring_targets_app1", "pref_lockscreen_ring_targets_app2",
-        "pref_lockscreen_ring_targets_app3", "pref_lockscreen_ring_targets_app4"
+        "pref_lockscreen_ring_targets_app3", "pref_lockscreen_ring_targets_app4", "pref_lockscreen_ring_targets_app5",
+        "pref_lockscreen_ring_targets_app6"
     };
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_VERTICAL_OFFSET = "pref_lockscreen_ring_targets_vertical_offset";
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_HORIZONTAL_OFFSET = "pref_lockscreen_ring_targets_horizontal_offset";
@@ -1214,8 +1215,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNavbarCustomKeyLongpress = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS);
             mPrefNavbarCustomKeyDoubletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP);
 
-            mPrefLockscreenTargetsApp = new AppPickerPreference[5];
-            for (int i=0; i<=4; i++) {
+            mPrefLockscreenTargetsApp = new AppPickerPreference[PREF_KEY_LOCKSCREEN_TARGETS_APP.length];
+            for (int i=0; i<PREF_KEY_LOCKSCREEN_TARGETS_APP.length; i++) {
                 mPrefLockscreenTargetsApp[i] = (AppPickerPreference) findPreference(
                         PREF_KEY_LOCKSCREEN_TARGETS_APP[i]);
                 String title = String.format(

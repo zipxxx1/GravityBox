@@ -410,69 +410,35 @@ public class ModLockscreen {
                     final ArrayList<Object> newTargets = new ArrayList<Object>();
                     final ArrayList<String> newDescriptions = new ArrayList<String>();
                     final ArrayList<String> newDirections = new ArrayList<String>();
-                    final ArrayList<AppInfo> appInfoList = new ArrayList<AppInfo>(5);
                     final int unlockDescResId = res.getIdentifier("description_target_unlock", 
                             "string", "android");
                     final int unlockDirecResId = res.getIdentifier("description_direction_right", 
                             "string", "android");
-
-                    // fill appInfoList helper with apps from preferences
-                    for (int i=0; i<=4; i++) {
-                        String app = prefs.getString(
-                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_APP[i], null);
-                        if (app != null) {
-                            AppInfo appInfo = GlowPadHelper.getAppInfo(context, app);
-                            if (appInfo != null) {
-                                appInfoList.add(appInfo);
-                                if (DEBUG) log("appInfoList.add: " + app);
-                            }
-                        }
-                    }
 
                     // get target from position 0 supposing it's unlock ring
                     newTargets.add(targets.get(0));
                     newDescriptions.add(unlockDescResId == 0 ? null : res.getString(unlockDescResId));
                     newDirections.add(unlockDirecResId == 0 ? null : res.getString(unlockDirecResId));
 
-                    // create and fill custom targets with proper layout based on number of targets
-                    switch(appInfoList.size()) {
-                        case 1:
+                    // fill ring targets with apps from preferences
+                    AppInfo appInfo;
+                    for (int i=0; i<GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_APP.length; i++) {
+                        appInfo = null;
+                        String app = prefs.getString(
+                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_APP[i], null);
+                        if (app != null) {
+                            appInfo = GlowPadHelper.getAppInfo(context, app);
+                        }
+                        if (appInfo != null) {
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfo, mGlowPadViewClass));
+                            newDescriptions.add(appInfo.name);
+                        } else {
                             newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadViewClass));
                             newDescriptions.add(null);
-                            newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(0), mGlowPadViewClass));
-                            newDescriptions.add(appInfoList.get(0).name);
-                            newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadViewClass));
-                            newDescriptions.add(null);
-                            newDirections.add(null);
-                            break;
-                        case 2:
-                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(0), mGlowPadViewClass));
-                            newDescriptions.add(appInfoList.get(0).name);
-                            newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(1), mGlowPadViewClass));
-                            newDescriptions.add(appInfoList.get(1).name);
-                            newDirections.add(null);
-                            newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadViewClass));
-                            newDescriptions.add(null);
-                            newDirections.add(null);
-                            break;
-                        case 3:
-                        case 4:
-                        case 5:
-                            for (int i=0; i<=4; i++) {
-                                if (i >= appInfoList.size()) {
-                                    newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadViewClass));
-                                    newDescriptions.add(null);
-                                } else {
-                                    newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfoList.get(i), mGlowPadViewClass));
-                                    newDescriptions.add(appInfoList.get(i).name);
-                                }
-                                newDirections.add(null);
-                            }
-                            break;
+                        }
+                        newDirections.add(null);
                     }
+
                     XposedHelpers.setObjectField(mGlowPadView, "mTargetDrawables", newTargets);
                     XposedHelpers.setObjectField(mGlowPadView, "mTargetDescriptions", newDescriptions);
                     XposedHelpers.setObjectField(mGlowPadView, "mDirectionDescriptions", newDirections);
