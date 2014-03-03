@@ -97,8 +97,15 @@ public class ModSignalIconHide {
 
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    ViewGroup vgSlot1 = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mMobileGroup");
-                    ViewGroup vgSlot2 = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mMobileGroupGemini");
+                    Object mobileGroup = XposedHelpers.getObjectField(param.thisObject, "mMobileGroup");
+                    ViewGroup vgSlot1, vgSlot2;
+                    if (mobileGroup instanceof ViewGroup[]) {
+                        vgSlot1 = (ViewGroup) ((ViewGroup[])mobileGroup)[0];
+                        vgSlot2 = (ViewGroup) ((ViewGroup[])mobileGroup)[1];
+                    } else {
+                        vgSlot1 = (ViewGroup) mobileGroup;
+                        vgSlot2 = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mMobileGroupGemini");
+                    }
                     boolean isSim1Inserted = false;
                     boolean isSim2Inserted = false;
 
