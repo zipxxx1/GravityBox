@@ -1279,14 +1279,14 @@
     <string name="shortcut_smart_radio_toggle">Включение умного радио</string>
 
     <!-- Master switch title -->
-    <string name="pref_masterswitch_title">Главный переключатель</string>
+    <string name="pref_masterswitch_title">Включить</string>
 
     <!-- Mute volume adjust vibrate -->
     <string name="pref_volume_adjust_vibrate_mute_title">Откл.вибр.при регулировке</string>
     <string name="pref_volume_adjust_vibrate_mute_summary">Отключение вибрации при регулировке громкости уведомлений/звонка клавишами громкости</string>
 
     <!-- ScreenRecord: use stock binary -->
-    <string name="pref_screenrecord_use_stock_title">Использовать стоковый файл</string>
+    <string name="pref_screenrecord_use_stock_title">Стоковый бинарный файл</string>
     <string name="pref_screenrecord_use_stock_summary">Если включено, для записи экрана будет использоваться стоковый бинарный файл. 
         Активируйте при проблемах с альтернативным бинарным файлом. Имейте в виду, что стоковый файл не поддерживает аудио и запись более 3 минут.</string>
 
