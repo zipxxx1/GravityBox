@@ -1283,4 +1283,23 @@
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Activar/desactivar modo de red inteligente</string>
 
+    <!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">Desactivar vibración al ajustar volumen</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Desactiva la vibración al ajustar el volumen de notificación/llamada usando los botones de volumen</string>
+
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Activa/desactiva los ajustes del reloj de la barra de estado (requiere reinicio)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Tamaño del día de la semana</string>
+ 
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">Tamaño de AM/PM</string>
+ 
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Anillo de la barra de navegación</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Desactivar anillo de la barra de navegación</string>
+
 </resources>
