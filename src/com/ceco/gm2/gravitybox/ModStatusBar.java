@@ -637,10 +637,16 @@ public class ModStatusBar {
                     if (mCarrierTextView == null || mCarrierText == null) return;
 
                     if (Utils.hasGeminiSupport()) {
-                        final String networkName = (String) XposedHelpers.getObjectField(
-                                param.thisObject, "mNetworkName");
-                        final String networkNameGemini = (String) XposedHelpers.getObjectField(
-                                param.thisObject, "mNetworkNameGemini");
+                        String networkName[] = new String[2];
+                        Object name = XposedHelpers.getObjectField(param.thisObject, "mNetworkName");
+                        if (name instanceof String[]) {
+                            networkName[0] = (String) ((String[])name)[0];
+                            networkName[1] = (String) ((String[])name)[1];
+                        } else {
+                            networkName[0] = (String) name;
+                            networkName[1] = (String) XposedHelpers.getObjectField(
+                                    param.thisObject, "mNetworkNameGemini");
+                        }
 
                         if (mCarrierTextViewOrigVisibility == null) {
                             mCarrierTextViewOrigVisibility = new int[] {
@@ -658,7 +664,7 @@ public class ModStatusBar {
                         for (int i=0; i<2; i++) {
                             if (mCarrierTextView[i] == null) continue;
                             if (mCarrierText[i].isEmpty()) {
-                                mCarrierTextView[i].setText(i == 0 ? networkName : networkNameGemini);
+                                mCarrierTextView[i].setText(networkName[i]);
                                 mCarrierTextView[i].setVisibility(mCarrierTextViewOrigVisibility[i]);
                                 mCarrierTextView[i].setGravity(mCarrierTextViewOrigGravity[i]);
                             } else {
