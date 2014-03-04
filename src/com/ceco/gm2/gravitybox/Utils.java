@@ -150,12 +150,9 @@ public class Utils {
         return mIsMtkDevice;
     }
 
-    public static boolean isMt6572Device() {
-        return (Build.HARDWARE.toLowerCase().contains("mt6572"));
-    }
-
-    public static boolean isMt6582Device() {
-        return (Build.HARDWARE.toLowerCase().contains("mt6582"));
+    public static boolean isMt65x2Device() {
+        return (Build.HARDWARE.toLowerCase().contains("mt6572") ||
+                Build.HARDWARE.toLowerCase().contains("mt6582"));
     }
 
     public static boolean isXperiaDevice() {
