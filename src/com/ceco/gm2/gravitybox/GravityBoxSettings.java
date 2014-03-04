@@ -1381,11 +1381,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
                 }
 
-                // Remove preferences not needed for MT6572
-                if (Utils.isMt6572Device()) {
-                    mPrefCatStatusbar.removePreference(mSignalIconAutohide);
-                }
-
                 // Remove fix location preference for Android versions other than 4.2.1 
                 if (Build.VERSION.SDK_INT != Build.VERSION_CODES.JELLY_BEAN_MR1) {
                     mPrefCatFixes.removePreference(mPrefFixLocation);
