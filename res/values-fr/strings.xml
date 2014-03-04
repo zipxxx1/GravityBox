@@ -55,13 +55,13 @@
     <string name="caller_fullscreen_photo_title">Photo de l\'appelant plein écran</string>
 
     <!-- QuickSettings strings -->
-    <string name="quick_settings_sync_on">Synchro on</string>
-    <string name="quick_settings_sync_off">Synchro off</string>
-    <string name="quick_settings_wifi_ap_on">Hotspot on</string>
-    <string name="quick_settings_wifi_ap_off">Hotspot off</string>
-    <string name="quick_settings_torch_on">Torche on</string>
-    <string name="quick_settings_torch_off">Torche off</string>
-    <string name="quick_settings_torch_off_notif">Toucher pour éteindre</string>
+    <string name="quick_settings_sync_on">Synchro On</string>
+    <string name="quick_settings_sync_off">Synchro Off</string>
+    <string name="quick_settings_wifi_ap_on">Hotspot On</string>
+    <string name="quick_settings_wifi_ap_off">Hotspot Off</string>
+    <string name="quick_settings_torch_on">Torche On</string>
+    <string name="quick_settings_torch_off">Torche Off</string>
+    <string name="quick_settings_torch_off_notif">Toucher pour Éteindre</string>
     <string name="quick_settings_qr_playing">Lecture&#8230;</string>
     <string name="quick_settings_qr_recording">Enregistrement&#8230;</string>
     <string name="quick_settings_qr_recorded">Enregistré</string>
@@ -70,47 +70,50 @@
     <string name="quick_settings_expanded_desktop_disabled">Désactivé</string>
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Étendu</string>
-    <string name="quick_settings_stay_awake_on">Rester allumé on</string>
-    <string name="quick_settings_stay_awake_off">Rester allumé off</string>
-    <string name="quick_settings_nfc_on">NFC on</string>
-    <string name="quick_settings_nfc_off">NFC off</string>
+    <string name="quick_settings_stay_awake_on">Rester Allumé On</string>
+    <string name="quick_settings_stay_awake_off">Rester Allumé Off</string>
+    <string name="quick_settings_nfc_on">NFC On</string>
+    <string name="quick_settings_nfc_off">NFC Off</string>
     <string name="quick_settings_camera_error_connect">Pas de connexion à l\'appareil</string>
     <string name="quick_settings_usb_tether_off">Déconnecté</string>
-    <string name="quick_settings_usb_tether_connected">Partage de connexion off</string>
-    <string name="quick_settings_usb_tether_on">Partage de connexion</string>
+    <string name="quick_settings_usb_tether_connected">Partage de Connexion Off</string>
+    <string name="quick_settings_usb_tether_on">Partage de Connexion</string>
     <string name="quick_settings_music_play">Lecture</string>
     <string name="quick_settings_music_pause">Pause</string>
+    <string name="quick_settings_smart_radio_on">Ondes Radio Intelligentes On</string>
+    <string name="quick_settings_smart_radio_off">Ondes Radio Intelligentes Off</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Touches des paramètres rapides</string>
     <string name="quick_settings_summary">Permet d\'afficher ou masquer les touches de paramètres rapides depuis la barre d\'état</string>
-    <string name="qs_tile_user_profile">Profil utilisateur</string>
-    <string name="qs_tile_airplane_mode">Mode avion</string>
-    <string name="qs_tile_battery">Niveau de batterie</string>
+    <string name="qs_tile_user_profile">Profil Utilisateur</string>
+    <string name="qs_tile_airplane_mode">Mode Avion</string>
+    <string name="qs_tile_battery">Niveau de Batterie</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Localisation</string>
-    <string name="qs_tile_gps_alt">GPS (style CM)</string>
-    <string name="qs_tile_mobile_data">Connexion de données</string>
-    <string name="qs_tile_network_mode">Mode réseau</string>
-    <string name="qs_tile_data_usage">Consommation de données</string>
+    <string name="qs_tile_gps_alt">GPS (Style CM)</string>
+    <string name="qs_tile_mobile_data">Connexion de Données</string>
+    <string name="qs_tile_network_mode">Mode Réseau</string>
+    <string name="qs_tile_data_usage">Consommation de Données</string>
     <string name="qs_tile_brightness">Luminosité</string>
-    <string name="qs_tile_autorotation">Rotation automatique</string>
+    <string name="qs_tile_autorotation">Rotation Automatique</string>
     <string name="qs_tile_sync">Synchronisation</string>
     <string name="qs_tile_wifi_ap">Hotspot Wi-Fi</string>
     <string name="qs_tile_torch">Torche</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Veille</string>
-    <string name="qs_tile_quickrecord">Enregistrement rapide</string>
+    <string name="qs_tile_quickrecord">Enregistrement Rapide</string>
     <string name="qs_tile_settings">Paramètres</string>
     <string name="qs_tile_volume">Volume</string>
-    <string name="qs_tile_expanded_desktop">Bureau étendu</string>
-    <string name="qs_tile_stay_awake">Rester allumé</string>
-    <string name="qs_tile_screenshot">Capture d\'écran</string>
+    <string name="qs_tile_expanded_desktop">Bureau Étendu</string>
+    <string name="qs_tile_stay_awake">Rester Allumé</string>
+    <string name="qs_tile_screenshot">Capture d\'Écran</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">Appareil photo</string>
-    <string name="qs_tile_usb_tethering">Partage de connexion USB</string>
+    <string name="qs_tile_camera">Appareil Photo</string>
+    <string name="qs_tile_usb_tethering">Partage de Connexion USB</string>
     <string name="qs_tile_music">Musique</string>
+    <string name="qs_tile_smart_radio">Ondes Radio Intelligentes</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -397,15 +400,15 @@
     <string name="pref_quickapp_slot4_title">Appui long appli position 4</string>
     
     <!-- GPS Tile (for non-MTK) -->
-    <string name="qs_tile_gps_enabled">GPS on</string>
-    <string name="qs_tile_gps_disabled">GPS off</string>
-    <string name="qs_tile_gps_locked">GPS connecté</string>    
+    <string name="qs_tile_gps_enabled">GPS On</string>
+    <string name="qs_tile_gps_disabled">GPS Off</string>
+    <string name="qs_tile_gps_locked">GPS Connecté</string>    
 
     <!-- Pie control: always show menu button -->
     <string name="pie_control_menu_title">Toujours afficher le bouton menu</string>
 
     <!-- Ringer mode tile (for non-MTK) -->
-    <string name="qs_tile_ringer_mode">Mode de sonnerie</string>
+    <string name="qs_tile_ringer_mode">Mode de Sonnerie</string>
     
     <!-- Clock settings category -->
     <string name="pref_cat_clock_settings_title">Paramètres de l\'horloge</string>
@@ -456,9 +459,12 @@
     <string name="hwkey_action_custom_app_none">Aucune appli personnalisée attribuée !</string>
     <string name="hwkey_action_custom_app_missing">Appli personnalisée introuvable !</string>
 
-    <!-- Link notification panel clock to Deskclock -->
-    <string name="pref_clock_link_title">Appli horloge depuis panneau de notification</string>
+    <!-- Notification panel clock -->
+    <string name="pref_cat_statusbar_clock_title">Horloge de la barre d\'état</string>
+    <string name="pref_cat_notif_panel_clock_title">Horloge du panneau de notification</string>
+    <string name="pref_clock_link_title">Appli horloge sur simple appui</string>
     <string name="pref_clock_link_summary">Crée un lien du panneau de notification vers une application spécifique au lieu des paramètres date et heure</string>
+    <string name="pref_clock_longpress_link_title">Appli horloge sur appui long</string>
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Attente d\'une réponse de la branche système de GravityBox&#8230;</string>
@@ -493,7 +499,7 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Modifications barre de navigation</string>
     <string name="pref_cat_navigation_bar_summary">Regroupe diverses modifications liées à la barre de navigation</string>
-    <string name="pref_navbar_override_summary">Interrupteur général pour les modifications de la barre de navigation (redémarrage nécessaire)</string>
+    <string name="pref_navbar_override_summary">Enclenche les modifications de la barre de navigation (redémarrage nécessaire)</string>
     <string name="pref_navbar_enable_title">Activer la barre de navigation</string>
     <string name="pref_navbar_enable_summary">Redémarrage nécessaire</string>
     <string name="pref_navbar_height_title">Hauteur barre de navigation</string>
@@ -508,7 +514,7 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Cibles de l\'anneau de déverrouillage</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Interrupteur général pour les cibles de l\'écran de déverrouillage</string>
+    <string name="pref_lockscreen_ring_targets_enable_summary">Enclenche les cibles de l\'écran de déverrouillage</string>
     <string name="pref_lockscreen_ring_targets_app_title">Cible %s de l\'anneau</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Marge verticale anneau de déverrouillage</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Marge horizontale anneau de déverrouillage</string>
@@ -759,7 +765,7 @@
     <string name="hwkey_ls_torch_voldown_longpress">Par appui long sur volume -</string>
 
     <!-- QuickSettings management master switch -->
-    <string name="pref_qs_management_enable_summary">Interrupteur principal pour la gestion des Paramètres Rapides (nécessite un redémarrage)</string>
+    <string name="pref_qs_management_enable_summary">Enclenche la gestion des Paramètres Rapides (nécessite un redémarrage)</string>
 
     <!-- AppPickerPreference: shortcut support -->
     <string name="app_picker_applications">Applications</string>
@@ -897,7 +903,7 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Cibles de l\'anneau de navigation</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Interrupteur principal pour les cibles de l\'anneau de navigation (redémarrage nécessaire)</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Enclenche les cibles de l\'anneau de navigation (redémarrage nécessaire)</string>
     <string name="pref_navbar_ring_target_title">Cible %d sur l\'anneau</string>
 
     <!-- Shortcut activity title -->
@@ -1260,5 +1266,43 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
+
+    <!-- Unlock ring: double-tap to sleep -->
+    <string name="pref_lockscreen_ring_dt2s_title">Activer le double appui pour mettre en veille</string>
+    <string name="pref_lockscreen_ring_dt2s_summary">Permet la mise en veille par un double appui sur l\'anneau de déverrouillage</string>
+
+    <!-- Charger plugged/unplugged sound -->
+    <string name="pref_charger_plugged_sound_title">Son à la connexion du chargeur</string>
+    <string name="pref_charger_plugged_sound_summary">Joue un son lorsque le chargeur branché/débranché</string>
+
+    <!-- GB Actions: Toggle Smart Radio -->
+    <string name="shortcut_smart_radio_toggle">Enclencher les Ondes Radio Intelligentes</string>
+
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">Interrupteur principal</string>
+
+   	<!-- Mute volume adjust vibrate -->
+    <string name="pref_volume_adjust_vibrate_mute_title">Désactiver vibration d\'ajustement du volume</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Désactive la vibration lors de l\'ajustement du volume de notification/sonnerie par les touches de volume</string>
+
+    <!-- ScreenRecord: use stock binary -->
+    <string name="pref_screenrecord_use_stock_title">Utiliser le code binaire par défaut</string>
+    <string name="pref_screenrecord_use_stock_summary">Lorsque l\'option est activée, le code binaire par défaut pour l\'enregistrement de l\'écran est utilisé. 
+        À utiliser dans le cas où le code binaire alternatif pose des problèmes. Notez que le code binaire par défaut ne supporte ni l\'enregistrement audio ni les enrengistrements de plus de 3 minutes</string>
+
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Enclenche les paramètres pour l\'horloge de la barre d\'état (redémarrage nécessaire)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Taille jour de la semaine</string>
+
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">Taille AM/PM</string>
+
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Anneau barre de navigation</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Désactiver l\'anneau de la barre de navigation</string>
 
 </resources>
