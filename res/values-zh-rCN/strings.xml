@@ -1284,5 +1284,25 @@
     <!-- Mute volume adjust vibrate -->
     <string name="pref_volume_adjust_vibrate_mute_title">禁用音量调整震动</string>
     <string name="pref_volume_adjust_vibrate_mute_summary">禁止使用音量键调整通知/铃声音量时振动</string>
+    
+    <!-- ScreenRecord: use stock binary -->
+    <string name="pref_screenrecord_use_stock_title">使用原厂二进制</string>
+    <string name="pref_screenrecord_use_stock_summary">启用后原厂屏幕录制二进制文件用于记录 
+        替代二进制会导致另一种情况下的问题。请注意，该原厂的二进制不支持音频和录制时间超过3分钟</string>
+
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">切换状态栏时钟设置（需要重新启动）</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">星期大小(周)</string>
+
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">上午/下午 大小</string>
+
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">导航环</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">禁用导航环</string>
 
 </resources>
