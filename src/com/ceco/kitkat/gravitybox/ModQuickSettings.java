@@ -1332,6 +1332,15 @@ public class ModQuickSettings {
                                 }
                             }
                         });
+                        tile.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View v) {
+                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
+                                        android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS);
+                                tile.setPressed(false);
+                                return true;
+                            }
+                        });
                     }
                 }
             });
