@@ -1165,7 +1165,26 @@ public class ModQuickSettings {
                     CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    ((View)param.args[0]).setTag(mAospTileTags.get("settings"));
+                    final View tile = (View) param.args[0];
+                    tile.setTag(mAospTileTags.get("settings"));
+                    if (mOverrideTileKeys.contains("settings")) {
+	                    tile.setOnLongClickListener(new View.OnLongClickListener() {
+	                        @Override
+	                        public boolean onLongClick(View v) {
+	                            Intent i = new Intent();
+	                            i.setClassName(GravityBox.PACKAGE_NAME, GravityBoxSettings.class.getName());
+	                            try {
+	                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", i);
+	                            } catch (Throwable t) {
+	                                // fallback in case of troubles
+	                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	                                mContext.startActivity(i);
+	                            }
+	                            tile.setPressed(false);
+	                            return true;
+	                        }
+	                    });
+                    }
                 }
             });
         } catch (Throwable t) {
