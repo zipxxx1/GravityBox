@@ -1285,4 +1285,24 @@
     <string name="pref_volume_adjust_vibrate_mute_title">Disattiva vibrazione regolazione volume</string>
     <string name="pref_volume_adjust_vibrate_mute_summary">Disattiva la vibrazione durante la regolazione del volume</string>
 
+    <!-- ScreenRecord: use stock binary -->
+    <string name="pref_screenrecord_use_stock_title">Usa metodo standard</string>
+    <string name="pref_screenrecord_use_stock_summary">Quando abilitato, verrà utilizzato il metodo standard di Android per la registrazione della schermata. 
+        Usare solo se si riscontrano problemi. Nota bene che il metodo standard non supporta audio e video più lunghi di 3 minuti.</string>
+
+    <!-- Clock settings master switch -->
+    <string name="pref_sb_clock_masterswitch_summary">Attiva/disattiva impostazioni barra di stato (richiede riavvio)</string>
+
+    <!-- Clock: day of week size -->
+    <string name="pref_sb_clock_dow_size_title">Dimensione giorno della settimana</string>
+
+    <!-- Clock: AM/PM size -->
+    <string name="pref_sb_clock_ampm_size_title">Dimensione AM/PM</string>
+
+    <!-- Navigation bar ring category -->
+    <string name="pref_cat_navbar_ring_title">Anello barra di navigazione</string>
+
+    <!-- Navbar ring: option to disable -->
+    <string name="pref_navbar_ring_disable_title">Disabilita anello</string>
+
 </resources>
