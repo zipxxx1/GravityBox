@@ -892,10 +892,6 @@
     <string name="hwkey_action_auto_rotation_enabled">自动旋转已启用</string>
     <string name="hwkey_action_auto_rotation_disabled">自动旋转已停用</string>
 
-    <!-- Allow any widget on Lockscreen -->
-    <string name="pref_lockscreen_allow_any_widget_title">允许任何小部件</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">允许在锁屏界面显示，一般仅适用于启动器的小部件</string>
-
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">显示电源键菜单</string>
     <string name="hwkey_action_expand_notifications">展开通知面板</string>

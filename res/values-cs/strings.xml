@@ -863,10 +863,6 @@
     <string name="hwkey_action_auto_rotation_enabled">Auto rotace zapnuta</string>
     <string name="hwkey_action_auto_rotation_disabled">Auto rotace vypnuta</string>
 
-    <!-- Allow any widget on Lockscreen -->
-    <string name="pref_lockscreen_allow_any_widget_title">Povolit všechny widgety</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">Povolí i ty widgety na obrazovce uzamčení, které mohou být použity pouze vrámci spouštěče</string>
-
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Zobrazit nabídku napájení</string>
     <string name="hwkey_action_expand_notifications">Zobrazit panel upozornění</string>

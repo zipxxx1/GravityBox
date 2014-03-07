@@ -871,10 +871,6 @@
     <string name="hwkey_action_auto_rotation_enabled">自動旋轉已啟用</string>
     <string name="hwkey_action_auto_rotation_disabled">自動旋轉已停用</string>
 
-    <!-- Allow any widget on Lockscreen -->
-    <string name="pref_lockscreen_allow_any_widget_title">允許任小何工具</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">允許鎖定畫面桌面小工具，僅可使用於一般桌面啟動器</string>
-
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">顯示電源選單</string>
     <string name="hwkey_action_expand_notifications">展開通知面板</string>

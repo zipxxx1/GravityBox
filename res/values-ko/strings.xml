@@ -710,9 +710,6 @@
     <string name="hwkey_action_auto_rotation_enabled">자동 회전 활성화</string>
     <string name="hwkey_action_auto_rotation_disabled">자동 회전 비활성화</string>
 
-    <string name="pref_lockscreen_allow_any_widget_title">모든 위젯 허용</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">홈 런처에서만 사용 가능한 위젯을 잠금 화면에서도 사용 가능하게 만듭니다.</string>
-
     <string name="hwkey_action_show_power_menu">전원 옵션 보이기</string>
     <string name="hwkey_action_expand_notifications">잠금 패널 확장</string>
     <string name="hwkey_action_expand_quicksettings">퀵세팅 패널 확장</string>

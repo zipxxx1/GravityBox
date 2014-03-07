@@ -869,10 +869,6 @@
     <string name="hwkey_action_auto_rotation_enabled">Auto-obracanie włączone</string>
     <string name="hwkey_action_auto_rotation_disabled">Auto-obracanie wyłączone</string>
 
-    <!-- Allow any widget on Lockscreen -->
-    <string name="pref_lockscreen_allow_any_widget_title">Dozwolony dowolny widżet</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">Pozwala umieścić na Ekranie Blokady widżety, które normalnie mogą być używane tylko na ekranie Startera Aplikacji</string>
-
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Pokaż menu Zasilania</string>
     <string name="hwkey_action_expand_notifications">Rozwiń panel Powiadomień</string>

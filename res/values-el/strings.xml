@@ -892,10 +892,6 @@
     <string name="hwkey_action_auto_rotation_enabled">Η αυτόμ. περιστροφή ενεργοποιήθηκε</string>
     <string name="hwkey_action_auto_rotation_disabled">Η αυτόμ. περιστροφή απενεργοποιήθηκε</string>
 
-    <!-- Allow any widget on Lockscreen -->
-    <string name="pref_lockscreen_allow_any_widget_title">Επιτρέπονται όλα τα widget</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">Επιτρέπει την χρήση widget αρχικής οθόνης στο κλείδωμα οθόνης</string>
-
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Εμφάνιση μενού λειτουργίας</string>
     <string name="hwkey_action_expand_notifications">Εμφάνιση πεδίου ειδοποίησεων</string>
