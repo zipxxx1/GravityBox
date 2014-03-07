@@ -31,13 +31,27 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     // copies required files from assets to file system
     private void prepareAssets(Context context) {
+        File f;
+
         // prepare alternative screenrecord binary if doesn't exist yet
-        File srBinary = new File(context.getFilesDir() + "/screenrecord");
-        if (!srBinary.exists()) {
-            Utils.writeAssetToFile(context, "screenrecord", srBinary);
+        f = new File(context.getFilesDir() + "/screenrecord");
+        if (!f.exists()) {
+            Utils.writeAssetToFile(context, "screenrecord", f);
         }
-        if (srBinary.exists()) {
-            srBinary.setExecutable(true);
+        if (f.exists()) {
+            f.setExecutable(true);
+        }
+
+        // prepare battery sound files
+        final String[] bSounds = new String[] { "battery_charged.ogg", "charger_plugged.ogg", "charger_unplugged.ogg" };
+        for (String bSound : bSounds) {
+            f = new File(context.getFilesDir() + "/" + bSound);
+            if (!f.exists()) {
+                Utils.writeAssetToFile(context, bSound, f);
+            }
+            if (f.exists()) {
+                f.setReadable(true, false);
+            }
         }
     }
 }
