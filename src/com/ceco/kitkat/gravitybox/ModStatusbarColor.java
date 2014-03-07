@@ -140,10 +140,12 @@ public class ModStatusbarColor {
                                     mIconManager.getDefaultIconColor()));
                     mIconManager.setDataActivityColor(
                             prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR, 
-                                    StatusBarIconManager.DEFAULT_DATA_ACTIVITY_COLOR));
+                                    gbContext.getResources().getInteger(
+                                            R.integer.signal_cluster_data_activity_icon_color)));
                     mIconManager.setDataActivityColor(1,
                             prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, 
-                                    StatusBarIconManager.DEFAULT_DATA_ACTIVITY_COLOR));
+                                    gbContext.getResources().getInteger(
+                                            R.integer.signal_cluster_data_activity_icon_color)));
                     try {
                         int signalIconMode = Integer.valueOf(prefs.getString(
                                 GravityBoxSettings.PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "1"));

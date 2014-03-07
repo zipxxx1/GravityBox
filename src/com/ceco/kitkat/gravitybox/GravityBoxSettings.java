@@ -156,9 +156,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_STATUSBAR_ICON_COLOR = "pref_statusbar_icon_color";
     public static final String PREF_KEY_STATUS_ICON_STYLE = "pref_status_icon_style";
     public static final String PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY = "pref_statusbar_icon_color_secondary";
-    public static final String PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR = "pref_statusbar_data_activity_color";
+    public static final String PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR = "pref_signal_cluster_data_activity_color";
     public static final String PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY = 
-            "pref_statusbar_data_activity_color_secondary";
+            "pref_signal_cluster_data_activity_color_secondary";
     public static final String PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE = "pref_statusbar_signal_color_mode";
     public static final String PREF_KEY_STATUSBAR_CENTER_CLOCK = "pref_statusbar_center_clock";
     public static final String PREF_KEY_STATUSBAR_CLOCK_DOW = "pref_statusbar_clock_dow2";
@@ -631,6 +631,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS = "pref_launcher_desktop_grid_cols";
     public static final String PREF_KEY_LAUNCHER_RESIZE_WIDGET = "pref_launcher_resize_widget";
 
+    public static final String PREF_CAT_KEY_SIGNAL_CLUSTER = "pref_cat_signal_cluster";
     public static final String PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE = "pref_signal_cluster_connection_state";
     public static final String PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY = "pref_signal_cluster_data_activity";
 
@@ -1060,6 +1061,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private Preference mPrefRestore;
         private EditTextPreference mPrefTransVerification;
         private ListPreference mPrefScreenrecordSize;
+        private PreferenceScreen mPrefCatSignalCluster;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1331,6 +1333,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefScreenrecordSize = (ListPreference) findPreference(PREF_KEY_SCREENRECORD_SIZE);
 
+            mPrefCatSignalCluster = (PreferenceScreen) findPreference(PREF_CAT_KEY_SIGNAL_CLUSTER);
+
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
                 mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
@@ -1376,14 +1380,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
                 mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
-                mPrefCatStatusbarColors.removePreference(mPrefSbDaColorSecondary);
+                mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
             } else {
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {
                     mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                     mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
-                    mPrefCatStatusbarColors.removePreference(mPrefSbDaColorSecondary);
+                    mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                 }
                 mPrefCatStatusbarQs.removePreference(mPrefQsTileBehaviourOverride);
             }
@@ -1393,8 +1397,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatDisplay.removePreference(mPrefButtonBacklightNotif);
 
             // Features not relevant for KitKat but keep them for potential future use
-            mPrefCatStatusbarColors.removePreference(mPrefSbDaColor);
-            mPrefCatStatusbarColors.removePreference(mPrefSbDaColorSecondary);
+            mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
 
             // Remove more music volume steps option if necessary
             if (!Utils.shouldAllowMoreVolumeSteps()) {
@@ -1650,10 +1653,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE)) {
                 mPrefSbIconColor.setEnabled(mPrefSbIconColorEnable.isChecked());
-                mPrefSbDaColor.setEnabled(mPrefSbIconColorEnable.isChecked());
                 mPrefSbSignalColorMode.setEnabled(mPrefSbIconColorEnable.isChecked());
                 mPrefSbIconColorSecondary.setEnabled(mPrefSbIconColorEnable.isChecked());
-                mPrefSbDaColorSecondary.setEnabled(mPrefSbIconColorEnable.isChecked());
             }
 
             if (key == null || key.equals(PREF_KEY_NOTIF_BACKGROUND)) {
@@ -1988,11 +1989,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_DATA_ACTIVITY_COLOR,
-                        prefs.getInt(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR, Color.WHITE));
+                        prefs.getInt(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR, 
+                        getResources().getInteger(R.integer.signal_cluster_data_activity_icon_color)));
             } else if (key.equals(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_DATA_ACTIVITY_COLOR_SECONDARY,
-                        prefs.getInt(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, Color.WHITE));
+                        prefs.getInt(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, 
+                        getResources().getInteger(R.integer.signal_cluster_data_activity_icon_color)));
             } else if (key.equals(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_SIGNAL_COLOR_MODE,

@@ -110,6 +110,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     imageDataOut = mGbResources.getDrawable(R.drawable.stat_sys_signal_out);
                     imageDataInOut = mGbResources.getDrawable(R.drawable.stat_sys_signal_inout);
                 }
+                updateDataActivityColor();
             }
         }
 
@@ -168,6 +169,18 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 activityView.setVisibility(activityIn || activityOut ?
                         View.VISIBLE : View.GONE);
                 if (DEBUG) log("SignalActivity: " + signalType + ": data activity indicators updated");
+            }
+        }
+
+        public void updateDataActivityColor() {
+            if (imageDataIn != null) {
+                imageDataIn = mIconManager.applyDataActivityColorFilter(imageDataIn);
+            }
+            if (imageDataOut != null) {
+                imageDataOut = mIconManager.applyDataActivityColorFilter(imageDataInOut);
+            }
+            if (imageDataInOut != null) {
+                imageDataInOut = mIconManager.applyDataActivityColorFilter(imageDataInOut);
             }
         }
     } 
@@ -404,6 +417,15 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 StatusBarIconManager.FLAG_DATA_ACTIVITY_COLOR_CHANGED |
                 StatusBarIconManager.FLAG_ICON_COLOR_SECONDARY_CHANGED |
                 StatusBarIconManager.FLAG_SIGNAL_ICON_MODE_CHANGED)) != 0) {
+            if ((flags & StatusBarIconManager.FLAG_DATA_ACTIVITY_COLOR_CHANGED) != 0 &&
+                    mDataActivityEnabled) {
+                if (mWifiActivity != null) {
+                    mWifiActivity.updateDataActivityColor();
+                }
+                if (mMobileActivity != null) {
+                    mMobileActivity.updateDataActivityColor();
+                }
+            }
             update();
         }
     }

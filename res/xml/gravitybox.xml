@@ -457,6 +457,21 @@
                 android:summary="@string/pref_signal_cluster_data_activity_summary"
                 android:defaultValue="false" />
 
+            <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                android:key="pref_signal_cluster_data_activity_color"
+                android:title="@string/pref_statusbar_data_activity_color_title" 
+                android:summary="@string/pref_statusbar_data_activity_color_summary"
+                android:defaultValue="@integer/signal_cluster_data_activity_icon_color"
+                android:dependency="pref_signal_cluster_data_activity" />
+
+            <!-- this pref is hidden, but we keep it for potential future use -->
+            <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                android:key="pref_signal_cluster_data_activity_color_secondary"
+                android:title="@string/pref_statusbar_data_activity_color_secondary_title" 
+                android:summary="@string/pref_statusbar_data_activity_color_secondary_summary"
+                android:defaultValue="@integer/signal_cluster_data_activity_icon_color"
+                android:dependency="pref_signal_cluster_data_activity" />
+
         </PreferenceScreen>
 
         <PreferenceScreen 
@@ -495,18 +510,6 @@
                 android:title="@string/pref_statusbar_icon_color_secondary_title" 
                 android:summary="@string/pref_statusbar_icon_color_secondary_summary"
                 android:defaultValue="@integer/COLOR_HOLO_BLUE_LIGHT" />
-
-            <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                android:key="pref_statusbar_data_activity_color"
-                android:title="@string/pref_statusbar_data_activity_color_title" 
-                android:summary="@string/pref_statusbar_data_activity_color_summary"
-                android:defaultValue="@integer/COLOR_WHITE" />
-
-            <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                android:key="pref_statusbar_data_activity_color_secondary"
-                android:title="@string/pref_statusbar_data_activity_color_secondary_title" 
-                android:summary="@string/pref_statusbar_data_activity_color_secondary_summary"
-                android:defaultValue="@integer/COLOR_WHITE" />
 
             <ListPreference
                 android:key="pref_statusbar_signal_color_mode" 
