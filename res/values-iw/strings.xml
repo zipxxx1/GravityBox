@@ -836,10 +836,6 @@
     <string name="hwkey_action_auto_rotation_enabled">סיבוב אוטומטי מופעל</string>
     <string name="hwkey_action_auto_rotation_disabled">סיבוב אוטומטי מבוטל</string>
 
-    <!-- Allow any widget on Lockscreen -->
-    <string name="pref_lockscreen_allow_any_widget_title">אפשר כל ווידג\'ט</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">מאפשר להציג על גבי מסך נעילה גם את הווידג\'טים אשר מיועדים להצגה במסכי לאונצ\'ר בלבד</string>
-
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">הצג תפריט הפעלה/כיבוי</string>
     <string name="hwkey_action_expand_notifications">הרחב את מגירת ההתראות</string>

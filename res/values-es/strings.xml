@@ -934,10 +934,6 @@
     <string name="hwkey_action_auto_rotation_enabled">Rotación automática activada</string>
     <string name="hwkey_action_auto_rotation_disabled">Rotación automática desactivada</string>
 
-    <!-- Allow any widget on Lockscreen -->
-    <string name="pref_lockscreen_allow_any_widget_title">Permitir cualquier widget</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">Permite colocar en la pantalla de bloqueo los widgets que solo pueden ser usados en el lanzador</string>
-
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Mostrar menú de apagado</string>
     <string name="hwkey_action_expand_notifications">Expandir panel de notificaciones</string>

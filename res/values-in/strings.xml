@@ -935,10 +935,6 @@
     <string name="hwkey_action_auto_rotation_enabled">Rotasi otomatis hidup</string>
     <string name="hwkey_action_auto_rotation_disabled">Rotasi otomatis mati</string>
 
-    <!-- Allow any widget on Lockscreen -->
-    <string name="pref_lockscreen_allow_any_widget_title">Bolehkan widget apapun</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">Membolehkan widget-widget yang biasanya hanya bisa digunakan di launcher untuk digunakan di lockscreen</string>
-
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Tunjukkan menu power</string>
     <string name="hwkey_action_expand_notifications">Buka panel notifikasi</string>

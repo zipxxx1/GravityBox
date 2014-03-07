@@ -920,10 +920,6 @@
     <string name="hwkey_action_auto_rotation_enabled">Auto-rotazione abilitata</string>
     <string name="hwkey_action_auto_rotation_disabled">Auto rotazione disabilitata</string>
 
-    <!-- Allow any widget on Lockscreen -->
-    <string name="pref_lockscreen_allow_any_widget_title">Permetti qualsiasi widget</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">Permetti questi widget nella schermata di blocco che normalmente sono usati solo nel launcher</string>
-
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Visualizza menù spegnimento</string>
     <string name="hwkey_action_expand_notifications">Espandi barra notifiche</string>

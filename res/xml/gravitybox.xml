@@ -194,12 +194,6 @@
                 android:summary="@string/pref_lockscreen_widget_limit_disable_summary"
                 android:defaultValue="false" />
 
-            <CheckBoxPreference 
-                android:key="pref_lockscreen_allow_any_widget"
-                android:title="@string/pref_lockscreen_allow_any_widget_title"
-                android:summary="@string/pref_lockscreen_allow_any_widget_summary"
-                android:defaultValue="false" />
-
         </PreferenceCategory>
 
         <PreferenceCategory 

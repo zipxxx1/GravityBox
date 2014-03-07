@@ -26,7 +26,6 @@ import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.appwidget.AppWidgetHostView;
-import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -89,7 +88,6 @@ public class ModLockscreen {
             CLASS_PATH + ".KeyguardUpdateMonitor.BatteryStatus";
     private static final String CLASS_KG_VIEW_BASE = CLASS_PATH + ".KeyguardViewBase";
     private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
-    private static final String CLASS_KG_ACTIVITY_LAUNCHER = CLASS_PATH + ".KeyguardActivityLauncher";
     private static final String CLASS_CARRIER_TEXT = Utils.isMtkDevice() ?
             CLASS_PATH + ".MediatekCarrierText" : CLASS_PATH + ".CarrierText";
     private static final String ENUM_SECURITY_MODE = CLASS_PATH + ".KeyguardSecurityModel.SecurityMode";
@@ -157,7 +155,6 @@ public class ModLockscreen {
             final Class<?> kgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, null);
             final Class<?> kgViewBaseClass = XposedHelpers.findClass(CLASS_KG_VIEW_BASE, null);
             final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, null);
-            final Class<?> kgActivityLauncherClass = XposedHelpers.findClass(CLASS_KG_ACTIVITY_LAUNCHER, null);
             final Class<?> carrierTextClass = XposedHelpers.findClass(CLASS_CARRIER_TEXT, null);
             final Class<? extends Enum> kgSecurityModeEnum = 
                     (Class<? extends Enum>) XposedHelpers.findClass(ENUM_SECURITY_MODE, null);
@@ -642,25 +639,6 @@ public class ModLockscreen {
                             v.setSystemUiVisibility(v.getSystemUiVisibility() |
                                     (disableClock ? STATUSBAR_DISABLE_CLOCK : 0));
                         }
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgActivityLauncherClass, "launchActivity",
-                    Intent.class, boolean.class, boolean.class, Handler.class, Runnable.class, new XC_MethodHook() {
-                @SuppressLint("InlinedApi")
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    Intent intent = (Intent) param.args[0];
-                    if ("android.appwidget.action.KEYGUARD_APPWIDGET_PICK".equals(intent.getAction()) &&
-                            prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ALLOW_ANY_WIDGET, false)) {
-                        intent.removeExtra("categoryFilter");
-                        intent.putExtra("categoryFilter", AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN);
-                        Bundle options = new Bundle();
-                        options.putInt(AppWidgetManager.OPTION_APPWIDGET_HOST_CATEGORY,
-                                AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN);
-                        intent.removeExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
-                        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS, options);
                     }
                 }
             });

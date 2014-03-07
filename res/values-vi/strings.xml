@@ -928,10 +928,6 @@
     <string name="hwkey_action_auto_rotation_enabled">Xoay tự động bật</string>
     <string name="hwkey_action_auto_rotation_disabled">Xoay tự động tắt</string>
 
-    <!-- Allow any widget on Lockscreen -->
-    <string name="pref_lockscreen_allow_any_widget_title">Cho phép mọi widget</string>
-    <string name="pref_lockscreen_allow_any_widget_summary">Cho phép dùng các widget thường chỉ có thể dùng trong launcher xuất hiện trong màn hình khoá</string>
-
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Hiện menu nguồn</string>
     <string name="hwkey_action_expand_notifications">Mở rộng thanh thông báo</string>
