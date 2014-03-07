@@ -124,33 +124,36 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             activityOut = out;
 
             // partially/fully connected state
-            if (mConnectionStateEnabled &&
-                    !(mIconManager.isColoringEnabled() &&
+            if (mConnectionStateEnabled) {
+                if (!(mIconManager.isColoringEnabled() &&
                         mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED)) {
-                ImageView signalIcon = signalType == SignalType.WIFI ?
-                        (ImageView) mFldWifiView.get(mView) : (ImageView) mFldMobileView.get(mView);
-                if (signalIcon != null && signalIcon.getDrawable() != null) {
-                    Drawable d = signalIcon.getDrawable().mutate();
-                    if (!fullyConnected) {
-                        d.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
-                    } else {
-                        d.clearColorFilter();
-                    }
-                    signalIcon.setImageDrawable(d);
-                }
-                if (signalType == SignalType.MOBILE) {
-                    ImageView dataTypeIcon = (ImageView) mFldMobileTypeView.get(mView);
-                    if (dataTypeIcon != null && dataTypeIcon.getDrawable() != null) {
-                        Drawable dti = dataTypeIcon.getDrawable().mutate();
+                    ImageView signalIcon = signalType == SignalType.WIFI ?
+                            (ImageView) mFldWifiView.get(mView) : (ImageView) mFldMobileView.get(mView);
+                    if (signalIcon != null && signalIcon.getDrawable() != null) {
+                        Drawable d = signalIcon.getDrawable().mutate();
                         if (!fullyConnected) {
-                            dti.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
+                            d.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
                         } else {
-                            dti.clearColorFilter();
+                            d.clearColorFilter();
                         }
-                        dataTypeIcon.setImageDrawable(dti);
+                        signalIcon.setImageDrawable(d);
                     }
+                    if (signalType == SignalType.MOBILE) {
+                        ImageView dataTypeIcon = (ImageView) mFldMobileTypeView.get(mView);
+                        if (dataTypeIcon != null && dataTypeIcon.getDrawable() != null) {
+                            Drawable dti = dataTypeIcon.getDrawable().mutate();
+                            if (!fullyConnected) {
+                                dti.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
+                            } else {
+                                dti.clearColorFilter();
+                            }
+                            dataTypeIcon.setImageDrawable(dti);
+                        }
+                    }
+                    if (DEBUG) log("SignalActivity: " + signalType + ": connection state updated");
+                } else {
+                    apply();
                 }
-                if (DEBUG) log("SignalActivity: " + signalType + ": connection state updated");
             }
 
             // in/out activity
