@@ -1161,7 +1161,7 @@ public class ModQuickSettings {
                             public boolean onLongClick(View v) {
                                 XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
                                         android.provider.Settings.ACTION_DISPLAY_SETTINGS);
-                                 tile.setPressed(false);
+                                tile.setPressed(false);
                                 return true;
                             }
                         });
@@ -1180,22 +1180,22 @@ public class ModQuickSettings {
                     final View tile = (View) param.args[0];
                     tile.setTag(mAospTileTags.get("settings"));
                     if (mOverrideTileKeys.contains("settings")) {
-	                    tile.setOnLongClickListener(new View.OnLongClickListener() {
-	                        @Override
-	                        public boolean onLongClick(View v) {
-	                            Intent i = new Intent();
-	                            i.setClassName(GravityBox.PACKAGE_NAME, GravityBoxSettings.class.getName());
-	                            try {
-	                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", i);
-	                            } catch (Throwable t) {
-	                                // fallback in case of troubles
-	                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	                                mContext.startActivity(i);
-	                            }
-	                            tile.setPressed(false);
-	                            return true;
-	                        }
-	                    });
+                        tile.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View v) {
+                                Intent i = new Intent();
+                                i.setClassName(GravityBox.PACKAGE_NAME, GravityBoxSettings.class.getName());
+                                try {
+                                    XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", i);
+                                } catch (Throwable t) {
+                                    // fallback in case of troubles
+                                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    mContext.startActivity(i);
+                                }
+                                tile.setPressed(false);
+                                return true;
+                            }
+                        });
                     }
                 }
             });
