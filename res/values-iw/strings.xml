@@ -583,7 +583,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">ניטור מהירות העברת נתונים</string>
-    <string name="pref_data_traffic_enable_summary">מציג מהירות תעבורה של נתונים בכל פעם שיש חיבור לאינטרנט</string>
     <string name="pref_data_traffic_position_title">מיקום</string>
     <string name="dt_position_auto">אוטומטי (באמצע או בצד ימין - תלוי במיקום השעון)</string>
     <string name="dt_position_left">שמאל</string>

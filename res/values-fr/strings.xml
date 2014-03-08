@@ -665,7 +665,6 @@
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitoring du flux de données</string>
     <string name="pref_data_traffic_enable_title">Activer le monitoring</string>
-    <string name="pref_data_traffic_enable_summary">Affiche le contrôleur du flux de données à chaque fois que la connexion de données est active</string>
     <string name="pref_data_traffic_position_title">Position</string>
     <string name="dt_position_auto">Auto (centré ou à droite en fonction de la position de l\'horloge)</string>
     <string name="dt_position_left">À gauche</string>

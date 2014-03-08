@@ -122,6 +122,12 @@ public class ModStatusbarColor {
         }
     };
 
+    public static void unregisterIconManagerListener(IconManagerListener listener) {
+        if (mIconManager != null) {
+            mIconManager.unregisterListener(listener);
+        }
+    }
+
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
 
         @Override
@@ -485,7 +491,6 @@ public class ModStatusbarColor {
                     setStatusbarBgColor(bgColor);
                     if (mIconManager != null) {
                         mIconManager.registerListener(mIconManagerListener);
-                        mIconManager.refreshState();
                     }
 
                     Intent i = new Intent(ACTION_PHONE_STATUSBAR_VIEW_MADE);
