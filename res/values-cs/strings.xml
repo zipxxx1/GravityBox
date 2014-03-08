@@ -570,7 +570,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitor datového toku</string>
-    <string name="pref_data_traffic_enable_summary">Zobrazí monitor datového toku automaticky, pokud je aktivní datové spojení</string>
     <string name="pref_data_traffic_position_title">Pozice</string>
     <string name="dt_position_auto">Auto (uprostřed nebo vpravo, na základě aktuální pozice hodin)</string>
     <string name="dt_position_left">Vlevo</string>

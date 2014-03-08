@@ -77,6 +77,12 @@ public class ModStatusbarColor {
         }
     }
 
+    public static void unregisterIconManagerListener(IconManagerListener listener) {
+        if (mIconManager != null) {
+            mIconManager.unregisterListener(listener);
+        }
+    }
+
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
 
         @Override
@@ -188,9 +194,6 @@ public class ModStatusbarColor {
                     mStatusbarBgColor = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_BGCOLOR, Color.BLACK);
                     if (mIconManager != null) {
                         mIconManager.registerListener(mIconManagerListener);
-                        if (mIconManager.isColoringEnabled()) {
-                            mIconManager.refreshState();
-                        }
                     }
                     setStatusbarBgColor();
 

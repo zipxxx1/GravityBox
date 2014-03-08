@@ -582,7 +582,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">データ通信量モニター</string>
-    <string name="pref_data_traffic_enable_summary">データ通信をしているときにデータ通信量モニターを表示します。</string>
     <string name="pref_data_traffic_position_title">位置</string>
     <string name="dt_position_auto">自動(時計の位置に従う)</string>
     <string name="dt_position_left">左</string>

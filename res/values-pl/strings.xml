@@ -582,7 +582,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitor transmisji danych</string>
-    <string name="pref_data_traffic_enable_summary">Pokazuje prędkość transmisji danych gdy połączenie danych jest aktywne</string>
     <string name="pref_data_traffic_position_title">Pozycja</string>
     <string name="dt_position_auto">Automatycznie (centralnie lub po prawej w zależności od położenia zegara)</string>
     <string name="dt_position_left">Po lewej</string>

@@ -223,9 +223,16 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     public void registerListener(IconManagerListener listener) {
         if (!mListeners.contains(listener)) {
             mListeners.add(listener);
+            listener.onIconManagerStatusChanged(FLAG_ALL, mColorInfo);
         }
         if (listener instanceof BatteryStatusListener) {
             mBatteryInfo.registerListener((BatteryStatusListener) listener);
+        }
+    }
+
+    public void unregisterListener(IconManagerListener listener) {
+        if (mListeners.contains(listener)) {
+            mListeners.remove(listener);
         }
     }
 

@@ -717,35 +717,45 @@
             android:key="pref_cat_data_traffic"
             android:title="@string/pref_cat_data_traffic_title">
 
-            <SwitchPreference 
-                android:key="pref_data_traffic_enable"
-                android:title="@string/pref_masterswitch_title"
-                android:summary="@string/pref_data_traffic_enable_summary"
-                android:defaultValue="false" />
+            <ListPreference 
+                android:key="pref_data_traffic_mode"
+                android:title="@string/pref_data_traffic_mode_title"
+                android:entries="@array/data_traffic_mode_entries"
+                android:entryValues="@array/data_traffic_mode_values"
+                android:defaultValue="OFF" />
 
             <ListPreference
                 android:key="pref_data_traffic_position"
                 android:title="@string/pref_data_traffic_position_title" 
                 android:entries="@array/data_traffic_position_entries"
                 android:entryValues="@array/data_traffic_position_values"
-                android:defaultValue="0"
-                android:dependency="pref_data_traffic_enable" />
+                android:defaultValue="0" />
 
             <ListPreference
                 android:key="pref_data_traffic_size"
                 android:title="@string/pref_data_traffic_size_title" 
                 android:entries="@array/data_traffic_size_entries"
                 android:entryValues="@array/data_traffic_size_values"
-                android:defaultValue="14"
-                android:dependency="pref_data_traffic_enable" />
+                android:defaultValue="14" />
 
             <ListPreference
                 android:key="pref_data_traffic_inactivity_mode"
                 android:title="@string/pref_data_traffic_inactivity_mode_title" 
                 android:entries="@array/data_traffic_inactivity_mode_entries"
                 android:entryValues="@array/data_traffic_inactivity_mode_values"
-                android:defaultValue="0"
-                android:dependency="pref_data_traffic_enable" />
+                android:defaultValue="0" />
+
+            <ListPreference 
+                android:key="pref_data_traffic_omni_mode"
+                android:title="@string/pref_data_traffic_omni_mode_title"
+                android:entries="@array/data_traffic_omni_mode_entries"
+                android:entryValues="@array/data_traffic_omni_mode_values"
+                android:defaultValue="IN_OUT" />
+
+            <CheckBoxPreference 
+                android:key="pref_data_traffic_omni_show_icon"
+                android:title="@string/pref_data_traffic_omni_show_icon_title"
+                android:defaultValue="true" />
 
         </PreferenceScreen>
 

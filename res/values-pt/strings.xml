@@ -571,7 +571,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitor de tráfego de dados</string>
-    <string name="pref_data_traffic_enable_summary">Mostra um monitor de tráfego sempre que uma conexão for encontrada</string>
     <string name="pref_data_traffic_position_title">Posição</string>
     <string name="dt_position_auto">Auto (centro ou direita, dependendo da posição do relógio)</string>
     <string name="dt_position_left">Esquerda</string>

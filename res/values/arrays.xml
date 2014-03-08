@@ -892,4 +892,28 @@
         <item>1080x1920</item>
     </string-array>
 
+    <string-array name="data_traffic_mode_entries" translatable="false">
+        <item>@string/dt_mode_off</item>
+        <item>@string/dt_mode_simple</item>
+        <item>@string/dt_mode_omni</item>
+    </string-array>
+
+    <string-array name="data_traffic_mode_values" translatable="false">
+        <item>OFF</item>
+        <item>SIMPLE</item>
+        <item>OMNI</item>
+    </string-array>
+
+    <string-array name="data_traffic_omni_mode_entries" translatable="false">
+        <item>@string/dt_omni_mode_in</item>
+        <item>@string/dt_omni_mode_out</item>
+        <item>@string/dt_omni_mode_in_out</item>
+    </string-array>
+
+    <string-array name="data_traffic_omni_mode_values" translatable="false">
+        <item>IN</item>
+        <item>OUT</item>
+        <item>IN_OUT</item>
+    </string-array>
+
 </resources>

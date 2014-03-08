@@ -53,7 +53,6 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
-import android.view.ViewConfiguration;
 import android.view.Window;
 import android.widget.Toast;
 import android.app.Activity;
@@ -603,19 +602,23 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_ONGOING_NOTIF_RESET = "ongoingNotifReset";
 
     public static final String PREF_CAT_KEY_DATA_TRAFFIC = "pref_cat_data_traffic";
-    public static final String PREF_KEY_DATA_TRAFFIC_ENABLE = "pref_data_traffic_enable";
+    public static final String PREF_KEY_DATA_TRAFFIC_MODE = "pref_data_traffic_mode";
     public static final String PREF_KEY_DATA_TRAFFIC_POSITION = "pref_data_traffic_position";
     public static final int DT_POSITION_AUTO = 0;
     public static final int DT_POSITION_LEFT = 1;
     public static final int DT_POSITION_RIGHT = 2;
     public static final String PREF_KEY_DATA_TRAFFIC_SIZE = "pref_data_traffic_size";
     public static final String PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE = "pref_data_traffic_inactivity_mode";
+    public static final String PREF_KEY_DATA_TRAFFIC_OMNI_MODE = "pref_data_traffic_omni_mode";
+    public static final String PREF_KEY_DATA_TRAFFIC_OMNI_SHOW_ICON = "pref_data_traffic_omni_show_icon";
     public static final String ACTION_PREF_DATA_TRAFFIC_CHANGED = 
             "gravitybox.intent.action.DATA_TRAFFIC_CHANGED";
-    public static final String EXTRA_DT_ENABLE = "dtEnable";
+    public static final String EXTRA_DT_MODE = "dtMode";
     public static final String EXTRA_DT_POSITION = "dtPosition";
     public static final String EXTRA_DT_SIZE = "dtSize";
     public static final String EXTRA_DT_INACTIVITY_MODE = "dtInactivityMode";
+    public static final String EXTRA_DT_OMNI_MODE = "dtOmniMode";
+    public static final String EXTRA_DT_OMNI_SHOW_ICON = "dtOmniShowIcon";
 
     public static final String PREF_CAT_KEY_APP_LAUNCHER = "pref_cat_app_launcher";
     public static final List<String> PREF_KEY_APP_LAUNCHER_SLOT = new ArrayList<String>(Arrays.asList(
@@ -1003,9 +1006,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefQsTileLabelStyle;
         private ListPreference mPrefSbClockDow;
         private ListPreference mPrefSbLockPolicy;
+        private PreferenceScreen mPrefCatDataTraffic;
         private ListPreference mPrefDataTrafficPosition;
         private ListPreference mPrefDataTrafficSize;
+        private ListPreference mPrefDataTrafficMode;
         private ListPreference mPrefDataTrafficInactivityMode;
+        private ListPreference mPrefDataTrafficOmniMode;
+        private CheckBoxPreference mPrefDataTrafficOmniShowIcon;
         private CheckBoxPreference mPrefLinkVolumes;
         private CheckBoxPreference mPrefVolumePanelExpandable;
         private CheckBoxPreference mPrefVolumePanelFullyExpandable;
@@ -1258,9 +1265,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefSbClockDow = (ListPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_DOW);
             mPrefSbLockPolicy = (ListPreference) findPreference(PREF_KEY_STATUSBAR_LOCK_POLICY);
+
+            mPrefCatDataTraffic = (PreferenceScreen) findPreference(PREF_CAT_KEY_DATA_TRAFFIC);
             mPrefDataTrafficPosition = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_POSITION);
             mPrefDataTrafficSize = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_SIZE);
+            mPrefDataTrafficMode = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_MODE);
             mPrefDataTrafficInactivityMode = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE);
+            mPrefDataTrafficOmniMode = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_OMNI_MODE);
+            mPrefDataTrafficOmniShowIcon = (CheckBoxPreference) findPreference(PREF_KEY_DATA_TRAFFIC_OMNI_SHOW_ICON);
 
             mPrefCatAppLauncher = (PreferenceScreen) findPreference(PREF_CAT_KEY_APP_LAUNCHER);
             mPrefAppLauncherSlot = new AppPickerPreference[PREF_KEY_APP_LAUNCHER_SLOT.size()];
@@ -1812,6 +1824,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefVolumeRockerWake.setSummary(mPrefVolumeRockerWake.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_OMNI_MODE)) {
+                mPrefDataTrafficOmniMode.setSummary(mPrefDataTrafficOmniMode.getEntry());
+            }
+
             if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE)) {
                 mPrefDataTrafficInactivityMode.setSummary(mPrefDataTrafficInactivityMode.getEntry());
             }
@@ -1903,6 +1919,26 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_SCREENRECORD_SIZE)) {
                 mPrefScreenrecordSize.setSummary(mPrefScreenrecordSize.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_MODE)) {
+                mPrefDataTrafficMode.setSummary(mPrefDataTrafficMode.getEntry());
+                mPrefCatDataTraffic.removePreference(mPrefDataTrafficPosition);
+                mPrefCatDataTraffic.removePreference(mPrefDataTrafficSize);
+                mPrefCatDataTraffic.removePreference(mPrefDataTrafficInactivityMode);
+                mPrefCatDataTraffic.removePreference(mPrefDataTrafficOmniMode);
+                mPrefCatDataTraffic.removePreference(mPrefDataTrafficOmniShowIcon);
+                String mode = mPrefDataTrafficMode.getValue();
+                if (mode.equals("SIMPLE")) {
+                    mPrefCatDataTraffic.addPreference(mPrefDataTrafficPosition);
+                    mPrefCatDataTraffic.addPreference(mPrefDataTrafficSize);
+                    mPrefCatDataTraffic.addPreference(mPrefDataTrafficInactivityMode);
+                } else if (mode.equals("OMNI")) {
+                    mPrefCatDataTraffic.addPreference(mPrefDataTrafficPosition);
+                    mPrefCatDataTraffic.addPreference(mPrefDataTrafficSize);
+                    mPrefCatDataTraffic.addPreference(mPrefDataTrafficOmniMode);
+                    mPrefCatDataTraffic.addPreference(mPrefDataTrafficOmniShowIcon);
+                }
             }
         }
 
@@ -2409,9 +2445,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
                 intent.putExtra(EXTRA_SIM_SLOT, Integer.valueOf(
                         prefs.getString(PREF_KEY_QS_NETWORK_MODE_SIM_SLOT, "0")));
-            } else if (key.equals(PREF_KEY_DATA_TRAFFIC_ENABLE)) {
+            } else if (key.equals(PREF_KEY_DATA_TRAFFIC_MODE)) {
                 intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
-                intent.putExtra(EXTRA_DT_ENABLE, prefs.getBoolean(PREF_KEY_DATA_TRAFFIC_ENABLE, false));
+                intent.putExtra(EXTRA_DT_MODE, prefs.getString(PREF_KEY_DATA_TRAFFIC_MODE, "OFF"));
+            } else if (key.equals(PREF_KEY_DATA_TRAFFIC_OMNI_MODE)) {
+                intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
+                intent.putExtra(EXTRA_DT_OMNI_MODE, prefs.getString(PREF_KEY_DATA_TRAFFIC_OMNI_MODE, "IN_OUT"));
+            } else if (key.equals(PREF_KEY_DATA_TRAFFIC_OMNI_SHOW_ICON)) {
+                intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
+                intent.putExtra(EXTRA_DT_OMNI_SHOW_ICON, 
+                        prefs.getBoolean(PREF_KEY_DATA_TRAFFIC_OMNI_SHOW_ICON, true));
             } else if (key.equals(PREF_KEY_DATA_TRAFFIC_POSITION)) {
                 intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
                 intent.putExtra(EXTRA_DT_POSITION, Integer.valueOf(
@@ -2471,6 +2514,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         prefs.getBoolean(PREF_KEY_NATIONAL_ROAMING, false));
             }
             if (intent.getAction() != null) {
+                mPrefs.edit().commit();
                 getActivity().sendBroadcast(intent);
             }
 

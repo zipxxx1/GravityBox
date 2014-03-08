@@ -599,7 +599,6 @@
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Монитор трафика</string>
-    <string name="pref_data_traffic_enable_summary">Отображение трафика всегда, когда включена передача данных</string>
     <string name="pref_data_traffic_position_title">Позиция</string>
     <string name="dt_position_auto">Автоматически (в центре или справа в зависимости от положения часов)</string>
     <string name="dt_position_left">Слева</string>
