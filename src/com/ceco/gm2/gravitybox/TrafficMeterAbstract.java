@@ -27,6 +27,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ public abstract class TrafficMeterAbstract extends TextView
     protected int mPosition;
     protected int mSize;
     protected int mMargin;
+    protected boolean mIsScreenOn = true;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -140,6 +142,13 @@ public abstract class TrafficMeterAbstract extends TextView
 
     public int getTrafficMeterPosition() {
         return mPosition;
+    }
+
+    @Override
+    public void onScreenStateChanged(int screenState) {
+        mIsScreenOn = screenState == View.SCREEN_STATE_ON;
+        updateState();
+        super.onScreenStateChanged(screenState);
     }
 
     @Override

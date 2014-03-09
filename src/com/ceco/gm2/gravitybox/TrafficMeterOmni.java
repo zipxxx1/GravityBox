@@ -203,7 +203,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
 
     @Override
     protected void updateState() {
-        if (mAttached && getConnectAvailable()) {
+        if (mAttached && mIsScreenOn && getConnectAvailable()) {
             totalRxBytes = TrafficStats.getTotalRxBytes();
             lastUpdateTime = SystemClock.elapsedRealtime();
             mTrafficHandler.sendEmptyMessage(1);
