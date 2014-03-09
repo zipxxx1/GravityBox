@@ -149,6 +149,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NATIONAL_ROAMING = "pref_national_roaming";
     public static final String PREF_CAT_KEY_STATUSBAR = "pref_cat_statusbar";
     public static final String PREF_CAT_KEY_STATUSBAR_QS = "pref_cat_statusbar_qs";
+    public static final String PREF_CAT_KEY_QS_TILE_SETTINGS = "pref_cat_qs_tile_settings";
+    public static final String PREF_CAT_KEY_QS_NM_TILE_SETTINGS = "pref_cat_qs_nm_tile_settings";
     public static final String PREF_CAT_KEY_STATUSBAR_COLORS = "pref_cat_statusbar_colors";
     public static final String PREF_KEY_STATUSBAR_BGCOLOR = "pref_statusbar_bgcolor2";
     public static final String PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE = "pref_statusbar_icon_color_enable";
@@ -1060,6 +1062,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private EditTextPreference mPrefTransVerification;
         private ListPreference mPrefScreenrecordSize;
         private PreferenceScreen mPrefCatSignalCluster;
+        private PreferenceScreen mPrefCatQsTileSettings;
+        private PreferenceScreen mPrefCatQsNmTileSettings;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1158,6 +1162,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCatStatusbar = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR);
             mPrefCatStatusbarQs = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_QS);
+            mPrefCatQsTileSettings = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_TILE_SETTINGS);
+            mPrefCatQsNmTileSettings = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_NM_TILE_SETTINGS);
             mPrefCatStatusbarColors = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_COLORS);
             mPrefAutoSwitchQs = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
             mPrefQuickPulldown = (ListPreference) findPreference(PREF_KEY_QUICK_PULLDOWN);
@@ -1369,9 +1375,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (Utils.isWifiOnly(getActivity())) {
                 // Remove preferences that don't apply to wifi-only devices
                 getPreferenceScreen().removePreference(mPrefCatPhone);
-                mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileMode);
-                mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileLte);
-                mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileCdma);
+                mPrefCatQsTileSettings.removePreference(mPrefCatQsNmTileSettings);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
@@ -1392,7 +1396,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                     mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                 }
-                mPrefCatStatusbarQs.removePreference(mPrefQsTileBehaviourOverride);
+                mPrefCatQsTileSettings.removePreference(mPrefQsTileBehaviourOverride);
             }
 
             // TODO: rework for KitKat compatibility
