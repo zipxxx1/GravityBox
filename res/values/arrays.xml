@@ -239,6 +239,7 @@
         <item>@string/qs_tile_airplane_mode</item>
         <item>@string/qs_tile_gps</item>
         <item>@string/qs_tile_autorotation</item>
+        <item>@string/qs_tile_settings</item>
     </string-array>
 
     <string-array name="qs_tile_override_values" translatable="false">
@@ -248,6 +249,7 @@
         <item>airplane_mode_textview</item>
         <item>gps_textview</item>
         <item>auto_rotate_textview</item>
+        <item>settings</item>
     </string-array>
 
     <string-array name="lockscreen_bg_entries" translatable="false">
