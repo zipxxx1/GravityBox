@@ -155,6 +155,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_FIX_CALENDAR = "pref_fix_calendar";
     public static final String PREF_CAT_KEY_STATUSBAR = "pref_cat_statusbar";
     public static final String PREF_CAT_KEY_STATUSBAR_QS = "pref_cat_statusbar_qs";
+    public static final String PREF_CAT_KEY_QS_TILE_SETTINGS = "pref_cat_qs_tile_settings";
+    public static final String PREF_CAT_KEY_QS_NM_TILE_SETTINGS = "pref_cat_qs_nm_tile_settings";
     public static final String PREF_CAT_KEY_STATUSBAR_COLORS = "pref_cat_statusbar_colors";
     public static final String PREF_KEY_STATUSBAR_BGCOLOR = "pref_statusbar_bgcolor2";
     public static final String PREF_KEY_STATUSBAR_COLOR_FOLLOW_STOCK_BATTERY = "pref_sbcolor_follow_stock_battery";
@@ -1031,6 +1033,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private Preference mPrefBackup;
         private Preference mPrefRestore;
         private EditTextPreference mPrefTransVerification;
+        private PreferenceScreen mPrefCatQsTileSettings;
+        private PreferenceScreen mPrefCatQsNmTileSettings;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1143,6 +1147,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefFixLocation = (CheckBoxPreference) findPreference(PREF_KEY_FIX_LOCATION);
             mPrefCatStatusbar = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR);
             mPrefCatStatusbarQs = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_QS);
+            mPrefCatQsTileSettings = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_TILE_SETTINGS);
+            mPrefCatQsNmTileSettings = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_NM_TILE_SETTINGS);
             mPrefCatStatusbarColors = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_COLORS);
             mPrefAutoSwitchQs = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
             mPrefQuickPulldown = (ListPreference) findPreference(PREF_KEY_QUICK_PULLDOWN);
@@ -1352,10 +1358,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (Utils.isWifiOnly(getActivity())) {
                 // Remove preferences that don't apply to wifi-only devices
                 getPreferenceScreen().removePreference(mPrefCatPhone);
-                mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileMode);
                 mPrefCatStatusbar.removePreference(mSignalIconAutohide);
-                mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileLte);
-                mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileCdma);
+                mPrefCatQsTileSettings.removePreference(mPrefCatQsNmTileSettings);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatPhoneMobileData.removePreference(mPrefMobileDataSlow2gDisable);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
@@ -1406,7 +1410,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
                 mQuickSettings.setEntries(R.array.qs_tile_entries);
                 mQuickSettings.setEntryValues(R.array.qs_tile_values);
-                mPrefCatStatusbarQs.removePreference(mPrefQsTileBehaviourOverride);
+                mPrefCatQsTileSettings.removePreference(mPrefQsTileBehaviourOverride);
             }
 
             // Remove preferences not compatible with stock Sony Xperia ROMs
