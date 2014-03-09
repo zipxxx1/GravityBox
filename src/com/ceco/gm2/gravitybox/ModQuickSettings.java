@@ -17,6 +17,7 @@ package com.ceco.gm2.gravitybox;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,6 +32,7 @@ import com.ceco.gm2.gravitybox.quicksettings.AQuickSettingsTile;
 import com.ceco.gm2.gravitybox.quicksettings.CameraTile;
 import com.ceco.gm2.gravitybox.quicksettings.ExpandedDesktopTile;
 import com.ceco.gm2.gravitybox.quicksettings.GpsTile;
+import com.ceco.gm2.gravitybox.quicksettings.GravityBoxTile;
 import com.ceco.gm2.gravitybox.quicksettings.LockScreenTile;
 import com.ceco.gm2.gravitybox.quicksettings.NetworkModeTile;
 import com.ceco.gm2.gravitybox.quicksettings.NfcTile;
@@ -49,6 +51,7 @@ import com.ceco.gm2.gravitybox.quicksettings.UsbTetherTile;
 import com.ceco.gm2.gravitybox.quicksettings.VolumeTile;
 import com.ceco.gm2.gravitybox.quicksettings.WifiApTile;
 import com.ceco.gm2.gravitybox.quicksettings.WifiTile;
+import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 
 import android.annotation.SuppressLint;
 
@@ -67,6 +70,7 @@ import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.IBinder;
+import android.provider.AlarmClock;
 import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -127,6 +131,8 @@ public class ModQuickSettings {
     private static boolean mQsTileSpanDisable;
     private static LabelStyle mQsTileLabelStyle = LabelStyle.ALLCAPS;
     private enum LabelStyle { NORMAL, ALLCAPS, HIDDEN };
+    private static String mAlarmSingletapApp;
+    private static String mAlarmLongpressApp;
 
     private static float mGestureStartX;
     private static float mGestureStartY;
@@ -194,6 +200,8 @@ public class ModQuickSettings {
         tmpMap.put("battery_textview", 7);
         tmpMap.put("airplane_mode_textview", 8);
         tmpMap.put("bluetooth_textview", 9);
+        tmpMap.put("gps_textview", 10);
+        tmpMap.put("alarm_textview", 11);
         mAospTileTags = Collections.unmodifiableMap(tmpMap);
 
         mAllTileViews = new HashMap<String, View>();
@@ -241,6 +249,12 @@ public class ModQuickSettings {
                     float size = intent.getIntExtra(GravityBoxSettings.EXTRA_QUICK_PULLDOWN_SIZE, 15) / 100f;
                     mQuickPulldownSize.set(1-size, size);
                     if (DEBUG) log("mQuickPulldownSize=" + mQuickPulldownSize);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_ALARM_SINGLETAP_APP)) {
+                    mAlarmSingletapApp = intent.getStringExtra(GravityBoxSettings.EXTRA_QS_ALARM_SINGLETAP_APP);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_ALARM_LONGPRESS_APP)) {
+                    mAlarmLongpressApp = intent.getStringExtra(GravityBoxSettings.EXTRA_QS_ALARM_LONGPRESS_APP);
                 }
             }
 
@@ -483,6 +497,9 @@ public class ModQuickSettings {
                 log("Invalid preference for quick pulldown: " + e.getMessage());
             }
 
+            mAlarmSingletapApp = mPrefs.getString(GravityBoxSettings.PREF_KEY_QS_ALARM_SINGLETAP_APP, null);
+            mAlarmLongpressApp = mPrefs.getString(GravityBoxSettings.PREF_KEY_QS_ALARM_LONGPRESS_APP, null);
+
             final Class<?> quickSettingsClass = XposedHelpers.findClass(CLASS_QUICK_SETTINGS, classLoader);
             final Class<?> phoneStatusBarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
             final Class<?> panelBarClass = XposedHelpers.findClass(CLASS_PANEL_BAR, classLoader);
@@ -500,6 +517,8 @@ public class ModQuickSettings {
                     ViewGroup.class, LayoutInflater.class, quickSettingsAddSystemTilesHook);
             XposedHelpers.findAndHookMethod(quickSettingsClass, "updateResources",
                     quickSettingsUpdateResourcesHook);
+            XposedHelpers.findAndHookMethod(quickSettingsClass, "setupQuickSettings",
+                    qsSetupQuickSettingsHook);
             XposedHelpers.findAndHookMethod(notifPanelViewClass, "onTouchEvent", 
                     MotionEvent.class, notificationPanelViewOnTouchEvent);
             XposedHelpers.findAndHookMethod(phoneStatusBarClass, "makeStatusBarView", 
@@ -718,11 +737,16 @@ public class ModQuickSettings {
                 for (AQuickSettingsTile t : mTiles) {
                     mBroadcastSubReceivers.add(t);
                 }
-
-                updateTileOrderAndVisibility();
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }
+        }
+    };
+
+    private static XC_MethodHook qsSetupQuickSettingsHook = new XC_MethodHook() {
+        @Override
+        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+            updateTileOrderAndVisibility();
         }
     };
 
@@ -1470,6 +1494,63 @@ public class ModQuickSettings {
                             }
                         });
                     }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(classQsModel, "addAlarmTile",
+                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    final View tile = (View) param.args[0];
+                    tile.setTag(mAospTileTags.get("alarm_textview"));
+                    tile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                final Intent intent = mAlarmSingletapApp == null ?
+                                        new Intent("com.android.deskclock.ALARM_ALERT") :
+                                        Intent.parseUri(mAlarmSingletapApp, 0);
+                                if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
+                                    Intent newIntent = new Intent(intent.getStringExtra(
+                                            ShortcutActivity.EXTRA_ACTION));
+                                    newIntent.putExtras(intent);
+                                    mContext.sendBroadcast(newIntent);
+                                } else {
+                                    XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity",
+                                            intent);
+                                }
+                            } catch (Throwable t) {
+                                log("Error launching Alarm singletap app: " + t.getMessage());
+                            }
+                        }
+                    });
+                    tile.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            if (mAlarmLongpressApp == null) return false;
+                            try {
+                                final Intent intent = Intent.parseUri(mAlarmLongpressApp, 0);
+                                if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
+                                    Intent newIntent = new Intent(intent.getStringExtra(
+                                            ShortcutActivity.EXTRA_ACTION));
+                                    newIntent.putExtras(intent);
+                                    mContext.sendBroadcast(newIntent);
+                                } else {
+                                    XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity",
+                                            intent);
+                                }
+                                tile.setPressed(true);
+                                return true;
+                            } catch (Throwable t) {
+                                log("Error launching Alarm longpress app: " + t.getMessage());
+                                return false;
+                            }
+                        }
+                    });
                 }
             });
         } catch (Throwable t) {
