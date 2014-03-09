@@ -1147,7 +1147,19 @@ public class ModQuickSettings {
                     CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    ((View)param.args[0]).setTag(mAospTileTags.get("brightness_textview"));
+                    final View tile = (View) param.args[0];
+                    tile.setTag(mAospTileTags.get("brightness_textview"));
+                    if (mOverrideTileKeys.contains("brightness_textview")) {
+                        tile.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View v) {
+                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
+                                        android.provider.Settings.ACTION_DISPLAY_SETTINGS);
+                                tile.setPressed(false);
+                                return true;
+                            }
+                        });
+                    }
                 }
             });
         } catch (Throwable t) {
