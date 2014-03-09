@@ -20,6 +20,7 @@ package com.ceco.kitkat.gravitybox;
 import android.content.Context;
 import android.content.Intent;
 import android.net.TrafficStats;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.TypedValue;
 import android.view.View;
@@ -32,6 +33,7 @@ import java.io.FileReader;
 import java.io.File;
 
 import com.ceco.kitkat.gravitybox.R;
+
 import de.robv.android.xposed.XSharedPreferences;
 
 public class TrafficMeter extends TrafficMeterAbstract {
@@ -95,34 +97,23 @@ public class TrafficMeter extends TrafficMeterAbstract {
         }
     }
 
-    @Override
-    public void onScreenStateChanged(int screenState) {
-        if (screenState == SCREEN_STATE_OFF) {
-            stopTrafficUpdates();
-        } else {
-            startTrafficUpdates();
-        }
-        super.onScreenStateChanged(screenState);
-    }
-
     private void stopTrafficUpdates() {
-        if (mAttached) {
-            getHandler().removeCallbacks(mRunnable);
+        final Handler h = getHandler();
+        if (h != null && mRunnable != null) {
+            h.removeCallbacks(mRunnable);
             setText("");
+            if (DEBUG) log("traffic updates stopped");
         }
-        if (DEBUG) log("traffic updates stopped");
     }
 
     private void startTrafficUpdates() {
-        if (mAttached && getConnectAvailable()) {
-            mTotalRxBytes = getTotalReceivedBytes();
-            mLastUpdateTime = SystemClock.elapsedRealtime();
-            mTrafficBurstStartTime = Long.MIN_VALUE;
+        mTotalRxBytes = getTotalReceivedBytes();
+        mLastUpdateTime = SystemClock.elapsedRealtime();
+        mTrafficBurstStartTime = Long.MIN_VALUE;
 
-            getHandler().removeCallbacks(mRunnable);
-            getHandler().post(mRunnable);
-            if (DEBUG) log("traffic updates started");
-        }
+        getHandler().removeCallbacks(mRunnable);
+        getHandler().post(mRunnable);
+        if (DEBUG) log("traffic updates started");
     }
 
     private String formatTraffic(long bytes, boolean speed) {
@@ -215,7 +206,7 @@ public class TrafficMeter extends TrafficMeterAbstract {
     protected void updateState() {
         if (DEBUG) log("updating state");
 
-        if (mAttached && getConnectAvailable()) {
+        if (mAttached && mIsScreenOn && getConnectAvailable()) {
             setVisibility(View.VISIBLE);
             startTrafficUpdates();
         } else {
