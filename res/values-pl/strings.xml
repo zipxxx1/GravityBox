@@ -1182,7 +1182,7 @@
     <string name="shortcuts_icon_picker_phone">Telefon</string>
     <string name="shortcuts_icon_picker_package">Paczka</string>
     <string name="shortcuts_icon_picker_pinterest">Pinterest</string>
-    <string name="shortcuts_icon_picker_play">Odtwórz</string>
+    <string name="shortcuts_icon_picker_play">Google Play</string>
     <string name="shortcuts_icon_picker_pocket">Kieszeń</string>
     <string name="shortcuts_icon_picker_quicksettings">Szybkie ustawienia</string>
     <string name="shortcuts_icon_picker_rss">Kanał RSS</string>
@@ -1287,5 +1287,33 @@
 
     <!-- Navbar ring: option to disable -->
     <string name="pref_navbar_ring_disable_title">Wyłącz pierścień paska nawigacji</string>
+
+    <!-- Data traffic monitor style -->
+    <string name="pref_data_traffic_mode_title">Styl monitora transmisji danych</string>
+    <string name="dt_mode_off">Wyłączony</string>
+    <string name="dt_mode_simple">Prosty</string>
+    <string name="dt_mode_omni">Omni</string>
+
+    <!-- Omni data traffic monitor -->
+    <string name="pref_data_traffic_omni_mode_title">Tryb monitorowania</string>
+    <string name="dt_omni_mode_in">Pobieranie</string>
+    <string name="dt_omni_mode_out">Wysyłanie</string>
+    <string name="dt_omni_mode_in_out">Pobieranie i wysyłanie</string>
+    <string name="byte_per_sec_abbr">B/s</string>
+    <string name="bit_per_sec_abbr">b/s</string>
+    <string name="kilo_abbr">k</string>
+    <string name="mega_abbr">M</string>
+    <string name="giga_abbr">G</string>
+    <string name="pref_data_traffic_omni_show_icon_title">Pokaż ikonę</string>
+
+    <!--  Icon Picker: additional icons -->
+    <string name="shortcuts_icon_picker_viber">Viber</string>
+    <string name="shortcuts_icon_picker_skype">Skype</string>
+    <string name="shortcuts_icon_picker_calculator">Kalkulator</string>
+
+    <!-- QS Tiles: tile specific settings categories -->
+    <string name="pref_cat_qs_tile_settings_title">Specyficzne ustawienia kafelka</string>
+    <string name="pref_cat_qs_tile_settings_summary">Zawiera specyficzne ustawienia kafelka</string>
+    <string name="pref_cat_qs_nm_tile_settings_title">Ustawienia kefelka Trybu Sieci</string>
 
 </resources>
