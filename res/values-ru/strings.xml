@@ -1310,4 +1310,32 @@
     <!-- Navbar ring: option to disable -->
     <string name="pref_navbar_ring_disable_title">Отключить нав.кольцо</string>
 
+    <!-- Data traffic monitor style -->
+    <string name="pref_data_traffic_mode_title">Стиль монитора трафика</string>
+    <string name="dt_mode_off">Отключен</string>
+    <string name="dt_mode_simple">Простой</string>
+    <string name="dt_mode_omni">Омни</string>
+
+    <!-- Omni data traffic monitor -->
+    <string name="pref_data_traffic_omni_mode_title">Режим мониторинга</string>
+    <string name="dt_omni_mode_in">Загрузка</string>
+    <string name="dt_omni_mode_out">Передача</string>
+    <string name="dt_omni_mode_in_out">Загрузка и передача</string>
+    <string name="byte_per_sec_abbr">Б/с</string>
+    <string name="bit_per_sec_abbr">бит/с</string>
+    <string name="kilo_abbr">к</string>
+    <string name="mega_abbr">М</string>
+    <string name="giga_abbr">Г</string>
+    <string name="pref_data_traffic_omni_show_icon_title">Отображать значок</string>
+
+    <!--  Icon Picker: additional icons -->
+    <string name="shortcuts_icon_picker_viber">Viber</string>
+    <string name="shortcuts_icon_picker_skype">Skype</string>
+    <string name="shortcuts_icon_picker_calculator">Калькулятор</string>
+
+    <!-- QS Tiles: tile specific settings categories -->
+    <string name="pref_cat_qs_tile_settings_title">Особые настройки</string>
+    <string name="pref_cat_qs_tile_settings_summary">Применение особых настроек плитки</string>
+    <string name="pref_cat_qs_nm_tile_settings_title">Плитка сет.режима</string>
+
 </resources>
