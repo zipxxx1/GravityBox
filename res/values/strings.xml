@@ -1340,4 +1340,9 @@
     <string name="pref_cat_qs_tile_settings_summary">Contains tile specific settings</string>
     <string name="pref_cat_qs_nm_tile_settings_title">Network mode tile settings</string>
 
+    <!-- Traffic meter: show only when download active -->
+    <string name="pref_data_traffic_active_dl_only_title">Only while download active</string>
+    <string name="pref_data_traffic_active_dl_only_summary">Shows traffic meter only while there are ongoing downloads via 
+        standard Android\'s Download Manager</string>
+
 </resources>
