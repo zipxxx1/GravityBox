@@ -31,6 +31,7 @@ import com.ceco.gm2.gravitybox.quicksettings.AQuickSettingsTile;
 import com.ceco.gm2.gravitybox.quicksettings.CameraTile;
 import com.ceco.gm2.gravitybox.quicksettings.ExpandedDesktopTile;
 import com.ceco.gm2.gravitybox.quicksettings.GpsTile;
+import com.ceco.gm2.gravitybox.quicksettings.LockScreenTile;
 import com.ceco.gm2.gravitybox.quicksettings.NetworkModeTile;
 import com.ceco.gm2.gravitybox.quicksettings.NfcTile;
 import com.ceco.gm2.gravitybox.quicksettings.QuickAppTile;
@@ -176,7 +177,8 @@ public class ModQuickSettings {
             R.id.camera_tileview,
             R.id.usb_tether_tileview,
             R.id.quickapp_tileview_2,
-            R.id.smart_radio_tileview
+            R.id.smart_radio_tileview,
+            R.id.lock_screen_tileview
         ));
         if (Utils.isMtkDevice()) {
             mCustomGbTileKeys.add(R.id.wifi_tileview);
@@ -707,6 +709,10 @@ public class ModQuickSettings {
                     srTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                     mTiles.add(srTile);
                 }
+
+                LockScreenTile lsTile = new LockScreenTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                lsTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                mTiles.add(lsTile);
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {
