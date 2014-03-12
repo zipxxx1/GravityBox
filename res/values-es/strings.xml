@@ -106,7 +106,9 @@
     <string name="quick_settings_usb_tether_on">Tethering activado</string>
     <string name="quick_settings_smart_radio_on">Modo de red inteligente activado</string>
     <string name="quick_settings_smart_radio_off">Modo de red inteligente desactivado</string>
-
+    <string name="quick_settings_lock_screen_on">Bloquear pantalla activado</string>
+    <string name="quick_settings_lock_screen_off">Bloquear pantalla desactivado</string>
+ 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Ajustes rápidos de la barra de estado</string>
     <string name="quick_settings_summary">Permite mostrar u ocultar los ajustes rápidos en la barra de estado</string>
@@ -140,6 +142,8 @@
     <string name="qs_tile_camera">Cámara</string>
     <string name="qs_tile_usb_tethering">Tethering por USB</string>
     <string name="qs_tile_smart_radio">Modo de red inteligente</string>
+    <string name="qs_tile_alarm">Alarma</string>
+    <string name="qs_tile_lock_screen">Bloquear pantalla</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de color</string>
@@ -148,7 +152,7 @@
     <!-- Statusbar background color -->
     <string name="statusbar_bgcolor_title">Color de fondo de la barra de estado</string>
     <string name="statusbar_bgcolor_summary">Permite establecer un color de fondo a la barra de estado</string>
-    
+
     <!-- Fix speech settings -->
     <string name="fix_tts_settings_title">Fix speech settings</string> <!-- STILL UNTRANSLATED -->
     <string name="fix_tts_settings_summary">Unlocks voice search and text-to-speech settings in Language&amp;Input (requires reboot)</string> <!-- STILL UNTRANSLATED -->
@@ -156,7 +160,7 @@
     <!-- Advanced developer options -->
     <string name="fix_dev_opts_title">Opciones avanzadas de desarrollo</string>
     <string name="fix_dev_opts_summary">Desbloquea las opciones avanzadas de desarrollo (requiere reinicio)</string>
-    
+
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Ajustes de la barra de estado</string>
     <string name="pref_cat_statusbar_summary">Contiene varios ajustes de la barra de estado</string>
@@ -164,7 +168,7 @@
     <string name="pref_cat_misc_summary">Contiene todos los demás ajustes que no pertenecen a una categoría concreta</string>
     <string name="pref_cat_fixes_title">Correcciones generales</string>
     <string name="pref_cat_fixes_summary">Contiene correcciones específicas para MTK6589. Usar solo si es necesario.</string>
-    
+
     <!-- About -->
     <string name="pref_cat_about_title">Acerca de</string>
     <string name="about_gb_summary">Programado por C3C076@XDA. Toca para visitar el hilo oficial.</string>
@@ -1234,7 +1238,7 @@
     <string name="pref_statusbar_dt2s_summary">Suspende el dispositivo al realizar una doble pulsación en la barra de estado</string>
 
     <!-- Animation scales -->
-    <string name="animation_scale0">Animation deasctivada</string>
+    <string name="animation_scale0">Animación deasctivada</string>
     <string name="animation_scale1">Escala de animación .25x</string>
     <string name="animation_scale2">Escala de animación .5x</string>
     <string name="animation_scale3">Escala de animación 1x</string>
@@ -1256,6 +1260,7 @@
     <string name="pref_quick_pulldown_size_title">Área para desplegar ajustes rápidos</string>
 
     <!-- Stay Awake Tile modes -->
+    <string name="pref_qs_stay_awake_title">Modos de casilla \'Mantener despierto\'</string>
     <string name="stay_awake_15s">15s</string>
     <string name="stay_awake_30s">30s</string>
     <string name="stay_awake_1m">1m</string>
@@ -1263,6 +1268,7 @@
     <string name="stay_awake_5m">5m</string>
     <string name="stay_awake_10m">10m</string>
     <string name="stay_awake_30m">30m</string>
+    <string name="stay_awake_on">Mantener despierto activado</string>
 
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
