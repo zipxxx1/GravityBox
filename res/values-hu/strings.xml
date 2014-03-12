@@ -106,6 +106,8 @@
     <string name="quick_settings_usb_tether_on">Megosztás</string>
     <string name="quick_settings_smart_radio_on">Okos rádiókapcsolat be</string>
     <string name="quick_settings_smart_radio_off">Okos rádiókapcsolat ki</string>
+    <string name="quick_settings_lock_screen_on">Zárképernyő bekapcsolva</string>
+    <string name="quick_settings_lock_screen_off">Zárképernyő kikapcsolva</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Állapotsáv Gyorsbeállítások csempéi</string>
@@ -140,6 +142,8 @@
     <string name="qs_tile_camera">Kamera</string>
     <string name="qs_tile_usb_tethering">USB internetmegosztás</string>
     <string name="qs_tile_smart_radio">Okos rádiókapcsolat</string>
+    <string name="qs_tile_alarm">Ébresztő</string>
+    <string name="qs_tile_lock_screen">Zárképernyő</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Szín választó</string>
@@ -1260,6 +1264,7 @@
     <string name="pref_quick_pulldown_size_title">Gyors legördítés mérete</string>
 
     <!-- Stay Awake Tile modes -->
+    <string name="pref_qs_stay_awake_title">Ébrentartás csempe mód</string>
     <string name="stay_awake_15s">15 másodperc</string>
     <string name="stay_awake_30s">30 másodperc</string>
     <string name="stay_awake_1m">1 perc</string>
@@ -1267,6 +1272,7 @@
     <string name="stay_awake_5m">5 perc</string>
     <string name="stay_awake_10m">10 perc</string>
     <string name="stay_awake_30m">30 perc</string>
+    <string name="stay_awake_on">Ébrentartás bekapcsolva</string>
 
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
@@ -1304,5 +1310,43 @@
 
     <!-- Navbar ring: option to disable -->
     <string name="pref_navbar_ring_disable_title">Navigációs kör letiltása</string>
+    
+    	<!-- Data traffic monitor style -->
+    <string name="pref_data_traffic_mode_title">Adatforgalom figyelő stílus</string>
+    <string name="dt_mode_off">Letiltva</string>
+    <string name="dt_mode_simple">Egyszerű stílus</string>
+    <string name="dt_mode_omni">Omni stílus</string>
+
+    <!-- Omni data traffic monitor -->
+    <string name="pref_data_traffic_omni_mode_title">Megjelenítési mód</string>
+    <string name="dt_omni_mode_in">Letöltés</string>
+    <string name="dt_omni_mode_out">Feltöltés</string>
+    <string name="dt_omni_mode_in_out">Letöltés és feltöltés</string>
+    <string name="byte_per_sec_abbr">B/s</string>
+    <string name="bit_per_sec_abbr">b/s</string>
+    <string name="kilo_abbr">k</string>
+    <string name="mega_abbr">M</string>
+    <string name="giga_abbr">G</string>
+    <string name="pref_data_traffic_omni_show_icon_title">Ikon mutatása</string>
+
+    <!--  Icon Picker: additional icons -->
+    <string name="shortcuts_icon_picker_viber">Viber</string>
+    <string name="shortcuts_icon_picker_skype">Skype</string>
+    <string name="shortcuts_icon_picker_calculator">Számológép</string>
+
+    <!-- QS Tiles: tile specific settings categories -->
+    <string name="pref_cat_qs_tile_settings_title">Csempe specifikus beállítások</string>
+    <string name="pref_cat_qs_tile_settings_summary">Csempe specifikus beállításokat tartalmaz</string>
+    <string name="pref_cat_qs_nm_tile_settings_title">Hálózati mód csempe beállítások</string>
+
+    <!-- QS Tiles: Alarm tile settings -->
+    <string name="pref_cat_qs_alarm_tile_settings_title">Ébresztés csempe beállítások</string>
+    <string name="pref_qs_alarm_singletap_app_title">Egyszeri érintés alkalmazása</string>
+    <string name="alarm_singletap_app_default">Alapértelmezett alkalmazás</string>
+    <string name="pref_qs_alarm_longpress_app_title">Hosszú érintés alkalmazása</string>
+
+    <!-- Traffic meter: show only when download active -->
+    <string name="pref_data_traffic_active_dl_only_title">Csak aktív letöltés esetén</string>
+    <string name="pref_data_traffic_active_dl_only_summary">Adatforgalom mérő mutatása, ha van folyamatban lévő letöltés az Android alapértelmezett letöltéskezelőjével</string>
 
 </resources>
