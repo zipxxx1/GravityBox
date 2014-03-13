@@ -133,6 +133,7 @@
         <item>@string/qs_tile_gravitybox</item>
         <item>@string/qs_tile_camera</item>
         <item>@string/qs_tile_usb_tethering</item>
+        <item>@string/qs_tile_alarm</item>
         <item>@string/qs_tile_lock_screen</item>
     </string-array>
 
@@ -169,6 +170,7 @@
         <item>gravitybox_tileview</item>
         <item>camera_tileview</item>
         <item>usb_tether_tileview</item>
+        <item>alarm_textview</item>
         <item>lock_screen_tileview</item>
     </string-array>
 
