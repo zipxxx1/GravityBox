@@ -67,6 +67,15 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.ceco.gm2.gravitybox.ledcontrol.LedControlActivity"
+            android:label="@string/pref_led_control_title" >
+        </activity>
+
+        <activity
+            android:name="com.ceco.gm2.gravitybox.ledcontrol.LedSettingsActivity" >
+        </activity>
+
         <service android:name=".GravityBoxService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.TOGGLE_SYNC" />
