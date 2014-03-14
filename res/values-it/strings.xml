@@ -77,7 +77,7 @@
     <string name="quick_settings_expanded_desktop_disabled">Disattivato</string>
     <string name="quick_settings_expanded_desktop_normal">Normale</string>
     <string name="quick_settings_expanded_desktop_expanded">Esteso</string>
-    <string name="quick_settings_stay_awake_on">Sempre acceso On</string>
+    <string name="quick_settings_stay_awake_on">Sempre acceso</string>
     <string name="quick_settings_stay_awake_off">Sempre acceso Off</string>
     <string name="quick_settings_wifi">Wi-Fi</string>
     <string name="quick_settings_wifi_off">Wi-Fi off</string>
@@ -91,6 +91,8 @@
     <string name="quick_settings_usb_tether_on">Tethering On</string>
     <string name="quick_settings_smart_radio_on">Modem Intelligente On</string>
     <string name="quick_settings_smart_radio_off">Modem Intelligente Off</string>
+    <string name="quick_settings_lock_screen_on">Blocco schermo On</string>
+    <string name="quick_settings_lock_screen_off">Blocco schermo Off</string>
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Caselle QuickSetting</string>
@@ -125,6 +127,8 @@
     <string name="qs_tile_camera">Fotocamera</string>
     <string name="qs_tile_usb_tethering">Tethering USB</string>
     <string name="qs_tile_smart_radio">Modem Intelligente</string>
+    <string name="qs_tile_alarm">Sveglia</string>
+    <string name="qs_tile_lock_screen">Schermata di blocco</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Scegli colore</string>
@@ -408,6 +412,7 @@
     <string name="recent_clear_top_right">Alto destra</string>
     <string name="recent_clear_bottom_left">Basso sinistra</string>
     <string name="recent_clear_bottom_right">Basso destra</string>
+    <string name="recent_clear_navigation_bar">Barra di navigazione (richiede ottimizzazioni Barra di navigazione attive)</string>
 
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Margine superiore</string>
@@ -699,7 +704,7 @@
     <string name="pref_cat_hwkey_volume_title">Tasti volume</string>
     <string name="pref_cat_hwkey_actions_others">Altre impostazioni</string>
     <string name="pref_hwkey_longpress_title">Azione pressione prolungata</string>
-    <string name="pref_hwkey_singletap_title">Azione pressione corta</string>
+    <string name="pref_hwkey_singletap_title">Azione tocco singolo</string>
     <string name="pref_hwkey_doubletap_title">Azione doppio tap</string>
 
     <!-- Disable double-tap (e.g. for Home Key on Android 4.3+) -->
@@ -1250,6 +1255,7 @@
     <string name="pref_quick_pulldown_size_title">Dimensione bordo visualizzazione rapida</string>
 
     <!-- Stay Awake Tile modes -->
+    <string name="pref_qs_stay_awake_title">Modalità casella Timeout display</string>
     <string name="stay_awake_15s">15s</string>
     <string name="stay_awake_30s">30s</string>
     <string name="stay_awake_1m">1m</string>
@@ -1257,6 +1263,7 @@
     <string name="stay_awake_5m">5m</string>
     <string name="stay_awake_10m">10m</string>
     <string name="stay_awake_30m">30m</string>
+    <string name="stay_awake_on">Sempre acceso</string>
 
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
