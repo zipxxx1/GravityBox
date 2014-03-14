@@ -1355,4 +1355,7 @@
     <string name="pref_data_traffic_active_dl_only_summary">Shows traffic meter only while there are ongoing downloads via 
         standard Android\'s Download Manager</string>
 
+    <!-- Omni data traffic monitor inactivity threshold -->
+    <string name="pref_data_traffic_omni_autohide_threshold_title">Inactivity threshold</string>
+
 </resources>
