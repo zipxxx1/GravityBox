@@ -20,7 +20,7 @@ Changelog 2.9.9 - 14/03/2014
 - Battery charged/charger plugged/unplugged sounds:
 --- Linked to notification stream instead of media stream
 --- Ogg files are now stored in the filesystem thus can be easily replaced with custom ones:
------- stored in /data/data/com.ceco.kitkat.gravitybox/files
+------ stored in /data/data/com.ceco.gm2.gravitybox/files
 ------ when replaced, correct file permission mode must be set for files to be readable by everyone
 --- Falls back to system notification sound in case ogg is missing or is not readable
 - Icon Picker: Added icons for Calculator, Skype and Viber
