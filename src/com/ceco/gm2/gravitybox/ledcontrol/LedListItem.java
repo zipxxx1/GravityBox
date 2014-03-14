@@ -18,13 +18,14 @@ package com.ceco.gm2.gravitybox.ledcontrol;
 import java.util.Locale;
 
 import com.ceco.gm2.gravitybox.R;
+import com.ceco.gm2.gravitybox.adapters.IBaseListAdapterItem;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 
-public class LedListItem {
+public class LedListItem implements IBaseListAdapterItem {
 
     private Context mContext;
     private ApplicationInfo mAppInfo;
@@ -85,5 +86,15 @@ public class LedListItem {
     protected void setEnabled(boolean enabled) {
         mLedSettings.setEnabled(enabled);
         mLedSettings.serialize();
+    }
+
+    @Override
+    public String getText() {
+        return getAppName();
+    }
+
+    @Override
+    public String getSubText() {
+        return getAppDesc();
     }
 }
