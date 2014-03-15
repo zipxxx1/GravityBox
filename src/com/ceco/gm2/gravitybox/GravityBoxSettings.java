@@ -46,6 +46,7 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
@@ -316,6 +317,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_VOLUME_ROCKER_WAKE = "pref_volume_rocker_wake";
     public static final String PREF_KEY_HWKEY_LOCKSCREEN_TORCH = "pref_hwkey_lockscreen_torch";
     public static final String PREF_CAT_KEY_HWKEY_ACTIONS_OTHERS = "pref_cat_hwkey_actions_others";
+    public static final String PREF_KEY_VK_VIBRATE_PATTERN = "pref_virtual_key_vibrate_pattern";
     public static final int HWKEY_ACTION_DEFAULT = 0;
     public static final int HWKEY_ACTION_SEARCH = 1;
     public static final int HWKEY_ACTION_VOICE_SEARCH = 2;
@@ -358,12 +360,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_HWKEY_KILL_DELAY_CHANGED = "gravitybox.intent.action.HWKEY_KILL_DELAY_CHANGED";
     public static final String ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED = "gravitybox.intent.action.VOLUME_ROCKER_WAKE_CHANGED";
     public static final String ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED = "gravitybox.intent.action.HWKEY_LOCKSCREEN_TORCH_CHANGED";
+    public static final String ACTION_PREF_VK_VIBRATE_PATTERN_CHANGED = "gravitybox.intent.action.VK_VIBRATE_PATTERN_CHANGED";
     public static final String EXTRA_HWKEY_VALUE = "hwKeyValue";
     public static final String EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE = "hwKeyHomeDoubletapDisable";
     public static final String EXTRA_HWKEY_HOME_DOUBLETAP = "hwKeyHomeDoubletap";
     public static final String EXTRA_HWKEY_HOME_LONGPRESS_KG = "hwKeyHomeLongpressKeyguard";
     public static final String EXTRA_VOLUME_ROCKER_WAKE = "volumeRockerWake";
     public static final String EXTRA_HWKEY_TORCH = "hwKeyTorch";
+    public static final String EXTRA_VK_VIBRATE_PATTERN = "virtualKeyVubratePattern";
 
     public static final String PREF_KEY_PHONE_FLIP = "pref_phone_flip";
     public static final int PHONE_FLIP_ACTION_NONE = 0;
@@ -878,7 +882,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         mAlertDialog = null;
     }
 
-    public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+    public static class PrefsFragment extends PreferenceFragment 
+                                      implements OnSharedPreferenceChangeListener,
+                                                 OnPreferenceChangeListener {
         private ListPreference mBatteryStyle;
         private CheckBoxPreference mPrefBatteryPercent;
         private ListPreference mPrefBatteryPercentCharging;
@@ -1067,6 +1073,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatQsNmTileSettings;
         private PreferenceScreen mPrefCatQsAlarmTileSettings;
         private Preference mPrefLedControl;
+        private EditTextPreference mPrefVkVibratePattern;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1362,6 +1369,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefTransVerification = (EditTextPreference) findPreference(PREF_KEY_TRANS_VERIFICATION);
 
             mPrefLedControl = findPreference(PREF_LED_CONTROL);
+
+            mPrefVkVibratePattern = (EditTextPreference) findPreference(PREF_KEY_VK_VIBRATE_PATTERN);
+            mPrefVkVibratePattern.setOnPreferenceChangeListener(this);
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
@@ -2711,6 +2721,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 if (transId != null && !transId.trim().isEmpty()) {
                     checkTransaction(transId.toUpperCase(Locale.US));
                 }
+            } else if (key.equals(PREF_KEY_VK_VIBRATE_PATTERN)) {
+                intent.setAction(ACTION_PREF_VK_VIBRATE_PATTERN_CHANGED);
+                intent.putExtra(EXTRA_VK_VIBRATE_PATTERN,
+                        prefs.getString(PREF_KEY_VK_VIBRATE_PATTERN, null));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
@@ -2748,6 +2762,21 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (rebootKeys.contains(key))
                 Toast.makeText(getActivity(), getString(R.string.reboot_required), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public boolean onPreferenceChange(Preference pref, Object newValue) {
+            if (pref == mPrefVkVibratePattern) {
+                if (newValue == null || ((String)newValue).isEmpty()) return true;
+                try {
+                    Utils.csvToLongArray((String)newValue);
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), getString(R.string.lc_vibrate_pattern_invalid),
+                            Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            }
+            return true;
         }
 
         @Override
