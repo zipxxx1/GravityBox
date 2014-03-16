@@ -91,6 +91,8 @@ public class ModLockscreen {
     private static final String CLASS_CARRIER_TEXT = Utils.isMtkDevice() ?
             CLASS_PATH + ".MediatekCarrierText" : CLASS_PATH + ".CarrierText";
     private static final String ENUM_SECURITY_MODE = CLASS_PATH + ".KeyguardSecurityModel.SecurityMode";
+    private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
+    private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
@@ -137,6 +139,9 @@ public class ModLockscreen {
     private static View mGlowPadView;
     private static Class<? extends View> mGlowPadViewClass;
 
+    private static boolean mInStealthMode;
+    private static Object mPatternDisplayMode; 
+
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
@@ -158,6 +163,9 @@ public class ModLockscreen {
             final Class<?> carrierTextClass = XposedHelpers.findClass(CLASS_CARRIER_TEXT, null);
             final Class<? extends Enum> kgSecurityModeEnum = 
                     (Class<? extends Enum>) XposedHelpers.findClass(ENUM_SECURITY_MODE, null);
+            final Class<?> lockPatternViewClass = XposedHelpers.findClass(CLASS_LOCK_PATTERN_VIEW, null);
+            final Class<? extends Enum> displayModeEnum =
+                    (Class<? extends Enum>) XposedHelpers.findClass(ENUM_DISPLAY_MODE, null);
 
             boolean enableMenuKey = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, false);
@@ -768,6 +776,19 @@ public class ModLockscreen {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(lockPatternViewClass, "onDraw", Canvas.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    beforeLockPatternDraw(displayModeEnum, param.thisObject);
+                }
+
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    afterLockPatternDraw(param.thisObject);
+                }
+            });
+
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -942,5 +963,29 @@ public class ModLockscreen {
             mGlowPadView.invalidate();
         }
         if (DEBUG_ARC) log("Lockscreen battery arc updated");
+    }
+
+    private static void beforeLockPatternDraw(final Class<? extends Enum> displayModeEnum, final Object thisObject) {
+        final Object patternDisplayMode = XposedHelpers.getObjectField(thisObject, "mPatternDisplayMode");
+        final Boolean inStealthMode = XposedHelpers.getBooleanField(thisObject, "mInStealthMode");  
+
+        if (!mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR, true) &&
+                    mPatternDisplayMode == null && patternDisplayMode == Enum.valueOf(displayModeEnum, "Wrong")) {
+            mInStealthMode = inStealthMode;
+            mPatternDisplayMode = patternDisplayMode;
+            XposedHelpers.setBooleanField(thisObject, "mInStealthMode", true);
+            XposedHelpers.setObjectField(thisObject, "mPatternDisplayMode", Enum.valueOf(displayModeEnum, "Correct"));
+        } else {
+            mPatternDisplayMode = null;
+        }
+    }
+
+    private static void afterLockPatternDraw(final Object thisObject) {
+        if (null != mPatternDisplayMode) {
+            XposedHelpers.setBooleanField(thisObject, "mInStealthMode", mInStealthMode);
+            XposedHelpers.setObjectField(thisObject, "mPatternDisplayMode", mPatternDisplayMode);
+            mInStealthMode = false;
+            mPatternDisplayMode = null;
+        }
     }
 }
