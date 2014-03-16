@@ -275,15 +275,19 @@ public class ModLockscreen {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(kgViewManagerClass, 
-                    "shouldEnableScreenRotation", new XC_MethodReplacement() {
+            try {
+                XposedHelpers.findAndHookMethod(kgViewManagerClass, 
+                        "shouldEnableScreenRotation", new XC_MethodReplacement() {
 
-                        @Override
-                        protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                            prefs.reload();
-                            return prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ROTATION, false);
-                        }
-            });
+                            @Override
+                            protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                                prefs.reload();
+                                return prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ROTATION, false);
+                            }
+                });
+            } catch (Throwable t) {
+                log("shouldEnableScreenRotation: No such method");
+            }
 
             XposedHelpers.findAndHookMethod(kgHostViewClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
