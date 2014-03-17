@@ -1390,4 +1390,8 @@
     <string name="pref_lockscreen_show_pattern_error_title">Mostrar erro na sequência</string>
     <string name="pref_lockscreen_show_pattern_error_summary">Permite mostrar um trilho vermelho quando a sequência é introduzida incorretamente</string>
 
+    <!-- Premium features: allow trial period -->
+    <string name="trial_info">Esta funcionalidade está em modo de teste. Se a considerar útil pode continuar a utilizá-la assim que registar a transação PayPal. 
+        O período de teste termina após reiniciar %d vezes.</string>
+
 </resources>
