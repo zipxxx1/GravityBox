@@ -117,8 +117,6 @@ public class ModStatusBar {
     private static TextView mCarrierTextView[];
     private static ImageView mCarrierDividerImageView;
     private static String mCarrierText[];
-    private static int[] mCarrierTextViewOrigVisibility;
-    private static int[] mCarrierTextViewOrigGravity;
     private static boolean mDt2sEnabled;
     private static GestureDetector mDoubletapGesture;
     private static View mIconMergerView;
@@ -622,25 +620,21 @@ public class ModStatusBar {
                                     param.thisObject, "mNetworkNameGemini");
                         }
 
-                        if (mCarrierTextViewOrigVisibility == null) {
-                            mCarrierTextViewOrigVisibility = new int[] {
-                                mCarrierTextView[0] == null ? View.GONE : mCarrierTextView[0].getVisibility(),
-                                mCarrierTextView[1] == null ? View.GONE : mCarrierTextView[1].getVisibility()
-                            };
-                        }
-                        if (mCarrierTextViewOrigGravity == null) {
-                            mCarrierTextViewOrigGravity = new int[] {
-                                mCarrierTextView[0] == null ? Gravity.CENTER : mCarrierTextView[0].getGravity(),
-                                mCarrierTextView[1] == null ? Gravity.CENTER : mCarrierTextView[1].getGravity()
-                            };
-                        }
+                        int[] carrierTextViewOrigVisibility = new int[] {
+                            mCarrierTextView[0] == null ? View.GONE : mCarrierTextView[0].getVisibility(),
+                            mCarrierTextView[1] == null ? View.GONE : mCarrierTextView[1].getVisibility()
+                        };
+                        int[] carrierTextViewOrigGravity = new int[] {
+                            mCarrierTextView[0] == null ? Gravity.CENTER : mCarrierTextView[0].getGravity(),
+                            mCarrierTextView[1] == null ? Gravity.CENTER : mCarrierTextView[1].getGravity()
+                        };
 
                         for (int i=0; i<2; i++) {
                             if (mCarrierTextView[i] == null) continue;
                             if (mCarrierText[i].isEmpty()) {
                                 mCarrierTextView[i].setText(networkName[i]);
-                                mCarrierTextView[i].setVisibility(mCarrierTextViewOrigVisibility[i]);
-                                mCarrierTextView[i].setGravity(mCarrierTextViewOrigGravity[i]);
+                                mCarrierTextView[i].setVisibility(carrierTextViewOrigVisibility[i]);
+                                mCarrierTextView[i].setGravity(carrierTextViewOrigGravity[i]);
                             } else {
                                 if (mCarrierText[i].trim().isEmpty()) {
                                     mCarrierTextView[i].setText("");
