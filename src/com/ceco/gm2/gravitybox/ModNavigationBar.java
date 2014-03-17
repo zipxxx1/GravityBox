@@ -326,10 +326,15 @@ public class ModNavigationBar {
                     mNavbarBgColor = prefs.getInt(
                             GravityBoxSettings.PREF_KEY_NAVBAR_BG_COLOR, mNavbarDefaultBgColor);
 
-                    mRecentIcon = mResources.getDrawable(
+                    try {
+                        mRecentIcon = mResources.getDrawable(
                             mResources.getIdentifier("ic_sysbar_recent", "drawable", PACKAGE_NAME));
-                    mRecentLandIcon = mResources.getDrawable(
+                        mRecentLandIcon = mResources.getDrawable(
                             mResources.getIdentifier("ic_sysbar_recent_land", "drawable", PACKAGE_NAME));
+                    } catch (Throwable t) {
+                        log("Error getting resources for recents key. Clear all in navbar support disabled.");
+                    }
+
                     mRecentAltIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear);
                     mRecentAltLandIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear_land);
 
@@ -507,7 +512,7 @@ public class ModNavigationBar {
                         Method m = XposedHelpers.findMethodExact(navbarViewClass, "getRecentsButton");
                         mRecentBtn = (ImageView) m.invoke(param.thisObject);
                     } catch(NoSuchMethodError nme) {
-                        if (DEBUG) log("getRecentsButton method doesn't exist");
+                        log("getRecentsButton method doesn't exist");
                     }
                	    mNavbarVertical = XposedHelpers.getBooleanField(param.thisObject, "mVertical");
                     setRecentAlt(context);
@@ -785,7 +790,8 @@ public class ModNavigationBar {
     }
 
     private static void setRecentAlt(Context context) {
-        if (mRecentBtn == null || context == null) return;
+        if (mRecentBtn == null || context == null ||
+                mRecentIcon == null || mRecentLandIcon == null) return;
 
         if (mRecentAlt) {
             mRecentBtn.setImageDrawable(mNavbarVertical ? mRecentAltLandIcon : mRecentAltIcon);
