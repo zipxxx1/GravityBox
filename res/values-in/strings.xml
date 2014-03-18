@@ -1309,4 +1309,97 @@
     <!-- Navbar ring: option to disable -->
     <string name="pref_navbar_ring_disable_title">Matikan cincin Navbar</string>
 
+    <!-- Data traffic monitor style -->
+    <string name="pref_data_traffic_mode_title">Gaya monitor lalu-lintas paket data</string>
+    <string name="dt_mode_off">Dimatikan</string>
+    <string name="dt_mode_simple">Gaya Sederhana</string>
+    <string name="dt_mode_omni">Gaya Omni</string>
+
+    <!-- Omni data traffic monitor -->
+    <string name="pref_data_traffic_omni_mode_title">Mode monitor</string>
+    <string name="dt_omni_mode_in">Download</string>
+    <string name="dt_omni_mode_out">Upload</string>
+    <string name="dt_omni_mode_in_out">Download dan upload</string>
+    <string name="byte_per_sec_abbr">B/s</string>
+    <string name="bit_per_sec_abbr">b/s</string>
+    <string name="kilo_abbr">k</string>
+    <string name="mega_abbr">M</string>
+    <string name="giga_abbr">G</string>
+    <string name="pref_data_traffic_omni_show_icon_title">Tunjukkan ikon</string>
+
+    <!--  Icon Picker: additional icons -->
+    <string name="shortcuts_icon_picker_viber">Viber</string>
+    <string name="shortcuts_icon_picker_skype">Skype</string>
+    <string name="shortcuts_icon_picker_calculator">Calculator</string>
+
+    <!-- QS Tiles: tile specific settings categories -->
+    <string name="pref_cat_qs_tile_settings_title">Pengaturan spesifik kotak</string>
+    <string name="pref_cat_qs_tile_settings_summary">Berisi pengaturan spesifik kotak</string>
+    <string name="pref_cat_qs_nm_tile_settings_title">Pengaturan kotak mode jaringan</string>
+
+    <!-- QS Tiles: Alarm tile settings -->
+    <string name="pref_cat_qs_alarm_tile_settings_title">Pengaturan kotak alarm</string>
+    <string name="pref_qs_alarm_singletap_app_title">Aplikasi ketika disentuh sekali</string>
+    <string name="alarm_singletap_app_default">Aplikasi bawaan</string>
+    <string name="pref_qs_alarm_longpress_app_title">Aplikasi ketika ditahan</string>
+
+    <!-- Traffic meter: show only when download active -->
+    <string name="pref_data_traffic_active_dl_only_title">Hanya ketika download aktif</string>
+    <string name="pref_data_traffic_active_dl_only_summary">Tunjukkan meter lalu-lintas hanya ketika ada download yang aktif 
+        di manajer download bawaan Android</string>
+
+    <!-- Led control -->
+    <string name="pref_led_control_title">Kontrol notifikasi ultimate</string>
+    <string name="pref_led_control_summary">Bolehkan kontrol lampu, suara, dan getar notifikasi untuk setiap aplikasi</string>
+    <string name="lc_please_wait">Silahkan tunggu&#8230;</string>
+    <string name="lc_disabled">Kontrol notifikasi dimatikan</string>
+    <string name="pref_lc_led_color_title">Warna LED</string>
+    <string name="pref_lc_led_time_on_title">Durasi LED hidup</string>
+    <string name="pref_lc_led_time_off_title">Durasi LED mati</string>
+    <string name="pref_lc_ongoing_title">Berjalan</string>
+    <string name="pref_lc_ongoing_summary">Berlaku juga untuk notifikasi yang sedang berjalan bila dinyalakan</string>
+    <string name="lc_btn_preview">Contoh</string>
+    <string name="lc_btn_save">Simpan</string>
+    <string name="lc_item_summary_on">Hidup</string>
+    <string name="lc_item_summary_off">Mati</string>
+    <string name="lc_item_summary_ongoing">Berjalan</string>
+    <string name="lc_preview_notif_title">Kontrol notifikasi GravityBox</string>
+    <string name="lc_preview_notif_text">Percobaan untuk %s</string>
+    <string name="lc_activity_menu_show_all">Tunjukkan semua item</string>
+    <string name="lc_activity_menu_show_active">Tunjukkan item yang aktif</string>
+    <string name="pref_cat_lc_lights_title">Lampu</string>
+    <string name="pref_cat_lc_other_title">Pengaturan lainnya</string>
+    <string name="pref_cat_lc_sounds_title">Suara</string>
+    <string name="pref_cat_lc_vibrations_title">Getaran</string>
+    <string name="pref_lc_notif_sound_override_title">Paksakan suara notifikasi</string>
+    <string name="pref_lc_notif_sound_title">Suara notifikasi</string>
+    <string name="lc_notif_sound_none">Tanpa suara</string>
+    <string name="pref_lc_notif_sound_only_once_title">Peringatkan sekali saja</string>
+    <string name="pref_lc_notif_sound_only_once_summary">Ketika dihidupkan, suara dan/atau getarannya tidak akan diulangi kembali bila sudah pernah dimainkan</string>
+    <string name="pref_lc_notif_insistent_title">Terus-menerus</string>
+    <string name="pref_lc_notif_insistent_summary">Ketika dihidupkan, suaranya akan terus-menerus dimainkan hingga notifikasinya dibatalkan atau jendela notifikasinya dibuka</string>
+    <string name="pref_lc_vibrate_override_title">Paksakan getaran</string>
+    <string name="pref_lc_vibrate_pattern_title">Pola getaran</string>
+    <string name="pref_lc_vibrate_pattern_summary">Daftar yang berisikan pasangan hidup/mati dalam hitungan milidetik yang dipisahkan oleh koma. Atur ke 0 untuk mematikan getaran.</string>
+    <string name="lc_vibrate_pattern_invalid">Format pola getaran tidak valid</string>
+
+    <!-- Omni data traffic monitor inactivity threshold -->
+    <string name="pref_data_traffic_omni_autohide_threshold_title">Batas tidak aktif</string>
+
+    <!-- Icon Picker: additional icons -->
+    <string name="shortcuts_icon_picker_chrome">Chrome</string>
+    <string name="shortcuts_icon_picker_spotify">Spotify</string>
+
+    <!-- Virtual keys vibrate pattern -->
+    <string name="pref_virtual_key_vibrate_pattern_title">Pola getaran tombol virtual</string>
+
+    <string name="pref_virtual_key_vibrate_pattern_summary">Daftar yang berisikan pasangan hidup/mati dalam hitungan milidetik yang dipisahkan oleh koma. Biarkan kosong untuk menggunakan pola getaran bawaan.</string>
+    <!-- Lockscreen: show pattern error -->
+    <string name="pref_lockscreen_show_pattern_error_title">Tunjukkan kesalahan pola</string>
+    <string name="pref_lockscreen_show_pattern_error_summary">Berikan garis merah ketika ada kesalahan pada pola yang dimasukkan</string>
+
+    <!-- Premium features: allow trial period -->
+    <string name="trial_info">Fitur ini masih dalam masa percobaan. Jika anda menemukan bahwa fitur ini berguna, anda bisa melanjutkan menggunakan fitur ini setelah mendaftarkan 
+        ID transaksi donasi PayPal anda. Periode percobaannya berakhir setelah %d restart.</string>
+
 </resources>
