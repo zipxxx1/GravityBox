@@ -1407,6 +1407,7 @@
     <string name="pref_lockscreen_show_pattern_error_summary">进入错误格式时显示红色足迹</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">此功能在试用模式。如果你觉得它有用您可以继续登录您的PayPal后使用它捐赠交易ID。 %d重启后试用期结束</string>
-        
+    <string name="trial_info">此功能是试用模式！如果您觉得它有用您可以继续登录您的PayPal后使用它捐赠交易ID。 %d将在重启后结束试用期</string>
+    
+    
 </resources>
