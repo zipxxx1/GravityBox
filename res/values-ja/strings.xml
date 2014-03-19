@@ -1370,5 +1370,12 @@
     <!-- Icon Picker: additional icons -->
     <string name="shortcuts_icon_picker_chrome">Chrome</string>
     <string name="shortcuts_icon_picker_spotify">Spotify</string>
+    
+    <!-- Lockscreen: show pattern error -->
+    <string name="pref_lockscreen_show_pattern_error_title">パターンエラーの表示</string>
+    <string name="pref_lockscreen_show_pattern_error_summary">入力したパターンが間違っているとき赤くするようにします。</string>
+
+    <!-- Premium features: allow trial period -->
+    <string name="trial_info">この機能はお試しモードです。もし便利だと思ったら寄付をしてPayPal取引ID番号を入力すれば使えるようになります。お試しモードはあと%d回再起動すると終了します。</string>
 
 </resources>
