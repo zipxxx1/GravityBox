@@ -579,11 +579,11 @@
     <string name="pref_cat_phone_mobile_data_title">行動數據</string>
 
     <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">去除 unicode 字符</string>
-    <string name="pref_mms_unicode_stripping_summary">正常字符轉換成 unicode 字符。降低整體郵件大小.</string>
-    <string name="unicode_stripping_leave_intact">保留字符不變</string>
-    <string name="unicode_stripping_non_encodable">去除非可編碼字符</string>
-    <string name="unicode_stripping_all">去除所有 unicode 字符</string>
+    <string name="pref_mms_unicode_stripping_title">去除 unicode 字元</string>
+    <string name="pref_mms_unicode_stripping_summary">正常字元轉換成 unicode 字元。降低整體郵件大小.</string>
+    <string name="unicode_stripping_leave_intact">保留字元不變</string>
+    <string name="unicode_stripping_non_encodable">去除非可編碼字元</string>
+    <string name="unicode_stripping_all">去除所有 unicode 字元</string>
 
     <!-- Disable slow 2G data warning -->
     <string name="pref_mobile_data_slow2g_disable_title">停用 2G 網路延遲警告</string>
@@ -658,8 +658,8 @@
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">停用</string>
     <string name="clock_dow_standard">標準</string>
-    <string name="clock_dow_lowercase">小寫字符(僅英文有效)</string>
-    <string name="clock_dow_uppercase">大寫字符(僅英文有效)</string>
+    <string name="clock_dow_lowercase">小寫字元(僅英文有效)</string>
+    <string name="clock_dow_uppercase">大寫字元(僅英文有效)</string>
 
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">鎖定螢幕時的狀態列鎖定政策</string>
