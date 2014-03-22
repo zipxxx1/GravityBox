@@ -45,6 +45,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -679,9 +680,10 @@ public class ModLockscreen {
                         }
                     });
 
-                    XposedHelpers.findAndHookMethod(carrierTextClass, "updateCarrierTextGemini",
-                            "com.android.internal.telephony.IccCardConstants$State", CharSequence.class, CharSequence.class,
-                            int.class, new XC_MethodHook() {
+                    XposedHelpers.findAndHookMethod(carrierTextClass,
+                            Build.HARDWARE.toLowerCase().contains("mt6592") ? "updateCarrierText" : "updateCarrierTextGemini",
+                                    "com.android.internal.telephony.IccCardConstants$State",
+                                    CharSequence.class, CharSequence.class, int.class, new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                             TextView carrierTextView[] = new TextView[2];
