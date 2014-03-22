@@ -15,6 +15,46 @@ public class StatusbarSignalClusterMt65x2 extends StatusbarSignalClusterMtk {
     }
 
     @Override
+    protected void updateWiFiIcon() {
+        try {
+            Object wifiStrengthId = null, wifiActivityId = null;
+            int resId = 0;
+            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") &&
+                    mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
+                ImageView wifiIcon = (ImageView) XposedHelpers.getObjectField(mView, "mWifi");
+                if (wifiIcon != null) {
+                    wifiStrengthId = (Object) XposedHelpers.getObjectField(mView, "mWifiStrengthId");
+                    if (wifiStrengthId instanceof Integer) {
+                        resId = (Integer) wifiStrengthId;
+                    } else {
+                        resId = (Integer) XposedHelpers.callMethod(wifiStrengthId, "getIconId");
+                    }
+                    Drawable d = mIconManager.getWifiIcon(resId);
+                    if (d != null) wifiIcon.setImageDrawable(d);
+                }
+                ImageView wifiActivity = (ImageView) XposedHelpers.getObjectField(mView, "mWifiActivity");
+                if (wifiActivity != null) {
+                    try {
+                        wifiActivityId = (Object) XposedHelpers.getObjectField(mView, "mWifiActivityId");
+                        if (wifiStrengthId instanceof Integer) {
+                            resId = (Integer) wifiActivityId;
+                        } else {
+                            resId = (Integer) XposedHelpers.callMethod(wifiActivityId, "getIconId");
+                        }
+                        Drawable d = mResources.getDrawable(resId).mutate();
+                        d = mIconManager.applyDataActivityColorFilter(d);
+                        wifiActivity.setImageDrawable(d);
+                    } catch (Resources.NotFoundException e) {
+                        wifiActivity.setImageDrawable(null);
+                    }
+                }
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    @Override
     protected void updateMobileIcon() {
         updateMobileIcon(0);
         updateMobileIcon(1);
