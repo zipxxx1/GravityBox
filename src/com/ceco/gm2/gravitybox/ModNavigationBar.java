@@ -225,7 +225,7 @@ public class ModNavigationBar {
                 mRecentAlt = intent.getBooleanExtra(ModClearAllRecents.EXTRA_NAVBAR_RECENTS_CLEAR_ALL, false);
                 if (DEBUG) log("mRecentAlt = " + mRecentAlt);
                 if (recentAltCurrent != mRecentAlt) {
-                    setRecentAlt(context);
+                    setRecentAlt();
                 }
             }
         }
@@ -515,7 +515,7 @@ public class ModNavigationBar {
                         log("getRecentsButton method doesn't exist");
                     }
                	    mNavbarVertical = XposedHelpers.getBooleanField(param.thisObject, "mVertical");
-                    setRecentAlt(context);
+                    setRecentAlt();
                 }
             });
 
@@ -789,9 +789,8 @@ public class ModNavigationBar {
         
     }
 
-    private static void setRecentAlt(Context context) {
-        if (mRecentBtn == null || context == null ||
-                mRecentIcon == null || mRecentLandIcon == null) return;
+    private static void setRecentAlt() {
+        if (mRecentBtn == null || mRecentIcon == null || mRecentLandIcon == null) return;
 
         if (mRecentAlt) {
             mRecentBtn.setImageDrawable(mNavbarVertical ? mRecentAltLandIcon : mRecentAltIcon);
@@ -803,10 +802,10 @@ public class ModNavigationBar {
                     mRecentsLongpressAction != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS) {
                 mRecentsLongpressActionBck = mRecentsLongpressAction;
             }
-            broadcastRecentsActions(context, GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP, 
+            broadcastRecentsActions(mRecentBtn.getContext(), GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP, 
                     GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS);
         } else {
-            mRecentBtn.postDelayed(resetRecentKeyStateRunnable, 200);
+            mRecentBtn.post(resetRecentKeyStateRunnable);
         }
     }
 
