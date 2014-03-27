@@ -116,7 +116,8 @@ public class ModClearAllRecents {
         try {
             mPrefs = prefs;
             Class<?> recentPanelViewClass = XposedHelpers.findClass(CLASS_RECENT_PANEL_VIEW, classLoader);
-            Class<?> recentActivityClass = XposedHelpers.findClass(CLASS_RECENT_ACTIVITY, classLoader);
+            Class<?> recentActivityClass = (Build.VERSION.SDK_INT > 16) ?
+                    XposedHelpers.findClass(CLASS_RECENT_ACTIVITY, classLoader) : null;
             Class<?> recentVerticalScrollView = XposedHelpers.findClass(CLASS_RECENT_VERTICAL_SCROLL_VIEW, classLoader);
             Class<?> recentHorizontalScrollView = XposedHelpers.findClass(CLASS_RECENT_HORIZONTAL_SCROLL_VIEW, classLoader);
 
@@ -261,31 +262,33 @@ public class ModClearAllRecents {
                         updateRambarHook);
             }
 
-            XposedHelpers.findAndHookMethod(recentActivityClass, "onResume", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_SINGLETAP);
-                    intentFilter.addAction(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_LONGPRESS);
-                    mRecentsActivity = ((Activity)param.thisObject);
-                    mRecentsActivity.registerReceiver(mBroadcastReceiver, intentFilter);
-                    if (mFinishHandler != null) {
-                        mFinishHandler.removeCallbacks(mFinishRunnable);
-                        mFinishHandler = null;
+            if (Build.VERSION.SDK_INT > 16) {
+                XposedHelpers.findAndHookMethod(recentActivityClass, "onResume", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        IntentFilter intentFilter = new IntentFilter();
+                        intentFilter.addAction(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_SINGLETAP);
+                        intentFilter.addAction(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_LONGPRESS);
+                        mRecentsActivity = ((Activity)param.thisObject);
+                        mRecentsActivity.registerReceiver(mBroadcastReceiver, intentFilter);
+                        if (mFinishHandler != null) {
+                            mFinishHandler.removeCallbacks(mFinishRunnable);
+                            mFinishHandler = null;
+                        }
+                        mFinishHandler = new Handler();
+                        if (DEBUG) log("Broadcast receiver registered");
                     }
-                    mFinishHandler = new Handler();
-                    if (DEBUG) log("Broadcast receiver registered");
-                }
-            });
+                });
 
-            XposedHelpers.findAndHookMethod(recentActivityClass, "onPause", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    mRecentsActivity.unregisterReceiver(mBroadcastReceiver);
-                    mFinishHandler.postDelayed(mFinishRunnable, 500);
-                    if (DEBUG) log("Broadcast receiver unregistered");
-                }
-            });
+                XposedHelpers.findAndHookMethod(recentActivityClass, "onPause", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        mRecentsActivity.unregisterReceiver(mBroadcastReceiver);
+                        mFinishHandler.postDelayed(mFinishRunnable, 500);
+                        if (DEBUG) log("Broadcast receiver unregistered");
+                    }
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

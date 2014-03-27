@@ -1481,6 +1481,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatDisplay.removePreference(mPrefCatBrightness);
                 mPrefCatDisplay.removePreference(mPrefScreenOffEffect);
                 mPrefCatMedia.removePreference(mPrefSafeMediaVolume);
+
+                // remove clear all in navigation bar / pie option
+                mPrefRecentClear.setEntries(R.array.recents_clear_entries);
+                mPrefRecentClear.setEntryValues(R.array.recents_clear_values);
+                List<CharSequence> recentsClearEntries = new ArrayList<CharSequence>(Arrays.asList(
+                        mPrefRecentClear.getEntries()));
+                List<CharSequence> recentsClearEntryValues = new ArrayList<CharSequence>(Arrays.asList(
+                        mPrefRecentClear.getEntryValues()));
+                recentsClearEntries.remove(getString(R.string.recent_clear_navigation_bar));
+                recentsClearEntryValues.remove("1");
+                mPrefRecentClear.setEntries(recentsClearEntries.toArray(
+                        new CharSequence[recentsClearEntries.size()]));
+                mPrefRecentClear.setEntryValues(recentsClearEntryValues.toArray(
+                        new CharSequence[recentsClearEntryValues.size()]));
             }
 
             // Remove preferences not compatible with Android < 4.3+
