@@ -87,20 +87,25 @@ public class ModAudio {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    if (context == null) return;
+                    if (context == null) {
+                        mHandleChangeVolume = new HandleChangeVolume(context);
+                        XposedHelpers.findAndHookMethod(classAudioService, "adjustMasterVolume", 
+                                int.class, int.class, mHandleChangeVolume);
+                        XposedHelpers.findAndHookMethod(classAudioService, "adjustSuggestedStreamVolume", 
+                                int.class, int.class, int.class, mHandleChangeVolume);
 
-                    mHandleChangeVolume = new HandleChangeVolume(context);
-                    XposedHelpers.findAndHookMethod(classAudioService, "adjustMasterVolume", 
-                            int.class, int.class, mHandleChangeVolume);
-                    XposedHelpers.findAndHookMethod(classAudioService, "adjustSuggestedStreamVolume", 
-                            int.class, int.class, int.class, mHandleChangeVolume);
-
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SAFE_MEDIA_VOLUME_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_SWAP_KEYS_CHANGED);
-                    context.registerReceiver(mBroadcastReceiver, intentFilter);
-                    if (DEBUG) log("AudioService constructed. Broadcast receiver registered");
+                        IntentFilter intentFilter = new IntentFilter();
+                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SAFE_MEDIA_VOLUME_CHANGED);
+                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED);
+                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_SWAP_KEYS_CHANGED);
+                        context.registerReceiver(mBroadcastReceiver, intentFilter);
+                        if (DEBUG) log("AudioService constructed. Broadcast receiver registered");
+                    }
+                    if (Build.VERSION.SDK_INT > 16 &&
+                            prefs.getBoolean(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS, false)) {
+                        XposedHelpers.setIntField(param.thisObject, "mSafeMediaVolumeIndex", 150);
+                        if (DEBUG) log("Default mSafeMediaVolumeIndex set to 150");
+                    }
                 }
             });
 
@@ -121,7 +126,7 @@ public class ModAudio {
 
                 XposedHelpers.findAndHookMethod(classAudioService, "checkSafeMediaVolume", 
                         int.class, int.class, int.class, new XC_MethodHook() {
-        
+
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if (!mSafeMediaVolumeEnabled) {
@@ -130,6 +135,26 @@ public class ModAudio {
                         }
                     }
                 });
+
+                if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS, false)) {
+                    XposedHelpers.findAndHookMethod(classAudioService, "onConfigureSafeVolume",
+                            boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            param.setObjectExtra("gbCurSafeMediaVolIndex",
+                                    XposedHelpers.getIntField(param.thisObject, "mSafeMediaVolumeIndex"));
+                        }
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if ((Integer) param.getObjectExtra("gbCurSafeMediaVolIndex") !=
+                                    XposedHelpers.getIntField(param.thisObject, "mSafeMediaVolumeIndex")) {
+                                int safeMediaVolIndex = XposedHelpers.getIntField(param.thisObject, "mSafeMediaVolumeIndex") * 2;
+                                XposedHelpers.setIntField(param.thisObject, "mSafeMediaVolumeIndex", safeMediaVolIndex);
+                                if (DEBUG) log("onConfigureSafeVolume: mSafeMediaVolumeIndex set to " + safeMediaVolIndex);
+                            }
+                        }
+                    });
+                }
             }
 
             mVolForceMusicControl = prefs.getBoolean(
