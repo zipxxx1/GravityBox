@@ -23,7 +23,6 @@ import java.util.List;
 import com.ceco.gm2.gravitybox.GlowPadHelper.AppInfo;
 import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetProviderInfo;
@@ -45,7 +44,6 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -680,10 +678,18 @@ public class ModLockscreen {
                         }
                     });
 
-                    XposedHelpers.findAndHookMethod(carrierTextClass,
-                            Build.HARDWARE.toLowerCase().contains("mt6592") ? "updateCarrierText" : "updateCarrierTextGemini",
-                                    "com.android.internal.telephony.IccCardConstants$State",
-                                    CharSequence.class, CharSequence.class, int.class, new XC_MethodHook() {
+                    String updateCarrierTextMethod;
+                    try {
+                        updateCarrierTextMethod = XposedHelpers.findMethodExact(carrierTextClass, "updateCarrierTextGemini",
+                                "com.android.internal.telephony.IccCardConstants$State",
+                                    CharSequence.class, CharSequence.class, int.class).getName();
+                    } catch (NoSuchMethodError nme) {
+                        if (DEBUG) log("updateCarrierTextGemini method doesn't exist, fallback to updateCarrierText");
+                        updateCarrierTextMethod = "updateCarrierText";
+                    }
+                    XposedHelpers.findAndHookMethod(carrierTextClass, updateCarrierTextMethod,
+                            "com.android.internal.telephony.IccCardConstants$State",
+                                CharSequence.class, CharSequence.class, int.class, new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                             TextView carrierTextView[] = new TextView[2];
