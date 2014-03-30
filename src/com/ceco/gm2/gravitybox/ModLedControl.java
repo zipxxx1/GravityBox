@@ -29,6 +29,7 @@ public class ModLedControl {
     private static final String TAG = "GB:ModLedControl";
     private static final boolean DEBUG = false;
     private static final String CLASS_USER_HANDLE = "android.os.UserHandle";
+    private static final String PACKAGE_NAME_GRAVITYBOX = "com.ceco.gm2.gravitybox";
 
     private static XSharedPreferences mPrefs;
 
@@ -64,13 +65,24 @@ public class ModLedControl {
                     return;
                 }
 
+                int id = (Integer) param.args[1];
+                Notification n = (Notification) param.args[2];
+
                 final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                 final String pkgName = context.getPackageName();
-                final LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
-                if (DEBUG) log(pkgName + ": " + ls.toString());
-                if (!ls.getEnabled()) return;
 
-                Notification n = (Notification) param.args[2];
+                if (pkgName.equals(PACKAGE_NAME_GRAVITYBOX) && id >= 2049) return;
+
+                LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
+                if (!ls.getEnabled()) {
+                    // use default settings in case they are active
+                    ls = LedSettings.deserialize(mPrefs.getStringSet("default", null));
+                    if (!ls.getEnabled()) {
+                        return;
+                    }
+                }
+                if (DEBUG) log(pkgName + ": " + ls.toString());
+
                 if (((n.flags & Notification.FLAG_ONGOING_EVENT) == Notification.FLAG_ONGOING_EVENT) &&
                         !ls.getOngoing()) {
                     if (DEBUG) log("Ongoing led control disabled. Forcing LED Off");
