@@ -130,17 +130,19 @@ public class ModPowerMenu {
 
                    // colorize icons to make them look good on light backgrounds
                    int airplaneIconId = res.getIdentifier("ic_lock_airplane_mode_off", "drawable", PACKAGE_NAME);
-                   Drawable airplaneIcon = res.getDrawable(airplaneIconId);
-                   Bitmap bitmap = Utils.drawableToBitmap(airplaneIcon);
-                   int airplaneIconColor = bitmap.getPixel(bitmap.getWidth()/2, bitmap.getHeight()/2);
-                   if (airplaneIconColor != Color.WHITE) {
-                       int iconColor = Utils.hasLenovoVibeUI() ? Color.parseColor("#4b4b4b") : Color.GRAY;
-                       mRebootIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                       mRebootSoftIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                       mRecoveryIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                       mBootloaderIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                       mExpandedDesktopIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                       mScreenshotIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
+                   if (airplaneIconId != 0) {
+                       Drawable airplaneIcon = res.getDrawable(airplaneIconId);
+                       Bitmap bitmap = Utils.drawableToBitmap(airplaneIcon);
+                       int airplaneIconColor = bitmap.getPixel(bitmap.getWidth()/2, bitmap.getHeight()/2);
+                       if (airplaneIconColor != Color.WHITE) {
+                           int iconColor = Utils.hasLenovoVibeUI() ? Color.parseColor("#4b4b4b") : Color.GRAY;
+                           mRebootIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
+                           mRebootSoftIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
+                           mRecoveryIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
+                           mBootloaderIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
+                           mExpandedDesktopIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
+                           mScreenshotIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
+                       }
                    }
 
                    mRebootItemList = new ArrayList<IIconListAdapterItem>();
