@@ -1394,4 +1394,10 @@
     <string name="trial_info">Esta funcionalidade está em modo de teste. Se a considerar útil pode continuar a utilizá-la assim que registar a transação PayPal. 
         O período de teste termina após reiniciar %d vezes.</string>
 
+    <!-- Notification control: default settings -->
+    <string name="lc_activity_menu_default_settings">Definições padrão</string>
+    <string name="pref_lc_default_settings_summary">Quando ativado, as definições padrão são aplicadas automaticamente a todas as aplicações que não tenham uma configuração explicita</string>
+    <string name="lc_defaults_apply">Definições padrão aplicáveis</string>
+    <string name="lc_settings_menu_reset">Repôr definições de origem</string>
+
 </resources>
