@@ -963,8 +963,9 @@ public class ModStatusBar {
     private static void updateSpacer() {
         if (mSpacer == null) return;
 
-         // Only reduce space when data network type icons are not showing
-        if (mDisableDataNetworkTypeIcons) {
+        // Only reduce space between wiFi and signal icons on non-VibeUI ROMs
+        // and when data network type icons were hide
+        if (!Utils.hasLenovoVibeUI() && mDisableDataNetworkTypeIcons) {
             mSpacer.setLayoutParams(mSpacerAltLayoutParams);
         } else {
             mSpacer.setLayoutParams(mSpacerDefLayoutParams);
