@@ -1,3 +1,31 @@
+Changelog 3.0.1 - 01/04/2014
+--------------------------------------
+- Power Menu: graphical UI optimization (thanks to bgcngm)
+--- colorize icons to make them look good on light backgrounds
+--- added new icons to match Lenovo VibeUI ROMs resolution
+- Statusbar signal cluster view:
+--- fixed WiFi signal coloring on MT6592 (thanks to bgcngm)
+--- code reworked to better handle all MTK platforms (thanks to bgcngm)
+--- don't reduce wifi and signal icons spacing on Lenovo VibeUI ROMs (thanks to bgcngm)
+- Lockscreen custom carrier texts:
+--- added compatibility with MT6592 (thanks to bgcngm)
+- Clear all recents:
+--- fixed clear all key being stuck in navbar under certain conditions
+--- workaround for AOSP bug that kept recents panel active in the background under certain conditions
+--- fixed clear all key coloring in Pie (thanks to SilentException)
+--- further optimizations (thanks to SilentException)
+--- fixed broken feature on Android 4.1 (thanks to bgcngm)
+- Media: take increased music volume steps into account for safe headset volume
+- Reorganized Clock settings (thanks to Minty123)
+- Added Malay translations (thanks to zamzameir)
+- Updated German translations (thanks to Minty123, LibertyMarine)
+- Updated French translation (thanks to ch-vox)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Traditional) translations (thanks to knight00931)
+- Updated Chinese (Simplified) translations (thanks to liveasx, logicmd)
+- Updated Vietnamese translations (thanks to alienyd)
+
 Changelog 3.0.0 - 18/03/2014
 --------------------------------------
 - Introducing Ultimate Notification Control
