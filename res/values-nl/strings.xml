@@ -24,7 +24,6 @@
     <string name="battery_style_stock">Standaard batterij indicator</string>
     <string name="battery_style_circle">Cirkel batterij</string>
     <string name="battery_style_circle_percent">Cirkel batterij met percentage</string>
-    <string name="battery_style_percent">Batterij percentage tekst</string>
     <string name="battery_style_none">Geen</string>
 
     <string name="vol_music_controls_title">Volume knoppen slaan liedje over</string>
@@ -162,10 +161,6 @@
     <string name="reboot_confirm_recovery">Uw %s wil herstarten in recovery.</string>
     <string name="reboot_confirm_bootloader">Uw %s wil herstarten in bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT scherm uit effect</string>
-    <string name="crt_off_effect_summary">Toont animatie dat oude CRT simuleert bij het uitzetten van het scherm</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Ingenieur modus</string>
     <string name="engineering_mode_summary">Lanceert ingenieur modus applicatie</string>
@@ -226,7 +221,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Schakel vergrendelscherm rotatie in</string>
-    <string name="pref_lockscreen_rotation_summary">WAARSCHUWING: kan de ontsluitring doelen omgooien op sommige toestellen als het AOSP vergrendelscherm aangepast werd door de leverancier</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Schakel menu knop in</string>
@@ -286,10 +280,6 @@
     <string name="phone_flip_action_mute">Beltoon stil</string>
     <string name="phone_flip_action_dismiss">Oproep afbreken</string>
 
-    <!-- Disable vibrate on call connect -->
-    <string name="pref_phone_call_connect_vibrate_disable_title">Vibreren bij opnemen uitschakelen</string>
-    <string name="pref_phone_call_connect_vibrate_disable_summary">Schakelt de vibratie uit als een oproep word verbonden</string>
-
     <!-- Soft reboot -->
     <string name="reboot_soft">Soft reboot</string>
 
@@ -322,10 +312,6 @@
     <string name="quick_pulldown_off">Uit</string>
     <string name="quick_pulldown_right">Rechts</string>
     <string name="quick_pulldown_left">Links</string>
-
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Ontwaken door volume knop uitschakelen</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Voor toestellen als Jiayu G3s,G4 waar volume knoppen het scherm inschakelen</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Statusbalk kleuren</string>
@@ -546,7 +532,6 @@
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Ontsluit ring instellingen</string>
-    <string name="pref_lockscreen_ring_targets_enable_title">Activeer ontsluit ring doelen</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Hoofdschakelaar voor ontsluit ring doelen</string>
     <string name="pref_lockscreen_ring_targets_app_title">Doelapplicatie %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Ontsluit ring verticale offset</string>
