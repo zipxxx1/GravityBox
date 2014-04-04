@@ -1386,4 +1386,10 @@
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Ta funkcja działa obecnie w trybie próbnym. Jeśli okaże się przydatna, będzie jej można nadal używać po zarejestrowaniu identyfikatora transakcji PayPal. Okres próbny kończy się po %d ponownych uruchomieniach.</string>
 
+    <!-- Notification control: default settings -->
+    <string name="lc_activity_menu_default_settings">Ustawienia domyślne</string>
+    <string name="pref_lc_default_settings_summary">Gdy włączone, automatycznie stosuje ustawienia domyślne dla wszystkich aplikacji, które nie mają aktywnych sprecyzowanych ustawień kontroli powiadomień</string>
+    <string name="lc_defaults_apply">Zastosuj ustawienia domyślne</string>
+    <string name="lc_settings_menu_reset">Zresetuj ustawienia domyślne</string>
+
 </resources>
