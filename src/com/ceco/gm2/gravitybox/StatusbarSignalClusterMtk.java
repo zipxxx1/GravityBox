@@ -96,11 +96,9 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                                     (ImageView[]) mobileActivity;
             }
             Object mobileActivityIds = XposedHelpers.getObjectField(mView, "mMobileActivityId");
-            if (mMobileActivityIds == null) {
-                mMobileActivityIds = (mobileActivityIds instanceof Object[]) ? (Object[]) mobileActivityIds :
-                        new Object[] { (Object) mobileActivityIds, Utils.hasGeminiSupport() ?
-                                (Object) XposedHelpers.getObjectField(mView, "mMobileActivityIdGemini") : null };
-            }
+            mMobileActivityIds = (mobileActivityIds instanceof Object[]) ? (Object[]) mobileActivityIds :
+                    new Object[] { (Object) mobileActivityIds, Utils.hasGeminiSupport() ?
+                            (Object) XposedHelpers.getObjectField(mView, "mMobileActivityIdGemini") : null };
             Object mobileRoam = XposedHelpers.getObjectField(mView, "mMobileRoam");
             if (mMobileRoam == null) {
                 mMobileRoam = (mobileRoam instanceof ImageView) ?
@@ -110,11 +108,9 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
             }
             if (Utils.hasGeminiSupport()) {
                 Object mobileIconIds = XposedHelpers.getObjectField(mView, "mMobileStrengthId");
-                if (mMobileIconIds == null) {
-                    mMobileIconIds = (mobileIconIds instanceof Object[][]) ? (Object[][]) mobileIconIds :
-                            new Object[][] { (Object[]) mobileIconIds, Utils.hasGeminiSupport() ?
-                                    (Object[]) XposedHelpers.getObjectField(mView, "mMobileStrengthIdGemini") : null };
-                }
+                mMobileIconIds = (mobileIconIds instanceof Object[][]) ? (Object[][]) mobileIconIds :
+                        new Object[][] { (Object[]) mobileIconIds, Utils.hasGeminiSupport() ?
+                                (Object[]) XposedHelpers.getObjectField(mView, "mMobileStrengthIdGemini") : null };
             }
             Object mobileType = XposedHelpers.getObjectField(mView, "mMobileType");
             if (mMobileType == null) {
@@ -124,25 +120,19 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                                     (ImageView[]) mobileType;
             }
             Object mobileTypeIds = XposedHelpers.getObjectField(mView, "mMobileTypeId");
-            if (mMobileTypeIds == null) {
-                mMobileTypeIds = (mobileTypeIds instanceof Object[]) ? (Object[]) mobileTypeIds :
-                        new Object[] { (Object) mobileTypeIds, Utils.hasGeminiSupport() ?
-                                (Object) XposedHelpers.getObjectField(mView, "mMobileTypeIdGemini") : null };
-            }
+            mMobileTypeIds = (mobileTypeIds instanceof Object[]) ? (Object[]) mobileTypeIds :
+                    new Object[] { (Object) mobileTypeIds, Utils.hasGeminiSupport() ?
+                            (Object) XposedHelpers.getObjectField(mView, "mMobileTypeIdGemini") : null };
             Object mobileVisible = XposedHelpers.getObjectField(mView, "mMobileVisible");
-            if (mMobileVisible == null) {
-                mMobileVisible = (mobileVisible instanceof Boolean) ?
-                        new boolean[] { (Boolean) mobileVisible, Utils.hasGeminiSupport() ?
-                                (boolean) XposedHelpers.getBooleanField(mView, "mMobileVisibleGemini") : null } :
-                                    (boolean[]) mobileVisible;
-            }
+            mMobileVisible = (mobileVisible instanceof Boolean) ?
+                    new boolean[] { (Boolean) mobileVisible, Utils.hasGeminiSupport() ?
+                            (boolean) XposedHelpers.getBooleanField(mView, "mMobileVisibleGemini") : false } :
+                                (boolean[]) mobileVisible;
             Object roaming = XposedHelpers.getObjectField(mView, "mRoaming");
-            if (mRoaming == null) {
-                mRoaming = (roaming instanceof Boolean) ?
-                        new boolean[] { (Boolean) roaming, Utils.hasGeminiSupport() ?
-                                (boolean) XposedHelpers.getBooleanField(mView, "mRoamingGemini") : null } :
-                                    (boolean[]) roaming;
-            }
+            mRoaming = (roaming instanceof Boolean) ?
+                    new boolean[] { (Boolean) roaming, Utils.hasGeminiSupport() ?
+                            (boolean) XposedHelpers.getBooleanField(mView, "mRoamingGemini") : false } :
+                                (boolean[]) roaming;
             Object roamingId = XposedHelpers.getObjectField(mView, "mRoamingId");
             if (mRoamingId == null) {
                 mRoamingId = (roamingId instanceof Integer) ?
@@ -169,7 +159,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                                 Drawable d = mResources.getDrawable(resId).mutate();
                                 d = mIconManager.applyDataActivityColorFilter(slot, d);
                                 mMobileActivity[slot].setImageDrawable(d);
-                            } catch (Resources.NotFoundException e) { 
+                            } catch (Resources.NotFoundException e) {
                                 mMobileActivity[slot].setImageDrawable(null);
                             }
                         }
