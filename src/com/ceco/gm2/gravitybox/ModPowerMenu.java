@@ -133,7 +133,7 @@ public class ModPowerMenu {
                    if (airplaneIconId != 0) {
                        Drawable airplaneIcon = res.getDrawable(airplaneIconId);
                        Bitmap bitmap = Utils.drawableToBitmap(airplaneIcon);
-                       int airplaneIconColor = bitmap.getPixel(bitmap.getWidth()/2, bitmap.getHeight()/2);
+                       int airplaneIconColor = Utils.getBitmapPredominantColor(bitmap);
                        if (airplaneIconColor != Color.WHITE) {
                            int iconColor = Utils.hasLenovoVibeUI() ? Color.parseColor("#4b4b4b") : Color.GRAY;
                            mRebootIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
