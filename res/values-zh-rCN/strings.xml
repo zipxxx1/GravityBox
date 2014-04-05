@@ -1408,6 +1408,12 @@
 
     <!-- Premium features: allow trial period -->
     <string name="trial_info">此功能是试用模式！如果您觉得它有用您可以继续登录您的PayPal后使用它捐赠交易ID。 %d将在重启后结束试用期</string>
-    
+
+
+    <!-- Notification control: default settings -->
+    <string name="lc_activity_menu_default_settings">默认设置</string>
+    <string name="pref_lc_default_settings_summary">当打开时默认设置会自动应用到那些没有激活设定的应用程序</string>
+    <string name="lc_defaults_apply">应用默认设置</string>
+    <string name="lc_settings_menu_reset">重置为默认值</string>
     
 </resources>
