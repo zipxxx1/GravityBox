@@ -77,6 +77,11 @@
             android:name="com.ceco.gm2.gravitybox.ledcontrol.LedSettingsActivity" >
         </activity>
 
+        <activity
+            android:name="com.ceco.gm2.gravitybox.ledcontrol.ActiveScreenActivity"
+            android:label="@string/lc_active_screen" >
+        </activity>
+
         <service android:name=".GravityBoxService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.TOGGLE_SYNC" />
