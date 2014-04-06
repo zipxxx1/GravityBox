@@ -1392,7 +1392,7 @@
     <string name="lc_defaults_apply">Zastosuj ustawienia domyślne</string>
     <string name="lc_settings_menu_reset">Zresetuj ustawienia domyślne</string>
 
-   <!-- Notification control: Active screen -->
+    <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktywny Ekran</string>
     <string name="lc_active_screen_info">Funkcja ta automatycznie włącza ekran za każdym razem 
         gdy dotrze nowe powiadomienie. Stanie się tak tylko w przypadku, gdy ekran nie jest przykryty 
