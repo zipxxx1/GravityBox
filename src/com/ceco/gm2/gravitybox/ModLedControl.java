@@ -15,8 +15,9 @@
 
 package com.ceco.gm2.gravitybox;
 
-import com.ceco.gm2.gravitybox.ledcontrol.LedSettings;
 import com.ceco.gm2.gravitybox.ledcontrol.ActiveScreenActivity;
+import com.ceco.gm2.gravitybox.ledcontrol.LedSettings;
+import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
 
 import android.app.KeyguardManager;
 import android.app.Notification;
@@ -57,6 +58,28 @@ public class ModLedControl {
     private static boolean mScreenCovered;
     private static boolean mOnPanelRevealedBlocked;
 
+    static class QuietHours {
+        boolean enabled;
+        long start;
+        long end;
+        boolean muteLED;
+
+        QuietHours(XSharedPreferences prefs) {
+            enabled = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false);
+            start = prefs.getLong(QuietHoursActivity.PREF_KEY_QH_START, 0);
+            end = prefs.getLong(QuietHoursActivity.PREF_KEY_QH_END, 0);
+            muteLED = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_LED, false);
+        }
+
+        boolean quietHoursActive() {
+            return (enabled && Utils.isTimeOfDayInRange(System.currentTimeMillis(), start, end));
+        }
+
+        boolean quietHoursActiveIncludingLED() {
+            return quietHoursActive() && muteLED;
+        }
+    }
+
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) { 
@@ -81,6 +104,9 @@ public class ModLedControl {
             if (action.equals(Intent.ACTION_USER_PRESENT)) {
                 if (DEBUG) log("User present");
                 mOnPanelRevealedBlocked = false;
+            }
+            if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+                mPrefs.reload();
             }
         }
     };
@@ -118,6 +144,7 @@ public class ModLedControl {
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(ActiveScreenActivity.ACTION_ACTIVE_SCREEN_CHANGED);
                         intentFilter.addAction(Intent.ACTION_USER_PRESENT);
+                        intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                         toggleActiveScreenFeature(mPrefs.getBoolean(
@@ -173,6 +200,8 @@ public class ModLedControl {
                 int id = (Integer) param.args[1];
                 Notification n = (Notification) param.args[2];
 
+                final QuietHours quietHours = new QuietHours(mPrefs);
+
                 final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                 final String pkgName = context.getPackageName();
 
@@ -182,43 +211,56 @@ public class ModLedControl {
                 if (!ls.getEnabled()) {
                     // use default settings in case they are active
                     ls = LedSettings.deserialize(mPrefs.getStringSet("default", null));
-                    if (!ls.getEnabled()) {
+                    if (!ls.getEnabled() && !quietHours.quietHoursActive()) {
                         return;
                     }
                 }
                 if (DEBUG) log(pkgName + ": " + ls.toString());
 
                 if (((n.flags & Notification.FLAG_ONGOING_EVENT) == Notification.FLAG_ONGOING_EVENT) &&
-                        !ls.getOngoing()) {
+                        !ls.getOngoing() && !quietHours.quietHoursActive()) {
                     if (DEBUG) log("Ongoing led control disabled. Forcing LED Off");
                     return;
                 }
 
                 // lights
                 n.defaults &= ~Notification.DEFAULT_LIGHTS;
-                n.flags |= Notification.FLAG_SHOW_LIGHTS;
-                n.ledOnMS = ls.getLedOnMs();
-                n.ledOffMS = ls.getLedOffMs();
-                n.ledARGB = ls.getColor();
+                if (quietHours.quietHoursActiveIncludingLED()) {
+                    n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
+                } else {
+                    n.flags |= Notification.FLAG_SHOW_LIGHTS;
+                    n.ledOnMS = ls.getLedOnMs();
+                    n.ledOffMS = ls.getLedOffMs();
+                    n.ledARGB = ls.getColor();
+                }
 
                 // sound
-                if (ls.getSoundOverride()) {
+                if (quietHours.quietHoursActive()) {
                     n.defaults &= ~Notification.DEFAULT_SOUND;
-                    n.sound = ls.getSoundUri();
-                }
-                if (ls.getSoundOnlyOnce()) {
-                    n.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
-                } else {
-                    n.flags &= ~Notification.FLAG_ONLY_ALERT_ONCE;
-                }
-                if (ls.getInsistent()) {
-                    n.flags |= Notification.FLAG_INSISTENT;
-                } else {
+                    n.sound = null;
                     n.flags &= ~Notification.FLAG_INSISTENT;
+                } else {
+                    if (ls.getSoundOverride()) {
+                        n.defaults &= ~Notification.DEFAULT_SOUND;
+                        n.sound = ls.getSoundUri();
+                    }
+                    if (ls.getSoundOnlyOnce()) {
+                        n.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
+                    } else {
+                        n.flags &= ~Notification.FLAG_ONLY_ALERT_ONCE;
+                    }
+                    if (ls.getInsistent()) {
+                        n.flags |= Notification.FLAG_INSISTENT;
+                    } else {
+                        n.flags &= ~Notification.FLAG_INSISTENT;
+                    }
                 }
 
                 // vibration
-                if (ls.getVibrateOverride() && ls.getVibratePattern() != null) {
+                if (quietHours.quietHoursActive()) {
+                    n.defaults &= ~Notification.DEFAULT_VIBRATE;
+                    n.vibrate = new long[] {0};
+                } else if (ls.getVibrateOverride() && ls.getVibratePattern() != null) {
                     n.defaults &= ~Notification.DEFAULT_VIBRATE;
                     n.vibrate = ls.getVibratePattern();
                 }
@@ -234,6 +276,9 @@ public class ModLedControl {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             if (mPm != null && !mPm.isScreenOn() && !mScreenCovered && mKm.isKeyguardLocked()) {
+                final QuietHours quietHours = new QuietHours(mPrefs);
+                if(quietHours.quietHoursActive()) return;
+
                 final String pkgName = (String) param.args[0];
                 LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
                 if (!ls.getEnabled()) {
