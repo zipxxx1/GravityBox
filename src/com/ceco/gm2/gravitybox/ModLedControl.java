@@ -17,6 +17,7 @@ package com.ceco.gm2.gravitybox;
 
 import com.ceco.gm2.gravitybox.ledcontrol.ActiveScreenActivity;
 import com.ceco.gm2.gravitybox.ledcontrol.LedSettings;
+import com.ceco.gm2.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
 
 import android.app.KeyguardManager;
@@ -219,15 +220,16 @@ public class ModLedControl {
 
                 if (((n.flags & Notification.FLAG_ONGOING_EVENT) == Notification.FLAG_ONGOING_EVENT) &&
                         !ls.getOngoing() && !quietHours.quietHoursActive()) {
-                    if (DEBUG) log("Ongoing led control disabled. Forcing LED Off");
+                    if (DEBUG) log("Ongoing led control disabled. Ignoring.");
                     return;
                 }
 
                 // lights
-                n.defaults &= ~Notification.DEFAULT_LIGHTS;
-                if (quietHours.quietHoursActiveIncludingLED()) {
+                if (quietHours.quietHoursActiveIncludingLED() || ls.getLedMode() == LedMode.OFF) {
+                    n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
-                } else {
+                } else if (ls.getLedMode() == LedMode.OVERRIDE) {
+                    n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags |= Notification.FLAG_SHOW_LIGHTS;
                     n.ledOnMS = ls.getLedOnMs();
                     n.ledOffMS = ls.getLedOffMs();
