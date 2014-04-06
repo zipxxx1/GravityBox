@@ -49,7 +49,7 @@
     <string name="poweroff_recovery">Recovery</string>    
     <string name="poweroff_bootloader">Bootloader</string>
 
-    <string name="vol_key_cursor_control_title">Tombol volume mengontol kursor</string>
+    <string name="vol_key_cursor_control_title">Tombol volume mengontrol kursor</string>
     <string name="vol_key_cursor_control_summary">Kontrol kursor menggunakan tombol volume saat mengetik</string>
     <string name="vol_key_cursor_control_off">Dimatikan</string>
     <string name="vol_key_cursor_control_on">Volume atas/bawah menggerakkan kursor ke kiri/kanan</string>
@@ -58,18 +58,18 @@
     <string name="recents_clear_all_title">Bersihkan semua tugas baru</string>
 
     <string name="fix_datetime_crash_title">Perbaiki crash pengaturan Tanggal&amp;Waktu</string>
-    <string name="fix_datetime_crash_summary">Hidupkan jika anda mengalami crash ketika masuk ke pengaturan Tanggal&amp;Waktu (membutuhkan reboot)</string>
+    <string name="fix_datetime_crash_summary">Hidupkan jika anda mengalami crash ketika masuk ke pengaturan Tanggal&amp;Waktu (membutuhkan restart)</string>
 
     <string name="fix_caller_id_phone_title">Perbaiki caller ID pada telepon</string>
-    <string name="fix_caller_id_phone_summary">Hidupkan jika kontak anda tidak cocok ketika menerima panggilan (membutuhkan reboot)</string>
+    <string name="fix_caller_id_phone_summary">Hidupkan jika kontak anda tidak cocok ketika menerima panggilan (membutuhkan restart)</string>
     <string name="fix_caller_id_phone_alert">Setelah reboot, harap bersihkan data dan mengisi ulang kontak ada agar perubahan bisa berjalan! Masuk ke Pengaturan / Aplikasi / Semua - untuk membersihkan data Contacts provider.</string>
 
     <string name="fix_caller_id_mms_title">Perbaiki caller ID pada pesan</string>
-    <string name="fix_caller_id_mms_summary">Hidupkan jika anda mengalami percakapan yang terpisah-pisah untuk 1 kontak yang sama (membutuhkan reboot)</string>
+    <string name="fix_caller_id_mms_summary">Hidupkan jika anda mengalami percakapan yang terpisah-pisah untuk 1 kontak yang sama (membutuhkan restart)</string>
     <string name="fix_caller_id_mms_alert">Setelah reboot, harap hapus semua percakapan yang terpisah-pisah di aplikasi perpesanan agar perubahan bisa berjalan!</string>
 
     <string name="fix_calendar_title">Perbaiki aplikasi kalender</string>
-    <string name="fix_calendar_summary">Hidupkan jika anda mengalami layar yang hidup sendiri secara berkala (membutuhkan reboot)</string>
+    <string name="fix_calendar_summary">Hidupkan jika anda mengalami layar yang hidup sendiri secara berkala (membutuhkan restart)</string>
 
     <string name="important">Penting</string>
 
@@ -151,11 +151,11 @@
 
     <!--  Fix speech settings -->
     <string name="fix_tts_settings_title">Perbaiki pengaturan bicara</string>
-    <string name="fix_tts_settings_summary">Membuka kunci pengaturan pencarian suara dan text-to-speech di pengaturan Bahasa&amp;Masukan (membutuhkan reboot)</string>
+    <string name="fix_tts_settings_summary">Membuka kunci pengaturan pencarian suara dan text-to-speech di pengaturan Bahasa&amp;Masukan (membutuhkan restart)</string>
 
     <!--  Advanced developer options -->
     <string name="fix_dev_opts_title">Opsi pengembang tingkat lanjut</string>
-    <string name="fix_dev_opts_summary">Membuka kunci opsi pengembang tingkat lanjut (membutuhkan reboot)</string>
+    <string name="fix_dev_opts_summary">Membuka kunci opsi pengembang tingkat lanjut (membutuhkan restart)</string>
 
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Tweak statusbar</string>
@@ -219,7 +219,7 @@
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">Nilai kecerahan minimal</string>
-    <string name="pref_brightness_min_summary">Membolehkan anda untuk men-set nilai minimal kecerahan layar. Berjalan hanya untuk pengaturan kecerahan manual. (membutuhkan reboot)</string>
+    <string name="pref_brightness_min_summary">Membolehkan anda untuk men-set nilai minimal kecerahan layar. Berjalan hanya untuk pengaturan kecerahan manual. (membutuhkan restart)</string>
 
     <!--  Autobrightness levels -->
     <string name="pref_ab_title">Level Autobrightness</string>
@@ -243,11 +243,11 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Hidupkan tombol menu</string>
-    <string name="pref_lockscreen_menu_key_summary">Membolehkan tombol menu digunakan untuk membuka kunci secara cepat ketika di lockscreen (membutuhkan reboot)</string>
+    <string name="pref_lockscreen_menu_key_summary">Membolehkan tombol menu digunakan untuk membuka kunci secara cepat ketika di lockscreen (membutuhkan restart)</string>
 
     <!-- Fix messaging wakelock -->
     <string name="pref_mms_fix_wakelock_title">Perbaiki wakelock perpesanan</string>
-    <string name="pref_mms_fix_wakelock_summary">Menghindari hidupnya layar ketika ada pesan baru yang datang (membutuhkan reboot)</string>
+    <string name="pref_mms_fix_wakelock_summary">Menghindari hidupnya layar ketika ada pesan baru yang datang (membutuhkan restart)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Jam di tengah</string>
@@ -258,7 +258,7 @@
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">Tambahkan jarak volume musik</string>
-    <string name="pref_music_volume_steps_summary">Menambahkan jarak volume untuk alur musik (membutuhkan reboot)</string>
+    <string name="pref_music_volume_steps_summary">Menambahkan jarak volume untuk alur musik (membutuhkan restart)</string>
 
     <!-- Safe headset media volume -->
     <string name="pref_safe_media_volume_title">Volume media yang aman untuk headset</string>
@@ -304,7 +304,7 @@
 
     <!--  Solid black Holo background -->
     <string name="pref_holo_bg_solid_black_title">Latar belakang hitam</string>
-    <string name="pref_holo_bg_solid_black_summary">Gunakan warna hitam sebagai latar belakang menggantikan gradiasi abu-abu sebagai latar belakang sistem Holo (membutuhkan reboot)</string>
+    <string name="pref_holo_bg_solid_black_summary">Gunakan warna hitam sebagai latar belakang menggantikan gradiasi abu-abu sebagai latar belakang sistem Holo (membutuhkan restart)</string>
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Kotak perbaris</string>
@@ -546,7 +546,7 @@
     <string name="pref_navbar_override_title">Acuhkan aturan bawaan sistem</string>
     <string name="pref_navbar_override_summary">Hidup/Matikan tweak navigation bar (membutuhkan restart)</string>
     <string name="pref_navbar_enable_title">Hidupkan navigation bar</string>
-    <string name="pref_navbar_enable_summary">Membutuhkan reboot</string>
+    <string name="pref_navbar_enable_summary">membutuhkan restart</string>
     <string name="pref_navbar_height_title">Tinggi navigation bar</string>
     <string name="pref_navbar_height_summary">Berlaku untuk orientasi potret/berdiri dan navigation bar horizontal</string>
     <string name="pref_navbar_height_landscape_summary">Berlaku untuk navigation bar horizontal dan orientasi lanskap/tidur</string>
@@ -1082,7 +1082,7 @@
 
     <!-- Pulse notification delay -->
     <string name="pref_pulse_notification_delay_title">Jeda denyutan notifikasi</string>
-    <string name="pref_pulse_notification_delay_summary">Membutuhkan reboot</string>
+    <string name="pref_pulse_notification_delay_summary">membutuhkan restart</string>
 
     <!--  Clear recents modes -->
     <string name="pref_clear_recents_mode_title">Kelakuan ketika membersihkan semua tugas</string>
@@ -1401,5 +1401,11 @@
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Fitur ini masih dalam masa percobaan. Jika anda menemukan bahwa fitur ini berguna, anda bisa melanjutkan menggunakan fitur ini setelah mendaftarkan 
         ID transaksi donasi PayPal anda. Periode percobaannya berakhir setelah %d restart.</string>
+
+    <!-- Notification control: default settings -->
+    <string name="lc_activity_menu_default_settings">Pengaturan Bawaan</string>
+    <string name="pref_lc_default_settings_summary">Ketika dihidupkan, pengaturan bawaan akan dihidupkan untuk aplikasi yang tidak memiliki pengaturan khusus yang sedang aktif</string>
+    <string name="lc_defaults_apply">Pengaturan bawaan berlaku</string>
+    <string name="lc_settings_menu_reset">Kembalikan ke bawaan</string>
 
 </resources>
