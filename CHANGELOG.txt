@@ -1,3 +1,41 @@
+Changelog 3.0.2 - 08/04/2014
+--------------------------------------
+- Ultimate Notification Control extended:
+--- Implemented default settings:
+------ when enabled, all apps that have no active explicit settings will automatically use default settings
+--- Active Screen:
+------ automatically turns on screen every time new notification arrives
+------ optionally expands notification panel automatically
+------ takes into account whether device is in the pocket or case
+------ master switch + configuration on per-app basis
+--- Quiet hours:
+------ mutes sounds/vibrations for all notifications arriving within defined time range
+------ optionally mutes LED (won't pulse when notification arrives)
+------ mutes also GB's charger plugged/unplugged/battery charged sounds
+--- More control over LED settings:
+------ allows preserving original LED settings coming from a particular app
+------ allows overriding LED settings to provide custom behavior
+------ allows turning LED off for a particular app
+- Power Menu:
+--- improved detection of airplane mode icon color for new icons coloring purposes (thanks to bgcngm)
+- Statusbar signal cluster view:
+--- fixed broken mobile icons on some MTK devices (thanks to bgcngm)
+- Updated French translation (thanks to ch-vox)
+- Updated Japanese translation (thanks to WedyDQ10)
+- Updated Spanish translation (thanks to jvbferrer)
+- Updated Russian translation (thanks to gaich)
+- Updated Chinese (Simplified) translation (thanks to liveasx)
+- Updated Chinese (Traditional) translation (thanks to momomok)
+- Updated Polish translation (thanks to xtrem007)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Italian translation (thanks to pesa1234)
+- Updated Dutch translation (thanks to Martinusbe)
+- Updated German translation (thanks to Minty123, LibertyMarine)
+- Updated Hungarian translation (thanks to benjoe1)
+- Updated Indonesian translation (thanks to awaaas)
+- Updated Ukranian translation (thanks to Vavooon)
+- Updated Slovak and Czech translations
+
 Changelog 3.0.1 - 01/04/2014
 --------------------------------------
 - Power Menu: graphical UI optimization (thanks to bgcngm)
