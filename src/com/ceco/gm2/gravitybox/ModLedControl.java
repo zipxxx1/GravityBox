@@ -202,7 +202,6 @@ public class ModLedControl {
                 Notification n = (Notification) param.args[2];
 
                 final QuietHours quietHours = new QuietHours(mPrefs);
-
                 final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                 final String pkgName = context.getPackageName();
 
@@ -225,10 +224,11 @@ public class ModLedControl {
                 }
 
                 // lights
-                if (quietHours.quietHoursActiveIncludingLED() || ls.getLedMode() == LedMode.OFF) {
+                if (quietHours.quietHoursActiveIncludingLED() || 
+                        (ls.getEnabled() && ls.getLedMode() == LedMode.OFF)) {
                     n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
-                } else if (ls.getLedMode() == LedMode.OVERRIDE) {
+                } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE) {
                     n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags |= Notification.FLAG_SHOW_LIGHTS;
                     n.ledOnMS = ls.getLedOnMs();
