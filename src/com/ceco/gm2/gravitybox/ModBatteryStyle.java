@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Build;
 import android.provider.Settings;
 import android.view.Gravity;
@@ -95,6 +96,12 @@ public class ModBatteryStyle {
                     mPercentText.setChargingStyle(chargingStyle);
                     if (DEBUG) log("PercentText charging style changed to: " + chargingStyle);
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_CHARGING_COLOR)) {
+                    int chargingColor = intent.getIntExtra(
+                            GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_CHARGING_COLOR, Color.GREEN);
+                    mPercentText.setChargingColor(chargingColor);
+                    if (DEBUG) log("PercentText charging color changed to: " + chargingColor);
+                }
             } else if (intent.getAction().equals(ACTION_MTK_BATTERY_PERCENTAGE_SWITCH)) {
                 mMtkPercentTextEnabled = intent.getIntExtra(EXTRA_MTK_BATTERY_PERCENTAGE_STATE, 0) == 1;
                 mPrefs.reload();
@@ -163,6 +170,8 @@ public class ModBatteryStyle {
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
                     mPercentText.setChargingStyle(Integer.valueOf(prefs.getString(
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING, "0")));
+                    mPercentText.setChargingColor(prefs.getInt(
+                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING_COLOR, Color.GREEN));
                     ModStatusbarColor.registerIconManagerListener(mPercentText);
 
                     // GM2 specific - if there's already view with id "circle_battery", remove it
