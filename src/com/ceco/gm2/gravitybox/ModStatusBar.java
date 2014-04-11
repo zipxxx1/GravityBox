@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.gm2.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
+import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -332,6 +333,11 @@ public class ModStatusBar {
                     setClockPosition(prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_STATUSBAR_CENTER_CLOCK, false));
 
+                    // inject Quiet Hours view
+                    StatusbarQuietHoursView qhv = new StatusbarQuietHoursView(liparam.view.getContext());
+                    mIconArea.addView(qhv, 0);
+                    mBroadcastSubReceivers.add(qhv);
+
                     // MTK Dual SIMs: reduce space between wifi and signal icons
                     if (Utils.hasGeminiSupport()) {
                         final int scvResId = liparam.res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
@@ -476,6 +482,8 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER_TEXT_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER2_TEXT_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DT2S_CHANGED);
+                    intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
+                    intentFilter.addAction(Intent.ACTION_TIME_TICK);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
