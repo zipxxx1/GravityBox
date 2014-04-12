@@ -15,6 +15,8 @@
 
 package com.ceco.gm2.gravitybox;
 
+import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
+
 import java.util.ArrayList;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -138,7 +140,7 @@ public class BatteryInfoManager {
     }
 
     private boolean quietHoursActive() {
-        ModLedControl.QuietHours qh = new ModLedControl.QuietHours(
+        QuietHours qh = new QuietHours(
                 new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol"));
         return qh.quietHoursActive();
     }
