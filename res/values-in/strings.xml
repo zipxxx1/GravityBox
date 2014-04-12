@@ -147,7 +147,7 @@
 
     <!--  Statusbar background color -->
     <string name="statusbar_bgcolor_title">Warna latar Statusbar</string>
-    <string name="statusbar_bgcolor_summary">Membolehkan untuk men-set warna latar statusbar</string>
+    <string name="statusbar_bgcolor_summary">Membolehkan untuk menetapkan warna latar statusbar</string>
 
     <!--  Fix speech settings -->
     <string name="fix_tts_settings_title">Perbaiki pengaturan bicara</string>
@@ -184,7 +184,7 @@
 
     <!-- Dual SIM ringer -->
     <string name="dual_sim_ringer_title">Dual SIM Ringer</string>
-    <string name="dual_sim_ringer_summary">Membuka aplikasi yang membolehkan anda untuk men-set suara ringtone dan notifikasi berbeda untuk masing-masing SIM</string>
+    <string name="dual_sim_ringer_summary">Membuka aplikasi yang membolehkan anda untuk mengatur suara ringtone dan notifikasi berbeda untuk masing-masing SIM</string>
 
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">Tweak Lockscreen </string>
@@ -196,9 +196,9 @@
     <string name="lockscreen_bg_image">Gambar kustom</string>
     <string name="lockscreen_bg_last_screen">Layar terakhir</string>
     <string name="pref_lockscreen_bg_color_title">Tentukan warna kustom</string>
-    <string name="pref_lockscreen_bg_color_summary">Membolehkan anda untuk men-set warna kustom sebagai latar belakang Lockscreen</string>
+    <string name="pref_lockscreen_bg_color_summary">Membolehkan anda untuk menetapkan warna kustom sebagai latar belakang Lockscreen</string>
     <string name="pref_lockscreen_bg_image_title">Tentukan gambar kustom</string>
-    <string name="pref_lockscreen_bg_image_summary">Membolehkan anda untuk men-set gambar kustom sebagai latar belakang Lockscreen</string>
+    <string name="pref_lockscreen_bg_image_summary">Membolehkan anda untuk menetapkan gambar kustom sebagai latar belakang Lockscreen</string>
     <string name="lockscreen_background_result_successful">Latar belakang telah diganti</string>
     <string name="lockscreen_background_result_not_successful">Latar belakang tidak diganti</string>
     <string name="pref_cat_lockscreen_other_title">Lainnya</string>
@@ -219,16 +219,16 @@
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">Nilai kecerahan minimal</string>
-    <string name="pref_brightness_min_summary">Membolehkan anda untuk men-set nilai minimal kecerahan layar. Berjalan hanya untuk pengaturan kecerahan manual. (membutuhkan restart)</string>
+    <string name="pref_brightness_min_summary">Membolehkan anda untuk mengatur nilai minimal kecerahan layar. Berjalan hanya untuk pengaturan kecerahan manual. (membutuhkan restart)</string>
 
     <!--  Autobrightness levels -->
     <string name="pref_ab_title">Level Autobrightness</string>
-    <string name="pref_ab_summary">Membolehkan anda untuk men-set nilai level cahaya ambien dan cahaya latar LCD yang terkai</string>
+    <string name="pref_ab_summary">Membolehkan anda untuk mengatur nilai level cahaya ambien dan cahaya latar LCD yang terkai</string>
     <string name="level">Level</string>
     <string name="pref_ab_lux_max_label">Lux max</string>
     <string name="pref_ab_brighness_label">Kecerahan (%d &#8211; 255)</string>
     <string name="pref_ab_number_error_general">Nomor yang dimasukkan tidak valid</string>
-    <string name="pref_ab_brightness_too_low">Tidak direkomendasikan untuk men-set nilai kecerahan di bawah %d</string>
+    <string name="pref_ab_brightness_too_low">Tidak direkomendasikan untuk menetapkan nilai kecerahan di bawah %d</string>
     <string name="pref_ab_brightness_too_high">Kecerahan tidak dapat berada diatas 255</string>
     <string name="pref_ab_number_error_negative">Nilai tidak boleh sama dengan nol</string>
     <string name="pref_ab_number_not_ascending">Nilai yang berada di level bawah tidak boleh lebih tinggi dari level di atasnya</string>
@@ -270,7 +270,7 @@
 
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Aksi tombol fisik</string>
-    <string name="pref_cat_hwkey_actions_summary">Membolehkan anda untuk men-set aksi kustom pada tombol fisik</string>
+    <string name="pref_cat_hwkey_actions_summary">Membolehkan anda untuk mengatur aksi kustom pada tombol fisik</string>
     <string name="hwkey_menu_longpress_dialog_title">Aksi tombol menu ketika ditahan</string>
     <string name="hwkey_menu_doubletap_dialog_title">Aksi tombol menu ketika ditekan dua kali (Double-tap)</string>
     <string name="hwkey_back_longpress_dialog_title">Aksi tombol kembali ketika ditahan</string>
@@ -315,7 +315,7 @@
 
     <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">Panel volume yang bisa dibuka</string>
-    <string name="pref_volume_panel_expandable_summary">Menghidupkan panel volume yang bisa dibuka dengan kemampuan untuk men-set volume-volume dengan alur yang berbeda</string>
+    <string name="pref_volume_panel_expandable_summary">Menghidupkan panel volume yang bisa dibuka dengan kemampuan untuk mengatur volume-volume dengan alur yang berbeda</string>
 
     <!-- Fully expandable volume panel -->
     <string name="pref_volume_panel_expandable_fully_title">Panel volume yang bisa dibuka secara penuh</string>
@@ -323,7 +323,7 @@
 
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Gabungkan alur ringtone &amp; notifikasi</string>
-    <string name="pref_link_volumes_summary">Ketika dimatikan, alur volume untuk ringtone dan notifikasi bisa di set secara independen</string>
+    <string name="pref_link_volumes_summary">Ketika dimatikan, alur volume untuk ringtone dan notifikasi bisa di atur secara independen</string>
 
     <!-- Auto-switch QuickSettings -->
     <string name="pref_auto_switch_qs_title">Otomatis berpindah ke QuickSettings</string>
@@ -344,11 +344,11 @@
 
     <!-- Statusbar icon color -->
     <string name="pref_statusbar_icon_color_title">Warna ikon Statusbar</string>
-    <string name="pref_statusbar_icon_color_summary">Men-set warna untuk ikon statusbar dan jam</string>
+    <string name="pref_statusbar_icon_color_summary">Atur warna untuk ikon statusbar dan jam</string>
 
     <!-- Statusbar data activity color -->
     <string name="pref_statusbar_data_activity_color_title">Warna aktivitas paket data</string>
-    <string name="pref_statusbar_data_activity_color_summary">Men-set warna untuk indikator aktivitas paket data</string>
+    <string name="pref_statusbar_data_activity_color_summary">Atur warna untuk indikator aktivitas paket data</string>
 
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">Manajemen QuickSettings</string>
@@ -361,9 +361,9 @@
     <string name="notif_background_default">Latar belakang asli</string>
     <string name="notif_background_color_fill">Warna</string>
     <string name="notif_background_custom_image">Gambar kustom</string>
-    <string name="pref_notif_color_title">Set Warna latar belakang</string>
-    <string name="pref_notif_image_portrait_title">Set gambar posisi berdiri</string>
-    <string name="pref_notif_image_landscape_title">Set gambar posisi lanskap</string>
+    <string name="pref_notif_color_title">Tetapkan Warna latar belakang</string>
+    <string name="pref_notif_image_portrait_title">Tetapkan gambar posisi berdiri</string>
+    <string name="pref_notif_image_landscape_title">Tetapkan gambar posisi lanskap</string>
     <string name="pref_notif_background_alpha_title">Transparansi latar belakang</string>
     <string name="pref_notif_color_mode_title">Mode latar belakang</string>
     <string name="color_fill_overlay">Melapisi</string>
@@ -789,7 +789,7 @@
     <string name="pref_statusbar_icon_color_secondary_title">Warna sinyal kedua</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Merubah warna sinyal oranye</string>
     <string name="pref_statusbar_data_activity_color_secondary_title">Warna aktifitas data kedua</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">Men-set warna untuk indikator lalu-lintas data kedua</string>
+    <string name="pref_statusbar_data_activity_color_secondary_summary">Atur warna untuk indikator lalu-lintas data kedua</string>
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Gaya ikon status</string>
@@ -1407,5 +1407,40 @@
     <string name="pref_lc_default_settings_summary">Ketika dihidupkan, pengaturan bawaan akan dihidupkan untuk aplikasi yang tidak memiliki pengaturan khusus yang sedang aktif</string>
     <string name="lc_defaults_apply">Pengaturan bawaan berlaku</string>
     <string name="lc_settings_menu_reset">Kembalikan ke bawaan</string>
+
+    <!-- Notification control: Active screen -->
+    <string name="lc_active_screen">Layar Aktif</string>
+    <string name="lc_active_screen_info">Fitur Layar Aktif akan secara otomatis menghidupkan layar setiap 
+        kali ada notifikasi baru yang tiba. Hal ini akan terjadi hanya jika layarnya tidak tertutupi 
+        (mis. ketika perangkat tidak berada di kantong). Fitur ini secara opsional akan membuka panel notifikasi bergantung pada 
+        pengaturan keamanan lockscreen dan pengaturan pengguna saat ini. Harap diketahui bahwa Layar Aktif membutuhkan lockscreen
+        untuk dihidupkan.\nTombol di bawah ini adalah tombol utamanya. Setelah dihidupkan, 
+        pengaturan tambahan dapat diterapkan untuk masing-masing aplikasi</string>
+    <string name="lc_active_screen_switch_title">Hidupkan Layar Aktif</string>
+    <string name="lc_expand_notification_panel_title">Buka panel notifikasi</string>
+    <string name="lc_expand_notification_panel_summary">Secara otomatis membuka panel notifikasi ketika layar dihidupkan 
+        (apabila dijinkan oleh pengaturan keamanan lockscreen saat ini)</string>
+
+    <!-- Notification control: Quiet hours -->
+    <string name="lc_quiet_hours">Jam tenang</string>
+    <string name="pref_lc_qh_enabled_title">Hidupkan jam tenang</string>
+    <string name="pref_lc_qh_enabled_summary">Mematikan suara/getaran dan juga LED secara opsional untuk 
+        semua notifikasi dalam rentang waktu yang ditentukan</string>
+    <string name="pref_lc_qh_start_title">Waktu mulai</string>
+    <string name="pref_lc_qh_end_title">Waktu berakhir</string>
+    <string name="pref_lc_qh_mute_led_title">Matikan lampu</string>
+
+    <!-- Notification control: LED mode -->
+    <string name="pref_lc_led_mode_title">Mode LED</string>
+    <string name="lc_led_mode_original">Orisinal (dari aplikasi)</string>
+    <string name="lc_led_mode_override">Paksakan</string>
+    <string name="lc_led_mode_off">Matikan (tanpa lampu)</string>
+
+    <!-- Notification control: Quiet hours statusbar icon -->
+    <string name="pref_lc_qh_statusbar_icon_title">Ikon Statusbar</string>
+    <string name="pref_lc_qh_statusbar_icon_summary">Tunjukkan ikon di Statusbar ketika jam tenang</string>
+
+    <!-- Battey percent text: charging color -->
+    <string name="battery_percent_text_charging_color_title">Warna pengisian daya</string>
 
 </resources>
