@@ -1451,4 +1451,7 @@
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Couleur durant la charge</string>
 
+    <!-- Force English locale -->
+    <string name="pref_force_english_locale_title">Forcer la localisation en anglais</string>
+
 </resources>
