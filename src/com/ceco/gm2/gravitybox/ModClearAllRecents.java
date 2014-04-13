@@ -296,6 +296,13 @@ public class ModClearAllRecents {
 
     private static XC_MethodHook updateRambarHook = new XC_MethodHook() {
         @Override
+        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+            if (XposedHelpers.getObjectField(param.thisObject, "mRecentTaskDescriptions") == null ||
+                    XposedHelpers.getObjectField(param.thisObject, "mRecentTasksLoader") == null) {
+                param.setResult(null);
+            }
+        }
+        @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             if (mRamUsageBar != null && mRamUsageBar.getVisibility() == View.VISIBLE && mHandler != null) {
                 mHandler.post(updateRamBarTask);
