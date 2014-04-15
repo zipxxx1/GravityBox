@@ -818,6 +818,10 @@
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">LTE Netzmodus erlauben</string>
 
+    <!-- Disable data network type icons -->
+    <string name="pref_disable_data_network_type_icons_title">Indikatoren für Netzwerktyp deaktiveren</string>
+    <string name="pref_disable_data_network_type_icons_summary">Erlaubt das Deaktivieren der 3G/G Indikatoren bei den Signalbalken</string>
+
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Um Aktionen in der Statusleiste zu erlauben ist es nötig die Standardeinstellungen im Navigationsleisten-Menü anzupassen</string>
 
@@ -1413,5 +1417,19 @@
     <string name="lc_led_mode_original">Original (von App)</string>
     <string name="lc_led_mode_override">Überschreiben</string>
     <string name="lc_led_mode_off">Aus (Kein Licht)</string>
+
+    <!-- Notification control: Quiet hours statusbar icon -->
+    <string name="pref_lc_qh_statusbar_icon_title">Symbol in Statusleiste</string>
+    <string name="pref_lc_qh_statusbar_icon_summary">Symbol während Ruhestunden in Statusleiste anzeigen</string>
+
+    <!-- Battey percent text: charging color -->
+    <string name="battery_percent_text_charging_color_title">Aufladefarbe</string>
+
+    <!-- Notification control: Quiet hours for weekends-->
+    <string name="pref_lc_qh_cat_weekdays_title">Werktage</string>
+    <string name="pref_lc_qh_cat_weekend_title">Wochenende</string>
+
+    <!-- Force English locale -->
+    <string name="pref_force_english_locale_title">Englisch erzwingen</string>
 
 </resources>
