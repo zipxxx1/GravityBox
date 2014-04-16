@@ -87,7 +87,7 @@ public class ModAudio {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    if (context == null) {
+                    if (context != null) {
                         mHandleChangeVolume = new HandleChangeVolume(context);
                         XposedHelpers.findAndHookMethod(classAudioService, "adjustMasterVolume", 
                                 int.class, int.class, mHandleChangeVolume);
