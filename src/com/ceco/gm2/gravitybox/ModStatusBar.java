@@ -29,7 +29,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LayoutInflated;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
-import de.robv.android.xposed.callbacks.XC_LayoutInflated.LayoutInflatedParam;
 import android.app.Notification;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -335,7 +334,7 @@ public class ModStatusBar {
 
                     // inject Quiet Hours view
                     StatusbarQuietHoursView qhv = new StatusbarQuietHoursView(liparam.view.getContext());
-                    mIconArea.addView(qhv, 0);
+                    mIconArea.addView(qhv, Build.VERSION.SDK_INT > 16 ? 0 : 1);
                     mBroadcastSubReceivers.add(qhv);
 
                     // MTK Dual SIMs: reduce space between wifi and signal icons
@@ -940,7 +939,8 @@ public class ModStatusBar {
                         if (mClockInSbContents && mSbContents != null) {
                             mSbContents.addView(mTrafficMeter);
                         } else if (mIconArea != null) {
-                            mIconArea.addView(mTrafficMeter, 0);
+                            mIconArea.addView(mTrafficMeter,
+                                    Build.VERSION.SDK_INT > 16 ? 0 : 1);
                         }
                     } else if (mLayoutClock != null) {
                         mLayoutClock.addView(mTrafficMeter);
