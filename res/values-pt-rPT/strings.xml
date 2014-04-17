@@ -1441,4 +1441,7 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Forçar idioma Inglês</string>
 
+    <!-- VolumePanel transparency -->
+    <string name="pref_volume_panel_transparency_title">Transparência do painel de volume</string>
+
 </resources>
