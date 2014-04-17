@@ -1,3 +1,16 @@
+Changelog 3.0.4 - 17/04/2014
+--------------------------------------
+- Media tweaks:
+--- fixed bug affecting safe media, volume orientation switcher and force music control options (thanks to bgcngm)
+--- option for adjusting volume panel transparency
+- StatusBar:
+--- fixed data traffic monitor positioning on Android 4.1 (thanks to Mr.Its for testing)
+--- fixed Quiet hours statusbar icon to match JellyBean theme
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Slovak and Czech translations
+- Updated Italian translations (thanks to pesa1234)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+
 Changelog 3.0.3 - 15/04/2014
 --------------------------------------
 - Ultimate Notification Control:
