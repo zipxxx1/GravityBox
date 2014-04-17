@@ -94,6 +94,8 @@ public class StatusbarQuietHoursView extends ImageView implements BroadcastSubRe
 
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
+        if (mDrawables == null) return;
+
         if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0 ||
                 (flags & StatusBarIconManager.FLAG_ICON_STYLE_CHANGED) != 0) {
             int index = colorInfo.coloringEnabled ? colorInfo.iconStyle : 2;
