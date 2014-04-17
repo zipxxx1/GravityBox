@@ -1404,4 +1404,7 @@
     <string name="lc_led_mode_override">Vlastní</string>
     <string name="lc_led_mode_off">Vypnuto</string>
 
+    <!-- VolumePanel transparency -->
+    <string name="pref_volume_panel_transparency_title">Průhlednost panelu hlasitosti</string>
+
 </resources>
