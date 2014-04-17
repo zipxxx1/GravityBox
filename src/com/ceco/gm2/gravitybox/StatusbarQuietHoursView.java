@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ public class StatusbarQuietHoursView extends ImageView implements BroadcastSubRe
 
     private XSharedPreferences mPrefs;
     private QuietHours mQuietHours;
+    private Drawable[] mDrawables;
 
     public StatusbarQuietHoursView(Context context) {
         super(context);
@@ -53,7 +55,10 @@ public class StatusbarQuietHoursView extends ImageView implements BroadcastSubRe
                 mQuietHours = new QuietHours(mPrefs);
             }
             Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
-            setImageDrawable(gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours));
+            mDrawables = new Drawable[3];
+            mDrawables[0] = gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours_jb);
+            mDrawables[1] = gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours_kk);
+            mDrawables[2] = gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -89,7 +94,10 @@ public class StatusbarQuietHoursView extends ImageView implements BroadcastSubRe
 
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
+        if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0 ||
+                (flags & StatusBarIconManager.FLAG_ICON_STYLE_CHANGED) != 0) {
+            int index = colorInfo.coloringEnabled ? colorInfo.iconStyle : 2;
+            setImageDrawable(mDrawables[index]);
             if (colorInfo.coloringEnabled) {
                 setColorFilter(colorInfo.iconColor[0], PorterDuff.Mode.SRC_IN);
             } else {
