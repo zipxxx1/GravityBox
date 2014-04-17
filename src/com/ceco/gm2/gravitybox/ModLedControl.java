@@ -119,11 +119,13 @@ public class ModLedControl {
             XposedBridge.log(t);
         }
 
-        try {
-            XposedHelpers.findAndHookMethod(NotificationManager.class, "notifyAsUser",
-                    String.class, int.class, Notification.class, CLASS_USER_HANDLE, notifyHook);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
+        if (Build.VERSION.SDK_INT > 16) {
+            try {
+                XposedHelpers.findAndHookMethod(NotificationManager.class, "notifyAsUser",
+                        String.class, int.class, Notification.class, CLASS_USER_HANDLE, notifyHook);
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
 
         try {
