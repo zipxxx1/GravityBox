@@ -1441,6 +1441,6 @@
     <string name="pref_lc_qh_cat_weekend_title">Weekend</string>
 
     <!-- Force English locale -->
-    <string name="pref_force_english_locale_title">Forza inglese</string>
+    <string name="pref_force_english_locale_title">Imposta gravitybox in inglese</string>
 
 </resources>
