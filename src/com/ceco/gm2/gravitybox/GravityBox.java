@@ -80,12 +80,13 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         if (Build.VERSION.SDK_INT > 16) {
             FixTraceFlood.initZygote();
             ModElectronBeam.initZygote(prefs);
-            if (!Utils.hasLenovoVibeUI())
+            if (!Utils.hasLenovoVibeUI()) {
                 ModLockscreen.initZygote(prefs);
 
-            // PermissionGranter init goes here because so far its only purpose
-            // is to grant permissions needed by QuickSettings camera tile
-            PermissionGranter.initZygote();
+                // PermissionGranter init goes here because so far its only purpose
+                // is to grant permissions needed by new QuickSettings custom tiles
+                PermissionGranter.initZygote();
+            }
         }
 
         // Common
@@ -125,7 +126,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             FixDevOptions.initPackageResources(prefs, resparam);
         }
 
-        if (Build.VERSION.SDK_INT > 16 &&
+        if (Build.VERSION.SDK_INT > 16 && !Utils.hasLenovoVibeUI() &&
                 resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
             ModQuickSettings.initResources(prefs, resparam);
         }
@@ -217,7 +218,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModCallCard.init(prefs, lpparam.classLoader);
         }
 
-        if (Build.VERSION.SDK_INT > 16 &&
+        if (Build.VERSION.SDK_INT > 16 && !Utils.hasLenovoVibeUI() &&
                 lpparam.packageName.equals(ModQuickSettings.PACKAGE_NAME) &&
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, true)) {
             ModQuickSettings.init(prefs, lpparam.classLoader);

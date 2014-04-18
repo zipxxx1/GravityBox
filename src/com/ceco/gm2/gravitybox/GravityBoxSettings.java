@@ -1476,6 +1476,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatQsTileSettings.removePreference(mPrefCatQsAlarmTileSettings);
             }
 
+            // Remove preferences not compatible with Lenovo VibeUI ROMs
+            if (Utils.hasLenovoVibeUI()) {
+                getPreferenceScreen().removePreference(mPrefCatLockscreen);
+                mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
+            }
+
             // Remove preferences not compatible with stock Sony Xperia ROMs
             if (Utils.isXperiaDevice()) {
                 mPrefCatStatusbarColors.removePreference(mStatusbarBgColor);
