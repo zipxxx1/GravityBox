@@ -16,13 +16,11 @@ package com.ceco.gm2.gravitybox;
 
 import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
+import com.ceco.gm2.gravitybox.StatusbarQuietHoursManager.QuietHoursListener;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
-import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
 
-import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -31,10 +29,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class StatusbarQuietHoursView extends ImageView implements BroadcastSubReceiver, IconManagerListener {
+public class StatusbarQuietHoursView extends ImageView implements IconManagerListener, QuietHoursListener {
 
-    private XSharedPreferences mPrefs;
     private QuietHours mQuietHours;
+    private StatusbarQuietHoursManager mManager;
     private Drawable[] mDrawables;
 
     public StatusbarQuietHoursView(Context context) {
@@ -49,11 +47,10 @@ public class StatusbarQuietHoursView extends ImageView implements BroadcastSubRe
         setLayoutParams(lParams);
         setScaleType(ImageView.ScaleType.CENTER);
 
+        mManager = StatusbarQuietHoursManager.getInstance(context);
+        mQuietHours = mManager.getQuietHours();
+
         try {
-            mPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
-            if (mPrefs != null) {
-                mQuietHours = new QuietHours(mPrefs);
-            }
             Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
             mDrawables = new Drawable[3];
             mDrawables[0] = gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours_jb);
@@ -70,26 +67,25 @@ public class StatusbarQuietHoursView extends ImageView implements BroadcastSubRe
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         ModStatusbarColor.registerIconManagerListener(this);
+        mManager.registerListener(this);
     }
 
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         ModStatusbarColor.unregisterIconManagerListener(this);
+        mManager.unregisterListener(this);
     }
 
     @Override
-    public void onBroadcastReceived(Context context, Intent intent) {
-        final String action = intent.getAction();
-        if(Intent.ACTION_TIME_TICK.equals(action)) {
-            updateVisibility();
-        } else if (QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED.equals(action)) {
-            if (mPrefs != null) {
-                mPrefs.reload();
-                mQuietHours = new QuietHours(mPrefs);
-            }
-            updateVisibility();
-        }
+    public void onQuietHoursChanged() {
+        mQuietHours = mManager.getQuietHours();
+        updateVisibility();
+    }
+
+    @Override
+    public void onTimeTick() {
+        updateVisibility();
     }
 
     @Override

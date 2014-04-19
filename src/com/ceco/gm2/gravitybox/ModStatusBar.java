@@ -335,7 +335,6 @@ public class ModStatusBar {
                     // inject Quiet Hours view
                     StatusbarQuietHoursView qhv = new StatusbarQuietHoursView(liparam.view.getContext());
                     mIconArea.addView(qhv, Build.VERSION.SDK_INT > 16 ? 0 : 1);
-                    mBroadcastSubReceivers.add(qhv);
 
                     // MTK Dual SIMs: reduce space between wifi and signal icons
                     if (Utils.hasGeminiSupport()) {
@@ -481,8 +480,6 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER_TEXT_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER2_TEXT_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DT2S_CHANGED);
-                    intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
-                    intentFilter.addAction(Intent.ACTION_TIME_TICK);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(

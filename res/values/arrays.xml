@@ -135,6 +135,7 @@
         <item>@string/qs_tile_usb_tethering</item>
         <item>@string/qs_tile_alarm</item>
         <item>@string/qs_tile_lock_screen</item>
+        <item>@string/lc_quiet_hours</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
@@ -172,6 +173,7 @@
         <item>usb_tether_tileview</item>
         <item>alarm_textview</item>
         <item>lock_screen_tileview</item>
+        <item>quiet_hours_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_entries" translatable="false">
@@ -205,6 +207,7 @@
         <item>@string/qs_tile_usb_tethering</item>
         <item>@string/qs_tile_alarm</item>
         <item>@string/qs_tile_lock_screen</item>
+        <item>@string/lc_quiet_hours</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_values" translatable="false">
@@ -238,6 +241,7 @@
         <item>usb_tether_tileview</item>
         <item>alarm_textview</item>
         <item>lock_screen_tileview</item>
+        <item>quiet_hours_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_override_entries" translatable="false">

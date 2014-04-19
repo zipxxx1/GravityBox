@@ -17,7 +17,6 @@ package com.ceco.gm2.gravitybox;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,6 +37,7 @@ import com.ceco.gm2.gravitybox.quicksettings.NetworkModeTile;
 import com.ceco.gm2.gravitybox.quicksettings.NfcTile;
 import com.ceco.gm2.gravitybox.quicksettings.QuickAppTile;
 import com.ceco.gm2.gravitybox.quicksettings.QuickRecordTile;
+import com.ceco.gm2.gravitybox.quicksettings.QuietHoursTile;
 import com.ceco.gm2.gravitybox.quicksettings.RingerModeTile;
 import com.ceco.gm2.gravitybox.quicksettings.ScreenshotTile;
 import com.ceco.gm2.gravitybox.quicksettings.SleepTile;
@@ -184,7 +184,8 @@ public class ModQuickSettings {
             R.id.usb_tether_tileview,
             R.id.quickapp_tileview_2,
             R.id.smart_radio_tileview,
-            R.id.lock_screen_tileview
+            R.id.lock_screen_tileview,
+            R.id.quiet_hours_tileview
         ));
         if (Utils.isMtkDevice()) {
             mCustomGbTileKeys.add(R.id.wifi_tileview);
@@ -732,6 +733,10 @@ public class ModQuickSettings {
                 LockScreenTile lsTile = new LockScreenTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 lsTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(lsTile);
+
+                QuietHoursTile qhTile = new QuietHoursTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                qhTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                mTiles.add(qhTile);
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {
