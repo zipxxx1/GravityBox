@@ -17,10 +17,11 @@ package com.ceco.gm2.gravitybox.ledcontrol;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import android.app.Notification;
+import android.content.SharedPreferences;
+
 import com.ceco.gm2.gravitybox.ModLedControl;
 import com.ceco.gm2.gravitybox.Utils;
-
-import de.robv.android.xposed.XSharedPreferences;
 
 public class QuietHours {
     public enum Mode { ON, OFF, AUTO };
@@ -35,7 +36,7 @@ public class QuietHours {
     public boolean showStatusbarIcon;
     public Mode mode;
 
-    public QuietHours(XSharedPreferences prefs) {
+    public QuietHours(SharedPreferences prefs) {
         uncLocked = prefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false);
         enabled = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false);
         start = prefs.getLong(QuietHoursActivity.PREF_KEY_QH_START, 0);

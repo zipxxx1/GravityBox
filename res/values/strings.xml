@@ -1464,4 +1464,7 @@
     <!-- VolumePanel transparency -->
     <string name="pref_volume_panel_transparency_title">Volume panel transparency</string>
 
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">Toggle Quiet hours</string>
+
 </resources>
