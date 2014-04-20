@@ -1432,4 +1432,7 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Wymuś język angielski</string>
 
+    <!-- VolumePanel transparency -->
+    <string name="pref_volume_panel_transparency_title">Przezroczystość panelu głośności</string>
+
 </resources>
