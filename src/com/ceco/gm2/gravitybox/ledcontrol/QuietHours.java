@@ -14,14 +14,23 @@
  */
 package com.ceco.gm2.gravitybox.ledcontrol;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import android.app.Notification;
 import android.content.SharedPreferences;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.text.TextUtils;
+import android.widget.RemoteViews;
 
 import com.ceco.gm2.gravitybox.ModLedControl;
 import com.ceco.gm2.gravitybox.Utils;
+
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 
 public class QuietHours {
     public enum Mode { ON, OFF, AUTO };
@@ -48,8 +57,32 @@ public class QuietHours {
         mode = Mode.valueOf(prefs.getString(QuietHoursActivity.PREF_KEY_QH_MODE, "AUTO"));
     }
 
+    public boolean quietHoursActive(LedSettings ls, Notification n) {
+        if (!uncLocked && enabled && ls.getEnabled() && ls.getQhIgnore()) {
+            if (ls.getQhIgnoreList() == null || ls.getQhIgnoreList().trim().isEmpty()) {
+                if (ModLedControl.DEBUG) ModLedControl.log("QH ignored for all notifications");
+                return false;
+            } else {
+                List<String> notifTexts = getNotificationTexts(n);
+                String[] keywords = ls.getQhIgnoreList().trim().split(",");
+                boolean ignore = false;
+                for (String kw : keywords) {
+                    kw = kw.toLowerCase();
+                    ignore |= n.tickerText != null && n.tickerText.toString().toLowerCase().contains(kw);
+                    for (String notifText : notifTexts) {
+                        ignore |= notifText.toLowerCase().contains(kw);
+                    }
+                }
+                if (ModLedControl.DEBUG) ModLedControl.log("QH ignore list contains keyword?: " + ignore);
+                return (ignore ? false : quietHoursActive());
+            }
+        } else {
+            return quietHoursActive();
+        }
+    }
+
     public boolean quietHoursActive() {
-        if (!enabled) return false;
+        if (uncLocked || !enabled) return false;
 
         if (mode != Mode.AUTO) {
             return (mode == Mode.ON ? true : false);
@@ -118,7 +151,66 @@ public class QuietHours {
         return (Utils.isTimeOfDayInRange(System.currentTimeMillis(), s, e));
     }
 
-    public boolean quietHoursActiveIncludingLED() {
-        return quietHoursActive() && muteLED;
+    public boolean quietHoursActiveIncludingLED(LedSettings ls, Notification n) {
+        return quietHoursActive(ls, n) && muteLED;
+    }
+
+    private List<String> getNotificationTexts(Notification notification) {
+        List<String> texts = new ArrayList<String>();
+
+        // We have to extract the information from the content view
+        RemoteViews views = notification.bigContentView;
+        if (views == null) views = notification.contentView;
+        if (views == null) return texts;
+
+        try {
+            // Get the mActions member of the given RemoteViews object.
+            @SuppressWarnings("unchecked")
+            ArrayList<Parcelable> actions = (ArrayList<Parcelable>) 
+                XposedHelpers.getObjectField(views, "mActions");
+            if (actions == null) return texts;
+
+            // Find the setText() actions
+            for (Parcelable p : actions) {
+                Parcel parcel = Parcel.obtain();
+                p.writeToParcel(parcel, 0);
+                parcel.setDataPosition(0);
+
+                // The tag tells which type of action it is (2 is ReflectionAction)
+                int tag = parcel.readInt();
+                if (tag != 2)  {
+                    parcel.recycle();
+                    continue;
+                }
+
+                // Skip View ID
+                parcel.readInt();
+
+                // Get method name
+                String methodName = parcel.readString();
+                if ("setText".equals(methodName)) {
+                    // Skip Parameter type (10 = Character Sequence)
+                    parcel.readInt();
+
+                    // Store the actual string
+                    String t = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel).toString().trim();
+                    if (t != null) {
+                        texts.add(t);
+                    }
+                }
+
+                parcel.recycle();
+            }
+        } catch (Throwable  t) {
+            XposedBridge.log(t);
+        }
+
+        if (ModLedControl.DEBUG) {
+            for (String text : texts) {
+                ModLedControl.log("Notif text: " + text);
+            }
+        }
+
+        return texts;
     }
 }
