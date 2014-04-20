@@ -1444,4 +1444,13 @@
     <!-- VolumePanel transparency -->
     <string name="pref_volume_panel_transparency_title">Transparência do painel de volume</string>
 
+    <!-- UNC Quiet Hours: ignore on per-app basis -->
+    <string name="pref_lc_qh_ignore_title">Ignorar horas de silêncio</string>
+    <string name="pref_lc_qh_ignore_list_title">Por palavras-chave específicas</string>
+    <string name="pref_lc_qh_ignore_list_summary">Lista de palavras-chave, separadas por vírgula, para as quais deverão ser ignoradas as horas de silêncio. 
+        Deixar em branco para aplicar a todas as notificações.</string>
+
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">Comutar horas de silêncio</string>
+
 </resources>
