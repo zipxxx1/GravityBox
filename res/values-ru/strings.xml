@@ -108,6 +108,9 @@
     <string name="quick_settings_smart_radio_off">Умн.радио выкл</string>
     <string name="quick_settings_lock_screen_on">Экр.блокировки вкл</string>
     <string name="quick_settings_lock_screen_off">Экр.блокировки выкл</string>
+    <string name="quick_settings_quiet_hours_off">Тихий час выкл</string>
+    <string name="quick_settings_quiet_hours_on">Тихий час вкл</string>
+    <string name="quick_settings_quiet_hours_auto">Тихий час авто</string>
     
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Плитки быстрых настроек</string>
@@ -1460,5 +1463,14 @@
 
     <!-- VolumePanel transparency -->
     <string name="pref_volume_panel_transparency_title">Прозрачность панели громкости</string>
+
+    <!-- UNC Quiet Hours: ignore on per-app basis -->
+    <string name="pref_lc_qh_ignore_title">Игноририровать тихий час</string>
+    <string name="pref_lc_qh_ignore_list_title">По ключевым словам</string>
+    <string name="pref_lc_qh_ignore_list_summary">Список разделённых запятыми ключевых слов для игнорирования 
+        тихого часа. Оставьте пустым для сохранения всех уведомлений.</string>
+
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">Включение тихого часа</string>
 
 </resources>
