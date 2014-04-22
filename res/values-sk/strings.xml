@@ -92,6 +92,9 @@
     <string name="quick_settings_smart_radio_off">Smart Radio vyp</string>
     <string name="quick_settings_lock_screen_on">Obrazovka uzamknutia zap</string>
     <string name="quick_settings_lock_screen_off">Obrazovka uzamknutia vyp</string>
+    <string name="quick_settings_quiet_hours_off">Tiché hodiny vyp</string>
+    <string name="quick_settings_quiet_hours_on">Tiché hodiny zap</string>
+    <string name="quick_settings_quiet_hours_auto">Tiché hodiny auto</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Dlaždice QuickSettings panelu</string>
@@ -1405,5 +1408,14 @@
 
     <!-- VolumePanel transparency -->
     <string name="pref_volume_panel_transparency_title">Priehľadnosť panela hlasitosti</string>
+
+    <!-- UNC Quiet Hours: ignore on per-app basis -->
+    <string name="pref_lc_qh_ignore_title">Ignorovať tiché hodiny</string>
+    <string name="pref_lc_qh_ignore_list_title">Pre zadané kľúčové slová</string>
+    <string name="pref_lc_qh_ignore_list_summary">Zoznam čiarkou oddelených kľúčových slov, 
+        pre ktoré ignorovať tiché hodiny. Ponechajte prázdne pre všetky oznámenia.</string>
+
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">Prepnúť tiché hodiny</string>
 
 </resources>
