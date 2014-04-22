@@ -1445,6 +1445,15 @@
     
     <!-- VolumePanel transparency -->
     <string name="pref_volume_panel_transparency_title">Trasparenza pannello volume</string>
+    
+    <!-- UNC Quiet Hours: ignore on per-app basis -->
+    <string name="pref_lc_qh_ignore_title">Ignora ore notturne</string>
+    <string name="pref_lc_qh_ignore_list_title">Lista keywords</string>
+    <string name="pref_lc_qh_ignore_list_summary">Separare con una virgola la lista di keywords per ignorare le notifiche
+    durante le ore notturne. Lasciare il campo vuoto per tutte le notifiche.</string>
+
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">Ore Notturne</string>
 
 
 </resources>
