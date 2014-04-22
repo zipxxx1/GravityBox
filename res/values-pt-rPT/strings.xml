@@ -93,6 +93,9 @@
     <string name="quick_settings_smart_radio_off">Rádio inteligente desativado</string>
     <string name="quick_settings_lock_screen_on">Bloqueio de ecrã ativado</string>
     <string name="quick_settings_lock_screen_off">Bloqueio de ecrã desativado</string>
+    <string name="quick_settings_quiet_hours_off">Horas de silêncio desativadas</string>
+    <string name="quick_settings_quiet_hours_on">Horas de silêncio ativadas</string>
+    <string name="quick_settings_quiet_hours_auto">Horas de silêncio automáticas</string>
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Definições rápidas na barra de status</string>
