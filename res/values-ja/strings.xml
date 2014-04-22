@@ -93,6 +93,9 @@
     <string name="quick_settings_smart_radio_off">スマートネットワークオフ</string>
     <string name="quick_settings_lock_screen_on">ロック画面オン</string>
     <string name="quick_settings_lock_screen_off">ロック画面オフ</string>
+    <string name="quick_settings_quiet_hours_off">お休みモードオフ</string>
+    <string name="quick_settings_quiet_hours_on">お休みモードオン</string>
+    <string name="quick_settings_quiet_hours_auto">お休みモード自動</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">ステータスバークイック設定タイル</string>
@@ -1423,5 +1426,13 @@
 
     <!-- VolumePanel transparency -->
     <string name="pref_volume_panel_transparency_title">音量パネルの透過度</string>
+
+    <!-- UNC Quiet Hours: ignore on per-app basis -->
+    <string name="pref_lc_qh_ignore_title">お休みモードを無視</string>
+    <string name="pref_lc_qh_ignore_list_title">キーワード設定</string>
+    <string name="pref_lc_qh_ignore_list_summary">お休みモードを無視するキーワードをコンマで分けて入力してください。空白にすると全ての通知を対象にします。</string>
+
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">お休みモードトグル</string>
 
 </resources>
