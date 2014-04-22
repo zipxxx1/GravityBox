@@ -1439,4 +1439,12 @@
     <!-- VolumePanel transparency -->
     <string name="pref_volume_panel_transparency_title">音量面板透明度</string>
 
+    <!-- UNC Quiet Hours: ignore on per-app basis -->
+    <string name="pref_lc_qh_ignore_title">忽略靜音時段設定</string>
+    <string name="pref_lc_qh_ignore_list_title">只有當通知包含下列的關鍵字才會忽略靜音時段</string>
+    <string name="pref_lc_qh_ignore_list_summary">觸發忽略靜音時段的關鍵字清單，以逗號分隔。留空的話，本應用程式所有通知皆會忽略靜音時段</string>
+
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">開關靜音時段</string>
+
 </resources>
