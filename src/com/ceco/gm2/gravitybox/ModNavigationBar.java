@@ -15,12 +15,12 @@
 
 package com.ceco.gm2.gravitybox;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
+import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -83,6 +83,7 @@ public class ModNavigationBar {
     private static boolean mAlwaysOnBottom;
     private static boolean mNavbarVertical;
     private static boolean mNavbarRingDisabled;
+    private static KeyguardManager mKeyguard;
 
     // Custom key
     private static boolean mCustomKeyEnabled;
@@ -338,6 +339,10 @@ public class ModNavigationBar {
                     mRecentAltIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear);
                     mRecentAltLandIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear_land);
 
+                    try {
+                        mKeyguard = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+                    } catch (Throwable t) { log("Error getting keyguard manager: " + t.getMessage()); }
+
                     mNavigationBarView = (View) param.thisObject;
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
@@ -586,9 +591,14 @@ public class ModNavigationBar {
                             Intent intent = appInfo.intent;
                             // if intent is a GB action of broadcast type, handle it directly here
                             if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
-                                Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
-                                newIntent.putExtras(intent);
-                                mGlowPadView.getContext().sendBroadcast(newIntent);
+                                if (mKeyguard != null && 
+                                        mKeyguard.isKeyguardLocked() && mKeyguard.isKeyguardSecure()) {
+                                    if (DEBUG) log("Keyguard is locked & secured - ignoring GB action");
+                                } else {
+                                    Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+                                    newIntent.putExtras(intent);
+                                    mGlowPadView.getContext().sendBroadcast(newIntent);
+                                }
                             // otherwise start activity
                             } else {
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
