@@ -1432,4 +1432,15 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Englisch erzwingen</string>
 
+     <!-- VolumePanel transparency -->
+    <string name="pref_volume_panel_transparency_title">Lautstärkeanzeige Transparenz</string>
+
+    <!-- UNC Quiet Hours: ignore on per-app basis -->
+    <string name="pref_lc_qh_ignore_title">Ignoriere stille Stunden</string>
+    <string name="pref_lc_qh_ignore_list_title">Für spezifische Schlüsselwörter</string>
+    <string name="pref_lc_qh_ignore_list_summary">Mit Kommata getrennte Liste von Schlüsselwörtern für welche Ruhestunden ignoriert werden. Leer lassen für alle Benachrichtigungen.</string>
+
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">Ruhestunden ein-/ausschalten</string>
+
 </resources>
