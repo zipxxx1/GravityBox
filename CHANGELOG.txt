@@ -1,3 +1,41 @@
+Changelog 3.1.0 - 25/04/2014
+--------------------------------------
+- Hide tweaks not compatible with Lenovo VibeUI ROMs (thanks to bgcngm)
+- QuickSettings management:
+--- added Quiet hours tile:
+------ single-press cycles between QH on/off (manual mode)
+------ long-press turns on QH auto mode (follows time ranges defined in QH settings)
+------ long-press during auto mode opens QH settings
+- UNC Quiet hours:
+--- fixed bug in time range handling for Friday/Sunday
+--- added option for ignoring QH on per-app basis:
+------ allows ignoring QH for all notifications arriving from particular app
+------ allows defining keywords for which to ignore QH (QH will be ignored for notifications containing keywords)
+- GravityBox Actions:
+--- added Quiet hours shortcuts:
+------ one for toggling manual on/off, another one for switching to AUTO mode
+------ 3rd party control via intent available:
+--------- Intent: gravitybox.intent.action.ACTION_TOGGLE_QUIET_HOURS
+--------- Extra param (optional): qhMode (case sensitive string; supported values: ON, OFF, AUTO)
+--- fixed Google Now action not launching on devices without navigation bar
+--- fixed bug in launching GB Actions from unlock ring (toggle actions were affected)
+--- prevent unsafe GB actions from launching from navbar ring or unlock ring when keyguard is secured (security measure)
+- Display tweaks: Changed unit of pulse notification delay to allow values < 1s
+- Improved support for RTL languages (4.2+)
+--- proper cursor control arrows in navigation bar
+--- proper mobile signal icons (e.g. when statusbar coloring is on)
+--- switching between RTL/non-RTL system language requires reboot for GB to load proper resources
+- Updated Italian translations (thanks to pesa1234)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Japanese translation (thanks to WedyDQ10)
+- Updated French translation (thanks to ch-vox)
+- Updated Russian translations (thanks to gaich)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated German translation (thanks to LibertyMarine)
+- Updated Slovak and Czech translations
+
 Changelog 3.0.4 - 17/04/2014
 --------------------------------------
 - Media tweaks:
