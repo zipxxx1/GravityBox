@@ -108,6 +108,9 @@
     <string name="quick_settings_smart_radio_off">Modo de red inteligente desactivado</string>
     <string name="quick_settings_lock_screen_on">Bloquear pantalla activado</string>
     <string name="quick_settings_lock_screen_off">Bloquear pantalla desactivado</string>
+    <string name="quick_settings_quiet_hours_off">Horas tranquilas desactivado</string>
+    <string name="quick_settings_quiet_hours_on">Horas tranquilas activado</string>
+    <string name="quick_settings_quiet_hours_auto">Horas tranquilas automático</string>
  
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Ajustes rápidos de la barra de estado</string>
@@ -118,7 +121,7 @@
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_wifi_alt">Wi-Fi (estilo CM)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
-    <string name="qs_tile_gps">Ubicación</string>
+    <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (estilo CM)</string>
     <string name="qs_tile_mobile_data">Datos móviles</string>
     <string name="qs_tile_network_mode">Modo de red</string>
@@ -824,7 +827,7 @@
 
     <!-- Disable data network type icons -->
     <string name="pref_disable_data_network_type_icons_title">Desactivar indicadores de tipo de red de datos</string>
-    <string name="pref_disable_data_network_type_icons_summary">Desactiva los indicadores 3G/G al lado de las barras de señal de la barra de estado</string>
+    <string name="pref_disable_data_network_type_icons_summary">Permite desactivar los indicadores 3G/G al lado de las barras de señal</string>
 
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Para habilitar el soporte de acciones en la barra de navegación, es necesario 
@@ -1113,7 +1116,7 @@
        Reemplaza al retraso para cambiar de modo de red predeterminado cuando el valor no es cero.</string>
 
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">Texto de operador secundario personalizado</string> <!-- STILL UNTRANSLATED -->
+    <string name="pref_lockscreen_carrier2_text_title">Texto de operador secundario personalizado</string>
 
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">Guardar configuración</string>
@@ -1435,5 +1438,24 @@
 
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Color de carga</string>
+
+    <!-- Notification control: Quiet hours for weekends-->
+    <string name="pref_lc_qh_cat_weekdays_title">Días entre semana</string>
+    <string name="pref_lc_qh_cat_weekend_title">Fin de semana</string>
+
+    <!-- Force English locale -->
+    <string name="pref_force_english_locale_title">Forzar idioma a inglés</string>
+
+    <!-- VolumePanel transparency -->
+    <string name="pref_volume_panel_transparency_title">Transparencia del panel de volumen</string>
+
+    <!-- UNC Quiet Hours: ignore on per-app basis -->
+    <string name="pref_lc_qh_ignore_title">Ignorar horas tranquilas</string>
+    <string name="pref_lc_qh_ignore_list_title">Para teclados específicos</string>
+    <string name="pref_lc_qh_ignore_list_summary">Lista separada por comas de palabras clave para las cuales ignorar
+        las horas tranquilas. Dejar vacío para todas las notificaciones.</string>
+
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">Activar/desactivar horas tranquilas</string>
 
 </resources>
