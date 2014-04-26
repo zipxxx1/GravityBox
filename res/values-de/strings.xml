@@ -1100,6 +1100,9 @@
     <string name="pref_smart_radio_screen_off_delay_title">Verzögerter Energiesparmodus</string>
     <string name="pref_smart_radio_screen_off_delay_summary">Verzögert das Schalten in den Energiesparmodus wenn der Bildschirm ausgeht. Überschreibt die obige Verzögerung wenn der folgende Wert nicht 0 ist</string>
 
+    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
+    <string name="pref_lockscreen_carrier2_text_title">Eigener Zweitprovider-Text</string>
+
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">Sichern der Einstellungen</string>
     <string name="pref_settings_restore_title">Wiederherst. der Einstellungen</string>
@@ -1433,11 +1436,11 @@
     <string name="pref_force_english_locale_title">Englisch erzwingen</string>
 
      <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">Lautstärkeanzeige Transparenz</string>
+    <string name="pref_volume_panel_transparency_title">Transparenz der Lautstärkeanzeige</string>
 
     <!-- UNC Quiet Hours: ignore on per-app basis -->
-    <string name="pref_lc_qh_ignore_title">Ignoriere stille Stunden</string>
-    <string name="pref_lc_qh_ignore_list_title">Für spezifische Schlüsselwörter</string>
+    <string name="pref_lc_qh_ignore_title">Ruhestunden ignorieren</string>
+    <string name="pref_lc_qh_ignore_list_title">Für Schlüsselwörter</string>
     <string name="pref_lc_qh_ignore_list_summary">Mit Kommata getrennte Liste von Schlüsselwörtern für welche Ruhestunden ignoriert werden. Leer lassen für alle Benachrichtigungen.</string>
 
     <!-- GB Actions: Quiet hours shortcut -->
