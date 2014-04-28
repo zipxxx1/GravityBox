@@ -51,7 +51,6 @@ public class ShortcutActivity extends ListActivity {
             ExpandQuicksettingsShortcut.ACTION,
             NetworkModeShortcut.ACTION,
             RecentAppsShortcut.ACTION,
-            AppLauncherShortcut.ACTION,
             MobileDataShortcut.ACTION,
             WifiShortcut.ACTION,
             BluetoothShortcut.ACTION,
