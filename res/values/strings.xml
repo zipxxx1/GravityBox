@@ -1473,4 +1473,7 @@
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Toggle Quiet hours</string>
 
+    <!-- GB Actions: toggle airplane mode -->
+    <string name="shortcut_airplane_mode">Toggle airplane mode</string>
+
 </resources>
