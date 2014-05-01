@@ -74,7 +74,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("updateWiFiIcon", t);
         }
     }
 
@@ -191,7 +191,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("updateMobileIcon", t);
         }
     }
 
@@ -211,7 +211,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                 airplaneModeIcon.setImageDrawable(d);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("updateAirplaneModeIcon", t);
         }
     }
 
@@ -240,7 +240,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("updateRoamingIndicator", t);
         }
     }
 }

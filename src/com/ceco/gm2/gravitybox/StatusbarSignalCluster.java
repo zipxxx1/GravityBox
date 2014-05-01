@@ -15,6 +15,9 @@
 
 package com.ceco.gm2.gravitybox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
 
@@ -35,9 +38,17 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected LinearLayout mView;
     protected StatusBarIconManager mIconManager;
     protected Resources mResources;
+    private List<String> mErrorsLogged = new ArrayList<String>();
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
+    }
+
+    protected void logAndMute(String key, Throwable t) {
+        if (!mErrorsLogged.contains(key)) {
+            XposedBridge.log(t);
+            mErrorsLogged.add(key);
+        }
     }
 
     public static StatusbarSignalCluster create(LinearLayout view, StatusBarIconManager iconManager) {
@@ -96,7 +107,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 updateAirplaneModeIcon();
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("apply", t);
         }
     }
 
@@ -123,7 +134,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("updateWiFiIcon", t);
         }
     }
 
@@ -164,7 +175,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 }
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("updateMobileIcon", t);
         }
     }
 
@@ -181,7 +192,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 airplaneModeIcon.setImageDrawable(d);
             }
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            logAndMute("updateAirplaneModeIcon", t);
         }
     }
 
