@@ -15,13 +15,20 @@
 
 package com.ceco.gm2.gravitybox;
 
+import android.annotation.SuppressLint;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.view.ViewConfiguration;
+
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class ModViewConfig {
+    private static final String CLASS_ACTIVITY_MANAGER_SERVICE = "com.android.server.am.ActivityManagerService";
+    private static final String CLASS_ACTIVITY_RECORD = "com.android.server.am.ActivityRecord";
 
     public static void initZygote(final XSharedPreferences prefs) {
         try {
@@ -29,6 +36,25 @@ public class ModViewConfig {
             if (!"default".equals(mode)) {
                 XposedHelpers.findAndHookMethod(ViewConfiguration.class, "hasPermanentMenuKey",
                         XC_MethodReplacement.returnConstant(!"enabled".equals(mode)));
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            if (Build.VERSION.SDK_INT > 16 &&
+                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_FORCE_LTR_DIRECTION, false)) {
+                final Class<?> activityManagerSvcClass = XposedHelpers.findClass(CLASS_ACTIVITY_MANAGER_SERVICE, null);
+                XposedHelpers.findAndHookMethod(activityManagerSvcClass, "updateConfigurationLocked", 
+                        Configuration.class, CLASS_ACTIVITY_RECORD, boolean.class, boolean.class, new XC_MethodHook() {
+                    @SuppressLint("NewApi")
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (param.args[0] != null) {
+                            ((Configuration) param.args[0]).setLayoutDirection(null);
+                        }
+                    }
+                });
             }
         } catch (Throwable t) {
             XposedBridge.log(t);

@@ -709,6 +709,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_IME_FULLSCREEN_DISABLE = "pref_ime_fullscreen_disable";
     public static final String PREF_KEY_TORCH_AUTO_OFF = "pref_torch_auto_off";
     public static final String PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON = "pref_force_overflow_menu_button2";
+    public static final String PREF_KEY_FORCE_LTR_DIRECTION = "pref_force_ltr_direction";
 
     public static final String PREF_CAT_KEY_MISC_OTHER = "pref_cat_misc_other";
     public static final String PREF_KEY_PULSE_NOTIFICATION_DELAY = "pref_pulse_notification_delay2";
@@ -770,7 +771,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SMART_RADIO_ENABLE,
             PREF_KEY_PULSE_NOTIFICATION_DELAY,
             PREF_KEY_SCREEN_OFF_EFFECT,
-            PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH
+            PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH,
+            PREF_KEY_FORCE_LTR_DIRECTION
     ));
 
     private static final class SystemProperties {
@@ -1086,6 +1088,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefPulseNotificationDelay;
         private PreferenceCategory mPrefCatMiscOther;
         private SeekBarPreference mPrefTorchAutoOff;
+        private CheckBoxPreference mPrefForceLtrDirection;
         private WebServiceClient<TransactionResult> mTransWebServiceClient;
         private Preference mPrefBackup;
         private Preference mPrefRestore;
@@ -1385,6 +1388,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCatMiscOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_MISC_OTHER);
             mPrefTorchAutoOff = (SeekBarPreference) findPreference(PREF_KEY_TORCH_AUTO_OFF);
+            mPrefForceLtrDirection = (CheckBoxPreference) findPreference(PREF_KEY_FORCE_LTR_DIRECTION);
 
             mPrefBackup = findPreference(PREF_KEY_SETTINGS_BACKUP);
             mPrefRestore = findPreference(PREF_KEY_SETTINGS_RESTORE);
@@ -1506,6 +1510,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatDisplay.removePreference(mPrefCatBrightness);
                 mPrefCatDisplay.removePreference(mPrefScreenOffEffect);
                 mPrefCatMedia.removePreference(mPrefSafeMediaVolume);
+                mPrefCatMiscOther.removePreference(mPrefForceLtrDirection);
 
                 // remove clear all in navigation bar / pie option
                 mPrefRecentClear.setEntries(R.array.recents_clear_entries);
