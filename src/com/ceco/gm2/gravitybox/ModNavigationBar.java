@@ -16,7 +16,6 @@
 package com.ceco.gm2.gravitybox;
 
 import java.lang.reflect.Method;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -29,6 +28,7 @@ import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.HapticFeedbackConstants;
@@ -495,6 +495,13 @@ public class ModNavigationBar {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     setCustomKeyVisibility();
                     setMenuKeyVisibility();
+
+                    if (Build.VERSION.SDK_INT > 16 && mNavbarRingDisabled) {
+                        View v = (View) XposedHelpers.callMethod(param.thisObject, "getSearchLight");
+                        if (v != null) {
+                            v.setVisibility(View.GONE);
+                        }
+                    }
                 }
             });
 
