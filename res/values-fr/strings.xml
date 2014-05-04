@@ -1061,7 +1061,7 @@
     <string name="pref_translucent_decor_disabled">Désactivé</string>
 
     <!-- Pulse notification delay -->
-    <string name="pref_pulse_notification_delay_title">Délai pulsation de notification</string>
+    <string name="pref_pulse_notification_delay_title">Fréquence LED de notification</string>
     <string name="pref_pulse_notification_delay_summary">Redémarrage nécessaire</string>
 
     <!--  Clear recents modes -->
@@ -1518,5 +1518,6 @@
 
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">Forcer le sens gauche à droite</string>
-    <string name="pref_force_ltr_direction_summary">Redémarrage nécessaire</string>
+    <string name="pref_force_ltr_direction_summary">Force le sens de lecture de gauche à droite pour les langues lues de droite à gauche (redémarrage nécessaire)</string>
+
 </resources>
