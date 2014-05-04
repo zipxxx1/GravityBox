@@ -1089,7 +1089,7 @@
     <string name="pref_pie_app_longpress_title">Touche Lanceur d\'Appli</string>
 
     <!-- Pulse notification delay -->
-    <string name="pref_pulse_notification_delay_title">Délai pulsation de notification</string>
+    <string name="pref_pulse_notification_delay_title">Retard impulsion de notification</string>
     <string name="pref_pulse_notification_delay_summary">Redémarrage nécessaire</string>
 
     <!--  Clear recents modes -->
