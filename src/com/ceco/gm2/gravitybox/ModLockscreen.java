@@ -494,13 +494,15 @@ public class ModLockscreen {
 
                     final AppInfo appInfo = (AppInfo) XposedHelpers.getAdditionalInstanceField(td, "mGbAppInfo");
                     if (appInfo != null) {
+                        boolean isSecure = false;
+                        final Object lockPatternUtils = XposedHelpers.getObjectField(
+                                XposedHelpers.getSurroundingThis(param.thisObject), "mLockPatternUtils");
+                        if (lockPatternUtils != null) {
+                            isSecure = (Boolean) XposedHelpers.callMethod(lockPatternUtils, "isSecure");
+                        }
                         // if intent is a GB action of broadcast type, handle it directly here
                         if (ShortcutActivity.isGbBroadcastShortcut(appInfo.intent)) {
-                            final Object lockPatternUtils = XposedHelpers.getObjectField(
-                                    XposedHelpers.getSurroundingThis(param.thisObject), "mLockPatternUtils");
-                            if (lockPatternUtils != null && 
-                                    (Boolean) XposedHelpers.callMethod(lockPatternUtils, "isSecure") &&
-                                        !ShortcutActivity.isActionSafe(appInfo.intent.getStringExtra(
+                            if (isSecure && !ShortcutActivity.isActionSafe(appInfo.intent.getStringExtra(
                                             ShortcutActivity.EXTRA_ACTION))) {
                                 if (DEBUG) log("Keyguard is secured - ignoring GB action");
                             } else {
@@ -513,15 +515,21 @@ public class ModLockscreen {
                             XposedHelpers.callMethod(mGlowPadView, "doFinish");
                         // otherwise start activity
                         } else {
-                            final Object activityLauncher = XposedHelpers.getObjectField(
+                            if (isSecure && prefs.getBoolean(
+                                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_SLIDE_BEFORE_UNLOCK, false)) {
+                                Class<?> amnCls = XposedHelpers.findClass("android.app.ActivityManagerNative",
+                                        mGlowPadView.getContext().getClassLoader());
+                                Object amn = XposedHelpers.callStaticMethod(amnCls, "getDefault");
+                                XposedHelpers.callMethod(amn, "dismissKeyguardOnNextActivity");
+                                appInfo.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                                        Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                mGlowPadView.getContext().startActivity(appInfo.intent);
+                            } else {
+                                final Object activityLauncher = XposedHelpers.getObjectField(
                                     XposedHelpers.getSurroundingThis(param.thisObject), "mActivityLauncher");
-                            XposedHelpers.callMethod(activityLauncher, "launchActivity", mLaunchActivityArgs,
-                                    appInfo.intent, false, true, new Handler(), new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (DEBUG) log("onStarted: " + appInfo.intent);
-                                        }
-                            });
+                                XposedHelpers.callMethod(activityLauncher, "launchActivity", mLaunchActivityArgs,
+                                        appInfo.intent, false, true, null, null);
+                            }
                         }
                     }
                 }
