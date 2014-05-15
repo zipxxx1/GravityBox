@@ -181,7 +181,7 @@
     <string name="reboot_confirm">A telefon újra fog indulni.</string>
     <string name="reboot_confirm_recovery">A telefon Recovery módba fog újraindulni.</string>
     <string name="reboot_confirm_bootloader">A telefon Bootloader módba fog újraindulni.</string>
-    
+
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Tervező üzemmód</string>
     <string name="engineering_mode_summary">Elindítja a Tervező üzemmód programot</string>
@@ -981,7 +981,7 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Pie vezérlővel kapcsolatos beállítások</string>
-    
+
     <!-- Shortcut for Google Now -->
     <string name="shortcut_google_now">Google Now</string>
 
@@ -1005,7 +1005,7 @@
     <string name="lockscreen_sb_clock_hide_on_widget">Elrejtve ismert, órához kapcsolódó widget esetén</string>
     <string name="lockscreen_sb_clock_always_hide">Mindig elrejtve</string>
     <string name="lockscreen_sb_clock_always_show">Mindig mutatva</string>
-    
+
     <!-- QuickApp Tile #2 -->
     <string name="pref_cat_quickapp_tile_2_title">Gyors Programelérés csempe 2 beállítások</string>
     <string name="qs_tile_quickapp_2">Gyors Programelérés 2</string>
@@ -1022,7 +1022,7 @@
 
     <!-- Disable fullscreen keyboard -->
     <string name="pref_ime_fullscreen_disable_title">Teljes képernyős billentyűzet letiltása</string>
-    
+
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Zseblámpa automatikus kikapcsolása</string>
     <string name="pref_torch_auto_off_summary">Kikapcsolja a zseblámpát meghatározott idő után. Letiltáshoz állíts be 0-t (nem javasolt)</string>
@@ -1030,10 +1030,10 @@
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Hangerőszabályzó gombok megfordítása</string>
     <string name="pref_vol_swap_keys_summary">Felcseréli a hangerőszabályzó gombokat elforgatott képernyőnél</string>
-    
+
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Elmosódás effekt</string>
-    
+
     <!-- Tiles: Disable tile spanning -->
     <string name="pref_qs_tile_span_disable_title">Csempe kiterjeszkedés letiltása</string>
     <string name="pref_qs_tile_span_disable_summary">Letiltja a tulajdonos, fényerő és a beállítások csempék két csempeszélességre való kiterjeszkedését fekvő tájolásnál</string>
@@ -1105,10 +1105,10 @@
 
     <!-- Key Action: Show volume panel -->
     <string name="hwkey_action_volume_panel">Hangerő panel mutatása</string>
-    
+
     <!-- Blur effect intensity -->
     <string name="pref_lockscreen_bg_blur_intensity_title">Elmosódás effekt intenzitás</string>
-    
+
     <!-- Smart radio: independent delay for screen off power save event -->
     <string name="pref_smart_radio_screen_off_delay_title">Késleltetett energiatakarékosság</string>
     <string name="pref_smart_radio_screen_off_delay_summary">Késlelteti az energiatakarékos üzemmódba váltást a képernyő kikapcsolásakor. Felülírja az alapértelmezett hálózati üzemmód váltáskori késleltetést, ha a beállított érték nem nulla.</string>
@@ -1232,7 +1232,7 @@
     <string name="qs_auto_switch_disabled">Letiltva</string>
     <string name="qs_auto_switch_mode1">Amikor nincsenek értesítések</string>
     <string name="qs_auto_switch_mode2">Amikor nincsenek törölhető értesítések</string>
-    
+
     <!-- Statusbar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">Dupla érintésre alvás engedélyezése</string>
     <string name="pref_statusbar_dt2s_summary">Az értesítési sávon történő dupla érintés alvó állapotba helyezi a készüléket</string>
@@ -1246,8 +1246,9 @@
     <string name="animation_scale5">Animáció lépték 2x</string>
     <string name="animation_scale6">Animáció lépték 5x</string>
     <string name="animation_scale7">Animáció lépték 10x</string>
-    
-     <!-- QS Tiles: Tile label style -->
+    <string name="animation_scale8">Animáció lépték .75x</string>
+
+    <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Csempe felirat stílus</string>
     <string name="tile_label_style_normal">Normál</string>
     <string name="tile_label_style_allcaps">Minden nagybetűvel</string>
@@ -1290,7 +1291,7 @@
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Okos rádiókapcsolat ki-bekapcsolása</string>
-    
+
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Főkapcsoló</string>
 
@@ -1312,8 +1313,8 @@
 
     <!-- Navbar ring: option to disable -->
     <string name="pref_navbar_ring_disable_title">Navigációs kör letiltása</string>
-    
-    	<!-- Data traffic monitor style -->
+
+    <!-- Data traffic monitor style -->
     <string name="pref_data_traffic_mode_title">Adatforgalom figyelő stílus</string>
     <string name="dt_mode_off">Letiltva</string>
     <string name="dt_mode_simple">Egyszerű stílus</string>
@@ -1430,8 +1431,8 @@
     <string name="lc_led_mode_original">Eredeti (alkalmazás általi)</string>
     <string name="lc_led_mode_override">Felülírt</string>
     <string name="lc_led_mode_off">Kikapcsolva (nincsenek értesítési fények)</string>
-    
-    	<!-- Notification control: Quiet hours statusbar icon -->
+
+    <!-- Notification control: Quiet hours statusbar icon -->
     <string name="pref_lc_qh_statusbar_icon_title">Értesítési sáv ikon</string>
     <string name="pref_lc_qh_statusbar_icon_summary">Ikon mutatása az értesítési sávon Csendes időszakok alatt</string>
 

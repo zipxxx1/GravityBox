@@ -1252,6 +1252,7 @@ Thay thế thời gian chờ mặc định nếu khác 0.</string>
     <string name="animation_scale5">Tốc độ hiệu ứng 2x</string>
     <string name="animation_scale6">Tốc độ hiệu ứng 5x</string>
     <string name="animation_scale7">Tốc độ hiệu ứng 10x</string>
+    <string name="animation_scale8">Tốc độ hiệu ứng .75x</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Kiểu nhãn ô</string>

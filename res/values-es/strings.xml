@@ -1249,6 +1249,7 @@
     <string name="animation_scale5">Escala de animación 2x</string>
     <string name="animation_scale6">Escala de animación 5x</string>
     <string name="animation_scale7">Escala de animación 10x</string>
+    <string name="animation_scale8">Escala de animación .75x</string>
 
     <!-- Key Actions: Show brightness dialog -->
     <string name="hwkey_action_brightness_dialog">Mostrar panel de ajuste de brillo</string>

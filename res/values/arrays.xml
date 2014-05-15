@@ -395,6 +395,7 @@
         <item>@string/animation_scale0</item>
         <item>@string/animation_scale1</item>
         <item>@string/animation_scale2</item>
+        <item>@string/animation_scale8</item>
         <item>@string/animation_scale3</item>
         <item>@string/animation_scale4</item>
         <item>@string/animation_scale5</item>
@@ -407,6 +408,7 @@
         <item>0</item>
         <item>.25</item>
         <item>.5</item>
+        <item>.75</item>
         <item>1</item>
         <item>1.5</item>
         <item>2</item>
@@ -419,6 +421,7 @@
         <item>@string/animation_scale0</item>
         <item>@string/animation_scale1</item>
         <item>@string/animation_scale2</item>
+        <item>@string/animation_scale8</item>
         <item>@string/animation_scale3</item>
         <item>@string/animation_scale4</item>
         <item>@string/animation_scale5</item>
@@ -431,6 +434,7 @@
         <item>0</item>
         <item>.25</item>
         <item>.5</item>
+        <item>.75</item>
         <item>1</item>
         <item>1.5</item>
         <item>2</item>
@@ -443,6 +447,7 @@
         <item>@string/animation_scale0</item>
         <item>@string/animation_scale1</item>
         <item>@string/animation_scale2</item>
+        <item>@string/animation_scale8</item>
         <item>@string/animation_scale3</item>
         <item>@string/animation_scale4</item>
         <item>@string/animation_scale5</item>
@@ -455,6 +460,7 @@
         <item>0</item>
         <item>.25</item>
         <item>.5</item>
+        <item>.75</item>
         <item>1</item>
         <item>1.5</item>
         <item>2</item>
