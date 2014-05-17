@@ -549,7 +549,7 @@
     <string name="hwkey_action_expanded_desktop_disabled">Chức năng Desktop mở rộng tắt!</string>
 
     <!-- Navigation bar tweaks category -->
-    <string name="pref_cat_navigation_bar_title">Tinh chỉnh thanh điều hướng</string>
+    <string name="pref_cat_navigation_bar_title">Thanh điều hướng</string>
     <string name="pref_cat_navigation_bar_summary">Các tinh chỉnh liên quan đến thanh điều hướng</string>
     <string name="pref_navbar_override_title">Ghi đè lên các thiết lập hệ thống</string>
     <string name="pref_navbar_override_summary">Bật/Tắt các tinh chỉnh thanh điều hướng (cần khởi động lại)</string>
@@ -1059,8 +1059,7 @@ Khi đó bạn có thể quyết định chặn thông báo này từ lần sau.
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Chưa đặt</string>
     <string name="pref_cat_smart_radio_title">Linh hoạt</string>
-    <string name="pref_smart_radio_enable_summary">Tự động chuyển giữa chế độ tiết kiệm năng lượng và chế độ thường 
-	tuỳ theo trạng thái kết nối mạng dữ liệu và Wifi (cần khởi động lại)</string>
+    <string name="pref_smart_radio_enable_summary">Tự động chuyển giữa chế độ tiết kiệm năng lượng và chế độ thường tuỳ theo trạng thái kết nối mạng dữ liệu và Wifi (cần khởi động lại)</string>
     <string name="pref_smart_radio_normal_mode_title">Chế độ mạng thường</string>
     <string name="pref_smart_radio_power_saving_mode_title">Chế độ mạng tiết kiệm năng lượng</string>
     <string name="pref_smart_radio_screen_off_title">Khi màn hình tắt</string>
@@ -1356,8 +1355,7 @@ Thay thế thời gian chờ mặc định nếu khác 0.</string>
 
     <!-- Traffic meter: show only when download active -->
     <string name="pref_data_traffic_active_dl_only_title">Chỉ khi đang tải xuống</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Chỉ hiển thị tốc độ lưu lượng khi 
-	Trình quản lý tải xuống mặc định của Android đang tải xuống</string>
+    <string name="pref_data_traffic_active_dl_only_summary">Chỉ hiển thị tốc độ lưu lượng khi Trình quản lý tải xuống mặc định của Android đang tải xuống</string>
 
     <!-- Led control -->
     <string name="pref_led_control_title">Điều khiển thông báo toàn diện</string>
@@ -1410,8 +1408,7 @@ Thay thế thời gian chờ mặc định nếu khác 0.</string>
     <string name="pref_lockscreen_show_pattern_error_summary">Hiện đường đỏ khi vẽ sai đường nối</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">Tính năng này đang ở chế độ dùng thử. Nếu bạn thấy nó có ích, bạn có thể tiếp tục sử dụng sau khi nhập 
-	ID quyên góp bằng PayPal.  Thời gian dùng thử kết thúc sau %d  lần khởi động lại.</string>
+    <string name="trial_info">Tính năng này đang ở chế độ dùng thử. Nếu bạn thấy nó có ích, bạn có thể tiếp tục sử dụng sau khi nhập ID quyên góp bằng PayPal.  Thời gian dùng thử kết thúc sau %d  lần khởi động lại.</string>
 
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">Thiết lập mặc định</string>
@@ -1422,21 +1419,16 @@ Thay thế thời gian chờ mặc định nếu khác 0.</string>
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Màn hình chủ động</string>
     <string name="lc_active_screen_info">Tính năng Màn hình chủ động sẽ tự động bật màn hình mỗi khi có thông báo mới.
-	Việc này chỉ xảy ra nếu màn hình không bị che
-	(ví dụ như khi thiết bị không ở trong túi). Bạn cũng có thể cho bảng thông báo tự động mở, tuỳ theo
-	chế độ bảo mật màn hình khoá và thiết lập hiện thời. Hãy lưu ý rằng Màn hình chủ động yêu cầu
-	chế độ màn hình khoá phải bật.\nDưới đây là công-tắc tổng. Sau khi bật,
-	bạn có thể tuỳ chỉnh thêm cho từng ứng dụng.</string>
+Việc này chỉ xảy ra nếu màn hình không bị che (ví dụ như khi thiết bị không ở trong túi). Bạn cũng có thể cho bảng thông báo tự động mở, tuỳ theo chế độ bảo mật màn hình khoá và thiết lập hiện thời. Hãy lưu ý rằng Màn hình chủ động yêu cầu chế độ màn hình khoá phải bật.\n
+Dưới đây là công-tắc tổng. Sau khi bật, bạn có thể tuỳ chỉnh thêm cho từng ứng dụng.</string>
     <string name="lc_active_screen_switch_title">Bật Màn hình chủ động</string>
     <string name="lc_expand_notification_panel_title">Mở bảng thông báo</string>
-    <string name="lc_expand_notification_panel_summary">Tự đông mở bảng thông báo khi bật màn hình 
-        (nếu chế độ bảo mật màn hình hiện thời cho phép)</string>
+    <string name="lc_expand_notification_panel_summary">Tự đông mở bảng thông báo khi bật màn hình (nếu chế độ bảo mật màn hình hiện thời cho phép)</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Thời gian yên lặng</string>
     <string name="pref_lc_qh_enabled_title">Bật thời gian yên lặng</string>
-    <string name="pref_lc_qh_enabled_summary">Không phát âm báo/rung và có thể cả đèn LED 
-        đối với mọi thông báo nhận được trong khoảng thời gian này</string>
+    <string name="pref_lc_qh_enabled_summary">Không phát âm báo/rung và có thể cả đèn LED đối với mọi thông báo nhận được trong khoảng thời gian này</string>
     <string name="pref_lc_qh_start_title">Thời gian bắt đầu</string>
     <string name="pref_lc_qh_end_title">Thời gian kết thúc</string>
     <string name="pref_lc_qh_mute_led_title">Không bật đèn</string>
@@ -1467,8 +1459,7 @@ Thay thế thời gian chờ mặc định nếu khác 0.</string>
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">Bỏ qua thời gian yên lặng</string>
     <string name="pref_lc_qh_ignore_list_title">Khi có từ khoá</string>
-    <string name="pref_lc_qh_ignore_list_summary">Danh sách các từ khoá (tách nhau bằng dấu phẩy) để bỏ qua 
-        Thời gian yên lặng.. Để trống để áp dụng với mọi thông báo.</string>
+    <string name="pref_lc_qh_ignore_list_summary">Danh sách các từ khoá (tách nhau bằng dấu phẩy) để bỏ qua Thời gian yên lặng.. Để trống để áp dụng với mọi thông báo.</string>
 
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Bật/Tắt Thời gian yên lặng</string>
