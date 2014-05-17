@@ -158,6 +158,8 @@ public class ShortcutActivity extends ListActivity {
             QuietHoursShortcut.launchAction(mContext, intent);
         } else if (action.equals(AirplaneModeShortcut.ACTION)) {
             AirplaneModeShortcut.launchAction(mContext, intent);
+        } else if (action.equals(RingerModeShortcut.ACTION)) {
+            RingerModeShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -200,6 +202,7 @@ public class ShortcutActivity extends ListActivity {
             list.add(new MediaControlShortcut(mContext));
         }
         list.add(new VolumePanelShortcut(mContext));
+        list.add(new RingerModeShortcut(mContext));
         if (Build.VERSION.SDK_INT > 17) {
             list.add(new BrightnessDialogShortcut(mContext));
         }
