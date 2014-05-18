@@ -736,7 +736,7 @@ Khi đó bạn có thể quyết định chặn thông báo này từ lần sau.
 
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">Menu ứng dụng nhanh</string>
-    <string name="pref_cat_app_launcher_summary">Menu chứa tối đa 8 ứng dụng, kích hoạt bằng một nút cứng hoặc nút phụ trên thanh điều hướng</string>
+    <string name="pref_cat_app_launcher_summary">Menu chứa tối đa 12 ứng dụng, kích hoạt bằng một nút cứng hoặc nút phụ trên thanh điều hướng</string>
     <string name="pref_app_launcher_slot_title">Ứng dụng %d</string>
     <string name="app_launcher_no_apps">Chưa có ứng dụng nào. Dùng menu GravityBox / Menu ứng dụng nhanh để đặt ứng dụng.</string>
 
