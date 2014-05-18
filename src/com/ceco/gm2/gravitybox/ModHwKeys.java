@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.ActivityNotFoundException;
@@ -1612,6 +1613,7 @@ public class ModHwKeys {
         }
     }
 
+    @SuppressLint("NewApi")
     private static void toggleAirplaneMode() {
         try {
             ContentResolver cr = mContext.getContentResolver();

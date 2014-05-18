@@ -194,7 +194,8 @@ public class ShortcutActivity extends ListActivity {
             list.add(new NetworkModeShortcut(mContext));
             list.add(new SmartRadioShortcut(mContext));
         }
-        list.add(new AirplaneModeShortcut(mContext));
+        if (Build.VERSION.SDK_INT > 16)
+            list.add(new AirplaneModeShortcut(mContext));
         list.add(new BluetoothShortcut(mContext));
         if (Utils.hasNfc(mContext))
             list.add(new NfcShortcut(mContext));
