@@ -108,6 +108,9 @@
     <string name="quick_settings_smart_radio_off">Okos rádiókapcsolat ki</string>
     <string name="quick_settings_lock_screen_on">Zárképernyő bekapcsolva</string>
     <string name="quick_settings_lock_screen_off">Zárképernyő kikapcsolva</string>
+    <string name="quick_settings_quiet_hours_off">Csendes Időszak kikapcsolva</string>
+    <string name="quick_settings_quiet_hours_on">Csendes Időszak bekapcsolva</string>
+    <string name="quick_settings_quiet_hours_auto">Automatikus Csendes Időszak</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Állapotsáv Gyorsbeállítások csempéi</string>
@@ -1445,5 +1448,63 @@
 
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Angol lokalicázió kényszerítése</string>
+    
+    <!-- VolumePanel transparency -->
+    <string name="pref_volume_panel_transparency_title">Hangerő panel átlátszósága</string>
+    
+    <!-- UNC Quiet Hours: ignore on per-app basis -->
+    <string name="pref_lc_qh_ignore_title">Csendes Időszak figyelmen kívül hagyása</string>
+    <string name="pref_lc_qh_ignore_list_title">Meghatározott kulcsszavaknál</string>
+    <string name="pref_lc_qh_ignore_list_summary">Kulcsszavak vesszővel elválasztott listája, melyek figyelmen kívül hagyják a Csendes Időszakot. Hagyd üresen az összes értesítéshez.</string>
+
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">Csendes Időszak ki-bekapcsolása</string>
+
+    <!-- GB Actions: toggle airplane mode -->
+    <string name="shortcut_airplane_mode">Repülő üzemmód ki-bekapcsolása</string>
+
+    <!-- Statusbar BT icon visibility -->
+    <string name="pref_sb_bt_visibility_title">Bluetooth ikon láthatósága</string>
+    <string name="sb_bt_default">BT engedélyezésekor (alapértelmezett)</string>
+    <string name="sb_bt_connected">BT csatlakozásakor</string>
+    <string name="sb_bt_hidden">Elrejtve</string>
+
+    <!-- Increasing ringtone volume -->
+    <string name="pref_increasing_ring_title">Növekvő hangerejű csengőhang</string>
+    <string name="increasing_ring_enable">Engedélyezve</string>
+    <string name="increasing_ring_min_volume_title">Csengés kezdő hangerő</string>
+    <string name="increasing_ring_volume_notice">Megjegyzés:\nHa a kezdő hangerő magasabb értékre kerül beállításra, mint a csengés hangerő, a csengőhang a csengés hangerőn kerül lejátszásra</string>
+    <string name="increasing_ring_interval_title">Növekedés intervalluma</string>
+    <string name="increasing_ring_interval_eachring">Minden csengésnél</string>
+    <string name="increasing_ring_interval_half_second">0.5 másodperc</string>
+    <string name="increasing_ring_interval_1second">1 másodperc</string>
+    <string name="increasing_ring_interval_2seconds">2 másodperc</string>
+    <string name="increasing_ring_interval_3seconds">3 másodperc</string>
+    <string name="increasing_ring_interval_5seconds">5 másodperc</string>
+    <string name="increasing_ring_interval_10seconds">10 másodperc</string>
+
+    <!-- Icon picker: Snapchat icon -->
+    <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
+
+    <!-- HW Key Action: In-app search -->
+    <string name="hwkey_action_inapp_search">Alkalmazáson belüli keresés</string>
+
+    <!-- Misc: Force LTR direction -->
+    <string name="pref_force_ltr_direction_title">Balról jobbra irány kényszerítése</string>
+    <string name="pref_force_ltr_direction_summary">Balról jobbra elrendezés kényszerítése a jobbról balra lokalizációkhoz (újraindítás szükséges)</string>
+
+    <!-- Volume panel transparency: opaque on interaction -->
+    <string name="pref_volume_panel_opaque_title">Átlátszóság interakciónál</string>
+    <string name="pref_volume_panel_opaque_summary">Eltávolítja az átlátszóságot a hangerő panel aktív használatakor</string>
+
+    <!-- Ringer mode shortcut -->
+    <string name="shortcut_ringer_mode">Csengés üzemmód beállítása</string>
+
+    <!-- Data traffic monitor: Only for mobile data -->
+    <string name="pref_data_traffic_active_mobile_only_title">Csak mobil adatkapcsolatnál</string>
+
+    <!-- Dashed circle battery style -->
+    <string name="battery_style_circle_dashed">Szaggatott kör akkumlátor</string>
+    <string name="battery_style_circle_dashed_percent">Szaggatott kör akkumlátor százalékkal</string>
 
 </resources>
