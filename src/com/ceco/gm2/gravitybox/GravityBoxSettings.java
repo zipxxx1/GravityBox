@@ -192,6 +192,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK = "pref_clock_longpress_link";
     public static final String PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH = "pref_sb_clock_masterswitch";
     public static final String PREF_KEY_ALARM_ICON_HIDE = "pref_alarm_icon_hide";
+    public static final String PREF_CAT_KEY_TRANSPARENCY_MANAGER = "pref_cat_transparency_manager";
     public static final String PREF_KEY_TM_MODE = "pref_tm_mode";
     public static final String PREF_KEY_TM_STATUSBAR_LAUNCHER = "pref_tm_statusbar_launcher";
     public static final String PREF_KEY_TM_STATUSBAR_LOCKSCREEN = "pref_tm_statusbar_lockscreen";
@@ -233,6 +234,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_LOCKSCREEN_BG = "lockscreenBg";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN_SLIDING_CHALLENGE = "pref_cat_lockscreen_sliding_challenge";
+    public static final String PREF_CAT_KEY_LOCKSCREEN_WIDGETS = "pref_cat_lockscreen_widgets";
     public static final String PREF_CAT_KEY_LOCKSCREEN_OTHER = "pref_cat_lockscreen_other";
     public static final String PREF_KEY_LOCKSCREEN_BATTERY_ARC = "pref_lockscreen_battery_arc";
     public static final String PREF_KEY_LOCKSCREEN_RING_TORCH = "pref_lockscreen_ring_torch";
@@ -718,6 +720,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON = "pref_force_overflow_menu_button2";
     public static final String PREF_KEY_FORCE_LTR_DIRECTION = "pref_force_ltr_direction";
 
+    public static final String PREF_CAT_KEY_MISC = "pref_cat_misc";
+    public static final String PREF_CAT_KEY_MISC_RECENTS_PANEL = "pref_cat_misc_recents_panel";
     public static final String PREF_CAT_KEY_MISC_OTHER = "pref_cat_misc_other";
     public static final String PREF_KEY_PULSE_NOTIFICATION_DELAY = "pref_pulse_notification_delay2";
 
@@ -1068,6 +1072,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private File callerPhotoFile;
         private CheckBoxPreference mPrefCallerUnknownPhotoEnable;
         private Preference mPrefCallerUnknownPhoto;
+        private PreferenceScreen mPrefCatTransparencyManager;
         private SeekBarPreference mPrefTmSbLauncher;
         private SeekBarPreference mPrefTmSbLockscreen;
         private SeekBarPreference mPrefTmNbLauncher;
@@ -1078,6 +1083,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefHwKeyLockscreenTorch;
         private PreferenceCategory mPrefCatHwKeyOthers;
         private PreferenceCategory mPrefCatLsSlidingChallenge;
+        private PreferenceCategory mPrefCatLsWidgets;
         private PreferenceCategory mPrefCatLsOther;
         private CheckBoxPreference mPrefLsRingTorch;
         private PreferenceScreen mPrefCatLauncherTweaks;
@@ -1094,6 +1100,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefNavbarRingTargetsBgStyle;
         private ListPreference mPrefNavbarRingHapticFeedback;
         private SeekBarPreference mPrefPulseNotificationDelay;
+        private PreferenceScreen mPrefCatMisc;
+        private PreferenceCategory mPrefCatMiscRecentsPanel;
         private PreferenceCategory mPrefCatMiscOther;
         private SeekBarPreference mPrefTorchAutoOff;
         private CheckBoxPreference mPrefForceLtrDirection;
@@ -1358,6 +1366,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatAppLauncher.addPreference(mPrefAppLauncherSlot[i]);
             }
 
+            mPrefCatTransparencyManager = (PreferenceScreen) findPreference(PREF_CAT_KEY_TRANSPARENCY_MANAGER);
             mPrefTmSbLauncher = (SeekBarPreference) findPreference(PREF_KEY_TM_STATUSBAR_LAUNCHER);
             mPrefTmSbLockscreen = (SeekBarPreference) findPreference(PREF_KEY_TM_STATUSBAR_LOCKSCREEN);
             mPrefTmNbLauncher = (SeekBarPreference) findPreference(PREF_KEY_TM_NAVBAR_LAUNCHER);
@@ -1367,6 +1376,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbDaColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY);
 
             mPrefCatLsSlidingChallenge = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_SLIDING_CHALLENGE);
+            mPrefCatLsWidgets = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_WIDGETS);
             mPrefCatLsOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_OTHER);
             mPrefLsRingTorch = (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_RING_TORCH);
 
@@ -1395,6 +1405,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefPulseNotificationDelay = (SeekBarPreference) findPreference(PREF_KEY_PULSE_NOTIFICATION_DELAY);
 
+            mPrefCatMisc = (PreferenceScreen) findPreference(PREF_CAT_KEY_MISC);
+            mPrefCatMiscRecentsPanel = (PreferenceCategory) findPreference(PREF_CAT_KEY_MISC_RECENTS_PANEL);
             mPrefCatMiscOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_MISC_OTHER);
             mPrefTorchAutoOff = (SeekBarPreference) findPreference(PREF_KEY_TORCH_AUTO_OFF);
             mPrefForceLtrDirection = (CheckBoxPreference) findPreference(PREF_KEY_FORCE_LTR_DIRECTION);
@@ -1421,6 +1433,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {
                 mPrefCatHwKeyOthers.removePreference(mPrefHwKeyLockscreenTorch);
+                mPrefCatLsSlidingChallenge.removePreference(mPrefLsRingTorch);
                 mPrefCatLsSlidingChallenge.removePreference(mPrefLsRingTorch);
                 mPrefCatMiscOther.removePreference(mPrefTorchAutoOff);
             }
@@ -1498,6 +1511,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mQuickSettings.setEntryValues(R.array.qs_tile_values);
                 mPrefCatQsTileSettings.removePreference(mPrefQsTileBehaviourOverride);
                 mPrefCatQsTileSettings.removePreference(mPrefCatQsAlarmTileSettings);
+            }
+
+            // Remove preferences not compatible with Acer ROMs
+            if (Utils.hasAcerCustomUI()) {
+                mPrefCatLockscreen.removePreference(mPrefCatLockscreenBg);
+                mPrefCatLockscreen.removePreference(mPrefCatLsSlidingChallenge);
+                mPrefCatLockscreen.removePreference(mPrefCatLsWidgets);
+                mPrefCatTransparencyManager.removePreference(mPrefTmSbLockscreen);
+                mPrefCatMisc.removePreference(mPrefCatMiscRecentsPanel);
             }
 
             // Remove preferences not compatible with Lenovo VibeUI ROMs

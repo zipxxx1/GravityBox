@@ -38,6 +38,7 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.WindowManager;
 
 import java.io.File;
@@ -65,6 +66,7 @@ public class Utils {
     private static int mDeviceType = -1;
     private static Boolean mIsMtkDevice = null;
     private static Boolean mIsXperiaDevice = null;
+    private static Boolean mHasAcerCustomUI = null;
     private static Boolean mHasLenovoCustomUI = null;
     private static Boolean mHasLenovoVibeUI = null;
     private static Boolean mIsLenovoROW = null;
@@ -98,7 +100,11 @@ public class Utils {
     ));
 
     private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
+        try {
+            XposedBridge.log(TAG + ": " + message);
+        } catch (Throwable t) {
+            Log.e(TAG, message);
+        }
     }
 
     private static int getScreenType(Context con) {
@@ -165,6 +171,13 @@ public class Utils {
         mIsXperiaDevice = Build.MANUFACTURER.equalsIgnoreCase("sony")
                 && !isMtkDevice();
         return mIsXperiaDevice;
+    }
+
+    public static boolean hasAcerCustomUI() {
+        if (mHasAcerCustomUI != null) return mHasAcerCustomUI;
+
+        mHasAcerCustomUI = SystemProp.get("persist.sys.skin", "none").equals("/system/app/theme-res-acer.apk");
+        return mHasAcerCustomUI;
     }
 
     public static boolean hasLenovoCustomUI() {
