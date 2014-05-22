@@ -1765,7 +1765,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefPulseNotificationDelay.setValue(delay);
             }
 
-            if (!sSystemProperties.uuidRegistered) {
+            if (!sSystemProperties.uuidRegistered ||
+                    !UnlockActivity.checkPolicyOk(getActivity())) {
                 mPrefBackup.setEnabled(false);
                 mPrefBackup.setSummary(R.string.wsc_trans_required_summary);
                 mPrefRestore.setEnabled(false);
