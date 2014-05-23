@@ -91,6 +91,7 @@ public class ModNavigationBar {
     private static Context mGbContext;
     private static NavbarViewInfo[] mNavbarViewInfo = new NavbarViewInfo[2];
     private static boolean mCustomKeySwapEnabled;
+    private static boolean mCustomKeyAltIcon;
 
     // Colors
     private static boolean mNavbarColorsEnabled;
@@ -185,6 +186,11 @@ public class ModNavigationBar {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_RING_DISABLE)) {
                     mNavbarRingDisabled = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_NAVBAR_RING_DISABLE, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON)) {
+                    mCustomKeyAltIcon = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON, false);
+                    updateCustomKeyIcon();
                 }
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_RECENTS_SINGLETAP_CHANGED)) {
@@ -335,6 +341,7 @@ public class ModNavigationBar {
                     } catch (Throwable t) {
                         log("Error getting resources for recents key. Clear all in navbar support disabled.");
                     }
+                    mCustomKeyAltIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ICON, false);
 
                     mRecentAltIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear);
                     mRecentAltLandIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear_land);
@@ -420,7 +427,8 @@ public class ModNavigationBar {
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setScaleType(ScaleType.FIT_CENTER);
                         appKey.setClickable(true);
-                        appKey.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_apps));
+                        appKey.setImageDrawable(gbRes.getDrawable(mCustomKeyAltIcon ?
+                                R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps));
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
@@ -448,7 +456,8 @@ public class ModNavigationBar {
                     if (vRot != null) {
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setClickable(true);
-                        appKey.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_apps));
+                        appKey.setImageDrawable(gbRes.getDrawable(mCustomKeyAltIcon ?
+                                R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps));
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
@@ -509,8 +518,6 @@ public class ModNavigationBar {
                     int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    final Context context = ((View) param.thisObject).getContext();
-
                     if (mNavbarColorsEnabled) {
                         final int navigationIconHints = XposedHelpers.getIntField(
                                 param.thisObject, "mNavigationIconHints");
@@ -1156,6 +1163,18 @@ public class ModNavigationBar {
             }
             XposedHelpers.setIntField(mGlowPadView, "mVibrationDuration", vibrateDuration);
             XposedHelpers.callMethod(mGlowPadView, "setVibrateEnabled", vibrateDuration > 0);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void updateCustomKeyIcon() {
+        try {
+            Resources res = mGbContext.getResources();
+            for (NavbarViewInfo nvi : mNavbarViewInfo) {
+                nvi.customKey.setImageDrawable(res.getDrawable(mCustomKeyAltIcon ?
+                        R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps));
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
