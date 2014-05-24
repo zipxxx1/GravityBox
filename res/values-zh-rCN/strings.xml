@@ -1520,5 +1520,11 @@
     <!-- Dashed circle battery style -->
     <string name="battery_style_circle_dashed">虚线圆圈电池</string>
     <string name="battery_style_circle_dashed_percent">虚线圆圈电池含百分比</string>
-    
+
+    <!-- Premium feature unlock via unlocker app -->
+    <string name="premium_unlocked_message">感谢您的支持，高级功能将在GravityBox重新启动后解锁
+        确认GravityBox安装解锁至少要20分钟</string>
+    <string name="pref_about_get_unlocker_title">获取解锁</string>
+    <string name="pref_about_get_unlocker_summary">没有PayPal？只需点击这里从Google Play市场获取解锁GravityBox高级功能</string>
+
 </resources>
