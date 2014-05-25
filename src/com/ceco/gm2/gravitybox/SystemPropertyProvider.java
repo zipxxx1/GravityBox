@@ -106,6 +106,10 @@ public class SystemPropertyProvider {
                                                     cr, SETTING_GRAVITYBOX_UUID))));
                                     data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
                                             SETTING_UNC_TRIAL_COUNTDOWN, 20));
+                                    data.putBoolean("isAcerShellEnabled",
+                                            Utils.SystemProp.get("acer.shell.mode", "none").equalsIgnoreCase("enabled"));
+                                    data.putBoolean("isAcerLaunchpadEnabled",
+                                            Utils.SystemProp.getBoolean("ENABLE_LAUNCHPAD", false));
                                     if (DEBUG) {
                                         log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
                                         log("isTablet: " + data.getBoolean("isTablet"));
@@ -114,6 +118,8 @@ public class SystemPropertyProvider {
                                         log("defaultNotificationLedOff: " + data.getInt("defaultNotificationLedOff"));
                                         log("uuidRegistered: " + data.getBoolean("uuidRegistered"));
                                         log("uncTrialCountdown: " + data.getInt("uncTrialCountdown"));
+                                        log("isAcerShellEnabled: " + data.getInt("isAcerShellEnabled"));
+                                        log("isAcerLaunchpadEnabled: " + data.getInt("isAcerLaunchpadEnabled"));
                                     }
                                     receiver.send(RESULT_SYSTEM_PROPERTIES, data);
                                 } else if (intent.getAction().equals(ACTION_REGISTER_UUID) && 

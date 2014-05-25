@@ -803,6 +803,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public int defaultNotificationLedOff;
         public boolean uuidRegistered;
         public int uncTrialCountdown;
+        public boolean isAcerShellEnabled;
+        public boolean isAcerLaunchpadEnabled;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -825,6 +827,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (data.containsKey("uncTrialCountdown")) {
                 uncTrialCountdown = data.getInt("uncTrialCountdown");
+            }
+            if (data.containsKey("isAcerShellEnabled")) {
+                isAcerShellEnabled = data.getBoolean("isAcerShellEnabled");
+            }
+            if (data.containsKey("isAcerLaunchpadEnabled")) {
+                isAcerLaunchpadEnabled = data.getBoolean("isAcerLaunchpadEnabled");
             }
         }
     }
@@ -1530,11 +1538,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             // Remove preferences not compatible with Acer ROMs
-            if (Utils.hasAcerCustomUI()) {
+            if (sSystemProperties.isAcerShellEnabled) {
                 mPrefCatLockscreen.removePreference(mPrefCatLockscreenBg);
                 mPrefCatLockscreen.removePreference(mPrefCatLsSlidingChallenge);
                 mPrefCatLockscreen.removePreference(mPrefCatLsWidgets);
                 mPrefCatTransparencyManager.removePreference(mPrefTmSbLockscreen);
+            }
+            if (sSystemProperties.isAcerLaunchpadEnabled) {
                 mPrefCatMisc.removePreference(mPrefCatMiscRecentsPanel);
             }
 
