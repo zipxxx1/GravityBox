@@ -13,6 +13,7 @@ Changelog 3.1.4 - 26/05/2014
 - Smart Radio: option to ignore mobile data availability
 - GB Actions: added shortcut for toggling Synchronization
 - Proper hide of tweaks not compatible with Acer skinned ROMs (thanks to bgcngm)
+- (Potential) Fix for ongoing notification blocker on Android 4.1
 - Updated Polish translations (thanks to xtrem007)
 - Updated Chinese (Simplified) translations (thanks to liveasx)
 - Updated Chinese (Traditional) translations (thanks to momomok)
