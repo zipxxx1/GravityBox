@@ -34,6 +34,8 @@ import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.KeyguardManager;
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -42,8 +44,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.content.res.XModuleResources;
+import android.content.res.XResources;
 import android.database.ContentObserver;
 import android.graphics.Paint;
+
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -83,6 +89,7 @@ public class ModStatusBar {
             "com.android.systemui.statusbar.policy.NetworkController";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
     private static final String CLASS_ICON_MERGER = "com.android.systemui.statusbar.phone.IconMerger";
+    private static final String CLASS_SAVE_IMG_TASK = "com.android.systemui.screenshot.SaveImageInBackgroundTask";
     private static final boolean DEBUG = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
@@ -92,6 +99,10 @@ public class ModStatusBar {
     public static final String SETTING_ONGOING_NOTIFICATIONS = "gb_ongoing_notifications";
 
     public static final String ACTION_START_SEARCH_ASSIST = "gravitybox.intent.action.START_SEARCH_ASSIST";
+
+    private static final String ACTION_DELETE_SCREENSHOT = "com.android.systemui.DELETE_SCREENSHOT";
+    private static final String SCREENSHOT_URI = "com.android.systemui.SCREENSHOT_URI";
+    private static final int SCREENSHOT_NOTIFICATION_ID = 789;
 
     private static ViewGroup mIconArea;
     private static ViewGroup mRootView;
@@ -127,6 +138,7 @@ public class ModStatusBar {
     private static View mIconMergerView;
     private static String mClockLongpressLink;
     private static XSharedPreferences mPrefs;
+    private static int mDeleteIconId;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -230,6 +242,14 @@ public class ModStatusBar {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_DT2S_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_SB_DT2S)) {
                 mDt2sEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_DT2S, false);
+            } else if (intent.getAction().equals(ACTION_DELETE_SCREENSHOT)) {
+                Uri screenshotUri = Uri.parse(intent.getStringExtra(SCREENSHOT_URI));
+                if (screenshotUri != null) {
+                    mContext.getContentResolver().delete(screenshotUri, null, null);
+                }
+                NotificationManager notificationManager =
+                        (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancel(SCREENSHOT_NOTIFICATION_ID);
             }
         }
     };
@@ -368,6 +388,10 @@ public class ModStatusBar {
                     }
                 }
             });
+
+            XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
+            mDeleteIconId = XResources.getFakeResId(modRes, R.drawable.ic_menu_delete);
+            resparam.res.setReplacement(mDeleteIconId, modRes.fwd(R.drawable.ic_menu_delete));
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -494,6 +518,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER2_TEXT_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DT2S_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BT_VISIBILITY_CHANGED);
+                    intentFilter.addAction(ACTION_DELETE_SCREENSHOT);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
@@ -842,6 +867,37 @@ public class ModStatusBar {
 
             // Status bar Bluetooth icon policy
             mBroadcastSubReceivers.add(new StatusbarBluetoothIcon(classLoader, prefs));
+
+            // Delete action for screenshot notification
+            try {
+                XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_SAVE_IMG_TASK, classLoader),
+                        "doInBackground", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        Object result = param.getResult();
+                        if (result == null || (Integer) XposedHelpers.getIntField(result, "result") != 0)
+                            return;
+
+                        Notification.Builder builder = (Notification.Builder)
+                                XposedHelpers.getObjectField(param.thisObject, "mNotificationBuilder");
+                        if (XposedHelpers.getAdditionalInstanceField(builder, "gbDeleteActionAdded") != null)
+                            return;
+
+                        Uri uri = (Uri) XposedHelpers.getObjectField(result, "imageUri");
+                        Intent deleteIntent = new Intent(ACTION_DELETE_SCREENSHOT);
+                        deleteIntent.putExtra(SCREENSHOT_URI, uri.toString());
+                        Context context = (Context) XposedHelpers.getObjectField(result, "context");
+                        Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+                        builder.addAction(mDeleteIconId, gbContext.getString(R.string.delete),
+                                PendingIntent.getBroadcast(context, 0, deleteIntent,
+                                        PendingIntent.FLAG_CANCEL_CURRENT));
+
+                        XposedHelpers.setAdditionalInstanceField(builder, "gbDeleteActionAdded", true);
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
         catch (Throwable t) {
             XposedBridge.log(t);

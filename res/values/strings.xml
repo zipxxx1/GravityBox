@@ -1546,4 +1546,7 @@
     <!-- Statusbar clock: show date -->
     <string name="pref_statusbar_clock_date_title">Show date</string>
 
+    <!-- Delete -->
+    <string name="delete">Delete</string>
+
 </resources>
