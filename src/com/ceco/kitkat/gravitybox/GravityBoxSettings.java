@@ -1594,6 +1594,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefs.edit().putStringSet(PREF_KEY_QUICK_SETTINGS, qsPrefs).commit();
             mQuickSettings.setEntries(qsEntries.toArray(new CharSequence[qsEntries.size()]));
             mQuickSettings.setEntryValues(qsEntryValues.toArray(new CharSequence[qsEntryValues.size()]));
+            TileOrderActivity.updateTileList(mPrefs);
 
             // Remove actions for HW keys based on device features
             mPrefHwKeyMenuLongpress.setEntries(R.array.hwkey_action_entries);
