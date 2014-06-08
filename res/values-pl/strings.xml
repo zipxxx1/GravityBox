@@ -1524,4 +1524,10 @@
     <!-- UNC: timeout for Alert only once -->
     <string name="pref_lc_notif_sound_only_once_timeout_title">W przedziale czasu</string>
 
+    <!-- Statusbar clock: show date -->
+    <string name="pref_statusbar_clock_date_title">Pokaż datę</string>
+
+    <!-- Delete -->
+    <string name="delete">Usuń</string>
+
 </resources>
