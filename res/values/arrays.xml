@@ -172,6 +172,7 @@
         <item>@string/qs_tile_data_usage</item>
         <item>@string/qs_tile_airplane_mode</item>
         <item>@string/qs_tile_gps</item>
+        <item>@string/qs_tile_gps_slimkat</item>
         <item>@string/qs_tile_autorotation</item>
         <item>@string/qs_tile_settings</item>
         <item>@string/qs_tile_brightness</item>
@@ -183,6 +184,7 @@
         <item>rssi_textview</item>
         <item>airplane_mode_textview</item>
         <item>gps_textview</item>
+        <item>location_tileview</item>
         <item>auto_rotate_textview</item>
         <item>settings</item>
         <item>brightness_textview</item>

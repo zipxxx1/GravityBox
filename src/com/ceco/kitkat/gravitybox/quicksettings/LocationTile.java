@@ -15,6 +15,9 @@
  */
 package com.ceco.kitkat.gravitybox.quicksettings;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,9 +26,11 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
 
+import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.ModQuickSettings;
 import com.ceco.kitkat.gravitybox.R;
 
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 
 public class LocationTile extends BasicTile {
@@ -34,6 +39,7 @@ public class LocationTile extends BasicTile {
 
     private boolean mLocationEnabled;
     private int mLocationMode;
+    private boolean mBehaviorOverriden;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -48,19 +54,38 @@ public class LocationTile extends BasicTile {
         mOnClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setLocationEnabled(!mLocationEnabled);
+                if (mBehaviorOverriden) {
+                    if (mLocationEnabled) {
+                        switchLocationMode(mLocationMode);
+                    }
+                } else {
+                    setLocationEnabled(!mLocationEnabled);
+                }
             }
         };
 
         mOnLongClick = new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if (mLocationEnabled) {
-                    switchLocationMode(mLocationMode);
+                if (mBehaviorOverriden) {
+                    setLocationEnabled(!mLocationEnabled);
+                } else {
+                    if (mLocationEnabled) {
+                        switchLocationMode(mLocationMode);
+                    }
                 }
                 return true;
             }
         };
+    }
+
+    @Override
+    protected void onPreferenceInitialize(XSharedPreferences prefs) {
+        super.onPreferenceInitialize(prefs);
+
+        Set<String> overridenTileKeys = prefs.getStringSet(
+                GravityBoxSettings.PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE, new HashSet<String>());
+        mBehaviorOverriden = overridenTileKeys.contains("location_tileview");
     }
 
     @Override
