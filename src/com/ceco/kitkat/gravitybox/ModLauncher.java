@@ -32,6 +32,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.XposedHelpers.ClassNotFoundError;
 
 public class ModLauncher {
     public static final List<String> PACKAGE_NAMES = new ArrayList<String>(Arrays.asList(
@@ -121,61 +122,76 @@ public class ModLauncher {
         }
 
         try {
-            final Class<?> classLauncher = XposedHelpers.findClass(CLASS_LAUNCHER, classLoader);
-            final Class<?> classAppWidgetHostView = XposedHelpers.findClass(CLASS_APP_WIDGET_HOST_VIEW, classLoader);
+            Class<?> classLauncher = null;
+            try {
+                classLauncher = XposedHelpers.findClass(CLASS_LAUNCHER, classLoader);
+            } catch (ClassNotFoundError e) { 
+                log("Launcher3.Launcher not found");
+            }
 
-            XposedHelpers.findAndHookMethod(classLauncher, "onCreate", Bundle.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    IntentFilter intentFilter = new IntentFilter(ACTION_SHOW_APP_DRAWER);
-                    ((Activity)param.thisObject).registerReceiver(mBroadcastReceiver, intentFilter);
-                    mReceiverRegistered = true;
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(classLauncher, "onDestroy", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mReceiverRegistered) {
-                        ((Activity)param.thisObject).unregisterReceiver(mBroadcastReceiver);
-                        mReceiverRegistered = false;
+            if (classLauncher != null) {
+                XposedHelpers.findAndHookMethod(classLauncher, "onCreate", Bundle.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        IntentFilter intentFilter = new IntentFilter(ACTION_SHOW_APP_DRAWER);
+                        ((Activity)param.thisObject).registerReceiver(mBroadcastReceiver, intentFilter);
+                        mReceiverRegistered = true;
                     }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(classLauncher, "onNewIntent", Intent.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    Intent i = (Intent) param.args[0];
-                    mShouldShowAppDrawer = (i != null && i.hasExtra("showAppDrawer"));
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(classLauncher, "onResume", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mShouldShowAppDrawer) {
-                        mShouldShowAppDrawer = false;
-                        XposedHelpers.callMethod(param.thisObject, "onClickAllAppsButton", 
-                                new Class<?>[] { View.class }, (Object)null);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(classAppWidgetHostView, "getAppWidgetInfo", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_LAUNCHER_RESIZE_WIDGET, false)) {
-                        Object info = XposedHelpers.getObjectField(param.thisObject, "mInfo");
-                        if (info != null) {
-                            XposedHelpers.setIntField(info, "resizeMode", 3);
-                            XposedHelpers.setIntField(info, "minResizeWidth", 40);
-                            XposedHelpers.setIntField(info, "minResizeHeight", 40);
+                });
+    
+                XposedHelpers.findAndHookMethod(classLauncher, "onDestroy", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mReceiverRegistered) {
+                            ((Activity)param.thisObject).unregisterReceiver(mBroadcastReceiver);
+                            mReceiverRegistered = false;
                         }
                     }
-                }
-            });
+                });
+    
+                XposedHelpers.findAndHookMethod(classLauncher, "onNewIntent", Intent.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        Intent i = (Intent) param.args[0];
+                        mShouldShowAppDrawer = (i != null && i.hasExtra("showAppDrawer"));
+                    }
+                });
+    
+                XposedHelpers.findAndHookMethod(classLauncher, "onResume", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mShouldShowAppDrawer) {
+                            mShouldShowAppDrawer = false;
+                            XposedHelpers.callMethod(param.thisObject, "onClickAllAppsButton", 
+                                    new Class<?>[] { View.class }, (Object)null);
+                        }
+                    }
+                });
+            }
+
+            Class<?> classAppWidgetHostView = null;
+            try {
+                classAppWidgetHostView = XposedHelpers.findClass(CLASS_APP_WIDGET_HOST_VIEW, classLoader);
+            } catch (ClassNotFoundError e) {
+                log("AppWidgetHostView not found");
+            }
+
+            if (classAppWidgetHostView != null) {
+                XposedHelpers.findAndHookMethod(classAppWidgetHostView, "getAppWidgetInfo", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (prefs.getBoolean(
+                                GravityBoxSettings.PREF_KEY_LAUNCHER_RESIZE_WIDGET, false)) {
+                            Object info = XposedHelpers.getObjectField(param.thisObject, "mInfo");
+                            if (info != null) {
+                                XposedHelpers.setIntField(info, "resizeMode", 3);
+                                XposedHelpers.setIntField(info, "minResizeWidth", 40);
+                                XposedHelpers.setIntField(info, "minResizeHeight", 40);
+                            }
+                        }
+                    }
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
