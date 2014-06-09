@@ -1530,4 +1530,8 @@
     <!-- Delete -->
     <string name="delete">Usuń</string>
 
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">Wyłącz przycisk połączenia alarmowego</string>
+    <string name="pref_lockscreen_disable_ecb_summary">UŻYWAJ NA WŁASNE RYZYKO!!!</string>
+
 </resources>
