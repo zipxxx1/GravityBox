@@ -1526,4 +1526,10 @@
     <!-- UNC: timeout for Alert only once -->
     <string name="pref_lc_notif_sound_only_once_timeout_title">在設定時限內</string>
 
+  <!-- Statusbar clock: show date -->
+  <string name="pref_statusbar_clock_date_title">顯示日期</string>
+
+  <!-- Delete -->
+  <string name="delete">刪除</string>
+
 </resources>
