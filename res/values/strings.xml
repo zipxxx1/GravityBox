@@ -1549,4 +1549,8 @@
     <!-- Delete -->
     <string name="delete">Delete</string>
 
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">Disable emergency call button</string>
+    <string name="pref_lockscreen_disable_ecb_summary">USE AT YOUR OWN RISK!!!!</string>
+
 </resources>

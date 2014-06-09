@@ -46,6 +46,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -59,6 +60,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewManager;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -92,6 +94,7 @@ public class ModLockscreen {
     private static final String ENUM_SECURITY_MODE = CLASS_PATH + ".KeyguardSecurityModel.SecurityMode";
     private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
     private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
+    private static final String CLASS_LOCK_PATTERN_UTILS = "com.android.internal.widget.LockPatternUtils";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
@@ -165,6 +168,7 @@ public class ModLockscreen {
             final Class<?> lockPatternViewClass = XposedHelpers.findClass(CLASS_LOCK_PATTERN_VIEW, null);
             final Class<? extends Enum> displayModeEnum =
                     (Class<? extends Enum>) XposedHelpers.findClass(ENUM_DISPLAY_MODE, null);
+            final Class<?> lockPatternUtilsClass = XposedHelpers.findClass(CLASS_LOCK_PATTERN_UTILS, null);
 
             boolean enableMenuKey = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, false);
@@ -826,6 +830,16 @@ public class ModLockscreen {
                 }
             });
 
+            XposedHelpers.findAndHookMethod(lockPatternUtilsClass, "updateEmergencyCallButtonState",
+                    Button.class, int.class, boolean.class, boolean.class, boolean.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_DISABLE_ECB, false) &&
+                            (Integer) param.args[1] != TelephonyManager.CALL_STATE_OFFHOOK) {
+                        param.args[2] = false;
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
