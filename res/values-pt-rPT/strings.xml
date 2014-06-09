@@ -1523,4 +1523,17 @@
     <!-- GB Actions: Toggle sync -->
     <string name="shortcut_sync">Comutar sincronização</string>
 
+    <!-- UNC: timeout for Alert only once -->
+    <string name="pref_lc_notif_sound_only_once_timeout_title">Dentro do intervalo de tempo</string>
+
+    <!-- Statusbar clock: show date -->
+    <string name="pref_statusbar_clock_date_title">Mostrar data</string>
+
+    <!-- Delete -->
+    <string name="delete">Apagar</string>
+
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">Desativar botão de chamada de emergência</string>
+    <string name="pref_lockscreen_disable_ecb_summary">USE A SEU PRÓPRIO RISCO!!!</string>
+
 </resources>
