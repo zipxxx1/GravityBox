@@ -967,6 +967,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefLockscreenBlurIntensity;
         private EditTextPreference mPrefLockscreenCarrierText;
         private EditTextPreference mPrefLockscreenCarrier2Text;
+        private CheckBoxPreference mPrefLockscreenDisableEcb;
         private File wallpaperImage;
         private File wallpaperTemporary;
         private File notifBgImagePortrait;
@@ -1209,6 +1210,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER_TEXT);
             mPrefLockscreenCarrier2Text = 
                     (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER2_TEXT);
+            mPrefLockscreenDisableEcb =
+                    (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_DISABLE_ECB);
 
             wallpaperImage = new File(getActivity().getFilesDir() + "/lockwallpaper"); 
             wallpaperTemporary = new File(getActivity().getCacheDir() + "/lockwallpaper.tmp");
@@ -1473,6 +1476,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatPhoneTelephony.removePreference(mPrefCallVibrations);
             }
             if (!Utils.hasTelephonySupport(getActivity())) {
+                mPrefCatLsOther.removePreference(mPrefLockscreenDisableEcb);
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
                 mPrefCatMedia.removePreference(mPrefLinkVolumes);
                 mPrefCatFixes.removePreference(mPrefFixCallerIDPhone);
