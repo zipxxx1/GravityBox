@@ -134,31 +134,33 @@ public class QuickAppTile extends BasicTile {
                     return;
                 }
                 final int mode = mIntent.getIntExtra("mode", AppPickerPreference.MODE_APP);
+
+                Bitmap appIcon = null;
                 final int iconResId = mIntent.getStringExtra("iconResName") != null ?
                         mGbResources.getIdentifier(mIntent.getStringExtra("iconResName"),
                         "drawable", mGbContext.getPackageName()) : 0;
-                Bitmap appIcon = null;
-                if (mode == AppPickerPreference.MODE_APP) {
-                    ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
-                    mAppName = ai.loadLabel(mPm).toString();
-                    if (iconResId != 0) {
-                        appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
-                    } else {
-                        appIcon = Utils.drawableToBitmap(ai.loadIcon(mPm));
-                    }
-                } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
-                    mAppName = mIntent.getStringExtra("label");
-                    if (iconResId != 0) {
-                        appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
-                    } else {
-                        final String appIconPath = mIntent.getStringExtra("icon");
-                        if (appIconPath != null) {
-                            File f = new File(appIconPath);
+                if (iconResId != 0) {
+                    appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                } else {
+                    final String appIconPath = mIntent.getStringExtra("icon");
+                    if (appIconPath != null) {
+                        File f = new File(appIconPath);
+                        if (f.exists() && f.canRead()) {
                             FileInputStream fis = new FileInputStream(f);
                             appIcon = BitmapFactory.decodeStream(fis);
                             fis.close();
                         }
                     }
+                }
+
+                if (mode == AppPickerPreference.MODE_APP) {
+                    ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
+                    mAppName = ai.loadLabel(mPm).toString();
+                    if (appIcon == null) {
+                        appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                    }
+                } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
+                    mAppName = mIntent.getStringExtra("label");
                 }
                 if (appIcon != null) {
                     int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 

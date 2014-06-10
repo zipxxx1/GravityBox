@@ -110,34 +110,36 @@ public class GlowPadHelper {
                 return null;
             }
             final int mode = appInfo.intent.getIntExtra("mode", AppPickerPreference.MODE_APP);
+
+            Bitmap appIcon = null;
             final int iconResId = appInfo.intent.getStringExtra("iconResName") != null ?
                     mGbResources.getIdentifier(appInfo.intent.getStringExtra("iconResName"),
                     "drawable", GravityBox.PACKAGE_NAME) : 0;
-            Bitmap appIcon = null;
+            if (iconResId != 0) {
+                appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+            } else {
+                final String appIconPath = appInfo.intent.getStringExtra("icon");
+                if (appIconPath != null) {
+                    File f = new File(appIconPath);
+                    if (f.exists() && f.canRead()) {
+                        FileInputStream fis = new FileInputStream(f);
+                        appIcon = BitmapFactory.decodeStream(fis);
+                        fis.close();
+                    }
+                }
+            }
+
             final Resources res = context.getResources();
             boolean isGbShortcut = false;
             if (mode == AppPickerPreference.MODE_APP) {
                 PackageManager pm = context.getPackageManager();
                 ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
                 appInfo.name = (String) ai.loadLabel(pm);
-                if (iconResId != 0) {
+                if (appIcon == null) {
                     appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
-                } else {
-                    appIcon = Utils.drawableToBitmap(ai.loadIcon(pm));
                 }
             } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                 appInfo.name = appInfo.intent.getStringExtra("label");
-                if (iconResId != 0) {
-                    appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
-                } else {
-                    final String appIconPath = appInfo.intent.getStringExtra("icon");
-                    if (appIconPath != null) {
-                        File f = new File(appIconPath);
-                        FileInputStream fis = new FileInputStream(f);
-                        appIcon = BitmapFactory.decodeStream(fis);
-                        fis.close();
-                    }
-                }
                 isGbShortcut = appInfo.intent.getAction().equals(ShortcutActivity.ACTION_LAUNCH_ACTION);
             }
             if (appIcon != null) {

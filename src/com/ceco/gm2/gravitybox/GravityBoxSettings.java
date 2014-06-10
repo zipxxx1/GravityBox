@@ -16,6 +16,8 @@
 package com.ceco.gm2.gravitybox;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -765,6 +767,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
     private static final int REQ_CALLER_PHOTO = 1027;
     private static final int REQ_OBTAIN_SHORTCUT = 1028;
+    private static final int REQ_ICON_PICK = 1029;
 
     private static final List<String> rebootKeys = new ArrayList<String>(Arrays.asList(
             PREF_KEY_FIX_DATETIME_CRASH,
@@ -968,6 +971,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private File wallpaperTemporary;
         private File notifBgImagePortrait;
         private File notifBgImageLandscape;
+        private File iconTemporary;
         private PreferenceScreen mPrefCatHwKeyActions;
         private PreferenceCategory mPrefCatHwKeyMenu;
         private ListPreference mPrefHwKeyMenuLongpress;
@@ -1211,6 +1215,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             notifBgImagePortrait = new File(getActivity().getFilesDir() + "/notifwallpaper");
             notifBgImageLandscape = new File(getActivity().getFilesDir() + "/notifwallpaper_landscape");
             callerPhotoFile = new File(getActivity().getFilesDir() + "/caller_photo");
+            iconTemporary = new File(getActivity().getFilesDir() + "/icon.tmp");
 
             mPrefCatHwKeyActions = (PreferenceScreen) findPreference(PREF_CAT_HWKEY_ACTIONS);
             mPrefCatHwKeyMenu = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_MENU);
@@ -3261,6 +3266,38 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             startActivityForResult(mShortcutHandler.getCreateShortcutIntent(), REQ_OBTAIN_SHORTCUT);
         }
 
+        public interface IconPickHandler {
+            void onIconPicked(Bitmap icon);
+            void onIconPickCancelled();
+        }
+
+        private IconPickHandler mIconPickHandler;
+        public void pickIcon(int sizePx, IconPickHandler handler) {
+            if (handler == null) return;
+
+            mIconPickHandler = handler;
+
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.setType("image/*");
+            intent.putExtra("crop", "true");
+            intent.putExtra("aspectX", sizePx);
+            intent.putExtra("aspectY", sizePx);
+            intent.putExtra("outputX", sizePx);
+            intent.putExtra("outputY", sizePx);
+            intent.putExtra("scale", true);
+            intent.putExtra("scaleUpIfNeeded", true);
+            intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
+            try {
+                iconTemporary.createNewFile();
+                iconTemporary.setWritable(true, false);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(iconTemporary));
+                startActivityForResult(intent, REQ_ICON_PICK);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             if (requestCode == REQ_LOCKSCREEN_BACKGROUND) {
@@ -3359,6 +3396,23 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                             data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME), b);
                 } else {
                     mShortcutHandler.onShortcutCancelled();
+                }
+            } else if (requestCode == REQ_ICON_PICK && mIconPickHandler != null) {
+                if (resultCode == Activity.RESULT_OK && iconTemporary.exists()) {
+                    try {
+                        Bitmap icon = BitmapFactory.decodeStream(new FileInputStream(iconTemporary));
+                        mIconPickHandler.onIconPicked(icon);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    } finally {
+                        iconTemporary.delete();
+                    }
+                } else {
+                    if (iconTemporary.exists()) {
+                        iconTemporary.delete();
+                    }
+                    mIconPickHandler.onIconPickCancelled();
                 }
             }
         }
