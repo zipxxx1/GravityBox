@@ -1228,6 +1228,7 @@
     <string name="animation_scale6">アニメーション速度5倍</string>
     <string name="animation_scale7">アニメーション速度10倍</string>
     <string name="animation_scale8">アニメーション速度.75倍</string>
+    <string name="animation_scale9">アニメーション速度1.25倍</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">タイルのラベルスタイル</string>
