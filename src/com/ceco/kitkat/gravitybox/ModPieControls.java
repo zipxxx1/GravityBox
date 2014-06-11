@@ -166,6 +166,10 @@ public class ModPieControls {
                     mPieController.setLongpressDelay(intent.getIntExtra(
                             GravityBoxSettings.EXTRA_PIE_LONGPRESS_DELAY, 0));
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_MIRRORED_KEYS)) {
+                    mPieController.setMirroredKeys(intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_PIE_MIRRORED_KEYS, false));
+                }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
                 mExpandedDesktopMode = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
@@ -302,6 +306,7 @@ public class ModPieControls {
                         log("Invalid value for PREF_KEY_PIE_CONTROL_CUSTOM_KEY preference");
                     }
                     mPieController.setCustomKeyMode(customKeyMode);
+                    mPieController.setMirroredKeys(prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_MIRRORED_KEYS, false));
 
                     mPieController.attachTo(param.thisObject);
 

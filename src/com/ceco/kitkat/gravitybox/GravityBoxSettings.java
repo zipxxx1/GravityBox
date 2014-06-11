@@ -442,6 +442,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_PIE_APP_LONGPRESS = "pref_pie_app_longpress";
     public static final String PREF_KEY_PIE_SYSINFO_DISABLE = "pref_pie_sysinfo_disable";
     public static final String PREF_KEY_PIE_LONGPRESS_DELAY = "pref_pie_longpress_delay";
+    public static final String PREF_KEY_PIE_MIRRORED_KEYS = "pref_pie_control_mirrored_keys";
     public static final int PIE_CUSTOM_KEY_OFF = 0;
     public static final int PIE_CUSTOM_KEY_SEARCH = 1;
     public static final int PIE_CUSTOM_KEY_APP_LAUNCHER = 2;
@@ -462,6 +463,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_PIE_LONGPRESS_ACTION = "pieLongpressAction";
     public static final String EXTRA_PIE_SYSINFO_DISABLE = "pieSysinfoDisable";
     public static final String EXTRA_PIE_LONGPRESS_DELAY = "pieLongpressDelay";
+    public static final String EXTRA_PIE_MIRRORED_KEYS = "pieMirroredKeys";
 
     public static final String PREF_KEY_BUTTON_BACKLIGHT_MODE = "pref_button_backlight_mode";
     public static final String PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS = "pref_button_backlight_notifications";
@@ -2509,6 +2511,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_LONGPRESS_DELAY, Integer.valueOf(
                         prefs.getString(PREF_KEY_PIE_LONGPRESS_DELAY, "0")));
+            } else if (key.equals(PREF_KEY_PIE_MIRRORED_KEYS)) {
+                intent.setAction(ACTION_PREF_PIE_CHANGED);
+                intent.putExtra(EXTRA_PIE_MIRRORED_KEYS,
+                        prefs.getBoolean(PREF_KEY_PIE_MIRRORED_KEYS, false));
             } else if (key.equals(PREF_KEY_BUTTON_BACKLIGHT_MODE)) {
                 intent.setAction(ACTION_PREF_BUTTON_BACKLIGHT_CHANGED);
                 intent.putExtra(EXTRA_BB_MODE, prefs.getString(

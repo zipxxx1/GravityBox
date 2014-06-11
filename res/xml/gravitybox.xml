@@ -1175,6 +1175,11 @@
                 android:defaultValue="1000" />
 
         <CheckBoxPreference 
+                android:key="pref_pie_control_mirrored_keys"
+                android:title="@string/pref_pie_control_mirrored_keys_title"
+                android:defaultValue="false" />
+
+        <CheckBoxPreference 
                 android:key="pref_pie_sysinfo_disable"
                 android:title="@string/pref_pie_sysinfo_disable_title"
                 android:defaultValue="false" />

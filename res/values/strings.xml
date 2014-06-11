@@ -1587,4 +1587,7 @@
     <string name="cd_west">W</string>
     <string name="cd_north_west">NW</string>
 
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">Mirrored keys</string>
+
 </resources>

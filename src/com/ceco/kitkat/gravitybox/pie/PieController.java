@@ -126,6 +126,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private Drawable mRecentAltIcon;
     private boolean mRecentAlt = false;
     private int mRecentLongPressAction = 0;
+    private boolean mMirroredKeys;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -406,27 +407,55 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         int minimumImageSize = (int)mGbResources.getDimension(R.dimen.pie_item_size);
 
         mNavigationSlice.clear();
-        mNavigationSlice.addItem(constructItem(2, ButtonType.BACK,
-                mBackIcon,
-                minimumImageSize));
-        mNavigationSlice.addItem(constructItem(2, ButtonType.HOME,
-                res.getDrawable(res.getIdentifier("ic_sysbar_home", "drawable", PACKAGE_NAME)),
-                minimumImageSize));
-        mNavigationSlice.addItem(constructItem(2, ButtonType.RECENT,
-                mRecentIcon,
-                minimumImageSize));
-        if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_SEARCH) {
-            mNavigationSlice.addItem(constructItem(1, ButtonType.SEARCH,
-                    mGbResources.getDrawable(R.drawable.ic_sysbar_search_side), minimumImageSize));
-        } else if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_APP_LAUNCHER) {
-            mNavigationSlice.addItem(constructItem(1, ButtonType.APP_LAUNCHER,
-                    mGbResources.getDrawable(R.drawable.ic_sysbar_apps), minimumImageSize));
-        }
 
-        mMenuButton = constructItem(1, ButtonType.MENU,
-                res.getDrawable(res.getIdentifier("ic_sysbar_menu", "drawable", PACKAGE_NAME)),
-                minimumImageSize);
-        mNavigationSlice.addItem(mMenuButton);
+        if (mMirroredKeys) {
+            mMenuButton = constructItem(1, ButtonType.MENU,
+                    res.getDrawable(res.getIdentifier("ic_sysbar_menu", "drawable", PACKAGE_NAME)),
+                    minimumImageSize);
+            mNavigationSlice.addItem(mMenuButton);
+    
+            if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_SEARCH) {
+                mNavigationSlice.addItem(constructItem(1, ButtonType.SEARCH,
+                        mGbResources.getDrawable(R.drawable.ic_sysbar_search_side), minimumImageSize));
+            } else if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_APP_LAUNCHER) {
+                mNavigationSlice.addItem(constructItem(1, ButtonType.APP_LAUNCHER,
+                        mGbResources.getDrawable(R.drawable.ic_sysbar_apps), minimumImageSize));
+            }
+    
+            mNavigationSlice.addItem(constructItem(2, ButtonType.RECENT,
+                    mRecentIcon,
+                    minimumImageSize));
+    
+            mNavigationSlice.addItem(constructItem(2, ButtonType.HOME,
+                    res.getDrawable(res.getIdentifier("ic_sysbar_home", "drawable", PACKAGE_NAME)),
+                    minimumImageSize));
+    
+            mNavigationSlice.addItem(constructItem(2, ButtonType.BACK,
+                    mBackIcon,
+                    minimumImageSize));
+        } else {
+            mNavigationSlice.addItem(constructItem(2, ButtonType.BACK,
+                    mBackIcon,
+                    minimumImageSize));
+            mNavigationSlice.addItem(constructItem(2, ButtonType.HOME,
+                    res.getDrawable(res.getIdentifier("ic_sysbar_home", "drawable", PACKAGE_NAME)),
+                    minimumImageSize));
+            mNavigationSlice.addItem(constructItem(2, ButtonType.RECENT,
+                    mRecentIcon,
+                    minimumImageSize));
+            if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_SEARCH) {
+                mNavigationSlice.addItem(constructItem(1, ButtonType.SEARCH,
+                        mGbResources.getDrawable(R.drawable.ic_sysbar_search_side), minimumImageSize));
+            } else if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_APP_LAUNCHER) {
+                mNavigationSlice.addItem(constructItem(1, ButtonType.APP_LAUNCHER,
+                        mGbResources.getDrawable(R.drawable.ic_sysbar_apps), minimumImageSize));
+            }
+
+            mMenuButton = constructItem(1, ButtonType.MENU,
+                    res.getDrawable(res.getIdentifier("ic_sysbar_menu", "drawable", PACKAGE_NAME)),
+                    minimumImageSize);
+            mNavigationSlice.addItem(mMenuButton);
+        }
 
         setNavigationIconHints(mNavigationIconHints, true);
         setMenuVisibility(mShowMenu);
@@ -550,6 +579,11 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
 
     public void setCustomKeyMode(int mode) {
         mCustomKeyMode = mode;
+        setupNavigationItems();
+    }
+
+    public void setMirroredKeys(boolean mirrored) {
+        mMirroredKeys = mirrored;
         setupNavigationItems();
     }
 
