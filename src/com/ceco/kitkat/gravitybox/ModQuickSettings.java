@@ -32,6 +32,7 @@ import com.ceco.kitkat.gravitybox.R;
 import com.ceco.kitkat.gravitybox.Utils.MethodState;
 import com.ceco.kitkat.gravitybox.quicksettings.AQuickSettingsTile;
 import com.ceco.kitkat.gravitybox.quicksettings.CameraTile;
+import com.ceco.kitkat.gravitybox.quicksettings.CompassTile;
 import com.ceco.kitkat.gravitybox.quicksettings.ExpandedDesktopTile;
 import com.ceco.kitkat.gravitybox.quicksettings.GpsTile;
 import com.ceco.kitkat.gravitybox.quicksettings.GravityBoxTile;
@@ -172,7 +173,8 @@ public class ModQuickSettings {
             R.id.smart_radio_tileview,
             R.id.lock_screen_tileview,
             R.id.location_tileview,
-            R.id.quiet_hours_tileview
+            R.id.quiet_hours_tileview,
+            R.id.compass_tileview
         ));
 
         Map<String, Integer> tmpMap = new HashMap<String, Integer>();
@@ -823,6 +825,12 @@ public class ModQuickSettings {
                 QuietHoursTile qhTile = new QuietHoursTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 qhTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(qhTile);
+
+                if (Utils.hasCompass(mContext)) {
+                    CompassTile cTile = new CompassTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                    cTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                    mTiles.add(cTile);
+                }
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {

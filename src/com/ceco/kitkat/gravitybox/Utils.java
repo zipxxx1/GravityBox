@@ -28,6 +28,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Vibrator;
@@ -80,6 +82,7 @@ public class Utils {
     private static Boolean mHasFlash = null;
     private static Boolean mHasGPS = null;
     private static Boolean mHasNfc = null;
+    private static Boolean mHasCompass;
 
     // Supported MTK devices
     private static final Set<String> MTK_DEVICES = new HashSet<String>(Arrays.asList(
@@ -292,6 +295,20 @@ public class Utils {
             return mHasNfc;
         } catch (Throwable t) {
             mHasNfc = null;
+            return false;
+        }
+    }
+
+    public static boolean hasCompass(Context context) {
+        if (mHasCompass != null) return mHasCompass;
+
+        try {
+            SensorManager sm = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+            mHasCompass = (sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null &&
+                        sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null);
+            return mHasCompass;
+        } catch (Throwable t) {
+            mHasCompass = null;
             return false;
         }
     }

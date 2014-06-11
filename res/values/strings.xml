@@ -1570,4 +1570,20 @@
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">Icon pick cancelled by target app</string>
 
+    <!-- QS: Compass tile -->
+    <string name="qs_tile_compass">Compass</string>
+    <string name="quick_settings_compass_off">Compass off</string>
+    <string name="quick_settings_compass_init">Initializing&#8230;</string>
+    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
+
+    <!-- Cardinal directions -->
+    <string name="cd_north">N</string>
+    <string name="cd_north_east">NE</string>
+    <string name="cd_east">E</string>
+    <string name="cd_south_east">SE</string>
+    <string name="cd_south">S</string>
+    <string name="cd_south_west">SW</string>
+    <string name="cd_west">W</string>
+    <string name="cd_north_west">NW</string>
+
 </resources>

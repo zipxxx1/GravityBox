@@ -127,6 +127,7 @@
         <item>@string/qs_tile_alarm</item>
         <item>@string/qs_tile_lock_screen</item>
         <item>@string/lc_quiet_hours</item>
+        <item>@string/qs_tile_compass</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_values_kk" translatable="false">
@@ -164,6 +165,7 @@
         <item>alarm_textview</item>
         <item>lock_screen_tileview</item>
         <item>quiet_hours_tileview</item>
+        <item>compass_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_override_entries" translatable="false">
@@ -1017,5 +1019,16 @@
         <item>5000</item>
         <item>10000</item>
     </integer-array>
+
+    <string-array name="cardinal_directions">
+        <item>@string/cd_north</item>
+        <item>@string/cd_north_east</item>
+        <item>@string/cd_east</item>
+        <item>@string/cd_south_east</item>
+        <item>@string/cd_south</item>
+        <item>@string/cd_south_west</item>
+        <item>@string/cd_west</item>
+        <item>@string/cd_north_west</item>
+    </string-array>
 
 </resources>

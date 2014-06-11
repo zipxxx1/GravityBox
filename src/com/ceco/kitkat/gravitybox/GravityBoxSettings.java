@@ -1600,6 +1600,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     qsPrefs.remove("quiet_hours_tileview");
                 }
             }
+            if (!Utils.hasCompass(getActivity())) {
+                qsEntries.remove(getString(R.string.qs_tile_compass));
+                qsEntryValues.remove("compass_tileview");
+                if (qsPrefs != null && qsPrefs.contains("compass_tileview")) {
+                    qsPrefs.remove("compass_tileview");
+                }
+            }
             // and update saved prefs in case it was previously checked in previous versions
             mPrefs.edit().putStringSet(PREF_KEY_QUICK_SETTINGS, qsPrefs).commit();
             mQuickSettings.setEntries(qsEntries.toArray(new CharSequence[qsEntries.size()]));
