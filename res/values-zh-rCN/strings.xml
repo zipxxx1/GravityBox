@@ -1405,7 +1405,7 @@
     <string name="pref_lockscreen_show_pattern_error_summary">进入错误格式时显示红色足迹</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">此功能是试用模式！如果你觉得它有用您可以解锁高级功能！在%d重启后将结束试用期</string>
+    <string name="trial_info">此功能是试用模式！如果您觉得它有用您可以解锁高级功能！在%d重启后将结束试用期</string>
     
     
     <!-- Navbar: disable camera icon -->
@@ -1554,5 +1554,40 @@
 
     <!-- GB Actions: Toggle sync -->
     <string name="shortcut_sync">切换同步</string>
+    
+    <!-- UNC: timeout for Alert only once -->
+    <string name="pref_lc_notif_sound_only_once_timeout_title">在设置时间内</string>
+
+    <!-- Statusbar clock: show date -->
+    <string name="pref_statusbar_clock_date_title">显示日期</string>
+
+    <!-- Delete -->
+    <string name="delete">删除</string>
+
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">禁用紧急呼叫按钮</string>
+    <string name="pref_lockscreen_disable_ecb_summary">请注意一切风险!!!!</string>
+
+    <!-- AppPicker: icon pick cancelled -->
+    <string name="app_picker_icon_pick_cancelled">选择目标应用程序后取消图标</string>
+    
+    <!-- QS: Compass tile -->
+    <string name="qs_tile_compass">指南针</string>
+    <string name="quick_settings_compass_off">指南针已关闭</string>
+    <string name="quick_settings_compass_init">正在初始化&#8230;</string>
+    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
+
+    <!-- Cardinal directions -->
+    <string name="cd_north">北</string>
+    <string name="cd_north_east">东北</string>
+    <string name="cd_east">东</string>
+    <string name="cd_south_east">东南</string>
+    <string name="cd_south">南</string>
+    <string name="cd_south_west">西南</string>
+    <string name="cd_west">西</string>
+    <string name="cd_north_west">西北</string>
+
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">响应键</string>
     
 </resources>
