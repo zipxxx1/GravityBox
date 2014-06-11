@@ -1536,7 +1536,7 @@
 
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Игнор.доступность моб.данных</string>
-    <string name="pref_smart_radio_mda_ignore_summary">Переключение в нормальный режим, даже если мобильные данные в настоящий момент недоступны</string>
+    <string name="pref_smart_radio_mda_ignore_summary">Переключение в обычный режим, даже если мобильные данные в настоящий момент недоступны</string>
 
     <!-- GB Actions: Toggle sync -->
     <string name="shortcut_sync">Включение синхронизации</string>
@@ -1553,5 +1553,11 @@
     <!-- Lockscreen: disable emergency call button -->
     <string name="pref_lockscreen_disable_ecb_title">Откл кнопку экстр.вызова</string>
     <string name="pref_lockscreen_disable_ecb_summary">ИСПОЛЬЗУЙТЕ НА СВОЙ СТРАХ И РИСК!!!!</string>
+
+    <!-- AppPicker: icon pick cancelled -->
+    <string name="app_picker_icon_pick_cancelled">Отмена выбора значка приложением</string>
+
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">Зеркальные кнопки</string>
 
 </resources>
