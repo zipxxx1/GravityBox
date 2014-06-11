@@ -1550,7 +1550,7 @@
 
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Игнор.доступность моб.данных</string>
-    <string name="pref_smart_radio_mda_ignore_summary">Переключение в нормальный режим, даже если мобильные данные в настоящий момент недоступны</string>
+    <string name="pref_smart_radio_mda_ignore_summary">Переключение в обычный режим, даже если мобильные данные в настоящий момент недоступны</string>
 
     <!-- GB Actions: Toggle sync -->
     <string name="shortcut_sync">Включение синхронизации</string>
@@ -1567,5 +1567,27 @@
     <!-- Lockscreen: disable emergency call button -->
     <string name="pref_lockscreen_disable_ecb_title">Откл кнопку экстр.вызова</string>
     <string name="pref_lockscreen_disable_ecb_summary">ИСПОЛЬЗУЙТЕ НА СВОЙ СТРАХ И РИСК!!!!</string>
+
+    <!-- AppPicker: icon pick cancelled -->
+    <string name="app_picker_icon_pick_cancelled">Отмена выбора значка приложением</string>
+
+    <!-- QS: Compass tile -->
+    <string name="qs_tile_compass">Компас</string>
+    <string name="quick_settings_compass_off">Компас выкл</string>
+    <string name="quick_settings_compass_init">Инициализация&#8230;</string>
+    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
+
+    <!-- Cardinal directions -->
+    <string name="cd_north">С</string>
+    <string name="cd_north_east">СВ</string>
+    <string name="cd_east">В</string>
+    <string name="cd_south_east">ЮВ</string>
+    <string name="cd_south">Ю</string>
+    <string name="cd_south_west">ЮЗ</string>
+    <string name="cd_west">З</string>
+    <string name="cd_north_west">СЗ</string>
+
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">Зеркальные кнопки</string>
 
 </resources>
