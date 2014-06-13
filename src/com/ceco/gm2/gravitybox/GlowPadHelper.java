@@ -232,10 +232,11 @@ public class GlowPadHelper {
                 mGbResources = context.createPackageContext(GravityBox.PACKAGE_NAME, 0).getResources();
             }
 
-            Paint paint = null;
+            Paint paint = new Paint();
             if (appInfo.intent.getStringExtra("iconResName") != null) {
-                paint = new Paint();
                 paint.setColorFilter(new LightingColorFilter(0xFF585858, 1));
+            } else {
+                paint.setColorFilter(new LightingColorFilter(0xFF999999, 1));
             }
 
             Bitmap bg = Utils.drawableToBitmap(mGbResources.getDrawable(R.drawable.target_background));
