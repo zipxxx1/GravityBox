@@ -157,7 +157,7 @@ public class QuickAppTile extends BasicTile {
                     ActivityInfo ai = mPm.getActivityInfo(mIntent.getComponent(), 0);
                     mAppName = ai.loadLabel(mPm).toString();
                     if (appIcon == null) {
-                        appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                        appIcon = Utils.drawableToBitmap(ai.loadIcon(mPm));
                     }
                 } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                     mAppName = mIntent.getStringExtra("label");

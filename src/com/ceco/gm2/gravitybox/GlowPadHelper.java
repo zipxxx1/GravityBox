@@ -136,7 +136,7 @@ public class GlowPadHelper {
                 ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
                 appInfo.name = (String) ai.loadLabel(pm);
                 if (appIcon == null) {
-                    appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                    appIcon = Utils.drawableToBitmap(ai.loadIcon(pm));
                 }
             } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                 appInfo.name = appInfo.intent.getStringExtra("label");
