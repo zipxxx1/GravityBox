@@ -56,7 +56,7 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
     }
 
     public StatusbarClock(XSharedPreferences prefs) {
-        mClockShowDate = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_DATE, null);
+        mClockShowDate = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_DATE, "disabled");
         mClockShowDow = Integer.valueOf(
                 prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_DOW, "0"));
         mAmPmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_AMPM_HIDE, false);
