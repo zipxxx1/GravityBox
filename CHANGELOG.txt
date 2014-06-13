@@ -1,3 +1,9 @@
+Changelog 3.1.7 - 14/06/2014
+--------------------------------------
+- Fixed severe bug in AppPicker affecting ring targets/quick app tile icons
+- Ring targets: apply highlight color change to all icon types
+- Statusbar: extended option for clock date allowing to choose date format (thanks to bgcngm)
+
 Changelog 3.1.6 - 13/06/2014
 --------------------------------------
 - Statusbar brightness control revised (thanks to jacknicholson)
