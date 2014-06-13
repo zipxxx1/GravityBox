@@ -1568,4 +1568,16 @@
     <!-- Pie: mirrored keys -->
     <string name="pref_pie_control_mirrored_keys_title">Teclas invertidas</string>
 
+    <!-- Pie: center trigger -->
+    <string name="pref_pie_control_center_trigger_title">Ativação ao centro</string>
+    <string name="pref_pie_control_center_trigger_summary">Permite ativar os controlos Pie apenas quando se desliza a partir do centro da borda do ecrã</string>
+
+    <!-- Statusbar clock: date format options -->
+    <string name="clock_date_disabled">Desativado</string>
+    <string name="clock_date_localized">Localizado</string>
+    <string name="clock_date_format_1">dd/MM</string>
+    <string name="clock_date_format_2">MM/dd</string>
+    <string name="clock_date_format_3">d MMM</string>
+    <string name="clock_date_format_4">MMM d</string>
+
 </resources>
