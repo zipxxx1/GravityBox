@@ -1573,7 +1573,7 @@
 
     <!-- QS: Compass tile -->
     <string name="qs_tile_compass">Compass</string>
-    <string name="quick_settings_compass_off">Compass off</string>
+    <string name="quick_settings_compass_off">Compass Off</string>
     <string name="quick_settings_compass_init">Initializing&#8230;</string>
     <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
 
