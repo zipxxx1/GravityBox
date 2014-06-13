@@ -1,3 +1,38 @@
+Changelog 3.1.6 - 13/06/2014
+--------------------------------------
+- Statusbar brightness control revised (thanks to jacknicholson)
+--- Prevent brightness changes after notifications panel has been opened
+--- Don't adjust brightness for swipes <45° from vertical.
+- AppPicker preference: added support for choosing custom icons
+--- long-press on preference icon triggers custom icon pick
+--- single-press preserved (shows list of predefined icons)
+--- compatible with standard Gallery only (incompatible with Google Photos)
+- Added option to show short date in statusbar clock
+- Implemented delete action within screenshot notification
+- Quick settings:
+--- added "override default tile behavior" support for SlimKat Location mode tile
+--- added Compass tile
+- Pie controls:
+--- added option for Mirrored keys (swaps key positions)
+--- added option for Centered trigger - triggers pie only when swiping from center of the screen edge
+--- fixed back key alt. icon not showing when IME (keyboard) is showing
+- Lockscreen: added option to disable emergency call button (USE AT YOUR OWN RISK!!!!)
+- Fixed bugs in autobrightness settings
+--- improved sanity check for entered LUX values
+--- prevent bootloop in case of invalid values
+- Developer settings: added 1.25x animation scale
+- Added partial Norwegian translations (thanks to Simen B)
+- Updated German translations (thanks to LibertyMarine)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated French translation (thanks to ch-vox)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Slovak and Czech translations
+
 Changelog 3.1.5 - 03/06/2014
 --------------------------------------
 - Adjusted for compatibility with Android 4.4.3
