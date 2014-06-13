@@ -1564,4 +1564,30 @@
     <!-- Delete -->
     <string name="delete">Elimina</string>
 
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">Disabilita tasto chiamata d\'emergenza</string>
+    <string name="pref_lockscreen_disable_ecb_summary">USA A TUO RISCHIO E PERICOLO!!!!</string>
+
+    <!-- AppPicker: icon pick cancelled -->
+    <string name="app_picker_icon_pick_cancelled">Scelta icona annullata dall\'app di destinazione</string>
+
+    <!-- QS: Compass tile -->
+    <string name="qs_tile_compass">Bussola</string>
+    <string name="quick_settings_compass_off">Bussola Spenta</string>
+    <string name="quick_settings_compass_init">Avvio in corso&#8230;</string>
+    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
+
+    <!-- Cardinal directions -->
+    <string name="cd_north">N</string>
+    <string name="cd_north_east">NE</string>
+    <string name="cd_east">E</string>
+    <string name="cd_south_east">SE</string>
+    <string name="cd_south">S</string>
+    <string name="cd_south_west">SO</string>
+    <string name="cd_west">O</string>
+    <string name="cd_north_west">NO</string>
+
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">Scambia posizione tasti</string>
+
 </resources>
