@@ -502,21 +502,9 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
 
         mNavigationIconHints = hints;
 
-        PieItem item = findItem(ButtonType.HOME);
+        PieItem item = findItem(ButtonType.BACK);
         if (item != null) {
-            boolean isNop = (hints & (1 << 1)) != 0;
-            item.setAlpha(isNop ? 0.5f : 1.0f);
-        }
-        item = findItem(ButtonType.RECENT);
-        if (item != null) {
-            boolean isNop = (hints & (1 << 2)) != 0;
-            item.setAlpha(isNop ? 0.5f : 1.0f);
-        }
-        item = findItem(ButtonType.BACK);
-        if (item != null) {
-            boolean isNop = (hints & (1 << 0)) != 0;
-            boolean isAlt = (hints & (1 << 3)) != 0;
-            item.setAlpha(isNop ? 0.5f : 1.0f);
+            boolean isAlt = (hints & (1 << 0)) != 0;
             item.setImageDrawable(isAlt ? mBackAltIcon : mBackIcon);
         }
         setDisabledFlags(mDisabledFlags, true);
