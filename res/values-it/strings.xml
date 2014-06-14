@@ -1528,5 +1528,33 @@
 
     <!-- UNC: timeout for Alert only once -->
     <string name="pref_lc_notif_sound_only_once_timeout_title">Nei limiti di tempo</string>
+    
+    <!-- Statusbar clock: show date -->
+    <string name="pref_statusbar_clock_date_title">Visualizza data</string>
+
+    <!-- Delete -->
+    <string name="delete">Cancella</string>
+
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">Disabilita tasto chiamata di emergenza</string>
+    <string name="pref_lockscreen_disable_ecb_summary">USO A PROPRIO RISCHIO</string>
+
+    <!-- AppPicker: icon pick cancelled -->
+    <string name="app_picker_icon_pick_cancelled">Icona scelta annullata da app selezionata</string>
+
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">Tasti invertiti</string>
+
+    <!-- Pie: center trigger -->
+    <string name="pref_pie_control_center_trigger_title">Trigger centrale</string>
+    <string name="pref_pie_control_center_trigger_summary">Trigger pie scorrendo dal centro al bordo dello schermo</string>
+
+    <!-- Statusbar clock: date format options -->
+    <string name="clock_date_disabled">Disabilitato</string>
+    <string name="clock_date_localized">Formato data basato sul formato locale</string>
+    <string name="clock_date_format_1">Formato data: gg/MM</string>
+    <string name="clock_date_format_2">Formato data: MM/gg</string>
+    <string name="clock_date_format_3">Formato data: g MMM</string>
+    <string name="clock_date_format_4">Formato data: MMM g</string>
 
 </resources>
