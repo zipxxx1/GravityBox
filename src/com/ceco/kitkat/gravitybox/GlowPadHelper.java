@@ -212,6 +212,8 @@ public class GlowPadHelper {
             }
 
             Paint paint = new Paint();
+            paint.setAntiAlias(true);
+            paint.setFilterBitmap(true);
             if (appInfo.intent.getStringExtra("iconResName") != null) {
                 paint.setColorFilter(new LightingColorFilter(0xFF585858, 1));
             } else {
@@ -226,7 +228,10 @@ public class GlowPadHelper {
 
             Bitmap bNormal = Bitmap.createBitmap(bg.getWidth(), bg.getHeight(), Config.ARGB_8888);
             Canvas canvasNormal = new Canvas(bNormal);
-            canvasNormal.drawBitmap(fg, null, fgRect, null);
+            Paint normalPaint = new Paint();
+            normalPaint.setAntiAlias(true);
+            normalPaint.setFilterBitmap(true);
+            canvasNormal.drawBitmap(fg, null, fgRect, normalPaint);
             Drawable normalDrawable = new BitmapDrawable(context.getResources(), bNormal);
 
             Bitmap bActive = Bitmap.createBitmap(bg.getWidth(), bg.getHeight(), Config.ARGB_8888);
