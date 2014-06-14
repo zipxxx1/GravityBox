@@ -1497,21 +1497,6 @@
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">Výber ikony bol zrušený cieľovou aplikáciou</string>
 
-    <!-- QS: Compass tile -->
-    <string name="qs_tile_compass">Kompas</string>
-    <string name="quick_settings_compass_off">Kompas vyp</string>
-    <string name="quick_settings_compass_init">Inicializácia&#8230;</string>
-
-    <!-- Cardinal directions -->
-    <string name="cd_north">S</string>
-    <string name="cd_north_east">SV</string>
-    <string name="cd_east">V</string>
-    <string name="cd_south_east">JV</string>
-    <string name="cd_south">J</string>
-    <string name="cd_south_west">JZ</string>
-    <string name="cd_west">Z</string>
-    <string name="cd_north_west">SZ</string>
-
     <!-- Pie: mirrored keys -->
     <string name="pref_pie_control_mirrored_keys_title">Zrkladlové tlačidlá</string>
 
