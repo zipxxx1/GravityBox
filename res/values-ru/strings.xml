@@ -1590,4 +1590,16 @@
     <!-- Pie: mirrored keys -->
     <string name="pref_pie_control_mirrored_keys_title">Зеркальные кнопки</string>
 
+    <!-- Pie: center trigger -->
+    <string name="pref_pie_control_center_trigger_title">Центровка триггера</string>
+    <string name="pref_pie_control_center_trigger_summary">Вызов веерного меню только при при вытягивании из центра края экрана</string>
+
+    <!-- Statusbar clock: date format options -->
+    <string name="clock_date_disabled">Отключено</string>
+    <string name="clock_date_localized">Формат локализации</string>
+    <string name="clock_date_format_1">Формат даты: дд/ММ</string>
+    <string name="clock_date_format_2">Формат даты: ММ/дд</string>
+    <string name="clock_date_format_3">Формат даты: д МММ</string>
+    <string name="clock_date_format_4">Формат даты: МММ д</string>
+
 </resources>
