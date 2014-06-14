@@ -105,6 +105,7 @@ public class AppPickerPreference extends DialogPreference
     private int mAppIconPreviewSizePx;
     private Dialog mIconPickerDialog;
     private boolean mIconPickerEnabled = true;
+    private int mIconPickSizePx;
 
     private static LruCache<String, BitmapDrawable> sAppIconCache;
     static {
@@ -134,6 +135,8 @@ public class AppPickerPreference extends DialogPreference
         mAppIconSizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 
                 mResources.getDisplayMetrics());
         mAppIconPreviewSizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, 
+                mResources.getDisplayMetrics());
+        mIconPickSizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, 
                 mResources.getDisplayMetrics());
         mPackageManager = mContext.getPackageManager();
         mMode = MODE_APP;
@@ -312,7 +315,7 @@ public class AppPickerPreference extends DialogPreference
         if (v != mBtnAppIcon || sPrefsFragment == null ||
                 getPersistedString(null) == null) return true;
 
-        sPrefsFragment.pickIcon(mAppIconSizePx, new IconPickHandler() {
+        sPrefsFragment.pickIcon(mIconPickSizePx, new IconPickHandler() {
             @Override
             public void onIconPicked(Bitmap icon) {
                 try {
