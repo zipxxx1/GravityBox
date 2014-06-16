@@ -29,7 +29,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LayoutInflated;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
-
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.KeyguardManager;
@@ -48,13 +47,13 @@ import android.content.res.XModuleResources;
 import android.content.res.XResources;
 import android.database.ContentObserver;
 import android.graphics.Paint;
-
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
@@ -495,8 +494,10 @@ public class ModStatusBar {
                     mScreenWidth = (float) res.getDisplayMetrics().widthPixels;
                     mMinBrightness = res.getInteger(res.getIdentifier(
                             "config_screenBrightnessDim", "integer", "android"));
-                    mPeekHeight = res.getDimensionPixelSize(res.getIdentifier(
-                            "peek_height", "dimen", PACKAGE_NAME));
+                    mPeekHeight = Build.VERSION.SDK_INT > 16 ? res.getDimensionPixelSize(res.getIdentifier(
+                            "peek_height", "dimen", PACKAGE_NAME)) :
+                                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 84,
+                                        res.getDisplayMetrics());
                     BRIGHTNESS_ON = XposedHelpers.getStaticIntField(powerManagerClass, "BRIGHTNESS_ON");
 
                     try {
