@@ -715,10 +715,12 @@ public class ModNavigationBar {
                 // determine layout from layout of placeholder view we found
                 ViewGroup.LayoutParams ovlp = mNavbarViewInfo[index].originalView.getLayoutParams();
                 if (DEBUG) log("originalView: lpWidth=" + ovlp.width + "; lpHeight=" + ovlp.height);
-                if (ovlp.width >= 0) {
-                    lp = new LinearLayout.LayoutParams(size, LinearLayout.LayoutParams.MATCH_PARENT, 0);
+                if (ovlp instanceof LinearLayout.LayoutParams) {
+                    lp = (LinearLayout.LayoutParams) ovlp;
+                } else if (ovlp.width >= 0) {
+                    lp = new LinearLayout.LayoutParams(ovlp.width, LinearLayout.LayoutParams.MATCH_PARENT, 0);
                 } else if (ovlp.height >= 0) {
-                    lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, size, 0);
+                    lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ovlp.height, 0);
                 } else {
                     log("Weird layout of placeholder view detected");
                 }
@@ -730,9 +732,9 @@ public class ModNavigationBar {
                     if (back != null) {
                         ViewGroup.LayoutParams blp = back.getLayoutParams();
                         if (blp.width >= 0) {
-                            lp = new LinearLayout.LayoutParams(size, LinearLayout.LayoutParams.MATCH_PARENT, 0);
+                            lp = new LinearLayout.LayoutParams(blp.width, LinearLayout.LayoutParams.MATCH_PARENT, 0);
                         } else if (blp.height >= 0) {
-                            lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, size, 0);
+                            lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, blp.height, 0);
                         } else {
                             log("Weird layout of back button view detected");
                         }
