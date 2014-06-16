@@ -162,7 +162,8 @@ public class Utils {
         if (mIsMotoXtDevice != null) return mIsMotoXtDevice;
 
         mIsMotoXtDevice = Build.MANUFACTURER.equalsIgnoreCase("motorola") &&
-                Build.MODEL.toLowerCase().startsWith("xt");
+                (Build.MODEL.toLowerCase().startsWith("xt") ||
+                 Build.MODEL.toLowerCase().startsWith("razr"));
         return mIsMotoXtDevice;
     }
 
