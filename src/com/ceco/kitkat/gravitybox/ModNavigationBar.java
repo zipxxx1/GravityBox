@@ -892,8 +892,8 @@ public class ModNavigationBar {
             for (int i = 0; i <= 1; i++) {
                 View v = mNavbarViewInfo[i].navButtons.findViewById(menuResId);
                 if (v != null) {
-                    v.setVisibility(visible ? View.VISIBLE : 
-                        mDpadKeysVisible ? View.GONE : View.INVISIBLE);
+                    v.setVisibility(mDpadKeysVisible ? View.GONE :
+                        visible ? View.VISIBLE : View.INVISIBLE);
                 }
             }
         } catch (Throwable t) {
