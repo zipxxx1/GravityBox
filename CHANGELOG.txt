@@ -1,3 +1,8 @@
+Changelog 3.1.8 - 16/06/2014
+--------------------------------------
+- Fixed brightness control and other affected statusbar tweaks for Android 4.1
+- Updated French translation (thanks to ch-vox)
+
 Changelog 3.1.7 - 15/06/2014
 --------------------------------------
 - Ultimate notification control:
