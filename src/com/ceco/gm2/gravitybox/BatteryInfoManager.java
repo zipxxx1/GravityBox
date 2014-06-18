@@ -23,6 +23,7 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -43,6 +44,16 @@ public class BatteryInfoManager {
         boolean charging;
         int level;
         int powerSource;
+        int temperature;
+        int voltage;
+
+        public float getTempCelsius() {
+            return ((float)temperature/10f);
+        }
+
+        public float getTempFahrenheit() {
+            return (((float)temperature/10f)*(9f/5f)+32);
+        }
     }
 
     public interface BatteryStatusListener {
@@ -53,9 +64,7 @@ public class BatteryInfoManager {
         mContext = context;
         mGbContext = gbContext;
         mBatteryData = new BatteryData();
-        mBatteryData.charging = false;
-        mBatteryData.level = 0;
-        mBatteryData.powerSource = 0;
+        getCurrentBatteryData();
         mListeners = new ArrayList<BatteryStatusListener>();
         mChargedSoundEnabled = false;
         mPluggedSoundEnabled = false;
@@ -64,6 +73,7 @@ public class BatteryInfoManager {
     public void registerListener(BatteryStatusListener listener) {
         if (!mListeners.contains(listener)) {
             mListeners.add(listener);
+            listener.onBatteryStatusChanged(mBatteryData);
         }
     }
 
@@ -74,14 +84,24 @@ public class BatteryInfoManager {
     }
 
     public void updateBatteryInfo(Intent intent) {
+        updateBatteryInfo(intent, true);
+    }
+
+    public void updateBatteryInfo(Intent intent, boolean notify) {
+        if (intent == null) return;
+
         int newLevel = (int)(100f
                 * intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
                 / intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100));
         int newPowerSource = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
         boolean newCharging = newPowerSource != 0;
+        int newTemp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0);
+        int newVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
 
         if (mBatteryData.level != newLevel || mBatteryData.charging != newCharging ||
-                mBatteryData.powerSource != newPowerSource) {
+                mBatteryData.powerSource != newPowerSource ||
+                mBatteryData.temperature != newTemp || 
+                mBatteryData.voltage != newVoltage) {
             if (mChargedSoundEnabled && newLevel == 100 && mBatteryData.level == 99) {
                 playSound("battery_charged.ogg");
             }
@@ -97,8 +117,19 @@ public class BatteryInfoManager {
             mBatteryData.level = newLevel;
             mBatteryData.charging = newCharging;
             mBatteryData.powerSource = newPowerSource;
-            notifyListeners();
+            mBatteryData.temperature = newTemp;
+            mBatteryData.voltage = newVoltage;
+
+            if (notify) {
+                notifyListeners();
+            }
         }
+    }
+
+    public BatteryData getCurrentBatteryData() {
+        updateBatteryInfo(mContext.registerReceiver(null,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED)), false);
+        return mBatteryData;
     }
 
     public void setChargedSoundEnabled(boolean enabled) {

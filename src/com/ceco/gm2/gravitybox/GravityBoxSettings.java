@@ -634,6 +634,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QS_TILE_SPAN_DISABLE = "pref_qs_tile_span_disable";
     public static final String PREF_KEY_QS_ALARM_SINGLETAP_APP = "pref_qs_alarm_singletap_app";
     public static final String PREF_KEY_QS_ALARM_LONGPRESS_APP = "pref_qs_alarm_longpress_app";
+    public static final String PREF_CAT_KEY_QS_BATTERY_TILE_SETTINGS = "pref_cat_qs_battery_tile_settings";
+    public static final String PREF_KEY_QS_BATTERY_EXTENDED = "pref_qs_battery_extended";
+    public static final String PREF_KEY_QS_BATTERY_TEMP_UNIT = "pref_qs_battery_temp_unit";
     public static final String EXTRA_NMT_MODE = "networkModeTileMode";
     public static final String EXTRA_NMT_LTE = "networkModeTileLte";
     public static final String EXTRA_NMT_CDMA = "networkModeTileCdma";
@@ -802,7 +805,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_PULSE_NOTIFICATION_DELAY,
             PREF_KEY_SCREEN_OFF_EFFECT,
             PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH,
-            PREF_KEY_FORCE_LTR_DIRECTION
+            PREF_KEY_FORCE_LTR_DIRECTION,
+            PREF_KEY_QS_BATTERY_EXTENDED
     ));
 
     private static final class SystemProperties {
@@ -1148,6 +1152,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private Preference mPrefLedControl;
         private EditTextPreference mPrefVkVibratePattern;
         private ListPreference mPrefSbBtVisibility;
+        private PreferenceScreen mPrefCatQsBatteryTileSettings;
+        private ListPreference mPrefQsBatteryTempUnit;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1374,6 +1380,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefQsNetworkModeSimSlot = (ListPreference) findPreference(PREF_KEY_QS_NETWORK_MODE_SIM_SLOT);
             mPrefQsTileOrder = (Preference) findPreference(PREF_KEY_QUICK_SETTINGS_TILE_ORDER);
             mPrefQsTileLabelStyle = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE);
+            mPrefCatQsBatteryTileSettings = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_BATTERY_TILE_SETTINGS);
+            mPrefQsBatteryTempUnit = (ListPreference) findPreference(PREF_KEY_QS_BATTERY_TEMP_UNIT);
 
             mPrefSbClockDate = (ListPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_DATE);
             mPrefSbClockDow = (ListPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_DOW);
@@ -1553,6 +1561,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mQuickSettings.setEntryValues(R.array.qs_tile_values);
                 mPrefCatQsTileSettings.removePreference(mPrefQsTileBehaviourOverride);
                 mPrefCatQsTileSettings.removePreference(mPrefCatQsAlarmTileSettings);
+                mPrefCatQsTileSettings.removePreference(mPrefCatQsBatteryTileSettings);
             }
 
             // Remove preferences not compatible with Acer ROMs
@@ -2257,6 +2266,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_STATUSBAR_BT_VISIBILITY)) {
                 mPrefSbBtVisibility.setSummary(mPrefSbBtVisibility.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_QS_BATTERY_TEMP_UNIT)) {
+                mPrefQsBatteryTempUnit.setSummary(mPrefQsBatteryTempUnit.getEntry());
             }
         }
 

@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.ceco.gm2.gravitybox.BatteryInfoManager.BatteryData;
 import com.ceco.gm2.gravitybox.Utils.MethodState;
 import com.ceco.gm2.gravitybox.quicksettings.AQuickSettingsTile;
 import com.ceco.gm2.gravitybox.quicksettings.CameraTile;
@@ -53,9 +54,8 @@ import com.ceco.gm2.gravitybox.quicksettings.WifiApTile;
 import com.ceco.gm2.gravitybox.quicksettings.WifiTile;
 import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 
-import android.annotation.SuppressLint;
-
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -1381,7 +1381,50 @@ public class ModQuickSettings {
                     CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    ((View)param.args[0]).setTag(mAospTileTags.get("battery_textview"));
+                    final View tile = (View) param.args[0];
+                    tile.setTag(mAospTileTags.get("battery_textview"));
+                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BATTERY_EXTENDED, false)) {
+                        int imgResId = tile.getResources().getIdentifier("image", "id", PACKAGE_NAME);
+                        if (imgResId != 0) {
+                            View batteryImg = tile.findViewById(imgResId);
+                            if (batteryImg != null) {
+                                ViewGroup tileContent = (ViewGroup) ((ViewGroup) tile).getChildAt(0);
+                                KitKatBattery kkb = new KitKatBattery(tile.getContext());
+                                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                                        (LinearLayout.LayoutParams) batteryImg.getLayoutParams());
+                                kkb.setId(imgResId);
+                                kkb.setLayoutParams(lp);
+                                kkb.setPadding(batteryImg.getPaddingLeft(), batteryImg.getPaddingTop(), 
+                                        batteryImg.getPaddingRight(), batteryImg.getPaddingBottom());
+                                tileContent.removeView(batteryImg);
+                                tileContent.addView(kkb, 0);
+                                ModStatusbarColor.getIconManager().getBatteryInfoManager().registerListener(kkb);
+                            }
+                        }
+                        XposedBridge.hookAllMethods(param.args[1].getClass(), "refreshView", new XC_MethodHook() {
+                            @Override
+                            protected void afterHookedMethod(final MethodHookParam param2) throws Throwable {
+                                int textResId = tile.getResources().getIdentifier("text", "id", PACKAGE_NAME);
+                                if (textResId != 0) {
+                                    TextView tileTv = (TextView) tile.findViewById(textResId);
+                                    if (tileTv != null) {
+                                        BatteryInfoManager biMng = ModStatusbarColor
+                                                .getIconManager().getBatteryInfoManager();
+                                        BatteryData bd = biMng.getCurrentBatteryData();
+                                        String tempUnit = mPrefs.getString(
+                                                GravityBoxSettings.PREF_KEY_QS_BATTERY_TEMP_UNIT, "C");
+                                        float temp = tempUnit.equals("C") ? 
+                                                bd.getTempCelsius() : bd.getTempFahrenheit();
+                                        String text = bd.charging ? String.format("%d%%, %.1f\u00b0%s, %dmV",
+                                                bd.level, temp, tempUnit, bd.voltage) :
+                                                    String.format("%.1f\u00b0%s, %dmV",
+                                                            temp, tempUnit, bd.voltage);
+                                        tileTv.setText(text);
+                                    }
+                                }
+                            }
+                        });
+                    }
                 }
             });
         } catch (Throwable t) {
