@@ -363,10 +363,19 @@ public class ModDisplay {
             });
 
             if (classDisplayPowerController != null) {
-                XposedHelpers.findAndHookMethod(classDisplayPowerController, "requestPowerState",
-                        CLASS_DISPLAY_POWER_REQUEST, boolean.class, new XC_MethodHook() {
+                XposedBridge.hookAllMethods(classDisplayPowerController, "requestPowerState", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (param.args.length < 2 || 
+                                !param.args[0].getClass().getName().equals(CLASS_DISPLAY_POWER_REQUEST) ||
+                                !(param.args[1] instanceof Boolean)) {
+                            log("Unsupported requestPowerState method. Params: ");
+                            for (Object p : param.args) {
+                                log(p.getClass().getName());
+                            }
+                            return;
+                        }
+
                         if (!mIsUserPresent || !mLsBgLastScreenEnabled) return;
 
                         if (mKeyguardManager == null) {
