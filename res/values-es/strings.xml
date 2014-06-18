@@ -1553,4 +1553,48 @@
     
     <!-- UNC: timeout for Alert only once -->
     <string name="pref_lc_notif_sound_only_once_timeout_title">Dentro del intervalo de tiempo</string>
+    
+    <!-- Statusbar clock: show date -->
+    <string name="pref_statusbar_clock_date_title">Mostrar fecha</string>
+    
+    <!-- Delete -->
+    <string name="delete">Eliminar</string>
+    
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">Desactivar botón de llamada de emergencia</string>
+    <string name="pref_lockscreen_disable_ecb_summary">¡ÚSALO BAJO TU RESPONSABILIDAD!</string>
+    
+    <!-- AppPicker: icon pick cancelled -->
+    <string name="app_picker_icon_pick_cancelled">Selección de icono cancelado por la app elegida</string>
+    
+    <!-- QS: Compass tile -->
+    <string name="qs_tile_compass">Brújula</string>
+    <string name="quick_settings_compass_off">Deshabilitar brújula</string>
+    <string name="quick_settings_compass_init">Inicializando&#8230;</string>
+    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
+
+    <!-- Cardinal directions -->
+    <string name="cd_north">N</string>
+    <string name="cd_north_east">NE</string>
+    <string name="cd_east">E</string>
+    <string name="cd_south_east">SE</string>
+    <string name="cd_south">S</string>
+    <string name="cd_south_west">SO</string>
+    <string name="cd_west">O</string>
+    <string name="cd_north_west">NO</string>
+    
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">Mirrored keys</string> // cannot find any proper translation
+    
+    <!-- Pie: center trigger -->
+    <string name="pref_pie_control_center_trigger_title">Centrar disparador</string>
+    <string name="pref_pie_control_center_trigger_summary">Abre el menú pie solo al arrastrar desde la parte central del borde de la pantalla</string>
+
+    <!-- Statusbar clock: date format options -->
+    <string name="clock_date_disabled">Desactivado</string>
+    <string name="clock_date_localized">Formato de fecha basada en tu territorio</string>
+    <string name="clock_date_format_1">Formato de fecha: dd/MM</string>
+    <string name="clock_date_format_2">Formato de fecha: MM/dd</string>
+    <string name="clock_date_format_3">Formato de fecha: d MMM</string>
+    <string name="clock_date_format_4">Formato de fecha: MMM d</string>
 </resources>
