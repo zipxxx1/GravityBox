@@ -1055,4 +1055,14 @@
         <item>@string/cd_north_west</item>
     </string-array>
 
+    <string-array name="temperature_unit_entries" translatable="false">
+        <item>@string/celsius</item>
+        <item>@string/fahrenheit</item>
+    </string-array>
+
+    <string-array name="temperature_unit_values" translatable="false">
+        <item>C</item>
+        <item>F</item>
+    </string-array>
+
 </resources>
