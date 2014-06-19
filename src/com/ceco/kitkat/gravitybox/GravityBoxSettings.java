@@ -254,6 +254,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_FLASHING_LED_DISABLE = "pref_flashing_led_disable";
     public static final String PREF_KEY_CHARGING_LED_DISABLE = "pref_charging_led_disable";
+    public static final String ACTION_BATTERY_LED_CHANGED = "gravitybox.intent.action.BATTERY_LED_CHANGED";
+    public static final String EXTRA_BLED_FLASHING_DISABLED = "batteryLedFlashingDisabled";
+    public static final String EXTRA_BLED_CHARGING_DISABLED = "batteryLedChargingDisabled";
 
     public static final String PREF_CAT_KEY_DISPLAY = "pref_cat_display";
     public static final String PREF_KEY_EXPANDED_DESKTOP = "pref_expanded_desktop";
@@ -2831,6 +2834,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_STATUSBAR_BT_VISIBILITY_CHANGED);
                 intent.putExtra(EXTRA_SB_BT_VISIBILITY,
                         prefs.getString(PREF_KEY_STATUSBAR_BT_VISIBILITY, "DEFAULT"));
+            } else if (key.equals(PREF_KEY_FLASHING_LED_DISABLE)) {
+                intent.setAction(ACTION_BATTERY_LED_CHANGED);
+                intent.putExtra(EXTRA_BLED_FLASHING_DISABLED,
+                        prefs.getBoolean(PREF_KEY_FLASHING_LED_DISABLE, false));
+            } else if (key.equals(PREF_KEY_CHARGING_LED_DISABLE)) {
+                intent.setAction(ACTION_BATTERY_LED_CHANGED);
+                intent.putExtra(EXTRA_BLED_CHARGING_DISABLED,
+                        prefs.getBoolean(PREF_KEY_CHARGING_LED_DISABLE, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
