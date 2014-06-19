@@ -1581,4 +1581,5 @@
     <string name="pref_qs_battery_temp_unit_title">溫度單位</string>
     <string name="celsius">攝氏</string>
     <string name="fahrenheit">華氏</string>
+
 </resources>
