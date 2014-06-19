@@ -1584,7 +1584,8 @@
     <string name="cd_north_west">NO</string>
     
     <!-- Pie: mirrored keys -->
-    <string name="pref_pie_control_mirrored_keys_title">Mirrored keys</string> // cannot find any proper translation
+    <!-- cannot find any proper translation -->
+    <string name="pref_pie_control_mirrored_keys_title">Mirrored keys</string>
     
     <!-- Pie: center trigger -->
     <string name="pref_pie_control_center_trigger_title">Centrar disparador</string>
