@@ -1601,6 +1601,7 @@
     <string name="clock_date_format_2">Format de date: MM/jj</string>
     <string name="clock_date_format_3">Format de date: j MMM</string>
     <string name="clock_date_format_4">Format de date: MMM j</string>
+    <string name="clock_date_format_5">Format de date: j</string>
 
     <!-- Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_settings_title">Paramètres de la touche batterie</string>
