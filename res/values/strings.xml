@@ -1571,5 +1571,6 @@
     <string name="clock_date_format_2">Date format: MM/dd</string>
     <string name="clock_date_format_3">Date format: d MMM</string>
     <string name="clock_date_format_4">Date format: MMM d</string>
+    <string name="clock_date_format_5">Date format: d</string>
 
 </resources>
