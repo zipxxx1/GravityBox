@@ -1517,4 +1517,54 @@
     <!-- UNC: timeout for Alert only once -->
     <string name="pref_lc_notif_sound_only_once_timeout_title">Innerhalb des Zeitintervalls</string>
 
+    <!-- Statusbar clock: show date -->
+    <string name="pref_statusbar_clock_date_title">Datum anzeigen</string>
+
+    <!-- Delete -->
+    <string name="delete">Löschen</string>
+
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">Deaktiviere Notruf-Taste</string>
+    <string name="pref_lockscreen_disable_ecb_summary">WARNUNG: BENUTZUNG AUF EIGENE GEFAHR!!!!</string>
+
+    <!-- AppPicker: icon pick cancelled -->
+    <string name="app_picker_icon_pick_cancelled">Symbol Auswahl von Ziel-App abgebrochen</string>
+
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">Gespiegelte Tasten</string>
+
+    <!-- Pie: center trigger -->
+    <string name="pref_pie_control_center_trigger_title">Mitte-Schalter</string>
+    <string name="pref_pie_control_center_trigger_summary">Öffnet PIE-Menu nur wenn von Zentrum zum Bildschirmrand gewischt wird</string>
+
+    <!-- Statusbar clock: date format options -->
+    <string name="clock_date_disabled">Aus</string>
+    <string name="clock_date_localized">Datum Format basierend auf Region</string>
+    <string name="clock_date_format_1">Datum Format: tt/MM</string>
+    <string name="clock_date_format_2">Datum Format: MM/tt</string>
+    <string name="clock_date_format_3">Datum Format: t MMM</string>
+    <string name="clock_date_format_4">Datum Format: MMM t</string>
+    <string name="clock_date_format_5">Datum Format: t</string>
+
+    <!-- Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_settings_title">Akku Titel Einstellungen</string>
+    <string name="pref_qs_battery_extended_title">Erweiterter Akku Titel</string>
+    <string name="pref_qs_battery_extended_summary">Benötigt Neustart</string>
+    <string name="pref_qs_battery_temp_unit_title">Temperatur Einheit</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">Kopfhörer Aktion</string>
+    <string name="pref_headset_action_plug_title">Kopfhörer verbunden</string>
+    <string name="pref_headset_action_unplug_title">Kopfhörer getrennt</string>
+
+    <!-- Quiet Hours: mute vibrations -->
+    <string name="pref_lc_qh_mute_vibe_title">Deaktiviere Vibration</string>
+
+    <!-- Quiet Hours: interactive mode -->
+    <string name="pref_lc_qh_interactive_title">Interaktiver Modus</string>
+    <string name="pref_lc_qh_interactive_summary">Halte Benachrichtigungen immer still während Benutzerinteraktion during user interaction 
+        (respektiert App spezifische Ignorieren Regel)</string>
+
 </resources>
