@@ -41,7 +41,7 @@ public class QuietHours {
     int end;
     int startAlt;
     int endAlt;
-    boolean muteLED;
+    public boolean muteLED;
     public boolean showStatusbarIcon;
     public Mode mode;
 
@@ -136,10 +136,6 @@ public class QuietHours {
         }
 
         return (Utils.isTimeOfDayInRange(System.currentTimeMillis(), s, e));
-    }
-
-    public boolean quietHoursActiveIncludingLED(LedSettings ls, Notification n) {
-        return quietHoursActive(ls, n) && muteLED;
     }
 
     private List<String> getNotificationTexts(Notification notification) {
