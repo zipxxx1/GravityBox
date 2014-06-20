@@ -250,7 +250,7 @@ public class ModLedControl {
                 if (DEBUG) log(pkgName + ": " + ls.toString());
 
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n);
-                final boolean qhActiveIncludingLed = mQuietHours.quietHoursActiveIncludingLED(ls, n);
+                final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
 
                 if (((n.flags & Notification.FLAG_ONGOING_EVENT) == Notification.FLAG_ONGOING_EVENT) &&
                         !ls.getOngoing() && !qhActive) {
