@@ -36,6 +36,7 @@ public class QuietHoursActivity extends Activity {
     public static final String PREF_KEY_QH_START_ALT = "pref_lc_qh_start_alt2";
     public static final String PREF_KEY_QH_END_ALT = "pref_lc_qh_end_alt2";
     public static final String PREF_KEY_QH_MUTE_LED = "pref_lc_qh_mute_led";
+    public static final String PREF_KEY_QH_MUTE_VIBE = "pref_lc_qh_mute_vibe";
     public static final String PREF_KEY_QH_STATUSBAR_ICON = "pref_lc_qh_statusbar_icon";
     public static final String PREF_KEY_QH_MODE = "pref_lc_qh_mode";
 
