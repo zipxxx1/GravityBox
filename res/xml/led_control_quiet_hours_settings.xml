@@ -40,6 +40,13 @@
         android:defaultValue="true"
         android:dependency="pref_lc_qh_enabled" />
 
+    <CheckBoxPreference
+        android:key="pref_lc_qh_interactive"
+        android:title="@string/pref_lc_qh_interactive_title"
+        android:summary="@string/pref_lc_qh_interactive_summary"
+        android:defaultValue="false"
+        android:dependency="pref_lc_qh_enabled" />
+
     <PreferenceCategory 
         android:key="pref_lc_qh_cat_weekdays"
         android:title="@string/pref_lc_qh_cat_weekdays_title">

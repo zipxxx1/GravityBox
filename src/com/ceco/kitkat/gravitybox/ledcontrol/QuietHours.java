@@ -45,6 +45,7 @@ public class QuietHours {
     public boolean muteVibe;
     public boolean showStatusbarIcon;
     public Mode mode;
+    public boolean interactive;
 
     public QuietHours(SharedPreferences prefs) {
         uncLocked = prefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false);
@@ -57,6 +58,7 @@ public class QuietHours {
         muteVibe = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_VIBE, true);
         showStatusbarIcon = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_STATUSBAR_ICON, true);
         mode = Mode.valueOf(prefs.getString(QuietHoursActivity.PREF_KEY_QH_MODE, "AUTO"));
+        interactive = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_INTERACTIVE, false);
     }
 
     public boolean quietHoursActive(LedSettings ls, Notification n) {
