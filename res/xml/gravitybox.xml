@@ -2039,6 +2039,24 @@
         </PreferenceCategory>
 
         <PreferenceCategory
+            android:key="pref_cat_headset_actions"
+            android:title="@string/pref_cat_headset_actions_title">
+
+            <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                android:key="pref_headset_action_plug"
+                android:title="@string/pref_headset_action_plug_title"
+                android:summary="@string/app_picker_none"
+                iconPickerEnabled="false" />
+
+            <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                android:key="pref_headset_action_unplug"
+                android:title="@string/pref_headset_action_unplug_title"
+                android:summary="@string/app_picker_none"
+                iconPickerEnabled="false" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory
             android:key="pref_cat_misc_other"
             android:title="@string/pref_cat_misc_other_title">
 

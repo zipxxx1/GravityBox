@@ -770,6 +770,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_INCREASING_RING = "pref_increasing_ring";
 
+    public static final String PREF_KEY_HEADSET_ACTION_PLUG = "pref_headset_action_plug";
+    public static final String PREF_KEY_HEADSET_ACTION_UNPLUG = "pref_headset_action_unplug";
+    public static final String ACTION_PREF_HEADSET_ACTION_CHANGED = "gravitybox.intent.action.HEADSET_ACTION_CHANGED";
+    public static final String EXTRA_HSA_STATE = "headsetState"; // 1 = plugged, 0 = unplugged
+    public static final String EXTRA_HSA_URI = "headsetActionUri";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -2939,6 +2945,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_STATUSBAR_BT_VISIBILITY_CHANGED);
                 intent.putExtra(EXTRA_SB_BT_VISIBILITY,
                         prefs.getString(PREF_KEY_STATUSBAR_BT_VISIBILITY, "DEFAULT"));
+            } else if (key.equals(PREF_KEY_HEADSET_ACTION_PLUG) ||
+                    key.equals(PREF_KEY_HEADSET_ACTION_UNPLUG)) {
+                intent.setAction(ACTION_PREF_HEADSET_ACTION_CHANGED);
+                intent.putExtra(EXTRA_HSA_STATE,
+                        key.equals(PREF_KEY_HEADSET_ACTION_PLUG) ? 1 : 0);
+                intent.putExtra(EXTRA_HSA_URI, prefs.getString(key, null));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

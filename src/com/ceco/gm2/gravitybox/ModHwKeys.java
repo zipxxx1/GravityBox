@@ -15,12 +15,14 @@
 
 package com.ceco.gm2.gravitybox;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.KeyguardManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -154,6 +156,7 @@ public class ModHwKeys {
     private static boolean mCustomKeyPressed = false;
     private static long[] mVkVibePattern;
     private static long[] mVkVibePatternDefault;
+    private static String[] mHeadsetUri = new String[2]; // index 0 = unplugged, index 1 = plugged
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui",
@@ -361,6 +364,16 @@ public class ModHwKeys {
                 setRingerMode(intent.getIntExtra(EXTRA_RINGER_MODE, RingerModeShortcut.MODE_RING_VIBRATE));
             } else if (action.equals(GravityBoxService.ACTION_TOGGLE_SYNC)) {
                 toggleSync();
+            } else if (action.equals(GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED)) {
+                int state = intent.getIntExtra(GravityBoxSettings.EXTRA_HSA_STATE, 0);
+                if (state == 0 || state == 1) {
+                    mHeadsetUri[state] = intent.getStringExtra(GravityBoxSettings.EXTRA_HSA_URI);
+                }
+            } else if (action.equals(Intent.ACTION_HEADSET_PLUG)) {
+                int state = intent.getIntExtra("state", 0);
+                if (state == 0 || state == 1) {
+                    launchCustomApp(mHeadsetUri[state]);
+                }
             }
         }
     };
@@ -420,6 +433,9 @@ public class ModHwKeys {
             } catch (NumberFormatException nfe) {
                 log("Invalid value for PREF_KEY_EXPANDED_DESKTOP preference");
             }
+
+            mHeadsetUri[0] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_UNPLUG, null);
+            mHeadsetUri[1] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_PLUG, null);
 
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
 
@@ -877,6 +893,8 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_INAPP_SEARCH);
             intentFilter.addAction(ACTION_SET_RINGER_MODE);
             intentFilter.addAction(GravityBoxService.ACTION_TOGGLE_SYNC);
+            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED);
+            intentFilter.addAction(Intent.ACTION_HEADSET_PLUG);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -1266,34 +1284,72 @@ public class ModHwKeys {
         }
     }
 
-    private static void launchCustomApp(final int action) {
+    private static void launchCustomApp(int action) {
+        mPrefs.reload();
+        String appInfo = (action == GravityBoxSettings.HWKEY_ACTION_CUSTOM_APP) ?
+                mPrefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_CUSTOM_APP, null) :
+                    mPrefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_CUSTOM_APP2, null);
+        if (appInfo == null) {
+            try {
+                Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mContext, mStrCustomAppNone, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (Throwable t) { }
+            return;
+        }
+
+        launchCustomApp(appInfo);
+    }
+
+    private static void launchCustomApp(String uri) {
+        if (uri == null) return;
+
+        try {
+            Intent i = Intent.parseUri(uri, 0);
+            launchCustomApp(i);
+        } catch (URISyntaxException e) {
+            log("launchCustomApp: error parsing uri: " + e.getMessage());
+        }
+    }
+
+    private static void launchCustomApp(final Intent intent) {
         Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
         if (handler == null) return;
-        mPrefs.reload();
 
         handler.post(
             new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        String appInfo = (action == GravityBoxSettings.HWKEY_ACTION_CUSTOM_APP) ?
-                                mPrefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_CUSTOM_APP, null) :
-                                    mPrefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_CUSTOM_APP2, null);
-                        if (appInfo == null) {
-                            Toast.makeText(mContext, mStrCustomAppNone, Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        Intent i = Intent.parseUri(appInfo, 0);
                         // if intent is a GB action of broadcast type, handle it directly here
-                        if (ShortcutActivity.isGbBroadcastShortcut(i)) {
-                            Intent newIntent = new Intent(i.getStringExtra(ShortcutActivity.EXTRA_ACTION));
-                            newIntent.putExtras(i);
+                        if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
+                            boolean isLaunchBlocked = false;
+                            try {
+                                KeyguardManager kgManager = 
+                                        (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
+                                isLaunchBlocked = kgManager != null && 
+                                    kgManager.isKeyguardLocked() && kgManager.isKeyguardSecure() &&
+                                        !ShortcutActivity.isActionSafe(intent.getStringExtra(
+                                                ShortcutActivity.EXTRA_ACTION));
+                            } catch (Throwable t) { }
+                            if (DEBUG) log("isLaunchBlocked: " + isLaunchBlocked);
+                            Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+                            newIntent.putExtras(intent);
                             mContext.sendBroadcast(newIntent);
-                        // otherwise start activity
+                        // otherwise start activity (dismissing keyguard if necessary)
                         } else {
-                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            mContext.startActivity(i);
+                            try {
+                                Class<?> amnCls = XposedHelpers.findClass("android.app.ActivityManagerNative",
+                                        mContext.getClassLoader());
+                                Object amn = XposedHelpers.callStaticMethod(amnCls, "getDefault");
+                                XposedHelpers.callMethod(amn, "dismissKeyguardOnNextActivity");
+                            } catch (Throwable t) { }
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            mContext.startActivity(intent);
                         }
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(mContext, mStrCustomAppMissing, Toast.LENGTH_SHORT).show();

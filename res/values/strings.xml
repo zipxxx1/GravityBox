@@ -1581,6 +1581,11 @@
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
 
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">Headset actions</string>
+    <string name="pref_headset_action_plug_title">On headset plugged</string>
+    <string name="pref_headset_action_unplug_title">On headset unplugged</string>
+
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Mute vibrations</string>
 
