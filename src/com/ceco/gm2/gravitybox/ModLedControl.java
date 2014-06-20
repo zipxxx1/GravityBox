@@ -197,6 +197,7 @@ public class ModLedControl {
 
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
+                final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
 
                 if (((n.flags & Notification.FLAG_ONGOING_EVENT) == Notification.FLAG_ONGOING_EVENT) &&
                         !ls.getOngoing() && !qhActive) {
@@ -217,21 +218,26 @@ public class ModLedControl {
                     n.ledARGB = ls.getColor();
                 }
 
-                // sound & vibration
+                // vibration
+                if (qhActiveIncludingVibe) {
+                    n.defaults &= ~Notification.DEFAULT_VIBRATE;
+                    n.vibrate = new long[] {0};
+                } else {
+                    if (ls.getVibrateOverride() && ls.getVibratePattern() != null) {
+                        n.defaults &= ~Notification.DEFAULT_VIBRATE;
+                        n.vibrate = ls.getVibratePattern();
+                    }
+                }
+
+                // sound
                 if (qhActive) {
                     n.defaults &= ~Notification.DEFAULT_SOUND;
                     n.sound = null;
-                    n.defaults &= ~Notification.DEFAULT_VIBRATE;
-                    n.vibrate = new long[] {0};
                     n.flags &= ~Notification.FLAG_INSISTENT;
                 } else {
                     if (ls.getSoundOverride()) {
                         n.defaults &= ~Notification.DEFAULT_SOUND;
                         n.sound = ls.getSoundUri();
-                    }
-                    if (ls.getVibrateOverride() && ls.getVibratePattern() != null) {
-                        n.defaults &= ~Notification.DEFAULT_VIBRATE;
-                        n.vibrate = ls.getVibratePattern();
                     }
                     if (ls.getSoundOnlyOnce()) {
                         if (ls.getSoundOnlyOnceTimeout() > 0) {

@@ -42,6 +42,7 @@ public class QuietHours {
     int startAlt;
     int endAlt;
     public boolean muteLED;
+    public boolean muteVibe;
     public boolean showStatusbarIcon;
     public Mode mode;
 
@@ -53,6 +54,7 @@ public class QuietHours {
         startAlt = prefs.getInt(QuietHoursActivity.PREF_KEY_QH_START_ALT, 1380);
         endAlt = prefs.getInt(QuietHoursActivity.PREF_KEY_QH_END_ALT, 360);
         muteLED = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_LED, false);
+        muteVibe = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_VIBE, true);
         showStatusbarIcon = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_STATUSBAR_ICON, true);
         mode = Mode.valueOf(prefs.getString(QuietHoursActivity.PREF_KEY_QH_MODE, "AUTO"));
     }
