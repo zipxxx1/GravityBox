@@ -192,15 +192,13 @@ public class ModLedControl {
                 if (!ls.getEnabled()) {
                     // use default settings in case they are active
                     ls = LedSettings.deserialize(mPrefs.getStringSet("default", null));
-                    if (!ls.getEnabled() && !(mQuietHours.quietHoursActive(ls, n) ||
-                            (mQuietHours.interactive && mUserPresent))) {
+                    if (!ls.getEnabled() && !mQuietHours.quietHoursActive(ls, n, mUserPresent)) {
                         return;
                     }
                 }
                 if (DEBUG) log(pkgName + ": " + ls.toString());
 
-                final boolean qhActive = mQuietHours.quietHoursActive(ls, n) ||
-                        (mQuietHours.interactive && mUserPresent);
+                final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
 
@@ -292,7 +290,7 @@ public class ModLedControl {
                     if (!ls.getActiveScreenEnabled()) return;
 
                     Notification n = (Notification) param.args[Build.VERSION.SDK_INT > 17 ? 4 : 3];
-                    if (mQuietHours.quietHoursActive(ls, n)) {
+                    if (mQuietHours.quietHoursActive(ls, n, false)) {
                         return;
                     }
 
