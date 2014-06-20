@@ -61,8 +61,10 @@ public class QuietHours {
         interactive = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_INTERACTIVE, false);
     }
 
-    public boolean quietHoursActive(LedSettings ls, Notification n) {
-        if (!uncLocked && enabled && ls.getEnabled() && ls.getQhIgnore()) {
+    public boolean quietHoursActive(LedSettings ls, Notification n, boolean userPresent) {
+        if (uncLocked || !enabled) return false;
+
+        if (ls.getEnabled() && ls.getQhIgnore()) {
             if (ls.getQhIgnoreList() == null || ls.getQhIgnoreList().trim().isEmpty()) {
                 if (ModLedControl.DEBUG) ModLedControl.log("QH ignored for all notifications");
                 return false;
@@ -78,10 +80,10 @@ public class QuietHours {
                     }
                 }
                 if (ModLedControl.DEBUG) ModLedControl.log("QH ignore list contains keyword?: " + ignore);
-                return (ignore ? false : quietHoursActive());
+                return (ignore ? false : (quietHoursActive() || (interactive && userPresent)));
             }
         } else {
-            return quietHoursActive();
+            return (quietHoursActive() || (interactive && userPresent));
         }
     }
 
