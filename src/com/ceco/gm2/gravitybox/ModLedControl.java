@@ -62,6 +62,7 @@ public class ModLedControl {
     private static boolean mOnPanelRevealedBlocked;
     private static QuietHours mQuietHours;
     private static Map<String, Long> mNotifTimestamps = new HashMap<String, Long>();
+    private static boolean mUserPresent;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -88,6 +89,7 @@ public class ModLedControl {
             }
             if (action.equals(Intent.ACTION_USER_PRESENT)) {
                 if (DEBUG) log("User present");
+                mUserPresent = true;
                 mOnPanelRevealedBlocked = false;
                 if (mProxSensorListenerRegistered && mSm != null && mProxSensor != null) {
                     mSm.unregisterListener(mProxSensorEventListener, mProxSensor);
@@ -96,6 +98,7 @@ public class ModLedControl {
                 }
             }
             if (action.equals(Intent.ACTION_SCREEN_OFF)) {
+                mUserPresent = false;
                 if (!mProxSensorListenerRegistered && mSm != null && mProxSensor != null) {
                     mSm.registerListener(mProxSensorEventListener, mProxSensor, SensorManager.SENSOR_DELAY_NORMAL);
                     mProxSensorListenerRegistered = true;
@@ -189,13 +192,15 @@ public class ModLedControl {
                 if (!ls.getEnabled()) {
                     // use default settings in case they are active
                     ls = LedSettings.deserialize(mPrefs.getStringSet("default", null));
-                    if (!ls.getEnabled() && !mQuietHours.quietHoursActive(ls, n)) {
+                    if (!ls.getEnabled() && !(mQuietHours.quietHoursActive(ls, n) ||
+                            (mQuietHours.interactive && mUserPresent))) {
                         return;
                     }
                 }
                 if (DEBUG) log(pkgName + ": " + ls.toString());
 
-                final boolean qhActive = mQuietHours.quietHoursActive(ls, n);
+                final boolean qhActive = mQuietHours.quietHoursActive(ls, n) ||
+                        (mQuietHours.interactive && mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
 
