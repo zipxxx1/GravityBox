@@ -1575,9 +1575,34 @@
     <!-- Statusbar clock: date format options -->
     <string name="clock_date_disabled">Desativado</string>
     <string name="clock_date_localized">Localizado</string>
-    <string name="clock_date_format_1">dd/MM</string>
-    <string name="clock_date_format_2">MM/dd</string>
-    <string name="clock_date_format_3">d MMM</string>
-    <string name="clock_date_format_4">MMM d</string>
+    <string name="clock_date_format_1">Formato da data: dd/MM</string>
+    <string name="clock_date_format_2">Formato da data: MM/dd</string>
+    <string name="clock_date_format_3">Formato da data: d MMM</string>
+    <string name="clock_date_format_4">Formato da data: MMM d</string>
+    <string name="clock_date_format_5">Formato da data: d</string>
+
+    <!-- Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_settings_title">Definiçoes do painel Bateria</string>
+    <string name="pref_qs_battery_extended_title">Painel avançado</string>
+    <string name="pref_qs_battery_extended_summary">Permite mostar percentagem, percentagem e tensão da bateria no painel (necessário reiniciar)</string>
+    <string name="pref_qs_battery_temp_unit_title">Unidade de temperatura</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">Headset actions</string>
+    <string name="pref_headset_action_plug_title">On headset plugged</string>
+    <string name="pref_headset_action_unplug_title">On headset unplugged</string>
+
+    <!-- Quiet Hours: mute vibrations -->
+    <string name="pref_lc_qh_mute_vibe_title">Destivar vibração</string>
+
+    <!-- Quiet Hours: interactive mode -->
+    <string name="pref_lc_qh_interactive_title">Modo interativo</string>
+    <string name="pref_lc_qh_interactive_summary">Manter sempre notificações silenciosas durante interação com o utilizador 
+        (respeitando o modo ignorar definido por aplicação)</string>
+
+    <!-- Screenshot delete -->
+    <string name="pref_screenshot_delete_title">Ativar opção de apagar captura de ecrã</string>
 
 </resources>
