@@ -1559,7 +1559,7 @@
 
     <!-- Pie: mirrored keys -->
     <string name="pref_pie_control_mirrored_keys_title">镜像按键</string>
-    
+
     <!-- Pie: center trigger -->
     <string name="pref_pie_control_center_trigger_title">中心触发</string>
     <string name="pref_pie_control_center_trigger_summary">只有从屏幕边缘中心点击才触发Pie</string>
@@ -1571,5 +1571,27 @@
     <string name="clock_date_format_2">日期格式: MM/dd</string>
     <string name="clock_date_format_3">日期格式: d MMM</string>
     <string name="clock_date_format_4">日期格式: MMM d</string>
+    <string name="clock_date_format_5">日期格式: d</string>
+
+    <!-- Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_settings_title">电池磁贴设置</string>
+    <string name="pref_qs_battery_extended_title">扩展电池磁贴</string>
+    <string name="pref_qs_battery_extended_summary">需要重新启动</string>
+    <string name="pref_qs_battery_temp_unit_title">温度单位</string>
+    <string name="celsius">摄氏</string>
+    <string name="fahrenheit">华氏</string>
+
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">耳机动作</string>
+    <string name="pref_headset_action_plug_title">当插入耳机时</string>
+    <string name="pref_headset_action_unplug_title">当拨出耳机时</string>
+
+    <!-- Quiet Hours: mute vibrations -->
+    <string name="pref_lc_qh_mute_vibe_title">无声震动</string>
+
+    <!-- Quiet Hours: interactive mode -->
+    <string name="pref_lc_qh_interactive_title">交互模式</string>
+    <string name="pref_lc_qh_interactive_summary">当用户交互过程中始终保持通知消息静音 
+        （忽略每个应用程序规则）</string>
 
 </resources>
