@@ -856,6 +856,10 @@ public class ModStatusBar {
                         if (XposedHelpers.getAdditionalInstanceField(builder, "gbDeleteActionAdded") != null)
                             return;
 
+                        prefs.reload();
+                        if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENSHOT_DELETE, false))
+                            return;
+
                         Uri uri = (Uri) XposedHelpers.getObjectField(result, "imageUri");
                         Intent deleteIntent = new Intent(ACTION_DELETE_SCREENSHOT);
                         deleteIntent.putExtra(SCREENSHOT_URI, uri.toString());
