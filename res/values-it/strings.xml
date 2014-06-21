@@ -1601,5 +1601,30 @@
     <string name="clock_date_format_2">Formato data: MM/gg</string>
     <string name="clock_date_format_3">Formato data: g MMM</string>
     <string name="clock_date_format_4">Formato data: MMM g</string>
+    <string name="clock_date_format_5">Formato data: g</string>
     	
+    <!-- Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_settings_title">Impostazioni casella batteria</string>
+    <string name="pref_qs_battery_extended_title">Casella batteria avanzata</string>
+    <string name="pref_qs_battery_extended_summary">Richiede riavvio</string>
+    <string name="pref_qs_battery_temp_unit_title">Unità temperatura</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">Azione auricolare</string>
+    <string name="pref_headset_action_plug_title">Con auricolare inserito</string>
+    <string name="pref_headset_action_unplug_title">Con auricolare disinserito</string>
+
+    <!-- Quiet Hours: mute vibrations -->
+    <string name="pref_lc_qh_mute_vibe_title">Non permettere vibrazioni</string>
+
+    <!-- Quiet Hours: interactive mode -->
+    <string name="pref_lc_qh_interactive_title">Modalità interazione</string>
+    <string name="pref_lc_qh_interactive_summary">Mantieni sempre silenziose le notifiche durante l\'interazione dell\'utente 
+        (rispettando eccezioni impostate per ogni app)</string>
+
+    <!-- Screenshot delete -->
+    <string name="pref_screenshot_delete_title">Abilita elimina screenshot</string>
+
 </resources>
