@@ -448,6 +448,13 @@ public class ModLedControl {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     HeadsUpMode mode = null;
                     try {
+                        // explicitly disable for dialer due to broken AOSP implementation
+                        String pkg = (String) XposedHelpers.getObjectField(param.args[0], "pkg");
+                        if (ModDialer.PACKAGE_NAMES.contains(pkg)) {
+                            if (DEBUG) log("Disabling heads up for dialer");
+                            param.setResult(false);
+                            return;
+                        }
                         Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
                         mode = HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE));
                         if (DEBUG) log("Heads up mode: " + (mode == null ? "null" : mode.toString()));
