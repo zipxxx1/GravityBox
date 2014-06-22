@@ -1067,4 +1067,18 @@
         <item>F</item>
     </string-array>
 
+    <string-array name="lc_heads_up_entries" translatable="false">
+        <item>@string/lc_heads_up_default</item>
+        <item>@string/lc_heads_up_always</item>
+        <item>@string/lc_heads_up_immersive</item>
+        <item>@string/lc_heads_up_off</item>
+    </string-array>
+
+    <string-array name="lc_heads_up_values" translatable="false">
+        <item>DEFAULT</item>
+        <item>ALWAYS</item>
+        <item>IMMERSIVE</item>
+        <item>OFF</item>
+    </string-array>
+
 </resources>

@@ -1627,4 +1627,11 @@
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Enable screenshot delete</string>
 
+    <!-- UNC: heads up mode -->
+    <string name="pref_lc_headsup_mode_title">Heads up mode</string>
+    <string name="lc_heads_up_default">Default</string>
+    <string name="lc_heads_up_always">Always</string>
+    <string name="lc_heads_up_immersive">When expanded desktop hides status bar</string>
+    <string name="lc_heads_up_off">Off</string>
+
 </resources>

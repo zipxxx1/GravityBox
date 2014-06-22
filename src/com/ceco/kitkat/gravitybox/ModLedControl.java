@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings;
+import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHours;
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.LedMode;
@@ -37,6 +38,7 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -48,8 +50,14 @@ public class ModLedControl {
     private static final String CLASS_USER_HANDLE = "android.os.UserHandle";
     private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.NotificationManagerService";
     private static final String CLASS_STATUSBAR_MGR_SERVICE = "com.android.server.StatusBarManagerService";
+    private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
+    private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
+    private static final String CLASS_STATUSBAR_NOTIFICATION = "android.service.notification.StatusBarNotification";
+    private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String PACKAGE_NAME_PHONE = "com.android.phone";
+    public static final String PACKAGE_NAME_SYSTEMUI = "com.android.systemui";
     private static final int MISSED_CALL_NOTIF_ID = 1;
+    private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
 
     private static XSharedPreferences mPrefs;
     private static Notification mNotifOnNextScreenOff;
@@ -255,9 +263,10 @@ public class ModLedControl {
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
+                final boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) == 
+                        Notification.FLAG_ONGOING_EVENT);
 
-                if (((n.flags & Notification.FLAG_ONGOING_EVENT) == Notification.FLAG_ONGOING_EVENT) &&
-                        !ls.getOngoing() && !qhActive) {
+                if (isOngoing && !ls.getOngoing() && !qhActive) {
                     if (DEBUG) log("Ongoing led control disabled. Ignoring.");
                     return;
                 }
@@ -320,6 +329,11 @@ public class ModLedControl {
                     } else {
                         n.flags &= ~Notification.FLAG_INSISTENT;
                     }
+                }
+
+                // heads up mode
+                if (ls.getEnabled() && !isOngoing) {
+                    n.extras.putString(NOTIF_EXTRA_HEADS_UP_MODE, ls.getHeadsUpMode().toString());
                 }
 
                 if (DEBUG) log("Notification info: defaults=" + n.defaults + "; flags=" + n.flags);
@@ -413,5 +427,76 @@ public class ModLedControl {
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
+    }
+
+    // SystemUI package
+    public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "start", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!(Boolean)XposedHelpers.getBooleanField(param.thisObject, "mUseHeadsUp")) {
+                        XposedHelpers.setBooleanField(param.thisObject, "mUseHeadsUp", true);
+                        XposedHelpers.callMethod(param.thisObject, "addHeadsUpView");
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "shouldInterrupt",
+                    CLASS_STATUSBAR_NOTIFICATION, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    HeadsUpMode mode = null;
+                    try {
+                        Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
+                        mode = HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE));
+                        if (DEBUG) log("Heads up mode: " + (mode == null ? "null" : mode.toString()));
+                        if (mode == null) return;
+                    } catch (Throwable t) {
+                        return;
+                    }
+
+                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    switch (mode) {
+                        default:
+                        case DEFAULT: return;
+                        case ALWAYS: param.setResult(isHeadsUpAllowed(context)); return;
+                        case OFF: param.setResult(false); return;
+                        case IMMERSIVE:
+                            param.setResult(isStatusBarImmersive(context, prefs) &&
+                                    isHeadsUpAllowed(context));
+                            return;
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static boolean isHeadsUpAllowed(Context context) {
+        if (context == null) return false;
+
+        Object kgTouchDelegate = XposedHelpers.callStaticMethod(
+                XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, context.getClassLoader()),
+                "getInstance", context);
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        return (pm.isScreenOn() &&
+                !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isShowingAndNotHidden") &&
+                !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isInputRestricted"));
+    }
+
+    private static boolean isStatusBarImmersive(Context context, XSharedPreferences prefs) {
+        if (context == null || prefs == null) return false;
+
+        prefs.reload();
+        int expandedDesktopMode = Integer.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
+        boolean edEnabled = Settings.Global.getInt(context.getContentResolver(),
+                ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0) == 1;
+        return (edEnabled
+                && (expandedDesktopMode == GravityBoxSettings.ED_SEMI_IMMERSIVE ||
+                        expandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE_STATUSBAR ||
+                                expandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE));
     }
 }
