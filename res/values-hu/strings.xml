@@ -1147,7 +1147,7 @@
     <string name="wsc_trans_blocked">A megadott tranzakció-azonosító blokkolásra került. A probléma megoldásához lépjen kapcsolatba a GravityBox fejlesztőivel.</string>
     <string name="pref_trans_verification_title">PayPal tranzakció-azonosító</string>
     <string name="pref_trans_verification_summary">Amennyiben adományozott, beírhatja a PayPal adományozási tranzakció-azonosítóját a prémium funkciók feloldásához.</string>
-    <string name="wsc_trans_required_summary">Ehhez a funkcióhoz érvényes PayPal tranzakció-azonosító szükséges</string>
+    <string name="wsc_trans_required_summary">Ez egy prémium funkció, melyhez feloldás szükséges</string>
 
     <!-- Pie: disable system info -->
     <string name="pref_pie_sysinfo_disable_title">Rendszerinformációs gomb letiltása</string>
@@ -1407,7 +1407,7 @@
     <string name="pref_lockscreen_show_pattern_error_summary">Piros mintanyom mutatása hibás feloldó minta megadásakor</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">Ez a funkció próba üzemmódban van. Ha hasznosnak találja, tovább használhatja a funkciót a PayPal adományozási tranzakció azonosító regisztrációja után. A próba üzemmód %d újraindítás után véget ér.</string>
+    <string name="trial_info">Ez a funkció próba üzemmódban van. Ha hasznosnak találja, tovább használhatja ezt a funkciót a prémium funkciók felolodása után. A próba üzemmód végetér %d újraindítás után.</string>
 
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">Alapértelmezett beállítások</string>
@@ -1507,5 +1507,78 @@
     <!-- Dashed circle battery style -->
     <string name="battery_style_circle_dashed">Szaggatott kör akkumlátor</string>
     <string name="battery_style_circle_dashed_percent">Szaggatott kör akkumlátor százalékkal</string>
+
+    <!-- Premium feature unlock via unlocker app -->
+    <string name="premium_unlocked_message">Köszönöm a támogatást. A prémium funkciók a GravityBox újraindítása után kerülnek feloldásra. Győződjön meg arról, hogy a GravityBox Feloldó (Unlocker) legalább 20 percig telepítve van.</string>
+    <string name="pref_about_get_unlocker_title">Feloldó beszerzése</string>
+    <string name="pref_about_get_unlocker_summary">Nincs PayPal fiókja? Csak érintsen ide a GravityBox prémium funkciók feloldójának a Play Áruházból való beszerzéséhez.</string>
+
+    <!-- Navbar custom key: alternate icon -->
+    <string name="pref_navbar_custom_key_icon_title">Alternatív ikon használata</string>
+
+    <!-- QS: swipe to Quick Settings -->
+    <string name="pref_qs_swipe_enable_title">Csúsztatás a GyorsBeállításokhoz</string>
+
+    <!-- Smart Radio: ignore mobile data availability -->
+    <string name="pref_smart_radio_mda_ignore_title">Mobil adatforgalom elérhetőségének figyelmen kívül hagyása</string>
+    <string name="pref_smart_radio_mda_ignore_summary">Normál módba vált akkor is, ha a mobil adatforgalom jelenleg nem elérhető</string>
+
+    <!-- GB Actions: Toggle sync -->
+    <string name="shortcut_sync">Szinkronizáció ki-bekapcsolása</string>
+
+    <!-- UNC: timeout for Alert only once -->
+    <string name="pref_lc_notif_sound_only_once_timeout_title">Időtartamon belül</string>
+
+    <!-- Statusbar clock: show date -->
+    <string name="pref_statusbar_clock_date_title">Dátum mutatása</string>
+
+    <!-- Delete -->
+    <string name="delete">Törlés</string>
+
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">Segélyhívó gomb letiltása</string>
+    <string name="pref_lockscreen_disable_ecb_summary">CSAK SAJÁT FELELŐSSÉGRE!!!!</string>
+
+    <!-- AppPicker: icon pick cancelled -->
+    <string name="app_picker_icon_pick_cancelled">Ikon kiválasztás törölve lett a célalkalmazás által</string>
+
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">Tükrözött gombok</string>
+
+    <!-- Pie: center trigger -->
+    <string name="pref_pie_control_center_trigger_title">Kioldás középről</string>
+    <string name="pref_pie_control_center_trigger_summary">Pie vezérlők csak a képernyőszélek közepén történő csúsztatáskor jelennek meg</string>
+
+    <!-- Statusbar clock: date format options -->
+    <string name="clock_date_disabled">Letiltva</string>
+    <string name="clock_date_localized">Dátum formátum lokalizáció alapján</string>
+    <string name="clock_date_format_1">Dátum formátum: nn/HH</string>
+    <string name="clock_date_format_2">Dátum formátum: HH/nn</string>
+    <string name="clock_date_format_3">Dátum formátum: n HHH</string>
+    <string name="clock_date_format_4">Dátum formátum: HHH n</string>
+    <string name="clock_date_format_5">Dátum formátum: n</string>
+
+    <!-- Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_settings_title">Akkumlátor csempe beállítások</string>
+    <string name="pref_qs_battery_extended_title">Kiterjesztett akkumlátor csempe</string>
+    <string name="pref_qs_battery_extended_summary">Újraindítás szükséges</string>
+    <string name="pref_qs_battery_temp_unit_title">Hőmérséklet egysége</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">Fejhallagató műveletek</string>
+    <string name="pref_headset_action_plug_title">Fejhallgató csatlakoztatva</string>
+    <string name="pref_headset_action_unplug_title">Fejhallgató nincs csatlakoztatva</string>
+
+    <!-- Quiet Hours: mute vibrations -->
+    <string name="pref_lc_qh_mute_vibe_title">Rezgések némítása</string>
+
+    <!-- Quiet Hours: interactive mode -->
+    <string name="pref_lc_qh_interactive_title">Interaktív mód</string>
+    <string name="pref_lc_qh_interactive_summary">Értesítések állandó kikapcsolva tartása felhasználói beavatkozásig (figyelembe véve az alkalamásonkénti mellőzési szabályokat)</string>
+
+    <!-- Screenshot delete -->
+    <string name="pref_screenshot_delete_title">Képernyőkép törlés engedélyezése</string>
 
 </resources>
