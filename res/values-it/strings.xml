@@ -1627,4 +1627,11 @@
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Abilita elimina screenshot</string>
 
+    <!-- UNC: heads up mode -->
+    <string name="pref_lc_headsup_mode_title">Notifiche Head up</string>
+    <string name="lc_heads_up_default">Predefinito</string>
+    <string name="lc_heads_up_always">Sempre</string>
+    <string name="lc_heads_up_immersive">Quando desktop esteso nasconde barra di stato</string>
+    <string name="lc_heads_up_off">Off</string>
+
 </resources>
