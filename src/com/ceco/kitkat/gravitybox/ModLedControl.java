@@ -332,7 +332,7 @@ public class ModLedControl {
                 }
 
                 // heads up mode
-                if (ls.getEnabled() && !isOngoing) {
+                if (ls.getEnabled()) {
                     n.extras.putString(NOTIF_EXTRA_HEADS_UP_MODE, ls.getHeadsUpMode().toString());
                 }
 
@@ -455,6 +455,13 @@ public class ModLedControl {
                             param.setResult(false);
                             return;
                         }
+                        // explicitly disable for all ongoing notifications
+                        if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing")) {
+                            if (DEBUG) log("Disabling heads up for ongoing notification");
+                            param.setResult(false);
+                            return;
+                        }
+                        // get desired mode set by UNC
                         Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
                         mode = HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE));
                         if (DEBUG) log("Heads up mode: " + (mode == null ? "null" : mode.toString()));

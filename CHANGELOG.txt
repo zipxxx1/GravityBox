@@ -4,6 +4,7 @@ Changelog 3.2.0 - 22/06/2014
 --- Heads up mode: takes advantage of hidden kitkat feature:
 ------ allows showing notifications in floating window; configurable on per-app basis
 ------ 2 finger swipe-down expands notification
+------ applicable to non-ongoing notifications only
 ------ http://youtu.be/yXferAXGirM
 --- Quiet hours: added option for controlling vibration muting separately
 --- Quiet hours: added option for Interactive mode (Always keeps notifications quiet during user interaction)
