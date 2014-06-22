@@ -1,3 +1,39 @@
+Changelog 3.2.0 - 22/06/2014
+--------------------------------------
+- Ultimate notification control:
+--- Heads up mode: takes advantage of hidden kitkat feature:
+------ allows showing notifications in floating window; configurable on per-app basis
+------ 2 finger swipe-down expands notification
+------ http://youtu.be/yXferAXGirM
+--- Quiet hours: added option for controlling vibration muting separately
+--- Quiet hours: added option for Interactive mode (Always keeps notifications quiet during user interaction)
+- QuickSettings management:
+--- added option for Extended battery tile (within Tile specific settings):
+------ shows battery percentage inside tile icon
+------ shows temperature and voltage as tile text (including percentage when charging)
+--- changed QuickRecord tile icons (thanks to SlimRoms)
+--- QuickApp tile: launch sub app immediately when there's only one defined
+--- fixed signal tile layout for Motorola Razr HD devices
+- Navigation bar:
+--- fixed key shifting on Nexus7 and other non-phone UI devices
+--- fixed menu key visibility logic during cursor control keys
+- Misc tweaks: 
+--- added options for defining headset plug/unplug actions
+--- added option for enabling Screenshot delete action within notification 
+- Statusbar date: added new format: "d" to show only day of month
+- AppPicker: improved custom icon quality (requires re-assigning of custom icons)
+- Updated Russian translations (thanks to gaich)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated French translation (thanks to ch-vox)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated German translations (thanks to LibertyMarine)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Slovak and Czech translations
+
 Changelog 3.1.7 - 14/06/2014
 --------------------------------------
 - Fixed severe bug in AppPicker affecting ring targets/quick app tile icons
