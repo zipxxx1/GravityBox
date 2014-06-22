@@ -1627,4 +1627,11 @@
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Вкл удаление снимка экрана</string>
 
+    <!-- UNC: heads up mode -->
+    <string name="pref_lc_headsup_mode_title">Режим Heads up</string>
+    <string name="lc_heads_up_default">По умолчанию</string>
+    <string name="lc_heads_up_always">Всегда</string>
+    <string name="lc_heads_up_immersive">При погружении без стр.состояния</string>
+    <string name="lc_heads_up_off">Выкл</string>
+
 </resources>
