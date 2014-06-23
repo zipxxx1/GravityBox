@@ -1611,4 +1611,27 @@
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
 
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">Actions kit piéton</string>
+    <string name="pref_headset_action_plug_title">Au branchement du kit piéton</string>
+    <string name="pref_headset_action_unplug_title">Au débranchement du kit piéton</string>
+
+    <!-- Quiet Hours: mute vibrations -->
+    <string name="pref_lc_qh_mute_vibe_title">Stopper les vibrations</string>
+
+    <!-- Quiet Hours: interactive mode -->
+    <string name="pref_lc_qh_interactive_title">Mode interactif</string>
+    <string name="pref_lc_qh_interactive_summary">Les notifications resteront silencieuses durant une interaction de l\'utilisateur 
+        (en respectant les règles d\'exclusion par application)</string>
+
+    <!-- Screenshot delete -->
+    <string name="pref_screenshot_delete_title">Activer la suppression de capture d\'écran</string>
+
+    <!-- UNC: heads up mode -->
+    <string name="pref_lc_headsup_mode_title">Notifications flottantes</string>
+    <string name="lc_heads_up_default">Par défaut</string>
+    <string name="lc_heads_up_always">Toujours</string>
+    <string name="lc_heads_up_immersive">Lorsque le bureau étendu masque la barre d\'état</string>
+    <string name="lc_heads_up_off">Off</string>
+
 </resources>
