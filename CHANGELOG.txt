@@ -1,3 +1,33 @@
+Changelog 3.2.0 - 24/06/2014
+--------------------------------------
+- Ultimate notification control:
+--- Quiet hours: added option for controlling vibration muting separately
+--- Quiet hours: added option for Interactive mode (Always keeps notifications quiet during user interaction)
+- QuickSettings management:
+--- added option (for non-MTK devices) for Extended battery tile (within Tile specific settings):
+------ shows battery percentage inside tile icon
+------ shows temperature and voltage as tile text (including percentage when charging)
+--- QuickApp tile: launch sub app immediately when there's only one defined
+- Navigation bar:
+--- fixed key shifting on Nexus7 and other non-phone UI devices
+--- fixed menu key visibility logic during cursor control keys
+- Misc tweaks: 
+--- added options for defining headset plug/unplug actions
+--- added option for enabling Screenshot delete action within notification 
+- Statusbar date: added new format: "d" to show only day of month
+- Updated Russian translations (thanks to gaich)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated French translation (thanks to ch-vox)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated German translations (thanks to LibertyMarine)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Slovak and Czech translations
+
 Changelog 3.1.8 - 16/06/2014
 --------------------------------------
 - Fixed brightness control and other affected statusbar tweaks for Android 4.1
