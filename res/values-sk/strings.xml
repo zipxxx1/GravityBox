@@ -1400,7 +1400,7 @@
         pre všetky oznámenia obdržané v definovanom časovom okne</string>
     <string name="pref_lc_qh_start_title">Začiatok</string>
     <string name="pref_lc_qh_end_title">Koniec</string>
-    <string name="pref_lc_qh_mute_led_title">Zakázať aj LED</string>
+    <string name="pref_lc_qh_mute_led_title">Zakázať LED</string>
 
     <!-- Notification control: LED mode -->
     <string name="pref_lc_led_mode_title">Režim LED</string>
@@ -1512,5 +1512,28 @@
     <string name="clock_date_format_3">d MMM</string>
     <string name="clock_date_format_4">MMM d</string>
     <string name="clock_date_format_5">d</string>
+
+    <!-- Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_settings_title">Nastavenia dlaždice Stav batérie</string>
+    <string name="pref_qs_battery_extended_title">Rozšírený stav batérie</string>
+    <string name="pref_qs_battery_extended_summary">Vyžaduje reštart</string>
+    <string name="pref_qs_battery_temp_unit_title">Jednotka teploty</string>
+    <string name="celsius">Celzius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">Akcie slúchadiel</string>
+    <string name="pref_headset_action_plug_title">Po pripojení slúchadiel</string>
+    <string name="pref_headset_action_unplug_title">Po odpojení slúchadiel</string>
+
+    <!-- Quiet Hours: mute vibrations -->
+    <string name="pref_lc_qh_mute_vibe_title">Zakázať vibrácie</string>
+
+    <!-- Quiet Hours: interactive mode -->
+    <string name="pref_lc_qh_interactive_title">Interaktívny režim</string>
+    <string name="pref_lc_qh_interactive_summary">Vždy stlmí oznámenia počas interakcie používateľa so zariadením</string>
+
+    <!-- Screenshot delete -->
+    <string name="pref_screenshot_delete_title">Povoliť vymazanie screenshot</string>
 
 </resources>
