@@ -1634,4 +1634,12 @@
     <string name="lc_heads_up_immersive">Lorsque le bureau étendu masque la barre d\'état</string>
     <string name="lc_heads_up_off">Off</string>
 
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">Notification flottante</string>
+    <string name="pref_heads_up_master_switch_summary">Active la fonction standard AOSP de notification flottante 
+        Si activée, des options additionnelles par application seront accessibles depuis le Contrôle ultime de notification (redémarrage nécessaire)</string>
+    <string name="pref_heads_up_one_finger_title">Développer avec un doigt</string>
+    <string name="pref_heads_up_timeout_title">Temporisation</string>
+    <string name="pref_heads_up_timeout_summary">Pour programmer la durée d\'affichage de la fenêtre de notification 0 = permanent</string>
+
 </resources>
