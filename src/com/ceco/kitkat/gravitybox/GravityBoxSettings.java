@@ -767,6 +767,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_INCREASING_RING = "pref_increasing_ring";
 
+    public static final String PREF_KEY_HEADS_UP_MASTER_SWITCH = "pref_heads_up_master_switch";
+    public static final String PREF_KEY_HEADS_UP_TIMEOUT = "pref_heads_up_timeout";
+    public static final String PREF_KEY_HEADS_UP_ONE_FINGER = "pref_heads_up_one_finger";
+
     public static final String PREF_KEY_HEADSET_ACTION_PLUG = "pref_headset_action_plug";
     public static final String PREF_KEY_HEADSET_ACTION_UNPLUG = "pref_headset_action_unplug";
     public static final String ACTION_PREF_HEADSET_ACTION_CHANGED = "gravitybox.intent.action.HEADSET_ACTION_CHANGED";
@@ -807,7 +811,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SIGNAL_CLUSTER_HPLUS,
             PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE,
             PREF_KEY_FORCE_LTR_DIRECTION,
-            PREF_KEY_QS_BATTERY_EXTENDED
+            PREF_KEY_QS_BATTERY_EXTENDED,
+            PREF_KEY_HEADS_UP_MASTER_SWITCH
     ));
 
     private static final class SystemProperties {

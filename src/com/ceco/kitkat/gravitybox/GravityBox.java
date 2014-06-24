@@ -204,7 +204,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModRinger.init(prefs, lpparam.classLoader);
         }
 
-        if (lpparam.packageName.equals(ModLedControl.PACKAGE_NAME_SYSTEMUI)) {
+        if (lpparam.packageName.equals(ModLedControl.PACKAGE_NAME_SYSTEMUI) &&
+                prefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_MASTER_SWITCH, false)) {
             ModLedControl.init(prefs, lpparam.classLoader);
         }
     }

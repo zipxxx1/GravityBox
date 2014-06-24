@@ -39,6 +39,7 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.provider.Settings;
+import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
@@ -56,6 +57,7 @@ public class ModLedControl {
     private static final String CLASS_STATUSBAR_NOTIFICATION = "android.service.notification.StatusBarNotification";
     private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData.Entry";
+    private static final String CLASS_EXPAND_HELPER = "com.android.systemui.ExpandHelper";
     private static final String PACKAGE_NAME_PHONE = "com.android.phone";
     public static final String PACKAGE_NAME_SYSTEMUI = "com.android.systemui";
     private static final int MISSED_CALL_NOTIF_ID = 1;
@@ -448,6 +450,7 @@ public class ModLedControl {
                     CLASS_STATUSBAR_NOTIFICATION, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    prefs.reload();
                     HeadsUpMode mode = null;
                     try {
                         // explicitly disable for dialer due to broken AOSP implementation
@@ -488,6 +491,25 @@ public class ModLedControl {
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIF_DATA_ENTRY, classLoader, "setInterruption", 
                     XC_MethodReplacement.DO_NOTHING);
+
+            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "resetHeadsUpDecayTimer",
+                    new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    int timeout = prefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_TIMEOUT, 5) * 1000;
+                    XposedHelpers.setIntField(param.thisObject, "mHeadsUpNotificationDecay", timeout);
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_EXPAND_HELPER, classLoader, "isInside",
+                    View.class, float.class, float.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_ONE_FINGER, false)) {
+                        param.setResult(true);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -508,7 +530,6 @@ public class ModLedControl {
     private static boolean isStatusBarImmersive(Context context, XSharedPreferences prefs) {
         if (context == null || prefs == null) return false;
 
-        prefs.reload();
         int expandedDesktopMode = Integer.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
         boolean edEnabled = Settings.Global.getInt(context.getContentResolver(),

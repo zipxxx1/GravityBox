@@ -18,6 +18,8 @@ package com.ceco.kitkat.gravitybox.ledcontrol;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.ceco.kitkat.gravitybox.GravityBoxSettings;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -174,6 +176,18 @@ public class LedSettings {
             SharedPreferences prefs = context.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             return prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return false;
+        }
+    }
+
+    protected static boolean isHeadsUpEnabled(Context context) {
+        try {
+            final String prefsName = context.getPackageName() + "_preferences";
+            SharedPreferences prefs = context.getSharedPreferences(
+                    prefsName, Context.MODE_WORLD_READABLE);
+            return prefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_MASTER_SWITCH, false);
         } catch (Throwable t) {
             t.printStackTrace();
             return false;

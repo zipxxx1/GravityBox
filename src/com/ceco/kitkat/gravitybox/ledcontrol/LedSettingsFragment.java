@@ -60,6 +60,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_QH_IGNORE = "pref_lc_qh_ignore";
     private static final String PREF_KEY_QH_IGNORE_LIST = "pref_lc_qh_ignore_list";
     private static final String PREF_KEY_HEADS_UP_MODE = "pref_lc_headsup_mode";
+    private static final String PREF_CAT_KEY_OTHER = "pref_cat_lc_other";
 
     private static final int REQ_PICK_SOUND = 101;
 
@@ -84,6 +85,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private CheckBoxPreference mQhIgnorePref;
     private EditTextPreference mQhIgnoreListPref;
     private ListPreference mHeadsUpModePref;
+    private PreferenceCategory mOtherCat;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mQhIgnoreListPref = (EditTextPreference) findPreference(PREF_KEY_QH_IGNORE_LIST);
         mHeadsUpModePref = (ListPreference) findPreference(PREF_KEY_HEADS_UP_MODE);
         mHeadsUpModePref.setOnPreferenceChangeListener(this);
+        mOtherCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_OTHER);
     }
 
     protected void initialize(LedSettings ledSettings) {
@@ -150,8 +153,12 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             mQhIgnorePref.setChecked(ledSettings.getQhIgnore());
             mQhIgnoreListPref.setText(ledSettings.getQhIgnoreList());
         }
-        mHeadsUpModePref.setValue(ledSettings.getHeadsUpMode().toString());
-        mHeadsUpModePref.setSummary(mHeadsUpModePref.getEntry());
+        if (!LedSettings.isHeadsUpEnabled(getActivity())) {
+            mOtherCat.removePreference(mHeadsUpModePref);
+        } else {
+            mHeadsUpModePref.setValue(ledSettings.getHeadsUpMode().toString());
+            mHeadsUpModePref.setSummary(mHeadsUpModePref.getEntry());
+        }
     }
 
     private void updateSoundPrefSummary() {

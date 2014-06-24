@@ -1634,4 +1634,12 @@
     <string name="lc_heads_up_immersive">When expanded desktop hides status bar</string>
     <string name="lc_heads_up_off">Off</string>
 
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">Notification heads up</string>
+    <string name="pref_heads_up_master_switch_summary">Activates standard AOSP heads up functionality. 
+        When enabled, additional per-app options will become available within Ultimate notification control. (requires reboot)</string>
+    <string name="pref_heads_up_one_finger_title">One finger expand</string>
+    <string name="pref_heads_up_timeout_title">Timeout</string>
+    <string name="pref_heads_up_timeout_summary">For how long to show notification window. 0 = persistent.</string>
+
 </resources>
