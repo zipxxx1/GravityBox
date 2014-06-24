@@ -1601,4 +1601,12 @@
     <string name="lc_heads_up_immersive">Gdy rozszerzony pulpit ukrywa pasek stanu</string>
     <string name="lc_heads_up_off">Wyłączony</string>
 
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">Powiadomienie Heads up</string>
+    <string name="pref_heads_up_master_switch_summary">Włącza standardową funkcjonalność AOSP Heads up. 
+        Gdy jest włączona, dodatkowe opcje dla danej aplikacji będą dostępne poprzez Nadrzędne ustawienia powiadomień. (wymaga restartu)</string>
+    <string name="pref_heads_up_one_finger_title">Rozwijanie jednym palcem</string>
+    <string name="pref_heads_up_timeout_title">Limit czasu</string>
+    <string name="pref_heads_up_timeout_summary">Czas wyświetlania okna powiadomienia. 0=trwale</string>
+
 </resources>
