@@ -23,7 +23,6 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -64,7 +63,6 @@ public class BatteryInfoManager {
         mContext = context;
         mGbContext = gbContext;
         mBatteryData = new BatteryData();
-        getCurrentBatteryData();
         mListeners = new ArrayList<BatteryStatusListener>();
         mChargedSoundEnabled = false;
         mPluggedSoundEnabled = false;
@@ -84,10 +82,6 @@ public class BatteryInfoManager {
     }
 
     public void updateBatteryInfo(Intent intent) {
-        updateBatteryInfo(intent, true);
-    }
-
-    public void updateBatteryInfo(Intent intent, boolean notify) {
         if (intent == null) return;
 
         int newLevel = (int)(100f
@@ -120,15 +114,11 @@ public class BatteryInfoManager {
             mBatteryData.temperature = newTemp;
             mBatteryData.voltage = newVoltage;
 
-            if (notify) {
-                notifyListeners();
-            }
+            notifyListeners();
         }
     }
 
     public BatteryData getCurrentBatteryData() {
-        updateBatteryInfo(mContext.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED)), false);
         return mBatteryData;
     }
 
