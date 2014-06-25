@@ -451,30 +451,27 @@ public class ModLedControl {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     prefs.reload();
-                    HeadsUpMode mode = null;
-                    try {
-                        // explicitly disable for dialer due to broken AOSP implementation
-                        String pkg = (String) XposedHelpers.getObjectField(param.args[0], "pkg");
-                        if (ModDialer.PACKAGE_NAMES.contains(pkg)) {
-                            if (DEBUG) log("Disabling heads up for dialer");
-                            param.setResult(false);
-                            return;
-                        }
-                        // explicitly disable for all ongoing notifications
-                        if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing")) {
-                            if (DEBUG) log("Disabling heads up for ongoing notification");
-                            param.setResult(false);
-                            return;
-                        }
-                        // get desired mode set by UNC or use default
-                        Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
-                        mode = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_MODE) ?
-                                HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE)) :
-                                    HeadsUpMode.ALWAYS;
-                        if (DEBUG) log("Heads up mode: " + mode.toString());
-                    } catch (Throwable t) {
+
+                    // explicitly disable for dialer due to broken AOSP implementation
+                    String pkg = (String) XposedHelpers.getObjectField(param.args[0], "pkg");
+                    if (ModDialer.PACKAGE_NAMES.contains(pkg)) {
+                        if (DEBUG) log("Disabling heads up for dialer");
+                        param.setResult(false);
                         return;
                     }
+                    // explicitly disable for all ongoing notifications
+                    if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing")) {
+                        if (DEBUG) log("Disabling heads up for ongoing notification");
+                        param.setResult(false);
+                        return;
+                    }
+
+                    // get desired mode set by UNC or use default
+                    Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
+                    HeadsUpMode mode = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_MODE) ?
+                            HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE)) :
+                                HeadsUpMode.ALWAYS;
+                    if (DEBUG) log("Heads up mode: " + mode.toString());
 
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     switch (mode) {
