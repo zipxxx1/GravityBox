@@ -1595,4 +1595,12 @@
     <string name="lc_heads_up_immersive">V prípade ak režim rozšírenej plochy skryje stavovú lištu</string>
     <string name="lc_heads_up_off">Vypnutý</string>
 
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">Heads up notifikácie</string>
+    <string name="pref_heads_up_master_switch_summary">Aktivuje štandardnú AOSP \"heads up\" funkcionalitu. 
+        Ak zapnuté, dodatočné nastavenia pre jednotlivé aplikácie samostatne budú dostupné v rámci ponuky Nastavenia oznámení. (vyžaduje reštart)</string>
+    <string name="pref_heads_up_one_finger_title">Rozšírenie jedným prstom</string>
+    <string name="pref_heads_up_timeout_title">Časovač zobrazenia</string>
+    <string name="pref_heads_up_timeout_summary">Po akej dobe zavrieť notifikačné okno. 0 = nikdy.</string>
+
 </resources>
