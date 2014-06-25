@@ -471,7 +471,9 @@ public class ModQuickSettings {
                 // update views we found
                 if (tileTextView != null) {
                     tileTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, tl.textSize);
-                    tileTextView.setAllCaps(tl.labelStyle == TileLayout.LabelStyle.ALLCAPS);
+                    tileTextView.setAllCaps(tl.labelStyle == TileLayout.LabelStyle.ALLCAPS &&
+                            !("battery_textview".equals(key) && 
+                                    mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BATTERY_EXTENDED, false)));
                     tileTextView.setVisibility(tl.labelStyle == TileLayout.LabelStyle.HIDDEN ?
                             View.GONE : View.VISIBLE);
                 }
