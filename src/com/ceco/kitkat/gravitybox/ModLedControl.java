@@ -466,11 +466,12 @@ public class ModLedControl {
                             param.setResult(false);
                             return;
                         }
-                        // get desired mode set by UNC
+                        // get desired mode set by UNC or use default
                         Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
-                        mode = HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE));
-                        if (DEBUG) log("Heads up mode: " + (mode == null ? "null" : mode.toString()));
-                        if (mode == null) return;
+                        mode = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_MODE) ?
+                                HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE)) :
+                                    HeadsUpMode.ALWAYS;
+                        if (DEBUG) log("Heads up mode: " + mode.toString());
                     } catch (Throwable t) {
                         return;
                     }
