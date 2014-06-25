@@ -1,3 +1,23 @@
+Changelog 3.2.1 - 25/06/2014
+--------------------------------------
+- Heads up:
+--- added master switch together with some basic options under Statusbar tweaks (outside Ultimate notification control)
+--- added option for defining timeout (0 = persistent)
+--- added option for turning on one finger expand
+--- fixed issue affecting notification ordering
+--- per-app heads up control remains available within Ultimate notification control (when master switch is on)
+- Fixed statusbar battery percentages showing 0 after reboot when expanded battery tile is enabled
+- QS: Don't apply "All caps" text style to extended battery tile to always show mV instead of MV
+- Updated layout in UNC quick search box to allow inputting non-English characters (thanks to momomok)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated German translations (thanks to LibertyMarine)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated French translation (thanks to ch-vox)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Russian translations (thanks to gaich)
+- Updated Slovak and Czech translations
+- Small adjustments to Indonesian translations (thanks to mirdhan)
+ 
 Changelog 3.2.0 - 22/06/2014
 --------------------------------------
 - Ultimate notification control:
