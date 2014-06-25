@@ -374,6 +374,7 @@ public class ModQuickSettings {
                 17, res.getDisplayMetrics());
         final int imgResId = res.getIdentifier("image", "id", PACKAGE_NAME);
         final int rssiImgResId = res.getIdentifier("rssi_image", "id", PACKAGE_NAME);
+        final int batTvResId = res.getIdentifier("battery_textview", "id", PACKAGE_NAME);
 
         if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(context)) {
             switch (mNumColumns) {
@@ -411,7 +412,9 @@ public class ModQuickSettings {
                 if (textView != null) {
                     textView.setTextSize(1, textSize);
                     textView.setSingleLine(false);
-                    textView.setAllCaps(mQsTileLabelStyle == LabelStyle.ALLCAPS);
+                    textView.setAllCaps(mQsTileLabelStyle == LabelStyle.ALLCAPS &&
+                            !(textView.getId() == batTvResId && 
+                                    mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BATTERY_EXTENDED, false)));
                 }
 
                 // adjust layout in case it's AOSP 4.3 tile
