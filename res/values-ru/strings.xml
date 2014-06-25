@@ -1628,10 +1628,18 @@
     <string name="pref_screenshot_delete_title">Вкл удаление снимка экрана</string>
 
     <!-- UNC: heads up mode -->
-    <string name="pref_lc_headsup_mode_title">Режим Heads up</string>
+    <string name="pref_lc_headsup_mode_title">Режим Всплытие (Heads up)</string>
     <string name="lc_heads_up_default">По умолчанию</string>
     <string name="lc_heads_up_always">Всегда</string>
     <string name="lc_heads_up_immersive">При погружении без стр.состояния</string>
     <string name="lc_heads_up_off">Выкл</string>
+
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">Уведомления режима Всплытие</string>
+    <string name="pref_heads_up_master_switch_summary">Активация стандартной функции Всплытие (Heads up) для AOSP. 
+        Если активировано, станут доступны дополнительные опции для приложений в управлении оповещениями. (Необходима перезагрузка)</string>
+    <string name="pref_heads_up_one_finger_title">Раскрытие пальцем</string>
+    <string name="pref_heads_up_timeout_title">Задержка</string>
+    <string name="pref_heads_up_timeout_summary">Время отображения окна уведомления. 0 = постоянно.</string>
 
 </resources>
