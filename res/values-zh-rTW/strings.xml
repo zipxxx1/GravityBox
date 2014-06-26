@@ -854,7 +854,7 @@
     <string name="volume_rocker_wake_disabled">停用</string>
 
    <!-- Advanced reboot menu: require confirmation -->
-    <string name="pref_reboot_confirm_required_title">要求重新啟動確認</string>
+    <string name="pref_reboot_confirm_required_title">在重新啟動前先進行確認</string>
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">點擊後隱藏</string>
@@ -1603,5 +1603,12 @@
     <string name="lc_heads_up_always">永遠啟用</string>
     <string name="lc_heads_up_immersive">當全螢幕模式啟用並隱藏了狀態列時</string>
     <string name="lc_heads_up_off">停用</string>
+
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">浮動通知</string>
+    <string name="pref_heads_up_master_switch_summary">啟用AOSP浮動通知功能。當啟用後，您可以在通知控制內針對個別應用程式設定浮動通知功能（需要重新啟動）</string>
+    <string name="pref_heads_up_one_finger_title">單指擴充</string>
+    <string name="pref_heads_up_timeout_title">逾時</string>
+    <string name="pref_heads_up_timeout_summary">設定每則浮動通知的顯示時間。設定成 0 來持續顯示</string>
 
 </resources>
