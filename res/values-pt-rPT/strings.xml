@@ -1605,4 +1605,19 @@
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Ativar opção de apagar captura de ecrã</string>
 
+    <!-- UNC: heads up mode -->
+    <string name="pref_lc_headsup_mode_title">Modo Heads up</string>
+    <string name="lc_heads_up_default">Predefinido</string>
+    <string name="lc_heads_up_always">Sempre</string>
+    <string name="lc_heads_up_immersive">Quando o ambiente de trabalho expandido esconder a barra de status</string>
+    <string name="lc_heads_up_off">Desativado</string>
+
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">Notificações flutuantes (Heads up)</string>
+    <string name="pref_heads_up_master_switch_summary">Permite ativar a funcionalidade nativa de notificações flutuantes. 
+        Após ativação, ficam disponíveis mais opções a definir por aplicação no Controlo de notificações (necessário reiniciar).</string>
+    <string name="pref_heads_up_one_finger_title">Expandir com um dedo</string>
+    <string name="pref_heads_up_timeout_title">Temporização</string>
+    <string name="pref_heads_up_timeout_summary">Permite definir por quanto tempo deverá ser mostrada a janela da notificação (0 = persistente)</string>
+
 </resources>
