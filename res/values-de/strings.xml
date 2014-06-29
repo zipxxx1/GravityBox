@@ -1105,7 +1105,7 @@
     <string name="wsc_trans_blocked">Der angegebene Transaktionscode ist blockiert. Kontaktieren Sie bei Bedarf den GravityBox-Entwickler (Englisch).</string>
     <string name="pref_trans_verification_title">Paypal Transaktionscode</string>
     <string name="pref_trans_verification_summary">Sollten Sie gespendet haben, können Sie mit Ihrem Paypal Transaktionscode Premiumfunktionen freischalten</string>
-    <string name="wsc_trans_required_summary">Diese Funktion benötigt einen gültigen PayPal Transaktionscode.</string>
+    <string name="wsc_trans_required_summary">Diese Funktion erfordert einen gültigen PayPal Transaktionscode.</string>
 
     <!-- Pie: disable system info -->
     <string name="pref_pie_sysinfo_disable_title">Systeminfo deaktivieren</string>
@@ -1123,7 +1123,7 @@
     <!-- Launcher tweaks: resize any widget -->
     <string name="pref_cat_launcher_other_title">Andere</string>
     <string name="pref_launcher_resize_widget_title">Alle Widgets vergrößern/verkleinern</string>
-    <string name="pref_launcher_resize_widget_summary">Erlaubt es alle Widgets auf dem Homescreen zu vergrößern/verkleinern (benötigt Launcher Neustart)</string>
+    <string name="pref_launcher_resize_widget_summary">Erlaubt es alle Widgets auf dem Homescreen zu vergrößern/verkleinern (erfordert Launcher Neustart)</string>
 
     <!-- Icon picker -->
     <string name="icon_picker_choose_icon_title">Symbol wählen</string>
@@ -1402,7 +1402,7 @@
     <string name="lc_active_screen_info">Beim Aktiv-Bildschirm wird der Bildschirm automatisch
         aktiviert, wenn eine Benachrichtigung eingeht. Dies geschieht nur, wenn das Gerät
         nicht verdeckt ist (z.B. in der Tasche). Optional kann die Benachrichtigungsleiste erweitert
-        werden. Der Aktiv-Bildschirm benötigt eine aktive Bildschirmsperre.\nIst der untenstehende Hauptschalter
+        werden. Der Aktiv-Bildschirm benötigt eine intakte Bildschirmsperre.\nIst der untenstehende Hauptschalter
         aktiviert, kann das Verhalten für einzelne Apps konfiguriert werden.</string>
     <string name="lc_active_screen_switch_title">Aktiv-Bildschirm aktivieren</string>
     <string name="lc_expand_notification_panel_title">Benachrichtigungsleiste erweitern</string>
@@ -1458,7 +1458,7 @@
 
     <!-- Signal cluster: H+ indicator -->
     <string name="pref_signal_cluster_hplus_title">H+ Symbol aktivieren</string>
-    <string name="pref_signal_cluster_hplus_summary">Benötigt Neustart</string>
+    <string name="pref_signal_cluster_hplus_summary">Erfordert Neustart</string>
 
     <!-- Signal cluster: LTE/4G indicator style -->
     <string name="pref_signal_cluster_lte_style_title">Stil des LTE-Symbols</string>
@@ -1583,7 +1583,7 @@
     <!-- Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_settings_title">Akku Titel Einstellungen</string>
     <string name="pref_qs_battery_extended_title">Erweiterter Akku Titel</string>
-    <string name="pref_qs_battery_extended_summary">Benötigt Neustart</string>
+    <string name="pref_qs_battery_extended_summary">Erfordert Neustart</string>
     <string name="pref_qs_battery_temp_unit_title">Temperatur Einheit</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
@@ -1610,5 +1610,13 @@
     <string name="lc_heads_up_always">Immer</string>
     <string name="lc_heads_up_immersive">Wenn erweiterter Desktop Statusleiste versteckt</string>
     <string name="lc_heads_up_off">Aus</string>
+    
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">Heads-Up Benachrichtigungen</string>
+    <string name="pref_heads_up_master_switch_summary">Aktiviert standart AOSP Funktionalität. 
+        Wenn aktiviert, werden weitere App-spezifische Einstellungen in der ultimativen Benachrichtigungkontrolle verfügbar. (erfordert Neustart)</string>
+    <string name="pref_heads_up_one_finger_title">Mit einem Finger erweitern</string>
+    <string name="pref_heads_up_timeout_title">Zeitlimit</string>
+    <string name="pref_heads_up_timeout_summary">Anzeigedauer des Benachrichtigungenfensters. 0 = dauerhaft.</string>
 
 </resources>
