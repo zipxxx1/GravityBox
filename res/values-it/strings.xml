@@ -1628,10 +1628,18 @@
     <string name="pref_screenshot_delete_title">Abilita elimina screenshot</string>
 
     <!-- UNC: heads up mode -->
-    <string name="pref_lc_headsup_mode_title">Notifiche Head up</string>
+    <string name="pref_lc_headsup_mode_title">Notifiche Heads up</string>
     <string name="lc_heads_up_default">Predefinito</string>
     <string name="lc_heads_up_always">Sempre</string>
     <string name="lc_heads_up_immersive">Quando desktop esteso nasconde barra di stato</string>
     <string name="lc_heads_up_off">Off</string>
+
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">Notifiche Heads Up</string>
+    <string name="pref_heads_up_master_switch_summary">Abilita la funzionalità Heads Up contenuta nell\'AOSP. 
+        Quando abilitato, sarà possibile impostare ulteriori opzioni per ogni app nel Gestore globale notifiche. (richiede riavvio)</string>
+    <string name="pref_heads_up_one_finger_title">Espandi con un dito</string>
+    <string name="pref_heads_up_timeout_title">Timeout</string>
+    <string name="pref_heads_up_timeout_summary">Specifica quanto tempo la notifica deve rimanere in primo piano. 0 = persistente.</string>
 
 </resources>
