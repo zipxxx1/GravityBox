@@ -417,7 +417,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     
             if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_SEARCH) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.SEARCH,
-                        mGbResources.getDrawable(R.drawable.ic_sysbar_search_side), minimumImageSize));
+                        mGbResources.getDrawable(R.drawable.pie_search), minimumImageSize));
             } else if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_APP_LAUNCHER) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.APP_LAUNCHER,
                         mGbResources.getDrawable(R.drawable.ic_sysbar_apps), minimumImageSize));
@@ -446,7 +446,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                     minimumImageSize));
             if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_SEARCH) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.SEARCH,
-                        mGbResources.getDrawable(R.drawable.ic_sysbar_search_side), minimumImageSize));
+                        mGbResources.getDrawable(R.drawable.pie_search), minimumImageSize));
             } else if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_APP_LAUNCHER) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.APP_LAUNCHER,
                         mGbResources.getDrawable(R.drawable.ic_sysbar_apps), minimumImageSize));

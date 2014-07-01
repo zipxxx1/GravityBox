@@ -18,6 +18,8 @@ package com.ceco.gm2.gravitybox;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
@@ -25,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.content.res.XModuleResources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -50,6 +53,7 @@ import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModNavigationBar {
     public static final String PACKAGE_NAME = "com.android.systemui";
@@ -274,6 +278,42 @@ public class ModNavigationBar {
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE, false)) {
+            XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
+
+            Map<String, Integer> ic_map = new HashMap<String, Integer>();
+            ic_map.put("ic_sysbar_back_ime", R.drawable.ic_sysbar_back_ime);
+            ic_map.put("ic_sysbar_back_ime_land", R.drawable.ic_sysbar_back_ime_land);
+            ic_map.put("ic_sysbar_back", R.drawable.ic_sysbar_back);
+            ic_map.put("ic_sysbar_back_land", R.drawable.ic_sysbar_back_land);
+            ic_map.put("ic_sysbar_back_side", R.drawable.ic_sysbar_back_side);
+            ic_map.put("ic_sysbar_highlight", R.drawable.ic_sysbar_highlight);
+            ic_map.put("ic_sysbar_highlight_land", R.drawable.ic_sysbar_highlight_land);
+            ic_map.put("ic_sysbar_menu", R.drawable.ic_sysbar_menu);
+            ic_map.put("ic_sysbar_menu_land", R.drawable.ic_sysbar_menu_land);
+            ic_map.put("ic_sysbar_menu_big", R.drawable.ic_sysbar_menu_big);
+            ic_map.put("ic_sysbar_menu_big_land", R.drawable.ic_sysbar_menu_big_land);
+            ic_map.put("ic_sysbar_recent", R.drawable.ic_sysbar_recent);
+            ic_map.put("ic_sysbar_recent_land", R.drawable.ic_sysbar_recent_land);
+            ic_map.put("ic_sysbar_recent_side", R.drawable.ic_sysbar_recent_side);
+            ic_map.put("ic_sysbar_search", R.drawable.ic_sysbar_search);
+            ic_map.put("ic_sysbar_search_land", R.drawable.ic_sysbar_search_land);
+            ic_map.put("ic_sysbar_search_side", R.drawable.ic_sysbar_search_side);
+            ic_map.put("ic_sysbar_home", R.drawable.ic_sysbar_home);
+            ic_map.put("ic_sysbar_home_land", R.drawable.ic_sysbar_home_land);
+
+            for (String key : ic_map.keySet()) {
+                try {
+                    resparam.res.setReplacement(PACKAGE_NAME, "drawable", key,
+                            modRes.fwd(ic_map.get(key)));
+                } catch (Throwable t) {
+                    log("Drawable not found: " + key);
+                }
+            }
         }
     }
 

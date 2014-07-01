@@ -722,6 +722,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_RING_TARGET_BG_STYLE = "ringTargetBgStyle";
     public static final String EXTRA_RING_HAPTIC_FEEDBACK = "ringHapticFeedback";
 
+    public static final String PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE = "pref_navbar_android_l_icons_enable";
+
     public static final String PREF_KEY_SMART_RADIO_ENABLE = "pref_smart_radio_enable";
     public static final String PREF_KEY_SMART_RADIO_NORMAL_MODE = "pref_smart_radio_normal_mode";
     public static final String PREF_KEY_SMART_RADIO_POWER_SAVING_MODE = "pref_smart_radio_power_saving_mode";
@@ -816,7 +818,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SCREEN_OFF_EFFECT,
             PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH,
             PREF_KEY_FORCE_LTR_DIRECTION,
-            PREF_KEY_QS_BATTERY_EXTENDED
+            PREF_KEY_QS_BATTERY_EXTENDED,
+            PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE
     ));
 
     private static final class SystemProperties {
@@ -1146,6 +1149,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private AppPickerPreference[] mPrefNavbarRingTarget;
         private ListPreference mPrefNavbarRingTargetsBgStyle;
         private ListPreference mPrefNavbarRingHapticFeedback;
+        private CheckBoxPreference mPrefNavbarAndroidLIconsEnable;
         private SeekBarPreference mPrefPulseNotificationDelay;
         private PreferenceScreen mPrefCatMisc;
         private PreferenceCategory mPrefCatMiscRecentsPanel;
@@ -1460,6 +1464,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefNavbarRingTarget[i] = appPref;
                 mPrefCatNavbarRingTargets.addPreference(mPrefNavbarRingTarget[i]);
             }
+
+            mPrefNavbarAndroidLIconsEnable = (CheckBoxPreference) findPreference(PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE);
 
             mPrefPulseNotificationDelay = (SeekBarPreference) findPreference(PREF_KEY_PULSE_NOTIFICATION_DELAY);
 
