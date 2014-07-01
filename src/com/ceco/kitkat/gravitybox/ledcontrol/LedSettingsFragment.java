@@ -18,6 +18,7 @@ package com.ceco.kitkat.gravitybox.ledcontrol;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.kitkat.gravitybox.preference.SeekBarPreference;
 
@@ -59,7 +60,9 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_CAT_KEY_QH = "pref_cat_lc_quiet_hours";
     private static final String PREF_KEY_QH_IGNORE = "pref_lc_qh_ignore";
     private static final String PREF_KEY_QH_IGNORE_LIST = "pref_lc_qh_ignore_list";
+    private static final String PREF_CAT_KEY_HEADS_UP = "pref_cat_lc_heads_up";
     private static final String PREF_KEY_HEADS_UP_MODE = "pref_lc_headsup_mode";
+    private static final String PREF_KEY_HEADS_UP_EXPANDED = "pref_lc_headsup_expanded";
     private static final String PREF_CAT_KEY_OTHER = "pref_cat_lc_other";
 
     private static final int REQ_PICK_SOUND = 101;
@@ -84,7 +87,9 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private PreferenceCategory mQhCat;
     private CheckBoxPreference mQhIgnorePref;
     private EditTextPreference mQhIgnoreListPref;
+    private PreferenceCategory mHeadsUpCat;
     private ListPreference mHeadsUpModePref;
+    private CheckBoxPreference mHeadsUpExpandedPref;
     private PreferenceCategory mOtherCat;
 
     @Override
@@ -113,8 +118,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mQhCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_QH);
         mQhIgnorePref = (CheckBoxPreference) findPreference(PREF_KEY_QH_IGNORE);
         mQhIgnoreListPref = (EditTextPreference) findPreference(PREF_KEY_QH_IGNORE_LIST);
+        mHeadsUpCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_HEADS_UP);
         mHeadsUpModePref = (ListPreference) findPreference(PREF_KEY_HEADS_UP_MODE);
         mHeadsUpModePref.setOnPreferenceChangeListener(this);
+        mHeadsUpExpandedPref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_EXPANDED);
         mOtherCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_OTHER);
     }
 
@@ -154,10 +161,13 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             mQhIgnoreListPref.setText(ledSettings.getQhIgnoreList());
         }
         if (!LedSettings.isHeadsUpEnabled(getActivity())) {
-            mOtherCat.removePreference(mHeadsUpModePref);
+            getPreferenceScreen().removePreference(mHeadsUpCat);
         } else {
             mHeadsUpModePref.setValue(ledSettings.getHeadsUpMode().toString());
             mHeadsUpModePref.setSummary(mHeadsUpModePref.getEntry());
+            mHeadsUpExpandedPref.setChecked(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF && 
+                    ledSettings.getHeadsUpExpanded());
+            mHeadsUpExpandedPref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
         }
     }
 
@@ -253,6 +263,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         return mHeadsUpModePref.getValue();
     }
 
+    protected boolean getHeadsUpExpanded() {
+        return mHeadsUpExpandedPref.isChecked();
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen prefScreen, Preference pref) {
         if (pref == mNotifSoundPref) {
@@ -297,6 +311,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         } else if (preference == mHeadsUpModePref) {
             mHeadsUpModePref.setValue((String)newValue);
             mHeadsUpModePref.setSummary(mHeadsUpModePref.getEntry());
+            mHeadsUpExpandedPref.setEnabled(!"OFF".equals(mHeadsUpModePref.getValue()));
         }
         return true;
     }

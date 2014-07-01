@@ -57,6 +57,7 @@ public class LedSettings {
     private boolean mQhIgnore;
     private String mQhIgnoreList;
     private HeadsUpMode mHeadsUpMode;
+    private boolean mHeadsUpExpanded;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -127,6 +128,8 @@ public class LedSettings {
                 ls.setQhIgnoreList(data[1]);
             } else if (data[0].equals("headsUpMode")) {
                 ls.setHeadsUpMode(data[1]);
+            } else if (data[0].equals("headsUpExpanded")) {
+                ls.setHeadsUpExpanded(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -154,6 +157,7 @@ public class LedSettings {
         mQhIgnore = false;
         mQhIgnoreList = null;
         mHeadsUpMode = HeadsUpMode.DEFAULT;
+        mHeadsUpExpanded = false;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -319,6 +323,10 @@ public class LedSettings {
         }
     }
 
+    protected void setHeadsUpExpanded(boolean expanded) {
+        mHeadsUpExpanded = expanded;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -399,6 +407,10 @@ public class LedSettings {
         return mHeadsUpMode;
     }
 
+    public boolean getHeadsUpExpanded() {
+        return mHeadsUpExpanded;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -426,6 +438,7 @@ public class LedSettings {
                 dataSet.add("qhIgnoreList:" + mQhIgnoreList);
             }
             dataSet.add("headsUpMode:" + mHeadsUpMode.toString());
+            dataSet.add("headsUpExpanded:" + mHeadsUpExpanded);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

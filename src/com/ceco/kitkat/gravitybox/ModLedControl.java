@@ -340,6 +340,10 @@ public class ModLedControl {
                 // heads up mode
                 if (ls.getEnabled()) {
                     n.extras.putString(NOTIF_EXTRA_HEADS_UP_MODE, ls.getHeadsUpMode().toString());
+                    if (ls.getHeadsUpMode() != HeadsUpMode.OFF) {
+                        n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED,
+                                ls.getHeadsUpExpanded());
+                    }
                 }
 
                 if (DEBUG) log("Notification info: defaults=" + n.defaults + "; flags=" + n.flags);

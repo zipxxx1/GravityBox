@@ -1642,4 +1642,8 @@
     <string name="pref_heads_up_timeout_title">Timeout</string>
     <string name="pref_heads_up_timeout_summary">For how long to show notification window. 0 = persistent.</string>
 
+    <!-- UNC HeadsUp category + additional options -->
+    <string name="pref_cat_lc_heads_up_title">Heads up</string>
+    <string name="pref_lc_headsup_expanded_title">Show expanded</string>
+
 </resources>
