@@ -450,17 +450,18 @@ public class ModLedControl {
                     CLASS_STATUSBAR_NOTIFICATION, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    prefs.reload();
-
-                    // explicitly disable for dialer due to broken AOSP implementation
-                    String pkg = (String) XposedHelpers.getObjectField(param.args[0], "pkg");
-                    if (ModDialer.PACKAGE_NAMES.contains(pkg)) {
-                        if (DEBUG) log("Disabling heads up for dialer");
+                    if (!(Boolean) XposedHelpers.callMethod(param.thisObject, "panelsEnabled")) {
+                        if (DEBUG) log("shouldInterrupt: NO due to panels being disabled");
                         param.setResult(false);
                         return;
                     }
+
+                    prefs.reload();
+
                     // explicitly disable for all ongoing notifications
-                    if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing")) {
+                    // apart from non-intrusive incoming call
+                    if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing") &&
+                            !isNonIntrusiveIncomingCallNotification(prefs, param.args[0])) {
                         if (DEBUG) log("Disabling heads up for ongoing notification");
                         param.setResult(false);
                         return;
@@ -536,5 +537,20 @@ public class ModLedControl {
                 && (expandedDesktopMode == GravityBoxSettings.ED_SEMI_IMMERSIVE ||
                         expandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE_STATUSBAR ||
                                 expandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE));
+    }
+
+    private static boolean isNonIntrusiveIncomingCallNotification(XSharedPreferences prefs, Object sbNotification) {
+        if (sbNotification == null) return false;
+
+        try {
+            String pkg = (String) XposedHelpers.getObjectField(sbNotification, "pkg");
+            int notifId = XposedHelpers.getIntField(sbNotification, "id");
+            return (prefs.getBoolean(GravityBoxSettings.PREF_KEY_PHONE_NONINTRUSIVE_INCOMING_CALL, false) &&
+                    ModDialer.PACKAGE_NAMES.contains(pkg) && notifId == 1);
+        } catch (Throwable t) {
+            log("isIncomingCallNotification: Error checking if notification is incoming call: " +
+                    t.getMessage());
+            return false;
+        }
     }
 }
