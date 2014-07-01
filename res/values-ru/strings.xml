@@ -1635,11 +1635,17 @@
     <string name="lc_heads_up_off">Выкл</string>
 
     <!-- Statusbar: notification heads up category -->
-    <string name="pref_cat_notif_heads_up_title">Уведомления режима Всплытие</string>
-    <string name="pref_heads_up_master_switch_summary">Активация стандартной функции Всплытие (Heads up) для AOSP. 
-        Если активировано, станут доступны дополнительные опции для приложений в управлении оповещениями. (Необходима перезагрузка)</string>
+    <string name="pref_cat_notif_heads_up_title">Уведомления режима всплытия</string>
+    <string name="pref_heads_up_master_switch_summary">Активация функции Всплытие (Heads up) для AOSP. 
+        Если активировано, станут доступны опции для приложений в управлении оповещениями. (Необходима перезагрузка)</string>
     <string name="pref_heads_up_one_finger_title">Раскрытие пальцем</string>
     <string name="pref_heads_up_timeout_title">Задержка</string>
     <string name="pref_heads_up_timeout_summary">Время отображения окна уведомления. 0 = постоянно.</string>
+
+    <!-- UNC HeadsUp category + additional options -->
+    <string name="pref_cat_lc_heads_up_title">Всплытие</string>
+    <string name="pref_lc_headsup_expanded_title">В раскрытом виде</string>
+    <string name="pref_lc_headsup_dnd_title>Не беспокоить</string>
+    <string name="pref_lc_headsup_dnd_summary">Уведомления в режиме всплытия не будут отображаться при работе этого приложения</string>
 
 </resources>
