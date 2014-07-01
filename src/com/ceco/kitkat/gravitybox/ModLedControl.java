@@ -16,6 +16,7 @@
 package com.ceco.kitkat.gravitybox;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings;
@@ -24,10 +25,12 @@ import com.ceco.kitkat.gravitybox.ledcontrol.QuietHours;
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.LedMode;
 
+import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -458,10 +461,12 @@ public class ModLedControl {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     prefs.reload();
 
+                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
 
                     // show expanded heads up for non-intrusive incoming call
-                    if (isNonIntrusiveIncomingCallNotification(prefs, param.args[0])) {
+                    if (isNonIntrusiveIncomingCallNotification(prefs, param.args[0]) &&
+                            !shouldNotDisturb(context)) {
                         n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, true);
                         param.setResult(true);
                         return;
@@ -487,10 +492,13 @@ public class ModLedControl {
                                 HeadsUpMode.ALWAYS;
                     if (DEBUG) log("Heads up mode: " + mode.toString());
 
-                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     switch (mode) {
                         default:
-                        case DEFAULT: return;
+                        case DEFAULT:
+                            if (shouldNotDisturb(context)) {
+                                param.setResult(false);
+                            }
+                            return;
                         case ALWAYS: param.setResult(isHeadsUpAllowed(context)); return;
                         case OFF: param.setResult(false); return;
                         case IMMERSIVE:
@@ -550,7 +558,8 @@ public class ModLedControl {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         return (pm.isScreenOn() &&
                 !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isShowingAndNotHidden") &&
-                !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isInputRestricted"));
+                !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isInputRestricted") &&
+                !shouldNotDisturb(context));
     }
 
     private static boolean isStatusBarImmersive(Context context, XSharedPreferences prefs) {
@@ -577,6 +586,33 @@ public class ModLedControl {
         } catch (Throwable t) {
             log("isIncomingCallNotification: Error checking if notification is incoming call: " +
                     t.getMessage());
+            return false;
+        }
+    }
+
+    private static String getTopLevelPackageName(Context context) {
+        try {
+            final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+            ComponentName cn = taskInfo.get(0).topActivity;
+            return cn.getPackageName();
+        } catch (Throwable t) {
+            log("Error getting top level package: " + t.getMessage());
+            return null;
+        }
+    }
+
+    private static boolean shouldNotDisturb(Context context) {
+        String pkgName = getTopLevelPackageName(context);
+        final XSharedPreferences uncPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
+        if(!uncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && pkgName != null) {
+            LedSettings ls = LedSettings.deserialize(uncPrefs.getStringSet(pkgName, null));
+            if (!ls.getEnabled()) {
+                // fall back to default settings
+                ls = LedSettings.deserialize(uncPrefs.getStringSet("default", null));
+            }
+            return (ls.getEnabled() && ls.getHeadsUpDnd());
+        } else {
             return false;
         }
     }
