@@ -15,6 +15,7 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -63,6 +64,7 @@ public class ModLauncher {
         CLASS_DYNAMIC_GRID.put("com.android.launcher3.DynamicGrid",
                 new DynamicGrid("mProfile", "numRows", "numColumns"));
         CLASS_DYNAMIC_GRID.put("nw", new DynamicGrid("Bq", "yx", "yy"));
+        CLASS_DYNAMIC_GRID.put("rf", new DynamicGrid("DU", "AW", "AX"));
     }
 
     private static void log(String message) {
@@ -87,8 +89,9 @@ public class ModLauncher {
             final DynamicGrid dynamicGrid;
             try {
                 Class<?> cls = XposedHelpers.findClass(className, classLoader);
-                if (DEBUG) log("Found DynamicGrid class as: " + className);
                 dynamicGrid = CLASS_DYNAMIC_GRID.get(className);
+                Field profile = cls.getDeclaredField(dynamicGrid.fProfile);
+                if (DEBUG) log("Probably found DynamicGrid class as: " + className);
                 dynamicGrid.clazz = cls;
             } catch (Throwable t) { continue; }
 
