@@ -1603,4 +1603,10 @@
     <string name="pref_heads_up_timeout_title">Časovač zobrazenia</string>
     <string name="pref_heads_up_timeout_summary">Po akej dobe zavrieť notifikačné okno. 0 = nikdy.</string>
 
+    <!-- UNC HeadsUp category + additional options -->
+    <string name="pref_cat_lc_heads_up_title">Heads up</string>
+    <string name="pref_lc_headsup_expanded_title">Rozšírený náhľad</string>
+    <string name="pref_lc_headsup_dnd_title">Nevyrušovať</string>
+    <string name="pref_lc_headsup_dnd_summary">Nezobrazí žiadne heads up notifikácie ak je táto aplikácia v popredí</string>
+
 </resources>
