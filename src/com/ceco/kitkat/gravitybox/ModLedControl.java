@@ -58,10 +58,12 @@ public class ModLedControl {
     private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData.Entry";
     private static final String CLASS_EXPAND_HELPER = "com.android.systemui.ExpandHelper";
+    private static final String CLASS_HEADSUP_NOTIF_VIEW = "com.android.systemui.statusbar.policy.HeadsUpNotificationView";
     private static final String PACKAGE_NAME_PHONE = "com.android.phone";
     public static final String PACKAGE_NAME_SYSTEMUI = "com.android.systemui";
     private static final int MISSED_CALL_NOTIF_ID = 1;
     private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
+    private static final String NOTIF_EXTRA_HEADS_UP_EXPANDED = "gbHeadsUpExpanded";
 
     private static XSharedPreferences mPrefs;
     private static Notification mNotifOnNextScreenOff;
@@ -450,25 +452,32 @@ public class ModLedControl {
                     CLASS_STATUSBAR_NOTIFICATION, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    prefs.reload();
+
+                    Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
+
+                    // show expanded heads up for non-intrusive incoming call
+                    if (isNonIntrusiveIncomingCallNotification(prefs, param.args[0])) {
+                        n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, true);
+                        param.setResult(true);
+                        return;
+                    }
+
+                    // disable when panels are disabled
                     if (!(Boolean) XposedHelpers.callMethod(param.thisObject, "panelsEnabled")) {
                         if (DEBUG) log("shouldInterrupt: NO due to panels being disabled");
                         param.setResult(false);
                         return;
                     }
 
-                    prefs.reload();
-
                     // explicitly disable for all ongoing notifications
-                    // apart from non-intrusive incoming call
-                    if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing") &&
-                            !isNonIntrusiveIncomingCallNotification(prefs, param.args[0])) {
+                    if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing")) {
                         if (DEBUG) log("Disabling heads up for ongoing notification");
                         param.setResult(false);
                         return;
                     }
 
                     // get desired mode set by UNC or use default
-                    Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
                     HeadsUpMode mode = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_MODE) ?
                             HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE)) :
                                 HeadsUpMode.ALWAYS;
@@ -506,6 +515,20 @@ public class ModLedControl {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_ONE_FINGER, false)) {
                         param.setResult(true);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_HEADSUP_NOTIF_VIEW, classLoader,
+                    "setNotification", CLASS_NOTIF_DATA_ENTRY, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    Object sbNotif = XposedHelpers.getObjectField(param.args[0], "notification");
+                    Notification n = (Notification) XposedHelpers.getObjectField(sbNotif, "notification");
+                    if (n.extras.getBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, false)) {
+                        Object headsUp = XposedHelpers.getObjectField(param.thisObject, "mHeadsUp");
+                        Object row = XposedHelpers.getObjectField(headsUp, "row");
+                        XposedHelpers.callMethod(row, "setExpanded", true);
                     }
                 }
             });
