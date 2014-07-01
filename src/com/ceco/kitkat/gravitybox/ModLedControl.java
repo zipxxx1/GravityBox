@@ -537,11 +537,12 @@ public class ModLedControl {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Object sbNotif = XposedHelpers.getObjectField(param.args[0], "notification");
                     Notification n = (Notification) XposedHelpers.getObjectField(sbNotif, "notification");
-                    if (n.extras.getBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, false)) {
-                        Object headsUp = XposedHelpers.getObjectField(param.thisObject, "mHeadsUp");
-                        Object row = XposedHelpers.getObjectField(headsUp, "row");
-                        XposedHelpers.callMethod(row, "setExpanded", true);
-                    }
+                    final boolean expanded = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_EXPANDED) ?
+                            n.extras.getBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, false) :
+                                prefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_EXPANDED, false);
+                    Object headsUp = XposedHelpers.getObjectField(param.thisObject, "mHeadsUp");
+                    Object row = XposedHelpers.getObjectField(headsUp, "row");
+                    XposedHelpers.callMethod(row, "setExpanded", expanded);
                 }
             });
         } catch (Throwable t) {
