@@ -475,7 +475,7 @@ public class ModLedControl {
 
                     // show expanded heads up for non-intrusive incoming call
                     if (isNonIntrusiveIncomingCallNotification(prefs, param.args[0]) &&
-                            !shouldNotDisturb(context)) {
+                            isHeadsUpAllowed(context)) {
                         n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, true);
                         param.setResult(true);
                         return;
