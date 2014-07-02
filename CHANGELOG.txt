@@ -1,3 +1,26 @@
+Changelog 3.2.2 - 02/07/2014
+--------------------------------------
+- Launcher tweaks: adjusted for compatibility with GNL 3.5
+- Heads Up (common):
+--- added support for non-intrusive incoming call:
+------ active when non-intrusive incoming call option is enabled in Phone tweaks
+------ always shows expanded for quick access to accept/decline call actions
+--- added option to show heads up expanded
+--- top gap is reduced automatically when status bar is hidden
+- Heads Up (UNC):
+--- added per-app option to show heads up expanded
+--- added per-app "Do not disturb" option:
+------ won't show any heads up from any app when app that has enabled DND is currently in the foreground
+- Navigation bar: added option to show Android L icons (thanks to bgcngm) 
+- ClearAllRecents: adjusted for compatibility with Xperia devices
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated German translations (thanks to LibertyMarine)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Slovak and Czech translations
+
 Changelog 3.2.1 - 25/06/2014
 --------------------------------------
 - Heads up:
