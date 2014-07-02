@@ -1064,6 +1064,12 @@
                 android:summary="@string/pref_navbar_camera_key_disable_summary"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference
+                android:key="pref_navbar_android_l_icons_enable"
+                android:title="@string/pref_navbar_android_l_icons_enable_title"
+                android:summary="@string/pref_navbar_android_l_icons_enable_summary"
+                android:defaultValue="false" />
+
         </PreferenceCategory>
 
         <PreferenceCategory 
