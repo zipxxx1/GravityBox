@@ -1605,10 +1605,16 @@
     <string name="lc_heads_up_off">停用</string>
 
     <!-- Statusbar: notification heads up category -->
-    <string name="pref_cat_notif_heads_up_title">浮動通知</string>
+    <string name="pref_cat_notif_heads_up_title">啟用浮動通知</string>
     <string name="pref_heads_up_master_switch_summary">啟用AOSP浮動通知功能。當啟用後，您可以在通知控制內針對個別應用程式設定浮動通知功能（需要重新啟動）</string>
-    <string name="pref_heads_up_one_finger_title">單指擴充</string>
+    <string name="pref_heads_up_one_finger_title">單指展開浮動通知</string>
     <string name="pref_heads_up_timeout_title">逾時</string>
     <string name="pref_heads_up_timeout_summary">設定每則浮動通知的顯示時間。設定成 0 來持續顯示</string>
+
+    <!-- UNC HeadsUp category + additional options -->
+    <string name="pref_cat_lc_heads_up_title">浮動通知設定</string>
+    <string name="pref_lc_headsup_expanded_title">自動展開浮動通知</string>
+    <string name="pref_lc_headsup_dnd_title">勿擾模式</string>
+    <string name="pref_lc_headsup_dnd_summary">當正在使用此應用程式時，不會顯示浮動通知</string>
 
 </resources>
