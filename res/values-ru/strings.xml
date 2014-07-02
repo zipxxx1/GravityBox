@@ -1597,4 +1597,8 @@
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Вкл удаление снимка экрана</string>
 
+   <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Вкл нав. клавиши Андроид L</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Замена стоковых значков клавиш навигации значками из Андроид L (необходима перезагрузка)</string>
+
 </resources>
