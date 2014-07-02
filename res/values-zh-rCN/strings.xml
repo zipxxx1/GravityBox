@@ -1624,4 +1624,32 @@
     <string name="pref_lc_qh_interactive_summary">当用户交互过程中始终保持通知消息静音 
         （忽略每个应用程序规则）</string>
     
+    <!-- Screenshot delete -->
+    <string name="pref_screenshot_delete_title">启用删除屏幕截图</string>
+
+    <!-- UNC: heads up mode -->
+    <string name="pref_lc_headsup_mode_title">浮动模式</string>
+    <string name="lc_heads_up_default">默认</string>
+    <string name="lc_heads_up_always">总是</string>
+    <string name="lc_heads_up_immersive">当扩展桌面时隐藏状态栏</string>
+    <string name="lc_heads_up_off">关闭</string>
+
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">浮动通知</string>
+    <string name="pref_heads_up_master_switch_summary">启用标准的AOSP浮动功能
+        启用后附加的每个应用程序选项会在最终通知控制变得可用（需要重新启动）</string>
+    <string name="pref_heads_up_one_finger_title">单指展开</string>
+    <string name="pref_heads_up_timeout_title">超时</string>
+    <string name="pref_heads_up_timeout_summary">设置通知窗口显示多长时间，0为一直显示</string>
+
+    <!-- UNC HeadsUp category + additional options -->
+    <string name="pref_cat_lc_heads_up_title">浮动通知</string>
+    <string name="pref_lc_headsup_expanded_title">显示扩展</string>
+    <string name="pref_lc_headsup_dnd_title">勿扰模式</string>
+    <string name="pref_lc_headsup_dnd_summary">当程序在前台将不会显示任何通知</string>
+
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">启用Android L虚拟按键图标</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">替换原厂虚拟按键图标为Android L风格(需要重新启动)</string>
+
 </resources>
