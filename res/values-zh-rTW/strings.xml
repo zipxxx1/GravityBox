@@ -1617,4 +1617,8 @@
     <string name="pref_lc_headsup_dnd_title">勿擾模式</string>
     <string name="pref_lc_headsup_dnd_summary">當正在使用此應用程式時，不會顯示浮動通知</string>
 
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">使用Android L的導航列圖示</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">替換預設導航列圖示成為Android L內的樣式（需要重新啟動）</string>
+
 </resources>
