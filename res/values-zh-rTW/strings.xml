@@ -409,8 +409,8 @@
     <string name="pref_button_backlight_notifications_summary">這個設定是實驗性的！當收到通知時背光燈會閃爍提醒。建議當您的裝置沒有 LED 通知燈時才開啟，此功能可能會消耗部分電量</string>
 
     <!-- Hide navigation bar for pie -->
-    <string name="pref_navbar_disable_title">隱藏海苔條</string>
-    <string name="pref_navbar_disable_summary">當 Pie 控制 啟用時隱藏海苔條（需要重新啟動）</string>
+    <string name="pref_navbar_disable_title">隱藏導航列</string>
+    <string name="pref_navbar_disable_summary">當 Pie 控制 啟用時隱藏導航列（需要重新啟動）</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">優化 Holo 背景</string>
@@ -1578,5 +1578,9 @@
 
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">在完成擷取螢幕截圖後的通知裏顯示刪除按鈕</string>
+
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">使用Android L的導航列圖示</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">替換預設導航列圖示成為Android L內的樣式（需要重新啟動）</string>
 
 </resources>
