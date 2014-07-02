@@ -1609,4 +1609,8 @@
     <string name="pref_lc_headsup_dnd_title">Nevyrušovať</string>
     <string name="pref_lc_headsup_dnd_summary">Nezobrazí žiadne heads up notifikácie ak je táto aplikácia v popredí</string>
 
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Android L navigačné ikony</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Nahradí pôvodné ikony navigačných tlačidiel ikonami z Android L (vyžaduje reštart)</string>
+
 </resources>
