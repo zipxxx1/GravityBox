@@ -34,6 +34,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.PixelFormat;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -41,8 +42,9 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.provider.Settings;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
@@ -443,6 +445,8 @@ public class ModLedControl {
     }
 
     // SystemUI package
+    private static WindowManager.LayoutParams mHeadsUpLp;
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "start", new XC_MethodHook() {
@@ -463,6 +467,11 @@ public class ModLedControl {
 
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
+                    View headsUpView = (View) XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
+                    int sysUiVis = XposedHelpers.getIntField(param.thisObject, "mSystemUiVisibility");
+
+                    maybeUpdateHeadsUpLayout(context, headsUpView, isStatusBarHidden(sysUiVis) ? 0 :
+                        (Integer) XposedHelpers.callMethod(param.thisObject, "getStatusBarHeight"));
 
                     // show expanded heads up for non-intrusive incoming call
                     if (isNonIntrusiveIncomingCallNotification(prefs, param.args[0]) &&
@@ -502,7 +511,6 @@ public class ModLedControl {
                         case ALWAYS: param.setResult(isHeadsUpAllowed(context)); return;
                         case OFF: param.setResult(false); return;
                         case IMMERSIVE:
-                            final int sysUiVis = XposedHelpers.getIntField(param.thisObject, "mSystemUiVisibility");
                             param.setResult(isStatusBarHidden(sysUiVis) && isHeadsUpAllowed(context));
                             return;
                     }
@@ -547,6 +555,35 @@ public class ModLedControl {
             });
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static void maybeUpdateHeadsUpLayout(Context context, View headsUpView, int yOffset) {
+        if (mHeadsUpLp == null) {
+            mHeadsUpLp = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL, // above the status bar!
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+                        | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+                        | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                        | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM
+                        | WindowManager.LayoutParams.FLAG_SPLIT_TOUCH,
+                    PixelFormat.TRANSLUCENT);
+            mHeadsUpLp.flags |= WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
+            mHeadsUpLp.gravity = Gravity.TOP;
+            mHeadsUpLp.y = -1;
+            mHeadsUpLp.setTitle("Heads Up");
+            mHeadsUpLp.packageName = context.getPackageName();
+            mHeadsUpLp.windowAnimations = context.getResources().getIdentifier(
+                    "Animation.StatusBar.HeadsUp", "style", PACKAGE_NAME_SYSTEMUI);
+        }
+
+        final boolean layoutChanged = mHeadsUpLp.y != yOffset;
+        if (layoutChanged) {
+            mHeadsUpLp.y = yOffset;
+            WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            wm.updateViewLayout(headsUpView, mHeadsUpLp);
         }
     }
 
