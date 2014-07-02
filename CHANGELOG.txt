@@ -1,3 +1,7 @@
+Changelog 3.2.3 - 02/07/2014
+--------------------------------------
+- HeadsUp: fixed misbehavior of non-intrusive incoming call when screen off or device locked
+
 Changelog 3.2.2 - 02/07/2014
 --------------------------------------
 - Launcher tweaks: adjusted for compatibility with GNL 3.5
