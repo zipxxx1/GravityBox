@@ -502,8 +502,8 @@ public class ModLedControl {
                         case ALWAYS: param.setResult(isHeadsUpAllowed(context)); return;
                         case OFF: param.setResult(false); return;
                         case IMMERSIVE:
-                            param.setResult(isStatusBarImmersive(context, prefs) &&
-                                    isHeadsUpAllowed(context));
+                            final int sysUiVis = XposedHelpers.getIntField(param.thisObject, "mSystemUiVisibility");
+                            param.setResult(isStatusBarHidden(sysUiVis) && isHeadsUpAllowed(context));
                             return;
                     }
                 }
@@ -563,17 +563,9 @@ public class ModLedControl {
                 !shouldNotDisturb(context));
     }
 
-    private static boolean isStatusBarImmersive(Context context, XSharedPreferences prefs) {
-        if (context == null || prefs == null) return false;
-
-        int expandedDesktopMode = Integer.valueOf(prefs.getString(
-                GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
-        boolean edEnabled = Settings.Global.getInt(context.getContentResolver(),
-                ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0) == 1;
-        return (edEnabled
-                && (expandedDesktopMode == GravityBoxSettings.ED_SEMI_IMMERSIVE ||
-                        expandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE_STATUSBAR ||
-                                expandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE));
+    private static boolean isStatusBarHidden(int systemUiVisibility) {
+        return ((systemUiVisibility & View.SYSTEM_UI_FLAG_FULLSCREEN) ==
+                View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
     private static boolean isNonIntrusiveIncomingCallNotification(XSharedPreferences prefs, Object sbNotification) {
