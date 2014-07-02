@@ -1626,4 +1626,8 @@
     <string name="pref_lc_headsup_dnd_title">Não incomodar</string>
     <string name="pref_lc_headsup_dnd_summary">Permite com que nenhuma notificação flutuante seja mostrada enquanto a aplicação estiver em primeiro plano</string>
 
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Ativar teclas de navegação do Android L</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Permite substituir os ícones padrão das teclas de navegação pelos do Android L (necessário reiniciar)</string>
+
 </resources>
