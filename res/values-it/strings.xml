@@ -1648,4 +1648,8 @@
     <string name="pref_lc_headsup_dnd_title">Non disturbare</string>
     <string name="pref_lc_headsup_dnd_summary">Non mostrare notifiche a comparsa quando l\'app è in primo piano</string>
 
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Icone pulsanti Android L</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Sostituisce le icone dei pulsanti della barra di navigazione standard con quelle di Android L (richiede riavvio)</string>
+
 </resources>
