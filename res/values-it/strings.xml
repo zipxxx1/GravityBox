@@ -1581,5 +1581,9 @@
 
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Abilita elimina screenshot</string>
+    
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Icone pulsanti Android L</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Sostituisce le icone dei pulsanti della barra di navigazione standard con quelle di Android L (richiede riavvio)</string>
 
 </resources>
