@@ -350,15 +350,17 @@ public class ModDialer {
                     }
 
                     if (shouldShowUnknownPhoto) {
-                        final Context context = ((View) param.args[0]).getContext();
+                        final ImageView iv = (ImageView) param.args[0];
+                        final Context context = iv.getContext();
                         final Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
                         final String path = gbContext.getFilesDir() + "/caller_photo";
                         File f = new File(path);
                         if (f.exists() && f.canRead()) {
                             Bitmap b = BitmapFactory.decodeFile(path);
                             if (b != null) {
-                                param.args[1] = new BitmapDrawable(context.getResources(), b);
+                                iv.setImageDrawable(new BitmapDrawable(context.getResources(), b));
                                 if (DEBUG) log("Unknow caller photo set");
+                                param.setResult(null);
                             }
                         }
                     }
