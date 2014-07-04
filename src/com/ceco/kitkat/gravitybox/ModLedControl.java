@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings;
+import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHours;
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHoursActivity;
@@ -69,6 +70,7 @@ public class ModLedControl {
     private static final int MISSED_CALL_NOTIF_ID = 1;
     private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
     private static final String NOTIF_EXTRA_HEADS_UP_EXPANDED = "gbHeadsUpExpanded";
+    private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
 
     private static XSharedPreferences mPrefs;
     private static Notification mNotifOnNextScreenOff;
@@ -342,12 +344,18 @@ public class ModLedControl {
                     }
                 }
 
-                // heads up mode
                 if (ls.getEnabled()) {
+                    // heads up mode
                     n.extras.putString(NOTIF_EXTRA_HEADS_UP_MODE, ls.getHeadsUpMode().toString());
                     if (ls.getHeadsUpMode() != HeadsUpMode.OFF) {
                         n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED,
                                 ls.getHeadsUpExpanded());
+                    }
+                    // active screen mode
+                    if (ls.getActiveScreenEnabled() && !qhActive && !isOngoing && mPm != null &&
+                            !mPm.isScreenOn() && !mScreenCovered && mKm.isKeyguardLocked()) {
+                        n.extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
+                                ls.getActiveScreenMode().toString());
                     }
                 }
 
@@ -360,45 +368,28 @@ public class ModLedControl {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
-                if (mPm != null && !mPm.isScreenOn() && !mScreenCovered && mKm.isKeyguardLocked()) {
-                    final String pkgName = (String) param.args[0];
-                    LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
-                    if (!ls.getEnabled()) {
-                        // use default settings in case they are active
-                        ls = LedSettings.deserialize(mPrefs.getStringSet("default", null));
-                        if (!ls.getEnabled()) {
-                            return;
+                final String pkgName = (String) param.args[0];
+                Notification n = (Notification) param.args[4];
+                if (!n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE))
+                    return;
+
+                final ActiveScreenMode asMode = ActiveScreenMode.valueOf(
+                        n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE));
+                if (DEBUG) log("Performing Active Screen for " + pkgName + " with mode " +
+                        asMode.toString());
+                mOnPanelRevealedBlocked = asMode == ActiveScreenMode.EXPAND_PANEL;
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (asMode == ActiveScreenMode.EXPAND_PANEL) {
+                            mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS));
                         }
+                        final WakeLock wl = mPm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
+                                PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, TAG);
+                        wl.acquire();
+                        wl.release();
                     }
-                    if (!ls.getActiveScreenEnabled()) return;
-
-                    Notification n = (Notification) param.args[4];
-                    if (mQuietHours.quietHoursActive(ls, n, false)) {
-                        return;
-                    }
-
-                    if (((n.flags & Notification.FLAG_ONGOING_EVENT) == Notification.FLAG_ONGOING_EVENT) &&
-                            !ls.getOngoing()) {
-                        if (DEBUG) log("Ongoing led control disabled. Ignoring.");
-                        return;
-                    }
-
-                    if (DEBUG) log("Performing Active Screen for " + pkgName);
-                    final LedSettings fls = ls;
-                    mOnPanelRevealedBlocked = fls.getActiveScreenExpanded();
-                    mHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (fls.getActiveScreenExpanded()) {
-                                mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS));
-                            }
-                            final WakeLock wl = mPm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
-                                    PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, TAG);
-                            wl.acquire();
-                            wl.release();
-                        }
-                    }, 1000);
-                }
+                }, 1000);
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }
@@ -494,6 +485,15 @@ public class ModLedControl {
                         return;
                     }
 
+                    // show if active screen heads up mode set
+                    if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) &&
+                            ActiveScreenMode.valueOf(n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE)) ==
+                                ActiveScreenMode.HEADS_UP) {
+                        if (DEBUG) log("Showing active screen heads up");
+                        param.setResult(true);
+                        return;
+                    }
+
                     // get desired mode set by UNC or use default
                     HeadsUpMode mode = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_MODE) ?
                             HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE)) :
@@ -523,7 +523,12 @@ public class ModLedControl {
                     new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    int timeout = prefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_TIMEOUT, 5) * 1000;
+                    Object headsUpView = XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
+                    Object headsUp = XposedHelpers.getObjectField(headsUpView, "mHeadsUp");
+                    Object sbNotif = XposedHelpers.getObjectField(headsUp, "notification");
+                    Notification n = (Notification) XposedHelpers.getObjectField(sbNotif, "notification");
+                    int timeout = n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) ? 10000 :
+                            prefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_TIMEOUT, 5) * 1000;
                     XposedHelpers.setIntField(param.thisObject, "mHeadsUpNotificationDecay", timeout);
                 }
             });

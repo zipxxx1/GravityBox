@@ -35,6 +35,7 @@ public class LedSettings {
 
     public enum LedMode { ORIGINAL, OVERRIDE, OFF };
     public enum HeadsUpMode { DEFAULT, ALWAYS, IMMERSIVE, OFF };
+    public enum ActiveScreenMode { DO_NOTHING, EXPAND_PANEL, HEADS_UP };
 
     private Context mContext;
     private String mPackageName;
@@ -52,7 +53,7 @@ public class LedSettings {
     private String mVibratePatternStr;
     private long[] mVibratePattern;
     private boolean mActiveScreenEnabled;
-    private boolean mActiveScreenExpanded;
+    private ActiveScreenMode mActiveScreenMode;
     private LedMode mLedMode;
     private boolean mQhIgnore;
     private String mQhIgnoreList;
@@ -119,8 +120,8 @@ public class LedSettings {
                 ls.setVibratePatternFromString(data[1]);
             } else if (data[0].equals("activeScreenEnabled")) {
                 ls.setActiveScreenEnabled(Boolean.valueOf(data[1]));
-            } else if (data[0].equals("activeScreenExpanded")) {
-                ls.setActiveScreenExpanded(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("activeScreenMode")) {
+                ls.setActiveScreenMode(ActiveScreenMode.valueOf(data[1]));
             } else if (data[0].equals("ledMode")) {
                 ls.setLedMode(LedMode.valueOf(data[1]));
             } else if (data[0].equals("qhIgnore")) {
@@ -155,7 +156,7 @@ public class LedSettings {
         mVibratePatternStr = null;
         mVibratePattern = null;
         mActiveScreenEnabled = false;
-        mActiveScreenExpanded = false;
+        mActiveScreenMode = ActiveScreenMode.DO_NOTHING;
         mLedMode = LedMode.OVERRIDE;
         mQhIgnore = false;
         mQhIgnoreList = null;
@@ -299,8 +300,8 @@ public class LedSettings {
         mActiveScreenEnabled = enabled;
     }
 
-    protected void setActiveScreenExpanded(boolean expanded) {
-        mActiveScreenExpanded = expanded;
+    protected void setActiveScreenMode(ActiveScreenMode mode) {
+        mActiveScreenMode = mode;
     }
 
     protected void setLedMode(LedMode ledMode) {
@@ -395,8 +396,8 @@ public class LedSettings {
         return mActiveScreenEnabled;
     }
 
-    public boolean getActiveScreenExpanded() {
-        return mActiveScreenExpanded;
+    public ActiveScreenMode getActiveScreenMode() {
+        return mActiveScreenMode;
     }
 
     public LedMode getLedMode() {
@@ -443,7 +444,7 @@ public class LedSettings {
                 dataSet.add("vibratePattern:" + mVibratePatternStr);
             }
             dataSet.add("activeScreenEnabled:" + mActiveScreenEnabled);
-            dataSet.add("activeScreenExpanded:" + mActiveScreenExpanded);
+            dataSet.add("activeScreenMode:" + mActiveScreenMode);
             dataSet.add("ledMode:" + mLedMode);
             dataSet.add("qhIgnore:" + mQhIgnore);
             if (mQhIgnoreList != null) {

@@ -18,6 +18,7 @@ package com.ceco.kitkat.gravitybox.ledcontrol;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.kitkat.gravitybox.preference.SeekBarPreference;
@@ -55,7 +56,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_DEFAULT_SETTINGS = "pref_lc_default_settings";
     private static final String PREF_CAT_KEY_ACTIVE_SCREEN = "pref_cat_lc_active_screen";
     private static final String PREF_KEY_ACTIVE_SCREEN_ENABLED = "pref_lc_active_screen_enable";
-    private static final String PREF_KEY_ACTIVE_SCREEN_EXPANDED = "pref_lc_active_screen_expand";
+    private static final String PREF_KEY_ACTIVE_SCREEN_MODE = "pref_lc_active_screen_mode";
     private static final String PREF_KEY_LED_MODE = "pref_lc_led_mode";
     private static final String PREF_CAT_KEY_QH = "pref_cat_lc_quiet_hours";
     private static final String PREF_KEY_QH_IGNORE = "pref_lc_qh_ignore";
@@ -83,7 +84,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private SwitchPreference mDefaultSettingsPref;
     private PreferenceCategory mActiveScreenCat;
     private CheckBoxPreference mActiveScreenEnabledPref;
-    private CheckBoxPreference mActiveScreenExpandedPref;
+    private ListPreference mActiveScreenModePref;
     private ListPreference mLedModePref;
     private PreferenceCategory mQhCat;
     private CheckBoxPreference mQhIgnorePref;
@@ -114,7 +115,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mDefaultSettingsPref = (SwitchPreference) findPreference(PREF_KEY_DEFAULT_SETTINGS);
         mActiveScreenCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_ACTIVE_SCREEN);
         mActiveScreenEnabledPref = (CheckBoxPreference) findPreference(PREF_KEY_ACTIVE_SCREEN_ENABLED);
-        mActiveScreenExpandedPref = (CheckBoxPreference) findPreference(PREF_KEY_ACTIVE_SCREEN_EXPANDED);
+        mActiveScreenModePref = (ListPreference) findPreference(PREF_KEY_ACTIVE_SCREEN_MODE);
+        mActiveScreenModePref.setOnPreferenceChangeListener(this);
         mLedModePref = (ListPreference) findPreference(PREF_KEY_LED_MODE);
         mLedModePref.setOnPreferenceChangeListener(this);
         mQhCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_QH);
@@ -153,7 +155,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             getPreferenceScreen().removePreference(mActiveScreenCat);
         } else {
             mActiveScreenEnabledPref.setChecked(ledSettings.getActiveScreenEnabled());
-            mActiveScreenExpandedPref.setChecked(ledSettings.getActiveScreenExpanded());
+            mActiveScreenModePref.setValue(ledSettings.getActiveScreenMode().toString());
+            mActiveScreenModePref.setSummary(mActiveScreenModePref.getEntry());
         }
         mLedModePref.setValue(ledSettings.getLedMode().toString());
         updateLedModeDependentState();
@@ -247,8 +250,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         return mActiveScreenEnabledPref.isChecked();
     }
 
-    protected boolean getActiveScreenExpanded() {
-        return mActiveScreenExpandedPref.isChecked();
+    protected ActiveScreenMode getActiveScreenMode() {
+        return ActiveScreenMode.valueOf(mActiveScreenModePref.getValue());
     }
 
     protected LedMode getLedMode() {
@@ -320,6 +323,9 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             mHeadsUpModePref.setValue((String)newValue);
             mHeadsUpModePref.setSummary(mHeadsUpModePref.getEntry());
             mHeadsUpExpandedPref.setEnabled(!"OFF".equals(mHeadsUpModePref.getValue()));
+        } else if (preference == mActiveScreenModePref) {
+            mActiveScreenModePref.setValue((String)newValue);
+            mActiveScreenModePref.setSummary(mActiveScreenModePref.getEntry());
         }
         return true;
     }
