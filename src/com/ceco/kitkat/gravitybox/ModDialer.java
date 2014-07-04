@@ -39,6 +39,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Vibrator;
@@ -71,6 +72,8 @@ public class ModDialer {
     private static final String CLASS_CALL = "com.android.services.telephony.common.Call";
     private static final String CLASS_CONTACT_CACHE_ENTRY = "com.android.incallui.ContactInfoCache.ContactCacheEntry";
     private static final boolean DEBUG = false;
+
+    public static final String NOTIF_EXTRA_NON_INTRUSIVE_CALL = "gbNonIntrusiveCall";
 
     private static final int CALL_STATE_ACTIVE = 2;
     private static final int CALL_STATE_INCOMING = 3;
@@ -609,6 +612,10 @@ public class ModDialer {
                                 final String contentTitle = (String) XposedHelpers.callMethod(
                                         param.thisObject, "getContentTitle", param.args[1], isConference);
                                 b.setTicker(contentTitle);
+                                // mark notification as non-intrusive
+                                Bundle bundle = new Bundle();
+                                bundle.putBoolean(NOTIF_EXTRA_NON_INTRUSIVE_CALL, true);
+                                b.setExtras(bundle);
                             }
                         });
                     }

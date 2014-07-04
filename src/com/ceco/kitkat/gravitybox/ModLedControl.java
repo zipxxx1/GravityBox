@@ -474,8 +474,7 @@ public class ModLedControl {
                         (Integer) XposedHelpers.callMethod(param.thisObject, "getStatusBarHeight"));
 
                     // show expanded heads up for non-intrusive incoming call
-                    if (isNonIntrusiveIncomingCallNotification(prefs, param.args[0]) &&
-                            isHeadsUpAllowed(context)) {
+                    if (isNonIntrusiveIncomingCallNotification(n) && isHeadsUpAllowed(context)) {
                         n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, true);
                         param.setResult(true);
                         return;
@@ -605,19 +604,9 @@ public class ModLedControl {
                 View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
-    private static boolean isNonIntrusiveIncomingCallNotification(XSharedPreferences prefs, Object sbNotification) {
-        if (sbNotification == null) return false;
-
-        try {
-            String pkg = (String) XposedHelpers.getObjectField(sbNotification, "pkg");
-            int notifId = XposedHelpers.getIntField(sbNotification, "id");
-            return (prefs.getBoolean(GravityBoxSettings.PREF_KEY_PHONE_NONINTRUSIVE_INCOMING_CALL, false) &&
-                    ModDialer.PACKAGE_NAMES.contains(pkg) && notifId == 1);
-        } catch (Throwable t) {
-            log("isIncomingCallNotification: Error checking if notification is incoming call: " +
-                    t.getMessage());
-            return false;
-        }
+    private static boolean isNonIntrusiveIncomingCallNotification(Notification n) {
+        return (n != null &&
+                n.extras.getBoolean(ModDialer.NOTIF_EXTRA_NON_INTRUSIVE_CALL, false));
     }
 
     private static String getTopLevelPackageName(Context context) {
