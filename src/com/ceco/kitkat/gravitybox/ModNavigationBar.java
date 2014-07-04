@@ -569,6 +569,11 @@ public class ModNavigationBar {
                         final Resources gbRes = mGbContext.getResources();
                         mRecentAltIcon = gbRes.getDrawable(R.drawable.ic_sysbar_recent_clear);
                         mRecentAltLandIcon = gbRes.getDrawable(R.drawable.ic_sysbar_recent_clear_land);
+
+                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE, false)) {
+                            XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon",
+                                    gbRes.getDrawable(R.drawable.ic_sysbar_back_ime_land));
+                        }
                     }
                 }
             });
