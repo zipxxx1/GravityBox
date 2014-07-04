@@ -1635,11 +1635,27 @@
     <string name="lc_heads_up_off">Off</string>
 
     <!-- Statusbar: notification heads up category -->
-    <string name="pref_cat_notif_heads_up_title">Notification flottante</string>
+    <string name="pref_cat_notif_heads_up_title">Notifications flottantes</string>
     <string name="pref_heads_up_master_switch_summary">Active la fonction standard AOSP de notification flottante 
         Si activée, des options additionnelles par application seront accessibles depuis le Contrôle ultime de notification (redémarrage nécessaire)</string>
     <string name="pref_heads_up_one_finger_title">Développer avec un doigt</string>
     <string name="pref_heads_up_timeout_title">Temporisation</string>
     <string name="pref_heads_up_timeout_summary">Pour programmer la durée d\'affichage de la fenêtre de notification 0 = permanent</string>
+
+    <!-- UNC HeadsUp category + additional options -->
+    <string name="pref_cat_lc_heads_up_title">Notifictions flottantes</string>
+    <string name="pref_lc_headsup_expanded_title">Affichage étendu</string>
+    <string name="pref_lc_headsup_dnd_title">Ne pas déranger</string>
+    <string name="pref_lc_headsup_dnd_summary">Aucune notification flottante ne s\'affichera durant l\'utilisation de cette application en premier plan</string>
+
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Activer les icônes de Android L pour les touches de navigation</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Remplace les icônes par défaut des touches de navigation par celles incluses dans Android L (redémarrage nécessaire)</string>
+
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Mode écran actif</string>
+    <string name="lc_active_screen_mode_nothing">Ne rien faire (allume seulement l\'écran)</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
 </resources>
