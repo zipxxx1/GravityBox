@@ -70,6 +70,7 @@ public class ModLedControl {
     private static final int MISSED_CALL_NOTIF_ID = 1;
     private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
     private static final String NOTIF_EXTRA_HEADS_UP_EXPANDED = "gbHeadsUpExpanded";
+    private static final String NOTIF_EXTRA_HEADS_UP_GRAVITY = "gbHeadsUpGravity";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
 
     private static XSharedPreferences mPrefs;
@@ -357,6 +358,9 @@ public class ModLedControl {
                             !mPm.isScreenOn() && !mScreenCovered && mKm.isKeyguardLocked()) {
                         n.extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
                                 ls.getActiveScreenMode().toString());
+                        if (ls.getActiveScreenMode() == ActiveScreenMode.HEADS_UP) {
+                            n.extras.putInt(NOTIF_EXTRA_HEADS_UP_GRAVITY, Gravity.CENTER);
+                        }
                     }
                 }
 
@@ -463,7 +467,8 @@ public class ModLedControl {
                     int sysUiVis = XposedHelpers.getIntField(param.thisObject, "mSystemUiVisibility");
 
                     maybeUpdateHeadsUpLayout(context, headsUpView, isStatusBarHidden(sysUiVis) ? 0 :
-                        (Integer) XposedHelpers.callMethod(param.thisObject, "getStatusBarHeight"));
+                        (Integer) XposedHelpers.callMethod(param.thisObject, "getStatusBarHeight"),
+                        n.extras.getInt(NOTIF_EXTRA_HEADS_UP_GRAVITY, Gravity.TOP));
 
                     // show expanded heads up for non-intrusive incoming call
                     if (isNonIntrusiveIncomingCallNotification(n) && isHeadsUpAllowed(context)) {
@@ -563,7 +568,7 @@ public class ModLedControl {
         }
     }
 
-    private static void maybeUpdateHeadsUpLayout(Context context, View headsUpView, int yOffset) {
+    private static void maybeUpdateHeadsUpLayout(Context context, View headsUpView, int yOffset, int gravity) {
         if (mHeadsUpLp == null) {
             mHeadsUpLp = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT,
@@ -576,7 +581,7 @@ public class ModLedControl {
                         | WindowManager.LayoutParams.FLAG_SPLIT_TOUCH,
                     PixelFormat.TRANSLUCENT);
             mHeadsUpLp.flags |= WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
-            mHeadsUpLp.gravity = Gravity.TOP;
+            mHeadsUpLp.gravity = -1;
             mHeadsUpLp.y = -1;
             mHeadsUpLp.setTitle("Heads Up");
             mHeadsUpLp.packageName = context.getPackageName();
@@ -584,9 +589,15 @@ public class ModLedControl {
                     "Animation.StatusBar.HeadsUp", "style", PACKAGE_NAME_SYSTEMUI);
         }
 
-        final boolean layoutChanged = mHeadsUpLp.y != yOffset;
+        if (gravity != Gravity.TOP) {
+            yOffset = 0;
+        }
+
+        final boolean layoutChanged = mHeadsUpLp.y != yOffset ||
+                mHeadsUpLp.gravity != gravity;
         if (layoutChanged) {
             mHeadsUpLp.y = yOffset;
+            mHeadsUpLp.gravity = gravity;
             WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             wm.updateViewLayout(headsUpView, mHeadsUpLp);
         }
