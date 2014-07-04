@@ -1396,8 +1396,6 @@
         budú prístupné na úrovni nastavení jednotlivých aplikácií.</string>
     <string name="lc_active_screen_switch_title">Povoliť aktívnu obrazovku</string>
     <string name="lc_expand_notification_panel_title">Rozbaliť lištu oznmámení</string>
-    <string name="lc_expand_notification_panel_summary">Rozbalí lištu oznámení automaticky počas zapnutia obrazovky 
-        (ak to súčasná bezpečnostná politika obrazovky uzamknutia povoľuje)</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Tiché hodiny</string>

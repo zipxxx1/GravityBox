@@ -1409,7 +1409,6 @@
     <string name="lc_active_screen_info">啟用主動螢幕喚醒功能後，任何新的通知都會使螢幕自動亮著（只有當螢幕沒有被覆蓋的情況下，如：您的電話不在口袋裏）。根據鎖定畫面的安全性設定及您的設定，它亦可以自動展開通知面板。請注意，主動螢幕喚醒功能需要啟用鎖定畫面。 \n 以下的開關只是主開關，當啟用後請按需要為個別應用程式進行設定。</string>
     <string name="lc_active_screen_switch_title">啟用主動螢幕喚醒</string>
     <string name="lc_expand_notification_panel_title">展開通知面板</string>
-    <string name="lc_expand_notification_panel_summary">若鎖定面板安全性設定容許的話，當螢幕亮著時自動展開通知面板</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">靜音時段</string>

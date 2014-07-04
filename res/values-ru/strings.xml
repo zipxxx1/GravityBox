@@ -1428,8 +1428,6 @@
         возможно выполнить дополнительную конфигурацию по приложениям</string>
     <string name="lc_active_screen_switch_title">Включение активного экрана</string>
     <string name="lc_expand_notification_panel_title">Раскрытие уведомлений</string>
-    <string name="lc_expand_notification_panel_summary">Автоматическое раскрытие панели уведомлений при включении экрана 
-        (если разрешено текущей политикой безопасности экрана блокировки)</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Тихий час</string>

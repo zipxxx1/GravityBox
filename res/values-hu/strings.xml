@@ -1416,7 +1416,6 @@
     <string name="lc_active_screen_info">Az Aktív Képernyő funkció minden alkalommal automatikusan bekapcsolja a kijelzőt új értesítés érkezésekor. Csak abban az esetben aktiválódik, ha a képernyő nincs eltakarva (pl. ha a készülék nincs zsebben). Opcionálisan lenyitja az értesítések panelt az aktuális zárképernyő biztonsági házirend és felhasználói beállításoktól függően. Ne feledje, hogy az Aktív Képernyő működéséhez a zárképernyőt engedélyeznie kell.\nA lenti kapcsoló a főkapcsoló. Engedélyezés után további, alkalmazásonkénti konfiguráció lehetséges.</string>
     <string name="lc_active_screen_switch_title">Aktív Képernyő engedélyezése</string>
     <string name="lc_expand_notification_panel_title">Értesítési panel lenyitása</string>
-    <string name="lc_expand_notification_panel_summary">Automatikusan lenyitja az értesítési panelt a képernyő bekapcsolásakor (ha az aktuális zárképernyő biztonsági házirend által engedélyezett)</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Csendes időszak</string>

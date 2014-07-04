@@ -1424,9 +1424,7 @@
         se pueden configurar más opciones por app</string>
     <string name="lc_active_screen_switch_title">Activar Pantalla activa</string>
     <string name="lc_expand_notification_panel_title">Expandir panel de notificación</string>
-    <string name="lc_expand_notification_panel_summary">Expande automáticamente el panel de notificación al encender la pantalla
-    (si está permitido por la actual política de seguridad de la pantalla de bloqueo)</string>
-        
+
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Horas de silencio</string>
     <string name="pref_lc_qh_enabled_title">Activar horas tranquilas</string>

@@ -1428,8 +1428,6 @@
         la configuration précise par application peut être effectuée</string>
     <string name="lc_active_screen_switch_title">Enclencher l\'Écran Actif</string>
     <string name="lc_expand_notification_panel_title">Dérouler le panneau de nofication</string>
-    <string name="lc_expand_notification_panel_summary">Déroule le panneau de notification automatiquement lorsque l\'écran s\'allume 
-        (si autorisé par la politique actuelle de sécurité de l\'écran de déverrouillage)</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Heures silencieuses</string>

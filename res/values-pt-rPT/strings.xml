@@ -1406,8 +1406,6 @@
         interruptor permite a ativação global da funcionalidade. Depois de ativar, as configurações poderão ser efetuadas por aplicação.</string>
     <string name="lc_active_screen_switch_title">Ativar Ecrã ligado</string>
     <string name="lc_expand_notification_panel_title">Expandir painel de notificações</string>
-    <string name="lc_expand_notification_panel_summary">Permite expandir o painel de notificações automaticamente quando o ecrã se liga 
-        (se permitido pela atual política de segurança do ecrã de bloqueio)</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Horas de silêncio</string>

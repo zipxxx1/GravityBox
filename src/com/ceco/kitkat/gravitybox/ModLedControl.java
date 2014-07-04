@@ -352,7 +352,8 @@ public class ModLedControl {
                                 ls.getHeadsUpExpanded());
                     }
                     // active screen mode
-                    if (ls.getActiveScreenEnabled() && !qhActive && !isOngoing && mPm != null &&
+                    if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
+                            !qhActive && !isOngoing && mPm != null &&
                             !mPm.isScreenOn() && !mScreenCovered && mKm.isKeyguardLocked()) {
                         n.extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
                                 ls.getActiveScreenMode().toString());

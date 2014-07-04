@@ -19,6 +19,7 @@ import java.util.Locale;
 
 import com.ceco.kitkat.gravitybox.R;
 import com.ceco.kitkat.gravitybox.adapters.IBaseListAdapterItem;
+import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.LedMode;
 
 import android.content.Context;
@@ -92,7 +93,7 @@ public class LedListItem implements IBaseListAdapterItem {
                 buf += "; " + mContext.getString(R.string.pref_lc_vibrate_override_title);
             }
             if (LedSettings.isActiveScreenMasterEnabled(mContext) &&
-                    mLedSettings.getActiveScreenEnabled()) {
+                    mLedSettings.getActiveScreenMode() != ActiveScreenMode.DISABLED) {
                 buf += "; " + mContext.getString(R.string.lc_active_screen);
             }
             if (LedSettings.isQuietHoursEnabled(mContext) &&

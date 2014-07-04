@@ -1398,7 +1398,6 @@
         Po włączeniu go dodatkowa konfiguracja może być wykonana na bazie danej aplikacji.</string>
     <string name="lc_active_screen_switch_title">Włącz Aktywny Ekran</string>
     <string name="lc_expand_notification_panel_title">Rozwiń panel powiadomień</string>
-    <string name="lc_expand_notification_panel_summary">Automatycznie rozwija panel powiadomień, gdy włącza się ekran (jeśli pozwala na to bieżąca polityka bezpieczeństwa blokady ekranu)</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Ciche Godziny</string>

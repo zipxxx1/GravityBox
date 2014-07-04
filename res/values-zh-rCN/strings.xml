@@ -1428,8 +1428,6 @@
         启用后，额外的配置可以在每个应用程序的基础上进行</string>
     <string name="lc_active_screen_switch_title">启用激活屏幕</string>
     <string name="lc_expand_notification_panel_title">展开通知面板</string>
-    <string name="lc_expand_notification_panel_summary">当屏幕开启自动展开通知面板
-        （如果当前的锁屏安全策略允许）</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">静音时段</string>

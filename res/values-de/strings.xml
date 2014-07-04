@@ -1406,8 +1406,6 @@
         aktiviert, kann das Verhalten für einzelne Apps konfiguriert werden.</string>
     <string name="lc_active_screen_switch_title">Aktiv-Bildschirm aktivieren</string>
     <string name="lc_expand_notification_panel_title">Benachrichtigungsleiste erweitern</string>
-    <string name="lc_expand_notification_panel_summary">Benachrichtigungsleiste automatisch erweitern wenn Bildschirm aktiviert wird
-        (Wenn zugelassen durch Einstellungen des Sperrbildschirms)</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Ruhestunden</string>

@@ -55,7 +55,6 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_VIBRATE_PATTERN = "pref_lc_vibrate_pattern";
     private static final String PREF_KEY_DEFAULT_SETTINGS = "pref_lc_default_settings";
     private static final String PREF_CAT_KEY_ACTIVE_SCREEN = "pref_cat_lc_active_screen";
-    private static final String PREF_KEY_ACTIVE_SCREEN_ENABLED = "pref_lc_active_screen_enable";
     private static final String PREF_KEY_ACTIVE_SCREEN_MODE = "pref_lc_active_screen_mode";
     private static final String PREF_KEY_LED_MODE = "pref_lc_led_mode";
     private static final String PREF_CAT_KEY_QH = "pref_cat_lc_quiet_hours";
@@ -83,7 +82,6 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private EditTextPreference mVibratePatternPref;
     private SwitchPreference mDefaultSettingsPref;
     private PreferenceCategory mActiveScreenCat;
-    private CheckBoxPreference mActiveScreenEnabledPref;
     private ListPreference mActiveScreenModePref;
     private ListPreference mLedModePref;
     private PreferenceCategory mQhCat;
@@ -114,7 +112,6 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mVibratePatternPref.setOnPreferenceChangeListener(this);
         mDefaultSettingsPref = (SwitchPreference) findPreference(PREF_KEY_DEFAULT_SETTINGS);
         mActiveScreenCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_ACTIVE_SCREEN);
-        mActiveScreenEnabledPref = (CheckBoxPreference) findPreference(PREF_KEY_ACTIVE_SCREEN_ENABLED);
         mActiveScreenModePref = (ListPreference) findPreference(PREF_KEY_ACTIVE_SCREEN_MODE);
         mActiveScreenModePref.setOnPreferenceChangeListener(this);
         mLedModePref = (ListPreference) findPreference(PREF_KEY_LED_MODE);
@@ -154,7 +151,6 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         if (!LedSettings.isActiveScreenMasterEnabled(getActivity())) {
             getPreferenceScreen().removePreference(mActiveScreenCat);
         } else {
-            mActiveScreenEnabledPref.setChecked(ledSettings.getActiveScreenEnabled());
             mActiveScreenModePref.setValue(ledSettings.getActiveScreenMode().toString());
             mActiveScreenModePref.setSummary(mActiveScreenModePref.getEntry());
         }
@@ -244,10 +240,6 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected boolean getDefaultSettingsEnabled() {
         return mDefaultSettingsPref.isChecked();
-    }
-
-    protected boolean getActiveScreenEnabled() {
-        return mActiveScreenEnabledPref.isChecked();
     }
 
     protected ActiveScreenMode getActiveScreenMode() {
