@@ -403,6 +403,13 @@ public class ModNavigationBar {
                     mRecentAltIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear);
                     mRecentAltLandIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear_land);
 
+                    if (Build.VERSION.SDK_INT < 18) {
+                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE, false)) {
+                            XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon",
+                                    res.getDrawable(R.drawable.ic_sysbar_back_ime_land));
+                        }
+                    }
+
                     try {
                         mKeyguard = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
                     } catch (Throwable t) { log("Error getting keyguard manager: " + t.getMessage()); }
@@ -567,6 +574,27 @@ public class ModNavigationBar {
                     }
                 }
             });
+
+            if (Build.VERSION.SDK_INT > 17) {
+                XposedHelpers.findAndHookMethod(navbarViewClass, "getIcons", Resources.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        mRecentIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentIcon");
+                        mRecentLandIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentLandIcon");
+    
+                        if (mGbContext != null) {
+                            final Resources gbRes = mGbContext.getResources();
+                            mRecentAltIcon = gbRes.getDrawable(R.drawable.ic_sysbar_recent_clear);
+                            mRecentAltLandIcon = gbRes.getDrawable(R.drawable.ic_sysbar_recent_clear_land);
+    
+                            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE, false)) {
+                                XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon",
+                                        gbRes.getDrawable(R.drawable.ic_sysbar_back_ime_land));
+                            }
+                        }
+                    }
+                });
+            }
 
             XposedHelpers.findAndHookMethod(navbarViewClass, "setNavigationIconHints",
                     int.class, boolean.class, new XC_MethodHook() {
