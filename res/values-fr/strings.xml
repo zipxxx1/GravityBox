@@ -1652,7 +1652,8 @@
 
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Mode écran actif</string>
-    <string name="lc_active_screen_mode_nothing">Ne rien faire (allume seulement l\'écran)</string>
+    <string name="lc_active_screen_mode_disabled">Désactivé</string>
+    <string name="lc_active_screen_mode_nothing">Seulement allumer l\'écran</string>
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
