@@ -477,6 +477,15 @@ public class ModLedControl {
                         return;
                     }
 
+                    // show if active screen heads up mode set
+                    if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) &&
+                            ActiveScreenMode.valueOf(n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE)) ==
+                                ActiveScreenMode.HEADS_UP) {
+                        if (DEBUG) log("Showing active screen heads up");
+                        param.setResult(true);
+                        return;
+                    }
+
                     // disable when panels are disabled
                     if (!(Boolean) XposedHelpers.callMethod(param.thisObject, "panelsEnabled")) {
                         if (DEBUG) log("shouldInterrupt: NO due to panels being disabled");
@@ -488,15 +497,6 @@ public class ModLedControl {
                     if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing")) {
                         if (DEBUG) log("Disabling heads up for ongoing notification");
                         param.setResult(false);
-                        return;
-                    }
-
-                    // show if active screen heads up mode set
-                    if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) &&
-                            ActiveScreenMode.valueOf(n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE)) ==
-                                ActiveScreenMode.HEADS_UP) {
-                        if (DEBUG) log("Showing active screen heads up");
-                        param.setResult(true);
                         return;
                     }
 
