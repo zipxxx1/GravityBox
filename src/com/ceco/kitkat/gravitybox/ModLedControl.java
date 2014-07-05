@@ -15,6 +15,7 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,9 +42,11 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import de.robv.android.xposed.XC_MethodHook;
@@ -65,13 +68,16 @@ public class ModLedControl {
     private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData.Entry";
     private static final String CLASS_EXPAND_HELPER = "com.android.systemui.ExpandHelper";
     private static final String CLASS_HEADSUP_NOTIF_VIEW = "com.android.systemui.statusbar.policy.HeadsUpNotificationView";
+    private static final String CLASS_STATUSBAR_ICON_VIEW = "com.android.systemui.statusbar.StatusBarIconView";
     private static final String PACKAGE_NAME_PHONE = "com.android.phone";
     public static final String PACKAGE_NAME_SYSTEMUI = "com.android.systemui";
     private static final int MISSED_CALL_NOTIF_ID = 1;
+
     private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
     private static final String NOTIF_EXTRA_HEADS_UP_EXPANDED = "gbHeadsUpExpanded";
     private static final String NOTIF_EXTRA_HEADS_UP_GRAVITY = "gbHeadsUpGravity";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
+    private static final int MSG_SHOW_HEADS_UP = 1026;
 
     private static XSharedPreferences mPrefs;
     private static Notification mNotifOnNextScreenOff;
@@ -354,8 +360,7 @@ public class ModLedControl {
                     }
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
-                            !qhActive && !isOngoing && mPm != null &&
-                            !mPm.isScreenOn() && !mScreenCovered && mKm.isKeyguardLocked()) {
+                            !qhActive && !isOngoing && mPm != null && mKm.isKeyguardLocked()) {
                         n.extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
                                 ls.getActiveScreenMode().toString());
                         if (ls.getActiveScreenMode() == ActiveScreenMode.HEADS_UP) {
@@ -373,15 +378,17 @@ public class ModLedControl {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
-                final String pkgName = (String) param.args[0];
                 Notification n = (Notification) param.args[4];
-                if (!n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE))
+                if (!n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) || !(mPm != null && 
+                        !mPm.isScreenOn() && !mScreenCovered && mKm.isKeyguardLocked()))
                     return;
 
                 final ActiveScreenMode asMode = ActiveScreenMode.valueOf(
                         n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE));
+                final String pkgName = (String) param.args[0];
                 if (DEBUG) log("Performing Active Screen for " + pkgName + " with mode " +
                         asMode.toString());
+
                 mOnPanelRevealedBlocked = asMode == ActiveScreenMode.EXPAND_PANEL;
                 mHandler.postDelayed(new Runnable() {
                     @Override
@@ -442,6 +449,9 @@ public class ModLedControl {
 
     // SystemUI package
     private static WindowManager.LayoutParams mHeadsUpLp;
+    private static long mHeadsUpClickTime;
+    private static Handler mHeadsUpHandler;
+    private static Runnable mHeadsUpHideRunnable;
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
@@ -466,59 +476,60 @@ public class ModLedControl {
                     View headsUpView = (View) XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
                     int sysUiVis = XposedHelpers.getIntField(param.thisObject, "mSystemUiVisibility");
 
-                    maybeUpdateHeadsUpLayout(context, headsUpView, isStatusBarHidden(sysUiVis) ? 0 :
-                        (Integer) XposedHelpers.callMethod(param.thisObject, "getStatusBarHeight"),
-                        n.extras.getInt(NOTIF_EXTRA_HEADS_UP_GRAVITY, Gravity.TOP));
+                    boolean showHeadsUp = false;
 
                     // show expanded heads up for non-intrusive incoming call
                     if (isNonIntrusiveIncomingCallNotification(n) && isHeadsUpAllowed(context)) {
                         n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, true);
-                        param.setResult(true);
-                        return;
-                    }
-
+                        showHeadsUp = true;
                     // show if active screen heads up mode set
-                    if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) &&
+                    } else if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) &&
                             ActiveScreenMode.valueOf(n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE)) ==
                                 ActiveScreenMode.HEADS_UP) {
                         if (DEBUG) log("Showing active screen heads up");
-                        param.setResult(true);
-                        return;
-                    }
-
+                        showHeadsUp = true;
                     // disable when panels are disabled
-                    if (!(Boolean) XposedHelpers.callMethod(param.thisObject, "panelsEnabled")) {
+                    } else if (!(Boolean) XposedHelpers.callMethod(param.thisObject, "panelsEnabled")) {
                         if (DEBUG) log("shouldInterrupt: NO due to panels being disabled");
-                        param.setResult(false);
-                        return;
-                    }
-
+                        showHeadsUp = false;
                     // explicitly disable for all ongoing notifications
-                    if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing")) {
+                    } else if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing")) {
                         if (DEBUG) log("Disabling heads up for ongoing notification");
-                        param.setResult(false);
-                        return;
-                    }
-
+                        showHeadsUp = false;
                     // get desired mode set by UNC or use default
-                    HeadsUpMode mode = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_MODE) ?
-                            HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE)) :
-                                HeadsUpMode.ALWAYS;
-                    if (DEBUG) log("Heads up mode: " + mode.toString());
-
-                    switch (mode) {
-                        default:
-                        case DEFAULT:
-                            if (shouldNotDisturb(context)) {
-                                param.setResult(false);
-                            }
-                            return;
-                        case ALWAYS: param.setResult(isHeadsUpAllowed(context)); return;
-                        case OFF: param.setResult(false); return;
-                        case IMMERSIVE:
-                            param.setResult(isStatusBarHidden(sysUiVis) && isHeadsUpAllowed(context));
-                            return;
+                    } else {
+                        HeadsUpMode mode = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_MODE) ?
+                                HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE)) :
+                                    HeadsUpMode.ALWAYS;
+                        if (DEBUG) log("Heads up mode: " + mode.toString());
+    
+                        switch (mode) {
+                            default:
+                            case DEFAULT:
+                                showHeadsUp = shouldNotDisturb(context) ? false : (Boolean)param.getResult();
+                                break;
+                            case ALWAYS: 
+                                showHeadsUp = isHeadsUpAllowed(context);
+                                break;
+                            case OFF: 
+                                showHeadsUp = false; 
+                                break;
+                            case IMMERSIVE:
+                                showHeadsUp = isStatusBarHidden(sysUiVis) && isHeadsUpAllowed(context);
+                                break;
+                        }
                     }
+
+                    if (showHeadsUp) {
+                        if (mHeadsUpHandler != null) {
+                            mHeadsUpHandler.removeCallbacks(mHeadsUpHideRunnable);
+                        }
+                        maybeUpdateHeadsUpLayout(context, headsUpView, isStatusBarHidden(sysUiVis) ? 0 :
+                            (Integer) XposedHelpers.callMethod(param.thisObject, "getStatusBarHeight"),
+                            n.extras.getInt(NOTIF_EXTRA_HEADS_UP_GRAVITY, Gravity.TOP));
+                    }
+
+                    param.setResult(showHeadsUp);
                 }
             });
 
@@ -561,6 +572,65 @@ public class ModLedControl {
                     Object headsUp = XposedHelpers.getObjectField(param.thisObject, "mHeadsUp");
                     Object row = XposedHelpers.getObjectField(headsUp, "row");
                     XposedHelpers.callMethod(row, "setExpanded", expanded);
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "updateNotification",
+                    IBinder.class, CLASS_STATUSBAR_NOTIFICATION, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    Object huNotifEntry = XposedHelpers.getObjectField(param.thisObject,
+                            "mInterruptingNotificationEntry");
+                    if (huNotifEntry != null) {
+                        XposedHelpers.callMethod(param.thisObject, "setHeadsUpVisibility", false);
+                    }
+                }
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    Object huNotifEntry = XposedHelpers.getObjectField(param.thisObject,
+                            "mInterruptingNotificationEntry");
+                    Object huView = XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
+                    if (huNotifEntry == null && 
+                            (Boolean)XposedHelpers.callMethod(param.thisObject, "shouldInterrupt", param.args[1])) {
+                        Constructor<?> c = XposedHelpers.findConstructorExact(CLASS_NOTIF_DATA_ENTRY,
+                                classLoader, IBinder.class, CLASS_STATUSBAR_NOTIFICATION,
+                                    CLASS_STATUSBAR_ICON_VIEW);
+                        Object entry = c.newInstance(param.args[0], param.args[1], null);
+                        if ((Boolean) XposedHelpers.callMethod(param.thisObject, "inflateViews",
+                                entry, XposedHelpers.callMethod(huView, "getHolder"))) {
+                            XposedHelpers.setLongField(param.thisObject, "mInterruptingNotificationTime",
+                                    System.currentTimeMillis());
+                            XposedHelpers.setObjectField(param.thisObject, "mInterruptingNotificationEntry", entry);
+                            XposedHelpers.callMethod(huView, "setNotification", entry);
+                            Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
+                            h.sendEmptyMessage(MSG_SHOW_HEADS_UP);
+                            XposedHelpers.callMethod(param.thisObject, "resetHeadsUpDecayTimer");
+                        }
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_HEADSUP_NOTIF_VIEW, classLoader, "onInterceptTouchEvent",
+                    MotionEvent.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    MotionEvent ev = (MotionEvent) param.args[0];
+                    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+                        mHeadsUpClickTime = System.currentTimeMillis();
+                    } else if (ev.getAction() == MotionEvent.ACTION_UP) {
+                        if (System.currentTimeMillis() - mHeadsUpClickTime < 300) {
+                            if (mHeadsUpHandler == null) {
+                                mHeadsUpHandler = new Handler();
+                                mHeadsUpHideRunnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ((View)param.thisObject).setVisibility(View.GONE);
+                                    }
+                                };
+                            }
+                            mHeadsUpHandler.postDelayed(mHeadsUpHideRunnable, 200);
+                        }
+                    }
                 }
             });
         } catch (Throwable t) {
