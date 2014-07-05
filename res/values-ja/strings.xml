@@ -1530,5 +1530,34 @@
     <string name="clock_date_format_2">日付形式: MM/dd</string>
     <string name="clock_date_format_3">日付形式: d MMM</string>
     <string name="clock_date_format_4">日付形式: MMM d</string>
+    <string name="clock_date_format_5">日付形式: d</string>
+
+    <!-- Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_settings_title">バッテリータイル設定</string>
+    <string name="pref_qs_battery_extended_title">拡張バッテリータイル</string>
+    <string name="pref_qs_battery_extended_summary">有効化したら再起動してください。</string>
+    <string name="pref_qs_battery_temp_unit_title">温度単位</string>
+    <string name="celsius">摂氏</string>
+    <string name="fahrenheit">華氏</string>
+
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">ヘッドセットアクション</string>
+    <string name="pref_headset_action_plug_title">ヘッドセット接続時</string>
+    <string name="pref_headset_action_unplug_title">ヘッドセット接続解除時</string>
+
+    <!-- Quiet Hours: mute vibrations -->
+    <string name="pref_lc_qh_mute_vibe_title">バイブのミュート</string>
+
+    <!-- Quiet Hours: interactive mode -->
+    <string name="pref_lc_qh_interactive_title">操作時に静かにさせる</string>
+    <string name="pref_lc_qh_interactive_summary">操作時は常に通知を静かにさせるようにします。
+        (アプリ別設定を優先します)</string>
+
+    <!-- Screenshot delete -->
+    <string name="pref_screenshot_delete_title">スクリーンショットの通知に削除ボタンを追加</string>
+
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Android Lナビキーアイコンにする</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">ナビキーのアイコンをAndroid Lのものに変更します。(要再起動)</string>
 
 </resources>
