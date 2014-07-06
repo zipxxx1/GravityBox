@@ -1608,4 +1608,21 @@
     <string name="pref_heads_up_timeout_title">Limit czasu</string>
     <string name="pref_heads_up_timeout_summary">Czas wyświetlania okna powiadomienia. 0=trwale</string>
 
+    <!-- UNC HeadsUp category + additional options -->
+    <string name="pref_cat_lc_heads_up_title">Heads up</string>
+    <string name="pref_lc_headsup_expanded_title">Pokaż rozszerzony</string>
+    <string name="pref_lc_headsup_dnd_title">Nie przeszkadzać</string>
+    <string name="pref_lc_headsup_dnd_summary">Nie pokaże żadnych powiadomień Heads up, podczas gdy ta aplikacja jest na pierwszym planie</string>
+
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Włącz ikony nawigacyjne Androida L</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Zastępuje standardowe ikony nawigacji ikonami pochodzącymi z Androida L (wymagany restart)</string>
+
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Tryb aktywnego ekranu</string>
+    <string name="lc_active_screen_mode_disabled">Wyłączony</string>
+    <string name="lc_active_screen_mode_nothing">Tylko włącz ekran</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
+
 </resources>
