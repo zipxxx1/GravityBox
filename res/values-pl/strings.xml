@@ -1569,5 +1569,9 @@
 
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Włącz usuwanie zrzutu ekranu</string>
-    
+
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Włącz ikony nawigacyjne Androida L</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Zastępuje standardowe ikony nawigacji ikonami pochodzącymi z Androida L (wymagany restart)</string>
+
 </resources>
