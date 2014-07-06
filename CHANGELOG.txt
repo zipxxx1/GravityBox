@@ -1,3 +1,26 @@
+Changelog 3.2.4 - 06/07/2014
+--------------------------------------
+- Heads Up (common):
+--- improved non-intrusive call handling (won't show ongoing call as heads up)
+--- added support for showing heads up for existing notifications that got updated
+--- added support for proper handling of notification action buttons
+------ hides heads up window when notification action button clicked
+- UNC Active Screen:
+--- per-app active screen extended to support heads up mode
+--- shows centered heads up in lock screen
+--- supports secured lock screen
+- Navigation bar:
+--- replaced Android L icons with the authentic ones
+--- replaced Android L IME back icon with rotated triangle for more consistent experience
+- Phone tweaks: fixed contact photo not always showing when unknown caller photo option is active
+- Updated French translation (thanks to ch-vox)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Slovak and Czech translations
+
 Changelog 3.2.3 - 02/07/2014
 --------------------------------------
 - HeadsUp: fixed misbehavior of non-intrusive incoming call when screen off or device locked
