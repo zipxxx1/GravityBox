@@ -1495,7 +1495,7 @@
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">Danke für Ihre Unterstützung. Premium Funktionen werden freigeschaltet, nachdem GravityBox neugestartet wurde. 
         Stellen Sie sicher, dass GravityBox Unlocker für mindestens 20 Minuten installiert bleibt.</string>
-    <string name="pref_about_get_unlocker_title">Erhalte Freischalter</string>
+    <string name="pref_about_get_unlocker_title">Erhalte Unlocker</string>
     <string name="pref_about_get_unlocker_summary">Sie haben kein PayPal? Klicken Sie einfach hier um die GravityBox Premium Funktionen über den PlayStore freizuschalten.</string>
 
     <!-- Navbar custom key: alternate icon -->
@@ -1522,7 +1522,7 @@
 
     <!-- Lockscreen: disable emergency call button -->
     <string name="pref_lockscreen_disable_ecb_title">Deaktiviere Notruf-Taste</string>
-    <string name="pref_lockscreen_disable_ecb_summary">WARNUNG: BENUTZUNG AUF EIGENE GEFAHR!!!!</string>
+    <string name="pref_lockscreen_disable_ecb_summary">BENUTZUNG AUF EIGENE GEFAHR!!!!</string>
 
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">Symbol Auswahl von Ziel-App abgebrochen</string>
@@ -1566,5 +1566,9 @@
 
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Screenshot löschen an</string>
+
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Aktiviere Android "L" Navigationstasten</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Ersetzt standart Navigationstasten Symbole durch diejenigen von Android "L" (erfordert Neustart)</string>
 
 </resources>
