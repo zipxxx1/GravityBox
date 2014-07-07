@@ -78,6 +78,7 @@ public class ModLedControl {
     private static final String NOTIF_EXTRA_HEADS_UP_GRAVITY = "gbHeadsUpGravity";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
     private static final int MSG_SHOW_HEADS_UP = 1026;
+    private static final int MSG_HIDE_HEADS_UP = 1027;
 
     private static XSharedPreferences mPrefs;
     private static Notification mNotifOnNextScreenOff;
@@ -578,31 +579,26 @@ public class ModLedControl {
             XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "updateNotification",
                     IBinder.class, CLASS_STATUSBAR_NOTIFICATION, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    Object huNotifEntry = XposedHelpers.getObjectField(param.thisObject,
-                            "mInterruptingNotificationEntry");
-                    if (huNotifEntry != null) {
-                        XposedHelpers.callMethod(param.thisObject, "setHeadsUpVisibility", false);
-                    }
-                }
-                @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    Object huNotifEntry = XposedHelpers.getObjectField(param.thisObject,
-                            "mInterruptingNotificationEntry");
-                    Object huView = XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
-                    if (huNotifEntry == null && 
-                            (Boolean)XposedHelpers.callMethod(param.thisObject, "shouldInterrupt", param.args[1])) {
+                    if ((Boolean)XposedHelpers.callMethod(param.thisObject, "shouldInterrupt", param.args[1])) {
                         Constructor<?> c = XposedHelpers.findConstructorExact(CLASS_NOTIF_DATA_ENTRY,
                                 classLoader, IBinder.class, CLASS_STATUSBAR_NOTIFICATION,
                                     CLASS_STATUSBAR_ICON_VIEW);
+                        Object huView = XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
                         Object entry = c.newInstance(param.args[0], param.args[1], null);
                         if ((Boolean) XposedHelpers.callMethod(param.thisObject, "inflateViews",
                                 entry, XposedHelpers.callMethod(huView, "getHolder"))) {
+                            Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
+                            Object huNotifEntry = XposedHelpers.getObjectField(param.thisObject,
+                                    "mInterruptingNotificationEntry");
+                            if (huNotifEntry != null) {
+                                h.removeMessages(MSG_HIDE_HEADS_UP);
+                                XposedHelpers.callMethod(param.thisObject, "setHeadsUpVisibility", false);
+                            }
                             XposedHelpers.setLongField(param.thisObject, "mInterruptingNotificationTime",
                                     System.currentTimeMillis());
                             XposedHelpers.setObjectField(param.thisObject, "mInterruptingNotificationEntry", entry);
                             XposedHelpers.callMethod(huView, "setNotification", entry);
-                            Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
                             h.sendEmptyMessage(MSG_SHOW_HEADS_UP);
                             XposedHelpers.callMethod(param.thisObject, "resetHeadsUpDecayTimer");
                         }
