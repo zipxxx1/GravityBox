@@ -1387,7 +1387,8 @@ public class ModQuickSettings {
                     final View tile = (View) param.args[0];
                     tile.setTag(mAospTileTags.get("battery_textview"));
                     if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BATTERY_EXTENDED, false)) {
-                        int imgResId = tile.getResources().getIdentifier("image", "id", PACKAGE_NAME);
+                        int imgResId = tile.getResources().getIdentifier(Build.VERSION.SDK_INT == 18 ? 
+                                "image" : "battery_image", "id", PACKAGE_NAME);
                         if (imgResId != 0) {
                             View batteryImg = tile.findViewById(imgResId);
                             if (batteryImg != null) {
@@ -1407,7 +1408,8 @@ public class ModQuickSettings {
                         XposedBridge.hookAllMethods(param.args[1].getClass(), "refreshView", new XC_MethodHook() {
                             @Override
                             protected void afterHookedMethod(final MethodHookParam param2) throws Throwable {
-                                int textResId = tile.getResources().getIdentifier("text", "id", PACKAGE_NAME);
+                                int textResId = tile.getResources().getIdentifier(Build.VERSION.SDK_INT == 18 ? 
+                                        "text" : "battery_textview", "id", PACKAGE_NAME);
                                 if (textResId != 0) {
                                     TextView tileTv = (TextView) tile.findViewById(textResId);
                                     if (tileTv != null) {
