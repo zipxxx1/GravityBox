@@ -1514,7 +1514,7 @@
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">Danke für Ihre Unterstützung. Premium Funktionen werden freigeschaltet, nachdem GravityBox neugestartet wurde. 
         Stellen Sie sicher, dass GravityBox Unlocker für mindestens 20 Minuten installiert bleibt.</string>
-    <string name="pref_about_get_unlocker_title">Erhalte Freischalter</string>
+    <string name="pref_about_get_unlocker_title">Erhalte Unlocker</string>
     <string name="pref_about_get_unlocker_summary">Sie haben kein PayPal? Klicken Sie einfach hier um die GravityBox Premium Funktionen über den PlayStore freizuschalten.</string>
 
     <!-- Navbar custom key: alternate icon -->
@@ -1541,7 +1541,7 @@
 
     <!-- Lockscreen: disable emergency call button -->
     <string name="pref_lockscreen_disable_ecb_title">Deaktiviere Notruf-Taste</string>
-    <string name="pref_lockscreen_disable_ecb_summary">WARNUNG: BENUTZUNG AUF EIGENE GEFAHR!!!!</string>
+    <string name="pref_lockscreen_disable_ecb_summary">BENUTZUNG AUF EIGENE GEFAHR!!!!</string>
 
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">Symbol Auswahl von Ziel-App abgebrochen</string>
@@ -1616,5 +1616,23 @@
     <string name="pref_heads_up_one_finger_title">Mit einem Finger erweitern</string>
     <string name="pref_heads_up_timeout_title">Zeitlimit</string>
     <string name="pref_heads_up_timeout_summary">Anzeigedauer des Benachrichtigungenfensters. 0 = dauerhaft.</string>
+    
+    <!-- UNC HeadsUp category + additional options -->
+    <string name="pref_cat_lc_heads_up_title">Heads-Up</string>
+    <string name="pref_lc_headsup_expanded_title">Erweitert anzeigen</string>
+    <string name="pref_lc_headsup_dnd_title">Nicht stören</string>
+    <string name="pref_lc_headsup_dnd_summary">Keine Heads-Up Benachrichtigungen anzeigen, wenn diese App im Vordergrund ist</string>
+
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Aktiviere Android "L" Navigationstasten</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Ersetzt standart Navigationstasten Symbole durch diejenigen von Android "L" (erfordert Neustart)</string>
+
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Aktiv Bildschirm Modus</string>
+    <string name="lc_active_screen_mode_disabled">Aus</string>
+    <string name="lc_active_screen_mode_nothing">Bildschirm nur anschalten</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
+
 
 </resources>
