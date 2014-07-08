@@ -1587,4 +1587,8 @@
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Habilitar borrar captura de pantalla</string>
 
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Activar iconos de navegación de Android L</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Remplaza los iconos de navegación predeterminados por los de Android L (requiere reinicio)</string>
+
 </resources>
