@@ -1629,7 +1629,7 @@
     <string name="pref_lc_headsup_mode_title">Heads up mode</string>
     <string name="lc_heads_up_default">Default</string>
     <string name="lc_heads_up_always">Always</string>
-    <string name="lc_heads_up_immersive">When expanded desktop hides status bar</string>
+    <string name="lc_heads_up_immersive">When status bar hidden</string>
     <string name="lc_heads_up_off">Off</string>
 
     <!-- Statusbar: notification heads up category -->

@@ -1590,7 +1590,7 @@
     <string name="pref_lc_headsup_mode_title">Heads up režim</string>
     <string name="lc_heads_up_default">Predvolený</string>
     <string name="lc_heads_up_always">Vždy zapnutý</string>
-    <string name="lc_heads_up_immersive">V prípade ak režim rozšírenej plochy skryje stavovú lištu</string>
+    <string name="lc_heads_up_immersive">Ak je stavová lišta skrytá</string>
     <string name="lc_heads_up_off">Vypnutý</string>
 
     <!-- Statusbar: notification heads up category -->
