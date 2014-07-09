@@ -20,6 +20,7 @@ import java.util.Locale;
 import com.ceco.kitkat.gravitybox.R;
 import com.ceco.kitkat.gravitybox.adapters.IBaseListAdapterItem;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
+import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.LedMode;
 
 import android.content.Context;
@@ -92,9 +93,11 @@ public class LedListItem implements IBaseListAdapterItem {
             if (mLedSettings.getVibrateOverride()) {
                 buf += "; " + mContext.getString(R.string.pref_lc_vibrate_override_title);
             }
-            if (LedSettings.isActiveScreenMasterEnabled(mContext) &&
-                    mLedSettings.getActiveScreenMode() != ActiveScreenMode.DISABLED) {
-                buf += "; " + mContext.getString(R.string.lc_active_screen);
+            if (LedSettings.isActiveScreenMasterEnabled(mContext)) {
+                buf += "; AS: " + getActiveScreenModeTitle(mLedSettings.getActiveScreenMode());
+            }
+            if (LedSettings.isHeadsUpEnabled(mContext)) {
+                buf += "; HUP: " + getHeadsUpModeTitle(mLedSettings.getHeadsUpMode());
             }
             if (LedSettings.isQuietHoursEnabled(mContext) &&
                     mLedSettings.getQhIgnore()) {
@@ -104,6 +107,36 @@ public class LedListItem implements IBaseListAdapterItem {
                 buf += "; " + mContext.getString(R.string.lc_item_summary_ongoing);
             }
             return buf;
+        }
+    }
+
+    private String getActiveScreenModeTitle(ActiveScreenMode asMode) {
+        switch (asMode) {
+            case DISABLED:
+                return mContext.getString(R.string.lc_active_screen_mode_disabled);
+            case DO_NOTHING: 
+                return mContext.getString(R.string.lc_active_screen_mode_nothing);
+            case EXPAND_PANEL:
+                return mContext.getString(R.string.lc_active_screen_mode_expand);
+            case HEADS_UP:
+                return mContext.getString(R.string.lc_active_screen_mode_headsup);
+            default:
+                return "N/A";
+        }
+    }
+
+    private String getHeadsUpModeTitle(HeadsUpMode hupMode) {
+        switch (hupMode) {
+            case DEFAULT:
+                return mContext.getString(R.string.lc_heads_up_default);
+            case ALWAYS:
+                return mContext.getString(R.string.lc_heads_up_always);
+            case IMMERSIVE:
+                return mContext.getString(R.string.lc_heads_up_immersive);
+            case OFF:
+                return mContext.getString(R.string.lc_heads_up_off);
+            default:
+                return "N/A";
         }
     }
 
