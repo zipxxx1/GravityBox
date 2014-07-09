@@ -364,6 +364,9 @@ public class ScreenRecordingService extends Service {
 
         try {
             mShowTouchesDefault = Settings.System.getInt(getContentResolver(), SETTING_SHOW_TOUCHES);
+            if (mShowTouchesDefault == 0) {
+                toggleShowTouches();
+            }
         } catch (SettingNotFoundException e) {
             //
         }
