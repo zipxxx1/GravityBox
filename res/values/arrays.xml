@@ -128,6 +128,7 @@
         <item>@string/qs_tile_lock_screen</item>
         <item>@string/lc_quiet_hours</item>
         <item>@string/qs_tile_compass</item>
+        <item>@string/qs_tile_remote_display</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_values_kk" translatable="false">
@@ -166,6 +167,7 @@
         <item>lock_screen_tileview</item>
         <item>quiet_hours_tileview</item>
         <item>compass_tileview</item>
+        <item>remote_display_textview</item>
     </string-array>
 
     <string-array name="qs_tile_override_entries" translatable="false">

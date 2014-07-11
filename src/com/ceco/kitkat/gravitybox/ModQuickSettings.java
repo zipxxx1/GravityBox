@@ -191,6 +191,7 @@ public class ModQuickSettings {
         tmpMap.put("bluetooth_textview", 9);
         tmpMap.put("gps_textview", 10);
         tmpMap.put("alarm_textview", 11);
+        tmpMap.put("remote_display_textview", 12);
         mAospTileTags = Collections.unmodifiableMap(tmpMap);
 
         mAllTileViews = new HashMap<String, View>();
@@ -1649,6 +1650,24 @@ public class ModQuickSettings {
                             }
                         }
                     });
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(classQsModel, "addRemoteDisplayTile",
+                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    final View tile = (View) param.args[0];
+                    tile.setTag(mAospTileTags.get("remote_display_textview"));
+                    Object onPrepareListener = XposedHelpers.getObjectField(tile, "mOnPrepareListener");
+                    if (onPrepareListener != null) {
+                        XposedHelpers.callMethod(onPrepareListener, "onPrepare");
+                        XposedHelpers.callMethod(tile, "setOnPrepareListener", (Object)null);
+                    }
                 }
             });
         } catch (Throwable t) {
