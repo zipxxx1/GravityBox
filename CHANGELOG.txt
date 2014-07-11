@@ -1,3 +1,22 @@
+Changelog 3.2.5 - 11/07/2014
+--------------------------------------
+- Quick Settings:
+--- added support for Remote display tile (cast screen)
+--- fixed glitches during settings panel expansion when Remote display tile is active
+--- allow tile reordering activity on non-touchscreen devices
+- Heads Up: fixed issue causing heads up to sometimes disappear too fast
+- Ultimate notification control: 
+--- indicate active screen and heads up modes within UNC app list subtitles
+--- changed improper title of Active Screen mode "when expanded desktop hides status bar"
+- Pie: slightly increased trigger swipe angle
+- Screen recording: toggle pointer automatically when screen recording starts
+- Updated Russian translations (thanks to gaich)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated German translations (thanks to LibertyMarine)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated French translation (thanks to ch-vox)
+
 Changelog 3.2.4 - 06/07/2014
 --------------------------------------
 - Heads Up (common):
