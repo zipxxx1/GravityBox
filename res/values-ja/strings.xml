@@ -1588,7 +1588,7 @@
     <string name="pref_lc_headsup_mode_title">Heads upモード</string>
     <string name="lc_heads_up_default">デフォルト</string>
     <string name="lc_heads_up_always">常時</string>
-    <string name="lc_heads_up_immersive">拡張デスクトップでステータスバーを隠した時</string>
+    <string name="lc_heads_up_immersive">ステータスバーを隠した時</string>
     <string name="lc_heads_up_off">オフ</string>
 
     <!-- Statusbar: notification heads up category -->
@@ -1615,5 +1615,8 @@
     <string name="lc_active_screen_mode_nothing">画面点灯のみ</string>
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
+    
+    <!-- QS: Remote display tile -->
+    <string name="qs_tile_remote_display">リモートディスプレイ</string>
     
 </resources>
