@@ -1580,4 +1580,8 @@
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Ativar opção de apagar captura de ecrã</string>
 
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Ativar teclas de navegação do Android L</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Permite substituir os ícones padrão das teclas de navegação pelos do Android L (necessário reiniciar)</string>
+
 </resources>
