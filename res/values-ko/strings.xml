@@ -1040,4 +1040,289 @@
 
     <string name="shortcut_smart_radio_toggle">스마트 라디오 전환</string>
 
+    <string name="pref_masterswitch_title">마스터 스위치</string>
+
+    <string name="pref_volume_adjust_vibrate_mute_title">볼륨 조절 시 진동 비활성화</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">알림 / 벨소리를 조절할 때 피드백되는 진동을 비활성화 합니다.</string>
+
+    <string name="pref_sb_clock_masterswitch_summary">상단바 시계 설정 활성화 여부 (재시작 필요)</string>
+
+    <string name="pref_sb_clock_dow_size_title">요일 글자 크기</string>
+
+    <string name="pref_sb_clock_ampm_size_title">오전/오후 글자 크기</string>
+
+    <string name="pref_cat_navbar_ring_title">네비게이션 바 고리</string>
+
+    <string name="pref_navbar_ring_disable_title">네비게이션 바 고리 비활성화</string>
+
+    <string name="pref_data_traffic_mode_title">데이터 트래픽 감시기 유형</string>
+    <string name="dt_mode_off">비활성화</string>
+    <string name="dt_mode_simple">간단한 유형</string>
+    <string name="dt_mode_omni">Omni 유형</string>
+
+    <string name="pref_data_traffic_omni_mode_title">감시 모드</string>
+    <string name="dt_omni_mode_in">다운로드</string>
+    <string name="dt_omni_mode_out">업로드</string>
+    <string name="dt_omni_mode_in_out">다운로드 및 업로드</string>
+    <string name="byte_per_sec_abbr">B/s</string>
+    <string name="bit_per_sec_abbr">b/s</string>
+    <string name="kilo_abbr">k</string>
+    <string name="mega_abbr">M</string>
+    <string name="giga_abbr">G</string>
+    <string name="pref_data_traffic_omni_show_icon_title">아이콘 표시</string>
+
+    <string name="shortcuts_icon_picker_viber">Viber</string>
+    <string name="shortcuts_icon_picker_skype">Skype</string>
+    <string name="shortcuts_icon_picker_calculator">계산기</string>
+
+    <string name="pref_cat_qs_tile_settings_title">퀵세팅 타일 설정</string>
+    <string name="pref_cat_qs_tile_settings_summary">퀵세팅의 타일 관련 요소들이 있습니다.</string>
+    <string name="pref_cat_qs_nm_tile_settings_title">네트워크 모드 제목 설정</string>
+
+    <string name="pref_cat_qs_alarm_tile_settings_title">알람 타일 설정</string>
+    <string name="pref_qs_alarm_singletap_app_title">한 번 터치할 때의 앱</string>
+    <string name="alarm_singletap_app_default">기본 시계 앱</string>
+    <string name="pref_qs_alarm_longpress_app_title">길게 누를 때의 앱</string>
+
+    <string name="pref_data_traffic_active_dl_only_title">다운로드 활동이 있을때만 표시</string>
+    <string name="pref_data_traffic_active_dl_only_summary">안드로이드 기본 다운로드 매니저에 의해 다운로드 활동이 감지될 때만 표시합니다.</string>
+
+    <string name="pref_led_control_title">알림 개별 설정</string>
+    <string name="pref_led_control_summary">알림의 LED 색깔, 소리, 진동 주기를 앱마다 각각 설정할 수 있습니다.</string>
+    <string name="lc_please_wait">잠시만 기다려 주세요&#8230;</string>
+    <string name="lc_disabled">알림 설정 비활성화됨</string>
+    <string name="pref_lc_led_color_title">LED 색깔</string>
+    <string name="pref_lc_led_time_on_title">LED의 켜짐 시간</string>
+    <string name="pref_lc_led_time_off_title">LED의 꺼짐 시간</string>
+    <string name="pref_lc_ongoing_title">진행 중 알림 적용</string>
+    <string name="pref_lc_ongoing_summary">'진행 중'이라고 표시되는 알림에도 적용합니다.</string>
+    <string name="lc_btn_preview">미리보기</string>
+    <string name="lc_btn_save">저장</string>
+    <string name="lc_item_summary_on">켜기</string>
+    <string name="lc_item_summary_off">끄기</string>
+    <string name="lc_item_summary_ongoing">진행 중</string>
+    <string name="lc_preview_notif_title">GravityBox 알림 설정 테스트</string>
+    <string name="lc_preview_notif_text">%s 앱에 적용되기 전의 테스트입니다.</string>
+    <string name="lc_activity_menu_show_all">모든 앱 표시</string>
+    <string name="lc_activity_menu_show_active">활성화된 앱 표시</string>
+    <string name="pref_cat_lc_lights_title">LED</string>
+    <string name="pref_cat_lc_other_title">기타 설정</string>
+    <string name="pref_cat_lc_sounds_title">소리</string>
+    <string name="pref_cat_lc_vibrations_title">진동 주기</string>
+    <string name="pref_lc_notif_sound_override_title">알림 소리 오버라이드</string>
+    <string name="pref_lc_notif_sound_title">알림 소리</string>
+    <string name="lc_notif_sound_none">소리 없음</string>
+    <string name="pref_lc_notif_sound_only_once_title">소리를 한 번만 울림</string>
+    <string name="pref_lc_notif_sound_only_once_summary">활성화하면, 소리와 진동은 알림이 이미 있을 때 더 이상 울리지 않습니다.</string>
+    <string name="pref_lc_notif_insistent_title">반복</string>
+    <string name="pref_lc_notif_insistent_summary">활성화하면, 알림이 취소되거나 켜질 때까지 알림 소리를 반복해서 재생합니다.</string>
+    <string name="pref_lc_vibrate_override_title">진동 주기 오버라이드</string>
+    <string name="pref_lc_vibrate_pattern_title">진동 주기 설정</string>
+    <string name="pref_lc_vibrate_pattern_summary">콤마(,)로 켜짐과 꺼짐을 구분하며, 단위는 밀리세컨드입니다. 0으로 설정하면 비활성화됩니다.</string>
+    <string name="lc_vibrate_pattern_invalid">잘못된 진동 패턴입니다!</string>
+
+    <string name="pref_data_traffic_omni_autohide_threshold_title">Inactivity threshold</string>
+
+    <!-- Icon Picker: additional icons -->
+    <string name="shortcuts_icon_picker_chrome">Chrome</string>
+    <string name="shortcuts_icon_picker_spotify">Spotify</string>
+
+    <!-- Virtual keys vibrate pattern -->
+    <string name="pref_virtual_key_vibrate_pattern_title">Virtual key vibration pattern</string>
+    <string name="pref_virtual_key_vibrate_pattern_summary">Comma separated list of off/on duration pairs in milliseconds. Leave empty for default vibration pattern.</string>
+
+    <!-- Lockscreen: show pattern error -->
+    <string name="pref_lockscreen_show_pattern_error_title">Show pattern error</string>
+    <string name="pref_lockscreen_show_pattern_error_summary">Show red trail when wrong pattern is entered</string>
+
+    <!-- Premium features: allow trial period -->
+    <string name="trial_info">This feature is in trial mode. If you find it useful you can continue using it after unlocking premium features. 
+        Trial period ends after %d reboots.</string>
+
+    <!-- Notification control: default settings -->
+    <string name="lc_activity_menu_default_settings">Default settings</string>
+    <string name="pref_lc_default_settings_summary">When on, default settings apply automatically to all applications that have no active explicit settings</string>
+    <string name="lc_defaults_apply">Default settings apply</string>
+    <string name="lc_settings_menu_reset">Reset to defaults</string>
+
+    <!-- Notification control: Active screen -->
+    <string name="lc_active_screen">Active Screen</string>
+    <string name="lc_active_screen_info">Active Screen feature automatically turns on screen every 
+        time new notification arrives. This will happen only in case screen is not covered 
+        (e.g. when device is not in the pocket). It optionally expands notification panel depending on 
+        the current lock screen security policy and user preference. Be aware that Active Screen requires lock screen
+        to be enabled.\nThe switch below is a master switch. After it\'s enabled, 
+        additional configuration can be done on per-app basis</string>
+    <string name="lc_active_screen_switch_title">Enable Active Screen</string>
+    <string name="lc_expand_notification_panel_title">Expand notification panel</string>
+    <string name="lc_expand_notification_panel_summary">Expands notification panel automatically when screen turns on 
+        (if allowed by current lock screen security policy)</string>
+
+    <!-- Notification control: Quiet hours -->
+    <string name="lc_quiet_hours">Quiet hours</string>
+    <string name="pref_lc_qh_enabled_title">Enable quiet hours</string>
+    <string name="pref_lc_qh_enabled_summary">Mutes sounds/vibrations and optionally LED for 
+        all notifications arriving within defined time range</string>
+    <string name="pref_lc_qh_start_title">Start time</string>
+    <string name="pref_lc_qh_end_title">End time</string>
+    <string name="pref_lc_qh_mute_led_title">Mute lights</string>
+
+    <!-- Notification control: LED mode -->
+    <string name="pref_lc_led_mode_title">LED mode</string>
+    <string name="lc_led_mode_original">Original (from app)</string>
+    <string name="lc_led_mode_override">Override</string>
+    <string name="lc_led_mode_off">Off (no lights)</string>
+
+    <!-- Notification control: Quiet hours statusbar icon -->
+    <string name="pref_lc_qh_statusbar_icon_title">Status bar icon</string>
+    <string name="pref_lc_qh_statusbar_icon_summary">Shows icon in status bar during quiet hours</string>
+
+    <!-- Battey percent text: charging color -->
+    <string name="battery_percent_text_charging_color_title">Charging color</string>
+
+    <!-- Notification control: Quiet hours for weekends-->
+    <string name="pref_lc_qh_cat_weekdays_title">Week days</string>
+    <string name="pref_lc_qh_cat_weekend_title">Weekend</string>
+
+    <!-- Force English locale -->
+    <string name="pref_force_english_locale_title">Force English locale</string>
+
+    <!-- VolumePanel transparency -->
+    <string name="pref_volume_panel_transparency_title">Volume panel transparency</string>
+
+    <!-- UNC Quiet Hours: ignore on per-app basis -->
+    <string name="pref_lc_qh_ignore_title">Ignore Quiet hours</string>
+    <string name="pref_lc_qh_ignore_list_title">For specific keywords</string>
+    <string name="pref_lc_qh_ignore_list_summary">Comma separated list of keywords for which to ignore 
+        Quiet hours. Leave empty for all notifications.</string>
+
+    <!-- GB Actions: Quiet hours shortcut -->
+    <string name="shortcut_quiet_hours_toggle">Toggle Quiet hours</string>
+
+    <!-- GB Actions: toggle airplane mode -->
+    <string name="shortcut_airplane_mode">Toggle airplane mode</string>
+
+    <!-- Statusbar BT icon visibility -->
+    <string name="pref_sb_bt_visibility_title">Bluetooth icon visibility</string>
+    <string name="sb_bt_default">When BT enabled (default)</string>
+    <string name="sb_bt_connected">When BT connected</string>
+    <string name="sb_bt_hidden">Hidden</string>
+
+    <!-- Increasing ringtone volume -->
+    <string name="pref_increasing_ring_title">Ascending ringtone</string>
+    <string name="increasing_ring_enable">Enable</string>
+    <string name="increasing_ring_min_volume_title">Ringing start volume</string>
+    <string name="increasing_ring_volume_notice">Notice:\nAs the start volume is set higher than the ringer volume, the ring tone will be played using the ringer volume.</string>
+    <string name="increasing_ring_interval_title">Increase interval</string>
+    <string name="increasing_ring_interval_eachring">On each ring</string>
+    <string name="increasing_ring_interval_half_second">0.5 seconds</string>
+    <string name="increasing_ring_interval_1second">1 second</string>
+    <string name="increasing_ring_interval_2seconds">2 seconds</string>
+    <string name="increasing_ring_interval_3seconds">3 seconds</string>
+    <string name="increasing_ring_interval_5seconds">5 seconds</string>
+    <string name="increasing_ring_interval_10seconds">10 seconds</string>
+
+    <!-- Icon picker: Snapchat icon -->
+    <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
+
+    <!-- HW Key Action: In-app search -->
+    <string name="hwkey_action_inapp_search">In-app search</string>
+
+    <!-- Misc: Force LTR direction -->
+    <string name="pref_force_ltr_direction_title">Force LTR direction</string>
+    <string name="pref_force_ltr_direction_summary">Forces LTR layout direction for RTL locales (requires reboot)</string>
+
+    <!-- Volume panel transparency: opaque on interaction -->
+    <string name="pref_volume_panel_opaque_title">Opaque on interaction</string>
+    <string name="pref_volume_panel_opaque_summary">Removes transparency when interacting with volume panel</string>
+
+    <!-- Ringer mode shortcut -->
+    <string name="shortcut_ringer_mode">Set ringer mode</string>
+
+    <!-- Data traffic monitor: Only for mobile data -->
+    <string name="pref_data_traffic_active_mobile_only_title">Mobile data only</string>
+
+    <!-- Dashed circle battery style -->
+    <string name="battery_style_circle_dashed">Dashed circle battery</string>
+    <string name="battery_style_circle_dashed_percent">Dashed circle battery with percentage</string>
+
+    <!-- Premium feature unlock via unlocker app -->
+    <string name="premium_unlocked_message">Thank you for your support. Premium features will be unlocked after GravityBox is restarted. 
+        Make sure to keep GravityBox Unlocker installed for at least 20 minutes.</string>
+    <string name="pref_about_get_unlocker_title">Get unlocker</string>
+    <string name="pref_about_get_unlocker_summary">Don\'t have PayPal? Simply touch here to get GravityBox premium feature unlocker from the Play Store.</string>
+
+    <!-- Navbar custom key: alternate icon -->
+    <string name="pref_navbar_custom_key_icon_title">Use alternate icon</string>
+
+    <!-- QS: swipe to Quick Settings -->
+    <string name="pref_qs_swipe_enable_title">Swipe to Quick Settings</string>
+
+    <!-- Smart Radio: ignore mobile data availability -->
+    <string name="pref_smart_radio_mda_ignore_title">Ignore mobile data availability</string>
+    <string name="pref_smart_radio_mda_ignore_summary">Switches to normal mode even if mobile data is currently unavailable</string>
+
+    <!-- GB Actions: Toggle sync -->
+    <string name="shortcut_sync">Toggle sync</string>
+
+    <!-- UNC: timeout for Alert only once -->
+    <string name="pref_lc_notif_sound_only_once_timeout_title">Within time interval</string>
+
+    <!-- Statusbar clock: show date -->
+    <string name="pref_statusbar_clock_date_title">Show date</string>
+
+    <!-- Delete -->
+    <string name="delete">Delete</string>
+
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">Disable emergency call button</string>
+    <string name="pref_lockscreen_disable_ecb_summary">USE AT YOUR OWN RISK!!!!</string>
+
+    <!-- AppPicker: icon pick cancelled -->
+    <string name="app_picker_icon_pick_cancelled">Icon pick cancelled by target app</string>
+
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">Mirrored keys</string>
+
+    <!-- Pie: center trigger -->
+    <string name="pref_pie_control_center_trigger_title">Center trigger</string>
+    <string name="pref_pie_control_center_trigger_summary">Triggers pie only when swiping from center of the screen edge</string>
+
+    <!-- Statusbar clock: date format options -->
+    <string name="clock_date_disabled">Disabled</string>
+    <string name="clock_date_localized">Date format based on locale</string>
+    <string name="clock_date_format_1">Date format: dd/MM</string>
+    <string name="clock_date_format_2">Date format: MM/dd</string>
+    <string name="clock_date_format_3">Date format: d MMM</string>
+    <string name="clock_date_format_4">Date format: MMM d</string>
+    <string name="clock_date_format_5">Date format: d</string>
+
+    <!-- Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_settings_title">Battery tile settings</string>
+    <string name="pref_qs_battery_extended_title">Extended battery tile</string>
+    <string name="pref_qs_battery_extended_summary">Requires reboot</string>
+    <string name="pref_qs_battery_temp_unit_title">Temperature unit</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">Headset actions</string>
+    <string name="pref_headset_action_plug_title">On headset plugged</string>
+    <string name="pref_headset_action_unplug_title">On headset unplugged</string>
+
+    <!-- Quiet Hours: mute vibrations -->
+    <string name="pref_lc_qh_mute_vibe_title">Mute vibrations</string>
+
+    <!-- Quiet Hours: interactive mode -->
+    <string name="pref_lc_qh_interactive_title">Interactive mode</string>
+    <string name="pref_lc_qh_interactive_summary">Always keeps notifications quiet during user interaction 
+        (respecting per app ignore rules)</string>
+
+    <!-- Screenshot delete -->
+    <string name="pref_screenshot_delete_title">Enable screenshot delete</string>
+
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Enable Android L navigation key icons</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Replaces stock navigation key icons by those coming from Android L (requires reboot)</string>
+
 </resources>
