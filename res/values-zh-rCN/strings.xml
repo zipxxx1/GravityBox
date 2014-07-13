@@ -348,7 +348,7 @@
 
     <!-- Battery status in pie controls -->
     <string name="pie_battery_status_charging">正在充电：<xliff:g id="percent">%d</xliff:g>%%</string>
-    <string name="pie_battery_status_full">已充满！</string>
+    <string name="pie_battery_status_full">电量已充满！</string>
     <string name="pie_battery_status_discharging">剩余电量：<xliff:g id="percent">%d</xliff:g>%%</string>
 
     <!-- Phone status in pie controls -->
@@ -357,7 +357,7 @@
     <string name="pie_phone_status_emergency_only">仅限紧急呼叫</string>
 
     <!-- Pie Controls settings -->
-    <string name="pie_control_title">Pie Controls虚拟按键</string>
+    <string name="pie_control_title">Pie Controls虚拟按键调整</string>
     <string name="pie_control_enable_title">启用Pie Controls虚拟按键</string>
     <string name="pie_control_size_title">虚拟按键大小</string>
     <string name="pie_control_trigger_positions_title">触发位置</string>
@@ -383,7 +383,7 @@
     <string name="pref_hwkeys_disable_summary">当Pie Controls虚拟按键启用时将会禁用实体按键单击功能</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">使用黑色 Holo 主题</string>
+    <string name="pref_gb_theme_dark_title">使用黑色Holo主题</string>
     <string name="pref_gb_theme_dark_summary">切换GravityBox至黑色Holo主题代替白色Holo主题</string>
 
     <!-- Clear all recents positions -->
@@ -435,11 +435,11 @@
 
     <!-- Transparency management -->
     <string name="pref_cat_transparency_manager_title">透明度调整</string>
-    <string name="pref_cat_transparency_manager_summary">管理状态栏和导航栏的透明度</string>
+    <string name="pref_cat_transparency_manager_summary">管理状态栏和虚拟按键的透明度</string>
     <string name="pref_tm_statusbar_launcher_title">启动器下的状态栏透明度</string>
     <string name="pref_tm_statusbar_lockscreen_title">锁屏画面时的状态栏透明度</string>
-    <string name="pref_tm_navbar_launcher_title">启动器下的导航栏透明度</string>
-    <string name="pref_tm_navbar_lockscreen_title">锁屏画面时的导航栏透明度</string>
+    <string name="pref_tm_navbar_launcher_title">启动器下的虚拟按键透明度</string>
+    <string name="pref_tm_navbar_lockscreen_title">锁屏画面时的虚拟按键透明度</string>
 
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">隐藏闹钟图标</string>
@@ -488,9 +488,9 @@
     <!-- Expanded Desktop -->
     <string name="pref_expanded_desktop_title">扩展桌面模式</string>
     <string name="expanded_desktop_disabled">禁用</string>
-    <string name="expanded_desktop_navbar">隐藏导航栏</string>
+    <string name="expanded_desktop_navbar">隐藏虚拟按键</string>
     <string name="expanded_desktop_immersive_statusbar">浸式状态栏</string>
-    <string name="expanded_desktop_immersive_navbar">浸式导航栏</string>
+    <string name="expanded_desktop_immersive_navbar">浸式虚拟按键</string>
     <string name="expanded_desktop_both">半沉浸式</string>
     <string name="expanded_desktop_immersive">沉浸式</string>
     <string name="action_expanded_desktop_title">扩展桌面</string>
@@ -508,16 +508,16 @@
     <string name="hwkey_action_expanded_desktop_disabled">扩展桌面模式已禁用！</string>
 
     <!-- Navigation bar tweaks category -->
-    <string name="pref_cat_navigation_bar_title">导航栏调整</string>
-    <string name="pref_cat_navigation_bar_summary">包含各种与导航栏相关的调整选项</string>
-    <string name="pref_navbar_override_summary">导航栏调整总开关（需要重新启动）</string>
-    <string name="pref_navbar_enable_title">启用导航栏</string>
+    <string name="pref_cat_navigation_bar_title">虚拟按键调整</string>
+    <string name="pref_cat_navigation_bar_summary">包含各种与虚拟按键相关的调整选项</string>
+    <string name="pref_navbar_override_summary">虚拟按键调整总开关（需要重新启动）</string>
+    <string name="pref_navbar_enable_title">启用虚拟按键</string>
     <string name="pref_navbar_enable_summary">需要重新启动</string>
-    <string name="pref_navbar_height_title">导航栏高度</string>
-    <string name="pref_navbar_height_summary">适用于竖屏状态下的水平方向导航栏</string>
-    <string name="pref_navbar_height_landscape_summary">适用于横屏状态下的水平方向导航栏</string>
-    <string name="pref_navbar_width_title">导航栏宽度</string>
-    <string name="pref_navbar_width_summary">适用于横屏状态下的竖直方向导航栏</string>
+    <string name="pref_navbar_height_title">虚拟按键高度</string>
+    <string name="pref_navbar_height_summary">应用于虚拟按键竖屏和纵向</string>
+    <string name="pref_navbar_height_landscape_summary">应用于虚拟按键横屏和纵向</string>
+    <string name="pref_navbar_width_title">虚拟按键宽度</string>
+    <string name="pref_navbar_width_summary">应用于虚拟按键横屏和横向</string>
     <string name="pref_navbar_menukey_title">总是显示菜单键</string>
     
     <!-- Screenshot in power menu -->
@@ -561,7 +561,7 @@
     <string name="pie_controls_disabled">从不</string>
     <string name="pie_controls_enabled_always">总是</string>
     <string name="pie_controls_enabled_expanded">当扩展桌面开启时</string>
-    <string name="pie_controls_enabled_expanded_navbar">当扩展桌面隐藏导航栏时</string>
+    <string name="pie_controls_enabled_expanded_navbar">当扩展桌面隐藏虚拟按键时</string>
 
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">拔下电缆时开启屏幕</string>
@@ -673,9 +673,9 @@
         
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">应用程序启动器</string>
-    <string name="pref_cat_app_launcher_summary">允许定义最多12个应用程序，并分配至实体按键行为或作为额外的导航栏按键</string>
-    <string name="pref_app_launcher_slot_title">应用程序槽 %d</string>
-    <string name="app_launcher_no_apps">没有应用程序被分配，请使用GravityBox或应用程序启动器来分配应用程序</string>
+    <string name="pref_cat_app_launcher_summary">对话框允许定义最多12个应用程序，可以分配实体按键或作为额外的虚拟按键</string>
+    <string name="pref_app_launcher_slot_title">应用程序槽%d</string>
+    <string name="app_launcher_no_apps">没有应用程序被分配，请使用GravityBox应用程序启动器来分配应用</string>
 
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">显示应用程序启动器</string>
@@ -707,23 +707,23 @@
     
     <!-- Navbar tweaks categories -->
     <string name="pref_cat_navbar_general_title">普通</string>
-    <string name="pref_cat_navbar_keys_title">导航键</string>
+    <string name="pref_cat_navbar_keys_title">虚拟按键</string>
     <string name="pref_cat_navbar_color_title">颜色</string>
     <string name="pref_cat_navbar_dimen_title">大小</string>
     
     <!-- Navigation bar colors -->
-    <string name="pref_navbar_color_enable_title">启用导航栏颜色</string>
+    <string name="pref_navbar_color_enable_title">启用虚拟按键颜色</string>
     <string name="pref_navbar_color_enable_summary">禁用后可能需要重启</string>
-    <string name="pref_navbar_key_color_title">导航键颜色</string>
-    <string name="pref_navbar_key_glow_color_title">导航键发光颜色</string>
-    <string name="pref_navbar_bg_color_title">导航栏背景颜色</string>
+    <string name="pref_navbar_key_color_title">虚拟按键颜色</string>
+    <string name="pref_navbar_key_glow_color_title">虚拟按键发光颜色</string>
+    <string name="pref_navbar_bg_color_title">虚拟按键背景颜色</string>
         
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">透明度管理模式</string>
     <string name="pref_tm_mode_summary">需要重新启动</string>
     <string name="tm_mode_disabled">禁用</string>
     <string name="tm_mode_statusbar">状态栏</string>
-    <string name="tm_mode_navbar">导航栏</string>
+    <string name="tm_mode_navbar">虚拟按键</string>
     <string name="tm_mode_full">两者</string>
 
     <!-- Secondary signal icon color for MTK Dual SIMs -->
@@ -749,14 +749,14 @@
     <string name="pref_recent_clear_margin_bottom_title">调整底部边距</string>
 
     <!-- Google Plus -->
-    <string name="pref_about_gplus_title">Google+ 社群</string>
-    <string name="pref_about_gplus_summary">点击此处进入GravityBox的Google+社群</string>
+    <string name="pref_about_gplus_title">Google+ 社交</string>
+    <string name="pref_about_gplus_summary">点击这里进入GravityBox的Google+社交</string>
 
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">允许LTE网络模式</string>
 
     <!-- HW Keys Navigation Bar warning -->
-    <string name="hwkey_navbar_warning">为了启用导航栏行为支持，这需要覆盖导航栏调整菜单中的系统默认设置</string>
+    <string name="hwkey_navbar_warning">为了使实体按键操作支持，这需要覆盖系统默认实体按键中的调整菜单</string>
     
 
     <!-- Old GB to new GB one-time dialog -->
@@ -855,8 +855,8 @@
     
     <!-- Cursor control in navigation bar -->
     <string name="pref_navbar_cursor_control_title">光标控制键</string>
-    <string name="pref_navbar_cursor_control_summary">当显示键盘时，在导航栏中启用光标控制键</string>
-
+    <string name="pref_navbar_cursor_control_summary">当显示键盘时，在虚拟按键中启用光标控制键</string>
+    
     <!-- Volume rocker wake -->
     <string name="pref_volume_rocker_wake_title">音量键唤醒</string>
     <string name="volume_rocker_wake_default">系统默认</string>
@@ -1013,7 +1013,7 @@
 
     <!-- Navbar: always on bottom -->
     <string name="pref_navbar_always_on_bottom_title">总是在底部</string>
-    <string name="pref_navbar_always_on_bottom_summary">横向时强制导航栏在底部（需要重新启动）</string>
+    <string name="pref_navbar_always_on_bottom_summary">横向时强制虚拟按键在底部（需要重新启动）</string>
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">交换菜单键</string>
@@ -1564,7 +1564,7 @@
 
     <!-- Lockscreen: disable emergency call button -->
     <string name="pref_lockscreen_disable_ecb_title">禁用紧急呼叫按钮</string>
-    <string name="pref_lockscreen_disable_ecb_summary">请注意一切风险!!!!</string>
+    <string name="pref_lockscreen_disable_ecb_summary">请注意一切风险!</string>
 
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">选择目标应用程序后取消图标</string>
@@ -1606,8 +1606,8 @@
     <string name="pref_qs_battery_extended_title">扩展电池磁贴</string>
     <string name="pref_qs_battery_extended_summary">需要重新启动</string>
     <string name="pref_qs_battery_temp_unit_title">温度单位</string>
-    <string name="celsius">摄氏</string>
-    <string name="fahrenheit">华氏</string>
+    <string name="celsius">摄氏度</string>
+    <string name="fahrenheit">华氏度</string>
 
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">耳机动作</string>
@@ -1629,7 +1629,7 @@
     <string name="pref_lc_headsup_mode_title">浮动模式</string>
     <string name="lc_heads_up_default">默认</string>
     <string name="lc_heads_up_always">总是</string>
-    <string name="lc_heads_up_immersive">当扩展桌面时隐藏状态栏</string>
+    <string name="lc_heads_up_immersive">当状态栏隐藏</string>
     <string name="lc_heads_up_off">关闭</string>
 
     <!-- Statusbar: notification heads up category -->
@@ -1656,5 +1656,8 @@
     <string name="lc_active_screen_mode_nothing">仅唤醒屏幕</string>
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
+    
+    <!-- QS: Remote display tile -->
+    <string name="qs_tile_remote_display">远程显示</string>
 
 </resources>
