@@ -382,7 +382,7 @@
 
     <!-- Battery status in pie controls -->
     <string name="pie_battery_status_charging">正在充电:<xliff:g id="percent">%d</xliff:g>%%</string>
-    <string name="pie_battery_status_full">已充满!</string>
+    <string name="pie_battery_status_full">电量已充满!</string>
     <string name="pie_battery_status_discharging">剩余电量:<xliff:g id="percent">%d</xliff:g>%%</string>
 
     <!-- Phone status in pie controls -->
@@ -391,7 +391,7 @@
     <string name="pie_phone_status_emergency_only">仅限紧急呼叫</string>
 
     <!-- Pie Controls settings -->
-    <string name="pie_control_title">Pie Controls虚拟按键</string>
+    <string name="pie_control_title">Pie Controls虚拟按键调整</string>
     <string name="pie_control_enable_title">启用Pie Controls虚拟按键</string>
     <string name="pie_control_size_title">虚拟按键大小</string>
     <string name="pie_control_trigger_positions_title">触发位置</string>
@@ -1552,7 +1552,7 @@
 
     <!-- Lockscreen: disable emergency call button -->
     <string name="pref_lockscreen_disable_ecb_title">禁用紧急呼叫按钮</string>
-    <string name="pref_lockscreen_disable_ecb_summary">请注意一切风险!!!!</string>
+    <string name="pref_lockscreen_disable_ecb_summary">请注意一切风险!</string>
 
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">选择目标应用程序后取消图标</string>
@@ -1578,8 +1578,8 @@
     <string name="pref_qs_battery_extended_title">扩展电池磁贴</string>
     <string name="pref_qs_battery_extended_summary">需要重新启动</string>
     <string name="pref_qs_battery_temp_unit_title">温度单位</string>
-    <string name="celsius">摄氏</string>
-    <string name="fahrenheit">华氏</string>
+    <string name="celsius">摄氏度</string>
+    <string name="fahrenheit">华氏度</string>
 
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">耳机动作</string>
