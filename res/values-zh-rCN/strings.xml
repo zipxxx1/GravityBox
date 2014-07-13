@@ -735,19 +735,19 @@
     <string name="signal_color_mode_disabled">不使用颜色</string>
 
     <!-- Application launcher -->
-    <string name="pref_cat_app_launcher_title">程序启动器</string>
+    <string name="pref_cat_app_launcher_title">应用程序启动器</string>
     <string name="pref_cat_app_launcher_summary">对话框允许定义最多12个应用程序，可以分配实体按键或作为额外的虚拟按键</string>
-    <string name="pref_app_launcher_slot_title">应用程序槽 %d</string>
-    <string name="app_launcher_no_apps">没有应用程序被分配，请使用GravityBox程序启动器来分配应用</string>
+    <string name="pref_app_launcher_slot_title">应用程序槽%d</string>
+    <string name="app_launcher_no_apps">没有应用程序被分配，请使用GravityBox应用程序启动器来分配应用</string>
 
     <!-- HW Key Actions: application launcher -->
-    <string name="hwkey_action_app_launcher">显示程序启动器</string>
+    <string name="hwkey_action_app_launcher">显示应用程序启动器</string>
 
     <!-- Pie custom key -->
     <string name="pref_pie_control_custom_key_title">显示自定义按键</string>
     <string name="pie_custom_key_off">禁用</string>
     <string name="pie_custom_key_search">搜索</string>
-    <string name="pie_custom_key_app_launcher">程序启动器</string>
+    <string name="pie_custom_key_app_launcher">应用程序启动器</string>
 
     <!-- Pie colors -->
     <string name="pref_cat_pie_colors_title">Pie 颜色</string>
@@ -821,14 +821,14 @@
 
     <!-- Google Plus -->
     <string name="pref_about_gplus_title">Google+ 社交</string>
-    <string name="pref_about_gplus_summary">点击这里进入GravityBox的Google+ 社交</string>
+    <string name="pref_about_gplus_summary">点击这里进入GravityBox的Google+社交</string>
 
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">允许LTE网络模式</string>
 
     <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">禁用数据网络类型指示</string>
-    <string name="pref_disable_data_network_type_icons_summary">允许禁用信号条旁边的3G/G指示</string>
+    <string name="pref_disable_data_network_type_icons_title">禁用数据网络类型指示器</string>
+    <string name="pref_disable_data_network_type_icons_summary">允许禁用信号条旁边的3G/G指示器</string>
     
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">为了使实体按键操作支持，这需要覆盖系统默认实体按键中的调整菜单</string>
