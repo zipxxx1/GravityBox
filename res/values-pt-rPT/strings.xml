@@ -1607,7 +1607,7 @@
     <string name="pref_lc_headsup_mode_title">Modo Heads up</string>
     <string name="lc_heads_up_default">Predefinido</string>
     <string name="lc_heads_up_always">Sempre</string>
-    <string name="lc_heads_up_immersive">Quando o ambiente de trabalho expandido esconder a barra de status</string>
+    <string name="lc_heads_up_immersive">Quando a barra de status estiver ocultada</string>
     <string name="lc_heads_up_off">Desativado</string>
 
     <!-- Statusbar: notification heads up category -->
@@ -1634,5 +1634,8 @@
     <string name="lc_active_screen_mode_nothing">Ligar ecrã unicamente</string>
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
+
+    <!-- QS: Remote display tile -->
+    <string name="qs_tile_remote_display">Ecrã remoto</string>
 
 </resources>
