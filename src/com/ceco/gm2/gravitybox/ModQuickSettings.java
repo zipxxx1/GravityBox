@@ -46,7 +46,6 @@ import com.ceco.gm2.gravitybox.quicksettings.SmartRadioTile;
 import com.ceco.gm2.gravitybox.quicksettings.StayAwakeTile;
 import com.ceco.gm2.gravitybox.quicksettings.TileOrderActivity;
 import com.ceco.gm2.gravitybox.quicksettings.TorchTile;
-import com.ceco.gm2.gravitybox.quicksettings.GravityBoxTile;
 import com.ceco.gm2.gravitybox.quicksettings.SyncTile;
 import com.ceco.gm2.gravitybox.quicksettings.UsbTetherTile;
 import com.ceco.gm2.gravitybox.quicksettings.VolumeTile;
@@ -70,7 +69,6 @@ import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.IBinder;
-import android.provider.AlarmClock;
 import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -293,6 +291,17 @@ public class ModQuickSettings {
         return null;
     }
 
+    private static String getAospTileKey(View view) {
+        if (view == null) return null;
+
+        for (String key : mAospTileTags.keySet()) {
+            if (view.findViewWithTag(mAospTileTags.get(key)) != null) {
+                return key;
+            }
+        }
+        return null;
+    }
+
     private static void updateTileOrderAndVisibility() {
         if (mActiveTileKeys == null) {
             if (DEBUG) log("updateTileOrderAndVisibility: mActiveTileKeys is null - skipping");
@@ -374,7 +383,6 @@ public class ModQuickSettings {
                 17, res.getDisplayMetrics());
         final int imgResId = res.getIdentifier("image", "id", PACKAGE_NAME);
         final int rssiImgResId = res.getIdentifier("rssi_image", "id", PACKAGE_NAME);
-        final int batTvResId = res.getIdentifier("battery_textview", "id", PACKAGE_NAME);
 
         if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(context)) {
             switch (mNumColumns) {
@@ -413,7 +421,7 @@ public class ModQuickSettings {
                     textView.setTextSize(1, textSize);
                     textView.setSingleLine(false);
                     textView.setAllCaps(mQsTileLabelStyle == LabelStyle.ALLCAPS &&
-                            !(textView.getId() == batTvResId && 
+                            !("battery_textview".equals(getAospTileKey(viewGroup)) && 
                                     mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BATTERY_EXTENDED, false)));
                 }
 
