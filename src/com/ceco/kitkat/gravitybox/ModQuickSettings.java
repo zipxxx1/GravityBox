@@ -105,6 +105,7 @@ public class ModQuickSettings {
     private static final String CLASS_QS_MODEL_STATE = "com.android.systemui.statusbar.phone.QuickSettingsModel.State";
     private static final String CLASS_ROTATION_LOCK_CTRL = "com.android.systemui.statusbar.policy.RotationLockController";
     private static final String CLASS_ROTATION_POLICY = "com.android.internal.view.RotationPolicy";
+    private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
     private static final boolean DEBUG = false;
 
     private static final float STATUS_BAR_SWIPE_VERTICAL_MAX_PERCENTAGE = 0.025f;
@@ -647,6 +648,18 @@ public class ModQuickSettings {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mQsTileSpanDisable) {
                         param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(panelBarClass, "onPanelFullyOpened",
+                    CLASS_PANEL_VIEW, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mQuickSettings != null) {
+                        Object qsModel = XposedHelpers.getObjectField(mQuickSettings, "mModel");
+                        XposedHelpers.callMethod(qsModel, "updateRemoteDisplays");
+                        if (DEBUG) log("updateRemoteDisplays called");
                     }
                 }
             });
