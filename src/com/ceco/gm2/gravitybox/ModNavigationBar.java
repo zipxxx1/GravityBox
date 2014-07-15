@@ -311,7 +311,7 @@ public class ModNavigationBar {
                     resparam.res.setReplacement(PACKAGE_NAME, "drawable", key,
                             modRes.fwd(ic_map.get(key)));
                 } catch (Throwable t) {
-                    log("Drawable not found: " + key);
+                    if (DEBUG) log("Drawable not found: " + key);
                 }
             }
         }
