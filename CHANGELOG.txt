@@ -1,3 +1,27 @@
+Changelog 3.2.1 - 15/07/2014
+--------------------------------------
+- Fixed statusbar battery percentages showing 0 after reboot when extended battery tile is enabled
+- QuickSettings management:
+--- fixed extended battery tile for Android 4.2 (AOSP only)
+--- don't apply "All caps" text style to extended battery tile to always show mV instead of MV
+--- allow tile reordering activity on non-touchscreen devices
+- Updated layout in UNC quick search box to allow inputting non-English characters (thanks to momomok)
+- Launcher tweaks: adjusted for compatibility with GNL 3.5
+- Navigation bar: added option to show Android L icons (thanks to bgcngm)
+- Pie: slightly increased trigger swipe angle
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Italian translations (thanks to pesa1234)
+- Updated French translation (thanks to ch-vox)
+- Updated Polish translations (thanks to xtrem007)
+- Updated German translations (thanks to LibertyMarine)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Korean translations (thanks to SDKoongchi)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Slovak and Czech translations
+
 Changelog 3.2.0 - 24/06/2014
 --------------------------------------
 - Ultimate notification control:
