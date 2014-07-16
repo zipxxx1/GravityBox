@@ -1400,7 +1400,7 @@
     <string name="pref_lockscreen_show_pattern_error_summary">Mostrar rastro rojo al introducir patrón incorrecto</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">Esta característica es de prueba. Si la encuentras útil, puedes seguir usándola tras desbloquear el modo premium. Modo de prueba acaba tras %d reinicios.</string>
+    <string name="trial_info">Esta herramienta es para usuarios premium. Si la encuentras útil, puedes seguir usándola tras desbloquear el modo premium. Esta versión de prueba acaba tras %d reinicios.</string>
 
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">Ajustes predeterminados</string>
@@ -1586,5 +1586,8 @@
     <!-- Navbar keys: enable Android L icons -->
     <string name="pref_navbar_android_l_icons_enable_title">Activar iconos de navegación de Android L</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Remplaza los iconos de navegación predeterminados por los de Android L (requiere reinicio)</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Acción personalizada</string>
 
 </resources>
