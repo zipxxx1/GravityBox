@@ -1402,7 +1402,7 @@
     <string name="pref_lockscreen_show_pattern_error_summary">Mostrar rastro rojo al introducir patrón incorrecto</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">Esta característica es de prueba. Si la encuentras útil, puedes seguir usándola tras desbloquear el modo premium. Modo de prueba acaba tras %d reinicios.</string>
+    <string name="trial_info">Esta herramienta es para usuarios premium. Si la encuentras útil, puedes seguir usándola tras desbloquear el modo premium. Esta versión de prueba acaba tras %d reinicios.</string>
     
     <!-- Navbar: disable camera icon -->
     <string name="pref_navbar_camera_key_disable_title">Desactivar icono de cámara</string>
@@ -1567,7 +1567,7 @@
     
     <!-- QS: Compass tile -->
     <string name="qs_tile_compass">Brújula</string>
-    <string name="quick_settings_compass_off">Deshabilitar brújula</string>
+    <string name="quick_settings_compass_off">Brújula desactivada</string>
     <string name="quick_settings_compass_init">Inicializando&#8230;</string>
     <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
 
@@ -1625,7 +1625,7 @@
     <string name="pref_lc_headsup_mode_title">Modo Heads up</string>
     <string name="lc_heads_up_default">Predeterminado</string>
     <string name="lc_heads_up_always">Siempre</string>
-    <string name="lc_heads_up_immersive">Cuando el escritorio expandido oculte la barra de estado</string>
+    <string name="lc_heads_up_immersive">Cuando la barra de estado esté oculta</string>
     <string name="lc_heads_up_off">Desactivado</string>
     
     <!-- Statusbar: notification heads up category -->
@@ -1652,4 +1652,7 @@
     <string name="lc_active_screen_mode_nothing">Solo encender pantalla</string>
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
+    
+    <!-- QS: Remote display tile -->
+    <string name="qs_tile_remote_display">Pantalla remota</string>
 </resources>
