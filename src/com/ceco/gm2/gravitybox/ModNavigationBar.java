@@ -1104,7 +1104,6 @@ public class ModNavigationBar {
             final ArrayList<Object> newTargets = new ArrayList<Object>();
             final ArrayList<String> newDescriptions = new ArrayList<String>();
             final ArrayList<String> newDirections = new ArrayList<String>();
-            final int iconSizeDp = mRingTargetsBgStyle == BgStyle.NONE ? 50 : 45;
 
             final int dummySlotCount = isGlowPadVertical() ? 4 : 1;
             for (int i = 0; i < dummySlotCount; i++) {
@@ -1117,7 +1116,7 @@ public class ModNavigationBar {
                 if (i < GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGET.size()) {
                     String app = mPrefs.getString(
                             GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGET.get(i), null);
-                    AppInfo ai = GlowPadHelper.getAppInfo(context, app, iconSizeDp, mRingTargetsBgStyle);
+                    AppInfo ai = GlowPadHelper.getAppInfo(context, app, 55, mRingTargetsBgStyle);
                     newTargets.add(GlowPadHelper.createTargetDrawable(context, ai, mGlowPadViewClass));
                     newDescriptions.add(ai == null ? null : ai.name);
                     newDirections.add(null);
@@ -1147,13 +1146,12 @@ public class ModNavigationBar {
                     (ArrayList<Object>) XposedHelpers.getObjectField(mGlowPadView, "mTargetDrawables");
             final ArrayList<String> descs = 
                     (ArrayList<String>)XposedHelpers.getObjectField(mGlowPadView, "mTargetDescriptions");
-            final int iconSizeDp = mRingTargetsBgStyle == BgStyle.NONE ? 50 : 45;
             index++; // take dummy drawable at position 0 into account
             if (isGlowPadVertical()) {
                 index += 3;
             }
 
-            AppInfo ai = GlowPadHelper.getAppInfo(context, app, iconSizeDp, mRingTargetsBgStyle);
+            AppInfo ai = GlowPadHelper.getAppInfo(context, app, 55, mRingTargetsBgStyle);
             if (targets != null && targets.size() > index) {
                 targets.set(index, GlowPadHelper.createTargetDrawable(context, ai, mGlowPadViewClass));
                 if (DEBUG) log("Ring target at index " + index + " set to: " + (ai == null ? "null" : ai.name));

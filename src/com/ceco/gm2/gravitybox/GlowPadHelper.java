@@ -40,7 +40,6 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.ceco.gm2.gravitybox.preference.AppPickerPreference;
-import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -130,7 +129,6 @@ public class GlowPadHelper {
             }
 
             final Resources res = context.getResources();
-            boolean isGbShortcut = false;
             if (mode == AppPickerPreference.MODE_APP) {
                 PackageManager pm = context.getPackageManager();
                 ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
@@ -140,12 +138,11 @@ public class GlowPadHelper {
                 }
             } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
                 appInfo.name = appInfo.intent.getStringExtra("label");
-                isGbShortcut = appInfo.intent.getAction().equals(ShortcutActivity.ACTION_LAUNCH_ACTION);
             }
             if (appIcon != null) {
                 int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                        isGbShortcut ? 60 : iconSizeDp, res.getDisplayMetrics());
-                appIcon = createStyledBitmap(appIcon, sizePx, bgStyle, isGbShortcut);
+                        iconSizeDp, res.getDisplayMetrics());
+                appIcon = createStyledBitmap(appIcon, sizePx, bgStyle);
                 appInfo.icon = new BitmapDrawable(res, appIcon);
             }
 
@@ -158,7 +155,7 @@ public class GlowPadHelper {
         }
     }
 
-    private static Bitmap createStyledBitmap(Bitmap bitmap, int sizePx, BgStyle bgStyle, boolean isGbShortcut) {
+    private static Bitmap createStyledBitmap(Bitmap bitmap, int sizePx, BgStyle bgStyle) {
         bitmap = Bitmap.createScaledBitmap(bitmap, sizePx, sizePx, true);
 
         switch (bgStyle) {
@@ -166,7 +163,7 @@ public class GlowPadHelper {
             case DARK:
             case BLACK:
                 int bitmapSize = Math.max(bitmap.getWidth(), bitmap.getHeight());
-                int marginSize = Math.round(bitmapSize / (isGbShortcut ? 16f : 2.4f));
+                int marginSize = Math.round(bitmapSize / 3f);
                 int size = bitmapSize + marginSize;
 
                 Bitmap b = Bitmap.createBitmap(size, size, Config.ARGB_8888);
