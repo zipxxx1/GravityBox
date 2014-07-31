@@ -70,6 +70,7 @@ import android.content.res.Resources;
 import android.graphics.PointF;
 import android.location.LocationManager;
 import android.media.AudioManager;
+import android.media.MediaRouter;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.provider.AlarmClock;
@@ -111,6 +112,9 @@ public class ModQuickSettings {
     private static final float STATUS_BAR_SWIPE_VERTICAL_MAX_PERCENTAGE = 0.025f;
     private static final float STATUS_BAR_SWIPE_TRIGGER_PERCENTAGE = 0.05f;
     private static final float STATUS_BAR_SWIPE_MOVE_PERCENTAGE = 0.2f;
+
+    private static final int MR_ROUTE_TYPE_REMOTE_DISPLAY = 1 << 2;
+    private static final int MR_CALLBACK_FLAG_REQUEST_DISCOVERY = 1 << 2;
 
     private static Context mContext;
     private static Context mGbContext;
@@ -658,8 +662,25 @@ public class ModQuickSettings {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mQuickSettings != null) {
                         Object qsModel = XposedHelpers.getObjectField(mQuickSettings, "mModel");
+                        MediaRouter mr = (MediaRouter) XposedHelpers.getObjectField(qsModel, "mMediaRouter");
+                        mr.addCallback(MR_ROUTE_TYPE_REMOTE_DISPLAY , (MediaRouter.Callback) 
+                                XposedHelpers.getObjectField(qsModel, "mRemoteDisplayRouteCallback"),
+                                MR_CALLBACK_FLAG_REQUEST_DISCOVERY);
                         XposedHelpers.callMethod(qsModel, "updateRemoteDisplays");
                         if (DEBUG) log("updateRemoteDisplays called");
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(panelBarClass, "onAllPanelsCollapsed", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mQuickSettings != null) {
+                        Object qsModel = XposedHelpers.getObjectField(mQuickSettings, "mModel");
+                        MediaRouter mr = (MediaRouter) XposedHelpers.getObjectField(qsModel, "mMediaRouter");
+                        mr.removeCallback((MediaRouter.Callback) 
+                                XposedHelpers.getObjectField(qsModel, "mRemoteDisplayRouteCallback"));
+                        if (DEBUG) log("Remote Display route callback unregistered");
                     }
                 }
             });
@@ -1676,11 +1697,7 @@ public class ModQuickSettings {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final View tile = (View) param.args[0];
                     tile.setTag(mAospTileTags.get("remote_display_textview"));
-                    Object onPrepareListener = XposedHelpers.getObjectField(tile, "mOnPrepareListener");
-                    if (onPrepareListener != null) {
-                        XposedHelpers.callMethod(onPrepareListener, "onPrepare");
-                        XposedHelpers.callMethod(tile, "setOnPrepareListener", (Object)null);
-                    }
+                    XposedHelpers.callMethod(tile, "setOnPrepareListener", (Object)null);
                 }
             });
         } catch (Throwable t) {
