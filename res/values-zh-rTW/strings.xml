@@ -1627,4 +1627,7 @@
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
+    <!-- QS: Remote display tile -->
+    <string name="qs_tile_remote_display">遠端顯示</string>
+
 </resources>
