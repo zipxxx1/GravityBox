@@ -470,6 +470,14 @@ public class ModLedControl {
                     CLASS_STATUSBAR_NOTIFICATION, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    // disable heads up if notification is for different user in multi-user environment
+                    if (!(Boolean)XposedHelpers.callMethod(param.thisObject, "notificationIsForCurrentUser",
+                            param.args[0])) {
+                        if (DEBUG) log("HeadsUp: Notification is not for current user");
+                        param.setResult(false);
+                        return;
+                    }
+
                     prefs.reload();
 
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
