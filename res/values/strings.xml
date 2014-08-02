@@ -1422,7 +1422,7 @@
     <string name="lc_active_screen">Active Screen</string>
     <string name="lc_active_screen_info">Active Screen feature automatically turns on screen every 
         time new notification arrives. This will happen only in case screen is not covered 
-        (e.g. when device is not in the pocket). It optionally expands notification panel depending on 
+        (e.g. when device is not in the pocket). It optionally expands notification panel or shows heads up depending on 
         the current lock screen security policy and user preference. Be aware that Active Screen requires lock screen
         to be enabled.\nThe switch below is a master switch. After it\'s enabled, 
         additional configuration can be done on per-app basis</string>
@@ -1659,5 +1659,15 @@
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Remote display</string>
+
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Manages default settings of notifications for all apps that have no own per-app settings enabled</string>
+    <string name="pref_unc_perapp_settings_title">Per-app settings</string>
+    <string name="pref_unc_perapp_settings_summary">Manages settings of notifications on per-app basis overriding Default settings</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Manages common settings for Active Screen feature</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Manages Quiet hours for notifications</string>
 
 </resources>

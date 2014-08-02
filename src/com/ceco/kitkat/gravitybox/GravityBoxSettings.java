@@ -28,7 +28,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import com.ceco.kitkat.gravitybox.R;
-import com.ceco.kitkat.gravitybox.ledcontrol.LedControlActivity;
+import com.ceco.kitkat.gravitybox.ledcontrol.LedMainActivity;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings;
 import com.ceco.kitkat.gravitybox.preference.AppPickerPreference;
 import com.ceco.kitkat.gravitybox.preference.AutoBrightnessDialogPreference;
@@ -3025,9 +3025,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     Toast.makeText(getActivity(), R.string.settings_restore_no_backup, Toast.LENGTH_SHORT).show();
                 }
             } else if (PREF_LED_CONTROL.equals(pref.getKey())) {
-                intent = new Intent(getActivity(), LedControlActivity.class);
-                intent.putExtra(LedControlActivity.EXTRA_UUID_REGISTERED, sSystemProperties.uuidRegistered);
-                intent.putExtra(LedControlActivity.EXTRA_TRIAL_COUNTDOWN, sSystemProperties.uncTrialCountdown);
+                intent = new Intent(getActivity(), LedMainActivity.class);
+                intent.putExtra(LedMainActivity.EXTRA_UUID_REGISTERED, sSystemProperties.uuidRegistered);
+                intent.putExtra(LedMainActivity.EXTRA_TRIAL_COUNTDOWN, sSystemProperties.uncTrialCountdown);
             }
 
             if (intent != null) {

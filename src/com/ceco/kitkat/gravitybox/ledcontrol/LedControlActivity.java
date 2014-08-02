@@ -40,14 +40,10 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class LedControlActivity extends ListActivity implements ListItemActionHandler, OnItemClickListener {
 
     private static final int REQ_SETTINGS = 1;
-    private static final int REQ_SETTINGS_DEFAULT = 2;
-    public static final String EXTRA_UUID_REGISTERED = "uuidRegistered";
-    public static final String EXTRA_TRIAL_COUNTDOWN = "uncTrialCountdown";
 
     private ListView mList;
     private AsyncTask<Void, Void, ArrayList<LedListItem>> mAsyncTask;
@@ -55,9 +51,6 @@ public class LedControlActivity extends ListActivity implements ListItemActionHa
     private LedListItem mCurrentItem;
     private EditText mSearchEditText;
     private boolean mShowActiveOnly;
-    private TextView mTrialInfoView;
-    private boolean mUuidRegistered;
-    private int mTrialCountdown;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,19 +61,6 @@ public class LedControlActivity extends ListActivity implements ListItemActionHa
 
         super.onCreate(savedInstanceState);
 
-        if (getIntent() == null || !getIntent().hasExtra(EXTRA_UUID_REGISTERED) ||
-                !getIntent().hasExtra(EXTRA_TRIAL_COUNTDOWN)) {
-            finish();
-            return;
-        } else {
-            mUuidRegistered = getIntent().getBooleanExtra(EXTRA_UUID_REGISTERED, false);
-            mTrialCountdown = getIntent().getIntExtra(EXTRA_TRIAL_COUNTDOWN, 0);
-            if (!mUuidRegistered && mTrialCountdown == 0) {
-                finish();
-                return;
-            }
-        }
-
         if (savedInstanceState != null) {
             mShowActiveOnly = savedInstanceState.getBoolean("showActiveOnly", false);
         }
@@ -89,12 +69,6 @@ public class LedControlActivity extends ListActivity implements ListItemActionHa
 
         mList = getListView();
         mList.setOnItemClickListener(this);
-
-        mTrialInfoView = (TextView) findViewById(R.id.trial_info);
-        if (!mUuidRegistered) {
-            mTrialInfoView.setText(String.format(getString(R.string.trial_info), mTrialCountdown));
-            mTrialInfoView.setVisibility(View.VISIBLE);
-        }
 
         mSearchEditText = (EditText) findViewById(R.id.input_search);
         mSearchEditText.addTextChangedListener(new TextWatcher() {
@@ -137,19 +111,6 @@ public class LedControlActivity extends ListActivity implements ListItemActionHa
             case R.id.lc_activity_menu_show_active:
                 mShowActiveOnly = true;
                 setData();
-                return true;
-            case R.id.lc_activity_menu_default_settings:
-                Intent intent = new Intent(this, LedSettingsActivity.class);
-                intent.putExtra(LedSettingsActivity.EXTRA_PACKAGE_NAME, "default");
-                intent.putExtra(LedSettingsActivity.EXTRA_APP_NAME, 
-                        getString(R.string.lc_activity_menu_default_settings));
-                startActivityForResult(intent, REQ_SETTINGS_DEFAULT);
-                return true;
-            case R.id.lc_activity_menu_active_screen:
-                startActivity(new Intent(this, ActiveScreenActivity.class));
-                return true;
-            case R.id.lc_activity_menu_quiet_hours:
-                startActivity(new Intent(this, QuietHoursActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -248,13 +209,6 @@ public class LedControlActivity extends ListActivity implements ListItemActionHa
                 mCurrentItem.refreshLedSettings();
                 mList.invalidateViews();
             }
-        }
-
-        if (requestCode == REQ_SETTINGS_DEFAULT && resultCode == RESULT_OK) {
-            for (int i = 0; i < mList.getCount(); i++) {
-                ((LedListItem)mList.getItemAtPosition(i)).refreshLedSettings();
-            }
-            mList.invalidateViews();
         }
     }
 

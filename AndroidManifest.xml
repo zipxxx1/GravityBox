@@ -75,8 +75,13 @@
         </activity>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.ledcontrol.LedControlActivity"
+            android:name="com.ceco.kitkat.gravitybox.ledcontrol.LedMainActivity"
             android:label="@string/pref_led_control_title" >
+        </activity>
+
+        <activity
+            android:name="com.ceco.kitkat.gravitybox.ledcontrol.LedControlActivity"
+            android:label="@string/pref_unc_perapp_settings_title" >
         </activity>
 
         <activity
