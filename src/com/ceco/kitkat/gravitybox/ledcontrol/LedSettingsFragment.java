@@ -144,6 +144,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         updateSoundPrefSummary();
         if (ledSettings.getPackageName().equals("default")) {
             mDefaultSettingsPref.setChecked(ledSettings.getEnabled());
+            mHeadsUpCat.removePreference(mHeadsUpDndPref);
         } else {
             mDefaultSettingsPref.setChecked(false);
             getPreferenceScreen().removePreference(mDefaultSettingsPref);

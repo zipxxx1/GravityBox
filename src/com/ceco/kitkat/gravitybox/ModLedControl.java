@@ -716,10 +716,6 @@ public class ModLedControl {
         final XSharedPreferences uncPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
         if(!uncPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && pkgName != null) {
             LedSettings ls = LedSettings.deserialize(uncPrefs.getStringSet(pkgName, null));
-            if (!ls.getEnabled()) {
-                // fall back to default settings
-                ls = LedSettings.deserialize(uncPrefs.getStringSet("default", null));
-            }
             return (ls.getEnabled() && ls.getHeadsUpDnd());
         } else {
             return false;
