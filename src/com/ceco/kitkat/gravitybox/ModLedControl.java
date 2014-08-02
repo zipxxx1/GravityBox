@@ -483,7 +483,7 @@ public class ModLedControl {
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
                     View headsUpView = (View) XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
-                    int sysUiVis = XposedHelpers.getIntField(param.thisObject, "mSystemUiVisibility");
+                    int statusBarWindowState = XposedHelpers.getIntField(param.thisObject, "mStatusBarWindowState");
 
                     boolean showHeadsUp = false;
 
@@ -524,7 +524,7 @@ public class ModLedControl {
                                 showHeadsUp = false; 
                                 break;
                             case IMMERSIVE:
-                                showHeadsUp = isStatusBarHidden(sysUiVis) && isHeadsUpAllowed(context);
+                                showHeadsUp = isStatusBarHidden(statusBarWindowState) && isHeadsUpAllowed(context);
                                 break;
                         }
                     }
@@ -533,7 +533,7 @@ public class ModLedControl {
                         if (mHeadsUpHandler != null) {
                             mHeadsUpHandler.removeCallbacks(mHeadsUpHideRunnable);
                         }
-                        maybeUpdateHeadsUpLayout(context, headsUpView, isStatusBarHidden(sysUiVis) ? 0 :
+                        maybeUpdateHeadsUpLayout(context, headsUpView, isStatusBarHidden(statusBarWindowState) ? 0 :
                             (Integer) XposedHelpers.callMethod(param.thisObject, "getStatusBarHeight"),
                             n.extras.getInt(NOTIF_EXTRA_HEADS_UP_GRAVITY, Gravity.TOP));
                     }
@@ -690,9 +690,8 @@ public class ModLedControl {
                 !shouldNotDisturb(context));
     }
 
-    private static boolean isStatusBarHidden(int systemUiVisibility) {
-        return ((systemUiVisibility & View.SYSTEM_UI_FLAG_FULLSCREEN) ==
-                View.SYSTEM_UI_FLAG_FULLSCREEN);
+    private static boolean isStatusBarHidden(int statusBarWindowState) {
+        return (statusBarWindowState != 0);
     }
 
     private static boolean isNonIntrusiveIncomingCallNotification(Notification n) {
