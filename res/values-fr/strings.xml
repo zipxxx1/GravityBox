@@ -1422,7 +1422,7 @@
     <string name="lc_active_screen">Écran Actif</string>
     <string name="lc_active_screen_info">L\'option Écran Actif allume automatiquement l\'écran à chaque fois 
         qu\'une nouvelle notification arrive. Cela se produira seulement si l\'écran n\'est pas recouvert
-        (ex : lorsque l\'appareil est dans la poche). Elle peut dérouler le panneau de notification en option selon
+        (ex : lorsque l\'appareil est dans la poche). Elle peut en option dérouler le panneau de notification ou afficher une fenêtre flottante selon
         la politique de sécurité de l\'écran de déverrouillage et les préférences utilisateur. Attention, l\'Écran Actif nécessite 
         que l\'écran de déverrouillage soit actif. L\'interrupteur en-dessous est l\'interrupteur principal. Après qu\'il soit enclenché, 
         la configuration précise par application peut être effectuée</string>
@@ -1660,4 +1660,13 @@
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Affichage à distance</string>
 
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Gère les paramètres par défaut des notifications pour les applications qui n\'ont pas leurs propres paramètres par-appli activés</string>
+    <string name="pref_unc_perapp_settings_title">Paramètres par-appli</string>
+    <string name="pref_unc_perapp_settings_summary">Gère les paramètres des notifications application par application en remplaçant les paramètres par défaut</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Gère les paramètres communs pour l\'option Écran Actif</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Gère les Heures silencieuses pour les notifications</string>
 </resources>
