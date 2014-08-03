@@ -430,10 +430,6 @@
     <string name="hwkey_home_longpress_dialog_title">ضغطة مطولة على زر المنزل</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">تشغيل تطبيق مخصص 1</string>
-    <string name="pref_hwkey_custom_app_title">تعيين تطبيق مخصص 1</string>
-    <string name="hwkey_action_custom_app2">تشغيل تطبيق مخصص 2</string>
-    <string name="pref_hwkey_custom_app_title2">تعيين تطبيق مخصص 2</string>
     <string name="hwkey_action_custom_app_none">لم يتم تعيين تطبيق!</string>
     <string name="hwkey_action_custom_app_missing">لم يتم العثور على التطبيق!</string>
 

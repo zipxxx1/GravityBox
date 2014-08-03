@@ -447,10 +447,6 @@
     <string name="hwkey_home_longpress_dialog_title">ホームキー長押しアクション</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">カスタムアプリ1を起動</string>
-    <string name="pref_hwkey_custom_app_title">カスタムアプリ1をセット</string>
-    <string name="hwkey_action_custom_app2">カスタムアプリ2を起動</string>
-    <string name="pref_hwkey_custom_app_title2">カスタムアプリ2をセット</string>
     <string name="hwkey_action_custom_app_none">セットされていません!</string>
     <string name="hwkey_action_custom_app_missing">アプリが見つかりません!</string>
 

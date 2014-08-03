@@ -272,10 +272,6 @@
     <string name="pref_brightness_master_switch_summary">"Включити тільки у випадку, якщо пристрій використовує стандартний механізм Android для регулювання яскравості. Залиште вимкненим, якщо є проблеми, якось пов'язані з яскравістю. (Необхідна перезавантаження)"</string>
     <string name="hwkey_action_recent_apps">Показати нещодавні додатки</string>
     <string name="hwkey_home_longpress_dialog_title">Дія за довгому натисненню Головна</string>
-    <string name="hwkey_action_custom_app">Запустити додаток 1</string>
-    <string name="pref_hwkey_custom_app_title">Вибрати додаток 1</string>
-    <string name="hwkey_action_custom_app2">Запустити програму 2</string>
-    <string name="pref_hwkey_custom_app_title2">Вибрати додаток 2</string>
     <string name="hwkey_action_custom_app_none">Додаток не вибрано!</string>
     <string name="hwkey_action_custom_app_missing">Додаток не знайдено!</string>
     <string name="pref_clock_link_title">Додаток-годинник для панелі повідомлень</string>

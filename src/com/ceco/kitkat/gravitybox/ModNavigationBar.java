@@ -82,10 +82,10 @@ public class ModNavigationBar {
     private static View mNavigationBarView;
     private static Object[] mRecentsKeys;
     private static HomeKeyInfo[] mHomeKeys;
-    private static int mRecentsSingletapActionBck = 0;
-    private static int mRecentsLongpressActionBck = 0;
-    private static int mRecentsSingletapAction = 0;
-    private static int mRecentsLongpressAction = 0;
+    private static ModHwKeys.HwKeyAction mRecentsSingletapActionBck = new ModHwKeys.HwKeyAction(0, null);
+    private static ModHwKeys.HwKeyAction mRecentsLongpressActionBck = new ModHwKeys.HwKeyAction(0, null);;
+    private static ModHwKeys.HwKeyAction mRecentsSingletapAction = new ModHwKeys.HwKeyAction(0, null);
+    private static ModHwKeys.HwKeyAction mRecentsLongpressAction = new ModHwKeys.HwKeyAction(0, null);
     private static int mHomeLongpressAction = 0;
     private static boolean mHwKeysEnabled;
     private static boolean mCursorControlEnabled;
@@ -217,15 +217,23 @@ public class ModNavigationBar {
                     updateCustomKeyIcon();
                 }
             } else if (intent.getAction().equals(
-                    GravityBoxSettings.ACTION_PREF_HWKEY_RECENTS_SINGLETAP_CHANGED)) {
-                mRecentsSingletapAction = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
+                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) && 
+                    GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP.equals(intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_HWKEY_KEY))) {
+                mRecentsSingletapAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
+                mRecentsSingletapAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
                 updateRecentsKeyCode();
             } else if (intent.getAction().equals(
-                    GravityBoxSettings.ACTION_PREF_HWKEY_RECENTS_LONGPRESS_CHANGED)) {
-                mRecentsLongpressAction = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
+                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
+                    GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS.equals(intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_HWKEY_KEY))) {
+                mRecentsLongpressAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
+                mRecentsLongpressAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
                 updateRecentsKeyCode();
             } else if (intent.getAction().equals(
-                    GravityBoxSettings.ACTION_PREF_HWKEY_HOME_LONGPRESS_CHANGED)) {
+                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
+                    GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS.equals(intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_HWKEY_KEY))) {
                 mHomeLongpressAction = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
                 updateHomeKeyLongpressSupport();
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED) && 
@@ -342,12 +350,16 @@ public class ModNavigationBar {
             mRingTargetsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGETS_ENABLE, false);
 
             try {
-                mRecentsSingletapAction = Integer.valueOf(
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP, "0"));
-                mRecentsLongpressAction = Integer.valueOf(
-                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0"));
-                mRecentsSingletapActionBck = mRecentsSingletapAction;
-                mRecentsLongpressActionBck = mRecentsLongpressAction;
+                mRecentsSingletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP, "0")),
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP+"_custom", null));
+                mRecentsLongpressAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
+                mRecentsSingletapActionBck.actionId = mRecentsSingletapAction.actionId;
+                mRecentsSingletapActionBck.customApp = mRecentsSingletapAction.customApp;
+                mRecentsLongpressActionBck.actionId = mRecentsLongpressAction.actionId;
+                mRecentsLongpressActionBck.customApp = mRecentsLongpressAction.customApp;
                 mHomeLongpressAction = Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS, "0"));
             } catch (NumberFormatException nfe) {
@@ -409,9 +421,7 @@ public class ModNavigationBar {
                     mNavigationBarView = (View) param.thisObject;
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_RECENTS_SINGLETAP_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_RECENTS_LONGPRESS_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_HOME_LONGPRESS_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_PIE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_SWAP_KEYS);
                     intentFilter.addAction(ModClearAllRecents.NAVBAR_RECENTS_CLEAR_ALL);
@@ -944,16 +954,19 @@ public class ModNavigationBar {
 
         if (mRecentAlt) {
             mRecentBtn.setImageDrawable(mNavbarVertical ? mRecentAltLandIcon : mRecentAltIcon);
-            if (mRecentsSingletapAction != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP &&
-                    mRecentsSingletapAction != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS) {
-                mRecentsSingletapActionBck = mRecentsSingletapAction;
+            if (mRecentsSingletapAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP &&
+                    mRecentsSingletapAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS) {
+                mRecentsSingletapActionBck.actionId = mRecentsSingletapAction.actionId;
+                mRecentsSingletapActionBck.customApp = mRecentsSingletapAction.customApp;
             }
-            if (mRecentsLongpressAction != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP &&
-                    mRecentsLongpressAction != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS) {
-                mRecentsLongpressActionBck = mRecentsLongpressAction;
+            if (mRecentsLongpressAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP &&
+                    mRecentsLongpressAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS) {
+                mRecentsLongpressActionBck.actionId = mRecentsLongpressAction.actionId;
+                mRecentsLongpressActionBck.customApp = mRecentsLongpressAction.customApp;
             }
-            broadcastRecentsActions(mRecentBtn.getContext(), GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP, 
-                    GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS);
+            broadcastRecentsActions(mRecentBtn.getContext(),
+                    new ModHwKeys.HwKeyAction(GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP, null), 
+                    new ModHwKeys.HwKeyAction(GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS, null));
         } else {
             mRecentBtn.post(resetRecentKeyStateRunnable);
         }
@@ -971,18 +984,23 @@ public class ModNavigationBar {
         }
     };
 
-    private static void broadcastRecentsActions(Context context, int singleTapAction, int longPressAction) {
+    private static void broadcastRecentsActions(Context context, ModHwKeys.HwKeyAction singleTapAction, 
+            ModHwKeys.HwKeyAction longPressAction) {
         if (context == null) return;
 
         Intent intent;
         intent = new Intent();
-        intent.setAction(GravityBoxSettings.ACTION_PREF_HWKEY_RECENTS_SINGLETAP_CHANGED);
-        intent.putExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, singleTapAction);
+        intent.setAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
+        intent.putExtra(GravityBoxSettings.EXTRA_HWKEY_KEY, GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_SINGLETAP);
+        intent.putExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, singleTapAction.actionId);
+        intent.putExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP, singleTapAction.customApp);
         context.sendBroadcast(intent);
 
         intent = new Intent();
-        intent.setAction(GravityBoxSettings.ACTION_PREF_HWKEY_RECENTS_LONGPRESS_CHANGED);
-        intent.putExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, longPressAction);
+        intent.setAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
+        intent.putExtra(GravityBoxSettings.EXTRA_HWKEY_KEY, GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS);
+        intent.putExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, longPressAction.actionId);
+        intent.putExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP, longPressAction.customApp);
         context.sendBroadcast(intent);
     }
 
@@ -1036,8 +1054,8 @@ public class ModNavigationBar {
     }
 
     private static boolean recentsKeyHasAction() {
-        return (mRecentsSingletapAction != 0 ||
-                mRecentsLongpressAction != 0 ||
+        return (mRecentsSingletapAction.actionId != 0 ||
+                mRecentsLongpressAction.actionId != 0 ||
                 !mHwKeysEnabled);
     }
 

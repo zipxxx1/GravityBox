@@ -354,10 +354,6 @@
 
     <string name="hwkey_home_longpress_dialog_title">홈 키를 길게 누를 때</string>
 
-    <string name="hwkey_action_custom_app">사용자 지정 앱 1 실행</string>
-    <string name="pref_hwkey_custom_app_title">사용자 지정 앱 1 설정</string>
-    <string name="hwkey_action_custom_app2">사용자 지정 앱 2 실행</string>
-    <string name="pref_hwkey_custom_app_title2">사용자 지정 앱 2 설정</string>
     <string name="hwkey_action_custom_app_none">사용자 지정 앱이 설정되지 않았습니다!</string>
     <string name="hwkey_action_custom_app_missing">사용자 지정 앱을 찾을 수 없습니다!</string>
 

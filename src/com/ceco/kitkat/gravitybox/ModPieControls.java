@@ -154,11 +154,6 @@ public class ModPieControls {
                     mPieController.setTextColor(intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_COLOR_TEXT,
                             mGbContext.getResources().getColor(R.color.pie_text_color)));
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_BUTTON) &&
-                        intent.hasExtra(GravityBoxSettings.EXTRA_PIE_LONGPRESS_ACTION)) {
-                    mPieController.setLongPressAction(intent.getStringExtra(GravityBoxSettings.EXTRA_PIE_BUTTON),
-                            intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_LONGPRESS_ACTION, 0));
-                }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_SYSINFO_DISABLE)) {
                     mPieController.setSysinfoDisabled(intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_PIE_SYSINFO_DISABLE, false));
@@ -179,9 +174,35 @@ public class ModPieControls {
                 mExpandedDesktopMode = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
                 attachPie();
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED)) {
+                String key = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_KEY);
+                String btnName = getButtonNameFromKey(key);
+                if (btnName != null) {
+                    int value = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 
+                        GravityBoxSettings.HWKEY_ACTION_DEFAULT);
+                    String customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
+                    mPieController.setLongPressAction(getButtonNameFromKey(key), value, customApp);
+                }
             }
         }
     };
+
+    private static String getButtonNameFromKey(String key) {
+        if (GravityBoxSettings.PREF_KEY_PIE_APP_LONGPRESS.equals(key))
+            return "APP_LAUNCHER";
+        else if (GravityBoxSettings.PREF_KEY_PIE_BACK_LONGPRESS.equals(key))
+            return "BACK";
+        else if (GravityBoxSettings.PREF_KEY_PIE_HOME_LONGPRESS.equals(key))
+            return "HOME";
+        else if (GravityBoxSettings.PREF_KEY_PIE_MENU_LONGPRESS.equals(key))
+            return "MENU";
+        else if (GravityBoxSettings.PREF_KEY_PIE_RECENTS_LONGPRESS.equals(key))
+            return "RECENT";
+        else if (GravityBoxSettings.PREF_KEY_PIE_SEARCH_LONGPRESS.equals(key))
+            return "SEARCH";
+        else 
+            return null;
+    }
 
     private static int getTriggerSlotsFromArray(String[] triggers) {
         int tslots = 0;
@@ -319,6 +340,7 @@ public class ModPieControls {
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_PIE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new PieSettingsObserver(new Handler());

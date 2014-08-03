@@ -106,6 +106,8 @@ public class AppPickerPreference extends DialogPreference
     private Dialog mIconPickerDialog;
     private boolean mIconPickerEnabled = true;
     private int mIconPickSizePx;
+    private boolean mNullItemEnabled = true;
+    private String mValue;
 
     private static LruCache<String, BitmapDrawable> sAppIconCache;
     static {
@@ -144,6 +146,7 @@ public class AppPickerPreference extends DialogPreference
 
         if (attrs != null) {
             mIconPickerEnabled = attrs.getAttributeBooleanValue(null, "iconPickerEnabled", true);
+            mNullItemEnabled = attrs.getAttributeBooleanValue(null, "nullItemEnabled", true);
         }
 
         setDialogLayoutResource(R.layout.app_picker_preference);
@@ -235,6 +238,10 @@ public class AppPickerPreference extends DialogPreference
         mMode = mModeSpinner.getSelectedItemPosition();
 
         setData();
+    }
+
+    public void show() {
+        showDialog(null);
     }
 
     @Override
@@ -411,9 +418,11 @@ public class AppPickerPreference extends DialogPreference
                 }
 
                 Collections.sort(appList, new ResolveInfo.DisplayNameComparator(mPackageManager));
-                itemList.add(mMode == MODE_SHORTCUT ? 
+                if (mNullItemEnabled) {
+                    itemList.add(mMode == MODE_SHORTCUT ? 
                         new ShortcutItem(mContext.getString(R.string.app_picker_none), null) :
                         new AppItem(mContext.getString(R.string.app_picker_none), null));
+                }
                 for (ResolveInfo ri : appList) {
                     if (this.isCancelled()) break;
                     String appName = ri.loadLabel(mPackageManager).toString();
@@ -437,13 +446,18 @@ public class AppPickerPreference extends DialogPreference
         }.execute();
     }
 
-    private void setValue(String value){
-        persistString(value);
+    public void setValue(String value){
+        mValue = value;
         mAppInfo = getAppInfoFromValue(value);
         setSummary(mAppInfo.name);
         if (mBtnAppIcon != null) {
             mBtnAppIcon.setImageDrawable(mAppInfo.icon);
         }
+        persistString(value);
+    }
+
+    public String getValue() {
+        return mValue;
     }
 
     @Override

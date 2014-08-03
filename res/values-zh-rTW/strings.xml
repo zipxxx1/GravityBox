@@ -463,10 +463,6 @@
     <string name="hwkey_home_longpress_dialog_title">Home 鍵長按動作</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">執行自訂應用程式 1</string>
-    <string name="pref_hwkey_custom_app_title">設定自訂應用程式 1</string>
-    <string name="hwkey_action_custom_app2">執行自訂應用程式 2</string>
-    <string name="pref_hwkey_custom_app_title2">設定自訂應用程式 2</string>
     <string name="hwkey_action_custom_app_none">沒有指定應用程式！</string>
     <string name="hwkey_action_custom_app_missing">找不到已設定的自訂應用程式！（請確定已安裝該應用程式）</string>
 

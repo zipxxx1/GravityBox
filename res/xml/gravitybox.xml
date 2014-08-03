@@ -2008,18 +2008,6 @@
                 android:entryValues="@array/hwkey_ls_torch_values"
                 android:defaultValue="0" />
 
-            <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
-                android:key="pref_hwkey_custom_app"
-                android:title="@string/pref_hwkey_custom_app_title"
-                android:summary="@string/app_picker_none"
-                iconPickerEnabled="false" />
-
-            <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
-                android:key="pref_hwkey_custom_app2"
-                android:title="@string/pref_hwkey_custom_app_title2"
-                android:summary="@string/app_picker_none"
-                iconPickerEnabled="false" />
-
             <ListPreference
                 android:key="pref_hwkey_doubletap_speed"
                 android:title="@string/pref_hwkey_doubletap_speed_title"
@@ -2293,5 +2281,13 @@
             android:persistent="false" />
 
     </PreferenceScreen>
+
+    <!-- Hidden preference helper for Key Actions / Custom action -->
+    <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
+        android:key="pref_hwkey_custom_app"
+        android:title="@string/hwkey_action_custom"
+        android:summary="@string/app_picker_none"
+        iconPickerEnabled="false"
+        nullItemEnabled="false" />
 
 </PreferenceScreen>

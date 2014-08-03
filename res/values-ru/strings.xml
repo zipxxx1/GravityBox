@@ -463,10 +463,6 @@
     <string name="hwkey_home_longpress_dialog_title">Удержание Домой</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">Запустить приложение 1</string>
-    <string name="pref_hwkey_custom_app_title">Выбрать приложение 1</string>
-    <string name="hwkey_action_custom_app2">Запустить приложение 2</string>
-    <string name="pref_hwkey_custom_app_title2">Выбрать приложение 2</string>
     <string name="hwkey_action_custom_app_none">Приложение не выбрано!</string>
     <string name="hwkey_action_custom_app_missing">Приложение не найдено!</string>
 

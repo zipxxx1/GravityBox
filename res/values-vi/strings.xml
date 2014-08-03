@@ -429,10 +429,6 @@
     <string name="hwkey_home_longpress_dialog_title">Hoạt động giữ phím HOME</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">Chuyển tới ứng dụng tùy chỉnh 1</string>
-    <string name="pref_hwkey_custom_app_title">Cài đặt ứng dụng tùy chỉnh 1</string>
-    <string name="hwkey_action_custom_app2">Chuyển tới ứng dụng tùy chỉnh 2</string>
-    <string name="pref_hwkey_custom_app_title2">Cài đặt ứng dụng tùy chỉnh 2</string>
     <string name="hwkey_action_custom_app_none">Không có ứng dụng tùy chỉnh được thiết lập!</string>
     <string name="hwkey_action_custom_app_missing">Ứng dụng tùy chỉnh không tìm thấy!</string>
 

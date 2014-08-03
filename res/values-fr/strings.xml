@@ -463,10 +463,6 @@
     <string name="hwkey_home_longpress_dialog_title">Appui long touche Home</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">Lancer l\'appli personnalisée 1</string>
-    <string name="pref_hwkey_custom_app_title">Définir l\'appli personnalisée 1</string>
-    <string name="hwkey_action_custom_app2">Lancer l\'appli personnalisée 2</string>
-    <string name="pref_hwkey_custom_app_title2">Définir l\'appli personnalisée 2</string>
     <string name="hwkey_action_custom_app_none">Aucune appli personnalisée attribuée !</string>
     <string name="hwkey_action_custom_app_missing">Appli personnalisée introuvable !</string>
 
