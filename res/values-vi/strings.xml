@@ -506,12 +506,8 @@
     <string name="hwkey_home_longpress_dialog_title">Bấm-giữ nút Home</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">Mở ứng dụng 1</string>
-    <string name="pref_hwkey_custom_app_title">Đặt ứng dụng 1</string>
-    <string name="hwkey_action_custom_app2">Mở ứng dụng 2</string>
-    <string name="pref_hwkey_custom_app_title2">Đặt ứng dụng 2</string>
-    <string name="hwkey_action_custom_app_none">Chưa đặt ứng dụng nào!</string>
-    <string name="hwkey_action_custom_app_missing">Không tìm thấy ứng dụng!</string>
+    <string name="hwkey_action_custom_app_none">Không có ứng dụng tùy chỉnh được thiết lập!</string>
+    <string name="hwkey_action_custom_app_missing">Ứng dụng tùy chỉnh không tìm thấy!</string>
 
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Đồng hồ thanh trạng thái</string>

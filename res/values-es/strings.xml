@@ -505,10 +505,6 @@
     <string name="hwkey_home_longpress_dialog_title">Acción con pulsación larga en botón inicio</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">Lanzar app 1</string>
-    <string name="pref_hwkey_custom_app_title">Establecer app 1</string>
-    <string name="hwkey_action_custom_app2">Lanzar app 2</string>
-    <string name="pref_hwkey_custom_app_title2">Establecer app 2</string>
     <string name="hwkey_action_custom_app_none">Aplicación no asignada</string>
     <string name="hwkey_action_custom_app_missing">Aplicación no encontrada</string>
 

@@ -332,7 +332,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HWKEY_RECENTS_SINGLETAP = "pref_hwkey_recents_singletap";
     public static final String PREF_KEY_HWKEY_RECENTS_LONGPRESS = "pref_hwkey_recents_longpress";
     public static final String PREF_KEY_HWKEY_CUSTOM_APP = "pref_hwkey_custom_app";
-    public static final String PREF_KEY_HWKEY_CUSTOM_APP2 = "pref_hwkey_custom_app2";
     public static final String PREF_KEY_HWKEY_DOUBLETAP_SPEED = "pref_hwkey_doubletap_speed";
     public static final String PREF_KEY_HWKEY_KILL_DELAY = "pref_hwkey_kill_delay";
     public static final String PREF_CAT_HWKEY_VOLUME = "pref_cat_hwkey_volume";
@@ -347,8 +346,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int HWKEY_ACTION_KILL = 4;
     public static final int HWKEY_ACTION_SLEEP = 5;
     public static final int HWKEY_ACTION_RECENT_APPS = 6;
-    public static final int HWKEY_ACTION_CUSTOM_APP = 7;
-    public static final int HWKEY_ACTION_CUSTOM_APP2 = 8;
     public static final int HWKEY_ACTION_MENU = 9;
     public static final int HWKEY_ACTION_EXPANDED_DESKTOP = 10;
     public static final int HWKEY_ACTION_TORCH = 11;
@@ -364,6 +361,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int HWKEY_ACTION_LAUNCHER_DRAWER = 21;
     public static final int HWKEY_ACTION_BRIGHTNESS_DIALOG = 22;
     public static final int HWKEY_ACTION_INAPP_SEARCH = 23;
+    public static final int HWKEY_ACTION_CUSTOM_APP = 25;
     public static final int HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP = 101;
     public static final int HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS = 102;
     public static final int HWKEY_DOUBLETAP_SPEED_DEFAULT = 400;
@@ -371,22 +369,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int HWKEY_TORCH_DISABLED = 0;
     public static final int HWKEY_TORCH_HOME_LONGPRESS = 1;
     public static final int HWKEY_TORCH_VOLDOWN_LONGPRESS = 2;
-    public static final String ACTION_PREF_HWKEY_MENU_LONGPRESS_CHANGED = "gravitybox.intent.action.HWKEY_MENU_LONGPRESS_CHANGED";
-    public static final String ACTION_PREF_HWKEY_MENU_DOUBLETAP_CHANGED = "gravitybox.intent.action.HWKEY_MENU_DOUBLETAP_CHANGED";
-    public static final String ACTION_PREF_HWKEY_HOME_LONGPRESS_CHANGED = "gravitybox.intent.action.HWKEY_HOME_LONGPRESS_CHANGED";
-    public static final String ACTION_PREF_HWKEY_HOME_DOUBLETAP_CHANGED = "gravitybox.intent.action.HWKEY_HOME_DOUBLETAP_CHANGED";
-    public static final String ACTION_PREF_HWKEY_BACK_LONGPRESS_CHANGED = "gravitybox.intent.action.HWKEY_BACK_LONGPRESS_CHANGED";
-    public static final String ACTION_PREF_HWKEY_BACK_DOUBLETAP_CHANGED = "gravitybox.intent.action.HWKEY_BACK_DOUBLETAP_CHANGED";
-    public static final String ACTION_PREF_HWKEY_RECENTS_SINGLETAP_CHANGED = "gravitybox.intent.action.HWKEY_RECENTS_SINGLETAP_CHANGED";
-    public static final String ACTION_PREF_HWKEY_RECENTS_LONGPRESS_CHANGED = "gravitybox.intent.action.HWKEY_RECENTS_LONGPRESS_CHANGED";
+    public static final String ACTION_PREF_HWKEY_CHANGED = "gravitybox.intent.action.HWKEY_CHANGED";
     public static final String ACTION_PREF_HWKEY_DOUBLETAP_SPEED_CHANGED = "gravitybox.intent.action.HWKEY_DOUBLETAP_SPEED_CHANGED";
     public static final String ACTION_PREF_HWKEY_KILL_DELAY_CHANGED = "gravitybox.intent.action.HWKEY_KILL_DELAY_CHANGED";
     public static final String ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED = "gravitybox.intent.action.VOLUME_ROCKER_WAKE_CHANGED";
     public static final String ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED = "gravitybox.intent.action.HWKEY_LOCKSCREEN_TORCH_CHANGED";
     public static final String ACTION_PREF_VK_VIBRATE_PATTERN_CHANGED = "gravitybox.intent.action.VK_VIBRATE_PATTERN_CHANGED";
+    public static final String EXTRA_HWKEY_KEY = "hwKeyKey";
     public static final String EXTRA_HWKEY_VALUE = "hwKeyValue";
+    public static final String EXTRA_HWKEY_CUSTOM_APP = "hwKeyCustomApp";
     public static final String EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE = "hwKeyHomeDoubletapDisable";
-    public static final String EXTRA_HWKEY_HOME_DOUBLETAP = "hwKeyHomeDoubletap";
     public static final String EXTRA_HWKEY_HOME_LONGPRESS_KG = "hwKeyHomeLongpressKeyguard";
     public static final String EXTRA_VOLUME_ROCKER_WAKE = "volumeRockerWake";
     public static final String EXTRA_HWKEY_TORCH = "hwKeyTorch";
@@ -465,8 +457,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_PIE_COLOR_OUTLINE = "pieColorOutline";
     public static final String EXTRA_PIE_COLOR_SELECTED = "pieColorSelected";
     public static final String EXTRA_PIE_COLOR_TEXT = "pieColorText";
-    public static final String EXTRA_PIE_BUTTON = "pieButton";
-    public static final String EXTRA_PIE_LONGPRESS_ACTION = "pieLongpressAction";
     public static final String EXTRA_PIE_SYSINFO_DISABLE = "pieSysinfoDisable";
     public static final String EXTRA_PIE_LONGPRESS_DELAY = "pieLongpressDelay";
     public static final String EXTRA_PIE_MIRRORED_KEYS = "pieMirroredKeys";
@@ -596,9 +586,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_KEY_GLOW_COLOR = "navbarKeyGlowColor";
     public static final String EXTRA_NAVBAR_BG_COLOR = "navbarBgColor";
     public static final String EXTRA_NAVBAR_CURSOR_CONTROL = "navbarCursorControl";
-    public static final String EXTRA_NAVBAR_CUSTOM_KEY_SINGLETAP = "navbarCustomKeySingletap";
-    public static final String EXTRA_NAVBAR_CUSTOM_KEY_LONGPRESS = "navbarCustomKeyLongpress";
-    public static final String EXTRA_NAVBAR_CUSTOM_KEY_DOUBLETAP = "navbarCustomKeyDoubletap";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_SWAP = "navbarCustomKeySwap";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_ICON = "navbarCustomKeyIcon";
     public static final String EXTRA_NAVBAR_RING_DISABLE = "navbarRingDisable";
@@ -820,6 +807,26 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_FORCE_LTR_DIRECTION,
             PREF_KEY_QS_BATTERY_EXTENDED,
             PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE
+    ));
+
+    private static List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
+            PREF_KEY_HWKEY_MENU_LONGPRESS,
+            PREF_KEY_HWKEY_MENU_DOUBLETAP,
+            PREF_KEY_HWKEY_HOME_LONGPRESS,
+            PREF_KEY_HWKEY_HOME_DOUBLETAP,
+            PREF_KEY_HWKEY_BACK_LONGPRESS,
+            PREF_KEY_HWKEY_BACK_DOUBLETAP,
+            PREF_KEY_HWKEY_RECENTS_SINGLETAP,
+            PREF_KEY_HWKEY_RECENTS_LONGPRESS,
+            PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP,
+            PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS,
+            PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP,
+            PREF_KEY_PIE_APP_LONGPRESS,
+            PREF_KEY_PIE_BACK_LONGPRESS,
+            PREF_KEY_PIE_HOME_LONGPRESS,
+            PREF_KEY_PIE_MENU_LONGPRESS,
+            PREF_KEY_PIE_RECENTS_LONGPRESS,
+            PREF_KEY_PIE_SEARCH_LONGPRESS
     ));
 
     private static final class SystemProperties {
@@ -1168,6 +1175,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefSbBtVisibility;
         private PreferenceScreen mPrefCatQsBatteryTileSettings;
         private ListPreference mPrefQsBatteryTempUnit;
+        private AppPickerPreference mPrefCustomApp;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1487,6 +1495,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefSbBtVisibility = (ListPreference) findPreference(PREF_KEY_STATUSBAR_BT_VISIBILITY);
 
+            mPrefCustomApp = (AppPickerPreference) findPreference(PREF_KEY_HWKEY_CUSTOM_APP);
+            getPreferenceScreen().removePreference(mPrefCustomApp);
+
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
                 mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
@@ -1631,6 +1642,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (Build.VERSION.SDK_INT < 18) {
                 mPrefCatHwKeyHome.removePreference(mPrefHomeDoubletapDisable);
                 mPrefCatHwKeyHome.removePreference(mPrefHwKeyHomeDoubletap);
+                customAppKeys.remove(PREF_KEY_HWKEY_HOME_DOUBLETAP);
             }
 
             // Remove more music volume steps option if necessary
@@ -1905,34 +1917,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefLockscreenSbClock.setSummary(mPrefLockscreenSbClock.getEntry());
             }
 
-            if (key == null || key.equals(PREF_KEY_HWKEY_MENU_LONGPRESS)) {
-                mPrefHwKeyMenuLongpress.setSummary(mPrefHwKeyMenuLongpress.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_HWKEY_MENU_DOUBLETAP)) {
-                mPrefHwKeyMenuDoubletap.setSummary(mPrefHwKeyMenuDoubletap.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_HWKEY_HOME_LONGPRESS)) {
-                mPrefHwKeyHomeLongpress.setSummary(mPrefHwKeyHomeLongpress.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_HWKEY_BACK_LONGPRESS)) {
-                mPrefHwKeyBackLongpress.setSummary(mPrefHwKeyBackLongpress.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_HWKEY_BACK_DOUBLETAP)) {
-                mPrefHwKeyBackDoubletap.setSummary(mPrefHwKeyBackDoubletap.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_HWKEY_RECENTS_SINGLETAP)) {
-                mPrefHwKeyRecentsSingletap.setSummary(mPrefHwKeyRecentsSingletap.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_HWKEY_RECENTS_LONGPRESS)) {
-                mPrefHwKeyRecentsLongpress.setSummary(mPrefHwKeyRecentsLongpress.getEntry());
-            }
-
             if (key == null || key.equals(PREF_KEY_HWKEY_DOUBLETAP_SPEED)) {
                 mPrefHwKeyDoubletapSpeed.setSummary(getString(R.string.pref_hwkey_doubletap_speed_summary)
                         + " (" + mPrefHwKeyDoubletapSpeed.getEntry() + ")");
@@ -2136,18 +2120,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefDataTrafficInactivityMode.setSummary(mPrefDataTrafficInactivityMode.getEntry());
             }
 
-            if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP)) {
-                mPrefNavbarCustomKeySingletap.setSummary(mPrefNavbarCustomKeySingletap.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS)) {
-                mPrefNavbarCustomKeyLongpress.setSummary(mPrefNavbarCustomKeyLongpress.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP)) {
-                mPrefNavbarCustomKeyDoubletap.setSummary(mPrefNavbarCustomKeyDoubletap.getEntry());
-            }
-
             if (key == null || key.equals(PREF_KEY_NAVBAR_RING_TARGETS_ENABLE)) {
                 final boolean enabled = mPrefNavbarRingTargetsEnable.isChecked();
                 for (int i = 0; i < mPrefNavbarRingTarget.length; i++) {
@@ -2174,10 +2146,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING)) {
                 mPrefBatteryPercentCharging.setSummary(mPrefBatteryPercentCharging.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_HWKEY_HOME_DOUBLETAP)) {
-                mPrefHwKeyHomeDoubletap.setSummary(mPrefHwKeyHomeDoubletap.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_CARRIER_TEXT)) {
@@ -2287,10 +2255,48 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_QS_BATTERY_TEMP_UNIT)) {
                 mPrefQsBatteryTempUnit.setSummary(mPrefQsBatteryTempUnit.getEntry());
             }
+
+            for (String caKey : customAppKeys) {
+                ListPreference caPref = (ListPreference) findPreference(caKey);
+                if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
+                    caPref.setSummary(mPrefCustomApp.getSummary());
+                    Intent intent = new Intent(ACTION_PREF_HWKEY_CHANGED);
+                    intent.putExtra(EXTRA_HWKEY_KEY, caKey);
+                    intent.putExtra(EXTRA_HWKEY_VALUE, HWKEY_ACTION_CUSTOM_APP);
+                    intent.putExtra(EXTRA_HWKEY_CUSTOM_APP, mPrefCustomApp.getValue());
+                    mPrefs.edit().commit();
+                    getActivity().sendBroadcast(intent);
+                } else if (key == null || customAppKeys.contains(key)) {
+                    String value = caPref.getValue();
+                    if (value != null && Integer.valueOf(value) == HWKEY_ACTION_CUSTOM_APP) {
+                        mPrefCustomApp.setKey(caKey + "_custom");
+                        mPrefCustomApp.setValue(
+                                mPrefs.getString(caKey + "_custom", null));
+                        caPref.setSummary(mPrefCustomApp.getSummary());
+                    } else {
+                        caPref.setSummary(caPref.getEntry());
+                    }
+                }
+            }
         }
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+            if (customAppKeys.contains(key)) { 
+                if (Integer.valueOf(prefs.getString(key, "0")) == HWKEY_ACTION_CUSTOM_APP) {
+                    Intent intent = new Intent(ACTION_PREF_HWKEY_CHANGED);
+                    intent.putExtra(EXTRA_HWKEY_KEY, key);
+                    intent.putExtra(EXTRA_HWKEY_VALUE, HWKEY_ACTION_CUSTOM_APP);
+                    mPrefs.edit().commit();
+                    getActivity().sendBroadcast(intent);
+                    findPreference(key).setSummary(R.string.app_picker_none);
+                    mPrefCustomApp.setKey(key + "_custom");
+                    mPrefCustomApp.show();
+                    return;
+                } else {
+                    mPrefs.edit().putString(key + "_custom", null).commit();
+                }
+            }
             updatePreferences(key);
 
             Intent intent = new Intent();
@@ -2457,39 +2463,47 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_SAFE_MEDIA_VOLUME_ENABLED,
                         prefs.getBoolean(PREF_KEY_SAFE_MEDIA_VOLUME, false));
             } else if (key.equals(PREF_KEY_HWKEY_MENU_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_HWKEY_MENU_LONGPRESS_CHANGED);
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_MENU_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_MENU_DOUBLETAP)) {
-                intent.setAction(ACTION_PREF_HWKEY_MENU_DOUBLETAP_CHANGED);
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_MENU_DOUBLETAP, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_HOME_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_HWKEY_HOME_LONGPRESS_CHANGED);
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_HOME_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_HOME_DOUBLETAP_DISABLE)) {
-                intent.setAction(ACTION_PREF_HWKEY_HOME_DOUBLETAP_CHANGED);
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE,
                         prefs.getBoolean(PREF_KEY_HWKEY_HOME_DOUBLETAP_DISABLE, false));
             } else if (key.equals(PREF_KEY_HWKEY_HOME_DOUBLETAP)) {
-                intent.setAction(ACTION_PREF_HWKEY_HOME_DOUBLETAP_CHANGED);
-                intent.putExtra(EXTRA_HWKEY_HOME_DOUBLETAP, Integer.valueOf(
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_HOME_DOUBLETAP, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_BACK_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_HWKEY_BACK_LONGPRESS_CHANGED);
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_BACK_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_BACK_DOUBLETAP)) {
-                intent.setAction(ACTION_PREF_HWKEY_BACK_DOUBLETAP_CHANGED);
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_BACK_DOUBLETAP, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_RECENTS_SINGLETAP)) {
-                intent.setAction(ACTION_PREF_HWKEY_RECENTS_SINGLETAP_CHANGED);
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_RECENTS_SINGLETAP, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_RECENTS_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_HWKEY_RECENTS_LONGPRESS_CHANGED);
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_DOUBLETAP_SPEED)) {
@@ -2622,34 +2636,34 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_PIE_COLOR_TEXT, prefs.getInt(PREF_KEY_PIE_COLOR_TEXT, 
                         getResources().getColor(R.color.pie_text_color)));
             } else if (key.equals(PREF_KEY_PIE_BACK_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_PIE_CHANGED);
-                intent.putExtra(EXTRA_PIE_BUTTON, "BACK");
-                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_PIE_BACK_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_PIE_HOME_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_PIE_CHANGED);
-                intent.putExtra(EXTRA_PIE_BUTTON, "HOME");
-                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_PIE_HOME_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_PIE_RECENTS_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_PIE_CHANGED);
-                intent.putExtra(EXTRA_PIE_BUTTON, "RECENT");
-                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_PIE_RECENTS_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_PIE_SEARCH_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_PIE_CHANGED);
-                intent.putExtra(EXTRA_PIE_BUTTON, "SEARCH");
-                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_PIE_SEARCH_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_PIE_MENU_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_PIE_CHANGED);
-                intent.putExtra(EXTRA_PIE_BUTTON, "MENU");
-                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_PIE_MENU_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_PIE_APP_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_PIE_CHANGED);
-                intent.putExtra(EXTRA_PIE_BUTTON, "APP_LAUNCHER");
-                intent.putExtra(EXTRA_PIE_LONGPRESS_ACTION, Integer.valueOf(
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_PIE_APP_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_PIE_SYSINFO_DISABLE)) {
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
@@ -2732,16 +2746,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                             PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP)).setChecked(false);
                 }
             } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP)) {
-                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_SINGLETAP,
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE,
                         Integer.valueOf(prefs.getString(PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP, "12")));
             } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS)) {
-                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_LONGPRESS,
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE,
                         Integer.valueOf(prefs.getString(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS, "0")));
             } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP)) {
-                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_DOUBLETAP,
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE,
                         Integer.valueOf(prefs.getString(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP, "0")));
             } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);

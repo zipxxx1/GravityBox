@@ -501,10 +501,6 @@
     <string name="hwkey_home_longpress_dialog_title">Ενέργεια παρατεταμένου πατήματος του πλήκτρου αρχικής οθόνης</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">Εκκίνηση προσαρμ. εφαρμογής 1</string>
-    <string name="pref_hwkey_custom_app_title">Ορισμός προσαρμ. εφαρμογής 1</string>
-    <string name="hwkey_action_custom_app2">Εκκίνηση προσαρμ. εφαρμογής 2</string>
-    <string name="pref_hwkey_custom_app_title2">Ορισμός προσαρμ. εφαρμογής 2</string>
     <string name="hwkey_action_custom_app_none">Καμία προσαρμ. εφαρμογή ορισμένη!</string>
     <string name="hwkey_action_custom_app_missing">Η προσαρμ. εφαρμογή δεν βρέθηκε!</string>
 

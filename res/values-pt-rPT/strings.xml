@@ -491,10 +491,6 @@
     <string name="hwkey_home_longpress_dialog_title">Ação ao manter pressionada a tecla Casa</string>
 
     <!-- HW Key Action: Launch custom app -->
-    <string name="hwkey_action_custom_app">Iniciar aplicação 1</string>
-    <string name="pref_hwkey_custom_app_title">Definir aplicação 1</string>
-    <string name="hwkey_action_custom_app2">Iniciar aplicação 2</string>
-    <string name="pref_hwkey_custom_app_title2">Definir aplicação 2</string>
     <string name="hwkey_action_custom_app_none">Nenhuma aplicação definida!</string>
     <string name="hwkey_action_custom_app_missing">Aplicação não encontrada!</string>
 

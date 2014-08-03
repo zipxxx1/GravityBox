@@ -451,10 +451,6 @@
     <string name="hwkey_home_longpress_dialog_title">Aksi butang home ditekan lama</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">Lancarkan aplikasi 1</string>
-    <string name="pref_hwkey_custom_app_title">Set aplikasi 1</string>
-    <string name="hwkey_action_custom_app2">Lancarkan aplikasi 2</string>
-    <string name="pref_hwkey_custom_app_title2">Set aplikas 2</string>
     <string name="hwkey_action_custom_app_none">Tiada aplikasi diset!</string>
     <string name="hwkey_action_custom_app_missing">Aplikasi tidak dijumpai!</string>
 

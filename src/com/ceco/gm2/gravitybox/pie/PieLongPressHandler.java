@@ -34,7 +34,7 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
     private static final boolean DEBUG = false;
 
     private Context mContext;
-    private Map<ButtonType,Integer> mActions;
+    private Map<ButtonType,ModHwKeys.HwKeyAction> mActions;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -43,19 +43,25 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
     public PieLongPressHandler(Context context, XSharedPreferences prefs) {
         mContext = context;
 
-        mActions = new HashMap<ButtonType, Integer>();
-        mActions.put(ButtonType.BACK, Integer.valueOf(
-                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_BACK_LONGPRESS, "0")));
-        mActions.put(ButtonType.HOME, Integer.valueOf(
-                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_HOME_LONGPRESS, "0")));
-        mActions.put(ButtonType.RECENT, Integer.valueOf(
-                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_RECENTS_LONGPRESS, "0")));
-        mActions.put(ButtonType.SEARCH, Integer.valueOf(
-                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_SEARCH_LONGPRESS, "0")));
-        mActions.put(ButtonType.MENU, Integer.valueOf(
-                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_MENU_LONGPRESS, "0")));
-        mActions.put(ButtonType.APP_LAUNCHER, Integer.valueOf(
-                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_APP_LONGPRESS, "0")));
+        mActions = new HashMap<ButtonType, ModHwKeys.HwKeyAction>();
+        mActions.put(ButtonType.BACK, new ModHwKeys.HwKeyAction(Integer.valueOf(
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_BACK_LONGPRESS, "0")),
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_BACK_LONGPRESS+"_custom", null)));
+        mActions.put(ButtonType.HOME, new ModHwKeys.HwKeyAction(Integer.valueOf(
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_HOME_LONGPRESS, "0")),
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_HOME_LONGPRESS+"_custom", null)));
+        mActions.put(ButtonType.RECENT, new ModHwKeys.HwKeyAction(Integer.valueOf(
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_RECENTS_LONGPRESS, "0")),
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_RECENTS_LONGPRESS+"_custom", null)));
+        mActions.put(ButtonType.SEARCH, new ModHwKeys.HwKeyAction(Integer.valueOf(
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_SEARCH_LONGPRESS, "0")),
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_SEARCH_LONGPRESS+"_custom", null)));
+        mActions.put(ButtonType.MENU, new ModHwKeys.HwKeyAction(Integer.valueOf(
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_MENU_LONGPRESS, "0")),
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_MENU_LONGPRESS+"_custom", null)));
+        mActions.put(ButtonType.APP_LAUNCHER, new ModHwKeys.HwKeyAction(Integer.valueOf(
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_APP_LONGPRESS, "0")),
+                prefs.getString(GravityBoxSettings.PREF_KEY_PIE_APP_LONGPRESS+"_custom", null)));
     }
 
     @Override
@@ -68,28 +74,29 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
         return false;
     }
 
-    protected void setLongPressAction(String button, int action) {
+    protected void setLongPressAction(String button, int action, String customApp) {
         if (button == null) return;
 
         ButtonType btnType = ButtonType.valueOf(button);
         if (btnType != null && mActions.containsKey(btnType)) {
-            mActions.put(btnType, action);
+            mActions.get(btnType).actionId = action;
+            mActions.get(btnType).customApp = customApp;
             if (DEBUG) log("Action for " + btnType + ": " + action);
         }
     }
 
-    protected int getLongPressAction(ButtonType buttonType) {
-        if (buttonType == null) return 0;
+    protected ModHwKeys.HwKeyAction getLongPressAction(ButtonType buttonType) {
+        if (buttonType == null) return new ModHwKeys.HwKeyAction(0, null);
 
         if (mActions.containsKey(buttonType)) {
             return mActions.get(buttonType);
         }
-        return 0;
+        return new ModHwKeys.HwKeyAction(0, null);
     }
 
     private boolean performActionFor(ButtonType btnType) {
         Intent intent = null;
-        switch(mActions.get(btnType)) {
+        switch(mActions.get(btnType).actionId) {
             case GravityBoxSettings.HWKEY_ACTION_SEARCH:
                 intent = new Intent(ModHwKeys.ACTION_SEARCH); 
                 break;
@@ -109,9 +116,8 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
                 intent = new Intent(ModHwKeys.ACTION_SHOW_APP_LAUCNHER);
                 break;
             case GravityBoxSettings.HWKEY_ACTION_CUSTOM_APP:
-            case GravityBoxSettings.HWKEY_ACTION_CUSTOM_APP2:
                 intent = new Intent(ModHwKeys.ACTION_LAUNCH_APP);
-                intent.putExtra(ModHwKeys.EXTRA_APP_ID, mActions.get(btnType));
+                intent.putExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP, mActions.get(btnType).customApp);
                 break;
             case GravityBoxSettings.HWKEY_ACTION_EXPANDED_DESKTOP:
                 intent = new Intent(ModHwKeys.ACTION_TOGGLE_EXPANDED_DESKTOP);

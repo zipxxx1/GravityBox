@@ -474,10 +474,6 @@
     <string name="hwkey_home_longpress_dialog_title">Home knop lang-druk actie</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">Start aangepaste app 1</string>
-    <string name="pref_hwkey_custom_app_title">Stel aangepaste app 1 in</string>
-    <string name="hwkey_action_custom_app2">Start aangepaste app 2</string>
-    <string name="pref_hwkey_custom_app_title2">Stel aangepaste app 2 in</string>
     <string name="hwkey_action_custom_app_none">Geen aangepaste app toegewezen!</string>
     <string name="hwkey_action_custom_app_missing">Aangepaste app niet gevonden!</string>
 

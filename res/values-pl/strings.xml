@@ -491,10 +491,6 @@
     <string name="hwkey_home_longpress_dialog_title">Akcja długiego naciśnięcia HOME</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app">Uruchom własną aplikację 1</string>
-    <string name="pref_hwkey_custom_app_title">Ustaw własną aplikację 1</string>
-    <string name="hwkey_action_custom_app2">Uruchom własną aplikację 2</string>
-    <string name="pref_hwkey_custom_app_title2">Ustaw własną aplikację 2</string>
     <string name="hwkey_action_custom_app_none">Nie przypisano własnej aplikacji!</string>
     <string name="hwkey_action_custom_app_missing">Nie znaleziono własnej aplikacji!</string>
 

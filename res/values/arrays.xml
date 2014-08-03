@@ -295,8 +295,6 @@
         <item>@string/hwkey_action_recent_apps</item>
         <item>@string/hwkey_action_app_launcher</item>
         <item>@string/hwkey_action_launcher_drawer</item>
-        <item>@string/hwkey_action_custom_app</item>
-        <item>@string/hwkey_action_custom_app2</item>
         <item>@string/hwkey_action_menu</item>
         <item>@string/hwkey_action_home</item>
         <item>@string/hwkey_action_back</item>
@@ -309,6 +307,7 @@
         <item>@string/hwkey_action_expand_quicksettings</item>
         <item>@string/hwkey_action_volume_panel</item>
         <item>@string/hwkey_action_brightness_dialog</item>
+        <item>@string/hwkey_action_custom</item>
     </string-array>
 
     <string-array name="hwkey_action_values" translatable="false">
@@ -322,8 +321,6 @@
         <item>6</item>
         <item>12</item>
         <item>21</item>
-        <item>7</item>
-        <item>8</item>
         <item>9</item>
         <item>13</item>
         <item>14</item>
@@ -336,6 +333,7 @@
         <item>18</item>
         <item>20</item>
         <item>22</item>
+        <item>25</item>
     </string-array>
 
     <string-array name="hwkey_doubletap_speed_entries" translatable="false">

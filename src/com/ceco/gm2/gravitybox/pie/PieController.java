@@ -126,7 +126,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private Drawable mRecentIcon;
     private Drawable mRecentAltIcon;
     private boolean mRecentAlt = false;
-    private int mRecentLongPressAction = 0;
+    private ModHwKeys.HwKeyAction mRecentLongPressAction = new ModHwKeys.HwKeyAction(0, null);
     private boolean mMirroredKeys;
 
     private static void log(String message) {
@@ -695,10 +695,10 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         if (mRecentAlt) {
             recentBtn.setImageDrawable(mRecentAltIcon);
             mRecentLongPressAction = getLongPressAction(ButtonType.RECENT);
-            setLongPressAction(ButtonType.RECENT.name(), GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS);
+            setLongPressAction(ButtonType.RECENT.name(), GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS, null);
         } else {
             recentBtn.setImageDrawable(mRecentIcon);
-            setLongPressAction(ButtonType.RECENT.name(), mRecentLongPressAction);
+            setLongPressAction(ButtonType.RECENT.name(), mRecentLongPressAction.actionId, mRecentLongPressAction.customApp);
         }
     }
 
@@ -794,17 +794,17 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         }
     }
 
-    public void setLongPressAction(String button, int action) {
+    public void setLongPressAction(String button, int action, String customApp) {
         if (mLongPressHandler != null) {
-            mLongPressHandler.setLongPressAction(button, action);
+            mLongPressHandler.setLongPressAction(button, action, customApp);
         }
     }
 
-    public int getLongPressAction(ButtonType button) {
+    public ModHwKeys.HwKeyAction getLongPressAction(ButtonType button) {
         if (mLongPressHandler != null) {
             return mLongPressHandler.getLongPressAction(button);
         }
-        return 0;
+        return new ModHwKeys.HwKeyAction(0, null);
     }
 
     public void setSysinfoDisabled(boolean disabled) {
