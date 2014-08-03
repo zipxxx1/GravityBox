@@ -1422,8 +1422,8 @@
     <string name="lc_active_screen">Активный экран</string>
     <string name="lc_active_screen_info">Функция активного экрана автоматически включает экран при 
         получении каждого нового уведомления. Функция не работает, если экран закрыт 
-        (например, когда устройство находится в кармане). Опционально, можно настроить раскрытие панели уведомлений 
-        (в зависимости от текущей политики безопасности экрана блокировки и настроек пользователя). Имейте в виду, что для работы
+        (например, когда устройство находится в кармане). При этом, опционально, раскрывается панель уведомлений или отображаются уведомления
+        всплытия (в зависимости от текущей политики безопасности экрана блокировки и настроек пользователя). Имейте в виду, что для работы
         активного экрана требуется, чтобы экран блокировки был включен.\nФункция активируется переключателем ниже. После включения 
         возможно выполнить дополнительную конфигурацию по приложениям</string>
     <string name="lc_active_screen_switch_title">Включение активного экрана</string>
@@ -1659,5 +1659,15 @@
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Трансляция</string>
+
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Управление параметрами по умолчанию уведомлений для всех приложений, для которых не применяются собственные настройки по приложениям</string>
+    <string name="pref_unc_perapp_settings_title">Настройки по приложениям</string>
+    <string name="pref_unc_perapp_settings_summary">Управление настройками уведомлений по приложениям, заменяющими параметры по умолчанию</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Управление общими настройками функции активного экрана</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Управление тихим часом для уведомлений</string>
 
 </resources>
