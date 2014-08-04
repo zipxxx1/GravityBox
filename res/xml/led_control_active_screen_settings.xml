@@ -20,4 +20,16 @@
         android:title="@string/lc_active_screen_switch_title"
         android:defaultValue="false" />
 
+    <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+        android:key="pref_unc_as_headsup_timeout"
+        android:title="@string/pref_unc_as_headsup_timeout_title"
+        android:summary="@string/pref_unc_as_headsup_timeout_summary"
+        minimum="0"
+        maximum="30"
+        interval="1"
+        monitorBoxEnabled="true"
+        monitorBoxUnit="s"
+        android:defaultValue="10"
+        android:dependency="activeScreenEnabled" />
+
 </PreferenceScreen>

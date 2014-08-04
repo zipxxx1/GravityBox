@@ -1669,4 +1669,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Custom action</string>
 
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">Heads up timeout</string>
+    <string name="pref_unc_as_headsup_timeout_summary">For how long to show heads up window. 0 = until unlocked.</string>
+
 </resources>

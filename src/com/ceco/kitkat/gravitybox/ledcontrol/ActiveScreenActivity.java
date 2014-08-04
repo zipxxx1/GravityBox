@@ -54,6 +54,11 @@ public class ActiveScreenActivity extends Activity {
             mPrefs = getPreferenceManager().getSharedPreferences();
 
             addPreferencesFromResource(R.xml.led_control_active_screen_settings);
+
+            if (!LedSettings.isHeadsUpEnabled(getActivity())) {
+                getPreferenceScreen().removePreference(
+                        findPreference(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT));
+            }
         }
 
         @Override
