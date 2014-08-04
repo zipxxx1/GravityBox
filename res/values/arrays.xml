@@ -1095,4 +1095,16 @@
         <item>HEADS_UP</item>
     </string-array>
 
+    <string-array name="headsup_position_entries" translatable="false">
+        <item>@string/headsup_position_top</item>
+        <item>@string/headsup_position_center</item>
+        <item>@string/headsup_position_bottom</item>
+    </string-array>
+
+    <string-array name="headsup_position_values" translatable="false">
+        <item>48</item>
+        <item>17</item>
+        <item>80</item>
+    </string-array>
+
 </resources>

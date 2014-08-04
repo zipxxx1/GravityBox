@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 
 public class ActiveScreenActivity extends Activity {
@@ -44,6 +45,7 @@ public class ActiveScreenActivity extends Activity {
 
     public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
         private SharedPreferences mPrefs;
+        private ListPreference mPrefHeadsupPosition;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -55,9 +57,13 @@ public class ActiveScreenActivity extends Activity {
 
             addPreferencesFromResource(R.xml.led_control_active_screen_settings);
 
+            mPrefHeadsupPosition = (ListPreference) findPreference(
+                    LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_POSITION);
+
             if (!LedSettings.isHeadsUpEnabled(getActivity())) {
                 getPreferenceScreen().removePreference(
                         findPreference(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT));
+                getPreferenceScreen().removePreference(mPrefHeadsupPosition);
             }
         }
 
@@ -65,6 +71,7 @@ public class ActiveScreenActivity extends Activity {
         public void onResume() {
             super.onResume();
             mPrefs.registerOnSharedPreferenceChangeListener(this);
+            updateSummaries();
         }
 
         @Override
@@ -81,6 +88,11 @@ public class ActiveScreenActivity extends Activity {
             }
             prefs.edit().commit();
             getActivity().sendBroadcast(intent);
+            updateSummaries();
+        }
+
+        private void updateSummaries() {
+            mPrefHeadsupPosition.setSummary(mPrefHeadsupPosition.getEntry());
         }
     }
 }

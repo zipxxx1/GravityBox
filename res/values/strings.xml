@@ -1673,4 +1673,10 @@
     <string name="pref_unc_as_headsup_timeout_title">Heads up timeout</string>
     <string name="pref_unc_as_headsup_timeout_summary">For how long to show heads up window. 0 = until unlocked.</string>
 
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">Heads up position</string>
+    <string name="headsup_position_top">Top</string>
+    <string name="headsup_position_center">Center</string>
+    <string name="headsup_position_bottom">Bottom</string>
+
 </resources>

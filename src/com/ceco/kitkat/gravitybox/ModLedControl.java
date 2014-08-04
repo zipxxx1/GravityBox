@@ -366,7 +366,8 @@ public class ModLedControl {
                         n.extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
                                 ls.getActiveScreenMode().toString());
                         if (ls.getActiveScreenMode() == ActiveScreenMode.HEADS_UP) {
-                            n.extras.putInt(NOTIF_EXTRA_HEADS_UP_GRAVITY, Gravity.CENTER);
+                            n.extras.putInt(NOTIF_EXTRA_HEADS_UP_GRAVITY, Integer.valueOf(
+                                    mPrefs.getString(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_POSITION, "17")));
                             n.extras.putInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT,
                                     mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT, 10));
                         }
