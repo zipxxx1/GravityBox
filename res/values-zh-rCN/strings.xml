@@ -243,7 +243,7 @@
 
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">实体按键调整</string>
-    <string name="pref_cat_hwkey_actions_summary">可在此为实体按键设置自定动作</string>
+    <string name="pref_cat_hwkey_actions_summary">包含各种与实体按键自定义动作相关的调整选项</string>
     <string name="hwkey_menu_longpress_dialog_title">长按菜单键行为</string>
     <string name="hwkey_menu_doubletap_dialog_title">双击菜单键行为</string>
     <string name="hwkey_back_longpress_dialog_title">长按返回键行为</string>
@@ -435,7 +435,7 @@
 
     <!-- Transparency management -->
     <string name="pref_cat_transparency_manager_title">透明度调整</string>
-    <string name="pref_cat_transparency_manager_summary">管理状态栏和虚拟按键的透明度</string>
+    <string name="pref_cat_transparency_manager_summary">包含各种与状态栏和虚拟按键透明度相关的调整选项</string>
     <string name="pref_tm_statusbar_launcher_title">启动器下的状态栏透明度</string>
     <string name="pref_tm_statusbar_lockscreen_title">锁屏画面时的状态栏透明度</string>
     <string name="pref_tm_navbar_launcher_title">启动器下的虚拟按键透明度</string>
@@ -1655,5 +1655,28 @@
     
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">远程显示</string>
+    
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">启用通知管理默认设置为每个应用程序设置自己的应用程序</string>
+    <string name="pref_unc_perapp_settings_title">每个应用程序设置</string>
+    <string name="pref_unc_perapp_settings_summary">通知管理设置在每个应用程序的基础上覆盖默认设置</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">管理主屏幕功能常用设置</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">管理静音时段通知</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">自定义操作</string>
+
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">浮动通知超时</string>
+    <string name="pref_unc_as_headsup_timeout_summary">显示浮动通知窗口多长时间 0=直到解锁</string>
+
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">浮动通知位置</string>
+    <string name="headsup_position_top">顶部</string>
+    <string name="headsup_position_center">中心</string>
+    <string name="headsup_position_bottom">底部</string>
 
 </resources>
