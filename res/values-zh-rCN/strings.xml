@@ -1597,4 +1597,7 @@
     <string name="pref_navbar_android_l_icons_enable_title">启用Android L虚拟按键图标</string>
     <string name="pref_navbar_android_l_icons_enable_summary">替换原厂虚拟按键图标为Android L风格(需要重新启动)</string>
 
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">自定义操作</string>
+
 </resources>
