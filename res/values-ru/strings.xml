@@ -1666,4 +1666,17 @@
     <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
     <string name="pref_unc_quiet_hours_summary">Управление тихим часом для уведомлений</string>
 
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Пользовательское действие</string>
+
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">Задержка всплытия</string>
+    <string name="pref_unc_as_headsup_timeout_summary">Время отображения окна всплытия. 0 = до разблокировки.</string>
+
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">Положение всплытия</string>
+    <string name="headsup_position_top">Вверху</string>
+    <string name="headsup_position_center">По центру</string>
+    <string name="headsup_position_bottom">Внизу</string>
+
 </resources>
