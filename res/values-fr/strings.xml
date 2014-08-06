@@ -1665,4 +1665,21 @@
     <string name="pref_unc_active_screen_summary">Gère les paramètres communs pour l\'option Écran Actif</string>
     <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
     <string name="pref_unc_quiet_hours_summary">Gère les Heures silencieuses pour les notifications</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Action personnalisée</string>
+
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">Temporisation des notifications flottantes</string>
+    <string name="pref_unc_as_headsup_timeout_summary">Pour règler le délai de visibilité des notifications flottantes. 0 = jusqu\'à ouverture</string>
+
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">Position des notifications flottantes</string>
+    <string name="headsup_position_top">En haut</string>
+    <string name="headsup_position_center">Centrée</string>
+    <string name="headsup_position_bottom">En bas</string>
+
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">Consommation de données 2</string>
+
 </resources>
