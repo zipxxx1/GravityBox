@@ -83,7 +83,6 @@ public class Utils {
     private static Boolean mHasGPS = null;
     private static Boolean mHasNfc = null;
     private static Boolean mHasCompass;
-    private static Boolean mHasMsimSupport = null;
 
     // Supported MTK devices
     private static final Set<String> MTK_DEVICES = new HashSet<String>(Arrays.asList(
@@ -205,14 +204,6 @@ public class Utils {
 
         mHasGeminiSupport = SystemProp.getBoolean("ro.mediatek.gemini_support", false);
         return mHasGeminiSupport;
-    }
-
-    public static boolean hasMsimSupport() {
-        if (mHasMsimSupport != null) return mHasMsimSupport;
-
-        File f = new File("/system/framework/telephony-msim.jar");
-        mHasMsimSupport = f.exists();
-        return mHasMsimSupport;
     }
 
     public static boolean isWifiOnly(Context con) {

@@ -1366,7 +1366,7 @@ public class ModQuickSettings {
         try {
             XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile",
                     CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
-            if (Utils.hasMsimSupport()) {
+            if (PhoneWrapper.hasMsimSupport()) {
                 XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile_2",
                         CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
             }

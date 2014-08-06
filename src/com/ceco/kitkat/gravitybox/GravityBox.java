@@ -51,7 +51,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         }
         XposedBridge.log("GB:Has telephony support: " + Utils.hasTelephonySupport());
         XposedBridge.log("GB:Has Gemini support: " + Utils.hasGeminiSupport());
-        XposedBridge.log("GB:Has MSIM support: " + Utils.hasMsimSupport());
         XposedBridge.log("GB:Android SDK: " + Build.VERSION.SDK_INT);
         XposedBridge.log("GB:Android Release: " + Build.VERSION.RELEASE);
         XposedBridge.log("GB:ROM: " + Build.DISPLAY);

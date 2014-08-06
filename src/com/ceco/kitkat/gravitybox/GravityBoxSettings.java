@@ -834,6 +834,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public int defaultNotificationLedOff;
         public boolean uuidRegistered;
         public int uncTrialCountdown;
+        public boolean hasMsimSupport;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -856,6 +857,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (data.containsKey("uncTrialCountdown")) {
                 uncTrialCountdown = data.getInt("uncTrialCountdown");
+            }
+            if (data.containsKey("hasMsimSupport")) {
+                hasMsimSupport = data.getBoolean("hasMsimSupport");
             }
         }
     }
@@ -1549,7 +1553,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.isMtkDevice()) {
                 mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
-                if (!Utils.hasMsimSupport()) {
+                if (!sSystemProperties.hasMsimSupport) {
                     mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
                 }
                 mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
@@ -1650,7 +1654,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     qsPrefs.remove("compass_tileview");
                 }
             }
-            if (!Utils.hasMsimSupport()) {
+            if (!sSystemProperties.hasMsimSupport) {
                 qsEntries.remove(getString(R.string.qs_tile_data_usage_2));
                 qsEntryValues.remove("rssi_textview_2");
                 if (qsPrefs != null && qsPrefs.contains("rssi_textview_2")) {

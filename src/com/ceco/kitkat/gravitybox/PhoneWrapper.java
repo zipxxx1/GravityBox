@@ -53,6 +53,7 @@ public class PhoneWrapper {
     private static Class<?> mSystemProperties;
     private static Context mContext;
     private static int mSimSlot;
+    private static Boolean mHasMsimSupport = null;
 
     private static void log(String msg) {
         XposedBridge.log(TAG + ": " + msg);
@@ -93,7 +94,7 @@ public class PhoneWrapper {
     };
 
     private static Class<?> getPhoneFactoryClass() {
-        if (Utils.hasMsimSupport()) {
+        if (hasMsimSupport()) {
             return XposedHelpers.findClass("com.codeaurora.telephony.msim.MSimPhoneFactory", null);
         } else {
             return XposedHelpers.findClass("com.android.internal.telephony.PhoneFactory", null);
@@ -103,7 +104,7 @@ public class PhoneWrapper {
     private static String getMakePhoneMethodName() {
         if (Utils.hasGeminiSupport()) {
             return "makeDefaultPhones";
-        } else if (Utils.hasMsimSupport()) {
+        } else if (hasMsimSupport()) {
             return "makeMultiSimDefaultPhone";
         } else {
             return "makeDefaultPhone";
@@ -113,7 +114,7 @@ public class PhoneWrapper {
     private static Object getPhone() {
         if (mClsPhoneFactory == null) {
             return null;
-        } else if (Utils.hasMsimSupport()) {
+        } else if (hasMsimSupport()) {
             return XposedHelpers.callStaticMethod(mClsPhoneFactory, "getPhone", mSimSlot);
         } else {
             return XposedHelpers.callStaticMethod(mClsPhoneFactory, "getDefaultPhone");
@@ -197,5 +198,22 @@ public class PhoneWrapper {
     public static boolean isLteNetworkType(int networkType) {
         return (networkType >= NT_LTE_CDMA_EVDO &&
                 networkType < NT_MODE_UNKNOWN);
+    }
+
+    public static boolean hasMsimSupport() {
+        if (mHasMsimSupport != null) return mHasMsimSupport;
+
+        try {
+            Object mtm = XposedHelpers.callStaticMethod(
+                    XposedHelpers.findClass("android.telephony.MSimTelephonyManager", null),
+                        "getDefault");
+            mHasMsimSupport = (Boolean) XposedHelpers.callMethod(mtm, "isMultiSimEnabled") &&
+                    (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount") > 1;
+        } catch (Throwable t) {
+            mHasMsimSupport = false;
+        }
+
+        if (DEBUG) log("hasMsimSupport: " + mHasMsimSupport);
+        return mHasMsimSupport;
     }
 }

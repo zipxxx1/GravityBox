@@ -106,6 +106,7 @@ public class SystemPropertyProvider {
                                                     cr, SETTING_GRAVITYBOX_UUID))));
                                     data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
                                             SETTING_UNC_TRIAL_COUNTDOWN, 20));
+                                    data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
                                     if (DEBUG) {
                                         log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
                                         log("isTablet: " + data.getBoolean("isTablet"));
@@ -114,6 +115,7 @@ public class SystemPropertyProvider {
                                         log("defaultNotificationLedOff: " + data.getInt("defaultNotificationLedOff"));
                                         log("uuidRegistered: " + data.getBoolean("uuidRegistered"));
                                         log("uncTrialCountdown: " + data.getInt("uncTrialCountdown"));
+                                        log("hasMsimSupport: " + data.getBoolean("hasMsimSupport"));
                                     }
                                     receiver.send(RESULT_SYSTEM_PROPERTIES, data);
                                 } else if (intent.getAction().equals(ACTION_REGISTER_UUID) && 
