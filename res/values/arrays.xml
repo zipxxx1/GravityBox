@@ -98,6 +98,7 @@
         <item>@string/qs_tile_settings</item>
         <item>@string/qs_tile_wifi</item>
         <item>@string/qs_tile_data_usage</item>
+        <item>@string/qs_tile_data_usage_2</item>
         <item>@string/qs_tile_autorotation</item>
         <item>@string/qs_tile_battery</item>
         <item>@string/qs_tile_airplane_mode</item>
@@ -137,6 +138,7 @@
         <item>settings</item>
         <item>wifi_textview</item>
         <item>rssi_textview</item>
+        <item>rssi_textview_2</item>
         <item>auto_rotate_textview</item>
         <item>battery_textview</item>
         <item>airplane_mode_textview</item>

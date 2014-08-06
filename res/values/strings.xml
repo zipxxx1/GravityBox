@@ -1679,4 +1679,7 @@
     <string name="headsup_position_center">Center</string>
     <string name="headsup_position_bottom">Bottom</string>
 
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">Data Usage 2</string>
+
 </resources>

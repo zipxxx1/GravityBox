@@ -1650,6 +1650,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     qsPrefs.remove("compass_tileview");
                 }
             }
+            if (!Utils.hasMsimSupport()) {
+                qsEntries.remove(getString(R.string.qs_tile_data_usage_2));
+                qsEntryValues.remove("rssi_textview_2");
+                if (qsPrefs != null && qsPrefs.contains("rssi_textview_2")) {
+                    qsPrefs.remove("rssi_textview_2");
+                }
+            }
+
             // and update saved prefs in case it was previously checked in previous versions
             mPrefs.edit().putStringSet(PREF_KEY_QUICK_SETTINGS, qsPrefs).commit();
             mQuickSettings.setEntries(qsEntries.toArray(new CharSequence[qsEntries.size()]));

@@ -197,6 +197,7 @@ public class ModQuickSettings {
         tmpMap.put("gps_textview", 10);
         tmpMap.put("alarm_textview", 11);
         tmpMap.put("remote_display_textview", 12);
+        tmpMap.put("rssi_textview_2", 13);
         mAospTileTags = Collections.unmodifiableMap(tmpMap);
 
         mAllTileViews = new HashMap<String, View>();
@@ -453,7 +454,9 @@ public class ModQuickSettings {
                 if (Utils.isMotoXtDevice() && "wifi_textview".equals(key) && imgGroupResId != 0) {
                     layoutView = viewGroup.findViewById(imgGroupResId);
                     tileTextView = (TextView) viewGroup.findViewById(textResId);
-                } else if (Utils.isMotoXtDevice() && "rssi_textview".equals(key) && rssiSlotIdResId != 0) {
+                } else if (Utils.isMotoXtDevice() && 
+                        ("rssi_textview".equals(key) || "rssi_textview_2".equals(key)) && 
+                                rssiSlotIdResId != 0) {
                     final View slotIdView = viewGroup.findViewById(rssiSlotIdResId);
                     if (slotIdView != null && slotIdView.getParent() instanceof View) {
                         layoutView = (View) slotIdView.getParent();
@@ -1362,67 +1365,13 @@ public class ModQuickSettings {
 
         try {
             XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile",
-                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("rssi_textview"));
-                    if (mOverrideTileKeys.contains("rssi_textview")) {
-                        tile.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                final ConnectivityManager cm = 
-                                       (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-                                final boolean mobileDataEnabled = 
-                                        (Boolean) XposedHelpers.callMethod(cm, "getMobileDataEnabled");
-
-                                if (mHideOnChange && mStatusBar != null) {
-                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
-                                }
-
-                                if (Utils.isXperiaDevice()) {
-                                    Intent i = new Intent(ConnectivityServiceWrapper.ACTION_XPERIA_MOBILE_DATA_TOGGLE);
-                                    mContext.sendBroadcast(i);
-                                    return;
-                                }
-
-                                Intent intent = new Intent(ConnectivityServiceWrapper.ACTION_SET_MOBILE_DATA_ENABLED);
-                                intent.putExtra(ConnectivityServiceWrapper.EXTRA_ENABLED, !mobileDataEnabled);
-                                mContext.sendBroadcast(intent);
-                            }
-                        });
-                        tile.setOnLongClickListener(new View.OnLongClickListener() {
-                            @Override
-                            public boolean onLongClick(View v) {
-                                Intent intent = new Intent();
-                                intent.setComponent(new ComponentName("com.android.settings", 
-                                        "com.android.settings.Settings$DataUsageSummaryActivity"));
-                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", intent);
-                                tile.setPressed(false);
-                                return true;
-                            }
-                        });
-                        XposedHelpers.findAndHookMethod(param.args[1].getClass(), "refreshView",
-                                CLASS_QS_TILEVIEW, CLASS_QS_MODEL_STATE, new XC_MethodHook() {
-                            @Override
-                            protected void afterHookedMethod(final MethodHookParam param2) throws Throwable {
-                                if (param2.args[0] != tile) return;
-                                final ConnectivityManager cm = 
-                                        (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-                                if (!(Boolean) XposedHelpers.callMethod(cm, "getMobileDataEnabled")) {
-                                    ImageView iov = (ImageView) tile.findViewById(
-                                            mContext.getResources().getIdentifier(
-                                                    "rssi_overlay_image", "id", PACKAGE_NAME));
-                                    if (iov != null) {
-                                        iov.setImageDrawable(mGbContext.getResources().getDrawable(
-                                                R.drawable.ic_qs_signal_data_off));
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }
-            });
+                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
+            if (Utils.hasMsimSupport()) {
+                XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile_2",
+                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
+            }
+            XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile",
+                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -1704,4 +1653,72 @@ public class ModQuickSettings {
             XposedBridge.log(t);
         }
     }
+
+    private static XC_MethodHook addRSSITileHook = new XC_MethodHook() {
+        @Override
+        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+            try {
+                final View tile = (View) param.args[0];
+                final String tileKey = param.method.getName().equals("addRSSITile") ? 
+                        "rssi_textview" : "rssi_textview_2";
+                tile.setTag(mAospTileTags.get(tileKey));
+                if (mOverrideTileKeys.contains("rssi_textview")) {
+                    tile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final ConnectivityManager cm = 
+                                   (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+                            final boolean mobileDataEnabled = 
+                                    (Boolean) XposedHelpers.callMethod(cm, "getMobileDataEnabled");
+
+                            if (mHideOnChange && mStatusBar != null) {
+                                XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                            }
+
+                            if (Utils.isXperiaDevice()) {
+                                Intent i = new Intent(ConnectivityServiceWrapper.ACTION_XPERIA_MOBILE_DATA_TOGGLE);
+                                mContext.sendBroadcast(i);
+                                return;
+                            }
+
+                            Intent intent = new Intent(ConnectivityServiceWrapper.ACTION_SET_MOBILE_DATA_ENABLED);
+                            intent.putExtra(ConnectivityServiceWrapper.EXTRA_ENABLED, !mobileDataEnabled);
+                            mContext.sendBroadcast(intent);
+                        }
+                    });
+                    tile.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Intent intent = new Intent();
+                            intent.setComponent(new ComponentName("com.android.settings", 
+                                    "com.android.settings.Settings$DataUsageSummaryActivity"));
+                            XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", intent);
+                            tile.setPressed(false);
+                            return true;
+                        }
+                    });
+                    XposedHelpers.findAndHookMethod(param.args[1].getClass(), "refreshView",
+                            CLASS_QS_TILEVIEW, CLASS_QS_MODEL_STATE, new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(final MethodHookParam param2) throws Throwable {
+                            if (param2.args[0] != tile) return;
+                            final ConnectivityManager cm = 
+                                    (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+                            if (!(Boolean) XposedHelpers.callMethod(cm, "getMobileDataEnabled")) {
+                                ImageView iov = (ImageView) tile.findViewById(
+                                        mContext.getResources().getIdentifier(
+                                                "rssi_overlay_image", "id", PACKAGE_NAME));
+                                if (iov != null) {
+                                    iov.setImageDrawable(mGbContext.getResources().getDrawable(
+                                            R.drawable.ic_qs_signal_data_off));
+                                }
+                            }
+                        }
+                    });
+                }
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+        }
+    };
 }
