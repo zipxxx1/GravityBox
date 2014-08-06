@@ -1597,4 +1597,7 @@
     <string name="pref_navbar_android_l_icons_enable_title">Activer les icônes de Android L pour les touches de navigation</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Remplace les icônes par défaut des touches de navigation par celles incluses dans Android L (redémarrage nécessaire)</string>
 
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Action personnalisée</string>
+
 </resources>
