@@ -1570,4 +1570,7 @@
     <string name="pref_navbar_android_l_icons_enable_title">Włącz ikony nawigacyjne Androida L</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Zastępuje standardowe ikony nawigacji ikonami pochodzącymi z Androida L (wymagany restart)</string>
 
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Własna akcja</string>
+
 </resources>
