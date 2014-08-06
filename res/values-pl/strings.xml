@@ -1621,4 +1621,33 @@
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
+    <!-- QS: Remote display tile -->
+    <string name="qs_tile_remote_display">Zdalny Wyświetlacz</string>
+
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Zarządza domyślnymi ustawieniami powiadomień dla wszystkich aplikacji, które nie mają włączonych żadnych własnych ustawień</string>
+    <string name="pref_unc_perapp_settings_title">Ustawienia dla aplikacji</string>
+    <string name="pref_unc_perapp_settings_summary">Zarządza ustawieniami powiadomień na bazie ustawień aplikacji, zastępując domyślne ustawienia</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Zarządza wspólnymi ustawieniami Aktywnego Ekranu</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Zarządza funkcją Cichych Godzin dla powiadomień</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Własna akcja</string>
+
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">Limit czasu Heads up</string>
+    <string name="pref_unc_as_headsup_timeout_summary">Określa jak długo pokazywać okno Heads up. 0 = do odblokowania.</string>
+
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">Pozycja Heads up</string>
+    <string name="headsup_position_top">Na górze</string>
+    <string name="headsup_position_center">Centralnie</string>
+    <string name="headsup_position_bottom">Na dole</string>
+
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">Użycie Danych 2</string>
+
 </resources>
