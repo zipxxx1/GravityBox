@@ -1597,4 +1597,7 @@
     <string name="pref_navbar_android_l_icons_enable_title">Вкл нав. клавиши Андроид L</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Замена стоковых значков клавиш навигации значками из Андроид L (необходима перезагрузка)</string>
 
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Пользовательское действие</string>
+
 </resources>
