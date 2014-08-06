@@ -92,11 +92,39 @@ public class PhoneWrapper {
         }
     };
 
+    private static Class<?> getPhoneFactoryClass() {
+        if (Utils.hasMsimSupport()) {
+            return XposedHelpers.findClass("com.codeaurora.telephony.msim.MSimPhoneFactory", null);
+        } else {
+            return XposedHelpers.findClass("com.android.internal.telephony.PhoneFactory", null);
+        }
+    }
+
+    private static String getMakePhoneMethodName() {
+        if (Utils.hasGeminiSupport()) {
+            return "makeDefaultPhones";
+        } else if (Utils.hasMsimSupport()) {
+            return "makeMultiSimDefaultPhone";
+        } else {
+            return "makeDefaultPhone";
+        }
+    }
+
+    private static Object getPhone() {
+        if (mClsPhoneFactory == null) {
+            return null;
+        } else if (Utils.hasMsimSupport()) {
+            return XposedHelpers.callStaticMethod(mClsPhoneFactory, "getPhone", mSimSlot);
+        } else {
+            return XposedHelpers.callStaticMethod(mClsPhoneFactory, "getDefaultPhone");
+        }
+    }
+
     public static void initZygote(final XSharedPreferences prefs) {
         if (DEBUG) log("Entering init state");
 
         try {
-            mClsPhoneFactory = XposedHelpers.findClass("com.android.internal.telephony.PhoneFactory", null);
+            mClsPhoneFactory = getPhoneFactoryClass();
             mSystemProperties = XposedHelpers.findClass("android.os.SystemProperties", null);
 
             mSimSlot = 0;
@@ -108,8 +136,7 @@ public class PhoneWrapper {
             }
             if (DEBUG) log("mSimSlot = " + mSimSlot);
 
-            String methodName = Utils.isMtkDevice() ? "makeDefaultPhones" : "makeDefaultPhone";
-            XposedHelpers.findAndHookMethod(mClsPhoneFactory, methodName, 
+            XposedHelpers.findAndHookMethod(mClsPhoneFactory, getMakePhoneMethodName(), 
                     Context.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
@@ -132,10 +159,9 @@ public class PhoneWrapper {
     }
 
     private static void setPreferredNetworkType(int networkType) {
-        Object defPhone = XposedHelpers.callStaticMethod(mClsPhoneFactory, "getDefaultPhone");
-        if (defPhone == null) return;
-
         try {
+            Object defPhone = getPhone();
+            if (defPhone == null) return;
             if (Utils.hasGeminiSupport()) {
                 Class<?>[] paramArgs = new Class<?>[3];
                 paramArgs[0] = int.class;

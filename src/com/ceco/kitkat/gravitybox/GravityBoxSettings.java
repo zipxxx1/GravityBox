@@ -1540,7 +1540,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getPreferenceScreen().removePreference(mPrefCatPhone);
                 mPrefCatQsTileSettings.removePreference(mPrefCatQsNmTileSettings);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
-                mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
+                mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
            }
@@ -1549,7 +1549,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.isMtkDevice()) {
                 mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
-                mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
+                if (!Utils.hasMsimSupport()) {
+                    mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
+                }
                 mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text);
@@ -1558,7 +1560,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 if (!sSystemProperties.hasGeminiSupport) {
                     mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
                     mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
-                    mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
+                    mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                     mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                     mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text); 

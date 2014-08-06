@@ -413,6 +413,14 @@
                         android:title="@string/pref_network_mode_tile_cdma_title"
                         android:defaultValue="false" />
 
+                    <ListPreference
+                        android:key="pref_qs_network_mode_sim_slot" 
+                        android:title="@string/pref_qs_network_mode_sim_slot_title"
+                        android:entries="@array/network_mode_sim_slot_entries"
+                        android:entryValues="@array/network_mode_sim_slot_values"
+                        android:defaultValue="0"
+                        android:dependency="pref_qs_management_enable" />
+
                 </PreferenceScreen>
 
                 <MultiSelectListPreference 
@@ -467,14 +475,6 @@
                 android:title="@string/pref_qs_tile_span_disable_title"
                 android:summary="@string/pref_qs_tile_span_disable_summary"
                 android:defaultValue="false"
-                android:dependency="pref_qs_management_enable" />
-
-            <ListPreference
-                android:key="pref_qs_network_mode_sim_slot" 
-                android:title="@string/pref_qs_network_mode_sim_slot_title"
-                android:entries="@array/network_mode_sim_slot_entries"
-                android:entryValues="@array/network_mode_sim_slot_values"
-                android:defaultValue="0"
                 android:dependency="pref_qs_management_enable" />
 
             <ListPreference 
