@@ -1670,11 +1670,11 @@
     <string name="hwkey_action_custom">Action personnalisée</string>
 
     <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Temporisation des fenêtres flottantes</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Pour règler le délai de visibilité des fenêtres flottantes. 0 = jusqu\'à ouverture</string>
+    <string name="pref_unc_as_headsup_timeout_title">Temporisation des notifications flottantes</string>
+    <string name="pref_unc_as_headsup_timeout_summary">Pour règler le délai de visibilité des notifications flottantes. 0 = jusqu\'à ouverture</string>
 
     <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Position des fenêtres flottantes</string>
+    <string name="pref_unc_as_headsup_position_title">Position des notifications flottantes</string>
     <string name="headsup_position_top">En haut</string>
     <string name="headsup_position_center">Centrée</string>
     <string name="headsup_position_bottom">En bas</string>
