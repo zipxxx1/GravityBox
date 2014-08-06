@@ -121,7 +121,7 @@ public class ModBatteryStyle {
                 });
             } catch (Throwable t) {
                 // Specific layout not found, so let's work with standard layout 
-                layout = Utils.hasGeminiSupport() ? "gemini_super_status_bar" : "super_status_bar";
+                layout = ModStatusBar.getSuperStatusbarLayoutName();
             } 
             final String[] batteryPercentTextIds = new String[] { "percentage", "battery_text" };
 

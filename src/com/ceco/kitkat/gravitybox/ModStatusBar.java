@@ -272,13 +272,35 @@ public class ModStatusBar {
         }
     }
 
+    public static String getSuperStatusbarLayoutName() {
+        if (Utils.hasGeminiSupport()) {
+            return Utils.hasLenovoCustomUI() ? "lenovo_gemini_super_status_bar" : "gemini_super_status_bar";
+        } else if (PhoneWrapper.hasMsimSupport()) {
+            return "msim_super_status_bar";
+        } else {
+            return "super_status_bar";
+        }
+    }
+
+    public static String getStatusbarLayoutName() {
+        if (PhoneWrapper.hasMsimSupport()) {
+            return "msim_status_bar";
+        } else {
+            return "status_bar";
+        }
+    }
+
+    public static String getPanelHolderLayoutName() {
+        if (PhoneWrapper.hasMsimSupport()) {
+            return "msim_panel_holder";
+        } else {
+            return "panel_holder";
+        }
+    }
+
     public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
         try {
-            final String layout = Utils.hasGeminiSupport() ?
-                    Utils.hasLenovoCustomUI() ? "lenovo_gemini_super_status_bar" : "gemini_super_status_bar" :
-                        "super_status_bar";
-
-            resparam.res.hookLayout(PACKAGE_NAME, "layout", layout, new XC_LayoutInflated() {
+            resparam.res.hookLayout(PACKAGE_NAME, "layout", getSuperStatusbarLayoutName(), new XC_LayoutInflated() {
 
                 @Override
                 public void handleLayoutInflated(LayoutInflatedParam liparam) throws Throwable {
@@ -287,7 +309,7 @@ public class ModStatusBar {
                     if (mIconArea == null) return;
 
                     mRootView = (ViewGroup) liparam.view.findViewById(
-                            liparam.res.getIdentifier("status_bar", "id", PACKAGE_NAME));
+                            liparam.res.getIdentifier(getStatusbarLayoutName(), "id", PACKAGE_NAME));
                     if (mRootView == null) return;
 
                     mSbContents = (ViewGroup) liparam.view.findViewById(liparam.res.getIdentifier(
@@ -310,7 +332,7 @@ public class ModStatusBar {
                             mBroadcastSubReceivers.add(mClock);
                             // find notification panel clock
                             final ViewGroup panelHolder = (ViewGroup) liparam.view.findViewById(
-                                    liparam.res.getIdentifier("panel_holder", "id", PACKAGE_NAME));
+                                    liparam.res.getIdentifier(getPanelHolderLayoutName(), "id", PACKAGE_NAME));
                             if (panelHolder != null) {
                                 TextView clockExpanded = (TextView) panelHolder.findViewById(
                                         liparam.res.getIdentifier("clock", "id", PACKAGE_NAME));
