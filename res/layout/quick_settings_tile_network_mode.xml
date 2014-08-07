@@ -27,4 +27,13 @@
         android:layout_gravity="center"
         android:gravity="center" />
 
+    <TextView
+        style="@style/TextAppearance.QuickSettings.TileView"
+        android:id="@+id/simSlot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:gravity="center"
+        android:visibility="gone" />
+
 </FrameLayout>

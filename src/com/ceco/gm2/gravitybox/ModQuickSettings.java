@@ -626,6 +626,7 @@ public class ModQuickSettings {
             intentFilter.addAction(UsbTetherTile.ACTION_USB_STATE);
             intentFilter.addAction(Intent.ACTION_MEDIA_SHARED);
             intentFilter.addAction(UsbTetherTile.ACTION_MEDIA_UNSHARED);
+            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
         }
     };

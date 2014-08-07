@@ -78,6 +78,7 @@ public class PhoneWrapper {
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
 
+        @SuppressLint("NewApi")
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ACTION_CHANGE_NETWORK_TYPE) &&
@@ -90,6 +91,11 @@ public class PhoneWrapper {
                 mSimSlot = intent.getIntExtra(GravityBoxSettings.EXTRA_SIM_SLOT, 0);
                 if (DEBUG) log("received ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED broadcast: " +
                                     "mSimSlot = " + mSimSlot);
+                setPreferredNetworkType(Build.VERSION.SDK_INT > 16 ?
+                        Settings.Global.getInt(mContext.getContentResolver(), 
+                                PREFERRED_NETWORK_MODE, getDefaultNetworkType()) :
+                        Settings.Secure.getInt(mContext.getContentResolver(), 
+                                PREFERRED_NETWORK_MODE, getDefaultNetworkType()));
             }
         }
     };
