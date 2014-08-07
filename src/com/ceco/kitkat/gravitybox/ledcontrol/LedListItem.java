@@ -43,7 +43,9 @@ public class LedListItem implements IBaseListAdapterItem {
         mAppInfo = appInfo;
         PackageManager pm = mContext.getPackageManager();
         mAppName = (String) mAppInfo.loadLabel(pm);
-        mAppIcon = mAppInfo.loadIcon(pm);
+        try {
+            mAppIcon = mAppInfo.loadIcon(pm);
+        } catch (Throwable t) { /* wtf? */ t.printStackTrace(); }
         mLedSettings = LedSettings.deserialize(mContext, appInfo.packageName);
     }
 
