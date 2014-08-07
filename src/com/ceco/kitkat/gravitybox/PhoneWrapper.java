@@ -216,4 +216,15 @@ public class PhoneWrapper {
         if (DEBUG) log("hasMsimSupport: " + mHasMsimSupport);
         return mHasMsimSupport;
     }
+
+    public static int getMsimPreferredDataSubscription() {
+        try {
+            Object mtm = XposedHelpers.callStaticMethod(
+                    XposedHelpers.findClass("android.telephony.MSimTelephonyManager", null),
+                        "getDefault");
+            return (Integer) XposedHelpers.callMethod(mtm, "getPreferredDataSubscription");
+        } catch (Throwable t) {
+            return 0;
+        }
+    }
 }

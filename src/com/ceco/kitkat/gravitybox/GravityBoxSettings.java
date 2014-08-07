@@ -1582,6 +1582,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifExpandAll);
             }
 
+            // Remove Moto XT preferences
+            if (Utils.isMotoXtDevice()) {
+                mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE));
+                mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS));
+            }
+
             // TODO: rework for KitKat compatibility
             getPreferenceScreen().removePreference(mPrefCatTransparencyManager);
             mPrefCatDisplay.removePreference(mPrefButtonBacklightNotif);

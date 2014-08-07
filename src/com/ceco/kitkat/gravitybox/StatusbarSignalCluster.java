@@ -114,12 +114,16 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         SignalType signalType;
 
         public SignalActivity(ViewGroup container, SignalType type) {
+            this(container, type, Gravity.BOTTOM | Gravity.CENTER);
+        }
+
+        public SignalActivity(ViewGroup container, SignalType type, int gravity) {
             signalType = type;
             if (mDataActivityEnabled) {
                 activityView = new ImageView(container.getContext());
                 FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
                         FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-                lp.gravity = Gravity.CENTER | Gravity.BOTTOM;
+                lp.gravity = gravity;
                 activityView.setLayoutParams(lp);
                 container.addView(activityView);
                 if (type == SignalType.WIFI) {
@@ -211,7 +215,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     } 
 
     public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
-        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false)) {
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
+                !Utils.isMotoXtDevice()) {
             XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
             sQsHpResId = XResources.getFakeResId(modRes, R.drawable.ic_qs_signal_hp);
             sQsHpFullResId = XResources.getFakeResId(modRes, R.drawable.ic_qs_signal_full_hp);
@@ -355,7 +360,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             }
         }
 
-        if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false)) {
+        if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
+                !Utils.isMotoXtDevice()) {
             try {
                 final Class<?> networkCtrlClass = XposedHelpers.findClass(
                         "com.android.systemui.statusbar.policy.NetworkController", 
