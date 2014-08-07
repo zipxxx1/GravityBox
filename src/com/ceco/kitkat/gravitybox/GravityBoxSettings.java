@@ -1555,8 +1555,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 if (!sSystemProperties.hasMsimSupport) {
                     mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
+                    mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                 }
-                mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
+                if (Utils.isMotoXtDevice()) {
+                    mPrefCatStatusbarColors.removePreference(mPrefSbSignalColorMode);
+                }
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text);
             } else {

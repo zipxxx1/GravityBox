@@ -78,7 +78,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     }
 
     @Override
-    protected void updateMobileIcon() {
+    protected void updateMobileIcon(int simSlot) {
         try {
             Object mobile = XposedHelpers.getObjectField(mView, "mMobile");
             if (mMobile == null) {

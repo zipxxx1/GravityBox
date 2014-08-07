@@ -49,7 +49,7 @@ import android.widget.LinearLayout;
 
 public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManagerListener {
     public static final String TAG = "GB:StatusbarSignalCluster";
-    private static final boolean DEBUG = false;
+    protected static final boolean DEBUG = false;
 
     protected static XSharedPreferences sPrefs;
 
@@ -87,6 +87,16 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         if (!mErrorsLogged.contains(key)) {
             XposedBridge.log(t);
             mErrorsLogged.add(key);
+        }
+    }
+
+    public static String getClassName() {
+        if (PhoneWrapper.hasMsimSupport()) {
+            return "com.android.systemui.statusbar.MSimSignalClusterView";
+        } else if (Utils.hasGeminiSupport()) {
+            return "com.android.systemui.statusbar.SignalClusterViewGemini";
+        } else {
+            return "com.android.systemui.statusbar.SignalClusterView";
         }
     }
 
@@ -228,7 +238,9 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     public static StatusbarSignalCluster create(LinearLayout view, StatusBarIconManager iconManager,
             XSharedPreferences prefs) {
         sPrefs = prefs;
-        if (Utils.isMtkDevice()) {
+        if (PhoneWrapper.hasMsimSupport()) {
+            return new StatusbarSignalClusterMsim(view, iconManager);
+        } else if (Utils.isMtkDevice()) {
             return new StatusbarSignalClusterMtk(view, iconManager);
         } else {
             return new StatusbarSignalCluster(view, iconManager);
@@ -273,7 +285,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         return field;
     }
 
-    private void createHooks() {
+    protected void createHooks() {
         try {
             XposedHelpers.findAndHookMethod(mView.getClass(), "apply", new XC_MethodHook() {
                 @Override
@@ -387,7 +399,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
     }
 
-    private void update() {
+    protected void update() {
         if (mView != null) {
             try {
                 XposedHelpers.callMethod(mView, "apply");
@@ -398,6 +410,10 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     protected void apply() {
+        apply(0);
+    }
+
+    protected void apply(int simSlot) {
         try {
             boolean doApply = true;
             if (mFldWifiGroup != null) {
@@ -407,7 +423,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 if (mIconManager.isColoringEnabled()) {
                     updateWiFiIcon();
                     if (!XposedHelpers.getBooleanField(mView, "mIsAirplaneMode")) {
-                        updateMobileIcon();
+                        updateMobileIcon(simSlot);
                     }
                     if (DEBUG) log("Signal icon colors updated");
                 }
@@ -435,7 +451,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     }
 
-    protected void updateMobileIcon() {
+    protected void updateMobileIcon(int simSlot) {
         try {
             if (XposedHelpers.getBooleanField(mView, "mMobileVisible") &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
