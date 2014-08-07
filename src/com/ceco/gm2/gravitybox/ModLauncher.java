@@ -62,6 +62,7 @@ public class ModLauncher {
                 new DynamicGrid("mProfile", "numRows", "numColumns"));
         CLASS_DYNAMIC_GRID.put("nw", new DynamicGrid("Bq", "yx", "yy"));
         CLASS_DYNAMIC_GRID.put("rf", new DynamicGrid("DU", "AW", "AX"));
+        CLASS_DYNAMIC_GRID.put("sg", new DynamicGrid("Ez", "BB", "BC"));
     }
 
     private static boolean mShouldShowAppDrawer;
