@@ -1584,9 +1584,9 @@
     <string name="fahrenheit">Fahrenheit</string>
 
     <!-- Headset plug/unplug actions -->
-    <string name="pref_cat_headset_actions_title">Headset actions</string>
-    <string name="pref_headset_action_plug_title">On headset plugged</string>
-    <string name="pref_headset_action_unplug_title">On headset unplugged</string>
+    <string name="pref_cat_headset_actions_title">Ações associadas ao auricular</string>
+    <string name="pref_headset_action_plug_title">Quando o auricular for ligado</string>
+    <string name="pref_headset_action_unplug_title">Quando o auricular for desligado</string>
 
     <!-- Quiet Hours: mute vibrations -->
     <string name="pref_lc_qh_mute_vibe_title">Destivar vibração</string>
@@ -1633,5 +1633,31 @@
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Ecrã remoto</string>
+
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Permite gerir as configurações das notificações para todas aplicações (apenas das que não possuem configurações próprias)</string>
+    <string name="pref_unc_perapp_settings_title">Definições por aplicação</string>
+    <string name="pref_unc_perapp_settings_summary">Permite gerir as configurações das notificações por aplicação (sobrepondo as configurações pré-definidas)</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Permite gerir as configurações associadas ao modo Ecrã ativo</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Permite gerir horas de silêncio para notificações</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Ação personalizada</string>
+
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">Temporização das notificações flutuantes</string>
+    <string name="pref_unc_as_headsup_timeout_summary">Permite definir por quanto tempo deverá ser mostrada a notificação (0 = até desbloquear)</string>
+
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">Posicionamento das notificações flutuantes</string>
+    <string name="headsup_position_top">Topo</string>
+    <string name="headsup_position_center">Centro</string>
+    <string name="headsup_position_bottom">Fundo</string>
+
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">Utilização de dados 2</string>
 
 </resources>
