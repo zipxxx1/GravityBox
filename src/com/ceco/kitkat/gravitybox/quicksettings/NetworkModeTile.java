@@ -18,10 +18,10 @@ package com.ceco.kitkat.gravitybox.quicksettings;
 import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.PhoneWrapper;
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +29,7 @@ import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.TextView;
 
 public class NetworkModeTile extends BasicTile {
     private static final String TAG = "GB:NetworkModeTile";
@@ -40,6 +41,9 @@ public class NetworkModeTile extends BasicTile {
     private boolean mAllow2g3g;
     private boolean mAllowLte;
     private boolean mUseCdma;
+    private boolean mIsMsim;
+    private int mSimSlot;
+    private TextView mSimSlotTextView;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -119,9 +123,15 @@ public class NetworkModeTile extends BasicTile {
         mOnLongClick = new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setClassName("com.android.phone", "com.android.phone.Settings");
-                startActivity(intent);
+                if (mIsMsim) {
+                    Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
+                    intent.putExtra(GravityBoxSettings.EXTRA_SIM_SLOT, mSimSlot == 0 ? 1 : 0);
+                    mContext.sendBroadcast(intent);
+                } else {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.setClassName("com.android.phone", "com.android.phone.Settings");
+                    startActivity(intent);
+                }
                 return true;
             }
         };
@@ -132,11 +142,22 @@ public class NetworkModeTile extends BasicTile {
         mNetworkType = Settings.Global.getInt(cr, 
                 PhoneWrapper.PREFERRED_NETWORK_MODE, mDefaultNetworkType);
         if (DEBUG) log("mNetworkType=" + mNetworkType + "; mDefaultNetworkType=" + mDefaultNetworkType);
+
+        mIsMsim = PhoneWrapper.hasMsimSupport() || Utils.hasGeminiSupport();
     }
 
     @Override
     protected int onGetLayoutId() {
         return R.layout.quick_settings_tile_network_mode;
+    }
+
+    @Override
+    protected void onTileCreate() {
+        super.onTileCreate();
+        mSimSlotTextView = (TextView) mTile.findViewById(R.id.simSlot);
+        if (mIsMsim) {
+            mSimSlotTextView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -157,6 +178,17 @@ public class NetworkModeTile extends BasicTile {
         }
         updateFlags(value, prefs.getBoolean(GravityBoxSettings.PREF_KEY_NETWORK_MODE_TILE_LTE, false),
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_NETWORK_MODE_TILE_CDMA, false));
+
+        if (mIsMsim) {
+            try {
+                mSimSlot = Integer.valueOf(prefs.getString(
+                        GravityBoxSettings.PREF_KEY_QS_NETWORK_MODE_SIM_SLOT, "0"));
+            } catch (NumberFormatException nfe) {
+                log("Invalid value for SIM Slot preference: " + nfe.getMessage());
+            }
+            if (DEBUG) log("mSimSlot = " + mSimSlot);
+            mSimSlotTextView.setText(String.valueOf(mSimSlot+1));
+        }
     }
 
     @Override
@@ -173,6 +205,14 @@ public class NetworkModeTile extends BasicTile {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_NMT_CDMA)) {
                 updateCdmaFlags(intent.getBooleanExtra(GravityBoxSettings.EXTRA_NMT_CDMA, false));
             }
+        }
+
+        if (mIsMsim && intent.getAction().equals(
+                GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED)) {
+            mSimSlot = intent.getIntExtra(GravityBoxSettings.EXTRA_SIM_SLOT, 0);
+            if (DEBUG) log("received ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED broadcast: " +
+                                "mSimSlot = " + mSimSlot);
+            mSimSlotTextView.setText(String.valueOf(mSimSlot+1));
         }
     }
 

@@ -89,6 +89,8 @@ public class PhoneWrapper {
                 mSimSlot = intent.getIntExtra(GravityBoxSettings.EXTRA_SIM_SLOT, 0);
                 if (DEBUG) log("received ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED broadcast: " +
                                     "mSimSlot = " + mSimSlot);
+                setPreferredNetworkType(Settings.Global.getInt(mContext.getContentResolver(), 
+                        PREFERRED_NETWORK_MODE, getDefaultNetworkType()));
             }
         }
     };
