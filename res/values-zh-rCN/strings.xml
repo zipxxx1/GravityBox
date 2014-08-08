@@ -1678,5 +1678,8 @@
     <string name="headsup_position_top">顶部</string>
     <string name="headsup_position_center">中心</string>
     <string name="headsup_position_bottom">底部</string>
+    
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">数据使用 2</string>
 
 </resources>
