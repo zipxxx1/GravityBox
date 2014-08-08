@@ -1679,4 +1679,7 @@
     <string name="headsup_position_center">По центру</string>
     <string name="headsup_position_bottom">Внизу</string>
 
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">Мобильные данные 2</string>
+
 </resources>
