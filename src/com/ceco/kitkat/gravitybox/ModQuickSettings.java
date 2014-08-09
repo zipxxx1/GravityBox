@@ -683,6 +683,10 @@ public class ModQuickSettings {
                         MediaRouter mr = (MediaRouter) XposedHelpers.getObjectField(qsModel, "mMediaRouter");
                         mr.removeCallback((MediaRouter.Callback) 
                                 XposedHelpers.getObjectField(qsModel, "mRemoteDisplayRouteCallback"));
+                        View tile = (View) XposedHelpers.getObjectField(qsModel, "mRemoteDisplayTile");
+                        if (tile != null) {
+                            tile.setVisibility(View.GONE);
+                        }
                         if (DEBUG) log("Remote Display route callback unregistered");
                     }
                 }
