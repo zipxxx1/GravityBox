@@ -1,3 +1,38 @@
+Changelog 3.3.0 - 09/08/2014
+--------------------------------------
+- Added full support for Moto G Dual SIM running stock KitKat (except for carrier text options)
+- Quick settings:
+--- improved cast screen tile behavior
+--- made precautions to avoid rare battery drain coming from Remote Display related to cast screen tile
+--- added support for SIM 2 and network mode tiles on Moto G dual SIM devices
+--- Network mode tile:
+------ added option to choose to which SIM slot network mode tile applies (tile specific settings)
+------ long-press on tile switches SIM slot without a need to dive into tile specific settings
+- Signal cluster:
+--- added option to hide mobile signal icons when SIM slots are empty (Moto G dual SIM)
+- Heads up common:
+--- show heads up only in case notification is for current user (in case of multi-user environments such as tablets)
+- Ultimate notification control:
+--- removed "Do not disturb" option from Default settings
+--- added main screen with links to UNC features (improved user experience)
+--- improved detection of statusbar visibility when heads up is set to show only when statusbar hidden
+--- ActiveScreen: added option for setting heads up timeout (0 = until device is unlocked)
+--- ActiveScreen: added option for setting heads up position
+--- handle errors from package manager - potentially avoids rare crashes during app list loading
+- Ring targets: improved unification of predefined/custom icon sizes
+- Launcher tweaks: adjusted for compatibility with Google Search 3.6.13 
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Russian translations (thanks to gaich)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated French translation (thanks to ch-vox)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Slovak and Czech translations
+
 Changelog 3.2.5 - 11/07/2014
 --------------------------------------
 - Quick Settings:
