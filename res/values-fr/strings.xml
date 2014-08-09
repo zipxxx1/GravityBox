@@ -1682,4 +1682,8 @@
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Consommation de données 2</string>
 
+    <!-- MSIM Signal Cluster: auto-hide signal icons -->
+    <string name="pref_signal_icon_autohide_title">Masquer les icônes de signal</string>
+    <string name="pref_signal_icon_autohide_summary">Cache automatiquement les icônes du signal si aucune carte SIM n\'est insérée (redémarrage nécessaire)</string>
+
 </resources>
