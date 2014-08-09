@@ -1561,12 +1561,12 @@
     <string name="fahrenheit">Fahrenheit</string>
 
     <!-- Headset plug/unplug actions -->
-    <string name="pref_cat_headset_actions_title">Headset actions</string>
-    <string name="pref_headset_action_plug_title">On headset plugged</string>
-    <string name="pref_headset_action_unplug_title">On headset unplugged</string>
+    <string name="pref_cat_headset_actions_title">Ações associadas ao auricular</string>
+    <string name="pref_headset_action_plug_title">Quando o auricular for ligado</string>
+    <string name="pref_headset_action_unplug_title">Quando o auricular for desligado</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Destivar vibração</string>
+    <string name="pref_lc_qh_mute_vibe_title">Desativar vibração</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Modo interativo</string>
@@ -1579,5 +1579,8 @@
     <!-- Navbar keys: enable Android L icons -->
     <string name="pref_navbar_android_l_icons_enable_title">Ativar teclas de navegação do Android L</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Permite substituir os ícones padrão das teclas de navegação pelos do Android L (necessário reiniciar)</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Ação personalizada</string>
 
 </resources>
