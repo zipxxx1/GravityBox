@@ -1536,4 +1536,7 @@
     <string name="pref_navbar_android_l_icons_enable_title">Android L navigační ikony</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Nahradí původní ikony navigačních tlačítek ikonami z Android L (vyžaduje restart)</string>
 
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Vlastní akce</string>
+
 </resources>
