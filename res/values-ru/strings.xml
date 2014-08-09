@@ -1682,4 +1682,8 @@
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Мобильные данные 2</string>
 
+    <!-- MSIM Signal Cluster: auto-hide signal icons -->
+    <string name="pref_signal_icon_autohide_title">Автоскрытие значков сигнала</string>
+    <string name="pref_signal_icon_autohide_summary">Автоматическое скрытие значков сигнала, если SIM-карта не установлена (необходима перезагрузка)</string>
+
 </resources>
