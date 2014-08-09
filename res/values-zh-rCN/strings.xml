@@ -1681,5 +1681,9 @@
     
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">数据使用 2</string>
+    
+    <!-- MSIM Signal Cluster: auto-hide signal icons -->
+    <string name="pref_signal_icon_autohide_title">自动隐藏信号图标</string>
+    <string name="pref_signal_icon_autohide_summary">在未插入SIM卡时自动隐藏信号图标（需要重新启动）</string>
 
 </resources>
