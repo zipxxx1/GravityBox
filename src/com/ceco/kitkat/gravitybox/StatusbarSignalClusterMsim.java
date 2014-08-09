@@ -22,6 +22,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
 
     protected Object mNetworkControllerCallback2;
     protected SignalActivity[] mMobileActivity;
+    protected boolean mSignalIconAutohide;
 
     public StatusbarSignalClusterMsim(LinearLayout view, StatusBarIconManager iconManager) {
         super(view, iconManager);
@@ -31,6 +32,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected void initPreferences() {
         super.initPreferences();
         mConnectionStateEnabled = false;
+        mSignalIconAutohide = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_ICON_AUTOHIDE, false);
     }
 
     @Override
@@ -38,6 +40,14 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         try {
             XposedHelpers.findAndHookMethod(mView.getClass(), "applySubscription", 
                     int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mSignalIconAutohide) {
+                        int simSlot = (Integer) param.args[0];
+                        ((boolean[])XposedHelpers.getObjectField(mView, "mMobileVisible"))[simSlot] =
+                                PhoneWrapper.isMsimCardInserted(simSlot);
+                    }
+                }
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     apply((Integer) param.args[0]);

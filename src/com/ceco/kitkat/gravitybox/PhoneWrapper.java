@@ -229,4 +229,18 @@ public class PhoneWrapper {
             return 0;
         }
     }
+
+    public static boolean isMsimCardInserted(int slot) {
+        try {
+            Object mtm = XposedHelpers.callStaticMethod(
+                    XposedHelpers.findClass("android.telephony.MSimTelephonyManager", null),
+                        "getDefault");
+            int phoneCount = (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount");
+            return ((phoneCount > slot) &&
+                    (Boolean) XposedHelpers.callMethod(mtm, "hasIccCard", slot));
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return false;
+        }
+    }
 }

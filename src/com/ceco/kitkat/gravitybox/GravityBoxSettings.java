@@ -767,6 +767,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_HSA_STATE = "headsetState"; // 1 = plugged, 0 = unplugged
     public static final String EXTRA_HSA_URI = "headsetActionUri";
 
+    public static final String PREF_KEY_SIGNAL_ICON_AUTOHIDE = "pref_signal_icon_autohide";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -803,7 +805,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_FORCE_LTR_DIRECTION,
             PREF_KEY_QS_BATTERY_EXTENDED,
             PREF_KEY_HEADS_UP_MASTER_SWITCH,
-            PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE
+            PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE,
+            PREF_KEY_SIGNAL_ICON_AUTOHIDE
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -1586,6 +1589,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (Utils.isMotoXtDevice()) {
                 mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE));
                 mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS));
+            }
+
+            // Remove MSIM preferences for non-MSIM devices
+            if (!sSystemProperties.hasMsimSupport) {
+                mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_ICON_AUTOHIDE));
             }
 
             // TODO: rework for KitKat compatibility

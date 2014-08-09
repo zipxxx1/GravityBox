@@ -1617,4 +1617,8 @@
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Vzdialená obrazovka</string>
 
+    <!-- MSIM Signal Cluster: auto-hide signal icons -->
+    <string name="pref_signal_icon_autohide_title">Skryť ikony signálu</string>
+    <string name="pref_signal_icon_autohide_summary">Umožní automatické skrývanie ikon signálu pre prázdne SIM sloty (vyžaduje reštart)</string>
+
 </resources>
