@@ -71,6 +71,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
 
     static class ColorInfo {
         boolean coloringEnabled;
+        boolean wasColoringEnabled;
         int defaultIconColor;
         int[] iconColor;
         int defaultDataActivityColor;
@@ -159,6 +160,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     private void initColorInfo() {
         mColorInfo = new ColorInfo();
         mColorInfo.coloringEnabled = false;
+        mColorInfo.wasColoringEnabled = false;
         mColorInfo.defaultIconColor = getDefaultIconColor();
         mColorInfo.iconColor = new int[2];
         mColorInfo.defaultDataActivityColor = mGbResources.getInteger(
@@ -244,6 +246,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     }
 
     public void setColoringEnabled(boolean enabled) {
+        mColorInfo.wasColoringEnabled = mColorInfo.coloringEnabled;
         if (mColorInfo.coloringEnabled != enabled) {
             mColorInfo.coloringEnabled = enabled;
             clearCache();
@@ -500,8 +503,10 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 setCachedDrawable(key, d);
                 if (DEBUG) log("getBasicIcon: returning drawable for key: " + key);
                 return d;
-            } else {
+            } else if (mColorInfo.wasColoringEnabled) {
                 return mSystemUiRes.getDrawable(resId);
+            } else {
+                return null;
             }
         } catch (Throwable t) {
             log("getBasicIcon: " + t.getMessage());
