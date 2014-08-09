@@ -1594,6 +1594,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Remove MSIM preferences for non-MSIM devices
             if (!sSystemProperties.hasMsimSupport) {
                 mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_ICON_AUTOHIDE));
+            } else {
+                // TODO: carrier texts for MSIM devices
+                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
+                mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
             }
 
             // TODO: rework for KitKat compatibility
