@@ -1386,7 +1386,7 @@
     <string name="lc_active_screen_info">Funkcia aktívnej obrazovky slúži na automatické zapnutie obrazovky 
         po obdržaní každého nového oznámenia. To sa udeje len v prípade, ak nie je obrazovka zakrytá 
         (napr. ak nie je zariadenie vo vrecku alebo v púzdre). Voliteľne dôjde k automatickékmu rozbaleniu 
-        lišty oznámení v závislosti od aktuálnej bezpečnostnej politiky obrazovky uzamknutia. 
+        lišty oznámení alebo k zobrazeniu Heads up v závislosti od aktuálnej bezpečnostnej politiky obrazovky uzamknutia. 
         Funkcia aktívnej obrazovky sa uplatní len v prípade, ak je aktivovaná obrazovka uzamknutia.  
         Prepínač nižšie slúži na hlavné zapnutie/vypnutie funkcie. Ak je funkcia zapnutá, ďalšie jej nastavenia 
         budú prístupné na úrovni nastavení jednotlivých aplikácií.</string>
@@ -1616,6 +1616,32 @@
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Vzdialená obrazovka</string>
+
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Spravuje predvolené nastavenia, ktoré sú aplikované automaticky na všetky aplikácie, ktoré nemajú aktívne vlastné nastavenia</string>
+    <string name="pref_unc_perapp_settings_title">Nastavenia aplikácií</string>
+    <string name="pref_unc_perapp_settings_summary">Spravuje vlastné nastavenia konkrétnych aplikácií</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Spravuje všeobecné nastavenia pre funkciu aktívnej obrazovky</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Spravuje tiché hodiny oznámení</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Vlastná akcia</string>
+
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">Heads up časovač</string>
+    <string name="pref_unc_as_headsup_timeout_summary">Po akej dobe zavrieť notifikačné okno. 0 = po odomknutí zariadenia.</string>
+
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">Heads up pozícia</string>
+    <string name="headsup_position_top">Hore</string>
+    <string name="headsup_position_center">V strede</string>
+    <string name="headsup_position_bottom">Dole</string>
+
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">Využitie dát 2</string>
 
     <!-- MSIM Signal Cluster: auto-hide signal icons -->
     <string name="pref_signal_icon_autohide_title">Skryť ikony signálu</string>
