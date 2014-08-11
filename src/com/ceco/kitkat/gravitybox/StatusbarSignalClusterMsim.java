@@ -148,7 +148,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                 ImageView mobile = (ImageView) XposedHelpers.getObjectField(mView, sMobileViewNames[simSlot]);
                 if (mobile != null) {
                     int resId = ((int[])XposedHelpers.getObjectField(mView, "mMobileStrengthIconId"))[simSlot];
-                    Drawable d = mIconManager.getMobileIcon(resId, true);
+                    Drawable d = mIconManager.getMobileIcon(simSlot, resId, true);
                     if (d != null) mobile.setImageDrawable(d);
                 }
                 if (mIconManager.isMobileIconChangeAllowed()) {
@@ -157,7 +157,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                         try {
                             int resId = ((int[])XposedHelpers.getObjectField(mView, "mMobileTypeIconId"))[simSlot];
                             Drawable d = mResources.getDrawable(resId).mutate();
-                            d = mIconManager.applyColorFilter(d);
+                            d = mIconManager.applyColorFilter(simSlot, d);
                             mobileType.setImageDrawable(d);
                         } catch (Resources.NotFoundException e) { 
                             mobileType.setImageDrawable(null);
