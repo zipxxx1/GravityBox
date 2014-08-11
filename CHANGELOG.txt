@@ -1,3 +1,12 @@
+Changelog 3.3.1 - 11/08/2014
+--------------------------------------
+- Fixed crash in GravityBox settings
+- Don't show toasts when Headset is plugged/unplugged when no actions are set
+- Fixed coloring of signal icon for SIM slot 2 (Moto G Dual SIM)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated French translation (thanks to ch-vox)
+- Updated Japanese translations (thanks to WedyDQ10)
+
 Changelog 3.3.0 - 09/08/2014
 --------------------------------------
 - Added full support for Moto G Dual SIM running stock KitKat (except for carrier text options)
