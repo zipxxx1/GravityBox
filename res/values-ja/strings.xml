@@ -1556,4 +1556,7 @@
     <string name="pref_navbar_android_l_icons_enable_title">Android Lナビキーアイコンにする</string>
     <string name="pref_navbar_android_l_icons_enable_summary">ナビキーのアイコンをAndroid Lのものに変更します。(要再起動)</string>
 
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">カスタムアクション</string>
+
 </resources>
