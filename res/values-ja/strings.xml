@@ -1615,4 +1615,34 @@
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">リモートディスプレイ</string>
     
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">個別設定が有効でない全てのアプリに対する標準設定を管理します。</string>
+    <string name="pref_unc_perapp_settings_title">個別設定</string>
+    <string name="pref_unc_perapp_settings_summary">個別の通知設定を管理します。</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">アクティブスクリーン機能の設定を管理します。</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">通知のお休みモードの設定を管理します。</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">カスタムアクション</string>
+
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">Heads upタイムアウト</string>
+    <string name="pref_unc_as_headsup_timeout_summary">Heads up通知ウインドウを表示する時間を指定します。 0 = アンロックされるまで表示</string>
+
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">Heads up通知の位置</string>
+    <string name="headsup_position_top">上</string>
+    <string name="headsup_position_center">中央</string>
+    <string name="headsup_position_bottom">下</string>
+
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">データ使用量2</string>
+
+    <!-- MSIM Signal Cluster: auto-hide signal icons -->
+    <string name="pref_signal_icon_autohide_title">電波アイコンを自動的に隠す</string>
+    <string name="pref_signal_icon_autohide_summary">SIMカードが挿入されていないときに電波アイコンを非表示にします。(要再起動)</string>
+
 </resources>
