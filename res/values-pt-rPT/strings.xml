@@ -1583,4 +1583,14 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Ação personalizada</string>
 
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Permite gerir as configurações das notificações para todas aplicações (apenas das que não possuem configurações próprias)</string>
+    <string name="pref_unc_perapp_settings_title">Definições por aplicação</string>
+    <string name="pref_unc_perapp_settings_summary">Permite gerir as configurações das notificações por aplicação (sobrepondo as configurações pré-definidas)</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Permite gerir as configurações associadas ao modo Ecrã ativo</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Permite gerir horas de silêncio para notificações</string>
+
 </resources>
