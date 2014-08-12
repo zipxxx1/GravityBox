@@ -1573,4 +1573,14 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Własna akcja</string>
 
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Zarządza domyślnymi ustawieniami powiadomień dla wszystkich aplikacji, które nie mają włączonych żadnych własnych ustawień</string>
+    <string name="pref_unc_perapp_settings_title">Ustawienia dla aplikacji</string>
+    <string name="pref_unc_perapp_settings_summary">Zarządza ustawieniami powiadomień na bazie ustawień aplikacji, zastępując domyślne ustawienia</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Zarządza wspólnymi ustawieniami Aktywnego Ekranu</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Zarządza funkcją Cichych Godzin dla powiadomień</string>
+
 </resources>
