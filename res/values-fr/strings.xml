@@ -1600,4 +1600,14 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Action personnalisée</string>
 
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Gère les paramètres par défaut des notifications pour les applications qui n\'ont pas leurs propres paramètres par-appli activés</string>
+    <string name="pref_unc_perapp_settings_title">Paramètres par-appli</string>
+    <string name="pref_unc_perapp_settings_summary">Gère les paramètres des notifications application par application en remplaçant les paramètres par défaut</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Gère les paramètres communs pour l\'option Écran Actif</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Gère les Heures silencieuses pour les notifications</string>
+
 </resources>
