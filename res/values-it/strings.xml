@@ -1582,4 +1582,7 @@
     <string name="pref_navbar_android_l_icons_enable_title">Icone pulsanti Android L</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Sostituisce le icone dei pulsanti della barra di navigazione standard con quelle di Android L (richiede riavvio)</string>
 
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Azione personalizzata</string>
+
 </resources>
