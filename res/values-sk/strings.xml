@@ -1539,4 +1539,14 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Vlastná akcia</string>
 
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Spravuje predvolené nastavenia, ktoré sú aplikované automaticky na všetky aplikácie, ktoré nemajú aktívne vlastné nastavenia</string>
+    <string name="pref_unc_perapp_settings_title">Nastavenia aplikácií</string>
+    <string name="pref_unc_perapp_settings_summary">Spravuje vlastné nastavenia konkrétnych aplikácií</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Spravuje všeobecné nastavenia pre funkciu aktívnej obrazovky</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Spravuje tiché hodiny oznámení</string>
+
 </resources>
