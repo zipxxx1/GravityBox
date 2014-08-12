@@ -361,7 +361,7 @@ public class ModHwKeys {
                 }
             } else if (action.equals(Intent.ACTION_HEADSET_PLUG)) {
                 int state = intent.getIntExtra("state", 0);
-                if (state == 0 || state == 1) {
+                if ((state == 0 || state == 1) && mHeadsetUri[state] != null) {
                     launchCustomApp(mHeadsetUri[state]);
                 }
             }
