@@ -1559,4 +1559,14 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">カスタムアクション</string>
 
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">個別設定が有効でない全てのアプリに対する標準設定を管理します。</string>
+    <string name="pref_unc_perapp_settings_title">個別設定</string>
+    <string name="pref_unc_perapp_settings_summary">個別の通知設定を管理します。</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">アクティブスクリーン機能の設定を管理します。</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">通知のお休みモードの設定を管理します。</string>
+
 </resources>
