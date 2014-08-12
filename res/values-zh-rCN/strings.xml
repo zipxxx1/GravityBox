@@ -1600,4 +1600,14 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">自定义操作</string>
 
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">启用通知管理默认设置为每个应用程序设置自己的应用程序</string>
+    <string name="pref_unc_perapp_settings_title">每个应用程序设置</string>
+    <string name="pref_unc_perapp_settings_summary">通知管理设置在每个应用程序的基础上覆盖默认设置</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">管理主屏幕功能常用设置</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">管理静音时段通知</string>
+
 </resources>
