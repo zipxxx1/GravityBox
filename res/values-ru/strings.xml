@@ -1589,7 +1589,7 @@
     <string name="pref_lc_qh_interactive_title">Интерактивный режим</string>
     <string name="pref_lc_qh_interactive_summary">Тихий час всегда применяется к уведомлениям во время действий пользователя 
         (с соблюдением настроек игнорирования по приложениям)</string>
-		
+
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Вкл удаление снимка экрана</string>
 
@@ -1599,5 +1599,15 @@
 
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Пользовательское действие</string>
+
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Управление параметрами по умолчанию уведомлений для всех приложений, для которых не применяются собственные настройки по приложениям</string>
+    <string name="pref_unc_perapp_settings_title">Настройки по приложениям</string>
+    <string name="pref_unc_perapp_settings_summary">Управление настройками уведомлений по приложениям, заменяющими параметры по умолчанию</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Управление общими настройками функции активного экрана</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Управление тихим часом для уведомлений</string>
 
 </resources>
