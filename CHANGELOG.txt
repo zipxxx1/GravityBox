@@ -1,3 +1,25 @@
+Changelog 3.2.2 - 13/08/2014
+--------------------------------------
+- Ultimate notification control:
+--- added main screen with links to UNC features (improved user experience)
+--- handle errors from package manager - potentially avoids rare crashes during app list loading
+- Ring targets: improved unification of predefined/custom icon sizes
+- Launcher tweaks: adjusted for compatibility with Google Search 3.6.13
+- Navigation key actions: major rework which allows to bind Custom action to all key actions instead of using limited "Launch custom app 1/2"
+--- removed "Launch custom app 1/2" from action list as well as related options for choosing custom app 1/2
+--- added "Custom action" to the list of available actions which when set opens app picker for user to choose desired action
+- FakeID vulnerability patch (thanks to Tungstwenty@XDA for original Xposed module - https://github.com/Tungstwenty/FakeIDFix):
+--- patches new security vulnerability labeled "Fake ID" (Google bug 13678484) - http://bluebox.com/technical/android-fake-id-vulnerability/
+- Updated Japanese translation (thanks to WedyDQ10)
+- Updated Russian translation (thanks to gaich)
+- Updated Italian translation (thanks to pesa1234)
+- Updated Chinese (Simplified) translation (thanks to liveasx)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Spanish translation (thanks to jvbferrer)
+- Updated French translation (thanks to ch-vox)
+- Updated Polish translation (thanks to xtrem007)
+- Updated Slovak and Czech translations
+
 Changelog 3.2.1 - 15/07/2014
 --------------------------------------
 - Fixed statusbar battery percentages showing 0 after reboot when extended battery tile is enabled
