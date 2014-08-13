@@ -1583,6 +1583,16 @@
     <string name="pref_navbar_android_l_icons_enable_summary">Sostituisce le icone dei pulsanti della barra di navigazione standard con quelle di Android L (richiede riavvio)</string>
 
     <!-- Key actions: custom action -->
-    <string name="hwkey_action_custom">Azione personalizzata</string>
-
+    <string name="hwkey_action_custom">Azioni personalizzate</string>
+    
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Gestisci le impostazioni predefinite per le notifiche delle app che non hanno un profilo personalizzato</string>
+    <string name="pref_unc_perapp_settings_title">Impostazioni app</string>
+    <string name="pref_unc_perapp_settings_summary">Gestisci un profilo personalizzato da sovrascrivere alle impostazioni predefinite per le notifiche delle app</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Imposta alcuni parametri generici per la funzione Active Screen</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Imposta le Ore Notturne per le notifiche</string>
+    
 </resources>
