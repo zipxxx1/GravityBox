@@ -24,14 +24,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Switch;
+import android.preference.PreferenceFragment;
 
 public class ActiveScreenActivity extends Activity {
-    private SharedPreferences mPrefs;
-    private Switch mMasterSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +39,43 @@ public class ActiveScreenActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        mPrefs = getSharedPreferences("ledcontrol", Context.MODE_WORLD_READABLE);
-
         setContentView(R.layout.active_screen_activity);
+    }
 
-        mMasterSwitch = (Switch) findViewById(R.id.as_switch);
-        mMasterSwitch.setChecked(mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false));
-        mMasterSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mPrefs.edit().putBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, isChecked).commit();
-                Intent intent = new Intent(LedSettings.ACTION_UNC_SETTINGS_CHANGED);
-                intent.putExtra(LedSettings.EXTRA_UNC_AS_ENABLED, isChecked);
-                sendBroadcast(intent);
+    public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
+        private SharedPreferences mPrefs;
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            getPreferenceManager().setSharedPreferencesName("ledcontrol");
+            getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
+            mPrefs = getPreferenceManager().getSharedPreferences();
+
+            addPreferencesFromResource(R.xml.led_control_active_screen_settings);
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            mPrefs.registerOnSharedPreferenceChangeListener(this);
+        }
+
+        @Override
+        public void onPause() {
+            mPrefs.unregisterOnSharedPreferenceChangeListener(this);
+            super.onPause();
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+            Intent intent = new Intent(LedSettings.ACTION_UNC_SETTINGS_CHANGED);
+            if (LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED.equals(key)) {
+                intent.putExtra(LedSettings.EXTRA_UNC_AS_ENABLED, prefs.getBoolean(key, false));
             }
-        });
+            prefs.edit().commit();
+            getActivity().sendBroadcast(intent);
+        }
     }
 }
