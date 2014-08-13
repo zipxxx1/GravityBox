@@ -1656,4 +1656,34 @@
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Trasmetti schermo</string>
 
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Gestisci le impostazioni predefinite per le notifiche delle app che non hanno un profilo personalizzato</string>
+    <string name="pref_unc_perapp_settings_title">Impostazioni app</string>
+    <string name="pref_unc_perapp_settings_summary">Gestisci un profilo personalizzato da sovrascrivere alle impostazioni predefinite per le notifiche delle app</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Imposta alcuni parametri generici per la funzione Active Screen</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Imposta le Ore Notturne per le notifiche</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Azioni personalizzate</string>
+
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">Timeout notifiche a comparsa</string>
+    <string name="pref_unc_as_headsup_timeout_summary">Specifica quanto tempo la notifica deve essere mostrata. 0 = finchè non viene sbloccato il dispositivo.</string>
+
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">Posizione Notifiche a comparsa</string>
+    <string name="headsup_position_top">In alto</string>
+    <string name="headsup_position_center">Al centro</string>
+    <string name="headsup_position_bottom">In basso</string>
+
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">Utilizzo Dati 2</string>
+
+    <!-- MSIM Signal Cluster: auto-hide signal icons -->
+    <string name="pref_signal_icon_autohide_title">Nascondi automaticamente icone segnale</string>
+    <string name="pref_signal_icon_autohide_summary">Nasconde automaticamente le icone del segnale quando la scheda SIM non è inserita (richiede riavvio)</string>
+
 </resources>
