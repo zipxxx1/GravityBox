@@ -144,11 +144,6 @@ public class LedControlActivity extends ListActivity implements ListItemActionHa
             }
 
             @Override
-            protected void onCancelled() {
-                dismissProgressDialog();
-            }
-
-            @Override
             protected void onPostExecute(ArrayList<LedListItem> result) {
                 dismissProgressDialog();
                 mSearchEditText.setText("");
@@ -176,6 +171,7 @@ public class LedControlActivity extends ListActivity implements ListItemActionHa
     }
 
     private void cancelSetData() {
+        dismissProgressDialog();
         if (mAsyncTask != null && mAsyncTask.getStatus() == AsyncTask.Status.RUNNING) {
             mAsyncTask.cancel(true);
         }
