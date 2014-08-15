@@ -692,7 +692,6 @@ public class ModLedControl {
                         | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
                         | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                         | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                        | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM
                         | WindowManager.LayoutParams.FLAG_SPLIT_TOUCH,
                     PixelFormat.TRANSLUCENT);
             mHeadsUpLp.flags |= WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
