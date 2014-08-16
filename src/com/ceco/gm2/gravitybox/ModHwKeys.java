@@ -191,6 +191,9 @@ public class ModHwKeys {
             actionId = id;
             customApp = cApp;
         }
+        public HwKeyAction clone() {
+            return new HwKeyAction(actionId, customApp);
+        }
     }
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {

@@ -553,4 +553,10 @@ public class ModPieControls {
         mPieContainer.setTriggerSlots(mPieTriggerSlots);
         attachPie();
     }
+
+    public static void setRecentAlt(boolean recentAlt) {
+        if (mPieController != null) {
+            mPieController.setRecentAlt(recentAlt);
+        }
+    }
 }

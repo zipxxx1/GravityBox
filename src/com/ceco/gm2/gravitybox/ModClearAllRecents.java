@@ -59,9 +59,6 @@ public class ModClearAllRecents {
     public static final String CLASS_RECENT_ACTIVITY = "com.android.systemui.recent.RecentsActivity";
     private static final boolean DEBUG = false;
 
-    public static final String NAVBAR_RECENTS_CLEAR_ALL = "navbarRecentsClearAll";
-    public static final String EXTRA_NAVBAR_RECENTS_CLEAR_ALL = "navbarRecentsClearAllShow";
-
     private static XSharedPreferences mPrefs;
     private static ImageView mRecentsClearButton;
     private static int mClearRecentsMode;
@@ -339,10 +336,8 @@ public class ModClearAllRecents {
     };
 
     private static void setRecentsClearAll(Boolean show, Context context) {
-        Intent intent = new Intent(NAVBAR_RECENTS_CLEAR_ALL);
-        intent.putExtra(EXTRA_NAVBAR_RECENTS_CLEAR_ALL, show);
-        context.sendBroadcast(intent);
-        if (DEBUG) log("setRecentsClearAll broadcast sent");
+        ModNavigationBar.setRecentAlt(show);
+        ModPieControls.setRecentAlt(show);
     }
 
     private static void updateButtonLayout(View container) {
