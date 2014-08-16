@@ -77,6 +77,7 @@ public class ModLedControl {
     private static final String NOTIF_EXTRA_HEADS_UP_EXPANDED = "gbHeadsUpExpanded";
     private static final String NOTIF_EXTRA_HEADS_UP_GRAVITY = "gbHeadsUpGravity";
     private static final String NOTIF_EXTRA_HEADS_UP_TIMEOUT = "gbHeadsUpTimeout";
+    private static final String NOTIF_EXTRA_HEADS_UP_ALPHA = "gbHeadsUpAlpha";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
     private static final int MSG_SHOW_HEADS_UP = 1026;
     private static final int MSG_HIDE_HEADS_UP = 1027;
@@ -371,6 +372,9 @@ public class ModLedControl {
                                     mPrefs.getString(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_POSITION, "17")));
                             n.extras.putInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT,
                                     mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT, 10));
+                            n.extras.putFloat(NOTIF_EXTRA_HEADS_UP_ALPHA,
+                                    (float)(100 - mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA,
+                                            0)) / 100f);
                         }
                     }
                 }
@@ -464,6 +468,7 @@ public class ModLedControl {
     static class HeadsUpParams {
         int yOffset;
         int gravity;
+        float alpha;
     }
 
     private static BroadcastReceiver mUserPresentReceiver = new BroadcastReceiver() {
@@ -570,6 +575,8 @@ public class ModLedControl {
                         mHeadsUpParams.gravity = n.extras.getInt(NOTIF_EXTRA_HEADS_UP_GRAVITY,
                                 Integer.valueOf(prefs.getString(
                                         GravityBoxSettings.PREF_KEY_HEADS_UP_POSITION, "48")));
+                        mHeadsUpParams.alpha = n.extras.getFloat(NOTIF_EXTRA_HEADS_UP_ALPHA,
+                                (float)(100 - prefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_ALPHA, 0)) / 100f);
                         maybeUpdateHeadsUpLayout(headsUpView);
                     }
 
@@ -731,6 +738,7 @@ public class ModLedControl {
 
         final int gravity = isImeShowing() ? Gravity.TOP : mHeadsUpParams.gravity;
         final int yOffset = gravity != Gravity.TOP ? 0 : mHeadsUpParams.yOffset;
+        headsUpView.setAlpha(mHeadsUpParams.alpha);
 
         final boolean layoutChanged = mHeadsUpLp.y != yOffset ||
                 mHeadsUpLp.gravity != gravity;

@@ -721,6 +721,17 @@
                 android:defaultValue="48"
                 android:dependency="pref_heads_up_master_switch" />
 
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+                android:key="pref_heads_up_alpha"
+                android:title="@string/pref_heads_up_alpha_title"
+                minimum="0"
+                maximum="80"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="%"
+                android:defaultValue="0"
+                android:dependency="pref_heads_up_master_switch" />
+
         </PreferenceScreen>
 
         <PreferenceScreen

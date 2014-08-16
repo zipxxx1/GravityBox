@@ -761,6 +761,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HEADS_UP_ONE_FINGER = "pref_heads_up_one_finger";
     public static final String PREF_KEY_HEADS_UP_EXPANDED = "pref_heads_up_expanded";
     public static final String PREF_KEY_HEADS_UP_POSITION = "pref_heads_up_position";
+    public static final String PREF_KEY_HEADS_UP_ALPHA = "pref_heads_up_alpha";
 
     public static final String PREF_KEY_HEADSET_ACTION_PLUG = "pref_headset_action_plug";
     public static final String PREF_KEY_HEADSET_ACTION_UNPLUG = "pref_headset_action_unplug";

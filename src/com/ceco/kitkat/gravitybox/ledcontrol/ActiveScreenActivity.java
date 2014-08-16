@@ -64,6 +64,8 @@ public class ActiveScreenActivity extends Activity {
                 getPreferenceScreen().removePreference(
                         findPreference(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT));
                 getPreferenceScreen().removePreference(mPrefHeadsupPosition);
+                getPreferenceScreen().removePreference(
+                        findPreference(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA));
             }
         }
 
