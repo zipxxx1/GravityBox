@@ -498,6 +498,8 @@ public class ModLedControl {
                     }
                     mStatusBar = param.thisObject;
                     mHeadsUpParams = new HeadsUpParams();
+                    mHeadsUpParams.alpha = (float)(100f - prefs.getInt(
+                            GravityBoxSettings.PREF_KEY_HEADS_UP_ALPHA, 0)) / 100f;
                     Context context = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
                     context.registerReceiver(mUserPresentReceiver, new IntentFilter(Intent.ACTION_USER_PRESENT));
                 }
@@ -708,6 +710,27 @@ public class ModLedControl {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "animateHeadsUp",
+                    boolean.class, float.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    View headsUpView = (View) XposedHelpers.getObjectField(
+                            param.thisObject, "mHeadsUpNotificationView");
+                    if (headsUpView != null && mHeadsUpParams.alpha < 1f) {
+                        float frac = (Float) param.args[1] / 0.4f;
+                        frac = frac < 1f ? frac : 1f;
+                        float alpha = 1f - frac;
+                        alpha = alpha > mHeadsUpParams.alpha ? mHeadsUpParams.alpha : alpha;
+                        float offset = XposedHelpers.getFloatField(param.thisObject, 
+                                "mHeadsUpVerticalOffset") * frac;
+                        offset = (Boolean) param.args[0] ? offset : 0f;
+                        headsUpView.setAlpha(alpha);
+                        headsUpView.setY(offset);
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -738,7 +761,9 @@ public class ModLedControl {
 
         final int gravity = isImeShowing() ? Gravity.TOP : mHeadsUpParams.gravity;
         final int yOffset = gravity != Gravity.TOP ? 0 : mHeadsUpParams.yOffset;
-        headsUpView.setAlpha(mHeadsUpParams.alpha);
+        if (headsUpView.getAlpha() >= 0.2f) {
+            headsUpView.setAlpha(mHeadsUpParams.alpha);
+        }
 
         final boolean layoutChanged = mHeadsUpLp.y != yOffset ||
                 mHeadsUpLp.gravity != gravity;
