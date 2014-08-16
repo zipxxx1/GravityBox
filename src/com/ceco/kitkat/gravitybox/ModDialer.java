@@ -101,7 +101,6 @@ public class ModDialer {
     private static Unhook mNotifBuildHook;
     private static boolean mBroadcastReceiverRegistered;
     private static Class<?> mClassInCallPresenter;
-    private static boolean mNonIntrusiveIncomingCallBlocked;
     private static boolean mIsCallUiInBackground;
 
     private static void log(String message) {
@@ -212,10 +211,6 @@ public class ModDialer {
             context.sendBroadcast(intent);
             XposedHelpers.callMethod(callCmdClient, "answerCall", callId);
             XposedHelpers.callMethod(sbNotifier, "cancelInCall");
-            mNonIntrusiveIncomingCallBlocked = true;
-            XposedHelpers.callMethod(sbNotifier, "updateNotificationAndLaunchIncomingCallUi",
-                    Enum.valueOf(enumInCallState, "INCALL"),
-                    XposedHelpers.getObjectField(inCallPresenter, "mCallList"));
             if (DEBUG) log("Call answered");
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -473,8 +468,7 @@ public class ModDialer {
                     Object state = param.getResult();
                     if (DEBUG) log("InCallPresenter.getPotentialStateFromCallList(); InCallState = " + state);
                     if (mPreviousCallState == null || 
-                            (mPreviousCallState == Enum.valueOf(enumInCallState, "NO_CALLS") &&
-                                state != Enum.valueOf(enumInCallState, "NO_CALLS"))) {
+                            mPreviousCallState == Enum.valueOf(enumInCallState, "NO_CALLS")) {
                         refreshPhonePrefs();
                     }
 
@@ -531,13 +525,8 @@ public class ModDialer {
                     Notification.Builder.class, PendingIntent.class, CLASS_CALL, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    refreshPhonePrefs();
                     mIsCallUiInBackground = false;
                     if (!mNonIntrusiveIncomingCall || isDayDreaming()) return;
-                    if (mNonIntrusiveIncomingCallBlocked) {
-                        mNonIntrusiveIncomingCallBlocked = false;
-                        return;
-                    }
 
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
