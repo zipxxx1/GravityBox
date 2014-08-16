@@ -713,6 +713,14 @@
                 android:defaultValue="false"
                 android:dependency="pref_heads_up_master_switch" />
 
+            <ListPreference
+                android:key="pref_heads_up_position"
+                android:title="@string/pref_unc_as_headsup_position_title"
+                android:entries="@array/headsup_position_entries"
+                android:entryValues="@array/headsup_position_values"
+                android:defaultValue="48"
+                android:dependency="pref_heads_up_master_switch" />
+
         </PreferenceScreen>
 
         <PreferenceScreen

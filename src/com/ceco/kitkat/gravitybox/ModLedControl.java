@@ -80,6 +80,7 @@ public class ModLedControl {
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
     private static final int MSG_SHOW_HEADS_UP = 1026;
     private static final int MSG_HIDE_HEADS_UP = 1027;
+    private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
 
     private static XSharedPreferences mPrefs;
     private static Notification mNotifOnNextScreenOff;
@@ -458,6 +459,12 @@ public class ModLedControl {
     private static Handler mHeadsUpHandler;
     private static Runnable mHeadsUpHideRunnable;
     private static Object mStatusBar;
+    private static HeadsUpParams mHeadsUpParams;
+
+    static class HeadsUpParams {
+        int yOffset;
+        int gravity;
+    }
 
     private static BroadcastReceiver mUserPresentReceiver = new BroadcastReceiver() {
         @Override
@@ -485,6 +492,7 @@ public class ModLedControl {
                         XposedHelpers.callMethod(param.thisObject, "addHeadsUpView");
                     }
                     mStatusBar = param.thisObject;
+                    mHeadsUpParams = new HeadsUpParams();
                     Context context = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
                     context.registerReceiver(mUserPresentReceiver, new IntentFilter(Intent.ACTION_USER_PRESENT));
                 }
@@ -557,9 +565,12 @@ public class ModLedControl {
                         if (mHeadsUpHandler != null) {
                             mHeadsUpHandler.removeCallbacks(mHeadsUpHideRunnable);
                         }
-                        maybeUpdateHeadsUpLayout(context, headsUpView, isStatusBarHidden(statusBarWindowState) ? 0 :
-                            (Integer) XposedHelpers.callMethod(param.thisObject, "getStatusBarHeight"),
-                            n.extras.getInt(NOTIF_EXTRA_HEADS_UP_GRAVITY, Gravity.TOP));
+                        mHeadsUpParams.yOffset = isStatusBarHidden(statusBarWindowState) ? 0 :
+                            (Integer) XposedHelpers.callMethod(param.thisObject, "getStatusBarHeight");
+                        mHeadsUpParams.gravity = n.extras.getInt(NOTIF_EXTRA_HEADS_UP_GRAVITY,
+                                Integer.valueOf(prefs.getString(
+                                        GravityBoxSettings.PREF_KEY_HEADS_UP_POSITION, "48")));
+                        maybeUpdateHeadsUpLayout(headsUpView);
                     }
 
                     param.setResult(showHeadsUp);
@@ -678,12 +689,27 @@ public class ModLedControl {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "setImeWindowStatus",
+                    IBinder.class, int.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    View headsUpView = (View) XposedHelpers.getObjectField(
+                            param.thisObject, "mHeadsUpNotificationView");
+                    if (headsUpView != null) {
+                        maybeUpdateHeadsUpLayout(headsUpView);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    private static void maybeUpdateHeadsUpLayout(Context context, View headsUpView, int yOffset, int gravity) {
+    private static void maybeUpdateHeadsUpLayout(View headsUpView) {
+        if (headsUpView == null || mHeadsUpParams == null) return;
+        final Context context = headsUpView.getContext();
+
         if (mHeadsUpLp == null) {
             mHeadsUpLp = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT,
@@ -703,9 +729,8 @@ public class ModLedControl {
                     "Animation.StatusBar.HeadsUp", "style", PACKAGE_NAME_SYSTEMUI);
         }
 
-        if (gravity != Gravity.TOP) {
-            yOffset = 0;
-        }
+        final int gravity = isImeShowing() ? Gravity.TOP : mHeadsUpParams.gravity;
+        final int yOffset = gravity != Gravity.TOP ? 0 : mHeadsUpParams.yOffset;
 
         final boolean layoutChanged = mHeadsUpLp.y != yOffset ||
                 mHeadsUpLp.gravity != gravity;
@@ -732,6 +757,13 @@ public class ModLedControl {
 
     private static boolean isStatusBarHidden(int statusBarWindowState) {
         return (statusBarWindowState != 0);
+    }
+
+    private static boolean isImeShowing() {
+        if (mStatusBar == null) return false;
+
+        int iconHints = XposedHelpers.getIntField(mStatusBar, "mNavigationIconHints");
+        return ((iconHints & NAVIGATION_HINT_BACK_ALT) == NAVIGATION_HINT_BACK_ALT);
     }
 
     private static boolean isNonIntrusiveIncomingCallNotification(Notification n) {

@@ -760,6 +760,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HEADS_UP_TIMEOUT = "pref_heads_up_timeout";
     public static final String PREF_KEY_HEADS_UP_ONE_FINGER = "pref_heads_up_one_finger";
     public static final String PREF_KEY_HEADS_UP_EXPANDED = "pref_heads_up_expanded";
+    public static final String PREF_KEY_HEADS_UP_POSITION = "pref_heads_up_position";
 
     public static final String PREF_KEY_HEADSET_ACTION_PLUG = "pref_headset_action_plug";
     public static final String PREF_KEY_HEADSET_ACTION_UNPLUG = "pref_headset_action_unplug";
@@ -1204,6 +1205,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefSbBtVisibility;
         private ListPreference mPrefQsBatteryTempUnit;
         private AppPickerPreference mPrefCustomApp;
+        private ListPreference mPrefHeadsUpPosition;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1511,6 +1513,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCustomApp = (AppPickerPreference) findPreference(PREF_KEY_HWKEY_CUSTOM_APP);
             getPreferenceScreen().removePreference(mPrefCustomApp);
+
+            mPrefHeadsUpPosition = (ListPreference) findPreference(PREF_KEY_HEADS_UP_POSITION);
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
@@ -2182,6 +2186,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_QS_BATTERY_TEMP_UNIT)) {
                 mPrefQsBatteryTempUnit.setSummary(mPrefQsBatteryTempUnit.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_HEADS_UP_POSITION)) {
+                mPrefHeadsUpPosition.setSummary(mPrefHeadsUpPosition.getEntry());
             }
 
             for (String caKey : customAppKeys) {
