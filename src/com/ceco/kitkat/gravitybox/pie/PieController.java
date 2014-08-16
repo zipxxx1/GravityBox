@@ -51,7 +51,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 import com.ceco.kitkat.gravitybox.GravityBoxSettings;
-import com.ceco.kitkat.gravitybox.ModClearAllRecents;
 import com.ceco.kitkat.gravitybox.ModHwKeys;
 import com.ceco.kitkat.gravitybox.ModPieControls;
 import com.ceco.kitkat.gravitybox.R;
@@ -280,13 +279,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                 mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
                 mBatteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS,
                         BatteryManager.BATTERY_STATUS_UNKNOWN);
-            } else if (intent.getAction().equals(ModClearAllRecents.NAVBAR_RECENTS_CLEAR_ALL)) {
-                Boolean recentAltCurrent = mRecentAlt;
-                mRecentAlt = intent.getBooleanExtra(ModClearAllRecents.EXTRA_NAVBAR_RECENTS_CLEAR_ALL, false);
-                if (DEBUG) log("mRecentAlt = " + mRecentAlt);
-                if (recentAltCurrent != mRecentAlt) {
-                    setRecentAlt();
-                }
             }
         }
     };
@@ -312,7 +304,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mGbContext = gbContext;
         mGbResources = gbContext.getResources();
         mLongPressHandler = new PieLongPressHandler(context, prefs);
-        mRecentLongPressAction = getLongPressAction(ButtonType.RECENT);
+        mRecentLongPressAction = getLongPressAction(ButtonType.RECENT).clone();
 
         mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -390,7 +382,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         // start listening for changes
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        intentFilter.addAction(ModClearAllRecents.NAVBAR_RECENTS_CLEAR_ALL);
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
         if (mHasTelephony) {
@@ -511,6 +502,8 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     }
 
     private PieItem findItem(ButtonType type) {
+        if (mNavigationSlice == null) return null;
+
         for (PieItem item : mNavigationSlice.getItems()) {
             ButtonType itemType = (ButtonType) item.tag;
             if (type == itemType) {
@@ -673,13 +666,16 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mContext.sendBroadcast(intent);
     }
 
-    private void setRecentAlt() {
+    public void setRecentAlt(boolean recentAlt) {
+        if (mRecentAlt == recentAlt) return;
+
         PieItem recentBtn = findItem(ButtonType.RECENT);
         if (recentBtn == null) return;
 
+        mRecentAlt = recentAlt;
         if (mRecentAlt) {
             recentBtn.setImageDrawable(mRecentAltIcon);
-            mRecentLongPressAction = getLongPressAction(ButtonType.RECENT);
+            mRecentLongPressAction = getLongPressAction(ButtonType.RECENT).clone();
             setLongPressAction(ButtonType.RECENT.name(), GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS, null);
         } else {
             recentBtn.setImageDrawable(mRecentIcon);

@@ -222,6 +222,12 @@ public class ModNavigationBar {
                             GravityBoxSettings.EXTRA_HWKEY_KEY))) {
                 mRecentsSingletapAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
                 mRecentsSingletapAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
+                if (mRecentsSingletapAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS &&
+                        mRecentsSingletapAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP) {
+                    mRecentsSingletapActionBck.actionId = mRecentsSingletapAction.actionId;
+                    mRecentsSingletapActionBck.customApp = mRecentsSingletapAction.customApp;
+                    if (DEBUG) log("mRecentsSingletapActionBck.actionId = " + mRecentsSingletapActionBck.actionId);
+                }
                 updateRecentsKeyCode();
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
@@ -229,6 +235,12 @@ public class ModNavigationBar {
                             GravityBoxSettings.EXTRA_HWKEY_KEY))) {
                 mRecentsLongpressAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
                 mRecentsLongpressAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
+                if (mRecentsLongpressAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS &&
+                        mRecentsLongpressAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP) {
+                    mRecentsLongpressActionBck.actionId = mRecentsLongpressAction.actionId;
+                    mRecentsLongpressActionBck.customApp = mRecentsLongpressAction.customApp;
+                    if (DEBUG) log("mRecentsLongpressActionBck.actionId = " + mRecentsLongpressActionBck.actionId);
+                }
                 updateRecentsKeyCode();
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
@@ -258,13 +270,6 @@ public class ModNavigationBar {
                     mRingHapticFeedback = RingHapticFeedback.valueOf(
                             intent.getStringExtra(GravityBoxSettings.EXTRA_RING_HAPTIC_FEEDBACK));
                     setRingHapticFeedback();
-                }
-            } else if (intent.getAction().equals(ModClearAllRecents.NAVBAR_RECENTS_CLEAR_ALL)) {
-                Boolean recentAltCurrent = mRecentAlt;
-                mRecentAlt = intent.getBooleanExtra(ModClearAllRecents.EXTRA_NAVBAR_RECENTS_CLEAR_ALL, false);
-                if (DEBUG) log("mRecentAlt = " + mRecentAlt);
-                if (recentAltCurrent != mRecentAlt) {
-                    setRecentAlt();
                 }
             }
         }
@@ -424,7 +429,6 @@ public class ModNavigationBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_PIE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_SWAP_KEYS);
-                    intentFilter.addAction(ModClearAllRecents.NAVBAR_RECENTS_CLEAR_ALL);
                     if (mRingTargetsEnabled) {
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
                     }
@@ -607,8 +611,8 @@ public class ModNavigationBar {
                     } catch(NoSuchMethodError nme) {
                         if (DEBUG) log("getRecentsButton method doesn't exist");
                     }
-               	    mNavbarVertical = XposedHelpers.getBooleanField(param.thisObject, "mVertical");
-                    setRecentAlt();
+                    mNavbarVertical = XposedHelpers.getBooleanField(param.thisObject, "mVertical");
+                    updateRecentAltButton();
                 }
             });
 
@@ -949,21 +953,12 @@ public class ModNavigationBar {
         
     }
 
-    private static void setRecentAlt() {
-        if (mRecentBtn == null) return;
+    public static void setRecentAlt(boolean recentAlt) {
+        if (mRecentBtn == null || mRecentAlt == recentAlt) return;
 
+        mRecentAlt = recentAlt;
         if (mRecentAlt) {
-            mRecentBtn.setImageDrawable(mNavbarVertical ? mRecentAltLandIcon : mRecentAltIcon);
-            if (mRecentsSingletapAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP &&
-                    mRecentsSingletapAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS) {
-                mRecentsSingletapActionBck.actionId = mRecentsSingletapAction.actionId;
-                mRecentsSingletapActionBck.customApp = mRecentsSingletapAction.customApp;
-            }
-            if (mRecentsLongpressAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP &&
-                    mRecentsLongpressAction.actionId != GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS) {
-                mRecentsLongpressActionBck.actionId = mRecentsLongpressAction.actionId;
-                mRecentsLongpressActionBck.customApp = mRecentsLongpressAction.customApp;
-            }
+            updateRecentAltButton();
             broadcastRecentsActions(mRecentBtn.getContext(),
                     new ModHwKeys.HwKeyAction(GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP, null), 
                     new ModHwKeys.HwKeyAction(GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS, null));
@@ -978,11 +973,21 @@ public class ModNavigationBar {
             if (mRecentBtn.isPressed()) {
                 mRecentBtn.postDelayed(this, 200);
             } else {
-                mRecentBtn.setImageDrawable(mNavbarVertical ? mRecentLandIcon : mRecentIcon);
+                updateRecentAltButton();
                 broadcastRecentsActions(mRecentBtn.getContext(), mRecentsSingletapActionBck, mRecentsLongpressActionBck);
             }
         }
     };
+
+    private static void updateRecentAltButton() {
+        if (mRecentBtn != null) {
+            if (mRecentAlt) {
+                mRecentBtn.setImageDrawable(mNavbarVertical ? mRecentAltLandIcon : mRecentAltIcon);
+            } else {
+                mRecentBtn.setImageDrawable(mNavbarVertical ? mRecentLandIcon : mRecentIcon);
+            }
+        }
+    }
 
     private static void broadcastRecentsActions(Context context, ModHwKeys.HwKeyAction singleTapAction, 
             ModHwKeys.HwKeyAction longPressAction) {
