@@ -1257,7 +1257,7 @@
     <string name="pref_lockscreen_ring_dt2s_summary">Permite hibernar o dispositivo após dupla pressão do anel de desbloqueio</string>
 
     <!-- Charger plugged sound -->
-    <string name="pref_charger_plugged_sound_title">Som de ligação do carregador</string>
+    <string name="pref_charger_plugged_sound_title">Som ao ligar carregador</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Comutar rádio inteligente</string>
@@ -1587,7 +1587,7 @@
     <string name="pref_headset_action_unplug_title">Quando o auricular for desligado</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Destivar vibração</string>
+    <string name="pref_lc_qh_mute_vibe_title">Desativar vibração</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Modo interativo</string>
@@ -1661,5 +1661,11 @@
     <!-- MSIM Signal Cluster: auto-hide signal icons -->
     <string name="pref_signal_icon_autohide_title">Ocultar barras de sinal</string>
     <string name="pref_signal_icon_autohide_summary">Ocultar automaticamente as barras de sinal do cartão SIM quando este não está inserido (necessário reiniciar)</string>
+
+    <!-- Heads Up: Transparency level -->
+    <string name="pref_heads_up_alpha_title">Nível de transparência</string>
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Som ao desligar carregador</string>
 
 </resources>
