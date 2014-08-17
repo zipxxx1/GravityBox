@@ -960,7 +960,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">צליל סוללה טעונה במלואה</string>
-    <string name="pref_battery_charged_sound_summary">השמעת צליל כאשר הסוללה טעונה במלואה</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">פעולות לחיצה ארוכה</string>

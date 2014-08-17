@@ -1050,7 +1050,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Ήχος πλήρης μπαταρίας</string>
-    <string name="pref_battery_charged_sound_summary">Αναπαράγει ήχο όταν η μπαταρία είναι πλήρης</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Ενέργειες παρατετ. αγγίγματος</string>

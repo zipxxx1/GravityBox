@@ -1053,7 +1053,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Dźwięk naładowanej baterii</string>
-    <string name="pref_battery_charged_sound_summary">Odtwarza dźwięk gdy bateria zostanie w pełni naładowana</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Akcje długiego naciśnięcia</string>
@@ -1267,9 +1266,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">Uśpij po podwójnym kliknięciu</string>
     <string name="pref_lockscreen_ring_dt2s_summary">Podwójne kliknięcie na pierścieniu odblokowania usypia urządzenie</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Dźwięk podłączenia ładowarki</string>
-    <string name="pref_charger_plugged_sound_summary">Odtwarza dźwięk kiedy ładowarka jest podłączana/odłączana</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Przełącz Smart Radio</string>

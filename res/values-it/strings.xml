@@ -1058,7 +1058,6 @@
     
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Notifica batteria carica</string>
-    <string name="pref_battery_charged_sound_summary">Riproduce un suono quando la batteria raggiunge il livello massimo di carica</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Azione pressione prolungata</string>
@@ -1274,9 +1273,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">Doppio-tap spegne schermo</string>
     <string name="pref_lockscreen_ring_dt2s_summary">Fare doppio-tap sull\'anello di sblocco spegnerà lo schermo</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Riproduci suono al collegamento</string>
-    <string name="pref_charger_plugged_sound_summary">Riproduce un suono quando il caricabatterie viene collegato/scollegato</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Attiva/disattiva Modem intelligente</string> 

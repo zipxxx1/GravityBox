@@ -1052,7 +1052,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Ton bei vollem Akku</string>
-    <string name="pref_battery_charged_sound_summary">Spielt einen Ton ab wenn der Akku vollständig geladen ist</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Lang-drücken Aktionen</string>
@@ -1266,9 +1265,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">Doppelt Tippen für Standby</string>
     <string name="pref_lockscreen_ring_dt2s_summary">Doppeltes Antippen des Entsperrrings schickt Gerät in den Standbymodus</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Ton bei verbundenem Ladegerät</string>
-    <string name="pref_charger_plugged_sound_summary">Spielt Ton wenn Ladegerät ein-/ausgesteckt wird</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Netzautomatik umschalten</string>

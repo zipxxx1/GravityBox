@@ -1071,7 +1071,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Akkumlátor feltöltve jelzőhang</string>
-    <string name="pref_battery_charged_sound_summary">Hang lejtászása, amikor az akkumlátor eléri a teljes töltöttséget</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Hosszú érintés műveletek</string>
@@ -1285,9 +1284,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">Dupla érintésre alvás engedélyezése</string>
     <string name="pref_lockscreen_ring_dt2s_summary">A feloldó körön történő dupla érintés alvó állapotba helyezi a készüléket</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Töltő csatlakoztatása hang</string>
-    <string name="pref_charger_plugged_sound_summary">Hang lejátszása a töltő fel/lecsatlakoztatásakor</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Okos rádiókapcsolat ki-bekapcsolása</string>

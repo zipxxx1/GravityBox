@@ -1047,7 +1047,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">満充電時に音声通知</string>
-    <string name="pref_battery_charged_sound_summary">バッテリーの充電が完了した時に音を鳴らします。</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">長押しアクション</string>
@@ -1263,9 +1262,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">ダブルタップで消灯を有効化</string>
     <string name="pref_lockscreen_ring_dt2s_summary">ロック解除リングをダブルタップすると画面を消灯するようにします。</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">充電器接続時の効果音</string>
-    <string name="pref_charger_plugged_sound_summary">充電器を接続/接続解除したときに効果音を再生します。</string>
     
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">スマートネットワークトグル</string>

@@ -1028,7 +1028,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Upozornění nabití baterie</string>
-    <string name="pref_battery_charged_sound_summary">Přehraje zvukové upozornění po úplném nabití baterie</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Akce na dlouhé podržení</string>
@@ -1245,9 +1244,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">Uspat dvojitým klepnutím</string>
     <string name="pref_lockscreen_ring_dt2s_summary">Poklepání na odemykací prstenec uspí zařízení</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Zvuk připojení napájení</string>
-    <string name="pref_charger_plugged_sound_summary">Přehraje zvuk při připojení/odpojení napájení</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Přepnout Smart Radio</string>
@@ -1548,5 +1546,8 @@
     <string name="pref_unc_active_screen_summary">Spravuje obecná nastavení pro funkci aktivní obrazovky</string>
     <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
     <string name="pref_unc_quiet_hours_summary">Spravuje tiché hodiny notifikací</string>
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Zvuk odpojení napájení</string>
 
 </resources>

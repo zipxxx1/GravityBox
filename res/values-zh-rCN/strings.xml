@@ -1073,7 +1073,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">电池充电声音</string>
-    <string name="pref_battery_charged_sound_summary">电池充满后播放声音</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">长按动作</string>
@@ -1289,9 +1288,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">启用双击睡眠</string>
     <string name="pref_lockscreen_ring_dt2s_summary">在解锁环上双击使设备睡眠</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">插入充电器声音</string>
-    <string name="pref_charger_plugged_sound_summary">充电器插入/拔出时播放声音</string>
     
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">切换智能网络</string>

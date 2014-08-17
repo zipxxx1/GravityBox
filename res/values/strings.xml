@@ -1073,7 +1073,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Battery charged sound</string>
-    <string name="pref_battery_charged_sound_summary">Plays sound when battery gets fully charged</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Long-press actions</string>
@@ -1289,9 +1288,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">Enable double-tap to sleep</string>
     <string name="pref_lockscreen_ring_dt2s_summary">Double-tap on unlock ring puts device to sleep</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Charger plugged sound</string>
-    <string name="pref_charger_plugged_sound_summary">Plays sound when charger is plugged/unplugged</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Toggle Smart Radio</string>
@@ -1609,5 +1607,8 @@
     <string name="pref_unc_active_screen_summary">Manages common settings for Active Screen feature</string>
     <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
     <string name="pref_unc_quiet_hours_summary">Manages Quiet hours for notifications</string>
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Charger unplugged sound</string>
 
 </resources>

@@ -1073,7 +1073,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Son pour batterie chargée</string>
-    <string name="pref_battery_charged_sound_summary">Joue un son lorsque la batterie est complètement chargée</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Actions avec appui long</string>
@@ -1289,9 +1288,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">Activer le double appui pour mettre en veille</string>
     <string name="pref_lockscreen_ring_dt2s_summary">Permet la mise en veille par un double appui sur l\'anneau de déverrouillage</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Son à la connexion du chargeur</string>
-    <string name="pref_charger_plugged_sound_summary">Joue un son lorsque le chargeur branché/débranché</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Enclencher les Ondes Radio Intelligentes</string>

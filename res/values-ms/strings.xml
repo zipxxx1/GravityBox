@@ -972,7 +972,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Bunyi bateri penuh</string>
-    <string name="pref_battery_charged_sound_summary">Mainkan bunyi ketika bateri penuh</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Aksi tekan lama</string>
@@ -1185,9 +1184,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">Benarkan tap dua kali untuk offkan skrin</string>
     <string name="pref_lockscreen_ring_dt2s_summary">Tap dua kali pada gelung untuk offkan skrin</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Bunyi ketika dicas</string>
-    <string name="pref_charger_plugged_sound_summary">Mainkan bunyi ketika charger masuk/keluar</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Butang Smart Radio</string>

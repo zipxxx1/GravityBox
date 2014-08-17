@@ -178,7 +178,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mIconCache = new HashMap<String, SoftReference<Drawable>>();
 
         initColorInfo();
-        mBatteryInfo = new BatteryInfoManager(context, gbContext);
+        mBatteryInfo = new BatteryInfoManager(context);
 
         mListeners = new ArrayList<IconManagerListener>();
     }
@@ -253,15 +253,9 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
             }
         } else if (intent.getAction().equals(Intent.ACTION_BATTERY_CHANGED)) {
             mBatteryInfo.updateBatteryInfo(intent);
-        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_CHARGED_SOUND_CHANGED)) {
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_CHARGED_SOUND)) {
-                mBatteryInfo.setChargedSoundEnabled(intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_BATTERY_CHARGED_SOUND, false));
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_CHARGER_PLUGGED_SOUND)) {
-                mBatteryInfo.setPluggedSoundEnabled(intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_CHARGER_PLUGGED_SOUND, false));
-            }
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED)) {
+            mBatteryInfo.setSound(intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1),
+                    intent.getStringExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));
         }
     }
 

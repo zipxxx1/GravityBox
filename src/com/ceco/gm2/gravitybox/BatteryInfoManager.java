@@ -34,10 +34,12 @@ public class BatteryInfoManager {
     private BatteryData mBatteryData;
     private ArrayList<BatteryStatusListener> mListeners;
     private Context mContext;
-    private Context mGbContext;
-    private boolean mChargedSoundEnabled;
-    private boolean mPluggedSoundEnabled;
+    private Uri[] mSounds;
     private TelephonyManager mTelephonyManager;
+
+    public static final int SOUND_CHARGED = 0;
+    public static final int SOUND_PLUGGED = 1;
+    public static final int SOUND_UNPLUGGED = 2;
 
     class BatteryData {
         boolean charging;
@@ -59,13 +61,11 @@ public class BatteryInfoManager {
         void onBatteryStatusChanged(BatteryData batteryData);
     }
 
-    public BatteryInfoManager(Context context, Context gbContext) {
+    public BatteryInfoManager(Context context) {
         mContext = context;
-        mGbContext = gbContext;
         mBatteryData = new BatteryData();
         mListeners = new ArrayList<BatteryStatusListener>();
-        mChargedSoundEnabled = false;
-        mPluggedSoundEnabled = false;
+        mSounds = new Uri[3];
     }
 
     public void registerListener(BatteryStatusListener listener) {
@@ -96,15 +96,15 @@ public class BatteryInfoManager {
                 mBatteryData.powerSource != newPowerSource ||
                 mBatteryData.temperature != newTemp || 
                 mBatteryData.voltage != newVoltage) {
-            if (mChargedSoundEnabled && newLevel == 100 && mBatteryData.level == 99) {
-                playSound("battery_charged.ogg");
+            if (newLevel == 100 && mBatteryData.level < 100 && mBatteryData.level > 0) {
+                playSound(SOUND_CHARGED);
             }
 
-            if (mPluggedSoundEnabled && mBatteryData.powerSource != newPowerSource) {
+            if (mBatteryData.powerSource != newPowerSource) {
                 if (newPowerSource == 0) {
-                    playSound("charger_unplugged.ogg");
+                    playSound(SOUND_UNPLUGGED);
                 } else if (newPowerSource != BatteryManager.BATTERY_PLUGGED_WIRELESS) {
-                    playSound("charger_plugged.ogg");
+                    playSound(SOUND_PLUGGED);
                 }
             }
 
@@ -122,25 +122,28 @@ public class BatteryInfoManager {
         return mBatteryData;
     }
 
-    public void setChargedSoundEnabled(boolean enabled) {
-        mChargedSoundEnabled = enabled;
+    public void setSound(int type, String uri) {
+        if (type < 0 || type > (mSounds.length-1)) return;
+
+        if (uri == null || uri.isEmpty()) {
+            mSounds[type] = null;
+        } else {
+            try {
+                mSounds[type] = Uri.parse(uri);
+            } catch (Exception e) {
+                mSounds[type] = null;
+            }
+        }
     }
 
-    public void setPluggedSoundEnabled(boolean enabled) {
-        mPluggedSoundEnabled = enabled;
-    }
-
-    private void playSound(String fileName) {
-        if (!isPhoneIdle() || quietHoursActive()) return;
+    private void playSound(int type) {
+        if (type < 0 || type > (mSounds.length-1) || mSounds[type] == null || 
+                !isPhoneIdle() || quietHoursActive()) return;
         try {
-            final String filePath = mGbContext.getFilesDir().getAbsolutePath() + "/" + fileName;
-            final Uri soundUri = Uri.parse("file://" + filePath);
-            if (soundUri != null) {
-                final Ringtone sfx = RingtoneManager.getRingtone(mGbContext, soundUri);
-                if (sfx != null) {
-                    sfx.setStreamType(AudioManager.STREAM_NOTIFICATION);
-                    sfx.play();
-                }
+            final Ringtone sfx = RingtoneManager.getRingtone(mContext, mSounds[type]);
+            if (sfx != null) {
+                sfx.setStreamType(AudioManager.STREAM_NOTIFICATION);
+                sfx.play();
             }
         } catch (Throwable t) {
             XposedBridge.log(t);

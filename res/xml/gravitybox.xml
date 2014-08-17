@@ -1398,17 +1398,29 @@
                 android:entryValues="@array/low_battery_warning_policy_values"
                 android:defaultValue="3" />
 
-            <CheckBoxPreference 
-                android:key="pref_battery_charged_sound"
+            <RingtonePreference 
+                android:key="pref_battery_charged_sound2"
                 android:title="@string/pref_battery_charged_sound_title"
-                android:summary="@string/pref_battery_charged_sound_summary"
-                android:defaultValue="false" />
+                android:ringtoneType="notification"
+                android:showDefault="true"
+                android:showSilent="true"
+                android:defaultValue="" />
 
-            <CheckBoxPreference 
-                android:key="pref_charger_plugged_sound"
+            <RingtonePreference 
+                android:key="pref_charger_plugged_sound2"
                 android:title="@string/pref_charger_plugged_sound_title"
-                android:summary="@string/pref_charger_plugged_sound_summary"
-                android:defaultValue="false" />
+                android:ringtoneType="notification"
+                android:showDefault="true"
+                android:showSilent="true"
+                android:defaultValue="" />
+
+            <RingtonePreference 
+                android:key="pref_charger_unplugged_sound"
+                android:title="@string/pref_charger_unplugged_sound_title"
+                android:ringtoneType="notification"
+                android:showDefault="true"
+                android:showSilent="true"
+                android:defaultValue="" />
 
             <CheckBoxPreference 
                 android:key="pref_flashing_led_disable"

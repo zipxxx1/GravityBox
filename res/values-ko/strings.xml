@@ -848,7 +848,6 @@
     <string name="carrier_text_empty">지정되지 않음</string>
 
     <string name="pref_battery_charged_sound_title">배터리 충전 완료 소리</string>
-    <string name="pref_battery_charged_sound_summary">배터리가 완전히 충전되었을 때 소리를 재생합니다.</string>
 
     <string name="pref_cat_pie_long_press_title">길게 누르기 액션</string>
     <string name="pref_pie_back_longpress_title">뒤로 가기 키</string>
@@ -1032,7 +1031,6 @@
     <string name="pref_lockscreen_ring_dt2s_summary">잠금 해제 고리를 두 번 터치하면 화면이 꺼집니다.</string>
 
     <string name="pref_charger_plugged_sound_title">충전기 연결 소리</string>
-    <string name="pref_charger_plugged_sound_summary">충전기가 연결되거나 분리될 때 소리를 재생합니다.</string>
 
     <string name="shortcut_smart_radio_toggle">스마트 라디오 전환</string>
 

@@ -1068,8 +1068,7 @@
     <string name="carrier_text_empty">空的</string>
 
     <!-- Battery charged sound -->
-    <string name="pref_battery_charged_sound_title">電池充電音效</string>
-    <string name="pref_battery_charged_sound_summary">當電池充滿電池播放音效</string>
+    <string name="pref_battery_charged_sound_title">電池充滿電音效</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">長按操作</string>
@@ -1285,9 +1284,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">啟用雙擊休眠</string>
     <string name="pref_lockscreen_ring_dt2s_summary">雙擊解鎖環使裝置進入休眠</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">充電器插入音效</string>
-    <string name="pref_charger_plugged_sound_summary">當充電器插入/拔除時播放音效</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">切換智慧網路</string>

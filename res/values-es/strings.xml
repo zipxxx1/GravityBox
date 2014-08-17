@@ -1069,7 +1069,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Sonido con batería cargada</string>
-    <string name="pref_battery_charged_sound_summary">Reproduce un sonido cuando la batería está completamente cargada</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Acciones con pulsación larga</string>
@@ -1285,9 +1284,8 @@
     <string name="pref_lockscreen_ring_dt2s_title">Activar doble pulsación para suspender</string>
     <string name="pref_lockscreen_ring_dt2s_summary">Doble pulsación en el anillo de desbloqueo suspende el dispositivo</string>
 
-    <!-- Charger plugged/unplugged sound -->
+    <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Sonido al conectar cargador</string>
-    <string name="pref_charger_plugged_sound_summary">Reproduce un sonido cuando el cargador se conecta/desconecta</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Activar/desactivar modo de red inteligente</string>
