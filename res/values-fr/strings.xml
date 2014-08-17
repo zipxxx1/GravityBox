@@ -1687,4 +1687,7 @@
     <!-- Heads Up: Transparency level -->
     <string name="pref_heads_up_alpha_title">Niveau de transparence</string>
 
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Son à la déconnexion du chargeur</string>
+
 </resources>
