@@ -1645,4 +1645,10 @@
     <string name="pref_signal_icon_autohide_title">Skryť ikony signálu</string>
     <string name="pref_signal_icon_autohide_summary">Umožní automatické skrývanie ikon signálu pre prázdne SIM sloty (vyžaduje reštart)</string>
 
+    <!-- Heads Up: Transparency level -->
+    <string name="pref_heads_up_alpha_title">Úroveň priehľadnosti</string>
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Zvuk odpojenia napájania</string>
+
 </resources>
