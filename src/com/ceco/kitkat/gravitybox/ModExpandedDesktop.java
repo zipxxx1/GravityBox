@@ -804,6 +804,17 @@ public class ModExpandedDesktop {
                 }
             });
 
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "requestTransientBars",
+                    CLASS_POLICY_WINDOW_STATE, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (param.args[0] == XposedHelpers.getObjectField(param.thisObject, "mNavigationBar")
+                            && isNavbarHidden()) {
+                        if (DEBUG) log("requestTransientBars: ignoring since navbar is hidden");
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
