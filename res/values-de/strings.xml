@@ -1627,6 +1627,44 @@
     <string name="lc_active_screen_mode_nothing">Bildschirm nur anschalten</string>
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
+    
+    <!-- QS: Remote display tile -->
+    <string name="qs_tile_remote_display">Fernanzeige</string>
 
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Verwaltet standart Benachrichtigungnseinstellungen aller Apps, die keine App-spezifische Einstellungen aktiviert haben</string>
+    <string name="pref_unc_perapp_settings_title">Per-app settings</string>
+    <string name="pref_unc_perapp_settings_summary">Verwaltet appspezifisch Benachrichtigungseinstellungen und überschreibt die standart Einstellungen</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Verwaltet allgemeine Einstellungen des Aktiv-Bildschirm Features</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Verwaltet Ruhestunden für Benachrichtigungen</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Benutzerdefinierte Aktion</string>
+
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">Heads-Up timout</string>
+    <string name="pref_unc_as_headsup_timeout_summary">Anzeigezeit des Heads-Up Fensters. 0 = bis Bildschirm entsperrt.</string>
+
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">Heads-Up Position</string>
+    <string name="headsup_position_top">Oben</string>
+    <string name="headsup_position_center">Mitte</string>
+    <string name="headsup_position_bottom">Unten</string>
+
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">Datenverkehr 2</string>
+
+    <!-- MSIM Signal Cluster: auto-hide signal icons -->
+    <string name="pref_signal_icon_autohide_title">Verstecke automatisch Signalsymbol</string>
+    <string name="pref_signal_icon_autohide_summary">Verstecke automatisch Signalsymbol wenn keine SIM-Karte Vorhanden (erfordert Neustart)</string>
+
+    <!-- Heads Up: Transparency level -->
+    <string name="pref_heads_up_alpha_title">Transparenz Stufe</string>
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Ladegerät getrennt Ton</string>
 
 </resources>
