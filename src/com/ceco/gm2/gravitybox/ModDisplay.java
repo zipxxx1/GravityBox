@@ -121,8 +121,9 @@ public class ModDisplay {
                         updateButtonBacklight();
                     }
                 }
-            } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)
-                        || intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+            } else if ((intent.getAction().equals(Intent.ACTION_SCREEN_ON)
+                        || intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) &&
+                        !mButtonBacklightMode.equals(GravityBoxSettings.BB_MODE_DEFAULT)) {
                 updateButtonBacklight(intent.getAction().equals(Intent.ACTION_SCREEN_ON));
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_LOCKSCREEN_BG)) {
