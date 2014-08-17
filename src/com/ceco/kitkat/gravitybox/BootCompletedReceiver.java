@@ -41,17 +41,5 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         if (f.exists()) {
             f.setExecutable(true);
         }
-
-        // prepare battery sound files
-        final String[] bSounds = new String[] { "battery_charged.ogg", "charger_plugged.ogg", "charger_unplugged.ogg" };
-        for (String bSound : bSounds) {
-            f = new File(context.getFilesDir() + "/" + bSound);
-            if (!f.exists()) {
-                Utils.writeAssetToFile(context, bSound, f);
-            }
-            if (f.exists()) {
-                f.setReadable(true, false);
-            }
-        }
     }
 }

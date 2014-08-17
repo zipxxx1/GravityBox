@@ -40,6 +40,8 @@ import com.ceco.kitkat.gravitybox.webserviceclient.TransactionResult.Transaction
 import com.ceco.kitkat.gravitybox.webserviceclient.WebServiceClient;
 import com.ceco.kitkat.gravitybox.webserviceclient.WebServiceClient.WebServiceTaskListener;
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -53,6 +55,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -116,12 +119,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
     public static final int BATTERY_WARNING_POPUP = 1;
     public static final int BATTERY_WARNING_SOUND = 2;
-    public static final String PREF_KEY_BATTERY_CHARGED_SOUND = "pref_battery_charged_sound";
-    public static final String PREF_KEY_CHARGER_PLUGGED_SOUND = "pref_charger_plugged_sound";
-    public static final String ACTION_PREF_BATTERY_CHARGED_SOUND_CHANGED = 
-            "gravitybox.intent.action.BATTERY_CHARGED_SOUND_CHANGED";
-    public static final String EXTRA_BATTERY_CHARGED_SOUND = "batteryChargedSound";
-    public static final String EXTRA_CHARGER_PLUGGED_SOUND = "chargerPluggedSound";
+    public static final String PREF_KEY_BATTERY_CHARGED_SOUND = "pref_battery_charged_sound2";
+    public static final String PREF_KEY_CHARGER_PLUGGED_SOUND = "pref_charger_plugged_sound2";
+    public static final String PREF_KEY_CHARGER_UNPLUGGED_SOUND = "pref_charger_unplugged_sound";
+    public static final String ACTION_PREF_BATTERY_SOUND_CHANGED = 
+            "gravitybox.intent.action.BATTERY_SOUND_CHANGED";
+    public static final String EXTRA_BATTERY_SOUND_TYPE = "batterySoundType";
+    public static final String EXTRA_BATTERY_SOUND_URI = "batterySoundUri";
 
     public static final String PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS = "pref_disable_data_network_type_icons";
     public static final String ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED = "gravitybox.intent.action.DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED";
@@ -829,6 +833,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_PIE_MENU_LONGPRESS,
             PREF_KEY_PIE_RECENTS_LONGPRESS,
             PREF_KEY_PIE_SEARCH_LONGPRESS
+    ));
+
+    private static final List<String> ringToneKeys = new ArrayList<String>(Arrays.asList(
+            PREF_KEY_BATTERY_CHARGED_SOUND,
+            PREF_KEY_CHARGER_PLUGGED_SOUND,
+            PREF_KEY_CHARGER_UNPLUGGED_SOUND
     ));
 
     private static final class SystemProperties {
@@ -1759,17 +1769,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         }
 
         @Override
-        public void onResume() {
-            super.onResume();
-
-            updatePreferences(null);
-            mPrefs.registerOnSharedPreferenceChangeListener(this);
-        }
-
-        @Override
         public void onPause() {
-            mPrefs.unregisterOnSharedPreferenceChangeListener(this);
-
             if (mTransWebServiceClient != null) {
                 mTransWebServiceClient.abortTaskIfRunning();
             }
@@ -1780,6 +1780,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             super.onPause();
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            mPrefs.registerOnSharedPreferenceChangeListener(this);
+            updatePreferences(null);
+        }
+
+        @Override
+        public void onStop() {
+            mPrefs.unregisterOnSharedPreferenceChangeListener(this);
+            super.onStop();
         }
 
         private void setDefaultValues() {
@@ -2213,6 +2226,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     } else {
                         caPref.setSummary(caPref.getEntry());
                     }
+                }
+            }
+
+            for (String rtKey : ringToneKeys) {
+                RingtonePreference rtPref = (RingtonePreference) findPreference(rtKey);
+                String val = mPrefs.getString(rtKey, null);
+                if (val != null && !val.isEmpty()) {
+                    Uri uri = Uri.parse(val);
+                    Ringtone r = RingtoneManager.getRingtone(getActivity(), uri);
+                    if (r != null) {
+                        rtPref.setSummary(r.getTitle(getActivity()));
+                    }
+                } else {
+                    rtPref.setSummary(R.string.lc_notif_sound_none);
                 }
             }
         }
@@ -2879,13 +2906,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_LOCKSCREEN_BG,
                         prefs.getString(PREF_KEY_LOCKSCREEN_BACKGROUND, LOCKSCREEN_BG_DEFAULT));
             } else if (key.equals(PREF_KEY_BATTERY_CHARGED_SOUND)) {
-                intent.setAction(ACTION_PREF_BATTERY_CHARGED_SOUND_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_CHARGED_SOUND,
-                        prefs.getBoolean(PREF_KEY_BATTERY_CHARGED_SOUND, false));
+                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_CHARGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_URI,
+                        prefs.getString(PREF_KEY_BATTERY_CHARGED_SOUND, ""));
             } else if (key.equals(PREF_KEY_CHARGER_PLUGGED_SOUND)) {
-                intent.setAction(ACTION_PREF_BATTERY_CHARGED_SOUND_CHANGED);
-                intent.putExtra(EXTRA_CHARGER_PLUGGED_SOUND,
-                        prefs.getBoolean(PREF_KEY_CHARGER_PLUGGED_SOUND, false));
+                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_PLUGGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_URI,
+                        prefs.getString(PREF_KEY_CHARGER_PLUGGED_SOUND, ""));
+            } else if (key.equals(PREF_KEY_CHARGER_UNPLUGGED_SOUND)) {
+                intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_UNPLUGGED);
+                intent.putExtra(EXTRA_BATTERY_SOUND_URI,
+                        prefs.getString(PREF_KEY_CHARGER_UNPLUGGED_SOUND, ""));
             } else if (key.equals(PREF_KEY_TRANS_VERIFICATION)) {
                 String transId = prefs.getString(key, null);
                 if (transId != null && !transId.trim().isEmpty()) {
@@ -3297,6 +3331,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == REQ_LOCKSCREEN_BACKGROUND) {
                 if (resultCode == Activity.RESULT_OK) {
                     if (wallpaperTemporary.exists()) {
