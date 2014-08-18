@@ -74,6 +74,7 @@ import android.media.MediaRouter;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.provider.AlarmClock;
+import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -1291,8 +1292,13 @@ public class ModQuickSettings {
                         tile.setOnLongClickListener(new View.OnLongClickListener() {
                             @Override
                             public boolean onLongClick(View v) {
-                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
-                                        android.provider.Settings.ACTION_DISPLAY_SETTINGS);
+                                int brightnessMode = Settings.System.getInt(mContext.getContentResolver(),
+                                        Settings.System.SCREEN_BRIGHTNESS_MODE, 0);
+                                Settings.System.putInt(mContext.getContentResolver(),
+                                        Settings.System.SCREEN_BRIGHTNESS_MODE,
+                                        brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL ?
+                                                Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC :
+                                                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
                                 tile.setPressed(false);
                                 return true;
                             }
