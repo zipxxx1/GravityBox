@@ -1277,7 +1277,7 @@
     <string name="pref_lockscreen_ring_dt2s_summary">Fare doppio-tap sull\'anello di sblocco spegnerà lo schermo</string>
 
     <!-- Charger plugged sound -->
-    <string name="pref_charger_plugged_sound_title">Riproduci suono al collegamento</string>
+    <string name="pref_charger_plugged_sound_title">Suono inserimento cavo</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Attiva/disattiva Modem intelligente</string>
@@ -1683,5 +1683,11 @@
     <!-- MSIM Signal Cluster: auto-hide signal icons -->
     <string name="pref_signal_icon_autohide_title">Nascondi automaticamente icone segnale</string>
     <string name="pref_signal_icon_autohide_summary">Nasconde automaticamente le icone del segnale quando la scheda SIM non è inserita (richiede riavvio)</string>
+
+    <!-- Heads Up: Transparency level -->
+    <string name="pref_heads_up_alpha_title">Livello trasparenza</string>
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Suono disinserimento cavo</string>
 
 </resources>
