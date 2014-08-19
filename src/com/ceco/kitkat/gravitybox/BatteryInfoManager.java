@@ -124,10 +124,15 @@ public class BatteryInfoManager {
 
     public void setSound(int type, String uri) {
         if (type < 0 || type > (mSounds.length-1)) return;
-        try {
-            mSounds[type] = Uri.parse(uri);
-        } catch (Exception e) {
+
+        if (uri == null || uri.isEmpty()) {
             mSounds[type] = null;
+        } else {
+            try {
+                mSounds[type] = Uri.parse(uri);
+            } catch (Exception e) {
+                mSounds[type] = null;
+            }
         }
     }
 
