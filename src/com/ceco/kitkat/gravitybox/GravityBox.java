@@ -58,6 +58,10 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         SystemWideResources.initResources(prefs);
 
         // Common
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_PATCH_FAKE_ID, false)) {
+            PatchFakeId.initZygote();
+        }
+
         ModElectronBeam.initZygote(prefs);
         ModVolumeKeySkipTrack.init(prefs);
         ModInputMethod.initZygote(prefs);

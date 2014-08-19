@@ -1690,4 +1690,9 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Charger unplugged sound</string>
 
+    <!-- Fake ID patch -->
+    <string name="pref_patch_fake_id_title">Patch Fake ID vulnerability</string>
+    <string name="pref_patch_fake_id_summary">Note, that security scanners are not capable of detecting patch coming from GravityBox thus 
+        they will report as not fixed even if patch is applied (requires reboot)</string>
+
 </resources>
