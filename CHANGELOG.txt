@@ -1,3 +1,30 @@
+Changelog 3.3.2 - 19/08/2014
+--------------------------------------
+- Quick settings: toggle auto-brightness on/off on brightness tile long-press (when brightness tile behavior overriden)
+- Heads up common:
+--- added option for choosing heads up position (applies only when keyboard is not showing to avoid interference http://youtu.be/m3xD9z0k5oM )
+--- added option for choosing heads up transparency level
+--- improved handling of non-intrusive incoming call
+--- fixed heads up sometimes stuck after non-intrusive incoming call is answered
+- Ultimate notification control:
+--- Active Screen: added option for choosing heads up transparency level
+--- Active Screen: avoid keyboard popping up for heads up on lock screen
+--- fixed crash when orientation changes during app list loading
+- Power tweaks: allow users to choose custom sounds for battery charged/charger plugged/unplugged events
+- Navigation bar/pie: optimized behavior of dynamic clear all recents key
+- Key actions: fixed issues with the recents key causing action reset
+- ExpandedDesktop: don't show status bar when swiping from navbar area in semi-immersive mode - e.g. avoids showing status bar 
+  when user has Pie controls within navbar area
+- Display tweaks: affect button backlight behavior only when option for button backlight mode is other than default
+- Misc tweaks: added option for FakeID vulnerability patch (thanks to Tungstwenty@XDA for original Xposed module - https://github.com/Tungstwenty/FakeIDFix):
+--- patches new security vulnerability labeled "Fake ID" (Google bug 13678484) - http://bluebox.com/technical/android-fake-id-vulnerability/
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated French translation (thanks to ch-vox)
+- Updated German translations (thanks to LibertyMarine)
+- Updated Russian translations (thanks to gaich)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Slovak and Czech translations
+
 Changelog 3.3.1 - 11/08/2014
 --------------------------------------
 - Fixed crash in GravityBox settings
