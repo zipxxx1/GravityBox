@@ -1690,4 +1690,9 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Son à la déconnexion du chargeur</string>
 
+    <!-- Fake ID patch -->
+    <string name="pref_patch_fake_id_title">Patch pour la faille Fake ID</string>
+    <string name="pref_patch_fake_id_summary">Notez que les scanners ne sont pas capables de détecter le patch correctif appliqué par GravityBox 
+        c\'est pourquoi ils rapporteront que la faille est toujours présentes, même si le patch a été appliqué (redémarrage nécessaire)</string>
+
 </resources>
