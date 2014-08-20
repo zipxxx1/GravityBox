@@ -1683,5 +1683,15 @@
     <!-- MSIM Signal Cluster: auto-hide signal icons -->
     <string name="pref_signal_icon_autohide_title">自动隐藏信号图标</string>
     <string name="pref_signal_icon_autohide_summary">在未插入SIM卡时自动隐藏信号图标（需要重新启动）</string>
+    
+    <!-- Heads Up: Transparency level -->
+    <string name="pref_heads_up_alpha_title">透明度等级</string>
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">插入充电器声音</string>
+
+    <!-- Fake ID patch -->
+    <string name="pref_patch_fake_id_title">修补假身份漏洞(Fake ID)</string>
+    <string name="pref_patch_fake_id_summary">注意，从GravityBox应用该补丁Security Scanners软件不能检测到,它们的报告将显示为不确定（需要重新启动）</string>
 
 </resources>
