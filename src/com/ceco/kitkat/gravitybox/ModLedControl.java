@@ -119,13 +119,7 @@ public class ModLedControl {
                 final boolean screenCovered = event.values[0] == 0;
                 if (DEBUG) log("mProxSensorEventListener: screenCovered=" + screenCovered);
                 if (!screenCovered) {
-                    if (mOnPanelRevealedBlocked) {
-                        mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS));
-                    }
-                    final WakeLock wl = mPm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
-                            PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, TAG);
-                    wl.acquire();
-                    wl.release();
+                    performActiveScreen();
                 }
             } catch (Throwable t) {
                 XposedBridge.log(t);
@@ -404,9 +398,11 @@ public class ModLedControl {
                 if (DEBUG) log("Performing Active Screen for " + pkgName + " with mode " +
                         asMode.toString());
 
+                mOnPanelRevealedBlocked = asMode == ActiveScreenMode.EXPAND_PANEL;
                 if (mSm != null && mProxSensor != null) {
-                    mOnPanelRevealedBlocked = asMode == ActiveScreenMode.EXPAND_PANEL;
                     mSm.registerListener(mProxSensorEventListener, mProxSensor, SensorManager.SENSOR_DELAY_FASTEST);
+                } else {
+                    performActiveScreen();
                 }
             } catch (Throwable t) {
                 XposedBridge.log(t);
@@ -450,6 +446,16 @@ public class ModLedControl {
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
+    }
+
+    private static void performActiveScreen() {
+        if (mOnPanelRevealedBlocked) {
+            mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS));
+        }
+        final WakeLock wl = mPm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
+                PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, TAG);
+        wl.acquire();
+        wl.release();
     }
 
     // SystemUI package
