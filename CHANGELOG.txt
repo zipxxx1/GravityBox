@@ -1,3 +1,13 @@
+Changelog 3.3.3 - 20/08/2014
+--------------------------------------
+- Fixed battery/charging events sounds playing even if no sounds are set
+--- known to happen on Samsung and other "unsupported" devices
+- Use proper minimum brightness value for status bar brightness control (thanks to tonyp)
+- UNC ActiveScreen: optimized proximity sensor usage
+--- feature no more requires prox sensor to be on while screen is off
+- Updated French translation (thanks to ch-vox)
+- Updated Slovak translations (thanks to ja_som)
+
 Changelog 3.3.2 - 19/08/2014
 --------------------------------------
 - Quick settings: toggle auto-brightness on/off on brightness tile long-press (when brightness tile behavior overriden)
