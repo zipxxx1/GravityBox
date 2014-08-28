@@ -220,7 +220,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                !Utils.isMotoXtDevice()) {
+                !Utils.isMotoXtDevice() && !Utils.isMtkDevice()) {
             XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
             sQsHpResId = XResources.getFakeResId(modRes, R.drawable.ic_qs_signal_hp);
             sQsHpFullResId = XResources.getFakeResId(modRes, R.drawable.ic_qs_signal_full_hp);
@@ -237,10 +237,12 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             QS_DATA_HP = new int[] { sQsHpResId, sQsHpFullResId };
         }
 
-        String lteStyle = prefs.getString(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE, "DEFAULT");
-        if (!lteStyle.equals("DEFAULT")) {
-            resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "bool", "config_show4GForLTE",
-                    lteStyle.equals("4G"));
+        if (!Utils.isMtkDevice()) {
+            String lteStyle = prefs.getString(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE, "DEFAULT");
+            if (!lteStyle.equals("DEFAULT")) {
+                resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "bool", "config_show4GForLTE",
+                        lteStyle.equals("4G"));
+            }
         }
     }
 

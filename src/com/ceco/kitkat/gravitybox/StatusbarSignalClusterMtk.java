@@ -1,5 +1,7 @@
 package com.ceco.kitkat.gravitybox;
 
+import java.lang.reflect.Field;
+
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
@@ -40,6 +42,8 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
 
         mRoamingIndicatorsDisabled = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_DISABLE_ROAMING_INDICATORS, false);
+        mConnectionStateEnabled = false;
+        mDataActivityEnabled = false;
     }
 
     @Override
@@ -194,12 +198,26 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
         }
     }
 
+    private ImageView getAirplaneModeIcon() throws IllegalAccessException, IllegalArgumentException {
+        final String[] fNames = new String[] { "mAirplane", "mFlightMode" };
+        Field f = null;
+
+        for (String fName : fNames) {
+            try {
+                f = mView.getClass().getDeclaredField(fName);
+                break;
+            } catch (NoSuchFieldException nfe) { }
+        }
+        if (f == null) return null;
+
+        f.setAccessible(true);
+        return (ImageView) f.get(mView);
+    }
+
     @Override 
     protected void updateAirplaneModeIcon() {
         try {
-            ImageView airplaneModeIcon = Utils.hasGeminiSupport() ?
-                    (ImageView) XposedHelpers.getObjectField(mView, "mFlightMode") :
-                        (ImageView) XposedHelpers.getObjectField(mView, "mAirplane");
+            ImageView airplaneModeIcon = getAirplaneModeIcon();
             if (airplaneModeIcon != null) {
                 Drawable d = airplaneModeIcon.getDrawable();
                 if (mIconManager.isColoringEnabled()) {

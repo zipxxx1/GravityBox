@@ -1219,6 +1219,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefQsBatteryTempUnit;
         private AppPickerPreference mPrefCustomApp;
         private ListPreference mPrefHeadsUpPosition;
+        private CheckBoxPreference mPrefSignalIconAutohide;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1514,6 +1515,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefScreenrecordSize = (ListPreference) findPreference(PREF_KEY_SCREENRECORD_SIZE);
 
             mPrefCatSignalCluster = (PreferenceScreen) findPreference(PREF_CAT_KEY_SIGNAL_CLUSTER);
+            mPrefSignalIconAutohide = (CheckBoxPreference) findPreference(PREF_KEY_SIGNAL_ICON_AUTOHIDE);
 
             mPrefLedControl = findPreference(PREF_LED_CONTROL);
 
@@ -1583,13 +1585,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text);
             } else {
+                mPrefCatStatusbar.removePreference(mPrefCatSignalCluster);
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {
                     mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
                     mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                     mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
-                    mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                     mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text); 
                 }
             }
@@ -1609,7 +1611,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             // Remove MSIM preferences for non-MSIM devices
             if (!sSystemProperties.hasMsimSupport) {
-                mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_ICON_AUTOHIDE));
+                mPrefCatSignalCluster.removePreference(mPrefSignalIconAutohide);
             } else {
                 // TODO: carrier texts for MSIM devices
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
