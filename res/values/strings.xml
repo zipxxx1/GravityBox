@@ -1695,4 +1695,7 @@
     <string name="pref_patch_fake_id_summary">Note, that security scanners are not capable of detecting patch coming from GravityBox thus 
         they will report as not fixed even if patch is applied (requires reboot)</string>
 
+    <!-- MTK tiles: Audio profile -->
+    <string name="qs_tile_audio_profile">Audio Profile</string>
+
 </resources>

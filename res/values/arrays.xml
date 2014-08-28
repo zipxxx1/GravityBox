@@ -97,6 +97,7 @@
         <item>@string/qs_tile_brightness</item>
         <item>@string/qs_tile_settings</item>
         <item>@string/qs_tile_wifi</item>
+        <item>@string/qs_tile_mobile_data</item>
         <item>@string/qs_tile_data_usage</item>
         <item>@string/qs_tile_data_usage_2</item>
         <item>@string/qs_tile_autorotation</item>
@@ -108,6 +109,7 @@
         <item>@string/qs_tile_gps_slimkat</item>
         <item>@string/qs_tile_gps_alt</item>
         <item>@string/qs_tile_ringer_mode</item>
+        <item>@string/qs_tile_audio_profile</item>
         <item>@string/qs_tile_volume</item>
         <item>@string/qs_tile_network_mode</item>
         <item>@string/qs_tile_smart_radio</item>
@@ -137,6 +139,7 @@
         <item>brightness_textview</item>
         <item>settings</item>
         <item>wifi_textview</item>
+        <item>mtk_mobile_data</item>
         <item>rssi_textview</item>
         <item>rssi_textview_2</item>
         <item>auto_rotate_textview</item>
@@ -148,6 +151,7 @@
         <item>location_tileview</item>
         <item>gps_tileview</item>
         <item>ringer_mode_tileview</item>
+        <item>mtk_audio_profile</item>
         <item>volume_tileview</item>
         <item>network_mode_tileview</item>
         <item>smart_radio_tileview</item>

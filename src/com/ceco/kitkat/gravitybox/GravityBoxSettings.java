@@ -1592,7 +1592,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                     mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text); 
                 }
-                mPrefCatQsTileSettings.removePreference(mPrefQsTileBehaviourOverride);
             }
 
             // Remove preferences not compatible with Lenovo VibeUI ROMs
@@ -1699,12 +1698,54 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     qsPrefs.remove("rssi_textview_2");
                 }
             }
+            if (!Utils.isMtkDevice()) {
+                qsEntries.remove(getString(R.string.qs_tile_mobile_data));
+                qsEntries.remove(getString(R.string.qs_tile_audio_profile));
+                qsEntryValues.remove("mtk_mobile_data");
+                qsEntryValues.remove("mtk_audio_profile");
+                if (qsPrefs != null) {
+                    if (qsPrefs.contains("mtk_mobile_data")) qsPrefs.remove("mtk_mobile_data");
+                    if (qsPrefs.contains("mtk_audio_profile")) qsPrefs.remove("mtk_audio_profile");
+                }
+            }
 
             // and update saved prefs in case it was previously checked in previous versions
             mPrefs.edit().putStringSet(PREF_KEY_QUICK_SETTINGS, qsPrefs).commit();
             mQuickSettings.setEntries(qsEntries.toArray(new CharSequence[qsEntries.size()]));
             mQuickSettings.setEntryValues(qsEntryValues.toArray(new CharSequence[qsEntryValues.size()]));
             TileOrderActivity.updateTileList(mPrefs);
+
+            // Remove overriden tiles based on device type
+            List<CharSequence> qsoEntries = new ArrayList<CharSequence>(Arrays.asList(
+                    mPrefQsTileBehaviourOverride.getEntries()));
+            List<CharSequence> qsoEntryValues = new ArrayList<CharSequence>(Arrays.asList(
+                    mPrefQsTileBehaviourOverride.getEntryValues()));
+            Set<String> qsoPrefs = mPrefs.getStringSet(PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE, null);
+            if (Utils.isMtkDevice()) {
+                qsoEntries.remove(getString(R.string.qs_tile_wifi));
+                qsoEntries.remove(getString(R.string.qs_tile_data_usage));
+                qsoEntries.remove(getString(R.string.qs_tile_autorotation));
+                qsoEntries.remove(getString(R.string.qs_tile_airplane_mode));
+                qsoEntries.remove(getString(R.string.qs_tile_bluetooth));
+                qsoEntries.remove(getString(R.string.qs_tile_gps));
+                qsoEntryValues.remove("wifi_textview");
+                qsoEntryValues.remove("rssi_textview");
+                qsoEntryValues.remove("auto_rotate_textview");
+                qsoEntryValues.remove("airplane_mode_textview");
+                qsoEntryValues.remove("bluetooth_textview");
+                qsoEntryValues.remove("gps_textview");
+                if (qsoPrefs != null) {
+                    if (qsoPrefs.contains("wifi_textview")) qsoPrefs.remove("wifi_textview");
+                    if (qsoPrefs.contains("rssi_textview")) qsoPrefs.remove("rssi_textview");
+                    if (qsoPrefs.contains("auto_rotate_textview")) qsoPrefs.remove("auto_rotate_textview");
+                    if (qsoPrefs.contains("airplane_mode_textview")) qsoPrefs.remove("airplane_mode_textview");
+                    if (qsoPrefs.contains("bluetooth_textview")) qsoPrefs.remove("bluetooth_textview");
+                    if (qsoPrefs.contains("gps_textview")) qsoPrefs.remove("gps_textview");
+                }
+            }
+            mPrefs.edit().putStringSet(PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE, qsoPrefs).commit();
+            mPrefQsTileBehaviourOverride.setEntries(qsoEntries.toArray(new CharSequence[qsoEntries.size()]));
+            mPrefQsTileBehaviourOverride.setEntryValues(qsoEntryValues.toArray(new CharSequence[qsoEntryValues.size()]));
 
             // Remove actions for HW keys based on device features
             mPrefHwKeyMenuLongpress.setEntries(R.array.hwkey_action_entries);

@@ -107,7 +107,8 @@ public class ModStatusbarColor {
         try {
             final Class<?> phoneStatusbarViewClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_VIEW, classLoader);
             final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
-            final Class<?> signalClusterViewClass = XposedHelpers.findClass(StatusbarSignalCluster.getClassName(), classLoader);
+            final Class<?> signalClusterViewClass = XposedHelpers.findClass(
+                    StatusbarSignalCluster.getClassName(classLoader), classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
             final Class<?> statusbarIconViewClass = XposedHelpers.findClass(CLASS_STATUSBAR_ICON_VIEW, classLoader);
             final Class<?> sbTransitionsClass = XposedHelpers.findClass(CLASS_SB_TRANSITIONS, classLoader);

@@ -186,19 +186,36 @@ public class ModQuickSettings {
         ));
 
         Map<String, Integer> tmpMap = new HashMap<String, Integer>();
-        tmpMap.put("user_textview", 1);
-        tmpMap.put("brightness_textview", 2);
-        tmpMap.put("settings", 3);
-        tmpMap.put("wifi_textview", 4);
-        tmpMap.put("rssi_textview", 5);
-        tmpMap.put("auto_rotate_textview", 6);
-        tmpMap.put("battery_textview", 7);
-        tmpMap.put("airplane_mode_textview", 8);
-        tmpMap.put("bluetooth_textview", 9);
-        tmpMap.put("gps_textview", 10);
-        tmpMap.put("alarm_textview", 11);
-        tmpMap.put("remote_display_textview", 12);
-        tmpMap.put("rssi_textview_2", 13);
+        if (Utils.isMtkDevice()) {
+            tmpMap.put("user_textview", 1);
+            tmpMap.put("brightness_textview", 13);
+            tmpMap.put("settings", 25);
+            tmpMap.put("wifi_textview", 5);
+            tmpMap.put("rssi_textview", 10);
+            tmpMap.put("auto_rotate_textview", 16);
+            tmpMap.put("battery_textview", 3);
+            tmpMap.put("airplane_mode_textview", 2);
+            tmpMap.put("bluetooth_textview", 6);
+            tmpMap.put("gps_textview", 7);
+            tmpMap.put("alarm_textview", 17);
+            tmpMap.put("remote_display_textview", 18);
+            tmpMap.put("mtk_mobile_data", 9);
+            tmpMap.put("mtk_audio_profile", 12);
+        } else {
+            tmpMap.put("user_textview", 1);
+            tmpMap.put("brightness_textview", 2);
+            tmpMap.put("settings", 3);
+            tmpMap.put("wifi_textview", 4);
+            tmpMap.put("rssi_textview", 5);
+            tmpMap.put("auto_rotate_textview", 6);
+            tmpMap.put("battery_textview", 7);
+            tmpMap.put("airplane_mode_textview", 8);
+            tmpMap.put("bluetooth_textview", 9);
+            tmpMap.put("gps_textview", 10);
+            tmpMap.put("alarm_textview", 11);
+            tmpMap.put("remote_display_textview", 12);
+            tmpMap.put("rssi_textview_2", 13);
+        }
         mAospTileTags = Collections.unmodifiableMap(tmpMap);
 
         mAllTileViews = new HashMap<String, View>();
@@ -277,6 +294,31 @@ public class ModQuickSettings {
         return null;
     }
 
+    private static String getMtkTileKey(View view) {
+        if (view == null) return null;
+
+        try {
+            Method m = view.getClass().getMethod("getTileViewId");
+            m.setAccessible(true);
+            int id = ((Enum<?>) m.invoke(view)).ordinal();
+            for (String key : mAospTileTags.keySet()) {
+                if (mAospTileTags.get(key) == id) {
+                    return key;
+                }
+            }
+        } catch (Exception e) { }
+
+        return null;
+    }
+
+    private static String getStockTileKey(View view) {
+        if (Utils.isMtkDevice()) {
+            return getMtkTileKey(view);
+        } else {
+            return getAospTileKey(view);
+        }
+    }
+
     private static String getGbTileKey(View view) {
         final Resources res = mGbContext.getResources();
         for (Integer ikey : mCustomGbTileKeys) {
@@ -291,7 +333,7 @@ public class ModQuickSettings {
         if (view == null) return null;
 
         String key = null;
-        key = getAospTileKey(view);
+        key = getStockTileKey(view);
 
         if (key == null) {
             key = getGbTileKey(view);
@@ -442,6 +484,8 @@ public class ModQuickSettings {
             // Moto XT
             final int imgGroupResId = res.getIdentifier("image_group", "id", PACKAGE_NAME);
             final int rssiSlotIdResId = res.getIdentifier("rssi_slot_id", "id", PACKAGE_NAME);
+            // MTK
+            final int imgResIdSwitch = res.getIdentifier("imageSwitch", "id", PACKAGE_NAME);
 
             final int tileCount = mContainerView.getChildCount();
             for(int i = 0; i < tileCount; i++) {
@@ -450,8 +494,9 @@ public class ModQuickSettings {
 
                 // look for layout view and tile text view
                 View layoutView = null;
+                View layoutViewSwitch = null;
                 TextView tileTextView = null;
-                final String key = getAospTileKey(viewGroup);
+                final String key = getStockTileKey(viewGroup);
                 if (Utils.isMotoXtDevice() && "wifi_textview".equals(key) && imgGroupResId != 0) {
                     layoutView = viewGroup.findViewById(imgGroupResId);
                     tileTextView = (TextView) viewGroup.findViewById(textResId);
@@ -468,6 +513,9 @@ public class ModQuickSettings {
                     // basic tile
                     if (imgResId != 0) {
                         layoutView = viewGroup.findViewById(imgResId);
+                    }
+                    if (imgResIdSwitch != 0) {
+                        layoutViewSwitch = viewGroup.findViewById(imgResIdSwitch);
                     }
                     // RSSI special tile
                     if (layoutView == null && rssiImgResId != 0) {
@@ -493,6 +541,13 @@ public class ModQuickSettings {
                     lp.bottomMargin = tl.imageMarginBottom;
                     layoutView.setLayoutParams(lp);
                     layoutView.requestLayout();
+                }
+                if (layoutViewSwitch != null && layoutViewSwitch.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+                    ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) layoutViewSwitch.getLayoutParams();
+                    lp.topMargin = tl.imageMarginTop;
+                    lp.bottomMargin = tl.imageMarginBottom;
+                    layoutViewSwitch.setLayoutParams(lp);
+                    layoutViewSwitch.requestLayout();
                 }
             }
 
@@ -592,9 +647,7 @@ public class ModQuickSettings {
                     int.class, int.class, qsContainerViewOnMeasure);
 
             // tag AOSP QS views for future identification
-            if (!Utils.isMtkDevice()) {
-                tagAospTileViews(classLoader);
-            }
+            tagAospTileViews(classLoader);
 
             final Class<?> rlControllerClass = XposedHelpers.findClass(CLASS_ROTATION_LOCK_CTRL, classLoader);
             XposedHelpers.findAndHookMethod(rlControllerClass, "isRotationLockAffordanceVisible", 
@@ -1050,6 +1103,7 @@ public class ModQuickSettings {
         }
     };
 
+    @SuppressWarnings("unchecked")
     private static boolean notifDataHasVisibleItems(Object notifData) {
         try {
             ArrayList<Object> entries = (ArrayList<Object>) XposedHelpers.getObjectField(notifData, "mEntries");
@@ -1065,6 +1119,7 @@ public class ModQuickSettings {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static boolean notifDataHasClearableItems(Object notifData) {
         try {
             ArrayList<Object> entries = (ArrayList<Object>) XposedHelpers.getObjectField(notifData, "mEntries");
@@ -1189,13 +1244,11 @@ public class ModQuickSettings {
             try {
                 ViewGroup thisView = (ViewGroup) param.thisObject;
                 int widthMeasureSpec = (Integer) param.args[0];
-                int heightMeasureSpec = (Integer) param.args[1];
                 float mCellGap = XposedHelpers.getFloatField(thisView, "mCellGap");
                 int numColumns = XposedHelpers.getIntField(thisView, "mNumColumns");
                 int orientation = mContext.getResources().getConfiguration().orientation;
-                
+
                 int width = MeasureSpec.getSize(widthMeasureSpec);
-                int height = MeasureSpec.getSize(heightMeasureSpec);
                 int availableWidth = (int) (width - thisView.getPaddingLeft() - thisView.getPaddingRight() -
                         (numColumns - 1) * mCellGap);
                 float cellWidth = (float) Math.ceil(((float) availableWidth) / numColumns);
@@ -1266,19 +1319,25 @@ public class ModQuickSettings {
         }
     };
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     private static void tagAospTileViews(ClassLoader classLoader) {
         final Class<?> classQsModel = XposedHelpers.findClass(CLASS_QS_MODEL, classLoader);
-
-        try {
-            XposedHelpers.findAndHookMethod(classQsModel, "addUserTile",
-                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    ((View)param.args[0]).setTag(mAospTileTags.get("user_textview"));
-                }
-            });
-        } catch (Throwable t) {
-            XposedBridge.log(t);
+        final Class<? extends Enum> enumTileId = Utils.isMtkDevice() ?
+                (Class<? extends Enum>) XposedHelpers.findClass(
+                        "com.mediatek.systemui.ext.QuickSettingsTileViewId", classLoader) : null;
+        
+        if (!Utils.isMtkDevice()) {
+            try {
+                XposedHelpers.findAndHookMethod(classQsModel, "addUserTile",
+                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        ((View)param.args[0]).setTag(mAospTileTags.get("user_textview"));
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
 
         try {
@@ -1287,7 +1346,9 @@ public class ModQuickSettings {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("brightness_textview"));
+                    if (!Utils.isMtkDevice()) {
+                        tile.setTag(mAospTileTags.get("brightness_textview"));
+                    }
                     if (mOverrideTileKeys.contains("brightness_textview")) {
                         tile.setOnLongClickListener(new View.OnLongClickListener() {
                             @Override
@@ -1316,7 +1377,9 @@ public class ModQuickSettings {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("settings"));
+                    if (!Utils.isMtkDevice()) {
+                        tile.setTag(mAospTileTags.get("settings"));
+                    }
                     if (mOverrideTileKeys.contains("settings")) {
                         tile.setOnLongClickListener(new View.OnLongClickListener() {
                             @Override
@@ -1341,87 +1404,93 @@ public class ModQuickSettings {
             XposedBridge.log(t);
         }
 
-        try {
-            XposedHelpers.findAndHookMethod(classQsModel, "addWifiTile",
-                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("wifi_textview"));
-                    if (mOverrideTileKeys.contains("wifi_textview")) {
-                        tile.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mWifiManager.toggleWifiEnabled();
-                                if (mHideOnChange && mStatusBar != null) {
-                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+        if (!Utils.isMtkDevice()) {
+            try {
+                XposedHelpers.findAndHookMethod(classQsModel, "addWifiTile",
+                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        final View tile = (View) param.args[0];
+                        tile.setTag(mAospTileTags.get("wifi_textview"));
+                        if (mOverrideTileKeys.contains("wifi_textview")) {
+                            tile.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mWifiManager.toggleWifiEnabled();
+                                    if (mHideOnChange && mStatusBar != null) {
+                                        XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                    }
                                 }
-                            }
-                        });
-                        tile.setOnLongClickListener(new View.OnLongClickListener() {
-                            @Override
-                            public boolean onLongClick(View v) {
-                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
-                                        android.provider.Settings.ACTION_WIFI_SETTINGS);
-                                tile.setPressed(false);
-                                return true;
-                            }
-                        });
+                            });
+                            tile.setOnLongClickListener(new View.OnLongClickListener() {
+                                @Override
+                                public boolean onLongClick(View v) {
+                                    XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
+                                            android.provider.Settings.ACTION_WIFI_SETTINGS);
+                                    tile.setPressed(false);
+                                    return true;
+                                }
+                            });
+                        }
                     }
-                }
-            });
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-
-        try {
-            XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile",
-                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
-            if (PhoneWrapper.hasMsimSupport()) {
-                XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile_2",
-                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
             }
-            XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile",
-                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
         }
 
-        try {
-            XposedHelpers.findAndHookMethod(classQsModel, "addRotationLockTile",
-                    CLASS_QS_TILEVIEW, CLASS_ROTATION_LOCK_CTRL, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("auto_rotate_textview"));
-                    if (mOverrideTileKeys.contains("auto_rotate_textview")) {
-                        tile.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                final Object rlCtrl = XposedHelpers.getObjectField(
-                                        mQuickSettings, "mRotationLockController");
-                                final boolean locked = (Boolean) XposedHelpers.callMethod(
-                                        rlCtrl, "isRotationLocked");
-                                XposedHelpers.callMethod(rlCtrl, "setRotationLocked", !locked);
-                                if (mHideOnChange && mStatusBar != null) {
-                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
-                                }
-                            }
-                        });
-                        tile.setOnLongClickListener(new View.OnLongClickListener() {
-                            @Override
-                            public boolean onLongClick(View v) {
-                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
-                                        android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);
-                                tile.setPressed(false);
-                                return true;
-                            }
-                        });
-                    }
+        if (!Utils.isMtkDevice()) {
+            try {
+                XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile",
+                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
+                if (PhoneWrapper.hasMsimSupport()) {
+                    XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile_2",
+                            CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
                 }
-            });
-        } catch (Throwable t) {
-            XposedBridge.log(t);
+                XposedHelpers.findAndHookMethod(classQsModel, "addRSSITile",
+                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, addRSSITileHook);
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+        }
+
+        if (!Utils.isMtkDevice()) {
+            try {
+                XposedHelpers.findAndHookMethod(classQsModel, "addRotationLockTile",
+                        CLASS_QS_TILEVIEW, CLASS_ROTATION_LOCK_CTRL, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        final View tile = (View) param.args[0];
+                        tile.setTag(mAospTileTags.get("auto_rotate_textview"));
+                        if (mOverrideTileKeys.contains("auto_rotate_textview")) {
+                            tile.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    final Object rlCtrl = XposedHelpers.getObjectField(
+                                            mQuickSettings, "mRotationLockController");
+                                    final boolean locked = (Boolean) XposedHelpers.callMethod(
+                                            rlCtrl, "isRotationLocked");
+                                    XposedHelpers.callMethod(rlCtrl, "setRotationLocked", !locked);
+                                    if (mHideOnChange && mStatusBar != null) {
+                                        XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                    }
+                                }
+                            });
+                            tile.setOnLongClickListener(new View.OnLongClickListener() {
+                                @Override
+                                public boolean onLongClick(View v) {
+                                    XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
+                                            android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                                    tile.setPressed(false);
+                                    return true;
+                                }
+                            });
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
 
         try {
@@ -1430,7 +1499,9 @@ public class ModQuickSettings {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("battery_textview"));
+                    if (!Utils.isMtkDevice()) {
+                        tile.setTag(mAospTileTags.get("battery_textview"));
+                    }
                     if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BATTERY_EXTENDED, false)) {
                         int imgResId = tile.getResources().getIdentifier("image", "id", PACKAGE_NAME);
                         if (imgResId != 0) {
@@ -1479,118 +1550,124 @@ public class ModQuickSettings {
             XposedBridge.log(t);
         }
 
-        try {
-            XposedHelpers.findAndHookMethod(classQsModel, "addAirplaneModeTile",
-                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("airplane_mode_textview"));
-                    if (mOverrideTileKeys.contains("airplane_mode_textview")) {
-                        tile.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                final Object state = XposedHelpers.getObjectField(
-                                        param.thisObject, "mAirplaneModeState");
-                                final boolean enabled = XposedHelpers.getBooleanField(state, "enabled");
-                                XposedHelpers.callMethod(param.thisObject, "setAirplaneModeState", !enabled);
-                                if (mHideOnChange && mStatusBar != null) {
-                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+        if (!Utils.isMtkDevice()) {
+            try {
+                XposedHelpers.findAndHookMethod(classQsModel, "addAirplaneModeTile",
+                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        final View tile = (View) param.args[0];
+                        tile.setTag(mAospTileTags.get("airplane_mode_textview"));
+                        if (mOverrideTileKeys.contains("airplane_mode_textview")) {
+                            tile.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    final Object state = XposedHelpers.getObjectField(
+                                            param.thisObject, "mAirplaneModeState");
+                                    final boolean enabled = XposedHelpers.getBooleanField(state, "enabled");
+                                    XposedHelpers.callMethod(param.thisObject, "setAirplaneModeState", !enabled);
+                                    if (mHideOnChange && mStatusBar != null) {
+                                        XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                    }
                                 }
-                            }
-                        });
-                        tile.setOnLongClickListener(new View.OnLongClickListener() {
-                            @Override
-                            public boolean onLongClick(View v) {
-                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
-                                        android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS);
-                                tile.setPressed(false);
-                                return true;
-                            }
-                        });
+                            });
+                            tile.setOnLongClickListener(new View.OnLongClickListener() {
+                                @Override
+                                public boolean onLongClick(View v) {
+                                    XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
+                                            android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS);
+                                    tile.setPressed(false);
+                                    return true;
+                                }
+                            });
+                        }
                     }
-                }
-            });
-        } catch (Throwable t) {
-            XposedBridge.log(t);
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
 
-        try {
-            XposedHelpers.findAndHookMethod(classQsModel, "addBluetoothTile",
-                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("bluetooth_textview"));
-                    if (mOverrideTileKeys.contains("bluetooth_textview")) {
-                        tile.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                final BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-                                if (btAdapter.isEnabled()) {
-                                    btAdapter.disable();
-                                } else {
-                                    btAdapter.enable();
+        if (!Utils.isMtkDevice()) {
+            try {
+                XposedHelpers.findAndHookMethod(classQsModel, "addBluetoothTile",
+                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        final View tile = (View) param.args[0];
+                        tile.setTag(mAospTileTags.get("bluetooth_textview"));
+                        if (mOverrideTileKeys.contains("bluetooth_textview")) {
+                            tile.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    final BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+                                    if (btAdapter.isEnabled()) {
+                                        btAdapter.disable();
+                                    } else {
+                                        btAdapter.enable();
+                                    }
+                                    if (mHideOnChange && mStatusBar != null) {
+                                        XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                    }
                                 }
-                                if (mHideOnChange && mStatusBar != null) {
-                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                            });
+                            tile.setOnLongClickListener(new View.OnLongClickListener() {
+                                @Override
+                                public boolean onLongClick(View v) {
+                                    XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
+                                            android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+                                    tile.setPressed(false);
+                                    return true;
                                 }
-                            }
-                        });
-                        tile.setOnLongClickListener(new View.OnLongClickListener() {
-                            @Override
-                            public boolean onLongClick(View v) {
-                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
-                                        android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
-                                tile.setPressed(false);
-                                return true;
-                            }
-                        });
+                            });
+                        }
                     }
-                }
-            });
-        } catch (Throwable t) {
-            XposedBridge.log(t);
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
 
-        try {
-            XposedHelpers.findAndHookMethod(classQsModel, "addLocationTile",
-                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("gps_textview"));
-                    if (mOverrideTileKeys.contains("gps_textview")) {
-                        tile.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                final Object locCtrl = XposedHelpers.getObjectField(
-                                        mQuickSettings, "mLocationController");
-                                final boolean newState = !(Boolean)XposedHelpers.callMethod(
-                                        locCtrl, "isLocationEnabled");
-                                if ((Boolean)XposedHelpers.callMethod(locCtrl, "setLocationEnabled", newState)
-                                        && newState && !hasDisableLocationConsent) {
-                                    Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-                                    mContext.sendBroadcast(closeDialog);
-                                } else if (mHideOnChange && mStatusBar != null) {
-                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+        if (!Utils.isMtkDevice()) {
+            try {
+                XposedHelpers.findAndHookMethod(classQsModel, "addLocationTile",
+                        CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        final View tile = (View) param.args[0];
+                        tile.setTag(mAospTileTags.get("gps_textview"));
+                        if (mOverrideTileKeys.contains("gps_textview")) {
+                            tile.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    final Object locCtrl = XposedHelpers.getObjectField(
+                                            mQuickSettings, "mLocationController");
+                                    final boolean newState = !(Boolean)XposedHelpers.callMethod(
+                                            locCtrl, "isLocationEnabled");
+                                    if ((Boolean)XposedHelpers.callMethod(locCtrl, "setLocationEnabled", newState)
+                                            && newState && !hasDisableLocationConsent) {
+                                        Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+                                        mContext.sendBroadcast(closeDialog);
+                                    } else if (mHideOnChange && mStatusBar != null) {
+                                        XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                    }
                                 }
-                            }
-                        });
-                        tile.setOnLongClickListener(new View.OnLongClickListener() {
-                            @Override
-                            public boolean onLongClick(View v) {
-                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
-                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                tile.setPressed(false);
-                                return true;
-                            }
-                        });
+                            });
+                            tile.setOnLongClickListener(new View.OnLongClickListener() {
+                                @Override
+                                public boolean onLongClick(View v) {
+                                    XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
+                                            android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    tile.setPressed(false);
+                                    return true;
+                                }
+                            });
+                        }
                     }
-                }
-            });
-        } catch (Throwable t) {
-            XposedBridge.log(t);
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
 
         try {
@@ -1599,7 +1676,12 @@ public class ModQuickSettings {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("alarm_textview"));
+                    if (Utils.isMtkDevice()) {
+                        XposedHelpers.callMethod(param.args[0], "setTileViewId",
+                                Enum.valueOf(enumTileId, "ID_Alarm"));
+                    } else {
+                        tile.setTag(mAospTileTags.get("alarm_textview"));
+                    }
                     tile.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -1656,7 +1738,12 @@ public class ModQuickSettings {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final View tile = (View) param.args[0];
-                    tile.setTag(mAospTileTags.get("remote_display_textview"));
+                    if (Utils.isMtkDevice()) {
+                        XposedHelpers.callMethod(param.args[0], "setTileViewId",
+                                Enum.valueOf(enumTileId, "ID_WifiDisplay"));
+                    } else {
+                        tile.setTag(mAospTileTags.get("remote_display_textview"));
+                    }
                     XposedHelpers.callMethod(tile, "setOnPrepareListener", (Object)null);
                 }
             });
