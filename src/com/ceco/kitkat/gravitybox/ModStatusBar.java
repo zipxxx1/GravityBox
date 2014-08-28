@@ -78,9 +78,10 @@ public class ModStatusBar {
     private static final String CLASS_NETWORKTYPE = Utils.hasLenovoVibeUI() ?
             "com.android.systemui.lenovo.ext.NetworkType" :
             "com.mediatek.systemui.ext.NetworkType";
-    private static final String CLASS_NETWORK_CONTROLLER = Utils.hasGeminiSupport() ? 
-            "com.android.systemui.statusbar.policy.NetworkControllerGemini" :
+    private static final String CLASS_NETWORK_CONTROLLER =
             "com.android.systemui.statusbar.policy.NetworkController";
+    private static final String CLASS_NETWORK_CONTROLLER_GEMINI =
+            "com.android.systemui.statusbar.policy.NetworkControllerGemini";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
     private static final String CLASS_ICON_MERGER = "com.android.systemui.statusbar.phone.IconMerger";
@@ -369,6 +370,17 @@ public class ModStatusBar {
         }
     }
 
+    private static Class<?> getNetworkControllerClass(ClassLoader classLoader) {
+        if (Utils.hasGeminiSupport()) {
+            try {
+                Class<?> clazz = XposedHelpers.findClass(CLASS_NETWORK_CONTROLLER_GEMINI, classLoader);
+                return clazz;
+            } catch (Throwable t) { }
+        }
+
+        return XposedHelpers.findClass(CLASS_NETWORK_CONTROLLER, classLoader);
+    }
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
@@ -380,7 +392,7 @@ public class ModStatusBar {
             final Class<?> phoneStatusBarPolicyClass = 
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_POLICY, classLoader);
             final Class<?> powerManagerClass = XposedHelpers.findClass(CLASS_POWER_MANAGER, classLoader);
-            final Class<?> networkControllerClass = XposedHelpers.findClass(CLASS_NETWORK_CONTROLLER, classLoader);
+            final Class<?> networkControllerClass = getNetworkControllerClass(classLoader);
             Class<?> expandableNotifRowClass = null;
             if (!Utils.hasLenovoVibeUI()) {
                 expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
