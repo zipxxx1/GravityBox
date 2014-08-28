@@ -1214,9 +1214,17 @@ public class ModStatusBar {
     private static void updateCarrierTextView() {
         if (mPhoneStatusBar == null) return;
 
+        Object nwCtrl = null;
+        if (Utils.hasGeminiSupport()) {
+            try {
+                nwCtrl = XposedHelpers.getObjectField(mPhoneStatusBar, "mNetworkControllerGemini");
+            } catch(Throwable t) { }
+        }
+
         try {
-            Object nwCtrl = XposedHelpers.getObjectField(mPhoneStatusBar, Utils.hasGeminiSupport() ? 
-                    "mNetworkControllerGemini" : "mNetworkController");
+            if (nwCtrl == null) {
+                nwCtrl = XposedHelpers.getObjectField(mPhoneStatusBar, "mNetworkController");
+            }
             if (nwCtrl != null) {
                 XposedHelpers.callMethod(nwCtrl, "refreshViews");
             }
