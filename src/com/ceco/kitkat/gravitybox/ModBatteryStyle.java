@@ -248,6 +248,16 @@ public class ModBatteryStyle {
                     if (DEBUG) log("BatteryController constructed");
                 }
             });
+
+            if (Utils.isMtkDevice()) {
+                XposedHelpers.findAndHookMethod(batteryControllerClass, "onReceive", 
+                        Context.class, Intent.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        updateBatteryStyle();
+                    }
+                });
+            }
         }
         catch (Throwable t) {
             XposedBridge.log(t);
