@@ -1695,4 +1695,7 @@
     <string name="pref_patch_fake_id_summary">Имейте в виду, сканирование безопасности может не определить этот патч от GravityBox, поэтому 
         в отчётах уязвимость может указываться как неисправленная, несмотря на то, что патч был применён (необходима перезагрузка)</string>
 
+    <!-- MTK tiles: Audio profile -->
+    <string name="qs_tile_audio_profile">Профиль аудио</string>
+
 </resources>
