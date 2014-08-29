@@ -1694,4 +1694,8 @@
     <string name="pref_patch_fake_id_title">修补假身份漏洞(Fake ID)</string>
     <string name="pref_patch_fake_id_summary">注意，从GravityBox应用该补丁Security Scanners软件不能检测到,它们的报告将显示为不确定（需要重新启动）</string>
 
+
+    <!-- MTK tiles: Audio profile -->
+    <string name="qs_tile_audio_profile">音量情景</string>
+
 </resources>
