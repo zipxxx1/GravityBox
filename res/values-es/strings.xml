@@ -1661,10 +1661,10 @@
     <string name="pref_unc_quiet_hours_summary">Administra las horas de silencio en las notificaciones</string>
     
     <!-- Key actions: custom action -->
-    <string name="hwkey_action_custom">Acción personalizada</string></string>
+    <string name="hwkey_action_custom">Acción personalizada</string>
     
     <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Ocultar notificación Heads up tras...</string>
+    <string name="pref_unc_as_headsup_timeout_title">Ocultar notificación Heads up tras&#8230;</string>
     <string name="pref_unc_as_headsup_timeout_summary">Cuánto tiempo mostrar la ventana de notificación. 0 = hasta desbloquear.</string>
     
      <!-- UNC Active Screen: heads up position -->
@@ -1687,7 +1687,7 @@
     <string name="pref_charger_unplugged_sound_title">Sonido al desconectar cargados</string>
     
     <!-- Fake ID patch -->
-+    <string name="pref_patch_fake_id_title">Solucionar vulnerabilidad Fake ID</string>
-+    <string name="pref_patch_fake_id_summary">Nota: los escáneres de seguridad no son capaces de detectar el parche aplicado por GravityBox, por lo que 
-+        lo mostrarán como no solucionado aunque ya hayas aplicado dicho parche (requiere reinicio)</string>
+    <string name="pref_patch_fake_id_title">Solucionar vulnerabilidad Fake ID</string>
+    <string name="pref_patch_fake_id_summary">Nota: los escáneres de seguridad no son capaces de detectar el parche aplicado por GravityBox, por lo que 
+        lo mostrarán como no solucionado aunque ya hayas aplicado dicho parche (requiere reinicio)</string>
 </resources>
