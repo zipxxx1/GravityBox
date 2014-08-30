@@ -24,9 +24,6 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
 
     public StatusbarSignalClusterMtk(LinearLayout view, StatusBarIconManager iconManager) {
         super(view, iconManager);
-
-        mRoamingIndicatorsDisabled = false;
-        mDisableDataNetworkTypeIcons = false;
     }
 
     @Override
@@ -46,15 +43,38 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     }
 
     @Override
-    public void initPreferences(XSharedPreferences prefs) {
-        super.initPreferences(prefs);
+    public void initPreferences() {
+        super.initPreferences();
 
-        mRoamingIndicatorsDisabled = prefs.getBoolean(
+        mRoamingIndicatorsDisabled = sPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_DISABLE_ROAMING_INDICATORS, false);
         mConnectionStateEnabled = false;
         mDataActivityEnabled = false;
-        mDisableDataNetworkTypeIcons = prefs.getBoolean(
+        mDisableDataNetworkTypeIcons = sPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
+    }
+
+    @Override
+    protected void apply(int simSlot) {
+        try {
+            boolean doApply = true;
+            if (mFldWifiGroup != null) {
+                doApply = mFldWifiGroup.get(mView) != null;
+            }
+            if (doApply) {
+                if (mIconManager.isColoringEnabled()) {
+                    updateWiFiIcon();
+                    if (DEBUG) log("Signal icon colors updated");
+                }
+                if (!XposedHelpers.getBooleanField(mView, "mIsAirplaneMode")) {
+                    updateMobileIcon(simSlot);
+                }
+                updateAirplaneModeIcon();
+            }
+            updateRoamingIndicator();
+        } catch (Throwable t) {
+            logAndMute("apply", t);
+        }
     }
 
     @Override
@@ -164,54 +184,56 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
             }
 
             for (int slot = 0; slot < mMobile.length; slot++) {
-                if (mMobileVisible != null && mMobileVisible[slot] &&
-                        mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
-                    if (mMobile[slot] != null) {
-                        int resId = (Integer) XposedHelpers.callMethod(Utils.hasGeminiSupport() ? 
-                                mMobileIconIds[slot][0] : XposedHelpers.getObjectField(mView, "mMobileStrengthId"),
-                                "getIconId");
-                        Drawable d = mIconManager.getMobileIcon(slot, resId, true);
-                        if (d != null) mMobile[slot].setImageDrawable(d);
+                if (mMobileVisible != null && mMobileVisible[slot]) {
+                    if (mDisableDataNetworkTypeIcons && mSignalNetworkType != null &&
+                            mSignalNetworkType[slot] != null) {
+                        mSignalNetworkType[slot].setVisibility(View.GONE);
                     }
-                    if (mIconManager.isMobileIconChangeAllowed(slot)) {
-                        if (mMobileActivity != null) {
-                            try {
-                                int resId = (Integer) XposedHelpers.callMethod(
-                                        mMobileActivityIds[slot], "getIconId");
-                                Drawable d = mResources.getDrawable(resId).mutate();
-                                d = mIconManager.applyDataActivityColorFilter(slot, d);
-                                mMobileActivity[slot].setImageDrawable(d);
-                            } catch (Resources.NotFoundException e) {
-                                mMobileActivity[slot].setImageDrawable(null);
-                            }
+                    if (mIconManager.isColoringEnabled() &&
+                            mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
+                        if (mMobile[slot] != null) {
+                            int resId = (Integer) XposedHelpers.callMethod(Utils.hasGeminiSupport() ? 
+                                    mMobileIconIds[slot][0] : XposedHelpers.getObjectField(mView, "mMobileStrengthId"),
+                                    "getIconId");
+                            Drawable d = mIconManager.getMobileIcon(slot, resId, true);
+                            if (d != null) mMobile[slot].setImageDrawable(d);
                         }
-                        if (mMobileType != null) {
-                            try {
-                                int resId = Utils.hasGeminiSupport() ?
-                                        (Integer) XposedHelpers.callMethod(mMobileTypeIds[slot], "getIconId") :
-                                            XposedHelpers.getIntField(mView, "mMobileTypeId");
-                                Drawable d = mResources.getDrawable(resId).mutate();
-                                d = mIconManager.applyColorFilter(slot, d);
-                                mMobileType[slot].setImageDrawable(d);
-                            } catch (Resources.NotFoundException e) {
-                                mMobileType[slot].setImageDrawable(null);
-                            }
-                        }
-                        if (mRoaming[slot]) {
-                            if (mMobileRoam != null) {
+                        if (mIconManager.isMobileIconChangeAllowed(slot)) {
+                            if (mMobileActivity != null) {
                                 try {
-                                    int resId = mRoamingId[slot];
+                                    int resId = (Integer) XposedHelpers.callMethod(
+                                            mMobileActivityIds[slot], "getIconId");
                                     Drawable d = mResources.getDrawable(resId).mutate();
-                                    d = mIconManager.applyColorFilter(slot, d);
-                                    mMobileRoam[slot].setImageDrawable(d);
+                                    d = mIconManager.applyDataActivityColorFilter(slot, d);
+                                    mMobileActivity[slot].setImageDrawable(d);
                                 } catch (Resources.NotFoundException e) {
-                                    mMobileRoam[slot].setImageDrawable(null);
+                                    mMobileActivity[slot].setImageDrawable(null);
                                 }
                             }
-                        }
-                        if (mDisableDataNetworkTypeIcons && mSignalNetworkType != null &&
-                                mSignalNetworkType[slot] != null) {
-                            mSignalNetworkType[slot].setVisibility(View.GONE);
+                            if (mMobileType != null) {
+                                try {
+                                    int resId = Utils.hasGeminiSupport() ?
+                                            (Integer) XposedHelpers.callMethod(mMobileTypeIds[slot], "getIconId") :
+                                                XposedHelpers.getIntField(mView, "mMobileTypeId");
+                                    Drawable d = mResources.getDrawable(resId).mutate();
+                                    d = mIconManager.applyColorFilter(slot, d);
+                                    mMobileType[slot].setImageDrawable(d);
+                                } catch (Resources.NotFoundException e) {
+                                    mMobileType[slot].setImageDrawable(null);
+                                }
+                            }
+                            if (mRoaming[slot]) {
+                                if (mMobileRoam != null) {
+                                    try {
+                                        int resId = mRoamingId[slot];
+                                        Drawable d = mResources.getDrawable(resId).mutate();
+                                        d = mIconManager.applyColorFilter(slot, d);
+                                        mMobileRoam[slot].setImageDrawable(d);
+                                    } catch (Resources.NotFoundException e) {
+                                        mMobileRoam[slot].setImageDrawable(null);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -253,13 +275,6 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
         } catch (Throwable t) {
             logAndMute("updateAirplaneModeIcon", t);
         }
-    }
-
-    @Override
-    public void apply() {
-        super.apply();
-
-        updateRoamingIndicator();
     }
 
     protected void updateRoamingIndicator() {

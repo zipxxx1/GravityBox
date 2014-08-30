@@ -64,7 +64,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected StatusBarIconManager mIconManager;
     protected Resources mResources;
     protected Resources mGbResources;
-    private Field mFldWifiGroup;
+    protected Field mFldWifiGroup;
     private Field mFldMobileGroup;
     private Field mFldMobileView;
     private Field mFldMobileTypeView;
@@ -401,8 +401,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) { }
-
-    public void initPreferences(XSharedPreferences prefs) { }
 
     protected void initPreferences() { 
         mConnectionStateEnabled = sPrefs.getBoolean(
