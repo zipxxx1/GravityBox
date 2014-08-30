@@ -83,6 +83,7 @@ public class ModPowerMenu {
     private static String mScreenshotStr;
     private static String mScreenrecordStr;
     private static Unhook mRebootActionHook;
+    private static Unhook mRebootActionShowHook;
     private static Object mRebootActionItem;
     private static boolean mRebootActionItemStockExists;
     private static Object mScreenshotAction;
@@ -182,6 +183,10 @@ public class ModPowerMenu {
                         mRebootActionHook.unhook();
                         mRebootActionHook = null;
                     }
+                    if (mRebootActionShowHook != null) {
+                        mRebootActionShowHook.unhook();
+                        mRebootActionShowHook = null;
+                    }
                 }
 
                 @Override
@@ -263,6 +268,13 @@ public class ModPowerMenu {
                                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
                                     RebootAction.showRebootDialog(mContext);
                                     return null;
+                                }
+                            });
+                            mRebootActionShowHook = XposedHelpers.findAndHookMethod(mRebootActionItem.getClass(),
+                                    "showDuringKeyguard", new XC_MethodReplacement() {
+                                @Override
+                                protected Object replaceHookedMethod(MethodHookParam param)throws Throwable {
+                                    return mRebootAllowOnLockscreen;
                                 }
                             });
                         } else {
