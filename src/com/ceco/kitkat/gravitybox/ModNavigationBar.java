@@ -1200,7 +1200,7 @@ public class ModNavigationBar {
 
             final int dummySlotCount = isGlowPadVertical() ? 4 : 1;
             for (int i = 0; i < dummySlotCount; i++) {
-                newTargets.add(GlowPadHelper.createTargetDrawable(context, null));
+                newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadView.getClass()));
                 newDescriptions.add(null);
                 newDirections.add(null);
             }
@@ -1210,11 +1210,11 @@ public class ModNavigationBar {
                     String app = mPrefs.getString(
                             GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGET.get(i), null);
                     AppInfo ai = GlowPadHelper.getAppInfo(context, app, 55, mRingTargetsBgStyle);
-                    newTargets.add(GlowPadHelper.createTargetDrawable(context, ai));
+                    newTargets.add(GlowPadHelper.createTargetDrawable(context, ai, mGlowPadView.getClass()));
                     newDescriptions.add(ai == null ? null : ai.name);
                     newDirections.add(null);
                 } else {
-                    newTargets.add(GlowPadHelper.createTargetDrawable(context, null));
+                    newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadView.getClass()));
                     newDescriptions.add(null);
                     newDirections.add(null);
                 }
@@ -1246,7 +1246,7 @@ public class ModNavigationBar {
 
             AppInfo ai = GlowPadHelper.getAppInfo(context, app, 55, mRingTargetsBgStyle);
             if (targets != null && targets.size() > index) {
-                targets.set(index, GlowPadHelper.createTargetDrawable(context, ai));
+                targets.set(index, GlowPadHelper.createTargetDrawable(context, ai, mGlowPadView.getClass()));
                 if (DEBUG) log("Ring target at index " + index + " set to: " + (ai == null ? "null" : ai.name));
             }
             if (descs != null && descs.size() > index) {

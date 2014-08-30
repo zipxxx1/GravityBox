@@ -411,10 +411,10 @@ public class ModLockscreen {
                             appInfo = GlowPadHelper.getAppInfo(context, app);
                         }
                         if (appInfo != null) {
-                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfo));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfo, mGlowPadView.getClass()));
                             newDescriptions.add(appInfo.name);
                         } else {
-                            newTargets.add(GlowPadHelper.createTargetDrawable(context, null));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadView.getClass()));
                             newDescriptions.add(null);
                         }
                         newDirections.add(null);

@@ -37,6 +37,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.TypedValue;
+import android.view.View;
 
 import com.ceco.kitkat.gravitybox.preference.AppPickerPreference;
 
@@ -47,12 +48,14 @@ public class GlowPadHelper {
     private static final String TAG = "GB:GlowPadHelper";
     private static final boolean DEBUG = false;
 
-    private static final String CLASS_TARGET_DRAWABLE = Utils.isMtkDevice() ?
-            "com.android.keyguard.TargetDrawable" :
+    private static final String CLASS_TARGET_DRAWABLE = 
             "com.android.internal.widget.multiwaveview.TargetDrawable";
+    private static final String CLASS_TARGET_DRAWABLE_MTK = 
+            "com.android.keyguard.TargetDrawable";
 
     private static Hashtable<String, AppInfo> mAppInfoCache = new Hashtable<String, AppInfo>();
     private static Constructor<?> mTargetDrawableConstructor;
+    private static Constructor<?> mTargetDrawableConstructorMtk;
     private static Resources mGbResources;
 
     private static void log(String message) {
@@ -179,14 +182,11 @@ public class GlowPadHelper {
         }
     }
 
-    public static Object createTargetDrawable(Context  context, AppInfo appInfo) throws Throwable {
+    public static Object createTargetDrawable(Context  context, AppInfo appInfo, 
+            Class<? extends View> glowPadViewClass) throws Throwable {
         try {
-            if (mTargetDrawableConstructor == null) {
-                mTargetDrawableConstructor = XposedHelpers.findConstructorExact(
-                        XposedHelpers.findClass(CLASS_TARGET_DRAWABLE, context.getClassLoader()), 
-                        Resources.class, int.class);
-            }
-            final Object td = mTargetDrawableConstructor.newInstance(context.getResources(), 0);
+            final Object td = getTargetDrawableConstructor(context, glowPadViewClass)
+                    .newInstance(context.getResources(), 0);
             if (appInfo != null) {
                 StateListDrawable sld = createStateListDrawable(context, appInfo);
                 XposedHelpers.setObjectField(td, "mDrawable", sld);
@@ -195,6 +195,28 @@ public class GlowPadHelper {
             }
 
             return td;
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return null;
+        }
+    }
+
+    private static Constructor<?> getTargetDrawableConstructor(Context context,
+            Class<? extends View> glowPadViewClass) throws Throwable {
+        try {
+            if (glowPadViewClass.getName().contains("Mediatek")) {
+                if (mTargetDrawableConstructorMtk != null) return mTargetDrawableConstructorMtk;
+
+                return mTargetDrawableConstructorMtk = XposedHelpers.findConstructorExact(
+                        XposedHelpers.findClass(CLASS_TARGET_DRAWABLE_MTK, context.getClassLoader()), 
+                        Resources.class, int.class);
+            } else {
+                if (mTargetDrawableConstructor != null) return mTargetDrawableConstructor;
+
+                return mTargetDrawableConstructor = XposedHelpers.findConstructorExact(
+                        XposedHelpers.findClass(CLASS_TARGET_DRAWABLE, context.getClassLoader()), 
+                        Resources.class, int.class);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
             return null;
