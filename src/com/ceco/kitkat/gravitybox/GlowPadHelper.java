@@ -47,7 +47,8 @@ public class GlowPadHelper {
     private static final String TAG = "GB:GlowPadHelper";
     private static final boolean DEBUG = false;
 
-    private static final String CLASS_TARGET_DRAWABLE = 
+    private static final String CLASS_TARGET_DRAWABLE = Utils.isMtkDevice() ?
+            "com.android.keyguard.TargetDrawable" :
             "com.android.internal.widget.multiwaveview.TargetDrawable";
 
     private static Hashtable<String, AppInfo> mAppInfoCache = new Hashtable<String, AppInfo>();
@@ -182,7 +183,7 @@ public class GlowPadHelper {
         try {
             if (mTargetDrawableConstructor == null) {
                 mTargetDrawableConstructor = XposedHelpers.findConstructorExact(
-                        XposedHelpers.findClass(CLASS_TARGET_DRAWABLE, null), 
+                        XposedHelpers.findClass(CLASS_TARGET_DRAWABLE, context.getClassLoader()), 
                         Resources.class, int.class);
             }
             final Object td = mTargetDrawableConstructor.newInstance(context.getResources(), 0);

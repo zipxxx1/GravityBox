@@ -49,6 +49,7 @@ import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Surface;
 import android.view.View.OnLongClickListener;
 import android.view.GestureDetector;
@@ -84,11 +85,13 @@ public class ModLockscreen {
     private static final String CLASS_KG_UPDATE_MONITOR_BATTERY_STATUS = 
             CLASS_PATH + ".KeyguardUpdateMonitor.BatteryStatus";
     private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
-    private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
+    private static final String CLASS_CARRIER_TEXT = CLASS_PATH + (Utils.isMtkDevice() ? 
+            ".MediatekCarrierText" : ".CarrierText");
     private static final String ENUM_SECURITY_MODE = CLASS_PATH + ".KeyguardSecurityModel.SecurityMode";
     private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
     private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
     private static final String CLASS_LOCK_PATTERN_UTILS = "com.android.internal.widget.LockPatternUtils";
+    private static final String CLASS_KG_UTILS = CLASS_PATH + ".KeyguardUtils";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
@@ -126,6 +129,8 @@ public class ModLockscreen {
     private static boolean mBackgroundAlreadySet;
     private static boolean mIsLastScreenBackground;
     private static GestureDetector mDoubletapGesture;
+    private static Object mKgViewManagerHost;
+    private static String mCarrierText[];
 
     // Battery Arc
     private static HandleDrawable mHandleDrawable;
@@ -234,6 +239,9 @@ public class ModLockscreen {
                     Drawable.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mKgViewManagerHost == null) {
+                        mKgViewManagerHost = param.thisObject;
+                    }
                     final Drawable d = (Drawable) param.args[0];
                     if (d != null) {
                         mBackgroundAlreadySet = !mIsLastScreenBackground;
@@ -249,15 +257,17 @@ public class ModLockscreen {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(kgViewManagerClass, 
-                    "shouldEnableScreenRotation", new XC_MethodReplacement() {
-
-                        @Override
-                        protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                            prefs.reload();
-                            return prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ROTATION, false);
-                        }
-            });
+            try {
+                XposedHelpers.findAndHookMethod(kgViewManagerClass, "shouldEnableScreenRotation", 
+                        shouldEnableScreenRotationHook);
+            } catch (NoSuchMethodError nme) {
+                try {
+                    XposedHelpers.findAndHookMethod(CLASS_KG_UTILS, classLoader, 
+                            "shouldEnableScreenRotation", Context.class, shouldEnableScreenRotationHook);
+                } catch (NoSuchMethodError nme2) {
+                    XposedBridge.log(nme2);
+                }
+            }
 
             XposedHelpers.findAndHookMethod(kgHostViewClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
@@ -627,15 +637,117 @@ public class ModLockscreen {
                 }
             });
 
-            XposedBridge.hookAllMethods(carrierTextClass, "getCarrierTextForSimState", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    String carrierText = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
-                    if (carrierText != null && !carrierText.isEmpty()) {
-                        param.setResult(carrierText.trim());
+            if (Utils.isMtkDevice()) {
+                if (Utils.hasGeminiSupport()) {
+                    XposedHelpers.findAndHookMethod(carrierTextClass, "showOrHideCarrier", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                            TextView carrierDivider;
+                            Object divider = XposedHelpers.getObjectField(param.thisObject, "mCarrierDivider");
+                            if (divider instanceof TextView[]) {
+                                carrierDivider = (TextView) ((TextView[])divider)[0];
+                            } else {
+                                carrierDivider = (TextView) divider;
+                            }
+                            mCarrierText = new String[] {
+                                    prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, ""),
+                                    prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER2_TEXT, "")};
+
+                            if (carrierDivider != null) {
+                                if ((!mCarrierText[0].isEmpty() && mCarrierText[0].trim().isEmpty()) ||
+                                        (!mCarrierText[1].isEmpty() && mCarrierText[1].trim().isEmpty()))
+                                    carrierDivider.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+
+                    String updateCarrierTextMethod;
+                    try {
+                        updateCarrierTextMethod = XposedHelpers.findMethodExact(carrierTextClass, "updateCarrierTextGemini",
+                                "com.android.internal.telephony.IccCardConstants$State",
+                                    CharSequence.class, CharSequence.class, int.class).getName();
+                    } catch (NoSuchMethodError nme) {
+                        if (DEBUG) log("updateCarrierTextGemini method doesn't exist, fallback to updateCarrierText");
+                        updateCarrierTextMethod = "updateCarrierText";
                     }
+                    XposedHelpers.findAndHookMethod(carrierTextClass, updateCarrierTextMethod,
+                            "com.android.internal.telephony.IccCardConstants$State",
+                                CharSequence.class, CharSequence.class, int.class, new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                            TextView carrierTextView[] = new TextView[2];
+                            Object carrierView = XposedHelpers.getObjectField(param.thisObject, "mCarrierView");
+                            if (carrierView instanceof TextView[]) {
+                                carrierTextView[0] = (TextView) ((TextView[])carrierView)[0];
+                                carrierTextView[1] = (TextView) ((TextView[])carrierView)[1];
+                            } else {
+                                carrierTextView[0] = (TextView) carrierView;
+                                carrierTextView[1] = (TextView) XposedHelpers.getObjectField(
+                                        param.thisObject, "mCarrierGeminiView");
+                            }
+
+                            int[] origVisibility = new int[] {
+                                    carrierTextView[0] == null ? View.GONE : carrierTextView[0].getVisibility(),
+                                    carrierTextView[1] == null ? View.GONE : carrierTextView[1].getVisibility()
+                            };
+
+                            if (mCarrierText != null) {
+                                for (int i=0; i<2; i++) {
+                                    if (carrierTextView[i] == null) continue;
+                                    if (mCarrierText[i].isEmpty()) {
+                                        carrierTextView[i].setVisibility(origVisibility[i]);
+                                    } else {
+                                        if (mCarrierText[i].trim().isEmpty()) {
+                                            carrierTextView[i].setText("");
+                                            carrierTextView[i].setVisibility(View.GONE);
+                                        } else {
+                                            carrierTextView[i].setText(mCarrierText[i]);
+                                            carrierTextView[i].setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                }
+                                if ((carrierTextView[0] != null &&
+                                     carrierTextView[0].getVisibility() == View.VISIBLE) &&
+                                    (carrierTextView[1] != null && 
+                                     carrierTextView[1].getVisibility() == View.VISIBLE)) {
+                                    carrierTextView[0].setGravity(Gravity.RIGHT);
+                                    carrierTextView[1].setGravity(Gravity.LEFT);
+                                } else {
+                                    if (carrierTextView[0] != null) {
+                                        carrierTextView[0].setGravity(Gravity.CENTER);
+                                    }
+                                    if (carrierTextView[1] != null) {
+                                        carrierTextView[1].setGravity(Gravity.CENTER);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    XposedHelpers.findAndHookMethod(carrierTextClass, "updateCarrierText",
+                            "com.android.internal.telephony.IccCardConstants$State", CharSequence.class, CharSequence.class,
+                            new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                            TextView carrierTextView = (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierView");
+                            String carrierText = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
+                            if (carrierText != null && !carrierText.isEmpty()) {
+                                carrierTextView.setText(carrierText.trim());
+                            }
+                        }
+                    });
                 }
-            });
+            } else {
+                XposedBridge.hookAllMethods(carrierTextClass, "getCarrierTextForSimState", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        String carrierText = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
+                        if (carrierText != null && !carrierText.isEmpty()) {
+                            param.setResult(carrierText.trim());
+                        }
+                    }
+                });
+            }
 
             XposedHelpers.findAndHookMethod(kgHostViewClass, "showPrimarySecurityScreen",
                     boolean.class, new XC_MethodHook() {
@@ -646,7 +758,13 @@ public class ModLockscreen {
 
                     final Object currentSecuritySelection = 
                             XposedHelpers.getObjectField(param.thisObject, "mCurrentSecuritySelection");
-                    final boolean isSimOrAccount = 
+                    final boolean isSimOrAccount = Utils.isMtkDevice() ?
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "SimPinPukMe1") ||
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "SimPinPukMe2") ||
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "SimPinPukMe3") ||
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "SimPinPukMe4") ||
+                            currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "Account") 
+                            :
                             currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "SimPin") ||
                             currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "SimPuk") ||
                             currentSecuritySelection == Enum.valueOf(kgSecurityModeEnum, "Account");
@@ -680,10 +798,34 @@ public class ModLockscreen {
                     }
                 }
             });
+
+            if (Utils.isMtkDevice()) {
+                XposedHelpers.findAndHookMethod(mKgUpdateMonitorClass, "handleBootCompleted", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mKgViewManagerHost != null) {
+                            XposedHelpers.callMethod(mKgViewManagerHost, "setCustomBackground",
+                                    XposedHelpers.getObjectField(mKgViewManagerHost, "mCustomBackground"));
+                        }
+                    }
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
+
+    private static XC_MethodReplacement shouldEnableScreenRotationHook = new XC_MethodReplacement() {
+        @Override
+        protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+            try {
+                return mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ROTATION, false);
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+                return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+            }
+        }
+    };
 
     private static boolean shouldDrawBatteryArc() {
         return (mArcEnabled && mHandleDrawable != null && 
@@ -791,7 +933,11 @@ public class ModLockscreen {
         public boolean onLongClick(View view) {
             if (mKeyguardHostView == null) return false;
             try {
-                XposedHelpers.callMethod(mKeyguardHostView, "showNextSecurityScreenOrFinish", false);
+                if (Utils.isMtkDevice()) {
+                    XposedHelpers.callMethod(mKeyguardHostView, "showNextSecurityScreenOrFinish", false, true);
+                } else {
+                    XposedHelpers.callMethod(mKeyguardHostView, "showNextSecurityScreenOrFinish", false);
+                }
                 return true;
             } catch (Throwable t) {
                 XposedBridge.log(t);

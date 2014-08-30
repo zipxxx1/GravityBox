@@ -248,6 +248,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
     public static final String PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK = "pref_lockscreen_statusbar_clock";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
+    public static final String PREF_KEY_LOCKSCREEN_CARRIER2_TEXT = "pref_lockscreen_carrier2_text";
     public static final String PREF_KEY_LOCKSCREEN_SLIDE_BEFORE_UNLOCK = "pref_lockscreen_slide_before_unlock";
     public static final String PREF_KEY_LOCKSCREEN_RING_DT2S = "pref_lockscreen_ring_dt2s";
     public static final String PREF_KEY_STATUSBAR_LOCK_POLICY = "pref_statusbar_lock_policy";
@@ -1049,6 +1050,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefLockscreenBgBlurEffect;
         private SeekBarPreference mPrefLockscreenBlurIntensity;
         private EditTextPreference mPrefLockscreenCarrierText;
+        private EditTextPreference mPrefLockscreenCarrier2Text;
         private CheckBoxPreference mPrefLockscreenDisableEcb;
         private File wallpaperImage;
         private File wallpaperTemporary;
@@ -1283,6 +1285,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     (SeekBarPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY);
             mPrefLockscreenCarrierText = 
                     (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER_TEXT);
+            mPrefLockscreenCarrier2Text = 
+                    (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER2_TEXT);
             mPrefLockscreenDisableEcb =
                     (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_DISABLE_ECB);
 
@@ -1569,6 +1573,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
+                mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
            }
 
             // Remove MTK specific preferences for non-MTK devices
@@ -1584,6 +1589,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text);
+                mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
             } else {
                 mPrefCatStatusbar.removePreference(mPrefCatSignalCluster);
                 // Remove Gemini specific preferences for non-Gemini MTK devices
@@ -1593,6 +1599,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                     mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text); 
+                    mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
                 }
             }
 
@@ -2149,6 +2156,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     carrierText = getString(R.string.carrier_text_empty);
                 }
                 mPrefLockscreenCarrierText.setSummary(carrierText);
+            }
+
+            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_CARRIER2_TEXT)) {
+                String carrierText = mPrefLockscreenCarrier2Text.getText();
+                if (carrierText == null || carrierText.isEmpty()) {
+                    carrierText = getString(R.string.carrier_text_default);
+                } else if (carrierText.trim().isEmpty()) {
+                    carrierText = getString(R.string.carrier_text_empty);
+                }
+                mPrefLockscreenCarrier2Text.setSummary(carrierText);
             }
 
             if (key == null || key.equals(PREF_KEY_NOTIF_CARRIER_TEXT)) {
