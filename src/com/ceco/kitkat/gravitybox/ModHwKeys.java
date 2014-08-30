@@ -153,7 +153,8 @@ public class ModHwKeys {
             "com.mediatek.bluetooth",
             "android.process.acore",
             "com.google.process.gapps",
-            "com.android.smspush"
+            "com.android.smspush",
+            "com.mediatek.voicecommand"
     ));
 
     private static void log(String message) {
