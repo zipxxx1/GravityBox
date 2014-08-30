@@ -14,16 +14,19 @@ import android.widget.LinearLayout;
 
 public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     protected boolean mRoamingIndicatorsDisabled;
+    protected boolean mDisableDataNetworkTypeIcons;
     protected static boolean[] mMobileVisible = null, mRoaming = null;
     protected static int[] mRoamingId = null;
     protected static ImageView[] mMobile = null, mMobileActivity = null, mMobileType = null, mMobileRoam = null;
     protected static Object[] mMobileActivityIds = null, mMobileTypeIds = null;
     protected static Object[][] mMobileIconIds = null;
+    protected static ImageView[] mSignalNetworkType = null;
 
     public StatusbarSignalClusterMtk(LinearLayout view, StatusBarIconManager iconManager) {
         super(view, iconManager);
 
         mRoamingIndicatorsDisabled = false;
+        mDisableDataNetworkTypeIcons = false;
     }
 
     @Override
@@ -33,6 +36,12 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_DISABLE_ROAMING_INDICATORS_CHANGED)) {
             mRoamingIndicatorsDisabled = intent.getBooleanExtra(
                     GravityBoxSettings.EXTRA_INDICATORS_DISABLED, false);
+            update();
+        } else if(intent.getAction().equals(GravityBoxSettings.ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED)
+                && intent.hasExtra(GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED)) {
+            mDisableDataNetworkTypeIcons = intent.getBooleanExtra(
+                    GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED, false);
+            update();
         }
     }
 
@@ -44,6 +53,8 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                 GravityBoxSettings.PREF_KEY_DISABLE_ROAMING_INDICATORS, false);
         mConnectionStateEnabled = false;
         mDataActivityEnabled = false;
+        mDisableDataNetworkTypeIcons = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
     }
 
     @Override
@@ -143,6 +154,14 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                                 (int) XposedHelpers.getIntField(mView, "mRoamingGeminiId") : 0 } :
                                     (int[]) roamingId;
             }
+            if (mSignalNetworkType == null) {
+                try {
+                    Object signalNetworkType = XposedHelpers.getObjectField(mView, "mSignalNetworkType");
+                    if (signalNetworkType instanceof ImageView[]) {
+                        mSignalNetworkType = (ImageView[]) signalNetworkType;
+                    }
+                } catch (Throwable t) { };
+            }
 
             for (int slot = 0; slot < mMobile.length; slot++) {
                 if (mMobileVisible != null && mMobileVisible[slot] &&
@@ -189,6 +208,10 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                                     mMobileRoam[slot].setImageDrawable(null);
                                 }
                             }
+                        }
+                        if (mDisableDataNetworkTypeIcons && mSignalNetworkType != null &&
+                                mSignalNetworkType[slot] != null) {
+                            mSignalNetworkType[slot].setVisibility(View.GONE);
                         }
                     }
                 }
