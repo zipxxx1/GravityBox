@@ -1222,6 +1222,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private AppPickerPreference mPrefCustomApp;
         private ListPreference mPrefHeadsUpPosition;
         private CheckBoxPreference mPrefSignalIconAutohide;
+        private CheckBoxPreference mPrefNonIntrusiveCall;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1428,6 +1429,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCallerUnknownPhotoEnable = (CheckBoxPreference) findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE);
             mPrefCallerUnknownPhoto = (Preference) findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO);
             mPrefCallerFullscreenPhoto = (ListPreference) findPreference(PREF_KEY_CALLER_FULLSCREEN_PHOTO);
+            mPrefNonIntrusiveCall = (CheckBoxPreference) findPreference(PREF_KEY_PHONE_NONINTRUSIVE_INCOMING_CALL);
 
             mPrefNetworkModeTileMode = (ListPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_MODE);
             mPrefNetworkModeTileLte = (CheckBoxPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_LTE);
@@ -1591,6 +1593,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
             } else {
                 mPrefCatStatusbar.removePreference(mPrefCatSignalCluster);
+                mPrefCatPhoneTelephony.removePreference(mPrefNonIntrusiveCall);
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {
                     mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);

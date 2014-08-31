@@ -203,8 +203,6 @@ public class ModDialer {
                     XposedHelpers.callStaticMethod(mClassCallCmdClient, "getInstance");
             final Object inCallPresenter = 
                     XposedHelpers.callStaticMethod(mClassInCallPresenter, "getInstance");
-            final Class<? extends Enum> enumInCallState = (Class<? extends Enum>)
-                    XposedHelpers.findClass(ENUM_IN_CALL_STATE, context.getClassLoader());
             final int callId = (Integer) XposedHelpers.callMethod(mIncomingCall, "getCallId");
             final Object sbNotifier = XposedHelpers.getObjectField(inCallPresenter, "mStatusBarNotifier");
             Intent intent = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
@@ -256,7 +254,8 @@ public class ModDialer {
             }
 
             mNonIntrusiveIncomingCall = mPrefsPhone.getBoolean(
-                    GravityBoxSettings.PREF_KEY_PHONE_NONINTRUSIVE_INCOMING_CALL, false);
+                    GravityBoxSettings.PREF_KEY_PHONE_NONINTRUSIVE_INCOMING_CALL, false) &&
+                        !Utils.isMtkDevice();
         }
     }
 
@@ -287,6 +286,7 @@ public class ModDialer {
         }
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void init(final XSharedPreferences prefs, ClassLoader classLoader, final String packageName) {
         mPrefsPhone = prefs;
 
@@ -317,6 +317,10 @@ public class ModDialer {
                     int color = prefs.getString(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, 
                             "disabled").equals("disabled") ? Color.BLACK : 0; 
                     v.setBackgroundColor(color);
+                    if (Utils.isMtkDevice()) {
+                        final View gpView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowpad");
+                        gpView.setBackgroundColor(color);
+                    }
                     if (DEBUG) log("AnswerFragment showAnswerUi: background color set");
                 }
             });
