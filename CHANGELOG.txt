@@ -1,3 +1,20 @@
+Changelog 3.4.0 - 31/08/2014
+--------------------------------------
+- Adjusted for compatibility with ThL 5000 (MTK6592) running stock ROM
+- Potential support for other MTK devices running pure MediaTek KitKat ROMs
+- UNC ActiveScreen: improved evaluation of proximity sensor state (fixes proximity sensor issues on Moto G)
+- Display tweaks: Button backlight notifications feature adjusted for KitKat compatibility
+- Battery charged sound: don't play fully charged sound at boot
+- Lockscreen: don't apply quick unlock to SIM PIN/PUK views (Fixes glitch when entering SIM PIN/PUK)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Portuguese (PT) translations
+- Updated Slovak and Czech translations
+
 Changelog 3.3.3 - 20/08/2014
 --------------------------------------
 - Fixed battery/charging events sounds playing even if no sounds are set
