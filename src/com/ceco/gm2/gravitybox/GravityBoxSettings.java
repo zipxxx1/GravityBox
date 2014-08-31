@@ -1444,6 +1444,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 appPref.setSummary(getActivity().getString(R.string.app_picker_none));
                 mPrefAppLauncherSlot[i] = appPref;
                 mPrefCatAppLauncher.addPreference(mPrefAppLauncherSlot[i]);
+                if (mPrefs.getString(appPref.getKey(), null) == null) {
+                    mPrefs.edit().putString(appPref.getKey(), null).commit();
+                }
             }
 
             mPrefCatTransparencyManager = (PreferenceScreen) findPreference(PREF_CAT_KEY_TRANSPARENCY_MANAGER);
@@ -1481,6 +1484,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 appPref.setSummary(getActivity().getString(R.string.app_picker_none));
                 mPrefNavbarRingTarget[i] = appPref;
                 mPrefCatNavbarRingTargets.addPreference(mPrefNavbarRingTarget[i]);
+                if (mPrefs.getString(appPref.getKey(), null) == null) {
+                    mPrefs.edit().putString(appPref.getKey(), null).commit();
+                }
             }
 
             mPrefNavbarAndroidLIconsEnable = (CheckBoxPreference) findPreference(PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE);
