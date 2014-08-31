@@ -819,7 +819,11 @@ public class ModLockscreen {
         @Override
         protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
             try {
-                return mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ROTATION, false);
+                if (Utils.isMtkDevice()) {
+                    return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                } else {
+                    return mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ROTATION, false);
+                }
             } catch (Throwable t) {
                 XposedBridge.log(t);
                 return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);

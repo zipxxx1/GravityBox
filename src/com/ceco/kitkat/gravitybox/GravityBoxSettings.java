@@ -1190,6 +1190,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceCategory mPrefCatLsSlidingChallenge;
         private PreferenceCategory mPrefCatLsOther;
         private CheckBoxPreference mPrefLsRingTorch;
+        private CheckBoxPreference mPrefLsRotation;
         private PreferenceScreen mPrefCatLauncherTweaks;
         private ListPreference mPrefLauncherDesktopGridRows;
         private ListPreference mPrefLauncherDesktopGridCols;
@@ -1487,6 +1488,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatLsSlidingChallenge = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_SLIDING_CHALLENGE);
             mPrefCatLsOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_OTHER);
             mPrefLsRingTorch = (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_RING_TORCH);
+            mPrefLsRotation = (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_ROTATION);
 
             mPrefCatLauncherTweaks = (PreferenceScreen) findPreference(PREF_CAT_LAUNCHER_TWEAKS);
             mPrefLauncherDesktopGridRows = (ListPreference) findPreference(PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS);
@@ -1600,6 +1602,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else {
                 mPrefCatStatusbar.removePreference(mPrefCatSignalCluster);
                 mPrefCatPhoneTelephony.removePreference(mPrefNonIntrusiveCall);
+                mPrefCatLsOther.removePreference(mPrefLsRotation);
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {
                     mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
