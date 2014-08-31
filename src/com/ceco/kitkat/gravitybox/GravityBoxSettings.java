@@ -1581,7 +1581,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 if (!sSystemProperties.hasMsimSupport) {
-                    mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                 }
                 if (Utils.isMotoXtDevice()) {
@@ -1596,7 +1595,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 if (!sSystemProperties.hasGeminiSupport) {
                     mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
                     mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
-                    mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                     mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text); 
                     mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
@@ -1619,6 +1617,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Remove MSIM preferences for non-MSIM devices
             if (!sSystemProperties.hasMsimSupport) {
                 mPrefCatSignalCluster.removePreference(mPrefSignalIconAutohide);
+                mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
             } else {
                 // TODO: carrier texts for MSIM devices
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);

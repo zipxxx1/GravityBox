@@ -18,7 +18,6 @@ package com.ceco.kitkat.gravitybox.quicksettings;
 import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.PhoneWrapper;
 import com.ceco.kitkat.gravitybox.R;
-import com.ceco.kitkat.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -143,7 +142,7 @@ public class NetworkModeTile extends BasicTile {
                 PhoneWrapper.PREFERRED_NETWORK_MODE, mDefaultNetworkType);
         if (DEBUG) log("mNetworkType=" + mNetworkType + "; mDefaultNetworkType=" + mDefaultNetworkType);
 
-        mIsMsim = PhoneWrapper.hasMsimSupport() || Utils.hasGeminiSupport();
+        mIsMsim = PhoneWrapper.hasMsimSupport();
     }
 
     @Override

@@ -166,6 +166,8 @@ public class PhoneWrapper {
             Object defPhone = getPhone();
             if (defPhone == null) return;
             if (Utils.hasGeminiSupport()) {
+                mSimSlot = (Integer) XposedHelpers.callMethod(defPhone, "get3GSimId");
+                if (DEBUG) log("Gemini 3G SIM ID: " + mSimSlot);
                 Class<?>[] paramArgs = new Class<?>[3];
                 paramArgs[0] = int.class;
                 paramArgs[1] = Message.class;
