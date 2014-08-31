@@ -1695,4 +1695,7 @@
     <string name="pref_patch_fake_id_summary">Notez que les scanners ne sont pas capables de détecter le patch correctif appliqué par GravityBox 
         c\'est pourquoi ils rapporteront que la faille est toujours présentes, même si le patch a été appliqué (redémarrage nécessaire)</string>
 
+    <!-- MTK tiles: Audio profile -->
+    <string name="qs_tile_audio_profile">Profile Audio</string>
+
 </resources>
