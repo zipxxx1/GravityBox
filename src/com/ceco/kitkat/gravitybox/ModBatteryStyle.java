@@ -295,6 +295,9 @@ public class ModBatteryStyle {
             }
 
             if (mPercentText != null) {
+                if (Utils.isMtkDevice()) {
+                    mPercentText.update();
+                }
                 mPercentText.setVisibility(
                         (mBatteryPercentTextEnabled || mMtkPercentTextEnabled) ?
                                 View.VISIBLE : View.GONE);
