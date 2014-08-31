@@ -1626,7 +1626,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             // TODO: rework for KitKat compatibility
             getPreferenceScreen().removePreference(mPrefCatTransparencyManager);
-            mPrefCatDisplay.removePreference(mPrefButtonBacklightNotif);
 
             // Features not relevant for KitKat but keep them for potential future use
             mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);

@@ -32,7 +32,6 @@ import android.content.res.XResources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -109,8 +108,7 @@ public class ModDisplay {
                     mButtonBacklightMode = intent.getStringExtra(GravityBoxSettings.EXTRA_BB_MODE);
                     updateButtonBacklight();
                 }
-                //TODO: rework for KitKat compatibility
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_BB_NOTIF) && Build.VERSION.SDK_INT < 19) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_BB_NOTIF)) {
                     mButtonBacklightNotif = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BB_NOTIF, false);
                     if (!mButtonBacklightNotif) {
                         mPendingNotif = false;
@@ -208,10 +206,8 @@ public class ModDisplay {
 
             mButtonBacklightMode = prefs.getString(
                     GravityBoxSettings.PREF_KEY_BUTTON_BACKLIGHT_MODE, GravityBoxSettings.BB_MODE_DEFAULT);
-            // TODO: rework for KitKat compatibility
             mButtonBacklightNotif = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS, false) &&
-                    Build.VERSION.SDK_INT < 19;
+                    GravityBoxSettings.PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS, false);
             mLsBgLastScreenEnabled = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND,
                     GravityBoxSettings.LOCKSCREEN_BG_DEFAULT).equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN);
 
@@ -337,7 +333,10 @@ public class ModDisplay {
                     }
 
                     if (mButtonBacklightNotif) {
-                        if (mHandler == null) mHandler = new Handler();
+                        if (mHandler == null) {
+                            mHandler = (Handler) XposedHelpers.getObjectField(
+                                    XposedHelpers.getSurroundingThis(param.thisObject), "mH");
+                        }
                         if (id == LIGHT_ID_NOTIFICATIONS || id == LIGHT_ID_ATTENTION) {
                             if ((Integer)param.args[0] != 0) {
                                 if (!mPendingNotif) {
