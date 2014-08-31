@@ -1656,4 +1656,7 @@
     <string name="pref_patch_fake_id_summary">Pozor, bezpečnostní skenery nedokážou rozpoznat záplatu z GravityBox, a budou hlásit zranitelnost i 
          přesto, že je záplata aktivní (vyžaduje restart)</string>
 
+    <!-- MTK tiles: Audio profile -->
+    <string name="qs_tile_audio_profile">Zvukové profily</string>
+
 </resources>
