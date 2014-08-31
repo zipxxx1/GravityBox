@@ -96,7 +96,7 @@ public class BatteryInfoManager {
                 mBatteryData.powerSource != newPowerSource ||
                 mBatteryData.temperature != newTemp || 
                 mBatteryData.voltage != newVoltage) {
-            if (newLevel == 100 && mBatteryData.level < 100) {
+            if (newLevel == 100 && mBatteryData.level < 100 && mBatteryData.level > 0) {
                 playSound(SOUND_CHARGED);
             }
 
