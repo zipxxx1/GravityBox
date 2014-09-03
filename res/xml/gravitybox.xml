@@ -2284,6 +2284,12 @@
             android:summary="@string/pref_mtk_fix_dev_opts_summary"
             android:defaultValue="false" />
 
+        <CheckBoxPreference
+            android:key="pref_mtk_fix_tts_settings"
+            android:title="@string/pref_mtk_fix_tts_settings_title"
+            android:summary="@string/pref_mtk_fix_tts_settings_summary"
+            android:defaultValue="false" />
+
     </PreferenceScreen>
 
     <PreferenceScreen 

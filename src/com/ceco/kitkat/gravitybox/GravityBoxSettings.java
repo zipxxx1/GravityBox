@@ -780,6 +780,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
     public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
+    public static final String PREF_KEY_MTK_FIX_TTS_SETTINGS = "pref_mtk_fix_tts_settings";
 
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
@@ -820,7 +821,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE,
             PREF_KEY_SIGNAL_ICON_AUTOHIDE,
             PREF_KEY_PATCH_FAKE_ID,
-            PREF_KEY_MTK_FIX_DEV_OPTS
+            PREF_KEY_MTK_FIX_DEV_OPTS,
+            PREF_KEY_MTK_FIX_TTS_SETTINGS
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(

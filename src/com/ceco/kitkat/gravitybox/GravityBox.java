@@ -148,6 +148,10 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_DEV_OPTS, false)) {
                 MtkFixDevOptions.init(prefs, lpparam.classLoader);
             }
+            if (lpparam.packageName.equals(MtkFixTtsSettings.PACKAGE_NAME) &&
+                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_TTS_SETTINGS, false)) {
+                MtkFixTtsSettings.init(prefs, lpparam.classLoader);
+            }
         }
 
         // Common
