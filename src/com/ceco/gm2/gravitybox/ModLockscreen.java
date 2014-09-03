@@ -542,6 +542,11 @@ public class ModLockscreen {
             XposedHelpers.findAndHookMethod(kgAbsKeyInputViewClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    final String className = param.thisObject.getClass().getName();
+                    if (!className.endsWith("KeyguardPasswordView") && !className.endsWith("KeyguardPINView")) {
+                        return;
+                    }
+
                     final TextView passwordEntry = 
                             (TextView) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
                     if (passwordEntry != null) {
