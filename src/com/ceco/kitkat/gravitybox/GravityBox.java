@@ -87,6 +87,13 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, true)) {
             ModQuickSettings.initDisableLocationConsent(prefs);
         }
+
+        // MTK
+        if (Utils.isMtkDevice()) {
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_DEV_OPTS, false)) {
+                MtkFixDevOptions.initZygote();
+            }
+        }
     }
 
     @Override
@@ -136,6 +143,10 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             if (Utils.hasGeminiSupport()
                     && lpparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
                 ModStatusBar.initMtkPlugin(prefs, lpparam.classLoader);
+            }
+            if (lpparam.packageName.equals(MtkFixDevOptions.PACKAGE_NAME) &&
+                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_DEV_OPTS, false)) {
+                MtkFixDevOptions.init(prefs, lpparam.classLoader);
             }
         }
 

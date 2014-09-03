@@ -777,6 +777,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_SIGNAL_ICON_AUTOHIDE = "pref_signal_icon_autohide2";
 
+    // MTK fixes
+    public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
+    public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -815,7 +819,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_HEADS_UP_MASTER_SWITCH,
             PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE,
             PREF_KEY_SIGNAL_ICON_AUTOHIDE,
-            PREF_KEY_PATCH_FAKE_ID
+            PREF_KEY_PATCH_FAKE_ID,
+            PREF_KEY_MTK_FIX_DEV_OPTS
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -1224,6 +1229,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefHeadsUpPosition;
         private CheckBoxPreference mPrefSignalIconAutohide;
         private CheckBoxPreference mPrefNonIntrusiveCall;
+        private PreferenceScreen mPrefCatMtkFixes;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1544,6 +1550,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             getPreferenceScreen().removePreference(mPrefCustomApp);
 
             mPrefHeadsUpPosition = (ListPreference) findPreference(PREF_KEY_HEADS_UP_POSITION);
+
+            // MTK fixes
+            mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
+            if (!Utils.isMtkDevice()) {
+                getPreferenceScreen().removePreference(mPrefCatMtkFixes);
+            }
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {

@@ -2274,6 +2274,19 @@
         android:summary="@string/engineering_mode_summary" />"
 
     <PreferenceScreen 
+        android:key="pref_cat_mtk_fixes"
+        android:title="@string/pref_cat_mtk_fixes_title"
+        android:summary="@string/pref_cat_mtk_fixes_summary">
+
+        <CheckBoxPreference
+            android:key="pref_mtk_fix_dev_opts"
+            android:title="@string/pref_mtk_fix_dev_opts_title"
+            android:summary="@string/pref_mtk_fix_dev_opts_summary"
+            android:defaultValue="false" />
+
+    </PreferenceScreen>
+
+    <PreferenceScreen 
         android:key="pref_cat_about"
         android:title="@string/pref_cat_about_title">
 
