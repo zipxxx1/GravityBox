@@ -1698,4 +1698,12 @@
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Профиль аудио</string>
 
+    <!-- MTK specific fixes category -->
+    <string name="pref_cat_mtk_fixes_title">Исправления проблем MTK</string>
+    <string name="pref_cat_mtk_fixes_summary">Исправления общих для MediaTek специфических проблем. Используйте только при необходимости.</string>
+
+    <!-- MTK Advanced Developer Options -->
+    <string name="pref_mtk_fix_dev_opts_title">Доп. опции разработчика</string>
+    <string name="pref_mtk_fix_dev_opts_summary">Разблокировка дополнительных опций разработчика (необходима перезагрузка)</string>
+
 </resources>
