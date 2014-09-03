@@ -44,6 +44,7 @@ public class NfcTile extends BasicTile {
 
     private int mNfcState = NFC_ADAPTER_UNKNOWN;
     private BroadcastReceiver mStateChangeReceiver;
+    private Handler mHandler;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -51,12 +52,17 @@ public class NfcTile extends BasicTile {
 
     public NfcTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
+        mHandler = new Handler();
 
         mOnClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toggleState();
-                updateResources();
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        toggleState();
+                    } 
+                }, 50);
             }
         };
 
@@ -67,9 +73,6 @@ public class NfcTile extends BasicTile {
                 return true;
             }
         };
-
-        // get state with retry flag set as NFC Adapter needs some time for initialization
-        getNfcState(true);
     }
 
     @Override
@@ -82,8 +85,11 @@ public class NfcTile extends BasicTile {
         mStateChangeReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context arg0, Intent arg1) {
+                final int oldNfcState = mNfcState;
                 getNfcState();
-                updateResources();
+                if (mNfcState != oldNfcState) {
+                    updateResources();
+                }
             }
         };
         IntentFilter intentFilter = new IntentFilter(ACTION_ADAPTER_STATE_CHANGED);
@@ -95,17 +101,19 @@ public class NfcTile extends BasicTile {
     @Override
     protected synchronized void updateTile() {
         switch (mNfcState) {
-            case STATE_TURNING_ON:
             case STATE_ON:
                 mDrawableId = R.drawable.ic_qs_nfc_on;
                 mLabel = mGbContext.getString(R.string.quick_settings_nfc_on);
                 break;
-            case STATE_TURNING_OFF:
             case STATE_OFF:
-            default:
                 mDrawableId = R.drawable.ic_qs_nfc_off;
                 mLabel = mGbContext.getString(R.string.quick_settings_nfc_off);
                 break;
+            case STATE_TURNING_ON:
+            case STATE_TURNING_OFF:
+            default:
+                mDrawableId = R.drawable.ic_qs_nfc_trans;
+                mLabel = "----";
         }
 
         super.updateTile();
@@ -114,16 +122,18 @@ public class NfcTile extends BasicTile {
     protected void toggleState() {
         getNfcState();
         switch (mNfcState) {
-            case STATE_TURNING_ON:
             case STATE_ON:
+                mNfcState = STATE_TURNING_OFF;
+                updateResources();
                 try {
                     XposedHelpers.callMethod(mNfcAdapter, "disable");
                 } catch (Throwable t) {
                     log("Error calling disable() on NFC adapter: " + t.getMessage());
                 }
                 break;
-            case STATE_TURNING_OFF:
             case STATE_OFF:
+                mNfcState = STATE_TURNING_ON;
+                updateResources();
                 try {
                     XposedHelpers.callMethod(mNfcAdapter, "enable");
                 } catch (Throwable t) {
@@ -134,10 +144,6 @@ public class NfcTile extends BasicTile {
     }
 
     private void getNfcState() {
-        getNfcState(false);
-    }
-
-    private void getNfcState(boolean retry) {
         try {
             if (mNfcAdapter == null) {
                 mNfcAdapter = (NfcAdapter) XposedHelpers.callStaticMethod(
@@ -146,19 +152,6 @@ public class NfcTile extends BasicTile {
             mNfcState = (Integer) XposedHelpers.callMethod(mNfcAdapter, "getAdapterState");
         } catch (Throwable t) {
             mNfcState = NFC_ADAPTER_UNKNOWN;
-            // if attempt failed and retry flag set, we will ask again after 6 seconds
-            if (retry) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (DEBUG) log("Retrying to get NfcAdapter state");
-                        getNfcState();
-                        updateResources();
-                    }
-                }, 6000);
-            } else {
-                log("Error getting state of NfcAdapter: " + t.getMessage());
-            }
         }
         if (DEBUG) log("getNfcState: mNfcState = " + mNfcState);
     }
