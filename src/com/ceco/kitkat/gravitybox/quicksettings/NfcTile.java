@@ -82,6 +82,8 @@ public class NfcTile extends BasicTile {
 
     @Override
     protected void onTilePostCreate() {
+        super.onTilePostCreate();
+
         mStateChangeReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context arg0, Intent arg1) {
@@ -95,7 +97,12 @@ public class NfcTile extends BasicTile {
         IntentFilter intentFilter = new IntentFilter(ACTION_ADAPTER_STATE_CHANGED);
         mContext.registerReceiver(mStateChangeReceiver, intentFilter);
 
-        super.onTilePostCreate();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mStateChangeReceiver.onReceive(null, null);
+            }
+        }, 12000);
     }
 
     @Override
