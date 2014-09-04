@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -30,6 +31,7 @@ public class ModTelephony {
     private static final String CLASS_GSM_SERVICE_STATE_TRACKER = 
             "com.android.internal.telephony.gsm.GsmServiceStateTracker";
     private static final String CLASS_SERVICE_STATE = "android.telephony.ServiceState";
+    private static final String CLASS_SERVICE_STATE_EXT = "com.mediatek.op.telephony.ServiceStateExt";
     private static final boolean DEBUG = false;
 
     private static void log(String msg) {
@@ -72,28 +74,39 @@ public class ModTelephony {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classGsmServiceStateTracker, "isOperatorConsideredNonRoaming",
-                    CLASS_SERVICE_STATE, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!mNationalRoamingEnabled) return;
+            if (Utils.hasGeminiSupport()) {
+                XposedHelpers.findAndHookMethod(CLASS_SERVICE_STATE_EXT, null, "ignoreDomesticRoaming", 
+                        new XC_MethodReplacement() {
+                    @Override
+                    protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                        if (DEBUG) log("ignoreDomesticRoaming: " + mNationalRoamingEnabled);
+                        return mNationalRoamingEnabled;
+                    }
+                });
+            } else {
+                XposedHelpers.findAndHookMethod(classGsmServiceStateTracker, "isOperatorConsideredNonRoaming",
+                        CLASS_SERVICE_STATE, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (!mNationalRoamingEnabled) return;
 
-                    String simNumeric = Utils.SystemProp.get("gsm.sim.operator.numeric", "");
-                    String operatorNumeric = (String) XposedHelpers.callMethod(
-                            param.args[0], "getOperatorNumeric");
+                        String simNumeric = Utils.SystemProp.get("gsm.sim.operator.numeric", "");
+                        String operatorNumeric = (String) XposedHelpers.callMethod(
+                                param.args[0], "getOperatorNumeric");
 
-                    boolean equalsMcc = false;
-                    try {
-                        equalsMcc = simNumeric.substring(0, 3).equals(operatorNumeric.substring(0, 3));
-                        if (DEBUG) log("isOperatorConsideredNonRoaming: simNumeric=" + simNumeric +
-                                "; operatorNumeric=" + operatorNumeric + "; equalsMcc=" + equalsMcc);
-                    } catch (Exception e) { }
+                        boolean equalsMcc = false;
+                        try {
+                            equalsMcc = simNumeric.substring(0, 3).equals(operatorNumeric.substring(0, 3));
+                            if (DEBUG) log("isOperatorConsideredNonRoaming: simNumeric=" + simNumeric +
+                                    "; operatorNumeric=" + operatorNumeric + "; equalsMcc=" + equalsMcc);
+                        } catch (Exception e) { }
 
-                    boolean result = (Boolean) param.getResult();
-                    result = result || equalsMcc;
-                    param.setResult(result);
-                }
-            });
+                        boolean result = (Boolean) param.getResult();
+                        result = result || equalsMcc;
+                        param.setResult(result);
+                    }
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
