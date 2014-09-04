@@ -201,6 +201,7 @@ public class ModQuickSettings {
             tmpMap.put("remote_display_textview", 18);
             tmpMap.put("mtk_mobile_data", 9);
             tmpMap.put("mtk_audio_profile", 12);
+            tmpMap.put("mtk_screen_timeout", 14);
         } else {
             tmpMap.put("user_textview", 1);
             tmpMap.put("brightness_textview", 2);
