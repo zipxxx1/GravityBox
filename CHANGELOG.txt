@@ -1,3 +1,20 @@
+Changelog 3.4.1 - 05/09/2014
+--------------------------------------
+- Lockscreen: fixed Quick Unlock not applying to Password security
+- QuickSettings: improved behavior of NFC tile (indicates ON<->OFF transition states)
+- MediaTek specific:
+--- fixed missing carrier text for the second SIM in notification drawer
+--- added option for unhiding Advanced developer options
+--- added option for unhiding Voice search and TTS settings in Language&Input
+--- removed redundant MTK screen timeout quick settings tile
+--- improved cast screen tile to follow stock behavior
+--- option for national data roaming adjusted for MTK compatibility
+- Updated French translations (thanks to ch-vox)
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Portuguese (PT) translations
+- Updated Slovak and Czech translations
+
 Changelog 3.4.0 - 31/08/2014
 --------------------------------------
 - Adjusted for compatibility with ThL 5000 (MTK6592) running stock ROM
