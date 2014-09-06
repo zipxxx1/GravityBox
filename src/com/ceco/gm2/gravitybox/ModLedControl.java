@@ -34,7 +34,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
-import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 
@@ -52,13 +51,10 @@ public class ModLedControl {
 
     private static XSharedPreferences mPrefs;
     private static Context mContext;
-    private static Handler mHandler;
     private static PowerManager mPm;
     private static SensorManager mSm;
     private static KeyguardManager mKm;
     private static Sensor mProxSensor;
-    private static boolean mProxSensorListenerRegistered;
-    private static boolean mScreenCovered;
     private static boolean mOnPanelRevealedBlocked;
     private static QuietHours mQuietHours;
     private static Map<String, Long> mNotifTimestamps = new HashMap<String, Long>();
@@ -67,8 +63,23 @@ public class ModLedControl {
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) { 
-            mScreenCovered = event.values[0] == 0;
-            if (DEBUG) log("Screen covered: " + mScreenCovered);
+            try {
+                final boolean screenCovered = 
+                        event.values[0] < (mProxSensor.getMaximumRange() * 0.1f); 
+                if (DEBUG) log("mProxSensorEventListener: " + event.values[0] +
+                        "; screenCovered=" + screenCovered);
+                if (!screenCovered) {
+                    performActiveScreen();
+                }
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            } finally {
+                try { 
+                    mSm.unregisterListener(this, mProxSensor); 
+                } catch (Throwable t) {
+                    // should never happen
+                }
+            }
         }
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) { }
@@ -91,19 +102,9 @@ public class ModLedControl {
                 if (DEBUG) log("User present");
                 mUserPresent = true;
                 mOnPanelRevealedBlocked = false;
-                if (mProxSensorListenerRegistered && mSm != null && mProxSensor != null) {
-                    mSm.unregisterListener(mProxSensorEventListener, mProxSensor);
-                    mProxSensorListenerRegistered = false;
-                    if (DEBUG) log("Prox sensor listener unregistered");
-                }
             }
             if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 mUserPresent = false;
-                if (!mProxSensorListenerRegistered && mSm != null && mProxSensor != null) {
-                    mSm.registerListener(mProxSensorEventListener, mProxSensor, SensorManager.SENSOR_DELAY_NORMAL);
-                    mProxSensorListenerRegistered = true;
-                    if (DEBUG) log("Prox sensor listener registered");
-                }
             }
         }
     };
@@ -124,7 +125,6 @@ public class ModLedControl {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mContext == null) {
                         mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                        mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
 
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(LedSettings.ACTION_UNC_SETTINGS_CHANGED);
@@ -277,7 +277,7 @@ public class ModLedControl {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
-                if (mPm != null && !mPm.isScreenOn() && !mScreenCovered && mKm.isKeyguardLocked()) {
+                if (mPm != null && !mPm.isScreenOn() && mKm.isKeyguardLocked()) {
                     final String pkgName = (String) param.args[0];
                     LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
                     if (!ls.getEnabled()) {
@@ -303,18 +303,11 @@ public class ModLedControl {
                     if (DEBUG) log("Performing Active Screen for " + pkgName);
                     final LedSettings fls = ls;
                     mOnPanelRevealedBlocked = fls.getActiveScreenExpanded();
-                    mHandler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (fls.getActiveScreenExpanded()) {
-                                mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS));
-                            }
-                            final WakeLock wl = mPm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
-                                    PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, TAG);
-                            wl.acquire();
-                            wl.release();
-                        }
-                    }, 1000);
+                    if (mSm != null && mProxSensor != null) {
+                        mSm.registerListener(mProxSensorEventListener, mProxSensor, SensorManager.SENSOR_DELAY_FASTEST);
+                    } else {
+                        performActiveScreen();
+                    }
                 }
             } catch (Throwable t) {
                 XposedBridge.log(t);
@@ -325,7 +318,6 @@ public class ModLedControl {
     private static void toggleActiveScreenFeature(boolean enable) {
         try {
             if (enable && mContext != null) {
-                mScreenCovered = false;
                 mPm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
                 mKm = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
                 mSm = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
@@ -340,5 +332,15 @@ public class ModLedControl {
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
+    }
+
+    private static void performActiveScreen() {
+        if (mOnPanelRevealedBlocked) {
+            mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS));
+        }
+        final WakeLock wl = mPm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
+                PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, TAG);
+        wl.acquire();
+        wl.release();
     }
 }
