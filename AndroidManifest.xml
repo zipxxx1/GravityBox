@@ -16,8 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ceco.gm2.gravitybox"
-    android:versionCode="92"
-    android:versionName="3.2.2" >
+    android:versionCode="100"
+    android:versionName="3.3.0" >
 
     <uses-sdk
         android:minSdkVersion="16"

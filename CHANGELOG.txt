@@ -1,3 +1,23 @@
+Changelog 3.3.0 - 06/09/2014
+--------------------------------------
+- Power tweaks: allow users to choose custom sounds for battery charged/charger plugged/unplugged events
+- Quick settings: 
+--- toggle auto-brightness on/off on brightness tile long-press (when brightness tile behavior overriden) (non-MTK only)
+--- long-press on network mode tile switches SIM slot to which tile applies without a need to dive into tile specific settings
+--- improved behavior of NFC tile (indicates ON<->OFF transition states)
+- Navigation bar/pie: optimized behavior of dynamic clear all recents key
+- Display tweaks: don't affect button backlight when option for button backlight mode is set to default
+- PowerMenu: apply "disable reboot on lockscreen" also to existing stock reboot item
+- Lockscreen: don't apply quick unlock to SIM PIN/PUK views (Fixes glitch when entering SIM PIN/PUK)
+- Ultimate notification control:
+--- fixed crash when orientation changes during app list loading
+--- ActiveScreen: fully optimized proximity sensor usage
+------ feature no more requires prox sensor to be always on while screen is off
+- Improved compatibility with DynamicAlarm module (requires status bar coloring to be off)
+- Updated Portuguese (BR) translations (thanks to Android-Mailson)
+- Updated Italian translation (thanks to pesa1234)
+- Updated Polish translation (thanks to xtrem007)
+
 Changelog 3.2.2 - 13/08/2014
 --------------------------------------
 - Ultimate notification control:
