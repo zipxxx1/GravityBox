@@ -1565,4 +1565,7 @@
     <string name="pref_navbar_android_l_icons_enable_title">Aktiviere Android "L" Navigationstasten</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Ersetzt standart Navigationstasten Symbole durch diejenigen von Android "L" (erfordert Neustart)</string>
 
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Ladegerät getrennt Ton</string>
+
 </resources>
