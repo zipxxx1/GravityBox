@@ -1592,5 +1592,8 @@
     <string name="pref_unc_active_screen_summary">Imposta alcuni parametri generici per la funzione Active Screen</string>
     <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
     <string name="pref_unc_quiet_hours_summary">Imposta le Ore Notturne per le notifiche</string>
-    
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Suono disinserimento cavo</string>
+
 </resources>
