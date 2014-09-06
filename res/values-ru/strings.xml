@@ -1608,4 +1608,7 @@
     <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
     <string name="pref_unc_quiet_hours_summary">Управление тихим часом для уведомлений</string>
 
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Звук при отключении ЗУ</string>
+
 </resources>
