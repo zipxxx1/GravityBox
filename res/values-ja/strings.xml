@@ -1567,4 +1567,7 @@
     <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
     <string name="pref_unc_quiet_hours_summary">通知のお休みモードの設定を管理します。</string>
 
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">電源接続解除時のサウンド</string>
+
 </resources>
