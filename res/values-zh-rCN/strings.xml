@@ -318,7 +318,7 @@
     <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，磁贴会根据您的设置自动缩放（适用于手机在纵向模式或平板上的任何方向模式）</string>
 
     <!--  Status bar clock - show day of week -->
-    <string name="pref_statusbar_clock_dow_title">显示星期(周)</string>
+    <string name="pref_statusbar_clock_dow_title">显示星期(周X)</string>
 
     <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">可扩展音量面板</string>
@@ -1072,7 +1072,7 @@
     <string name="carrier_text_empty">空</string>
 
     <!-- Battery charged sound -->
-    <string name="pref_battery_charged_sound_title">电池充电声音</string>
+    <string name="pref_battery_charged_sound_title">电池充满声音</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">长按动作</string>
@@ -1609,6 +1609,6 @@
     <string name="pref_unc_quiet_hours_summary">管理静音时段通知</string>
 
     <!-- Charger unplugged sound -->
-    <string name="pref_charger_unplugged_sound_title">插入充电器声音</string>
+    <string name="pref_charger_unplugged_sound_title">拔出充电器声音</string>
 
 </resources>
