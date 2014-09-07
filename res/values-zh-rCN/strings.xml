@@ -1038,7 +1038,7 @@
     <string name="carrier_text_empty">空</string>
     
     <!-- Battery charged sound -->
-    <string name="pref_battery_charged_sound_title">电池充电声音</string>
+    <string name="pref_battery_charged_sound_title">电池充满声音</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">长按动作</string>
@@ -1298,7 +1298,7 @@
     <string name="pref_sb_clock_masterswitch_summary">切换状态栏时钟设置（需要重新启动）</string>
 
     <!-- Clock: day of week size -->
-    <string name="pref_sb_clock_dow_size_title">星期大小(周)</string>
+    <string name="pref_sb_clock_dow_size_title">星期大小(周X)</string>
 
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">上午/下午 大小</string>
@@ -1688,7 +1688,7 @@
     <string name="pref_heads_up_alpha_title">透明度等级</string>
 
     <!-- Charger unplugged sound -->
-    <string name="pref_charger_unplugged_sound_title">插入充电器声音</string>
+    <string name="pref_charger_unplugged_sound_title">拔出充电器声音</string>
 
     <!-- Fake ID patch -->
     <string name="pref_patch_fake_id_title">修补假身份漏洞(Fake ID)</string>
@@ -1700,7 +1700,7 @@
     
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">修复MTK特性</string>
-    <string name="pref_cat_mtk_fixes_summary">修复包含联发科芯片的一些特性，仅在需要时使用</string>
+    <string name="pref_cat_mtk_fixes_summary">包含各种与联发科芯片的特性修复，仅在需要时使用</string>
 
     <!-- MTK Advanced Developer Options -->
     <string name="pref_mtk_fix_dev_opts_title">高级开发人员选项</string>
