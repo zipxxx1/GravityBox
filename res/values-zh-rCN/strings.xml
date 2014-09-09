@@ -1607,4 +1607,9 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">拔出充电器声音</string>
 
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">使用选择的图像</string>
+    <string name="imgpick_choose_error">选择的图像错误</string>
+    <string name="imgpick_crop_error">裁剪图像错误</string>
+
 </resources>
