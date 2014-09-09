@@ -108,6 +108,13 @@
             android:permission="gravitybox.permission.UNLOCK">
         </activity>
 
+        <activity
+            android:name="com.ceco.kitkat.gravitybox.PickImageActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="false"
+            android:excludeFromRecents="true">
+        </activity>
+
         <service android:name="com.ceco.kitkat.gravitybox.GravityBoxService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.TOGGLE_SYNC" />
