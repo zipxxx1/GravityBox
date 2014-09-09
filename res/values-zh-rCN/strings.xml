@@ -1012,7 +1012,7 @@
 
     <!-- Force music volume control -->
     <string name="pref_vol_force_music_control_title">强制媒体音量控制</string>
-    <string name="pref_vol_force_music_control_summary">启用后音量键控制媒体的音量而不是铃声音量</string>
+    <string name="pref_vol_force_music_control_summary">启用后音量键控制媒体音量而不是铃声音量</string>
     
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">最近使用面板</string>
@@ -1305,7 +1305,7 @@
     <string name="pref_sb_clock_masterswitch_summary">切换状态栏时钟设置（需要重新启动）</string>
 
     <!-- Clock: day of week size -->
-    <string name="pref_sb_clock_dow_size_title">星期大小(周)</string>
+    <string name="pref_sb_clock_dow_size_title">星期大小(周X)</string>
 
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">上午/下午 大小</string>
