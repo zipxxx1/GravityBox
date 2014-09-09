@@ -284,7 +284,7 @@
     <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，磁贴会根据您的设置自动缩放（适用于手机在纵向模式或平板上的任何方向模式）</string>
     
     <!--  Status bar clock - show day of week -->
-    <string name="pref_statusbar_clock_dow_title">显示星期(周)</string>
+    <string name="pref_statusbar_clock_dow_title">显示星期(周X)</string>
     
     <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">可扩展音量面板</string>
@@ -977,7 +977,7 @@
 
     <!-- Force music volume control -->
     <string name="pref_vol_force_music_control_title">强制媒体音量控制</string>
-    <string name="pref_vol_force_music_control_summary">启用后音量键控制媒体的音量而不是铃声音量</string>
+    <string name="pref_vol_force_music_control_summary">启用后音量键控制媒体音量而不是铃声音量</string>
     
     <!-- Misc tweaks: category for recents panel related tweaks -->
     <string name="pref_cat_misc_recents_panel_title">最近使用面板</string>
@@ -1709,5 +1709,10 @@
     <!-- MTK Fix speech settings -->
     <string name="pref_mtk_fix_tts_settings_title">修复语音设置</string>
     <string name="pref_mtk_fix_tts_settings_summary">在语言&amp;输入设置解锁语音搜索和文字转语音（需要重新启动） Unlocks voice search and text-to-speech settings in Language&amp;Input (requires reboot)</string>
+    
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">使用选择的图像</string>
+    <string name="imgpick_choose_error">选择的图像错误</string>
+    <string name="imgpick_crop_error">裁剪图像错误</string>
 
 </resources>
