@@ -135,7 +135,7 @@ public class AppPickerPreference extends DialogPreference
                     Map<String, ?> keys = prefs.getAll();
                     for (Map.Entry<String, ?> entry : keys.entrySet()) {
                         Object val = entry.getValue();
-                        if ((val instanceof String) && ((String)val).startsWith("#Intent")) {
+                        if ((val instanceof String) && ((String)val).contains("#Intent")) {
                             try {
                                 Intent intent = Intent.parseUri((String)val, 0);
                                 String fileName = intent.getStringExtra("icon");
