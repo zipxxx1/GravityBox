@@ -254,6 +254,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int SBL_POLICY_DEFAULT = 0;
     public static final int SBL_POLICY_UNLOCKED = 1;
     public static final int SBL_POLICY_LOCKED = 2;
+    public static final int SBL_POLICY_UNLOCKED_SECURED = 3;
     public static final String PREF_KEY_LOCKSCREEN_DISABLE_ECB = "pref_lockscreen_disable_ecb";
 
     public static final String PREF_KEY_FLASHING_LED_DISABLE = "pref_flashing_led_disable";

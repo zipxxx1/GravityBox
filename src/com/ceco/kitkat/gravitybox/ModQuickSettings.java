@@ -108,6 +108,7 @@ public class ModQuickSettings {
     private static final String CLASS_ROTATION_LOCK_CTRL = "com.android.systemui.statusbar.policy.RotationLockController";
     private static final String CLASS_ROTATION_POLICY = "com.android.internal.view.RotationPolicy";
     private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
+    private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final boolean DEBUG = false;
 
     private static final float STATUS_BAR_SWIPE_VERTICAL_MAX_PERCENTAGE = 0.025f;
@@ -749,6 +750,24 @@ public class ModQuickSettings {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "switchToSettings", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (isKeyguardSecured()) {
+                        param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "flipToSettings", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (isKeyguardSecured()) {
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -989,6 +1008,7 @@ public class ModQuickSettings {
                     Method mIsFullyExpanded = param.thisObject.getClass().getSuperclass().getMethod("isFullyExpanded");
                     final boolean isFullyExpanded = (Boolean) mIsFullyExpanded.invoke(param.thisObject);
                     final boolean justPeeked = (Boolean) XposedHelpers.getBooleanField(param.thisObject, "mJustPeeked");
+                    final boolean keyguardSecured = isKeyguardSecured();
 
                     final View thisView = (View) param.thisObject;
                     final int width = ((View)XposedHelpers.getObjectField(mStatusBar, "mStatusBarView")).getWidth();
@@ -999,9 +1019,9 @@ public class ModQuickSettings {
                         case MotionEvent.ACTION_DOWN:
                             mGestureStartX = event.getX(0);
                             mGestureStartY = event.getY(0);
-                            mTrackingSwipe = isFullyExpanded && mQsSwipeEnabled;
+                            mTrackingSwipe = isFullyExpanded && mQsSwipeEnabled && !keyguardSecured;
                                     //mGestureStartY > height - handleBarHeight - paddingBottom;
-                            okToFlip = (expandedHeight == 0);
+                            okToFlip = (expandedHeight == 0) && !keyguardSecured;
                             XposedHelpers.setBooleanField(param.thisObject, "mOkToFlip", okToFlip);
                             if (mAutoSwitch == 1 && !notifDataHasVisibleItems(notificationData)) {
                                 shouldFlip = true;
@@ -1106,6 +1126,18 @@ public class ModQuickSettings {
             }
         }
     };
+
+    private static boolean isKeyguardSecured() {
+        try {
+            Object kgTouchDelegate = XposedHelpers.callStaticMethod(
+                    XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, mContext.getClassLoader()),
+                    "getInstance", mContext);
+            return ((Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isShowingAndNotHidden") &&
+                    (Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isSecure"));
+        } catch (Throwable t) {
+            return false;
+        }
+    }
 
     @SuppressWarnings("unchecked")
     private static boolean notifDataHasVisibleItems(Object notifData) {
