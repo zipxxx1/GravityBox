@@ -664,6 +664,7 @@
     <string name="pref_statusbar_lock_policy_title">Statusbar lock policy</string>
     <string name="sbl_policy_default">Default</string>
     <string name="sbl_policy_unlocked">Unlocked if keyguard insecured</string>
+    <string name="sbl_policy_unlocked_secured">Unlocked</string>
     <string name="sbl_policy_locked">Locked</string>
 
     <!-- Data traffic monitor -->

@@ -604,7 +604,8 @@ public class ModLockscreen {
 
                     if (showing && sbManager != null && !(context instanceof Activity)) {
                         int flags = STATUSBAR_DISABLE_RECENT;
-                        if ((Boolean) XposedHelpers.callMethod(param.thisObject, "isSecure")) {
+                        if ((Boolean) XposedHelpers.callMethod(param.thisObject, "isSecure") &&
+                                policy != GravityBoxSettings.SBL_POLICY_UNLOCKED_SECURED) {
                             flags |= STATUSBAR_DISABLE_EXPAND;
                             flags |= STATUSBAR_DISABLE_NOTIFICATION_TICKER;
                         } else if (policy == GravityBoxSettings.SBL_POLICY_LOCKED) {

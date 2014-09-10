@@ -47,7 +47,6 @@ public class ShortcutActivity extends ListActivity {
     private boolean mInvokedFromGb;
 
     private static List<String> UNSAFE_ACTIONS = new ArrayList<String>(Arrays.asList(
-            ExpandNotificationsShortcut.ACTION,
             ExpandQuicksettingsShortcut.ACTION,
             NetworkModeShortcut.ACTION,
             RecentAppsShortcut.ACTION,
