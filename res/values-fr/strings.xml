@@ -602,7 +602,8 @@
     <string name="pref_statusbar_lock_policy_title">Politique de verrouillage de la barre d\'état</string>
     <string name="sbl_policy_default">Par défaut</string>
     <string name="sbl_policy_unlocked">Accessible en l\'absence de sécurisation (code/mdp)</string>
-    <string name="sbl_policy_locked">Bloquée</string>
+    <string name="sbl_policy_unlocked_secured">Déverrouillée</string>
+    <string name="sbl_policy_locked">Verrouillée</string>
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitoring du flux de données</string>
@@ -1709,5 +1710,10 @@
     <!-- MTK Fix speech settings -->
     <string name="pref_mtk_fix_tts_settings_title">Solution paramètre Voix</string>
     <string name="pref_mtk_fix_tts_settings_summary">Donne accès aux paramètres de recherche vocale et de synthèse vocale dans Langue et saisie (redémarrage nécessaire)</string>
+
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Ouvrir l\'image avec</string>
+    <string name="imgpick_choose_error">Erreur lors du choix de l\'image</string>
+    <string name="imgpick_crop_error">Erreur lors du recadrage de l\'image</string>
 
 </resources>
