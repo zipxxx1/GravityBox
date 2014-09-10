@@ -75,6 +75,7 @@ public class ModDisplay {
     private static String mButtonBacklightMode;
     private static boolean mButtonBacklightNotif;
     private static PowerManager mPm;
+    private static int mPulseNotifDelay;
 
     private static ServiceConnection mKisServiceConn;
     private static InputStream mKisImageStream;
@@ -189,7 +190,7 @@ public class ModDisplay {
                         mPendingNotifColor = 0;
                         XposedHelpers.callMethod(ls, "setLight_native",
                             np, LIGHT_ID_BUTTONS, mPendingNotifColor, 0, 0, 0, 0);
-                        mHandler.postDelayed(mPendingNotifRunnable, 3000);
+                        mHandler.postDelayed(mPendingNotifRunnable, mPulseNotifDelay);
                     }
                 }
             } catch(Exception e) {
@@ -214,6 +215,7 @@ public class ModDisplay {
                     GravityBoxSettings.PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS, false);
             mLsBgLastScreenEnabled = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND,
                     GravityBoxSettings.LOCKSCREEN_BG_DEFAULT).equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN);
+            mPulseNotifDelay = prefs.getInt(GravityBoxSettings.PREF_KEY_PULSE_NOTIFICATION_DELAY, 3000);
 
             if (classDisplayPowerController != null) {
                 XposedBridge.hookAllConstructors(classDisplayPowerController, new XC_MethodHook() {
