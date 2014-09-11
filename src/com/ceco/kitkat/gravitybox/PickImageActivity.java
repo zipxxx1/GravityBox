@@ -115,17 +115,20 @@ public class PickImageActivity extends Activity {
             }
         } else {
             setResult(Activity.RESULT_CANCELED);
+            cleanup();
             finish();
         }
     }
 
     private void onImageLoadedResult(LoadResult result) {
         if (isDestroyed()) {
+            cleanup();
             return;
         } else if (result.exception != null) {
             Toast.makeText(this, String.format("%s: %s", getString(R.string.imgpick_choose_error),
                     result.exception.getMessage()), Toast.LENGTH_SHORT).show();
             setResult(Activity.RESULT_CANCELED);
+            cleanup();
             finish();
             return;
         }
@@ -175,6 +178,7 @@ public class PickImageActivity extends Activity {
             Toast.makeText(this, String.format("%s: %s", getString(R.string.imgpick_crop_error),
                     e.getMessage()), Toast.LENGTH_SHORT).show();
             setResult(Activity.RESULT_CANCELED);
+            cleanup();
             finish();
         }
     }
@@ -183,6 +187,14 @@ public class PickImageActivity extends Activity {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
+    }
+
+    private void cleanup() {
+        if (mLoadResult != null && mLoadResult.filePath != null) {
+            new File(mLoadResult.filePath).delete();
+            new File(mLoadResult.filePath + "_cropped").delete();
+        }
+        mLoadResult = null;
     }
 
     class LoadResult {
