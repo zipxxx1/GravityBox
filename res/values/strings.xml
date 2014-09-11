@@ -1716,4 +1716,8 @@
     <string name="imgpick_choose_error">Error while choosing image</string>
     <string name="imgpick_crop_error">Error while cropping image</string>
 
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Proximity wake-up</string>
+    <string name="pref_power_proximity_wake_summary">Use proximity sensor to help decide whether to wake device up</string>
+
 </resources>

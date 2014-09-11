@@ -777,6 +777,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_SIGNAL_ICON_AUTOHIDE = "pref_signal_icon_autohide2";
 
+    public static final String PREF_KEY_POWER_PROXIMITY_WAKE = "pref_power_proximity_wake";
+    public static final String ACTION_PREF_POWER_CHANGED = "gravitybox.intent.action.POWER_CHANGED";
+    public static final String EXTRA_POWER_PROXIMITY_WAKE = "powerProximityWake";
+
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
     public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
@@ -3041,6 +3045,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_HSA_STATE,
                         key.equals(PREF_KEY_HEADSET_ACTION_PLUG) ? 1 : 0);
                 intent.putExtra(EXTRA_HSA_URI, prefs.getString(key, null));
+            } else if (key.equals(PREF_KEY_POWER_PROXIMITY_WAKE)) {
+                intent.setAction(ACTION_PREF_POWER_CHANGED);
+                intent.putExtra(EXTRA_POWER_PROXIMITY_WAKE, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
