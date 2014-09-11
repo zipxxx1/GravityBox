@@ -602,6 +602,7 @@
     <string name="pref_statusbar_lock_policy_title">Блокировка строки состояния</string>
     <string name="sbl_policy_default">По умолчанию</string>
     <string name="sbl_policy_unlocked">Разблокирована, если нет защиты</string>
+    <string name="sbl_policy_unlocked_secured">Разблокирована</string>
     <string name="sbl_policy_locked">Заблокирована</string>
 
     <!-- Data traffic monitor -->
