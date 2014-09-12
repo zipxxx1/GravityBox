@@ -1716,4 +1716,8 @@
     <string name="imgpick_choose_error">Erreur lors du choix de l\'image</string>
     <string name="imgpick_crop_error">Erreur lors du recadrage de l\'image</string>
 
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Sortie de veille et proximité</string>
+    <string name="pref_power_proximity_wake_summary">Utiliser le capteur de proximité pour décider si l\'appareil doit sortir de veille ou non</string>
+
 </resources>
