@@ -223,10 +223,6 @@
     <string name="pref_safe_media_volume_title">עוצמת שמע בטוחה באוזניות</string>
     <string name="pref_safe_media_volume_summary">מפעיל או מכבה מצב של עוצמת השמע הבטוחה בעת שימוש באוזניות</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">ללא LED בהטענה</string>
-    <string name="pref_charging_led_disable_summary">מכבה היבהוב LED בעת הטענת המכשיר</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">אפשרויות סרגל ניווט</string>
     <string name="pref_cat_hwkey_actions_summary">מאפשר לקבוע פעולות בהתאמה אישית עבור מקשי ניווט (חומרתיים ותוכנתיים)</string>

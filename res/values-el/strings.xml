@@ -230,10 +230,6 @@
     <string name="pref_safe_media_volume_title">Ασφαλής ένταση ακουστικών</string>
     <string name="pref_safe_media_volume_summary">Ενεργοποιεί ή απενεργοποιεί τη λειτουργία ασφαλούς έντασης ακουστικών</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Απενεργοποίηση του LED φόρτισης</string>
-    <string name="pref_charging_led_disable_summary">Απενεργοποιεί το LED κατά τη διάρκεια της φόρτισης</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Ενέργειες φυσικών πλήκτρων</string>
     <string name="pref_cat_hwkey_actions_summary">Επιτρέπει τη ρύθμιση προσαρμοσμένων ενεργειών για τα φυσικά πλήκτρα</string>

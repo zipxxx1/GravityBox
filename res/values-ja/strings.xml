@@ -221,10 +221,6 @@
     <string name="pref_safe_media_volume_title">安全な音量</string>
     <string name="pref_safe_media_volume_summary">ヘッドフォンでの音量制限を有効/無効化します。</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">充電中LEDを無効化</string>
-    <string name="pref_charging_led_disable_summary">充電中のLED点灯を無効化します。</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">ナビキーアクション</string>
     <string name="pref_cat_hwkey_actions_summary">ハード/ソフトキーのアクションを変更します。</string>

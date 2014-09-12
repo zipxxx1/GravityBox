@@ -20,6 +20,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.ceco.kitkat.gravitybox.ModLowBatteryWarning.ChargingLed;
+
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -32,6 +34,7 @@ import android.content.res.XResources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -60,8 +63,8 @@ public class ModDisplay {
     public static final int RESULT_AUTOBRIGHTNESS_CONFIG = 0;
 
     private static final int LIGHT_ID_BUTTONS = 2;
+    private static final int LIGHT_ID_BATTERY = 3;
     private static final int LIGHT_ID_NOTIFICATIONS = 4;
-    private static final int LIGHT_ID_ATTENTION = 5;
 
     private static Context mContext;
     private static Object mDisplayPowerController;
@@ -71,6 +74,9 @@ public class ModDisplay {
     private static boolean mButtonBacklightNotif;
     private static PowerManager mPm;
     private static int mPulseNotifDelay;
+    private static boolean mCharging;
+    private static int mBatteryLevel;
+    private static ChargingLed mChargingLed;
 
     private static ServiceConnection mKisServiceConn;
     private static InputStream mKisImageStream;
@@ -112,7 +118,6 @@ public class ModDisplay {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_BB_NOTIF)) {
                     mButtonBacklightNotif = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BB_NOTIF, false);
                     if (!mButtonBacklightNotif) {
-                        mPendingNotif = false;
                         updateButtonBacklight();
                     }
                 }
@@ -125,6 +130,27 @@ public class ModDisplay {
                 mLsBgLastScreenEnabled = intent.getStringExtra(GravityBoxSettings.EXTRA_LOCKSCREEN_BG)
                         .equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN);
                 if (DEBUG_KIS) log ("mLsBgLastScreenEnabled = " + mLsBgLastScreenEnabled);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED) &&
+                    intent.hasExtra(GravityBoxSettings.EXTRA_BLED_CHARGING)) {
+                ChargingLed cg = ChargingLed.valueOf(intent.getStringExtra(GravityBoxSettings.EXTRA_BLED_CHARGING));
+                if (cg == ChargingLed.EMULATED) {
+                    resetLight(LIGHT_ID_BATTERY);
+                }
+                mChargingLed = cg;
+                if (!mPendingNotif) {
+                    resetLight(LIGHT_ID_NOTIFICATIONS);
+                }
+            } else if (intent.getAction().equals(Intent.ACTION_BATTERY_CHANGED)) {
+                boolean charging = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
+                int level = (int)(100f * intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
+                                    / intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100));
+                if (mCharging != charging || mBatteryLevel != level) {
+                    mCharging = charging;
+                    mBatteryLevel = level;
+                    if (mChargingLed == ChargingLed.EMULATED && !mPendingNotif) {
+                        resetLight(LIGHT_ID_NOTIFICATIONS);
+                    }
+                }
             }
         }
     };
@@ -134,7 +160,7 @@ public class ModDisplay {
     }
 
     private static void updateButtonBacklight(boolean isScreenOn) {
-        if (mLight == null || mPendingNotif) return;
+        if (mLight == null || (mButtonBacklightNotif && mPendingNotif)) return;
 
         try {
             Integer color = null;
@@ -152,6 +178,19 @@ public class ModDisplay {
                 XposedHelpers.callMethod(ls, "setLight_native",
                         np, LIGHT_ID_BUTTONS, color, 0, 0, 0, 0);
             }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void resetLight(int lightId) {
+        if (mLight == null) return;
+
+        try {
+            Object ls = XposedHelpers.getSurroundingThis(mLight);
+            Object[] lights = (Object[]) XposedHelpers.getObjectField(ls, "mLights");
+            XposedHelpers.callMethod(lights[lightId],
+                    "setLightLocked", 0, 0, 0, 0, 0);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -212,6 +251,7 @@ public class ModDisplay {
             mLsBgLastScreenEnabled = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND,
                     GravityBoxSettings.LOCKSCREEN_BG_DEFAULT).equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN);
             mPulseNotifDelay = prefs.getInt(GravityBoxSettings.PREF_KEY_PULSE_NOTIFICATION_DELAY, 3000);
+            mChargingLed = ChargingLed.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_CHARGING_LED, "DEFAULT"));
 
             XposedBridge.hookAllConstructors(classDisplayPowerController, new XC_MethodHook() {
                 @Override
@@ -296,6 +336,8 @@ public class ModDisplay {
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BUTTON_BACKLIGHT_CHANGED);
                         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
                         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+                        intentFilter.addAction(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED);
+                        intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                         if (DEBUG) log("LightsService constructed. Broadcast receiver registered.");
                     }
@@ -319,7 +361,7 @@ public class ModDisplay {
                         mPm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
                     }
 
-                    if (id == LIGHT_ID_BUTTONS && !mPendingNotif) {
+                    if (id == LIGHT_ID_BUTTONS && !(mButtonBacklightNotif && mPendingNotif)) {
                         if (mButtonBacklightMode.equals(GravityBoxSettings.BB_MODE_DISABLE)) {
                             param.args[0] = param.args[1] = param.args[2] = param.args[3] = param.args[4] = 0;
                             if (DEBUG) log("Button backlight disabled. Turning off");
@@ -334,30 +376,44 @@ public class ModDisplay {
                         }
                     }
 
-                    if (mButtonBacklightNotif) {
-                        if (mHandler == null) {
-                            mHandler = (Handler) XposedHelpers.getObjectField(
-                                    XposedHelpers.getSurroundingThis(param.thisObject), "mH");
-                        }
-                        if (id == LIGHT_ID_NOTIFICATIONS || id == LIGHT_ID_ATTENTION) {
-                            if ((Integer)param.args[0] != 0) {
-                                if (!mPendingNotif) {
-                                    if (DEBUG) log("New notification. Entering PendingNotif state");
-                                    mPendingNotif = true;
+                    if (id == LIGHT_ID_NOTIFICATIONS) {
+                        if ((Integer)param.args[0] != 0) {
+                            if (!mPendingNotif) {
+                                if (DEBUG) log("New notification. Entering PendingNotif state");
+                                mPendingNotif = true;
+                                if (mButtonBacklightNotif) {
                                     mWakeLock = mPm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GbModDisplay");
                                     mWakeLock.acquire(3600000);
+                                    if (mHandler == null) {
+                                        mHandler = (Handler) XposedHelpers.getObjectField(
+                                            XposedHelpers.getSurroundingThis(param.thisObject), "mH");
+                                    }
                                     mHandler.removeCallbacks(mPendingNotifRunnable);
                                     mHandler.post(mPendingNotifRunnable);
                                 }
-                            } else if (mPendingNotif) {
-                                if (DEBUG) log("Notification dismissed. Leaving PendingNotif state");
-                                mPendingNotif = false;
-                                if (mWakeLock.isHeld()) {
-                                    mWakeLock.release();
-                                }
-                                mWakeLock = null;
                             }
+                        } else if (mPendingNotif) {
+                            if (DEBUG) log("Notification dismissed. Leaving PendingNotif state");
+                            mPendingNotif = false;
+                            if (mWakeLock != null && mWakeLock.isHeld()) {
+                                mWakeLock.release();
+                            }
+                            mWakeLock = null;
                         }
+
+                        if (!mPendingNotif && mChargingLed == ChargingLed.EMULATED && mCharging) {
+                            int cappedLevel = Math.min(Math.max(mBatteryLevel, 15), 90);
+                            float hue = (cappedLevel - 15) * 1.6f;
+                            param.args[0] = Color.HSVToColor(0xff, new float[]{ hue, 1.f, 1.f });
+                            param.args[1] = 1;
+                            param.args[2] = Integer.MAX_VALUE;
+                            param.args[3] = 1;
+                            param.args[4] = 0;
+                        }
+                    }
+
+                    if (id == LIGHT_ID_BATTERY && mChargingLed == ChargingLed.EMULATED) {
+                        param.setResult(null);
                     }
                 }
             });

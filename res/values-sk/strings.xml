@@ -219,10 +219,6 @@
     <string name="pref_safe_media_volume_title">Bezpečná hlasitosť pre headset</string>
     <string name="pref_safe_media_volume_summary">Aktivuje alebo deaktivuje bezpečnú hlasitosť pre headset</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Vypnúť LED nabíjania</string>
-    <string name="pref_charging_led_disable_summary">Vypne LED počas nabíjania</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Akcie tlačidiel</string>
     <string name="pref_cat_hwkey_actions_summary">Umožňuje nastavenie akcií pre hardvérové/softvérové tlačidlá</string>

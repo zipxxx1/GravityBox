@@ -173,10 +173,6 @@
     <string name="pref_safe_media_volume_title">Sikkert lydniveau for hovedtelefoner</string>
     <string name="pref_safe_media_volume_summary">Slår sikkert lydniveau for hovedtelefoner til eller fra</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Afbryd lade-LED</string>
-    <string name="pref_charging_led_disable_summary">Afbryder lysdiodesignal for ladning</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Funktioner for hardware-taster</string>
     <string name="pref_cat_hwkey_actions_summary">Valg af funktion for hardware-taster</string>

@@ -205,10 +205,6 @@
     <string name="pref_safe_media_volume_title">Volume de segurança do fone de ouvido</string>
     <string name="pref_safe_media_volume_summary">Ativa ou desativa o volume seguro para o fone de ouvido</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Desabilitar LED de carregamento</string>
-    <string name="pref_charging_led_disable_summary">Desabilita LED enquanto carrega</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Ações de teclas físicas</string>
     <string name="pref_cat_hwkey_actions_summary">Permite definir ações personalizadas para as teclas físicas</string>

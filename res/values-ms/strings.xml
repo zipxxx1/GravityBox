@@ -231,10 +231,6 @@
     <string name="pref_safe_media_volume_title">Tahap nada yang selamat untuk earfon</string>
     <string name="pref_safe_media_volume_summary">hidupkan atau matikan tahap nada yang selamat untuk earfon</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Tidak boleh mengecas LED</string>
-    <string name="pref_charging_led_disable_summary">Tiada LED semasa mengecas</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Aksi untuk butang navigasi</string>
     <string name="pref_cat_hwkey_actions_summary">Benarkan untuk set pelbagai aksi untuk butang navigasi(hardware dan software)</string>

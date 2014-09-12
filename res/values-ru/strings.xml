@@ -237,10 +237,6 @@
     <string name="pref_safe_media_volume_title">Безопасная громкость</string>
     <string name="pref_safe_media_volume_summary">Включение или выключение функции безопасной громкости звука в наушниках</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Отключить индикацию</string>
-    <string name="pref_charging_led_disable_summary">Отключение светодиода индикации во время зарядки</string>
-    
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Кнопки навигации</string>
     <string name="pref_cat_hwkey_actions_summary">Установка своих действий для кнопок навигации (физических и программных)</string>
