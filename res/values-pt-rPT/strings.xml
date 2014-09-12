@@ -587,6 +587,7 @@
     <string name="pref_statusbar_lock_policy_title">Política de bloqueio da barra de status</string>
     <string name="sbl_policy_default">Padrão</string>
     <string name="sbl_policy_unlocked">Desbloqueada quando método de bloqueio for inseguro</string>
+    <string name="sbl_policy_unlocked_secured">Desbloqueada</string>
     <string name="sbl_policy_locked">Bloqueada</string>
 
     <!-- Data traffic monitor -->
@@ -1678,7 +1679,7 @@
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Ajustes gerais MTK</string>
-    <string name="pref_cat_mtk_fixes_summary">Contém correções gerais para dispositivos baseados no MediaTek. Utilizar apenas caso seja necessário!</string>
+    <string name="pref_cat_mtk_fixes_summary">Contém correções gerais para dispositivos MediaTek. Utilizar apenas caso seja necessário!</string>
 
     <!-- MTK Advanced Developer Options -->
     <string name="pref_mtk_fix_dev_opts_title">Desbloquear opções de programador avançadas</string>
@@ -1687,5 +1688,14 @@
     <!-- MTK Fix speech settings -->
     <string name="pref_mtk_fix_tts_settings_title">Desbloquear definições de voz</string>
     <string name="pref_mtk_fix_tts_settings_summary">Desbloqueia pesquisa por voz e configurações de texto para voz nas definições (necessário reiniciar)</string>
+
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Escolher imagem utilizando</string>
+    <string name="imgpick_choose_error">Erro ao escolher imagem</string>
+    <string name="imgpick_crop_error">Erro ao cortar imagem</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Ligar através da proximidade</string>
+    <string name="pref_power_proximity_wake_summary">Permite utilizar o sensor de proximidade para decidir se o dispositivo se deve ligar</string>
 
 </resources>
