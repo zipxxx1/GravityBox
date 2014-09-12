@@ -1716,4 +1716,8 @@
     <string name="imgpick_choose_error">Ошибка при выборе изображения</string>
     <string name="imgpick_crop_error">Ошибка при обрезке изображения</string>
 
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Приближение при пробуждении</string>
+    <string name="pref_power_proximity_wake_summary">Проверка датчика приближения перед пробуждением устройства</string>
+
 </resources>
