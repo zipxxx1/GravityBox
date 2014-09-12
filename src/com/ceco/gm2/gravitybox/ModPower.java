@@ -39,12 +39,17 @@ public class ModPower {
     private static final boolean DEBUG = false;
 
     private static final int MSG_WAKE_UP = 100;
+    private static final int MSG_UNREGISTER_PROX_SENSOR_LISTENER = 101;
     private static final int MAX_PROXIMITY_WAIT = 500;
+    private static final int MAX_PROXIMITY_TTL = MAX_PROXIMITY_WAIT * 2;
 
     private static Context mContext;
     private static Handler mHandler;
     private static SensorManager mSensorManager;
     private static Sensor mProxSensor;
+    private static Object mLock;
+    private static Runnable mWakeUpRunnable;
+    private static boolean mProxSensorCovered;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -71,6 +76,7 @@ public class ModPower {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     mHandler = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
+                    mLock = XposedHelpers.getObjectField(param.thisObject, "mLock");
                     toggleWakeUpWithProximityFeature(prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false));
 
@@ -85,27 +91,29 @@ public class ModPower {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (!hasWakeUpWithProximityFeature()) return;
 
-                    if (mHandler.hasMessages(MSG_WAKE_UP)) {
-                        if (DEBUG) log("wakeUpInternal: Wake up message already queued");
-                        param.setResult(null);
-                        return;
-                    }
-
-                    Runnable r = new Runnable() {
-                        @Override
-                        public void run() {
-                            final long ident = Binder.clearCallingIdentity();
-                            try {
-                                if (DEBUG) log("Waking up...");
-                                XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                            } catch (Throwable t) {
-                            } finally {
-                                Binder.restoreCallingIdentity(ident);
-                            }
+                    synchronized (mLock) { 
+                        if (mHandler.hasMessages(MSG_WAKE_UP)) {
+                            if (DEBUG) log("wakeUpInternal: Wake up message already queued");
+                            param.setResult(null);
+                            return;
                         }
-                    };
-                    runWithProximityCheck(r);
-                    param.setResult(null);
+    
+                        mWakeUpRunnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                final long ident = Binder.clearCallingIdentity();
+                                try {
+                                    if (DEBUG) log("Waking up...");
+                                    XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                                } catch (Throwable t) {
+                                } finally {
+                                    Binder.restoreCallingIdentity(ident);
+                                }
+                            }
+                        };
+                        runWithProximityCheck();
+                        param.setResult(null);
+                    }
                 }
             });
 
@@ -115,7 +123,9 @@ public class ModPower {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     Message msg = (Message) param.args[0];
                     if (msg.what == MSG_WAKE_UP) {
-                        ((Runnable) msg.obj).run();
+                        mWakeUpRunnable.run();
+                    } else if (msg.what == MSG_UNREGISTER_PROX_SENSOR_LISTENER) {
+                        unregisterProxSensorListener();
                     }
                 }
             });
@@ -130,6 +140,7 @@ public class ModPower {
                 mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
                 mProxSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
             } else {
+                unregisterProxSensorListener();
                 mProxSensor = null;
                 mSensorManager = null;
             }
@@ -143,35 +154,51 @@ public class ModPower {
         return (mSensorManager != null && mProxSensor != null);
     }
 
-    private static void runWithProximityCheck(Runnable r) {
+    private static void runWithProximityCheck() {
         if (mHandler.hasMessages(MSG_WAKE_UP)) {
             if (DEBUG) log("runWithProximityCheck: Wake up message already queued");
             return;
+        } else if (mHandler.hasMessages(MSG_UNREGISTER_PROX_SENSOR_LISTENER)) {
+            mHandler.removeMessages(MSG_UNREGISTER_PROX_SENSOR_LISTENER);
+            mHandler.sendEmptyMessageDelayed(MSG_UNREGISTER_PROX_SENSOR_LISTENER, MAX_PROXIMITY_TTL);
+            if (DEBUG) log("Proximity sensor listener still alive; mProxSensorCovered=" + mProxSensorCovered);
+            if (!mProxSensorCovered) {
+                mWakeUpRunnable.run();
+            }
+        } else {
+            mHandler.sendEmptyMessageDelayed(MSG_WAKE_UP, MAX_PROXIMITY_WAIT);
+            mSensorManager.registerListener(mProxSensorListener, mProxSensor, 
+                    SensorManager.SENSOR_DELAY_FASTEST);
+            if (DEBUG) log("Proximity sensor listener resgistered");
         }
-        Message msg = mHandler.obtainMessage(MSG_WAKE_UP);
-        msg.obj = r;
-        mHandler.sendMessageDelayed(msg, MAX_PROXIMITY_WAIT);
-        runPostProximityCheck(r);
     }
 
-    private static void runPostProximityCheck(final Runnable r) {
-        mSensorManager.registerListener(new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent event) {
-                mSensorManager.unregisterListener(this);
+    private static void unregisterProxSensorListener() {
+        if (mSensorManager != null && mProxSensor != null) {
+            mSensorManager.unregisterListener(mProxSensorListener, mProxSensor);
+            if (DEBUG) log("Proximity sensor listener unregistered");
+        }
+    }
+
+    private static SensorEventListener mProxSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            mProxSensorCovered = event.values[0] < (mProxSensor.getMaximumRange() * 0.1f);
+            if (DEBUG) log("onSensorChanged:  mProxSensorCovered=" + mProxSensorCovered);
+            if (!mHandler.hasMessages(MSG_UNREGISTER_PROX_SENSOR_LISTENER)) {
+                if (DEBUG) log("Proximity sensor listener was not alive; scheduling unreg");
+                mHandler.sendEmptyMessageDelayed(MSG_UNREGISTER_PROX_SENSOR_LISTENER, MAX_PROXIMITY_TTL);
                 if (!mHandler.hasMessages(MSG_WAKE_UP)) {
                     if (DEBUG) log("Prox sensor status received too late. Wake up already triggered");
                     return;
                 }
                 mHandler.removeMessages(MSG_WAKE_UP);
-                if (event.values[0] >= (mProxSensor.getMaximumRange() * 0.1f)) {
-                    r.run();
-                } else if (DEBUG) {
-                    log("Prox sensor covered: ignoring wake up");
+                if (!mProxSensorCovered) {
+                    mWakeUpRunnable.run();
                 }
             }
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {}
-        }, mProxSensor, SensorManager.SENSOR_DELAY_FASTEST);
-    }
+        }
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+    };
 }
