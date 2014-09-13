@@ -406,7 +406,7 @@ public class ModDisplay {
                             float hue = (cappedLevel - 15) * 1.6f;
                             param.args[0] = Color.HSVToColor(0xff, new float[]{ hue, 1.f, 1.f });
                             param.args[1] = 1;
-                            param.args[2] = Integer.MAX_VALUE;
+                            param.args[2] = 10000;
                             param.args[3] = 1;
                             param.args[4] = 0;
                         }
