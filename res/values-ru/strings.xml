@@ -1716,4 +1716,10 @@
     <string name="pref_power_proximity_wake_title">Приближение при пробуждении</string>
     <string name="pref_power_proximity_wake_summary">Проверка датчика приближения перед пробуждением устройства</string>
 
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">Индикация зарядки</string>
+    <string name="charging_led_default">По умолчанию</string>
+    <string name="charging_led_emulated">Эмуляция</string>
+    <string name="charging_led_disabled">Отключено</string>
+    
 </resources>
