@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ceco.kitkat.gravitybox.HeadsUpSnoozeDialog.HeadsUpSnoozeTimerSetListener;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
@@ -45,10 +46,14 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
@@ -467,6 +472,9 @@ public class ModLedControl {
     private static Runnable mHeadsUpHideRunnable;
     private static Object mStatusBar;
     private static HeadsUpParams mHeadsUpParams;
+    private static HeadsUpSnoozeDialog mHeadsUpSnoozeDlg;
+    private static ImageButton mHeadsUpSnoozeBtn;
+    private static Map<String, Long> mHeadsUpSnoozeMap;
 
     static class HeadsUpParams {
         int yOffset;
@@ -505,6 +513,8 @@ public class ModLedControl {
                             GravityBoxSettings.PREF_KEY_HEADS_UP_ALPHA, 0)) / 100f;
                     Context context = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
                     context.registerReceiver(mUserPresentReceiver, new IntentFilter(Intent.ACTION_USER_PRESENT));
+                    mHeadsUpSnoozeBtn = addSnoozeButton((ViewGroup) XposedHelpers.getObjectField(
+                            param.thisObject, "mHeadsUpNotificationView"));
                 }
             });
 
@@ -526,11 +536,17 @@ public class ModLedControl {
                     Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
                     View headsUpView = (View) XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
                     int statusBarWindowState = XposedHelpers.getIntField(param.thisObject, "mStatusBarWindowState");
+                    String pkgName = (String) XposedHelpers.getObjectField(param.args[0], "pkg");
 
                     boolean showHeadsUp = false;
 
+                    // no heads up if snoozing
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_SNOOZE, false) &&
+                            isHeadsUpSnoozing(pkgName)) {
+                        if (DEBUG) log("Heads up currently snoozing for " + pkgName);
+                        showHeadsUp = false;
                     // show expanded heads up for non-intrusive incoming call
-                    if (isNonIntrusiveIncomingCallNotification(n) && isHeadsUpAllowed(context)) {
+                    } else if (isNonIntrusiveIncomingCallNotification(n) && isHeadsUpAllowed(context)) {
                         n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, true);
                         showHeadsUp = true;
                     // show if active screen heads up mode set
@@ -629,6 +645,18 @@ public class ModLedControl {
                     Object headsUp = XposedHelpers.getObjectField(param.thisObject, "mHeadsUp");
                     Object row = XposedHelpers.getObjectField(headsUp, "row");
                     XposedHelpers.callMethod(row, "setExpanded", expanded);
+                    if (mHeadsUpSnoozeBtn != null) {
+                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_SNOOZE, false)) {
+                            String pkgName = (String) XposedHelpers.getObjectField(sbNotif, "pkg");
+                            mHeadsUpSnoozeDlg.setPackageName(pkgName);
+                            mHeadsUpSnoozeBtn.setVisibility(View.VISIBLE);
+                        } else {
+                            mHeadsUpSnoozeBtn.setVisibility(View.GONE);
+                            for (Map.Entry<String, Long> entry : mHeadsUpSnoozeMap.entrySet()) {
+                                entry.setValue(0l);
+                            }
+                        }
+                    }
                 }
             });
 
@@ -827,6 +855,55 @@ public class ModLedControl {
             return (ls.getEnabled() && ls.getHeadsUpDnd());
         } else {
             return false;
+        }
+    }
+
+    private static ImageButton addSnoozeButton(ViewGroup vg) throws Throwable {
+        final Context context = vg.getContext();
+        Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+        mHeadsUpSnoozeDlg = new HeadsUpSnoozeDialog(context, gbContext, mHeadsUpSnoozeTimerSetListener);
+        mHeadsUpSnoozeMap = new HashMap<String, Long>();
+        mHeadsUpSnoozeMap.put("[ALL]", 0l);
+
+        ImageButton imgButton = new ImageButton(context);
+        int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40,
+                vg.getResources().getDisplayMetrics());
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(sizePx, sizePx, 
+                Gravity.TOP | Gravity.END);
+        lp.rightMargin = sizePx / 2;
+        imgButton.setLayoutParams(lp);
+        imgButton.setImageDrawable(gbContext.getResources().getDrawable(R.drawable.ic_heads_up_snooze));
+        imgButton.setHapticFeedbackEnabled(true);
+        imgButton.setVisibility(View.GONE);
+        ((ViewGroup)vg.getChildAt(0)).addView(imgButton);
+        imgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHeadsUpSnoozeDlg.show();
+            }
+        });
+        return imgButton;
+    }
+
+    private static HeadsUpSnoozeTimerSetListener mHeadsUpSnoozeTimerSetListener = 
+            new HeadsUpSnoozeTimerSetListener() {
+        @Override
+        public void onHeadsUpSnoozeTimerSet(String pkgName, long millis) {
+            synchronized (mHeadsUpSnoozeMap) {
+                if (DEBUG) log("onHeadsUpSnoozeTimerSet: pkgName:"+pkgName+"; millis:"+millis);
+                String key = pkgName == null ? "[ALL]" : pkgName;
+                mHeadsUpSnoozeMap.put(key, System.currentTimeMillis()+millis);
+            }
+        }
+    };
+
+    private static boolean isHeadsUpSnoozing(String pkgName) {
+        synchronized (mHeadsUpSnoozeMap) {
+            final long currentTime = System.currentTimeMillis();
+            final long pkgSnoozeUntil = mHeadsUpSnoozeMap.containsKey(pkgName) ?
+                    mHeadsUpSnoozeMap.get(pkgName) : 0;
+            final long allSnoozeUntil = mHeadsUpSnoozeMap.get("[ALL]");
+            return (pkgSnoozeUntil > currentTime || allSnoozeUntil > currentTime);
         }
     }
 }

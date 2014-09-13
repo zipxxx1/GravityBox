@@ -718,6 +718,12 @@
                 android:defaultValue="false"
                 android:dependency="pref_heads_up_master_switch" />
 
+            <CheckBoxPreference
+                android:key="pref_heads_up_snooze"
+                android:title="@string/pref_heads_up_snooze_title"
+                android:defaultValue="false"
+                android:dependency="pref_heads_up_master_switch" />
+
             <ListPreference
                 android:key="pref_heads_up_position"
                 android:title="@string/pref_unc_as_headsup_position_title"

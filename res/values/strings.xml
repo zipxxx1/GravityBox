@@ -1722,4 +1722,9 @@
     <string name="charging_led_emulated">Emulated</string>
     <string name="charging_led_disabled">Disabled</string>
 
+    <!-- Heads up snooze timer -->
+    <string name="pref_heads_up_snooze_title">Enable snooze button</string>
+    <string name="headsup_snooze_all_apps">Set for all apps</string>
+    <string name="headsup_snooze_app">Set heads up snooze timer for %s</string>
+
 </resources>
