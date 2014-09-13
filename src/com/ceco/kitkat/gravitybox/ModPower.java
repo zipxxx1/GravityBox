@@ -27,6 +27,8 @@ import android.hardware.SensorManager;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -50,6 +52,7 @@ public class ModPower {
     private static Object mLock;
     private static Runnable mWakeUpRunnable;
     private static boolean mProxSensorCovered;
+    private static WakeLock mWakeLock;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -124,6 +127,7 @@ public class ModPower {
                     Message msg = (Message) param.args[0];
                     if (msg.what == MSG_WAKE_UP) {
                         mWakeUpRunnable.run();
+                        unregisterProxSensorListener();
                     } else if (msg.what == MSG_UNREGISTER_PROX_SENSOR_LISTENER) {
                         unregisterProxSensorListener();
                     }
@@ -139,10 +143,13 @@ public class ModPower {
             if (enabled) {
                 mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
                 mProxSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+                mWakeLock = ((PowerManager) mContext.getSystemService(Context.POWER_SERVICE))
+                        .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
             } else {
                 unregisterProxSensorListener();
                 mProxSensor = null;
                 mSensorManager = null;
+                mWakeLock = null;
             }
             if (DEBUG) log("toggleWakeUpWithProximityFeature: " + enabled);
         } catch (Throwable t) {
@@ -169,6 +176,7 @@ public class ModPower {
             mHandler.sendEmptyMessageDelayed(MSG_WAKE_UP, MAX_PROXIMITY_WAIT);
             mSensorManager.registerListener(mProxSensorListener, mProxSensor, 
                     SensorManager.SENSOR_DELAY_FASTEST);
+            mWakeLock.acquire();
             if (DEBUG) log("Proximity sensor listener resgistered");
         }
     }
@@ -177,6 +185,9 @@ public class ModPower {
         if (mSensorManager != null && mProxSensor != null) {
             mSensorManager.unregisterListener(mProxSensorListener, mProxSensor);
             if (DEBUG) log("Proximity sensor listener unregistered");
+        }
+        if (mWakeLock != null && mWakeLock.isHeld()) {
+            mWakeLock.release();
         }
     }
 
