@@ -1580,4 +1580,19 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Dźwięk odłączenia ładowarki</string>
 
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Wybierz obraz używając</string>
+    <string name="imgpick_choose_error">Błąd przy wyborze obrazu</string>
+    <string name="imgpick_crop_error">Błąd podczas przycinania obrazu</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Wybudzanie zbliżeniowe</string>
+    <string name="pref_power_proximity_wake_summary">Użyj czujnika zbliżeniowego aby określić, czy urządzenie ma zostać wybudzone</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">Tryb LED ładowania</string>
+    <string name="charging_led_default">Domyślny</string>
+    <string name="charging_led_emulated">Emulowany</string>
+    <string name="charging_led_disabled">Wyłączony</string>
+
 </resources>
