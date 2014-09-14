@@ -1694,4 +1694,16 @@
     <string name="pref_power_proximity_wake_title">Ligar através da proximidade</string>
     <string name="pref_power_proximity_wake_summary">Permite utilizar o sensor de proximidade para decidir se o dispositivo se deve ligar</string>
 
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">Luz de bateria a carregar</string>
+    <string name="charging_led_default">Por defeito</string>
+    <string name="charging_led_emulated">Através de simulação</string>
+    <string name="charging_led_disabled">Desativada</string>
+
+    <!-- Heads up snooze timer -->
+    <string name="pref_heads_up_snooze_title">Ativar possibilidade de adiar</string>
+    <string name="headsup_snooze_all_apps">Ativar em todas as aplicações</string>
+    <string name="headsup_snooze_app">Definir temporizador para adiamento de %s</string>
+    <string name="pref_heads_up_snooze_reset_title">Limpar temporizadores</string>
+
 </resources>
