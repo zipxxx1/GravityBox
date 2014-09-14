@@ -659,6 +659,7 @@
     <string name="pref_statusbar_lock_policy_title">鎖定螢幕時的狀態列鎖定政策</string>
     <string name="sbl_policy_default">預設</string>
     <string name="sbl_policy_unlocked">不鎖定</string>
+    <string name="sbl_policy_unlocked_secured">不鎖定</string>
     <string name="sbl_policy_locked">鎖定</string>
 
     <!-- Data traffic monitor -->
@@ -1572,5 +1573,36 @@
     <!-- Navbar keys: enable Android L icons -->
     <string name="pref_navbar_android_l_icons_enable_title">使用Android L的導航列圖示</string>
     <string name="pref_navbar_android_l_icons_enable_summary">替換預設導航列圖示成為Android L內的樣式（需要重新啟動）</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">其他選項</string>
+
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">為未有個別設定的應用程式建立預設通知設定</string>
+    <string name="pref_unc_perapp_settings_title">個別應用程式設定</string>
+    <string name="pref_unc_perapp_settings_summary">針對個別應用程式建立通知設定</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">管理 [主動螢幕喚醒] 的基本設定</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">管理 [勿擾模式] 的基本設定</string>
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">充電器拔除音效</string>
+
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">使用此應用程式選擇圖片</string>
+    <string name="imgpick_choose_error">選擇圖片時發生錯誤</string>
+    <string name="imgpick_crop_error">裁剪圖片時發生錯誤</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">距離感應器喚醒</string>
+    <string name="pref_power_proximity_wake_summary">一併使用距離感應器來決定是否應該喚醒裝置</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">電池充電通知燈</string>
+    <string name="charging_led_default">系統預設值</string>
+    <string name="charging_led_emulated">強制模擬</string>
+    <string name="charging_led_disabled">停用</string>
 
 </resources>
