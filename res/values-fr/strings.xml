@@ -1726,5 +1726,6 @@
     <string name="pref_heads_up_snooze_title">Active le bouton d\'arrêt momentané</string>
     <string name="headsup_snooze_all_apps">Pour toutes les applications</string>
     <string name="headsup_snooze_app">Arrêt momentané des notifications flottantes durant %s</string>
+    <string name="pref_heads_up_snooze_reset_title">Réinitialiser les durées d\'arrêt momentané</string>
 
 </resources>
