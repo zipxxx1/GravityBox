@@ -660,7 +660,8 @@
     <string name="pref_statusbar_lock_policy_title">Politique de verrouillage de la barre d\'état</string>
     <string name="sbl_policy_default">Par défaut</string>
     <string name="sbl_policy_unlocked">Accessible en l\'absence de sécurisation (code/mdp)</string>
-    <string name="sbl_policy_locked">Bloquée</string>
+    <string name="sbl_policy_unlocked_secured">Déverrouillée</string>
+    <string name="sbl_policy_locked">Verrouillée</string>
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitoring du flux de données</string>
@@ -1606,5 +1607,20 @@
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Son à la déconnexion du chargeur</string>
+
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Ouvrir l\'image avec</string>
+    <string name="imgpick_choose_error">Erreur lors du choix de l\'image</string>
+    <string name="imgpick_crop_error">Erreur lors du recadrage de l\'image</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Sortie de veille et proximité</string>
+    <string name="pref_power_proximity_wake_summary">Utiliser le capteur de proximité pour décider si l\'appareil doit sortir de veille ou non</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">LED batterie en charge</string>
+    <string name="charging_led_default">Par défaut</string>
+    <string name="charging_led_emulated">Émulée</string>
+    <string name="charging_led_disabled">Désactivée</string>
 
 </resources>
