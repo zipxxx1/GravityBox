@@ -55,6 +55,7 @@ import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
+import android.app.KeyguardManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -99,7 +100,6 @@ public class ModQuickSettings {
     private static final String CLASS_QS_MODEL = "com.android.systemui.statusbar.phone.QuickSettingsModel";
     private static final String CLASS_QS_MODEL_RCB = "com.android.systemui.statusbar.phone.QuickSettingsModel$RefreshCallback";
     private static final String CLASS_QS_MODEL_STATE = "com.android.systemui.statusbar.phone.QuickSettingsModel.State";
-    private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final boolean DEBUG = false;
 
     private static final float STATUS_BAR_SWIPE_VERTICAL_MAX_PERCENTAGE = 0.025f;
@@ -948,11 +948,8 @@ public class ModQuickSettings {
 
     private static boolean isKeyguardSecured() {
         try {
-            Object kgTouchDelegate = XposedHelpers.callStaticMethod(
-                    XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, mContext.getClassLoader()),
-                    "getInstance", mContext);
-            return ((Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isShowingAndNotHidden") &&
-                    (Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isSecure"));
+            KeyguardManager km = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
+            return (km.isKeyguardLocked() && km.isKeyguardSecure());
         } catch (Throwable t) {
             return false;
         }
