@@ -1,3 +1,31 @@
+Changelog 3.4.2 - 14/09/2014
+--------------------------------------
+- GB settings: 
+--- reworked image choosing/cropping - supports Google Photos and potentially other gallery apps
+--- added automatic clean up of GB app picker cache (saves storage space)
+- Heads up: added option to show snooze button within heads up window
+--- allows to suppress heads up for particular app or all apps at once for specified amount of time
+--- added option to reset all current snooze timers
+- Lockscreen status bar lock policy: option to allow status bar expand on secured lock screen
+--- allows peeking on notifications even if lock screen is secured
+--- access to quick settings prohibited
+--- makes UNC ActiveScreen "expand notification panel" mode work on secured lock screen
+- Display tweaks:
+--- added option for emulating battery charging light:
+------ allows charging light on devices lacking native support (e.g. Nexus 5)
+------ pending notification light has priority over charging light
+------ charging light color changes lineary according to current battery level (requires RGB LED hardware)
+------ whether led is constantly ON or "breathing" depends on LED driver (cannot be affected by GB)
+--- button backlight notifications adjusted to follow Pulse notification delay  
+- Power tweaks: added option for proximity wake up (prevents accidental wake up)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated French translation (thanks to ch-vox)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Russian translations (thanks to gaich)
+- Updated Portuguese (PT) translations
+- Updated Slovak and Czech translations
+
 Changelog 3.4.1 - 05/09/2014
 --------------------------------------
 - Lockscreen: fixed Quick Unlock not applying to Password security
