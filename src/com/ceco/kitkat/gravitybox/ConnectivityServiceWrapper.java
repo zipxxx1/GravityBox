@@ -17,6 +17,7 @@ package com.ceco.kitkat.gravitybox;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -44,6 +45,7 @@ public class ConnectivityServiceWrapper {
     public static final String ACTION_SET_LOCATION_MODE = "gravitybox.intent.action.SET_LOCATION_MODE";
     public static final String ACTION_TOGGLE_NFC = "gravitybox.intent.action.TOGGLE_NFC";
     public static final String EXTRA_LOCATION_MODE = "locationMode";
+    public static final String ACTION_TOGGLE_AIRPLANE_MODE = "gravitybox.intent.action.TOGGLE_AIRPLANE_MODE";
     public static final String EXTRA_ENABLED = "enabled";
 
     private static final int NFC_STATE_OFF = 1;
@@ -81,6 +83,8 @@ public class ConnectivityServiceWrapper {
                         Settings.Secure.LOCATION_MODE_BATTERY_SAVING));
             } else if (intent.getAction().equals(ACTION_TOGGLE_NFC)) {
                 toggleNfc();
+            } else if (intent.getAction().equals(ACTION_TOGGLE_AIRPLANE_MODE)) {
+                toggleAirplaneMode();
             }
         }
     };
@@ -114,6 +118,7 @@ public class ConnectivityServiceWrapper {
                         intentFilter.addAction(ACTION_TOGGLE_WIFI_AP);
                         intentFilter.addAction(ACTION_SET_LOCATION_MODE);
                         intentFilter.addAction(ACTION_TOGGLE_NFC);
+                        intentFilter.addAction(ACTION_TOGGLE_AIRPLANE_MODE);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
@@ -203,6 +208,27 @@ public class ConnectivityServiceWrapper {
                         break;
                 }
             }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void setAirplaneModeEnabled(boolean enabled) {
+        if (mConnectivityService == null) return;
+        try {
+            XposedHelpers.callMethod(mConnectivityService, "setAirplaneMode", enabled);
+            if (DEBUG) log("setAirplaneModeEnabled called");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void toggleAirplaneMode() {
+        if (mContext == null) return;
+        try {
+            ContentResolver cr = mContext.getContentResolver();
+            final boolean enabled = Settings.Global.getInt(cr, Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
+            setAirplaneModeEnabled(!enabled);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
