@@ -482,18 +482,22 @@ public class ModLedControl {
         float alpha;
     }
 
-    private static BroadcastReceiver mUserPresentReceiver = new BroadcastReceiver() {
+    private static BroadcastReceiver mSystemUiBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            try {
-                Object huNotifEntry = XposedHelpers.getObjectField(mStatusBar,
-                        "mInterruptingNotificationEntry");
-                if (huNotifEntry != null) {
-                    Handler h = (Handler) XposedHelpers.getObjectField(mStatusBar, "mHandler");
-                    h.sendEmptyMessage(MSG_HIDE_HEADS_UP);
+            if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
+                try {
+                    Object huNotifEntry = XposedHelpers.getObjectField(mStatusBar,
+                            "mInterruptingNotificationEntry");
+                    if (huNotifEntry != null) {
+                        Handler h = (Handler) XposedHelpers.getObjectField(mStatusBar, "mHandler");
+                        h.sendEmptyMessage(MSG_HIDE_HEADS_UP);
+                    }
+                } catch (Throwable t) {
+                    XposedBridge.log(t);
                 }
-            } catch (Throwable t) {
-                XposedBridge.log(t);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_HEADS_UP_SNOOZE_RESET)) {
+                resetHeadsUpSnoozeTimers();
             }
         }
     };
@@ -512,7 +516,10 @@ public class ModLedControl {
                     mHeadsUpParams.alpha = (float)(100f - prefs.getInt(
                             GravityBoxSettings.PREF_KEY_HEADS_UP_ALPHA, 0)) / 100f;
                     Context context = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
-                    context.registerReceiver(mUserPresentReceiver, new IntentFilter(Intent.ACTION_USER_PRESENT));
+                    IntentFilter intentFilter = new IntentFilter();
+                    intentFilter.addAction(Intent.ACTION_USER_PRESENT);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_HEADS_UP_SNOOZE_RESET);
+                    context.registerReceiver(mSystemUiBroadcastReceiver, intentFilter);
                     mHeadsUpSnoozeBtn = addSnoozeButton((ViewGroup) XposedHelpers.getObjectField(
                             param.thisObject, "mHeadsUpNotificationView"));
                 }
@@ -652,9 +659,7 @@ public class ModLedControl {
                             mHeadsUpSnoozeBtn.setVisibility(View.VISIBLE);
                         } else {
                             mHeadsUpSnoozeBtn.setVisibility(View.GONE);
-                            for (Map.Entry<String, Long> entry : mHeadsUpSnoozeMap.entrySet()) {
-                                entry.setValue(0l);
-                            }
+                            resetHeadsUpSnoozeTimers();
                         }
                     }
                 }
@@ -898,12 +903,22 @@ public class ModLedControl {
     };
 
     private static boolean isHeadsUpSnoozing(String pkgName) {
+        if (mHeadsUpSnoozeMap == null) return false;
         synchronized (mHeadsUpSnoozeMap) {
             final long currentTime = System.currentTimeMillis();
             final long pkgSnoozeUntil = mHeadsUpSnoozeMap.containsKey(pkgName) ?
                     mHeadsUpSnoozeMap.get(pkgName) : 0;
             final long allSnoozeUntil = mHeadsUpSnoozeMap.get("[ALL]");
             return (pkgSnoozeUntil > currentTime || allSnoozeUntil > currentTime);
+        }
+    }
+
+    private static void resetHeadsUpSnoozeTimers() {
+        if (mHeadsUpSnoozeMap == null) return;
+        synchronized (mHeadsUpSnoozeMap) {
+            for (Map.Entry<String, Long> entry : mHeadsUpSnoozeMap.entrySet()) {
+                entry.setValue(0l);
+            }
         }
     }
 }

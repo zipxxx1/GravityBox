@@ -769,6 +769,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HEADS_UP_POSITION = "pref_heads_up_position";
     public static final String PREF_KEY_HEADS_UP_ALPHA = "pref_heads_up_alpha";
     public static final String PREF_KEY_HEADS_UP_SNOOZE = "pref_heads_up_snooze";
+    public static final String PREF_KEY_HEADS_UP_SNOOZE_RESET = "pref_heads_up_snooze_reset";
+    public static final String ACTION_HEADS_UP_SNOOZE_RESET = "gravitybox.intent.action.HEADS_UP_SNOOZE_RESET";
 
     public static final String PREF_KEY_HEADSET_ACTION_PLUG = "pref_headset_action_plug";
     public static final String PREF_KEY_HEADSET_ACTION_UNPLUG = "pref_headset_action_unplug";
@@ -3220,6 +3222,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent = new Intent(getActivity(), LedMainActivity.class);
                 intent.putExtra(LedMainActivity.EXTRA_UUID_REGISTERED, sSystemProperties.uuidRegistered);
                 intent.putExtra(LedMainActivity.EXTRA_TRIAL_COUNTDOWN, sSystemProperties.uncTrialCountdown);
+            } else if (PREF_KEY_HEADS_UP_SNOOZE_RESET.equals(pref.getKey())) {
+                intent = new Intent(ACTION_HEADS_UP_SNOOZE_RESET);
+                getActivity().sendBroadcast(intent);
+                return true;
             }
 
             if (intent != null) {

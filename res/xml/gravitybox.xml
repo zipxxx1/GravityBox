@@ -724,6 +724,11 @@
                 android:defaultValue="false"
                 android:dependency="pref_heads_up_master_switch" />
 
+            <Preference
+                android:key="pref_heads_up_snooze_reset"
+                android:title="@string/pref_heads_up_snooze_reset_title"
+                android:dependency="pref_heads_up_snooze" />
+
             <ListPreference
                 android:key="pref_heads_up_position"
                 android:title="@string/pref_unc_as_headsup_position_title"
