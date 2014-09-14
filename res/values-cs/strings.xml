@@ -569,6 +569,7 @@
     <string name="pref_statusbar_lock_policy_title">Povolit stažení stavové lišty</string>
     <string name="sbl_policy_default">Výchozí nastavení</string>
     <string name="sbl_policy_unlocked">Pokud je obrazovka uzamčení nezabezpečená</string>
+    <string name="sbl_policy_unlocked_secured">Vždy povolit</string>
     <string name="sbl_policy_locked">Nikdy</string>
 
     <!-- Data traffic monitor -->
@@ -1666,5 +1667,26 @@
     <!-- MTK Fix speech settings -->
     <string name="pref_mtk_fix_tts_settings_title">Opravit nastavení řeči</string>
     <string name="pref_mtk_fix_tts_settings_summary">Odemkne nastavení výstupu převodu textu na řeč v nastavení Jazyk&amp;vstup (vyžaduje restart)</string>
+
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Vybrat obrázek pomocí</string>
+    <string name="imgpick_choose_error">Chyba během vybírání obrázku</string>
+    <string name="imgpick_crop_error">Chyba během oříznutí obrázku</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Zabránit nechtěnému probuzení</string>
+    <string name="pref_power_proximity_wake_summary">Kontrolovat senzor přiblížení pro zabránění nechtěného probuzení</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">Režim LED nabíjení</string>
+    <string name="charging_led_default">Původní</string>
+    <string name="charging_led_emulated">Emulovaný</string>
+    <string name="charging_led_disabled">Vypnutý</string>
+
+    <!-- Heads up snooze timer -->
+    <string name="pref_heads_up_snooze_title">Povolit tlačítko dřímání</string>
+    <string name="headsup_snooze_all_apps">Pro všechny aplikace</string>
+    <string name="headsup_snooze_app">Nastavit heads up dřímání pro %s</string>
+    <string name="pref_heads_up_snooze_reset_title">Nulovat časovače dřímání</string>
 
 </resources>
