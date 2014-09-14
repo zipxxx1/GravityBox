@@ -1674,4 +1674,25 @@
     <string name="pref_mtk_fix_tts_settings_title">Poprawki ustawień mowy</string>
     <string name="pref_mtk_fix_tts_settings_summary">Odblokowuje wyszukiwanie głosowe i przetwarzanie tekstu na mowę w menu Język i wprowadzanie (wymagany restart)</string>
 
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Wybierz obraz używając</string>
+    <string name="imgpick_choose_error">Błąd przy wyborze obrazu</string>
+    <string name="imgpick_crop_error">Błąd podczas przycinania obrazu</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Wybudzanie zbliżeniowe</string>
+    <string name="pref_power_proximity_wake_summary">Użyj czujnika zbliżeniowego aby określić, czy urządzenie ma zostać wybudzone</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">Tryb LED ładowania</string>
+    <string name="charging_led_default">Domyślny</string>
+    <string name="charging_led_emulated">Emulowany</string>
+    <string name="charging_led_disabled">Wyłączony</string>
+
+    <!-- Heads up snooze timer -->
+    <string name="pref_heads_up_snooze_title">Włącz przycisk drzemki</string>
+    <string name="headsup_snooze_all_apps">Ustaw dla wszystkich aplikacji</string>
+    <string name="headsup_snooze_app">Ustaw drzemkę heads up dla %s</string>
+    <string name="pref_heads_up_snooze_reset_title">Wyzeruj liczniki czasu drzemki</string>
+
 </resources>
