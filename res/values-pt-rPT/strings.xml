@@ -154,8 +154,8 @@
     <string name="pref_cat_statusbar_summary">Contém vários ajustes relacionados com a barra de status</string>
     <string name="pref_cat_misc_title">Ajustes diversos</string>
     <string name="pref_cat_misc_summary">Contém todos os ajustes que não são classificados numa categoria específica</string>
-    <string name="pref_cat_fixes_title">Ajustes gerais</string>
-    <string name="pref_cat_fixes_summary">Contém correções gerais para dispositivos baseados no MTK6589. Utilizar apenas caso seja necessário!</string>
+    <string name="pref_cat_fixes_title">Ajustes gerais MTK</string>
+    <string name="pref_cat_fixes_summary">>Contém correções gerais para dispositivos MediaTek. Utilizar apenas caso seja necessário!</string>
 
     <!-- About -->
     <string name="pref_cat_about_title">Acerca</string>
@@ -645,6 +645,7 @@
     <string name="pref_statusbar_lock_policy_title">Política de bloqueio da barra de status</string>
     <string name="sbl_policy_default">Padrão</string>
     <string name="sbl_policy_unlocked">Desbloqueada quando método de bloqueio for inseguro</string>
+    <string name="sbl_policy_unlocked_secured">Desbloqueada</string>
     <string name="sbl_policy_locked">Bloqueada</string>
 
     <!-- Data traffic monitor -->
@@ -1589,5 +1590,20 @@
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Som ao desligar carregador</string>
+
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Escolher imagem utilizando</string>
+    <string name="imgpick_choose_error">Erro ao escolher imagem</string>
+    <string name="imgpick_crop_error">Erro ao cortar imagem</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Ligar através da proximidade</string>
+    <string name="pref_power_proximity_wake_summary">Permite utilizar o sensor de proximidade para decidir se o dispositivo se deve ligar</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">Luz de bateria a carregar</string>
+    <string name="charging_led_default">Por defeito</string>
+    <string name="charging_led_emulated">Através de simulação</string>
+    <string name="charging_led_disabled">Desativada</string>
 
 </resources>
