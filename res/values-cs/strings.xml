@@ -1458,7 +1458,7 @@
 
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">Děkujeme za podporu. Prémiové funkce budou odemknuty po restartování GravityBox. 
-        Ponechte GravityBox Unlocker nainstalován po dobu minimálně 20 minut.</string>
+        Ponechte GravityBox Unlocker nainstalován po dobu minimálně 120 minut.</string>
     <string name="pref_about_get_unlocker_title">Získat odemykací aplikaci</string>
     <string name="pref_about_get_unlocker_summary">Nemáte PayPal? Jednoduše klepněte sem pro získání odemykací aplikace prémiových funkcí z obchodu Play.</string>
 

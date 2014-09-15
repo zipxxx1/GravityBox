@@ -1498,7 +1498,7 @@
 
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">感謝您的支持。當重新啟動GravityBox後進階功能將會被解鎖。
-      請注意，安裝GravityBox解鎖器後可能要20分鐘才能順利解鎖全部功能。</string>
+      請注意，安裝GravityBox解鎖器後可能要120分鐘才能順利解鎖全部功能。</string>
     <string name="pref_about_get_unlocker_title">取得解鎖器</string>
     <string name="pref_about_get_unlocker_summary">沒有PayPal帳號？請按此到Play商店購買GravityBox解鎖器來解鎖所有進階功能</string>
 

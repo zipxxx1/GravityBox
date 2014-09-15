@@ -1473,7 +1473,7 @@
 
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">サポートしてくださりありがとうございます。GravityBoxを再起動するとプレミアム機能が使えるようになります。
-        GravityBox Unlockerを20分以上インストールしたままにしてください。</string>
+        GravityBox Unlockerを120分以上インストールしたままにしてください。</string>
     <string name="pref_about_get_unlocker_title">Unlockerを入手</string>
     <string name="pref_about_get_unlocker_summary">PayPalが嫌いですか? ここをタップするとGravityBoxのプレミアム機能を使えるようにするUnlockerをPlayストアでダウンロードできます。</string>
 

@@ -1484,7 +1484,7 @@
 
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">Danke für Ihre Unterstützung. Premium Funktionen werden freigeschaltet, nachdem GravityBox neugestartet wurde. 
-        Stellen Sie sicher, dass GravityBox Unlocker für mindestens 20 Minuten installiert bleibt.</string>
+        Stellen Sie sicher, dass GravityBox Unlocker für mindestens 120 Minuten installiert bleibt.</string>
     <string name="pref_about_get_unlocker_title">Erhalte Unlocker</string>
     <string name="pref_about_get_unlocker_summary">Sie haben kein PayPal? Klicken Sie einfach hier um die GravityBox Premium Funktionen über den PlayStore freizuschalten.</string>
 
