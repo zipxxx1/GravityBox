@@ -1072,7 +1072,6 @@ Khi đó bạn có thể quyết định chặn thông báo này từ lần sau.
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Âm báo đầy pin</string>
-    <string name="pref_battery_charged_sound_summary">Phát âm báo khi pin đã được sạc đầy</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Bấm-giữ</string>
@@ -1290,7 +1289,6 @@ Thay thế thời gian chờ mặc định nếu khác 0.</string>
 
     <!-- Charger plugged/unplugged sound -->
     <string name="pref_charger_plugged_sound_title">Âm báo cắm sạc</string>
-    <string name="pref_charger_plugged_sound_summary">Phát âm báo khi cắm/rút sạc</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Bật/Tắt Mạng thông minh</string>

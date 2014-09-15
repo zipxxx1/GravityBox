@@ -1065,7 +1065,6 @@
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">Suara ketika selesai mengisi baterai</string>
-    <string name="pref_battery_charged_sound_summary">Mainkan suara ketika baterai selesai terisi secara penuh</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Aksi ketika ditahan</string>
@@ -1280,7 +1279,6 @@
 
     <!-- Charger plugged/unplugged sound -->
     <string name="pref_charger_plugged_sound_title">Suara ketika charger terpasang</string>
-    <string name="pref_charger_plugged_sound_summary">Mainkan suara ketika charger terpasang/terlepas</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Hidup/Matikan Radio Pintar</string>
