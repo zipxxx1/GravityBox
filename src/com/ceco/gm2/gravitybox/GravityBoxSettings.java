@@ -17,7 +17,6 @@ package com.ceco.gm2.gravitybox;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,7 +56,6 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
@@ -1007,10 +1005,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private EditTextPreference mPrefLockscreenCarrier2Text;
         private CheckBoxPreference mPrefLockscreenDisableEcb;
         private File wallpaperImage;
-        private File wallpaperTemporary;
         private File notifBgImagePortrait;
         private File notifBgImageLandscape;
-        private File iconTemporary;
         private PreferenceScreen mPrefCatHwKeyActions;
         private PreferenceCategory mPrefCatHwKeyMenu;
         private ListPreference mPrefHwKeyMenuLongpress;
@@ -1257,11 +1253,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_DISABLE_ECB);
 
             wallpaperImage = new File(getActivity().getFilesDir() + "/lockwallpaper"); 
-            wallpaperTemporary = new File(getActivity().getCacheDir() + "/lockwallpaper.tmp");
             notifBgImagePortrait = new File(getActivity().getFilesDir() + "/notifwallpaper");
             notifBgImageLandscape = new File(getActivity().getFilesDir() + "/notifwallpaper_landscape");
             callerPhotoFile = new File(getActivity().getFilesDir() + "/caller_photo");
-            iconTemporary = new File(getActivity().getFilesDir() + "/icon.tmp");
 
             mPrefCatHwKeyActions = (PreferenceScreen) findPreference(PREF_CAT_HWKEY_ACTIONS);
             mPrefCatHwKeyMenu = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_MENU);
@@ -3224,12 +3218,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
         @SuppressWarnings("deprecation")
         private void setCustomLockscreenImage() {
-            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            intent.putExtra("crop", "true");
-            intent.putExtra("scale", true);
-            intent.putExtra("scaleUpIfNeeded", false);
-            intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
+            Intent intent = new Intent(getActivity(), PickImageActivity.class);
+            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
+            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
             Display display = getActivity().getWindowManager().getDefaultDisplay();
             int width = display.getWidth();
             int height = display.getHeight();
@@ -3247,30 +3238,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 height = getActivity().getWallpaperDesiredMinimumHeight();
                 float spotlightX = (float) display.getWidth() / width;
                 float spotlightY = (float) display.getHeight() / height;
-                intent.putExtra("aspectX", width);
-                intent.putExtra("aspectY", height);
-                intent.putExtra("outputX", width);
-                intent.putExtra("outputY", height);
-                intent.putExtra("spotlightX", spotlightX);
-                intent.putExtra("spotlightY", spotlightY);
+                intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, width);
+                intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, height);
+                intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, width);
+                intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, height);
+                intent.putExtra(PickImageActivity.EXTRA_SPOTLIGHT_X, spotlightX);
+                intent.putExtra(PickImageActivity.EXTRA_SPOTLIGHT_Y, spotlightY);
             } else {
                 boolean isPortrait = getResources().getConfiguration().orientation ==
                     Configuration.ORIENTATION_PORTRAIT;
-                intent.putExtra("aspectX", isPortrait ? width : height - titleBarHeight);
-                intent.putExtra("aspectY", isPortrait ? height - titleBarHeight : width);
+                intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? width : height - titleBarHeight);
+                intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? height - titleBarHeight : width);
             }
-            try {
-                wallpaperTemporary.createNewFile();
-                wallpaperTemporary.setWritable(true, false);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(wallpaperTemporary));
-                intent.putExtra("return-data", false);
-                getActivity().startActivityFromFragment(this, intent, REQ_LOCKSCREEN_BACKGROUND);
-            } catch (Exception e) {
-                Toast.makeText(getActivity(), getString(
-                        R.string.lockscreen_background_result_not_successful),
-                        Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
+            getActivity().startActivityFromFragment(this, intent, REQ_LOCKSCREEN_BACKGROUND);
         }
 
         @SuppressWarnings("deprecation")
@@ -3284,29 +3264,17 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             int statusBarHeight = rect.top;
             int contentViewTop = window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
             int titleBarHeight = contentViewTop - statusBarHeight;
-            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            intent.putExtra("crop", "true");
+            Intent intent = new Intent(getActivity(), PickImageActivity.class);
+            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
             boolean isPortrait = getResources()
                     .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-            intent.putExtra("aspectX", isPortrait ? width : height - titleBarHeight);
-            intent.putExtra("aspectY", isPortrait ? height - titleBarHeight : width);
-            intent.putExtra("outputX", isPortrait ? width : height);
-            intent.putExtra("outputY", isPortrait ? height : width);
-            intent.putExtra("scale", true);
-            intent.putExtra("scaleUpIfNeeded", true);
-            intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
-            try {
-                wallpaperTemporary.createNewFile();
-                wallpaperTemporary.setWritable(true, false);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(wallpaperTemporary));
-                startActivityForResult(intent, REQ_NOTIF_BG_IMAGE_PORTRAIT);
-            } catch (Exception e) {
-                Toast.makeText(getActivity(), getString(
-                        R.string.lockscreen_background_result_not_successful),
-                        Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? width : height - titleBarHeight);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? height - titleBarHeight : width);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, isPortrait ? width : height);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, isPortrait ? height : width);
+            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
+            intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
+            startActivityForResult(intent, REQ_NOTIF_BG_IMAGE_PORTRAIT);
         }
 
         @SuppressWarnings("deprecation")
@@ -3320,58 +3288,33 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             int statusBarHeight = rect.top;
             int contentViewTop = window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
             int titleBarHeight = contentViewTop - statusBarHeight;
-            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            intent.putExtra("crop", "true");
+            Intent intent = new Intent(getActivity(), PickImageActivity.class);
+            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
             boolean isPortrait = getResources()
                   .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-            intent.putExtra("aspectX", isPortrait ? height - titleBarHeight : width);
-            intent.putExtra("aspectY", isPortrait ? width : height - titleBarHeight);
-            intent.putExtra("outputX", isPortrait ? height : width);
-            intent.putExtra("outputY", isPortrait ? width : height);
-            intent.putExtra("scale", true);
-            intent.putExtra("scaleUpIfNeeded", true);
-            intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
-            try {
-                wallpaperTemporary.createNewFile();
-                wallpaperTemporary.setWritable(true, false);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(wallpaperTemporary));
-                startActivityForResult(intent, REQ_NOTIF_BG_IMAGE_LANDSCAPE);
-            } catch (Exception e) {
-                Toast.makeText(getActivity(), getString(
-                        R.string.lockscreen_background_result_not_successful),
-                        Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? height - titleBarHeight : width);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? width : height - titleBarHeight);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, isPortrait ? height : width);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, isPortrait ? width : height);
+            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
+            intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
+            startActivityForResult(intent, REQ_NOTIF_BG_IMAGE_LANDSCAPE);
         }
 
         private void setCustomCallerImage() {
             int width = getResources().getDimensionPixelSize(R.dimen.caller_id_photo_width);
             int height = getResources().getDimensionPixelSize(R.dimen.caller_id_photo_height);
-            Intent intent = new Intent(Intent.ACTION_PICK,
-                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            intent.putExtra("crop", "true");
+            Intent intent = new Intent(getActivity(), PickImageActivity.class);
+            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
             boolean isPortrait = getResources()
                     .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-            intent.putExtra("aspectX", isPortrait ? width : height);
-            intent.putExtra("aspectY", isPortrait ? height : width);
-            intent.putExtra("outputX", isPortrait ? width : height);
-            intent.putExtra("outputY", isPortrait ? height : width);
-            intent.putExtra("scale", true);
-            intent.putExtra("scaleUpIfNeeded", true);
-            intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
-            try {
-                wallpaperTemporary.createNewFile();
-                wallpaperTemporary.setWritable(true, false);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(wallpaperTemporary));
-                startActivityForResult(intent, REQ_CALLER_PHOTO);
-            } catch (Exception e) {
-                Toast.makeText(getActivity(), getString(
-                        R.string.caller_unkown_photo_result_not_successful),
-                        Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? width : height);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? height : width);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, isPortrait ? width : height);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, isPortrait ? height : width);
+            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
+            intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
+            startActivityForResult(intent, REQ_CALLER_PHOTO);
         }
 
         public interface ShortcutHandler {
@@ -3399,25 +3342,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mIconPickHandler = handler;
 
-            Intent intent = new Intent(Intent.ACTION_PICK,
-                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            intent.putExtra("crop", "true");
-            intent.putExtra("aspectX", sizePx);
-            intent.putExtra("aspectY", sizePx);
-            intent.putExtra("outputX", sizePx);
-            intent.putExtra("outputY", sizePx);
-            intent.putExtra("scale", true);
-            intent.putExtra("scaleUpIfNeeded", true);
-            intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
-            try {
-                iconTemporary.createNewFile();
-                iconTemporary.setWritable(true, false);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(iconTemporary));
-                startActivityForResult(intent, REQ_ICON_PICK);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Intent intent = new Intent(getActivity(), PickImageActivity.class);
+            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, sizePx);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, sizePx);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, sizePx);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, sizePx);
+            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
+            intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
+            startActivityForResult(intent, REQ_ICON_PICK);
         }
 
         @Override
@@ -3425,34 +3358,30 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == REQ_LOCKSCREEN_BACKGROUND) {
                 if (resultCode == Activity.RESULT_OK) {
-                    if (wallpaperTemporary.exists()) {
-                        wallpaperTemporary.renameTo(wallpaperImage);
+                    File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
+                    if (f.exists()) {
+                        f.renameTo(wallpaperImage);
                     }
                     wallpaperImage.setReadable(true, false);
                     Toast.makeText(getActivity(), getString(
                             R.string.lockscreen_background_result_successful), 
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    if (wallpaperTemporary.exists()) {
-                        wallpaperTemporary.delete();
-                    }
                     Toast.makeText(getActivity(), getString(
                             R.string.lockscreen_background_result_not_successful),
                             Toast.LENGTH_SHORT).show();
                 }
             } else if (requestCode == REQ_NOTIF_BG_IMAGE_PORTRAIT) {
                 if (resultCode == Activity.RESULT_OK) {
-                    if (wallpaperTemporary.exists()) {
-                        wallpaperTemporary.renameTo(notifBgImagePortrait);
+                    File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
+                    if (f.exists()) {
+                        f.renameTo(notifBgImagePortrait);
                     }
                     notifBgImagePortrait.setReadable(true, false);
                     Toast.makeText(getActivity(), getString(
                             R.string.lockscreen_background_result_successful), 
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    if (wallpaperTemporary.exists()) {
-                        wallpaperTemporary.delete();
-                    }
                     Toast.makeText(getActivity(), getString(
                             R.string.lockscreen_background_result_not_successful),
                             Toast.LENGTH_SHORT).show();
@@ -3461,17 +3390,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getActivity().sendBroadcast(intent);
             } else if (requestCode == REQ_NOTIF_BG_IMAGE_LANDSCAPE) {
                 if (resultCode == Activity.RESULT_OK) {
-                    if (wallpaperTemporary.exists()) {
-                        wallpaperTemporary.renameTo(notifBgImageLandscape);
+                    File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
+                    if (f.exists()) {
+                        f.renameTo(notifBgImageLandscape);
                     }
                     notifBgImageLandscape.setReadable(true, false);
                     Toast.makeText(getActivity(), getString(
                             R.string.lockscreen_background_result_successful), 
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    if (wallpaperTemporary.exists()) {
-                        wallpaperTemporary.delete();
-                    }
                     Toast.makeText(getActivity(), getString(
                             R.string.lockscreen_background_result_not_successful),
                             Toast.LENGTH_SHORT).show();
@@ -3480,17 +3407,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getActivity().sendBroadcast(intent);
             } else if (requestCode == REQ_CALLER_PHOTO) {
                 if (resultCode == Activity.RESULT_OK) {
-                    if (wallpaperTemporary.exists()) {
-                        wallpaperTemporary.renameTo(callerPhotoFile);
+                    File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
+                    if (f.exists()) {
+                        f.renameTo(callerPhotoFile);
                     }
                     callerPhotoFile.setReadable(true, false);
                     Toast.makeText(getActivity(), getString(
                             R.string.caller_unknown_photo_result_successful), 
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    if (wallpaperTemporary.exists()) {
-                        wallpaperTemporary.delete();
-                    }
                     Toast.makeText(getActivity(), getString(
                             R.string.caller_unkown_photo_result_not_successful),
                             Toast.LENGTH_SHORT).show();
@@ -3521,20 +3446,17 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mShortcutHandler.onShortcutCancelled();
                 }
             } else if (requestCode == REQ_ICON_PICK && mIconPickHandler != null) {
-                if (resultCode == Activity.RESULT_OK && iconTemporary.exists()) {
+                if (resultCode == Activity.RESULT_OK) {
                     try {
-                        Bitmap icon = BitmapFactory.decodeStream(new FileInputStream(iconTemporary));
+                        File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
+                        Bitmap icon = BitmapFactory.decodeStream(new FileInputStream(f));
                         mIconPickHandler.onIconPicked(icon);
-                    } catch (FileNotFoundException e) {
+                        f.delete();
+                    } catch (Exception e) {
                         e.printStackTrace();
                         Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    } finally {
-                        iconTemporary.delete();
                     }
                 } else {
-                    if (iconTemporary.exists()) {
-                        iconTemporary.delete();
-                    }
                     mIconPickHandler.onIconPickCancelled();
                 }
             }

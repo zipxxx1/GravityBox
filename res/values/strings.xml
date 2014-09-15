@@ -1611,4 +1611,9 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Charger unplugged sound</string>
 
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Pick image using</string>
+    <string name="imgpick_choose_error">Error while choosing image</string>
+    <string name="imgpick_crop_error">Error while cropping image</string>
+
 </resources>
