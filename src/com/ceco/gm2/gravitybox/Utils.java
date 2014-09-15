@@ -78,6 +78,7 @@ public class Utils {
     private static Boolean mHasFlash = null;
     private static Boolean mHasGPS = null;
     private static Boolean mHasNfc = null;
+    private static Boolean mHasProximitySensor = null;
 
     // Supported MTK devices
     private static final Set<String> MTK_DEVICES = new HashSet<String>(Arrays.asList(
@@ -289,6 +290,19 @@ public class Utils {
             return mHasNfc;
         } catch (Throwable t) {
             mHasNfc = null;
+            return false;
+        }
+    }
+
+    public static boolean hasProximitySensor(Context con) {
+        if (mHasProximitySensor != null) return mHasProximitySensor;
+
+        try {
+            PackageManager pm = con.getPackageManager();
+            mHasProximitySensor = pm.hasSystemFeature(PackageManager.FEATURE_SENSOR_PROXIMITY);
+            return mHasProximitySensor;
+        } catch (Throwable t) {
+            mHasProximitySensor = null;
             return false;
         }
     }
