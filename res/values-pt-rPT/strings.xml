@@ -1505,7 +1505,7 @@
 
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">Obrigado pelo suporte. As funcionalidades avançadas serão desbloqueadas após ter reiniciado o GravityBox. 
-        Garanta que mantém a aplicação de desbloqueio do GravityBox instalada durante pelo menos 20 minutos.</string>
+        Garanta que mantém a aplicação de desbloqueio do GravityBox instalada durante pelo menos 120 minutos.</string>
     <string name="pref_about_get_unlocker_title">Obter desbloqueador</string>
     <string name="pref_about_get_unlocker_summary">Não tem PayPal? Carregue aqui para obter a aplicação de desbloqueio das funcionalidades avançadas do GravityBox a partir da Play Store.</string>
 

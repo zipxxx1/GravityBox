@@ -182,7 +182,7 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
         if (!unlockerInstalled) {
             long addedMs = SettingsManager.getInstance(context).getUnlockerTimestamp();
             long removedMs = System.currentTimeMillis();
-            if ((removedMs - addedMs) < 900000) {
+            if ((removedMs - addedMs) < 7200000) {
                 Log.d("GravityBox", "Unlocker uninstalled too early");
                 SettingsManager.getInstance(context).resetUuid();
                 return false;
