@@ -1545,6 +1545,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.hasVibrator(getActivity())) {
                 mPrefCatPhoneTelephony.removePreference(mPrefCallVibrations);
             }
+            if (!Utils.hasProximitySensor(getActivity())) {
+                mPrefCatPowerOther.removePreference(mPrefPowerProximityWake);
+            }
             if (!Utils.hasTelephonySupport(getActivity())) {
                 mPrefCatLsOther.removePreference(mPrefLockscreenDisableEcb);
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
