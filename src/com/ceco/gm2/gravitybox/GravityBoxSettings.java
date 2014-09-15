@@ -264,11 +264,17 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int SBL_POLICY_LOCKED = 2;
     public static final String PREF_KEY_LOCKSCREEN_DISABLE_ECB = "pref_lockscreen_disable_ecb";
 
+    public static final String PREF_CAT_KEY_POWER = "pref_cat_power";
+    public static final String PREF_CAT_KEY_POWER_MENU = "pref_cat_power_menu";
+    public static final String PREF_CAT_KEY_POWER_OTHER = "pref_cat_power_other";
     public static final String PREF_KEY_FLASHING_LED_DISABLE = "pref_flashing_led_disable";
     public static final String PREF_KEY_CHARGING_LED_DISABLE = "pref_charging_led_disable";
     public static final String ACTION_BATTERY_LED_CHANGED = "gravitybox.intent.action.BATTERY_LED_CHANGED";
     public static final String EXTRA_BLED_FLASHING_DISABLED = "batteryLedFlashingDisabled";
     public static final String EXTRA_BLED_CHARGING_DISABLED = "batteryLedChargingDisabled";
+    public static final String PREF_KEY_POWER_PROXIMITY_WAKE = "pref_power_proximity_wake";
+    public static final String ACTION_PREF_POWER_CHANGED = "gravitybox.intent.action.POWER_CHANGED";
+    public static final String EXTRA_POWER_PROXIMITY_WAKE = "powerProximityWake";
 
     public static final String PREF_CAT_KEY_DISPLAY = "pref_cat_display";
     public static final String PREF_KEY_EXPANDED_DESKTOP = "pref_expanded_desktop";
@@ -1080,6 +1086,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefScreenDimLevel;
         private AutoBrightnessDialogPreference mPrefAutoBrightness;
         private PreferenceScreen mPrefCatLockscreen;
+        private PreferenceScreen mPrefCatPower;
+        private PreferenceCategory mPrefCatPowerMenu;
+        private PreferenceCategory mPrefCatPowerOther;
+        private CheckBoxPreference mPrefPowerProximityWake;
         private PreferenceScreen mPrefCatDisplay;
         private PreferenceScreen mPrefCatBrightness;
         private ListPreference mPrefScreenOffEffect;
@@ -1355,6 +1365,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefAutoBrightness = (AutoBrightnessDialogPreference) findPreference(PREF_KEY_AUTOBRIGHTNESS);
 
             mPrefCatLockscreen = (PreferenceScreen) findPreference(PREF_CAT_KEY_LOCKSCREEN);
+            mPrefCatPower = (PreferenceScreen) findPreference(PREF_CAT_KEY_POWER);
+            mPrefCatPowerMenu = (PreferenceCategory) findPreference(PREF_CAT_KEY_POWER_MENU);
+            mPrefCatPowerOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_POWER_OTHER);
+            mPrefPowerProximityWake = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE);
             mPrefCatDisplay = (PreferenceScreen) findPreference(PREF_CAT_KEY_DISPLAY);
             mPrefCatBrightness = (PreferenceScreen) findPreference(PREF_CAT_KEY_BRIGHTNESS);
             mPrefScreenOffEffect = (ListPreference) findPreference(PREF_KEY_SCREEN_OFF_EFFECT);
@@ -1629,6 +1643,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getPreferenceScreen().removePreference(mPrefCatLockscreen);
                 mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
                 mPrefCatStatusbar.removePreference(mPrefCatNotifDrawerStyle);
+                mPrefCatPowerOther.removePreference(mPrefPowerProximityWake);
                 mPrefCatDisplay.removePreference(mPrefCatBrightness);
                 mPrefCatDisplay.removePreference(mPrefScreenOffEffect);
                 mPrefCatMedia.removePreference(mPrefSafeMediaVolume);
@@ -3020,6 +3035,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_HSA_STATE,
                         key.equals(PREF_KEY_HEADSET_ACTION_PLUG) ? 1 : 0);
                 intent.putExtra(EXTRA_HSA_URI, prefs.getString(key, null));
+            } else if (key.equals(PREF_KEY_POWER_PROXIMITY_WAKE)) {
+                intent.setAction(ACTION_PREF_POWER_CHANGED);
+                intent.putExtra(EXTRA_POWER_PROXIMITY_WAKE, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

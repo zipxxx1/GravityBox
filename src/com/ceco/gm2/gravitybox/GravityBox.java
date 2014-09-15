@@ -87,6 +87,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
                 // is to grant permissions needed by new QuickSettings custom tiles
                 PermissionGranter.initZygote();
             }
+            ModPower.initZygote(prefs);
         }
 
         // Common
