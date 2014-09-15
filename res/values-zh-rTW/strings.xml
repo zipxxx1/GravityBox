@@ -595,6 +595,7 @@
     <string name="pref_statusbar_lock_policy_title">狀態列鎖定政策</string>
     <string name="sbl_policy_default">預設</string>
     <string name="sbl_policy_unlocked">不鎖定 (若螢幕鎖定方式並非圖形/PIN/密碼) </string>
+    <string name="sbl_policy_unlocked_secured">不鎖定</string>
     <string name="sbl_policy_locked">鎖定</string>
 
     <!-- Data traffic monitor -->
