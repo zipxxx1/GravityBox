@@ -1195,6 +1195,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefs = getPreferenceScreen().getSharedPreferences();
             AppPickerPreference.sPrefsFragment = this;
+            AppPickerPreference.cleanupAsync(getActivity());
 
             mBatteryStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_STYLE);
             mPrefBatteryPercent = (CheckBoxPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT);

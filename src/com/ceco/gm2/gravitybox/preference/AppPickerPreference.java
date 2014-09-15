@@ -20,10 +20,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.ceco.gm2.gravitybox.GravityBoxSettings.PrefsFragment;
@@ -41,6 +43,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -118,6 +121,51 @@ public class AppPickerPreference extends DialogPreference
                 return d.getBitmap().getByteCount();
             }
         };
+    }
+
+    public static void cleanupAsync(final Context context) {
+        new AsyncTask<Void,Void,Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    List<String> usedFileNameList = new ArrayList<String>();
+                    final String prefsName = context.getPackageName() + "_preferences";
+                    SharedPreferences prefs = context.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
+                    // populate list of used icon files
+                    Map<String, ?> keys = prefs.getAll();
+                    for (Map.Entry<String, ?> entry : keys.entrySet()) {
+                        Object val = entry.getValue();
+                        if ((val instanceof String) && ((String)val).contains("#Intent")) {
+                            try {
+                                Intent intent = Intent.parseUri((String)val, 0);
+                                String fileName = intent.getStringExtra("icon");
+                                if (fileName != null) {
+                                    File iconFile = new File(fileName);
+                                    if (iconFile.exists()) {
+                                        usedFileNameList.add(iconFile.getName());
+                                    }
+                                }
+                            } catch (URISyntaxException ue) {
+                                continue;
+                            }
+                        }
+                    }
+                    // delete all unused icon files
+                    File appPickerDir = new File(context.getFilesDir() + "/app_picker");
+                    if (appPickerDir.exists() && appPickerDir.isDirectory()) {
+                        File[] files = appPickerDir.listFiles();
+                        for (File f : files) {
+                            if (!usedFileNameList.contains(f.getName())) {
+                                f.delete();
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }.execute();
     }
 
     class AppInfo {
