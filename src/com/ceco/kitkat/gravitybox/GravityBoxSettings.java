@@ -255,6 +255,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int SBL_POLICY_UNLOCKED = 1;
     public static final int SBL_POLICY_LOCKED = 2;
     public static final int SBL_POLICY_UNLOCKED_SECURED = 3;
+    public static final String ACTION_PREF_STATUSBAR_LOCK_POLICY_CHANGED = "gravitybox.intent.action.STATUSBAR_LOCK_POLICY_CHANGED";
+    public static final String EXTRA_STATUSBAR_LOCK_POLICY = "statusbarLockPolicy";
     public static final String PREF_KEY_LOCKSCREEN_DISABLE_ECB = "pref_lockscreen_disable_ecb";
 
     public static final String PREF_KEY_FLASHING_LED_DISABLE = "pref_flashing_led_disable";
@@ -3058,6 +3060,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_POWER_PROXIMITY_WAKE)) {
                 intent.setAction(ACTION_PREF_POWER_CHANGED);
                 intent.putExtra(EXTRA_POWER_PROXIMITY_WAKE, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_STATUSBAR_LOCK_POLICY)) {
+                intent.setAction(ACTION_PREF_STATUSBAR_LOCK_POLICY_CHANGED);
+                intent.putExtra(EXTRA_STATUSBAR_LOCK_POLICY, Integer.valueOf(prefs.getString(key, "0")));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
