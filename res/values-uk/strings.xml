@@ -172,8 +172,6 @@
     <string name="pref_music_volume_steps_summary">Додає більше кроків для зміни гучності музики (Необхідна перезавантаження)</string>
     <string name="pref_safe_media_volume_title">Безпечний звук у навушниках</string>
     <string name="pref_safe_media_volume_summary">Дозволяє включити або виключити функцію безпечного звуку в навушниках</string>
-    <string name="pref_charging_led_disable_title">Вимкнути діод зарядки</string>
-    <string name="pref_charging_led_disable_summary">Дозволяє відключити діод під час заряду</string>
     <string name="pref_cat_hwkey_actions_title">Дії кнопок</string>
     <string name="pref_cat_hwkey_actions_summary">Дозволяє задати свої дії для кнопок телефону</string>
     <string name="hwkey_menu_longpress_dialog_title">Довге натиснення Меню</string>

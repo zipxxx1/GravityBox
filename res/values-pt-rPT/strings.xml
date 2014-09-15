@@ -256,10 +256,6 @@
     <string name="pref_safe_media_volume_title">Volume de segurança para mãos-livres</string>
     <string name="pref_safe_media_volume_summary">Ativa ou desativa o volume de segurança do áudio mãos-livres</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Desativar luz de bateria a carregar</string>
-    <string name="pref_charging_led_disable_summary">Desativa a luz vermelha quando a bateria está a carregar</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Ações para teclas de navegação</string>
     <string name="pref_cat_hwkey_actions_summary">Permite personalizar ações para as teclas navegação (físicas ou virtuais)</string>

@@ -256,10 +256,6 @@
     <string name="pref_safe_media_volume_title">Bezpieczna głośność dla słuchawek</string>
     <string name="pref_safe_media_volume_summary">Włącza lub wyłącza funkcję bezpiecznego poziomu głośności przy korzystaniu ze słuchawek</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Wyłącz sygn. LED przy ładowaniu</string>
-    <string name="pref_charging_led_disable_summary">Wyłącza sygnalizację LED podczas ładowania</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Działanie przycisków nawigacyjnych</string>
     <string name="pref_cat_hwkey_actions_summary">Pozwala ustawić niestandardowe działania przycisków nawigacyjnych (sprzętowych i programowych)</string>

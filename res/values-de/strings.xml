@@ -266,10 +266,6 @@
     <string name="pref_safe_media_volume_title">Kopfhörerlautstärke begrenzen</string>
     <string name="pref_safe_media_volume_summary">Aktiviert die Lautstärkebegrenzung bei Kopfhörern</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Lade-LED deaktivieren</string>
-    <string name="pref_charging_led_disable_summary">Deaktiviert die LED während der Akku geladen wird</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Tastenbelegung anpassen</string>
     <string name="pref_cat_hwkey_actions_summary"></string>

@@ -37,10 +37,12 @@ public class ModLowBatteryWarning {
     private static final String CLASS_BATTERY_SERVICE_LED = "com.android.server.BatteryService$Led";
     public static final boolean DEBUG = false;
 
+    public static enum ChargingLed { DEFAULT, EMULATED, DISABLED };
+
     private static ThreadLocal<MethodState> mUpdateLightsMethodState;
     private static Object mBatteryLed;
     private static boolean mFlashingLedDisabled;
-    private static boolean mChargingLedDisabled;
+    private static ChargingLed mChargingLed;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -54,9 +56,9 @@ public class ModLowBatteryWarning {
                     mFlashingLedDisabled = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_BLED_FLASHING_DISABLED, false);
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_BLED_CHARGING_DISABLED)) {
-                    mChargingLedDisabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_BLED_CHARGING_DISABLED, false);
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_BLED_CHARGING)) {
+                    mChargingLed = ChargingLed.valueOf(intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_BLED_CHARGING));
                 }
                 updateLightsLocked();
             }
@@ -82,7 +84,7 @@ public class ModLowBatteryWarning {
             mUpdateLightsMethodState.set(MethodState.UNKNOWN);
 
             mFlashingLedDisabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_FLASHING_LED_DISABLE, false);
-            mChargingLedDisabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_CHARGING_LED_DISABLE, false);
+            mChargingLed = ChargingLed.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_CHARGING_LED, "DEFAULT"));
 
             XposedBridge.hookAllConstructors(batteryServiceClass, new XC_MethodHook() {
                 @Override
@@ -139,7 +141,7 @@ public class ModLowBatteryWarning {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mUpdateLightsMethodState.get() != null &&
                             mUpdateLightsMethodState.get().equals(MethodState.METHOD_ENTERED)) {
-                        if (mChargingLedDisabled) {
+                        if (mChargingLed == ChargingLed.DISABLED) {
                             if (DEBUG) {
                                 log("LightService: setColor called from BatteryService - ignoring");
                             }

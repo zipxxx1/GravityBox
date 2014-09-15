@@ -264,10 +264,6 @@
     <string name="pref_safe_media_volume_title">Volume media yang aman untuk headset</string>
     <string name="pref_safe_media_volume_summary">Menghidupkan atau mematikan fitur volume media yang aman untuk headset</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Matikan LED pengisian daya</string>
-    <string name="pref_charging_led_disable_summary">Mematikan LED ketika mengisi daya</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Aksi tombol fisik</string>
     <string name="pref_cat_hwkey_actions_summary">Membolehkan anda untuk mengatur aksi kustom pada tombol fisik</string>

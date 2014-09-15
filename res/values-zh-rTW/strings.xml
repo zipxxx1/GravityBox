@@ -271,10 +271,6 @@
     <string name="pref_safe_media_volume_title">安全的耳機媒體音量</string>
     <string name="pref_safe_media_volume_summary">啟用或停用安全的耳機媒體音量功能</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">停用充電 LED 燈號</string>
-    <string name="pref_charging_led_disable_summary">停用當充電時會亮起的 LED 燈號</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">實體按鍵操作調整</string>
     <string name="pref_cat_hwkey_actions_summary">包含各種實體按鍵操作的個性化配置選項</string>

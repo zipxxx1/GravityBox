@@ -271,10 +271,6 @@
     <string name="pref_safe_media_volume_title">Volume d\'écoute sécurisé</string>
     <string name="pref_safe_media_volume_summary">Active ou désactive la limitation du volume sonore dans les écouteurs mains-libres</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Désactivation LED en chargement</string>
-    <string name="pref_charging_led_disable_summary">Désactive la LED lors du chargement</string>
-
      <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Actions touches de navigation</string>
     <string name="pref_cat_hwkey_actions_summary">Permet de programmer des actions pour les touches de navigation (matérielles et logicielles)</string>

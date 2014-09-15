@@ -214,9 +214,6 @@
     <string name="pref_safe_media_volume_title">헤드셋 안정 볼륨</string>
     <string name="pref_safe_media_volume_summary">헤드셋을 연결하였을 때 볼륨이 일정 단계 이상 올라가지 않는 것을 활성화하거나 비활성화 합니다.</string>
 
-    <string name="pref_charging_led_disable_title">충전 중 LED 비활성화</string>
-    <string name="pref_charging_led_disable_summary">충전 중에 표시되는 LED 알림등을 비활성화합니다.</string>
-
     <string name="pref_cat_hwkey_actions_title">하드웨어 키 설정</string>
     <string name="pref_cat_hwkey_actions_summary">하드웨어 키로 할 수 있는 기능을 추가합니다.</string>
     <string name="hwkey_menu_longpress_dialog_title">메뉴 키를 길게 누를 때</string>

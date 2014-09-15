@@ -249,10 +249,6 @@
     <string name="pref_safe_media_volume_title">Güvenli kulaklık sesi</string>
     <string name="pref_safe_media_volume_summary">Kulaklık takıldığında güvenli ses seviyesini etkinleştirir</string>
 
-    <!-- Disable charging LED -->
-    <string name="pref_charging_led_disable_title">Şarj oluyor LED bildirimi</string>
-    <string name="pref_charging_led_disable_summary">Şarj olurken LED bildirimini kapat</string>
-
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Fiziksel tuş işlemleri</string>
     <string name="pref_cat_hwkey_actions_summary">Fiziksel tuşlara özel eylem ata</string>

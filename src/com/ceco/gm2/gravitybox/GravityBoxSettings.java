@@ -269,10 +269,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_POWER_MENU = "pref_cat_power_menu";
     public static final String PREF_CAT_KEY_POWER_OTHER = "pref_cat_power_other";
     public static final String PREF_KEY_FLASHING_LED_DISABLE = "pref_flashing_led_disable";
-    public static final String PREF_KEY_CHARGING_LED_DISABLE = "pref_charging_led_disable";
+    public static final String PREF_KEY_CHARGING_LED = "pref_charging_led";
     public static final String ACTION_BATTERY_LED_CHANGED = "gravitybox.intent.action.BATTERY_LED_CHANGED";
     public static final String EXTRA_BLED_FLASHING_DISABLED = "batteryLedFlashingDisabled";
-    public static final String EXTRA_BLED_CHARGING_DISABLED = "batteryLedChargingDisabled";
+    public static final String EXTRA_BLED_CHARGING = "batteryLedCharging";
     public static final String PREF_KEY_POWER_PROXIMITY_WAKE = "pref_power_proximity_wake";
     public static final String ACTION_PREF_POWER_CHANGED = "gravitybox.intent.action.POWER_CHANGED";
     public static final String EXTRA_POWER_PROXIMITY_WAKE = "powerProximityWake";
@@ -1193,6 +1193,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatQsBatteryTileSettings;
         private ListPreference mPrefQsBatteryTempUnit;
         private AppPickerPreference mPrefCustomApp;
+        private ListPreference mPrefChargingLed;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1523,6 +1524,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCustomApp = (AppPickerPreference) findPreference(PREF_KEY_HWKEY_CUSTOM_APP);
             getPreferenceScreen().removePreference(mPrefCustomApp);
+
+            mPrefChargingLed = (ListPreference) findPreference(PREF_KEY_CHARGING_LED);
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
@@ -2286,6 +2289,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefQsBatteryTempUnit.setSummary(mPrefQsBatteryTempUnit.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_CHARGING_LED)) {
+                mPrefChargingLed.setSummary(mPrefChargingLed.getEntry());
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -3026,10 +3033,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_BATTERY_LED_CHANGED);
                 intent.putExtra(EXTRA_BLED_FLASHING_DISABLED,
                         prefs.getBoolean(PREF_KEY_FLASHING_LED_DISABLE, false));
-            } else if (key.equals(PREF_KEY_CHARGING_LED_DISABLE)) {
+            } else if (key.equals(PREF_KEY_CHARGING_LED)) {
                 intent.setAction(ACTION_BATTERY_LED_CHANGED);
-                intent.putExtra(EXTRA_BLED_CHARGING_DISABLED,
-                        prefs.getBoolean(PREF_KEY_CHARGING_LED_DISABLE, false));
+                intent.putExtra(EXTRA_BLED_CHARGING,
+                        prefs.getString(PREF_KEY_CHARGING_LED, "DEFAULT"));
             } else if (key.equals(PREF_KEY_HEADSET_ACTION_PLUG) ||
                     key.equals(PREF_KEY_HEADSET_ACTION_UNPLUG)) {
                 intent.setAction(ACTION_PREF_HEADSET_ACTION_CHANGED);

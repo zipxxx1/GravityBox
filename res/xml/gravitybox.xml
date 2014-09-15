@@ -1428,11 +1428,12 @@
                 android:summary="@string/pref_flashing_led_disable_summary"
                 android:defaultValue="false" />
 
-            <CheckBoxPreference 
-                android:key="pref_charging_led_disable"
-                android:title="@string/pref_charging_led_disable_title"
-                android:summary="@string/pref_charging_led_disable_summary"
-                android:defaultValue="false" />
+            <ListPreference 
+                android:key="pref_charging_led"
+                android:title="@string/pref_charging_led_title"
+                android:entries="@array/charging_led_entries"
+                android:entryValues="@array/charging_led_values"
+                android:defaultValue="DEFAULT" />
 
             <CheckBoxPreference 
                 android:key="pref_power_proximity_wake"
