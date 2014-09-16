@@ -1566,4 +1566,19 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">電源接続解除時のサウンド</string>
 
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">使う画像の選択</string>
+    <string name="imgpick_choose_error">画像の選択中にエラーが発生しました</string>
+    <string name="imgpick_crop_error">画像の切り取り中にエラーが発生しました</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">近接センサーで起動</string>
+    <string name="pref_power_proximity_wake_summary">近接センサーを使って、画面をオンにするべきか判断するようにします。</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">バッテリー充電時のLED</string>
+    <string name="charging_led_default">デフォルト</string>
+    <string name="charging_led_emulated">エミュレート</string>
+    <string name="charging_led_disabled">無効</string>
+
 </resources>
