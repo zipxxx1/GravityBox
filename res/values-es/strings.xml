@@ -659,6 +659,7 @@
     <string name="pref_statusbar_lock_policy_title">Política de bloqueo de la barra de estado</string>
     <string name="sbl_policy_default">Predeterminado</string>
     <string name="sbl_policy_unlocked">Desbloqueada incluso con PIN/contraseña/patrón</string>
+    <string name="sbl_policy_unlocked_secured">Desbloqueado</string>
     <string name="sbl_policy_locked">Bloqueada</string>
 
     <!-- Data traffic monitor -->
@@ -1583,5 +1584,33 @@
 
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Acción personalizada</string>
+
+     <!-- UNC: main screen -->
+     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+     <string name="pref_unc_default_settings_summary">Administra los ajustes predeterminados de notificaciones para todas las apps que no tengan habilitados los ajustes individuales</string>
+     <string name="pref_unc_perapp_settings_title">Ajustes para apps individuales</string>
+     <string name="pref_unc_perapp_settings_summary">Administra los ajustes de notificaciones individuales sobrescribiendo los predeterminados</string>
+     <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+     <string name="pref_unc_active_screen_summary">Administra los ajustes de Pantalla Activa</string>
+     <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+     <string name="pref_unc_quiet_hours_summary">Administra las horas de silencio en las notificaciones</string>
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Sonido al desconectar cargados</string>
+
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Elegir imagen usando</string>
+    <string name="imgpick_choose_error">Error al elegir imagen</string>
+    <string name="imgpick_crop_error">Error al recortar imagen</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Despertar con proximidad</string>
+    <string name="pref_power_proximity_wake_summary">Usa el sensor de proxomidad para decidir si se despierta el dispositivo</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">LED con bateria cargando</string>
+    <string name="charging_led_default">Predeterminado</string>
+    <string name="charging_led_emulated">Emulado</string>
+    <string name="charging_led_disabled">Desactivado</string>
 
 </resources>
