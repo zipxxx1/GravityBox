@@ -15,7 +15,7 @@
 
 package com.ceco.gm2.gravitybox.shortcuts;
 
-import com.ceco.gm2.gravitybox.ModHwKeys;
+import com.ceco.gm2.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.gm2.gravitybox.R;
 
 import android.content.Context;
@@ -24,7 +24,7 @@ import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
 
 public class AirplaneModeShortcut extends AShortcut {
-    protected static final String ACTION =  ModHwKeys.ACTION_TOGGLE_AIRPLANE_MODE;
+    protected static final String ACTION =  ConnectivityServiceWrapper.ACTION_TOGGLE_AIRPLANE_MODE;
 
     public AirplaneModeShortcut(Context context) {
         super(context);
