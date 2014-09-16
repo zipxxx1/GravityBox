@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
@@ -100,6 +101,7 @@ public class ModHwKeys {
     public static final String ACTION_RECENTS_CLEAR_ALL_SINGLETAP = "gravitybox.intent.action.ACTION_RECENTS_CLEARALL";
     public static final String ACTION_RECENTS_CLEAR_ALL_LONGPRESS = "gravitybox.intent.action.ACTION_RECENTS_CLEARALL_LONGPRESS";
     public static final String ACTION_TOGGLE_QUIET_HOURS = "gravitybox.intent.action.ACTION_TOGGLE_QUIET_HOURS";
+    public static final String ACTION_TOGGLE_AIRPLANE_MODE = "gravitybox.intent.action.TOGGLE_AIRPLANE_MODE";
     public static final String ACTION_INAPP_SEARCH = "gravitybox.intent.action.INAPP_SEARCH";
     public static final String ACTION_SET_RINGER_MODE = "gravitybox.intent.action.SET_RINGER_MODE";
     public static final String EXTRA_RINGER_MODE = "ringerMode";
@@ -347,6 +349,8 @@ public class ModHwKeys {
                         GravityBoxSettings.EXTRA_VK_VIBRATE_PATTERN));
             } else if (action.equals(ACTION_TOGGLE_QUIET_HOURS)) {
                 toggleQuietHours(intent.getStringExtra(QuietHoursActivity.EXTRA_QH_MODE));
+            } else if (action.equals(ACTION_TOGGLE_AIRPLANE_MODE)) {
+                toggleAirplaneMode();
             } else if (action.equals(ACTION_INAPP_SEARCH)) {
                 injectKey(KeyEvent.KEYCODE_SEARCH);
             } else if (action.equals(ACTION_SET_RINGER_MODE)) {
@@ -911,6 +915,7 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_SHOW_BRIGHTNESS_DIALOG);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VK_VIBRATE_PATTERN_CHANGED);
             intentFilter.addAction(ACTION_TOGGLE_QUIET_HOURS);
+            intentFilter.addAction(ACTION_TOGGLE_AIRPLANE_MODE);
             intentFilter.addAction(ACTION_INAPP_SEARCH);
             intentFilter.addAction(ACTION_SET_RINGER_MODE);
             intentFilter.addAction(GravityBoxService.ACTION_TOGGLE_SYNC);
@@ -1656,6 +1661,20 @@ public class ModHwKeys {
                 intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE, mode);
             }
             mGbContext.startService(intent);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    @SuppressLint("NewApi")
+    private static void toggleAirplaneMode() {
+        try {
+            ContentResolver cr = mContext.getContentResolver();
+            boolean enabled = Settings.Global.getInt(cr, Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
+            Settings.Global.putInt(cr, Settings.Global.AIRPLANE_MODE_ON, enabled ? 0 : 1);
+            Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+            intent.putExtra("state", !enabled);
+            mContext.sendBroadcast(intent);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
