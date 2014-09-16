@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -27,11 +28,14 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
 public class PickImageActivity extends Activity {
+    private static final String TEMP_PATH = Environment.getExternalStorageDirectory() + "/GravityBox/temp";
 
     private static final int REQ_PICK_IMAGE = 1;
     private static final int REQ_CROP_IMAGE = 2;
@@ -56,6 +60,7 @@ public class PickImageActivity extends Activity {
     private Point mAspectSize;
     private Point mOutputSize;
     private Point mSpotlightSize;
+    private boolean mIsDestroyed; // API level 16 workaround
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +100,15 @@ public class PickImageActivity extends Activity {
 
     @Override
     public void onDestroy() {
+        mIsDestroyed = true;
         dismissProgressDialog();
         super.onDestroy();
+    }
+
+    @SuppressLint("NewApi")
+    @Override
+    public boolean isDestroyed() {
+        return (Build.VERSION.SDK_INT > 16 ? super.isDestroyed() : mIsDestroyed);
     }
 
     @Override
@@ -183,6 +195,16 @@ public class PickImageActivity extends Activity {
         }
     }
 
+    @Override
+    public File getCacheDir() {
+        File tempDir = new File(TEMP_PATH);
+        if (!(tempDir.exists() && tempDir.isDirectory())) {
+            if (!tempDir.mkdirs())
+                throw new IllegalStateException(getString(R.string.imgpick_create_temp_dir_error)); 
+        }
+        return tempDir;
+    }
+
     private void dismissProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
@@ -211,11 +233,11 @@ public class PickImageActivity extends Activity {
 
         @Override
         protected LoadResult doInBackground(Uri... params) {
-            File outFile = new File(getCacheDir() + "/" + UUID.randomUUID().toString());
             LoadResult result = new LoadResult();
             InputStream in = null;
             FileOutputStream out = null;
             try {
+                File outFile = new File(getCacheDir() + "/" + UUID.randomUUID().toString());
                 in = getContentResolver().openInputStream(params[0]);
                 out = new FileOutputStream(outFile);
                 final byte[] buffer = new byte[1024];
