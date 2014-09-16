@@ -100,6 +100,8 @@ public class ModQuickSettings {
     private static final String CLASS_QS_MODEL = "com.android.systemui.statusbar.phone.QuickSettingsModel";
     private static final String CLASS_QS_MODEL_RCB = "com.android.systemui.statusbar.phone.QuickSettingsModel$RefreshCallback";
     private static final String CLASS_QS_MODEL_STATE = "com.android.systemui.statusbar.phone.QuickSettingsModel.State";
+    private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
+    private static final String CLASS_SETTINGS_PANEL_VIEW = "com.android.systemui.statusbar.phone.SettingsPanelView";
     private static final boolean DEBUG = false;
 
     private static final float STATUS_BAR_SWIPE_VERTICAL_MAX_PERCENTAGE = 0.025f;
@@ -626,6 +628,17 @@ public class ModQuickSettings {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (isQsAccessRestricted()) {
                         param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader, "onTouchEvent",
+                    MotionEvent.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (param.thisObject.getClass().getName().equals(CLASS_SETTINGS_PANEL_VIEW) &&
+                            isQsAccessRestricted()) {
+                        param.setResult(false);
                     }
                 }
             });
