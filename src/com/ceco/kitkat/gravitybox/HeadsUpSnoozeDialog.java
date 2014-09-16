@@ -61,7 +61,7 @@ public class HeadsUpSnoozeDialog extends Dialog implements View.OnClickListener 
         LayoutInflater inflater = LayoutInflater.from(gbContext);
         mView = inflater.inflate(R.layout.dialog_headsup_snooze, null);
         mTimePicker = (TimePicker) mView.findViewById(R.id.timePicker);
-        mTimePicker.setIs24HourView(DateFormat.is24HourFormat(context));
+        mTimePicker.setIs24HourView(true);
         mMessage = (TextView) mView.findViewById(R.id.message);
         mAllApps = (CheckBox) mView.findViewById(R.id.chkAllApps);
         mBtnCancel = (Button) mView.findViewById(R.id.btnCancel);
