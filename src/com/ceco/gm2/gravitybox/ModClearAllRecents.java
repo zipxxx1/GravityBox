@@ -285,6 +285,15 @@ public class ModClearAllRecents {
                         if (DEBUG) log("Broadcast receiver unregistered");
                     }
                 });
+
+                XposedHelpers.findAndHookMethod(recentActivityClass, "forceOpaqueBackground", Context.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        Boolean result = (Boolean)param.getResult();
+                        param.setResult(result && 
+                                !(Boolean) XposedHelpers.callStaticMethod(ActivityManager.class, "isHighEndGfx"));
+                    }
+                });
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
