@@ -1692,5 +1692,9 @@
     <string name="headsup_snooze_all_apps">Pre všetky aplikácie</string>
     <string name="headsup_snooze_app">Nastaviť heads up driemanie pre %s</string>
     <string name="pref_heads_up_snooze_reset_title">Nulovať časovače driemania</string>
+    <string name="pref_heads_up_snooze_timer_title">Predvolený časovač driemania</string>
+    <string name="pref_heads_up_snooze_timer_summary">Časovač, ktorý sa automaticky nastaví po stlačení tlačidla driemania. 
+        Dlhé stlačenie tlačidla driemania zobrazí dialóg pre manuálne zadanie časovača.</string>
+    <string name="headsup_snooze_timer_set">Heads up predvolený časovač driemania nastavený pre %s</string>
 
 </resources>

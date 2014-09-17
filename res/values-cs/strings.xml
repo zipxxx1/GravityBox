@@ -1688,5 +1688,9 @@
     <string name="headsup_snooze_all_apps">Pro všechny aplikace</string>
     <string name="headsup_snooze_app">Nastavit heads up dřímání pro %s</string>
     <string name="pref_heads_up_snooze_reset_title">Nulovat časovače dřímání</string>
+    <string name="pref_heads_up_snooze_timer_title">Výchozí časovač dřímání</string>
+    <string name="pref_heads_up_snooze_timer_summary">Časovač, který se automaticky nastaví po stisknutí tlačítka dřímání. 
+        Dlouhé stisknutí tlačítka dřímání zobrazí dialog pro manuální zadání časovače.</string>
+    <string name="headsup_snooze_timer_set">Heads up výchozí časovač dřímání nastaven pro %s</string>
 
 </resources>
