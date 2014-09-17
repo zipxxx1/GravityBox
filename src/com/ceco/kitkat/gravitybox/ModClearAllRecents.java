@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.Formatter;
 import android.util.TypedValue;
@@ -35,6 +36,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -46,6 +49,7 @@ import android.widget.TextView;
 import com.ceco.kitkat.gravitybox.R;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -65,6 +69,7 @@ public class ModClearAllRecents {
     private static int mClearRecentsMode;
     private static Activity mRecentsActivity;
     private static Handler mFinishHandler;
+    private static Unhook mAddPrivateFlagsHook;
 
     // RAM bar
     private static TextView mBackgroundProcessText;
@@ -266,6 +271,31 @@ public class ModClearAllRecents {
                     mRecentsActivity.unregisterReceiver(mBroadcastReceiver);
                     mFinishHandler.postDelayed(mFinishRunnable, 500);
                     if (DEBUG) log("Broadcast receiver unregistered");
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(recentActivityClass, "onCreate", Bundle.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    final Window w = ((Activity) param.thisObject).getWindow();
+                    mAddPrivateFlagsHook = XposedHelpers.findAndHookMethod(
+                            Window.class, "addPrivateFlags", int.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                            if (param.thisObject == w) {
+                                param.setResult(null);
+                            }
+                        }
+                    });
+                    w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                    w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                }
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mAddPrivateFlagsHook != null) {
+                        mAddPrivateFlagsHook.unhook();
+                        mAddPrivateFlagsHook = null;
+                    }
                 }
             });
         } catch (Throwable t) {
