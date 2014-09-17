@@ -1705,5 +1705,9 @@
     <string name="headsup_snooze_all_apps">Ativar em todas as aplicações</string>
     <string name="headsup_snooze_app">Definir temporizador para adiamento de %s</string>
     <string name="pref_heads_up_snooze_reset_title">Limpar temporizadores</string>
+    <string name="pref_heads_up_snooze_timer_title">Temporizador por defeito</string>
+    <string name="pref_heads_up_snooze_timer_summary">Permite definir o temporizador por defeito a aplicar automaticamente ao carregar para adiar a notificação. 
+        Ao manter pressionado o botão de adiamento é possível escolher um temporizador costumizado.</string>
+    <string name="headsup_snooze_timer_set">Temporizador por defeito das notificações definido por %s</string>
 
 </resources>
