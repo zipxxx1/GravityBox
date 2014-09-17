@@ -25,17 +25,18 @@ import android.widget.TimePicker;
 public class TimePreference extends DialogPreference {
     private TimePicker mPicker = null;
     private int mValue;
+    private boolean mTimerMode;
 
     public TimePreference(Context context) {
         this(context, null);
     }
 
     public TimePreference(Context ctxt, AttributeSet attrs) {
-        this(ctxt, attrs, 0);
-    }
+        super(ctxt, attrs);
 
-    public TimePreference(Context ctxt, AttributeSet attrs, int defStyle) {
-        super(ctxt, attrs, defStyle);
+        if (attrs != null) {
+            mTimerMode = attrs.getAttributeBooleanValue(null, "timerMode", false);
+        }
 
         setPositiveButtonText(android.R.string.ok);
         setNegativeButtonText(android.R.string.cancel);
@@ -44,7 +45,7 @@ public class TimePreference extends DialogPreference {
     @Override
     protected View onCreateDialogView() {
         mPicker = new TimePicker(getContext());
-        mPicker.setIs24HourView(DateFormat.is24HourFormat(getContext()));
+        mPicker.setIs24HourView(mTimerMode || DateFormat.is24HourFormat(getContext()));
         return mPicker;
     }
 
@@ -91,8 +92,12 @@ public class TimePreference extends DialogPreference {
 
     @Override
     public CharSequence getSummary() {
-        int hours = (int) (mValue / 60);
-        int minutes = mValue - hours*60;
-        return (String.format("%02d:%02d", hours, minutes));
+        if (super.getSummary() != null) {
+            return super.getSummary();
+        } else {
+            int hours = (int) (mValue / 60);
+            int minutes = mValue - hours*60;
+            return (String.format("%02d:%02d", hours, minutes));
+        }
     }
 }

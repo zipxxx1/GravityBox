@@ -773,6 +773,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HEADS_UP_SNOOZE = "pref_heads_up_snooze";
     public static final String PREF_KEY_HEADS_UP_SNOOZE_RESET = "pref_heads_up_snooze_reset";
     public static final String ACTION_HEADS_UP_SNOOZE_RESET = "gravitybox.intent.action.HEADS_UP_SNOOZE_RESET";
+    public static final String PREF_KEY_HEADS_UP_SNOOZE_TIMER = "pref_heads_up_snooze_timer";
 
     public static final String PREF_KEY_HEADSET_ACTION_PLUG = "pref_headset_action_plug";
     public static final String PREF_KEY_HEADSET_ACTION_UNPLUG = "pref_headset_action_unplug";

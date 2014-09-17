@@ -1727,5 +1727,9 @@
     <string name="headsup_snooze_all_apps">Set for all apps</string>
     <string name="headsup_snooze_app">Set heads up snooze timer for %s</string>
     <string name="pref_heads_up_snooze_reset_title">Reset snooze timers</string>
+    <string name="pref_heads_up_snooze_timer_title">Default snooze timer</string>
+    <string name="pref_heads_up_snooze_timer_summary">Timer to be set automatically when heads up snooze icon is clicked. 
+        Long-press on heads up snooze icon opens custom timer dialog.</string>
+    <string name="headsup_snooze_timer_set">Heads up default snooze timer set for %s</string>
 
 </resources>

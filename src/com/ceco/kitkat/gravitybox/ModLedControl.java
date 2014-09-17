@@ -54,6 +54,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
@@ -521,7 +522,7 @@ public class ModLedControl {
                     intentFilter.addAction(GravityBoxSettings.ACTION_HEADS_UP_SNOOZE_RESET);
                     context.registerReceiver(mSystemUiBroadcastReceiver, intentFilter);
                     mHeadsUpSnoozeBtn = addSnoozeButton((ViewGroup) XposedHelpers.getObjectField(
-                            param.thisObject, "mHeadsUpNotificationView"));
+                            param.thisObject, "mHeadsUpNotificationView"), prefs);
                 }
             });
 
@@ -863,9 +864,9 @@ public class ModLedControl {
         }
     }
 
-    private static ImageButton addSnoozeButton(ViewGroup vg) throws Throwable {
+    private static ImageButton addSnoozeButton(ViewGroup vg, final XSharedPreferences prefs) throws Throwable {
         final Context context = vg.getContext();
-        Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+        final Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
         mHeadsUpSnoozeDlg = new HeadsUpSnoozeDialog(context, gbContext, mHeadsUpSnoozeTimerSetListener);
         mHeadsUpSnoozeMap = new HashMap<String, Long>();
         mHeadsUpSnoozeMap.put("[ALL]", 0l);
@@ -884,7 +885,20 @@ public class ModLedControl {
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String pkgName = mHeadsUpSnoozeDlg.getPackageName();
+                if (pkgName != null) {
+                    long millis = prefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_SNOOZE_TIMER, 60) * 60000;
+                    mHeadsUpSnoozeTimerSetListener.onHeadsUpSnoozeTimerSet(pkgName, millis);
+                    Toast.makeText(context, String.format(gbContext.getString(R.string.headsup_snooze_timer_set),
+                            mHeadsUpSnoozeDlg.getAppName()), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        imgButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
                 mHeadsUpSnoozeDlg.show();
+                return true;
             }
         });
         return imgButton;

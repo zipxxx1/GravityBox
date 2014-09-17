@@ -41,6 +41,7 @@ public class HeadsUpSnoozeDialog extends Dialog implements View.OnClickListener 
     private Button mBtnCancel;
     private Button mBtnOk;
     private String mPkgName;
+    private String mAppName;
     HeadsUpSnoozeTimerSetListener mListener;
 
     public interface HeadsUpSnoozeTimerSetListener {
@@ -74,13 +75,21 @@ public class HeadsUpSnoozeDialog extends Dialog implements View.OnClickListener 
 
     public void setPackageName(String pkgName) {
         mPkgName = pkgName;
-        String appName = mPkgName;
+        mAppName = mPkgName;
         try {
             PackageManager pm = getContext().getPackageManager();
             ApplicationInfo appInfo = pm.getApplicationInfo(pkgName, 0);
-            appName = (String) appInfo.loadLabel(pm);
+            mAppName = (String) appInfo.loadLabel(pm);
         } catch (NameNotFoundException e) { }
-        mMessage.setText(String.format(mGbContext.getString(R.string.headsup_snooze_app), appName));
+        mMessage.setText(String.format(mGbContext.getString(R.string.headsup_snooze_app), mAppName));
+    }
+
+    public String getPackageName() {
+        return mPkgName;
+    }
+
+    public String getAppName() {
+        return mAppName;
     }
 
     @Override
