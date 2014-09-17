@@ -317,8 +317,14 @@ public class ModLockscreen {
                     final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     final Resources res = context.getResources();
                     mGlowPadView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowPadView");
-                    XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "showTargets",
-                            boolean.class, glowPadViewShowTargetsHook);
+                    if (Utils.isXperiaDevice()) {
+                    	XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "showTargets",
+                                boolean.class, int.class, glowPadViewShowTargetsHook);
+                    }
+                    else {
+                    	XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "showTargets",
+                                boolean.class, glowPadViewShowTargetsHook);
+                    }
                     XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "hideTargets",
                             boolean.class, boolean.class, glowPadViewHideTargetsHook);
                     XposedHelpers.findAndHookMethod(mGlowPadView.getClass(), "switchToState", 
