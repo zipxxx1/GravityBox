@@ -1,3 +1,25 @@
+Changelog 3.4.3 - 18/09/2014
+--------------------------------------
+- Lockscreen status bar lock policy:
+--- don't force access restriction to quick settings when policy in GB is other than "Unlocked"
+--- restrict access to QS also for apps that run on top of secured lock screen (e.g. Camera or 3rd party lock screens)
+--- fixed QS access restriction on tablet UI
+- Heads up snooze:
+--- always use 24h format for snooze timer picker
+--- added option for default snooze timer
+------ default snooze timer is set automatically when heads up snooze icon is pressed
+------ custom snooze timer dialog is open when heads up snooze icon is long-pressed
+- Recents panel:
+--- statusbar/navbar always translucent by default (no option)
+--- allow live wallpaper on high end GFX devices (no option)
+- Ring targets: adjusted for compatibility with Xperia (thanks to laguCool)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Polish translations (thanks to xtrem007)
+- Updated French translation (thanks to ch-vox)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+
 Changelog 3.4.2 - 14/09/2014
 --------------------------------------
 - GB settings: 
