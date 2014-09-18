@@ -544,10 +544,10 @@
     <string name="pref_qs_tile_behaviour_override_summary">交换单击/长按行为，并增加\'更改时隐藏\'选定磁贴的支持（需要重新启动）</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">网络模式磁贴 SIM 卡插槽</string>
-    <string name="pref_qs_network_mode_sim_slot_summary">定义网络模式磁贴对应的 SIM 卡插槽（%s）</string>
-    <string name="sim_slot1">SIM 卡插槽 1</string>
-    <string name="sim_slot2">SIM 卡插槽 2</string>
+    <string name="pref_qs_network_mode_sim_slot_title">网络模式磁贴SIM卡插槽</string>
+    <string name="pref_qs_network_mode_sim_slot_summary">定义网络模式磁贴对应的SIM卡插槽（%s）</string>
+    <string name="sim_slot1">SIM卡1</string>
+    <string name="sim_slot2">SIM卡2</string>
 
     <!-- Intelligent pie -->
     <string name="pie_controls_disabled">从不</string>
@@ -598,6 +598,7 @@
     <string name="pref_statusbar_lock_policy_title">状态栏锁定策略</string>
     <string name="sbl_policy_default">默认</string>
     <string name="sbl_policy_unlocked">不安全锁定时可以解锁</string>
+    <string name="sbl_policy_unlocked_secured">已解锁</string>
     <string name="sbl_policy_locked">锁定</string>
 
     <!-- Data traffic monitor -->
@@ -1709,6 +1710,26 @@
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">使用选择的图像</string>
     <string name="imgpick_choose_error">选择的图像错误</string>
-    <string name="imgpick_crop_error">裁剪图像错误</string>
+    <string name="imgpick_crop_error">剪裁图像错误</string>
+    
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">靠近唤醒</string>
+    <string name="pref_power_proximity_wake_summary">使用接近传感器以帮助决定是否需要唤醒设备</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">电池充电指示灯</string>
+    <string name="charging_led_default">默认</string>
+    <string name="charging_led_emulated">模拟</string>
+    <string name="charging_led_disabled">禁用</string>
+
+    <!-- Heads up snooze timer -->
+    <string name="pref_heads_up_snooze_title">开启贪睡按钮</string>
+    <string name="headsup_snooze_all_apps">为所有应用程序</string>
+    <string name="headsup_snooze_app">对%s浮动通知设置贪睡定时器</string>
+    <string name="pref_heads_up_snooze_reset_title">复位贪睡定时器</string>
+    <string name="pref_heads_up_snooze_timer_title">默认贪睡定时器</string>
+    <string name="pref_heads_up_snooze_timer_summary">点击浮动通知图标将自动设置贪睡定时器 
+	长按浮动通知图标打开贪睡定时器自定义对话框</string>
+    <string name="headsup_snooze_timer_set">默认为%s浮动通知设置贪睡定时器</string>
 
 </resources>
