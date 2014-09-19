@@ -1551,6 +1551,7 @@
     <string name="imgpick_dialog_title">Vybrať obrázok pomocou</string>
     <string name="imgpick_choose_error">Chyba počas vyberania obrázku</string>
     <string name="imgpick_crop_error">Chyba počas orezania obrázku</string>
+    <string name="imgpick_create_temp_dir_error">Chyba vytvorenia adresára pre dočasné súbory</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Zabrániť nechcenému prebudeniu</string>
