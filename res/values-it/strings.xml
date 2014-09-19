@@ -644,8 +644,9 @@
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">Regole di blocco barra di stato</string>
     <string name="sbl_policy_default">Predefinito</string>
-    <string name="sbl_policy_unlocked">Sbloccato se la tastiera è sbloccata</string>
-    <string name="sbl_policy_locked">Bloccato</string>
+    <string name="sbl_policy_unlocked">Sbloccata se la tastiera è sbloccata</string>
+    <string name="sbl_policy_unlocked_secured">Sbloccata</string>
+    <string name="sbl_policy_locked">Bloccata</string>
 
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Contatore traffico dati</string>
@@ -1591,5 +1592,20 @@
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Suono disinserimento cavo</string>
+
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Scegli immagine da</string>
+    <string name="imgpick_choose_error">Errore nella scelta immagine</string>
+    <string name="imgpick_crop_error">Errore nel ritagliare immagine</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Accensione con sensore prossimità</string>
+    <string name="pref_power_proximity_wake_summary">Usa i sensori di prossimità per aiutarti a decidere se svegliare o meno il dispositivo</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">LED batteria in carica</string>
+    <string name="charging_led_default">Predefinito</string>
+    <string name="charging_led_emulated">Attivo</string>
+    <string name="charging_led_disabled">Disattivo</string>
 
 </resources>
