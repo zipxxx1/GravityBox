@@ -15,6 +15,7 @@ Changelog 3.4.0 - 19/09/2014
 ------ whether led is constantly ON or "breathing" depends on LED driver (cannot be affected by GB)
 --- button backlight notifications adjusted to follow Pulse notification delay  
 - Power tweaks: added option for proximity wake up (prevents accidental wake up) (Android 4.2+ only)
+- Recents panel: allow live wallpaper on high end GFX devices (no option; Android 4.2+ only)
 - Updated Japanese translation (thanks to WedyDQ10)
 - Updated French translation (thanks to ch-vox)
 - Updated Chinese (Simplified) translation (thanks to liveasx)
