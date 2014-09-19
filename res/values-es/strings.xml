@@ -1719,5 +1719,10 @@
     <string name="headsup_snooze_all_apps">Establecer para todas las apps</string>
     <string name="headsup_snooze_app">No molestar durante %s</string>
     <string name="pref_heads_up_snooze_reset_title">Restablecer tiempo de No molestar</string>
+    
+    <string name="pref_heads_up_snooze_timer_title">Tiempo de No molestar predeterminado</string>
+    <string name="pref_heads_up_snooze_timer_summary">Tiempo a establecer automáticamente cuando se pulsa el icono de No molestar en la notificación Heads up. 
+        Una pulsación prolongada sobre dicho icono abre el diálogo para cambiar el tiempo.</string>
+    <string name="headsup_snooze_timer_set">El tiempo predeterminado de No molestar en Heads up es de %s</string>
  
 </resources>
