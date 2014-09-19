@@ -1595,6 +1595,7 @@
     <string name="imgpick_dialog_title">Escolher imagem utilizando</string>
     <string name="imgpick_choose_error">Erro ao escolher imagem</string>
     <string name="imgpick_crop_error">Erro ao cortar imagem</string>
+    <string name="imgpick_create_temp_dir_error">Erro ao criar directoria temporária</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Ligar através da proximidade</string>
