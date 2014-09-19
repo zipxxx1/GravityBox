@@ -1709,7 +1709,11 @@
     <!-- Heads up snooze timer -->
     <string name="pref_heads_up_snooze_title">啟用延後通知計時器</string>
     <string name="headsup_snooze_all_apps">套用至所有通知</string>
-    <string name="headsup_snooze_app">套用延後通知計時器至 %s</string>
+    <string name="headsup_snooze_app">已套用延後通知計時器至 %s</string>
     <string name="pref_heads_up_snooze_reset_title">重設延後通知計時器</string>
+    <string name="pref_heads_up_snooze_timer_title">預設延後通知計時器</string>
+    <string name="pref_heads_up_snooze_timer_summary">設定當您點擊延後通知按鈕時自動套用的計時器長度
+	(長按延後通知按鈕亦可自設延後通知計時器長度)</string>
+    <string name="headsup_snooze_timer_set">已套用預設延後通知計時器至 %s</string>
 
 </resources>
