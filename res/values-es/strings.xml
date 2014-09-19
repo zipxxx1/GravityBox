@@ -659,7 +659,7 @@
     <string name="pref_statusbar_lock_policy_title">Política de bloqueo de la barra de estado</string>
     <string name="sbl_policy_default">Predeterminado</string>
     <string name="sbl_policy_unlocked">Desbloqueada incluso con PIN/contraseña/patrón</string>
-    <string name="sbl_policy_unlocked_secured">Desbloqueado</string>
+    <string name="sbl_policy_unlocked_secured">Desbloqueada</string>
     <string name="sbl_policy_locked">Bloqueada</string>
 
     <!-- Data traffic monitor -->
@@ -1602,6 +1602,7 @@
     <string name="imgpick_dialog_title">Elegir imagen usando</string>
     <string name="imgpick_choose_error">Error al elegir imagen</string>
     <string name="imgpick_crop_error">Error al recortar imagen</string>
+    <string name="imgpick_create_temp_dir_error">Error al crear el directorio temporal</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Despertar con proximidad</string>
