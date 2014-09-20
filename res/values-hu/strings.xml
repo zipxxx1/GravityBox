@@ -1403,7 +1403,7 @@
 
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktív Képernyő</string>
-    <string name="lc_active_screen_info">Az Aktív Képernyő funkció minden alkalommal automatikusan bekapcsolja a kijelzőt új értesítés érkezésekor. Csak abban az esetben aktiválódik, ha a képernyő nincs eltakarva (pl. ha a készülék nincs zsebben). Opcionálisan lenyitja az értesítések panelt az aktuális zárképernyő biztonsági házirend és felhasználói beállításoktól függően. Ne feledje, hogy az Aktív Képernyő működéséhez a zárképernyőt engedélyeznie kell.\nA lenti kapcsoló a főkapcsoló. Engedélyezés után további, alkalmazásonkénti konfiguráció lehetséges.</string>
+    <string name="lc_active_screen_info">Az Aktív Képernyő funkció minden alkalommal automatikusan bekapcsolja a kijelzőt új értesítés érkezésekor. Csak abban az esetben aktiválódik, ha a képernyő nincs eltakarva (pl. ha a készülék nincs zsebben). Opcionálisan lenyitja az értesítések panelt vagy lebegő felugró értesítést mutat az aktuális zárképernyő biztonsági házirend és felhasználói beállításoktól függően. Ne feledje, hogy az Aktív Képernyő működéséhez a zárképernyőt engedélyeznie kell.\nA lenti kapcsoló a főkapcsoló. Engedélyezés után további, alkalmazásonkénti konfiguráció lehetséges.</string>
     <string name="lc_active_screen_switch_title">Aktív Képernyő engedélyezése</string>
     <string name="lc_expand_notification_panel_title">Értesítési panel lenyitása</string>
 
@@ -1511,6 +1511,205 @@
     <string name="battery_style_circle_dashed_percent">Szaggatott kör akkumlátor százalékkal</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Köszönöm a támogatását. A prémium funkciók a Gravitybox újraindítása után kerülnek feloldásra.</string>
+    <string name="premium_unlocked_message">Köszönöm a támogatást. A prémium funkciók a GravityBox újraindítása után kerülnek feloldásra. Győződjön meg arról, hogy a GravityBox Feloldó (Unlocker) legalább 120 percig telepítve van.</string>
+    <string name="pref_about_get_unlocker_title">Feloldó beszerzése</string>
+    <string name="pref_about_get_unlocker_summary">Nincs PayPal fiókja? Csak érintsen ide a GravityBox prémium funkciók feloldójának a Play Áruházból való beszerzéséhez</string>
+
+    <!-- Navbar custom key: alternate icon -->
+    <string name="pref_navbar_custom_key_icon_title">Alternatív ikon használata</string>
+
+    <!-- QS: swipe to Quick Settings -->
+    <string name="pref_qs_swipe_enable_title">Csúsztatás a GyorsBeállításokhoz</string>
+
+    <!-- Smart Radio: ignore mobile data availability -->
+    <string name="pref_smart_radio_mda_ignore_title">Mobil adatforgalom elérhetőségének figyelmen kívül hagyása</string>
+    <string name="pref_smart_radio_mda_ignore_summary">Normál módba vált akkor is, ha a mobil adatforgalom jelenleg nem elérhető</string>
+
+    <!-- GB Actions: Toggle sync -->
+    <string name="shortcut_sync">Szinkronizáció ki-bekapcsolása</string>
+
+    <!-- UNC: timeout for Alert only once -->
+    <string name="pref_lc_notif_sound_only_once_timeout_title">Időtartamon belül</string>
+
+    <!-- Statusbar clock: show date -->
+    <string name="pref_statusbar_clock_date_title">Dátum mutatása</string>
+
+    <!-- Delete -->
+    <string name="delete">Törlés</string>
+
+    <!-- Lockscreen: disable emergency call button -->
+    <string name="pref_lockscreen_disable_ecb_title">Segélyhívó gomb letiltása</string>
+    <string name="pref_lockscreen_disable_ecb_summary">CSAK SAJÁT FELELŐSSÉGRE!!!</string>
+
+    <!-- AppPicker: icon pick cancelled -->
+    <string name="app_picker_icon_pick_cancelled">Ikon kiválasztás törölve lett a célalkalmazás által</string>
+
+    <!-- QS: Compass tile -->
+    <string name="qs_tile_compass">Iránytű</string>
+    <string name="quick_settings_compass_off">Iránytű kikapcsolva</string>
+    <string name="quick_settings_compass_init">Inicializálás&#8230;</string>
+    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
+
+    <!-- Cardinal directions -->
+    <string name="cd_north">É</string>
+    <string name="cd_north_east">ÉK</string>
+    <string name="cd_east">K</string>
+    <string name="cd_south_east">DK</string>
+    <string name="cd_south">D</string>
+    <string name="cd_south_west">DNY</string>
+    <string name="cd_west">NY</string>
+    <string name="cd_north_west">ÉNY</string>
+
+    <!-- Pie: mirrored keys -->
+    <string name="pref_pie_control_mirrored_keys_title">Tükörfordított gombok</string>
+
+    <!-- Pie: center trigger -->
+    <string name="pref_pie_control_center_trigger_title">Kioldás középről</string>
+    <string name="pref_pie_control_center_trigger_summary">Csak akkor mutatja a Pie vezérlőket, ha a képernyő közepéről történik a csúsztatás</string>
+
+    <!-- Statusbar clock: date format options -->
+    <string name="clock_date_disabled">Letiltva</string>
+    <string name="clock_date_localized">Dátum formátum lokalizáció alapján</string>
+    <string name="clock_date_format_1">Dátum formátum: nn/HH</string>
+    <string name="clock_date_format_2">Dátum formátum: HH/nn</string>
+    <string name="clock_date_format_3">Dátum formátum: n HHH</string>
+    <string name="clock_date_format_4">Dátum formátum: HHH n</string>
+    <string name="clock_date_format_5">Dátum formátum: n</string>
+
+    <!-- Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_settings_title">Akkumulátor csempe beállítások</string>
+    <string name="pref_qs_battery_extended_title">Kibővített akkumulátor csempe</string>
+    <string name="pref_qs_battery_extended_summary">Újraindítás szükséges</string>
+    <string name="pref_qs_battery_temp_unit_title">Hőmérséklet mértékegysége</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <!-- Headset plug/unplug actions -->
+    <string name="pref_cat_headset_actions_title">Fejhallgató műveletek</string>
+    <string name="pref_headset_action_plug_title">Fejhallagtó csatlakoztatásakor</string>
+    <string name="pref_headset_action_unplug_title">Fejhallgató lecsatlakoztatásakor</string>
+
+    <!-- Quiet Hours: mute vibrations -->
+    <string name="pref_lc_qh_mute_vibe_title">Rezgések némítésa</string>
+
+    <!-- Quiet Hours: interactive mode -->
+    <string name="pref_lc_qh_interactive_title">Interaktív mód</string>
+    <string name="pref_lc_qh_interactive_summary">Mindig csendben tartja az értesítéseket felhasználói interakció során (figyelembe véve az alkalmazásonkénti figyelmen kívül hagyási szabályokat)</string>
+
+    <!-- Screenshot delete -->
+    <string name="pref_screenshot_delete_title">Képernyőkép törlés engedélyezése</string>
+
+    <!-- UNC: heads up mode -->
+    <string name="pref_lc_headsup_mode_title">"Lebegő felugró ablak" mód</string>
+    <string name="lc_heads_up_default">Alapértelmezett</string>
+    <string name="lc_heads_up_always">Mindig</string>
+    <string name="lc_heads_up_immersive">Rejtett értesítési sáv esetén</string>
+    <string name="lc_heads_up_off">Kikapcsolva</string>
+
+    <!-- Statusbar: notification heads up category -->
+    <string name="pref_cat_notif_heads_up_title">Értesítések lebegő felugró ablakban</string>
+    <string name="pref_heads_up_master_switch_summary">Aktiválja a szabvány AOSP lebegő, felül megjelenő ablak funkciót. Amikor engedélyezve van, további alkalmazásonkénti opció válik elérhetővé az Értesítés vezérlésben. (újraindítás szükséges)</string>
+    <string name="pref_heads_up_one_finger_title">Egy ujjas kiterjesztés</string>
+    <string name="pref_heads_up_timeout_title">Időtúllépés</string>
+    <string name="pref_heads_up_timeout_summary">Mennyi ideig mutassa az értesítési ablakot. 0 = folyamatosan.</string>
+
+    <!-- UNC HeadsUp category + additional options -->
+    <string name="pref_cat_lc_heads_up_title">Lebegő felugró ablak</string>
+    <string name="pref_lc_headsup_expanded_title">Kiterjesztve mutat</string>
+    <string name="pref_lc_headsup_dnd_title">Ne zavarjon</string>
+    <string name="pref_lc_headsup_dnd_summary">Nem mutat egyetlen lebegő felugró ablakot sem, amíg ez az alkalmazás az előtérben fut</string>
+
+    <!-- Navbar keys: enable Android L icons -->
+    <string name="pref_navbar_android_l_icons_enable_title">Android L navigációs gomb ikonok engedélyezése</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Lecseréli a gyári navigációs ikonokat az Android L-ből származóakra (újraindítás szükséges)</string>
+
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Aktív Képernyő mód</string>
+    <string name="lc_active_screen_mode_disabled">Letiltva</string>
+    <string name="lc_active_screen_mode_nothing">Csak bekapcsolt képernyőnél</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
+
+    <!-- QS: Remote display tile -->
+    <string name="qs_tile_remote_display">Távoli kijelző</string>
+
+    <!-- UNC: main screen -->
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">Minden olyan alkalmazás alapértelmezett értesítés beállításainak kezelése, melynek nincs engedélyezve alkalmazásfüggő beállítása</string>
+    <string name="pref_unc_perapp_settings_title">Alkalmazásonkénti beállítások</string>
+    <string name="pref_unc_perapp_settings_summary">Értesítések beállításainak alkalmazásonkénti kezelése az alapértelmezett beállítások felülírásával</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">Aktív képernyő gyakori beállításainak kezelése</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">Csendes Időszak értesítéseinek kezelése</string>
+
+    <!-- Key actions: custom action -->
+    <string name="hwkey_action_custom">Egyéni művelet</string>
+
+    <!-- UNC Active Screen: heads up timeout -->
+    <string name="pref_unc_as_headsup_timeout_title">Lebegő felugró ablak Időtúllépés</string>
+    <string name="pref_unc_as_headsup_timeout_summary">Mennyi ideig mutassa az értesítési ablakot. 0 = amíg a feloldás aktív.</string>
+
+    <!-- UNC Active Screen: heads up position -->
+    <string name="pref_unc_as_headsup_position_title">Lebegő felugró ablak pozíció</string>
+    <string name="headsup_position_top">Fent</string>
+    <string name="headsup_position_center">Középen</string>
+    <string name="headsup_position_bottom">Alul</string>
+
+    <!-- QS: support for MSIM -->
+    <string name="qs_tile_data_usage_2">Adathasználat 2</string>
+
+    <!-- MSIM Signal Cluster: auto-hide signal icons -->
+    <string name="pref_signal_icon_autohide_title">Jelszint ikonok automatikus elrejtése</string>
+    <string name="pref_signal_icon_autohide_summary">Automatikusan elrejti a jelszint ikonokat, ha nincs SIM kártya behelyezve (újraindítás szükséges)</string>
+
+    <!-- Heads Up: Transparency level -->
+    <string name="pref_heads_up_alpha_title">Átlátszóság szint</string>
+
+    <!-- Charger unplugged sound -->
+    <string name="pref_charger_unplugged_sound_title">Töltő lecsatlakoztatás hang</string>
+
+    <!-- Fake ID patch -->
+    <string name="pref_patch_fake_id_title"> Fake ID sebezhetőség javítás</string>
+    <string name="pref_patch_fake_id_summary">Vedd figyelembe, hogy a biztonsági szkennerek nem képesek felismerni a Gravitybox-tól érkező javítást, ezért nem fogják jelezni a javítást annak ellenére, hogy a javítás engedélyezve van (újraindítás szükséges)</string>
+
+    <!-- MTK tiles: Audio profile -->
+    <string name="qs_tile_audio_profile">Audió Profilok</string>
+
+    <!-- MTK specific fixes category -->
+    <string name="pref_cat_mtk_fixes_title">MTK specifikus javítások</string>
+    <string name="pref_cat_mtk_fixes_summary">Általános MediaTek specifikus javításokat tartalmaz. Csak akkor használd, ha szükséges.</string>
+
+    <!-- MTK Advanced Developer Options -->
+    <string name="pref_mtk_fix_dev_opts_title">Fejlett fejlesztői beállítások</string>
+    <string name="pref_mtk_fix_dev_opts_summary">Feloldja a fejlett fejlesztői beállításokat (újraindítás szükséges)</string>
+
+    <!-- MTK Fix speech settings -->
+    <string name="pref_mtk_fix_tts_settings_title">Beszéd beállítások javítása</string>
+    <string name="pref_mtk_fix_tts_settings_summary">Feloldja a hangalapú keresést és a szövegfelolvasó beállításokat a Nyelv és bevitel menüben (újraindítás szükséges)</string>
+
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Képkiválasztás</string>
+    <string name="imgpick_choose_error">Hiba történt a kép kiválasztása során</string>
+    <string name="imgpick_crop_error">iba történt a kép kivágás során</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Ébresztés közelség érzékelővel</string>
+    <string name="pref_power_proximity_wake_summary">Közelség érzékelő használatával segíti eldönteni a készülék a felébresztés szükségességét</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">Akkumulátor töltés LED</string>
+    <string name="charging_led_default">Alapértelmezett</string>
+    <string name="charging_led_emulated">Emulált</string>
+    <string name="charging_led_disabled">Letiltva</string>
+
+    <!-- Heads up snooze timer -->
+    <string name="pref_heads_up_snooze_title">Szundi gomb engedélyezése</string>
+    <string name="headsup_snooze_all_apps">Beállítás minden alkalmazáshoz</string>
+    <string name="headsup_snooze_app">Beállítja a Lebegő felugró ablak szundi időzítőjét %s-re</string>
+    <string name="pref_heads_up_snooze_reset_title">Szundi időzítő visszaállítása</string>
+    <string name="pref_heads_up_snooze_timer_title">Alapértelmezett szundi időzítő</string>
+    <string name="pref_heads_up_snooze_timer_summary">Az időzítő automatikusan beállításra kerül a lebegő felugró ablak szundi gombjára történő kattintással. Hosszú érintéssel a gombra kattintva az egyéni időzítő panel kerül megnyitásra.</string>
+    <string name="headsup_snooze_timer_set">Lebegő felugró ablak szundi időzítő beállítva %s-ra</string>
 
 </resources>
