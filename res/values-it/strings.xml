@@ -598,6 +598,7 @@
     <string name="pref_statusbar_lock_policy_title">Regole di blocco barra di stato</string>
     <string name="sbl_policy_default">Predefinito</string>
     <string name="sbl_policy_unlocked">Sbloccata se la tastiera è sbloccata</string>
+    <string name="sbl_policy_unlocked_secured">Sbloccata</string>
     <string name="sbl_policy_locked">Bloccata</string>
 
     <!-- Data traffic monitor -->
@@ -1690,5 +1691,45 @@
     <string name="pref_patch_fake_id_title">Patch vulnerabilità Fake ID</string>
     <string name="pref_patch_fake_id_summary">Nota bene, i programmi di scansione malware non sono in grado di rilevare la patch applicata da GravityBox, 
         rileveranno quindi la vulnerabilità come ancora presente, nonostante essa sia effettivamente risolta (richiede riavvio)</string>
+
+    <!-- MTK tiles: Audio profile -->
+    <string name="qs_tile_audio_profile">Profili audio</string>
+
+    <!-- MTK specific fixes category -->
+    <string name="pref_cat_mtk_fixes_title">Soluzioni specifiche per MTK</string>
+    <string name="pref_cat_mtk_fixes_summary">Colma alcune lacune dei dispositivi MediaTek. Usa solo se necessario.</string>
+
+    <!-- MTK Advanced Developer Options -->
+    <string name="pref_mtk_fix_dev_opts_title">Sblocca opzioni sviluppatore</string>
+    <string name="pref_mtk_fix_dev_opts_summary">Visualizza le opzioni sviluppatore tra le impostazioni telefono (richiede riavvio)</string>
+
+    <!-- MTK Fix speech settings -->
+    <string name="pref_mtk_fix_tts_settings_title">Sblocca impostazioni </string>
+    <string name="pref_mtk_fix_tts_settings_summary">Visualizza le impostazioni della ricerca vocale e dell\'output vocale in Lingua e immissione (richiede riavvio)</string>
+
+    <!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Scegli immagine da</string>
+    <string name="imgpick_choose_error">Errore nella scelta immagine</string>
+    <string name="imgpick_crop_error">Errore nel ritagliare immagine</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Accensione con sensore prossimità</string>
+    <string name="pref_power_proximity_wake_summary">Usa i sensori di prossimità per aiutarti a decidere se svegliare o meno il dispositivo</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">LED batteria in carica</string>
+    <string name="charging_led_default">Predefinito</string>
+    <string name="charging_led_emulated">Attivo</string>
+    <string name="charging_led_disabled">Disattivo</string>
+
+    <!-- Heads up snooze timer -->
+    <string name="pref_heads_up_snooze_title">Nascondi con pulsante</string>
+    <string name="headsup_snooze_all_apps">Imposta per tutte le app</string>
+    <string name="headsup_snooze_app">Nascondi le notifiche a comparsa per %s</string>
+    <string name="pref_heads_up_snooze_reset_title">Reimposta valori ritardo predefiniti</string>
+    <string name="pref_heads_up_snooze_timer_title">Valore ritardo predefinito</string>
+    <string name="pref_heads_up_snooze_timer_summary">La notifica a comparsa viene nascosta automaticamente se si tocca una sola volta l\'apposita icona. 
+        Per decidere per quanto nascondere una notifca a comparsa, tenere premuto sull\'apposita icona.</string>
+    <string name="headsup_snooze_timer_set">Le notifiche a comparsa saranno nascoste di default per %s</string>
 
 </resources>
