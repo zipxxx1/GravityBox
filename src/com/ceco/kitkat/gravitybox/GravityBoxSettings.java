@@ -259,6 +259,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_STATUSBAR_LOCK_POLICY = "statusbarLockPolicy";
     public static final String PREF_KEY_LOCKSCREEN_DISABLE_ECB = "pref_lockscreen_disable_ecb";
 
+    public static final String PREF_CAT_KEY_POWER = "pref_cat_power";
+    public static final String PREF_CAT_KEY_POWER_MENU = "pref_cat_power_menu";
+    public static final String PREF_CAT_KEY_POWER_OTHER = "pref_cat_power_other";
     public static final String PREF_KEY_FLASHING_LED_DISABLE = "pref_flashing_led_disable";
     public static final String PREF_KEY_CHARGING_LED = "pref_charging_led";
     public static final String ACTION_BATTERY_LED_CHANGED = "gravitybox.intent.action.BATTERY_LED_CHANGED";
@@ -1137,6 +1140,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefScreenDimLevel;
         private AutoBrightnessDialogPreference mPrefAutoBrightness;
         private PreferenceScreen mPrefCatLockscreen;
+        private PreferenceScreen mPrefCatPower;
+        private PreferenceCategory mPrefCatPowerMenu;
+        private PreferenceCategory mPrefCatPowerOther;
+        private CheckBoxPreference mPrefPowerProximityWake;
         private PreferenceScreen mPrefCatDisplay;
         private PreferenceScreen mPrefCatBrightness;
         private ListPreference mPrefCrtOff;
@@ -1402,6 +1409,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefAutoBrightness = (AutoBrightnessDialogPreference) findPreference(PREF_KEY_AUTOBRIGHTNESS);
 
             mPrefCatLockscreen = (PreferenceScreen) findPreference(PREF_CAT_KEY_LOCKSCREEN);
+            mPrefCatPower = (PreferenceScreen) findPreference(PREF_CAT_KEY_POWER);
+            mPrefCatPowerMenu = (PreferenceCategory) findPreference(PREF_CAT_KEY_POWER_MENU);
+            mPrefCatPowerOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_POWER_OTHER);
+            mPrefPowerProximityWake = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE);
             mPrefCatDisplay = (PreferenceScreen) findPreference(PREF_CAT_KEY_DISPLAY);
             mPrefCatBrightness = (PreferenceScreen) findPreference(PREF_CAT_KEY_BRIGHTNESS);
             mPrefCrtOff = (ListPreference) findPreference(PREF_KEY_CRT_OFF_EFFECT);
@@ -1585,6 +1596,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (!Utils.hasVibrator(getActivity())) {
                 mPrefCatPhoneTelephony.removePreference(mPrefCallVibrations);
+            }
+            if (!Utils.hasProximitySensor(getActivity())) {
+                mPrefCatPowerOther.removePreference(mPrefPowerProximityWake);
             }
             if (!Utils.hasTelephonySupport(getActivity())) {
                 mPrefCatLsOther.removePreference(mPrefLockscreenDisableEcb);
