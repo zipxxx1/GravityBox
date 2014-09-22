@@ -26,6 +26,7 @@ public class TimePreference extends DialogPreference {
     private TimePicker mPicker = null;
     private int mValue;
     private boolean mTimerMode;
+    private String mDefaultSummaryText;
 
     public TimePreference(Context context) {
         this(context, null);
@@ -34,6 +35,7 @@ public class TimePreference extends DialogPreference {
     public TimePreference(Context ctxt, AttributeSet attrs) {
         super(ctxt, attrs);
 
+        mDefaultSummaryText = (String) super.getSummary();
         if (attrs != null) {
             mTimerMode = attrs.getAttributeBooleanValue(null, "timerMode", false);
         }
@@ -92,8 +94,8 @@ public class TimePreference extends DialogPreference {
 
     @Override
     public CharSequence getSummary() {
-        if (super.getSummary() != null) {
-            return super.getSummary();
+        if (mDefaultSummaryText != null) {
+            return mDefaultSummaryText;
         } else {
             int hours = (int) (mValue / 60);
             int minutes = mValue - hours*60;
