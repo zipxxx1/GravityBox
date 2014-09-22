@@ -3393,14 +3393,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == REQ_LOCKSCREEN_BACKGROUND) {
                 if (resultCode == Activity.RESULT_OK) {
-                    File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
-                    if (f.exists()) {
-                        f.renameTo(wallpaperImage);
+                    try {
+                        File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
+                        Utils.copyFile(f, wallpaperImage);
+                        wallpaperImage.setReadable(true, false);
+                        f.delete();
+                        Toast.makeText(getActivity(), getString(
+                                R.string.lockscreen_background_result_successful), 
+                                Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(), getString(
+                                R.string.lockscreen_background_result_not_successful),
+                                Toast.LENGTH_SHORT).show();
                     }
-                    wallpaperImage.setReadable(true, false);
-                    Toast.makeText(getActivity(), getString(
-                            R.string.lockscreen_background_result_successful), 
-                            Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), getString(
                             R.string.lockscreen_background_result_not_successful),
@@ -3408,14 +3414,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
             } else if (requestCode == REQ_NOTIF_BG_IMAGE_PORTRAIT) {
                 if (resultCode == Activity.RESULT_OK) {
-                    File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
-                    if (f.exists()) {
-                        f.renameTo(notifBgImagePortrait);
+                    try {
+                        File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
+                        Utils.copyFile(f, notifBgImagePortrait);
+                        notifBgImagePortrait.setReadable(true, false);
+                        f.delete();
+                        Toast.makeText(getActivity(), getString(
+                                R.string.lockscreen_background_result_successful), 
+                                Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(), getString(
+                                R.string.lockscreen_background_result_not_successful),
+                                Toast.LENGTH_SHORT).show();
                     }
-                    notifBgImagePortrait.setReadable(true, false);
-                    Toast.makeText(getActivity(), getString(
-                            R.string.lockscreen_background_result_successful), 
-                            Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), getString(
                             R.string.lockscreen_background_result_not_successful),
@@ -3425,14 +3437,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getActivity().sendBroadcast(intent);
             } else if (requestCode == REQ_NOTIF_BG_IMAGE_LANDSCAPE) {
                 if (resultCode == Activity.RESULT_OK) {
-                    File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
-                    if (f.exists()) {
-                        f.renameTo(notifBgImageLandscape);
+                    try {
+                        File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
+                        Utils.copyFile(f, notifBgImageLandscape);
+                        notifBgImageLandscape.setReadable(true, false);
+                        f.delete();
+                        Toast.makeText(getActivity(), getString(
+                                R.string.lockscreen_background_result_successful), 
+                                Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(), getString(
+                                R.string.lockscreen_background_result_not_successful),
+                                Toast.LENGTH_SHORT).show();
                     }
-                    notifBgImageLandscape.setReadable(true, false);
-                    Toast.makeText(getActivity(), getString(
-                            R.string.lockscreen_background_result_successful), 
-                            Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), getString(
                             R.string.lockscreen_background_result_not_successful),
@@ -3442,14 +3460,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getActivity().sendBroadcast(intent);
             } else if (requestCode == REQ_CALLER_PHOTO) {
                 if (resultCode == Activity.RESULT_OK) {
-                    File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
-                    if (f.exists()) {
-                        f.renameTo(callerPhotoFile);
+                    try {
+                        File f = new File(data.getStringExtra(PickImageActivity.EXTRA_FILE_PATH));
+                        Utils.copyFile(f, callerPhotoFile);
+                        callerPhotoFile.setReadable(true, false);
+                        f.delete();
+                        Toast.makeText(getActivity(), getString(
+                                R.string.caller_unknown_photo_result_successful), 
+                                Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(), getString(
+                                R.string.caller_unkown_photo_result_not_successful),
+                                Toast.LENGTH_SHORT).show();
                     }
-                    callerPhotoFile.setReadable(true, false);
-                    Toast.makeText(getActivity(), getString(
-                            R.string.caller_unknown_photo_result_successful), 
-                            Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), getString(
                             R.string.caller_unkown_photo_result_not_successful),
