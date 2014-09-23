@@ -597,8 +597,8 @@
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">状态栏锁定策略</string>
     <string name="sbl_policy_default">默认</string>
-    <string name="sbl_policy_unlocked">不安全锁定时可以解锁</string>
-    <string name="sbl_policy_unlocked_secured">已解锁</string>
+    <string name="sbl_policy_unlocked">键盘锁不锁定</string>
+    <string name="sbl_policy_unlocked_secured">不锁定</string>
     <string name="sbl_policy_locked">锁定</string>
 
     <!-- Data traffic monitor -->
@@ -1719,7 +1719,7 @@
     <!-- Battery Charging LED -->
     <string name="pref_charging_led_title">电池充电指示灯</string>
     <string name="charging_led_default">默认</string>
-    <string name="charging_led_emulated">模拟</string>
+    <string name="charging_led_emulated">仿真</string>
     <string name="charging_led_disabled">禁用</string>
 
     <!-- Heads up snooze timer -->
