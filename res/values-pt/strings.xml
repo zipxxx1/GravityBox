@@ -60,12 +60,23 @@
     <string name="quick_settings_nfc_on">NFC ativado</string>
     <string name="quick_settings_nfc_off">NFC desativado</string>
     <string name="quick_settings_camera_error_connect">Não foi possível conectar-se à câmera</string>
-    <string name="quick_settings_usb_tether_off">Desconectado</string>
-    <string name="quick_settings_usb_tether_connected">Tethering desligado</string>
-    <string name="quick_settings_usb_tether_on">Tethering</string>
+    <string name="quick_settings_usb_tether_off">Desligado</string>
+    <string name="quick_settings_usb_tether_connected">Associação desativada</string>
+    <string name="quick_settings_usb_tether_on">Associação ativada</string>
+    <string name="quick_settings_music_play">Tocar</string>
+    <string name="quick_settings_music_pause">Pausa</string>
+    <string name="quick_settings_smart_radio_on">Rádio inteligente ativado</string>
+    <string name="quick_settings_smart_radio_off">Rádio inteligente desativado</string>
+    <string name="quick_settings_lock_screen_on">Bloqueio de tela ativado</string>
+    <string name="quick_settings_lock_screen_off">Bloqueio de tela desativado</string>
+    <string name="quick_settings_location_on">Localização</string>
+    <string name="quick_settings_location_off">Localização desativada</string>
+    <string name="quick_settings_quiet_hours_off">Horas de silêncio desativadas</string>
+    <string name="quick_settings_quiet_hours_on">Horas de silêncio ativadas</string>
+    <string name="quick_settings_quiet_hours_auto">Horas de silêncio automáticas</string>
 
     <!-- QuickSettings settings -->
-    <string name="quick_settings_title">Configurações rápidas na Barra de Status</string>
+    <string name="quick_settings_title">Configurações rápidas na barra de status</string>
     <string name="quick_settings_summary">Habilitar escolher quais configurações rápidas visualizar</string>
     <string name="qs_tile_user_profile">Perfil do Usuário</string>
     <string name="qs_tile_airplane_mode">Modo Avião</string>
@@ -92,19 +103,23 @@
     <string name="qs_tile_screenshot">Captura de tela</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Câmera</string>
-    <string name="qs_tile_usb_tethering">Tethering USB</string>
+    <string name="qs_tile_usb_tethering">Associação USB</string>
+    <string name="qs_tile_music">Música</string>
+    <string name="qs_tile_smart_radio">Rádio inteligente</string>
+    <string name="qs_tile_alarm">Alarme</string>
+    <string name="qs_tile_lock_screen">Bloqueio de tela</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Escolha a cor</string>
     <string name="press_color_to_apply">Pressione na cor para aplicar</string>
 
     <!-- Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Cor do fundo da Barra de Status</string>
+    <string name="statusbar_bgcolor_title">Cor do fundo da barra de status</string>
     <string name="statusbar_bgcolor_summary">Permite escolhe a cor do fundo</string>
 
     <!-- Main preference categories -->
-    <string name="pref_cat_statusbar_title">Ajustes da Barra de Status</string>
-    <string name="pref_cat_statusbar_summary">Contém diversos ajustes relacionados com a Barra de status</string>
+    <string name="pref_cat_statusbar_title">Ajustes da barra de status</string>
+    <string name="pref_cat_statusbar_summary">Contém diversos ajustes relacionados com a barra de status</string>
     <string name="pref_cat_misc_title">Ajustes diversos</string>
     <string name="pref_cat_misc_summary">Contém todos os ajustes que não são classificados numa categoria específica</string>
 
@@ -274,7 +289,7 @@
     <string name="quick_pulldown_left">Esquerda</string>
 
     <!-- Statusbar colors category -->
-    <string name="pref_cat_statusbar_colors_title">Cores da Barra de Status</string>
+    <string name="pref_cat_statusbar_colors_title">Cores da barra de status</string>
 
     <!-- Enable icon colors -->
     <string name="pref_statusbar_icon_color_enable_title">Habilitar coloração dos ícones</string>
@@ -399,10 +414,10 @@
     <!-- Transparency management -->
     <string name="pref_cat_transparency_manager_title">Gerenciamento de transparências</string>
     <string name="pref_cat_transparency_manager_summary">Gerencia a transparência da barra de status e da barra de navegação</string>
-    <string name="pref_tm_statusbar_launcher_title">Barra de Status no inicializador</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Barra de Status na tela de bloqueio</string>
-    <string name="pref_tm_navbar_launcher_title">Barra de Navegação no inicializador</string>
-    <string name="pref_tm_navbar_lockscreen_title">Barra de Navegação na tela de bloqueio</string>
+    <string name="pref_tm_statusbar_launcher_title">Barra de status no inicializador</string>
+    <string name="pref_tm_statusbar_lockscreen_title">Barra de status na tela de bloqueio</string>
+    <string name="pref_tm_navbar_launcher_title">Barra de navegação no inicializador</string>
+    <string name="pref_tm_navbar_lockscreen_title">Barra de navegação na tela de bloqueio</string>
 
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Esconder indicador de alarme</string>
@@ -461,8 +476,8 @@
     <string name="hwkey_action_expanded_desktop_disabled">Área de trabalho expandida desativada.</string>
 
     <!-- Navigation bar tweaks category -->
-    <string name="pref_cat_navigation_bar_title">Ajustes da Barra de Navegação</string>
-    <string name="pref_cat_navigation_bar_summary">Contém diversos ajustes relacionados com a Barra de Navegação</string>
+    <string name="pref_cat_navigation_bar_title">Ajustes da barra de navegação</string>
+    <string name="pref_cat_navigation_bar_summary">Contém diversos ajustes relacionados com a barra de navegação</string>
     <string name="pref_navbar_override_summary">Interruptor principal para os tweaks da barra de navegação (Necessário reiniciar)</string>
     <string name="pref_navbar_enable_title">Habilitar barra de navegação</string>
     <string name="pref_navbar_enable_summary">Necessário reiniciar</string>
