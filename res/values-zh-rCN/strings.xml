@@ -604,8 +604,8 @@
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">网络模式磁贴SIM卡插槽</string>
     <string name="pref_qs_network_mode_sim_slot_summary">定义网络模式磁贴应用到SIM卡插槽（%s）</string>
-    <string name="sim_slot1">SIM 卡1</string>
-    <string name="sim_slot2">SIM 卡2</string>
+    <string name="sim_slot1">SIM卡1</string>
+    <string name="sim_slot2">SIM卡2</string>
 
     <!-- Intelligent pie -->
     <string name="pie_controls_disabled">从不</string>
@@ -659,8 +659,8 @@
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">状态栏锁定策略</string>
     <string name="sbl_policy_default">默认</string>
-    <string name="sbl_policy_unlocked">不安全锁定时可以解锁</string>
-    <string name="sbl_policy_unlocked_secured">已解锁</string>
+    <string name="sbl_policy_unlocked">键盘锁不锁定</string>
+    <string name="sbl_policy_unlocked_secured">不锁定</string>
     <string name="sbl_policy_locked">锁定</string>
 
     <!-- Data traffic monitor -->
@@ -1611,7 +1611,7 @@
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">使用选择的图像</string>
     <string name="imgpick_choose_error">选择的图像错误</string>
-    <string name="imgpick_crop_error">裁剪图像错误</string>
+    <string name="imgpick_crop_error">剪裁图像错误</string>
     <string name="imgpick_create_temp_dir_error">创建临时目录错误</string>
 
     <!-- Proximity wake -->
@@ -1621,7 +1621,7 @@
     <!-- Battery Charging LED -->
     <string name="pref_charging_led_title">电池充电指示灯</string>
     <string name="charging_led_default">默认</string>
-    <string name="charging_led_emulated">模拟</string>
+    <string name="charging_led_emulated">仿真</string>
     <string name="charging_led_disabled">禁用</string>
 
 </resources>
