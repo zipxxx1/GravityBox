@@ -16,6 +16,12 @@
 package com.ceco.kitkat.gravitybox.ledcontrol;
 
 import java.io.File;
+import java.text.DateFormatSymbols;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.R;
@@ -26,6 +32,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceFragment;
 
 public class QuietHoursActivity extends Activity {
@@ -40,6 +47,7 @@ public class QuietHoursActivity extends Activity {
     public static final String PREF_KEY_QH_STATUSBAR_ICON = "pref_lc_qh_statusbar_icon";
     public static final String PREF_KEY_QH_MODE = "pref_lc_qh_mode";
     public static final String PREF_KEY_QH_INTERACTIVE = "pref_lc_qh_interactive";
+    public static final String PREF_KEY_QH_WEEKDAYS = "pref_lc_qh_weekdays";
 
     public static final String ACTION_QUIET_HOURS_CHANGED = 
             "gravitybox.intent.action.QUIET_HOURS_CHANGED";
@@ -97,6 +105,7 @@ public class QuietHoursActivity extends Activity {
     public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
         private SharedPreferences mPrefs;
+        private MultiSelectListPreference mPrefWeekDays;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -107,12 +116,43 @@ public class QuietHoursActivity extends Activity {
             mPrefs = getPreferenceManager().getSharedPreferences();
 
             addPreferencesFromResource(R.xml.led_control_quiet_hours_settings);
+            setupWeekDaysPref();
+        }
+
+        private void setupWeekDaysPref() {
+            mPrefWeekDays = (MultiSelectListPreference) findPreference(PREF_KEY_QH_WEEKDAYS); 
+            String[] days = new DateFormatSymbols(Locale.getDefault()).getWeekdays();
+            CharSequence[] entries = new CharSequence[7];
+            CharSequence[] entryValues = new CharSequence[7];
+            for (int i=1; i<=7; i++) {
+                entries[i-1] = days[i];
+                entryValues[i-1] = String.valueOf(i);
+            }
+            mPrefWeekDays.setEntries(entries);
+            mPrefWeekDays.setEntryValues(entryValues);
+            if (mPrefs.getStringSet(PREF_KEY_QH_WEEKDAYS, null) == null) {
+                Set<String> value = new HashSet<String>(Arrays.asList("2","3","4","5","6"));
+                mPrefs.edit().putStringSet(PREF_KEY_QH_WEEKDAYS, value).commit();
+                mPrefWeekDays.setValues(value);
+            }
+        }
+
+        private void updateSummaries() {
+            String[] days = new DateFormatSymbols(Locale.getDefault()).getWeekdays();
+            Set<String> weekDays = new TreeSet<String>(mPrefWeekDays.getValues());
+            String summary = "";
+            for (String wday : weekDays) {
+                if (!summary.isEmpty()) summary += ", ";
+                summary += days[Integer.valueOf(wday)];
+            }
+            mPrefWeekDays.setSummary(summary);
         }
 
         @Override
         public void onResume() {
             super.onResume();
             mPrefs.registerOnSharedPreferenceChangeListener(this);
+            updateSummaries();
         }
 
         @Override
@@ -123,6 +163,7 @@ public class QuietHoursActivity extends Activity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+            updateSummaries();
             Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
             prefs.edit().commit();
             getActivity().sendBroadcast(intent);
