@@ -15,9 +15,12 @@
 package com.ceco.gm2.gravitybox.ledcontrol;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.app.Notification;
 import android.content.SharedPreferences;
@@ -46,6 +49,7 @@ public class QuietHours {
     public boolean showStatusbarIcon;
     public Mode mode;
     public boolean interactive;
+    Set<String> weekDays;
 
     public QuietHours(SharedPreferences prefs) {
         uncLocked = prefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false);
@@ -59,6 +63,8 @@ public class QuietHours {
         showStatusbarIcon = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_STATUSBAR_ICON, true);
         mode = Mode.valueOf(prefs.getString(QuietHoursActivity.PREF_KEY_QH_MODE, "AUTO"));
         interactive = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_INTERACTIVE, false);
+        weekDays = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_WEEKDAYS,
+                new HashSet<String>(Arrays.asList("2","3","4","5","6")));
     }
 
     public boolean quietHoursActive(LedSettings ls, Notification n, boolean userPresent) {
@@ -98,50 +104,62 @@ public class QuietHours {
         c.setTimeInMillis(System.currentTimeMillis());
         int curMin = c.get(Calendar.HOUR_OF_DAY) * 60 + c.get(Calendar.MINUTE);
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        boolean isFriday = dayOfWeek == Calendar.FRIDAY;
-        boolean isSunday = dayOfWeek == Calendar.SUNDAY;
         int s = start; 
         int e = end;
-        if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) {
+        if (!weekDays.contains(String.valueOf(dayOfWeek))) {
             s = startAlt;
             e = endAlt;
         }
 
-        // special logic for Friday and Sunday
-        // we assume people stay up longer on Friday  
-        if (isFriday) {
+        // special logic for transition from week day to weekend and vice versa
+        // we assume people stay up longer before weekend  
+        if (isTransitionToWeekend(dayOfWeek)) {
             if (curMin > end) {
                 // we are after previous QH
                 if (startAlt > endAlt) {
                     // weekend range spans midnight
                     // let's apply weekend start time instead
                     s = startAlt;
-                    if (ModLedControl.DEBUG) ModLedControl.log("Applying weekend start time for Friday");
+                    if (ModLedControl.DEBUG) ModLedControl.log("Applying weekend start time for day before weekend");
                 } else {
                     // weekend range happens on the next day
-                    if (ModLedControl.DEBUG) ModLedControl.log("Ignoring quiet hours for Friday");
+                    if (ModLedControl.DEBUG) ModLedControl.log("Ignoring quiet hours for day before weekend");
                     return false;
                 }
             }
         }
-        // we assume people go to sleep earlier on Sunday
-        if (isSunday) {
+        // we assume people go to sleep earlier before week day
+        if (isTransitionToWeekDay(dayOfWeek)) {
             if (curMin > endAlt) {
                 // we are after previous QH
                 if (start > end) {
                     // weekday range spans midnight
                     // let's apply weekday start time instead
                     s = start;
-                    if (ModLedControl.DEBUG) ModLedControl.log("Applying weekday start time for Sunday");
+                    if (ModLedControl.DEBUG) ModLedControl.log("Applying weekday start time for day before weekday");
                 } else {
                     // weekday range happens on the next day
-                    if (ModLedControl.DEBUG) ModLedControl.log("Ignoring quiet hours for Sunday");
+                    if (ModLedControl.DEBUG) ModLedControl.log("Ignoring quiet hours for day before weekday");
                     return false;
                 }
             }
         }
 
         return (Utils.isTimeOfDayInRange(System.currentTimeMillis(), s, e));
+    }
+
+    private boolean isTransitionToWeekend(int day) {
+        int nextDay = day+1;
+        if (nextDay > 7) nextDay = 1;
+        return (weekDays.contains(String.valueOf(day)) &&
+                    !weekDays.contains(String.valueOf(nextDay)));
+    }
+
+    private boolean isTransitionToWeekDay(int day) {
+        int nextDay = day+1;
+        if (nextDay > 7) nextDay = 1;
+        return (!weekDays.contains(String.valueOf(day)) &&
+                    weekDays.contains(String.valueOf(nextDay)));
     }
 
     private List<String> getNotificationTexts(Notification notification) {
