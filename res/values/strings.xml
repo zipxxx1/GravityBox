@@ -1732,4 +1732,8 @@
         Long-press on heads up snooze icon opens custom timer dialog.</string>
     <string name="headsup_snooze_timer_set">Heads up default snooze timer set for %s</string>
 
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">Translucent bars</string>
+    <string name="pref_recents_translucent_bars_summary">Makes status bar and navigation bar always translucent in recents panel</string>
+
 </resources>

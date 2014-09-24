@@ -2215,6 +2215,12 @@
                 monitorBoxUnit="px"
                 android:defaultValue="40" />
 
+            <CheckBoxPreference
+                android:key="pref_recents_translucent_bars"
+                android:title="@string/pref_recents_translucent_bars_title"
+                android:summary="@string/pref_recents_translucent_bars_summary"
+                android:defaultValue="false" />
+
         </PreferenceCategory>
 
         <PreferenceCategory

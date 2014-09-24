@@ -277,18 +277,21 @@ public class ModClearAllRecents {
             XposedHelpers.findAndHookMethod(recentActivityClass, "onCreate", Bundle.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    final Window w = ((Activity) param.thisObject).getWindow();
-                    mAddPrivateFlagsHook = XposedHelpers.findAndHookMethod(
-                            Window.class, "addPrivateFlags", int.class, new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                            if (param.thisObject == w) {
-                                param.setResult(null);
+                    mPrefs.reload();
+                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_RECENTS_TRANSLUCENT_BARS, false)) {
+                        final Window w = ((Activity) param.thisObject).getWindow();
+                        mAddPrivateFlagsHook = XposedHelpers.findAndHookMethod(
+                                Window.class, "addPrivateFlags", int.class, new XC_MethodHook() {
+                            @Override
+                            protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                                if (param.thisObject == w) {
+                                    param.setResult(null);
+                                }
                             }
-                        }
-                    });
-                    w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                    w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                        });
+                        w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                        w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                    }
                 }
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
@@ -335,7 +338,6 @@ public class ModClearAllRecents {
                 mClearRecentsMode = Integer.valueOf(mPrefs.getString(GravityBoxSettings.PREF_KEY_CLEAR_RECENTS_MODE, "0"));
                 Boolean show = (Boolean) param.args[0];
                 if (show) {
-                    mPrefs.reload();
                     updateButtonLayout((View) param.thisObject);
                     updateRamBarLayout();
                 }
