@@ -1732,4 +1732,8 @@
         Un appui long sur l\'icône de l\'arrêt momentané des notifications flottantes donne accès à une boîte de dialogue pour une durée personnalisable</string>
     <string name="headsup_snooze_timer_set">Durée par défaut de l\'arrêt momentané des notifications flottantes réglée à %s</string>
 
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">Barres translucides</string>
+    <string name="pref_recents_translucent_bars_summary">Permet de rendre toujours translucides les barres d\'état et de navigation dans le panneau d\'applications récentes</string>
+
 </resources>
