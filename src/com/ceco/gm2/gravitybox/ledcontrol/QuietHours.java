@@ -149,15 +149,13 @@ public class QuietHours {
     }
 
     private boolean isTransitionToWeekend(int day) {
-        int nextDay = day+1;
-        if (nextDay > 7) nextDay = 1;
+        int nextDay = (day==7 ? 1 : day+1);
         return (weekDays.contains(String.valueOf(day)) &&
                     !weekDays.contains(String.valueOf(nextDay)));
     }
 
     private boolean isTransitionToWeekDay(int day) {
-        int nextDay = day+1;
-        if (nextDay > 7) nextDay = 1;
+        int nextDay = (day==7 ? 1 : day+1);
         return (!weekDays.contains(String.valueOf(day)) &&
                     weekDays.contains(String.valueOf(nextDay)));
     }

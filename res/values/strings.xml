@@ -1625,6 +1625,6 @@
     <string name="charging_led_disabled">Disabled</string>
 
     <!-- Quiet hours week days -->
-    <string name="pref_lc_qh_weekdays_title">Week days</string>
+    <string name="pref_lc_qh_weekdays_title">Set week days</string>
 
 </resources>
