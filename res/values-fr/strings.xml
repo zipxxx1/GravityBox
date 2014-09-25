@@ -1736,4 +1736,7 @@
     <string name="pref_recents_translucent_bars_title">Barres translucides</string>
     <string name="pref_recents_translucent_bars_summary">Permet de rendre toujours translucides les barres d\'état et de navigation dans le panneau d\'applications récentes</string>
 
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Choisir les jours de la semaine</string>
+
 </resources>
