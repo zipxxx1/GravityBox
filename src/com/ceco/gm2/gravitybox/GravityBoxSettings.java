@@ -266,6 +266,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_STATUSBAR_LOCK_POLICY_CHANGED = "gravitybox.intent.action.STATUSBAR_LOCK_POLICY_CHANGED";
     public static final String EXTRA_STATUSBAR_LOCK_POLICY = "statusbarLockPolicy";
     public static final String PREF_KEY_LOCKSCREEN_DISABLE_ECB = "pref_lockscreen_disable_ecb";
+    public static final String ACTION_LOCKSCREEN_SETTINGS_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SETTINGS_CHANGED";
 
     public static final String PREF_CAT_KEY_POWER = "pref_cat_power";
     public static final String PREF_CAT_KEY_POWER_MENU = "pref_cat_power_menu";
@@ -844,6 +845,39 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_BATTERY_CHARGED_SOUND,
             PREF_KEY_CHARGER_PLUGGED_SOUND,
             PREF_KEY_CHARGER_UNPLUGGED_SOUND
+    ));
+
+    private static final List<String> lockscreenKeys = new ArrayList<String>(Arrays.asList(
+            PREF_KEY_LOCKSCREEN_BACKGROUND,
+            PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR,
+            PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY,
+            PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT,
+            PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY,
+            PREF_KEY_LOCKSCREEN_SHADE_DISABLE,
+            PREF_KEY_LOCKSCREEN_TARGETS_VERTICAL_OFFSET,
+            PREF_KEY_LOCKSCREEN_TARGETS_HORIZONTAL_OFFSET,
+            PREF_KEY_LOCKSCREEN_RING_TORCH,
+            PREF_KEY_LOCKSCREEN_BATTERY_ARC,
+            PREF_KEY_LOCKSCREEN_TARGETS_ENABLE,
+            PREF_KEY_LOCKSCREEN_TARGETS_APP[0],
+            PREF_KEY_LOCKSCREEN_TARGETS_APP[1],
+            PREF_KEY_LOCKSCREEN_TARGETS_APP[2],
+            PREF_KEY_LOCKSCREEN_TARGETS_APP[3],
+            PREF_KEY_LOCKSCREEN_TARGETS_APP[4],
+            PREF_KEY_LOCKSCREEN_TARGETS_APP[5],
+            PREF_KEY_LOCKSCREEN_TARGETS_APP[6],
+            PREF_KEY_LOCKSCREEN_SLIDE_BEFORE_UNLOCK,
+            PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
+            PREF_KEY_STATUSBAR_LOCK_POLICY,
+            PREF_KEY_LOCKSCREEN_WIDGET_LIMIT_DISABLE,
+            PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK,
+            PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
+            PREF_KEY_LOCKSCREEN_CARRIER2_TEXT,
+            PREF_KEY_LOCKSCREEN_DISABLE_ECB,
+            PREF_KEY_LOCKSCREEN_ROTATION,
+            PREF_KEY_LOCKSCREEN_RING_DT2S,
+            PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS,
+            PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR
     ));
 
     private static final class SystemProperties {
@@ -3077,6 +3111,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 });
                 mDialog = builder.create();
                 mDialog.show();
+            }
+
+            if (lockscreenKeys.contains(key)) {
+                intent = new Intent(ACTION_LOCKSCREEN_SETTINGS_CHANGED);
+                getActivity().sendBroadcast(intent);
             }
 
             if (key.equals(PREF_KEY_BRIGHTNESS_MIN) &&
