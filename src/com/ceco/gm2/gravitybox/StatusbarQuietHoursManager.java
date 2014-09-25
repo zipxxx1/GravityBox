@@ -97,7 +97,7 @@ public class StatusbarQuietHoursManager extends BroadcastReceiver {
     private void refreshState() {
         try {
             if (mPrefs == null) {
-                mPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
+                mPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
             } else {
                 mPrefs.reload();
             }

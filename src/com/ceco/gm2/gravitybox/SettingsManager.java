@@ -69,7 +69,8 @@ public class SettingsManager {
         // preferences
         String[] prefsFileNames = new String[] { 
                 mContext.getPackageName() + "_preferences.xml",
-                "ledcontrol.xml"
+                "ledcontrol.xml",
+                "quiet_hours.xml"
         };
         for (String prefsFileName : prefsFileNames) {
             File prefsFile = new File(mContext.getFilesDir() + "/../shared_prefs/" + prefsFileName);
@@ -162,7 +163,8 @@ public class SettingsManager {
         // preferences
         String[] prefsFileNames = new String[] { 
                 mContext.getPackageName() + "_preferences.xml",
-                "ledcontrol.xml"
+                "ledcontrol.xml",
+                "quiet_hours.xml"
         };
         for (String prefsFileName : prefsFileNames) {
             File prefsFile = new File(BACKUP_PATH + "/" + prefsFileName);

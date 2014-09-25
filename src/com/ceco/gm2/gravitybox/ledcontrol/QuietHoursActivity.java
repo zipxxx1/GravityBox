@@ -37,6 +37,7 @@ import android.preference.PreferenceFragment;
 
 public class QuietHoursActivity extends Activity {
 
+    public static final String PREF_KEY_QH_LOCKED = "pref_lc_qh_locked";
     public static final String PREF_KEY_QH_ENABLED = "pref_lc_qh_enabled";
     public static final String PREF_KEY_QH_START = "pref_lc_qh_start2";
     public static final String PREF_KEY_QH_END = "pref_lc_qh_end2";
@@ -57,7 +58,7 @@ public class QuietHoursActivity extends Activity {
 
     public static void setQuietHoursMode(Context context, String mode) {
         try {
-            SharedPreferences prefs = context.getSharedPreferences("ledcontrol", Context.MODE_WORLD_READABLE);
+            SharedPreferences prefs = context.getSharedPreferences("quiet_hours", Context.MODE_WORLD_READABLE);
             QuietHours qh = new QuietHours(prefs);
             if (qh.uncLocked || !qh.enabled) {
                 return;
@@ -111,7 +112,7 @@ public class QuietHoursActivity extends Activity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
-            getPreferenceManager().setSharedPreferencesName("ledcontrol");
+            getPreferenceManager().setSharedPreferencesName("quiet_hours");
             getPreferenceManager().setSharedPreferencesMode(Context.MODE_WORLD_READABLE);
             mPrefs = getPreferenceManager().getSharedPreferences();
 

@@ -165,7 +165,7 @@ public class BatteryInfoManager {
 
     private boolean quietHoursActive() {
         QuietHours qh = new QuietHours(
-                new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol"));
+                new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours"));
         return qh.quietHoursActive();
     }
 }
