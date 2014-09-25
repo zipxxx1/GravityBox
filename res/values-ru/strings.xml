@@ -1732,4 +1732,11 @@
         Удержание нажатия на значке открывает диалог установки своего таймера.</string>
     <string name="headsup_snooze_timer_set">Таймер переноса по умолчанию установлен на %s</string>
 
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">Прозрачные панели</string>
+    <string name="pref_recents_translucent_bars_summary">Всегда прозрачные строка состояния и панель навигации в окне недавних</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Будни</string>
+
 </resources>
