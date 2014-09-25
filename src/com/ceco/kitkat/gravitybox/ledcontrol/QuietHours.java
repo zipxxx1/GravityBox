@@ -52,7 +52,7 @@ public class QuietHours {
     Set<String> weekDays;
 
     public QuietHours(SharedPreferences prefs) {
-        uncLocked = prefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false);
+        uncLocked = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false);
         enabled = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false);
         start = prefs.getInt(QuietHoursActivity.PREF_KEY_QH_START, 1380);
         end = prefs.getInt(QuietHoursActivity.PREF_KEY_QH_END, 360);

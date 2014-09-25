@@ -218,7 +218,11 @@ public class LedSettings {
             SharedPreferences prefs = context.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putBoolean(PREF_KEY_LOCKED, lock).commit();
+            prefs = context.getSharedPreferences("quiet_hours", Context.MODE_WORLD_READABLE);
+            prefs.edit().putBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, lock).commit();
             Intent intent = new Intent(ACTION_UNC_SETTINGS_CHANGED);
+            context.sendBroadcast(intent);
+            intent = new Intent(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
             context.sendBroadcast(intent);
         } catch (Throwable t) {
             t.printStackTrace();

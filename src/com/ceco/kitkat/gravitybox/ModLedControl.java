@@ -90,6 +90,7 @@ public class ModLedControl {
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
 
     private static XSharedPreferences mPrefs;
+    private static XSharedPreferences mQhPrefs;
     private static Notification mNotifOnNextScreenOff;
     private static Context mContext;
     private static PowerManager mPm;
@@ -147,21 +148,20 @@ public class ModLedControl {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            if (action.equals(LedSettings.ACTION_UNC_SETTINGS_CHANGED) ||
-                    action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+            if (action.equals(LedSettings.ACTION_UNC_SETTINGS_CHANGED)) {
                 mPrefs.reload();
-                mQuietHours = new QuietHours(mPrefs);
                 if (intent.hasExtra(LedSettings.EXTRA_UNC_AS_ENABLED)) {
                     toggleActiveScreenFeature(intent.getBooleanExtra(
                             LedSettings.EXTRA_UNC_AS_ENABLED, false));
                 }
-            }
-            if (action.equals(Intent.ACTION_USER_PRESENT)) {
+            } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+                mQhPrefs.reload();
+                mQuietHours = new QuietHours(mQhPrefs);
+            } else if (action.equals(Intent.ACTION_USER_PRESENT)) {
                 if (DEBUG) log("User present");
                 mUserPresent = true;
                 mOnPanelRevealedBlocked = false;
-            }
-            if (action.equals(Intent.ACTION_SCREEN_OFF)) {
+            } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 mUserPresent = false;
             }
         }
@@ -174,7 +174,9 @@ public class ModLedControl {
     public static void initZygote() {
         mPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
         mPrefs.makeWorldReadable();
-        mQuietHours = new QuietHours(mPrefs);
+        mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+        mQhPrefs.makeWorldReadable();
+        mQuietHours = new QuietHours(mQhPrefs);
 
         try {
             XposedHelpers.findAndHookMethod(NotificationManager.class, "notify",
