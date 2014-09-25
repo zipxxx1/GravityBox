@@ -47,14 +47,15 @@
         android:defaultValue="false"
         android:dependency="pref_lc_qh_enabled" />
 
-    <MultiSelectListPreference 
-        android:key="pref_lc_qh_weekdays"
-        android:title="@string/pref_lc_qh_weekdays_title"
-        android:dependency="pref_lc_qh_enabled" />
-
     <PreferenceCategory 
         android:key="pref_lc_qh_cat_weekdays"
         android:title="@string/pref_lc_qh_cat_weekdays_title">
+
+        <MultiSelectListPreference 
+            android:key="pref_lc_qh_weekdays"
+            android:title="@string/pref_lc_qh_weekdays_title"
+            android:dependency="pref_lc_qh_enabled" />
+
         <com.ceco.kitkat.gravitybox.preference.TimePreference
             android:key="pref_lc_qh_start2"
             android:title="@string/pref_lc_qh_start_title"

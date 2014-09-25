@@ -1737,6 +1737,6 @@
     <string name="pref_recents_translucent_bars_summary">Makes status bar and navigation bar always translucent in recents panel</string>
 
     <!-- Quiet hours week days -->
-    <string name="pref_lc_qh_weekdays_title">Week days</string>
+    <string name="pref_lc_qh_weekdays_title">Set week days</string>
 
 </resources>
