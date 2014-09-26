@@ -597,7 +597,7 @@
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">状态栏锁定策略</string>
     <string name="sbl_policy_default">默认</string>
-    <string name="sbl_policy_unlocked">键盘锁不锁定</string>
+    <string name="sbl_policy_unlocked">键盘锁不安全不锁定</string>
     <string name="sbl_policy_unlocked_secured">不锁定</string>
     <string name="sbl_policy_locked">锁定</string>
 
@@ -1731,5 +1731,20 @@
     <string name="pref_heads_up_snooze_timer_summary">点击浮动通知图标将自动设置贪睡定时器 
 	长按浮动通知图标打开贪睡定时器自定义对话框</string>
     <string name="headsup_snooze_timer_set">默认为%s浮动通知设置贪睡定时器</string>
+    
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">半透明栏</string>
+    <string name="pref_recents_translucent_bars_summary">在最近任务面板让状态栏和导航栏总是半透明</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">设置工作日</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">静音系统声音</string>
+    <string name="system_sound_dialpad">拨号键盘音效</string>
+    <string name="system_sound_touch">触摸音效</string>
+    <string name="system_sound_screen_lock">锁屏音效</string>
+    <string name="system_sound_volume_adjust">音量调节音效</string>
+    <string name="system_sound_charger">GravityBox充电音效</string>
 
 </resources>
