@@ -1739,4 +1739,12 @@
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Установка будней</string>
 
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Отключение системных звуков</string>
+    <string name="system_sound_dialpad">Звук набора номера</string>
+    <string name="system_sound_touch">Звуки касаний</string>
+    <string name="system_sound_screen_lock">Звук блокировки экрана</string>
+    <string name="system_sound_volume_adjust">Звук настройки громкости</string>
+    <string name="system_sound_charger">Звуки зарядки GravityBox</string>
+
 </resources>
