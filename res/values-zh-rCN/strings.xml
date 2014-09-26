@@ -1624,4 +1624,15 @@
     <string name="charging_led_emulated">仿真</string>
     <string name="charging_led_disabled">禁用</string>
 
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">设置工作日</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">静音系统声音</string>
+    <string name="system_sound_dialpad">拨号键盘音效</string>
+    <string name="system_sound_touch">触摸音效</string>
+    <string name="system_sound_screen_lock">锁屏音效</string>
+    <string name="system_sound_volume_adjust">音量调节音效</string>
+    <string name="system_sound_charger">GravityBox充电音效</string>
+
 </resources>
