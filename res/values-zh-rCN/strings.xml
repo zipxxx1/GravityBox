@@ -659,7 +659,7 @@
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">状态栏锁定策略</string>
     <string name="sbl_policy_default">默认</string>
-    <string name="sbl_policy_unlocked">键盘锁不安全不锁定</string>
+    <string name="sbl_policy_unlocked">键盘锁不安全时不锁定</string>
     <string name="sbl_policy_unlocked_secured">不锁定</string>
     <string name="sbl_policy_locked">锁定</string>
 
