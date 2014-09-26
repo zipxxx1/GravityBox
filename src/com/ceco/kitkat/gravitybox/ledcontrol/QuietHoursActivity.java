@@ -45,6 +45,7 @@ public class QuietHoursActivity extends Activity {
     public static final String PREF_KEY_QH_END_ALT = "pref_lc_qh_end_alt2";
     public static final String PREF_KEY_QH_MUTE_LED = "pref_lc_qh_mute_led";
     public static final String PREF_KEY_QH_MUTE_VIBE = "pref_lc_qh_mute_vibe";
+    public static final String PREF_KEY_QH_MUTE_SYSTEM_SOUNDS = "pref_lc_qh_mute_system_sounds";
     public static final String PREF_KEY_QH_STATUSBAR_ICON = "pref_lc_qh_statusbar_icon";
     public static final String PREF_KEY_QH_MODE = "pref_lc_qh_mode";
     public static final String PREF_KEY_QH_INTERACTIVE = "pref_lc_qh_interactive";
@@ -107,6 +108,7 @@ public class QuietHoursActivity extends Activity {
 
         private SharedPreferences mPrefs;
         private MultiSelectListPreference mPrefWeekDays;
+        private MultiSelectListPreference mPrefSystemSounds;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -118,6 +120,7 @@ public class QuietHoursActivity extends Activity {
 
             addPreferencesFromResource(R.xml.led_control_quiet_hours_settings);
             setupWeekDaysPref();
+            mPrefSystemSounds = (MultiSelectListPreference) findPreference(PREF_KEY_QH_MUTE_SYSTEM_SOUNDS);
         }
 
         private void setupWeekDaysPref() {
@@ -140,13 +143,30 @@ public class QuietHoursActivity extends Activity {
 
         private void updateSummaries() {
             String[] days = new DateFormatSymbols(Locale.getDefault()).getWeekdays();
-            Set<String> weekDays = new TreeSet<String>(mPrefWeekDays.getValues());
+            Set<String> values = new TreeSet<String>(mPrefWeekDays.getValues());
             String summary = "";
-            for (String wday : weekDays) {
+            for (String wday : values) {
                 if (!summary.isEmpty()) summary += ", ";
                 summary += days[Integer.valueOf(wday)];
             }
             mPrefWeekDays.setSummary(summary);
+
+            CharSequence[] entries = mPrefSystemSounds.getEntries();
+            CharSequence[] entryValues = mPrefSystemSounds.getEntryValues();
+            values = mPrefSystemSounds.getValues();
+            summary = "";
+            if (values != null) {
+                for (String value : values) {
+                    for (int i=0; i<entryValues.length; i++) {
+                        if (entryValues[i].equals(value)) {
+                            if (!summary.isEmpty()) summary += ", ";
+                            summary += entries[i];
+                            break;
+                        }
+                    }
+                }
+            }
+            mPrefSystemSounds.setSummary(summary);
         }
 
         @Override

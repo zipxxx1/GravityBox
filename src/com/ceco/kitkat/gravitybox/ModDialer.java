@@ -23,6 +23,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.ceco.kitkat.gravitybox.ledcontrol.QuietHours;
+
 import android.app.Fragment;
 import android.app.KeyguardManager;
 import android.app.Notification;
@@ -71,6 +73,7 @@ public class ModDialer {
     private static final String CLASS_STATUSBAR_NOTIFIER = "com.android.incallui.StatusBarNotifier";
     private static final String CLASS_CALL = "com.android.services.telephony.common.Call";
     private static final String CLASS_CONTACT_CACHE_ENTRY = "com.android.incallui.ContactInfoCache.ContactCacheEntry";
+    private static final String CLASS_DIALPAD_FRAGMENT = "com.android.dialer.dialpad.DialpadFragment";
     private static final boolean DEBUG = false;
 
     public static final String NOTIF_EXTRA_NON_INTRUSIVE_CALL = "gbNonIntrusiveCall";
@@ -102,6 +105,7 @@ public class ModDialer {
     private static boolean mBroadcastReceiverRegistered;
     private static Class<?> mClassInCallPresenter;
     private static boolean mIsCallUiInBackground;
+    private static QuietHours mQuietHours;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -620,6 +624,28 @@ public class ModDialer {
                     if (mNotifBuildHook != null) {
                         mNotifBuildHook.unhook();
                         mNotifBuildHook = null;
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(CLASS_DIALPAD_FRAGMENT, classLoader, "onResume", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param2) throws Throwable {
+                    XSharedPreferences qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+                    mQuietHours = new QuietHours(qhPrefs);
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_DIALPAD_FRAGMENT, classLoader, "playTone",
+                    int.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.DIALPAD)) {
+                        param.setResult(null);
                     }
                 }
             });

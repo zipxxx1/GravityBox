@@ -1127,4 +1127,20 @@
         <item>DISABLED</item>
     </string-array>
 
+    <string-array name="system_sound_entries" translatable="false">
+        <item>@string/system_sound_dialpad</item>
+        <item>@string/system_sound_touch</item>
+        <item>@string/system_sound_screen_lock</item>
+        <item>@string/system_sound_volume_adjust</item>
+        <item>@string/system_sound_charger</item>
+    </string-array>
+
+    <string-array name="system_sound_values" translatable="false">
+        <item>dialpad</item>
+        <item>touch</item>
+        <item>screen_lock</item>
+        <item>volume_adjust</item>
+        <item>charger</item>
+    </string-array>
+
 </resources>

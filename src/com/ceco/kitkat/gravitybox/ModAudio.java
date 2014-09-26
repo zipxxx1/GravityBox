@@ -15,6 +15,8 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import com.ceco.kitkat.gravitybox.ledcontrol.QuietHours;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +43,7 @@ public class ModAudio {
     private static boolean mVolForceMusicControl;
     private static boolean mSwapVolumeKeys;
     private static HandleChangeVolume mHandleChangeVolume;
+    private static XSharedPreferences mQhPrefs;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -69,6 +72,9 @@ public class ModAudio {
     public static void initZygote(final XSharedPreferences prefs) {
         try {
             final Class<?> classAudioService = XposedHelpers.findClass(CLASS_AUDIO_SERVICE, null);
+
+            mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+            mQhPrefs.makeWorldReadable();
 
             mSwapVolumeKeys = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_SWAP_KEYS, false);
 
@@ -180,6 +186,17 @@ public class ModAudio {
                         }
                     }
                 }
+            });
+
+            XposedHelpers.findAndHookMethod(AudioManager.class, "querySoundEffectsEnabled", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    mQhPrefs.reload();
+                    QuietHours qh = new QuietHours(mQhPrefs);
+                    if (qh.isSystemSoundMuted(QuietHours.SystemSound.TOUCH)) {
+                        param.setResult(false);
+                    }
+                } 
             });
         } catch(Throwable t) {
             XposedBridge.log(t);
