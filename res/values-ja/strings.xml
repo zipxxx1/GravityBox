@@ -102,6 +102,7 @@
     <string name="qs_tile_expanded_desktop">拡張デスクトップ</string>
     <string name="qs_tile_stay_awake">画面常時点灯</string>
     <string name="qs_tile_screenshot">スクリーンショット</string>
+    <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">カメラ</string>
     <string name="qs_tile_usb_tethering">USBテザリング</string>
     <string name="qs_tile_music">音楽</string>
@@ -581,6 +582,7 @@
     <string name="pref_statusbar_lock_policy_title">ステータスバーのロック</string>
     <string name="sbl_policy_default">デフォルト</string>
     <string name="sbl_policy_unlocked">キーガードオフ時にロック解除</string>
+    <string name="sbl_policy_unlocked_secured">ロックしない</string>
     <string name="sbl_policy_locked">ロックする</string>
 
     <!-- Data traffic monitor -->
@@ -593,6 +595,10 @@
     <string name="dt_size_normal">中</string>
     <string name="dt_size_smaller">小</string>
     <string name="dt_size_smallest">極小</string>
+    <string name="byte_abbr">B</string>
+    <string name="kilobyte_abbr">KB</string>
+    <string name="megabyte_abbr">MB</string>
+    <string name="second_abbr">秒</string>
 
     <!-- Disable lockscreen widget limit -->
     <string name="pref_lockscreen_widget_limit_disable_title">ウィジェット制限の無効化</string>
@@ -716,7 +722,11 @@
 
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">ボタン下の余白</string>
-    
+
+    <!-- Google Plus -->
+    <string name="pref_about_gplus_title">Google+コミュニティ</string>
+    <string name="pref_about_gplus_summary">タップでGravityBoxのGoogle+コミュニティを開きます。</string>
+
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">LTEモードを使用</string>
 
@@ -913,6 +923,9 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">パイ関連の設定を変更します。</string>
+
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
 
     <!-- Lockscreen background opacity -->
     <string name="pref_lockscreen_bg_opacity_title">背景の透過度</string>
@@ -1549,14 +1562,15 @@
     <string name="clock_date_format_2">日付形式: MM/dd</string>
     <string name="clock_date_format_3">日付形式: d MMM</string>
     <string name="clock_date_format_4">日付形式: MMM d</string>
-    
+    <string name="clock_date_format_5">日付形式: d</string>
+
     <!-- Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_settings_title">バッテリータイル設定</string>
     <string name="pref_qs_battery_extended_title">拡張バッテリータイル</string>
     <string name="pref_qs_battery_extended_summary">有効化したら再起動してください。</string>
-    <string name="pref_qs_battery_temp_unit_title">温度単位</string>
-    <string name="celsius">摂氏</string>
-    <string name="fahrenheit">華氏</string>
+    <string name="pref_qs_battery_temp_unit_title">温度の単位</string>
+    <string name="celsius">摂氏 (&#8451;)</string>
+    <string name="fahrenheit">華氏 (&#8457;)</string>
 
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">ヘッドセットアクション</string>
@@ -1684,5 +1698,24 @@
     <string name="headsup_snooze_all_apps">全てのアプリにセット</string>
     <string name="headsup_snooze_app">%sにHeads upスヌーズタイマーをセット</string>
     <string name="pref_heads_up_snooze_reset_title">スヌーズタイマーをリセット</string>
+    <string name="pref_heads_up_snooze_timer_title">デフォルトのスヌーズタイマー</string>
+    <string name="pref_heads_up_snooze_timer_summary">Heads upスヌーズアイコンをタップしたときに自動的にセットするスヌーズタイマーを設定します。
+        Heads upスヌーズアイコンを長押しするとカスタムタイマーダイアログが表示されます。</string>
+    <string name="headsup_snooze_timer_set">デフォルトのHeads upスヌーズタイマーを%sにセットしました</string>
+
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">バーの透過</string>
+    <string name="pref_recents_translucent_bars_summary">アプリ履歴パネルでのステータスバーとナビバーを常に透過させるようにします。</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">週日のセット</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">システムのサウンドを消音する</string>
+    <string name="system_sound_dialpad">ダイヤルパッド操作音</string>
+    <string name="system_sound_touch">タッチ操作音</string>
+    <string name="system_sound_screen_lock">画面ロック時の音</string>
+    <string name="system_sound_volume_adjust">音量変更時の音</string>
+    <string name="system_sound_charger">GravityBox充電音</string>
 
 </resources>
