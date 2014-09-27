@@ -19,8 +19,6 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
-
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -53,9 +51,6 @@ public class ModPhone {
     private static final String CLASS_GSM_SERVICE_STATE_TRACKER = 
             "com.android.internal.telephony.gsm.GsmServiceStateTracker";
     private static final String CLASS_PHONE_UTILS = "com.android.phone.PhoneUtils";
-    private static final String CLASS_DIALPAD_FRAGMENT = Build.VERSION.SDK_INT > 17 ?
-            "com.android.dialer.dialpad.DialpadFragment" :
-            "com.android.contacts.dialpad.DialpadFragment";
     private static final boolean DEBUG = false;
 
     private static final int VIBRATE_45_SEC = 2828;
@@ -71,7 +66,6 @@ public class ModPhone {
     private static XSharedPreferences mPrefsPhone;
     private static Set<String> mCallVibrations;
     private static WakeLock mWakeLock;
-    private static QuietHours mQuietHours;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -349,28 +343,6 @@ public class ModPhone {
                 XposedHelpers.findAndHookMethod(classCallNotifier, "onNewRingingConnection",
                         CLASS_ASYNC_RESULT, onNewRingingConnectionHook);
             }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-
-        try {
-            XposedHelpers.findAndHookMethod(CLASS_DIALPAD_FRAGMENT, classLoader, "onResume", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param2) throws Throwable {
-                    XSharedPreferences qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
-                    mQuietHours = new QuietHours(qhPrefs);
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_DIALPAD_FRAGMENT, classLoader, "playTone",
-                    int.class, int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.DIALPAD)) {
-                        param.setResult(null);
-                    }
-                }
-            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
