@@ -119,7 +119,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mNotifSoundOverridePref.setChecked(ledSettings.getSoundOverride());
         mSoundUri = ledSettings.getSoundUri();
         mNotifSoundOnlyOncePref.setChecked(ledSettings.getSoundOnlyOnce());
-        mNotifSoundOnlyOnceTimeoutPref.setValue((int)(ledSettings.getSoundOnlyOnceTimeout() / 60000));
+        mNotifSoundOnlyOnceTimeoutPref.setValue((int)(ledSettings.getSoundOnlyOnceTimeout() / 1000));
         mNotifInsistentPref.setChecked(ledSettings.getInsistent());
         mVibratePatternOverridePref.setChecked(ledSettings.getVibrateOverride());
         if (ledSettings.getVibratePatternAsString() != null) {
@@ -197,7 +197,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     }
 
     protected long getSoundOnlyOnceTimeout() {
-        return (mNotifSoundOnlyOnceTimeoutPref.getValue() * 60000);
+        return (mNotifSoundOnlyOnceTimeoutPref.getValue() * 1000);
     }
 
     protected boolean getInsistent() {
