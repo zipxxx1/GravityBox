@@ -1563,4 +1563,18 @@
     <string name="charging_led_emulated">Emulovaný</string>
     <string name="charging_led_disabled">Vypnutý</string>
 
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Nastavit pracovní dny</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Zakázat systémové zvuky</string>
+    <string name="system_sound_dialpad">Zvuky číselníku</string>
+    <string name="system_sound_touch">Zvuky dotyku</string>
+    <string name="system_sound_screen_lock">Zvuk uzamčení obrazovky</string>
+    <string name="system_sound_volume_adjust">Zvuk nastavení hlasitosti</string>
+    <string name="system_sound_charger">GravityBox zvuky napájení</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignorovat pro příchozí hovory</string>
+
 </resources>
