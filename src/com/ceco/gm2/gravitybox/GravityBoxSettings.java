@@ -1587,6 +1587,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (!Utils.hasProximitySensor(getActivity())) {
                 mPrefCatPowerOther.removePreference(mPrefPowerProximityWake);
+                mPrefCatPowerOther.removePreference(mPrefProximityWakeIgnoreCall);
             }
             if (!Utils.hasTelephonySupport(getActivity())) {
                 mPrefCatLsOther.removePreference(mPrefLockscreenDisableEcb);
