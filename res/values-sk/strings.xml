@@ -1697,4 +1697,22 @@
         Dlhé stlačenie tlačidla driemania zobrazí dialóg pre manuálne zadanie časovača.</string>
     <string name="headsup_snooze_timer_set">Heads up predvolený časovač driemania nastavený pre %s</string>
 
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">Priehľadné lišty</string>
+    <string name="pref_recents_translucent_bars_summary">Vždy aplikuje priehľadnosť stavovej a navigačnej lišty v panely aktívnych úloh</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Nastaviť pracovné dni</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Zakázať systémové zvuky</string>
+    <string name="system_sound_dialpad">Zvuky číselníku</string>
+    <string name="system_sound_touch">Zvuky dotyku</string>
+    <string name="system_sound_screen_lock">Zvuk uzamknutia obrazovky</string>
+    <string name="system_sound_volume_adjust">Zvuk nastavenia hlasitosti</string>
+    <string name="system_sound_charger">GravityBox zvuky napájania</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignorovať pre prichádzajúce hovory</string>
+
 </resources>

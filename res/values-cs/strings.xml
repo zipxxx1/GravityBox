@@ -1693,4 +1693,22 @@
         Dlouhé stisknutí tlačítka dřímání zobrazí dialog pro manuální zadání časovače.</string>
     <string name="headsup_snooze_timer_set">Heads up výchozí časovač dřímání nastaven pro %s</string>
 
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">Průhledné lišty</string>
+    <string name="pref_recents_translucent_bars_summary">Vždy aplikuje průhlednost stavové a navigační lišty v panelu aktivních úloh</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Nastavit pracovní dny</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Zakázat systémové zvuky</string>
+    <string name="system_sound_dialpad">Zvuky číselníku</string>
+    <string name="system_sound_touch">Zvuky dotyku</string>
+    <string name="system_sound_screen_lock">Zvuk uzamčení obrazovky</string>
+    <string name="system_sound_volume_adjust">Zvuk nastavení hlasitosti</string>
+    <string name="system_sound_charger">GravityBox zvuky napájení</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignorovat pro příchozí hovory</string>
+
 </resources>
