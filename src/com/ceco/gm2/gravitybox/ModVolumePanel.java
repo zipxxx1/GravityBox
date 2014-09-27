@@ -18,6 +18,9 @@ package com.ceco.gm2.gravitybox;
 import java.lang.reflect.Field;
 import java.util.Map;
 
+import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
+import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
+
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
@@ -72,6 +75,8 @@ public class ModVolumePanel {
     private static boolean mRunningDropTranslucentAnimation = false;
     private static View mPanel;
     private static boolean mOpaqueOnInteraction;
+    private static XSharedPreferences mQhPrefs;
+    private static QuietHours mQuietHours;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -115,6 +120,9 @@ public class ModVolumePanel {
                 mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
                 if (DEBUG) log("mVolumesLinked set to: " + mVolumesLinked);
                 updateStreamVolumeAlias();
+            } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+                mQhPrefs.reload();
+                mQuietHours = new QuietHours(mQhPrefs);
             }
         }
         
@@ -126,6 +134,9 @@ public class ModVolumePanel {
             final Class<?> classStreamControl = XposedHelpers.findClass(CLASS_STREAM_CONTROL, classLoader);
             final Class<?> classAudioService = XposedHelpers.findClass(CLASS_AUDIO_SERVICE, classLoader);
             final Class<?> classViewGroup = XposedHelpers.findClass(CLASS_VIEW_GROUP, classLoader);
+
+            mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+            mQuietHours = new QuietHours(mQhPrefs);
 
             mVolumeAdjustMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_MUTE, false);
             mVolumeAdjustVibrateMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE, false);
@@ -167,6 +178,7 @@ public class ModVolumePanel {
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
+                    intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     context.registerReceiver(mBrodcastReceiver, intentFilter);
 
                     mPanel = (View) XposedHelpers.getObjectField(param.thisObject, "mPanel");
@@ -281,7 +293,8 @@ public class ModVolumePanel {
                     int.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mVolumeAdjustMuted) {
+                    if (mVolumeAdjustMuted || 
+                            mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.VOLUME_ADJUST)) {
                         param.setResult(null);
                     }
                 }

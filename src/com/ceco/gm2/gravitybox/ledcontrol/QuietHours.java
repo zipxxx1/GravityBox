@@ -38,6 +38,14 @@ import de.robv.android.xposed.XposedHelpers;
 public class QuietHours {
     public enum Mode { ON, OFF, AUTO };
 
+    public static final class SystemSound {
+        public static final String DIALPAD = "dialpad";
+        public static final String TOUCH = "touch";
+        public static final String SCREEN_LOCK = "screen_lock";
+        public static final String VOLUME_ADJUST = "volume_adjust";
+        public static final String CHARGER = "charger";
+    }
+
     public boolean uncLocked;
     public boolean enabled;
     int start;
@@ -46,6 +54,7 @@ public class QuietHours {
     int endAlt;
     public boolean muteLED;
     public boolean muteVibe;
+    public Set<String> muteSystemSounds;
     public boolean showStatusbarIcon;
     public Mode mode;
     public boolean interactive;
@@ -60,6 +69,8 @@ public class QuietHours {
         endAlt = prefs.getInt(QuietHoursActivity.PREF_KEY_QH_END_ALT, 360);
         muteLED = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_LED, false);
         muteVibe = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_MUTE_VIBE, true);
+        muteSystemSounds = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_MUTE_SYSTEM_SOUNDS,
+                new HashSet<String>());
         showStatusbarIcon = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_STATUSBAR_ICON, true);
         mode = Mode.valueOf(prefs.getString(QuietHoursActivity.PREF_KEY_QH_MODE, "AUTO"));
         interactive = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_INTERACTIVE, false);
@@ -146,6 +157,10 @@ public class QuietHours {
         }
 
         return (Utils.isTimeOfDayInRange(System.currentTimeMillis(), s, e));
+    }
+
+    public boolean isSystemSoundMuted(String systemSound) {
+        return (muteSystemSounds.contains(systemSound) && quietHoursActive());
     }
 
     private boolean isTransitionToWeekend(int day) {

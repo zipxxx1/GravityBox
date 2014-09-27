@@ -1627,4 +1627,12 @@
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Set week days</string>
 
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Mute system sounds</string>
+    <string name="system_sound_dialpad">Dialpad tones</string>
+    <string name="system_sound_touch">Touch sounds</string>
+    <string name="system_sound_screen_lock">Screen lock sound</string>
+    <string name="system_sound_volume_adjust">Volume adjust sound</string>
+    <string name="system_sound_charger">GravityBox charger sounds</string>
+
 </resources>

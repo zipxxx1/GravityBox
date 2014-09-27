@@ -21,6 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.ceco.gm2.gravitybox.GlowPadHelper.AppInfo;
+import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
+import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 
 import android.app.Activity;
@@ -117,6 +119,7 @@ public class ModLockscreen {
     ));
 
     private static XSharedPreferences mPrefs;
+    private static XSharedPreferences mQhPrefs;
     private static Class<?>[] mLaunchActivityArgs = new Class<?>[] 
             { Intent.class, boolean.class, boolean.class, Handler.class, Runnable.class };
     private static Object mKeyguardHostView;
@@ -129,6 +132,7 @@ public class ModLockscreen {
     private static ImageView mLockScreenWallpaperImage;
     private static String mCarrierText[];
     private static GestureDetector mDoubletapGesture;
+    private static QuietHours mQuietHours;
 
     // Battery Arc
     private static HandleDrawable mHandleDrawable;
@@ -160,6 +164,10 @@ public class ModLockscreen {
             } else if (action.equals(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED)) {
                 if (DEBUG_KIS) log("ACTION_KEYGUARD_IMAGE_UPDATED received");
                 setLastScreenBackground(context);
+            } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
+                mQhPrefs.reload();
+                mQuietHours = new QuietHours(mQhPrefs);
+                if (DEBUG) log("QuietHours settings reloaded");
             } else if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
                 mIsUserPresent = true;
             }
@@ -170,6 +178,8 @@ public class ModLockscreen {
     public static void initZygote(final XSharedPreferences prefs) {
         try {
             mPrefs = prefs;
+            mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+            mQuietHours = new QuietHours(mQhPrefs);
 
             final Class<?> kgViewManagerClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER, null);
             final Class<?> kgHostViewClass = XposedHelpers.findClass(CLASS_KG_HOSTVIEW, null);
@@ -201,6 +211,7 @@ public class ModLockscreen {
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
                     intentFilter.addAction(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED);
+                    intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     intentFilter.addAction(Intent.ACTION_USER_PRESENT);
                     context.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("Keyguard mediator constructed");
@@ -837,6 +848,16 @@ public class ModLockscreen {
                     if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_DISABLE_ECB, false) &&
                             (Integer) param.args[1] != TelephonyManager.CALL_STATE_OFFHOOK) {
                         param.args[2] = false;
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(kgViewMediatorClass, "playSounds", boolean.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.SCREEN_LOCK)) {
+                        XposedHelpers.setBooleanField(param.thisObject, "mSuppressNextLockSound", false);
+                        param.setResult(null);
                     }
                 }
             });
