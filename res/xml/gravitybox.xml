@@ -1441,6 +1441,12 @@
                 android:summary="@string/pref_power_proximity_wake_summary"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference 
+                android:key="pref_power_proximity_wake_ignore_call"
+                android:title="@string/pref_power_proximity_wake_ignore_call_title"
+                android:defaultValue="false"
+                android:dependency="pref_power_proximity_wake" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>
