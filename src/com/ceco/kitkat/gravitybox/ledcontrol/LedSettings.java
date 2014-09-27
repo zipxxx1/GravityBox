@@ -112,7 +112,7 @@ public class LedSettings {
                 ls.setSoundUri(Uri.parse(data[1]));
             } else if (data[0].equals("soundOnlyOnce")) {
                 ls.setSoundOnlyOnce(Boolean.valueOf(data[1]));
-            } else if (data[0].equals("soundOnlyOnceTimeout")) {
+            } else if (data[0].equals("soundOnlyOnceTimeoutMs")) {
                 ls.setSoundOnlyOnceTimeout(Long.valueOf(data[1]));
             } else if (data[0].equals("insistent")) {
                 ls.setInsistent(Boolean.valueOf(data[1]));
@@ -432,7 +432,7 @@ public class LedSettings {
                 dataSet.add("sound:" + mSoundUri.toString());
             }
             dataSet.add("soundOnlyOnce:" + mSoundOnlyOnce);
-            dataSet.add("soundOnlyOnceTimeout:" + mSoundOnlyOnceTimeout);
+            dataSet.add("soundOnlyOnceTimeoutMs:" + mSoundOnlyOnceTimeout);
             dataSet.add("insistent:" + mInsistent);
             dataSet.add("vibrateOverride:" + mVibrateOverride);
             if (mVibratePatternStr != null) {

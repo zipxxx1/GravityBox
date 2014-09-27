@@ -91,12 +91,13 @@
             android:key="pref_lc_notif_sound_only_once_timeout"
             android:title="@string/pref_lc_notif_sound_only_once_timeout_title"
             minimum="0"
-            maximum="60"
-            interval="1"
+            maximum="1800"
+            interval="5"
             monitorBoxEnabled="true"
-            monitorBoxUnit="m" 
+            monitorBoxUnit="s" 
             android:defaultValue="0"
-            android:dependency="pref_lc_notif_sound_only_once" />
+            android:dependency="pref_lc_notif_sound_only_once"
+            android:persistent="false" />
 
         <CheckBoxPreference
             android:key="pref_lc_notif_insistent"
