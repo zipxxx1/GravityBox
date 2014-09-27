@@ -29,6 +29,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.telephony.TelephonyManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -53,6 +54,7 @@ public class ModPower {
     private static Runnable mWakeUpRunnable;
     private static boolean mProxSensorCovered;
     private static WakeLock mWakeLock;
+    private static boolean mIgnoreIncomingCall;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -65,6 +67,10 @@ public class ModPower {
                 toggleWakeUpWithProximityFeature(intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false));
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL)) {
+                mIgnoreIncomingCall = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL, false);
+            }
         }
     };
 
@@ -73,6 +79,9 @@ public class ModPower {
         try {
             Class<?> pmServiceClass = XposedHelpers.findClass(CLASS_PM_SERVICE, null);
             Class<?> pmHandlerClass = XposedHelpers.findClass(CLASS_PM_HANDLER, null);
+
+            mIgnoreIncomingCall = prefs.getBoolean(
+                    GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL, false);
 
             XposedBridge.hookAllMethods(pmServiceClass, "init", new XC_MethodHook() {
                 @Override
@@ -92,7 +101,7 @@ public class ModPower {
                     long.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!hasWakeUpWithProximityFeature()) return;
+                    if (!shouldRunProximityCheck()) return;
 
                     synchronized (mLock) { 
                         if (mHandler.hasMessages(MSG_WAKE_UP)) {
@@ -157,8 +166,19 @@ public class ModPower {
         }
     }
 
-    private static boolean hasWakeUpWithProximityFeature() {
-        return (mSensorManager != null && mProxSensor != null);
+    private static boolean shouldRunProximityCheck() {
+        return (mSensorManager != null && mProxSensor != null &&
+                !(mIgnoreIncomingCall && isIncomingCall()));
+    }
+
+    private static boolean isIncomingCall() {
+        try {
+            TelephonyManager phone = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+            return (phone.getCallState() == TelephonyManager.CALL_STATE_RINGING);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return false;
+        }
     }
 
     private static void runWithProximityCheck() {

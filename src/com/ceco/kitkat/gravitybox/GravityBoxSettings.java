@@ -789,8 +789,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_ICON_AUTOHIDE = "pref_signal_icon_autohide2";
 
     public static final String PREF_KEY_POWER_PROXIMITY_WAKE = "pref_power_proximity_wake";
+    public static final String PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL = "pref_power_proximity_wake_ignore_call";
     public static final String ACTION_PREF_POWER_CHANGED = "gravitybox.intent.action.POWER_CHANGED";
     public static final String EXTRA_POWER_PROXIMITY_WAKE = "powerProximityWake";
+    public static final String EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL = "powerProximityWakeIgnoreCall";
 
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
@@ -1282,6 +1284,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefNonIntrusiveCall;
         private PreferenceScreen mPrefCatMtkFixes;
         private ListPreference mPrefChargingLed;
+        private CheckBoxPreference mPrefProximityWakeIgnoreCall;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1607,6 +1610,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefHeadsUpPosition = (ListPreference) findPreference(PREF_KEY_HEADS_UP_POSITION);
 
             mPrefChargingLed = (ListPreference) findPreference(PREF_KEY_CHARGING_LED);
+            mPrefProximityWakeIgnoreCall = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL);
 
             // MTK fixes
             mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
@@ -1656,6 +1660,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
+                mPrefCatPowerOther.removePreference(mPrefProximityWakeIgnoreCall);
            }
 
             // Remove MTK specific preferences for non-MTK devices
@@ -3112,6 +3117,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_LOCK_POLICY)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_LOCK_POLICY_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_LOCK_POLICY, Integer.valueOf(prefs.getString(key, "0")));
+            } else if (key.equals(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL)) {
+                intent.setAction(ACTION_PREF_POWER_CHANGED);
+                intent.putExtra(EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
