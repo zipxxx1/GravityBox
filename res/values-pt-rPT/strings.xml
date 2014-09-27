@@ -1710,4 +1710,22 @@
         Ao manter pressionado o botão de adiamento é possível escolher um temporizador costumizado.</string>
     <string name="headsup_snooze_timer_set">Temporizador por defeito das notificações definido por %s</string>
 
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">Barras translúcidas</string>
+    <string name="pref_recents_translucent_bars_summary">Permite tornar as barras de status e de navegação translúcidas no painel de aplicações recentes</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Definir dias da semana</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Silenciar sons de sistema</string>
+    <string name="system_sound_dialpad">Sons do marcador</string>
+    <string name="system_sound_touch">Sons de reação ao toque</string>
+    <string name="system_sound_screen_lock">Som do ecrã de bloqueio</string>
+    <string name="system_sound_volume_adjust">Som do ajuste de volume</string>
+    <string name="system_sound_charger">Sons do GravityBox ao (des)ligar carregador</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignorar para chamada a receber</string>
+
 </resources>
