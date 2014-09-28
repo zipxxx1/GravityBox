@@ -1567,7 +1567,7 @@
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interaktív mód</string>
-    <string name="pref_lc_qh_interactive_summary">Értesítések állandó kikapcsolva tartása felhasználói beavatkozásig (figyelembe véve az alkalamásonkénti mellőzési szabályokat)</string>
+    <string name="pref_lc_qh_interactive_summary">Értesítések állandó kikapcsolva tartása felhasználói beavatkozásig (figyelembe véve az alkalamzásonkénti mellőzési szabályokat)</string>
 
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Képernyőkép törlés engedélyezése</string>
@@ -1606,6 +1606,20 @@
     <string name="pref_charging_led_title">Akkumulátor töltés LED</string>
     <string name="charging_led_default">Alapértelmezett</string>
     <string name="charging_led_emulated">Emulált</string>
-    <string name="charging_led_disabled">Letiltve</string>  
+    <string name="charging_led_disabled">Letiltve</string>
+    
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Hétköznapok beállítása (munkanapok)</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Rendszerhangok némítása</string>
+    <string name="system_sound_dialpad">Tárcsázó érintési hangjai</string>
+    <string name="system_sound_touch">Érintés hangok</string>
+    <string name="system_sound_screen_lock">Képernyőzár hangja</string>
+    <string name="system_sound_volume_adjust">Hangerő szabályozás hangja</string>
+    <string name="system_sound_charger">GravityBox töltési hangjai</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Figyelmen kívül hagy beérkező híváskor</string>
 
 </resources>
