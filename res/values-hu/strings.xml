@@ -1608,7 +1608,7 @@
 
     <!-- Statusbar: notification heads up category -->
     <string name="pref_cat_notif_heads_up_title">Értesítések lebegő felugró ablakban</string>
-    <string name="pref_heads_up_master_switch_summary">Aktiválja a szabvány AOSP lebegő, felül megjelenő ablak funkciót. Amikor engedélyezve van, további alkalmazásonkénti opció válik elérhetővé az Értesítés vezérlésben. (újraindítás szükséges)</string>
+    <string name="pref_heads_up_master_switch_summary">Aktiválja a szabvány AOSP heads up funkciót: értesítés lebegő, a képernyő tetején felugorva megjelenő ablakban. Amikor engedélyezve van, további alkalmazásonkénti opció válik elérhetővé az Értesítés vezérlésben. (újraindítás szükséges)</string>
     <string name="pref_heads_up_one_finger_title">Egy ujjas kiterjesztés</string>
     <string name="pref_heads_up_timeout_title">Időtúllépés</string>
     <string name="pref_heads_up_timeout_summary">Mennyi ideig mutassa az értesítési ablakot. 0 = folyamatosan.</string>
@@ -1691,7 +1691,7 @@
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Képkiválasztás</string>
     <string name="imgpick_choose_error">Hiba történt a kép kiválasztása során</string>
-    <string name="imgpick_crop_error">iba történt a kép kivágás során</string>
+    <string name="imgpick_crop_error">Hiba történt a kép kivágás során</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Ébresztés közelség érzékelővel</string>
@@ -1711,5 +1711,23 @@
     <string name="pref_heads_up_snooze_timer_title">Alapértelmezett szundi időzítő</string>
     <string name="pref_heads_up_snooze_timer_summary">Az időzítő automatikusan beállításra kerül a lebegő felugró ablak szundi gombjára történő kattintással. Hosszú érintéssel a gombra kattintva az egyéni időzítő panel kerül megnyitásra.</string>
     <string name="headsup_snooze_timer_set">Lebegő felugró ablak szundi időzítő beállítva %s-ra</string>
+
+	<!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">Áttetsző sávok</string>
+    <string name="pref_recents_translucent_bars_summary">Az állapot- és navigációs sávot mindig áttetszővé változtatja a Nemrég használt alkalmazások panelben.</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Hétköznapok beállítása (munkanapok)</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Rendszerhangok némítása</string>
+    <string name="system_sound_dialpad">Tárcsázó érintési hangjai</string>
+    <string name="system_sound_touch">Érintés hangok</string>
+    <string name="system_sound_screen_lock">Képernyőzár hangja</string>
+    <string name="system_sound_volume_adjust">Hangerő szabályozás hangja</string>
+    <string name="system_sound_charger">GravityBox töltési hangjai</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Figyelmen kívül hagy beérkező híváskor</string>
 
 </resources>
