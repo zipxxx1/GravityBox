@@ -1,3 +1,30 @@
+Changelog 3.4.4 - 28/09/2014
+--------------------------------------
+- UNC Quiet hours:
+--- added option for specifying week days
+--- added option for muting system sounds
+--- optimized preference handling (requires setting up quiet hours from scratch)
+- UNC: changed resolution of alert only once timeout from minutes to seconds (requires setting it up again)
+- Proximity wake-up:
+--- added option to ignore proximity wake-up on incoming call
+--- hide feature from devices that have no proximity sensor (thanks to bgcngm)
+- Recents panel: always translucent bars feature now optional (since it breaks recents panel on Xperia)
+- GB Actions: optimized airplane mode toggle action (thanks to pyler)
+- Lockscreen: optimized preference handling and unlock ring hooks
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated French translations (thanks to ch-vox)
+- Updated Turkish translation (thanks to droidplus)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Slovak and Czech translations
+
 Changelog 3.4.3 - 18/09/2014
 --------------------------------------
 - Lockscreen status bar lock policy:
