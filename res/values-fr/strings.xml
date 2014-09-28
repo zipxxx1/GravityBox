@@ -1623,4 +1623,18 @@
     <string name="charging_led_emulated">Émulée</string>
     <string name="charging_led_disabled">Désactivée</string>
 
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Choisir les jours de la semaine</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Sons système en sourdine</string>
+    <string name="system_sound_dialpad">Tonalités clavier téléphonique</string>
+    <string name="system_sound_touch">Sons au toucher</string>
+    <string name="system_sound_screen_lock">Son écran de déverrouillage</string>
+    <string name="system_sound_volume_adjust">Son à l\'ajustement du volume</string>
+    <string name="system_sound_charger">Sons de GravityBox au chargement</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignorer lors d\'un appel entrant</string>
+
 </resources>
