@@ -18,18 +18,18 @@
 
     <string name="app_name">GravityBox [KK]</string>
 
-    <string name="battery_style_title">Akkumlátor kijelző stílusa</string>  
-    <string name="battery_style_stock">Gyári akkumlátor kijelző</string>
-    <string name="battery_style_circle">Kör akkumlátor kijelző</string>
-    <string name="battery_style_circle_percent">Kör akkumlátor kijelző százalékkal</string>
-    <string name="battery_style_kitkat">KitKat akkumlátor kijelző</string>
+    <string name="battery_style_title">Akkumulátor kijelző stílusa</string>  
+    <string name="battery_style_stock">Gyári akkumulátor kijelző</string>
+    <string name="battery_style_circle">Kör akkumulátor kijelző</string>
+    <string name="battery_style_circle_percent">Kör akkumulátor kijelző százalékkal</string>
+    <string name="battery_style_kitkat">KitKat akkumulátor kijelző</string>
     <string name="battery_style_kitkat_percent">KitKat kijelző százalékkal</string>
-    <string name="battery_style_none">Semmilyen, nincs akkumlátor kijelzés</string>
+    <string name="battery_style_none">Semmilyen, nincs akkumulátor kijelzés</string>
 
     <string name="vol_music_controls_title">Hangerő gombok átugorják a számot</string>
     <string name="vol_music_controls_summary">Kikapcsolt képernyőnél a hangerő gombok hosszú megnyomásával átugorhatjuk az aktuális számot</string>
 
-    <string name="low_battery_warning_policy_title">Alacsony akkumlátorszint figyelmeztetés</string>
+    <string name="low_battery_warning_policy_title">Alacsony akkumulátorszint figyelmeztetés</string>
     <string name="low_battery_warning_full">Felugró szöveg és hang</string>
     <string name="low_battery_warning_popup">Csak felugó szöveg</string>
     <string name="low_battery_warning_sound">Csak hang</string>
@@ -94,11 +94,11 @@
     <string name="quick_settings_title">Állapotsáv Gyorsbeállítások csempéi</string>
     <string name="quick_settings_summary">Lehetővé teszi a Gyorsbeállítások csempék elrejtését/mutatását az állapotsávon</string>
     <string name="qs_tile_user_profile">Felhasználói profil</string>
-    <string name="qs_tile_airplane_mode">Repülő üzemmód</string>
-    <string name="qs_tile_battery">Akkumlátor státusz</string>
+    <string name="qs_tile_airplane_mode">Repülőgép üzemmód</string>
+    <string name="qs_tile_battery">Akkumulátor státusz</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
-    <string name="qs_tile_gps">Helymeghatározás</string>
+    <string name="qs_tile_gps">Helyzetmeghatározás</string>
     <string name="qs_tile_gps_slimkat">Helyzetmeghatározás (SlimKat stílus)</string>
     <string name="qs_tile_gps_alt">GPS (CM stílus)</string>
     <string name="qs_tile_mobile_data">Mobil adatátvitel</string>
@@ -106,7 +106,7 @@
     <string name="qs_tile_data_usage">Adat használat</string>
     <string name="qs_tile_brightness">Fényerő</string>
     <string name="qs_tile_autorotation">Automatikus elforgatás</string>
-    <string name="qs_tile_sync">Szinkronizálás</string>
+    <string name="qs_tile_sync">Szinkronizáció</string>
     <string name="qs_tile_wifi_ap">Wi-Fi hozzáférési pont</string>
     <string name="qs_tile_torch">Zseblámpa</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
@@ -188,7 +188,7 @@
 
     <!--  Low battery LED flashing -->
     <string name="pref_flashing_led_disable_title">Letiltja a LED villogást</string>
-    <string name="pref_flashing_led_disable_summary">Kikapcsolja a zavaró LED villogást amikor az akkumlátorszint alacsony és nincs töltés</string>
+    <string name="pref_flashing_led_disable_summary">Kikapcsolja a zavaró LED villogást amikor az akkumulátorszint alacsony és nincs töltés</string>
 
     <!-- Display tweaks category -->
     <string name="pref_cat_display_title">Kijelző módosítások</string>
@@ -368,7 +368,7 @@
     <string name="button_backlight_mode_disable">Gomb háttérvilágítás kikapcsolva</string>
     <string name="button_backlight_mode_always_on">Bekapcsolt kijelzőnél mindig bekapcsolva</string>
     <string name="pref_button_backlight_notifications_title">Gomb háttérvilágítás értesítések</string>
-    <string name="pref_button_backlight_notifications_summary">KÍSÉRLETI! Villogtatja a gomb háttérvilágítást amikor értesítés érkezik. Abban az esetben használd, ha az eszközödből hiányzik az értesítési LED. Fogyaszhtatja az akkumlátort.</string>
+    <string name="pref_button_backlight_notifications_summary">KÍSÉRLETI! Villogtatja a gomb háttérvilágítást amikor értesítés érkezik. Abban az esetben használd, ha az eszközödből hiányzik az értesítési LED. Fogyaszhtatja az akkumulátort.</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Nagyobb színmélységű Holo háttér</string>
@@ -598,6 +598,7 @@
     <string name="pref_statusbar_lock_policy_title">Állapotsáv zárolása házirend</string>
     <string name="sbl_policy_default">Alapértelmezett</string>
     <string name="sbl_policy_unlocked">Feloldva, ha a billentyűzár nincs engedélyezve</string>
+    <string name="sbl_policy_unlocked_secured">Feloldva</string>
     <string name="sbl_policy_locked">Zárolva</string>
 
     <!-- Data traffic monitor -->
@@ -634,8 +635,8 @@
     <string name="hwkey_recents_longpress_dialog_title">Nemrég használt alkalmazások gomb hosszú érintés művelete</string>
 
     <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Akkumlátor körív mutatása</string>
-    <string name="pref_lockscreen_battery_arc_summary">Mutatja az akkumlátor állapot körívet a feloldó kör körül.</string>
+    <string name="pref_lockscreen_battery_arc_title">Akkumulátor körív mutatása</string>
+    <string name="pref_lockscreen_battery_arc_summary">Mutatja az akkumulátor állapot körívet a feloldó kör körül.</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Zseblámpa ki-bekapcsolása</string>
@@ -830,19 +831,19 @@
     <string name="fullscreen_caller_full">Teljes</string>
 
     <!-- Battery percent text -->
-    <string name="battery_percent_text_title">Akkumlátor százalék szövege</string>
-    <string name="battery_percent_text_size_title">Akkumlátor százalék szöveg mérete</string>
+    <string name="battery_percent_text_title">Akkumulátor százalék szövege</string>
+    <string name="battery_percent_text_size_title">Akkumulátor százalék szöveg mérete</string>
     <string name="battery_percent_text_size_larger">Nagyobb</string>
     <string name="battery_percent_text_size_normal">Normál</string>
     <string name="battery_percent_text_size_smaller">Kisebb</string>
     <string name="battery_percent_text_size_even_smaller">Még kisebb</string>
     <string name="battery_percent_text_size_smallest">Legkisebb</string>
-    <string name="battery_percent_text_style_title">Akkumlátor százalék szöveg stílusa</string>
+    <string name="battery_percent_text_style_title">Akkumulátor százalék szöveg stílusa</string>
     <string name="battery_percent_text_style_default">Alapértelmezett</string>
     <string name="battery_percent_text_style_numbers_only">Csak számok (százalékos ikon nélkül)</string>
 
     <!-- Battery settings category -->
-    <string name="pref_cat_battery_settings_title">Akkumlátor beállítások</string>
+    <string name="pref_cat_battery_settings_title">Akkumulátor beállítások</string>
 
     <!-- Cursor control in navigation bar -->
     <string name="pref_navbar_cursor_control_title">Kurzor irányítás gombok</string>
@@ -922,11 +923,11 @@
     <string name="shortcut_wifi_ap">WiFi hozzáférési pont ki-bekapcsolása</string>
 
     <!-- Location mode shortcut -->
-    <string name="shortcut_location_mode">Helymeghatározás módjának beállítása</string>
+    <string name="shortcut_location_mode">Helyzetmeghatározás módjának beállítása</string>
     <string name="location_mode_high_accuracy">Nagy pontosság</string>
-    <string name="location_mode_battery_saving">Akkumlátor takarékos</string>
+    <string name="location_mode_battery_saving">Akkumulátor takarékos</string>
     <string name="location_mode_device_only">Csak modul</string>
-    <string name="location_mode_off">Helymeghatározás kikapcsolva</string>
+    <string name="location_mode_off">Helyzetmeghatározás kikapcsolva</string>
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">NFC ki-bekapcsolása</string>
@@ -1032,7 +1033,7 @@
     <string name="carrier_text_empty">Üres</string>
 
     <!-- Battery charged sound -->
-    <string name="pref_battery_charged_sound_title">Akkumlátor feltöltve jelzőhang</string>
+    <string name="pref_battery_charged_sound_title">Akkumulátor feltöltve jelzőhang</string>
 
     <!-- Pie long-press actions -->
     <string name="pref_cat_pie_long_press_title">Hosszú érintés műveletek</string>
@@ -1131,7 +1132,7 @@
     <string name="icon_picker_choose_icon_title">Ikon kiválasztása</string>
     <string name="shortcuts_icon_picker_alarm">Ébresztés</string>
     <string name="shortcuts_icon_picker_andy">Android robot</string>
-    <string name="shortcuts_icon_picker_battery">Akkumlátor</string>
+    <string name="shortcuts_icon_picker_battery">Akkumulátor</string>
     <string name="shortcuts_icon_picker_browser">Böngésző</string>
     <string name="shortcuts_icon_picker_calendar">Naptár</string>
     <string name="shortcuts_icon_picker_camera">Kamera</string>
@@ -1464,7 +1465,7 @@
     <string name="sc_lte_style_4g">4G</string>
 
     <!-- GB Actions: toggle airplane mode -->
-    <string name="shortcut_airplane_mode">Repülő üzemmód ki-bekapcsolása</string>
+    <string name="shortcut_airplane_mode">Repülőgép üzemmód ki-bekapcsolása</string>
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Bluetooth ikon láthatósága</string>
@@ -1507,8 +1508,8 @@
     <string name="pref_data_traffic_active_mobile_only_title">Csak mobil adatkapcsolatnál</string>
 
     <!-- Dashed circle battery style -->
-    <string name="battery_style_circle_dashed">Szaggatott kör akkumlátor</string>
-    <string name="battery_style_circle_dashed_percent">Szaggatott kör akkumlátor százalékkal</string>
+    <string name="battery_style_circle_dashed">Szaggatott kör akkumulátor</string>
+    <string name="battery_style_circle_dashed_percent">Szaggatott kör akkumulátor százalékkal</string>
 
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">Köszönöm a támogatást. A prémium funkciók a GravityBox újraindítása után kerülnek feloldásra. Győződjön meg arról, hogy a GravityBox Feloldó (Unlocker) legalább 120 percig telepítve van.</string>
@@ -1712,7 +1713,7 @@
     <string name="pref_heads_up_snooze_timer_summary">Az időzítő automatikusan beállításra kerül a lebegő felugró ablak szundi gombjára történő kattintással. Hosszú érintéssel a gombra kattintva az egyéni időzítő panel kerül megnyitásra.</string>
     <string name="headsup_snooze_timer_set">Lebegő felugró ablak szundi időzítő beállítva %s-ra</string>
 
-	<!-- Recents panel: always translucent bars -->
+    <!-- Recents panel: always translucent bars -->
     <string name="pref_recents_translucent_bars_title">Áttetsző sávok</string>
     <string name="pref_recents_translucent_bars_summary">Az állapot- és navigációs sávot mindig áttetszővé változtatja a Nemrég használt alkalmazások panelben.</string>
 
