@@ -182,7 +182,7 @@ public class LedSettings {
     protected static boolean isQuietHoursEnabled(Context context) {
         try {
             SharedPreferences prefs = context.getSharedPreferences(
-                    "ledcontrol", Context.MODE_WORLD_READABLE);
+                    "quiet_hours", Context.MODE_WORLD_READABLE);
             return prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false);
         } catch (Throwable t) {
             t.printStackTrace();
