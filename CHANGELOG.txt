@@ -1,3 +1,24 @@
+Changelog 3.4.1 - 29/09/2014
+--------------------------------------
+- UNC Quiet hours:
+--- added option for specifying week days
+--- added option for muting system sounds
+--- optimized preference handling (requires setting up quiet hours from scratch)
+- UNC: changed resolution of alert only once timeout from minutes to seconds (requires setting it up again)
+- Proximity wake-up:
+--- added option to ignore proximity wake-up on incoming call
+- Lockscreen: optimized preference handling and unlock ring hooks
+- GB settings: fixed image choosing/cropping issues
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Italian translations (thanks to valerioscifoni, pesa1234)
+- Updated French translations (thanks to ch-vox)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Slovak and Czech translations
+
 Changelog 3.4.0 - 19/09/2014
 --------------------------------------
 - GB settings:
