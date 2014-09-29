@@ -1746,5 +1746,8 @@
     <string name="system_sound_screen_lock">锁屏音效</string>
     <string name="system_sound_volume_adjust">音量调节音效</string>
     <string name="system_sound_charger">GravityBox充电音效</string>
+    
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">忽略来电</string>
 
 </resources>
