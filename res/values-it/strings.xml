@@ -1607,5 +1607,16 @@
     <string name="charging_led_default">Predefinito</string>
     <string name="charging_led_emulated">Attivo</string>
     <string name="charging_led_disabled">Disattivo</string>
+    
+     <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Suono di muto</string>
+    <string name="system_sound_dialpad">Toni tastiera</string>
+    <string name="system_sound_touch">Suono al tocco</string>
+    <string name="system_sound_screen_lock">Suono di blocco schermo</string>
+    <string name="system_sound_volume_adjust">Suoni regolazione volume</string>
+    <string name="system_sound_charger">Suono ricarica GravityBox</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignora per chiamate in arrivo</string>
 
 </resources>
