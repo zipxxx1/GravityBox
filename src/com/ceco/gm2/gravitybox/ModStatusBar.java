@@ -104,6 +104,8 @@ public class ModStatusBar {
     private static final String SCREENSHOT_URI = "com.android.systemui.SCREENSHOT_URI";
     private static final int SCREENSHOT_NOTIFICATION_ID = 789;
 
+    private static enum TickerPolicy { DEFAULT, LOCKED, SECURED, DISABLED };
+
     private static ViewGroup mIconArea;
     private static ViewGroup mRootView;
     private static LinearLayout mLayoutClock;
@@ -140,6 +142,7 @@ public class ModStatusBar {
     private static XSharedPreferences mPrefs;
     private static int mDeleteIconId;
     private static StatusbarDownloadProgressView mDownloadProgressView;
+    private static TickerPolicy mTickerPolicy;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -251,6 +254,9 @@ public class ModStatusBar {
                 NotificationManager notificationManager =
                         (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.cancel(SCREENSHOT_NOTIFICATION_ID);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED)) {
+                mTickerPolicy = TickerPolicy.valueOf(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_STATUSBAR_TICKER_POLICY));
             }
         }
     };
@@ -432,6 +438,8 @@ public class ModStatusBar {
                     prefs.getString(GravityBoxSettings.PREF_KEY_NOTIF_CARRIER_TEXT, ""),
                     prefs.getString(GravityBoxSettings.PREF_KEY_NOTIF_CARRIER2_TEXT, "")};
             mDt2sEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DT2S, false);
+            mTickerPolicy = TickerPolicy.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_STATUSBAR_TICKER_POLICY, "DEFAULT"));
 
             XposedBridge.hookAllConstructors(phoneStatusBarPolicyClass, new XC_MethodHook() {
                 @Override
@@ -528,6 +536,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BT_VISIBILITY_CHANGED);
                     intentFilter.addAction(ACTION_DELETE_SCREENSHOT);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
@@ -932,6 +941,32 @@ public class ModStatusBar {
                                         PendingIntent.FLAG_CANCEL_CURRENT));
 
                         XposedHelpers.setAdditionalInstanceField(builder, "gbDeleteActionAdded", true);
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+
+            // notification ticker policy
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "tick",
+                        IBinder.class, CLASS_STATUSBAR_NOTIF, boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        switch (mTickerPolicy) {
+                            case DEFAULT: return;
+                            case DISABLED: param.setResult(null); return;
+                            case LOCKED:
+                            case SECURED:
+                                KeyguardManager kg = (KeyguardManager) 
+                                    mContext.getSystemService(Context.KEYGUARD_SERVICE);
+                                if (mTickerPolicy == TickerPolicy.LOCKED && kg.isKeyguardLocked()) {
+                                    param.setResult(null);
+                                } else if (mTickerPolicy == TickerPolicy.SECURED &&
+                                        kg.isKeyguardLocked() && kg.isKeyguardSecure()) {
+                                    param.setResult(null);
+                                }
+                        }
                     }
                 });
             } catch (Throwable t) {

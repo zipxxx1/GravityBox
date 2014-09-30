@@ -790,6 +790,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_PATCH_MASTER_KEY = "pref_patch_master_key";
     public static final String PREF_KEY_PATCH_FAKE_ID = "pref_patch_fake_id";
 
+    public static final String PREF_KEY_STATUSBAR_TICKER_POLICY = "pref_statusbar_ticker_policy";
+    public static final String ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED = "gravitybox.intent.action.STATUSBAR_TICKER_POLICY_CHANGED";
+    public static final String EXTRA_STATUSBAR_TICKER_POLICY = "sbTickerPolicy";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -1244,6 +1248,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private AppPickerPreference mPrefCustomApp;
         private ListPreference mPrefChargingLed;
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
+        private ListPreference mPrefSbTickerPolicy;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1577,6 +1582,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefChargingLed = (ListPreference) findPreference(PREF_KEY_CHARGING_LED);
             mPrefProximityWakeIgnoreCall = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL);
+            mPrefSbTickerPolicy = (ListPreference) findPreference(PREF_KEY_STATUSBAR_TICKER_POLICY); 
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
@@ -2345,6 +2351,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefChargingLed.setSummary(mPrefChargingLed.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_STATUSBAR_TICKER_POLICY)) {
+                mPrefSbTickerPolicy.setSummary(mPrefSbTickerPolicy.getEntry());
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -3107,6 +3117,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED, prefs.getString(key, "OFF"));
+            } else if (key.equals(PREF_KEY_STATUSBAR_TICKER_POLICY)) {
+                intent.setAction(ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
+                intent.putExtra(EXTRA_STATUSBAR_TICKER_POLICY, prefs.getString(key, "DEFAULT"));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
