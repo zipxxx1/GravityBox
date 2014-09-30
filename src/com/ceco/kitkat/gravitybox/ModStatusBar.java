@@ -27,6 +27,7 @@ import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.XC_MethodHook.MethodHookParam;
 import de.robv.android.xposed.callbacks.XC_LayoutInflated;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import android.app.ActivityOptions;
@@ -67,6 +68,7 @@ import android.widget.TextView;
 public class ModStatusBar {
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String TAG = "GB:ModStatusBar";
+    private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_TICKER = "com.android.systemui.statusbar.phone.PhoneStatusBar$MyTicker";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
@@ -133,6 +135,7 @@ public class ModStatusBar {
     private static String mClockLongpressLink;
     private static XSharedPreferences mPrefs;
     private static int mDeleteIconId;
+    private static StatusbarDownloadProgressView mDownloadProgressView;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -355,6 +358,11 @@ public class ModStatusBar {
                     // inject Quiet Hours view
                     StatusbarQuietHoursView qhv = new StatusbarQuietHoursView(liparam.view.getContext());
                     mIconArea.addView(qhv, 0);
+
+                    // inject download progress view
+                    mDownloadProgressView = new StatusbarDownloadProgressView(liparam.view.getContext(), prefs);
+                    mRootView.addView(mDownloadProgressView);
+                    mBroadcastSubReceivers.add(mDownloadProgressView);
                 }
             });
 
@@ -516,6 +524,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DT2S_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BT_VISIBILITY_CHANGED);
                     intentFilter.addAction(ACTION_DELETE_SCREENSHOT);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(
@@ -637,6 +646,32 @@ public class ModStatusBar {
                     if (mOngoingNotif.contains(notifData)) {
                         param.setResult(null);
                         if (DEBUG) log("Ongoing notification " + notifData + " blocked.");
+                    }
+                }
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mDownloadProgressView != null) {
+                        mDownloadProgressView.onNotificationAdded(param.args[1]);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "updateNotification", 
+                    IBinder.class, CLASS_STATUSBAR_NOTIF, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mDownloadProgressView != null) {
+                        mDownloadProgressView.onNotificationUpdated(param.args[1]);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "removeNotificationViews",
+                    IBinder.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mDownloadProgressView != null) {
+                        mDownloadProgressView.onNotificationRemoved(param.getResult());
                     }
                 }
             });

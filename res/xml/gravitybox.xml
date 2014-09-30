@@ -979,6 +979,12 @@
 
         </PreferenceScreen>
 
+        <CheckBoxPreference 
+            android:key="pref_statusbar_download_progress"
+            android:title="@string/pref_statusbar_download_progress_title"
+            android:summary="@string/pref_statusbar_download_progress_summary"
+            android:defaultValue="false" />
+
         <ListPreference 
             android:key="pref_sb_bt_visibility"
             android:title="@string/pref_sb_bt_visibility_title"
