@@ -30,13 +30,14 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 
 public class StatusbarDownloadProgressView extends View implements IconManagerListener, BroadcastSubReceiver {
     private static final String TAG = "GB:StatusbarDownloadProgressView";
     private static final boolean DEBUG = false;
 
-    private boolean mEnabled;
+    private enum Mode { OFF, TOP, BOTTOM };
+    private Mode mMode;
     private String mPackageName;
 
     private static void log(String message) {
@@ -46,15 +47,15 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     public StatusbarDownloadProgressView(Context context, XSharedPreferences prefs) {
         super(context);
 
-        mEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, false);
+        mMode = Mode.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"));
 
         int heightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1,
                 context.getResources().getDisplayMetrics());
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, heightPx);
-        lp.gravity = Gravity.TOP | Gravity.START;
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(0, heightPx);
         setLayoutParams(lp);
         setBackgroundColor(Color.WHITE);
         setVisibility(View.GONE);
+        updatePosition();
     }
 
     @Override
@@ -70,7 +71,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     }
 
     public void onNotificationAdded(Object statusBarNotif) {
-        if (!mEnabled) return;
+        if (mMode == Mode.OFF) return;
 
         if (!verifyNotification(statusBarNotif)) {
             if (DEBUG) log("onNotificationAdded: ignoring non-download provider notification");
@@ -90,7 +91,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     }
 
     public void onNotificationUpdated(Object statusBarNotif) {
-        if (!mEnabled) return;
+        if (mMode == Mode.OFF) return;
 
         if (mPackageName == null) {
             // treat it as if it was added, e.g. to show progress in case
@@ -111,7 +112,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     }
 
     public void onNotificationRemoved(Object statusBarNotif) {
-        if (!mEnabled) return;
+        if (mMode == Mode.OFF) return;
 
         if (!verifyNotification(statusBarNotif)) {
             if (DEBUG) log("onNotificationRemoved: ignoring non-download provider notification");
@@ -161,6 +162,14 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         setVisibility(newWidth > 0 ? View.VISIBLE : View.GONE);
     }
 
+    private void updatePosition() {
+        if (mMode == Mode.OFF) return;
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) getLayoutParams();
+        lp.gravity = mMode == Mode.TOP ? (Gravity.TOP | Gravity.START) :
+            (Gravity.BOTTOM | Gravity.START);
+        setLayoutParams(lp);
+    }
+
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
@@ -175,10 +184,12 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED)) {
-            mEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED, false);
-            if (!mEnabled) {
+            mMode = Mode.valueOf(intent.getStringExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED));
+            if (mMode == Mode.OFF) {
                 mPackageName = null;
                 updateProgress(null);
+            } else {
+                updatePosition();
             }
         }
     }

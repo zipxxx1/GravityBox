@@ -3127,7 +3127,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
-                intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED, prefs.getBoolean(key, false));
+                intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED, prefs.getString(key, "OFF"));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

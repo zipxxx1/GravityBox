@@ -1754,5 +1754,8 @@
     <string name="pref_statusbar_download_progress_title">Download progress bar</string>
     <string name="pref_statusbar_download_progress_summary">Shows download progress bar in status bar for downloads carried out via
         Android\'s standard download manager</string>
+    <string name="sb_download_progress_off">Disabled</string>
+    <string name="sb_download_progress_top">Top edge</string>
+    <string name="sb_download_progress_bottom">Bottom edge</string>
 
 </resources>

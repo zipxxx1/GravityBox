@@ -1143,4 +1143,16 @@
         <item>charger</item>
     </string-array>
 
+    <string-array name="sb_download_progress_entries" translatable="false">
+        <item>@string/sb_download_progress_off</item>
+        <item>@string/sb_download_progress_top</item>
+        <item>@string/sb_download_progress_bottom</item>
+    </string-array>
+
+    <string-array name="sb_download_progress_values" translatable="false">
+        <item>OFF</item>
+        <item>TOP</item>
+        <item>BOTTOM</item>
+    </string-array>
+
 </resources>
