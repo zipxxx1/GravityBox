@@ -338,7 +338,7 @@
     <string name="pref_statusbar_data_activity_color_summary">Define cores para os indicadores de atividade de dados</string>
 
     <!-- QuickSettings management category -->
-    <string name="pref_cat_statusbar_qs_title">Gerenciamento de configurações rápidas</string>
+    <string name="pref_cat_statusbar_qs_title">Configurações rápidas</string>
 
     <!-- Notification drawer style -->
     <string name="pref_cat_notification_drawer_style_title">Estilo da gaveta de notificação</string>
@@ -455,8 +455,8 @@
     <string name="pie_control_trigger_size_title">Alterar tamanho</string>
 
     <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Gerenciamento de transparências</string>
-    <string name="pref_cat_transparency_manager_summary">Gerencia a transparência da barra de status e da barra de navegação</string>
+    <string name="pref_cat_transparency_manager_title">Configurações de transparências</string>
+    <string name="pref_cat_transparency_manager_summary">Configurar a transparência da barra de status e da barra de navegação</string>
     <string name="pref_tm_statusbar_launcher_title">Barra de status no inicializador</string>
     <string name="pref_tm_statusbar_lockscreen_title">Barra de status na tela de bloqueio</string>
     <string name="pref_tm_navbar_launcher_title">Barra de navegação no inicializador</string>
@@ -758,7 +758,7 @@
     <string name="pref_lockscreen_shade_disable_summary">Remove a tonalidade escura da tela de bloqueio</string>
 
     <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Modo de gerenciamento de transparências</string>
+    <string name="pref_tm_mode_title">Modo de configuração de transparências</string>
     <string name="pref_tm_mode_summary">Necessário reiniciar</string>
     <string name="tm_mode_disabled">Desabilitado</string>
     <string name="tm_mode_statusbar">Barra de status</string>
@@ -1593,5 +1593,19 @@
     <string name="charging_led_default">Padrão</string>
     <string name="charging_led_emulated">Através de simulação</string>
     <string name="charging_led_disabled">Desativada</string>
+    
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Definir dias da semana</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Silenciar sons do sistema</string>
+    <string name="system_sound_dialpad">Sons de tecla</string>
+    <string name="system_sound_touch">Sons de toque</string>
+    <string name="system_sound_screen_lock">Som da tela de bloqueio</string>
+    <string name="system_sound_volume_adjust">Som do ajuste de volume</string>
+    <string name="system_sound_charger">Sons do GravityBox ao (des)ligar carregador</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignorar em chamada recebida</string>
 
 </resources>
