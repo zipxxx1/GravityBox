@@ -1431,7 +1431,7 @@
     <string name="battery_percent_text_charging_color_title">充電時的電池文字顏色</string>
 
     <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">星期一至五</string>
+    <string name="pref_lc_qh_cat_weekdays_title">週日</string>
     <string name="pref_lc_qh_cat_weekend_title">週末</string>
 
     <!-- Disable data network type icons -->
@@ -1715,5 +1715,23 @@
     <string name="pref_heads_up_snooze_timer_summary">設定當您點擊延後通知按鈕時自動套用的計時器長度
 	(長按延後通知按鈕亦可自設延後通知計時器長度)</string>
     <string name="headsup_snooze_timer_set">已套用預設延後通知計時器至 %s</string>
+
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">半透明系統狀態列及導航列</string>
+    <string name="pref_recents_translucent_bars_summary">在多工面板內啟用半透明系統狀態列及導航列</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">設定週日</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">停用系統音效</string>
+    <string name="system_sound_dialpad">撥號鍵盤觸控音效</string>
+    <string name="system_sound_touch">觸控音效</string>
+    <string name="system_sound_screen_lock">螢幕鎖定音效</string>
+    <string name="system_sound_volume_adjust">音量調節音效</string>
+    <string name="system_sound_charger">GravityBox 充電器音效</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">當有來電時忽略 [距離感應器喚醒] 設定</string>
 
 </resources>
