@@ -798,6 +798,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED = "gravitybox.intent.action.STATUSBAR_DOWNLOAD_PROGRESS_CHANGED";
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED = "sbDownloadProgressEnabled";
 
+    public static final String PREF_KEY_STATUSBAR_TICKER_POLICY = "pref_statusbar_ticker_policy";
+    public static final String ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED = "gravitybox.intent.action.STATUSBAR_TICKER_POLICY_CHANGED";
+    public static final String EXTRA_STATUSBAR_TICKER_POLICY = "sbTickerPolicy";
+
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
     public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
@@ -1289,6 +1293,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatMtkFixes;
         private ListPreference mPrefChargingLed;
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
+        private ListPreference mPrefSbTickerPolicy;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1615,6 +1620,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefChargingLed = (ListPreference) findPreference(PREF_KEY_CHARGING_LED);
             mPrefProximityWakeIgnoreCall = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL);
+            mPrefSbTickerPolicy = (ListPreference) findPreference(PREF_KEY_STATUSBAR_TICKER_POLICY); 
 
             // MTK fixes
             mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
@@ -2362,6 +2368,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_CHARGING_LED)) {
                 mPrefChargingLed.setSummary(mPrefChargingLed.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_STATUSBAR_TICKER_POLICY)) {
+                mPrefSbTickerPolicy.setSummary(mPrefSbTickerPolicy.getEntry());
             }
 
             for (String caKey : customAppKeys) {
@@ -3128,6 +3138,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED, prefs.getString(key, "OFF"));
+            } else if (key.equals(PREF_KEY_STATUSBAR_TICKER_POLICY)) {
+                intent.setAction(ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
+                intent.putExtra(EXTRA_STATUSBAR_TICKER_POLICY, prefs.getString(key, "DEFAULT"));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

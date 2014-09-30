@@ -1758,4 +1758,11 @@
     <string name="sb_download_progress_top">Top edge</string>
     <string name="sb_download_progress_bottom">Bottom edge</string>
 
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Notification ticker policy</string>
+    <string name="sb_ticker_policy_default">Default</string>
+    <string name="sb_ticker_policy_locked">Disable on lock screen</string>
+    <string name="sb_ticker_policy_secured">Disable on secured lock screen</string>
+    <string name="sb_ticker_policy_disabled">Always disable</string>
+
 </resources>
