@@ -92,15 +92,19 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     public void onNotificationUpdated(Object statusBarNotif) {
         if (!mEnabled) return;
 
+        if (mPackageName == null) {
+            // treat it as if it was added, e.g. to show progress in case
+            // feature has been enabled during already ongoing download
+            onNotificationAdded(statusBarNotif);
+            return;
+        }
+
         if (!verifyNotification(statusBarNotif)) {
             if (DEBUG) log("onNotificationUpdated: ignoring non-download provider notification");
             return;
         }
 
-        if (mPackageName == null) {
-            if (DEBUG) log("onNotificationUpdated: no download registered");
-            return;
-        } else if (mPackageName.equals(getPackageName(statusBarNotif))) {
+        if (mPackageName.equals(getPackageName(statusBarNotif))) {
             if (DEBUG) log("updating progress for " + mPackageName);
             updateProgress(statusBarNotif);
         }
