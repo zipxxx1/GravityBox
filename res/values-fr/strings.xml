@@ -1750,4 +1750,9 @@
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorer lors d\'un appel entrant</string>
 
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Barre de progression du téléchargement</string>
+    <string name="pref_statusbar_download_progress_summary">Affiche une barre de progession de téléchargement dans la barre d\'état pour les téléchargements réalisés via
+        le gestionnaire standard de téléchargement d\'Android</string>
+
 </resources>
