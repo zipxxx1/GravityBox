@@ -167,6 +167,11 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) getLayoutParams();
         lp.gravity = mMode == Mode.TOP ? (Gravity.TOP | Gravity.START) :
             (Gravity.BOTTOM | Gravity.START);
+        if (Utils.isMtkDevice()) {
+            lp.setMargins(0, mMode == Mode.TOP ? 
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, 
+                            getResources().getDisplayMetrics()) : 0, 0, 0);
+        }
         setLayoutParams(lp);
     }
 
