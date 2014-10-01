@@ -1638,4 +1638,19 @@
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Игнорировать для входящего</string>
 
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Шкала загрузки</string>
+    <string name="pref_statusbar_download_progress_summary">Отображение шкалы выполнения загрузки в строке состояния для загрузок через
+        стандартный менеджер загрузки Андроид</string>
+    <string name="sb_download_progress_off">Отключено</string>
+    <string name="sb_download_progress_top">Верхний край</string>
+    <string name="sb_download_progress_bottom">Нижний край</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Строка уведомлений</string>
+    <string name="sb_ticker_policy_default">По умолчанию</string>
+    <string name="sb_ticker_policy_locked">Откл на экране блокировки</string>
+    <string name="sb_ticker_policy_secured">Откл на защищённом экране блокировки</string>
+    <string name="sb_ticker_policy_disabled">Откл всегда</string>
+
 </resources>
