@@ -1730,5 +1730,19 @@
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Figyelmen kívül hagy beérkező híváskor</string>
+    
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Letöltési folyamat sáv</string>
+    <string name="pref_statusbar_download_progress_summary">A letöltési folyamat sávot az értesítési sávban mutatja az Android gyári letöltő menedzser által elvégzett letöltésekhez.</string>
+    <string name="sb_download_progress_off">Letiltva</string>
+    <string name="sb_download_progress_top">Felső szélen</string>
+    <string name="sb_download_progress_bottom">Alsó szélen</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Értesítés kijelzés házirend</string>
+    <string name="sb_ticker_policy_default">Alapértelmezett</string>
+    <string name="sb_ticker_policy_locked">Letiltva zárképernyőnél</string>
+    <string name="sb_ticker_policy_secured">Letiltva zárolt zárképernyőnél</string>
+    <string name="sb_ticker_policy_disabled">Mindig letilva</string>
 
 </resources>
