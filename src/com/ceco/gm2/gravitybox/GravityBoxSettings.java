@@ -1693,6 +1693,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
                 mPrefCatStatusbar.removePreference(mPrefCatNotifDrawerStyle);
                 mPrefCatPowerOther.removePreference(mPrefPowerProximityWake);
+                mPrefCatPowerOther.removePreference(mPrefProximityWakeIgnoreCall);
                 mPrefCatDisplay.removePreference(mPrefCatBrightness);
                 mPrefCatDisplay.removePreference(mPrefScreenOffEffect);
                 mPrefCatMedia.removePreference(mPrefSafeMediaVolume);
