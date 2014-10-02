@@ -1185,7 +1185,7 @@
     <string name="pref_cat_lockscreen_statusbar_title">狀態列</string>
 
     <!-- Quick settings: Auto-switch extended -->
-    <string name="qs_auto_switch_disabled">已停用</string>
+    <string name="qs_auto_switch_disabled">停用</string>
     <string name="qs_auto_switch_mode1">當沒有通知時</string>
     <string name="qs_auto_switch_mode2">當沒有可以被清除的通知時</string>
 
@@ -1221,8 +1221,8 @@
     <!-- Navbar ring: Haptic feedback -->
     <string name="pref_navbar_ring_haptic_feedback_title">觸控反饋</string>
     <string name="navring_haptic_feedback_default">預設</string>
-    <string name="navring_haptic_feedback_enabled">已啟用</string>
-    <string name="navring_haptic_feedback_disabled">已停用</string>
+    <string name="navring_haptic_feedback_enabled">啟用</string>
+    <string name="navring_haptic_feedback_disabled">停用</string>
 
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">快速下拉大小</string>
@@ -1568,7 +1568,7 @@
     <string name="pref_pie_control_center_trigger_summary">只有當從螢幕邊緣中央往內掃才會觸發PIE</string>
 
     <!-- Statusbar clock: date format options -->
-    <string name="clock_date_disabled">已停用</string>
+    <string name="clock_date_disabled">停用</string>
     <string name="clock_date_localized">基於語系來設定日期格式</string>
     <string name="clock_date_format_1">日期格式：dd/MM</string>
     <string name="clock_date_format_2">日期格式：MM/dd</string>
@@ -1733,5 +1733,19 @@
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">當有來電時忽略 [距離感應器喚醒] 設定</string>
+
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">下載進度條</string>
+    <string name="pref_statusbar_download_progress_summary">當使用 Android 標準下載管理員進行下載時，在狀態列顯示進度條</string>
+    <string name="sb_download_progress_off">停用</string>
+    <string name="sb_download_progress_top">上沿</string>
+    <string name="sb_download_progress_bottom">下沿</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">停用狀態列的通知預覽</string>
+    <string name="sb_ticker_policy_default">系統預設值</string>
+    <string name="sb_ticker_policy_locked">在鎖定畫面停用</string>
+    <string name="sb_ticker_policy_secured">在鎖定畫面停用 (當已設定鎖定畫面安全性時)</string>
+    <string name="sb_ticker_policy_disabled">永遠停用</string>
 
 </resources>
