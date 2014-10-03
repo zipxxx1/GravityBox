@@ -507,6 +507,10 @@ public class ModLedControl {
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
+            mHeadsUpParams = new HeadsUpParams();
+            mHeadsUpParams.alpha = (float)(100f - prefs.getInt(
+                    GravityBoxSettings.PREF_KEY_HEADS_UP_ALPHA, 0)) / 100f;
+
             XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "start", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -515,9 +519,6 @@ public class ModLedControl {
                         XposedHelpers.callMethod(param.thisObject, "addHeadsUpView");
                     }
                     mStatusBar = param.thisObject;
-                    mHeadsUpParams = new HeadsUpParams();
-                    mHeadsUpParams.alpha = (float)(100f - prefs.getInt(
-                            GravityBoxSettings.PREF_KEY_HEADS_UP_ALPHA, 0)) / 100f;
                     Context context = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(Intent.ACTION_USER_PRESENT);
