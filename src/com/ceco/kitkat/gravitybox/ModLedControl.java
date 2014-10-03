@@ -777,7 +777,7 @@ public class ModLedControl {
     }
 
     private static void maybeUpdateHeadsUpLayout(View headsUpView) {
-        if (headsUpView == null || mHeadsUpParams == null) return;
+        if (headsUpView == null || !headsUpView.isAttachedToWindow()) return;
         final Context context = headsUpView.getContext();
 
         if (mHeadsUpLp == null) {
