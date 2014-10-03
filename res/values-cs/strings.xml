@@ -1711,4 +1711,19 @@
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorovat pro příchozí hovory</string>
 
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Indikátor stahování</string>
+    <string name="pref_statusbar_download_progress_summary">Zobrazí indikátor stahování ve stavové liště pro stažení vyřizovány přes 
+         standardní Android manažer stažení</string>
+    <string name="sb_download_progress_off">Vypnutý</string>
+    <string name="sb_download_progress_top">Horní hrana stavové lišty</string>
+    <string name="sb_download_progress_bottom">Spodní hrana stavové lišty</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Náhled obsahu notifikací</string>
+    <string name="sb_ticker_policy_default">Původní</string>
+    <string name="sb_ticker_policy_locked">Zakázat na obrazovce uzamčení</string>
+    <string name="sb_ticker_policy_secured">Zakázat na zabezpečené obrazovce uzamčení</string>
+    <string name="sb_ticker_policy_disabled">Vždy zakázat</string>
+
 </resources>
