@@ -63,10 +63,6 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                 mHideSimLabels = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SC_HIDE_SIM_LABELS, false);
                 update();
             }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_SC_SIGNAL_ICON_AUTOHIDE)) {
-                mSignalIconAutohide = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SC_SIGNAL_ICON_AUTOHIDE, false);
-                update();
-            }
         }
     }
 
