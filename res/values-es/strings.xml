@@ -1675,7 +1675,7 @@
     
     <!-- MSIM Signal Cluster: auto-hide signal icons -->
     <string name="pref_signal_icon_autohide_title">Ocultar automáticamente iconos de señal</string>
-    <string name="pref_signal_icon_autohide_summary">Oculta automáticamente los iconos de señal cuando no haya una SIM presente (requiere reinicio)</string>
+    <string name="pref_signal_icon_autohide_summary">Oculta automáticamente los iconos de señal cuando no haya una SIM presente</string>
 
     <!-- Heads Up: Transparency level -->
     <string name="pref_heads_up_alpha_title">Nivel de transparencia</string>

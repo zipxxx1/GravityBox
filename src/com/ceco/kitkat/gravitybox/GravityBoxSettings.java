@@ -56,7 +56,6 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
@@ -703,9 +702,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY = "pref_signal_cluster_data_activity";
     public static final String PREF_KEY_SIGNAL_CLUSTER_HPLUS = "pref_signal_cluster_hplus";
     public static final String PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE = "pref_signal_cluster_lte_style";
+    public static final String PREF_KEY_SIGNAL_ICON_AUTOHIDE = "pref_signal_icon_autohide2";
     public static final String PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS = "pref_signal_cluster_hide_sim_labels";
     public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
     public static final String EXTRA_SC_HIDE_SIM_LABELS = "scHideSimLabels";
+    public static final String EXTRA_SC_SIGNAL_ICON_AUTOHIDE = "scSignalIconAutohide";
 
     public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
     public static final String PREF_KEY_NAVBAR_RING_TARGETS_ENABLE = "pref_navbar_ring_targets_enable";
@@ -789,8 +790,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_HSA_STATE = "headsetState"; // 1 = plugged, 0 = unplugged
     public static final String EXTRA_HSA_URI = "headsetActionUri";
 
-    public static final String PREF_KEY_SIGNAL_ICON_AUTOHIDE = "pref_signal_icon_autohide2";
-
     public static final String PREF_KEY_POWER_PROXIMITY_WAKE = "pref_power_proximity_wake";
     public static final String PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL = "pref_power_proximity_wake_ignore_call";
     public static final String ACTION_PREF_POWER_CHANGED = "gravitybox.intent.action.POWER_CHANGED";
@@ -847,7 +846,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_QS_BATTERY_EXTENDED,
             PREF_KEY_HEADS_UP_MASTER_SWITCH,
             PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE,
-            PREF_KEY_SIGNAL_ICON_AUTOHIDE,
             PREF_KEY_PATCH_FAKE_ID,
             PREF_KEY_MTK_FIX_DEV_OPTS,
             PREF_KEY_MTK_FIX_TTS_SETTINGS
@@ -3150,6 +3148,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS)) {
                 intent.setAction(ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
                 intent.putExtra(EXTRA_SC_HIDE_SIM_LABELS, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_SIGNAL_ICON_AUTOHIDE)) {
+                intent.setAction(ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
+                intent.putExtra(EXTRA_SC_SIGNAL_ICON_AUTOHIDE, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
@@ -3337,7 +3338,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             return super.onPreferenceTreeClick(prefScreen, pref);
         }
 
-        @SuppressWarnings("deprecation")
         private void setCustomLockscreenImage() {
             Intent intent = new Intent(getActivity(), PickImageActivity.class);
             intent.putExtra(PickImageActivity.EXTRA_CROP, true);
