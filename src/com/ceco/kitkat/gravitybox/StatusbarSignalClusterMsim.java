@@ -23,8 +23,6 @@ import com.ceco.kitkat.gravitybox.StatusBarIconManager.ColorInfo;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
@@ -52,18 +50,6 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         mConnectionStateEnabled = false;
         mSignalIconAutohide = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_ICON_AUTOHIDE, false);
         mHideSimLabels = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS, false);
-    }
-
-    @Override
-    public void onBroadcastReceived(Context context, Intent intent) {
-        super.onBroadcastReceived(context, intent);
-
-        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_SIGNAL_CLUSTER_CHANGED)) {
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_SC_HIDE_SIM_LABELS)) {
-                mHideSimLabels = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SC_HIDE_SIM_LABELS, false);
-                update();
-            }
-        }
     }
 
     @Override
@@ -213,7 +199,9 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         try {
             String fieldName = simSlot == 0 ? "mMobileSlotLabelView" : "mMobileSlotLabelView2";
             View simLabel = (View) XposedHelpers.getObjectField(mView, fieldName);
-            simLabel.setVisibility(View.GONE);
+            if (simLabel != null) {
+                simLabel.setVisibility(View.GONE);
+            }
         } catch (Throwable t) {
             logAndMute("hideSimLabel", t);
         }

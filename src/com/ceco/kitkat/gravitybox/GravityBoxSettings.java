@@ -703,8 +703,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_CLUSTER_HPLUS = "pref_signal_cluster_hplus";
     public static final String PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE = "pref_signal_cluster_lte_style";
     public static final String PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS = "pref_signal_cluster_hide_sim_labels";
-    public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
-    public static final String EXTRA_SC_HIDE_SIM_LABELS = "scHideSimLabels";
 
     public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
     public static final String PREF_KEY_NAVBAR_RING_TARGETS_ENABLE = "pref_navbar_ring_targets_enable";
@@ -849,7 +847,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SIGNAL_ICON_AUTOHIDE,
             PREF_KEY_PATCH_FAKE_ID,
             PREF_KEY_MTK_FIX_DEV_OPTS,
-            PREF_KEY_MTK_FIX_TTS_SETTINGS
+            PREF_KEY_MTK_FIX_TTS_SETTINGS,
+            PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -3146,9 +3145,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_TICKER_POLICY)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_TICKER_POLICY, prefs.getString(key, "DEFAULT"));
-            } else if (key.equals(PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS)) {
-                intent.setAction(ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
-                intent.putExtra(EXTRA_SC_HIDE_SIM_LABELS, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
