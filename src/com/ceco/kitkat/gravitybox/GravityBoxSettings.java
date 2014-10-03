@@ -703,6 +703,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY = "pref_signal_cluster_data_activity";
     public static final String PREF_KEY_SIGNAL_CLUSTER_HPLUS = "pref_signal_cluster_hplus";
     public static final String PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE = "pref_signal_cluster_lte_style";
+    public static final String PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS = "pref_signal_cluster_hide_sim_labels";
+    public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
+    public static final String EXTRA_SC_HIDE_SIM_LABELS = "scHideSimLabels";
 
     public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
     public static final String PREF_KEY_NAVBAR_RING_TARGETS_ENABLE = "pref_navbar_ring_targets_enable";
@@ -1294,6 +1297,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefChargingLed;
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
         private ListPreference mPrefSbTickerPolicy;
+        private CheckBoxPreference mPrefScHideSimLabels;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1603,6 +1607,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCatSignalCluster = (PreferenceScreen) findPreference(PREF_CAT_KEY_SIGNAL_CLUSTER);
             mPrefSignalIconAutohide = (CheckBoxPreference) findPreference(PREF_KEY_SIGNAL_ICON_AUTOHIDE);
+            mPrefScHideSimLabels = (CheckBoxPreference) findPreference(PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS);
 
             mPrefLedControl = findPreference(PREF_LED_CONTROL);
 
@@ -1717,6 +1722,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Remove MSIM preferences for non-MSIM devices
             if (!sSystemProperties.hasMsimSupport) {
                 mPrefCatSignalCluster.removePreference(mPrefSignalIconAutohide);
+                mPrefCatSignalCluster.removePreference(mPrefScHideSimLabels);
                 mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
             } else {
                 // TODO: carrier texts for MSIM devices
@@ -3141,6 +3147,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_TICKER_POLICY)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_TICKER_POLICY, prefs.getString(key, "DEFAULT"));
+            } else if (key.equals(PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS)) {
+                intent.setAction(ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
+                intent.putExtra(EXTRA_SC_HIDE_SIM_LABELS, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

@@ -1765,4 +1765,7 @@
     <string name="sb_ticker_policy_secured">Disable on secured lock screen</string>
     <string name="sb_ticker_policy_disabled">Always disable</string>
 
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">Hide SIM labels</string>
+
 </resources>

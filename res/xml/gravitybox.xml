@@ -568,6 +568,11 @@
                 android:summary="@string/pref_signal_icon_autohide_summary"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference 
+                android:key="pref_signal_cluster_hide_sim_labels"
+                android:title="@string/pref_signal_cluster_hide_sim_labels_title"
+                android:defaultValue="false" />
+
         </PreferenceScreen>
 
         <PreferenceScreen 
