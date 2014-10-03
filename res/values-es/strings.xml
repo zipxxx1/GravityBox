@@ -658,7 +658,7 @@
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">Política de bloqueo de la barra de estado</string>
     <string name="sbl_policy_default">Predeterminado</string>
-    <string name="sbl_policy_unlocked">Desbloqueada incluso con PIN/contraseña/patrón</string>
+    <string name="sbl_policy_unlocked">Bloqueada incluso con PIN/contraseña/patrón</string>
     <string name="sbl_policy_unlocked_secured">Desbloqueada</string>
     <string name="sbl_policy_locked">Bloqueada</string>
 
@@ -1488,14 +1488,14 @@
 
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">Forzar dirección LTR</string>
-    <string name="pref_force_ltr_direction_summary">Forces LTR layout direction for RTL locales (requires reboot)</string>
+    <string name="pref_force_ltr_direction_summary">Fuerza dirección LTR en lugar de RTL (requiere reinicio)</string>
 
     <!-- Volume panel transparency: opaque on interaction -->
     <string name="pref_volume_panel_opaque_title">Opaco al interactuar</string>
     <string name="pref_volume_panel_opaque_summary">Desactiva la transparencia al interactuar con el panel de volumen</string>
 
     <!-- Ringer mode shortcut -->
-    <string name="shortcut_ringer_mode">Establecer mode de sonido</string>
+    <string name="shortcut_ringer_mode">Establecer modo de sonido</string>
 
     <!-- Data traffic monitor: Only for mobile data -->
     <string name="pref_data_traffic_active_mobile_only_title">Solo datos móviles</string>
@@ -1596,7 +1596,7 @@
      <string name="pref_unc_quiet_hours_summary">Administra las horas de silencio en las notificaciones</string>
 
     <!-- Charger unplugged sound -->
-    <string name="pref_charger_unplugged_sound_title">Sonido al desconectar cargados</string>
+    <string name="pref_charger_unplugged_sound_title">Sonido al desconectar cargador</string>
 
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Elegir imagen usando</string>
@@ -1606,12 +1606,41 @@
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Despertar con proximidad</string>
-    <string name="pref_power_proximity_wake_summary">Usa el sensor de proxomidad para decidir si se despierta el dispositivo</string>
+    <string name="pref_power_proximity_wake_summary">Usa el sensor de proximidad para decidir si se despierta el dispositivo</string>
 
     <!-- Battery Charging LED -->
     <string name="pref_charging_led_title">LED con bateria cargando</string>
     <string name="charging_led_default">Predeterminado</string>
     <string name="charging_led_emulated">Emulado</string>
     <string name="charging_led_disabled">Desactivado</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Establecer días entre semana</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Silenciar sonidos del sistema</string>
+    <string name="system_sound_dialpad">Teclado de marcación</string>
+    <string name="system_sound_touch">Tonos táctiles</string>
+    <string name="system_sound_screen_lock">Pantalla de bloqueo</string>
+    <string name="system_sound_volume_adjust">Ajuste de volumen</string>
+    <string name="system_sound_charger">Sonidos de carga de GB</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignorar para llamadas entrantes</string>
+
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Progreso de descargas</string>
+    <string name="pref_statusbar_download_progress_summary">Muestra una barra de progreso en la barra de estado para las descargas realizas 
+        a través del gestor de descargas estándar de Android</string>
+    <string name="sb_download_progress_off">Desactivado</string>
+    <string name="sb_download_progress_top">Borde superior</string>
+    <string name="sb_download_progress_bottom">Borde inferior</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Política de notificaciones ticker</string>
+    <string name="sb_ticker_policy_default">Predeterminado</string>
+    <string name="sb_ticker_policy_locked">Desactivado en patalla de bloqueo</string>
+    <string name="sb_ticker_policy_secured">Desactivado con PIN/contraseña/patrón</string>
+    <string name="sb_ticker_policy_disabled">Desactivado</string>
 
 </resources>
