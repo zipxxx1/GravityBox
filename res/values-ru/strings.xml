@@ -1765,4 +1765,7 @@
     <string name="sb_ticker_policy_secured">Откл на защищённом экране блокировки</string>
     <string name="sb_ticker_policy_disabled">Откл всегда</string>
 
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">Скрыть ярлыки SIM</string>
+
 </resources>
