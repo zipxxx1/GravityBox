@@ -1755,7 +1755,7 @@
     <string name="pref_statusbar_download_progress_summary">Affiche une barre de progession de téléchargement dans la barre d\'état pour les téléchargements réalisés via
         le gestionnaire standard de téléchargement d\'Android</string>
 
-+    <!-- MSIM signal cluster: Hide SIM labels -->
-+    <string name="pref_signal_cluster_hide_sim_labels_title">Masquer les marques de SIM</string>
-+
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">Masquer les marques de SIM</string>
+
 </resources>
