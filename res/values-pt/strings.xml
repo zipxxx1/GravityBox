@@ -1737,4 +1737,7 @@
     <string name="sb_ticker_policy_secured">Desativar na tela de bloqueio com segurança</string>
     <string name="sb_ticker_policy_disabled">Sempre desativar</string>
     
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">Ocultar ícone SIM</string>
+    
 </resources>
