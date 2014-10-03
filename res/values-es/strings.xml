@@ -1706,7 +1706,7 @@
     
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">Despertar con proximidad</string>
-    <string name="pref_power_proximity_wake_summary">Usa el sensor de proxomidad para decidir si se despierta el dispositivo</string>
+    <string name="pref_power_proximity_wake_summary">Usa el sensor de proximidad para decidir si se despierta el dispositivo</string>
     
     <!-- Battery Charging LED -->
     <string name="pref_charging_led_title">LED con bateria cargando</string>
