@@ -1719,10 +1719,47 @@
     <string name="headsup_snooze_all_apps">Establecer para todas las apps</string>
     <string name="headsup_snooze_app">No molestar durante %s</string>
     <string name="pref_heads_up_snooze_reset_title">Restablecer tiempo de No molestar</string>
-    
+
     <string name="pref_heads_up_snooze_timer_title">Tiempo de No molestar predeterminado</string>
     <string name="pref_heads_up_snooze_timer_summary">Tiempo a establecer automáticamente cuando se pulsa el icono de No molestar en la notificación Heads up. 
         Una pulsación prolongada sobre dicho icono abre el diálogo para cambiar el tiempo.</string>
     <string name="headsup_snooze_timer_set">El tiempo predeterminado de No molestar en Heads up es de %s</string>
+    
+     <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">Barra de estado translúcida</string>
+    <string name="pref_recents_translucent_bars_summary">La barra de estado se hace translúcida en tareas recientes</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Establecer días entre semana</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Silenciar sonidos del sistema</string>
+    <string name="system_sound_dialpad">Teclado de marcación</string>
+    <string name="system_sound_touch">Tonos táctiles</string>
+    <string name="system_sound_screen_lock">Pantalla de bloqueo</string>
+    <string name="system_sound_volume_adjust">Ajuste de volumen</string>
+    <string name="system_sound_charger">Sonidos de carga de GB</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignorar para llamadas entrantes</string>
+
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Progreso de descargas</string>
+    <string name="pref_statusbar_download_progress_summary">Muestra una barra de progreso en la barra de estado para las descargas realizas 
+    	a través del gestor de descargas estándar de Android</string>
+    <string name="sb_download_progress_off">Desactivado</string>
+    <string name="sb_download_progress_top">Borde superior</string>
+    <string name="sb_download_progress_bottom">Borde inferior</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Política de notificaciones ticker</string>
+    <string name="sb_ticker_policy_default">Predeterminado</string>
+    <string name="sb_ticker_policy_locked">Desactivado en patalla de bloqueo</string>
+    <string name="sb_ticker_policy_secured">Desactivado con PIN/contraseña/patrón</string>
+    <string name="sb_ticker_policy_disabled">Desactivado</string>
+
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">Ocultar etiquetas de SIM</string>
+    <string name="pref_signal_cluster_hide_sim_labels_summary">Requiere reinicio</string>
  
 </resources>
