@@ -1693,11 +1693,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
             }
 
-            // Remove preferences not compatible with stock Sony Xperia ROMs
-            if (Utils.isXperiaDevice()) {
-                mPrefCatStatusbarColors.removePreference(mStatusbarBgColor);
-            }
-
             // Remove preferences not compatible with Android 4.1
             if (Build.VERSION.SDK_INT < 17) {
                 getPreferenceScreen().removePreference(mPrefCatLockscreen);

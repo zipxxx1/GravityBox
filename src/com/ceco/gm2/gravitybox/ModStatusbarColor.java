@@ -616,16 +616,14 @@ public class ModStatusbarColor {
 
     private static void setStatusbarBgColor(int color) {
         if (mSbBgColoringEnabled && mPanelBar != null) {
-            if (!Utils.isXperiaDevice()) {
-                if (!(mPanelBar.getBackground() instanceof BackgroundAlphaColorDrawable)) {
-                    BackgroundAlphaColorDrawable colorDrawable = new BackgroundAlphaColorDrawable(color);
-                    mPanelBar.setBackground(colorDrawable);
-                    if (DEBUG) log("statusbar view backround replaced with BackgroundAlphaColorDrawable");
-                } else {
-                    ((BackgroundAlphaColorDrawable) mPanelBar.getBackground()).setBgColor(color);
-                }
-                if (DEBUG) log("statusbar background color set to: " + color);
+            if (!(mPanelBar.getBackground() instanceof BackgroundAlphaColorDrawable)) {
+                BackgroundAlphaColorDrawable colorDrawable = new BackgroundAlphaColorDrawable(color);
+                mPanelBar.setBackground(colorDrawable);
+                if (DEBUG) log("statusbar view backround replaced with BackgroundAlphaColorDrawable");
+            } else {
+                ((BackgroundAlphaColorDrawable) mPanelBar.getBackground()).setBgColor(color);
             }
+            if (DEBUG) log("statusbar background color set to: " + color);
         }
     }
 
