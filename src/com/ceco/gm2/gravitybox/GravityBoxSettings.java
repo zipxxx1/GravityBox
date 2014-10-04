@@ -782,6 +782,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_HSA_STATE = "headsetState"; // 1 = plugged, 0 = unplugged
     public static final String EXTRA_HSA_URI = "headsetActionUri";
 
+    public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS = "pref_statusbar_download_progress";
+    public static final String ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED = "gravitybox.intent.action.STATUSBAR_DOWNLOAD_PROGRESS_CHANGED";
+    public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED = "sbDownloadProgressEnabled";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -3098,6 +3102,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL)) {
                 intent.setAction(ACTION_PREF_POWER_CHANGED);
                 intent.putExtra(EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS)) {
+                intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
+                intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED, prefs.getString(key, "OFF"));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
