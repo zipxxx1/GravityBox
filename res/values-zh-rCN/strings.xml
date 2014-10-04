@@ -220,7 +220,7 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">启用菜单键</string>
-    <string name="pref_lockscreen_menu_key_summary">使菜单键在锁定画面时可以用来快速地解锁设备（需要重新启动）</string>
+    <string name="pref_lockscreen_menu_key_summary">使菜单键在锁定屏时可以用来快速解锁设备（需要重新启动）</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">时间居中</string>
@@ -1610,7 +1610,7 @@
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">交互模式</string>
-    <string name="pref_lc_qh_interactive_summary">当用户交互过程中始终保持通知消息静音 
+    <string name="pref_lc_qh_interactive_summary">当用户交互过程中总是保持通知消息静音 
         （忽略每个应用程序规则）</string>
     
     <!-- Screenshot delete -->
@@ -1749,5 +1749,24 @@
     
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">忽略来电</string>
+    
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">下载进度条</string>
+    <string name="pref_statusbar_download_progress_summary">当使用安卓标准下载管理器时在状态栏显示进度条</string>
+
+    <string name="sb_download_progress_off">禁用</string>
+    <string name="sb_download_progress_top">顶部</string>
+    <string name="sb_download_progress_bottom">底部</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">通知栏预览策略</string>
+    <string name="sb_ticker_policy_default">默认</string>
+    <string name="sb_ticker_policy_locked">锁屏时禁用</string>
+    <string name="sb_ticker_policy_secured">有安全锁时禁用</string>
+    <string name="sb_ticker_policy_disabled">总是禁用</string>
+
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">隐藏SIM卡标签</string>
+    <string name="pref_signal_cluster_hide_sim_labels_summary">需要重新启动</string>
 
 </resources>
