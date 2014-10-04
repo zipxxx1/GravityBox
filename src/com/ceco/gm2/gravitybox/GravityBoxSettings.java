@@ -172,6 +172,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_QS_ALARM_TILE_SETTINGS = "pref_cat_qs_alarm_tile_settings";
     public static final String PREF_CAT_KEY_QS_NM_TILE_SETTINGS = "pref_cat_qs_nm_tile_settings";
     public static final String PREF_CAT_KEY_STATUSBAR_COLORS = "pref_cat_statusbar_colors";
+    public static final String PREF_KEY_STATUSBAR_BGCOLOR_SWITCH = "pref_statusbar_bgcolor_switch";
     public static final String PREF_KEY_STATUSBAR_BGCOLOR = "pref_statusbar_bgcolor2";
     public static final String PREF_KEY_STATUSBAR_COLOR_FOLLOW_STOCK_BATTERY = "pref_sbcolor_follow_stock_battery";
     public static final String PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE = "pref_statusbar_icon_color_enable";
@@ -824,7 +825,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH,
             PREF_KEY_FORCE_LTR_DIRECTION,
             PREF_KEY_QS_BATTERY_EXTENDED,
-            PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE
+            PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE,
+            PREF_KEY_STATUSBAR_BGCOLOR_SWITCH
     ));
 
     private static List<String> customAppKeys = new ArrayList<String>(Arrays.asList(

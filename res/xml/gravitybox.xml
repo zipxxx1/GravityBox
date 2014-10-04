@@ -534,15 +534,21 @@
             android:title="@string/pref_cat_statusbar_colors_title">
 
             <SwitchPreference 
-                android:key="pref_statusbar_icon_color_enable"
-                android:summary="@string/pref_statusbar_icon_color_enable_title"
+                android:key="pref_statusbar_bgcolor_switch"
+                android:summary="@string/pref_statusbar_bgcolor_switch_title"
                 android:defaultValue="false" />
 
             <net.margaritov.preference.colorpicker.ColorPickerPreference 
                 android:key="pref_statusbar_bgcolor2"
                 android:title="@string/statusbar_bgcolor_title" 
                 android:summary="@string/statusbar_bgcolor_summary"
-                android:defaultValue="@integer/COLOR_BLACK" />
+                android:defaultValue="@integer/COLOR_BLACK"
+                android:dependency="pref_statusbar_bgcolor_switch" />
+
+            <SwitchPreference 
+                android:key="pref_statusbar_icon_color_enable"
+                android:summary="@string/pref_statusbar_icon_color_enable_title"
+                android:defaultValue="false" />
 
             <CheckBoxPreference 
                 android:key="pref_sbcolor_follow_stock_battery"

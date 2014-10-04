@@ -1646,4 +1646,7 @@
     <string name="sb_download_progress_top">Top edge</string>
     <string name="sb_download_progress_bottom">Bottom edge</string>
 
+    <!-- Statusbar: master switch for background color -->
+    <string name="pref_statusbar_bgcolor_switch_title">Enable status bar background coloring (requires reboot)</string>
+
 </resources>

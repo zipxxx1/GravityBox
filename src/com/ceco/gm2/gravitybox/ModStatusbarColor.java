@@ -28,14 +28,12 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import de.robv.android.xposed.XC_MethodHook;
@@ -81,6 +79,7 @@ public class ModStatusbarColor {
     private static Object mPhoneWindowManager;
     private static Object mPhoneStatusBar;
     private static StatusbarSignalCluster mSignalCluster;
+    private static boolean mSbBgColoringEnabled;
 
     static {
         mBatteryLevel = 0;
@@ -396,6 +395,7 @@ public class ModStatusbarColor {
                     XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader) : null;
             final Class<?> statusbarIconViewClass = XposedHelpers.findClass(CLASS_STATUSBAR_ICON_VIEW, classLoader);
 
+            mSbBgColoringEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_BGCOLOR_SWITCH, false);
             mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
 
             XposedBridge.hookAllConstructors(phoneStatusbarViewClass, new XC_MethodHook() {
@@ -615,7 +615,7 @@ public class ModStatusbarColor {
     }
 
     private static void setStatusbarBgColor(int color) {
-        if (mPanelBar != null) {
+        if (mSbBgColoringEnabled && mPanelBar != null) {
             if (!Utils.isXperiaDevice()) {
                 if (!(mPanelBar.getBackground() instanceof BackgroundAlphaColorDrawable)) {
                     BackgroundAlphaColorDrawable colorDrawable = new BackgroundAlphaColorDrawable(color);
