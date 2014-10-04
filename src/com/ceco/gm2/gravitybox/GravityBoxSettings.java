@@ -787,6 +787,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED = "gravitybox.intent.action.STATUSBAR_DOWNLOAD_PROGRESS_CHANGED";
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED = "sbDownloadProgressEnabled";
 
+    public static final String PREF_KEY_PATCH_MASTER_KEY = "pref_patch_master_key";
+    public static final String PREF_KEY_PATCH_FAKE_ID = "pref_patch_fake_id";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -826,7 +829,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_FORCE_LTR_DIRECTION,
             PREF_KEY_QS_BATTERY_EXTENDED,
             PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE,
-            PREF_KEY_STATUSBAR_BGCOLOR_SWITCH
+            PREF_KEY_STATUSBAR_BGCOLOR_SWITCH,
+            PREF_KEY_PATCH_MASTER_KEY,
+            PREF_KEY_PATCH_FAKE_ID
     ));
 
     private static List<String> customAppKeys = new ArrayList<String>(Arrays.asList(

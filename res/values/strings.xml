@@ -1649,4 +1649,9 @@
     <!-- Statusbar: master switch for background color -->
     <string name="pref_statusbar_bgcolor_switch_title">Enable status bar background coloring (requires reboot)</string>
 
+    <!-- Vulnerability patches -->
+    <string name="pref_patch_master_key_title">Patch Master Key vulnerability</string>
+    <string name="pref_patch_fake_id_title">Patch Fake ID vulnerability</string>
+    <string name="pref_patch_common_summary">Requires reboot</string>
+
 </resources>

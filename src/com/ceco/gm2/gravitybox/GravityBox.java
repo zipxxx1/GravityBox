@@ -100,8 +100,12 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModDisplay.initZygote(prefs);
         ModAudio.initZygote(prefs);
         ModHwKeys.initZygote(prefs);
-        PatchFakeId.initZygote();
-        PatchMasterKey.initZygote();
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_PATCH_FAKE_ID, true)) {
+            PatchFakeId.initZygote();
+        }
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_PATCH_MASTER_KEY, true)) {
+            PatchMasterKey.initZygote();
+        }
         ModPhone.initZygote(prefs);
         ModExpandedDesktop.initZygote(prefs);
         ConnectivityServiceWrapper.initZygote();

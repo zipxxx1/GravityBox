@@ -2128,6 +2128,18 @@
                 android:title="@string/pref_screenshot_delete_title"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference
+                android:key="pref_patch_master_key"
+                android:title="@string/pref_patch_master_key_title"
+                android:summary="@string/pref_patch_common_summary"
+                android:defaultValue="true" />
+
+            <CheckBoxPreference
+                android:key="pref_patch_fake_id"
+                android:title="@string/pref_patch_fake_id_title"
+                android:summary="@string/pref_patch_common_summary"
+                android:defaultValue="true" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>
