@@ -1,3 +1,24 @@
+Changelog 3.4.5 - 04/10/2014
+--------------------------------------
+- Statusbar: added option for showing download progress bar in status bar
+--- applies only to downloads carried out via Android's standard download manager
+--- allows top or bottom edge position
+--- in case of multiple download notifications, progress bar applies to the one that came first
+--- for Play Store app updates, progress represents real status unlike the one indicated within Play Store app
+- Statusbar: added option for controlling Notification Ticker policy
+- Signal cluster: added option for hiding SIM labels (Moto G Dual SIM only)
+- UNC: fixed "Ignore quiet hours" option disappearing bug introduced in 3.4.4
+- Heads up: fixed exotic NullPointerException appearing in Xposed error log
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated French translations (thanks to ch-vox)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Russian translations (thanks to gaich)
+- Updated Spanish translations (thanks to DIG200)
+- Updated Slovak and Czech translations
+
 Changelog 3.4.4 - 28/09/2014
 --------------------------------------
 - UNC Quiet hours:
