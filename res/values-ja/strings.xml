@@ -467,6 +467,7 @@
     <string name="expanded_desktop_disabled">無効</string>
     <string name="expanded_desktop_navbar">ナビバーを隠す</string>
     <string name="expanded_desktop_immersive_statusbar">ステータスバーのみ没入モード</string>
+    <string name="expanded_desktop_immersive_navbar">ナビバーのみ没入モード</string>
     <string name="expanded_desktop_both">半没入モード</string>
     <string name="expanded_desktop_immersive">没入モード</string>
     <string name="action_expanded_desktop_title">拡張デスクトップ</string>
@@ -736,9 +737,10 @@
     
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog">JB向けのGravityBoxがインストールされています。 
-        新しいバージョンを使用する前にアンインストールしないといけません。 古いGBから新しいGBへと設定をコピーし、古いGBをアンインストールします。
-        プロンプトが出たらアンインストールを選んでください。アンインストール後はXposedインストーラで
-        有効にして再起動してください。再起動しない場合システムが不安定になります。</string>
+        新しいバージョンを使用する前にアンインストールしないといけません。 古いGBから新しいGBへと設定をコピーし、
+        古いGBをアンインストールします。プロンプトが出たらアンインストールを選んでください。
+        アンインストール後はXposedインストーラで有効にして再起動してください。
+        再起動しない場合システムが不安定になることがあります。</string>
     <string name="gb_new_package_settings_transfer_ok">GravityBox設定のコピーが完了しました。</string>
     <string name="gb_new_package_settings_transfer_failed">GravityBox設定のコピーが失敗しました。</string>
     
@@ -1322,7 +1324,8 @@
 
     <!-- Traffic meter: show only when download active -->
     <string name="pref_data_traffic_active_dl_only_title">ダウンロード中のみ</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Androidの標準ダウンロードマネージャでダウンロードしているときだけ表示するようにします。</string>
+    <string name="pref_data_traffic_active_dl_only_summary">Androidの標準ダウンロードマネージャでダウンロードしているときだけ
+        メーターを表示するようにします。</string>
     
     <!-- Led control -->
     <string name="pref_led_control_title">通知コントロール</string>
@@ -1375,7 +1378,8 @@
     <string name="pref_lockscreen_show_pattern_error_summary">入力したパターンが間違っているとき赤くするようにします。</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">この機能はお試しモードです。もし便利だと思ったら寄付をしてPayPal取引ID番号を入力すれば使えるようになります。お試しモードはあと%d回再起動すると終了します。</string>
+    <string name="trial_info">この機能はお試しモードです。もし便利だと思ったら寄付をしてPayPal取引ID番号を入力すれば引き続き使えるようになります。
+        お試しモードはあと%d回再起動すると終了します。</string>
     
     <!-- Navbar: disable camera icon -->
     <string name="pref_navbar_camera_key_disable_title">カメラアイコンの無効化</string>
@@ -1389,15 +1393,20 @@
     
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">アクティブスクリーン</string>
-    <string name="lc_active_screen_info">アクティブスクリーンは、新しい通知が表示されるたびに画面をオンにする機能です。この機能は端末がカバーされていないとき(ポケットに入れていないときなど)だけ有効になります。
-        ロック画面の設定やUIによっては通知領域の展開もします。アクティブスクリーンを使用する際はロック画面を有効にしないといけません。\nこのスイッチで有効/無効を切り替えられます。有効にした後、アプリ毎に設定できます。</string>
+    <string name="lc_active_screen_info">アクティブスクリーンは、新しい通知が表示されるたびに画面をオンにする機能です。
+        この機能は端末がカバーされていないとき(ポケットに入れていないときなど)だけ有効になります。
+        ロック画面の設定やUIによっては通知領域の展開もします。
+        アクティブスクリーンを使用する際はロック画面を有効にしないといけません。
+        \nこのスイッチで有効/無効を切り替えられます。
+        有効にした後、アプリ毎に設定できます。</string>
     <string name="lc_active_screen_switch_title">アクティブスクリーンを有効化</string>
     <string name="lc_expand_notification_panel_title">通知領域を開く</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">お休みモード</string>
     <string name="pref_lc_qh_enabled_title">お休みモードを有効化</string>
-    <string name="pref_lc_qh_enabled_summary">指定した時間帯に通知音/バイブをならさないようにしたり、通知LEDを点灯させないようにしたり(任意)します。</string>
+    <string name="pref_lc_qh_enabled_summary">指定した時間帯に通知音/バイブをならさないようにしたり、
+        通知LEDを点灯させないようにしたり(任意)します。</string>
     <string name="pref_lc_qh_start_title">開始時間</string>
     <string name="pref_lc_qh_end_title">終了時間</string>
     <string name="pref_lc_qh_mute_led_title">通知LEDを点灯させない</string>
@@ -1435,7 +1444,8 @@
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">お休みモードを無視</string>
     <string name="pref_lc_qh_ignore_list_title">キーワード設定</string>
-    <string name="pref_lc_qh_ignore_list_summary">お休みモードを無視するキーワードをコンマで分けて入力してください。空白にすると全ての通知を対象にします。</string>
+    <string name="pref_lc_qh_ignore_list_summary">お休みモードを無視するキーワードをコンマで分けて入力してください。
+        空白にすると全ての通知を対象にします。</string>
 
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">お休みモードトグル</string>
@@ -1661,7 +1671,8 @@
 
     <!-- Fake ID patch -->
     <string name="pref_patch_fake_id_title">Fake ID脆弱性のパッチ</string>
-    <string name="pref_patch_fake_id_summary">注意:脆弱性をスキャンするアプリでは、GravityBoxでパッチされたかどうかは検出できないので、パッチを有効にしても未修正かのように表示されます。(要再起動)</string>
+    <string name="pref_patch_fake_id_summary">注意:脆弱性をスキャンするアプリでは、GravityBoxでパッチされているかどうかは検出できないので、
+        パッチを有効にしても未修正であるかのように表示されます。(要再起動)</string>
 
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">オーディオプロファイル</string>
@@ -1717,5 +1728,27 @@
     <string name="system_sound_screen_lock">画面ロック時の音</string>
     <string name="system_sound_volume_adjust">音量変更時の音</string>
     <string name="system_sound_charger">GravityBox充電音</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">着信時は適用しない</string>
+
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">ダウンロードプログレスバー</string>
+    <string name="pref_statusbar_download_progress_summary">Androidの標準ダウンロードマネージャーでの
+        ダウンロードの進行状況をステータスバーに表示します。</string>
+    <string name="sb_download_progress_off">無効</string>
+    <string name="sb_download_progress_top">上端に表示</string>
+    <string name="sb_download_progress_bottom">下端に表示</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">通知ティッカーの表示方式</string>
+    <string name="sb_ticker_policy_default">デフォルト</string>
+    <string name="sb_ticker_policy_locked">ロック画面では無効化</string>
+    <string name="sb_ticker_policy_secured">ロック中は無効化</string>
+    <string name="sb_ticker_policy_disabled">常に無効化</string>
+
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">SIMラベルを隠す</string>
+    <string name="pref_signal_cluster_hide_sim_labels_summary">変更後は再起動してください。</string>
 
 </resources>
