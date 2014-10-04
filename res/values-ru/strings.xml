@@ -1767,5 +1767,6 @@
 
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">Скрыть ярлыки SIM</string>
+    <string name="pref_signal_cluster_hide_sim_labels_summary">Необходима перезагрузка</string>
 
 </resources>
