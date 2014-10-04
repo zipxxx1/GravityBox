@@ -250,7 +250,7 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">启用菜单键</string>
-    <string name="pref_lockscreen_menu_key_summary">使菜单键在锁定画面时可以用来快速地解锁设备（需要重新启动）</string>
+    <string name="pref_lockscreen_menu_key_summary">使菜单键在锁定屏时可以用来快速解锁设备（需要重新启动）</string>
 
     <!-- Fix messaging wakelock -->
     <string name="pref_mms_fix_wakelock_title">修正短信唤醒</string>
