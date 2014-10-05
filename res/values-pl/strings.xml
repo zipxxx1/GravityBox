@@ -1595,4 +1595,41 @@
     <string name="charging_led_emulated">Emulowany</string>
     <string name="charging_led_disabled">Wyłączony</string>
 
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Ustaw dni tygodnia</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Wycisz dźwięki systemowe</string>
+    <string name="system_sound_dialpad">Dźwięki wybierania numeru</string>
+    <string name="system_sound_touch">Dźwięki przy dotknięciu</string>
+    <string name="system_sound_screen_lock">Dźwięki blokady ekranu</string>
+    <string name="system_sound_volume_adjust">Dźwięki regulacji głośności</string>
+    <string name="system_sound_charger">Dźwięki GravityBox ładowarki</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignoruj dla połączeń przychodzących</string>
+
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Pasek postępu pobierania</string>
+    <string name="pref_statusbar_download_progress_summary">Pokazuje pasek postępu pobierania na pasku stanu dla pobierań realizowanych poprzez
+        standardowy menedżer pobierania Androida</string>
+    <string name="sb_download_progress_off">Wyłączony</string>
+    <string name="sb_download_progress_top">Górna krawędź</string>
+    <string name="sb_download_progress_bottom">Dolna krawędź</string>
+
+    <!-- Statusbar: master switch for background color -->
+    <string name="pref_statusbar_bgcolor_switch_title">Włącz kolorowanie tła paska stanu (wymagany restart)</string>
+
+    <!-- Vulnerability patches -->
+    <string name="pref_patch_master_key_title">Napraw lukę Master Key</string>
+    <string name="pref_patch_fake_id_title">Napraw lukę "Fake ID"</string>
+    <string name="pref_patch_common_summary">Wymagany restart</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Polityka powiadomień na pasku stanu</string>
+    <string name="sb_ticker_policy_default">Domyślna</string>
+    <string name="sb_ticker_policy_locked">Wyłączone na ekranie blokady</string>
+    <string name="sb_ticker_policy_secured">Wyłączone na zabezpieczonym ekranie blokady</string>
+    <string name="sb_ticker_policy_disabled">Zawsze wyłączone</string>
+
 </resources>
