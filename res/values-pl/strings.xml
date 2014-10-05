@@ -1699,4 +1699,41 @@
         Długie naciśnięcie ikony drzemki otwiera okno dialogowe ustawień licznika czasu.</string>
     <string name="headsup_snooze_timer_set">Domyślny czas drzemki ustawiony na %s</string>
 
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">Przezroczyste paski</string>
+    <string name="pref_recents_translucent_bars_summary">Ustawia przezroczystość paska statusu i paska nawigacyjnego w ostatnich panelach</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Ustaw dni tygodnia</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Wycisz dźwięki systemowe</string>
+    <string name="system_sound_dialpad">Dźwięki wybierania numeru</string>
+    <string name="system_sound_touch">Dźwięki przy dotknięciu</string>
+    <string name="system_sound_screen_lock">Dźwięki blokady ekranu</string>
+    <string name="system_sound_volume_adjust">Dźwięki regulacji głośności</string>
+    <string name="system_sound_charger">Dźwięki GravityBox ładowarki</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignoruj dla połączeń przychodzących</string>
+
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Pasek postępu pobierania</string>
+    <string name="pref_statusbar_download_progress_summary">Pokazuje pasek postępu pobierania na pasku stanu dla pobierań realizowanych poprzez
+        standardowy menedżer pobierania Androida</string>
+    <string name="sb_download_progress_off">Wyłączony</string>
+    <string name="sb_download_progress_top">Górna krawędź</string>
+    <string name="sb_download_progress_bottom">Dolna krawędź</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Polityka powiadomień na pasku stanu</string>
+    <string name="sb_ticker_policy_default">Domyślna</string>
+    <string name="sb_ticker_policy_locked">Wyłączone na ekranie blokady</string>
+    <string name="sb_ticker_policy_secured">Wyłączone na zabezpieczonym ekranie blokady</string>
+    <string name="sb_ticker_policy_disabled">Zawsze wyłączone</string>
+
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">Ukryj etykiety SIM</string>
+    <string name="pref_signal_cluster_hide_sim_labels_summary">Wymagany restart</string>
+
 </resources>
