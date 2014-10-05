@@ -441,7 +441,7 @@
     <string name="pref_alarm_icon_hide_title">Ocultar icono de alarma</string>
 
     <!-- Screen dim level -->
-    <string name="pref_screen_dim_level_title">Nivle de atenuación de pantalla</string>
+    <string name="pref_screen_dim_level_title">Nivel de atenuación de pantalla</string>
     <string name="pref_screen_dim_level_summary">Cantidad de brillo durante la atenuación de la pantalla - cuando está a punto de apagarse (requiere reinicio)</string>
 
     <!-- Device type -->
