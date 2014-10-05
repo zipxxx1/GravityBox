@@ -1,3 +1,27 @@
+Changelog 3.4.2 - 05/10/2014
+--------------------------------------
+- GB Settings: fixed crash on Android 4.1 devices
+- Statusbar: added option for showing download progress bar in status bar
+--- applies only to downloads carried out via Android's standard download manager
+--- allows top or bottom edge position
+--- in case of multiple download notifications, progress bar applies to the one that came first
+--- for Play Store app updates, progress represents real status unlike the one indicated within Play Store app
+--- tested on Android 4.2 only; needs testing on 4.1 as well as 4.3
+- Statusbar: added option for controlling Notification Ticker policy
+- Statusbar coloring: added master switch for status bar background coloring
+- Misc: Master Key and Fake ID vulnerability patches are now optional (enabled by default)
+- UNC: fixed "Ignore quiet hours" option disappearing bug introduced in 3.4.1
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translation (thanks to momomok)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Russian translations (thanks to gaich)
+- Updated Spanish translation (thanks to DIG200)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated French translations (thanks to ch-vox)
+- Updated Slovak and Czech translations
+
 Changelog 3.4.1 - 29/09/2014
 --------------------------------------
 - UNC Quiet hours:
