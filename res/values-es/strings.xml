@@ -368,7 +368,7 @@
     <string name="button_backlight_mode_disable">Desactivar retroiluminación en botones</string>
     <string name="button_backlight_mode_always_on">Siempre activada con pantalla encendida</string>
     <string name="pref_button_backlight_notifications_title">Notificaciones con la retroiluminación</string>
-    <string name="pref_button_backlight_notifications_summary">¡EXPERIMENTAL! La retroiluminación parpadea cuando hay notificaciones. Usar si tu dispositivo no tiene LED de notificaciones. Puede consumir batería.</string>
+    <string name="pref_button_backlight_notifications_summary">La retroiluminación parpadea cuando hay notificaciones. Usar si tu dispositivo no tiene LED de notificaciones. Puede consumir batería.</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Fondo Holo interpolado</string>
