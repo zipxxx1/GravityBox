@@ -675,8 +675,8 @@
     <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> utiliz.</string>
     <string name="pref_rambar_title">Indicação de memória RAM</string>
     <string name="rambar_off">Desativada</string>
-    <string name="rambar_top">Topo superior</string>
-    <string name="rambar_bottom">Topo inferior</string>
+    <string name="rambar_top">Topo do ecrã</string>
+    <string name="rambar_bottom">Fundo do ecrã</string>
 
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Ação após pressão da tecla Aplicações recentes</string>
@@ -1620,5 +1620,28 @@
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorar para chamada a receber</string>
+
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Barra de progresso de transferências</string>
+    <string name="pref_statusbar_download_progress_summary">Permite mostrar na barra de status o progresso das transferências quando estas são executadas através
+        do gestor de transferências base do Android</string>
+    <string name="sb_download_progress_off">Desativada</string>
+    <string name="sb_download_progress_top">Topo do ecrã</string>
+    <string name="sb_download_progress_bottom">Fundo do ecrã</string>
+
+    <!-- Statusbar: master switch for background color -->
+    <string name="pref_statusbar_bgcolor_switch_title">Ativar coloração da barra de status (necessário reiniciar)</string>
+
+    <!-- Vulnerability patches -->
+    <string name="pref_patch_master_key_title">Corrigir vulnerabilidades 'Master Key'</string>
+    <string name="pref_patch_fake_id_title">Corrigir vulnerabilidade 'Fake ID'</string>
+    <string name="pref_patch_common_summary">Permite corrigir vulnerabilidades do Android (necessário reiniciar)</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Política de aviso de notificações</string>
+    <string name="sb_ticker_policy_default">Por defeito</string>
+    <string name="sb_ticker_policy_locked">Desativar no ecrã de bloqueio</string>
+    <string name="sb_ticker_policy_secured">Desativar quando método de bloqueio for seguro</string>
+    <string name="sb_ticker_policy_disabled">Desativar sempre</string>
 
 </resources>
