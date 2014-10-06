@@ -1614,6 +1614,14 @@
     <string name="sb_download_progress_off">Desativar</string>
     <string name="sb_download_progress_top">Acima da barra de status</string>
     <string name="sb_download_progress_bottom">Abaixo da barra de status</string>
+    
+     <!-- Statusbar: master switch for background color -->
+    <string name="pref_statusbar_bgcolor_switch_title">Ativar cor da barra de status (necessário reiniciar)</string>
+
+    <!-- Vulnerability patches -->
+    <string name="pref_patch_master_key_title">Corrigir vulnerabilidades \'Master Key\'</string>
+    <string name="pref_patch_fake_id_title">Corrigir vulnerabilidade \'Fake ID\'</string>
+    <string name="pref_patch_common_summary">Permite corrigir vulnerabilidades do Android (necessário reiniciar)</string>
 
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Notificação Ticker</string>
