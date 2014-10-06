@@ -130,6 +130,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     }
 
     private boolean verifyNotification(Object statusBarNotif) {
+        if (statusBarNotif == null) return false;
         String pkgName = (String) XposedHelpers.getObjectField(statusBarNotif, "pkg");
         if (ModDownloadProvider.PACKAGE_NAME.equals(pkgName)) {
             return true;
