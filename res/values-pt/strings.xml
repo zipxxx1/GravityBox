@@ -252,7 +252,7 @@
     <string name="phone_flip_action_dismiss">Rejeitar chamada</string>
 
     <!-- Soft reboot -->
-    <string name="reboot_soft">Reinício suave</string>
+    <string name="reboot_soft">Reiniciar suave</string>
 
     <!--  Solid black Holo background -->
     <string name="pref_holo_bg_solid_black_title">Fundo preto sólido</string>
