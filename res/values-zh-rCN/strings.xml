@@ -250,7 +250,7 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">启用菜单键</string>
-    <string name="pref_lockscreen_menu_key_summary">使菜单键在锁定屏时可以用来快速解锁设备（需要重新启动）</string>
+    <string name="pref_lockscreen_menu_key_summary">使菜单键在锁屏时可以用来快速解锁设备（需要重新启动）</string>
 
     <!-- Fix messaging wakelock -->
     <string name="pref_mms_fix_wakelock_title">修正短信唤醒</string>
@@ -1637,5 +1637,28 @@
     
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">忽略来电</string>
+    
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">下载进度条</string>
+    <string name="pref_statusbar_download_progress_summary">当使用安卓标准下载管理器时在状态栏显示进度条</string>
+    
+    <string name="sb_download_progress_off">禁用</string>
+    <string name="sb_download_progress_top">顶部</string>
+    <string name="sb_download_progress_bottom">底部</string>
+
+    <!-- Statusbar: master switch for background color -->
+    <string name="pref_statusbar_bgcolor_switch_title">启用状态栏背景色（需要重新启动）</string>
+
+    <!-- Vulnerability patches -->
+    <string name="pref_patch_master_key_title">修复Master Key漏洞</string>
+    <string name="pref_patch_fake_id_title">修复Fake ID漏洞</string>
+    <string name="pref_patch_common_summary">需要重新启</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">通知栏预览策略</string>
+    <string name="sb_ticker_policy_default">默认</string>
+    <string name="sb_ticker_policy_locked">锁屏时禁用</string>
+    <string name="sb_ticker_policy_secured">有安全锁时禁用</string>
+    <string name="sb_ticker_policy_disabled">总是禁用</string>
 
 </resources>
