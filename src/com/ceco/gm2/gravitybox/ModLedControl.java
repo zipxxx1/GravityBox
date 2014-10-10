@@ -187,6 +187,8 @@ public class ModLedControl {
                 final int id = (Integer) param.args[Build.VERSION.SDK_INT > 17 ? 3 : 2];
                 final String pkgName = (String) param.args[0];
                 Notification n = (Notification) param.args[Build.VERSION.SDK_INT > 17 ? 4 : 3];
+                final boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) == 
+                        Notification.FLAG_ONGOING_EVENT);
 
                 if (pkgName.equals(PACKAGE_NAME_GRAVITYBOX) && id >= 2049) return;
 
@@ -204,18 +206,19 @@ public class ModLedControl {
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
 
-                if (((n.flags & Notification.FLAG_ONGOING_EVENT) == Notification.FLAG_ONGOING_EVENT) &&
-                        !ls.getOngoing() && !qhActive) {
+                if (isOngoing && !ls.getOngoing() && !qhActive) {
                     if (DEBUG) log("Ongoing led control disabled. Ignoring.");
                     return;
                 }
 
                 // lights
                 if (qhActiveIncludingLed || 
-                        (ls.getEnabled() && ls.getLedMode() == LedMode.OFF)) {
+                        (ls.getEnabled() && ls.getLedMode() == LedMode.OFF &&
+                            !(isOngoing && !ls.getOngoing()))) {
                     n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
-                } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE) {
+                } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE &&
+                        !(isOngoing && !ls.getOngoing())) {
                     n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags |= Notification.FLAG_SHOW_LIGHTS;
                     n.ledOnMS = ls.getLedOnMs();
@@ -227,7 +230,7 @@ public class ModLedControl {
                 if (qhActiveIncludingVibe) {
                     n.defaults &= ~Notification.DEFAULT_VIBRATE;
                     n.vibrate = new long[] {0};
-                } else {
+                } else if (ls.getEnabled() && !(isOngoing && !ls.getOngoing())) {
                     if (ls.getVibrateOverride() && ls.getVibratePattern() != null) {
                         n.defaults &= ~Notification.DEFAULT_VIBRATE;
                         n.vibrate = ls.getVibratePattern();
