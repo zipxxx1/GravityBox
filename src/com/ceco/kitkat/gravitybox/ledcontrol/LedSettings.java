@@ -32,6 +32,7 @@ public class LedSettings {
     public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT = "pref_unc_as_headsup_timeout";
     public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_POSITION = "pref_unc_as_headsup_position";
     public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA = "pref_unc_as_headsup_alpha";
+    public static final String PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS = "pref_unc_as_ignore_quiet_hours";
 
     public static final String ACTION_UNC_SETTINGS_CHANGED = "gravitybox.intent.action.UNC_SETTINGS_CHANGED";
     public static final String EXTRA_UNC_AS_ENABLED = "uncActiveScreenEnabled";

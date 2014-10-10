@@ -296,6 +296,8 @@ public class ModLedControl {
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
+                final boolean qhActiveIncludingActiveScreen = qhActive &&
+                        !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
                 final boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) == 
                         Notification.FLAG_ONGOING_EVENT);
 
@@ -375,7 +377,7 @@ public class ModLedControl {
                     }
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
-                            !qhActive && !isOngoing && mPm != null && mKm.isKeyguardLocked()) {
+                            !qhActiveIncludingActiveScreen && !isOngoing && mPm != null && mKm.isKeyguardLocked()) {
                         n.extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
                                 ls.getActiveScreenMode().toString());
                         if (ls.getActiveScreenMode() == ActiveScreenMode.HEADS_UP) {
