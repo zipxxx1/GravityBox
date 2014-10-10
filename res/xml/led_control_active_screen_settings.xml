@@ -20,4 +20,10 @@
         android:title="@string/lc_active_screen_switch_title"
         android:defaultValue="false" />
 
+    <CheckBoxPreference
+        android:key="pref_unc_as_ignore_quiet_hours"
+        android:title="@string/pref_lc_qh_ignore_title"
+        android:defaultValue="false"
+        android:dependency="activeScreenEnabled" />
+
 </PreferenceScreen>

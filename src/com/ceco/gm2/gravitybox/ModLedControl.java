@@ -187,8 +187,6 @@ public class ModLedControl {
                 final int id = (Integer) param.args[Build.VERSION.SDK_INT > 17 ? 3 : 2];
                 final String pkgName = (String) param.args[0];
                 Notification n = (Notification) param.args[Build.VERSION.SDK_INT > 17 ? 4 : 3];
-                final boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) == 
-                        Notification.FLAG_ONGOING_EVENT);
 
                 if (pkgName.equals(PACKAGE_NAME_GRAVITYBOX) && id >= 2049) return;
 
@@ -205,6 +203,8 @@ public class ModLedControl {
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
+                final boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) == 
+                        Notification.FLAG_ONGOING_EVENT);
 
                 if (isOngoing && !ls.getOngoing() && !qhActive) {
                     if (DEBUG) log("Ongoing led control disabled. Ignoring.");
@@ -295,7 +295,8 @@ public class ModLedControl {
                     if (!ls.getActiveScreenEnabled()) return;
 
                     Notification n = (Notification) param.args[Build.VERSION.SDK_INT > 17 ? 4 : 3];
-                    if (mQuietHours.quietHoursActive(ls, n, false)) {
+                    if (!mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false) &&
+                            mQuietHours.quietHoursActive(ls, n, false)) {
                         return;
                     }
 
