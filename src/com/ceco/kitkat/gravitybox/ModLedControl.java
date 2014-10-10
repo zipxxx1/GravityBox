@@ -306,10 +306,12 @@ public class ModLedControl {
 
                 // lights
                 if (qhActiveIncludingLed || 
-                        (ls.getEnabled() && ls.getLedMode() == LedMode.OFF)) {
+                        (ls.getEnabled() && ls.getLedMode() == LedMode.OFF &&
+                            !(isOngoing && !ls.getOngoing()))) {
                     n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
-                } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE) {
+                } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE &&
+                        !(isOngoing && !ls.getOngoing())) {
                     n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags |= Notification.FLAG_SHOW_LIGHTS;
                     n.ledOnMS = ls.getLedOnMs();
@@ -321,7 +323,7 @@ public class ModLedControl {
                 if (qhActiveIncludingVibe) {
                     n.defaults &= ~Notification.DEFAULT_VIBRATE;
                     n.vibrate = new long[] {0};
-                } else {
+                } else if (ls.getEnabled() && !(isOngoing && !ls.getOngoing())) {
                     if (ls.getVibrateOverride() && ls.getVibratePattern() != null) {
                         n.defaults &= ~Notification.DEFAULT_VIBRATE;
                         n.vibrate = ls.getVibratePattern();
