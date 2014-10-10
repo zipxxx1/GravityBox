@@ -712,6 +712,14 @@
                 android:defaultValue="5"
                 android:dependency="pref_heads_up_master_switch" />
 
+            <ListPreference
+                android:key="pref_heads_up_importance"
+                android:title="@string/pref_heads_up_importance_title"
+                android:entries="@array/headsup_importance_entries"
+                android:entryValues="@array/headsup_importance_values"
+                android:defaultValue="-20"
+                android:dependency="pref_heads_up_master_switch" />
+
             <CheckBoxPreference 
                 android:key="pref_heads_up_one_finger"
                 android:title="@string/pref_heads_up_one_finger_title"

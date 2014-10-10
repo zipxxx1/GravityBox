@@ -779,6 +779,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HEADS_UP_SNOOZE_RESET = "pref_heads_up_snooze_reset";
     public static final String ACTION_HEADS_UP_SNOOZE_RESET = "gravitybox.intent.action.HEADS_UP_SNOOZE_RESET";
     public static final String PREF_KEY_HEADS_UP_SNOOZE_TIMER = "pref_heads_up_snooze_timer";
+    public static final String PREF_KEY_HEADS_UP_IMPORTANCE = "pref_heads_up_importance";
 
     public static final String PREF_KEY_HEADSET_ACTION_PLUG = "pref_headset_action_plug";
     public static final String PREF_KEY_HEADSET_ACTION_UNPLUG = "pref_headset_action_unplug";
@@ -1296,6 +1297,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
         private ListPreference mPrefSbTickerPolicy;
         private CheckBoxPreference mPrefScHideSimLabels;
+        private ListPreference mPrefHeadsUpImportance;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1620,6 +1622,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             getPreferenceScreen().removePreference(mPrefCustomApp);
 
             mPrefHeadsUpPosition = (ListPreference) findPreference(PREF_KEY_HEADS_UP_POSITION);
+            mPrefHeadsUpImportance = (ListPreference) findPreference(PREF_KEY_HEADS_UP_IMPORTANCE);
 
             mPrefChargingLed = (ListPreference) findPreference(PREF_KEY_CHARGING_LED);
             mPrefProximityWakeIgnoreCall = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL);
@@ -2368,6 +2371,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_HEADS_UP_POSITION)) {
                 mPrefHeadsUpPosition.setSummary(mPrefHeadsUpPosition.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_HEADS_UP_IMPORTANCE)) {
+                mPrefHeadsUpImportance.setSummary(mPrefHeadsUpImportance.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_CHARGING_LED)) {

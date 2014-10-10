@@ -1769,4 +1769,11 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">Hide SIM labels</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Requires reboot</string>
 
+    <!-- Heads up: importance threshold -->
+    <string name="pref_heads_up_importance_title">Importance threshold</string>
+    <string name="headsup_importance_disabled">Disabled</string>
+    <string name="headsup_importance_low">Low</string>
+    <string name="headsup_importance_medium">Medium</string>
+    <string name="headsup_importance_high">High</string>
+
 </resources>

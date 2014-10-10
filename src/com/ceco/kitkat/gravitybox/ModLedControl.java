@@ -478,6 +478,7 @@ public class ModLedControl {
     private static HeadsUpSnoozeDialog mHeadsUpSnoozeDlg;
     private static ImageButton mHeadsUpSnoozeBtn;
     private static Map<String, Long> mHeadsUpSnoozeMap;
+    private static XSharedPreferences mSysUiPrefs;
 
     static class HeadsUpParams {
         int yOffset;
@@ -507,6 +508,7 @@ public class ModLedControl {
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
+            mSysUiPrefs = prefs;
             mHeadsUpParams = new HeadsUpParams();
             mHeadsUpParams.alpha = (float)(100f - prefs.getInt(
                     GravityBoxSettings.PREF_KEY_HEADS_UP_ALPHA, 0)) / 100f;
@@ -578,13 +580,14 @@ public class ModLedControl {
                     } else {
                         HeadsUpMode mode = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_MODE) ?
                                 HeadsUpMode.valueOf(n.extras.getString(NOTIF_EXTRA_HEADS_UP_MODE)) :
-                                    HeadsUpMode.ALWAYS;
+                                    HeadsUpMode.DEFAULT;
                         if (DEBUG) log("Heads up mode: " + mode.toString());
     
                         switch (mode) {
                             default:
                             case DEFAULT:
-                                showHeadsUp = shouldNotDisturb(context) ? false : (Boolean)param.getResult();
+                                showHeadsUp = isHeadsUpAllowed(context,
+                                        (Integer) XposedHelpers.callMethod(param.args[0], "getScore"));
                                 break;
                             case ALWAYS: 
                                 showHeadsUp = isHeadsUpAllowed(context);
@@ -816,7 +819,17 @@ public class ModLedControl {
     }
 
     private static boolean isHeadsUpAllowed(Context context) {
+        return isHeadsUpAllowed(context, 20);
+    }
+
+    private static boolean isHeadsUpAllowed(Context context, int score) {
         if (context == null) return false;
+
+        if (score < Integer.valueOf(mSysUiPrefs.getString(
+                GravityBoxSettings.PREF_KEY_HEADS_UP_IMPORTANCE, "-20"))) {
+            if (DEBUG) log("isHeadsUpAllowed: no due to low importance level");
+            return false;
+        }
 
         Object kgTouchDelegate = XposedHelpers.callStaticMethod(
                 XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, context.getClassLoader()),
