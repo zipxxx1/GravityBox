@@ -780,6 +780,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_HEADS_UP_SNOOZE_RESET = "gravitybox.intent.action.HEADS_UP_SNOOZE_RESET";
     public static final String PREF_KEY_HEADS_UP_SNOOZE_TIMER = "pref_heads_up_snooze_timer";
     public static final String PREF_KEY_HEADS_UP_IMPORTANCE = "pref_heads_up_importance";
+    public static final String ACTION_HEADS_UP_SETTINGS_CHANGED = "gravitybox.intent.action.HEADS_UP_SETTINGS_CHANGED";
 
     public static final String PREF_KEY_HEADSET_ACTION_PLUG = "pref_headset_action_plug";
     public static final String PREF_KEY_HEADSET_ACTION_UNPLUG = "pref_headset_action_unplug";
@@ -908,6 +909,17 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_RING_DT2S,
             PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS,
             PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR
+    ));
+
+    private static final List<String> headsUpKeys = new ArrayList<String>(Arrays.asList(
+            PREF_KEY_HEADS_UP_TIMEOUT,
+            PREF_KEY_HEADS_UP_ONE_FINGER,
+            PREF_KEY_HEADS_UP_EXPANDED,
+            PREF_KEY_HEADS_UP_POSITION,
+            PREF_KEY_HEADS_UP_ALPHA,
+            PREF_KEY_HEADS_UP_SNOOZE,
+            PREF_KEY_HEADS_UP_SNOOZE_TIMER,
+            PREF_KEY_HEADS_UP_IMPORTANCE
     ));
 
     private static final class SystemProperties {
@@ -3154,6 +3166,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_STATUSBAR_TICKER_POLICY, prefs.getString(key, "DEFAULT"));
             } else if (lockscreenKeys.contains(key)) {
                 intent.setAction(ACTION_LOCKSCREEN_SETTINGS_CHANGED);
+            } else if (headsUpKeys.contains(key)) {
+                intent.setAction(ACTION_HEADS_UP_SETTINGS_CHANGED);
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
