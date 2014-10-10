@@ -3152,14 +3152,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_TICKER_POLICY)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_TICKER_POLICY, prefs.getString(key, "DEFAULT"));
+            } else if (lockscreenKeys.contains(key)) {
+                intent.setAction(ACTION_LOCKSCREEN_SETTINGS_CHANGED);
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
-                getActivity().sendBroadcast(intent);
-            }
-
-            if (lockscreenKeys.contains(key)) {
-                intent = new Intent(ACTION_LOCKSCREEN_SETTINGS_CHANGED);
                 getActivity().sendBroadcast(intent);
             }
 
