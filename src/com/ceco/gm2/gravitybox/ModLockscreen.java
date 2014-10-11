@@ -158,7 +158,8 @@ public class ModLockscreen {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED)) {
+            if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED) ||
+                    action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED)) {
                 mPrefs.reload();
                 if (DEBUG) log("Settings reloaded");
             } else if (action.equals(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED)) {
@@ -213,6 +214,7 @@ public class ModLockscreen {
                     intentFilter.addAction(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED);
                     intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     intentFilter.addAction(Intent.ACTION_USER_PRESENT);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
                     context.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("Keyguard mediator constructed");
                 }
