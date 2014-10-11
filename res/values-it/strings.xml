@@ -1732,4 +1732,48 @@
         Per decidere per quanto nascondere una notifca a comparsa, tenere premuto sull\'apposita icona.</string>
     <string name="headsup_snooze_timer_set">Le notifiche a comparsa saranno nascoste di default per %s</string>
 
+    <!-- Recents panel: always translucent bars -->
+    <string name="pref_recents_translucent_bars_title">Barre trasparenti</string>
+    <string name="pref_recents_translucent_bars_summary">Rende sempre trasparente la barra di navigazione e la barra di stato nella schermata app recenti</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Imposta giorni della settimana</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Silenzia suoni di sistema</string>
+    <string name="system_sound_dialpad">Suoni tastierino numerico</string>
+    <string name="system_sound_touch">Suoni alla pressione</string>
+    <string name="system_sound_screen_lock">Suono di blocco schermo</string>
+    <string name="system_sound_volume_adjust">Suono regolazione volume</string>
+    <string name="system_sound_charger">Suoni caricabatterie di GravityBox</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Ignora per le chiamate in arrivo</string>
+
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Barra di avanzamento download</string>
+    <string name="pref_statusbar_download_progress_summary">Mostra una barra di avanzamento nella barra di stato per i download in corso gestiti
+        dall\'app predefinita di Android per la gestione dei Download</string>
+    <string name="sb_download_progress_off">Disabilitato</string>
+    <string name="sb_download_progress_top">In alto</string>
+    <string name="sb_download_progress_bottom">In basso</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Comportamento testo notifiche</string>
+    <string name="sb_ticker_policy_default">Predefinito</string>
+    <string name="sb_ticker_policy_locked">Disabilita con schermata di blocco</string>
+    <string name="sb_ticker_policy_secured">Disabilita con schermata di sicurezza</string>
+    <string name="sb_ticker_policy_disabled">Disabilita sempre</string>
+
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">Nascondi nomi operatore</string>
+    <string name="pref_signal_cluster_hide_sim_labels_summary">Richiede riavvio</string>
+
+    <!-- Heads up: importance threshold -->
+    <string name="pref_heads_up_importance_title">Soglia priorità</string>
+    <string name="headsup_importance_disabled">Disabilitata</string>
+    <string name="headsup_importance_low">Bassa</string>
+    <string name="headsup_importance_medium">Media</string>
+    <string name="headsup_importance_high">Alta</string>
+
 </resources>
