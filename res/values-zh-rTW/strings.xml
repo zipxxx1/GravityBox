@@ -21,9 +21,9 @@
     <string name="battery_style_title">電量指示器風格</string>
     <string name="battery_style_stock">預設電量指示器</string>
     <string name="battery_style_circle">圓形電量指示器</string>
-    <string name="battery_style_circle_percent">圓形電量指示器(包含電量百分比)</string>
+    <string name="battery_style_circle_percent">圓形電量指示器 (包含電量百分比)</string>
     <string name="battery_style_kitkat">KitKat 電量指示器</string>
-    <string name="battery_style_kitkat_percent">KitKat 電量指示器(包含電量百分比)</string>
+    <string name="battery_style_kitkat_percent">KitKat 電量指示器 (包含電量百分比)</string>
     <string name="battery_style_none">隱藏</string>
 
     <string name="vol_music_controls_title">音量鍵跳過歌曲曲目</string>
@@ -38,7 +38,7 @@
     <string name="reboot_required">重啟裝置後更改將被套用</string>
 
     <string name="signal_icon_autohide_title">自動隱藏訊號圖示</string>
-    <string name="signal_icon_autohide_summary">自動隱藏訊號圖示時選定的SIM卡插槽，SIM卡未插入, 停用 \"SIM 卡未插入\" 通知</string>
+    <string name="signal_icon_autohide_summary">自動隱藏訊號圖示時選定的SIM卡插槽，SIM 卡未插入, 停用 \"SIM 卡未插入\" 通知</string>
     <string name="sim_slot_1">自動隱藏 SIM 卡槽 1</string>
     <string name="sim_slot_2">自動隱藏 SIM 卡槽 2</string>
     <string name="sim_disable_notifications">停用通知</string>
@@ -58,18 +58,18 @@
     <string name="recents_clear_all_title">清除全部最近使用的應用程式</string>
 
     <string name="fix_datetime_crash_title">修正「日期與時間」設定錯誤</string>
-    <string name="fix_datetime_crash_summary">當您進入日期與時間設定時發生錯誤時，啟用這個選項（需要重新啟動）</string>
+    <string name="fix_datetime_crash_summary">當您進入日期與時間設定時發生錯誤時，啟用這個選項 (需要重新啟動)</string>
 
     <string name="fix_caller_id_phone_title">修正通話的來電顯示</string>
-    <string name="fix_caller_id_phone_summary">若您來電畫面上顯示的聯絡人與您的通訊錄不合，啟用這個選項（需要重新啟動）</string>
-    <string name="fix_caller_id_phone_alert">為了讓更動生效，您應該在重新啟動後刪除並重新新增所有聯絡人！（請於 設定>應用程式>全部 分頁中找尋「聯絡人」應用程式並且選擇清除資料）</string>
+    <string name="fix_caller_id_phone_summary">若您來電畫面上顯示的聯絡人與您的通訊錄不合，啟用這個選項 (需要重新啟動)</string>
+    <string name="fix_caller_id_phone_alert">為了讓更動生效，您應該在重新啟動後刪除並重新新增所有聯絡人！ (請於 設定>應用程式>全部 分頁中找尋「聯絡人」應用程式並且選擇清除資料)</string>
 
     <string name="fix_caller_id_mms_title">修正簡訊的來電顯示</string>
-    <string name="fix_caller_id_mms_summary">如果來自同一個人的簡訊被分成不同的會話串，啟用這個選項（需要重新啟動）</string>
+    <string name="fix_caller_id_mms_summary">如果來自同一個人的簡訊被分成不同的會話串，啟用這個選項 (需要重新啟動)</string>
     <string name="fix_caller_id_mms_alert">為了讓更動生效，您應該在重新啟動後，於「訊息」應用程式內刪除全部被拆散的會話串！</string>
 
     <string name="fix_calendar_title">修正「行事曆」應用程式</string>
-    <string name="fix_calendar_summary">若您週期性地遇到螢幕自動開啟時，啟用這個選項（需要重新啟動）</string>
+    <string name="fix_calendar_summary">若您週期性地遇到螢幕自動開啟時，啟用這個選項 (需要重新啟動)</string>
 
     <string name="important">重要</string>
 
@@ -158,11 +158,11 @@
 
     <!--  Fix speech settings -->
     <string name="fix_tts_settings_title">修正語音設定</string>
-    <string name="fix_tts_settings_summary">解鎖位在語言與輸入設定內的「文字轉語音輸出」設定（需要重新啟動）</string>
+    <string name="fix_tts_settings_summary">解鎖位在語言與輸入設定內的「文字轉語音輸出」設定 (需要重新啟動)</string>
 
     <!--  Advanced developer options -->
     <string name="fix_dev_opts_title">進階的開發人員選項</string>
-    <string name="fix_dev_opts_summary">解鎖進階的開發人員選項（需要重新啟動）</string>
+    <string name="fix_dev_opts_summary">解鎖進階的開發人員選項 (需要重新啟動)</string>
 
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">狀態列調整</string>
@@ -226,14 +226,14 @@
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">最低亮度等級</string>
-    <string name="pref_brightness_min_summary">可以設定最低的亮度等級。在手動設定亮度時適用。（需要重新啟動）</string>
+    <string name="pref_brightness_min_summary">可以設定最低的亮度等級。在手動設定亮度時適用。 (需要重新啟動)</string>
 
     <!--  Autobrightness levels -->
     <string name="pref_ab_title">自動亮度等級</string>
     <string name="pref_ab_summary">可以設定環境的亮度等級與相對應的 LCD 背光值</string>
     <string name="level">等級</string>
-    <string name="pref_ab_lux_max_label">最大照度（lux）</string>
-    <string name="pref_ab_brighness_label">亮度（%d – 255）</string>
+    <string name="pref_ab_lux_max_label">最大照度 (lux)</string>
+    <string name="pref_ab_brighness_label">亮度 (%d – 255)</string>
     <string name="pref_ab_number_error_general">指定的數值不被接受</string>
     <string name="pref_ab_brightness_too_low">不建議將亮度設為 %d 以下</string>
     <string name="pref_ab_brightness_too_high">亮度無法大於 255</string>
@@ -250,11 +250,11 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">啟用選單鍵</string>
-    <string name="pref_lockscreen_menu_key_summary">令選單鍵在鎖定畫面可以用來快速地解鎖裝置（需要重新啟動）</string>
+    <string name="pref_lockscreen_menu_key_summary">令選單鍵在鎖定畫面可以用來快速地解鎖裝置 (需要重新啟動)</string>
 
     <!-- Fix messaging wakelock -->
     <string name="pref_mms_fix_wakelock_title">修正訊息的喚醒鎖</string>
-    <string name="pref_mms_fix_wakelock_summary">避免在收到新訊息時喚醒螢幕（需要重新啟動）</string>
+    <string name="pref_mms_fix_wakelock_summary">避免在收到新訊息時喚醒螢幕 (需要重新啟動)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">狀態列時鐘置中</string>
@@ -265,7 +265,7 @@
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">更多音樂音量的調整段數</string>
-    <string name="pref_music_volume_steps_summary">為音樂音量新增更多的調整段數（需要重新啟動）</string>
+    <string name="pref_music_volume_steps_summary">為音樂音量新增更多的調整段數 (需要重新啟動)</string>
 
     <!-- Safe headset media volume -->
     <string name="pref_safe_media_volume_title">安全的耳機媒體音量</string>
@@ -307,7 +307,7 @@
 
     <!--  Solid black Holo background -->
     <string name="pref_holo_bg_solid_black_title">純黑色背景</string>
-    <string name="pref_holo_bg_solid_black_summary">在預設的 Holo 系統內建佈景主題內使用純黑色的背景，而不是黑-灰色的漸層（需要重新啟動）</string>
+    <string name="pref_holo_bg_solid_black_summary">在預設的 Holo 系統內建佈景主題內使用純黑色的背景，而不是黑-灰色的漸層 (需要重新啟動)</string>
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">每列磁貼數</string>
@@ -406,15 +406,15 @@
 
     <!-- Hide navigation bar for pie -->
     <string name="pref_navbar_disable_title">隱藏導航列</string>
-    <string name="pref_navbar_disable_summary">當 Pie 控制 啟用時隱藏導航列（需要重新啟動）</string>
+    <string name="pref_navbar_disable_summary">當 Pie 控制 啟用時隱藏導航列 (需要重新啟動)</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">優化 Holo 背景</string>
-    <string name="pref_holo_bg_dither_summary">取代原本不完美漸層的預設 Holo 黑-灰色背景（需要重新啟動）</string>
+    <string name="pref_holo_bg_dither_summary">取代原本不完美漸層的預設 Holo 黑-灰色背景 (需要重新啟動)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">關閉實體按鍵</string>
-    <string name="pref_hwkeys_disable_summary">當 Pie 控制 啟用時將會關閉選單鍵、返回鍵與 HOME 鍵功能，但是實體按鍵功能仍可使用（如果您的裝置有實體按鍵）</string>
+    <string name="pref_hwkeys_disable_summary">當 Pie 控制 啟用時將會關閉選單鍵、返回鍵與 HOME 鍵功能，但是實體按鍵功能仍可使用 (如果您的裝置有實體按鍵)</string>
 
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">使用 Holo 黑色背景主題</string>
@@ -492,7 +492,7 @@
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">亮度設定</string>
     <string name="pref_brightness_master_switch_title">啟用亮度設定</string>
-    <string name="pref_brightness_master_switch_summary">這個功能只能在您的手機支援標準的 Android 亮度調整才啟用。如果您遇到任何亮度問題請關閉此選項（需要重新啟動）</string>
+    <string name="pref_brightness_master_switch_summary">這個功能只能在您的手機支援標準的 Android 亮度調整才啟用。如果您遇到任何亮度問題請關閉此選項 (需要重新啟動)</string>
 
     <!-- HW Key Action: Recent apps -->
     <string name="hwkey_action_recent_apps">顯示最近使用的應用程式</string>
@@ -502,7 +502,7 @@
 
     <!-- HW Key Action: Launch cutom app -->
     <string name="hwkey_action_custom_app_none">沒有指定應用程式！</string>
-    <string name="hwkey_action_custom_app_missing">找不到已設定的自訂應用程式！（請確定已安裝該應用程式）</string>
+    <string name="hwkey_action_custom_app_missing">找不到已設定的自訂應用程式！ (請確定已安裝該應用程式)</string>
 
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">狀態列時鐘</string>
@@ -543,7 +543,7 @@
     <string name="pref_cat_navigation_bar_title">導航列調整</string>
     <string name="pref_cat_navigation_bar_summary">包含各種有關導航列的個性配置選項</string>
     <string name="pref_navbar_override_title">覆蓋系統預設值</string>
-    <string name="pref_navbar_override_summary">新增導航列校正的主控鍵（需要重新啟動）</string>
+    <string name="pref_navbar_override_summary">新增導航列校正的主控鍵 (需要重新啟動)</string>
     <string name="pref_navbar_enable_title">啟用導航列功能</string>
     <string name="pref_navbar_enable_summary">需要重新啟動</string>
     <string name="pref_navbar_height_title">導航列高度</string>
@@ -565,7 +565,7 @@
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">啟用亮度控制</string>
-    <string name="pref_statusbar_brightness_summary">調整滑動狀態列時的亮度（需要停用自動亮度）</string>
+    <string name="pref_statusbar_brightness_summary">調整滑動狀態列時的亮度 (需要停用自動亮度)</string>
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">電話</string>
@@ -652,8 +652,8 @@
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">停用</string>
     <string name="clock_dow_standard">標準</string>
-    <string name="clock_dow_lowercase">小寫字元(僅英文有效)</string>
-    <string name="clock_dow_uppercase">大寫字元(僅英文有效)</string>
+    <string name="clock_dow_lowercase">小寫字元 (僅英文有效)</string>
+    <string name="clock_dow_uppercase">大寫字元 (僅英文有效)</string>
 
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">鎖定螢幕時的狀態列鎖定政策</string>
@@ -1049,7 +1049,7 @@
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">未定義</string>
     <string name="pref_cat_smart_radio_title">智慧網路</string>
-    <string name="pref_smart_radio_enable_summary">根據行動數據和無線網絡連接狀態，這會自動切換您自訂的省電模式或正常模式（需要重新啟動）</string>
+    <string name="pref_smart_radio_enable_summary">根據行動數據和無線網絡連接狀態，這會自動切換您自訂的省電模式或正常模式 (需要重新啟動)</string>
     <string name="pref_smart_radio_normal_mode_title">正常網路模式</string>
     <string name="pref_smart_radio_power_saving_mode_title">節省電力網路模式</string>
     <string name="pref_smart_radio_screen_off_title">當螢幕關閉</string>
@@ -1408,7 +1408,7 @@
 
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">主動螢幕喚醒</string>
-    <string name="lc_active_screen_info">啟用主動螢幕喚醒功能後，任何新的通知都會使螢幕自動亮著（只有當螢幕沒有被覆蓋的情況下，如：您的電話不在口袋裏）。根據鎖定畫面的安全性設定及您的設定，它亦可以自動展開通知面板。請注意，主動螢幕喚醒功能需要啟用鎖定畫面。\n以下的開關只是主開關，當啟用後請按需要為個別應用程式進行設定。</string>
+    <string name="lc_active_screen_info">啟用主動螢幕喚醒功能後，任何新的通知都會使螢幕自動亮著 (只有當螢幕沒有被覆蓋的情況下，如：您的電話不在口袋裏)。根據鎖定畫面的安全性設定及您的設定，它亦可以自動展開通知面板。請注意，主動螢幕喚醒功能需要啟用鎖定畫面。\n以下的開關只是主開關，當啟用後請按需要為個別應用程式進行設定。</string>
     <string name="lc_active_screen_switch_title">啟用主動螢幕喚醒</string>
     <string name="lc_expand_notification_panel_title">展開通知面板</string>
     <string name="lc_expand_notification_panel_summary">若鎖定面板安全性設定容許的話，當螢幕亮著時自動展開通知面板</string>
@@ -1457,7 +1457,7 @@
 
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">藍牙圖示可視性</string>
-    <string name="sb_bt_default">當藍牙啟用時（系統預設值）</string>
+    <string name="sb_bt_default">當藍牙啟用時 (系統預設值)</string>
     <string name="sb_bt_connected">當已連接藍牙設備時</string>
     <string name="sb_bt_hidden">隱藏</string>
 
@@ -1480,7 +1480,7 @@
 
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">強制使用從左至右版面配置方向</string>
-    <string name="pref_force_ltr_direction_summary">對所有從右至左的語系強制使用從左至右版面配置方向（需要重新啟動）</string>
+    <string name="pref_force_ltr_direction_summary">對所有從右至左的語系強制使用從左至右版面配置方向 (需要重新啟動)</string>
 
     <!-- Volume panel transparency: opaque on interaction -->
     <string name="pref_volume_panel_opaque_title">當使用時取消透明度</string>
@@ -1572,7 +1572,7 @@
 
     <!-- Navbar keys: enable Android L icons -->
     <string name="pref_navbar_android_l_icons_enable_title">使用Android L的導航列圖示</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">替換預設導航列圖示成為Android L內的樣式（需要重新啟動）</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">替換預設導航列圖示成為Android L內的樣式 (需要重新啟動)</string>
 
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">其他選項</string>
@@ -1625,6 +1625,14 @@
     <string name="sb_download_progress_off">停用</string>
     <string name="sb_download_progress_top">上沿</string>
     <string name="sb_download_progress_bottom">下沿</string>
+
+    <!-- Statusbar: master switch for background color -->
+    <string name="pref_statusbar_bgcolor_switch_title">啟用狀態列背景顏色選項 (需要重新啟動)</string>
+
+    <!-- Vulnerability patches -->
+    <string name="pref_patch_master_key_title">修補 Master Key 漏洞</string>
+    <string name="pref_patch_fake_id_title">修補 FakeID 漏洞</string>
+    <string name="pref_patch_common_summary">需要重新啟動</string>
 
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">停用狀態列的通知預覽</string>
