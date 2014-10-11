@@ -1736,4 +1736,11 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">Ukryj etykiety SIM</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Wymagany restart</string>
 
+    <!-- Heads up: importance threshold -->
+    <string name="pref_heads_up_importance_title">Próg ważności</string>
+    <string name="headsup_importance_disabled">Wyłączony</string>
+    <string name="headsup_importance_low">Niski</string>
+    <string name="headsup_importance_medium">Średni</string>
+    <string name="headsup_importance_high">Wysoki</string>
+
 </resources>
