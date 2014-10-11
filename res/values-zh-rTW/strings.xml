@@ -1752,4 +1752,11 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">隱藏訊號條 SIM 卡提示</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">需要重新啟動</string>
 
+    <!-- Heads up: importance threshold -->
+    <string name="pref_heads_up_importance_title">通知重要性篩選下限</string>
+    <string name="headsup_importance_disabled">停用</string>
+    <string name="headsup_importance_low">低重要性</string>
+    <string name="headsup_importance_medium">中重要性</string>
+    <string name="headsup_importance_high">高重要性</string>
+
 </resources>
