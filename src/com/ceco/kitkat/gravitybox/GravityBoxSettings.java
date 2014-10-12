@@ -2394,7 +2394,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             if (key == null || key.equals(PREF_KEY_HEADS_UP_IMPORTANCE)) {
-                mPrefHeadsUpImportance.setSummary(mPrefHeadsUpImportance.getEntry());
+                mPrefHeadsUpImportance.setSummary(String.format(
+                        getString(R.string.pref_heads_up_importance_summary),
+                        mPrefHeadsUpImportance.getEntry()));;
             }
 
             if (key == null || key.equals(PREF_KEY_CHARGING_LED)) {

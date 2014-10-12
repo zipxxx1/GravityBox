@@ -1771,6 +1771,8 @@
 
     <!-- Heads up: importance threshold -->
     <string name="pref_heads_up_importance_title">Importance threshold</string>
+    <string name="pref_heads_up_importance_summary">Allows suppressing heads up for notifications 
+        that are of importance lower than defined threshold (%s)</string>
     <string name="headsup_importance_disabled">Disabled</string>
     <string name="headsup_importance_low">Low</string>
     <string name="headsup_importance_medium">Medium</string>
