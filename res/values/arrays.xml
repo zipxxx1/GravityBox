@@ -1144,4 +1144,14 @@
         <item>DISABLED</item>
     </string-array>
 
+    <string-array name="nmt_2g3g_mode_entries" translatable="false">
+        <item>@string/nmt_2g3g_mode_wcdma</item>
+        <item>@string/nmt_2g3g_mode_auto</item>
+    </string-array>
+
+    <string-array name="nmt_2g3g_mode_values" translatable="false">
+        <item>0</item>
+        <item>3</item>
+    </string-array>
+
 </resources>

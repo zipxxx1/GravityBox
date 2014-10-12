@@ -1661,4 +1661,9 @@
     <string name="sb_ticker_policy_secured">Disable on secured lock screen</string>
     <string name="sb_ticker_policy_disabled">Always disable</string>
 
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G mode</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferred (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
+
 </resources>
