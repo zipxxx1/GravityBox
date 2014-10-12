@@ -1771,6 +1771,8 @@
 
     <!-- Heads up: importance threshold -->
     <string name="pref_heads_up_importance_title">Порог важности</string>
+    <string name="pref_heads_up_importance_summary">Возможность отключить уведомления всплытия, 
+        имеющие важность менее установленного порога (%s)</string>
     <string name="headsup_importance_disabled">Отключено</string>
     <string name="headsup_importance_low">Низкий</string>
     <string name="headsup_importance_medium">Средний</string>
