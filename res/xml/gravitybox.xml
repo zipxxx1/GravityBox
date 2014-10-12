@@ -408,6 +408,14 @@
                         android:entryValues="@array/network_mode_tile_mode_values"
                         android:defaultValue="0" />
 
+                    <ListPreference
+                        android:key="pref_network_mode_tile_2g3g_mode" 
+                        android:title="@string/pref_network_mode_tile_2g3g_mode_title"
+                        android:entries="@array/nmt_2g3g_mode_entries"
+                        android:entryValues="@array/nmt_2g3g_mode_values"
+                        android:defaultValue="0"
+                        android:dependency="pref_network_mode_tile_cdma" />
+
                     <CheckBoxPreference 
                         android:key="pref_network_mode_tile_lte"
                         android:title="@string/pref_network_mode_tile_lte_title"
@@ -416,7 +424,8 @@
                     <CheckBoxPreference 
                         android:key="pref_network_mode_tile_cdma"
                         android:title="@string/pref_network_mode_tile_cdma_title"
-                        android:defaultValue="false" />
+                        android:defaultValue="false"
+                        android:disableDependentsState="true" />
 
                     <ListPreference
                         android:key="pref_qs_network_mode_sim_slot" 
