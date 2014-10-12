@@ -1776,4 +1776,9 @@
     <string name="headsup_importance_medium">Средний</string>
     <string name="headsup_importance_high">Высокий</string>
 
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">Режим 2G+3G</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA предпочт. (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA авто (2G/3G)</string>
+
 </resources>
