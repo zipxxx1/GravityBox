@@ -1744,7 +1744,7 @@
     <!-- Heads up: importance threshold -->
     <string name="pref_heads_up_importance_title">Limite de importância</string>
     <string name="pref_heads_up_importance_summary">Permite suprimir as notificações flutuantes 
-+        para as quais o nível de importância é inferior ao limite definido(%s)</string>
+        para as quais o nível de importância é inferior ao limite definido(%s)</string>
     <string name="headsup_importance_disabled">Desativado</string>
     <string name="headsup_importance_low">Baixa</string>
     <string name="headsup_importance_medium">Médio</string>
