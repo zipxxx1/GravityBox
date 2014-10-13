@@ -506,7 +506,7 @@
     <string name="hwkey_action_custom_app_missing">Az egyéni alkalmazás nem található!</string>
 
     <!-- Notification panel clock -->
-    <string name="pref_cat_statusbar_clock_title">Értesítési sáv óra alkalmazás</string>
+    <string name="pref_cat_statusbar_clock_title">Állapotsáv óra alkalmazás</string>
     <string name="pref_cat_notif_panel_clock_title">Értesítési panel óra alkalmazás</string>
     <string name="pref_clock_link_title">Egyszeri érintés alkalmazása</string>
     <string name="pref_clock_link_summary">Az értesítési panel órájának megérintésével egy meghatározott alkalmazás megnyitása a Dátum&amp;Idő beállításai helyett</string>
@@ -566,7 +566,7 @@
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Fényerő szabályozás engedélyezése</string>
-    <string name="pref_statusbar_brightness_summary">Fényerő beállítása az értesítési sávon történő jobbra-balra csúsztatással</string>
+    <string name="pref_statusbar_brightness_summary">Fényerő beállítása az állapotsávon történő jobbra-balra csúsztatással</string>
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telefonálás</string>
@@ -586,7 +586,7 @@
 
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Gyári akkumulátor szín követése</string>
-    <string name="pref_sbcolor_follow_stock_battery_summary">A gyári akkumulátor ikon színét fogja használni az értesítési sávon az óra  illetve a százalékos és kör akkumulátor használat ikonjaihoz. Kikapcsolt ikonszínezés esetén használandó.</string>
+    <string name="pref_sbcolor_follow_stock_battery_summary">A gyári akkumulátor ikon színét fogja használni az állapotsávon az óra  illetve a százalékos és kör akkumulátor használat ikonjaihoz. Kikapcsolt ikonszínezés esetén használandó.</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Hálózati üzemmód csempe típusa</string>
@@ -907,7 +907,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Elrejtés változtatás után</string>
-    <string name="pref_qs_hide_on_change_summary">Automatikusan összecsukja az értesítési sávot csempe egyszeri érintésre. GravityBox és felülírt gyári csempékre vonatkozik.</string>
+    <string name="pref_qs_hide_on_change_summary">Automatikusan összecsukja az állapotsávot csempe egyszeri érintésre. GravityBox és felülírt gyári csempékre vonatkozik.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Kikapcsoló menü</string>
@@ -936,7 +936,7 @@
 
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Kikapcsoló menü mutatása</string>
-    <string name="hwkey_action_expand_notifications">Állapotsáv panel kiterjesztése</string>
+    <string name="hwkey_action_expand_notifications">Értesítési panel kiterjesztése</string>
     <string name="hwkey_action_expand_quicksettings">Gyorsbeállítások panel kiterjesztése</string>
 
     <!-- Navigation bar ring targets -->
@@ -1221,7 +1221,7 @@
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Widget-ek</string>
     <string name="pref_cat_lockscreen_sliding_challenge_title">Csúsztatási művelet</string>
-    <string name="pref_cat_lockscreen_statusbar_title">Értesítési sáv</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Állapotsáv</string>
 
     <!-- Quick settings: Auto-switch extended -->
     <string name="qs_auto_switch_disabled">Letiltva</string>
@@ -1230,7 +1230,7 @@
 
     <!-- Statusbar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">Dupla érintésre alvás engedélyezése</string>
-    <string name="pref_statusbar_dt2s_summary">Az értesítési sávon történő dupla érintés alvó állapotba helyezi a készüléket</string>
+    <string name="pref_statusbar_dt2s_summary">Az állapotsávon történő dupla érintés alvó állapotba helyezi a készüléket</string>
 
     <!-- Animation scales -->
     <string name="animation_scale0">Animáció kikapcsolva</string>
@@ -1295,7 +1295,7 @@
     <string name="pref_volume_adjust_vibrate_mute_summary">Letiltja a rezgést a hangerőszabályzó gombokkal történő értesítési/csengőhang hangererejének beállításakor</string>
 
     <!-- Clock settings master switch -->
-    <string name="pref_sb_clock_masterswitch_summary">Értesítési sáv óra beállítások ki-bekapcsolása (újraindítás szükséges)</string>
+    <string name="pref_sb_clock_masterswitch_summary">Allapotsáv óra beállítások ki-bekapcsolása (újraindítás szükséges)</string>
 
     <!-- Clock: day of week size -->
     <string name="pref_sb_clock_dow_size_title">A hét napjának mérete</string>
@@ -1428,8 +1428,8 @@
     <string name="lc_led_mode_off">Kikapcsolva (nincsenek értesítési fények)</string>
 
     <!-- Notification control: Quiet hours statusbar icon -->
-    <string name="pref_lc_qh_statusbar_icon_title">Értesítési sáv ikon</string>
-    <string name="pref_lc_qh_statusbar_icon_summary">Ikon mutatása az értesítési sávon Csendes időszakok alatt</string>
+    <string name="pref_lc_qh_statusbar_icon_title">Állapotsáv ikon</string>
+    <string name="pref_lc_qh_statusbar_icon_summary">Ikon mutatása az állapotsávon Csendes időszakok alatt</string>
 
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Töltés szín</string>
@@ -1624,10 +1624,18 @@
 
     <!-- Status bar: show download progress -->
     <string name="pref_statusbar_download_progress_title">Letöltési folyamat sáv</string>
-    <string name="pref_statusbar_download_progress_summary">A letöltési folyamat sávot az értesítési sávban mutatja az Android gyári letöltő menedzser által elvégzett letöltésekhez.</string>
+    <string name="pref_statusbar_download_progress_summary">A letöltési folyamat sávot az állapotsávban mutatja az Android gyári letöltő menedzser által elvégzett letöltésekhez.</string>
     <string name="sb_download_progress_off">Letiltva</string>
     <string name="sb_download_progress_top">Felső szélen</string>
     <string name="sb_download_progress_bottom">Alsó szélen</string>
+
+    <!-- Statusbar: master switch for background color -->
+    <string name="pref_statusbar_bgcolor_switch_title">Állapotsáv háttér színezés engedélyezése (újraindítás szükséges)</string>
+
+    <!-- Vulnerability patches -->
+    <string name="pref_patch_master_key_title">Javítás Master Key sebezhetőségre</string>
+    <string name="pref_patch_fake_id_title">Javítás Fake ID sebezhetőségre</string>
+    <string name="pref_patch_common_summary">Újraindítás szükséges</string>
 
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Értesítés kijelzés házirend</string>
