@@ -307,7 +307,8 @@ public class ModPowerMenu {
                     }
 
                     // Add Expanded Desktop action if enabled
-                    if (ExpandedDesktopAction.isExpandedDesktopEnabled(prefs)) {
+                    if (ExpandedDesktopAction.isExpandedDesktopEnabled(prefs) &&
+                            prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWERMENU_EXPANDED_DESKTOP, true)) {
                         if (mExpandedDesktopAction == null) {
                             mExpandedDesktopAction = Proxy.newProxyInstance(classLoader, 
                                     new Class<?>[] { actionClass },
