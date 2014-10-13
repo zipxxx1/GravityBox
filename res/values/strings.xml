@@ -1666,4 +1666,8 @@
     <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferred (3G/2G)</string>
     <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
 
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Expanded desktop in power menu</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Make sure alternative method of turning expanded desktop off is available!!!</string>
+
 </resources>
