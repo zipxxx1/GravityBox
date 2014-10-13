@@ -1743,9 +1743,15 @@
     
     <!-- Heads up: importance threshold -->
     <string name="pref_heads_up_importance_title">Limite de importância</string>
+    <string name="pref_heads_up_importance_summary">Permite suprimir notificações flutuantes para as notificações de importância menor, limite definido (%s)</string>
     <string name="headsup_importance_disabled">Desativado</string>
     <string name="headsup_importance_low">Baixa</string>
     <string name="headsup_importance_medium">Médio</string>
     <string name="headsup_importance_high">Alto</string>
+    
+        <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">Modo 2G+3G</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferêncial (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
     
 </resources>
