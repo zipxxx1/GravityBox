@@ -1783,4 +1783,8 @@
     <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Privilégié (3G/2G)</string>
     <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
 
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Bureau étendu dans le menu d\'extinction</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Vérifiez qu\'une méthode alternative soit accessible pour stopper le mode bureau étendu !!!</string>
+
 </resources>
