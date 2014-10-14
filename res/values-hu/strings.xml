@@ -463,7 +463,7 @@
     <string name="hwkey_action_custom_app_missing">Az egyéni alkalmazás nem található!</string>
 
     <!-- Notification panel clock -->
-    <string name="pref_cat_statusbar_clock_title">Értesítési sáv óra alkalmazás</string>
+    <string name="pref_cat_statusbar_clock_title">Állaptsáv óra alkalmazás</string>
     <string name="pref_cat_notif_panel_clock_title">Értesítési panel óra alkalmazás</string>
     <string name="pref_clock_link_title">Egyszeri érintés alkalmazása</string>
     <string name="pref_clock_link_summary">Az értesítési panel órájának megérintésével egy meghatározott alkalmazás megnyitása a Dátum&amp;Idő beállításai helyett</string>
@@ -524,7 +524,7 @@
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Fényerő szabályozás engedélyezése</string>
-    <string name="pref_statusbar_brightness_summary">Fényerő beállítása az értesítési sávon történő jobbra-balra csúsztatással</string>
+    <string name="pref_statusbar_brightness_summary">Fényerő beállítása az állapotsávon történő jobbra-balra csúsztatással</string>
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telefonálás</string>
@@ -860,7 +860,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Elrejtés változtatás után</string>
-    <string name="pref_qs_hide_on_change_summary">Automatikusan összecsukja az értesítési sávot csempe egyszeri érintésre. GravityBox és felülírt gyári csempékre vonatkozik.</string>
+    <string name="pref_qs_hide_on_change_summary">Automatikusan összecsukja az állapotsávot csempe egyszeri érintésre. GravityBox és felülírt gyári csempékre vonatkozik.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Kikapcsoló menü</string>
@@ -896,7 +896,7 @@
 
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Kikapcsoló menü mutatása</string>
-    <string name="hwkey_action_expand_notifications">Állapotsáv panel kiterjesztése</string>
+    <string name="hwkey_action_expand_notifications">Értesítési panel kiterjesztése</string>
     <string name="hwkey_action_expand_quicksettings">Gyorsbeállítások panel kiterjesztése</string>
 
     <!-- Navigation bar ring targets -->
@@ -1190,7 +1190,7 @@
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Widget-ek</string>
     <string name="pref_cat_lockscreen_sliding_challenge_title">Csúsztatási művelet</string>
-    <string name="pref_cat_lockscreen_statusbar_title">Értesítési sáv</string>
+    <string name="pref_cat_lockscreen_statusbar_title">Állapotsáv</string>
 
     <!-- Quick settings: Auto-switch extended -->
     <string name="qs_auto_switch_disabled">Letiltva</string>
@@ -1203,7 +1203,7 @@
 
     <!-- Statusbar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">Dupla érintésre alvás engedélyezése</string>
-    <string name="pref_statusbar_dt2s_summary">Az értesítési sávon történő dupla érintés alvó állapotba helyezi a készüléket</string>
+    <string name="pref_statusbar_dt2s_summary">Az állapotsávon történő dupla érintés alvó állapotba helyezi a készüléket</string>
 
     <!-- Animation scales -->
     <string name="animation_scale0">Animáció kikapcsolva</string>
@@ -1287,7 +1287,7 @@
     <string name="pref_screenrecord_use_stock_summary">Ha engedélyezve van, akkor a gyári videóbeállítás lesz használva felvételkor. Abban az esetben használd, ha az alternatív videóbeállítások problémákat okoznak. Ne feledd, hogy a gyári videóbeállítás nem támogatja a hangfelvételet és a felvétel nem lehet hosszabb 3 percnél.</string>
 
     <!-- Clock settings master switch -->
-    <string name="pref_sb_clock_masterswitch_summary">Értesítési sáv óra beállítások ki-bekapcsolása (újraindítás szükséges)</string>
+    <string name="pref_sb_clock_masterswitch_summary">Állapotsáv óra beállítások ki-bekapcsolása (újraindítás szükséges)</string>
 
     <!-- Clock: day of week size -->
     <string name="pref_sb_clock_dow_size_title">A hét napjának mérete</string>
@@ -1423,8 +1423,8 @@
     <string name="lc_led_mode_off">Kikapcsolva (nincsenek értesítési fények)</string>
     
     <!-- Notification control: Quiet hours statusbar icon -->
-    <string name="pref_lc_qh_statusbar_icon_title">Értesítési sáv ikon</string>
-    <string name="pref_lc_qh_statusbar_icon_summary">Ikon mutatása az értesítési sávon Csendes időszakok alatt</string>
+    <string name="pref_lc_qh_statusbar_icon_title">ÁLlapotsáv ikon</string>
+    <string name="pref_lc_qh_statusbar_icon_summary">Ikon mutatása az állapotsávon Csendes időszakok alatt</string>
 
     <!-- Battey percent text: charging color -->
     <string name="battery_percent_text_charging_color_title">Töltés szín</string>
@@ -1617,6 +1617,7 @@
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Lebegő felugró ablak</string>
     <string name="pref_lc_headsup_expanded_title">Kiterjesztve mutat</string>
+    <string name="pref_lc_headsup_expanded_summary">Vedd figyelembe, hogy ez az opció felülbírálásra kerülhet az Értesítés Vezérlés által</string>
     <string name="pref_lc_headsup_dnd_title">Ne zavarjon</string>
     <string name="pref_lc_headsup_dnd_summary">Nem mutat egyetlen lebegő felugró ablakot sem, amíg ez az alkalmazás az előtérben fut</string>
 
@@ -1733,7 +1734,7 @@
     
     <!-- Status bar: show download progress -->
     <string name="pref_statusbar_download_progress_title">Letöltési folyamat sáv</string>
-    <string name="pref_statusbar_download_progress_summary">A letöltési folyamat sávot az értesítési sávban mutatja az Android gyári letöltő menedzser által elvégzett letöltésekhez.</string>
+    <string name="pref_statusbar_download_progress_summary">A letöltési folyamat sávot az állapotsávban mutatja az Android gyári letöltő menedzser által elvégzett letöltésekhez.</string>
     <string name="sb_download_progress_off">Letiltva</string>
     <string name="sb_download_progress_top">Felső szélen</string>
     <string name="sb_download_progress_bottom">Alsó szélen</string>
@@ -1744,5 +1745,26 @@
     <string name="sb_ticker_policy_locked">Letiltva zárképernyőnél</string>
     <string name="sb_ticker_policy_secured">Letiltva zárolt zárképernyőnél</string>
     <string name="sb_ticker_policy_disabled">Mindig letilva</string>
+    
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">SIM címke elrejtése</string>
+    <string name="pref_signal_cluster_hide_sim_labels_summary">Újraindítás szükséges</string>
+
+    <!-- Heads up: importance threshold -->
+    <string name="pref_heads_up_importance_title">Fontossági küszöb</string>
+    <string name="pref_heads_up_importance_summary">Lehetővé teszi a lebegő felugró ablakban megjelenő értesítés kikapcsolását a beállított fontossági küszöb alatti értesítésekhez (%s)</string>
+    <string name="headsup_importance_disabled">Letiltva</string>
+    <string name="headsup_importance_low">Alacsony</string>
+    <string name="headsup_importance_medium">Közepes</string>
+    <string name="headsup_importance_high">Magas</string>
+
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G mód</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferált (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Kiterjesztett asztal a kikapcsoló menüben</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Ellenőrizd a kiterjesztett asztal kikapcsolás alternatív módszerét!!!</string>
 
 </resources>
