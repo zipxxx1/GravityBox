@@ -1634,6 +1634,7 @@
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Всплытие</string>
     <string name="pref_lc_headsup_expanded_title">В раскрытом виде</string>
+    <string name="pref_lc_headsup_expanded_summary">Пожалуйста, имейте в виду, что параметры управления оповещением могут переопределить данную опцию</string>
     <string name="pref_lc_headsup_dnd_title">Не беспокоить</string>
     <string name="pref_lc_headsup_dnd_summary">Уведомления в режиме всплытия не будут отображаться при работе этого приложения</string>
 
