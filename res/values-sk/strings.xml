@@ -1599,6 +1599,7 @@
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
     <string name="pref_lc_headsup_expanded_title">Rozšírený náhľad</string>
+    <string name="pref_lc_headsup_expanded_summary">Nastavenie môže byť obídené na úrovni jednotlivých aplikácií v nastaveniach oznámení</string>
     <string name="pref_lc_headsup_dnd_title">Nevyrušovať</string>
     <string name="pref_lc_headsup_dnd_summary">Nezobrazí žiadne heads up notifikácie ak je táto aplikácia v popredí</string>
 
