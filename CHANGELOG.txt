@@ -1,3 +1,35 @@
+Changelog 3.4.6 - 14/10/2014
+--------------------------------------
+- Heads up: 
+--- added option for importance threshold:
+------ allows to suppress heads up for notifications that are of lower importance than defined threshold
+------ depends on priority of notification as set by app sending a notification
+------ hint: Medium level filters out Google Now notifications
+--- added summary text to "Show expanded" preference to make clear it can be overriden by UNC (thanks to momomok)
+--- optimized preference handling (less processing when notification arrives)
+- Ultimate notification control:
+--- fixed improper lights and vibration handling during quiet hours affecting mainly ongoing notifications
+--- Active Screen: added option for ignoring quiet hours (shows active screen during quiet hours)
+--- heads up importance threshold applies when heads up mode is set to "Default"
+--- heads up importance threshold DOES NOT apply to Active Screen
+- Network mode tile: added option for specifying 2G+3G mode:
+--- allows to choose whether to use GSM/WCDMA Preferred or GSM/WCDMA Auto
+--- tile icon indicates which 2G+3G mode is set (2G/3G or 3G/2G)
+- PowerMenu: added option for hiding expanded desktop toggle in power menu
+- GB App Picker: search field adjusted to allow inputting non-English characters (thanks to momomok)
+- Status bar download progress: fixed exotic error appearing in xposed log 
+- Updated Russian translations (thanks to gaich)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated French translations (thanks to ch-vox)
+- Updated Spanish translations (thanks to DIG200)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated Slovak and Czech translations
+
 Changelog 3.4.5 - 04/10/2014
 --------------------------------------
 - Statusbar: added option for showing download progress bar in status bar
