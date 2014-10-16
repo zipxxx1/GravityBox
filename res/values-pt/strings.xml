@@ -1756,8 +1756,8 @@
     <string name="nmt_2g3g_mode_auto">GSM/WCDMA Automático (2G/3G)</string>
     
     <!-- Power menu: expanded desktop in power menu -->
-    <string name="pref_powermenu_expanded_desktop_title">Área de trabalho expandido no menu de energia</string>
-    <string name="pref_powermenu_expanded_desktop_summary">Certifique-se se o método ampliar área de trabalho está habilitado!!!</string>
+    <string name="pref_powermenu_expanded_desktop_title">Área de trabalho expandido no Menu Desligar</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Deverá ser grantido que existe um método alternativo para desativar à área de trabalho expandido!!!</string>
 
     
 </resources>
