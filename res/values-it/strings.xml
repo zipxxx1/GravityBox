@@ -1618,5 +1618,28 @@
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignora per chiamate in arrivo</string>
+    
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Barra di avanzamento download</string>
+    <string name="pref_statusbar_download_progress_summary">Mostra una barra di avanzamento nella barra di stato per i download in corso gestiti
+        dall\'app predefinita di Android per la gestione dei Download</string>
+    <string name="sb_download_progress_off">Disabilitato</string>
+    <string name="sb_download_progress_top">In alto</string>
+    <string name="sb_download_progress_bottom">In basso</string>
+
+    <!-- Statusbar: master switch for background color -->
+    <string name="pref_statusbar_bgcolor_switch_title">Abilita colore sfondo barra di stato (richiede riavvio)</string>
+
+    <!-- Vulnerability patches -->
+    <string name="pref_patch_master_key_title">Patch vulnerabilità Master Key</string>
+    <string name="pref_patch_fake_id_title">Patch vulnerabilità Fake ID/string>
+    <string name="pref_patch_common_summary">Richiede riavvio</string>
+
+    <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Comportamento testo notifiche</string>
+    <string name="sb_ticker_policy_default">Predefinito</string>
+    <string name="sb_ticker_policy_locked">Disabilita con schermata di blocco</string>
+    <string name="sb_ticker_policy_secured">Disabilita con schermata di sicurezza</string>
+    <string name="sb_ticker_policy_disabled">Disabilita sempre</string>
 
 </resources>
