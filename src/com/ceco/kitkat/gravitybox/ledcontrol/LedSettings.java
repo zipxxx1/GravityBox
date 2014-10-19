@@ -63,6 +63,7 @@ public class LedSettings {
     private HeadsUpMode mHeadsUpMode;
     private boolean mHeadsUpExpanded;
     private boolean mHeadsUpDnd;
+    private boolean mHeadsUpIgnoreUpdate;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -135,6 +136,8 @@ public class LedSettings {
                 ls.setHeadsUpExpanded(Boolean.valueOf(data[1]));
             } else if (data[0].equals("headsUpDnd")) {
                 ls.setHeadsUpDnd(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("headsUpIgnoreUpdate")) {
+                ls.setHeadsUpIgnoreUpdate(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -163,6 +166,7 @@ public class LedSettings {
         mHeadsUpMode = HeadsUpMode.DEFAULT;
         mHeadsUpExpanded = false;
         mHeadsUpDnd = false;
+        mHeadsUpIgnoreUpdate = false;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -336,6 +340,10 @@ public class LedSettings {
         mHeadsUpDnd = dnd;
     }
 
+    protected void setHeadsUpIgnoreUpdate(boolean ignoreUpdate) {
+        mHeadsUpIgnoreUpdate = ignoreUpdate;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -420,6 +428,10 @@ public class LedSettings {
         return mHeadsUpDnd;
     }
 
+    public boolean getHeadsUpIgnoreUpdate() {
+        return mHeadsUpIgnoreUpdate;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -448,6 +460,7 @@ public class LedSettings {
             dataSet.add("headsUpMode:" + mHeadsUpMode.toString());
             dataSet.add("headsUpExpanded:" + mHeadsUpExpanded);
             dataSet.add("headsUpDnd:" + mHeadsUpDnd);
+            dataSet.add("headsUpIgnoreUpdate:" + mHeadsUpIgnoreUpdate);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

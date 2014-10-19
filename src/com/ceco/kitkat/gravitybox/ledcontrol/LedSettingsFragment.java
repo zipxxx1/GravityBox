@@ -64,6 +64,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_HEADS_UP_MODE = "pref_lc_headsup_mode";
     private static final String PREF_KEY_HEADS_UP_EXPANDED = "pref_lc_headsup_expanded";
     private static final String PREF_KEY_HEADS_UP_DND = "pref_lc_headsup_dnd";
+    private static final String PREF_KEY_HEADS_UP_IGNORE_UPDATE = "pref_lc_headsup_ignore_update";
     private static final String PREF_CAT_KEY_OTHER = "pref_cat_lc_other";
 
     private static final int REQ_PICK_SOUND = 101;
@@ -91,6 +92,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private ListPreference mHeadsUpModePref;
     private CheckBoxPreference mHeadsUpExpandedPref;
     private CheckBoxPreference mHeadsUpDndPref;
+    private CheckBoxPreference mHeadsUpIgnoreUpdatePref;
     private PreferenceCategory mOtherCat;
 
     @Override
@@ -124,6 +126,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mHeadsUpModePref.setOnPreferenceChangeListener(this);
         mHeadsUpExpandedPref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_EXPANDED);
         mHeadsUpDndPref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_DND);
+        mHeadsUpIgnoreUpdatePref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_IGNORE_UPDATE);
         mOtherCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_OTHER);
     }
 
@@ -172,6 +175,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
                     ledSettings.getHeadsUpExpanded());
             mHeadsUpExpandedPref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
             mHeadsUpDndPref.setChecked(ledSettings.getHeadsUpDnd());
+            mHeadsUpIgnoreUpdatePref.setChecked(ledSettings.getHeadsUpIgnoreUpdate());
         }
     }
 
@@ -269,6 +273,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected boolean getHeadsUpDnd() {
         return mHeadsUpDndPref.isChecked();
+    }
+
+    protected boolean getHeadsUpIgnoreUpdate() {
+        return mHeadsUpIgnoreUpdatePref.isChecked();
     }
 
     @Override

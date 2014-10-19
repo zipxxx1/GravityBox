@@ -1788,4 +1788,8 @@
     <string name="pref_powermenu_expanded_desktop_title">Expanded desktop in power menu</string>
     <string name="pref_powermenu_expanded_desktop_summary">Make sure alternative method of turning expanded desktop off is available!!!</string>
 
+    <!-- UNC HeadsUp: ignore for updated notification -->
+    <string name="pref_lc_headsup_ignore_update_title">Ignore updates</string>
+    <string name="pref_lc_headsup_ignore_update_summary">Won\'t show heads up when existing notification gets updated</string>
+
 </resources>

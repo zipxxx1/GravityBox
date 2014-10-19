@@ -84,6 +84,7 @@ public class ModLedControl {
     private static final String NOTIF_EXTRA_HEADS_UP_GRAVITY = "gbHeadsUpGravity";
     private static final String NOTIF_EXTRA_HEADS_UP_TIMEOUT = "gbHeadsUpTimeout";
     private static final String NOTIF_EXTRA_HEADS_UP_ALPHA = "gbHeadsUpAlpha";
+    private static final String NOTIF_EXTRA_HEADS_UP_IGNORE_UPDATE = "gbHeadsUpIgnoreUpdate";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
     private static final int MSG_SHOW_HEADS_UP = 1026;
     private static final int MSG_HIDE_HEADS_UP = 1027;
@@ -374,6 +375,8 @@ public class ModLedControl {
                     if (ls.getHeadsUpMode() != HeadsUpMode.OFF) {
                         n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED,
                                 ls.getHeadsUpExpanded());
+                        n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_IGNORE_UPDATE,
+                                ls.getHeadsUpIgnoreUpdate());
                     }
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
@@ -678,6 +681,11 @@ public class ModLedControl {
                     IBinder.class, CLASS_STATUSBAR_NOTIFICATION, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    Notification n = (Notification ) XposedHelpers.getObjectField(param.args[1], "notification");
+                    if (n.extras.getBoolean(NOTIF_EXTRA_HEADS_UP_IGNORE_UPDATE, false)) {
+                        if (DEBUG) log("updateNotification: ignoring heads up for updated notification");
+                        return;
+                    }
                     if ((Boolean)XposedHelpers.callMethod(param.thisObject, "shouldInterrupt", param.args[1])) {
                         Constructor<?> c = XposedHelpers.findConstructorExact(CLASS_NOTIF_DATA_ENTRY,
                                 classLoader, IBinder.class, CLASS_STATUSBAR_NOTIFICATION,
