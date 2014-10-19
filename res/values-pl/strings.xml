@@ -1601,6 +1601,7 @@
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
     <string name="pref_lc_headsup_expanded_title">Pokaż rozszerzony</string>
+    <string name="pref_lc_headsup_expanded_summary">Należy pamiętać, że ta opcja może być nadpisana przez Nadrzędne Ustawienia Powiadomień</string>
     <string name="pref_lc_headsup_dnd_title">Nie przeszkadzać</string>
     <string name="pref_lc_headsup_dnd_summary">Nie pokaże żadnych powiadomień Heads up, podczas gdy ta aplikacja jest na pierwszym planie</string>
 
@@ -1738,9 +1739,24 @@
 
     <!-- Heads up: importance threshold -->
     <string name="pref_heads_up_importance_title">Próg ważności</string>
+    <string name="pref_heads_up_importance_summary">Pozwala pomijać powiadomienia Heads up 
+        których znaczenie jest niższe niż ustawiony próg (%s)</string>
     <string name="headsup_importance_disabled">Wyłączony</string>
     <string name="headsup_importance_low">Niski</string>
     <string name="headsup_importance_medium">Średni</string>
     <string name="headsup_importance_high">Wysoki</string>
+
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">Tryb 2G+3G</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA preferowane (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA automatycznie (2G/3G)</string>
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Rozszerzony pulpit w menu zasilania</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Upewnij się, że istnieje alternatywna metoda wyłączenia rozszerzonego pulpitu!!!</string>
+
+    <!-- UNC HeadsUp: ignore for updated notification -->
+    <string name="pref_lc_headsup_ignore_update_title">Ignoruj aktualizacje</string>
+    <string name="pref_lc_headsup_ignore_update_summary">Nie wyświetli Heads up, gdy istniejące powiadomienie zostanie zaktualizowane</string>
 
 </resources>
