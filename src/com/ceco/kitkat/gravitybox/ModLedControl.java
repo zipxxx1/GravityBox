@@ -16,6 +16,7 @@
 package com.ceco.kitkat.gravitybox;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -299,8 +300,26 @@ public class ModLedControl {
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
                 final boolean qhActiveIncludingActiveScreen = qhActive &&
                         !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
-                final boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) == 
-                        Notification.FLAG_ONGOING_EVENT);
+
+                boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
+                        (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);
+                // additional check if old notification had a foreground service flag set since it seems not to be propagated
+                // for updated notifications (until Notification gets processed by WorkerHandler which is too late for us)
+                if (!isOngoing) {
+                    ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(param.thisObject, "mNotificationList");
+                    synchronized (notifList) {
+                        int index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
+                                param.args[0], param.args[2], param.args[3], param.args[6]);
+                        if (index >= 0) {
+                            Object oldNotif = notifList.get(index);
+                            if (oldNotif != null) {
+                                Notification oldN = (Notification) XposedHelpers.callMethod(oldNotif, "getNotification");
+                                isOngoing = (oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0;
+                                if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
+                            }
+                        }
+                    }
+                }
 
                 if (isOngoing && !ls.getOngoing() && !qhActive) {
                     if (DEBUG) log("Ongoing led control disabled. Ignoring.");
