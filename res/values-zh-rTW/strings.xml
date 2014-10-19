@@ -1770,4 +1770,8 @@
     <string name="pref_powermenu_expanded_desktop_title">電源選單顯示 [全螢幕模式] 選項</string>
     <string name="pref_powermenu_expanded_desktop_summary">請先確認已設定其他可以關閉 [全螢幕模式] 的方法, 然後才停用本選項!</string>
 
+    <!-- UNC HeadsUp: ignore for updated notification -->
+    <string name="pref_lc_headsup_ignore_update_title">忽視通知更新</string>
+    <string name="pref_lc_headsup_ignore_update_summary">當現有的通知更新時, 不顯示成浮動通知</string>
+
 </resources>
