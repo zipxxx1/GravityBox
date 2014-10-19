@@ -66,7 +66,7 @@ public class ModLedControl {
         public void onSensorChanged(SensorEvent event) { 
             try {
                 final boolean screenCovered = 
-                        event.values[0] < (mProxSensor.getMaximumRange() * 0.1f); 
+                        event.values[0] != mProxSensor.getMaximumRange();
                 if (DEBUG) log("mProxSensorEventListener: " + event.values[0] +
                         "; screenCovered=" + screenCovered);
                 if (!screenCovered) {
