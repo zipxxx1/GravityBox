@@ -214,7 +214,7 @@ public class ModPower {
     private static SensorEventListener mProxSensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            mProxSensorCovered = event.values[0] < (mProxSensor.getMaximumRange() * 0.1f);
+            mProxSensorCovered = event.values[0] != mProxSensor.getMaximumRange();
             if (DEBUG) log("onSensorChanged:  mProxSensorCovered=" + mProxSensorCovered);
             if (!mHandler.hasMessages(MSG_UNREGISTER_PROX_SENSOR_LISTENER)) {
                 if (DEBUG) log("Proximity sensor listener was not alive; scheduling unreg");
