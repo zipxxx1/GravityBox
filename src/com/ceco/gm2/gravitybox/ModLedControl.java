@@ -15,6 +15,7 @@
 
 package com.ceco.gm2.gravitybox;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +37,6 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -144,16 +144,19 @@ public class ModLedControl {
 
             switch (Build.VERSION.SDK_INT) {
                 case 16:
+                    // pkg, tag, id, notification, idOut
                     XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, null,
                             "enqueueNotificationWithTag", String.class, String.class, int.class,
                             Notification.class, int[].class, notifyHook);
                     break;
                 case 17:
+                    // pkg, tag, id, notification, idOut, userId
                     XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, null,
                             "enqueueNotificationWithTag", String.class, String.class, int.class,
                             Notification.class, int[].class, int.class, notifyHook);
                     break;
                 case 18:
+                    // pkg, basePkg, tag, id, notification, idOut, userId
                     XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, null,
                             "enqueueNotificationWithTag", String.class, String.class, String.class, int.class,
                             Notification.class, int[].class, int.class, notifyHook);
@@ -203,8 +206,41 @@ public class ModLedControl {
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
-                final boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) == 
-                        Notification.FLAG_ONGOING_EVENT);
+
+                boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
+                        (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);
+                // additional check if old notification had a foreground service flag set since it seems not to be propagated
+                // for updated notifications (until Notification gets processed by WorkerHandler which is too late for us)
+                if (!isOngoing) {
+                    ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(param.thisObject, "mNotificationList");
+                    synchronized (notifList) {
+                        int index = -1;
+                        if (Build.VERSION.SDK_INT == 16) { // 4.1
+                            index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
+                                        param.args[0], param.args[1], param.args[2]);
+                        } else if (Build.VERSION.SDK_INT == 17) { // 4.2
+                            index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
+                                    param.args[0], param.args[1], param.args[2], param.args[5]);
+                        } else { // 4.3
+                            index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
+                                    param.args[0], param.args[2], param.args[3], param.args[6]);
+                        }
+                        if (index >= 0) {
+                            Object oldNotif = notifList.get(index);
+                            if (oldNotif != null) {
+                                Notification oldN = Build.VERSION.SDK_INT == 18 ?
+                                        (Notification) XposedHelpers.callMethod(oldNotif, "getNotification") :
+                                            (Notification) XposedHelpers.getObjectField(oldNotif, "notification");
+                                if ((oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0) {
+                                    n.flags |= Notification.FLAG_FOREGROUND_SERVICE | 
+                                            Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+                                    isOngoing = true;
+                                }
+                                if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
+                            }
+                        }
+                    }
+                }
 
                 if (isOngoing && !ls.getOngoing() && !qhActive) {
                     if (DEBUG) log("Ongoing led control disabled. Ignoring.");
