@@ -1634,6 +1634,7 @@
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Notifictions flottantes</string>
     <string name="pref_lc_headsup_expanded_title">Affichage étendu</string>
+    <string name="pref_lc_headsup_expanded_summary">Attention: cette option peut être redéfinie par le Contrôle Ultime de Notification (UNC)</string>
     <string name="pref_lc_headsup_dnd_title">Ne pas déranger</string>
     <string name="pref_lc_headsup_dnd_summary">Aucune notification flottante ne s\'affichera durant l\'utilisation de cette application en premier plan</string>
 
@@ -1786,5 +1787,9 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Bureau étendu dans le menu d\'extinction</string>
     <string name="pref_powermenu_expanded_desktop_summary">Vérifiez qu\'une méthode alternative soit accessible pour stopper le mode bureau étendu !!!</string>
+
+    <!-- UNC HeadsUp: ignore for updated notification -->
+    <string name="pref_lc_headsup_ignore_update_title">Ignorer les mises à jour</string>
+    <string name="pref_lc_headsup_ignore_update_summary">N\'affiche pas de notification flottante lorsque la notification en cours se met à jour</string>
 
 </resources>
