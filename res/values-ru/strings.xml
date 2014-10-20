@@ -1788,4 +1788,8 @@
     <string name="pref_powermenu_expanded_desktop_title">Расш.рабочий стол в меню выключения</string>
     <string name="pref_powermenu_expanded_desktop_summary">Убедитесь, что доступен альтернативный метод отключения расширенного рабочего стола!!!</string>
 
+    <!-- UNC HeadsUp: ignore for updated notification -->
+    <string name="pref_lc_headsup_ignore_update_title">Игнорировать обновления</string>
+    <string name="pref_lc_headsup_ignore_update_summary">Уведомления всплытия не будут появляться, если обновляется существующее уведомление</string>
+
 </resources>
