@@ -1759,5 +1759,8 @@
     <string name="pref_powermenu_expanded_desktop_title">Área de trabalho expandido no Menu Desligar</string>
     <string name="pref_powermenu_expanded_desktop_summary">Deverá ser grantido que existe um método alternativo para desativar à área de trabalho expandido!!!</string>
 
-    
+    <!-- UNC HeadsUp: ignore for updated notification -->
+    <string name="pref_lc_headsup_ignore_update_title">Ignorar atualizações</string>
+    <string name="pref_lc_headsup_ignore_update_summary">Não será exibido notificações flutuantes (heads-up) quando a notificação existente é atualizado</string>
+
 </resources>
