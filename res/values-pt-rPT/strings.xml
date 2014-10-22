@@ -1542,7 +1542,6 @@
     <string name="qs_tile_compass">Compasso</string>
     <string name="quick_settings_compass_off">Compasso desativado</string>
     <string name="quick_settings_compass_init">A inicializar&#8230;</string>
-    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
 
     <!-- Cardinal directions -->
     <string name="cd_north">N</string>
