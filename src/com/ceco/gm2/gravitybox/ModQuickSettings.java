@@ -670,6 +670,7 @@ public class ModQuickSettings {
             intentFilter.addAction(UsbTetherTile.ACTION_MEDIA_UNSHARED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_LOCK_POLICY_CHANGED);
+            intentFilter.addAction(RecordingService.ACTION_RECORDING_STATUS_CHANGED);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
         }
     };
