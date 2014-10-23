@@ -18,11 +18,12 @@ package com.ceco.gm2.gravitybox.quicksettings;
 import java.io.File;
 import java.io.IOException;
 
+import com.ceco.gm2.gravitybox.GravityBoxSettings;
 import com.ceco.gm2.gravitybox.R;
 import com.ceco.gm2.gravitybox.RecordingService;
 
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -47,6 +48,8 @@ public class QuickRecordTile extends BasicTile {
     private int mRecordingState = STATE_IDLE;
     private MediaPlayer mPlayer;
     private Handler mHandler;
+    private int mAudioQuality;
+    private long mAutoStopDelay;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -69,7 +72,7 @@ public class QuickRecordTile extends BasicTile {
                     case RecordingService.RECORDING_STATUS_STARTED:
                         mRecordingState = STATE_RECORDING;
                         mAudioFileName = intent.getStringExtra(RecordingService.EXTRA_AUDIO_FILENAME);
-                        mHandler.postDelayed(autoStopRecord, 3600000);
+                        mHandler.postDelayed(autoStopRecord, mAutoStopDelay);
                         if (DEBUG) log("Audio recording started");
                         break;
                     case RecordingService.RECORDING_STATUS_STOPPED:
@@ -142,6 +145,30 @@ public class QuickRecordTile extends BasicTile {
                 return true;
             }
         };
+    }
+
+    @Override
+    protected void onPreferenceInitialize(XSharedPreferences prefs) {
+        super.onPreferenceInitialize(prefs);
+
+        mAudioQuality = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_QUICKRECORD_QUALITY,
+                String.valueOf(RecordingService.DEFAULT_SAMPLING_RATE)));
+        mAutoStopDelay = prefs.getInt(GravityBoxSettings.PREF_KEY_QUICKRECORD_AUTOSTOP, 1) * 3600000;
+    }
+
+    @Override
+    public void onBroadcastReceived(Context context, Intent intent) {
+        super.onBroadcastReceived(context, intent);
+
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QR_QUALITY)) {
+                mAudioQuality = intent.getIntExtra(GravityBoxSettings.EXTRA_QR_QUALITY,
+                        RecordingService.DEFAULT_SAMPLING_RATE);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QR_AUTOSTOP)) {
+                mAutoStopDelay = intent.getIntExtra(GravityBoxSettings.EXTRA_QR_AUTOSTOP, 1) * 3600000;
+            }
+        }
     }
 
     @Override
@@ -237,6 +264,7 @@ public class QuickRecordTile extends BasicTile {
     private void startRecording() {
         Intent si = new Intent(mGbContext, RecordingService.class);
         si.setAction(RecordingService.ACTION_RECORDING_START);
+        si.putExtra(RecordingService.EXTRA_SAMPLING_RATE, mAudioQuality);
         mGbContext.startService(si);
     }
 

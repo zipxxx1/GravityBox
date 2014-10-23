@@ -797,6 +797,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED = "gravitybox.intent.action.STATUSBAR_TICKER_POLICY_CHANGED";
     public static final String EXTRA_STATUSBAR_TICKER_POLICY = "sbTickerPolicy";
 
+    public static final String PREF_KEY_QUICKRECORD_QUALITY = "pref_quickrecord_quality";
+    public static final String PREF_KEY_QUICKRECORD_AUTOSTOP = "pref_quickrecord_autostop";
+    public static final String EXTRA_QR_QUALITY = "quickRecordQuality";
+    public static final String EXTRA_QR_AUTOSTOP = "quickRecordAutostop";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -1253,6 +1258,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefChargingLed;
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
         private ListPreference mPrefSbTickerPolicy;
+        private ListPreference mPrefQrQuality;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1588,6 +1594,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefChargingLed = (ListPreference) findPreference(PREF_KEY_CHARGING_LED);
             mPrefProximityWakeIgnoreCall = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL);
             mPrefSbTickerPolicy = (ListPreference) findPreference(PREF_KEY_STATUSBAR_TICKER_POLICY); 
+
+            mPrefQrQuality = (ListPreference) findPreference(PREF_KEY_QUICKRECORD_QUALITY);
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
@@ -2364,6 +2372,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefSbTickerPolicy.setSummary(mPrefSbTickerPolicy.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_QUICKRECORD_QUALITY)) {
+                mPrefQrQuality.setSummary(mPrefQrQuality.getEntry());
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -3135,6 +3147,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_STATUSBAR_TICKER_POLICY, prefs.getString(key, "DEFAULT"));
             } else if (lockscreenKeys.contains(key)) {
                 intent.setAction(ACTION_LOCKSCREEN_SETTINGS_CHANGED);
+            } else if (key.equals(PREF_KEY_QUICKRECORD_QUALITY)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QR_QUALITY, Integer.valueOf(prefs.getString(key, "22050")));
+            } else if (key.equals(PREF_KEY_QUICKRECORD_AUTOSTOP)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QR_AUTOSTOP, prefs.getInt(key, 1));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

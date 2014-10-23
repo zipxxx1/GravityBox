@@ -1670,4 +1670,13 @@
     <string name="pref_powermenu_expanded_desktop_title">Expanded desktop in power menu</string>
     <string name="pref_powermenu_expanded_desktop_summary">Make sure alternative method of turning expanded desktop off is available!!!</string>
 
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">QuickRecord tile settings</string>
+    <string name="pref_quickrecord_quality_title">Audio quality</string>
+    <string name="qr_audio_quality_low">Low (16kHz)</string>
+    <string name="qr_audio_quality_medium">Medium (22kHz)</string>
+    <string name="qr_audio_quality_high">High (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Auto-stop recording</string>
+    <string name="pref_quickrecord_autostop_summary">Stops recording automatically after specified amount of time. Set to 0 to disable.</string>
+
 </resources>
