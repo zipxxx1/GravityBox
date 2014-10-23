@@ -1791,4 +1791,19 @@
     <string name="pref_lc_headsup_ignore_update_title">Игнорировать обновления</string>
     <string name="pref_lc_headsup_ignore_update_summary">Уведомления всплытия не будут появляться, если обновляется существующее уведомление</string>
 
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Настройки плитки быстрой записи</string>
+    <string name="pref_quickrecord_quality_title">Качество аудио</string>
+    <string name="qr_audio_quality_low">Низкое (16кГц)</string>
+    <string name="qr_audio_quality_medium">Среднее (22кГц)</string>
+    <string name="qr_audio_quality_high">Высокое (44кГц)</string>
+    <string name="pref_quickrecord_autostop_title">Автоостановка записи</string>
+    <string name="pref_quickrecord_autostop_summary">Автоматическая остановка записи через указанный промежуток времени. 0 - для отключения.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Очистка уведомлений</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Включение автояркости</string>
+
 </resources>
