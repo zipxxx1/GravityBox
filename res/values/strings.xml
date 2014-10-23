@@ -1801,4 +1801,7 @@
     <string name="pref_quickrecord_autostop_title">Auto-stop recording</string>
     <string name="pref_quickrecord_autostop_summary">Stops recording automatically after specified amount of time. Set to 0 to disable.</string>
 
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Clear notifications</string>
+
 </resources>

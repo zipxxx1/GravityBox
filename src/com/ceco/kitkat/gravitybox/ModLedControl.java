@@ -91,6 +91,8 @@ public class ModLedControl {
     private static final int MSG_HIDE_HEADS_UP = 1027;
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
 
+    public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
+
     private static XSharedPreferences mPrefs;
     private static XSharedPreferences mQhPrefs;
     private static Notification mNotifOnNextScreenOff;
@@ -103,6 +105,7 @@ public class ModLedControl {
     private static QuietHours mQuietHours;
     private static Map<String, Long> mNotifTimestamps = new HashMap<String, Long>();
     private static boolean mUserPresent;
+    private static Object mNotifManagerService;
 
     private static BroadcastReceiver mScreenOffReceiver = new BroadcastReceiver() {
         @Override
@@ -165,6 +168,8 @@ public class ModLedControl {
                 mOnPanelRevealedBlocked = false;
             } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 mUserPresent = false;
+            } else if (action.equals(ACTION_CLEAR_NOTIFICATIONS)) {
+                clearNotifications();
             }
         }
     };
@@ -219,7 +224,8 @@ public class ModLedControl {
             XposedBridge.hookAllConstructors(nmsClass, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mContext == null) {
+                    if (mNotifManagerService == null) {
+                        mNotifManagerService = param.thisObject;
                         mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
 
                         IntentFilter intentFilter = new IntentFilter();
@@ -227,6 +233,7 @@ public class ModLedControl {
                         intentFilter.addAction(Intent.ACTION_USER_PRESENT);
                         intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+                        intentFilter.addAction(ACTION_CLEAR_NOTIFICATIONS);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                         toggleActiveScreenFeature(!mPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
@@ -489,6 +496,17 @@ public class ModLedControl {
             mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS));
         }
         mPm.wakeUp(SystemClock.uptimeMillis());
+    }
+
+    private static void clearNotifications() {
+        try {
+            if (mNotifManagerService != null) {
+                XposedHelpers.callMethod(mNotifManagerService, "cancelAll",
+                        XposedHelpers.callStaticMethod(ActivityManager.class, "getCurrentUser"));
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 
     // SystemUI package
