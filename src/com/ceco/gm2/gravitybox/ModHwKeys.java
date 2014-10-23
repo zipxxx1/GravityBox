@@ -98,6 +98,7 @@ public class ModHwKeys {
     public static final String ACTION_LAUNCH_APP = "gravitybox.intent.action.LAUNCH_APP";
     public static final String ACTION_SHOW_VOLUME_PANEL = "gravitybox.intent.action.SHOW_VOLUME_PANEL";
     public static final String ACTION_SHOW_BRIGHTNESS_DIALOG = "gravitybox.intent.action.SHOW_BRIGHTNESS_DIALOG";
+    public static final String ACTION_TOGGLE_AUTO_BRIGHTNESS = "gravitybox.intent.action.TOGGLE_AUTO_BRIGHTNESS";
     public static final String ACTION_RECENTS_CLEAR_ALL_SINGLETAP = "gravitybox.intent.action.ACTION_RECENTS_CLEARALL";
     public static final String ACTION_RECENTS_CLEAR_ALL_LONGPRESS = "gravitybox.intent.action.ACTION_RECENTS_CLEARALL_LONGPRESS";
     public static final String ACTION_TOGGLE_QUIET_HOURS = "gravitybox.intent.action.ACTION_TOGGLE_QUIET_HOURS";
@@ -367,6 +368,8 @@ public class ModHwKeys {
                 if ((state == 0 || state == 1) && mHeadsetUri[state] != null) {
                     launchCustomApp(mHeadsetUri[state]);
                 }
+            } else if (action.equals(ACTION_TOGGLE_AUTO_BRIGHTNESS)) {
+                toggleAutoBrightness();
             }
         }
     };
@@ -921,6 +924,7 @@ public class ModHwKeys {
             intentFilter.addAction(GravityBoxService.ACTION_TOGGLE_SYNC);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED);
             intentFilter.addAction(Intent.ACTION_HEADSET_PLUG);
+            intentFilter.addAction(ACTION_TOGGLE_AUTO_BRIGHTNESS);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -1713,6 +1717,20 @@ public class ModHwKeys {
             si.setAction(GravityBoxService.ACTION_TOGGLE_SYNC);
             si.putExtra(GravityBoxService.EXTRA_SYNC_SHOW_TOAST, true);
             mGbContext.startService(si);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void toggleAutoBrightness() {
+        try {
+            int brightnessMode = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS_MODE, 0);
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS_MODE,
+                    brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL ?
+                            Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC :
+                                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
