@@ -161,6 +161,8 @@ public class ShortcutActivity extends ListActivity {
             RingerModeShortcut.launchAction(mContext, intent);
         } else if (action.equals(SyncShortcut.ACTION)) {
             SyncShortcut.launchAction(mContext, intent);
+        } else if (action.equals(ClearNotificationsShortcut.ACTION)) {
+            ClearNotificationsShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -179,6 +181,7 @@ public class ShortcutActivity extends ListActivity {
         ArrayList<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShowPowerMenuShortcut(mContext));
         list.add(new ExpandNotificationsShortcut(mContext));
+        list.add(new ClearNotificationsShortcut(mContext));
         if (Build.VERSION.SDK_INT > 16)
             list.add(new ExpandQuicksettingsShortcut(mContext));
         list.add(new ExpandedDesktopShortcut(mContext));
