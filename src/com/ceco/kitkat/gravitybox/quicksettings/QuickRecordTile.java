@@ -24,10 +24,8 @@ import com.ceco.kitkat.gravitybox.RecordingService;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -54,45 +52,6 @@ public class QuickRecordTile extends BasicTile {
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
-
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(RecordingService.ACTION_RECORDING_STATUS_CHANGED) &&
-                    intent.hasExtra(RecordingService.EXTRA_RECORDING_STATUS)) {
-                int recordingStatus = intent.getIntExtra(
-                        RecordingService.EXTRA_RECORDING_STATUS, RecordingService.RECORDING_STATUS_IDLE);
-                if (DEBUG) log("Broadcast received: recordingStatus = " + recordingStatus);
-                switch (recordingStatus) {
-                    case RecordingService.RECORDING_STATUS_IDLE:
-                        mRecordingState = STATE_IDLE;
-                        mHandler.removeCallbacks(autoStopRecord);
-                        break;
-                    case RecordingService.RECORDING_STATUS_STARTED:
-                        mRecordingState = STATE_RECORDING;
-                        mAudioFileName = intent.getStringExtra(RecordingService.EXTRA_AUDIO_FILENAME);
-                        mHandler.postDelayed(autoStopRecord, mAutoStopDelay);
-                        if (DEBUG) log("Audio recording started");
-                        break;
-                    case RecordingService.RECORDING_STATUS_STOPPED:
-                        mRecordingState = STATE_JUST_RECORDED;
-                        mHandler.removeCallbacks(autoStopRecord);
-                        if (DEBUG) log("Audio recording stopped");
-                        break;
-                    case RecordingService.RECORDING_STATUS_ERROR:
-                    default:
-                        mRecordingState = STATE_NO_RECORDING;
-                        mHandler.removeCallbacks(autoStopRecord);
-                        String statusMessage = intent.getStringExtra(RecordingService.EXTRA_STATUS_MESSAGE);
-                        log("Audio recording error: " + statusMessage);
-                        break;
-                }
-                updateResources();
-            }
-        }
-        
-    };
 
     public QuickRecordTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
@@ -168,20 +127,42 @@ public class QuickRecordTile extends BasicTile {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QR_AUTOSTOP)) {
                 mAutoStopDelay = intent.getIntExtra(GravityBoxSettings.EXTRA_QR_AUTOSTOP, 1) * 3600000;
             }
+        } else if (intent.getAction().equals(RecordingService.ACTION_RECORDING_STATUS_CHANGED) &&
+                intent.hasExtra(RecordingService.EXTRA_RECORDING_STATUS)) {
+            int recordingStatus = intent.getIntExtra(
+                    RecordingService.EXTRA_RECORDING_STATUS, RecordingService.RECORDING_STATUS_IDLE);
+            if (DEBUG) log("Broadcast received: recordingStatus = " + recordingStatus);
+            switch (recordingStatus) {
+                case RecordingService.RECORDING_STATUS_IDLE:
+                    mRecordingState = STATE_IDLE;
+                    mHandler.removeCallbacks(autoStopRecord);
+                    break;
+                case RecordingService.RECORDING_STATUS_STARTED:
+                    mRecordingState = STATE_RECORDING;
+                    mAudioFileName = intent.getStringExtra(RecordingService.EXTRA_AUDIO_FILENAME);
+                    mHandler.postDelayed(autoStopRecord, mAutoStopDelay);
+                    if (DEBUG) log("Audio recording started");
+                    break;
+                case RecordingService.RECORDING_STATUS_STOPPED:
+                    mRecordingState = STATE_JUST_RECORDED;
+                    mHandler.removeCallbacks(autoStopRecord);
+                    if (DEBUG) log("Audio recording stopped");
+                    break;
+                case RecordingService.RECORDING_STATUS_ERROR:
+                default:
+                    mRecordingState = STATE_NO_RECORDING;
+                    mHandler.removeCallbacks(autoStopRecord);
+                    String statusMessage = intent.getStringExtra(RecordingService.EXTRA_STATUS_MESSAGE);
+                    log("Audio recording error: " + statusMessage);
+                    break;
+            }
+            updateResources();
         }
     }
 
     @Override
     protected int onGetLayoutId() {
         return R.layout.quick_settings_tile_quickrecord;
-    }
-
-    @Override
-    protected void onTilePostCreate() {
-        IntentFilter intentFilter = new IntentFilter(RecordingService.ACTION_RECORDING_STATUS_CHANGED);
-        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
-
-        super.onTilePostCreate();
     }
 
     @Override
