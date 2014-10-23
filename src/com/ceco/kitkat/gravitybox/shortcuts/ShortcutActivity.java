@@ -163,6 +163,8 @@ public class ShortcutActivity extends ListActivity {
             SyncShortcut.launchAction(mContext, intent);
         } else if (action.equals(ClearNotificationsShortcut.ACTION)) {
             ClearNotificationsShortcut.launchAction(mContext, intent);
+        } else if (action.equals(AutoBrightnessShortcut.ACTION)) {
+            AutoBrightnessShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -210,6 +212,7 @@ public class ShortcutActivity extends ListActivity {
         list.add(new VolumePanelShortcut(mContext));
         list.add(new RingerModeShortcut(mContext));
         list.add(new BrightnessDialogShortcut(mContext));
+        list.add(new AutoBrightnessShortcut(mContext));
         list.add(new RecentAppsShortcut(mContext));
         if (mInvokedFromGb) {
             list.add(new KillAppShortcut(mContext));

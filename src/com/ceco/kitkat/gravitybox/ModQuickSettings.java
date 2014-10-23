@@ -1417,13 +1417,7 @@ public class ModQuickSettings {
                         tile.setOnLongClickListener(new View.OnLongClickListener() {
                             @Override
                             public boolean onLongClick(View v) {
-                                int brightnessMode = Settings.System.getInt(mContext.getContentResolver(),
-                                        Settings.System.SCREEN_BRIGHTNESS_MODE, 0);
-                                Settings.System.putInt(mContext.getContentResolver(),
-                                        Settings.System.SCREEN_BRIGHTNESS_MODE,
-                                        brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL ?
-                                                Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC :
-                                                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                                mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_TOGGLE_AUTO_BRIGHTNESS));
                                 tile.setPressed(false);
                                 return true;
                             }

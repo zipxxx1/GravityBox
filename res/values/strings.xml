@@ -1804,4 +1804,7 @@
     <!-- Clear notifications shortcut -->
     <string name="shortcut_clear_notifications">Clear notifications</string>
 
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Toggle auto brightness</string>
+
 </resources>
