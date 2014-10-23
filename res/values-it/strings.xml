@@ -1632,7 +1632,7 @@
 
     <!-- Vulnerability patches -->
     <string name="pref_patch_master_key_title">Patch vulnerabilità Master Key</string>
-    <string name="pref_patch_fake_id_title">Patch vulnerabilità Fake ID/string>
+    <string name="pref_patch_fake_id_title">Patch vulnerabilità Fake ID</string>
     <string name="pref_patch_common_summary">Richiede riavvio</string>
 
     <!-- Status bar: disable notification ticker -->
