@@ -42,16 +42,20 @@ public class RecordingService extends Service {
     public static final String EXTRA_RECORDING_STATUS = "recordingStatus";
     public static final String EXTRA_STATUS_MESSAGE = "statusMessage";
     public static final String EXTRA_AUDIO_FILENAME = "audioFileName";
+    public static final String EXTRA_SAMPLING_RATE = "samplingRate";
 
     public static final int RECORDING_STATUS_IDLE = 0;
     public static final int RECORDING_STATUS_STARTED = 1;
     public static final int RECORDING_STATUS_STOPPED = 2;
     public static final int RECORDING_STATUS_ERROR = -1;
 
+    public static final int DEFAULT_SAMPLING_RATE = 22050;
+
     private MediaRecorder mRecorder;
     private int mRecordingStatus = RECORDING_STATUS_IDLE;
     private Notification mRecordingNotif;
     private PendingIntent mPendingIntent;
+    private int mSamplingRate = DEFAULT_SAMPLING_RATE;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -80,6 +84,9 @@ public class RecordingService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && intent.getAction() != null) {
             if (intent.getAction().equals(ACTION_RECORDING_START)) {
+                if (intent.hasExtra(EXTRA_SAMPLING_RATE)) {
+                    mSamplingRate = intent.getIntExtra(EXTRA_SAMPLING_RATE, DEFAULT_SAMPLING_RATE);
+                }
                 startRecording();
                 return START_STICKY;
             } else if (intent.getAction().equals(ACTION_RECORDING_STOP)) {
@@ -128,7 +135,9 @@ public class RecordingService extends Service {
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             mRecorder.setOutputFile(audioFileName);
-            mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+            mRecorder.setAudioEncodingBitRate(16);
+            mRecorder.setAudioSamplingRate(mSamplingRate);
             mRecorder.setOnErrorListener(mOnErrorListener);
             mRecorder.prepare();
             mRecorder.start();

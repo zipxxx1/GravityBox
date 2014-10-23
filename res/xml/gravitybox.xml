@@ -397,6 +397,30 @@
 
                 </PreferenceScreen>
 
+                <PreferenceScreen
+                    android:key="pref_cat_quickrecord_tile"
+                    android:title="@string/pref_cat_quickrecord_tile_title" >
+
+                    <ListPreference
+                        android:key="pref_quickrecord_quality" 
+                        android:title="@string/pref_quickrecord_quality_title"
+                        android:entries="@array/qr_audio_quality_entries"
+                        android:entryValues="@array/qr_audio_quality_values"
+                        android:defaultValue="22050" />
+
+                    <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+                        android:key="pref_quickrecord_autostop"
+                        android:title="@string/pref_quickrecord_autostop_title"
+                        android:summary="@string/pref_quickrecord_autostop_summary"
+                        minimum="0"
+                        maximum="10"
+                        interval="1"
+                        monitorBoxEnabled="true"
+                        monitorBoxUnit="h" 
+                        android:defaultValue="1" />
+
+                </PreferenceScreen>
+
                 <PreferenceScreen 
                     android:key="pref_cat_qs_nm_tile_settings"
                     android:title="@string/pref_cat_qs_nm_tile_settings_title">
