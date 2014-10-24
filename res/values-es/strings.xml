@@ -529,6 +529,13 @@
     <string name="pref_cat_phone_telephony_title">Telefonía</string>
     <string name="pref_cat_phone_mobile_data_title">Datos móviles</string>
 
+    <!-- Messaging: Strip unicode -->
+    <string name="pref_mms_unicode_stripping_title">Quitar unicode</string>
+    <string name="pref_mms_unicode_stripping_summary">Convierte caracteres unicode a caracteres normales. Disminuye el tamaño del mensaje.</string>
+    <string name="unicode_stripping_leave_intact">Dejar caracteres intactos</string>
+    <string name="unicode_stripping_non_encodable">Quitar caracteres no codificables</string>
+    <string name="unicode_stripping_all">Quita todos los caracteres unicode</string>
+
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Alternación de modos de red</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>

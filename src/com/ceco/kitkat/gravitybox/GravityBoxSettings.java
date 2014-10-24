@@ -813,6 +813,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_QR_QUALITY = "quickRecordQuality";
     public static final String EXTRA_QR_AUTOSTOP = "quickRecordAutostop";
 
+    public static final String PREF_KEY_MMS_UNICODE_STRIPPING = "pref_mms_unicode_stripping";
+    public static final String UNISTR_LEAVE_INTACT = "leave_intact";
+    public static final String UNISTR_NON_ENCODABLE = "non_encodable";
+    public static final String UNISTR_ALL = "all";
+
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
     public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";

@@ -1802,13 +1802,19 @@
 
         </PreferenceCategory>
 
-        <!--
         <PreferenceCategory
             android:key="pref_cat_phone_messaging"
             android:title="@string/pref_cat_phone_messaging_title">
 
+            <ListPreference
+                android:key="pref_mms_unicode_stripping"
+                android:title="@string/pref_mms_unicode_stripping_title"
+                android:summary="@string/pref_mms_unicode_stripping_summary"
+                android:entries="@array/unicode_stripping_entries"
+                android:entryValues="@array/unicode_stripping_values"
+                android:defaultValue="leave_intact" />
+
         </PreferenceCategory>
-        -->
 
         <PreferenceCategory 
             android:key="pref_cat_phone_mobile_data"

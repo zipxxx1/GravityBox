@@ -520,6 +520,12 @@
     <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
     <string name="nm_tile_mode3">2G/3G/(LTE)</string>
 
+    <string name="pref_mms_unicode_stripping_title">Konwersja znaków Unicode</string>
+    <string name="pref_mms_unicode_stripping_summary">Zamienia znaki Unicode na zwykłe. Zmniejsza ogólny rozmiar wiadomości.</string>
+    <string name="unicode_stripping_leave_intact">Nie zmieniaj kodowania</string>
+    <string name="unicode_stripping_non_encodable">Konwertuj nie kodowalne znaki</string>
+    <string name="unicode_stripping_all">Konwertuj wszystkie znaki Unicode</string>
+
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Zezwalaj na pełen obrót</string>
 
