@@ -1814,4 +1814,8 @@
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Interrupteur luminosité auto</string>
 
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Utiliser les icônes Lollipop</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Nécessite de redémarrer</string>
+
 </resources>
