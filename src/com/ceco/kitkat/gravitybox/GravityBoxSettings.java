@@ -706,6 +706,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_CLUSTER_HPLUS = "pref_signal_cluster_hplus";
     public static final String PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE = "pref_signal_cluster_lte_style";
     public static final String PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS = "pref_signal_cluster_hide_sim_labels";
+    public static final String PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS = "pref_signal_cluster_lollipop_icons";
 
     public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
     public static final String PREF_KEY_NAVBAR_RING_TARGETS_ENABLE = "pref_navbar_ring_targets_enable";
@@ -858,7 +859,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_PATCH_FAKE_ID,
             PREF_KEY_MTK_FIX_DEV_OPTS,
             PREF_KEY_MTK_FIX_TTS_SETTINGS,
-            PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS
+            PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
+            PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -1719,7 +1721,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text);
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
             } else {
-                mPrefCatStatusbar.removePreference(mPrefCatSignalCluster);
+                int prefCount = mPrefCatSignalCluster.getPreferenceCount();
+                for (int i = prefCount-1; i >= 0 ; i--) {
+                    Preference p = mPrefCatSignalCluster.getPreference(i);
+                    if (!PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS.equals(p.getKey())) {
+                        mPrefCatSignalCluster.removePreference(p);
+                    }
+                }
                 mPrefCatPhoneTelephony.removePreference(mPrefNonIntrusiveCall);
                 mPrefCatLsOther.removePreference(mPrefLsRotation);
                 // Remove Gemini specific preferences for non-Gemini MTK devices
