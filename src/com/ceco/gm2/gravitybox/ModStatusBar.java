@@ -401,6 +401,8 @@ public class ModStatusBar {
                 }
             });
 
+            StatusbarSignalCluster.initResources(prefs, resparam);
+
             XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
             mDeleteIconId = XResources.getFakeResId(modRes, R.drawable.ic_menu_delete);
             resparam.res.setReplacement(mDeleteIconId, modRes.fwd(R.drawable.ic_menu_delete));

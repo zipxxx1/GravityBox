@@ -16,7 +16,9 @@
 package com.ceco.gm2.gravitybox;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
@@ -25,15 +27,18 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.res.XModuleResources;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManagerListener {
     public static final String TAG = "GB:StatusbarSignalCluster";
+    protected static final boolean DEBUG = false;
 
     protected LinearLayout mView;
     protected StatusBarIconManager mIconManager;
@@ -48,6 +53,67 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         if (!mErrorsLogged.contains(key)) {
             XposedBridge.log(t);
             mErrorsLogged.add(key);
+        }
+    }
+
+    public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
+        XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
+
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS, false)) {
+            Map<String, Integer> ic_map = new HashMap<String, Integer>();
+            ic_map.put("stat_sys_wifi_signal_0", R.drawable.stat_sys_wifi_signal_0_lollipop);
+            ic_map.put("stat_sys_wifi_signal_1", R.drawable.stat_sys_wifi_signal_1_lollipop);
+            ic_map.put("stat_sys_wifi_signal_1_fully", R.drawable.stat_sys_wifi_signal_1_fully_lollipop);
+            ic_map.put("stat_sys_wifi_signal_2", R.drawable.stat_sys_wifi_signal_2_lollipop);
+            ic_map.put("stat_sys_wifi_signal_2_fully", R.drawable.stat_sys_wifi_signal_2_fully_lollipop);
+            ic_map.put("stat_sys_wifi_signal_3", R.drawable.stat_sys_wifi_signal_3_lollipop);
+            ic_map.put("stat_sys_wifi_signal_3_fully", R.drawable.stat_sys_wifi_signal_3_fully_lollipop);
+            ic_map.put("stat_sys_wifi_signal_4", R.drawable.stat_sys_wifi_signal_4_lollipop);
+            ic_map.put("stat_sys_wifi_signal_4_fully", R.drawable.stat_sys_wifi_signal_4_fully_lollipop);
+            ic_map.put("stat_sys_wifi_signal_null", R.drawable.stat_sys_wifi_signal_null_lollipop);
+            ic_map.put("stat_sys_signal_0", R.drawable.stat_sys_signal_0_lollipop);
+            ic_map.put("stat_sys_signal_0_fully", R.drawable.stat_sys_signal_0_lollipop);
+            ic_map.put("stat_sys_signal_1", R.drawable.stat_sys_signal_1_lollipop);
+            ic_map.put("stat_sys_signal_1_fully", R.drawable.stat_sys_signal_1_fully_lollipop);
+            ic_map.put("stat_sys_signal_2", R.drawable.stat_sys_signal_2_lollipop);
+            ic_map.put("stat_sys_signal_2_fully", R.drawable.stat_sys_signal_2_fully_lollipop);
+            ic_map.put("stat_sys_signal_3", R.drawable.stat_sys_signal_3_lollipop);
+            ic_map.put("stat_sys_signal_3_fully", R.drawable.stat_sys_signal_3_fully_lollipop);
+            ic_map.put("stat_sys_signal_4", R.drawable.stat_sys_signal_4_lollipop);
+            ic_map.put("stat_sys_signal_4_fully", R.drawable.stat_sys_signal_4_fully_lollipop);
+            ic_map.put("stat_sys_signal_null", R.drawable.stat_sys_signal_null_lollipop);
+            ic_map.put("stat_sys_gemini_radio_off", R.drawable.stat_sys_signal_off_lollipop);
+            ic_map.put("stat_sys_gemini_signal_0", R.drawable.stat_sys_signal_0_lollipop);
+            ic_map.put("stat_sys_gemini_signal_1_blue", R.drawable.stat_sys_signal_1_fully_blue_lollipop);
+            ic_map.put("stat_sys_gemini_signal_1_purple", R.drawable.stat_sys_signal_1_fully_purple_lollipop);
+            ic_map.put("stat_sys_gemini_signal_1_orange", R.drawable.stat_sys_signal_1_fully_orange_lollipop);
+            ic_map.put("stat_sys_gemini_signal_1_green", R.drawable.stat_sys_signal_1_fully_green_lollipop);
+            ic_map.put("stat_sys_gemini_signal_1_white", R.drawable.stat_sys_signal_1_fully_lollipop);
+            ic_map.put("stat_sys_gemini_signal_2_blue", R.drawable.stat_sys_signal_2_fully_blue_lollipop);
+            ic_map.put("stat_sys_gemini_signal_2_purple", R.drawable.stat_sys_signal_2_fully_purple_lollipop);
+            ic_map.put("stat_sys_gemini_signal_2_orange", R.drawable.stat_sys_signal_2_fully_orange_lollipop);
+            ic_map.put("stat_sys_gemini_signal_2_green", R.drawable.stat_sys_signal_2_fully_green_lollipop);
+            ic_map.put("stat_sys_gemini_signal_2_white", R.drawable.stat_sys_signal_2_fully_lollipop);
+            ic_map.put("stat_sys_gemini_signal_3_blue", R.drawable.stat_sys_signal_3_fully_blue_lollipop);
+            ic_map.put("stat_sys_gemini_signal_3_purple", R.drawable.stat_sys_signal_3_fully_purple_lollipop);
+            ic_map.put("stat_sys_gemini_signal_3_orange", R.drawable.stat_sys_signal_3_fully_orange_lollipop);
+            ic_map.put("stat_sys_gemini_signal_3_green", R.drawable.stat_sys_signal_3_fully_green_lollipop);
+            ic_map.put("stat_sys_gemini_signal_3_white", R.drawable.stat_sys_signal_3_fully_lollipop);
+            ic_map.put("stat_sys_gemini_signal_4_blue", R.drawable.stat_sys_signal_4_fully_blue_lollipop);
+            ic_map.put("stat_sys_gemini_signal_4_purple", R.drawable.stat_sys_signal_4_fully_purple_lollipop);
+            ic_map.put("stat_sys_gemini_signal_4_orange", R.drawable.stat_sys_signal_4_fully_orange_lollipop);
+            ic_map.put("stat_sys_gemini_signal_4_green", R.drawable.stat_sys_signal_4_fully_green_lollipop);
+            ic_map.put("stat_sys_gemini_signal_4_white", R.drawable.stat_sys_signal_4_fully_lollipop);
+            ic_map.put("stat_sys_gemini_signal_null", R.drawable.stat_sys_signal_null_lollipop);
+            ic_map.put("stat_sys_gemini_signal_searching", R.drawable.stat_sys_signal_searching_lollipop);
+            for (String key : ic_map.keySet()) {
+                try {
+                    resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "drawable", key,
+                            modRes.fwd(ic_map.get(key)));
+                } catch (Throwable t) {
+                    if (DEBUG) log("Drawable not found: " + key);
+                }
+            }
         }
     }
 

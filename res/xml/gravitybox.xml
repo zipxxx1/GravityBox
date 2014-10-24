@@ -977,6 +977,12 @@
             android:summary="@string/pref_disable_roaming_indicators_summary"
             android:defaultValue="false" />
 
+        <CheckBoxPreference 
+            android:key="pref_signal_cluster_lollipop_icons"
+            android:title="@string/pref_signal_cluster_lollipop_icons_title"
+            android:summary="@string/pref_signal_cluster_lollipop_icons_summary"
+            android:defaultValue="false" />
+
     </PreferenceScreen>
 
     <PreferenceScreen

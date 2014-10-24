@@ -714,6 +714,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS = "pref_launcher_desktop_grid_cols";
     public static final String PREF_KEY_LAUNCHER_RESIZE_WIDGET = "pref_launcher_resize_widget";
 
+    public static final String PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS = "pref_signal_cluster_lollipop_icons";
+
     public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
     public static final String PREF_KEY_NAVBAR_RING_TARGETS_ENABLE = "pref_navbar_ring_targets_enable";
     public static final List<String> PREF_KEY_NAVBAR_RING_TARGET = new ArrayList<String>(Arrays.asList(
@@ -843,7 +845,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE,
             PREF_KEY_STATUSBAR_BGCOLOR_SWITCH,
             PREF_KEY_PATCH_MASTER_KEY,
-            PREF_KEY_PATCH_FAKE_ID
+            PREF_KEY_PATCH_FAKE_ID,
+            PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS
     ));
 
     private static List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
