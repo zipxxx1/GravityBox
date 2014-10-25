@@ -1764,4 +1764,26 @@
     <string name="pref_lc_headsup_ignore_update_title">Ignoruj aktualizacje</string>
     <string name="pref_lc_headsup_ignore_update_summary">Nie wyświetli Heads up, gdy istniejące powiadomienie zostanie zaktualizowane</string>
 
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Ustawienia kafelka Dyktafonu</string>
+    <string name="pref_quickrecord_quality_title">Jakość dźwięku</string>
+    <string name="qr_audio_quality_low">Niska (16kHz)</string>
+    <string name="qr_audio_quality_medium">Średnia (22kHz)</string>
+    <string name="qr_audio_quality_high">Wysoka (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Auto-stop nagrywania</string>
+    <string name="pref_quickrecord_autostop_summary">Automatycznie zatrzymuje nagrywanie po określonym czasie. Ustaw 0, aby wyłączyć.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Wyczyść powiadomienia</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Przełącz automatyczną jasność</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Użyj ikon Lollipop</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Wymagany restart</string>
+
+    <!-- Messaging -->
+    <string name="pref_cat_phone_messaging_title">Wiadomości</string>
+
 </resources>
