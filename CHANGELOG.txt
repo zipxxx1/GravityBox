@@ -1,3 +1,28 @@
+Changelog 3.4.7 - 25/10/2014
+--------------------------------------
+- Ultimate notification control:
+--- Heads up: added option for ingoring notification updates (won't show heads up when existing notification gets updated)
+--- improved detection of ongoing notifications belonging to foreground services
+--- active screen: don't apply to ongoing foreground service notifications
+--- active screen: use direct wake up call instead of full wake lock (should improve compatibility on some devices)
+--- active screen: improved check for proximity sensor state
+- Statusbar signal cluster: added option for using Lollipop signal icons (with full support for MediaTek Gemini)
+- Quick settings QuickRecord tile:
+--- added option for choosing audio quality
+--- added option for choosing auto-stop recording delay
+- GravityBox Actions:
+--- added action for clearing all notifications
+--- added action for toggling auto brightness
+- Phone tweaks: added option for SMS/MMS unicode filtering (for standard Messaging app only)
+- Launcher tweaks: adjusted for compatibility with Google Search 4.0.26 (thanks to theknut)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Updated Polish translations (thanks to xtrem007)
+- Updated French translations (thanks to ch-vox)
+- Updated Russian translations (thanks to gaich)
+- Updated Slovak and Czech translations
+
 Changelog 3.4.6 - 14/10/2014
 --------------------------------------
 - Heads up: 
