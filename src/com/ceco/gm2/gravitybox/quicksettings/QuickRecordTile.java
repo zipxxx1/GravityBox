@@ -140,7 +140,9 @@ public class QuickRecordTile extends BasicTile {
                 case RecordingService.RECORDING_STATUS_STARTED:
                     mRecordingState = STATE_RECORDING;
                     mAudioFileName = intent.getStringExtra(RecordingService.EXTRA_AUDIO_FILENAME);
-                    mHandler.postDelayed(autoStopRecord, mAutoStopDelay);
+                    if (mAutoStopDelay > 0) {
+                        mHandler.postDelayed(autoStopRecord, mAutoStopDelay);
+                    }
                     if (DEBUG) log("Audio recording started");
                     break;
                 case RecordingService.RECORDING_STATUS_STOPPED:
