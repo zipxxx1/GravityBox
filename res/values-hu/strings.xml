@@ -1773,4 +1773,30 @@
     <string name="pref_powermenu_expanded_desktop_title">Kiterjesztett asztal a kikapcsoló menüben</string>
     <string name="pref_powermenu_expanded_desktop_summary">Ellenőrizd a kiterjesztett asztal kikapcsolás alternatív módszerét!!!</string>
 
+	<!-- UNC HeadsUp: ignore for updated notification -->
+    <string name="pref_lc_headsup_ignore_update_title">Frissítés mellőzése</string>
+    <string name="pref_lc_headsup_ignore_update_summary">Nem jelenik meg felugró ablak, ha frissül egy meglévő értesítés</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Gyors Felvétel csempe beállítások</string>
+    <string name="pref_quickrecord_quality_title">Audió minőség</string>
+    <string name="qr_audio_quality_low">Alacsony (16kHz)</string>
+    <string name="qr_audio_quality_medium">Közepes (22kHz)</string>
+    <string name="qr_audio_quality_high">Magas (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Felvétel auto-stop</string>
+    <string name="pref_quickrecord_autostop_summary">A felvétel automatikusan leállításra kerül meghatározott idő eltelte után. Letiltáshoz állíts be 0-t.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Értesítések törlése</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Automatikus fényerő ki-bekapcsolása</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Lollipop ikonok használata</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Újraindítás szükséges</string>
+
+    <!-- Messaging -->
+    <string name="pref_cat_phone_messaging_title">Üzenetkezelés</string>
+
 </resources>
