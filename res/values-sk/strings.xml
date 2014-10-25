@@ -1760,4 +1760,30 @@
     <string name="pref_powermenu_expanded_desktop_title">Rozšírená plocha v menu napájania</string>
     <string name="pref_powermenu_expanded_desktop_summary">Uistite sa, že existuje alternatívna metóda vypnutia rozšírenej plochy!!!</string>
 
+    <!-- UNC HeadsUp: ignore for updated notification -->
+    <string name="pref_lc_headsup_ignore_update_title">Ignorovať aktualizácie</string>
+    <string name="pref_lc_headsup_ignore_update_summary">Nezobrazí Heads up v prípade aktualizácie obsahu existujúceho oznámenia</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Nastavenia dlaždice záznamu zvuku</string>
+    <string name="pref_quickrecord_quality_title">Kvalita zvuku</string>
+    <string name="qr_audio_quality_low">Nízka (16kHz)</string>
+    <string name="qr_audio_quality_medium">Stredná (22kHz)</string>
+    <string name="qr_audio_quality_high">Vysoká (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Automatické zastavenie nahrávania</string>
+    <string name="pref_quickrecord_autostop_summary">Zastaví nahrávanie po vypršaní definovanej doby. Nastavenie na 0 vypne túto funkciu.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Vymazať oznámenia</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Prepnúť automatický jas</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Použiť Lollipop ikony</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Vyžaduje reštart</string>
+
+    <!-- Messaging -->
+    <string name="pref_cat_phone_messaging_title">Správy</string>
+
 </resources>
