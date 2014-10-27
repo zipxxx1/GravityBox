@@ -278,11 +278,11 @@
     <string name="pref_link_volumes_summary">Quando desabilitado, os volumes para ringtone e notificações são definidos individualmente</string>
 
     <!-- Auto-switch QuickSettings -->
-    <string name="pref_auto_switch_qs_title">Auto-switch QuickSettings</string>
+    <string name="pref_auto_switch_qs_title">Mudar automaticamente as Configurações Rápidas</string>
     <string name="pref_auto_switch_qs_summary">As configurações rápidas serão exbidas automaticamente quando a barra de status é puxada para baixo enquando não houver notificações</string>
 
     <!-- Quick pulldown -->
-    <string name="pref_quick_pulldown_title">Pulldown rápido</string>
+    <string name="pref_quick_pulldown_title">Deslize rápido para baixo</string>
     <string name="pref_quick_pulldown_summary">A borda da barra de estatus puxa abaixo as configurações rápidas</string>
     <string name="quick_pulldown_off">Desabilitado</string>
     <string name="quick_pulldown_right">Direita</string>
@@ -507,11 +507,11 @@
     <string name="pref_cat_phone_mobile_data_title">Dados móveis</string>
 
     <!-- Messaging: Strip unicode -->
-    <string name="pref_mms_unicode_stripping_title">Strip unicode</string>
-    <string name="pref_mms_unicode_stripping_summary">Converts unicode characters to normal characters. Decreases overall message size.</string>
-    <string name="unicode_stripping_leave_intact">Leave characters intact</string>
-    <string name="unicode_stripping_non_encodable">Strip non-encodable characters</string>
-    <string name="unicode_stripping_all">Strip all unicode characters</string>
+    <string name="pref_mms_unicode_stripping_title">Faixa unicode</string>
+    <string name="pref_mms_unicode_stripping_summary">Converte caracteres Unicode para caracteres normais. Diminui o tamanho total da mensagem.</string>
+    <string name="unicode_stripping_leave_intact">Deixar caracteres na íntegra</string>
+    <string name="unicode_stripping_non_encodable">Elimina caracteres não codificáveis</string>
+    <string name="unicode_stripping_all">Elimina todos os caracteres Unicode</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Modo de rede modo de bloco</string>
@@ -1768,5 +1768,27 @@
     <!-- UNC HeadsUp: ignore for updated notification -->
     <string name="pref_lc_headsup_ignore_update_title">Ignorar atualizações</string>
     <string name="pref_lc_headsup_ignore_update_summary">Não será exibido notificações flutuantes (heads-up) quando a notificação existente é atualizado</string>
+    
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Configurações bloco Gravação Rápida</string>
+    <string name="pref_quickrecord_quality_title">Qualidade do áudio</string>
+    <string name="qr_audio_quality_low">Baixo (16kHz)</string>
+    <string name="qr_audio_quality_medium">Médio (22kHz)</string>
+    <string name="qr_audio_quality_high">Alto (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Parar a gravação automática</string>
+    <string name="pref_quickrecord_autostop_summary">Interrompe a gravação automaticamente após definir o tempo. Defina como 0 para desativar.</string>
 
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Limpar notificações</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Mudar para brilho automático</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Usar ícones do Lollipop</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Necessário reniciar</string>
+
+    <!-- Messaging -->
+    <string name="pref_cat_phone_messaging_title">Mensagens</string>
+    
 </resources>
