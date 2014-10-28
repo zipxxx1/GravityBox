@@ -1781,4 +1781,26 @@
     <string name="pref_lc_headsup_ignore_update_title">忽視通知更新</string>
     <string name="pref_lc_headsup_ignore_update_summary">當現有的通知更新時, 不顯示成浮動通知</string>
 
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">快速錄音 瓷貼設定</string>
+    <string name="pref_quickrecord_quality_title">錄音品質</string>
+    <string name="qr_audio_quality_low">低 (16kHz)</string>
+    <string name="qr_audio_quality_medium">中 (22kHz)</string>
+    <string name="qr_audio_quality_high">高 (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">自動停止錄音</string>
+    <string name="pref_quickrecord_autostop_summary">在指定時間後自動停止錄音, 設為 0 來停用本功能</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">清除通知</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">開關自動亮度</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">使用 Lollipop 圖示</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">需要重新啟動</string>
+
+    <!-- Messaging -->
+    <string name="pref_cat_phone_messaging_title">信息</string>
+
 </resources>
