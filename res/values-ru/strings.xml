@@ -1646,11 +1646,47 @@
     <string name="sb_download_progress_top">Верхний край</string>
     <string name="sb_download_progress_bottom">Нижний край</string>
 
+    <!-- Statusbar: master switch for background color -->
+    <string name="pref_statusbar_bgcolor_switch_title">Включить цвета фона строки состояния (необходима перезагрузка)</string>
+
+    <!-- Vulnerability patches -->
+    <string name="pref_patch_master_key_title">Патч уязвимости Master Key</string>
+    <string name="pref_patch_fake_id_title">Патч уязвимости Fake ID</string>
+    <string name="pref_patch_common_summary">Необходима перезагрузка</string>
+
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Строка уведомлений</string>
     <string name="sb_ticker_policy_default">По умолчанию</string>
     <string name="sb_ticker_policy_locked">Откл на экране блокировки</string>
     <string name="sb_ticker_policy_secured">Откл на защищённом экране блокировки</string>
     <string name="sb_ticker_policy_disabled">Откл всегда</string>
+
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">Режим 2G+3G</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA предпочт. (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA авто (2G/3G)</string>
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Расш.рабочий стол в меню выключения</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Убедитесь, что доступен альтернативный метод отключения расширенного рабочего стола!!!</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Настройки плитки быстрой записи</string>
+    <string name="pref_quickrecord_quality_title">Качество аудио</string>
+    <string name="qr_audio_quality_low">Низкое (16кГц)</string>
+    <string name="qr_audio_quality_medium">Среднее (22кГц)</string>
+    <string name="qr_audio_quality_high">Высокое (44кГц)</string>
+    <string name="pref_quickrecord_autostop_title">Автоостановка записи</string>
+    <string name="pref_quickrecord_autostop_summary">Автоматическая остановка записи через указанный промежуток времени. 0 - для отключения.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Очистка уведомлений</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Включение автояркости</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Использовать значки Lollipop</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Необходима перезагрузка</string>
 
 </resources>
