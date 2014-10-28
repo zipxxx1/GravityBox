@@ -338,14 +338,15 @@ public class ModLedControl {
                     if (!ls.getActiveScreenEnabled()) return;
 
                     Notification n = (Notification) param.args[Build.VERSION.SDK_INT > 17 ? 4 : 3];
-                    if (!mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false) &&
-                            mQuietHours.quietHoursActive(ls, n, false)) {
+                    if (((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
+                            (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0) &&
+                            !ls.getOngoing()) {
+                        if (DEBUG) log("Ongoing led control disabled. Ignoring.");
                         return;
                     }
 
-                    if (((n.flags & Notification.FLAG_ONGOING_EVENT) == Notification.FLAG_ONGOING_EVENT) &&
-                            !ls.getOngoing()) {
-                        if (DEBUG) log("Ongoing led control disabled. Ignoring.");
+                    if (!mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false) &&
+                            mQuietHours.quietHoursActive(ls, n, false)) {
                         return;
                     }
 
