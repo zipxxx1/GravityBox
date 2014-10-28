@@ -1597,4 +1597,27 @@
     <string name="pref_patch_fake_id_title">Záplata Fake ID zranitelnosti</string>
     <string name="pref_patch_common_summary">Vyžaduje restart</string>
 
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Rozšířená plocha v menu napájení</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Ujistěte se, že existuje alternativní metoda vypnutí rozšířené plochy!!!</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Nastavení dlaždice záznamu zvuku</string>
+    <string name="pref_quickrecord_quality_title">Kvalita zvuku</string>
+    <string name="qr_audio_quality_low">Nízká (16kHz)</string>
+    <string name="qr_audio_quality_medium">Střední (22kHz)</string>
+    <string name="qr_audio_quality_high">Vysoká (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Automatické zastavení nahrávání</string>
+    <string name="pref_quickrecord_autostop_summary">Zastaví nahrávání po vypršení definované doby. Nastavení na 0 vypne tuto funkci.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Vymazat oznámení</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Přepnout automatický jas</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Použít Lollipop ikony signálu</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Vyžaduje restart</string>
+
 </resources>

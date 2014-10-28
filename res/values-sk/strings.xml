@@ -1597,4 +1597,32 @@
     <string name="pref_patch_fake_id_title">Záplata Fake ID zraniteľnosti</string>
     <string name="pref_patch_common_summary">Vyžaduje reštart</string>
 
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G režim</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA preferované (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA automaticky (2G/3G)</string>
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Rozšírená plocha v menu napájania</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Uistite sa, že existuje alternatívna metóda vypnutia rozšírenej plochy!!!</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Nastavenia dlaždice záznamu zvuku</string>
+    <string name="pref_quickrecord_quality_title">Kvalita zvuku</string>
+    <string name="qr_audio_quality_low">Nízka (16kHz)</string>
+    <string name="qr_audio_quality_medium">Stredná (22kHz)</string>
+    <string name="qr_audio_quality_high">Vysoká (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Automatické zastavenie nahrávania</string>
+    <string name="pref_quickrecord_autostop_summary">Zastaví nahrávanie po vypršaní definovanej doby. Nastavenie na 0 vypne túto funkciu.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Vymazať oznámenia</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Prepnúť automatický jas</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Použiť Lollipop ikony signálu</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Vyžaduje reštart</string>
+
 </resources>
