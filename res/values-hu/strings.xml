@@ -1643,5 +1643,33 @@
     <string name="sb_ticker_policy_locked">Letiltva zárképernyőnél</string>
     <string name="sb_ticker_policy_secured">Letiltva zárolt zárképernyőnél</string>
     <string name="sb_ticker_policy_disabled">Mindig letilva</string>
+    
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G mód</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferált (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Kiterjesztett asztal a kikapcsoló menüben</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Ellenőrizd a kiterjesztett asztal kikapcsolás alternatív módszerét!!!</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Gyors Felvétel csempe beállítások</string>
+    <string name="pref_quickrecord_quality_title">Audió minőség</string>
+    <string name="qr_audio_quality_low">Alacsony (16kHz)</string>
+    <string name="qr_audio_quality_medium">Közepes (22kHz)</string>
+    <string name="qr_audio_quality_high">Magas (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Felvétel auto-stop</string>
+    <string name="pref_quickrecord_autostop_summary">A felvétel automatikusan leállításra kerül meghatározott idő eltelte után. Letiltáshoz állíts be 0-t.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Értesítések törlése</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">TAutomatius fényerő ki-bekapcsolása</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Lollipop ikonok használata</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Újraindítás szükséges</string>
 
 </resources>
