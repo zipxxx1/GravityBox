@@ -1660,5 +1660,33 @@
     <string name="sb_ticker_policy_locked">锁屏时禁用</string>
     <string name="sb_ticker_policy_secured">有安全锁时禁用</string>
     <string name="sb_ticker_policy_disabled">总是禁用</string>
+    
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G模式</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA 优先(3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA 自动(2G/3G)</string>
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">在电源键菜单显示扩展桌面按钮</string>
+    <string name="pref_powermenu_expanded_desktop_summary">请确认扩展桌面是可用的然后再替换！</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">快速录像瓷砖设置</string>
+    <string name="pref_quickrecord_quality_title">音频质量</string>
+    <string name="qr_audio_quality_low">低(16kHz)</string>
+    <string name="qr_audio_quality_medium">中(22kHz)</string>
+    <string name="qr_audio_quality_high">高(44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">自动停止录制</string>
+    <string name="pref_quickrecord_autostop_summary">设置时间自动停止录制，设置为0将禁用</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">清除通知</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">切换自动亮度</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">使用Lollipop图标</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">需要重新启动</string>
 
 </resources>
