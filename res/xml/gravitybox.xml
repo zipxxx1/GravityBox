@@ -411,7 +411,7 @@
                         android:entryValues="@array/qr_audio_quality_values"
                         android:defaultValue="22050" />
 
-                    <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+                    <com.ceco.gm2.gravitybox.preference.SeekBarPreference
                         android:key="pref_quickrecord_autostop"
                         android:title="@string/pref_quickrecord_autostop_title"
                         android:summary="@string/pref_quickrecord_autostop_summary"
