@@ -415,6 +415,8 @@ public class ModStatusbarColor {
                     Context gbContext = mPanelBar.getContext().createPackageContext(GravityBox.PACKAGE_NAME,
                             Context.CONTEXT_IGNORE_SECURITY);
                     mIconManager = new StatusBarIconManager(mPanelBar.getContext(), gbContext);
+                    mIconManager.setUseLollipopSignalIcons(prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS, false));
                     mIconManager.setIconColor(
                             prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR,
                                     mIconManager.getDefaultIconColor()));

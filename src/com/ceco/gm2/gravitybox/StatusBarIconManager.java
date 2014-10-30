@@ -69,6 +69,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     private ColorInfo mColorInfo;
     private List<IconManagerListener> mListeners;
     private BatteryInfoManager mBatteryInfo;
+    private boolean mUseLollipopSignalIcons;
 
     public interface IconManagerListener {
         void onIconManagerStatusChanged(int flags, ColorInfo colorInfo);
@@ -328,7 +329,14 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         }
     }
 
+    public void setUseLollipopSignalIcons(boolean useLollipopSignalIcons) {
+        mUseLollipopSignalIcons = useLollipopSignalIcons;
+    }
+
     public void setSignalIconMode(int mode) {
+        if (mode == SI_MODE_GB && mUseLollipopSignalIcons) {
+            mode = SI_MODE_STOCK;
+        }
         if (mColorInfo.signalIconMode != mode) {
             mColorInfo.signalIconMode = mode;
             clearCache();
