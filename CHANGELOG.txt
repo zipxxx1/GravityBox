@@ -1,3 +1,34 @@
+Changelog 3.4.3 - 30/10/2014
+--------------------------------------
+- Phone tweaks: brought back National data roaming option
+- Ultimate notification control:
+--- fixed improper lights and vibration handling during quiet hours affecting mainly ongoing notifications
+--- improved detection of ongoing notifications belonging to foreground services
+--- active Screen: added option for ignoring quiet hours (shows active screen during quiet hours)
+--- active screen: don't apply to ongoing foreground service notifications
+--- active screen: use direct wake up call instead of full wake lock (should improve compatibility on some devices)
+--- active screen: improved check for proximity sensor state
+- Statusbar tweaks: added option for using Lollipop signal icons (with full support for MediaTek Gemini)
+- Quick settings Network mode tile: added option for specifying 2G+3G mode:
+--- allows to choose whether to use GSM/WCDMA Preferred or GSM/WCDMA Auto
+--- tile icon indicates which 2G+3G mode is set (2G/3G or 3G/2G)
+- Quick settings QuickRecord tile:
+--- added option for choosing audio quality
+--- added option for choosing auto-stop recording delay
+- PowerMenu: added option for hiding expanded desktop toggle in power menu
+- Launcher tweaks: adjusted for compatibility with Google Search 4.0.26 (thanks to theknut)
+- GravityBox Actions:
+--- added action for clearing all notifications
+--- added action for toggling auto brightness
+- GB App Picker: search field adjusted to allow inputting non-English characters (thanks to momomok) 
+- Updated Polish translation (thanks to xtrem007)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translation (thanks to momomok)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Italian translations (thanks to pesa1234)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 3.4.2 - 05/10/2014
 --------------------------------------
 - GB Settings: fixed crash on Android 4.1 devices
