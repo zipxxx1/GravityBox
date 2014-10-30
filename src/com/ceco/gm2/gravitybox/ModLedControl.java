@@ -24,6 +24,7 @@ import com.ceco.gm2.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
 
+import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.app.Notification;
 import android.content.BroadcastReceiver;
@@ -397,7 +398,12 @@ public class ModLedControl {
     private static void clearNotifications() {
         try {
             if (mNotifManagerService != null) {
-                XposedHelpers.callMethod(mNotifManagerService, "onClearAll");
+                if (Build.VERSION.SDK_INT == 16) {
+                    XposedHelpers.callMethod(mNotifManagerService, "cancelAll");
+                } else {
+                    XposedHelpers.callMethod(mNotifManagerService, "cancelAll",
+                            XposedHelpers.callStaticMethod(ActivityManager.class, "getCurrentUser"));
+                }
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
