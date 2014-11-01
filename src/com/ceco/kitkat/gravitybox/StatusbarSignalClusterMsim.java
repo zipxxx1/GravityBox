@@ -252,7 +252,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
             try {
                 if (methodName.equals("onWifiSignalChanged")) {
                     if (mWifiActivity != null) {
-                        mWifiActivity.update((Boolean)args[0], true, 
+                        mWifiActivity.update(null, (Boolean)args[0], true, 
                                 (Boolean)args[3], (Boolean)args[4]);
                     }
                 } else if (methodName.equals("onMobileDataSignalChanged")) {
@@ -263,7 +263,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                         if (DEBUG) log("NetworkControllerCallbackMsim: onMobileDataSignalChanged " + 
                                 slot + "; enabled:" + args[0] + "; in:" + in + "; out:" + out);
                         if (mMobileActivity[slot] != null) {
-                            mMobileActivity[slot].update((Boolean)args[0], true, in, out);
+                            mMobileActivity[slot].update(null, (Boolean)args[0], true, in, out);
                         }
                     }
                 }
