@@ -284,48 +284,94 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS, false)) {
             Map<String, Integer> ic_map = new HashMap<String, Integer>();
+            // AOSP WiFi
             ic_map.put("stat_sys_wifi_signal_0", R.drawable.stat_sys_wifi_signal_0_lollipop);
             ic_map.put("stat_sys_wifi_signal_1_fully", R.drawable.stat_sys_wifi_signal_1_fully_lollipop);
             ic_map.put("stat_sys_wifi_signal_2_fully", R.drawable.stat_sys_wifi_signal_2_fully_lollipop);
             ic_map.put("stat_sys_wifi_signal_3_fully", R.drawable.stat_sys_wifi_signal_3_fully_lollipop);
             ic_map.put("stat_sys_wifi_signal_4_fully", R.drawable.stat_sys_wifi_signal_4_fully_lollipop);
             ic_map.put("stat_sys_wifi_signal_null", R.drawable.stat_sys_wifi_signal_null_lollipop);
-            if (Utils.hasGeminiSupport()) {
-                ic_map.put("stat_sys_gemini_radio_off", R.drawable.stat_sys_signal_off_lollipop);
-                ic_map.put("stat_sys_gemini_signal_0", R.drawable.stat_sys_signal_0_lollipop);
-                ic_map.put("stat_sys_gemini_signal_1_blue", R.drawable.stat_sys_signal_1_fully_blue_lollipop);
-                ic_map.put("stat_sys_gemini_signal_1_purple", R.drawable.stat_sys_signal_1_fully_purple_lollipop);
-                ic_map.put("stat_sys_gemini_signal_1_orange", R.drawable.stat_sys_signal_1_fully_orange_lollipop);
-                ic_map.put("stat_sys_gemini_signal_1_green", R.drawable.stat_sys_signal_1_fully_green_lollipop);
-                ic_map.put("stat_sys_gemini_signal_2_blue", R.drawable.stat_sys_signal_2_fully_blue_lollipop);
-                ic_map.put("stat_sys_gemini_signal_2_purple", R.drawable.stat_sys_signal_2_fully_purple_lollipop);
-                ic_map.put("stat_sys_gemini_signal_2_orange", R.drawable.stat_sys_signal_2_fully_orange_lollipop);
-                ic_map.put("stat_sys_gemini_signal_2_green", R.drawable.stat_sys_signal_2_fully_green_lollipop);
-                ic_map.put("stat_sys_gemini_signal_3_blue", R.drawable.stat_sys_signal_3_fully_blue_lollipop);
-                ic_map.put("stat_sys_gemini_signal_3_purple", R.drawable.stat_sys_signal_3_fully_purple_lollipop);
-                ic_map.put("stat_sys_gemini_signal_3_orange", R.drawable.stat_sys_signal_3_fully_orange_lollipop);
-                ic_map.put("stat_sys_gemini_signal_3_green", R.drawable.stat_sys_signal_3_fully_green_lollipop);
-                ic_map.put("stat_sys_gemini_signal_4_blue", R.drawable.stat_sys_signal_4_fully_blue_lollipop);
-                ic_map.put("stat_sys_gemini_signal_4_purple", R.drawable.stat_sys_signal_4_fully_purple_lollipop);
-                ic_map.put("stat_sys_gemini_signal_4_orange", R.drawable.stat_sys_signal_4_fully_orange_lollipop);
-                ic_map.put("stat_sys_gemini_signal_4_green", R.drawable.stat_sys_signal_4_fully_green_lollipop);
-                ic_map.put("stat_sys_gemini_signal_null", R.drawable.stat_sys_signal_null_lollipop);
-                ic_map.put("stat_sys_gemini_signal_searching", R.drawable.stat_sys_signal_searching_lollipop);
-            } else {
-                ic_map.put("stat_sys_signal_0", R.drawable.stat_sys_signal_0_lollipop);
-                ic_map.put("stat_sys_signal_0_fully", R.drawable.stat_sys_signal_0_lollipop);
-                ic_map.put("stat_sys_signal_1_fully", R.drawable.stat_sys_signal_1_fully_lollipop);
-                ic_map.put("stat_sys_signal_2_fully", R.drawable.stat_sys_signal_2_fully_lollipop);
-                ic_map.put("stat_sys_signal_3_fully", R.drawable.stat_sys_signal_3_fully_lollipop);
-                ic_map.put("stat_sys_signal_4_fully", R.drawable.stat_sys_signal_4_fully_lollipop);
-                ic_map.put("stat_sys_signal_null", R.drawable.stat_sys_signal_null_lollipop);
-            }
+
+            // AOSP Mobile
+            ic_map.put("stat_sys_signal_0", R.drawable.stat_sys_signal_0_lollipop);
+            ic_map.put("stat_sys_signal_0_fully", R.drawable.stat_sys_signal_0_lollipop);
+            ic_map.put("stat_sys_signal_1_fully", R.drawable.stat_sys_signal_1_fully_lollipop);
+            ic_map.put("stat_sys_signal_2_fully", R.drawable.stat_sys_signal_2_fully_lollipop);
+            ic_map.put("stat_sys_signal_3_fully", R.drawable.stat_sys_signal_3_fully_lollipop);
+            ic_map.put("stat_sys_signal_4_fully", R.drawable.stat_sys_signal_4_fully_lollipop);
+            ic_map.put("stat_sys_signal_null", R.drawable.stat_sys_signal_null_lollipop);
+
+            // Gemini Mobile
+            ic_map.put("stat_sys_gemini_radio_off", R.drawable.stat_sys_signal_off_lollipop);
+            ic_map.put("stat_sys_gemini_signal_0", R.drawable.stat_sys_signal_0_lollipop);
+            ic_map.put("stat_sys_gemini_signal_1_blue", R.drawable.stat_sys_signal_1_fully_blue_lollipop);
+            ic_map.put("stat_sys_gemini_signal_1_purple", R.drawable.stat_sys_signal_1_fully_purple_lollipop);
+            ic_map.put("stat_sys_gemini_signal_1_orange", R.drawable.stat_sys_signal_1_fully_orange_lollipop);
+            ic_map.put("stat_sys_gemini_signal_1_green", R.drawable.stat_sys_signal_1_fully_green_lollipop);
+            ic_map.put("stat_sys_gemini_signal_2_blue", R.drawable.stat_sys_signal_2_fully_blue_lollipop);
+            ic_map.put("stat_sys_gemini_signal_2_purple", R.drawable.stat_sys_signal_2_fully_purple_lollipop);
+            ic_map.put("stat_sys_gemini_signal_2_orange", R.drawable.stat_sys_signal_2_fully_orange_lollipop);
+            ic_map.put("stat_sys_gemini_signal_2_green", R.drawable.stat_sys_signal_2_fully_green_lollipop);
+            ic_map.put("stat_sys_gemini_signal_3_blue", R.drawable.stat_sys_signal_3_fully_blue_lollipop);
+            ic_map.put("stat_sys_gemini_signal_3_purple", R.drawable.stat_sys_signal_3_fully_purple_lollipop);
+            ic_map.put("stat_sys_gemini_signal_3_orange", R.drawable.stat_sys_signal_3_fully_orange_lollipop);
+            ic_map.put("stat_sys_gemini_signal_3_green", R.drawable.stat_sys_signal_3_fully_green_lollipop);
+            ic_map.put("stat_sys_gemini_signal_4_blue", R.drawable.stat_sys_signal_4_fully_blue_lollipop);
+            ic_map.put("stat_sys_gemini_signal_4_purple", R.drawable.stat_sys_signal_4_fully_purple_lollipop);
+            ic_map.put("stat_sys_gemini_signal_4_orange", R.drawable.stat_sys_signal_4_fully_orange_lollipop);
+            ic_map.put("stat_sys_gemini_signal_4_green", R.drawable.stat_sys_signal_4_fully_green_lollipop);
+            ic_map.put("stat_sys_gemini_signal_null", R.drawable.stat_sys_signal_null_lollipop);
+            ic_map.put("stat_sys_gemini_signal_searching", R.drawable.stat_sys_signal_searching_lollipop);
+
+            // Motorola WiFi
+            ic_map.put("zz_moto_stat_sys_wifi_signal_0", R.drawable.stat_sys_wifi_signal_0_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_0_fully_wide", R.drawable.stat_sys_wifi_signal_0_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_0_wide", R.drawable.stat_sys_wifi_signal_0_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_1", R.drawable.stat_sys_wifi_signal_1_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_1_fully_wide", R.drawable.stat_sys_wifi_signal_1_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_1_wide", R.drawable.stat_sys_wifi_signal_1_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_2", R.drawable.stat_sys_wifi_signal_2_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_2_fully_wide", R.drawable.stat_sys_wifi_signal_2_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_2_wide", R.drawable.stat_sys_wifi_signal_2_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_3", R.drawable.stat_sys_wifi_signal_3_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_3_fully_wide", R.drawable.stat_sys_wifi_signal_3_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_3_wide", R.drawable.stat_sys_wifi_signal_3_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_4", R.drawable.stat_sys_wifi_signal_4_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_4_fully_wide", R.drawable.stat_sys_wifi_signal_4_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_4_wide", R.drawable.stat_sys_wifi_signal_4_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_null", R.drawable.stat_sys_wifi_signal_null_lollipop);
+            ic_map.put("zz_moto_stat_sys_wifi_signal_null_wide", R.drawable.stat_sys_wifi_signal_null_lollipop);
+
+            // Motorola Mobile
+            ic_map.put("zz_moto_stat_sys_signal_0", R.drawable.stat_sys_signal_0_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_0_fully", R.drawable.stat_sys_signal_0_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_0_fully_wide", R.drawable.stat_sys_signal_0_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_0_wide", R.drawable.stat_sys_signal_0_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_1", R.drawable.stat_sys_signal_1_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_1_fully", R.drawable.stat_sys_signal_1_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_1_fully_wide", R.drawable.stat_sys_signal_1_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_1_wide", R.drawable.stat_sys_signal_1_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_2", R.drawable.stat_sys_signal_2_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_2_fully", R.drawable.stat_sys_signal_2_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_2_fully_wide", R.drawable.stat_sys_signal_2_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_2_wide", R.drawable.stat_sys_signal_2_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_3", R.drawable.stat_sys_signal_3_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_3_fully", R.drawable.stat_sys_signal_3_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_3_fully_wide", R.drawable.stat_sys_signal_3_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_3_wide", R.drawable.stat_sys_signal_3_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_4", R.drawable.stat_sys_signal_4_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_4_fully", R.drawable.stat_sys_signal_4_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_4_fully_wide", R.drawable.stat_sys_signal_4_fully_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_4_wide", R.drawable.stat_sys_signal_4_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_null", R.drawable.stat_sys_signal_null_lollipop);
+            ic_map.put("zz_moto_stat_sys_signal_null_wide", R.drawable.stat_sys_signal_null_lollipop);
+
             for (String key : ic_map.keySet()) {
                 try {
                     resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "drawable", key,
                             modRes.fwd(ic_map.get(key)));
                 } catch (Throwable t) {
-                    log("Drawable not found: " + key);
+                    if (DEBUG) log("Drawable not found: " + key);
                 }
             }
         }
