@@ -64,6 +64,7 @@ public class LedSettings {
     private boolean mHeadsUpExpanded;
     private boolean mHeadsUpDnd;
     private boolean mHeadsUpIgnoreUpdate;
+    private int mHeadsUpTimeout;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -138,6 +139,8 @@ public class LedSettings {
                 ls.setHeadsUpDnd(Boolean.valueOf(data[1]));
             } else if (data[0].equals("headsUpIgnoreUpdate")) {
                 ls.setHeadsUpIgnoreUpdate(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("headsUpTimeout")) {
+                ls.setHeadsUpTimeout(Integer.valueOf(data[1]));
             }
         }
         return ls;
@@ -167,6 +170,7 @@ public class LedSettings {
         mHeadsUpExpanded = false;
         mHeadsUpDnd = false;
         mHeadsUpIgnoreUpdate = false;
+        mHeadsUpTimeout = 5;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -344,6 +348,10 @@ public class LedSettings {
         mHeadsUpIgnoreUpdate = ignoreUpdate;
     }
 
+    protected void setHeadsUpTimeout(int timeout) {
+        mHeadsUpTimeout = timeout;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -432,6 +440,10 @@ public class LedSettings {
         return mHeadsUpIgnoreUpdate;
     }
 
+    public int getHeadsUpTimeout() {
+        return mHeadsUpTimeout;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -461,6 +473,7 @@ public class LedSettings {
             dataSet.add("headsUpExpanded:" + mHeadsUpExpanded);
             dataSet.add("headsUpDnd:" + mHeadsUpDnd);
             dataSet.add("headsUpIgnoreUpdate:" + mHeadsUpIgnoreUpdate);
+            dataSet.add("headsUpTimeout:" + mHeadsUpTimeout);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

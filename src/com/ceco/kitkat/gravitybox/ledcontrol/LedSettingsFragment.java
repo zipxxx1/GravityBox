@@ -65,6 +65,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_HEADS_UP_EXPANDED = "pref_lc_headsup_expanded";
     private static final String PREF_KEY_HEADS_UP_DND = "pref_lc_headsup_dnd";
     private static final String PREF_KEY_HEADS_UP_IGNORE_UPDATE = "pref_lc_headsup_ignore_update";
+    private static final String PREF_KEY_HEADS_UP_TIMEOUT = "pref_lc_headsup_timeout";
     private static final String PREF_CAT_KEY_OTHER = "pref_cat_lc_other";
 
     private static final int REQ_PICK_SOUND = 101;
@@ -93,6 +94,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private CheckBoxPreference mHeadsUpExpandedPref;
     private CheckBoxPreference mHeadsUpDndPref;
     private CheckBoxPreference mHeadsUpIgnoreUpdatePref;
+    private SeekBarPreference mHeadsUpTimeoutPref;
     private PreferenceCategory mOtherCat;
 
     @Override
@@ -127,6 +129,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mHeadsUpExpandedPref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_EXPANDED);
         mHeadsUpDndPref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_DND);
         mHeadsUpIgnoreUpdatePref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_IGNORE_UPDATE);
+        mHeadsUpTimeoutPref = (SeekBarPreference) findPreference(PREF_KEY_HEADS_UP_TIMEOUT);
         mOtherCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_OTHER);
     }
 
@@ -176,6 +179,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             mHeadsUpExpandedPref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
             mHeadsUpDndPref.setChecked(ledSettings.getHeadsUpDnd());
             mHeadsUpIgnoreUpdatePref.setChecked(ledSettings.getHeadsUpIgnoreUpdate());
+            mHeadsUpTimeoutPref.setValue(ledSettings.getHeadsUpTimeout());
         }
     }
 
@@ -277,6 +281,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected boolean getHeadsUpIgnoreUpdate() {
         return mHeadsUpIgnoreUpdatePref.isChecked();
+    }
+
+    protected int getHeadsUpTimeout() {
+        return mHeadsUpTimeoutPref.getValue();
     }
 
     @Override

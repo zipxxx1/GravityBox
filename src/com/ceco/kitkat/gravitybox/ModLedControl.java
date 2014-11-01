@@ -403,6 +403,8 @@ public class ModLedControl {
                                 ls.getHeadsUpExpanded());
                         n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_IGNORE_UPDATE,
                                 ls.getHeadsUpIgnoreUpdate());
+                        n.extras.putInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT,
+                                ls.getHeadsUpTimeout());
                     }
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
@@ -672,8 +674,8 @@ public class ModLedControl {
                     Object headsUp = XposedHelpers.getObjectField(headsUpView, "mHeadsUp");
                     Object sbNotif = XposedHelpers.getObjectField(headsUp, "notification");
                     Notification n = (Notification) XposedHelpers.getObjectField(sbNotif, "notification");
-                    int timeout = n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) ?
-                            n.extras.getInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT, 10) * 1000 :
+                    int timeout = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_TIMEOUT) ?
+                            n.extras.getInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT) * 1000 :
                                 mSysUiPrefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_TIMEOUT, 5) * 1000;
                     XposedHelpers.setIntField(param.thisObject, "mHeadsUpNotificationDecay", timeout);
                 }
