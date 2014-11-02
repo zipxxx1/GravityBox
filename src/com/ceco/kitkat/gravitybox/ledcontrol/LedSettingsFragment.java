@@ -179,7 +179,9 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             mHeadsUpExpandedPref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
             mHeadsUpDndPref.setChecked(ledSettings.getHeadsUpDnd());
             mHeadsUpIgnoreUpdatePref.setChecked(ledSettings.getHeadsUpIgnoreUpdate());
+            mHeadsUpIgnoreUpdatePref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
             mHeadsUpTimeoutPref.setValue(ledSettings.getHeadsUpTimeout());
+            mHeadsUpTimeoutPref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
         }
     }
 
@@ -331,7 +333,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         } else if (preference == mHeadsUpModePref) {
             mHeadsUpModePref.setValue((String)newValue);
             mHeadsUpModePref.setSummary(mHeadsUpModePref.getEntry());
-            mHeadsUpExpandedPref.setEnabled(!"OFF".equals(mHeadsUpModePref.getValue()));
+            final boolean enabled = !"OFF".equals(mHeadsUpModePref.getValue());
+            mHeadsUpExpandedPref.setEnabled(enabled);
+            mHeadsUpIgnoreUpdatePref.setEnabled(enabled);
+            mHeadsUpTimeoutPref.setEnabled(enabled);
         } else if (preference == mActiveScreenModePref) {
             mActiveScreenModePref.setValue((String)newValue);
             mActiveScreenModePref.setSummary(mActiveScreenModePref.getEntry());
