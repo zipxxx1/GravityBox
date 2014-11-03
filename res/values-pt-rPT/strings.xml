@@ -1511,8 +1511,8 @@
     <string name="battery_style_circle_dashed_percent">Indicador de bateria circular e tracejado com percentagem</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Obrigado pelo suporte. As funcionalidades avançadas serão desbloqueadas após ter reiniciado o GravityBox. 
-        Garanta que mantém a aplicação de desbloqueio do GravityBox instalada durante pelo menos 120 minutos.</string>
+    <string name="premium_unlocked_message">Obrigado pelo suporte. As funcionalidades avançadas serão desbloqueadas após reiniciar o sistema. 
+        As funcionalidade avançadas do Gravitybox permanecerão desbloqueadas, caso opte por desinstalar a aplicação de desbloqueio após expirar o período experimental.</string>
     <string name="pref_about_get_unlocker_title">Obter desbloqueador</string>
     <string name="pref_about_get_unlocker_summary">Não tem PayPal? Carregue aqui para obter a aplicação de desbloqueio das funcionalidades avançadas do GravityBox a partir da Play Store.</string>
 
@@ -1771,5 +1771,31 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Ambiente de trabalho expandido no Menu Desligar</string>
     <string name="pref_powermenu_expanded_desktop_summary">Deverá ser grantido que existe um método alternativo acessível para desativar o ambiente de trabalho expandido!!!</string>
+
+    <!-- UNC HeadsUp: ignore for updated notification -->
+    <string name="pref_lc_headsup_ignore_update_title">Ignorar atualizações</string>
+    <string name="pref_lc_headsup_ignore_update_summary">Permite ignorar atualizações das notificações flutuantes em curso</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Definições do painel Gravação rápida</string>
+    <string name="pref_quickrecord_quality_title">Qualidade de áudio</string>
+    <string name="qr_audio_quality_low">Baixa (16kHz)</string>
+    <string name="qr_audio_quality_medium">Média (22kHz)</string>
+    <string name="qr_audio_quality_high">Alta (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Parar gravação automaticamente</string>
+    <string name="pref_quickrecord_autostop_summary">Permite definir o tempo a partir do qual a gravação é automaticamente parada. Introduzir 0 para desativar.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Limpar notificações</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Comutar brilho automático</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Utilizar ícones Lollipop</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Necessário reiniciar</string>
+
+    <!-- Messaging -->
+    <string name="pref_cat_phone_messaging_title">Mensagens</string>
 
 </resources>
