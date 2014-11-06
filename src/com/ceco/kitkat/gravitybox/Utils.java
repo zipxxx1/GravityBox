@@ -16,6 +16,7 @@
 package com.ceco.kitkat.gravitybox;
 
 import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -154,9 +155,20 @@ public class Utils {
     public static boolean isXperiaDevice() {
         if (mIsXperiaDevice != null) return mIsXperiaDevice;
 
-        mIsXperiaDevice = Build.MANUFACTURER.equalsIgnoreCase("sony")
+        boolean isXperiaDevice = Build.MANUFACTURER.equalsIgnoreCase("sony")
                 && !isMtkDevice();
-        return mIsXperiaDevice;
+
+        if (isXperiaDevice) {
+            // doublecheck - hacky workaround to determine whether device is running GPE ROM
+            try {
+                XposedHelpers.findMethodExact("com.android.internal.widget.multiwaveview.GlowPadView",
+                        null, "showTargets", boolean.class, int.class);
+            } catch (Throwable t) {
+                isXperiaDevice = false;
+            }
+        }
+
+        return (mIsXperiaDevice = isXperiaDevice);
     }
 
     public static boolean isMotoXtDevice() {
