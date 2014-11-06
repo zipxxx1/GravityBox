@@ -1487,7 +1487,7 @@
 
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">Dziękujemy za wsparcie. Funkcje premium zostaną odblokowane po ponownym uruchomieniu GravityBox. 
-        Pozostaw GravityBox Unlocker zainstalowany na co najmniej 120 minut.</string>
+        GravityBox pozostanie odblokowany w przypadku odinstalowania unlockera po upływie terminu zwrotu.</string>
     <string name="pref_about_get_unlocker_title">Pobierz GB Unlocker</string>
     <string name="pref_about_get_unlocker_summary">Nie posiadasz PayPal? Wystarczy kliknąć tutaj, aby pobrać ze sklepu Google Play aplikację do odblokowania funkcji premium GravityBox.</string>
 
@@ -1631,5 +1631,33 @@
     <string name="sb_ticker_policy_locked">Wyłączone na ekranie blokady</string>
     <string name="sb_ticker_policy_secured">Wyłączone na zabezpieczonym ekranie blokady</string>
     <string name="sb_ticker_policy_disabled">Zawsze wyłączone</string>
+
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">Tryb 2G+3G</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA preferowane (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA automatycznie (2G/3G)</string>
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Rozszerzony pulpit w menu zasilania</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Upewnij się, że istnieje alternatywna metoda wyłączenia rozszerzonego pulpitu!!!</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Ustawienia kafelka Dyktafonu</string>
+    <string name="pref_quickrecord_quality_title">Jakość dźwięku</string>
+    <string name="qr_audio_quality_low">Niska (16kHz)</string>
+    <string name="qr_audio_quality_medium">Średnia (22kHz)</string>
+    <string name="qr_audio_quality_high">Wysoka (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Auto-stop nagrywania</string>
+    <string name="pref_quickrecord_autostop_summary">Automatycznie zatrzymuje nagrywanie po określonym czasie. Ustaw 0, aby wyłączyć.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Wyczyść powiadomienia</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Przełącz automatyczną jasność</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Użyj ikon sygnału Lollipop</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Wymagany restart</string>
 
 </resources>
