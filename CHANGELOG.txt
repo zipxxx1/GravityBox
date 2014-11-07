@@ -1,3 +1,26 @@
+Changelog 3.4.8 - 07/11/2014
+--------------------------------------
+- Lollipop signal icons:
+--- added Lollipop icons for partially connected state (only for devices having "Enable connection state" option in Signal cluster settings)
+--- added support for Moto G (also affects mobile signal tile due to Motorola using the same image for both)
+--- added support for RTL locales
+- Ultimate notification control: 
+--- added option for heads up timeout on per-app basis
+--- added workaround to bring back Active Screen and other UNC features to LG devices (doesn't mean LG devices are now officially supported!)  
+- Improved compatibility with Xperia Z Ultra Google Play Edition:
+--- fixes unlock ring options
+--- fixes navigation bar ring options
+--- should fix behavior of clear all recent tasks
+--- should fix volume panel options
+- Updated Polish translations (thanks to xtrem007)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Chinese (Traditional) translations (thanks to momomok)
+- Added translations for HongKong region (thanks to momomok)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated French translations (thanks to ch-vox)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 3.4.7 - 25/10/2014
 --------------------------------------
 - Ultimate notification control:
