@@ -1534,7 +1534,7 @@
     
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">感谢您的支持，GravityBox高级功能将在重新启动后解锁
-        安装GravityBox解锁器可能需要120分钟才能解锁全部功能</string>
+        退款期限到期后GravityBox将会卸载解锁器并锁定</string>
     <string name="pref_about_get_unlocker_title">获取解锁器</string>
     <string name="pref_about_get_unlocker_summary">没有PayPal？只需点击这里从Google Play市场购买GravityBox解锁器来解锁高级功能</string>
 
@@ -1815,7 +1815,7 @@
     <string name="shortcut_auto_brightness">切换自动亮度</string>
 
     <!-- Signal cluster: use lollipop icons -->
-    <string name="pref_signal_cluster_lollipop_icons_title">使用Lollipop图标</string>
+    <string name="pref_signal_cluster_lollipop_icons_title">使用Lollipop信号图标</string>
     <string name="pref_signal_cluster_lollipop_icons_summary">需要重新启动</string>
 
     <!-- Messaging -->
