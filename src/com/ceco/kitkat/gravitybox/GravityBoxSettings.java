@@ -57,9 +57,12 @@ import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -1961,6 +1964,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefPieAppLongpress.setEntryValues(actionEntryValues);
 
             setDefaultValues();
+            maybeShowCompatWarningDialog();
         }
 
         @Override
@@ -1988,6 +1992,31 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public void onStop() {
             mPrefs.unregisterOnSharedPreferenceChangeListener(this);
             super.onStop();
+        }
+
+        private void maybeShowCompatWarningDialog() {
+            final int stage = mPrefs.getInt("compat_warning_stage", 0);
+            if (stage < 2) {
+                final TextView msgView = new TextView(getActivity());
+                msgView.setText(R.string.compat_warning_message);
+                msgView.setMovementMethod(LinkMovementMethod.getInstance());
+                final int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16,
+                        getResources().getDisplayMetrics());
+                msgView.setPadding(padding, padding, padding, padding);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(R.string.compat_warning_title);
+                builder.setView(msgView);
+                builder.setPositiveButton(stage == 0 ? R.string.compat_warning_ok_stage1 :
+                    R.string.compat_warning_ok_stage2, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mPrefs.edit().putInt("compat_warning_stage", (stage+1)).commit();
+                        }
+                    });
+                builder.setNegativeButton(android.R.string.cancel, null);
+                mDialog = builder.create();
+                mDialog.show();
+            }
         }
 
         private void setDefaultValues() {
