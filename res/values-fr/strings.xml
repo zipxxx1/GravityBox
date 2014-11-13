@@ -1821,4 +1821,13 @@
     <!-- Messaging -->
     <string name="pref_cat_phone_messaging_title">Messagerie</string>
 
+    <!-- Compatibility warning -->
+    <string name="compat_warning_title">AVERTISSEMENT</string>
+    <string name="compat_warning_message">UNIQUEMENT POUR UN USAGE SUR LES TERMINAUX NON-MODIFIÉS ANDROID ET GOOGLE PLAY EDITION!\n\nL\'utilisation sur n\'importe quel autre terminal équipé d\'une ROM lourdement modifiée
+        telle que Touchwiz, Sense, Xperia, au même titre que les ROM customisées n\'est pas supportée et peut occasionner des résultats inattendus.\n\nSi vous continuez,
+        alors vous le faîtes en connaissance de cause et sans attendre un quelconque support. Pour plus d\'informations à propos de la compatibilité,
+        se référer <a href="http://forum.xda-developers.com/showthread.php?t=2554049">au fil de discussion sur XDA</a>.</string>
+    <string name="compat_warning_ok_stage1">OK. J\'ai compris.</string>
+    <string name="compat_warning_ok_stage2">J\'ai VRAIMENT compris!</string>
+
 </resources>
