@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.PreferenceFragment;
 
 public class ActiveScreenActivity extends Activity {
@@ -44,6 +45,7 @@ public class ActiveScreenActivity extends Activity {
 
     public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
         private SharedPreferences mPrefs;
+        private CheckBoxPreference mPrefPocketMode;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,14 @@ public class ActiveScreenActivity extends Activity {
             mPrefs = getPreferenceManager().getSharedPreferences();
 
             addPreferencesFromResource(R.xml.led_control_active_screen_settings);
+
+            mPrefPocketMode = (CheckBoxPreference) findPreference(
+                    LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE);
+
+            if (LedSettings.isProximityWakeUpEnabled(getActivity())) {
+                mPrefPocketMode.setSummary(R.string.pref_unc_as_pocket_mode_summary_overriden);
+                mPrefPocketMode.setEnabled(false);
+            }
         }
 
         @Override

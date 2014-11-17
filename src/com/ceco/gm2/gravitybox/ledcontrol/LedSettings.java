@@ -18,6 +18,8 @@ package com.ceco.gm2.gravitybox.ledcontrol;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.ceco.gm2.gravitybox.GravityBoxSettings;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,11 +30,13 @@ public class LedSettings {
     public static final String PREF_KEY_LOCKED = "uncLocked";
     public static final String PREF_KEY_ACTIVE_SCREEN_ENABLED = "activeScreenEnabled";
     public static final String PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS = "pref_unc_as_ignore_quiet_hours";
+    public static final String PREF_KEY_ACTIVE_SCREEN_POCKET_MODE = "pref_unc_as_pocket_mode";
 
     public static final String ACTION_UNC_SETTINGS_CHANGED = "gravitybox.intent.action.UNC_SETTINGS_CHANGED";
     public static final String EXTRA_UNC_AS_ENABLED = "uncActiveScreenEnabled";
 
     public enum LedMode { ORIGINAL, OVERRIDE, OFF };
+    public enum ActiveScreenMode { DISABLED, DO_NOTHING, EXPAND_PANEL };
 
     private Context mContext;
     private String mPackageName;
@@ -49,8 +53,7 @@ public class LedSettings {
     private boolean mVibrateOverride;
     private String mVibratePatternStr;
     private long[] mVibratePattern;
-    private boolean mActiveScreenEnabled;
-    private boolean mActiveScreenExpanded;
+    private ActiveScreenMode mActiveScreenMode;
     private LedMode mLedMode;
     private boolean mQhIgnore;
     private String mQhIgnoreList;
@@ -112,10 +115,8 @@ public class LedSettings {
                 ls.setVibrateOverride(Boolean.valueOf(data[1]));
             } else if (data[0].equals("vibratePattern")) {
                 ls.setVibratePatternFromString(data[1]);
-            } else if (data[0].equals("activeScreenEnabled")) {
-                ls.setActiveScreenEnabled(Boolean.valueOf(data[1]));
-            } else if (data[0].equals("activeScreenExpanded")) {
-                ls.setActiveScreenExpanded(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("activeScreenMode")) {
+                ls.setActiveScreenMode(ActiveScreenMode.valueOf(data[1]));
             } else if (data[0].equals("ledMode")) {
                 ls.setLedMode(LedMode.valueOf(data[1]));
             } else if (data[0].equals("qhIgnore")) {
@@ -143,8 +144,7 @@ public class LedSettings {
         mVibrateOverride = false;
         mVibratePatternStr = null;
         mVibratePattern = null;
-        mActiveScreenEnabled = false;
-        mActiveScreenExpanded = false;
+        mActiveScreenMode = ActiveScreenMode.DISABLED;
         mLedMode = LedMode.OVERRIDE;
         mQhIgnore = false;
         mQhIgnoreList = null;
@@ -170,6 +170,18 @@ public class LedSettings {
             SharedPreferences prefs = context.getSharedPreferences(
                     "quiet_hours", Context.MODE_WORLD_READABLE);
             return prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_ENABLED, false);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return false;
+        }
+    }
+
+    protected static boolean isProximityWakeUpEnabled(Context context) {
+        try {
+            final String prefsName = context.getPackageName() + "_preferences";
+            SharedPreferences prefs = context.getSharedPreferences(
+                    prefsName, Context.MODE_WORLD_READABLE);
+            return prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false);
         } catch (Throwable t) {
             t.printStackTrace();
             return false;
@@ -273,12 +285,8 @@ public class LedSettings {
         }
     }
 
-    protected void setActiveScreenEnabled(boolean enabled) {
-        mActiveScreenEnabled = enabled;
-    }
-
-    protected void setActiveScreenExpanded(boolean expanded) {
-        mActiveScreenExpanded = expanded;
+    protected void setActiveScreenMode(ActiveScreenMode mode) {
+        mActiveScreenMode = mode;
     }
 
     protected void setLedMode(LedMode ledMode) {
@@ -349,12 +357,8 @@ public class LedSettings {
         return mVibratePattern;
     }
 
-    public boolean getActiveScreenEnabled() {
-        return mActiveScreenEnabled;
-    }
-
-    public boolean getActiveScreenExpanded() {
-        return mActiveScreenExpanded;
+    public ActiveScreenMode getActiveScreenMode() {
+        return mActiveScreenMode;
     }
 
     public LedMode getLedMode() {
@@ -388,8 +392,7 @@ public class LedSettings {
             if (mVibratePatternStr != null) {
                 dataSet.add("vibratePattern:" + mVibratePatternStr);
             }
-            dataSet.add("activeScreenEnabled:" + mActiveScreenEnabled);
-            dataSet.add("activeScreenExpanded:" + mActiveScreenExpanded);
+            dataSet.add("activeScreenMode:" + mActiveScreenMode);
             dataSet.add("ledMode:" + mLedMode);
             dataSet.add("qhIgnore:" + mQhIgnore);
             if (mQhIgnoreList != null) {

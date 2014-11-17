@@ -1373,8 +1373,7 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktívna obrazovka</string>
     <string name="lc_active_screen_info">Funkcia aktívnej obrazovky slúži na automatické zapnutie obrazovky 
-        po obdržaní každého nového oznámenia. To sa udeje len v prípade, ak nie je obrazovka zakrytá 
-        (napr. ak nie je zariadenie vo vrecku alebo v púzdre). Voliteľne dôjde k automatickékmu rozbaleniu 
+        po obdržaní každého nového oznámenia. Voliteľne dôjde k automatickékmu rozbaleniu 
         lišty oznámení v závislosti od aktuálnej bezpečnostnej politiky obrazovky uzamknutia. 
         Funkcia aktívnej obrazovky sa uplatní len v prípade, ak je aktivovaná obrazovka uzamknutia.  
         Prepínač nižšie slúži na hlavné zapnutie/vypnutie funkcie. Ak je funkcia zapnutá, ďalšie jej nastavenia 
@@ -1634,5 +1633,16 @@
         <a href="http://forum.xda-developers.com/showthread.php?t=2316070">stránky podpory na XDA</a>.</string>
     <string name="compat_warning_ok_stage1">Beriem na vedomie</string>
     <string name="compat_warning_ok_stage2">Už neotravovať!</string>
+
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Režim aktívnej obrazovky</string>
+    <string name="lc_active_screen_mode_disabled">Vypnutá</string>
+    <string name="lc_active_screen_mode_nothing">Len zapnúť obrazovku</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Použiť senzor priblíženia</string>
+    <string name="pref_unc_as_pocket_mode_summary">Nezapne obrazovku, ak je senzor priblíženia zakrytý (napr. ak je zariadenie vo vrecku)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Toto nastavenie je momentálne obídené funkciou nechceného prebudenia v nastaveniach napájania</string>
 
 </resources>

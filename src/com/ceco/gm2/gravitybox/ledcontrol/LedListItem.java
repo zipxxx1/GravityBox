@@ -19,6 +19,7 @@ import java.util.Locale;
 
 import com.ceco.gm2.gravitybox.R;
 import com.ceco.gm2.gravitybox.adapters.IBaseListAdapterItem;
+import com.ceco.gm2.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.gm2.gravitybox.ledcontrol.LedSettings.LedMode;
 
 import android.content.Context;
@@ -93,9 +94,8 @@ public class LedListItem implements IBaseListAdapterItem {
             if (mLedSettings.getVibrateOverride()) {
                 buf += "; " + mContext.getString(R.string.pref_lc_vibrate_override_title);
             }
-            if (LedSettings.isActiveScreenMasterEnabled(mContext) &&
-                    mLedSettings.getActiveScreenEnabled()) {
-                buf += "; " + mContext.getString(R.string.lc_active_screen);
+            if (LedSettings.isActiveScreenMasterEnabled(mContext)) {
+                buf += "; AS: " + getActiveScreenModeTitle(mLedSettings.getActiveScreenMode());
             }
             if (LedSettings.isQuietHoursEnabled(mContext) &&
                     mLedSettings.getQhIgnore()) {
@@ -105,6 +105,19 @@ public class LedListItem implements IBaseListAdapterItem {
                 buf += "; " + mContext.getString(R.string.lc_item_summary_ongoing);
             }
             return buf;
+        }
+    }
+
+    private String getActiveScreenModeTitle(ActiveScreenMode asMode) {
+        switch (asMode) {
+            case DISABLED:
+                return mContext.getString(R.string.lc_active_screen_mode_disabled);
+            case DO_NOTHING: 
+                return mContext.getString(R.string.lc_active_screen_mode_nothing);
+            case EXPAND_PANEL:
+                return mContext.getString(R.string.lc_active_screen_mode_expand);
+            default:
+                return "N/A";
         }
     }
 

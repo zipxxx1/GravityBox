@@ -1681,4 +1681,15 @@
     <string name="compat_warning_ok_stage1">Certo, percebi.</string>
     <string name="compat_warning_ok_stage2">Percebi REALMENTE!</string>
 
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Modo Ecrã ativo</string>
+    <string name="lc_active_screen_mode_disabled">Desativado</string>
+    <string name="lc_active_screen_mode_nothing">Ligar ecrã unicamente</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Modo de bolso</string>
+    <string name="pref_unc_as_pocket_mode_summary">Permite que o ecrã não se ligue sempre que o sensor de proximidade estiver coberto (como por exemplo, quando o dispositivo estiver no bolso)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Atualmente, a funcionalidade de ligar através da proximidade, disponível nos ajustes de energia, sobrepõe-se a esta opção</string>
+
 </resources>

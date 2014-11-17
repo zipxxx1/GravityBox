@@ -1651,4 +1651,15 @@
     <string name="compat_warning_ok_stage1">OK. Ho capito.</string>
     <string name="compat_warning_ok_stage2">Ho capito DAVVERO!</string>
 
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Modalità Active Screen</string>
+    <string name="lc_active_screen_mode_disabled">Disabilitata</string>
+    <string name="lc_active_screen_mode_nothing">Accendi solo schermo</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Modalità tasca</string>
+    <string name="pref_unc_as_pocket_mode_summary">Lo schermo non verrà acceso se i sensori di prossimità sono coperti (es. quando il dispositivo è in tasca)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Questa opzione è al momento disabilitata da Risveglia con sensori di prossimità nel menu spegnimento</string>
+
 </resources>

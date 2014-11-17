@@ -18,10 +18,13 @@ package com.ceco.gm2.gravitybox;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.ceco.gm2.gravitybox.ledcontrol.LedSettings;
+import com.ceco.gm2.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.gm2.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
+
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
@@ -53,6 +56,10 @@ public class ModLedControl {
     private static final String CLASS_STATUSBAR_MGR_SERVICE = "com.android.server.StatusBarManagerService";
     private static final String PACKAGE_NAME_GRAVITYBOX = "com.ceco.gm2.gravitybox";
 
+    public static final String NOTIF_EXTRAS = "gbExtras";
+    private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
+    private static final String NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE = "gbActiveScreenPocketMode";
+
     public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
 
     private static XSharedPreferences mPrefs;
@@ -67,6 +74,7 @@ public class ModLedControl {
     private static Map<String, Long> mNotifTimestamps = new HashMap<String, Long>();
     private static boolean mUserPresent;
     private static Object mNotifManagerService;
+    private static boolean mProximityWakeUpEnabled;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -114,6 +122,10 @@ public class ModLedControl {
                 mUserPresent = false;
             } else if (action.equals(ACTION_CLEAR_NOTIFICATIONS)) {
                 clearNotifications();
+            } else if (action.equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
+                    intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
+                mProximityWakeUpEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false);
             }
         }
     };
@@ -122,12 +134,14 @@ public class ModLedControl {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static void initZygote() {
+    public static void initZygote(final XSharedPreferences mainPrefs) {
         mPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
         mPrefs.makeWorldReadable();
         mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
         mQhPrefs.makeWorldReadable();
         mQuietHours = new QuietHours(mQhPrefs);
+
+        mProximityWakeUpEnabled = mainPrefs.getBoolean(GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false);
 
         try {
             final Class<?> nmsClass = XposedHelpers.findClass(CLASS_NOTIFICATION_MANAGER_SERVICE, null);
@@ -144,6 +158,7 @@ public class ModLedControl {
                         intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                         intentFilter.addAction(ACTION_CLEAR_NOTIFICATIONS);
+                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                         toggleActiveScreenFeature(!mPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
@@ -194,7 +209,7 @@ public class ModLedControl {
                     boolean extrasFound = false;
                     while (p.dataAvail() > 0) {
                         try {
-                            if ("gbExtras".equals(p.readString())) {
+                            if (NOTIF_EXTRAS.equals(p.readString())) {
                                 if (DEBUG) log("GB extras magic found. Reading bundle");
                                 extras = p.readBundle();
                                 extrasFound = true;
@@ -209,7 +224,7 @@ public class ModLedControl {
                     if (!extrasFound) {
                         p.setDataPosition(pos);
                     }
-                    XposedHelpers.setAdditionalInstanceField(param.thisObject, "gbExtras", extras);
+                    XposedHelpers.setAdditionalInstanceField(param.thisObject, NOTIF_EXTRAS, extras);
                 }
             });
 
@@ -218,9 +233,9 @@ public class ModLedControl {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     Parcel p = (Parcel) param.args[0];
-                    p.writeString("gbExtras");
+                    p.writeString(NOTIF_EXTRAS);
                     p.writeBundle((Bundle) XposedHelpers.getAdditionalInstanceField(
-                            param.thisObject, "gbExtras"));
+                            param.thisObject, NOTIF_EXTRAS));
                     if (DEBUG) log("Notification to parcel: gbExtras written");
                 }
             });
@@ -254,9 +269,13 @@ public class ModLedControl {
                 }
                 if (DEBUG) log(pkgName + ": " + ls.toString());
 
+                Bundle extras = new Bundle();
+                XposedHelpers.setAdditionalInstanceField(n, NOTIF_EXTRAS, extras);
                 final boolean qhActive = mQuietHours.quietHoursActive(ls, n, mUserPresent);
                 final boolean qhActiveIncludingLed = qhActive && mQuietHours.muteLED;
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
+                final boolean qhActiveIncludingActiveScreen = qhActive &&
+                        !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
 
                 boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
                         (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);
@@ -362,6 +381,17 @@ public class ModLedControl {
                     }
                 }
 
+                if (ls.getEnabled()) {
+                    // active screen mode
+                    if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
+                            !qhActiveIncludingActiveScreen && !isOngoing && mPm != null && mKm.isKeyguardLocked()) {
+                        extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
+                                ls.getActiveScreenMode().toString());
+                        extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE, !mProximityWakeUpEnabled &&
+                                mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true));
+                    }
+                }
+
                 if (DEBUG) log("Notification info: defaults=" + n.defaults + "; flags=" + n.flags);
             } catch (Throwable t) {
                 XposedBridge.log(t);
@@ -371,39 +401,25 @@ public class ModLedControl {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
-                if (mPm != null && !mPm.isScreenOn() && mKm.isKeyguardLocked()) {
-                    final String pkgName = (String) param.args[0];
-                    LedSettings ls = LedSettings.deserialize(mPrefs.getStringSet(pkgName, null));
-                    if (!ls.getEnabled()) {
-                        // use default settings in case they are active
-                        ls = LedSettings.deserialize(mPrefs.getStringSet("default", null));
-                        if (!ls.getEnabled()) {
-                            return;
-                        }
-                    }
-                    if (!ls.getActiveScreenEnabled()) return;
+                Notification n = (Notification) param.args[Build.VERSION.SDK_INT > 17 ? 4 : 3];
+                Bundle extras = (Bundle) XposedHelpers.getAdditionalInstanceField(n, NOTIF_EXTRAS);
+                if (extras == null || !extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) || !(mPm != null && 
+                        !mPm.isScreenOn() && mKm.isKeyguardLocked()))
+                    return;
 
-                    Notification n = (Notification) param.args[Build.VERSION.SDK_INT > 17 ? 4 : 3];
-                    if (((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
-                            (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0) &&
-                            !ls.getOngoing()) {
-                        if (DEBUG) log("Ongoing led control disabled. Ignoring.");
-                        return;
-                    }
+                final ActiveScreenMode asMode = ActiveScreenMode.valueOf(
+                        extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE));
+                final String pkgName = (String) param.args[0];
+                if (DEBUG) log("Performing Active Screen for " + pkgName + " with mode " +
+                        asMode.toString());
 
-                    if (!mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false) &&
-                            mQuietHours.quietHoursActive(ls, n, false)) {
-                        return;
-                    }
-
-                    if (DEBUG) log("Performing Active Screen for " + pkgName);
-                    final LedSettings fls = ls;
-                    mOnPanelRevealedBlocked = fls.getActiveScreenExpanded();
-                    if (mSm != null && mProxSensor != null) {
-                        mSm.registerListener(mProxSensorEventListener, mProxSensor, SensorManager.SENSOR_DELAY_FASTEST);
-                    } else {
-                        performActiveScreen();
-                    }
+                mOnPanelRevealedBlocked = asMode == ActiveScreenMode.EXPAND_PANEL;
+                if (mSm != null && mProxSensor != null &&
+                        extras.getBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE)) {
+                    mSm.registerListener(mProxSensorEventListener, mProxSensor, SensorManager.SENSOR_DELAY_FASTEST);
+                    if (DEBUG) log("Performing active screen using proximity sensor");
+                } else {
+                    performActiveScreen();
                 }
             } catch (Throwable t) {
                 XposedBridge.log(t);

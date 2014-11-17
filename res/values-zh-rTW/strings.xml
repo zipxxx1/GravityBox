@@ -1647,4 +1647,15 @@
     <string name="compat_warning_ok_stage1">我明白了</string>
     <string name="compat_warning_ok_stage2">我真的明白相關風險了!</string>
 
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">主動螢幕喚醒模式</string>
+    <string name="lc_active_screen_mode_disabled">停用</string>
+    <string name="lc_active_screen_mode_nothing">只喚醒螢幕</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">袋中模式</string>
+    <string name="pref_unc_as_pocket_mode_summary">當距離感應器被覆蓋時 (例如當裝置被放在口袋中) 不會喚醒螢幕</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">本選項會被 [電源選項] > [距離感應器喚醒] 選項覆寫</string>
+
 </resources>

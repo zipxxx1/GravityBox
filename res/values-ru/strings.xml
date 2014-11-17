@@ -1698,4 +1698,15 @@
     <string name="compat_warning_ok_stage1">OK. Я понял.</string>
     <string name="compat_warning_ok_stage2">Я ДЕЙСТВИТЕЛЬНО понял!</string>
 
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Режим активного экрана</string>
+    <string name="lc_active_screen_mode_disabled">Отключен</string>
+    <string name="lc_active_screen_mode_nothing">Только включение экрана</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Режим кармана</string>
+    <string name="pref_unc_as_pocket_mode_summary">Экран не включится, если датчик приближения закрыт (например, когда устройство находится в кармане)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Данная опция переопределяется функцией пробуждения при приближении в настройках питания</string>
+
 </resources>

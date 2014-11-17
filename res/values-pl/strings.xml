@@ -1669,4 +1669,15 @@
     <string name="compat_warning_ok_stage1">Rozumiem</string>
     <string name="compat_warning_ok_stage2">Naprawdę rozumiem!</string>
 
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Tryb aktywnego ekranu</string>
+    <string name="lc_active_screen_mode_disabled">Wyłączony</string>
+    <string name="lc_active_screen_mode_nothing">Tylko włącz ekran</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Tryb W kieszeni</string>
+    <string name="pref_unc_as_pocket_mode_summary">Ekran nie włączy się, jeśli czujnik zbliżeniowy jest przykryty (np. gdy urządzenie znajduje się w kieszeni)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Ta opcja jest obecnie zastępowana przez funkcję Wybudzania zbliżeniowego z menu Poprawek ustawień zasilania</string>
+
 </resources>

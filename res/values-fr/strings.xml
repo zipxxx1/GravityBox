@@ -1661,4 +1661,15 @@
     <string name="compat_warning_ok_stage1">OK. J\'ai compris.</string>
     <string name="compat_warning_ok_stage2">J\'ai VRAIMENT compris!</string>
 
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Mode écran actif</string>
+    <string name="lc_active_screen_mode_disabled">Désactivé</string>
+    <string name="lc_active_screen_mode_nothing">Seulement allumer l\'écran</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Mode poche</string>
+    <string name="pref_unc_as_pocket_mode_summary">L\'écran ne s\'allumera pas lorsque le capteur de proximité est couvert (ex: lorsque l\'appareil est dans la poche)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Cette option est actuellement remplacée par l\'option "sortie de veille et proximité" dans les modifications énergie</string>
+
 </resources>

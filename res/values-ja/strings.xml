@@ -1626,4 +1626,10 @@
     <string name="sb_ticker_policy_secured">ロック中は無効化</string>
     <string name="sb_ticker_policy_disabled">常に無効化</string>
 
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">アクティブスクリーンモード</string>
+    <string name="lc_active_screen_mode_disabled">無効</string>
+    <string name="lc_active_screen_mode_nothing">画面点灯のみ</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
 </resources>

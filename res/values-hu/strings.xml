@@ -1678,4 +1678,15 @@
     <string name="compat_warning_ok_stage1">OK. Értettem.</string>
     <string name="compat_warning_ok_stage2">TÉNYLEG értettem!</string>
 
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Aktív Képernyő mód</string>
+    <string name="lc_active_screen_mode_disabled">Letiltva</string>
+    <string name="lc_active_screen_mode_nothing">Csak bekapcsolt képernyőnél</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Zsebben hordás mód</string>
+    <string name="pref_unc_as_pocket_mode_summary">A képernyő nem fog bekapcsolódni, ha a közelség érzékelő takarva van(pl. ha a készülék zsebben van)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Ezt az opciót jelenleg az Energia beállítások menüben lévő Ébresztés közelség érzékelővel funkció felülírja</string>
+
 </resources>

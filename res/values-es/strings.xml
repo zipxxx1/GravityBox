@@ -1643,4 +1643,10 @@
     <string name="sb_ticker_policy_secured">Desactivado con PIN/contraseña/patrón</string>
     <string name="sb_ticker_policy_disabled">Desactivado</string>
 
+    <!-- UNC Active Screen Mode -->
+    <string name="pref_lc_active_screen_mode_title">Modo Pantalla Activa</string>
+    <string name="lc_active_screen_mode_disabled">Desactivado</string>
+    <string name="lc_active_screen_mode_nothing">Solo encender pantalla</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
 </resources>
