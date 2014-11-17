@@ -1380,8 +1380,7 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktivní obrazovka</string>
     <string name="lc_active_screen_info">Funkce aktivní obrazovky slouží k automatickému zapnutí obrazovky po obdržení 
-        každého nového oznámení. To se děje pouze v případě, není-li obrazovka zakryta 
-        (např. pokud není zařízení v kapse nebo v pouzdře). Volitelně dojde k automatickékmu rozbalení lišty oznámení 
+        každého nového oznámení. Volitelně dojde k automatickékmu rozbalení lišty oznámení 
         nebo k zobrazení Heads up v závislosti od aktuální bezpečnostní politiky obrazovky uzamčení. Funkce aktivní obrazovky se použije pouze v případě, 
         pokud je aktivována obrazovka uzamčení. Přepínač níže slouží na hlavní zapnutí/vypnutí funkce. 
         Pokud je funkce zapnuta, další její nastavení budou přístupné na úrovni nastavení jednotlivých aplikací.</string>

@@ -43,6 +43,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -87,6 +88,7 @@ public class ModLedControl {
     private static final String NOTIF_EXTRA_HEADS_UP_ALPHA = "gbHeadsUpAlpha";
     private static final String NOTIF_EXTRA_HEADS_UP_IGNORE_UPDATE = "gbHeadsUpIgnoreUpdate";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
+    private static final String NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE = "gbActiveScreenPocketMode";
     private static final int MSG_SHOW_HEADS_UP = 1026;
     private static final int MSG_HIDE_HEADS_UP = 1027;
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
@@ -106,6 +108,7 @@ public class ModLedControl {
     private static Map<String, Long> mNotifTimestamps = new HashMap<String, Long>();
     private static boolean mUserPresent;
     private static Object mNotifManagerService;
+    private static boolean mProximityWakeUpEnabled;
 
     private static BroadcastReceiver mScreenOffReceiver = new BroadcastReceiver() {
         @Override
@@ -170,6 +173,10 @@ public class ModLedControl {
                 mUserPresent = false;
             } else if (action.equals(ACTION_CLEAR_NOTIFICATIONS)) {
                 clearNotifications();
+            } else if (action.equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
+                    intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
+                mProximityWakeUpEnabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false);
             }
         }
     };
@@ -178,12 +185,14 @@ public class ModLedControl {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static void initZygote() {
+    public static void initZygote(final XSharedPreferences mainPrefs) {
         mPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
         mPrefs.makeWorldReadable();
         mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
         mQhPrefs.makeWorldReadable();
         mQuietHours = new QuietHours(mQhPrefs);
+
+        mProximityWakeUpEnabled = mainPrefs.getBoolean(GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false);
 
         try {
             XposedHelpers.findAndHookMethod(NotificationManager.class, "notify",
@@ -234,6 +243,7 @@ public class ModLedControl {
                         intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
                         intentFilter.addAction(ACTION_CLEAR_NOTIFICATIONS);
+                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                         toggleActiveScreenFeature(!mPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
@@ -413,6 +423,8 @@ public class ModLedControl {
                             !qhActiveIncludingActiveScreen && !isOngoing && mPm != null && mKm.isKeyguardLocked()) {
                         n.extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
                                 ls.getActiveScreenMode().toString());
+                        n.extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE, !mProximityWakeUpEnabled &&
+                                mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true));
                         if (ls.getActiveScreenMode() == ActiveScreenMode.HEADS_UP) {
                             n.extras.putInt(NOTIF_EXTRA_HEADS_UP_GRAVITY, Integer.valueOf(
                                     mPrefs.getString(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_POSITION, "17")));
@@ -446,8 +458,10 @@ public class ModLedControl {
                         asMode.toString());
 
                 mOnPanelRevealedBlocked = asMode == ActiveScreenMode.EXPAND_PANEL;
-                if (mSm != null && mProxSensor != null) {
+                if (mSm != null && mProxSensor != null &&
+                        n.extras.getBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE)) {
                     mSm.registerListener(mProxSensorEventListener, mProxSensor, SensorManager.SENSOR_DELAY_FASTEST);
+                    if (DEBUG) log("Performing active screen using proximity sensor");
                 } else {
                     performActiveScreen();
                 }
@@ -499,7 +513,12 @@ public class ModLedControl {
         if (mOnPanelRevealedBlocked) {
             mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS));
         }
-        mPm.wakeUp(SystemClock.uptimeMillis());
+        long ident = Binder.clearCallingIdentity();
+        try {
+            mPm.wakeUp(SystemClock.uptimeMillis());
+        } finally {
+            Binder.restoreCallingIdentity(ident);
+        }
     }
 
     private static void clearNotifications() {

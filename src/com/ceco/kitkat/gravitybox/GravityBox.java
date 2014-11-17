@@ -81,7 +81,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModNavigationBar.initZygote(prefs);
         }
 
-        ModLedControl.initZygote();
+        ModLedControl.initZygote(prefs);
         ModPower.initZygote(prefs);
 
         if (!Utils.hasLenovoVibeUI() &&

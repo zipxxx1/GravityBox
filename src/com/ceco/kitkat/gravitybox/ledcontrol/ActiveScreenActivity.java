@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 
@@ -46,6 +47,7 @@ public class ActiveScreenActivity extends Activity {
     public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
         private SharedPreferences mPrefs;
         private ListPreference mPrefHeadsupPosition;
+        private CheckBoxPreference mPrefPocketMode;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class ActiveScreenActivity extends Activity {
 
             mPrefHeadsupPosition = (ListPreference) findPreference(
                     LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_POSITION);
+            mPrefPocketMode = (CheckBoxPreference) findPreference(
+                    LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE);
 
             if (!LedSettings.isHeadsUpEnabled(getActivity())) {
                 getPreferenceScreen().removePreference(
@@ -66,6 +70,11 @@ public class ActiveScreenActivity extends Activity {
                 getPreferenceScreen().removePreference(mPrefHeadsupPosition);
                 getPreferenceScreen().removePreference(
                         findPreference(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA));
+            }
+
+            if (LedSettings.isProximityWakeUpEnabled(getActivity())) {
+                mPrefPocketMode.setSummary(R.string.pref_unc_as_pocket_mode_summary_overriden);
+                mPrefPocketMode.setEnabled(false);
             }
         }
 

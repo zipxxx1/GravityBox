@@ -1411,8 +1411,7 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Active Screen</string>
     <string name="lc_active_screen_info">Active Screen feature automatically turns on screen every 
-        time new notification arrives. This will happen only in case screen is not covered 
-        (e.g. when device is not in the pocket). It optionally expands notification panel or shows heads up depending on 
+        time new notification arrives. It optionally expands notification panel or shows heads up depending on 
         the current lock screen security policy and user preference. Be aware that Active Screen requires lock screen
         to be enabled.\nThe switch below is a master switch. After it\'s enabled, 
         additional configuration can be done on per-app basis</string>
@@ -1821,5 +1820,10 @@
         see <a href="http://forum.xda-developers.com/showthread.php?t=2554049">the support thread at XDA</a>.</string>
     <string name="compat_warning_ok_stage1">OK. I got it.</string>
     <string name="compat_warning_ok_stage2">I REALLY got it!</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Pocket mode</string>
+    <string name="pref_unc_as_pocket_mode_summary">Won\'t turn screen on when proximity sensor is covered (e.g. when device is in the pocket)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">This option is currently overriden by Proximity wake-up feature in Power tweaks</string>
 
 </resources>

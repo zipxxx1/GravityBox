@@ -21,6 +21,13 @@
         android:defaultValue="false" />
 
     <CheckBoxPreference
+        android:key="pref_unc_as_pocket_mode"
+        android:title="@string/pref_unc_as_pocket_mode_title"
+        android:summary="@string/pref_unc_as_pocket_mode_summary"
+        android:defaultValue="true"
+        android:dependency="activeScreenEnabled" />
+
+    <CheckBoxPreference
         android:key="pref_unc_as_ignore_quiet_hours"
         android:title="@string/pref_lc_qh_ignore_title"
         android:defaultValue="false"

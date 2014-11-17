@@ -33,6 +33,7 @@ public class LedSettings {
     public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_POSITION = "pref_unc_as_headsup_position";
     public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA = "pref_unc_as_headsup_alpha";
     public static final String PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS = "pref_unc_as_ignore_quiet_hours";
+    public static final String PREF_KEY_ACTIVE_SCREEN_POCKET_MODE = "pref_unc_as_pocket_mode";
 
     public static final String ACTION_UNC_SETTINGS_CHANGED = "gravitybox.intent.action.UNC_SETTINGS_CHANGED";
     public static final String EXTRA_UNC_AS_ENABLED = "uncActiveScreenEnabled";
@@ -205,6 +206,18 @@ public class LedSettings {
             SharedPreferences prefs = context.getSharedPreferences(
                     prefsName, Context.MODE_WORLD_READABLE);
             return prefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_MASTER_SWITCH, false);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return false;
+        }
+    }
+
+    protected static boolean isProximityWakeUpEnabled(Context context) {
+        try {
+            final String prefsName = context.getPackageName() + "_preferences";
+            SharedPreferences prefs = context.getSharedPreferences(
+                    prefsName, Context.MODE_WORLD_READABLE);
+            return prefs.getBoolean(GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false);
         } catch (Throwable t) {
             t.printStackTrace();
             return false;
