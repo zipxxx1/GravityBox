@@ -421,14 +421,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Μέγεθος ενεργοποίησης</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Διαχείριση διαφάνειας</string>
-    <string name="pref_cat_transparency_manager_summary">Διαχείριση διαφάνειας για την γραμμή κατάστασης και για την γραμμή πλοήγησης</string>
-    <string name="pref_tm_statusbar_launcher_title">Διαφ. γραμ. καταστ. για την αρχική οθόνη</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Διαφ. γραμ. καταστ. για το κλείδ. οθόνης</string>
-    <string name="pref_tm_navbar_launcher_title">Διαφ. γραμ. πλοήγησης για την αρχική οθόνη</string>
-    <string name="pref_tm_navbar_lockscreen_title">Διαφ. γραμ. πλοήγησης για το κλείδ. οθόνης</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Απόκρυψη εικονίδιου ξυπνητηριού</string>
 

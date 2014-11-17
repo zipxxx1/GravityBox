@@ -428,14 +428,6 @@
     
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Taille de la gâchette</string>
-    
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Gestion de la transparence</string>
-    <string name="pref_cat_transparency_manager_summary">Gère la transparence de la barre d\'état et de la barre de navigation</string>
-    <string name="pref_tm_statusbar_launcher_title">Barre d\'état du lanceur</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Barre d\'état de l\'écran de déverrouillage</string>
-    <string name="pref_tm_navbar_launcher_title">Barre de navigation du lanceur</string>
-    <string name="pref_tm_navbar_lockscreen_title">Barre de navigation de l\'écran de déverrouillage</string>
 
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Masquer l\'icône de l\'alarme</string>

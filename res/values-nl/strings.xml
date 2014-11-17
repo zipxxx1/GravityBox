@@ -423,14 +423,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Trigger size</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Transparency management</string>
-    <string name="pref_cat_transparency_manager_summary">Manages transparency for statusbar and navigation bar</string>
-    <string name="pref_tm_statusbar_launcher_title">Statusbar for launcher</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Statusbar for lockscreen</string>
-    <string name="pref_tm_navbar_launcher_title">Navbar for launcher</string>
-    <string name="pref_tm_navbar_lockscreen_title">Navbar for lockscreen</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Hide alarm icon</string>
 

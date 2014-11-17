@@ -429,14 +429,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Kioldógomb méret</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Átlátszóság menedzsment</string>
-    <string name="pref_cat_transparency_manager_summary">Állapotsáv és Navigációs sáv átlátszóságának kezelése</string>
-    <string name="pref_tm_statusbar_launcher_title">Állapotsáv Indítónál</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Állapotsáv Zárképernyőnél</string>
-    <string name="pref_tm_navbar_launcher_title">Navigációs sáv Indítónál</string>
-    <string name="pref_tm_navbar_lockscreen_title">Navigációs sáv Zárképernyőnél</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Ébresztő ikon elrejtése</string>
 

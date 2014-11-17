@@ -423,14 +423,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Saiz kawasan</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Tetapan transparent</string>
-    <string name="pref_cat_transparency_manager_summary">Tetapan transparent untuk status dan bar navigasi</string>
-    <string name="pref_tm_statusbar_launcher_title">Statusbar untuk launcher</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Statusbar untuk skrinkunci</string>
-    <string name="pref_tm_navbar_launcher_title">Bar navigasi untuk launcher</string>
-    <string name="pref_tm_navbar_lockscreen_title">Bar navigasi untuk lockscreen</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Sembunyikan icon Alarm</string>
 

@@ -411,14 +411,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Alterar tamanho</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Configurações de transparências</string>
-    <string name="pref_cat_transparency_manager_summary">Configurar a transparência da barra de status e da barra de navegação</string>
-    <string name="pref_tm_statusbar_launcher_title">Barra de status no inicializador</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Barra de status na tela de bloqueio</string>
-    <string name="pref_tm_navbar_launcher_title">Barra de navegação no inicializador</string>
-    <string name="pref_tm_navbar_lockscreen_title">Barra de navegação na tela de bloqueio</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Esconder indicador de alarme</string>
 

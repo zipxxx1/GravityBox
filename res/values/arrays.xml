@@ -678,20 +678,6 @@
         <item>2</item>
     </string-array>
 
-    <string-array name="tm_mode_entries" translatable="false">
-        <item>@string/tm_mode_disabled</item>
-        <item>@string/tm_mode_statusbar</item>
-        <item>@string/tm_mode_navbar</item>
-        <item>@string/tm_mode_full</item>
-    </string-array>
-
-    <string-array name="tm_mode_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
     <string-array name="status_icon_style_entries" translatable="false">
         <item>@string/icon_style_jb</item>
         <item>@string/icon_style_kk</item>

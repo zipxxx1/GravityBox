@@ -256,11 +256,6 @@
     <string name="pref_clock_ampm_hide_title">Ховати AM/PM</string>
     <string name="pref_clock_hide_title">Ховати годинник</string>
     <string name="pie_control_trigger_size_title">Розмір перемикачів</string>
-    <string name="pref_cat_transparency_manager_title">Управління прозорістю</string>
-    <string name="pref_tm_statusbar_launcher_title">Статусбар для головного екрану</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Статусбара для екрану блокування</string>
-    <string name="pref_tm_navbar_launcher_title">Панель навігації для ланчера</string>
-    <string name="pref_tm_navbar_lockscreen_title">Панель наві. для екрану блокування</string>
     <string name="pref_alarm_icon_hide_title">Заховати значок будильника</string>
     <string name="pref_screen_dim_level_title">Рівень загасання підсвічування</string>
     <string name="pref_screen_dim_level_summary">Яскравість для приглушеної підсвічування - коли екран майже вимк.ючився (необхідне перезавантаження)</string>

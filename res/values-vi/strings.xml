@@ -396,13 +396,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Kích cỡ</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Quản lý trong suốt</string>
-    <string name="pref_tm_statusbar_launcher_title">Thanh trạng thái trong suốt trong launcher</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Thanh trạng thái trong suốt trong màn hình khóa</string>
-    <string name="pref_tm_navbar_launcher_title">Trong suốt bảng điều hướng trong launcher</string>
-    <string name="pref_tm_navbar_lockscreen_title">Trong suốt bảng điều hướng trong lockscreen</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Ẩn biểu tượng báo thức</string>
 

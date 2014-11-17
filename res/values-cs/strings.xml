@@ -403,14 +403,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Velikost aktivátoru</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Nastavení průhlednosti</string>
-    <string name="pref_cat_transparency_manager_summary">Umožňuje nastavení úrovně průhlednosti pro stavový řádek a navigační lištu</string>
-    <string name="pref_tm_statusbar_launcher_title">Stavový řádek pro launcher</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Stavový řádek pro lockscreen</string>
-    <string name="pref_tm_navbar_launcher_title">Navigační lišta pro launcher</string>
-    <string name="pref_tm_navbar_lockscreen_title">Navigační lišta pro lockscreen</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Skrýt ikonu alarmu</string>
 

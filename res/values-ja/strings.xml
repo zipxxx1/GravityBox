@@ -414,14 +414,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">起動領域のサイズ</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">透過度管理</string>
-    <string name="pref_cat_transparency_manager_summary">ステータスバーとナビバーの透過度を設定します。</string>
-    <string name="pref_tm_statusbar_launcher_title">ホームアプリでのステータスバーの透過度</string>
-    <string name="pref_tm_statusbar_lockscreen_title">ロック画面でのステータスバーの透過度</string>
-    <string name="pref_tm_navbar_launcher_title">ホームアプリでのナビバーの透過度</string>
-    <string name="pref_tm_navbar_lockscreen_title">ロック画面でのナビバーの透過度</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">アラームアイコンを非表示</string>
 

@@ -329,13 +329,6 @@
 
     <string name="pie_control_trigger_size_title">트리거 크기</string>
 
-    <string name="pref_cat_transparency_manager_title">투명도 관리</string>
-    <string name="pref_cat_transparency_manager_summary">상단바와 네비게이션 바의 투명도를 관리합니다.</string>
-    <string name="pref_tm_statusbar_launcher_title">런처에서의 상단바 투명도</string>
-    <string name="pref_tm_statusbar_lockscreen_title">잠금 화면에서의 상단바 투명도</string>
-    <string name="pref_tm_navbar_launcher_title">런처에서의 네비게이션 바 투명도</string>
-    <string name="pref_tm_navbar_lockscreen_title">잠금 화면에서의 네비게이션 바 투명도</string>
-
     <string name="pref_alarm_icon_hide_title">알람 아이콘 숨기기</string>
 
     <string name="pref_screen_dim_level_title">화면 Dim 레벨</string>

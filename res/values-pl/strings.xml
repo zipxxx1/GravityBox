@@ -413,14 +413,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Wielkość przełącznika Pie</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Ustawienia przezroczystości</string>
-    <string name="pref_cat_transparency_manager_summary">Zarządza przezroczystością paska statusu i paska nawigacyjnego</string>
-    <string name="pref_tm_statusbar_launcher_title">Pasek statusu startera</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Pasek statusu ekranu blokady</string>
-    <string name="pref_tm_navbar_launcher_title">Pasek nawigacji startera</string>
-    <string name="pref_tm_navbar_lockscreen_title">Pasek nawigacji ekranu blokady</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Ukryj ikonę alarmu</string>
 

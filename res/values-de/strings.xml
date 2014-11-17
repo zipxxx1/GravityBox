@@ -421,14 +421,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Auslösungsbereich</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Transparenzeinstellungen</string>
-        <string name="pref_cat_transparency_manager_summary">Regelt die Transparenz der Benachrichtigungs- und Navigationsleiste</string>
-    <string name="pref_tm_statusbar_launcher_title">Benachrichtigungsleiste im Launcher</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Benachrichtigungsleiste im Sperrbildschirm</string>
-    <string name="pref_tm_navbar_launcher_title">Navigationsleiste im Launcher</string>
-    <string name="pref_tm_navbar_lockscreen_title">Navigationsleiste im Sperrbildschirm</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Wecker-Symbol verstecken</string>
 

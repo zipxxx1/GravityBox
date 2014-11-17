@@ -397,13 +397,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">حجم المشغل</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">إدارة الشفافية</string>
-    <string name="pref_tm_statusbar_launcher_title">شفافية شريط الحالة في الشاشة الرئيسية</string>
-    <string name="pref_tm_statusbar_lockscreen_title">شفافية شريط الحالة في شاشة القفل</string>
-    <string name="pref_tm_navbar_launcher_title">شفافية شريط التنقل في الشاشة الرئيسية</string>
-    <string name="pref_tm_navbar_lockscreen_title">شفافية شريط التنقل في شاشة القفل</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">اخفاء أيقونة المنبه</string>
 

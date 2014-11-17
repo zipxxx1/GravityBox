@@ -429,14 +429,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">觸發位置大小</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">透明度調整</string>
-    <string name="pref_cat_transparency_manager_summary">包含導航列與狀態列透明度選項</string>
-    <string name="pref_tm_statusbar_launcher_title">啟動器下的狀態列</string>
-    <string name="pref_tm_statusbar_lockscreen_title">鎖定畫面下的狀態列</string>
-    <string name="pref_tm_navbar_launcher_title">啟動器下的導航列</string>
-    <string name="pref_tm_navbar_lockscreen_title">鎖定畫面下的導航列</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">隱藏鬧鐘圖示</string>
 

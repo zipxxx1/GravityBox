@@ -414,14 +414,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">גודל איזור הפעלה</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">ניהול שקיפויות</string>
-    <string name="pref_cat_transparency_manager_summary">מאפשר ניהול שקיפויות עבור שורת המצב ומגירת ההתראות</string>
-    <string name="pref_tm_statusbar_launcher_title">שורת מצב עבור לאונצ\'ר</string>
-    <string name="pref_tm_statusbar_lockscreen_title">שורת מצב עבור מסך הנעילה</string>
-    <string name="pref_tm_navbar_launcher_title">סרגל ניווט עבור לאונצ\'ר</string>
-    <string name="pref_tm_navbar_lockscreen_title">סרגל ניווט עבור מסך הנעילה</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">הסתר אייקון של שעון מעורר</string>
 

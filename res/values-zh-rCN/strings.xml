@@ -429,14 +429,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">触发位置大小</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">透明度调整</string>
-    <string name="pref_cat_transparency_manager_summary">包含各种与状态栏和虚拟按键透明度相关的调整选项</string>
-    <string name="pref_tm_statusbar_launcher_title">启动器下的状态栏透明度</string>
-    <string name="pref_tm_statusbar_lockscreen_title">锁屏画面时的状态栏透明度</string>
-    <string name="pref_tm_navbar_launcher_title">启动器下的虚拟按键透明度</string>
-    <string name="pref_tm_navbar_lockscreen_title">锁屏画面时的虚拟按键透明度</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">隐藏闹钟图标</string>
 

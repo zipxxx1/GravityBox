@@ -403,14 +403,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Besar pemicu</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Manajemen transparansi</string>
-    <string name="pref_cat_transparency_manager_summary">Mengatur transparansi untuk statusbar dan navbar</string>
-    <string name="pref_tm_statusbar_launcher_title">Statusbar untuk launcher</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Statusbar untuk lockscreen</string>
-    <string name="pref_tm_navbar_launcher_title">Navbar untuk launcher</string>
-    <string name="pref_tm_navbar_lockscreen_title">Navbar untuk lockscreen</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Sembunyikan ikon alarm</string>
 

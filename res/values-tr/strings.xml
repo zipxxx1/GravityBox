@@ -397,13 +397,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Tetikleyici boyutu</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Saydamlık yönetimi</string>
-    <string name="pref_tm_statusbar_launcher_title">Başlatıcı için durum çubuğu saydamlığı</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Kilit ekranı için durum çubuğu saydamlığı</string>
-    <string name="pref_tm_navbar_launcher_title">Başlatıcı için gezinme çubuğu saydamlığı</string>
-    <string name="pref_tm_navbar_lockscreen_title">Kilit ekranı için gezinme çubuğu saydamlığı</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Alarm simgesini gizle</string>
 

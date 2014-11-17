@@ -196,12 +196,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_STATUSBAR_CLOCK_LONGPRESS_LINK = "pref_clock_longpress_link";
     public static final String PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH = "pref_sb_clock_masterswitch";
     public static final String PREF_KEY_ALARM_ICON_HIDE = "pref_alarm_icon_hide";
-    public static final String PREF_CAT_KEY_TRANSPARENCY_MANAGER = "pref_cat_transparency_manager";
-    public static final String PREF_KEY_TM_MODE = "pref_tm_mode";
-    public static final String PREF_KEY_TM_STATUSBAR_LAUNCHER = "pref_tm_statusbar_launcher";
-    public static final String PREF_KEY_TM_STATUSBAR_LOCKSCREEN = "pref_tm_statusbar_lockscreen";
-    public static final String PREF_KEY_TM_NAVBAR_LAUNCHER = "pref_tm_navbar_launcher";
-    public static final String PREF_KEY_TM_NAVBAR_LOCKSCREEN = "pref_tm_navbar_lockscreen";
 
     public static final String PREF_CAT_KEY_ABOUT = "pref_cat_about";
     public static final String PREF_KEY_ABOUT_GRAVITYBOX = "pref_about_gb";
@@ -528,10 +522,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_SB_DATA_ACTIVITY_COLOR = "dataActivityColor";
     public static final String EXTRA_SB_DATA_ACTIVITY_COLOR_SECONDARY = "dataActivityColorSecondary";
     public static final String EXTRA_SB_SIGNAL_COLOR_MODE = "signalColorMode";
-    public static final String EXTRA_TM_SB_LAUNCHER = "tmSbLauncher";
-    public static final String EXTRA_TM_SB_LOCKSCREEN = "tmSbLockscreen";
-    public static final String EXTRA_TM_NB_LAUNCHER = "tmNbLauncher";
-    public static final String EXTRA_TM_NB_LOCKSCREEN = "tmNbLockscreen";
 
     public static final String ACTION_PREF_QUICKSETTINGS_CHANGED = "gravitybox.intent.action.QUICKSETTINGS_CHANGED";
     public static final String EXTRA_QS_PREFS = "qsPrefs";
@@ -846,7 +836,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_NAVBAR_ENABLE,
             PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE,
             PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
-            PREF_KEY_TM_MODE,
             PREF_KEY_QUICK_SETTINGS_ENABLE,
             PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE,
             PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY,
@@ -1276,14 +1265,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefCallerUnknownPhotoEnable;
         private Preference mPrefCallerUnknownPhoto;
         private ListPreference mPrefCallerFullscreenPhoto;
-        private SeekBarPreference mPrefTmSbLauncher;
-        private SeekBarPreference mPrefTmSbLockscreen;
-        private SeekBarPreference mPrefTmNbLauncher;
-        private SeekBarPreference mPrefTmNbLockscreen;
         private PreferenceScreen mPrefCatStatusbarColors;
         private ColorPickerPreference mPrefSbIconColorSecondary;
         private ColorPickerPreference mPrefSbDaColorSecondary;
-        private PreferenceScreen mPrefCatTransparencyManager;
         private ListPreference mPrefHwKeyLockscreenTorch;
         private PreferenceCategory mPrefCatHwKeyOthers;
         private PreferenceCategory mPrefCatLsSlidingChallenge;
@@ -1586,12 +1570,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
             }
 
-            mPrefCatTransparencyManager = (PreferenceScreen) findPreference(PREF_CAT_KEY_TRANSPARENCY_MANAGER);
-            mPrefTmSbLauncher = (SeekBarPreference) findPreference(PREF_KEY_TM_STATUSBAR_LAUNCHER);
-            mPrefTmSbLockscreen = (SeekBarPreference) findPreference(PREF_KEY_TM_STATUSBAR_LOCKSCREEN);
-            mPrefTmNbLauncher = (SeekBarPreference) findPreference(PREF_KEY_TM_NAVBAR_LAUNCHER);
-            mPrefTmNbLockscreen = (SeekBarPreference) findPreference(PREF_KEY_TM_NAVBAR_LOCKSCREEN);
-
             mPrefSbIconColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY);
             mPrefSbDaColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY);
 
@@ -1771,9 +1749,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
             }
-
-            // TODO: rework for KitKat compatibility
-            getPreferenceScreen().removePreference(mPrefCatTransparencyManager);
 
             // Features not relevant for KitKat but keep them for potential future use
             mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
@@ -2608,18 +2583,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                 intent.putExtra(EXTRA_SB_SIGNAL_COLOR_MODE,
                         Integer.valueOf(prefs.getString(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "1")));
-            } else if (key.equals(PREF_KEY_TM_STATUSBAR_LAUNCHER)) {
-                intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
-                intent.putExtra(EXTRA_TM_SB_LAUNCHER, prefs.getInt(PREF_KEY_TM_STATUSBAR_LAUNCHER, 0));
-            } else if (key.equals(PREF_KEY_TM_STATUSBAR_LOCKSCREEN)) {
-                intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
-                intent.putExtra(EXTRA_TM_SB_LOCKSCREEN, prefs.getInt(PREF_KEY_TM_STATUSBAR_LOCKSCREEN, 0));
-            } else if (key.equals(PREF_KEY_TM_NAVBAR_LAUNCHER)) {
-                intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
-                intent.putExtra(EXTRA_TM_NB_LAUNCHER, prefs.getInt(PREF_KEY_TM_NAVBAR_LAUNCHER, 0));
-            } else if (key.equals(PREF_KEY_TM_NAVBAR_LOCKSCREEN)) {
-                intent.setAction(ACTION_PREF_STATUSBAR_COLOR_CHANGED);
-                intent.putExtra(EXTRA_TM_NB_LOCKSCREEN, prefs.getInt(PREF_KEY_TM_NAVBAR_LOCKSCREEN, 0));
             } else if (key.equals(PREF_KEY_STATUSBAR_CENTER_CLOCK)) {
                 intent.setAction(ACTION_PREF_CLOCK_CHANGED);
                 intent.putExtra(EXTRA_CENTER_CLOCK, 

@@ -429,14 +429,6 @@
     <!-- Pie trigger size -->
     <string name="pie_control_trigger_size_title">Tamaño del accionador</string>
 
-    <!-- Transparency management -->
-    <string name="pref_cat_transparency_manager_title">Ajustes de transparencia</string>
-    <string name="pref_cat_transparency_manager_summary">Ajusta la transparencia de la barra de estado y barra de navegación</string>
-    <string name="pref_tm_statusbar_launcher_title">Barra de estado en lanzador</string>
-    <string name="pref_tm_statusbar_lockscreen_title">Barra de estado en pantalla de bloqueo</string>
-    <string name="pref_tm_navbar_launcher_title">Barra de navegación en lanzador</string>
-    <string name="pref_tm_navbar_lockscreen_title">Barra de navegación en pantalla de bloqueo</string>
-
     <!-- Hide alarm icon -->
     <string name="pref_alarm_icon_hide_title">Ocultar icono de alarma</string>
 
