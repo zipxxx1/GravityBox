@@ -1777,4 +1777,14 @@
     <!-- Messaging -->
     <string name="pref_cat_phone_messaging_title">Správy</string>
 
+    <!-- Compatibility warning -->
+    <string name="compat_warning_title">UPOZORNENIE</string>
+    <string name="compat_warning_message">LEN PRE ZARIADENIA S ČISTÝM ALEBO GOOGLE PLAY EDITION ANDROIDOM!\n\nPoužitie na brandovaných
+        systémoch ako TouchWiz, Sense, Xperia, rovnako ako na akejkoľvek "custom" ROM, nie je podporované a môže spôsobiť neočakávané výsledky.\n\nV prípade,
+        ak sa rozhodnete pokračovať napriek tomu, že Vaše zariadenie nie je oficiálne podporované, robíte tak na vlastné riziko a bez
+        nároku na akúkoľvek podporu. Pre podrobnejšie informácie ohľadom kompatibility, navštívte
+        <a href="http://forum.xda-developers.com/showthread.php?t=2554049">stránky podpory na XDA</a>.</string>
+    <string name="compat_warning_ok_stage1">Beriem na vedomie</string>
+    <string name="compat_warning_ok_stage2">Už neotravovať!</string>
+
 </resources>
