@@ -1778,4 +1778,18 @@
     <!-- Messaging -->
     <string name="pref_cat_phone_messaging_title">Wiadomości</string>
 
+   <!-- Compatibility warning -->
+    <string name="compat_warning_title">OSTRZEŻENIE</string>
+    <string name="compat_warning_message">TYLKO DO STOSOWANIA NA NIEZMODYFIKOWANEJ WERSJI ANDROIDA LUB URZĄDZENIACH GOOGLE PLAY EDITION!\n\nStosowanie na modyfikowanych systemach
+        takich jak TouchWiz, Sense, Xperia lub każdej innej niestandardowej wersji ROM,  może przynieść nieoczekiwane rezultaty.\n\nJeśli zdecydujesz się kontynuować
+        pomimo faktu, że urządzenie nie jest oficjalnie obsługiwane, robisz to na własne ryzyko i bez gwarancji jakiegokolwiek wsparcia. Więcej informacji na temat zgodności
+        można znaleźć w <a href="http://forum.xda-developers.com/showthread.php?t=2554049">wątku wsparcia z XDA</a>.</string>
+    <string name="compat_warning_ok_stage1">Rozumiem</string>
+    <string name="compat_warning_ok_stage2">Naprawdę rozumiem!</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Tryb W kieszeni</string>
+    <string name="pref_unc_as_pocket_mode_summary">Ekran nie włączy się, jeśli czujnik zbliżeniowy jest przykryty (np. gdy urządzenie znajduje się w kieszeni)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Ta opcja jest obecnie zastępowana przez funkcję Wybudzania zbliżeniowego z menu Poprawek ustawień zasilania</string>
+
 </resources>
