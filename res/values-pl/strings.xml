@@ -1379,8 +1379,7 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktywny Ekran</string>
     <string name="lc_active_screen_info">Funkcja ta automatycznie włącza ekran za każdym razem 
-        gdy dotrze nowe powiadomienie. Stanie się tak tylko w przypadku, gdy ekran nie jest przykryty 
-        (np. gdy urządzenie nie jest w kieszeni). Opcjonalnie rozwija panel powiadomień w zależności 
+        gdy dotrze nowe powiadomienie. Opcjonalnie rozwija panel powiadomień w zależności 
         od bieżącej polityki bezpieczeństwa blokady ekranu i preferencji użytkownika. Należy pamiętać, że Aktywny Ekran
         wymaga włączenia blokady ekranu.\nPrzełącznik poniżej jest głównym wyłącznikiem. 
         Po włączeniu go dodatkowa konfiguracja może być wykonana na bazie danej aplikacji.</string>
