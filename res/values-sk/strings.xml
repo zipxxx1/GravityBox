@@ -975,7 +975,7 @@
 
     <!-- Navbar: always on bottom -->
     <string name="pref_navbar_always_on_bottom_title">Vždy na spodku</string>
-    <string name="pref_navbar_always_on_bottom_summary">Vynúti zobrazenie navigačnej lišty na spodku obrazovky v režime na šírku (vyžaduje reštart)</string>
+    <string name="pref_navbar_always_on_bottom_summary">EXPERIMENTÁLNE! Vynúti zobrazenie navigačnej lišty na spodku obrazovky v režime na šírku (vyžaduje reštart)</string>
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Prehodiť s menu tlačidlom</string>

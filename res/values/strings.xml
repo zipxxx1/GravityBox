@@ -1005,7 +1005,7 @@
 
     <!-- Navbar: always on bottom -->
     <string name="pref_navbar_always_on_bottom_title">Always on bottom</string>
-    <string name="pref_navbar_always_on_bottom_summary">Forces navbar to be on bottom for landscape orientation (requires reboot)</string>
+    <string name="pref_navbar_always_on_bottom_summary">EXPERIMENTAL! Forces navbar to be on bottom for landscape orientation (requires reboot)</string>
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Swap with menu key</string>
