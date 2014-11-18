@@ -1783,4 +1783,13 @@
     <string name="compat_warning_ok_stage1">Beru na vědomí</string>
     <string name="compat_warning_ok_stage2">Už neotravovat!</string>
 
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Použít senzor přiblížení</string>
+    <string name="pref_unc_as_pocket_mode_summary">Nezapne obrazovku, pokud je senzor přiblížení zakryt (např. je-li zařízení v kapse)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Toto nastavení je momentálně obcházeno funkcí nechtěného probuzení v nastavení napájení</string>
+
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">Režim pro leváky</string>
+    <string name="pref_navbar_left_handed_summary">EXPERIMENTÁLNÍ! Umístí vertikální navigační lištu na levou stranu obrazovky v režimu na šířku (vyžaduje restart)</string>
+
 </resources>
