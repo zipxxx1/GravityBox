@@ -44,6 +44,7 @@ public class ModExpandedDesktop {
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
     private static final String CLASS_POLICY_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
     private static final String CLASS_IMMERSIVE_MODE_CONFIRM = "com.android.internal.policy.impl.ImmersiveModeConfirmation";
+    private static final String CLASS_SYSTEM_GESTURE = "com.android.internal.policy.impl.SystemGesturesPointerEventListener";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
@@ -88,6 +89,11 @@ public class ModExpandedDesktop {
     private static boolean mClearedBecauseOfForceShow;
     private static Unhook mGetSystemUiVisibilityHook;
     private static List<String> mLoggedErrors = new ArrayList<String>();
+    private static boolean mNavbarLeftHanded;
+    private static int mAnimDockRightExit;
+    private static int mAnimDockRightEnter;
+    private static int mAnimDockLeftExit;
+    private static int mAnimDockLeftEnter;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -231,6 +237,9 @@ public class ModExpandedDesktop {
                         (float) prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE, 100) / 100f;
                 mNavbarWidthScaleFactor = 
                         (float) prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_WIDTH, 100) / 100f;
+                mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
+                        !prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM, false) &&
+                        prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
             }
 
             mExpandedDesktopMode = GravityBoxSettings.ED_DISABLED;
@@ -256,6 +265,15 @@ public class ModExpandedDesktop {
                             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
                         }
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+
+                        mAnimDockRightExit = mContext.getResources().getIdentifier(
+                                "dock_right_exit", "anim", "android");
+                        mAnimDockRightEnter = mContext.getResources().getIdentifier(
+                                "dock_right_enter", "anim", "android");
+                        mAnimDockLeftExit = mContext.getResources().getIdentifier(
+                                "dock_left_exit", "anim", "android");
+                        mAnimDockLeftEnter = mContext.getResources().getIdentifier(
+                                "dock_left_enter", "anim", "android");
 
                         mSettingsObserver = new SettingsObserver(
                                 (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler"));
@@ -329,7 +347,7 @@ public class ModExpandedDesktop {
                     boolean.class, int.class, int.class, int.class, new XC_MethodReplacement() {
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!isImmersiveModeActive()) {
+                    if (!isImmersiveModeActive() && !(mNavbarLeftHanded && !isNavbarHidden())) {
                         return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                     }
 
@@ -492,6 +510,40 @@ public class ModExpandedDesktop {
                                         // we can tell the app that it is covered by it.
                                         setInt("mSystemBottom", val);
                                     }
+                                } else if (mNavbarLeftHanded && !isNavbarHidden()) {
+                                    // Landscape screen; nav bar goes to the left.
+                                    int right = overscanLeft + 
+                                            getIntArray("mNavigationBarWidthForRotation")[displayRotation];
+                                    getRect("mTmpNavigationFrame").set(0, 0, right, displayHeight);
+                                    val = getRect("mTmpNavigationFrame").right;
+                                    setInt("mStableLeft", val);
+                                    if (!isNavbarImmersive()) {
+                                        setInt("mStableFullscreenLeft", val);
+                                    }
+                                    if (transientNavBarShowing
+                                            || (navVisible && isNavbarImmersive())) {
+                                        XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
+                                    } else if (navVisible) {
+                                        XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", true);
+                                        setInt("mDockLeft", val);
+                                        setInt("mRestrictedScreenLeft", getInt("mDockLeft"));
+                                        setInt("mRestrictedScreenWidth", getInt("mDockRight") - 
+                                                getInt("mRestrictedScreenLeft"));
+                                        setInt("mRestrictedOverscanScreenLeft", getInt("mRestrictedScreenLeft"));
+                                        setInt("mRestrictedOverscanScreenWidth", getInt("mDockRight")
+                                                - getInt("mRestrictedOverscanScreenLeft"));
+                                    } else {
+                                        // We currently want to hide the navigation UI.
+                                        XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", false);
+                                    }
+
+                                    if (navVisible && !navTranslucent && !(Boolean)XposedHelpers.callMethod(navBar, "isAnimatingLw")
+                                            && !(Boolean)XposedHelpers.callMethod(navBarCtrl, "wasRecentlyTranslucent")) {
+                                        // If the nav bar is currently requested to be visible,
+                                        // and not in the process of animating on or off, then
+                                        // we can tell the app that it is covered by it.
+                                        setInt("mSystemLeft", val);
+                                    }
                                 } else {
                                     // Landscape screen; nav bar goes to the right.
                                     int left = displayWidth - overscanRight
@@ -640,8 +692,13 @@ public class ModExpandedDesktop {
                     if (isImmersiveModeActive()) {
                         WindowManager.LayoutParams attrs = (WindowManager.LayoutParams) param.args[1];
                         if (attrs.type == WindowManager.LayoutParams.TYPE_INPUT_METHOD) {
-                            param.setObjectExtra("gbDockRight", Integer.valueOf(getInt("mDockRight")));
-                            setInt("mDockRight", getInt("mStableRight"));
+                            if (mNavbarLeftHanded) {
+                                param.setObjectExtra("gbDockLeft", Integer.valueOf(getInt("mDockLeft")));
+                                setInt("mDockLeft", getInt("mStableLeft"));
+                            } else {
+                                param.setObjectExtra("gbDockRight", Integer.valueOf(getInt("mDockRight")));
+                                setInt("mDockRight", getInt("mStableRight"));
+                            }
                         }
                         if (DEBUG_LAYOUT) log("layoutWindowLw: hooking WindowState.getSystemUiVisibility()");
                         mGetSystemUiVisibilityHook = XposedHelpers.findAndHookMethod(
@@ -663,6 +720,9 @@ public class ModExpandedDesktop {
                     }
                     if (param.getObjectExtra("gbDockRight") != null) {
                         setInt("mDockRight", (Integer)param.getObjectExtra("gbDockRight"));
+                    }
+                    if (param.getObjectExtra("gbDockLeft") != null) {
+                        setInt("mDockLeft", (Integer)param.getObjectExtra("gbDockLeft"));
                     }
                 }
             });
@@ -815,6 +875,45 @@ public class ModExpandedDesktop {
                     }
                 }
             });
+
+            if (mNavbarLeftHanded) {
+                XposedHelpers.findAndHookMethod(classPhoneWindowManager, "selectAnimationLw",
+                        CLASS_POLICY_WINDOW_STATE, int.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        int result = (Integer) param.getResult();
+                        if (result == mAnimDockRightExit) {
+                            param.setResult(mAnimDockLeftExit);
+                        } else if (result == mAnimDockRightEnter) {
+                            param.setResult(mAnimDockLeftEnter);
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(CLASS_SYSTEM_GESTURE, null, "detectSwipe",
+                        int.class, long.class, float.class, float.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if ((Integer)param.getResult() == 0 && !isNavbarHidden()) {
+                            final float fromX = ((float[])XposedHelpers.getObjectField(
+                                    param.thisObject, "mDownX"))[(Integer) param.args[0]];
+                            final long elapsed = (Long)param.args[1] - 
+                                    ((long[])XposedHelpers.getObjectField(
+                                            param.thisObject, "mDownTime"))[(Integer)param.args[0]];
+                            if (fromX <= XposedHelpers.getIntField(param.thisObject, "mSwipeStartThreshold") &&
+                                    (Float)param.args[2] > fromX + XposedHelpers.getIntField(
+                                            param.thisObject, "mSwipeDistanceThreshold") &&
+                                    elapsed < XposedHelpers.getStaticLongField(param.thisObject.getClass(),
+                                            "SWIPE_TIMEOUT_MS")) {
+                                Object navBar = getObj("mNavigationBar");
+                                if (navBar != null && !getBool("mNavigationBarOnBottom")) {
+                                    XposedHelpers.callMethod(mPhoneWindowManager, "requestTransientBars", navBar);
+                                }
+                            }
+                        }
+                    }
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -863,7 +962,6 @@ public class ModExpandedDesktop {
     private static boolean isNavbarImmersive() {
         return (mExpandedDesktop
                 && (mExpandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE ||
-                mExpandedDesktopMode == GravityBoxSettings.ED_SEMI_IMMERSIVE ||
                 mExpandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE_NAVBAR));
     }
 

@@ -1826,4 +1826,8 @@
     <string name="pref_unc_as_pocket_mode_summary">Won\'t turn screen on when proximity sensor is covered (e.g. when device is in the pocket)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">This option is currently overriden by Proximity wake-up feature in Power tweaks</string>
 
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">Left handed mode</string>
+    <string name="pref_navbar_left_handed_summary">EXPERIMENTAL! Places vertical navigation bar on the left side of the screen in landscape mode (requires reboot)</string>
+
 </resources>

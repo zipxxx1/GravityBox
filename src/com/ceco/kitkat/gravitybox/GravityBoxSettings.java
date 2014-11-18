@@ -555,6 +555,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_NAVBAR_DIMEN = "pref_cat_navbar_dimen";
     public static final String PREF_KEY_NAVBAR_OVERRIDE = "pref_navbar_override";
     public static final String PREF_KEY_NAVBAR_ENABLE = "pref_navbar_enable";
+    public static final String PREF_KEY_NAVBAR_LEFT_HANDED = "pref_navbar_left_handed";
     public static final String PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM = "pref_navbar_always_on_bottom";
     public static final String PREF_KEY_NAVBAR_HEIGHT = "pref_navbar_height";
     public static final String PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE = "pref_navbar_height_landscape";
@@ -857,7 +858,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_MTK_FIX_DEV_OPTS,
             PREF_KEY_MTK_FIX_TTS_SETTINGS,
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
-            PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS
+            PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS,
+            PREF_KEY_NAVBAR_LEFT_HANDED
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
