@@ -985,7 +985,7 @@
 
     <!-- Navbar: always on bottom -->
     <string name="pref_navbar_always_on_bottom_title">Sempre em baixo</string>
-    <string name="pref_navbar_always_on_bottom_summary">Força a barra de navegação a ficar sempre em baixo na orientação de ecrã horizontal (necessário reiniciar)</string>
+    <string name="pref_navbar_always_on_bottom_summary">EXPERIMENTAL! Permite forçar a barra de navegação a ficar sempre em baixo na orientação de ecrã horizontal (necessário reiniciar)</string>
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Trocar posição com tecla Menu</string>
@@ -1802,5 +1802,9 @@
     <string name="pref_unc_as_pocket_mode_title">Modo de bolso</string>
     <string name="pref_unc_as_pocket_mode_summary">Permite que o ecrã não se ligue sempre que o sensor de proximidade estiver coberto (como por exemplo, quando o dispositivo estiver no bolso)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Atualmente, a funcionalidade de ligar através da proximidade, disponível nos ajustes de energia, sobrepõe-se a esta opção</string>
+
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">Modo para canhotos</string>
+    <string name="pref_navbar_left_handed_summary">EXPERIMENTAL! Permite colocar a barra de navegação vertical no lado esquerdo na orientação de ecrã horizontal (necessário reiniciar)</string>
 
 </resources>
