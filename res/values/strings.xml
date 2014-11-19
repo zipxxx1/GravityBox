@@ -1588,8 +1588,8 @@
     <string name="pref_screenshot_delete_title">Enable screenshot delete</string>
 
     <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Enable Android L navigation key icons</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Replaces stock navigation key icons by those coming from Android L (requires reboot)</string>
+    <string name="pref_navbar_android_l_icons_enable_title">Use Lollipop icons</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Replaces stock navigation key icons by those coming from Android Lollipop (requires reboot)</string>
 
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Custom action</string>

@@ -1527,8 +1527,8 @@
     <string name="pref_screenshot_delete_title">Povoliť vymazanie screenshot</string>
 
     <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Android L navigačné ikony</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Nahradí pôvodné ikony navigačných tlačidiel ikonami z Android L (vyžaduje reštart)</string>
+    <string name="pref_navbar_android_l_icons_enable_title">Použiť Lollipop ikony</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Nahradí pôvodné ikony navigačných tlačidiel ikonami z Android Lollipop (vyžaduje reštart)</string>
 
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Vlastná akcia</string>
