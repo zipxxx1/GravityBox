@@ -1709,4 +1709,8 @@
     <string name="pref_unc_as_pocket_mode_summary">当距离传感器被遮挡时不会唤醒屏幕（例如当设备在口袋里）</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">在电源调整项中的接近唤醒功能会被覆盖</string>
 
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">隐藏启动器图标</string>
+    <string name="pref_hide_launcher_icon_summary">桌面启动器可能需要重新启动</string>
+
 </resources>

@@ -1662,4 +1662,8 @@
     <string name="pref_unc_as_pocket_mode_summary">Lo schermo non verrà acceso se i sensori di prossimità sono coperti (es. quando il dispositivo è in tasca)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Questa opzione è al momento disabilitata da Risveglia con sensori di prossimità nel menu spegnimento</string>
 
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Nascondi icona launcher</string>
+    <string name="pref_hide_launcher_icon_summary">Potrebbe richiedere il riavvio del launcher</string>
+
 </resources>

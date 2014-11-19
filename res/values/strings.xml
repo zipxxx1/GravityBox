@@ -1708,4 +1708,8 @@
     <string name="pref_unc_as_pocket_mode_summary">Won\'t turn screen on when proximity sensor is covered (e.g. when device is in the pocket)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">This option is currently overriden by Proximity wake-up feature in Power tweaks</string>
 
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Hide launcher icon</string>
+    <string name="pref_hide_launcher_icon_summary">May require launcher restart</string>
+
 </resources>

@@ -1658,4 +1658,8 @@
     <string name="pref_unc_as_pocket_mode_summary">當距離感應器被覆蓋時 (例如當裝置被放在口袋中) 不會喚醒螢幕</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">本選項會被 [電源選項] > [距離感應器喚醒] 選項覆寫</string>
 
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">隱藏啟動器圖示</string>
+    <string name="pref_hide_launcher_icon_summary">可能需要重新啟動啟動器方能生效</string>
+
 </resources>

@@ -1709,4 +1709,8 @@
     <string name="pref_unc_as_pocket_mode_summary">Экран не включится, если датчик приближения закрыт (например, когда устройство находится в кармане)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Данная опция переопределяется функцией пробуждения при приближении в настройках питания</string>
 
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Скрыть значок из меню</string>
+    <string name="pref_hide_launcher_icon_summary">Может потребоваться перезапуск лончера</string>
+
 </resources>

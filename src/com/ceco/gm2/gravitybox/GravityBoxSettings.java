@@ -69,6 +69,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -76,6 +77,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -806,6 +808,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICKRECORD_AUTOSTOP = "pref_quickrecord_autostop";
     public static final String EXTRA_QR_QUALITY = "quickRecordQuality";
     public static final String EXTRA_QR_AUTOSTOP = "quickRecordAutostop";
+
+    public static final String PREF_KEY_HIDE_LAUNCHER_ICON = "pref_hide_launcher_icon";
 
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
@@ -3185,6 +3189,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_QUICKRECORD_AUTOSTOP)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QR_AUTOSTOP, prefs.getInt(key, 1));
+            } else if (key.equals(PREF_KEY_HIDE_LAUNCHER_ICON)) {
+                int mode = prefs.getBoolean(key, false) ?
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED :
+                            PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+                getActivity().getPackageManager().setComponentEnabledSetting(
+                        new ComponentName(getActivity(), "com.ceco.gm2.gravitybox.GravityBoxSettingsAlias"),
+                        mode, PackageManager.DONT_KILL_APP);
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

@@ -1680,4 +1680,8 @@
     <string name="pref_unc_as_pocket_mode_summary">Ekran nie włączy się, jeśli czujnik zbliżeniowy jest przykryty (np. gdy urządzenie znajduje się w kieszeni)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Ta opcja jest obecnie zastępowana przez funkcję Wybudzania zbliżeniowego z menu Poprawek ustawień zasilania</string>
 
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Ukryj ikonę startera aplikacji</string>
+    <string name="pref_hide_launcher_icon_summary">Może wymagać ponownego uruchomienia startera aplikacji</string>
+
 </resources>

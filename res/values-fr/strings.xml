@@ -1672,4 +1672,8 @@
     <string name="pref_unc_as_pocket_mode_summary">L\'écran ne s\'allumera pas lorsque le capteur de proximité est couvert (ex: lorsque l\'appareil est dans la poche)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Cette option est actuellement remplacée par l\'option "sortie de veille et proximité" dans les modifications énergie</string>
 
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Masquer l\'icône du lanceur</string>
+    <string name="pref_hide_launcher_icon_summary">Peut nécessiter de redémarrer le lanceur</string>
+
 </resources>

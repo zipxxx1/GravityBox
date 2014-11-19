@@ -1689,4 +1689,8 @@
     <string name="pref_unc_as_pocket_mode_summary">A képernyő nem fog bekapcsolódni, ha a közelség érzékelő takarva van(pl. ha a készülék zsebben van)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Ezt az opciót jelenleg az Energia beállítások menüben lévő Ébresztés közelség érzékelővel funkció felülírja</string>
 
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Indító ikon elrejtése</string>
+    <string name="pref_hide_launcher_icon_summary">Szükséges lehet a launcher újraindítása</string>
+
 </resources>
