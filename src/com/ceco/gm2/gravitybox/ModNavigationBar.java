@@ -88,6 +88,7 @@ public class ModNavigationBar {
     private static boolean mNavbarVertical;
     private static boolean mNavbarRingDisabled;
     private static KeyguardManager mKeyguard;
+    private static boolean mUseLollipopIcons;
 
     // Custom key
     private static boolean mCustomKeyEnabled;
@@ -339,6 +340,7 @@ public class ModNavigationBar {
 
             mAlwaysShowMenukey = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_MENUKEY, false);
             mRingTargetsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGETS_ENABLE, false);
+            mUseLollipopIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE, false);
 
             try {
                 mRecentsSingletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
@@ -400,11 +402,13 @@ public class ModNavigationBar {
                     }
                     mCustomKeyAltIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ICON, false);
 
-                    mRecentAltIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear);
-                    mRecentAltLandIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear_land);
+                    mRecentAltIcon = res.getDrawable(mUseLollipopIcons ?
+                            R.drawable.ic_sysbar_recent_clear_lollipop : R.drawable.ic_sysbar_recent_clear);
+                    mRecentAltLandIcon = res.getDrawable(mUseLollipopIcons ?
+                            R.drawable.ic_sysbar_recent_clear_land_lollipop : R.drawable.ic_sysbar_recent_clear_land);
 
                     if (Build.VERSION.SDK_INT < 18) {
-                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE, false)) {
+                        if (mUseLollipopIcons) {
                             XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon",
                                     res.getDrawable(R.drawable.ic_sysbar_back_ime_land));
                         }
@@ -488,8 +492,7 @@ public class ModNavigationBar {
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setScaleType(ScaleType.FIT_CENTER);
                         appKey.setClickable(true);
-                        appKey.setImageDrawable(gbRes.getDrawable(mCustomKeyAltIcon ?
-                                R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps));
+                        appKey.setImageDrawable(gbRes.getDrawable(getCustomKeyIconId()));
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
@@ -517,8 +520,7 @@ public class ModNavigationBar {
                     if (vRot != null) {
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setClickable(true);
-                        appKey.setImageDrawable(gbRes.getDrawable(mCustomKeyAltIcon ?
-                                R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps));
+                        appKey.setImageDrawable(gbRes.getDrawable(getCustomKeyIconId()));
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
@@ -584,15 +586,17 @@ public class ModNavigationBar {
     
                         if (mGbContext != null) {
                             final Resources gbRes = mGbContext.getResources();
-                            mRecentAltIcon = gbRes.getDrawable(R.drawable.ic_sysbar_recent_clear);
-                            mRecentAltLandIcon = gbRes.getDrawable(R.drawable.ic_sysbar_recent_clear_land);
+                            mRecentAltIcon = gbRes.getDrawable(mUseLollipopIcons ?
+                                    R.drawable.ic_sysbar_recent_clear_lollipop : R.drawable.ic_sysbar_recent_clear);
+                            mRecentAltLandIcon = gbRes.getDrawable(mUseLollipopIcons ?
+                                    R.drawable.ic_sysbar_recent_clear_land_lollipop : R.drawable.ic_sysbar_recent_clear_land);
     
-                            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE, false)) {
+                            if (mUseLollipopIcons) {
                                 XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon",
                                         gbRes.getDrawable(R.drawable.ic_sysbar_back_ime_land));
                             }
                         }
-                    }
+                    };
                 });
             }
 
@@ -1263,11 +1267,20 @@ public class ModNavigationBar {
         try {
             Resources res = mGbContext.getResources();
             for (NavbarViewInfo nvi : mNavbarViewInfo) {
-                nvi.customKey.setImageDrawable(res.getDrawable(mCustomKeyAltIcon ?
-                        R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps));
+                nvi.customKey.setImageDrawable(res.getDrawable(getCustomKeyIconId()));
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static int getCustomKeyIconId() {
+        if (mUseLollipopIcons) {
+            return mCustomKeyAltIcon ?
+                    R.drawable.ic_sysbar_apps2_lollipop : R.drawable.ic_sysbar_apps_lollipop;
+        } else {
+            return mCustomKeyAltIcon ?
+                    R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps;
         }
     }
 }
