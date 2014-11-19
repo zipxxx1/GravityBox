@@ -1636,7 +1636,7 @@
     <string name="pref_lc_headsup_dnd_summary">Уведомления в режиме всплытия не будут отображаться при работе этого приложения</string>
 
     <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Вкл нав. клавиши Андроид L</string>
+    <string name="pref_navbar_android_l_icons_enable_title">Использовать значки Lollipop</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Замена стоковых значков клавиш навигации значками из Андроид L (необходима перезагрузка)</string>
 
     <!-- UNC Active Screen Mode -->
@@ -1828,5 +1828,9 @@
     <!-- Navbar: Left handed mode -->
     <string name="pref_navbar_left_handed_title">Режим левой руки</string>
     <string name="pref_navbar_left_handed_summary">ЭКПЕРИМЕНТ! Размещение вертикальной нав. панели по левой стороне экрана в ландшафтном режиме (необходима перезагрузка)</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Скрыть значок из меню</string>
+    <string name="pref_hide_launcher_icon_summary">Может потребоваться перезапуск лончера</string>
 
 </resources>
