@@ -1614,8 +1614,8 @@
     <string name="pref_lc_headsup_dnd_summary">Permite com que nenhuma notificação flutuante seja mostrada enquanto a aplicação estiver em primeiro plano</string>
 
     <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Ativar teclas de navegação do Android L</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Permite substituir os ícones padrão das teclas de navegação pelos do Android L (necessário reiniciar)</string>
+    <string name="pref_navbar_android_l_icons_enable_title">Ativar teclas de navegação do Lollipop</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Permite substituir os ícones padrão das teclas de navegação pelos do Lollipop (necessário reiniciar)</string>
 
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Modo Ecrã ativo</string>
@@ -1783,7 +1783,7 @@
     <string name="shortcut_auto_brightness">Comutar brilho automático</string>
 
     <!-- Signal cluster: use lollipop icons -->
-    <string name="pref_signal_cluster_lollipop_icons_title">Utilizar ícones Lollipop</string>
+    <string name="pref_signal_cluster_lollipop_icons_title">Utilizar ícones do Lollipop</string>
     <string name="pref_signal_cluster_lollipop_icons_summary">Necessário reiniciar</string>
 
     <!-- Messaging -->
@@ -1806,5 +1806,9 @@
     <!-- Navbar: Left handed mode -->
     <string name="pref_navbar_left_handed_title">Modo para canhotos</string>
     <string name="pref_navbar_left_handed_summary">EXPERIMENTAL! Permite colocar a barra de navegação vertical no lado esquerdo na orientação de ecrã horizontal (necessário reiniciar)</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Ocultar ícone no inicializador</string>
+    <string name="pref_hide_launcher_icon_summary">Permite ocultar o ícone do GravityBox no inicializador (poderá ser necessário reiniciar o inicializador)</string>
 
 </resources>
