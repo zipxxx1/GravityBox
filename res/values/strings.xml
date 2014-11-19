@@ -1830,4 +1830,8 @@
     <string name="pref_navbar_left_handed_title">Left handed mode</string>
     <string name="pref_navbar_left_handed_summary">EXPERIMENTAL! Places vertical navigation bar on the left side of the screen in landscape mode (requires reboot)</string>
 
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Hide launcher icon</string>
+    <string name="pref_hide_launcher_icon_summary">May require launcher restart</string>
+
 </resources>

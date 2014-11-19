@@ -70,6 +70,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -77,6 +78,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -811,6 +813,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String UNISTR_LEAVE_INTACT = "leave_intact";
     public static final String UNISTR_NON_ENCODABLE = "non_encodable";
     public static final String UNISTR_ALL = "all";
+
+    public static final String PREF_KEY_HIDE_LAUNCHER_ICON = "pref_hide_launcher_icon";
 
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
@@ -3208,6 +3212,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_QUICKRECORD_AUTOSTOP)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QR_AUTOSTOP, prefs.getInt(key, 1));
+            } else if (key.equals(PREF_KEY_HIDE_LAUNCHER_ICON)) {
+                int mode = prefs.getBoolean(key, false) ?
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED :
+                            PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+                getActivity().getPackageManager().setComponentEnabledSetting(
+                        new ComponentName(getActivity(), "com.ceco.kitkat.gravitybox.GravityBoxSettingsAlias"),
+                        mode, PackageManager.DONT_KILL_APP);
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

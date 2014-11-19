@@ -1792,4 +1792,8 @@
     <string name="pref_navbar_left_handed_title">Režim pro leváky</string>
     <string name="pref_navbar_left_handed_summary">EXPERIMENTÁLNÍ! Umístí vertikální navigační lištu na levou stranu obrazovky v režimu na šířku (vyžaduje restart)</string>
 
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Skrýt ikonu ve spouštěči aplikací</string>
+    <string name="pref_hide_launcher_icon_summary">Může vyžadovat restart spouštěče aplikací</string>
+
 </resources>
