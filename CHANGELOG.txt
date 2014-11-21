@@ -1,3 +1,24 @@
+Changelog 3.4.9 - 21/11/2014
+--------------------------------------
+- Navigation bar tweaks:
+--- added option for left handed mode:
+------ experimental, but seems to work fine on officially supported devices
+------ applicable to devices with vertical navbar in landscape mode (phone devices)
+--- Lollipop icons updated from official Lollipop release (yes, they are smaller)
+--- custom key icons adjusted to match Lollipop layout
+- UNC Active Screen: 
+--- added option for Pocket mode (makes proximity sensor based behavior optional)
+--- additional fixes for devices without proximity sensor
+- About: added option for hiding module icon from launcher
+- Added compatibility warning dialog showing upon opening settings (thanks to jacknicholson, kingvortex, GermainZ, m0han for content suggestions)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Russian translations (thanks to gaich)
+- Updated French translations (thanks to ch-vox)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Slovak and Czech translations
+
 Changelog 3.4.8 - 07/11/2014
 --------------------------------------
 - Lollipop signal icons:
