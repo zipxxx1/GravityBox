@@ -1629,5 +1629,33 @@
     <string name="sb_ticker_policy_locked">Desativar na tela de bloqueio</string>
     <string name="sb_ticker_policy_secured">Desativar na tela de bloqueio com segurança</string>
     <string name="sb_ticker_policy_disabled">Sempre desativar</string>
+    
+     <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">Modo 2G+3G</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferêncial (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Automático (2G/3G)</string>
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Ambiente de trabalho expandido no Menu Desligar</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Deverá ser grantido que existe um método alternativo acessível para desativar o ambiente de trabalho expandido!!!</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Definições do painel Gravação rápida</string>
+    <string name="pref_quickrecord_quality_title">Qualidade de áudio</string>
+    <string name="qr_audio_quality_low">Baixa (16kHz)</string>
+    <string name="qr_audio_quality_medium">Média (22kHz)</string>
+    <string name="qr_audio_quality_high">Alta (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Parar gravação automaticamente</string>
+    <string name="pref_quickrecord_autostop_summary">Permite definir o tempo a partir do qual a gravação é automaticamente parada. Introduzir 0 para desativar.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Limpar notificações</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Alternar brilho automático</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Utilizar ícones Lollipop</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Necessário reiniciar</string>
 
 </resources>
