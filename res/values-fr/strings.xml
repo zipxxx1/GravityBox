@@ -1005,7 +1005,7 @@
 
     <!-- Navbar: always on bottom -->
     <string name="pref_navbar_always_on_bottom_title">Toujours en bas</string>
-    <string name="pref_navbar_always_on_bottom_summary">Force la barre de navigation à être en bas d\'écran en orientation paysage (nécessite un redémarrage)</string>
+    <string name="pref_navbar_always_on_bottom_summary">EXPÉRIMENTAL! Force la barre de navigation à être en bas d\'écran en orientation paysage (nécessite un redémarrage)</string>
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Intervertir avec la touche menu</string>
@@ -1411,8 +1411,7 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Écran Actif</string>
     <string name="lc_active_screen_info">L\'option Écran Actif allume automatiquement l\'écran à chaque fois 
-        qu\'une nouvelle notification arrive. Cela se produira seulement si l\'écran n\'est pas recouvert
-        (ex : lorsque l\'appareil est dans la poche). Elle peut en option dérouler le panneau de notification ou afficher une fenêtre flottante selon
+        qu\'une nouvelle notification arrive. Elle peut en option dérouler le panneau de notification ou afficher une fenêtre flottante selon
         la politique de sécurité de l\'écran de déverrouillage et les préférences utilisateur. Attention, l\'Écran Actif nécessite 
         que l\'écran de déverrouillage soit actif. L\'interrupteur en-dessous est l\'interrupteur principal. Après qu\'il soit enclenché, 
         la configuration précise par application peut être effectuée</string>
@@ -1631,14 +1630,14 @@
     <string name="pref_heads_up_timeout_summary">Pour programmer la durée d\'affichage de la fenêtre de notification 0 = permanent</string>
 
     <!-- UNC HeadsUp category + additional options -->
-    <string name="pref_cat_lc_heads_up_title">Notifictions flottantes</string>
+    <string name="pref_cat_lc_heads_up_title">Notifications flottantes</string>
     <string name="pref_lc_headsup_expanded_title">Affichage étendu</string>
     <string name="pref_lc_headsup_expanded_summary">Attention: cette option peut être redéfinie par le Contrôle Ultime de Notification (UNC)</string>
     <string name="pref_lc_headsup_dnd_title">Ne pas déranger</string>
     <string name="pref_lc_headsup_dnd_summary">Aucune notification flottante ne s\'affichera durant l\'utilisation de cette application en premier plan</string>
 
     <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Activer les icônes de Android L pour les touches de navigation</string>
+    <string name="pref_navbar_android_l_icons_enable_title">Utiliser les icônes de Lollipop</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Remplace les icônes par défaut des touches de navigation par celles incluses dans Android L (redémarrage nécessaire)</string>
 
     <!-- UNC Active Screen Mode -->
@@ -1821,5 +1820,18 @@
         se référer <a href="http://forum.xda-developers.com/showthread.php?t=2554049">au fil de discussion sur XDA</a>.</string>
     <string name="compat_warning_ok_stage1">OK. J\'ai compris.</string>
     <string name="compat_warning_ok_stage2">J\'ai VRAIMENT compris!</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Mode poche</string>
+    <string name="pref_unc_as_pocket_mode_summary">L\'écran ne s\'allumera pas lorsque le capteur de proximité est couvert (ex: lorsque l\'appareil est dans la poche)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Cette option est actuellement remplacée par l\'option "sortie de veille et proximité" dans les modifications énergie</string>
+
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">Mode gaucher</string>
+    <string name="pref_navbar_left_handed_summary">EXPÉRIMENTAL! Place la barre de navigation verticale à gauche en affichage mode paysage (redémarrage nécessaire)</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Masquer l\'icône du lanceur</string>
+    <string name="pref_hide_launcher_icon_summary">Peut nécessiter de redémarrer le lanceur</string>
 
 </resources>
