@@ -220,34 +220,36 @@ public class ModLedControl {
                 // additional check if old notification had a foreground service flag set since it seems not to be propagated
                 // for updated notifications (until Notification gets processed by WorkerHandler which is too late for us)
                 if (!isOngoing) {
-                    ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(param.thisObject, "mNotificationList");
-                    synchronized (notifList) {
-                        int index = -1;
-                        if (Build.VERSION.SDK_INT == 16) { // 4.1
-                            index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
-                                        param.args[0], param.args[1], param.args[2]);
-                        } else if (Build.VERSION.SDK_INT == 17) { // 4.2
-                            index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
-                                    param.args[0], param.args[1], param.args[2], param.args[5]);
-                        } else { // 4.3
-                            index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
-                                    param.args[0], param.args[2], param.args[3], param.args[6]);
-                        }
-                        if (index >= 0) {
-                            Object oldNotif = notifList.get(index);
-                            if (oldNotif != null) {
-                                Notification oldN = Build.VERSION.SDK_INT == 18 ?
-                                        (Notification) XposedHelpers.callMethod(oldNotif, "getNotification") :
-                                            (Notification) XposedHelpers.getObjectField(oldNotif, "notification");
-                                if ((oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0) {
-                                    n.flags |= Notification.FLAG_FOREGROUND_SERVICE | 
-                                            Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
-                                    isOngoing = true;
+                    try {
+                        ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(param.thisObject, "mNotificationList");
+                        synchronized (notifList) {
+                            int index = -1;
+                            if (Build.VERSION.SDK_INT == 16) { // 4.1
+                                index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
+                                            param.args[0], param.args[1], param.args[2]);
+                            } else if (Build.VERSION.SDK_INT == 17) { // 4.2
+                                index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
+                                        param.args[0], param.args[1], param.args[2], param.args[5]);
+                            } else { // 4.3
+                                index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
+                                        param.args[0], param.args[2], param.args[3], param.args[6]);
+                            }
+                            if (index >= 0) {
+                                Object oldNotif = notifList.get(index);
+                                if (oldNotif != null) {
+                                    Notification oldN = Build.VERSION.SDK_INT == 18 ?
+                                            (Notification) XposedHelpers.callMethod(oldNotif, "getNotification") :
+                                                (Notification) XposedHelpers.getObjectField(oldNotif, "notification");
+                                    if ((oldN.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0) {
+                                        n.flags |= Notification.FLAG_FOREGROUND_SERVICE | 
+                                                Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+                                        isOngoing = true;
+                                    }
+                                    if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
                                 }
-                                if (DEBUG) log("Old notification foreground service check: isOngoing=" + isOngoing);
                             }
                         }
-                    }
+                    } catch (Throwable t) { /* yet another vendor messing with the internals... */ }
                 }
 
                 if (isOngoing && !ls.getOngoing() && !qhActive) {
