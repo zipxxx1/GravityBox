@@ -1662,4 +1662,9 @@
     <string name="pref_hide_launcher_icon_title">隱藏啟動器圖示</string>
     <string name="pref_hide_launcher_icon_summary">可能需要重新啟動啟動器方能生效</string>
 
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">已停用</string>
+    <string name="navbar_l_icon_style_original">原生</string>
+    <string name="navbar_l_icon_style_large">較大</string>
+
 </resources>

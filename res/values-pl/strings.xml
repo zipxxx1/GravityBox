@@ -1684,4 +1684,9 @@
     <string name="pref_hide_launcher_icon_title">Ukryj ikonę startera aplikacji</string>
     <string name="pref_hide_launcher_icon_summary">Może wymagać ponownego uruchomienia startera aplikacji</string>
 
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">Wyłączone</string>
+    <string name="navbar_l_icon_style_original">Oryginalne</string>
+    <string name="navbar_l_icon_style_large">Duże</string>
+
 </resources>

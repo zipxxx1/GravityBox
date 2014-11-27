@@ -1649,4 +1649,9 @@
     <string name="pref_hide_launcher_icon_title">Skryť ikonu v spúšťači aplikácií</string>
     <string name="pref_hide_launcher_icon_summary">Môže vyžadovať reštart spúšťača aplikácií</string>
 
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">Vypnuté</string>
+    <string name="navbar_l_icon_style_original">Originálne</string>
+    <string name="navbar_l_icon_style_large">Veľké</string>
+
 </resources>

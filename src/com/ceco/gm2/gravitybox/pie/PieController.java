@@ -53,6 +53,7 @@ import android.widget.ImageView;
 
 import com.ceco.gm2.gravitybox.GravityBoxSettings;
 import com.ceco.gm2.gravitybox.ModHwKeys;
+import com.ceco.gm2.gravitybox.ModNavigationBar.LollipopIconStyle;
 import com.ceco.gm2.gravitybox.ModPieControls;
 import com.ceco.gm2.gravitybox.R;
 import com.ceco.gm2.gravitybox.pie.PieItem;
@@ -127,7 +128,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private boolean mRecentAlt = false;
     private ModHwKeys.HwKeyAction mRecentLongPressAction = new ModHwKeys.HwKeyAction(0, null);
     private boolean mMirroredKeys;
-    private boolean mUseLollipopIcons;
+    private LollipopIconStyle mLollipopIconStyle;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -307,8 +308,8 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mGbResources = gbContext.getResources();
         mLongPressHandler = new PieLongPressHandler(context, prefs);
         mRecentLongPressAction = getLongPressAction(ButtonType.RECENT).clone();
-        mUseLollipopIcons = prefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE, false);
+        mLollipopIconStyle = LollipopIconStyle.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICON_STYLE, "DISABLED"));
 
         mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -323,7 +324,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mBackAltIcon = res.getDrawable(context.getResources().getIdentifier(
                 "ic_sysbar_back_ime", "drawable", PACKAGE_NAME));
         mRecentIcon = res.getDrawable(res.getIdentifier("ic_sysbar_recent", "drawable", PACKAGE_NAME));
-        mRecentAltIcon = mGbResources.getDrawable(mUseLollipopIcons ?
+        mRecentAltIcon = mGbResources.getDrawable(mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
                R.drawable.ic_sysbar_recent_clear_lollipop : R.drawable.ic_sysbar_recent_clear);
 
         try {
@@ -415,7 +416,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                         mGbResources.getDrawable(R.drawable.pie_search), minimumImageSize));
             } else if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_APP_LAUNCHER) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.APP_LAUNCHER,
-                        mGbResources.getDrawable(mUseLollipopIcons ?
+                        mGbResources.getDrawable(mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
                                R.drawable.ic_sysbar_apps_lollipop : R.drawable.ic_sysbar_apps),
                                minimumImageSize));
             }
@@ -446,7 +447,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
                         mGbResources.getDrawable(R.drawable.pie_search), minimumImageSize));
             } else if (mCustomKeyMode == GravityBoxSettings.PIE_CUSTOM_KEY_APP_LAUNCHER) {
                 mNavigationSlice.addItem(constructItem(1, ButtonType.APP_LAUNCHER,
-                        mGbResources.getDrawable(mUseLollipopIcons ?
+                        mGbResources.getDrawable(mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
                                 R.drawable.ic_sysbar_apps_lollipop : R.drawable.ic_sysbar_apps),
                                 minimumImageSize));
             }

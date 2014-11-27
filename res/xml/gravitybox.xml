@@ -1075,11 +1075,13 @@
 
             </PreferenceScreen>
 
-            <CheckBoxPreference 
-                android:key="pref_navbar_android_l_icons_enable"
+            <ListPreference
+                android:key="pref_navbar_android_l_icon_style"
                 android:title="@string/pref_navbar_android_l_icons_enable_title"
                 android:summary="@string/pref_navbar_android_l_icons_enable_summary"
-                android:defaultValue="false" />
+                android:entries="@array/navbar_l_icon_style_entries"
+                android:entryValues="@array/navbar_l_icon_style_values"
+                android:defaultValue="DISABLED" />
 
         </PreferenceCategory>
 

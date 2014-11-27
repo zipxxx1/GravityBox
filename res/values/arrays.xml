@@ -1178,4 +1178,16 @@
         <item>EXPAND_PANEL</item>
     </string-array>
 
+    <string-array name="navbar_l_icon_style_entries" translatable="false">
+        <item>@string/navbar_l_icon_style_disabled</item>
+        <item>@string/navbar_l_icon_style_original</item>
+        <item>@string/navbar_l_icon_style_large</item>
+    </string-array>
+
+    <string-array name="navbar_l_icon_style_values" translatable="false">
+        <item>DISABLED</item>
+        <item>ORIGINAL</item>
+        <item>LARGE</item>
+    </string-array>
+
 </resources>

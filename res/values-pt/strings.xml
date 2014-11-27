@@ -1682,4 +1682,9 @@
     <string name="pref_hide_launcher_icon_title">Ocultar ícone no inicializador</string>
     <string name="pref_hide_launcher_icon_summary">Permite ocultar o ícone do GravityBox no inicializador (poderá ser necessário reiniciar o inicializador)</string>
 
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">Desativado</string>
+    <string name="navbar_l_icon_style_original">Original</string>
+    <string name="navbar_l_icon_style_large">Grande</string>
+
 </resources>

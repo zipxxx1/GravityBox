@@ -1676,4 +1676,9 @@
     <string name="pref_hide_launcher_icon_title">Masquer l\'icône du lanceur</string>
     <string name="pref_hide_launcher_icon_summary">Peut nécessiter de redémarrer le lanceur</string>
 
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">Désactivé</string>
+    <string name="navbar_l_icon_style_original">Original</string>
+    <string name="navbar_l_icon_style_large">Grand</string>
+
 </resources>
