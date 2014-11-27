@@ -504,14 +504,20 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(ScaleType.FIT_CENTER);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_left));
+                        dpadLeft.setImageDrawable(gbRes.getDrawable(
+                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
+                                        R.drawable.ic_sysbar_ime_left_lollipop :
+                                            R.drawable.ic_sysbar_ime_left));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(ScaleType.FIT_CENTER);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_right));
+                        dpadRight.setImageDrawable(gbRes.getDrawable(
+                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
+                                        R.drawable.ic_sysbar_ime_right_lollipop :
+                                            R.drawable.ic_sysbar_ime_right));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -531,13 +537,19 @@ public class ModNavigationBar {
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_left));
+                        dpadLeft.setImageDrawable(gbRes.getDrawable(
+                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
+                                        R.drawable.ic_sysbar_ime_left_lollipop :
+                                            R.drawable.ic_sysbar_ime_left));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_right));
+                        dpadRight.setImageDrawable(gbRes.getDrawable(
+                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
+                                        R.drawable.ic_sysbar_ime_right_lollipop :
+                                            R.drawable.ic_sysbar_ime_right));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
