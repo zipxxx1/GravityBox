@@ -81,6 +81,8 @@ public class ModNavigationBar {
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
     private static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
 
+    public enum LollipopIconStyle { DISABLED, ORIGINAL, LARGE };
+
     private static XSharedPreferences mPrefs;
     private static boolean mAlwaysShowMenukey;
     private static View mNavigationBarView;
@@ -100,7 +102,7 @@ public class ModNavigationBar {
     private static boolean mCameraKeyDisabled;
     private static KeyguardManager mKeyguard;
     private static boolean mNavbarLeftHanded;
-    private static boolean mUseLollipopIcons;
+    private static LollipopIconStyle mLollipopIconStyle;
 
     // Custom key
     private static boolean mCustomKeyEnabled;
@@ -321,21 +323,24 @@ public class ModNavigationBar {
     }
 
     public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
-        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE, false)) {
+        final LollipopIconStyle lis = LollipopIconStyle.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICON_STYLE, "DISABLED"));
+        if (lis != LollipopIconStyle.DISABLED) {
             XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
 
+            final boolean large = lis == LollipopIconStyle.LARGE;
             Map<String, Integer> ic_map = new HashMap<String, Integer>();
-            ic_map.put("ic_sysbar_back_ime", R.drawable.ic_sysbar_back_ime);
-            ic_map.put("ic_sysbar_back", R.drawable.ic_sysbar_back);
-            ic_map.put("ic_sysbar_back_land", R.drawable.ic_sysbar_back_land);
+            ic_map.put("ic_sysbar_back_ime", large ? R.drawable.ic_sysbar_back_ime_large : R.drawable.ic_sysbar_back_ime);
+            ic_map.put("ic_sysbar_back", large ? R.drawable.ic_sysbar_back_large : R.drawable.ic_sysbar_back);
+            ic_map.put("ic_sysbar_back_land", large ? R.drawable.ic_sysbar_back_land_large : R.drawable.ic_sysbar_back_land);
             ic_map.put("ic_sysbar_highlight", R.drawable.ic_sysbar_highlight);
             ic_map.put("ic_sysbar_highlight_land", R.drawable.ic_sysbar_highlight_land);
-            ic_map.put("ic_sysbar_menu", R.drawable.ic_sysbar_menu);
-            ic_map.put("ic_sysbar_menu_land", R.drawable.ic_sysbar_menu_land);
-            ic_map.put("ic_sysbar_recent", R.drawable.ic_sysbar_recent);
-            ic_map.put("ic_sysbar_recent_land", R.drawable.ic_sysbar_recent_land);
-            ic_map.put("ic_sysbar_home", R.drawable.ic_sysbar_home);
-            ic_map.put("ic_sysbar_home_land", R.drawable.ic_sysbar_home_land);
+            ic_map.put("ic_sysbar_menu", large ? R.drawable.ic_sysbar_menu_large : R.drawable.ic_sysbar_menu);
+            ic_map.put("ic_sysbar_menu_land", large ? R.drawable.ic_sysbar_menu_land_large : R.drawable.ic_sysbar_menu_land);
+            ic_map.put("ic_sysbar_recent", large ? R.drawable.ic_sysbar_recent_large : R.drawable.ic_sysbar_recent);
+            ic_map.put("ic_sysbar_recent_land", large ? R.drawable.ic_sysbar_recent_land_large : R.drawable.ic_sysbar_recent_land);
+            ic_map.put("ic_sysbar_home", large ? R.drawable.ic_sysbar_home_large : R.drawable.ic_sysbar_home);
+            ic_map.put("ic_sysbar_home_land", large ? R.drawable.ic_sysbar_home_land_large : R.drawable.ic_sysbar_home_land);
 
             for (String key : ic_map.keySet()) {
                 try {
@@ -362,7 +367,8 @@ public class ModNavigationBar {
             mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
                     !prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM, false) &&
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
-            mUseLollipopIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE, false);
+            mLollipopIconStyle = LollipopIconStyle.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICON_STYLE, "DISABLED"));
 
             try {
                 mRecentsSingletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
@@ -589,14 +595,15 @@ public class ModNavigationBar {
 
                     if (mGbContext != null) {
                         final Resources gbRes = mGbContext.getResources();
-                        mRecentAltIcon = gbRes.getDrawable(mUseLollipopIcons ?
+                        mRecentAltIcon = gbRes.getDrawable(mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
                                 R.drawable.ic_sysbar_recent_clear_lollipop : R.drawable.ic_sysbar_recent_clear);
-                        mRecentAltLandIcon = gbRes.getDrawable(mUseLollipopIcons ?
+                        mRecentAltLandIcon = gbRes.getDrawable(mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
                                 R.drawable.ic_sysbar_recent_clear_land_lollipop : R.drawable.ic_sysbar_recent_clear_land);
 
-                        if (mUseLollipopIcons) {
+                        if (mLollipopIconStyle != LollipopIconStyle.DISABLED) {
                             XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon",
-                                    gbRes.getDrawable(R.drawable.ic_sysbar_back_ime_land));
+                                    gbRes.getDrawable(mLollipopIconStyle == LollipopIconStyle.LARGE ?
+                                            R.drawable.ic_sysbar_back_ime_land_large : R.drawable.ic_sysbar_back_ime_land));
                         }
                     }
                 }
@@ -1381,7 +1388,7 @@ public class ModNavigationBar {
     }
 
     private static int getCustomKeyIconId() {
-        if (mUseLollipopIcons) {
+        if (mLollipopIconStyle == LollipopIconStyle.ORIGINAL) {
             return mCustomKeyAltIcon ?
                     R.drawable.ic_sysbar_apps2_lollipop : R.drawable.ic_sysbar_apps_lollipop;
         } else {

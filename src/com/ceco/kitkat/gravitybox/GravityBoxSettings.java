@@ -717,7 +717,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_RING_TARGET_BG_STYLE = "ringTargetBgStyle";
     public static final String EXTRA_RING_HAPTIC_FEEDBACK = "ringHapticFeedback";
 
-    public static final String PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE = "pref_navbar_android_l_icons_enable";
+    public static final String PREF_KEY_NAVBAR_ANDROID_L_ICON_STYLE = "pref_navbar_android_l_icon_style";
 
     public static final String PREF_KEY_SMART_RADIO_ENABLE = "pref_smart_radio_enable";
     public static final String PREF_KEY_SMART_RADIO_NORMAL_MODE = "pref_smart_radio_normal_mode";
@@ -856,7 +856,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_FORCE_LTR_DIRECTION,
             PREF_KEY_QS_BATTERY_EXTENDED,
             PREF_KEY_HEADS_UP_MASTER_SWITCH,
-            PREF_KEY_NAVBAR_ANDROID_L_ICONS_ENABLE,
+            PREF_KEY_NAVBAR_ANDROID_L_ICON_STYLE,
             PREF_KEY_SIGNAL_ICON_AUTOHIDE,
             PREF_KEY_PATCH_FAKE_ID,
             PREF_KEY_MTK_FIX_DEV_OPTS,
