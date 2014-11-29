@@ -101,9 +101,9 @@
     <string name="qs_tile_gps">定位服務</string>
     <string name="qs_tile_gps_slimkat">定位服務 (SlimKat 風格) </string>
     <string name="qs_tile_gps_alt">定位服務 (CM 風格) </string>
-    <string name="qs_tile_mobile_data">行動數據</string>
+    <string name="qs_tile_mobile_data">流動數據</string>
     <string name="qs_tile_network_mode">網路模式</string>
-    <string name="qs_tile_data_usage">資料用量</string>
+    <string name="qs_tile_data_usage">數據用量</string>
     <string name="qs_tile_brightness">亮度</string>
     <string name="qs_tile_autorotation">自動旋轉</string>
     <string name="qs_tile_sync">同步功能</string>
@@ -316,8 +316,8 @@
     <string name="pref_statusbar_icon_color_summary">設定狀態列圖示和時鐘的顏色</string>
 
     <!-- Statusbar data activity color -->
-    <string name="pref_statusbar_data_activity_color_title">資料傳輸顏色</string>
-    <string name="pref_statusbar_data_activity_color_summary">設定傳輸資料時的顏色</string>
+    <string name="pref_statusbar_data_activity_color_title">數據傳輸顏色</string>
+    <string name="pref_statusbar_data_activity_color_summary">設定傳輸數據時的顏色</string>
 
     <!-- QuickSettings management category -->
     <string name="pref_cat_statusbar_qs_title">管理快速設定選單</string>
@@ -520,7 +520,7 @@
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">通話</string>
-    <string name="pref_cat_phone_mobile_data_title">行動數據</string>
+    <string name="pref_cat_phone_mobile_data_title">流動數據</string>
 
     <!-- Messaging: Strip unicode -->
     <string name="pref_mms_unicode_stripping_title">去除 unicode 字符</string>
@@ -598,7 +598,7 @@
     <string name="sbl_policy_locked">鎖定</string>
 
     <!-- Data traffic monitor -->
-    <string name="pref_cat_data_traffic_title">資料流量速度監控器</string>
+    <string name="pref_cat_data_traffic_title">數據流量速度監控器</string>
     <string name="pref_data_traffic_position_title">顯示位置</string>
     <string name="dt_position_auto">自動 (置中或靠右取決於時鐘的位置) </string>
     <string name="dt_position_left">左</string>
@@ -713,8 +713,8 @@
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">第二訊號顏色</string>
     <string name="pref_statusbar_icon_color_secondary_summary">覆蓋預設橘色訊號圖示</string>
-    <string name="pref_statusbar_data_activity_color_secondary_title">第二資料傳輸活動顏色</string>
-    <string name="pref_statusbar_data_activity_color_secondary_summary">設定第二資料傳輸指示符顏色</string>
+    <string name="pref_statusbar_data_activity_color_secondary_title">第二數據傳輸活動顏色</string>
+    <string name="pref_statusbar_data_activity_color_secondary_summary">設定第二數據傳輸指示符顏色</string>
  
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">狀態列圖示風格</string>
@@ -871,9 +871,9 @@
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">訊號指示符設定</string>
     <string name="pref_signal_cluster_connection_state_title">啟用連接狀態</string>
-    <string name="pref_signal_cluster_connection_state_summary">在行動數據及 Wi-Fi 圖示上顯示部分/完全連接狀態 (需要重新啟動) </string>
-    <string name="pref_signal_cluster_data_activity_title">啟用資料傳輸活動</string>
-    <string name="pref_signal_cluster_data_activity_summary">在行動數據及 Wi-Fi 圖示上顯示資料傳輸活動 (需要重新啟動) </string>
+    <string name="pref_signal_cluster_connection_state_summary">在流動數據及 Wi-Fi 圖示上顯示部分/完全連接狀態 (需要重新啟動) </string>
+    <string name="pref_signal_cluster_data_activity_title">啟用數據傳輸活動</string>
+    <string name="pref_signal_cluster_data_activity_summary">在流動數據及 Wi-Fi 圖示上顯示數據傳輸活動 (需要重新啟動) </string>
 
   <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">使用 CDMA 網路模式</string>
@@ -900,7 +900,7 @@
     <string name="shortcut_network_mode">切換網路模式</string>
 
     <!-- Toggle mobile data shortcut -->
-    <string name="shortcut_mobile_data">開關行動數據</string>
+    <string name="shortcut_mobile_data">開關流動數據</string>
 
     <!-- Toggle WiFi shortcut -->
     <string name="shortcut_wifi">開關 Wi-Fi</string>
@@ -1006,11 +1006,11 @@
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">未定義</string>
     <string name="pref_cat_smart_radio_title">智慧型無線網路</string>
-    <string name="pref_smart_radio_enable_summary">根據行動數據和 Wi-Fi 連接狀態，自動切換到您所指定的省電模式或正常模式 (需要重新啟動) </string>
+    <string name="pref_smart_radio_enable_summary">根據流動數據和 Wi-Fi 連接狀態，自動切換到您所指定的省電模式或正常模式 (需要重新啟動) </string>
     <string name="pref_smart_radio_normal_mode_title">正常模式</string>
     <string name="pref_smart_radio_power_saving_mode_title">省電模式</string>
     <string name="pref_smart_radio_screen_off_title">當螢幕關閉</string>
-    <string name="pref_smart_radio_screen_off_summary">當螢幕關閉，無論行動數據是否已被啟用或停用，啟動省電模式</string>
+    <string name="pref_smart_radio_screen_off_summary">當螢幕關閉，無論流動數據是否已被啟用或停用，啟動省電模式</string>
     <string name="pref_smart_radio_ignore_locked_title">當鎖定時忽略</string>
     <string name="pref_smart_radio_ignore_locked_summary">當螢幕開啟時，除非螢幕鎖定已被解除，否則省電模式將不會停用</string>
     <string name="pref_smart_radio_mode_change_delay_title">延遲變更網路模式</string>
@@ -1294,7 +1294,7 @@
     <string name="pref_navbar_ring_disable_title">停用導航環</string>
 
     <!-- Data traffic monitor style -->
-    <string name="pref_data_traffic_mode_title">資料流量速度監控器風格</string>
+    <string name="pref_data_traffic_mode_title">數據流量速度監控器風格</string>
     <string name="dt_mode_off">停用</string>
     <string name="dt_mode_simple">簡單風格</string>
     <string name="dt_mode_omni">Omni 風格</string>
@@ -1329,7 +1329,7 @@
     
      <!-- Traffic meter: show only when download active -->
     <string name="pref_data_traffic_active_dl_only_title">當有下載任務時</string>
-    <string name="pref_data_traffic_active_dl_only_summary">僅在當 Android 標準下載管理員有下載任務時顯示資料流量速度監控器</string>
+    <string name="pref_data_traffic_active_dl_only_summary">僅在當 Android 標準下載管理員有下載任務時顯示數據流量速度監控器</string>
 
     <!-- Led control -->
     <string name="pref_led_control_title">通知控制</string>
@@ -1367,7 +1367,7 @@
     <string name="lc_vibrate_pattern_invalid">無效的震動規律格式</string>
 
     <!-- Omni data traffic monitor inactivity threshold -->
-    <string name="pref_data_traffic_omni_autohide_threshold_title">資料流量少於以下數值時視為閒置</string>
+    <string name="pref_data_traffic_omni_autohide_threshold_title">數據流量少於以下數值時視為閒置</string>
 
     <!-- Icon Picker: additional icons -->
     <string name="shortcuts_icon_picker_chrome">Chrome</string>
@@ -1434,7 +1434,7 @@
     <string name="pref_lc_qh_cat_weekend_title">週末</string>
 
     <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">停用行動數據網絡類別圖示</string>
+    <string name="pref_disable_data_network_type_icons_title">停用流動數據網絡類別圖示</string>
     <string name="pref_disable_data_network_type_icons_summary">停用在訊號條旁的 3G/G 圖示</string>
 
     <!-- Force English locale -->
@@ -1503,7 +1503,7 @@
     <string name="shortcut_ringer_mode">設定鈴聲模式</string>
 
     <!-- Data traffic monitor: Only for mobile data -->
-    <string name="pref_data_traffic_active_mobile_only_title">只限行動數據</string>
+    <string name="pref_data_traffic_active_mobile_only_title">只限流動數據</string>
 
     <!-- Dashed circle battery style -->
     <string name="battery_style_circle_dashed">虛線圓形電量指示器</string>
@@ -1522,8 +1522,8 @@
     <string name="pref_qs_swipe_enable_title">滑動到快速設定頁</string>
 
     <!-- Smart Radio: ignore mobile data availability -->
-    <string name="pref_smart_radio_mda_ignore_title">忽略行動數據可用性</string>
-    <string name="pref_smart_radio_mda_ignore_summary">即使無法使用行動數據，亦會恢復正常模式</string>
+    <string name="pref_smart_radio_mda_ignore_title">忽略流動數據可用性</string>
+    <string name="pref_smart_radio_mda_ignore_summary">即使無法使用流動數據，亦會恢復正常模式</string>
 
     <!-- GB Actions: Toggle sync -->
     <string name="shortcut_sync">開關同步</string>
@@ -1794,5 +1794,29 @@
 
     <!-- Messaging -->
     <string name="pref_cat_phone_messaging_title">信息</string>
+
+    <!-- Compatibility warning -->
+    <string name="compat_warning_title">警告</string>
+    <string name="compat_warning_message">只供原生 Android 或 Google Play Edition 裝置使用! \n\n 在客製化的 OEM ROM (如: Touchwiz，Sense，Xperia) 內使用並未經過測試，並可能導致意料之外的結果。 \n\n如果仍想要繼續，請您自己要承擔風險而且開發者將不會提供正式支援。如您想了解更多關於相容性的資料，請到<a href="http://forum.xda-developers.com/showthread.php?t=2554049"> XDA 討論串內查閱。 </a></string>
+    <string name="compat_warning_ok_stage1">我明白了</string>
+    <string name="compat_warning_ok_stage2">我真的明白相關風險了!</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">袋中模式</string>
+    <string name="pref_unc_as_pocket_mode_summary">當距離感應器被覆蓋時 (例如當裝置被放在口袋中) 不會喚醒螢幕</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">本選項會被 [電源選項] > [距離感應器喚醒] 選項覆寫</string>
+
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">左手模式</string>
+    <string name="pref_navbar_left_handed_summary">請注意! 此乃實驗性功能! 當裝置橫置時把垂直導航列置於左方 (需要重新啟動)</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">隱藏啟動器圖示</string>
+    <string name="pref_hide_launcher_icon_summary">可能需要重新啟動啟動器方能生效</string>
+
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">已停用</string>
+    <string name="navbar_l_icon_style_original">原生</string>
+    <string name="navbar_l_icon_style_large">較大</string>
 
 </resources>
