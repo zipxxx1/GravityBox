@@ -979,7 +979,7 @@
 
     <!-- Navbar: always on bottom -->
     <string name="pref_navbar_always_on_bottom_title">Zawsze na dole</string>
-    <string name="pref_navbar_always_on_bottom_summary">Wymusza położenie paska nawigacji na dole w przypadku orientacji poziomej ekranu (wymagany restart)</string>
+    <string name="pref_navbar_always_on_bottom_summary">EKSPERYMENTALNE! Wymusza położenie paska nawigacji na dole w przypadku orientacji poziomej ekranu (wymagany restart)</string>
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Zamień z przyciskiem MENU</string>
@@ -1602,8 +1602,8 @@
     <string name="pref_lc_headsup_dnd_summary">Nie pokaże żadnych powiadomień Heads up, podczas gdy ta aplikacja jest na pierwszym planie</string>
 
     <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Włącz ikony nawigacyjne Androida L</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Zastępuje standardowe ikony nawigacji ikonami pochodzącymi z Androida L (wymagany restart)</string>
+    <string name="pref_navbar_android_l_icons_enable_title">Użyj ikon Lollipop</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Zastępuje standardowe ikony nawigacji ikonami pochodzącymi z Androida Lollipop (wymagany restart)</string>
 
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Tryb aktywnego ekranu</string>
@@ -1790,5 +1790,18 @@
     <string name="pref_unc_as_pocket_mode_title">Tryb W kieszeni</string>
     <string name="pref_unc_as_pocket_mode_summary">Ekran nie włączy się, jeśli czujnik zbliżeniowy jest przykryty (np. gdy urządzenie znajduje się w kieszeni)</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">Ta opcja jest obecnie zastępowana przez funkcję Wybudzania zbliżeniowego z menu Poprawek ustawień zasilania</string>
+
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">Tryb leworęczny</string>
+    <string name="pref_navbar_left_handed_summary">EKSPERYMENTALNY! Przy orientacji poziomej plasuje pionowy pasek nawigacji po lewej stronie ekranu (wymaga restartu)</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Ukryj ikonę startera aplikacji</string>
+    <string name="pref_hide_launcher_icon_summary">Może wymagać ponownego uruchomienia startera aplikacji</string>
+
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">Wyłączone</string>
+    <string name="navbar_l_icon_style_original">Oryginalne</string>
+    <string name="navbar_l_icon_style_large">Duże</string>
 
 </resources>
