@@ -1839,4 +1839,9 @@
     <string name="navbar_l_icon_style_original">Original</string>
     <string name="navbar_l_icon_style_large">Large</string>
 
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">Adaptive delay</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">Automatically prolongs delay 
+        if current mobile data traffic exceeds defined threshold (Set to 0 to disable)</string>
+
 </resources>

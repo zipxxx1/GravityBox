@@ -724,6 +724,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SMART_RADIO_POWER_SAVING_MODE = "pref_smart_radio_power_saving_mode";
     public static final String PREF_KEY_SMART_RADIO_SCREEN_OFF = "pref_smart_radio_screen_off";
     public static final String PREF_KEY_SMART_RADIO_SCREEN_OFF_DELAY = "pref_smart_radio_screen_off_delay";
+    public static final String PREF_KEY_SMART_RADIO_ADAPTIVE_DELAY = "pref_smart_radio_adaptive_delay";
     public static final String PREF_KEY_SMART_RADIO_IGNORE_LOCKED = "pref_smart_radio_ignore_locked";
     public static final String PREF_KEY_SMART_RADIO_MODE_CHANGE_DELAY = "pref_smart_radio_mode_change_delay";
     public static final String PREF_KEY_SMART_RADIO_MDA_IGNORE = "pref_smart_radio_mda_ignore";
@@ -735,6 +736,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_SR_IGNORE_LOCKED = "smartRadioIgnoreLocked";
     public static final String EXTRA_SR_MODE_CHANGE_DELAY = "smartRadioModeChangeDelay";
     public static final String EXTRA_SR_MDA_IGNORE = "smartRadioMdaIgnore";
+    public static final String EXTRA_SR_ADAPTIVE_DELAY = "smartRadioAdaptiveDelay";
 
     public static final String PREF_KEY_IME_FULLSCREEN_DISABLE = "pref_ime_fullscreen_disable";
     public static final String PREF_KEY_TORCH_AUTO_OFF = "pref_torch_auto_off";
@@ -1320,6 +1322,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefScHideSimLabels;
         private ListPreference mPrefHeadsUpImportance;
         private ListPreference mPrefQrQuality;
+        private SeekBarPreference mPrefSrAdaptiveDelay;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1646,6 +1649,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbTickerPolicy = (ListPreference) findPreference(PREF_KEY_STATUSBAR_TICKER_POLICY); 
 
             mPrefQrQuality = (ListPreference) findPreference(PREF_KEY_QUICKRECORD_QUALITY);
+
+            mPrefSrAdaptiveDelay = (SeekBarPreference) findPreference(PREF_KEY_SMART_RADIO_ADAPTIVE_DELAY);
 
             // MTK fixes
             mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
@@ -2443,6 +2448,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefQrQuality.setSummary(mPrefQrQuality.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_SMART_RADIO_SCREEN_OFF_DELAY)) {
+                mPrefSrAdaptiveDelay.setEnabled(
+                        mPrefs.getBoolean(PREF_KEY_SMART_RADIO_ENABLE, false) &&
+                        mPrefs.getBoolean(PREF_KEY_SMART_RADIO_SCREEN_OFF, false) &&
+                        mPrefs.getInt(PREF_KEY_SMART_RADIO_SCREEN_OFF_DELAY, 0) > 0);
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -3118,6 +3130,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
                 intent.putExtra(EXTRA_SR_SCREEN_OFF_DELAY,
                         prefs.getInt(PREF_KEY_SMART_RADIO_SCREEN_OFF_DELAY, 0));
+            } else if (key.equals(PREF_KEY_SMART_RADIO_ADAPTIVE_DELAY)) {
+                intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
+                intent.putExtra(EXTRA_SR_ADAPTIVE_DELAY,
+                        prefs.getInt(PREF_KEY_SMART_RADIO_ADAPTIVE_DELAY, 0));
             } else if (key.equals(PREF_KEY_SMART_RADIO_IGNORE_LOCKED)) {
                 intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
                 intent.putExtra(EXTRA_SR_IGNORE_LOCKED,
