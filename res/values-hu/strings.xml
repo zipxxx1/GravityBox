@@ -1698,4 +1698,8 @@
     <string name="navbar_l_icon_style_original">Eredeti</string>
     <string name="navbar_l_icon_style_large">Nagyobb</string>
 
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">Adaptív késleltetés</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">Automatikusan meghosszabbítja a késleltetést, ha az aktuális mobil adatforgalom meghaladja a meghatározott értéket (Letiltáshoz állíts be 0-t)</string>
+
 </resources>

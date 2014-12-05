@@ -1681,4 +1681,9 @@
     <string name="navbar_l_icon_style_original">Original</string>
     <string name="navbar_l_icon_style_large">Grand</string>
 
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">Seuil adptatif</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">Prolonge automatiquement le retardement
+        si les données mobiles en cours sont supérieures au seuil défini (Mettre 0 pour désactiver)</string>
+
 </resources>

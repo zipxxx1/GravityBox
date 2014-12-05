@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.TrafficStats;
 import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -65,6 +66,7 @@ public class ModSmartRadio {
     private static boolean mSmartRadioEnabled;
     private static boolean mIgnoreMobileDataAvailability;
     private static boolean mIsPhoneIdle = true;
+    private static int mAdaptiveDelayThreshold;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -99,6 +101,10 @@ public class ModSmartRadio {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_MDA_IGNORE)) {
                     mIgnoreMobileDataAvailability = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_SR_MDA_IGNORE, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_SR_ADAPTIVE_DELAY)) {
+                    mAdaptiveDelayThreshold = intent.getIntExtra(GravityBoxSettings.EXTRA_SR_ADAPTIVE_DELAY, 0);
+                    if (DEBUG) log("mAdaptiveDelay = " + mAdaptiveDelayThreshold);
                 }
             } else if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 int nwType = -1;
@@ -326,6 +332,13 @@ public class ModSmartRadio {
         private WakeLock mWakeLock;
         private AlarmManager mAlarmManager;
         private PendingIntent mPendingIntent;
+        private LinkActivity mLinkActivity;
+
+        class LinkActivity {
+            long timestamp;
+            long rxBytes;
+            long txBytes;
+        }
 
         public NetworkModeChanger(Context context) {
             mContext = context;
@@ -333,6 +346,7 @@ public class ModSmartRadio {
             mNextNetworkMode = -1;
             mCurrentNetworkMode = -1;
             mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+            mLinkActivity = new LinkActivity();
 
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GB:SmartRadio");
@@ -357,10 +371,7 @@ public class ModSmartRadio {
             mNextNetworkMode = networkMode;
             if (mIsScreenOff && mNextNetworkMode == mPowerSavingMode && mScreenOffDelay != 0) {
                 if (DEBUG) log("NetworkModeChanger: scheduling alarm for switching to power saving mode");
-                Intent intent = new Intent(ACTION_CHANGE_MODE_ALARM);
-                mPendingIntent = PendingIntent.getBroadcast(mContext, 1, intent, PendingIntent.FLAG_ONE_SHOT);
-                long triggerAtMillis = System.currentTimeMillis() + mScreenOffDelay*60*1000;
-                mAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, mPendingIntent);
+                scheduleAlarm();
             } else {
                 if (mModeChangeDelay == 0) {
                     run();
@@ -382,18 +393,50 @@ public class ModSmartRadio {
             }
         }
 
+        private void scheduleAlarm() {
+            Intent intent = new Intent(ACTION_CHANGE_MODE_ALARM);
+            mPendingIntent = PendingIntent.getBroadcast(mContext, 1, intent, PendingIntent.FLAG_ONE_SHOT);
+            long triggerAtMillis = System.currentTimeMillis() + mScreenOffDelay*60*1000;
+            mAlarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, mPendingIntent);
+            mLinkActivity.timestamp = System.currentTimeMillis();
+            mLinkActivity.rxBytes = TrafficStats.getMobileRxBytes();
+            mLinkActivity.txBytes = TrafficStats.getMobileTxBytes();
+        }
+
         private void cancelPendingAlarm() {
             if (mAlarmManager != null && mPendingIntent != null) {
                 mAlarmManager.cancel(mPendingIntent);
+                mPendingIntent = null;
             }
+        }
+
+        private boolean shouldPostponeAlarm() {
+            boolean postpone = false;
+            if (mAdaptiveDelayThreshold > 0) {
+                // if there's link activity higher than defined threshold
+                long rxDelta = TrafficStats.getMobileRxBytes() - mLinkActivity.rxBytes;
+                long txDelta = TrafficStats.getMobileTxBytes() - mLinkActivity.txBytes;
+                long timeDelta = System.currentTimeMillis() - mLinkActivity.timestamp;
+                long speedRxKBs = (long)(rxDelta / (timeDelta / 1000f)) / 1024;
+                long speedTxKBs = (long)(txDelta / (timeDelta / 1000f)) / 1024;
+                postpone |= speedTxKBs >= mAdaptiveDelayThreshold || speedRxKBs >= mAdaptiveDelayThreshold;
+                if (DEBUG) log("shouldPostponeAlarm: speedRxKBs=" + speedRxKBs +
+                        "; speedTxKBs=" + speedTxKBs + "; threshold=" + mAdaptiveDelayThreshold);
+            }
+            return postpone;
         }
 
         @Override
         public void onBroadcastReceived(Context context, Intent intent) {
             if (intent.getAction().equals(ACTION_CHANGE_MODE_ALARM)) {
                 if (DEBUG) log("ACTION_CHANGE_MODE_ALARM received");
-                run();
                 mPendingIntent = null;
+                if (shouldPostponeAlarm()) {
+                    if (DEBUG) log("NetworkModeChanger: postponing alarm for switching to power saving mode");
+                    scheduleAlarm();
+                } else {
+                    run();
+                }
             }
         }
     }
@@ -410,6 +453,7 @@ public class ModSmartRadio {
             mModeChangeDelay = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_MODE_CHANGE_DELAY, 5);
             mScreenOffDelay = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_SCREEN_OFF_DELAY, 0);
             mIgnoreMobileDataAvailability = prefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_MDA_IGNORE, false);
+            mAdaptiveDelayThreshold = prefs.getInt(GravityBoxSettings.PREF_KEY_SMART_RADIO_ADAPTIVE_DELAY, 0);
 
             XposedHelpers.findAndHookMethod(classSystemUIService, "onCreate", new XC_MethodHook() {
                 @Override

@@ -1654,4 +1654,9 @@
     <string name="navbar_l_icon_style_original">Originálne</string>
     <string name="navbar_l_icon_style_large">Veľké</string>
 
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">Adaptívne oneskorenie</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">Automaticky predĺži oneskorenie 
+        ak mobilný dátový tok prekračuje definovaný prah (Nastavenie 0 vypne túto funkciu)</string>
+
 </resources>
