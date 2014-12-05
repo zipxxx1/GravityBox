@@ -28,6 +28,7 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -62,6 +63,7 @@ public class ModSmartRadio {
     private static int mScreenOffDelay;
     private static boolean mSmartRadioEnabled;
     private static boolean mIgnoreMobileDataAvailability;
+    private static boolean mIsPhoneIdle = true;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -129,6 +131,18 @@ public class ModSmartRadio {
                 }
             } else if (intent.getAction().equals(ACTION_TOGGLE_SMART_RADIO)) {
                 toggleSmartRadio();
+            } else if (intent.getAction().equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
+                final boolean wasPhoneBusy = !mIsPhoneIdle;
+                mIsPhoneIdle = TelephonyManager.EXTRA_STATE_IDLE.equals(
+                        intent.getStringExtra(TelephonyManager.EXTRA_STATE));
+                if (DEBUG) log("ACTION_PHONE_STATE_CHANGED: mIsPhoneIdle=" + mIsPhoneIdle);
+                if (wasPhoneBusy && mIsPhoneIdle) {
+                    if (shouldSwitchToNormalState()) {
+                        switchToState(State.NORMAL);
+                    } else {
+                        switchToState(State.POWER_SAVING);
+                    }
+                }
             }
 
             if (mNetworkModeChanger != null) {
@@ -237,6 +251,9 @@ public class ModSmartRadio {
             return;
         } else if (mCurrentState == newState && !force) {
             if (DEBUG) log("switchToState: new state == previous state - ignoring");
+            return;
+        } else if (!mIsPhoneIdle) {
+            if (DEBUG) log("switchToState: phone is not idle - ignoring");
             return;
         } else if (!isMobileNetworkAvailable()) {
             // force power saving state no matter what so we start with it when mobile network is available again
@@ -412,6 +429,7 @@ public class ModSmartRadio {
                         intentFilter.addAction(Intent.ACTION_USER_PRESENT);
                         intentFilter.addAction(NetworkModeChanger.ACTION_CHANGE_MODE_ALARM);
                         intentFilter.addAction(ACTION_TOGGLE_SMART_RADIO);
+                        intentFilter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
