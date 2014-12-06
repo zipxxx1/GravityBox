@@ -16,6 +16,10 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.ceco.kitkat.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.kitkat.gravitybox.StatusBarIconManager.IconManagerListener;
 
@@ -36,9 +40,17 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private static final String TAG = "GB:StatusbarDownloadProgressView";
     private static final boolean DEBUG = false;
 
+    public static final List<String> SUPPORTED_PACKAGES = new ArrayList<String>(Arrays.asList(
+            "com.android.providers.downloads",
+            "com.android.bluetooth",
+            "com.mediatek.bluetooth",
+            "com.android.chrome",
+            "org.mozilla.firefox"
+    ));
+
     private enum Mode { OFF, TOP, BOTTOM };
     private Mode mMode;
-    private String mPackageName;
+    private String mId;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -74,18 +86,18 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         if (mMode == Mode.OFF) return;
 
         if (!verifyNotification(statusBarNotif)) {
-            if (DEBUG) log("onNotificationAdded: ignoring non-download provider notification");
+            if (DEBUG) log("onNotificationAdded: ignoring unsupported notification");
             return;
         }
 
-        if (mPackageName != null) {
-            if (DEBUG) log("onNotificationAdded: another download already in registered");
+        if (mId != null) {
+            if (DEBUG) log("onNotificationAdded: another download already registered");
             return;
         }
 
-        mPackageName = getPackageName(statusBarNotif);
-        if (mPackageName != null) {
-            if (DEBUG) log("starting progress for " + mPackageName);
+        mId = getIdentifier(statusBarNotif);
+        if (mId != null) {
+            if (DEBUG) log("starting progress for " + mId);
             updateProgress(statusBarNotif);
         }
     }
@@ -93,7 +105,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     public void onNotificationUpdated(Object statusBarNotif) {
         if (mMode == Mode.OFF) return;
 
-        if (mPackageName == null) {
+        if (mId == null) {
             // treat it as if it was added, e.g. to show progress in case
             // feature has been enabled during already ongoing download
             onNotificationAdded(statusBarNotif);
@@ -101,12 +113,12 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         }
 
         if (!verifyNotification(statusBarNotif)) {
-            if (DEBUG) log("onNotificationUpdated: ignoring non-download provider notification");
+            if (DEBUG) log("onNotificationUpdated: ignoring unsupported notification");
             return;
         }
 
-        if (mPackageName.equals(getPackageName(statusBarNotif))) {
-            if (DEBUG) log("updating progress for " + mPackageName);
+        if (mId.equals(getIdentifier(statusBarNotif))) {
+            if (DEBUG) log("updating progress for " + mId);
             updateProgress(statusBarNotif);
         }
     }
@@ -115,16 +127,16 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         if (mMode == Mode.OFF) return;
 
         if (!verifyNotification(statusBarNotif)) {
-            if (DEBUG) log("onNotificationRemoved: ignoring non-download provider notification");
+            if (DEBUG) log("onNotificationRemoved: ignoring unsupported notification");
             return;
         }
 
-        if (mPackageName == null) {
+        if (mId == null) {
             if (DEBUG) log("onNotificationRemoved: no download registered");
             return;
-        } else if (mPackageName.equals(getPackageName(statusBarNotif))) {
-            if (DEBUG) log("finishing progress for " + mPackageName);
-            mPackageName = null;
+        } else if (mId.equals(getIdentifier(statusBarNotif))) {
+            if (DEBUG) log("finishing progress for " + mId);
+            mId = null;
             updateProgress(null);
         }
     }
@@ -132,18 +144,23 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private boolean verifyNotification(Object statusBarNotif) {
         if (statusBarNotif == null) return false;
         String pkgName = (String) XposedHelpers.getObjectField(statusBarNotif, "pkg");
-        if (ModDownloadProvider.PACKAGE_NAME.equals(pkgName)) {
-            return true;
+        if (SUPPORTED_PACKAGES.contains(pkgName)) {
+            return (Boolean) XposedHelpers.callMethod(statusBarNotif, "isOngoing");
         }
         return false;
     }
 
-    private String getPackageName(Object statusBarNotif) {
-        String tag = (String) XposedHelpers.getObjectField(statusBarNotif, "tag");
-        if (tag != null && tag.contains(":")) {
-            return tag.substring(tag.indexOf(":")+1);
+    private String getIdentifier(Object statusBarNotif) {
+        String pkgName = (String) XposedHelpers.getObjectField(statusBarNotif, "pkg");
+        if (SUPPORTED_PACKAGES.get(0).equals(pkgName)) {
+            String tag = (String) XposedHelpers.getObjectField(statusBarNotif, "tag");
+            if (tag != null && tag.contains(":")) {
+                return pkgName + ":" + tag.substring(tag.indexOf(":")+1);
+            }
+            if (DEBUG) log("getIdentifier: Unexpected notification tag: " + tag);
+        } else {
+            return (pkgName + ":" + String.valueOf(XposedHelpers.getIntField(statusBarNotif, "id")));
         }
-        if (DEBUG) log("getPackageName: Unexpected notification tag: " + tag);
         return null;
     }
 
@@ -152,8 +169,12 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         int newWidth = 0;
         if (statusBarNotif != null) {
             Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
-            if (n.extras.containsKey(Notification.EXTRA_PROGRESS)) {
-                newWidth = (int) ((float)maxWidth * (float)(n.extras.getInt(Notification.EXTRA_PROGRESS)*0.01f));
+            if (n != null && n.extras.containsKey(Notification.EXTRA_PROGRESS)) {
+                final int progress = n.extras.getInt(Notification.EXTRA_PROGRESS);
+                final int progressMax = n.extras.getInt(Notification.EXTRA_PROGRESS_MAX, 0);
+                if (progressMax > 0) {
+                    newWidth = (int) ((float)maxWidth * (float)progress/(float)progressMax);
+                }
             }
         }
         if (DEBUG) log("updateProgress: maxWidth=" + maxWidth + "; newWidth=" + newWidth);
@@ -192,7 +213,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED)) {
             mMode = Mode.valueOf(intent.getStringExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED));
             if (mMode == Mode.OFF) {
-                mPackageName = null;
+                mId = null;
                 updateProgress(null);
             } else {
                 updatePosition();
