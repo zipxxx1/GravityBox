@@ -1838,4 +1838,9 @@
     <string name="navbar_l_icon_style_original">Оригинал</string>
     <string name="navbar_l_icon_style_large">Большой</string>
 
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">Адаптивная задержка</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">Автоматическое продление задержки 
+        при выходе трафика мобильных данных за пределы установленного порога (0 для отключения)</string>
+
 </resources>
