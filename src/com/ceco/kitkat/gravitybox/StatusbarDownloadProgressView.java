@@ -43,9 +43,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     public static final List<String> SUPPORTED_PACKAGES = new ArrayList<String>(Arrays.asList(
             "com.android.providers.downloads",
             "com.android.bluetooth",
-            "com.mediatek.bluetooth",
-            "com.android.chrome",
-            "org.mozilla.firefox"
+            "com.mediatek.bluetooth"
     ));
 
     private enum Mode { OFF, TOP, BOTTOM };
@@ -112,11 +110,6 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             return;
         }
 
-        if (!verifyNotification(statusBarNotif)) {
-            if (DEBUG) log("onNotificationUpdated: ignoring unsupported notification");
-            return;
-        }
-
         if (mId.equals(getIdentifier(statusBarNotif))) {
             if (DEBUG) log("updating progress for " + mId);
             updateProgress(statusBarNotif);
@@ -125,11 +118,6 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
 
     public void onNotificationRemoved(Object statusBarNotif) {
         if (mMode == Mode.OFF) return;
-
-        if (!verifyNotification(statusBarNotif)) {
-            if (DEBUG) log("onNotificationRemoved: ignoring unsupported notification");
-            return;
-        }
 
         if (mId == null) {
             if (DEBUG) log("onNotificationRemoved: no download registered");
@@ -142,12 +130,17 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     }
 
     private boolean verifyNotification(Object statusBarNotif) {
-        if (statusBarNotif == null) return false;
+        if (statusBarNotif == null || !(Boolean) XposedHelpers.callMethod(statusBarNotif, "isOngoing")) {
+            return false;
+        }
+
         String pkgName = (String) XposedHelpers.getObjectField(statusBarNotif, "pkg");
         if (SUPPORTED_PACKAGES.contains(pkgName)) {
-            return (Boolean) XposedHelpers.callMethod(statusBarNotif, "isOngoing");
+            return true;
+        } else {
+            Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
+            return (n != null && n.extras.getBoolean(ModLedControl.NOTIF_EXTRA_PROGRESS_TRACKING));
         }
-        return false;
     }
 
     private String getIdentifier(Object statusBarNotif) {

@@ -1750,9 +1750,10 @@
     <string name="pref_power_proximity_wake_ignore_call_title">Ignore for incoming call</string>
 
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">Download progress bar</string>
-    <string name="pref_statusbar_download_progress_summary">Shows download progress bar in status bar for downloads carried out via
-        Android\'s standard download manager</string>
+    <string name="pref_statusbar_download_progress_title">Progress bar</string>
+    <string name="pref_statusbar_download_progress_summary">Shows progress bar in status bar for
+        standard Android Download Manager, bluetooth transfers and other apps that have
+        Progress bar tracking enabled in Ultimate notification control</string>
     <string name="sb_download_progress_off">Disabled</string>
     <string name="sb_download_progress_top">Top edge</string>
     <string name="sb_download_progress_bottom">Bottom edge</string>
@@ -1843,5 +1844,10 @@
     <string name="pref_smart_radio_adaptive_delay_title">Adaptive delay</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Automatically prolongs delay 
         if current mobile data traffic exceeds defined threshold (Set to 0 to disable)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Progress bar tracking</string>
+    <string name="pref_lc_progress_tracking_summary">Shows progress bar in status bar for ongoing notifications
+        that contain progress bar. Requires Progress bar feature in status bar tweaks to be enabled.</string>
 
 </resources>

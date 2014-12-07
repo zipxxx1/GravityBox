@@ -66,6 +66,7 @@ public class LedSettings {
     private boolean mHeadsUpDnd;
     private boolean mHeadsUpIgnoreUpdate;
     private int mHeadsUpTimeout;
+    private boolean mProgressTracking;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -142,6 +143,8 @@ public class LedSettings {
                 ls.setHeadsUpIgnoreUpdate(Boolean.valueOf(data[1]));
             } else if (data[0].equals("headsUpTimeout")) {
                 ls.setHeadsUpTimeout(Integer.valueOf(data[1]));
+            } else if (data[0].equals("progressTracking")) {
+                ls.setProgressTracking(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -172,6 +175,7 @@ public class LedSettings {
         mHeadsUpDnd = false;
         mHeadsUpIgnoreUpdate = false;
         mHeadsUpTimeout = 5;
+        mProgressTracking = false;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -365,6 +369,10 @@ public class LedSettings {
         mHeadsUpTimeout = timeout;
     }
 
+    protected void setProgressTracking(boolean tracking) {
+        mProgressTracking = tracking;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -457,6 +465,10 @@ public class LedSettings {
         return mHeadsUpTimeout;
     }
 
+    public boolean getProgressTracking() {
+        return mProgressTracking;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -487,6 +499,7 @@ public class LedSettings {
             dataSet.add("headsUpDnd:" + mHeadsUpDnd);
             dataSet.add("headsUpIgnoreUpdate:" + mHeadsUpIgnoreUpdate);
             dataSet.add("headsUpTimeout:" + mHeadsUpTimeout);
+            dataSet.add("progressTracking:" + mProgressTracking);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

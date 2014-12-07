@@ -18,6 +18,7 @@ package com.ceco.kitkat.gravitybox.ledcontrol;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.StatusbarDownloadProgressView;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.LedMode;
@@ -67,6 +68,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_HEADS_UP_IGNORE_UPDATE = "pref_lc_headsup_ignore_update";
     private static final String PREF_KEY_HEADS_UP_TIMEOUT = "pref_lc_headsup_timeout";
     private static final String PREF_CAT_KEY_OTHER = "pref_cat_lc_other";
+    private static final String PREF_KEY_PROGRESS_TRACKING = "pref_lc_progress_tracking";
 
     private static final int REQ_PICK_SOUND = 101;
 
@@ -96,6 +98,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private CheckBoxPreference mHeadsUpIgnoreUpdatePref;
     private SeekBarPreference mHeadsUpTimeoutPref;
     private PreferenceCategory mOtherCat;
+    private CheckBoxPreference mProgressTrackingPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -131,6 +134,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mHeadsUpIgnoreUpdatePref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_IGNORE_UPDATE);
         mHeadsUpTimeoutPref = (SeekBarPreference) findPreference(PREF_KEY_HEADS_UP_TIMEOUT);
         mOtherCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_OTHER);
+        mProgressTrackingPref = (CheckBoxPreference) findPreference(PREF_KEY_PROGRESS_TRACKING);
     }
 
     protected void initialize(LedSettings ledSettings) {
@@ -182,6 +186,11 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             mHeadsUpIgnoreUpdatePref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
             mHeadsUpTimeoutPref.setValue(ledSettings.getHeadsUpTimeout());
             mHeadsUpTimeoutPref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
+        }
+        if (StatusbarDownloadProgressView.SUPPORTED_PACKAGES.contains(ledSettings.getPackageName())) {
+            mOtherCat.removePreference(mProgressTrackingPref);
+        } else {
+            mProgressTrackingPref.setChecked(ledSettings.getProgressTracking());
         }
     }
 
@@ -287,6 +296,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected int getHeadsUpTimeout() {
         return mHeadsUpTimeoutPref.getValue();
+    }
+
+    protected boolean getProgressTracking() {
+        return mProgressTrackingPref.isChecked();
     }
 
     @Override

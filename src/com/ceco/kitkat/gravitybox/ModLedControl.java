@@ -89,6 +89,7 @@ public class ModLedControl {
     private static final String NOTIF_EXTRA_HEADS_UP_IGNORE_UPDATE = "gbHeadsUpIgnoreUpdate";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE = "gbActiveScreenPocketMode";
+    public static final String NOTIF_EXTRA_PROGRESS_TRACKING = "gbProgressTracking";
     private static final int MSG_SHOW_HEADS_UP = 1026;
     private static final int MSG_HIDE_HEADS_UP = 1027;
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
@@ -317,6 +318,7 @@ public class ModLedControl {
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
                 final boolean qhActiveIncludingActiveScreen = qhActive &&
                         !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
+                n.extras.putBoolean(NOTIF_EXTRA_PROGRESS_TRACKING, ls.getProgressTracking());
 
                 boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
                         (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);
