@@ -1723,4 +1723,9 @@
     <string name="pref_smart_radio_adaptive_delay_summary">自动延迟
         如果目前的移动数据流量超过了定义的阈值（设置为0将禁用）</string>
 
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">进度条跟踪</string>
+    <string name="pref_lc_progress_tracking_summary">在正在进行的通知状态栏显示进度条
+        需要在状态栏的调整进度条功能被激活</string>
+
 </resources>

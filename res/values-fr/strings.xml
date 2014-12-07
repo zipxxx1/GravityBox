@@ -1638,9 +1638,10 @@
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorer lors d\'un appel entrant</string>
 
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">Barre de progression du téléchargement</string>
-    <string name="pref_statusbar_download_progress_summary">Affiche une barre de progession de téléchargement dans la barre d\'état pour les téléchargements réalisés via
-        le gestionnaire standard de téléchargement d\'Android</string>
+    <string name="pref_statusbar_download_progress_title">Barre de progression</string>
+    <string name="pref_statusbar_download_progress_summary">Affiche une barre de progression dans la barre d\'état pour
+        le Gestionnaire de Téléchargement d\'Android standard, les transferts bluetooth et les autres applis qui ont
+        le suivi par barre de progression activé dans le Contrôle Ultime de Notications</string>
     <string name="sb_download_progress_off">Désactivé</string>
     <string name="sb_download_progress_top">Bord supérieur</string>
     <string name="sb_download_progress_bottom">Bord inférieur</string>
@@ -1685,5 +1686,10 @@
     <string name="pref_smart_radio_adaptive_delay_title">Seuil adptatif</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Prolonge automatiquement le retardement
         si les données mobiles en cours sont supérieures au seuil défini (Mettre 0 pour désactiver)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Suivi par barre de progression</string>
+    <string name="pref_lc_progress_tracking_summary">Affiche une barre de progression dans la barre d\'état pour les notifications en cours
+        qui contiennent une barre de progression. Il faut que l\'item Barre de progression soit activé dans les Modifications de Barre d\'état</string>
 
 </resources>

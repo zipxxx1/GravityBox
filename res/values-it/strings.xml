@@ -1619,10 +1619,10 @@
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignora per chiamate in arrivo</string>
     
-    <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">Barra di avanzamento download</string>
+    <string name="pref_statusbar_download_progress_title">Barra di avanzamento</string>
     <string name="pref_statusbar_download_progress_summary">Mostra una barra di avanzamento nella barra di stato per i download in corso gestiti
-        dall\'app predefinita di Android per la gestione dei Download</string>
+        dall\'app predefinita di Android per la gestione dei Download, i trasferimenti bluetooth e altre applicazioni che hanno
+        la barra di avanzamento abilitata nel Gestore globale notifiche</string>
     <string name="sb_download_progress_off">Disabilitato</string>
     <string name="sb_download_progress_top">In alto</string>
     <string name="sb_download_progress_bottom">In basso</string>
@@ -1675,5 +1675,10 @@
     <string name="pref_smart_radio_adaptive_delay_title">Ritardo adattivo</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Prolunga automaticamente il ritardo 
         se viene superata la soglia impostata del traffico dati (Imposta a 0 per disattivare)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Tracciamento barra di avanzamento</string>
+    <string name="pref_lc_progress_tracking_summary">Mostra una barra di avanzamento per le notifiche in corso
+        che prevedono tale barra. Richiede l\'attivazione della Barra di avanzamento nel menu Barra di stato.</string>
 
 </resources>

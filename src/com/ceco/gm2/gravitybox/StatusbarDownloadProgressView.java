@@ -31,6 +31,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.TypedValue;
@@ -47,9 +48,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     public static final List<String> SUPPORTED_PACKAGES = new ArrayList<String>(Arrays.asList(
             "com.android.providers.downloads",
             "com.android.bluetooth",
-            "com.mediatek.bluetooth",
-            "com.android.chrome",
-            "org.mozilla.firefox"
+            "com.mediatek.bluetooth"
     ));
 
     private enum Mode { OFF, TOP, BOTTOM };
@@ -116,11 +115,6 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             return;
         }
 
-        if (!verifyNotification(statusBarNotif)) {
-            if (DEBUG) log("onNotificationUpdated: ignoring unsupported notification");
-            return;
-        }
-
         if (mId.equals(getIdentifier(statusBarNotif))) {
             if (DEBUG) log("updating progress for " + mId);
             updateProgress(statusBarNotif);
@@ -129,11 +123,6 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
 
     public void onNotificationRemoved(Object statusBarNotif) {
         if (mMode == Mode.OFF) return;
-
-        if (!verifyNotification(statusBarNotif)) {
-            if (DEBUG) log("onNotificationRemoved: ignoring unsupported notification");
-            return;
-        }
 
         if (mId == null) {
             if (DEBUG) log("onNotificationRemoved: no download registered");
@@ -146,12 +135,22 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     }
 
     private boolean verifyNotification(Object statusBarNotif) {
-        if (statusBarNotif == null) return false;
+        if (statusBarNotif == null || !(Boolean) XposedHelpers.callMethod(statusBarNotif, "isOngoing")) {
+            return false;
+        }
+
         String pkgName = (String) XposedHelpers.getObjectField(statusBarNotif, "pkg");
         if (SUPPORTED_PACKAGES.contains(pkgName)) {
-            return (Boolean) XposedHelpers.callMethod(statusBarNotif, "isOngoing");
+            return true;
+        } else {
+            Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
+            if (n != null) {
+                Bundle extras = (Bundle) XposedHelpers.getAdditionalInstanceField(n, ModLedControl.NOTIF_EXTRAS);
+                return (extras != null && extras.getBoolean(ModLedControl.NOTIF_EXTRA_PROGRESS_TRACKING));
+            } else {
+                return false;
+            }
         }
-        return false;
     }
 
     protected String getIdentifier(Object statusBarNotif) {
@@ -209,19 +208,16 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
                     continue;
                 }
 
-                // Check whether View ID is a progress bar
-                int id = parcel.readInt();
-                if (id == android.R.id.progress) {
-                    String methodName = parcel.readString();
-                    if ("setMax".equals(methodName)) {
-                        parcel.readInt(); // skip type value
-                        total = parcel.readInt();
-                        if (DEBUG) log("getProgress: total=" + total);
-                    } else if ("setProgress".equals(methodName)) {
-                        parcel.readInt(); // skip type value
-                        current = parcel.readInt();
-                        if (DEBUG) log("getProgress: current=" + current);
-                    }
+                parcel.readInt(); // skip View ID
+                String methodName = parcel.readString();
+                if ("setMax".equals(methodName)) {
+                    parcel.readInt(); // skip type value
+                    total = parcel.readInt();
+                    if (DEBUG) log("getProgress: total=" + total);
+                } else if ("setProgress".equals(methodName)) {
+                    parcel.readInt(); // skip type value
+                    current = parcel.readInt();
+                    if (DEBUG) log("getProgress: current=" + current);
                 }
 
                 parcel.recycle();

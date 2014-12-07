@@ -1577,9 +1577,10 @@
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorovať pre prichádzajúce hovory</string>
 
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">Indikátor sťahovania</string>
-    <string name="pref_statusbar_download_progress_summary">Zobrazí indikátor sťahovania v stavovej lište pre stiahnutia vybavované cez 
-        štandardný Android manažér stiahnutí</string>
+    <string name="pref_statusbar_download_progress_title">Indikátor progresu</string>
+    <string name="pref_statusbar_download_progress_summary">Zobrazí indikátor progresu v stavovej lište
+        pre Android manažér prevzatí súborov, bluetooth prenosy a pre všetky aplikácie, ktoré majú povolenú
+        funkciu sledovania progresu v nastaveniach oznámení.</string>
     <string name="sb_download_progress_off">Vypnutý</string>
     <string name="sb_download_progress_top">Horná hrana stavovej lišty</string>
     <string name="sb_download_progress_bottom">Spodná hrana stavovej lišty</string>
@@ -1658,5 +1659,11 @@
     <string name="pref_smart_radio_adaptive_delay_title">Adaptívne oneskorenie</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Automaticky predĺži oneskorenie 
         ak mobilný dátový tok prekračuje definovaný prah (Nastavenie 0 vypne túto funkciu)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Sledovanie progresu</string>
+    <string name="pref_lc_progress_tracking_summary">Zobrazí indikátor progresu v stavovej lište pre prebiehajúce
+        oznámenia, ktoré obsahujú indikátor progresu. Vyžaduje povolenie funkcie Indikátor progresu
+        v nastaveniach stavovej lišty.</string>
 
 </resources>

@@ -57,6 +57,7 @@ public class LedSettings {
     private LedMode mLedMode;
     private boolean mQhIgnore;
     private String mQhIgnoreList;
+    private boolean mProgressTracking;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -123,6 +124,8 @@ public class LedSettings {
                 ls.setQhIgnore(Boolean.valueOf(data[1]));
             } else if (data[0].equals("qhIgnoreList")) {
                 ls.setQhIgnoreList(data[1]);
+            } else if (data[0].equals("progressTracking")) {
+                ls.setProgressTracking(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -148,6 +151,7 @@ public class LedSettings {
         mLedMode = LedMode.OVERRIDE;
         mQhIgnore = false;
         mQhIgnoreList = null;
+        mProgressTracking = false;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -301,6 +305,10 @@ public class LedSettings {
         mQhIgnoreList = ignoreList;
     }
 
+    protected void setProgressTracking(boolean tracking) {
+        mProgressTracking = tracking;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -373,6 +381,10 @@ public class LedSettings {
         return mQhIgnoreList;
     }
 
+    public boolean getProgressTracking() {
+        return mProgressTracking;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -398,6 +410,7 @@ public class LedSettings {
             if (mQhIgnoreList != null) {
                 dataSet.add("qhIgnoreList:" + mQhIgnoreList);
             }
+            dataSet.add("progressTracking:" + mProgressTracking);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

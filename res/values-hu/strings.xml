@@ -1623,9 +1623,8 @@
     <string name="pref_power_proximity_wake_ignore_call_title">Figyelmen kívül hagy beérkező híváskor</string>
 
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">Letöltési folyamat sáv</string>
-    <string name="pref_statusbar_download_progress_summary">A letöltési folyamat sávot az állapotsávban mutatja az Android gyári letöltő menedzser által elvégzett letöltésekhez.</string>
-    <string name="sb_download_progress_off">Letiltva</string>
+    <string name="pref_statusbar_download_progress_title">Folyamatjelző sáv</string>
+    <string name="pref_statusbar_download_progress_summary">A folyamatjelző sávot az állapotsávban mutatja Android gyári letöltő menedzser és bluetooth adatátvitel esetén, valamint további alkalmazásoknál, melyekhez folyamatjelző sáv figyelés van beállítva az Értesítés vezérlés menüben.</string>    <string name="sb_download_progress_off">Letiltva</string>
     <string name="sb_download_progress_top">Felső szélen</string>
     <string name="sb_download_progress_bottom">Alsó szélen</string>
 
@@ -1701,5 +1700,9 @@
     <!-- Smart Radio: Adaptive delay for delayed power save -->
     <string name="pref_smart_radio_adaptive_delay_title">Adaptív késleltetés</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Automatikusan meghosszabbítja a késleltetést, ha az aktuális mobil adatforgalom meghaladja a meghatározott értéket (Letiltáshoz állíts be 0-t)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Folyamatjelző sáv figyelés</string>
+    <string name="pref_lc_progress_tracking_summary">A folyamatjelző sávot az állapotsávban mutatja a folyamatjelző sávval rendelkező folyamatban lévő értesítésekhez. Szükséges, hogy a Folyamatjelző sáv funkció engedélyezve legyen az Állapotsáv módosítások menüben.</string>
 
 </resources>

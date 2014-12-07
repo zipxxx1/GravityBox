@@ -1639,9 +1639,10 @@
     <string name="pref_power_proximity_wake_ignore_call_title">Игнорировать для входящего</string>
 
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">Шкала загрузки</string>
-    <string name="pref_statusbar_download_progress_summary">Отображение шкалы выполнения загрузки в строке состояния для загрузок через
-        стандартный менеджер загрузки Андроид</string>
+    <string name="pref_statusbar_download_progress_title">Шкала выполнения</string>
+    <string name="pref_statusbar_download_progress_summary">Отображение шкалы выполнения в строке состояния для загрузок через
+        стандартный менеджер загрузки Андроид, передачи по bluetooth и других приложений, использующих
+        слежение за шкалой выполнения в управлении оповещением</string>
     <string name="sb_download_progress_off">Отключено</string>
     <string name="sb_download_progress_top">Верхний край</string>
     <string name="sb_download_progress_bottom">Нижний край</string>
@@ -1722,5 +1723,10 @@
     <string name="pref_smart_radio_adaptive_delay_title">Адаптивная задержка</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Автоматическое продление задержки 
         при выходе трафика мобильных данных за пределы установленного порога (0 для отключения)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Слежение за шкалой выполнения</string>
+    <string name="pref_lc_progress_tracking_summary">Отображение шкалы выполнения в строке состояния для текущих уведомлений,
+        содержащих шкалу выполнения. Необходимо, чтобы функция шкалы выполнения в настройках строки состояния быть включена.</string>
 
 </resources>

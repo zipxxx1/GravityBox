@@ -15,13 +15,13 @@
 
 package com.ceco.gm2.gravitybox.ledcontrol;
 
-import net.margaritov.preference.colorpicker.ColorPickerPreference;
-
 import com.ceco.gm2.gravitybox.R;
+import com.ceco.gm2.gravitybox.StatusbarDownloadProgressView;
 import com.ceco.gm2.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.gm2.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.gm2.gravitybox.preference.SeekBarPreference;
 
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.Ringtone;
@@ -59,6 +59,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_CAT_KEY_QH = "pref_cat_lc_quiet_hours";
     private static final String PREF_KEY_QH_IGNORE = "pref_lc_qh_ignore";
     private static final String PREF_KEY_QH_IGNORE_LIST = "pref_lc_qh_ignore_list";
+    private static final String PREF_CAT_KEY_OTHER = "pref_cat_lc_other";
+    private static final String PREF_KEY_PROGRESS_TRACKING = "pref_lc_progress_tracking";
 
     private static final int REQ_PICK_SOUND = 101;
 
@@ -81,6 +83,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private PreferenceCategory mQhCat;
     private CheckBoxPreference mQhIgnorePref;
     private EditTextPreference mQhIgnoreListPref;
+    private PreferenceCategory mOtherCat;
+    private CheckBoxPreference mProgressTrackingPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,6 +112,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mQhCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_QH);
         mQhIgnorePref = (CheckBoxPreference) findPreference(PREF_KEY_QH_IGNORE);
         mQhIgnoreListPref = (EditTextPreference) findPreference(PREF_KEY_QH_IGNORE_LIST);
+        mOtherCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_OTHER);
+        mProgressTrackingPref = (CheckBoxPreference) findPreference(PREF_KEY_PROGRESS_TRACKING);
     }
 
     protected void initialize(LedSettings ledSettings) {
@@ -144,6 +150,11 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         } else {
             mQhIgnorePref.setChecked(ledSettings.getQhIgnore());
             mQhIgnoreListPref.setText(ledSettings.getQhIgnoreList());
+        }
+        if (StatusbarDownloadProgressView.SUPPORTED_PACKAGES.contains(ledSettings.getPackageName())) {
+            mOtherCat.removePreference(mProgressTrackingPref);
+        } else {
+            mProgressTrackingPref.setChecked(ledSettings.getProgressTracking());
         }
     }
 
@@ -229,6 +240,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected String getQhIgnoreList() {
         return mQhIgnoreListPref.getText();
+    }
+
+    protected boolean getProgressTracking() {
+        return mProgressTrackingPref.isChecked();
     }
 
     @Override

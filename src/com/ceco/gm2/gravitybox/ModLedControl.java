@@ -59,6 +59,7 @@ public class ModLedControl {
     public static final String NOTIF_EXTRAS = "gbExtras";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE = "gbActiveScreenPocketMode";
+    public static final String NOTIF_EXTRA_PROGRESS_TRACKING = "gbProgressTracking";
 
     public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
 
@@ -276,6 +277,7 @@ public class ModLedControl {
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
                 final boolean qhActiveIncludingActiveScreen = qhActive &&
                         !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
+                extras.putBoolean(NOTIF_EXTRA_PROGRESS_TRACKING, ls.getProgressTracking());
 
                 boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
                         (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);

@@ -167,6 +167,13 @@
         android:title="@string/pref_cat_lc_other_title">
 
         <CheckBoxPreference
+            android:key="pref_lc_progress_tracking"
+            android:title="@string/pref_lc_progress_tracking_title"
+            android:summary="@string/pref_lc_progress_tracking_summary"
+            android:defaultValue="false"
+            android:persistent="false" />
+
+        <CheckBoxPreference
             android:key="pref_lc_ongoing"
             android:title="@string/pref_lc_ongoing_title"
             android:summary="@string/pref_lc_ongoing_summary"

@@ -1610,9 +1610,10 @@
     <string name="pref_power_proximity_wake_ignore_call_title">Ignoruj dla połączeń przychodzących</string>
 
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">Pasek postępu pobierania</string>
-    <string name="pref_statusbar_download_progress_summary">Pokazuje pasek postępu pobierania na pasku stanu dla pobierań realizowanych poprzez
-        standardowy menedżer pobierania Androida</string>
+    <string name="pref_statusbar_download_progress_title">Pasek postępu</string>
+    <string name="pref_statusbar_download_progress_summary">Pokazuje pasek postępu na pasku stanu dla
+        standardowego menedżera pobierania Androida, transferu Bluetooth i innych aplikacji, które mają
+        włączony Pasek śledzenie postępu w menu Nadrzędnych ustawień powiadomień</string>
     <string name="sb_download_progress_off">Wyłączony</string>
     <string name="sb_download_progress_top">Górna krawędź</string>
     <string name="sb_download_progress_bottom">Dolna krawędź</string>
@@ -1693,5 +1694,10 @@
     <string name="pref_smart_radio_adaptive_delay_title">Opóźnienie adaptacyjne</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Automatycznie wydłuża opóźnienie 
         gdy przepływ danych mobilnych przekroczy określony próg (Ustaw 0, aby wyłączyć)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Śledzenie postępu</string>
+    <string name="pref_lc_progress_tracking_summary">Pokazuje pasek postępu na pasku stanu dla trwających powiadomień
+        posiadających wskaźnik postępu. Wymaga włączenia funkcji Paska postępu w menu Ustawień paska statusu.</string>
 
 </resources>
