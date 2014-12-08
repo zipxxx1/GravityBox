@@ -1793,7 +1793,7 @@
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">快速录像瓷砖设置</string>
-    <string name="pref_quickrecord_quality_title">音频质量</string>
+    <string name="pref_quickrecord_quality_title">录音质量</string>
     <string name="qr_audio_quality_low">低(16kHz)</string>
     <string name="qr_audio_quality_medium">中(22kHz)</string>
     <string name="qr_audio_quality_high">高(44kHz)</string>
@@ -1811,6 +1811,43 @@
     <string name="pref_signal_cluster_lollipop_icons_summary">需要重新启动</string>
 
     <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">消息</string>
+    <string name="pref_cat_phone_messaging_title">信息</string>
+	
+	<!-- Compatibility warning -->
+    <string name="compat_warning_title">警告</string>
+    <string name="compat_warning_message">仅适用原生Android或Google Play Edition设备使用！\n\n	
+		使用其它品牌或者定制ROM像:Touchwiz, Sense, Xperia可能会导致意想不到的结果\n\n如果需要继续,
+		那么您确认这是您自己的风险，并没有任何技术支持与期望。有关兼容性的详细信息,
+		请看<a href="http://forum.xda-developers.com/showthread.php?t=2554049">XDA论坛</A>的支持页面</string>
+    <string name="compat_warning_ok_stage1">我明白了</string>
+    <string name="compat_warning_ok_stage2">我真的明白了</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">口袋模式</string>
+    <string name="pref_unc_as_pocket_mode_summary">当距离传感器被遮挡时不会唤醒屏幕（例如当设备在口袋里）</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">在电源调整项中的接近唤醒功能会被覆盖</string>
+
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">左手模式</string>
+    <string name="pref_navbar_left_handed_summary">实验功能！当设备在横向模式下屏幕的左侧将会垂直显示虚拟按键（需要重新启动）</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">隐藏启动器图标</string>
+    <string name="pref_hide_launcher_icon_summary">桌面启动器可能需要重新启动</string>
+
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">禁用</string>
+    <string name="navbar_l_icon_style_original">原始</string>
+    <string name="navbar_l_icon_style_large">大</string>
+
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">自适应延迟</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">自动延迟
+        如果目前的移动数据流量超过了定义的阈值（设置为0将禁用）</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">进度条跟踪</string>
+    <string name="pref_lc_progress_tracking_summary">在正在进行的通知状态栏显示进度条
+        包含进度条。需要在状态栏的调整进度条功能被激活。</string>
 
 </resources>
