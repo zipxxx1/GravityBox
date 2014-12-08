@@ -1652,7 +1652,7 @@
     <!-- Vulnerability patches -->
     <string name="pref_patch_master_key_title">修复Master Key漏洞</string>
     <string name="pref_patch_fake_id_title">修复Fake ID漏洞</string>
-    <string name="pref_patch_common_summary">需要重新启</string>
+    <string name="pref_patch_common_summary">需要重新启动</string>
 
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">状态栏通知预览策略</string>
