@@ -30,11 +30,14 @@ import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RemoteViews;
 
 public class StatusbarDownloadProgressView extends View implements IconManagerListener, BroadcastSubReceiver {
     private static final String TAG = "GB:StatusbarDownloadProgressView";
@@ -162,19 +165,67 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         int newWidth = 0;
         if (statusBarNotif != null) {
             Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
-            if (n != null && n.extras.containsKey(Notification.EXTRA_PROGRESS)) {
-                final int progress = n.extras.getInt(Notification.EXTRA_PROGRESS);
-                final int progressMax = n.extras.getInt(Notification.EXTRA_PROGRESS_MAX, 0);
-                if (progressMax > 0) {
-                    newWidth = (int) ((float)maxWidth * (float)progress/(float)progressMax);
-                }
-            }
+            newWidth = (int) ((float)maxWidth * getProgress(n));
         }
         if (DEBUG) log("updateProgress: maxWidth=" + maxWidth + "; newWidth=" + newWidth);
         ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) getLayoutParams();
         lp.width = newWidth;
         setLayoutParams(lp);
         setVisibility(newWidth > 0 ? View.VISIBLE : View.GONE);
+    }
+
+    private float getProgress(Notification n) {
+        if (n == null) return 0f;
+        int total = 0;
+        int current = 0;
+
+        if (n.extras.containsKey(Notification.EXTRA_PROGRESS)) {
+            current = n.extras.getInt(Notification.EXTRA_PROGRESS);
+            total = n.extras.getInt(Notification.EXTRA_PROGRESS_MAX, 0);
+        } else {
+            // We have to extract the information from the content view
+            RemoteViews views = n.bigContentView;
+            if (views == null) views = n.contentView;
+            if (views == null) return 0f;
+
+            try {
+                @SuppressWarnings("unchecked")
+                ArrayList<Parcelable> actions = (ArrayList<Parcelable>) 
+                    XposedHelpers.getObjectField(views, "mActions");
+                if (actions == null) return 0f;
+
+                for (Parcelable p : actions) {
+                    Parcel parcel = Parcel.obtain();
+                    p.writeToParcel(parcel, 0);
+                    parcel.setDataPosition(0);
+
+                    // The tag tells which type of action it is (2 is ReflectionAction)
+                    int tag = parcel.readInt();
+                    if (tag != 2)  {
+                        parcel.recycle();
+                        continue;
+                    }
+
+                    parcel.readInt(); // skip View ID
+                    String methodName = parcel.readString();
+                    if ("setMax".equals(methodName)) {
+                        parcel.readInt(); // skip type value
+                        total = parcel.readInt();
+                        if (DEBUG) log("getProgress: total=" + total);
+                    } else if ("setProgress".equals(methodName)) {
+                        parcel.readInt(); // skip type value
+                        current = parcel.readInt();
+                        if (DEBUG) log("getProgress: current=" + current);
+                    }
+
+                    parcel.recycle();
+                }
+            } catch (Throwable  t) {
+                XposedBridge.log(t);
+            }
+        }
+
+        return (total > 0 ? ((float)current/(float)total) : 0f);
     }
 
     private void updatePosition() {
