@@ -49,6 +49,22 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             "com.mediatek.bluetooth"
     ));
 
+    class ProgressInfo {
+        boolean hasProgressBar;
+        int progress;
+        int max;
+
+        public ProgressInfo(boolean hasProgressBar, int progress, int max) {
+            this.hasProgressBar = hasProgressBar;
+            this.progress = progress;
+            this.max = max;
+        }
+
+        public float getFraction() {
+            return (max > 0 ? ((float)progress/(float)max) : 0f);
+        }
+    }
+
     private enum Mode { OFF, TOP, BOTTOM };
     private Mode mMode;
     private String mId;
@@ -133,17 +149,16 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     }
 
     private boolean verifyNotification(Object statusBarNotif) {
-        if (statusBarNotif == null || !(Boolean) XposedHelpers.callMethod(statusBarNotif, "isOngoing")) {
+        if (statusBarNotif == null || (Boolean) XposedHelpers.callMethod(statusBarNotif, "isClearable")) {
             return false;
         }
 
         String pkgName = (String) XposedHelpers.getObjectField(statusBarNotif, "pkg");
-        if (SUPPORTED_PACKAGES.contains(pkgName)) {
-            return true;
-        } else {
-            Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
-            return (n != null && n.extras.getBoolean(ModLedControl.NOTIF_EXTRA_PROGRESS_TRACKING));
-        }
+        Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
+        return (n != null && 
+               (SUPPORTED_PACKAGES.contains(pkgName) ||
+                n.extras.getBoolean(ModLedControl.NOTIF_EXTRA_PROGRESS_TRACKING)) &&
+                getProgressInfo(n).hasProgressBar);
     }
 
     private String getIdentifier(Object statusBarNotif) {
@@ -165,7 +180,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         int newWidth = 0;
         if (statusBarNotif != null) {
             Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
-            newWidth = (int) ((float)maxWidth * getProgress(n));
+            newWidth = (int) ((float)maxWidth * getProgressInfo(n).getFraction());
         }
         if (DEBUG) log("updateProgress: maxWidth=" + maxWidth + "; newWidth=" + newWidth);
         ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) getLayoutParams();
@@ -174,58 +189,53 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         setVisibility(newWidth > 0 ? View.VISIBLE : View.GONE);
     }
 
-    private float getProgress(Notification n) {
-        if (n == null) return 0f;
-        int total = 0;
-        int current = 0;
+    private ProgressInfo getProgressInfo(Notification n) {
+        ProgressInfo pInfo = new ProgressInfo(false, 0, 0);
+        if (n == null) return pInfo;
 
-        if (n.extras.containsKey(Notification.EXTRA_PROGRESS)) {
-            current = n.extras.getInt(Notification.EXTRA_PROGRESS);
-            total = n.extras.getInt(Notification.EXTRA_PROGRESS_MAX, 0);
-        } else {
-            // We have to extract the information from the content view
-            RemoteViews views = n.bigContentView;
-            if (views == null) views = n.contentView;
-            if (views == null) return 0f;
+        // We have to extract the information from the content view
+        RemoteViews views = n.bigContentView;
+        if (views == null) views = n.contentView;
+        if (views == null) return pInfo;
 
-            try {
-                @SuppressWarnings("unchecked")
-                ArrayList<Parcelable> actions = (ArrayList<Parcelable>) 
-                    XposedHelpers.getObjectField(views, "mActions");
-                if (actions == null) return 0f;
+        try {
+            @SuppressWarnings("unchecked")
+            ArrayList<Parcelable> actions = (ArrayList<Parcelable>) 
+                XposedHelpers.getObjectField(views, "mActions");
+            if (actions == null) return pInfo;
 
-                for (Parcelable p : actions) {
-                    Parcel parcel = Parcel.obtain();
-                    p.writeToParcel(parcel, 0);
-                    parcel.setDataPosition(0);
+            for (Parcelable p : actions) {
+                Parcel parcel = Parcel.obtain();
+                p.writeToParcel(parcel, 0);
+                parcel.setDataPosition(0);
 
-                    // The tag tells which type of action it is (2 is ReflectionAction)
-                    int tag = parcel.readInt();
-                    if (tag != 2)  {
-                        parcel.recycle();
-                        continue;
-                    }
-
-                    parcel.readInt(); // skip View ID
-                    String methodName = parcel.readString();
-                    if ("setMax".equals(methodName)) {
-                        parcel.readInt(); // skip type value
-                        total = parcel.readInt();
-                        if (DEBUG) log("getProgress: total=" + total);
-                    } else if ("setProgress".equals(methodName)) {
-                        parcel.readInt(); // skip type value
-                        current = parcel.readInt();
-                        if (DEBUG) log("getProgress: current=" + current);
-                    }
-
+                // The tag tells which type of action it is (2 is ReflectionAction)
+                int tag = parcel.readInt();
+                if (tag != 2)  {
                     parcel.recycle();
+                    continue;
                 }
-            } catch (Throwable  t) {
-                XposedBridge.log(t);
+
+                parcel.readInt(); // skip View ID
+                String methodName = parcel.readString();
+                if ("setMax".equals(methodName)) {
+                    parcel.readInt(); // skip type value
+                    pInfo.max = parcel.readInt();
+                    if (DEBUG) log("getProgressInfo: total=" + pInfo.max);
+                } else if ("setProgress".equals(methodName)) {
+                    parcel.readInt(); // skip type value
+                    pInfo.progress = parcel.readInt();
+                    pInfo.hasProgressBar = true;
+                    if (DEBUG) log("getProgressInfo: current=" + pInfo.progress);
+                }
+
+                parcel.recycle();
             }
+        } catch (Throwable  t) {
+            XposedBridge.log(t);
         }
 
-        return (total > 0 ? ((float)current/(float)total) : 0f);
+        return pInfo;
     }
 
     private void updatePosition() {
