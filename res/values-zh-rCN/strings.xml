@@ -1818,7 +1818,7 @@
     <string name="compat_warning_message">仅适用原生Android或Google Play Edition设备使用！\n\n	
 		使用其它品牌或者定制ROM像:Touchwiz, Sense, Xperia可能会导致意想不到的结果\n\n如果需要继续,
 		那么您确认这是您自己的风险，并没有任何技术支持与期望。有关兼容性的详细信息,
-		请看<a href="http://forum.xda-developers.com/showthread.php?t=2554049">XDA论坛</A>的支持页面</string>
+		请看<a href="http://forum.xda-developers.com/showthread.php?t=2554049">XDA论坛</a>的支持页面</string>
     <string name="compat_warning_ok_stage1">我明白了</string>
     <string name="compat_warning_ok_stage2">我真的明白了</string>
 
