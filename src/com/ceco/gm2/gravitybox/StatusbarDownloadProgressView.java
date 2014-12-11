@@ -51,6 +51,11 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             "com.mediatek.bluetooth"
     ));
 
+    public interface ProgressStateListener {
+        void onProgressTrackingStarted(boolean isBluetooth);
+        void onProgressTrackingStopped();
+    }
+
     class ProgressInfo {
         boolean hasProgressBar;
         int progress;
@@ -70,6 +75,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private enum Mode { OFF, TOP, BOTTOM };
     private Mode mMode;
     private String mId;
+    private List<ProgressStateListener> mListeners;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -79,6 +85,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         super(context);
 
         mMode = Mode.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"));
+        mListeners = new ArrayList<ProgressStateListener>();
 
         int heightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1,
                 context.getResources().getDisplayMetrics());
@@ -101,6 +108,39 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         ModStatusbarColor.unregisterIconManagerListener(this);
     }
 
+    public void registerListener(ProgressStateListener listener) {
+        if (listener == null) return;
+        synchronized (mListeners) {
+            if (!mListeners.contains(listener)) {
+                mListeners.add(listener);
+            }
+        }
+    }
+
+    public void unregisterListener(ProgressStateListener listener) {
+        synchronized (mListeners) {
+            if (mListeners.contains(listener)) {
+                mListeners.remove(listener);
+            }
+        }
+    }
+
+    private void notifyProgressStarted(boolean isBluetooth) {
+        synchronized (mListeners) {
+            for (ProgressStateListener l : mListeners) {
+                l.onProgressTrackingStarted(isBluetooth);
+            }
+        }
+    }
+
+    private void notifyProgressStopped() {
+        synchronized (mListeners) {
+            for (ProgressStateListener l : mListeners) {
+                l.onProgressTrackingStopped();
+            }
+        }
+    }
+
     public void onNotificationAdded(Object statusBarNotif) {
         if (mMode == Mode.OFF) return;
 
@@ -118,6 +158,8 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         if (mId != null) {
             if (DEBUG) log("starting progress for " + mId);
             updateProgress(statusBarNotif);
+            notifyProgressStarted(mId.startsWith(SUPPORTED_PACKAGES.get(1)) ||
+                    mId.startsWith(SUPPORTED_PACKAGES.get(2)));
         }
     }
 
@@ -147,6 +189,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             if (DEBUG) log("finishing progress for " + mId);
             mId = null;
             updateProgress(null);
+            notifyProgressStopped();
         }
     }
 
@@ -268,6 +311,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             if (mMode == Mode.OFF) {
                 mId = null;
                 updateProgress(null);
+                notifyProgressStopped();
             } else {
                 updatePosition();
             }

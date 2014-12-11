@@ -1054,6 +1054,9 @@ public class ModStatusBar {
                 mBroadcastSubReceivers.remove(mTrafficMeter);
             }
             ModStatusbarColor.unregisterIconManagerListener(mTrafficMeter);
+            if (mDownloadProgressView != null) {
+                mDownloadProgressView.unregisterListener(mTrafficMeter);
+            }
             mTrafficMeter = null;
         }
 
@@ -1062,6 +1065,9 @@ public class ModStatusBar {
             mTrafficMeter.initialize(mPrefs);
             updateTrafficMeterPosition();
             ModStatusbarColor.registerIconManagerListener(mTrafficMeter);
+            if (mDownloadProgressView != null) {
+                mDownloadProgressView.registerListener(mTrafficMeter);
+            }
             mBroadcastSubReceivers.add(mTrafficMeter);
         }
     }

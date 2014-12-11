@@ -37,12 +37,14 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 
 public abstract class TrafficMeterAbstract extends TextView 
-                        implements BroadcastSubReceiver, IconManagerListener {
+                        implements BroadcastSubReceiver, IconManagerListener,
+                                   StatusbarDownloadProgressView.ProgressStateListener {
     protected static final String PACKAGE_NAME = "com.android.systemui";
     protected static final String TAG = "GB:NetworkTraffic";
     protected static final boolean DEBUG = false;
 
     public static enum TrafficMeterMode { OFF, SIMPLE, OMNI };
+    public static enum DisplayMode { ALWAYS, PROGRESS_TRACKING };
 
     protected Context mGbContext;
     protected boolean mAttached;
@@ -51,12 +53,12 @@ public abstract class TrafficMeterAbstract extends TextView
     protected int mSize;
     protected int mMargin;
     protected boolean mIsScreenOn = true;
-    protected boolean mShowOnlyWhenDownloadActive;
-    protected boolean mIsDownloadActive;
+    protected DisplayMode mDisplayMode;
     private PhoneStateListener mPhoneStateListener;
     private TelephonyManager mPhone;
     protected boolean mMobileDataConnected;
     protected boolean mShowOnlyForMobileData;
+    protected boolean mIsTrackingProgress;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -118,8 +120,8 @@ public abstract class TrafficMeterAbstract extends TextView
             log("Invalid preference value for PREF_KEY_DATA_TRAFFIC_POSITION");
         }
 
-        mShowOnlyWhenDownloadActive = prefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_ACTIVE_DL_ONLY, false);
+        mDisplayMode = DisplayMode.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_DISPLAY_MODE, "ALWAYS"));
 
         if (mPhone != null) {
             mShowOnlyForMobileData = prefs.getBoolean(
@@ -135,13 +137,6 @@ public abstract class TrafficMeterAbstract extends TextView
             String action = intent.getAction();
             if (action != null && action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 updateState();
-            } else if (ModDownloadProvider.ACTION_DOWNLOAD_STATE_CHANGED.equals(action)
-                    && intent.hasExtra(ModDownloadProvider.EXTRA_ACTIVE)) {
-                mIsDownloadActive = intent.getBooleanExtra(ModDownloadProvider.EXTRA_ACTIVE, false);
-                if (DEBUG) log("ACTION_DOWNLOAD_STATE_CHANGED; active=" + mIsDownloadActive);
-                if (mShowOnlyWhenDownloadActive) {
-                    updateState();
-                }
             }
         }
     };
@@ -161,7 +156,6 @@ public abstract class TrafficMeterAbstract extends TextView
             if (DEBUG) log("attached to window");
             IntentFilter filter = new IntentFilter();
             filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-            filter.addAction(ModDownloadProvider.ACTION_DOWNLOAD_STATE_CHANGED);
             getContext().registerReceiver(mIntentReceiver, filter, null, getHandler());
 
             if (mPhone != null) {
@@ -212,9 +206,9 @@ public abstract class TrafficMeterAbstract extends TextView
             if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_SIZE)) {
                 mSize = intent.getIntExtra(GravityBoxSettings.EXTRA_DT_SIZE, 14);
             }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_ACTIVE_DL_ONLY)) {
-                mShowOnlyWhenDownloadActive = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_DT_ACTIVE_DL_ONLY, false);
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_DISPLAY_MODE)) {
+                mDisplayMode = DisplayMode.valueOf(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_DT_DISPLAY_MODE));
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_ACTIVE_MOBILE_ONLY)) {
                 mShowOnlyForMobileData = intent.getBooleanExtra(
@@ -238,8 +232,8 @@ public abstract class TrafficMeterAbstract extends TextView
 
     private boolean shoudStartTrafficUpdates() {
         boolean shouldStart = mAttached && mIsScreenOn && getConnectAvailable();
-        if (mShowOnlyWhenDownloadActive) {
-            shouldStart &= mIsDownloadActive;
+        if (mDisplayMode == DisplayMode.PROGRESS_TRACKING) {
+            shouldStart &= mIsTrackingProgress;
         }
         if (mShowOnlyForMobileData) {
             shouldStart &= mMobileDataConnected;
@@ -257,6 +251,22 @@ public abstract class TrafficMeterAbstract extends TextView
             setVisibility(View.GONE);
             setText("");
             if (DEBUG) log("traffic updates stopped");
+        }
+    }
+
+    @Override
+    public void onProgressTrackingStarted(boolean isBluetooth) {
+        mIsTrackingProgress = !isBluetooth;
+        if (mDisplayMode == DisplayMode.PROGRESS_TRACKING) {
+            updateState();
+        }
+    }
+
+    @Override
+    public void onProgressTrackingStopped() {
+        mIsTrackingProgress = false;
+        if (mDisplayMode == DisplayMode.PROGRESS_TRACKING) {
+            updateState();
         }
     }
 

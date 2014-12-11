@@ -1347,11 +1347,6 @@
     <string name="alarm_singletap_app_default">Appli par défaut</string>
     <string name="pref_qs_alarm_longpress_app_title">Appli appui long</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">Uniquement lorsque le téléchargement est actif</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Affiche le compteur de flux de données uniquement lorsqu\'il y a un téléchargement en cours via 
-        le gestionnaire standard de téléchargement d\'Android</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Contrôle ultime de notification</string>
     <string name="pref_led_control_summary">Permet de contrôler les lumières, sons et vibrations de notification application par application</string>
@@ -1691,5 +1686,10 @@
     <string name="pref_lc_progress_tracking_title">Suivi par barre de progression</string>
     <string name="pref_lc_progress_tracking_summary">Affiche une barre de progression dans la barre d\'état pour les notifications en cours
         qui contiennent une barre de progression. Il faut que l\'item Barre de progression soit activé dans les Modifications de Barre d\'état</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">Mode d\'affichage</string>
+    <string name="dt_display_mode_always">Toujours (lorsqu\'une connexion au réseau est disponible)</string>
+    <string name="dt_display_mode_pt">Lorsqu\'une barre de progression est présente dans la barre d\'état</string>
 
 </resources>

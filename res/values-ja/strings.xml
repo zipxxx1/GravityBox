@@ -1329,11 +1329,6 @@
     <string name="alarm_singletap_app_default">デフォルトのアプリ</string>
     <string name="pref_qs_alarm_longpress_app_title">長押しで起動するアプリ</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">ダウンロード中のみ</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Androidの標準ダウンロードマネージャでダウンロードしているときだけ
-        メーターを表示するようにします。</string>
-    
     <!-- Led control -->
     <string name="pref_led_control_title">通知コントロール</string>
     <string name="pref_led_control_summary">通知LEDや通知音、バイブをアプリごとに管理します。</string>

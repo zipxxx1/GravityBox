@@ -1343,10 +1343,6 @@
     <string name="alarm_singletap_app_default">Alapértelmezett alkalmazás</string>
     <string name="pref_qs_alarm_longpress_app_title">Hosszú érintés alkalmazása</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">Csak aktív letöltés esetén</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Adatforgalom mérő mutatása, ha van folyamatban lévő letöltés az Android alapértelmezett letöltéskezelőjével</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Értesítés vezérlés</string>
     <string name="pref_led_control_summary">Lehetővé teszi az értesítési fények, hangok és rezgések szabályozásást alkalmazásonként</string>
@@ -1704,5 +1700,10 @@
     <!-- UNC: Progress bar tracking -->
     <string name="pref_lc_progress_tracking_title">Folyamatjelző sáv figyelés</string>
     <string name="pref_lc_progress_tracking_summary">A folyamatjelző sávot az állapotsávban mutatja a folyamatjelző sávval rendelkező folyamatban lévő értesítésekhez. Szükséges, hogy a Folyamatjelző sáv funkció engedélyezve legyen az Állapotsáv módosítások menüben.</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">Kijelzés mód</string>
+    <string name="dt_display_mode_always">Mindig (ha rendelkezésre áll hálózati kapcsolat)</string>
+    <string name="dt_display_mode_pt">Amikor a folyamatjelző sáv az értesítési sávban jelenik meg</string>
 
 </resources>

@@ -1319,10 +1319,6 @@
     <string name="alarm_singletap_app_default">Padrão</string>
     <string name="pref_qs_alarm_longpress_app_title">Aplicativo ao manter pressionado</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">Apenas quando download estiver ativo</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Permite mostrar o medidor de tráfego de dados apenas quando estiver em andamento algum download</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Controle de notificações</string>
     <string name="pref_led_control_summary">Permite controlar as notificações (avisos luminosos, sonoros e por vibração) por aplicativo</string>

@@ -680,7 +680,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_DATA_TRAFFIC = "pref_cat_data_traffic";
     public static final String PREF_KEY_DATA_TRAFFIC_MODE = "pref_data_traffic_mode";
     public static final String PREF_KEY_DATA_TRAFFIC_ACTIVE_MOBILE_ONLY = "pref_data_traffic_active_mobile_only";
-    public static final String PREF_KEY_DATA_TRAFFIC_ACTIVE_DL_ONLY = "pref_data_traffic_active_dl_only";
+    public static final String PREF_KEY_DATA_TRAFFIC_DISPLAY_MODE = "pref_data_traffic_display_mode";
     public static final String PREF_KEY_DATA_TRAFFIC_POSITION = "pref_data_traffic_position";
     public static final int DT_POSITION_AUTO = 0;
     public static final int DT_POSITION_LEFT = 1;
@@ -695,7 +695,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             "gravitybox.intent.action.DATA_TRAFFIC_CHANGED";
     public static final String EXTRA_DT_MODE = "dtMode";
     public static final String EXTRA_DT_ACTIVE_MOBILE_ONLY = "dtActiveMobileOnly";
-    public static final String EXTRA_DT_ACTIVE_DL_ONLY = "dtActiveDownloadOnly";
+    public static final String EXTRA_DT_DISPLAY_MODE = "dtDisplayMode";
     public static final String EXTRA_DT_POSITION = "dtPosition";
     public static final String EXTRA_DT_SIZE = "dtSize";
     public static final String EXTRA_DT_INACTIVITY_MODE = "dtInactivityMode";
@@ -1208,7 +1208,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefDataTrafficOmniAutohide;
         private SeekBarPreference mPrefDataTrafficOmniAutohideTh;
         private CheckBoxPreference mPrefDataTrafficActiveMobileOnly;
-        private CheckBoxPreference mPrefDataTrafficActiveDlOnly;
+        private ListPreference mPrefDataTrafficDisplayMode;
         private CheckBoxPreference mPrefLinkVolumes;
         private CheckBoxPreference mPrefVolumePanelExpandable;
         private CheckBoxPreference mPrefVolumePanelFullyExpandable;
@@ -1517,7 +1517,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefDataTrafficOmniMode = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_OMNI_MODE);
             mPrefDataTrafficOmniShowIcon = (CheckBoxPreference) findPreference(PREF_KEY_DATA_TRAFFIC_OMNI_SHOW_ICON);
             mPrefDataTrafficActiveMobileOnly = (CheckBoxPreference) findPreference(PREF_KEY_DATA_TRAFFIC_ACTIVE_MOBILE_ONLY);
-            mPrefDataTrafficActiveDlOnly = (CheckBoxPreference) findPreference(PREF_KEY_DATA_TRAFFIC_ACTIVE_DL_ONLY);
+            mPrefDataTrafficDisplayMode = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_DISPLAY_MODE);
             mPrefDataTrafficOmniAutohide = (CheckBoxPreference) findPreference(PREF_KEY_DATA_TRAFFIC_OMNI_AUTOHIDE);
             mPrefDataTrafficOmniAutohideTh = (SeekBarPreference) findPreference(PREF_KEY_DATA_TRAFFIC_OMNI_AUTOHIDE_TH);
 
@@ -2372,15 +2372,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficOmniMode);
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficOmniShowIcon);
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficActiveMobileOnly);
-                mPrefCatDataTraffic.removePreference(mPrefDataTrafficActiveDlOnly);
+                mPrefCatDataTraffic.removePreference(mPrefDataTrafficDisplayMode);
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficOmniAutohide);
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficOmniAutohideTh);
                 String mode = mPrefDataTrafficMode.getValue();
                 if (!mode.equals("OFF")) {
                     if (!Utils.isWifiOnly(getActivity()))
                         mPrefCatDataTraffic.addPreference(mPrefDataTrafficActiveMobileOnly);
-                    if (Build.VERSION.SDK_INT > 17)
-                        mPrefCatDataTraffic.addPreference(mPrefDataTrafficActiveDlOnly);
+                    mPrefCatDataTraffic.addPreference(mPrefDataTrafficDisplayMode);
                     mPrefCatDataTraffic.addPreference(mPrefDataTrafficPosition);
                     mPrefCatDataTraffic.addPreference(mPrefDataTrafficSize);
                 }
@@ -2392,6 +2391,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatDataTraffic.addPreference(mPrefDataTrafficOmniAutohide);
                     mPrefCatDataTraffic.addPreference(mPrefDataTrafficOmniAutohideTh);
                 }
+            }
+
+            if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_DISPLAY_MODE)) {
+                mPrefDataTrafficDisplayMode.setSummary(mPrefDataTrafficDisplayMode.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_STATUSBAR_BT_VISIBILITY)) {
@@ -3090,10 +3093,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
                 intent.putExtra(EXTRA_DT_ACTIVE_MOBILE_ONLY,
                         prefs.getBoolean(PREF_KEY_DATA_TRAFFIC_ACTIVE_MOBILE_ONLY, false));
-            } else if (key.equals(PREF_KEY_DATA_TRAFFIC_ACTIVE_DL_ONLY)) {
+            } else if (key.equals(PREF_KEY_DATA_TRAFFIC_DISPLAY_MODE)) {
                 intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
-                intent.putExtra(EXTRA_DT_ACTIVE_DL_ONLY,
-                        prefs.getBoolean(PREF_KEY_DATA_TRAFFIC_ACTIVE_DL_ONLY, false));
+                intent.putExtra(EXTRA_DT_DISPLAY_MODE, prefs.getString(key, "ALWAYS"));
             } else if (key.equals(PREF_KEY_SMART_RADIO_NORMAL_MODE)) {
                 intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
                 intent.putExtra(EXTRA_SR_NORMAL_MODE,

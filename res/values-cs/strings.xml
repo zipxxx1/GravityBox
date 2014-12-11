@@ -1303,11 +1303,6 @@
     <string name="alarm_singletap_app_default">Výchozí</string>
     <string name="pref_qs_alarm_longpress_app_title">Aplikace na dlouhé podržení</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">Pouze pro Download Manager</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Zobrazí monitor průtoku dat jen v případě aktivních 
-         downloadů přes standardní Android Download Manager</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Nastavení oznámení</string>
     <string name="pref_led_control_summary">Umožňuje nastavení LED, zvuků a vibrací oznámení pro každou aplikaci samostatně</string>
@@ -1660,5 +1655,10 @@
     <string name="pref_lc_progress_tracking_summary">Zobrazí indikátor progresu ve stavové liště pro probíhající
         oznámení, které obsahují indikátor progresu. Vyžaduje povolení funkce Indikátor progresu
         v nastaveních stavové lišty.</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">Režim zobrazení</string>
+    <string name="dt_display_mode_always">Vždy (když je k dispozici síťové spojení)</string>
+    <string name="dt_display_mode_pt">Během zobrazení indikátoru progresu</string>
 
 </resources>

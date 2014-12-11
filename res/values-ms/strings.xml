@@ -1242,11 +1242,6 @@
     <string name="alarm_singletap_app_default">Aplikasi asal</string>
     <string name="pref_qs_alarm_longpress_app_title">Aplikasi tekan lama</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">Pengurus muat turun sahaja</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Tunjukkan data trafik ketika tiada muat turun berlaku melalui 
-        pengurus muat turun asal</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Kawalan notifikasi terhebat</string>
     <string name="pref_led_control_summary">Benarkan kawal LED, bunyi, gegaran mengikut aplikasi</string>
