@@ -983,11 +983,12 @@
                 android:title="@string/pref_data_traffic_active_mobile_only_title"
                 android:defaultValue="false" />
 
-            <CheckBoxPreference 
-                android:key="pref_data_traffic_active_dl_only"
-                android:title="@string/pref_data_traffic_active_dl_only_title"
-                android:summary="@string/pref_data_traffic_active_dl_only_summary"
-                android:defaultValue="false" />
+            <ListPreference 
+                android:key="pref_data_traffic_display_mode"
+                android:title="@string/pref_data_traffic_display_mode_title"
+                android:entries="@array/dt_display_mode_entries"
+                android:entryValues="@array/dt_display_mode_values"
+                android:defaultValue="ALWAYS" />
 
             <ListPreference
                 android:key="pref_data_traffic_position"

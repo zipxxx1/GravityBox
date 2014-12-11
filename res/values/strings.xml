@@ -1339,11 +1339,6 @@
     <string name="alarm_singletap_app_default">Default app</string>
     <string name="pref_qs_alarm_longpress_app_title">Long-press app</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">Download Manager only</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Shows traffic meter only while there are ongoing downloads via 
-        standard Android\'s Download Manager</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Ultimate notification control</string>
     <string name="pref_led_control_summary">Allows controlling notification lights, sounds and vibrations on per-app basis</string>
@@ -1849,5 +1844,11 @@
     <string name="pref_lc_progress_tracking_title">Progress bar tracking</string>
     <string name="pref_lc_progress_tracking_summary">Shows progress bar in status bar for ongoing notifications
         that contain progress bar. Requires Progress bar feature in status bar tweaks to be enabled.</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">Display mode</string>
+    <string name="dt_display_mode_always">Always (when network connection available)</string>
+    <string name="dt_display_mode_dm">For Android Download Manager only</string>
+    <string name="dt_display_mode_pt">When progress bar in status bar is showing</string>
 
 </resources>

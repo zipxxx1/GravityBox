@@ -1215,4 +1215,16 @@
         <item>LARGE</item>
     </string-array>
 
+    <string-array name="dt_display_mode_entries" translatable="false">
+        <item>@string/dt_display_mode_always</item>
+        <item>@string/dt_display_mode_dm</item>
+        <item>@string/dt_display_mode_pt</item>
+    </string-array>
+
+    <string-array name="dt_display_mode_values" translatable="false">
+        <item>ALWAYS</item>
+        <item>DOWNLOAD_MANAGER</item>
+        <item>PROGRESS_TRACKING</item>
+    </string-array>
+
 </resources>

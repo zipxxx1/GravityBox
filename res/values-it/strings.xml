@@ -1339,11 +1339,6 @@
     <string name="alarm_singletap_app_default">App predefinita</string>
     <string name="pref_qs_alarm_longpress_app_title">App pressione prolungata</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">Solo con gestore Download</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Mostra il contatore traffico dati solo quando è in uso l\'app predefinita di Android 
-    per la gestione dei Download</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Gestore globale notifiche</string>
     <string name="pref_led_control_summary">Personalizza colori LED, suoni, vibrazioni per ogni app</string>

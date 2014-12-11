@@ -1339,11 +1339,6 @@
     <string name="alarm_singletap_app_default">默认应用</string>
     <string name="pref_qs_alarm_longpress_app_title">长按应用</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">仅在下载激活</string>
-    <string name="pref_data_traffic_active_dl_only_summary">只有正在下载并通过标准Android下载管理器才显示流量计</string>
-    
-    
     <!-- Led control -->
     <string name="pref_led_control_title">终极通知控制</string>
     <string name="pref_led_control_summary">允许控制通知指示灯在每个应用程序的基础上控制声音和振动</string>

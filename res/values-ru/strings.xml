@@ -1339,11 +1339,6 @@
     <string name="alarm_singletap_app_default">Прилож.по умолчанию</string>
     <string name="pref_qs_alarm_longpress_app_title">Прилож.на удержание</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">Только менеджер загрузки</string>
-    <string name="pref_data_traffic_active_dl_only_summary">Отображение трафика только при текущих загрузках через 
-        стандартный менеджер загрузки Андроид</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Управление оповещением</string>
     <string name="pref_led_control_summary">Управление оповещением посредством световой индикации, звуков и вибрации для соответствующих приложений</string>

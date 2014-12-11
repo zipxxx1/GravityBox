@@ -1289,10 +1289,6 @@
     <string name="alarm_singletap_app_default">Varsayılan uygulama</string>
     <string name="pref_qs_alarm_longpress_app_title">Uzun basma uyg.sı</string>
 
-    <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">Sadece İndirme Yöneticisi</string>
-    <string name="pref_data_traffic_active_dl_only_summary">"Trafik ölçümünü sadece Android'in indirme yöneticisinde indirme varsa yapar "</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Güçlü bildirim kontrolü</string>
     <string name="pref_led_control_summary">Allows controlling notification lights, sounds and vibrations on per-app basis</string>

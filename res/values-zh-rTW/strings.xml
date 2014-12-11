@@ -1326,10 +1326,6 @@
     <string name="pref_qs_alarm_singletap_app_title">單擊應用程式</string>
     <string name="alarm_singletap_app_default">預設應用程式</string>
     <string name="pref_qs_alarm_longpress_app_title">長按應用程式</string>
-    
-     <!-- Traffic meter: show only when download active -->
-    <string name="pref_data_traffic_active_dl_only_title">當有下載任務時</string>
-    <string name="pref_data_traffic_active_dl_only_summary">僅在當 Android 標準下載管理員有下載任務時顯示資料流量速度監控器</string>
 
     <!-- Led control -->
     <string name="pref_led_control_title">通知控制</string>
