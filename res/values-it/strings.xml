@@ -638,7 +638,7 @@
     <string name="pref_lockscreen_battery_arc_summary">Mostra arco stato batteria intorno all\'anello di sblocco</string>
 
     <!-- HW Key Actions: toggle torch -->
-    <string name="hwkey_action_torch">Torcia attiva/disattiva</string>
+    <string name="hwkey_action_torch">Torcia on/off</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Espandi automaticamente</string>
@@ -908,19 +908,19 @@
     <string name="shortcut_activity_title">Azioni GravityBox</string>
  
     <!-- Network mode shortcut -->
-    <string name="shortcut_network_mode">Modalità di rete</string>
+    <string name="shortcut_network_mode">Modalità di rete on/off</string>
     
     <!-- Toggle mobile data shortcut -->
-    <string name="shortcut_mobile_data">Dati Mobili</string>
+    <string name="shortcut_mobile_data">Dati Mobili on/off</string>
 
     <!-- Toggle WiFi shortcut -->
-    <string name="shortcut_wifi">WiFi</string>
+    <string name="shortcut_wifi">WiFi on/off</string>
 
     <!-- Toggle Bluetooth shortcut -->
-    <string name="shortcut_bluetooth">Bluetooth</string>
+    <string name="shortcut_bluetooth">Bluetooth on/off</string>
 
     <!-- Toggle WiFi AP shortcut -->
-    <string name="shortcut_wifi_ap">WiFi AP</string>
+    <string name="shortcut_wifi_ap">WiFi AP on/off</string>
     
     <!-- Location mode shortcut -->
     <string name="shortcut_location_mode">Imposta modalità geolocalizzazione</string>
@@ -930,7 +930,7 @@
     <string name="location_mode_off">Geolocalizzazione spenta</string>
 
     <!-- Toggle NFC shortcut -->
-    <string name="shortcut_nfc">NFC</string>
+    <string name="shortcut_nfc">NFC on/off</string>
 
     <!-- Navigation bar ring targets background style -->
     <string name="pref_navbar_ring_targets_bg_style_title">Stile sfondo pulsanti anello</string>
@@ -1276,7 +1276,7 @@
     <string name="pref_charger_plugged_sound_title">Suono inserimento cavo</string>
 
     <!-- GB Actions: Toggle Smart Radio -->
-    <string name="shortcut_smart_radio_toggle">Attiva/disattiva Modem intelligente</string>
+    <string name="shortcut_smart_radio_toggle">Modem intelligente on/off</string>
 
     <!-- Master switch title -->
     <string name="pref_masterswitch_title">Interruttore principale</string>
@@ -1305,7 +1305,7 @@
     <!-- Navbar ring: option to disable -->
     <string name="pref_navbar_ring_disable_title">Disabilita anello</string>
 
-<!-- Data traffic monitor style -->
+    <!-- Data traffic monitor style -->
     <string name="pref_data_traffic_mode_title">Stile contatore dati</string>
     <string name="dt_mode_off">Disabilitato</string>
     <string name="dt_mode_simple">Semplice</string>
@@ -1406,8 +1406,7 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Active Screen</string>
     <string name="lc_active_screen_info">Questa funzione accende automaticamente lo schermo 
-        ogni volta che una nuova notifica arriva. Questo succede solo in caso che lo schermo non sia coperto
-        (es. quando il dispositivo è in tasca). Si può anche scegliere di espandere il pannello notifiche se le opzioni di 
+        ogni volta che una nuova notifica arriva. Si può anche scegliere di espandere il pannello notifiche se le opzioni di 
         sicurezza della schermata di blocco e se le preferenze dell\'utente lo permettono. Bisogna essere consapevoli che questa 
         funzione richiede che sia attiva la schermata di blocco.\nL\'interruttore sotto è il principale. 
         Dopo essere stato abilitato la configurazione può essere fatta per ogni app.</string>
@@ -1460,7 +1459,7 @@
     durante le ore notturne. Lasciare il campo vuoto per tutte le notifiche.</string>
 
     <!-- GB Actions: Quiet hours shortcut -->
-    <string name="shortcut_quiet_hours_toggle">Ore Notturne</string>
+    <string name="shortcut_quiet_hours_toggle">Ore Notturne on/off</string>
 
     <!-- Signal cluster: H+ indicator -->
     <string name="pref_signal_cluster_hplus_title">Abilita indicatore H+</string>
@@ -1473,7 +1472,7 @@
     <string name="sc_lte_style_4g">4G</string>
     
     <!-- GB Actions: toggle airplane mode -->
-    <string name="shortcut_airplane_mode">Modalità aereo</string>
+    <string name="shortcut_airplane_mode">Modalità aereo on/off</string>
  
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Visibilità icona Bluetooth</string>
@@ -1533,10 +1532,10 @@
 
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ignora disponibilità dati mobili</string>
-    <string name="pref_smart_radio_mda_ignore_summary">Cambia a modo normale anche se i dati mobili sono temporaneamente non disponibili.</string>
+    <string name="pref_smart_radio_mda_ignore_summary">Torna alla modalità normale anche se i dati mobili sono temporaneamente non disponibili.</string>
 
     <!-- GB Actions: Toggle sync -->
-    <string name="shortcut_sync">Sincronizzazione</string>
+    <string name="shortcut_sync">Sincronizzazione on/off</string>
 
     <!-- UNC: timeout for Alert only once -->
     <string name="pref_lc_notif_sound_only_once_timeout_title">Nei limiti di tempo</string>
@@ -1558,6 +1557,7 @@
     <string name="qs_tile_compass">Bussola</string>
     <string name="quick_settings_compass_off">Bussola Spenta</string>
     <string name="quick_settings_compass_init">Avvio in corso&#8230;</string>
+    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
 
     <!-- Cardinal directions -->
     <string name="cd_north">N</string>
@@ -1627,12 +1627,13 @@
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Notifiche a comparsa</string>
     <string name="pref_lc_headsup_expanded_title">Mostra estese</string>
+    <string name="pref_lc_headsup_expanded_summary">Da notare che questa opzione può essere sostituita nel Gestore Globale Notifiche</string>
     <string name="pref_lc_headsup_dnd_title">Non disturbare</string>
     <string name="pref_lc_headsup_dnd_summary">Non mostrare notifiche a comparsa quando l\'app è in primo piano</string>
 
     <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Icone pulsanti Android L</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Sostituisce le icone dei pulsanti della barra di navigazione standard con quelle di Android L (richiede riavvio)</string>
+    <string name="pref_navbar_android_l_icons_enable_title">Icone pulsanti Lollipop</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Sostituisce le icone dei pulsanti della barra di navigazione standard con quelle di Lollipop (richiede riavvio)</string>
 
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Modalità Active Screen</string>
@@ -1744,9 +1745,10 @@
     <string name="pref_power_proximity_wake_ignore_call_title">Ignora per le chiamate in arrivo</string>
 
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">Barra di avanzamento download</string>
+    <string name="pref_statusbar_download_progress_title">Barra di avanzamento</string>
     <string name="pref_statusbar_download_progress_summary">Mostra una barra di avanzamento nella barra di stato per i download in corso gestiti
-        dall\'app predefinita di Android per la gestione dei Download</string>
+        dall\'app predefinita di Android per la gestione dei Download, i trasferimenti bluetooth e altre applicazioni che hanno
+        la barra di avanzamento abilitata nel Gestore globale notifiche</string>
     <string name="sb_download_progress_off">Disabilitato</string>
     <string name="sb_download_progress_top">In alto</string>
     <string name="sb_download_progress_bottom">In basso</string>
@@ -1764,9 +1766,89 @@
 
     <!-- Heads up: importance threshold -->
     <string name="pref_heads_up_importance_title">Soglia priorità</string>
+     <string name="pref_heads_up_importance_summary">Allows suppressing heads up for notifications 
+        that are of importance lower than defined threshold (%s)</string>
     <string name="headsup_importance_disabled">Disabilitata</string>
     <string name="headsup_importance_low">Bassa</string>
     <string name="headsup_importance_medium">Media</string>
     <string name="headsup_importance_high">Alta</string>
+
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">Modalità 2G+3G</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferito (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Desktop esteso in menu spegnimento</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Assicuratevi che siano disponibili altri metodi per disattivare il desktop esteso!</string>
+
+    <!-- UNC HeadsUp: ignore for updated notification -->
+    <string name="pref_lc_headsup_ignore_update_title">Ignora aggiornamenti</string>
+    <string name="pref_lc_headsup_ignore_update_summary">Non verrà mostrata una notifica a comparsa quando è già presente una notifica</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Impostazioni casella Registratore</string>
+    <string name="pref_quickrecord_quality_title">Qualità audio</string>
+    <string name="qr_audio_quality_low">Bassa (16kHz)</string>
+    <string name="qr_audio_quality_medium">Media (22kHz)</string>
+    <string name="qr_audio_quality_high">Alta (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Ferma registrazione automaticamente</string>
+    <string name="pref_quickrecord_autostop_summary">Ferma la registrazione in modo automatico dopo un intervallo di tempo specificato. Impostare a 0 per disattivare questa funzione.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Cancella notifiche</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Luminosità automatica on/off</string>
+
+    <!-- Signal cluster: use lollipop icons -->
+    <string name="pref_signal_cluster_lollipop_icons_title">Usa icone Lollipop</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">Richiede riavvio</string>
+
+    <!-- Messaging -->
+    <string name="pref_cat_phone_messaging_title">Messaggi</string>
+
+    <!-- Compatibility warning -->
+    <string name="compat_warning_title">ATTENZIONE</string>
+    <string name="compat_warning_message">USARE SOLO CON VERSIONI DI ANDROID PURO O GOOGLE PLAY EDITION!\n\nNon sono supportate ROM personalizzate
+        dai produttori come la Touchwiz, Sense, Xperia, o qualsiasi altra custom ROM, non seguire queste istruzioni potrebbe causare problemi.\n\nAndando avanti,
+        siete consapevoli che è a vostro rischio e pericolo e che non riceverete alcun supporto. Per informazioni più dettagliate riguardo la compatibilità,
+        visitare <a il thread di supporto su XDA href="http://forum.xda-developers.com/showthread.php?t=2554049"></a>.</string>
+    <string name="compat_warning_ok_stage1">OK. Ho capito.</string>
+    <string name="compat_warning_ok_stage2">Ho capito DAVVERO!</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Modalità tasca</string>
+    <string name="pref_unc_as_pocket_mode_summary">Lo schermo non verrà acceso se i sensori di prossimità sono coperti (es. quando il dispositivo è in tasca)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Questa opzione è al momento disabilitata da Risveglia con sensori di prossimità nel menu spegnimento</string>
+
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">Modalità mancino</string>
+    <string name="pref_navbar_left_handed_summary">SPERIMENTALE! Mostra la barra di navigazione in modalità orizzontale sul lato sinistro dello schermo (richiede riavvio)</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Nascondi icona launcher</string>
+    <string name="pref_hide_launcher_icon_summary">Potrebbe richiedere il riavvio del launcher</string>
+
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">Disattivata</string>
+    <string name="navbar_l_icon_style_original">Originale</string>
+    <string name="navbar_l_icon_style_large">Grande</string>
+
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">Ritardo adattivo</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">Prolunga automaticamente il ritardo 
+        se viene superata la soglia impostata del traffico dati (Imposta a 0 per disattivare)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Tracciamento barra di avanzamento</string>
+    <string name="pref_lc_progress_tracking_summary">Mostra una barra di avanzamento per le notifiche in corso
+        che prevedono tale barra. Richiede l\'attivazione della Barra di avanzamento nel menu Barra di stato.</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">Modalità attivazione</string>
+    <string name="dt_display_mode_always">Sempre (quando è disponibile una connessione dati)</string>
+    <string name="dt_display_mode_dm">Solo con Gestore Download di Android</string>
+    <string name="dt_display_mode_pt">Quando viene mostrata una barra di avanzamento nella barra di stato</string>
 
 </resources>
