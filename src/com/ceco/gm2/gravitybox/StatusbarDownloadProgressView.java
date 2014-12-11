@@ -141,6 +141,12 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         }
     }
 
+    private void stopTracking() {
+        mId = null;
+        updateProgress(null);
+        notifyProgressStopped();
+    }
+
     public void onNotificationAdded(Object statusBarNotif) {
         if (mMode == Mode.OFF) return;
 
@@ -174,8 +180,14 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         }
 
         if (mId.equals(getIdentifier(statusBarNotif))) {
-            if (DEBUG) log("updating progress for " + mId);
-            updateProgress(statusBarNotif);
+            // if notification became clearable, stop tracking immediately
+            if ((Boolean) XposedHelpers.callMethod(statusBarNotif, "isClearable")) {
+                if (DEBUG) log("onNotificationUpdated: notification became clearable - stopping tracking");
+                stopTracking();
+            } else {
+                if (DEBUG) log("updating progress for " + mId);
+                updateProgress(statusBarNotif);
+            }
         }
     }
 
@@ -187,9 +199,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             return;
         } else if (mId.equals(getIdentifier(statusBarNotif))) {
             if (DEBUG) log("finishing progress for " + mId);
-            mId = null;
-            updateProgress(null);
-            notifyProgressStopped();
+            stopTracking();
         }
     }
 
@@ -211,7 +221,8 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         return (extras != null && extras.getBoolean(ModLedControl.NOTIF_EXTRA_PROGRESS_TRACKING));
     }
 
-    protected String getIdentifier(Object statusBarNotif) {
+    private String getIdentifier(Object statusBarNotif) {
+        if (statusBarNotif == null) return null;
         String pkgName = (String) XposedHelpers.getObjectField(statusBarNotif, "pkg");
         if (Build.VERSION.SDK_INT > 17 && SUPPORTED_PACKAGES.get(0).equals(pkgName)) {
             String tag = (String) XposedHelpers.getObjectField(statusBarNotif, "tag");
@@ -309,9 +320,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED)) {
             mMode = Mode.valueOf(intent.getStringExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED));
             if (mMode == Mode.OFF) {
-                mId = null;
-                updateProgress(null);
-                notifyProgressStopped();
+                stopTracking();
             } else {
                 updatePosition();
             }
