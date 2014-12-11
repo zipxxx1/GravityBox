@@ -1557,7 +1557,6 @@
     <string name="qs_tile_compass">Bussola</string>
     <string name="quick_settings_compass_off">Bussola Spenta</string>
     <string name="quick_settings_compass_init">Avvio in corso&#8230;</string>
-    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
 
     <!-- Cardinal directions -->
     <string name="cd_north">N</string>
@@ -1813,7 +1812,7 @@
     <string name="compat_warning_message">USARE SOLO CON VERSIONI DI ANDROID PURO O GOOGLE PLAY EDITION!\n\nNon sono supportate ROM personalizzate
         dai produttori come la Touchwiz, Sense, Xperia, o qualsiasi altra custom ROM, non seguire queste istruzioni potrebbe causare problemi.\n\nAndando avanti,
         siete consapevoli che è a vostro rischio e pericolo e che non riceverete alcun supporto. Per informazioni più dettagliate riguardo la compatibilità,
-        visitare <a il thread di supporto su XDA href="http://forum.xda-developers.com/showthread.php?t=2554049"></a>.</string>
+        visitare il thread di supporto su XDA <a href="http://forum.xda-developers.com/showthread.php?t=2554049"></a>.</string>
     <string name="compat_warning_ok_stage1">OK. Ho capito.</string>
     <string name="compat_warning_ok_stage2">Ho capito DAVVERO!</string>
 
