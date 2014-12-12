@@ -263,7 +263,7 @@
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">Fejre fordítás művelete csengés közben</string>
-    <string name="pref_phone_flip_summary">Lehetővé teszi, hogy meghatározza azt a műveletet, amit az eszköz csengés közbeni fejjel lefelé fordításakor végrehajt</string>
+    <string name="pref_phone_flip_summary">Lehetővé teszi a készülék csengés közbeni fejjel lefelé fordításakor végrehajtandó művelet meghatározását</string>
     <string name="phone_flip_action_none">Ne tegyen semmit</string>
     <string name="phone_flip_action_mute">Csengés elnémítása</string>
     <string name="phone_flip_action_dismiss">Hívás elutasítása</string>
@@ -331,7 +331,7 @@
     <string name="notif_background_color_fill">Szín kitöltése</string>
     <string name="notif_background_custom_image">Egyéni kép</string>
     <string name="pref_notif_color_title">Háttérszín beállítása</string>
-    <string name="pref_notif_image_portrait_title">Alló tájolás hátterének beállítása</string>
+    <string name="pref_notif_image_portrait_title">Álló tájolás hátterének beállítása</string>
     <string name="pref_notif_image_landscape_title">Fekvő tájolás hátterének beállítása</string>
     <string name="pref_notif_background_alpha_title">Háttér átlátszóság</string>
     <string name="pref_notif_color_mode_title">Háttér üzemmód</string>
@@ -349,7 +349,7 @@
 
     <!-- Phone status in pie controls -->
     <string name="pie_phone_status_no_service">Nincs szolgáltatás</string>
-    <string name="pie_phone_status_airplane_mode">Airplane üzemmód bekapcsolva</string>
+    <string name="pie_phone_status_airplane_mode">Repülőgép üzemmód bekapcsolva</string>
     <string name="pie_phone_status_emergency_only">Csak segélyhívás</string>
 
     <!-- Pie Controls settings -->
@@ -368,7 +368,7 @@
     <string name="button_backlight_mode_disable">Gomb háttérvilágítás kikapcsolva</string>
     <string name="button_backlight_mode_always_on">Bekapcsolt kijelzőnél mindig bekapcsolva</string>
     <string name="pref_button_backlight_notifications_title">Gomb háttérvilágítás értesítések</string>
-    <string name="pref_button_backlight_notifications_summary">KÍSÉRLETI! Villogtatja a gomb háttérvilágítást amikor értesítés érkezik. Abban az esetben használd, ha az eszközödből hiányzik az értesítési LED. Fogyaszhtatja az akkumulátort.</string>
+    <string name="pref_button_backlight_notifications_summary">KÍSÉRLETI! Villogtatja a gomb háttérvilágítást értesítés érkezésekor. Abban az esetben használd, ha a készülékedből hiányzik az értesítési LED. Fogyaszhtatja az akkumulátort.</string>
 
     <!--  Dithered Holo background -->
     <string name="pref_holo_bg_dither_title">Nagyobb színmélységű Holo háttér</string>
@@ -442,7 +442,7 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Fényerő beállítások</string>
-    <string name="pref_brightness_master_switch_summary">Csak abban az esetben használd, ha az eszközöd támogotja a szabvány Android fényerő funkciókat. Fényerővel kapcsolatos hibák megjelenése esetén tiltsd le ezt a funkciót. (újraindítás szükséges)</string>
+    <string name="pref_brightness_master_switch_summary">Csak abban az esetben használd, ha a készüléked támogatja a szabvány Android fényerő funkciókat. Fényerővel kapcsolatos hibák megjelenése esetén tiltsd le ezt a funkciót. (újraindítás szükséges)</string>
 
     <!-- HW Key Action: Recent apps -->
     <string name="hwkey_action_recent_apps">Nemrég használt alkalmazások megjelenítése</string>
@@ -455,7 +455,7 @@
     <string name="hwkey_action_custom_app_missing">Az egyéni alkalmazás nem található!</string>
 
     <!-- Notification panel clock -->
-    <string name="pref_cat_statusbar_clock_title">Állaptsáv óra alkalmazás</string>
+    <string name="pref_cat_statusbar_clock_title">Állapotsáv óra alkalmazás</string>
     <string name="pref_cat_notif_panel_clock_title">Értesítési panel óra alkalmazás</string>
     <string name="pref_clock_link_title">Egyszeri érintés alkalmazása</string>
     <string name="pref_clock_link_summary">Az értesítési panel órájának megérintésével egy meghatározott alkalmazás megnyitása a Dátum&amp;Idő beállításai helyett</string>
@@ -473,10 +473,10 @@
     <string name="pref_expanded_desktop_title">Kiterjesztett asztal üzemmód</string>
     <string name="expanded_desktop_disabled">Letiltva</string>
     <string name="expanded_desktop_navbar">Navigációs sáv elrejtése</string>
-    <string name="expanded_desktop_immersive_statusbar">Imerzív értesítési sáv</string>
-    <string name="expanded_desktop_immersive_navbar">Imerzív navigációs sáv</string>
-    <string name="expanded_desktop_both">Fél-imerzív</string>
-    <string name="expanded_desktop_immersive">Imerzív</string>
+    <string name="expanded_desktop_immersive_statusbar">Immerzív értesítési sáv</string>
+    <string name="expanded_desktop_immersive_navbar">Immerzív navigációs sáv</string>
+    <string name="expanded_desktop_both">Fél-immerzív</string>
+    <string name="expanded_desktop_immersive">Immerzív</string>
     <string name="action_expanded_desktop_title">Kiterjesztett asztal</string>
     <string name="action_expanded_desktop_on">Kiterjesztett asztal bekapcsolva</string>
     <string name="action_expanded_desktop_off">Kiterjesztett asztal kikapcsolva</string>
@@ -560,12 +560,12 @@
 
     <!-- Mute volume adjust sound -->
     <string name="pref_volume_adjust_mute_title">Lenémítja a hangerő beállítás értesítő hangot</string>
-    <string name="pref_volume_adjust_mute_summary">Letiltja a hangerő gombokkal történő hangerőszabályozáskor hallható hangot</string>
+    <string name="pref_volume_adjust_mute_summary">Letiltja a hangerő gombokkal történő hangerőszabályzáskor hallható hangot</string>
 
     <!-- Call vibrations -->
     <string name="pref_call_vibrations_title">Híváskori rezgések</string>
     <string name="call_vibration_connected">Hívás kapcsolódásakor</string>
-    <string name="call_vibration_disconnected">Hívás megszakítasakor</string>
+    <string name="call_vibration_disconnected">Hívás megszakításakor</string>
     <string name="call_vibration_waiting">Hívás várakozás során</string>
     <string name="call_vibration_periodic">Minden 45. másodpercben kimenő hívások közben</string>
 
@@ -756,8 +756,8 @@
         beállításait a régi verziójú GB-ból az új verzióba és utána eltávolítani a régi verziójú GB-t. 
         Az eltávolítás figyelmeztetésekor megerősítés SZÜKSÉGES. Az eltávolítás után az új modul Xposed Telepítőben történő aktiválása
         majd AZONNALI rendszer újraindítás szükséges, különben rendszer stabilitási problémákat észlelhet.</string>
-    <string name="gb_new_package_settings_transfer_ok">GravityBox settings transferred successfully</string>
-    <string name="gb_new_package_settings_transfer_failed">Transfer of GravityBox settings failed</string>
+    <string name="gb_new_package_settings_transfer_ok">A GravityBox beállítások átmentése sikerült</string>
+    <string name="gb_new_package_settings_transfer_failed">Nem sikerült a GravityBox beállítások átmentése</string>
 
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Zseblámpa bekapcsolása zárképernyőn</string>
@@ -816,13 +816,13 @@
     <string name="pref_cat_launcher_tweaks_title">Indító módosítások</string>
     <string name="pref_cat_launcher_tweaks_summary">A gyári és a Google Experience Indítóra vonatkozik</string>
     <string name="pref_cat_launcher_desktop_grid_title">Képernyőrács</string>
-    <string name="pref_launcher_desktop_grid_info_title">Alapértelmezettnél más értékek használata a widgetek megjelenítésének és működésének az összeomlását eredményezheti. Okosan használd. A változtatásokhoz az Indító újraindítása szükséges.</string>
+    <string name="pref_launcher_desktop_grid_info_title">Alapértelmezettől eltérő értékek használata a widget-ek megjelenítésének és működésének összeomlását eredményezheti. Okosan használd. A változtatásokhoz a launcher újraindítása szükséges.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Sorok száma</string>
     <string name="pref_launcher_desktop_grid_cols_title">Oszlopok száma</string>
     <string name="desktop_grid_default">Alapértelmezett</string>
 
     <!-- HW Key Acctions: toggle screen recording -->
-    <string name="hwkey_action_screen_recording">Képernyő videófelvétel ki-bekapcsolása</string>
+    <string name="hwkey_action_screen_recording">Képernyő videofelvétel ki-bekapcsolása</string>
 
     <!-- Full screen caller photo modes -->
     <string name="fullscreen_caller_disabled">Letiltva</string>
@@ -999,12 +999,12 @@
     <string name="pref_qs_tile_span_disable_summary">Letiltja a tulajdonos, fényerő és a beállítások csempék két csempeszélességre való kiterjeszkedését fekvő tájolásnál</string>
 
     <!-- Force overflow menu button -->
-    <string name="pref_force_overflow_menu_button_title">Kényszerített overflow menü gomb</string>
+    <string name="pref_force_overflow_menu_button_title">Túlnyúló menü gomb kényszerítése</string>
     <string name="pref_force_overflow_menu_button_summary">Újraindítás szükséges</string>
 
     <!-- Navbar: always on bottom -->
     <string name="pref_navbar_always_on_bottom_title">Mindig alul</string>
-    <string name="pref_navbar_always_on_bottom_summary">Navigációs sáv alsó pozícióba kényszerítése fekvő tájolásnál (újraindítás szükséges)</string>
+    <string name="pref_navbar_always_on_bottom_summary">KÍSÉRLETI! Navigációs sáv alsó pozícióba kényszerítése fekvő tájolásnál (újraindítás szükséges)</string>
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Pozíció felcserélése menü gombbal</string>
@@ -1246,8 +1246,8 @@
     <string name="stay_awake_on">Ébrentartás bekapcsolva</string>
 
     <!-- Screen recording options -->
-    <string name="pref_cat_screenrecord_options_title">Képernyő videófelvétel</string>
-    <string name="pref_cat_screenrecord_options_summary">Képernyő videófelvételhez tartalmaz beállításokat</string>
+    <string name="pref_cat_screenrecord_options_title">Képernyő videofelvétel</string>
+    <string name="pref_cat_screenrecord_options_summary">Képernyő videofelvételhez tartalmaz beállításokat</string>
     <string name="pref_screenrecord_size_title">Videó méret</string>
     <string name="scr_size_default">Készülék alapértelmezett</string>
     <string name="scr_size_sd">SD (360x640px)</string>
@@ -1279,10 +1279,10 @@
 
     <!-- Mute volume adjust vibrate -->
     <string name="pref_volume_adjust_vibrate_mute_title">Hangerő beállításkori rezgés letiltása</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Letiltja a rezgést a hangerőszabályzó gombokkal történő értesítési/csengőhang hangererejének beállításakor</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Letiltja a hangerőszabályzó gombokkal történő értesítési/csengőhang hangerő beállításakori rezgést</string>
 
     <!-- ScreenRecord: use stock binary -->
-    <string name="pref_screenrecord_use_stock_title">Gyári videobeállítások használata</string>
+    <string name="pref_screenrecord_use_stock_title">Gyári videóbeállítások használata</string>
     <string name="pref_screenrecord_use_stock_summary">Ha engedélyezve van, akkor a gyári videóbeállítás lesz használva felvételkor. Abban az esetben használd, ha az alternatív videóbeállítások problémákat okoznak. Ne feledd, hogy a gyári videóbeállítás nem támogatja a hangfelvételet és a felvétel nem lehet hosszabb 3 percnél.</string>
 
     <!-- Clock settings master switch -->
@@ -1336,7 +1336,7 @@
 
     <!-- Led control -->
     <string name="pref_led_control_title">Értesítés vezérlés</string>
-    <string name="pref_led_control_summary">Lehetővé teszi az értesítési fények, hangok és rezgések szabályozásást alkalmazásonként</string>
+    <string name="pref_led_control_summary">Lehetővé teszi az értesítési fények, hangok és rezgések alkalmazásonkénti szabályozását</string>
     <string name="lc_please_wait">Kérem várjon&#8230;</string>
     <string name="lc_disabled">Értesítés vezérlés letiltva</string>
     <string name="pref_lc_led_color_title">LED fény</string>
@@ -1366,7 +1366,7 @@
     <string name="pref_lc_notif_insistent_summary">Ha engedélyezve van, az értesítési hang ismétlődően lejátszásra kerül az értesítés törléséig vagy az értesítési ablak megnyitásáig</string>
     <string name="pref_lc_vibrate_override_title">Rezgések felülírása</string>
     <string name="pref_lc_vibrate_pattern_title">Rezgés minta</string>
-    <string name="pref_lc_vibrate_pattern_summary">A rezgés ki/be időtartam párok vesszővel elválasztott listája, ezredmásodpercben. Állíts be 0 értéket a rezgés letilátásához</string>
+    <string name="pref_lc_vibrate_pattern_summary">A rezgés ki/be időtartam párok vesszővel elválasztott listája, ezredmásodpercben. Állíts be 0 értéket a rezgés letiltásához</string>
     <string name="lc_vibrate_pattern_invalid">Érvénytelen rezgés minta formátum</string>
 
     <!-- Omni data traffic monitor inactivity threshold -->
@@ -1399,7 +1399,7 @@
 
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktív Képernyő</string>
-    <string name="lc_active_screen_info">Az Aktív Képernyő funkció minden alkalommal automatikusan bekapcsolja a kijelzőt új értesítés érkezésekor. Csak abban az esetben aktiválódik, ha a képernyő nincs eltakarva (pl. ha a készülék nincs zsebben). Opcionálisan lenyitja az értesítések panelt vagy lebegő felugró értesítést mutat az aktuális zárképernyő biztonsági házirend és felhasználói beállításoktól függően. Ne feledje, hogy az Aktív Képernyő működéséhez a zárképernyőt engedélyeznie kell.\nA lenti kapcsoló a főkapcsoló. Engedélyezés után további, alkalmazásonkénti konfiguráció lehetséges.</string>
+    <string name="lc_active_screen_info">Az Aktív Képernyő funkció minden alkalommal automatikusan bekapcsolja a kijelzőt új értesítés érkezésekor. Opcionálisan kiterjeszti az értesítések panelt vagy lebegő felugró értesítést mutat az aktuális zárképernyő biztonsági házirendtől és felhasználói beállításoktól függően. Ne feledje, hogy az Aktív Képernyő működéséhez a zárképernyőt engedélyeznie kell.\nA lenti kapcsoló a főkapcsoló. Engedélyezés után további, alkalmazásonkénti konfiguráció lehetséges.</string>
     <string name="lc_active_screen_switch_title">Aktív Képernyő engedélyezése</string>
     <string name="lc_expand_notification_panel_title">Értesítési panel lenyitása</string>
 
@@ -1418,7 +1418,7 @@
     <string name="lc_led_mode_off">Kikapcsolva (nincsenek értesítési fények)</string>
     
     <!-- Notification control: Quiet hours statusbar icon -->
-    <string name="pref_lc_qh_statusbar_icon_title">ÁLlapotsáv ikon</string>
+    <string name="pref_lc_qh_statusbar_icon_title">Állapotsáv ikon</string>
     <string name="pref_lc_qh_statusbar_icon_summary">Ikon mutatása az állapotsávon Csendes időszakok alatt</string>
 
     <!-- Battey percent text: charging color -->
@@ -1429,11 +1429,11 @@
     <string name="pref_lc_qh_cat_weekend_title">Hétvége</string>
 
     <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">Adattevékenység típús kijelzők letiltása</string>
+    <string name="pref_disable_data_network_type_icons_title">Adattevékenység típus kijelzők letiltása</string>
     <string name="pref_disable_data_network_type_icons_summary">Lehetővé teszi a jelszint ikonok melletti 3G/G kijelzők letiltását</string>
 
     <!-- Force English locale -->
-    <string name="pref_force_english_locale_title">Angol lokalicázió kényszerítése</string>
+    <string name="pref_force_english_locale_title">Angol lokalizáció kényszerítése</string>
     
     <!-- VolumePanel transparency -->
     <string name="pref_volume_panel_transparency_title">Hangerő panel átlátszóság</string>
@@ -1507,7 +1507,7 @@
     <string name="battery_style_circle_dashed_percent">Szaggatott kör akkumulátor százalékkal</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Köszönöm a támogatást. A prémium funkciók a GravityBox újraindítása után kerülnek feloldásra. Győződjön meg arról, hogy a GravityBox Feloldó (Unlocker) legalább 120 percig telepítve van.</string>
+    <string name="premium_unlocked_message">Köszönöm a támogatást. A prémium funkciók a rendszer újraindítása után kerülnek feloldásra. A feloldó (unlocker) visszatérítési határidő lejárta utáni eltávolítása esetén a Gravitybox prémium funkciói feloldott állapotban maradnak.</string>
     <string name="pref_about_get_unlocker_title">Feloldó beszerzése</string>
     <string name="pref_about_get_unlocker_summary">Nincs PayPal fiókja? Csak érintsen ide a GravityBox prémium funkciók feloldójának a Play Áruházból való beszerzéséhez</string>
 
@@ -1581,11 +1581,11 @@
 
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">Fejhallgató műveletek</string>
-    <string name="pref_headset_action_plug_title">Fejhallagtó csatlakoztatásakor</string>
+    <string name="pref_headset_action_plug_title">Fejhallgató csatlakoztatásakor</string>
     <string name="pref_headset_action_unplug_title">Fejhallgató lecsatlakoztatásakor</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Rezgések némítésa</string>
+    <string name="pref_lc_qh_mute_vibe_title">Rezgések némítása</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interaktív mód</string>
@@ -1616,8 +1616,8 @@
     <string name="pref_lc_headsup_dnd_summary">Nem mutat egyetlen lebegő felugró ablakot sem, amíg ez az alkalmazás az előtérben fut</string>
 
     <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Android L navigációs gomb ikonok engedélyezése</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Lecseréli a gyári navigációs ikonokat az Android L-ből származóakra (újraindítás szükséges)</string>
+    <string name="pref_navbar_android_l_icons_enable_title">Lollipop ikonok használata</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">Lecseréli a gyári navigációs ikonokat az Android Lollipop-ból származóakra (újraindítás szükséges)</string>
 
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Aktív Képernyő mód</string>
@@ -1727,8 +1727,8 @@
     <string name="pref_power_proximity_wake_ignore_call_title">Figyelmen kívül hagy beérkező híváskor</string>
     
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">Letöltési folyamat sáv</string>
-    <string name="pref_statusbar_download_progress_summary">A letöltési folyamat sávot az állapotsávban mutatja az Android gyári letöltő menedzser által elvégzett letöltésekhez.</string>
+    <string name="pref_statusbar_download_progress_title">Folyamatjelző sáv</string>
+    <string name="pref_statusbar_download_progress_summary">A folyamatjelző sávot az állapotsávban mutatja Android gyári letöltő menedzser és bluetooth adatátvitel esetén, valamint további alkalmazásoknál, melyekhez folyamatjelző sáv figyelés van beállítva az Értesítés vezérlés menüben.</string>
     <string name="sb_download_progress_off">Letiltva</string>
     <string name="sb_download_progress_top">Felső szélen</string>
     <string name="sb_download_progress_bottom">Alsó szélen</string>
@@ -1786,5 +1786,47 @@
 
     <!-- Messaging -->
     <string name="pref_cat_phone_messaging_title">Üzenetkezelés</string>
+    
+    <!-- Compatibility warning -->
+    <string name="compat_warning_title">FIGYELMEZTETÉS</string>
+    <string name="compat_warning_message">CSAK MÓDOSÍTÁS NÉLKÜLI VAGY GOOGLE PLAY EDITION ESZKÖZÖKRE!\n\nMinden más módosított gyártói ROM-on való használat, úgymint Touchwiz, Sense, Xperia és minden más egyedi ROM nem támogatott, és nem várt problémákat okozhat.\n\nHa mégis folytatod, akkor meg kell erősítened, hogy ezt saját felelősségedre teszed, mindenféle támogatás reménye nélkül. További, részletes kompatibilitási információhoz nézd meg ezt: <a href="http://forum.xda-developers.com/showthread.php?t=2554049">szoftver támogatási oldal az XDA-n</a>.</string>
+    <string name="compat_warning_ok_stage1">OK. Értettem.</string>
+    <string name="compat_warning_ok_stage2">TÉNYLEG értettem!</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Zsebben hordás mód</string>
+    <string name="pref_unc_as_pocket_mode_summary">A képernyő nem fog bekapcsolódni, ha a közelség érzékelő takarva van(pl. ha a készülék zsebben van)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Ezt az opciót jelenleg az Energia beállítások menüben lévő Ébresztés közelség érzékelővel funkció felülírja</string>
+
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">Balkezes mód</string>
+    <string name="pref_navbar_left_handed_summary">KÍSÉRLETI! Függőleges navigációs sávot helyez el a képernyő bal szélén fekvő tájolásnál (újraindítás szükséges)</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Indító ikon elrejtése</string>
+    <string name="pref_hide_launcher_icon_summary">Szükséges lehet a launcher újraindítása</string>
+
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">Letiltva</string>
+    <string name="navbar_l_icon_style_original">Eredeti</string>
+    <string name="navbar_l_icon_style_large">Nagyobb</string>
+
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">Adaptív késleltetés</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">Automatikusan meghosszabbítja a késleltetést, ha az aktuális mobil adatforgalom meghaladja a meghatározott értéket (Letiltáshoz állíts be 0-t)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Folyamatjelző sáv figyelés</string>
+    <string name="pref_lc_progress_tracking_summary">A folyamatjelző sávot az állapotsávban mutatja a folyamatjelző sávval rendelkező folyamatban lévő értesítésekhez. Szükséges, hogy a Folyamatjelző sáv funkció engedélyezve legyen az Állapotsáv módosítások menüben.</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">Kijelzés mód</string>
+    <string name="dt_display_mode_always">Mindig (ha rendelkezésre áll hálózati kapcsolat)</string>
+    <string name="dt_display_mode_dm">Csak az Android Letöltéskezelő esetén</string>
+    <string name="dt_display_mode_pt">Amikor a folyamatjelző sáv az értesítési sávban jelenik meg</string>
+
+    <!-- Unlock ring targets: custom unlock ring -->
+    <string name="pref_lockscreen_ring_custom_unlock_title">Egyéni feloldó célpont</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">Lehetővé teszi a feloldó célppont manuális beállítását. Győződj meg róla, hogy legalább egy feloldó célpont beállításra került egy GravityBox feloldó művelethez vagy valamelyik alkalmazás indításához.</string>
 
 </resources>
