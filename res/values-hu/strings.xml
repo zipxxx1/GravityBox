@@ -1706,4 +1706,8 @@
     <string name="dt_display_mode_always">Mindig (ha rendelkezésre áll hálózati kapcsolat)</string>
     <string name="dt_display_mode_pt">Amikor a folyamatjelző sáv az értesítési sávban jelenik meg</string>
 
+    <!-- Unlock ring targets: custom unlock ring -->
+    <string name="pref_lockscreen_ring_custom_unlock_title">Egyéni feloldó célpont</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">Lehetővé teszi a feloldó célppont manuális beállítását. Győződj meg róla, hogy legalább egy feloldó célpont beállításra került egy GravityBox feloldó művelethez vagy valamelyik alkalmazás indításához.</string>
+
 </resources>

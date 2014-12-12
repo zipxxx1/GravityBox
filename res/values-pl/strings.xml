@@ -1701,4 +1701,9 @@
     <string name="dt_display_mode_always">Zawsze (gdy dostępne jest połączenie sieciowe)</string>
     <string name="dt_display_mode_pt">Gdy wyświetlany jest pasek postępu na pasku stanu</string>
 
+    <!-- Unlock ring targets: custom unlock ring -->
+    <string name="pref_lockscreen_ring_custom_unlock_title">Niestandardowy cel Pierścienia Odblokowania</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">Pozwala ręcznie ustawić cel odblokowania.
+        Upewnij się, że co najmniej jeden z ustawionych celów pierścienia jest skonfigurowany jako akcja odblokowania lub uruchomienia jakiejś aplikacji.</string>
+
 </resources>

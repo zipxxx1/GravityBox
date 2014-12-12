@@ -1728,4 +1728,9 @@
     <string name="dt_display_mode_always">Always (when network connection available)</string>
     <string name="dt_display_mode_pt">When progress bar in status bar is showing</string>
 
+    <!-- Unlock ring targets: custom unlock ring -->
+    <string name="pref_lockscreen_ring_custom_unlock_title">Custom unlock target</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">Allows to set unlock target manually.
+        Make sure at least one of the ring targets is either set to use GravityBox Unlock action or to start some app.</string>
+
 </resources>
