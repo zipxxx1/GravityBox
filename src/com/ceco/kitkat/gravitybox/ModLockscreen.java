@@ -412,6 +412,8 @@ public class ModLockscreen {
                     if (!mPrefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_ENABLE, false)) return;
 
+                    final boolean customUnlock = mPrefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_CUSTOM_UNLOCK, false);
                     final ArrayList<Object> targets = (ArrayList<Object>) XposedHelpers.getObjectField(
                             mGlowPadView, "mTargetDrawables");
                     final ArrayList<Object> newTargets = new ArrayList<Object>();
@@ -422,14 +424,18 @@ public class ModLockscreen {
                     final int unlockDirecResId = res.getIdentifier("description_direction_right", 
                             "string", PACKAGE_NAME);
 
-                    // get target from position 0 supposing it's unlock ring
-                    newTargets.add(targets.get(0));
-                    newDescriptions.add(unlockDescResId == 0 ? null : res.getString(unlockDescResId));
-                    newDirections.add(unlockDirecResId == 0 ? null : res.getString(unlockDirecResId));
+                    if (!customUnlock) {
+                        // get target from position 0 supposing it's unlock ring
+                        newTargets.add(targets.get(0));
+                        newDescriptions.add(unlockDescResId == 0 ? null : res.getString(unlockDescResId));
+                        newDirections.add(unlockDirecResId == 0 ? null : res.getString(unlockDirecResId));
+                    }
 
                     // fill ring targets with apps from preferences
                     AppInfo appInfo;
-                    for (int i=0; i<GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_APP.length; i++) {
+                    int length = GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_APP.length;
+                    if (!customUnlock) length--;
+                    for (int i=0; i<length; i++) {
                         appInfo = null;
                         String app = mPrefs.getString(
                                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_APP[i], null);
@@ -438,12 +444,18 @@ public class ModLockscreen {
                         }
                         if (appInfo != null) {
                             newTargets.add(GlowPadHelper.createTargetDrawable(context, appInfo, mGlowPadView.getClass()));
-                            newDescriptions.add(appInfo.name);
+                            if (ShortcutActivity.isGbUnlockShortcut(appInfo.intent)) {
+                                newDescriptions.add(unlockDescResId == 0 ? appInfo.name : res.getString(unlockDescResId));
+                                newDirections.add(unlockDirecResId == 0 ? null : res.getString(unlockDirecResId));
+                            } else {
+                                newDescriptions.add(appInfo.name);
+                                newDirections.add(null);
+                            }
                         } else {
                             newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadView.getClass()));
                             newDescriptions.add(null);
+                            newDirections.add(null);
                         }
-                        newDirections.add(null);
                     }
 
                     XposedHelpers.setObjectField(mGlowPadView, "mTargetDrawables", newTargets);
@@ -509,6 +521,12 @@ public class ModLockscreen {
                             }
                             XposedHelpers.setIntField(mGlowPadView, "mActiveTarget", -1);
                             XposedHelpers.callMethod(mGlowPadView, "doFinish");
+                        // if intent is a GB Unlock shortcut
+                        } else if (ShortcutActivity.isGbUnlockShortcut(appInfo.intent)) {
+                            final Object callback = XposedHelpers.getObjectField(
+                                    XposedHelpers.getSurroundingThis(param.thisObject), "mCallback");
+                            XposedHelpers.callMethod(callback, "userActivity", 0);
+                            XposedHelpers.callMethod(callback, "dismiss", false);
                         // otherwise start activity
                         } else {
                             final Object activityLauncher = XposedHelpers.getObjectField(

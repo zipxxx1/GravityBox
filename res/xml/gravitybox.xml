@@ -91,6 +91,13 @@
                     android:summary="@string/pref_lockscreen_ring_targets_enable_summary"
                     android:defaultValue="false" />
 
+                <CheckBoxPreference
+                    android:key="pref_lockscreen_ring_custom_unlock"
+                    android:title="@string/pref_lockscreen_ring_custom_unlock_title"
+                    android:summary="@string/pref_lockscreen_ring_custom_unlock_summary"
+                    android:defaultValue="false"
+                    android:dependency="pref_lockscreen_ring_targets_enable" />
+
                 <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                     android:key="pref_lockscreen_ring_targets_app0"
                     android:title="@string/pref_lockscreen_ring_targets_app_title"
@@ -123,6 +130,11 @@
 
                 <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
                     android:key="pref_lockscreen_ring_targets_app6"
+                    android:title="@string/pref_lockscreen_ring_targets_app_title"
+                    android:summary="@string/app_picker_none" />
+
+                <com.ceco.kitkat.gravitybox.preference.AppPickerPreference
+                    android:key="pref_lockscreen_ring_targets_app7"
                     android:title="@string/pref_lockscreen_ring_targets_app_title"
                     android:summary="@string/app_picker_none" />
 

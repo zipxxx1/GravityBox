@@ -36,6 +36,7 @@ import com.ceco.kitkat.gravitybox.Utils;
 import com.ceco.kitkat.gravitybox.adapters.BasicIconListItem;
 import com.ceco.kitkat.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.kitkat.gravitybox.adapters.IconListAdapter;
+import com.ceco.kitkat.gravitybox.shortcuts.ShortcutActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -111,6 +112,7 @@ public class AppPickerPreference extends DialogPreference
     private int mIconPickSizePx;
     private boolean mNullItemEnabled = true;
     private String mValue;
+    private boolean mAllowUnlockAction;
 
     private static LruCache<String, BitmapDrawable> sAppIconCache;
     static {
@@ -290,6 +292,10 @@ public class AppPickerPreference extends DialogPreference
 
     public void show() {
         showDialog(null);
+    }
+
+    public void setAllowUnlockAction(boolean allow) {
+        mAllowUnlockAction = allow;
     }
 
     @Override
@@ -674,6 +680,9 @@ public class AppPickerPreference extends DialogPreference
                 mCreateShortcutIntent.setComponent(cn);
                 // mark intent so we can later identify it comes from GB
                 mCreateShortcutIntent.putExtra("gravitybox", true);
+                if (mAllowUnlockAction) {
+                    mCreateShortcutIntent.putExtra(ShortcutActivity.EXTRA_ALLOW_UNLOCK_ACTION, true);
+                }
             }
         }
 

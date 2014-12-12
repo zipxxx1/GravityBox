@@ -38,11 +38,13 @@ public class ShortcutActivity extends ListActivity {
     public static final String ACTION_LAUNCH_ACTION = "gravitybox.intent.action.LAUNCH_ACTION";
     public static final String EXTRA_ACTION = "action";
     public static final String EXTRA_ACTION_TYPE = "actionType";
+    public static final String EXTRA_ALLOW_UNLOCK_ACTION = "allowUnlockAction";
 
     private Context mContext;
     private IconListAdapter mListAdapter;
     private Button mBtnCancel;
     private boolean mInvokedFromGb;
+    private boolean mAllowUnlockAction;
 
     private static List<String> UNSAFE_ACTIONS = new ArrayList<String>(Arrays.asList(
             ExpandQuicksettingsShortcut.ACTION,
@@ -69,6 +71,13 @@ public class ShortcutActivity extends ListActivity {
                 intent.getStringExtra(ShortcutActivity.EXTRA_ACTION_TYPE).equals("broadcast"));
     }
 
+    public static boolean isGbUnlockShortcut(Intent intent) {
+        return (intent != null && intent.getAction() != null &&
+                intent.getAction().equals(ShortcutActivity.ACTION_LAUNCH_ACTION) &&
+                intent.hasExtra(ShortcutActivity.EXTRA_ACTION_TYPE) &&
+                intent.getStringExtra(ShortcutActivity.EXTRA_ACTION_TYPE).equals("unlock"));
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +101,7 @@ public class ShortcutActivity extends ListActivity {
                 }
             });
             mInvokedFromGb = intent.hasExtra("gravitybox");
+            mAllowUnlockAction = intent.getBooleanExtra(EXTRA_ALLOW_UNLOCK_ACTION, false);
             return;
         } else if (intent.getAction().equals(ACTION_LAUNCH_ACTION) &&
                 intent.hasExtra(EXTRA_ACTION)) {
@@ -181,6 +191,9 @@ public class ShortcutActivity extends ListActivity {
 
     private void setData() {
         ArrayList<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
+        if (mAllowUnlockAction) {
+            list.add(new UnlockShortcut(mContext));
+        }
         list.add(new ShowPowerMenuShortcut(mContext));
         list.add(new ExpandNotificationsShortcut(mContext));
         list.add(new ClearNotificationsShortcut(mContext));

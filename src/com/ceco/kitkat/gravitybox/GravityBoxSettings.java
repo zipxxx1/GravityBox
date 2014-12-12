@@ -595,11 +595,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_RING_DISABLE = "navbarRingDisable";
     public static final String EXTRA_NAVBAR_CAMERA_KEY_DISABLE = "navbarCameraKeyDisable";
 
+    public static final String PREF_CAT_KEY_LOCKSCREEN_RING_SETTINGS = "pref_cat_lockscreen_ring_settings";
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_ENABLE = "pref_lockscreen_ring_targets_enable";
+    public static final String PREF_KEY_LOCKSCREEN_TARGETS_CUSTOM_UNLOCK = "pref_lockscreen_ring_custom_unlock";
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_APP[] = new String[] {
         "pref_lockscreen_ring_targets_app0", "pref_lockscreen_ring_targets_app1", "pref_lockscreen_ring_targets_app2",
         "pref_lockscreen_ring_targets_app3", "pref_lockscreen_ring_targets_app4", "pref_lockscreen_ring_targets_app5",
-        "pref_lockscreen_ring_targets_app6"
+        "pref_lockscreen_ring_targets_app6", "pref_lockscreen_ring_targets_app7"
     };
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_VERTICAL_OFFSET = "pref_lockscreen_ring_targets_vertical_offset";
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_HORIZONTAL_OFFSET = "pref_lockscreen_ring_targets_horizontal_offset";
@@ -905,6 +907,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_RING_TORCH,
             PREF_KEY_LOCKSCREEN_BATTERY_ARC,
             PREF_KEY_LOCKSCREEN_TARGETS_ENABLE,
+            PREF_KEY_LOCKSCREEN_TARGETS_CUSTOM_UNLOCK,
             PREF_KEY_LOCKSCREEN_TARGETS_APP[0],
             PREF_KEY_LOCKSCREEN_TARGETS_APP[1],
             PREF_KEY_LOCKSCREEN_TARGETS_APP[2],
@@ -912,6 +915,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_TARGETS_APP[4],
             PREF_KEY_LOCKSCREEN_TARGETS_APP[5],
             PREF_KEY_LOCKSCREEN_TARGETS_APP[6],
+            PREF_KEY_LOCKSCREEN_TARGETS_APP[7],
             PREF_KEY_LOCKSCREEN_SLIDE_BEFORE_UNLOCK,
             PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
             PREF_KEY_STATUSBAR_LOCK_POLICY,
@@ -1323,6 +1327,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefHeadsUpImportance;
         private ListPreference mPrefQrQuality;
         private SeekBarPreference mPrefSrAdaptiveDelay;
+        private PreferenceScreen mPrefCatLsRingSettings;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1514,6 +1519,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNavbarCustomKeyLongpress = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS);
             mPrefNavbarCustomKeyDoubletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP);
 
+            mPrefCatLsRingSettings = (PreferenceScreen) findPreference(PREF_CAT_KEY_LOCKSCREEN_RING_SETTINGS);
             mPrefLockscreenTargetsApp = new AppPickerPreference[PREF_KEY_LOCKSCREEN_TARGETS_APP.length];
             for (int i=0; i<PREF_KEY_LOCKSCREEN_TARGETS_APP.length; i++) {
                 mPrefLockscreenTargetsApp[i] = (AppPickerPreference) findPreference(
@@ -1522,6 +1528,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         getString(R.string.pref_lockscreen_ring_targets_app_title), (i+1));
                 mPrefLockscreenTargetsApp[i].setTitle(title);
                 mPrefLockscreenTargetsApp[i].setDialogTitle(title);
+                mPrefLockscreenTargetsApp[i].setAllowUnlockAction(true);
             }
             mPrefLockscreenSbClock = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK);
 
@@ -2181,6 +2188,22 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 final boolean enabled = mPrefs.getBoolean(PREF_KEY_LOCKSCREEN_TARGETS_ENABLE, false);
                 for(Preference p : mPrefLockscreenTargetsApp) {
                     p.setEnabled(enabled);
+                }
+            }
+
+            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_TARGETS_CUSTOM_UNLOCK)) {
+                if (mPrefs.getBoolean(PREF_KEY_LOCKSCREEN_TARGETS_CUSTOM_UNLOCK, false)) {
+                    if (mPrefCatLsRingSettings.findPreference(
+                            mPrefLockscreenTargetsApp[mPrefLockscreenTargetsApp.length-1].getKey()) == null) {
+                        mPrefCatLsRingSettings.addPreference(
+                                mPrefLockscreenTargetsApp[mPrefLockscreenTargetsApp.length-1]);
+                    }
+                } else {
+                    if (mPrefCatLsRingSettings.findPreference(
+                        mPrefLockscreenTargetsApp[mPrefLockscreenTargetsApp.length-1].getKey()) != null) {
+                        mPrefCatLsRingSettings.removePreference(
+                                mPrefLockscreenTargetsApp[mPrefLockscreenTargetsApp.length-1]);
+                    }
                 }
             }
 
