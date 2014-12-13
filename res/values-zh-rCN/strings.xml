@@ -1780,7 +1780,7 @@
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">在电源键菜单显示扩展桌面按钮</string>
-    <string name="pref_powermenu_expanded_desktop_summary">请确认扩展桌面是可用的然后再替换！</string>
+    <string name="pref_powermenu_expanded_desktop_summary">请确认扩展桌面是可用的然后再替换</string>
 
     <!-- UNC HeadsUp: ignore for updated notification -->
     <string name="pref_lc_headsup_ignore_update_title">忽略浮动通知更新</string>
@@ -1843,6 +1843,17 @@
     <!-- UNC: Progress bar tracking -->
     <string name="pref_lc_progress_tracking_title">进度条跟踪</string>
     <string name="pref_lc_progress_tracking_summary">在正在进行的通知状态栏显示进度条
-        包含进度条。需要在状态栏的调整进度条功能被激活。</string>
+        需要在状态栏的调整进度条功能被激活</string>
+    
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">显示模式</string>
+    <string name="dt_display_mode_always">总是（当网络连接可用）</string>
+    <string name="dt_display_mode_dm">仅对于Android下载管理器</string>
+    <string name="dt_display_mode_pt">当显示状态栏进度条</string>
+
+    <!-- Unlock ring targets: custom unlock ring -->
+    <string name="pref_lockscreen_ring_custom_unlock_title">自定义解锁目标</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">可手动设置解锁目标
+        至少一个解锁目标或使用GravityBox设置为解锁动作或启动一些应用程序</string>
 
 </resources>
