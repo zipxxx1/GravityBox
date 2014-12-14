@@ -492,8 +492,11 @@ public class ModHwKeys {
                             handler.removeCallbacks(mLockscreenTorchRunnable);
                         } else {
                             if (event.getRepeatCount() == 0) {
-                                handler.postDelayed(mLockscreenTorchRunnable, 
-                                        ViewConfiguration.getLongPressTimeout());
+                                final Object ts = XposedHelpers.callMethod(param.thisObject, "getTelephonyService");
+                                if ((Boolean) XposedHelpers.callMethod(ts, "isIdle")) {
+                                    handler.postDelayed(mLockscreenTorchRunnable, 
+                                            ViewConfiguration.getLongPressTimeout());
+                                }
                             }
                         }
                     }
