@@ -1807,7 +1807,7 @@
         gdy przepływ danych mobilnych przekroczy określony próg (Ustaw 0, aby wyłączyć)</string>
 
     <!-- UNC: Progress bar tracking -->
-    <string na me="pref_lc_progress_tracking_title">Śledzenie postępu</string>
+    <string name="pref_lc_progress_tracking_title">Śledzenie postępu</string>
     <string name="pref_lc_progress_tracking_summary">Pokazuje pasek postępu na pasku stanu dla trwających powiadomień
         posiadających wskaźnik postępu. Wymaga włączenia funkcji Paska postępu w menu Ustawień paska statusu.</string>
 
