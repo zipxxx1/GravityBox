@@ -1,3 +1,27 @@
+Changelog 3.5.1 - 14/12/2014
+--------------------------------------
+- Lockscreen tweaks / Unlock ring targets: added option for custom unlock target
+--- when option is enabled, one more slot becomes available (total of 8 customizable slots)
+--- allows customizing target that serves for unlocking purpose by default
+--- GravityBox Actions: introduced Unlock action which can be assigned to any unlock ring target
+- Status bar tweaks / Progress bar:
+--- improved identification of notifications that contain progress bar
+--- other improvements and bug fixes
+- Status bar tweaks / Data traffic monitor:
+--- added option for Display mode which replaces previous "Download manager only" option:
+------ Always (when connection available) (default behavior)
+------ For Android Download Manager only (previously as standalone option)
+------ When progress bar in status bar is showing (new)
+- UNC Progress bar tracking:
+--- extended to support more 3rd party apps (browsers/download managers/file managers)
+--- fixed progress bar issues when tracking is enabled in Default settings
+- Key actions: don't perform torch on volume down during call
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Italian translations (thanks to valerioscifoni)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Slovak and Czech translations
+
 Changelog 3.5.0 - 07/12/2014
 --------------------------------------
 - Smart Radio:
