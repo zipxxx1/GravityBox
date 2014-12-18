@@ -1849,7 +1849,7 @@
     <string name="pref_data_traffic_display_mode_title">Mode d\'affichage</string>
     <string name="dt_display_mode_always">Toujours (lorsqu\'une connexion au réseau est disponible)</string>
     <string name="dt_display_mode_dm">Uniquement pour le Gestionnaire de Téléchargement d\'Android</string>
-    <string name="dt_display_mode_pt">Lorsqu\'une barre de progression est présente dans la barre d'\état</string>
+    <string name="dt_display_mode_pt">Lorsqu\'une barre de progression est présente dans la barre d\'état</string>
 
     <!-- Unlock ring targets: custom unlock ring -->
     <string name="pref_lockscreen_ring_custom_unlock_title">Cible de déverrouillage personnalisée</string>
