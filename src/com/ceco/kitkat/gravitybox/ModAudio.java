@@ -134,6 +134,7 @@ public class ModAudio {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (!mSafeMediaVolumeEnabled) {
                         param.setResult(true);
+                        XposedHelpers.callMethod(param.thisObject, "disableSafeMediaVolume");
                         return;
                     }
                 }
