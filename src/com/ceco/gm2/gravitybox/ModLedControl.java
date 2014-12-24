@@ -18,12 +18,11 @@ package com.ceco.gm2.gravitybox;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.ceco.gm2.gravitybox.ledcontrol.LedSettings;
 import com.ceco.gm2.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
-
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.app.Notification;
@@ -35,11 +34,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.os.SystemClock;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -429,14 +430,25 @@ public class ModLedControl {
         }
     }
 
+    @SuppressLint("NewApi")
+    @SuppressWarnings("deprecation")
     private static void performActiveScreen() {
         if (mOnPanelRevealedBlocked) {
             mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS));
         }
-        final WakeLock wl = mPm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
-                PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, TAG);
-        wl.acquire();
-        wl.release();
+        if (Build.VERSION.SDK_INT > 16) {
+            long ident = Binder.clearCallingIdentity();
+            try {
+                mPm.wakeUp(SystemClock.uptimeMillis());
+            } finally {
+                Binder.restoreCallingIdentity(ident);
+            }
+        } else {
+            final WakeLock wl = mPm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
+                    PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, TAG);
+            wl.acquire();
+            wl.release();
+        }
     }
 
     private static void clearNotifications() {
