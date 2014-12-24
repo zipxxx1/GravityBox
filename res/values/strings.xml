@@ -1689,4 +1689,13 @@
     <string name="pref_signal_cluster_lollipop_icons_title">Use Lollipop signal icons</string>
     <string name="pref_signal_cluster_lollipop_icons_summary">Requires reboot</string>
 
+    <!-- Compatibility warning -->
+    <string name="compat_warning_title">WARNING</string>
+    <string name="compat_warning_message">FOR USE ON UNMODIFIED ANDROID OR GOOGLE PLAY EDITION DEVICES ONLY!\n\nUse on any other heavily branded
+        ROM like Touchwiz, Sense, Xperia, as well as on any custom ROM, is not supported and may cause unexpected results.\n\nIf you proceed,
+        then you confirm it\'s at your own risk and without expectation of any support. For more detailed information on compatibility,
+        see <a href="http://forum.xda-developers.com/showthread.php?t=2316070">the support thread at XDA</a>.</string>
+    <string name="compat_warning_ok_stage1">OK. I got it.</string>
+    <string name="compat_warning_ok_stage2">I REALLY got it!</string>
+
 </resources>

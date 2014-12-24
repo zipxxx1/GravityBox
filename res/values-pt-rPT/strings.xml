@@ -1672,4 +1672,13 @@
     <string name="pref_signal_cluster_lollipop_icons_title">Utilizar ícones Lollipop</string>
     <string name="pref_signal_cluster_lollipop_icons_summary">Necessário reiniciar</string>
 
+    <!-- Compatibility warning -->
+    <string name="compat_warning_title">AVISO</string>
+    <string name="compat_warning_message">PARA USO EXCLUSIVO EM DISPOSITIVOS EDIÇÃO GOOGLE PLAY OU A CORRER ANDROID PURO!\n\n
+        A utilização em ROMs costumizadas ou altamente modificadas pelos fabricantes como é o caso de TouchWiz (Samsung), Sense (HTC) ou Xperia (Sony) entre outras,
+        não é suportada e poderá causar efeitos indesejados.\n\nSe proceder, estará a confirmar que está consciente disso e não poderá esperar qualquer tipo de suporte.
+        Para mais informações sobre a compatibilidade, visite <a href="http://forum.xda-developers.com/showthread.php?t=2316070">a página de suporte no XDA</a>.</string>
+    <string name="compat_warning_ok_stage1">Certo, percebi.</string>
+    <string name="compat_warning_ok_stage2">Percebi REALMENTE!</string>
+
 </resources>
