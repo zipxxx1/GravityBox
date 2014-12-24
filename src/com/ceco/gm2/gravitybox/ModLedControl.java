@@ -36,6 +36,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Parcel;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import de.robv.android.xposed.XC_MethodHook;
@@ -179,6 +181,46 @@ public class ModLedControl {
                         param.setResult(null);
                         if (DEBUG) log("onPanelRevealed blocked");
                     }
+                }
+            });
+
+            XposedHelpers.findAndHookConstructor(Notification.class, Parcel.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    final Parcel p = (Parcel) param.args[0];
+                    final int pos = p.dataPosition();
+                    Bundle extras = new Bundle();
+                    boolean extrasFound = false;
+                    while (p.dataAvail() > 0) {
+                        try {
+                            if ("gbExtras".equals(p.readString())) {
+                                if (DEBUG) log("GB extras magic found. Reading bundle");
+                                extras = p.readBundle();
+                                extrasFound = true;
+                                break;
+                            } else if (DEBUG) {
+                                log("No GB extras magic in value");
+                            }
+                        } catch (Throwable t) {
+                            if (DEBUG) log("Error reading value from parcel: " + t.getMessage());
+                        }
+                    }
+                    if (!extrasFound) {
+                        p.setDataPosition(pos);
+                    }
+                    XposedHelpers.setAdditionalInstanceField(param.thisObject, "gbExtras", extras);
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(Notification.class, "writeToParcel",
+                    Parcel.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    Parcel p = (Parcel) param.args[0];
+                    p.writeString("gbExtras");
+                    p.writeBundle((Bundle) XposedHelpers.getAdditionalInstanceField(
+                            param.thisObject, "gbExtras"));
+                    if (DEBUG) log("Notification to parcel: gbExtras written");
                 }
             });
         } catch (Throwable t) {
