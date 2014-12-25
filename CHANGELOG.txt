@@ -1,3 +1,48 @@
+Changelog 3.5.0 - 25/12/2014
+--------------------------------------
+- Lockscreen tweaks / Unlock ring targets: added option for custom unlock target
+--- when option is enabled, one more slot becomes available (total of 8 customizable slots)
+--- allows customizing target that serves for unlocking purpose by default
+--- GravityBox Actions: introduced Unlock action which can be assigned to any unlock ring target
+- Status bar tweaks / Progress bar:
+--- added support for Bluetooth transfers
+--- extended to support new UNC "Progress bar tracking" feature
+--- improved identification of notifications that contain progress bar
+--- other improvements and bug fixes
+- Status bar tweaks / Data traffic monitor:
+--- added option for Display mode:
+------ Always (when connection available) (default behavior)
+------ When progress bar in status bar is showing (new)
+- Navigation bar:
+--- Lollipop icons updated from official Lollipop release (yes, they are smaller)
+--- Lollipop icons option extended to support previous larger style
+--- replaced Lollipop IME back icon with rotated triangle for more consistent experience
+--- custom key icons adjusted to match original Lollipop layout
+--- cursor control key icons adjusted for original Lollipop layout
+- Smart Radio:
+--- added option for adaptive delayed power save:
+------ automatically prolongs delay of power saving switch if current mobile data traffic exceeds defined threshold
+------ applies when Delayed power save option is enabled and screen is off
+------ example: won't switch to power saving mode when streaming music over mobile connection
+--- don't attempt to switch network mode while in call
+- Ultimate notification control / Active Screen: 
+--- added option for Pocket mode (makes proximity sensor based behavior optional)
+--- other optimizations
+- Ultimate notification control: added option for Progress bar tracking (default and per-app)
+--- shows progress bar in status bar for every ongoing notification that contains progress bar
+--- requires "Progress bar" feature in status bar tweaks to be enabled
+--- example: can be used to enable progress bar in status bar for 3rd party apps and download managers
+--- Android Download Manager and Bluetooth transfers are supported implicitly (don't require UNC)
+- About: added option for hiding module icon from launcher
+- Added compatibility warning dialog showing upon opening settings
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Russian translations (thanks to gaich)
+- Updated Polish translation (thanks to xtrem007)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Slovak and Czech translations
+
 Changelog 3.4.3 - 30/10/2014
 --------------------------------------
 - Phone tweaks: brought back National data roaming option
