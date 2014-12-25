@@ -1627,4 +1627,48 @@
     <string name="lc_active_screen_mode_nothing">画面点灯のみ</string>
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
 
+    <!-- Compatibility warning -->
+    <string name="compat_warning_title">警告</string>
+    <string name="compat_warning_message">このモジュールはAOSPやGoogle Playエディション向けです!\n\nカスタマイズされたROM、
+        例えばXperia、Touchwiz、SenseやカスタムROMはサポートしておらず、問題が起きる可能性があります。\n\n
+        使用する場合は自己責任・サポートなしでお願いします。互換性につての詳細は
+    <a href="http://forum.xda-developers.com/showthread.php?t=2316070">XDAのサポートスレ (英語)</a>を見てください。</string>
+    <string name="compat_warning_ok_stage1">分かった</string>
+    <string name="compat_warning_ok_stage2">分かったから!</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">ポケットモード</string>
+    <string name="pref_unc_as_pocket_mode_summary">近接センサーが覆われているとき画面をオンにしないようにします。 (例: 端末がポケットの中にあるとき)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">このオプションは電源設定の「近接センサーで起動」によって上書きされています。</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">ホームアプリアイコンを隠す</string>
+    <string name="pref_hide_launcher_icon_summary">ホームアプリの再起動が必要な場合があります。</string>
+
+    <!-- Navbar: lollipop icon style -->
+    <string name="navbar_l_icon_style_disabled">無効</string>
+    <string name="navbar_l_icon_style_original">オリジナル</string>
+    <string name="navbar_l_icon_style_large">大</string>
+
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">適切な遅延</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">モバイルデータ通信のトラフィックが指定した閾値を超えているとき、
+        自動的に遅延を長くします。 (0に設定すると無効化)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">プログレスバーのトラッキング</string>
+    <string name="pref_lc_progress_tracking_summary">プログレスバーを含んでいる、実行中の通知のプログレスバーを
+        ステータスバーに表示します。ステータスバーのプログレスバーオプションが有効にされていないといけません。</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">表示モード</string>
+    <string name="dt_display_mode_always">常時 (ネットワーク接続があるとき)</string>
+    <string name="dt_display_mode_dm">Androidのダウンロードマネージャのみ</string>
+    <string name="dt_display_mode_pt">ステータスバーにプログレスバーが表示されているとき</string>
+
+    <!-- Unlock ring targets: custom unlock ring -->
+    <string name="pref_lockscreen_ring_custom_unlock_title">カスタムロック解除ターゲット</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">ロック解除ターゲットの手動設定が出来ます。
+        最低でも一つのリングターゲットがGravityBoxのロック解除アクションか何かのアプリ起動に設定されているようにしてください。</string>
+
 </resources>
