@@ -152,7 +152,8 @@ public class Utils {
     public static boolean isMtkDevice() {
         if (mIsMtkDevice != null) return mIsMtkDevice;
 
-        mIsMtkDevice = MTK_DEVICES.contains(Build.HARDWARE.toLowerCase());
+        mIsMtkDevice = MTK_DEVICES.contains(Build.HARDWARE.toLowerCase()) &&
+                !isMotoXtDevice();
         return mIsMtkDevice;
     }
 
