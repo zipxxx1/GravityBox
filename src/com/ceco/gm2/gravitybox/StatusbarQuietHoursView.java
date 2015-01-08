@@ -18,7 +18,7 @@ import com.ceco.gm2.gravitybox.managers.StatusBarIconManager;
 import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 import com.ceco.gm2.gravitybox.managers.SysUiManagers;
-import com.ceco.gm2.gravitybox.StatusbarQuietHoursManager.QuietHoursListener;
+import com.ceco.gm2.gravitybox.managers.StatusbarQuietHoursManager.QuietHoursListener;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
 
 import de.robv.android.xposed.XposedBridge;
@@ -34,7 +34,6 @@ import android.widget.LinearLayout;
 public class StatusbarQuietHoursView extends ImageView implements IconManagerListener, QuietHoursListener {
 
     private QuietHours mQuietHours;
-    private StatusbarQuietHoursManager mManager;
     private Drawable[] mDrawables;
 
     public StatusbarQuietHoursView(Context context) {
@@ -49,8 +48,7 @@ public class StatusbarQuietHoursView extends ImageView implements IconManagerLis
         setLayoutParams(lParams);
         setScaleType(ImageView.ScaleType.CENTER);
 
-        mManager = StatusbarQuietHoursManager.getInstance(context);
-        mQuietHours = mManager.getQuietHours();
+        mQuietHours = SysUiManagers.QuietHoursManager.getQuietHours();
 
         try {
             Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
@@ -71,7 +69,7 @@ public class StatusbarQuietHoursView extends ImageView implements IconManagerLis
         if (SysUiManagers.IconManager != null) {
             SysUiManagers.IconManager.registerListener(this);
         }
-        mManager.registerListener(this);
+        SysUiManagers.QuietHoursManager.registerListener(this);
     }
 
     @Override
@@ -80,12 +78,12 @@ public class StatusbarQuietHoursView extends ImageView implements IconManagerLis
         if (SysUiManagers.IconManager != null) {
             SysUiManagers.IconManager.unregisterListener(this);
         }
-        mManager.unregisterListener(this);
+        SysUiManagers.QuietHoursManager.unregisterListener(this);
     }
 
     @Override
     public void onQuietHoursChanged() {
-        mQuietHours = mManager.getQuietHours();
+        mQuietHours = SysUiManagers.QuietHoursManager.getQuietHours();
         updateVisibility();
     }
 

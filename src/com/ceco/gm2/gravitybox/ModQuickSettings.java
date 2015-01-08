@@ -798,9 +798,11 @@ public class ModQuickSettings {
                 lsTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(lsTile);
 
-                QuietHoursTile qhTile = new QuietHoursTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                qhTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(qhTile);
+                if (SysUiManagers.QuietHoursManager != null) {
+                    QuietHoursTile qhTile = new QuietHoursTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                    qhTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                    mTiles.add(qhTile);
+                }
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {
