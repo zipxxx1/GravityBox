@@ -364,8 +364,10 @@ public class ModStatusBar {
                             GravityBoxSettings.PREF_KEY_STATUSBAR_CENTER_CLOCK, false));
 
                     // inject Quiet Hours view
-                    StatusbarQuietHoursView qhv = new StatusbarQuietHoursView(liparam.view.getContext());
-                    mIconArea.addView(qhv, 0);
+                    if (SysUiManagers.QuietHoursManager != null) {
+                        StatusbarQuietHoursView qhv = new StatusbarQuietHoursView(liparam.view.getContext());
+                        mIconArea.addView(qhv, 0);
+                    }
 
                     // inject download progress view
                     mDownloadProgressView = new StatusbarDownloadProgressView(liparam.view.getContext(), prefs);

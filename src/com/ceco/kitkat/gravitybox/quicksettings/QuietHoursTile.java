@@ -17,10 +17,10 @@ package com.ceco.kitkat.gravitybox.quicksettings;
 
 import com.ceco.kitkat.gravitybox.GravityBox;
 import com.ceco.kitkat.gravitybox.R;
-import com.ceco.kitkat.gravitybox.StatusbarQuietHoursManager;
-import com.ceco.kitkat.gravitybox.StatusbarQuietHoursManager.QuietHoursListener;
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHours;
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.kitkat.gravitybox.managers.StatusbarQuietHoursManager.QuietHoursListener;
+import com.ceco.kitkat.gravitybox.managers.SysUiManagers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +29,6 @@ import android.view.View;
 public class QuietHoursTile extends BasicTile implements QuietHoursListener {
 
     private QuietHours mQh;
-    private StatusbarQuietHoursManager mManager;
 
     public QuietHoursTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
@@ -46,7 +45,7 @@ public class QuietHoursTile extends BasicTile implements QuietHoursListener {
             public boolean onLongClick(View v) {
                 if (mQh != null) {
                     if (mQh.mode != QuietHours.Mode.AUTO) {
-                        mManager.setMode(QuietHours.Mode.AUTO);
+                        SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.AUTO);
                     } else {
                         Intent i = new Intent();
                         i.setClassName(GravityBox.PACKAGE_NAME, QuietHoursActivity.class.getName());
@@ -57,8 +56,7 @@ public class QuietHoursTile extends BasicTile implements QuietHoursListener {
             }
         };
 
-        mManager = StatusbarQuietHoursManager.getInstance(mContext);
-        mQh = mManager.getQuietHours();
+        mQh = SysUiManagers.QuietHoursManager.getQuietHours();
     }
 
     @Override
@@ -69,12 +67,12 @@ public class QuietHoursTile extends BasicTile implements QuietHoursListener {
     @Override
     protected void onTilePostCreate() {
         super.onTilePostCreate();
-        mManager.registerListener(this);
+        SysUiManagers.QuietHoursManager.registerListener(this);
     }
 
     @Override
     public void onQuietHoursChanged() {
-        mQh = mManager.getQuietHours();
+        mQh = SysUiManagers.QuietHoursManager.getQuietHours();
         updateResources();
     }
 
@@ -118,14 +116,14 @@ public class QuietHoursTile extends BasicTile implements QuietHoursListener {
 
         switch (mQh.mode) {
             case ON:
-                mManager.setMode(QuietHours.Mode.OFF);
+                SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.OFF);
                 break;
             case AUTO:
-                mManager.setMode(mQh.quietHoursActive() ? 
+                SysUiManagers.QuietHoursManager.setMode(mQh.quietHoursActive() ? 
                         QuietHours.Mode.OFF : QuietHours.Mode.ON);
                 break;
             case OFF:
-                mManager.setMode(QuietHours.Mode.ON);
+                SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.ON);
                 break;
         }
     }

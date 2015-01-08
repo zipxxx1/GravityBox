@@ -12,22 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ceco.kitkat.gravitybox;
+package com.ceco.kitkat.gravitybox.managers;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.kitkat.gravitybox.BroadcastSubReceiver;
+import com.ceco.kitkat.gravitybox.GravityBox;
+import com.ceco.kitkat.gravitybox.GravityBoxService;
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHours;
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHoursActivity;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 
-public class StatusbarQuietHoursManager extends BroadcastReceiver {
+public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
 
     private static final Object lock = new Object();
     private static StatusbarQuietHoursManager sManager;
@@ -42,7 +43,7 @@ public class StatusbarQuietHoursManager extends BroadcastReceiver {
         public void onTimeTick();
     }
 
-    public static StatusbarQuietHoursManager getInstance(Context context) {
+    protected static StatusbarQuietHoursManager getInstance(Context context) {
         synchronized(lock) {
             if (sManager == null) {
                 sManager = new StatusbarQuietHoursManager(context);
@@ -55,18 +56,11 @@ public class StatusbarQuietHoursManager extends BroadcastReceiver {
         mContext = context;
         mListeners = new ArrayList<QuietHoursListener>();
 
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Intent.ACTION_TIME_TICK);
-        intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
-        intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-        intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
-        mContext.registerReceiver(this, intentFilter);
-
         refreshState();
     }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onBroadcastReceived(Context context, Intent intent) {
         final String action = intent.getAction();
         if (action.equals(Intent.ACTION_TIME_TICK) ||
                 action.equals(Intent.ACTION_TIME_CHANGED) ||
