@@ -87,13 +87,17 @@ public class TouchInterceptor extends ListView {
                     // The dragger icon itself is quite small, so pretend the
                     // touch area is bigger
                     if (x < r.right * 2) {
+                        // Fix x position while dragging
+                        int[] itemPos = new int[2];
+                        item.getLocationOnScreen(itemPos);
+
                         item.setDrawingCacheEnabled(true);
                         // Create a copy of the drawing cache so that it does
                         // not get recycled
                         // by the framework when the list tries to clean up
                         // memory
                         Bitmap bitmap = Bitmap.createBitmap(item.getDrawingCache());
-                        startDragging(bitmap, y);
+                        startDragging(bitmap, itemPos[0], y);
                         mDragPos = itemnum;
                         mFirstDragPos = mDragPos;
                         mHeight = getHeight();
@@ -185,6 +189,9 @@ public class TouchInterceptor extends ListView {
             params.height = mItemHeightNormal;
             v.setLayoutParams(params);
             v.setVisibility(View.VISIBLE);
+            // Reset the drawing cache, the positions might have changed.
+            // We don't want the cache to be wrong.
+            v.setDrawingCacheEnabled(false);
         }
     }
 
@@ -293,12 +300,12 @@ public class TouchInterceptor extends ListView {
         return super.onTouchEvent(ev);
     }
 
-    private void startDragging(Bitmap bm, int y) {
+    private void startDragging(Bitmap bm, int x, int y) {
         stopDragging();
 
         mWindowParams = new WindowManager.LayoutParams();
-        mWindowParams.gravity = Gravity.TOP;
-        mWindowParams.x = 0;
+        mWindowParams.gravity = Gravity.TOP | Gravity.LEFT;
+        mWindowParams.x = x;
         mWindowParams.y = y - mDragPoint + mCoordOffset;
 
         mWindowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -314,6 +321,7 @@ public class TouchInterceptor extends ListView {
         Context context = getContext();
         ImageView v = new ImageView(context);
         int backGroundColor = context.getResources().getColor(R.color.dragndrop_background);
+		v.setAlpha((float) 0.7);
         v.setBackgroundColor(backGroundColor);
         v.setImageBitmap(bm);
         mDragBitmap = bm;
@@ -330,6 +338,7 @@ public class TouchInterceptor extends ListView {
 
     private void stopDragging() {
         if (mDragView != null) {
+            mDragView.setVisibility(GONE);
             WindowManager wm = (WindowManager) getContext().getSystemService("window");
             wm.removeView(mDragView);
             mDragView.setImageDrawable(null);
