@@ -1127,6 +1127,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                                                  OnPreferenceChangeListener {
         private ListPreference mBatteryStyle;
         private CheckBoxPreference mPrefBatteryPercent;
+        private ListPreference mPrefBatteryPercentSize;
+        private ListPreference mPrefBatteryPercentStyle;
         private ListPreference mPrefBatteryPercentCharging;
         private ListPreference mLowBatteryWarning;
         private SharedPreferences mPrefs;
@@ -1346,6 +1348,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mBatteryStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_STYLE);
             mPrefBatteryPercent = (CheckBoxPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT);
+            mPrefBatteryPercentSize = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE);
+            mPrefBatteryPercentStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_STYLE);
             mPrefBatteryPercentCharging = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING);
             mLowBatteryWarning = (ListPreference) findPreference(PREF_KEY_LOW_BATTERY_WARNING_POLICY);
             mQuickSettings = (MultiSelectListPreference) findPreference(PREF_KEY_QUICK_SETTINGS);
@@ -2328,6 +2332,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_NAVBAR_RING_HAPTIC_FEEDBACK)) {
                 mPrefNavbarRingHapticFeedback.setSummary(mPrefNavbarRingHapticFeedback.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE)) {
+                mPrefBatteryPercentSize.setSummary(mPrefBatteryPercentSize.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_STYLE)) {
+                mPrefBatteryPercentStyle.setSummary(mPrefBatteryPercentStyle.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING)) {

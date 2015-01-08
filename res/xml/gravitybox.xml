@@ -842,40 +842,46 @@
                 android:entryValues="@array/battery_style_values"
                 android:defaultValue="1" />
 
-            <CheckBoxPreference 
-                android:key="pref_battery_percent_text"
-                android:title="@string/battery_percent_text_title"
-                android:defaultValue="false" />
+            <PreferenceScreen
+                android:key="pref_cat_battery_percent_text"
+                android:title="@string/battery_percent_text_title">
 
-            <ListPreference
-                android:key="pref_battery_percent_text_size"
-                android:title="@string/battery_percent_text_size_title" 
-                android:entries="@array/battery_percent_text_size_entries"
-                android:entryValues="@array/battery_percent_text_size_values"
-                android:dependency="pref_battery_percent_text"
-                android:defaultValue="16" />
+                <CheckBoxPreference 
+                    android:key="pref_battery_percent_text"
+                    android:title="@string/battery_percent_text_show_title"
+                    android:defaultValue="false" />
 
-            <ListPreference
-                android:key="pref_battery_percent_text_style"
-                android:title="@string/battery_percent_text_style_title" 
-                android:entries="@array/battery_percent_text_style_entries"
-                android:entryValues="@array/battery_percent_text_style_values"
-                android:dependency="pref_battery_percent_text"
-                android:defaultValue="%" />
+                <ListPreference
+                    android:key="pref_battery_percent_text_size"
+                    android:title="@string/battery_percent_text_size_title" 
+                    android:entries="@array/battery_percent_text_size_entries"
+                    android:entryValues="@array/battery_percent_text_size_values"
+                    android:dependency="pref_battery_percent_text"
+                    android:defaultValue="16" />
 
-            <ListPreference 
-                android:key="battery_percent_text_charging"
-                android:title="@string/battery_percent_text_charging_title"
-                android:dependency="pref_battery_percent_text"
-                android:entries="@array/bpt_charging_entries"
-                android:entryValues="@array/bpt_charging_values"
-                android:defaultValue="0" />
+                <ListPreference
+                    android:key="pref_battery_percent_text_style"
+                    android:title="@string/battery_percent_text_style_title" 
+                    android:entries="@array/battery_percent_text_style_entries"
+                    android:entryValues="@array/battery_percent_text_style_values"
+                    android:dependency="pref_battery_percent_text"
+                    android:defaultValue="%" />
 
-            <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                android:key="pref_battery_percent_text_charging_color"
-                android:title="@string/battery_percent_text_charging_color_title"
-                android:defaultValue="@integer/COLOR_GREEN"
-                android:dependency="pref_battery_percent_text" />
+                <ListPreference 
+                    android:key="battery_percent_text_charging"
+                    android:title="@string/battery_percent_text_charging_title"
+                    android:dependency="pref_battery_percent_text"
+                    android:entries="@array/bpt_charging_entries"
+                    android:entryValues="@array/bpt_charging_values"
+                    android:defaultValue="0" />
+
+                <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                    android:key="pref_battery_percent_text_charging_color"
+                    android:title="@string/battery_percent_text_charging_color_title"
+                    android:defaultValue="@integer/COLOR_GREEN"
+                    android:dependency="pref_battery_percent_text" />
+
+            </PreferenceScreen>
 
         </PreferenceScreen>
 
