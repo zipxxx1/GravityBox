@@ -1688,4 +1688,8 @@
     <string name="pref_smart_radio_adaptive_delay_summary">Prolonga automaticamente atraso
         se o tráfego de dados móveis atual excede limite definido (Ajuste para 0 para desabilitar)</string>
 
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Prioridade Wi-Fi</string>
+    <string name="pref_wifi_priority_summary">Especifica as prioridades das redes Wi-Fi</string>
+
 </resources>

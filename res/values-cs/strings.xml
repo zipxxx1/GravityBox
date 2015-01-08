@@ -1666,4 +1666,8 @@
     <string name="pref_lockscreen_ring_custom_unlock_summary">Umožňuje nastavení zkratky odemknutí manuálně.
         Ujistěte se, že alespoň jedna zkratka je nastavena na GravityBox akci odemknutí, nebo ke spuštění libovolné aplikace.</string>
 
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Wi-Fi priorita</string>
+    <string name="pref_wifi_priority_summary">Umožňuje definovat prioritu sítí Wi-Fi</string>
+
 </resources>

@@ -1734,4 +1734,8 @@
     <string name="pref_lockscreen_ring_custom_unlock_summary">Установка пользовательского ярлыка разблокировки вручную.
         Убедитесь, что как минимум один ярлык кольца установлен на действие разблокировки GravityBox или на запуск приложения.</string>
 
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Приоритет Wi-Fi</string>
+    <string name="pref_wifi_priority_summary">Установка приоритета сетей Wi-Fi</string>
+
 </resources>

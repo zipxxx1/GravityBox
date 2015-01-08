@@ -2170,6 +2170,15 @@
             android:key="pref_cat_misc_other"
             android:title="@string/pref_cat_misc_other_title">
 
+            <PreferenceScreen
+                android:key="pref_wifi_priority"
+                android:title="@string/pref_wifi_priority_title"
+                android:summary="@string/pref_wifi_priority_summary">
+                <intent
+                    android:targetPackage="com.ceco.gm2.gravitybox"
+                    android:targetClass="com.ceco.gm2.gravitybox.WifiPriorityActivity" />
+            </PreferenceScreen>
+
             <CheckBoxPreference
                 android:key="pref_ime_fullscreen_disable"
                 android:title="@string/pref_ime_fullscreen_disable_title"
