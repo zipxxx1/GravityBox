@@ -15,6 +15,8 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import com.ceco.kitkat.gravitybox.managers.SysUiManagers;
+
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -25,6 +27,7 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
@@ -58,7 +61,7 @@ public class SystemPropertyProvider {
         return (resId == 0 ? -1 : res.getInteger(resId));
     }
 
-    public static void init(final ClassLoader classLoader) {
+    public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> classSystemUIService = XposedHelpers.findClass(
                     "com.android.systemui.SystemUIService", classLoader);
@@ -67,6 +70,14 @@ public class SystemPropertyProvider {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     Context context = (Context) param.thisObject;
                     if (context != null) {
+                        try {
+                            if (DEBUG) log("Initializing SystemUI managers");
+                            SysUiManagers.init(context, prefs);
+                        } catch(Throwable t) {
+                            log("Error initializing SystemUI managers: ");
+                            XposedBridge.log(t);
+                        }
+
                         if (DEBUG) log("SystemUIService created. Registering BroadcastReceiver");
                         final ContentResolver cr = context.getContentResolver();
 

@@ -15,6 +15,8 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import com.ceco.kitkat.gravitybox.managers.SysUiManagers;
+
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.Context;
@@ -170,6 +172,7 @@ public class ModBatteryStyle {
                     mPercentText.setChargingColor(prefs.getInt(
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING_COLOR, Color.GREEN));
                     ModStatusbarColor.registerIconManagerListener(mPercentText);
+                    SysUiManagers.BatteryInfoManager.registerListener(mPercentText);
 
                     // inject circle battery view
                     mCircleBattery = new CmCircleBattery(vg.getContext());
@@ -181,6 +184,7 @@ public class ModBatteryStyle {
                     mCircleBattery.setPadding(6, 0, 0, 0);
                     mCircleBattery.setVisibility(View.GONE);
                     ModStatusbarColor.registerIconManagerListener(mCircleBattery);
+                    SysUiManagers.BatteryInfoManager.registerListener(mCircleBattery);
                     vg.addView(mCircleBattery);
                     if (DEBUG) log("CmCircleBattery injected");
 
@@ -195,6 +199,7 @@ public class ModBatteryStyle {
                     mKitKatBattery.setLayoutParams(lParams);
                     mKitKatBattery.setVisibility(View.GONE);
                     ModStatusbarColor.registerIconManagerListener(mKitKatBattery);
+                    SysUiManagers.BatteryInfoManager.registerListener(mKitKatBattery);
                     vg.addView(mKitKatBattery);
 
                     // find battery

@@ -164,12 +164,6 @@ public class ModStatusbarColor {
                     }
                     mIconManager.setColoringEnabled(prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE, false));
-                    mIconManager.getBatteryInfoManager().setSound(BatteryInfoManager.SOUND_CHARGED,
-                            prefs.getString(GravityBoxSettings.PREF_KEY_BATTERY_CHARGED_SOUND, ""));
-                    mIconManager.getBatteryInfoManager().setSound(BatteryInfoManager.SOUND_PLUGGED,
-                            prefs.getString(GravityBoxSettings.PREF_KEY_CHARGER_PLUGGED_SOUND, ""));
-                    mIconManager.getBatteryInfoManager().setSound(BatteryInfoManager.SOUND_UNPLUGGED,
-                            prefs.getString(GravityBoxSettings.PREF_KEY_CHARGER_UNPLUGGED_SOUND, ""));
                     mBroadcastSubReceivers.add(mIconManager);
                 }
             });

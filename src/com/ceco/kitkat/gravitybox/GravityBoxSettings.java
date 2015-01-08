@@ -29,6 +29,7 @@ import java.util.Set;
 import com.ceco.kitkat.gravitybox.R;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedMainActivity;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings;
+import com.ceco.kitkat.gravitybox.managers.BatteryInfoManager;
 import com.ceco.kitkat.gravitybox.preference.AppPickerPreference;
 import com.ceco.kitkat.gravitybox.preference.AutoBrightnessDialogPreference;
 import com.ceco.kitkat.gravitybox.preference.SeekBarPreference;

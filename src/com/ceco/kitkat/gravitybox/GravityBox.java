@@ -132,7 +132,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {
-            SystemPropertyProvider.init(lpparam.classLoader);
+            SystemPropertyProvider.init(prefs, lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(ModAudioSettings.PACKAGE_NAME)) {
