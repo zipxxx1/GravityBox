@@ -22,9 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ceco.gm2.gravitybox.BatteryInfoManager.BatteryStatusListener;
 import de.robv.android.xposed.XposedBridge;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -68,7 +66,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     private boolean[] mAllowMobileIconChange;
     private ColorInfo mColorInfo;
     private List<IconManagerListener> mListeners;
-    private BatteryInfoManager mBatteryInfo;
     private boolean mUseLollipopSignalIcons;
 
     public interface IconManagerListener {
@@ -179,7 +176,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mIconCache = new HashMap<String, SoftReference<Drawable>>();
 
         initColorInfo();
-        mBatteryInfo = new BatteryInfoManager(context);
 
         mListeners = new ArrayList<IconManagerListener>();
     }
@@ -252,25 +248,13 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                         GravityBoxSettings.EXTRA_SB_SIGNAL_COLOR_MODE,
                         StatusBarIconManager.SI_MODE_GB));
             }
-        } else if (intent.getAction().equals(Intent.ACTION_BATTERY_CHANGED)) {
-            mBatteryInfo.updateBatteryInfo(intent);
-        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED)) {
-            mBatteryInfo.setSound(intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1),
-                    intent.getStringExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));
         }
-    }
-
-    public BatteryInfoManager getBatteryInfoManager() {
-        return mBatteryInfo;
     }
 
     public void registerListener(IconManagerListener listener) {
         if (!mListeners.contains(listener)) {
             mListeners.add(listener);
             listener.onIconManagerStatusChanged(FLAG_ALL, mColorInfo);
-        }
-        if (listener instanceof BatteryStatusListener) {
-            mBatteryInfo.registerListener((BatteryStatusListener) listener);
         }
     }
 

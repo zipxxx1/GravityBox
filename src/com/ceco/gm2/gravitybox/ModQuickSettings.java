@@ -26,7 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.ceco.gm2.gravitybox.BatteryInfoManager.BatteryData;
+import com.ceco.gm2.gravitybox.managers.BatteryInfoManager.BatteryData;
+import com.ceco.gm2.gravitybox.managers.SysUiManagers;
 import com.ceco.gm2.gravitybox.Utils.MethodState;
 import com.ceco.gm2.gravitybox.quicksettings.AQuickSettingsTile;
 import com.ceco.gm2.gravitybox.quicksettings.CameraTile;
@@ -1473,7 +1474,7 @@ public class ModQuickSettings {
                                         batteryImg.getPaddingRight(), batteryImg.getPaddingBottom());
                                 tileContent.removeView(batteryImg);
                                 tileContent.addView(kkb, 0);
-                                ModStatusbarColor.getIconManager().getBatteryInfoManager().registerListener(kkb);
+                                SysUiManagers.BatteryInfoManager.registerListener(kkb);
                             }
                         }
                         XposedBridge.hookAllMethods(param.args[1].getClass(), "refreshView", new XC_MethodHook() {
@@ -1484,9 +1485,7 @@ public class ModQuickSettings {
                                 if (textResId != 0) {
                                     TextView tileTv = (TextView) tile.findViewById(textResId);
                                     if (tileTv != null) {
-                                        BatteryInfoManager biMng = ModStatusbarColor
-                                                .getIconManager().getBatteryInfoManager();
-                                        BatteryData bd = biMng.getCurrentBatteryData();
+                                        BatteryData bd = SysUiManagers.BatteryInfoManager.getCurrentBatteryData();
                                         String tempUnit = mPrefs.getString(
                                                 GravityBoxSettings.PREF_KEY_QS_BATTERY_TEMP_UNIT, "C");
                                         float temp = tempUnit.equals("C") ? 

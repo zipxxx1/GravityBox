@@ -15,6 +15,8 @@
 
 package com.ceco.gm2.gravitybox;
 
+import com.ceco.gm2.gravitybox.managers.SysUiManagers;
+
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -25,6 +27,7 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
@@ -58,11 +61,22 @@ public class SystemPropertyProvider {
         return (resId == 0 ? -1 : res.getInteger(resId));
     }
 
-    public static void init(final ClassLoader classLoader) {
+    public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> classSystemUIService = XposedHelpers.findClass(
                     "com.android.systemui.SystemUIService", classLoader);
             XposedHelpers.findAndHookMethod(classSystemUIService, "onCreate", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    Context context = (Context) param.thisObject;
+                    try {
+                        if (DEBUG) log("Initializing SystemUI managers");
+                        SysUiManagers.init(context, prefs);
+                    } catch(Throwable t) {
+                        log("Error initializing SystemUI managers: ");
+                        XposedBridge.log(t);
+                    }
+                }
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     Context context = (Context) param.thisObject;

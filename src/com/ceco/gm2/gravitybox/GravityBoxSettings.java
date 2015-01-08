@@ -29,6 +29,7 @@ import java.util.Set;
 import com.ceco.gm2.gravitybox.R;
 import com.ceco.gm2.gravitybox.ledcontrol.LedMainActivity;
 import com.ceco.gm2.gravitybox.ledcontrol.LedSettings;
+import com.ceco.gm2.gravitybox.managers.BatteryInfoManager;
 import com.ceco.gm2.gravitybox.preference.AppPickerPreference;
 import com.ceco.gm2.gravitybox.preference.AutoBrightnessDialogPreference;
 import com.ceco.gm2.gravitybox.preference.SeekBarPreference;

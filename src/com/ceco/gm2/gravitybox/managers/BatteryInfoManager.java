@@ -13,8 +13,12 @@
  * limitations under the License.
  */
 
-package com.ceco.gm2.gravitybox;
+package com.ceco.gm2.gravitybox.managers;
 
+import com.ceco.gm2.gravitybox.BroadcastSubReceiver;
+import com.ceco.gm2.gravitybox.GravityBox;
+import com.ceco.gm2.gravitybox.GravityBoxSettings;
+import com.ceco.gm2.gravitybox.Utils;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
 
 import java.util.ArrayList;
@@ -30,7 +34,7 @@ import android.net.Uri;
 import android.os.BatteryManager;
 import android.telephony.TelephonyManager;
 
-public class BatteryInfoManager {
+public class BatteryInfoManager implements BroadcastSubReceiver {
     private BatteryData mBatteryData;
     private ArrayList<BatteryStatusListener> mListeners;
     private Context mContext;
@@ -41,12 +45,12 @@ public class BatteryInfoManager {
     public static final int SOUND_PLUGGED = 1;
     public static final int SOUND_UNPLUGGED = 2;
 
-    class BatteryData {
-        boolean charging;
-        int level;
-        int powerSource;
-        int temperature;
-        int voltage;
+    public class BatteryData {
+        public boolean charging;
+        public int level;
+        public int powerSource;
+        public int temperature;
+        public int voltage;
 
         public float getTempCelsius() {
             return ((float)temperature/10f);
@@ -61,23 +65,44 @@ public class BatteryInfoManager {
         void onBatteryStatusChanged(BatteryData batteryData);
     }
 
-    public BatteryInfoManager(Context context) {
+    protected BatteryInfoManager(Context context, XSharedPreferences prefs) {
         mContext = context;
         mBatteryData = new BatteryData();
         mListeners = new ArrayList<BatteryStatusListener>();
         mSounds = new Uri[3];
+
+        setSound(BatteryInfoManager.SOUND_CHARGED,
+                prefs.getString(GravityBoxSettings.PREF_KEY_BATTERY_CHARGED_SOUND, ""));
+        setSound(BatteryInfoManager.SOUND_PLUGGED,
+                prefs.getString(GravityBoxSettings.PREF_KEY_CHARGER_PLUGGED_SOUND, ""));
+        setSound(BatteryInfoManager.SOUND_UNPLUGGED,
+                prefs.getString(GravityBoxSettings.PREF_KEY_CHARGER_UNPLUGGED_SOUND, ""));
     }
 
     public void registerListener(BatteryStatusListener listener) {
-        if (!mListeners.contains(listener)) {
-            mListeners.add(listener);
-            listener.onBatteryStatusChanged(mBatteryData);
+        if (listener == null) return;
+        synchronized(mListeners) {
+            if (!mListeners.contains(listener)) {
+                mListeners.add(listener);
+                listener.onBatteryStatusChanged(mBatteryData);
+            }
+        }
+    }
+
+    public void unregisterListener(BatteryStatusListener listener) {
+        if (listener == null) return;
+        synchronized(mListeners) {
+            if (mListeners.contains(listener)) {
+                mListeners.remove(listener);
+            }
         }
     }
 
     private void notifyListeners() {
-        for (BatteryStatusListener listener : mListeners) {
-            listener.onBatteryStatusChanged(mBatteryData);
+        synchronized(mListeners) {
+            for (BatteryStatusListener listener : mListeners) {
+                listener.onBatteryStatusChanged(mBatteryData);
+            }
         }
     }
 
@@ -167,5 +192,15 @@ public class BatteryInfoManager {
         QuietHours qh = new QuietHours(
                 new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours"));
         return qh.isSystemSoundMuted(QuietHours.SystemSound.CHARGER);
+    }
+
+    @Override
+    public void onBroadcastReceived(Context context, Intent intent) {
+        if (intent.getAction().equals(Intent.ACTION_BATTERY_CHANGED)) {
+            updateBatteryInfo(intent);
+        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED)) {
+            setSound(intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1),
+                    intent.getStringExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));
+        }
     }
 }
