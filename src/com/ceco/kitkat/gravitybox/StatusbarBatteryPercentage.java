@@ -15,10 +15,11 @@
 
 package com.ceco.kitkat.gravitybox;
 
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.ColorInfo;
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.IconManagerListener;
 import com.ceco.kitkat.gravitybox.managers.BatteryInfoManager.BatteryData;
 import com.ceco.kitkat.gravitybox.managers.BatteryInfoManager.BatteryStatusListener;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.ColorInfo;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;

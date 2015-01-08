@@ -20,8 +20,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.ColorInfo;
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.IconManagerListener;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.ColorInfo;
+import com.ceco.kitkat.gravitybox.managers.SysUiManagers;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -97,13 +99,17 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        ModStatusbarColor.registerIconManagerListener(this);
+        if (SysUiManagers.IconManager != null) {
+            SysUiManagers.IconManager.registerListener(this);
+        }
     }
 
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        ModStatusbarColor.unregisterIconManagerListener(this);
+        if (SysUiManagers.IconManager != null) {
+            SysUiManagers.IconManager.unregisterListener(this);
+        }
     }
 
     public void registerListener(ProgressStateListener listener) {

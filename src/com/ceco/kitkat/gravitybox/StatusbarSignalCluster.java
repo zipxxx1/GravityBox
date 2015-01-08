@@ -25,8 +25,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.ColorInfo;
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.IconManagerListener;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager;
+import com.ceco.kitkat.gravitybox.managers.SysUiManagers;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.ColorInfo;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -197,7 +199,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                         apply();
                     }
                 } else {
-                    if (!(mIconManager.isColoringEnabled() &&
+                    if (!(mIconManager != null && mIconManager.isColoringEnabled() &&
                         mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED)) {
                         if (signalIcon != null && signalIcon.getDrawable() != null) {
                             Drawable d = signalIcon.getDrawable().mutate();
@@ -242,6 +244,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
 
         public void updateDataActivityColor() {
+            if (mIconManager == null) return;
+
             if (imageDataIn != null) {
                 imageDataIn = mIconManager.applyDataActivityColorFilter(imageDataIn);
             }
@@ -377,21 +381,20 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     }
 
-    public static StatusbarSignalCluster create(LinearLayout view, StatusBarIconManager iconManager,
-            XSharedPreferences prefs) {
+    public static StatusbarSignalCluster create(LinearLayout view, XSharedPreferences prefs) {
         sPrefs = prefs;
         if (PhoneWrapper.hasMsimSupport()) {
-            return new StatusbarSignalClusterMsim(view, iconManager);
+            return new StatusbarSignalClusterMsim(view);
         } else if (Utils.isMtkDevice()) {
-            return new StatusbarSignalClusterMtk(view, iconManager);
+            return new StatusbarSignalClusterMtk(view);
         } else {
-            return new StatusbarSignalCluster(view, iconManager);
+            return new StatusbarSignalCluster(view);
         }
     }
 
-    public StatusbarSignalCluster(LinearLayout view, StatusBarIconManager iconManager) {
+    public StatusbarSignalCluster(LinearLayout view) {
         mView = view;
-        mIconManager = iconManager;
+        mIconManager = SysUiManagers.IconManager;
         mResources = mView.getResources();
         try {
             mGbResources = mView.getContext().createPackageContext(
@@ -410,7 +413,9 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         initPreferences();
         createHooks();
 
-        mIconManager.registerListener(this);
+        if (mIconManager != null) {
+            mIconManager.registerListener(this);
+        }
     }
 
     private Field resolveField(String... fieldNames) {
@@ -563,7 +568,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 doApply = mFldWifiGroup.get(mView) != null;
             }
             if (doApply) {
-                if (mIconManager.isColoringEnabled()) {
+                if (mIconManager != null && mIconManager.isColoringEnabled()) {
                     updateWiFiIcon();
                     if (!XposedHelpers.getBooleanField(mView, "mIsAirplaneMode")) {
                         updateMobileIcon(simSlot);
@@ -579,7 +584,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     protected void updateWiFiIcon() {
         try {
-            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") &&
+            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") && mIconManager != null &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
                 ImageView wifiIcon = (ImageView) mFldWifiView.get(mView);
                 if (wifiIcon != null) {
@@ -604,7 +609,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     protected void updateMobileIcon(int simSlot) {
         try {
-            if (XposedHelpers.getBooleanField(mView, "mMobileVisible") &&
+            if (XposedHelpers.getBooleanField(mView, "mMobileVisible") && mIconManager != null &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
                 ImageView mobile = (ImageView) mFldMobileView.get(mView);
                 if (mobile != null) {
@@ -645,7 +650,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             ImageView airplaneModeIcon = (ImageView) mFldAirplaneView.get(mView);
             if (airplaneModeIcon != null) {
                 Drawable d = airplaneModeIcon.getDrawable();
-                if (mIconManager.isColoringEnabled()) {
+                if (mIconManager != null && mIconManager.isColoringEnabled()) {
                     d = mIconManager.applyColorFilter(d);
                 } else if (d != null) {
                     d.setColorFilter(null);

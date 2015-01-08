@@ -2,7 +2,8 @@ package com.ceco.kitkat.gravitybox;
 
 import java.lang.reflect.Field;
 
-import de.robv.android.xposed.XSharedPreferences;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager;
+
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
@@ -22,8 +23,8 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     protected static Object[][] mMobileIconIds = null;
     protected static ImageView[] mSignalNetworkType = null;
 
-    public StatusbarSignalClusterMtk(LinearLayout view, StatusBarIconManager iconManager) {
-        super(view, iconManager);
+    public StatusbarSignalClusterMtk(LinearLayout view) {
+        super(view);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                 doApply = mFldWifiGroup.get(mView) != null;
             }
             if (doApply) {
-                if (mIconManager.isColoringEnabled()) {
+                if (mIconManager != null && mIconManager.isColoringEnabled()) {
                     updateWiFiIcon();
                     if (DEBUG) log("Signal icon colors updated");
                 }
@@ -81,7 +82,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     protected void updateWiFiIcon() {
         try {
             Object wifiStrengthId = null, wifiActivityId = null;
-            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") &&
+            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") && mIconManager != null &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
                 ImageView wifiIcon = (ImageView) XposedHelpers.getObjectField(mView, "mWifi");
                 if (wifiIcon != null) {
@@ -189,7 +190,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                             mSignalNetworkType[slot] != null) {
                         mSignalNetworkType[slot].setVisibility(View.GONE);
                     }
-                    if (mIconManager.isColoringEnabled() &&
+                    if (mIconManager != null && mIconManager.isColoringEnabled() &&
                             mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
                         if (mMobile[slot] != null) {
                             int resId = (Integer) XposedHelpers.callMethod(Utils.hasGeminiSupport() ? 
@@ -265,7 +266,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
             ImageView airplaneModeIcon = getAirplaneModeIcon();
             if (airplaneModeIcon != null) {
                 Drawable d = airplaneModeIcon.getDrawable();
-                if (mIconManager.isColoringEnabled()) {
+                if (mIconManager != null && mIconManager.isColoringEnabled()) {
                     d = mIconManager.applyColorFilter(d);
                 } else if (d != null) {
                     d.setColorFilter(null);

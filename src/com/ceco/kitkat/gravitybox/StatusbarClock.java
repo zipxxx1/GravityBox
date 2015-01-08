@@ -20,8 +20,9 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.ColorInfo;
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.IconManagerListener;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.ColorInfo;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;

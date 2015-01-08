@@ -19,7 +19,8 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.ColorInfo;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.ColorInfo;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
@@ -40,8 +41,8 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected boolean mSignalIconAutohide;
     protected boolean mHideSimLabels;
 
-    public StatusbarSignalClusterMsim(LinearLayout view, StatusBarIconManager iconManager) {
-        super(view, iconManager);
+    public StatusbarSignalClusterMsim(LinearLayout view) {
+        super(view);
     }
 
     @Override
@@ -168,7 +169,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         try {
             boolean mobileVisible = ((boolean[])XposedHelpers.getObjectField(mView, "mMobileVisible"))[simSlot];
             if (DEBUG) log("Mobile visible for slot " + simSlot + ": " + mobileVisible);
-            if (mobileVisible &&
+            if (mobileVisible && mIconManager != null &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
                 ImageView mobile = (ImageView) XposedHelpers.getObjectField(mView, sMobileViewNames[simSlot]);
                 if (mobile != null) {
@@ -210,7 +211,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     @Override
     protected void updateWiFiIcon() {
         try {
-            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") &&
+            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") && mIconManager != null &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
                 ImageView wifiIcon = (ImageView) XposedHelpers.getObjectField(mView, "mWifiStrengthView");
                 if (wifiIcon != null) {

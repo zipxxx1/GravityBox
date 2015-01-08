@@ -14,10 +14,12 @@
  */
 package com.ceco.kitkat.gravitybox;
 
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.ColorInfo;
-import com.ceco.kitkat.gravitybox.StatusBarIconManager.IconManagerListener;
 import com.ceco.kitkat.gravitybox.StatusbarQuietHoursManager.QuietHoursListener;
 import com.ceco.kitkat.gravitybox.ledcontrol.QuietHours;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.ColorInfo;
+import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.IconManagerListener;
+import com.ceco.kitkat.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
@@ -61,14 +63,18 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        ModStatusbarColor.registerIconManagerListener(this);
+        if (SysUiManagers.IconManager != null) {
+            SysUiManagers.IconManager.registerListener(this);
+        }
         mManager.registerListener(this);
     }
 
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        ModStatusbarColor.unregisterIconManagerListener(this);
+        if (SysUiManagers.IconManager != null) {
+            SysUiManagers.IconManager.unregisterListener(this);
+        }
         mManager.unregisterListener(this);
     }
 

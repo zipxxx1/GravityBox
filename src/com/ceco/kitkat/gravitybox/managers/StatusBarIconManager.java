@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.ceco.kitkat.gravitybox;
+package com.ceco.kitkat.gravitybox.managers;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
@@ -22,9 +22,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ceco.kitkat.gravitybox.BroadcastSubReceiver;
+import com.ceco.kitkat.gravitybox.GravityBox;
+import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.R;
-import de.robv.android.xposed.XposedBridge;
+import com.ceco.kitkat.gravitybox.Utils;
 
+import de.robv.android.xposed.XSharedPreferences;
+import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -67,26 +72,28 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         void onIconManagerStatusChanged(int flags, ColorInfo colorInfo);
     }
 
-    static class ColorInfo {
-        boolean coloringEnabled;
-        boolean wasColoringEnabled;
-        int defaultIconColor;
-        int[] iconColor;
-        int defaultDataActivityColor;
-        int[] dataActivityColor;
-        int signalIconMode;
-        int iconStyle;
-        float alphaSignalCluster;
-        float alphaTextAndBattery;
+    public static class ColorInfo {
+        public boolean coloringEnabled;
+        public boolean wasColoringEnabled;
+        public int defaultIconColor;
+        public int[] iconColor;
+        public int defaultDataActivityColor;
+        public int[] dataActivityColor;
+        public int signalIconMode;
+        public int iconStyle;
+        public float alphaSignalCluster;
+        public float alphaTextAndBattery;
     }
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public StatusBarIconManager(Context context, Context gbContext) {
+    protected StatusBarIconManager(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
         mSystemUiRes = mContext.getResources();
+        Context gbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME,
+                Context.CONTEXT_IGNORE_SECURITY);
         mGbResources = gbContext.getResources();
         mAllowMobileIconChange = new boolean[] { true, true };
 
@@ -152,6 +159,33 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         initColorInfo();
 
         mListeners = new ArrayList<IconManagerListener>();
+
+        setIconColor(prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR, 
+                getDefaultIconColor()));
+        try {
+            int iconStyle = Integer.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_STATUS_ICON_STYLE, "1"));
+            setIconStyle(iconStyle);
+        } catch(NumberFormatException nfe) {
+            log("Invalid value for PREF_KEY_STATUS_ICON_STYLE preference");
+        }
+        setIconColor(1, prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY,
+                        getDefaultIconColor()));
+        setDataActivityColor(
+                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR, 
+                        mGbResources.getInteger(R.integer.signal_cluster_data_activity_icon_color)));
+        setDataActivityColor(1, 
+                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, 
+                        mGbResources.getInteger(R.integer.signal_cluster_data_activity_icon_color)));
+        try {
+            int signalIconMode = Integer.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "1"));
+            setSignalIconMode(signalIconMode);
+        } catch (NumberFormatException nfe) {
+            log("Invalid value for PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE preference");
+        }
+        setColoringEnabled(prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE, false));
     }
 
     private void initColorInfo() {
