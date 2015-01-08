@@ -64,6 +64,7 @@ public class ModLauncher {
         CLASS_DYNAMIC_GRID.put("rf", new DynamicGrid("DU", "AW", "AX"));
         CLASS_DYNAMIC_GRID.put("sg", new DynamicGrid("Ez", "BB", "BC"));
         CLASS_DYNAMIC_GRID.put("ur", new DynamicGrid("Gi", "Dg", "Dh"));
+        CLASS_DYNAMIC_GRID.put("wd", new DynamicGrid("vg", "Ce", "Cf"));
     }
 
     private static boolean mShouldShowAppDrawer;
