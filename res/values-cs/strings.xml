@@ -843,6 +843,7 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Procentuální text stavu baterie</string>
+    <string name="battery_percent_text_show_title">Zobrazit procentuální text</string>
     <string name="battery_percent_text_size_title">Velikost textu</string>
     <string name="battery_percent_text_size_larger">Větší</string>
     <string name="battery_percent_text_size_normal">Normální</string>

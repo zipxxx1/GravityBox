@@ -880,6 +880,7 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Texte pourcentage de batterie</string>
+    <string name="battery_percent_text_show_title">Afficher le texte pourcentage de batterie</string>
     <string name="battery_percent_text_size_title">Taille du texte pourcentage de batterie</string>
     <string name="battery_percent_text_size_normal">Normal</string>
     <string name="battery_percent_text_size_larger">Plus grand</string>

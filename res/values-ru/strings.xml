@@ -880,6 +880,7 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Проценты заряда</string>
+    <string name="battery_percent_text_show_title">Показать проценты</string>
     <string name="battery_percent_text_size_title">Размер текста</string>
     <string name="battery_percent_text_size_larger">Больше</string>
     <string name="battery_percent_text_size_normal">Обычный</string>

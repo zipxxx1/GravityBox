@@ -880,6 +880,7 @@
     
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">电量百分比</string>
+    <string name="battery_percent_text_show_title">显示百分比文字</string>
     <string name="battery_percent_text_size_title">电量百分比大小</string>
     <string name="battery_percent_text_size_larger">大</string>
     <string name="battery_percent_text_size_normal">标准</string>
