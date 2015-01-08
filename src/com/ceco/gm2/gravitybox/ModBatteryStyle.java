@@ -174,8 +174,12 @@ public class ModBatteryStyle {
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING, "0")));
                     mPercentText.setChargingColor(prefs.getInt(
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING_COLOR, Color.GREEN));
-                    ModStatusbarColor.registerIconManagerListener(mPercentText);
-                    SysUiManagers.BatteryInfoManager.registerListener(mPercentText);
+                    if (SysUiManagers.IconManager != null) {
+                        SysUiManagers.IconManager.registerListener(mPercentText);
+                    }
+                    if (SysUiManagers.BatteryInfoManager != null) {
+                        SysUiManagers.BatteryInfoManager.registerListener(mPercentText);
+                    }
 
                     // GM2 specific - if there's already view with id "circle_battery", remove it
                     if (Build.DISPLAY.toLowerCase().contains("gravitymod")) {
@@ -196,8 +200,12 @@ public class ModBatteryStyle {
                     mCircleBattery.setLayoutParams(lParams);
                     mCircleBattery.setPadding(4, 0, 0, 0);
                     mCircleBattery.setVisibility(View.GONE);
-                    ModStatusbarColor.registerIconManagerListener(mCircleBattery);
-                    SysUiManagers.BatteryInfoManager.registerListener(mCircleBattery);
+                    if (SysUiManagers.IconManager != null) {
+                        SysUiManagers.IconManager.registerListener(mCircleBattery);
+                    }
+                    if (SysUiManagers.BatteryInfoManager != null) {
+                        SysUiManagers.BatteryInfoManager.registerListener(mCircleBattery);
+                    }
                     vg.addView(mCircleBattery);
                     if (DEBUG) log("CmCircleBattery injected");
 
@@ -217,8 +225,12 @@ public class ModBatteryStyle {
                     }
                     mKitKatBattery.setLayoutParams(lParams);
                     mKitKatBattery.setVisibility(View.GONE);
-                    ModStatusbarColor.registerIconManagerListener(mKitKatBattery);
-                    SysUiManagers.BatteryInfoManager.registerListener(mKitKatBattery);
+                    if (SysUiManagers.IconManager != null) {
+                        SysUiManagers.IconManager.registerListener(mKitKatBattery);
+                    }
+                    if (SysUiManagers.BatteryInfoManager != null) {
+                        SysUiManagers.BatteryInfoManager.registerListener(mKitKatBattery);
+                    }
                     vg.addView(mKitKatBattery);
 
                     // find battery

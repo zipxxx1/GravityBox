@@ -1,7 +1,8 @@
 package com.ceco.gm2.gravitybox;
 
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager;
+
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +20,8 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     protected static Object[] mMobileActivityIds = null, mMobileTypeIds = null;
     protected static Object[][] mMobileIconIds = null;
 
-    public StatusbarSignalClusterMtk(LinearLayout view, StatusBarIconManager iconManager) {
-        super(view, iconManager);
+    public StatusbarSignalClusterMtk(LinearLayout view) {
+        super(view);
 
         mRoamingIndicatorsDisabled = false;
     }
@@ -47,7 +48,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     protected void updateWiFiIcon() {
         try {
             Object wifiStrengthId = null, wifiActivityId = null;
-            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") &&
+            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") && mIconManager != null &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
                 ImageView wifiIcon = (ImageView) XposedHelpers.getObjectField(mView, "mWifi");
                 if (wifiIcon != null) {
@@ -142,7 +143,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
             }
 
             for (int slot = 0; slot < mMobile.length; slot++) {
-                if (mMobileVisible != null && mMobileVisible[slot] &&
+                if (mMobileVisible != null && mMobileVisible[slot] && mIconManager != null &&
                         mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
                     if (mMobile[slot] != null) {
                         int resId = (Integer) XposedHelpers.callMethod(Utils.hasGeminiSupport() ? 
@@ -203,7 +204,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                         (ImageView) XposedHelpers.getObjectField(mView, "mAirplane");
             if (airplaneModeIcon != null) {
                 Drawable d = airplaneModeIcon.getDrawable();
-                if (mIconManager.isColoringEnabled()) {
+                if (mIconManager != null && mIconManager.isColoringEnabled()) {
                     d = mIconManager.applyColorFilter(d);
                 } else if (d != null) {
                     d.setColorFilter(null);

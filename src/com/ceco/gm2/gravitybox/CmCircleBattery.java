@@ -18,8 +18,9 @@ package com.ceco.gm2.gravitybox;
 
 import com.ceco.gm2.gravitybox.managers.BatteryInfoManager.BatteryData;
 import com.ceco.gm2.gravitybox.managers.BatteryInfoManager.BatteryStatusListener;
-import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
-import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.ColorInfo;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
 import de.robv.android.xposed.XposedBridge;
 import android.content.Context;

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.gm2.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
+import com.ceco.gm2.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -327,7 +328,9 @@ public class ModStatusBar {
                         if (clock != null) {
                             mClock = new StatusbarClock(prefs);
                             mClock.setClock(clock);
-                            ModStatusbarColor.registerIconManagerListener(mClock);
+                            if (SysUiManagers.IconManager != null) {
+                                SysUiManagers.IconManager.registerListener(mClock);
+                            }
                             mBroadcastSubReceivers.add(mClock);
                             // find notification panel clock
                             String panelHolderId = Build.VERSION.SDK_INT > 16 ?
@@ -1053,7 +1056,9 @@ public class ModStatusBar {
             if (mBroadcastSubReceivers.contains(mTrafficMeter)) {
                 mBroadcastSubReceivers.remove(mTrafficMeter);
             }
-            ModStatusbarColor.unregisterIconManagerListener(mTrafficMeter);
+            if (SysUiManagers.IconManager != null) {
+                SysUiManagers.IconManager.unregisterListener(mTrafficMeter);
+            }
             if (mDownloadProgressView != null) {
                 mDownloadProgressView.unregisterListener(mTrafficMeter);
             }
@@ -1064,7 +1069,9 @@ public class ModStatusBar {
             mTrafficMeter = TrafficMeterAbstract.create(mContext, mTrafficMeterMode);
             mTrafficMeter.initialize(mPrefs);
             updateTrafficMeterPosition();
-            ModStatusbarColor.registerIconManagerListener(mTrafficMeter);
+            if (SysUiManagers.IconManager != null) {
+                SysUiManagers.IconManager.registerListener(mTrafficMeter);
+            }
             if (mDownloadProgressView != null) {
                 mDownloadProgressView.registerListener(mTrafficMeter);
             }

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.ceco.gm2.gravitybox;
+package com.ceco.gm2.gravitybox.managers;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
@@ -22,6 +22,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ceco.gm2.gravitybox.BroadcastSubReceiver;
+import com.ceco.gm2.gravitybox.GravityBox;
+import com.ceco.gm2.gravitybox.GravityBoxSettings;
+import com.ceco.gm2.gravitybox.R;
+import com.ceco.gm2.gravitybox.Utils;
+
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.Intent;
@@ -72,28 +79,30 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         void onIconManagerStatusChanged(int flags, ColorInfo colorInfo);
     }
 
-    static class ColorInfo {
-        boolean coloringEnabled;
-        boolean wasColoringEnabled;
-        int defaultIconColor;
-        int[] iconColor;
-        int defaultDataActivityColor;
-        int[] dataActivityColor;
-        Integer stockBatteryColor;
-        int signalIconMode;
-        boolean skipBatteryIcon;
-        boolean followStockBatteryColor;
-        boolean lowProfile;
-        int iconStyle;
+    public static class ColorInfo {
+        public boolean coloringEnabled;
+        public boolean wasColoringEnabled;
+        public int defaultIconColor;
+        public int[] iconColor;
+        public int defaultDataActivityColor;
+        public int[] dataActivityColor;
+        public Integer stockBatteryColor;
+        public int signalIconMode;
+        public boolean skipBatteryIcon;
+        public boolean followStockBatteryColor;
+        public boolean lowProfile;
+        public int iconStyle;
     }
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public StatusBarIconManager(Context context, Context gbContext) {
+    protected StatusBarIconManager(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
         mSystemUiRes = mContext.getResources();
+        Context gbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME,
+                Context.CONTEXT_IGNORE_SECURITY);
         mGbResources = gbContext.getResources();
         mAllowMobileIconChange = new boolean[] { true, true };
 
@@ -178,6 +187,41 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         initColorInfo();
 
         mListeners = new ArrayList<IconManagerListener>();
+
+        setUseLollipopSignalIcons(prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS, false));
+        setIconColor(
+                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR,
+                        getDefaultIconColor()));
+        try {
+            int iconStyle = Integer.valueOf(
+                    prefs.getString(GravityBoxSettings.PREF_KEY_STATUS_ICON_STYLE, "0"));
+            setIconStyle(iconStyle);
+        } catch(NumberFormatException nfe) {
+            log("Invalid value for PREF_KEY_STATUS_ICON_STYLE preference");
+        }
+        setIconColor(1,
+                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY,
+                        getDefaultIconColor()));
+        setDataActivityColor(
+                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR, 
+                        StatusBarIconManager.DEFAULT_DATA_ACTIVITY_COLOR));
+        setDataActivityColor(1,
+                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, 
+                        StatusBarIconManager.DEFAULT_DATA_ACTIVITY_COLOR));
+        setFollowStockBatteryColor(prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_STATUSBAR_COLOR_FOLLOW_STOCK_BATTERY, false));
+        try {
+            int signalIconMode = Integer.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "0"));
+            setSignalIconMode(signalIconMode);
+        } catch (NumberFormatException nfe) {
+            log("Invalid value for PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE preference");
+        }
+        setSkipBatteryIcon(prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY, false));
+        setColoringEnabled(prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE, false));
     }
 
     private void initColorInfo() {

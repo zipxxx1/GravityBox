@@ -14,8 +14,10 @@
  */
 package com.ceco.gm2.gravitybox;
 
-import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
-import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.ColorInfo;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.IconManagerListener;
+import com.ceco.gm2.gravitybox.managers.SysUiManagers;
 import com.ceco.gm2.gravitybox.StatusbarQuietHoursManager.QuietHoursListener;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
 
@@ -66,14 +68,18 @@ public class StatusbarQuietHoursView extends ImageView implements IconManagerLis
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
-        ModStatusbarColor.registerIconManagerListener(this);
+        if (SysUiManagers.IconManager != null) {
+            SysUiManagers.IconManager.registerListener(this);
+        }
         mManager.registerListener(this);
     }
 
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        ModStatusbarColor.unregisterIconManagerListener(this);
+        if (SysUiManagers.IconManager != null) {
+            SysUiManagers.IconManager.unregisterListener(this);
+        }
         mManager.unregisterListener(this);
     }
 

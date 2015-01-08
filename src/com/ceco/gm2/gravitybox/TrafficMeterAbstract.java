@@ -16,8 +16,9 @@
 
 package com.ceco.gm2.gravitybox;
 
-import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
-import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.ColorInfo;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

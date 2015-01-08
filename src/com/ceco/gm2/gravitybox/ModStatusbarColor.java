@@ -18,8 +18,10 @@ package com.ceco.gm2.gravitybox;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
-import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.ColorInfo;
+import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.IconManagerListener;
+import com.ceco.gm2.gravitybox.managers.SysUiManagers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -65,7 +67,6 @@ public class ModStatusbarColor {
     public static final String ACTION_PHONE_STATUSBAR_VIEW_MADE = "gravitybox.intent.action.PHONE_STATUSBAR_VIEW_MADE";
 
     private static View mPanelBar;
-    private static StatusBarIconManager mIconManager;
     private static View mBattery;
     private static int mBatteryLevel;
     private static boolean mBatteryPlugged;
@@ -94,12 +95,6 @@ public class ModStatusbarColor {
         mBattery = battery;
     }
 
-    public static void registerIconManagerListener(IconManagerListener listener) {
-        if (mIconManager != null) {
-            mIconManager.registerListener(listener);
-        }
-    }
-
     private static BroadcastReceiver mBroadcastReceiverPwm = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -120,16 +115,6 @@ public class ModStatusbarColor {
             }
         }
     };
-
-    public static void unregisterIconManagerListener(IconManagerListener listener) {
-        if (mIconManager != null) {
-            mIconManager.unregisterListener(listener);
-        }
-    }
-
-    public static StatusBarIconManager getIconManager() {
-        return mIconManager;
-    }
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
 
@@ -411,45 +396,6 @@ public class ModStatusbarColor {
                     intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED);
                     mPanelBar.getContext().registerReceiver(mBroadcastReceiver, intentFilter);
-
-                    Context gbContext = mPanelBar.getContext().createPackageContext(GravityBox.PACKAGE_NAME,
-                            Context.CONTEXT_IGNORE_SECURITY);
-                    mIconManager = new StatusBarIconManager(mPanelBar.getContext(), gbContext);
-                    mIconManager.setUseLollipopSignalIcons(prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS, false));
-                    mIconManager.setIconColor(
-                            prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR,
-                                    mIconManager.getDefaultIconColor()));
-                    try {
-                        int iconStyle = Integer.valueOf(
-                                prefs.getString(GravityBoxSettings.PREF_KEY_STATUS_ICON_STYLE, "0"));
-                        mIconManager.setIconStyle(iconStyle);
-                    } catch(NumberFormatException nfe) {
-                        log("Invalid value for PREF_KEY_STATUS_ICON_STYLE preference");
-                    }
-                    mIconManager.setIconColor(1,
-                            prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY,
-                                    mIconManager.getDefaultIconColor()));
-                    mIconManager.setDataActivityColor(
-                            prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR, 
-                                    StatusBarIconManager.DEFAULT_DATA_ACTIVITY_COLOR));
-                    mIconManager.setDataActivityColor(1,
-                            prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY, 
-                                    StatusBarIconManager.DEFAULT_DATA_ACTIVITY_COLOR));
-                    mIconManager.setFollowStockBatteryColor(prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_STATUSBAR_COLOR_FOLLOW_STOCK_BATTERY, false));
-                    try {
-                        int signalIconMode = Integer.valueOf(prefs.getString(
-                                GravityBoxSettings.PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE, "0"));
-                        mIconManager.setSignalIconMode(signalIconMode);
-                    } catch (NumberFormatException nfe) {
-                        log("Invalid value for PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE preference");
-                    }
-                    mIconManager.setSkipBatteryIcon(prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_STATUSBAR_COLOR_SKIP_BATTERY, false));
-                    mIconManager.setColoringEnabled(prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_STATUSBAR_ICON_COLOR_ENABLE, false));
-                    mBroadcastSubReceivers.add(mIconManager);
                 }
             });
 
@@ -458,7 +404,7 @@ public class ModStatusbarColor {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     LinearLayout view = (LinearLayout) param.thisObject;
-                    mSignalCluster = StatusbarSignalCluster.create(view, mIconManager);
+                    mSignalCluster = StatusbarSignalCluster.create(view);
                     mSignalCluster.initPreferences(prefs);
                     mBroadcastSubReceivers.add(mSignalCluster);
                     if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
@@ -491,8 +437,8 @@ public class ModStatusbarColor {
                     mBatteryController = XposedHelpers.getObjectField(param.thisObject, "mBatteryController");
                     int bgColor = prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_BGCOLOR, Color.BLACK);
                     setStatusbarBgColor(bgColor);
-                    if (mIconManager != null) {
-                        mIconManager.registerListener(mIconManagerListener);
+                    if (SysUiManagers.IconManager != null) {
+                        SysUiManagers.IconManager.registerListener(mIconManagerListener);
                     }
 
                     Intent i = new Intent(ACTION_PHONE_STATUSBAR_VIEW_MADE);
@@ -535,8 +481,8 @@ public class ModStatusbarColor {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final boolean lightsOut = (Boolean) param.args[0];
-                    if (mIconManager != null) {
-                        mIconManager.setLowProfile(lightsOut);
+                    if (SysUiManagers.IconManager != null) {
+                        SysUiManagers.IconManager.setLowProfile(lightsOut);
                     }
                 }
             });
@@ -557,10 +503,10 @@ public class ModStatusbarColor {
                         } else {
                             mBatteryPlugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
                         }
-                        if (mIconManager != null && mIconManager.isColoringEnabled() && 
-                                !mIconManager.shouldSkipBatteryIcon() && mBattery != null &&
+                        if (SysUiManagers.IconManager != null && SysUiManagers.IconManager.isColoringEnabled() && 
+                                !SysUiManagers.IconManager.shouldSkipBatteryIcon() && mBattery != null &&
                                 (mBattery instanceof ImageView)) {
-                            Drawable d = mIconManager.getBatteryIcon(mBatteryLevel, mBatteryPlugged);
+                            Drawable d = SysUiManagers.IconManager.getBatteryIcon(mBatteryLevel, mBatteryPlugged);
                             if (d != null) {
                                 ((ImageView)mBattery).setImageDrawable(d);
                             }
@@ -589,13 +535,13 @@ public class ModStatusbarColor {
                     CLASS_STATUSBAR_ICON, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mIconManager != null && mIconManager.isColoringEnabled()) {
+                    if (SysUiManagers.IconManager != null && SysUiManagers.IconManager.isColoringEnabled()) {
                         final String iconPackage = 
                                 (String) XposedHelpers.getObjectField(param.args[0], "iconPackage");
                         if (DEBUG) log("statusbarIconView.getIcon: iconPackage=" + iconPackage);
                         if (iconPackage == null || iconPackage.equals(PACKAGE_NAME)) {
                             final int iconId = XposedHelpers.getIntField(param.args[0], "iconId");
-                            Drawable d = mIconManager.getBasicIcon(iconId);
+                            Drawable d = SysUiManagers.IconManager.getBasicIcon(iconId);
                             if (d != null) {
                                 param.setResult(d);
                                 return;
@@ -676,7 +622,10 @@ public class ModStatusbarColor {
                             (String) XposedHelpers.getObjectField(sbIcon, "iconPackage");
                     if (iconPackage == null || iconPackage.equals(PACKAGE_NAME)) {
                         final int resId = XposedHelpers.getIntField(sbIcon, "iconId");
-                        Drawable d = mIconManager.getBasicIcon(resId);
+                        Drawable d = null;
+                        if (SysUiManagers.IconManager != null) {
+                            d = SysUiManagers.IconManager.getBasicIcon(resId);
+                        }
                         if (d != null) {
                             v.setImageDrawable(d);
                         }
