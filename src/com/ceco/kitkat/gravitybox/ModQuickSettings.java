@@ -30,7 +30,6 @@ import java.util.Set;
 
 import com.ceco.kitkat.gravitybox.R;
 import com.ceco.kitkat.gravitybox.Utils.MethodState;
-import com.ceco.kitkat.gravitybox.managers.BatteryInfoManager;
 import com.ceco.kitkat.gravitybox.managers.BatteryInfoManager.BatteryData;
 import com.ceco.kitkat.gravitybox.managers.SysUiManagers;
 import com.ceco.kitkat.gravitybox.quicksettings.AQuickSettingsTile;
@@ -1577,14 +1576,16 @@ public class ModQuickSettings {
                                         batteryImg.getPaddingRight(), batteryImg.getPaddingBottom());
                                 tileContent.removeView(batteryImg);
                                 tileContent.addView(kkb, 0);
-                                SysUiManagers.BatteryInfoManager.registerListener(kkb);
+                                if (SysUiManagers.BatteryInfoManager != null) {
+                                    SysUiManagers.BatteryInfoManager.registerListener(kkb);
+                                }
                             }
                         }
                         XposedBridge.hookAllMethods(param.args[1].getClass(), "refreshView", new XC_MethodHook() {
                             @Override
                             protected void afterHookedMethod(final MethodHookParam param2) throws Throwable {
                                 int textResId = tile.getResources().getIdentifier("text", "id", PACKAGE_NAME);
-                                if (textResId != 0) {
+                                if (textResId != 0 && SysUiManagers.BatteryInfoManager != null) {
                                     TextView tileTv = (TextView) tile.findViewById(textResId);
                                     if (tileTv != null) {
                                         BatteryData bd = SysUiManagers.BatteryInfoManager.getCurrentBatteryData();
