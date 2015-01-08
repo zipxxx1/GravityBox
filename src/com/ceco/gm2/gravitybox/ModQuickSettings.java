@@ -1474,7 +1474,9 @@ public class ModQuickSettings {
                                         batteryImg.getPaddingRight(), batteryImg.getPaddingBottom());
                                 tileContent.removeView(batteryImg);
                                 tileContent.addView(kkb, 0);
-                                SysUiManagers.BatteryInfoManager.registerListener(kkb);
+                                if (SysUiManagers.BatteryInfoManager != null) {
+                                    SysUiManagers.BatteryInfoManager.registerListener(kkb);
+                                }
                             }
                         }
                         XposedBridge.hookAllMethods(param.args[1].getClass(), "refreshView", new XC_MethodHook() {
@@ -1482,7 +1484,7 @@ public class ModQuickSettings {
                             protected void afterHookedMethod(final MethodHookParam param2) throws Throwable {
                                 int textResId = tile.getResources().getIdentifier(Build.VERSION.SDK_INT == 18 ? 
                                         "text" : "battery_textview", "id", PACKAGE_NAME);
-                                if (textResId != 0) {
+                                if (textResId != 0 && SysUiManagers.BatteryInfoManager != null) {
                                     TextView tileTv = (TextView) tile.findViewById(textResId);
                                     if (tileTv != null) {
                                         BatteryData bd = SysUiManagers.BatteryInfoManager.getCurrentBatteryData();
