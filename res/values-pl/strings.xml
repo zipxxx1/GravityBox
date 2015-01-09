@@ -1710,4 +1710,19 @@
     <string name="pref_wifi_priority_title">Priorytet Wi-Fi</string>
     <string name="pref_wifi_priority_summary">Określa priorytet sieci Wi-Fi</string>
 
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">Pasek baterii</string>
+    <string name="pref_battery_bar_show_title">Pokaż pasek baterii</string>
+    <string name="pref_battery_bar_position_title">Pozycja</string>
+    <string name="bbar_position_top">Górna krawędź</string>
+    <string name="bbar_position_bottom">Dolna krawędź</string>
+    <string name="pref_battery_bar_margin_title">Margines krawędzi</string>
+    <string name="pref_battery_bar_thickness_title">Grubość</string>
+    <string name="pref_battery_bar_charge_anim_title">Animacja ładowania</string>
+    <string name="pref_battery_bar_dynacolor_title">Dynamiczny kolor</string>
+    <string name="pref_battery_bar_dynacolor_summary">Automatycznie określa kolor na podstawie obecnego poziomu baterii</string>
+    <string name="pref_battery_bar_color_title">Kolor</string>
+    <string name="pref_battery_bar_color_low_title">Kolor niskiego poziomu baterii</string>
+    <string name="pref_battery_bar_color_critical_title">Kolor krytycznego poziomu baterii</string>
+
 </resources>

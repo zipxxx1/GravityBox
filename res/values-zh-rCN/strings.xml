@@ -1738,4 +1738,18 @@
     <string name="pref_wifi_priority_title">WiFi优先级</string>
     <string name="pref_wifi_priority_summary">指定WiFi网络优先级</string>
 
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">电量栏</string>
+    <string name="pref_battery_bar_show_title">显示电量栏</string>
+    <string name="pref_battery_bar_position_title">位置</string>
+    <string name="bbar_position_top">顶部边缘</string>
+    <string name="bbar_position_bottom">底部边缘</string>
+    <string name="pref_battery_bar_margin_title">边缘空白</string>
+    <string name="pref_battery_bar_thickness_title">厚度</string>
+    <string name="pref_battery_bar_charge_anim_title">充电动画</string>
+    <string name="pref_battery_bar_dynacolor_title">动态颜色</string>
+    <string name="pref_battery_bar_color_title">颜色</string>
+    <string name="pref_battery_bar_color_low_title">低电量颜色</string>
+    <string name="pref_battery_bar_color_critical_title">危急电量颜色</string>
+
 </resources>

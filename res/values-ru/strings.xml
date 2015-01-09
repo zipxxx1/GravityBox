@@ -1739,4 +1739,19 @@
     <string name="pref_wifi_priority_title">Приоритет Wi-Fi</string>
     <string name="pref_wifi_priority_summary">Установка приоритета сетей Wi-Fi</string>
 
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">Полоса батареи</string>
+    <string name="pref_battery_bar_show_title">Показывать полосу</string>
+    <string name="pref_battery_bar_position_title">Расположение</string>
+    <string name="bbar_position_top">По верхнему краю</string>
+    <string name="bbar_position_bottom">По нижнему краю</string>
+    <string name="pref_battery_bar_margin_title">Отступ от края</string>
+    <string name="pref_battery_bar_thickness_title">Толщина</string>
+    <string name="pref_battery_bar_charge_anim_title">Анимация зарядки</string>
+    <string name="pref_battery_bar_dynacolor_title">Динамичный цвет</string>
+    <string name="pref_battery_bar_dynacolor_summary">Автоопределение текущего цвета в зависимости от заряда батареи</string>
+    <string name="pref_battery_bar_color_title">Цвет</string>
+    <string name="pref_battery_bar_color_low_title">Цвет при низком заряде</string>
+    <string name="pref_battery_bar_color_critical_title">Цвет критич. состояния</string>
+
 </resources>

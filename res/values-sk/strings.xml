@@ -1676,4 +1676,19 @@
     <string name="pref_wifi_priority_title">Wi-Fi priorita</string>
     <string name="pref_wifi_priority_summary">Umožňuje definovať prioritu sietí Wi-Fi</string>
 
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">Pruh batérie</string>
+    <string name="pref_battery_bar_show_title">Zobraziť pruh batérie</string>
+    <string name="pref_battery_bar_position_title">Pozícia</string>
+    <string name="bbar_position_top">Horná hrana</string>
+    <string name="bbar_position_bottom">Spodná hrana</string>
+    <string name="pref_battery_bar_margin_title">Okraj hrany</string>
+    <string name="pref_battery_bar_thickness_title">Hrúbka</string>
+    <string name="pref_battery_bar_charge_anim_title">Animácia nabíjania</string>
+    <string name="pref_battery_bar_dynacolor_title">Dynamická farba</string>
+    <string name="pref_battery_bar_dynacolor_summary">Určí farbu automaticky na základe aktuálnej úrovne batérie</string>
+    <string name="pref_battery_bar_color_title">Farba</string>
+    <string name="pref_battery_bar_color_low_title">Farba nízkej úrovne</string>
+    <string name="pref_battery_bar_color_critical_title">Farba kritickej úrovne</string>
+
 </resources>

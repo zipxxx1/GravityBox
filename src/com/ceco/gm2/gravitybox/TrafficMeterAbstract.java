@@ -256,7 +256,8 @@ public abstract class TrafficMeterAbstract extends TextView
     }
 
     @Override
-    public void onProgressTrackingStarted(boolean isBluetooth) {
+    public void onProgressTrackingStarted(boolean isBluetooth,
+            StatusbarDownloadProgressView.Mode mode) {
         mIsTrackingProgress = !isBluetooth;
         if (mDisplayMode == DisplayMode.PROGRESS_TRACKING) {
             updateState();
