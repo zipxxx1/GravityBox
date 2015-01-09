@@ -821,6 +821,26 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_HIDE_LAUNCHER_ICON = "pref_hide_launcher_icon";
 
+    public static final String PREF_KEY_BATTERY_BAR_SHOW = "pref_battery_bar_show";
+    public static final String PREF_KEY_BATTERY_BAR_POSITION = "pref_battery_bar_position";
+    public static final String PREF_KEY_BATTERY_BAR_MARGIN = "pref_battery_bar_margin";
+    public static final String PREF_KEY_BATTERY_BAR_THICKNESS = "pref_battery_bar_thickness";
+    public static final String PREF_KEY_BATTERY_BAR_CHARGE_ANIM = "pref_battery_bar_charge_anim";
+    public static final String PREF_KEY_BATTERY_BAR_DYNACOLOR = "pref_battery_bar_dynacolor";
+    public static final String PREF_KEY_BATTERY_BAR_COLOR = "pref_battery_bar_color";
+    public static final String PREF_KEY_BATTERY_BAR_COLOR_LOW = "pref_battery_bar_color_low";
+    public static final String PREF_KEY_BATTERY_BAR_COLOR_CRITICAL = "pref_battery_bar_color_critical";
+    public static final String ACTION_PREF_BATTERY_BAR_CHANGED = "gravitybox.intent.action.BATTERY_BAR_CHANGED";
+    public static final String EXTRA_BBAR_SHOW = "batteryBarShow";
+    public static final String EXTRA_BBAR_POSITION = "batteryBarPosition";
+    public static final String EXTRA_BBAR_MARGIN = "batteryBarMargin";
+    public static final String EXTRA_BBAR_THICKNESS = "batteryBarThickness";
+    public static final String EXTRA_BBAR_CHARGE_ANIM = "batteryBarChargeAnim";
+    public static final String EXTRA_BBAR_DYNACOLOR = "batteryBarDynaColor";
+    public static final String EXTRA_BBAR_COLOR = "batteryBarColor";
+    public static final String EXTRA_BBAR_COLOR_LOW = "batteryBarColorLow";
+    public static final String EXTRA_BBAR_COLOR_CRITICAL = "batteryBarColorCritical";
+
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
     public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
@@ -1331,6 +1351,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefQrQuality;
         private SeekBarPreference mPrefSrAdaptiveDelay;
         private PreferenceScreen mPrefCatLsRingSettings;
+        private ListPreference mPrefBbarPosition;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1663,6 +1684,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefQrQuality = (ListPreference) findPreference(PREF_KEY_QUICKRECORD_QUALITY);
 
             mPrefSrAdaptiveDelay = (SeekBarPreference) findPreference(PREF_KEY_SMART_RADIO_ADAPTIVE_DELAY);
+
+            mPrefBbarPosition = (ListPreference) findPreference(PREF_KEY_BATTERY_BAR_POSITION);
 
             // MTK fixes
             mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
@@ -2495,6 +2518,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         mPrefs.getInt(PREF_KEY_SMART_RADIO_SCREEN_OFF_DELAY, 0) > 0);
             }
 
+            if (key == null || key.equals(PREF_KEY_BATTERY_BAR_POSITION)) {
+                mPrefBbarPosition.setSummary(mPrefBbarPosition.getEntry());
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -3274,6 +3301,36 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getActivity().getPackageManager().setComponentEnabledSetting(
                         new ComponentName(getActivity(), "com.ceco.kitkat.gravitybox.GravityBoxSettingsAlias"),
                         mode, PackageManager.DONT_KILL_APP);
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_SHOW)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_SHOW, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_POSITION)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_POSITION, prefs.getString(key, "TOP"));
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_MARGIN)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_MARGIN, prefs.getInt(key, 0));
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_THICKNESS)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_THICKNESS, prefs.getInt(key, 2));
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_DYNACOLOR)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_DYNACOLOR, prefs.getBoolean(key, true));
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_COLOR)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_COLOR, prefs.getInt(key, 
+                        getResources().getInteger(R.integer.COLOR_WHITE)));
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_COLOR_LOW)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_COLOR_LOW, prefs.getInt(key, 
+                        getResources().getInteger(R.integer.COLOR_ORANGE)));
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_COLOR_CRITICAL)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_COLOR_CRITICAL, prefs.getInt(key, 
+                        getResources().getInteger(R.integer.COLOR_RED)));
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_CHARGE_ANIM)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_CHARGE_ANIM, prefs.getBoolean(key, true));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

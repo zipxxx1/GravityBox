@@ -1227,4 +1227,14 @@
         <item>PROGRESS_TRACKING</item>
     </string-array>
 
+    <string-array name="bbar_position_entries" translatable="false">
+        <item>@string/bbar_position_top</item>
+        <item>@string/bbar_position_bottom</item>
+    </string-array>
+
+    <string-array name="bbar_position_values" translatable="false">
+        <item>TOP</item>
+        <item>BOTTOM</item>
+    </string-array>
+
 </resources>

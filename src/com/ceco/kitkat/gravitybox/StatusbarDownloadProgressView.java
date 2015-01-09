@@ -52,7 +52,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     ));
 
     public interface ProgressStateListener {
-        void onProgressTrackingStarted(boolean isBluetooth);
+        void onProgressTrackingStarted(boolean isBluetooth, Mode mode);
         void onProgressTrackingStopped();
     }
 
@@ -72,7 +72,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         }
     }
 
-    private enum Mode { OFF, TOP, BOTTOM };
+    public enum Mode { OFF, TOP, BOTTOM };
     private Mode mMode;
     private String mId;
     private List<ProgressStateListener> mListeners;
@@ -115,11 +115,14 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     public void registerListener(ProgressStateListener listener) {
         if (listener == null) return;
         synchronized (mListeners) {
-            mListeners.add(listener);
+            if (!mListeners.contains(listener)) {
+                mListeners.add(listener);
+            }
         }
     }
 
     public void unregisterListener(ProgressStateListener listener) {
+        if (listener == null) return;
         synchronized (mListeners) {
             if (mListeners.contains(listener)) {
                 mListeners.remove(listener);
@@ -130,7 +133,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private void notifyProgressStarted(boolean isBluetooth) {
         synchronized (mListeners) {
             for (ProgressStateListener l : mListeners) {
-                l.onProgressTrackingStarted(isBluetooth);
+                l.onProgressTrackingStarted(isBluetooth, mMode);
             }
         }
     }

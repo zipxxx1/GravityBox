@@ -373,6 +373,12 @@ public class ModStatusBar {
                     mDownloadProgressView = new StatusbarDownloadProgressView(liparam.view.getContext(), prefs);
                     mRootView.addView(mDownloadProgressView);
                     mBroadcastSubReceivers.add(mDownloadProgressView);
+
+                    // inject battery bar view
+                    BatteryBarView bbView = new BatteryBarView(liparam.view.getContext(), prefs);
+                    mRootView.addView(bbView);
+                    mBroadcastSubReceivers.add(bbView);
+                    mDownloadProgressView.registerListener(bbView);
                 }
             });
 
@@ -538,6 +544,7 @@ public class ModStatusBar {
                     intentFilter.addAction(ACTION_DELETE_SCREENSHOT);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_BAR_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     mSettingsObserver = new SettingsObserver(

@@ -883,6 +883,78 @@
 
             </PreferenceScreen>
 
+            <PreferenceScreen 
+                android:key="pref_cat_battery_bar"
+                android:title="@string/pref_cat_battery_bar_title">
+
+                <CheckBoxPreference 
+                    android:key="pref_battery_bar_show"
+                    android:title="@string/pref_battery_bar_show_title"
+                    android:defaultValue="false" />
+
+                <ListPreference 
+                    android:key="pref_battery_bar_position"
+                    android:title="@string/pref_battery_bar_position_title"
+                    android:entries="@array/bbar_position_entries"
+                    android:entryValues="@array/bbar_position_values"
+                    android:defaultValue="TOP"
+                    android:dependency="pref_battery_bar_show" />
+
+                <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+                    android:key="pref_battery_bar_margin"
+                    android:title="@string/pref_battery_bar_margin_title"
+                    minimum="0"
+                    maximum="3"
+                    interval="1"
+                    monitorBoxEnabled="true"
+                    monitorBoxUnit="px"
+                    android:defaultValue="0"
+                    android:dependency="pref_battery_bar_show" />
+
+                <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+                    android:key="pref_battery_bar_thickness"
+                    android:title="@string/pref_battery_bar_thickness_title"
+                    minimum="1"
+                    maximum="3"
+                    interval="1"
+                    monitorBoxEnabled="true"
+                    monitorBoxUnit="px"
+                    android:defaultValue="2"
+                    android:dependency="pref_battery_bar_show" />
+
+                <CheckBoxPreference 
+                    android:key="pref_battery_bar_charge_anim"
+                    android:title="@string/pref_battery_bar_charge_anim_title"
+                    android:defaultValue="false"
+                    android:dependency="pref_battery_bar_show" />
+
+                <CheckBoxPreference 
+                    android:key="pref_battery_bar_dynacolor"
+                    android:title="@string/pref_battery_bar_dynacolor_title"
+                    android:defaultValue="true"
+                    android:dependency="pref_battery_bar_show"
+                    android:disableDependentsState="true" />
+
+                <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                    android:key="pref_battery_bar_color"
+                    android:title="@string/pref_battery_bar_color_title"
+                    android:defaultValue="@integer/COLOR_WHITE"
+                    android:dependency="pref_battery_bar_dynacolor" />
+
+                <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                    android:key="pref_battery_bar_color_low"
+                    android:title="@string/pref_battery_bar_color_low_title"
+                    android:defaultValue="@integer/COLOR_ORANGE"
+                    android:dependency="pref_battery_bar_dynacolor" />
+
+                <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                    android:key="pref_battery_bar_color_critical"
+                    android:title="@string/pref_battery_bar_color_critical_title"
+                    android:defaultValue="@integer/COLOR_RED"
+                    android:dependency="pref_battery_bar_dynacolor" />
+
+            </PreferenceScreen>
+
         </PreferenceScreen>
 
         <PreferenceScreen
