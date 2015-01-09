@@ -832,6 +832,7 @@
     
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">电量百分比文字</string>
+    <string name="battery_percent_text_show_title">显示百分比文字</string>
     <string name="battery_percent_text_size_title">电量百分比文字大小</string>
     <string name="battery_percent_text_size_larger">大</string>
     <string name="battery_percent_text_size_normal">正常</string>
@@ -1854,6 +1855,24 @@
     <!-- Unlock ring targets: custom unlock ring -->
     <string name="pref_lockscreen_ring_custom_unlock_title">自定义解锁目标</string>
     <string name="pref_lockscreen_ring_custom_unlock_summary">可手动设置解锁目标
-        至少一个解锁目标或使用GravityBox设置为解锁动作或启动一些应用程序</string>
+        至少一个解锁目标或使用GravityBox设置为解锁动作或启动一些应用程序</string> 
+    
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">WiFi优先级</string>
+    <string name="pref_wifi_priority_summary">指定WiFi网络优先级</string>
+
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">电量栏</string>
+    <string name="pref_battery_bar_show_title">显示电量栏</string>
+    <string name="pref_battery_bar_position_title">位置</string>
+    <string name="bbar_position_top">顶部边缘</string>
+    <string name="bbar_position_bottom">底部边缘</string>
+    <string name="pref_battery_bar_margin_title">边缘空白</string>
+    <string name="pref_battery_bar_thickness_title">厚度</string>
+    <string name="pref_battery_bar_charge_anim_title">充电动画</string>
+    <string name="pref_battery_bar_dynacolor_title">动态颜色</string>
+    <string name="pref_battery_bar_color_title">颜色</string>
+    <string name="pref_battery_bar_color_low_title">低电量颜色</string>
+    <string name="pref_battery_bar_color_critical_title">危急电量颜色</string>
 
 </resources>
