@@ -1871,6 +1871,7 @@
     <string name="pref_battery_bar_thickness_title">Thickness</string>
     <string name="pref_battery_bar_charge_anim_title">Charging animation</string>
     <string name="pref_battery_bar_dynacolor_title">Dynamic color</string>
+    <string name="pref_battery_bar_dynacolor_summary">Determines color from current battery level automatically</string>
     <string name="pref_battery_bar_color_title">Color</string>
     <string name="pref_battery_bar_color_low_title">Low battery color</string>
     <string name="pref_battery_bar_color_critical_title">Critical battery color</string>

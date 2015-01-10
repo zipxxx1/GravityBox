@@ -931,6 +931,7 @@
                 <CheckBoxPreference 
                     android:key="pref_battery_bar_dynacolor"
                     android:title="@string/pref_battery_bar_dynacolor_title"
+                    android:summary="@string/pref_battery_bar_dynacolor_summary"
                     android:defaultValue="true"
                     android:dependency="pref_battery_bar_show"
                     android:disableDependentsState="true" />
