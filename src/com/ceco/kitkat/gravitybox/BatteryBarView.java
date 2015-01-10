@@ -57,7 +57,8 @@ public class BatteryBarView extends View implements IconManagerListener,
     private int mColor;
     private int mColorLow;
     private int mColorCritical;
-    private BatteryData mBatteryData;
+    private int mLevel;
+    private boolean mCharging;
     private boolean mIsAnimating;
     private boolean mHiddenByProgressBar;
 
@@ -107,10 +108,13 @@ public class BatteryBarView extends View implements IconManagerListener,
 
     @Override
     public void onBatteryStatusChanged(BatteryData batteryData) {
-        mBatteryData = batteryData;
-        if (DEBUG) log("onBatteryStatusChanged: level=" + mBatteryData.level +
-                "; charging=" + mBatteryData.charging);
-        update();
+        if (mLevel != batteryData.level || mCharging != batteryData.charging) {
+            mLevel = batteryData.level;
+            mCharging = batteryData.charging;
+            if (DEBUG) log("onBatteryStatusChanged: level=" + mLevel +
+                    "; charging=" + mCharging);
+            update();
+        }
     }
 
     private void setListeners() {
@@ -132,27 +136,27 @@ public class BatteryBarView extends View implements IconManagerListener,
     }
 
     private void update() {
-        if (mEnabled && mBatteryData != null && !mHiddenByProgressBar) {
+        if (mEnabled && !mHiddenByProgressBar) {
             setVisibility(View.VISIBLE);
             if (mDynaColor) {
-                int cappedLevel = Math.min(Math.max(mBatteryData.level, 15), 90);
+                int cappedLevel = Math.min(Math.max(mLevel, 15), 90);
                 float hue = (cappedLevel - 15) * 1.6f;
                 setBackgroundColor(Color.HSVToColor(0xff, new float[]{ hue, 1.f, 1.f }));
             } else {
                 int color = mColor;
-                if (mBatteryData.level <= 5) {
+                if (mLevel <= 5) {
                     color = mColorCritical;
-                } else if (mBatteryData.level <= 15) {
+                } else if (mLevel <= 15) {
                     color = mColorLow;
                 }
                 setBackgroundColor(color);
             }
-            if (mAnimateCharge && mBatteryData.charging && mBatteryData.level < 100) {
+            if (mAnimateCharge && mCharging && mLevel < 100) {
                 setScaleX(1f);
                 startAnimation();
             } else {
                 stopAnimation();
-                setScaleX(mBatteryData.level/100f);
+                setScaleX(mLevel/100f);
             }
         } else {
             stopAnimation();
@@ -164,7 +168,7 @@ public class BatteryBarView extends View implements IconManagerListener,
         if (mIsAnimating) {
             stopAnimation();
         }
-        ScaleAnimation a = new ScaleAnimation(mBatteryData.level/100f, 1f, 1f, 1f);
+        ScaleAnimation a = new ScaleAnimation(mLevel/100f, 1f, 1f, 1f);
         a.setInterpolator(new AccelerateInterpolator());
         a.setDuration(ANIM_DURATION);
         a.setRepeatCount(Animation.INFINITE);
