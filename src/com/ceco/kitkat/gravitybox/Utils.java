@@ -182,7 +182,8 @@ public class Utils {
 
         mIsMotoXtDevice = Build.MANUFACTURER.equalsIgnoreCase("motorola") &&
                 (Build.MODEL.toLowerCase().startsWith("xt") ||
-                 Build.MODEL.toLowerCase().contains("razr"));
+                 Build.MODEL.toLowerCase().contains("razr")) &&
+                 !isGpeDevice();
         return mIsMotoXtDevice;
     }
 
