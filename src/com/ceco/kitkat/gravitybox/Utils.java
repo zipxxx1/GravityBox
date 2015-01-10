@@ -162,7 +162,7 @@ public class Utils {
         if (mIsXperiaDevice != null) return mIsXperiaDevice;
 
         boolean isXperiaDevice = Build.MANUFACTURER.equalsIgnoreCase("sony")
-                && !isMtkDevice();
+                && !isMtkDevice() && !isGpeDevice();
 
         if (isXperiaDevice) {
             // doublecheck - hacky workaround to determine whether device is running GPE ROM
