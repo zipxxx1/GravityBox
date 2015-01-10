@@ -67,17 +67,20 @@ public class SystemPropertyProvider {
                     "com.android.systemui.SystemUIService", classLoader);
             XposedHelpers.findAndHookMethod(classSystemUIService, "onCreate", new XC_MethodHook() {
                 @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    Context context = (Context) param.thisObject;
+                    try {
+                        if (DEBUG) log("Initializing SystemUI managers");
+                        SysUiManagers.init(context, prefs);
+                    } catch(Throwable t) {
+                        log("Error initializing SystemUI managers: ");
+                        XposedBridge.log(t);
+                    }
+                }
+                @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     Context context = (Context) param.thisObject;
                     if (context != null) {
-                        try {
-                            if (DEBUG) log("Initializing SystemUI managers");
-                            SysUiManagers.init(context, prefs);
-                        } catch(Throwable t) {
-                            log("Error initializing SystemUI managers: ");
-                            XposedBridge.log(t);
-                        }
-
                         if (DEBUG) log("SystemUIService created. Registering BroadcastReceiver");
                         final ContentResolver cr = context.getContentResolver();
 
