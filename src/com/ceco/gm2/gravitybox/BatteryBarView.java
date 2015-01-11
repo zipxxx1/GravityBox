@@ -26,6 +26,7 @@ import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.IconManagerListener
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -34,7 +35,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
 public class BatteryBarView extends View implements IconManagerListener, 
@@ -59,7 +60,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     private int mColorCritical;
     private int mLevel;
     private boolean mCharging;
-    private boolean mIsAnimating;
+    private ObjectAnimator mChargingAnimator;
     private boolean mHiddenByProgressBar;
 
     private static void log(String message) {
@@ -88,6 +89,7 @@ public class BatteryBarView extends View implements IconManagerListener,
                 FrameLayout.LayoutParams.MATCH_PARENT, mHeightPx);
         setLayoutParams(lp);
         setPivotX(0f);
+        setScaleX(0f);
         setVisibility(View.GONE);
         updatePosition();
     }
@@ -152,11 +154,12 @@ public class BatteryBarView extends View implements IconManagerListener,
                 setBackgroundColor(color);
             }
             if (mAnimateCharge && mCharging && mLevel < 100) {
-                setScaleX(1f);
                 startAnimation();
             } else {
                 stopAnimation();
-                setScaleX(mLevel/100f);
+                if (getScaleX() != mLevel/100f) {
+                    animateToCurrentLevel();
+                }
             }
         } else {
             stopAnimation();
@@ -164,21 +167,28 @@ public class BatteryBarView extends View implements IconManagerListener,
         }
     }
 
-    private void startAnimation() {
-        if (mIsAnimating) {
-            stopAnimation();
-        }
-        ScaleAnimation a = new ScaleAnimation(mLevel/100f, 1f, 1f, 1f);
-        a.setInterpolator(new AccelerateInterpolator());
+    private void animateToCurrentLevel() {
+        ObjectAnimator a = ObjectAnimator.ofFloat(this, "scaleX", getScaleX(), mLevel/100f);
+        a.setInterpolator(new DecelerateInterpolator());
         a.setDuration(ANIM_DURATION);
-        a.setRepeatCount(Animation.INFINITE);
-        startAnimation(a);
-        mIsAnimating = true;
+        a.setRepeatCount(0);
+        a.start();
+    }
+
+    private void startAnimation() {
+        stopAnimation();
+        mChargingAnimator = ObjectAnimator.ofFloat(this, "scaleX", mLevel/100f, 1f);
+        mChargingAnimator.setInterpolator(new AccelerateInterpolator());
+        mChargingAnimator.setDuration(ANIM_DURATION);
+        mChargingAnimator.setRepeatCount(Animation.INFINITE);
+        mChargingAnimator.start();
     }
 
     private void stopAnimation() {
-        clearAnimation();
-        mIsAnimating = false;
+        if (mChargingAnimator != null) {
+            mChargingAnimator.cancel();
+            mChargingAnimator = null;
+        }
     }
 
     private void updatePosition() {
@@ -222,6 +232,7 @@ public class BatteryBarView extends View implements IconManagerListener,
                     setListeners();
                 } else {
                     unsetListeners();
+                    setScaleX(0f);
                 }
                 update();
             }
