@@ -219,8 +219,10 @@ public class BatteryBarView extends View implements IconManagerListener,
 
     @Override
     public void onProgressTrackingStopped() {
-        mHiddenByProgressBar = false;
-        update();
+        if (mHiddenByProgressBar) {
+            mHiddenByProgressBar = false;
+            update();
+        }
     }
 
     @Override
