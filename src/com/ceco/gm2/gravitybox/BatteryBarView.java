@@ -157,8 +157,11 @@ public class BatteryBarView extends View implements IconManagerListener,
                 startAnimation();
             } else {
                 stopAnimation();
-                if (getScaleX() != mLevel/100f) {
-                    animateToCurrentLevel();
+                final float newScale = mLevel/100f;
+                if (Math.abs(getScaleX() - newScale) > 0.02f) {
+                    animateScaleTo(newScale);
+                } else {
+                    setScaleX(newScale);
                 }
             }
         } else {
@@ -167,12 +170,13 @@ public class BatteryBarView extends View implements IconManagerListener,
         }
     }
 
-    private void animateToCurrentLevel() {
-        ObjectAnimator a = ObjectAnimator.ofFloat(this, "scaleX", getScaleX(), mLevel/100f);
+    private void animateScaleTo(float newScale) {
+        ObjectAnimator a = ObjectAnimator.ofFloat(this, "scaleX", getScaleX(), newScale);
         a.setInterpolator(new DecelerateInterpolator());
         a.setDuration(ANIM_DURATION);
         a.setRepeatCount(0);
         a.start();
+        if (DEBUG) log("Animating to current level");
     }
 
     private void startAnimation() {
