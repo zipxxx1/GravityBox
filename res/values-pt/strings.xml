@@ -1810,5 +1810,39 @@
     <string name="pref_smart_radio_adaptive_delay_title">Adaptação de atraso</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Prolonga automaticamente atraso
 se o tráfego de dados móveis atual excede limite definido (Ajuste para 0 para desabilitar)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Acompanhamento da barra de progresso</string>
+    <string name="pref_lc_progress_tracking_summary">Mostra na barra de status o progresso das notificações em andamento. Requer recurso barra de progressos ativado.</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">Modo de Exibição</string>
+    <string name="dt_display_mode_always">Sempre (quando a conexão de rede disponível)</string>
+    <string name="dt_display_mode_dm">Somente para Gerenciador de Download(Android)</string>
+    <string name="dt_display_mode_pt">Quando a barra de status exibir progresso em andamento</string>
+
+    <!-- Unlock ring targets: custom unlock ring -->
+    <string name="pref_lockscreen_ring_custom_unlock_title">Destino de desbloqueio Personalizado</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">Permite definir Destino desbloquear manualmente. Certifique-se de, pelo menos, um dos alvos do anel seja definido como usar a ação GravityBox Unlock ou para iniciar algum aplicativo.</string>
+
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Prioridade Wi-Fi</string>
+    <string name="pref_wifi_priority_summary">Especifica as prioridades das redes Wi-Fi</string>
+
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">Barra de bateria</string>
+    <string name="pref_battery_bar_show_title">Mostrar barra de bateria</string>
+    <string name="pref_battery_bar_position_title">Posição</string>
+    <string name="bbar_position_top">Borda superior</string>
+    <string name="bbar_position_bottom">Borda inferior</string>
+    <string name="pref_battery_bar_margin_title">Margem da Borda</string>
+    <string name="pref_battery_bar_thickness_title">Espessura</string>
+    <string name="pref_battery_bar_charge_anim_title">Animação de carregamento</string>
+    <string name="pref_battery_bar_dynacolor_title">Dinâmica de cores</string>
+    <string name="pref_battery_bar_dynacolor_summary">Determina a cor do nível atual da bateria automaticamente</string>
+    <string name="pref_battery_bar_color_title">Cor</string>
+    <string name="pref_battery_bar_color_low_title">Cor da bateria baixa</string>
+    <string name="pref_battery_bar_color_critical_title">Cor da bateria crítica</string>
+
         
 </resources>
