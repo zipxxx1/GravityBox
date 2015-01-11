@@ -120,10 +120,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
     @Override
     public void handleInitPackageResources(InitPackageResourcesParam resparam) throws Throwable {
-
-        if (resparam.packageName.equals(ModBatteryStyle.PACKAGE_NAME))
-            ModBatteryStyle.initResources(prefs, resparam);
-
         if (resparam.packageName.equals(ModNavigationBar.PACKAGE_NAME) &&
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false)) {
             ModNavigationBar.initResources(prefs, resparam);
@@ -209,10 +205,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         }
 
         // Common
-        if (lpparam.packageName.equals(ModBatteryStyle.PACKAGE_NAME)) {
-            ModBatteryStyle.init(prefs, lpparam.classLoader);
-        }
-
         if (lpparam.packageName.equals(ModLowBatteryWarning.PACKAGE_NAME)) {
             ModLowBatteryWarning.init(prefs, lpparam.classLoader);
         }
