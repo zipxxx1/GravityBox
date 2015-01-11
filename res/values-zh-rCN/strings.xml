@@ -474,9 +474,9 @@
     <!-- Transparency management -->
     <string name="pref_cat_transparency_manager_title">透明度调整</string>
     <string name="pref_cat_transparency_manager_summary">包含各种与状态栏和虚拟按键透明度相关的调整选项</string>
-    <string name="pref_tm_statusbar_launcher_title">启动器下的状态栏透明度</string>
+    <string name="pref_tm_statusbar_launcher_title">桌面下的状态栏透明度</string>
     <string name="pref_tm_statusbar_lockscreen_title">锁屏画面时的状态栏透明度</string>
-    <string name="pref_tm_navbar_launcher_title">启动器下的虚拟按键透明度</string>
+    <string name="pref_tm_navbar_launcher_title">桌面下的虚拟按键透明度</string>
     <string name="pref_tm_navbar_lockscreen_title">锁屏画面时的虚拟按键透明度</string>
 
     <!-- Hide alarm icon -->
@@ -864,10 +864,10 @@
     <string name="fix_location_summary">如果您发现运动跟踪应用程序不能正常使用请启用（需要重新启动）</string>
     
     <!-- Launcher tweaks -->
-    <string name="pref_cat_launcher_tweaks_title">启动器调整</string>
-    <string name="pref_cat_launcher_tweaks_summary">仅适用于谷歌体验启动器</string>
+    <string name="pref_cat_launcher_tweaks_title">桌面调整</string>
+    <string name="pref_cat_launcher_tweaks_summary">仅适用于谷歌体验桌面</string>
     <string name="pref_cat_launcher_desktop_grid_title">桌面网格</string>
-    <string name="pref_launcher_desktop_grid_info_title">使用非默认的值可能破坏小部件的布局，请谨慎使用，改动将在启动器重新启动后生效</string>
+    <string name="pref_launcher_desktop_grid_info_title">使用非默认的值可能破坏小部件的布局，请谨慎使用，改动将在桌面重新启动后生效</string>
     <string name="pref_launcher_desktop_grid_rows_title">行数</string>
     <string name="pref_launcher_desktop_grid_cols_title">列数</string>
     <string name="desktop_grid_default">默认</string>
@@ -1706,8 +1706,8 @@
     <string name="pref_unc_as_pocket_mode_summary_overriden">在电源调整项中的接近唤醒功能会被覆盖</string>
 
     <!-- Hide launcher icon -->
-    <string name="pref_hide_launcher_icon_title">隐藏启动器图标</string>
-    <string name="pref_hide_launcher_icon_summary">桌面启动器可能需要重新启动</string>
+    <string name="pref_hide_launcher_icon_title">隐藏桌面图标</string>
+    <string name="pref_hide_launcher_icon_summary">桌面可能需要重新启动</string>
 
     <!-- Navbar: lollipop icon style -->
     <string name="navbar_l_icon_style_disabled">禁用</string>
@@ -1748,6 +1748,7 @@
     <string name="pref_battery_bar_thickness_title">厚度</string>
     <string name="pref_battery_bar_charge_anim_title">充电动画</string>
     <string name="pref_battery_bar_dynacolor_title">动态颜色</string>
+    <string name="pref_battery_bar_dynacolor_summary">从当前电池电量自动确定颜色</string>
     <string name="pref_battery_bar_color_title">颜色</string>
     <string name="pref_battery_bar_color_low_title">低电量颜色</string>
     <string name="pref_battery_bar_color_critical_title">危急电量颜色</string>
