@@ -1,3 +1,21 @@
+Changelog 3.5.1 - 12/01/2015
+--------------------------------------
+- Statusbar tweaks/Battery settings: added battery bar
+--- allows custom position/margin/thickness/dynamic or user defined colors
+--- optional charging animation
+--- hides automatically while progress bar in status bar is showing at the same position
+- Misc tweaks: added interface for specifying WiFi network priorities
+--- connects to preferred network when more networks with good signal are in range
+--- requires new permissions: ACCESS_WIFI_STATE and CHANGE_WIFI_STATE
+- Launcher tweaks: adjusted for Google Search 4.1.21 (thanks to theknut)
+- Reworked statusbar tweaks to get rid of layout hooks (for potential better compatibility with unsupported devices)
+- Other optimizations
+- Updated French translations (thanks to ch-vox)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Polish translations (thanks to xtrem007)
+
 Changelog 3.5.0 - 25/12/2014
 --------------------------------------
 - Lockscreen tweaks / Unlock ring targets: added option for custom unlock target
