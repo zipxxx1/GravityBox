@@ -1754,5 +1754,6 @@
     <string name="pref_battery_bar_color_low_title">Цвет при низком заряде</string>
     <string name="pref_battery_bar_color_critical_title">Цвет критич. состояния</string>
     <string name="pref_battery_bar_centered_title">По центру</string>
+    <string name="pref_battery_bar_color_charging_title">Цвет при зарядке</string>
 
 </resources>
