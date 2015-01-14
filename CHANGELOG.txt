@@ -1,3 +1,12 @@
+Changelog 3.5.3 - 14/01/2015
+--------------------------------------
+- Launcher tweaks: adjusted for Google Search 4.1.24
+- Battery bar:
+--- added option for centered bar
+--- added option for choosing charging color
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 3.5.2 - 11/01/2015
 --------------------------------------
 - Statusbar tweaks/Battery settings: added battery bar
