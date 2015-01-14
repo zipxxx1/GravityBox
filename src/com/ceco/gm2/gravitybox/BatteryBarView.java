@@ -62,6 +62,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     private boolean mCharging;
     private ObjectAnimator mChargingAnimator;
     private boolean mHiddenByProgressBar;
+    private boolean mCentered;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -84,11 +85,11 @@ public class BatteryBarView extends View implements IconManagerListener,
         mColor = prefs.getInt(GravityBoxSettings.PREF_KEY_BATTERY_BAR_COLOR, 0xff0099cc);
         mColorLow = prefs.getInt(GravityBoxSettings.PREF_KEY_BATTERY_BAR_COLOR_LOW, 0xffffa500);
         mColorCritical = prefs.getInt(GravityBoxSettings.PREF_KEY_BATTERY_BAR_COLOR_CRITICAL, Color.RED);
+        mCentered = prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_BAR_CENTERED, false);
 
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT, mHeightPx);
         setLayoutParams(lp);
-        setPivotX(0f);
         setScaleX(0f);
         setVisibility(View.GONE);
         updatePosition();
@@ -106,6 +107,12 @@ public class BatteryBarView extends View implements IconManagerListener,
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         unsetListeners();
+    }
+
+    @Override
+    public void onSizeChanged(int w, int h, int oldw, int oldh) {
+        if (DEBUG) log("w=" + w + "; h=" + h);
+        setPivotX(mCentered ? w/2f : 0f);
     }
 
     @Override
@@ -198,8 +205,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     private void updatePosition() {
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) getLayoutParams();
         lp.height = mHeightPx;
-        lp.gravity = mPosition == Position.TOP ? (Gravity.TOP | Gravity.START) :
-            (Gravity.BOTTOM | Gravity.START);
+        lp.gravity = mPosition == Position.TOP ? Gravity.TOP : Gravity.BOTTOM;
         lp.setMargins(0, mPosition == Position.TOP ? mMarginPx : 0,
                         0, mPosition == Position.BOTTOM ? mMarginPx : 0);
         setLayoutParams(lp);
@@ -278,6 +284,10 @@ public class BatteryBarView extends View implements IconManagerListener,
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BBAR_CHARGE_ANIM)) {
                 mAnimateCharge = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BBAR_CHARGE_ANIM, false);
                 update();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BBAR_CENTERED)) {
+                mCentered = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BBAR_CENTERED, false);
+                setPivotX(mCentered ? getWidth()/2f : 0f);
             }
         }
     }

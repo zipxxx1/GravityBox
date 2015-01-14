@@ -1685,5 +1685,6 @@
     <string name="pref_battery_bar_color_title">Barva</string>
     <string name="pref_battery_bar_color_low_title">Barva nízké úrovně</string>
     <string name="pref_battery_bar_color_critical_title">Barva kritické úrovně</string>
+    <string name="pref_battery_bar_centered_title">Vycentrovaný</string>
 
 </resources>
