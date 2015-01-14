@@ -91,6 +91,8 @@ public class ModLauncher {
 
     private static boolean mShouldShowAppDrawer;
     private static boolean mReceiverRegistered;
+    private static Method mShowAllAppsMethod;
+    private static Object[] mShowAllAppsParams;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -196,37 +198,40 @@ public class ModLauncher {
                     protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                         if (mShouldShowAppDrawer) {
                             mShouldShowAppDrawer = false;
-                            Method m = null;
-                            for (ShowAllApps sapm : METHOD_SHOW_ALL_APPS) {
-                                try {
-                                    for (int i = 0; i < sapm.paramTypes.length; i++) {
-                                        if (sapm.paramTypes[i] instanceof String) {
-                                            sapm.paramTypes[i] = XposedHelpers.findClass(
-                                                (String) sapm.paramTypes[i], classLoader);
+                            if (mShowAllAppsMethod != null) {
+                                mShowAllAppsMethod.invoke(param.thisObject, mShowAllAppsParams);
+                            } else {
+                                for (ShowAllApps sapm : METHOD_SHOW_ALL_APPS) {
+                                    try {
+                                        for (int i = 0; i < sapm.paramTypes.length; i++) {
+                                            if (sapm.paramTypes[i] instanceof String) {
+                                                sapm.paramTypes[i] = XposedHelpers.findClass(
+                                                    (String) sapm.paramTypes[i], classLoader);
+                                            }
+                                            if (sapm.paramValues[i] instanceof String) {
+                                                sapm.paramValues[i] = XposedHelpers.getStaticObjectField(
+                                                    (Class<?>) sapm.paramTypes[i],
+                                                    (String) sapm.paramValues[i]);
+                                            }
                                         }
-                                        if (sapm.paramValues[i] instanceof String) {
-                                            sapm.paramValues[i] = XposedHelpers.getStaticObjectField(
-                                                (Class<?>) sapm.paramTypes[i],
-                                                (String) sapm.paramValues[i]);
+                                        Class<?> clazz = param.thisObject.getClass();
+                                        if (clazz.getName().equals(CLASS_LAUNCHER)) {
+                                            mShowAllAppsMethod = XposedHelpers.findMethodExact(clazz,
+                                                    sapm.methodName, sapm.paramTypes);
+                                        } else if (clazz.getSuperclass().getName().equals(CLASS_LAUNCHER)) {
+                                            mShowAllAppsMethod = XposedHelpers.findMethodExact(clazz.getSuperclass(),
+                                                    sapm.methodName, sapm.paramTypes);
                                         }
+                                        mShowAllAppsParams = sapm.paramValues;
+                                        mShowAllAppsMethod.invoke(param.thisObject, mShowAllAppsParams);
+                                    } catch (Throwable t) {
+                                        if (DEBUG) log("Method name " + sapm.methodName + 
+                                                " not found: " + t.getMessage());
                                     }
-                                    Class<?> clazz = param.thisObject.getClass();
-                                    if (clazz.getName().equals(CLASS_LAUNCHER)) {
-                                        m = XposedHelpers.findMethodExact(clazz,
-                                                sapm.methodName, sapm.paramTypes);
-                                    } else if (clazz.getSuperclass().getName().equals(CLASS_LAUNCHER)) {
-                                        m = XposedHelpers.findMethodExact(clazz.getSuperclass(),
-                                                sapm.methodName, sapm.paramTypes);
-                                    }
-                                    m.setAccessible(true);
-                                    m.invoke(param.thisObject, sapm.paramValues);
-                                } catch (Throwable t) {
-                                    if (DEBUG) log("Method name " + sapm.methodName + 
-                                            " not found: " + t.getMessage());
                                 }
-                            }
-                            if (m == null) {
-                                log("Couldn't find method for opening app dawer. Incompatible Google Search?");
+                                if (mShowAllAppsMethod == null) {
+                                    log("Couldn't find method for opening app dawer. Incompatible Google Search?");
+                                }
                             }
                         }
                     }
