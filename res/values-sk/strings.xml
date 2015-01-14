@@ -1842,5 +1842,7 @@
     <string name="pref_battery_bar_color_title">Farba</string>
     <string name="pref_battery_bar_color_low_title">Farba nízkej úrovne</string>
     <string name="pref_battery_bar_color_critical_title">Farba kritickej úrovne</string>
+    <string name="pref_battery_bar_centered_title">Vycentrovaný</string>
+    <string name="pref_battery_bar_color_charging_title">Farba nabíjania</string>
 
 </resources>
