@@ -16,7 +16,10 @@
 package com.ceco.gm2.gravitybox;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
@@ -26,7 +29,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -38,6 +40,7 @@ public class ModLauncher {
     private static final String TAG = "GB:ModLauncher";
 
     private static final Map<String, DynamicGrid> CLASS_DYNAMIC_GRID; 
+    private static final List<ShowAllApps> METHOD_SHOW_ALL_APPS;
     private static final String CLASS_LAUNCHER = "com.android.launcher3.Launcher";
     private static final String CLASS_APP_WIDGET_HOST_VIEW = "android.appwidget.AppWidgetHostView";
     private static final boolean DEBUG = false;
@@ -56,6 +59,17 @@ public class ModLauncher {
         }
     }
 
+    private static final class ShowAllApps {
+        String methodName;
+        Object[] paramTypes;
+        Object[] paramValues;
+        public ShowAllApps(String mName, Object[] pTypes, Object[] pValues) {
+            methodName = mName;
+            paramTypes = pTypes;
+            paramValues = pValues;
+        }
+    }
+
     static {
         CLASS_DYNAMIC_GRID = new HashMap<String, DynamicGrid>();
         CLASS_DYNAMIC_GRID.put("com.android.launcher3.DynamicGrid",
@@ -64,7 +78,15 @@ public class ModLauncher {
         CLASS_DYNAMIC_GRID.put("rf", new DynamicGrid("DU", "AW", "AX"));
         CLASS_DYNAMIC_GRID.put("sg", new DynamicGrid("Ez", "BB", "BC"));
         CLASS_DYNAMIC_GRID.put("ur", new DynamicGrid("Gi", "Dg", "Dh"));
-        CLASS_DYNAMIC_GRID.put("wd", new DynamicGrid("vg", "Ce", "Cf"));
+        CLASS_DYNAMIC_GRID.put("wd", new DynamicGrid("Fe", "Ce", "Cf"));
+
+        METHOD_SHOW_ALL_APPS = new ArrayList<ShowAllApps>();
+        METHOD_SHOW_ALL_APPS.add(new ShowAllApps("onClickAllAppsButton",
+                new Object[] { View.class },
+                new Object[] { null } ));
+        METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
+                new Object[] { boolean.class, "tk", boolean.class },
+                new Object[] { false, "xJ", false } ));
     }
 
     private static boolean mShouldShowAppDrawer;
@@ -85,6 +107,7 @@ public class ModLauncher {
     }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        boolean dynamicGridFound = false;
         for (String className : CLASS_DYNAMIC_GRID.keySet()) {
             final DynamicGrid dynamicGrid;
             try {
@@ -93,8 +116,12 @@ public class ModLauncher {
                 Field profile = cls.getDeclaredField(dynamicGrid.fProfile);
                 if (DEBUG) log("Probably found DynamicGrid class as: " + className);
                 dynamicGrid.clazz = cls;
-            } catch (Throwable t) { continue; }
+            } catch (Throwable t) { 
+                if (DEBUG) XposedBridge.log(t);
+                continue; 
+            }
 
+            dynamicGridFound = true;
             try {
                 XposedBridge.hookAllConstructors(dynamicGrid.clazz, new XC_MethodHook() { 
                     @Override
@@ -122,6 +149,10 @@ public class ModLauncher {
             }
 
             break;
+        }
+
+        if (!dynamicGridFound) {
+            log("Couldn't find dynamic grid. Incompatible Google Search?");
         }
 
         try {
@@ -165,8 +196,38 @@ public class ModLauncher {
                     protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                         if (mShouldShowAppDrawer) {
                             mShouldShowAppDrawer = false;
-                            XposedHelpers.callMethod(param.thisObject, "onClickAllAppsButton", 
-                                    new Class<?>[] { View.class }, (Object)null);
+                            Method m = null;
+                            for (ShowAllApps sapm : METHOD_SHOW_ALL_APPS) {
+                                try {
+                                    for (int i = 0; i < sapm.paramTypes.length; i++) {
+                                        if (sapm.paramTypes[i] instanceof String) {
+                                            sapm.paramTypes[i] = XposedHelpers.findClass(
+                                                (String) sapm.paramTypes[i], classLoader);
+                                        }
+                                        if (sapm.paramValues[i] instanceof String) {
+                                            sapm.paramValues[i] = XposedHelpers.getStaticObjectField(
+                                                (Class<?>) sapm.paramTypes[i],
+                                                (String) sapm.paramValues[i]);
+                                        }
+                                    }
+                                    Class<?> clazz = param.thisObject.getClass();
+                                    if (clazz.getName().equals(CLASS_LAUNCHER)) {
+                                        m = XposedHelpers.findMethodExact(clazz,
+                                                sapm.methodName, sapm.paramTypes);
+                                    } else if (clazz.getSuperclass().getName().equals(CLASS_LAUNCHER)) {
+                                        m = XposedHelpers.findMethodExact(clazz.getSuperclass(),
+                                                sapm.methodName, sapm.paramTypes);
+                                    }
+                                    m.setAccessible(true);
+                                    m.invoke(param.thisObject, sapm.paramValues);
+                                } catch (Throwable t) {
+                                    if (DEBUG) log("Method name " + sapm.methodName + 
+                                            " not found: " + t.getMessage());
+                                }
+                            }
+                            if (m == null) {
+                                log("Couldn't find method for opening app dawer. Incompatible Google Search?");
+                            }
                         }
                     }
                 });
