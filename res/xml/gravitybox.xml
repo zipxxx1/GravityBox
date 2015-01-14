@@ -960,6 +960,12 @@
                     android:defaultValue="@integer/COLOR_RED"
                     android:dependency="pref_battery_bar_dynacolor" />
 
+                <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                    android:key="pref_battery_bar_color_charging"
+                    android:title="@string/pref_battery_bar_color_charging_title"
+                    android:defaultValue="@integer/COLOR_GREEN"
+                    android:dependency="pref_battery_bar_dynacolor" />
+
             </PreferenceScreen>
 
         </PreferenceScreen>

@@ -1876,5 +1876,6 @@
     <string name="pref_battery_bar_color_low_title">Low battery color</string>
     <string name="pref_battery_bar_color_critical_title">Critical battery color</string>
     <string name="pref_battery_bar_centered_title">Centered</string>
+    <string name="pref_battery_bar_color_charging_title">Charging color</string>
 
 </resources>

@@ -58,6 +58,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     private int mColor;
     private int mColorLow;
     private int mColorCritical;
+    private int mColorCharging;
     private int mLevel;
     private boolean mCharging;
     private ObjectAnimator mChargingAnimator;
@@ -85,6 +86,7 @@ public class BatteryBarView extends View implements IconManagerListener,
         mColor = prefs.getInt(GravityBoxSettings.PREF_KEY_BATTERY_BAR_COLOR, Color.WHITE);
         mColorLow = prefs.getInt(GravityBoxSettings.PREF_KEY_BATTERY_BAR_COLOR_LOW, 0xffffa500);
         mColorCritical = prefs.getInt(GravityBoxSettings.PREF_KEY_BATTERY_BAR_COLOR_CRITICAL, Color.RED);
+        mColorCharging = prefs.getInt(GravityBoxSettings.PREF_KEY_BATTERY_BAR_COLOR_CHARGING, Color.GREEN);
         mCentered = prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_BAR_CENTERED, false);
 
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
@@ -153,7 +155,9 @@ public class BatteryBarView extends View implements IconManagerListener,
                 setBackgroundColor(Color.HSVToColor(0xff, new float[]{ hue, 1.f, 1.f }));
             } else {
                 int color = mColor;
-                if (mLevel <= 5) {
+                if (mCharging) {
+                    color = mColorCharging;
+                } else if (mLevel <= 5) {
                     color = mColorCritical;
                 } else if (mLevel <= 15) {
                     color = mColorLow;
@@ -288,6 +292,10 @@ public class BatteryBarView extends View implements IconManagerListener,
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BBAR_CENTERED)) {
                 mCentered = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BBAR_CENTERED, false);
                 setPivotX(mCentered ? getWidth()/2f : 0f);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BBAR_COLOR_CHARGING)) {
+                mColorCharging = intent.getIntExtra(GravityBoxSettings.EXTRA_BBAR_COLOR_CHARGING, Color.GREEN);
+                update();
             }
         }
     }
