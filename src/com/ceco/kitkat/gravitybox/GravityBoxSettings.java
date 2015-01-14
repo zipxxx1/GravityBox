@@ -830,6 +830,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_BATTERY_BAR_COLOR = "pref_battery_bar_color";
     public static final String PREF_KEY_BATTERY_BAR_COLOR_LOW = "pref_battery_bar_color_low";
     public static final String PREF_KEY_BATTERY_BAR_COLOR_CRITICAL = "pref_battery_bar_color_critical";
+    public static final String PREF_KEY_BATTERY_BAR_CENTERED = "pref_battery_bar_centered";
     public static final String ACTION_PREF_BATTERY_BAR_CHANGED = "gravitybox.intent.action.BATTERY_BAR_CHANGED";
     public static final String EXTRA_BBAR_SHOW = "batteryBarShow";
     public static final String EXTRA_BBAR_POSITION = "batteryBarPosition";
@@ -840,6 +841,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_BBAR_COLOR = "batteryBarColor";
     public static final String EXTRA_BBAR_COLOR_LOW = "batteryBarColorLow";
     public static final String EXTRA_BBAR_COLOR_CRITICAL = "batteryBarColorCritical";
+    public static final String EXTRA_BBAR_CENTERED = "batteryBarCentered";
 
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
@@ -3331,6 +3333,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_BATTERY_BAR_CHARGE_ANIM)) {
                 intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
                 intent.putExtra(EXTRA_BBAR_CHARGE_ANIM, prefs.getBoolean(key, true));
+            } else if (key.equals(PREF_KEY_BATTERY_BAR_CENTERED)) {
+                intent.setAction(ACTION_PREF_BATTERY_BAR_CHANGED);
+                intent.putExtra(EXTRA_BBAR_CENTERED, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

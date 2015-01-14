@@ -923,6 +923,12 @@
                     android:dependency="pref_battery_bar_show" />
 
                 <CheckBoxPreference 
+                    android:key="pref_battery_bar_centered"
+                    android:title="@string/pref_battery_bar_centered_title"
+                    android:defaultValue="false"
+                    android:dependency="pref_battery_bar_show" />
+
+                <CheckBoxPreference 
                     android:key="pref_battery_bar_charge_anim"
                     android:title="@string/pref_battery_bar_charge_anim_title"
                     android:defaultValue="false"
