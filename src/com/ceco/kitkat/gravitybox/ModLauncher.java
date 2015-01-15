@@ -80,8 +80,7 @@ public class ModLauncher {
         CLASS_DYNAMIC_GRID.put("rf", new DynamicGrid("DU", "AW", "AX"));
         CLASS_DYNAMIC_GRID.put("sg", new DynamicGrid("Ez", "BB", "BC"));
         CLASS_DYNAMIC_GRID.put("ur", new DynamicGrid("Gi", "Dg", "Dh"));
-        CLASS_DYNAMIC_GRID.put("wd", new DynamicGrid("vg", "Ce", "Cf"));
-        CLASS_DYNAMIC_GRID.put("wd", new DynamicGrid("Fe", "Cd", "Ce"));
+        CLASS_DYNAMIC_GRID.put("wd", new DynamicGrid("Fe", "Ce", "Cf"));
 
         METHOD_SHOW_ALL_APPS = new ArrayList<ShowAllApps>();
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("onClickAllAppsButton",
