@@ -1,3 +1,10 @@
+Changelog 3.5.2 - 15/01/2015
+--------------------------------------
+- Launcher tweaks: adjusted for Google Search 4.1.24
+- Battery bar:
+--- added option for centered bar
+--- added option for choosing charging color
+
 Changelog 3.5.1 - 12/01/2015
 --------------------------------------
 - Statusbar tweaks/Battery settings: added battery bar
