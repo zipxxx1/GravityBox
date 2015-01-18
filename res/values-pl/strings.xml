@@ -1840,5 +1840,7 @@
     <string name="pref_battery_bar_color_title">Kolor</string>
     <string name="pref_battery_bar_color_low_title">Kolor niskiego poziomu baterii</string>
     <string name="pref_battery_bar_color_critical_title">Kolor krytycznego poziomu baterii</string>
+    <string name="pref_battery_bar_centered_title">Wycentrowany</string>
+    <string name="pref_battery_bar_color_charging_title">Kolor ładowania</string>
 
 </resources>
