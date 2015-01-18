@@ -865,6 +865,7 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Texto de percentagem de bateria</string>
+    <string name="battery_percent_text_show_title">Mostrar texto de percentagem</string>
     <string name="battery_percent_text_size_title">Tamanho do tipo de letra da percentagem</string>
     <string name="battery_percent_text_size_larger">Grande</string>
     <string name="battery_percent_text_size_normal">Normal</string>
@@ -1701,5 +1702,42 @@
     <string name="pref_smart_radio_adaptive_delay_title">Atraso adaptativo</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Permite prolongar automaticamente o atraso, 
         caso o atual tráfego de dados móveis exceda o limite definido (definir como 0 para desativar)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Seguimento da barra de progresso</string>
+    <string name="pref_lc_progress_tracking_summary">Permite mostrar na barra de status a barra de progresso das notificações em andamento, sempre que estas a contenham
+        (requer ativação da barra de progresso de transferências)</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">Modo de exibição</string>
+    <string name="dt_display_mode_always">Sempre (quando a ligação de rede estiver disponível)</string>
+    <string name="dt_display_mode_dm">Apenas para gestor de transferências base do Android</string>
+    <string name="dt_display_mode_pt">Quando a barra de progresso estiver visível</string>
+
+    <!-- Unlock ring targets: custom unlock ring -->
+    <string name="pref_lockscreen_ring_custom_unlock_title">Alvo do anel de desbloqueio personalizado</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">Permite definir alvo do anel de desbloqueio manualmente.
+        Deverá ser garantido que pelo menos um dos alvos está configurado para ativar a acção de desbloqueio ou para iniciar alguma aplicação.</string>
+
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Prioridade Wi-Fi</string>
+    <string name="pref_wifi_priority_summary">Permite especificar a prioridade das redes Wi-Fi</string>
+
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">Barra de bateria</string>
+    <string name="pref_battery_bar_show_title">Mostrar barra de bateria</string>
+    <string name="pref_battery_bar_position_title">Posição</string>
+    <string name="bbar_position_top">Borda superior</string>
+    <string name="bbar_position_bottom">Borda inferior</string>
+    <string name="pref_battery_bar_margin_title">Margem da borda</string>
+    <string name="pref_battery_bar_thickness_title">Espessura</string>
+    <string name="pref_battery_bar_charge_anim_title">Animação durante carga</string>
+    <string name="pref_battery_bar_dynacolor_title">Coloração dinâmica</string>
+    <string name="pref_battery_bar_dynacolor_summary">Determina automaticamente a cor a partir do atual nível de bateria</string>
+    <string name="pref_battery_bar_color_title">Cor</string>
+    <string name="pref_battery_bar_color_low_title">Cor para nível de bateria baixo</string>
+    <string name="pref_battery_bar_color_critical_title">Cor para nível de bateria crítico</string>
+    <string name="pref_battery_bar_centered_title">Centrado</string>
+    <string name="pref_battery_bar_color_charging_title">Cor durante carga</string>
 
 </resources>
