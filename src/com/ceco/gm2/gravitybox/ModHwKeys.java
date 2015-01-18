@@ -1546,7 +1546,8 @@ public class ModHwKeys {
     private static void expandNotificationsPanel() {
         try {
             final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService"); 
-            XposedHelpers.callMethod(sbService, "expandNotificationsPanel");
+            XposedHelpers.callMethod(sbService, Build.VERSION.SDK_INT > 16 ? "expandNotificationsPanel" :
+                "expand");
         } catch (Throwable t) {
             log("Error executing expandNotificationsPanel(): " + t.getMessage());
         }

@@ -464,8 +464,7 @@ public class ModLedControl {
         } else {
             final WakeLock wl = mPm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
                     PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, TAG);
-            wl.acquire();
-            wl.release();
+            wl.acquire(10000);
         }
     }
 
