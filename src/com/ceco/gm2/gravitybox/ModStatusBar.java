@@ -352,10 +352,11 @@ public class ModStatusBar {
                     }
                     mBroadcastSubReceivers.add(mClock);
                     // find notification panel clock
-                    String panelHolderId = Build.VERSION.SDK_INT > 16 ?
-                            "panel_holder" : "notification_panel";
-                    final ViewGroup panelHolder = (ViewGroup) mStatusBarView.findViewById(
-                            res.getIdentifier(panelHolderId, "id", PACKAGE_NAME));
+                    final ViewGroup panelHolder = Build.VERSION.SDK_INT > 16 ?
+                            (ViewGroup) mStatusBarView.findViewById(
+                            res.getIdentifier("panel_holder", "id", PACKAGE_NAME)) :
+                                (ViewGroup) XposedHelpers.getObjectField(
+                                        mPhoneStatusBar, "mNotificationPanel");
                     if (panelHolder != null) {
                         TextView clockExpanded = (TextView) panelHolder.findViewById(
                                 res.getIdentifier("clock", "id", PACKAGE_NAME));
@@ -1382,7 +1383,8 @@ public class ModStatusBar {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mContext.startActivity(intent);
                 if (mPhoneStatusBar != null) {
-                    XposedHelpers.callMethod(mPhoneStatusBar, "animateCollapsePanels");
+                    XposedHelpers.callMethod(mPhoneStatusBar, Build.VERSION.SDK_INT > 16 ?
+                            "animateCollapsePanels" : "animateCollapse");
                 }
             }
         } catch (ActivityNotFoundException e) {
