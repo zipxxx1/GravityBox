@@ -1875,5 +1875,7 @@
     <string name="pref_battery_bar_color_title">Couleur</string>
     <string name="pref_battery_bar_color_low_title">Couleur pour batterie faible</string>
     <string name="pref_battery_bar_color_critical_title">Couleur pour batterie critique</string>
+    <string name="pref_battery_bar_centered_title">Centrée</string>
+    <string name="pref_battery_bar_color_charging_title">Couleur en chargement</string>
 
 </resources>
