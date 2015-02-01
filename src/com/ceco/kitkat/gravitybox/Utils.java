@@ -87,20 +87,6 @@ public class Utils {
     private static Boolean mHasCompass;
     private static Boolean mHasProximitySensor = null;
 
-    // Supported MTK devices
-    private static final Set<String> MTK_DEVICES = new HashSet<String>(Arrays.asList(
-        new String[] {
-                // Single-core SoC
-                "mt6575",
-                // Dual-core SoC
-                "mt6572", "mt6577", "mt8377",
-                // Quad-core SoC
-                "mt6582", "mt6589", "mt8389", "mt8121",
-                // Octa-core SoC
-                "mt6592", "mt6595"
-        }
-    ));
-
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
@@ -153,7 +139,7 @@ public class Utils {
     public static boolean isMtkDevice() {
         if (mIsMtkDevice != null) return mIsMtkDevice;
 
-        mIsMtkDevice = MTK_DEVICES.contains(Build.HARDWARE.toLowerCase()) &&
+        mIsMtkDevice = Build.HARDWARE.toLowerCase().matches("^mt[68][1-9][1-9][1-9]$") &&
                 !isMotoXtDevice();
         return mIsMtkDevice;
     }
