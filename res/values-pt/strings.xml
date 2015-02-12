@@ -14,7 +14,7 @@
     <string name="vol_music_controls_title">Teclas de volume trocam de faixa</string>
     <string name="vol_music_controls_summary">Teclas de volume trocam de faixa após pressionar e segurar com a tela desligada</string>
 
-    <string name="low_battery_warning_policy_title">Aviso de baixa bateria</string>
+    <string name="low_battery_warning_policy_title">Aviso de bateria fraca</string>
     <string name="low_battery_warning_full">Sons e \"Pop-up\"</string>
     <string name="low_battery_warning_popup">Somente \"Pop-up\"</string>
     <string name="low_battery_warning_sound">Somente sons</string>
@@ -23,7 +23,7 @@
     <string name="reboot_required">As mudanças serão aplicadas após reiniciar o dispositivo.</string>
 
     <string name="poweroff_advanced_title">Menu de Desligar avançado</string>
-    <string name="poweroff_advanced_summary">Adiciona opções para reiniciar em modo de recuperação ao menu de desligar</string>
+    <string name="poweroff_advanced_summary">Adiciona opções para reiniciar em modo de recuperação e em modo bootloader ao menu de desligar</string>
     <string name="poweroff_recovery">Recuperação</string>
     <string name="poweroff_bootloader">Bootloader</string>
 
@@ -61,8 +61,8 @@
     <string name="quick_settings_nfc_off">NFC desativado</string>
     <string name="quick_settings_camera_error_connect">Não foi possível conectar-se à câmera</string>
     <string name="quick_settings_usb_tether_off">Desligado</string>
-    <string name="quick_settings_usb_tether_connected">Associação desativada</string>
-    <string name="quick_settings_usb_tether_on">Associação ativada</string>
+    <string name="quick_settings_usb_tether_connected">Tethering USB desativado</string>
+    <string name="quick_settings_usb_tether_on">Tethering USB ativado</string>
     <string name="quick_settings_music_play">Tocar</string>
     <string name="quick_settings_music_pause">Pausa</string>
     <string name="quick_settings_smart_radio_on">Rádio inteligente ativado</string>
@@ -98,12 +98,12 @@
     <string name="qs_tile_quickrecord">Gravação rápida</string>
     <string name="qs_tile_settings">Configurações</string>
     <string name="qs_tile_volume">Volume</string>
-    <string name="qs_tile_expanded_desktop">Desktop expandido</string>
+    <string name="qs_tile_expanded_desktop">Área de trabalho expandida</string>
     <string name="qs_tile_stay_awake">Manter ligado</string>
     <string name="qs_tile_screenshot">Captura de tela</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Câmera</string>
-    <string name="qs_tile_usb_tethering">Associação USB</string>
+    <string name="qs_tile_usb_tethering">Tethering USB</string>
     <string name="qs_tile_music">Música</string>
     <string name="qs_tile_smart_radio">Rádio inteligente</string>
     <string name="qs_tile_alarm">Alarme</string>
@@ -154,11 +154,11 @@
     <string name="pref_lockscreen_background_title">Estilo do fundo</string>
     <string name="lockscreen_bg_default">Papel de parede padrão</string>
     <string name="lockscreen_bg_color">Cor sólida</string>
-    <string name="lockscreen_bg_image">Imagem customizada</string>
+    <string name="lockscreen_bg_image">Imagem personalizada</string>
     <string name="pref_lockscreen_bg_color_title">Escolha a cor</string>
-    <string name="pref_lockscreen_bg_color_summary">Permite escolher uma cor customizada para a tela de bloqueio</string>
+    <string name="pref_lockscreen_bg_color_summary">Permite escolher uma cor personalizada para a tela de bloqueio</string>
     <string name="pref_lockscreen_bg_image_title">Escolha uma imagem</string>
-    <string name="pref_lockscreen_bg_image_summary">Permite escolher uma imagem customizada para a tela de bloqueio</string>
+    <string name="pref_lockscreen_bg_image_summary">Permite escolher uma imagem personalizada para a tela de bloqueio</string>
     <string name="lockscreen_background_result_successful">Fundo alterado</string>
     <string name="lockscreen_background_result_not_successful">Fundo não alterado</string>
     <string name="pref_cat_lockscreen_other_title">Outros</string>
@@ -238,7 +238,7 @@
     <string name="pref_hwkey_doubletap_speed_summary">Define o quão rápido a tecla deve ser pressionada para disparar o toque duplo</string>
     <string name="app_killed">%s morto</string>
     <string name="nothing_to_kill">Não há nada para matar</string>
-    <string name="no_previous_app_found">Aplicativo anterior não encontrado</string>
+    <string name="no_previous_app_found">Nenhum aplicativo anterior</string>
 
     <!--  Phone tweaks category -->
     <string name="pref_cat_phone_title">Ajustes de telefone</string>
@@ -283,7 +283,7 @@
 
     <!-- Quick pulldown -->
     <string name="pref_quick_pulldown_title">Deslize rápido para baixo</string>
-    <string name="pref_quick_pulldown_summary">A borda da barra de status puxa abaixo as configurações rápidas</string>
+    <string name="pref_quick_pulldown_summary">A borda da barra de status puxa para baixo as configurações rápidas</string>
     <string name="quick_pulldown_off">Desabilitado</string>
     <string name="quick_pulldown_right">Direita</string>
     <string name="quick_pulldown_left">Esquerda</string>
@@ -599,10 +599,10 @@
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> livre</string>
     <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
     <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> usada</string>
-    <string name="pref_rambar_title">Indicação RAM nos aplicativos recentes</string>
+    <string name="pref_rambar_title">Indicação de RAM nos aplicativos recentes</string>
     <string name="rambar_off">Desabilitado</string>
-    <string name="rambar_top">Topo superior</string>
-    <string name="rambar_bottom">Topo inferior</string>
+    <string name="rambar_top">pParte superior</string>
+    <string name="rambar_bottom">Parte inferior</string>
 
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Ação do clique simples na tecla de Aplicativos recentes</string>
@@ -610,7 +610,7 @@
 
     <!-- Lockscreen battery arc -->
     <string name="pref_lockscreen_battery_arc_title">Mostrar arco de bateria</string>
-    <string name="pref_lockscreen_battery_arc_summary">Permite mostrar o estado da bateria em forma de arco desenhado em torno do anel de desbloqueio</string>
+    <string name="pref_lockscreen_battery_arc_summary">Permite mostrar o nível de bateria em forma de arco desenhado em torno do anel de desbloqueio</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Alternar lanterna</string>
@@ -635,7 +635,7 @@
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">Modo de cor do sinal</string>
     <string name="signal_color_mode_gb">Usar ícones do GravityBox (com suporte a indicadores de nível de sinal)</string>
-    <string name="signal_color_mode_stock">Usar ícones padrões (Sem suporte a indicadores de nível de sinal)</string>
+    <string name="signal_color_mode_stock">Usar ícones padrão (sem suporte a indicadores de nível de sinal)</string>
     <string name="signal_color_mode_disabled">Não aplicar cor</string>
 
     <!-- Application launcher -->
@@ -1060,11 +1060,11 @@
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">Backup das configurações</string>
     <string name="pref_settings_restore_title">Restaurar configurações</string>
-    <string name="settings_backup_failed">Falha ao guardar configurações</string>
+    <string name="settings_backup_failed">Falha ao salvar as configurações</string>
     <string name="settings_backup_no_prefs">Arquivo de preferências não encontrado.</string>
     <string name="settings_backup_success">Backup feito com sucesso</string>
     <string name="settings_restore_no_backup">Não existem configurações salvas para restaurar</string>
-    <string name="settings_restore_confirm">As preferências atuais serão substituídas. Tem certeza?</string>
+    <string name="settings_restore_confirm">As configurações atuais serão substituídas. Tem certeza?</string>
     <string name="settings_restore_failed">Falha ao restaurar configurações</string>
     <string name="settings_restore_success">Configurações restauradas com sucesso</string>
     <string name="settings_restore_reboot">Por favor, reinicie seu dispositivo.</string>
@@ -1262,7 +1262,7 @@
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Usar o binário padrão</string>
-    <string name="pref_screenrecord_use_stock_summary">Quando ativado, o binário padrão de gravação da tela é usado para efetuar gravações. 
+    <string name="pref_screenrecord_use_stock_summary">Quando ativado, o binário padrão de gravação de tela é usado para efetuar gravações. 
         Usar caso o binário alternativo cause problemas. Note que o binário padrão não suporta gravação com áudio nem gravações com mais de 3 minutos.</string>
 
     <!-- Clock settings master switch -->
@@ -1365,7 +1365,7 @@
     <string name="pref_lockscreen_show_pattern_error_summary">Permite mostrar um rastro vermelho quando a sequência é introduzida incorretamente</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">Esta funcionalidade está em modo de teste. Se a considerar útil pode continuar usando-a assim que desbloquear as funcionalidades avançadas. 
+    <string name="trial_info">Esta funcionalidade está em modo de teste. Se a considerar útil você pode continuar usando-a assim que desbloquear as funcionalidades avançadas. 
         O período de teste termina após reiniciar %d vezes.</string>
 
     <!-- Navbar: disable camera icon -->
@@ -1373,10 +1373,10 @@
     <string name="pref_navbar_camera_key_disable_summary">Permite desativar o ícone da câmera presente na tela de bloqueio</string>
 
     <!-- Notification control: default settings -->
-    <string name="lc_activity_menu_default_settings">Definições padrão</string>
+    <string name="lc_activity_menu_default_settings">Configurações padrão</string>
     <string name="pref_lc_default_settings_summary">Quando ativado, as configurações padrão são aplicadas automaticamente a todos os aplicativos que não tenham uma configuração explicita</string>
-    <string name="lc_defaults_apply">Definições padrão aplicáveis</string>
-    <string name="lc_settings_menu_reset">Repôr definições de origem</string>
+    <string name="lc_defaults_apply">Configurações padrão aplicáveis</string>
+    <string name="lc_settings_menu_reset">Redefinir para as configurações padrão</string>
 
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Tela ligada</string>
@@ -1425,7 +1425,7 @@
     <string name="pref_volume_panel_transparency_title">Transparência do painel de volume</string>
 
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">Nome da operadora secundário personalizado</string>
+    <string name="pref_lockscreen_carrier2_text_title">Nome da operadora secundária personalizado</string>
 
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">Ignorar horas de silêncio</string>
@@ -1602,7 +1602,7 @@
     <string name="pref_cat_lc_heads_up_title">Notificações flutuantes (Heads up)</string>
     <string name="pref_lc_headsup_expanded_title">Mostrar notificações expandidas</string>
     <string name="pref_lc_headsup_dnd_title">Não incomodar</string>
-    <string name="pref_lc_headsup_dnd_summary">Permite com que nenhuma notificação flutuante seja mostrada enquanto o aplicativo estiver em primeiro plano</string>
+    <string name="pref_lc_headsup_dnd_summary">Faz com que nenhuma notificação flutuante seja mostrada enquanto o aplicativo estiver em primeiro plano</string>
 
     <!-- Navbar keys: enable Android L icons -->
     <string name="pref_navbar_android_l_icons_enable_title">Ativar barra de navegação do Lollipop</string>
@@ -1652,7 +1652,7 @@
     <string name="pref_heads_up_alpha_title">Nível de transparência</string>
 
     <!-- Charger unplugged sound -->
-    <string name="pref_charger_unplugged_sound_title">Som ao desligar carregador</string>
+    <string name="pref_charger_unplugged_sound_title">Som ao desconectar carregador</string>
 
     <!-- Fake ID patch -->
     <string name="pref_patch_fake_id_title">Corrigir vulnerabilidade "Fake ID"</string>
@@ -1671,7 +1671,7 @@
     <string name="pref_mtk_fix_dev_opts_summary">Desbloqueia as opções de programador avançadas nas configurações (necessário reiniciar)</string>
 
     <!-- MTK Fix speech settings -->
-    <string name="pref_mtk_fix_tts_settings_title">Desbloquear definições de voz</string>
+    <string name="pref_mtk_fix_tts_settings_title">Desbloquear configurações de voz</string>
     <string name="pref_mtk_fix_tts_settings_summary">Desbloqueia pesquisa por voz e configurações de texto para voz nas configurações (necessário reiniciar)</string>
 
     <!-- ImagePicker -->
@@ -1746,16 +1746,16 @@
     
     <!-- QS: network mode tile 2g+3g mode -->
     <string name="pref_network_mode_tile_2g3g_mode_title">Modo 2G+3G</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferêncial (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Automático (2G/3G)</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA (preferir WCDMA) (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA automático (2G/3G)</string>
     
     <!-- Power menu: expanded desktop in power menu -->
-    <string name="pref_powermenu_expanded_desktop_title">Área de trabalho expandido no Menu Desligar</string>
-    <string name="pref_powermenu_expanded_desktop_summary">Deverá ser grantido que existe um método alternativo para desativar à área de trabalho expandido!!!</string>
+    <string name="pref_powermenu_expanded_desktop_title">Área de trabalho expandida no Menu Desligar</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Certifique-se de que existe um método alternativo para desativar a área de trabalho expandida!!!</string>
 
     <!-- UNC HeadsUp: ignore for updated notification -->
     <string name="pref_lc_headsup_ignore_update_title">Ignorar atualizações</string>
-    <string name="pref_lc_headsup_ignore_update_summary">Não será exibido notificações flutuantes (heads-up) quando a notificação existente é atualizado</string>
+    <string name="pref_lc_headsup_ignore_update_summary">Não serão exibidas notificações flutuantes (heads-up) quando a notificação existente é atualizada</string>
     
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">Configurações bloco Gravação Rápida</string>
@@ -1764,7 +1764,7 @@
     <string name="qr_audio_quality_medium">Médio (22kHz)</string>
     <string name="qr_audio_quality_high">Alto (44kHz)</string>
     <string name="pref_quickrecord_autostop_title">Parar a gravação automática</string>
-    <string name="pref_quickrecord_autostop_summary">Interrompe a gravação automaticamente após definir o tempo. Defina como 0 para desativar.</string>
+    <string name="pref_quickrecord_autostop_summary">Interrompe a gravação automaticamente após o tempo determinado. Defina como 0 para desativar.</string>
 
     <!-- Clear notifications shortcut -->
     <string name="shortcut_clear_notifications">Limpar notificações</string>
@@ -1823,7 +1823,7 @@ se o tráfego de dados móveis atual excede limite definido (Ajuste para 0 para 
 
     <!-- Unlock ring targets: custom unlock ring -->
     <string name="pref_lockscreen_ring_custom_unlock_title">Destino de desbloqueio Personalizado</string>
-    <string name="pref_lockscreen_ring_custom_unlock_summary">Permite definir Destino desbloquear manualmente. Certifique-se de que pelo menos um dos alvos do anel seja definido como usar a ação GravityBox Unlock ou para iniciar algum aplicativo.</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">Permite definir o destino de desbloqueio manualmente. Certifique-se de que pelo menos um dos alvos do anel seja definido como usar a ação GravityBox Unlock ou para iniciar algum aplicativo.</string>
 
     <!-- Wi-Fi priority -->
     <string name="pref_wifi_priority_title">Prioridade Wi-Fi</string>
