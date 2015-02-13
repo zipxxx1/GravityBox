@@ -519,8 +519,7 @@ public class ModLockscreen {
                                 newIntent.putExtras(appInfo.intent);
                                 mGlowPadView.getContext().sendBroadcast(newIntent);
                             }
-                            XposedHelpers.setIntField(mGlowPadView, "mActiveTarget", -1);
-                            XposedHelpers.callMethod(mGlowPadView, "doFinish");
+                            XposedHelpers.callMethod(mGlowPadView, "reset", true);
                         // if intent is a GB Unlock shortcut
                         } else if (ShortcutActivity.isGbUnlockShortcut(appInfo.intent)) {
                             final Object callback = XposedHelpers.getObjectField(
