@@ -1531,7 +1531,7 @@
     <!-- QS: Compass tile -->
     <string name="qs_tile_compass">Bússola</string>
     <string name="quick_settings_compass_off">Bússola desativada</string>
-    <string name="quick_settings_compass_init"Inicializando&#8230;</string>
+    <string name="quick_settings_compass_init">Inicializando&#8230;</string>
 
     <!-- Cardinal directions -->
     <string name="cd_north">N</string>
