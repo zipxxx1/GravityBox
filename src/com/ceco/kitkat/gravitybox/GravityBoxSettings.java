@@ -1356,6 +1356,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefSrAdaptiveDelay;
         private PreferenceScreen mPrefCatLsRingSettings;
         private ListPreference mPrefBbarPosition;
+        private ListPreference mPrefSbdpMode;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1690,6 +1691,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSrAdaptiveDelay = (SeekBarPreference) findPreference(PREF_KEY_SMART_RADIO_ADAPTIVE_DELAY);
 
             mPrefBbarPosition = (ListPreference) findPreference(PREF_KEY_BATTERY_BAR_POSITION);
+
+            mPrefSbdpMode = (ListPreference) findPreference(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS);
 
             // MTK fixes
             mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
@@ -2524,6 +2527,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_BATTERY_BAR_POSITION)) {
                 mPrefBbarPosition.setSummary(mPrefBbarPosition.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS)) {
+                mPrefSbdpMode.setSummary(mPrefSbdpMode.getEntry());
             }
 
             for (String caKey : customAppKeys) {
