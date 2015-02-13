@@ -1157,6 +1157,16 @@
                 android:defaultValue="OFF" />
 
             <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+                android:key="pref_statusbar_download_progress_margin"
+                android:title="@string/pref_statusbar_download_progress_margin_title"
+                minimum="0"
+                maximum="3"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="px"
+                android:defaultValue="0" />
+
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
                 android:key="pref_statusbar_download_progress_thickness"
                 android:title="@string/pref_statusbar_download_progress_thickness_title"
                 minimum="1"
