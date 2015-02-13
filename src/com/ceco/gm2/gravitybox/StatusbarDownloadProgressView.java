@@ -39,7 +39,6 @@ import android.os.Parcelable;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RemoteViews;
 
@@ -91,8 +90,11 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
 
         int heightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1,
                 context.getResources().getDisplayMetrics());
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(0, heightPx);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, heightPx);
         setLayoutParams(lp);
+        setPivotX(0f);
+        setScaleX(0f);
         setBackgroundColor(Color.WHITE);
         setVisibility(View.GONE);
         updatePosition();
@@ -244,17 +246,14 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     }
 
     private void updateProgress(Object statusBarNotif) {
-        int maxWidth = ((View) getParent()).getWidth();
-        int newWidth = 0;
+        float newScaleX = 0;
         if (statusBarNotif != null) {
             Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
-            newWidth = (int) ((float)maxWidth * getProgressInfo(n).getFraction());
+            newScaleX = getProgressInfo(n).getFraction();
         }
-        if (DEBUG) log("updateProgress: maxWidth=" + maxWidth + "; newWidth=" + newWidth);
-        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) getLayoutParams();
-        lp.width = newWidth;
-        setLayoutParams(lp);
-        setVisibility(newWidth > 0 ? View.VISIBLE : View.GONE);
+        if (DEBUG) log("updateProgress: newScaleX=" + newScaleX);
+        setScaleX(newScaleX);
+        setVisibility(newScaleX > 0 ? View.VISIBLE : View.GONE);
     }
 
     private ProgressInfo getProgressInfo(Notification n) {
