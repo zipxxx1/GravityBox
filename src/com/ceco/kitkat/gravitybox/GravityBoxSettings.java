@@ -324,6 +324,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_CAT_HWKEY_ACTIONS = "pref_cat_hwkey_actions";
     public static final String PREF_CAT_HWKEY_MENU = "pref_cat_hwkey_menu";
+    public static final String PREF_KEY_HWKEY_MENU_SINGLETAP = "pref_hwkey_menu_singletap";
     public static final String PREF_KEY_HWKEY_MENU_LONGPRESS = "pref_hwkey_menu_longpress";
     public static final String PREF_KEY_HWKEY_MENU_DOUBLETAP = "pref_hwkey_menu_doubletap";
     public static final String PREF_CAT_HWKEY_HOME = "pref_cat_hwkey_home";
@@ -904,6 +905,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
+            PREF_KEY_HWKEY_MENU_SINGLETAP,
             PREF_KEY_HWKEY_MENU_LONGPRESS,
             PREF_KEY_HWKEY_MENU_DOUBLETAP,
             PREF_KEY_HWKEY_HOME_LONGPRESS,
@@ -1189,6 +1191,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private File notifBgImageLandscape;
         private PreferenceScreen mPrefCatHwKeyActions;
         private PreferenceCategory mPrefCatHwKeyMenu;
+        private ListPreference mPrefHwKeyMenuSingletap;
         private ListPreference mPrefHwKeyMenuLongpress;
         private ListPreference mPrefHwKeyMenuDoubletap;
         private PreferenceCategory mPrefCatHwKeyHome;
@@ -1443,6 +1446,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCatHwKeyActions = (PreferenceScreen) findPreference(PREF_CAT_HWKEY_ACTIONS);
             mPrefCatHwKeyMenu = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_MENU);
+            mPrefHwKeyMenuSingletap = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_SINGLETAP);
             mPrefHwKeyMenuLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_LONGPRESS);
             mPrefHwKeyMenuDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_MENU_DOUBLETAP);
             mPrefCatHwKeyHome = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_HOME);
@@ -1951,6 +1955,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             CharSequence[] actionEntries = actEntries.toArray(new CharSequence[actEntries.size()]);
             CharSequence[] actionEntryValues = actEntryValues.toArray(new CharSequence[actEntryValues.size()]);
+            mPrefHwKeyMenuSingletap.setEntries(actionEntries);
+            mPrefHwKeyMenuSingletap.setEntryValues(actionEntryValues);
             mPrefHwKeyMenuLongpress.setEntries(actionEntries);
             mPrefHwKeyMenuLongpress.setEntryValues(actionEntryValues);
             // other preferences have the exact same entries and entry values
@@ -2735,6 +2741,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_SAFE_MEDIA_VOLUME_CHANGED);
                 intent.putExtra(EXTRA_SAFE_MEDIA_VOLUME_ENABLED,
                         prefs.getBoolean(PREF_KEY_SAFE_MEDIA_VOLUME, false));
+            } else if (key.equals(PREF_KEY_HWKEY_MENU_SINGLETAP)) {
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
+                        prefs.getString(PREF_KEY_HWKEY_MENU_SINGLETAP, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_MENU_LONGPRESS)) {
                 intent.setAction(ACTION_PREF_HWKEY_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_KEY, key);

@@ -2160,7 +2160,13 @@
         <PreferenceCategory
             android:key="pref_cat_hwkey_menu"
             android:title="@string/pref_cat_hwkey_menu_title">
-            
+
+           <ListPreference
+                android:key="pref_hwkey_menu_singletap"
+                android:title="@string/pref_hwkey_singletap_title"
+                android:dialogTitle="@string/hwkey_menu_singletap_dialog_title"
+                android:defaultValue="0"/>
+
             <ListPreference
                 android:key="pref_hwkey_menu_longpress"
                 android:title="@string/pref_hwkey_longpress_title"

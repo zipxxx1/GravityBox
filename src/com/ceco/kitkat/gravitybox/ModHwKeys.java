@@ -121,6 +121,7 @@ public class ModHwKeys {
     private static String mStrAutoRotationDisabled;
     private static boolean mIsMenuLongPressed = false;
     private static boolean mIsMenuDoubleTap = false;
+    private static boolean mWasMenuDoubleTap = false;
     private static boolean mIsBackLongPressed = false;
     private static boolean mIsBackDoubleTap = false;
     private static boolean mWasBackDoubleTap = false;
@@ -170,6 +171,7 @@ public class ModHwKeys {
     }
 
     private static enum HwKeyTrigger {
+        MENU_SINGLETAP,
         MENU_LONGPRESS,
         MENU_DOUBLETAP,
         HOME_LONGPRESS,
@@ -210,7 +212,10 @@ public class ModHwKeys {
             String customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
 
             if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED)) {
-                if (GravityBoxSettings.PREF_KEY_HWKEY_MENU_LONGPRESS.equals(key)) {
+                if (GravityBoxSettings.PREF_KEY_HWKEY_MENU_SINGLETAP.equals(key)) {
+                    setActionFor(HwKeyTrigger.MENU_SINGLETAP, value, customApp);
+                    if (DEBUG) log("Menu singletap action set to: " + value);
+                } else if (GravityBoxSettings.PREF_KEY_HWKEY_MENU_LONGPRESS.equals(key)) {
                     setActionFor(HwKeyTrigger.MENU_LONGPRESS, value, customApp);
                     if (DEBUG) log("Menu long-press action set to: " + value);
                 } else if (GravityBoxSettings.PREF_KEY_HWKEY_MENU_DOUBLETAP.equals(key)) {
@@ -377,6 +382,7 @@ public class ModHwKeys {
             mPrefs = prefs;
 
             Map<HwKeyTrigger, HwKeyAction> map = new HashMap<HwKeyTrigger, HwKeyAction>();
+            map.put(HwKeyTrigger.MENU_SINGLETAP, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.MENU_DOUBLETAP, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.MENU_LONGPRESS, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.HOME_LONGPRESS, new HwKeyAction(0, null));
@@ -391,6 +397,9 @@ public class ModHwKeys {
             mHwKeyActions = Collections.unmodifiableMap(map);
 
             try {
+                setActionFor(HwKeyTrigger.MENU_SINGLETAP, Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_MENU_SINGLETAP, "0")), 
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_MENU_SINGLETAP+"_custom", null));
                 setActionFor(HwKeyTrigger.MENU_LONGPRESS, Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_MENU_LONGPRESS, "0")), 
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_MENU_LONGPRESS+"_custom", null));
@@ -617,54 +626,47 @@ public class ModHwKeys {
                             mHandler.removeCallbacks(mMenuLongPress);
                             if (mIsMenuLongPressed) {
                                 mIsMenuLongPressed = false;
-                                param.setResult(-1);
-                                return;
-                            }
-                            if (event.getRepeatCount() == 0) {
+                            } else if (event.getRepeatCount() == 0) {
                                 if (!areHwKeysEnabled()) {
                                     if (DEBUG) log("MENU KeyEvent coming from HW key and keys disabled. Ignoring.");
-                                    param.setResult(-1);
-                                    return;
                                 } else if (mIsMenuDoubleTap) {
                                     // we are still waiting for double-tap
                                     if (DEBUG) log("MENU doubletap pending. Ignoring.");
-                                    param.setResult(-1);
-                                    return;
+                                } else if (!mWasMenuDoubleTap && !event.isCanceled()) {
+                                    if (getActionFor(HwKeyTrigger.MENU_SINGLETAP).actionId != 
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                        performAction(HwKeyTrigger.MENU_SINGLETAP);
+                                    } else {
+                                        if (DEBUG) log("Triggering original DOWN/UP events for MENU key");
+                                        injectKey(KeyEvent.KEYCODE_MENU);
+                                    }
                                 }
                             }
-                        } else {
-                            if (event.getRepeatCount() == 0) {
-                                mMenuKeyPressed = true;
-                                if (mIsMenuDoubleTap) {
-                                    performAction(HwKeyTrigger.MENU_DOUBLETAP);
-                                    mHandler.removeCallbacks(mMenuDoubleTapReset);
-                                    mIsMenuDoubleTap = false;
-                                    param.setResult(-1);
-                                    return;
-                                } else {
-                                    mIsMenuLongPressed = false;
-                                    mIsMenuDoubleTap = false;
-                                    if (getActionFor(HwKeyTrigger.MENU_DOUBLETAP).actionId != 
-                                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                        mIsMenuDoubleTap = true;
-                                        mHandler.postDelayed(mMenuDoubleTapReset, mDoubletapSpeed);
-                                        param.setResult(-1);
-                                    }
-                                    if (getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId != 
-                                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                        mHandler.postDelayed(mMenuLongPress, 
-                                                getLongpressTimeoutForAction(
-                                                        getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId));
-                                    }
-                                }
+                        } else if (event.getRepeatCount() == 0) {
+                            mMenuKeyPressed = true;
+                            mWasMenuDoubleTap = mIsMenuDoubleTap;
+                            if (mIsMenuDoubleTap) {
+                                performAction(HwKeyTrigger.MENU_DOUBLETAP);
+                                mHandler.removeCallbacks(mMenuDoubleTapReset);
+                                mIsMenuDoubleTap = false;
                             } else {
+                                mIsMenuLongPressed = false;
+                                mIsMenuDoubleTap = false;
+                                if (getActionFor(HwKeyTrigger.MENU_DOUBLETAP).actionId != 
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    mIsMenuDoubleTap = true;
+                                    mHandler.postDelayed(mMenuDoubleTapReset, mDoubletapSpeed);
+                                }
                                 if (getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId != 
                                         GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                    param.setResult(-1);
+                                    mHandler.postDelayed(mMenuLongPress, 
+                                            getLongpressTimeoutForAction(
+                                                    getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId));
                                 }
-                                return;
                             }
                         }
+                        param.setResult(-1);
+                        return;
                     }
 
                     if (keyCode == KeyEvent.KEYCODE_BACK && isFromSystem &&
@@ -949,8 +951,14 @@ public class ModHwKeys {
             // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
             // for long-press action
             if (!mMenuKeyPressed && areHwKeysEnabled()) {
-                if (DEBUG) log("MENU key double tap timed out and key not pressed; injecting MENU key");
-                injectKey(KeyEvent.KEYCODE_MENU);
+                if (getActionFor(HwKeyTrigger.MENU_SINGLETAP).actionId != 
+                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                    if (DEBUG) log("MENU key double tap timed out and key not pressed; performing singletap action");
+                    performAction(HwKeyTrigger.MENU_SINGLETAP);
+                } else {
+                    if (DEBUG) log("MENU key double tap timed out and key not pressed; injecting MENU key");
+                    injectKey(KeyEvent.KEYCODE_MENU);
+                }
             }
         }
     };
@@ -1052,6 +1060,7 @@ public class ModHwKeys {
     private static boolean hasAction(HwKey key) {
         boolean retVal = false;
         if (key == HwKey.MENU) {
+            retVal |= getActionFor(HwKeyTrigger.MENU_SINGLETAP).actionId != GravityBoxSettings.HWKEY_ACTION_DEFAULT;
             retVal |= getActionFor(HwKeyTrigger.MENU_LONGPRESS).actionId != GravityBoxSettings.HWKEY_ACTION_DEFAULT;
             retVal |= getActionFor(HwKeyTrigger.MENU_DOUBLETAP).actionId != GravityBoxSettings.HWKEY_ACTION_DEFAULT;
         } else if (key == HwKey.HOME) {
