@@ -1485,5 +1485,6 @@ Dưới đây là công-tắc tổng. Sau khi bật, bạn có thể tuỳ chỉ
     <!-- Status bar: progress bar -->
     <string name="pref_statusbar_download_progress_mode_title">Chế độ</string>
     <string name="pref_statusbar_download_progress_animated_title">Hoạt ảnh</string>
+    <string name="pref_statusbar_download_progress_centered_title">Giữa</string>
 
 </resources>

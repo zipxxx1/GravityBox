@@ -1850,5 +1850,6 @@
     <!-- Status bar: progress bar -->
     <string name="pref_statusbar_download_progress_mode_title">Üzemmód</string>
     <string name="pref_statusbar_download_progress_animated_title">Animált</string>
+    <string name="pref_statusbar_download_progress_centered_title">Középre igazítva</string>
 
 </resources>

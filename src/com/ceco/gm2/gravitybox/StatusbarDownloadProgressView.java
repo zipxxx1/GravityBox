@@ -84,6 +84,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private List<ProgressStateListener> mListeners;
     private boolean mAnimated;
     private ObjectAnimator mAnimator;
+    private boolean mCentered;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -94,6 +95,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
 
         mMode = Mode.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"));
         mAnimated = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED, true);
+        mCentered = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED, false);
 
         mListeners = new ArrayList<ProgressStateListener>();
 
@@ -102,7 +104,6 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT, heightPx);
         setLayoutParams(lp);
-        setPivotX(0f);
         setScaleX(0f);
         setBackgroundColor(Color.WHITE);
         setVisibility(View.GONE);
@@ -129,6 +130,12 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         if (SysUiManagers.IconManager != null) {
             SysUiManagers.IconManager.unregisterListener(this);
         }
+    }
+
+    @Override
+    public void onSizeChanged(int w, int h, int oldw, int oldh) {
+        if (DEBUG) log("w=" + w + "; h=" + h);
+        setPivotX(mCentered ? w/2f : 0f);
     }
 
     public void registerListener(ProgressStateListener listener) {
@@ -374,6 +381,11 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED)) {
                 mAnimated = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED, true);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED)) {
+                mCentered = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED, false);
+                setPivotX(mCentered ? getWidth()/2f : 0f);
             }
         }
     }
