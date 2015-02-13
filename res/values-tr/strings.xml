@@ -650,4 +650,6 @@
     <string name="pref_about_get_unlocker_title">Kilidi aç</string>
     <string name="pref_about_get_unlocker_summary">"PayPal hesabınız yok mu? Buraya dokunup Play Store uygulamasını indirerek kilidi açabilirsiniz."</string>
 
+    <string name="pref_statusbar_download_progress_mode_title">Mod</string>
+
 </resources>

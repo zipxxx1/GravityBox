@@ -1324,6 +1324,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefSrAdaptiveDelay;
         private PreferenceScreen mPrefCatLsRingSettings;
         private ListPreference mPrefBbarPosition;
+        private ListPreference mPrefSbdpMode;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1665,6 +1666,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSrAdaptiveDelay = (SeekBarPreference) findPreference(PREF_KEY_SMART_RADIO_ADAPTIVE_DELAY);
 
             mPrefBbarPosition = (ListPreference) findPreference(PREF_KEY_BATTERY_BAR_POSITION);
+
+            mPrefSbdpMode = (ListPreference) findPreference(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS);
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
@@ -2558,6 +2561,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 Preference p2 = findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_IMAGE);
                 p2.setEnabled(mPrefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false) &&
                         "CUSTOM".equals(p.getValue()));
+            }
+
+            if (key == null || key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS)) {
+                mPrefSbdpMode.setSummary(mPrefSbdpMode.getEntry());
             }
 
             for (String caKey : customAppKeys) {

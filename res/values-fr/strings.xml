@@ -1716,4 +1716,7 @@
     <string name="pref_lc_sound_replace_title">Remplace le son original</string>
     <string name="pref_lc_sound_replace_summary">Applique un son redéfini seulement dans le cas où le son est actif pour la notification originale</string>
 
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Mode</string>
+
 </resources>

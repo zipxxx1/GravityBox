@@ -1711,4 +1711,7 @@
     <string name="pref_lc_sound_vibrate_summary">Zapobiega wibracjom dla powiadomień które mają wyłączony tryb wibracji
         gdy tryb dzwonka jest ustawiony na same wibracje</string>
 
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Tryb</string>
+
 </resources>

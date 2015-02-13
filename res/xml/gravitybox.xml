@@ -1035,13 +1035,19 @@
 
         </PreferenceScreen>
 
-        <ListPreference 
-            android:key="pref_statusbar_download_progress"
+        <PreferenceScreen 
+            android:key="pref_cat_statusbar_download_progress"
             android:title="@string/pref_statusbar_download_progress_title"
-            android:summary="@string/pref_statusbar_download_progress_summary"
-            android:entries="@array/sb_download_progress_entries"
-            android:entryValues="@array/sb_download_progress_values"
-            android:defaultValue="OFF" />
+            android:summary="@string/pref_statusbar_download_progress_summary">
+
+            <ListPreference 
+                android:key="pref_statusbar_download_progress"
+                android:title="@string/pref_statusbar_download_progress_mode_title"
+                android:entries="@array/sb_download_progress_entries"
+                android:entryValues="@array/sb_download_progress_values"
+                android:defaultValue="OFF" />
+
+        </PreferenceScreen>
 
         <ListPreference 
             android:key="pref_sb_bt_visibility"

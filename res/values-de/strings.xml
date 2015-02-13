@@ -1640,4 +1640,7 @@
     <string name="custom_image_success">Benutzerdefiniertes Bild gesetzt</string>
     <string name="custom_image_failure">Setzen des benutzerdefinierten Bildes fehlgeschlagen</string>
 
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Modus</string>
+
 </resources>

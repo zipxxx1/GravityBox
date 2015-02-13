@@ -1380,4 +1380,7 @@
     <string name="pref_battery_bar_color_critical_title">배터리 레벨이 심각하게 낮을 때 색깔</string>
     <string name="pref_battery_bar_centered_title">가운데 정렬</string>
     <string name="pref_battery_bar_color_charging_title">충전 색깔</string>
+
+    <string name="pref_statusbar_download_progress_mode_title">모드</string>
+
 </resources>

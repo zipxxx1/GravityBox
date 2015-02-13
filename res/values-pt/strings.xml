@@ -1686,4 +1686,7 @@
     <string name="pref_battery_bar_color_low_title">Cor da bateria baixa</string>
     <string name="pref_battery_bar_color_critical_title">Cor da bateria crítica</string>
 
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Modo</string>
+
 </resources>

@@ -1876,4 +1876,7 @@
     <!-- Clock: Show seconds -->
     <string name="pref_statusbar_clock_show_seconds_title">Показать секунды</string>
 
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Режим</string>
+
 </resources>

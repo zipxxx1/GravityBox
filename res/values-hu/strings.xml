@@ -1847,4 +1847,7 @@
 	<!-- Clock: Show seconds -->
     <string name="pref_statusbar_clock_show_seconds_title">Másodpercek megjelenítése</string>
 
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Üzemmód</string>
+
 </resources>
