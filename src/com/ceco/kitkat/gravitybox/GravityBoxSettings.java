@@ -339,6 +339,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_HWKEY_RECENTS = "pref_cat_hwkey_recents";
     public static final String PREF_KEY_HWKEY_RECENTS_SINGLETAP = "pref_hwkey_recents_singletap";
     public static final String PREF_KEY_HWKEY_RECENTS_LONGPRESS = "pref_hwkey_recents_longpress";
+    public static final String PREF_KEY_HWKEY_RECENTS_DOUBLETAP = "pref_hwkey_recents_doubletap";
     public static final String PREF_KEY_HWKEY_CUSTOM_APP = "pref_hwkey_custom_app";
     public static final String PREF_KEY_HWKEY_DOUBLETAP_SPEED = "pref_hwkey_doubletap_speed";
     public static final String PREF_KEY_HWKEY_KILL_DELAY = "pref_hwkey_kill_delay";
@@ -916,6 +917,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_HWKEY_BACK_DOUBLETAP,
             PREF_KEY_HWKEY_RECENTS_SINGLETAP,
             PREF_KEY_HWKEY_RECENTS_LONGPRESS,
+            PREF_KEY_HWKEY_RECENTS_DOUBLETAP,
             PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP,
             PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS,
             PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP,
@@ -1207,6 +1209,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceCategory mPrefCatHwKeyRecents;
         private ListPreference mPrefHwKeyRecentsSingletap;
         private ListPreference mPrefHwKeyRecentsLongpress;
+        private ListPreference mPrefHwKeyRecentsDoubletap;
         private PreferenceCategory mPrefCatHwKeyVolume;
         private ListPreference mPrefHwKeyDoubletapSpeed;
         private ListPreference mPrefHwKeyKillDelay;
@@ -1463,6 +1466,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatHwKeyRecents = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_RECENTS);
             mPrefHwKeyRecentsSingletap = (ListPreference) findPreference(PREF_KEY_HWKEY_RECENTS_SINGLETAP);
             mPrefHwKeyRecentsLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_RECENTS_LONGPRESS);
+            mPrefHwKeyRecentsDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_RECENTS_DOUBLETAP);
             mPrefHwKeyDoubletapSpeed = (ListPreference) findPreference(PREF_KEY_HWKEY_DOUBLETAP_SPEED);
             mPrefHwKeyKillDelay = (ListPreference) findPreference(PREF_KEY_HWKEY_KILL_DELAY);
             mPrefCatHwKeyVolume = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_VOLUME);
@@ -1980,6 +1984,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefHwKeyRecentsSingletap.setEntryValues(actionEntryValues);
             mPrefHwKeyRecentsLongpress.setEntries(actionEntries);
             mPrefHwKeyRecentsLongpress.setEntryValues(actionEntryValues);
+            mPrefHwKeyRecentsDoubletap.setEntries(actionEntries);
+            mPrefHwKeyRecentsDoubletap.setEntryValues(actionEntryValues);
             mPrefNavbarCustomKeySingletap.setEntries(actionEntries);
             mPrefNavbarCustomKeySingletap.setEntryValues(actionEntryValues);
             mPrefNavbarCustomKeyLongpress.setEntries(actionEntries);
@@ -2805,6 +2811,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_HWKEY_KEY, key);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")));
+            } else if (key.equals(PREF_KEY_HWKEY_RECENTS_DOUBLETAP)) {
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
+                        prefs.getString(PREF_KEY_HWKEY_RECENTS_DOUBLETAP, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_DOUBLETAP_SPEED)) {
                 intent.setAction(ACTION_PREF_HWKEY_DOUBLETAP_SPEED_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(

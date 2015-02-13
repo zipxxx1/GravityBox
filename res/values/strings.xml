@@ -1891,4 +1891,7 @@
     <!-- Key actions: single-tap for back button -->
     <string name="hwkey_back_singletap_dialog_title">Back key single-tap action</string>
 
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">Recents key double-tap action</string>
+
 </resources>

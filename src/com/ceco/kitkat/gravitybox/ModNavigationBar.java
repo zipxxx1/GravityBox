@@ -92,6 +92,7 @@ public class ModNavigationBar {
     private static ModHwKeys.HwKeyAction mRecentsLongpressActionBck = new ModHwKeys.HwKeyAction(0, null);;
     private static ModHwKeys.HwKeyAction mRecentsSingletapAction = new ModHwKeys.HwKeyAction(0, null);
     private static ModHwKeys.HwKeyAction mRecentsLongpressAction = new ModHwKeys.HwKeyAction(0, null);
+    private static ModHwKeys.HwKeyAction mRecentsDoubletapAction = new ModHwKeys.HwKeyAction(0, null);
     private static int mHomeLongpressAction = 0;
     private static boolean mHwKeysEnabled;
     private static boolean mCursorControlEnabled;
@@ -249,6 +250,13 @@ public class ModNavigationBar {
                     mRecentsLongpressActionBck.customApp = mRecentsLongpressAction.customApp;
                     if (DEBUG) log("mRecentsLongpressActionBck.actionId = " + mRecentsLongpressActionBck.actionId);
                 }
+                updateRecentsKeyCode();
+            } else if (intent.getAction().equals(
+                    GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
+                    GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP.equals(intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_HWKEY_KEY))) {
+                mRecentsDoubletapAction.actionId = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
+                mRecentsDoubletapAction.customApp = intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP);
                 updateRecentsKeyCode();
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) &&
@@ -1133,6 +1141,7 @@ public class ModNavigationBar {
     private static boolean recentsKeyHasAction() {
         return (mRecentsSingletapAction.actionId != 0 ||
                 mRecentsLongpressAction.actionId != 0 ||
+                mRecentsDoubletapAction.actionId != 0 ||
                 !mHwKeysEnabled);
     }
 

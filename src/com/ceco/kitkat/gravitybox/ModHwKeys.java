@@ -125,7 +125,10 @@ public class ModHwKeys {
     private static boolean mIsBackLongPressed = false;
     private static boolean mIsBackDoubleTap = false;
     private static boolean mWasBackDoubleTap = false;
+    private static boolean mRecentsKeyPressed = false;
     private static boolean mIsRecentsLongPressed = false;
+    private static boolean mIsRecentsDoubleTap = false;
+    private static boolean mWasRecentsDoubleTap = false;
     private static boolean mIsHomeLongPressed = false;
     private static int mLockscreenTorch = 0;
     private static boolean mHomeDoubletapDisabled;
@@ -181,6 +184,7 @@ public class ModHwKeys {
         BACK_DOUBLETAP,
         RECENTS_SINGLETAP,
         RECENTS_LONGPRESS,
+        RECENTS_DOUBLETAP,
         CUSTOM_SINGLETAP,
         CUSTOM_LONGPRESS,
         CUSTOM_DOUBLETAP
@@ -266,6 +270,9 @@ public class ModHwKeys {
                 } else if (GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS.equals(key)) {
                     setActionFor(HwKeyTrigger.RECENTS_LONGPRESS, value, customApp);
                     if (DEBUG) log("Recents long-press action set to: " + value);
+                } else if (GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP.equals(key)) {
+                    setActionFor(HwKeyTrigger.RECENTS_DOUBLETAP, value, customApp);
+                    if (DEBUG) log("Recents double-tap action set to: " + value);
                 } else if (GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP.equals(key)) {
                     setActionFor(HwKeyTrigger.CUSTOM_SINGLETAP, value, customApp);
                     if (DEBUG) log("Custom key singletap action set to: " + value);
@@ -396,6 +403,7 @@ public class ModHwKeys {
             map.put(HwKeyTrigger.BACK_DOUBLETAP, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.RECENTS_SINGLETAP, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.RECENTS_LONGPRESS, new HwKeyAction(0, null));
+            map.put(HwKeyTrigger.RECENTS_DOUBLETAP, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.CUSTOM_SINGLETAP, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.CUSTOM_LONGPRESS, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.CUSTOM_DOUBLETAP, new HwKeyAction(0, null));
@@ -432,6 +440,9 @@ public class ModHwKeys {
                 setActionFor(HwKeyTrigger.RECENTS_LONGPRESS, Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
+                setActionFor(HwKeyTrigger.RECENTS_DOUBLETAP, Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP, "0")),
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP+"_custom", null));
                 mDoubletapSpeed = Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_DOUBLETAP_SPEED, "400"));
                 mKillDelay = Integer.valueOf(
@@ -728,37 +739,44 @@ public class ModHwKeys {
                         return;
                     }
 
-                    if (keyCode == KeyEvent.KEYCODE_APP_SWITCH) {
-                        if (!hasAction(HwKey.RECENTS) && areHwKeysEnabled()) return;
-
+                    if (keyCode == KeyEvent.KEYCODE_APP_SWITCH && isFromSystem &&
+                        (hasAction(HwKey.RECENTS) || !areHwKeysEnabled())) {
+    
                         if (!down) {
-                            cancelPreloadRecentApps();
+                            mRecentsKeyPressed = false;
                             mHandler.removeCallbacks(mRecentsLongPress);
-                            if (!mIsRecentsLongPressed) {
-                                if (!areHwKeysEnabled() &&
-                                        event.getRepeatCount() == 0 && 
-                                        ((event.getFlags() & KeyEvent.FLAG_FROM_SYSTEM) != 0)) {
-                                    if (DEBUG) log("APP_SWITCH KeyEvent coming from HW key and keys disabled. Ignoring.");
-                                    param.setResult(-1);
-                                    return;
-                                } else if (!event.isCanceled()) {
+                            if (mIsRecentsLongPressed) {
+                                mIsRecentsLongPressed = false;
+                            } else if (event.getRepeatCount() == 0) {
+                                if (!areHwKeysEnabled()) {
+                                    if (DEBUG) log("RECENTS KeyEvent coming from HW key and keys disabled. Ignoring.");
+                                } else if (mIsRecentsDoubleTap) {
+                                    // we are still waiting for double-tap
+                                    if (DEBUG) log("RECENTS doubletap pending. Ignoring.");
+                                } else if (!mWasRecentsDoubleTap && !event.isCanceled()) {
                                     if (getActionFor(HwKeyTrigger.RECENTS_SINGLETAP).actionId != 
-                                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
                                         performAction(HwKeyTrigger.RECENTS_SINGLETAP);
                                     } else {
-                                        toggleRecentApps();
+                                        if (DEBUG) log("Triggering original DOWN/UP events for RECENTS key");
+                                        injectKey(KeyEvent.KEYCODE_APP_SWITCH);
                                     }
                                 }
                             }
-                            mIsRecentsLongPressed = false;
-                        } else {
-                            if (event.getRepeatCount() == 0) {
+                        } else if (event.getRepeatCount() == 0) {
+                            mRecentsKeyPressed = true;
+                            mWasRecentsDoubleTap = mIsRecentsDoubleTap;
+                            if (mIsRecentsDoubleTap) {
+                                performAction(HwKeyTrigger.RECENTS_DOUBLETAP);
+                                mHandler.removeCallbacks(mRecentsDoubleTapReset);
+                                mIsRecentsDoubleTap = false;
+                            } else {
                                 mIsRecentsLongPressed = false;
-                                final int action = getActionFor(HwKeyTrigger.RECENTS_SINGLETAP).actionId;
-                                if (action == GravityBoxSettings.HWKEY_ACTION_DEFAULT ||
-                                        action == GravityBoxSettings.HWKEY_ACTION_RECENT_APPS ||
-                                            action == GravityBoxSettings.HWKEY_ACTION_RECENT_APPS) {
-                                    preloadRecentApps();
+                                mIsRecentsDoubleTap = false;
+                                if (getActionFor(HwKeyTrigger.RECENTS_DOUBLETAP).actionId != 
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    mIsRecentsDoubleTap = true;
+                                    mHandler.postDelayed(mRecentsDoubleTapReset, mDoubletapSpeed);
                                 }
                                 if (getActionFor(HwKeyTrigger.RECENTS_LONGPRESS).actionId != 
                                         GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
@@ -1014,6 +1032,27 @@ public class ModHwKeys {
         }
     };
 
+    private static Runnable mRecentsDoubleTapReset = new Runnable() {
+
+        @Override
+        public void run() {
+            mIsRecentsDoubleTap = false;
+            // doubletap timed out and since we blocked default RECENTS key action while waiting for doubletap
+            // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
+            // for long-press action
+            if (!mRecentsKeyPressed && areHwKeysEnabled()) {
+                if (getActionFor(HwKeyTrigger.RECENTS_SINGLETAP).actionId != 
+                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                    if (DEBUG) log("RECENTS key double tap timed out and key not pressed; performing singletap action");
+                    performAction(HwKeyTrigger.RECENTS_SINGLETAP);
+                } else {
+                    if (DEBUG) log("RECENTS key double tap timed out and key not pressed; injecting RECENTS key");
+                    injectKey(KeyEvent.KEYCODE_APP_SWITCH);
+                }
+            }
+        }
+    };
+
     private static Runnable mCustomKeyDoubletapReset = new Runnable() {
         @Override
         public void run() {
@@ -1088,6 +1127,7 @@ public class ModHwKeys {
         } else if (key == HwKey.RECENTS) {
             retVal |= getActionFor(HwKeyTrigger.RECENTS_SINGLETAP).actionId != GravityBoxSettings.HWKEY_ACTION_DEFAULT;
             retVal |= getActionFor(HwKeyTrigger.RECENTS_LONGPRESS).actionId != GravityBoxSettings.HWKEY_ACTION_DEFAULT;
+            retVal |= getActionFor(HwKeyTrigger.RECENTS_DOUBLETAP).actionId != GravityBoxSettings.HWKEY_ACTION_DEFAULT;
         } else if (key == HwKey.CUSTOM) {
             retVal = true;
         }
@@ -1650,33 +1690,6 @@ public class ModHwKeys {
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
             log("Error executing showBrightnessDialog: " + t.getMessage());
-        }
-    }
-
-    private static boolean mPreloadedRecentApps;
-    private static void preloadRecentApps() {
-        mPreloadedRecentApps = true;
-        try {
-            final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService");
-            if (sbService != null) {
-                XposedHelpers.callMethod(sbService, "preloadRecentApps");
-            }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    private static void cancelPreloadRecentApps() {
-        if (mPreloadedRecentApps) {
-            mPreloadedRecentApps = false;
-            try {
-                final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService");
-                if (sbService != null) {
-                    XposedHelpers.callMethod(sbService, "cancelPreloadRecentApps");
-                }
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
         }
     }
 
