@@ -1690,5 +1690,6 @@
     <string name="pref_statusbar_download_progress_mode_title">Modo</string>
     <string name="pref_statusbar_download_progress_animated_title">Animada</string>
     <string name="pref_statusbar_download_progress_centered_title">Centralizada</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Espessura</string>
 
 </resources>

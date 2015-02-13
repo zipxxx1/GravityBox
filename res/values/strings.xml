@@ -1880,5 +1880,6 @@
     <string name="pref_statusbar_download_progress_mode_title">Mode</string>
     <string name="pref_statusbar_download_progress_animated_title">Animated</string>
     <string name="pref_statusbar_download_progress_centered_title">Centered</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Thickness</string>
 
 </resources>

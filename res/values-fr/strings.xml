@@ -1720,5 +1720,6 @@
     <string name="pref_statusbar_download_progress_mode_title">Mode</string>
     <string name="pref_statusbar_download_progress_animated_title">Animé</string>
     <string name="pref_statusbar_download_progress_centered_title">Centré</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Épaisseur</string>
 
 </resources>
