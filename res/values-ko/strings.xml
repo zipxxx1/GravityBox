@@ -1382,5 +1382,6 @@
     <string name="pref_battery_bar_color_charging_title">충전 색깔</string>
 
     <string name="pref_statusbar_download_progress_mode_title">모드</string>
+    <string name="pref_statusbar_download_progress_animated_title">애니메이션</string>
 
 </resources>

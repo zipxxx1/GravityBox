@@ -1657,5 +1657,6 @@
 
     <!-- Status bar: progress bar -->
     <string name="pref_statusbar_download_progress_mode_title">モード</string>
+    <string name="pref_statusbar_download_progress_animated_title">アニメ</string>
 
 </resources>

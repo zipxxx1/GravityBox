@@ -1309,5 +1309,6 @@
 
     <!-- Status bar: progress bar -->
     <string name="pref_statusbar_download_progress_mode_title">Mod</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animasi</string>
 
 </resources>

@@ -1718,5 +1718,6 @@
 
     <!-- Status bar: progress bar -->
     <string name="pref_statusbar_download_progress_mode_title">Mode</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animé</string>
 
 </resources>

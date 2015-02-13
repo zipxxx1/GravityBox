@@ -810,8 +810,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_HSA_URI = "headsetActionUri";
 
     public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS = "pref_statusbar_download_progress";
+    public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED = "pref_statusbar_download_progress_animated";
     public static final String ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED = "gravitybox.intent.action.STATUSBAR_DOWNLOAD_PROGRESS_CHANGED";
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED = "sbDownloadProgressEnabled";
+    public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED = "sbDownloadProgressAnimated";
 
     public static final String PREF_KEY_PATCH_MASTER_KEY = "pref_patch_master_key";
     public static final String PREF_KEY_PATCH_FAKE_ID = "pref_patch_fake_id";
@@ -3334,6 +3336,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED, prefs.getString(key, "OFF"));
+            } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED)) {
+                intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
+                intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED, prefs.getBoolean(key, true));
             } else if (key.equals(PREF_KEY_STATUSBAR_TICKER_POLICY)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_TICKER_POLICY, prefs.getString(key, "DEFAULT"));
