@@ -1156,6 +1156,11 @@
                 android:entryValues="@array/sb_download_progress_values"
                 android:defaultValue="OFF" />
 
+            <CheckBoxPreference 
+                android:key="pref_statusbar_download_progress_animated"
+                android:title="@string/pref_statusbar_download_progress_animated_title"
+                android:defaultValue="true" />
+
         </PreferenceScreen>
 
         <ListPreference 

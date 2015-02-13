@@ -28,6 +28,8 @@ import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.IconManagerListe
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +39,7 @@ import android.os.Parcelable;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.RemoteViews;
 
@@ -49,6 +52,8 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             "com.android.bluetooth",
             "com.mediatek.bluetooth"
     ));
+
+    private static final int ANIM_DURATION = 400;
 
     public interface ProgressStateListener {
         void onProgressTrackingStarted(boolean isBluetooth, Mode mode);
@@ -75,6 +80,8 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private Mode mMode;
     private String mId;
     private List<ProgressStateListener> mListeners;
+    private boolean mAnimated;
+    private ObjectAnimator mAnimator;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -84,6 +91,8 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         super(context);
 
         mMode = Mode.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"));
+        mAnimated = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED, true);
+
         mListeners = new ArrayList<ProgressStateListener>();
 
         int heightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1,
@@ -96,6 +105,12 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         setBackgroundColor(Color.WHITE);
         setVisibility(View.GONE);
         updatePosition();
+
+        mAnimator = new ObjectAnimator();
+        mAnimator.setTarget(this);
+        mAnimator.setInterpolator(new DecelerateInterpolator());
+        mAnimator.setDuration(ANIM_DURATION);
+        mAnimator.setRepeatCount(0);
     }
 
     @Override
@@ -239,14 +254,37 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     }
 
     private void updateProgress(Object statusBarNotif) {
-        float newScaleX = 0;
         if (statusBarNotif != null) {
             Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
-            newScaleX = getProgressInfo(n).getFraction();
+            float newScaleX = getProgressInfo(n).getFraction();
+            if (DEBUG) log("updateProgress: newScaleX=" + newScaleX);
+            setVisibility(View.VISIBLE);
+            if (mAnimated) {
+                animateScaleXTo(newScaleX);
+            } else {
+                setScaleX(newScaleX);
+            }
+        } else {
+            if (mAnimator.isStarted()) {
+                mAnimator.end();
+            }
+            postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setScaleX(0f);
+                    setVisibility(View.GONE);
+                }
+            }, 500);
         }
-        if (DEBUG) log("updateProgress: newScaleX=" + newScaleX);
-        setScaleX(newScaleX);
-        setVisibility(newScaleX > 0 ? View.VISIBLE : View.GONE);
+    }
+
+    private void animateScaleXTo(float newScaleX) {
+        if (mAnimator.isStarted()) {
+            mAnimator.cancel();
+        }
+        mAnimator.setValues(PropertyValuesHolder.ofFloat("scaleX", getScaleX(), newScaleX));
+        mAnimator.start();
+        if (DEBUG) log("Animating to new scaleX: " + newScaleX);
     }
 
     private ProgressInfo getProgressInfo(Notification n) {
@@ -325,11 +363,18 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED)) {
-            mMode = Mode.valueOf(intent.getStringExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED));
-            if (mMode == Mode.OFF) {
-                stopTracking();
-            } else {
-                updatePosition();
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED)) {
+                mMode = Mode.valueOf(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED));
+                if (mMode == Mode.OFF) {
+                    stopTracking();
+                } else {
+                    updatePosition();
+                }
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED)) {
+                mAnimated = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED, true);
             }
         }
     }
