@@ -1721,5 +1721,6 @@
     <string name="pref_statusbar_download_progress_animated_title">Animé</string>
     <string name="pref_statusbar_download_progress_centered_title">Centré</string>
     <string name="pref_statusbar_download_progress_thickness_title">Épaisseur</string>
+    <string name="pref_statusbar_download_progress_margin_title">Marge de bordure</string>
 
 </resources>

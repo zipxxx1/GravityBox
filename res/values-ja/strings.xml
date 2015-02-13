@@ -1660,5 +1660,6 @@
     <string name="pref_statusbar_download_progress_animated_title">アニメ</string>
     <string name="pref_statusbar_download_progress_centered_title">中央寄せ</string>
     <string name="pref_statusbar_download_progress_thickness_title">太さ</string>
+    <string name="pref_statusbar_download_progress_margin_title">端のマージン</string>
 
 </resources>

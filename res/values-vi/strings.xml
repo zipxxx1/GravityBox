@@ -1487,5 +1487,6 @@ Dưới đây là công-tắc tổng. Sau khi bật, bạn có thể tuỳ chỉ
     <string name="pref_statusbar_download_progress_animated_title">Hoạt ảnh</string>
     <string name="pref_statusbar_download_progress_centered_title">Giữa</string>
     <string name="pref_statusbar_download_progress_thickness_title">Độ dày</string>
+    <string name="pref_statusbar_download_progress_margin_title">Khoảng cách lề</string>
 
 </resources>

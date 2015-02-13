@@ -1881,5 +1881,6 @@
     <string name="pref_statusbar_download_progress_animated_title">Анимированная</string>
     <string name="pref_statusbar_download_progress_centered_title">По центру</string>
     <string name="pref_statusbar_download_progress_thickness_title">Толщина</string>
+    <string name="pref_statusbar_download_progress_margin_title">Отступ от края</string>
 
 </resources>

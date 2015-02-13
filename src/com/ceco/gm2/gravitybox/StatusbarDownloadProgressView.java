@@ -86,6 +86,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private ObjectAnimator mAnimator;
     private boolean mCentered;
     private int mHeightPx;
+    private int mEdgeMarginPx;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -99,6 +100,9 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         mCentered = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED, false);
         mHeightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS, 1),
+                context.getResources().getDisplayMetrics());
+        mEdgeMarginPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN, 0),
                 context.getResources().getDisplayMetrics());
 
         mListeners = new ArrayList<ProgressStateListener>();
@@ -358,6 +362,8 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         lp.height = mHeightPx;
         lp.gravity = mMode == Mode.TOP ? (Gravity.TOP | Gravity.START) :
             (Gravity.BOTTOM | Gravity.START);
+        lp.setMargins(0, mMode == Mode.TOP ? mEdgeMarginPx : 0,
+                      0, mMode == Mode.BOTTOM ? mEdgeMarginPx : 0);
         setLayoutParams(lp);
     }
 
@@ -393,6 +399,12 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS)) {
                 mHeightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         intent.getIntExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS, 1),
+                        getResources().getDisplayMetrics());
+                updatePosition();
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN)) {
+                mEdgeMarginPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                        intent.getIntExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN, 0),
                         getResources().getDisplayMetrics());
                 updatePosition();
             }

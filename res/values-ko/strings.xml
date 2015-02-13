@@ -1385,5 +1385,6 @@
     <string name="pref_statusbar_download_progress_animated_title">애니메이션</string>
     <string name="pref_statusbar_download_progress_centered_title">가운데 정렬</string>
     <string name="pref_statusbar_download_progress_thickness_title">두께</string>
+    <string name="pref_statusbar_download_progress_margin_title">가장자리 여유공간</string>
 
 </resources>
