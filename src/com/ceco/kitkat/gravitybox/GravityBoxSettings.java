@@ -333,6 +333,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HWKEY_HOME_DOUBLETAP = "pref_hwkey_home_doubletap";
     public static final String PREF_KEY_HWKEY_HOME_LONGPRESS_KEYGUARD = "pref_hwkey_home_longpress_keyguard";
     public static final String PREF_CAT_HWKEY_BACK = "pref_cat_hwkey_back";
+    public static final String PREF_KEY_HWKEY_BACK_SINGLETAP = "pref_hwkey_back_singletap";
     public static final String PREF_KEY_HWKEY_BACK_LONGPRESS = "pref_hwkey_back_longpress";
     public static final String PREF_KEY_HWKEY_BACK_DOUBLETAP = "pref_hwkey_back_doubletap";
     public static final String PREF_CAT_HWKEY_RECENTS = "pref_cat_hwkey_recents";
@@ -910,6 +911,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_HWKEY_MENU_DOUBLETAP,
             PREF_KEY_HWKEY_HOME_LONGPRESS,
             PREF_KEY_HWKEY_HOME_DOUBLETAP,
+            PREF_KEY_HWKEY_BACK_SINGLETAP,
             PREF_KEY_HWKEY_BACK_LONGPRESS,
             PREF_KEY_HWKEY_BACK_DOUBLETAP,
             PREF_KEY_HWKEY_RECENTS_SINGLETAP,
@@ -1199,6 +1201,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefHwKeyHomeDoubletap;
         private CheckBoxPreference mPrefHwKeyHomeLongpressKeyguard;
         private PreferenceCategory mPrefCatHwKeyBack;
+        private ListPreference mPrefHwKeyBackSingletap;
         private ListPreference mPrefHwKeyBackLongpress;
         private ListPreference mPrefHwKeyBackDoubletap;
         private PreferenceCategory mPrefCatHwKeyRecents;
@@ -1454,6 +1457,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             //mPrefHwKeyHomeLongpressKeyguard = (CheckBoxPreference) findPreference(PREF_KEY_HWKEY_HOME_LONGPRESS_KEYGUARD);
             mPrefHwKeyHomeDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_HOME_DOUBLETAP);
             mPrefCatHwKeyBack = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_BACK);
+            mPrefHwKeyBackSingletap = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_SINGLETAP);
             mPrefHwKeyBackLongpress = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_LONGPRESS);
             mPrefHwKeyBackDoubletap = (ListPreference) findPreference(PREF_KEY_HWKEY_BACK_DOUBLETAP);
             mPrefCatHwKeyRecents = (PreferenceCategory) findPreference(PREF_CAT_HWKEY_RECENTS);
@@ -1966,6 +1970,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefHwKeyHomeLongpress.setEntryValues(actionEntryValues);
             mPrefHwKeyHomeDoubletap.setEntries(actionEntries);
             mPrefHwKeyHomeDoubletap.setEntryValues(actionEntryValues);
+            mPrefHwKeyBackSingletap.setEntries(actionEntries);
+            mPrefHwKeyBackSingletap.setEntryValues(actionEntryValues);
             mPrefHwKeyBackLongpress.setEntries(actionEntries);
             mPrefHwKeyBackLongpress.setEntryValues(actionEntryValues);
             mPrefHwKeyBackDoubletap.setEntries(actionEntries);
@@ -2774,6 +2780,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_HWKEY_KEY, key);
                 intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_HOME_DOUBLETAP, "0")));
+            } else if (key.equals(PREF_KEY_HWKEY_BACK_SINGLETAP)) {
+                intent.setAction(ACTION_PREF_HWKEY_CHANGED);
+                intent.putExtra(EXTRA_HWKEY_KEY, key);
+                intent.putExtra(EXTRA_HWKEY_VALUE, Integer.valueOf(
+                        prefs.getString(PREF_KEY_HWKEY_BACK_SINGLETAP, "0")));
             } else if (key.equals(PREF_KEY_HWKEY_BACK_LONGPRESS)) {
                 intent.setAction(ACTION_PREF_HWKEY_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_KEY, key);

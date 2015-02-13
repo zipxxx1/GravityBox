@@ -176,6 +176,7 @@ public class ModHwKeys {
         MENU_DOUBLETAP,
         HOME_LONGPRESS,
         HOME_DOUBLETAP,
+        BACK_SINGLETAP,
         BACK_LONGPRESS,
         BACK_DOUBLETAP,
         RECENTS_SINGLETAP,
@@ -250,6 +251,9 @@ public class ModHwKeys {
                                     t.getMessage());
                         }
                     }
+                } else if (GravityBoxSettings.PREF_KEY_HWKEY_BACK_SINGLETAP.equals(key)) {
+                    setActionFor(HwKeyTrigger.BACK_SINGLETAP, value, customApp);
+                    if (DEBUG) log("Back single-tap action set to: " + value);
                 } else if (GravityBoxSettings.PREF_KEY_HWKEY_BACK_LONGPRESS.equals(key)) {
                     setActionFor(HwKeyTrigger.BACK_LONGPRESS, value, customApp);
                     if (DEBUG) log("Back long-press action set to: " + value);
@@ -387,6 +391,7 @@ public class ModHwKeys {
             map.put(HwKeyTrigger.MENU_LONGPRESS, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.HOME_LONGPRESS, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.HOME_DOUBLETAP, new HwKeyAction(0, null));
+            map.put(HwKeyTrigger.BACK_SINGLETAP, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.BACK_LONGPRESS, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.BACK_DOUBLETAP, new HwKeyAction(0, null));
             map.put(HwKeyTrigger.RECENTS_SINGLETAP, new HwKeyAction(0, null));
@@ -412,6 +417,9 @@ public class ModHwKeys {
                 setActionFor(HwKeyTrigger.HOME_DOUBLETAP, Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_DOUBLETAP, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_DOUBLETAP+"_custom", null));
+                setActionFor(HwKeyTrigger.BACK_SINGLETAP, Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_BACK_SINGLETAP, "0")),
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_BACK_SINGLETAP+"_custom", null));
                 setActionFor(HwKeyTrigger.BACK_LONGPRESS, Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_BACK_LONGPRESS, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_BACK_LONGPRESS+"_custom", null));
@@ -670,47 +678,49 @@ public class ModHwKeys {
                     }
 
                     if (keyCode == KeyEvent.KEYCODE_BACK && isFromSystem &&
-                            (hasAction(HwKey.BACK) || !areHwKeysEnabled())) {
-
+                        (hasAction(HwKey.BACK) || !areHwKeysEnabled())) {
+    
                         if (!down) {
                             mBackKeyPressed = false;
                             mHandler.removeCallbacks(mBackLongPress);
                             if (mIsBackLongPressed) {
                                 mIsBackLongPressed = false;
-                            } else if (areHwKeysEnabled() && !mIsBackDoubleTap && !mWasBackDoubleTap) {
-                                // inject BACK key event as it was previously eaten by us
-                                if (DEBUG) log("Triggering original DOWN/UP events for BACK key");
-                                if (!event.isCanceled()) {
-                                    injectKey(KeyEvent.KEYCODE_BACK);
+                            } else if (event.getRepeatCount() == 0) {
+                                if (!areHwKeysEnabled()) {
+                                    if (DEBUG) log("BACK KeyEvent coming from HW key and keys disabled. Ignoring.");
+                                } else if (mIsBackDoubleTap) {
+                                    // we are still waiting for double-tap
+                                    if (DEBUG) log("BACK doubletap pending. Ignoring.");
+                                } else if (!mWasBackDoubleTap && !event.isCanceled()) {
+                                    if (getActionFor(HwKeyTrigger.BACK_SINGLETAP).actionId != 
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                        performAction(HwKeyTrigger.BACK_SINGLETAP);
+                                    } else {
+                                        if (DEBUG) log("Triggering original DOWN/UP events for BACK key");
+                                        injectKey(KeyEvent.KEYCODE_BACK);
+                                    }
                                 }
-                            } else {
-                                if (DEBUG) log("BACK KeyEvent coming from HW key and keys disabled; " +
-                                		"or pending double-tap. Ignoring.");
                             }
-                        } else {
-                            if (event.getRepeatCount() == 0) {
-                                mBackKeyPressed = true;
-                                mWasBackDoubleTap = mIsBackDoubleTap;
-                                if (mIsBackDoubleTap) {
-                                    performAction(HwKeyTrigger.BACK_DOUBLETAP);
-                                    mHandler.removeCallbacks(mBackDoubleTapReset);
-                                    mIsBackDoubleTap = false;
-                                    param.setResult(-1);
-                                    return;
-                                } else {
-                                    mIsBackLongPressed = false;
-                                    mIsBackDoubleTap = false;
-                                    if (getActionFor(HwKeyTrigger.BACK_DOUBLETAP).actionId != 
-                                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                        mIsBackDoubleTap = true;
-                                        mHandler.postDelayed(mBackDoubleTapReset, mDoubletapSpeed);
-                                    }
-                                    if (getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId != 
-                                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                                        mHandler.postDelayed(mBackLongPress, 
-                                                getLongpressTimeoutForAction(
-                                                        getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId));
-                                    }
+                        } else if (event.getRepeatCount() == 0) {
+                            mBackKeyPressed = true;
+                            mWasBackDoubleTap = mIsBackDoubleTap;
+                            if (mIsBackDoubleTap) {
+                                performAction(HwKeyTrigger.BACK_DOUBLETAP);
+                                mHandler.removeCallbacks(mBackDoubleTapReset);
+                                mIsBackDoubleTap = false;
+                            } else {
+                                mIsBackLongPressed = false;
+                                mIsBackDoubleTap = false;
+                                if (getActionFor(HwKeyTrigger.BACK_DOUBLETAP).actionId != 
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    mIsBackDoubleTap = true;
+                                    mHandler.postDelayed(mBackDoubleTapReset, mDoubletapSpeed);
+                                }
+                                if (getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId != 
+                                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                                    mHandler.postDelayed(mBackLongPress, 
+                                            getLongpressTimeoutForAction(
+                                                    getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId));
                                 }
                             }
                         }
@@ -982,8 +992,14 @@ public class ModHwKeys {
             // let's inject it now additionally, but only in case it's not still pressed as we might still be waiting
             // for long-press action
             if (!mBackKeyPressed && areHwKeysEnabled()) {
-                if (DEBUG) log("BACK key double tap timed out and key not pressed; injecting BACK key");
-                injectKey(KeyEvent.KEYCODE_BACK);
+                if (getActionFor(HwKeyTrigger.BACK_SINGLETAP).actionId != 
+                        GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                    if (DEBUG) log("BACK key double tap timed out and key not pressed; performing singletap action");
+                    performAction(HwKeyTrigger.BACK_SINGLETAP);
+                } else {
+                    if (DEBUG) log("BACK key double tap timed out and key not pressed; injecting BACK key");
+                    injectKey(KeyEvent.KEYCODE_BACK);
+                }
             }
         }
     };
@@ -1066,6 +1082,7 @@ public class ModHwKeys {
         } else if (key == HwKey.HOME) {
             retVal |= getActionFor(HwKeyTrigger.HOME_LONGPRESS).actionId != GravityBoxSettings.HWKEY_ACTION_DEFAULT;
         } else if (key == HwKey.BACK) {
+            retVal |= getActionFor(HwKeyTrigger.BACK_SINGLETAP).actionId != GravityBoxSettings.HWKEY_ACTION_DEFAULT;
             retVal |= getActionFor(HwKeyTrigger.BACK_LONGPRESS).actionId != GravityBoxSettings.HWKEY_ACTION_DEFAULT;
             retVal |= getActionFor(HwKeyTrigger.BACK_DOUBLETAP).actionId != GravityBoxSettings.HWKEY_ACTION_DEFAULT;
         } else if (key == HwKey.RECENTS) {

@@ -2161,7 +2161,7 @@
             android:key="pref_cat_hwkey_menu"
             android:title="@string/pref_cat_hwkey_menu_title">
 
-           <ListPreference
+            <ListPreference
                 android:key="pref_hwkey_menu_singletap"
                 android:title="@string/pref_hwkey_singletap_title"
                 android:dialogTitle="@string/hwkey_menu_singletap_dialog_title"
@@ -2216,6 +2216,12 @@
         <PreferenceCategory
             android:key="pref_cat_hwkey_back"
             android:title="@string/pref_cat_hwkey_back_title">
+
+            <ListPreference
+                android:key="pref_hwkey_back_singletap"
+                android:title="@string/pref_hwkey_singletap_title"
+                android:dialogTitle="@string/hwkey_back_singletap_dialog_title"
+                android:defaultValue="0"/>
 
             <ListPreference
                 android:key="pref_hwkey_back_longpress"
