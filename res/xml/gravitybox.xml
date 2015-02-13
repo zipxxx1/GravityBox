@@ -1156,6 +1156,16 @@
                 android:entryValues="@array/sb_download_progress_values"
                 android:defaultValue="OFF" />
 
+            <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+                android:key="pref_statusbar_download_progress_thickness"
+                android:title="@string/pref_statusbar_download_progress_thickness_title"
+                minimum="1"
+                maximum="4"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="px"
+                android:defaultValue="1" />
+
             <CheckBoxPreference 
                 android:key="pref_statusbar_download_progress_centered"
                 android:title="@string/pref_statusbar_download_progress_centered_title"

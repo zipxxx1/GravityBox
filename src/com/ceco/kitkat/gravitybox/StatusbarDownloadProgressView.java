@@ -83,6 +83,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private boolean mAnimated;
     private ObjectAnimator mAnimator;
     private boolean mCentered;
+    private int mHeightPx;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -94,13 +95,14 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         mMode = Mode.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"));
         mAnimated = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED, true);
         mCentered = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED, false);
+        mHeightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS, 1),
+                context.getResources().getDisplayMetrics());
 
         mListeners = new ArrayList<ProgressStateListener>();
 
-        int heightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1,
-                context.getResources().getDisplayMetrics());
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT, heightPx);
+                FrameLayout.LayoutParams.MATCH_PARENT, mHeightPx);
         setLayoutParams(lp);
         setScaleX(0f);
         setBackgroundColor(Color.WHITE);
@@ -346,6 +348,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private void updatePosition() {
         if (mMode == Mode.OFF) return;
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) getLayoutParams();
+        lp.height = mHeightPx;
         lp.gravity = mMode == Mode.TOP ? (Gravity.TOP | Gravity.START) :
             (Gravity.BOTTOM | Gravity.START);
         if (Utils.isMtkDevice()) {
@@ -387,6 +390,12 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
                 mCentered = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED, false);
                 setPivotX(mCentered ? getWidth()/2f : 0f);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS)) {
+                mHeightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                        intent.getIntExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS, 1),
+                        getResources().getDisplayMetrics());
+                updatePosition();
             }
         }
     }
