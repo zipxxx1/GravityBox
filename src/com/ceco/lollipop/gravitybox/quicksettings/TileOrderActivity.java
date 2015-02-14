@@ -58,8 +58,8 @@ public class TileOrderActivity extends ListActivity {
         File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
         mTextAppearanceResId = android.R.style.TextAppearance_Holo_Medium_Inverse;
         if (file.exists()) {
-            this.setTheme(android.R.style.Theme_Holo);
-            mTextAppearanceResId = android.R.style.TextAppearance_Holo_Medium;
+            this.setTheme(android.R.style.Theme_Material);
+            mTextAppearanceResId = android.R.style.TextAppearance_Material_Medium;
         }
 
         super.onCreate(savedInstanceState);

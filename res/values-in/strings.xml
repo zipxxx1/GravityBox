@@ -354,8 +354,8 @@
     <string name="pref_hwkeys_disable_summary">Mematikan aksi tombol navigasi saat ditekan sekali ketika kontrol Pie diaktifkan.</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">Gunakan tema Holo Dark</string>
-    <string name="pref_gb_theme_dark_summary">Ganti UI GB ke tema Holo Dark daripada Holo Light</string>
+    <string name="pref_gb_theme_dark_title">Gunakan tema Dark</string>
+    <string name="pref_gb_theme_dark_summary">Ganti UI GB ke tema Dark daripada Light</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Matikan</string>

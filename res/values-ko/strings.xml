@@ -291,8 +291,8 @@
     <string name="pref_hwkeys_disable_title">하드웨어 키 비활성화</string>
     <string name="pref_hwkeys_disable_summary">Pie 컨트롤이 활성화 되있을 때 하드웨어 키를 무력화합니다.</string>
 
-    <string name="pref_gb_theme_dark_title">Holo Dark 테마 사용</string>
-    <string name="pref_gb_theme_dark_summary">GravityBox의 UI 테마를 Holo Light을 대신하여 Holo Dark를 사용합니다. (AMOLED 기기에 적합)</string>
+    <string name="pref_gb_theme_dark_title">Dark 테마 사용</string>
+    <string name="pref_gb_theme_dark_summary">GravityBox의 UI 테마를 Light을 대신하여 Dark를 사용합니다. (AMOLED 기기에 적합)</string>
 
     <string name="recent_clear_off">사용 안함</string>
     <string name="recent_clear_top_left">상단 왼쪽</string>

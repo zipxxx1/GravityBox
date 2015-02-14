@@ -347,8 +347,8 @@
     <string name="pref_hwkeys_disable_summary">Tắt phím MENU, BACK, HOME khi bảng Pie được bật. Phím cứng vẫn làm việc. (Cho thiết bị có phím cứng)</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">Sử dụng Holo Dark theme</string>
-    <string name="pref_gb_theme_dark_summary">Chuyển GB UI tới sử dụng Holo Dark theme thay vì of Holo Light</string>
+    <string name="pref_gb_theme_dark_title">Sử dụng dark theme</string>
+    <string name="pref_gb_theme_dark_summary">Chuyển GB UI tới sử dụng dark theme thay vì of light</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Tắt</string>

@@ -372,8 +372,8 @@
     <string name="pref_hwkeys_disable_summary">Deaktiviert den einfachen Tastenklick, während die PIE-Steuerung aktiviert ist</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">Dunkles Holo-Theme verwenden</string>
-    <string name="pref_gb_theme_dark_summary">Ändert das GravityBox-UI auf ein dunkles Holo-Theme</string>
+    <string name="pref_gb_theme_dark_title">Dunkles Theme verwenden</string>
+    <string name="pref_gb_theme_dark_summary">Ändert das GravityBox-UI auf ein dunkles Theme</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Aus</string>

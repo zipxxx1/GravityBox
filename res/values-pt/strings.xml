@@ -363,7 +363,7 @@
 
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Usar tema escuro</string>
-    <string name="pref_gb_theme_dark_summary">Altera a UI do GB para usar o tema Holo Dark em vez do Holo Light</string>
+    <string name="pref_gb_theme_dark_summary">Altera a UI do GB para usar o tema escuro</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Desabilitado</string>

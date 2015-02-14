@@ -379,8 +379,8 @@
     <string name="pref_hwkeys_disable_summary">当Pie Controls虚拟按键启用时将会禁用实体按键单击功能</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">使用黑色Holo主题</string>
-    <string name="pref_gb_theme_dark_summary">切换GravityBox至黑色Holo主题代替白色Holo主题</string>
+    <string name="pref_gb_theme_dark_title">使用黑色主题</string>
+    <string name="pref_gb_theme_dark_summary">切换GravityBox至黑色主题代替白色主题</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">关闭</string>

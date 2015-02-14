@@ -379,8 +379,8 @@
     <string name="pref_hwkeys_disable_summary">Letiltja a hardver gombok egyszeri érintését, ha a Pie Vezérlők engedélyezve vannak</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">Holo Sötét téma használata</string>
-    <string name="pref_gb_theme_dark_summary">Átkapcsolja a Gravitybox felhasználói felületét, hogy a Holo sötét témát használja a Holo világos helyett</string>
+    <string name="pref_gb_theme_dark_title">Sötét téma használata</string>
+    <string name="pref_gb_theme_dark_summary">Átkapcsolja a Gravitybox felhasználói felületét, hogy a sötét témát használja a világos helyett</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Kikapcsolva</string>

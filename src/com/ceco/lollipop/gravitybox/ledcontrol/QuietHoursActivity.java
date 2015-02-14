@@ -95,7 +95,7 @@ public class QuietHoursActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
         if (file.exists()) {
-            setTheme(android.R.style.Theme_Holo);
+            setTheme(android.R.style.Theme_Material);
         }
 
         super.onCreate(savedInstanceState);

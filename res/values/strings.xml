@@ -379,8 +379,8 @@
     <string name="pref_hwkeys_disable_summary">Disables single-tap on keys while Pie Controls are enabled</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">Use Holo Dark theme</string>
-    <string name="pref_gb_theme_dark_summary">Switches GB UI to use Holo Dark theme instead of Holo Light</string>
+    <string name="pref_gb_theme_dark_title">Use dark theme</string>
+    <string name="pref_gb_theme_dark_summary">Switches GB UI to use dark theme</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Off</string>

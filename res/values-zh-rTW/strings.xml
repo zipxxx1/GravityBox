@@ -379,8 +379,8 @@
     <string name="pref_hwkeys_disable_summary">當 Pie 控制 啟用時將會關閉選單鍵、返回鍵與 HOME 鍵功能，但是實體按鍵功能仍可使用 (如果您的裝置有實體按鍵) </string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">使用 Holo 黑色背景主題</string>
-    <string name="pref_gb_theme_dark_summary">將 GravityBox 的預設 Holo 白色背景主題換成 Holo 黑色背景主題</string>
+    <string name="pref_gb_theme_dark_title">使用  黑色背景主題</string>
+    <string name="pref_gb_theme_dark_summary">將 GravityBox 的預設  白色背景主題換成  黑色背景主題</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">關閉</string>

@@ -319,8 +319,8 @@
     <string name="pref_hwkeys_disable_title">ハードキーを無効化</string>
     <string name="pref_hwkeys_disable_summary">パイ操作が有効なときハードキーを無効化します。ハードキーアクションは動作します。(ハードキーのある端末向け)</string>
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">Holoダークテーマを使用</string>
-    <string name="pref_gb_theme_dark_summary">GravityBoxのUIをHoloダークテーマに変更します。</string>
+    <string name="pref_gb_theme_dark_title">ダークテーマを使用</string>
+    <string name="pref_gb_theme_dark_summary">GravityBoxのUIをダークテーマに変更します。</string>
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">オフ</string>
     <string name="recent_clear_top_left">左上</string>

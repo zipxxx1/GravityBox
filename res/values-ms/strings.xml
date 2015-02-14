@@ -373,8 +373,8 @@
     <string name="pref_hwkeys_disable_summary">Matikan sekali sentuh ketika pie dibenarkan</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">Gunakan tema HOLO gelap</string>
-    <string name="pref_gb_theme_dark_summary">Gunakan tema HOLO gelap untuk GB</string>
+    <string name="pref_gb_theme_dark_title">Gunakan tema gelap</string>
+    <string name="pref_gb_theme_dark_summary">Gunakan tema gelap untuk GB</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Matikan</string>

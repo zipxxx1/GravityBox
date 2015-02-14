@@ -348,8 +348,8 @@
     <string name="pref_hwkeys_disable_summary">Pasta dilimi etkinken MENU, GERİ, EV tuşlarını devre dışı bırakır. Fiziksel tuşları olan aygıtlar içindir ve donanım tuşu eylemleri çalışmaya devam eder.</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">Koyu Holo teması kullan</string>
-    <string name="pref_gb_theme_dark_summary">Arayüzde Koyu Holo temasını etkinleştirir</string>
+    <string name="pref_gb_theme_dark_title">Koyu teması kullan</string>
+    <string name="pref_gb_theme_dark_summary">Arayüzde Koyu temasını etkinleştirir</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Kapat</string>

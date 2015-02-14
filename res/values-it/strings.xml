@@ -380,7 +380,7 @@
 
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Usa tema scuro</string>
-    <string name="pref_gb_theme_dark_summary">Cambia interfaccia a GravityBox, usa il tema Holo Dark invece di Holo Light</string>
+    <string name="pref_gb_theme_dark_summary">Cambia interfaccia a GravityBox, usa il tema scuro</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Non mostrare</string>

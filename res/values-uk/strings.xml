@@ -230,7 +230,7 @@
     <string name="pref_holo_bg_dither_summary">Замінює стандартний фон на згладжений для уникнення неплавного градієнта (необхідне перезавантаження)</string>
     <string name="pref_hwkeys_disable_title">Вимкнути залізні кнопки</string>
     <string name="pref_hwkeys_disable_summary">Відключає кнопки НАЗАД, ДОДОМУ, МЕНЮ при включеному віяловому меню. Нестандартні дії цих кнопок по раніше будуть працювати. (Для пристроїв із залізними кнопками)</string>
-    <string name="pref_gb_theme_dark_title">Використовувати тему Holo Dark</string>
+    <string name="pref_gb_theme_dark_title">Використовувати темну тему</string>
     <string name="pref_gb_theme_dark_summary">Перемикає тему інтерфейсу GravityBox зі світлою на темну</string>
     <string name="recent_clear_off">Вимкнено</string>
     <string name="recent_clear_top_left">Зверху зліва</string>

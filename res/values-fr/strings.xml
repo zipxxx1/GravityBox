@@ -379,8 +379,8 @@
     <string name="pref_hwkeys_disable_summary">Désactive l\'appui simple sur les touches de navigation lorsque les touches flottantes sont activées</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">Utiliser le thème Holo Dark</string>
-    <string name="pref_gb_theme_dark_summary">Bascule l\'interface de GravityBox vers le thème Holo Dark au lieu de Holo Light</string>
+    <string name="pref_gb_theme_dark_title">Utiliser le thème Dark</string>
+    <string name="pref_gb_theme_dark_summary">Bascule l\'interface de GravityBox vers le thème Dark au lieu de Light</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Désactivé</string>

@@ -372,8 +372,8 @@
     <string name="pref_hwkeys_disable_summary">Απενεργοποιεί τα ΜΕΝΟΥ, ΕΠΙΣΤΡΟΦΗ, ΚΕΝΤΡΙΚΗΣ ΟΘΟΝΗΣ όταν τα Pie controls είναι ενεργοποιημένα. Οι ενέργειες των πλήκτρων HW θα συνεχίσουν να λειτουργούν. (για συσκευές που έχουν πλήκτρα HW)</string>
 
     <!-- Option for GB dark theme -->
-    <string name="pref_gb_theme_dark_title">Χρήση θέματος Holo Dark</string>
-    <string name="pref_gb_theme_dark_summary">Αλλάζει το GB UI σε θέμα Holo Dark αντί για Holo Light</string>
+    <string name="pref_gb_theme_dark_title">Χρήση θέματος Dark</string>
+    <string name="pref_gb_theme_dark_summary">Αλλάζει το GB UI σε θέμα Dark αντί για Light</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Ανενεργό</string>
