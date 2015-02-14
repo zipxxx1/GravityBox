@@ -15,7 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ceco.kitkat.gravitybox"
+    package="com.ceco.lollipop.gravitybox"
     android:versionCode="125"
     android:versionName="3.5.4" >
 
@@ -44,14 +44,14 @@
         android:protectionLevel="signature" />
 
     <application
-        android:name="com.ceco.kitkat.gravitybox.GravityBoxApplication"
+        android:name="com.ceco.lollipop.gravitybox.GravityBoxApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:supportsRtl="true" >
         <activity
-            android:name="com.ceco.kitkat.gravitybox.GravityBoxSettings"
+            android:name="com.ceco.lollipop.gravitybox.GravityBoxSettings"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,10 +60,10 @@
         </activity>
 
         <activity-alias
-            android:name="com.ceco.kitkat.gravitybox.GravityBoxSettingsAlias"
+            android:name="com.ceco.lollipop.gravitybox.GravityBoxSettingsAlias"
             android:label="@string/app_name"
             android:enabled="true"
-            android:targetActivity="com.ceco.kitkat.gravitybox.GravityBoxSettings" >
+            android:targetActivity="com.ceco.lollipop.gravitybox.GravityBoxSettings" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -71,12 +71,12 @@
         </activity-alias>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.quicksettings.TileOrderActivity"
+            android:name="com.ceco.lollipop.gravitybox.quicksettings.TileOrderActivity"
             android:label="@string/pref_qs_tile_order_title" >
         </activity>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.shortcuts.ShortcutActivity"
+            android:name="com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity"
             android:label="@string/shortcut_activity_title"
             android:theme="@android:style/Theme.Holo.Dialog"
             android:launchMode="singleTop"
@@ -89,31 +89,31 @@
         </activity>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.ledcontrol.LedMainActivity"
+            android:name="com.ceco.lollipop.gravitybox.ledcontrol.LedMainActivity"
             android:label="@string/pref_led_control_title" >
         </activity>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.ledcontrol.LedControlActivity"
+            android:name="com.ceco.lollipop.gravitybox.ledcontrol.LedControlActivity"
             android:label="@string/pref_unc_perapp_settings_title" >
         </activity>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.ledcontrol.LedSettingsActivity" >
+            android:name="com.ceco.lollipop.gravitybox.ledcontrol.LedSettingsActivity" >
         </activity>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.ledcontrol.ActiveScreenActivity"
+            android:name="com.ceco.lollipop.gravitybox.ledcontrol.ActiveScreenActivity"
             android:label="@string/lc_active_screen" >
         </activity>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.ledcontrol.QuietHoursActivity"
+            android:name="com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity"
             android:label="@string/lc_quiet_hours" >
         </activity>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.UnlockActivity"
+            android:name="com.ceco.lollipop.gravitybox.UnlockActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false"
             android:noHistory="true"
@@ -123,18 +123,18 @@
         </activity>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.PickImageActivity"
+            android:name="com.ceco.lollipop.gravitybox.PickImageActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false"
             android:excludeFromRecents="true">
         </activity>
 
         <activity
-            android:name="com.ceco.kitkat.gravitybox.WifiPriorityActivity"
+            android:name="com.ceco.lollipop.gravitybox.WifiPriorityActivity"
             android:label="@string/pref_wifi_priority_title" >
         </activity>
 
-        <service android:name="com.ceco.kitkat.gravitybox.GravityBoxService">
+        <service android:name="com.ceco.lollipop.gravitybox.GravityBoxService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.TOGGLE_SYNC" />
                 <action android:name="gravitybox.intent.action.GET_SYNC_STATUS" />
@@ -142,29 +142,29 @@
             </intent-filter>
         </service>
 
-        <service android:name="com.ceco.kitkat.gravitybox.TorchService">
+        <service android:name="com.ceco.lollipop.gravitybox.TorchService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.TOGGLE_TORCH" />
             </intent-filter>
         </service>
 
-        <service android:name="com.ceco.kitkat.gravitybox.RecordingService">
+        <service android:name="com.ceco.lollipop.gravitybox.RecordingService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.RECORDING_START" />
                 <action android:name="gravitybox.intent.action.RECORDING_STOP" />
             </intent-filter>
         </service>
 
-        <service android:name="com.ceco.kitkat.gravitybox.ScreenRecordingService">
+        <service android:name="com.ceco.lollipop.gravitybox.ScreenRecordingService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.TOGGLE_SCREEN_RECORDING" />
             </intent-filter>
         </service>
 
-        <service android:name="com.ceco.kitkat.gravitybox.KeyguardImageService" />
+        <service android:name="com.ceco.lollipop.gravitybox.KeyguardImageService" />
 
         <receiver 
-            android:name=".BootCompletedReceiver"
+            android:name="com.ceco.lollipop.gravitybox.BootCompletedReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -173,7 +173,7 @@
         </receiver>
 
         <receiver 
-            android:name=".UnlockActivity$UnlockReceiver"
+            android:name="com.ceco.lollipop.gravitybox.UnlockActivity$UnlockReceiver"
             android:enabled="true"
             android:exported="true"
             android:permission="gravitybox.permission.UNLOCK">
@@ -183,7 +183,7 @@
         </receiver>
 
         <receiver 
-            android:name=".UnlockActivity$PkgManagerReceiver"
+            android:name="com.ceco.lollipop.gravitybox.UnlockActivity$PkgManagerReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

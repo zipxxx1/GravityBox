@@ -33,7 +33,7 @@
         android:defaultValue="false"
         android:dependency="activeScreenEnabled" />
 
-    <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+    <com.ceco.lollipop.gravitybox.preference.SeekBarPreference
         android:key="pref_unc_as_headsup_timeout"
         android:title="@string/pref_unc_as_headsup_timeout_title"
         android:summary="@string/pref_unc_as_headsup_timeout_summary"
@@ -53,7 +53,7 @@
         android:defaultValue="17"
         android:dependency="activeScreenEnabled" />
 
-    <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+    <com.ceco.lollipop.gravitybox.preference.SeekBarPreference
         android:key="pref_unc_as_headsup_alpha"
         android:title="@string/pref_heads_up_alpha_title"
         minimum="0"
