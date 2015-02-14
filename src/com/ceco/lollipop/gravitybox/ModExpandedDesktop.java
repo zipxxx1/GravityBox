@@ -73,7 +73,7 @@ public class ModExpandedDesktop {
         static final int FLAG_LAYOUT_INSET_DECOR = WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
         static final int FLAG_LAYOUT_IN_OVERSCAN = 0x02000000;
         static final int TYPE_HIDDEN_NAV_CONSUMER = FIRST_SYSTEM_WINDOW+22;
-        static final int TYPE_KEYGUARD = WindowManager.LayoutParams.TYPE_KEYGUARD;
+        static final int TYPE_KEYGUARD = WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG;
         static final int TYPE_STATUS_BAR = WindowManager.LayoutParams.TYPE_STATUS_BAR;
     }
 

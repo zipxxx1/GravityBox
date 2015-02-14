@@ -20,9 +20,9 @@
     android:versionName="3.5.4" >
 
     <uses-sdk
-        android:minSdkVersion="19"
-        android:maxSdkVersion="19"
-        android:targetSdkVersion="19" />
+        android:minSdkVersion="21"
+        android:maxSdkVersion="21"
+        android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />

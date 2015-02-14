@@ -19,6 +19,7 @@ import com.ceco.lollipop.gravitybox.ModHwKeys;
 import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
@@ -36,7 +37,7 @@ public class SleepTile extends BasicTile {
             public void onClick(View v) {
                 try {
                     PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-                    pm.goToSleep(SystemClock.uptimeMillis());
+                    XposedHelpers.callMethod(pm, "goToSleep", SystemClock.uptimeMillis());
                 } catch(Exception e) {
                     XposedBridge.log(e);
                 }

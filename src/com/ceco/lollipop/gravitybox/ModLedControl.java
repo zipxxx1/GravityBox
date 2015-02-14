@@ -518,7 +518,7 @@ public class ModLedControl {
         }
         long ident = Binder.clearCallingIdentity();
         try {
-            mPm.wakeUp(SystemClock.uptimeMillis());
+            XposedHelpers.callMethod(mPm, "wakeUp", SystemClock.uptimeMillis());
         } finally {
             Binder.restoreCallingIdentity(ident);
         }

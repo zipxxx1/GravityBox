@@ -1330,7 +1330,7 @@ public class ModHwKeys {
     private static void goToSleep() {
         try {
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-            pm.goToSleep(SystemClock.uptimeMillis());
+            XposedHelpers.callMethod(pm, "goToSleep", SystemClock.uptimeMillis());
         } catch (Exception e) {
             XposedBridge.log(e);
         }
