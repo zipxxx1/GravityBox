@@ -23,7 +23,7 @@
     <string name="reboot_required">As mudanças serão aplicadas após reiniciar o dispositivo.</string>
 
     <string name="poweroff_advanced_title">Menu de Desligar avançado</string>
-    <string name="poweroff_advanced_summary">Adiciona opções para reiniciar em modo de recuperação e em modo bootloader ao menu de desligar</string>
+    <string name="poweroff_advanced_summary">Adiciona opções para reiniciar em modo de recuperação ao menu de desligar</string>
     <string name="poweroff_recovery">Recuperação</string>
     <string name="poweroff_bootloader">Bootloader</string>
 
@@ -561,7 +561,7 @@
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">Desbloqueio rápido</string>
-    <string name="pref_lockscreen_quick_unlock_summary">Desbloqueia automaticamente quando o PIN/senha correta é inserida.</string>
+    <string name="pref_lockscreen_quick_unlock_summary">Desbloqueia automaticamente quando o PIN/senha correta é inserido(a).</string>
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">Desabilitado</string>
@@ -572,7 +572,7 @@
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">Política de bloqueio da barra de status</string>
     <string name="sbl_policy_default">Padrão</string>
-    <string name="sbl_policy_unlocked">Desbloqueada se não houver bloqueio de tela</string>
+    <string name="sbl_policy_unlocked">Desbloqueada se o método de bloqueio for inseguro</string>
     <string name="sbl_policy_locked">Bloqueada</string>
 
     <!-- Data traffic monitor -->
@@ -1072,7 +1072,7 @@
     <!-- Web service client strings -->
     <string name="wsc_hash_creation_failed">Erro ao gerar valor hash do aplicativo</string>
     <string name="wsc_parse_response_error">Erro ao processar dados obtidos através do serviço Web</string>
-    <string name="wsc_hash_invalid">O serviço Web recusou comunicação devido a incompatibilidade de hashes. Tipicamente acontece caso
+    <string name="wsc_hash_invalid">O serviço Web recusou comunicação devido a incompatibilidade de hashes. Isso tipicamente acontece se
         você usa uma versão não oficial do GravityBox ou se o APK foi modificado por terceiros.</string>
     <string name="wsc_please_wait">Por favor aguarde&#8230;</string>
     <string name="wsc_error">Erro na comunicação com o serviço Web: %s</string>
@@ -1562,14 +1562,14 @@
     <!-- Battery tile settings -->
     <string name="pref_cat_qs_battery_tile_settings_title">Configs. do painel Bateria</string>
     <string name="pref_qs_battery_extended_title">Painel avançado</string>
-    <string name="pref_qs_battery_extended_summary">Permite mostar percentagem, percentagem e tensão da bateria no painel (necessário reiniciar)</string>
+    <string name="pref_qs_battery_extended_summary">Permite mostar porcentagem, temperatura e tensão da bateria no painel (necessário reiniciar)</string>
     <string name="pref_qs_battery_temp_unit_title">Unidade de temperatura</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
 
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">Ações associadas ao fone de ouvido</string>
-    <string name="pref_headset_action_plug_title">Quando o fone de ouvido for plugado</string>
+    <string name="pref_headset_action_plug_title">Quando o fone de ouvido for conectado</string>
     <string name="pref_headset_action_unplug_title">Quando o fone de ouvido for removido</string>
 
     <!-- Quiet Hours: mute vibrations -->
@@ -1611,7 +1611,7 @@
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Modo Tela ativo</string>
     <string name="lc_active_screen_mode_disabled">Desativado</string>
-    <string name="lc_active_screen_mode_nothing">Ligar tela unicamente</string>
+    <string name="lc_active_screen_mode_nothing">Somente ligar a tela</string>
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
@@ -1632,7 +1632,7 @@
     <string name="hwkey_action_custom">Ação personalizada</string>
 
     <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Temporização das notificações flutuantes</string>
+    <string name="pref_unc_as_headsup_timeout_title">Tempo limite das notificações flutuantes</string>
     <string name="pref_unc_as_headsup_timeout_summary">Permite definir por quanto tempo deverá ser mostrada a notificação (0 = até desbloquear)</string>
 
     <!-- UNC Active Screen: heads up position -->
@@ -1656,8 +1656,8 @@
 
     <!-- Fake ID patch -->
     <string name="pref_patch_fake_id_title">Corrigir vulnerabilidade "Fake ID"</string>
-    <string name="pref_patch_fake_id_summary">Notar que os aplicativos para verificação de segurança não são capazes de detectar se a correção feita pelo GravityBox produziu efeito, 
-        reportando o sistema como vulnerável, mesmo não sendo o caso (necessário reiniciar)</string>
+    <string name="pref_patch_fake_id_summary">Note que os aplicativos de verificação de segurança não são capazes de detectar se a correção feita pelo GravityBox produziu efeito, 
+        assim irão reportar o sistema como vulnerável, mesmo não sendo o caso (necessário reiniciar)</string>
 
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Perfis de áudio</string>
@@ -1718,8 +1718,8 @@
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorar em chamada recebida</string>
     
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">Barra de progresso de transferências</string>
-    <string name="pref_statusbar_download_progress_summary">Mostra barra de progresso na barra de status para transferências efetuadas através do gerenciador de download padrão</string>
+    <string name="pref_statusbar_download_progress_title">Barra de progresso de downloads</string>
+    <string name="pref_statusbar_download_progress_summary">Mostra barra de progresso na barra de status para downloads efetuados através do gerenciador de download padrão</string>
     <string name="sb_download_progress_off">Desativar</string>
     <string name="sb_download_progress_top">Acima da barra de status</string>
     <string name="sb_download_progress_bottom">Abaixo da barra de status</string>
@@ -1782,9 +1782,9 @@
     <!-- Compatibility warning -->
     <string name="compat_warning_title">AVISO</string>
     <string name="compat_warning_message">PARA USO EXCLUSIVO EM DISPOSITIVOS EDIÇÃO GOOGLE PLAY OU COM ANDROID PURO!\n\n
-        O uso em ROMS customizadas ou altamente modificadas pelos fabricantes como é o caso de TouchWiz (Samsung), Sense (HTC) ou Xperia (Sony) entre outras,
-        não é suportado e poderá causar efeitos indesejados.\n\nSe proceder, você estará confirmando que está consciente disso e não poderá esperar qualquer tipo de suporte.
-        Para mais informações sobre a compatibilidade, visite <a href="http://forum.xda-developers.com/showthread.php?t=2554049">a página de suporte no XDA</a>.</string>
+        O uso em ROMs customizadas ou altamente modificadas pelos fabricantes como é o caso de TouchWiz (Samsung), Sense (HTC) ou Xperia (Sony) entre outras,
+        não é suportado e poderá causar efeitos indesejados.\n\nSe proceder, você estará confirmando que está consciente disso e não poderá esperar por qualquer tipo de suporte.
+        Para mais informações sobre compatibilidade, visite <a href="http://forum.xda-developers.com/showthread.php?t=2554049">a página de suporte no XDA</a>.</string>
     <string name="compat_warning_ok_stage1">Certo, entendi.</string>
     <string name="compat_warning_ok_stage2">REALMENTE ENTENDI!</string>
 
@@ -1809,7 +1809,7 @@
     <!-- Smart Radio: Adaptive delay for delayed power save -->
     <string name="pref_smart_radio_adaptive_delay_title">Adaptação de atraso</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Prolonga automaticamente atraso
-se o tráfego de dados móveis atual excede limite definido (Ajuste para 0 para desabilitar)</string>
+se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 para desabilitar)</string>
 
     <!-- UNC: Progress bar tracking -->
     <string name="pref_lc_progress_tracking_title">Acompanhamento da barra de progresso</string>
@@ -1822,7 +1822,7 @@ se o tráfego de dados móveis atual excede limite definido (Ajuste para 0 para 
     <string name="dt_display_mode_pt">Quando a barra de status exibir progresso em andamento</string>
 
     <!-- Unlock ring targets: custom unlock ring -->
-    <string name="pref_lockscreen_ring_custom_unlock_title">Destino de desbloqueio Personalizado</string>
+    <string name="pref_lockscreen_ring_custom_unlock_title">Destino de desbloqueio personalizado</string>
     <string name="pref_lockscreen_ring_custom_unlock_summary">Permite definir o destino de desbloqueio manualmente. Certifique-se de que pelo menos um dos alvos do anel seja definido como usar a ação GravityBox Unlock ou para iniciar algum aplicativo.</string>
 
     <!-- Wi-Fi priority -->
