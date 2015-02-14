@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">GravityBox [KK]</string>
+    <string name="app_name">GravityBox [LP]</string>
 
     <string name="battery_style_title">Valg af batteriindikator</string>	
     <string name="battery_style_stock">Standard batteriindikator</string>
