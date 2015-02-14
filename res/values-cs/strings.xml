@@ -1838,7 +1838,23 @@
     <string name="pref_battery_bar_color_title">Barva</string>
     <string name="pref_battery_bar_color_low_title">Barva nízké úrovně</string>
     <string name="pref_battery_bar_color_critical_title">Barva kritické úrovně</string>
-    <string name="pref_battery_bar_centered_title">Vycentrovaný</string>
+    <string name="pref_battery_bar_centered_title">Vycentrován</string>
     <string name="pref_battery_bar_color_charging_title">Barva nabíjení</string>
+
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Režim</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animovaný</string>
+    <string name="pref_statusbar_download_progress_centered_title">Vycentrován</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Tloušťka</string>
+    <string name="pref_statusbar_download_progress_margin_title">Okraj hrany</string>
+
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">Ťuknutí na Menu</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">Ťuknutí na Zpět</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">Dvojité klepnutí na tlačítko seznamu aplikací</string>
 
 </resources>
