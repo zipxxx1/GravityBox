@@ -1,3 +1,25 @@
+Changelog 3.5.4 - 14/02/2015
+--------------------------------------
+- Smarter identification of MediaTek devices
+- Improved detection of GPE devices (thanks to KingKaminari)
+- Fixed unlock ring getting frozen on MTK devices after launching GravityBox Action from ring target
+- Statusbar tweaks / Progress bar
+--- added option for progress bar animation
+--- added option for centered progress bar
+--- added option for progress bar thickness
+--- added option for edge margin
+- Key actions:
+--- added single-tap action for Menu key
+--- added single-tap action for Back key
+--- added double-tap action for Recents key
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated French translations (thanks to ch-vox)
+- Updated Portuguese (BR) translations (thanks to wyghor, KingKaminari)
+- Updated Slovak and Czech translations
+
 Changelog 3.5.3 - 14/01/2015
 --------------------------------------
 - Launcher tweaks: adjusted for Google Search 4.1.24
