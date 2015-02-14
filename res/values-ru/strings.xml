@@ -1876,5 +1876,21 @@
     <string name="pref_battery_bar_color_critical_title">Цвет критич. состояния</string>
     <string name="pref_battery_bar_centered_title">По центру</string>
     <string name="pref_battery_bar_color_charging_title">Цвет при зарядке</string>
+    
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Режим</string>
+    <string name="pref_statusbar_download_progress_animated_title">Анимированная</string>
+    <string name="pref_statusbar_download_progress_centered_title">По центру</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Толщина</string>
+    <string name="pref_statusbar_download_progress_margin_title">Отступ от края</string>
+
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">Нажатие на кнопку Меню</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">Нажатие на кнопку Назад</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">Нажатие на кнопку Недавние</string>
 
 </resources>
