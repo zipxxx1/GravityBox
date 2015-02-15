@@ -699,6 +699,7 @@
     </string-array>
 
     <string-array name="volume_panel_timeout_entries" translatable="false">
+        <item>@string/volume_panel_timeout_default</item>
         <item>500ms</item>
         <item>1000ms</item>
         <item>1500ms</item>
@@ -708,6 +709,7 @@
     </string-array>
 
     <string-array name="volume_panel_timeout_values" translatable="false">
+        <item>0</item>
         <item>500</item>
         <item>1000</item>
         <item>1500</item>

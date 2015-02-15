@@ -1304,10 +1304,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefDataTrafficOmniAutohideTh;
         private CheckBoxPreference mPrefDataTrafficActiveMobileOnly;
         private ListPreference mPrefDataTrafficDisplayMode;
-        private CheckBoxPreference mPrefLinkVolumes;
-        private CheckBoxPreference mPrefVolumePanelExpandable;
-        private CheckBoxPreference mPrefVolumePanelFullyExpandable;
-        private CheckBoxPreference mPrefVolumePanelAutoexpand;
+        //private CheckBoxPreference mPrefLinkVolumes;
+        //private CheckBoxPreference mPrefVolumePanelExpandable;
+        //private CheckBoxPreference mPrefVolumePanelFullyExpandable;
+        //private CheckBoxPreference mPrefVolumePanelAutoexpand;
         private ListPreference mPrefVolumePanelTimeout;
         private CheckBoxPreference mPrefHomeDoubletapDisable;
         private PreferenceScreen mPrefCatAppLauncher;
@@ -1545,10 +1545,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatMedia = (PreferenceScreen) findPreference(PREF_CAT_KEY_MEDIA);
             mPrefSafeMediaVolume = (CheckBoxPreference) findPreference(PREF_KEY_SAFE_MEDIA_VOLUME);
             mPrefMusicVolumeSteps = (CheckBoxPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS);
-            mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
-            mPrefVolumePanelExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_EXPANDABLE);
-            mPrefVolumePanelFullyExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_FULLY_EXPANDABLE);
-            mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
+            //mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
+            //mPrefVolumePanelExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_EXPANDABLE);
+            //mPrefVolumePanelFullyExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_FULLY_EXPANDABLE);
+            //mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
             mPrefVolumePanelTimeout = (ListPreference) findPreference(PREF_KEY_VOLUME_PANEL_TIMEOUT);
             mPrefTranclucentDecor =  (ListPreference) findPreference(PREF_KEY_TRANSLUCENT_DECOR);
 
@@ -1738,7 +1738,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.hasTelephonySupport(getActivity())) {
                 mPrefCatLsOther.removePreference(mPrefLockscreenDisableEcb);
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
-                mPrefCatMedia.removePreference(mPrefLinkVolumes);
+                //mPrefCatMedia.removePreference(mPrefLinkVolumes);
             }
             if (!Utils.isAppInstalled(getActivity(), APP_MESSAGING) && mPrefCatPhoneMessaging != null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
@@ -2312,10 +2312,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefDataTrafficSize.setSummary(mPrefDataTrafficSize.getEntry());
             }
 
-            if (key == null || key.equals(PREF_KEY_VOLUME_PANEL_EXPANDABLE)) {
-                mPrefVolumePanelAutoexpand.setEnabled(mPrefVolumePanelExpandable.isChecked());
-                mPrefVolumePanelFullyExpandable.setEnabled(mPrefVolumePanelExpandable.isChecked());
-            }
+//            if (key == null || key.equals(PREF_KEY_VOLUME_PANEL_EXPANDABLE)) {
+//                mPrefVolumePanelAutoexpand.setEnabled(mPrefVolumePanelExpandable.isChecked());
+//                mPrefVolumePanelFullyExpandable.setEnabled(mPrefVolumePanelExpandable.isChecked());
+//            }
 
             if (key == null || key.equals(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE)) {
                 mPrefSbSignalColorMode.setSummary(mPrefSbSignalColorMode.getEntry());
@@ -2843,7 +2843,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_VOLUME_PANEL_TIMEOUT)) {
                 intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
                 intent.putExtra(EXTRA_TIMEOUT, Integer.valueOf(
-                        prefs.getString(PREF_KEY_VOLUME_PANEL_TIMEOUT, "3000")));
+                        prefs.getString(PREF_KEY_VOLUME_PANEL_TIMEOUT, "0")));
             } else if (key.equals(PREF_KEY_VOLUME_PANEL_TRANSPARENCY)) {
                 intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
                 intent.putExtra(EXTRA_TRANSPARENCY,

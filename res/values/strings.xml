@@ -1885,4 +1885,7 @@
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Recents key double-tap action</string>
 
+    <!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">Default</string>
+
 </resources>

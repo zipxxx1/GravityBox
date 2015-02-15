@@ -133,9 +133,9 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             SystemPropertyProvider.init(prefs, lpparam.classLoader);
         }
 
-        if (lpparam.packageName.equals(ModAudioSettings.PACKAGE_NAME)) {
-            ModAudioSettings.init(prefs, lpparam.classLoader);
-        }
+//        if (lpparam.packageName.equals(ModAudioSettings.PACKAGE_NAME)) {
+//            ModAudioSettings.init(prefs, lpparam.classLoader);
+//        }
 
         // MTK Specific
         if (Utils.isMtkDevice()) {
