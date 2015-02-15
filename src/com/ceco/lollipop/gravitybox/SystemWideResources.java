@@ -18,11 +18,19 @@ package com.ceco.lollipop.gravitybox;
 import android.content.res.Resources;
 import android.content.res.XModuleResources;
 import android.content.res.XResources;
+
 import com.ceco.lollipop.gravitybox.R;
+
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 
 public class SystemWideResources {
+    private static final String TAG = "GB:SystemWideResources";
+    private static final boolean DEBUG = false;
+
+    private static void log(String message) {
+        XposedBridge.log(TAG + ": " + message);
+    }
 
     public static void initResources(final XSharedPreferences prefs) {
         try {
@@ -67,6 +75,18 @@ public class SystemWideResources {
             }
 
             XResources.setSystemWideReplacement("android", "bool", "config_sip_wifi_only", false);
+
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_BRIGHTNESS_MASTER_SWITCH, false)) {
+                int brightnessMin = prefs.getInt(GravityBoxSettings.PREF_KEY_BRIGHTNESS_MIN, 20);
+                XResources.setSystemWideReplacement(
+                    "android", "integer", "config_screenBrightnessSettingMinimum", brightnessMin);
+                if (DEBUG) log("Minimum brightness value set to: " + brightnessMin);
+
+                int screenDim = prefs.getInt(GravityBoxSettings.PREF_KEY_SCREEN_DIM_LEVEL, 10);
+                XResources.setSystemWideReplacement(
+                        "android", "integer", "config_screenBrightnessDim", screenDim);
+                if (DEBUG) log("Screen dim level set to: " + screenDim);
+            }
 
         } catch (Throwable t) {
             XposedBridge.log(t);

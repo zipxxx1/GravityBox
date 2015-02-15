@@ -30,10 +30,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Resources;
-import android.content.res.XResources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,18 +43,19 @@ import android.os.Messenger;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.ResultReceiver;
+import android.view.Surface;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class ModDisplay {
     private static final String TAG = "GB:ModDisplay";
-    private static final String CLASS_DISPLAY_POWER_CONTROLLER = "com.android.server.power.DisplayPowerController";
-    private static final String CLASS_LIGHT_SERVICE_LIGHT = "com.android.server.LightsService$Light";
-    private static final String CLASS_LIGHT_SERVICE = "com.android.server.LightsService";
-    private static final String CLASS_DISPLAY_POWER_REQUEST = "com.android.server.power.DisplayPowerRequest";
+    private static final String CLASS_DISPLAY_POWER_CONTROLLER = "com.android.server.display.DisplayPowerController";
+    private static final String CLASS_LIGHT_SERVICE_LIGHT = "com.android.server.lights.LightsService$LightImpl";
+    private static final String CLASS_LIGHT_SERVICE = "com.android.server.lights.LightsService";
+    private static final String CLASS_DISPLAY_POWER_REQUEST = "android.hardware.display.DisplayManagerInternal.DisplayPowerRequest";
+    private static final String CLASS_DISPLAY_MANAGER_GLOBAL = "android.hardware.display.DisplayManagerGlobal";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
 
@@ -68,8 +69,6 @@ public class ModDisplay {
 
     private static Context mContext;
     private static Object mDisplayPowerController;
-    private static int mScreenBrightnessRangeMinimum;
-    private static int mScreenBrightnessRangeMaximum;
     private static String mButtonBacklightMode;
     private static boolean mButtonBacklightNotif;
     private static PowerManager mPm;
@@ -212,7 +211,7 @@ public class ModDisplay {
                     mHandler.removeCallbacks(this);
                     mPendingNotifColor = 
                             mButtonBacklightMode.equals(GravityBoxSettings.BB_MODE_ALWAYS_ON) 
-                                    && mPm.isScreenOn() ? 0xff6e6e6e : 0;
+                                    && mPm.isInteractive() ? 0xff6e6e6e : 0;
                     XposedHelpers.callMethod(ls, "setLight_native",
                             np, LIGHT_ID_BUTTONS, mPendingNotifColor, 0, 0, 0, 0);
                 } else {
@@ -234,12 +233,12 @@ public class ModDisplay {
         }
     };
 
-    public static void initZygote(final XSharedPreferences prefs) {
+    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> classDisplayPowerController =
-                    XposedHelpers.findClass(CLASS_DISPLAY_POWER_CONTROLLER, null);
-            final Class<?> classLight = XposedHelpers.findClass(CLASS_LIGHT_SERVICE_LIGHT, null);
-            final Class<?> classLightService = XposedHelpers.findClass(CLASS_LIGHT_SERVICE, null);
+                    XposedHelpers.findClass(CLASS_DISPLAY_POWER_CONTROLLER, classLoader);
+            final Class<?> classLight = XposedHelpers.findClass(CLASS_LIGHT_SERVICE_LIGHT, classLoader);
+            final Class<?> classLightService = XposedHelpers.findClass(CLASS_LIGHT_SERVICE, classLoader);
 
             final boolean brightnessSettingsEnabled = 
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_BRIGHTNESS_MASTER_SWITCH, false);
@@ -256,27 +255,19 @@ public class ModDisplay {
             XposedBridge.hookAllConstructors(classDisplayPowerController, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (DEBUG) log("DisplayPowerController constructed");
                     if (param.args.length < 2) {
                         log("Unsupported parameters. Aborting.");
                         return;
                     }
-                    mContext = (Context) param.args[1];
+                    mContext = (Context) param.args[0];
                     if (mContext == null) {
                         log("Context is null. Aborting.");
                         return;
                     }
 
                     mDisplayPowerController = param.thisObject;
-                    mKeyguardManager = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
 
                     if (brightnessSettingsEnabled) {
-                        mScreenBrightnessRangeMinimum = XposedHelpers.getIntField(
-                                param.thisObject, "mScreenBrightnessRangeMinimum");
-                        mScreenBrightnessRangeMaximum = XposedHelpers.getIntField(
-                                param.thisObject, "mScreenBrightnessRangeMaximum");
-    
-                        prefs.reload();
                         String config = prefs.getString(GravityBoxSettings.PREF_KEY_AUTOBRIGHTNESS, null);
                         if (config != null) {
                             String[] luxValues = config.split("\\|")[0].split(",");
@@ -302,30 +293,9 @@ public class ModDisplay {
                     }
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+                    if (DEBUG) log("DisplayPowerController constructed");
                 }
             });
-
-            if (brightnessSettingsEnabled) {
-                int brightnessMin = prefs.getInt(GravityBoxSettings.PREF_KEY_BRIGHTNESS_MIN, 20);
-                XResources.setSystemWideReplacement(
-                    "android", "integer", "config_screenBrightnessSettingMinimum", brightnessMin);
-                if (DEBUG) log("Minimum brightness value set to: " + brightnessMin);
-
-                int screenDim = prefs.getInt(GravityBoxSettings.PREF_KEY_SCREEN_DIM_LEVEL, 10);
-                XResources.setSystemWideReplacement(
-                        "android", "integer", "config_screenBrightnessDim", screenDim);
-                if (DEBUG) log("Screen dim level set to: " + screenDim);
-
-                XposedHelpers.findAndHookMethod(classDisplayPowerController, 
-                        "clampScreenBrightness", int.class, new XC_MethodReplacement() {
-    
-                            @Override
-                            protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                                return XposedHelpers.callMethod(param.thisObject, "clamp", param.args[0],
-                                        mScreenBrightnessRangeMinimum, mScreenBrightnessRangeMaximum);
-                            }
-                });
-            }
 
             XposedBridge.hookAllConstructors(classLightService, new XC_MethodHook() {
                 @Override
@@ -368,7 +338,7 @@ public class ModDisplay {
                             return;
                         } else if (mButtonBacklightMode.equals(GravityBoxSettings.BB_MODE_ALWAYS_ON)) {
                             int color = (Integer)param.args[0];
-                            if (mPm.isScreenOn() && (color == 0 || color == Color.BLACK)) {
+                            if (mPm.isInteractive() && (color == 0 || color == Color.BLACK)) {
                                 if (DEBUG) log("Button backlight always on and screen is on. Turning on");
                                 param.args[0] = 0xff6e6e6e;
                                 return;
@@ -422,29 +392,35 @@ public class ModDisplay {
                     CLASS_DISPLAY_POWER_REQUEST, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!mLsBgLastScreenEnabled || mKeyguardManager.isKeyguardLocked()) return;
+                    if (!mLsBgLastScreenEnabled) return;
+
+                    if (mKeyguardManager == null) {
+                        mKeyguardManager = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
+                    }
+                    if (mKeyguardManager.isKeyguardLocked()) return;
 
                     final boolean waitForNegativeProximity = (Boolean) param.args[1];
                     final boolean pendingWaitForNegativeProximity = 
                             XposedHelpers.getBooleanField(param.thisObject, "mPendingWaitForNegativeProximityLocked");
                     final Object pendingRequestLocked = 
                             XposedHelpers.getObjectField(param.thisObject, "mPendingRequestLocked");
-                    final int requestedScreenState = XposedHelpers.getIntField(param.args[0], "screenState");
+                    final int requestedScreenState = XposedHelpers.getIntField(param.args[0], "policy");
 
                     if ((waitForNegativeProximity && !pendingWaitForNegativeProximity ||
                             pendingRequestLocked == null || !pendingRequestLocked.equals(param.args[0])) &&
                             requestedScreenState == 0) {
-                        final Object displayManager = XposedHelpers.getObjectField(param.thisObject, "mDisplayManager");
-                        final int display0 = ((int[])XposedHelpers.callMethod(displayManager, "getDisplayIds"))[0];
-                        Object displayInfo = XposedHelpers.callMethod(displayManager, "getDisplayInfo", display0);
+                        final Object dm = XposedHelpers.callStaticMethod(XposedHelpers.findClass(
+                                CLASS_DISPLAY_MANAGER_GLOBAL, classLoader), "getInstance");
+                        final int display0 = ((int[])XposedHelpers.callMethod(dm, "getDisplayIds"))[0];
+                        Object displayInfo = XposedHelpers.callMethod(dm, "getDisplayInfo", display0);
                         final int naturalW = (Integer)XposedHelpers.callMethod(displayInfo, "getNaturalWidth");
                         final int naturalH = (Integer)XposedHelpers.callMethod(displayInfo, "getNaturalHeight");
 
                         /* Limit max screenshot capture layer to 22000.
                         Prevents status bar and navigation bar from being captured.*/
-                        final Bitmap bmp = (Bitmap) XposedHelpers.callStaticMethod(
-                             XposedHelpers.findClass("android.view.SurfaceControl", null), "screenshot",
-                             naturalW, naturalH, 0, 22000);
+                        Class<?> surfaceCtrl = XposedHelpers.findClass("android.view.SurfaceControl", classLoader);
+                        final Bitmap bmp = (Bitmap) XposedHelpers.callStaticMethod(surfaceCtrl, "screenshot",
+                             new Rect(), naturalW, naturalH, 0, 22000, false, Surface.ROTATION_0);
                         if (bmp == null) return;
 
                         final Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
@@ -558,6 +534,7 @@ public class ModDisplay {
     private static void updateAutobrightnessConfig(int[] lux, int[] brightness) {
         if (mDisplayPowerController == null || mContext == null) return;
 
+        if (DEBUG) log("updateAutobrightnessConfig called");
         Resources res = mContext.getResources();
 
         int screenBrightnessDim = res.getInteger(res.getIdentifier(
@@ -585,8 +562,10 @@ public class ModDisplay {
             Object autoBrightnessSpline = XposedHelpers.callMethod(
                     mDisplayPowerController, "createAutoBrightnessSpline", lux, brightnessAdj);
             if (autoBrightnessSpline != null) {
-                XposedHelpers.setObjectField(mDisplayPowerController, 
-                    "mScreenAutoBrightnessSpline", autoBrightnessSpline);
+                Object abrCtrl = XposedHelpers.getObjectField(mDisplayPowerController,
+                        "mAutomaticBrightnessController");
+                XposedHelpers.setObjectField(abrCtrl, 
+                        "mScreenAutoBrightnessSpline", autoBrightnessSpline);
                 if (brightnessAdj[0] < screenBrightnessMinimum) {
                     screenBrightnessMinimum = brightnessAdj[0];
                 }
@@ -597,8 +576,10 @@ public class ModDisplay {
             }
         }
 
-        mScreenBrightnessRangeMinimum = (Integer) XposedHelpers.callMethod(
+        int screenBrightnessRangeMinimum = (Integer) XposedHelpers.callMethod(
                 mDisplayPowerController, "clampAbsoluteBrightness", screenBrightnessMinimum);
+        XposedHelpers.setIntField(mDisplayPowerController, "mScreenBrightnessRangeMinimum",
+                screenBrightnessRangeMinimum);
 
         if (DEBUG) log("Autobrightness config updated");
     }
