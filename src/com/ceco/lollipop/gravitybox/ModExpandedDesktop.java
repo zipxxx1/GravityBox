@@ -43,7 +43,6 @@ public class ModExpandedDesktop {
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
     private static final String CLASS_POLICY_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
-    private static final String CLASS_IMMERSIVE_MODE_CONFIRM = "com.android.internal.policy.impl.ImmersiveModeConfirmation";
     private static final String CLASS_SYSTEM_GESTURE = "com.android.internal.policy.impl.SystemGesturesPointerEventListener";
 
     private static final boolean DEBUG = false;
@@ -64,6 +63,7 @@ public class ModExpandedDesktop {
         static final int SYSTEM_UI_CLEARABLE_FLAGS =
                 SYSTEM_UI_FLAG_LOW_PROFILE | SYSTEM_UI_FLAG_HIDE_NAVIGATION
                     | SYSTEM_UI_FLAG_FULLSCREEN;
+        static final int SYSTEM_UI_TRANSPARENT = 0x00008000;
     }
 
     private static class WmLp {
@@ -75,6 +75,7 @@ public class ModExpandedDesktop {
         static final int TYPE_HIDDEN_NAV_CONSUMER = FIRST_SYSTEM_WINDOW+22;
         static final int TYPE_KEYGUARD = WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG;
         static final int TYPE_STATUS_BAR = WindowManager.LayoutParams.TYPE_STATUS_BAR;
+        static final int PRIVATE_FLAG_KEYGUARD = 0x00000400;
     }
 
     private static Context mContext;
@@ -227,7 +228,6 @@ public class ModExpandedDesktop {
     public static void initZygote(final XSharedPreferences prefs) {
         try {
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
-            final Class<?> classImmersiveModeConfirm = XposedHelpers.findClass(CLASS_IMMERSIVE_MODE_CONFIRM, null);
 
             mNavbarOverride = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false);
             if (mNavbarOverride) {
@@ -412,14 +412,18 @@ public class ModExpandedDesktop {
                         XposedHelpers.setIntField(getObj("mSystemGestures"), "screenHeight", displayHeight - overscanTop - overscanBottom);
                         setInt("mDockLeft", overscanLeft); setInt("mContentLeft", overscanLeft); setInt("mStableLeft", overscanLeft);
                         setInt("mStableFullscreenLeft", overscanLeft); setInt("mCurLeft", overscanLeft);
+                        setInt("mVoiceContentLeft", overscanLeft);
                         setInt("mDockTop", overscanTop); setInt("mContentTop", overscanTop); setInt("mStableTop", overscanTop);
                         setInt("mStableFullscreenTop", overscanTop); setInt("mCurTop", overscanTop);
+                        setInt("mVoiceContentTop", overscanTop);
                         val = displayWidth - overscanRight;
                         setInt("mDockRight", val); setInt("mContentRight", val); setInt("mStableRight", val);
                         setInt("mStableFullscreenRight", val); setInt("mCurRight", val);
+                        setInt("mVoiceContentRight", val);
                         val = displayHeight - overscanBottom;
                         setInt("mDockBottom", val); setInt("mContentBottom", val); setInt("mStableBottom", val); 
                         setInt("mStableFullscreenBottom", val); setInt("mCurBottom", val);
+                        setInt("mVoiceContentBottom", val);
                         setInt("mDockLayer", 0x10000000);
                         setInt("mStatusBarLayer", -1);
 
@@ -440,13 +444,16 @@ public class ModExpandedDesktop {
                             // drive nav being hidden only by whether it is requested.
                             final int sysui = getInt("mLastSystemUiFlags");
                             boolean navVisible = (sysui & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
-                            boolean navTranslucent = (sysui & ViewConst.NAVIGATION_BAR_TRANSLUCENT) != 0;
+                            boolean navTranslucent = (sysui & 
+                                    (ViewConst.NAVIGATION_BAR_TRANSLUCENT | ViewConst.SYSTEM_UI_TRANSPARENT)) != 0;
                             boolean immersive = (sysui & ViewConst.SYSTEM_UI_FLAG_IMMERSIVE) != 0;
                             boolean immersiveSticky = (sysui & ViewConst.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) != 0;
                             boolean navAllowedHidden = immersive || immersiveSticky;
                             navTranslucent &= !immersiveSticky || 
                                     mExpandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE_STATUSBAR;  // transient trumps translucent
-                            navTranslucent &= (Boolean) XposedHelpers.callMethod(param.thisObject, "areTranslucentBarsAllowed");
+                            if (!isKeyguardShowing()) {
+                                navTranslucent &= (Boolean) XposedHelpers.callMethod(param.thisObject, "areTranslucentBarsAllowed");
+                            }
 
                             // When the navigation bar isn't visible, we put up a fake
                             // input window to catch all touch events.  This way we can
@@ -537,7 +544,8 @@ public class ModExpandedDesktop {
                                         XposedHelpers.callMethod(navBarCtrl, "setBarShowingLw", false);
                                     }
 
-                                    if (navVisible && !navTranslucent && !(Boolean)XposedHelpers.callMethod(navBar, "isAnimatingLw")
+                                    if (navVisible && !navTranslucent && !navAllowedHidden &&
+                                            !(Boolean)XposedHelpers.callMethod(navBar, "isAnimatingLw")
                                             && !(Boolean)XposedHelpers.callMethod(navBarCtrl, "wasRecentlyTranslucent")) {
                                         // If the nav bar is currently requested to be visible,
                                         // and not in the process of animating on or off, then
@@ -577,17 +585,17 @@ public class ModExpandedDesktop {
                                 // Make sure the content and current rectangles are updated to
                                 // account for the restrictions from the navigation bar.
                                 val = getInt("mDockTop");
-                                setInt("mContentTop", val); setInt("mCurTop", val);
+                                setInt("mContentTop", val); setInt("mCurTop", val); setInt("mVoiceContentTop", val);
                                 val = getInt("mDockBottom");
-                                setInt("mContentBottom", val); setInt("mCurBottom", val);
+                                setInt("mContentBottom", val); setInt("mCurBottom", val); setInt("mVoiceContentBottom", val);
                                 val = getInt("mDockLeft");
-                                setInt("mContentLeft", val); setInt("mCurLeft", val);
+                                setInt("mContentLeft", val); setInt("mCurLeft", val); setInt("mVoiceContentLeft", val);
                                 val = getInt("mDockRight");
-                                setInt("mContentRight", val); setInt("mCurRight", val);
+                                setInt("mContentRight", val); setInt("mCurRight", val); setInt("mVoiceContentRight",val);
                                 setInt("mStatusBarLayer", (Integer)XposedHelpers.callMethod(navBar, "getSurfaceLayer"));
                                 // And compute the final frame.
                                 Object nf = getObj("mTmpNavigationFrame");
-                                XposedHelpers.callMethod(navBar, "computeFrameLw", nf, nf, nf, nf, nf, dcf);
+                                XposedHelpers.callMethod(navBar, "computeFrameLw", nf, nf, nf, nf, nf, dcf, nf);
                                 if (DEBUG_LAYOUT) log("mNavigationBar frame: " + nf);
                                 if ((Boolean)XposedHelpers.callMethod(navBarCtrl, "checkHiddenLw")) {
                                     updateSysUiVisibility = true;
@@ -613,14 +621,17 @@ public class ModExpandedDesktop {
                                 setInt("mStatusBarLayer", (Integer)XposedHelpers.callMethod(statusBar, "getSurfaceLayer"));
 
                                 // Let the status bar determine its size.
-                                XposedHelpers.callMethod(statusBar, "computeFrameLw", pf, df, vf, vf, vf, dcf);
+                                XposedHelpers.callMethod(statusBar, "computeFrameLw", pf, df, vf, vf, vf, dcf, vf);
 
                                 // For layout, the status bar is always at the top with our fixed height.
                                 setInt("mStableTop", getInt("mUnrestrictedScreenTop") + getInt("mStatusBarHeight"));
 
                                 boolean statusBarTransient = (sysui & ViewConst.STATUS_BAR_TRANSIENT) != 0;
-                                boolean statusBarTranslucent = (sysui & ViewConst.STATUS_BAR_TRANSLUCENT) != 0;
-                                statusBarTranslucent &= (Boolean) XposedHelpers.callMethod(param.thisObject, "areTranslucentBarsAllowed");
+                                boolean statusBarTranslucent = (sysui & 
+                                        (ViewConst.STATUS_BAR_TRANSLUCENT | ViewConst.SYSTEM_UI_TRANSPARENT)) != 0;
+                                if (!isKeyguardShowing()) {
+                                    statusBarTranslucent &= (Boolean) XposedHelpers.callMethod(param.thisObject, "areTranslucentBarsAllowed");
+                                }
 
                                 // If the status bar is hidden, we don't want to cause
                                 // windows behind it to scroll.
@@ -632,13 +643,13 @@ public class ModExpandedDesktop {
                                     setInt("mDockTop", getInt("mUnrestrictedScreenTop") + getInt("mStatusBarHeight"));
 
                                     val = getInt("mDockTop");
-                                    setInt("mContentTop", val); setInt("mCurTop", val);
+                                    setInt("mContentTop", val); setInt("mCurTop", val); setInt("mVoiceContentTop", val);
                                     val = getInt("mDockBottom");
-                                    setInt("mContentBottom", val); setInt("mCurBottom", val);
+                                    setInt("mContentBottom", val); setInt("mCurBottom", val); setInt("mVoiceContentBottom", val);
                                     val = getInt("mDockLeft");
-                                    setInt("mContentLeft", val); setInt("mCurLeft", val);
+                                    setInt("mContentLeft", val); setInt("mCurLeft", val); setInt("mVoiceContentLeft", val);
                                     val = getInt("mDockRight");
-                                    setInt("mContentRight", val); setInt("mCurRight", val);
+                                    setInt("mContentRight", val); setInt("mCurRight", val); setInt("mVoiceContentRight", val);
 
                                     if (DEBUG_LAYOUT) log("Status bar: " +
                                         String.format(
@@ -686,11 +697,12 @@ public class ModExpandedDesktop {
             });
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "layoutWindowLw",
-                    CLASS_POLICY_WINDOW_STATE, WindowManager.LayoutParams.class, CLASS_POLICY_WINDOW_STATE, new XC_MethodHook() {
+                    CLASS_POLICY_WINDOW_STATE, CLASS_POLICY_WINDOW_STATE, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (isImmersiveModeActive()) {
-                        WindowManager.LayoutParams attrs = (WindowManager.LayoutParams) param.args[1];
+                        WindowManager.LayoutParams attrs = (WindowManager.LayoutParams)
+                                XposedHelpers.callMethod(param.args[0], "getAttrs");
                         if (attrs.type == WindowManager.LayoutParams.TYPE_INPUT_METHOD) {
                             if (mNavbarLeftHanded) {
                                 param.setObjectExtra("gbDockLeft", Integer.valueOf(getInt("mDockLeft")));
@@ -765,8 +777,9 @@ public class ModExpandedDesktop {
                             return 0;
                         }
                         Object winAttrs = XposedHelpers.callMethod(win, "getAttrs");
+                        final int privateFlags = XposedHelpers.getIntField(winAttrs, "privateFlags");
                         final int windowType = XposedHelpers.getIntField(winAttrs, "type");
-                        if (windowType == WmLp.TYPE_KEYGUARD && 
+                        if ((privateFlags & WmLp.PRIVATE_FLAG_KEYGUARD) != 0 && 
                                 getBool("mHideLockScreen") == true) {
                             // We are updating at a point where the keyguard has gotten
                             // focus, but we were last in a state where the top window is
@@ -844,22 +857,6 @@ public class ModExpandedDesktop {
                     } catch(Throwable t) {
                         logAndMute(param.method.getName(), t);
                         return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(classImmersiveModeConfirm, "immersiveModeChanged",
-                    String.class, boolean.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (param.args[0] == null) return;
-                    Object confirmedPackages = 
-                            XposedHelpers.getObjectField(param.thisObject, "mConfirmedPackages");
-                    if (confirmedPackages != null) {
-                        if (!(Boolean)XposedHelpers.callMethod(confirmedPackages, "contains", param.args[0])) {
-                            XposedHelpers.callMethod(confirmedPackages, "add", param.args[0]);
-                            if (DEBUG) log(param.args[0] + " added to mConfirmedPackages list");
-                        }
                     }
                 }
             });
@@ -972,7 +969,7 @@ public class ModExpandedDesktop {
     }
 
     private static boolean isImmersiveModeActive() {
-        return isStatusbarImmersive() || isNavbarImmersive();
+        return !isKeyguardShowing() && (isStatusbarImmersive() || isNavbarImmersive());
     }
 
     private static int updateSystemUiVisibilityFlagsForExpandedDesktop(int vis) {
@@ -990,5 +987,10 @@ public class ModExpandedDesktop {
             vis |= WmLp.FLAG_FULLSCREEN;
         }
         return vis;
+    }
+
+    private static boolean isKeyguardShowing() {
+        return (Boolean) XposedHelpers.callMethod(mPhoneWindowManager, "isStatusBarKeyguard") && 
+                !getBool("mHideLockScreen");
     }
 }
