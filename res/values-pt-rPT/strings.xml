@@ -137,9 +137,6 @@
     <string name="reboot_confirm_recovery">O seu %s irá reiniciar em modo de recuperação.</string>
     <string name="reboot_confirm_bootloader">O seu %s irá reiniciar em modo bootloader.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Efeito ao desligar</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modo de Engenharia</string>
     <string name="engineering_mode_summary">Inicia aplicação Modo de Engenharia</string>
@@ -791,11 +788,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostar marcador automaticamente</string>
     <string name="pref_dialer_show_dialpad_summary">Permite mostrar o marcador automaticamente após lançar a aplicação de telefone</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Padrão</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Desvanescente</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Ajustes do inicializador</string>

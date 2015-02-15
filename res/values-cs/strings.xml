@@ -133,9 +133,6 @@
     <string name="reboot_confirm">Váš %s bude restartován</string>
     <string name="reboot_confirm_recovery">Váš %s bude restartován do režimu Recovery</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Efekt vypnutí obrazovky</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Režim technika</string>
     <string name="engineering_mode_summary">Spustí aplikaci Režim technika</string>
@@ -778,11 +775,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Zobrazit ciferník automaticky</string>
     <string name="pref_dialer_show_dialpad_summary">Zobrazí ciferník automaticky po otevření aplikace hovorů</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Výchozí</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Ztmavit</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Nastavení spouštěče</string>

@@ -127,9 +127,6 @@
     <string name="reboot_confirm_recovery">%s Kurtarma modunda başlatılacak.</string>
     <string name="reboot_confirm_bootloader">%s Bootloader modunda başlatılacak.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Ekran kapanma efekti</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Mühendis modu</string>
     <string name="engineering_mode_summary">Mühendis modu uygulamasını başlatır</string>
@@ -761,11 +758,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Arama tuşlarını oto. göster</string>
     <string name="pref_dialer_show_dialpad_summary">Arama uygulaması açıldığında arama tuşlarını gösterir</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Sistem varsayılanı</string>
-    <string name="screen_off_effect_crt">CRT (Eski TV kapanma efekti)</string>
-    <string name="screen_off_effect_fade">Solma</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Başlatıcı iyileştirmeleri</string>

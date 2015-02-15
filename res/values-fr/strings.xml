@@ -151,9 +151,6 @@
     <string name="reboot_confirm">Votre %s va redémarrer</string>
     <string name="reboot_confirm_recovery">Votre %s va redémarrer en mode récupération</string>
     <string name="reboot_confirm_bootloader">Votre %s va redémarrer en mode bootloader</string>
-    
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Effet d\'extinction de l\'écran</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Mode ingénierie</string>
@@ -807,11 +804,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Afficher le pavé numérique automatiquement</string>
     <string name="pref_dialer_show_dialpad_summary">Affiche le pavé numérique automatiquement à l\'ouverture de l\'application de numérotation</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Valeur système par défaut</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Fondu</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Modifications du lanceur</string>

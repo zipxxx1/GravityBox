@@ -146,9 +146,6 @@
     <string name="reboot_confirm_recovery">%s anda akan reboot ke recovery.</string>
     <string name="reboot_confirm_bootloader">%s anda akan reboot ke bootloader.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Kesan skrin dimatikan</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Mod kejuruteraan</string>
     <string name="engineering_mode_summary">Lancarkan applikasi mod kejuruteraan</string>
@@ -793,11 +790,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Tunjuk pad nombor automatik</string>
     <string name="pref_dialer_show_dialpad_summary">Tunjuk pad nombor automatik ketika ingin membuat panggilan</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Tetapan asal system</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Hilang</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Customisasi pelancar</string>

@@ -1786,13 +1786,6 @@
             android:title="@string/pref_display_allow_all_rotations_title"
             android:defaultValue="false" />
 
-        <ListPreference 
-            android:key="pref_crt_off_effect2"
-            android:title="@string/crt_off_effect_title"
-            android:entries="@array/screen_off_effect_entries"
-            android:entryValues="@array/screen_off_effect_values"
-            android:defaultValue="0" />
-
         <CheckBoxPreference 
             android:key="pref_unplug_turns_on_screen"
             android:title="@string/pref_unplug_turns_on_screen_title"

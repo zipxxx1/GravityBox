@@ -145,9 +145,6 @@
     <string name="reboot_confirm_recovery">Το %s θα κάνει επανεκκίνηση σε λειτ. Recovery.</string>
     <string name="reboot_confirm_bootloader">Το %s θα κάνει επανεκκίνηση σε λειτ. Bootloader.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Εφέ κλεισίματος CRT οθόνης</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">ΜΤΚ Engineering mode</string>
     <string name="engineering_mode_summary">Ανοίγει την εφαρμογή ΜΤΚ Engineering mode</string>
@@ -795,11 +792,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Εμφάνιση πληκτρολογίου αυτόματα</string>
     <string name="pref_dialer_show_dialpad_summary">Εμφανίζει το πληκτρολόγιο κλήσεων αυτόματα με το άνοιγμα της εφαρμογής κλήσεων</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Προεπιλογή συστήματος</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Εξασθένιση</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Αρχική οθόνη</string>

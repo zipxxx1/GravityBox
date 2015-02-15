@@ -133,8 +133,6 @@
     <string name="reboot_confirm">%s を再起動します。</string>
     <string name="reboot_confirm_recovery">%s をリカバリへ再起動します。</string>
     <string name="reboot_confirm_bootloader">%s をbootloaderへ再起動します。</string>
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">画面オフ効果</string>
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">開発者モード</string>
     <string name="engineering_mode_summary">開発者モードアプリを起動します。</string>
@@ -666,10 +664,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">ダイアルパッドを自動表示</string>
     <string name="pref_dialer_show_dialpad_summary">電話アプリを開いた時に自動的にダイアルパッドを表示します。</string>
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">デフォルト</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">フェード</string>
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">ランチャー調整</string>
     <string name="pref_cat_launcher_tweaks_summary">標準ランチャーとGoogle Experience launcherに適用されます。</string>

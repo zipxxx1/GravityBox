@@ -152,9 +152,6 @@
     <string name="reboot_confirm_recovery">Il %s verrà riavviato in Recovery.</string>
     <string name="reboot_confirm_bootloader">Il %s verrà riavviato in Bootloader.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Effetto spegnimento schermo</string>
-	
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modalità Engineer</string>
     <string name="engineering_mode_summary">Lancia l\'applicazione in Modalità Engineer</string>
@@ -807,12 +804,7 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostra sempre tastierino numerico</string>
     <string name="pref_dialer_show_dialpad_summary">Mostra sempre il tastierino numerico appena si accede all\'app telefono</string>
-    
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Predefinito</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Dissolvenza</string>
-    
+
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Launcher</string>
     <string name="pref_cat_launcher_tweaks_summary">Si applica solo al launcher Google Experience</string>

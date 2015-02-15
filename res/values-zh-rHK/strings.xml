@@ -152,9 +152,6 @@
     <string name="reboot_confirm_recovery">您的 %s 將重新啟動至 Recovery 模式</string>
     <string name="reboot_confirm_bootloader">您的 %s 將重新啟動至 Bootloader 模式</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">CRT 螢幕關閉特效</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">工程模式</string>
     <string name="engineering_mode_summary">啟動 [工程模式] 應用程式</string>
@@ -796,11 +793,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">自動顯示撥號鍵盤</string>
     <string name="pref_dialer_show_dialpad_summary">當開啟撥號程式時自動開啟撥號鍵盤</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">系統預設</string>
-    <string name="screen_off_effect_crt">CRT 效果</string>
-    <string name="screen_off_effect_fade">淡出 效果</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">啟動器選項</string>

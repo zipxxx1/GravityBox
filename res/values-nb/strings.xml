@@ -152,9 +152,6 @@
     <string name="reboot_confirm_recovery">Din enhet vil restarte til recovery modus.</string>
     <string name="reboot_confirm_bootloader">Din enhet vil restarte til bootloader modus.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Screen off effect</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
     <string name="engineering_mode_summary">Launches Engineering mode application</string>
@@ -799,11 +796,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Show dialpad automatically</string>
     <string name="pref_dialer_show_dialpad_summary">Shows dialpad automatically upon opening dialer app</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">System default</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Fade</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Launcher tweaks</string>

@@ -152,9 +152,6 @@
     <string name="reboot_confirm_recovery">A telefon Recovery módba fog újraindulni.</string>
     <string name="reboot_confirm_bootloader">A telefon Bootloader módba fog újraindulni.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Képernyő kikapcsolási effekt</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Tervező üzemmód</string>
     <string name="engineering_mode_summary">Elindítja a Tervező üzemmód programot</string>
@@ -806,11 +803,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Tárcsázó gombok automatikus megjelenítése</string>
     <string name="pref_dialer_show_dialpad_summary">Automatikusan megjeleníti a tárcsázó gombokat a tárcsázó alkalmazás megnyitásakor</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Gyári beállítás</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Elhalványulás</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Indító módosítások</string>

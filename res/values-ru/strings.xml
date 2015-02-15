@@ -152,9 +152,6 @@
     <string name="reboot_confirm_recovery">%s будет перезагружен в режим восстановления.</string>
     <string name="reboot_confirm_bootloader">%s будет перезагружен в загрузчик.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Эффект выключения экрана</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Инженерный режим</string>
     <string name="engineering_mode_summary">Запуск приложения в инженерном режиме</string>
@@ -807,12 +804,7 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Показать панель набора</string>
     <string name="pref_dialer_show_dialpad_summary">Автоматическое отображение панели набора номера при открытии приложения телефона</string>
-        
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">По умолчанию</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Затемнение</string>
-    
+
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Настройки лончера</string>
     <string name="pref_cat_launcher_tweaks_summary">Только для стокового лончера и Google Experience</string>

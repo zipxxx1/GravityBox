@@ -90,9 +90,6 @@
     <string name="reboot_confirm">Din %s vil genstarte.</string>
     <string name="reboot_confirm_recovery">Din %s vil genstarte i systemgendannelsestilstand.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Billedrørsskærms-slukkeeffekt</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Ingeniørtilstand</string>
     <string name="engineering_mode_summary">Starter Ingeniørtilstands-applikation</string>

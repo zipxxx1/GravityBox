@@ -136,9 +136,6 @@
     <string name="reboot_confirm_recovery">O seu %s irá reiniciar em modo de recuperação.</string>
     <string name="reboot_confirm_bootloader">O seu %s irá reiniciar em modo bootloader.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Efeito de desligamento de tela</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modo Engenharia</string>
     <string name="engineering_mode_summary">Roda o aplicativo Modo Engenharia</string>
@@ -782,11 +779,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostrar teclado automaticamente</string>
     <string name="pref_dialer_show_dialpad_summary">Mostra o teclado automaticamente quando aberto o aplicativo de Discador</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Padrão do sistema</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Desvanecer</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Ajustes do launcher</string>

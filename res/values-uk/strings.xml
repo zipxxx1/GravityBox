@@ -87,7 +87,6 @@
     <string name="reboot_confirm">%s буде перезавантажено.</string>
     <string name="reboot_confirm_recovery">%s буде перезавантажений у відновленні.</string>
     <string name="reboot_confirm_bootloader">%s буде перезавантажений в завантажувач.</string>
-    <string name="crt_off_effect_title">Ефект кіноскопу вимкнення екрану</string>
     <string name="engineering_mode_title">Інженерне меню</string>
     <string name="engineering_mode_summary">Дозволяє запустити Інженерне меню</string>
     <string name="dual_sim_ringer_title">Мелодія дзвінка для 2-х SIM</string>

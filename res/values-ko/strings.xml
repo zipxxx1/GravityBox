@@ -107,8 +107,6 @@
     <string name="reboot_confirm_recovery">%s이(가) 곧 리커버리로 재시작됩니다.</string>
     <string name="reboot_confirm_bootloader">%s이(가) 곧 부트로더로 재시작됩니다.</string>
 
-    <string name="crt_off_effect_title">화면 꺼짐 효과</string>
-
     <string name="engineering_mode_title">엔지니어링 모드</string>
     <string name="engineering_mode_summary">엔지니어링 모드 애플리케이션을 실행합니다.</string>
 
@@ -625,10 +623,6 @@
 
     <string name="pref_dialer_show_dialpad_title">다이얼패드 보이기</string>
     <string name="pref_dialer_show_dialpad_summary">전화 앱을 실행하면 다이얼패드를 바로 보여지게 합니다.</string>
-
-    <string name="screen_off_effect_default">시스템 기본값</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">페이드</string>
 
     <string name="pref_cat_launcher_tweaks_title">홈 런처 트윅</string>
     <string name="pref_cat_launcher_tweaks_summary">순정 AOSP 런처와 Google Experience 런처의 설정을 수정합니다.</string>

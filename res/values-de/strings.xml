@@ -144,9 +144,6 @@
     <string name="reboot_confirm_recovery">%s startet in die Recovery.</string>
     <string name="reboot_confirm_bootloader">%s startet in den Bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Bildschirmeffekt beim Ausschalten</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Entwicklermodus</string>
     <string name="engineering_mode_summary">Startet die Anwendung für den Entwicklermodus</string>
@@ -794,11 +791,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Wählfeld autom. anzeigen</string>
     <string name="pref_dialer_show_dialpad_summary">Zeigt das Wählfeld autom. wenn der Dialer geöffnet wird</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Standard</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Ausblenden</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Launcher Anpassungen</string>

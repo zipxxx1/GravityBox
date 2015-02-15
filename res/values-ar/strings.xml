@@ -126,9 +126,6 @@
     <string name="reboot_confirm_recovery">Your %s will reboot into recovery.</string>
     <string name="reboot_confirm_bootloader">Your %s will reboot into bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">تأثير اطفاء الشاشة</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
     <string name="engineering_mode_summary">Launches Engineering mode application</string>

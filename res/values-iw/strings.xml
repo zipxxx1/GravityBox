@@ -139,9 +139,6 @@
     <string name="reboot_confirm_recovery">ה-%s שלך יופעל מחדש למצב רקברי.</string>
     <string name="reboot_confirm_bootloader">ה-%s יופעל מחדש למצב בוטלואדר.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">אפקט כיבוי מסך</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">מצב הנדסה</string>
     <string name="engineering_mode_summary">פותח יישום של מצב הנדסה</string>
@@ -781,11 +778,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">הצג חייגן באופן אוטומטי</string>
     <string name="pref_dialer_show_dialpad_summary">הצג מקשי חיוג באופן אוטומטי בעת פתיחת החייגן</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">ברירת מחדל של מערכת</string>
-    <string name="screen_off_effect_crt">שפופרת קרן קתודית (CRT)</string>
-    <string name="screen_off_effect_fade">דעיכה</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">הגדרות לאונצ\'ר</string>

@@ -126,9 +126,6 @@
     <string name="reboot_confirm_recovery">%s của bạn sẽ khởi động lại vào recovery.</string>
     <string name="reboot_confirm_bootloader">%s của bạn sẽ khởi động lại vào bootloader.</string>
 
-    <!-- CRT effect screen off animation -->
-    <string name="crt_off_effect_title">Tắt hiệu ứng TV cũ</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Engineering mode</string>
     <string name="engineering_mode_summary">Chuyển tới ứng dụng Engineering mode</string>

@@ -136,9 +136,6 @@
     <string name="reboot_confirm_recovery">Twój %s zostanie zrestartowany do trybu Recovery.</string>
     <string name="reboot_confirm_bootloader">Twój %s zostanie zrestartowany do trybu Bootloader.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Efekt wygaszania ekranu</string>
-
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Tryb inżynierski</string>
     <string name="engineering_mode_summary">Włącza ukrytą aplikację trybu inżynierskiego</string>
@@ -781,11 +778,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Automatycznie pokaż klawiaturę telefonu</string>
     <string name="pref_dialer_show_dialpad_summary">Automatycznie pokazuje klawiaturę telefonu po otwarciu aplikacji dialera</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Domyślny systemu</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Przygasanie</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Poprawki Startera Aplikacji</string>

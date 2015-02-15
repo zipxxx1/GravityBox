@@ -152,9 +152,6 @@
     <string name="reboot_confirm_recovery">El %s se reiniciará en modo recuperación.</string>
     <string name="reboot_confirm_bootloader">El %s se reiniciará al bootloader.</string>
 
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">Efecto de apagado de pantalla</string>
- 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modo ingeniería</string>
     <string name="engineering_mode_summary">Lanza la aplicación Modo ingeniería</string>
@@ -806,11 +803,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Mostrar teclado numérico automáticamente</string>
     <string name="pref_dialer_show_dialpad_summary">Muestra el teclado automáticamente al abrir la aplicación Teléfono</string>
-
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">Predeterminado</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">Desvanecer</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Ajustes del lanzador</string>

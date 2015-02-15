@@ -151,9 +151,6 @@
     <string name="reboot_confirm">您的%s将重新启动</string>
     <string name="reboot_confirm_recovery">您的%s将重新启动至Recovery</string>
     <string name="reboot_confirm_bootloader">您的%s将重新启动至Bootloader</string>
-    
-    <!-- Screen off effect -->
-    <string name="crt_off_effect_title">关闭屏幕效果</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">工程模式</string>
@@ -807,11 +804,6 @@
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">自动显示拨号盘</string>
     <string name="pref_dialer_show_dialpad_summary">打开拨号程序时自动显示拨号盘</string>
-    
-    <!-- Screen off effects -->
-    <string name="screen_off_effect_default">系统默认</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">淡出</string>
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">桌面调整</string>
