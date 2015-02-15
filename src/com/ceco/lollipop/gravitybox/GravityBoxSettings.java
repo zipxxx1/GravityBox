@@ -121,8 +121,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int BATTERY_STYLE_NONE = 0;
 
     public static final String PREF_KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
-    public static final int BATTERY_WARNING_POPUP = 1;
-    public static final int BATTERY_WARNING_SOUND = 2;
     public static final String PREF_KEY_BATTERY_CHARGED_SOUND = "pref_battery_charged_sound2";
     public static final String PREF_KEY_CHARGER_PLUGGED_SOUND = "pref_charger_plugged_sound2";
     public static final String PREF_KEY_CHARGER_UNPLUGGED_SOUND = "pref_charger_unplugged_sound";

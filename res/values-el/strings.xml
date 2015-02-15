@@ -36,9 +36,6 @@
     <string name="vol_music_controls_summary">Αλλαγή μουσικών κομματιών σε σβηστή οθόνη με παρατεταμένο πάτημα των πλήκτρων έντασης</string>
 
     <string name="low_battery_warning_policy_title">Ειδοποίηση χαμηλής στάθμης μπαταρίας</string>
-    <string name="low_battery_warning_full">Αναδυόμενο παράθυρο και ήχος</string>
-    <string name="low_battery_warning_popup">Αναδυόμενο παράθυρο μόνο</string>
-    <string name="low_battery_warning_sound">Ήχος μόνο</string>
     <string name="low_battery_warning_off">Απενεργοποιημένη</string>
 
     <string name="reboot_required">Οι αλλαγές θα εφαρμοστούν μετά από επανεκκίνηση</string>

@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">Musiktitel bei inaktivem Bildschirm durch langes Drücken der Lautstärketasten überspringen</string>
 
     <string name="low_battery_warning_policy_title">Warnung bei niedrigem Akkustand</string>
-    <string name="low_battery_warning_full">Benachrichtigung und Warnton</string>
-    <string name="low_battery_warning_popup">Nur Benachrichtigung</string>
-    <string name="low_battery_warning_sound">Nur Warnton</string>
     <string name="low_battery_warning_off">Aus</string>
 
     <string name="reboot_required">Änderungen werden nach einem Neustart übernommen</string>

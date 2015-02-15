@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">Переключать треки удержанием клавиш громкости при выключенном экране</string>
 
     <string name="low_battery_warning_policy_title">Предупреждение о низком заряде</string>
-    <string name="low_battery_warning_full">Уведомление и звук</string>
-    <string name="low_battery_warning_popup">Только уведомление</string>
-    <string name="low_battery_warning_sound">Только звук</string>
     <string name="low_battery_warning_off">Не предупреждать</string>
 
     <string name="reboot_required">Изменения вступят в силу после перезагрузки</string>

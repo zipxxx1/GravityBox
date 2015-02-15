@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">langkau track dengan menekan lama butang volume ketika screen off</string>
 
     <string name="low_battery_warning_policy_title">Amaran bateri rendah</string>
-    <string name="low_battery_warning_full">Notifikasi dan bunyi</string>
-    <string name="low_battery_warning_popup">Notifikasi sahaja</string>
-    <string name="low_battery_warning_sound">Bunyi sahaja</string>
     <string name="low_battery_warning_off">Tiada</string>
 
     <string name="reboot_required">Perubahan akan berlaku selepas reboot</string>

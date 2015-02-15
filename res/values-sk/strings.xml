@@ -15,9 +15,8 @@
     <string name="vol_music_controls_summary">Umožní prepínanie skladieb dlhým podržaním tlačidiel hlasitosti pri vypnutej obrazovke</string>
 
     <string name="low_battery_warning_policy_title">Upozornenie vybitia batérie</string>
-    <string name="low_battery_warning_full">Dialóg a zvuk</string>
-    <string name="low_battery_warning_popup">Len dialóg</string>
-    <string name="low_battery_warning_sound">Len zvuk</string>
+    <string name="low_battery_warning_default">Pôvodné</string>
+    <string name="low_battery_warning_nonintrusive">Nerušivé</string>
     <string name="low_battery_warning_off">Vypnuté</string>
 
     <string name="reboot_required">Zmena sa prejaví po reštarte</string>

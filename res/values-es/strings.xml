@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">Cambiar canción con pulsación larga sobre los botones de volumen con la pantalla apagada</string>
 
     <string name="low_battery_warning_policy_title">Aviso de batería baja</string>
-    <string name="low_battery_warning_full">Aviso y sonido</string>
-    <string name="low_battery_warning_popup">Sólo aviso</string>
-    <string name="low_battery_warning_sound">Sólo sonido</string>
     <string name="low_battery_warning_off">Desactivado</string>
 
     <string name="reboot_required">Los cambios se aplicarán después de reiniciar</string>

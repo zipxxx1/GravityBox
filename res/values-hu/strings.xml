@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">Kikapcsolt képernyőnél a hangerő gombok hosszú megnyomásával átugorhatjuk az aktuális számot</string>
 
     <string name="low_battery_warning_policy_title">Alacsony akkumulátorszint figyelmeztetés</string>
-    <string name="low_battery_warning_full">Felugró szöveg és hang</string>
-    <string name="low_battery_warning_popup">Csak felugó szöveg</string>
-    <string name="low_battery_warning_sound">Csak hang</string>
     <string name="low_battery_warning_off">Kikapcsolva</string>
 
     <string name="reboot_required">A változtatás csak újraindítás után lesz alkalmazva</string>

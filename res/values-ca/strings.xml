@@ -13,9 +13,6 @@
     <string name="vol_music_controls_summary">Canvia la pista amb una pressió llarga de les tecles de volum si la pantalla està apagada</string>
 
     <string name="low_battery_warning_policy_title">Avís de bateria baixa</string>
-    <string name="low_battery_warning_full">Notificació i so</string>
-    <string name="low_battery_warning_popup">Només notificació</string>
-    <string name="low_battery_warning_sound">Només so</string>
     <string name="low_battery_warning_off">Desactivat</string>
 
     <string name="reboot_required">Es necessari arrencar de nou</string>

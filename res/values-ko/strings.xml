@@ -13,9 +13,6 @@
     <string name="vol_music_controls_summary">화면이 꺼져 있을 때 볼륨 키를 길게 눌러서 현재 재생되는 트랙을 건너 뛰기</string>
 
     <string name="low_battery_warning_policy_title">배터리 부족 경고 알림</string>
-    <string name="low_battery_warning_full">팝업 창과 소리로 알림</string>
-    <string name="low_battery_warning_popup">팝업 창으로만 알림</string>
-    <string name="low_battery_warning_sound">소리로만 알림</string>
     <string name="low_battery_warning_off">알리지 않음</string>
 
     <string name="reboot_required">변경된 사항은 재시작 후에 적용됩니다.</string>

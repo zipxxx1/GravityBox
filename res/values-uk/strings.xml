@@ -11,9 +11,6 @@
     <string name="vol_music_controls_title">Пропуск треку з допомогу клавіш гучності</string>
     <string name="vol_music_controls_summary">Пропускати треки довгим натисканням клавіш гучності при вимкненому екрані</string>
     <string name="low_battery_warning_policy_title">Попередження про низький заряд</string>
-    <string name="low_battery_warning_full">Повідомлення і звук</string>
-    <string name="low_battery_warning_popup">Тільки повідомлення</string>
-    <string name="low_battery_warning_sound">Тільки звук</string>
     <string name="low_battery_warning_off">Не попереджати</string>
     <string name="reboot_required">Зміни набудуть чинності після перезавантаження</string>
     <string name="poweroff_advanced_title">Розширене меню перезавантаження</string>

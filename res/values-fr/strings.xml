@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">Changer de pistes audio par un appui long sur ces touches (écran éteint)</string>
 
     <string name="low_battery_warning_policy_title">Avertissement de batterie faible</string>
-    <string name="low_battery_warning_full">Message et son</string>
-    <string name="low_battery_warning_popup">Message seulement</string>
-    <string name="low_battery_warning_sound">Son seulement</string>
     <string name="low_battery_warning_off">Aucun</string>
 
     <string name="reboot_required">Le changement sera pris en compte après redémarrage</string>

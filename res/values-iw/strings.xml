@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">מאפשר מעבר בין שירים באמצעות לחיצה ארוכה על לחצני עוצמת שמע במצב של מסך כבוי</string>
 
     <string name="low_battery_warning_policy_title">התראת סוללה חלשה</string>
-    <string name="low_battery_warning_full">חלון קופץ וצליל</string>
-    <string name="low_battery_warning_popup">חלון קופץ בלבד</string>
-    <string name="low_battery_warning_sound">צליל בלבד</string>
     <string name="low_battery_warning_off">ללא התראה</string>
 
     <string name="reboot_required">השינוי יתבצע לאחר הפעלת המכשיר מחדש</string>

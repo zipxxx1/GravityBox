@@ -15,9 +15,8 @@
     <string name="vol_music_controls_summary">Umožní přepínání skladeb dlouhým podržením tlačítek hlasitosti při vypnuté obrazovce</string>
 
     <string name="low_battery_warning_policy_title">Upozornění vybité baterie</string>
-    <string name="low_battery_warning_full">Dialog a zvuk</string>
-    <string name="low_battery_warning_popup">Jen dialog</string>
-    <string name="low_battery_warning_sound">Jen zvuk</string>
+    <string name="low_battery_warning_default">Výchozí</string>
+    <string name="low_battery_warning_nonintrusive">Nerušivé</string>
     <string name="low_battery_warning_off">Vypnuté</string>
 
     <string name="reboot_required">Změna se projeví po restartu</string>

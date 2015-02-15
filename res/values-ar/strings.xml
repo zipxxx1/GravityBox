@@ -29,9 +29,6 @@
     <string name="vol_music_controls_summary">الانتقال بين الصوتيات أثناء اطفاء الشاشة بضغطة زر مطولة</string>
 
     <string name="low_battery_warning_policy_title">تنبيه عند انخفاض البطارية</string>
-    <string name="low_battery_warning_full">نافذة منبثقة مع نغمة</string>
-    <string name="low_battery_warning_popup">نافذة منبثقة فقط</string>
-    <string name="low_battery_warning_sound">نغمة فقط</string>
     <string name="low_battery_warning_off">عدم التنبيه</string>
 
     <string name="reboot_required">سيتم تطبيق المتغيرات بعد اعادة التشغيل</string>

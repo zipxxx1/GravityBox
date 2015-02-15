@@ -25,9 +25,6 @@
     <string name="vol_music_controls_title">音量キーで曲操作</string>
     <string name="vol_music_controls_summary">画面オフ時に音量キー長押しで曲送り/曲戻しします。</string>
     <string name="low_battery_warning_policy_title">バッテリー残量低下警告</string>
-    <string name="low_battery_warning_full">ポップアップ＋警告音</string>
-    <string name="low_battery_warning_popup">ポップアップのみ</string>
-    <string name="low_battery_warning_sound">警告音のみ</string>
     <string name="low_battery_warning_off">なし</string>
     <string name="reboot_required">変更は再起動後に適用されます。</string>
     <string name="poweroff_advanced_title">再起動オプション</string>

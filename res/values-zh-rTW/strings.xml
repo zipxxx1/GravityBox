@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">螢幕關閉時長按音量鍵來跳過歌曲曲目</string>
 
     <string name="low_battery_warning_policy_title">低電量警告</string>
-    <string name="low_battery_warning_full">彈出浮動窗與音效</string>
-    <string name="low_battery_warning_popup">只有浮動窗</string>
-    <string name="low_battery_warning_sound">只有音效</string>
     <string name="low_battery_warning_off">關閉</string>
 
     <string name="reboot_required">重新啟動裝置後更改將被套用</string>

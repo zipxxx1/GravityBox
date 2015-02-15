@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">Ekran kapalıyken ses tuşlarına uzun basıldığında sonraki şarkıya geç</string>
 
     <string name="low_battery_warning_policy_title">Düşük pil uyarısı</string>
-    <string name="low_battery_warning_full">Pencere ve ses</string>
-    <string name="low_battery_warning_popup">Sadece pencere</string>
-    <string name="low_battery_warning_sound">Sadece ses</string>
     <string name="low_battery_warning_off">Kapalı</string>
 
     <string name="reboot_required">Yeniden başlatıldığında değişiklik uygulanacak</string>

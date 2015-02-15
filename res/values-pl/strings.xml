@@ -15,9 +15,6 @@
     <string name="vol_music_controls_summary">Długie przyciśnięcie pomija odtwarzany utwór gdy ekran jest wyłączony</string>
 
     <string name="low_battery_warning_policy_title">Ostrzeżenie o rozładowanej baterii</string>
-    <string name="low_battery_warning_full">Wyskakujące powiadomienie i dźwięk</string>
-    <string name="low_battery_warning_popup">Tylko wyskakujące powiadomienie</string>
-    <string name="low_battery_warning_sound">Tylko dźwięk</string>
     <string name="low_battery_warning_off">Wyłączone</string>
 
     <string name="reboot_required">Zmiany będą zastosowane po restarcie</string>

@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">Liedjes overslaan op lang indrukken van volumetoetsen terwijl het scherm uitgeschakeld is</string>
 
     <string name="low_battery_warning_policy_title">Lage batterij waarschuwing</string>
-    <string name="low_battery_warning_full">Pop-up en geluid</string>
-    <string name="low_battery_warning_popup">Alleen Pop-up</string>
-    <string name="low_battery_warning_sound">Alleen geluid</string>
     <string name="low_battery_warning_off">Uit</string>
 
   <string name="reboot_required">Verandering zal na een herstart worden toegepast</string>

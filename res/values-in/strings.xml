@@ -31,9 +31,6 @@
     <string name="vol_music_controls_summary">Loncati trek lagu dengan menahan tombol volume ketika layar dimatikan</string>
 
     <string name="low_battery_warning_policy_title">Peringatan baterai lemah</string>
-    <string name="low_battery_warning_full">Pop-up dan suara</string>
-    <string name="low_battery_warning_popup">Pop-up saja</string>
-    <string name="low_battery_warning_sound">Suara saja</string>
     <string name="low_battery_warning_off">Mati</string>
 
     <string name="reboot_required">Perubahan akan diterapkan setelah reboot</string>

@@ -29,9 +29,6 @@
     <string name="vol_music_controls_summary">Giữ phím âm lượng để chuyển bài hát khi đang khóa màn hình</string>
 
     <string name="low_battery_warning_policy_title">Cảnh báo pin yếu</string>
-    <string name="low_battery_warning_full">Cảnh báo và âm báo</string>
-    <string name="low_battery_warning_popup">Chỉ cảnh báo</string>
-    <string name="low_battery_warning_sound">Chỉ âm báo</string>
     <string name="low_battery_warning_off">Tắt</string>
 
     <string name="reboot_required">Thay đổi cần trang bị khởi động lại</string>

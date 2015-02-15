@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">当屏幕关闭时长按音量键以切换歌曲</string>
 
     <string name="low_battery_warning_policy_title">低电量警告</string>
-    <string name="low_battery_warning_full">弹出窗口以及音效</string>
-    <string name="low_battery_warning_popup">仅弹出窗口</string>
-    <string name="low_battery_warning_sound">仅音效</string>
     <string name="low_battery_warning_off">关闭</string>
 
     <string name="reboot_required">重新启动以后设置才会启用</string>

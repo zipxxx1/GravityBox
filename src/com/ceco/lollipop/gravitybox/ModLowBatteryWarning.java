@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,8 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-
-import com.ceco.lollipop.gravitybox.Utils.MethodState;
+import android.os.BatteryManager;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -33,13 +32,12 @@ public class ModLowBatteryWarning {
     private static final String TAG = "GB:ModLowBatteryWarning";
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String CLASS_POWER_UI = "com.android.systemui.power.PowerUI";
-    private static final String CLASS_LIGHT_SERVICE_LIGHT = "com.android.server.LightsService$Light";
+    private static final String CLASS_POWER_WARNINGS = "com.android.systemui.power.PowerNotificationWarnings";
     private static final String CLASS_BATTERY_SERVICE_LED = "com.android.server.BatteryService$Led";
     public static final boolean DEBUG = false;
 
     public static enum ChargingLed { DEFAULT, EMULATED, DISABLED };
 
-    private static ThreadLocal<MethodState> mUpdateLightsMethodState;
     private static Object mBatteryLed;
     private static boolean mFlashingLedDisabled;
     private static ChargingLed mChargingLed;
@@ -75,13 +73,10 @@ public class ModLowBatteryWarning {
         }
     }
 
-    public static void initZygote(final XSharedPreferences prefs) {
-        if (DEBUG) log("initZygote");
+    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        if (DEBUG) log("initAndroid");
         try {
-            final Class<?> lightServiceClass = XposedHelpers.findClass(CLASS_LIGHT_SERVICE_LIGHT, null);
-            final Class<?> batteryServiceClass = XposedHelpers.findClass(CLASS_BATTERY_SERVICE_LED, null);
-            mUpdateLightsMethodState = new ThreadLocal<MethodState>();
-            mUpdateLightsMethodState.set(MethodState.UNKNOWN);
+            final Class<?> batteryServiceClass = XposedHelpers.findClass(CLASS_BATTERY_SERVICE_LED, classLoader);
 
             mFlashingLedDisabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_FLASHING_LED_DISABLE, false);
             mChargingLed = ChargingLed.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_CHARGING_LED, "DEFAULT"));
@@ -101,52 +96,29 @@ public class ModLowBatteryWarning {
             XposedHelpers.findAndHookMethod(batteryServiceClass, "updateLightsLocked", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    mUpdateLightsMethodState.set(MethodState.METHOD_ENTERED);
+                    Object batteryLight = XposedHelpers.getObjectField(param.thisObject, "mBatteryLight");
+                    Object o = XposedHelpers.getSurroundingThis(param.thisObject);
+                    Object batteryProps = XposedHelpers.getObjectField(o, "mBatteryProps");
                     if (DEBUG) {
                         log("BatteryService LED: updateLightsLocked ENTERED");
                         // for debugging purposes - simulate low battery
-                        Object o = XposedHelpers.getSurroundingThis(param.thisObject);
-                        Object batteryProps = XposedHelpers.getObjectField(o, "mBatteryProps");
                         XposedHelpers.setIntField(batteryProps, "batteryLevel", 10);
                     }
-                }
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    mUpdateLightsMethodState.set(MethodState.METHOD_EXITED);
-                    if (DEBUG) {
-                        log("BatteryService LED: updateLightsLocked EXITED");
-                    }
-                }
-            });
 
-            XposedHelpers.findAndHookMethod(lightServiceClass, "setFlashing", 
-                    int.class, int.class, int.class, int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mUpdateLightsMethodState.get() != null &&
-                            mUpdateLightsMethodState.get().equals(MethodState.METHOD_ENTERED)) {
-                        if (mFlashingLedDisabled) {
-                            if (DEBUG) {
-                                log("LightService: setFlashing called from BatteryService - ignoring");
-                            }
-                            XposedHelpers.callMethod(param.thisObject, "turnOff");
-                            param.setResult(null);
-                        }
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(lightServiceClass, "setColor", int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mUpdateLightsMethodState.get() != null &&
-                            mUpdateLightsMethodState.get().equals(MethodState.METHOD_ENTERED)) {
+                    final int status = XposedHelpers.getIntField(batteryProps, "batteryStatus");
+                    if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
                         if (mChargingLed == ChargingLed.DISABLED) {
-                            if (DEBUG) {
-                                log("LightService: setColor called from BatteryService - ignoring");
-                            }
-                            XposedHelpers.callMethod(param.thisObject, "turnOff");
+                            if (DEBUG) log("Disabling charging led");
+                            XposedHelpers.callMethod(batteryLight, "turnOff");
                             param.setResult(null);
+                            return;
+                        }
+                    } else {
+                        if (mFlashingLedDisabled) {
+                            if (DEBUG) log("Disabling low battery flashing led");
+                            XposedHelpers.callMethod(batteryLight, "turnOff");
+                            param.setResult(null);
+                            return;
                         }
                     }
                 }
@@ -156,56 +128,43 @@ public class ModLowBatteryWarning {
         }
     }
 
+    // SystemUI package
+    public enum LowBatteryWarningMode { DEFAULT, NONINTRUSIVE, OFF };
+
     static void init(final XSharedPreferences prefs, ClassLoader classLoader) {
         try {
             if (DEBUG) log("init");
 
-            Class<?> classPowerUI = findClass(CLASS_POWER_UI, classLoader);
-
             // for debugging purposes - simulate low battery even if it's not
             if (DEBUG) {
+                Class<?> classPowerUI = findClass(CLASS_POWER_UI, classLoader);
                 findAndHookMethod(classPowerUI, "findBatteryLevelBucket", int.class, new XC_MethodHook() {
-
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         param.setResult(-1);
                     }
-
                 });
             }
 
-            findAndHookMethod(classPowerUI, "playLowBatterySound", new XC_MethodHook() {
-
+            Class<?> classPowerWarnings = findClass(CLASS_POWER_WARNINGS, classLoader);
+            findAndHookMethod(classPowerWarnings, "showLowBatteryWarning", boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     prefs.reload();
-                    final int batteryWarningPolicy = Integer.valueOf(
-                            prefs.getString(GravityBoxSettings.PREF_KEY_LOW_BATTERY_WARNING_POLICY, "3"));
-                    final boolean playSound = ((batteryWarningPolicy & GravityBoxSettings.BATTERY_WARNING_SOUND) != 0);
-
-                    if (DEBUG) log("playLowBatterySound called; playSound = " + playSound);
-                    
-                    if (!playSound)
-                        param.setResult(null);
+                    LowBatteryWarningMode mode = LowBatteryWarningMode.valueOf(
+                            prefs.getString(GravityBoxSettings.PREF_KEY_LOW_BATTERY_WARNING_POLICY, "DEFAULT"));
+                    if (DEBUG) log("showLowBatteryWarning called; mode = " + mode);
+                    switch (mode) {
+                        case DEFAULT:
+                            return;
+                        case NONINTRUSIVE:
+                            param.args[0] = false;
+                            break;
+                        case OFF:
+                            param.setResult(null);
+                            return;
+                    }
                 }
-
-            });
-
-            findAndHookMethod(classPowerUI, "showLowBatteryWarning", new XC_MethodHook() {
-
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    prefs.reload();
-                    final int batteryWarningPolicy = Integer.valueOf(
-                            prefs.getString(GravityBoxSettings.PREF_KEY_LOW_BATTERY_WARNING_POLICY, "3"));
-                    final boolean showPopup = ((batteryWarningPolicy & GravityBoxSettings.BATTERY_WARNING_POPUP) != 0);
-                    
-                    if (DEBUG) log("showLowBatteryWarning called; showPopup = " + showPopup);
-
-                    if (!showPopup)
-                        param.setResult(null);
-                }
-
             });
 
         } catch (Throwable t) { XposedBridge.log(t); }

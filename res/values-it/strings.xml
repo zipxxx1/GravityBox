@@ -30,9 +30,6 @@
     <string name="vol_music_controls_summary">Cambia traccia alla pressione prolungata dei tasti volume a schermo spento</string>
 
     <string name="low_battery_warning_policy_title">Avviso per poca batteria</string>
-    <string name="low_battery_warning_full">Pop-up e suono</string>
-    <string name="low_battery_warning_popup">Solo pop-up</string>
-    <string name="low_battery_warning_sound">Solo suono</string>
     <string name="low_battery_warning_off">Nessun avviso</string>
 
     <string name="reboot_required">Le modifiche saranno applicate dopo il riavvio</string>

@@ -65,17 +65,15 @@
     </string-array>
 
     <string-array name="low_battery_warning_policy_entries" translatable="false">
-        <item>@string/low_battery_warning_full</item>
-        <item>@string/low_battery_warning_popup</item>
-        <item>@string/low_battery_warning_sound</item>
+        <item>@string/low_battery_warning_default</item>
+        <item>@string/low_battery_warning_nonintrusive</item>
         <item>@string/low_battery_warning_off</item>
     </string-array>
 
     <string-array name="low_battery_warning_policy_values" translatable="false">
-        <item>3</item>
-        <item>1</item>
-        <item>2</item>
-        <item>0</item>
+        <item>DEFAULT</item>
+        <item>NONINTRUSIVE</item>
+        <item>OFF</item>
     </string-array>
 
     <string-array name="empty_array" />

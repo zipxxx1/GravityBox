@@ -15,9 +15,6 @@
     <string name="vol_music_controls_summary">As teclas de volume mudam de faixa após manter a respectiva tecla pressionada com o ecrã apagado</string>
 
     <string name="low_battery_warning_policy_title">Aviso de bateria fraca</string>
-    <string name="low_battery_warning_full">Aviso visual e sonoro</string>
-    <string name="low_battery_warning_popup">Apenas aviso visual</string>
-    <string name="low_battery_warning_sound">Apenas aviso sonoro</string>
     <string name="low_battery_warning_off">Desligado</string>
 
     <string name="reboot_required">As alterações serão aplicadas após reiniciar o sistema</string>
