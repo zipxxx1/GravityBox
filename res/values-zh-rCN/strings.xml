@@ -16,7 +16,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox[KK]</string>
+    <string name="app_name">GravityBox[LP]</string>
 
     <string name="battery_style_title">电量图标风格</string>        
     <string name="battery_style_stock">原厂电量图标</string>
@@ -1877,5 +1877,21 @@
     <string name="pref_battery_bar_color_critical_title">危急电量颜色</string>
     <string name="pref_battery_bar_centered_title">居中</string>
     <string name="pref_battery_bar_color_charging_title">充电颜色</string>
+	
+	<!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">模式</string>
+    <string name="pref_statusbar_download_progress_animated_title">动画</string>
+    <string name="pref_statusbar_download_progress_centered_title">居中</string>
+    <string name="pref_statusbar_download_progress_thickness_title">厚度</string>
+    <string name="pref_statusbar_download_progress_margin_title">边缘</string>
+
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">菜单键单击动作</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">返回键单击动作</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">最近任务键双击动作</string>
 
 </resources>
