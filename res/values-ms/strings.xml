@@ -744,7 +744,6 @@
     <string name="pref_hwkey_lockscreen_torch_title">Lampu di skrinkunci</string>
     <string name="hwkey_ls_torch_disabled">Matikan</string>
     <string name="hwkey_ls_torch_home_longpress">Di rumah ketika tekan lama</string>
-    <string name="hwkey_ls_torch_voldown_longpress">Di nada bawah ketika tekan lama</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Pengurus Butang Setting cepat (perlukan reboot)</string>
@@ -872,7 +871,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Tunjuk menu power</string>
     <string name="hwkey_action_expand_notifications">Besarkan panel notifikasi</string>
-    <string name="hwkey_action_expand_quicksettings">Besarkan panel QuickSettings</string>
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Target gelung navigasi</string>
@@ -1200,9 +1198,6 @@
     <string name="tile_label_style_normal">Biasa</string>
     <string name="tile_label_style_allcaps">Semua huruf besar</string>
     <string name="tile_label_style_hidden">Tersembunyi</string>
-
-    <!-- Key Actions: Show brightness dialog -->
-    <string name="hwkey_action_brightness_dialog">Tunjukkan dialog kecerahan</string>
 
     <!-- Navbar ring: Haptic feedback -->
     <string name="pref_navbar_ring_haptic_feedback_title">Gegaran</string>

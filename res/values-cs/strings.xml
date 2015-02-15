@@ -731,7 +731,6 @@
     <string name="pref_hwkey_lockscreen_torch_title">Ovládání LED světla na obrazovce uzamčení</string>
     <string name="hwkey_ls_torch_disabled">Vypnuto</string>
     <string name="hwkey_ls_torch_home_longpress">Na dlouhé podržení Domů</string>
-    <string name="hwkey_ls_torch_voldown_longpress">Na dlouhé podržení Hlasitost-</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Hlavní přepínač pro QuickSettings nastavení (vyžaduje restart)</string>
@@ -860,7 +859,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Zobrazit nabídku napájení</string>
     <string name="hwkey_action_expand_notifications">Zobrazit panel upozornění</string>
-    <string name="hwkey_action_expand_quicksettings">Zobrazit panel nastavení</string>
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Zkratky prstence navigační lišty</string>
@@ -1185,9 +1183,6 @@
     <string name="tile_label_style_normal">Normální</string>
     <string name="tile_label_style_allcaps">Velká písmena</string>
     <string name="tile_label_style_hidden">Skrýt</string>
-
-    <!-- Key Actions: Show brightness dialog -->
-    <string name="hwkey_action_brightness_dialog">Otevřít nastavení jasu</string>
 
     <!-- Navbar ring: Haptic feedback -->
     <string name="pref_navbar_ring_haptic_feedback_title">Hmatová odezva</string>

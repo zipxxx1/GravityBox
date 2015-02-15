@@ -47,7 +47,6 @@ public class ShortcutActivity extends ListActivity {
     private boolean mAllowUnlockAction;
 
     private static List<String> UNSAFE_ACTIONS = new ArrayList<String>(Arrays.asList(
-            ExpandQuicksettingsShortcut.ACTION,
             NetworkModeShortcut.ACTION,
             RecentAppsShortcut.ACTION,
             MobileDataShortcut.ACTION,
@@ -121,8 +120,6 @@ public class ShortcutActivity extends ListActivity {
             ShowPowerMenuShortcut.launchAction(mContext, intent);
         } else if (action.equals(ExpandNotificationsShortcut.ACTION)) {
             ExpandNotificationsShortcut.launchAction(mContext, intent);
-        } else if (action.equals(ExpandQuicksettingsShortcut.ACTION)) {
-            ExpandQuicksettingsShortcut.launchAction(mContext, intent);
         } else if (action.equals(ExpandedDesktopShortcut.ACTION)) {
             ExpandedDesktopShortcut.launchAction(mContext, intent);
         } else if (action.equals(ScreenshotShortcut.ACTION)) {
@@ -159,8 +156,6 @@ public class ShortcutActivity extends ListActivity {
             VolumePanelShortcut.launchAction(mContext, intent);
         } else if (action.equals(LauncherDrawerShortcut.ACTION)) {
             LauncherDrawerShortcut.launchAction(mContext, intent);
-        } else if (action.equals(BrightnessDialogShortcut.ACTION)) {
-            BrightnessDialogShortcut.launchAction(mContext, intent);
         } else if (action.equals(SmartRadioShortcut.ACTION)) {
             SmartRadioShortcut.launchAction(mContext, intent);
         } else if (action.equals(QuietHoursShortcut.ACTION)) {
@@ -197,7 +192,6 @@ public class ShortcutActivity extends ListActivity {
         list.add(new ShowPowerMenuShortcut(mContext));
         list.add(new ExpandNotificationsShortcut(mContext));
         list.add(new ClearNotificationsShortcut(mContext));
-        list.add(new ExpandQuicksettingsShortcut(mContext));
         list.add(new ExpandedDesktopShortcut(mContext));
         list.add(new GoogleNowShortcut(mContext));
         list.add(new ScreenshotShortcut(mContext));
@@ -224,7 +218,6 @@ public class ShortcutActivity extends ListActivity {
         }
         list.add(new VolumePanelShortcut(mContext));
         list.add(new RingerModeShortcut(mContext));
-        list.add(new BrightnessDialogShortcut(mContext));
         list.add(new AutoBrightnessShortcut(mContext));
         list.add(new RecentAppsShortcut(mContext));
         if (mInvokedFromGb) {

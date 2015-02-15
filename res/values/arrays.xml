@@ -233,9 +233,7 @@
         <item>@string/hwkey_action_auto_rotation</item>
         <item>@string/hwkey_action_show_power_menu</item>
         <item>@string/hwkey_action_expand_notifications</item>
-        <item>@string/hwkey_action_expand_quicksettings</item>
         <item>@string/hwkey_action_volume_panel</item>
-        <item>@string/hwkey_action_brightness_dialog</item>
         <item>@string/hwkey_action_custom</item>
     </string-array>
 
@@ -260,9 +258,7 @@
         <item>16</item>
         <item>17</item>
         <item>18</item>
-        <item>19</item>
         <item>21</item>
-        <item>23</item>
         <item>25</item>
     </string-array>
 
@@ -689,13 +685,11 @@
     <string-array name="hwkey_ls_torch_entries" translatable="false">
         <item>@string/hwkey_ls_torch_disabled</item>
         <item>@string/hwkey_ls_torch_home_longpress</item>
-        <item>@string/hwkey_ls_torch_voldown_longpress</item>
     </string-array>
 
     <string-array name="hwkey_ls_torch_values" translatable="false">
         <item>0</item>
         <item>1</item>
-        <item>2</item>
     </string-array>
 
     <string-array name="volume_panel_timeout_entries" translatable="false">

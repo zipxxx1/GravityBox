@@ -585,7 +585,6 @@
     <string name="pref_hwkey_lockscreen_torch_title">잠금 화면 손전등</string>
     <string name="hwkey_ls_torch_disabled">비활성화</string>
     <string name="hwkey_ls_torch_home_longpress">홈 키를 길게 눌렀을 때</string>
-    <string name="hwkey_ls_torch_voldown_longpress">볼륨 하 버튼을 길게 눌렀을 때</string>
 
     <string name="pref_qs_management_enable_summary">GB에서 퀵세팅 설정을 담당하기 (재시작 필요)</string>
 
@@ -688,7 +687,6 @@
 
     <string name="hwkey_action_show_power_menu">전원 옵션 보이기</string>
     <string name="hwkey_action_expand_notifications">잠금 패널 확장</string>
-    <string name="hwkey_action_expand_quicksettings">퀵세팅 패널 확장</string>
 
     <string name="pref_cat_navbar_ring_targets_title">네비게이션 고리 바로가기</string>
     <string name="pref_navbar_ring_targets_enable_summary">GB에서 네비게이션 고리의 바로가기를 담당합니다. (재시작 필요)</string>
@@ -956,8 +954,6 @@
     <string name="tile_label_style_normal">기본</string>
     <string name="tile_label_style_allcaps">모두 대문자</string>
     <string name="tile_label_style_hidden">숨기기</string>
-
-    <string name="hwkey_action_brightness_dialog">밝기 대화창 보이기</string>
 
     <string name="pref_navbar_ring_haptic_feedback_title">햅틱 피드백</string>
     <string name="navring_haptic_feedback_default">기본 값</string>

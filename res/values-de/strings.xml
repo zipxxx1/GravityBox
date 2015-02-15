@@ -745,7 +745,6 @@
     <string name="pref_hwkey_lockscreen_torch_title">Taschenlampe im Sperrbildschirm</string>
     <string name="hwkey_ls_torch_disabled">Deaktiviert</string>
     <string name="hwkey_ls_torch_home_longpress">Langes Drücken der Home Taste</string>
-    <string name="hwkey_ls_torch_voldown_longpress">Langes Drücken der Lautstärke-runter Taste</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Aktiviert/Deaktiviert die Anpassung der Schnelleinstellungen (erfordert Neustart)</string>
@@ -873,7 +872,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Ausschaltmenü anzeigen</string>
     <string name="hwkey_action_expand_notifications">Benachrichtigungsleiste erweitern</string>
-    <string name="hwkey_action_expand_quicksettings">Schnelleinstellungenleiste erweitern</string>
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Anwendungen des Navigationsringes</string>
@@ -1198,9 +1196,6 @@
     <string name="tile_label_style_normal">Normal</string>
     <string name="tile_label_style_allcaps">Großbuchstaben</string>
     <string name="tile_label_style_hidden">Versteckt</string>
-
-    <!-- Key Actions: Show brightness dialog -->
-    <string name="hwkey_action_brightness_dialog">Helligkeitsregler anzeigen</string>
 
     <!-- Navbar ring: Haptic feedback -->
     <string name="pref_navbar_ring_haptic_feedback_title">Haptisches Feedback</string>

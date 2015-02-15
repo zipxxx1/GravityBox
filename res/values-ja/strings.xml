@@ -626,7 +626,6 @@
     <string name="pref_hwkey_lockscreen_torch_title">ロック画面のトーチ</string>
     <string name="hwkey_ls_torch_disabled">無効</string>
     <string name="hwkey_ls_torch_home_longpress">ホームボタン長押し</string>
-    <string name="hwkey_ls_torch_voldown_longpress">音量下ボタン長押し</string>
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">クイック設定タイル管理を有効/無効にします。(要再起動)</string>
     <!-- AppPickerPreference: shortcut support -->
@@ -729,7 +728,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">電源メニューを表示</string>
     <string name="hwkey_action_expand_notifications">通知領域を開く</string>
-    <string name="hwkey_action_expand_quicksettings">クイック設定を開く</string>
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">ナビリングのターゲット</string>
     <string name="pref_navbar_ring_targets_enable_summary">ナビリングのターゲットを有効/無効にします。(要再起動)</string>
@@ -999,8 +997,6 @@
     <string name="tile_label_style_normal">通常</string>
     <string name="tile_label_style_allcaps">全て大文字</string>
     <string name="tile_label_style_hidden">非表示</string>
-    <!-- Key Actions: Show brightness dialog -->
-    <string name="hwkey_action_brightness_dialog">画面の明るさダイアログを表示</string>
     <!-- Navbar ring: Haptic feedback -->
     <string name="pref_navbar_ring_haptic_feedback_title">操作時バイブレーション</string>
     <string name="navring_haptic_feedback_default">デフォルト</string>

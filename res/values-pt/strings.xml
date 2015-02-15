@@ -733,7 +733,6 @@
     <string name="pref_hwkey_lockscreen_torch_title">Lanterna na tela de bloqueio</string>
     <string name="hwkey_ls_torch_disabled">Desabilitado</string>
     <string name="hwkey_ls_torch_home_longpress">No toque longo do botão Home</string>
-    <string name="hwkey_ls_torch_voldown_longpress">Ao pressionar e segurar o botão de Volume-</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Chave-mestra para manipulação das Configurações Rápidas (requer reinício)</string>
@@ -861,7 +860,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Mostrar menu de energia</string>
     <string name="hwkey_action_expand_notifications">Expandir painel de notificações</string>
-    <string name="hwkey_action_expand_quicksettings">Expandir painel de configurações rápidas</string>
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Atalhos da barra de navegação</string>
@@ -1189,9 +1187,6 @@
     <string name="tile_label_style_normal">Normal</string>
     <string name="tile_label_style_allcaps">Tudo em maiúsculas</string>
     <string name="tile_label_style_hidden">Oculto</string>
-
-    <!-- Key Actions: Show brightness dialog -->
-    <string name="hwkey_action_brightness_dialog">Mostrar controle de brilho</string>
 
     <!-- Navbar ring: Haptic feedback -->
     <string name="pref_navbar_ring_haptic_feedback_title">Reconhecimento tátil</string>

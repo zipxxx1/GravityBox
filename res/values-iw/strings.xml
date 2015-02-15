@@ -732,7 +732,6 @@
     <string name="pref_hwkey_lockscreen_torch_title">פנס במסך נעילה</string>
     <string name="hwkey_ls_torch_disabled">כבוי</string>
     <string name="hwkey_ls_torch_home_longpress">בלחיצה ארוכה על כפתור הבית</string>
-    <string name="hwkey_ls_torch_voldown_longpress">בלחיצה ארוכה של כפתור החלשת שמע</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">מפסק ראשי לניהול הגדרות של QuickSettings (דורש איתחול)</string>
@@ -860,7 +859,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">הצג תפריט הפעלה/כיבוי</string>
     <string name="hwkey_action_expand_notifications">הרחב את מגירת ההתראות</string>
-    <string name="hwkey_action_expand_quicksettings">הרחב תפריט QuickSettings</string>
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">קיצורי דרך של טבעת ביטול נעילה</string>

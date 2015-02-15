@@ -138,9 +138,6 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
             case GravityBoxSettings.HWKEY_ACTION_EXPAND_NOTIFICATIONS:
                 intent = new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS);
                 break;
-            case GravityBoxSettings.HWKEY_ACTION_EXPAND_QUICKSETTINGS:
-                intent = new Intent(ModHwKeys.ACTION_EXPAND_QUICKSETTINGS);
-                break;
             case GravityBoxSettings.HWKEY_ACTION_SCREENSHOT:
                 intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
                 break;
@@ -149,9 +146,6 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
                 break;
             case GravityBoxSettings.HWKEY_ACTION_LAUNCHER_DRAWER:
                 intent = new Intent(ModLauncher.ACTION_SHOW_APP_DRAWER);
-                break;
-            case GravityBoxSettings.HWKEY_ACTION_BRIGHTNESS_DIALOG:
-                intent = new Intent(ModHwKeys.ACTION_SHOW_BRIGHTNESS_DIALOG);
                 break;
             case GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS:
                 intent = new Intent(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_LONGPRESS);

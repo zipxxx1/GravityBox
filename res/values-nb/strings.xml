@@ -750,7 +750,6 @@
     <string name="pref_hwkey_lockscreen_torch_title">Lockscreen torch</string>
     <string name="hwkey_ls_torch_disabled">Disabled</string>
     <string name="hwkey_ls_torch_home_longpress">On Home long-press</string>
-    <string name="hwkey_ls_torch_voldown_longpress">On volume down long-press</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Toggles QuickSettings management (requires reboot)</string>
@@ -878,7 +877,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Show power menu</string>
     <string name="hwkey_action_expand_notifications">Expand notifications panel</string>
-    <string name="hwkey_action_expand_quicksettings">Expand QuickSettings panel</string>
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Navigation ring targets</string>
@@ -1206,9 +1204,6 @@
     <string name="tile_label_style_normal">Normal</string>
     <string name="tile_label_style_allcaps">All capitals</string>
     <string name="tile_label_style_hidden">Hidden</string>
-
-    <!-- Key Actions: Show brightness dialog -->
-    <string name="hwkey_action_brightness_dialog">Show brightness dialog</string>
 
     <!-- Navbar ring: Haptic feedback -->
     <string name="pref_navbar_ring_haptic_feedback_title">Haptic feedback</string>

@@ -712,7 +712,6 @@
     <string name="pref_hwkey_lockscreen_torch_title">Kilit ekranı feneri</string>
     <string name="hwkey_ls_torch_disabled">Devre dışı</string>
     <string name="hwkey_ls_torch_home_longpress">Home tuşuna uzun basıldığında</string>
-    <string name="hwkey_ls_torch_voldown_longpress">Ses kısma tuşuna uzun basıldığında</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Hızlı Ayarlar yönetimini açar (yeniden başlatma gerekli)</string>
@@ -840,7 +839,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">Güç menüsünü aç</string>
     <string name="hwkey_action_expand_notifications">Bildirim panelini aç</string>
-    <string name="hwkey_action_expand_quicksettings">Hızlı Ayarlar panelini aç</string>
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Gezinme halkası hedefleri</string>
@@ -1165,9 +1163,6 @@
     <string name="tile_label_style_normal">Normal</string>
     <string name="tile_label_style_allcaps">Hepsi büyük</string>
     <string name="tile_label_style_hidden">Gizli</string>
-
-    <!-- Key Actions: Show brightness dialog -->
-    <string name="hwkey_action_brightness_dialog">Parlaklık diyaloğunu göster</string>
 
     <!-- Navbar ring: Haptic feedback -->
     <string name="pref_navbar_ring_haptic_feedback_title">Haptic feedback</string>

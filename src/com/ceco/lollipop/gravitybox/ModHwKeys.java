@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -80,7 +80,6 @@ public class ModHwKeys {
     public static final String ACTION_TOGGLE_EXPANDED_DESKTOP = 
             "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP";
     public static final String ACTION_EXPAND_NOTIFICATIONS = "gravitybox.intent.action.EXPAND_NOTIFICATIONS";
-    public static final String ACTION_EXPAND_QUICKSETTINGS = "gravitybox.intent.action.EXPAND_QUICKSETTINGS";
     public static final String ACTION_TOGGLE_TORCH = "gravitybox.intent.action.TOGGLE_TORCH";
     public static final String ACTION_SHOW_RECENT_APPS = "gravitybox.intent.action.SHOW_RECENT_APPS";
     public static final String ACTION_SHOW_APP_LAUCNHER = "gravitybox.intent.action.SHOW_APP_LAUNCHER";
@@ -94,7 +93,6 @@ public class ModHwKeys {
     public static final String ACTION_VOICE_SEARCH = "gravitybox.intent.action.VOICE_SEARCH";
     public static final String ACTION_LAUNCH_APP = "gravitybox.intent.action.LAUNCH_APP";
     public static final String ACTION_SHOW_VOLUME_PANEL = "gravitybox.intent.action.SHOW_VOLUME_PANEL";
-    public static final String ACTION_SHOW_BRIGHTNESS_DIALOG = "gravitybox.intent.action.SHOW_BRIGHTNESS_DIALOG";
     public static final String ACTION_TOGGLE_AUTO_BRIGHTNESS = "gravitybox.intent.action.TOGGLE_AUTO_BRIGHTNESS";
     public static final String ACTION_RECENTS_CLEAR_ALL_SINGLETAP = "gravitybox.intent.action.ACTION_RECENTS_CLEARALL";
     public static final String ACTION_RECENTS_CLEAR_ALL_LONGPRESS = "gravitybox.intent.action.ACTION_RECENTS_CLEARALL_LONGPRESS";
@@ -150,7 +148,7 @@ public class ModHwKeys {
     private static boolean mCustomKeyPressed = false;
     private static long[] mVkVibePattern;
     private static long[] mVkVibePatternDefault;
-    private static String[] mHeadsetUri = new String[2]; // index 0 = unplugged, index 1 = plugged
+    private static String[] mHeadsetUri = new String[2]; // index 0 = unplugged, index 1 = plugged 
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui",
@@ -327,8 +325,6 @@ public class ModHwKeys {
                 toggleScreenRecording();
             } else if (action.equals(ACTION_EXPAND_NOTIFICATIONS) && mPhoneWindowManager != null) {
                 expandNotificationsPanel();
-            } else if (action.equals(ACTION_EXPAND_QUICKSETTINGS) && mPhoneWindowManager != null) {
-                expandSettingsPanel();
             } else if (action.equals(ACTION_TOGGLE_TORCH)) {
                 toggleTorch();
             } else if (action.equals(ACTION_SHOW_RECENT_APPS)) {
@@ -359,8 +355,6 @@ public class ModHwKeys {
                 launchCustomApp(intent.getStringExtra(GravityBoxSettings.EXTRA_HWKEY_CUSTOM_APP));
             } else if (action.equals(ACTION_SHOW_VOLUME_PANEL)) {
                 showVolumePanel();
-            } else if (action.equals(ACTION_SHOW_BRIGHTNESS_DIALOG)) {
-                showBrightnessDialog();
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_VK_VIBRATE_PATTERN_CHANGED)) {
                 setVirtualKeyVibePattern(intent.getStringExtra(
                         GravityBoxSettings.EXTRA_VK_VIBRATE_PATTERN));
@@ -491,7 +485,7 @@ public class ModHwKeys {
                 Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS, phoneWindowManagerInitHook);
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "interceptKeyBeforeQueueing", 
-                    KeyEvent.class, int.class, boolean.class, new XC_MethodHook(XCallback.PRIORITY_HIGHEST) {
+                    KeyEvent.class, int.class, new XC_MethodHook(XCallback.PRIORITY_HIGHEST) {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     KeyEvent event = (KeyEvent) param.args[0];
@@ -509,22 +503,6 @@ public class ModHwKeys {
                         } else {
                             if (event.getRepeatCount() == 0) {
                                 handler.postDelayed(mResetBrightnessRunnable, 7000);
-                            }
-                        }
-                    }
-
-                    if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && keyguardOn &&
-                            mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_VOLDOWN_LONGPRESS &&
-                            !(Boolean) XposedHelpers.callMethod(param.thisObject, "isMusicActive")) {
-                        if (!down) {
-                            handler.removeCallbacks(mLockscreenTorchRunnable);
-                        } else {
-                            if (event.getRepeatCount() == 0) {
-                                final Object ts = XposedHelpers.callMethod(param.thisObject, "getTelephonyService");
-                                if ((Boolean) XposedHelpers.callMethod(ts, "isIdle")) {
-                                    handler.postDelayed(mLockscreenTorchRunnable, 
-                                            ViewConfiguration.getLongPressTimeout());
-                                }
                             }
                         }
                     }
@@ -927,7 +905,6 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_TOGGLE_EXPANDED_DESKTOP);
             intentFilter.addAction(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING);
             intentFilter.addAction(ACTION_EXPAND_NOTIFICATIONS);
-            intentFilter.addAction(ACTION_EXPAND_QUICKSETTINGS);
             intentFilter.addAction(ACTION_TOGGLE_TORCH);
             intentFilter.addAction(ACTION_SHOW_RECENT_APPS);
             intentFilter.addAction(ACTION_SHOW_APP_LAUCNHER);
@@ -940,7 +917,6 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_VOICE_SEARCH);
             intentFilter.addAction(ACTION_LAUNCH_APP);
             intentFilter.addAction(ACTION_SHOW_VOLUME_PANEL);
-            intentFilter.addAction(ACTION_SHOW_BRIGHTNESS_DIALOG);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VK_VIBRATE_PATTERN_CHANGED);
             intentFilter.addAction(ACTION_TOGGLE_QUIET_HOURS);
             intentFilter.addAction(ACTION_INAPP_SEARCH);
@@ -1181,16 +1157,12 @@ public class ModHwKeys {
             showGlobalActionsDialog();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_EXPAND_NOTIFICATIONS) {
             expandNotificationsPanel();
-        } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_EXPAND_QUICKSETTINGS) {
-            expandSettingsPanel();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_SCREENSHOT) {
             takeScreenshot();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_VOLUME_PANEL) {
             showVolumePanel();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_LAUNCHER_DRAWER) {
             showLauncherDrawer();
-        } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_BRIGHTNESS_DIALOG) {
-            showBrightnessDialog();
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_SINGLETAP) {
             clearAllRecents(false);
         } else if (action.actionId == GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS) {
@@ -1618,9 +1590,7 @@ public class ModHwKeys {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    XposedHelpers.callMethod(mPhoneWindowManager, "sendCloseSystemWindows", 
-                            SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS);
-                    XposedHelpers.callMethod(mPhoneWindowManager, "showGlobalActionsDialog");
+                    XposedHelpers.callMethod(mPhoneWindowManager, "showGlobalActions");
                 }
             });
         } catch (Throwable t) {
@@ -1634,15 +1604,6 @@ public class ModHwKeys {
             XposedHelpers.callMethod(sbService, "expandNotificationsPanel");
         } catch (Throwable t) {
             log("Error executing expandNotificationsPanel(): " + t.getMessage());
-        }
-    }
-
-    private static void expandSettingsPanel() {
-        try {
-            final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService"); 
-            XposedHelpers.callMethod(sbService, "expandSettingsPanel");
-        } catch (Throwable t) {
-            log("Error executing expandSettingsPanel(): " + t.getMessage());
         }
     }
 
@@ -1681,15 +1642,6 @@ public class ModHwKeys {
             mContext.sendBroadcast(intent);
         } catch (Throwable t) {
             log("Error executing clearAllRecents(" + longPress + "): " + t.getMessage());
-        }
-    }
-
-    private static void showBrightnessDialog() {
-        try {
-            Intent intent = new Intent("android.intent.action.SHOW_BRIGHTNESS_DIALOG");
-            mContext.sendBroadcast(intent);
-        } catch (Throwable t) {
-            log("Error executing showBrightnessDialog: " + t.getMessage());
         }
     }
 

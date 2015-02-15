@@ -747,7 +747,6 @@
     <string name="pref_hwkey_lockscreen_torch_title">鎖定畫面手電筒</string>
     <string name="hwkey_ls_torch_disabled">停用</string>
     <string name="hwkey_ls_torch_home_longpress">長按 Home 鍵</string>
-    <string name="hwkey_ls_torch_voldown_longpress">長按 音量 - 鍵</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">快速設定選項主開關 (需要重新啟動) </string>
@@ -875,7 +874,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">顯示電源選單</string>
     <string name="hwkey_action_expand_notifications">展開通知面板</string>
-    <string name="hwkey_action_expand_quicksettings">展開快速設定面板</string>
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">導航環目標</string>
@@ -1202,9 +1200,6 @@
     <string name="tile_label_style_normal">正常</string>
     <string name="tile_label_style_allcaps">大寫字母</string>
     <string name="tile_label_style_hidden">隱藏</string>
-
-    <!-- Key Actions: Show brightness dialog -->
-    <string name="hwkey_action_brightness_dialog">顯示亮度對話框</string>
 
     <!-- Navbar ring: Haptic feedback -->
     <string name="pref_navbar_ring_haptic_feedback_title">觸控反饋</string>
