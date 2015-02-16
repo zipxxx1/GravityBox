@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -74,16 +74,16 @@ public class ModPower {
         }
     };
 
-    public static void initZygote(final XSharedPreferences prefs) {
+    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         // wake up with proximity feature
         try {
-            Class<?> pmServiceClass = XposedHelpers.findClass(CLASS_PM_SERVICE, null);
-            Class<?> pmHandlerClass = XposedHelpers.findClass(CLASS_PM_HANDLER, null);
+            Class<?> pmServiceClass = XposedHelpers.findClass(CLASS_PM_SERVICE, classLoader);
+            Class<?> pmHandlerClass = XposedHelpers.findClass(CLASS_PM_HANDLER, classLoader);
 
             mIgnoreIncomingCall = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL, false);
 
-            XposedBridge.hookAllMethods(pmServiceClass, "init", new XC_MethodHook() {
+            XposedBridge.hookAllMethods(pmServiceClass, "systemReady", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
@@ -98,7 +98,7 @@ public class ModPower {
             });
 
             XposedHelpers.findAndHookMethod(pmServiceClass, "wakeUpInternal",
-                    long.class, new XC_MethodHook() {
+                    long.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (!shouldRunProximityCheck()) return;

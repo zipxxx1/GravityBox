@@ -76,7 +76,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         }
 
         ModLedControl.initZygote(prefs);
-        ModPower.initZygote(prefs);
 
         // MTK
         if (Utils.isMtkDevice()) {
@@ -123,6 +122,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModDisplay.initAndroid(prefs, lpparam.classLoader);
             ConnectivityServiceWrapper.initAndroid(lpparam.classLoader);
             ModViewConfig.initAndroid(prefs, lpparam.classLoader);
+            ModPower.initAndroid(prefs, lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {
