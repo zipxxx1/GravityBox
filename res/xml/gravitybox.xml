@@ -96,10 +96,13 @@
             android:key="pref_cat_lockscreen_other"
             android:title="@string/pref_cat_lockscreen_other_title">
 
-            <CheckBoxPreference 
-                android:key="pref_lockscreen_rotation"
+            <ListPreference 
+                android:key="pref_lockscreen_rotation2"
                 android:title="@string/pref_lockscreen_rotation_title"
-                android:defaultValue="false" />
+                android:summary="@string/pref_lockscreen_rotation_summary"
+                android:entries="@array/tri_state_entries"
+                android:entryValues="@array/tri_state_values"
+                android:defaultValue="DEFAULT" />
 
             <CheckBoxPreference 
                 android:key="pref_lockscreen_show_pattern_error"

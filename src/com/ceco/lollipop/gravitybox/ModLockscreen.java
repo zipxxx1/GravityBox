@@ -62,7 +62,7 @@ public class ModLockscreen {
     private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
     private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
     private static final String CLASS_LOCK_PATTERN_UTILS = "com.android.internal.widget.LockPatternUtils";
-    private static final String CLASS_KG_UTILS = CLASS_PATH + ".KeyguardUtils";
+    private static final String CLASS_SB_WINDOW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
 
     private static final boolean DEBUG = false;
     //private static final boolean DEBUG_KIS = false;
@@ -134,6 +134,7 @@ public class ModLockscreen {
             final Class<?> carrierTextClass = XposedHelpers.findClass(CLASS_CARRIER_TEXT, classLoader);
             final Class<?> lockPatternViewClass = XposedHelpers.findClass(CLASS_LOCK_PATTERN_VIEW, classLoader);
             final Class<? extends Enum> displayModeEnum = (Class<? extends Enum>) XposedHelpers.findClass(ENUM_DISPLAY_MODE, classLoader);
+            final Class<?> sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader);
 
             XposedBridge.hookAllConstructors(kgViewMediatorClass, new XC_MethodHook() {
                 @Override
@@ -210,16 +211,26 @@ public class ModLockscreen {
 //                }
 //            });
 
-            try {
-                XposedHelpers.findAndHookMethod(kgViewManagerClass, "shouldEnableScreenRotation", 
-                        shouldEnableScreenRotationHook);
-            } catch (NoSuchMethodError nme) {
-                try {
-                    XposedHelpers.findAndHookMethod(CLASS_KG_UTILS, classLoader, 
-                            "shouldEnableScreenRotation", Context.class, shouldEnableScreenRotationHook);
-                } catch (NoSuchMethodError nme2) {
-                    XposedBridge.log(nme2);
-                }
+            final Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_ROTATION, "DEFAULT"));
+            if (triState != Utils.TriState.DEFAULT) {
+                XposedHelpers.findAndHookMethod(sbWindowManagerClass, "shouldEnableKeyguardScreenRotation",
+                        new XC_MethodReplacement() {
+                    @Override
+                    protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+                        if (DEBUG) log("shouldEnableKeyguardScreenRotation called");
+                        try {
+                            if (Utils.isMtkDevice()) {
+                                return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                            } else {
+                                return (triState == Utils.TriState.ENABLED);
+                            }
+                        } catch (Throwable t) {
+                            XposedBridge.log(t);
+                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                        }
+                    }
+                });
             }
 
             XposedHelpers.findAndHookMethod(kgHostViewClass, "onFinishInflate", new XC_MethodHook() {
@@ -482,22 +493,6 @@ public class ModLockscreen {
             XposedBridge.log(t);
         }
     }
-
-    private static XC_MethodReplacement shouldEnableScreenRotationHook = new XC_MethodReplacement() {
-        @Override
-        protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-            try {
-                if (Utils.isMtkDevice()) {
-                    return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                } else {
-                    return mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ROTATION, false);
-                }
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-                return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-            }
-        }
-    };
 
     private static final OnLongClickListener mLockButtonLongClickListener = new OnLongClickListener() {
         @Override

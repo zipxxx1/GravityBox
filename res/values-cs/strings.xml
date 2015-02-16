@@ -192,6 +192,7 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotace obrazovky uzamčení</string>
+    <string name="pref_lockscreen_rotation_summary">Vyžaduje restart</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Povolit menu tlačítko</string>

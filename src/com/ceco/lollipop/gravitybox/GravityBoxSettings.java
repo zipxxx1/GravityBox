@@ -232,7 +232,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     //public static final String EXTRA_LOCKSCREEN_BG = "lockscreenBg";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN_OTHER = "pref_cat_lockscreen_other";
-    public static final String PREF_KEY_LOCKSCREEN_ROTATION = "pref_lockscreen_rotation";
+    public static final String PREF_KEY_LOCKSCREEN_ROTATION = "pref_lockscreen_rotation2";
     public static final String PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR = "pref_lockscreen_show_pattern_error";
     public static final String PREF_KEY_LOCKSCREEN_MENU_KEY = "pref_lockscreen_menu_key2";
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
@@ -837,6 +837,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     private static final List<String> rebootKeys = new ArrayList<String>(Arrays.asList(
             PREF_KEY_BRIGHTNESS_MIN,
             PREF_KEY_LOCKSCREEN_MENU_KEY,
+            PREF_KEY_LOCKSCREEN_ROTATION,
             PREF_KEY_MUSIC_VOLUME_STEPS,
             PREF_KEY_HOLO_BG_SOLID_BLACK,
             PREF_KEY_HOLO_BG_DITHER,
@@ -910,7 +911,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
             PREF_KEY_LOCKSCREEN_CARRIER2_TEXT,
             PREF_KEY_LOCKSCREEN_DISABLE_ECB,
-            PREF_KEY_LOCKSCREEN_ROTATION,
             PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR
     ));
 
@@ -1269,7 +1269,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefHwKeyLockscreenTorch;
         private PreferenceCategory mPrefCatHwKeyOthers;
         private PreferenceCategory mPrefCatLsOther;
-        private CheckBoxPreference mPrefLsRotation;
+        private ListPreference mPrefLsRotation;
         private PreferenceScreen mPrefCatLauncherTweaks;
         private ListPreference mPrefLauncherDesktopGridRows;
         private ListPreference mPrefLauncherDesktopGridCols;
@@ -1568,7 +1568,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbDaColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY);
 
             mPrefCatLsOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_OTHER);
-            mPrefLsRotation = (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_ROTATION);
+            mPrefLsRotation = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_ROTATION);
 
             mPrefCatLauncherTweaks = (PreferenceScreen) findPreference(PREF_CAT_LAUNCHER_TWEAKS);
             mPrefLauncherDesktopGridRows = (ListPreference) findPreference(PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS);
