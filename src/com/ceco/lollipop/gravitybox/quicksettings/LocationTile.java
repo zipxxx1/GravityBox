@@ -27,7 +27,6 @@ import android.provider.Settings;
 import android.view.View;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
-import com.ceco.lollipop.gravitybox.ModQuickSettings;
 import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -165,11 +164,9 @@ public class LocationTile extends BasicTile {
         int locationMode = getLocationMode();
         boolean locationEnabled = isLocationEnabled();
 
-        if (!ModQuickSettings.hasDisableLocationConsent) {
-            Runnable collapsePanels = collapsePanels(mLocationMode, locationMode, mLocationEnabled, locationEnabled);
-            Handler handler = new Handler();
-            handler.post(collapsePanels);
-        }
+        Runnable collapsePanels = collapsePanels(mLocationMode, locationMode, mLocationEnabled, locationEnabled);
+        Handler handler = new Handler();
+        handler.post(collapsePanels);
  
         mLocationMode = locationMode;
         mLocationEnabled = locationEnabled;

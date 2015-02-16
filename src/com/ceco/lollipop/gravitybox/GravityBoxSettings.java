@@ -1795,6 +1795,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getPreferenceScreen().removePreference(mPrefCatLockscreen);
                 mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifExpandAll);
+            } else {
+                // TODO: rework for Lollipop
+                mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
             }
 
             // Remove Moto XT preferences

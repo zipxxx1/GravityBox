@@ -15,8 +15,6 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -158,8 +156,6 @@ public class ModQuickSettings {
     private static Map<String, View> mAllTileViews;
 
     private static List<BroadcastSubReceiver> mBroadcastSubReceivers;
-
-    public static boolean hasDisableLocationConsent = false;
 
     static {
         mCustomGbTileKeys = new ArrayList<Integer>(Arrays.asList(
@@ -790,24 +786,6 @@ public class ModQuickSettings {
                     }
                 }
             });
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    public static void initDisableLocationConsent(final XSharedPreferences prefs) {
-        try {
-            if (DEBUG) log("initDisableLocationConsent");
-
-            BufferedReader apks = new BufferedReader(new FileReader(XposedBridge.BASE_DIR + "conf/modules.list"));
-            String apk;
-            while ((apk = apks.readLine()) != null) {
-                if (apk.contains(DISABLE_LOCATION_CONSENT_PACKAGE_NAME)) {
-                    hasDisableLocationConsent = true;
-                    if (DEBUG) log("hasDisableLocationConsent");
-                }
-            }
-            apks.close();
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -1706,7 +1684,7 @@ public class ModQuickSettings {
                                     final boolean newState = !(Boolean)XposedHelpers.callMethod(
                                             locCtrl, "isLocationEnabled");
                                     if ((Boolean)XposedHelpers.callMethod(locCtrl, "setLocationEnabled", newState)
-                                            && newState && !hasDisableLocationConsent) {
+                                            && newState) {
                                         Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
                                         mContext.sendBroadcast(closeDialog);
                                     } else if (mHideOnChange && mStatusBar != null) {

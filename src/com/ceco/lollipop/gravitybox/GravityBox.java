@@ -78,11 +78,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModLedControl.initZygote(prefs);
         ModPower.initZygote(prefs);
 
-        if (!Utils.hasLenovoVibeUI() &&
-                prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, true)) {
-            ModQuickSettings.initDisableLocationConsent(prefs);
-        }
-
         // MTK
         if (Utils.isMtkDevice()) {
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_DEV_OPTS, false)) {
@@ -107,10 +102,11 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModSettings.initPackageResources(prefs, resparam);
         }
 
-        if (!Utils.hasLenovoVibeUI() &&
-                resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
-            ModQuickSettings.initResources(prefs, resparam);
-        }
+// TODO: rework for Lollipop
+//        if (!Utils.hasLenovoVibeUI() &&
+//                resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
+//            ModQuickSettings.initResources(prefs, resparam);
+//        }
 
         if (!Utils.hasLenovoVibeUI() &&
                 resparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
@@ -170,11 +166,12 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModDialer.init(prefs, lpparam.classLoader, lpparam.packageName);
         }
 
-        if (!Utils.hasLenovoVibeUI() &&
-                lpparam.packageName.equals(ModQuickSettings.PACKAGE_NAME) &&
-                prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, true)) {
-            ModQuickSettings.init(prefs, lpparam.classLoader);
-        }
+// TODO: rework for Lollipop
+//        if (!Utils.hasLenovoVibeUI() &&
+//                lpparam.packageName.equals(ModQuickSettings.PACKAGE_NAME) &&
+//                prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, true)) {
+//            ModQuickSettings.init(prefs, lpparam.classLoader);
+//        }
 
         if (lpparam.packageName.equals(ModStatusbarColor.PACKAGE_NAME)) {
             ModStatusbarColor.init(prefs, lpparam.classLoader);
