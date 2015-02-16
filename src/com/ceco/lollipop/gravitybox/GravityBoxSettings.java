@@ -1674,10 +1674,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
-                mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
-                mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
                 mPrefCatPowerOther.removePreference(mPrefProximityWakeIgnoreCall);
            }
+
+            // TODO: carrier text in lock screen statusbar
+            mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
+            mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
 
             // Remove MTK specific preferences for non-MTK devices
             if (!Utils.isMtkDevice()) {
@@ -1691,7 +1693,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text);
-                mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
+                //mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
             } else {
                 int prefCount = mPrefCatSignalCluster.getPreferenceCount();
                 for (int i = prefCount-1; i >= 0 ; i--) {
@@ -1708,7 +1710,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                     mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrier2Text); 
-                    mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
+                    //mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
                 }
             }
 
@@ -1736,7 +1738,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else {
                 // TODO: carrier texts for MSIM devices
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifCarrierText);
-                mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
+                //mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
             }
 
             // Features not relevant for KitKat but keep them for potential future use

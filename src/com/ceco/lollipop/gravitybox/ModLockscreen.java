@@ -25,7 +25,6 @@ import android.content.IntentFilter;
 import android.graphics.Canvas;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.View;
@@ -48,8 +47,6 @@ public class ModLockscreen {
     private static final String CLASS_KG_ABS_KEY_INPUT_VIEW = CLASS_PATH + ".KeyguardAbsKeyInputView";
     private static final String CLASS_KGVIEW_MEDIATOR = "com.android.systemui.keyguard.KeyguardViewMediator";
     private static final String CLASS_KG_UPDATE_MONITOR = CLASS_PATH + ".KeyguardUpdateMonitor";
-    private static final String CLASS_CARRIER_TEXT = CLASS_PATH + (Utils.isMtkDevice() ? 
-            ".MediatekCarrierText" : ".CarrierText");
     private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
     private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
     private static final String CLASS_SB_WINDOW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
@@ -65,7 +62,6 @@ public class ModLockscreen {
     //private static boolean mBackgroundAlreadySet;
     //private static boolean mIsLastScreenBackground;
     private static Object mKgViewManagerHost;
-    private static String mCarrierText[];
     private static QuietHours mQuietHours;
 
     private static boolean mInStealthMode;
@@ -107,7 +103,6 @@ public class ModLockscreen {
             final Class<?> kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, classLoader);
             mKgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, classLoader);
             //final Class<?> kgViewManagerHostClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER_HOST, classLoader);
-            final Class<?> carrierTextClass = XposedHelpers.findClass(CLASS_CARRIER_TEXT, classLoader);
             final Class<?> lockPatternViewClass = XposedHelpers.findClass(CLASS_LOCK_PATTERN_VIEW, classLoader);
             final Class<? extends Enum> displayModeEnum = (Class<? extends Enum>) XposedHelpers.findClass(ENUM_DISPLAY_MODE, classLoader);
             final Class<?> sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader);
@@ -281,118 +276,6 @@ public class ModLockscreen {
                     }
                 }
             });
-
-            if (Utils.isMtkDevice()) {
-                if (Utils.hasGeminiSupport()) {
-                    XposedHelpers.findAndHookMethod(carrierTextClass, "showOrHideCarrier", new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                            TextView carrierDivider;
-                            Object divider = XposedHelpers.getObjectField(param.thisObject, "mCarrierDivider");
-                            if (divider instanceof TextView[]) {
-                                carrierDivider = (TextView) ((TextView[])divider)[0];
-                            } else {
-                                carrierDivider = (TextView) divider;
-                            }
-                            mCarrierText = new String[] {
-                                    mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, ""),
-                                    mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER2_TEXT, "")};
-
-                            if (carrierDivider != null) {
-                                if ((!mCarrierText[0].isEmpty() && mCarrierText[0].trim().isEmpty()) ||
-                                        (!mCarrierText[1].isEmpty() && mCarrierText[1].trim().isEmpty()))
-                                    carrierDivider.setVisibility(View.GONE);
-                            }
-                        }
-                    });
-
-                    String updateCarrierTextMethod;
-                    try {
-                        updateCarrierTextMethod = XposedHelpers.findMethodExact(carrierTextClass, "updateCarrierTextGemini",
-                                "com.android.internal.telephony.IccCardConstants$State",
-                                    CharSequence.class, CharSequence.class, int.class).getName();
-                    } catch (NoSuchMethodError nme) {
-                        if (DEBUG) log("updateCarrierTextGemini method doesn't exist, fallback to updateCarrierText");
-                        updateCarrierTextMethod = "updateCarrierText";
-                    }
-                    XposedHelpers.findAndHookMethod(carrierTextClass, updateCarrierTextMethod,
-                            "com.android.internal.telephony.IccCardConstants$State",
-                                CharSequence.class, CharSequence.class, int.class, new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                            TextView carrierTextView[] = new TextView[2];
-                            Object carrierView = XposedHelpers.getObjectField(param.thisObject, "mCarrierView");
-                            if (carrierView instanceof TextView[]) {
-                                carrierTextView[0] = (TextView) ((TextView[])carrierView)[0];
-                                carrierTextView[1] = (TextView) ((TextView[])carrierView)[1];
-                            } else {
-                                carrierTextView[0] = (TextView) carrierView;
-                                carrierTextView[1] = (TextView) XposedHelpers.getObjectField(
-                                        param.thisObject, "mCarrierGeminiView");
-                            }
-
-                            int[] origVisibility = new int[] {
-                                    carrierTextView[0] == null ? View.GONE : carrierTextView[0].getVisibility(),
-                                    carrierTextView[1] == null ? View.GONE : carrierTextView[1].getVisibility()
-                            };
-
-                            if (mCarrierText != null) {
-                                for (int i=0; i<2; i++) {
-                                    if (carrierTextView[i] == null) continue;
-                                    if (mCarrierText[i].isEmpty()) {
-                                        carrierTextView[i].setVisibility(origVisibility[i]);
-                                    } else {
-                                        if (mCarrierText[i].trim().isEmpty()) {
-                                            carrierTextView[i].setText("");
-                                            carrierTextView[i].setVisibility(View.GONE);
-                                        } else {
-                                            carrierTextView[i].setText(mCarrierText[i]);
-                                            carrierTextView[i].setVisibility(View.VISIBLE);
-                                        }
-                                    }
-                                }
-                                if ((carrierTextView[0] != null &&
-                                     carrierTextView[0].getVisibility() == View.VISIBLE) &&
-                                    (carrierTextView[1] != null && 
-                                     carrierTextView[1].getVisibility() == View.VISIBLE)) {
-                                    carrierTextView[0].setGravity(Gravity.RIGHT);
-                                    carrierTextView[1].setGravity(Gravity.LEFT);
-                                } else {
-                                    if (carrierTextView[0] != null) {
-                                        carrierTextView[0].setGravity(Gravity.CENTER);
-                                    }
-                                    if (carrierTextView[1] != null) {
-                                        carrierTextView[1].setGravity(Gravity.CENTER);
-                                    }
-                                }
-                            }
-                        }
-                    });
-                } else {
-                    XposedHelpers.findAndHookMethod(carrierTextClass, "updateCarrierText",
-                            "com.android.internal.telephony.IccCardConstants$State", CharSequence.class, CharSequence.class,
-                            new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                            TextView carrierTextView = (TextView) XposedHelpers.getObjectField(param.thisObject, "mCarrierView");
-                            String carrierText = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
-                            if (carrierText != null && !carrierText.isEmpty()) {
-                                carrierTextView.setText(carrierText.trim());
-                            }
-                        }
-                    });
-                }
-            } else {
-                XposedBridge.hookAllMethods(carrierTextClass, "getCarrierTextForSimState", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                        String carrierText = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, null);
-                        if (carrierText != null && !carrierText.isEmpty()) {
-                            param.setResult(carrierText.trim());
-                        }
-                    }
-                });
-            }
 
             XposedHelpers.findAndHookMethod(lockPatternViewClass, "onDraw", Canvas.class, new XC_MethodHook() {
                 @Override
