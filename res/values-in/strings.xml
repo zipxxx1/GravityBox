@@ -148,8 +148,6 @@
     <string name="lockscreen_background_result_successful">Latar belakang telah diganti</string>
     <string name="lockscreen_background_result_not_successful">Latar belakang tidak diganti</string>
     <string name="pref_cat_lockscreen_other_title">Lainnya</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Maksimalkan widget</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Ketika dihidupkan widget di lockscreen akan dimaksimalkan</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Tweak Daya</string>
@@ -568,10 +566,6 @@
     <string name="kilobyte_abbr">KB</string>
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">s</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Matikan batasan widget</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Membolehkan jumlah tak terbatas untuk widget lockscreen</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->

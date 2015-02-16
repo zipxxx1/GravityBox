@@ -157,8 +157,6 @@
     <string name="lockscreen_background_result_successful">Pozadie zmenené</string>
     <string name="lockscreen_background_result_not_successful">Pozadie nebolo zmenené</string>
     <string name="pref_cat_lockscreen_other_title">Iné</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Maximalizovať miniaplikácie</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Umožní zobrazenie miniaplikácií v maximalizovanom stave automaticky po zobrazení obrazovky uzamknutia</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Nastavenia napájania</string>
@@ -569,10 +567,6 @@
     <string name="dt_size_normal">Normálna</string>
     <string name="dt_size_smaller">Menšia</string>
     <string name="dt_size_smallest">Najmenšia</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Vypnúť limit miniaplikácií</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Umožní neobmedzený počet miniaplikácií obrazovky uzamknutia</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1132,7 +1126,6 @@
     <string name="shortcuts_icon_picker_unlock">Odomknúť</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">Miniaplikácie</string>
     <string name="pref_cat_lockscreen_statusbar_title">Stavová lišta</string>
 
     <!-- Quick settings: Auto-switch extended -->

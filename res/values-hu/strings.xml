@@ -173,8 +173,6 @@
     <string name="lockscreen_background_result_successful">A háttér megváltozott</string>
     <string name="lockscreen_background_result_not_successful">A háttér nem változott meg</string>
     <string name="pref_cat_lockscreen_other_title">Egyéb</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Widget-ek maximalizálása</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Ha engedélyezve van, a Zárképernyő widget-ek alapértelmezetten maximalizálva lesznek</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Energia beállítások</string>
@@ -601,10 +599,6 @@
     <string name="kilobyte_abbr">KB</string>
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">mp</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Widget limitáció letiltása</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Lehetővé teszi korlátlan számú widget alkalmazását a Zárképernyőn</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1155,7 +1149,6 @@
     <string name="shortcuts_icon_picker_unlock">Feloldás</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">Widget-ek</string>
     <string name="pref_cat_lockscreen_statusbar_title">Állapotsáv</string>
 
     <!-- Quick settings: Auto-switch extended -->

@@ -255,7 +255,6 @@ public class ModLockscreen {
                     mKeyguardHostView = param.thisObject; 
                     Object slidingChallenge = XposedHelpers.getObjectField(
                             param.thisObject, "mSlidingChallengeLayout");
-                    minimizeChallengeIfDesired(slidingChallenge);
 
                     if (slidingChallenge != null) {
                         try {
@@ -276,15 +275,6 @@ public class ModLockscreen {
                             XposedBridge.log(t);
                         }
                     }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgHostViewClass, "onScreenTurnedOn", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    Object slidingChallenge = XposedHelpers.getObjectField(
-                            param.thisObject, "mSlidingChallengeLayout");
-                    minimizeChallengeIfDesired(slidingChallenge);
                 }
             });
 
@@ -373,16 +363,6 @@ public class ModLockscreen {
 
                         XposedHelpers.callMethod(sbManager, "disable", flags);
                         if (DEBUG) log("adjustStatusBarLocked: new flags = " + flags);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgHostViewClass, "numWidgets", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mPrefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_WIDGET_LIMIT_DISABLE, false)) {
-                        param.setResult(0);
                     }
                 }
             });
@@ -590,15 +570,6 @@ public class ModLockscreen {
             }
         }
     };
-
-    private static void minimizeChallengeIfDesired(Object challenge) {
-        if (challenge == null) return;
-
-        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS, false)) {
-            if (DEBUG) log("minimizeChallengeIfDesired: challenge minimized");
-            XposedHelpers.callMethod(challenge, "showChallenge", false);
-        }
-    }
 
     private static final OnLongClickListener mLockButtonLongClickListener = new OnLongClickListener() {
         @Override

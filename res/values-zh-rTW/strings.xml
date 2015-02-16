@@ -173,8 +173,6 @@
     <string name="lockscreen_background_result_successful">背景已更改</string>
     <string name="lockscreen_background_result_not_successful">背景未更改</string>
     <string name="pref_cat_lockscreen_other_title">其他</string>
-    <string name="pref_lockscreen_maximize_widgets_title">最大化小工具</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">若啟用這個選項，鎖定畫面的小工具預設都會被最大化</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">電源選項</string>
@@ -594,10 +592,6 @@
     <string name="dt_size_normal">正常</string>
     <string name="dt_size_smaller">較小</string>
     <string name="dt_size_smallest">最小</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">停用鎖定畫面小工具數量限制</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">允許無限數量的螢幕鎖定小工具</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1147,7 +1141,6 @@
     <string name="shortcuts_icon_picker_unlock">解鎖</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">小工具</string>
     <string name="pref_cat_lockscreen_statusbar_title">狀態列</string>
 
     <!-- Quick settings: Auto-switch extended -->

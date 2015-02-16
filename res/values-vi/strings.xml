@@ -146,8 +146,6 @@
     <string name="lockscreen_background_result_successful">Nền đã được thay đổi</string>
     <string name="lockscreen_background_result_not_successful">Nền chưa được thay đổi</string>
     <string name="pref_cat_lockscreen_other_title">Khác</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Tiện ích tối đa</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Khi được bật, số tiện ích màn hình khóa sẽ được mở mặc định là tối đa</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Cài đặt nguồn thiết bị</string>

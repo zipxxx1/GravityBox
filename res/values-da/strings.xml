@@ -110,8 +110,6 @@
     <string name="lockscreen_background_result_successful">Baggrund ændret</string>
     <string name="lockscreen_background_result_not_successful">Baggrund ikke ændret</string>
     <string name="pref_cat_lockscreen_other_title">Andet</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Maksimér widgets</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Låseskærms-widgets vil automatisk blive maksimerede, når dette er valgt</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Strøm-tweaks</string>

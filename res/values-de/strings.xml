@@ -165,8 +165,6 @@
     <string name="lockscreen_background_result_successful">Hintergrund wurde geändert</string>
     <string name="lockscreen_background_result_not_successful">Hintergrund wurde nicht geändert</string>
     <string name="pref_cat_lockscreen_other_title">Sonstiges</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Widgets maximieren</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Wenn aktiviert werden Widgets auf dem Sperrbildschirm maximiert</string>
 
     <!-- Power tweaks category -->
     <string name="pref_cat_power_title">Ausschaltmenü anpassen</string>
@@ -593,10 +591,6 @@
     <string name="kilobyte_abbr">KB</string>
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">s</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Widget-Beschränkung aufheben</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Erlaubt eine unbeschränkte Anzahl an Sperrbildschirm-Widgets</string>
 
     <!-- RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1143,7 +1137,6 @@
     <string name="shortcuts_icon_picker_unlock">Entsperren</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
     <string name="pref_cat_lockscreen_statusbar_title">Statusleiste</string>
 
     <!-- Quick settings: Auto-switch extended -->

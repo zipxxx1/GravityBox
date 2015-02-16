@@ -78,24 +78,6 @@
         </PreferenceCategory>
 
         <PreferenceCategory 
-            android:key="pref_cat_lockscreen_widgets"
-            android:title="@string/pref_cat_lockscreen_widgets_title">
-
-            <CheckBoxPreference 
-                android:key="pref_lockscreen_maximize_widgets"
-                android:title="@string/pref_lockscreen_maximize_widgets_title"
-                android:summary="@string/pref_lockscreen_maximize_widgets_summary"
-                android:defaultValue="false" />
-
-            <CheckBoxPreference 
-                android:key="pref_lockscreen_widget_limit_disable"
-                android:title="@string/pref_lockscreen_widget_limit_disable_title"
-                android:summary="@string/pref_lockscreen_widget_limit_disable_summary"
-                android:defaultValue="false" />
-
-        </PreferenceCategory>
-
-        <PreferenceCategory 
             android:key="pref_cat_lockscreen_statusbar"
             android:title="@string/pref_cat_lockscreen_statusbar_title">
 

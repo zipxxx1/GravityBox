@@ -157,8 +157,6 @@
     <string name="lockscreen_background_result_successful">Tło zostało zmienione</string>
     <string name="lockscreen_background_result_not_successful">Tło nie zostało zmienione</string>
     <string name="pref_cat_lockscreen_other_title">Inne</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Maksymalizuj widżety</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Gdy włączone, widżety będą domyślnie zmaksymalizowane</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Poprawki ustawień zasilania</string>
@@ -581,10 +579,6 @@
     <string name="kilobyte_abbr">KB</string>
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">s</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Wyłączenie limitu widżetów</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Umożliwia nieograniczoną liczbę widżetów Ekranu Blokady</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1130,7 +1124,6 @@
     <string name="shortcuts_icon_picker_unlock">Odblokowanie</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">Widżety</string>
     <string name="pref_cat_lockscreen_statusbar_title">Pasek stanu</string>
 
     <!-- Quick settings: Auto-switch extended -->

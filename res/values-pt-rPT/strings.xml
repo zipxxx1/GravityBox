@@ -158,8 +158,6 @@
     <string name="lockscreen_background_result_successful">Fundo alterado</string>
     <string name="lockscreen_background_result_not_successful">Fundo não alterado</string>
     <string name="pref_cat_lockscreen_other_title">Outros</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Aumentar widgets</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Quando selecionado, os widgets do ecrã de bloqueio serão aumentados</string>
 
     <!-- Power tweaks category -->
     <string name="pref_cat_power_title">Ajustes de energia</string>
@@ -586,10 +584,6 @@
     <string name="kilobyte_abbr">KB</string>
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">s</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Desativar limitação de widgets</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Permite colocar um número ilimitado de widgets no ecrã de bloqueio</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1140,7 +1134,6 @@
     <string name="shortcuts_icon_picker_unlock">Desbloqueio</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
     <string name="pref_cat_lockscreen_statusbar_title">Barra de status</string>
 
     <!-- Quick settings: Auto-switch extended -->

@@ -173,8 +173,6 @@
     <string name="lockscreen_background_result_successful">背景已更改</string>
     <string name="lockscreen_background_result_not_successful">背景未更改</string>
     <string name="pref_cat_lockscreen_other_title">其它</string>
-    <string name="pref_lockscreen_maximize_widgets_title">最大化小部件</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">若启用这个选项，锁屏画面的小部件将会默认被最大化</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">电源键调整</string>
@@ -602,10 +600,6 @@
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">s</string>
 
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">禁用小部件限制</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">允许无限数量的锁屏小部件</string>
-    
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
     <string name="service_background_processes">可用：<xliff:g id="memory">%1$s</xliff:g></string>
@@ -1160,7 +1154,6 @@
     <string name="shortcuts_icon_picker_unlock">解锁</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">小部件</string>
     <string name="pref_cat_lockscreen_statusbar_title">状态栏</string>
 
     <!-- Quick settings: Auto-switch extended -->

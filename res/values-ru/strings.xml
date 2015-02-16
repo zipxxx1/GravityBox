@@ -173,8 +173,6 @@
     <string name="lockscreen_background_result_successful">Фон изменён</string>
     <string name="lockscreen_background_result_not_successful">Фон не изменён</string>
     <string name="pref_cat_lockscreen_other_title">Другое</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Развернуть виджеты</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Когда включено, виджеты будут максимизированы по умолчанию</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Настройки питания</string>
@@ -601,10 +599,6 @@
     <string name="kilobyte_abbr">КБ</string>
     <string name="megabyte_abbr">МБ</string>
     <string name="second_abbr">с</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Отключить ограничение</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Неограниченное количество виджетов экрана блокировки</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1160,7 +1154,6 @@
     <string name="shortcuts_icon_picker_unlock">Разблокировка</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">Виджеты</string>
     <string name="pref_cat_lockscreen_statusbar_title">Строка состояния</string>
 
     <!-- Quick settings: Auto-switch extended -->

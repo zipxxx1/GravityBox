@@ -173,8 +173,6 @@
     <string name="lockscreen_background_result_successful">Fond d\'écran modifié</string>
     <string name="lockscreen_background_result_not_successful">Fond d\'écran inchangé</string>
     <string name="pref_cat_lockscreen_other_title">Autre</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Widgets maximisés</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Activée, cette option maximise par défaut l\'affichage des widgets de l\'écran de déverrouillage</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Modifications énergie</string>
@@ -601,10 +599,6 @@
     <string name="kilobyte_abbr">Ko</string>
     <string name="megabyte_abbr">Mo</string>
     <string name="second_abbr">s</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Supprimer la limite de widgets</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Autorise un nombre illimité de widgets sur l\'écran de déverrouillage</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1160,7 +1154,6 @@
     <string name="shortcuts_icon_picker_unlock">Déverrouiller</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
     <string name="pref_cat_lockscreen_statusbar_title">Barre d\'état</string>
 
     <!-- Quick settings: Auto-switch extended -->

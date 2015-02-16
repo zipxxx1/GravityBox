@@ -167,8 +167,6 @@
     <string name="lockscreen_background_result_successful">Achtergrond aangepast</string>
     <string name="lockscreen_background_result_not_successful">Achtergrond niet aangepast</string>
     <string name="pref_cat_lockscreen_other_title">Andere</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Widgets maximalizeren</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Wanneer ingeschakeld worden vergrendelscherm widgets automatisch gemaximalizeerd weergegeven</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Power tweaks</string>
@@ -594,10 +592,6 @@
     <string name="kilobyte_abbr">KB</string>
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">s</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Disable widget limit</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Allows unlimited number of lockscreen widgets</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1152,7 +1146,6 @@
     <string name="shortcuts_icon_picker_unlock">Unlock</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
     <string name="pref_cat_lockscreen_statusbar_title">Status bar</string>
 
     <!-- Quick settings: Auto-switch extended -->

@@ -160,8 +160,6 @@
     <string name="lockscreen_background_result_successful">שינוי הרקע בוצה</string>
     <string name="lockscreen_background_result_not_successful">שינוי הרקע לא בוצע</string>
     <string name="pref_cat_lockscreen_other_title">אחר</string>
-    <string name="pref_lockscreen_maximize_widgets_title">הגדלה מירבית של ווידג\'טים</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">כאשר מופעל, יגרום להגדלה מירבית של הווידג\'טים במסך הנעילה</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">אפשרויות תפריט הפעלה/כיבוי</string>
@@ -575,10 +573,6 @@
     <string name="kilobyte_abbr">ק\"ב</string>
     <string name="megabyte_abbr">מ\"ב</string>
     <string name="second_abbr">שנ\'</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">בטל הגבלת ווידג\'טים</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">מאפשר מספר בלתי מוגבל של ווידג\'טים במסך הנעילה</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->

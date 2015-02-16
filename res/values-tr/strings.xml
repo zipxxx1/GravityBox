@@ -147,8 +147,6 @@
     <string name="lockscreen_background_result_successful">Arkaplan değişti</string>
     <string name="lockscreen_background_result_not_successful">Arkaplan değişmedi</string>
     <string name="pref_cat_lockscreen_other_title">Diğer</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Widgetleri büyüt</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Etkinleştirilirse kilit ekranı widgetleri büyütülecek</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Güç iyileştirmeleri</string>
@@ -556,10 +554,6 @@
     <string name="dt_size_normal">Normal</string>
     <string name="dt_size_smaller">Daha küçük</string>
     <string name="dt_size_smallest">En küçük</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Widget sınırlamasını kaldır</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Kilit ekranına sınırsız widget yerleşebilsin</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1110,7 +1104,6 @@
     <string name="shortcuts_icon_picker_unlock">Kilit aç</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">Widgetler</string>
     <string name="pref_cat_lockscreen_statusbar_title">Durum çubuğu</string>
 
     <!-- Quick settings: Auto-switch extended -->

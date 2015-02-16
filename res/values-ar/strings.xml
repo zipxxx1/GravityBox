@@ -146,8 +146,6 @@
     <string name="lockscreen_background_result_successful">تم تغيير الخلفية</string>
     <string name="lockscreen_background_result_not_successful">لم يتم تغيير الخلفية</string>
     <string name="pref_cat_lockscreen_other_title">أخرى</string>
-    <string name="pref_lockscreen_maximize_widgets_title">توسيع الويدجت</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">عند التفعيل يتم عرض الويدجت بكامل الشاشة</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">الطاقة</string>
@@ -561,10 +559,6 @@
     <string name="kilobyte_abbr">KB</string>
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">s</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">تعطيل محدودية الويدجت</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">السماح بإضافة عدد لا محدود من الويدجت على شاشة القفل</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->

@@ -152,8 +152,6 @@
     <string name="lockscreen_background_result_successful">背景を変更しました。</string>
     <string name="lockscreen_background_result_not_successful">背景は変更されませんでした。</string>
     <string name="pref_cat_lockscreen_other_title">その他</string>
-    <string name="pref_lockscreen_maximize_widgets_title">ウィジェットの最大化</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">有効にするとウィジェットのサイズが最大化されます。</string>
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">電源設定</string>
     <string name="pref_cat_power_summary">電源に関連した設定を変更します。</string>
@@ -498,9 +496,6 @@
     <string name="kilobyte_abbr">KB</string>
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">秒</string>
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">ウィジェット制限の無効化</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">ロック画面にいくつでもウィジェットをおけるようにします。</string>
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g>空き</string>
@@ -953,7 +948,6 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">ロック解除</string>
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">ウィジェト</string>
     <string name="pref_cat_lockscreen_statusbar_title">ステータスバー</string>
     <!-- Quick settings: Auto-switch extended -->
     <string name="qs_auto_switch_disabled">無効</string>

@@ -167,8 +167,6 @@
     <string name="lockscreen_background_result_successful">Latarbelakang telah berubah</string>
     <string name="lockscreen_background_result_not_successful">Latarbelakang tidak berubah</string>
     <string name="pref_cat_lockscreen_other_title">Lain-lain</string>
-    <string name="pref_lockscreen_maximize_widgets_title">Besarkan widget</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">Apabila dihidupkan, skrinkunci akan auto besarkan widget</string>
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">Customisasi butang power</string>
@@ -587,10 +585,6 @@
     <string name="kilobyte_abbr">KB</string>
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">s</string>
-
-    <!-- Disable lockscreen widget limit -->
-    <string name="pref_lockscreen_widget_limit_disable_title">Matikan had widget</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">Benarkan widget tanpa had</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -1145,7 +1139,6 @@
     <string name="shortcuts_icon_picker_unlock">Buka</string>
 
     <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_widgets_title">Widget</string>
     <string name="pref_cat_lockscreen_statusbar_title">Bar status</string>
 
     <!-- Quick settings: Auto-switch extended -->

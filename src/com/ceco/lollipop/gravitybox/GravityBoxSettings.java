@@ -234,8 +234,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_LOCKSCREEN_BG = "lockscreenBg";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN_OTHER = "pref_cat_lockscreen_other";
-    public static final String PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "pref_lockscreen_maximize_widgets";
-    public static final String PREF_KEY_LOCKSCREEN_WIDGET_LIMIT_DISABLE = "pref_lockscreen_widget_limit_disable";
     public static final String PREF_KEY_LOCKSCREEN_ROTATION = "pref_lockscreen_rotation";
     public static final String PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR = "pref_lockscreen_show_pattern_error";
     public static final String PREF_KEY_LOCKSCREEN_MENU_KEY = "pref_lockscreen_menu_key";
@@ -918,13 +916,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY,
             PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
             PREF_KEY_STATUSBAR_LOCK_POLICY,
-            PREF_KEY_LOCKSCREEN_WIDGET_LIMIT_DISABLE,
             PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK,
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
             PREF_KEY_LOCKSCREEN_CARRIER2_TEXT,
             PREF_KEY_LOCKSCREEN_DISABLE_ECB,
             PREF_KEY_LOCKSCREEN_ROTATION,
-            PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS,
             PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR
     ));
 
