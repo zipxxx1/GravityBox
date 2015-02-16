@@ -357,10 +357,10 @@
     <string name="pie_control_enable_title">啟用 Pie 控制</string>
     <string name="pie_control_size_title">導航鍵大小</string>
     <string name="pie_control_trigger_positions_title">觸發位置</string>
-    <string name="pie_control_trigger_left">螢幕左邊緣</string>
-    <string name="pie_control_trigger_bottom">螢幕下邊緣</string>
-    <string name="pie_control_trigger_right">螢幕右邊緣</string>
-    <string name="pie_control_trigger_top">螢幕上邊緣</string>
+    <string name="pie_control_trigger_left">左邊緣</string>
+    <string name="pie_control_trigger_bottom">下邊緣</string>
+    <string name="pie_control_trigger_right">右邊緣</string>
+    <string name="pie_control_trigger_top">上邊緣</string>
 
     <!-- Button backlight options -->
     <string name="pref_button_backlight_mode_title">按鍵背光燈模式</string>
@@ -1731,11 +1731,11 @@
     <string name="pref_power_proximity_wake_ignore_call_title">當有來電時忽略 [距離感應器喚醒] 設定</string>
 
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">下載進度條</string>
-    <string name="pref_statusbar_download_progress_summary">當使用 Android 標準下載管理員進行下載時，在狀態列顯示進度條</string>
+    <string name="pref_statusbar_download_progress_title">顯示進度條</string>
+    <string name="pref_statusbar_download_progress_summary">在下列情況發生時，於狀態列顯示進度條：使用 Android 標準下載管理員進行下載時，進行藍牙傳輸時，或其他已在 [通知控制] 內啟用 [進度條追蹤] 的應用程式</string>
     <string name="sb_download_progress_off">停用</string>
-    <string name="sb_download_progress_top">上沿</string>
-    <string name="sb_download_progress_bottom">下沿</string>
+    <string name="sb_download_progress_top">上邊緣</string>
+    <string name="sb_download_progress_bottom">下邊緣</string>
 
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">停用狀態列的通知預覽</string>
@@ -1814,5 +1814,62 @@
     <string name="navbar_l_icon_style_disabled">已停用</string>
     <string name="navbar_l_icon_style_original">原生</string>
     <string name="navbar_l_icon_style_large">較大</string>
+
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">自動調節延遲</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">當資料流量大於下列數值時，變更網路模式的延遲秒數將被延長 (設為 0 來停用)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">進度條追蹤</string>
+    <string name="pref_lc_progress_tracking_summary">當現有的進行中通知內含進度條時，在狀態列顯示進度條。
+        需要啟用 [顯示進度條] 方能正常運作。</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">顯示模式</string>
+    <string name="dt_display_mode_always">永遠顯示 (當有可用的網絡連線時)</string>
+    <string name="dt_display_mode_dm">當使用 Android 標準下載管理員時</string>
+    <string name="dt_display_mode_pt">當已設定在狀態列中顯示進度條時</string>
+
+    <!-- Unlock ring targets: custom unlock ring -->
+    <string name="pref_lockscreen_ring_custom_unlock_title">自訂解鎖環內的小鎖頭</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">讓您可以設定用於解鎖內的小鎖頭的動作。
+        請最少設定其中一個目標位置為 GravityBox 解鎖動作 或啟動應用程式，否則您將無法解鎖您的裝置。</string>
+
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Wi-Fi 優先次序</string>
+    <string name="pref_wifi_priority_summary">指定連接 Wi-Fi 網絡的優先次序</string>
+
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">電量條</string>
+    <string name="pref_battery_bar_show_title">顯示電量條</string>
+    <string name="pref_battery_bar_position_title">位置</string>
+    <string name="bbar_position_top">上邊緣</string>
+    <string name="bbar_position_bottom">下邊緣</string>
+    <string name="pref_battery_bar_margin_title">邊距設定</string>
+    <string name="pref_battery_bar_thickness_title">粗幼</string>
+    <string name="pref_battery_bar_charge_anim_title">充電動畫提示</string>
+    <string name="pref_battery_bar_dynacolor_title">由系統設定顏色</string>
+    <string name="pref_battery_bar_dynacolor_summary">根據現在電量決定電量條的顏色</string>
+    <string name="pref_battery_bar_color_title">自訂顏色</string>
+    <string name="pref_battery_bar_color_low_title">低電量時的顏色</string>
+    <string name="pref_battery_bar_color_critical_title">極低電量時的顏色</string>
+    <string name="pref_battery_bar_centered_title">置中</string>
+    <string name="pref_battery_bar_color_charging_title">充電時的顏色</string>
+
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">顯示模式</string>
+    <string name="pref_statusbar_download_progress_animated_title">使用動畫</string>
+    <string name="pref_statusbar_download_progress_centered_title">置中</string>
+    <string name="pref_statusbar_download_progress_thickness_title">粗幼</string>
+    <string name="pref_statusbar_download_progress_margin_title">邊距設定</string>
+
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">選單鍵單擊動作</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">返回鍵單擊動作</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">多工鍵雙擊動作</string>
 
 </resources>
