@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import android.graphics.Canvas;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -39,7 +40,9 @@ public class ModLockscreen {
 
     private static final String CLASS_KGVIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
     //private static final String CLASS_KGVIEW_MANAGER_HOST = CLASS_KGVIEW_MANAGER + ".ViewManagerHost";
-    private static final String CLASS_KG_ABS_KEY_INPUT_VIEW = CLASS_PATH + ".KeyguardAbsKeyInputView";
+    private static final String CLASS_KG_PASSWORD_VIEW = CLASS_PATH + ".KeyguardPasswordView";
+    private static final String CLASS_KG_PIN_VIEW = CLASS_PATH + ".KeyguardPINView";
+    private static final String CLASS_KG_PASSWORD_TEXT_VIEW = CLASS_PATH + ".PasswordTextView";
     private static final String CLASS_KGVIEW_MEDIATOR = "com.android.systemui.keyguard.KeyguardViewMediator";
     private static final String CLASS_KG_UPDATE_MONITOR = CLASS_PATH + ".KeyguardUpdateMonitor";
     private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
@@ -92,7 +95,9 @@ public class ModLockscreen {
             mQuietHours = new QuietHours(mQhPrefs);
 
             final Class<?> kgViewManagerClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER, classLoader);
-            final Class<?> kgAbsKeyInputViewClass = XposedHelpers.findClass(CLASS_KG_ABS_KEY_INPUT_VIEW, classLoader);
+            final Class<?> kgPasswordViewClass = XposedHelpers.findClass(CLASS_KG_PASSWORD_VIEW, classLoader);
+            final Class<?> kgPINViewClass = XposedHelpers.findClass(CLASS_KG_PIN_VIEW, classLoader);
+            final Class<?> kgPasswordTextViewClass = XposedHelpers.findClass(CLASS_KG_PASSWORD_TEXT_VIEW, classLoader);
             final Class<?> kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, classLoader);
             mKgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, classLoader);
             //final Class<?> kgViewManagerHostClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER_HOST, classLoader);
@@ -197,46 +202,54 @@ public class ModLockscreen {
                 });
             }
 
-            XposedHelpers.findAndHookMethod(kgAbsKeyInputViewClass, "onFinishInflate", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(kgPasswordViewClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    final String className = param.thisObject.getClass().getName();
-                    if (!className.endsWith("KeyguardPasswordView") && !className.endsWith("KeyguardPINView")) {
-                        return;
-                    }
+                    if (!mPrefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) return;
 
                     final TextView passwordEntry = 
                             (TextView) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
-                    if (passwordEntry != null) {
-                        passwordEntry.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void afterTextChanged(Editable s) {
-                                if (!mPrefs.getBoolean(
-                                        GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) return;
+                    if (passwordEntry == null) return;
 
-                                final Object callback = 
-                                        XposedHelpers.getObjectField(param.thisObject, "mCallback");
-                                final Object lockPatternUtils = 
-                                        XposedHelpers.getObjectField(param.thisObject, "mLockPatternUtils");
-                                String entry = passwordEntry.getText().toString();
+                    passwordEntry.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            doQuickUnlock(param.thisObject, passwordEntry.getText().toString());
+                        }
+                        @Override
+                        public void beforeTextChanged(CharSequence arg0,int arg1, int arg2, int arg3) { }
+                        @Override
+                        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) { }
+                    });
+                }
+            });
 
-                                if (callback != null && lockPatternUtils != null &&
-                                        entry.length() > 3 && 
-                                        (Boolean) XposedHelpers.callMethod(
-                                                lockPatternUtils, "checkPassword", entry)) {
-                                    XposedHelpers.callMethod(callback, "reportSuccessfulUnlockAttempt");
-                                    XposedHelpers.callMethod(callback, "dismiss", true);
-                                }
-                            }
-                            @Override
-                            public void beforeTextChanged(CharSequence arg0,
-                                    int arg1, int arg2, int arg3) {
-                            }
-                            @Override
-                            public void onTextChanged(CharSequence arg0,
-                                    int arg1, int arg2, int arg3) {
-                            }
-                        });
+            XposedHelpers.findAndHookMethod(kgPINViewClass, "onFinishInflate", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (!mPrefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) return;
+                    final View passwordEntry = 
+                            (View) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
+                    if (passwordEntry != null) { 
+                        XposedHelpers.setAdditionalInstanceField(passwordEntry, "gbPINView",
+                                param.thisObject);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(kgPasswordTextViewClass, "append", char.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (!mPrefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) return;
+
+                    Object pinView = XposedHelpers.getAdditionalInstanceField(param.thisObject, "gbPINView");
+                    if (pinView != null) {
+                        if (DEBUG) log("quickUnlock: PasswordText belongs to PIN view");
+                        String entry = (String) XposedHelpers.getObjectField(param.thisObject, "mText");
+                        doQuickUnlock(pinView, entry);
                     }
                 }
             });
@@ -279,35 +292,18 @@ public class ModLockscreen {
         }
     }
 
-    static class HandleDrawable {
-        Object mHd;
+    private static void doQuickUnlock(Object securityView, String entry) {
+        try {
+            final Object callback = XposedHelpers.getObjectField(securityView, "mCallback");
+            final Object lockPatternUtils = XposedHelpers.getObjectField(securityView, "mLockPatternUtils");
 
-        public HandleDrawable(Object handleDrawable) {
-            mHd = handleDrawable;
-        }
-
-        public void set(Object handleDrawable) {
-            mHd = handleDrawable;
-        }
-
-        public float getAlpha() {
-            return (Float) XposedHelpers.callMethod(mHd, "getAlpha");
-        }
-
-        public float getPositionX() {
-            return (Float) XposedHelpers.callMethod(mHd, "getPositionX");
-        }
-
-        public float getPositionY() {
-            return (Float) XposedHelpers.callMethod(mHd, "getPositionY");
-        }
-
-        public int getWidth() {
-            return (Integer) XposedHelpers.callMethod(mHd, "getWidth");
-        }
-
-        public int getHeight() {
-            return (Integer) XposedHelpers.callMethod(mHd, "getHeight");
+            if (callback != null && lockPatternUtils != null && entry.length() > 3 && 
+                    (Boolean) XposedHelpers.callMethod(lockPatternUtils, "checkPassword", entry)) {
+                XposedHelpers.callMethod(callback, "reportUnlockAttempt", true);
+                XposedHelpers.callMethod(callback, "dismiss", true);
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);;
         }
     }
 
