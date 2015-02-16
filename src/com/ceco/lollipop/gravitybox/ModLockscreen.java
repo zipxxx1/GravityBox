@@ -15,7 +15,6 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +22,6 @@ import java.util.List;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
 
-import android.app.Activity;
 import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
@@ -70,10 +68,6 @@ public class ModLockscreen {
     private static final boolean DEBUG = false;
     //private static final boolean DEBUG_KIS = false;
 
-    private static final int STATUSBAR_DISABLE_RECENT = 0x01000000;
-    private static final int STATUSBAR_DISABLE_NOTIFICATION_TICKER = 0x00080000;
-    private static final int STATUSBAR_DISABLE_EXPAND = 0x00010000;
-    private static final int STATUSBAR_DISABLE_SEARCH = 0x02000000;
     private static final int STATUSBAR_DISABLE_CLOCK = 0x00800000;
 
     private static final List<String> CLOCK_WIDGETS = new ArrayList<String>(Arrays.asList(
@@ -308,51 +302,6 @@ public class ModLockscreen {
                                     int arg1, int arg2, int arg3) {
                             }
                         });
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgViewMediatorClass, "adjustStatusBarLocked", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    int policy = GravityBoxSettings.SBL_POLICY_DEFAULT;
-                    try {
-                        policy = Integer.valueOf(mPrefs.getString(
-                            GravityBoxSettings.PREF_KEY_STATUSBAR_LOCK_POLICY, "0"));
-                    } catch (NumberFormatException nfe) {
-                        //
-                    }
-                    if (DEBUG) log("Statusbar lock policy = " + policy);
-                    if (policy == GravityBoxSettings.SBL_POLICY_DEFAULT) return;
-
-                    final Object sbManager = 
-                            XposedHelpers.getObjectField(param.thisObject, "mStatusBarManager");
-                    final Context context = 
-                            (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    final boolean showing = XposedHelpers.getBooleanField(param.thisObject, "mShowing");
-
-                    if (showing && sbManager != null && !(context instanceof Activity)) {
-                        int flags = STATUSBAR_DISABLE_RECENT;
-                        if ((Boolean) XposedHelpers.callMethod(param.thisObject, "isSecure") &&
-                                policy != GravityBoxSettings.SBL_POLICY_UNLOCKED_SECURED) {
-                            flags |= STATUSBAR_DISABLE_EXPAND;
-                            flags |= STATUSBAR_DISABLE_NOTIFICATION_TICKER;
-                        } else if (policy == GravityBoxSettings.SBL_POLICY_LOCKED) {
-                            flags |= STATUSBAR_DISABLE_EXPAND;
-                        }
-
-                        try {
-                            Method m = XposedHelpers.findMethodExact(
-                                    kgViewMediatorClass, "isAssistantAvailable");
-                            if (!(Boolean) m.invoke(param.thisObject)) {
-                                flags |= STATUSBAR_DISABLE_SEARCH;
-                            }
-                        } catch(NoSuchMethodError nme) {
-                            if (DEBUG) log("isAssistantAvailable method doesn't exist (Android < 4.2.2?)");
-                        }
-
-                        XposedHelpers.callMethod(sbManager, "disable", flags);
-                        if (DEBUG) log("adjustStatusBarLocked: new flags = " + flags);
                     }
                 }
             });

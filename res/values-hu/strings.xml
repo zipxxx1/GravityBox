@@ -578,13 +578,6 @@
     <string name="clock_dow_lowercase">Kisbetű</string>
     <string name="clock_dow_uppercase">Nagybetű</string>
 
-    <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">Állapotsáv zárolása házirend</string>
-    <string name="sbl_policy_default">Alapértelmezett</string>
-    <string name="sbl_policy_unlocked">Feloldva, ha a billentyűzár nincs engedélyezve</string>
-    <string name="sbl_policy_unlocked_secured">Feloldva</string>
-    <string name="sbl_policy_locked">Zárolva</string>
-
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Adatforgalom figyelő</string>
     <string name="pref_data_traffic_position_title">Pozíció</string>

@@ -437,11 +437,6 @@
     <string name="clock_dow_lowercase">소문자</string>
     <string name="clock_dow_uppercase">대문자</string>
 
-    <string name="pref_statusbar_lock_policy_title">상단바 잠금 정책</string>
-    <string name="sbl_policy_default">기본</string>
-    <string name="sbl_policy_unlocked">잠금 화면의 보안 옵션이 선택되어있지 않으면 잠그지 않음</string>
-    <string name="sbl_policy_locked">잠금</string>
-
     <string name="pref_cat_data_traffic_title">데이터 트래픽 모니터</string>
     <string name="pref_data_traffic_position_title">위치</string>
     <string name="dt_position_auto">자동 (시계의 위치에 따라 정해짐)</string>

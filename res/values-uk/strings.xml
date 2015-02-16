@@ -337,10 +337,6 @@
     <string name="clock_dow_standard">Типово</string>
     <string name="clock_dow_lowercase">рядковими</string>
     <string name="clock_dow_uppercase">ВЕЛИКИМИ</string>
-    <string name="pref_statusbar_lock_policy_title">Правила блокування статусбара</string>
-    <string name="sbl_policy_default">Типово</string>
-    <string name="sbl_policy_unlocked">Розблоковано якщо блокування клавіатури ненадіне</string>
-    <string name="sbl_policy_locked">Заблокований</string>
     <string name="pref_cat_data_traffic_title">Монітор трафіку</string>
     <string name="pref_data_traffic_position_title">Позиція</string>
     <string name="dt_position_auto">Автоматично (у центрі або праворуч залежно від позиції годин)</string>

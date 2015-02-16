@@ -540,12 +540,6 @@
     <string name="clock_dow_lowercase">أحرف صغيرة</string>
     <string name="clock_dow_uppercase">أحرف كبيرة</string>
 
-    <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">تأمين شريط الحالة</string>
-    <string name="sbl_policy_default">افتراضي</string>
-    <string name="sbl_policy_unlocked">إلغاء التأمين عند عدم وجود تأمين للجهاز</string>
-    <string name="sbl_policy_locked">تأمين</string>
-
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">مراقبة حركة البيانات</string>
     <string name="pref_data_traffic_position_title">الموقع</string>

@@ -74,7 +74,6 @@ import android.media.MediaRouter;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.provider.AlarmClock;
-import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -108,7 +107,6 @@ public class ModQuickSettings {
     private static final String CLASS_ROTATION_LOCK_CTRL = "com.android.systemui.statusbar.policy.RotationLockController";
     private static final String CLASS_ROTATION_POLICY = "com.android.internal.view.RotationPolicy";
     private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
-    private static final String CLASS_SETTINGS_PANEL_VIEW = "com.android.systemui.statusbar.phone.SettingsPanelView";
     private static final boolean DEBUG = false;
 
     private static final float STATUS_BAR_SWIPE_VERTICAL_MAX_PERCENTAGE = 0.025f;
@@ -141,7 +139,6 @@ public class ModQuickSettings {
     private static TileLayout.LabelStyle mQsTileLabelStyle = TileLayout.LabelStyle.ALLCAPS;
     private static String mAlarmSingletapApp;
     private static String mAlarmLongpressApp;
-    private static int mStatusbarLockPolicy = GravityBoxSettings.SBL_POLICY_DEFAULT;
 
     private static float mGestureStartX;
     private static float mGestureStartY;
@@ -274,9 +271,6 @@ public class ModQuickSettings {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_SWIPE)) {
                     mQsSwipeEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_SWIPE, false);
                 }
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_LOCK_POLICY_CHANGED)) {
-                mStatusbarLockPolicy = intent.getIntExtra(GravityBoxSettings.EXTRA_STATUSBAR_LOCK_POLICY,
-                        GravityBoxSettings.SBL_POLICY_DEFAULT);
             }
 
             if (mBroadcastSubReceivers != null) {
@@ -625,13 +619,6 @@ public class ModQuickSettings {
             mAlarmSingletapApp = mPrefs.getString(GravityBoxSettings.PREF_KEY_QS_ALARM_SINGLETAP_APP, null);
             mAlarmLongpressApp = mPrefs.getString(GravityBoxSettings.PREF_KEY_QS_ALARM_LONGPRESS_APP, null);
 
-            try {
-                mStatusbarLockPolicy = Integer.valueOf(mPrefs.getString(
-                        GravityBoxSettings.PREF_KEY_STATUSBAR_LOCK_POLICY, "0"));
-            } catch (NumberFormatException e) {
-                log("Invalid preference for statusbar lock policy: " + e.getMessage());
-            }
-
             final Class<?> quickSettingsClass = XposedHelpers.findClass(CLASS_QUICK_SETTINGS, classLoader);
             final Class<?> phoneStatusBarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
             final Class<?> panelBarClass = XposedHelpers.findClass(CLASS_PANEL_BAR, classLoader);
@@ -758,34 +745,6 @@ public class ModQuickSettings {
                     }
                 }
             });
-
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "switchToSettings", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (isQsAccessRestricted()) {
-                        param.setResult(null);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "flipToSettings", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (isQsAccessRestricted()) {
-                        param.setResult(null);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_SETTINGS_PANEL_VIEW, classLoader, "onTouchEvent",
-                    MotionEvent.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (isQsAccessRestricted()) {
-                        param.setResult(false);
-                    }
-                }
-            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -815,7 +774,6 @@ public class ModQuickSettings {
             intentFilter.addAction(LocationManager.MODE_CHANGED_ACTION);
             intentFilter.addAction(LocationManager.PROVIDERS_CHANGED_ACTION);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
-            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_LOCK_POLICY_CHANGED);
             intentFilter.addAction(RecordingService.ACTION_RECORDING_STATUS_CHANGED);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
         }
@@ -1012,7 +970,6 @@ public class ModQuickSettings {
                     Method mIsFullyExpanded = param.thisObject.getClass().getSuperclass().getMethod("isFullyExpanded");
                     final boolean isFullyExpanded = (Boolean) mIsFullyExpanded.invoke(param.thisObject);
                     final boolean justPeeked = (Boolean) XposedHelpers.getBooleanField(param.thisObject, "mJustPeeked");
-                    final boolean qsAccessRestricted = isQsAccessRestricted();
 
                     final View thisView = (View) param.thisObject;
                     final int width = ((View)XposedHelpers.getObjectField(mStatusBar, "mStatusBarView")).getWidth();
@@ -1023,9 +980,9 @@ public class ModQuickSettings {
                         case MotionEvent.ACTION_DOWN:
                             mGestureStartX = event.getX(0);
                             mGestureStartY = event.getY(0);
-                            mTrackingSwipe = isFullyExpanded && mQsSwipeEnabled && !qsAccessRestricted;
+                            mTrackingSwipe = isFullyExpanded && mQsSwipeEnabled;
                                     //mGestureStartY > height - handleBarHeight - paddingBottom;
-                            okToFlip = (expandedHeight == 0) && !qsAccessRestricted;
+                            okToFlip = (expandedHeight == 0);
                             XposedHelpers.setBooleanField(param.thisObject, "mOkToFlip", okToFlip);
                             if (mAutoSwitch == 1 && !notifDataHasVisibleItems(notificationData)) {
                                 shouldFlip = true;
@@ -1138,14 +1095,6 @@ public class ModQuickSettings {
         } catch (Throwable t) {
             return false;
         }
-    }
-
-    private static boolean isQsAccessRestricted() {
-        final boolean restricted = 
-                (mStatusbarLockPolicy == GravityBoxSettings.SBL_POLICY_UNLOCKED_SECURED &&
-                    isKeyguardSecured());
-        if (DEBUG) log("isQsAccessRestricted: " + restricted);
-        return restricted;
     }
 
     @SuppressWarnings("unchecked")

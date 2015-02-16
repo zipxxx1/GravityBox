@@ -571,12 +571,6 @@
     <string name="clock_dow_lowercase">Kleinbuchstaben</string>
     <string name="clock_dow_uppercase">Großbuchstaben</string>
 
-    <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">Sperre der Benachrichtigungsleiste</string>
-    <string name="sbl_policy_default">Standard</string>
-    <string name="sbl_policy_unlocked">Aufgehoben bei ungesicherter Display-Sperre</string>
-    <string name="sbl_policy_locked">Gesperrt</string>
-
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Datenverbrauchsanzeige</string>
     <string name="pref_data_traffic_position_title">Position</string>

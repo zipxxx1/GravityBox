@@ -553,12 +553,6 @@
     <string name="clock_dow_lowercase">אותיות קטנות</string>
     <string name="clock_dow_uppercase">אותיות ראשיות</string>
 
-    <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">מדיניות נעילה של שורת מצב</string>
-    <string name="sbl_policy_default">ברירת מחדל</string>
-    <string name="sbl_policy_unlocked">לא נעולה אם משתמשים בנעילת מסך לא מאובטחת</string>
-    <string name="sbl_policy_locked">נעולה</string>
-
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">ניטור מהירות העברת נתונים</string>
     <string name="pref_data_traffic_position_title">מיקום</string>

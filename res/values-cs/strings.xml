@@ -551,13 +551,6 @@
     <string name="clock_dow_lowercase">Malými písmeny</string>
     <string name="clock_dow_uppercase">Velkými písmeny</string>
 
-    <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">Povolit stažení stavové lišty</string>
-    <string name="sbl_policy_default">Výchozí nastavení</string>
-    <string name="sbl_policy_unlocked">Pokud je obrazovka uzamčení nezabezpečená</string>
-    <string name="sbl_policy_unlocked_secured">Vždy povolit</string>
-    <string name="sbl_policy_locked">Nikdy</string>
-
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitor datového toku</string>
     <string name="pref_data_traffic_position_title">Pozice</string>

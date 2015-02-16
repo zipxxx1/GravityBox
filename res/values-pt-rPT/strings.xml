@@ -563,13 +563,6 @@
     <string name="clock_dow_lowercase">Minúsculas</string>
     <string name="clock_dow_uppercase">Maiúsculas</string>
 
-    <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">Política de bloqueio da barra de status</string>
-    <string name="sbl_policy_default">Padrão</string>
-    <string name="sbl_policy_unlocked">Desbloqueada quando método de bloqueio for inseguro</string>
-    <string name="sbl_policy_unlocked_secured">Desbloqueada</string>
-    <string name="sbl_policy_locked">Bloqueada</string>
-
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitorização de tráfego de dados</string>
     <string name="pref_data_traffic_position_title">Posicionamento</string>

@@ -578,13 +578,6 @@
     <string name="clock_dow_lowercase">小写</string>
     <string name="clock_dow_uppercase">大写</string>
 
-    <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">状态栏锁定策略</string>
-    <string name="sbl_policy_default">默认</string>
-    <string name="sbl_policy_unlocked">键盘锁不安全时不锁定</string>
-    <string name="sbl_policy_unlocked_secured">不锁定</string>
-    <string name="sbl_policy_locked">锁定</string>
-
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">数据通信监控</string>
     <string name="pref_data_traffic_position_title">位置</string>

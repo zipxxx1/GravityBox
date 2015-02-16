@@ -578,13 +578,6 @@
     <string name="clock_dow_lowercase">En minuscules</string>
     <string name="clock_dow_uppercase">En majuscules</string>
 
-    <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">Décision pour le verrouillage de la barre d\'état</string>
-    <string name="sbl_policy_default">Par défaut</string>
-    <string name="sbl_policy_unlocked">Accessible en l\'absence de sécurisation (code/mdp)</string>
-    <string name="sbl_policy_unlocked_secured">Déverrouillée</string>
-    <string name="sbl_policy_locked">Verrouillée</string>
-
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitoring du flux de données</string>
     <string name="pref_data_traffic_position_title">Position</string>

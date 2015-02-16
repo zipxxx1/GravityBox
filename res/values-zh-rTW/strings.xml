@@ -575,13 +575,6 @@
     <string name="clock_dow_lowercase">小寫字母 (僅英文有效) </string>
     <string name="clock_dow_uppercase">大寫字母 (僅英文有效) </string>
 
-    <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">狀態列鎖定政策</string>
-    <string name="sbl_policy_default">預設</string>
-    <string name="sbl_policy_unlocked">不鎖定 (若螢幕鎖定方式並非圖形/PIN/密碼) </string>
-    <string name="sbl_policy_unlocked_secured">不鎖定</string>
-    <string name="sbl_policy_locked">鎖定</string>
-
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">資料流量速度監控器</string>
     <string name="pref_data_traffic_position_title">顯示位置</string>

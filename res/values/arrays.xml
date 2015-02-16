@@ -598,20 +598,6 @@
         <item>3</item>
     </string-array>
 
-    <string-array name="statusbar_lock_policy_entries" translatable="false">
-        <item>@string/sbl_policy_default</item>
-        <item>@string/sbl_policy_unlocked</item>
-        <item>@string/sbl_policy_unlocked_secured</item>
-        <item>@string/sbl_policy_locked</item>
-    </string-array>
-
-    <string-array name="statusbar_lock_policy_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>3</item>
-        <item>2</item>
-    </string-array>
-
     <string-array name="data_traffic_position_entries" translatable="false">
         <item>@string/dt_position_auto</item>
         <item>@string/dt_position_left</item>

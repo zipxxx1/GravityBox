@@ -559,12 +559,6 @@
     <string name="clock_dow_lowercase">Małe litery</string>
     <string name="clock_dow_uppercase">Duże litery</string>
 
-    <!-- Statusbar expand policy -->
-    <string name="pref_statusbar_lock_policy_title">Pasek statusu blokady</string>
-    <string name="sbl_policy_default">Domyślnie</string>
-    <string name="sbl_policy_unlocked">Odblokowany, jeśli blokada klawiatury odbezpieczona</string>
-    <string name="sbl_policy_locked">Zablokowany</string>
-
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">Monitor transmisji danych</string>
     <string name="pref_data_traffic_position_title">Pozycja</string>

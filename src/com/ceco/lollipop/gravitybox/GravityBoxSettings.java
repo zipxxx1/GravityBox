@@ -239,13 +239,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK = "pref_lockscreen_statusbar_clock";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER2_TEXT = "pref_lockscreen_carrier2_text";
-    public static final String PREF_KEY_STATUSBAR_LOCK_POLICY = "pref_statusbar_lock_policy";
-    public static final int SBL_POLICY_DEFAULT = 0;
-    public static final int SBL_POLICY_UNLOCKED = 1;
-    public static final int SBL_POLICY_LOCKED = 2;
-    public static final int SBL_POLICY_UNLOCKED_SECURED = 3;
-    public static final String ACTION_PREF_STATUSBAR_LOCK_POLICY_CHANGED = "gravitybox.intent.action.STATUSBAR_LOCK_POLICY_CHANGED";
-    public static final String EXTRA_STATUSBAR_LOCK_POLICY = "statusbarLockPolicy";
     public static final String PREF_KEY_LOCKSCREEN_DISABLE_ECB = "pref_lockscreen_disable_ecb";
     public static final String ACTION_LOCKSCREEN_SETTINGS_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SETTINGS_CHANGED";
 
@@ -913,7 +906,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 //            PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY,
 //            PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY,
             PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
-            PREF_KEY_STATUSBAR_LOCK_POLICY,
             PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK,
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
             PREF_KEY_LOCKSCREEN_CARRIER2_TEXT,
@@ -1248,7 +1240,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefSbClockDate;
         private ListPreference mPrefSbClockDow;
         private SeekBarPreference mPrefSbClockDowSize;
-        private ListPreference mPrefSbLockPolicy;
         private PreferenceScreen mPrefCatDataTraffic;
         private ListPreference mPrefDataTrafficPosition;
         private ListPreference mPrefDataTrafficSize;
@@ -1543,7 +1534,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbClockDate = (ListPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_DATE);
             mPrefSbClockDow = (ListPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_DOW);
             mPrefSbClockDowSize = (SeekBarPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_DOW_SIZE);
-            mPrefSbLockPolicy = (ListPreference) findPreference(PREF_KEY_STATUSBAR_LOCK_POLICY);
 
             mPrefCatDataTraffic = (PreferenceScreen) findPreference(PREF_CAT_KEY_DATA_TRAFFIC);
             mPrefDataTrafficPosition = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_POSITION);
@@ -2218,10 +2208,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefSbClockDow.setSummary(mPrefSbClockDow.getEntry());
                 mPrefSbClockDowSize.setEnabled(Integer.valueOf(
                         mPrefSbClockDow.getValue()) != 0);
-            }
-
-            if (key == null || key.equals(PREF_KEY_STATUSBAR_LOCK_POLICY)) {
-                mPrefSbLockPolicy.setSummary(mPrefSbLockPolicy.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_POSITION)) {
@@ -3234,9 +3220,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_POWER_PROXIMITY_WAKE)) {
                 intent.setAction(ACTION_PREF_POWER_CHANGED);
                 intent.putExtra(EXTRA_POWER_PROXIMITY_WAKE, prefs.getBoolean(key, false));
-            } else if (key.equals(PREF_KEY_STATUSBAR_LOCK_POLICY)) {
-                intent.setAction(ACTION_PREF_STATUSBAR_LOCK_POLICY_CHANGED);
-                intent.putExtra(EXTRA_STATUSBAR_LOCK_POLICY, Integer.valueOf(prefs.getString(key, "0")));
             } else if (key.equals(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL)) {
                 intent.setAction(ACTION_PREF_POWER_CHANGED);
                 intent.putExtra(EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL, prefs.getBoolean(key, false));
