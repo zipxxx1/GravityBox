@@ -25,10 +25,6 @@ import android.content.IntentFilter;
 import android.graphics.Canvas;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View.OnLongClickListener;
-import android.view.ViewGroup;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -43,7 +39,6 @@ public class ModLockscreen {
 
     private static final String CLASS_KGVIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
     //private static final String CLASS_KGVIEW_MANAGER_HOST = CLASS_KGVIEW_MANAGER + ".ViewManagerHost";
-    private static final String CLASS_KG_HOSTVIEW = CLASS_PATH + ".KeyguardHostView";
     private static final String CLASS_KG_ABS_KEY_INPUT_VIEW = CLASS_PATH + ".KeyguardAbsKeyInputView";
     private static final String CLASS_KGVIEW_MEDIATOR = "com.android.systemui.keyguard.KeyguardViewMediator";
     private static final String CLASS_KG_UPDATE_MONITOR = CLASS_PATH + ".KeyguardUpdateMonitor";
@@ -56,7 +51,6 @@ public class ModLockscreen {
 
     private static XSharedPreferences mPrefs;
     private static XSharedPreferences mQhPrefs;
-    private static Object mKeyguardHostView;
     //private static Context mGbContext;
     private static Class<?> mKgUpdateMonitorClass;
     //private static boolean mBackgroundAlreadySet;
@@ -98,7 +92,6 @@ public class ModLockscreen {
             mQuietHours = new QuietHours(mQhPrefs);
 
             final Class<?> kgViewManagerClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER, classLoader);
-            final Class<?> kgHostViewClass = XposedHelpers.findClass(CLASS_KG_HOSTVIEW, classLoader);
             final Class<?> kgAbsKeyInputViewClass = XposedHelpers.findClass(CLASS_KG_ABS_KEY_INPUT_VIEW, classLoader);
             final Class<?> kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, classLoader);
             mKgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, classLoader);
@@ -204,35 +197,6 @@ public class ModLockscreen {
                 });
             }
 
-            XposedHelpers.findAndHookMethod(kgHostViewClass, "onFinishInflate", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    mKeyguardHostView = param.thisObject; 
-                    Object slidingChallenge = XposedHelpers.getObjectField(
-                            param.thisObject, "mSlidingChallengeLayout");
-
-                    if (slidingChallenge != null) {
-                        try {
-                            // find lock button and assign long click listener
-                            // we assume there's only 1 ImageButton in sliding challenge layout
-                            // we have to do it this way since there's no ID assigned in layout XML
-                            final ViewGroup vg = (ViewGroup) slidingChallenge;
-                            final int childCount = vg.getChildCount();
-                            for (int i = 0; i < childCount; i++) {
-                                View v = vg.getChildAt(i);
-                                if (v instanceof ImageButton) {
-                                    v.setOnLongClickListener(mLockButtonLongClickListener);
-                                    v.bringToFront();
-                                    break;
-                                }
-                            }
-                        } catch (Throwable t) {
-                            XposedBridge.log(t);
-                        }
-                    }
-                }
-            });
-
             XposedHelpers.findAndHookMethod(kgAbsKeyInputViewClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
@@ -314,24 +278,6 @@ public class ModLockscreen {
             XposedBridge.log(t);
         }
     }
-
-    private static final OnLongClickListener mLockButtonLongClickListener = new OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View view) {
-            if (mKeyguardHostView == null) return false;
-            try {
-                if (Utils.isMtkDevice()) {
-                    XposedHelpers.callMethod(mKeyguardHostView, "showNextSecurityScreenOrFinish", false, true);
-                } else {
-                    XposedHelpers.callMethod(mKeyguardHostView, "showNextSecurityScreenOrFinish", false);
-                }
-                return true;
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-                return false;
-            }
-        }
-    };
 
     static class HandleDrawable {
         Object mHd;
