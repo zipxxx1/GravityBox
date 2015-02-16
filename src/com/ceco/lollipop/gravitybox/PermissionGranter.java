@@ -40,12 +40,12 @@ public class PermissionGranter {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static void initZygote() {
+    public static void initAndroid(final ClassLoader classLoader) {
         try {
-            final Class<?> pmServiceClass = XposedHelpers.findClass(CLASS_PACKAGE_MANAGER_SERVICE, null);
+            final Class<?> pmServiceClass = XposedHelpers.findClass(CLASS_PACKAGE_MANAGER_SERVICE, classLoader);
 
             XposedHelpers.findAndHookMethod(pmServiceClass, "grantPermissionsLPw",
-                    CLASS_PACKAGE_PARSER_PACKAGE, boolean.class, new XC_MethodHook() {
+                    CLASS_PACKAGE_PARSER_PACKAGE, boolean.class, String.class, new XC_MethodHook() {
                 @SuppressWarnings("unchecked")
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {

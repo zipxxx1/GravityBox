@@ -68,7 +68,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModAudio.initZygote(prefs);
         ModHwKeys.initZygote(prefs);
         ModExpandedDesktop.initZygote(prefs);
-        PermissionGranter.initZygote();
         ModVolumePanel.initZygote(prefs);
         ModViewConfig.initZygote(prefs);
         ModTelephony.initZygote(prefs);
@@ -124,6 +123,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
 
         if (lpparam.packageName.equals("android")) {
+            PermissionGranter.initAndroid(lpparam.classLoader);
             ModLowBatteryWarning.initAndroid(prefs, lpparam.classLoader);
             ModDisplay.initAndroid(prefs, lpparam.classLoader);
             ConnectivityServiceWrapper.initAndroid(lpparam.classLoader);
