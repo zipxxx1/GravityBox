@@ -69,7 +69,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModHwKeys.initZygote(prefs);
         ModExpandedDesktop.initZygote(prefs);
         ModVolumePanel.initZygote(prefs);
-        ModViewConfig.initZygote(prefs);
         ModTelephony.initZygote(prefs);
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false)) {
@@ -127,6 +126,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModLowBatteryWarning.initAndroid(prefs, lpparam.classLoader);
             ModDisplay.initAndroid(prefs, lpparam.classLoader);
             ConnectivityServiceWrapper.initAndroid(lpparam.classLoader);
+            ModViewConfig.initAndroid(prefs, lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {

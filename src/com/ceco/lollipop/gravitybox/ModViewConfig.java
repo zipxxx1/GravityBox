@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,7 +28,7 @@ public class ModViewConfig {
     private static final String CLASS_ACTIVITY_MANAGER_SERVICE = "com.android.server.am.ActivityManagerService";
     private static final String CLASS_ACTIVITY_RECORD = "com.android.server.am.ActivityRecord";
 
-    public static void initZygote(final XSharedPreferences prefs) {
+    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final String mode = prefs.getString(GravityBoxSettings.PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON, "default");
             if (!"default".equals(mode)) {
@@ -45,7 +45,7 @@ public class ModViewConfig {
 
         try {
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_FORCE_LTR_DIRECTION, false)) {
-                final Class<?> activityManagerSvcClass = XposedHelpers.findClass(CLASS_ACTIVITY_MANAGER_SERVICE, null);
+                final Class<?> activityManagerSvcClass = XposedHelpers.findClass(CLASS_ACTIVITY_MANAGER_SERVICE, classLoader);
                 XposedHelpers.findAndHookMethod(activityManagerSvcClass, "updateConfigurationLocked", 
                         Configuration.class, CLASS_ACTIVITY_RECORD, boolean.class, boolean.class, new XC_MethodHook() {
                     @Override
