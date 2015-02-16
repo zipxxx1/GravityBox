@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -56,6 +57,7 @@ public class ConnectivityServiceWrapper {
     private static Context mContext;
     private static Object mConnectivityService;
     private static WifiManagerWrapper mWifiManager;
+    private static TelephonyManager mTelephonyManager;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -89,10 +91,10 @@ public class ConnectivityServiceWrapper {
         }
     };
 
-    public static void initZygote() {
+    public static void initAndroid(final ClassLoader classLoader) {
         try {
             final Class<?> connServiceClass = 
-                    XposedHelpers.findClass(CLASS_CONNECTIVITY_SERVICE, null);
+                    XposedHelpers.findClass(CLASS_CONNECTIVITY_SERVICE, classLoader);
 
             XposedBridge.hookAllConstructors(connServiceClass, new XC_MethodHook() {
                 @Override
@@ -109,6 +111,8 @@ public class ConnectivityServiceWrapper {
                     if (context != null) {
                         mContext = context;
                         mWifiManager = new WifiManagerWrapper(context);
+                        mTelephonyManager = (TelephonyManager) context.getSystemService(
+                                Context.TELEPHONY_SERVICE);
 
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(ACTION_SET_MOBILE_DATA_ENABLED);
@@ -129,20 +133,20 @@ public class ConnectivityServiceWrapper {
     }
 
     private static void setMobileDataEnabled(boolean enabled) {
-        if (mConnectivityService == null) return;
+        if (mTelephonyManager == null) return;
         try {
-            XposedHelpers.callMethod(mConnectivityService, "setMobileDataEnabled", enabled);
-            if (DEBUG) log("setMobileDataEnabled called");
+            XposedHelpers.callMethod(mTelephonyManager, "setDataEnabled", enabled);
+            if (DEBUG) log("setDataEnabled called");
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
     private static void toggleMobileData() {
-        if (mConnectivityService == null) return;
+        if (mTelephonyManager == null) return;
         try {
             final boolean enabled = 
-                    (Boolean) XposedHelpers.callMethod(mConnectivityService, "getMobileDataEnabled");
+                    (Boolean) XposedHelpers.callMethod(mTelephonyManager, "getDataEnabled");
             setMobileDataEnabled(!enabled);
         } catch (Throwable t) {
             XposedBridge.log(t);
