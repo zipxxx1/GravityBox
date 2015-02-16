@@ -136,7 +136,7 @@ public class ModLockscreen {
             final Class<? extends Enum> displayModeEnum = (Class<? extends Enum>) XposedHelpers.findClass(ENUM_DISPLAY_MODE, classLoader);
             final Class<?> sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader);
 
-            XposedBridge.hookAllConstructors(kgViewMediatorClass, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(kgViewMediatorClass, "setup", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
