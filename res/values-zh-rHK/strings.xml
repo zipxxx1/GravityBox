@@ -1651,11 +1651,6 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">充電器拔除音效</string>
 
-    <!-- Fake ID patch -->
-    <string name="pref_patch_fake_id_title">修補 FakeID 漏洞</string>
-    <string name="pref_patch_fake_id_summary">請注意，Play 商店中的安全檢測器並無法偵測 GravityBox 針對 FakeID 漏洞所作出的修補。
-	故此，它們仍然會顯示該漏洞未被修補。請重新啟動來完成修補漏洞。</string>
-
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">音效設定檔</string>
 

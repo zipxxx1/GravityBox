@@ -1660,12 +1660,7 @@
     
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Sonido al desconectar cargador</string>
-    
-    <!-- Fake ID patch -->
-    <string name="pref_patch_fake_id_title">Solucionar vulnerabilidad Fake ID</string>
-    <string name="pref_patch_fake_id_summary">Nota: los escáneres de seguridad no son capaces de detectar el parche aplicado por GravityBox, por lo que 
-        lo mostrarán como no solucionado aunque ya hayas aplicado dicho parche (requiere reinicio)</string>
-        
+
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Perfil de audio</string>
     

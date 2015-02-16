@@ -1631,11 +1631,6 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Dźwięk odłączenia ładowarki</string>
 
-    <!-- Fake ID patch -->
-    <string name="pref_patch_fake_id_title">Napraw lukę "Fake ID"</string>
-    <string name="pref_patch_fake_id_summary">Pamiętaj, że skanery bezpieczeństwa nie są w stanie wykryć poprawek wykonanych przez GravityBox, więc
-         nadal będą raportowały brak poprawki, nawet jeśli została ona wprowadzona (wymagany restart)</string>
-
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Profile Dźwiękowe</string>
 

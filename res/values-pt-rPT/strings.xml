@@ -1644,11 +1644,6 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Som ao desligar carregador</string>
 
-    <!-- Fake ID patch -->
-    <string name="pref_patch_fake_id_title">Corrigir vulnerabilidade "Fake ID"</string>
-    <string name="pref_patch_fake_id_summary">De notar que as aplicações para verificação de segurança não são capazes de detectar se a correção feita pelo GravityBox produziu efeito, 
-        reportando o sistema como vulnerável, mesmo não sendo o caso (necessário reiniciar)</string>
-
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Perfis de áudio</string>
 

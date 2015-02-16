@@ -1649,10 +1649,6 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Töltő lecsatlakoztatás hang</string>
 
-    <!-- Fake ID patch -->
-    <string name="pref_patch_fake_id_title"> Fake ID sebezhetőség javítás</string>
-    <string name="pref_patch_fake_id_summary">Vedd figyelembe, hogy a biztonsági szkennerek nem képesek felismerni a Gravitybox-tól érkező javítást, ezért nem fogják jelezni a javítást annak ellenére, hogy a javítás engedélyezve van (újraindítás szükséges)</string>
-
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">Audió Profilok</string>
 

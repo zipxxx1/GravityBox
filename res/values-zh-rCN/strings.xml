@@ -1667,11 +1667,6 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">拔出充电器声音</string>
 
-    <!-- Fake ID patch -->
-    <string name="pref_patch_fake_id_title">修补假身份漏洞(Fake ID)</string>
-    <string name="pref_patch_fake_id_summary">注意，从GravityBox应用该补丁Security Scanners软件并不能检测到,它们的报告仍会显示为未修补（需要重新启动）</string>
-
-
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">音量情景</string>
     

@@ -2501,12 +2501,6 @@
                 android:title="@string/pref_screenshot_delete_title"
                 android:defaultValue="false" />
 
-            <CheckBoxPreference
-                android:key="pref_patch_fake_id"
-                android:title="@string/pref_patch_fake_id_title"
-                android:summary="@string/pref_patch_fake_id_summary"
-                android:defaultValue="false" />
-
         </PreferenceCategory>
 
     </PreferenceScreen>
