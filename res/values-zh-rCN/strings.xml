@@ -1485,10 +1485,6 @@
     <!-- Delete -->
     <string name="delete">删除</string>
 
-    <!-- Lockscreen: disable emergency call button -->
-    <string name="pref_lockscreen_disable_ecb_title">禁用紧急呼叫按钮</string>
-    <string name="pref_lockscreen_disable_ecb_summary">请注意一切风险!</string>
-
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">选择目标应用程序后取消图标</string>
     

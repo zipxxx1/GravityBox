@@ -1216,9 +1216,6 @@
     <string name="pref_statusbar_clock_date_title">日付を表示</string>
     <!-- Delete -->
     <string name="delete">削除</string>
-    <!-- Lockscreen: disable emergency call button -->
-    <string name="pref_lockscreen_disable_ecb_title">緊急通報ボタンを無効化</string>
-    <string name="pref_lockscreen_disable_ecb_summary">自己責任でお願いします!!!!</string>
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">ターゲットアプリによりアイコン選択がキャンセルされました</string>
     <!-- QS: Compass tile -->

@@ -1434,10 +1434,6 @@
     <!-- Delete -->
     <string name="delete">Sil</string>
 
-    <!-- Lockscreen: disable emergency call button -->
-    <string name="pref_lockscreen_disable_ecb_title">Acil arama butonunu kaldır</string>
-    <string name="pref_lockscreen_disable_ecb_summary">KENDİ RİSKİNİZ ALTINDA KULLANIN!!!!</string>
-
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">İkon seçme hedef uygulama tarafından reddedildi</string>
 

@@ -1454,10 +1454,6 @@
     <!-- Delete -->
     <string name="delete">Vymazať</string>
 
-    <!-- Lockscreen: disable emergency call button -->
-    <string name="pref_lockscreen_disable_ecb_title">Skryť tlačidlo tiesňového hovoru</string>
-    <string name="pref_lockscreen_disable_ecb_summary">NA VLASTNÉ RIZIKO!!!!</string>
-
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">Výber ikony bol zrušený cieľovou aplikáciou</string>
 

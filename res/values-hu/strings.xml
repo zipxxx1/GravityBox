@@ -1470,10 +1470,6 @@
     <!-- Delete -->
     <string name="delete">Törlés</string>
 
-    <!-- Lockscreen: disable emergency call button -->
-    <string name="pref_lockscreen_disable_ecb_title">Segélyhívó gomb letiltása</string>
-    <string name="pref_lockscreen_disable_ecb_summary">CSAK SAJÁT FELELŐSSÉGRE!!!</string>
-
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">Ikon kiválasztás törölve lett a célalkalmazás által</string>
 

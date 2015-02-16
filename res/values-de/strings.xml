@@ -1462,10 +1462,6 @@
     <!-- Delete -->
     <string name="delete">Löschen</string>
 
-    <!-- Lockscreen: disable emergency call button -->
-    <string name="pref_lockscreen_disable_ecb_title">Deaktiviere Notruf-Taste</string>
-    <string name="pref_lockscreen_disable_ecb_summary">BENUTZUNG AUF EIGENE GEFAHR!!!!</string>
-
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">Symbol Auswahl von Ziel-App abgebrochen</string>
 

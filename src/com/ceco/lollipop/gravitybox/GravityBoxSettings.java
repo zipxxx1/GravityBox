@@ -238,7 +238,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER2_TEXT = "pref_lockscreen_carrier2_text";
-    public static final String PREF_KEY_LOCKSCREEN_DISABLE_ECB = "pref_lockscreen_disable_ecb";
     public static final String ACTION_LOCKSCREEN_SETTINGS_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SETTINGS_CHANGED";
 
     public static final String PREF_CAT_KEY_POWER = "pref_cat_power";
@@ -908,7 +907,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
             PREF_KEY_LOCKSCREEN_CARRIER2_TEXT,
-            PREF_KEY_LOCKSCREEN_DISABLE_ECB,
             PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR
     ));
 
@@ -1132,7 +1130,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         //private SeekBarPreference mPrefLockscreenBlurIntensity;
         private EditTextPreference mPrefLockscreenCarrierText;
         private EditTextPreference mPrefLockscreenCarrier2Text;
-        private CheckBoxPreference mPrefLockscreenDisableEcb;
         private File wallpaperImage;
         private File notifBgImagePortrait;
         private File notifBgImageLandscape;
@@ -1379,8 +1376,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER_TEXT);
             mPrefLockscreenCarrier2Text = 
                     (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER2_TEXT);
-            mPrefLockscreenDisableEcb =
-                    (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_DISABLE_ECB);
 
             wallpaperImage = new File(getActivity().getFilesDir() + "/lockwallpaper"); 
             notifBgImagePortrait = new File(getActivity().getFilesDir() + "/notifwallpaper");
@@ -1661,7 +1656,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatPowerOther.removePreference(mPrefProximityWakeIgnoreCall);
             }
             if (!Utils.hasTelephonySupport(getActivity())) {
-                mPrefCatLsOther.removePreference(mPrefLockscreenDisableEcb);
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
                 //mPrefCatMedia.removePreference(mPrefLinkVolumes);
             }

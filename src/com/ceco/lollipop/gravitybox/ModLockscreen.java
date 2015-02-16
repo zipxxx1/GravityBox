@@ -23,14 +23,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Canvas;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
@@ -54,7 +52,6 @@ public class ModLockscreen {
             ".MediatekCarrierText" : ".CarrierText");
     private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
     private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
-    private static final String CLASS_LOCK_PATTERN_UTILS = "com.android.internal.widget.LockPatternUtils";
     private static final String CLASS_SB_WINDOW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
 
     private static final boolean DEBUG = false;
@@ -406,17 +403,6 @@ public class ModLockscreen {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     afterLockPatternDraw(param.thisObject);
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_LOCK_PATTERN_UTILS, classLoader, "updateEmergencyCallButtonState",
-                    Button.class, int.class, boolean.class, boolean.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_DISABLE_ECB, false) &&
-                            (Integer) param.args[1] != TelephonyManager.CALL_STATE_OFFHOOK) {
-                        param.args[2] = false;
-                    }
                 }
             });
 

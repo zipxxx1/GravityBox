@@ -1484,10 +1484,6 @@
     <!-- Delete -->
     <string name="delete">Удалить</string>
 
-    <!-- Lockscreen: disable emergency call button -->
-    <string name="pref_lockscreen_disable_ecb_title">Откл кнопку экстр.вызова</string>
-    <string name="pref_lockscreen_disable_ecb_summary">ИСПОЛЬЗУЙТЕ НА СВОЙ СТРАХ И РИСК!!!!</string>
-
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">Отмена выбора значка приложением</string>
 

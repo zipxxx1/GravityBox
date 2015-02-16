@@ -1470,10 +1470,6 @@
     <!-- Delete -->
     <string name="delete">刪除</string>
 
-    <!-- Lockscreen: disable emergency call button -->
-    <string name="pref_lockscreen_disable_ecb_title">停用緊急電話按鈕</string>
-    <string name="pref_lockscreen_disable_ecb_summary">請小心考慮一切風險！</string>
-
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">取消更改自訂圖示</string>
 

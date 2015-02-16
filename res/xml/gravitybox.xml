@@ -121,12 +121,6 @@
                 android:title="@string/pref_lockscreen_carrier2_text_title"
                 android:defaultValue="" />
 
-            <CheckBoxPreference 
-                android:key="pref_lockscreen_disable_ecb"
-                android:title="@string/pref_lockscreen_disable_ecb_title"
-                android:summary="@string/pref_lockscreen_disable_ecb_summary"
-                android:defaultValue="false" />
-
         </PreferenceCategory>
 
     </PreferenceScreen>

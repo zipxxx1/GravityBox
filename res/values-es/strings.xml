@@ -1479,11 +1479,7 @@
     
     <!-- Delete -->
     <string name="delete">Eliminar</string>
-    
-    <!-- Lockscreen: disable emergency call button -->
-    <string name="pref_lockscreen_disable_ecb_title">Desactivar botón de llamada de emergencia</string>
-    <string name="pref_lockscreen_disable_ecb_summary">¡ÚSALO BAJO TU RESPONSABILIDAD!</string>
-    
+
     <!-- AppPicker: icon pick cancelled -->
     <string name="app_picker_icon_pick_cancelled">Selección de icono cancelado por la app elegida</string>
     
