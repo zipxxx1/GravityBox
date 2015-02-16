@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -1203,6 +1203,18 @@
     <string-array name="bbar_position_values" translatable="false">
         <item>TOP</item>
         <item>BOTTOM</item>
+    </string-array>
+
+    <string-array name="tri_state_entries" translatable="false">
+        <item>@string/state_default</item>
+        <item>@string/state_enabled</item>
+        <item>@string/state_disabled</item>
+    </string-array>
+
+    <string-array name="tri_state_values" translatable="false">
+        <item>DEFAULT</item>
+        <item>ENABLED</item>
+        <item>DISABLED</item>
     </string-array>
 
 </resources>

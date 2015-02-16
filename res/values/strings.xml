@@ -1835,4 +1835,9 @@
     <!-- Volume panel: default timeout -->
     <string name="volume_panel_timeout_default">Default</string>
 
+    <!-- Tri state pref -->
+    <string name="state_default">Default</string>
+    <string name="state_enabled">Enabled</string>
+    <string name="state_disabled">Disabled</string>
+
 </resources>

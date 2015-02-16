@@ -44,18 +44,17 @@ import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModLockscreen {
     private static final String CLASS_PATH = "com.android.keyguard";
     private static final String TAG = "GB:ModLockscreen";
-    public static final String PACKAGE_NAME = "com.android.keyguard";
+    public static final String PACKAGE_NAME = "com.android.systemui";
 
-    private static final String CLASS_KGVIEW_MANAGER = CLASS_PATH + ".KeyguardViewManager";
+    private static final String CLASS_KGVIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
     //private static final String CLASS_KGVIEW_MANAGER_HOST = CLASS_KGVIEW_MANAGER + ".ViewManagerHost";
     private static final String CLASS_KG_HOSTVIEW = CLASS_PATH + ".KeyguardHostView";
     private static final String CLASS_KG_ABS_KEY_INPUT_VIEW = CLASS_PATH + ".KeyguardAbsKeyInputView";
-    private static final String CLASS_KGVIEW_MEDIATOR = CLASS_PATH + ".KeyguardViewMediator";
+    private static final String CLASS_KGVIEW_MEDIATOR = "com.android.systemui.keyguard.KeyguardViewMediator";
     private static final String CLASS_KG_UPDATE_MONITOR = CLASS_PATH + ".KeyguardUpdateMonitor";
     private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + (Utils.isMtkDevice() ? 
@@ -117,16 +116,6 @@ public class ModLockscreen {
             }
         }
     };
-
-    public static void initPackageResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
-        try {
-            boolean enableMenuKey = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, false);
-            resparam.res.setReplacement(PACKAGE_NAME, "bool", "config_disableMenuKeyInLockScreen", !enableMenuKey);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {

@@ -136,6 +136,8 @@ public class Utils {
         METHOD_EXITED
     }
 
+    public static enum TriState { DEFAULT, ENABLED, DISABLED };
+
     public static boolean isMtkDevice() {
         if (mIsMtkDevice != null) return mIsMtkDevice;
 

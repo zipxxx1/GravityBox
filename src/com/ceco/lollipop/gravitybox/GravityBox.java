@@ -102,11 +102,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 //                resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
 //            ModQuickSettings.initResources(prefs, resparam);
 //        }
-
-        if (!Utils.hasLenovoVibeUI() &&
-                resparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
-            ModLockscreen.initPackageResources(prefs, resparam);
-        }
     }
 
     @Override

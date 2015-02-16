@@ -107,11 +107,13 @@
                 android:summary="@string/pref_lockscreen_show_pattern_error_summary"
                 android:defaultValue="true" />
 
-            <CheckBoxPreference 
-                android:key="pref_lockscreen_menu_key"
+            <ListPreference 
+                android:key="pref_lockscreen_menu_key2"
                 android:title="@string/pref_lockscreen_menu_key_title"
                 android:summary="@string/pref_lockscreen_menu_key_summary"
-                android:defaultValue="false" />
+                android:entries="@array/tri_state_entries"
+                android:entryValues="@array/tri_state_values"
+                android:defaultValue="DEFAULT" />
 
             <CheckBoxPreference 
                 android:key="pref_lockscreen_quick_unlock"
