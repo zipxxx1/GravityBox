@@ -1843,9 +1843,9 @@
     <string name="pref_cat_battery_bar_title">電量條</string>
     <string name="pref_battery_bar_show_title">顯示電量條</string>
     <string name="pref_battery_bar_position_title">位置</string>
-    <string name="bbar_position_top">上邊緣 edge</string>
-    <string name="bbar_position_bottom">下邊緣 edge</string>
-    <string name="pref_battery_bar_margin_title">邊距設定 margin</string>
+    <string name="bbar_position_top">上邊緣</string>
+    <string name="bbar_position_bottom">下邊緣</string>
+    <string name="pref_battery_bar_margin_title">邊距設定</string>
     <string name="pref_battery_bar_thickness_title">粗幼</string>
     <string name="pref_battery_bar_charge_anim_title">充電動畫提示</string>
     <string name="pref_battery_bar_dynacolor_title">由系統設定顏色</string>
