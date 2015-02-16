@@ -469,13 +469,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Screenshot di menu power</string>
 
-    <!-- Lockscreen targets -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Target Lockscreen</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Hidupkan pengaturan target lockscreen</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Aplikasi target %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Jarak bawah cincin unlock</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Jarak samping cincin unlock</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Hidupkan kontrol kecerahan</string>
     <string name="pref_statusbar_brightness_summary">Atur kecerahan layar dengan menggeser staturbar (Membutuhkan kecerahan otomatis untuk dimatikan)</string>
@@ -593,10 +586,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Aksi ketika tombol Recents ditekan sekali</string>
     <string name="hwkey_recents_longpress_dialog_title">Aksi ketika tombol Recents ditahan</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Tunjukkan lengkungan baterai</string>
-    <string name="pref_lockscreen_battery_arc_summary">Tunjukkan lengkungan status baterai di sekitar lingkaran pembuka kunci</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Hidup/Matikan Senter</string>

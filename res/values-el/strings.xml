@@ -490,13 +490,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Στιγμιότυπο οθόνης στο μενού λειτουργίας</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Δακτύλιος ξεκλειδώματος</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Διαχείριση στόχων δακτυλίου ξεκλειδώματος</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Επιλεγμένη εφαρμογή %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Κάθετη αντιστάθμιση δακτυλίου ξεκλειδώματος</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Οριζόντια αντιστάθμιση δακτυλίου ξεκλειδώματος</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Ενεργοποίηση ελέγχου φωτεινότητας</string>
     <string name="pref_statusbar_brightness_summary">Ρυθμίζει τη φωτεινότητα ολισθαίνοντας πάνω στην γραμμή κατάστασης (απαιτείται απενεργοποίηση της αυτόματης φωτεινότητας)</string>
@@ -614,10 +607,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Ενέργεια μονού χτυπήματος του πλήκτρου προσφάτων</string>
     <string name="hwkey_recents_longpress_dialog_title">Ενέργεια παρατεταμένου πατήματος του πλήκτρου προσφάτων</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Προβολή τόξου μπαταρίας</string>
-    <string name="pref_lockscreen_battery_arc_summary">Προβάλει τόξο κατάστασης της μπαταρίας περιμετρικά του κύκλου ξεκλειδώματος της οθόνης</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Διακόπτης φακού</string>
@@ -758,10 +747,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Εναλλαγή πλήκτρων Επιστροφής και Πρόσφατα</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">Ενεργοποίηση φακού</string>
-    <string name="pref_lockscreen_ring_torch_summary">Εναλλάσσει τον φακό όταν αγγίξετε παρατεταμένα τον δαχτύλιο ξεκλειδώματος</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Χρονικό όριο πεδίου έντασης</string>
@@ -1161,13 +1146,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Ξεκλείδωμα</string>
 
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">Ολίσθηση πριν το ξεκλείδωμα</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">Επιτρέπει την χρήση του κλειδώματος ολίσθησης μαζί με το κλείδωμα ασφαλείας</string>
-
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">Πρόκληση ολίσθησης</string>
     <string name="pref_cat_lockscreen_statusbar_title">Γραμμή κατάστασης</string>
 
     <!-- Quick settings: Auto-switch extended -->

@@ -483,13 +483,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">צילום מסך בתפריט הפעלה/כיבוי</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">הגדרות טבעת לביטול הנעילה</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">מפסק ראשי עבור קיצורי טבעת לביטול הנעילה</string>
-    <string name="pref_lockscreen_ring_targets_app_title">קיצור דרך של טבעת %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">הזחה אנכית של טבעת לביטול הנעילה</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">הזחה אופקית של טבעת לביטול הנעילה</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">הפעל בקרת בהירות</string>
     <string name="pref_statusbar_brightness_summary">התאם בהירות מסך באמצעות החלקת אצבע על שורת המצב (זאת בתנאי שלא מופעלת בהירות אוטומטית)</string>
@@ -600,10 +593,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">פעולה בלחיצה רגילה על כפתור יישומים אחרונים</string>
     <string name="hwkey_recents_longpress_dialog_title">פעולה בלחיצה ארוכה על כפתור יישומים אחרונים</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">הצג את קשת הסוללה</string>
-    <string name="pref_lockscreen_battery_arc_summary">מציג קשת המתארת את מצב הסוללה מסביב לטבעת לפתיחת הנעילה</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">הפעל/כבה פנס</string>
@@ -744,10 +733,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">החלפה בין כפתור חזור ובין כפתור יישומים אחרונים</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">הפעל פנס</string>
-    <string name="pref_lockscreen_ring_torch_summary">מפעיל פנס בלחיצה ארוכה על טבעת ביטול הנעילה</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">פסק זמן של תפריט עוצמת השמע</string>

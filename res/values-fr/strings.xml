@@ -501,13 +501,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Capture d\'écran dans le menu d\'extinction</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Cibles de l\'anneau de déverrouillage</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Enclenche les cibles de l\'écran de déverrouillage</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Cible %s de l\'anneau</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Marge verticale anneau de déverrouillage</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Marge horizontale anneau de déverrouillage</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Activer le contrôle de la luminosité</string>
     <string name="pref_statusbar_brightness_summary">Ajuste la luminosité en glissant le doigt sur la barre d\'état (la luminosité automatique doit être désactivée !)</string>
@@ -626,10 +619,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Action appui simple sur touche appli récentes</string>
     <string name="hwkey_recents_longpress_dialog_title">Action appui long sur touche appli récentes</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Afficher l\'arc de batterie</string>
-    <string name="pref_lockscreen_battery_arc_summary">Affiche un arc pour l\'état de la batterie autour de l\'anneau de déverrouillage</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Commuter la torche</string>
@@ -770,10 +759,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Permuter les touches Retour et Appli Récentes</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">Activer la torche</string>
-    <string name="pref_lockscreen_ring_torch_summary">Allume/éteint la torche par un appui long sur l\'anneau de déverrouillage</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Temporisation du panneau de volume</string>
@@ -1174,13 +1159,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Déverrouiller</string>
 
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">Faire glisser avant de déverrouiller</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">Permet d\'utiliser la glissière de déverrouillage avec les cibles de l\'anneau en même temps que l\'anneau de déverrouillage</string>
-
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">Glisser pour déverrouiller</string>
     <string name="pref_cat_lockscreen_statusbar_title">Barre d\'état</string>
 
     <!-- Quick settings: Auto-switch extended -->
@@ -1252,10 +1232,6 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">Activer le double appui pour mettre en veille</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">Permet la mise en veille par un double appui sur l\'anneau de déverrouillage</string>
 
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Son à la connexion du chargeur</string>
@@ -1830,11 +1806,6 @@
     <string name="dt_display_mode_always">Toujours (lorsqu\'une connexion au réseau est disponible)</string>
     <string name="dt_display_mode_dm">Uniquement pour le Gestionnaire de Téléchargement d\'Android</string>
     <string name="dt_display_mode_pt">Lorsqu\'une barre de progression est présente dans la barre d\'état</string>
-
-    <!-- Unlock ring targets: custom unlock ring -->
-    <string name="pref_lockscreen_ring_custom_unlock_title">Cible de déverrouillage personnalisée</string>
-    <string name="pref_lockscreen_ring_custom_unlock_summary">Permet de positionner manuellement la cible de déverrouillage.
-        Vérifiez bien qu\'au moins une cible de l\'anneau soit bien programmée pour utiliser l\'action Déverrouillage de GravityBox ou pour lancer une appli</string>
 
     <!-- Wi-Fi priority -->
     <string name="pref_wifi_priority_title">Priorité Wi-Fi</string>

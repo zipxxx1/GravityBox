@@ -500,13 +500,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Captura de pantalla en menú de apagado</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Apps en el anillo de desbloqueo</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Activador de los disparadores del anillo de desbloqueo</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Destino desde el anillo %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Desplazamiento vertical</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Desplazamiento horizontal</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Habilitar control de brillo</string>
     <string name="pref_statusbar_brightness_summary">Ajusta el brillo deslizando el dedo sobre la barra de estado (requiere desactivar brillo automático)</string>
@@ -625,10 +618,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Acción con una pulsación en el botón multitarea</string>
     <string name="hwkey_recents_longpress_dialog_title">Acción con pulsación prolongada en botón multitarea</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Mostrar batería circular</string>
-    <string name="pref_lockscreen_battery_arc_summary">Muestra un círculo con el estado de la batería alrededor del anillo de desbloqueo</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Activar/desactivar linterna</string>
@@ -769,10 +758,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Intercambiar botones Atrás y Multitarea</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">Activar linterna</string>
-    <string name="pref_lockscreen_ring_torch_summary">Activa/desactiva la linterna cuando se pulsa prolongadamente el anillo de desbloqueo</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Ocultar panel de volumen tras</string>
@@ -1173,13 +1158,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Desbloquear</string>
  
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">Deslizar antes de desbloquear</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">Permite usar el anillo de desbloqueo junto al bloqueo de seguridad</string>
-
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">Desbloqueo de seguridad</string><!-- UNTRANSLATED -->
     <string name="pref_cat_lockscreen_statusbar_title">Barra de estado</string>
  
  
@@ -1252,11 +1232,7 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-    
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">Activar doble pulsación para suspender</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">Doble pulsación en el anillo de desbloqueo suspende el dispositivo</string>
- 
+
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Sonido al conectar cargador</string>
  

@@ -477,13 +477,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Screenshot v menu napájania</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Skratky odomykacieho prstenca</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Hlavný vypínač pre skratky obrazovky uzamknutia</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Aplikácia pre skratku %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Vertikálny ofset prstenca</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Horizontálny ofset prstenca</string> 
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Povoliť ovládanie jasu</string>
     <string name="pref_statusbar_brightness_summary">Povolí ovládanie jasu posúvaním prsta po stavovej lište</string>
@@ -594,10 +587,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Ťuknutie na tlačidlo zoznamu aplikácíí</string>
     <string name="hwkey_recents_longpress_dialog_title">Dlhé podržanie tlačidla zoznamu aplikácií</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Oblúkový indikátor stavu batérie</string>
-    <string name="pref_lockscreen_battery_arc_summary">Zobrazí oblúk po obvode odomykacieho prstenca, reprezentujúci stav batérie</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Zapnúť/vypnúť svetlo</string>
@@ -742,10 +731,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Prehodiť tlačidlá Späť a Zoznam spustených úloh</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">Povoliť LED svetlo</string>
-    <string name="pref_lockscreen_ring_torch_summary">Dlhé podržanie odomykacieho prstenca prepne LED svetlo</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Časovač panela hlasitosti</string>
@@ -1146,13 +1131,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Odomknúť</string>
 
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">Prstenec pred odomknutím</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">Umožňuje použiť odomykací prstenec a jeho skratky aj v prípade bezpečnostného zámku</string>
-
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Miniaplikácie</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">Odomykací prstenec</string>
     <string name="pref_cat_lockscreen_statusbar_title">Stavová lišta</string>
 
     <!-- Quick settings: Auto-switch extended -->
@@ -1224,10 +1204,6 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">Uspať dvojitým ťuknutím</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">Dvojité ťuknutie na odomykací prstenec uspí zariadenie</string>
 
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Zvuk pripojenia napájania</string>
@@ -1799,11 +1775,6 @@
     <string name="dt_display_mode_always">Vždy (keď je k dispozícii sieťové spojenie)</string>
     <string name="dt_display_mode_dm">Len pre Android Download Manager</string>
     <string name="dt_display_mode_pt">Počas zobrazenia indikátora progresu</string>
-
-    <!-- Unlock ring targets: custom unlock ring -->
-    <string name="pref_lockscreen_ring_custom_unlock_title">Voliteľná skratka odomknutia</string>
-    <string name="pref_lockscreen_ring_custom_unlock_summary">Umožňuje nastavenie skratky odomknutia manuálne.
-        Uistite sa, že aspoň jedna skratka je nastavená na GravityBox akciu odomknutia, alebo na spustenie ľubovoľnej aplikácie.</string>
 
     <!-- Wi-Fi priority -->
     <string name="pref_wifi_priority_title">Wi-Fi priorita</string>

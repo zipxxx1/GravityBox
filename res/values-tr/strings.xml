@@ -463,13 +463,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Güç menüsünde ekran görüntüsü</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Kilit açma halkası ayarları</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Kilit açma halkası hedefleri ana tuş</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Hedef uygulama %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Kilit açma halkası dikey offset</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Kilit açma halkası yatay offset</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Parlaklık kontrolünü etkinleştir</string>
     <string name="pref_statusbar_brightness_summary">Durum çubuğunun üzerinde kaydırarak parlaklığı ayarlar</string>
@@ -581,10 +574,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Son uyg.lar tuşu tek basma eylemi</string>
     <string name="hwkey_recents_longpress_dialog_title">Son uyg.lar tuşu uzun basma eylemi</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Pil yuvarlağını göster</string>
-    <string name="pref_lockscreen_battery_arc_summary">Kilit açma halkası etrafında pil durumunu gösteren yuvarlak oluşturur</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Feneri etkinleştir</string>
@@ -724,10 +713,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Geri ve Son uyg.lar tuşlarının yerlerini değiştir</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">Feneri etkinleştir</string>
-    <string name="pref_lockscreen_ring_torch_summary">Kilit açma halkasına uzun basıldığında fener açılır</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Ses paneli zaman aşımı</string>
@@ -1124,13 +1109,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Kilit aç</string>
 
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">Kilidi açmadan önce kaydırma</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">Allows using sliding challenge with ring targets together with security lock</string>
-
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Widgetler</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">Sliding challenge</string>
     <string name="pref_cat_lockscreen_statusbar_title">Durum çubuğu</string>
 
     <!-- Quick settings: Auto-switch extended -->
@@ -1202,10 +1182,6 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">Çift dokunuş ile uykuya geçme</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">Kilit açma halkasına çift dokunma cihazı uyutur</string>
 
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Şarj cihazı takıldı sesi</string>

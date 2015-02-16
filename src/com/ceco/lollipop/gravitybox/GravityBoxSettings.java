@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -233,10 +233,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_LOCKSCREEN_BG_CHANGED = "gravitybox.intent.action.LOCKSCREEN_BG_CHANGED";
     public static final String EXTRA_LOCKSCREEN_BG = "lockscreenBg";
 
-    public static final String PREF_CAT_KEY_LOCKSCREEN_SLIDING_CHALLENGE = "pref_cat_lockscreen_sliding_challenge";
     public static final String PREF_CAT_KEY_LOCKSCREEN_OTHER = "pref_cat_lockscreen_other";
-    public static final String PREF_KEY_LOCKSCREEN_BATTERY_ARC = "pref_lockscreen_battery_arc";
-    public static final String PREF_KEY_LOCKSCREEN_RING_TORCH = "pref_lockscreen_ring_torch";
     public static final String PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "pref_lockscreen_maximize_widgets";
     public static final String PREF_KEY_LOCKSCREEN_WIDGET_LIMIT_DISABLE = "pref_lockscreen_widget_limit_disable";
     public static final String PREF_KEY_LOCKSCREEN_ROTATION = "pref_lockscreen_rotation";
@@ -246,8 +243,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK = "pref_lockscreen_statusbar_clock";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER2_TEXT = "pref_lockscreen_carrier2_text";
-    public static final String PREF_KEY_LOCKSCREEN_SLIDE_BEFORE_UNLOCK = "pref_lockscreen_slide_before_unlock";
-    public static final String PREF_KEY_LOCKSCREEN_RING_DT2S = "pref_lockscreen_ring_dt2s";
     public static final String PREF_KEY_STATUSBAR_LOCK_POLICY = "pref_statusbar_lock_policy";
     public static final int SBL_POLICY_DEFAULT = 0;
     public static final int SBL_POLICY_UNLOCKED = 1;
@@ -593,17 +588,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_RING_DISABLE = "navbarRingDisable";
     public static final String EXTRA_NAVBAR_CAMERA_KEY_DISABLE = "navbarCameraKeyDisable";
 
-    public static final String PREF_CAT_KEY_LOCKSCREEN_RING_SETTINGS = "pref_cat_lockscreen_ring_settings";
-    public static final String PREF_KEY_LOCKSCREEN_TARGETS_ENABLE = "pref_lockscreen_ring_targets_enable";
-    public static final String PREF_KEY_LOCKSCREEN_TARGETS_CUSTOM_UNLOCK = "pref_lockscreen_ring_custom_unlock";
-    public static final String PREF_KEY_LOCKSCREEN_TARGETS_APP[] = new String[] {
-        "pref_lockscreen_ring_targets_app0", "pref_lockscreen_ring_targets_app1", "pref_lockscreen_ring_targets_app2",
-        "pref_lockscreen_ring_targets_app3", "pref_lockscreen_ring_targets_app4", "pref_lockscreen_ring_targets_app5",
-        "pref_lockscreen_ring_targets_app6", "pref_lockscreen_ring_targets_app7"
-    };
-    public static final String PREF_KEY_LOCKSCREEN_TARGETS_VERTICAL_OFFSET = "pref_lockscreen_ring_targets_vertical_offset";
-    public static final String PREF_KEY_LOCKSCREEN_TARGETS_HORIZONTAL_OFFSET = "pref_lockscreen_ring_targets_horizontal_offset";
-
     public static final String PREF_KEY_STATUSBAR_BRIGHTNESS = "pref_statusbar_brightness";
     public static final String PREF_KEY_STATUSBAR_DT2S = "pref_statusbar_dt2s";
     public static final String ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED = "gravitybox.intent.action.STATUSBAR_BRIGHTNESS_CHANGED";
@@ -932,21 +916,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT,
             PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY,
             PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY,
-            PREF_KEY_LOCKSCREEN_TARGETS_VERTICAL_OFFSET,
-            PREF_KEY_LOCKSCREEN_TARGETS_HORIZONTAL_OFFSET,
-            PREF_KEY_LOCKSCREEN_RING_TORCH,
-            PREF_KEY_LOCKSCREEN_BATTERY_ARC,
-            PREF_KEY_LOCKSCREEN_TARGETS_ENABLE,
-            PREF_KEY_LOCKSCREEN_TARGETS_CUSTOM_UNLOCK,
-            PREF_KEY_LOCKSCREEN_TARGETS_APP[0],
-            PREF_KEY_LOCKSCREEN_TARGETS_APP[1],
-            PREF_KEY_LOCKSCREEN_TARGETS_APP[2],
-            PREF_KEY_LOCKSCREEN_TARGETS_APP[3],
-            PREF_KEY_LOCKSCREEN_TARGETS_APP[4],
-            PREF_KEY_LOCKSCREEN_TARGETS_APP[5],
-            PREF_KEY_LOCKSCREEN_TARGETS_APP[6],
-            PREF_KEY_LOCKSCREEN_TARGETS_APP[7],
-            PREF_KEY_LOCKSCREEN_SLIDE_BEFORE_UNLOCK,
             PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
             PREF_KEY_STATUSBAR_LOCK_POLICY,
             PREF_KEY_LOCKSCREEN_WIDGET_LIMIT_DISABLE,
@@ -955,7 +924,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_CARRIER2_TEXT,
             PREF_KEY_LOCKSCREEN_DISABLE_ECB,
             PREF_KEY_LOCKSCREEN_ROTATION,
-            PREF_KEY_LOCKSCREEN_RING_DT2S,
             PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS,
             PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR
     ));
@@ -1268,7 +1236,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceCategory mPrefCatNavbarDimen;
         private CheckBoxPreference mPrefNavbarEnable;
         private CheckBoxPreference mPrefMusicVolumeSteps;
-        private AppPickerPreference[] mPrefLockscreenTargetsApp;
         private ListPreference mPrefLockscreenSbClock;
         private PreferenceCategory mPrefCatPhoneTelephony;
         private PreferenceCategory mPrefCatPhoneMessaging;
@@ -1316,9 +1283,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ColorPickerPreference mPrefSbDaColorSecondary;
         private ListPreference mPrefHwKeyLockscreenTorch;
         private PreferenceCategory mPrefCatHwKeyOthers;
-        private PreferenceCategory mPrefCatLsSlidingChallenge;
         private PreferenceCategory mPrefCatLsOther;
-        private CheckBoxPreference mPrefLsRingTorch;
         private CheckBoxPreference mPrefLsRotation;
         private PreferenceScreen mPrefCatLauncherTweaks;
         private ListPreference mPrefLauncherDesktopGridRows;
@@ -1361,7 +1326,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefHeadsUpImportance;
         private ListPreference mPrefQrQuality;
         private SeekBarPreference mPrefSrAdaptiveDelay;
-        private PreferenceScreen mPrefCatLsRingSettings;
         private ListPreference mPrefBbarPosition;
         private ListPreference mPrefSbdpMode;
 
@@ -1559,17 +1523,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNavbarCustomKeyLongpress = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS);
             mPrefNavbarCustomKeyDoubletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP);
 
-            mPrefCatLsRingSettings = (PreferenceScreen) findPreference(PREF_CAT_KEY_LOCKSCREEN_RING_SETTINGS);
-            mPrefLockscreenTargetsApp = new AppPickerPreference[PREF_KEY_LOCKSCREEN_TARGETS_APP.length];
-            for (int i=0; i<PREF_KEY_LOCKSCREEN_TARGETS_APP.length; i++) {
-                mPrefLockscreenTargetsApp[i] = (AppPickerPreference) findPreference(
-                        PREF_KEY_LOCKSCREEN_TARGETS_APP[i]);
-                String title = String.format(
-                        getString(R.string.pref_lockscreen_ring_targets_app_title), (i+1));
-                mPrefLockscreenTargetsApp[i].setTitle(title);
-                mPrefLockscreenTargetsApp[i].setDialogTitle(title);
-                mPrefLockscreenTargetsApp[i].setAllowUnlockAction(true);
-            }
             mPrefLockscreenSbClock = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK);
 
             mPrefCatPhoneTelephony = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_TELEPHONY);
@@ -1629,9 +1582,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbIconColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_ICON_COLOR_SECONDARY);
             mPrefSbDaColorSecondary = (ColorPickerPreference) findPreference(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR_SECONDARY);
 
-            mPrefCatLsSlidingChallenge = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_SLIDING_CHALLENGE);
             mPrefCatLsOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_OTHER);
-            mPrefLsRingTorch = (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_RING_TORCH);
             mPrefLsRotation = (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_ROTATION);
 
             mPrefCatLauncherTweaks = (PreferenceScreen) findPreference(PREF_CAT_LAUNCHER_TWEAKS);
@@ -1720,7 +1671,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {
                 mPrefCatHwKeyOthers.removePreference(mPrefHwKeyLockscreenTorch);
-                mPrefCatLsSlidingChallenge.removePreference(mPrefLsRingTorch);
                 mPrefCatMiscOther.removePreference(mPrefTorchAutoOff);
             }
             if (!Utils.hasVibrator(getActivity())) {
@@ -2235,29 +2185,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatNavbarRing.setEnabled(override && mPrefNavbarEnable.isChecked());
                 mPrefCatNavbarColor.setEnabled(override && mPrefNavbarEnable.isChecked());
                 mPrefCatNavbarDimen.setEnabled(override && mPrefNavbarEnable.isChecked());
-            }
-
-            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_TARGETS_ENABLE)) {
-                final boolean enabled = mPrefs.getBoolean(PREF_KEY_LOCKSCREEN_TARGETS_ENABLE, false);
-                for(Preference p : mPrefLockscreenTargetsApp) {
-                    p.setEnabled(enabled);
-                }
-            }
-
-            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_TARGETS_CUSTOM_UNLOCK)) {
-                if (mPrefs.getBoolean(PREF_KEY_LOCKSCREEN_TARGETS_CUSTOM_UNLOCK, false)) {
-                    if (mPrefCatLsRingSettings.findPreference(
-                            mPrefLockscreenTargetsApp[mPrefLockscreenTargetsApp.length-1].getKey()) == null) {
-                        mPrefCatLsRingSettings.addPreference(
-                                mPrefLockscreenTargetsApp[mPrefLockscreenTargetsApp.length-1]);
-                    }
-                } else {
-                    if (mPrefCatLsRingSettings.findPreference(
-                        mPrefLockscreenTargetsApp[mPrefLockscreenTargetsApp.length-1].getKey()) != null) {
-                        mPrefCatLsRingSettings.removePreference(
-                                mPrefLockscreenTargetsApp[mPrefLockscreenTargetsApp.length-1]);
-                    }
-                }
             }
 
             if (key == null || key.equals(PREF_KEY_NETWORK_MODE_TILE_MODE)) {

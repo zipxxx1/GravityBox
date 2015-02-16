@@ -414,12 +414,6 @@
     <string name="pref_navbar_menukey_title">メニューキーを常時表示</string>
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">電源メニューにスクリーンショットを追加</string>
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">ロック画面ターゲット</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">ロック画面設定を有効化します。</string>
-    <string name="pref_lockscreen_ring_targets_app_title">ターゲットアプリ %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">ロック解除リングの縦のオフセット</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">ロック解除リングの横のオフセット</string>
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">明るさ操作を有効化</string>
     <string name="pref_statusbar_brightness_summary">ステータスバー上でスライドして明るさ調整できるようにします。</string>
@@ -519,9 +513,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">最近のアプリキータップアクション</string>
     <string name="hwkey_recents_longpress_dialog_title">最近のアプリキー長押しアクション</string>
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">バッテリーアークを表示</string>
-    <string name="pref_lockscreen_battery_arc_summary">ロック解除リングハンドルの回りにバッテリーアークを表示します。</string>
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">トーチトグル</string>
     <!-- Volume panel: Show expanded -->
@@ -635,9 +626,6 @@
     <string name="app_picker_shortcut_cancelled">ショートカットの作成がキャンセルされました。</string>
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">バックと最近のアプリのキーを入れ替える</string>
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">ライトの有効化</string>
-    <string name="pref_lockscreen_ring_torch_summary">ロック解除リングが長押しされた時にライトの有効/無効を切り替えます。</string>
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">音量パネルを非表示にするまでの時間</string>
     <!-- Ringer tile modes -->
@@ -964,12 +952,8 @@
     <string name="shortcuts_icon_picker_tv">TV</string>
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">ロック解除</string>
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">ロック解除前にスライド</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">リングターゲットの使用とロック解除を同時にできるようにします。</string>
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">ウィジェト</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">スライド</string>
     <string name="pref_cat_lockscreen_statusbar_title">ステータスバー</string>
     <!-- Quick settings: Auto-switch extended -->
     <string name="qs_auto_switch_disabled">無効</string>
@@ -1031,9 +1015,6 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">ダブルタップで消灯を有効化</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">ロック解除リングをダブルタップすると画面を消灯するようにします。</string>
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">充電器接続時の効果音</string>
     <!-- GB Actions: Toggle Smart Radio -->
@@ -1495,8 +1476,4 @@
     <string name="dt_display_mode_always">常時 (ネットワーク接続があるとき)</string>
     <string name="dt_display_mode_dm">Androidのダウンロードマネージャのみ</string>
     <string name="dt_display_mode_pt">ステータスバーにプログレスバーが表示されているとき</string>
-    <!-- Unlock ring targets: custom unlock ring -->
-    <string name="pref_lockscreen_ring_custom_unlock_title">カスタムロック解除ターゲット</string>
-    <string name="pref_lockscreen_ring_custom_unlock_summary">ロック解除ターゲットの手動設定が出来ます。
-最低でも一つのリングターゲットがGravityBoxのロック解除アクションか何かのアプリ起動に設定されているようにしてください。</string>
 </resources>

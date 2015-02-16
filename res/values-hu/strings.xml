@@ -501,13 +501,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Képernyőkép a kikapcsoló menüben</string>    
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Feloldó kör célpontok</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Feloldó kör célpontok ki-bekapcsolása</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Célpont alkalmazás %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Feloldó kör függőleges eltolása</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Feloldó kör vízszintes eltolása</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Fényerő szabályozás engedélyezése</string>
     <string name="pref_statusbar_brightness_summary">Fényerő beállítása az állapotsávon történő jobbra-balra csúsztatással</string>
@@ -626,10 +619,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Nemrég használt alkalmazások gomb egyszeri érintés művelete</string>
     <string name="hwkey_recents_longpress_dialog_title">Nemrég használt alkalmazások gomb hosszú érintés művelete</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Akkumulátor körív mutatása</string>
-    <string name="pref_lockscreen_battery_arc_summary">Mutatja az akkumulátor állapot körívet a feloldó kör körül.</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Zseblámpa ki-bekapcsolása</string>
@@ -769,10 +758,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">A Vissza és a Nemrég használt alkalmazások gombok felcserélése</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">Zseblámpa bekapcsolása</string>
-    <string name="pref_lockscreen_ring_torch_summary">Ki-bekapcsolja a zseblámpát a feloldó kör hosszú érintésével</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Hangerő panel időtúllépés</string>
@@ -1169,13 +1154,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Feloldás</string>
 
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">Csúsztatás feloldás előtt</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">Lehetővé teszi a feloldó kör célpontok csúsztatással történő és a biztonsági feloldás együttes használatát</string>
-
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Widget-ek</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">Csúsztatási művelet</string>
     <string name="pref_cat_lockscreen_statusbar_title">Állapotsáv</string>
 
     <!-- Quick settings: Auto-switch extended -->
@@ -1247,10 +1227,6 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">Dupla érintésre alvás engedélyezése</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">A feloldó körön történő dupla érintés alvó állapotba helyezi a készüléket</string>
 
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Töltő csatlakoztatása hang</string>
@@ -1804,9 +1780,5 @@
     <string name="dt_display_mode_always">Mindig (ha rendelkezésre áll hálózati kapcsolat)</string>
     <string name="dt_display_mode_dm">Csak az Android Letöltéskezelő esetén</string>
     <string name="dt_display_mode_pt">Amikor a folyamatjelző sáv az értesítési sávban jelenik meg</string>
-
-    <!-- Unlock ring targets: custom unlock ring -->
-    <string name="pref_lockscreen_ring_custom_unlock_title">Egyéni feloldó célpont</string>
-    <string name="pref_lockscreen_ring_custom_unlock_summary">Lehetővé teszi a feloldó célppont manuális beállítását. Győződj meg róla, hogy legalább egy feloldó célpont beállításra került egy GravityBox feloldó művelethez vagy valamelyik alkalmazás indításához.</string>
 
 </resources>

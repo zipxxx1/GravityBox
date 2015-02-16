@@ -477,13 +477,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Captura de tela no menu de opções de energia</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Desbloquear configurações do anel</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Controle principal para desbloquear alvos do anel</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Aplicativo alvo %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Desbloquear deslocamento vertical do anel</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Desbloquear deslocamento horizontal do anel</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Habilitar controle de brilho</string>
     <string name="pref_statusbar_brightness_summary">Ajusta o brilho ao deslizar sobre a barra de status (Necessário que o brilho automático esteja desabilitado)</string>
@@ -601,10 +594,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Ação do clique simples na tecla de Aplicativos recentes</string>
     <string name="hwkey_recents_longpress_dialog_title">Ação de clique longo na tecla de Aplicativos recentes</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Mostrar arco de bateria</string>
-    <string name="pref_lockscreen_battery_arc_summary">Permite mostrar o nível de bateria em forma de arco desenhado em torno do anel de desbloqueio</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Alternar lanterna</string>
@@ -745,10 +734,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Inverter botões Voltar e Aplicativos Recentes</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">Habilitar lanterna</string>
-    <string name="pref_lockscreen_ring_torch_summary">Habilitar a lanterna quando o anel de desbloqueio é segurado</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Tempo-limite do painel de volumes</string>
@@ -1148,13 +1133,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Desbloqueio</string>
 
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">Deslizar antes de desbloquear</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">Permite mostrar método de deslizar para desbloquear (com alvos de desbloqueio) antes do método de bloqueio seguro</string>
-
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">Deslizar para desbloquear</string>
     <string name="pref_cat_lockscreen_statusbar_title">Barra de status</string>
 
     <!-- Quick settings: Auto-switch extended -->
@@ -1226,10 +1206,6 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">Ativar duplo toque para hibernar</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">Permite hibernar o dispositivo após tocar duas vezes no anel de desbloqueio</string>
 
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Som ao plugar carregador</string>
@@ -1799,10 +1775,6 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="dt_display_mode_always">Sempre (quando a conexão de rede disponível)</string>
     <string name="dt_display_mode_dm">Somente para o gerenciador de downloads do Android</string>
     <string name="dt_display_mode_pt">Quando a barra de status exibir progresso em andamento</string>
-
-    <!-- Unlock ring targets: custom unlock ring -->
-    <string name="pref_lockscreen_ring_custom_unlock_title">Destino de desbloqueio personalizado</string>
-    <string name="pref_lockscreen_ring_custom_unlock_summary">Permite definir o destino de desbloqueio manualmente. Certifique-se de que pelo menos um dos alvos do anel seja definido como usar a ação GravityBox Unlock ou para iniciar algum aplicativo.</string>
 
     <!-- Wi-Fi priority -->
     <string name="pref_wifi_priority_title">Prioridade Wi-Fi</string>

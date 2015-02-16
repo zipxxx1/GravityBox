@@ -501,13 +501,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Снимок экрана в меню</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Ярлыки кольца разблокировки</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Включение ярлыков кольца разблокировки</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Целевое приложение %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Вертик. смещение кольца</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Гориз. смещение кольца</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Включить контроль яркости</string>
     <string name="pref_statusbar_brightness_summary">Настройка яркости перемещением пальца вдоль строки состояния (необходимо, чтобы автоматическая яркость была отключена)</string>
@@ -627,10 +620,6 @@
     <string name="hwkey_recents_singletap_dialog_title">Нажатие Недавних</string>
     <string name="hwkey_recents_longpress_dialog_title">Удержание Недавних</string>
 
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Статус батареи</string>
-    <string name="pref_lockscreen_battery_arc_summary">Показывать арку батареи вокруг кольца разблокировки</string>
-    
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Включить фонарик</string>
 
@@ -770,10 +759,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Поменять Назад и Недавние</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">Включить фонарик</string>
-    <string name="pref_lockscreen_ring_torch_summary">Включение фонарика при нажатии на кольцо разблокировки</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Задержка панели громкости</string>
@@ -1174,13 +1159,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Разблокировка</string>
 
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">Кольцо перед блокировкой</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">Возможность использования ярлыков кольца перед разблокировкой пин/графическим ключом</string>
-
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Виджеты</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">Кольцо разблокировки</string>
     <string name="pref_cat_lockscreen_statusbar_title">Строка состояния</string>
 
     <!-- Quick settings: Auto-switch extended -->
@@ -1252,10 +1232,6 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">Двойное нажатие для сна</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">Двойное нажатие на кольце разблокировки переводит устройство в режим сна</string>
 
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Звук при подключении ЗУ</string>
@@ -1829,11 +1805,6 @@
     <string name="dt_display_mode_always">Всегда (при доступном сетевом соединении)</string>
     <string name="dt_display_mode_dm">Только для менеджера загрузки Андроид</string>
     <string name="dt_display_mode_pt">При отображении шкалы выполнения в строке состояния</string>
-
-    <!-- Unlock ring targets: custom unlock ring -->
-    <string name="pref_lockscreen_ring_custom_unlock_title">Пользовательский ярлык</string>
-    <string name="pref_lockscreen_ring_custom_unlock_summary">Установка пользовательского ярлыка разблокировки вручную.
-        Убедитесь, что как минимум один ярлык кольца установлен на действие разблокировки GravityBox или на запуск приложения.</string>
 
     <!-- Wi-Fi priority -->
     <string name="pref_wifi_priority_title">Приоритет Wi-Fi</string>

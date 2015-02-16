@@ -501,13 +501,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">电源键菜单屏幕截图</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">解锁环目标</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">解锁环目标总开关</string>
-    <string name="pref_lockscreen_ring_targets_app_title">目标应用%s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">解锁环垂直偏移</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">解锁环水平偏移</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">启用亮度控制</string>
     <string name="pref_statusbar_brightness_summary">启用状态栏调整亮度（需要禁用自动亮度）</string>
@@ -627,10 +620,6 @@
     <string name="hwkey_recents_singletap_dialog_title">单击最近任务键行为</string>
     <string name="hwkey_recents_longpress_dialog_title">长按最近任务键行为</string>
 
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">显示电池弧光</string>
-    <string name="pref_lockscreen_battery_arc_summary">解锁环周围绘制显示电池状态弧光</string>
-    
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">手电筒开关</string>
 
@@ -770,10 +759,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">交换返回键和最近任务键</string>
-    
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">启用手电筒</string>
-    <string name="pref_lockscreen_ring_torch_summary">长按解锁换来开关手电筒</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">音量面板超时</string>
@@ -1173,14 +1158,9 @@
     <string name="shortcuts_icon_picker_tv">电视</string>
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">解锁</string>
-    
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">滑动解锁前</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">允许使用滑动对环目标和安全锁一起更改</string>
 
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">小部件</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">滑动调整</string>
     <string name="pref_cat_lockscreen_statusbar_title">状态栏</string>
 
     <!-- Quick settings: Auto-switch extended -->
@@ -1252,10 +1232,6 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-    
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">启用双击睡眠</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">在解锁环上双击使设备睡眠</string>
 
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">插入充电器声音</string>
@@ -1831,11 +1807,6 @@
     <string name="dt_display_mode_dm">仅对于Android下载管理器</string>
     <string name="dt_display_mode_pt">当显示状态栏进度条</string>
 
-    <!-- Unlock ring targets: custom unlock ring -->
-    <string name="pref_lockscreen_ring_custom_unlock_title">自定义解锁目标</string>
-    <string name="pref_lockscreen_ring_custom_unlock_summary">可手动设置解锁目标
-        至少一个解锁目标或使用GravityBox设置为解锁动作或启动一些应用程序</string> 
-    
     <!-- Wi-Fi priority -->
     <string name="pref_wifi_priority_title">WiFi优先级</string>
     <string name="pref_wifi_priority_summary">指定WiFi网络优先级</string>

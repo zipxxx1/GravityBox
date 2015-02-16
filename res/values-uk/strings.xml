@@ -292,11 +292,6 @@
     <string name="pref_navbar_width_summary">Застосовується до ландшафтної орієнтації</string>
     <string name="pref_navbar_menukey_title">Завжди показувати кнопку меню</string>
     <string name="pref_powermenu_screenshot_title">Скріншот в меню вимкнення</string>
-    <string name="pref_cat_lockscreen_ring_settings_title">ярлики екрану блокування</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Загальний перемикач ярликів екрану блокування</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Додаток %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Вертикальний зсув кільця розблокування</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Горизонтальне зміщення</string>
     <string name="pref_statusbar_brightness_title">Включити контроль яскравості</string>
     <string name="pref_statusbar_brightness_summary">Міняти яскравість слайдом вздовж статусбара</string>
     <string name="pref_cat_phone_telephony_title">Телефонія</string>
@@ -371,8 +366,6 @@
     <string name="rambar_bottom">знизу</string>
     <string name="hwkey_recents_singletap_dialog_title">Дія з одиночного торкання</string>
     <string name="hwkey_recents_longpress_dialog_title">Дія по довгому торкання</string>
-    <string name="pref_lockscreen_battery_arc_title">Статус батареї</string>
-    <string name="pref_lockscreen_battery_arc_summary">Показувати арку батареї, намальовану навколо кільця розблокування</string>
     <string name="hwkey_action_torch">Включити ліхтарик</string>
     <string name="pref_volume_panel_autoexpand_title">Розширювати автоматично</string>
     <string name="pref_cat_hwkey_menu_title">Кнопка Меню</string>

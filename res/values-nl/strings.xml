@@ -495,13 +495,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Screenshot in power menu</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Unlock ring targets</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Toggles unlock ring targets</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Ring target %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Unlock ring vertical offset</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">Unlock ring horizontal offset</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Enable brightness control</string>
     <string name="pref_statusbar_brightness_summary">Adjusts brightness by sliding over statusbar (requires automatic brightness to be disabled)</string>
@@ -619,10 +612,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Recents key single-tap action</string>
     <string name="hwkey_recents_longpress_dialog_title">Recents key long-press action</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Show battery arc</string>
-    <string name="pref_lockscreen_battery_arc_summary">Shows battery status arc drawn around unlock ring handle</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Toggle torch</string>
@@ -763,10 +752,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Swap Back and Recents keys</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">Enable torch</string>
-    <string name="pref_lockscreen_ring_torch_summary">Toggles torch when unlock ring handle is long-pressed</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
@@ -1166,13 +1151,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Unlock</string>
 
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">Slide before unlock</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">Allows using sliding challenge with ring targets together with security lock</string>
-
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Widgets</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">Sliding challenge</string>
     <string name="pref_cat_lockscreen_statusbar_title">Status bar</string>
 
     <!-- Quick settings: Auto-switch extended -->
@@ -1244,10 +1224,6 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">Enable double-tap to sleep</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">Double-tap on unlock ring puts device to sleep</string>
 
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Charger plugged sound</string>

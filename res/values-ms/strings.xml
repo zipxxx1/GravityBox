@@ -495,13 +495,6 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Tangkap screen di menu power</string>
 
-    <!-- Unlock ring settings -->
-    <string name="pref_cat_lockscreen_ring_settings_title">Target gelung kekunci</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">Butang untuk target gelung kekunci</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Target gelung %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">Set gelung kunci memanjang ke atas</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">set gelung kekunci memanjang ke tepi</string>
-
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Benarkan kawal kecerahan</string>
     <string name="pref_statusbar_brightness_summary">Kawal kecerahan dengan slide di bar status(Kecerahan auto perlu dimatikan)</string>
@@ -612,10 +605,6 @@
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">Butang recents sekali tekan</string>
     <string name="hwkey_recents_longpress_dialog_title">Butang recents tekan dua kali</string>
-
-    <!-- Lockscreen battery arc -->
-    <string name="pref_lockscreen_battery_arc_title">Tunjuk bulatan bateri</string>
-    <string name="pref_lockscreen_battery_arc_summary">Tunjuk bulatan bateri sekitar bulatan kekunci</string>
 
     <!-- HW Key Actions: toggle torch -->
     <string name="hwkey_action_torch">Butang lampu picit</string>
@@ -756,10 +745,6 @@
 
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">Tukar butang kembali dengan butang aplikasi sebelum</string>
-
-    <!-- Unlock ring Torch -->
-    <string name="pref_lockscreen_ring_torch_title">Benarkan lampu</string>
-    <string name="pref_lockscreen_ring_torch_summary">Hidupkan lampu ketika gelung ditekan lama</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">masa tamat panel nada</string>
@@ -1159,13 +1144,8 @@
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Buka</string>
 
-    <!-- Lockscreen: Slide before unlock -->
-    <string name="pref_lockscreen_slide_before_unlock_title">Slide sebelum buka</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">Benarkan cabaran slide dengan kunci sekuriti</string>
-
     <!-- Lockscreen tweaks: option categories -->
     <string name="pref_cat_lockscreen_widgets_title">Widget</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">Cabaran slide</string>
     <string name="pref_cat_lockscreen_statusbar_title">Bar status</string>
 
     <!-- Quick settings: Auto-switch extended -->
@@ -1237,10 +1217,6 @@
     <!-- Icon picker: new icons -->
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">Whatsapp</string>
-
-    <!-- Unlock ring: double-tap to sleep -->
-    <string name="pref_lockscreen_ring_dt2s_title">Benarkan tap dua kali untuk offkan skrin</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">Tap dua kali pada gelung untuk offkan skrin</string>
 
     <!-- Charger plugged sound -->
     <string name="pref_charger_plugged_sound_title">Bunyi ketika dicas</string>
