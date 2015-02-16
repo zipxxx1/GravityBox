@@ -22,6 +22,7 @@
         android:title="@string/pref_cat_lockscreen_title"
         android:summary="@string/pref_cat_lockscreen_summary">
 
+        <!--
         <PreferenceCategory 
             android:key="pref_cat_lockscreen_background"
             android:title="@string/pref_cat_lockscreen_background_title">
@@ -76,6 +77,7 @@
                 android:order="6" />
 
         </PreferenceCategory>
+        -->
 
         <PreferenceCategory 
             android:key="pref_cat_lockscreen_statusbar"

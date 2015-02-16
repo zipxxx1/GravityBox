@@ -69,7 +69,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.WallpaperManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -86,7 +85,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.Rect;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
@@ -219,19 +217,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_TELEPHONY_NATIONAL_ROAMING = "nationalRoaming";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN = "pref_cat_lockscreen";
-    public static final String PREF_CAT_KEY_LOCKSCREEN_BACKGROUND = "pref_cat_lockscreen_background";
-    public static final String PREF_KEY_LOCKSCREEN_BACKGROUND = "pref_lockscreen_background";
-    public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR = "pref_lockscreen_bg_color";
-    public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_IMAGE = "pref_lockscreen_bg_image";
-    public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY = "pref_lockscreen_bg_opacity";
-    public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT = "pref_lockscreen_bg_blur_effect";
-    public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY = "pref_lockscreen_bg_blur_intensity";
-    public static final String LOCKSCREEN_BG_DEFAULT = "default";
-    public static final String LOCKSCREEN_BG_COLOR = "color";
-    public static final String LOCKSCREEN_BG_IMAGE = "image";
-    public static final String LOCKSCREEN_BG_LAST_SCREEN = "last_screen";
-    public static final String ACTION_PREF_LOCKSCREEN_BG_CHANGED = "gravitybox.intent.action.LOCKSCREEN_BG_CHANGED";
-    public static final String EXTRA_LOCKSCREEN_BG = "lockscreenBg";
+    //public static final String PREF_CAT_KEY_LOCKSCREEN_BACKGROUND = "pref_cat_lockscreen_background";
+    //public static final String PREF_KEY_LOCKSCREEN_BACKGROUND = "pref_lockscreen_background";
+    //public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR = "pref_lockscreen_bg_color";
+    //public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_IMAGE = "pref_lockscreen_bg_image";
+    //public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY = "pref_lockscreen_bg_opacity";
+    //public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT = "pref_lockscreen_bg_blur_effect";
+    //public static final String PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY = "pref_lockscreen_bg_blur_intensity";
+    //public static final String LOCKSCREEN_BG_DEFAULT = "default";
+    //public static final String LOCKSCREEN_BG_COLOR = "color";
+    //public static final String LOCKSCREEN_BG_IMAGE = "image";
+    //public static final String LOCKSCREEN_BG_LAST_SCREEN = "last_screen";
+    //public static final String ACTION_PREF_LOCKSCREEN_BG_CHANGED = "gravitybox.intent.action.LOCKSCREEN_BG_CHANGED";
+    //public static final String EXTRA_LOCKSCREEN_BG = "lockscreenBg";
 
     public static final String PREF_CAT_KEY_LOCKSCREEN_OTHER = "pref_cat_lockscreen_other";
     public static final String PREF_KEY_LOCKSCREEN_ROTATION = "pref_lockscreen_rotation";
@@ -909,11 +907,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     ));
 
     private static final List<String> lockscreenKeys = new ArrayList<String>(Arrays.asList(
-            PREF_KEY_LOCKSCREEN_BACKGROUND,
-            PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR,
-            PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT,
-            PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY,
-            PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY,
+//            PREF_KEY_LOCKSCREEN_BACKGROUND,
+//            PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR,
+//            PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT,
+//            PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY,
+//            PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY,
             PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
             PREF_KEY_STATUSBAR_LOCK_POLICY,
             PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK,
@@ -1135,13 +1133,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private Preference mPrefAboutUnlocker;
         private Preference mPrefEngMode;
         private Preference mPrefDualSimRinger;
-        private PreferenceCategory mPrefCatLockscreenBg;
-        private ListPreference mPrefLockscreenBg;
-        private ColorPickerPreference mPrefLockscreenBgColor;
-        private Preference mPrefLockscreenBgImage;
-        private SeekBarPreference mPrefLockscreenBgOpacity;
-        private CheckBoxPreference mPrefLockscreenBgBlurEffect;
-        private SeekBarPreference mPrefLockscreenBlurIntensity;
+        //private PreferenceCategory mPrefCatLockscreenBg;
+        //private ListPreference mPrefLockscreenBg;
+        //private ColorPickerPreference mPrefLockscreenBgColor;
+        //private Preference mPrefLockscreenBgImage;
+        //private SeekBarPreference mPrefLockscreenBgOpacity;
+        //private CheckBoxPreference mPrefLockscreenBgBlurEffect;
+        //private SeekBarPreference mPrefLockscreenBlurIntensity;
         private EditTextPreference mPrefLockscreenCarrierText;
         private EditTextPreference mPrefLockscreenCarrier2Text;
         private CheckBoxPreference mPrefLockscreenDisableEcb;
@@ -1375,19 +1373,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getPreferenceScreen().removePreference(mPrefDualSimRinger);
             }
 
-            mPrefCatLockscreenBg = 
-                    (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_BACKGROUND);
-            mPrefLockscreenBg = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND);
-            mPrefLockscreenBgColor = 
-                    (ColorPickerPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR);
-            mPrefLockscreenBgImage = 
-                    (Preference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_IMAGE);
-            mPrefLockscreenBgOpacity = 
-                    (SeekBarPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY);
-            mPrefLockscreenBgBlurEffect =
-                    (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT);
-            mPrefLockscreenBlurIntensity =
-                    (SeekBarPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY);
+            // TODO: Lockscreen background
+//            mPrefCatLockscreenBg = 
+//                    (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_BACKGROUND);
+//            mPrefLockscreenBg = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND);
+//            mPrefLockscreenBgColor = 
+//                    (ColorPickerPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_COLOR);
+//            mPrefLockscreenBgImage = 
+//                    (Preference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_IMAGE);
+//            mPrefLockscreenBgOpacity = 
+//                    (SeekBarPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY);
+//            mPrefLockscreenBgBlurEffect =
+//                    (CheckBoxPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_EFFECT);
+//            mPrefLockscreenBlurIntensity =
+//                    (SeekBarPreference) findPreference(PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY);
             mPrefLockscreenCarrierText = 
                     (EditTextPreference) findPreference(PREF_KEY_LOCKSCREEN_CARRIER_TEXT);
             mPrefLockscreenCarrier2Text = 
@@ -2072,23 +2071,23 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
             }
 
-            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_BACKGROUND)) {
-                mPrefLockscreenBg.setSummary(mPrefLockscreenBg.getEntry());
-                mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgColor);
-                mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgImage);
-                mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgBlurEffect);
-                mPrefCatLockscreenBg.removePreference(mPrefLockscreenBlurIntensity);
-                String option = mPrefs.getString(PREF_KEY_LOCKSCREEN_BACKGROUND, LOCKSCREEN_BG_DEFAULT);
-                if (!option.equals(LOCKSCREEN_BG_DEFAULT)) {
-                    mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgBlurEffect);
-                    mPrefCatLockscreenBg.addPreference(mPrefLockscreenBlurIntensity);
-                }
-                if (option.equals(LOCKSCREEN_BG_COLOR)) {
-                    mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgColor);
-                } else if (option.equals(LOCKSCREEN_BG_IMAGE)) {
-                    mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgImage);
-                }
-            }
+//            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_BACKGROUND)) {
+//                mPrefLockscreenBg.setSummary(mPrefLockscreenBg.getEntry());
+//                mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgColor);
+//                mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgImage);
+//                mPrefCatLockscreenBg.removePreference(mPrefLockscreenBgBlurEffect);
+//                mPrefCatLockscreenBg.removePreference(mPrefLockscreenBlurIntensity);
+//                String option = mPrefs.getString(PREF_KEY_LOCKSCREEN_BACKGROUND, LOCKSCREEN_BG_DEFAULT);
+//                if (!option.equals(LOCKSCREEN_BG_DEFAULT)) {
+//                    mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgBlurEffect);
+//                    mPrefCatLockscreenBg.addPreference(mPrefLockscreenBlurIntensity);
+//                }
+//                if (option.equals(LOCKSCREEN_BG_COLOR)) {
+//                    mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgColor);
+//                } else if (option.equals(LOCKSCREEN_BG_IMAGE)) {
+//                    mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgImage);
+//                }
+//            }
 
             if (key == null || key.equals(PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK)) {
                 mPrefLockscreenSbClock.setSummary(mPrefLockscreenSbClock.getEntry());
@@ -3175,10 +3174,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
                 intent.putExtra(EXTRA_SR_MDA_IGNORE,
                         prefs.getBoolean(PREF_KEY_SMART_RADIO_MDA_IGNORE, false));
-            } else if (key.equals(PREF_KEY_LOCKSCREEN_BACKGROUND)) {
-                intent.setAction(ACTION_PREF_LOCKSCREEN_BG_CHANGED);
-                intent.putExtra(EXTRA_LOCKSCREEN_BG,
-                        prefs.getString(PREF_KEY_LOCKSCREEN_BACKGROUND, LOCKSCREEN_BG_DEFAULT));
+//            } else if (key.equals(PREF_KEY_LOCKSCREEN_BACKGROUND)) {
+//                intent.setAction(ACTION_PREF_LOCKSCREEN_BG_CHANGED);
+//                intent.putExtra(EXTRA_LOCKSCREEN_BG,
+//                        prefs.getString(PREF_KEY_LOCKSCREEN_BACKGROUND, LOCKSCREEN_BG_DEFAULT));
             } else if (key.equals(PREF_KEY_BATTERY_CHARGED_SOUND)) {
                 intent.setAction(ACTION_PREF_BATTERY_SOUND_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_CHARGED);
@@ -3368,9 +3367,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (pref == mPrefDualSimRinger) {
                 intent = new Intent(Intent.ACTION_MAIN);
                 intent.setClassName(APP_DUAL_SIM_RINGER, APP_DUAL_SIM_RINGER_CLASS);
-            } else if (pref == mPrefLockscreenBgImage) {
-                setCustomLockscreenImage();
-                return true;
+//            } else if (pref == mPrefLockscreenBgImage) {
+//                setCustomLockscreenImage();
+//                return true;
             } else if (pref == mPrefNotifImagePortrait) {
                 setCustomNotifBgPortrait();
                 return true;
@@ -3495,36 +3494,36 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             return super.onPreferenceTreeClick(prefScreen, pref);
         }
 
-        private void setCustomLockscreenImage() {
-            Intent intent = new Intent(getActivity(), PickImageActivity.class);
-            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
-            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
-            Display display = getActivity().getWindowManager().getDefaultDisplay();
-            Point displaySize = new Point();
-            display.getRealSize(displaySize);
-            // Lock screen for tablets visible section are different in landscape/portrait,
-            // image need to be cropped correctly, like wallpaper setup for scrolling in background in home screen
-            // other wise it does not scale correctly
-            if (Utils.isTabletUI(getActivity())) {
-                WallpaperManager wpManager = WallpaperManager.getInstance(getActivity());
-                int wpWidth = wpManager.getDesiredMinimumWidth();
-                int wpHeight = wpManager.getDesiredMinimumHeight();
-                float spotlightX = (float) displaySize.x / wpWidth;
-                float spotlightY = (float) displaySize.y / wpHeight;
-                intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, wpWidth);
-                intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, wpHeight);
-                intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, wpWidth);
-                intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, wpHeight);
-                intent.putExtra(PickImageActivity.EXTRA_SPOTLIGHT_X, spotlightX);
-                intent.putExtra(PickImageActivity.EXTRA_SPOTLIGHT_Y, spotlightY);
-            } else {
-                boolean isPortrait = getResources().getConfiguration().orientation ==
-                    Configuration.ORIENTATION_PORTRAIT;
-                intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? displaySize.x : displaySize.y);
-                intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? displaySize.y : displaySize.x);
-            }
-            getActivity().startActivityFromFragment(this, intent, REQ_LOCKSCREEN_BACKGROUND);
-        }
+//        private void setCustomLockscreenImage() {
+//            Intent intent = new Intent(getActivity(), PickImageActivity.class);
+//            intent.putExtra(PickImageActivity.EXTRA_CROP, true);
+//            intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
+//            Display display = getActivity().getWindowManager().getDefaultDisplay();
+//            Point displaySize = new Point();
+//            display.getRealSize(displaySize);
+//            // Lock screen for tablets visible section are different in landscape/portrait,
+//            // image need to be cropped correctly, like wallpaper setup for scrolling in background in home screen
+//            // other wise it does not scale correctly
+//            if (Utils.isTabletUI(getActivity())) {
+//                WallpaperManager wpManager = WallpaperManager.getInstance(getActivity());
+//                int wpWidth = wpManager.getDesiredMinimumWidth();
+//                int wpHeight = wpManager.getDesiredMinimumHeight();
+//                float spotlightX = (float) displaySize.x / wpWidth;
+//                float spotlightY = (float) displaySize.y / wpHeight;
+//                intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, wpWidth);
+//                intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, wpHeight);
+//                intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, wpWidth);
+//                intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, wpHeight);
+//                intent.putExtra(PickImageActivity.EXTRA_SPOTLIGHT_X, spotlightX);
+//                intent.putExtra(PickImageActivity.EXTRA_SPOTLIGHT_Y, spotlightY);
+//            } else {
+//                boolean isPortrait = getResources().getConfiguration().orientation ==
+//                    Configuration.ORIENTATION_PORTRAIT;
+//                intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? displaySize.x : displaySize.y);
+//                intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? displaySize.y : displaySize.x);
+//            }
+//            getActivity().startActivityFromFragment(this, intent, REQ_LOCKSCREEN_BACKGROUND);
+//        }
 
         @SuppressWarnings("deprecation")
         private void setCustomNotifBgPortrait() {

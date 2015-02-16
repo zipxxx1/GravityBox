@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,35 +15,20 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.ceco.lollipop.gravitybox.ModLowBatteryWarning.ChargingLed;
 
-import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.ResultReceiver;
-import android.view.Surface;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -54,10 +39,10 @@ public class ModDisplay {
     private static final String CLASS_DISPLAY_POWER_CONTROLLER = "com.android.server.display.DisplayPowerController";
     private static final String CLASS_LIGHT_SERVICE_LIGHT = "com.android.server.lights.LightsService$LightImpl";
     private static final String CLASS_LIGHT_SERVICE = "com.android.server.lights.LightsService";
-    private static final String CLASS_DISPLAY_POWER_REQUEST = "android.hardware.display.DisplayManagerInternal.DisplayPowerRequest";
-    private static final String CLASS_DISPLAY_MANAGER_GLOBAL = "android.hardware.display.DisplayManagerGlobal";
+    //private static final String CLASS_DISPLAY_POWER_REQUEST = "android.hardware.display.DisplayManagerInternal.DisplayPowerRequest";
+    //private static final String CLASS_DISPLAY_MANAGER_GLOBAL = "android.hardware.display.DisplayManagerGlobal";
     private static final boolean DEBUG = false;
-    private static final boolean DEBUG_KIS = false;
+    //private static final boolean DEBUG_KIS = false;
 
     public static final String ACTION_GET_AUTOBRIGHTNESS_CONFIG = "gravitybox.intent.action.GET_AUTOBRIGHTNESS_CONFIG";
     public static final String ACTION_SET_AUTOBRIGHTNESS_CONFIG = "gravitybox.intent.action.SET_AUTOBRIGHTNESS_CONFIG";
@@ -77,12 +62,12 @@ public class ModDisplay {
     private static int mBatteryLevel;
     private static ChargingLed mChargingLed;
 
-    private static ServiceConnection mKisServiceConn;
-    private static InputStream mKisImageStream;
-    private static Messenger mKisService;
-    private static Messenger mKisClient;
-    private static KeyguardManager mKeyguardManager;
-    private static boolean mLsBgLastScreenEnabled;
+    //private static ServiceConnection mKisServiceConn;
+    //private static InputStream mKisImageStream;
+    //private static Messenger mKisService;
+    //private static Messenger mKisClient;
+    //private static KeyguardManager mKeyguardManager;
+    //private static boolean mLsBgLastScreenEnabled;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -124,11 +109,11 @@ public class ModDisplay {
                         || intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) &&
                         !mButtonBacklightMode.equals(GravityBoxSettings.BB_MODE_DEFAULT)) {
                 updateButtonBacklight(intent.getAction().equals(Intent.ACTION_SCREEN_ON));
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_LOCKSCREEN_BG)) {
-                mLsBgLastScreenEnabled = intent.getStringExtra(GravityBoxSettings.EXTRA_LOCKSCREEN_BG)
-                        .equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN);
-                if (DEBUG_KIS) log ("mLsBgLastScreenEnabled = " + mLsBgLastScreenEnabled);
+//            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED) &&
+//                    intent.hasExtra(GravityBoxSettings.EXTRA_LOCKSCREEN_BG)) {
+//                mLsBgLastScreenEnabled = intent.getStringExtra(GravityBoxSettings.EXTRA_LOCKSCREEN_BG)
+//                        .equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN);
+//                if (DEBUG_KIS) log ("mLsBgLastScreenEnabled = " + mLsBgLastScreenEnabled);
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_BLED_CHARGING)) {
                 ChargingLed cg = ChargingLed.valueOf(intent.getStringExtra(GravityBoxSettings.EXTRA_BLED_CHARGING));
@@ -247,8 +232,8 @@ public class ModDisplay {
                     GravityBoxSettings.PREF_KEY_BUTTON_BACKLIGHT_MODE, GravityBoxSettings.BB_MODE_DEFAULT);
             mButtonBacklightNotif = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS, false);
-            mLsBgLastScreenEnabled = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND,
-                    GravityBoxSettings.LOCKSCREEN_BG_DEFAULT).equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN);
+            //mLsBgLastScreenEnabled = prefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND,
+            //        GravityBoxSettings.LOCKSCREEN_BG_DEFAULT).equals(GravityBoxSettings.LOCKSCREEN_BG_LAST_SCREEN);
             mPulseNotifDelay = prefs.getInt(GravityBoxSettings.PREF_KEY_PULSE_NOTIFICATION_DELAY, 3000);
             mChargingLed = ChargingLed.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_CHARGING_LED, "DEFAULT"));
 
@@ -291,7 +276,7 @@ public class ModDisplay {
                     if (brightnessSettingsEnabled) {
                         intentFilter.addAction(ACTION_SET_AUTOBRIGHTNESS_CONFIG);
                     }
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
+                    //intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("DisplayPowerController constructed");
                 }
@@ -388,144 +373,144 @@ public class ModDisplay {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classDisplayPowerController, "requestPowerState",
-                    CLASS_DISPLAY_POWER_REQUEST, boolean.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!mLsBgLastScreenEnabled) return;
-
-                    if (mKeyguardManager == null) {
-                        mKeyguardManager = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
-                    }
-                    if (mKeyguardManager.isKeyguardLocked()) return;
-
-                    final boolean waitForNegativeProximity = (Boolean) param.args[1];
-                    final boolean pendingWaitForNegativeProximity = 
-                            XposedHelpers.getBooleanField(param.thisObject, "mPendingWaitForNegativeProximityLocked");
-                    final Object pendingRequestLocked = 
-                            XposedHelpers.getObjectField(param.thisObject, "mPendingRequestLocked");
-                    final int requestedScreenState = XposedHelpers.getIntField(param.args[0], "policy");
-
-                    if ((waitForNegativeProximity && !pendingWaitForNegativeProximity ||
-                            pendingRequestLocked == null || !pendingRequestLocked.equals(param.args[0])) &&
-                            requestedScreenState == 0) {
-                        final Object dm = XposedHelpers.callStaticMethod(XposedHelpers.findClass(
-                                CLASS_DISPLAY_MANAGER_GLOBAL, classLoader), "getInstance");
-                        final int display0 = ((int[])XposedHelpers.callMethod(dm, "getDisplayIds"))[0];
-                        Object displayInfo = XposedHelpers.callMethod(dm, "getDisplayInfo", display0);
-                        final int naturalW = (Integer)XposedHelpers.callMethod(displayInfo, "getNaturalWidth");
-                        final int naturalH = (Integer)XposedHelpers.callMethod(displayInfo, "getNaturalHeight");
-
-                        /* Limit max screenshot capture layer to 22000.
-                        Prevents status bar and navigation bar from being captured.*/
-                        Class<?> surfaceCtrl = XposedHelpers.findClass("android.view.SurfaceControl", classLoader);
-                        final Bitmap bmp = (Bitmap) XposedHelpers.callStaticMethod(surfaceCtrl, "screenshot",
-                             new Rect(), naturalW, naturalH, 0, 22000, false, Surface.ROTATION_0);
-                        if (bmp == null) return;
-
-                        final Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
-                        new Thread(new Runnable() {
-                             @Override
-                             public void run() {
-                                 final WakeLock wakeLock = mPm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-                                 wakeLock.acquire(10000);
-                                 Bitmap tmpBmp = bmp;
-                                 int width = bmp.getWidth();
-                                 int height = bmp.getHeight();
-                                 // scale image (keeping aspect ratio) if it is too large
-                                 if (width * height > 1440000) {
-                                     int newWidth = (width < height) ? 900 : 1600;
-                                     float factor = newWidth / (float) width;
-                                     int newHeight = (int) (height * factor);
-                                     if (DEBUG_KIS) log("requestPowerState: scaled image res (WxH):"
-                                             + newWidth + "x" + newHeight);
-                                     tmpBmp = Bitmap.createScaledBitmap(bmp, newWidth, newHeight, true);
-                                 }
-        
-                                 final ByteArrayOutputStream os = new ByteArrayOutputStream();
-                                 tmpBmp.compress(CompressFormat.PNG, 100, os);
-                                 try {
-                                    os.close();
-                                 } catch (IOException e1) { }
-                                 bmp.recycle();
-                                 tmpBmp.recycle();
-                                 mKisImageStream = new ByteArrayInputStream(os.toByteArray());
-
-                                 if (mKisClient == null) {
-                                     mKisClient = new Messenger(new Handler(h.getLooper()) {
-                                         @Override
-                                         public void handleMessage(Message msg) {
-                                             if (DEBUG_KIS) log("mKisClient: got reply: what=" + msg.what);
-                                             try {
-                                                 if (msg.what == KeyguardImageService.MSG_GET_NEXT_CHUNK) {
-                                                     byte[] data = new byte[204800];
-                                                     if (mKisImageStream.read(data) != -1) {
-                                                         Bundle bundle = new Bundle();
-                                                         bundle.putByteArray("data", data);
-                                                         Message dataMsg = Message.obtain(null, KeyguardImageService.MSG_WRITE_OUTPUT);
-                                                         dataMsg.setData(bundle);
-                                                         dataMsg.replyTo = mKisClient;
-                                                         mKisService.send(dataMsg);
-                                                         if (DEBUG_KIS) log("mKisClient: MSG_WRITE_OUTPUT sent");
-                                                     } else {
-                                                         msg = Message.obtain(null, KeyguardImageService.MSG_FINISH_OUTPUT);
-                                                         mKisService.send(msg);
-                                                         mContext.unbindService(mKisServiceConn);
-                                                         if (wakeLock != null && wakeLock.isHeld()) {
-                                                             wakeLock.release();
-                                                         }
-                                                         mKisService = null;
-                                                         mKisServiceConn = null;
-                                                         if (DEBUG_KIS) log("mKisClient: MSG_FINISH_OUTPUT sent");
-                                                     }
-                                                 } else if (msg.what == KeyguardImageService.MSG_ERROR) {
-                                                     mContext.unbindService(mKisServiceConn);
-                                                     if (wakeLock != null && wakeLock.isHeld()) {
-                                                         wakeLock.release();
-                                                     }
-                                                     mKisService = null;
-                                                     mKisServiceConn = null;
-                                                     log("mKisClient: MSG_ERROR received");
-                                                 }
-                                             } catch (Throwable t) {
-                                                 XposedBridge.log(t);
-                                             }
-                                         }
-                                     });
-                                 }
-
-                                 mKisServiceConn = new ServiceConnection() {
-                                     @Override
-                                     public void onServiceConnected(ComponentName cn, IBinder binder) {
-                                         try {
-                                             mKisService = new Messenger(binder);
-                                             Message msg = Message.obtain(null, KeyguardImageService.MSG_BEGIN_OUTPUT);
-                                             msg.replyTo = mKisClient;
-                                             mKisService.send(msg);
-                                             if (DEBUG_KIS) log("mKisServiceConn: onServiceConnected");
-                                         } catch (Throwable t) {
-                                             XposedBridge.log(t);;
-                                         }
-                                     }
-                                     @Override
-                                     public void onServiceDisconnected(ComponentName cn) {
-                                         if (wakeLock != null && wakeLock.isHeld()) {
-                                             wakeLock.release();
-                                         }
-                                         mKisService = null;
-                                         mKisServiceConn = null;
-                                         if (DEBUG_KIS) log("mKisServiceConn: onServiceDisconnected");
-                                     } 
-                                 };
-                                 ComponentName cn = new ComponentName(GravityBox.PACKAGE_NAME, KeyguardImageService.class.getName());
-                                 Intent intent = new Intent();
-                                 intent.setComponent(cn);
-                                 mContext.bindService(intent, mKisServiceConn, Context.BIND_AUTO_CREATE);
-                             }
-                         }).start();;
-                    }
-                }
-            });
+//            XposedHelpers.findAndHookMethod(classDisplayPowerController, "requestPowerState",
+//                    CLASS_DISPLAY_POWER_REQUEST, boolean.class, new XC_MethodHook() {
+//                @Override
+//                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+//                    if (!mLsBgLastScreenEnabled) return;
+//
+//                    if (mKeyguardManager == null) {
+//                        mKeyguardManager = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
+//                    }
+//                    if (mKeyguardManager.isKeyguardLocked()) return;
+//
+//                    final boolean waitForNegativeProximity = (Boolean) param.args[1];
+//                    final boolean pendingWaitForNegativeProximity = 
+//                            XposedHelpers.getBooleanField(param.thisObject, "mPendingWaitForNegativeProximityLocked");
+//                    final Object pendingRequestLocked = 
+//                            XposedHelpers.getObjectField(param.thisObject, "mPendingRequestLocked");
+//                    final int requestedScreenState = XposedHelpers.getIntField(param.args[0], "policy");
+//
+//                    if ((waitForNegativeProximity && !pendingWaitForNegativeProximity ||
+//                            pendingRequestLocked == null || !pendingRequestLocked.equals(param.args[0])) &&
+//                            requestedScreenState == 0) {
+//                        final Object dm = XposedHelpers.callStaticMethod(XposedHelpers.findClass(
+//                                CLASS_DISPLAY_MANAGER_GLOBAL, classLoader), "getInstance");
+//                        final int display0 = ((int[])XposedHelpers.callMethod(dm, "getDisplayIds"))[0];
+//                        Object displayInfo = XposedHelpers.callMethod(dm, "getDisplayInfo", display0);
+//                        final int naturalW = (Integer)XposedHelpers.callMethod(displayInfo, "getNaturalWidth");
+//                        final int naturalH = (Integer)XposedHelpers.callMethod(displayInfo, "getNaturalHeight");
+//
+//                        /* Limit max screenshot capture layer to 22000.
+//                        Prevents status bar and navigation bar from being captured.*/
+//                        Class<?> surfaceCtrl = XposedHelpers.findClass("android.view.SurfaceControl", classLoader);
+//                        final Bitmap bmp = (Bitmap) XposedHelpers.callStaticMethod(surfaceCtrl, "screenshot",
+//                             new Rect(), naturalW, naturalH, 0, 22000, false, Surface.ROTATION_0);
+//                        if (bmp == null) return;
+//
+//                        final Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
+//                        new Thread(new Runnable() {
+//                             @Override
+//                             public void run() {
+//                                 final WakeLock wakeLock = mPm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+//                                 wakeLock.acquire(10000);
+//                                 Bitmap tmpBmp = bmp;
+//                                 int width = bmp.getWidth();
+//                                 int height = bmp.getHeight();
+//                                 // scale image (keeping aspect ratio) if it is too large
+//                                 if (width * height > 1440000) {
+//                                     int newWidth = (width < height) ? 900 : 1600;
+//                                     float factor = newWidth / (float) width;
+//                                     int newHeight = (int) (height * factor);
+//                                     if (DEBUG_KIS) log("requestPowerState: scaled image res (WxH):"
+//                                             + newWidth + "x" + newHeight);
+//                                     tmpBmp = Bitmap.createScaledBitmap(bmp, newWidth, newHeight, true);
+//                                 }
+//        
+//                                 final ByteArrayOutputStream os = new ByteArrayOutputStream();
+//                                 tmpBmp.compress(CompressFormat.PNG, 100, os);
+//                                 try {
+//                                    os.close();
+//                                 } catch (IOException e1) { }
+//                                 bmp.recycle();
+//                                 tmpBmp.recycle();
+//                                 mKisImageStream = new ByteArrayInputStream(os.toByteArray());
+//
+//                                 if (mKisClient == null) {
+//                                     mKisClient = new Messenger(new Handler(h.getLooper()) {
+//                                         @Override
+//                                         public void handleMessage(Message msg) {
+//                                             if (DEBUG_KIS) log("mKisClient: got reply: what=" + msg.what);
+//                                             try {
+//                                                 if (msg.what == KeyguardImageService.MSG_GET_NEXT_CHUNK) {
+//                                                     byte[] data = new byte[204800];
+//                                                     if (mKisImageStream.read(data) != -1) {
+//                                                         Bundle bundle = new Bundle();
+//                                                         bundle.putByteArray("data", data);
+//                                                         Message dataMsg = Message.obtain(null, KeyguardImageService.MSG_WRITE_OUTPUT);
+//                                                         dataMsg.setData(bundle);
+//                                                         dataMsg.replyTo = mKisClient;
+//                                                         mKisService.send(dataMsg);
+//                                                         if (DEBUG_KIS) log("mKisClient: MSG_WRITE_OUTPUT sent");
+//                                                     } else {
+//                                                         msg = Message.obtain(null, KeyguardImageService.MSG_FINISH_OUTPUT);
+//                                                         mKisService.send(msg);
+//                                                         mContext.unbindService(mKisServiceConn);
+//                                                         if (wakeLock != null && wakeLock.isHeld()) {
+//                                                             wakeLock.release();
+//                                                         }
+//                                                         mKisService = null;
+//                                                         mKisServiceConn = null;
+//                                                         if (DEBUG_KIS) log("mKisClient: MSG_FINISH_OUTPUT sent");
+//                                                     }
+//                                                 } else if (msg.what == KeyguardImageService.MSG_ERROR) {
+//                                                     mContext.unbindService(mKisServiceConn);
+//                                                     if (wakeLock != null && wakeLock.isHeld()) {
+//                                                         wakeLock.release();
+//                                                     }
+//                                                     mKisService = null;
+//                                                     mKisServiceConn = null;
+//                                                     log("mKisClient: MSG_ERROR received");
+//                                                 }
+//                                             } catch (Throwable t) {
+//                                                 XposedBridge.log(t);
+//                                             }
+//                                         }
+//                                     });
+//                                 }
+//
+//                                 mKisServiceConn = new ServiceConnection() {
+//                                     @Override
+//                                     public void onServiceConnected(ComponentName cn, IBinder binder) {
+//                                         try {
+//                                             mKisService = new Messenger(binder);
+//                                             Message msg = Message.obtain(null, KeyguardImageService.MSG_BEGIN_OUTPUT);
+//                                             msg.replyTo = mKisClient;
+//                                             mKisService.send(msg);
+//                                             if (DEBUG_KIS) log("mKisServiceConn: onServiceConnected");
+//                                         } catch (Throwable t) {
+//                                             XposedBridge.log(t);;
+//                                         }
+//                                     }
+//                                     @Override
+//                                     public void onServiceDisconnected(ComponentName cn) {
+//                                         if (wakeLock != null && wakeLock.isHeld()) {
+//                                             wakeLock.release();
+//                                         }
+//                                         mKisService = null;
+//                                         mKisServiceConn = null;
+//                                         if (DEBUG_KIS) log("mKisServiceConn: onServiceDisconnected");
+//                                     } 
+//                                 };
+//                                 ComponentName cn = new ComponentName(GravityBox.PACKAGE_NAME, KeyguardImageService.class.getName());
+//                                 Intent intent = new Intent();
+//                                 intent.setComponent(cn);
+//                                 mContext.bindService(intent, mKisServiceConn, Context.BIND_AUTO_CREATE);
+//                             }
+//                         }).start();;
+//                    }
+//                }
+//            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
