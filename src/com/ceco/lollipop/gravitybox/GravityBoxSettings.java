@@ -236,7 +236,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR = "pref_lockscreen_show_pattern_error";
     public static final String PREF_KEY_LOCKSCREEN_MENU_KEY = "pref_lockscreen_menu_key2";
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
-    public static final String PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK = "pref_lockscreen_statusbar_clock";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER2_TEXT = "pref_lockscreen_carrier2_text";
     public static final String PREF_KEY_LOCKSCREEN_DISABLE_ECB = "pref_lockscreen_disable_ecb";
@@ -907,7 +906,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 //            PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY,
 //            PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY,
             PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
-            PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK,
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
             PREF_KEY_LOCKSCREEN_CARRIER2_TEXT,
             PREF_KEY_LOCKSCREEN_DISABLE_ECB,
@@ -1222,7 +1220,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceCategory mPrefCatNavbarDimen;
         private CheckBoxPreference mPrefNavbarEnable;
         private CheckBoxPreference mPrefMusicVolumeSteps;
-        private ListPreference mPrefLockscreenSbClock;
         private PreferenceCategory mPrefCatPhoneTelephony;
         private PreferenceCategory mPrefCatPhoneMessaging;
         private PreferenceCategory mPrefCatPhoneMobileData;
@@ -1508,8 +1505,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNavbarCustomKeySingletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP);
             mPrefNavbarCustomKeyLongpress = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS);
             mPrefNavbarCustomKeyDoubletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP);
-
-            mPrefLockscreenSbClock = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK);
 
             mPrefCatPhoneTelephony = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_TELEPHONY);
             mPrefCatPhoneMessaging = (PreferenceCategory) findPreference(PREF_CAT_KEY_PHONE_MESSAGING);
@@ -2078,10 +2073,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 //                    mPrefCatLockscreenBg.addPreference(mPrefLockscreenBgImage);
 //                }
 //            }
-
-            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK)) {
-                mPrefLockscreenSbClock.setSummary(mPrefLockscreenSbClock.getEntry());
-            }
 
             if (key == null || key.equals(PREF_KEY_HWKEY_DOUBLETAP_SPEED)) {
                 mPrefHwKeyDoubletapSpeed.setSummary(getString(R.string.pref_hwkey_doubletap_speed_summary)

@@ -895,12 +895,6 @@
     <string name="bpt_charging_static">Statyczny</string>
     <string name="bpt_charging_animated">Animowany</string>
 
-    <!-- Lockscreen statusbar clock visibility -->
-    <string name="pref_lockscreen_sb_clock_title">Widoczność zegara paska statusu</string>
-    <string name="lockscreen_sb_clock_hide_on_widget">Ukryj przy znanych widżetach zegarków</string>
-    <string name="lockscreen_sb_clock_always_hide">Zawsze ukrywaj</string>
-    <string name="lockscreen_sb_clock_always_show">Zawsze pokazuj</string>
-
     <!-- QuickApp Tile #2 -->
     <string name="pref_cat_quickapp_tile_2_title">Ustawienia kafelka Aplikacji 2</string>
     <string name="qs_tile_quickapp_2">Szybkie uruch. Aplikacji 2</string>
@@ -1116,9 +1110,6 @@
     <string name="shortcuts_icon_picker_tv">TV</string>
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">Odblokowanie</string>
-
-    <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_statusbar_title">Pasek stanu</string>
 
     <!-- Quick settings: Auto-switch extended -->
     <string name="qs_auto_switch_disabled">Wyłączony</string>

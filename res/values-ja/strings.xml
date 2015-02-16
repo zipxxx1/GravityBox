@@ -752,11 +752,6 @@
     <string name="bpt_charging_none">なし</string>
     <string name="bpt_charging_static">静止</string>
     <string name="bpt_charging_animated">アニメ</string>
-    <!-- Lockscreen statusbar clock visibility -->
-    <string name="pref_lockscreen_sb_clock_title">ステータスバーの時計表示</string>
-    <string name="lockscreen_sb_clock_hide_on_widget">時計ウィジェットがあれば非表示</string>
-    <string name="lockscreen_sb_clock_always_hide">非表示</string>
-    <string name="lockscreen_sb_clock_always_show">表示</string>
     <!-- QuickApp Tile #2 -->
     <string name="pref_cat_quickapp_tile_2_title">クイックアプリタイル2の設定</string>
     <string name="qs_tile_quickapp_2">クイックアプリ2</string>
@@ -941,8 +936,6 @@
     <string name="shortcuts_icon_picker_tv">TV</string>
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">ロック解除</string>
-    <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_statusbar_title">ステータスバー</string>
     <!-- Quick settings: Auto-switch extended -->
     <string name="qs_auto_switch_disabled">無効</string>
     <string name="qs_auto_switch_mode1">通知がないとき</string>

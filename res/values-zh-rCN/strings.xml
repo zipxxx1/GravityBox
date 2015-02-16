@@ -921,12 +921,6 @@
     <string name="bpt_charging_static">静止</string>
     <string name="bpt_charging_animated">动画</string>
 
-    <!-- Lockscreen statusbar clock visibility -->
-    <string name="pref_lockscreen_sb_clock_title">状态栏时钟可见性</string>
-    <string name="lockscreen_sb_clock_hide_on_widget">隐藏已知时钟相关部件</string>
-    <string name="lockscreen_sb_clock_always_hide">总是隐藏</string>
-    <string name="lockscreen_sb_clock_always_show">总是显示</string>
-    
     <!-- QuickApp Tile #2 -->
     <string name="pref_cat_quickapp_tile_2_title">快速应用磁贴2设置</string>
     <string name="qs_tile_quickapp_2">快速应用磁贴 2</string>
@@ -1145,9 +1139,6 @@
     <string name="shortcuts_icon_picker_tv">电视</string>
     <string name="shortcuts_icon_picker_twitter">Twitter</string>
     <string name="shortcuts_icon_picker_unlock">解锁</string>
-
-    <!-- Lockscreen tweaks: option categories -->
-    <string name="pref_cat_lockscreen_statusbar_title">状态栏</string>
 
     <!-- Quick settings: Auto-switch extended -->
     <string name="qs_auto_switch_disabled">禁用</string>

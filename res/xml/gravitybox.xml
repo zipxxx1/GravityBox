@@ -79,19 +79,6 @@
         </PreferenceCategory>
         -->
 
-        <PreferenceCategory 
-            android:key="pref_cat_lockscreen_statusbar"
-            android:title="@string/pref_cat_lockscreen_statusbar_title">
-
-            <ListPreference
-                android:key="pref_lockscreen_statusbar_clock"
-                android:title="@string/pref_lockscreen_sb_clock_title"
-                android:entries="@array/lockscreen_sb_clock_entries"
-                android:entryValues="@array/lockscreen_sb_clock_values"
-                android:defaultValue="0" />
-
-        </PreferenceCategory>
-
         <PreferenceCategory
             android:key="pref_cat_lockscreen_other"
             android:title="@string/pref_cat_lockscreen_other_title">

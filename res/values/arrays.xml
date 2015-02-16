@@ -808,18 +808,6 @@
         <item>2</item>
     </string-array>
 
-    <string-array name="lockscreen_sb_clock_entries" translatable="false">
-        <item>@string/lockscreen_sb_clock_hide_on_widget</item>
-        <item>@string/lockscreen_sb_clock_always_hide</item>
-        <item>@string/lockscreen_sb_clock_always_show</item>
-    </string-array>
-
-    <string-array name="lockscreen_sb_clock_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
     <string-array name="pref_translucent_decor_entries" translatable="false">
         <item>@string/pref_translucent_decor_default</item>
         <item>@string/pref_translucent_decor_enabled</item>

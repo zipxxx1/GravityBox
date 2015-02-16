@@ -15,15 +15,9 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
 
-import android.appwidget.AppWidgetHostView;
-import android.appwidget.AppWidgetProviderInfo;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -56,7 +50,6 @@ public class ModLockscreen {
     private static final String CLASS_KG_ABS_KEY_INPUT_VIEW = CLASS_PATH + ".KeyguardAbsKeyInputView";
     private static final String CLASS_KGVIEW_MEDIATOR = "com.android.systemui.keyguard.KeyguardViewMediator";
     private static final String CLASS_KG_UPDATE_MONITOR = CLASS_PATH + ".KeyguardUpdateMonitor";
-    private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + (Utils.isMtkDevice() ? 
             ".MediatekCarrierText" : ".CarrierText");
     private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
@@ -66,19 +59,6 @@ public class ModLockscreen {
 
     private static final boolean DEBUG = false;
     //private static final boolean DEBUG_KIS = false;
-
-    private static final int STATUSBAR_DISABLE_CLOCK = 0x00800000;
-
-    private static final List<String> CLOCK_WIDGETS = new ArrayList<String>(Arrays.asList(
-            "com.android.deskclock",
-            "com.google.android.deskclock",
-            "com.dvtonder.chronus",
-            "net.nurik.roman.dashclock",
-            "com.roymam.android.notificationswidget",
-            "org.zooper.zwfree",
-            "com.devexpert.weather",
-            "ch.bitspin.timely"
-    ));
 
     private static XSharedPreferences mPrefs;
     private static XSharedPreferences mQhPrefs;
@@ -129,7 +109,6 @@ public class ModLockscreen {
             final Class<?> kgAbsKeyInputViewClass = XposedHelpers.findClass(CLASS_KG_ABS_KEY_INPUT_VIEW, classLoader);
             final Class<?> kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, classLoader);
             mKgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, classLoader);
-            final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, classLoader);
             //final Class<?> kgViewManagerHostClass = XposedHelpers.findClass(CLASS_KGVIEW_MANAGER_HOST, classLoader);
             final Class<?> carrierTextClass = XposedHelpers.findClass(CLASS_CARRIER_TEXT, classLoader);
             final Class<?> lockPatternViewClass = XposedHelpers.findClass(CLASS_LOCK_PATTERN_VIEW, classLoader);
@@ -302,33 +281,6 @@ public class ModLockscreen {
                                     int arg1, int arg2, int arg3) {
                             }
                         });
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgWidgetPagerClass, "onPageSwitched",
-                    View.class, int.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    final View v = (View) param.thisObject;
-                    final int visibilityMode = Integer.valueOf(mPrefs.getString(
-                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_STATUSBAR_CLOCK, "0"));
-
-                    if (visibilityMode != 0) {
-                        v.setSystemUiVisibility(visibilityMode == 1 ?
-                                v.getSystemUiVisibility() | STATUSBAR_DISABLE_CLOCK :
-                                    v.getSystemUiVisibility() & ~STATUSBAR_DISABLE_CLOCK);
-                    } else if (param.args[0] instanceof ViewGroup) {
-                        final ViewGroup vg = (ViewGroup) param.args[0];
-                        if (vg.getChildAt(0) instanceof AppWidgetHostView) {
-                            final AppWidgetProviderInfo info = 
-                                    ((AppWidgetHostView) vg.getChildAt(0)).getAppWidgetInfo();
-                            final String widgetPackage = info.provider.getPackageName();
-                            if (DEBUG) log("onPageSwitched: widget package = " + widgetPackage);
-                            final boolean disableClock = CLOCK_WIDGETS.contains(widgetPackage);
-                            v.setSystemUiVisibility(v.getSystemUiVisibility() |
-                                    (disableClock ? STATUSBAR_DISABLE_CLOCK : 0));
-                        }
                     }
                 }
             });

@@ -895,12 +895,6 @@
     <string name="bpt_charging_static">סטאטי</string>
     <string name="bpt_charging_animated">מונפש</string>
 
-    <!-- Lockscreen statusbar clock visibility -->
-    <string name="pref_lockscreen_sb_clock_title">תצוגת שעון בשורת המצב</string>
-    <string name="lockscreen_sb_clock_hide_on_widget">הסתר בכל ווידג\'ט הקשור בשעון</string>
-    <string name="lockscreen_sb_clock_always_hide">הסתר תמיד</string>
-    <string name="lockscreen_sb_clock_always_show">הצג תמיד</string>
-
     <!-- QuickApp Tile #2 -->
     <string name="pref_cat_quickapp_tile_2_title">הגדרות אריח QuickApp 2</string>
     <string name="qs_tile_quickapp_2">אריח Quick App 2</string>
