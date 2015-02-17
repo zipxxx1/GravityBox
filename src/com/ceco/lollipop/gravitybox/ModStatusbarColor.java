@@ -119,17 +119,6 @@ public class ModStatusbarColor {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(phoneStatusbarClass, "getNavigationBarLayoutParams", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    WindowManager.LayoutParams lp = (WindowManager.LayoutParams) param.getResult();
-                    if (lp != null) {
-                        lp.format = PixelFormat.TRANSLUCENT;
-                        param.setResult(lp);
-                    }
-                }
-            });
-
             XposedHelpers.findAndHookMethod(notifPanelViewClass, "onFinishInflate", new XC_MethodHook() {
 
                 @Override
