@@ -1730,10 +1730,6 @@
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">切换自动亮度</string>
 
-    <!-- Signal cluster: use lollipop icons -->
-    <string name="pref_signal_cluster_lollipop_icons_title">使用Lollipop信号图标</string>
-    <string name="pref_signal_cluster_lollipop_icons_summary">需要重新启动</string>
-
     <!-- Messaging -->
     <string name="pref_cat_phone_messaging_title">信息</string>
 	

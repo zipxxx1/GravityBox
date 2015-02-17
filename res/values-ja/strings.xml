@@ -1414,9 +1414,6 @@
     <string name="shortcut_clear_notifications">通知の消去</string>
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">明るさ自動調整トグル</string>
-    <!-- Signal cluster: use lollipop icons -->
-    <string name="pref_signal_cluster_lollipop_icons_title">Lollipopアイコンを使う</string>
-    <string name="pref_signal_cluster_lollipop_icons_summary">有効/無効にした後は再起動してください。</string>
     <!-- Messaging -->
     <string name="pref_cat_phone_messaging_title">メッセージ</string>
     <!-- Compatibility warning -->

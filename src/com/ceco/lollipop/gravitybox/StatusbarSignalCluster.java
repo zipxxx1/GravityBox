@@ -66,29 +66,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected static int[][] DATA_HP;
     protected static int[] QS_DATA_HP;
 
-    // QS signal icons to statusbar signal icons map
-    protected static Map<String, Integer> sQsScMap;
-    static {
-        HashMap<String, Integer> map = new HashMap<String, Integer>();
-        map.put("ic_qs_signal_1", R.drawable.stat_sys_signal_1_lollipop);
-        map.put("ic_qs_signal_2", R.drawable.stat_sys_signal_2_lollipop);
-        map.put("ic_qs_signal_3", R.drawable.stat_sys_signal_3_lollipop);
-        map.put("ic_qs_signal_4", R.drawable.stat_sys_signal_4_lollipop);
-        map.put("ic_qs_signal_full_1", R.drawable.stat_sys_signal_1_fully_lollipop);
-        map.put("ic_qs_signal_full_2", R.drawable.stat_sys_signal_2_fully_lollipop);
-        map.put("ic_qs_signal_full_3", R.drawable.stat_sys_signal_3_fully_lollipop);
-        map.put("ic_qs_signal_full_4", R.drawable.stat_sys_signal_4_fully_lollipop);
-        map.put("ic_qs_wifi_1", R.drawable.stat_sys_wifi_signal_1_lollipop);
-        map.put("ic_qs_wifi_2", R.drawable.stat_sys_wifi_signal_2_lollipop);
-        map.put("ic_qs_wifi_3", R.drawable.stat_sys_wifi_signal_3_lollipop);
-        map.put("ic_qs_wifi_4", R.drawable.stat_sys_wifi_signal_4_lollipop);
-        map.put("ic_qs_wifi_full_1", R.drawable.stat_sys_wifi_signal_1_fully_lollipop);
-        map.put("ic_qs_wifi_full_2", R.drawable.stat_sys_wifi_signal_2_fully_lollipop);
-        map.put("ic_qs_wifi_full_3", R.drawable.stat_sys_wifi_signal_3_fully_lollipop);
-        map.put("ic_qs_wifi_full_4", R.drawable.stat_sys_wifi_signal_4_fully_lollipop);
-        sQsScMap = Collections.unmodifiableMap(map);
-    }
-
     protected LinearLayout mView;
     protected StatusBarIconManager mIconManager;
     protected Resources mResources;
@@ -107,7 +84,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected Object mNetworkControllerCallback;
     protected SignalActivity mWifiActivity;
     protected SignalActivity mMobileActivity;
-    protected boolean mUseLollipopIcons;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -193,39 +169,31 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             if (mConnectionStateEnabled) {
                 ImageView signalIcon = signalType == SignalType.WIFI ?
                         (ImageView) mFldWifiView.get(mView) : (ImageView) mFldMobileView.get(mView);
-                if (mUseLollipopIcons) {
-                    if (signalIcon != null && resName != null && sQsScMap.containsKey(resName)) {
-                        Drawable d = mGbResources.getDrawable(sQsScMap.get(resName));
+                if (!(mIconManager != null && mIconManager.isColoringEnabled() &&
+                    mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED)) {
+                    if (signalIcon != null && signalIcon.getDrawable() != null) {
+                        Drawable d = signalIcon.getDrawable().mutate();
+                        if (!fullyConnected) {
+                            d.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
+                        } else {
+                            d.clearColorFilter();
+                        }
                         signalIcon.setImageDrawable(d);
-                        apply();
+                    }
+                    if (signalType == SignalType.MOBILE) {
+                        ImageView dataTypeIcon = (ImageView) mFldMobileTypeView.get(mView);
+                        if (dataTypeIcon != null && dataTypeIcon.getDrawable() != null) {
+                            Drawable dti = dataTypeIcon.getDrawable().mutate();
+                            if (!fullyConnected) {
+                                dti.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
+                            } else {
+                                dti.clearColorFilter();
+                            }
+                            dataTypeIcon.setImageDrawable(dti);
+                        }
                     }
                 } else {
-                    if (!(mIconManager != null && mIconManager.isColoringEnabled() &&
-                        mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED)) {
-                        if (signalIcon != null && signalIcon.getDrawable() != null) {
-                            Drawable d = signalIcon.getDrawable().mutate();
-                            if (!fullyConnected) {
-                                d.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
-                            } else {
-                                d.clearColorFilter();
-                            }
-                            signalIcon.setImageDrawable(d);
-                        }
-                        if (signalType == SignalType.MOBILE) {
-                            ImageView dataTypeIcon = (ImageView) mFldMobileTypeView.get(mView);
-                            if (dataTypeIcon != null && dataTypeIcon.getDrawable() != null) {
-                                Drawable dti = dataTypeIcon.getDrawable().mutate();
-                                if (!fullyConnected) {
-                                    dti.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
-                                } else {
-                                    dti.clearColorFilter();
-                                }
-                                dataTypeIcon.setImageDrawable(dti);
-                            }
-                        }
-                    } else {
-                        apply();
-                    }
+                    apply();
                 }
             }
 
@@ -284,100 +252,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             if (!lteStyle.equals("DEFAULT")) {
                 resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "bool", "config_show4GForLTE",
                         lteStyle.equals("4G"));
-            }
-        }
-
-        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS, false)) {
-            Map<String, Integer> ic_map = new HashMap<String, Integer>();
-            // AOSP WiFi
-            ic_map.put("stat_sys_wifi_signal_0", R.drawable.stat_sys_wifi_signal_0_lollipop);
-            ic_map.put("stat_sys_wifi_signal_1_fully", R.drawable.stat_sys_wifi_signal_1_fully_lollipop);
-            ic_map.put("stat_sys_wifi_signal_2_fully", R.drawable.stat_sys_wifi_signal_2_fully_lollipop);
-            ic_map.put("stat_sys_wifi_signal_3_fully", R.drawable.stat_sys_wifi_signal_3_fully_lollipop);
-            ic_map.put("stat_sys_wifi_signal_4_fully", R.drawable.stat_sys_wifi_signal_4_fully_lollipop);
-            ic_map.put("stat_sys_wifi_signal_null", R.drawable.stat_sys_wifi_signal_null_lollipop);
-
-            // AOSP Mobile
-            ic_map.put("stat_sys_signal_0", R.drawable.stat_sys_signal_0_lollipop);
-            ic_map.put("stat_sys_signal_0_fully", R.drawable.stat_sys_signal_0_lollipop);
-            ic_map.put("stat_sys_signal_1_fully", R.drawable.stat_sys_signal_1_fully_lollipop);
-            ic_map.put("stat_sys_signal_2_fully", R.drawable.stat_sys_signal_2_fully_lollipop);
-            ic_map.put("stat_sys_signal_3_fully", R.drawable.stat_sys_signal_3_fully_lollipop);
-            ic_map.put("stat_sys_signal_4_fully", R.drawable.stat_sys_signal_4_fully_lollipop);
-            ic_map.put("stat_sys_signal_null", R.drawable.stat_sys_signal_null_lollipop);
-
-            // Gemini Mobile
-            ic_map.put("stat_sys_gemini_radio_off", R.drawable.stat_sys_signal_off_lollipop);
-            ic_map.put("stat_sys_gemini_signal_0", R.drawable.stat_sys_signal_0_lollipop);
-            ic_map.put("stat_sys_gemini_signal_1_blue", R.drawable.stat_sys_signal_1_fully_blue_lollipop);
-            ic_map.put("stat_sys_gemini_signal_1_purple", R.drawable.stat_sys_signal_1_fully_purple_lollipop);
-            ic_map.put("stat_sys_gemini_signal_1_orange", R.drawable.stat_sys_signal_1_fully_orange_lollipop);
-            ic_map.put("stat_sys_gemini_signal_1_green", R.drawable.stat_sys_signal_1_fully_green_lollipop);
-            ic_map.put("stat_sys_gemini_signal_2_blue", R.drawable.stat_sys_signal_2_fully_blue_lollipop);
-            ic_map.put("stat_sys_gemini_signal_2_purple", R.drawable.stat_sys_signal_2_fully_purple_lollipop);
-            ic_map.put("stat_sys_gemini_signal_2_orange", R.drawable.stat_sys_signal_2_fully_orange_lollipop);
-            ic_map.put("stat_sys_gemini_signal_2_green", R.drawable.stat_sys_signal_2_fully_green_lollipop);
-            ic_map.put("stat_sys_gemini_signal_3_blue", R.drawable.stat_sys_signal_3_fully_blue_lollipop);
-            ic_map.put("stat_sys_gemini_signal_3_purple", R.drawable.stat_sys_signal_3_fully_purple_lollipop);
-            ic_map.put("stat_sys_gemini_signal_3_orange", R.drawable.stat_sys_signal_3_fully_orange_lollipop);
-            ic_map.put("stat_sys_gemini_signal_3_green", R.drawable.stat_sys_signal_3_fully_green_lollipop);
-            ic_map.put("stat_sys_gemini_signal_4_blue", R.drawable.stat_sys_signal_4_fully_blue_lollipop);
-            ic_map.put("stat_sys_gemini_signal_4_purple", R.drawable.stat_sys_signal_4_fully_purple_lollipop);
-            ic_map.put("stat_sys_gemini_signal_4_orange", R.drawable.stat_sys_signal_4_fully_orange_lollipop);
-            ic_map.put("stat_sys_gemini_signal_4_green", R.drawable.stat_sys_signal_4_fully_green_lollipop);
-            ic_map.put("stat_sys_gemini_signal_null", R.drawable.stat_sys_signal_null_lollipop);
-            ic_map.put("stat_sys_gemini_signal_searching", R.drawable.stat_sys_signal_searching_lollipop);
-
-            // Motorola WiFi
-            ic_map.put("zz_moto_stat_sys_wifi_signal_0", R.drawable.stat_sys_wifi_signal_0_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_0_fully_wide", R.drawable.stat_sys_wifi_signal_0_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_0_wide", R.drawable.stat_sys_wifi_signal_0_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_1", R.drawable.stat_sys_wifi_signal_1_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_1_fully_wide", R.drawable.stat_sys_wifi_signal_1_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_1_wide", R.drawable.stat_sys_wifi_signal_1_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_2", R.drawable.stat_sys_wifi_signal_2_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_2_fully_wide", R.drawable.stat_sys_wifi_signal_2_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_2_wide", R.drawable.stat_sys_wifi_signal_2_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_3", R.drawable.stat_sys_wifi_signal_3_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_3_fully_wide", R.drawable.stat_sys_wifi_signal_3_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_3_wide", R.drawable.stat_sys_wifi_signal_3_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_4", R.drawable.stat_sys_wifi_signal_4_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_4_fully_wide", R.drawable.stat_sys_wifi_signal_4_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_4_wide", R.drawable.stat_sys_wifi_signal_4_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_null", R.drawable.stat_sys_wifi_signal_null_lollipop);
-            ic_map.put("zz_moto_stat_sys_wifi_signal_null_wide", R.drawable.stat_sys_wifi_signal_null_lollipop);
-
-            // Motorola Mobile
-            ic_map.put("zz_moto_stat_sys_signal_0", R.drawable.stat_sys_signal_0_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_0_fully", R.drawable.stat_sys_signal_0_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_0_fully_wide", R.drawable.stat_sys_signal_0_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_0_wide", R.drawable.stat_sys_signal_0_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_1", R.drawable.stat_sys_signal_1_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_1_fully", R.drawable.stat_sys_signal_1_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_1_fully_wide", R.drawable.stat_sys_signal_1_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_1_wide", R.drawable.stat_sys_signal_1_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_2", R.drawable.stat_sys_signal_2_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_2_fully", R.drawable.stat_sys_signal_2_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_2_fully_wide", R.drawable.stat_sys_signal_2_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_2_wide", R.drawable.stat_sys_signal_2_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_3", R.drawable.stat_sys_signal_3_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_3_fully", R.drawable.stat_sys_signal_3_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_3_fully_wide", R.drawable.stat_sys_signal_3_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_3_wide", R.drawable.stat_sys_signal_3_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_4", R.drawable.stat_sys_signal_4_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_4_fully", R.drawable.stat_sys_signal_4_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_4_fully_wide", R.drawable.stat_sys_signal_4_fully_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_4_wide", R.drawable.stat_sys_signal_4_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_null", R.drawable.stat_sys_signal_null_lollipop);
-            ic_map.put("zz_moto_stat_sys_signal_null_wide", R.drawable.stat_sys_signal_null_lollipop);
-
-            for (String key : ic_map.keySet()) {
-                try {
-                    resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "drawable", key,
-                            modRes.fwd(ic_map.get(key)));
-                } catch (Throwable t) {
-                    if (DEBUG) log("Drawable not found: " + key);
-                }
             }
         }
     }
@@ -544,8 +418,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE, false);
         mDataActivityEnabled = sPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
-        mUseLollipopIcons = sPrefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS, false);
     }
 
     protected void update() {
@@ -589,17 +461,9 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
                 ImageView wifiIcon = (ImageView) mFldWifiView.get(mView);
                 if (wifiIcon != null) {
-                    Drawable d = null;
-                    if (mUseLollipopIcons) {
-                        if (wifiIcon.getDrawable() != null) {
-                            d = wifiIcon.getDrawable().getConstantState().newDrawable().mutate();
-                            d = mIconManager.applyColorFilter(d);
-                        }
-                    } else {
-                        int resId = XposedHelpers.getIntField(mView, "mWifiStrengthId");
-                        d = mIconManager.getWifiIcon(resId, 
-                                mWifiActivity != null ? mWifiActivity.fullyConnected : true);
-                    }
+                    int resId = XposedHelpers.getIntField(mView, "mWifiStrengthId");
+                    Drawable d = mIconManager.getWifiIcon(resId, 
+                            mWifiActivity != null ? mWifiActivity.fullyConnected : true);
                     if (d != null) wifiIcon.setImageDrawable(d);
                 }
             }
@@ -614,20 +478,12 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
                 ImageView mobile = (ImageView) mFldMobileView.get(mView);
                 if (mobile != null) {
-                    Drawable d = null;
-                    if (mUseLollipopIcons) {
-                        if (mobile.getDrawable() != null) {
-                            d = mobile.getDrawable().getConstantState().newDrawable().mutate();
-                            d = mIconManager.applyColorFilter(d);
-                        }
-                    } else {
-                        int resId = XposedHelpers.getIntField(mView, "mMobileStrengthId");
-                        d = mIconManager.getMobileIcon(resId,
-                                mMobileActivity != null ? mMobileActivity.fullyConnected : true);
-                    }
+                    int resId = XposedHelpers.getIntField(mView, "mMobileStrengthId");
+                    Drawable d = mIconManager.getMobileIcon(resId,
+                            mMobileActivity != null ? mMobileActivity.fullyConnected : true);
                     if (d != null) mobile.setImageDrawable(d);
                 }
-                if (mIconManager.isMobileIconChangeAllowed() || mUseLollipopIcons) {
+                if (mIconManager.isMobileIconChangeAllowed()) {
                     ImageView mobileType = (ImageView) mFldMobileTypeView.get(mView);
                     if (mobileType != null) {
                         try {

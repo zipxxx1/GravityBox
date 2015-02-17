@@ -1728,10 +1728,6 @@
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Luminosità automatica on/off</string>
 
-    <!-- Signal cluster: use lollipop icons -->
-    <string name="pref_signal_cluster_lollipop_icons_title">Usa icone Lollipop</string>
-    <string name="pref_signal_cluster_lollipop_icons_summary">Richiede riavvio</string>
-
     <!-- Messaging -->
     <string name="pref_cat_phone_messaging_title">Messaggi</string>
 

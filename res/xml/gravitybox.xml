@@ -422,12 +422,6 @@
             android:title="@string/pref_cat_signal_cluster_title">
 
             <CheckBoxPreference 
-                android:key="pref_signal_cluster_lollipop_icons"
-                android:title="@string/pref_signal_cluster_lollipop_icons_title"
-                android:summary="@string/pref_signal_cluster_lollipop_icons_summary"
-                android:defaultValue="false" />
-
-            <CheckBoxPreference 
                 android:key="pref_signal_cluster_connection_state"
                 android:title="@string/pref_signal_cluster_connection_state_title"
                 android:summary="@string/pref_signal_cluster_connection_state_summary"

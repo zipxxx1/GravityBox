@@ -1729,10 +1729,6 @@
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Включение автояркости</string>
 
-    <!-- Signal cluster: use lollipop icons -->
-    <string name="pref_signal_cluster_lollipop_icons_title">Использовать значки Lollipop</string>
-    <string name="pref_signal_cluster_lollipop_icons_summary">Необходима перезагрузка</string>
-
     <!-- Messaging -->
     <string name="pref_cat_phone_messaging_title">Сообщения</string>
 
