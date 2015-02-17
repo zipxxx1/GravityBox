@@ -674,7 +674,7 @@
     <string name="pref_status_icon_style_title">Styl ikon statusu</string>
     <string name="pref_status_icon_style_summary">Dotyczy ikon statusu takich jak cisza, wibracje, alarm, itp.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">KitKat</string>
+    <string name="icon_style_kk">Lollipop</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Akcja podwójnego kliknięcia BACK</string>

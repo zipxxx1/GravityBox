@@ -694,7 +694,7 @@
     <string name="pref_status_icon_style_title">状态栏图标风格</string>
     <string name="pref_status_icon_style_summary">适用于无声、振动、闹钟等状态图标</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">KitKat</string>
+    <string name="icon_style_kk">Lollipop</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">双击返回键行为</string>

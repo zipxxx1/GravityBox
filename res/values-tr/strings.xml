@@ -649,7 +649,7 @@
     <string name="pref_status_icon_style_title">Durum çubuğu ikonları stili</string>
     <string name="pref_status_icon_style_summary">Sessiz, titreşim, alarm gibi durum simgelerine uygulanır.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">KitKat</string>
+    <string name="icon_style_kk">Lollipop</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Geri tuşu iki kez basma hareketi</string>

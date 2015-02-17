@@ -693,7 +693,7 @@
     <string name="pref_status_icon_style_title">Estilo de icono de estado</string>
     <string name="pref_status_icon_style_summary">Se aplica a los iconos de estado tales como silencio, vibración, alarma, etc.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">KitKat</string>
+    <string name="icon_style_kk">Lollipop</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Acción de doble pulsación sobre botón de retroceso</string>

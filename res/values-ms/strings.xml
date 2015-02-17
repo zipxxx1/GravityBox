@@ -681,7 +681,7 @@
     <string name="pref_status_icon_style_title">Jenis ikon status</string>
     <string name="pref_status_icon_style_summary">Untuk ikon senyap,getaran,penggera,dsb.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">KitKat</string>
+    <string name="icon_style_kk">Lollipop</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Aksi tekan dua kali untuk butang kembali</string>

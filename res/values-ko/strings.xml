@@ -535,7 +535,7 @@
     <string name="pref_status_icon_style_title">상단바 아이콘 스타일</string>
     <string name="pref_status_icon_style_summary">상단바의 주요 아이콘들의 스타일을 바꿉니다.</string>
     <string name="icon_style_jb">젤리빈 (JellyBean)</string>
-    <string name="icon_style_kk">킷캣 (KitKat)</string>
+    <string name="icon_style_kk">킷캣 (Lollipop)</string>
 
     <string name="hwkey_back_doubletap_dialog_title">뒤로 가기 키 두 번 터치 액션</string>
 

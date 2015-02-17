@@ -686,7 +686,7 @@
     <string name="pref_status_icon_style_title">Stil der Statussymbole</string>
     <string name="pref_status_icon_style_summary">Wird angewendet auf Statussymbole wie Leise, Vibration, Wecker, etc.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">KitKat</string>
+    <string name="icon_style_kk">Lollipop</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Zurück-Taste doppeltes Drücken Aktion</string>

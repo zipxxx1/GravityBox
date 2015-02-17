@@ -46,7 +46,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     public static final int SI_MODE_DISABLED = 2;
 
     public static final int JELLYBEAN = 0;
-    public static final int KITKAT = 1;
+    public static final int LOLLIPOP = 1;
 
     public static final int FLAG_COLORING_ENABLED_CHANGED = 1 << 0;
     public static final int FLAG_SIGNAL_ICON_MODE_CHANGED = 1 << 1;
@@ -197,7 +197,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 R.integer.signal_cluster_data_activity_icon_color);
         mColorInfo.dataActivityColor = new int[2];
         mColorInfo.signalIconMode = SI_MODE_STOCK;
-        mColorInfo.iconStyle = KITKAT;
+        mColorInfo.iconStyle = LOLLIPOP;
         mColorInfo.alphaSignalCluster = 1;
         mColorInfo.alphaTextAndBattery = 1;
     }
@@ -331,7 +331,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     }
 
     public void setIconStyle(int style) {
-        if((style == JELLYBEAN || style == KITKAT) &&
+        if((style == JELLYBEAN || style == LOLLIPOP) &&
                 mColorInfo.iconStyle != style) {
             mColorInfo.iconStyle = style;
             clearCache();
