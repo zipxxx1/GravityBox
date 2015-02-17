@@ -109,6 +109,9 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 R.drawable.stat_sys_headset_with_mic_jb, null });
         basicIconMap.put("stat_sys_headset_without_mic", new Integer[] {
                 R.drawable.stat_sys_headset_without_mic_jb, null });
+        basicIconMap.put("stat_sys_zen_none", new Integer[] { null, null });
+        basicIconMap.put("stat_sys_zen_important", new Integer[] { null, null });
+        basicIconMap.put("stat_sys_location", new Integer[] { null, null });
         mBasicIconIds = Collections.unmodifiableMap(basicIconMap);
 
         mIconCache = new HashMap<String, SoftReference<Drawable>>();
