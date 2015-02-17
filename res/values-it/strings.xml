@@ -841,8 +841,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Indicatori segnale</string>
-    <string name="pref_signal_cluster_connection_state_title">Mostra stato connessione</string>
-    <string name="pref_signal_cluster_connection_state_summary">Indica se parzialmente o totalmente connesso su rete mobile o WiFi (richiede riavvio)</string>
     <string name="pref_signal_cluster_data_activity_title">Mostra attività dati</string>
     <string name="pref_signal_cluster_data_activity_summary">Indica attività dati su rete mobile o WiFi (richiede riavvio)</string>
 

@@ -48,7 +48,6 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     @Override
     protected void initPreferences() {
         super.initPreferences();
-        mConnectionStateEnabled = false;
         mSignalIconAutohide = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_ICON_AUTOHIDE, false);
         mHideSimLabels = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS, false);
     }
@@ -216,7 +215,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                 ImageView wifiIcon = (ImageView) XposedHelpers.getObjectField(mView, "mWifiStrengthView");
                 if (wifiIcon != null) {
                     int resId = XposedHelpers.getIntField(mView, "mWifiStrengthIconId");
-                    Drawable d = mIconManager.getWifiIcon(resId, true);
+                    Drawable d = mIconManager.getWifiIcon(resId);
                     if (d != null) wifiIcon.setImageDrawable(d);
                 }
             }
@@ -253,7 +252,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
             try {
                 if (methodName.equals("onWifiSignalChanged")) {
                     if (mWifiActivity != null) {
-                        mWifiActivity.update(null, (Boolean)args[0], true, 
+                        mWifiActivity.update((Boolean)args[0], 
                                 (Boolean)args[3], (Boolean)args[4]);
                     }
                 } else if (methodName.equals("onMobileDataSignalChanged")) {
@@ -264,7 +263,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                         if (DEBUG) log("NetworkControllerCallbackMsim: onMobileDataSignalChanged " + 
                                 slot + "; enabled:" + args[0] + "; in:" + in + "; out:" + out);
                         if (mMobileActivity[slot] != null) {
-                            mMobileActivity[slot].update(null, (Boolean)args[0], true, in, out);
+                            mMobileActivity[slot].update((Boolean)args[0], in, out);
                         }
                     }
                 }

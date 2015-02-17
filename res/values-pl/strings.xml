@@ -816,8 +816,6 @@
     
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Ustawienia ikon sygnału</string>
-    <string name="pref_signal_cluster_connection_state_title">Stan połączenia</string>
-    <string name="pref_signal_cluster_connection_state_summary">Pokazuje stan częściowego/całkowitego połączenia dla ikon połączenia komórkowego i WiFi (wymagany restart)</string>
     <string name="pref_signal_cluster_data_activity_title">Wskaźniki transmisji danych</string>
     <string name="pref_signal_cluster_data_activity_summary">Pokazuje aktywność transmisji danych przy wskaźnikach połączenia komórkowego i WiFi (wymagany restart)</string>
 

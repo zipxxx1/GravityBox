@@ -828,8 +828,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Tetapan Signal cluster</string>
-    <string name="pref_signal_cluster_connection_state_title">Aktifkan keadaan sambungan</string>
-    <string name="pref_signal_cluster_connection_state_summary">Tunjuk samada sambungan separuh/penuh pada ikon paket data dan wifi (perlukan reboot)</string>
     <string name="pref_signal_cluster_data_activity_title">Aktifkan aktiviti data</string>
     <string name="pref_signal_cluster_data_activity_summary">Tunjuk aktiviti data pada ikon paket data dan wifi (perlukan reboot)</string>
 

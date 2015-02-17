@@ -816,8 +816,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">הגדרות מקבץ האייקונים של אות רשת</string>
-    <string name="pref_signal_cluster_connection_state_title">אפשר מצב חיבור</string>
-    <string name="pref_signal_cluster_connection_state_summary">מציג מצב של חיבור חלקי/מלא באייקונים של גלישה סלולרית וחיבור Wi-Fi (דורש איתחול)</string>
     <string name="pref_signal_cluster_data_activity_title">אפשר תצוגת העברת נתונים</string>
     <string name="pref_signal_cluster_data_activity_summary">מציג פעילות העברת נתונים באייקונים של גלישה סלולרית וחיבור Wi-Fi (דורש איתחול)</string>
 

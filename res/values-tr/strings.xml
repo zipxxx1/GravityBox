@@ -796,8 +796,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Sinyal kümesi ayarları</string>
-    <string name="pref_signal_cluster_connection_state_title">Bağlantı durumunu etkinleştir</string>
-    <string name="pref_signal_cluster_connection_state_summary">Indicates partially/fully connected state on mobile and WiFi icons (requires reboot)</string>
     <string name="pref_signal_cluster_data_activity_title">Veri aktivitesini aç</string>
     <string name="pref_signal_cluster_data_activity_summary">Indicates data activity on mobile and WiFi icons (requires reboot)</string>
 

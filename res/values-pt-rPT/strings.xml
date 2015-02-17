@@ -822,8 +822,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Definições do agregador de sinal</string>
-    <string name="pref_signal_cluster_connection_state_title">Ativar estado da ligação</string>
-    <string name="pref_signal_cluster_connection_state_summary">Permite exibir o estado (parcial/total) da ligação nos indicadores de dados moóvel e WiFi (necessário reiniciar)</string>
     <string name="pref_signal_cluster_data_activity_title">Ativar atividade de dados</string>
     <string name="pref_signal_cluster_data_activity_summary">Permite exibir a atividade de dados nos indicadores de dados moóvel e Wi-Fi (necessário reiniciar)</string>
 

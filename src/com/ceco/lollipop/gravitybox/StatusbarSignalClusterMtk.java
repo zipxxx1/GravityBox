@@ -49,7 +49,6 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
 
         mRoamingIndicatorsDisabled = sPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_DISABLE_ROAMING_INDICATORS, false);
-        mConnectionStateEnabled = false;
         mDataActivityEnabled = false;
         mDisableDataNetworkTypeIcons = sPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
@@ -90,7 +89,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                     int resId = (wifiStrengthId instanceof Integer) ?
                             (Integer) wifiStrengthId :
                                 (Integer) XposedHelpers.callMethod(wifiStrengthId, "getIconId");
-                    Drawable d = mIconManager.getWifiIcon(resId, true);
+                    Drawable d = mIconManager.getWifiIcon(resId);
                     if (d != null) wifiIcon.setImageDrawable(d);
                 }
                 ImageView wifiActivity = (ImageView) XposedHelpers.getObjectField(mView, "mWifiActivity");

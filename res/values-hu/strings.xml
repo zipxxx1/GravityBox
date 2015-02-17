@@ -840,8 +840,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Jelszint csoport beállítások</string>
-    <string name="pref_signal_cluster_connection_state_title">Csatlakozási állapot engedélyezése</string>
-    <string name="pref_signal_cluster_connection_state_summary">Kijelzi a részleges/teljes csatlakozási állapotot a mobil és WiFi ikonokon (újraindítás szükséges)</string>
     <string name="pref_signal_cluster_data_activity_title">Adat aktivitás engedélyezése</string>
     <string name="pref_signal_cluster_data_activity_summary">Kijelzi az adatforgalom aktivitást a mobil és WiFi ikonokon (újraindítás szükséges)</string>
 

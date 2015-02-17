@@ -829,8 +829,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Netzwerkaktivität</string>
-    <string name="pref_signal_cluster_connection_state_title">Verbindungszustand anzeigen</string>
-    <string name="pref_signal_cluster_connection_state_summary">Zeigt an ob Netzwerk teilweise/vollständig verbunden ist (erfordert Neustart)</string>
     <string name="pref_signal_cluster_data_activity_title">Datenaktivität anzeigen</string>
     <string name="pref_signal_cluster_data_activity_summary">Zeigt an wenn Daten über ein Netzwerk gesendet werden (erfordert Neustart)</string>
 

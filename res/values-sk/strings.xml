@@ -815,8 +815,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Nastavenia ikon signálu</string>
-    <string name="pref_signal_cluster_connection_state_title">Stav pripojenia</string>
-    <string name="pref_signal_cluster_connection_state_summary">Indikácia čiastočného/úplného stavu pripojenia mobilných dát a WiFi (vyžaduje reštart)</string>
     <string name="pref_signal_cluster_data_activity_title">Indikátory dátového prenosu</string>
     <string name="pref_signal_cluster_data_activity_summary">Indikácia dátového prenosu v ikonách mobilných dát a WiFi (vyžaduje reštart)</string>
 

@@ -692,8 +692,6 @@
     <string name="pref_navbar_custom_key_enable_title">カスタムキーの有効化</string>
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">電波アイコン設定</string>
-    <string name="pref_signal_cluster_connection_state_title">接続状況の表示</string>
-    <string name="pref_signal_cluster_connection_state_summary">データ通信とWi-Fiアイコンに接続状況を表示します。(要再起動)</string>
     <string name="pref_signal_cluster_data_activity_title">通信アイコンの表示</string>
     <string name="pref_signal_cluster_data_activity_summary">データ通信とWi-Fiアイコンに通信アイコンを表示します。(要再起動)</string>
     <!-- Network mode tile: CDMA support -->

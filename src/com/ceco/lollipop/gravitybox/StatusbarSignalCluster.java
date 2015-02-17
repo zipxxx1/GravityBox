@@ -20,10 +20,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
@@ -42,8 +39,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.XModuleResources;
 import android.content.res.XResources;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.telephony.TelephonyManager;
 import android.view.Gravity;
@@ -78,8 +73,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     private Field mFldAirplaneView;
     private List<String> mErrorsLogged = new ArrayList<String>();
 
-    // Connection state and data activity
-    protected boolean mConnectionStateEnabled;
+    // Data activity
     protected boolean mDataActivityEnabled;
     protected Object mNetworkControllerCallback;
     protected SignalActivity mWifiActivity;
@@ -114,7 +108,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     enum SignalType { WIFI, MOBILE };
     class SignalActivity {
         boolean enabled;
-        boolean fullyConnected = true;
         boolean activityIn;
         boolean activityOut;
         Drawable imageDataIn;
@@ -122,7 +115,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         Drawable imageDataInOut;
         ImageView activityView;
         SignalType signalType;
-        String resName;
 
         public SignalActivity(ViewGroup container, SignalType type) {
             this(container, type, Gravity.BOTTOM | Gravity.CENTER);
@@ -152,50 +144,16 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
         public void update() {
             try {
-                update(resName, enabled, fullyConnected, activityIn, activityOut);
+                update(enabled, activityIn, activityOut);
             } catch (Throwable t) {
                 logAndMute("SignalActivity.update", t);
             }
         }
 
-        public void update(String resName, boolean enabled, boolean fully, boolean in, boolean out) throws Throwable {
-            this.resName = resName; 
+        public void update(boolean enabled, boolean in, boolean out) throws Throwable {
             this.enabled = enabled;
-            fullyConnected = fully;
             activityIn = in;
             activityOut = out;
-
-            // partially/fully connected state
-            if (mConnectionStateEnabled) {
-                ImageView signalIcon = signalType == SignalType.WIFI ?
-                        (ImageView) mFldWifiView.get(mView) : (ImageView) mFldMobileView.get(mView);
-                if (!(mIconManager != null && mIconManager.isColoringEnabled() &&
-                    mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED)) {
-                    if (signalIcon != null && signalIcon.getDrawable() != null) {
-                        Drawable d = signalIcon.getDrawable().mutate();
-                        if (!fullyConnected) {
-                            d.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
-                        } else {
-                            d.clearColorFilter();
-                        }
-                        signalIcon.setImageDrawable(d);
-                    }
-                    if (signalType == SignalType.MOBILE) {
-                        ImageView dataTypeIcon = (ImageView) mFldMobileTypeView.get(mView);
-                        if (dataTypeIcon != null && dataTypeIcon.getDrawable() != null) {
-                            Drawable dti = dataTypeIcon.getDrawable().mutate();
-                            if (!fullyConnected) {
-                                dti.setColorFilter(Color.rgb(244, 145, 85), PorterDuff.Mode.SRC_ATOP);
-                            } else {
-                                dti.clearColorFilter();
-                            }
-                            dataTypeIcon.setImageDrawable(dti);
-                        }
-                    }
-                } else {
-                    apply();
-                }
-            }
 
             // in/out activity
             if (mDataActivityEnabled) {
@@ -313,21 +271,13 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     apply();
-                    if (mConnectionStateEnabled) {
-                        if (mWifiActivity != null) {
-                            mWifiActivity.update();
-                        }
-                        if (mMobileActivity != null) {
-                            mMobileActivity.update();
-                        }
-                    }
                 }
             });
         } catch (Throwable t) {
             log("Error hooking apply() method: " + t.getMessage());
         }
 
-        if (mConnectionStateEnabled || mDataActivityEnabled) {
+        if (mDataActivityEnabled) {
             try {
                 final ClassLoader classLoader = mView.getContext().getClassLoader();
                 final Class<?> networkCtrlClass = XposedHelpers.findClass(
@@ -414,8 +364,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     public void onBroadcastReceived(Context context, Intent intent) { }
 
     protected void initPreferences() { 
-        mConnectionStateEnabled = sPrefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE, false);
         mDataActivityEnabled = sPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
     }
@@ -462,8 +410,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 ImageView wifiIcon = (ImageView) mFldWifiView.get(mView);
                 if (wifiIcon != null) {
                     int resId = XposedHelpers.getIntField(mView, "mWifiStrengthId");
-                    Drawable d = mIconManager.getWifiIcon(resId, 
-                            mWifiActivity != null ? mWifiActivity.fullyConnected : true);
+                    Drawable d = mIconManager.getWifiIcon(resId);
                     if (d != null) wifiIcon.setImageDrawable(d);
                 }
             }
@@ -479,8 +426,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 ImageView mobile = (ImageView) mFldMobileView.get(mView);
                 if (mobile != null) {
                     int resId = XposedHelpers.getIntField(mView, "mMobileStrengthId");
-                    Drawable d = mIconManager.getMobileIcon(resId,
-                            mMobileActivity != null ? mMobileActivity.fullyConnected : true);
+                    Drawable d = mIconManager.getMobileIcon(resId, true);
                     if (d != null) mobile.setImageDrawable(d);
                 }
                 if (mIconManager.isMobileIconChangeAllowed()) {
@@ -546,36 +492,12 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             try {
                 if (methodName.equals("onWifiSignalChanged")) {
                     if (mWifiActivity != null) {
-                        boolean fullyConnected = true;
-                        final int wifiIconId = (Integer)args[1];
-                        String wifiIconName = null;
-                        if (wifiIconId != 0) {
-                            wifiIconName = mResources.getResourceEntryName(wifiIconId);
-                        }
-                        if (mConnectionStateEnabled && wifiIconName != null) {
-                            fullyConnected = wifiIconName.contains("full") ||
-                                    wifiIconName.equals("ic_qs_wifi_0");
-                        }
-                        mWifiActivity.update(wifiIconName, (Boolean)args[0], fullyConnected, 
+                        mWifiActivity.update((Boolean)args[0],
                                 (Boolean)args[2], (Boolean)args[3]);
                     }
                 } else if (methodName.equals("onMobileDataSignalChanged")) {
                     if (mMobileActivity != null) {
-                        boolean fullyConnected = true;
-                        final int mobileIconId = (Integer)args[1];
-                        String mobileIconName = null;
-                        if (mobileIconId != 0) {
-                            mobileIconName = mResources.getResourceEntryName(mobileIconId);
-                        }
-                        final int dataActivityIconId = (Integer)args[3];
-                        if (mConnectionStateEnabled && mobileIconName != null && dataActivityIconId != 0) {
-                            fullyConnected = mWifiActivity.enabled || mobileIconName.contains("full");
-                        }
-                        if (fullyConnected && mobileIconName != null && !mobileIconName.contains("full")) {
-                            mobileIconName = "ic_qs_signal_full_" +
-                                    mobileIconName.charAt(mobileIconName.length()-1);
-                        }
-                        mMobileActivity.update(mobileIconName, (Boolean)args[0], fullyConnected, 
+                        mMobileActivity.update((Boolean)args[0], 
                                 (Boolean)args[4], (Boolean)args[5]);
                     }
                 }

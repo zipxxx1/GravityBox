@@ -395,15 +395,12 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         if (DEBUG) log("setCachedDrawable('" + key + "') - storing to cache");
     }
 
-    public Drawable getWifiIcon(int resId, boolean fullyConnected) {
+    public Drawable getWifiIcon(int resId) {
         Drawable cd;
         String key;
 
         try {
             key = mSystemUiRes.getResourceEntryName(resId);
-            if (!fullyConnected && key.endsWith("_fully")) {
-                key = key.substring(0, key.length() - "_fully".length());
-            }
         } catch (Resources.NotFoundException nfe) {
             return null;
         }

@@ -830,8 +830,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Εικονίδιο σήματος</string>
-    <string name="pref_signal_cluster_connection_state_title">Κατάσταση σύνδεσης</string>
-    <string name="pref_signal_cluster_connection_state_summary">Εμφανίζει την μερική/πλήρης κατάσταση σύνδεσης στα εικονίδια κινητής και WiFi (απαιτείται επανεκκίνηση)</string>
     <string name="pref_signal_cluster_data_activity_title">Μεταφορά δεδομένων</string>
     <string name="pref_signal_cluster_data_activity_summary">Εμφανίζει την μεταφορά δεδομένων στα εικονίδια κινητής και WiFi (απαιτείται επανεκκίνηση)</string>
 

@@ -840,8 +840,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Ajustes de señal de red</string>
-    <string name="pref_signal_cluster_connection_state_title">Activar estado de conexión</string>
-    <string name="pref_signal_cluster_connection_state_summary">Indica el estado de conexión (parcial o completo) en los iconos de señal y WiFi (requiere reinicio)</string>
     <string name="pref_signal_cluster_data_activity_title">Activar indicadores de actividad de datos</string>
     <string name="pref_signal_cluster_data_activity_summary">Indica la actividad de datos en los iconos de señal y WiFi (requiere reinicio)</string>
  

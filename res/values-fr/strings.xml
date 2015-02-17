@@ -842,8 +842,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Paramètres regroupés des signaux</string>
-    <string name="pref_signal_cluster_connection_state_title">Activer l\'état de la connexion</string>
-    <string name="pref_signal_cluster_connection_state_summary">Indique si l\'état de la connexion est partiel ou complet sur les icônes mobile et Wifi (redémarrage nécessaire)</string>
     <string name="pref_signal_cluster_data_activity_title">Activer l\'activité de données</string>
     <string name="pref_signal_cluster_data_activity_summary">Indique l\'activité des échanges de données sur les icônes mobile et Wifi (redémarrage nécessaire)</string>
 

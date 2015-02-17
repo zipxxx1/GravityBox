@@ -817,8 +817,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Configurações do agrupamento de sinal</string>
-    <string name="pref_signal_cluster_connection_state_title">Habilitar estado de conexão</string>
-    <string name="pref_signal_cluster_connection_state_summary">Indica o estado de conexão (parcial/total) nos ícones de dados móveis e WiFi (requer reinício)</string>
     <string name="pref_signal_cluster_data_activity_title">Habilitar atividade de dados</string>
     <string name="pref_signal_cluster_data_activity_summary">Indica atividade dos dados nos ícones de dados móveis e WiFi (requer reinício)</string>
 

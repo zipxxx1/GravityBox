@@ -662,7 +662,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LAUNCHER_RESIZE_WIDGET = "pref_launcher_resize_widget";
 
     public static final String PREF_CAT_KEY_SIGNAL_CLUSTER = "pref_cat_signal_cluster";
-    public static final String PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE = "pref_signal_cluster_connection_state";
     public static final String PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY = "pref_signal_cluster_data_activity";
     public static final String PREF_KEY_SIGNAL_CLUSTER_HPLUS = "pref_signal_cluster_hplus";
     public static final String PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE = "pref_signal_cluster_lte_style";
@@ -840,7 +839,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE,
             PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
             PREF_KEY_QUICK_SETTINGS_ENABLE,
-            PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE,
             PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY,
             PREF_KEY_NAVBAR_RING_TARGETS_ENABLE,
             PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON,
@@ -1709,7 +1707,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             // Remove Moto XT preferences
             if (Utils.isMotoXtDevice()) {
-                mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_CLUSTER_CONNECTION_STATE));
                 mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS));
             }
 

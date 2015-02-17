@@ -830,8 +830,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">訊號指示符設定</string>
-    <string name="pref_signal_cluster_connection_state_title">啟用連接狀態</string>
-    <string name="pref_signal_cluster_connection_state_summary">在流動數據及 Wi-Fi 圖示上顯示部分/完全連接狀態 (需要重新啟動) </string>
     <string name="pref_signal_cluster_data_activity_title">啟用數據傳輸活動</string>
     <string name="pref_signal_cluster_data_activity_summary">在流動數據及 Wi-Fi 圖示上顯示數據傳輸活動 (需要重新啟動) </string>
 

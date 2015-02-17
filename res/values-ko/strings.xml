@@ -652,8 +652,6 @@
     <string name="pref_navbar_custom_key_enable_title">사용자 키 활성화</string>
 
     <string name="pref_cat_signal_cluster_title">신호 클러스터 설정</string>
-    <string name="pref_signal_cluster_connection_state_title">연결 상태 표시</string>
-    <string name="pref_signal_cluster_connection_state_summary">모바일 데이터와 Wi-Fi 연결 상태를 표시합니다. (재시작 필요)</string>
     <string name="pref_signal_cluster_data_activity_title">데이터 활동 표시</string>
     <string name="pref_signal_cluster_data_activity_summary">모바일 데이터와 Wi-Fi의 데이터 활동 상태를 표시합니다. (재시작 필요)</string>
 

@@ -422,12 +422,6 @@
             android:title="@string/pref_cat_signal_cluster_title">
 
             <CheckBoxPreference 
-                android:key="pref_signal_cluster_connection_state"
-                android:title="@string/pref_signal_cluster_connection_state_title"
-                android:summary="@string/pref_signal_cluster_connection_state_summary"
-                android:defaultValue="false" />
-
-            <CheckBoxPreference 
                 android:key="pref_signal_cluster_data_activity"
                 android:title="@string/pref_signal_cluster_data_activity_title"
                 android:summary="@string/pref_signal_cluster_data_activity_summary"

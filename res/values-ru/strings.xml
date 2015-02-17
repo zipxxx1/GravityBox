@@ -842,8 +842,6 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Настройки сигнала</string>
-    <string name="pref_signal_cluster_connection_state_title">Вкл состояние соединения</string>
-    <string name="pref_signal_cluster_connection_state_summary">Отображение состояния частичного/полного соединения в значках мобильного сигнала и Wi-Fi (необходима перезагрузка)</string>
     <string name="pref_signal_cluster_data_activity_title">Вкл активность данных</string>
     <string name="pref_signal_cluster_data_activity_summary">Отображение активности данных в значках мобильного сигнала и Wi-Fi (необходима перезагрузка)</string>
     
