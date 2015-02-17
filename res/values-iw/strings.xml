@@ -113,10 +113,6 @@
     <string name="dialog_color_picker">בחירת צבע</string>
     <string name="press_color_to_apply">לחץ על צבע על מנת להחיל שינוי</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">צבע הרקע של שורת מצב</string>
-    <string name="statusbar_bgcolor_summary">מאפשר קביעת צבע הרקע של שורת מצב</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">אפשרויות שורת המצב</string>
     <string name="pref_cat_statusbar_summary">כולל הגדרות שונות שניתן לבצע בשורת המצב</string>

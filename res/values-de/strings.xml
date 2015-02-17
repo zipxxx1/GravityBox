@@ -118,10 +118,6 @@
     <string name="dialog_color_picker">Farbauswahl</string>
     <string name="press_color_to_apply">Zur Bestätigung auf Farbfeld drücken</string>
 
-    <!-- Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Farbe der Statusleiste</string>
-    <string name="statusbar_bgcolor_summary">Farbe für die Statusleiste auswählen</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Statusleiste anpassen</string>
     <string name="pref_cat_statusbar_summary"></string>

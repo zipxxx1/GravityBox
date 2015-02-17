@@ -479,13 +479,6 @@
                 android:defaultValue="false" />
 
             <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                android:key="pref_statusbar_bgcolor2"
-                android:title="@string/statusbar_bgcolor_title" 
-                android:summary="@string/statusbar_bgcolor_summary"
-                android:defaultValue="@integer/COLOR_BLACK"
-                android:dependency="pref_statusbar_icon_color_enable" />
-
-            <net.margaritov.preference.colorpicker.ColorPickerPreference 
                 android:key="pref_statusbar_icon_color"
                 android:title="@string/pref_statusbar_icon_color_title" 
                 android:summary="@string/pref_statusbar_icon_color_summary"

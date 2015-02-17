@@ -128,10 +128,6 @@
     <string name="dialog_color_picker">Color Picker</string>
     <string name="press_color_to_apply">Press on Color to apply</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Statusbar background color</string>
-    <string name="statusbar_bgcolor_summary">Allows to set statusbar background color</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Statusbar tweaks</string>
     <string name="pref_cat_statusbar_summary">Contains various statusbar tweaks</string>

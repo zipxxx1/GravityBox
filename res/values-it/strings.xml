@@ -126,10 +126,6 @@
     <string name="dialog_color_picker">Scegli colore</string>
     <string name="press_color_to_apply">Tocca il colore per applicare</string>
 
-    <!-- Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Colore sfondo barra di stato</string>
-    <string name="statusbar_bgcolor_summary">Permette di impostare il colore di sfondo della barra di stato</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Barra di stato</string>
     <string name="pref_cat_statusbar_summary">Permette di personalizzare la barra di stato</string>

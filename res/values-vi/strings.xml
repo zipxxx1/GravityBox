@@ -100,10 +100,6 @@
     <string name="dialog_color_picker">Chọn màu</string>
     <string name="press_color_to_apply">Ấn trên màu để chọn</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Màu nền thanh trạng thái</string>
-    <string name="statusbar_bgcolor_summary">Cho phép đặt màu nền thanh trạng thái và trong suốt</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Tùy chỉnh thanh trạng thái</string>
     <string name="pref_cat_statusbar_summary">Tùy chỉnh các trạng thái khác nhau</string>

@@ -126,10 +126,6 @@
     <string name="dialog_color_picker">Szín választó</string>
     <string name="press_color_to_apply">Nyomjon a színre a beállításhoz</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Állapotsáv háttérszín</string>
-    <string name="statusbar_bgcolor_summary">Lehetővé teszi az Állapotsáv háttérszínének a beállítását</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Állapotsáv módosítások</string>
     <string name="pref_cat_statusbar_summary">Különféle Állapotsáv módosításokat tartalmaz</string>

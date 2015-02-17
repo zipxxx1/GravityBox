@@ -101,10 +101,6 @@
     <string name="dialog_color_picker">Renk Seçici</string>
     <string name="press_color_to_apply">Uygulamak için renge dokunun</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Durum çubuğu arkaplan rengi</string>
-    <string name="statusbar_bgcolor_summary">Durum çubuğu arkaplan rengini ve saydamlığı ayarla</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Durum çubuğu iyileştirmeleri</string>
     <string name="pref_cat_statusbar_summary">Çeşitli durum çubuğu iyileştirmelerini içerir</string>

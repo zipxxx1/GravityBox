@@ -85,9 +85,6 @@
     <string name="dialog_color_picker">색깔 선택</string>
     <string name="press_color_to_apply">색깔을 눌러서 적용합니다.</string>
 
-    <string name="statusbar_bgcolor_title">상단바 배경 색깔</string>
-    <string name="statusbar_bgcolor_summary">상단바 배경 색깔을 변경합니다.</string>
-
     <string name="pref_cat_statusbar_title">상단바 트윅</string>
     <string name="pref_cat_statusbar_summary">상단바의 기능들과 외형을 변경할 수 있습니다.</string>
     <string name="pref_cat_misc_title">기타 트윅</string>

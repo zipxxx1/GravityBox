@@ -65,10 +65,6 @@
     <string name="dialog_color_picker">Farvevælger</string>
     <string name="press_color_to_apply">Tryk på Farve for at ændre</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Baggrundsfarve for statusbjælken</string>
-    <string name="statusbar_bgcolor_summary">Tillader indstilling af statusbjælkens baggrundsfarve samt transparens</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Statusbjælke-tweaks</string>
     <string name="pref_cat_statusbar_summary">Indeholder diverse statusbjælke-tweaks</string>

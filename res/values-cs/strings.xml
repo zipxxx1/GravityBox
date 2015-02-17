@@ -110,10 +110,6 @@
     <string name="dialog_color_picker">Výběr barvy</string>
     <string name="press_color_to_apply">Dotykem potvrdíte barvu</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Barva pozadí stavového řádku</string>
-    <string name="statusbar_bgcolor_summary">Umožní nastavení barvy a průhlednosti pozadí stavového řádku</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Nastavení stavového řádku</string>
     <string name="pref_cat_statusbar_summary">Obsahuje různá nastavení stavového řádku</string>

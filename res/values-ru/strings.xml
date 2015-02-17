@@ -126,10 +126,6 @@
     <string name="dialog_color_picker">Выбор цвета</string>
     <string name="press_color_to_apply">Нажмите на цвет для применения</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Цвет панели уведомлений</string>
-    <string name="statusbar_bgcolor_summary">Установка цвета панели уведомлений</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Настройки строки состояния</string>
     <string name="pref_cat_statusbar_summary">Различные настройки строки состояния</string>

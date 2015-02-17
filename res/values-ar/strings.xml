@@ -100,10 +100,6 @@
     <string name="dialog_color_picker">اختيار اللون</string>
     <string name="press_color_to_apply">اضغط على اللون لتطبيقه</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">لون خلفية شريط الحالة</string>
-    <string name="statusbar_bgcolor_summary">Allows to set statusbar background color and transparency</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">شريط الحالة</string>
     <string name="pref_cat_statusbar_summary">يحتوي عدة خيارات للتعديل على شريط الحالة</string>

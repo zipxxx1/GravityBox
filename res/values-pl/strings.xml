@@ -110,10 +110,6 @@
     <string name="dialog_color_picker">Wybór koloru</string>
     <string name="press_color_to_apply">Naciśnij na kolor aby ustawić</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Kolor tła paska statusu</string>
-    <string name="statusbar_bgcolor_summary">Umożliwia wybór koloru tła paska statusu</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Ustawienia paska statusu</string>
     <string name="pref_cat_statusbar_summary">Zawiera różne dodatkowe ustawienia dla paska statusu</string>

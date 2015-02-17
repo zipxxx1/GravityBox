@@ -120,10 +120,6 @@
     <string name="dialog_color_picker">Pemilih warna</string>
     <string name="press_color_to_apply">tekan warna untuk set</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">warna latarbelakang satusbar</string>
-    <string name="statusbar_bgcolor_summary">Benarkan untuk menetapkan warna latarbelakang statusbar </string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Customisasi statusbar</string>
     <string name="pref_cat_statusbar_summary">Mengandungi pelbagai customisasi untuk statusbar</string>

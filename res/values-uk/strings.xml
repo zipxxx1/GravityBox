@@ -69,8 +69,6 @@
     <string name="qs_tile_screenshot">Знімок екрану</string>
     <string name="dialog_color_picker">Вибір кольору</string>
     <string name="press_color_to_apply">Натисніть на колір для застосування</string>
-    <string name="statusbar_bgcolor_title">Колір панелі повідомлень</string>
-    <string name="statusbar_bgcolor_summary">Дозволяє задати колір і прозорість панелі повідомлень</string>
     <string name="pref_cat_statusbar_title">Налаштування статусбара</string>
     <string name="pref_cat_statusbar_summary">Містить деякі налаштування статусбара</string>
     <string name="pref_cat_misc_title">Різні налаштування</string>

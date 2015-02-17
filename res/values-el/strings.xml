@@ -119,10 +119,6 @@
     <string name="dialog_color_picker">Επιλογέας χρώματος</string>
     <string name="press_color_to_apply">Πιέστε στο χρώμα για εφαρμογή</string>
 
-    <!--  Statusbar background color -->
-    <string name="statusbar_bgcolor_title">Χρώμα φόντου Γραμμής Κατάστασης</string>
-    <string name="statusbar_bgcolor_summary">Επιτρέπει να ορίσετε το χρώμα και τη διαφάνεια φόντου της Γραμμής Κατάστασης</string>
-
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Γραμμή Κατάστασης</string>
     <string name="pref_cat_statusbar_summary">Περιέχει διάφορες βελτιώσεις της Γραμμής Κατάστασης</string>
