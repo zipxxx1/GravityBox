@@ -17,7 +17,9 @@ package com.ceco.lollipop.gravitybox;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
+import com.ceco.lollipop.gravitybox.StatusbarSignalCluster.NetworkControllerCallback;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
 
@@ -124,6 +126,23 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         } catch (Throwable t) {
             log("Error hooking apply() method: " + t.getMessage());
         }
+    }
+
+    @Override
+    protected void setNetworkController(Object networkController) {
+        final ClassLoader classLoader = mView.getClass().getClassLoader();
+        final Class<?> networkCtrlCbClass = XposedHelpers.findClass(
+                "com.android.systemui.statusbar.policy.MSimNetworkController.MSimNetworkSignalChangedCallback", 
+                classLoader);
+        mNetworkControllerCallback = Proxy.newProxyInstance(classLoader, 
+                new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallbackMsim(networkController));
+        XposedHelpers.callMethod(networkController, "addNetworkSignalChangedCallback",
+                mNetworkControllerCallback, 0);
+        mNetworkControllerCallback2 = Proxy.newProxyInstance(classLoader, 
+                new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallbackMsim(networkController));
+        XposedHelpers.callMethod(networkController, "addNetworkSignalChangedCallback",
+                mNetworkControllerCallback2, 1);
+        if (DEBUG) log("setNetworkController: callback registered");
     }
 
     @Override
