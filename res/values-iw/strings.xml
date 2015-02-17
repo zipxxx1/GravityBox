@@ -600,7 +600,6 @@
 
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">מצב צבע בודד</string>
-    <string name="signal_color_mode_gb">השתמש באייקונים של GravityBox</string>
     <string name="signal_color_mode_stock">השתמש באייקונים של סטוק</string>
     <string name="signal_color_mode_disabled">אל תחיל צבע</string>
 

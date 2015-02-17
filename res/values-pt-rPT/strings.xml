@@ -610,7 +610,6 @@
 
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">Modo de coloração indicadores de sinal</string>
-    <string name="signal_color_mode_gb">Aplicar com indicadores do GravityBox</string>
     <string name="signal_color_mode_stock">Aplicar com indicadores padrão</string>
     <string name="signal_color_mode_disabled">Não aplicar coloração</string>
 

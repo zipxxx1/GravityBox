@@ -41,7 +41,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     private static final String TAG = "GB:StatusBarIconManager";
     private static final boolean DEBUG = false;
 
-    public static final int SI_MODE_GB = 0;
     public static final int SI_MODE_STOCK = 1;
     public static final int SI_MODE_DISABLED = 2;
 
@@ -60,8 +59,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     private Context mContext;
     private Resources mGbResources;
     private Resources mSystemUiRes;
-    private Map<String, Integer> mWifiIconIds;
-    private Map<String, Integer> mMobileIconIds;
     private Map<String, Integer[]> mBasicIconIds;
     private Map<String, SoftReference<Drawable>> mIconCache;
     private boolean[] mAllowMobileIconChange;
@@ -96,45 +93,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
                 Context.CONTEXT_IGNORE_SECURITY);
         mGbResources = gbContext.getResources();
         mAllowMobileIconChange = new boolean[] { true, true };
-
-        Map<String, Integer> tmpMap = new HashMap<String, Integer>();
-        tmpMap.put("stat_sys_wifi_signal_0", R.drawable.stat_sys_wifi_signal_0);
-        tmpMap.put("stat_sys_wifi_signal_1", R.drawable.stat_sys_wifi_signal_1);
-        tmpMap.put("stat_sys_wifi_signal_1_fully", R.drawable.stat_sys_wifi_signal_1_fully);
-        tmpMap.put("stat_sys_wifi_signal_2", R.drawable.stat_sys_wifi_signal_2);
-        tmpMap.put("stat_sys_wifi_signal_2_fully", R.drawable.stat_sys_wifi_signal_2_fully);
-        tmpMap.put("stat_sys_wifi_signal_3", R.drawable.stat_sys_wifi_signal_3);
-        tmpMap.put("stat_sys_wifi_signal_3_fully", R.drawable.stat_sys_wifi_signal_3_fully);
-        tmpMap.put("stat_sys_wifi_signal_4", R.drawable.stat_sys_wifi_signal_4);
-        tmpMap.put("stat_sys_wifi_signal_4_fully", R.drawable.stat_sys_wifi_signal_4_fully);
-        tmpMap.put("stat_sys_wifi_signal_null", R.drawable.stat_sys_wifi_signal_null);
-        mWifiIconIds = Collections.unmodifiableMap(tmpMap);
-
-        if (Utils.isMtkDevice()) {
-            tmpMap = new HashMap<String, Integer>();
-            tmpMap.put("stat_sys_gemini_signal_1_blue", R.drawable.stat_sys_signal_1_fully);
-            tmpMap.put("stat_sys_gemini_signal_2_blue", R.drawable.stat_sys_signal_2_fully);
-            tmpMap.put("stat_sys_gemini_signal_3_blue", R.drawable.stat_sys_signal_3_fully);
-            tmpMap.put("stat_sys_gemini_signal_4_blue", R.drawable.stat_sys_signal_4_fully);
-            tmpMap.put("stat_sys_gemini_signal_1_orange", R.drawable.stat_sys_signal_1_fully);
-            tmpMap.put("stat_sys_gemini_signal_2_orange", R.drawable.stat_sys_signal_2_fully);
-            tmpMap.put("stat_sys_gemini_signal_3_orange", R.drawable.stat_sys_signal_3_fully);
-            tmpMap.put("stat_sys_gemini_signal_4_orange", R.drawable.stat_sys_signal_4_fully);
-            mMobileIconIds = Collections.unmodifiableMap(tmpMap);
-        } else {
-            tmpMap = new HashMap<String, Integer>();
-            tmpMap.put("stat_sys_signal_0", R.drawable.stat_sys_signal_0);
-            tmpMap.put("stat_sys_signal_0_fully", R.drawable.stat_sys_signal_0_fully);
-            tmpMap.put("stat_sys_signal_1", R.drawable.stat_sys_signal_1);
-            tmpMap.put("stat_sys_signal_1_fully", R.drawable.stat_sys_signal_1_fully);
-            tmpMap.put("stat_sys_signal_2", R.drawable.stat_sys_signal_2);
-            tmpMap.put("stat_sys_signal_2_fully", R.drawable.stat_sys_signal_2_fully);
-            tmpMap.put("stat_sys_signal_3", R.drawable.stat_sys_signal_3);
-            tmpMap.put("stat_sys_signal_3_fully", R.drawable.stat_sys_signal_3_fully);
-            tmpMap.put("stat_sys_signal_4", R.drawable.stat_sys_signal_4);
-            tmpMap.put("stat_sys_signal_4_fully", R.drawable.stat_sys_signal_4_fully);
-            mMobileIconIds = Collections.unmodifiableMap(tmpMap);
-        }
 
         Map<String, Integer[]> basicIconMap = new HashMap<String, Integer[]>();
         basicIconMap.put("stat_sys_data_bluetooth", new Integer[] 
@@ -229,7 +187,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
             } else if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_SIGNAL_COLOR_MODE)) {
                 setSignalIconMode(intent.getIntExtra(
                         GravityBoxSettings.EXTRA_SB_SIGNAL_COLOR_MODE,
-                        StatusBarIconManager.SI_MODE_GB));
+                        StatusBarIconManager.SI_MODE_STOCK));
             }
         }
     }
@@ -405,18 +363,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         }
 
         switch(mColorInfo.signalIconMode) {
-            case SI_MODE_GB:
-                cd = getCachedDrawable(key);
-                if (cd != null) return cd;
-                if (mWifiIconIds.containsKey(key)) {
-                    Drawable d = mGbResources.getDrawable(mWifiIconIds.get(key)).mutate();
-                    d = applyColorFilter(d);
-                    setCachedDrawable(key, d);
-                    return d;
-                }
-                if (DEBUG) log("getWifiIcon: no drawable for key: " + key);
-                return null;
-
             case SI_MODE_STOCK:
                 cd = getCachedDrawable(key);
                 if (cd != null) return cd;
@@ -451,18 +397,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         }
 
         switch(mColorInfo.signalIconMode) {
-            case SI_MODE_GB:
-                cd = getCachedDrawable(key);
-                if (cd != null) return cd;
-                if (mMobileIconIds.containsKey(key)) {
-                    Drawable d = mGbResources.getDrawable(mMobileIconIds.get(key)).mutate();
-                    d = applyColorFilter(index, d);
-                    setCachedDrawable(key, d);
-                    return d;
-                }
-                if (DEBUG) log("getMobileIcon: no drawable for key: " + key);
-                return null;
-
             case SI_MODE_STOCK:
                 cd = getCachedDrawable(key);
                 if (cd != null) return cd;

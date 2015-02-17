@@ -612,7 +612,6 @@
 
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">Mod warna signal</string>
-    <string name="signal_color_mode_gb">Guna ikon GravityBox</string>
     <string name="signal_color_mode_stock">Guna ikan asal</string>
     <string name="signal_color_mode_disabled">Jangan set warna</string>
 

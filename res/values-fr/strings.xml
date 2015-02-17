@@ -625,7 +625,6 @@
  
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">Mode couleur pour le signal</string>
-    <string name="signal_color_mode_gb">Utiliser les icônes GravityBox</string>
     <string name="signal_color_mode_stock">Utiliser les icônes par défaut</string>
     <string name="signal_color_mode_disabled">Ne pas modifier les couleurs</string>
  

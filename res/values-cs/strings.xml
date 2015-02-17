@@ -595,7 +595,6 @@
 
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">Režim vybarvování signálu</string>
-    <string name="signal_color_mode_gb">Použít GravityBox ikony</string>
     <string name="signal_color_mode_stock">Použít originál ikony</string>
     <string name="signal_color_mode_disabled">Nevybarvovat</string>
 

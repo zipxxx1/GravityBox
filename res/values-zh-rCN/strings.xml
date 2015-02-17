@@ -625,7 +625,6 @@
 
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">信号色彩模式</string>
-    <string name="signal_color_mode_gb">使用GravityBox图标</string>
     <string name="signal_color_mode_stock">使用原厂图标</string>
     <string name="signal_color_mode_disabled">不使用颜色</string>
         

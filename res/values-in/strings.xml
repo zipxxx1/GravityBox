@@ -593,7 +593,6 @@
 
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">Mode pewarnaan sinyal</string>
-    <string name="signal_color_mode_gb">Gunakan ikon GravityBox</string>
     <string name="signal_color_mode_stock">Gunakan ikon bawaan</string>
     <string name="signal_color_mode_disabled">Jangan terapkan warna</string>
 

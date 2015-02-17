@@ -601,7 +601,6 @@
 
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">Modo de cor do sinal</string>
-    <string name="signal_color_mode_gb">Usar ícones do GravityBox (com suporte a indicadores de nível de sinal)</string>
     <string name="signal_color_mode_stock">Usar ícones padrão (sem suporte a indicadores de nível de sinal)</string>
     <string name="signal_color_mode_disabled">Não aplicar cor</string>
 

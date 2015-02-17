@@ -614,7 +614,6 @@
 
     <!-- Color mode for statusbar signal icons -->
     <string name="pref_statusbar_signal_color_mode_title">Τύπος χρώματος σήματος</string>
-    <string name="signal_color_mode_gb">Χρήση εικονιδίων GravityBox (με υποστήριξη επιπέδου σήματος)</string>
     <string name="signal_color_mode_stock">Χρήση εργοστασιακών εικονιδίων (χωρίς υποστήριξη επιπέδου σήματος)</string>
     <string name="signal_color_mode_disabled">Μη εφαρμογή χρώματος</string>
 
