@@ -22,8 +22,6 @@
     <string name="battery_style_stock">Gyári akkumulátor kijelző</string>
     <string name="battery_style_circle">Kör akkumulátor kijelző</string>
     <string name="battery_style_circle_percent">Kör akkumulátor kijelző százalékkal</string>
-    <string name="battery_style_kitkat">KitKat akkumulátor kijelző</string>
-    <string name="battery_style_kitkat_percent">KitKat kijelző százalékkal</string>
     <string name="battery_style_none">Semmilyen, nincs akkumulátor kijelzés</string>
 
     <string name="vol_music_controls_title">Hangerő gombok átugorják a számot</string>

@@ -22,8 +22,6 @@
     <string name="battery_style_stock">Penunjuk asal</string>
     <string name="battery_style_circle">Jenis bulat</string>
     <string name="battery_style_circle_percent">Jenis bulat dengan peratusan</string>
-    <string name="battery_style_kitkat">Jenis KitKat</string>
-    <string name="battery_style_kitkat_percent">jenis KitKat dengan peratusan</string>
     <string name="battery_style_none">Tiada</string>
 
     <string name="vol_music_controls_title">Butang volume melangkau track lagu</string>

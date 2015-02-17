@@ -22,8 +22,6 @@
     <string name="battery_style_stock">Стоковая батарея</string>
     <string name="battery_style_circle">Круглая батарея</string>
     <string name="battery_style_circle_percent">Круглая с процентами</string>
-    <string name="battery_style_kitkat">Батарея KitKat</string>
-    <string name="battery_style_kitkat_percent">Батарея KitKat с процентами</string>
     <string name="battery_style_none">Не показывать</string>
 
     <string name="vol_music_controls_title">Переключение треков</string>

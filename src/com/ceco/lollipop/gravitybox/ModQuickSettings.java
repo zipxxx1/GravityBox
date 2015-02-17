@@ -82,7 +82,6 @@ import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -1491,25 +1490,6 @@ public class ModQuickSettings {
                         tile.setTag(mAospTileTags.get("battery_textview"));
                     }
                     if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_BATTERY_EXTENDED, false)) {
-                        int imgResId = tile.getResources().getIdentifier("image", "id", PACKAGE_NAME);
-                        if (imgResId != 0) {
-                            View batteryImg = tile.findViewById(imgResId);
-                            if (batteryImg != null) {
-                                ViewGroup tileContent = (ViewGroup) ((ViewGroup) tile).getChildAt(0);
-                                KitKatBattery kkb = new KitKatBattery(tile.getContext());
-                                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                                        (LinearLayout.LayoutParams) batteryImg.getLayoutParams());
-                                kkb.setId(imgResId);
-                                kkb.setLayoutParams(lp);
-                                kkb.setPadding(batteryImg.getPaddingLeft(), batteryImg.getPaddingTop(), 
-                                        batteryImg.getPaddingRight(), batteryImg.getPaddingBottom());
-                                tileContent.removeView(batteryImg);
-                                tileContent.addView(kkb, 0);
-                                if (SysUiManagers.BatteryInfoManager != null) {
-                                    SysUiManagers.BatteryInfoManager.registerListener(kkb);
-                                }
-                            }
-                        }
                         XposedBridge.hookAllMethods(param.args[1].getClass(), "refreshView", new XC_MethodHook() {
                             @Override
                             protected void afterHookedMethod(final MethodHookParam param2) throws Throwable {

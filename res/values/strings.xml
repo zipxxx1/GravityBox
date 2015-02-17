@@ -22,8 +22,6 @@
     <string name="battery_style_stock">Stock battery indicator</string>
     <string name="battery_style_circle">Circle battery</string>
     <string name="battery_style_circle_percent">Circle battery with percentage</string>
-    <string name="battery_style_kitkat">KitKat battery</string>
-    <string name="battery_style_kitkat_percent">KitKat battery with percentage</string>
     <string name="battery_style_none">None</string>
 
     <string name="vol_music_controls_title">Volume keys skip track</string>

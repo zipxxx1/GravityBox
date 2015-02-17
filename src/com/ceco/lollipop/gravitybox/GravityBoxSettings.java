@@ -112,8 +112,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int BATTERY_STYLE_STOCK = 1;
     public static final int BATTERY_STYLE_CIRCLE = 2;
     public static final int BATTERY_STYLE_CIRCLE_PERCENT = 3;
-    public static final int BATTERY_STYLE_KITKAT = 4;
-    public static final int BATTERY_STYLE_KITKAT_PERCENT = 5;
     public static final int BATTERY_STYLE_CIRCLE_DASHED = 6;
     public static final int BATTERY_STYLE_CIRCLE_DASHED_PERCENT = 7;
     public static final int BATTERY_STYLE_NONE = 0;

@@ -7,8 +7,6 @@
     <string name="battery_style_stock">Základní</string>
     <string name="battery_style_circle">Kruhový bez procent</string>
     <string name="battery_style_circle_percent">Kruhový s procenty</string>
-    <string name="battery_style_kitkat">KitKat bez procent</string>
-    <string name="battery_style_kitkat_percent">KitKat s procenty</string>
     <string name="battery_style_none">Žádný</string>
 
     <string name="vol_music_controls_title">Ovládání hudby tlačítky hlasitosti</string>

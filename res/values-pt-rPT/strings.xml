@@ -7,8 +7,6 @@
     <string name="battery_style_stock">Indicador de bateria padrão</string>
     <string name="battery_style_circle">Indicador de bateria circular</string>
     <string name="battery_style_circle_percent">Indicador de bateria circular com percentagem</string>
-    <string name="battery_style_kitkat">Indicador de bateria do KitKat</string>
-    <string name="battery_style_kitkat_percent">Indicador de bateria do KitKat com percentagem</string>
     <string name="battery_style_none">Nenhum</string>
 
     <string name="vol_music_controls_title">Mudar de faixa utilizando teclas de volume</string>

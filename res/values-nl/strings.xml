@@ -22,8 +22,6 @@
     <string name="battery_style_stock">Standaard batterij indicator</string>
     <string name="battery_style_circle">Cirkel batterij</string>
     <string name="battery_style_circle_percent">Cirkel batterij met percentage</string>
-    <string name="battery_style_kitkat">KitKat batterij</string>
-    <string name="battery_style_kitkat_percent">KitKat batterij met percentage</string>
     <string name="battery_style_none">Geen</string>
 
     <string name="vol_music_controls_title">Volume knoppen slaan liedje over</string>

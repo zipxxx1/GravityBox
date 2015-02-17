@@ -5,7 +5,6 @@
     <string name="battery_style_stock">Стоковий індикатор</string>
     <string name="battery_style_circle">Круглий індикатор</string>
     <string name="battery_style_circle_percent">Круглий індикатор з відсотками</string>
-    <string name="battery_style_kitkat">Батарея KitKat</string>
     <string name="battery_percent_text_title">Індикатор з відсотками</string>
     <string name="battery_style_none">Не показувати</string>
     <string name="vol_music_controls_title">Пропуск треку з допомогу клавіш гучності</string>

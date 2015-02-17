@@ -22,8 +22,6 @@
     <string name="battery_style_stock">Indicatore batteria predefinito</string>
     <string name="battery_style_circle">Batteria circolare no percentuale</string>
     <string name="battery_style_circle_percent">Batteria circolare con percentuale</string>
-    <string name="battery_style_kitkat">Batteria KitKat</string>
-    <string name="battery_style_kitkat_percent">Batteria KitKat con percentuale</string>
     <string name="battery_style_none">Nessuno</string>
 
     <string name="vol_music_controls_title">Cambia traccia con volume</string>

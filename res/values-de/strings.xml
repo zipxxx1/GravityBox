@@ -22,8 +22,6 @@
     <string name="battery_style_stock">Standard</string>
     <string name="battery_style_circle">Rund</string>
     <string name="battery_style_circle_percent">Rund mit Prozentwert</string>
-    <string name="battery_style_kitkat">KitKat</string>
-    <string name="battery_style_kitkat_percent">KitKat mit Prozentwert</string>
     <string name="battery_style_none">Keine Anzeige</string>
 
     <string name="vol_music_controls_title">Titelsprung mittels Lautstärketasten</string>

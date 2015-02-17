@@ -22,8 +22,6 @@
     <string name="battery_style_stock">Stok pil göstergesi</string>
     <string name="battery_style_circle">Yuvarlak pil göstergesi</string>
     <string name="battery_style_circle_percent">Yüzdeli yuvarlak pil göstergesi</string>
-    <string name="battery_style_kitkat">KitKat pil göstergesi</string>
-    <string name="battery_style_kitkat_percent">Yüzdeli KitKat pil göstergesi</string>
     <string name="battery_style_none">Pil göstergesi olmasın</string>
 
     <string name="vol_music_controls_title">Ses tuşlarıyla müzik kontrolü</string>

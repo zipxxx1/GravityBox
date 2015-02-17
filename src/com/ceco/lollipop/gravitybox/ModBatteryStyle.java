@@ -51,7 +51,6 @@ public class ModBatteryStyle {
     private static StatusbarBatteryPercentage mPercentText;
     private static CmCircleBattery mCircleBattery;
     private static View mStockBattery;
-    private static KitKatBattery mKitKatBattery;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -176,24 +175,6 @@ public class ModBatteryStyle {
             vg.addView(mCircleBattery);
             if (DEBUG) log("CmCircleBattery injected");
 
-            // inject KitKat battery view
-            mKitKatBattery = new KitKatBattery(vg.getContext());
-            mKitKatBattery.setTag("kitkat_battery");
-            final float density = res.getDisplayMetrics().density;
-            lParams = new LinearLayout.LayoutParams((int)(density * 10.5f), 
-                    (int)(density * 16));
-            lParams.setMarginStart((int)(density * 4));
-            lParams.bottomMargin = Math.round(density * 0.33f);
-            mKitKatBattery.setLayoutParams(lParams);
-            mKitKatBattery.setVisibility(View.GONE);
-            if (SysUiManagers.IconManager != null) {
-                SysUiManagers.IconManager.registerListener(mKitKatBattery);
-            }
-            if (SysUiManagers.BatteryInfoManager != null) {
-                SysUiManagers.BatteryInfoManager.registerListener(mKitKatBattery);
-            }
-            vg.addView(mKitKatBattery);
-
             // find battery
             mStockBattery = vg.findViewById(
                     res.getIdentifier("battery", "id", PACKAGE_NAME));
@@ -243,14 +224,6 @@ public class ModBatteryStyle {
                         mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_DASHED ||
                         mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_CIRCLE_DASHED_PERCENT ?
                                 CmCircleBattery.Style.DASHED : CmCircleBattery.Style.SOLID);
-            }
-
-            if (mKitKatBattery != null) {
-                mKitKatBattery.setVisibility((mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_KITKAT ||
-                        mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_KITKAT_PERCENT) ?
-                                View.VISIBLE : View.GONE);
-                mKitKatBattery.setShowPercent(
-                        mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_KITKAT_PERCENT);
             }
 
             if (mPercentText != null) {

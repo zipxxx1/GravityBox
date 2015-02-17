@@ -22,8 +22,6 @@
     <string name="battery_style_stock">Indikator baterai bawaan</string>
     <string name="battery_style_circle">Baterai lingkar</string>
     <string name="battery_style_circle_percent">Baterai lingkar dengan persentase</string>
-    <string name="battery_style_kitkat">Baterai KitKat</string>
-    <string name="battery_style_kitkat_percent">Baterai KitKat dengan persentase</string>
     <string name="battery_percent_text_title">Teks persentase baterai</string>
     <string name="battery_style_none">Tidak ada</string>
 

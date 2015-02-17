@@ -19,8 +19,6 @@
     <string name="battery_style_stock">標準バッテリーアイコン</string>
     <string name="battery_style_circle">サークルアイコン</string>
     <string name="battery_style_circle_percent">サークルアイコン＋％</string>
-    <string name="battery_style_kitkat">KitKatアイコン</string>
-    <string name="battery_style_kitkat_percent">KitKatアイコン＋％</string>
     <string name="battery_style_none">なし</string>
     <string name="vol_music_controls_title">音量キーで曲操作</string>
     <string name="vol_music_controls_summary">画面オフ時に音量キー長押しで曲送り/曲戻しします。</string>

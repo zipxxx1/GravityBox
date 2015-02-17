@@ -22,8 +22,6 @@
     <string name="battery_style_stock">מחוון סוללה סגנון סטוק</string>
     <string name="battery_style_circle">סוללה עגולה</string>
     <string name="battery_style_circle_percent">סוללה עגולה עם אחוזים</string>
-    <string name="battery_style_kitkat">סוללת KitKat</string>
-    <string name="battery_style_kitkat_percent">סוללת KitKat עם אחוזים</string>
     <string name="battery_style_none">ללא סוללה</string>
 
     <string name="vol_music_controls_title">מעבר בין שירים עם לחצני עוצמת שמע</string>

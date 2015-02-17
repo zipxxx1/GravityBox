@@ -22,8 +22,6 @@
     <string name="battery_style_stock">原厂电量图标</string>
     <string name="battery_style_circle">圆形电量图标</string>
     <string name="battery_style_circle_percent">圆形电量图标含百分比</string>
-    <string name="battery_style_kitkat">KitKat电量图标</string>
-    <string name="battery_style_kitkat_percent">KitKat电量图标含百分比</string>
     <string name="battery_style_none">无</string>
 
     <string name="vol_music_controls_title">音量键切换歌曲</string>
