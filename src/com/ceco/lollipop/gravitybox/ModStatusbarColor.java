@@ -27,11 +27,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
@@ -172,15 +170,16 @@ public class ModStatusbarColor {
         public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
             if ((flags & (StatusBarIconManager.FLAG_ICON_COLOR_CHANGED |
                     StatusBarIconManager.FLAG_ICON_STYLE_CHANGED)) != 0) {
-                updateStatusIcons();
+                updateStatusIcons("mStatusIcons");
+                updateStatusIcons("mStatusIconsKeyguard");
             }
         }
     };
 
-    private static void updateStatusIcons() {
+    private static void updateStatusIcons(String statusIcons) {
         if (mPhoneStatusBar == null) return;
         try {
-            ViewGroup vg = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStatusIcons");
+            ViewGroup vg = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, statusIcons);
             final int childCount = vg.getChildCount();
             for (int i = 0; i < childCount; i++) {
                 if (!vg.getChildAt(i).getClass().getName().equals(CLASS_STATUSBAR_ICON_VIEW)) {
