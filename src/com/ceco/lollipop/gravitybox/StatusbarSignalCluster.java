@@ -54,12 +54,15 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     protected static XSharedPreferences sPrefs;
 
+    public enum ContainerType { STATUSBAR, HEADER, KEYGUARD };
+
     // HSPA+
     protected static int sQsHpResId;
     protected static int sSbHpResId;
     protected static int[][] DATA_HP;
     protected static int[] QS_DATA_HP;
 
+    protected ContainerType mContainerType;
     protected LinearLayout mView;
     protected StatusBarIconManager mIconManager;
     protected Resources mResources;
@@ -215,18 +218,20 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     }
 
-    public static StatusbarSignalCluster create(LinearLayout view, XSharedPreferences prefs) {
+    public static StatusbarSignalCluster create(ContainerType containerType,
+            LinearLayout view, XSharedPreferences prefs) {
         sPrefs = prefs;
         if (PhoneWrapper.hasMsimSupport()) {
-            return new StatusbarSignalClusterMsim(view);
+            return new StatusbarSignalClusterMsim(containerType, view);
         } else if (Utils.isMtkDevice()) {
-            return new StatusbarSignalClusterMtk(view);
+            return new StatusbarSignalClusterMtk(containerType, view);
         } else {
-            return new StatusbarSignalCluster(view);
+            return new StatusbarSignalCluster(containerType, view);
         }
     }
 
-    public StatusbarSignalCluster(LinearLayout view) {
+    public StatusbarSignalCluster(ContainerType containerType, LinearLayout view) {
+        mContainerType = containerType;
         mView = view;
         mIconManager = SysUiManagers.IconManager;
         mResources = mView.getResources();
@@ -360,8 +365,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     public void onBroadcastReceived(Context context, Intent intent) { }
 
     protected void initPreferences() { 
-        mDataActivityEnabled = sPrefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
+        mDataActivityEnabled = mContainerType != ContainerType.HEADER && 
+                sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
     }
 
     protected void setNetworkController(Object networkController) {

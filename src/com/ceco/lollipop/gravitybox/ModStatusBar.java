@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.StatusbarSignalCluster.ContainerType;
 import com.ceco.lollipop.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
@@ -133,7 +134,6 @@ public class ModStatusBar {
     private static int mDeleteIconId;
     private static StatusbarDownloadProgressView mDownloadProgressView;
     private static TickerPolicy mTickerPolicy;
-    private static StatusbarSignalCluster mSignalCluster;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -393,10 +393,52 @@ public class ModStatusBar {
             if (scResId != 0) {
                 LinearLayout view = (LinearLayout) mStatusBarView.findViewById(scResId);
                 if (view != null) {
-                    mSignalCluster = StatusbarSignalCluster.create(view, mPrefs);
-                    mSignalCluster.setNetworkController(XposedHelpers.getObjectField(
+                    StatusbarSignalCluster sc = StatusbarSignalCluster.create(ContainerType.STATUSBAR, view, mPrefs);
+                    sc.setNetworkController(XposedHelpers.getObjectField(
                             mPhoneStatusBar, "mNetworkController"));
-                    mBroadcastSubReceivers.add(mSignalCluster);
+                    mBroadcastSubReceivers.add(sc);
+                    if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
+                }
+            } else if (DEBUG) {
+                log("signal_cluster not found in mStatusBarView");
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void prepareSignalClusterHeader() {
+        try {
+            Resources res = mContext.getResources();
+            int scResId = res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
+            if (scResId != 0) {
+                View header = (View) XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
+                LinearLayout view = (LinearLayout) header.findViewById(scResId);
+                if (view != null) {
+                    StatusbarSignalCluster sc = StatusbarSignalCluster.create(ContainerType.HEADER, view, mPrefs);
+                    mBroadcastSubReceivers.add(sc);
+                    if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
+                }
+            } else if (DEBUG) {
+                log("signal_cluster not found in mStatusBarView");
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void prepareSignalClusterKeyguard() {
+        try {
+            Resources res = mContext.getResources();
+            int scResId = res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
+            if (scResId != 0) {
+                View kgsb = (View) XposedHelpers.getObjectField(mPhoneStatusBar, "mKeyguardStatusBar");
+                LinearLayout view = (LinearLayout) kgsb.findViewById(scResId);
+                if (view != null) {
+                    StatusbarSignalCluster sc = StatusbarSignalCluster.create(ContainerType.KEYGUARD, view, mPrefs);
+                    sc.setNetworkController(XposedHelpers.getObjectField(
+                            mPhoneStatusBar, "mNetworkController"));
+                    mBroadcastSubReceivers.add(sc);
                     if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
                 }
             } else if (DEBUG) {
@@ -476,6 +518,8 @@ public class ModStatusBar {
                     prepareBrightnessControl();
                     prepareTrafficMeter();
                     prepareSignalCluster();
+                    prepareSignalClusterHeader();
+                    prepareSignalClusterKeyguard();
 
                     ModBatteryStyle.init(mStatusBarView, prefs);
 

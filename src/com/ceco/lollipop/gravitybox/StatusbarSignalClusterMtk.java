@@ -23,8 +23,8 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     protected static Object[][] mMobileIconIds = null;
     protected static ImageView[] mSignalNetworkType = null;
 
-    public StatusbarSignalClusterMtk(LinearLayout view) {
-        super(view);
+    public StatusbarSignalClusterMtk(ContainerType containerType, LinearLayout view) {
+        super(containerType, view);
     }
 
     @Override

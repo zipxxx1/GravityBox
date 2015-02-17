@@ -19,7 +19,6 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import com.ceco.lollipop.gravitybox.StatusbarSignalCluster.NetworkControllerCallback;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
 
@@ -42,8 +41,8 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected boolean mSignalIconAutohide;
     protected boolean mHideSimLabels;
 
-    public StatusbarSignalClusterMsim(LinearLayout view) {
-        super(view);
+    public StatusbarSignalClusterMsim(ContainerType containerType, LinearLayout view) {
+        super(containerType, view);
     }
 
     @Override
