@@ -42,7 +42,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
     private static final boolean DEBUG = false;
 
     private TextView mClock;
-    private TextView mClockExpanded;
     private int mDefaultClockColor;
     private int mOriginalPaddingLeft;
     private boolean mAmPmHide;
@@ -70,10 +69,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         return mClock;
     }
 
-    public TextView getExpandedClock() {
-        return mClockExpanded;
-    }
-
     public void resetOriginalPaddingLeft() {
         if (mClock != null) {
             mClock.setPadding(mOriginalPaddingLeft, 0, 0, 0);
@@ -98,25 +93,11 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         hookGetSmallTime();
     }
 
-    public void setExpandedClock(TextView clock) {
-        if (clock == null) throw new IllegalArgumentException("Clock cannot be null");
-
-        mClockExpanded = clock;
-    }
-
     private void updateClock() {
         try {
             XposedHelpers.callMethod(mClock, "updateClock");
         } catch (Throwable t) {
             log("Error in updateClock: " + t.getMessage());
-        }
-    }
-
-    private void updateExpandedClock() {
-        try {
-            XposedHelpers.callMethod(mClockExpanded, "updateClock");
-        } catch (Throwable t) {
-            log("Error in updateExpandedClock: " + t.getMessage());
         }
     }
 
@@ -228,7 +209,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
             if (intent.hasExtra(GravityBoxSettings.EXTRA_AMPM_HIDE)) {
                 mAmPmHide = intent.getBooleanExtra(GravityBoxSettings.EXTRA_AMPM_HIDE, false);
                 updateClock();
-                updateExpandedClock();
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_HIDE)) {
                 mClockHidden = intent.getBooleanExtra(GravityBoxSettings.EXTRA_CLOCK_HIDE, false);
@@ -241,7 +221,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
             if (intent.hasExtra(GravityBoxSettings.EXTRA_AMPM_SIZE)) {
                 mAmPmSize = intent.getIntExtra(GravityBoxSettings.EXTRA_AMPM_SIZE, 70) / 100f;
                 updateClock();
-                updateExpandedClock();
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_CLOCK_DATE)) {
                 mClockShowDate = intent.getStringExtra(GravityBoxSettings.EXTRA_CLOCK_DATE);

@@ -36,6 +36,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.service.notification.StatusBarNotification;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -182,7 +183,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         notifyProgressStopped();
     }
 
-    public void onNotificationAdded(Object statusBarNotif) {
+    public void onNotificationAdded(StatusBarNotification statusBarNotif) {
         if (mMode == Mode.OFF) return;
 
         if (!verifyNotification(statusBarNotif)) {
@@ -204,7 +205,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         }
     }
 
-    public void onNotificationUpdated(Object statusBarNotif) {
+    public void onNotificationUpdated(StatusBarNotification statusBarNotif) {
         if (mMode == Mode.OFF) return;
 
         if (mId == null) {
@@ -216,7 +217,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
 
         if (mId.equals(getIdentifier(statusBarNotif))) {
             // if notification became clearable, stop tracking immediately
-            if ((Boolean) XposedHelpers.callMethod(statusBarNotif, "isClearable")) {
+            if (statusBarNotif.isClearable()) {
                 if (DEBUG) log("onNotificationUpdated: notification became clearable - stopping tracking");
                 stopTracking();
             } else {
@@ -226,7 +227,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         }
     }
 
-    public void onNotificationRemoved(Object statusBarNotif) {
+    public void onNotificationRemoved(StatusBarNotification statusBarNotif) {
         if (mMode == Mode.OFF) return;
 
         if (mId == null) {
@@ -238,38 +239,36 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         }
     }
 
-    private boolean verifyNotification(Object statusBarNotif) {
-        if (statusBarNotif == null || (Boolean) XposedHelpers.callMethod(statusBarNotif, "isClearable")) {
+    private boolean verifyNotification(StatusBarNotification statusBarNotif) {
+        if (statusBarNotif == null || statusBarNotif.isClearable()) {
             return false;
         }
 
-        String pkgName = (String) XposedHelpers.getObjectField(statusBarNotif, "pkg");
-        Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
+        Notification n = statusBarNotif.getNotification();
         return (n != null && 
-               (SUPPORTED_PACKAGES.contains(pkgName) ||
+               (SUPPORTED_PACKAGES.contains(statusBarNotif.getPackageName()) ||
                 n.extras.getBoolean(ModLedControl.NOTIF_EXTRA_PROGRESS_TRACKING)) &&
                 getProgressInfo(n).hasProgressBar);
     }
 
-    private String getIdentifier(Object statusBarNotif) {
+    private String getIdentifier(StatusBarNotification statusBarNotif) {
         if (statusBarNotif == null) return null;
-        String pkgName = (String) XposedHelpers.getObjectField(statusBarNotif, "pkg");
+        String pkgName = statusBarNotif.getPackageName();
         if (SUPPORTED_PACKAGES.get(0).equals(pkgName)) {
-            String tag = (String) XposedHelpers.getObjectField(statusBarNotif, "tag");
+            String tag = statusBarNotif.getTag();
             if (tag != null && tag.contains(":")) {
                 return pkgName + ":" + tag.substring(tag.indexOf(":")+1);
             }
             if (DEBUG) log("getIdentifier: Unexpected notification tag: " + tag);
         } else {
-            return (pkgName + ":" + String.valueOf(XposedHelpers.getIntField(statusBarNotif, "id")));
+            return (pkgName + ":" + String.valueOf(statusBarNotif.getId()));
         }
         return null;
     }
 
-    private void updateProgress(Object statusBarNotif) {
+    private void updateProgress(StatusBarNotification statusBarNotif) {
         if (statusBarNotif != null) {
-            Notification n = (Notification) XposedHelpers.getObjectField(statusBarNotif, "notification");
-            float newScaleX = getProgressInfo(n).getFraction();
+            float newScaleX = getProgressInfo(statusBarNotif.getNotification()).getFraction();
             if (DEBUG) log("updateProgress: newScaleX=" + newScaleX);
             setVisibility(View.VISIBLE);
             if (mAnimated) {
@@ -281,13 +280,8 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             if (mAnimator.isStarted()) {
                 mAnimator.end();
             }
-            postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    setScaleX(0f);
-                    setVisibility(View.GONE);
-                }
-            }, 500);
+            setScaleX(0f);
+            setVisibility(View.GONE);
         }
     }
 

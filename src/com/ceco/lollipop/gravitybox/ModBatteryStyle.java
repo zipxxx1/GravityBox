@@ -105,7 +105,7 @@ public class ModBatteryStyle {
             final String[] batteryPercentTextIds = new String[] { "percentage", "battery_text" };
 
             ViewGroup vg = (ViewGroup) statusBarView.findViewById(
-                    res.getIdentifier("signal_battery_cluster", "id", PACKAGE_NAME));
+                    res.getIdentifier("system_icons", "id", PACKAGE_NAME));
 
             mBatteryStyle = Integer.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));

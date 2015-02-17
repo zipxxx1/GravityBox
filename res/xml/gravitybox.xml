@@ -574,18 +574,6 @@
                 android:order="6"
                 android:defaultValue="0" />
 
-            <EditTextPreference 
-                android:key="pref_notif_carrier_text"
-                android:title="@string/pref_lockscreen_carrier_text_title"
-                android:order="7"
-                android:defaultValue="" />
-
-            <EditTextPreference 
-                android:key="pref_notif_carrier2_text"
-                android:title="@string/pref_lockscreen_carrier2_text_title"
-                android:order="8"
-                android:defaultValue="" />
-
             <CheckBoxPreference 
                 android:key="pref_notif_expand_all"
                 android:title="@string/pref_notif_expand_all_title"

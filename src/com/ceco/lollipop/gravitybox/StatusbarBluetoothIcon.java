@@ -47,7 +47,7 @@ public class StatusbarBluetoothIcon implements BroadcastSubReceiver {
     private void createHooks(ClassLoader classLoader) {
         try {
             XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR_POLICY, classLoader, 
-                    "updateBluetooth", Intent.class, new XC_MethodHook() {
+                    "updateBluetooth", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mSbService == null) {

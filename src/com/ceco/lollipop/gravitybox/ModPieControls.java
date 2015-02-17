@@ -358,8 +358,8 @@ public class ModPieControls {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "disable", int.class, new XC_MethodHook() {
-
+            XposedHelpers.findAndHookMethod(phoneStatusBarClass, "disable", 
+                    int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mPieController == null) return;
