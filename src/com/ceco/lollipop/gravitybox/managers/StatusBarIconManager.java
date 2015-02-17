@@ -138,10 +138,9 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
 
         Map<String, Integer[]> basicIconMap = new HashMap<String, Integer[]>();
         basicIconMap.put("stat_sys_data_bluetooth", new Integer[] 
-                { R.drawable.stat_sys_data_bluetooth, R.drawable.stat_sys_data_bluetooth });
+                { R.drawable.stat_sys_data_bluetooth, null });
         basicIconMap.put("stat_sys_data_bluetooth_connected", new Integer[] {
-                R.drawable.stat_sys_data_bluetooth_connected, 
-                R.drawable.stat_sys_data_bluetooth_connected });
+                R.drawable.stat_sys_data_bluetooth_connected, null });
         basicIconMap.put("stat_sys_alarm", new Integer[] {
                 R.drawable.stat_sys_alarm_jb, null });
         basicIconMap.put("stat_sys_ringer_vibrate", new Integer[] { 
