@@ -70,6 +70,17 @@ public class StatusbarBattery implements IconManagerListener {
         }
     }
 
+    public void setShowPercentage(boolean showPercentage) {
+        if (mBattery != null) {
+            try {
+                XposedHelpers.setBooleanField(mBattery, "mShowPercent", showPercentage);
+                mBattery.invalidate();
+            } catch (Throwable t) {
+                log("Error setting percentage: " + t.getMessage());
+            }
+        }
+    }
+
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {

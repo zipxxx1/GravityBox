@@ -50,7 +50,7 @@ public class ModBatteryStyle {
     private static boolean mMtkPercentTextEnabled;
     private static StatusbarBatteryPercentage mPercentText;
     private static CmCircleBattery mCircleBattery;
-    private static View mStockBattery;
+    private static StatusbarBattery mStockBattery;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -176,13 +176,12 @@ public class ModBatteryStyle {
             if (DEBUG) log("CmCircleBattery injected");
 
             // find battery
-            mStockBattery = vg.findViewById(
+            View stockBatteryView = vg.findViewById(
                     res.getIdentifier("battery", "id", PACKAGE_NAME));
-            if (mStockBattery != null) {
-                mStockBattery.setTag("stock_battery");
-                StatusbarBattery sbb = new StatusbarBattery(mStockBattery);
+            if (stockBatteryView != null) {
+                mStockBattery = new StatusbarBattery(stockBatteryView);
                 if (SysUiManagers.IconManager != null) {
-                    SysUiManagers.IconManager.registerListener(sbb);
+                    SysUiManagers.IconManager.registerListener(mStockBattery);
                 }
             }
 
@@ -207,8 +206,15 @@ public class ModBatteryStyle {
     private static void updateBatteryStyle() {
         try {
             if (mStockBattery != null) {
-                mStockBattery.setVisibility((mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK) ?
-                             View.VISIBLE : View.GONE);
+                if (mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK ||
+                        mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_STOCK_PERCENT) {
+                    mStockBattery.getView().setVisibility(View.VISIBLE);
+                    mStockBattery.setShowPercentage(mBatteryStyle == 
+                            GravityBoxSettings.BATTERY_STYLE_STOCK_PERCENT);
+                    
+                } else {
+                    mStockBattery.getView().setVisibility(View.GONE);
+                }
             }
 
             if (mCircleBattery != null) {

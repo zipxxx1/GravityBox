@@ -1815,4 +1815,7 @@
     <string name="state_enabled">Enabled</string>
     <string name="state_disabled">Disabled</string>
 
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">Stock battery with percentage</string>
+
 </resources>
