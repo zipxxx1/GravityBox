@@ -133,6 +133,7 @@ public class ModStatusBar {
     private static int mDeleteIconId;
     private static StatusbarDownloadProgressView mDownloadProgressView;
     private static TickerPolicy mTickerPolicy;
+    private static StatusbarSignalCluster mSignalCluster;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -385,6 +386,27 @@ public class ModStatusBar {
         }
     }
 
+    private static void prepareSignalCluster() {
+        try {
+            Resources res = mContext.getResources();
+            int scResId = res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
+            if (scResId != 0) {
+                LinearLayout view = (LinearLayout) mStatusBarView.findViewById(scResId);
+                if (view != null) {
+                    mSignalCluster = StatusbarSignalCluster.create(view, mPrefs);
+                    mSignalCluster.setNetworkController(XposedHelpers.getObjectField(
+                            mPhoneStatusBar, "mNetworkController"));
+                    mBroadcastSubReceivers.add(mSignalCluster);
+                    if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
+                }
+            } else if (DEBUG) {
+                log("signal_cluster not found in mStatusBarView");
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
@@ -453,6 +475,7 @@ public class ModStatusBar {
                     prepareHeaderTimeView();
                     prepareBrightnessControl();
                     prepareTrafficMeter();
+                    prepareSignalCluster();
 
                     ModBatteryStyle.init(mStatusBarView, prefs);
 

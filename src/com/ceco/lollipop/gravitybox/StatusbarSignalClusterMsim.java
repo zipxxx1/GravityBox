@@ -17,7 +17,6 @@ package com.ceco.lollipop.gravitybox;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
@@ -59,6 +58,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                     int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mView != param.thisObject) return;
                     if (mSignalIconAutohide) {
                         int simSlot = (Integer) param.args[0];
                         ((boolean[])XposedHelpers.getObjectField(mView, "mMobileVisible"))[simSlot] =
@@ -67,37 +67,18 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                 }
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mView != param.thisObject) return;
                     apply((Integer) param.args[0]);
                 }
             });
 
             if (mDataActivityEnabled) {
                 try {
-                    final ClassLoader classLoader = mView.getContext().getClassLoader();
-                    final Class<?> networkCtrlClass = XposedHelpers.findClass(
-                            "com.android.systemui.statusbar.policy.MSimNetworkController", classLoader);
-                    final Class<?> networkCtrlCbClass = XposedHelpers.findClass(
-                            "com.android.systemui.statusbar.policy.MSimNetworkController.MSimNetworkSignalChangedCallback", 
-                                classLoader);
-                    XposedHelpers.findAndHookMethod(mView.getClass(), "setNetworkController",
-                            networkCtrlClass, new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            mNetworkControllerCallback = Proxy.newProxyInstance(classLoader, 
-                                new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallbackMsim(param.args[0]));
-                            XposedHelpers.callMethod(param.args[0], "addAddNetworkSignalChangedCallback",
-                                    mNetworkControllerCallback, 0);
-                            mNetworkControllerCallback2 = Proxy.newProxyInstance(classLoader, 
-                                    new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallbackMsim(param.args[0]));
-                                XposedHelpers.callMethod(param.args[0], "addAddNetworkSignalChangedCallback",
-                                        mNetworkControllerCallback, 1);
-                            if (DEBUG) log("setNetworkController: callback registered");
-                        }
-                    });
-
                     XposedHelpers.findAndHookMethod(mView.getClass(), "onAttachedToWindow", new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (mView != param.thisObject) return;
+
                             View v = (View) XposedHelpers.getObjectField(mView, "mWifiStrengthView");
                             if (v != null && v.getParent() instanceof FrameLayout) {
                                 mWifiActivity = new SignalActivity((FrameLayout)v.getParent(), SignalType.WIFI);
@@ -110,14 +91,14 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                             v = (View) XposedHelpers.getObjectField(mView, "mMobileStrengthView");
                             if (v != null && v.getParent() instanceof FrameLayout) {
                                 mMobileActivity[0] = new SignalActivity((FrameLayout)v.getParent(), SignalType.MOBILE,
-                                        Gravity.BOTTOM | Gravity.RIGHT);
+                                        Gravity.BOTTOM | Gravity.END);
                                 if (DEBUG) log("onAttachedToWindow: mMobileActivity created");
                             }
 
                             v = (View) XposedHelpers.getObjectField(mView, "mMobileStrengthView2");
                             if (v != null && v.getParent() instanceof FrameLayout) {
                                 mMobileActivity[1] = new SignalActivity((FrameLayout)v.getParent(), SignalType.MOBILE,
-                                        Gravity.BOTTOM | Gravity.RIGHT);
+                                        Gravity.BOTTOM | Gravity.END);
                                 if (DEBUG) log("onAttachedToWindow: mMobileActivity2 created");
                             }
                         }
@@ -126,6 +107,8 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                     XposedHelpers.findAndHookMethod(mView.getClass(), "onDetachedFromWindow", new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (mView != param.thisObject) return;
+
                             mWifiActivity = null;
                             if (mMobileActivity != null) {
                                 mMobileActivity[0] = mMobileActivity[1] = null;

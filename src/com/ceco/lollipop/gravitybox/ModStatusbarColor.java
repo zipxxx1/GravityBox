@@ -36,7 +36,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -60,7 +59,6 @@ public class ModStatusbarColor {
     private static View mPanelBar;
     private static List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private static Object mPhoneStatusBar;
-    private static StatusbarSignalCluster mSignalCluster;
     private static int mStatusbarBgColor;
     private static Object mBarBackground;
     private static Integer mStatusbarBgColorOriginal;
@@ -92,8 +90,6 @@ public class ModStatusbarColor {
         try {
             final Class<?> phoneStatusbarViewClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_VIEW, classLoader);
             final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
-            final Class<?> signalClusterViewClass = XposedHelpers.findClass(
-                    StatusbarSignalCluster.getClassName(classLoader), classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
             final Class<?> statusbarIconViewClass = XposedHelpers.findClass(CLASS_STATUSBAR_ICON_VIEW, classLoader);
             final Class<?> sbTransitionsClass = XposedHelpers.findClass(CLASS_SB_TRANSITIONS, classLoader);
@@ -115,19 +111,6 @@ public class ModStatusbarColor {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED);
                     mPanelBar.getContext().registerReceiver(mBroadcastReceiver, intentFilter);
-                }
-            });
-
-            XposedBridge.hookAllConstructors(signalClusterViewClass, new XC_MethodHook() {
-
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    LinearLayout view = (LinearLayout) param.thisObject;
-                    if (mSignalCluster == null) {
-                        mSignalCluster = StatusbarSignalCluster.create(view, prefs);
-                        mBroadcastSubReceivers.add(mSignalCluster);
-                        if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
-                    }
                 }
             });
 
