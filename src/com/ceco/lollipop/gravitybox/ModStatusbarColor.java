@@ -27,9 +27,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -158,6 +160,7 @@ public class ModStatusbarColor {
                     StatusBarIconManager.FLAG_ICON_STYLE_CHANGED)) != 0) {
                 updateStatusIcons("mStatusIcons");
                 updateStatusIcons("mStatusIconsKeyguard");
+                updateSettingsButton();
             }
         }
     };
@@ -187,6 +190,22 @@ public class ModStatusbarColor {
                         }
                     }
                 }
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void updateSettingsButton() {
+        if (mPhoneStatusBar == null || SysUiManagers.IconManager == null) return;
+        try {
+            Object header = XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
+            ImageButton settingsButton = (ImageButton) XposedHelpers.getObjectField(header, "mSettingsButton");
+            if (SysUiManagers.IconManager.isColoringEnabled()) {
+                settingsButton.setColorFilter(SysUiManagers.IconManager.getIconColor(),
+                        PorterDuff.Mode.SRC_IN);
+            } else {
+                settingsButton.clearColorFilter();
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
