@@ -65,6 +65,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -86,6 +87,8 @@ public class ModStatusBar {
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
     private static final String CLASS_ICON_MERGER = "com.android.systemui.statusbar.phone.IconMerger";
     private static final String CLASS_SAVE_IMG_TASK = "com.android.systemui.screenshot.SaveImageInBackgroundTask";
+    private static final String CLASS_STATUSBAR_WM = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
+    private static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
     private static final boolean DEBUG = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
@@ -102,6 +105,16 @@ public class ModStatusBar {
 
     private static enum TickerPolicy { DEFAULT, LOCKED, SECURED, DISABLED };
     public static enum ContainerType { STATUSBAR, HEADER, KEYGUARD };
+
+    public static class StatusBarState {
+        public static final int SHADE = 0;
+        public static final int KEYGUARD = 1;
+        public static final int SHADE_LOCKED = 2;
+    };
+
+    public interface StatusBarStateChangedListener {
+        void onStatusBarStateChanged(int oldState, int newState);
+    }
 
     private static ViewGroup mIconArea;
     private static LinearLayout mLayoutCenter;
@@ -148,6 +161,8 @@ public class ModStatusBar {
     private static int BRIGHTNESS_ON = 255;
 
     private static List<BroadcastSubReceiver> mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
+    private static List<StatusBarStateChangedListener> mStateChangeListeners = 
+            new ArrayList<StatusBarStateChangedListener>();
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -461,6 +476,8 @@ public class ModStatusBar {
                 expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
             }
             final Class<?> phoneStatusbarViewClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_VIEW, classLoader);
+            final Class<?> statusBarWmClass = XposedHelpers.findClass(CLASS_STATUSBAR_WM, classLoader);
+            final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
 
             final Class<?>[] loadAnimParamArgs = new Class<?>[2];
             loadAnimParamArgs[0] = int.class;
@@ -539,6 +556,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_BACKGROUND_CHANGED);
                     if (Utils.isMtkDevice()) {
                         intentFilter.addAction(BatteryStyleController.ACTION_MTK_BATTERY_PERCENTAGE_SWITCH);
                     }
@@ -885,6 +903,40 @@ public class ModStatusBar {
                                     param.setResult(null);
                                 }
                         }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+
+            // status bar state change handling
+            try {
+                XposedHelpers.findAndHookMethod(statusBarWmClass, "setStatusBarState",
+                        int.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        Object currentState = XposedHelpers.getObjectField(param.thisObject, "mCurrentState");
+                        int oldState = (Integer) XposedHelpers.getIntField(currentState, "statusBarState");
+                        int newState = (Integer) param.args[0];
+                        if (DEBUG) log("setStatusBarState: oldState="+oldState+"; newState="+newState);
+                        for (StatusBarStateChangedListener listener : mStateChangeListeners) {
+                            listener.onStatusBarStateChanged(oldState, newState);
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+
+            // notification drawer wallpaper
+            try {
+                XposedHelpers.findAndHookMethod(notifPanelViewClass, "onFinishInflate", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        NotificationWallpaper nw = 
+                                new NotificationWallpaper((FrameLayout) param.thisObject, prefs);
+                        mStateChangeListeners.add(nw);
+                        mBroadcastSubReceivers.add(nw);
                     }
                 });
             } catch (Throwable t) {

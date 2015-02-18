@@ -1152,6 +1152,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatNotifDrawerStyle;
         private ListPreference mPrefNotifBackground;
         private ColorPickerPreference mPrefNotifColor;
+        private SeekBarPreference mPrefNotifAlpha;
         private Preference mPrefNotifImagePortrait;
         private Preference mPrefNotifImageLandscape;
         private CheckBoxPreference mPrefDisableDataNetworkTypeIcons;
@@ -1412,6 +1413,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNotifImagePortrait = (Preference) findPreference(PREF_KEY_NOTIF_IMAGE_PORTRAIT);
             mPrefNotifImageLandscape = (Preference) findPreference(PREF_KEY_NOTIF_IMAGE_LANDSCAPE);
             mPrefNotifExpandAll = (CheckBoxPreference) findPreference(PREF_KEY_NOTIF_EXPAND_ALL);
+            mPrefNotifAlpha = (SeekBarPreference) findPreference(PREF_KEY_NOTIF_BACKGROUND_ALPHA);
 
             mPrefDisableDataNetworkTypeIcons = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS);
             mPrefDisableRoamingIndicators = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_ROAMING_INDICATORS);
@@ -2066,16 +2068,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_NOTIF_BACKGROUND)) {
                 mPrefNotifBackground.setSummary(mPrefNotifBackground.getEntry());
-                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifColor);
-                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifImagePortrait);
-                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifImageLandscape);
                 String option = mPrefs.getString(PREF_KEY_NOTIF_BACKGROUND, NOTIF_BG_DEFAULT);
-                if (option.equals(NOTIF_BG_COLOR)) {
-                    mPrefCatNotifDrawerStyle.addPreference(mPrefNotifColor);
-                } else if (option.equals(NOTIF_BG_IMAGE)) {
-                    mPrefCatNotifDrawerStyle.addPreference(mPrefNotifImagePortrait);
-                    mPrefCatNotifDrawerStyle.addPreference(mPrefNotifImageLandscape);
-                }
+                mPrefNotifColor.setEnabled(option.equals(NOTIF_BG_COLOR));
+                mPrefNotifImagePortrait.setEnabled(option.equals(NOTIF_BG_IMAGE));
+                mPrefNotifImageLandscape.setEnabled(option.equals(NOTIF_BG_IMAGE));
+                mPrefNotifAlpha.setEnabled(!option.equals(NOTIF_BG_DEFAULT));
             }
 
             if (key == null || key.equals(PREF_KEY_BUTTON_BACKLIGHT_MODE)) {
