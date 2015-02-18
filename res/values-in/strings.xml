@@ -295,9 +295,6 @@
     <string name="pref_notif_image_portrait_title">Set gambar posisi berdiri</string>
     <string name="pref_notif_image_landscape_title">Set gambar posisi lanskap</string>
     <string name="pref_notif_background_alpha_title">Transparansi latar belakang</string>
-    <string name="pref_notif_color_mode_title">Mode latar belakang</string>
-    <string name="color_fill_overlay">Melapisi</string>
-    <string name="color_fill_underlay">Mendasari</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Matikan indikator roaming</string>

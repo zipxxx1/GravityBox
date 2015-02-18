@@ -314,9 +314,6 @@
     <string name="pref_notif_image_portrait_title">Set imej potret</string>
     <string name="pref_notif_image_landscape_title">Set imej lanskap</string>
     <string name="pref_notif_background_alpha_title">Latar belakang bayang (transparent)</string>
-    <string name="pref_notif_color_mode_title">Mod latar belakang</string>
-    <string name="color_fill_overlay">Di atas</string>
-    <string name="color_fill_underlay">Di bawah</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Matikan tanda roaming</string>

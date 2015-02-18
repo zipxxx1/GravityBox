@@ -36,20 +36,16 @@ import android.view.ViewParent;
 import android.view.WindowManager;
 import android.view.Surface;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 
 class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver {
     private static final String PACKAGE_NAME = "com.android.systemui";
     private static final String TAG = "GB:NotificationWallpaper";
 
     private FrameLayout mNotificationPanelView;
-    private ImageView mNotificationWallpaperImage;
     private String mNotifBgImagePathPortrait;
     private String mNotifBgImagePathLandscape;
     private String mBgType;
     private int mColor;
-    private String mColorMode;
     private float mAlpha;
     private Context mContext;
     Bitmap mBitmapWallpaper = null;
@@ -70,7 +66,6 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
         }
 
         mBgType = GravityBoxSettings.NOTIF_BG_DEFAULT;
-        mColorMode = GravityBoxSettings.NOTIF_BG_COLOR_MODE_OVERLAY;
         mAlpha = 0.6f;
 
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
@@ -82,9 +77,6 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
                 GravityBoxSettings.NOTIF_BG_DEFAULT));
         setColor(prefs.getInt(
                 GravityBoxSettings.PREF_KEY_NOTIF_COLOR, Color.BLACK));
-        setColorMode(prefs.getString(
-                GravityBoxSettings.PREF_KEY_NOTIF_COLOR_MODE,
-                GravityBoxSettings.NOTIF_BG_COLOR_MODE_OVERLAY));
         setAlpha(prefs.getInt(
                 GravityBoxSettings.PREF_KEY_NOTIF_BACKGROUND_ALPHA, 0));
         mNotificationPanelView.addView(this);
@@ -105,14 +97,6 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
 
     public void setColor(int color) {
         mColor = color; 
-    }
-
-    public String getColorMode() {
-        return mColorMode;
-    }
-
-    public void setColorMode(String colorMode) {
-        mColorMode = colorMode;
     }
 
     public float getAlpha() {
@@ -144,11 +128,6 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
     }
 
     private void updateNotificationWallpaper() {
-        if (mNotificationWallpaperImage != null) {
-            removeView(mNotificationWallpaperImage);
-            mNotificationWallpaperImage = null;
-        }
-
         if (mBgType.equals(GravityBoxSettings.NOTIF_BG_DEFAULT)) return;
 
         boolean isLandscape = false;
@@ -185,21 +164,9 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
 
         if (d != null) {
             d.setAlpha(mAlpha == 0 ? 255 : (int) ((1-mAlpha) * 255));
-            if (mColorMode.equals(GravityBoxSettings.NOTIF_BG_COLOR_MODE_UNDERLAY)) {
-                ViewParent parent = getParent();
-                if (parent != null && parent instanceof FrameLayout) {
-                    ((FrameLayout)parent).setBackground(d);
-                }
-            } else if (mColorMode.equals(GravityBoxSettings.NOTIF_BG_COLOR_MODE_OVERLAY)) {
-                mNotificationWallpaperImage = new ImageView(getContext());
-                if (mBgType.equals(GravityBoxSettings.NOTIF_BG_IMAGE) &&
-                        isLandscape && !fileLandscape.exists()) {
-                    mNotificationWallpaperImage.setScaleType(ScaleType.CENTER_CROP);
-                } else {
-                    mNotificationWallpaperImage.setScaleType(ScaleType.CENTER);
-                }
-                mNotificationWallpaperImage.setImageDrawable(d);
-                addView(mNotificationWallpaperImage, -1, -1);
+            ViewParent parent = getParent();
+            if (parent != null && parent instanceof FrameLayout) {
+                ((FrameLayout)parent).setBackground(d);
             }
         }
     }
@@ -230,9 +197,6 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BG_ALPHA)) {
                 setAlpha(intent.getIntExtra(GravityBoxSettings.EXTRA_BG_ALPHA, 0));
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_BG_COLOR_MODE)) {
-                setColorMode(intent.getStringExtra(GravityBoxSettings.EXTRA_BG_COLOR_MODE));
             }
             updateNotificationPanelBackground();
         }

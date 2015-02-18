@@ -320,9 +320,6 @@
     <string name="pref_notif_image_portrait_title">Imposta immagine verticale</string>
     <string name="pref_notif_image_landscape_title">Imposta immagine orizzontale</string>
     <string name="pref_notif_background_alpha_title">Trasparenza sfondo</string>
-    <string name="pref_notif_color_mode_title">Tipo di sfondo</string>
-    <string name="color_fill_overlay">Sovrastante</string>
-    <string name="color_fill_underlay">Sottostante</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Disattiva indicatori roaming</string>

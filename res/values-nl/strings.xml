@@ -314,9 +314,6 @@
     <string name="pref_notif_image_portrait_title">Portret afbeelding instellen</string>
     <string name="pref_notif_image_landscape_title">Landschap afbeelding instellen</string>
     <string name="pref_notif_background_alpha_title">Doorzichtigheid van achtergrond</string>
-    <string name="pref_notif_color_mode_title">Achtergrond modus</string>
-    <string name="color_fill_overlay">Overlay</string>
-    <string name="color_fill_underlay">Underlay</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Roaming indicators uitschakelen</string>

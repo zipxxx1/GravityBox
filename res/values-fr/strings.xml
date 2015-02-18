@@ -320,9 +320,6 @@
     <string name="pref_notif_image_portrait_title">Image en mode portrait</string>
     <string name="pref_notif_image_landscape_title">Image en mode paysage</string>
     <string name="pref_notif_background_alpha_title">Transparence de l\'arrière-plan</string>
-    <string name="pref_notif_color_mode_title">Mode d\'arrière-plan</string>
-    <string name="color_fill_overlay">Surimpression</string>
-    <string name="color_fill_underlay">Sous-couche</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Désactiver indic. d\'itinérance</string>

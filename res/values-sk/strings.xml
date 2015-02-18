@@ -298,9 +298,6 @@
     <string name="pref_notif_image_portrait_title">Nastaviť obrázok na výšku</string>
     <string name="pref_notif_image_landscape_title">Nastaviť obázok na šírku</string>
     <string name="pref_notif_background_alpha_title">Priehľadnosť pozadia</string>
-    <string name="pref_notif_color_mode_title">Režim pozadia</string>
-    <string name="color_fill_overlay">Prekryť</string>
-    <string name="color_fill_underlay">Podklad</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Vypnúť roaming indikátory</string>

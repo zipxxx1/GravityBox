@@ -291,9 +291,6 @@
     <string name="pref_notif_image_portrait_title">تعيين صورة طولية</string>
     <string name="pref_notif_image_landscape_title">تعيين صورة عرضية</string>
     <string name="pref_notif_background_alpha_title">شفافية الخلفية</string>
-    <string name="pref_notif_color_mode_title">وضع الخلفية</string>
-    <string name="color_fill_overlay">أمامي</string>
-    <string name="color_fill_underlay">خلفي</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">تعطيل مؤشرات التجوال</string>

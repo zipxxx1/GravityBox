@@ -320,9 +320,6 @@
     <string name="pref_notif_image_portrait_title">Álló tájolás hátterének beállítása</string>
     <string name="pref_notif_image_landscape_title">Fekvő tájolás hátterének beállítása</string>
     <string name="pref_notif_background_alpha_title">Háttér átlátszóság</string>
-    <string name="pref_notif_color_mode_title">Háttér üzemmód</string>
-    <string name="color_fill_overlay">Átfedés</string>
-    <string name="color_fill_underlay">Alsó réteg -Underlay-</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Roaming mutató letiltása</string>

@@ -192,9 +192,6 @@
     <string name="pref_notif_image_portrait_title">Задати портретну картинку</string>
     <string name="pref_notif_image_landscape_title">Задати ландшафтну картинку</string>
     <string name="pref_notif_background_alpha_title">Прозорість фону</string>
-    <string name="pref_notif_color_mode_title">Режим фону</string>
-    <string name="color_fill_overlay">Передній план</string>
-    <string name="color_fill_underlay">Задній план</string>
     <string name="pref_disable_roaming_indicators_title">Відключити індикатор роумінгу</string>
     <string name="pref_disable_roaming_indicators_summary">При відключенні R-індикатор не буде відображатися. Використовуйте з обережністю.</string>
     <string name="pie_battery_status_charging">Зарядка ( %d%%)</string>

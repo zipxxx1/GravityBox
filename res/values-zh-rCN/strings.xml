@@ -320,9 +320,6 @@
     <string name="pref_notif_image_portrait_title">设置竖向图片</string>
     <string name="pref_notif_image_landscape_title">设置横向图片</string>
     <string name="pref_notif_background_alpha_title">背景透明度</string>
-    <string name="pref_notif_color_mode_title">背景模式</string>
-    <string name="color_fill_overlay">覆盖</string>
-    <string name="color_fill_underlay">底图</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">禁用漫游指示</string>

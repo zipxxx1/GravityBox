@@ -289,9 +289,6 @@
     <string name="pref_notif_image_portrait_title">Dikey resmi ayarla</string>
     <string name="pref_notif_image_landscape_title">Yatay resmi ayarla</string>
     <string name="pref_notif_background_alpha_title">Arkaplan saydamlığı</string>
-    <string name="pref_notif_color_mode_title">Arkaplan modu</string>
-    <string name="color_fill_overlay">Üstünü kapla</string>
-    <string name="color_fill_underlay">Altını kapla</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Dolaşım göstergesini devre dışı bırak</string>

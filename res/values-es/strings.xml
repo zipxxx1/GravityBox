@@ -320,9 +320,6 @@
     <string name="pref_notif_image_portrait_title">Establecer imagen en modo retrato</string>
     <string name="pref_notif_image_landscape_title">Establecer imagen panorámica</string>
     <string name="pref_notif_background_alpha_title">Transparencia del fondo</string>
-    <string name="pref_notif_color_mode_title">Posición del fondo</string>
-    <string name="color_fill_overlay">Por encima</string>
-    <string name="color_fill_underlay">Por debajo</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Desactivar indicadores de roaming</string>

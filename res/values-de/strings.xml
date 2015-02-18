@@ -313,9 +313,6 @@
     <string name="pref_notif_image_portrait_title">Bild für Hochformat auswählen</string>
     <string name="pref_notif_image_landscape_title">Bild für Querformat auswählen</string>
     <string name="pref_notif_background_alpha_title">Hintergrundtransparenz auswählen</string>
-    <string name="pref_notif_color_mode_title">Hintergrund-Modus</string>
-    <string name="color_fill_overlay">Über Benachrichtigungen</string>
-    <string name="color_fill_underlay">Unter Benachrichtigungen</string>
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">Roaming-Symbole deaktivieren</string>

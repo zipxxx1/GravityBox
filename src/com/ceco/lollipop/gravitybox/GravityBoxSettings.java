@@ -62,7 +62,6 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
-import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
@@ -85,7 +84,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Rect;
+import android.graphics.Point;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class GravityBoxSettings extends Activity implements GravityBoxResultReceiver.Receiver {
@@ -383,7 +382,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_NOTIF_DRAWER_STYLE = "pref_cat_notification_drawer_style";
     public static final String PREF_KEY_NOTIF_BACKGROUND = "pref_notif_background";
     public static final String PREF_KEY_NOTIF_COLOR = "pref_notif_color";
-    public static final String PREF_KEY_NOTIF_COLOR_MODE = "pref_notif_color_mode";
     public static final String PREF_KEY_NOTIF_IMAGE_PORTRAIT = "pref_notif_image_portrait";
     public static final String PREF_KEY_NOTIF_IMAGE_LANDSCAPE = "pref_notif_image_landscape";
     public static final String PREF_KEY_NOTIF_BACKGROUND_ALPHA = "pref_notif_background_alpha";
@@ -391,13 +389,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String NOTIF_BG_DEFAULT = "default";
     public static final String NOTIF_BG_COLOR = "color";
     public static final String NOTIF_BG_IMAGE = "image";
-    public static final String NOTIF_BG_COLOR_MODE_OVERLAY = "overlay";
-    public static final String NOTIF_BG_COLOR_MODE_UNDERLAY = "underlay";
     public static final String ACTION_NOTIF_BACKGROUND_CHANGED = "gravitybox.intent.action.NOTIF_BACKGROUND_CHANGED";
     public static final String ACTION_NOTIF_EXPAND_ALL_CHANGED = "gravitybox.intent.action.NOTIF_EXPAND_ALL_CHANGED";
     public static final String EXTRA_BG_TYPE = "bgType";
     public static final String EXTRA_BG_COLOR = "bgColor";
-    public static final String EXTRA_BG_COLOR_MODE = "bgColorMode";
     public static final String EXTRA_BG_ALPHA = "bgAlpha";
     public static final String EXTRA_NOTIF_EXPAND_ALL = "notifExpandAll";
 
@@ -1159,7 +1154,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ColorPickerPreference mPrefNotifColor;
         private Preference mPrefNotifImagePortrait;
         private Preference mPrefNotifImageLandscape;
-        private ListPreference mPrefNotifColorMode;
         private CheckBoxPreference mPrefDisableDataNetworkTypeIcons;
         private CheckBoxPreference mPrefNotifExpandAll;
         private CheckBoxPreference mPrefDisableRoamingIndicators;
@@ -1417,7 +1411,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNotifColor = (ColorPickerPreference) findPreference(PREF_KEY_NOTIF_COLOR);
             mPrefNotifImagePortrait = (Preference) findPreference(PREF_KEY_NOTIF_IMAGE_PORTRAIT);
             mPrefNotifImageLandscape = (Preference) findPreference(PREF_KEY_NOTIF_IMAGE_LANDSCAPE);
-            mPrefNotifColorMode = (ListPreference) findPreference(PREF_KEY_NOTIF_COLOR_MODE);
             mPrefNotifExpandAll = (CheckBoxPreference) findPreference(PREF_KEY_NOTIF_EXPAND_ALL);
 
             mPrefDisableDataNetworkTypeIcons = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS);
@@ -2074,22 +2067,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_NOTIF_BACKGROUND)) {
                 mPrefNotifBackground.setSummary(mPrefNotifBackground.getEntry());
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifColor);
-                mPrefCatNotifDrawerStyle.removePreference(mPrefNotifColorMode);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifImagePortrait);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifImageLandscape);
                 String option = mPrefs.getString(PREF_KEY_NOTIF_BACKGROUND, NOTIF_BG_DEFAULT);
                 if (option.equals(NOTIF_BG_COLOR)) {
                     mPrefCatNotifDrawerStyle.addPreference(mPrefNotifColor);
-                    mPrefCatNotifDrawerStyle.addPreference(mPrefNotifColorMode);
                 } else if (option.equals(NOTIF_BG_IMAGE)) {
                     mPrefCatNotifDrawerStyle.addPreference(mPrefNotifImagePortrait);
                     mPrefCatNotifDrawerStyle.addPreference(mPrefNotifImageLandscape);
-                    mPrefCatNotifDrawerStyle.addPreference(mPrefNotifColorMode);
                 }
-            }
-
-            if (key == null || key.equals(PREF_KEY_NOTIF_COLOR_MODE)) {
-                mPrefNotifColorMode.setSummary(mPrefNotifColorMode.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_BUTTON_BACKLIGHT_MODE)) {
@@ -2719,10 +2705,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_NOTIF_COLOR)) {
                 intent.setAction(ACTION_NOTIF_BACKGROUND_CHANGED);
                 intent.putExtra(EXTRA_BG_COLOR, prefs.getInt(PREF_KEY_NOTIF_COLOR, Color.BLACK));
-            } else if (key.equals(PREF_KEY_NOTIF_COLOR_MODE)) {
-                intent.setAction(ACTION_NOTIF_BACKGROUND_CHANGED);
-                intent.putExtra(EXTRA_BG_COLOR_MODE, prefs.getString(
-                        PREF_KEY_NOTIF_COLOR_MODE, NOTIF_BG_COLOR_MODE_OVERLAY));
             } else if (key.equals(PREF_KEY_NOTIF_BACKGROUND_ALPHA)) {
                 intent.setAction(ACTION_NOTIF_BACKGROUND_CHANGED);
                 intent.putExtra(EXTRA_BG_ALPHA, prefs.getInt(PREF_KEY_NOTIF_BACKGROUND_ALPHA, 0));
@@ -3450,49 +3432,35 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 //            getActivity().startActivityFromFragment(this, intent, REQ_LOCKSCREEN_BACKGROUND);
 //        }
 
-        @SuppressWarnings("deprecation")
         private void setCustomNotifBgPortrait() {
             Display display = getActivity().getWindowManager().getDefaultDisplay();
-            int width = display.getWidth();
-            int height = display.getHeight();
-            Rect rect = new Rect();
-            Window window = getActivity().getWindow();
-            window.getDecorView().getWindowVisibleDisplayFrame(rect);
-            int statusBarHeight = rect.top;
-            int contentViewTop = window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
-            int titleBarHeight = contentViewTop - statusBarHeight;
+            Point displaySize = new Point();
+            display.getRealSize(displaySize);
             Intent intent = new Intent(getActivity(), PickImageActivity.class);
             intent.putExtra(PickImageActivity.EXTRA_CROP, true);
             boolean isPortrait = getResources()
                     .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? width : height - titleBarHeight);
-            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? height - titleBarHeight : width);
-            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, isPortrait ? width : height);
-            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, isPortrait ? height : width);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? displaySize.x : displaySize.y);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? displaySize.y : displaySize.x);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, isPortrait ? displaySize.x : displaySize.y);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, isPortrait ? displaySize.y : displaySize.x);
             intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
             intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
             startActivityForResult(intent, REQ_NOTIF_BG_IMAGE_PORTRAIT);
         }
 
-        @SuppressWarnings("deprecation")
         private void setCustomNotifBgLandscape() {
             Display display = getActivity().getWindowManager().getDefaultDisplay();
-            int width = display.getWidth();
-            int height = display.getHeight();
-            Rect rect = new Rect();
-            Window window = getActivity().getWindow();
-            window.getDecorView().getWindowVisibleDisplayFrame(rect);
-            int statusBarHeight = rect.top;
-            int contentViewTop = window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
-            int titleBarHeight = contentViewTop - statusBarHeight;
+            Point displaySize = new Point();
+            display.getRealSize(displaySize);
             Intent intent = new Intent(getActivity(), PickImageActivity.class);
             intent.putExtra(PickImageActivity.EXTRA_CROP, true);
             boolean isPortrait = getResources()
                   .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? height - titleBarHeight : width);
-            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? width : height - titleBarHeight);
-            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, isPortrait ? height : width);
-            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, isPortrait ? width : height);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, isPortrait ? displaySize.y : displaySize.x);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, isPortrait ? displaySize.x : displaySize.y);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, isPortrait ? displaySize.y : displaySize.x);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, isPortrait ? displaySize.x : displaySize.y);
             intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
             intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
             startActivityForResult(intent, REQ_NOTIF_BG_IMAGE_LANDSCAPE);
