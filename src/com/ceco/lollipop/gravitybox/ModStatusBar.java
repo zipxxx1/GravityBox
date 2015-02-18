@@ -425,7 +425,7 @@ public class ModStatusBar {
             if (container != null && scResId != 0) {
                 LinearLayout view = (LinearLayout) container.findViewById(scResId);
                 if (view != null) {
-                    StatusbarSignalCluster sc = StatusbarSignalCluster.create(ContainerType.STATUSBAR, view, mPrefs);
+                    StatusbarSignalCluster sc = StatusbarSignalCluster.create(containerType, view, mPrefs);
                     sc.setNetworkController(XposedHelpers.getObjectField(
                             mPhoneStatusBar, "mNetworkController"));
                     mBroadcastSubReceivers.add(sc);
