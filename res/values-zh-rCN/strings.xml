@@ -28,6 +28,8 @@
     <string name="vol_music_controls_summary">当屏幕关闭时长按音量键以切换歌曲</string>
 
     <string name="low_battery_warning_policy_title">低电量警告</string>
+	<string name="low_battery_warning_default">默认</string>
+	<string name="low_battery_warning_nonintrusive">不打扰</string>
     <string name="low_battery_warning_off">关闭</string>
 
     <string name="reboot_required">重新启动以后设置才会启用</string>
@@ -203,6 +205,7 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">启用锁屏画面旋转</string>
+	<string name="pref_lockscreen_rotation_summary">需要重新启动</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">启用菜单键</string>
@@ -1334,8 +1337,7 @@
         出现这种情况仅在屏幕不是盖住的（例如：当设备没有在口袋）
         它可以选择扩展面板的通知根据当前锁屏的安全策略和用户偏好
         请注意，激活屏幕，需要启用锁屏
-        下面此开关是总开关
-        启用后，额外的配置可以在每个应用程序的基础上进行</string>
+        下面此开关是总开关，启用后额外的配置可以在每个应用程序的基础上进行</string>
     <string name="lc_active_screen_switch_title">启用激活屏幕</string>
     <string name="lc_expand_notification_panel_title">展开通知面板</string>
 
@@ -1479,7 +1481,7 @@
     <string name="qs_tile_compass">指南针</string>
     <string name="quick_settings_compass_off">指南针已关闭</string>
     <string name="quick_settings_compass_init">正在初始化&#8230;</string>
-    
+	<string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
 
     <!-- Cardinal directions -->
     <string name="cd_north">北</string>
@@ -1662,9 +1664,10 @@
     <string name="pref_power_proximity_wake_ignore_call_title">忽略来电</string>
     
     <!-- Status bar: show download progress -->
-    <string name="pref_statusbar_download_progress_title">下载进度条</string>
-    <string name="pref_statusbar_download_progress_summary">当使用安卓标准下载管理器时在状态栏显示进度条</string>
-
+    <string name="pref_statusbar_download_progress_title">进度条</string>
+    <string name="pref_statusbar_download_progress_summary">在状态栏显示进度条
+		标准的Android下载管理器,蓝牙传输和其它应用程序
+		需要启用终极通知控制进度条跟踪</string>
     <string name="sb_download_progress_off">禁用</string>
     <string name="sb_download_progress_top">顶部</string>
     <string name="sb_download_progress_bottom">底部</string>
@@ -1799,5 +1802,27 @@
 
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">最近任务键双击动作</string>
+	
+	<!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">默认</string>
+
+    <!-- Tri state pref -->
+    <string name="state_default">默认</string>
+    <string name="state_enabled">开启</string>
+    <string name="state_disabled">关闭</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">原厂电量百分比</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">在状态栏显示</string>
+    <string name="battery_percent_text_statusbar_summary">在标准状态栏显示电量百分比文字(当设备解锁时)</string>
+    <string name="battery_percent_text_keyguard_title">键盘锁模式</string>
+    <string name="battery_percent_text_keyguard_summary">在锁屏状态栏指定百分比文字行为</string>
+    <string name="keyguard_percent_text_default">默认(当充电时)</string>
+    <string name="keyguard_percent_text_show_always">允许显示</string>
+    <string name="keyguard_percent_text_hide">隐藏</string>
+    <string name="battery_percent_text_header_hide_title">隐藏状态栏标题</string>
+    <string name="battery_percent_text_size_default">默认</string>
 
 </resources>
