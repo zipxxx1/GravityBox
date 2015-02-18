@@ -329,7 +329,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     private void initSizeMeasureIconHeight() {
         final Resources res = getResources();
         mCircleSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                16, res.getDisplayMetrics());
+                17, res.getDisplayMetrics());
         if (DEBUG) log("mCircleSize = " + mCircleSize + "px");
     }
 

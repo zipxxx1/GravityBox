@@ -128,7 +128,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lParams.gravity = Gravity.CENTER_VERTICAL;
         mCircleBattery.setLayoutParams(lParams);
-        mCircleBattery.setPadding(6, 0, 0, 0);
+        mCircleBattery.setPadding(8, 0, 0, 0);
         mCircleBattery.setVisibility(View.GONE);
         mSystemIcons.addView(mCircleBattery);
         if (DEBUG) log("CmCircleBattery injected");
