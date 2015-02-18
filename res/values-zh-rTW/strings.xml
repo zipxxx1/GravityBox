@@ -1656,8 +1656,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">停用狀態列的通知預覽</string>
     <string name="sb_ticker_policy_default">系統預設值</string>
-    <string name="sb_ticker_policy_locked">在鎖定畫面停用</string>
-    <string name="sb_ticker_policy_secured">在鎖定畫面停用 (當已設定鎖定畫面安全性時)</string>
     <string name="sb_ticker_policy_disabled">永遠停用</string>
 
     <!-- MSIM signal cluster: Hide SIM labels -->

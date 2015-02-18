@@ -1672,8 +1672,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">状态栏通知预览策略</string>
     <string name="sb_ticker_policy_default">默认</string>
-    <string name="sb_ticker_policy_locked">锁屏时禁用</string>
-    <string name="sb_ticker_policy_secured">有安全锁时禁用</string>
     <string name="sb_ticker_policy_disabled">总是禁用</string>
 
     <!-- MSIM signal cluster: Hide SIM labels -->

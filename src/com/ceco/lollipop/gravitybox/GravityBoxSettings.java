@@ -768,6 +768,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS = "sbDownloadProgressThickness";
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN = "sbDownloadProgressMargin";
 
+    public static final String PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH = "pref_statusbar_ticker_master_switch";
     public static final String PREF_KEY_STATUSBAR_TICKER_POLICY = "pref_statusbar_ticker_policy";
     public static final String ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED = "gravitybox.intent.action.STATUSBAR_TICKER_POLICY_CHANGED";
     public static final String EXTRA_STATUSBAR_TICKER_POLICY = "sbTickerPolicy";
@@ -852,7 +853,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_MTK_FIX_DEV_OPTS,
             PREF_KEY_MTK_FIX_TTS_SETTINGS,
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
-            PREF_KEY_NAVBAR_LEFT_HANDED
+            PREF_KEY_NAVBAR_LEFT_HANDED,
+            PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(

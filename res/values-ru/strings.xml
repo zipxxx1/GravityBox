@@ -1674,8 +1674,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Строка уведомлений</string>
     <string name="sb_ticker_policy_default">По умолчанию</string>
-    <string name="sb_ticker_policy_locked">Откл на экране блокировки</string>
-    <string name="sb_ticker_policy_secured">Откл на защищённом экране блокировки</string>
     <string name="sb_ticker_policy_disabled">Откл всегда</string>
 
     <!-- MSIM signal cluster: Hide SIM labels -->

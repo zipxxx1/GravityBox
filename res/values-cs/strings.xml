@@ -1636,8 +1636,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Náhled obsahu notifikací</string>
     <string name="sb_ticker_policy_default">Původní</string>
-    <string name="sb_ticker_policy_locked">Zakázat na obrazovce uzamčení</string>
-    <string name="sb_ticker_policy_secured">Zakázat na zabezpečené obrazovce uzamčení</string>
     <string name="sb_ticker_policy_disabled">Vždy zakázat</string>
 
     <!-- MSIM signal cluster: Hide SIM labels -->

@@ -1675,8 +1675,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Notification ticker policy</string>
     <string name="sb_ticker_policy_default">Default</string>
-    <string name="sb_ticker_policy_locked">Disable on lock screen</string>
-    <string name="sb_ticker_policy_secured">Disable on secured lock screen</string>
     <string name="sb_ticker_policy_disabled">Always disable</string>
 
     <!-- MSIM signal cluster: Hide SIM labels -->
@@ -1824,5 +1822,9 @@
     <string name="keyguard_percent_text_hide">Hide</string>
     <string name="battery_percent_text_header_hide_title">Hide in status bar header</string>
     <string name="battery_percent_text_size_default">Default</string>
-    
+
+    <!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">Notification ticker</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Enables notification ticker and its related features (requires reboot)</string>
+
 </resources>

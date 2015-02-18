@@ -1367,8 +1367,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">通知ティッカーの表示方式</string>
     <string name="sb_ticker_policy_default">デフォルト</string>
-    <string name="sb_ticker_policy_locked">ロック画面では無効化</string>
-    <string name="sb_ticker_policy_secured">ロック中は無効化</string>
     <string name="sb_ticker_policy_disabled">常に無効化</string>
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">SIMラベルを隠す</string>

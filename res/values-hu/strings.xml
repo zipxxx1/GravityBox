@@ -1653,8 +1653,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Értesítés kijelzés házirend</string>
     <string name="sb_ticker_policy_default">Alapértelmezett</string>
-    <string name="sb_ticker_policy_locked">Letiltva zárképernyőnél</string>
-    <string name="sb_ticker_policy_secured">Letiltva zárolt zárképernyőnél</string>
     <string name="sb_ticker_policy_disabled">Mindig letilva</string>
     
     <!-- MSIM signal cluster: Hide SIM labels -->

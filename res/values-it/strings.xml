@@ -1671,8 +1671,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Comportamento testo notifiche</string>
     <string name="sb_ticker_policy_default">Predefinito</string>
-    <string name="sb_ticker_policy_locked">Disabilita con schermata di blocco</string>
-    <string name="sb_ticker_policy_secured">Disabilita con schermata di sicurezza</string>
     <string name="sb_ticker_policy_disabled">Disabilita sempre</string>
 
     <!-- MSIM signal cluster: Hide SIM labels -->

@@ -103,7 +103,7 @@ public class ModStatusBar {
     private static final String SCREENSHOT_URI = "com.android.systemui.SCREENSHOT_URI";
     private static final int SCREENSHOT_NOTIFICATION_ID = 789;
 
-    private static enum TickerPolicy { DEFAULT, LOCKED, SECURED, DISABLED };
+    private static enum TickerPolicy { DEFAULT, DISABLED };
     public static enum ContainerType { STATUSBAR, HEADER, KEYGUARD };
 
     public static class StatusBarState {
@@ -286,6 +286,10 @@ public class ModStatusBar {
             XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
             mDeleteIconId = XResources.getFakeResId(modRes, R.drawable.ic_menu_delete);
             resparam.res.setReplacement(mDeleteIconId, modRes.fwd(R.drawable.ic_menu_delete));
+
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH, false)) {
+                resparam.res.setReplacement(PACKAGE_NAME, "bool", "enable_ticker", true);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -884,29 +888,21 @@ public class ModStatusBar {
             }
 
             // notification ticker policy
-            try {
-                XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "tick",
-                        StatusBarNotification.class, boolean.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        switch (mTickerPolicy) {
-                            case DEFAULT: return;
-                            case DISABLED: param.setResult(null); return;
-                            case LOCKED:
-                            case SECURED:
-                                KeyguardManager kg = (KeyguardManager) 
-                                    mContext.getSystemService(Context.KEYGUARD_SERVICE);
-                                if (mTickerPolicy == TickerPolicy.LOCKED && kg.isKeyguardLocked()) {
-                                    param.setResult(null);
-                                } else if (mTickerPolicy == TickerPolicy.SECURED &&
-                                        kg.isKeyguardLocked() && kg.isKeyguardSecure()) {
-                                    param.setResult(null);
-                                }
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH, false)) {
+                try {
+                    XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "tick",
+                            StatusBarNotification.class, boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            switch (mTickerPolicy) {
+                                case DEFAULT: return;
+                                case DISABLED: param.setResult(null); return;
+                            }
                         }
-                    }
-                });
-            } catch (Throwable t) {
-                XposedBridge.log(t);
+                    });
+                } catch (Throwable t) {
+                    XposedBridge.log(t);
+                }
             }
 
             // status bar state change handling
@@ -921,6 +917,10 @@ public class ModStatusBar {
                         if (DEBUG) log("setStatusBarState: oldState="+oldState+"; newState="+newState);
                         for (StatusBarStateChangedListener listener : mStateChangeListeners) {
                             listener.onStatusBarStateChanged(oldState, newState);
+                        }
+                        // don't show centered clock in keyguard mode
+                        if (mClock != null && mClockCentered) {
+                            mClock.setClockVisibility(newState == StatusBarState.SHADE);
                         }
                     }
                 });

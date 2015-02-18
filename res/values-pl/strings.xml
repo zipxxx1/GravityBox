@@ -1639,8 +1639,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Polityka powiadomień na pasku stanu</string>
     <string name="sb_ticker_policy_default">Domyślna</string>
-    <string name="sb_ticker_policy_locked">Wyłączone na ekranie blokady</string>
-    <string name="sb_ticker_policy_secured">Wyłączone na zabezpieczonym ekranie blokady</string>
     <string name="sb_ticker_policy_disabled">Zawsze wyłączone</string>
 
     <!-- MSIM signal cluster: Hide SIM labels -->

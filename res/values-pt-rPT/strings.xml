@@ -1649,8 +1649,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Política de aviso de notificações</string>
     <string name="sb_ticker_policy_default">Por defeito</string>
-    <string name="sb_ticker_policy_locked">Desativar no ecrã de bloqueio</string>
-    <string name="sb_ticker_policy_secured">Desativar quando método de bloqueio for seguro</string>
     <string name="sb_ticker_policy_disabled">Desativar sempre</string>
 
     <!-- MSIM signal cluster: Hide SIM labels -->

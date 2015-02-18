@@ -1663,8 +1663,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Política de notificaciones ticker</string>
     <string name="sb_ticker_policy_default">Predeterminado</string>
-    <string name="sb_ticker_policy_locked">Desactivado en patalla de bloqueo</string>
-    <string name="sb_ticker_policy_secured">Desactivado con PIN/contraseña/patrón</string>
     <string name="sb_ticker_policy_disabled">Desactivado</string>
 
     <!-- MSIM signal cluster: Hide SIM labels -->

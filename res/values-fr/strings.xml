@@ -1672,8 +1672,6 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Décision pour le bandeau de notification</string>
     <string name="sb_ticker_policy_default">Par défaut</string>
-    <string name="sb_ticker_policy_locked">Désactivé sur l\'écran de déverrouillage</string>
-    <string name="sb_ticker_policy_secured">Désactivé sur l\'écran de déverrouillage sécurisé</string>
     <string name="sb_ticker_policy_disabled">Toujours désactivé</string>
 
     <!-- MSIM signal cluster: Hide SIM labels -->
