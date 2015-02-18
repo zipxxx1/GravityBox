@@ -1095,17 +1095,6 @@ public class ModStatusBar {
         }
     }
 
-    private static Intent getIntentFromClockLink() {
-        if (mClockLink == null) return null;
-
-        try {
-            return Intent.parseUri(mClockLink, 0);
-        } catch (Exception e) {
-            log("Error getting ComponentName from clock link: " + e.getMessage());
-            return null;
-        }
-    }
-
     private static Runnable mLongPressBrightnessChange = new Runnable() {
         @Override
         public void run() {
