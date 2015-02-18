@@ -2,6 +2,7 @@ package com.ceco.lollipop.gravitybox;
 
 import java.lang.reflect.Field;
 
+import com.ceco.lollipop.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 
 import de.robv.android.xposed.XposedHelpers;

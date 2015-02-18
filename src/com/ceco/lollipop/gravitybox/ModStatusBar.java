@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.lollipop.gravitybox.R;
-import com.ceco.lollipop.gravitybox.StatusbarSignalCluster.ContainerType;
 import com.ceco.lollipop.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
@@ -102,6 +101,7 @@ public class ModStatusBar {
     private static final int SCREENSHOT_NOTIFICATION_ID = 789;
 
     private static enum TickerPolicy { DEFAULT, LOCKED, SECURED, DISABLED };
+    public static enum ContainerType { STATUSBAR, HEADER, KEYGUARD };
 
     private static ViewGroup mIconArea;
     private static LinearLayout mLayoutCenter;

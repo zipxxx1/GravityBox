@@ -22,6 +22,7 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.lollipop.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
@@ -53,8 +54,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected static final boolean DEBUG = false;
 
     protected static XSharedPreferences sPrefs;
-
-    public enum ContainerType { STATUSBAR, HEADER, KEYGUARD };
 
     // HSPA+
     protected static int sQsHpResId;
