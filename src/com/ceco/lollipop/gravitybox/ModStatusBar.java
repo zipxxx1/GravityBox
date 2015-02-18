@@ -385,63 +385,35 @@ public class ModStatusBar {
         }
     }
 
-    private static void prepareSignalCluster() {
+    private static void prepareSignalCluster(ContainerType containerType) {
         try {
             Resources res = mContext.getResources();
             int scResId = res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
-            if (scResId != 0) {
-                LinearLayout view = (LinearLayout) mStatusBarView.findViewById(scResId);
+            ViewGroup container = null;
+            switch (containerType) {
+                case STATUSBAR:
+                    container = (ViewGroup) mStatusBarView;
+                    break;
+                case HEADER:
+                    container = (ViewGroup) XposedHelpers.getObjectField(
+                            mPhoneStatusBar, "mHeader");
+                    break;
+                case KEYGUARD:
+                    container = (ViewGroup) XposedHelpers.getObjectField(
+                            mPhoneStatusBar, "mKeyguardStatusBar");
+                    break;
+            }
+            if (container != null && scResId != 0) {
+                LinearLayout view = (LinearLayout) container.findViewById(scResId);
                 if (view != null) {
                     StatusbarSignalCluster sc = StatusbarSignalCluster.create(ContainerType.STATUSBAR, view, mPrefs);
                     sc.setNetworkController(XposedHelpers.getObjectField(
                             mPhoneStatusBar, "mNetworkController"));
                     mBroadcastSubReceivers.add(sc);
-                    if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
+                    if (DEBUG) log("SignalClusterView constructed for: " + containerType);
                 }
             } else if (DEBUG) {
-                log("signal_cluster not found in mStatusBarView");
-            }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    private static void prepareSignalClusterHeader() {
-        try {
-            Resources res = mContext.getResources();
-            int scResId = res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
-            if (scResId != 0) {
-                View header = (View) XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
-                LinearLayout view = (LinearLayout) header.findViewById(scResId);
-                if (view != null) {
-                    StatusbarSignalCluster sc = StatusbarSignalCluster.create(ContainerType.HEADER, view, mPrefs);
-                    mBroadcastSubReceivers.add(sc);
-                    if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
-                }
-            } else if (DEBUG) {
-                log("signal_cluster not found in mStatusBarView");
-            }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    private static void prepareSignalClusterKeyguard() {
-        try {
-            Resources res = mContext.getResources();
-            int scResId = res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
-            if (scResId != 0) {
-                View kgsb = (View) XposedHelpers.getObjectField(mPhoneStatusBar, "mKeyguardStatusBar");
-                LinearLayout view = (LinearLayout) kgsb.findViewById(scResId);
-                if (view != null) {
-                    StatusbarSignalCluster sc = StatusbarSignalCluster.create(ContainerType.KEYGUARD, view, mPrefs);
-                    sc.setNetworkController(XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mNetworkController"));
-                    mBroadcastSubReceivers.add(sc);
-                    if (DEBUG) log("SignalClusterView constructed - mSignalClusterView set");
-                }
-            } else if (DEBUG) {
-                log("signal_cluster not found in mStatusBarView");
+                log("signal_cluster not found in container type: " + containerType);
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -542,9 +514,9 @@ public class ModStatusBar {
                     prepareHeaderTimeView();
                     prepareBrightnessControl();
                     prepareTrafficMeter();
-                    prepareSignalCluster();
-                    prepareSignalClusterHeader();
-                    prepareSignalClusterKeyguard();
+                    prepareSignalCluster(ContainerType.STATUSBAR);
+                    prepareSignalCluster(ContainerType.HEADER);
+                    prepareSignalCluster(ContainerType.KEYGUARD);
                     prepareBatteryStyle(ContainerType.STATUSBAR);
                     prepareBatteryStyle(ContainerType.HEADER);
                     prepareBatteryStyle(ContainerType.KEYGUARD);
