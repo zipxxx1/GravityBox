@@ -28,6 +28,8 @@
     <string name="vol_music_controls_summary">Переключать треки удержанием клавиш громкости при выключенном экране</string>
 
     <string name="low_battery_warning_policy_title">Предупреждение о низком заряде</string>
+    <string name="low_battery_warning_default">По умолчанию</string>
+    <string name="low_battery_warning_nonintrusive">Деликатно</string>
     <string name="low_battery_warning_off">Не предупреждать</string>
 
     <string name="reboot_required">Изменения вступят в силу после перезагрузки</string>
@@ -203,6 +205,7 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Включить поворот экрана</string>
+    <string name="pref_lockscreen_rotation_summary">Необходима перезагрузка</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Включить кнопку меню</string>
@@ -360,7 +363,7 @@
     <string name="pref_holo_bg_dither_title">Сглаженный Holo фон</string>
     <string name="pref_holo_bg_dither_summary">Замена стандартного фона на сглаженный для устранения полосок градиента (необходима перезагрузка)</string>
 
-    <!-- Disable hardware keys for pie -->
+    <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Отключить нав. кнопки</string>
     <string name="pref_hwkeys_disable_summary">Отключение одиночных нажатий на навигационных кнопках при включенном веерном меню.</string>
 
@@ -1802,5 +1805,16 @@
 
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Нажатие на кнопку Недавние</string>
+
+    <!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">По умолчанию</string>
+
+    <!-- Tri state pref -->
+    <string name="state_default">По умолчанию</string>
+    <string name="state_enabled">Вкл</string>
+    <string name="state_disabled">Откл</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">Стоковая батарея с процентами</string>
 
 </resources>
