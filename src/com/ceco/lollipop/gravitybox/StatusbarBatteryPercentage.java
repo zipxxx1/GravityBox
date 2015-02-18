@@ -16,11 +16,13 @@
 package com.ceco.lollipop.gravitybox;
 
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryData;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryStatusListener;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
+import de.robv.android.xposed.XSharedPreferences;
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ArgbEvaluator;
@@ -44,12 +46,29 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
     public static final int CHARGING_STYLE_STATIC = 1;
     public static final int CHARGING_STYLE_ANIMATED = 2;
 
-    public StatusbarBatteryPercentage(TextView clockView) {
-        mPercentage = clockView;
+    public StatusbarBatteryPercentage(TextView view, XSharedPreferences prefs) {
+        mPercentage = view;
         mDefaultColor = mIconColor = mPercentage.getCurrentTextColor();
-        mPercentSign = "";
-        mChargingStyle = CHARGING_STYLE_NONE;
-        mChargingColor = Color.GREEN;
+
+        initPreferences(prefs);
+
+        if (SysUiManagers.IconManager != null) {
+            SysUiManagers.IconManager.registerListener(this);
+        }
+        if (SysUiManagers.BatteryInfoManager != null) {
+            SysUiManagers.BatteryInfoManager.registerListener(this);
+        }
+    }
+
+    private void initPreferences(XSharedPreferences prefs) {
+        setTextSize(Integer.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
+        setPercentSign(prefs.getString(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
+        setChargingStyle(Integer.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING, "0")));
+        setChargingColor(prefs.getInt(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING_COLOR, Color.GREEN));
     }
 
     private boolean startChargingAnimation() {

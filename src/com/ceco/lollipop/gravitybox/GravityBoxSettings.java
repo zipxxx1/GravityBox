@@ -2151,7 +2151,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (Utils.isMtkDevice()) {
                 final boolean mtkBatteryPercent = Settings.Secure.getInt(getActivity().getContentResolver(), 
-                        ModBatteryStyle.SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1;
+                        BatteryStyleController.SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1;
                 if (mtkBatteryPercent) {
                     mPrefs.edit().putBoolean(PREF_KEY_BATTERY_PERCENT_TEXT, false).commit();
                     mPrefBatteryPercent.setChecked(false);

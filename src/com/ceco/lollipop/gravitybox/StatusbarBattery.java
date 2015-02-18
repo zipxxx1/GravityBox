@@ -16,6 +16,7 @@
 package com.ceco.lollipop.gravitybox;
 
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
@@ -48,6 +49,9 @@ public class StatusbarBattery implements IconManagerListener {
             mDefaultChargeColor = XposedHelpers.getIntField(mBattery, "mChargeColor");
         } catch (Throwable t) {
             log("Error backing up original colors: " + t.getMessage());
+        }
+        if (SysUiManagers.IconManager != null) {
+            SysUiManagers.IconManager.registerListener(this);
         }
     }
 

@@ -17,6 +17,7 @@
 package com.ceco.lollipop.gravitybox;
 
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryData;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryStatusListener;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
@@ -178,6 +179,12 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         super.onAttachedToWindow();
         if (!mAttached) {
             mAttached = true;
+            if (SysUiManagers.IconManager != null) {
+                SysUiManagers.IconManager.registerListener(this);
+            }
+            if (SysUiManagers.BatteryInfoManager != null) {
+                SysUiManagers.BatteryInfoManager.registerListener(this);
+            }
             mHandler.postDelayed(mInvalidate, 250);
         }
     }
@@ -187,6 +194,12 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         super.onDetachedFromWindow();
         if (mAttached) {
             mAttached = false;
+            if (SysUiManagers.IconManager != null) {
+                SysUiManagers.IconManager.unregisterListener(this);
+            }
+            if (SysUiManagers.BatteryInfoManager != null) {
+                SysUiManagers.BatteryInfoManager.unregisterListener(this);
+            }
             mRectLeft = null; // makes sure, size based variables get
                                 // recalculated on next attach
             mCircleSize = 0;    // makes sure, mCircleSize is reread from icons on

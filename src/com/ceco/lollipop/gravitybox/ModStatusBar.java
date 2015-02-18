@@ -162,7 +162,6 @@ public class ModStatusBar {
             for (BroadcastSubReceiver bsr : mBroadcastSubReceivers) {
                 bsr.onBroadcastReceived(context, intent);
             }
-            ModBatteryStyle.onBroadcastReceived(context, intent);
 
             if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_CENTER_CLOCK)) {
@@ -449,6 +448,32 @@ public class ModStatusBar {
         }
     }
 
+    private static void prepareBatteryStyle(ContainerType containerType) {
+        try {
+            ViewGroup container = null;
+            switch (containerType) {
+                case STATUSBAR:
+                    container = (ViewGroup) mStatusBarView;
+                    break;
+                case HEADER:
+                    container = (ViewGroup) XposedHelpers.getObjectField(
+                            mPhoneStatusBar, "mHeader");
+                    break;
+                case KEYGUARD:
+                    container = (ViewGroup) XposedHelpers.getObjectField(
+                            mPhoneStatusBar, "mKeyguardStatusBar");
+                    break;
+            }
+            if (container != null) {
+                BatteryStyleController bsc = new BatteryStyleController(
+                        containerType, container, mPrefs);
+                mBroadcastSubReceivers.add(bsc);
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
@@ -520,8 +545,9 @@ public class ModStatusBar {
                     prepareSignalCluster();
                     prepareSignalClusterHeader();
                     prepareSignalClusterKeyguard();
-
-                    ModBatteryStyle.init(mStatusBarView, prefs);
+                    prepareBatteryStyle(ContainerType.STATUSBAR);
+                    prepareBatteryStyle(ContainerType.HEADER);
+                    prepareBatteryStyle(ContainerType.KEYGUARD);
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED);
@@ -542,7 +568,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
                     if (Utils.isMtkDevice()) {
-                        intentFilter.addAction(ModBatteryStyle.ACTION_MTK_BATTERY_PERCENTAGE_SWITCH);
+                        intentFilter.addAction(BatteryStyleController.ACTION_MTK_BATTERY_PERCENTAGE_SWITCH);
                     }
 
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
