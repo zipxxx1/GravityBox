@@ -104,7 +104,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int QUICK_PULLDOWN_LEFT = 2;
 
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
-    public static final String PREF_KEY_BATTERY_PERCENT_TEXT = "pref_battery_percent_text";
+    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR = "pref_battery_percent_text_statusbar";
+    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_HEADER_HIDE = "pref_battery_percent_text_header_hide";
+    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD = "pref_battery_percent_text_keyguard";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_SIZE = "pref_battery_percent_text_size";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STYLE = "pref_battery_percent_text_style";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING = "battery_percent_text_charging";
@@ -477,7 +479,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_BATTERY_STYLE = "batteryStyle";
     public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED =
             "gravitybox.intent.action.BATTERY_PERCENT_TEXT_CHANGED";
-    public static final String EXTRA_BATTERY_PERCENT_TEXT = "batteryPercentText";
+    public static final String EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR = "batteryPercentTextSb";
+    public static final String EXTRA_BATTERY_PERCENT_TEXT_HEADER_HIDE = "batteryPercentTextHeaderHide";
+    public static final String EXTRA_BATTERY_PERCENT_TEXT_KEYGUARD = "batteryPercentTextKg";
     public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED =
             "gravitybox.intent.action.BATTERY_PERCENT_TEXT_SIZE_CHANGED";
     public static final String EXTRA_BATTERY_PERCENT_TEXT_SIZE = "batteryPercentTextSize";
@@ -1092,7 +1096,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                                       implements OnSharedPreferenceChangeListener,
                                                  OnPreferenceChangeListener {
         private ListPreference mBatteryStyle;
-        private CheckBoxPreference mPrefBatteryPercent;
+        private CheckBoxPreference mPrefBatteryPercentSb;
         private ListPreference mPrefBatteryPercentSize;
         private ListPreference mPrefBatteryPercentStyle;
         private ListPreference mPrefBatteryPercentCharging;
@@ -1308,7 +1312,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             AppPickerPreference.cleanupAsync(getActivity());
 
             mBatteryStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_STYLE);
-            mPrefBatteryPercent = (CheckBoxPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT);
+            mPrefBatteryPercentSb = (CheckBoxPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR);
             mPrefBatteryPercentSize = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE);
             mPrefBatteryPercentStyle = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_STYLE);
             mPrefBatteryPercentCharging = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING);
@@ -2153,14 +2157,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 final boolean mtkBatteryPercent = Settings.Secure.getInt(getActivity().getContentResolver(), 
                         BatteryStyleController.SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1;
                 if (mtkBatteryPercent) {
-                    mPrefs.edit().putBoolean(PREF_KEY_BATTERY_PERCENT_TEXT, false).commit();
-                    mPrefBatteryPercent.setChecked(false);
+                    mPrefs.edit().putBoolean(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false).commit();
+                    mPrefBatteryPercentSb.setChecked(false);
                     Intent intent = new Intent();
                     intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
-                    intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT, false);
+                    intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, false);
                     getActivity().sendBroadcast(intent);
                 }
-                mPrefBatteryPercent.setEnabled(!mtkBatteryPercent);
+                mPrefBatteryPercentSb.setEnabled(!mtkBatteryPercent);
             }
 
             if (key == null || key.equals(PREF_KEY_STATUSBAR_CLOCK_DATE)) {
@@ -2460,13 +2464,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_BATTERY_STYLE_CHANGED);
                 int batteryStyle = Integer.valueOf(prefs.getString(PREF_KEY_BATTERY_STYLE, "1"));
                 intent.putExtra("batteryStyle", batteryStyle);
-            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT)) {
+            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR)) {
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
-                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT, prefs.getBoolean(PREF_KEY_BATTERY_PERCENT_TEXT, false));
+                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_HEADER_HIDE)) {
+                intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_HEADER_HIDE, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD)) {
+                intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_KEYGUARD, prefs.getString(key, "DEFAULT"));
             } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE)) {
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_SIZE, Integer.valueOf(
-                        prefs.getString(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
+                        prefs.getString(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "0")));
             } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_STYLE)) {
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STYLE,

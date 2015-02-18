@@ -28,6 +28,7 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 public class StatusbarBatteryPercentage implements IconManagerListener, BatteryStatusListener {
     private TextView mPercentage;
     private int mDefaultColor;
+    private int mDefaultSizePx;
     private int mIconColor;
     private String mPercentSign;
     private BatteryData mBatteryData;
@@ -49,6 +51,16 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
     public StatusbarBatteryPercentage(TextView view, XSharedPreferences prefs) {
         mPercentage = view;
         mDefaultColor = mIconColor = mPercentage.getCurrentTextColor();
+
+        try {
+            Resources res = mPercentage.getResources();
+            int resId = res.getIdentifier("battery_level_text_size", "dimen",
+                    BatteryStyleController.PACKAGE_NAME);
+            mDefaultSizePx = res.getDimensionPixelSize(resId);
+        } catch (Throwable t) {
+            mDefaultSizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16,
+                    mPercentage.getResources().getDisplayMetrics());
+        }
 
         initPreferences(prefs);
 
@@ -130,8 +142,16 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
         update();
     }
 
+    public void setTextSize(int unit, int size) {
+        mPercentage.setTextSize(unit, size);
+    }
+
     public void setTextSize(int size) {
-        mPercentage.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
+        if (size == 0) {
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, mDefaultSizePx);
+        } else {
+            setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
+        }
     }
 
     public void setPercentSign(String percentSign) {

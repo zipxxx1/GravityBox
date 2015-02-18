@@ -785,7 +785,6 @@
     
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">电量百分比文字</string>
-    <string name="battery_percent_text_show_title">显示百分比文字</string>
     <string name="battery_percent_text_size_title">电量百分比文字大小</string>
     <string name="battery_percent_text_size_larger">大</string>
     <string name="battery_percent_text_size_normal">正常</string>

@@ -788,7 +788,6 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Battery percent text</string>
-    <string name="battery_percent_text_show_title">Show percent text</string>
     <string name="battery_percent_text_size_title">Battery percent text size</string>
     <string name="battery_percent_text_size_larger">Larger</string>
     <string name="battery_percent_text_size_normal">Normal</string>
@@ -1818,4 +1817,15 @@
     <!-- Battery style: Stock battery with percentage -->
     <string name="battery_style_stock_percent">Stock battery with percentage</string>
 
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">Show in status bar</string>
+    <string name="battery_percent_text_statusbar_summary">Shows battery percent text in standard status bar (when device is unlocked)</string>
+    <string name="battery_percent_text_keyguard_title">Keyguard mode</string>
+    <string name="battery_percent_text_keyguard_summary">Specifies behavior of percent text in lock screen status bar</string>
+    <string name="keyguard_percent_text_default">Default (while charging)</string>
+    <string name="keyguard_percent_text_show_always">Always show</string>
+    <string name="keyguard_percent_text_hide">Hide</string>
+    <string name="battery_percent_text_header_hide_title">Hide in status bar header</string>
+    <string name="battery_percent_text_size_default">Default</string>
+    
 </resources>

@@ -45,13 +45,17 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     public static final String EXTRA_MTK_BATTERY_PERCENTAGE_STATE = "state";
     public static final String SETTING_MTK_BATTERY_PERCENTAGE = "battery_percentage";
 
+    private enum KeyguardMode { DEFAULT, ALWAYS_SHOW, HIDDEN };
+
     private ContainerType mContainerType;
     private ViewGroup mContainer;
     private ViewGroup mSystemIcons;
     private Context mContext;
     private XSharedPreferences mPrefs;
     private int mBatteryStyle;
-    private boolean mBatteryPercentTextEnabled;
+    private boolean mBatteryPercentTextEnabledSb;
+    private boolean mBatteryPercentTextHeaderHide;
+    private KeyguardMode mBatteryPercentTextKgMode;
     private boolean mMtkPercentTextEnabled;
     private StatusbarBatteryPercentage mPercentText;
     private CmCircleBattery mCircleBattery;
@@ -70,23 +74,27 @@ public class BatteryStyleController implements BroadcastSubReceiver {
 
         initPreferences(prefs);
         initLayout();
-        updateBatteryStyle();
         createHooks();
+        updateBatteryStyle();
     }
 
     private void initPreferences(XSharedPreferences prefs) {
         mPrefs = prefs;
         mBatteryStyle = Integer.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
-        mBatteryPercentTextEnabled = prefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT, false);
+        mBatteryPercentTextEnabledSb = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false);
+        mBatteryPercentTextHeaderHide = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_HEADER_HIDE, false);
+        mBatteryPercentTextKgMode = KeyguardMode.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD, "DEFAULT"));
         mMtkPercentTextEnabled = Utils.isMtkDevice() ?
                 Settings.Secure.getInt(mContext.getContentResolver(), 
                         SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1 : false;
     }
 
     private void initLayout() {
-        final String[] batteryPercentTextIds = new String[] { "percentage", "battery_text" };
+        final String[] batteryPercentTextIds = new String[] { "battery_level", "percentage", "battery_text" };
         Resources res = mContext.getResources();
 
         // inject percent text if it doesn't exist
@@ -163,12 +171,20 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             }
 
             if (mPercentText != null) {
-                if (Utils.isMtkDevice()) {
-                    mPercentText.update();
+                switch (mContainerType) {
+                    case STATUSBAR:
+                        if (Utils.isMtkDevice()) {
+                            mPercentText.update();
+                        }
+                        mPercentText.setVisibility(
+                                (mBatteryPercentTextEnabledSb || mMtkPercentTextEnabled) ?
+                                        View.VISIBLE : View.GONE);
+                        break;
+                    case KEYGUARD:
+                    case HEADER:
+                        XposedHelpers.callMethod(mContainer, "updateVisibilities");
+                        break;
                 }
-                mPercentText.setVisibility(
-                        (mBatteryPercentTextEnabled || mMtkPercentTextEnabled) ?
-                                View.VISIBLE : View.GONE);
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -176,37 +192,95 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     }
 
     private void createHooks() {
-        if (Utils.isMtkDevice()) {
-            Class<?> batteryControllerClass = XposedHelpers.findClass(CLASS_BATTERY_CONTROLLER,
-                    mContext.getClassLoader());
-            XposedHelpers.findAndHookMethod(batteryControllerClass, "onReceive", 
-                    Context.class, Intent.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    updateBatteryStyle();
-                }
-            });
+        if (Utils.isMtkDevice() && mContainerType == ContainerType.STATUSBAR) {
+            try {
+                Class<?> batteryControllerClass = XposedHelpers.findClass(CLASS_BATTERY_CONTROLLER,
+                        mContext.getClassLoader());
+                XposedHelpers.findAndHookMethod(batteryControllerClass, "onReceive", 
+                        Context.class, Intent.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        updateBatteryStyle();
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+        }
+
+        if (mContainerType == ContainerType.KEYGUARD || mContainerType == ContainerType.HEADER) {
+            try {
+                XposedHelpers.findAndHookMethod(mContainer.getClass(),
+                        "updateVisibilities", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (DEBUG) log(mContainerType + ": updateVisibilities");
+                        if (mPercentText != null) {
+                            if (mContainerType == ContainerType.KEYGUARD) {
+                                if (mBatteryPercentTextKgMode == KeyguardMode.ALWAYS_SHOW) {
+                                    mPercentText.setVisibility(View.VISIBLE);
+                                } else if (mBatteryPercentTextKgMode == KeyguardMode.HIDDEN) {
+                                    mPercentText.setVisibility(View.GONE);
+                                }
+                            } else if (mContainerType == ContainerType.HEADER) {
+                                if (mBatteryPercentTextHeaderHide) {
+                                    mPercentText.setVisibility(View.GONE);
+                                }
+                            }
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+            try {
+                XposedHelpers.findAndHookMethod(mContainer.getClass(), "onBatteryLevelChanged",
+                        int.class, boolean.class, boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (DEBUG) log(mContainerType + ": onBatteryLevelChanged");
+                        if (mPercentText != null) {
+                            mPercentText.update();
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
     }
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
-        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED) &&
+        String action = intent.getAction();
+        if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED) &&
                 intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE)) {
                     mBatteryStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE, 1);
                     if (DEBUG) log("mBatteryStyle changed to: " + mBatteryStyle);
                     updateBatteryStyle();
-        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED) &&
-                intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT)) {
-                    mBatteryPercentTextEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT, false);
-                    if (DEBUG) log("mPercentText changed to: " + mBatteryPercentTextEnabled);
-                    updateBatteryStyle();
-        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED) &&
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR)) {
+                mBatteryPercentTextEnabledSb = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, false);
+                if (DEBUG) log("mBatteryPercentTextEnabledSb changed to: " + mBatteryPercentTextEnabledSb);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_HEADER_HIDE)) {
+                mBatteryPercentTextHeaderHide = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_HEADER_HIDE, false);
+                if (DEBUG) log("mBatteryPercentTextHeaderHide changed to: " + mBatteryPercentTextHeaderHide);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_KEYGUARD)) {
+                mBatteryPercentTextKgMode = KeyguardMode.valueOf(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_KEYGUARD));
+                if (DEBUG) log("mBatteryPercentTextEnabledKg changed to: " + mBatteryPercentTextKgMode);
+            }
+            updateBatteryStyle();
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED) &&
                 intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_SIZE) && mPercentText != null) {
-                    int textSize = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_SIZE, 16);
+                    int textSize = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_SIZE, 0);
                     mPercentText.setTextSize(textSize);
                     if (DEBUG) log("PercentText size changed to: " + textSize);
-        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED)
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED)
                        && mPercentText != null) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STYLE)) {
                     String percentSign = intent.getStringExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STYLE);
@@ -225,7 +299,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 mPercentText.setChargingColor(chargingColor);
                 if (DEBUG) log("PercentText charging color changed to: " + chargingColor);
             }
-        } else if (intent.getAction().equals(ACTION_MTK_BATTERY_PERCENTAGE_SWITCH)) {
+        } else if (action.equals(ACTION_MTK_BATTERY_PERCENTAGE_SWITCH)) {
             mMtkPercentTextEnabled = intent.getIntExtra(EXTRA_MTK_BATTERY_PERCENTAGE_STATE, 0) == 1;
             if (DEBUG) log("mMtkPercentText changed to: " + mMtkPercentTextEnabled);
             updateBatteryStyle();
