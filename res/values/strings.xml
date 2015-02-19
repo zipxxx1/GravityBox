@@ -1543,10 +1543,6 @@
     <string name="pref_lc_headsup_dnd_title">Do not disturb</string>
     <string name="pref_lc_headsup_dnd_summary">Won\'t show any heads up while this app is in the foreground</string>
 
-    <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Use Lollipop icons</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Replaces stock navigation key icons by those coming from Android Lollipop (requires reboot)</string>
-
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Active Screen mode</string>
     <string name="lc_active_screen_mode_disabled">Disabled</string>
@@ -1720,11 +1716,6 @@
     <string name="pref_hide_launcher_icon_title">Hide launcher icon</string>
     <string name="pref_hide_launcher_icon_summary">May require launcher restart</string>
 
-    <!-- Navbar: lollipop icon style -->
-    <string name="navbar_l_icon_style_disabled">Disabled</string>
-    <string name="navbar_l_icon_style_original">Original</string>
-    <string name="navbar_l_icon_style_large">Large</string>
-
     <!-- Smart Radio: Adaptive delay for delayed power save -->
     <string name="pref_smart_radio_adaptive_delay_title">Adaptive delay</string>
     <string name="pref_smart_radio_adaptive_delay_summary">Automatically prolongs delay 
@@ -1803,5 +1794,9 @@
     <!-- Notification ticker -->
     <string name="pref_cat_statusbar_ticker_title">Notification ticker</string>
     <string name="pref_statusbar_ticker_master_switch_summary">Enables notification ticker and its related features (requires reboot)</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">Use larger icons</string>
+    <string name="pref_navbar_larger_icons_summary">Requires reboot</string>
 
 </resources>

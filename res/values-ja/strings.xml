@@ -1261,9 +1261,6 @@
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
     <string name="pref_lc_headsup_dnd_title">通知の一時停止</string>
     <string name="pref_lc_headsup_dnd_summary">このアプリを前面で起動しているときにHeads up通知を表示しないようにします。</string>
-    <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Android Lナビキーアイコンにする</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">ナビキーのアイコンをAndroid Lのものに変更します。(要再起動)</string>
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">アクティブスクリーンモード</string>
     <string name="lc_active_screen_mode_disabled">無効</string>
@@ -1402,10 +1399,6 @@
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">ホームアプリアイコンを隠す</string>
     <string name="pref_hide_launcher_icon_summary">ホームアプリの再起動が必要な場合があります。</string>
-    <!-- Navbar: lollipop icon style -->
-    <string name="navbar_l_icon_style_disabled">無効</string>
-    <string name="navbar_l_icon_style_original">オリジナル</string>
-    <string name="navbar_l_icon_style_large">大</string>
     <!-- Smart Radio: Adaptive delay for delayed power save -->
     <string name="pref_smart_radio_adaptive_delay_title">適切な遅延</string>
     <string name="pref_smart_radio_adaptive_delay_summary">モバイルデータ通信のトラフィックが指定した閾値を超えているとき、

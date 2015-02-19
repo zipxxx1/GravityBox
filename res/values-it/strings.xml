@@ -1539,10 +1539,6 @@
     <string name="pref_lc_headsup_dnd_title">Non disturbare</string>
     <string name="pref_lc_headsup_dnd_summary">Non mostrare notifiche a comparsa quando l\'app è in primo piano</string>
 
-    <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Icone pulsanti Lollipop</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Sostituisce le icone dei pulsanti della barra di navigazione standard con quelle di Lollipop (richiede riavvio)</string>
-
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Modalità Active Screen</string>
     <string name="lc_active_screen_mode_disabled">Disabilitata</string>
@@ -1715,11 +1711,6 @@
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Nascondi icona launcher</string>
     <string name="pref_hide_launcher_icon_summary">Potrebbe richiedere il riavvio del launcher</string>
-
-    <!-- Navbar: lollipop icon style -->
-    <string name="navbar_l_icon_style_disabled">Disattivata</string>
-    <string name="navbar_l_icon_style_original">Originale</string>
-    <string name="navbar_l_icon_style_large">Grande</string>
 
     <!-- Smart Radio: Adaptive delay for delayed power save -->
     <string name="pref_smart_radio_adaptive_delay_title">Ritardo adattivo</string>

@@ -1508,10 +1508,6 @@
     <string name="pref_lc_headsup_dnd_title">Nevyrušovať</string>
     <string name="pref_lc_headsup_dnd_summary">Nezobrazí žiadne heads up notifikácie ak je táto aplikácia v popredí</string>
 
-    <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Použiť Lollipop ikony</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Nahradí pôvodné ikony navigačných tlačidiel ikonami z Android Lollipop (vyžaduje reštart)</string>
-
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Režim aktívnej obrazovky</string>
     <string name="lc_active_screen_mode_disabled">Vypnutá</string>
@@ -1685,11 +1681,6 @@
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Skryť ikonu v spúšťači aplikácií</string>
     <string name="pref_hide_launcher_icon_summary">Môže vyžadovať reštart spúšťača aplikácií</string>
-
-    <!-- Navbar: lollipop icon style -->
-    <string name="navbar_l_icon_style_disabled">Vypnuté</string>
-    <string name="navbar_l_icon_style_original">Originálne</string>
-    <string name="navbar_l_icon_style_large">Veľké</string>
 
     <!-- Smart Radio: Adaptive delay for delayed power save -->
     <string name="pref_smart_radio_adaptive_delay_title">Adaptívne oneskorenie</string>

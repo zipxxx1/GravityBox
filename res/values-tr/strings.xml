@@ -1488,10 +1488,6 @@
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
     <string name="pref_lc_headsup_dnd_summary">Bu uygulama önplandayken heads up bildirimlerini gösterme</string>
 
-    <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Android L gezinme ikonları</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Gezinme çubuğu ikonlarını Android L ikonları ile değiştirir (yeniden başlatma gerekir)</string>
-
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Active Screen modu</string>
     <string name="lc_active_screen_mode_disabled">Devre dışı</string>

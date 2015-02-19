@@ -81,8 +81,6 @@ public class ModNavigationBar {
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
     private static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
 
-    public enum LollipopIconStyle { DISABLED, ORIGINAL, LARGE };
-
     private static XSharedPreferences mPrefs;
     private static boolean mAlwaysShowMenukey;
     private static View mNavigationBarView;
@@ -102,7 +100,7 @@ public class ModNavigationBar {
     private static boolean mNavbarRingDisabled;
     private static KeyguardManager mKeyguard;
     private static boolean mNavbarLeftHanded;
-    private static LollipopIconStyle mLollipopIconStyle;
+    private static boolean mUseLargerIcons;
 
     // Custom key
     private static boolean mCustomKeyEnabled;
@@ -317,25 +315,19 @@ public class ModNavigationBar {
     }
 
     public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
-        final LollipopIconStyle lis = LollipopIconStyle.valueOf(prefs.getString(
-                GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICON_STYLE, "DISABLED"));
-        if (lis != LollipopIconStyle.DISABLED) {
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LARGER_ICONS, false)) {
+            Map<String, Integer> ic_map = new HashMap<String, Integer>();
             XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
 
-            final boolean large = lis == LollipopIconStyle.LARGE;
-            Map<String, Integer> ic_map = new HashMap<String, Integer>();
-            ic_map.put("ic_sysbar_back_ime", large ? R.drawable.ic_sysbar_back_ime_large : R.drawable.ic_sysbar_back_ime);
-            ic_map.put("ic_sysbar_back", large ? R.drawable.ic_sysbar_back_large : R.drawable.ic_sysbar_back);
-            ic_map.put("ic_sysbar_back_land", large ? R.drawable.ic_sysbar_back_land_large : R.drawable.ic_sysbar_back_land);
-            ic_map.put("ic_sysbar_highlight", R.drawable.ic_sysbar_highlight);
-            ic_map.put("ic_sysbar_highlight_land", R.drawable.ic_sysbar_highlight_land);
-            ic_map.put("ic_sysbar_menu", large ? R.drawable.ic_sysbar_menu_large : R.drawable.ic_sysbar_menu);
-            ic_map.put("ic_sysbar_menu_land", large ? R.drawable.ic_sysbar_menu_land_large : R.drawable.ic_sysbar_menu_land);
-            ic_map.put("ic_sysbar_recent", large ? R.drawable.ic_sysbar_recent_large : R.drawable.ic_sysbar_recent);
-            ic_map.put("ic_sysbar_recent_land", large ? R.drawable.ic_sysbar_recent_land_large : R.drawable.ic_sysbar_recent_land);
-            ic_map.put("ic_sysbar_home", large ? R.drawable.ic_sysbar_home_large : R.drawable.ic_sysbar_home);
-            ic_map.put("ic_sysbar_home_land", large ? R.drawable.ic_sysbar_home_land_large : R.drawable.ic_sysbar_home_land);
-
+            ic_map.put("ic_sysbar_back_ime", R.drawable.ic_sysbar_back_ime_large);
+            ic_map.put("ic_sysbar_back", R.drawable.ic_sysbar_back_large);
+            ic_map.put("ic_sysbar_back_land", R.drawable.ic_sysbar_back_land_large);
+            ic_map.put("ic_sysbar_menu", R.drawable.ic_sysbar_menu_large);
+            ic_map.put("ic_sysbar_menu_land", R.drawable.ic_sysbar_menu_land_large);
+            ic_map.put("ic_sysbar_recent", R.drawable.ic_sysbar_recent_large);
+            ic_map.put("ic_sysbar_recent_land", R.drawable.ic_sysbar_recent_land_large);
+            ic_map.put("ic_sysbar_home", R.drawable.ic_sysbar_home_large);
+            ic_map.put("ic_sysbar_home_land", R.drawable.ic_sysbar_home_land_large);
             for (String key : ic_map.keySet()) {
                 try {
                     resparam.res.setReplacement(PACKAGE_NAME, "drawable", key,
@@ -361,8 +353,7 @@ public class ModNavigationBar {
             mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
                     !prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM, false) &&
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
-            mLollipopIconStyle = LollipopIconStyle.valueOf(prefs.getString(
-                    GravityBoxSettings.PREF_KEY_NAVBAR_ANDROID_L_ICON_STYLE, "DISABLED"));
+            mUseLargerIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LARGER_ICONS, false);
 
             try {
                 mRecentsSingletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
@@ -508,20 +499,18 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(ScaleType.FIT_CENTER);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(
-                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
-                                        R.drawable.ic_sysbar_ime_left_lollipop :
-                                            R.drawable.ic_sysbar_ime_left));
+                        dpadLeft.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
+                                R.drawable.ic_sysbar_ime_left :
+                                        R.drawable.ic_sysbar_ime_left_lollipop));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(ScaleType.FIT_CENTER);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(
-                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
-                                        R.drawable.ic_sysbar_ime_right_lollipop :
-                                            R.drawable.ic_sysbar_ime_right));
+                        dpadRight.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
+                                R.drawable.ic_sysbar_ime_right :
+                                        R.drawable.ic_sysbar_ime_right_lollipop));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -541,19 +530,17 @@ public class ModNavigationBar {
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(
-                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
-                                        R.drawable.ic_sysbar_ime_left_lollipop :
-                                            R.drawable.ic_sysbar_ime_left));
+                        dpadLeft.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
+                                            R.drawable.ic_sysbar_ime_left :
+                                                R.drawable.ic_sysbar_ime_left_lollipop));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(
-                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
-                                        R.drawable.ic_sysbar_ime_right_lollipop :
-                                            R.drawable.ic_sysbar_ime_right));
+                        dpadRight.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
+                                            R.drawable.ic_sysbar_ime_right :
+                                                R.drawable.ic_sysbar_ime_right_lollipop));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -578,13 +565,6 @@ public class ModNavigationBar {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     setCustomKeyVisibility();
                     setMenuKeyVisibility();
-
-                    if (mNavbarRingDisabled) {
-                        View v = (View) XposedHelpers.callMethod(param.thisObject, "getSearchLight");
-                        if (v != null) {
-                            v.setVisibility(View.GONE);
-                        }
-                    }
                 }
             });
 
@@ -596,16 +576,15 @@ public class ModNavigationBar {
 
                     if (mGbContext != null) {
                         final Resources gbRes = mGbContext.getResources();
-                        mRecentAltIcon = gbRes.getDrawable(mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
-                                R.drawable.ic_sysbar_recent_clear_lollipop : R.drawable.ic_sysbar_recent_clear);
-                        mRecentAltLandIcon = gbRes.getDrawable(mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
-                                R.drawable.ic_sysbar_recent_clear_land_lollipop : R.drawable.ic_sysbar_recent_clear_land);
+                        mRecentAltIcon = gbRes.getDrawable(mUseLargerIcons ?
+                                R.drawable.ic_sysbar_recent_clear: R.drawable.ic_sysbar_recent_clear_lollipop );
+                        mRecentAltLandIcon = gbRes.getDrawable(mUseLargerIcons ?
+                                R.drawable.ic_sysbar_recent_clear_land : R.drawable.ic_sysbar_recent_clear_land_lollipop);
 
-                        if (mLollipopIconStyle != LollipopIconStyle.DISABLED) {
-                            XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon",
-                                    gbRes.getDrawable(mLollipopIconStyle == LollipopIconStyle.LARGE ?
-                                            R.drawable.ic_sysbar_back_ime_land_large : R.drawable.ic_sysbar_back_ime_land));
-                        }
+                        XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon",
+                                    gbRes.getDrawable(mUseLargerIcons ?
+                                            R.drawable.ic_sysbar_back_ime_land_large :
+                                                R.drawable.ic_sysbar_back_ime_land));
                     }
                 }
             });
@@ -1220,7 +1199,7 @@ public class ModNavigationBar {
 
         try {
             final int menuButtonResId = mResources.getIdentifier("menu", "id", PACKAGE_NAME);
-            View menuKey = nvi.navButtons.findViewById(menuButtonResId);
+            View menuKey = (View) nvi.navButtons.findViewById(menuButtonResId).getParent();
             View customKey = nvi.customKey;
             int menuPos = nvi.navButtons.indexOfChild(menuKey);
             int customPos = nvi.customKeyPosition;
@@ -1381,12 +1360,12 @@ public class ModNavigationBar {
     }
 
     private static int getCustomKeyIconId() {
-        if (mLollipopIconStyle == LollipopIconStyle.ORIGINAL) {
-            return mCustomKeyAltIcon ?
-                    R.drawable.ic_sysbar_apps2_lollipop : R.drawable.ic_sysbar_apps_lollipop;
-        } else {
+        if (mUseLargerIcons) {
             return mCustomKeyAltIcon ?
                     R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps;
+        } else {
+            return mCustomKeyAltIcon ?
+                    R.drawable.ic_sysbar_apps2_lollipop : R.drawable.ic_sysbar_apps_lollipop;
         }
     }
 }

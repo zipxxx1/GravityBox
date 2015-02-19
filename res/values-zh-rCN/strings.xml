@@ -1541,10 +1541,6 @@
     <string name="pref_lc_headsup_dnd_title">勿扰模式</string>
     <string name="pref_lc_headsup_dnd_summary">当程序在前台将不会显示任何通知</string>
 
-    <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">启用Android L虚拟按键图标</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">替换原厂虚拟按键图标为Android L风格(需要重新启动)</string>
-    
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">唤醒屏幕模式</string>
     <string name="lc_active_screen_mode_disabled">停用</string>
@@ -1717,11 +1713,6 @@
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">隐藏桌面图标</string>
     <string name="pref_hide_launcher_icon_summary">桌面可能需要重新启动</string>
-
-    <!-- Navbar: lollipop icon style -->
-    <string name="navbar_l_icon_style_disabled">禁用</string>
-    <string name="navbar_l_icon_style_original">原始</string>
-    <string name="navbar_l_icon_style_large">大</string>
 
     <!-- Smart Radio: Adaptive delay for delayed power save -->
     <string name="pref_smart_radio_adaptive_delay_title">自适应延迟</string>

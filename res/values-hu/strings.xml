@@ -1524,10 +1524,6 @@
     <string name="pref_lc_headsup_dnd_title">Ne zavarjon</string>
     <string name="pref_lc_headsup_dnd_summary">Nem mutat egyetlen lebegő felugró ablakot sem, amíg ez az alkalmazás az előtérben fut</string>
 
-    <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Lollipop ikonok használata</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Lecseréli a gyári navigációs ikonokat az Android Lollipop-ból származóakra (újraindítás szükséges)</string>
-
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Aktív Képernyő mód</string>
     <string name="lc_active_screen_mode_disabled">Letiltva</string>
@@ -1693,11 +1689,6 @@
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Indító ikon elrejtése</string>
     <string name="pref_hide_launcher_icon_summary">Szükséges lehet a launcher újraindítása</string>
-
-    <!-- Navbar: lollipop icon style -->
-    <string name="navbar_l_icon_style_disabled">Letiltva</string>
-    <string name="navbar_l_icon_style_original">Eredeti</string>
-    <string name="navbar_l_icon_style_large">Nagyobb</string>
 
     <!-- Smart Radio: Adaptive delay for delayed power save -->
     <string name="pref_smart_radio_adaptive_delay_title">Adaptív késleltetés</string>

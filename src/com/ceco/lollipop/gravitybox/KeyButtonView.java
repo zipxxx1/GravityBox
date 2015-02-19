@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
- * 
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,57 +17,48 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.ActivityManager;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.Canvas;
-import android.graphics.PorterDuff;
-import android.graphics.RectF;
 import android.hardware.input.InputManager;
+import android.media.AudioManager;
 import android.os.SystemClock;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.InputDevice;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
-import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
 
+import java.lang.Math;
+
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
+
 public class KeyButtonView extends ImageView {
-    private static final String PACKAGE_NAME = "com.android.systemui";
-    private static final String TAG = "GB:KeyButtonView";
+    private static final String TAG = "StatusBar.KeyButtonView";
     private static final boolean DEBUG = false;
 
-    final float GLOW_MAX_SCALE_FACTOR = 1.8f;
-    public static final float DEFAULT_QUIESCENT_ALPHA = 0.70f;
+    // TODO: Get rid of this
+    public static final float DEFAULT_QUIESCENT_ALPHA = 1f;
 
-    long mDownTime;
-    int mCode;
-    int mTouchSlop;
-    Drawable mGlowBG;
-    int mGlowWidth, mGlowHeight;
-    float mGlowAlpha = 0f, mGlowScale = 1f, mDrawingAlpha = 1f;
-    float mQuiescentAlpha = DEFAULT_QUIESCENT_ALPHA;
-    RectF mRect = new RectF(0f,0f,0f,0f);
-    AnimatorSet mPressedAnim;
-    Animator mAnimateToQuiescent = new ObjectAnimator();
+    private long mDownTime;
+    private int mCode;
+    private int mTouchSlop;
+    private float mDrawingAlpha = 1f;
+    private float mQuiescentAlpha = DEFAULT_QUIESCENT_ALPHA;
+    private AudioManager mAudioManager;
+    private Animator mAnimateToQuiescent = new ObjectAnimator();
+    private boolean mLongPressConsumed;
+    private KeyButtonRipple mRipple;
 
-    Resources mResources;
-    boolean mLongPressConsumed;
-
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
-
-    Runnable mCheckLongPress = new Runnable() {
+    private final Runnable mCheckLongPress = new Runnable() {
         public void run() {
             if (isPressed()) {
                 if (mCode != 0) {
@@ -88,58 +79,37 @@ public class KeyButtonView extends ImageView {
         super(context);
 
         mCode = 0;
-        mResources = context.getResources();
 
-        mGlowBG = mResources.getDrawable(mResources.getIdentifier(
-                "ic_sysbar_highlight", "drawable", PACKAGE_NAME));
-        if (mGlowBG != null) {
-            setDrawingAlpha(mQuiescentAlpha);
-            mGlowWidth = mGlowBG.getIntrinsicWidth();
-            mGlowHeight = mGlowBG.getIntrinsicHeight();
-        }
+        setDrawingAlpha(mQuiescentAlpha);
 
         setClickable(true);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        mRipple = new KeyButtonRipple(context, this);
+        setBackground(mRipple);
     }
 
     public void setKeyCode(int keyCode) {
         mCode = keyCode;
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        if (mGlowBG != null) {
-            canvas.save();
-            final int w = getWidth();
-            final int h = getHeight();
-            final float aspect = (float)mGlowWidth / mGlowHeight;
-            final int drawW = (int)(h*aspect);
-            final int drawH = h;
-            final int margin = (drawW-w)/2;
-            canvas.scale(mGlowScale, mGlowScale, w*0.5f, h*0.5f);
-            mGlowBG.setBounds(-margin, 0, drawW-margin, drawH);
-            mGlowBG.setAlpha((int)(mDrawingAlpha * mGlowAlpha * 255));
-            mGlowBG.draw(canvas);
-            canvas.restore();
-            mRect.right = w;
-            mRect.bottom = h;
+    public void setGlowColor(int color) {
+        if (mRipple != null) {
+            mRipple.setGlowColor(color);
         }
-        super.onDraw(canvas);
     }
 
     public void setQuiescentAlpha(float alpha, boolean animate) {
         mAnimateToQuiescent.cancel();
         alpha = Math.min(Math.max(alpha, 0), 1);
-        if (alpha == mQuiescentAlpha) return;
+        if (alpha == mQuiescentAlpha && alpha == mDrawingAlpha) return;
         mQuiescentAlpha = alpha;
-        if (DEBUG) log("New quiescent alpha = " + mQuiescentAlpha);
-        if (mGlowBG != null) {
-            if (animate) {
-                mAnimateToQuiescent = animateToQuiescent();
-                mAnimateToQuiescent.start();
-            } else {
-                setDrawingAlpha(mQuiescentAlpha);
-            }
+        if (DEBUG) Log.d(TAG, "New quiescent alpha = " + mQuiescentAlpha);
+        if (animate) {
+            mAnimateToQuiescent = animateToQuiescent();
+            mAnimateToQuiescent.start();
+        } else {
+            setDrawingAlpha(mQuiescentAlpha);
         }
     }
 
@@ -147,94 +117,17 @@ public class KeyButtonView extends ImageView {
         return ObjectAnimator.ofFloat(this, "drawingAlpha", mQuiescentAlpha);
     }
 
+    public float getQuiescentAlpha() {
+        return mQuiescentAlpha;
+    }
+
     public float getDrawingAlpha() {
-        if (mGlowBG == null) return 0;
         return mDrawingAlpha;
     }
 
-    @SuppressWarnings("deprecation")
     public void setDrawingAlpha(float x) {
-        if (mGlowBG == null) return;
-        // Calling setAlpha(int), which is an ImageView-specific
-        // method that's different from setAlpha(float). This sets
-        // the alpha on this ImageView's drawable directly
-        setAlpha((int) (x * 255));
+        setImageAlpha((int) (x * 255));
         mDrawingAlpha = x;
-    }
-
-    public float getGlowAlpha() {
-        if (mGlowBG == null) return 0;
-        return mGlowAlpha;
-    }
-
-    public void setGlowAlpha(float x) {
-        if (mGlowBG == null) return;
-        mGlowAlpha = x;
-        invalidate();
-    }
-
-    public float getGlowScale() {
-        if (mGlowBG == null) return 0;
-        return mGlowScale;
-    }
-
-    @SuppressWarnings("unused")
-    public void setGlowScale(float x) {
-        if (mGlowBG == null) return;
-        mGlowScale = x;
-        final float w = getWidth();
-        final float h = getHeight();
-        if (GLOW_MAX_SCALE_FACTOR <= 1.0f) {
-            // this only works if we know the glow will never leave our bounds
-            invalidate();
-        } else {
-            final float rx = (w * (GLOW_MAX_SCALE_FACTOR - 1.0f)) / 2.0f + 1.0f;
-            final float ry = (h * (GLOW_MAX_SCALE_FACTOR - 1.0f)) / 2.0f + 1.0f;
-            invalidateGlobalRegion(
-                    this,
-                    new RectF(getLeft() - rx,
-                              getTop() - ry,
-                              getRight() + rx,
-                              getBottom() + ry));
-
-            // also invalidate our immediate parent to help avoid situations where nearby glows
-            // interfere
-            ((View)getParent()).invalidate();
-        }
-    }
-
-    public void setPressed(boolean pressed) {
-        if (mGlowBG != null) {
-            if (pressed != isPressed()) {
-                if (mPressedAnim != null && mPressedAnim.isRunning()) {
-                    mPressedAnim.cancel();
-                }
-                final AnimatorSet as = mPressedAnim = new AnimatorSet();
-                if (pressed) {
-                    if (mGlowScale < GLOW_MAX_SCALE_FACTOR) 
-                        mGlowScale = GLOW_MAX_SCALE_FACTOR;
-                    if (mGlowAlpha < mQuiescentAlpha)
-                        mGlowAlpha = mQuiescentAlpha;
-                    setDrawingAlpha(1f);
-                    as.playTogether(
-                        ObjectAnimator.ofFloat(this, "glowAlpha", 1f),
-                        ObjectAnimator.ofFloat(this, "glowScale", GLOW_MAX_SCALE_FACTOR)
-                    );
-                    as.setDuration(50);
-                } else {
-                    mAnimateToQuiescent.cancel();
-                    mAnimateToQuiescent = animateToQuiescent();
-                    as.playTogether(
-                        ObjectAnimator.ofFloat(this, "glowAlpha", 0f),
-                        ObjectAnimator.ofFloat(this, "glowScale", 1f),
-                        mAnimateToQuiescent
-                    );
-                    as.setDuration(500);
-                }
-                as.start();
-            }
-        }
-        super.setPressed(pressed);
     }
 
     public boolean onTouchEvent(MotionEvent ev) {
@@ -243,12 +136,13 @@ public class KeyButtonView extends ImageView {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                //Slog.d("KeyButtonView", "press");
+                //Log.d("KeyButtonView", "press");
                 mDownTime = SystemClock.uptimeMillis();
                 setPressed(true);
                 if (mCode != 0) {
                     sendEvent(KeyEvent.ACTION_DOWN, 0, mDownTime);
                 } else {
+                    // Provide the same haptic feedback that the system offers for virtual keys.
                     performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 }
                 removeCallbacks(mCheckLongPress);
@@ -282,6 +176,7 @@ public class KeyButtonView extends ImageView {
                         sendEvent(KeyEvent.ACTION_UP, KeyEvent.FLAG_CANCELED);
                     }
                 } else {
+                    // no key code, just a regular ImageView
                     if (doIt) {
                         performClick();
                     }
@@ -293,24 +188,18 @@ public class KeyButtonView extends ImageView {
         return true;
     }
 
-    private static void invalidateGlobalRegion(View view, RectF childBounds) {
-        while (view.getParent() != null && view.getParent() instanceof View) {
-            view = (View) view.getParent();
-            view.getMatrix().mapRect(childBounds);
-            view.invalidate((int) Math.floor(childBounds.left),
-                            (int) Math.floor(childBounds.top),
-                            (int) Math.ceil(childBounds.right),
-                            (int) Math.ceil(childBounds.bottom));
+    public void playSoundEffect(int soundConstant) {
+        try {
+            int currentUser = (Integer) XposedHelpers.callStaticMethod(
+                    ActivityManager.class, "getCurrentUser");
+            XposedHelpers.callMethod(mAudioManager, "playSoundEffect",
+                    soundConstant, currentUser);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
-    }
+    };
 
-    public void setGlowColor(int color) {
-        if (mGlowBG != null) {
-            mGlowBG.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-        }
-    }
-
-    void sendEvent(int action, int flags) {
+    public void sendEvent(int action, int flags) {
         sendEvent(action, flags, SystemClock.uptimeMillis());
     }
 

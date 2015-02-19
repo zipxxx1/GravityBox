@@ -1514,10 +1514,6 @@
     <string name="pref_cat_lc_heads_up_title">Notificações flutuantes (Heads up)</string>
     <string name="pref_lc_headsup_dnd_summary">Faz com que nenhuma notificação flutuante seja mostrada enquanto o aplicativo estiver em primeiro plano</string>
 
-    <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Ativar barra de navegação do Lollipop</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Permite substituir os ícones padrão da barra de navegação pelos do Android Lollipop (necessário reiniciar)</string>
-
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">Modo Tela ativo</string>
     <string name="lc_active_screen_mode_disabled">Desativado</string>
@@ -1688,11 +1684,6 @@
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Ocultar ícone no inicializador</string>
     <string name="pref_hide_launcher_icon_summary">Permite ocultar o ícone do GravityBox no inicializador (poderá ser necessário reiniciar o inicializador)</string>
-
-    <!-- Navbar: lollipop icon style -->
-    <string name="navbar_l_icon_style_disabled">Desativado</string>
-    <string name="navbar_l_icon_style_original">Original</string>
-    <string name="navbar_l_icon_style_large">Grande</string>
 
     <!-- Smart Radio: Adaptive delay for delayed power save -->
     <string name="pref_smart_radio_adaptive_delay_title">Adaptação de atraso</string>
