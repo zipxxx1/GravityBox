@@ -44,8 +44,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.content.res.XModuleResources;
-import android.content.res.XResources;
 import android.database.ContentObserver;
 import android.graphics.Paint;
 import android.net.Uri;
@@ -144,7 +142,6 @@ public class ModStatusBar {
     private static View mIconMergerView;
     private static String mClockLongpressLink;
     private static XSharedPreferences mPrefs;
-    private static int mDeleteIconId;
     private static StatusbarDownloadProgressView mDownloadProgressView;
     private static TickerPolicy mTickerPolicy;
 
@@ -282,10 +279,6 @@ public class ModStatusBar {
     public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
         try {
             StatusbarSignalCluster.initResources(prefs, resparam);
-
-            XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
-            mDeleteIconId = XResources.getFakeResId(modRes, R.drawable.ic_menu_delete);
-            resparam.res.setReplacement(mDeleteIconId, modRes.fwd(R.drawable.ic_menu_delete));
 
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH, false)) {
                 resparam.res.setReplacement(PACKAGE_NAME, "bool", "enable_ticker", true);
@@ -876,7 +869,7 @@ public class ModStatusBar {
                         deleteIntent.putExtra(SCREENSHOT_URI, uri.toString());
                         Context context = (Context) XposedHelpers.getObjectField(result, "context");
                         Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
-                        builder.addAction(mDeleteIconId, gbContext.getString(R.string.delete),
+                        builder.addAction(android.R.drawable.ic_delete, gbContext.getString(R.string.delete),
                                 PendingIntent.getBroadcast(context, 0, deleteIntent,
                                         PendingIntent.FLAG_CANCEL_CURRENT));
 
