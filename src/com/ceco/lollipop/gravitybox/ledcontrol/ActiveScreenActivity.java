@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +27,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 
 public class ActiveScreenActivity extends Activity {
@@ -46,7 +45,6 @@ public class ActiveScreenActivity extends Activity {
 
     public static class PrefsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
         private SharedPreferences mPrefs;
-        private ListPreference mPrefHeadsupPosition;
         private CheckBoxPreference mPrefPocketMode;
 
         @Override
@@ -59,15 +57,12 @@ public class ActiveScreenActivity extends Activity {
 
             addPreferencesFromResource(R.xml.led_control_active_screen_settings);
 
-            mPrefHeadsupPosition = (ListPreference) findPreference(
-                    LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_POSITION);
             mPrefPocketMode = (CheckBoxPreference) findPreference(
                     LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE);
 
             if (!LedSettings.isHeadsUpEnabled(getActivity())) {
                 getPreferenceScreen().removePreference(
                         findPreference(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT));
-                getPreferenceScreen().removePreference(mPrefHeadsupPosition);
                 getPreferenceScreen().removePreference(
                         findPreference(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA));
             }
@@ -103,7 +98,6 @@ public class ActiveScreenActivity extends Activity {
         }
 
         private void updateSummaries() {
-            mPrefHeadsupPosition.setSummary(mPrefHeadsupPosition.getEntry());
         }
     }
 }

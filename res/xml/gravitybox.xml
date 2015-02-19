@@ -586,19 +586,6 @@
                 android:defaultValue="-20"
                 android:dependency="pref_heads_up_master_switch" />
 
-            <CheckBoxPreference 
-                android:key="pref_heads_up_one_finger"
-                android:title="@string/pref_heads_up_one_finger_title"
-                android:defaultValue="false"
-                android:dependency="pref_heads_up_master_switch" />
-
-            <CheckBoxPreference
-                android:key="pref_heads_up_expanded"
-                android:title="@string/pref_lc_headsup_expanded_title"
-                android:summary="@string/pref_lc_headsup_expanded_summary"
-                android:defaultValue="false"
-                android:dependency="pref_heads_up_master_switch" />
-
             <CheckBoxPreference
                 android:key="pref_heads_up_snooze"
                 android:title="@string/pref_heads_up_snooze_title"
@@ -617,14 +604,6 @@
                 android:key="pref_heads_up_snooze_reset"
                 android:title="@string/pref_heads_up_snooze_reset_title"
                 android:dependency="pref_heads_up_snooze" />
-
-            <ListPreference
-                android:key="pref_heads_up_position"
-                android:title="@string/pref_unc_as_headsup_position_title"
-                android:entries="@array/headsup_position_entries"
-                android:entryValues="@array/headsup_position_values"
-                android:defaultValue="48"
-                android:dependency="pref_heads_up_master_switch" />
 
             <com.ceco.lollipop.gravitybox.preference.SeekBarPreference
                 android:key="pref_heads_up_alpha"

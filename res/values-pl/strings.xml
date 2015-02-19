@@ -1306,7 +1306,6 @@
         wymaga włączenia blokady ekranu.\nPrzełącznik poniżej jest głównym wyłącznikiem. 
         Po włączeniu go dodatkowa konfiguracja może być wykonana na bazie danej aplikacji.</string>
     <string name="lc_active_screen_switch_title">Włącz Aktywny Ekran</string>
-    <string name="lc_expand_notification_panel_title">Rozwiń panel powiadomień</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Ciche Godziny</string>
@@ -1508,14 +1507,11 @@
     <string name="pref_cat_notif_heads_up_title">Powiadomienie Heads up</string>
     <string name="pref_heads_up_master_switch_summary">Włącza standardową funkcjonalność AOSP Heads up. 
         Gdy jest włączona, dodatkowe opcje dla danej aplikacji będą dostępne poprzez Nadrzędne ustawienia powiadomień. (wymaga restartu)</string>
-    <string name="pref_heads_up_one_finger_title">Rozwijanie jednym palcem</string>
     <string name="pref_heads_up_timeout_title">Limit czasu</string>
     <string name="pref_heads_up_timeout_summary">Czas wyświetlania okna powiadomienia. 0=trwale</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
-    <string name="pref_lc_headsup_expanded_title">Pokaż rozszerzony</string>
-    <string name="pref_lc_headsup_expanded_summary">Należy pamiętać, że ta opcja może być nadpisana przez Nadrzędne Ustawienia Powiadomień</string>
     <string name="pref_lc_headsup_dnd_title">Nie przeszkadzać</string>
     <string name="pref_lc_headsup_dnd_summary">Nie pokaże żadnych powiadomień Heads up, podczas gdy ta aplikacja jest na pierwszym planie</string>
 
@@ -1527,7 +1523,6 @@
     <string name="pref_lc_active_screen_mode_title">Tryb aktywnego ekranu</string>
     <string name="lc_active_screen_mode_disabled">Wyłączony</string>
     <string name="lc_active_screen_mode_nothing">Tylko włącz ekran</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
@@ -1549,12 +1544,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Limit czasu Heads up</string>
     <string name="pref_unc_as_headsup_timeout_summary">Określa jak długo pokazywać okno Heads up. 0 = do odblokowania.</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Pozycja Heads up</string>
-    <string name="headsup_position_top">Na górze</string>
-    <string name="headsup_position_center">Centralnie</string>
-    <string name="headsup_position_bottom">Na dole</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Użycie Danych 2</string>
@@ -1662,10 +1651,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Rozszerzony pulpit w menu zasilania</string>
     <string name="pref_powermenu_expanded_desktop_summary">Upewnij się, że istnieje alternatywna metoda wyłączenia rozszerzonego pulpitu!!!</string>
-
-    <!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">Ignoruj aktualizacje</string>
-    <string name="pref_lc_headsup_ignore_update_summary">Nie wyświetli Heads up, gdy istniejące powiadomienie zostanie zaktualizowane</string>
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">Ustawienia kafelka Dyktafonu</string>

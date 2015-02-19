@@ -731,9 +731,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_HEADS_UP_MASTER_SWITCH = "pref_heads_up_master_switch";
     public static final String PREF_KEY_HEADS_UP_TIMEOUT = "pref_heads_up_timeout";
-    public static final String PREF_KEY_HEADS_UP_ONE_FINGER = "pref_heads_up_one_finger";
-    public static final String PREF_KEY_HEADS_UP_EXPANDED = "pref_heads_up_expanded";
-    public static final String PREF_KEY_HEADS_UP_POSITION = "pref_heads_up_position";
     public static final String PREF_KEY_HEADS_UP_ALPHA = "pref_heads_up_alpha";
     public static final String PREF_KEY_HEADS_UP_SNOOZE = "pref_heads_up_snooze";
     public static final String PREF_KEY_HEADS_UP_SNOOZE_RESET = "pref_heads_up_snooze_reset";
@@ -900,9 +897,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     private static final List<String> headsUpKeys = new ArrayList<String>(Arrays.asList(
             PREF_KEY_HEADS_UP_TIMEOUT,
-            PREF_KEY_HEADS_UP_ONE_FINGER,
-            PREF_KEY_HEADS_UP_EXPANDED,
-            PREF_KEY_HEADS_UP_POSITION,
             PREF_KEY_HEADS_UP_ALPHA,
             PREF_KEY_HEADS_UP_SNOOZE,
             PREF_KEY_HEADS_UP_SNOOZE_TIMER,
@@ -1280,7 +1274,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefSbBtVisibility;
         private ListPreference mPrefQsBatteryTempUnit;
         private AppPickerPreference mPrefCustomApp;
-        private ListPreference mPrefHeadsUpPosition;
         private CheckBoxPreference mPrefSignalIconAutohide;
         private CheckBoxPreference mPrefNonIntrusiveCall;
         private PreferenceScreen mPrefCatMtkFixes;
@@ -1598,7 +1591,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCustomApp = (AppPickerPreference) findPreference(PREF_KEY_HWKEY_CUSTOM_APP);
             getPreferenceScreen().removePreference(mPrefCustomApp);
 
-            mPrefHeadsUpPosition = (ListPreference) findPreference(PREF_KEY_HEADS_UP_POSITION);
             mPrefHeadsUpImportance = (ListPreference) findPreference(PREF_KEY_HEADS_UP_IMPORTANCE);
 
             mPrefChargingLed = (ListPreference) findPreference(PREF_KEY_CHARGING_LED);
@@ -2348,10 +2340,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_QS_BATTERY_TEMP_UNIT)) {
                 mPrefQsBatteryTempUnit.setSummary(mPrefQsBatteryTempUnit.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_HEADS_UP_POSITION)) {
-                mPrefHeadsUpPosition.setSummary(mPrefHeadsUpPosition.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_HEADS_UP_IMPORTANCE)) {

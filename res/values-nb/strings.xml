@@ -1330,7 +1330,6 @@
         to be enabled.\nThe switch below is a master switch. After it\'s enabled, 
         additional configuration can be done on per-app basis</string>
     <string name="lc_active_screen_switch_title">Enable Active Screen</string>
-    <string name="lc_expand_notification_panel_title">Expand notification panel</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Quiet hours</string>

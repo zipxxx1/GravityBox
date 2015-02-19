@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -63,9 +63,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_QH_IGNORE_LIST = "pref_lc_qh_ignore_list";
     private static final String PREF_CAT_KEY_HEADS_UP = "pref_cat_lc_heads_up";
     private static final String PREF_KEY_HEADS_UP_MODE = "pref_lc_headsup_mode";
-    private static final String PREF_KEY_HEADS_UP_EXPANDED = "pref_lc_headsup_expanded";
     private static final String PREF_KEY_HEADS_UP_DND = "pref_lc_headsup_dnd";
-    private static final String PREF_KEY_HEADS_UP_IGNORE_UPDATE = "pref_lc_headsup_ignore_update";
     private static final String PREF_KEY_HEADS_UP_TIMEOUT = "pref_lc_headsup_timeout";
     private static final String PREF_CAT_KEY_OTHER = "pref_cat_lc_other";
     private static final String PREF_KEY_PROGRESS_TRACKING = "pref_lc_progress_tracking";
@@ -93,9 +91,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private EditTextPreference mQhIgnoreListPref;
     private PreferenceCategory mHeadsUpCat;
     private ListPreference mHeadsUpModePref;
-    private CheckBoxPreference mHeadsUpExpandedPref;
     private CheckBoxPreference mHeadsUpDndPref;
-    private CheckBoxPreference mHeadsUpIgnoreUpdatePref;
     private SeekBarPreference mHeadsUpTimeoutPref;
     private PreferenceCategory mOtherCat;
     private CheckBoxPreference mProgressTrackingPref;
@@ -129,9 +125,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mHeadsUpCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_HEADS_UP);
         mHeadsUpModePref = (ListPreference) findPreference(PREF_KEY_HEADS_UP_MODE);
         mHeadsUpModePref.setOnPreferenceChangeListener(this);
-        mHeadsUpExpandedPref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_EXPANDED);
         mHeadsUpDndPref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_DND);
-        mHeadsUpIgnoreUpdatePref = (CheckBoxPreference) findPreference(PREF_KEY_HEADS_UP_IGNORE_UPDATE);
         mHeadsUpTimeoutPref = (SeekBarPreference) findPreference(PREF_KEY_HEADS_UP_TIMEOUT);
         mOtherCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_OTHER);
         mProgressTrackingPref = (CheckBoxPreference) findPreference(PREF_KEY_PROGRESS_TRACKING);
@@ -178,12 +172,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         } else {
             mHeadsUpModePref.setValue(ledSettings.getHeadsUpMode().toString());
             mHeadsUpModePref.setSummary(mHeadsUpModePref.getEntry());
-            mHeadsUpExpandedPref.setChecked(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF && 
-                    ledSettings.getHeadsUpExpanded());
-            mHeadsUpExpandedPref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
             mHeadsUpDndPref.setChecked(ledSettings.getHeadsUpDnd());
-            mHeadsUpIgnoreUpdatePref.setChecked(ledSettings.getHeadsUpIgnoreUpdate());
-            mHeadsUpIgnoreUpdatePref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
             mHeadsUpTimeoutPref.setValue(ledSettings.getHeadsUpTimeout());
             mHeadsUpTimeoutPref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
         }
@@ -282,16 +271,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         return mHeadsUpModePref.getValue();
     }
 
-    protected boolean getHeadsUpExpanded() {
-        return mHeadsUpExpandedPref.isChecked();
-    }
-
     protected boolean getHeadsUpDnd() {
         return mHeadsUpDndPref.isChecked();
-    }
-
-    protected boolean getHeadsUpIgnoreUpdate() {
-        return mHeadsUpIgnoreUpdatePref.isChecked();
     }
 
     protected int getHeadsUpTimeout() {
@@ -347,8 +328,6 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             mHeadsUpModePref.setValue((String)newValue);
             mHeadsUpModePref.setSummary(mHeadsUpModePref.getEntry());
             final boolean enabled = !"OFF".equals(mHeadsUpModePref.getValue());
-            mHeadsUpExpandedPref.setEnabled(enabled);
-            mHeadsUpIgnoreUpdatePref.setEnabled(enabled);
             mHeadsUpTimeoutPref.setEnabled(enabled);
         } else if (preference == mActiveScreenModePref) {
             mActiveScreenModePref.setValue((String)newValue);

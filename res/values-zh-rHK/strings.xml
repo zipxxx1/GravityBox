@@ -1326,7 +1326,6 @@
 	\n 以下的開關只是主開關，
 	當啟用後請按需要為個別應用程式進行設定。</string>
     <string name="lc_active_screen_switch_title">啟用主動螢幕喚醒</string>
-    <string name="lc_expand_notification_panel_title">展開通知面板</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">勿擾模式</string>
@@ -1527,14 +1526,11 @@
     <string name="pref_cat_notif_heads_up_title">啟用浮動通知</string>
     <string name="pref_heads_up_master_switch_summary">啟用 AOSP 浮動通知功能。
 	當啟用後，您可以在通知控制內針對個別應用程式設定浮動通知功能 (需要重新啟動) </string>
-    <string name="pref_heads_up_one_finger_title">單指展開浮動通知</string>
     <string name="pref_heads_up_timeout_title">逾時</string>
     <string name="pref_heads_up_timeout_summary">設定每則浮動通知的顯示時間。設定成 0 來持續顯示</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">浮動通知</string>
-    <string name="pref_lc_headsup_expanded_title">自動展開浮動通知</string>
-    <string name="pref_lc_headsup_expanded_summary">請注意, 本選項可能會被 [通知控制] 內的設定所覆蓋</string>
     <string name="pref_lc_headsup_dnd_title">浮動通知勿擾模式</string>
     <string name="pref_lc_headsup_dnd_summary">當正在使用此應用程式時，不會顯示浮動通知</string>
 
@@ -1546,7 +1542,6 @@
     <string name="pref_lc_active_screen_mode_title">主動螢幕喚醒模式</string>
     <string name="lc_active_screen_mode_disabled">停用</string>
     <string name="lc_active_screen_mode_nothing">只喚醒螢幕</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
@@ -1568,12 +1563,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">浮動通知逾時</string>
     <string name="pref_unc_as_headsup_timeout_summary">設定浮動通知的顯示時間。設為 0 時，浮動通知會一直顯示直至手機屏幕鎖定被解除</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">浮動通知位置</string>
-    <string name="headsup_position_top">頂部</string>
-    <string name="headsup_position_center">置中</string>
-    <string name="headsup_position_bottom">底部</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">數據用量 2</string>
@@ -1678,10 +1667,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">電源選單顯示 [全螢幕模式] 選項</string>
     <string name="pref_powermenu_expanded_desktop_summary">請先確認已設定其他可以關閉 [全螢幕模式] 的方法, 然後才停用本選項!</string>
-
-    <!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">忽視通知更新</string>
-    <string name="pref_lc_headsup_ignore_update_summary">當現有的通知更新時, 不顯示成浮動通知</string>
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">快速錄音 瓷貼設定</string>

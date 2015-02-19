@@ -1336,7 +1336,6 @@
         que l\'écran de déverrouillage soit actif. L\'interrupteur en-dessous est l\'interrupteur principal. Après qu\'il soit enclenché, 
         la configuration précise par application peut être effectuée</string>
     <string name="lc_active_screen_switch_title">Enclencher l\'Écran Actif</string>
-    <string name="lc_expand_notification_panel_title">Dérouler le panneau de nofication</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Heures silencieuses</string>
@@ -1541,14 +1540,11 @@
     <string name="pref_cat_notif_heads_up_title">Notifications flottantes</string>
     <string name="pref_heads_up_master_switch_summary">Active la fonction standard AOSP de notification flottante 
         Si activée, des options additionnelles par application seront accessibles depuis le Contrôle ultime de notification (redémarrage nécessaire)</string>
-    <string name="pref_heads_up_one_finger_title">Développer avec un doigt</string>
     <string name="pref_heads_up_timeout_title">Temporisation</string>
     <string name="pref_heads_up_timeout_summary">Pour programmer la durée d\'affichage de la fenêtre de notification 0 = permanent</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Notifications flottantes</string>
-    <string name="pref_lc_headsup_expanded_title">Affichage étendu</string>
-    <string name="pref_lc_headsup_expanded_summary">Attention: cette option peut être redéfinie par le Contrôle Ultime de Notification (UNC)</string>
     <string name="pref_lc_headsup_dnd_title">Ne pas déranger</string>
     <string name="pref_lc_headsup_dnd_summary">Aucune notification flottante ne s\'affichera durant l\'utilisation de cette application en premier plan</string>
 
@@ -1560,7 +1556,6 @@
     <string name="pref_lc_active_screen_mode_title">Mode écran actif</string>
     <string name="lc_active_screen_mode_disabled">Désactivé</string>
     <string name="lc_active_screen_mode_nothing">Seulement allumer l\'écran</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
@@ -1582,12 +1577,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Temporisation des notifications flottantes</string>
     <string name="pref_unc_as_headsup_timeout_summary">Pour règler le délai de visibilité des notifications flottantes. 0 = jusqu\'à ouverture</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Position des notifications flottantes</string>
-    <string name="headsup_position_top">En haut</string>
-    <string name="headsup_position_center">Centrée</string>
-    <string name="headsup_position_bottom">En bas</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Consommation de données 2</string>
@@ -1695,10 +1684,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Bureau étendu dans le menu d\'extinction</string>
     <string name="pref_powermenu_expanded_desktop_summary">Vérifiez qu\'une méthode alternative soit accessible pour stopper le mode bureau étendu !!!</string>
-
-    <!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">Ignorer les mises à jour</string>
-    <string name="pref_lc_headsup_ignore_update_summary">N\'affiche pas de notification flottante lorsque la notification en cours se met à jour</string>
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">Paramètre touche Enregistrement Rapide</string>

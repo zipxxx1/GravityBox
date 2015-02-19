@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,7 +15,6 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,27 +38,23 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.PixelFormat;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Binder;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.service.notification.StatusBarNotification;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -68,32 +63,24 @@ public class ModLedControl {
     private static final String TAG = "GB:ModLedControl";
     public static final boolean DEBUG = false;
     private static final String CLASS_USER_HANDLE = "android.os.UserHandle";
-    private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.NotificationManagerService";
-    private static final String CLASS_STATUSBAR_MGR_SERVICE = "com.android.server.StatusBarManagerService";
+    private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.notification.NotificationManagerService";
+    private static final String CLASS_STATUSBAR_MGR_SERVICE = "com.android.server.statusbar.StatusBarManagerService";
     private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
-    private static final String CLASS_STATUSBAR_NOTIFICATION = "android.service.notification.StatusBarNotification";
     private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData.Entry";
-    private static final String CLASS_EXPAND_HELPER = "com.android.systemui.ExpandHelper";
     private static final String CLASS_HEADSUP_NOTIF_VIEW = "com.android.systemui.statusbar.policy.HeadsUpNotificationView";
-    private static final String CLASS_STATUSBAR_ICON_VIEW = "com.android.systemui.statusbar.StatusBarIconView";
-    private static final String PACKAGE_NAME_PHONE = "com.android.phone";
+    private static final String PACKAGE_NAME_PHONE = "com.android.server.telecom";
     public static final String PACKAGE_NAME_SYSTEMUI = "com.android.systemui";
     private static final int MISSED_CALL_NOTIF_ID = 1;
 
     private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
-    private static final String NOTIF_EXTRA_HEADS_UP_EXPANDED = "gbHeadsUpExpanded";
-    private static final String NOTIF_EXTRA_HEADS_UP_GRAVITY = "gbHeadsUpGravity";
     private static final String NOTIF_EXTRA_HEADS_UP_TIMEOUT = "gbHeadsUpTimeout";
     private static final String NOTIF_EXTRA_HEADS_UP_ALPHA = "gbHeadsUpAlpha";
-    private static final String NOTIF_EXTRA_HEADS_UP_IGNORE_UPDATE = "gbHeadsUpIgnoreUpdate";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE = "gbActiveScreenPocketMode";
     public static final String NOTIF_EXTRA_PROGRESS_TRACKING = "gbProgressTracking";
-    private static final int MSG_SHOW_HEADS_UP = 1026;
-    private static final int MSG_HIDE_HEADS_UP = 1027;
-    private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
+    private static final int MSG_HIDE_HEADS_UP = 1029;
 
     public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
 
@@ -187,7 +174,7 @@ public class ModLedControl {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public static void initZygote(final XSharedPreferences mainPrefs) {
+    public static void initAndroid(final XSharedPreferences mainPrefs, final ClassLoader classLoader) {
         mPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "ledcontrol");
         mPrefs.makeWorldReadable();
         mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
@@ -231,13 +218,13 @@ public class ModLedControl {
         }
 
         try {
-            final Class<?> nmsClass = XposedHelpers.findClass(CLASS_NOTIFICATION_MANAGER_SERVICE, null);
+            final Class<?> nmsClass = XposedHelpers.findClass(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader);
             XposedBridge.hookAllConstructors(nmsClass, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mNotifManagerService == null) {
                         mNotifManagerService = param.thisObject;
-                        mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                        mContext = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
 
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(LedSettings.ACTION_UNC_SETTINGS_CHANGED);
@@ -248,6 +235,11 @@ public class ModLedControl {
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
+                        Object service = XposedHelpers.getObjectField(param.thisObject, "mService");
+                        XposedHelpers.findAndHookMethod(service.getClass(),
+                                "enqueueNotificationWithTag", String.class, String.class, String.class, 
+                                int.class, Notification.class, int[].class, int.class, notifyHook);
+
                         toggleActiveScreenFeature(!mPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
                                 mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false));
                         if (DEBUG) log("Notification manager service initialized");
@@ -255,11 +247,7 @@ public class ModLedControl {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, null, "enqueueNotificationWithTag",
-                    String.class, String.class, String.class, int.class, Notification.class, 
-                    int[].class, int.class, notifyHook);
-
-            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR_MGR_SERVICE, null, "onPanelRevealed", 
+            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR_MGR_SERVICE, classLoader, "onPanelRevealed", 
                     new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
@@ -280,6 +268,7 @@ public class ModLedControl {
             // Phone missed calls: fix AOSP bug preventing LED from working for missed calls
             final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
             final String pkgName = context.getPackageName();
+            if (DEBUG) log("notifyHookPkg: " + pkgName);
             if (mNotifOnNextScreenOff == null && pkgName.equals(PACKAGE_NAME_PHONE) && 
                     (Integer)param.args[1] == MISSED_CALL_NOTIF_ID) {
                 mNotifOnNextScreenOff = (Notification) param.args[2];
@@ -414,10 +403,6 @@ public class ModLedControl {
                     // heads up mode
                     n.extras.putString(NOTIF_EXTRA_HEADS_UP_MODE, ls.getHeadsUpMode().toString());
                     if (ls.getHeadsUpMode() != HeadsUpMode.OFF) {
-                        n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED,
-                                ls.getHeadsUpExpanded());
-                        n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_IGNORE_UPDATE,
-                                ls.getHeadsUpIgnoreUpdate());
                         n.extras.putInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT,
                                 ls.getHeadsUpTimeout());
                     }
@@ -429,8 +414,6 @@ public class ModLedControl {
                         n.extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE, !mProximityWakeUpEnabled &&
                                 mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true));
                         if (ls.getActiveScreenMode() == ActiveScreenMode.HEADS_UP) {
-                            n.extras.putInt(NOTIF_EXTRA_HEADS_UP_GRAVITY, Integer.valueOf(
-                                    mPrefs.getString(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_POSITION, "17")));
                             n.extras.putInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT,
                                     mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT, 10));
                             n.extras.putFloat(NOTIF_EXTRA_HEADS_UP_ALPHA,
@@ -460,7 +443,7 @@ public class ModLedControl {
                 if (DEBUG) log("Performing Active Screen for " + pkgName + " with mode " +
                         asMode.toString());
 
-                mOnPanelRevealedBlocked = asMode == ActiveScreenMode.EXPAND_PANEL;
+                mOnPanelRevealedBlocked = true;
                 if (mSm != null && mProxSensor != null &&
                         n.extras.getBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE)) {
                     mSm.registerListener(mProxSensorEventListener, mProxSensor, SensorManager.SENSOR_DELAY_FASTEST);
@@ -536,10 +519,6 @@ public class ModLedControl {
     }
 
     // SystemUI package
-    private static WindowManager.LayoutParams mHeadsUpLp;
-    private static long mHeadsUpClickTime;
-    private static Handler mHeadsUpHandler;
-    private static Runnable mHeadsUpHideRunnable;
     private static Object mStatusBar;
     private static HeadsUpParams mHeadsUpParams;
     private static HeadsUpSnoozeDialog mHeadsUpSnoozeDlg;
@@ -548,8 +527,6 @@ public class ModLedControl {
     private static XSharedPreferences mSysUiPrefs;
 
     static class HeadsUpParams {
-        int yOffset;
-        int gravity;
         float alpha;
     }
 
@@ -558,8 +535,9 @@ public class ModLedControl {
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
                 try {
-                    Object huNotifEntry = XposedHelpers.getObjectField(mStatusBar,
-                            "mInterruptingNotificationEntry");
+                    View headsUpView = (View) XposedHelpers.getObjectField(
+                            mStatusBar, "mHeadsUpNotificationView");
+                    Object huNotifEntry = XposedHelpers.callMethod(headsUpView, "getEntry");
                     if (huNotifEntry != null) {
                         Handler h = (Handler) XposedHelpers.getObjectField(mStatusBar, "mHandler");
                         h.sendEmptyMessage(MSG_HIDE_HEADS_UP);
@@ -596,28 +574,26 @@ public class ModLedControl {
                     intentFilter.addAction(GravityBoxSettings.ACTION_HEADS_UP_SNOOZE_RESET);
                     intentFilter.addAction(GravityBoxSettings.ACTION_HEADS_UP_SETTINGS_CHANGED);
                     context.registerReceiver(mSystemUiBroadcastReceiver, intentFilter);
-                    mHeadsUpSnoozeBtn = addSnoozeButton((ViewGroup) XposedHelpers.getObjectField(
-                            param.thisObject, "mHeadsUpNotificationView"));
+                    mHeadsUpSnoozeBtn = createSnoozeButton(context);
                 }
             });
 
             XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "shouldInterrupt",
-                    CLASS_STATUSBAR_NOTIFICATION, new XC_MethodHook() {
+                    StatusBarNotification.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     // disable heads up if notification is for different user in multi-user environment
-                    if (!(Boolean)XposedHelpers.callMethod(param.thisObject, "notificationIsForCurrentUser",
+                    if (!(Boolean)XposedHelpers.callMethod(param.thisObject, "isNotificationForCurrentProfiles",
                             param.args[0])) {
                         if (DEBUG) log("HeadsUp: Notification is not for current user");
-                        param.setResult(false);
                         return;
                     }
 
+                    StatusBarNotification sbn = (StatusBarNotification) param.args[0];
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    Notification n = (Notification) XposedHelpers.getObjectField(param.args[0], "notification");
-                    View headsUpView = (View) XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
+                    Notification n = sbn.getNotification();
                     int statusBarWindowState = XposedHelpers.getIntField(param.thisObject, "mStatusBarWindowState");
-                    String pkgName = (String) XposedHelpers.getObjectField(param.args[0], "pkg");
+                    String pkgName = sbn.getPackageName();
 
                     boolean showHeadsUp = false;
 
@@ -626,10 +602,6 @@ public class ModLedControl {
                             isHeadsUpSnoozing(pkgName)) {
                         if (DEBUG) log("Heads up currently snoozing for " + pkgName);
                         showHeadsUp = false;
-                    // show expanded heads up for non-intrusive incoming call
-                    } else if (isNonIntrusiveIncomingCallNotification(n) && isHeadsUpAllowed(context)) {
-                        n.extras.putBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, true);
-                        showHeadsUp = true;
                     // show if active screen heads up mode set
                     } else if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) &&
                             ActiveScreenMode.valueOf(n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE)) ==
@@ -639,10 +611,6 @@ public class ModLedControl {
                     // disable when panels are disabled
                     } else if (!(Boolean) XposedHelpers.callMethod(param.thisObject, "panelsEnabled")) {
                         if (DEBUG) log("shouldInterrupt: NO due to panels being disabled");
-                        showHeadsUp = false;
-                    // explicitly disable for all ongoing notifications
-                    } else if ((Boolean) XposedHelpers.callMethod(param.args[0], "isOngoing")) {
-                        if (DEBUG) log("Disabling heads up for ongoing notification");
                         showHeadsUp = false;
                     // get desired mode set by UNC or use default
                     } else {
@@ -654,41 +622,29 @@ public class ModLedControl {
                         switch (mode) {
                             default:
                             case DEFAULT:
-                                showHeadsUp = isHeadsUpAllowed(context,
+                                showHeadsUp = isHeadsUpAllowed(sbn, context,
                                         (Integer) XposedHelpers.callMethod(param.args[0], "getScore"));
                                 break;
                             case ALWAYS: 
-                                showHeadsUp = isHeadsUpAllowed(context);
+                                showHeadsUp = isHeadsUpAllowed(sbn, context);
                                 break;
                             case OFF: 
                                 showHeadsUp = false; 
                                 break;
                             case IMMERSIVE:
-                                showHeadsUp = isStatusBarHidden(statusBarWindowState) && isHeadsUpAllowed(context);
+                                showHeadsUp = isStatusBarHidden(statusBarWindowState) && isHeadsUpAllowed(sbn, context);
                                 break;
                         }
                     }
 
                     if (showHeadsUp) {
-                        if (mHeadsUpHandler != null) {
-                            mHeadsUpHandler.removeCallbacks(mHeadsUpHideRunnable);
-                        }
-                        mHeadsUpParams.yOffset = isStatusBarHidden(statusBarWindowState) ? 0 :
-                            (Integer) XposedHelpers.callMethod(param.thisObject, "getStatusBarHeight");
-                        mHeadsUpParams.gravity = n.extras.getInt(NOTIF_EXTRA_HEADS_UP_GRAVITY,
-                                Integer.valueOf(mSysUiPrefs.getString(
-                                        GravityBoxSettings.PREF_KEY_HEADS_UP_POSITION, "48")));
                         mHeadsUpParams.alpha = n.extras.getFloat(NOTIF_EXTRA_HEADS_UP_ALPHA,
                                 (float)(100 - mSysUiPrefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_ALPHA, 0)) / 100f);
-                        maybeUpdateHeadsUpLayout(headsUpView);
                     }
 
                     param.setResult(showHeadsUp);
                 }
             });
-
-            XposedHelpers.findAndHookMethod(CLASS_NOTIF_DATA_ENTRY, classLoader, "setInterruption", 
-                    XC_MethodReplacement.DO_NOTHING);
 
             XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "resetHeadsUpDecayTimer",
                     new XC_MethodHook() {
@@ -696,8 +652,10 @@ public class ModLedControl {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     Object headsUpView = XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
                     Object headsUp = XposedHelpers.getObjectField(headsUpView, "mHeadsUp");
-                    Object sbNotif = XposedHelpers.getObjectField(headsUp, "notification");
-                    Notification n = (Notification) XposedHelpers.getObjectField(sbNotif, "notification");
+                    if (headsUp == null) return;
+                    StatusBarNotification sbNotif = (StatusBarNotification)
+                            XposedHelpers.getObjectField(headsUp, "notification");
+                    Notification n = sbNotif.getNotification();
                     int timeout = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_TIMEOUT) ?
                             n.extras.getInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT) * 1000 :
                                 mSysUiPrefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_TIMEOUT, 5) * 1000;
@@ -705,95 +663,27 @@ public class ModLedControl {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_EXPAND_HELPER, classLoader, "isInside",
-                    View.class, float.class, float.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mSysUiPrefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_ONE_FINGER, false)) {
-                        param.setResult(true);
-                    }
-                }
-            });
-
             XposedHelpers.findAndHookMethod(CLASS_HEADSUP_NOTIF_VIEW, classLoader,
-                    "setNotification", CLASS_NOTIF_DATA_ENTRY, new XC_MethodHook() {
+                    "showNotification", CLASS_NOTIF_DATA_ENTRY, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    Object sbNotif = XposedHelpers.getObjectField(param.args[0], "notification");
-                    Notification n = (Notification) XposedHelpers.getObjectField(sbNotif, "notification");
-                    final boolean expanded = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_EXPANDED) ?
-                            n.extras.getBoolean(NOTIF_EXTRA_HEADS_UP_EXPANDED, false) :
-                                mSysUiPrefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_EXPANDED, false);
-                    Object headsUp = XposedHelpers.getObjectField(param.thisObject, "mHeadsUp");
-                    Object row = XposedHelpers.getObjectField(headsUp, "row");
-                    XposedHelpers.callMethod(row, "setExpanded", expanded);
+                    // alpha
+                    ViewGroup contentHolder = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mContentHolder");
+                    contentHolder.setAlpha(mHeadsUpParams.alpha);
+                    Object swipeHelper = XposedHelpers.getObjectField(param.thisObject, "mSwipeHelper");
+                    XposedHelpers.callMethod(swipeHelper, "setMaxSwipeProgress", mHeadsUpParams.alpha);
+                    // snooze button
+                    StatusBarNotification sbNotif = (StatusBarNotification)
+                            XposedHelpers.getObjectField(param.args[0], "notification");
                     if (mHeadsUpSnoozeBtn != null) {
                         if (mSysUiPrefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_SNOOZE, false)) {
-                            String pkgName = (String) XposedHelpers.getObjectField(sbNotif, "pkg");
-                            mHeadsUpSnoozeDlg.setPackageName(pkgName);
+                            contentHolder.addView(mHeadsUpSnoozeBtn);
+                            mHeadsUpSnoozeDlg.setPackageName(sbNotif.getPackageName());
                             mHeadsUpSnoozeBtn.setVisibility(View.VISIBLE);
+                            if (DEBUG) log("Showing snooze button ");
                         } else {
                             mHeadsUpSnoozeBtn.setVisibility(View.GONE);
                             resetHeadsUpSnoozeTimers();
-                        }
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "updateNotification",
-                    IBinder.class, CLASS_STATUSBAR_NOTIFICATION, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    Notification n = (Notification ) XposedHelpers.getObjectField(param.args[1], "notification");
-                    if (n.extras.getBoolean(NOTIF_EXTRA_HEADS_UP_IGNORE_UPDATE, false)) {
-                        if (DEBUG) log("updateNotification: ignoring heads up for updated notification");
-                        return;
-                    }
-                    if ((Boolean)XposedHelpers.callMethod(param.thisObject, "shouldInterrupt", param.args[1])) {
-                        Constructor<?> c = XposedHelpers.findConstructorExact(CLASS_NOTIF_DATA_ENTRY,
-                                classLoader, IBinder.class, CLASS_STATUSBAR_NOTIFICATION,
-                                    CLASS_STATUSBAR_ICON_VIEW);
-                        Object huView = XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
-                        Object entry = c.newInstance(param.args[0], param.args[1], null);
-                        if ((Boolean) XposedHelpers.callMethod(param.thisObject, "inflateViews",
-                                entry, XposedHelpers.callMethod(huView, "getHolder"))) {
-                            Handler h = (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler");
-                            Object huNotifEntry = XposedHelpers.getObjectField(param.thisObject,
-                                    "mInterruptingNotificationEntry");
-                            if (huNotifEntry != null) {
-                                h.removeMessages(MSG_HIDE_HEADS_UP);
-                                XposedHelpers.callMethod(param.thisObject, "setHeadsUpVisibility", false);
-                            }
-                            XposedHelpers.setLongField(param.thisObject, "mInterruptingNotificationTime",
-                                    System.currentTimeMillis());
-                            XposedHelpers.setObjectField(param.thisObject, "mInterruptingNotificationEntry", entry);
-                            XposedHelpers.callMethod(huView, "setNotification", entry);
-                            h.sendEmptyMessage(MSG_SHOW_HEADS_UP);
-                            XposedHelpers.callMethod(param.thisObject, "resetHeadsUpDecayTimer");
-                        }
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_HEADSUP_NOTIF_VIEW, classLoader, "onInterceptTouchEvent",
-                    MotionEvent.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    MotionEvent ev = (MotionEvent) param.args[0];
-                    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-                        mHeadsUpClickTime = System.currentTimeMillis();
-                    } else if (ev.getAction() == MotionEvent.ACTION_UP) {
-                        if (System.currentTimeMillis() - mHeadsUpClickTime < 300) {
-                            if (mHeadsUpHandler == null) {
-                                mHeadsUpHandler = new Handler();
-                                mHeadsUpHideRunnable = new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        ((View)param.thisObject).setVisibility(View.GONE);
-                                    }
-                                };
-                            }
-                            mHeadsUpHandler.postDelayed(mHeadsUpHideRunnable, 200);
                         }
                     }
                 }
@@ -803,47 +693,16 @@ public class ModLedControl {
                     boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    Object huNotifEntry = XposedHelpers.getObjectField(param.thisObject,
-                            "mInterruptingNotificationEntry");
+                    View headsUpView = (View) XposedHelpers.getObjectField(
+                            param.thisObject, "mHeadsUpNotificationView");
+                    Object huNotifEntry = XposedHelpers.callMethod(headsUpView, "getEntry");
                     if (huNotifEntry != null) {
-                        Object sbNotif = XposedHelpers.getObjectField(huNotifEntry, "notification");
-                        Notification n = (Notification) XposedHelpers.getObjectField(sbNotif, "notification");
+                        StatusBarNotification sbNotif = (StatusBarNotification)
+                                XposedHelpers.getObjectField(huNotifEntry, "notification");
+                        Notification n = sbNotif.getNotification();
                         if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE)) {
                             param.setResult(null);
                         }
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "setImeWindowStatus",
-                    IBinder.class, int.class, int.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    View headsUpView = (View) XposedHelpers.getObjectField(
-                            param.thisObject, "mHeadsUpNotificationView");
-                    if (headsUpView != null) {
-                        maybeUpdateHeadsUpLayout(headsUpView);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "animateHeadsUp",
-                    boolean.class, float.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    View headsUpView = (View) XposedHelpers.getObjectField(
-                            param.thisObject, "mHeadsUpNotificationView");
-                    if (headsUpView != null && mHeadsUpParams.alpha < 1f) {
-                        float frac = (Float) param.args[1] / 0.4f;
-                        frac = frac < 1f ? frac : 1f;
-                        float alpha = 1f - frac;
-                        alpha = alpha > mHeadsUpParams.alpha ? mHeadsUpParams.alpha : alpha;
-                        float offset = XposedHelpers.getFloatField(param.thisObject, 
-                                "mHeadsUpVerticalOffset") * frac;
-                        offset = (Boolean) param.args[0] ? offset : 0f;
-                        headsUpView.setAlpha(alpha);
-                        headsUpView.setY(offset);
-                        param.setResult(null);
                     }
                 }
             });
@@ -852,50 +711,11 @@ public class ModLedControl {
         }
     }
 
-    private static void maybeUpdateHeadsUpLayout(View headsUpView) {
-        if (headsUpView == null || !headsUpView.isAttachedToWindow()) return;
-        final Context context = headsUpView.getContext();
-
-        if (mHeadsUpLp == null) {
-            mHeadsUpLp = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL, // above the status bar!
-                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
-                        | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-                        | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                        | WindowManager.LayoutParams.FLAG_SPLIT_TOUCH,
-                    PixelFormat.TRANSLUCENT);
-            mHeadsUpLp.flags |= WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
-            mHeadsUpLp.gravity = -1;
-            mHeadsUpLp.y = -1;
-            mHeadsUpLp.setTitle("Heads Up");
-            mHeadsUpLp.packageName = context.getPackageName();
-            mHeadsUpLp.windowAnimations = context.getResources().getIdentifier(
-                    "Animation.StatusBar.HeadsUp", "style", PACKAGE_NAME_SYSTEMUI);
-        }
-
-        final int gravity = isImeShowing() ? Gravity.TOP : mHeadsUpParams.gravity;
-        final int yOffset = gravity != Gravity.TOP ? 0 : mHeadsUpParams.yOffset;
-        if (headsUpView.getAlpha() >= 0.2f) {
-            headsUpView.setAlpha(mHeadsUpParams.alpha);
-        }
-
-        final boolean layoutChanged = mHeadsUpLp.y != yOffset ||
-                mHeadsUpLp.gravity != gravity;
-        if (layoutChanged) {
-            mHeadsUpLp.y = yOffset;
-            mHeadsUpLp.gravity = gravity;
-            WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-            wm.updateViewLayout(headsUpView, mHeadsUpLp);
-        }
+    private static boolean isHeadsUpAllowed(StatusBarNotification sbn, Context context) {
+        return isHeadsUpAllowed(sbn, context, 20);
     }
 
-    private static boolean isHeadsUpAllowed(Context context) {
-        return isHeadsUpAllowed(context, 20);
-    }
-
-    private static boolean isHeadsUpAllowed(Context context, int score) {
+    private static boolean isHeadsUpAllowed(StatusBarNotification sbn, Context context, int score) {
         if (context == null) return false;
 
         if (score < Integer.valueOf(mSysUiPrefs.getString(
@@ -908,26 +728,16 @@ public class ModLedControl {
                 XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, context.getClassLoader()),
                 "getInstance", context);
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        Notification n = sbn.getNotification();
         return (pm.isScreenOn() &&
-                !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isShowingAndNotHidden") &&
+                !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isShowingAndNotOccluded") &&
                 !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isInputRestricted") &&
+                (!sbn.isOngoing() || n.fullScreenIntent != null || (n.extras.getInt("headsup", 0) != 0)) &&
                 !shouldNotDisturb(context));
     }
 
     private static boolean isStatusBarHidden(int statusBarWindowState) {
         return (statusBarWindowState != 0);
-    }
-
-    private static boolean isImeShowing() {
-        if (mStatusBar == null) return false;
-
-        int iconHints = XposedHelpers.getIntField(mStatusBar, "mNavigationIconHints");
-        return ((iconHints & NAVIGATION_HINT_BACK_ALT) == NAVIGATION_HINT_BACK_ALT);
-    }
-
-    private static boolean isNonIntrusiveIncomingCallNotification(Notification n) {
-        return (n != null &&
-                n.extras.getBoolean(ModDialer.NOTIF_EXTRA_NON_INTRUSIVE_CALL, false));
     }
 
     private static String getTopLevelPackageName(Context context) {
@@ -953,8 +763,7 @@ public class ModLedControl {
         }
     }
 
-    private static ImageButton addSnoozeButton(ViewGroup vg) throws Throwable {
-        final Context context = vg.getContext();
+    private static ImageButton createSnoozeButton(final Context context) throws Throwable {
         final Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
         mHeadsUpSnoozeDlg = new HeadsUpSnoozeDialog(context, gbContext, mHeadsUpSnoozeTimerSetListener);
         mHeadsUpSnoozeMap = new HashMap<String, Long>();
@@ -962,15 +771,15 @@ public class ModLedControl {
 
         ImageButton imgButton = new ImageButton(context);
         int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40,
-                vg.getResources().getDisplayMetrics());
+                context.getResources().getDisplayMetrics());
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(sizePx, sizePx, 
-                Gravity.TOP | Gravity.END);
-        lp.rightMargin = sizePx / 2;
+                Gravity.BOTTOM | Gravity.END);
         imgButton.setLayoutParams(lp);
         imgButton.setImageDrawable(gbContext.getResources().getDrawable(R.drawable.ic_heads_up_snooze));
         imgButton.setHapticFeedbackEnabled(true);
         imgButton.setVisibility(View.GONE);
-        ((ViewGroup)vg.getChildAt(0)).addView(imgButton);
+        imgButton.setElevation(30);
+        imgButton.setAlpha(0.5f);
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -990,6 +799,7 @@ public class ModLedControl {
                 return true;
             }
         });
+        if (DEBUG) log("Snooze button created");
         return imgButton;
     }
 

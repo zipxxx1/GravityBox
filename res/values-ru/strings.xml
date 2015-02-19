@@ -1339,7 +1339,6 @@
         активного экрана требуется, чтобы экран блокировки был включен.\nФункция активируется переключателем ниже. После включения 
         возможно выполнить дополнительную конфигурацию по приложениям</string>
     <string name="lc_active_screen_switch_title">Включение активного экрана</string>
-    <string name="lc_expand_notification_panel_title">Раскрытие уведомлений</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Тихий час</string>
@@ -1543,14 +1542,11 @@
     <string name="pref_cat_notif_heads_up_title">Уведомления режима всплытия</string>
     <string name="pref_heads_up_master_switch_summary">Активация функции Всплытие (Heads up) для AOSP. 
         Если активировано, станут доступны опции для приложений в управлении оповещениями. (Необходима перезагрузка)</string>
-    <string name="pref_heads_up_one_finger_title">Раскрытие пальцем</string>
     <string name="pref_heads_up_timeout_title">Задержка</string>
     <string name="pref_heads_up_timeout_summary">Время отображения окна уведомления. 0 = постоянно.</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Всплытие</string>
-    <string name="pref_lc_headsup_expanded_title">В раскрытом виде</string>
-    <string name="pref_lc_headsup_expanded_summary">Пожалуйста, имейте в виду, что параметры управления оповещением могут переопределить данную опцию</string>
     <string name="pref_lc_headsup_dnd_title">Не беспокоить</string>
     <string name="pref_lc_headsup_dnd_summary">Уведомления в режиме всплытия не будут отображаться при работе этого приложения</string>
 
@@ -1562,7 +1558,6 @@
     <string name="pref_lc_active_screen_mode_title">Режим активного экрана</string>
     <string name="lc_active_screen_mode_disabled">Отключен</string>
     <string name="lc_active_screen_mode_nothing">Только включение экрана</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
@@ -1584,12 +1579,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Задержка всплытия</string>
     <string name="pref_unc_as_headsup_timeout_summary">Время отображения окна всплытия. 0 = до разблокировки.</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Положение всплытия</string>
-    <string name="headsup_position_top">Вверху</string>
-    <string name="headsup_position_center">По центру</string>
-    <string name="headsup_position_bottom">Внизу</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Мобильные данные 2</string>
@@ -1697,10 +1686,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Расш.рабочий стол в меню выключения</string>
     <string name="pref_powermenu_expanded_desktop_summary">Убедитесь, что доступен альтернативный метод отключения расширенного рабочего стола!!!</string>
-
-    <!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">Игнорировать обновления</string>
-    <string name="pref_lc_headsup_ignore_update_summary">Уведомления всплытия не будут появляться, если обновляется существующее уведомление</string>
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">Настройки плитки быстрой записи</string>

@@ -1102,7 +1102,6 @@
         \nこのスイッチで有効/無効を切り替えられます。
         有効にした後、アプリ毎に設定できます。</string>
     <string name="lc_active_screen_switch_title">アクティブスクリーンを有効化</string>
-    <string name="lc_expand_notification_panel_title">通知領域を開く</string>
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">お休みモード</string>
     <string name="pref_lc_qh_enabled_title">お休みモードを有効化</string>
@@ -1262,13 +1261,10 @@
     <string name="pref_cat_notif_heads_up_title">Heads up通知機能</string>
     <string name="pref_heads_up_master_switch_summary">AOSP標準のHeads up機能を有効にします。
         有効にすると、アプリ別設定が通知コントロールで出来るようになります。 (要再起動)</string>
-    <string name="pref_heads_up_one_finger_title">指一本で開く</string>
     <string name="pref_heads_up_timeout_title">タイムアウト</string>
     <string name="pref_heads_up_timeout_summary">どれぐらいの間通知ウインドウを表示するか指定します。 0 = 非表示にしない</string>
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
-    <string name="pref_lc_headsup_expanded_title">開いた状態で表示</string>
-    <string name="pref_lc_headsup_expanded_summary">この設定は通知コントロールで上書きされることがあります。</string>
     <string name="pref_lc_headsup_dnd_title">通知の一時停止</string>
     <string name="pref_lc_headsup_dnd_summary">このアプリを前面で起動しているときにHeads up通知を表示しないようにします。</string>
     <!-- Navbar keys: enable Android L icons -->
@@ -1278,7 +1274,6 @@
     <string name="pref_lc_active_screen_mode_title">アクティブスクリーンモード</string>
     <string name="lc_active_screen_mode_disabled">無効</string>
     <string name="lc_active_screen_mode_nothing">画面点灯のみ</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">リモートディスプレイ</string>
@@ -1296,11 +1291,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Heads upタイムアウト</string>
     <string name="pref_unc_as_headsup_timeout_summary">Heads up通知ウインドウを表示する時間を指定します。 0 = アンロックされるまで表示</string>
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Heads up通知の位置</string>
-    <string name="headsup_position_top">上</string>
-    <string name="headsup_position_center">中央</string>
-    <string name="headsup_position_bottom">下</string>
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">データ使用量2</string>
     <!-- MSIM Signal Cluster: auto-hide signal icons -->
@@ -1386,9 +1376,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">電源メニューの拡張デスクトップ</string>
     <string name="pref_powermenu_expanded_desktop_summary">まず拡張デスクトップを無効に出来る他の方法があるか確認してください!!!</string>
-    <!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">更新を無視する</string>
-    <string name="pref_lc_headsup_ignore_update_summary">すでにある通知が更新されたとき、Heads upを表示しないようにします。</string>
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">クイック録音タイル設定</string>
     <string name="pref_quickrecord_quality_title">音質</string>

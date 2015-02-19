@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -71,8 +71,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModNavigationBar.initZygote(prefs);
         }
 
-        ModLedControl.initZygote(prefs);
-
         // MTK
         if (Utils.isMtkDevice()) {
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_DEV_OPTS, false)) {
@@ -114,6 +112,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ConnectivityServiceWrapper.initAndroid(lpparam.classLoader);
             ModViewConfig.initAndroid(prefs, lpparam.classLoader);
             ModPower.initAndroid(prefs, lpparam.classLoader);
+            ModLedControl.initAndroid(prefs, lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {

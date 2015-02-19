@@ -1336,7 +1336,6 @@
         funzione richiede che sia attiva la schermata di blocco.\nL\'interruttore sotto è il principale. 
         Dopo essere stato abilitato la configurazione può essere fatta per ogni app.</string>
     <string name="lc_active_screen_switch_title">Abilita Active Screen</string>
-    <string name="lc_expand_notification_panel_title">Espandi pannello notifiche</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Ore Notturne</string>
@@ -1540,14 +1539,11 @@
     <string name="pref_cat_notif_heads_up_title">Notifiche a comparsa</string>
     <string name="pref_heads_up_master_switch_summary">Abilita la funzionalità Heads Up contenuta nell\'AOSP. 
         Quando abilitato, sarà possibile impostare ulteriori opzioni per ogni app nel Gestore globale notifiche. (richiede riavvio)</string>
-    <string name="pref_heads_up_one_finger_title">Espandi con un dito</string>
     <string name="pref_heads_up_timeout_title">Timeout</string>
     <string name="pref_heads_up_timeout_summary">Specifica quanto tempo la notifica deve rimanere in primo piano. 0 = persistente.</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Notifiche a comparsa</string>
-    <string name="pref_lc_headsup_expanded_title">Mostra estese</string>
-    <string name="pref_lc_headsup_expanded_summary">Da notare che questa opzione può essere sostituita nel Gestore Globale Notifiche</string>
     <string name="pref_lc_headsup_dnd_title">Non disturbare</string>
     <string name="pref_lc_headsup_dnd_summary">Non mostrare notifiche a comparsa quando l\'app è in primo piano</string>
 
@@ -1559,7 +1555,6 @@
     <string name="pref_lc_active_screen_mode_title">Modalità Active Screen</string>
     <string name="lc_active_screen_mode_disabled">Disabilitata</string>
     <string name="lc_active_screen_mode_nothing">Accendi solo schermo</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
@@ -1581,12 +1576,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Timeout notifiche a comparsa</string>
     <string name="pref_unc_as_headsup_timeout_summary">Specifica quanto tempo la notifica deve essere mostrata. 0 = finchè non viene sbloccato il dispositivo.</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Posizione Notifiche a comparsa</string>
-    <string name="headsup_position_top">In alto</string>
-    <string name="headsup_position_center">Al centro</string>
-    <string name="headsup_position_bottom">In basso</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Utilizzo Dati 2</string>
@@ -1694,10 +1683,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Desktop esteso in menu spegnimento</string>
     <string name="pref_powermenu_expanded_desktop_summary">Assicuratevi che siano disponibili altri metodi per disattivare il desktop esteso!</string>
-
-    <!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">Ignora aggiornamenti</string>
-    <string name="pref_lc_headsup_ignore_update_summary">Non verrà mostrata una notifica a comparsa quando è già presente una notifica</string>
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">Impostazioni casella Registratore</string>

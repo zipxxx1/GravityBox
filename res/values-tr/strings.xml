@@ -1288,7 +1288,6 @@
         to be enabled.\nThe switch below is a master switch. After it\'s enabled, 
         additional configuration can be done on per-app basis</string>
     <string name="lc_active_screen_switch_title">Enable Active Screen</string>
-    <string name="lc_expand_notification_panel_title">Expand notification panel</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Quiet hours</string>
@@ -1490,14 +1489,11 @@
     <!-- Statusbar: notification heads up category -->
     <string name="pref_cat_notif_heads_up_title">Heads Up Bildirimi</string>
     <string name="pref_heads_up_master_switch_summary">Activates standard AOSP heads up functionality. When enabled, additional per-app options will become available within Ultimate notification control. (requires reboot)</string>
-    <string name="pref_heads_up_one_finger_title">Tek dokunuşta genişlet</string>
     <string name="pref_heads_up_timeout_title">Zaman Aşımı</string>
     <string name="pref_heads_up_timeout_summary">Bildirim penceresinin ne kadar gösterileceğini ayarlar. 0 = persistent.</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
-    <string name="pref_lc_headsup_expanded_title">Genişletilmiş göster</string>
-    <string name="pref_lc_headsup_dnd_title">Rahatsız etme</string>
     <string name="pref_lc_headsup_dnd_summary">Bu uygulama önplandayken heads up bildirimlerini gösterme</string>
 
     <!-- Navbar keys: enable Android L icons -->
@@ -1508,7 +1504,6 @@
     <string name="pref_lc_active_screen_mode_title">Active Screen modu</string>
     <string name="lc_active_screen_mode_disabled">Devre dışı</string>
     <string name="lc_active_screen_mode_nothing">Sadece ekranı aç</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
@@ -1530,12 +1525,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Heads up zaman aşımı</string>
     <string name="pref_unc_as_headsup_timeout_summary">Heads up penceresinin ne kadar gösterileceğini ayarlar. 0 = until unlocked.</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Heads up pozisyonu</string>
-    <string name="headsup_position_top">Üst</string>
-    <string name="headsup_position_center">Orta</string>
-    <string name="headsup_position_bottom">Alt</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Veri Kullanımı 2</string>

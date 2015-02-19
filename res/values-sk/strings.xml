@@ -1311,7 +1311,6 @@
         Prepínač nižšie slúži na hlavné zapnutie/vypnutie funkcie. Ak je funkcia zapnutá, ďalšie jej nastavenia 
         budú prístupné na úrovni nastavení jednotlivých aplikácií.</string>
     <string name="lc_active_screen_switch_title">Povoliť aktívnu obrazovku</string>
-    <string name="lc_expand_notification_panel_title">Rozbaliť lištu oznmámení</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Tiché hodiny</string>
@@ -1509,14 +1508,11 @@
     <string name="pref_cat_notif_heads_up_title">Heads up notifikácie</string>
     <string name="pref_heads_up_master_switch_summary">Aktivuje štandardnú AOSP \"heads up\" funkcionalitu. 
         Ak zapnuté, dodatočné nastavenia pre jednotlivé aplikácie samostatne budú dostupné v rámci ponuky Nastavenia oznámení. (vyžaduje reštart)</string>
-    <string name="pref_heads_up_one_finger_title">Rozšírenie jedným prstom</string>
     <string name="pref_heads_up_timeout_title">Časovač zobrazenia</string>
     <string name="pref_heads_up_timeout_summary">Po akej dobe zavrieť notifikačné okno. 0 = nikdy.</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
-    <string name="pref_lc_headsup_expanded_title">Rozšírený náhľad</string>
-    <string name="pref_lc_headsup_expanded_summary">Nastavenie môže byť obídené na úrovni jednotlivých aplikácií v nastaveniach oznámení</string>
     <string name="pref_lc_headsup_dnd_title">Nevyrušovať</string>
     <string name="pref_lc_headsup_dnd_summary">Nezobrazí žiadne heads up notifikácie ak je táto aplikácia v popredí</string>
 
@@ -1528,7 +1524,6 @@
     <string name="pref_lc_active_screen_mode_title">Režim aktívnej obrazovky</string>
     <string name="lc_active_screen_mode_disabled">Vypnutá</string>
     <string name="lc_active_screen_mode_nothing">Len zapnúť obrazovku</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
@@ -1550,12 +1545,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Heads up časovač</string>
     <string name="pref_unc_as_headsup_timeout_summary">Po akej dobe zavrieť notifikačné okno. 0 = po odomknutí zariadenia.</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Heads up pozícia</string>
-    <string name="headsup_position_top">Hore</string>
-    <string name="headsup_position_center">V strede</string>
-    <string name="headsup_position_bottom">Dole</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Využitie dát 2</string>
@@ -1663,10 +1652,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Rozšírená plocha v menu napájania</string>
     <string name="pref_powermenu_expanded_desktop_summary">Uistite sa, že existuje alternatívna metóda vypnutia rozšírenej plochy!!!</string>
-
-    <!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">Ignorovať aktualizácie</string>
-    <string name="pref_lc_headsup_ignore_update_summary">Nezobrazí Heads up v prípade aktualizácie obsahu existujúceho oznámenia</string>
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">Nastavenia dlaždice záznamu zvuku</string>

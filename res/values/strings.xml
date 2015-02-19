@@ -1339,7 +1339,6 @@
         to be enabled.\nThe switch below is a master switch. After it\'s enabled, 
         additional configuration can be done on per-app basis</string>
     <string name="lc_active_screen_switch_title">Enable Active Screen</string>
-    <string name="lc_expand_notification_panel_title">Expand notification panel</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Quiet hours</string>
@@ -1544,14 +1543,11 @@
     <string name="pref_cat_notif_heads_up_title">Notification heads up</string>
     <string name="pref_heads_up_master_switch_summary">Activates standard AOSP heads up functionality. 
         When enabled, additional per-app options will become available within Ultimate notification control. (requires reboot)</string>
-    <string name="pref_heads_up_one_finger_title">One finger expand</string>
     <string name="pref_heads_up_timeout_title">Timeout</string>
     <string name="pref_heads_up_timeout_summary">For how long to show notification window. 0 = persistent.</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
-    <string name="pref_lc_headsup_expanded_title">Show expanded</string>
-    <string name="pref_lc_headsup_expanded_summary">Please note that this option can be overridden by Ultimate Notification Control</string>
     <string name="pref_lc_headsup_dnd_title">Do not disturb</string>
     <string name="pref_lc_headsup_dnd_summary">Won\'t show any heads up while this app is in the foreground</string>
 
@@ -1563,7 +1559,6 @@
     <string name="pref_lc_active_screen_mode_title">Active Screen mode</string>
     <string name="lc_active_screen_mode_disabled">Disabled</string>
     <string name="lc_active_screen_mode_nothing">Turn screen on only</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
@@ -1585,12 +1580,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Heads up timeout</string>
     <string name="pref_unc_as_headsup_timeout_summary">For how long to show heads up window. 0 = until unlocked.</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Heads up position</string>
-    <string name="headsup_position_top">Top</string>
-    <string name="headsup_position_center">Center</string>
-    <string name="headsup_position_bottom">Bottom</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Data Usage 2</string>
@@ -1698,10 +1687,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Expanded desktop in power menu</string>
     <string name="pref_powermenu_expanded_desktop_summary">Make sure alternative method of turning expanded desktop off is available!!!</string>
-
-    <!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">Ignore updates</string>
-    <string name="pref_lc_headsup_ignore_update_summary">Won\'t show heads up when existing notification gets updated</string>
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">QuickRecord tile settings</string>

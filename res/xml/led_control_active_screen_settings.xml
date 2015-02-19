@@ -45,14 +45,6 @@
         android:defaultValue="10"
         android:dependency="activeScreenEnabled" />
 
-    <ListPreference
-        android:key="pref_unc_as_headsup_position"
-        android:title="@string/pref_unc_as_headsup_position_title"
-        android:entries="@array/headsup_position_entries"
-        android:entryValues="@array/headsup_position_values"
-        android:defaultValue="17"
-        android:dependency="activeScreenEnabled" />
-
     <com.ceco.lollipop.gravitybox.preference.SeekBarPreference
         android:key="pref_unc_as_headsup_alpha"
         android:title="@string/pref_heads_up_alpha_title"

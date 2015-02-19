@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,7 +30,6 @@ public class LedSettings {
     public static final String PREF_KEY_LOCKED = "uncLocked";
     public static final String PREF_KEY_ACTIVE_SCREEN_ENABLED = "activeScreenEnabled";
     public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT = "pref_unc_as_headsup_timeout";
-    public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_POSITION = "pref_unc_as_headsup_position";
     public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA = "pref_unc_as_headsup_alpha";
     public static final String PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS = "pref_unc_as_ignore_quiet_hours";
     public static final String PREF_KEY_ACTIVE_SCREEN_POCKET_MODE = "pref_unc_as_pocket_mode";
@@ -40,7 +39,7 @@ public class LedSettings {
 
     public enum LedMode { ORIGINAL, OVERRIDE, OFF };
     public enum HeadsUpMode { DEFAULT, ALWAYS, IMMERSIVE, OFF };
-    public enum ActiveScreenMode { DISABLED, DO_NOTHING, EXPAND_PANEL, HEADS_UP };
+    public enum ActiveScreenMode { DISABLED, DO_NOTHING, HEADS_UP };
 
     private Context mContext;
     private String mPackageName;
@@ -62,9 +61,7 @@ public class LedSettings {
     private boolean mQhIgnore;
     private String mQhIgnoreList;
     private HeadsUpMode mHeadsUpMode;
-    private boolean mHeadsUpExpanded;
     private boolean mHeadsUpDnd;
-    private boolean mHeadsUpIgnoreUpdate;
     private int mHeadsUpTimeout;
     private boolean mProgressTracking;
 
@@ -135,12 +132,8 @@ public class LedSettings {
                 ls.setQhIgnoreList(data[1]);
             } else if (data[0].equals("headsUpMode")) {
                 ls.setHeadsUpMode(data[1]);
-            } else if (data[0].equals("headsUpExpanded")) {
-                ls.setHeadsUpExpanded(Boolean.valueOf(data[1]));
             } else if (data[0].equals("headsUpDnd")) {
                 ls.setHeadsUpDnd(Boolean.valueOf(data[1]));
-            } else if (data[0].equals("headsUpIgnoreUpdate")) {
-                ls.setHeadsUpIgnoreUpdate(Boolean.valueOf(data[1]));
             } else if (data[0].equals("headsUpTimeout")) {
                 ls.setHeadsUpTimeout(Integer.valueOf(data[1]));
             } else if (data[0].equals("progressTracking")) {
@@ -171,9 +164,7 @@ public class LedSettings {
         mQhIgnore = false;
         mQhIgnoreList = null;
         mHeadsUpMode = HeadsUpMode.DEFAULT;
-        mHeadsUpExpanded = false;
         mHeadsUpDnd = false;
-        mHeadsUpIgnoreUpdate = false;
         mHeadsUpTimeout = 5;
         mProgressTracking = false;
     }
@@ -353,16 +344,8 @@ public class LedSettings {
         }
     }
 
-    protected void setHeadsUpExpanded(boolean expanded) {
-        mHeadsUpExpanded = expanded;
-    }
-
     protected void setHeadsUpDnd(boolean dnd) {
         mHeadsUpDnd = dnd;
-    }
-
-    protected void setHeadsUpIgnoreUpdate(boolean ignoreUpdate) {
-        mHeadsUpIgnoreUpdate = ignoreUpdate;
     }
 
     protected void setHeadsUpTimeout(int timeout) {
@@ -449,16 +432,8 @@ public class LedSettings {
         return mHeadsUpMode;
     }
 
-    public boolean getHeadsUpExpanded() {
-        return mHeadsUpExpanded;
-    }
-
     public boolean getHeadsUpDnd() {
         return mHeadsUpDnd;
-    }
-
-    public boolean getHeadsUpIgnoreUpdate() {
-        return mHeadsUpIgnoreUpdate;
     }
 
     public int getHeadsUpTimeout() {
@@ -495,9 +470,7 @@ public class LedSettings {
                 dataSet.add("qhIgnoreList:" + mQhIgnoreList);
             }
             dataSet.add("headsUpMode:" + mHeadsUpMode.toString());
-            dataSet.add("headsUpExpanded:" + mHeadsUpExpanded);
             dataSet.add("headsUpDnd:" + mHeadsUpDnd);
-            dataSet.add("headsUpIgnoreUpdate:" + mHeadsUpIgnoreUpdate);
             dataSet.add("headsUpTimeout:" + mHeadsUpTimeout);
             dataSet.add("progressTracking:" + mProgressTracking);
             SharedPreferences prefs = mContext.getSharedPreferences(

@@ -1339,7 +1339,6 @@
         请注意，激活屏幕，需要启用锁屏
         下面此开关是总开关，启用后额外的配置可以在每个应用程序的基础上进行</string>
     <string name="lc_active_screen_switch_title">启用激活屏幕</string>
-    <string name="lc_expand_notification_panel_title">展开通知面板</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">静音时段</string>
@@ -1543,14 +1542,11 @@
     <string name="pref_cat_notif_heads_up_title">浮动通知</string>
     <string name="pref_heads_up_master_switch_summary">启用标准的AOSP浮动功能
         启用后附加的每个应用程序选项会在最终通知控制变得可用（需要重新启动）</string>
-    <string name="pref_heads_up_one_finger_title">单指展开</string>
     <string name="pref_heads_up_timeout_title">超时</string>
     <string name="pref_heads_up_timeout_summary">设置通知窗口显示多长时间，0为一直显示</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">浮动通知</string>
-    <string name="pref_lc_headsup_expanded_title">显示扩展</string>
-    <string name="pref_lc_headsup_expanded_summary">请注意，此选项可以通过终极通知控制内的设置覆盖</string>
     <string name="pref_lc_headsup_dnd_title">勿扰模式</string>
     <string name="pref_lc_headsup_dnd_summary">当程序在前台将不会显示任何通知</string>
 
@@ -1562,7 +1558,6 @@
     <string name="pref_lc_active_screen_mode_title">唤醒屏幕模式</string>
     <string name="lc_active_screen_mode_disabled">停用</string>
     <string name="lc_active_screen_mode_nothing">仅唤醒屏幕</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
     
     <!-- QS: Remote display tile -->
@@ -1585,12 +1580,6 @@
     <string name="pref_unc_as_headsup_timeout_title">浮动通知超时</string>
     <string name="pref_unc_as_headsup_timeout_summary">显示浮动通知窗口多长时间 0=直到解锁</string>
 
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">浮动通知位置</string>
-    <string name="headsup_position_top">顶部</string>
-    <string name="headsup_position_center">中心</string>
-    <string name="headsup_position_bottom">底部</string>
-    
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">数据使用 2</string>
     
@@ -1697,10 +1686,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">在电源键菜单显示扩展桌面按钮</string>
     <string name="pref_powermenu_expanded_desktop_summary">请确认扩展桌面是可用的然后再替换</string>
-
-    <!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">忽略浮动通知更新</string>
-    <string name="pref_lc_headsup_ignore_update_summary">当有通知更新时不显示浮动通知</string>
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">快速录像瓷砖设置</string>

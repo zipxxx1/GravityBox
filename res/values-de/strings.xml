@@ -1316,7 +1316,6 @@
         werden. Der Aktiv-Bildschirm benötigt eine intakte Bildschirmsperre.\nIst der untenstehende Hauptschalter
         aktiviert, kann das Verhalten für einzelne Apps konfiguriert werden.</string>
     <string name="lc_active_screen_switch_title">Aktiv-Bildschirm aktivieren</string>
-    <string name="lc_expand_notification_panel_title">Benachrichtigungsleiste erweitern</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Ruhestunden</string>
@@ -1519,14 +1518,11 @@
     <string name="pref_cat_notif_heads_up_title">Heads-Up Benachrichtigungen</string>
     <string name="pref_heads_up_master_switch_summary">Aktiviert standart AOSP Funktionalität. 
         Wenn aktiviert, werden weitere App-spezifische Einstellungen in der ultimativen Benachrichtigungkontrolle verfügbar. (erfordert Neustart)</string>
-    <string name="pref_heads_up_one_finger_title">Mit einem Finger erweitern</string>
     <string name="pref_heads_up_timeout_title">Zeitlimit</string>
     <string name="pref_heads_up_timeout_summary">Anzeigedauer des Benachrichtigungenfensters. 0 = dauerhaft.</string>
     
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Heads-Up</string>
-    <string name="pref_lc_headsup_expanded_title">Erweitert anzeigen</string>
-    <string name="pref_lc_headsup_dnd_title">Nicht stören</string>
     <string name="pref_lc_headsup_dnd_summary">Keine Heads-Up Benachrichtigungen anzeigen, wenn diese App im Vordergrund ist</string>
 
     <!-- Navbar keys: enable Android L icons -->
@@ -1537,7 +1533,6 @@
     <string name="pref_lc_active_screen_mode_title">Aktiv Bildschirm Modus</string>
     <string name="lc_active_screen_mode_disabled">Aus</string>
     <string name="lc_active_screen_mode_nothing">Bildschirm nur anschalten</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
     
     <!-- QS: Remote display tile -->
@@ -1559,12 +1554,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Heads-Up timout</string>
     <string name="pref_unc_as_headsup_timeout_summary">Anzeigezeit des Heads-Up Fensters. 0 = bis Bildschirm entsperrt.</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Heads-Up Position</string>
-    <string name="headsup_position_top">Oben</string>
-    <string name="headsup_position_center">Mitte</string>
-    <string name="headsup_position_bottom">Unten</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Datenverkehr 2</string>

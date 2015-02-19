@@ -187,19 +187,6 @@
             android:persistent="false" />
 
         <CheckBoxPreference
-            android:key="pref_lc_headsup_ignore_update"
-            android:title="@string/pref_lc_headsup_ignore_update_title"
-            android:summary="@string/pref_lc_headsup_ignore_update_summary"
-            android:defaultValue="false"
-            android:persistent="false" />
-
-        <CheckBoxPreference
-            android:key="pref_lc_headsup_expanded"
-            android:title="@string/pref_lc_headsup_expanded_title"
-            android:defaultValue="false"
-            android:persistent="false" />
-
-        <CheckBoxPreference
             android:key="pref_lc_headsup_dnd"
             android:title="@string/pref_lc_headsup_dnd_title"
             android:summary="@string/pref_lc_headsup_dnd_summary"

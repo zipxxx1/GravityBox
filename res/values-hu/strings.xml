@@ -1326,7 +1326,6 @@
     <string name="lc_active_screen">Aktív Képernyő</string>
     <string name="lc_active_screen_info">Az Aktív Képernyő funkció minden alkalommal automatikusan bekapcsolja a kijelzőt új értesítés érkezésekor. Opcionálisan kiterjeszti az értesítések panelt vagy lebegő felugró értesítést mutat az aktuális zárképernyő biztonsági házirendtől és felhasználói beállításoktól függően. Ne feledje, hogy az Aktív Képernyő működéséhez a zárképernyőt engedélyeznie kell.\nA lenti kapcsoló a főkapcsoló. Engedélyezés után további, alkalmazásonkénti konfiguráció lehetséges.</string>
     <string name="lc_active_screen_switch_title">Aktív Képernyő engedélyezése</string>
-    <string name="lc_expand_notification_panel_title">Értesítési panel lenyitása</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Csendes időszak</string>
@@ -1525,14 +1524,11 @@
     <!-- Statusbar: notification heads up category -->
     <string name="pref_cat_notif_heads_up_title">Értesítések lebegő felugró ablakban</string>
     <string name="pref_heads_up_master_switch_summary">Aktiválja a szabvány AOSP heads up funkciót: értesítés lebegő, a képernyő tetején felugorva megjelenő ablakban. Amikor engedélyezve van, további alkalmazásonkénti opció válik elérhetővé az Értesítés vezérlésben. (újraindítás szükséges)</string>
-    <string name="pref_heads_up_one_finger_title">Egy ujjas kiterjesztés</string>
     <string name="pref_heads_up_timeout_title">Időtúllépés</string>
     <string name="pref_heads_up_timeout_summary">Mennyi ideig mutassa az értesítési ablakot. 0 = folyamatosan.</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Lebegő felugró ablak</string>
-    <string name="pref_lc_headsup_expanded_title">Kiterjesztve mutat</string>
-    <string name="pref_lc_headsup_expanded_summary">Vedd figyelembe, hogy ez az opció felülbírálásra kerülhet az Értesítés Vezérlés által</string>
     <string name="pref_lc_headsup_dnd_title">Ne zavarjon</string>
     <string name="pref_lc_headsup_dnd_summary">Nem mutat egyetlen lebegő felugró ablakot sem, amíg ez az alkalmazás az előtérben fut</string>
 
@@ -1544,7 +1540,6 @@
     <string name="pref_lc_active_screen_mode_title">Aktív Képernyő mód</string>
     <string name="lc_active_screen_mode_disabled">Letiltva</string>
     <string name="lc_active_screen_mode_nothing">Csak bekapcsolt képernyőnél</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
@@ -1566,12 +1561,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Lebegő felugró ablak Időtúllépés</string>
     <string name="pref_unc_as_headsup_timeout_summary">Mennyi ideig mutassa az értesítési ablakot. 0 = amíg a feloldás aktív.</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Lebegő felugró ablak pozíció</string>
-    <string name="headsup_position_top">Fent</string>
-    <string name="headsup_position_center">Középen</string>
-    <string name="headsup_position_bottom">Alul</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Adathasználat 2</string>
@@ -1675,10 +1664,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Kiterjesztett asztal a kikapcsoló menüben</string>
     <string name="pref_powermenu_expanded_desktop_summary">Ellenőrizd a kiterjesztett asztal kikapcsolás alternatív módszerét!!!</string>
-
-	<!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">Frissítés mellőzése</string>
-    <string name="pref_lc_headsup_ignore_update_summary">Nem jelenik meg felugró ablak, ha frissül egy meglévő értesítés</string>
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">Gyors Felvétel csempe beállítások</string>

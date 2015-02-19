@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -118,8 +118,6 @@ public class LedListItem implements IBaseListAdapterItem {
                 return mContext.getString(R.string.lc_active_screen_mode_disabled);
             case DO_NOTHING: 
                 return mContext.getString(R.string.lc_active_screen_mode_nothing);
-            case EXPAND_PANEL:
-                return mContext.getString(R.string.lc_active_screen_mode_expand);
             case HEADS_UP:
                 return mContext.getString(R.string.lc_active_screen_mode_headsup);
             default:

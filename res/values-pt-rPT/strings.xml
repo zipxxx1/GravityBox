@@ -1315,7 +1315,6 @@
         do ecrã de bloqueio e das preferências do utilizador. De salientar que esta funcionalidade requer que o bloqueio de ecrã esteja ativado.\n\n
         O interruptor permite a ativação global da funcionalidade. Depois de ativar, as configurações poderão ser efetuadas por aplicação.</string>
     <string name="lc_active_screen_switch_title">Ativar Ecrã ligado</string>
-    <string name="lc_expand_notification_panel_title">Expandir painel de notificações</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Horas de silêncio</string>
@@ -1519,14 +1518,11 @@
     <string name="pref_cat_notif_heads_up_title">Notificações flutuantes (Heads up)</string>
     <string name="pref_heads_up_master_switch_summary">Permite ativar a funcionalidade nativa de notificações flutuantes. 
         Após ativação, ficam disponíveis mais opções a definir por aplicação no Controlo de notificações (necessário reiniciar).</string>
-    <string name="pref_heads_up_one_finger_title">Expandir com um dedo</string>
     <string name="pref_heads_up_timeout_title">Temporização</string>
     <string name="pref_heads_up_timeout_summary">Permite definir por quanto tempo deverá ser mostrada a janela da notificação (0 = persistente)</string>
 
     <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Notificações flutuantes (Heads up)</string>
-    <string name="pref_lc_headsup_expanded_title">Mostrar notificações expandidas</string>
-    <string name="pref_lc_headsup_expanded_summary">De notar que o Controlo de notificações se poderá sobrepor a esta opção</string>
     <string name="pref_lc_headsup_dnd_title">Não incomodar</string>
     <string name="pref_lc_headsup_dnd_summary">Permite com que nenhuma notificação flutuante seja mostrada enquanto a aplicação estiver em primeiro plano</string>
 
@@ -1538,7 +1534,6 @@
     <string name="pref_lc_active_screen_mode_title">Modo Ecrã ativo</string>
     <string name="lc_active_screen_mode_disabled">Desativado</string>
     <string name="lc_active_screen_mode_nothing">Ligar ecrã unicamente</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
@@ -1560,12 +1555,6 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Temporização das notificações flutuantes</string>
     <string name="pref_unc_as_headsup_timeout_summary">Permite definir por quanto tempo deverá ser mostrada a notificação (0 = até desbloquear)</string>
-
-    <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Posicionamento das notificações flutuantes</string>
-    <string name="headsup_position_top">Topo do ecrã</string>
-    <string name="headsup_position_center">Centro do ecrã</string>
-    <string name="headsup_position_bottom">Fundo do ecrã</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Utilização de dados 2</string>
@@ -1672,10 +1661,6 @@
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Ambiente de trabalho expandido no Menu Desligar</string>
     <string name="pref_powermenu_expanded_desktop_summary">Deverá ser grantido que existe um método alternativo acessível para desativar o ambiente de trabalho expandido!!!</string>
-
-    <!-- UNC HeadsUp: ignore for updated notification -->
-    <string name="pref_lc_headsup_ignore_update_title">Ignorar atualizações</string>
-    <string name="pref_lc_headsup_ignore_update_summary">Permite ignorar atualizações das notificações flutuantes em curso</string>
 
     <!-- QuickRecord tile settings -->
     <string name="pref_cat_quickrecord_tile_title">Definições do painel Gravação rápida</string>

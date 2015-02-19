@@ -1333,7 +1333,6 @@
         pantalla de bloqueo.\nDebajo está el interruptor principal. Tras activar, 
         se pueden configurar más opciones por app</string>
     <string name="lc_active_screen_switch_title">Activar Pantalla activa</string>
-    <string name="lc_expand_notification_panel_title">Expandir panel de notificación</string>
 
     <!-- Notification control: Quiet hours -->
     <string name="lc_quiet_hours">Horas de silencio</string>
@@ -1537,14 +1536,11 @@
     <string name="pref_cat_notif_heads_up_title">Notificaciones heads up</string>
     <string name="pref_heads_up_master_switch_summary">Activa la funcionalidad \"heads up\" de AOSP. 
          Al activar, opciones adicionales para cada aplicación se activarán en el Control de notificaciones. (requiere reinicio)</string>
-    <string name="pref_heads_up_one_finger_title">Expandir con un dedo</string>
     <string name="pref_heads_up_timeout_title">Tiempo de espera</string>
     <string name="pref_heads_up_timeout_summary">Cuánto tiempo mostrar la ventana de notificación. 0 = persistente.</string>
  
      <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
-    <string name="pref_lc_headsup_expanded_title">Mostrar expandido</string>
-    <string name="pref_lc_headsup_dnd_title">No molestar</string>
     <string name="pref_lc_headsup_dnd_summary">No mostrará notificaciones heads up mientras esta aplicación esté ejecutándose en primer plano</string>
  
     <!-- Navbar keys: enable Android L icons -->
@@ -1555,7 +1551,6 @@
     <string name="pref_lc_active_screen_mode_title">Modo Pantalla Activa</string>
     <string name="lc_active_screen_mode_disabled">Desactivado</string>
     <string name="lc_active_screen_mode_nothing">Solo encender pantalla</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
     
     <!-- QS: Remote display tile -->
@@ -1577,13 +1572,7 @@
     <!-- UNC Active Screen: heads up timeout -->
     <string name="pref_unc_as_headsup_timeout_title">Ocultar notificación Heads up tras&#8230;</string>
     <string name="pref_unc_as_headsup_timeout_summary">Cuánto tiempo mostrar la ventana de notificación. 0 = hasta desbloquear.</string>
-    
-     <!-- UNC Active Screen: heads up position -->
-    <string name="pref_unc_as_headsup_position_title">Posición del Heads up</string>
-    <string name="headsup_position_top">Arriba</string>
-    <string name="headsup_position_center">Centro</string>
-    <string name="headsup_position_bottom">Abajo</string>
-    
+
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Uso de datos 2</string>
     
