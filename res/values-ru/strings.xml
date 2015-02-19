@@ -1139,10 +1139,6 @@
     <string name="pref_notif_expand_all_title">Раскрыть все уведомления</string>
     <string name="pref_notif_expand_all_summary">Автоматическое раскрытие всех уведомлений, если включено</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Двойное нажатие для сна</string>
-    <string name="pref_statusbar_dt2s_summary">Двойное нажатие на строке состояния переводит устройство в режим сна</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">Анимация выкл</string>
     <string name="animation_scale1">Масштаб .25x</string>

@@ -890,9 +890,6 @@
     
     <string name="pref_notif_expand_all_title">모든 알림 확장</string>
     <string name="pref_notif_expand_all_summary">모든 알람들을 확장할 수 있으면 기본적으로 확장시킵니다.</string>
-    
-    <string name="pref_statusbar_dt2s_title">두 번 터치하여 잠금</string>
-    <string name="pref_statusbar_dt2s_summary">상단바를 두 번 터치하여 화면을 끕니다.</string>
 
     <string name="animation_scale0">애니메이션 없음</string>
     <string name="animation_scale1">애니메이션 0.25 배속</string>

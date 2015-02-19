@@ -1108,10 +1108,6 @@
     <string name="pref_notif_expand_all_title">Rozwiń wszystkie powiadomienia</string>
     <string name="pref_notif_expand_all_summary">Automatycznie rozwija wszystkie powiadomienia, gdy włączone</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Uśpij po podwójnym kliknięciu</string>
-    <string name="pref_statusbar_dt2s_summary">Podwójne kliknięcie na pasku stanu usypia urządzenie</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">Animacja wyłączona</string>
     <string name="animation_scale1">Skala animacji .25x</string>

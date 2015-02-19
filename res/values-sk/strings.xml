@@ -1109,10 +1109,6 @@
     <string name="pref_notif_expand_all_title">Rozšíriť všetky notifikácie</string>
     <string name="pref_notif_expand_all_summary">Rozšíri všetky notifikácie automaticky</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Uspať dvojitým ťuknutím</string>
-    <string name="pref_statusbar_dt2s_summary">Dvojité ťuknutie na stavovú lištu uspí zariadenie</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">Animácie vypnuté</string>
     <string name="animation_scale1">Mierka animácie .25x</string>

@@ -1136,10 +1136,6 @@
     <string name="pref_notif_expand_all_title">Développer toutes les notifications</string>
     <string name="pref_notif_expand_all_summary">Développe toutes les notifications automatiquement lorsque l\'option est activée</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Double appui pour mettre en veille</string>
-    <string name="pref_statusbar_dt2s_summary">Un double appui sur la barre d\'état met l\'appareil en veille</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">Animation désactivée</string>
     <string name="animation_scale1">Animation à l\'échelle 0.25x</string>

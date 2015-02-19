@@ -54,7 +54,6 @@ import android.provider.Settings;
 import android.service.notification.StatusBarNotification;
 import android.service.notification.NotificationListenerService.RankingMap;
 import android.util.TypedValue;
-import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
@@ -82,7 +81,6 @@ public class ModStatusBar {
             "com.android.systemui.lenovo.ext.NetworkType" :
             "com.mediatek.systemui.ext.NetworkType";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
-    private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
     private static final String CLASS_ICON_MERGER = "com.android.systemui.statusbar.phone.IconMerger";
     private static final String CLASS_SAVE_IMG_TASK = "com.android.systemui.screenshot.SaveImageInBackgroundTask";
     private static final String CLASS_STATUSBAR_WM = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
@@ -137,8 +135,6 @@ public class ModStatusBar {
     private static Object mStatusBarPlugin;
     private static Object mGetDataNetworkTypeIconGeminiHook;
     private static boolean mNotifExpandAll;
-    private static boolean mDt2sEnabled;
-    private static GestureDetector mDoubletapGesture;
     private static View mIconMergerView;
     private static String mClockLongpressLink;
     private static XSharedPreferences mPrefs;
@@ -233,9 +229,6 @@ public class ModStatusBar {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
                 mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_DT2S_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_SB_DT2S)) {
-                mDt2sEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_DT2S, false);
             } else if (intent.getAction().equals(ACTION_DELETE_SCREENSHOT)) {
                 Uri screenshotUri = Uri.parse(intent.getStringExtra(SCREENSHOT_URI));
                 if (screenshotUri != null) {
@@ -473,7 +466,6 @@ public class ModStatusBar {
             if (!Utils.hasLenovoVibeUI()) {
                 expandableNotifRowClass = XposedHelpers.findClass(CLASS_EXPANDABLE_NOTIF_ROW, classLoader);
             }
-            final Class<?> phoneStatusbarViewClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_VIEW, classLoader);
             final Class<?> statusBarWmClass = XposedHelpers.findClass(CLASS_STATUSBAR_WM, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
 
@@ -489,7 +481,6 @@ public class ModStatusBar {
                     GravityBoxSettings.PREF_KEY_STATUSBAR_BRIGHTNESS, false);
             mOngoingNotif = prefs.getString(GravityBoxSettings.PREF_KEY_ONGOING_NOTIFICATIONS, "");
             mNotifExpandAll = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NOTIF_EXPAND_ALL, false);
-            mDt2sEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DT2S, false);
             mTickerPolicy = TickerPolicy.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_STATUSBAR_TICKER_POLICY, "DEFAULT"));
 
@@ -544,7 +535,6 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED);
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DT2S_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BT_VISIBILITY_CHANGED);
                     intentFilter.addAction(ACTION_DELETE_SCREENSHOT);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
@@ -721,34 +711,6 @@ public class ModStatusBar {
                     }
                 });
             }
-
-            XposedBridge.hookAllConstructors(phoneStatusbarViewClass, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    final Context context = (Context) param.args[0];
-                    if (context == null) return;
-
-                    mDoubletapGesture = new GestureDetector(context, 
-                            new GestureDetector.SimpleOnGestureListener() {
-                        @Override
-                        public boolean onDoubleTap(MotionEvent e) {
-                            Intent intent = new Intent(ModHwKeys.ACTION_SLEEP);
-                            context.sendBroadcast(intent);
-                            return true;
-                        }
-                    });
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(phoneStatusbarViewClass, "onTouchEvent",
-                    MotionEvent.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mDt2sEnabled && mDoubletapGesture != null) {
-                        mDoubletapGesture.onTouchEvent((MotionEvent)param.args[0]);
-                    }
-                }
-            });
 
             // fragment that takes care of notification icon layout for center clock
             try {

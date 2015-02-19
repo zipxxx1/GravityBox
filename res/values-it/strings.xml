@@ -1136,10 +1136,6 @@
     <string name="pref_notif_expand_all_title">Espandi notifiche</string>
     <string name="pref_notif_expand_all_summary">Espande automaticamente tutte le notifiche</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Spegni schermo con doppio tap</string>
-    <string name="pref_statusbar_dt2s_summary">Tocca due volte la barra di stato per far spegnere lo schermo del dispositivo</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">Disattiva animazioni</string>
     <string name="animation_scale1">Scala animazione .25x</string>

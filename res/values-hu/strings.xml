@@ -1132,10 +1132,6 @@
     <string name="pref_notif_expand_all_title">Minden értesítés kiterjesztése</string>
     <string name="pref_notif_expand_all_summary">Az összes értesítést automatikusan kiterjeszti, ha engedélyezve van</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Dupla érintésre alvás engedélyezése</string>
-    <string name="pref_statusbar_dt2s_summary">Az állapotsávon történő dupla érintés alvó állapotba helyezi a készüléket</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">Animáció kikapcsolva</string>
     <string name="animation_scale1">Animáció lépték .25x</string>

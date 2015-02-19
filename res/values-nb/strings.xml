@@ -1129,10 +1129,6 @@
     <string name="pref_notif_expand_all_title">Expand all notifications</string>
     <string name="pref_notif_expand_all_summary">Expands all notifications automatically when enabled</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Enable double-tap to sleep</string>
-    <string name="pref_statusbar_dt2s_summary">Double-tap on status bar puts device to sleep</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">Animation off</string>
     <string name="animation_scale1">Animation scale .25x</string>

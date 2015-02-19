@@ -566,11 +566,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_CAMERA_KEY_DISABLE = "navbarCameraKeyDisable";
 
     public static final String PREF_KEY_STATUSBAR_BRIGHTNESS = "pref_statusbar_brightness";
-    public static final String PREF_KEY_STATUSBAR_DT2S = "pref_statusbar_dt2s";
     public static final String ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED = "gravitybox.intent.action.STATUSBAR_BRIGHTNESS_CHANGED";
-    public static final String ACTION_PREF_STATUSBAR_DT2S_CHANGED = "gravitybox.intent.action.STATUSBAR_DT2S_CHANGED";
     public static final String EXTRA_SB_BRIGHTNESS = "sbBrightness";
-    public static final String EXTRA_SB_DT2S = "sbDt2s";
 
     public static final String PREF_CAT_KEY_PHONE_TELEPHONY = "pref_cat_phone_telephony";
     public static final String PREF_CAT_KEY_PHONE_MESSAGING = "pref_cat_phone_messaging";
@@ -2943,9 +2940,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_BRIGHTNESS)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED);
                 intent.putExtra(EXTRA_SB_BRIGHTNESS, prefs.getBoolean(PREF_KEY_STATUSBAR_BRIGHTNESS, false));
-            } else if (key.equals(PREF_KEY_STATUSBAR_DT2S)) {
-                intent.setAction(ACTION_PREF_STATUSBAR_DT2S_CHANGED);
-                intent.putExtra(EXTRA_SB_DT2S, prefs.getBoolean(PREF_KEY_STATUSBAR_DT2S, false));
             } else if (key.equals(PREF_KEY_NETWORK_MODE_TILE_MODE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_NMT_MODE, Integer.valueOf(

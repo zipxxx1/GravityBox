@@ -1088,10 +1088,6 @@
     <string name="pref_notif_expand_all_title">Bütün bildirimleri genişlet</string>
     <string name="pref_notif_expand_all_summary">Bütün bildirimleri otomatik olarak genişletir</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Çift dokunuş uykusu</string>
-    <string name="pref_statusbar_dt2s_summary">Durum çubuğuna iki kez basmak cihazı uyutur</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">Animasyon kapalı</string>
     <string name="animation_scale1">Animation scale .25x</string>

@@ -1135,11 +1135,7 @@
     <!-- Notification drawer: expand all notifications -->
     <string name="pref_notif_expand_all_title">Expandir todas las notificaciones</string>
     <string name="pref_notif_expand_all_summary">Al activar, expande todas las notificaciones automáticamente</string>
- 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Activar doble pulsación para suspender</string>
-    <string name="pref_statusbar_dt2s_summary">Suspende el dispositivo al realizar una doble pulsación en la barra de estado</string>
-    
+
     <!-- Animation scales -->
     <string name="animation_scale0">Animación deasctivada</string>
     <string name="animation_scale1">Escala de animación .25x</string>

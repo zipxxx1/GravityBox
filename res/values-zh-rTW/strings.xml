@@ -1124,10 +1124,6 @@
     <string name="pref_notif_expand_all_title">自動展開所有通知</string>
     <string name="pref_notif_expand_all_summary">當啟用時自動展開所有通知</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">啟用雙擊休眠</string>
-    <string name="pref_statusbar_dt2s_summary">雙擊狀態列來使裝置休眠</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">動畫關閉</string>
     <string name="animation_scale1">動畫刻度 .25x</string>

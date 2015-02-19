@@ -1116,10 +1116,6 @@
     <string name="pref_notif_expand_all_title">Expandir todas as notificações</string>
     <string name="pref_notif_expand_all_summary">Permite expandir todas as notificações automaticamente quando ativado</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Ativar dupla pressão para hibernar</string>
-    <string name="pref_statusbar_dt2s_summary">Permite hibernar o dispositivo após dupla pressão da barra de status</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">Animação desligada</string>
     <string name="animation_scale1">Animação escala .25x</string>

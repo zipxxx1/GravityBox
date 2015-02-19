@@ -1121,10 +1121,6 @@
     <string name="pref_notif_expand_all_title">Benachrichtigungen erweitern</string>
     <string name="pref_notif_expand_all_summary">Wenn aktiviert werden alle Benachrichtigungen automatisch erweitert</string>
 
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">Doppelt Tippen für Standby</string>
-    <string name="pref_statusbar_dt2s_summary">Doppeltes Antippen der Statusleiste schickt Gerät in den Standbymodus</string>
-
     <!-- Animation scales -->
     <string name="animation_scale0">Animation aus</string>
     <string name="animation_scale1">Animation .25x</string>

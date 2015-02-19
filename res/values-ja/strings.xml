@@ -932,9 +932,6 @@
     <!-- Notification drawer: expand all notifications -->
     <string name="pref_notif_expand_all_title">すべての通知を展開</string>
     <string name="pref_notif_expand_all_summary">有効にするとすべての通知を自動的に展開します。</string>
-    <!-- Statusbar: Double-tap to sleep -->
-    <string name="pref_statusbar_dt2s_title">ダブルタップで消灯</string>
-    <string name="pref_statusbar_dt2s_summary">ステータスバーをダブルタップすると消灯するようにします。</string>
     <!-- Animation scales -->
     <string name="animation_scale0">アニメーション無し</string>
     <string name="animation_scale1">アニメーション速度.25倍</string>
