@@ -100,7 +100,6 @@ public class ModNavigationBar {
     private static boolean mAlwaysOnBottom;
     private static boolean mNavbarVertical;
     private static boolean mNavbarRingDisabled;
-    private static boolean mCameraKeyDisabled;
     private static KeyguardManager mKeyguard;
     private static boolean mNavbarLeftHanded;
     private static LollipopIconStyle mLollipopIconStyle;
@@ -206,19 +205,6 @@ public class ModNavigationBar {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_RING_DISABLE)) {
                     mNavbarRingDisabled = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_NAVBAR_RING_DISABLE, false);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CAMERA_KEY_DISABLE)) {
-                    mCameraKeyDisabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_CAMERA_KEY_DISABLE, false);
-                    if (mNavigationBarView != null) {
-                        try {
-                            XposedHelpers.setBooleanField(mNavigationBarView, "mCameraDisabledByDpm",
-                                    mCameraKeyDisabled || (Boolean) XposedHelpers.callMethod(
-                                            mNavigationBarView, "isCameraDisabledByDpm"));
-                        } catch (Throwable t) {
-                            XposedBridge.log(t);
-                        }
-                    }
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON)) {
                     mCustomKeyAltIcon = intent.getBooleanExtra(
@@ -406,8 +392,6 @@ public class ModNavigationBar {
                     GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP, false);
             mNavbarRingDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_NAVBAR_RING_DISABLE, false);
-            mCameraKeyDisabled = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_NAVBAR_CAMERA_KEY_DISABLE, false);
 
             // for HTC GPE devices having capacitive keys
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false)) {
@@ -438,9 +422,6 @@ public class ModNavigationBar {
                     mNavbarDefaultBgColor = res.getColor(R.color.navbar_bg_color);
                     mNavbarBgColor = prefs.getInt(
                             GravityBoxSettings.PREF_KEY_NAVBAR_BG_COLOR, mNavbarDefaultBgColor);
-                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_CAMERA_KEY_DISABLE, false)) {
-                        XposedHelpers.setBooleanField(param.thisObject, "mCameraDisabledByDpm", true);
-                    }
                     mCustomKeyAltIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ICON, false);
 
                     try {
@@ -794,15 +775,6 @@ public class ModNavigationBar {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mNavbarRingDisabled) {
-                        param.setResult(true);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(navbarViewClass, "isCameraDisabledByDpm", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mCameraKeyDisabled) {
                         param.setResult(true);
                     }
                 }

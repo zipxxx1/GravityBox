@@ -1294,10 +1294,6 @@
     <string name="trial_info">Esta funcionalidade está em modo de teste. Se a considerar útil pode continuar a utilizá-la assim que desbloquear as funcionalidades avançadas. 
         O período de teste termina após reiniciar %d vezes.</string>
 
-    <!-- Navbar: disable camera icon -->
-    <string name="pref_navbar_camera_key_disable_title">Desativar ícone da câmara</string>
-    <string name="pref_navbar_camera_key_disable_summary">Permite desativar o ícone da câmara presente no ecrã de bloqueio</string>
-
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">Definições padrão</string>
     <string name="pref_lc_default_settings_summary">Quando ativado, as definições padrão são aplicadas automaticamente a todas as aplicações que não tenham uma configuração explicita</string>

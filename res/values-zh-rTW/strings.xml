@@ -1302,10 +1302,6 @@
     <string name="trial_info">此功能正在試用階段，如果您覺得實用並想繼續使用此功能，請使用您的 PayPal  捐贈。
 	本功能試用期將在您重新啟動裝置 %d 次後結束。</string>
 
-    <!-- Navbar: disable camera icon -->
-    <string name="pref_navbar_camera_key_disable_title">停用相機圖示</string>
-    <string name="pref_navbar_camera_key_disable_summary">停用在鎖定畫面內的相機圖示</string>
-
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">預設設定</string>
     <string name="pref_lc_default_settings_summary">當啟用後，為所有未有設置過通知控制的應用程式套用下列的設定</string>

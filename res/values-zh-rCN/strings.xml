@@ -1315,11 +1315,6 @@
 
     <!-- Premium features: allow trial period -->
     <string name="trial_info">此功能是试用模式！如果您觉得它有用您可以解锁高级功能！在%d重启后将结束试用期</string>
-    
-    
-    <!-- Navbar: disable camera icon -->
-    <string name="pref_navbar_camera_key_disable_title">禁用相机图标</string>
-    <string name="pref_navbar_camera_key_disable_summary">在锁屏界面不显示相机图标</string>
 
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">默认设置</string>

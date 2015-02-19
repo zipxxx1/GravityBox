@@ -1309,10 +1309,6 @@
 
     <!-- Premium features: allow trial period -->
     <string name="trial_info">Esta herramienta es para usuarios premium. Si la encuentras útil, puedes seguir usándola tras desbloquear el modo premium. Esta versión de prueba acaba tras %d reinicios.</string>
-    
-    <!-- Navbar: disable camera icon -->
-    <string name="pref_navbar_camera_key_disable_title">Desactivar icono de cámara</string>
-    <string name="pref_navbar_camera_key_disable_summary">Desactiva el icono de la cámara en la pantalla de bloqueo</string>
 
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">Ajustes predeterminados</string>

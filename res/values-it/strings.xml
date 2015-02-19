@@ -1314,10 +1314,6 @@
     <string name="trial_info">Questa funzione è in Demo. Se la reputi utile puoi continuare ad usarla dopo la registrazione dell\'ID transazione della donazione PayPal.
     Il periodo di prova termina dopo %d riavvii.</string>
 
-    <!-- Navbar: disable camera icon -->
-    <string name="pref_navbar_camera_key_disable_title">Disabilita icona fotocamera</string>
-    <string name="pref_navbar_camera_key_disable_summary">Disabilita icona fotocamera nella schermata di blocco</string>
-
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">Impostazioni predefinite</string>
     <string name="pref_lc_default_settings_summary">Quando attivo verranno usate automaticamente le impostazioni predefinite nelle applicazioni che non hanno parametri definiti.</string>
