@@ -148,6 +148,7 @@ public class ModStatusBar {
     // Brightness control
     private static boolean mBrightnessControlEnabled;
     private static boolean mBrightnessControl;
+    private static boolean mBrightnessChanged;
     private static float mScreenWidth;
     private static int mMinBrightness;
     private static int mPeekHeight;
@@ -619,13 +620,30 @@ public class ModStatusBar {
             XposedHelpers.findAndHookMethod(phoneStatusBarClass, 
                     "interceptTouchEvent", MotionEvent.class, new XC_MethodHook() {
                 @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (!mBrightnessControl) return;
 
                     brightnessControl((MotionEvent) param.args[0]);
                     if ((XposedHelpers.getIntField(param.thisObject, "mDisabled")
                             & STATUS_BAR_DISABLE_EXPAND) != 0) {
                         param.setResult(true);
+                    }
+                }
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!mBrightnessControl || !mBrightnessChanged) return;
+
+                    int action = ((MotionEvent) param.args[0]).getAction();
+                    final boolean upOrCancel = (action == MotionEvent.ACTION_UP ||
+                            action == MotionEvent.ACTION_CANCEL);
+                    if (upOrCancel) {
+                        mBrightnessChanged = false;
+                        if (mJustPeeked && XposedHelpers.getBooleanField(
+                                param.thisObject, "mExpandedVisible")) {
+                            Object notifPanel = XposedHelpers.getObjectField(
+                                    param.thisObject, "mNotificationPanel");
+                            XposedHelpers.callMethod(notifPanel, "fling", 10, false);
+                        }
                     }
                 }
             });
@@ -1116,6 +1134,7 @@ public class ModStatusBar {
 
     private static void adjustBrightness(int x) {
         try {
+            mBrightnessChanged = true;
             float raw = ((float) x) / mScreenWidth;
     
             // Add a padding to the brightness control on both sides to
