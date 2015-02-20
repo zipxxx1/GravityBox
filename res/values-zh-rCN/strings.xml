@@ -1309,7 +1309,8 @@
     <string name="pref_lockscreen_show_pattern_error_summary">进入错误格式时显示红色足迹</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">此功能是试用模式！如果您觉得它有用您可以解锁高级功能！在%d重启后将结束试用期</string>
+    <string name="trial_info">此功能是试用模式！如果您觉得它有用您可以解锁高级功能
+		在%d重启后将结束试用期</string>
 
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">默认设置</string>
@@ -1466,6 +1467,7 @@
     <string name="qs_tile_compass">指南针</string>
     <string name="quick_settings_compass_off">指南针已关闭</string>
     <string name="quick_settings_compass_init">正在初始化&#8230;</string>
+
 
     <!-- Cardinal directions -->
     <string name="cd_north">北</string>
@@ -1783,5 +1785,13 @@
     <string name="keyguard_percent_text_hide">隐藏</string>
     <string name="battery_percent_text_header_hide_title">隐藏状态栏标题</string>
     <string name="battery_percent_text_size_default">默认</string>
+	
+	<!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">通知代码</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">开启通知代码及其相关特征(需要重新启动)</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">使用大图标</string>
+    <string name="pref_navbar_larger_icons_summary">需要重新启动</string>
 
 </resources>
