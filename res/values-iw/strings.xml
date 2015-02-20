@@ -741,11 +741,6 @@
     <!-- HW Key Acctions: toggle screen recording -->
     <string name="hwkey_action_screen_recording">הפעלה/כיבוי של הקלטת מסך</string>
 
-    <!-- Full screen caller photo modes -->
-    <string name="fullscreen_caller_disabled">כבוי</string>
-    <string name="fullscreen_caller_partial">חלקי</string>
-    <string name="fullscreen_caller_full">מלא</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">טקסט של אחוזי סוללה</string>
     <string name="battery_percent_text_size_title">גודל טקסט אחוזי סוללה</string>

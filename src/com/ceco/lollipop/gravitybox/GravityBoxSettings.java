@@ -161,7 +161,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int RECENT_CLEAR_NAVIGATION_BAR = 1;
 
     public static final String PREF_CAT_KEY_PHONE = "pref_cat_phone";
-    public static final String PREF_KEY_CALLER_FULLSCREEN_PHOTO = "pref_caller_fullscreen_photo2";
+    public static final String PREF_KEY_CALLER_FULLSCREEN_PHOTO = "pref_caller_fullscreen_photo3";
     public static final String PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE = "pref_caller_unknown_photo_enable";
     public static final String PREF_KEY_CALLER_UNKNOWN_PHOTO = "pref_caller_unknown_photo";
     public static final String PREF_KEY_DIALER_SHOW_DIALPAD = "pref_dialer_show_dialpad";
@@ -1225,7 +1225,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private File callerPhotoFile;
         private CheckBoxPreference mPrefCallerUnknownPhotoEnable;
         private Preference mPrefCallerUnknownPhoto;
-        private ListPreference mPrefCallerFullscreenPhoto;
         private PreferenceScreen mPrefCatStatusbarColors;
         private ColorPickerPreference mPrefSbIconColorSecondary;
         private ColorPickerPreference mPrefSbDaColorSecondary;
@@ -1473,7 +1472,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCallVibrations = (MultiSelectListPreference) findPreference(PREF_KEY_CALL_VIBRATIONS);
             mPrefCallerUnknownPhotoEnable = (CheckBoxPreference) findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE);
             mPrefCallerUnknownPhoto = (Preference) findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO);
-            mPrefCallerFullscreenPhoto = (ListPreference) findPreference(PREF_KEY_CALLER_FULLSCREEN_PHOTO);
 
             mPrefNetworkModeTileMode = (ListPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_MODE);
             mPrefNetworkModeTile2G3GMode = (ListPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_2G3G_MODE);
@@ -2185,10 +2183,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS)) {
                 mPrefLauncherDesktopGridCols.setSummary(mPrefLauncherDesktopGridCols.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_CALLER_FULLSCREEN_PHOTO)) {
-                mPrefCallerFullscreenPhoto.setSummary(mPrefCallerFullscreenPhoto.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_VOLUME_ROCKER_WAKE)) {

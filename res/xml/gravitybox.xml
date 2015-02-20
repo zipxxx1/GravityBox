@@ -1649,12 +1649,10 @@
                 android:dialogTitle="@string/pref_increasing_ring_title"
                 gb:streamType="ring" />
 
-            <ListPreference 
-                android:key="pref_caller_fullscreen_photo2"
+            <CheckBoxPreference 
+                android:key="pref_caller_fullscreen_photo3"
                 android:title="@string/caller_fullscreen_photo_title"
-                android:entries="@array/fullscreen_caller_entries"
-                android:entryValues="@array/fullscreen_caller_values"
-                android:defaultValue="disabled" />
+                android:defaultValue="false" />
 
             <CheckBoxPreference 
                 android:key="pref_caller_unknown_photo_enable"

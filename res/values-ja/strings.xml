@@ -631,10 +631,6 @@
     <string name="desktop_grid_default">デフォルト</string>
     <!-- HW Key Acctions: toggle screen recording -->
     <string name="hwkey_action_screen_recording">画面録画のトグル</string>
-    <!-- Full screen caller photo modes -->
-    <string name="fullscreen_caller_disabled">無効</string>
-    <string name="fullscreen_caller_partial">一部</string>
-    <string name="fullscreen_caller_full">全部</string>
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">バッテリー％テキスト</string>
     <string name="battery_percent_text_size_title">バッテリー％テキストサイズ</string>

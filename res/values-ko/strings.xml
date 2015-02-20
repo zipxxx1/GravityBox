@@ -592,10 +592,6 @@
 
     <string name="hwkey_action_screen_recording">화면 녹화 토글</string>
 
-    <string name="fullscreen_caller_disabled">비활성화</string>
-    <string name="fullscreen_caller_partial">조금 확대</string>
-    <string name="fullscreen_caller_full">모두 확대</string>
-
     <string name="battery_percent_text_title">배터리 잔량 표시</string>
     <string name="battery_percent_text_size_title">배터리 잔량 표시기 크기</string>
     <string name="battery_percent_text_size_larger">크게</string>

@@ -31,7 +31,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
@@ -226,11 +225,10 @@ public class ModDialer {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final View view = ((Fragment)param.thisObject).getView();
-                    final String fscPref = prefs.getString(
-                            GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, "disabled");
-                    if (view != null && !(Boolean)param.args[0] && !fscPref.equals("disabled")) {
-                        final int visibility = fscPref.equals("partial") ? View.INVISIBLE : View.GONE;
-                        view.setVisibility(visibility);
+                    final boolean fsc = prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false);
+                    if (fsc & view != null && !(Boolean)param.args[0]) {
+                        view.setVisibility(View.GONE);
                     }
                 }
             });
@@ -241,15 +239,15 @@ public class ModDialer {
                     if (!(Boolean) param.args[0]) return;
 
                     refreshPhonePrefs();
-                    final View v = ((Fragment) param.thisObject).getView();
-                    int color = prefs.getString(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, 
-                            "disabled").equals("disabled") ? Color.BLACK : 0; 
-                    v.setBackgroundColor(color);
-                    if (Utils.isMtkDevice()) {
-                        final View gpView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowpad");
-                        gpView.setBackgroundColor(color);
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false)) { 
+                    final View v = ((Fragment) param.thisObject).getView(); 
+                        v.setBackgroundColor(0);
+                        if (Utils.isMtkDevice()) {
+                            final View gpView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowpad");
+                            gpView.setBackgroundColor(0);
+                        }
+                        if (DEBUG) log("AnswerFragment showAnswerUi: background color set");
                     }
-                    if (DEBUG) log("AnswerFragment showAnswerUi: background color set");
                 }
             });
         } catch (Throwable t) {

@@ -754,11 +754,6 @@
     <!-- HW Key Acctions: toggle screen recording -->
     <string name="hwkey_action_screen_recording">Bildschirmaufnahme an/aus</string>
 
-    <!-- Full screen caller photo modes -->
-    <string name="fullscreen_caller_disabled">Deaktiviert</string>
-    <string name="fullscreen_caller_partial">Teilweise</string>
-    <string name="fullscreen_caller_full">Vollständig</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Akkuanzeige in Prozent</string>
     <string name="battery_percent_text_size_title">Textgröße der Prozentanzeige</string>

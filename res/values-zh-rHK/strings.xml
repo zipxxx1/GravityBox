@@ -755,11 +755,6 @@
     <!-- HW Key Acctions: toggle screen recording -->
     <string name="hwkey_action_screen_recording">開關螢幕錄製</string>
 
-    <!-- Full screen caller photo modes -->
-    <string name="fullscreen_caller_disabled">停用</string>
-    <string name="fullscreen_caller_partial">局部</string>
-    <string name="fullscreen_caller_full">全螢幕</string>
-
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">電池電量百分比文字</string>
     <string name="battery_percent_text_size_title">電池電量百分比文字大小</string>
