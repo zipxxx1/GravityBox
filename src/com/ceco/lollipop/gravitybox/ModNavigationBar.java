@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,12 +17,9 @@ package com.ceco.lollipop.gravitybox;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,8 +29,6 @@ import android.content.res.XModuleResources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,12 +36,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ImageView.ScaleType;
-import android.widget.RelativeLayout;
 
 import com.ceco.lollipop.gravitybox.R;
-import com.ceco.lollipop.gravitybox.GlowPadHelper.AppInfo;
-import com.ceco.lollipop.gravitybox.GlowPadHelper.BgStyle;
-import com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -66,8 +57,8 @@ public class ModNavigationBar {
             "com.android.systemui.statusbar.phone.NavigationBarTransitions";
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
     private static final String CLASS_SEARCH_PANEL_VIEW = "com.android.systemui.SearchPanelView";
-    private static final String CLASS_GLOWPAD_TRIGGER_LISTENER = CLASS_SEARCH_PANEL_VIEW + "$GlowPadTriggerListener";
-    private static final String CLASS_GLOWPAD_VIEW = "com.android.internal.widget.multiwaveview.GlowPadView";
+//    private static final String CLASS_GLOWPAD_TRIGGER_LISTENER = CLASS_SEARCH_PANEL_VIEW + "$GlowPadTriggerListener";
+//    private static final String CLASS_GLOWPAD_VIEW = "com.android.internal.widget.multiwaveview.GlowPadView";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_DEADZONE = "com.android.systemui.statusbar.policy.DeadZone";
 
@@ -77,7 +68,6 @@ public class ModNavigationBar {
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
     private static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
 
-    private static XSharedPreferences mPrefs;
     private static boolean mAlwaysShowMenukey;
     private static View mNavigationBarView;
     private static Object[] mRecentsKeys;
@@ -93,7 +83,6 @@ public class ModNavigationBar {
     private static boolean mDpadKeysVisible;
     private static boolean mNavbarVertical;
     private static boolean mNavbarRingDisabled;
-    private static KeyguardManager mKeyguard;
     private static boolean mNavbarLeftHanded;
     private static boolean mUseLargerIcons;
 
@@ -116,13 +105,14 @@ public class ModNavigationBar {
     private static Integer mNavbarBgColorOriginal;
     private static Object mBarBackground;;
 
-    // Ring targets
-    private static enum RingHapticFeedback { DEFAULT, ENABLED, DISABLED };
-    private static boolean mRingTargetsEnabled;
-    private static View mGlowPadView;
-    private static BgStyle mRingTargetsBgStyle;
-    private static RingHapticFeedback mRingHapticFeedback;
-    private static Integer mRingVibrateDurationOrig;
+    // TODO: Ring targets
+//    private static enum RingHapticFeedback { DEFAULT, ENABLED, DISABLED };
+//    private static boolean mRingTargetsEnabled = false;
+//    private static View mGlowPadView;
+//    private static BgStyle mRingTargetsBgStyle;
+//    private static RingHapticFeedback mRingHapticFeedback;
+//    private static Integer mRingVibrateDurationOrig;
+//    private static KeyguardManager mKeyguard;
 
     private static Drawable mRecentIcon, mRecentLandIcon;
     private static Drawable mRecentAltIcon, mRecentAltLandIcon;
@@ -249,24 +239,26 @@ public class ModNavigationBar {
                 updateRecentsKeyCode();
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_SWAP_KEYS)) {
                 swapBackAndRecents();
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_RING_TARGET_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_RING_TARGET_INDEX) &&
-                        intent.hasExtra(GravityBoxSettings.EXTRA_RING_TARGET_APP)) {
-                    updateRingTarget(intent.getIntExtra(GravityBoxSettings.EXTRA_RING_TARGET_INDEX, -1),
-                            intent.getStringExtra(GravityBoxSettings.EXTRA_RING_TARGET_APP));
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_RING_TARGET_BG_STYLE)) {
-                    mRingTargetsBgStyle = BgStyle.valueOf(
-                            intent.getStringExtra(GravityBoxSettings.EXTRA_RING_TARGET_BG_STYLE));
-                    GlowPadHelper.clearAppInfoCache();
-                    setRingTargets();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_RING_HAPTIC_FEEDBACK)) {
-                    mRingHapticFeedback = RingHapticFeedback.valueOf(
-                            intent.getStringExtra(GravityBoxSettings.EXTRA_RING_HAPTIC_FEEDBACK));
-                    setRingHapticFeedback();
-                }
             }
+            // TODO: Navbar ring targets
+//            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_NAVBAR_RING_TARGET_CHANGED)) {
+//                if (intent.hasExtra(GravityBoxSettings.EXTRA_RING_TARGET_INDEX) &&
+//                        intent.hasExtra(GravityBoxSettings.EXTRA_RING_TARGET_APP)) {
+//                    updateRingTarget(intent.getIntExtra(GravityBoxSettings.EXTRA_RING_TARGET_INDEX, -1),
+//                            intent.getStringExtra(GravityBoxSettings.EXTRA_RING_TARGET_APP));
+//                }
+//                if (intent.hasExtra(GravityBoxSettings.EXTRA_RING_TARGET_BG_STYLE)) {
+//                    mRingTargetsBgStyle = BgStyle.valueOf(
+//                            intent.getStringExtra(GravityBoxSettings.EXTRA_RING_TARGET_BG_STYLE));
+//                    GlowPadHelper.clearAppInfoCache();
+//                    setRingTargets();
+//                }
+//                if (intent.hasExtra(GravityBoxSettings.EXTRA_RING_HAPTIC_FEEDBACK)) {
+//                    mRingHapticFeedback = RingHapticFeedback.valueOf(
+//                            intent.getStringExtra(GravityBoxSettings.EXTRA_RING_HAPTIC_FEEDBACK));
+//                    setRingHapticFeedback();
+//                }
+//            }
         }
     };
 
@@ -297,15 +289,14 @@ public class ModNavigationBar {
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
-            mPrefs = prefs;
-
             final Class<?> navbarViewClass = XposedHelpers.findClass(CLASS_NAVBAR_VIEW, classLoader);
             final Class<?> navbarTransitionsClass = XposedHelpers.findClass(CLASS_NAVBAR_TRANSITIONS, classLoader);
             final Class<?> barTransitionsClass = XposedHelpers.findClass(CLASS_BAR_TRANSITIONS, classLoader);
             final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
 
             mAlwaysShowMenukey = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_MENUKEY, false);
-            mRingTargetsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGETS_ENABLE, false);
+            // TODO: Navbar ring targets
+            //mRingTargetsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGETS_ENABLE, false);
             mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
             mUseLargerIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LARGER_ICONS, false);
@@ -368,9 +359,10 @@ public class ModNavigationBar {
                             GravityBoxSettings.PREF_KEY_NAVBAR_BG_COLOR, mNavbarDefaultBgColor);
                     mCustomKeyAltIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ICON, false);
 
-                    try {
-                        mKeyguard = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-                    } catch (Throwable t) { log("Error getting keyguard manager: " + t.getMessage()); }
+                 // TODO: Navbar ring targets
+//                    try {
+//                        mKeyguard = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+//                    } catch (Throwable t) { log("Error getting keyguard manager: " + t.getMessage()); }
 
                     mNavigationBarView = (View) param.thisObject;
                     IntentFilter intentFilter = new IntentFilter();
@@ -378,9 +370,10 @@ public class ModNavigationBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_PIE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_SWAP_KEYS);
-                    if (mRingTargetsEnabled) {
-                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
-                    }
+                    // TODO: Navbar ring targets
+//                    if (mRingTargetsEnabled) {
+//                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
+//                    }
                     context.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("NavigationBarView constructed; Broadcast receiver registered");
                 }
@@ -604,101 +597,102 @@ public class ModNavigationBar {
                 }
             });
 
-            if (mRingTargetsEnabled || mNavbarLeftHanded) {
-                final Class<?> searchPanelViewClass = XposedHelpers.findClass(CLASS_SEARCH_PANEL_VIEW, classLoader);
-                final Class<?> glowPadTriggerListenerClass = XposedHelpers.findClass(CLASS_GLOWPAD_TRIGGER_LISTENER, classLoader);
-                final Class<?> glowPasViewClass = XposedHelpers.findClass(CLASS_GLOWPAD_VIEW, classLoader);
+            // TODO: Navbar ring targets
+//            if (mRingTargetsEnabled || mNavbarLeftHanded) {
+//                final Class<?> searchPanelViewClass = XposedHelpers.findClass(CLASS_SEARCH_PANEL_VIEW, classLoader);
+//                final Class<?> glowPadTriggerListenerClass = XposedHelpers.findClass(CLASS_GLOWPAD_TRIGGER_LISTENER, classLoader);
+//                final Class<?> glowPasViewClass = XposedHelpers.findClass(CLASS_GLOWPAD_VIEW, classLoader);
+//
+//                mRingTargetsBgStyle = BgStyle.valueOf(
+//                        prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE, "NONE"));
+//                mRingHapticFeedback = RingHapticFeedback.valueOf(
+//                        prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_RING_HAPTIC_FEEDBACK, "DEFAULT"));
 
-                mRingTargetsBgStyle = BgStyle.valueOf(
-                        prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE, "NONE"));
-                mRingHapticFeedback = RingHapticFeedback.valueOf(
-                        prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_RING_HAPTIC_FEEDBACK, "DEFAULT"));
+//                XposedHelpers.findAndHookMethod(searchPanelViewClass, "onFinishInflate", new XC_MethodHook() {
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        mGlowPadView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowPadView");
+//                        if (mRingTargetsEnabled) {
+//                            prefs.reload();
+//                            setRingHapticFeedback();
+//                            setRingTargets();
+//                        }
+//                    }
+//                });
 
-                XposedHelpers.findAndHookMethod(searchPanelViewClass, "onFinishInflate", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        mGlowPadView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowPadView");
-                        if (mRingTargetsEnabled) {
-                            prefs.reload();
-                            setRingHapticFeedback();
-                            setRingTargets();
-                        }
-                    }
-                });
+//                XC_MethodHook glowPadViewShowTargetsHook = new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                        if (param.thisObject == mGlowPadView) {
+//                            if (mNavbarVertical && !isGlowPadVertical()) {
+//                                rotateRingTargets();
+//                            }
+//                        }
+//                    }
+//                };
+//                if (Utils.isXperiaDevice()) {
+//                    XposedHelpers.findAndHookMethod(glowPasViewClass, "showTargets", boolean.class, int.class, glowPadViewShowTargetsHook);
+//                } else {
+//                    XposedHelpers.findAndHookMethod(glowPasViewClass, "showTargets", boolean.class, glowPadViewShowTargetsHook);
+//                }
 
-                XC_MethodHook glowPadViewShowTargetsHook = new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (param.thisObject == mGlowPadView) {
-                            if (mNavbarVertical && !isGlowPadVertical()) {
-                                rotateRingTargets();
-                            }
-                        }
-                    }
-                };
-                if (Utils.isXperiaDevice()) {
-                    XposedHelpers.findAndHookMethod(glowPasViewClass, "showTargets", boolean.class, int.class, glowPadViewShowTargetsHook);
-                } else {
-                    XposedHelpers.findAndHookMethod(glowPasViewClass, "showTargets", boolean.class, glowPadViewShowTargetsHook);
-                }
+//                XposedHelpers.findAndHookMethod(navbarViewClass, "reorient", new XC_MethodHook() {
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        if (DEBUG) log("Navigation bar view reorient");
+//                        if (mGlowPadView != null) {
+//                            mNavbarVertical = XposedHelpers.getBooleanField(param.thisObject, "mVertical");
+//                            if (mNavbarVertical && !isGlowPadVertical()) {
+//                                rotateRingTargets();
+//                            }
+//                        }
+//                    }
+//                });
 
-                XposedHelpers.findAndHookMethod(navbarViewClass, "reorient", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (DEBUG) log("Navigation bar view reorient");
-                        if (mGlowPadView != null) {
-                            mNavbarVertical = XposedHelpers.getBooleanField(param.thisObject, "mVertical");
-                            if (mNavbarVertical && !isGlowPadVertical()) {
-                                rotateRingTargets();
-                            }
-                        }
-                    }
-                });
-
-                if (mRingTargetsEnabled) {
-                    XposedHelpers.findAndHookMethod(glowPadTriggerListenerClass, "onTrigger",
-                            View.class, int.class, new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            if (DEBUG) log("GlowPadView.OnTriggerListener; index=" + ((Integer) param.args[1]));
-                            final int index = (Integer) param.args[1];
-                            @SuppressWarnings("unchecked")
-                            final ArrayList<Object> targets = (ArrayList<Object>) XposedHelpers.getObjectField(
-                                    mGlowPadView, "mTargetDrawables");
-                            final Object td = targets.get(index);
-        
-                            AppInfo appInfo = (AppInfo) XposedHelpers.getAdditionalInstanceField(td, "mGbAppInfo");
-                            if (appInfo != null) {
-                                try {
-                                    Object activityManagerNative = XposedHelpers.callStaticMethod(
-                                        XposedHelpers.findClass("android.app.ActivityManagerNative", null),
-                                            "getDefault");
-                                    XposedHelpers.callMethod(activityManagerNative, "dismissKeyguardOnNextActivity");
-                                } catch (Throwable t) {}
-                                Intent intent = appInfo.intent;
-                                // if intent is a GB action of broadcast type, handle it directly here
-                                if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
-                                    if (mKeyguard != null && 
-                                            mKeyguard.isKeyguardLocked() && mKeyguard.isKeyguardSecure() &&
-                                                !ShortcutActivity.isActionSafe(intent.getStringExtra(
-                                                        ShortcutActivity.EXTRA_ACTION))) {
-                                        if (DEBUG) log("Keyguard is locked & secured - ignoring GB action");
-                                    } else {
-                                        Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
-                                        newIntent.putExtras(intent);
-                                        mGlowPadView.getContext().sendBroadcast(newIntent);
-                                    }
-                                // otherwise start activity
-                                } else {
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    mGlowPadView.getContext().startActivity(intent);
-                                    mGlowPadView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
-                                }
-                            }
-                        }
-                    });
-                }
-            }
+//                if (mRingTargetsEnabled) {
+//                    XposedHelpers.findAndHookMethod(glowPadTriggerListenerClass, "onTrigger",
+//                            View.class, int.class, new XC_MethodHook() {
+//                        @Override
+//                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                            if (DEBUG) log("GlowPadView.OnTriggerListener; index=" + ((Integer) param.args[1]));
+//                            final int index = (Integer) param.args[1];
+//                            @SuppressWarnings("unchecked")
+//                            final ArrayList<Object> targets = (ArrayList<Object>) XposedHelpers.getObjectField(
+//                                    mGlowPadView, "mTargetDrawables");
+//                            final Object td = targets.get(index);
+//        
+//                            AppInfo appInfo = (AppInfo) XposedHelpers.getAdditionalInstanceField(td, "mGbAppInfo");
+//                            if (appInfo != null) {
+//                                try {
+//                                    Object activityManagerNative = XposedHelpers.callStaticMethod(
+//                                        XposedHelpers.findClass("android.app.ActivityManagerNative", null),
+//                                            "getDefault");
+//                                    XposedHelpers.callMethod(activityManagerNative, "dismissKeyguardOnNextActivity");
+//                                } catch (Throwable t) {}
+//                                Intent intent = appInfo.intent;
+//                                // if intent is a GB action of broadcast type, handle it directly here
+//                                if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
+//                                    if (mKeyguard != null && 
+//                                            mKeyguard.isKeyguardLocked() && mKeyguard.isKeyguardSecure() &&
+//                                                !ShortcutActivity.isActionSafe(intent.getStringExtra(
+//                                                        ShortcutActivity.EXTRA_ACTION))) {
+//                                        if (DEBUG) log("Keyguard is locked & secured - ignoring GB action");
+//                                    } else {
+//                                        Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+//                                        newIntent.putExtras(intent);
+//                                        mGlowPadView.getContext().sendBroadcast(newIntent);
+//                                    }
+//                                // otherwise start activity
+//                                } else {
+//                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                    mGlowPadView.getContext().startActivity(intent);
+//                                    mGlowPadView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+//                                }
+//                            }
+//                        }
+//                    });
+//                }
+//            }
 
             XposedHelpers.findAndHookMethod(phoneStatusbarClass, "shouldDisableNavbarGestures", new XC_MethodHook() {
                 @Override
@@ -1119,133 +1113,134 @@ public class ModNavigationBar {
         }
     }
 
-    private static void setRingTargets() {
-        if (mGlowPadView == null) return;
+    // TODO: Navbar ring targets
+//    private static void setRingTargets() {
+//        if (mGlowPadView == null) return;
+//
+//        try {
+//            Context context = mGlowPadView.getContext();
+//
+//            final ArrayList<Object> newTargets = new ArrayList<Object>();
+//            final ArrayList<String> newDescriptions = new ArrayList<String>();
+//            final ArrayList<String> newDirections = new ArrayList<String>();
+//
+//            final int dummySlotCount = isGlowPadVertical() ? 4 : 1;
+//            for (int i = 0; i < dummySlotCount; i++) {
+//                newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadView.getClass()));
+//                newDescriptions.add(null);
+//                newDirections.add(null);
+//            }
+//
+//            for (int i = 0; i < (12 - dummySlotCount); i++) {
+//                if (i < GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGET.size()) {
+//                    String app = mPrefs.getString(
+//                            GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGET.get(i), null);
+//                    AppInfo ai = GlowPadHelper.getAppInfo(context, app, 55, mRingTargetsBgStyle);
+//                    newTargets.add(GlowPadHelper.createTargetDrawable(context, ai, mGlowPadView.getClass()));
+//                    newDescriptions.add(ai == null ? null : ai.name);
+//                    newDirections.add(null);
+//                } else {
+//                    newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadView.getClass()));
+//                    newDescriptions.add(null);
+//                    newDirections.add(null);
+//                }
+//            }
+//
+//            XposedHelpers.setObjectField(mGlowPadView, "mTargetDrawables", newTargets);
+//            XposedHelpers.setObjectField(mGlowPadView, "mTargetDescriptions", newDescriptions);
+//            XposedHelpers.setObjectField(mGlowPadView, "mDirectionDescriptions", newDirections);
+//            mGlowPadView.requestLayout();
+//        } catch(Throwable t) {
+//            XposedBridge.log(t);
+//        }
+//    }
 
-        try {
-            Context context = mGlowPadView.getContext();
-
-            final ArrayList<Object> newTargets = new ArrayList<Object>();
-            final ArrayList<String> newDescriptions = new ArrayList<String>();
-            final ArrayList<String> newDirections = new ArrayList<String>();
-
-            final int dummySlotCount = isGlowPadVertical() ? 4 : 1;
-            for (int i = 0; i < dummySlotCount; i++) {
-                newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadView.getClass()));
-                newDescriptions.add(null);
-                newDirections.add(null);
-            }
-
-            for (int i = 0; i < (12 - dummySlotCount); i++) {
-                if (i < GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGET.size()) {
-                    String app = mPrefs.getString(
-                            GravityBoxSettings.PREF_KEY_NAVBAR_RING_TARGET.get(i), null);
-                    AppInfo ai = GlowPadHelper.getAppInfo(context, app, 55, mRingTargetsBgStyle);
-                    newTargets.add(GlowPadHelper.createTargetDrawable(context, ai, mGlowPadView.getClass()));
-                    newDescriptions.add(ai == null ? null : ai.name);
-                    newDirections.add(null);
-                } else {
-                    newTargets.add(GlowPadHelper.createTargetDrawable(context, null, mGlowPadView.getClass()));
-                    newDescriptions.add(null);
-                    newDirections.add(null);
-                }
-            }
-
-            XposedHelpers.setObjectField(mGlowPadView, "mTargetDrawables", newTargets);
-            XposedHelpers.setObjectField(mGlowPadView, "mTargetDescriptions", newDescriptions);
-            XposedHelpers.setObjectField(mGlowPadView, "mDirectionDescriptions", newDirections);
-            mGlowPadView.requestLayout();
-        } catch(Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private static void updateRingTarget(int index, String app) {
-        if (mGlowPadView == null || index < 0) return;
-
-        try {
-            final Context context = mGlowPadView.getContext();
-            final ArrayList<Object> targets = 
-                    (ArrayList<Object>) XposedHelpers.getObjectField(mGlowPadView, "mTargetDrawables");
-            final ArrayList<String> descs = 
-                    (ArrayList<String>)XposedHelpers.getObjectField(mGlowPadView, "mTargetDescriptions");
-            index++; // take dummy drawable at position 0 into account
-            if (isGlowPadVertical()) {
-                if (mNavbarLeftHanded) {
-                    index -= 3;
-                    if (index < 0) index += 12;
-                } else {
-                    index += 3;
-                }
-            }
-
-            AppInfo ai = GlowPadHelper.getAppInfo(context, app, 55, mRingTargetsBgStyle);
-            if (targets != null && targets.size() > index) {
-                targets.set(index, GlowPadHelper.createTargetDrawable(context, ai, mGlowPadView.getClass()));
-                if (DEBUG) log("Ring target at index " + index + " set to: " + (ai == null ? "null" : ai.name));
-            }
-            if (descs != null && descs.size() > index) {
-                descs.set(index, ai == null ? null : ai.name);
-            }
-            mGlowPadView.requestLayout();
-        } catch(Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    private static boolean isGlowPadVertical() {
-        Boolean vertical = (Boolean) XposedHelpers.getAdditionalInstanceField(mGlowPadView, "mGbVertical");
-        return (vertical != null && vertical.booleanValue());
-    }
-
-    @SuppressWarnings("unchecked")
-    private static void rotateRingTargets() {
-        try {
-            final ArrayList<Object> targets = 
-                    (ArrayList<Object>) XposedHelpers.getObjectField(mGlowPadView, "mTargetDrawables");
-            final ArrayList<String> descs = 
-                    (ArrayList<String>)XposedHelpers.getObjectField(mGlowPadView, "mTargetDescriptions");
-
-            int rotateBy = 3;
-            if (mNavbarLeftHanded) {
-                View container = (View) mGlowPadView.getParent();
-                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) container.getLayoutParams();
-                lp.addRule(RelativeLayout.ALIGN_PARENT_START, RelativeLayout.TRUE);
-                container.setLayoutParams(lp);
-                XposedHelpers.setIntField(mGlowPadView, "mGravity", Gravity.END);
-                rotateBy = mRingTargetsEnabled ? -3 : 2;
-            }
-            if (targets != null) Collections.rotate(targets, rotateBy);
-            if (descs != null) Collections.rotate(descs, rotateBy);
-            mGlowPadView.requestLayout();
-            XposedHelpers.setAdditionalInstanceField(mGlowPadView, "mGbVertical", true);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    private static void setRingHapticFeedback() {
-        if (mGlowPadView == null) return;
-
-        try {
-            if (mRingVibrateDurationOrig == null) {
-                mRingVibrateDurationOrig = XposedHelpers.getIntField(mGlowPadView, "mVibrationDuration");
-                if (mRingHapticFeedback == RingHapticFeedback.DEFAULT) return;
-            }
-            int vibrateDuration;
-            switch (mRingHapticFeedback) {
-                case ENABLED: vibrateDuration = 20; break;
-                case DISABLED: vibrateDuration = 0; break;
-                default:
-                case DEFAULT: vibrateDuration = mRingVibrateDurationOrig; break;
-            }
-            XposedHelpers.setIntField(mGlowPadView, "mVibrationDuration", vibrateDuration);
-            XposedHelpers.callMethod(mGlowPadView, "setVibrateEnabled", vibrateDuration > 0);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
+//    @SuppressWarnings("unchecked")
+//    private static void updateRingTarget(int index, String app) {
+//        if (mGlowPadView == null || index < 0) return;
+//
+//        try {
+//            final Context context = mGlowPadView.getContext();
+//            final ArrayList<Object> targets = 
+//                    (ArrayList<Object>) XposedHelpers.getObjectField(mGlowPadView, "mTargetDrawables");
+//            final ArrayList<String> descs = 
+//                    (ArrayList<String>)XposedHelpers.getObjectField(mGlowPadView, "mTargetDescriptions");
+//            index++; // take dummy drawable at position 0 into account
+//            if (isGlowPadVertical()) {
+//                if (mNavbarLeftHanded) {
+//                    index -= 3;
+//                    if (index < 0) index += 12;
+//                } else {
+//                    index += 3;
+//                }
+//            }
+//
+//            AppInfo ai = GlowPadHelper.getAppInfo(context, app, 55, mRingTargetsBgStyle);
+//            if (targets != null && targets.size() > index) {
+//                targets.set(index, GlowPadHelper.createTargetDrawable(context, ai, mGlowPadView.getClass()));
+//                if (DEBUG) log("Ring target at index " + index + " set to: " + (ai == null ? "null" : ai.name));
+//            }
+//            if (descs != null && descs.size() > index) {
+//                descs.set(index, ai == null ? null : ai.name);
+//            }
+//            mGlowPadView.requestLayout();
+//        } catch(Throwable t) {
+//            XposedBridge.log(t);
+//        }
+//    }
+//
+//    private static boolean isGlowPadVertical() {
+//        Boolean vertical = (Boolean) XposedHelpers.getAdditionalInstanceField(mGlowPadView, "mGbVertical");
+//        return (vertical != null && vertical.booleanValue());
+//    }
+//
+//    @SuppressWarnings("unchecked")
+//    private static void rotateRingTargets() {
+//        try {
+//            final ArrayList<Object> targets = 
+//                    (ArrayList<Object>) XposedHelpers.getObjectField(mGlowPadView, "mTargetDrawables");
+//            final ArrayList<String> descs = 
+//                    (ArrayList<String>)XposedHelpers.getObjectField(mGlowPadView, "mTargetDescriptions");
+//
+//            int rotateBy = 3;
+//            if (mNavbarLeftHanded) {
+//                View container = (View) mGlowPadView.getParent();
+//                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) container.getLayoutParams();
+//                lp.addRule(RelativeLayout.ALIGN_PARENT_START, RelativeLayout.TRUE);
+//                container.setLayoutParams(lp);
+//                XposedHelpers.setIntField(mGlowPadView, "mGravity", Gravity.END);
+//                rotateBy = mRingTargetsEnabled ? -3 : 2;
+//            }
+//            if (targets != null) Collections.rotate(targets, rotateBy);
+//            if (descs != null) Collections.rotate(descs, rotateBy);
+//            mGlowPadView.requestLayout();
+//            XposedHelpers.setAdditionalInstanceField(mGlowPadView, "mGbVertical", true);
+//        } catch (Throwable t) {
+//            XposedBridge.log(t);
+//        }
+//    }
+//
+//    private static void setRingHapticFeedback() {
+//        if (mGlowPadView == null) return;
+//
+//        try {
+//            if (mRingVibrateDurationOrig == null) {
+//                mRingVibrateDurationOrig = XposedHelpers.getIntField(mGlowPadView, "mVibrationDuration");
+//                if (mRingHapticFeedback == RingHapticFeedback.DEFAULT) return;
+//            }
+//            int vibrateDuration;
+//            switch (mRingHapticFeedback) {
+//                case ENABLED: vibrateDuration = 20; break;
+//                case DISABLED: vibrateDuration = 0; break;
+//                default:
+//                case DEFAULT: vibrateDuration = mRingVibrateDurationOrig; break;
+//            }
+//            XposedHelpers.setIntField(mGlowPadView, "mVibrationDuration", vibrateDuration);
+//            XposedHelpers.callMethod(mGlowPadView, "setVibrateEnabled", vibrateDuration > 0);
+//        } catch (Throwable t) {
+//            XposedBridge.log(t);
+//        }
+//    }
 
     private static void updateCustomKeyIcon() {
         try {

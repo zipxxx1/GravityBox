@@ -1145,6 +1145,7 @@
                 android:defaultValue="false"
                 android:disableDependentsState="true" />
 
+            <!-- 
             <PreferenceScreen 
                 android:key="pref_cat_navbar_ring_targets"
                 android:title="@string/pref_cat_navbar_ring_targets_title"
@@ -1156,7 +1157,7 @@
                     android:summary="@string/pref_navbar_ring_targets_enable_summary"
                     android:defaultValue="false" />
 
-                <!-- Ring target prefs will be generated dynamically at runtime -->
+                Ring target prefs will be generated dynamically at runtime
 
                 <ListPreference
                     android:key="pref_navbar_ring_targets_bg_style"
@@ -1175,6 +1176,7 @@
                     android:dependency="pref_navbar_ring_targets_enable" />
 
             </PreferenceScreen>
+            -->
 
         </PreferenceCategory>
 
