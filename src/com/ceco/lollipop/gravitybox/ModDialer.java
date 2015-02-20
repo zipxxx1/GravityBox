@@ -268,7 +268,7 @@ public class ModDialer {
                     if (param.args[1] != null) {
                         final Fragment frag = (Fragment) param.thisObject;
                         final Resources res = frag.getResources();
-                        Drawable picUnknown = res.getDrawable(res.getIdentifier("picture_unknown", "drawable",
+                        Drawable picUnknown = res.getDrawable(res.getIdentifier("img_no_image", "drawable",
                                         res.getResourcePackageName(frag.getId())));
                         shouldShowUnknownPhoto = ((Drawable)param.args[1]).getConstantState().equals(
                                                     picUnknown.getConstantState());
