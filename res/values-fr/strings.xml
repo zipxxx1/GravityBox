@@ -668,7 +668,6 @@
     <string name="pref_navbar_color_enable_summary">Peut nécessiter un redémarrage après désactivation</string>
     <string name="pref_navbar_key_color_title">Couleur touche de navigation</string>
     <string name="pref_navbar_key_glow_color_title">Couleur brillance touche de navigation</string>
-    <string name="pref_navbar_bg_color_title">Couleur de fond barre de navigation</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Mode de gestion de la transparence</string>

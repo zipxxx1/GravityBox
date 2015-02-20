@@ -512,7 +512,6 @@
     <string name="pref_navbar_color_enable_summary">활성화 및 비활성화하려면 재시작이 필요 할 수 있습니다.</string>
     <string name="pref_navbar_key_color_title">네비게이션 키 색깔</string>
     <string name="pref_navbar_key_glow_color_title">네비게이션 키 터치 색깔</string>
-    <string name="pref_navbar_bg_color_title">네비게이션 바 배경색</string>
 
     <string name="pref_tm_mode_title">투명도 설정</string>
     <string name="pref_tm_mode_summary">재시작 필요</string>

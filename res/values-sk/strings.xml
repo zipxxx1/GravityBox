@@ -641,7 +641,6 @@
     <string name="pref_navbar_color_enable_summary">Môže vyžadovať reštart po deaktivácii</string>
     <string name="pref_navbar_key_color_title">Farba tlačidiel</string>
     <string name="pref_navbar_key_glow_color_title">Efekt tlačidiel</string>
-    <string name="pref_navbar_bg_color_title">Farba pozadia lišty</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Režim priehľadnosti</string>

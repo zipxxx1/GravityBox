@@ -667,7 +667,6 @@
     <string name="pref_navbar_color_enable_summary">Podría requerir reinicio tras deshabilitar</string>
     <string name="pref_navbar_key_color_title">Color de botón de navegación</string>
     <string name="pref_navbar_key_glow_color_title">Color del brillo del botón de navegación</string>
-    <string name="pref_navbar_bg_color_title">Color de fondo de la barra de navegación</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Modo de gestor de transparencia</string>

@@ -660,7 +660,6 @@
     <string name="pref_navbar_color_enable_summary">停用後可能需要重新啟動</string>
     <string name="pref_navbar_key_color_title">導航列按鍵顏色</string>
     <string name="pref_navbar_key_glow_color_title">導航列光暈顏色</string>
-    <string name="pref_navbar_bg_color_title">導航列背景顏色</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">透明度管理器模式</string>

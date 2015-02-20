@@ -648,7 +648,6 @@
     <string name="pref_navbar_color_enable_summary">Może wymagać ponownego uruchomienia po wyłączeniu</string>
     <string name="pref_navbar_key_color_title">Kolor klawisza nawigacyjnego</string>
     <string name="pref_navbar_key_glow_color_title">Poświata klawisza nawigacyjnego</string>
-    <string name="pref_navbar_bg_color_title">Tło klawisza nawigacyjnego</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Tryb przezroczystości</string>

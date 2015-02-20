@@ -671,7 +671,6 @@
     <string name="pref_navbar_color_enable_summary">禁用后可能需要重启</string>
     <string name="pref_navbar_key_color_title">虚拟按键颜色</string>
     <string name="pref_navbar_key_glow_color_title">虚拟按键发光颜色</string>
-    <string name="pref_navbar_bg_color_title">虚拟按键背景颜色</string>
         
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">透明度管理模式</string>

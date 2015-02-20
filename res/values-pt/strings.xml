@@ -644,7 +644,6 @@
     <string name="pref_navbar_color_enable_summary">Pode ser necessário reiniciar após desabilitar</string>
     <string name="pref_navbar_key_color_title">Cor da tecla de navegação</string>
     <string name="pref_navbar_key_glow_color_title">Cor crescente da tecla de navegação</string>
-    <string name="pref_navbar_bg_color_title">Cor de fundo da barra de navegação</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Modo de configuração de transparências</string>

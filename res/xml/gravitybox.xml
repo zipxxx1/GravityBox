@@ -1204,13 +1204,6 @@
                 android:dependency="pref_navbar_color_enable"
                 alphaSlider="true" />
 
-            <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                android:key="pref_navbar_bg_color"
-                android:title="@string/pref_navbar_bg_color_title"
-                android:defaultValue="@color/navbar_bg_color"
-                android:dependency="pref_navbar_color_enable"
-                alphaSlider="false" />
-
         </PreferenceCategory>
 
         <PreferenceCategory

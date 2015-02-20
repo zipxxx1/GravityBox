@@ -544,7 +544,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NAVBAR_COLOR_ENABLE = "pref_navbar_color_enable";
     public static final String PREF_KEY_NAVBAR_KEY_COLOR = "pref_navbar_key_color";
     public static final String PREF_KEY_NAVBAR_KEY_GLOW_COLOR = "pref_navbar_key_glow_color";
-    public static final String PREF_KEY_NAVBAR_BG_COLOR = "pref_navbar_bg_color";
     public static final String PREF_KEY_NAVBAR_RING_DISABLE = "pref_navbar_ring_disable";
     public static final String ACTION_PREF_NAVBAR_CHANGED = "gravitybox.intent.action.ACTION_NAVBAR_CHANGED";
     public static final String ACTION_PREF_NAVBAR_SWAP_KEYS = "gravitybox.intent.action.ACTION_NAVBAR_SWAP_KEYS";
@@ -556,7 +555,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_COLOR_ENABLE = "navbarColorEnable";
     public static final String EXTRA_NAVBAR_KEY_COLOR = "navbarKeyColor";
     public static final String EXTRA_NAVBAR_KEY_GLOW_COLOR = "navbarKeyGlowColor";
-    public static final String EXTRA_NAVBAR_BG_COLOR = "navbarBgColor";
     public static final String EXTRA_NAVBAR_CURSOR_CONTROL = "navbarCursorControl";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_SWAP = "navbarCustomKeySwap";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_ICON = "navbarCustomKeyIcon";
@@ -2925,11 +2923,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_NAVBAR_KEY_GLOW_COLOR,
                         prefs.getInt(PREF_KEY_NAVBAR_KEY_GLOW_COLOR, 
                                 getResources().getColor(R.color.navbar_key_glow_color)));
-            } else if (key.equals(PREF_KEY_NAVBAR_BG_COLOR)) {
-                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_BG_COLOR,
-                        prefs.getInt(PREF_KEY_NAVBAR_BG_COLOR, 
-                                getResources().getColor(R.color.navbar_bg_color)));
             } else if (PREF_KEY_APP_LAUNCHER_SLOT.contains(key)) {
                 intent.setAction(ACTION_PREF_APP_LAUNCHER_CHANGED);
                 intent.putExtra(EXTRA_APP_LAUNCHER_SLOT,

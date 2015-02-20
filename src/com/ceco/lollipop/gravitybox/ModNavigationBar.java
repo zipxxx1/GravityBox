@@ -15,7 +15,6 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +55,6 @@ public class ModNavigationBar {
     private static final String CLASS_KEY_BUTTON_VIEW = "com.android.systemui.statusbar.policy.KeyButtonView";
     private static final String CLASS_NAVBAR_TRANSITIONS = 
             "com.android.systemui.statusbar.phone.NavigationBarTransitions";
-    private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
     private static final String CLASS_SEARCH_PANEL_VIEW_CIRCLE = "com.android.systemui.SearchPanelCircleView";
 //    private static final String CLASS_GLOWPAD_TRIGGER_LISTENER = CLASS_SEARCH_PANEL_VIEW + "$GlowPadTriggerListener";
 //    private static final String CLASS_GLOWPAD_VIEW = "com.android.internal.widget.multiwaveview.GlowPadView";
@@ -99,12 +97,8 @@ public class ModNavigationBar {
     private static boolean mNavbarColorsEnabled;
     private static int mKeyDefaultColor = 0xe8ffffff;
     private static int mKeyDefaultGlowColor = 0x40ffffff;
-    private static int mNavbarDefaultBgColor = 0xff000000;
     private static int mKeyColor;
     private static int mKeyGlowColor;
-    private static int mNavbarBgColor;
-    private static Integer mNavbarBgColorOriginal;
-    private static Object mBarBackground;;
 
     // TODO: Ring targets
 //    private static enum RingHapticFeedback { DEFAULT, ENABLED, DISABLED };
@@ -166,15 +160,9 @@ public class ModNavigationBar {
                             GravityBoxSettings.EXTRA_NAVBAR_KEY_GLOW_COLOR, mKeyDefaultGlowColor);
                     setKeyColor();
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_BG_COLOR)) {
-                    mNavbarBgColor = intent.getIntExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_BG_COLOR, mNavbarDefaultBgColor);
-                    setNavbarBgColor();
-                }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_COLOR_ENABLE)) {
                     mNavbarColorsEnabled = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_NAVBAR_COLOR_ENABLE, false);
-                    setNavbarBgColor();
                     setKeyColor();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CURSOR_CONTROL)) {
@@ -292,7 +280,6 @@ public class ModNavigationBar {
         try {
             final Class<?> navbarViewClass = XposedHelpers.findClass(CLASS_NAVBAR_VIEW, classLoader);
             final Class<?> navbarTransitionsClass = XposedHelpers.findClass(CLASS_NAVBAR_TRANSITIONS, classLoader);
-            final Class<?> barTransitionsClass = XposedHelpers.findClass(CLASS_BAR_TRANSITIONS, classLoader);
             final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
 
             mAlwaysShowMenukey = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_MENUKEY, false);
@@ -355,9 +342,6 @@ public class ModNavigationBar {
                     mKeyDefaultGlowColor = res.getColor(R.color.navbar_key_glow_color);
                     mKeyGlowColor = prefs.getInt(
                             GravityBoxSettings.PREF_KEY_NAVBAR_KEY_GLOW_COLOR, mKeyDefaultGlowColor);
-                    mNavbarDefaultBgColor = res.getColor(R.color.navbar_bg_color);
-                    mNavbarBgColor = prefs.getInt(
-                            GravityBoxSettings.PREF_KEY_NAVBAR_BG_COLOR, mNavbarDefaultBgColor);
                     mCustomKeyAltIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ICON, false);
 
                  // TODO: Navbar ring targets
@@ -495,7 +479,6 @@ public class ModNavigationBar {
 
                     updateRecentsKeyCode();
                     updateHomeKeyLongpressSupport();
-                    setNavbarBgColor();
 
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_SWAP_KEYS, false)) {
                         swapBackAndRecents();
@@ -577,23 +560,6 @@ public class ModNavigationBar {
                                 mNavbarViewInfo[i].dpadRight.setQuiescentAlpha(alpha, animate);
                             }
                         }
-                    }
-                }
-            });
-
-            XposedBridge.hookAllConstructors(barTransitionsClass, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (XposedHelpers.getObjectField(param.thisObject, "mView") == mNavigationBarView) {
-                        try {
-                            Field barBg = XposedHelpers.findField(param.thisObject.getClass(), "mBarBackground");
-                            mBarBackground = barBg.get(param.thisObject);
-                            if (DEBUG) log("BarTransitions appear to be Android 4.4.1");
-                        } catch (NoSuchFieldError nfe) {
-                            mBarBackground = param.thisObject;
-                            if (DEBUG) log("BarTransitions appear to be Android 4.4");
-                        }
-                        
                     }
                 }
             });
@@ -1052,30 +1018,6 @@ public class ModNavigationBar {
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
-        }
-    }
-
-    private static void setNavbarBgColor() {
-        if (mNavigationBarView == null || 
-                mBarBackground == null) return;
-
-        try {
-            if (mNavbarBgColorOriginal == null) {
-                mNavbarBgColorOriginal = XposedHelpers.getIntField(mBarBackground, "mOpaque");
-                if (DEBUG) log("Saved original navbar background color");
-            }
-            int bgColor = mNavbarColorsEnabled ? 
-                    mNavbarBgColor : mNavbarBgColorOriginal;
-            XposedHelpers.setIntField(mBarBackground, "mOpaque", bgColor);
-            if (mBarBackground instanceof Drawable) {
-                ((Drawable) mBarBackground).invalidateSelf();
-            } else {
-                final Object barTransitions = XposedHelpers.getObjectField(mNavigationBarView, "mBarTransitions");
-                final int currentMode = (Integer) XposedHelpers.callMethod(barTransitions, "getMode");
-                XposedHelpers.callMethod(barTransitions, "applyModeBackground", -1, currentMode, false);
-            }
-        } catch (Throwable t) {
-            log("Error setting navbar background color: " + t.getMessage());
         }
     }
 

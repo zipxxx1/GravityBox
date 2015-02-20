@@ -655,7 +655,6 @@
     <string name="pref_navbar_color_enable_summary">Mungkin perlukan reboot setelah dinyah aktif</string>
     <string name="pref_navbar_key_color_title">Warna bar navigasi</string>
     <string name="pref_navbar_key_glow_color_title">Warna glow untuk bar navigasi</string>
-    <string name="pref_navbar_bg_color_title">Warna belakang bar navigasi</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Mod pengurus transparent</string>

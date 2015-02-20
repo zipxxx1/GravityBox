@@ -394,5 +394,4 @@
     <string name="pref_cat_navbar_dimen_title">Розміри</string>
     <string name="pref_navbar_key_color_title">Колір кнопок навігації</string>
     <string name="pref_navbar_key_glow_color_title">Колір тіні кнопок навігації</string>
-    <string name="pref_navbar_bg_color_title">Колір фону паненлі навігації</string>
 </resources>

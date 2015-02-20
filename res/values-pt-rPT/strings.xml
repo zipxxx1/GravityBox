@@ -653,7 +653,6 @@
     <string name="pref_navbar_color_enable_summary">Pode ser necessário reiniciar após desativar</string>
     <string name="pref_navbar_key_color_title">Cor das teclas</string>
     <string name="pref_navbar_key_glow_color_title">Cor das teclas ao pressionar</string>
-    <string name="pref_navbar_bg_color_title">Cor de fundo da barra de navegação</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Modo de gestão de transparências</string>

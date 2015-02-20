@@ -661,7 +661,6 @@
     <string name="pref_navbar_color_enable_summary">May require reboot after disabling</string>
     <string name="pref_navbar_key_color_title">Navigation key color</string>
     <string name="pref_navbar_key_glow_color_title">Navigation key glow color</string>
-    <string name="pref_navbar_bg_color_title">Navigation bar background color</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Transparency manager mode</string>

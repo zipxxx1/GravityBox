@@ -657,7 +657,6 @@
     <string name="pref_navbar_color_enable_summary">Μπορεί να χρειαστεί επανεκκίνηση μετά από απενεργοποίηση</string>
     <string name="pref_navbar_key_color_title">Χρώμα πλήκτρου πλοήγησης</string>
     <string name="pref_navbar_key_glow_color_title">Χρώμα λάμψης πλήκτρου πλοήγησης</string>
-    <string name="pref_navbar_bg_color_title">Χρώμα φόντου μπάρας πλοήγησης</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Διαχείριση διαφάνειας</string>

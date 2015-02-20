@@ -552,7 +552,6 @@
     <string name="pref_navbar_color_enable_summary">無効化後は再起動してください。</string>
     <string name="pref_navbar_key_color_title">ナビキーの色</string>
     <string name="pref_navbar_key_glow_color_title">ナビキーのグロー色</string>
-    <string name="pref_navbar_bg_color_title">ナビバーの背景色</string>
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">透過処理モード</string>
     <string name="pref_tm_mode_summary">変更後は再起動してください。</string>

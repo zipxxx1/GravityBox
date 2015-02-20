@@ -643,7 +643,6 @@
     <string name="pref_navbar_color_enable_summary">ייתכן ויהיה צורך באיתחול המכשיר לאחר ביטול</string>
     <string name="pref_navbar_key_color_title">צבע מקשי הניווט</string>
     <string name="pref_navbar_key_glow_color_title">צבע זוהר של מקשי הניווט</string>
-    <string name="pref_navbar_bg_color_title">צבע רקע של שורת הניווט</string>
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">מצב ניהול שקיפויות</string>
