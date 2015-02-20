@@ -21,31 +21,31 @@
     <string name="battery_style_title">電量指示器風格</string>
     <string name="battery_style_stock">預設電量指示器</string>
     <string name="battery_style_circle">圓形電量指示器</string>
-    <string name="battery_style_circle_percent">圓形電量指示器 (包含電量百分比)</string>
+    <string name="battery_style_circle_percent">圓形電量指示器（含電量百分比）</string>
     <string name="battery_style_kitkat">KitKat 電量指示器</string>
-    <string name="battery_style_kitkat_percent">KitKat 電量指示器 (包含電量百分比)</string>
-    <string name="battery_style_none">隱藏</string>
+    <string name="battery_style_kitkat_percent">KitKat 電量指示器（含電量百分比）</string>
+    <string name="battery_style_none">不顯示</string>
 
     <string name="vol_music_controls_title">音量鍵跳過歌曲曲目</string>
     <string name="vol_music_controls_summary">螢幕關閉時長按音量鍵來跳過歌曲曲目</string>
 
     <string name="low_battery_warning_policy_title">低電量警告</string>
-    <string name="low_battery_warning_full">彈出浮動窗與音效</string>
-    <string name="low_battery_warning_popup">只有浮動窗</string>
-    <string name="low_battery_warning_sound">只有音效</string>
+    <string name="low_battery_warning_full">彈出浮動視窗並播放音效</string>
+    <string name="low_battery_warning_popup">僅彈出浮動視窗</string>
+    <string name="low_battery_warning_sound">僅播放音效</string>
     <string name="low_battery_warning_off">關閉</string>
 
     <string name="reboot_required">重新啟動裝置後更改將被套用</string>
 
     <string name="poweroff_advanced_title">進階電源選單</string>
-    <string name="poweroff_advanced_summary">啟用進階電源選單  (包含重新啟動及 Recovery 模式選項)</string>
+    <string name="poweroff_advanced_summary">啟用進階電源選單（包含重新啟動及 Recovery 模式選項）</string>
     <string name="poweroff_recovery">Recovery 模式</string>
     <string name="poweroff_bootloader">Bootloader 模式</string>
 
     <string name="vol_key_cursor_control_title">音量鍵鍵盤游標控制</string>
     <string name="vol_key_cursor_control_summary">在文字輸入區域內，以音量鍵控制鍵盤游標位置</string>
     <string name="vol_key_cursor_control_off">停用</string>
-    <string name="vol_key_cursor_control_on">音量 -/+ 鍵控制鍵盤游標向左/向右</string>
+    <string name="vol_key_cursor_control_on">音量 +/- 鍵控制鍵盤游標向左/向右</string>
     <string name="vol_key_cursor_control_on_reverse">音量 +/- 鍵控制鍵盤游標向右/向左</string>
 
     <string name="recents_clear_all_title">清除全部最近使用的應用程式</string>
@@ -141,11 +141,11 @@
 
     <!-- About -->
     <string name="pref_cat_about_title">關於</string>
-    <string name="about_gb_summary">由 C3C076@XDA 編寫。點選此處以拜訪官方的討論串。</string>
+    <string name="about_gb_summary">由 C3C076@XDA 撰寫。按此前往官方討論串。</string>
     <string name="about_xposed_title">Xposed 框架</string>
-    <string name="about_xposed_summary">由 rovo89@XDA 編寫。點選此處以拜訪官方的討論串。</string>
-    <string name="about_donate_title">捐助</string>
-    <string name="about_donate_summary">如果您覺得這個程式寫得不錯，您可以按下這個按鈕通過 PayPal 來捐贈我</string>
+    <string name="about_xposed_summary">由 rovo89@XDA 撰寫。按此前往官方討論串。</string>
+    <string name="about_donate_title">贊助</string>
+    <string name="about_donate_summary">若您覺得這個程式寫得不錯，您可以按此按鈕以 PayPal 贊助我</string>
 
     <!-- Reboot confirmation -->
     <string name="reboot_confirm">您的 %s 將重新啟動</string>
@@ -156,12 +156,12 @@
     <string name="crt_off_effect_title">CRT 螢幕關閉特效</string>
 
     <!-- Engineering mode shortcut -->
-    <string name="engineering_mode_title">工程模式</string>
-    <string name="engineering_mode_summary">啟動 [工程模式] 應用程式</string>
+    <string name="engineering_mode_title">開發人員模式</string>
+    <string name="engineering_mode_summary">啟動「開發人員模式」應用程式</string>
 
     <!-- Dual SIM ringer -->
     <string name="dual_sim_ringer_title">雙 SIM 卡鈴聲</string>
-    <string name="dual_sim_ringer_summary">讓您可以設定各個 SIM 卡的鈴聲與通知音效</string>
+    <string name="dual_sim_ringer_summary">讓您可以設定各別 SIM 卡的鈴聲與通知音效</string>
 
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">鎖定畫面選項</string>
@@ -176,8 +176,8 @@
     <string name="pref_lockscreen_bg_color_summary">為鎖定畫面設定自訂的背景顏色</string>
     <string name="pref_lockscreen_bg_image_title">設定自訂圖片</string>
     <string name="pref_lockscreen_bg_image_summary">為鎖定畫面設定自訂的背景圖片</string>
-    <string name="lockscreen_background_result_successful">背景已更改</string>
-    <string name="lockscreen_background_result_not_successful">背景未更改</string>
+    <string name="lockscreen_background_result_successful">背景已修改</string>
+    <string name="lockscreen_background_result_not_successful">背景未修改</string>
     <string name="pref_cat_lockscreen_other_title">其他</string>
     <string name="pref_lockscreen_maximize_widgets_title">最大化小工具</string>
     <string name="pref_lockscreen_maximize_widgets_summary">若啟用這個選項，鎖定畫面的小工具預設都會被最大化</string>
@@ -196,14 +196,14 @@
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">最低亮度等級</string>
-    <string name="pref_brightness_min_summary">可以設定最低的亮度等級。在手動設定亮度時適用。 (需要重新啟動) </string>
+    <string name="pref_brightness_min_summary">可以設定最低的亮度等級。在手動設定亮度時適用。（必須重新啟動裝置）</string>
 
     <!--  Autobrightness levels -->
     <string name="pref_ab_title">自動亮度等級</string>
     <string name="pref_ab_summary">可以設定環境的亮度等級與相對應的螢幕背光強度</string>
     <string name="level">亮度等級</string>
     <string name="pref_ab_lux_max_label">亮度數值 (lux) </string>
-    <string name="pref_ab_brighness_label">背光強度 (%d &#8211; 255) </string>
+    <string name="pref_ab_brighness_label">背光強度（%d &#8211; 255）</string>
     <string name="pref_ab_number_error_general">指定的數值不被接受</string>
     <string name="pref_ab_brightness_too_low">不建議將背光強度設為 %d 以下</string>
     <string name="pref_ab_brightness_too_high">背光強度無法大於 255</string>
@@ -212,7 +212,7 @@
     <string name="pref_ab_number_not_descending">較高亮度等級背光強度無法小於較低亮度等級的背光強度</string>
     <string name="pref_ab_values_set">已設定 %s 的背光強度</string>
     <string name="pref_ab_config_saved">已儲存新的自動亮度設定</string>
-    <string name="pref_ab_config_cancelled">未有儲存新的自動亮度設定</string>
+    <string name="pref_ab_config_cancelled">無法儲存新的自動亮度設定</string>
     <string name="pref_ab_button_set">設定</string>
 
     <!-- Lockscreen rotation -->
@@ -239,15 +239,15 @@
 
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">導航按鍵選項</string>
-    <string name="pref_cat_hwkey_actions_summary">為導航按鍵 (包括硬體按鍵及軟體導航鍵) 設定自設動作</string>
-    <string name="hwkey_menu_longpress_dialog_title">選單鍵長按動作</string>
-    <string name="hwkey_menu_doubletap_dialog_title">選單鍵雙擊動作</string>
-    <string name="hwkey_back_longpress_dialog_title">返回鍵長按動作</string>
+    <string name="pref_cat_hwkey_actions_summary">為導航按鍵（包括硬體按鍵及軟體導航鍵）設定自設動作</string>
+    <string name="hwkey_menu_longpress_dialog_title">按住「選單鍵」執行</string>
+    <string name="hwkey_menu_doubletap_dialog_title">點兩下「選單鍵」執行</string>
+    <string name="hwkey_back_longpress_dialog_title">按住「返回鍵」執行</string>
     <string name="hwkey_action_default">預設</string>
     <string name="hwkey_action_search">搜尋</string>
     <string name="hwkey_action_voice_search">語音搜尋</string>
     <string name="hwkey_action_prev_app">切換至上一個應用程式</string>
-    <string name="hwkey_action_kill">結束當前應用程式</string>
+    <string name="hwkey_action_kill">結束目前的應用程式</string>
     <string name="hwkey_action_sleep">使裝置休眠</string>
     <string name="pref_hwkey_kill_delay_title">結束當前應用程式的長按延遲</string>
     <string name="pref_hwkey_kill_delay_summary">適用於 [結束當前應用程式] 選項。定義按鍵需要持續按下多久才會觸發動作</string>
@@ -340,16 +340,16 @@
 
     <!-- Disable roaming indicators -->
     <string name="pref_disable_roaming_indicators_title">隱藏漫遊數據圖示</string>
-    <string name="pref_disable_roaming_indicators_summary">當停用時，狀態列上的 R 漫遊數據圖示會隱藏，請小心使用！</string>
+    <string name="pref_disable_roaming_indicators_summary">當停用時，狀態列上的「R」漫遊數據圖示會隱藏，請小心使用！</string>
 
     <!-- Battery status in pie controls -->
-    <string name="pie_battery_status_charging">充電中  (<xliff:g id="percent">%d</xliff:g>%%) </string>
+    <string name="pie_battery_status_charging">充電中（<xliff:g id="percent">%d</xliff:g>%%）</string>
     <string name="pie_battery_status_full">已充滿</string>
     <string name="pie_battery_status_discharging">剩餘 <xliff:g id="percent">%d</xliff:g>%%</string>
 
     <!-- Phone status in pie controls -->
     <string name="pie_phone_status_no_service">沒有服務</string>
-    <string name="pie_phone_status_airplane_mode">飛航模式 啟用</string>
+    <string name="pie_phone_status_airplane_mode">飛航模式已啟用</string>
     <string name="pie_phone_status_emergency_only">僅能撥打緊急電話</string>
 
     <!-- Pie Controls settings -->
@@ -357,16 +357,16 @@
     <string name="pie_control_enable_title">啟用 Pie 控制</string>
     <string name="pie_control_size_title">導航鍵大小</string>
     <string name="pie_control_trigger_positions_title">觸發位置</string>
-    <string name="pie_control_trigger_left">左邊緣</string>
-    <string name="pie_control_trigger_bottom">下邊緣</string>
-    <string name="pie_control_trigger_right">右邊緣</string>
-    <string name="pie_control_trigger_top">上邊緣</string>
+    <string name="pie_control_trigger_left">螢幕左邊界</string>
+    <string name="pie_control_trigger_bottom">螢幕底部</string>
+    <string name="pie_control_trigger_right">螢幕右邊界</string>
+    <string name="pie_control_trigger_top">螢幕頂部</string>
 
     <!-- Button backlight options -->
     <string name="pref_button_backlight_mode_title">按鍵背光燈模式</string>
     <string name="button_backlight_mode_default">預設</string>
-    <string name="button_backlight_mode_disable">關閉按鍵背光燈</string>
-    <string name="button_backlight_mode_always_on">當螢幕喚醒時按鍵背光燈永遠打開</string>
+    <string name="button_backlight_mode_disable">停用按鍵背光燈</string>
+    <string name="button_backlight_mode_always_on">當開啟螢幕時永遠開啟按鍵背光燈</string>
     <string name="pref_button_backlight_notifications_title">按鍵背光燈通知</string>
     <string name="pref_button_backlight_notifications_summary">這個設定是實驗性的！當收到通知時背光燈會閃爍提醒。建議當您的裝置沒有通知燈時才開啟本功能，因為可能會加速電量消耗。</string>
 
@@ -395,7 +395,7 @@
 
     <!-- AppPickerPreference -->
     <string name="app_picker_search">搜尋</string>
-    <string name="app_picker_none"> (未有指定) </string>
+    <string name="app_picker_none">（尚未指定）</string>
 
     <!-- QuickApp tile settings -->
     <string name="qs_tile_quickapp">應用程式捷徑</string>
@@ -421,7 +421,7 @@
     <string name="pref_cat_clock_settings_title">時鐘設定</string>
 
     <!-- Clock: hide am/pm -->
-    <string name="pref_clock_ampm_hide_title">隱藏 上午/下午</string>
+    <string name="pref_clock_ampm_hide_title">隱藏「上午/下午」</string>
 
     <!-- Clock: hide clock -->
     <string name="pref_clock_hide_title">隱藏時鐘</string>
@@ -442,24 +442,24 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">亮度設定</string>
-    <string name="pref_brightness_master_switch_summary">請先確定您的手機支援標準的 Android 亮度調整才使用本功能。如果您遇到任何亮度問題請關閉此選項 (需要重新啟動) </string>
+    <string name="pref_brightness_master_switch_summary">請先確認您的手機是否支援標準 Android 亮度調整才使用此功能，如果您遇到任何亮度問題請關閉此選項。（必須重新啟動裝置）</string>
 
     <!-- HW Key Action: Recent apps -->
     <string name="hwkey_action_recent_apps">顯示最近使用過的應用程式</string>
 
     <!-- HW Key Action: Home long-press -->
-    <string name="hwkey_home_longpress_dialog_title">Home 鍵長按動作</string>
+    <string name="hwkey_home_longpress_dialog_title">按住「Home 鍵」執行</string>
 
     <!-- HW Key Action: Launch cutom app -->
-    <string name="hwkey_action_custom_app_none">沒有指定應用程式！</string>
+    <string name="hwkey_action_custom_app_none">尚未指定應用程式！</string>
     <string name="hwkey_action_custom_app_missing">找不到已設定的自訂應用程式 </string>
 
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">狀態列時鐘</string>
     <string name="pref_cat_notif_panel_clock_title">通知面板時鐘</string>
-    <string name="pref_clock_link_title">點擊時鐘時執行的應用程式</string>
-    <string name="pref_clock_link_summary">啟動此功能後，點擊通知面板的時鐘將執行指定的應用程式而非預設的 [日期與時間] 設定</string>
-    <string name="pref_clock_longpress_link_title">長按時鐘時執行的應用程式</string>
+    <string name="pref_clock_link_title">點選時鐘時執行的應用程式</string>
+    <string name="pref_clock_link_summary">啟動此功能後，點選通知面板的時鐘將執行指定的應用程式而非預設的「日期與時間」設定</string>
+    <string name="pref_clock_longpress_link_title">按住時鐘時執行的應用程式</string>
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">正在等待 GravityBox 系統框架回應&#8230;</string>
@@ -473,10 +473,10 @@
     <string name="pref_expanded_desktop_title">全螢幕模式</string>
     <string name="expanded_desktop_disabled">關閉</string>
     <string name="expanded_desktop_navbar">隱藏導航列</string>
-    <string name="expanded_desktop_immersive_statusbar">融入模式 (只有狀態列) </string>
-    <string name="expanded_desktop_immersive_navbar">融入模式 (只有導航列) </string>
-    <string name="expanded_desktop_both">融入模式狀態列 + Pie 控制</string>
-    <string name="expanded_desktop_immersive">完整的融入模式</string>
+    <string name="expanded_desktop_immersive_statusbar">融合狀態列</string>
+    <string name="expanded_desktop_immersive_navbar">融合導航列</string>
+    <string name="expanded_desktop_both">半融合模式（含 Pie 控制）</string>
+    <string name="expanded_desktop_immersive">完全融合</string>
     <string name="action_expanded_desktop_title">全螢幕模式</string>
     <string name="action_expanded_desktop_on">全螢幕模式已開啟</string>
     <string name="action_expanded_desktop_off">全螢幕模式已關閉</string>
@@ -531,6 +531,9 @@
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">網路模式瓷貼模式</string>
+    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
+    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
+    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
 
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允許畫面可以全方位旋轉</string>
@@ -563,8 +566,8 @@
     <string name="pref_call_vibrations_title">來電震動</string>
     <string name="call_vibration_connected">在通話接通後</string>
     <string name="call_vibration_disconnected">在通話掛斷時</string>
-    <string name="call_vibration_waiting">在通話等待時</string>
-    <string name="call_vibration_periodic">通話期間每 45 秒</string>
+    <string name="call_vibration_waiting">在通話保留時</string>
+    <string name="call_vibration_periodic">通話時每隔 45 秒</string>
 
     <!-- QuickSettings tile order -->
     <string name="pref_qs_tile_order_title">瓷貼排序</string>
@@ -578,7 +581,7 @@
     <string name="ongoing_notif_reset_list">重設清單</string>
     <string name="ongoing_notif_reset_alert">您確定要重設清單嗎? 
         這會清除當前清單中被封鎖的通知，所有已被封鎖的通知將會在稍後重新出現。</string>
-    <string name="ongoing_notif_list_empty"> (清單是空的) </string>
+    <string name="ongoing_notif_list_empty">（無）</string>
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">快速解鎖</string>
@@ -587,8 +590,8 @@
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">停用</string>
     <string name="clock_dow_standard">標準</string>
-    <string name="clock_dow_lowercase">小寫字母 (僅英文有效) </string>
-    <string name="clock_dow_uppercase">大寫字母 (僅英文有效) </string>
+    <string name="clock_dow_lowercase">小寫字母（僅對英文有效）</string>
+    <string name="clock_dow_uppercase">大寫字母（僅對英文有效）</string>
 
     <!-- Statusbar expand policy -->
     <string name="pref_statusbar_lock_policy_title">狀態列鎖定政策</string>
@@ -600,13 +603,17 @@
     <!-- Data traffic monitor -->
     <string name="pref_cat_data_traffic_title">資料流量速度監控器</string>
     <string name="pref_data_traffic_position_title">顯示位置</string>
-    <string name="dt_position_auto">自動 (置中或靠右取決於時鐘的位置) </string>
-    <string name="dt_position_left">左</string>
-    <string name="dt_position_right">右</string>
+    <string name="dt_position_auto">自動（由時鐘位置決定置中或靠右）</string>
+    <string name="dt_position_left">靠左</string>
+    <string name="dt_position_right">靠右</string>
     <string name="pref_data_traffic_size_title">大小</string>
     <string name="dt_size_normal">正常</string>
-    <string name="dt_size_smaller">較小</string>
+    <string name="dt_size_smaller">小</string>
     <string name="dt_size_smallest">最小</string>
+    <string name="byte_abbr">B</string>
+    <string name="kilobyte_abbr">KB</string>
+    <string name="megabyte_abbr">MB</string>
+    <string name="second_abbr">s</string>
 
     <!-- Disable lockscreen widget limit -->
     <string name="pref_lockscreen_widget_limit_disable_title">停用鎖定畫面小工具數量限制</string>
@@ -623,15 +630,15 @@
     <string name="rambar_bottom">底部</string>
     
     <!-- HW Key actions for recents button -->
-    <string name="hwkey_recents_singletap_dialog_title">多工鍵單擊動作</string>
-    <string name="hwkey_recents_longpress_dialog_title">多工鍵長按動作</string>
+    <string name="hwkey_recents_singletap_dialog_title">按一下「多工鍵」執行</string>
+    <string name="hwkey_recents_longpress_dialog_title">按住「多工鍵」執行</string>
 
     <!-- Lockscreen battery arc -->
     <string name="pref_lockscreen_battery_arc_title">顯示電池狀態圓弧</string>
     <string name="pref_lockscreen_battery_arc_summary">在解鎖環附近顯示當前電量狀態圓弧</string>
 
     <!-- HW Key Actions: toggle torch -->
-    <string name="hwkey_action_torch">開關手電筒</string>
+    <string name="hwkey_action_torch">切換手電筒</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">自動展開音量面板</string>
@@ -658,9 +665,9 @@
 
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">應用程式啟動器</string>
-    <string name="pref_cat_app_launcher_summary">一個可以被指派為硬體按鍵動作或作為額外導航列按鍵的對話框。您可以指定最多 12 個應用程式到這對話框內</string>
-    <string name="pref_app_launcher_slot_title">應用程式槽 %d</string>
-    <string name="app_launcher_no_apps">沒有指定任何應用程式。請使用 GravityBox 內的 [應用程式啟動器] 選單來分配應用程式。</string>
+    <string name="pref_cat_app_launcher_summary">能設定到實體按鍵或導航列按鈕的應用程式選單，您最多可設定 12 個應用程式至此選單中。</string>
+    <string name="pref_app_launcher_slot_title">應用程式選單 %d</string>
+    <string name="app_launcher_no_apps">尚未指定任何應用程式。請使用 GravityBox 中的「應用程式啟動器」選單來設定應用程式。</string>
 
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">顯示應用程式啟動器</string>
@@ -683,8 +690,8 @@
     <!-- Custom unknown caller photo -->
     <string name="pref_caller_unknown_photo_enable_title">啟用未知來電撥號者照片</string>
     <string name="pref_caller_unknown_photo_title">設定未知來電撥號者照片</string>
-    <string name="caller_unknown_photo_result_successful">照片已更改</string>
-    <string name="caller_unkown_photo_result_not_successful">照片未更改</string>
+    <string name="caller_unknown_photo_result_successful">照片已變更</string>
+    <string name="caller_unkown_photo_result_not_successful">照片未變更</string>
 
     <!-- Minimum screen brightness warning -->
     <string name="screen_brightness_min_warning">您的裝置可能不支援低於 20 的亮度數值，如果您的裝置螢幕亮不起來，您可以按住 音量 + 鍵 至少 7 秒來重設亮度，並請設定較高的亮度數值。</string>
@@ -719,12 +726,14 @@
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">狀態列圖示風格</string>
     <string name="pref_status_icon_style_summary">套用於無聲、震動、鬧鐘等狀態列圖示。</string>
+    <string name="icon_style_jb">JellyBean</string>
+    <string name="icon_style_kk">KitKat</string>
 
     <!-- HW Key Actions: Back double-tap -->
-    <string name="hwkey_back_doubletap_dialog_title">返回鍵雙擊動作</string>
+    <string name="hwkey_back_doubletap_dialog_title">點兩下「返回鍵」執行</string>
 
     <!-- HW Key Actions: Home and Back actions -->
-    <string name="hwkey_action_home">前往啟動器</string>
+    <string name="hwkey_action_home">回到桌面</string>
     <string name="hwkey_action_back">返回</string>
     
     <!-- Clear all recents bottom margin -->
@@ -732,7 +741,7 @@
 
     <!-- Google Plus -->
     <string name="pref_about_gplus_title">Google+ 社群</string>
-    <string name="pref_about_gplus_summary">輕觸這裡來拜訪 GravityBox 的 Google+ 社群</string>
+    <string name="pref_about_gplus_summary">按此前往 GravityBox 的 Google+ 社群</string>
 
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">允許 LTE 網路模式</string>
@@ -741,19 +750,19 @@
     <string name="hwkey_navbar_warning">為了能夠支援導航列動作控制，在導航列選項中覆蓋系統預設值是必須的</string>
 
     <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">偵測到在本裝置上已安裝舊版 GravityBox。
-        必須先把舊版 GravityBox 解除安裝才能正確使用新版 GravityBox。
-        新版 GravityBox 將由舊版 GravityBox 傳輸您設定，然後會把舊版 GravityBox 解除安裝。
-        您必須在出現 [解除安裝] 提示時按下 [確認] 。 解除安裝後，請前往 Xposed 安裝器啟用新模組然後馬上重新啟動。
-        否則，您將有可能遭遇到系統相容穩定性的問題。</string>
+    <string name="gb_new_package_dialog">偵測到本裝置上已安裝著舊版的 GravityBox，您必須將其解除安裝方能使用新版 GravityBox。
+        新版 GravityBox 將嘗試由舊版繼承設定後將其解除安裝，
+        當出現解除安裝的提示時，您必須按下確定，
+        並至 Xposed 的模組列表中重新把 GravityBox 啟用，
+        且重新啟動裝置，以確保系統的穩定性。</string>
     <string name="gb_new_package_settings_transfer_ok">GravityBox 設定傳輸成功</string>
     <string name="gb_new_package_settings_transfer_failed">GravityBox 設定傳輸失敗</string>
 
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">鎖定畫面手電筒</string>
     <string name="hwkey_ls_torch_disabled">停用</string>
-    <string name="hwkey_ls_torch_home_longpress">長按 Home 鍵</string>
-    <string name="hwkey_ls_torch_voldown_longpress">長按 音量 - 鍵</string>
+    <string name="hwkey_ls_torch_home_longpress">按住「Home 鍵」</string>
+    <string name="hwkey_ls_torch_voldown_longpress">按住「音量 - 鍵」</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">快速設定選項主開關 (需要重新啟動) </string>
@@ -761,8 +770,8 @@
     <!-- AppPickerPreference: shortcut support -->
     <string name="app_picker_applications">應用程式</string>
     <string name="app_picker_shortcuts">捷徑</string>
-    <string name="app_picker_shortcut_null_intent">由於該應用程式不支援捷徑，無法建立對應的捷徑</string>
-    <string name="app_picker_shortcut_cancelled">已經取消建立捷徑</string>
+    <string name="app_picker_shortcut_null_intent">由於該應用程式不支援捷徑，故無法建立對應的捷徑</string>
+    <string name="app_picker_shortcut_cancelled">已取消建立捷徑</string>
  
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">互換返回鍵與多工鍵位置</string>
@@ -781,7 +790,7 @@
     <string name="ringer_mode_sound">響鈴</string>
     <string name="ringer_mode_sound_vibrate">響鈴與震動</string>
 
-	<!-- Screen recording -->
+    <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">螢幕正被錄製</string>
     <string name="screenrecord_notif_title">正在錄製螢幕中</string>
     <string name="screenrecord_notif_stop">停止</string>
@@ -803,8 +812,8 @@
     <string name="screen_off_effect_fade">淡出 效果</string>
 
     <!-- Launcher tweaks -->
-    <string name="pref_cat_launcher_tweaks_title">啟動器選項</string>
-    <string name="pref_cat_launcher_tweaks_summary">僅套用於原生啟動器與 Google 即時資訊啟動器</string>
+    <string name="pref_cat_launcher_tweaks_title">桌面選項</string>
+    <string name="pref_cat_launcher_tweaks_summary">僅套用於原生桌面與 Google 即時資訊桌面</string>
     <string name="pref_cat_launcher_desktop_grid_title">桌面網格</string>
     <string name="pref_launcher_desktop_grid_info_title">使用其他數值將有可能導致小工具版面發生變異，請謹慎使用 (需要重新啟動啟動器)</string>
     <string name="pref_launcher_desktop_grid_rows_title">行數</string>
@@ -812,7 +821,7 @@
     <string name="desktop_grid_default">預設</string>
 
     <!-- HW Key Acctions: toggle screen recording -->
-    <string name="hwkey_action_screen_recording">開關螢幕錄製</string>
+    <string name="hwkey_action_screen_recording">開啟或關閉螢幕錄製</string>
 
     <!-- Full screen caller photo modes -->
     <string name="fullscreen_caller_disabled">停用</string>
@@ -821,15 +830,16 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">電池電量百分比文字</string>
+    <string name="battery_percent_text_show_title">顯示百分比文字</string>
     <string name="battery_percent_text_size_title">電池電量百分比文字大小</string>
-    <string name="battery_percent_text_size_larger">較大</string>
+    <string name="battery_percent_text_size_larger">大</string>
     <string name="battery_percent_text_size_normal">正常</string>
-    <string name="battery_percent_text_size_smaller">較小</string>
+    <string name="battery_percent_text_size_smaller">小</string>
     <string name="battery_percent_text_size_even_smaller">更小</string>
     <string name="battery_percent_text_size_smallest">最小</string>
     <string name="battery_percent_text_style_title">電池電量百分比文字風格</string>
     <string name="battery_percent_text_style_default">預設</string>
-    <string name="battery_percent_text_style_numbers_only">僅有數字 (沒有百分比符號) </string>
+    <string name="battery_percent_text_style_numbers_only">僅數字（無百分比符號）</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">電池設定</string>
@@ -990,7 +1000,7 @@
 
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">強制啟用三點選單鍵</string>
-    <string name="pref_force_overflow_menu_button_summary">需要重新啟動</string>
+    <string name="pref_force_overflow_menu_button_summary">必須重新啟動裝置</string>
 
     <!-- Navbar: always on bottom -->
     <string name="pref_navbar_always_on_bottom_title">總是在底部</string>
@@ -1019,7 +1029,7 @@
     <!-- Lockscreen: custom carrier text -->
     <string name="pref_lockscreen_carrier_text_title">自訂電訊商標題文字</string>
     <string name="carrier_text_default">預設</string>
-    <string name="carrier_text_empty">未有設定</string>
+    <string name="carrier_text_empty">尚未設定</string>
 
     <!-- Battery charged sound -->
     <string name="pref_battery_charged_sound_title">電池充滿音效</string>
@@ -1044,9 +1054,9 @@
     <string name="pref_pulse_notification_delay_summary">需要重新啟動</string>
 
     <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">清除所有近期應用程式</string>
-    <string name="pref_clear_recents_mode_0">點選清除全部；長按清除全部 (除了當前應用程式) </string>
-    <string name="pref_clear_recents_mode_1">點選清除全部 (除了當前應用程式) ；長按清除全部</string>
+    <string name="pref_clear_recents_mode_title">清除所有應用程式</string>
+    <string name="pref_clear_recents_mode_0">按一下清除全部，按住清除目前以外的應用程式</string>
+    <string name="pref_clear_recents_mode_1">按一下清除目前以外的應用程式，按住清除全部</string>
 
     <!-- Power menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">鎖定畫面停用電源選單</string>
@@ -1057,7 +1067,7 @@
     <string name="overflow_menu_disabled">強制停用</string>
 
     <!-- Key Action: Take screenshot -->
-    <string name="hwkey_action_screenshot">擷取螢幕截圖</string>
+    <string name="hwkey_action_screenshot">螢幕截圖</string>
 
     <!-- Key Action: Show volume panel -->
     <string name="hwkey_action_volume_panel">顯示音量面板</string>
@@ -1197,16 +1207,16 @@
     <string name="pref_statusbar_dt2s_summary">雙擊狀態列來使裝置休眠</string>
 
     <!-- Animation scales -->
-    <string name="animation_scale0">動畫關閉</string>
-    <string name="animation_scale1">動畫刻度 .25x</string>
-    <string name="animation_scale2">動畫刻度 .5x</string>
-    <string name="animation_scale3">動畫刻度 1x</string>
-    <string name="animation_scale4">動畫刻度 1.5x</string>
-    <string name="animation_scale5">動畫刻度 2x</string>
-    <string name="animation_scale6">動畫刻度 5x</string>
-    <string name="animation_scale7">動畫刻度 10x</string>
-    <string name="animation_scale8">動畫刻度 .75x</string>
-    <string name="animation_scale9">動畫刻度 1.25x</string>
+    <string name="animation_scale0">關閉動畫</string>
+    <string name="animation_scale1">.25 倍速</string>
+    <string name="animation_scale2">.5 倍速</string>
+    <string name="animation_scale3">1 倍速</string>
+    <string name="animation_scale4"> 1.5 倍速</string>
+    <string name="animation_scale5">2 倍速</string>
+    <string name="animation_scale6">5 倍速</string>
+    <string name="animation_scale7">10 倍速</string>
+    <string name="animation_scale8">.75 倍速</string>
+    <string name="animation_scale9">1.25 倍速</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">瓷貼標題風格</string>
@@ -1303,7 +1313,7 @@
     <string name="pref_data_traffic_omni_mode_title">監控模式</string>
     <string name="dt_omni_mode_in">下載</string>
     <string name="dt_omni_mode_out">上載</string>
-    <string name="dt_omni_mode_in_out">下載與上載</string>
+    <string name="dt_omni_mode_in_out">上傳與下載</string>
     <string name="byte_per_sec_abbr">B/s</string>
     <string name="bit_per_sec_abbr">b/s</string>
     <string name="kilo_abbr">k</string>
@@ -1330,7 +1340,7 @@
     <!-- Led control -->
     <string name="pref_led_control_title">通知控制</string>
     <string name="pref_led_control_summary">允許控制每一個應用程式的通知燈、音效與震動設定</string>
-    <string name="lc_please_wait">請稍後&#8230;</string>
+    <string name="lc_please_wait">請稍候&#8230;</string>
     <string name="lc_disabled">通知控制已停用</string>
     <string name="pref_lc_led_color_title">通知燈顏色</string>
     <string name="pref_lc_led_time_on_title">通知燈開啟秒數</string>
@@ -1423,18 +1433,18 @@
     <string name="pref_lc_qh_statusbar_icon_summary">當 [勿擾模式] 生效時，顯示通知圖示以茲識別</string>
 
     <!-- Battey percent text: charging color -->
-    <string name="battery_percent_text_charging_color_title">充電時的電池文字顏色</string>
+    <string name="battery_percent_text_charging_color_title">充電時電池的文字顏色</string>
 
     <!-- Notification control: Quiet hours for weekends-->
     <string name="pref_lc_qh_cat_weekdays_title">週日</string>
     <string name="pref_lc_qh_cat_weekend_title">週末</string>
 
     <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">停用行動數據網絡類別圖示</string>
+    <string name="pref_disable_data_network_type_icons_title">停用行動數據網絡類型圖示</string>
     <string name="pref_disable_data_network_type_icons_summary">停用在訊號條旁的 3G/G 圖示</string>
 
     <!-- Force English locale -->
-    <string name="pref_force_english_locale_title">強制使用英語介面</string>
+    <string name="pref_force_english_locale_title">強制使用英文語系（force English locale）</string>
 
     <!-- VolumePanel transparency -->
     <string name="pref_volume_panel_transparency_title">音量面板透明度</string>
@@ -1457,6 +1467,8 @@
     <!-- Signal cluster: LTE/4G indicator style -->
     <string name="pref_signal_cluster_lte_style_title">LTE 圖示風格</string>
     <string name="sc_lte_style_default">系統預設</string>
+    <string name="sc_lte_style_4g">4G</string>
+    <string name="sc_lte_style_lte">LTE</string>
 
     <!-- GB Actions: toggle airplane mode -->
     <string name="shortcut_airplane_mode">開關飛航模式</string>
@@ -1471,9 +1483,9 @@
     <string name="pref_increasing_ring_title">遞增鈴聲</string>
     <string name="increasing_ring_enable">啟用</string>
     <string name="increasing_ring_min_volume_title">起始鈴聲音量</string>
-    <string name="increasing_ring_volume_notice">請注意：\n 由於起始音量較已設定的鈴聲音量大，鈴聲將以已設定的鈴聲音量播放</string>
-    <string name="increasing_ring_interval_title">遞增間隙</string>
-    <string name="increasing_ring_interval_eachring">每次鈴聲播放後</string>
+    <string name="increasing_ring_volume_notice">請注意：\n由於起始音量比所設定的鈴聲音量大，鈴響時將以設定的鈴聲音量來播放。</string>
+    <string name="increasing_ring_interval_title">漸進間隔</string>
+    <string name="increasing_ring_interval_eachring">每次鈴響後</string>
     <string name="increasing_ring_interval_half_second">0.5 秒</string>
     <string name="increasing_ring_interval_1second">1 秒</string>
     <string name="increasing_ring_interval_2seconds">2 秒</string>
@@ -1485,11 +1497,11 @@
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
 
     <!-- HW Key Action: In-app search -->
-    <string name="hwkey_action_inapp_search">應用程式內的搜尋</string>
+    <string name="hwkey_action_inapp_search">於應用程式中搜尋</string>
 
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">強制使用從左至右版面配置方向</string>
-    <string name="pref_force_ltr_direction_summary">對所有從右至左的語系強制使用從左至右版面配置方向 (需要重新啟動) </string>
+    <string name="pref_force_ltr_direction_summary">對所有從右至左的語系強制使用從左至右版面配置方向（必須重新啟動裝置）</string>
 
     <!-- Volume panel transparency: opaque on interaction -->
     <string name="pref_volume_panel_opaque_title">當調節音量時取消透明度</string>
@@ -1499,11 +1511,11 @@
     <string name="shortcut_ringer_mode">設定鈴聲模式</string>
 
     <!-- Data traffic monitor: Only for mobile data -->
-    <string name="pref_data_traffic_active_mobile_only_title">只限行動數據</string>
+    <string name="pref_data_traffic_active_mobile_only_title">僅限行動上網流量</string>
 
     <!-- Dashed circle battery style -->
     <string name="battery_style_circle_dashed">虛線圓形電量指示器</string>
-    <string name="battery_style_circle_dashed_percent">虛線圓形電量指示器 (包含電量百分比)</string>
+    <string name="battery_style_circle_dashed_percent">虛線圓形電量指示器（含電量百分比）</string>
 
     <!-- Premium feature unlock via unlocker app -->
     <string name="premium_unlocked_message">感謝您的支持。當重新啟動 GravityBox 後進階功能將會被解鎖。
@@ -1564,7 +1576,7 @@
 
     <!-- Statusbar clock: date format options -->
     <string name="clock_date_disabled">停用</string>
-    <string name="clock_date_localized">基於語系來設定日期格式</string>
+    <string name="clock_date_localized">依系統語系決定日期格式</string>
     <string name="clock_date_format_1">日期格式：dd/MM</string>
     <string name="clock_date_format_2">日期格式：MM/dd</string>
     <string name="clock_date_format_3">日期格式：d MMM</string>
@@ -1576,11 +1588,11 @@
     <string name="pref_qs_battery_extended_title">在電池狀態瓷貼中顯示詳細資訊</string>
     <string name="pref_qs_battery_extended_summary">需要重新啟動</string>
     <string name="pref_qs_battery_temp_unit_title">溫度單位</string>
-    <string name="celsius">攝氏</string>
-    <string name="fahrenheit">華氏</string>
+    <string name="celsius">攝氏（&#8451;）</string>
+    <string name="fahrenheit">華氏（&#8457;）</string>
 
     <!-- Headset plug/unplug actions -->
-    <string name="pref_cat_headset_actions_title">插拔耳機觸發的動作</string>
+    <string name="pref_cat_headset_actions_title">插入或移除耳機時執行的動作</string>
     <string name="pref_headset_action_plug_title">當插入耳機時</string>
     <string name="pref_headset_action_unplug_title">當拔除耳機時</string>
 
@@ -1624,7 +1636,7 @@
     <!-- UNC Active Screen Mode -->
     <string name="pref_lc_active_screen_mode_title">主動螢幕喚醒模式</string>
     <string name="lc_active_screen_mode_disabled">停用</string>
-    <string name="lc_active_screen_mode_nothing">只喚醒螢幕</string>
+    <string name="lc_active_screen_mode_nothing">僅喚醒螢幕</string>
     <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
@@ -1650,9 +1662,9 @@
 
     <!-- UNC Active Screen: heads up position -->
     <string name="pref_unc_as_headsup_position_title">浮動通知位置</string>
-    <string name="headsup_position_top">頂部</string>
+    <string name="headsup_position_top">置頂</string>
     <string name="headsup_position_center">置中</string>
-    <string name="headsup_position_bottom">底部</string>
+    <string name="headsup_position_bottom">置底</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">數據用量 2</string>
@@ -1789,13 +1801,13 @@
     <string name="pref_signal_cluster_lollipop_icons_summary">需要重新啟動</string>
 
     <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">信息</string>
+    <string name="pref_cat_phone_messaging_title">訊息</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">警告</string>
-    <string name="compat_warning_message">只供原生 Android 或 Google Play Edition 裝置使用! \n\n 在客製化的 OEM ROM (如: Touchwiz，Sense，Xperia) 內使用並未經過測試，並可能導致意料之外的結果。 \n\n如果仍想要繼續，請您自己要承擔風險而且開發者將不會提供正式支援。如您想了解更多關於相容性的資料，請到<a href="http://forum.xda-developers.com/showthread.php?t=2554049"> XDA 討論串內查閱。 </a></string>
-    <string name="compat_warning_ok_stage1">我明白了</string>
-    <string name="compat_warning_ok_stage2">我真的明白相關風險了!</string>
+    <string name="compat_warning_message">僅供原生 Android 或 Google Play 版本之裝置使用！\n\n本程式並未在任何客製化程度較大的系統（例如 Touchwiz, Sense, Xperia 等）中測試，將可能發生未預期的結果。\n\n若您仍要繼續使用，請自行承擔風險，開發人員將無法提供相關協助。若您想瞭解更多關於相容性的資訊，歡迎前往 </string>
+    <string name="compat_warning_ok_stage1">我知道了</string>
+    <string name="compat_warning_ok_stage2">我真的清楚了！</string>
 
     <!-- UNC Active screen: Pocket mode -->
     <string name="pref_unc_as_pocket_mode_title">袋中模式</string>
@@ -1826,7 +1838,7 @@
 
     <!-- Data traffic monitor: display mode -->
     <string name="pref_data_traffic_display_mode_title">顯示模式</string>
-    <string name="dt_display_mode_always">永遠顯示 (當有可用的網絡連線時)</string>
+    <string name="dt_display_mode_always">永遠顯示（當有可用的網絡連線時）</string>
     <string name="dt_display_mode_dm">當使用 Android 標準下載管理員時</string>
     <string name="dt_display_mode_pt">當已設定在狀態列中顯示進度條時</string>
 
@@ -1843,8 +1855,8 @@
     <string name="pref_cat_battery_bar_title">電量條</string>
     <string name="pref_battery_bar_show_title">顯示電量條</string>
     <string name="pref_battery_bar_position_title">位置</string>
-    <string name="bbar_position_top">上邊緣</string>
-    <string name="bbar_position_bottom">下邊緣</string>
+    <string name="bbar_position_top">頂部</string>
+    <string name="bbar_position_bottom">底部</string>
     <string name="pref_battery_bar_margin_title">邊距設定</string>
     <string name="pref_battery_bar_thickness_title">粗幼</string>
     <string name="pref_battery_bar_charge_anim_title">充電動畫提示</string>
@@ -1864,12 +1876,12 @@
     <string name="pref_statusbar_download_progress_margin_title">邊距設定</string>
 
     <!-- Key actions: single-tap for menu button -->
-    <string name="hwkey_menu_singletap_dialog_title">選單鍵單擊動作</string>
+    <string name="hwkey_menu_singletap_dialog_title">點一下「選單鍵」執行</string>
 
     <!-- Key actions: single-tap for back button -->
-    <string name="hwkey_back_singletap_dialog_title">返回鍵單擊動作</string>
+    <string name="hwkey_back_singletap_dialog_title">點一下「返回鍵」執行</string>
 
     <!-- Key actions: double-tap for recents button -->
-    <string name="hwkey_recents_doubletap_dialog_title">多工鍵雙擊動作</string>
+    <string name="hwkey_recents_doubletap_dialog_title">點兩下「多工鍵」執行</string>
 
 </resources>
