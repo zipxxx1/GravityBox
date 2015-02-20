@@ -30,13 +30,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,7 @@ public class ModPowerMenu {
     private static Drawable mExpandedDesktopIcon;
     private static Drawable mScreenshotIcon;
     private static Drawable mScreenrecordIcon;
+    private static boolean mIconsTinted;
     private static List<IIconListAdapterItem> mRebootItemList;
     private static String mRebootConfirmStr;
     private static String mRebootConfirmRecoveryStr;
@@ -111,6 +113,7 @@ public class ModPowerMenu {
                            GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
                    Resources res = mContext.getResources();
                    Resources gbRes = gbContext.getResources();
+                   gbRes.updateConfiguration(res.getConfiguration(), res.getDisplayMetrics());
 
                    int rebootStrId = res.getIdentifier("factorytest_reboot", "string", PACKAGE_NAME);
                    int rebootSoftStrId = R.string.reboot_soft;
@@ -136,25 +139,6 @@ public class ModPowerMenu {
                            R.drawable.ic_lock_screenshot_vibeui : R.drawable.ic_lock_screenshot);
                    mScreenrecordIcon = gbRes.getDrawable(Utils.hasLenovoVibeUI() ?
                            R.drawable.ic_lock_screen_record_vibeui : R.drawable.ic_lock_screen_record);
-
-                   // colorize icons to make them look good on light backgrounds
-                   int airplaneIconId = res.getIdentifier("ic_lock_airplane_mode_off", "drawable",
-                           !Utils.hasLenovoCustomUI() ? PACKAGE_NAME : "lenovo");
-                   if (airplaneIconId != 0) {
-                       Drawable airplaneIcon = res.getDrawable(airplaneIconId);
-                       Bitmap bitmap = Utils.drawableToBitmap(airplaneIcon);
-                       int airplaneIconColor = Utils.getBitmapPredominantColor(bitmap);
-                       if (airplaneIconColor != Color.WHITE) {
-                           int iconColor = Utils.hasLenovoVibeUI() ? Color.parseColor("#4b4b4b") : Color.GRAY;
-                           mRebootIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                           mRebootSoftIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                           mRecoveryIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                           mBootloaderIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                           mExpandedDesktopIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                           mScreenshotIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                           mScreenrecordIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP);
-                       }
-                   }
 
                    mRebootItemList = new ArrayList<IIconListAdapterItem>();
                    mRebootItemList.add(new BasicIconListItem(mRebootStr, null, mRebootIcon, null));
@@ -193,6 +177,24 @@ public class ModPowerMenu {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mContext == null) return;
+
+                    // tint icons with colorControlNormal of current power dialog theme
+                    if (!mIconsTinted) {
+                        Dialog dlg = (Dialog) param.getResult();
+                        TypedValue value = new TypedValue();
+                        int[] attribute = new int[] { android.R.attr.colorControlNormal };
+                        TypedArray array = dlg.getContext().obtainStyledAttributes(value.resourceId, attribute);
+                        int iconColor = array.getColor(0, Color.GRAY);
+                        array.recycle();
+                        mRebootIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN);
+                        mRebootSoftIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN);
+                        mRecoveryIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN);
+                        mBootloaderIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN);
+                        mExpandedDesktopIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN);
+                        mScreenshotIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN);
+                        mScreenrecordIcon.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN);
+                        mIconsTinted = true;
+                    }
 
                     mRebootConfirmRequired = prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_REBOOT_CONFIRM_REQUIRED, true);
