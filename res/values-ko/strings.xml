@@ -727,9 +727,6 @@
     <string name="pref_force_overflow_menu_button_title">강제로 오버플로 메뉴 버튼 보이기</string>
     <string name="pref_force_overflow_menu_button_summary">재시작 필요</string>
 
-    <string name="pref_navbar_always_on_bottom_title">항상 하단에 배치</string>
-    <string name="pref_navbar_always_on_bottom_summary">네비게이션 바가 항상 하단에 배치되도록 설정합니다. (재시작 필요)</string>
-
     <string name="pref_navbar_custom_key_swap_title">메뉴 키와 전환</string>
     
     <string name="pref_phone_nonintrusive_incoming_call_title">간섭 없는 수신 전화</string>

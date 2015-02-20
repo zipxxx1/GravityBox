@@ -924,10 +924,6 @@
     <string name="pref_force_overflow_menu_button_title">Forçar botão de estouro</string>
     <string name="pref_force_overflow_menu_button_summary">Necessário reiniciar</string>
 
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">Sempre em baixo</string>
-    <string name="pref_navbar_always_on_bottom_summary">EXPERIMENTAL! Permite forçar a barra de navegação a ficar sempre em baixo na orientação de ecrã horizontal (necessário reiniciar)</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Trocar posição com tecla Menu</string>
 

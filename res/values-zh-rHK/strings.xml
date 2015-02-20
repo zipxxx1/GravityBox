@@ -933,10 +933,6 @@
     <string name="pref_force_overflow_menu_button_title">強制啟用三點選單鍵</string>
     <string name="pref_force_overflow_menu_button_summary">需要重新啟動</string>
 
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">總是在底部</string>
-    <string name="pref_navbar_always_on_bottom_summary">強制讓導航列顯示在橫向底部 (需要重新啟動) </string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">互換自訂按鍵與選單鍵位置</string>
 

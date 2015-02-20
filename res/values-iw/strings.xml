@@ -919,10 +919,6 @@
     <string name="pref_force_overflow_menu_button_title">כפה כפתור תפריט בשלוש נקודות</string>
     <string name="pref_force_overflow_menu_button_summary">דורש איתחול</string>
 
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">תמיד למטה</string>
-    <string name="pref_navbar_always_on_bottom_summary">כופה את מיקום שורת הניווט בתחתית המסך במצג אנכי (דורש איתחול)</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">החלף עם כפתור תפריט</string>
 

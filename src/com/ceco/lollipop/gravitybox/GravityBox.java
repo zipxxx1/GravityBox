@@ -67,10 +67,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModVolumePanel.initZygote(prefs);
         ModTelephony.initZygote(prefs);
 
-        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false)) {
-            ModNavigationBar.initZygote(prefs);
-        }
-
         // MTK
         if (Utils.isMtkDevice()) {
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_DEV_OPTS, false)) {

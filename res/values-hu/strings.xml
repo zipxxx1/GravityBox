@@ -943,10 +943,6 @@
     <string name="pref_force_overflow_menu_button_title">Túlnyúló menü gomb kényszerítése</string>
     <string name="pref_force_overflow_menu_button_summary">Újraindítás szükséges</string>
 
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">Mindig alul</string>
-    <string name="pref_navbar_always_on_bottom_summary">KÍSÉRLETI! Navigációs sáv alsó pozícióba kényszerítése fekvő tájolásnál (újraindítás szükséges)</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Pozíció felcserélése menü gombbal</string>
 

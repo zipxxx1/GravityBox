@@ -899,10 +899,6 @@
     <string name="pref_force_overflow_menu_button_title">Force overflow menu button</string>
     <string name="pref_force_overflow_menu_button_summary">Yeniden başlatma gerektirir</string>
 
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">Her zaman aşağıda</string>
-    <string name="pref_navbar_always_on_bottom_summary">Yatay görünümde gez.çubuğunun altta kalması için zorlanır(yeniden başlatma gerekli)</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Menü tuşuyla yerini değiştir</string>
 

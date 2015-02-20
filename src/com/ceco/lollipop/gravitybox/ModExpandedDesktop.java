@@ -238,7 +238,6 @@ public class ModExpandedDesktop {
                 mNavbarWidthScaleFactor = 
                         (float) prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_WIDTH, 100) / 100f;
                 mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
-                        !prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM, false) &&
                         prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
             }
 

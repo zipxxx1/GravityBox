@@ -1062,16 +1062,7 @@
                 android:key="pref_navbar_left_handed"
                 android:title="@string/pref_navbar_left_handed_title"
                 android:summary="@string/pref_navbar_left_handed_summary"
-                android:defaultValue="false"
-                android:dependency="pref_navbar_always_on_bottom" />
-
-            <CheckBoxPreference 
-                android:key="pref_navbar_always_on_bottom"
-                android:title="@string/pref_navbar_always_on_bottom_title"
-                android:summary="@string/pref_navbar_always_on_bottom_summary"
-                android:defaultValue="false"
-                android:dependency="pref_navbar_enable"
-                android:disableDependentsState="true" />
+                android:defaultValue="false" />
 
         </PreferenceCategory>
 

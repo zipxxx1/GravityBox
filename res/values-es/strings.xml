@@ -942,10 +942,6 @@
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Forzar desbordamiento del botón menú</string>
     <string name="pref_force_overflow_menu_button_summary">Requiere reinicio</string>
-    
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">Siempre abajo</string>
-    <string name="pref_navbar_always_on_bottom_summary">Fuerza a la barra de navegación a permanecer abajo en orientación panorámica (requiere reinicio)</string>
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Intercambiar con botón menú</string>

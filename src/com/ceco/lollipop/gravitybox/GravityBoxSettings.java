@@ -528,7 +528,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NAVBAR_OVERRIDE = "pref_navbar_override";
     public static final String PREF_KEY_NAVBAR_ENABLE = "pref_navbar_enable";
     public static final String PREF_KEY_NAVBAR_LEFT_HANDED = "pref_navbar_left_handed";
-    public static final String PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM = "pref_navbar_always_on_bottom";
     public static final String PREF_KEY_NAVBAR_HEIGHT = "pref_navbar_height";
     public static final String PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE = "pref_navbar_height_landscape";
     public static final String PREF_KEY_NAVBAR_WIDTH = "pref_navbar_width";
@@ -831,7 +830,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY,
             PREF_KEY_NAVBAR_RING_TARGETS_ENABLE,
             PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON,
-            PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM,
             PREF_KEY_SMART_RADIO_ENABLE,
             PREF_KEY_PULSE_NOTIFICATION_DELAY,
             PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH,

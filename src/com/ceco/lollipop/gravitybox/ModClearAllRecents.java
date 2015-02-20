@@ -84,7 +84,6 @@ public class ModClearAllRecents {
     private static int mRamUsageBarVerticalMargin;
     private static int mRamUsageBarHorizontalMargin;
     private static boolean mPreserveCurrentTask;
-    private static boolean mNavbarAlwaysOnBottom;
     private static View mRecentsPanelView;
 
     private static void log(String message) {
@@ -123,7 +122,6 @@ public class ModClearAllRecents {
             Class<?> recentVerticalScrollView = XposedHelpers.findClass(CLASS_RECENT_VERTICAL_SCROLL_VIEW, classLoader);
             Class<?> recentHorizontalScrollView = XposedHelpers.findClass(CLASS_RECENT_HORIZONTAL_SCROLL_VIEW, classLoader);
 
-            mNavbarAlwaysOnBottom = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM, false);
 
             mMemInfoReader = new MemInfoReader();
 
@@ -377,19 +375,19 @@ public class ModClearAllRecents {
                         mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_TOP, 0), 
                         res.getDisplayMetrics());
                 int marginRight = (gravity == 53 && orientation == Configuration.ORIENTATION_LANDSCAPE
-                        && Utils.isPhoneUI(context) && !mNavbarAlwaysOnBottom) ?
+                        && Utils.isPhoneUI(context)) ?
                         (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                                 mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
                                 res.getDisplayMetrics()): 0;
                 lparams.setMargins(0, marginTop, marginRight, 0);
             } else {
                 int marginBottom = (orientation == Configuration.ORIENTATION_PORTRAIT || 
-                                        !Utils.isPhoneUI(context) || mNavbarAlwaysOnBottom) ?
+                                        !Utils.isPhoneUI(context)) ?
                         (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                         mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
                         res.getDisplayMetrics()) : 0;
                 int marginRight = (gravity == 85 && orientation == Configuration.ORIENTATION_LANDSCAPE
-                        && Utils.isPhoneUI(context) && !mNavbarAlwaysOnBottom) ?
+                        && Utils.isPhoneUI(context)) ?
                         (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                                 mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
                                 res.getDisplayMetrics()): 0;
@@ -481,12 +479,12 @@ public class ModClearAllRecents {
                     mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_TOP, 0), 
                     res.getDisplayMetrics()) : 0;
             final int marginBottom = (!rbOnTop && (orientation == Configuration.ORIENTATION_PORTRAIT ||
-                                                    !Utils.isPhoneUI(context) || mNavbarAlwaysOnBottom)) ? 
+                                                    !Utils.isPhoneUI(context))) ? 
                     (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                     mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
                     res.getDisplayMetrics()) : 0;
             final int marginRight = orientation == Configuration.ORIENTATION_LANDSCAPE && 
-                                                        Utils.isPhoneUI(context) && !mNavbarAlwaysOnBottom ?
+                                                        Utils.isPhoneUI(context) ?
                             (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                                     mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
                                     res.getDisplayMetrics()) : 0;

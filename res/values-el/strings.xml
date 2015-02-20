@@ -933,10 +933,6 @@
     <string name="pref_force_overflow_menu_button_title">Επιβολή υπερχείλισης πλήκτρου μενού</string>
     <string name="pref_force_overflow_menu_button_summary">Απαιτείται επανεκκίνηση</string>
 
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">Πάντα στο κάτω μέρος</string>
-    <string name="pref_navbar_always_on_bottom_summary">Επιβάλει την γραμμή πλοήγησης να βρίσκεται πάντα στο κάτω μέρος για τον οριζόντιο προσανατολισμό (απαιτείται επανεκκίνηση)</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Αλλαγή με πλήκτρο μενού</string>
 

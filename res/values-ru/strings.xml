@@ -947,10 +947,6 @@
     <string name="pref_force_overflow_menu_button_title">Отображение троеточия меню</string>
     <string name="pref_force_overflow_menu_button_summary">Необходима перезагрузка</string>
 
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">Всегда внизу</string>
-    <string name="pref_navbar_always_on_bottom_summary">Навигационная панель остаётся внизу в ландшафтном режиме (необходима перезагрузка)</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Поменять местами с меню</string>
 

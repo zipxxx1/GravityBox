@@ -919,10 +919,6 @@
     <string name="pref_force_overflow_menu_button_title">Wymuś przycisk Overflow</string>
     <string name="pref_force_overflow_menu_button_summary">Wymusza wyświetlanie przycisku z trzema kropkami w menu aplikacji (wymagany restart)</string>
 
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">Zawsze na dole</string>
-    <string name="pref_navbar_always_on_bottom_summary">EKSPERYMENTALNE! Wymusza położenie paska nawigacji na dole w przypadku orientacji poziomej ekranu (wymagany restart)</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Zamień z przyciskiem MENU</string>
 

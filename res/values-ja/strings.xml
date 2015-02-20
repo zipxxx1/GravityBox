@@ -767,9 +767,6 @@
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">メニューボタン表示を強制</string>
     <string name="pref_force_overflow_menu_button_summary">再起動すると反映されます。</string>
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">常に下部に表示</string>
-    <string name="pref_navbar_always_on_bottom_summary">横画面でもナビバーを下に表示するようにします。(要再起動)</string>
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">メニューキーと入れ替え</string>
     <!-- Phone: Non-intrusive incoming call -->

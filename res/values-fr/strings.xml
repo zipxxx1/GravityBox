@@ -944,10 +944,6 @@
     <string name="pref_force_overflow_menu_button_title">Forcer le bouton menu de débordement</string>
     <string name="pref_force_overflow_menu_button_summary">Nécessite un redémarrage</string>
 
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">Toujours en bas</string>
-    <string name="pref_navbar_always_on_bottom_summary">EXPÉRIMENTAL! Force la barre de navigation à être en bas d\'écran en orientation paysage (nécessite un redémarrage)</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Intervertir avec la touche menu</string>
 

@@ -914,10 +914,6 @@
     <string name="pref_force_overflow_menu_button_title">Vynucené menu tlačítko</string>
     <string name="pref_force_overflow_menu_button_summary">Vynutí zobrazení menu tlačítka v aplikacích (vyžaduje restart)</string>
 
-    <!-- Navbar: always on bottom -->
-    <string name="pref_navbar_always_on_bottom_title">Vždy na spodku</string>
-    <string name="pref_navbar_always_on_bottom_summary">EXPERIMENTÁLNÍ! Vynutí zobrazení navigační lišty na spodku obrazovky v režimu na šířku (vyžaduje restart)</string>
-
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Přehodit s menu tlačítkem</string>
 
