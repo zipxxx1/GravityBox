@@ -230,10 +230,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Hızlı yeniden başlat</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Düz siyah arkaplan</string>
-    <string name="pref_holo_bg_solid_black_summary">Varsayılan Holo sistem teması için siyah-gri renk geçişi yerine düz siyah arkaplan kullan (yeniden başlatma gerektirir)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Her satırdaki kare</string>
     <string name="pref_qs_tiles_per_row_summary">Her bir satırda kaç tane HızlıAyarlar karesi gösterilecek? Kareler gerektiğinde yeniden boyutlandırılır ve sadece dikey moda uygulanır.</string>
@@ -321,10 +317,6 @@
     <string name="button_backlight_mode_always_on">Ekran açıkken her zaman açık</string>
     <string name="pref_button_backlight_notifications_title">Tuş arka ışığı bildirimleri</string>
     <string name="pref_button_backlight_notifications_summary">DENEYİMSEL! Bildirim varken arka ışıklar yanıp söner. Aygıtınızın LED bildirimi yoksa kullanın. Pili tüketebilir.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Holo Renk Bandı</string>
-    <string name="pref_holo_bg_dither_summary">Holo arkaplanını rengi bandı olmayan bir arkaplanla değiştirir (yeniden başlatma gerektirir)</string>
 
     <!-- Disable hardware keys for pie -->
     <string name="pref_hwkeys_disable_title">Donanım tuşlarını devre dışı bırak</string>

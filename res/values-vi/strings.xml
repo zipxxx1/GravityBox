@@ -231,10 +231,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Khởi đông nhanh</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Hình nền đặc đen</string>
-    <string name="pref_holo_bg_solid_black_summary">Sử dụng hình nền đặc đen mặc định của hệ thống (Trang bị thay đổi khi khởi động lại)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Số biểu tượng trên dòng</string>
     <string name="pref_qs_tiles_per_row_summary">Định nghĩ có bao nhiêu cột biểu tượng trên dòng quicksettings.</string>
@@ -322,10 +318,6 @@
     <string name="button_backlight_mode_always_on">Luôn sáng kh màn hình bật</string>
     <string name="pref_button_backlight_notifications_title">Nút back sáng thông báo</string>
     <string name="pref_button_backlight_notifications_summary">Nhấp nháy đèn nền nút khi có thông báo, sử dụng khi thiết bị của bạn ko có đèn led thông báo cân thay thế và lưu ý có thể hao pin.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Hòa sắc nền Holo</string>
-    <string name="pref_holo_bg_dither_summary">Thay thế hóa sắc chuẩn Holo với màu được lựa chọn trong chế độ hòa sắc (yêu cầu khởi động lại)</string>
 
     <!-- Disable hardware keys for pie -->
     <string name="pref_hwkeys_disable_title">Tắt phím cứng</string>

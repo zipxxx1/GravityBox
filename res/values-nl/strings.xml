@@ -251,10 +251,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Soft reboot</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Volledig zwarte achtergrond</string>
-    <string name="pref_holo_bg_solid_black_summary">Gebruik volledig zwarte achtergrond voor default Holo systeemthema ipv zwart-grijze gradient (herstart vereist)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Tegels per rij</string>
     <string name="pref_qs_tiles_per_row_summary">Stelt in hoe veel Quicksettings tegels afgebeeld worden per rij (van toepassing op portretmodus bij telefoons of elke orientatie bij tablets)</string>
@@ -346,10 +342,6 @@
     <string name="button_backlight_mode_always_on">Altijd aan als scherm aan is</string>
     <string name="pref_button_backlight_notifications_title">Knoppen backlight meldingen</string>
     <string name="pref_button_backlight_notifications_summary">EXPERIMENTEEL! Knoppen backlight knippert als er meldingen zijn. Gebruik indien je toestel geen notificatie LED heeft. Kan batterijgebruik verhogen.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Geditherde Holo achtergrond</string>
-    <string name="pref_holo_bg_dither_summary">Vervangt standaard Holo achtergrond door een geditherde om color banding te voorkomen (herstart vereist)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Navigatieknoppen uitschakelen</string>

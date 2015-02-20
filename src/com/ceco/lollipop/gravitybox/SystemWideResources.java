@@ -16,10 +16,7 @@
 package com.ceco.lollipop.gravitybox;
 
 import android.content.res.Resources;
-import android.content.res.XModuleResources;
 import android.content.res.XResources;
-
-import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -37,24 +34,9 @@ public class SystemWideResources {
             Resources systemRes = XResources.getSystem();
             Utils.TriState triState;
 
-            XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, null);
-
             int translucentDecor = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_TRANSLUCENT_DECOR, "0"));
             if (translucentDecor != 0) {
                 XResources.setSystemWideReplacement("android", "bool", "config_enableTranslucentDecor", translucentDecor == 1);
-            }
-
-            boolean holoBgDither = prefs.getBoolean(GravityBoxSettings.PREF_KEY_HOLO_BG_DITHER, false);
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_HOLO_BG_SOLID_BLACK, false)) {
-                XResources.setSystemWideReplacement(
-                    "android", "drawable", "background_holo_dark", modRes.fwd(R.drawable.background_holo_dark_solid));
-            } else if (holoBgDither) {
-                XResources.setSystemWideReplacement(
-                        "android", "drawable", "background_holo_dark", modRes.fwd(R.drawable.background_holo_dark));
-            }
-            if (holoBgDither) {
-                XResources.setSystemWideReplacement(
-                        "android", "drawable", "background_holo_light", modRes.fwd(R.drawable.background_holo_light));
             }
 
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false)) {

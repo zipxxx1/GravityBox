@@ -257,10 +257,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Reinicio de software</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Fondo negro</string>
-    <string name="pref_holo_bg_solid_black_summary">Usa un fondo negro para los sistemas con tema Holo en lugar del degradado (requiere reinicio)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Casillas por fila</string>
     <string name="pref_qs_tiles_per_row_summary">Define cuántas casillas de ajustes se mostrarán por fila, redimensionándose automáticamente (se aplica en el modo retrato en móviles o en cualquier orientación en tablets)</string>
@@ -352,10 +348,6 @@
     <string name="button_backlight_mode_always_on">Siempre activada con pantalla encendida</string>
     <string name="pref_button_backlight_notifications_title">Notificaciones con la retroiluminación</string>
     <string name="pref_button_backlight_notifications_summary">La retroiluminación parpadea cuando hay notificaciones. Usar si tu dispositivo no tiene LED de notificaciones. Puede consumir batería.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Fondo Holo interpolado</string>
-    <string name="pref_holo_bg_dither_summary">Reemplaza el fondo Holo estándar con otro interpolado para suprimir el \'color banding\' (requiere reinicio)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Desactivar botones de navegación</string>

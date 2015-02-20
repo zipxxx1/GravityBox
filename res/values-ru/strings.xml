@@ -260,10 +260,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Мягкая перезагрузка</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Чёрный фон</string>
-    <string name="pref_holo_bg_solid_black_summary">Использовать сплошной чёрный фон для системной Holo-темы по умолчанию вместо темно-серого градиента (необходима перезагрузка)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Количество плиток в ряду</string>
     <string name="pref_qs_tiles_per_row_summary">Установка количества плиток быстрых настроек в одном ряду. Размеры изменятся соответственно (применимо к портретному режиму на телефонах или любому на планшетах)</string>
@@ -355,10 +351,6 @@
     <string name="button_backlight_mode_always_on">Включать всегда, когда включен экран</string>
     <string name="pref_button_backlight_notifications_title">Уведомления подсветкой клавиш</string>
     <string name="pref_button_backlight_notifications_summary">ЭКСПЕРИМЕНТАЛЬНАЯ ФУНКЦИЯ! Мигающая подсветка клавиш при уведомлениях. Использовать при отсутствии на устройстве светодиода. Может привести к расходу батареи.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Сглаженный Holo фон</string>
-    <string name="pref_holo_bg_dither_summary">Замена стандартного фона на сглаженный для устранения полосок градиента (необходима перезагрузка)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Отключить нав. кнопки</string>

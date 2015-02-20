@@ -257,10 +257,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Riavvio veloce</string>
 
-    <!-- Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Sfondo nero</string>
-    <string name="pref_holo_bg_solid_black_summary">Imposta uno sfondo nero come colore predefinito del tema Holo invece del grigio scuro sfumato (richiede riavvio)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Caselle per riga</string>
     <string name="pref_qs_tiles_per_row_summary">Definisce quante caselle visualizzare su una riga. Le caselle verranno scalate di conseguenza.</string>
@@ -352,10 +348,6 @@
     <string name="button_backlight_mode_always_on">Sempre attiva se lo schermo è acceso</string>
     <string name="pref_button_backlight_notifications_title">Notifiche mediante illuminazione tasti</string>
     <string name="pref_button_backlight_notifications_summary">SPERIMENTALE! Accendi tasti se c\'è una notifica e lo schermo è spento. Usare nel caso il telefono non abbia il LED di notifica</string>
-	
-	    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Sfondo Holo dithered</string>
-    <string name="pref_holo_bg_dither_summary">Sostituisce lo sfondo Holo standard con uno dithered per eliminare la distorsione dei colori (richiede riavvio)</string>
 
     <!-- Disable hardware keys for pie -->
     <string name="pref_hwkeys_disable_title">Disabilita tasti hardware</string>

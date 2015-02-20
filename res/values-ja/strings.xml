@@ -221,9 +221,6 @@
     <string name="phone_flip_action_dismiss">拒否</string>
     <!-- Soft reboot -->
     <string name="reboot_soft">ソフトリブート</string>
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">黒一色のHolo背景</string>
-    <string name="pref_holo_bg_solid_black_summary">Holoシステムテーマの背景を黒一色にします。(要再起動)</string>
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">行毎のタイル数</string>
     <string name="pref_qs_tiles_per_row_summary">行毎に表示するタイル数を設定します。タイルはタイル数に合わせてリサイズされ、縦画面にのみ適用されます。</string>
@@ -297,9 +294,6 @@
     <string name="button_backlight_mode_always_on">画面オン中は常時点灯</string>
     <string name="pref_button_backlight_notifications_title">ボタンバックライトで通知</string>
     <string name="pref_button_backlight_notifications_summary">実験的です! 通知があるときにボタンのバックライトを点滅させます。通知LEDがない端末でご使用ください。バッテリーを消費します。</string>
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">ディザHolo背景</string>
-    <string name="pref_holo_bg_dither_summary">ディザ処理した背景に変更します。(要再起動)</string>
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">ハードキーを無効化</string>
     <string name="pref_hwkeys_disable_summary">パイ操作が有効なときハードキーを無効化します。ハードキーアクションは動作します。(ハードキーのある端末向け)</string>

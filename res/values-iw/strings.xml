@@ -243,10 +243,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">איתחול מהיר</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">רקע שחור אחיד</string>
-    <string name="pref_holo_bg_solid_black_summary">השתמש ברקע שחור אחיד עבור ערכת Holo dark במקום הרקע השחור-אפור. (דורש איתחול)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">מספר אריחים בשורה</string>
     <string name="pref_qs_tiles_per_row_summary">מגדיר את מספר אריחי QuickSettings להצגה בכל שורה, תוך שינוי גודל של אריחים בהתאם (חל על מצג אנכי במכשירי טלפון ועל כל מצג בטאבלטים)</string>
@@ -338,10 +334,6 @@
     <string name="button_backlight_mode_always_on">תמיד מופעל כאשר המסך מופעל</string>
     <string name="pref_button_backlight_notifications_title">התראות באמצעות תאורה אחורית</string>
     <string name="pref_button_backlight_notifications_summary">ניסיוני! בעת התראה מופיע היבהוב של תאורה אחורית בכפתורים. השתמש במידה ואין התראות LED במכשירך. עלול לצרוך סוללה.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">רקע מרוצד</string>
-    <string name="pref_holo_bg_dither_summary">מחליף את הרקע הסטנדרטי של Holo dark ברקע מרוצד על מנת להפחית את התפצלות הצבעים בתצוגה דיגיטלית(דורש איתחול)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">ביטול מקשי ניווט</string>

@@ -251,10 +251,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Soft reboot</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Latarbelakang hitam pekat</string>
-    <string name="pref_holo_bg_solid_black_summary">Guna latar belakang hitam selain kelabu (perlukan reboot)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Tiles dalam baris</string>
     <string name="pref_qs_tiles_per_row_summary">Tentukan berapa tile untuk setiap baris, betulkan size tile (hanya untuk potrait dan lanscape utk semua fon)</string>
@@ -346,10 +342,6 @@
     <string name="button_backlight_mode_always_on">Sentiasa hidupkan ketika skrin hidup</string>
     <string name="pref_button_backlight_notifications_title">Notifikasi lampu belakang</string>
     <string name="pref_button_backlight_notifications_summary">PERCUBAAN! kelipkan lampu belakang jika ada notifikasi. Guna jika fon anda tiada LED. Boleh serap bateri secara rabak.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Latar belakang HOLO yang advance</string>
-    <string name="pref_holo_bg_dither_summary">Gantikan Holo biasa dgn advance untuk warne yang lebih purer(perlukan reboot)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Matikan bar navigasi</string>

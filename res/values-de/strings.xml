@@ -250,10 +250,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Software Neustart</string>
 
-    <!-- Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Schwarzer Hintergrund</string>
-    <string name="pref_holo_bg_solid_black_summary">Ersetzt den Standardhintergrund mit schwarz-grauem Verlauf durch einen komplett schwarzen (erfordert Neustart)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Schnelleinstellungen pro Reihe</string>
     <string name="pref_qs_tiles_per_row_summary">Legt fest, wie viele Schnelleinstellungen in einer Reihe im Hochformat angezeigt werden</string>
@@ -345,10 +341,6 @@
     <string name="button_backlight_mode_always_on">Aktiv, wenn Bildschirm eingeschaltet ist</string>
     <string name="pref_button_backlight_notifications_title">Aktiv, wenn Benachrichtigungen vorliegen</string>
     <string name="pref_button_backlight_notifications_summary">EXPERIMENTELL! Blinkt wenn eine Benachrichtigung vorliegt (als Alternative für Geräte ohne Benachrichtigungs-LED). Erhöht Akkuverbrauch!</string>
-
-    <!-- Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Geditherter Hintergrund</string>
-    <string name="pref_holo_bg_dither_summary">Ersetzt den Standardhintergrund mit schwarz-grauem Verlauf durch einen geditherten, um Farbstreifenbildung zu minimieren (erfordert Neustart)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Navigationstasten deaktivieren</string>

@@ -250,10 +250,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Επανεκκίνηση λογισμικού</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Μαύρο φόντο</string>
-    <string name="pref_holo_bg_solid_black_summary">Χρήση μαύρου φόντου ως προεπιλογή για το Holo θέμα αντί του μαύρου-γκρι (απαιτείται επανεκκίνηση)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Πλακίδια ανά σειρά</string>
     <string name="pref_qs_tiles_per_row_summary">Ορίζει πόσα QuickSettings πλακίδια θα εμφανίζονται ανά σειρά. Τα τμήματα θα αλλάζουν μέγεθος ανάλογα. Αφορά τον κατακόρυφο προσανατολισμό.</string>
@@ -345,10 +341,6 @@
     <string name="button_backlight_mode_always_on">Πάντα ενεργό όταν η οθόνη είναι ενεργή</string>
     <string name="pref_button_backlight_notifications_title">Ειδοποιήσεις φωτισμού πλήκτρου</string>
     <string name="pref_button_backlight_notifications_summary">ΠΕΙΡΑΜΑΤΙΚΟ! Αναβοσβήνει τον οπίσθιο φωτισμό πλήκτρου όταν υπάρχει μία ειδοποίηση. Χρησιμοποιήστε σε περίπτωση που η συσκευή σας δεν έχει LED ειδοποιήσεων. Ενδέχεται να καταναλώσει μπαταρία.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Dithering φόντου Holo</string>
-    <string name="pref_holo_bg_dither_summary">Αντικαθιστά το βασικό Holo φόντο με ένα dithered για να καταπιέσει τον διαχωρισμό των χρωματικών ζωνών (απαιτείται επανεκκίνηση)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Απενεργοποίηση φυσικών πλήκτρων</string>

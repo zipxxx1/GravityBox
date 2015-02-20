@@ -241,10 +241,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Miękki restart</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Jednolite czarne tło</string>
-    <string name="pref_holo_bg_solid_black_summary">Użyj jednolitego czarnego tła zamiast czarno-szarego gradientu dla domyślnego tematu Holo (wymagany restart)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Ilość kafelków w rzędzie</string>
     <string name="pref_qs_tiles_per_row_summary">Określa ile Kafelków Szybkich Ustawień wyświetlić w jednym rzędzie przy czym rozmiar kafelków zostanie odpowiednio zmieniony (dotyczy trybu portretowego dla telefonów lub dowolnej orientacji ekranu dla tabletów)</string>
@@ -336,10 +332,6 @@
     <string name="button_backlight_mode_always_on">Włącz gdy aktywny ekran</string>
     <string name="pref_button_backlight_notifications_title">Powiadamianie podświetleniem</string>
     <string name="pref_button_backlight_notifications_summary">EKSPERYMENTALNE! Podświetlenie przycisków miga gdy przychodzi powiadomienie. Zastosowanie w przypadku urządzeń nie posiadających diody powiadomień. Może szybciej zużywać baterię.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Wygładzone tło Holo</string>
-    <string name="pref_holo_bg_dither_summary">Zastępuje standardowe tło Holo wygładzonym (wymagany restart)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Wyłącz klawisze nawigacji</string>

@@ -259,11 +259,7 @@
 
     <!-- Soft reboot -->
     <string name="reboot_soft">软重启</string>
-    
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">纯黑色背景</string>
-    <string name="pref_holo_bg_solid_black_summary">在默认的Holo系统主题内使用纯黑色的背景而不是黑-灰色渐变（需要重新启动）</string>
-    
+
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">每行磁贴数</string>
     <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，磁贴会根据您的设置自动缩放（适用于手机在纵向模式或平板上的任何方向模式）</string>
@@ -355,10 +351,6 @@
     <string name="button_backlight_mode_always_on">屏幕亮起时使背光常亮</string>
     <string name="pref_button_backlight_notifications_title">背光灯通知</string>
     <string name="pref_button_backlight_notifications_summary">这个设置是实验性的！当收到通知时背光灯会闪烁提醒。建议当您的设备没有LED通知灯时才开启，此功能可能会消耗部分电量</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">优化Holo背景</string>
-    <string name="pref_holo_bg_dither_summary">使用优化过的Holo背景以消除色带（需要重新启动）</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">禁用实体按键</string>

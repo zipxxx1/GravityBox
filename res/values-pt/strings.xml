@@ -240,10 +240,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Reinício leve</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Fundo preto sólido</string>
-    <string name="pref_holo_bg_solid_black_summary">Usa um fundo preto sólido para o tema Holo padrão do sistema em vez do gradiente de preto-cinza (necessário reiniciar)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Painéis por linha</string>
     <string name="pref_qs_tiles_per_row_summary">Permite definir quantos painéis serão mostrados nas configurações rápidas. Os painéis serão redimensionados de acordo. Aplicável ao modo retrato.</string>
@@ -335,10 +331,6 @@
     <string name="button_backlight_mode_always_on">Sempre ligado enquanto a tela estiver ligada</string>
     <string name="pref_button_backlight_notifications_title">Notificações de luz de fundo</string>
     <string name="pref_button_backlight_notifications_summary">EXPERIMENTAL! Pisca a luz de fundo ao receber notificações. Use caso seu dispositivo não tenha LED de notificações. Pode consumir bateria.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Fundo pontilhado</string>
-    <string name="pref_holo_bg_dither_summary">Substituir o fundo do tema Holo padrão por um pontilhado (necessário reiniciar)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Desativar botões de navegação</string>

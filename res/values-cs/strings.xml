@@ -238,10 +238,6 @@
     <string name="phone_flip_action_mute">Ztlumit vyzvánění</string>
     <string name="phone_flip_action_dismiss">Zrušit hovor</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Plné černé pozadí</string>
-    <string name="pref_holo_bg_solid_black_summary">Nahradí standardní černo-šedé pozadí (gradient) plnou černou barvou (vyžaduje restart)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Počet dlaždic na řádek</string>
     <string name="pref_qs_tiles_per_row_summary">Definuje počet QuickSettings dlaždic zobrazených na 1 řádek. Velikost dlaždic bude upravena podle potřeby. Aplikovatelné na portrét režim.</string>
@@ -329,10 +325,6 @@
     <string name="button_backlight_mode_always_on">Vždy zapnuto během zapnuté obrazovky</string>
     <string name="pref_button_backlight_notifications_title">Notifikace podsvícením</string>
     <string name="pref_button_backlight_notifications_summary">EXPERIMENTÁLNÍ! Zapne podsvícení tlačítek v případě nové notifikace během vypnuté obrazovky. Použít v případě, že zařízení nemá oznamovací LED.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Vyhlazené Holo pozadí</string>
-    <string name="pref_holo_bg_dither_summary">Nahradí standardní Holo pozadí vyhlazeným obrázkem za účelem eliminace pruhů barevného přechodu (vyžaduje restart)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Zablokovat navigační tlačítka</string>

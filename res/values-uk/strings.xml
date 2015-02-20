@@ -158,8 +158,6 @@
     <string name="phone_flip_action_mute">Вимкнути звук</string>
     <string name="phone_flip_action_dismiss">Скинути дзвінок</string>
     <string name="reboot_soft">"М'які перезавантаження"</string>
-    <string name="pref_holo_bg_solid_black_title">Чорний задній фон</string>
-    <string name="pref_holo_bg_solid_black_summary">Використовувати чорний фон для системної Holo-теми за замовчуванням замість темно-сірого градієнта (Необхідна перезавантаження)</string>
     <string name="pref_qs_tiles_per_row_title">Іконок в ряд</string>
     <string name="pref_qs_tiles_per_row_summary">Визначає, як багато іконок швидких налаштувань буде показано в одному ряду. Розміри зміняться відповідно. Застосовується до портретному режиму.</string>
     <string name="pref_statusbar_clock_dow_title">Відображати день тижня</string>
@@ -214,8 +212,6 @@
     <string name="button_backlight_mode_always_on">Включати завжди, коли включений екран</string>
     <string name="pref_button_backlight_notifications_title">Сповіщення підсвічуванням клавіш</string>
     <string name="pref_button_backlight_notifications_summary">ЕКСПЕРИМЕНТАЛЬНО! Бликаюче підсвічування клавіш при повідомленнях. Використовувати тільки у разі відсутності світлодіодних індикатора. Може призвести до погіршення життя батареї.</string>
-    <string name="pref_holo_bg_dither_title">Згладжений Holo фон</string>
-    <string name="pref_holo_bg_dither_summary">Замінює стандартний фон на згладжений для уникнення неплавного градієнта (необхідне перезавантаження)</string>
     <string name="pref_hwkeys_disable_title">Вимкнути залізні кнопки</string>
     <string name="pref_hwkeys_disable_summary">Відключає кнопки НАЗАД, ДОДОМУ, МЕНЮ при включеному віяловому меню. Нестандартні дії цих кнопок по раніше будуть працювати. (Для пристроїв із залізними кнопками)</string>
     <string name="pref_gb_theme_dark_title">Використовувати темну тему</string>

@@ -257,10 +257,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Intelligens újraindítás</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Solid fekete Holo háttér</string>
-    <string name="pref_holo_bg_solid_black_summary">A solid fekete hátteret használja az alapértelmezett Holo rendszer témához a fekete-szürke színátmenet helyett (újraindítás szükséges)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Csempék egy sorban</string>
     <string name="pref_qs_tiles_per_row_summary">Meghatározza, hogy mennyi Gyorsbeállítások csempe jelenjen meg soronként, melyek ennek megfelelően kerülnek átméretezésre (telefon esetében álló tájolás módra vonatkozik, tablet esetén bármely tájolási irányra).</string>
@@ -352,10 +348,6 @@
     <string name="button_backlight_mode_always_on">Bekapcsolt kijelzőnél mindig bekapcsolva</string>
     <string name="pref_button_backlight_notifications_title">Gomb háttérvilágítás értesítések</string>
     <string name="pref_button_backlight_notifications_summary">KÍSÉRLETI! Villogtatja a gomb háttérvilágítást értesítés érkezésekor. Abban az esetben használd, ha a készülékedből hiányzik az értesítési LED. Fogyaszhtatja az akkumulátort.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Nagyobb színmélységű Holo háttér</string>
-    <string name="pref_holo_bg_dither_summary">Lecseréli a szabvány Holo hátteret nagyobb színmélységű típusra a színátmenetek folyamatosságának megtörése ellen (újraindítás szükséges)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Navigációs hardver gombok letiltása</string>

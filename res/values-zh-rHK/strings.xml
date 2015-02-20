@@ -257,10 +257,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">快速重新啟動</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">純黑色背景</string>
-    <string name="pref_holo_bg_solid_black_summary">在預設的 Holo 系統佈景主題內使用純黑色的背景，而不是黑-灰色的漸層 (需要重新啟動) </string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">每列瓷貼數</string>
     <string name="pref_qs_tiles_per_row_summary">設定快速設定內每列有幾個瓷貼。瓷貼會根據您的設定自動縮放 (請注意，本選項適用於當電話處於直向時/平板電腦處於任何方向時) </string>
@@ -352,10 +348,6 @@
     <string name="button_backlight_mode_always_on">當螢幕喚醒時按鍵背光燈永遠打開</string>
     <string name="pref_button_backlight_notifications_title">按鍵背光燈通知</string>
     <string name="pref_button_backlight_notifications_summary">這個設定是實驗性的！當收到通知時背光燈會閃爍提醒。建議當您的裝置沒有通知燈時才開啟本功能，因為可能會加速電量消耗。</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">優化 Holo 背景</string>
-    <string name="pref_holo_bg_dither_summary">取代原本不完美漸層的預設 Holo 黑-灰色背景 (需要重新啟動) </string>
 
     <!-- Disable hardware keys for pie -->
     <string name="pref_hwkeys_disable_title">停用實體按鍵</string>

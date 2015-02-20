@@ -260,10 +260,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Soft reboot</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Solid black background</string>
-    <string name="pref_holo_bg_solid_black_summary">Use solid black background for default Holo system theme instead of black-grey gradient (requires reboot)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Tiles per row</string>
     <string name="pref_qs_tiles_per_row_summary">Defines how many QuickSettings tiles to display per one row, being tiles resized accordingly (applies to portrait mode on phones or any orientation mode on tablets)</string>
@@ -355,10 +351,6 @@
     <string name="button_backlight_mode_always_on">Always on while screen is on</string>
     <string name="pref_button_backlight_notifications_title">Button backlight notifications</string>
     <string name="pref_button_backlight_notifications_summary">EXPERIMENTAL! Blinks button backlight when there is a notification. Use in case your device lacks notification LED. May consume battery.</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Dithered Holo background</string>
-    <string name="pref_holo_bg_dither_summary">Replaces standard Holo background with dithered one to suppress color banding (requires reboot)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Disable navigation keys</string>

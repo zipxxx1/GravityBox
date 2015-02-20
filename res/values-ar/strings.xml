@@ -232,10 +232,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">اعادة تشغيل النظام</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">خلفية سوداء</string>
-    <string name="pref_holo_bg_solid_black_summary">استخدام خلفية سوداء لثيم النظام (يتطلب اعادة التشغيل)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">عدد الأعمدة</string>
     <string name="pref_qs_tiles_per_row_summary">تحديد عدد الأعمدة للأيقونات المعروضة بدرج الاعدادات السريعة</string>
@@ -323,10 +319,6 @@
     <string name="button_backlight_mode_always_on">تفعيل الاضاءة أثناء تشغيل الشاشة</string>
     <string name="pref_button_backlight_notifications_title">اضاءة الاشعارات</string>
     <string name="pref_button_backlight_notifications_summary">تفعيل الاضاءة عند وصول اشعار والشاشة مطفأة</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">خلفية متدرجة</string>
-    <string name="pref_holo_bg_dither_summary">استخدام خلفية متدرجة لثيم النظام (يتطلب اعادة التشغيل)</string>
 
     <!-- Disable hardware keys for pie -->
     <string name="pref_hwkeys_disable_title">تعطيل أزرار الجهاز</string>

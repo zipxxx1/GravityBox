@@ -257,10 +257,6 @@
     <!-- Soft reboot -->
     <string name="reboot_soft">Redémarrage logiciel</string>
 
-    <!--  Solid black Holo background -->
-    <string name="pref_holo_bg_solid_black_title">Arrière-plan noir uni</string>
-    <string name="pref_holo_bg_solid_black_summary">Utiliser un arrière-plan noir uni pour le thème Holo par défaut au lieu du dégradé noir-gris (nécessite un redémarrage)</string>
-
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Touches par rangée</string>
     <string name="pref_qs_tiles_per_row_summary">Définit le nombre de touches de paramètres rapides à afficher par rangée. Les touches seront redimensionnées en conséquence (s\'applique en mode portrait pour les téléphone et dans n\'importe quelle orientation pour les tablettes)</string>
@@ -352,10 +348,6 @@
     <string name="button_backlight_mode_always_on">Toujours actif avec l\'écran</string>
     <string name="pref_button_backlight_notifications_title">Notification via bouton rétroéclairé</string>
     <string name="pref_button_backlight_notifications_summary">EXPÉRIMENTAL ! Fais clignoter le rétroéclairage du bouton lorsqu\'il y a une notification. À utiliser en l\'absence de LED de notification. Peut augmenter la consommation de batterie</string>
-
-    <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Arrière-plan Holo tramé</string>
-    <string name="pref_holo_bg_dither_summary">Remplace l\'arrière-plan Holo standard par un arrière-plan tramé pour supprimer les bandes de couleur (nécessite un redémarrage)</string>
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Désactiver les touches de navigation</string>
