@@ -27,6 +27,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.res.XModuleResources;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -56,7 +57,7 @@ public class ModNavigationBar {
     private static final String CLASS_NAVBAR_TRANSITIONS = 
             "com.android.systemui.statusbar.phone.NavigationBarTransitions";
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
-    private static final String CLASS_SEARCH_PANEL_VIEW = "com.android.systemui.SearchPanelView";
+    private static final String CLASS_SEARCH_PANEL_VIEW_CIRCLE = "com.android.systemui.SearchPanelCircleView";
 //    private static final String CLASS_GLOWPAD_TRIGGER_LISTENER = CLASS_SEARCH_PANEL_VIEW + "$GlowPadTriggerListener";
 //    private static final String CLASS_GLOWPAD_VIEW = "com.android.internal.widget.multiwaveview.GlowPadView";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
@@ -732,6 +733,23 @@ public class ModNavigationBar {
                         } catch (Throwable t) {
                             XposedBridge.log(t);
                             return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(CLASS_SEARCH_PANEL_VIEW_CIRCLE, classLoader,
+                        "updateCircleRect", Rect.class, float.class, boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (XposedHelpers.getBooleanField(param.thisObject, "mHorizontal")) {
+                            float circleSize = XposedHelpers.getFloatField(param.thisObject,
+                                    (boolean) param.args[2] ? "mCircleMinSize" : "mCircleSize");
+                            int baseMargin = XposedHelpers.getIntField(param.thisObject, "mBaseMargin");
+                            float offset = (float) param.args[1];
+                            int left = (int) (-(circleSize / 2) + baseMargin + offset);
+                            Rect rect = (Rect) param.args[0];
+                            rect.set(left, rect.top, (int) (left + circleSize), rect.bottom);
+                            if (DEBUG) log("SearchPanelCircleView rect: " + rect);
                         }
                     }
                 });
