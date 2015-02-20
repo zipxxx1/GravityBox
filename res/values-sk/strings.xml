@@ -1364,14 +1364,12 @@
     <string name="increasing_ring_min_volume_title">Počiatočná hlasitosť vyzváňania</string>
     <string name="increasing_ring_volume_notice">Poznámka:\nAk je počiatočná hlasitosť nastavená na vyššiu hodnotu než je hlasitosť vyzváňania, 
         vyzváňanie bude prehraté hlasitosťou vyzváňania.</string>
-    <string name="increasing_ring_interval_title">Interval zvyšovania hlasitosti</string>
-    <string name="increasing_ring_interval_eachring">Pri každom zazvonení</string>
-    <string name="increasing_ring_interval_half_second">0.5 sekundy</string>
-    <string name="increasing_ring_interval_1second">1 sekunda</string>
-    <string name="increasing_ring_interval_2seconds">2 sekundy</string>
-    <string name="increasing_ring_interval_3seconds">3 sekundy</string>
-    <string name="increasing_ring_interval_5seconds">5 sekúnd</string>
-    <string name="increasing_ring_interval_10seconds">10 sekúnd</string>
+    <string name="increasing_ring_ramp_up_duration_title">Doba zvyšovania hlasitosti</string>
+    <string name="increasing_ring_interval_1">10 sekúnd</string>
+    <string name="increasing_ring_interval_2">15 sekúnd</string>
+    <string name="increasing_ring_interval_3">20 sekúnd</string>
+    <string name="increasing_ring_interval_4">25 sekúnd</string>
+    <string name="increasing_ring_interval_5">30 sekúnd</string>
 
     <!-- HW Key Action: In-app search -->
     <string name="hwkey_action_inapp_search">Hľadať v aplikácii</string>

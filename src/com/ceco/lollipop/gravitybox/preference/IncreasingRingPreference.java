@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public class IncreasingRingPreference extends VolumePreference implements
     public static final String EXTRA_STREAM_TYPE = "streamType";
     public static final String EXTRA_ENABLED = "enabled";
     public static final String EXTRA_MIN_VOLUME = "minVolume";
-    public static final String EXTRA_INTERVAL = "interval";
+    public static final String EXTRA_RAMP_UP_DURATION = "rampUpDuration";
 
     private CheckBox mEnabledCheckbox;
     private TextView mMinVolumeTitle;
@@ -55,8 +55,8 @@ public class IncreasingRingPreference extends VolumePreference implements
 
     public static final class ConfigStore {
         public boolean enabled = false;
-        public int minVolume = 1;
-        public int interval = 0;
+        public float minVolume = 0.1f; // fraction
+        public int rampUpDuration = 10;
 
         public ConfigStore(String value) {
             if (value == null) return;
@@ -64,8 +64,8 @@ public class IncreasingRingPreference extends VolumePreference implements
             try {
                 String[] data = value.split(SEPARATOR);
                 enabled = Boolean.valueOf(data[0]);
-                minVolume = Integer.valueOf(data[1]);
-                interval = Integer.valueOf(data[2]);
+                minVolume = Float.valueOf(data[1]);
+                rampUpDuration = Integer.valueOf(data[2]);
             } catch (Throwable t) {
                 enabled = false;
                 t.printStackTrace();
@@ -76,13 +76,13 @@ public class IncreasingRingPreference extends VolumePreference implements
             String[] data = new String[] {
                     String.valueOf(enabled),
                     String.valueOf(minVolume),
-                    String.valueOf(interval)
+                    String.valueOf(rampUpDuration)
             };
             return Utils.join(data, SEPARATOR);
         }
 
         public String toString() {
-            return "[enabled=" + enabled + "; minVolume=" + minVolume + "; interval=" + interval + "]";
+            return "[enabled=" + enabled + "; minVolume=" + minVolume + "; rampUpDuration=" + rampUpDuration + "]";
         }
     }
 
@@ -107,9 +107,9 @@ public class IncreasingRingPreference extends VolumePreference implements
 
         mRingVolumeNotice = (TextView) view.findViewById(R.id.increasing_ring_volume_notice);
 
-        mIntervalTitle = (TextView) view.findViewById(R.id.increasing_ring_interval_title);
-        mInterval = (Spinner) view.findViewById(R.id.increasing_ring_interval);
-        mIntervalValues = getContext().getResources().getIntArray(R.array.increasing_ring_interval_values);
+        mIntervalTitle = (TextView) view.findViewById(R.id.increasing_ring_ramp_up_duration_title);
+        mInterval = (Spinner) view.findViewById(R.id.increasing_ring_ramp_up_duration);
+        mIntervalValues = getContext().getResources().getIntArray(R.array.increasing_ring_ramp_up_duration_values);
 
         getConfig();
         updateVolumeNoticeVisibility(mMinVolumeSeekBar.getProgress());
@@ -146,11 +146,11 @@ public class IncreasingRingPreference extends VolumePreference implements
     private void getConfig() {
         mConfigStore = new ConfigStore(getPersistedString(null));
         mEnabledCheckbox.setChecked(mConfigStore.enabled);
-        mMinVolumeSeekBar.setProgress(mConfigStore.minVolume);
+        mMinVolumeSeekBar.setProgress((int)(mConfigStore.minVolume * mMinVolumeSeekBar.getMax()));
 
         int index = 0;
         for (int i = 0; i < mIntervalValues.length; i++) {
-            if (mIntervalValues[i] == mConfigStore.interval) {
+            if (mIntervalValues[i] == mConfigStore.rampUpDuration) {
                 index = i;
                 break;
             }
@@ -161,25 +161,26 @@ public class IncreasingRingPreference extends VolumePreference implements
     private void saveConfig() {
         if (mConfigStore != null) {
             mConfigStore.enabled = mEnabledCheckbox.isChecked();
-            mConfigStore.minVolume = mMinVolumeSeekBar.getProgress();
-            mConfigStore.interval = mIntervalValues[mInterval.getSelectedItemPosition()];
+            mConfigStore.minVolume = (float)mMinVolumeSeekBar.getProgress() / (float)mMinVolumeSeekBar.getMax();
+            if (mConfigStore.minVolume < 0.1f) mConfigStore.minVolume = 0.1f;
+            mConfigStore.rampUpDuration = mIntervalValues[mInterval.getSelectedItemPosition()];
             persistString(mConfigStore.getValue());
 
             Intent intent = new Intent(ACTION_INCREASING_RING_CHANGED);
             intent.putExtra(EXTRA_STREAM_TYPE, mStreamType);
             intent.putExtra(EXTRA_ENABLED, mConfigStore.enabled);
             intent.putExtra(EXTRA_MIN_VOLUME, mConfigStore.minVolume);
-            intent.putExtra(EXTRA_INTERVAL, mConfigStore.interval);
+            intent.putExtra(EXTRA_RAMP_UP_DURATION, mConfigStore.rampUpDuration);
             getContext().sendBroadcast(intent);
         }
     }
 
     private void updateVolumeNoticeVisibility(int value) {
-        boolean visible = value > mMinVolumeSeekBar.getSecondaryProgress();
-        if (!mEnabledCheckbox.isChecked()) {
-            visible = false;
-        }
-        mRingVolumeNotice.setVisibility(visible ? View.VISIBLE : View.GONE);
+//        boolean visible = value > mMinVolumeSeekBar.getSecondaryProgress();
+//        if (!mEnabledCheckbox.isChecked()) {
+//            visible = false;
+//        }
+//        mRingVolumeNotice.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     private void updateEnabledStates() {

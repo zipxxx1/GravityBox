@@ -1143,14 +1143,6 @@
     <string name="increasing_ring_enable">有効</string>
     <string name="increasing_ring_min_volume_title">開始音量</string>
     <string name="increasing_ring_volume_notice">注意:\n開始音量が着信音の音量設定より大きい場合は着信音の音量を使います。</string>
-    <string name="increasing_ring_interval_title">大きくする間隔</string>
-    <string name="increasing_ring_interval_eachring">ループ毎</string>
-    <string name="increasing_ring_interval_half_second">0.5秒</string>
-    <string name="increasing_ring_interval_1second">1秒</string>
-    <string name="increasing_ring_interval_2seconds">2秒</string>
-    <string name="increasing_ring_interval_3seconds">3秒</string>
-    <string name="increasing_ring_interval_5seconds">5秒</string>
-    <string name="increasing_ring_interval_10seconds">10秒</string>
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
     <!-- HW Key Action: In-app search -->

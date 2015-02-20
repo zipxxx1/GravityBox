@@ -1367,14 +1367,6 @@
     <string name="increasing_ring_enable">Aktiviert</string>
     <string name="increasing_ring_min_volume_title">Startlautstärke</string>
     <string name="increasing_ring_volume_notice">Achtung:\nIst die Startlautstärke höher als die Klingeltonlautstärke, so wird nur letzere zum Abspielen benutzt</string>
-    <string name="increasing_ring_interval_title">Steigerungsintervall</string>
-    <string name="increasing_ring_interval_eachring">Bei jedem Klingeln</string>
-    <string name="increasing_ring_interval_half_second">0.5 Sekunden</string>
-    <string name="increasing_ring_interval_1second">1 Sekunde</string>
-    <string name="increasing_ring_interval_2seconds">2 Sekunden</string>
-    <string name="increasing_ring_interval_3seconds">3 Sekunden</string>
-    <string name="increasing_ring_interval_5seconds">5 Sekunden</string>
-    <string name="increasing_ring_interval_10seconds">10 Sekunden</string>
 
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>

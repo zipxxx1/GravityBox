@@ -1385,15 +1385,7 @@
     <string name="increasing_ring_enable">Activar</string>
     <string name="increasing_ring_min_volume_title">Volumen inicial</string>
     <string name="increasing_ring_volume_notice">Aviso:\nSi el volumen inicial es mayor que el de llamada, el volumen usado será el de este último.</string>
-    <string name="increasing_ring_interval_title">Intervalo de aumento</string>
-    <string name="increasing_ring_interval_eachring">En cada tono</string>
-    <string name="increasing_ring_interval_half_second">0.5 segundos</string>
-    <string name="increasing_ring_interval_1second">1 segundo</string>
-    <string name="increasing_ring_interval_2seconds">2 segundos</string>
-    <string name="increasing_ring_interval_3seconds">3 segundos</string>
-    <string name="increasing_ring_interval_5seconds">5 segundos</string>
-    <string name="increasing_ring_interval_10seconds">10 segundos</string>
-    
+
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
     

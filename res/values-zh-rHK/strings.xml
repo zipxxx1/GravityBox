@@ -1375,14 +1375,6 @@
     <string name="increasing_ring_enable">啟用</string>
     <string name="increasing_ring_min_volume_title">起始鈴聲音量</string>
     <string name="increasing_ring_volume_notice">請注意：\n 由於起始音量較已設定的鈴聲音量大，鈴聲將以已設定的鈴聲音量播放</string>
-    <string name="increasing_ring_interval_title">遞增間隙</string>
-    <string name="increasing_ring_interval_eachring">每次鈴聲播放後</string>
-    <string name="increasing_ring_interval_half_second">0.5 秒</string>
-    <string name="increasing_ring_interval_1second">1 秒</string>
-    <string name="increasing_ring_interval_2seconds">2 秒</string>
-    <string name="increasing_ring_interval_3seconds">3 秒</string>
-    <string name="increasing_ring_interval_5seconds">5 秒</string>
-    <string name="increasing_ring_interval_10seconds">10 秒</string>
 
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>

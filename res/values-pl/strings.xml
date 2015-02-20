@@ -1356,14 +1356,6 @@
     <string name="increasing_ring_enable">Włącz</string>
     <string name="increasing_ring_min_volume_title">Początkowa głośność dzwonka</string>
     <string name="increasing_ring_volume_notice">Uwaga:\n Jeśli początkowa głośność jest wyższa od normalnej, to dzwonek będzie odtwarzany przy użyciu głośności normalnej.</string>
-    <string name="increasing_ring_interval_title">Interwał narastania</string>
-    <string name="increasing_ring_interval_eachring">Przy każdym dzwonku</string>
-    <string name="increasing_ring_interval_half_second">0.5 sekundy</string>
-    <string name="increasing_ring_interval_1second">1 sekunda</string>
-    <string name="increasing_ring_interval_2seconds">2 sekundy</string>
-    <string name="increasing_ring_interval_3seconds">3 sekundy</string>
-    <string name="increasing_ring_interval_5seconds">5 sekund</string>
-    <string name="increasing_ring_interval_10seconds">10 sekund</string>
 
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>

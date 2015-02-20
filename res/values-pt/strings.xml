@@ -1364,14 +1364,6 @@
     <string name="increasing_ring_enable">Ativar</string>
     <string name="increasing_ring_min_volume_title">Volume inicial de toque</string>
     <string name="increasing_ring_volume_notice">Nota:\nUma vez que o volume inicial é superior ao do toque do sistema, o aviso será tocado com o volume de toque do sistema.</string>
-    <string name="increasing_ring_interval_title">Intervalo de incrementos</string>
-    <string name="increasing_ring_interval_eachring">A cada toque</string>
-    <string name="increasing_ring_interval_half_second">0,5 segundos</string>
-    <string name="increasing_ring_interval_1second">1 segundo</string>
-    <string name="increasing_ring_interval_2seconds">2 segundos</string>
-    <string name="increasing_ring_interval_3seconds">3 segundos</string>
-    <string name="increasing_ring_interval_5seconds">5 segundos</string>
-    <string name="increasing_ring_interval_10seconds">10 segundos</string>
 
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>

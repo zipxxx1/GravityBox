@@ -1391,14 +1391,6 @@
     <string name="increasing_ring_enable">Включить</string>
     <string name="increasing_ring_min_volume_title">Начальная громкость</string>
     <string name="increasing_ring_volume_notice">Примечание:\nесли значение начальной громкости превышает громкость звонка, мелодия будет воспроизводиться на уровне громкости звонка.</string>
-    <string name="increasing_ring_interval_title">Интервал нарастания</string>
-    <string name="increasing_ring_interval_eachring">С каждым звонком</string>
-    <string name="increasing_ring_interval_half_second">0.5 с</string>
-    <string name="increasing_ring_interval_1second">1 с</string>
-    <string name="increasing_ring_interval_2seconds">2 с</string>
-    <string name="increasing_ring_interval_3seconds">3 с</string>
-    <string name="increasing_ring_interval_5seconds">5 с</string>
-    <string name="increasing_ring_interval_10seconds">10 с</string>
 
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>

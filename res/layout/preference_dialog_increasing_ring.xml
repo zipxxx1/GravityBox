@@ -52,19 +52,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/increasing_ring_volume_notice"
-                android:paddingTop="8dip" />
+                android:paddingTop="8dip"
+                android:visibility="gone" />
 
-        <TextView android:id="@+id/increasing_ring_interval_title"
+        <TextView android:id="@+id/increasing_ring_ramp_up_duration_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/increasing_ring_interval_title"
+                android:text="@string/increasing_ring_ramp_up_duration_title"
                 android:paddingTop="8dip" />
 
-        <Spinner android:id="@+id/increasing_ring_interval"
+        <Spinner android:id="@+id/increasing_ring_ramp_up_duration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:prompt="@string/increasing_ring_interval_title"
-                android:entries="@array/increasing_ring_interval_entries"
+                android:prompt="@string/increasing_ring_ramp_up_duration_title"
+                android:entries="@array/increasing_ring_ramp_up_duration_entries"
                 android:paddingTop="6dip"
                 android:paddingBottom="6dip" />
 

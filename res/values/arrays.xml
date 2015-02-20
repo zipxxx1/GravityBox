@@ -976,24 +976,20 @@
         <item>HIDDEN</item>
     </string-array>
 
-    <string-array name="increasing_ring_interval_entries" translatable="false">
-        <item>@string/increasing_ring_interval_eachring</item>
-        <item>@string/increasing_ring_interval_half_second</item>
-        <item>@string/increasing_ring_interval_1second</item>
-        <item>@string/increasing_ring_interval_2seconds</item>
-        <item>@string/increasing_ring_interval_3seconds</item>
-        <item>@string/increasing_ring_interval_5seconds</item>
-        <item>@string/increasing_ring_interval_10seconds</item>
+    <string-array name="increasing_ring_ramp_up_duration_entries" translatable="false">
+        <item>@string/increasing_ring_interval_1</item>
+        <item>@string/increasing_ring_interval_2</item>
+        <item>@string/increasing_ring_interval_3</item>
+        <item>@string/increasing_ring_interval_4</item>
+        <item>@string/increasing_ring_interval_5</item>
     </string-array>
 
-    <integer-array name="increasing_ring_interval_values" translatable="false">
-        <item>0</item>
-        <item>500</item>
-        <item>1000</item>
-        <item>2000</item>
-        <item>3000</item>
-        <item>5000</item>
-        <item>10000</item>
+    <integer-array name="increasing_ring_ramp_up_duration_values" translatable="false">
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
     </integer-array>
 
     <string-array name="cardinal_directions">

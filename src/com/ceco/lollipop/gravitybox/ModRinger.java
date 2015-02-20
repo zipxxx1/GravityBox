@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package com.ceco.lollipop.gravitybox;
 
+import java.lang.reflect.Method;
+
 import com.ceco.lollipop.gravitybox.preference.IncreasingRingPreference;
 import com.ceco.lollipop.gravitybox.preference.IncreasingRingPreference.ConfigStore;
 
@@ -23,27 +25,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.media.Ringtone;
+import android.net.Uri;
 import android.os.Handler;
-import android.os.Message;
-import android.os.SystemClock;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class ModRinger {
-    public static final String PACKAGE_NAME = "com.android.phone";
+    public static final String PACKAGE_NAME = "com.android.server.telecom";
     private static final String TAG = "GB:ModRinger";
     private static final boolean DEBUG = false;
 
-    private static final String CLASS_RINGER = "com.android.phone.Ringer";
-    private static final int PLAY_RING_ONCE = 1;
-    private static final int INCREASE_RING_VOLUME = 4;
+    private static final String CLASS_RINGTONE_PLAYER = "com.android.server.telecom.AsyncRingtonePlayer";
 
-    private static Handler mHandler;
-    private static int mRingerVolume = -1;
     private static ConfigStore mRingerConfig;
-    private static AudioManager mAm;
+    private static float mIncrementAmount;
+    private static float mCurrentIncrementVolume;
+    private static Ringtone mRingtone;
+    private static Handler mHandler;
+    private static Object mAsyncRinger;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -57,115 +59,117 @@ public class ModRinger {
                        AudioManager.STREAM_RING) {
                mRingerConfig.enabled = intent.getBooleanExtra(
                        IncreasingRingPreference.EXTRA_ENABLED, false);
-               mRingerConfig.minVolume = intent.getIntExtra(
-                       IncreasingRingPreference.EXTRA_MIN_VOLUME, 1);
-               mRingerConfig.interval = intent.getIntExtra(
-                       IncreasingRingPreference.EXTRA_INTERVAL, 0);
+               mRingerConfig.minVolume = intent.getFloatExtra(
+                       IncreasingRingPreference.EXTRA_MIN_VOLUME, 0.1f);
+               mRingerConfig.rampUpDuration = intent.getIntExtra(
+                       IncreasingRingPreference.EXTRA_RAMP_UP_DURATION, 10);
                if (DEBUG) log(mRingerConfig.toString());
            }
         }
     };
 
+    private static Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mRingtone == null) return;
+            mCurrentIncrementVolume += mIncrementAmount;
+            if (mCurrentIncrementVolume > 1f) mCurrentIncrementVolume = 1f;
+            if (DEBUG) log("Increasing ringtone volume to " +
+                    Math.round(mCurrentIncrementVolume * 100f) + "%");
+            setVolume(mCurrentIncrementVolume);
+            if (mCurrentIncrementVolume < 1f) {
+                mHandler.postDelayed(this, 1000);
+            }
+        }
+    };
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
-            final Class<?> clsRinger = XposedHelpers.findClass(CLASS_RINGER, classLoader);
+            final Class<?> clsRingtonePlayer = XposedHelpers.findClass(CLASS_RINGTONE_PLAYER, classLoader);
+
+            Method mtdHandlePlay = null;
+            try {
+                mtdHandlePlay = clsRingtonePlayer.getDeclaredMethod("handlePlay", Uri.class);
+                if (DEBUG) log("handlePlay found");
+            } catch (NoSuchMethodException nme) {
+                try {
+                    mtdHandlePlay = clsRingtonePlayer.getDeclaredMethod("access$000",
+                            clsRingtonePlayer, Uri.class);
+                    if (DEBUG) log("handlePlay found as access$000");
+                } catch (NoSuchMethodException nme2) { }
+            }
+
+            if (mtdHandlePlay == null) {
+                log("Cannot find handlePlay method in " + CLASS_RINGTONE_PLAYER + ". Increasing ringtone disabled");
+                return;
+            }
 
             mRingerConfig = new ConfigStore(prefs.getString(
                     GravityBoxSettings.PREF_KEY_INCREASING_RING, null));
             if (DEBUG) log(mRingerConfig.toString());
 
-            XposedBridge.hookAllConstructors(clsRinger, new XC_MethodHook() {
+            XposedBridge.hookAllConstructors(clsRingtonePlayer, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (param.args.length > 0 && param.args[0] instanceof Context) {
-                        Context context = (Context) param.args[0];
-                        mAm = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-                        IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction(IncreasingRingPreference.ACTION_INCREASING_RING_CHANGED);
-                        context.registerReceiver(mBroadcastReceiver, intentFilter);
-                        if (DEBUG) log("Ringer created; broadcast receiver registered");
-                    }
+                    mAsyncRinger = param.thisObject;
+                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
+                    IntentFilter intentFilter = new IntentFilter();
+                    intentFilter.addAction(IncreasingRingPreference.ACTION_INCREASING_RING_CHANGED);
+                    context.registerReceiver(mBroadcastReceiver, intentFilter);
+                    if (DEBUG) log("Ringtone player created; broadcast receiver registered");
                 }
             });
 
-            XposedHelpers.findAndHookMethod(clsRinger, "ring", new XC_MethodHook() {
+            XposedBridge.hookMethod(mtdHandlePlay, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (!mRingerConfig.enabled) return;
 
-                    if (mHandler == null) {
-                        mHandler = new Handler() {
-                            @Override
-                            public void handleMessage(Message msg) {
-                                if (msg.what == INCREASE_RING_VOLUME) {
-                                    int ringerVolume = mAm.getStreamVolume(AudioManager.STREAM_RING);
-                                    if (mRingerVolume > 0 && ringerVolume < mRingerVolume) {
-                                        ringerVolume++;
-                                        if (DEBUG) log("increasing ring volume to " +
-                                                       ringerVolume + "/" + mRingerVolume);
-                                        mAm.setStreamVolume(AudioManager.STREAM_RING,
-                                                ringerVolume, 0);
-                                        if (mRingerConfig.interval > 0) {
-                                            sendEmptyMessageDelayed(INCREASE_RING_VOLUME,
-                                                    mRingerConfig.interval);
-                                        }
-                                    }
-                                }
-                            }
-                        };
+                    mRingtone = (Ringtone) XposedHelpers.getObjectField(mAsyncRinger, "mRingtone");
+                    if (mRingtone == null) {
+                        if (DEBUG) log("handlePlay called but ringtone is null");
+                        return;
                     }
 
-                    long firstRingEventTime = XposedHelpers.getLongField(param.thisObject, "mFirstRingEventTime");
-                    if (firstRingEventTime < 0) {
-                        int ringerVolume = mAm.getStreamVolume(AudioManager.STREAM_RING);
-                        if (mRingerConfig.minVolume < ringerVolume) {
-                            mRingerVolume = ringerVolume;
-                            mAm.setStreamVolume(AudioManager.STREAM_RING, mRingerConfig.minVolume, 0);
-                            if (DEBUG) log("increasing ring is enabled, starting at " +
-                                    mRingerConfig.minVolume + "/" + ringerVolume);
-                            if (mRingerConfig.interval > 0) {
-                                mHandler.sendEmptyMessageDelayed(INCREASE_RING_VOLUME, 
-                                        mRingerConfig.interval);
-                            }
-                            if (mRingerConfig.minVolume == 0) {
-                                XposedHelpers.callMethod(param.thisObject, "makeLooper");
-                                XposedHelpers.setLongField(param.thisObject, "mFirstRingEventTime",
-                                        SystemClock.elapsedRealtime());
-                                ((Handler) XposedHelpers.getObjectField(param.thisObject, "mRingHandler"))
-                                    .sendEmptyMessage(PLAY_RING_ONCE);
-                            }
-                        } else {
-                            mRingerVolume = -1;
-                        }
-                    } else {
-                        long firstRingStartTime = XposedHelpers.getLongField(param.thisObject, "mFirstRingStartTime");
-                        if (firstRingStartTime > 0) {
-                            if (mRingerVolume > 0 && mRingerConfig.interval == 0) {
-                                mHandler.sendEmptyMessage(INCREASE_RING_VOLUME);
-                            }
-                        }
-                    }
+                    setVolume(mRingerConfig.minVolume);
+                    mIncrementAmount = (1f - mRingerConfig.minVolume) / (float) mRingerConfig.rampUpDuration;
+                    mCurrentIncrementVolume = mRingerConfig.minVolume;
+                    mHandler = (Handler) XposedHelpers.getObjectField(mAsyncRinger, "mHandler");
+                    mHandler.postDelayed(mRunnable, 1000);
+                    if (DEBUG) log("Starting increasing ring");
                 }
             });
 
-            XposedHelpers.findAndHookMethod(clsRinger, "stopRing", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(clsRingtonePlayer, "handleStop", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!mRingerConfig.enabled) return;
-
                     if (mHandler != null) {
-                        mHandler.removeCallbacksAndMessages(null);
-                        mHandler = null;
-                    }
-                    if (mRingerVolume >= 0) {
-                        if (DEBUG) log("stopRing: resetting ring volume to " + mRingerVolume);
-                        mAm.setStreamVolume(AudioManager.STREAM_RING, mRingerVolume, 0);
-                        mRingerVolume = -1;
+                        if (DEBUG) log("Removing increasing ring callback");
+                        mHandler.removeCallbacks(mRunnable);
                     }
                 }
             });
+
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static void setVolume(float volume) {
+        Object player = XposedHelpers.getObjectField(mRingtone, "mLocalPlayer");
+        if (player != null) {
+            XposedHelpers.callMethod(player, "setVolume", volume);
+        } else if (XposedHelpers.getBooleanField(mRingtone, "mAllowRemote")) {
+            player = XposedHelpers.getObjectField(mRingtone, "mRemotePlayer");
+            if (player != null) {
+                try {
+                    XposedHelpers.callMethod(player, "setVolume",
+                            XposedHelpers.getObjectField(mRingtone, "mRemoteToken"),
+                            volume);
+                } catch (Throwable t) {
+                    
+                }
+            }
         }
     }
 }

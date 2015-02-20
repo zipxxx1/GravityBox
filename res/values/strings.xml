@@ -1391,14 +1391,12 @@
     <string name="increasing_ring_enable">Enable</string>
     <string name="increasing_ring_min_volume_title">Ringing start volume</string>
     <string name="increasing_ring_volume_notice">Notice:\nAs the start volume is set higher than the ringer volume, the ring tone will be played using the ringer volume.</string>
-    <string name="increasing_ring_interval_title">Increase interval</string>
-    <string name="increasing_ring_interval_eachring">On each ring</string>
-    <string name="increasing_ring_interval_half_second">0.5 seconds</string>
-    <string name="increasing_ring_interval_1second">1 second</string>
-    <string name="increasing_ring_interval_2seconds">2 seconds</string>
-    <string name="increasing_ring_interval_3seconds">3 seconds</string>
-    <string name="increasing_ring_interval_5seconds">5 seconds</string>
-    <string name="increasing_ring_interval_10seconds">10 seconds</string>
+    <string name="increasing_ring_ramp_up_duration_title">Ramp-up duration</string>
+    <string name="increasing_ring_interval_1">10 seconds</string>
+    <string name="increasing_ring_interval_2">15 seconds</string>
+    <string name="increasing_ring_interval_3">20 seconds</string>
+    <string name="increasing_ring_interval_4">25 seconds</string>
+    <string name="increasing_ring_interval_5">30 seconds</string>
 
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
