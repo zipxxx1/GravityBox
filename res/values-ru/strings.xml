@@ -1766,4 +1766,28 @@
     <!-- Battery style: Stock battery with percentage -->
     <string name="battery_style_stock_percent">Стоковая батарея с процентами</string>
 
+     <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">В строке состояния</string>
+    <string name="battery_percent_text_statusbar_summary">Отображение текста процентов батареи в стандартной строке состояния (на разблокированном устройстве)</string>
+    <string name="battery_percent_text_keyguard_title">Защищённый режим</string>
+    <string name="battery_percent_text_keyguard_summary">Определение параметров текста процентов в строке состояния экрана блокировки</string>
+    <string name="keyguard_percent_text_default">По умолчанию (во время зарядки)</string>
+    <string name="keyguard_percent_text_show_always">Отображать всегда</string>
+    <string name="keyguard_percent_text_hide">Скрыть</string>
+    <string name="battery_percent_text_header_hide_title">Скрыть в строке состояния</string>
+    <string name="battery_percent_text_size_default">По умолчанию</string>
+
+    <!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">Строка уведомлений</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Включение строки уведомлений и связанных с ней функций (необходима перезагрузка)</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">Увеличенные значки</string>
+    <string name="pref_navbar_larger_icons_summary">Необходима перезагрузка</string>
+
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">Разрешить мягкую перезагрузку</string>
+    <string name="pref_reboot_allow_softreboot_summary">Имейте в виду, что мягкая перезагрузка может вызвать 
+        повышенный расход батареи или нестабильность. Лучше использовать обычную перезагрузку.</string>
+
 </resources>
