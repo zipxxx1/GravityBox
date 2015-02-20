@@ -913,10 +913,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Zamień z przyciskiem MENU</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">Nieinwazyjne połączenie przychodzące</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">Utrzymuje połączenia przychodzące w tle w trakcie interakcji użytkownika</string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Nieokreślone</string>
     <string name="pref_cat_smart_radio_title">Smart radio</string>

@@ -1649,12 +1649,6 @@
                 android:dialogTitle="@string/pref_increasing_ring_title"
                 gb:streamType="ring" />
 
-            <CheckBoxPreference 
-                android:key="pref_phone_nonintrusive_incoming_call"
-                android:title="@string/pref_phone_nonintrusive_incoming_call_title"
-                android:summary="@string/pref_phone_nonintrusive_incoming_call_summary"
-                android:defaultValue="false" />
-
             <ListPreference 
                 android:key="pref_caller_fullscreen_photo2"
                 android:title="@string/caller_fullscreen_photo_title"

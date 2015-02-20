@@ -927,10 +927,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Αλλαγή με πλήκτρο μενού</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">Διακριτική εισερχόμενη κλήση</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">Διατηρεί τις εισερχόμενες κλήσεις στο παρασκήνιο κατά τη διάρκεια της αλληλεπίδρασης του χρήστη</string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Απροσδιόριστο</string>
     <string name="pref_cat_smart_radio_title">Smart radio</string>

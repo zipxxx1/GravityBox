@@ -165,7 +165,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE = "pref_caller_unknown_photo_enable";
     public static final String PREF_KEY_CALLER_UNKNOWN_PHOTO = "pref_caller_unknown_photo";
     public static final String PREF_KEY_DIALER_SHOW_DIALPAD = "pref_dialer_show_dialpad";
-    public static final String PREF_KEY_PHONE_NONINTRUSIVE_INCOMING_CALL = "pref_phone_nonintrusive_incoming_call";
     public static final String PREF_KEY_NATIONAL_ROAMING = "pref_national_roaming";
     public static final String PREF_CAT_KEY_STATUSBAR = "pref_cat_statusbar";
     public static final String PREF_CAT_KEY_STATUSBAR_QS = "pref_cat_statusbar_qs";
@@ -1266,7 +1265,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefQsBatteryTempUnit;
         private AppPickerPreference mPrefCustomApp;
         private CheckBoxPreference mPrefSignalIconAutohide;
-        private CheckBoxPreference mPrefNonIntrusiveCall;
         private PreferenceScreen mPrefCatMtkFixes;
         private ListPreference mPrefChargingLed;
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
@@ -1476,7 +1474,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCallerUnknownPhotoEnable = (CheckBoxPreference) findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE);
             mPrefCallerUnknownPhoto = (Preference) findPreference(PREF_KEY_CALLER_UNKNOWN_PHOTO);
             mPrefCallerFullscreenPhoto = (ListPreference) findPreference(PREF_KEY_CALLER_FULLSCREEN_PHOTO);
-            mPrefNonIntrusiveCall = (CheckBoxPreference) findPreference(PREF_KEY_PHONE_NONINTRUSIVE_INCOMING_CALL);
 
             mPrefNetworkModeTileMode = (ListPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_MODE);
             mPrefNetworkModeTile2G3GMode = (ListPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_2G3G_MODE);
@@ -1666,7 +1663,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     Preference p = mPrefCatSignalCluster.getPreference(i);
                     mPrefCatSignalCluster.removePreference(p);
                 }
-                mPrefCatPhoneTelephony.removePreference(mPrefNonIntrusiveCall);
                 mPrefCatLsOther.removePreference(mPrefLsRotation);
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {

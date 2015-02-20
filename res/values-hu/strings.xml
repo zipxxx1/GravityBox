@@ -937,10 +937,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Pozíció felcserélése menü gombbal</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">Nem tolakodó bejövő hívás</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">A bejövő hívásokat a háttérben tartja felhasználói interakció közben</string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Nem meghatározott</string>
     <string name="pref_cat_smart_radio_title">Okos rádiókapcsolat</string>

@@ -925,10 +925,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Tukar dengan butang menu</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">Panggilan yang tidak menggqangu</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">Simpan panggilan baru di belakang ketika panggilan sedang aktif</string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Tidak dapat dipastikan</string>
     <string name="pref_cat_smart_radio_title">Smart radio</string>

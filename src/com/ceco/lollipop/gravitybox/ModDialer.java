@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,13 +26,8 @@ import java.util.Set;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 
 import android.app.Fragment;
-import android.app.KeyguardManager;
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,7 +36,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Vibrator;
@@ -49,8 +43,6 @@ import android.os.PowerManager.WakeLock;
 import android.view.View;
 import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodHook.Unhook;
-import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -70,22 +62,12 @@ public class ModDialer {
     private static final String CLASS_CALL_CMD_CLIENT = "com.android.incallui.CallCommandClient";
     private static final String CLASS_CALL_BUTTON_FRAGMENT = "com.android.incallui.CallButtonFragment";
     private static final String CLASS_ANSWER_FRAGMENT = "com.android.incallui.AnswerFragment";
-    private static final String CLASS_STATUSBAR_NOTIFIER = "com.android.incallui.StatusBarNotifier";
-    private static final String CLASS_CALL = "com.android.services.telephony.common.Call";
-    private static final String CLASS_CONTACT_CACHE_ENTRY = "com.android.incallui.ContactInfoCache.ContactCacheEntry";
     private static final String CLASS_DIALPAD_FRAGMENT = "com.android.dialer.dialpad.DialpadFragment";
     private static final boolean DEBUG = false;
-
-    public static final String NOTIF_EXTRA_NON_INTRUSIVE_CALL = "gbNonIntrusiveCall";
 
     private static final int CALL_STATE_ACTIVE = 2;
     private static final int CALL_STATE_INCOMING = 3;
     private static final int CALL_STATE_WAITING = 4;
-
-    private static final String ACTION_DISMISS_INCOMING_CALL = 
-            "gravitybox.dialer.intent.action.DISMISS_INCOMING_CALL";
-    private static final String ACTION_ANSWER_INCOMING_CALL = 
-            "gravitybox.dialer.intent.action.ANSWER_INCOMING_CALL";
 
     private static XSharedPreferences mPrefsPhone;
     private static int mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
@@ -99,12 +81,7 @@ public class ModDialer {
     private static Vibrator mVibrator;
     private static Handler mHandler;
     private static WakeLock mWakeLock;
-    private static Unhook mSetFullscreenIntentHook;
-    private static boolean mNonIntrusiveIncomingCall;
-    private static Unhook mNotifBuildHook;
-    private static boolean mBroadcastReceiverRegistered;
     private static Class<?> mClassInCallPresenter;
-    private static boolean mIsCallUiInBackground;
     private static QuietHours mQuietHours;
 
     private static void log(String message) {
@@ -197,28 +174,6 @@ public class ModDialer {
         }
     }
 
-    private static void answerCall(Context context, Object call) {
-        if (context == null || call == null || 
-                mClassCallCmdClient == null ||
-                mClassInCallPresenter == null) return;
-
-        try { 
-            final Object callCmdClient = 
-                    XposedHelpers.callStaticMethod(mClassCallCmdClient, "getInstance");
-            final Object inCallPresenter = 
-                    XposedHelpers.callStaticMethod(mClassInCallPresenter, "getInstance");
-            final int callId = (Integer) XposedHelpers.callMethod(mIncomingCall, "getCallId");
-            final Object sbNotifier = XposedHelpers.getObjectField(inCallPresenter, "mStatusBarNotifier");
-            Intent intent = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-            context.sendBroadcast(intent);
-            XposedHelpers.callMethod(callCmdClient, "answerCall", callId);
-            XposedHelpers.callMethod(sbNotifier, "cancelInCall");
-            if (DEBUG) log("Call answered");
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
     private static void vibrate(int v1, int p1, int v2) {
         if (mVibrator == null) return;
 
@@ -256,37 +211,6 @@ public class ModDialer {
             } catch (NumberFormatException e) {
                 XposedBridge.log(e);
             }
-
-            mNonIntrusiveIncomingCall = mPrefsPhone.getBoolean(
-                    GravityBoxSettings.PREF_KEY_PHONE_NONINTRUSIVE_INCOMING_CALL, false) &&
-                        !Utils.isMtkDevice();
-        }
-    }
-
-    private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("Broadcast received: " + intent);
-            if (intent.getAction().equals(ACTION_ANSWER_INCOMING_CALL)) {
-                answerCall(context, mIncomingCall);
-            } else if (intent.getAction().equals(ACTION_DISMISS_INCOMING_CALL)) {
-                rejectCall(mIncomingCall);
-            }
-        }
-    };
-
-    private static boolean isDayDreaming() {
-        try {
-            Class<?> serviceManagerClass = XposedHelpers.findClass("android.os.ServiceManager", null);
-            Object dmService = XposedHelpers.callStaticMethod(serviceManagerClass, "getService", "dreams");
-            Class<?> dreamManagerStub = XposedHelpers.findClass("android.service.dreams.IDreamManager.Stub", null);
-            Object dreamManager = XposedHelpers.callStaticMethod(dreamManagerStub, "asInterface", dmService);
-            boolean isDreaming = (Boolean) XposedHelpers.callMethod(dreamManager, "isDreaming");
-            if (DEBUG) log("isDayDreaming: " + isDreaming);
-            return isDreaming;
-        } catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
-            return false;
         }
     }
 
@@ -438,23 +362,9 @@ public class ModDialer {
                     if (state == CALL_STATE_INCOMING) {
                         mIncomingCall = param.args[0];
                         attachSensorListener();
-                        if (mIsCallUiInBackground) {
-                            final Object callCmdClient = 
-                                    XposedHelpers.callStaticMethod(mClassCallCmdClient, "getInstance");
-                            if (callCmdClient != null) {
-                                XposedHelpers.callMethod(callCmdClient, "setSystemBarNavigationEnabled", true);
-                            }
-                        }
                     } else if (state == CALL_STATE_WAITING &&
                             mCallVibrations.contains(GravityBoxSettings.CV_WAITING)) {
                         vibrate(200, 300, 500);
-                        if (mIsCallUiInBackground) {
-                            final Object callCmdClient = 
-                                    XposedHelpers.callStaticMethod(mClassCallCmdClient, "getInstance");
-                            if (callCmdClient != null) {
-                                XposedHelpers.callMethod(callCmdClient, "setSystemBarNavigationEnabled", true);
-                            }
-                        }
                     }
                 }
             });
@@ -522,112 +432,6 @@ public class ModDialer {
                 }
             });
         } catch(Throwable t) {
-            XposedBridge.log(t);
-        }
-
-        try {
-            final Class<?> classStatusbarNotifier = XposedHelpers.findClass(CLASS_STATUSBAR_NOTIFIER, classLoader);
-            final Class<?> classCallList = XposedHelpers.findClass(CLASS_CALL_LIST, classLoader);
-
-            XposedHelpers.findAndHookMethod(classStatusbarNotifier, "configureFullScreenIntent",
-                    Notification.Builder.class, PendingIntent.class, CLASS_CALL, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    mIsCallUiInBackground = false;
-                    if (!mNonIntrusiveIncomingCall || isDayDreaming()) return;
-
-                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-                    KeyguardManager kg = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-                    if (pm.isScreenOn() && !kg.isKeyguardLocked()) {
-                        if (DEBUG) log("Enforcing non-intrusive call notification");
-                        mSetFullscreenIntentHook = XposedHelpers.findAndHookMethod(Notification.Builder.class,
-                                "setFullScreenIntent", PendingIntent.class, boolean.class, 
-                                    XC_MethodReplacement.DO_NOTHING);
-                        mIsCallUiInBackground = true; 
-                    }
-                }
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mSetFullscreenIntentHook != null) {
-                        mSetFullscreenIntentHook.unhook();
-                        mSetFullscreenIntentHook = null;
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(classStatusbarNotifier, "buildAndSendNotification",
-                    CLASS_CALL, CLASS_CONTACT_CACHE_ENTRY, boolean.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!mNonIntrusiveIncomingCall) return;
-
-                    final Object callList = XposedHelpers.callStaticMethod(classCallList, "getInstance");
-                    final Object call = XposedHelpers.callMethod(param.thisObject, "getCallToShow", callList);
-                    final int callId = (Integer) XposedHelpers.callMethod(call, "getCallId");
-                    final int origCallId = (Integer) XposedHelpers.callMethod(param.args[0], "getCallId");
-                    if (call == null || callId != origCallId) {
-                        if (DEBUG) log("call is null or call ID != original call ID");
-                        return;
-                    }
-
-                    final int state = (Integer) XposedHelpers.callMethod(param.args[0], "getState");
-                    if (state == CALL_STATE_INCOMING) {
-                        final Context context = (Context) XposedHelpers.getObjectField(
-                                param.thisObject, "mContext");
-                        final Resources res = context.getResources();
-                        if (!mBroadcastReceiverRegistered) {
-                            IntentFilter intentFilter = new IntentFilter();
-                            intentFilter.addAction(ACTION_ANSWER_INCOMING_CALL);
-                            intentFilter.addAction(ACTION_DISMISS_INCOMING_CALL);
-                            context.registerReceiver(mBroadcastReceiver, intentFilter);
-                            mBroadcastReceiverRegistered = true;
-                        }
-                        mNotifBuildHook = XposedHelpers.findAndHookMethod(
-                                classStatusbarNotifier, "getNotificationBuilder", new XC_MethodHook() {
-                            @Override
-                            protected void afterHookedMethod(MethodHookParam param2) throws Throwable {
-                                if (DEBUG) log("getNotificationBuilder: adding actions");
-                                Notification.Builder b = (Notification.Builder) param2.getResult();
-                                // Answer action
-                                int iconId = res.getIdentifier(
-                                        "stat_sys_phone_call", "drawable", "com.android.dialer");
-                                String label = context.getString(res.getIdentifier(
-                                        "description_target_answer", "string", "com.android.dialer"));
-                                Intent iAnswer = new Intent(ACTION_ANSWER_INCOMING_CALL);
-                                PendingIntent piAnswer = PendingIntent.getBroadcast(context, 0, iAnswer, 0);
-                                b.addAction(iconId, label, piAnswer);
-                                // Reject action
-                                iconId = res.getIdentifier(
-                                        "stat_sys_phone_call_end", "drawable", "com.android.dialer");
-                                label = context.getString(res.getIdentifier(
-                                        "description_target_decline", "string", "com.android.dialer"));
-                                Intent iDismiss = new Intent(ACTION_DISMISS_INCOMING_CALL);
-                                PendingIntent piDismiss = PendingIntent.getBroadcast(context, 0, iDismiss, 0);
-                                b.addAction(iconId, label, piDismiss);
-                                // set ticker
-                                final boolean isConference = 
-                                        (Boolean) XposedHelpers.callMethod(call, "isConferenceCall");
-                                final String contentTitle = (String) XposedHelpers.callMethod(
-                                        param.thisObject, "getContentTitle", param.args[1], isConference);
-                                b.setTicker(contentTitle);
-                                // mark notification as non-intrusive
-                                Bundle bundle = new Bundle();
-                                bundle.putBoolean(NOTIF_EXTRA_NON_INTRUSIVE_CALL, true);
-                                b.setExtras(bundle);
-                            }
-                        });
-                    }
-                }
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mNotifBuildHook != null) {
-                        mNotifBuildHook.unhook();
-                        mNotifBuildHook = null;
-                    }
-                }
-            });
-        } catch (Throwable t) {
             XposedBridge.log(t);
         }
 

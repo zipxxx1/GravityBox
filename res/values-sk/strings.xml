@@ -911,10 +911,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Prehodiť s menu tlačidlom</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">Príchodzí hovor v pozadí</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">v prípade, ak sa zariadenie používa, bude príchodzí hovor oznámený len upozornením</string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Nedefinovaný</string>
     <string name="pref_smart_radio_enable_summary">Táto funkcia dokáže automaticky prepínať medzi definovaným normálnym režimom

@@ -721,9 +721,6 @@
     <string name="pref_force_overflow_menu_button_summary">재시작 필요</string>
 
     <string name="pref_navbar_custom_key_swap_title">메뉴 키와 전환</string>
-    
-    <string name="pref_phone_nonintrusive_incoming_call_title">간섭 없는 수신 전화</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">전화가 수신될 때 백그라운드에서 울리도록 합니다. 즉, 사용자가 무언가를 하고 있을 때에는 전화 수락 여부 창이 뜨지 않고, 알림으로만 전화 수신을 알립니다.</string>
 
     <string name="smart_radio_action_undefined">지정되지 않음</string>
     <string name="pref_cat_smart_radio_title">스마트 라디오</string>

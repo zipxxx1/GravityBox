@@ -927,10 +927,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">互換自訂按鍵與選單鍵位置</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">非干擾性來電</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">當您使用裝置時，來電會顯示成一個通知</string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">未定義</string>
     <string name="pref_cat_smart_radio_title">智慧型無線網路</string>

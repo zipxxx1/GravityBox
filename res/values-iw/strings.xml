@@ -913,10 +913,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">החלף עם כפתור תפריט</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">שיחות נכנסות לא פולשניות</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">בעת שהמשתמש עובד עם המכשיר, שיחות נכנסות יופעלו ברקע ולא יוצגו על כל המסך</string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">בלתי מוגדר</string>
     <string name="pref_cat_smart_radio_title">מודם חכם</string>

@@ -938,10 +938,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Intervertir avec la touche menu</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">Appel entrant non-intrusif</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">Laisse les appels entrants en fond de tâche lors d\'interaction de l\'utilisateur</string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Non défini</string>
     <string name="pref_cat_smart_radio_title">Ondes radio intelligentes</string>

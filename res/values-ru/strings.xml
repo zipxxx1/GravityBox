@@ -941,10 +941,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Поменять местами с меню</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">Деликатный входящий</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">Получение входящих вызовов в фоне во время действий пользователя </string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Не определено</string>
     <string name="pref_cat_smart_radio_title">Умное радио</string>

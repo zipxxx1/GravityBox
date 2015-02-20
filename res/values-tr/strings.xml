@@ -893,10 +893,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Menü tuşuyla yerini değiştir</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">Arkaplan gelen aramalar</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">Kullanıcının ekranda iş yaparken etkilenmemesi için gelen aramaları arkaplanda tutar</string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Belirlenmedi</string>
     <string name="pref_cat_smart_radio_title">Akıllı radyo</string>

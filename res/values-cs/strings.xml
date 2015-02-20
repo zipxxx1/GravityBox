@@ -908,10 +908,6 @@
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Přehodit s menu tlačítkem</string>
 
-    <!-- Phone: Non-intrusive incoming call -->
-    <string name="pref_phone_nonintrusive_incoming_call_title">Příchozí hovor v pozadí</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">V případě, že se zařízení používá, bude příchozí hovor oznámen jen upozorněním</string>
-
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Nedefinovaný</string>
     <string name="pref_cat_smart_radio_title">Inteligentní režim</string>
