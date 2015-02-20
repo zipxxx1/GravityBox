@@ -91,6 +91,7 @@ public class ModPowerMenu {
     private static Object mExpandedDesktopAction;
     private static boolean mRebootConfirmRequired;
     private static boolean mRebootAllowOnLockscreen;
+    private static boolean mAllowSoftReboot;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -197,6 +198,8 @@ public class ModPowerMenu {
                             GravityBoxSettings.PREF_KEY_REBOOT_CONFIRM_REQUIRED, true);
                     mRebootAllowOnLockscreen = prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_REBOOT_ALLOW_ON_LOCKSCREEN, false);
+                    mAllowSoftReboot = prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_REBOOT_ALLOW_SOFTREBOOT, false);
 
                     @SuppressWarnings("unchecked")
                     List<Object> mItems = (List<Object>) XposedHelpers.getObjectField(param.thisObject, "mItems");
@@ -370,24 +373,28 @@ public class ModPowerMenu {
             try {
                 if (DEBUG) log("about to build reboot dialog");
 
+                List<IIconListAdapterItem> list = 
+                        new ArrayList<IIconListAdapterItem>(mRebootItemList);
+                if (!mAllowSoftReboot) {
+                    list.remove(1);
+                }
                 AlertDialog.Builder builder = new AlertDialog.Builder(context)
                     .setTitle(mRebootStr)
-                    .setAdapter(new IconListAdapter(context, mRebootItemList), new DialogInterface.OnClickListener() {
-                        
+                    .setAdapter(new IconListAdapter(context, list), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                             if (DEBUG) log("onClick() item = " + which);
-                            handleReboot(context, mRebootStr, which);
+                            handleReboot(context, mRebootStr, 
+                                    (which > 0 && !mAllowSoftReboot) ? (which+1) : which);
                         }
                     })
                     .setNegativeButton(android.R.string.no,
                             new DialogInterface.OnClickListener() {
-        
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
                     });
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);

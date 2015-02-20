@@ -1794,4 +1794,9 @@
     <string name="pref_navbar_larger_icons_title">Use larger icons</string>
     <string name="pref_navbar_larger_icons_summary">Requires reboot</string>
 
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">Allow soft reboot</string>
+    <string name="pref_reboot_allow_softreboot_summary">Note that soft reboot can cause 
+        unexpected battery drain or instability issues. Best practice is to always use normal reboot.</string>
+
 </resources>

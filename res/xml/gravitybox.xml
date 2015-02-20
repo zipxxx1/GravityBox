@@ -1425,6 +1425,13 @@
                 android:defaultValue="false" />
 
             <CheckBoxPreference 
+                android:key="pref_reboot_allow_softreboot"
+                android:title="@string/pref_reboot_allow_softreboot_title"
+                android:summary="@string/pref_reboot_allow_softreboot_summary"
+                android:defaultValue="false"
+                android:dependency="pref_poweroff_advanced" />
+
+            <CheckBoxPreference 
                 android:key="pref_reboot_allow_on_lockscreen"
                 android:title="@string/pref_reboot_allow_on_lockscreen_title"
                 android:defaultValue="false"
