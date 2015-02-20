@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.res.XModuleResources;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -53,6 +54,7 @@ public class ModNavigationBar {
 
     private static final String CLASS_NAVBAR_VIEW = "com.android.systemui.statusbar.phone.NavigationBarView";
     private static final String CLASS_KEY_BUTTON_VIEW = "com.android.systemui.statusbar.policy.KeyButtonView";
+    private static final String CLASS_KEY_BUTTON_RIPPLE = "com.android.systemui.statusbar.policy.KeyButtonRipple";
     private static final String CLASS_NAVBAR_TRANSITIONS = 
             "com.android.systemui.statusbar.phone.NavigationBarTransitions";
     private static final String CLASS_SEARCH_PANEL_VIEW_CIRCLE = "com.android.systemui.SearchPanelCircleView";
@@ -96,7 +98,7 @@ public class ModNavigationBar {
     // Colors
     private static boolean mNavbarColorsEnabled;
     private static int mKeyDefaultColor = 0xe8ffffff;
-    private static int mKeyDefaultGlowColor = 0x40ffffff;
+    private static int mKeyDefaultGlowColor = 0x33ffffff;
     private static int mKeyColor;
     private static int mKeyGlowColor;
 
@@ -720,6 +722,16 @@ public class ModNavigationBar {
                     }
                 });
             }
+
+            XposedHelpers.findAndHookMethod(CLASS_KEY_BUTTON_RIPPLE, classLoader,
+                    "getRipplePaint", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mNavbarColorsEnabled) {
+                        ((Paint)param.getResult()).setColor(mKeyGlowColor);
+                    }
+                }
+            });
         } catch(Throwable t) {
             XposedBridge.log(t);
         }
@@ -993,31 +1005,41 @@ public class ModNavigationBar {
             View v = (View) XposedHelpers.getObjectField(mNavigationBarView, "mCurrentView");
             ViewGroup navButtons = (ViewGroup) v.findViewById(
                     mResources.getIdentifier("nav_buttons", "id", PACKAGE_NAME));
-            final int childCount = navButtons.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                if (navButtons.getChildAt(i) instanceof ImageView) {
-                    ImageView imgv = (ImageView)navButtons.getChildAt(i);
-                    if (mNavbarColorsEnabled) {
-                        imgv.setColorFilter(mKeyColor, PorterDuff.Mode.SRC_ATOP);
-                    } else {
-                        imgv.clearColorFilter();
-                    }
-                    if (imgv.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW)) {
-                        Drawable d = (Drawable) XposedHelpers.getObjectField(imgv, "mGlowBG");
-                        if (d != null) {
-                            if (mNavbarColorsEnabled) {
-                                d.setColorFilter(mKeyGlowColor, PorterDuff.Mode.SRC_ATOP);
-                            } else {
-                                d.clearColorFilter();
-                            }
-                        }
-                    } else if (imgv instanceof KeyButtonView) {
-                        ((KeyButtonView) imgv).setGlowColor(mKeyGlowColor);
-                    }
-                }
-            }
+            setKeyColorRecursive(navButtons);
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static void setKeyColorRecursive(ViewGroup vg) {
+        if (vg == null) return;
+        final int childCount = vg.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View child = vg.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                setKeyColorRecursive((ViewGroup) child);
+            } else if (child instanceof ImageView) {
+                ImageView imgv = (ImageView)vg.getChildAt(i);
+                if (mNavbarColorsEnabled) {
+                    imgv.setColorFilter(mKeyColor, PorterDuff.Mode.SRC_ATOP);
+                } else {
+                    imgv.clearColorFilter();
+                }
+                if (imgv.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW) &&
+                    !mNavbarColorsEnabled) {
+                    Drawable ripple = imgv.getBackground();
+                    if (ripple != null && 
+                            ripple.getClass().getName().equals(CLASS_KEY_BUTTON_RIPPLE)) {
+                        Paint paint = (Paint)XposedHelpers.getObjectField(ripple, "mRipplePaint");
+                        if (paint != null) {
+                            paint.setColor(0xffffffff);
+                        }
+                    }
+                } else if (imgv instanceof KeyButtonView) {
+                    ((KeyButtonView) imgv).setGlowColor(mNavbarColorsEnabled ?
+                            mKeyGlowColor : mKeyDefaultGlowColor);
+                }
+            }
         }
     }
 

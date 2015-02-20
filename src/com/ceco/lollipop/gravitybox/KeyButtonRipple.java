@@ -23,6 +23,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
@@ -37,14 +38,13 @@ import java.util.HashSet;
 public class KeyButtonRipple extends Drawable {
 
     private static final float GLOW_MAX_SCALE_FACTOR = 1.35f;
-    private static final float GLOW_MAX_ALPHA = 0.2f;
     private static final int ANIMATION_DURATION_SCALE = 350;
     private static final int ANIMATION_DURATION_FADE = 450;
 
     private Paint mRipplePaint;
     private float mGlowAlpha = 0f;
+    private float mGlowAlphaMax = 0.2f;
     private float mGlowScale = 1f;
-    private int mGlowColor = 0xffffffff;
     private boolean mPressed;
     private int mMaxWidth;
 
@@ -65,13 +65,16 @@ public class KeyButtonRipple extends Drawable {
         if (mRipplePaint == null) {
             mRipplePaint = new Paint();
             mRipplePaint.setAntiAlias(true);
-            mRipplePaint.setColor(mGlowColor);
+            mRipplePaint.setColor(0xffffff);
+            mRipplePaint.setAlpha((int)(mGlowAlphaMax * 255f));
         }
         return mRipplePaint;
     }
 
     public void setGlowColor(int color) {
-        mGlowColor = color;
+        int rgb = Color.rgb(Color.red(color), Color.green(color), Color.blue(color));
+        getRipplePaint().setColor(rgb);
+        mGlowAlphaMax = Color.alpha(color) / 255f;
     }
 
     private void drawSoftware(Canvas canvas) {
@@ -187,7 +190,7 @@ public class KeyButtonRipple extends Drawable {
 
     private void enterSoftware() {
         cancelAnimations();
-        mGlowAlpha = GLOW_MAX_ALPHA;
+        mGlowAlpha = mGlowAlphaMax;
         ObjectAnimator scaleAnimator = ObjectAnimator.ofFloat(this, "glowScale",
                 0f, GLOW_MAX_SCALE_FACTOR);
         scaleAnimator.setInterpolator(mInterpolator);
