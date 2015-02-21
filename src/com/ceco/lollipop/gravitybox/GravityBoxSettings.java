@@ -1680,10 +1680,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
             }
 
+            // TODO: H+ indicator
             // Remove Moto XT preferences
-            if (Utils.isMotoXtDevice()) {
+            //if (Utils.isMotoXtDevice()) {
                 mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS));
-            }
+            //}
 
             // Remove MSIM preferences for non-MSIM devices
             if (!sSystemProperties.hasMsimSupport) {
