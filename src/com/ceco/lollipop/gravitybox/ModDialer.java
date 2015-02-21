@@ -39,6 +39,7 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Vibrator;
 import android.os.PowerManager.WakeLock;
+import android.telecom.TelecomManager;
 import android.view.View;
 import android.widget.ImageView;
 import de.robv.android.xposed.XC_MethodHook;
@@ -58,7 +59,7 @@ public class ModDialer {
     private static final String CLASS_IN_CALL_PRESENTER = "com.android.incallui.InCallPresenter";
     private static final String ENUM_IN_CALL_STATE = "com.android.incallui.InCallPresenter$InCallState";
     private static final String CLASS_CALL_LIST = "com.android.incallui.CallList";
-    private static final String CLASS_CALL_CMD_CLIENT = "com.android.incallui.CallCommandClient";
+    private static final String CLASS_TELECOM_ADAPTER = "com.android.incallui.TelecomAdapter";
     private static final String CLASS_CALL_BUTTON_FRAGMENT = "com.android.incallui.CallButtonFragment";
     private static final String CLASS_ANSWER_FRAGMENT = "com.android.incallui.AnswerFragment";
     private static final String CLASS_DIALPAD_FRAGMENT = "com.android.dialer.dialpad.DialpadFragment";
@@ -75,7 +76,7 @@ public class ModDialer {
     private static SensorManager mSensorManager;
     private static boolean mSensorListenerAttached = false;
     private static Object mIncomingCall;
-    private static Class<?> mClassCallCmdClient;
+    private static Class<?> mClassTelecomAdapter;
     private static Object mPreviousCallState;
     private static Vibrator mVibrator;
     private static Handler mHandler;
@@ -144,12 +145,10 @@ public class ModDialer {
 
     private static void silenceRinger() {
         try {
-            final Class<?> classSm = XposedHelpers.findClass("android.os.ServiceManager", null);
-            final Class<?> classITelephony = XposedHelpers.findClass(
-                    "com.android.internal.telephony.ITelephony.Stub", null);
-            final Object ts = XposedHelpers.callStaticMethod(classSm, "checkService", Context.TELEPHONY_SERVICE);            
-            final Object its = XposedHelpers.callStaticMethod(classITelephony, "asInterface", ts);
-            XposedHelpers.callMethod(its, "silenceRinger");
+            Object ta = XposedHelpers.callStaticMethod(mClassTelecomAdapter, "getInstance");
+            Context ctx = (Context) XposedHelpers.getObjectField(ta, "mContext");
+            TelecomManager tm = (TelecomManager) ctx.getSystemService(Context.TELECOM_SERVICE);
+            XposedHelpers.callMethod(tm, "silenceRinger");
         } catch(Throwable t) {
             XposedBridge.log(t);
         }
@@ -157,15 +156,16 @@ public class ModDialer {
 
     private static void rejectCall(Object call) {
         if (call == null || 
-                mClassCallCmdClient == null) return;
+                mClassTelecomAdapter == null) return;
 
         try {
             final Object callCmdClient = 
-                    XposedHelpers.callStaticMethod(mClassCallCmdClient, "getInstance");
-            if (callCmdClient != null) {
-                Class<?>[] pArgs = new Class<?>[] { call.getClass(), boolean.class, String.class };
+                    XposedHelpers.callStaticMethod(mClassTelecomAdapter, "getInstance");
+            final String callId = (String) XposedHelpers.callMethod(call, "getId");
+            if (callCmdClient != null && callId != null) {
+                Class<?>[] pArgs = new Class<?>[] { String.class, boolean.class, String.class };
                 XposedHelpers.callMethod(callCmdClient, "rejectCall", pArgs,
-                        call, false, null);
+                        callId, false, null);
                 if (DEBUG) log("Call rejected");
             }
         } catch (Throwable t) {
@@ -327,7 +327,7 @@ public class ModDialer {
             mClassInCallPresenter = XposedHelpers.findClass(CLASS_IN_CALL_PRESENTER, classLoader);
             final Class<? extends Enum> enumInCallState = (Class<? extends Enum>)
                     XposedHelpers.findClass(ENUM_IN_CALL_STATE, classLoader);
-            mClassCallCmdClient = XposedHelpers.findClass(CLASS_CALL_CMD_CLIENT, classLoader);
+            mClassTelecomAdapter = XposedHelpers.findClass(CLASS_TELECOM_ADAPTER, classLoader);
 
             XposedBridge.hookAllMethods(mClassInCallPresenter, "setUp", new XC_MethodHook() {
                 @Override
@@ -360,8 +360,11 @@ public class ModDialer {
                     if (state == CALL_STATE_INCOMING) {
                         mIncomingCall = param.args[0];
                         attachSensorListener();
-                    } else if (state == CALL_STATE_WAITING &&
-                            mCallVibrations.contains(GravityBoxSettings.CV_WAITING)) {
+                    }
+                    if (state == CALL_STATE_WAITING ||
+                            (state == CALL_STATE_INCOMING && mPreviousCallState == 
+                                Enum.valueOf(enumInCallState, "INCALL") &&
+                            mCallVibrations.contains(GravityBoxSettings.CV_WAITING))) {
                         vibrate(200, 300, 500);
                     }
                 }
