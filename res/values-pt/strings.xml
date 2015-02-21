@@ -487,7 +487,7 @@
     <string name="pref_qs_tile_behaviour_override_summary">Substitui o comportamento do toque/toque-longo para blocos selecionados (necessário reiniciar)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">Slot de SIM para o bloco de modo de rede/string>
+    <string name="pref_qs_network_mode_sim_slot_title">Slot de SIM para o bloco de modo de rede</string>
     <string name="pref_qs_network_mode_sim_slot_summary">Define o slot de SIM ao qual o modo de rede se aplica (%s)</string>
     <string name="sim_slot1">Slot 1</string>
     <string name="sim_slot2">Slot 2</string>
