@@ -511,8 +511,10 @@ public class ModLedControl {
     private static void clearNotifications() {
         try {
             if (mNotifManagerService != null) {
-                XposedHelpers.callMethod(mNotifManagerService, "cancelAll",
-                        XposedHelpers.callStaticMethod(ActivityManager.class, "getCurrentUser"));
+                XposedHelpers.callMethod(mNotifManagerService, "cancelAllLocked",
+                        android.os.Process.myUid(), android.os.Process.myPid(),
+                        XposedHelpers.callStaticMethod(ActivityManager.class, "getCurrentUser"),
+                        3, (Object)null, true);
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
