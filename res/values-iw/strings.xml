@@ -949,11 +949,6 @@
     <string name="pref_pulse_notification_delay_title">השהיית התראה מהבהבת</string>
     <string name="pref_pulse_notification_delay_summary">דורש איתחול</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">נקה את כל ההגדרות של התנהגות משימות אחרונות</string>
-    <string name="pref_clear_recents_mode_0">לחיצה רגילה תגרום לניקוי כל היישומים האחרונים, ואילו לחיצה ארוכה תביא לניקוי כל היישומים האחרונים מלבד הנוכחיים</string>
-    <string name="pref_clear_recents_mode_1">לחיצה רגילה לגרום לניקוי כל היישומים האחרים מלבד הנוכחיים, ואילו לחיצה ארוכה תביא לניקוי כל היישומים האחרונים</string>
-
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">בטל תפריט הפעלה/כיבוי במסך הנעילה</string>
 

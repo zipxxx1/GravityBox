@@ -2167,13 +2167,6 @@
                 android:title="@string/recents_clear_all_title"
                 android:entries="@array/recents_clear_entries"
                 android:entryValues="@array/recents_clear_values"
-                android:defaultValue="53" />
-
-            <ListPreference 
-                android:key="pref_clear_recents_mode"
-                android:title="@string/pref_clear_recents_mode_title"
-                android:entries="@array/pref_clear_recents_mode_entries"
-                android:entryValues="@array/pref_clear_recents_mode_values"
                 android:defaultValue="0" />
 
             <ListPreference 
@@ -2187,27 +2180,21 @@
                 android:key="pref_recent_clear_margin_top"
                 android:title="@string/pref_recent_clear_margin_top_title"
                 minimum="0"
-                maximum="50"
+                maximum="100"
                 interval="1"
                 monitorBoxEnabled="true"
                 monitorBoxUnit="px"
-                android:defaultValue="20" />
+                android:defaultValue="77" />
 
             <com.ceco.lollipop.gravitybox.preference.SeekBarPreference
                 android:key="pref_recent_clear_margin_bottom"
                 android:title="@string/pref_recent_clear_margin_bottom_title"
                 minimum="0"
-                maximum="50"
+                maximum="100"
                 interval="1"
                 monitorBoxEnabled="true"
                 monitorBoxUnit="px"
-                android:defaultValue="40" />
-
-            <CheckBoxPreference
-                android:key="pref_recents_translucent_bars"
-                android:title="@string/pref_recents_translucent_bars_title"
-                android:summary="@string/pref_recents_translucent_bars_summary"
-                android:defaultValue="false" />
+                android:defaultValue="50" />
 
         </PreferenceCategory>
 

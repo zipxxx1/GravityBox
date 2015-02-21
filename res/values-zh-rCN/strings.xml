@@ -976,11 +976,6 @@
     <!-- Pulse notification delay -->
     <string name="pref_pulse_notification_delay_title">跳动延迟通知</string>
     <string name="pref_pulse_notification_delay_summary">需要重新启动</string>
-    
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">清除所有最近任务动作</string>
-    <string name="pref_clear_recents_mode_0">单击清除全部，长按清除目前所有</string>
-    <string name="pref_clear_recents_mode_1">单击清除目前所有，长按清除全部</string>
 
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">在锁屏上禁用电源键菜单</string>
@@ -1591,10 +1586,6 @@
     <string name="pref_heads_up_snooze_timer_summary">点击浮动通知图标将自动设置贪睡定时器 
 	长按浮动通知图标打开贪睡定时器自定义对话框</string>
     <string name="headsup_snooze_timer_set">默认为%s浮动通知设置贪睡定时器</string>
-    
-    <!-- Recents panel: always translucent bars -->
-    <string name="pref_recents_translucent_bars_title">半透明栏</string>
-    <string name="pref_recents_translucent_bars_summary">在最近任务面板让状态栏和导航栏总是半透明</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">设置工作日</string>

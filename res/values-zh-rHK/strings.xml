@@ -962,11 +962,6 @@
     <string name="pref_pulse_notification_delay_title">通知燈延遲</string>
     <string name="pref_pulse_notification_delay_summary">需要重新啟動</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">清除所有近期應用程式</string>
-    <string name="pref_clear_recents_mode_0">點選清除全部；長按清除全部 (除了當前應用程式) </string>
-    <string name="pref_clear_recents_mode_1">點選清除全部 (除了當前應用程式) ；長按清除全部</string>
-
     <!-- Power menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">鎖定畫面停用電源選單</string>
 
@@ -1574,10 +1569,6 @@
     <string name="pref_heads_up_snooze_timer_summary">設定當您點擊延後通知按鈕時自動套用的計時器長度
 	(長按延後通知按鈕亦可自設延後通知計時器長度)</string>
     <string name="headsup_snooze_timer_set">已套用預設延後通知計時器至 %s</string>
-
-    <!-- Recents panel: always translucent bars -->
-    <string name="pref_recents_translucent_bars_title">半透明系統狀態列及導航列</string>
-    <string name="pref_recents_translucent_bars_summary">在多工面板內啟用半透明系統狀態列及導航列</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">設定週日</string>

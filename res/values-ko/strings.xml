@@ -752,10 +752,6 @@
     <string name="pref_pulse_notification_delay_title">알림 딜레이 펄스</string>
     <string name="pref_pulse_notification_delay_summary">재시작 필요</string>
 
-    <string name="pref_clear_recents_mode_title">최근 앱 목록 지우기 행동</string>
-    <string name="pref_clear_recents_mode_0">짧게 누르면 전체를, 길게 누르면 현재 앱을 제외한 전체를 지우기</string>
-    <string name="pref_clear_recents_mode_1">짧게 누르면 현재 앱을 제외한 전체를, 길게 누르면 전체를 지우기</string>
-    
     <string name="pref_powermenu_disable_on_lockscreen_title">잠금 화면에서의 전원 옵션 비활성화</string>
 
     <string name="overflow_menu_default">시스템 기본값</string>

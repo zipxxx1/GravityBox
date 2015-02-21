@@ -928,11 +928,6 @@
     <string name="pref_pulse_notification_delay_title">Pulse notification delay</string>
     <string name="pref_pulse_notification_delay_summary">Yeniden başlatma gerektirir</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">Bütün işlemleri temizle davranışı</string>
-    <string name="pref_clear_recents_mode_0">Hepsini temizlemek için dokun, varolan hariç hepsini temizlemek için uzun bas</string>
-    <string name="pref_clear_recents_mode_1">Varolan hariç hepsini temizlemek için dokun, hepsini temizlemek için uzun bas</string>
-
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Kilit ekranında güç menüsünü devre dışı bırak</string>
 

@@ -124,7 +124,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     private Drawable mRecentIcon;
     private Drawable mRecentAltIcon;
     private boolean mRecentAlt = false;
-    private ModHwKeys.HwKeyAction mRecentLongPressAction = new ModHwKeys.HwKeyAction(0, null);
     private boolean mMirroredKeys;
     private boolean mUseLargerIcons;
 
@@ -305,7 +304,6 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mGbContext = gbContext;
         mGbResources = gbContext.getResources();
         mLongPressHandler = new PieLongPressHandler(context, prefs);
-        mRecentLongPressAction = getLongPressAction(ButtonType.RECENT).clone();
         mUseLargerIcons = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LARGER_ICONS, false);
 
         mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
@@ -682,11 +680,8 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         mRecentAlt = recentAlt;
         if (mRecentAlt) {
             recentBtn.setImageDrawable(mRecentAltIcon);
-            mRecentLongPressAction = getLongPressAction(ButtonType.RECENT).clone();
-            setLongPressAction(ButtonType.RECENT.name(), GravityBoxSettings.HWKEY_ACTION_CLEAR_ALL_RECENTS_LONGPRESS, null);
         } else {
             recentBtn.setImageDrawable(mRecentIcon);
-            setLongPressAction(ButtonType.RECENT.name(), mRecentLongPressAction.actionId, mRecentLongPressAction.customApp);
         }
     }
 

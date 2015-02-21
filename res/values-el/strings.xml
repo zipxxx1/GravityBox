@@ -963,11 +963,6 @@
     <string name="pref_pulse_notification_delay_title">Καθυστέρηση φωτεινής ένδειξης</string>
     <string name="pref_pulse_notification_delay_summary">Απαιτείται επανεκκίνηση</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">Συμπεριφορά εκκαθάρισης πρόσφατων εφαρμογών</string>
-    <string name="pref_clear_recents_mode_0">Άγγιγμα για εκκαθ. όλων, παρατετ. άγγιγμα για εκκαθ. όλων εκτός τρέχουσας</string>
-    <string name="pref_clear_recents_mode_1">Άγγιγμα για εκκαθ. όλων εκτός τρέχουσας, παρατετ. άγγιγμα για εκκαθ. όλων</string>
-
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Απενεργοποίηση του μενού λειτουργίας στο κλείδωμα οθόνης</string>
 

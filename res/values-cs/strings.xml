@@ -944,11 +944,6 @@
     <string name="pref_pulse_notification_delay_title">Frekvence blikání LED</string>
     <string name="pref_pulse_notification_delay_summary">Vyžaduje restart</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">Chování tlačítka ukončení úkolů</string>
-    <string name="pref_clear_recents_mode_0">Ťuknutím zrušit všechny úkoly, dlouhým podržením zrušit všechny úkoly kromě aktuálního</string>
-    <string name="pref_clear_recents_mode_1">Ťuknutím zrušit všechny úkoly kromě aktuálního, dlouhým podržením zrušit všechny úlohy</string>
-
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Zakázat nabídku napájení na obrazovce uzamčení</string>
 
@@ -1558,10 +1553,6 @@
     <string name="pref_heads_up_snooze_timer_summary">Časovač, který se automaticky nastaví po stisknutí tlačítka dřímání. 
         Dlouhé stisknutí tlačítka dřímání zobrazí dialog pro manuální zadání časovače.</string>
     <string name="headsup_snooze_timer_set">Heads up výchozí časovač dřímání nastaven pro %s</string>
-
-    <!-- Recents panel: always translucent bars -->
-    <string name="pref_recents_translucent_bars_title">Průhledné lišty</string>
-    <string name="pref_recents_translucent_bars_summary">Vždy aplikuje průhlednost stavové a navigační lišty v panelu aktivních úloh</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Nastavit pracovní dny</string>

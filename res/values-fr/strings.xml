@@ -974,11 +974,6 @@
     <string name="pref_pulse_notification_delay_title">Fréquence LED de notification</string>
     <string name="pref_pulse_notification_delay_summary">Redémarrage nécessaire</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">Comportement nettoyage de toutes les tâches récentes</string>
-    <string name="pref_clear_recents_mode_0">Taper pour tout nettoyer, appui long pour tout nettoyer sauf tâche en cours</string>
-    <string name="pref_clear_recents_mode_1">Taper pour tout nettoyer sauf tâche en cours, appui long pour tout nettoyer</string>
-
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Menu de redémarrage inactif sur écran de déverr.</string>
 
@@ -1588,10 +1583,6 @@
     <string name="pref_heads_up_snooze_timer_summary">Durée automatiquement appliquée après avoir cliqué sur l\icône de l\'arrêt momentané des notifications flottantes 
         Un appui long sur l\'icône de l\'arrêt momentané des notifications flottantes donne accès à une boîte de dialogue pour une durée personnalisable</string>
     <string name="headsup_snooze_timer_set">Durée par défaut de l\'arrêt momentané des notifications flottantes réglée à %s</string>
-
-    <!-- Recents panel: always translucent bars -->
-    <string name="pref_recents_translucent_bars_title">Barres translucides</string>
-    <string name="pref_recents_translucent_bars_summary">Permet de rendre toujours translucides les barres d\'état et de navigation dans le panneau d\'applications récentes</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Choisir les jours de la semaine</string>

@@ -972,11 +972,6 @@
     <string name="pref_pulse_notification_delay_title">Értesítés villogtatás késleltetése</string>
     <string name="pref_pulse_notification_delay_summary">Újraindítás szükséges</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">Nemrég használt alkalmazások kiürítésének viselkedése</string>
-    <string name="pref_clear_recents_mode_0">Egyszeri érintésre mindent kiürít, hosszú érintésre mindent, kivéve az aktuálisat</string>
-    <string name="pref_clear_recents_mode_1">Egyszeri érintésre mindent kiürít, kivéve az aktuálisat, hosszú érintésre mindent</string>
-
     <!-- Power menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Kikapcsoló menü letiltása zárképernyőnél</string>
 
@@ -1571,10 +1566,6 @@
     <string name="pref_heads_up_snooze_timer_title">Alapértelmezett szundi időzítő</string>
     <string name="pref_heads_up_snooze_timer_summary">Az időzítő automatikusan beállításra kerül a lebegő felugró ablak szundi gombjára történő kattintással. Hosszú érintéssel a gombra kattintva az egyéni időzítő panel kerül megnyitásra.</string>
     <string name="headsup_snooze_timer_set">Lebegő felugró ablak szundi időzítő beállítva %s-ra</string>
-
-    <!-- Recents panel: always translucent bars -->
-    <string name="pref_recents_translucent_bars_title">Áttetsző sávok</string>
-    <string name="pref_recents_translucent_bars_summary">Az állapot- és navigációs sávot mindig áttetszővé változtatja a Nemrég használt alkalmazások panelben.</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Hétköznapok beállítása (munkanapok)</string>

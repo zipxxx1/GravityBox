@@ -974,11 +974,6 @@
     <string name="pref_pulse_notification_delay_title">Ritardo LED di notifica</string>
     <string name="pref_pulse_notification_delay_summary">Richiede riavvio</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">Modalità pulisci attività recenti</string>
-    <string name="pref_clear_recents_mode_0">Tocca per pulire tutto, pressione prolungata per pulire tutto tranne quella corrente</string>
-    <string name="pref_clear_recents_mode_1">Tocca per pulire tutto tranne quella corrente, pressione prolungata per pulire tutto</string>
-
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Disabilita menù spegnimento in schermata di blocco</string>
 
@@ -1587,10 +1582,6 @@
     <string name="pref_heads_up_snooze_timer_summary">La notifica a comparsa viene nascosta automaticamente se si tocca una sola volta l\'apposita icona. 
         Per decidere per quanto nascondere una notifca a comparsa, tenere premuto sull\'apposita icona.</string>
     <string name="headsup_snooze_timer_set">Le notifiche a comparsa saranno nascoste di default per %s</string>
-
-    <!-- Recents panel: always translucent bars -->
-    <string name="pref_recents_translucent_bars_title">Barre trasparenti</string>
-    <string name="pref_recents_translucent_bars_summary">Rende sempre trasparente la barra di navigazione e la barra di stato nella schermata app recenti</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Imposta giorni della settimana</string>

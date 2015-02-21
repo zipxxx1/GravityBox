@@ -948,11 +948,6 @@
     <string name="pref_pulse_notification_delay_title">Opóźnienie impulsów powiadomień LED </string>
     <string name="pref_pulse_notification_delay_summary">Wymagany restart</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">Sposób czyszczenia aktualnych zadań</string>
-    <string name="pref_clear_recents_mode_0">Dotknij, aby usunąć wszystkie lub przytrzymaj, aby usunąć wszystkie z wyjątkiem bieżącego zadania</string>
-    <string name="pref_clear_recents_mode_1">Dotknij, aby usunąć wszystkie z wyjątkiem bieżącego zadania lub przytrzymaj, aby usunąć wszystkie</string>
-
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Wyłącz menu zasilania na ekranie blokady</string>
 
@@ -1555,10 +1550,6 @@
     <string name="pref_heads_up_snooze_timer_summary">Czas drzemki, który zostanie ustawiony automatycznie po kliknięciu ikony heads up drzemki.
         Długie naciśnięcie ikony drzemki otwiera okno dialogowe ustawień licznika czasu.</string>
     <string name="headsup_snooze_timer_set">Domyślny czas drzemki ustawiony na %s</string>
-
-    <!-- Recents panel: always translucent bars -->
-    <string name="pref_recents_translucent_bars_title">Przezroczyste paski</string>
-    <string name="pref_recents_translucent_bars_summary">Ustawia przezroczystość paska statusu i paska nawigacyjnego w ostatnich panelach</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Ustaw dni tygodnia</string>

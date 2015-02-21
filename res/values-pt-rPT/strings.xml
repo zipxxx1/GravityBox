@@ -954,11 +954,6 @@
     <string name="pref_pulse_notification_delay_title">Atraso do impulso de notificação</string>
     <string name="pref_pulse_notification_delay_summary">Necessário reiniciar</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">Funcionamento ao limpar aplicações</string>
-    <string name="pref_clear_recents_mode_0">Pressionar para limpar todas, manter pressionado para limpar todas menos a corrente</string>
-    <string name="pref_clear_recents_mode_1">Pressionar para limpar todas menos a corrente, manter pressionado para limpar todas</string>
-
     <!-- Power menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Desativar menu Desligar no ecrã de bloqueio</string>
 
@@ -1566,10 +1561,6 @@
     <string name="pref_heads_up_snooze_timer_summary">Permite definir o temporizador por defeito a aplicar automaticamente ao carregar para adiar a notificação. 
         Ao manter pressionado o botão de adiamento é possível escolher um temporizador costumizado.</string>
     <string name="headsup_snooze_timer_set">Temporizador por defeito das notificações definido por %s</string>
-
-    <!-- Recents panel: always translucent bars -->
-    <string name="pref_recents_translucent_bars_title">Barras translúcidas</string>
-    <string name="pref_recents_translucent_bars_summary">Permite tornar as barras de status e de navegação translúcidas no painel de aplicações recentes</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Definir dias da semana</string>

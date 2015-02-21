@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,10 +15,7 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
-
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -36,24 +33,18 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ImageView.ScaleType;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.XC_MethodHook.MethodHookParam;
 
 public class ModClearAllRecents {
     private static final String TAG = "GB:ModClearAllRecents";
@@ -61,15 +52,17 @@ public class ModClearAllRecents {
     public static final String CLASS_RECENT_VERTICAL_SCROLL_VIEW = "com.android.systemui.recent.RecentsVerticalScrollView";
     public static final String CLASS_RECENT_HORIZONTAL_SCROLL_VIEW = "com.android.systemui.recent.RecentsHorizontalScrollView";
     public static final String CLASS_RECENT_PANEL_VIEW = "com.android.systemui.recent.RecentsPanelView";
-    public static final String CLASS_RECENT_ACTIVITY = "com.android.systemui.recent.RecentsActivity";
+    public static final String CLASS_RECENT_ACTIVITY = "com.android.systemui.recents.RecentsActivity";
+    public static final String CLASS_SWIPE_HELPER = "com.android.systemui.recents.views.SwipeHelper";
+    public static final String CLASS_TASK_STACK_VIEW = "com.android.systemui.recents.views.TaskStackView";
     private static final boolean DEBUG = false;
 
-    private static XSharedPreferences mPrefs;
     private static ImageView mRecentsClearButton;
-    private static int mClearRecentsMode;
-    private static Activity mRecentsActivity;
-    private static Handler mFinishHandler;
-    private static Unhook mAddPrivateFlagsHook;
+    private static int mButtonGravity;
+    private static int mMarginTopPx;
+    private static int mMarginBottomPx;
+    private static boolean mNavbarLeftHanded;
+    private static ViewGroup mRecentsView;
 
     // RAM bar
     private static TextView mBackgroundProcessText;
@@ -78,13 +71,12 @@ public class ModClearAllRecents {
     private static MemInfoReader mMemInfoReader;
     private static Context mGbContext;
     private static LinearColorBar mRamUsageBar;
+    private static int mRamBarGravity;
     private static Handler mHandler;
     private static int[] mRamUsageBarPaddings;
     private static int mClearAllRecentsSizePx;
     private static int mRamUsageBarVerticalMargin;
     private static int mRamUsageBarHorizontalMargin;
-    private static boolean mPreserveCurrentTask;
-    private static View mRecentsPanelView;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -94,50 +86,66 @@ public class ModClearAllRecents {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (DEBUG) log("Broadcast received: " + intent.toString());
+            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_RECENTS_CHANGED)) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_RECENTS_CLEAR_ALL)) {
+                    mButtonGravity = intent.getIntExtra(GravityBoxSettings.EXTRA_RECENTS_CLEAR_ALL, 0);
+                    updateButtonLayout();
+                    updateRamBarLayout();
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_RECENTS_RAMBAR)) {
+                    mRamBarGravity = intent.getIntExtra(GravityBoxSettings.EXTRA_RECENTS_RAMBAR, 0);
+                    updateRamBarLayout();
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_RECENTS_MARGIN_TOP)) {
+                    mMarginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                            intent.getIntExtra(GravityBoxSettings.EXTRA_RECENTS_MARGIN_TOP, 77),
+                            context.getResources().getDisplayMetrics());
+                    updateButtonLayout();
+                    updateRamBarLayout();
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_RECENTS_MARGIN_BOTTOM)) {
+                    mMarginBottomPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                            intent.getIntExtra(GravityBoxSettings.EXTRA_RECENTS_MARGIN_BOTTOM, 50),
+                            context.getResources().getDisplayMetrics());
+                    updateButtonLayout();
+                    updateRamBarLayout();
+                }
+            }
             if (intent.getAction().equals(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_SINGLETAP)) {
-                clearAll(false);
-            } else if (intent.getAction().equals(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_LONGPRESS)) {
-                clearAll(true);
+                clearAll();
             }
-        }
-    };
-
-    private static Runnable mFinishRunnable = new Runnable() {
-        @Override
-        public void run() {
-            if (mRecentsActivity != null) {
-                setRecentsClearAll(false, mRecentsActivity);
-                mRecentsActivity.finish();
-                mRecentsActivity = null;
-            }
-            mFinishHandler = null;
         }
     };
 
     public static void init(final XSharedPreferences prefs, ClassLoader classLoader) {
         try {
-            mPrefs = prefs;
-            Class<?> recentPanelViewClass = XposedHelpers.findClass(CLASS_RECENT_PANEL_VIEW, classLoader);
             Class<?> recentActivityClass = XposedHelpers.findClass(CLASS_RECENT_ACTIVITY, classLoader);
-            Class<?> recentVerticalScrollView = XposedHelpers.findClass(CLASS_RECENT_VERTICAL_SCROLL_VIEW, classLoader);
-            Class<?> recentHorizontalScrollView = XposedHelpers.findClass(CLASS_RECENT_HORIZONTAL_SCROLL_VIEW, classLoader);
 
-
+            mButtonGravity = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL, "53"));
+            mRamBarGravity = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_RAMBAR, "0"));
+            mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false) &&
+                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
+                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
             mMemInfoReader = new MemInfoReader();
 
-            XposedHelpers.findAndHookMethod(recentPanelViewClass, "showImpl", 
-                    boolean.class, recentsPanelViewShowHook);
-
-            XposedBridge.hookAllConstructors(recentPanelViewClass, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(recentActivityClass, "onCreate", Bundle.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    mRecentsPanelView = (View) param.thisObject;
-                    Context context = mRecentsPanelView.getContext();
-                    mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+                    Activity activity = (Activity) param.thisObject;
+                    mGbContext = activity.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
                     mHandler = new Handler();
-                    mAm = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+                    mAm = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
+                    mRecentsView = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mRecentsView");
 
-                    final Resources res = context.getResources();
+                    final Resources res = activity.getResources();
+
+                    mMarginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
+                            prefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_TOP, 77), 
+                            res.getDisplayMetrics());
+                    mMarginBottomPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
+                            prefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 50), 
+                            res.getDisplayMetrics());
+
                     mRamUsageBarPaddings = new int[4];
                     mRamUsageBarPaddings[0] = mRamUsageBarPaddings[2] = (int) TypedValue.applyDimension(
                             TypedValue.COMPLEX_UNIT_DIP, 4, res.getDisplayMetrics());
@@ -149,165 +157,100 @@ public class ModClearAllRecents {
                             TypedValue.COMPLEX_UNIT_DIP, 15, res.getDisplayMetrics());
                     mRamUsageBarHorizontalMargin = (int) TypedValue.applyDimension(
                             TypedValue.COMPLEX_UNIT_DIP, 10, res.getDisplayMetrics());
+
+                    FrameLayout vg = (FrameLayout) activity.getWindow().getDecorView()
+                            .findViewById(android.R.id.content);
+
+                    // create and inject new ImageView and set onClick listener to handle action
+                    mRecentsClearButton = new ImageView(vg.getContext());
+                    mRecentsClearButton.setImageDrawable(mGbContext.getResources().getDrawable(
+                            R.drawable.ic_recent_clear));
+                    mRecentsClearButton.setBackground(mGbContext.getResources().getDrawable(
+                            R.drawable.image_view_button_bg)); 
+                    FrameLayout.LayoutParams lParams = new FrameLayout.LayoutParams(
+                            mClearAllRecentsSizePx, mClearAllRecentsSizePx);
+                    mRecentsClearButton.setLayoutParams(lParams);
+                    mRecentsClearButton.setScaleType(ScaleType.CENTER);
+                    mRecentsClearButton.setClickable(true);
+                    mRecentsClearButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                           clearAll();
+                        }
+                    });
+                    vg.addView(mRecentsClearButton);
+                    mRecentsClearButton.setVisibility(View.GONE);
+                    updateButtonLayout();
+                    if (DEBUG) log("clearAllButton ImageView injected");
+
+                    // create and inject RAM bar
+                    mRamUsageBar = new LinearColorBar(vg.getContext(), null);
+                    mRamUsageBar.setOrientation(LinearLayout.HORIZONTAL);
+                    mRamUsageBar.setClipChildren(false);
+                    mRamUsageBar.setClipToPadding(false);
+                    mRamUsageBar.setPadding(mRamUsageBarPaddings[0], mRamUsageBarPaddings[1],
+                            mRamUsageBarPaddings[2], mRamUsageBarPaddings[3]);
+                    FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(
+                            FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+                    mRamUsageBar.setLayoutParams(flp);
+                    LayoutInflater inflater = LayoutInflater.from(mGbContext);
+                    inflater.inflate(R.layout.linear_color_bar, mRamUsageBar, true);
+                    vg.addView(mRamUsageBar);
+                    mForegroundProcessText = (TextView) mRamUsageBar.findViewById(R.id.foregroundText);
+                    mBackgroundProcessText = (TextView) mRamUsageBar.findViewById(R.id.backgroundText);
+                    mRamUsageBar.setVisibility(View.GONE);
+                    updateRamBarLayout();
+                    if (DEBUG) log("RAM bar injected");
+
+                    IntentFilter intentFilter = new IntentFilter();
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_RECENTS_CHANGED);
+                    intentFilter.addAction(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_SINGLETAP);
+                    activity.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("Recents panel view constructed");
                 }
             });
 
-            XposedHelpers.findAndHookMethod(recentPanelViewClass, "onFinishInflate", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    int caGravity = Integer.valueOf(mPrefs.getString(
-                            GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL, "53"));
-                    final int rbGravity = Integer.valueOf(mPrefs.getString(
-                            GravityBoxSettings.PREF_KEY_RAMBAR, "0"));
-                    Boolean createClearAll = (caGravity != GravityBoxSettings.RECENT_CLEAR_OFF && caGravity != GravityBoxSettings.RECENT_CLEAR_NAVIGATION_BAR);
-                    Boolean createRamBar = (rbGravity != 0);
-                    if (!createClearAll && !createRamBar) {
-                        return;
-                    }
-
-                    View view = (View) param.thisObject;
-                    Resources res = view.getResources();
-                    ViewGroup vg = (ViewGroup) view.findViewById(res.getIdentifier("recents_bg_protect", "id", PACKAGE_NAME));
-
-                    // create and inject new ImageView and set onClick listener to handle action
-                    if (createClearAll) {
-                        mRecentsClearButton = new ImageView(vg.getContext());
-                        mRecentsClearButton.setImageDrawable(res.getDrawable(res.getIdentifier(
-                                "ic_notify_clear", "drawable", PACKAGE_NAME)));
-                        mRecentsClearButton.setBackground(mGbContext.getResources().getDrawable(
-                                R.drawable.image_view_button_bg));
-                        FrameLayout.LayoutParams lParams = new FrameLayout.LayoutParams(
-                                mClearAllRecentsSizePx, mClearAllRecentsSizePx);
-                        mRecentsClearButton.setLayoutParams(lParams);
-                        mRecentsClearButton.setScaleType(ScaleType.CENTER);
-                        mRecentsClearButton.setClickable(true);
-                        mRecentsClearButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                               clearAll(false);
-                            }
-                        });
-                        mRecentsClearButton.setOnLongClickListener(new View.OnLongClickListener() {
-                            @Override
-                            public boolean onLongClick(View v) {
-                                clearAll(true);
-                                return true;
-                            }
-                        });
-                        mRecentsClearButton.setVisibility(View.GONE);
-                        vg.addView(mRecentsClearButton);
-                        if (DEBUG) log("clearAllButton ImageView injected");
-                    }
-
-                    if (createRamBar) {
-                        // create and inject RAM bar
-                        mRamUsageBar = new LinearColorBar(vg.getContext(), null);
-                        mRamUsageBar.setOrientation(LinearLayout.HORIZONTAL);
-                        mRamUsageBar.setClipChildren(false);
-                        mRamUsageBar.setClipToPadding(false);
-                        mRamUsageBar.setPadding(mRamUsageBarPaddings[0], mRamUsageBarPaddings[1],
-                                mRamUsageBarPaddings[2], mRamUsageBarPaddings[3]);
-                        FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(
-                                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-                        mRamUsageBar.setLayoutParams(flp);
-                        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-                        inflater.inflate(R.layout.linear_color_bar, mRamUsageBar, true);
-                        vg.addView(mRamUsageBar);
-                        mForegroundProcessText = (TextView) mRamUsageBar.findViewById(R.id.foregroundText);
-                        mBackgroundProcessText = (TextView) mRamUsageBar.findViewById(R.id.backgroundText);
-                        mRamUsageBar.setVisibility(View.GONE);
-                        if (DEBUG) log("RAM bar injected");
-                    }
-                }
-            });
-
-            // for portrait mode
-            XposedHelpers.findAndHookMethod(recentVerticalScrollView, "dismissChild", View.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(recentActivityClass, "onDestroy", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    handleDismissChild(param);
+                    ((Activity)param.thisObject).unregisterReceiver(mBroadcastReceiver);
                 }
             });
-
-            // for landscape mode
-            XposedHelpers.findAndHookMethod(recentHorizontalScrollView, "dismissChild", View.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    handleDismissChild(param);
-                }
-            });
-
-            // When to update RAM bar values
-            XposedHelpers.findAndHookMethod(recentPanelViewClass, "clearRecentTasksList", 
-                    updateRambarHook);
-            XposedHelpers.findAndHookMethod(recentPanelViewClass, "handleSwipe",
-                    View.class, updateRambarHook);
-            XposedHelpers.findAndHookMethod(recentPanelViewClass, "refreshViews", 
-                    updateRambarHook);
 
             XposedHelpers.findAndHookMethod(recentActivityClass, "onResume", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_SINGLETAP);
-                    intentFilter.addAction(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_LONGPRESS);
-                    mRecentsActivity = ((Activity)param.thisObject);
-                    mRecentsActivity.registerReceiver(mBroadcastReceiver, intentFilter);
-                    if (mFinishHandler != null) {
-                        mFinishHandler.removeCallbacks(mFinishRunnable);
-                        mFinishHandler = null;
+                    Object config = XposedHelpers.getObjectField(param.thisObject, "mConfig");
+                    boolean hasTasks = !XposedHelpers.getBooleanField(config, "launchedWithNoRecentTasks");
+                    if (mRecentsClearButton != null) {
+                        boolean visible = mButtonGravity != 0 && mButtonGravity != 1 && hasTasks;
+                        mRecentsClearButton.setVisibility(visible ? View.VISIBLE : View.GONE);
                     }
-                    mFinishHandler = new Handler();
-                    if (DEBUG) log("Broadcast receiver registered");
+                    if (mRamUsageBar != null) {
+                        if (mRamBarGravity != 0) {
+                            mRamUsageBar.setVisibility(View.VISIBLE);
+                            updateRamBarLayout();
+                            updateRamBarMemoryUsage();
+                        } else {
+                            mRamUsageBar.setVisibility(View.GONE);
+                        }
+                    }
+                    if (mButtonGravity == GravityBoxSettings.RECENT_CLEAR_NAVIGATION_BAR && hasTasks) {
+                        setRecentsClearAll(true, (Context)param.thisObject);
+                    }
                 }
             });
 
-            XposedHelpers.findAndHookMethod(recentActivityClass, "onPause", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(recentActivityClass, "onStop", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    mRecentsActivity.unregisterReceiver(mBroadcastReceiver);
-                    mFinishHandler.postDelayed(mFinishRunnable, 500);
-                    if (DEBUG) log("Broadcast receiver unregistered");
+                    setRecentsClearAll(false, (Context)param.thisObject);
                 }
             });
 
-            XposedHelpers.findAndHookMethod(recentActivityClass, "onCreate", Bundle.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    mPrefs.reload();
-                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_RECENTS_TRANSLUCENT_BARS, false)) {
-                        final Window w = ((Activity) param.thisObject).getWindow();
-                        mAddPrivateFlagsHook = XposedHelpers.findAndHookMethod(
-                                Window.class, "addPrivateFlags", int.class, new XC_MethodHook() {
-                            @Override
-                            protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                                if (param.thisObject == w) {
-                                    param.setResult(null);
-                                }
-                            }
-                        });
-                        w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                        w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                    }
-                }
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mAddPrivateFlagsHook != null) {
-                        mAddPrivateFlagsHook.unhook();
-                        mAddPrivateFlagsHook = null;
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(recentActivityClass, "forceOpaqueBackground", Context.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    Boolean result = (Boolean)param.getResult();
-                    param.setResult(result && 
-                            !(Boolean) XposedHelpers.callStaticMethod(ActivityManager.class, "isHighEndGfx"));
-                }
-            });
+            // When to update RAM bar values
+            XposedHelpers.findAndHookMethod(CLASS_SWIPE_HELPER, classLoader, "dismissChild", 
+                    View.class, float.class, updateRambarHook);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -315,38 +258,8 @@ public class ModClearAllRecents {
 
     private static XC_MethodHook updateRambarHook = new XC_MethodHook() {
         @Override
-        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-            if (XposedHelpers.getObjectField(param.thisObject, "mRecentTaskDescriptions") == null ||
-                    XposedHelpers.getObjectField(param.thisObject, "mRecentTasksLoader") == null) {
-                param.setResult(null);
-            }
-        }
-        @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-            if (mRamUsageBar != null && mRamUsageBar.getVisibility() == View.VISIBLE && mHandler != null) {
-                mHandler.post(updateRamBarTask);
-            }
-        }
-    };
-
-    private static XC_MethodHook recentsPanelViewShowHook = new XC_MethodHook() {
-        @Override
-        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-            try {
-                mClearRecentsMode = Integer.valueOf(mPrefs.getString(GravityBoxSettings.PREF_KEY_CLEAR_RECENTS_MODE, "0"));
-                Boolean show = (Boolean) param.args[0];
-                if (show) {
-                    updateButtonLayout((View) param.thisObject);
-                    updateRamBarLayout();
-                }
-                List<?> recentTaskDescriptions = (List<?>) XposedHelpers.getObjectField(param.thisObject, "mRecentTaskDescriptions");
-                boolean visible = (recentTaskDescriptions != null && recentTaskDescriptions.size() > 0);
-                int gravity = Integer.valueOf(mPrefs.getString(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL, "53"));
-                setRecentsClearAll(show && visible && gravity == GravityBoxSettings.RECENT_CLEAR_NAVIGATION_BAR, 
-                        ((View) param.thisObject).getContext());
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
+            updateRamBarMemoryUsage();
         }
     };
 
@@ -355,154 +268,75 @@ public class ModClearAllRecents {
         ModPieControls.setRecentAlt(show);
     }
 
-    private static void updateButtonLayout(View container) {
-        if (mRecentsClearButton == null) return;
+    private static void updateButtonLayout() {
+        if (mRecentsClearButton == null || mButtonGravity == GravityBoxSettings.RECENT_CLEAR_OFF || 
+                mButtonGravity == GravityBoxSettings.RECENT_CLEAR_NAVIGATION_BAR) return;
 
         final Context context = mRecentsClearButton.getContext();
-        int gravity = Integer.valueOf(mPrefs.getString(
-                GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL, "53"));
-        List<?> recentTaskDescriptions = (List<?>) XposedHelpers.getObjectField(
-                container, "mRecentTaskDescriptions");
-        boolean visible = (recentTaskDescriptions != null && recentTaskDescriptions.size() > 0);
-        if (gravity != GravityBoxSettings.RECENT_CLEAR_OFF && gravity != GravityBoxSettings.RECENT_CLEAR_NAVIGATION_BAR && visible) {
-            final Resources res = mRecentsClearButton.getResources();
-            final int orientation = res.getConfiguration().orientation;
-            FrameLayout.LayoutParams lparams = 
-                    (FrameLayout.LayoutParams) mRecentsClearButton.getLayoutParams();
-            lparams.gravity = gravity;
-            if (gravity == 51 || gravity == 53) {
-                int marginTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
-                        mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_TOP, 0), 
-                        res.getDisplayMetrics());
-                int marginRight = (gravity == 53 && orientation == Configuration.ORIENTATION_LANDSCAPE
-                        && Utils.isPhoneUI(context)) ?
-                        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
-                                mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
-                                res.getDisplayMetrics()): 0;
-                lparams.setMargins(0, marginTop, marginRight, 0);
-            } else {
-                int marginBottom = (orientation == Configuration.ORIENTATION_PORTRAIT || 
-                                        !Utils.isPhoneUI(context)) ?
-                        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
-                        mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
-                        res.getDisplayMetrics()) : 0;
-                int marginRight = (gravity == 85 && orientation == Configuration.ORIENTATION_LANDSCAPE
-                        && Utils.isPhoneUI(context)) ?
-                        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
-                                mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
-                                res.getDisplayMetrics()): 0;
-                lparams.setMargins(0, 0, marginRight, marginBottom);
-            }
-            mRecentsClearButton.setLayoutParams(lparams);
-            mRecentsClearButton.setVisibility(View.VISIBLE);
+        final Resources res = mRecentsClearButton.getResources();
+        final int orientation = res.getConfiguration().orientation;
+        FrameLayout.LayoutParams lparams = 
+                (FrameLayout.LayoutParams) mRecentsClearButton.getLayoutParams();
+        lparams.gravity = mButtonGravity;
+        if (mButtonGravity == 51 || mButtonGravity == 53) { 
+            int gravityForNavbarPosition = mNavbarLeftHanded ? 51 : 53;
+            int marginRight = (mButtonGravity == gravityForNavbarPosition && 
+                    orientation == Configuration.ORIENTATION_LANDSCAPE && 
+                    Utils.isPhoneUI(context)) ? mMarginBottomPx : 0;
+            lparams.setMargins(mNavbarLeftHanded ? marginRight : 0, mMarginTopPx,
+                    mNavbarLeftHanded ? marginRight : 0, 0);
         } else {
-            mRecentsClearButton.setVisibility(View.GONE);
+            int gravityForNavbarPosition = mNavbarLeftHanded ? 83 : 85;
+            int marginBottom = (orientation == Configuration.ORIENTATION_PORTRAIT || 
+                                    !Utils.isPhoneUI(context)) ? mMarginBottomPx : 0;
+            int marginRight = (mButtonGravity == gravityForNavbarPosition && 
+                    orientation == Configuration.ORIENTATION_LANDSCAPE && 
+                    Utils.isPhoneUI(context)) ? mMarginBottomPx : 0;
+            lparams.setMargins(mNavbarLeftHanded ? marginRight : 0, 0, 
+                    mNavbarLeftHanded ? marginRight : 0, marginBottom);
         }
+        mRecentsClearButton.setLayoutParams(lparams);
         if (DEBUG) log("Clear all recents button layout updated");
     }
 
-    private static void handleDismissChild(final MethodHookParam param) {
-        // skip if non-null view passed - fall back to original method
-        if (param.args[0] != null)
-            return;
+    private static void updateRamBarLayout() {
+        if (mRamUsageBar == null || mRamBarGravity == 0) return;
 
-        if (DEBUG) log("handleDismissChild - removing all views");
+        final Context context = mRamUsageBar.getContext();
+        final Resources res = mRamUsageBar.getResources();
+        final int orientation = res.getConfiguration().orientation;
+        final boolean caOnTop = (mButtonGravity & Gravity.TOP) == Gravity.TOP;
+        final boolean caOnLeft = (mButtonGravity & Gravity.LEFT) == Gravity.LEFT;
+        final boolean rbOnTop = (mRamBarGravity == Gravity.TOP);
+        final boolean sibling = (mRecentsClearButton != null &&
+                mRecentsClearButton.getVisibility() == View.VISIBLE) &&
+                ((caOnTop && rbOnTop) || (!caOnTop && !rbOnTop));
+        final int marginTop = rbOnTop ? mMarginTopPx : 0;
+        final int marginBottom = (!rbOnTop && (orientation == Configuration.ORIENTATION_PORTRAIT ||
+                                                !Utils.isPhoneUI(context))) ? mMarginBottomPx : 0;
+        final int marginLeft = orientation == Configuration.ORIENTATION_LANDSCAPE && 
+                Utils.isPhoneUI(context) & mNavbarLeftHanded ? mMarginBottomPx : 0;
+        final int marginRight = orientation == Configuration.ORIENTATION_LANDSCAPE && 
+                Utils.isPhoneUI(context) & !mNavbarLeftHanded ? mMarginBottomPx : 0;
 
-        // scroll recents tasks view to show the first task clearing will start from
-        if (param.thisObject instanceof ScrollView) {
-            ((ScrollView) param.thisObject).smoothScrollTo(0, 0);
-        } else if (param.thisObject instanceof HorizontalScrollView) {
-            ((HorizontalScrollView)param.thisObject).smoothScrollTo(0, 0);
-        }
-
-        // start clearing task after 200ms delay to give some time for smooth scroll to finish
-        final LinearLayout mLinearLayout = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mLinearLayout");
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                final int count = Utils.isXperiaDevice() ? (mLinearLayout.getChildCount() - 1) :
-                    mLinearLayout.getChildCount();
-                for (int i = 0; i < count; i++) {
-                    final View child = mLinearLayout.getChildAt(i);
-                    final int index = i;
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                if (mPreserveCurrentTask && index == (count-1)) {
-                                    Object callback = XposedHelpers.getObjectField(param.thisObject, "mCallback");
-                                    if (callback != null) {
-                                        XposedHelpers.callMethod(callback, "handleOnClick", child);
-                                    }
-                                } else {
-                                    Object[] newArgs = new Object[] { child };
-                                    XposedBridge.invokeOriginalMethod(param.method, param.thisObject, newArgs);
-                                }
-                            } catch (Throwable t) {
-                                XposedBridge.log(t);
-                            }
-                        }
-                    }, 150 * i);
-                }
-            }
-        }, 200);
-
-        if (mRamUsageBar != null && mRamUsageBar.getVisibility() == View.VISIBLE && mHandler != null) {
-            mHandler.post(updateRamBarTask);
-        }
-
-        // don't call original method
-        param.setResult(null);
+        FrameLayout.LayoutParams flp = (FrameLayout.LayoutParams) mRamUsageBar.getLayoutParams();
+        flp.gravity = mRamBarGravity;
+        flp.setMargins(
+            sibling && caOnLeft ? (mClearAllRecentsSizePx + marginLeft) : 
+                (mRamUsageBarHorizontalMargin + marginLeft), 
+            rbOnTop ? (mRamUsageBarVerticalMargin + marginTop) : 0, 
+            sibling && !caOnLeft ? (mClearAllRecentsSizePx + marginRight) : 
+                (mRamUsageBarHorizontalMargin + marginRight), 
+            rbOnTop ? 0 : (mRamUsageBarVerticalMargin + marginBottom)
+        );
+        mRamUsageBar.setLayoutParams(flp);
+        if (DEBUG) log("RAM bar layout updated");
     }
 
-    private static void updateRamBarLayout() {
-        if (mRamUsageBar == null) return;
-
-        final int rbGravity = Integer.valueOf(mPrefs.getString(
-                GravityBoxSettings.PREF_KEY_RAMBAR, "0"));
-        if (rbGravity == 0) {
-            mRamUsageBar.setVisibility(View.GONE);
-        } else {
-            final Context context = mRamUsageBar.getContext();
-            final Resources res = mRamUsageBar.getResources();
-            final int orientation = res.getConfiguration().orientation;
-            final int caGravity = Integer.valueOf(mPrefs.getString(
-                    GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL, "53"));
-            final boolean caOnTop = (caGravity & Gravity.TOP) == Gravity.TOP;
-            final boolean caOnLeft = (caGravity & Gravity.LEFT) == Gravity.LEFT;
-            final boolean rbOnTop = (rbGravity == Gravity.TOP);
-            final boolean sibling = (mRecentsClearButton != null && 
-                    mRecentsClearButton.getVisibility() == View.VISIBLE) && 
-                    ((caOnTop && rbOnTop) || (!caOnTop && !rbOnTop));
-            final int marginTop = rbOnTop ? (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
-                    mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_TOP, 0), 
-                    res.getDisplayMetrics()) : 0;
-            final int marginBottom = (!rbOnTop && (orientation == Configuration.ORIENTATION_PORTRAIT ||
-                                                    !Utils.isPhoneUI(context))) ? 
-                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
-                    mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
-                    res.getDisplayMetrics()) : 0;
-            final int marginRight = orientation == Configuration.ORIENTATION_LANDSCAPE && 
-                                                        Utils.isPhoneUI(context) ?
-                            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
-                                    mPrefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM, 0), 
-                                    res.getDisplayMetrics()) : 0;
-
-            FrameLayout.LayoutParams flp = (FrameLayout.LayoutParams) mRamUsageBar.getLayoutParams();
-            flp.gravity = rbGravity;
-            flp.setMargins(
-                sibling && caOnLeft ? mClearAllRecentsSizePx : mRamUsageBarHorizontalMargin, 
-                rbOnTop ? (mRamUsageBarVerticalMargin + marginTop) : 0, 
-                sibling && !caOnLeft ? (mClearAllRecentsSizePx + marginRight) : 
-                    (mRamUsageBarHorizontalMargin + marginRight), 
-                rbOnTop ? 0 : (mRamUsageBarVerticalMargin + marginBottom)
-            );
-            mRamUsageBar.setLayoutParams(flp);
-            mRamUsageBar.setVisibility(View.VISIBLE);
+    private static void updateRamBarMemoryUsage() {
+        if (mRamUsageBar != null && mRamBarGravity != 0 && mHandler != null) {
             mHandler.post(updateRamBarTask);
         }
-        if (DEBUG) log("RAM bar layout updated");
     }
 
     private static final Runnable updateRamBarTask = new Runnable() {
@@ -534,23 +368,33 @@ public class ModClearAllRecents {
         }
     };
 
-    private static final void clearAll(boolean longPress) {
+    private static final void clearAll() {
+        if (mRecentsView == null) return;
+
         try {
-            if (mRecentsPanelView != null) {
-                Method m = XposedHelpers.findMethodExact(mRecentsPanelView.getClass(), "isShowing");
-                Boolean isShowing = (Boolean) m.invoke(mRecentsPanelView);
-                if (isShowing) {
-                    ViewGroup recentsContainer = (ViewGroup) XposedHelpers.getObjectField(mRecentsPanelView, "mRecentsContainer");
-                    if (!longPress) {
-                        mPreserveCurrentTask = (mClearRecentsMode == 1);
-                    } else {
-                        mPreserveCurrentTask = (mClearRecentsMode == 0);
-                   }
-                   recentsContainer.removeViewInLayout(null);
+            int childCount = mRecentsView.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                final View child = mRecentsView.getChildAt(i);
+                if (child.getClass().getName().equals(CLASS_TASK_STACK_VIEW)) {
+                    Object stack = XposedHelpers.getObjectField(child, "mStack");
+                    clearStack(child, stack);
                 }
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static final void clearStack(final Object stackView, Object stack) {
+        final ArrayList<?> tasks = (ArrayList<?>) XposedHelpers.callMethod(stack, "getTasks");
+        final int count = tasks.size();
+        for (int i = 0; i < count; i++) {
+            Object task = tasks.get(i);
+            final Object taskView = XposedHelpers.callMethod(stackView,
+                    "getChildViewForTask", task);
+            if (taskView != null) {
+                XposedHelpers.callMethod(taskView, "dismissTask");
+            }
         }
     }
 }

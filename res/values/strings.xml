@@ -977,11 +977,6 @@
     <string name="pref_pulse_notification_delay_title">Pulse notification delay</string>
     <string name="pref_pulse_notification_delay_summary">Requires reboot</string>
 
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">Clear all recent tasks behavior</string>
-    <string name="pref_clear_recents_mode_0">Tap to clear all, long-press to clear all but current</string>
-    <string name="pref_clear_recents_mode_1">Tap to clear all but current, long-press to clear all</string>
-
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Disable power menu on lockscreen</string>
 
@@ -1597,10 +1592,6 @@
     <string name="pref_heads_up_snooze_timer_summary">Timer to be set automatically when heads up snooze icon is clicked. 
         Long-press on heads up snooze icon opens custom timer dialog.</string>
     <string name="headsup_snooze_timer_set">Heads up default snooze timer set for %s</string>
-
-    <!-- Recents panel: always translucent bars -->
-    <string name="pref_recents_translucent_bars_title">Translucent bars</string>
-    <string name="pref_recents_translucent_bars_summary">Makes status bar and navigation bar always translucent in recents panel</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Set week days</string>

@@ -793,10 +793,6 @@
     <!-- Pulse notification delay -->
     <string name="pref_pulse_notification_delay_title">通知LED点滅の遅延</string>
     <string name="pref_pulse_notification_delay_summary">再起動すると反映されます。</string>
-    <!--  Clear recents modes -->
-    <string name="pref_clear_recents_mode_title">全てのアプリを終了するボタンの動作</string>
-    <string name="pref_clear_recents_mode_0">タップで全て終了、長押しで現在のアプリ以外終了</string>
-    <string name="pref_clear_recents_mode_1">長押しで全て終了、タップで現在のアプリ以外終了</string>
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">ロック画面で電源メニューを無効化</string>
     <!-- Extended force overflow menu button option -->
@@ -1299,9 +1295,6 @@
     <string name="pref_heads_up_snooze_timer_summary">Heads upスヌーズアイコンをタップしたときに自動的にセットするスヌーズタイマーを設定します。
         Heads upスヌーズアイコンを長押しするとカスタムタイマーダイアログが表示されます。</string>
     <string name="headsup_snooze_timer_set">デフォルトのHeads upスヌーズタイマーを%sにセットしました</string>
-    <!-- Recents panel: always translucent bars -->
-    <string name="pref_recents_translucent_bars_title">バーの透過</string>
-    <string name="pref_recents_translucent_bars_summary">アプリ履歴パネルでのステータスバーとナビバーを常に透過させるようにします。</string>
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">週日のセット</string>
     <!-- QuietHours: mute system sounds -->
