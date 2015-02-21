@@ -306,13 +306,6 @@ public class ModStatusBar {
             mDownloadProgressView.registerListener(bbView);
 
             mIconArea = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mSystemIconArea");
-
-            // inject Quiet Hours view
-            if (SysUiManagers.QuietHoursManager != null) {
-                StatusbarQuietHoursView qhv = new StatusbarQuietHoursView(mContext);
-                mIconArea.addView(qhv, 0);
-            }
-
             mSbContents = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStatusBarContents");
 
             if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH, true)) {
@@ -452,6 +445,29 @@ public class ModStatusBar {
         }
     }
 
+    private static void prepareQuietHoursIcon(ContainerType containerType) {
+        if (SysUiManagers.QuietHoursManager == null) return;
+
+        try {
+            ViewGroup container = null;
+            switch (containerType) {
+                case STATUSBAR:
+                    container = (ViewGroup) mStatusBarView;
+                    break;
+                case KEYGUARD:
+                    container = (ViewGroup) XposedHelpers.getObjectField(
+                            mPhoneStatusBar, "mKeyguardStatusBar");
+                    break;
+                default: break;
+            }
+            if (container != null) {
+                new StatusbarQuietHoursView(containerType, container, mContext);
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
@@ -526,6 +542,8 @@ public class ModStatusBar {
                     prepareBatteryStyle(ContainerType.STATUSBAR);
                     prepareBatteryStyle(ContainerType.HEADER);
                     prepareBatteryStyle(ContainerType.KEYGUARD);
+                    prepareQuietHoursIcon(ContainerType.STATUSBAR);
+                    prepareQuietHoursIcon(ContainerType.KEYGUARD);
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED);

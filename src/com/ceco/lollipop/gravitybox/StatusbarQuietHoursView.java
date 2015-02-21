@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,6 +14,7 @@
  */
 package com.ceco.lollipop.gravitybox;
 
+import com.ceco.lollipop.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
@@ -28,16 +29,19 @@ import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class StatusbarQuietHoursView extends ImageView implements  IconManagerListener, QuietHoursListener {
 
+    private ViewGroup mContainer;
     private QuietHours mQuietHours;
 
-    public StatusbarQuietHoursView(Context context) {
+    public StatusbarQuietHoursView(ContainerType containerType, ViewGroup container, Context context) {
         super(context);
 
+        mContainer = container;
         Resources res = context.getResources();
         int iconSizeResId = res.getIdentifier("status_bar_icon_size", "dimen", "android");
         int iconSize = iconSizeResId != 0 ? res.getDimensionPixelSize(iconSizeResId) :
@@ -46,6 +50,9 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(iconSize, iconSize);
         setLayoutParams(lParams);
         setScaleType(ImageView.ScaleType.CENTER);
+        ViewGroup systemIcons = (ViewGroup) mContainer.findViewById(
+                context.getResources().getIdentifier("system_icons", "id", ModStatusBar.PACKAGE_NAME));
+        systemIcons.addView(this, 0);
 
         mQuietHours = SysUiManagers.QuietHoursManager.getQuietHours();
 
