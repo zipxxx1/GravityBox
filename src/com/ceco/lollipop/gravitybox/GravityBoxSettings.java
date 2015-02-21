@@ -1947,13 +1947,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         }
 
         private void setDefaultValues() {
-            boolean value = mPrefs.getBoolean(PREF_KEY_NAVBAR_ENABLE, sSystemProperties.hasNavigationBar);
-            mPrefs.edit().putBoolean(PREF_KEY_NAVBAR_ENABLE, value).commit();
-            mPrefNavbarEnable.setChecked(value);
+            if (!mPrefs.getBoolean(PREF_KEY_NAVBAR_ENABLE + "_set", false)) {
+                mPrefs.edit().putBoolean(PREF_KEY_NAVBAR_ENABLE, sSystemProperties.hasNavigationBar).commit();
+                mPrefNavbarEnable.setChecked(sSystemProperties.hasNavigationBar);
+            }
 
-            value = mPrefs.getBoolean(PREF_KEY_UNPLUG_TURNS_ON_SCREEN, sSystemProperties.unplugTurnsOnScreen);
-            mPrefs.edit().putBoolean(PREF_KEY_UNPLUG_TURNS_ON_SCREEN, value).commit();
-            mPrefUnplugTurnsOnScreen.setChecked(value);
+            if (!mPrefs.getBoolean(PREF_KEY_UNPLUG_TURNS_ON_SCREEN + "_set", false)) {
+                mPrefs.edit().putBoolean(PREF_KEY_UNPLUG_TURNS_ON_SCREEN, 
+                        sSystemProperties.unplugTurnsOnScreen).commit();
+                mPrefUnplugTurnsOnScreen.setChecked(sSystemProperties.unplugTurnsOnScreen);
+            }
 
             if (!mPrefs.getBoolean(PREF_KEY_PULSE_NOTIFICATION_DELAY + "_set", false)) {
                 int delay = Math.min(Math.max(sSystemProperties.defaultNotificationLedOff, 500), 20000);
@@ -1985,14 +1988,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 LedSettings.lockUnc(getActivity(), false);
                 mPrefCatAbout.removePreference(mPrefTransVerification);
                 mPrefCatAbout.removePreference(mPrefAboutUnlocker);
-            }
-
-            // fix for potential invalid alpha value stored for data activity indicator color introduced in v2.9.9
-            int color = mPrefs.getInt(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR,
-                    getResources().getInteger(R.integer.signal_cluster_data_activity_icon_color));
-            if (Color.alpha(color) == 0) {
-                color = Color.argb(0xff, Color.red(color), Color.green(color), Color.blue(color));
-                mPrefs.edit().putInt(PREF_KEY_STATUSBAR_DATA_ACTIVITY_COLOR, color).commit();
             }
 
             WebServiceClient.getAppSignatureHash(getActivity());
