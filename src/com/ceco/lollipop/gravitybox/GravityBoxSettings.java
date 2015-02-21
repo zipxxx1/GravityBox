@@ -151,6 +151,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_RAMBAR = "pref_rambar";
     public static final String PREF_KEY_RECENTS_CLEAR_MARGIN_TOP = "pref_recent_clear_margin_top";
     public static final String PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM = "pref_recent_clear_margin_bottom";
+    public static final String PREF_KEY_RECENTS_SEARCH_BAR = "pref_recents_searchbar";
     public static final int RECENT_CLEAR_OFF = 0;
     public static final int RECENT_CLEAR_TOP_LEFT = 51;
     public static final int RECENT_CLEAR_TOP_RIGHT = 53;
@@ -162,6 +163,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_RECENTS_RAMBAR = "recentsRambar";
     public static final String EXTRA_RECENTS_MARGIN_TOP = "recentsMarginTop";
     public static final String EXTRA_RECENTS_MARGIN_BOTTOM = "recentsMarginBottom";
+    public static final String EXTRA_RECENTS_SEARCH_BAR = "recentsSearchBar";
 
     public static final String PREF_CAT_KEY_PHONE = "pref_cat_phone";
     public static final String PREF_KEY_CALLER_FULLSCREEN_PHOTO = "pref_caller_fullscreen_photo3";
@@ -1166,6 +1168,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefGbThemeDark;
         private ListPreference mPrefRecentClear;
         private ListPreference mPrefRambar;
+        private ListPreference mPrefRecentSearchBar;
         private PreferenceScreen mPrefCatPhone;
         private SeekBarPreference mPrefBrightnessMin;
         private SeekBarPreference mPrefScreenDimLevel;
@@ -1427,6 +1430,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefRecentClear = (ListPreference) findPreference(PREF_KEY_RECENTS_CLEAR_ALL);
             mPrefRambar = (ListPreference) findPreference(PREF_KEY_RAMBAR);
+            mPrefRecentSearchBar = (ListPreference) findPreference(PREF_KEY_RECENTS_SEARCH_BAR);
 
             mPrefCatPhone = (PreferenceScreen) findPreference(PREF_CAT_KEY_PHONE);
 
@@ -2082,6 +2086,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_RAMBAR)) {
                 mPrefRambar.setSummary(mPrefRambar.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_RECENTS_SEARCH_BAR)) {
+                mPrefRecentSearchBar.setSummary(mPrefRecentSearchBar.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_EXPANDED_DESKTOP)) {
@@ -3188,6 +3196,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM)) {
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
                 intent.putExtra(EXTRA_RECENTS_MARGIN_TOP, prefs.getInt(key, 50));
+            } else if (key.equals(PREF_KEY_RECENTS_SEARCH_BAR)) {
+                intent.setAction(ACTION_PREF_RECENTS_CHANGED);
+                intent.putExtra(EXTRA_RECENTS_SEARCH_BAR, prefs.getString(key, "DEFAULT"));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

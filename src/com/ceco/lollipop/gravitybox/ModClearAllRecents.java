@@ -49,13 +49,13 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModClearAllRecents {
     private static final String TAG = "GB:ModClearAllRecents";
     public static final String PACKAGE_NAME = "com.android.systemui";
-    public static final String CLASS_RECENT_VERTICAL_SCROLL_VIEW = "com.android.systemui.recent.RecentsVerticalScrollView";
-    public static final String CLASS_RECENT_HORIZONTAL_SCROLL_VIEW = "com.android.systemui.recent.RecentsHorizontalScrollView";
-    public static final String CLASS_RECENT_PANEL_VIEW = "com.android.systemui.recent.RecentsPanelView";
+    public static final String CLASS_RECENT_VIEW = "com.android.systemui.recents.views.RecentsView";
     public static final String CLASS_RECENT_ACTIVITY = "com.android.systemui.recents.RecentsActivity";
     public static final String CLASS_SWIPE_HELPER = "com.android.systemui.recents.views.SwipeHelper";
     public static final String CLASS_TASK_STACK_VIEW = "com.android.systemui.recents.views.TaskStackView";
     private static final boolean DEBUG = false;
+
+    private static enum SearchBarState { DEFAULT, HIDE_KEEP_SPACE, HIDE_REMOVE_SPACE }
 
     private static ImageView mRecentsClearButton;
     private static int mButtonGravity;
@@ -63,6 +63,9 @@ public class ModClearAllRecents {
     private static int mMarginBottomPx;
     private static boolean mNavbarLeftHanded;
     private static ViewGroup mRecentsView;
+    private static SearchBarState mSearchBarState;
+    private static SearchBarState mSearchBarStatePrev;
+    private static Integer mSearchBarOriginalHeight;
 
     // RAM bar
     private static TextView mBackgroundProcessText;
@@ -110,6 +113,11 @@ public class ModClearAllRecents {
                     updateButtonLayout();
                     updateRamBarLayout();
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_RECENTS_SEARCH_BAR)) {
+                    mSearchBarStatePrev = mSearchBarState;
+                    mSearchBarState = SearchBarState.valueOf(intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_RECENTS_SEARCH_BAR));
+                }
             }
             if (intent.getAction().equals(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_SINGLETAP)) {
                 clearAll();
@@ -126,6 +134,9 @@ public class ModClearAllRecents {
             mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false) &&
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
+            mSearchBarState = SearchBarState.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_RECENTS_SEARCH_BAR, "DEFAULT"));
+            mSearchBarStatePrev = mSearchBarState;
             mMemInfoReader = new MemInfoReader();
 
             XposedHelpers.findAndHookMethod(recentActivityClass, "onCreate", Bundle.class, new XC_MethodHook() {
@@ -238,6 +249,29 @@ public class ModClearAllRecents {
                     if (mButtonGravity == GravityBoxSettings.RECENT_CLEAR_NAVIGATION_BAR && hasTasks) {
                         setRecentsClearAll(true, (Context)param.thisObject);
                     }
+                    if (mSearchBarState != SearchBarState.DEFAULT) {
+                        XposedHelpers.callMethod(mRecentsView, "setSearchBarVisibility", View.GONE);
+                        if (mSearchBarState == SearchBarState.HIDE_REMOVE_SPACE) {
+                            if (mSearchBarOriginalHeight == null) {
+                                mSearchBarOriginalHeight = XposedHelpers.getIntField(
+                                        config, "searchBarSpaceHeightPx");
+                            }
+                            XposedHelpers.setIntField(config, "searchBarSpaceHeightPx", 0);
+                            if (DEBUG) log("onResume: search bar height set to 0");
+                        } else if (mSearchBarOriginalHeight != null) {
+                            XposedHelpers.setIntField(config, "searchBarSpaceHeightPx", 
+                                    mSearchBarOriginalHeight);
+                            if (DEBUG) log("onResume: restored original search bar height: " +
+                                    mSearchBarOriginalHeight);
+                        }
+                    } else if (mSearchBarStatePrev != SearchBarState.DEFAULT && hasTasks) {
+                        if ((Boolean) XposedHelpers.callMethod(mRecentsView, "hasSearchBar")) {
+                            XposedHelpers.callMethod(mRecentsView, "setSearchBarVisibility", View.VISIBLE);
+                        } else {
+                            XposedHelpers.callMethod(param.thisObject, "addSearchBarAppWidgetView");
+                        }
+                        mSearchBarStatePrev = mSearchBarState;
+                    }
                 }
             });
 
@@ -251,6 +285,28 @@ public class ModClearAllRecents {
             // When to update RAM bar values
             XposedHelpers.findAndHookMethod(CLASS_SWIPE_HELPER, classLoader, "dismissChild", 
                     View.class, float.class, updateRambarHook);
+
+            XposedHelpers.findAndHookMethod(CLASS_RECENT_VIEW, classLoader, "setSearchBarVisibility",
+                    int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mSearchBarState != SearchBarState.DEFAULT) {
+                        if (DEBUG) log("setSearchBarVisibility: forcing View.GONE");
+                        param.args[0] = Integer.valueOf(View.GONE);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_RECENT_ACTIVITY, classLoader,
+                    "addSearchBarAppWidgetView", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mSearchBarState != SearchBarState.DEFAULT) {
+                        if (DEBUG) log("addSearchBarAppWidgetView ignored");
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

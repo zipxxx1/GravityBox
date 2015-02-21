@@ -1771,4 +1771,10 @@
     <string name="pref_reboot_allow_softreboot_summary">Note that soft reboot can cause 
         unexpected battery drain or instability issues. Best practice is to always use normal reboot.</string>
 
+    <!-- Recents panel search bar -->
+    <string name="pref_recents_searchbar_title">Search bar visibility</string>
+    <string name="recents_searchbar_default">Default</string>
+    <string name="recents_searchbar_hide_keep_space">Hide and keep space</string>
+    <string name="recents_searchbar_hide_remove_space">Hide and remove space</string>
+
 </resources>

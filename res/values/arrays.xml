@@ -1149,4 +1149,16 @@
         <item>HIDDEN</item>
     </string-array>
 
+    <string-array name="recents_searchbar_entries" translatable="false">
+        <item>@string/recents_searchbar_default</item>
+        <item>@string/recents_searchbar_hide_keep_space</item>
+        <item>@string/recents_searchbar_hide_remove_space</item>
+    </string-array>
+
+    <string-array name="recents_searchbar_values" translatable="false">
+        <item>DEFAULT</item>
+        <item>HIDE_KEEP_SPACE</item>
+        <item>HIDE_REMOVE_SPACE</item>
+    </string-array>
+
 </resources>

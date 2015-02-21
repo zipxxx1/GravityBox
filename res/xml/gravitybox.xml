@@ -2196,6 +2196,13 @@
                 monitorBoxUnit="px"
                 android:defaultValue="50" />
 
+            <ListPreference 
+                android:key="pref_recents_searchbar"
+                android:title="@string/pref_recents_searchbar_title"
+                android:entries="@array/recents_searchbar_entries"
+                android:entryValues="@array/recents_searchbar_values"
+                android:defaultValue="DEFAULT" />
+
         </PreferenceCategory>
 
         <PreferenceCategory
