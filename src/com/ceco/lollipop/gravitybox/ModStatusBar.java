@@ -47,6 +47,7 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.UserHandle;
@@ -90,6 +91,7 @@ public class ModStatusBar {
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
     private static final int BRIGHTNESS_CONTROL_LONG_PRESS_TIMEOUT = 750; // ms
     private static final int BRIGHTNESS_CONTROL_LINGER_THRESHOLD = 20;
+    private static final float BRIGHTNESS_ADJ_RESOLUTION = 100;
     private static final int STATUS_BAR_DISABLE_EXPAND = 0x00010000;
     public static final String SETTING_ONGOING_NOTIFICATIONS = "gb_ongoing_notifications";
 
@@ -143,7 +145,7 @@ public class ModStatusBar {
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
-    private static boolean mBrightnessControl;
+    private static boolean mAutomaticBrightness;
     private static boolean mBrightnessChanged;
     private static float mScreenWidth;
     private static int mMinBrightness;
@@ -262,11 +264,15 @@ public class ModStatusBar {
         }
 
         public void update() {
-            ContentResolver resolver = mContext.getContentResolver();
-            int brightnessValue = Settings.System.getInt(resolver,
-                    Settings.System.SCREEN_BRIGHTNESS_MODE, 0);
-            mBrightnessControl = brightnessValue != Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
-                    && mBrightnessControlEnabled;
+            try {
+                ContentResolver resolver = mContext.getContentResolver();
+                int brightnessMode = (Integer) XposedHelpers.callStaticMethod(Settings.System.class,
+                        "getIntForUser", resolver,
+                        Settings.System.SCREEN_BRIGHTNESS_MODE, 0, -2);
+                mAutomaticBrightness = brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
     }
 
@@ -629,7 +635,7 @@ public class ModStatusBar {
                     "interceptTouchEvent", MotionEvent.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!mBrightnessControl) return;
+                    if (!mBrightnessControlEnabled) return;
 
                     brightnessControl((MotionEvent) param.args[0]);
                     if ((XposedHelpers.getIntField(param.thisObject, "mDisabled")
@@ -639,7 +645,7 @@ public class ModStatusBar {
                 }
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!mBrightnessControl || !mBrightnessChanged) return;
+                    if (!mBrightnessControlEnabled || !mBrightnessChanged) return;
 
                     int action = ((MotionEvent) param.args[0]).getAction();
                     final boolean upOrCancel = (action == MotionEvent.ACTION_UP ||
@@ -1116,18 +1122,13 @@ public class ModStatusBar {
         try {
             mBrightnessChanged = true;
             float raw = ((float) x) / mScreenWidth;
-    
+
             // Add a padding to the brightness control on both sides to
             // make it easier to reach min/max brightness
             float padded = Math.min(1.0f - BRIGHTNESS_CONTROL_PADDING,
                     Math.max(BRIGHTNESS_CONTROL_PADDING, raw));
             float value = (padded - BRIGHTNESS_CONTROL_PADDING) /
                     (1 - (2.0f * BRIGHTNESS_CONTROL_PADDING));
-    
-            int newBrightness = mMinBrightness + (int) Math.round(value *
-                    (BRIGHTNESS_ON - mMinBrightness));
-            newBrightness = Math.min(newBrightness, BRIGHTNESS_ON);
-            newBrightness = Math.max(newBrightness, mMinBrightness);
 
             Class<?> classSm = XposedHelpers.findClass("android.os.ServiceManager", null);
             Class<?> classIpm = XposedHelpers.findClass("android.os.IPowerManager.Stub", null);
@@ -1135,9 +1136,34 @@ public class ModStatusBar {
                     classSm, "getService", Context.POWER_SERVICE);
             Object power = XposedHelpers.callStaticMethod(classIpm, "asInterface", b);
             if (power != null) {
-                XposedHelpers.callMethod(power, "setTemporaryScreenBrightnessSettingOverride", newBrightness);
-                Settings.System.putInt(mContext.getContentResolver(),
-                        Settings.System.SCREEN_BRIGHTNESS, newBrightness);
+                if (mAutomaticBrightness) {
+                    float adj = (value * 100) / (BRIGHTNESS_ADJ_RESOLUTION / 2f) - 1;
+                    adj = Math.max(adj, -1);
+                    adj = Math.min(adj, 1);
+                    final float val = adj;
+                    XposedHelpers.callMethod(power, "setTemporaryScreenAutoBrightnessAdjustmentSettingOverride", val);
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            XposedHelpers.callStaticMethod(Settings.System.class, "putFloatForUser",
+                                mContext.getContentResolver(),"screen_auto_brightness_adj", val, -2);
+                        }
+                    });
+                } else {
+                    int newBrightness = mMinBrightness + (int) Math.round(value *
+                            (BRIGHTNESS_ON - mMinBrightness));
+                    newBrightness = Math.min(newBrightness, BRIGHTNESS_ON);
+                    newBrightness = Math.max(newBrightness, mMinBrightness);
+                    final int val = newBrightness;
+                    XposedHelpers.callMethod(power, "setTemporaryScreenBrightnessSettingOverride", val);
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            XposedHelpers.callStaticMethod(Settings.System.class, "putIntForUser",
+                                mContext.getContentResolver(),Settings.System.SCREEN_BRIGHTNESS, val, -2);
+                        }
+                    });
+                }
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
