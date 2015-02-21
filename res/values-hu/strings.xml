@@ -1597,14 +1597,6 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">SIM címke elrejtése</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Újraindítás szükséges</string>
 
-    <!-- Heads up: importance threshold -->
-    <string name="pref_heads_up_importance_title">Fontossági küszöb</string>
-    <string name="pref_heads_up_importance_summary">Lehetővé teszi a lebegő felugró ablakban megjelenő értesítés kikapcsolását a beállított fontossági küszöb alatti értesítésekhez (%s)</string>
-    <string name="headsup_importance_disabled">Letiltva</string>
-    <string name="headsup_importance_low">Alacsony</string>
-    <string name="headsup_importance_medium">Közepes</string>
-    <string name="headsup_importance_high">Magas</string>
-
     <!-- QS: network mode tile 2g+3g mode -->
     <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G mód</string>
     <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferált (3G/2G)</string>

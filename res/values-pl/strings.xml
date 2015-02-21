@@ -1583,15 +1583,6 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">Ukryj etykiety SIM</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Wymagany restart</string>
 
-    <!-- Heads up: importance threshold -->
-    <string name="pref_heads_up_importance_title">Próg ważności</string>
-    <string name="pref_heads_up_importance_summary">Pozwala pomijać powiadomienia Heads up 
-        których znaczenie jest niższe niż ustawiony próg (%s)</string>
-    <string name="headsup_importance_disabled">Wyłączony</string>
-    <string name="headsup_importance_low">Niski</string>
-    <string name="headsup_importance_medium">Średni</string>
-    <string name="headsup_importance_high">Wysoki</string>
-
     <!-- QS: network mode tile 2g+3g mode -->
     <string name="pref_network_mode_tile_2g3g_mode_title">Tryb 2G+3G</string>
     <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA preferowane (3G/2G)</string>

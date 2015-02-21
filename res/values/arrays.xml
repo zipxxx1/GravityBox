@@ -1067,20 +1067,6 @@
         <item>DISABLED</item>
     </string-array>
 
-    <string-array name="headsup_importance_entries" translatable="false">
-        <item>@string/headsup_importance_disabled</item>
-        <item>@string/headsup_importance_low</item>
-        <item>@string/headsup_importance_medium</item>
-        <item>@string/headsup_importance_high</item>
-    </string-array>
-
-    <string-array name="headsup_importance_values" translatable="false">
-        <item>-20</item>
-        <item>-10</item>
-        <item>0</item>
-        <item>10</item>
-    </string-array>
-
     <string-array name="nmt_2g3g_mode_entries" translatable="false">
         <item>@string/nmt_2g3g_mode_wcdma</item>
         <item>@string/nmt_2g3g_mode_auto</item>

@@ -731,7 +731,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HEADS_UP_SNOOZE_RESET = "pref_heads_up_snooze_reset";
     public static final String ACTION_HEADS_UP_SNOOZE_RESET = "gravitybox.intent.action.HEADS_UP_SNOOZE_RESET";
     public static final String PREF_KEY_HEADS_UP_SNOOZE_TIMER = "pref_heads_up_snooze_timer";
-    public static final String PREF_KEY_HEADS_UP_IMPORTANCE = "pref_heads_up_importance";
     public static final String ACTION_HEADS_UP_SETTINGS_CHANGED = "gravitybox.intent.action.HEADS_UP_SETTINGS_CHANGED";
 
     public static final String PREF_KEY_HEADSET_ACTION_PLUG = "pref_headset_action_plug";
@@ -892,8 +891,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_HEADS_UP_TIMEOUT,
             PREF_KEY_HEADS_UP_ALPHA,
             PREF_KEY_HEADS_UP_SNOOZE,
-            PREF_KEY_HEADS_UP_SNOOZE_TIMER,
-            PREF_KEY_HEADS_UP_IMPORTANCE
+            PREF_KEY_HEADS_UP_SNOOZE_TIMER
     ));
 
     private static final class SystemProperties {
@@ -1273,7 +1271,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
         private ListPreference mPrefSbTickerPolicy;
         private CheckBoxPreference mPrefScHideSimLabels;
-        private ListPreference mPrefHeadsUpImportance;
         private ListPreference mPrefQrQuality;
         private SeekBarPreference mPrefSrAdaptiveDelay;
         private ListPreference mPrefBbarPosition;
@@ -1581,8 +1578,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCustomApp = (AppPickerPreference) findPreference(PREF_KEY_HWKEY_CUSTOM_APP);
             getPreferenceScreen().removePreference(mPrefCustomApp);
-
-            mPrefHeadsUpImportance = (ListPreference) findPreference(PREF_KEY_HEADS_UP_IMPORTANCE);
 
             mPrefChargingLed = (ListPreference) findPreference(PREF_KEY_CHARGING_LED);
             mPrefProximityWakeIgnoreCall = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL);
@@ -2327,12 +2322,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_QS_BATTERY_TEMP_UNIT)) {
                 mPrefQsBatteryTempUnit.setSummary(mPrefQsBatteryTempUnit.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_HEADS_UP_IMPORTANCE)) {
-                mPrefHeadsUpImportance.setSummary(String.format(
-                        getString(R.string.pref_heads_up_importance_summary),
-                        mPrefHeadsUpImportance.getEntry()));;
             }
 
             if (key == null || key.equals(PREF_KEY_CHARGING_LED)) {

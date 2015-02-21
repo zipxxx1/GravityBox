@@ -1618,15 +1618,6 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">Скрыть ярлыки SIM</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Необходима перезагрузка</string>
 
-    <!-- Heads up: importance threshold -->
-    <string name="pref_heads_up_importance_title">Порог важности</string>
-    <string name="pref_heads_up_importance_summary">Возможность отключить уведомления всплытия, 
-        имеющие важность менее установленного порога (%s)</string>
-    <string name="headsup_importance_disabled">Отключено</string>
-    <string name="headsup_importance_low">Низкий</string>
-    <string name="headsup_importance_medium">Средний</string>
-    <string name="headsup_importance_high">Высокий</string>
-
     <!-- QS: network mode tile 2g+3g mode -->
     <string name="pref_network_mode_tile_2g3g_mode_title">Режим 2G+3G</string>
     <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA предпочт. (3G/2G)</string>

@@ -718,12 +718,6 @@ public class ModLedControl {
     private static boolean isHeadsUpAllowed(StatusBarNotification sbn, Context context, int score) {
         if (context == null) return false;
 
-        if (score < Integer.valueOf(mSysUiPrefs.getString(
-                GravityBoxSettings.PREF_KEY_HEADS_UP_IMPORTANCE, "-20"))) {
-            if (DEBUG) log("isHeadsUpAllowed: no due to low importance level");
-            return false;
-        }
-
         Object kgTouchDelegate = XposedHelpers.callStaticMethod(
                 XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, context.getClassLoader()),
                 "getInstance", context);

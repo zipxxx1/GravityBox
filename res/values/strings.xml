@@ -1625,15 +1625,6 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">Hide SIM labels</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Requires reboot</string>
 
-    <!-- Heads up: importance threshold -->
-    <string name="pref_heads_up_importance_title">Importance threshold</string>
-    <string name="pref_heads_up_importance_summary">Allows suppressing heads up for notifications 
-        that are of importance lower than defined threshold (%s)</string>
-    <string name="headsup_importance_disabled">Disabled</string>
-    <string name="headsup_importance_low">Low</string>
-    <string name="headsup_importance_medium">Medium</string>
-    <string name="headsup_importance_high">High</string>
-
     <!-- QS: network mode tile 2g+3g mode -->
     <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G mode</string>
     <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferred (3G/2G)</string>
