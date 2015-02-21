@@ -429,6 +429,7 @@ public class ModLedControl {
             }
         }
 
+        @SuppressWarnings("deprecation")
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
@@ -601,13 +602,17 @@ public class ModLedControl {
                     if (mSysUiPrefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_SNOOZE, false) &&
                             isHeadsUpSnoozing(pkgName)) {
                         if (DEBUG) log("Heads up currently snoozing for " + pkgName);
-                        showHeadsUp = false;
+                        showHeadsUp = false; 
                     // show if active screen heads up mode set
                     } else if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) &&
                             ActiveScreenMode.valueOf(n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE)) ==
                                 ActiveScreenMode.HEADS_UP) {
                         if (DEBUG) log("Showing active screen heads up");
                         showHeadsUp = true;
+                    // no heads up if app with DND enabled is in the foreground
+                    } else if (shouldNotDisturb(context)) {
+                        if (DEBUG) log("shouldInterrupt: NO due to DND app in the foreground");
+                        showHeadsUp = false;
                     // disable when panels are disabled
                     } else if (!(Boolean) XposedHelpers.callMethod(param.thisObject, "panelsEnabled")) {
                         if (DEBUG) log("shouldInterrupt: NO due to panels being disabled");
@@ -622,8 +627,7 @@ public class ModLedControl {
                         switch (mode) {
                             default:
                             case DEFAULT:
-                                showHeadsUp = isHeadsUpAllowed(sbn, context,
-                                        (Integer) XposedHelpers.callMethod(param.args[0], "getScore"));
+                                showHeadsUp = (Boolean) param.getResult();
                                 break;
                             case ALWAYS: 
                                 showHeadsUp = isHeadsUpAllowed(sbn, context);
@@ -711,11 +715,8 @@ public class ModLedControl {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private static boolean isHeadsUpAllowed(StatusBarNotification sbn, Context context) {
-        return isHeadsUpAllowed(sbn, context, 20);
-    }
-
-    private static boolean isHeadsUpAllowed(StatusBarNotification sbn, Context context, int score) {
         if (context == null) return false;
 
         Object kgTouchDelegate = XposedHelpers.callStaticMethod(
@@ -726,14 +727,14 @@ public class ModLedControl {
         return (pm.isScreenOn() &&
                 !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isShowingAndNotOccluded") &&
                 !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isInputRestricted") &&
-                (!sbn.isOngoing() || n.fullScreenIntent != null || (n.extras.getInt("headsup", 0) != 0)) &&
-                !shouldNotDisturb(context));
+                (!sbn.isOngoing() || n.fullScreenIntent != null || (n.extras.getInt("headsup", 0) != 0)));
     }
 
     private static boolean isStatusBarHidden(int statusBarWindowState) {
         return (statusBarWindowState != 0);
     }
 
+    @SuppressWarnings("deprecation")
     private static String getTopLevelPackageName(Context context) {
         try {
             final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
