@@ -119,13 +119,13 @@
     <string name="about_gb_summary">Codificado por C3C076@XDA. Entre em contato no tópico oficial.</string>
     <string name="about_xposed_title">Xposed framework</string>
     <string name="about_xposed_summary">Codificado por rovo89@XDA. Entre em contato no tópico oficial.</string>
-    <string name="about_donate_title">Doação</string>
-    <string name="about_donate_summary">Faça uma doação para mim se você acha que este aplicativo vale a pena! Também considere doar para o rovo89 pelo seu excelente trabalho com o Xposed framework.</string>
+    <string name="about_donate_title">Doar</string>
+    <string name="about_donate_summary">Toque aqui para dar suporte ao desenvolvimento deste app, fazendo uma doação via PayPal.</string>
 
     <!-- Reboot confirmation -->
-    <string name="reboot_confirm">O seu %s irá reiniciar.</string>
-    <string name="reboot_confirm_recovery">O seu %s irá reiniciar em modo de recuperação.</string>
-    <string name="reboot_confirm_bootloader">O seu %s irá reiniciar em modo bootloader.</string>
+    <string name="reboot_confirm">Seu %s irá reiniciar.</string>
+    <string name="reboot_confirm_recovery">Seu %s irá reiniciar em modo de recuperação.</string>
+    <string name="reboot_confirm_bootloader">Seu %s irá reiniciar em modo bootloader.</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Modo Engenharia</string>
@@ -147,8 +147,8 @@
     <string name="pref_lockscreen_bg_color_summary">Permite escolher uma cor personalizada para a tela de bloqueio</string>
     <string name="pref_lockscreen_bg_image_title">Escolha uma imagem</string>
     <string name="pref_lockscreen_bg_image_summary">Permite escolher uma imagem personalizada para a tela de bloqueio</string>
-    <string name="lockscreen_background_result_successful">Fundo alterado</string>
-    <string name="lockscreen_background_result_not_successful">Fundo não alterado</string>
+    <string name="lockscreen_background_result_successful">Plano de fundo alterado</string>
+    <string name="lockscreen_background_result_not_successful">Plano de fundo não alterado</string>
     <string name="pref_cat_lockscreen_other_title">Outros</string>
 
     <!-- Power tweaks category -->
@@ -181,7 +181,7 @@
     <string name="pref_ab_number_not_descending">O valor do patamar superior não pode ser menor que o do patamar inferior</string>
     <string name="pref_ab_values_set">Valores de %s definidos</string>
     <string name="pref_ab_config_saved">Nova configuração de níveis de brilho automático salva</string>
-    <string name="pref_ab_config_cancelled">Configuração de níveis de brilho automático não salva</string>
+    <string name="pref_ab_config_cancelled">A configuração de níveis de brilho automático não foi salva</string>
     <string name="pref_ab_button_set">Definir</string>
 
     <!-- Lockscreen rotation -->
@@ -189,18 +189,18 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Habilitar tecla de Menu</string>
-    <string name="pref_lockscreen_menu_key_summary">Permite que a tecla de Menu seja usada para um desbloqueio rápido da tela de bloqueio (necessário reiniciar)</string>
+    <string name="pref_lockscreen_menu_key_summary">Permite que a tecla de Menu seja usada para desbloquear rapidamente o dispositivo (necessário reiniciar)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Centralizar relógio</string>
 
     <!-- Media tweaks category -->
-    <string name="pref_cat_media_title">Ajustes multimídia</string>
+    <string name="pref_cat_media_title">Ajustes de multimídia</string>
     <string name="pref_cat_media_summary">Contém diversos ajustes relacionados a multimídia</string>
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">Níveis de volume adicionais</string>
-    <string name="pref_music_volume_steps_summary">Adiciona mais níveis de volumes para os fluxos de música (necessário reiniciar)</string>
+    <string name="pref_music_volume_steps_summary">Adiciona mais níveis de volume para os fluxos de música (necessário reiniciar)</string>
 
     <!-- Safe headset media volume -->
     <string name="pref_safe_media_volume_title">Volume seguro do fone de ouvido</string>
@@ -224,21 +224,21 @@
     <string name="pref_hwkey_doubletap_speed_summary">Define o quão rápido a tecla deve ser pressionada para disparar o toque duplo</string>
     <string name="app_killed">%s morto</string>
     <string name="nothing_to_kill">Não há nada para matar</string>
-    <string name="no_previous_app_found">Nenhum aplicativo anterior</string>
+    <string name="no_previous_app_found">Nenhum aplicativo anterior encontrado</string>
 
     <!--  Phone tweaks category -->
-    <string name="pref_cat_phone_title">Ajustes de telefone</string>
-    <string name="pref_cat_phone_summary">Contém diversos ajustes relacionados com o telefone</string>
+    <string name="pref_cat_phone_title">Ajustes de telefonia</string>
+    <string name="pref_cat_phone_summary">Contém diversos ajustes relacionados à telefonia</string>
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">Ação ao virar o telefone enquanto recebe uma chamada</string>
-    <string name="pref_phone_flip_summary">Permite definir uma ação para executar quando o telefone for virado para baixo enquanto está tocando</string>
-    <string name="phone_flip_action_none">Nenhuma ação</string>
-    <string name="phone_flip_action_mute">Mudo</string>
+    <string name="pref_phone_flip_summary">Permite definir uma ação a ser executada quando o telefone for virado para baixo enquanto está tocando</string>
+    <string name="phone_flip_action_none">Não fazer nada</string>
+    <string name="phone_flip_action_mute">Silenciar</string>
     <string name="phone_flip_action_dismiss">Rejeitar chamada</string>
 
     <!-- Soft reboot -->
-    <string name="reboot_soft">Reinício leve</string>
+    <string name="reboot_soft">Reinício rápido</string>
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Painéis por linha</string>
@@ -260,13 +260,13 @@
     <string name="pref_link_volumes_summary">Quando desabilitado, os volumes para ringtone e notificações são definidos individualmente</string>
 
     <!-- Auto-switch QuickSettings -->
-    <string name="pref_auto_switch_qs_title">Mudar automaticamente as Configurações Rápidas</string>
-    <string name="pref_auto_switch_qs_summary">As configurações rápidas serão exbidas automaticamente quando a barra de status é puxada para baixo caso não haja notificações</string>
+    <string name="pref_auto_switch_qs_title">Mudar automaticamente para as Configurações Rápidas</string>
+    <string name="pref_auto_switch_qs_summary">As configurações rápidas serão exibidas automaticamente quando a barra de status é puxada para baixo e se não houver notificações</string>
 
     <!-- Quick pulldown -->
     <string name="pref_quick_pulldown_title">Deslize rápido para baixo</string>
     <string name="pref_quick_pulldown_summary">A borda da barra de status puxa para baixo as configurações rápidas</string>
-    <string name="quick_pulldown_off">Desabilitado</string>
+    <string name="quick_pulldown_off">Desativado</string>
     <string name="quick_pulldown_right">Direita</string>
     <string name="quick_pulldown_left">Esquerda</string>
 
@@ -288,10 +288,10 @@
     <string name="pref_cat_statusbar_qs_title">Configurações rápidas</string>
 
     <!-- Notification drawer style -->
-    <string name="pref_cat_notification_drawer_style_title">Estilo da gaveta de notificação</string>
+    <string name="pref_cat_notification_drawer_style_title">Estilo da gaveta de notificações</string>
 
     <!-- Notification drawer background -->
-    <string name="pref_notif_background_title">Fundo da gaveta de notificação</string>
+    <string name="pref_notif_background_title">Fundo da gaveta de notificações</string>
     <string name="notif_background_default">Fundo padrão</string>
     <string name="notif_background_color_fill">Preenchimento de cor</string>
     <string name="notif_background_custom_image">Imagem personalizada</string>
@@ -358,10 +358,10 @@
     <string name="qs_tile_quickapp">Aplicativo rápido</string>
     <string name="pref_cat_quickapp_tile_title">Configurações do painel Aplicativo rápido</string>
     <string name="pref_quickapp_default_title">Aplicativo principal</string>
-    <string name="pref_quickapp_slot1_title">Longa pressionada aplicativo posição 1</string>
-    <string name="pref_quickapp_slot2_title">Longa pressionada aplicativo posição 2</string>
-    <string name="pref_quickapp_slot3_title">Longa pressionada aplicativo posição 3</string>
-    <string name="pref_quickapp_slot4_title">Longa pressionada aplicativo posição 4</string>
+    <string name="pref_quickapp_slot1_title">App longa press. posição 1</string>
+    <string name="pref_quickapp_slot2_title">App longa press. posição 2</string>
+    <string name="pref_quickapp_slot3_title">App longa press. aplicativo posição 3</string>
+    <string name="pref_quickapp_slot4_title">App longa press. aplicativo posição 4</string>
 
     <!-- GPS Tile (for non-MTK) -->
     <string name="qs_tile_gps_enabled">GPS ativado</string>
@@ -413,7 +413,7 @@
 
     <!-- Link notification panel clock to Deskclock -->
     <string name="pref_clock_link_title">Aplicativo de relógio do painel de notificações</string>
-    <string name="pref_clock_link_summary">Une o relógio do painel de notificações com um aplicativo de configurações de Data&amp;Hora</string>
+    <string name="pref_clock_link_summary">Une o relógio do painel de notificações a outro aplicativo ao invés das configs. de data e hora</string>
 
     <!-- GravityBox settings startup handling -->
     <string name="gb_startup_progress">Aguardando resposta do framework do GravityBox...</string>
@@ -429,8 +429,8 @@
     <string name="expanded_desktop_navbar">Esconder barra de navegação</string>
     <string name="expanded_desktop_both">Esconder ambos</string>
     <string name="action_expanded_desktop_title">Área de trabalho expandida</string>
-    <string name="action_expanded_desktop_on">Área de trabalho expandida está ligada</string>
-    <string name="action_expanded_desktop_off">Área de trabalho expandida está desligada</string>
+    <string name="action_expanded_desktop_on">Área de trabalho expandida ativada</string>
+    <string name="action_expanded_desktop_off">Área de trabalho expandida desativada</string>
 
     <!-- Power menu screenshot -->
     <string name="screenshot">Captura de tela</string>
@@ -453,7 +453,7 @@
     <string name="pref_navbar_height_landscape_summary">Aplicável à barra de navegação horizontal e em modo paisagem</string>
     <string name="pref_navbar_width_title">Largura da barra de navegação</string>
     <string name="pref_navbar_width_summary">Aplicável à barra de navegação vertical</string>
-    <string name="pref_navbar_menukey_title">Sempre mostrar a tecla de Menu</string>
+    <string name="pref_navbar_menukey_title">Sempre mostrar a tecla de menu</string>
 
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Captura de tela no menu de opções de energia</string>
@@ -487,10 +487,10 @@
     <string name="pref_qs_tile_behaviour_override_summary">Substitui o comportamento do toque/toque-longo para blocos selecionados (necessário reiniciar)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">Bloco do modo de Rede do SIM</string>
-    <string name="pref_qs_network_mode_sim_slot_summary">Define o slot do SIM que o modo de Rede se aplica (%s)</string>
-    <string name="sim_slot1">SIM slot 1</string>
-    <string name="sim_slot2">SIM slot 2</string>
+    <string name="pref_qs_network_mode_sim_slot_title">Slot de SIM para o bloco de modo de rede/string>
+    <string name="pref_qs_network_mode_sim_slot_summary">Define o slot de SIM ao qual o modo de rede se aplica (%s)</string>
+    <string name="sim_slot1">Slot 1</string>
+    <string name="sim_slot2">Slot 2</string>
 
     <!-- Intelligent pie -->
     <string name="pie_controls_disabled">Nunca</string>
@@ -503,7 +503,7 @@
     <string name="pref_unplug_turns_on_screen_summary">Se habilitado, a tela vai ligar quando você plugar/desplugar o cabo USB/carregador/qualquer outra coisa (necessário reiniciar)</string>
 
     <!-- Mute volume adjust sound -->
-    <string name="pref_volume_adjust_mute_title">Deixar mudo o volume dos ajustes de som</string>
+    <string name="pref_volume_adjust_mute_title">Silenciar o som de ajuste de volume</string>
     <string name="pref_volume_adjust_mute_summary">Desabilita o som tocado ao ajustar o volume usando as teclas de volume</string>
 
     <!-- Call vibrations -->
@@ -559,7 +559,7 @@
     <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> usada</string>
     <string name="pref_rambar_title">Indicação de RAM nos aplicativos recentes</string>
     <string name="rambar_off">Desabilitado</string>
-    <string name="rambar_top">pParte superior</string>
+    <string name="rambar_top">Parte superior</string>
     <string name="rambar_bottom">Parte inferior</string>
 
     <!-- HW Key actions for recents button -->
@@ -567,7 +567,7 @@
     <string name="hwkey_recents_longpress_dialog_title">Ação de clique longo na tecla de Aplicativos recentes</string>
 
     <!-- HW Key Actions: toggle torch -->
-    <string name="hwkey_action_torch">Alternar lanterna</string>
+    <string name="hwkey_action_torch">Ligar/desligar lanterna</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Expandir automaticamente</string>
@@ -576,7 +576,7 @@
     <string name="pref_cat_hwkey_menu_title">Tecla Menu</string>
     <string name="pref_cat_hwkey_home_title">Tecla Home</string>
     <string name="pref_cat_hwkey_back_title">Tecla Voltar</string>
-    <string name="pref_cat_hwkey_recents_title">Tecla de Aplicativos recentes</string>
+    <string name="pref_cat_hwkey_recents_title">Tecla de apps recentes</string>
     <string name="pref_cat_hwkey_volume_title">Teclas de volume</string>
     <string name="pref_cat_hwkey_actions_others">Outras configurações</string>
     <string name="pref_hwkey_longpress_title">Ação ao manter pressionada</string>
@@ -888,7 +888,7 @@
     <string name="pref_ime_fullscreen_disable_title">Desabilitar teclado em tela-cheia</string>
 
     <!-- Torch auto-off -->
-    <string name="pref_torch_auto_off_title">Auto desligar lanterna</string>
+    <string name="pref_torch_auto_off_title">Desligar lanterna automaticamente</string>
     <string name="pref_torch_auto_off_summary">Desligar a lanterna automaticamente após um tempo determinado. Defina 0 para desabilitar (não recomendado)</string>
 
     <!-- Swap volume keys when the screen is rotated -->
@@ -1001,7 +1001,7 @@
     <string name="wsc_trans_blocked">O ID de transação especificado foi bloqueado. Contacte o autor do GravityBox para resolver.</string>
     <string name="pref_trans_verification_title">ID de transação PayPal</string>
     <string name="pref_trans_verification_summary">Caso tenha feito uma doação, você pode introduzir o número de identificação da transação PayPal para desbloquear as funcionalidades avançadas</string>
-    <string name="wsc_trans_required_summary">Esta funcionalidade é avançada e requer o desbloqueio</string>
+    <string name="wsc_trans_required_summary">Esta funcionalidade é premium e requer o desbloqueio</string>
 
     <!-- Pie: disable system info -->
     <string name="pref_pie_sysinfo_disable_title">Desativar informações do sistema</string>
@@ -1342,7 +1342,7 @@
     <!-- Statusbar BT icon visibility -->
     <string name="pref_sb_bt_visibility_title">Visibilidade do indicador Bluetooth</string>
     <string name="sb_bt_default">Sempre que estiver ativado (predefinido)</string>
-    <string name="sb_bt_connected">Quando algum dispositivo estiver ligado</string>
+    <string name="sb_bt_connected">Quando algum dispositivo estiver conectado</string>
     <string name="sb_bt_hidden">Oculto</string>
 
     <!-- Increasing ringtone volume -->
@@ -1672,6 +1672,21 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="pref_battery_bar_color_critical_title">Cor da bateria crítica</string>
     <string name="pref_battery_bar_centered_title">Centrado</string>
     <string name="pref_battery_bar_color_charging_title">Cor durante carga</string>
+    
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Modo</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animada</string>
+    <string name="pref_statusbar_download_progress_centered_title">Centralizada</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Espessura</string>
+    <string name="pref_statusbar_download_progress_margin_title">Margem de borda</string>
 
-        
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">Ação de toque simples da tecla de menu</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">Ação de toque simples da tecla Voltar</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">Ação de toque simples da tecla de apps recentes</string>
+
 </resources>
