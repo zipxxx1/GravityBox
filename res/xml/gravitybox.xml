@@ -2099,8 +2099,9 @@
             android:key="pref_screenrecord_use_stock"
             android:title="@string/pref_screenrecord_use_stock_title"
             android:summary="@string/pref_screenrecord_use_stock_summary"
-            android:defaultValue="false"
-            android:disableDependentsState="true" />
+            android:defaultValue="true"
+            android:disableDependentsState="true"
+            android:enabled="false" />
 
         <ListPreference
             android:key="pref_screenrecord_size"

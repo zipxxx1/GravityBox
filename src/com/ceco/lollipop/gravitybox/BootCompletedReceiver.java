@@ -31,15 +31,15 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     // copies required files from assets to file system
     private void prepareAssets(Context context) {
-        File f;
-
-        // prepare alternative screenrecord binary if doesn't exist yet
-        f = new File(context.getFilesDir() + "/screenrecord");
-        if (!f.exists()) {
-            Utils.writeAssetToFile(context, "screenrecord", f);
-        }
-        if (f.exists()) {
-            f.setExecutable(true);
-        }
+//        File f;
+//
+//        // prepare alternative screenrecord binary if doesn't exist yet
+//        f = new File(context.getFilesDir() + "/screenrecord");
+//        if (!f.exists()) {
+//            Utils.writeAssetToFile(context, "screenrecord", f);
+//        }
+//        if (f.exists()) {
+//            f.setExecutable(true);
+//        }
     }
 }
