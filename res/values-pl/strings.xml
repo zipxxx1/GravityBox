@@ -789,7 +789,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Poprawki Startera Aplikacji</string>
-    <string name="pref_cat_launcher_tweaks_summary">Dotyczy standardowego startera aplikacji oraz Google Experience Launcher</string>
+    <string name="pref_cat_launcher_tweaks_summary">Dotyczy standardowego startera aplikacji oraz Google Now Launcher</string>
     <string name="pref_cat_launcher_desktop_grid_title">Siatka pulpitu</string>
     <string name="pref_launcher_desktop_grid_info_title">Użycie wartości innych niż domyślne może zaburzyć układ widżetów. Należy używać rozważnie. Zmiany wymagają ponownego uruchomienia startera aplikacji</string>
     <string name="pref_launcher_desktop_grid_rows_title">Ilość wierszy</string>

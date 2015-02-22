@@ -672,7 +672,7 @@
     <string name="screen_off_effect_fade">フェード</string>
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">ランチャー調整</string>
-    <string name="pref_cat_launcher_tweaks_summary">標準ランチャーとGoogle Experience launcherに適用されます。</string>
+    <string name="pref_cat_launcher_tweaks_summary">標準ランチャーとGoogle Now Launcherに適用されます。</string>
     <string name="pref_cat_launcher_desktop_grid_title">グリッド</string>
     <string name="pref_launcher_desktop_grid_info_title">デフォルト以外の値を使うとウィジェットのレイアウトが崩れる場合があります。変更後はランチャーを再起動してください。</string>
     <string name="pref_launcher_desktop_grid_rows_title">行数</string>

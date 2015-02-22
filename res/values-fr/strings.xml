@@ -815,7 +815,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Modifications du lanceur</string>
-    <string name="pref_cat_launcher_tweaks_summary">S\'applique au lanceur par défaut ainsi qu\'au lanceur Google Experience</string>
+    <string name="pref_cat_launcher_tweaks_summary">S\'applique au lanceur par défaut ainsi qu\'au lanceur Google Now</string>
     <string name="pref_cat_launcher_desktop_grid_title">Grille du bureau</string>
     <string name="pref_launcher_desktop_grid_info_title">Utiliser des valeurs autres que celles par défaut peut perturber l\'agencement des widgets. Utiliser à bon escient. Il faut redémarrer le lanceur pour que les changements prennent effet</string>
     <string name="pref_launcher_desktop_grid_rows_title">Nombre de lignes</string>

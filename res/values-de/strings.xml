@@ -802,7 +802,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Launcher Anpassungen</string>
-    <string name="pref_cat_launcher_tweaks_summary">Anpassungen für Stock Launcher und Google Experience Launcher</string>
+    <string name="pref_cat_launcher_tweaks_summary">Anpassungen für Stock Launcher und Google Now Launcher</string>
     <string name="pref_cat_launcher_desktop_grid_title">Desktop Raster</string>
     <string name="pref_launcher_desktop_grid_info_title">Andere Werte als die Standardwerte können Widgets evtl. funktionsunfähig gmachen. Vorsichtig einsetzen! (erfordert Launcher-Neustart)</string>
     <string name="pref_launcher_desktop_grid_rows_title">Anzahl Zeilen</string>

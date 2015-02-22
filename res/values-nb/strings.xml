@@ -807,7 +807,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Launcher tweaks</string>
-    <string name="pref_cat_launcher_tweaks_summary">Applies to stock launcher and Google Experience launcher</string>
+    <string name="pref_cat_launcher_tweaks_summary">Applies to stock launcher and Google Now launcher</string>
     <string name="pref_cat_launcher_desktop_grid_title">Desktop grid</string>
     <string name="pref_launcher_desktop_grid_info_title">Using other values than default may break widgets\' layout. Use wisely. Changes require launcher to be restarted.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Number of rows</string>

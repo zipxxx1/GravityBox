@@ -631,7 +631,7 @@
     <string name="screen_off_effect_fade">페이드</string>
 
     <string name="pref_cat_launcher_tweaks_title">홈 런처 트윅</string>
-    <string name="pref_cat_launcher_tweaks_summary">순정 AOSP 런처와 Google Experience 런처의 설정을 수정합니다.</string>
+    <string name="pref_cat_launcher_tweaks_summary">순정 AOSP 런처와 Google Now 런처의 설정을 수정합니다.</string>
     <string name="pref_cat_launcher_desktop_grid_title">바탕화면 격자</string>
     <string name="pref_launcher_desktop_grid_info_title">다른 값을 설정하면 위젯의 레이아웃이 깨질 수 있습니다. 주의하여 사용하세요. 런처가 재시작해야 값이 적용됩니다.</string>
     <string name="pref_launcher_desktop_grid_rows_title">열 갯수 (세로)</string>

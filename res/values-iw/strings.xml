@@ -789,7 +789,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">הגדרות לאונצ\'ר</string>
-    <string name="pref_cat_launcher_tweaks_summary">חל על לאונצ\'ר סטוק ועל לאונצ\'ר Google Experience</string>
+    <string name="pref_cat_launcher_tweaks_summary">חל על לאונצ\'ר סטוק ועל לאונצ\'ר Google Now</string>
     <string name="pref_cat_launcher_desktop_grid_title">פריסת רשת של מסכי הבית</string>
     <string name="pref_launcher_desktop_grid_info_title">שימשו בערכים שונים מערכי ברירת מחדל עלול לשבש תצוגה תקינה של ווידג\'טים. השתמש בחכמה. שינויים דורשים הפעלה מחדש של לאונצ\'ר.</string>
     <string name="pref_launcher_desktop_grid_rows_title">מספר שורות</string>

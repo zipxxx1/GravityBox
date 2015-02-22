@@ -785,7 +785,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Nastavenia spúšťača</string>
-    <string name="pref_cat_launcher_tweaks_summary">Vzťahuje sa na štandardný KitKat spúšťač alebo Google Experience spúšťač</string>
+    <string name="pref_cat_launcher_tweaks_summary">Vzťahuje sa na štandardný KitKat spúšťač alebo Google Now spúšťač</string>
     <string name="pref_cat_launcher_desktop_grid_title">Mriežka plochy</string>
     <string name="pref_launcher_desktop_grid_info_title">Použitie iných ako východzích hodnôt môže spôsobiť narušenie vzhľadu miniaplikácií. Zmeny vyžadujú reštart spúšťača.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Počet riadkov</string>
