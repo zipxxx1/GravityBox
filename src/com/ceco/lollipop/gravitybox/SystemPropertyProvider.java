@@ -87,7 +87,7 @@ public class SystemPropertyProvider {
                         // register or decrease UNC trial countdown
                         int uncTrialCountdown = Settings.System.getInt(cr, SETTING_UNC_TRIAL_COUNTDOWN, -1);
                         if (uncTrialCountdown == -1) {
-                            Settings.System.putInt(cr, SETTING_UNC_TRIAL_COUNTDOWN, 20);
+                            Settings.System.putInt(cr, SETTING_UNC_TRIAL_COUNTDOWN, 50);
                         } else {
                             if (--uncTrialCountdown >= 0) {
                                 Settings.System.putInt(cr, SETTING_UNC_TRIAL_COUNTDOWN, uncTrialCountdown);
@@ -119,7 +119,7 @@ public class SystemPropertyProvider {
                                             mSettingsUuid.equals(Settings.System.getString(
                                                     cr, SETTING_GRAVITYBOX_UUID))));
                                     data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
-                                            SETTING_UNC_TRIAL_COUNTDOWN, 20));
+                                            SETTING_UNC_TRIAL_COUNTDOWN, 50));
                                     data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
                                     if (DEBUG) {
                                         log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
