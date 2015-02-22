@@ -864,7 +864,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Indító módosítások</string>
-    <string name="pref_cat_launcher_tweaks_summary">Csak a Google Experience Indítóra vonatkozik</string>
+    <string name="pref_cat_launcher_tweaks_summary">Csak a Google Now Indítóra vonatkozik</string>
     <string name="pref_cat_launcher_desktop_grid_title">Képernyőrács</string>
     <string name="pref_launcher_desktop_grid_info_title">Alapértelmezettnél más értékek használata a widgetek megjelenítésének és működésének az összeomlását eredményezheti. Okosan használd. A változtatásokhoz az Indító újraindítása szükséges.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Sorok száma</string>

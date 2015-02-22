@@ -853,7 +853,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Αρχική οθόνη</string>
-    <string name="pref_cat_launcher_tweaks_summary">Ισχύει για την stock Αρχική οθόνη και για την Αρχική οθόνη Google Experience</string>
+    <string name="pref_cat_launcher_tweaks_summary">Ισχύει για την stock Αρχική οθόνη και για την Αρχική οθόνη Google Now</string>
     <string name="pref_cat_launcher_desktop_grid_title">Πλέγμα αρχικής οθόνης</string>
     <string name="pref_launcher_desktop_grid_info_title">Η χρήση άλλων τιμών από των προκαθορισμένων μπορεί να χαλάσει την διάταξη των widget. Χρήση με προσοχή. Οι αλλαγές χρειάζονται επανεκκίνηση της αρχικής οθόνης.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Αριθμός γραμμών</string>

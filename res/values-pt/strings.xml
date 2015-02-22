@@ -844,7 +844,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Launcher tweaks</string>
-    <string name="pref_cat_launcher_tweaks_summary">Aplicável somente ao launcher Google Experience</string>
+    <string name="pref_cat_launcher_tweaks_summary">Aplicável somente ao launcher Google Now</string>
     <string name="pref_cat_launcher_desktop_grid_title">Grade da área de trabalho</string>
     <string name="pref_launcher_desktop_grid_info_title">Usando outros valores ao envez do padrão pode quebrar o layout dos widgets. As mudanças requerem que o launcher seja reiniciado</string>
     <string name="pref_launcher_desktop_grid_rows_title">Número de linhas</string>

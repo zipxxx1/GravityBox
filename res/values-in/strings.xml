@@ -856,7 +856,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Tweak Launcher</string>
-    <string name="pref_cat_launcher_tweaks_summary">Berlaku hanya untuk Google Experience launcher</string>
+    <string name="pref_cat_launcher_tweaks_summary">Berlaku hanya untuk Google Now Launcher</string>
     <string name="pref_cat_launcher_desktop_grid_title">Kisi-kisi layar</string>
     <string name="pref_launcher_desktop_grid_info_title">Menggunakan selain nilai bawaan mungkin membuat tata ruang widget rusak. Gunakan secara bijak. Setiap perubahan membutuhkan launcher untuk di restart.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Jumlah baris</string>

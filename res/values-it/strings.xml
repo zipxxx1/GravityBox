@@ -850,7 +850,7 @@
     
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Launcher</string>
-    <string name="pref_cat_launcher_tweaks_summary">Si applica solo al launcher Google Experience</string>
+    <string name="pref_cat_launcher_tweaks_summary">Si applica solo al launcher Google Now</string>
     <string name="pref_cat_launcher_desktop_grid_title">Griglia</string>
     <string name="pref_launcher_desktop_grid_info_title">Utilizzare valori diversi da quelli predefiniti può disturbare la disposizione dei widget. Usalo con saggezza. È necessario riavviare il launcher per applicare le modifiche</string>
     <string name="pref_launcher_desktop_grid_rows_title">Numero di linee</string>

@@ -864,7 +864,7 @@ Khi đó bạn có thể quyết định chặn thông báo này từ lần sau.
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Tinh chỉnh launcher</string>
-    <string name="pref_cat_launcher_tweaks_summary">Chỉ áp dụng cho Google Experience launcher</string>
+    <string name="pref_cat_launcher_tweaks_summary">Chỉ áp dụng cho Google Now Launcher</string>
     <string name="pref_cat_launcher_desktop_grid_title">Trình bày desktop</string>
     <string name="pref_launcher_desktop_grid_info_title">Dùng các giá trị khác giá trị mặc định có thể phá vỡ giao diện của các widget. Cần khởi động lại launcher sau khi thay đổi.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Số hàng</string>
