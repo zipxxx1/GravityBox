@@ -1515,4 +1515,227 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Ladegerät getrennt Ton</string>
 
+	<!-- MTK tiles: Audio profile -->
+    <string name="qs_tile_audio_profile">Audioprofil</string>
+
+    <!-- MTK specific fixes category -->
+    <string name="pref_cat_mtk_fixes_title">MTK spezifische Korrekturen</string>
+    <string name="pref_cat_mtk_fixes_summary">Enthält Fehlerkorrekturen, die für MediaTek Geräte spezifisch sind. Nur benutzen, wenn benötigt!</string>
+
+    <!-- MTK Advanced Developer Options -->
+    <string name="pref_mtk_fix_dev_opts_title">Erweiterte Entwickleroptionen</string>
+    <string name="pref_mtk_fix_dev_opts_summary">Schaltet erweiterte Entwickleroptionen frei (Neustart erforlderlich)</string>
+
+    <!-- MTK Fix speech settings -->
+    <string name="pref_mtk_fix_tts_settings_title">Repariere Spracheinstellungen</string>
+    <string name="pref_mtk_fix_tts_settings_summary">Schaltet Sprachsuche und Sprachsynthese Einstellungen in Sprache&amp;Eingabe frei (Neustart erforderlich)</string>
+
+	<!-- ImagePicker -->
+    <string name="imgpick_dialog_title">Wähle das zu benutzende Bild</string>
+    <string name="imgpick_choose_error">Fehler bei der Auswahl des Bildes</string>
+    <string name="imgpick_crop_error">Fehler beim Zuschnitt des Bildes</string>
+
+    <!-- Proximity wake -->
+    <string name="pref_power_proximity_wake_title">Aufwachen durch Näherung</string>
+    <string name="pref_power_proximity_wake_summary">Benutze den Näherungssensor um zu entscheiden, ob das Gerät aufgeweckt werden soll</string>
+
+    <!-- Battery Charging LED -->
+    <string name="pref_charging_led_title">Akkulade-LED</string>
+    <string name="charging_led_default">Standard</string>
+    <string name="charging_led_emulated">Emuliert</string>
+    <string name="charging_led_disabled">Deaktiviert</string>
+    
+     <!-- Heads up snooze timer -->
+    <string name="pref_heads_up_snooze_title">Schlummerbutton aktivieren</string>
+    <string name="headsup_snooze_all_apps">Für alle Apps einstellen</string>
+    <string name="headsup_snooze_app">Heads Up Schlummerzeit auf %s stellen</string>
+    <string name="pref_heads_up_snooze_reset_title">Schlummertzeit zurücksetzen</string>
+    <string name="pref_heads_up_snooze_timer_title">Standard Schlummerzeit</string>
+    <string name="pref_heads_up_snooze_timer_summary">Timer automatisch einstellen wenn Heads Up Benachrichtigung angeklickt wird. 
+       Heads Up Schlummerbutton lange antippen um Dialog zu öffnen.</string>
+    <string name="headsup_snooze_timer_set">Heads Up standard Schlummerzeit auf %s eingestellt</string>
+
+    <!-- Quiet hours week days -->
+    <string name="pref_lc_qh_weekdays_title">Wochentage einstellen</string>
+
+    <!-- QuietHours: mute system sounds -->
+    <string name="pref_lc_qh_mute_system_sounds_title">Systemtöne stumm stellen</string>
+    <string name="system_sound_dialpad">Wähltastaturtöne</string>
+    <string name="system_sound_touch">Touchtöne</string>
+    <string name="system_sound_screen_lock">Bildschimsperrenton</string>
+    <string name="system_sound_volume_adjust">Lautstärketastenton</string>
+    <string name="system_sound_charger">GravityBox Ladetöne</string>
+
+    <!-- Proximty wake: ignore for incoming call -->
+    <string name="pref_power_proximity_wake_ignore_call_title">Für eingehende Anrufe ignorieren</string>
+
+    <!-- Status bar: show download progress -->
+    <string name="pref_statusbar_download_progress_title">Fortschrittsbalken</string>
+    <string name="pref_statusbar_download_progress_summary">Zeigt Fortschrittsbalken in der Status Bar für
+        standard Android Download Manager, Bluetooth Übertragungen und andere Apps, die
+        Fortschrittsbalken-Tracking in Ultimate notification control aktiviert haben.</string>
+    <string name="sb_download_progress_off">Deaktiviert</string>
+    <string name="sb_download_progress_top">Oberkante</string>
+    <string name="sb_download_progress_bottom">Unterkante</string>
+
+ <!-- Status bar: disable notification ticker -->
+    <string name="pref_statusbar_ticker_policy_title">Benachrichtigungsticker-Einstellungen</string>
+    <string name="sb_ticker_policy_default">Standard</string>
+    <string name="sb_ticker_policy_disabled">Immer deaktivieren</string>
+
+    <!-- MSIM signal cluster: Hide SIM labels -->
+    <string name="pref_signal_cluster_hide_sim_labels_title">SIM Labels verbergen</string>
+    <string name="pref_signal_cluster_hide_sim_labels_summary">Benötigt Neustart</string>
+
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G Modus</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Bevorzugt (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Erweiterter Desktop in Power-Menü</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Bitte sicherstellen, dass eine alternative Methode existiert, den erweiterten Desktop zu deaktivieren!!!</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">QuickRecord Kachel Einstellungen</string>
+    <string name="pref_quickrecord_quality_title">Audioqualität</string>
+    <string name="qr_audio_quality_low">Niedrig (16kHz)</string>
+    <string name="qr_audio_quality_medium">Mittel (22kHz)</string>
+    <string name="qr_audio_quality_high">Hoch (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Aufnahme automatisch stoppen</string>
+    <string name="pref_quickrecord_autostop_summary">Stoppt die Aufnahme automatisch nach einer bestimmten Zeit. Zum deaktivieren auf 0 setzen.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Benachrichtigungen löschen</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">Automatische Helligkeit aktivieren/deaktivieren</string>
+
+    <!-- Messaging -->
+    <string name="pref_cat_phone_messaging_title">Messaging</string>
+
+  <!-- Compatibility warning -->
+    <string name="compat_warning_title">WARNUNG</string>
+    <string name="compat_warning_message">NUR FÜR DIE BENUTZUNG AUF UNMODIFIZIERTEN ANDROID-VERSIONEN BZW GOOGLE-PLAY EDITIONS GEEIGNET!\n\n
+        Die Benutzung auf anderen stark veränderten Betriebssystemen wie Touchwiz, Sense, Xperia, sowie jegliche custom ROM, 
+        Ist nicht unterstützt und kann zu unvorhergesehenen Ergebnissen führen.\n\nWenn sie fortfahren,
+        dann bestätigen Sie, dass dies auf eigene Gefahr passiert und Sie keine Unterstützung des Programmierers erwarten. Für eine detaillierte Information zur Kompatibilität
+        besuchen Sie <a href="http://forum.xda-developers.com/showthread.php?t=3037566">den Support-Thread auf XDA</a>.</string>
+    <string name="compat_warning_ok_stage1">OK. Ich habe es verstanden.</string>
+    <string name="compat_warning_ok_stage2">Ich habe es WIRKLICH verstanden!</string>
+
+ <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Hosentaschenmodus</string>
+    <string name="pref_unc_as_pocket_mode_summary">Schalte den Display nicht ein, wenn der Näherungssensor verdeckt ist (zum Beispiel, weil das Gerät in der Hosentasche ist)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Diese Option ist im Moment durch die Aufwecken durch Näherungs-Einstellung blockiert.</string>
+
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">Linkshändermodus</string>
+    <string name="pref_navbar_left_handed_summary">EXPERIMENTAL! Platziert die Navigationsleiste im Landscape-Modus auf der linken Seite (erfordert Neustart)</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Launcher Icon verbergen</string>
+    <string name="pref_hide_launcher_icon_summary">Erfordert möglicherweise einen Neustart des Launchers</string>
+
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">Adaptive Verzögerung</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">Verzögert automatisch den Ruhezustand wenn der Datenverbrauch einen Grenzwert überschreitet. (Zum deaktivieren auf 0 setzen.)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Fortschrittsanzeige tracken</string>
+    <string name="pref_lc_progress_tracking_summary">Zeigt einen Fortschrittsbalken in der Status Bar wenn eine Benachrichtigung eine Fortschrittsanzeige beinhaltet. Dazu muss das Fortschrittsbalken-Feature in den Status Bar Einstellungen aktiviert sein.</string>
+
+ <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">Anzeigemodus</string>
+    <string name="dt_display_mode_always">Immer (wenn Netzwerkverbindung vorhanden)</string>
+    <string name="dt_display_mode_dm">Nur für Android Download Manager</string>
+    <string name="dt_display_mode_pt">Wenn Fortschrittsbalken in der Status Bar anhezeigt</string>
+
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">WLAN Priorität</string>
+    <string name="pref_wifi_priority_summary">Spezifiziert die Priorität von WLAN-Netzwerken</string>
+
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">Ladestandsbalken</string>
+    <string name="pref_battery_bar_show_title">Zeige Ladestandsbalken</string>
+    <string name="pref_battery_bar_position_title">Position</string>
+    <string name="bbar_position_top">Oberkante</string>
+    <string name="bbar_position_bottom">Unterkante</string>
+    <string name="pref_battery_bar_margin_title">Kantenabstand</string>
+    <string name="pref_battery_bar_thickness_title">Dicke</string>
+    <string name="pref_battery_bar_charge_anim_title">Ladeanimation</string>
+    <string name="pref_battery_bar_dynacolor_title">Dynamische Farbe</string>
+    <string name="pref_battery_bar_dynacolor_summary">Ermittelt die Farbe automatisch aus dem Ladestand</string>
+    <string name="pref_battery_bar_color_title">Farbe</string>
+    <string name="pref_battery_bar_color_low_title">Niedriger Ladestand Farbe</string>
+    <string name="pref_battery_bar_color_critical_title">Kritischer Ladestand Farbe</string>
+    <string name="pref_battery_bar_centered_title">zentriert</string>
+    <string name="pref_battery_bar_color_charging_title">Auflade-Farbe</string>
+
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Modus</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animiert</string>
+    <string name="pref_statusbar_download_progress_centered_title">Zentriert</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Dicke</string>
+    <string name="pref_statusbar_download_progress_margin_title">Kantenabstand</string>
+
+<!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">Menütaste Einfachtipp-Aktion</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">Zurücktaste Einfachtipp-Aktion</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">zuletzt verwendete Apps Doppeltipp-Aktion</string>
+
+    <!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">Standard</string>
+
+    <!-- Tri state pref -->
+    <string name="state_default">Standard</string>
+    <string name="state_enabled">Aktiviert</string>
+    <string name="state_disabled">Deaktiviert</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">Standard Batterie mit Prozent</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">Zeige in Status Bar</string>
+    <string name="battery_percent_text_statusbar_summary">Zeigt Batterieprozente in der Status Bar (wenn das Gerät entsperrt ist)</string>
+    <string name="battery_percent_text_keyguard_title">Sperrbildschirm Modus</string>
+    <string name="battery_percent_text_keyguard_summary">Spezifiziert das Verhalten des Prozenttextes im gesperrten Bildschirm</string>
+    <string name="keyguard_percent_text_default">Standard (während Ladevorgang)</string>
+    <string name="keyguard_percent_text_show_always">Immer zeigen</string>
+    <string name="keyguard_percent_text_hide">Verbergen</string>
+    <string name="battery_percent_text_header_hide_title">Im Status Bar Header verbergen</string>
+    <string name="battery_percent_text_size_default">Standard</string>
+
+    <!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">Benachrichtigungsticker</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Aktiviert den Benachrichtigungsticker und die zugehörigen Einstellungen (erfordert Neustart)</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">Große Symbole benutzen</string>
+    <string name="pref_navbar_larger_icons_summary">Erfordert Neustart</string>
+
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">Software Neustart erlauben</string>
+    <string name="pref_reboot_allow_softreboot_summary">Bitte beachten, dass Software Neustart unerwarteten Stromverbrauch und Stabilitätsverlust verursachen kann. Es wird empfohlen, immer den Geräte Neustart durchzuführen.</string>
+
+    <!-- Recents panel search bar -->
+    <string name="pref_recents_searchbar_title">Sichtbarkeit des Suchbalkens</string>
+    <string name="recents_searchbar_default">Standard</string>
+    <string name="recents_searchbar_hide_keep_space">Verbergen und Platz behalten</string>
+    <string name="recents_searchbar_hide_remove_space">Verbergen und Platz frei machen</string>
+    
+	 <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">ACHTUNG</string>
+    <string name="gb_new_package_dialog_message_lollipop">Eine Installation von GravityBox für KitKat wurde gefunden.
+        Bevor die neue Version verwendet werden kann, muss die alte Installation entfernt werden. Drücke auf OK um die Deinstallation zu starten.
+        Nach der Installation nicht vergessen, das neue Modul im XPosed Installer zu aktivieren und SOFORT NEUZUSTARTEN!</string>
+
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">Ein Backup, das in einer älteren Android-Version erstellt wurde, kann aufgrund großer Unterschiede im OS nicht wiederhergestellt werden. 
+        Es wird dringend empfohlen, GravityBox neu einzurichten.</string>
+
 </resources>
