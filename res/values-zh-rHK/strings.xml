@@ -691,15 +691,6 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">為了能夠支援導航列動作控制，在導航列選項中覆蓋系統預設值是必須的</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">偵測到在本裝置上已安裝舊版 GravityBox。
-        必須先把舊版 GravityBox 解除安裝才能正確使用新版 GravityBox。
-        新版 GravityBox 將由舊版 GravityBox 傳輸您設定，然後會把舊版 GravityBox 解除安裝。
-        您必須在出現 [解除安裝] 提示時按下 [確認] 。 解除安裝後，請前往 Xposed 安裝器啟用新模組然後馬上重新啟動。
-        否則，您將有可能遭遇到系統相容穩定性的問題。</string>
-    <string name="gb_new_package_settings_transfer_ok">GravityBox 設定傳輸成功</string>
-    <string name="gb_new_package_settings_transfer_failed">GravityBox 設定傳輸失敗</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">鎖定畫面手電筒</string>
     <string name="hwkey_ls_torch_disabled">停用</string>

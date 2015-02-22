@@ -677,15 +677,6 @@
     <string name="hwkey_navbar_warning">על מנת להפעיל תמיכה בפעולות של שורת הניווט, יש צורך 
         בעקיפה של ברירות מחדל מערכת בתפריט שורת הניווט</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">מצאנו כי גירסה ישנה של GravityBox מותקנת במכשירך עם שם חבילה מיושן. 
-        יש צורך להסיר את התקנת הגירסה הישנה על מנת להתקין את הגירסה הנוכחית. כעת ינסה GravityBox 
-        להעביר את ההגדרות שלך מהגירסה הישנה אל הגירסה החדשה ואז להסיר את התקנת הגירסה הישנה של GravityBox. חלה עליך חובה 
-        לאשר הסרת התקנה כאשר תתבקש. לאחר הסרת התקנה, יש להפעיל את המודולה החדשה ב-Xposed Installer 
-        ולהפעיל את המכשיר מחדש באופן מיידי. אחרת תיתכן אי יציבות של המערכת.</string>
-    <string name="gb_new_package_settings_transfer_ok">הגדרות GravityBox הועברו בהצלחה</string>
-    <string name="gb_new_package_settings_transfer_failed">העברת הגדרות GravityBox נכשלה</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">פנס במסך נעילה</string>
     <string name="hwkey_ls_torch_disabled">כבוי</string>

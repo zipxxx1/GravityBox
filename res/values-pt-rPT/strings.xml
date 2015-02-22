@@ -687,14 +687,6 @@
     <string name="hwkey_navbar_warning">Para ativar ações relacionadas com a barra de navegação, é necessário 
         ignorar predefinições de sistema no menu de ajustes da mesma</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">Foi detetada uma instalação obsoleta do GravityBox, sendo necessário proceder à sua
-        desinstalação antes de usar a nova aplicação. Será efetuada uma tentativa de transferência de configurações entre instalações.
-        DEVERÁ confirmar a desinstalação quando solicitado. Após a desinstalação, ative o novo módulo utilizando o Xposed Installer 
-        e REINICIE IMEDIATAMENTE, caso contŕaio poderá experienciar problemas de instabilidade no sistema.</string>
-    <string name="gb_new_package_settings_transfer_ok">Configurações do GravityBox transferidas com sucesso</string>
-    <string name="gb_new_package_settings_transfer_failed">Transferência das configurações do GravityBox falhada</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Comutar lanterna no ecrã de bloqueio</string>
     <string name="hwkey_ls_torch_disabled">Desativada</string>

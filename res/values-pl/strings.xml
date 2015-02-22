@@ -681,11 +681,6 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Aby włączyć obsługę akcji dla paska nawigacyjnego, konieczne jest zastąpienie domyślnych ustawień systemowych w menu Poprawek paska nawigacyjnego</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">Znaleziono starą wersję GravityBox zainstalowaną z przestarzałego pakietu. Należy ją odinstalować przed użyciem nowego pakietu. GB spróbuje teraz przenieść istniejące ustawienia ze starego do nowego GB a następnie odinstalować starą wersję GB. Musisz potwierdzić deinstalację, gdy pojawi się monit. Po deinstalacji aktywuj nowy moduł w Instalatorze Xposed i uruchom ponownie urządzenie gdyż inaczej mogą wystąpić problemy ze stabilnością systemu.</string>
-    <string name="gb_new_package_settings_transfer_ok">Ustawienia GravityBox przeniesione pomyślnie</string>
-    <string name="gb_new_package_settings_transfer_failed">Przeniesienie ustawień GravityBox nie powiodło się</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Latarka przy ekranie blokady</string>
     <string name="hwkey_ls_torch_disabled">Wyłączona</string>

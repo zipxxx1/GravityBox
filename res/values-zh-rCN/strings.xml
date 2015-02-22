@@ -705,15 +705,6 @@
     <string name="hwkey_navbar_warning">为了使实体按键操作支持，这需要覆盖系统默认实体按键中的调整菜单</string>
     
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">已安装使用废弃软件包名的旧版GravityBox
-	使用新的软件包之前必须将其卸载。GravityBox将尝试从旧GravityBox中转移设置
-	到新版GravityBox，然后将其卸载。出现提示时，您必须确认卸载。卸载后，
-	请在Xposed安装器中激活新模块并立即重新启动，否则您可能会遇到系统的稳定性问题</string>
-    <string name="gb_new_package_settings_transfer_ok">GravityBox设置转移成功</string>
-    <string name="gb_new_package_settings_transfer_failed">GravityBox设置转移失败</string>
-    
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">锁屏手电筒</string>
     <string name="hwkey_ls_torch_disabled">禁用</string>

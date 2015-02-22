@@ -675,15 +675,6 @@
     <string name="hwkey_navbar_warning">V prípade potreby použitia akcií pre softvérové tlačidlá navigačnej lišty je 
         potrebné zapnúť \'Obísť systémové nastavenia\' v menu Nastavenia navigačnej lišty</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">Bola nájdená predošlá verzia GravityBox so starým názvom balíka. 
-        Za účelom použitia tejto novej verzie, je potrebné ho odinštalovať. 
-        GB sa teraz pokúsi preniesť Vaše nastavenia zo starej verzie do novej verzie a následne 
-        odinštalovať starú verziu. Musíte potvrdiť odinštalovanie, v momente výzvy. 
-        Po odinštalovaní, aktivujte novú verziu v Xposed inštalátore a reštartuje zariadenie.</string>
-    <string name="gb_new_package_settings_transfer_ok">GravityBox nastavenia boli úspešne prenesené</string>
-    <string name="gb_new_package_settings_transfer_failed">GravityBox nastavenia sa bohužiaľ nepodarilo preniesť</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Ovládanie LED svetla na obrazovke uzamknutia</string>
     <string name="hwkey_ls_torch_disabled">Vypnuté</string>

@@ -701,15 +701,6 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">A Navigációs sávval kapcsolatos műveletek működéséhez a Navigációs sáv beállítások menüben a rendszerbeállítások felülírása szükséges</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">Régebbi GravityBox van telepítve, elavult csomagnévvel. 
-        Ennek az eltávolítása szükséges az új csomag használata előtt. A GB megpróbálja átemelni a meglévő
-        beállításait a régi verziójú GB-ból az új verzióba és utána eltávolítani a régi verziójú GB-t. 
-        Az eltávolítás figyelmeztetésekor megerősítés SZÜKSÉGES. Az eltávolítás után az új modul Xposed Telepítőben történő aktiválása
-        majd AZONNALI rendszer újraindítás szükséges, különben rendszer stabilitási problémákat észlelhet.</string>
-    <string name="gb_new_package_settings_transfer_ok">A GravityBox beállítások átmentése sikerült</string>
-    <string name="gb_new_package_settings_transfer_failed">Nem sikerült a GravityBox beállítások átmentése</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Zseblámpa bekapcsolása zárképernyőn</string>
     <string name="hwkey_ls_torch_disabled">Letiltva</string>

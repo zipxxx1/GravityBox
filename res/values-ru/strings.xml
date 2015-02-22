@@ -705,15 +705,6 @@
     <string name="hwkey_navbar_warning">При включении поддержки действия для панели навигации необходимо 
         переписать настройки по умолчанию в меню настроек панели навигации</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">Установлена устаревшая версия GravityBox. 
-        Она будет удалена перед установкой новой версии. GB попробует перенести настройки из старой инсталляции в новую. Вы ДОЛЖНЫ
-        подтвердить переустановку при запросе. После переустановки активируйте модуль в XPosed и 
-        НЕМЕДЛЕННО ПЕРЕЗАГРУЗИТЕСЬ, 
-        иначе можете столкнуться с нестабильностью системы.</string>
-    <string name="gb_new_package_settings_transfer_ok">Настройки GravityBox успешно перенесены</string>
-    <string name="gb_new_package_settings_transfer_failed">Неудачный перенос настроек GravityBox</string>
-    
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Фонарик на экране блокировки</string>
     <string name="hwkey_ls_torch_disabled">Отключен</string>

@@ -578,14 +578,6 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">ナビバーのアクションを有効化するには
         ナビバー設定でシステムの初期値を上書きしないといけません。</string>
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">JB向けのGravityBoxがインストールされています。 
-        新しいバージョンを使用する前にアンインストールしないといけません。 古いGBから新しいGBへと設定をコピーし、
-        古いGBをアンインストールします。プロンプトが出たらアンインストールを選んでください。
-        アンインストール後はXposedインストーラで有効にして再起動してください。
-        再起動しない場合システムが不安定になることがあります。</string>
-    <string name="gb_new_package_settings_transfer_ok">GravityBox設定のコピーが完了しました。</string>
-    <string name="gb_new_package_settings_transfer_failed">GravityBox設定のコピーが失敗しました。</string>
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">ロック画面のトーチ</string>
     <string name="hwkey_ls_torch_disabled">無効</string>

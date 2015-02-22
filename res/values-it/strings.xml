@@ -701,15 +701,6 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Per abilitare il supporto per le azioni della barra di navigazione è necessario
         sostituire le impostazioni di sistema predefinite nel menù barra di navigazione</string>
-        
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">È stata trovata una vecchia versione di Gravitybox ormai obsoleta.
-        Deve essere disinstallata prima di usarne una nuova. GB tenterà ora di
-        trasferire le impostazioni esistenti dal vecchio GB al nuovo GB per poi disinstallare la vecchia versione di GB. Si DEVE 
-        confermare la disinstallazione quando richiesto. Dopo la disinstallazione, attiva il nuovo modulo in Xposed Installer
-        e riavvia immediatamente, altrimenti si potrebbe incorrere in problemi di stabilità del sistema.</string>
-    <string name="gb_new_package_settings_transfer_ok">Settaggi GravityBox trasferiti correttamente</string>
-    <string name="gb_new_package_settings_transfer_failed">Trasferimento dei settaggi GravityBox fallito</string>
 
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Torcia dalla schermata di blocco</string>

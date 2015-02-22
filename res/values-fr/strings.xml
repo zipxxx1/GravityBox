@@ -702,15 +702,6 @@
     <string name="hwkey_navbar_warning">Pour permettre d\'activer le support des actions de la barre de navigation, il est nécessaire
         de remplacer les paramètres système par défaut dans le menu Modifications barre de navigation</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">Une ancienne version de GravityBox avec un nom de paquet obsolète a été trouvée. 
-        Elle doit être désinstallée avant que le nouveau paquet puisse être utilisé. GB va maintenant essayer de
-        transférer vos paramètres existants depuis l\'ancienne config vers la nouvelle, l\'ancienne sera ensuite désinstallée.
-        Vous DEVEZ confirmer la désinstallation lorsque cela vous sera demandé. Après la désinstallation, activez le nouveau module
-        dans l\'installateur de Xposed et REDÉMARREZ IMMÉDIATEMENT sinon vous risquez de recontrer des problèmes de stabilité du système</string>
-    <string name="gb_new_package_settings_transfer_ok">Paramètres de GravityBox transférés avec succès</string>
-    <string name="gb_new_package_settings_transfer_failed">Le transfert des paramètres de GravityBox a échoué</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Torche depuis écran de déverrouillage</string>
     <string name="hwkey_ls_torch_disabled">Désactivée</string>

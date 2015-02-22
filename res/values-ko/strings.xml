@@ -539,14 +539,6 @@
     <string name="hwkey_navbar_warning">In order to enable actions support for navigation bar, it is necessary 
         to override system defaults in Navigation bar tweaks menu</string>
 
-    <string name="gb_new_package_dialog">이전 버전의 GravityBox가 설치된 것으로 확인되었습니다.
-        새로운 버전의 GravityBox를 사용하려면 이전 버전의 GravityBox를 제거해야 합니다.
-        GravityBox는 이전 버전의 설정을 불러들여서 적용합니다. 패키지 제거 창이 뜨면 이전 버전의 GravityBox는 제거해 주세요.
-		제거 후, Xposed Installer의 모듈 목록에서 GravityBox를 활성화하고,
-        시스템에 이상이 생기면 Xposed Installer에서 빠른 재시작을 시행해 주세요.</string>
-    <string name="gb_new_package_settings_transfer_ok">GravityBox 설정 전환 성공!</string>
-    <string name="gb_new_package_settings_transfer_failed">설정 전환 실패</string>
-
     <string name="pref_hwkey_lockscreen_torch_title">잠금 화면 손전등</string>
     <string name="hwkey_ls_torch_disabled">비활성화</string>
     <string name="hwkey_ls_torch_home_longpress">홈 키를 길게 눌렀을 때</string>

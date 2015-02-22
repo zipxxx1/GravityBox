@@ -705,15 +705,6 @@
     <string name="hwkey_navbar_warning">In order to enable actions support for navigation bar, it is necessary 
         to override system defaults in Navigation bar tweaks menu</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">Old GravityBox with obsolete package name found installed. 
-        It has to be uninstalled before new package can be used. GB will now try to 
-        transfer your existing settings from old GB into new GB and then uninstall old GB. You MUST 
-        confirm uninstallation when prompted. After uninstallation, activate new module in Xposed Installer 
-        and REBOOT IMMEDIATELLY otherwise you might experience system stability issues.</string>
-    <string name="gb_new_package_settings_transfer_ok">GravityBox settings transferred successfully</string>
-    <string name="gb_new_package_settings_transfer_failed">Transfer of GravityBox settings failed</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Lockscreen torch</string>
     <string name="hwkey_ls_torch_disabled">Disabled</string>
@@ -1767,5 +1758,11 @@
     <string name="recents_searchbar_default">Default</string>
     <string name="recents_searchbar_hide_keep_space">Hide and keep space</string>
     <string name="recents_searchbar_hide_remove_space">Hide and remove space</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">ATTENTION</string>
+    <string name="gb_new_package_dialog_message_lollipop">GravityBox for KitKat found installed. 
+        Before new version can be used, old one has to be uninstalled. Press OK to start uninstallation process.
+        After uninstallation, do not forget to activate new module in Xposed Installer and REBOOT IMMEDIATELLY.</string>
 
 </resources>

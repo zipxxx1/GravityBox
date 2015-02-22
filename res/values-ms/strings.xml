@@ -689,15 +689,6 @@
     <string name="hwkey_navbar_warning">DEmi untuk membenarkan aksi keatas bar navigasi, adalah perlu
         untuk tukar tetapan asal bar navigasi di customisasi bar navigasi</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">GravityBox version lama dengan pakej lain ditemui. 
-        Ia perlu diuninstal dulu sebelum pakej baru diinstal. GB akan cuba alih  
-        tetapan anda di GB yang lama ke GB yang baru dan seterusnya menguninstalkan GB lama. Anda perlu 
-        pastikan uninstal apabila ditanya. Selepas uninstall, aktifkan module baru dalam xposed installer
-        dan REBOOT SECEPATNYA atau tidak anda akan mengalami isu dengan kestabilan system.</string>
-    <string name="gb_new_package_settings_transfer_ok">Tetapan Gravitybox berjaya dialaih</string>
-    <string name="gb_new_package_settings_transfer_failed">Tetapan Gravitybox berjaya gagal</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Lampu di skrinkunci</string>
     <string name="hwkey_ls_torch_disabled">Matikan</string>

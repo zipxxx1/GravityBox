@@ -691,15 +691,6 @@
     <string name="hwkey_navbar_warning">Για να ενεργοποιήσετε τις ενέργιες για την γραμμή πλοήγησης, πρέπει να 
         παρακάμψετε τις προεπιλογές συστήματος στο μενού της Γραμμής Κατάστασης</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">Βρέθηκε παλιό GravityBox με παρωχημένο όνομα πακέτου. 
-        Πρέπει να απεγκατασταθεί πριν το νέο πακέτο γίνει λειτουργικό. Το θα προσπαθήσει 
-        να μεταφέρει τις ρυθμίσεις από το παλιό στο καινούργιο GB και ύστερα θα απεγκαταστήσει το παλιό. ΠΡΕΠΕΙ 
-        αποδεχτείτε την απεγκατάσταση όταν ζητηθεί. Μετά την απεγκατάσταση, ενεργοποιήστε το νέο module στην εγκατάσταση Xposed 
-        και ΕΠΑΝΕΚΚΙΝΗΣΤΕ ΑΜΕΣΑ αλλιώς μπορεί να αντιμετωπίσετε προβλήματα σταθερότητας του συστήματος.</string>
-    <string name="gb_new_package_settings_transfer_ok">Οι ρυθμίσεις του GravityBox μεταφέρθηκαν επιτυχώς</string>
-    <string name="gb_new_package_settings_transfer_failed">Απέτυχε η μεταφορά των ρυθμίσεων του GravityBox!</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Φακός κλειδώματος οθόνης</string>
     <string name="hwkey_ls_torch_disabled">Απενεργοποιημένος</string>

@@ -967,44 +967,26 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         super.onCreate(savedInstanceState);
 
         // refuse to run if there's GB with old package name still installed
-        // try to copy old preferences and uninstall previous package
-        if (Utils.isAppInstalled(this, "com.ceco.gm2.gravitybox")) {
+        // prompt to uninstall previous package and finish
+        if (Utils.isAppInstalled(this, "com.ceco.kitkat.gravitybox")) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
             .setCancelable(false)
-            .setTitle("ATTENTION")
-            .setMessage(R.string.gb_new_package_dialog)
+            .setTitle(R.string.gb_new_package_dialog_title)
+            .setMessage(R.string.gb_new_package_dialog_message_lollipop)
             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-                    boolean copied = false;
-                    // write dummy pref to force prefs file creation
-                    PreferenceManager.getDefaultSharedPreferences(GravityBoxSettings.this)
-                    .edit().putBoolean("dummy_pref", true).commit();
-                    // replace our prefs file with file from old GB
-                    String oldPrefsPath = "/data/data/com.ceco.gm2.gravitybox/shared_prefs/" +
-                    		"com.ceco.gm2.gravitybox_preferences.xml";
-                    File oldPrefsFile = new File(oldPrefsPath);
-                    if (oldPrefsFile.exists() && oldPrefsFile.canRead()) {
-                        File newFile = new File(getFilesDir() + "/../shared_prefs/" + 
-                                getPackageName() + "_preferences.xml");
-                        if (newFile.exists() && newFile.canWrite()) {
-                            try {
-                                Utils.copyFile(oldPrefsFile, newFile);
-                                copied = true;
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                    Toast.makeText(GravityBoxSettings.this, copied ? 
-                            getString(R.string.gb_new_package_settings_transfer_ok) : 
-                                getString(R.string.gb_new_package_settings_transfer_failed),
-                            Toast.LENGTH_LONG).show();
                     // try to uninstall old package
-                    Uri oldGbUri = Uri.parse("package:com.ceco.gm2.gravitybox");
+                    Uri oldGbUri = Uri.parse("package:com.ceco.kitkat.gravitybox");
                     Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, oldGbUri);
                     startActivity(uninstallIntent);
+                    finish();
+                }
+            })
+            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
                     finish();
                 }
             });

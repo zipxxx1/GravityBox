@@ -693,12 +693,6 @@
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Um Aktionen in der Statusleiste zu erlauben ist es nötig die Standardeinstellungen im Navigationsleisten-Menü anzupassen</string>
 
-    <!-- Old GB to new GB one-time dialog -->
-    <string name="gb_new_package_dialog">Altes GravityBox mit veraltetem Paketnamen gefunden.
-        Die alte Version muss zuerst deinstalliert werden. GB wird jetzt versuchen Ihre alten Einstellungen zu kopieren und dann die alte GB-Version zu deinstallieren. Sie müssen Sie die Deinstallation bestätigen! Nach der Deinstallation muss das neue GB-Modul erneut im Xposed-Installer aktiviert werden. Anschließend sollte umgehend ein NEUSTART duchgeführt werden.</string>
-    <string name="gb_new_package_settings_transfer_ok">GravityBox Einstellungen erfolgreich kopiert</string>
-    <string name="gb_new_package_settings_transfer_failed">Kopieren der GravityBox Einstellungen fehlgeschlagen.</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Taschenlampe im Sperrbildschirm</string>
     <string name="hwkey_ls_torch_disabled">Deaktiviert</string>
