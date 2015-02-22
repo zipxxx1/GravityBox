@@ -180,7 +180,6 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private void stopTracking() {
         mId = null;
         updateProgress(null);
-        notifyProgressStopped();
     }
 
     public void onNotificationAdded(StatusBarNotification statusBarNotif) {
@@ -280,8 +279,14 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
             if (mAnimator.isStarted()) {
                 mAnimator.end();
             }
-            setScaleX(0f);
-            setVisibility(View.GONE);
+            postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setScaleX(0f);
+                    setVisibility(View.GONE);
+                    notifyProgressStopped();
+                }
+            }, 500);
         }
     }
 
