@@ -961,7 +961,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         // set Holo Dark theme if flag file exists
         File file = new File(getFilesDir() + "/" + FILE_THEME_DARK_FLAG);
         if (file.exists()) {
-            this.setTheme(android.R.style.Theme_Material);
+            this.setTheme(R.style.AppThemeDark);
         }
 
         super.onCreate(savedInstanceState);

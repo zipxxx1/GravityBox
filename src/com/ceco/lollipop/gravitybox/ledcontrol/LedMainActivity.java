@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -41,7 +41,7 @@ public class LedMainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
         if (file.exists()) {
-            setTheme(android.R.style.Theme_Material);
+            setTheme(R.style.AppThemeDark);
         }
 
         super.onCreate(savedInstanceState);

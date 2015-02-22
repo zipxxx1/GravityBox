@@ -19,11 +19,11 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
+    <!-- Light application theme -->
     <style name="AppBaseTheme" parent="android:Theme.Material.Light.DarkActionBar" />
     <style name="DialogBaseTheme" parent="android:Theme.Material.Light.Dialog" />
     <style name="AlertDialogBaseTheme" parent="android:Theme.Material.Light.Dialog.Alert" />
 
-    <!-- Light application theme -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:colorPrimary">#ff30a6cb</item>
@@ -41,6 +41,11 @@
         <item name="android:colorAccent">#ff30a6cb</item>
     </style>
 
+    <!-- Dark application theme -->
+    <style name="AppBaseThemeDark" parent="android:Theme.Material" />
+    <style name="AppThemeDark" parent="AppBaseThemeDark" />
+
+    <!-- QS text appearance -->
     <style name="TextAppearance" />
     <style name="TextAppearance.QuickSettings" />
 
@@ -55,6 +60,7 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <!-- AppLauncher labels -->
     <style name="AppLauncherTextView">
         <item name="android:gravity">center</item>
         <item name="android:textSize">11dp</item>

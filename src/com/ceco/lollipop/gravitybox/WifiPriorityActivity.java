@@ -27,7 +27,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import com.ceco.lollipop.gravitybox.R;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,15 +70,12 @@ public class WifiPriorityActivity extends ListActivity {
     private WifiManager mWifiManager;
     private TouchInterceptor mNetworksListView;
     private WifiPriorityAdapter mAdapter;
-    private int mTextAppearanceResId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
-        mTextAppearanceResId = android.R.style.TextAppearance_Material_Medium_Inverse;
         if (file.exists()) {
-            this.setTheme(android.R.style.Theme_Material);
-            mTextAppearanceResId = android.R.style.TextAppearance_Material_Medium;
+            this.setTheme(R.style.AppThemeDark);
         }
 
         super.onCreate(savedInstanceState);
@@ -170,7 +169,6 @@ public class WifiPriorityActivity extends ListActivity {
             WifiConfiguration network = (WifiConfiguration)getItem(position);
 
             final TextView name = (TextView) v.findViewById(R.id.name);
-            name.setTextAppearance(WifiPriorityActivity.this.getApplicationContext(), mTextAppearanceResId);
             // wpa_suplicant returns the SSID between double quotes. Remove them if are present.
             name.setText(filterSSID(network.SSID));
 

@@ -35,7 +35,7 @@ public class ActiveScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
         if (file.exists()) {
-            setTheme(android.R.style.Theme_Material);
+            setTheme(R.style.AppThemeDark);
         }
 
         super.onCreate(savedInstanceState);

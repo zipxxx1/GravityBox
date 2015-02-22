@@ -51,15 +51,12 @@ public class TileOrderActivity extends ListActivity {
     private Resources mResources;
     private SharedPreferences mPrefs;
     private Map<String, String> mTileTexts;
-    private int mTextAppearanceResId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
-        mTextAppearanceResId = android.R.style.TextAppearance_Holo_Medium_Inverse;
         if (file.exists()) {
-            this.setTheme(android.R.style.Theme_Material);
-            mTextAppearanceResId = android.R.style.TextAppearance_Material_Medium;
+            setTheme(R.style.AppThemeDark);
         }
 
         super.onCreate(savedInstanceState);
@@ -215,7 +212,6 @@ public class TileOrderActivity extends ListActivity {
             String tileKey = mTiles.get(position);
 
             final TextView name = (TextView) v.findViewById(R.id.name);
-            name.setTextAppearance(mContext, mTextAppearanceResId);
             final ImageView icon = (ImageView) v.findViewById(R.id.icon);
 
             name.setText(mTileTexts.get(tileKey));

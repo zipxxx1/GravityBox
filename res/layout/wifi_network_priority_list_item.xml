@@ -54,7 +54,8 @@
             android:layout_toStartOf="@id/icon"
             android:ellipsize="marquee"
             android:gravity="center_vertical"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceListItem" />
 
     </RelativeLayout>
 

@@ -15,10 +15,12 @@
 
 package com.ceco.lollipop.gravitybox.shortcuts;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.adapters.IIconListAdapterItem;
@@ -79,6 +81,11 @@ public class ShortcutActivity extends ListActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
+        if (file.exists()) {
+            setTheme(R.style.AppThemeDark);
+        }
+
         super.onCreate(savedInstanceState);
 
         mContext = this;
