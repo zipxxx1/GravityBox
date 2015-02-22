@@ -210,7 +210,7 @@
 
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Ações para teclas de navegação</string>
-    <string name="pref_cat_hwkey_actions_summary">Permite personalizar ações para as teclas navegação (físicas ou virtuais)</string>
+    <string name="pref_cat_hwkey_actions_summary">Permite personalizar ações para as teclas de navegação (físicas ou virtuais)</string>
     <string name="hwkey_menu_longpress_dialog_title">Ação ao manter pressionada a tecla Menu</string>
     <string name="hwkey_menu_doubletap_dialog_title">Ação após dupla pressão da tecla Menu</string>
     <string name="hwkey_back_longpress_dialog_title">Ação ao manter pressionada a tecla Atrás</string>
@@ -572,7 +572,7 @@
     <string name="rambar_bottom">Fundo do ecrã</string>
 
     <!-- HW Key actions for recents button -->
-    <string name="hwkey_recents_singletap_dialog_title">Ação após pressão da tecla Aplicações recentes</string>
+    <string name="hwkey_recents_singletap_dialog_title">Ação ao pressionar a tecla Aplicações recentes</string>
     <string name="hwkey_recents_longpress_dialog_title">Ação ao manter pressionada a tecla Aplicações recentes</string>
 
     <!-- HW Key Actions: toggle torch -->
@@ -732,7 +732,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Ajustes do inicializador</string>
-    <string name="pref_cat_launcher_tweaks_summary">Contém ajustes relacionados com o inicializador, aplicável ao padrão ou ao Google Experience</string>
+    <string name="pref_cat_launcher_tweaks_summary">Contém ajustes relacionados com o inicializador (aplicável ao padrão ou ao Google Now)</string>
     <string name="pref_cat_launcher_desktop_grid_title">Grelha do ambiente de trabalho</string>
     <string name="pref_launcher_desktop_grid_info_title">A utilização de valores diferentes dos pré-definidos pode causar problemas nos widgets, por isso use sabiamente. Após efetuar as alterações é necessário reiniciar o inicializador.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Número de linhas</string>
@@ -751,7 +751,7 @@
     <string name="battery_percent_text_size_even_smaller">Mais pequeno</string>
     <string name="battery_percent_text_size_smallest">Mínimo</string>
     <string name="battery_percent_text_style_title">Estilo da percentagem</string>
-    <string name="battery_percent_text_style_default">Padrão</string>
+    <string name="battery_percent_text_style_default">Predefinido</string>
     <string name="battery_percent_text_style_numbers_only">Apenas números (sem sinal de percentagem)</string>
 
     <!-- Battery settings category -->
@@ -1238,7 +1238,7 @@
     <string name="pref_lc_vibrate_override_title">Sobrepor vibração</string>
     <string name="pref_lc_vibrate_pattern_title">Padrão de vibração</string>
     <string name="pref_lc_vibrate_pattern_summary">Lista de pares de duração (desligado/ligado), em milisegundos, separados por vírgula. Colocar a 0 para desativar a vibração.</string>
-    <string name="lc_vibrate_pattern_invalid">Formato inválido para padrão de vibraçã</string>
+    <string name="lc_vibrate_pattern_invalid">Formato inválido para padrão de vibração</string>
 
     <!-- Omni data traffic monitor inactivity threshold -->
     <string name="pref_data_traffic_omni_autohide_threshold_title">Limite de inatividade</string>
@@ -1249,7 +1249,7 @@
 
     <!-- Virtual keys vibrate pattern -->
     <string name="pref_virtual_key_vibrate_pattern_title">Padrão de vibração das teclas</string>
-    <string name="pref_virtual_key_vibrate_pattern_summary">Lista de pares de duração (desligado/ligado), em milisegundos, separados por vírgula. Deixar vazio para o padrão pré-definido.</string>
+    <string name="pref_virtual_key_vibrate_pattern_summary">Lista de pares de duração (desligado/ligado), em milisegundos, separados por vírgula (deixar vazio para o padrão pré-definido)</string>
 
     <!-- Lockscreen: show pattern error -->
     <string name="pref_lockscreen_show_pattern_error_title">Mostrar erro na sequência</string>
@@ -1670,5 +1670,72 @@
     <string name="pref_battery_bar_color_critical_title">Cor para nível de bateria crítico</string>
     <string name="pref_battery_bar_centered_title">Centrado</string>
     <string name="pref_battery_bar_color_charging_title">Cor durante carga</string>
+
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Modo</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animado</string>
+    <string name="pref_statusbar_download_progress_centered_title">Centrado</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Espessura</string>
+    <string name="pref_statusbar_download_progress_margin_title">Margem da borda</string>
+
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">Ação após pressão da tecla Menu</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">Ação após pressão da tecla Atrás</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">Ação após dupla pressão da tecla Aplicações recentes</string>
+
+    <!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">Predefinido</string>
+
+    <!-- Tri state pref -->
+    <string name="state_default">Padrão</string>
+    <string name="state_enabled">Ativado</string>
+    <string name="state_disabled">Desativado</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">Indicador de bateria padrão com percentagem</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">Mostrar na barra de status</string>
+    <string name="battery_percent_text_statusbar_summary">Permite mostrar o texto com a percentagem de bateria na barra de status (quando o dispositivo estiver desbloqueado)</string>
+    <string name="battery_percent_text_keyguard_title">Modo de bloqueio</string>
+    <string name="battery_percent_text_keyguard_summary">Permite configurar o texto da percentagem na barra de status do ecrã de bloqueio</string>
+    <string name="keyguard_percent_text_default">Predefinido (durante carga)</string>
+    <string name="keyguard_percent_text_show_always">Mostrar sempre</string>
+    <string name="keyguard_percent_text_hide">Ocultar</string>
+    <string name="battery_percent_text_header_hide_title">Ocultar no cabeçalho da barra de status</string>
+    <string name="battery_percent_text_size_default">Predefinido</string>
+
+    <!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">Aviso de notificações</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Permite ativar o aviso de notificações e as funções relacionadas (necessário reiniciar)</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">Utilizar ícones grandes</string>
+    <string name="pref_navbar_larger_icons_summary">Necessário reiniciar</string>
+
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">Permitir reinício rápido</string>
+    <string name="pref_reboot_allow_softreboot_summary">De notar que o reinício rápido pode causar problemas de instabilidade ou 
+        consumo de bateria inesperado, sendo recomendável utilizar o modo normal</string>
+
+    <!-- Recents panel search bar -->
+    <string name="pref_recents_searchbar_title">Visibilidade da barra de pesquisa</string>
+    <string name="recents_searchbar_default">Padrão</string>
+    <string name="recents_searchbar_hide_keep_space">Ocultar e reservar o espaço</string>
+    <string name="recents_searchbar_hide_remove_space">Ocultar e remover o espaço</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">ATENÇÃO</string>
+    <string name="gb_new_package_dialog_message_lollipop">Foi detetada uma instalação obsoleta do GravityBox, sendo necessário proceder à sua desinstalação 
+        antes de poder comerçar a usar a nova versão. Pressione OK para iniciar o processo. Após a desinstalação deverá garantir que o módulo se encontra
+        ativado no Xposed Installer e reiniciar o dispositivo de imediato.</string>
+
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">As definições guardadas numa versão antiga do Android não podem ser restauradas 
+        devido a diversas diferenças do sistema operativo, sendo altamente recomendável configurar o GravityBox de raíz</string>
 
 </resources>
