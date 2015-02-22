@@ -1620,7 +1620,7 @@
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">警告</string>
-    <string name="compat_warning_message">只供原生 Android 或 Google Play Edition 裝置使用! \n\n 在客製化的 OEM ROM (如: Touchwiz，Sense，Xperia) 內使用並未經過測試，並可能導致意料之外的結果。 \n\n如果仍想要繼續，請您自己要承擔風險而且開發者將不會提供正式支援。如您想了解更多關於相容性的資料，請到<a href="http://forum.xda-developers.com/showthread.php?t=2554049"> XDA 討論串內查閱。 </a></string>
+    <string name="compat_warning_message">只供原生 Android 或 Google Play Edition 裝置使用! \n\n 在客製化的 OEM ROM (如: Touchwiz，Sense，Xperia) 內使用並未經過測試，並可能導致意料之外的結果。 \n\n如果仍想要繼續，請您自己要承擔風險而且開發者將不會提供正式支援。如您想了解更多關於相容性的資料，請到<a href="http://forum.xda-developers.com/showthread.php?t=3037566"> XDA 討論串內查閱。 </a></string>
     <string name="compat_warning_ok_stage1">我明白了</string>
     <string name="compat_warning_ok_stage2">我真的明白相關風險了!</string>
 

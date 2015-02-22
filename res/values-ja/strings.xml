@@ -1338,7 +1338,7 @@
     <string name="compat_warning_message">このモジュールはAOSPやGoogle Playエディション向けです!\n\nカスタマイズされたROM、
 例えばXperia、Touchwiz、SenseやカスタムROMはサポートしておらず、問題が起きる可能性があります。\n\n
 使用する場合は自己責任・サポートなしでお願いします。互換性につての詳細は
-<a href="http://forum.xda-developers.com/showthread.php?t=2554049">XDAのサポートスレ (英語)</a>を見てください。</string>
+<a href="http://forum.xda-developers.com/showthread.php?t=3037566">XDAのサポートスレ (英語)</a>を見てください。</string>
     <string name="compat_warning_ok_stage1">分かった</string>
     <string name="compat_warning_ok_stage2">分かったから!</string>
     <!-- UNC Active screen: Pocket mode -->
