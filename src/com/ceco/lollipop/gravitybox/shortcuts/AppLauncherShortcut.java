@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,8 +15,8 @@
 
 package com.ceco.lollipop.gravitybox.shortcuts;
 
-import com.ceco.lollipop.gravitybox.ModHwKeys;
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.managers.AppLauncher;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
 
 public class AppLauncherShortcut extends AShortcut {
-    protected static final String ACTION =  ModHwKeys.ACTION_SHOW_APP_LAUCNHER;
+    protected static final String ACTION =  AppLauncher.ACTION_SHOW_APP_LAUCNHER;
 
     public AppLauncherShortcut(Context context) {
         super(context);

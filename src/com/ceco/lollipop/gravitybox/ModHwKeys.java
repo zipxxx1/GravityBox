@@ -55,6 +55,7 @@ import android.widget.Toast;
 
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.lollipop.gravitybox.managers.AppLauncher;
 import com.ceco.lollipop.gravitybox.shortcuts.RingerModeShortcut;
 import com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity;
 
@@ -82,7 +83,6 @@ public class ModHwKeys {
     public static final String ACTION_EXPAND_NOTIFICATIONS = "gravitybox.intent.action.EXPAND_NOTIFICATIONS";
     public static final String ACTION_TOGGLE_TORCH = "gravitybox.intent.action.TOGGLE_TORCH";
     public static final String ACTION_SHOW_RECENT_APPS = "gravitybox.intent.action.SHOW_RECENT_APPS";
-    public static final String ACTION_SHOW_APP_LAUCNHER = "gravitybox.intent.action.SHOW_APP_LAUNCHER";
     public static final String ACTION_TOGGLE_ROTATION_LOCK = "gravitybox.intent.action.TOGGLE_ROTATION_LOCK";
     public static final String ACTION_SLEEP = "gravitybox.intent.action.SLEEP";
     public static final String ACTION_MEDIA_CONTROL = "gravitybox.intent.action.MEDIA_CONTROL";
@@ -136,7 +136,6 @@ public class ModHwKeys {
     private static String mVolumeRockerWake = "default";
     private static boolean mHwKeysEnabled = true;
     private static XSharedPreferences mPrefs;
-    private static AppLauncher mAppLauncher;
     private static int mPieMode;
     private static int mExpandedDesktopMode;
     private static boolean mMenuKeyPressed;
@@ -328,8 +327,6 @@ public class ModHwKeys {
                 toggleTorch();
             } else if (action.equals(ACTION_SHOW_RECENT_APPS)) {
                 toggleRecentApps();
-            } else if (action.equals(ACTION_SHOW_APP_LAUCNHER)) {
-                showAppLauncher();
             } else if (action.equals(ACTION_TOGGLE_ROTATION_LOCK)) {
                 toggleAutoRotation();
             } else if (action.equals(ACTION_SLEEP)) {
@@ -863,8 +860,6 @@ public class ModHwKeys {
             mStrAutoRotationEnabled = res.getString(R.string.hwkey_action_auto_rotation_enabled);
             mStrAutoRotationDisabled =  res.getString(R.string.hwkey_action_auto_rotation_disabled);
 
-            mAppLauncher = new AppLauncher(mContext, mPrefs);
-
             mVkVibePatternDefault = (long[]) XposedHelpers.getObjectField(
                     mPhoneWindowManager, "mVirtualKeyVibePattern");
             setVirtualKeyVibePattern(mPrefs.getString(GravityBoxSettings.PREF_KEY_VK_VIBRATE_PATTERN, null));
@@ -885,7 +880,6 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_EXPAND_NOTIFICATIONS);
             intentFilter.addAction(ACTION_TOGGLE_TORCH);
             intentFilter.addAction(ACTION_SHOW_RECENT_APPS);
-            intentFilter.addAction(ACTION_SHOW_APP_LAUCNHER);
             intentFilter.addAction(ACTION_TOGGLE_ROTATION_LOCK);
             intentFilter.addAction(ACTION_SLEEP);
             intentFilter.addAction(ACTION_MEDIA_CONTROL);
@@ -1443,15 +1437,11 @@ public class ModHwKeys {
     }
 
     private static void showAppLauncher() {
-        Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
-        if (handler == null || mAppLauncher == null) return;
-
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                mAppLauncher.showDialog();
-            }
-        });
+        try {
+            mContext.sendBroadcast(new Intent(AppLauncher.ACTION_SHOW_APP_LAUCNHER));
+        } catch (Throwable t) {
+            log("Error showing AppLauncher: " + t.getMessage());
+        }
     }
 
     private static void toggleScreenRecording() {

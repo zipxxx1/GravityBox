@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,6 +22,7 @@ import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModHwKeys;
 import com.ceco.lollipop.gravitybox.ModLauncher;
 import com.ceco.lollipop.gravitybox.ScreenRecordingService;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.pie.PieController.ButtonType;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -114,7 +115,9 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
                 intent = new Intent(ModHwKeys.ACTION_SLEEP);
                 break;
             case GravityBoxSettings.HWKEY_ACTION_APP_LAUNCHER:
-                intent = new Intent(ModHwKeys.ACTION_SHOW_APP_LAUCNHER);
+                if (SysUiManagers.AppLauncher != null) {
+                    SysUiManagers.AppLauncher.showDialog();
+                }
                 break;
             case GravityBoxSettings.HWKEY_ACTION_CUSTOM_APP:
                 intent = new Intent(ModHwKeys.ACTION_LAUNCH_APP);
@@ -154,8 +157,10 @@ public class PieLongPressHandler implements PieItem.PieOnLongPressListener {
             default: return false;
         }
 
-        if (DEBUG) log("Performing action: " + intent);
-        mContext.sendBroadcast(intent);
+        if (intent != null) {
+            if (DEBUG) log("Sending broadcast: " + intent);
+            mContext.sendBroadcast(intent);
+        }
 
         return true;
     }

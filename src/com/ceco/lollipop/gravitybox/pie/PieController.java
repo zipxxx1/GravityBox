@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project (Jens Doll)
- * Copyright (C) 2013 Peter Gregus for GravityBox project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox project (C3C076@xda)
  * This code is loosely based on portions of the ParanoidAndroid Project source, Copyright (C) 2012.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -54,6 +54,7 @@ import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModHwKeys;
 import com.ceco.lollipop.gravitybox.ModPieControls;
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.pie.PieItem;
 import com.ceco.lollipop.gravitybox.pie.PieLayout;
 import com.ceco.lollipop.gravitybox.pie.PieSliceContainer;
@@ -667,8 +668,9 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     }
 
     private void showAppLauncher() {
-        Intent intent = new Intent(ModHwKeys.ACTION_SHOW_APP_LAUCNHER);
-        mContext.sendBroadcast(intent);
+        if (SysUiManagers.AppLauncher != null) {
+            SysUiManagers.AppLauncher.showDialog();
+        }
     }
 
     public void setRecentAlt(boolean recentAlt) {

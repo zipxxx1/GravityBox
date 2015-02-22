@@ -16,6 +16,7 @@ public class SysUiManagers {
     public static BatteryInfoManager BatteryInfoManager;
     public static StatusBarIconManager IconManager;
     public static StatusbarQuietHoursManager QuietHoursManager;
+    public static AppLauncher AppLauncher;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -48,6 +49,13 @@ public class SysUiManagers {
             XposedBridge.log(t);
         }
 
+        try {
+            AppLauncher = new AppLauncher(context, prefs);
+        } catch (Throwable t) {
+            log("Error creating AppLauncher: ");
+            XposedBridge.log(t);
+        }
+
         IntentFilter intentFilter = new IntentFilter();
         // battery info manager
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
@@ -61,6 +69,10 @@ public class SysUiManagers {
         intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
         intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
         intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
+
+        // AppLauncher
+        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED);
+        intentFilter.addAction(com.ceco.lollipop.gravitybox.managers.AppLauncher.ACTION_SHOW_APP_LAUCNHER);
 
         context.registerReceiver(sBroadcastReceiver, intentFilter);
     }
@@ -76,6 +88,9 @@ public class SysUiManagers {
             }
             if (QuietHoursManager != null) {
                 QuietHoursManager.onBroadcastReceived(context, intent);
+            }
+            if (AppLauncher != null) {
+                AppLauncher.onBroadcastReceived(context, intent);
             }
         }
     };

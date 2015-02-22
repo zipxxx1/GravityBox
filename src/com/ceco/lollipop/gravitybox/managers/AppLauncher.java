@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,14 +13,18 @@
  * limitations under the License.
  */
 
-package com.ceco.lollipop.gravitybox;
+package com.ceco.lollipop.gravitybox.managers;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
+import com.ceco.lollipop.gravitybox.GravityBox;
+import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.preference.AppPickerPreference;
 import com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity;
 
@@ -52,9 +56,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AppLauncher {
+public class AppLauncher implements BroadcastSubReceiver {
     private static final String TAG = "GB:AppLauncher";
     private static final boolean DEBUG = false;
+
+    public static final String ACTION_SHOW_APP_LAUCNHER = "gravitybox.intent.action.SHOW_APP_LAUNCHER";
 
     private Context mContext;
     private Context mGbContext;
@@ -75,23 +81,6 @@ public class AppLauncher {
         @Override
         public void run() {
             dismissDialog();
-        }
-    };
-
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (DEBUG) log("Broadcast received: " + intent.toString());
-
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_APP_LAUNCHER_SLOT) &&
-                        intent.hasExtra(GravityBoxSettings.EXTRA_APP_LAUNCHER_APP)) {
-                    int slot = intent.getIntExtra(GravityBoxSettings.EXTRA_APP_LAUNCHER_SLOT, -1);
-                    String app = intent.getStringExtra(GravityBoxSettings.EXTRA_APP_LAUNCHER_APP);
-                    if (DEBUG) log("appSlot=" + slot + "; app=" + app);
-                    updateAppSlot(slot, app);
-                }
-            }
         }
     };
 
@@ -141,13 +130,26 @@ public class AppLauncher {
         mAppSlots.add(new AppInfo(R.id.quickapp11));
         mAppSlots.add(new AppInfo(R.id.quickapp12));
 
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED);
-        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
-
-        intentFilter = new IntentFilter(Intent.ACTION_PACKAGE_FULLY_REMOVED);
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_PACKAGE_FULLY_REMOVED);
         intentFilter.addDataScheme("package");
         mContext.registerReceiver(mPackageRemoveReceiver, intentFilter);
+    }
+
+    @Override
+    public void onBroadcastReceived(Context context, Intent intent) {
+        if (DEBUG) log("Broadcast received: " + intent.toString());
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_APP_LAUNCHER_SLOT) &&
+                    intent.hasExtra(GravityBoxSettings.EXTRA_APP_LAUNCHER_APP)) {
+                int slot = intent.getIntExtra(GravityBoxSettings.EXTRA_APP_LAUNCHER_SLOT, -1);
+                String app = intent.getStringExtra(GravityBoxSettings.EXTRA_APP_LAUNCHER_APP);
+                if (DEBUG) log("appSlot=" + slot + "; app=" + app);
+                updateAppSlot(slot, app);
+            }
+        }
+        if (intent.getAction().equals(ACTION_SHOW_APP_LAUCNHER)) {
+            showDialog();
+        }
     }
 
     public boolean dismissDialog() {
