@@ -1765,4 +1765,8 @@
         Before new version can be used, old one has to be uninstalled. Press OK to start uninstallation process.
         After uninstallation, do not forget to activate new module in Xposed Installer and REBOOT IMMEDIATELLY.</string>
 
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">Backup made in older version of Android cannot be restored due 
+        to extensive OS differences. It is highly recommended to configure GravityBox from scratch.</string>
+
 </resources>

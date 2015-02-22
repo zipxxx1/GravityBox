@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,7 +26,8 @@ import com.ceco.lollipop.gravitybox.R;
 
 public class SettingsManager {
     private static final String BACKUP_PATH = Environment.getExternalStorageDirectory() + "/GravityBox/backup";
-    private static final String BACKUP_OK_FLAG = BACKUP_PATH + "/.backup_ok";
+    private static final String BACKUP_OK_FLAG_OBSOLETE = BACKUP_PATH + "/.backup_ok";
+    private static final String BACKUP_OK_FLAG = BACKUP_PATH + "/.backup_ok_lp";
     private static final String BACKUP_NO_MEDIA = BACKUP_PATH + "/.nomedia";
 
     private static Context mContext;
@@ -152,6 +153,11 @@ public class SettingsManager {
     public boolean isBackupAvailable() {
         File backupOkFlagFile = new File(BACKUP_OK_FLAG);
         return backupOkFlagFile.exists();
+    }
+
+    public boolean isBackupObsolete() {
+        return new File(BACKUP_OK_FLAG_OBSOLETE).exists() &&
+                !isBackupAvailable();
     }
 
     public boolean restoreSettings() {

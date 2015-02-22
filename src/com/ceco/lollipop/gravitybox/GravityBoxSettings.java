@@ -3289,7 +3289,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 SettingsManager.getInstance(getActivity()).backupSettings();
             } else if (PREF_KEY_SETTINGS_RESTORE.equals(pref.getKey())) {
                 final SettingsManager sm = SettingsManager.getInstance(getActivity());
-                if (sm.isBackupAvailable()) {
+                if (sm.isBackupObsolete()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.app_name)
+                    .setMessage(R.string.settings_restore_backup_obsolete)
+                    .setCancelable(true)
+                    .setPositiveButton(android.R.string.ok, null);
+                    mDialog = builder.create();
+                    mDialog.show();
+                } else if (sm.isBackupAvailable()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.app_name)
                     .setMessage(R.string.settings_restore_confirm)
