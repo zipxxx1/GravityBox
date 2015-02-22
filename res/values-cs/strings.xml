@@ -190,7 +190,7 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Povolit menu tlačítko</string>
-    <string name="pref_lockscreen_menu_key_summary">Povolí menu tlačítko pro rychlé odemknutí obrazovky uzamčení (vyžaduje restart)</string>
+    <string name="pref_lockscreen_menu_key_summary">Povolí hardwarové menu tlačítko pro rychlé odemknutí (vyžaduje restart)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Vycentrované hodiny</string>
@@ -1418,7 +1418,7 @@
     <string name="cd_north_west">SZ</string>
 
     <!-- Pie: mirrored keys -->
-    <string name="pref_pie_control_mirrored_keys_title">Zrkladlové tlačítka</string>
+    <string name="pref_pie_control_mirrored_keys_title">Zrcadlené tlačítka</string>
 
     <!-- Pie: center trigger -->
     <string name="pref_pie_control_center_trigger_title">Středový aktivátor</string>
@@ -1465,7 +1465,7 @@
 
     <!-- Statusbar: notification heads up category -->
     <string name="pref_cat_notif_heads_up_title">Heads up notifikace</string>
-    <string name="pref_heads_up_master_switch_summary">Aktivuje standardní AOSP \"heads up\" funkcionalitu. 
+    <string name="pref_heads_up_master_switch_summary">Aktivuje dodatečné funkce.. 
         Pokud zapnuto, dodatečná nastavení pro jednotlivé aplikace samostatně budou dostupné v rámci nabídky Nastavení oznámení. (vyžaduje restart)</string>
     <string name="pref_heads_up_timeout_title">Časovač zobrazení</string>
     <string name="pref_heads_up_timeout_summary">Po jaké době zavřít notifikační okno. 0 = nikdy.</string>

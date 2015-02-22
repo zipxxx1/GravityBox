@@ -209,7 +209,7 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Enable menu key</string>
-    <string name="pref_lockscreen_menu_key_summary">Allows menu key to be used for quick-unlocking the device while on lockscreen (requires reboot)</string>
+    <string name="pref_lockscreen_menu_key_summary">Allows hadware menu key to unlock device (requires reboot)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Center clock</string>
@@ -487,7 +487,7 @@
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Enable brightness control</string>
-    <string name="pref_statusbar_brightness_summary">Adjusts brightness by sliding over statusbar (requires automatic brightness to be disabled)</string>
+    <string name="pref_statusbar_brightness_summary">Adjusts brightness by sliding over statusbar</string>
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Telephony</string>
@@ -1504,8 +1504,8 @@
 
     <!-- Statusbar: notification heads up category -->
     <string name="pref_cat_notif_heads_up_title">Notification heads up</string>
-    <string name="pref_heads_up_master_switch_summary">Activates standard AOSP heads up functionality. 
-        When enabled, additional per-app options will become available within Ultimate notification control. (requires reboot)</string>
+    <string name="pref_heads_up_master_switch_summary">Activates extended heads up functionality. 
+        When enabled, additional per-app options become available within Ultimate notification control. (requires reboot)</string>
     <string name="pref_heads_up_timeout_title">Timeout</string>
     <string name="pref_heads_up_timeout_summary">For how long to show notification window. 0 = persistent.</string>
 
