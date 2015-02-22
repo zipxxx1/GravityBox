@@ -1685,4 +1685,56 @@
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Dvojité ťuknutie na tlačidlo zoznamu aplikácíí</string>
 
+    <!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">Pôvodný</string>
+
+    <!-- Tri state pref -->
+    <string name="state_default">Pôvodné nastavenie</string>
+    <string name="state_enabled">Zapnúť</string>
+    <string name="state_disabled">Vypnúť</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">Základný s percentami</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">Zobraziť v stavovej lište</string>
+    <string name="battery_percent_text_statusbar_summary">Zobrazí percentuálny text v hlavnej stavovej lište (keď je zariadenie odomknuté)</string>
+    <string name="battery_percent_text_keyguard_title">Obrazovka uzamknutia</string>
+    <string name="battery_percent_text_keyguard_summary">Definuje správanie percentuálneho textu v stavovej lište obrazovky uzamknutia</string>
+    <string name="keyguard_percent_text_default">Pôvodné (počas nabíjania)</string>
+    <string name="keyguard_percent_text_show_always">Vždy zobraziť</string>
+    <string name="keyguard_percent_text_hide">Skryť</string>
+    <string name="battery_percent_text_header_hide_title">Skryť v hlavičke stavovej lišty</string>
+    <string name="battery_percent_text_size_default">Pôvodná</string>
+
+    <!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">Náhľad oznámení</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Aktivuje náhľad oznámení (ticker) (vyžaduje reštart)</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">Použiť väčšie ikony</string>
+    <string name="pref_navbar_larger_icons_summary">Vyžaduje reštart</string>
+
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">Povoliť softvérový reštart</string>
+    <string name="pref_reboot_allow_softreboot_summary">Pozor, softvérový reštart môže spôsobovať neočakávané 
+        problémy stability, ktoré môžu viesť k neželanej spotrebe batérie. Odporúča sa vždy použiť plný reštart.</string>
+
+    <!-- Recents panel search bar -->
+    <string name="pref_recents_searchbar_title">Viditeľnosť lišty vyhľadávania</string>
+    <string name="recents_searchbar_default">Pôvodná</string>
+    <string name="recents_searchbar_hide_keep_space">Skryť a zachovať priestor</string>
+    <string name="recents_searchbar_hide_remove_space">Skryť vrátane priestoru</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">POZOR</string>
+    <string name="gb_new_package_dialog_message_lollipop">Bola nájdená predošlá verzia GravityBox pre KitKat. 
+        Pred použitím novej verzie, je potrebné odinštalovať predošlú verziu. Slačte OK pre spustenie procesu odinštalácie. 
+        Po odinštalovaní, aktivujte novú verziu v Xposed inštalátore a reštartuje zariadenie.</string>
+
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">Zálohu vykonanú v predošlej verzii Android nie je možné obnoviť 
+        kvôli rozsiahlym odlišnostiam v systéme a súvisiacich nastaveniach GravityBox. 
+        Dôrazne sa odporúča nakonfigurovať GravityBox ručne.</string>
+
 </resources>
