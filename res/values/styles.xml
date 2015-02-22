@@ -20,10 +20,25 @@
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Material.Light.DarkActionBar" />
+    <style name="DialogBaseTheme" parent="android:Theme.Material.Light.Dialog" />
+    <style name="AlertDialogBaseTheme" parent="android:Theme.Material.Light.Dialog.Alert" />
 
-    <!-- Application theme. -->
+    <!-- Light application theme -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:colorPrimary">#ff30a6cb</item>
+        <item name="android:colorPrimaryDark">#ff2788a6</item>
+        <item name="android:colorAccent">#ff30a6cb</item>
+        <item name="android:dialogTheme">@style/DialogStyle</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogStyle</item>
+    </style>
+
+    <style name="DialogStyle" parent="DialogBaseTheme" >
+        <item name="android:colorAccent">#ff30a6cb</item>
+    </style>
+
+    <style name="AlertDialogStyle" parent="AlertDialogBaseTheme" >
+        <item name="android:colorAccent">#ff30a6cb</item>
     </style>
 
     <style name="TextAppearance" />

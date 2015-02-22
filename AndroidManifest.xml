@@ -78,7 +78,6 @@
         <activity
             android:name="com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity"
             android:label="@string/shortcut_activity_title"
-            android:theme="@android:style/Theme.Holo.Dialog"
             android:launchMode="singleTop"
             android:excludeFromRecents="true"
             android:noHistory="true" >
