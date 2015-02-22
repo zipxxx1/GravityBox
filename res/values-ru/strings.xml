@@ -1758,4 +1758,14 @@
     <string name="recents_searchbar_hide_keep_space">Скрыть и оставить место</string>
     <string name="recents_searchbar_hide_remove_space">Скрыть и убрать место</string>
 
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">ВНИМАНИЕ</string>
+    <string name="gb_new_package_dialog_message_lollipop">Обнаружен установленный GravityBox для KitKat. 
+        Перед использованием новой версии необходимо удалить старую. Нажмите OK для запуска процесса удаления.
+        После удаления не забудьте активировать новый модуль в Xposed Installer и СРАЗУ ЖЕ ПЕРЕЗАГРУЗИТЬСЯ.</string>
+
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">Резервная копия, выполненная в старой версии Андроид, не может быть восстановлена из-за 
+        значимых различий  ОС. Настоятельно рекомендуется настройка GravityBox с нуля.</string>
+
 </resources>
