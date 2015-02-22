@@ -239,7 +239,7 @@ public class AppPickerPreference extends DialogPreference
         mBtnAppIcon.setFocusable(false);
         if (mIconPickerEnabled) {
             mBtnAppIcon.setOnClickListener(this);
-            mBtnAppIcon.setOnLongClickListener(this);
+            //mBtnAppIcon.setOnLongClickListener(this);
         } else {
             mBtnAppIcon.setEnabled(false);
         }
