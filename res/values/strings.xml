@@ -209,7 +209,7 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Enable menu key</string>
-    <string name="pref_lockscreen_menu_key_summary">Allows hadware menu key to unlock device (requires reboot)</string>
+    <string name="pref_lockscreen_menu_key_summary">Allows hardware menu key to unlock device (requires reboot)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Center clock</string>
@@ -750,7 +750,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Launcher tweaks</string>
-    <string name="pref_cat_launcher_tweaks_summary">Applies to stock launcher and Google Experience launcher</string>
+    <string name="pref_cat_launcher_tweaks_summary">Applies to stock launcher and Google Now launcher</string>
     <string name="pref_cat_launcher_desktop_grid_title">Desktop grid</string>
     <string name="pref_launcher_desktop_grid_info_title">Using other values than default may break widgets\' layout. Use wisely. Changes require launcher to be restarted.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Number of rows</string>

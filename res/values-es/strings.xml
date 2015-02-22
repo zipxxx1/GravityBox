@@ -746,7 +746,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Ajustes del lanzador</string>
-    <string name="pref_cat_launcher_tweaks_summary">Se aplica al lanzador predeterminado y a Google Experience Launcher</string>
+    <string name="pref_cat_launcher_tweaks_summary">Se aplica al lanzador predeterminado y a Google Now Launcher</string>
     <string name="pref_cat_launcher_desktop_grid_title">Cuadrícula del escritorio</string>
     <string name="pref_launcher_desktop_grid_info_title">Cambiar los valores predeterminados podría desajustar la posición y/o tamaño de los widgets. Requiere reiniciar el lanzador.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Número de filas</string>

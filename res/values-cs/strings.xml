@@ -721,7 +721,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Nastavení spouštěče</string>
-    <string name="pref_cat_launcher_tweaks_summary">Vztahuje se na standardní KitKat spouštěč nebo Google Experience spouštěč</string>
+    <string name="pref_cat_launcher_tweaks_summary">Vztahuje se na standardní KitKat spouštěč nebo Google Now spouštěč</string>
     <string name="pref_cat_launcher_desktop_grid_title">Mřížka plochy</string>
     <string name="pref_launcher_desktop_grid_info_title">Použití jiných než výchozích hodnot může způsobit narušení vzhledu widgetů. Změny vyžadují restart spouštěče.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Počet řádků</string>

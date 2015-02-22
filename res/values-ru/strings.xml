@@ -750,7 +750,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Настройки лончера</string>
-    <string name="pref_cat_launcher_tweaks_summary">Только для стокового лончера и Google Experience</string>
+    <string name="pref_cat_launcher_tweaks_summary">Только для стокового лончера и Google Now</string>
     <string name="pref_cat_launcher_desktop_grid_title">Сетка рабочего стола</string>
     <string name="pref_launcher_desktop_grid_info_title">Использование значений, отличных от значений по умолчанию, может привести к проблемам с виджетами. Используйте с осторожностью. Изменения требуют перезапуска лончера</string>
     <string name="pref_launcher_desktop_grid_rows_title">Количество строк</string>

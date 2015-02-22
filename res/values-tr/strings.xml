@@ -702,7 +702,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Başlatıcı iyileştirmeleri</string>
-    <string name="pref_cat_launcher_tweaks_summary">Stok başlatıcıya ve Google Experience başlatıcısına uygulanır</string>
+    <string name="pref_cat_launcher_tweaks_summary">Stok başlatıcıya ve Google Now başlatıcısına uygulanır</string>
     <string name="pref_cat_launcher_desktop_grid_title">Masaüstü ızgarası</string>
     <string name="pref_launcher_desktop_grid_info_title">Varsayılandan başka değerler kullanmak widgetleri bozabilir. Seyrek kullanın. Değişiklikler başlatıcının yeniden başlatılmasını gerektirir.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Satır sayısı</string>
