@@ -744,12 +744,14 @@ public class ModNavigationBar {
 
             int searchPosition = index == 0 ? 1 : navButtons.getChildCount()-2;
             View v = navButtons.getChildAt(searchPosition);
-            if (v.getId() == -1 && !v.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW)) {
+            if (v.getId() == -1 && !v.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW) &&
+                    !(v instanceof ViewGroup)) {
                 mNavbarViewInfo[index].originalView = v;
             } else {
                 searchPosition = searchPosition == 1 ? navButtons.getChildCount()-2 : 1;
                 v = navButtons.getChildAt(searchPosition);
-                if (v.getId() == -1 && !v.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW)) {
+                if (v.getId() == -1 && !v.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW) &&
+                        !(v instanceof ViewGroup)) {
                     mNavbarViewInfo[index].originalView = v;
                 }
             }
