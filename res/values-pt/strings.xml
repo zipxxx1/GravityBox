@@ -1679,5 +1679,55 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
 
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Ação de toque simples da tecla de apps recentes</string>
+    
+     <!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">Predefinido</string>
 
+    <!-- Tri state pref -->
+    <string name="state_default">Padrão</string>
+    <string name="state_enabled">Ativado</string>
+    <string name="state_disabled">Desativado</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">Indicador de bateria padrão com percentagem</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">Mostrar na barra de status</string>
+    <string name="battery_percent_text_statusbar_summary">Permite mostrar o texto com a percentagem de bateria na barra de status (quando o dispositivo estiver desbloqueado)</string>
+    <string name="battery_percent_text_keyguard_title">Modo de bloqueio</string>
+    <string name="battery_percent_text_keyguard_summary">Permite configurar o texto da percentagem na barra de status da tela de bloqueio</string>
+    <string name="keyguard_percent_text_default">Predefinido (durante carga)</string>
+    <string name="keyguard_percent_text_show_always">Mostrar sempre</string>
+    <string name="keyguard_percent_text_hide">Ocultar</string>
+    <string name="battery_percent_text_header_hide_title">Ocultar no cabeçalho da barra de status</string>
+    <string name="battery_percent_text_size_default">Predefinido</string>
+
+    <!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">Aviso de notificações</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Permite ativar o aviso de notificações e as funções relacionadas (necessário reiniciar)</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">Utilizar ícones grandes</string>
+    <string name="pref_navbar_larger_icons_summary">Necessário reiniciar</string>
+
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">Permitir reinício rápido</string>
+    <string name="pref_reboot_allow_softreboot_summary">Nota: reinício rápido pode causar problemas de instabilidade ou 
+        consumo de bateria inesperado, sendo recomendável utilizar o modo normal</string>
+
+    <!-- Recents panel search bar -->
+    <string name="pref_recents_searchbar_title">Visibilidade da barra de pesquisa</string>
+    <string name="recents_searchbar_default">Padrão</string>
+    <string name="recents_searchbar_hide_keep_space">Ocultar e reservar o espaço</string>
+    <string name="recents_searchbar_hide_remove_space">Ocultar e remover o espaço</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">ATENÇÃO</string>
+    <string name="gb_new_package_dialog_message_lollipop">Foi detetada uma instalação obsoleta do GravityBox, sendo necessário proceder à sua desinstalação 
+        antes de poder comerçar a usar a nova versão. Pressione OK para iniciar o processo. Após a desinstalação deverá garantir que o módulo se encontra
+        ativado no Xposed Installer e reiniciar o dispositivo de imediato.</string>
+
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">As definições guardadas em uma versão antiga do Android não podem ser restauradas 
+        devido a diversas diferenças do sistema, sendo altamente recomendável configurar o GravityBox</string>
 </resources>
