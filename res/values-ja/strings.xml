@@ -686,6 +686,7 @@
     <string name="fullscreen_caller_full">全部</string>
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">バッテリー％テキスト</string>
+    <string name="battery_percent_text_show_title">パーセントテキストを表示</string>
     <string name="battery_percent_text_size_title">バッテリー％テキストサイズ</string>
     <string name="battery_percent_text_size_larger">大</string>
     <string name="battery_percent_text_size_normal">中</string>
@@ -1515,4 +1516,35 @@
     <string name="pref_lockscreen_ring_custom_unlock_title">カスタムロック解除ターゲット</string>
     <string name="pref_lockscreen_ring_custom_unlock_summary">ロック解除ターゲットの手動設定が出来ます。
 最低でも一つのリングターゲットがGravityBoxのロック解除アクションか何かのアプリ起動に設定されているようにしてください。</string>
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Wi-Fiの優先度</string>
+    <string name="pref_wifi_priority_summary">Wi-Fiネットワークの優先度を指定します。</string>
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">バッテリーバー</string>
+    <string name="pref_battery_bar_show_title">バッテリーバーの表示</string>
+    <string name="pref_battery_bar_position_title">位置</string>
+    <string name="bbar_position_top">上端</string>
+    <string name="bbar_position_bottom">下端</string>
+    <string name="pref_battery_bar_margin_title">端のマージン</string>
+    <string name="pref_battery_bar_thickness_title">太さ</string>
+    <string name="pref_battery_bar_charge_anim_title">充電中アニメ</string>
+    <string name="pref_battery_bar_dynacolor_title">ダイナミックカラー</string>
+    <string name="pref_battery_bar_dynacolor_summary">現在のバッテリー残量で自動的に色を決定します。</string>
+    <string name="pref_battery_bar_color_title">色</string>
+    <string name="pref_battery_bar_color_low_title">残量低下時の色</string>
+    <string name="pref_battery_bar_color_critical_title">残りわずかの時の色</string>
+    <string name="pref_battery_bar_centered_title">中央寄せ</string>
+    <string name="pref_battery_bar_color_charging_title">充電時の色</string>
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">モード</string>
+    <string name="pref_statusbar_download_progress_animated_title">アニメ</string>
+    <string name="pref_statusbar_download_progress_centered_title">中央寄せ</string>
+    <string name="pref_statusbar_download_progress_thickness_title">太さ</string>
+    <string name="pref_statusbar_download_progress_margin_title">端のマージン</string>
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">メニューキータップアクション</string>
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">バックキータップアクション</string>
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">最近のアプリキーダブルタップアクション</string>
 </resources>
