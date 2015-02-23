@@ -289,12 +289,12 @@ public class ModExpandedDesktop {
                     WindowManager.LayoutParams.class, Rect.class, new XC_MethodReplacement() {
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!isImmersiveModeActive()) {
-                        return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                    }
-
                     if (DEBUG_LAYOUT) log("getContentInsetHintLw");
                     try {
+                        if (!isImmersiveModeActive()) {
+                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                        }
+
                         WindowManager.LayoutParams attrs = (WindowManager.LayoutParams) param.args[0];
                         Rect contentInset = (Rect) param.args[1];
                         final int fl = updateWindowManagerVisibilityFlagsForExpandedDesktop(attrs.flags);
@@ -346,12 +346,12 @@ public class ModExpandedDesktop {
                     boolean.class, int.class, int.class, int.class, new XC_MethodReplacement() {
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!isImmersiveModeActive() && !(mNavbarLeftHanded && !isNavbarHidden())) {
-                        return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                    }
-
                     if (DEBUG_LAYOUT) log("beginLayoutLw");
                     try {
+                        if (!isImmersiveModeActive() && !(mNavbarLeftHanded && !isNavbarHidden())) {
+                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                        }
+
                         boolean isDefaultDisplay = (Boolean) param.args[0];
                         int displayWidth = (Integer) param.args[1];
                         int displayHeight = (Integer) param.args[2];
@@ -762,13 +762,13 @@ public class ModExpandedDesktop {
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "updateSystemUiVisibilityLw", new XC_MethodReplacement() {
                 @Override
                 protected Object replaceHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!isImmersiveModeActive()) {
-                        return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                    }
-
                     if (DEBUG_LAYOUT) log("updateSystemUiVisibilityLw");
                     try {
-                     // If there is no window focused, there will be nobody to handle the events
+                        if (!isImmersiveModeActive()) {
+                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                        }
+
+                        // If there is no window focused, there will be nobody to handle the events
                         // anyway, so just hang on in whatever state we're in until things settle down.
                         Object win = getObj("mFocusedWindow") != null ? 
                                 getObj("mFocusedWindow") : getObj("mTopFullscreenOpaqueWindowState");
