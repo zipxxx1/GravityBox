@@ -1463,7 +1463,7 @@
                 android:title="@string/low_battery_warning_policy_title"
                 android:entries="@array/low_battery_warning_policy_entries"
                 android:entryValues="@array/low_battery_warning_policy_values"
-                android:defaultValue="3" />
+                android:defaultValue="DEFAULT" />
 
             <RingtonePreference 
                 android:key="pref_battery_charged_sound2"
