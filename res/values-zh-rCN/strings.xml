@@ -865,7 +865,7 @@
     
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">桌面调整</string>
-    <string name="pref_cat_launcher_tweaks_summary">仅适用于谷歌体验桌面</string>
+    <string name="pref_cat_launcher_tweaks_summary">仅适用于谷歌Now桌面</string>
     <string name="pref_cat_launcher_desktop_grid_title">桌面网格</string>
     <string name="pref_launcher_desktop_grid_info_title">使用非默认的值可能破坏小部件的布局，请谨慎使用，改动将在桌面重新启动后生效</string>
     <string name="pref_launcher_desktop_grid_rows_title">行数</string>
