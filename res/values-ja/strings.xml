@@ -23,6 +23,8 @@
     <string name="vol_music_controls_title">音量キーで曲操作</string>
     <string name="vol_music_controls_summary">画面オフ時に音量キー長押しで曲送り/曲戻しします。</string>
     <string name="low_battery_warning_policy_title">バッテリー残量低下警告</string>
+    <string name="low_battery_warning_default">デフォルト</string>
+    <string name="low_battery_warning_nonintrusive">控えめ</string>
     <string name="low_battery_warning_off">なし</string>
     <string name="reboot_required">変更は再起動後に適用されます。</string>
     <string name="poweroff_advanced_title">再起動オプション</string>
@@ -177,6 +179,7 @@
     <string name="pref_ab_button_set">セット</string>
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">ロック画面での回転を有効化</string>
+    <string name="pref_lockscreen_rotation_summary">再起動が必要です。</string>
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">メニューキーを有効化</string>
     <string name="pref_lockscreen_menu_key_summary">ロック画面でメニューキーを押すとロックを解除するようにします。(要再起動)</string>
@@ -1124,6 +1127,12 @@
     <string name="increasing_ring_enable">有効</string>
     <string name="increasing_ring_min_volume_title">開始音量</string>
     <string name="increasing_ring_volume_notice">注意:\n開始音量が着信音の音量設定より大きい場合は着信音の音量を使います。</string>
+    <string name="increasing_ring_ramp_up_duration_title">強める間隔</string>
+    <string name="increasing_ring_interval_1">10秒</string>
+    <string name="increasing_ring_interval_2">15秒</string>
+    <string name="increasing_ring_interval_3">20秒</string>
+    <string name="increasing_ring_interval_4">25秒</string>
+    <string name="increasing_ring_interval_5">30秒</string>
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
     <!-- HW Key Action: In-app search -->
@@ -1254,7 +1263,6 @@
     <string name="pref_heads_up_alpha_title">透過度</string>
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">電源接続解除時のサウンド</string>
-    <!-- Fake ID patch -->
     <!-- MTK tiles: Audio profile -->
     <string name="qs_tile_audio_profile">オーディオプロファイル</string>
     <!-- MTK specific fixes category -->
@@ -1364,4 +1372,76 @@
     <string name="dt_display_mode_always">常時 (ネットワーク接続があるとき)</string>
     <string name="dt_display_mode_dm">Androidのダウンロードマネージャのみ</string>
     <string name="dt_display_mode_pt">ステータスバーにプログレスバーが表示されているとき</string>
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Wi-Fiの優先度</string>
+    <string name="pref_wifi_priority_summary">Wi-Fiネットワークの優先度を指定します。</string>
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">バッテリーバー</string>
+    <string name="pref_battery_bar_show_title">バッテリーバーの表示</string>
+    <string name="pref_battery_bar_position_title">位置</string>
+    <string name="bbar_position_top">上端</string>
+    <string name="bbar_position_bottom">下端</string>
+    <string name="pref_battery_bar_margin_title">端のマージン</string>
+    <string name="pref_battery_bar_thickness_title">太さ</string>
+    <string name="pref_battery_bar_charge_anim_title">充電中アニメ</string>
+    <string name="pref_battery_bar_dynacolor_title">ダイナミックカラー</string>
+    <string name="pref_battery_bar_dynacolor_summary">現在のバッテリー残量で自動的に色を決定します。</string>
+    <string name="pref_battery_bar_color_title">色</string>
+    <string name="pref_battery_bar_color_low_title">残量低下時の色</string>
+    <string name="pref_battery_bar_color_critical_title">残りわずかの時の色</string>
+    <string name="pref_battery_bar_centered_title">中央寄せ</string>
+    <string name="pref_battery_bar_color_charging_title">充電時の色</string>
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">モード</string>
+    <string name="pref_statusbar_download_progress_animated_title">アニメ</string>
+    <string name="pref_statusbar_download_progress_centered_title">中央寄せ</string>
+    <string name="pref_statusbar_download_progress_thickness_title">太さ</string>
+    <string name="pref_statusbar_download_progress_margin_title">端のマージン</string>
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">メニューキータップアクション</string>
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">バックキータップアクション</string>
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">最近のアプリキーダブルタップアクション</string>
+    <!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">デフォルト</string>
+    <!-- Tri state pref -->
+    <string name="state_default">デフォルト</string>
+    <string name="state_enabled">有効</string>
+    <string name="state_disabled">無効</string>
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">標準バッテリー＋％</string>
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">ステータスバーに表示</string>
+    <string name="battery_percent_text_statusbar_summary">ロック解除時の通常のステータスバーにバッテリーのパーセントテキストを表示します。</string>
+    <string name="battery_percent_text_keyguard_title">キーガードモード</string>
+    <string name="battery_percent_text_keyguard_summary">ロック画面のステータスバーでのパーセントテキストの動作を指定します。</string>
+    <string name="keyguard_percent_text_default">デフォルト (充電中)</string>
+    <string name="keyguard_percent_text_show_always">常に表示</string>
+    <string name="keyguard_percent_text_hide">非表示</string>
+    <string name="battery_percent_text_header_hide_title">ステータスバーヘッダでは非表示</string>
+    <string name="battery_percent_text_size_default">デフォルト</string>
+    <!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">通知ティッカー</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">通知ティッカーとそれに関連した機能を有効にします。(要再起動)</string>
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">大きめのアイコンを使う</string>
+    <string name="pref_navbar_larger_icons_summary">再起動が必要です。</string>
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">ソフトリブートを許可する</string>
+    <string name="pref_reboot_allow_softreboot_summary">注意: ソフトリブートは
+バッテリーの異常消費や不安定な動作を引き起こす可能性があります。通常の再起動を使う方がおすすめです。</string>
+    <!-- Recents panel search bar -->
+    <string name="pref_recents_searchbar_title">検索バーの表示</string>
+    <string name="recents_searchbar_default">デフォルト</string>
+    <string name="recents_searchbar_hide_keep_space">非表示 (スペースはそのまま)</string>
+    <string name="recents_searchbar_hide_remove_space">非表示 (スペースも削除)</string>
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">注意</string>
+    <string name="gb_new_package_dialog_message_lollipop">KitKat向けGravityBoxがインストールされています。
+        新しいバージョンを使う前に、古いバージョンをアンインストールしてください。OKをタップするとアンインストールを始めます。
+        アンインストールが終わったら、Lollipop向けをXposed Installerで有効にして、すぐ再起動してください。</string>
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">古いバージョンで作成されたバックアップはリストアできません。
+最初からGravityboxを設定し直すことをおすすめします。</string>
 </resources>
