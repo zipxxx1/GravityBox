@@ -33,6 +33,7 @@ public class GpsTile extends QsTile {
 
     private boolean mGpsEnabled;
     private boolean mGpsFixed;
+    private boolean mIsReceiving;
 
     private BroadcastReceiver mLocationManagerReceiver = new BroadcastReceiver() {
         @SuppressWarnings("deprecation")
@@ -52,9 +53,7 @@ public class GpsTile extends QsTile {
             }
 
             if (DEBUG) log(getKey() + ": mGpsEnabled = " + mGpsEnabled + "; mGpsFixed = " + mGpsFixed);
-            if (mState.visible) {
-                refreshState();
-            }
+            refreshState();
         }
     };
 
@@ -63,37 +62,32 @@ public class GpsTile extends QsTile {
         super(host, key, prefs, eventDistributor);
     }
 
-    @Override
-    public void initPreferences() {
-        super.initPreferences();
-
-        if (mState.visible) {
-            registerLocationManagerReceiver();
-        }
-    }
-
     @SuppressWarnings("deprecation")
     private void registerLocationManagerReceiver() {
+        if (mIsReceiving) return;
         mGpsEnabled = Settings.Secure.isLocationProviderEnabled(
                 mContext.getContentResolver(), LocationManager.GPS_PROVIDER);
+        mGpsFixed = false;
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(LocationManager.PROVIDERS_CHANGED_ACTION);
         intentFilter.addAction(GPS_ENABLED_CHANGE_ACTION);
         intentFilter.addAction(GPS_FIX_CHANGE_ACTION);
         mContext.registerReceiver(mLocationManagerReceiver, intentFilter);
+        mIsReceiving = true;
         if (DEBUG) log(getKey() + ": Location manager receiver registered");
     }
 
     private void unregisterLocationManagerReceiver() {
-        mContext.unregisterReceiver(mLocationManagerReceiver);
-        if (DEBUG) log(getKey() + ": Location manager receiver unregistered");
+        if (mIsReceiving) {
+            mContext.unregisterReceiver(mLocationManagerReceiver);
+            mIsReceiving = false;
+            if (DEBUG) log(getKey() + ": Location manager receiver unregistered");
+        }
     }
 
     @Override
-    public void onBroadcastReceived(Context context, Intent intent) {
-        super.onBroadcastReceived(context, intent);
-
-        if (mState.visible) {
+    public void setListening(boolean listening) {
+        if (listening && mState.visible) {
             registerLocationManagerReceiver();
         } else {
             unregisterLocationManagerReceiver();
