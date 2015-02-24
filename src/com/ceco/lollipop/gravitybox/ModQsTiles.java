@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import com.ceco.lollipop.gravitybox.quicksettings.AospTile;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTile;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor;
 
@@ -68,6 +70,12 @@ public class ModQsTiles {
 
                     Map<String, Object> tileMap = (Map<String, Object>)
                             XposedHelpers.getObjectField(param.thisObject, "mTiles");
+
+                    // prepare AOSP tile wrappers
+                    for (Entry<String,Object> entry : tileMap.entrySet()) {
+                        AospTile.create(param.thisObject, entry.getValue(), 
+                                entry.getKey(), prefs, mEventDistributor);
+                    }
 
                     // prepare GB tiles
                     for (String key : GB_TILE_KEYS) {

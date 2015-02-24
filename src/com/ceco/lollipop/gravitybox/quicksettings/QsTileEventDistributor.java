@@ -11,6 +11,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -22,13 +23,16 @@ public class QsTileEventDistributor {
     public interface QsEventListener {
         String getKey();
         void handleUpdateState(Object state, Object arg);
+        void handleDestroy();
+        void onCreateTileView(View tileView) throws Throwable;
+        void onBrodcastReceived(Context context, Intent intent);
+    }
+
+    public interface QsEventListenerGb extends QsEventListener {
         boolean supportsDualTargets();
         void handleClick();
         void handleSecondaryClick();
         void setListening(boolean listening);
-        Object createTileView() throws Throwable;
-        void handleDestroy();
-        void onBrodcastReceived(Context context, Intent intent);
     }
 
     private static void log(String message) {
@@ -92,8 +96,8 @@ public class QsTileEventDistributor {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
-                    if (l != null) {
-                        param.setResult(l.supportsDualTargets());
+                    if (l != null && (l instanceof QsEventListenerGb)) {
+                        param.setResult(((QsEventListenerGb)l).supportsDualTargets());
                     }
                 }
             });
@@ -105,7 +109,7 @@ public class QsTileEventDistributor {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
                     if (l != null) {
-                        l.handleClick();
+                        ((QsEventListenerGb)l).handleClick();
                         param.setResult(null);
                     }
                 }
@@ -117,8 +121,8 @@ public class QsTileEventDistributor {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
-                    if (l != null) {
-                        l.handleSecondaryClick();
+                    if (l != null && (l instanceof QsEventListenerGb)) {
+                        ((QsEventListenerGb)l).handleSecondaryClick();
                         param.setResult(null);
                     }
                 }
@@ -131,7 +135,7 @@ public class QsTileEventDistributor {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
                     if (l != null) {
-                        l.setListening((boolean)param.args[0]);
+                        ((QsEventListenerGb)l).setListening((boolean)param.args[0]);
                         param.setResult(null);
                     }
                 }
@@ -140,16 +144,16 @@ public class QsTileEventDistributor {
             XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "createTileView",
                     Context.class, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
                     if (l != null) {
-                        param.setResult(l.createTileView());
+                        l.onCreateTileView((View)param.getResult());
                     }
                 }
             });
 
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl, "handleDestroy",
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "handleDestroy",
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {

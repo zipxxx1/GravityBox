@@ -1,24 +1,24 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
-import de.robv.android.xposed.XSharedPreferences;
 import android.view.View;
+import de.robv.android.xposed.XSharedPreferences;
 
-public class LocationTile extends AospTile {
-    public static final String AOSP_KEY = "location";
+public class AirplaneModeTile extends AospTile {
+    public static final String AOSP_KEY = "airplane";
 
-    protected LocationTile(Object host, Object tile, XSharedPreferences prefs,
+    protected AirplaneModeTile(Object host, Object tile, XSharedPreferences prefs, 
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, tile, prefs, eventDistributor);
     }
 
     @Override
     public String getKey() {
-        return "aosp_tile_location";
+        return "aosp_tile_airplane_mode";
     }
 
     @Override
     protected String getClassName() {
-        return "com.android.systemui.qs.tiles.LocationTile";
+        return "com.android.systemui.qs.tiles.AirplaneModeTile";
     }
 
     @Override
@@ -30,5 +30,4 @@ public class LocationTile extends AospTile {
     public boolean handleLongClick(View view) {
         return false;
     }
-
 }

@@ -31,12 +31,10 @@ import com.ceco.lollipop.gravitybox.Utils.MethodState;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryData;
 import com.ceco.lollipop.gravitybox.quicksettings.AQuickSettingsTile;
-import com.ceco.lollipop.gravitybox.quicksettings.CameraTile;
 import com.ceco.lollipop.gravitybox.quicksettings.CompassTile;
 import com.ceco.lollipop.gravitybox.quicksettings.ExpandedDesktopTile;
 import com.ceco.lollipop.gravitybox.quicksettings.GpsTile;
-import com.ceco.lollipop.gravitybox.quicksettings.GravityBoxTile;
-import com.ceco.lollipop.gravitybox.quicksettings.LocationTile;
+import com.ceco.lollipop.gravitybox.quicksettings.LocationTileSlimkat;
 import com.ceco.lollipop.gravitybox.quicksettings.LockScreenTile;
 import com.ceco.lollipop.gravitybox.quicksettings.MusicTile;
 import com.ceco.lollipop.gravitybox.quicksettings.NetworkModeTile;
@@ -818,7 +816,7 @@ public class ModQuickSettings {
                 }
 
                 if (Utils.hasGPS(mContext)) {
-                    LocationTile locationTile = new LocationTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                    LocationTileSlimkat locationTile = new LocationTileSlimkat(mContext, mGbContext, mStatusBar, mPanelBar);
                     locationTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                     mTiles.add(locationTile);
                 }
@@ -878,14 +876,6 @@ public class ModQuickSettings {
                 ScreenshotTile ssTile = new ScreenshotTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 ssTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(ssTile);
-
-//                GravityBoxTile gbTile = new GravityBoxTile(mContext, mGbContext, mStatusBar, mPanelBar);
-//                gbTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-//                mTiles.add(gbTile);
-
-                CameraTile camTile = new CameraTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                camTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(camTile);
 
                 UsbTetherTile utTile = new UsbTetherTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 utTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);

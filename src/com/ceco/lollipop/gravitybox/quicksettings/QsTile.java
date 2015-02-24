@@ -8,13 +8,13 @@ import android.view.View;
 import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
-import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
+import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListenerGb;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public abstract class QsTile implements QsEventListener {
+public abstract class QsTile implements QsEventListenerGb {
     protected static String TAG = "GB:QsTile";
 
     protected static final boolean DEBUG = ModQsTiles.DEBUG;
@@ -101,11 +101,7 @@ public abstract class QsTile implements QsEventListener {
     }
 
     @Override
-    public Object createTileView() throws Throwable {
-        View tileView = (View) XposedHelpers.findConstructorExact(CLASS_TILE_VIEW,
-                mContext.getClassLoader(), Context.class).newInstance(mContext);
-        XposedHelpers.setAdditionalInstanceField(tileView, TILE_KEY_NAME, mKey);
-
+    public void onCreateTileView(View tileView) throws Throwable {
         tileView.setLongClickable(true);
         tileView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -113,8 +109,6 @@ public abstract class QsTile implements QsEventListener {
                 return handleLongClick(v);
             }
         });
-
-        return tileView;
     }
 
     @Override

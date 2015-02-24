@@ -192,8 +192,6 @@
         <item>@string/qs_tile_gps</item>
         <item>@string/qs_tile_gps_slimkat</item>
         <item>@string/qs_tile_autorotation</item>
-        <item>@string/qs_tile_settings</item>
-        <item>@string/qs_tile_brightness</item>
     </string-array>
 
     <string-array name="qs_tile_override_values" translatable="false">
@@ -204,8 +202,6 @@
         <item>gps_textview</item>
         <item>location_tileview</item>
         <item>auto_rotate_textview</item>
-        <item>settings</item>
-        <item>brightness_textview</item>
     </string-array>
 
     <string-array name="lockscreen_bg_entries" translatable="false">
