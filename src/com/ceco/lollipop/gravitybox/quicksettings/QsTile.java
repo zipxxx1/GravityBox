@@ -48,6 +48,8 @@ public abstract class QsTile implements QsEventListenerGb {
             return new GravityBoxTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_network_mode") && !Utils.isWifiOnly(ctx))
             return new NetworkModeTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_expanded_desktop"))
+            return new ExpandedDesktopTile(host, key, prefs, eventDistributor);
 
         return null;
     }
@@ -150,6 +152,15 @@ public abstract class QsTile implements QsEventListenerGb {
             XposedHelpers.callMethod(mHost, "startSettingsActivity", intent);
         } catch (Throwable t) {
             log("Error in startSettingsActivity: ");
+            XposedBridge.log(t);
+        }
+    }
+
+    public void collapsePanels() {
+        try {
+            XposedHelpers.callMethod(mHost, "collapsePanels");
+        } catch (Throwable t) {
+            log("Error in collapsePanels: ");
             XposedBridge.log(t);
         }
     }

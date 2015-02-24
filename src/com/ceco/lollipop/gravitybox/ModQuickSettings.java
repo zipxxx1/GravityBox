@@ -863,10 +863,6 @@ public class ModQuickSettings {
                 qAppTile2.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(qAppTile2);
 
-                ExpandedDesktopTile edTile = new ExpandedDesktopTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                edTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(edTile);
-
                 ScreenshotTile ssTile = new ScreenshotTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 ssTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(ssTile);

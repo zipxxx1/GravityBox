@@ -68,6 +68,7 @@ public class QsTileEventDistributor {
     private void prepareBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
+        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
     }
 
