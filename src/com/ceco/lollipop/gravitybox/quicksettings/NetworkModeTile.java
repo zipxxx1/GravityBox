@@ -113,8 +113,8 @@ public class NetworkModeTile extends QsTile {
     }
 
     @Override
-    public void onBrodcastReceived(Context context, Intent intent) {
-        super.onBrodcastReceived(context, intent);
+    public void onBroadcastReceived(Context context, Intent intent) {
+        super.onBroadcastReceived(context, intent);
 
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) { 
             if (intent.hasExtra(GravityBoxSettings.EXTRA_NMT_MODE)) {

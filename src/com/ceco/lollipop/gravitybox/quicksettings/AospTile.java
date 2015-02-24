@@ -82,7 +82,7 @@ public abstract class AospTile implements QsEventListener {
     }
 
     @Override
-    public void onBrodcastReceived(Context context, Intent intent) {
+    public void onBroadcastReceived(Context context, Intent intent) {
         if (DEBUG) log(getKey() + ": onBrodcastReceived: " + intent);
         final String action = intent.getAction();
         if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {

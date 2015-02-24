@@ -25,7 +25,7 @@ public class QsTileEventDistributor {
         void handleUpdateState(Object state, Object arg);
         void handleDestroy();
         void onCreateTileView(View tileView) throws Throwable;
-        void onBrodcastReceived(Context context, Intent intent);
+        void onBroadcastReceived(Context context, Intent intent);
     }
 
     public interface QsEventListenerGb extends QsEventListener {
@@ -56,7 +56,7 @@ public class QsTileEventDistributor {
         public void onReceive(Context context, Intent intent) {
             try {
                 for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
-                    l.getValue().onBrodcastReceived(context, intent);
+                    l.getValue().onBroadcastReceived(context, intent);
                 }
             } catch (Throwable t) {
                 log("Error notifying listeners of new broadcast: ");

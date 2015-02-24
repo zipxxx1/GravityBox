@@ -124,7 +124,7 @@ public abstract class QsTile implements QsEventListenerGb {
     }
 
     @Override
-    public void onBrodcastReceived(Context context, Intent intent) {
+    public void onBroadcastReceived(Context context, Intent intent) {
         if (DEBUG) log(mKey + ": onBrodcastReceived: " + intent);
         final String action = intent.getAction();
         if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
