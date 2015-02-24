@@ -72,9 +72,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Quicksetting trên thanh trạng thái</string>
     <string name="quick_settings_summary">Cho phép ẩn/hiện biểu tượng quicksetting trên thanh trạng thái</string>
-    <string name="qs_tile_user_profile">T.tin người sử dụng</string>
     <string name="qs_tile_airplane_mode">Chế độ máy bay</string>
-    <string name="qs_tile_battery">Trạng thái Pin</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
@@ -82,15 +80,13 @@
     <string name="qs_tile_mobile_data">Kết nối dữ liệu</string>
     <string name="qs_tile_network_mode">Chế độ mạng</string>
     <string name="qs_tile_data_usage">Sử dụng dữ liệu</string>
-    <string name="qs_tile_brightness">Độ sáng</string>
     <string name="qs_tile_autorotation">Auto rotation</string>
     <string name="qs_tile_sync">Đồng bộ</string>
     <string name="qs_tile_wifi_ap">Điểm phát wifi</string>
-    <string name="qs_tile_torch">Đèn pin</string>
+    <string name="qs_tile_torch_gb">Đèn pin</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Ngủ</string>
     <string name="qs_tile_quickrecord">Ghi âm nhanh</string>
-    <string name="qs_tile_settings">Cài đặt</string>
     <string name="qs_tile_volume">Âm lượng</string>
     <string name="qs_tile_expanded_desktop">Màn hình mở rộng</string>
     <string name="qs_tile_stay_awake">Stay awake</string>

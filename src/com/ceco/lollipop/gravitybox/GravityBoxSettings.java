@@ -53,7 +53,6 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
@@ -89,7 +88,7 @@ import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class GravityBoxSettings extends Activity implements GravityBoxResultReceiver.Receiver {
     public static final String PREF_KEY_QUICK_SETTINGS_ENABLE = "pref_qs_management_enable";
-    public static final String PREF_KEY_QUICK_SETTINGS = "pref_quick_settings2";
+    public static final String PREF_KEY_QUICK_SETTINGS = "pref_quick_settings3";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_ORDER = "pref_qs_tile_order";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE = "pref_qs_tile_label_style";
@@ -1657,9 +1656,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getPreferenceScreen().removePreference(mPrefCatLockscreen);
                 mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifExpandAll);
-            } else {
-                // TODO: rework for Lollipop
-                mPrefCatStatusbar.removePreference(mPrefCatStatusbarQs);
             }
 
             // TODO: H+ indicator
@@ -1694,76 +1690,83 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mQuickSettings.getEntryValues()));
             Set<String> qsPrefs = mPrefs.getStringSet(PREF_KEY_QUICK_SETTINGS, null);
             if (!Utils.hasFlash(getActivity())) {
-                qsEntries.remove(getString(R.string.qs_tile_torch));
-                qsEntryValues.remove("torch_tileview");
-                if (qsPrefs != null && qsPrefs.contains("torch_tileview")) {
-                    qsPrefs.remove("torch_tileview");
+                qsEntries.remove(getString(R.string.qs_tile_torch_gb));
+                qsEntryValues.remove("gb_tile_torch");
+                qsEntries.remove(getString(R.string.qs_tile_torch_aosp));
+                qsEntryValues.remove("aosp_tile_torch");
+                if (qsPrefs != null) {
+                    if (qsPrefs.contains("gb_tile_torch")) qsPrefs.remove("gb_tile_torch");
+                    if (qsPrefs.contains("aosp_tile_torch")) qsPrefs.remove("aosp_tile_torch");
                 }
             }
             if (!Utils.hasGPS(getActivity())) {
                 qsEntries.remove(getString(R.string.qs_tile_gps));
-                qsEntryValues.remove("gps_tileview");
-                qsEntryValues.remove("location_tileview");
-                if (Utils.isMtkDevice()) {
-                    qsEntries.remove(getString(R.string.qs_tile_gps_alt));
-                    qsEntries.remove(getString(R.string.qs_tile_gps_slimkat));
-                    qsEntryValues.remove("gps_textview");
-                }
+                qsEntryValues.remove("aosp_tile_location");
+                qsEntries.remove(getString(R.string.qs_tile_gps_alt));
+                qsEntryValues.remove("gb_tile_gps_alt");
+                qsEntries.remove(getString(R.string.qs_tile_gps_slimkat));
+                qsEntryValues.remove("gb_tile_gps_slimkat");
                 if (qsPrefs != null) {
-                    if (qsPrefs.contains("gps_tileview")) qsPrefs.remove("gps_tileview");
-                    if (qsPrefs.contains("gps_textview")) qsPrefs.remove("gps_textview");
-                    if (qsPrefs.contains("location_textview")) qsPrefs.remove("location_textview");
+                    if (qsPrefs.contains("aosp_tile_location")) qsPrefs.remove("aosp_tile_location");
+                    if (qsPrefs.contains("gb_tile_gps_alt")) qsPrefs.remove("gb_tile_gps_alt");
+                    if (qsPrefs.contains("gb_tile_gps_slimkat")) qsPrefs.remove("gb_tile_gps_slimkat");
                 }
             }
             if (Utils.isWifiOnly(getActivity())) {
-                qsEntries.remove(getString(R.string.qs_tile_mobile_data));
+                qsEntries.remove(getString(R.string.qs_tile_data_usage));
+                qsEntryValues.remove("aosp_tile_cell");
+                qsEntries.remove(getString(R.string.qs_tile_data_usage_2));
+                qsEntryValues.remove("aosp_tile_cell2");
                 qsEntries.remove(getString(R.string.qs_tile_network_mode));
+                qsEntryValues.remove("gb_tile_network_mode");
                 qsEntries.remove(getString(R.string.qs_tile_smart_radio));
-                qsEntryValues.remove("data_conn_textview");
-                qsEntryValues.remove("network_mode_tileview");
-                qsEntryValues.remove("smart_radio_tileview");
+                qsEntryValues.remove("gb_tile_smart_radio");
+                qsEntries.remove(getString(R.string.qs_tile_mobile_data));
+                qsEntryValues.remove("mtk_tile_mobile_data");
                 if (qsPrefs != null) {
-                    if (qsPrefs.contains("data_conn_textview")) qsPrefs.remove("data_conn_textview");
-                    if (qsPrefs.contains("network_mode_tileview")) qsPrefs.remove("network_mode_tileview");
-                    if (qsPrefs.contains("smart_radio_tileview")) qsPrefs.remove("smart_radio_tileview");
+                    if (qsPrefs.contains("aosp_tile_cell")) qsPrefs.remove("aosp_tile_cell");
+                    if (qsPrefs.contains("aosp_tile_cell2")) qsPrefs.remove("aosp_tile_cell2");
+                    if (qsPrefs.contains("gb_tile_network_mode")) qsPrefs.remove("gb_tile_network_mode");
+                    if (qsPrefs.contains("gb_tile_smart_radio")) qsPrefs.remove("gb_tile_smart_radio");
+                    if (qsPrefs.contains("mtk_tile_mobile_data")) qsPrefs.remove("mtk_tile_mobile_data");
                 }
             }
             if (!Utils.hasNfc(getActivity())) {
                 qsEntries.remove(getString(R.string.qs_tile_nfc));
-                qsEntryValues.remove("nfc_tileview");
-                if (qsPrefs != null && qsPrefs.contains("nfc_tileview")) {
-                    qsPrefs.remove("nfc_tileview");
+                qsEntryValues.remove("gb_tile_nfc");
+                if (qsPrefs != null && qsPrefs.contains("gb_tile_nfc")) {
+                    qsPrefs.remove("gb_tile_nfc");
                 }
             }
             if (LedSettings.isUncLocked(getActivity())) {
                 qsEntries.remove(getString(R.string.lc_quiet_hours));
-                qsEntryValues.remove("quiet_hours_tileview");
-                if (qsPrefs != null && qsPrefs.contains("quiet_hours_tileview")) {
-                    qsPrefs.remove("quiet_hours_tileview");
+                qsEntryValues.remove("gb_tile_quiet_hours");
+                if (qsPrefs != null && qsPrefs.contains("gb_tile_quiet_hours")) {
+                    qsPrefs.remove("gb_tile_quiet_hours");
                 }
             }
             if (!Utils.hasCompass(getActivity())) {
                 qsEntries.remove(getString(R.string.qs_tile_compass));
-                qsEntryValues.remove("compass_tileview");
-                if (qsPrefs != null && qsPrefs.contains("compass_tileview")) {
-                    qsPrefs.remove("compass_tileview");
+                qsEntryValues.remove("gb_tile_compass");
+                if (qsPrefs != null && qsPrefs.contains("gb_tile_compass")) {
+                    qsPrefs.remove("gb_tile_compass");
                 }
             }
             if (!sSystemProperties.hasMsimSupport) {
                 qsEntries.remove(getString(R.string.qs_tile_data_usage_2));
-                qsEntryValues.remove("rssi_textview_2");
-                if (qsPrefs != null && qsPrefs.contains("rssi_textview_2")) {
-                    qsPrefs.remove("rssi_textview_2");
+                qsEntryValues.remove("aosp_tile_cell2");
+                if (qsPrefs != null && qsPrefs.contains("aosp_tile_cell2")) {
+                    qsPrefs.remove("aosp_tile_cell2");
                 }
             }
             if (!Utils.isMtkDevice()) {
                 qsEntries.remove(getString(R.string.qs_tile_mobile_data));
                 qsEntries.remove(getString(R.string.qs_tile_audio_profile));
-                qsEntryValues.remove("mtk_mobile_data");
-                qsEntryValues.remove("mtk_audio_profile");
+                qsEntryValues.remove("mtk_tile_mobile_data");
+                qsEntryValues.remove("mtk_tile_audio_profile");
                 if (qsPrefs != null) {
-                    if (qsPrefs.contains("mtk_mobile_data")) qsPrefs.remove("mtk_mobile_data");
-                    if (qsPrefs.contains("mtk_audio_profile")) qsPrefs.remove("mtk_audio_profile");
+                    if (qsPrefs.contains("mtk_tile_mobile_data")) qsPrefs.remove("mtk_tile_mobile_data");
+                    if (qsPrefs.contains("mtk_tile_audio_profile")) qsPrefs.remove("mtk_tile_audio_profile");
                 }
             }
 

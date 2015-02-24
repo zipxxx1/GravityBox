@@ -72,9 +72,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Kotak-kotak QuickSettings Statusbar</string>
     <string name="quick_settings_summary">Membolehkan kotak-kotak QuickSettings di statusbar untuk di tampil/sembunyikan</string>
-    <string name="qs_tile_user_profile">Profil pengguna</string>
     <string name="qs_tile_airplane_mode">Mode pesawat terbang</string>
-    <string name="qs_tile_battery">Status baterai</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
@@ -82,15 +80,13 @@
     <string name="qs_tile_mobile_data">Data Paket</string>
     <string name="qs_tile_network_mode">Mode jaringan</string>
     <string name="qs_tile_data_usage">Penggunaan Data</string>
-    <string name="qs_tile_brightness">Kecerahan</string>
     <string name="qs_tile_autorotation">Rotasi otomatis</string>
     <string name="qs_tile_sync">Sinkronisasi</string>
     <string name="qs_tile_wifi_ap">Akses Poin Wi-Fi</string>
-    <string name="qs_tile_torch">Senter</string>
+    <string name="qs_tile_torch_gb">Senter</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Matikan layar</string>
     <string name="qs_tile_quickrecord">Rekam Cepat</string>
-    <string name="qs_tile_settings">Setting</string>
     <string name="qs_tile_volume">Volume</string>
     <string name="qs_tile_expanded_desktop">Perluasan Desktop</string>
     <string name="qs_tile_stay_awake">Tetap menyala</string>

@@ -79,9 +79,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">אריחי QuickSettings של שורת מצב</string>
     <string name="quick_settings_summary">אפשר הצגה או הסתרה של אריחי QuickSettings בשורת המצב</string>
-    <string name="qs_tile_user_profile">פרופיל משתמש</string>
     <string name="qs_tile_airplane_mode">מצב טיסה</string>
-    <string name="qs_tile_battery">מצב סוללה</string>
     <string name="qs_tile_wifi">קישורית Wi-Fi</string>
     <string name="qs_tile_bluetooth">קישורית Bluetooth</string>
     <string name="qs_tile_gps">מיקום</string>
@@ -89,21 +87,18 @@
     <string name="qs_tile_mobile_data">גלישה סלולרית</string>
     <string name="qs_tile_network_mode">מצבי רשת</string>
     <string name="qs_tile_data_usage">שימוש בגלישה סלולרית</string>
-    <string name="qs_tile_brightness">בהירות</string>
     <string name="qs_tile_autorotation">סיבוב מסך</string>
     <string name="qs_tile_sync">סינכרון</string>
     <string name="qs_tile_wifi_ap">נקודת גישה של Wi-Fi</string>
-    <string name="qs_tile_torch">פנס</string>
+    <string name="qs_tile_torch_gb">פנס</string>
     <string name="qs_tile_gravitybox">אריח GravityBox</string>
     <string name="qs_tile_sleep">שינה</string>
     <string name="qs_tile_quickrecord">הקלטה מהירה</string>
-    <string name="qs_tile_settings">הגדרות</string>
     <string name="qs_tile_volume">עוצמת שמע</string>
     <string name="qs_tile_expanded_desktop">מסך בית מורחב</string>
     <string name="qs_tile_stay_awake">ערנות מתמדת</string>
     <string name="qs_tile_screenshot">צילום מסך</string>
     <string name="qs_tile_nfc">קישורית NFC</string>
-    <string name="qs_tile_camera">מצלמה</string>
     <string name="qs_tile_usb_tethering">קשירה חמה ב-USB</string>
     <string name="qs_tile_music">מוסיקה</string>
 

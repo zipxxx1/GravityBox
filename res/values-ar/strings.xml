@@ -72,9 +72,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">أيقونات الاعدادات السريعة</string>
     <string name="quick_settings_summary">امكانية عرض أو اخفاء أيقونات الاعدادات السريعة على شريط الحالة</string>
-    <string name="qs_tile_user_profile">المستخدم</string>
     <string name="qs_tile_airplane_mode">وضع الطيران</string>
-    <string name="qs_tile_battery">البطارية</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">البلوتوث</string>
     <string name="qs_tile_gps">GPS</string>
@@ -82,15 +80,13 @@
     <string name="qs_tile_mobile_data">بيانات الجوال</string>
     <string name="qs_tile_network_mode">وضع الشبكة</string>
     <string name="qs_tile_data_usage">استخدام البيانات</string>
-    <string name="qs_tile_brightness">الاضاءة</string>
     <string name="qs_tile_autorotation">دوران تلقائي</string>
     <string name="qs_tile_sync">تزامن</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Access Point</string>
-    <string name="qs_tile_torch">الكشاف</string>
+    <string name="qs_tile_torch_gb">الكشاف</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">سبات</string>
     <string name="qs_tile_quickrecord">تسجيل سريع</string>
-    <string name="qs_tile_settings">الاعدادات</string>
     <string name="qs_tile_volume">الصوت</string>
     <string name="qs_tile_expanded_desktop">سطح المكتب الموسع</string>
     <string name="qs_tile_stay_awake">ابقى متيقض</string>

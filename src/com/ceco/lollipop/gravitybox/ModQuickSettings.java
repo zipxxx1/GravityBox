@@ -879,9 +879,9 @@ public class ModQuickSettings {
                 ssTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(ssTile);
 
-                GravityBoxTile gbTile = new GravityBoxTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                gbTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(gbTile);
+//                GravityBoxTile gbTile = new GravityBoxTile(mContext, mGbContext, mStatusBar, mPanelBar);
+//                gbTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+//                mTiles.add(gbTile);
 
                 CameraTile camTile = new CameraTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 camTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);

@@ -141,12 +141,12 @@
                 android:defaultValue="true" />
 
             <MultiSelectListPreference 
-                android:key="pref_quick_settings2"
+                android:key="pref_quick_settings3"
                 android:title="@string/quick_settings_title"
                 android:summary="@string/quick_settings_summary"
-                android:entries="@array/qs_tile_aosp_entries_kk"
-                android:entryValues="@array/qs_tile_aosp_values_kk"
-                android:defaultValue="@array/qs_tile_aosp_values_kk"
+                android:entries="@array/qs_tile_entries"
+                android:entryValues="@array/qs_tile_values"
+                android:defaultValue="@array/qs_tile_default_values"
                 android:dependency="pref_qs_management_enable" />
 
             <PreferenceScreen 

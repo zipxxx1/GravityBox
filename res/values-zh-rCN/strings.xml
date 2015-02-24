@@ -90,9 +90,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">状态栏快速设置</string>
     <string name="quick_settings_summary">允许在状态栏中显示或隐藏快速设置磁贴</string>
-    <string name="qs_tile_user_profile">用户配置文件</string>
     <string name="qs_tile_airplane_mode">飞行模式</string>
-    <string name="qs_tile_battery">电池状态</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">蓝牙</string>
     <string name="qs_tile_gps">位置信息</string>
@@ -101,25 +99,21 @@
     <string name="qs_tile_mobile_data">移动数据</string>
     <string name="qs_tile_network_mode">网络模式</string>
     <string name="qs_tile_data_usage">数据使用</string>
-    <string name="qs_tile_brightness">亮度</string>
     <string name="qs_tile_autorotation">自动旋转</string>
     <string name="qs_tile_sync">同步</string>
     <string name="qs_tile_wifi_ap">Wi-Fi接入点</string>
-    <string name="qs_tile_torch">手电筒</string>
+    <string name="qs_tile_torch_gb">手电筒</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">睡眠</string>
     <string name="qs_tile_quickrecord">快速录音</string>
-    <string name="qs_tile_settings">设置</string>
     <string name="qs_tile_volume">音量</string>
     <string name="qs_tile_expanded_desktop">扩展桌面</string>
     <string name="qs_tile_stay_awake">保持唤醒</string>
     <string name="qs_tile_screenshot">屏幕截图</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">相机</string>
     <string name="qs_tile_usb_tethering">USB共享</string>
     <string name="qs_tile_music">音乐</string>
     <string name="qs_tile_smart_radio">智能网络</string>
-    <string name="qs_tile_alarm">闹钟</string>
     <string name="qs_tile_lock_screen">锁屏</string>
 
     <!-- Color Picker -->

@@ -160,7 +160,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 //        }
 
         if (lpparam.packageName.equals(ModQsTiles.PACKAGE_NAME)) {
-            ModQsTiles.init(lpparam.classLoader);
+            ModQsTiles.init(prefs, lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(ModStatusbarColor.PACKAGE_NAME)) {

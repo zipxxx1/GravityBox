@@ -90,30 +90,29 @@
         <item>2</item>
     </string-array>
 
-    <string-array name="qs_tile_aosp_entries_kk" translatable="false">
-        <item>@string/qs_tile_user_profile</item>
-        <item>@string/qs_tile_brightness</item>
-        <item>@string/qs_tile_settings</item>
+    <string-array name="qs_tile_entries" translatable="false">
+        <!-- AOSP -->
         <item>@string/qs_tile_wifi</item>
-        <item>@string/qs_tile_mobile_data</item>
+        <item>@string/qs_tile_bluetooth</item>
+        <item>@string/qs_tile_inversion</item>
         <item>@string/qs_tile_data_usage</item>
         <item>@string/qs_tile_data_usage_2</item>
-        <item>@string/qs_tile_autorotation</item>
-        <item>@string/qs_tile_battery</item>
         <item>@string/qs_tile_airplane_mode</item>
-        <item>@string/qs_tile_bluetooth</item>
-        <item>@string/qs_tile_nfc</item>
+        <item>@string/qs_tile_autorotation</item>
+        <item>@string/qs_tile_torch_aosp</item>
         <item>@string/qs_tile_gps</item>
+        <item>@string/qs_tile_remote_display</item>
+        <item>@string/qs_tile_wifi_ap</item>
+        <!-- GB -->
+        <item>@string/qs_tile_nfc</item>
         <item>@string/qs_tile_gps_slimkat</item>
         <item>@string/qs_tile_gps_alt</item>
         <item>@string/qs_tile_ringer_mode</item>
-        <item>@string/qs_tile_audio_profile</item>
         <item>@string/qs_tile_volume</item>
         <item>@string/qs_tile_network_mode</item>
         <item>@string/qs_tile_smart_radio</item>
         <item>@string/qs_tile_sync</item>
-        <item>@string/qs_tile_wifi_ap</item>
-        <item>@string/qs_tile_torch</item>
+        <item>@string/qs_tile_torch_gb</item>
         <item>@string/qs_tile_sleep</item>
         <item>@string/qs_tile_stay_awake</item>
         <item>@string/qs_tile_quickrecord</item>
@@ -122,56 +121,67 @@
         <item>@string/qs_tile_expanded_desktop</item>
         <item>@string/qs_tile_screenshot</item>
         <item>@string/qs_tile_gravitybox</item>
-        <item>@string/qs_tile_camera</item>
         <item>@string/qs_tile_usb_tethering</item>
         <item>@string/qs_tile_music</item>
-        <item>@string/qs_tile_alarm</item>
         <item>@string/qs_tile_lock_screen</item>
         <item>@string/lc_quiet_hours</item>
         <item>@string/qs_tile_compass</item>
-        <item>@string/qs_tile_remote_display</item>
+        <!-- MTK -->
+        <item>@string/qs_tile_mobile_data</item>
+        <item>@string/qs_tile_audio_profile</item>
     </string-array>
 
-    <string-array name="qs_tile_aosp_values_kk" translatable="false">
-        <item>user_textview</item>
-        <item>brightness_textview</item>
-        <item>settings</item>
-        <item>wifi_textview</item>
-        <item>mtk_mobile_data</item>
-        <item>rssi_textview</item>
-        <item>rssi_textview_2</item>
-        <item>auto_rotate_textview</item>
-        <item>battery_textview</item>
-        <item>airplane_mode_textview</item>
-        <item>bluetooth_textview</item>
-        <item>nfc_tileview</item>
-        <item>gps_textview</item>
-        <item>location_tileview</item>
-        <item>gps_tileview</item>
-        <item>ringer_mode_tileview</item>
-        <item>mtk_audio_profile</item>
-        <item>volume_tileview</item>
-        <item>network_mode_tileview</item>
-        <item>smart_radio_tileview</item>
-        <item>sync_tileview</item>
-        <item>wifi_ap_tileview</item>
-        <item>torch_tileview</item>
-        <item>sleep_tileview</item>
-        <item>stay_awake_tileview</item>
-        <item>quickrecord_tileview</item>
-        <item>quickapp_tileview</item>
-        <item>quickapp_tileview_2</item>
-        <item>expanded_tileview</item>
-        <item>screenshot_tileview</item>
-        <item>gravitybox_tileview</item>
-        <item>camera_tileview</item>
-        <item>usb_tether_tileview</item>
-        <item>music_tileview</item>
-        <item>alarm_textview</item>
-        <item>lock_screen_tileview</item>
-        <item>quiet_hours_tileview</item>
-        <item>compass_tileview</item>
-        <item>remote_display_textview</item>
+    <string-array name="qs_tile_values" translatable="false">
+        <!-- AOSP -->
+        <item>aosp_tile_wifi</item>
+        <item>aosp_tile_bluetooth</item>
+        <item>aosp_tile_inversion</item>
+        <item>aosp_tile_cell</item>
+        <item>aosp_tile_cell2</item>
+        <item>aosp_tile_airplane_mode</item>
+        <item>aosp_tile_rotation</item>
+        <item>aosp_tile_torch</item>
+        <item>aosp_tile_location</item>
+        <item>aosp_tile_cast</item>
+        <item>aosp_tile_hotspot</item>
+        <!-- GB -->
+        <item>gb_tile_nfc</item>
+        <item>gb_tile_gps_slimkat</item>
+        <item>gb_tile_gps_alt</item>
+        <item>gb_tile_ringer_mode</item>
+        <item>gb_tile_volume</item>
+        <item>gb_tile_network_mode</item>
+        <item>gb_tile_smart_radio</item>
+        <item>gb_tile_sync</item>
+        <item>gb_tile_torch</item>
+        <item>gb_tile_sleep</item>
+        <item>gb_tile_stay_awake</item>
+        <item>gb_tile_quickrecord</item>
+        <item>gb_tile_quickapp</item>
+        <item>gb_tile_quickapp2</item>
+        <item>gb_tile_expanded_desktop</item>
+        <item>gb_tile_screenshot</item>
+        <item>gb_tile_gravitybox</item>
+        <item>gb_tile_usb_tether</item>
+        <item>gb_tile_music</item>
+        <item>gb_tile_lock_screen</item>
+        <item>gb_tile_quiet_hours</item>
+        <item>gb_tile_compass</item>
+        <!-- MTK -->
+        <item>mtk_tile_mobile_data</item>
+        <item>mtk_tile_audio_profile</item>
+    </string-array>
+
+    <string-array name="qs_tile_default_values" translatable="false">
+        <item>aosp_tile_wifi</item>
+        <item>aosp_tile_bluetooth</item>
+        <item>aosp_tile_cell</item>
+        <item>aosp_tile_airplane_mode</item>
+        <item>aosp_tile_rotation</item>
+        <item>aosp_tile_torch</item>
+        <item>aosp_tile_location</item>
+        <item>aosp_tile_cast</item>
+        <item>aosp_tile_hotspot</item>
     </string-array>
 
     <string-array name="qs_tile_override_entries" translatable="false">

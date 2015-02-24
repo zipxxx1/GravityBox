@@ -85,9 +85,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Επιλογές πλακιδίων QuickSettings</string>
     <string name="quick_settings_summary">Επιτρέπει την εμφάνιση ή απόκρυψη πλακιδίων QuickSettings στη Γραμμή Κατάστασης</string>
-    <string name="qs_tile_user_profile">Προφίλ χρήστη</string>
     <string name="qs_tile_airplane_mode">Λειτουργία πτήσης</string>
-    <string name="qs_tile_battery">Κατάσταση μπαταρίας</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
@@ -95,21 +93,18 @@
     <string name="qs_tile_mobile_data">Δεδομένα</string>
     <string name="qs_tile_network_mode">Λειτουργία δικτύου</string>
     <string name="qs_tile_data_usage">Χρήση δεδομένων</string>
-    <string name="qs_tile_brightness">Φωτεινότητα</string>
     <string name="qs_tile_autorotation">Αυτόματη περιστροφή</string>
     <string name="qs_tile_sync">Συγχρονισμός</string>
     <string name="qs_tile_wifi_ap">Σημείο πρόσβασης Wi-Fi</string>
-    <string name="qs_tile_torch">Φακός</string>
+    <string name="qs_tile_torch_gb">Φακός</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Ύπνος</string>
     <string name="qs_tile_quickrecord">Γρήγορη Εγγραφή</string>
-    <string name="qs_tile_settings">Ρυθμίσεις</string>
     <string name="qs_tile_volume">Ένταση</string>
     <string name="qs_tile_expanded_desktop">Διευρυμένη οθόνη</string>
     <string name="qs_tile_stay_awake">Σε επαγρύπνηση</string>
     <string name="qs_tile_screenshot">Στιγμιότυπο οθόνης</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">Κάμερα</string>
     <string name="qs_tile_usb_tethering">USB Tethering</string>
     <string name="qs_tile_music">Μουσική</string>
 

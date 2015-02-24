@@ -88,9 +88,7 @@
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Caselle QuickSetting</string>
     <string name="quick_settings_summary">Permette di mostrare o nascondere le caselle QuickSetting nella barra di stato</string>
-    <string name="qs_tile_user_profile">Profilo Utente</string>
     <string name="qs_tile_airplane_mode">Modalità Aereo</string>
-    <string name="qs_tile_battery">Stato Batteria</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
@@ -99,25 +97,21 @@
     <string name="qs_tile_mobile_data">Dati Mobili</string>
     <string name="qs_tile_network_mode">Modalità Rete</string>
     <string name="qs_tile_data_usage">Utilizzo Dati</string>
-    <string name="qs_tile_brightness">Luminosità</string>
     <string name="qs_tile_autorotation">Rotazione Automatica</string>
     <string name="qs_tile_sync">Sincronizzazione</string>
     <string name="qs_tile_wifi_ap">Punto d\'accesso Wi-Fi</string>
-    <string name="qs_tile_torch">Torcia</string>
+    <string name="qs_tile_torch_gb">Torcia</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Sospendi dispositivo</string>
     <string name="qs_tile_quickrecord">Registra</string>
-    <string name="qs_tile_settings">Impostazioni</string>
     <string name="qs_tile_volume">Volume</string>
     <string name="qs_tile_expanded_desktop">Desktop Esteso</string>
     <string name="qs_tile_stay_awake">Timeout Display</string>
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">Fotocamera</string>
     <string name="qs_tile_usb_tethering">Tethering USB</string>
     <string name="qs_tile_music">Musica</string>
     <string name="qs_tile_smart_radio">Modem Intelligente</string>
-    <string name="qs_tile_alarm">Sveglia</string>
     <string name="qs_tile_lock_screen">Schermata di blocco</string>
 
     <!-- Color Picker -->

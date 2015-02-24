@@ -83,9 +83,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Statusbar tile</string>
     <string name="quick_settings_summary">Bolehkan tunjuk atau sembunyi quickseeting tile di statusbar</string>
-    <string name="qs_tile_user_profile">Profil pengguna</string>
     <string name="qs_tile_airplane_mode">Mod kapal terbang</string>
-    <string name="qs_tile_battery">Status bateri</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Lokasi</string>
@@ -93,25 +91,21 @@
     <string name="qs_tile_mobile_data">Data telefon</string>
     <string name="qs_tile_network_mode">Jenis rangkaian</string>
     <string name="qs_tile_data_usage">Penggunaan data</string>
-    <string name="qs_tile_brightness">Kecerahan</string>
     <string name="qs_tile_autorotation">Putaran Auto</string>
     <string name="qs_tile_sync">Synchronisasi</string>
     <string name="qs_tile_wifi_ap">Pusat access wifi</string>
-    <string name="qs_tile_torch">Lampu picit</string>
+    <string name="qs_tile_torch_gb">Lampu picit</string>
     <string name="qs_tile_gravitybox">Gravitybox</string>
     <string name="qs_tile_sleep">Tidur</string>
     <string name="qs_tile_quickrecord">Rakaman cepat</string>
-    <string name="qs_tile_settings">Tetapan</string>
     <string name="qs_tile_volume">Volume</string>
     <string name="qs_tile_expanded_desktop">Desktop penuh</string>
     <string name="qs_tile_stay_awake">Kekal terjaga</string>
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">Kamera</string>
     <string name="qs_tile_usb_tethering">Sambungan USB</string>
     <string name="qs_tile_music">Muzik</string>
     <string name="qs_tile_smart_radio">Radio pintar</string>
-    <string name="qs_tile_alarm">Alarm</string>
     <string name="qs_tile_lock_screen">Skrin kunci</string>
 
     <!-- Color Picker -->

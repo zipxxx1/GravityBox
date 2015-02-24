@@ -77,9 +77,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">ステータスバークイック設定タイル</string>
     <string name="quick_settings_summary">ステータスバーにクイック設定タイルを表示するかどうか選択します。</string>
-    <string name="qs_tile_user_profile">プロフィール</string>
     <string name="qs_tile_airplane_mode">機内モード</string>
-    <string name="qs_tile_battery">バッテリー状態</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">位置情報</string>
@@ -88,25 +86,21 @@
     <string name="qs_tile_mobile_data">モバイルデータ</string>
     <string name="qs_tile_network_mode">ネットワークモード</string>
     <string name="qs_tile_data_usage">データ使用</string>
-    <string name="qs_tile_brightness">画面の明るさ</string>
     <string name="qs_tile_autorotation">画面の自動回転</string>
     <string name="qs_tile_sync">自動同期</string>
     <string name="qs_tile_wifi_ap">Wi-Fiアクセスポイント</string>
-    <string name="qs_tile_torch">トーチ</string>
+    <string name="qs_tile_torch_gb">トーチ</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">スリープ</string>
     <string name="qs_tile_quickrecord">クイック録音</string>
-    <string name="qs_tile_settings">設定</string>
     <string name="qs_tile_volume">音量</string>
     <string name="qs_tile_expanded_desktop">拡張デスクトップ</string>
     <string name="qs_tile_stay_awake">画面常時点灯</string>
     <string name="qs_tile_screenshot">スクリーンショット</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">カメラ</string>
     <string name="qs_tile_usb_tethering">USBテザリング</string>
     <string name="qs_tile_music">音楽</string>
     <string name="qs_tile_smart_radio">スマートネットワーク</string>
-    <string name="qs_tile_alarm">アラーム</string>
     <string name="qs_tile_lock_screen">ロック画面</string>
     <!-- Color Picker -->
     <string name="dialog_color_picker">カラーピッカー</string>

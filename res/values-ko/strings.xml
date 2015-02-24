@@ -55,9 +55,7 @@
 
     <string name="quick_settings_title">상단바 퀵세팅 타일</string>
     <string name="quick_settings_summary">상단바에서 퀵세팅 타일들을 활성화하거나 비활성화합니다.</string>
-    <string name="qs_tile_user_profile">사용자 프로파일</string>
     <string name="qs_tile_airplane_mode">비행기 모드</string>
-    <string name="qs_tile_battery">배터리 상태</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">위치</string>
@@ -65,20 +63,17 @@
     <string name="qs_tile_mobile_data">모바일 데이터</string>
     <string name="qs_tile_network_mode">네트워크 모드</string>
     <string name="qs_tile_data_usage">데이터 사용 상태</string>
-    <string name="qs_tile_brightness">밝기</string>
     <string name="qs_tile_autorotation">자동 회전</string>
     <string name="qs_tile_sync">동기화</string>
     <string name="qs_tile_wifi_ap">Wi-Fi 핫스팟</string>
-    <string name="qs_tile_torch">손전등</string>
+    <string name="qs_tile_torch_gb">손전등</string>
     <string name="qs_tile_sleep">화면 잠금 (Lock)</string>
     <string name="qs_tile_quickrecord">빠른 녹음</string>
-    <string name="qs_tile_settings">설정</string>
     <string name="qs_tile_volume">음량</string>
     <string name="qs_tile_expanded_desktop">화면 확장</string>
     <string name="qs_tile_stay_awake">화면 꺼짐</string>
     <string name="qs_tile_screenshot">스크린샷</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">카메라</string>
 
     <string name="dialog_color_picker">색깔 선택</string>
     <string name="press_color_to_apply">색깔을 눌러서 적용합니다.</string>

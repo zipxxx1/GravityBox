@@ -2,10 +2,15 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -22,6 +27,8 @@ public class QsTileEventDistributor {
         void handleSecondaryClick();
         void setListening(boolean listening);
         Object createTileView() throws Throwable;
+        void handleDestroy();
+        void onBrodcastReceived(Context context, Intent intent);
     }
 
     private static void log(String message) {
@@ -37,6 +44,27 @@ public class QsTileEventDistributor {
         mListeners = new LinkedHashMap<String,QsEventListener>();
 
         createHooks();
+        prepareBroadcastReceiver();
+    }
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
+                    l.getValue().onBrodcastReceived(context, intent);
+                }
+            } catch (Throwable t) {
+                log("Error notifying listeners of new broadcast: ");
+                XposedBridge.log(t);
+            }
+        }
+    };
+
+    private void prepareBroadcastReceiver() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
+        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
     }
 
     private void createHooks() {
@@ -117,6 +145,18 @@ public class QsTileEventDistributor {
                             .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
                     if (l != null) {
                         param.setResult(l.createTileView());
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl, "handleDestroy",
+                    new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        l.handleDestroy();
                     }
                 }
             });

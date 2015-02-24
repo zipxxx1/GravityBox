@@ -73,9 +73,7 @@
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Configurações rápidas na barra de status</string>
     <string name="quick_settings_summary">Permite escolher quais configurações rápidas visualizar</string>
-    <string name="qs_tile_user_profile">Perfil do Usuário</string>
     <string name="qs_tile_airplane_mode">Modo Avião</string>
-    <string name="qs_tile_battery">Status da Bateria</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
@@ -83,25 +81,21 @@
     <string name="qs_tile_mobile_data">Dados móveis</string>
     <string name="qs_tile_network_mode">Modo de Rede</string>
     <string name="qs_tile_data_usage">Uso de dados</string>
-    <string name="qs_tile_brightness">Brilho</string>
     <string name="qs_tile_autorotation">Auto rotação</string>
     <string name="qs_tile_sync">Sincronização</string>
     <string name="qs_tile_wifi_ap">Ponto de Acesso Wi-Fi</string>
-    <string name="qs_tile_torch">Lanterna</string>
+    <string name="qs_tile_torch_gb">Lanterna</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Dormir</string>
     <string name="qs_tile_quickrecord">Gravação rápida</string>
-    <string name="qs_tile_settings">Configurações</string>
     <string name="qs_tile_volume">Volume</string>
     <string name="qs_tile_expanded_desktop">Área de trabalho expandida</string>
     <string name="qs_tile_stay_awake">Manter ligado</string>
     <string name="qs_tile_screenshot">Captura de tela</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">Câmera</string>
     <string name="qs_tile_usb_tethering">Tethering USB</string>
     <string name="qs_tile_music">Música</string>
     <string name="qs_tile_smart_radio">Rádio inteligente</string>
-    <string name="qs_tile_alarm">Alarme</string>
     <string name="qs_tile_lock_screen">Bloqueio de tela</string>
 
     <!-- Color Picker -->

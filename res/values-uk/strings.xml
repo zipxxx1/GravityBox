@@ -43,9 +43,7 @@
     <string name="quick_settings_stay_awake_off">Не засинати вимк.</string>
     <string name="quick_settings_title">Іконки швидких налаштувань статусбару</string>
     <string name="quick_settings_summary">Дозволяє вмикати/вимикати іконки швидких налаштувань в статусбаре</string>
-    <string name="qs_tile_user_profile">Профіль користувача</string>
     <string name="qs_tile_airplane_mode">Режим польоту</string>
-    <string name="qs_tile_battery">Заряд батареї</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
@@ -53,15 +51,13 @@
     <string name="qs_tile_mobile_data">Мобільний інтернет</string>
     <string name="qs_tile_network_mode">Режим мережі (2G/3G)</string>
     <string name="qs_tile_data_usage">Передача даних (статистика)</string>
-    <string name="qs_tile_brightness">Яскравість</string>
     <string name="qs_tile_autorotation">Автоповорот</string>
     <string name="qs_tile_sync">Синхронізація</string>
     <string name="qs_tile_wifi_ap">Точка доступу Wi-Fi</string>
-    <string name="qs_tile_torch">Ліхтарик</string>
+    <string name="qs_tile_torch_gb">Ліхтарик</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Сон</string>
     <string name="qs_tile_quickrecord">Швидка запис</string>
-    <string name="qs_tile_settings">Налаштування</string>
     <string name="qs_tile_volume">Звук</string>
     <string name="qs_tile_expanded_desktop">Розширений робочий стіл</string>
     <string name="qs_tile_stay_awake">Не засинати</string>

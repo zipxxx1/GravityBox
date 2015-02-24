@@ -72,8 +72,8 @@ public class TileOrderActivity extends ListActivity {
         mTileAdapter = new TileAdapter(mContext);
         setListAdapter(mTileAdapter);
 
-        String[] allTileKeys = mResources.getStringArray(R.array.qs_tile_aosp_values_kk);
-        String[] allTileNames = mResources.getStringArray(R.array.qs_tile_aosp_entries_kk);
+        String[] allTileKeys = mResources.getStringArray(R.array.qs_tile_values);
+        String[] allTileNames = mResources.getStringArray(R.array.qs_tile_entries);
         mTileTexts = new HashMap<String, String>();
         for (int i = 0; i < allTileKeys.length; i++) {
             mTileTexts.put(allTileKeys[i], allTileNames[i]);

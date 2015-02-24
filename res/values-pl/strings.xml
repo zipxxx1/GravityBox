@@ -73,9 +73,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Kafelki Szybkich Ustawień</string>
     <string name="quick_settings_summary">Pozwala wyświetlić lub ukryć Kafelki Szybkich Ustawień na pasku statusu</string>
-    <string name="qs_tile_user_profile">Profil Użytkownika</string>
     <string name="qs_tile_airplane_mode">Tryb Samolotowy</string>
-    <string name="qs_tile_battery">Stan Baterii</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
@@ -83,25 +81,21 @@
     <string name="qs_tile_mobile_data">Transmisja Danych</string>
     <string name="qs_tile_network_mode">Tryb Sieci</string>
     <string name="qs_tile_data_usage">Użycie Danych</string>
-    <string name="qs_tile_brightness">Jasność</string>
     <string name="qs_tile_autorotation">Auto-Obracanie Ekranu</string>
     <string name="qs_tile_sync">Synchronizacja</string>
     <string name="qs_tile_wifi_ap">Punkt dostępowy Wi-Fi</string>
-    <string name="qs_tile_torch">Latarka</string>
+    <string name="qs_tile_torch_gb">Latarka</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Uśpienie</string>
     <string name="qs_tile_quickrecord">Dyktafon</string>
-    <string name="qs_tile_settings">Ustawienia</string>
     <string name="qs_tile_volume">Głośność</string>
     <string name="qs_tile_expanded_desktop">Rozszerzony Pulpit</string>
     <string name="qs_tile_stay_awake">Blokowanie Uśpienia</string>
     <string name="qs_tile_screenshot">Zrzut Ekranu</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">Aparat</string>
     <string name="qs_tile_usb_tethering">Tethering USB</string>
     <string name="qs_tile_music">Muzyka</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
-    <string name="qs_tile_alarm">Alarm</string>
     <string name="qs_tile_lock_screen">Ekran blokady</string>
 
     <!-- Color Picker -->

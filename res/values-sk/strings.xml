@@ -74,9 +74,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Dlaždice rýchlych nastavení</string>
     <string name="quick_settings_summary">Umožní zobrazenie/skrytie jednotlivých dlaždíc v panely rýchlych nastavení stavového riadku</string>
-    <string name="qs_tile_user_profile">Profil používateľa</string>
     <string name="qs_tile_airplane_mode">Režim v lietadle</string>
-    <string name="qs_tile_battery">Stav batérie</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Poloha</string>
@@ -85,11 +83,10 @@
     <string name="qs_tile_mobile_data">Mobilné dáta</string>
     <string name="qs_tile_network_mode">Typ siete</string>
     <string name="qs_tile_data_usage">Využitie dát</string>
-    <string name="qs_tile_brightness">Jas</string>
     <string name="qs_tile_autorotation">Automatické otáčanie obrazovky</string>
     <string name="qs_tile_sync">Synchronizácia</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Prístupový Bod</string>
-    <string name="qs_tile_torch">Svetlo</string>
+    <string name="qs_tile_torch_gb">Svetlo</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Uspať</string>
     <string name="qs_tile_quickrecord">Rýchly záznam zvuku</string>
@@ -98,11 +95,9 @@
     <string name="qs_tile_stay_awake">Bdenie</string>
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">Fotoaparát</string>
     <string name="qs_tile_usb_tethering">USB prístupový bod</string>
     <string name="qs_tile_music">Hudba</string>
     <string name="qs_tile_smart_radio">Smart Radio</string>
-    <string name="qs_tile_alarm">Budík</string>
     <string name="qs_tile_lock_screen">Obrazovka uzamknutia</string>
 
     <!-- Color Picker -->

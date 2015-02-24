@@ -88,9 +88,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Állapotsáv Gyorsbeállítások csempéi</string>
     <string name="quick_settings_summary">Lehetővé teszi a Gyorsbeállítások csempék elrejtését/mutatását az állapotsávon</string>
-    <string name="qs_tile_user_profile">Felhasználói profil</string>
     <string name="qs_tile_airplane_mode">Repülőgép üzemmód</string>
-    <string name="qs_tile_battery">Akkumulátor státusz</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Helyzetmeghatározás</string>
@@ -99,25 +97,21 @@
     <string name="qs_tile_mobile_data">Mobil adatátvitel</string>
     <string name="qs_tile_network_mode">Hálózati üzemmód</string>
     <string name="qs_tile_data_usage">Adat használat</string>
-    <string name="qs_tile_brightness">Fényerő</string>
     <string name="qs_tile_autorotation">Automatikus elforgatás</string>
     <string name="qs_tile_sync">Szinkronizáció</string>
     <string name="qs_tile_wifi_ap">Wi-Fi hozzáférési pont</string>
-    <string name="qs_tile_torch">Zseblámpa</string>
+    <string name="qs_tile_torch_gb">Zseblámpa</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Alvás</string>
     <string name="qs_tile_quickrecord">Gyors Felvétel</string>
-    <string name="qs_tile_settings">Beállítások</string>
     <string name="qs_tile_volume">Hangerő</string>
     <string name="qs_tile_expanded_desktop">Kiterjesztett asztal</string>
     <string name="qs_tile_stay_awake">Ébrentartás</string>
     <string name="qs_tile_screenshot">Képernyőkép</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">Kamera</string>
     <string name="qs_tile_usb_tethering">USB internetmegosztás</string>
     <string name="qs_tile_music">Zene</string>
     <string name="qs_tile_smart_radio">Okos rádiókapcsolat</string>
-    <string name="qs_tile_alarm">Ébresztő</string>
     <string name="qs_tile_lock_screen">Zárképernyő</string>
 
     <!-- Color Picker -->

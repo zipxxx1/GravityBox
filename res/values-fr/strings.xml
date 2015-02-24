@@ -88,9 +88,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Touches des paramètres rapides</string>
     <string name="quick_settings_summary">Permet d\'afficher ou masquer les touches de paramètres rapides depuis la barre d\'état</string>
-    <string name="qs_tile_user_profile">Profil Utilisateur</string>
     <string name="qs_tile_airplane_mode">Mode Avion</string>
-    <string name="qs_tile_battery">Niveau de Batterie</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Localisation</string>
@@ -99,25 +97,21 @@
     <string name="qs_tile_mobile_data">Connexion de Données</string>
     <string name="qs_tile_network_mode">Mode Réseau</string>
     <string name="qs_tile_data_usage">Consommation de Données</string>
-    <string name="qs_tile_brightness">Luminosité</string>
     <string name="qs_tile_autorotation">Rotation Automatique</string>
     <string name="qs_tile_sync">Synchronisation</string>
     <string name="qs_tile_wifi_ap">Hotspot Wi-Fi</string>
-    <string name="qs_tile_torch">Torche</string>
+    <string name="qs_tile_torch_gb">Torche</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Veille</string>
     <string name="qs_tile_quickrecord">Enregistrement Rapide</string>
-    <string name="qs_tile_settings">Paramètres</string>
     <string name="qs_tile_volume">Volume</string>
     <string name="qs_tile_expanded_desktop">Bureau Étendu</string>
     <string name="qs_tile_stay_awake">Rester Allumé</string>
     <string name="qs_tile_screenshot">Capture d\'Écran</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">Appareil Photo</string>
     <string name="qs_tile_usb_tethering">Partage de Connexion USB</string>
     <string name="qs_tile_music">Musique</string>
     <string name="qs_tile_smart_radio">Ondes Radio Intelligentes</string>
-    <string name="qs_tile_alarm">Alarme</string>
     <string name="qs_tile_lock_screen">Écran de Déverrouillage</string>
 
     <!-- Color Picker -->

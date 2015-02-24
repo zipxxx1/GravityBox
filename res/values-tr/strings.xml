@@ -71,9 +71,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Durum çubuğu HızlıAyarlar kareleri</string>
     <string name="quick_settings_summary">Durum çubuğundaki HızlıAyarlar karelerini göster veya gizle</string>
-    <string name="qs_tile_user_profile">Kullanıcı profili</string>
     <string name="qs_tile_airplane_mode">Uçak modu</string>
-    <string name="qs_tile_battery">Pil durumu</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
@@ -81,15 +79,13 @@
     <string name="qs_tile_mobile_data">Mobil veri</string>
     <string name="qs_tile_network_mode">Ağ modu</string>
     <string name="qs_tile_data_usage">Veri kullanımı</string>
-    <string name="qs_tile_brightness">Parlaklık</string>
     <string name="qs_tile_autorotation">Otomatik döndür</string>
     <string name="qs_tile_sync">Senkronizasyon</string>
     <string name="qs_tile_wifi_ap">Wi-Fi Erişim Noktası</string>
-    <string name="qs_tile_torch">Fener</string>
+    <string name="qs_tile_torch_gb">Fener</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Uyku</string>
     <string name="qs_tile_quickrecord">Hızlı Kaydet</string>
-    <string name="qs_tile_settings">Ayarlar</string>
     <string name="qs_tile_volume">Ses</string>
     <string name="qs_tile_expanded_desktop">Genişletilmiş masaüstü</string>
     <string name="qs_tile_stay_awake">Uyanık kal</string>

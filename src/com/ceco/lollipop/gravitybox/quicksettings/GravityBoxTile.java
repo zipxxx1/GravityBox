@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,40 +19,37 @@ import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
 
-import android.content.Context;
+import de.robv.android.xposed.XSharedPreferences;
 import android.content.Intent;
 import android.view.View;
 
-public class GravityBoxTile extends BasicTile {
+public class GravityBoxTile extends QsTile {
 
-    public GravityBoxTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
-        super(context, gbContext, statusBar, panelBar);
+    public GravityBoxTile(Object host, String key, XSharedPreferences prefs,
+            QsTileEventDistributor eventDistributor) throws Throwable {
+        super(host, key, prefs, eventDistributor);
 
-        mOnClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent();
-                i.setClassName(GravityBox.PACKAGE_NAME, GravityBoxSettings.class.getName());
-                startActivity(i);
-            }
-        };
-
-        mOnLongClick = new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent i = new Intent();
-                i.setClassName(GravityBox.PACKAGE_NAME, TileOrderActivity.class.getName());
-                startActivity(i);
-                return true;
-            }
-        };
-
-        mDrawableId = R.drawable.ic_qs_gravitybox;
-        mLabel = "GravityBox";
+        mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_gravitybox);
+        mState.label = "GravityBox";
     }
 
     @Override
-    protected int onGetLayoutId() {
-        return R.layout.quick_settings_tile_gravity;
+    public void handleUpdateState(Object state, Object arg) {
+        mState.applyTo(state);
+    }
+
+    @Override
+    public void handleClick() {
+        Intent i = new Intent();
+        i.setClassName(GravityBox.PACKAGE_NAME, GravityBoxSettings.class.getName());
+        startSettingsActivity(i);
+    }
+
+    @Override
+    public boolean handleLongClick(View view) {
+        Intent i = new Intent();
+        i.setClassName(GravityBox.PACKAGE_NAME, TileOrderActivity.class.getName());
+        startSettingsActivity(i);
+        return true;
     }
 }

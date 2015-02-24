@@ -90,9 +90,7 @@
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Плитки быстрых настроек</string>
     <string name="quick_settings_summary">Включение/отключение плиток быстрых настроек для панели уведомлений</string>
-    <string name="qs_tile_user_profile">Профиль пользователя</string>
     <string name="qs_tile_airplane_mode">Режим полёта</string>
-    <string name="qs_tile_battery">Состояние батареи</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">Геоданные</string>
@@ -101,25 +99,21 @@
     <string name="qs_tile_mobile_data">Моб. данные</string>
     <string name="qs_tile_network_mode">Режим сети</string>
     <string name="qs_tile_data_usage">Мобильные данные</string>
-    <string name="qs_tile_brightness">Яркость</string>
     <string name="qs_tile_autorotation">Автоповорот</string>
     <string name="qs_tile_sync">Синхронизация</string>
     <string name="qs_tile_wifi_ap">ТД Wi-Fi</string>
-    <string name="qs_tile_torch">Фонарик</string>
+    <string name="qs_tile_torch_gb">Фонарик</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Сон</string>
     <string name="qs_tile_quickrecord">Быстрая запись</string>
-    <string name="qs_tile_settings">Настройки</string>
     <string name="qs_tile_volume">Звук</string>
     <string name="qs_tile_expanded_desktop">Расш. рабочий стол</string>
     <string name="qs_tile_stay_awake">Бодрствование</string>
     <string name="qs_tile_screenshot">Снимок экрана</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">Камера</string>
     <string name="qs_tile_usb_tethering">Раздача по USB</string>
     <string name="qs_tile_music">Музыка</string>
     <string name="qs_tile_smart_radio">Умное радио</string>
-    <string name="qs_tile_alarm">Будильник</string>
     <string name="qs_tile_lock_screen">Экран блокировки</string>
 
     <!-- Color Picker -->
