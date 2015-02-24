@@ -810,12 +810,6 @@ public class ModQuickSettings {
                 }
 
                 if (Utils.hasGPS(mContext)) {
-                    GpsTile gpsTile = new GpsTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    gpsTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                    mTiles.add(gpsTile);
-                }
-
-                if (Utils.hasGPS(mContext)) {
                     LocationTileSlimkat locationTile = new LocationTileSlimkat(mContext, mGbContext, mStatusBar, mPanelBar);
                     locationTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                     mTiles.add(locationTile);

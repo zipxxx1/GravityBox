@@ -50,6 +50,9 @@ public abstract class QsTile implements QsEventListenerGb {
             return new NetworkModeTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_expanded_desktop"))
             return new ExpandedDesktopTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_gps_alt") && Utils.hasGPS(ctx)) {
+            return new GpsTile(host, key, prefs, eventDistributor);
+        }
 
         return null;
     }
@@ -154,6 +157,10 @@ public abstract class QsTile implements QsEventListenerGb {
             log("Error in startSettingsActivity: ");
             XposedBridge.log(t);
         }
+    }
+
+    public void startSettingsActivity(String action) {
+        startSettingsActivity(new Intent(action));
     }
 
     public void collapsePanels() {
