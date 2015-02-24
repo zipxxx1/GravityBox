@@ -2,6 +2,7 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.View;
 
 import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
@@ -19,6 +20,7 @@ public abstract class QsTile implements QsEventListener {
     public static final String CLASS_INTENT_TILE = "com.android.systemui.qs.tiles.IntentTile";
     public static final String CLASS_BASE_TILE = "com.android.systemui.qs.QSTile";
     public static final String CLASS_TILE_STATE = "com.android.systemui.qs.QSTile.State";
+    public static final String CLASS_TILE_VIEW = "com.android.systemui.qs.QSTileView";
 
     protected Object mHost;
     protected Object mTile;
@@ -48,6 +50,7 @@ public abstract class QsTile implements QsEventListener {
 
     public abstract void handleUpdateState(Object state, Object arg);
     public abstract void handleClick();
+    public abstract boolean handleLongClick(View view);
 
     public Object getTile() {
         return mTile;
@@ -71,6 +74,23 @@ public abstract class QsTile implements QsEventListener {
     @Override
     public void setListening(boolean listening) {
         // optional
+    }
+
+    @Override
+    public Object createTileView() throws Throwable {
+        View tileView = (View) XposedHelpers.findConstructorExact(CLASS_TILE_VIEW,
+                mContext.getClassLoader(), Context.class).newInstance(mContext);
+        XposedHelpers.setAdditionalInstanceField(tileView, TILE_KEY_NAME, mKey);
+
+        tileView.setLongClickable(true);
+        tileView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return handleLongClick(v);
+            }
+        });
+
+        return tileView;
     }
 
     public void refreshState() {

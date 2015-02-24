@@ -1,5 +1,7 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import android.view.View;
+
 import com.ceco.lollipop.gravitybox.R;
 
 public class TestTile extends QsTile {
@@ -20,7 +22,7 @@ public class TestTile extends QsTile {
     @Override
     public boolean supportsDualTargets() {
         if (DEBUG) log("Tile " + mKey + ": supportsDualTargets called");
-        return true;
+        return false;
     }
 
     @Override
@@ -36,5 +38,11 @@ public class TestTile extends QsTile {
     @Override
     public void setListening(boolean listening) {
         if (DEBUG) log("Tile " + mKey + ": setListening(" + listening + ") called");
+    }
+
+    @Override
+    public boolean handleLongClick(View view) {
+        if (DEBUG) log("Tile " + mKey + ": handleLongClick called");
+        return true;
     }
 }

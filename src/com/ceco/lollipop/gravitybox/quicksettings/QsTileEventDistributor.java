@@ -21,6 +21,7 @@ public class QsTileEventDistributor {
         void handleClick();
         void handleSecondaryClick();
         void setListening(boolean listening);
+        Object createTileView() throws Throwable;
     }
 
     private static void log(String message) {
@@ -104,6 +105,18 @@ public class QsTileEventDistributor {
                     if (l != null) {
                         l.setListening((boolean)param.args[0]);
                         param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "createTileView",
+                    Context.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        param.setResult(l.createTileView());
                     }
                 }
             });
