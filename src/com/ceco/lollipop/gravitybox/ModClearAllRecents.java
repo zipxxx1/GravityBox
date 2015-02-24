@@ -340,7 +340,7 @@ public class ModClearAllRecents {
                     orientation == Configuration.ORIENTATION_LANDSCAPE && 
                     Utils.isPhoneUI(context)) ? mMarginBottomPx : 0;
             lparams.setMargins(mNavbarLeftHanded ? marginRight : 0, mMarginTopPx,
-                    mNavbarLeftHanded ? marginRight : 0, 0);
+                    !mNavbarLeftHanded ? marginRight : 0, 0);
         } else {
             int gravityForNavbarPosition = mNavbarLeftHanded ? 83 : 85;
             int marginBottom = (orientation == Configuration.ORIENTATION_PORTRAIT || 
@@ -349,7 +349,7 @@ public class ModClearAllRecents {
                     orientation == Configuration.ORIENTATION_LANDSCAPE && 
                     Utils.isPhoneUI(context)) ? mMarginBottomPx : 0;
             lparams.setMargins(mNavbarLeftHanded ? marginRight : 0, 0, 
-                    mNavbarLeftHanded ? marginRight : 0, marginBottom);
+                    !mNavbarLeftHanded ? marginRight : 0, marginBottom);
         }
         mRecentsClearButton.setLayoutParams(lparams);
         if (DEBUG) log("Clear all recents button layout updated");
