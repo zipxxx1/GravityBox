@@ -808,12 +808,6 @@ public class ModQuickSettings {
                     nfcTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                     mTiles.add(nfcTile);
                 }
-
-                if (Utils.hasGPS(mContext)) {
-                    LocationTileSlimkat locationTile = new LocationTileSlimkat(mContext, mGbContext, mStatusBar, mPanelBar);
-                    locationTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                    mTiles.add(locationTile);
-                }
                 
                 RingerModeTile rmTile = new RingerModeTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 rmTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);

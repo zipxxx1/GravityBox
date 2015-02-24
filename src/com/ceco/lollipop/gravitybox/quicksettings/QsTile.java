@@ -50,9 +50,10 @@ public abstract class QsTile implements QsEventListenerGb {
             return new NetworkModeTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_expanded_desktop"))
             return new ExpandedDesktopTile(host, key, prefs, eventDistributor);
-        else if (key.equals("gb_tile_gps_alt") && Utils.hasGPS(ctx)) {
+        else if (key.equals("gb_tile_gps_alt") && Utils.hasGPS(ctx))
             return new GpsTile(host, key, prefs, eventDistributor);
-        }
+        else if (key.equals("gb_tile_gps_slimkat") && Utils.hasGPS(ctx))
+            return new LocationTileSlimkat(host, key, prefs, eventDistributor);
 
         return null;
     }
