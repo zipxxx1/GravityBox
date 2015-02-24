@@ -17,6 +17,7 @@ public abstract class QsTile implements QsEventListener {
     public static final String TILE_KEY_NAME = "gbTileKey";
     public static final String DUMMY_INTENT = "intent(dummy)";
     public static final String CLASS_INTENT_TILE = "com.android.systemui.qs.tiles.IntentTile";
+    public static final String CLASS_BASE_TILE = "com.android.systemui.qs.QSTile";
     public static final String CLASS_TILE_STATE = "com.android.systemui.qs.QSTile.State";
 
     protected Object mHost;
@@ -45,6 +46,9 @@ public abstract class QsTile implements QsEventListener {
         XposedHelpers.setAdditionalInstanceField(mTile, TILE_KEY_NAME, key);
     }
 
+    public abstract void handleUpdateState(Object state, Object arg);
+    public abstract void handleClick();
+
     public Object getTile() {
         return mTile;
     }
@@ -52,6 +56,30 @@ public abstract class QsTile implements QsEventListener {
     @Override
     public String getKey() {
         return mKey;
+    }
+
+    @Override
+    public boolean supportsDualTargets() {
+        return false;
+    }
+
+    @Override
+    public void handleSecondaryClick() {
+        // optional
+    }
+
+    @Override
+    public void setListening(boolean listening) {
+        // optional
+    }
+
+    public void refreshState() {
+        try {
+            XposedHelpers.callMethod(mTile, "refreshState");
+        } catch (Throwable t) {
+            log("Error refreshing tile state: ");
+            XposedBridge.log(t);
+        }
     }
 
     public static class State {

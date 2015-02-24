@@ -16,4 +16,25 @@ public class TestTile extends QsTile {
         mState.applyTo(state);
         if (DEBUG) log("Tile " + mKey + " state updated: " + state);
     }
+
+    @Override
+    public boolean supportsDualTargets() {
+        if (DEBUG) log("Tile " + mKey + ": supportsDualTargets called");
+        return true;
+    }
+
+    @Override
+    public void handleClick() {
+        if (DEBUG) log("Tile " + mKey + ": handleClick called");
+    }
+
+    @Override
+    public void handleSecondaryClick() {
+        if (DEBUG) log("Tile " + mKey + ": handleSecondaryClick called");
+    }
+
+    @Override
+    public void setListening(boolean listening) {
+        if (DEBUG) log("Tile " + mKey + ": setListening(" + listening + ") called");
+    }
 }

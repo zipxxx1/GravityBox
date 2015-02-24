@@ -17,6 +17,10 @@ public class QsTileEventDistributor {
     public interface QsEventListener {
         String getKey();
         void handleUpdateState(Object state, Object arg);
+        boolean supportsDualTargets();
+        void handleClick();
+        void handleSecondaryClick();
+        void setListening(boolean listening);
     }
 
     private static void log(String message) {
@@ -48,6 +52,57 @@ public class QsTileEventDistributor {
                             .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
                     if (l != null) {
                         l.handleUpdateState(param.args[0], param.args[1]);
+                        param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "supportsDualTargets",
+                    new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        param.setResult(l.supportsDualTargets());
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl, "handleClick",
+                    new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        l.handleClick();
+                        param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "handleSecondaryClick",
+                    new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        l.handleSecondaryClick();
+                        param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl, "setListening",
+                    boolean.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        l.setListening((boolean)param.args[0]);
                         param.setResult(null);
                     }
                 }
