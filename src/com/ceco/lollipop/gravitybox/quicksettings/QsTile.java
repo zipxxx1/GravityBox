@@ -8,6 +8,7 @@ import android.view.View;
 import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
+import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListenerGb;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -40,10 +41,15 @@ public abstract class QsTile implements QsEventListenerGb {
 
     public static QsTile create(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
+
+        Context ctx = (Context) XposedHelpers.callMethod(host, "getContext");
+
         if (key.equals("gb_tile_gravitybox"))
             return new GravityBoxTile(host, key, prefs, eventDistributor);
-        else
-            return null;
+        else if (key.equals("gb_tile_network_mode") && !Utils.isWifiOnly(ctx))
+            return new NetworkModeTile(host, key, prefs, eventDistributor);
+
+        return null;
     }
 
     protected QsTile(Object host, String key, XSharedPreferences prefs,

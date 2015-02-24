@@ -829,12 +829,6 @@ public class ModQuickSettings {
                 volTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(volTile);
 
-                if (!Utils.isWifiOnly(mContext)) {
-                    NetworkModeTile nmTile = new NetworkModeTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    nmTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                    mTiles.add(nmTile);
-                }
-
                 SyncTile syncTile = new SyncTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 syncTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(syncTile);
