@@ -133,6 +133,7 @@ public class ModNavigationBar {
         int customKeyPosition;
         boolean visible;
         boolean menuCustomSwapped;
+        ViewGroup menuImeGroup;
     }
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -757,6 +758,16 @@ public class ModNavigationBar {
             }
             mNavbarViewInfo[index].customKeyPosition = searchPosition;
 
+            // find ime switcher and menu group
+            int childCount = mNavbarViewInfo[index].navButtons.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                View child = mNavbarViewInfo[index].navButtons.getChildAt(i);
+                if (child instanceof ViewGroup) {
+                    mNavbarViewInfo[index].menuImeGroup = (ViewGroup)child;
+                    break;
+                }
+            }
+
             // determine app key layout
             LinearLayout.LayoutParams lp = null;
             if (mNavbarViewInfo[index].originalView != null) {
@@ -852,10 +863,19 @@ public class ModNavigationBar {
             final boolean visible = (showMenu || mAlwaysShowMenukey) &&
                     !((disabledFlags & STATUS_BAR_DISABLE_RECENT) != 0);
             int menuResId = mResources.getIdentifier("menu", "id", PACKAGE_NAME);
+            int imeSwitcherResId = mResources.getIdentifier("ime_switcher", "id", PACKAGE_NAME);
             for (int i = 0; i <= 1; i++) {
-                View v = mNavbarViewInfo[i].navButtons.findViewById(menuResId);
+                boolean isImeSwitcherVisible = false;
+                View v = null;
+                if (imeSwitcherResId != 0) {
+                    v = mNavbarViewInfo[i].navButtons.findViewById(imeSwitcherResId);
+                    if (v != null) {
+                        isImeSwitcherVisible = v.getVisibility() == View.VISIBLE;
+                    }
+                }
+                v = mNavbarViewInfo[i].navButtons.findViewById(menuResId);
                 if (v != null) {
-                    v.setVisibility(mDpadKeysVisible ? View.GONE :
+                    v.setVisibility(mDpadKeysVisible || isImeSwitcherVisible ? View.GONE :
                         visible ? View.VISIBLE : View.INVISIBLE);
                 }
             }
@@ -936,7 +956,16 @@ public class ModNavigationBar {
                         setMenuKeyVisibility();
                     }
                 }
-    
+                // Hide view group holding menu/customkey and ime switcher if all children hidden
+                if (mNavbarViewInfo[i].menuImeGroup != null) {
+                    boolean allHidden = true;
+                    for (int j = 0; j < mNavbarViewInfo[i].menuImeGroup.getChildCount(); j++) {
+                        allHidden &= mNavbarViewInfo[i].menuImeGroup.getChildAt(j)
+                                .getVisibility() != View.VISIBLE;
+                    }
+                    mNavbarViewInfo[i].menuImeGroup.setVisibility(
+                            mDpadKeysVisible && allHidden ? View.GONE : View.VISIBLE);
+                }
                 mNavbarViewInfo[i].dpadLeft.setVisibility(mDpadKeysVisible ? View.VISIBLE : View.GONE);
                 mNavbarViewInfo[i].dpadRight.setVisibility(mDpadKeysVisible ? View.VISIBLE : View.GONE);
                 if (DEBUG) log("setDpadKeyVisibility: visible=" + mDpadKeysVisible);
