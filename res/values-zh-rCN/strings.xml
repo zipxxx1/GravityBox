@@ -1735,8 +1735,8 @@
     <string name="battery_percent_text_size_default">默认</string>
 	
 	<!-- Notification ticker -->
-    <string name="pref_cat_statusbar_ticker_title">通知代码</string>
-    <string name="pref_statusbar_ticker_master_switch_summary">开启通知代码及其相关特征(需要重新启动)</string>
+    <string name="pref_cat_statusbar_ticker_title">通知预览</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">开启通知预览及其相关特征(需要重新启动)</string>
 
     <!-- Navigation bar: use larger icons -->
     <string name="pref_navbar_larger_icons_title">使用大图标</string>
