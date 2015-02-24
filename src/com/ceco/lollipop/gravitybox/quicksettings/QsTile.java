@@ -54,6 +54,8 @@ public abstract class QsTile implements QsEventListenerGb {
             return new GpsTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_gps_slimkat") && Utils.hasGPS(ctx))
             return new LocationTileSlimkat(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_lock_screen"))
+            return new LockScreenTile(host, key, prefs, eventDistributor);
 
         return null;
     }

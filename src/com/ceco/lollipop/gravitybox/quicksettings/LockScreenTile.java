@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,6 +17,7 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import com.ceco.lollipop.gravitybox.R;
 
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import android.app.KeyguardManager;
 import android.app.KeyguardManager.KeyguardLock;
@@ -25,53 +26,15 @@ import android.provider.Settings;
 import android.view.View;
 
 @SuppressWarnings("deprecation")
-public class LockScreenTile extends BasicTile {
-    private static final String TAG = "GB:LockScreenTile";
-
+public class LockScreenTile extends QsTile {
     private boolean mLockScreenEnabled;
     private KeyguardLock mKeyguardLock;
 
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
-
-    public LockScreenTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
-        super(context, gbContext, statusBar, panelBar);
-
-        mOnClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleLockscreenState();
-            }
-        };
-
-        mOnLongClick = new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                startActivity(Settings.ACTION_SECURITY_SETTINGS);
-                return true;
-            }
-        };
+    public LockScreenTile(Object host, String key, XSharedPreferences prefs,
+            QsTileEventDistributor eventDistributor) throws Throwable {
+        super(host, key, prefs, eventDistributor);
 
         mLockScreenEnabled = true;
-    }
-
-    @Override
-    protected int onGetLayoutId() {
-        return R.layout.quick_settings_tile_lock_screen;
-    }
-
-    @Override
-    protected synchronized void updateTile() {
-        if (mLockScreenEnabled) {
-            mLabel = mGbContext.getString(R.string.quick_settings_lock_screen_on);
-            mDrawableId = R.drawable.ic_qs_lock_screen_on;
-        } else {
-            mLabel = mGbContext.getString(R.string.quick_settings_lock_screen_off);
-            mDrawableId = R.drawable.ic_qs_lock_screen_off;
-        }
-
-        super.updateTile();
     }
 
     private void toggleLockscreenState() {
@@ -79,7 +42,7 @@ public class LockScreenTile extends BasicTile {
             if (mKeyguardLock == null) {
                 final KeyguardManager kgManager = 
                         (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
-                mKeyguardLock = kgManager.newKeyguardLock(TAG);
+                mKeyguardLock = kgManager.newKeyguardLock(getKey());
             }
             if (mKeyguardLock != null) {
                 mLockScreenEnabled = !mLockScreenEnabled;
@@ -88,10 +51,35 @@ public class LockScreenTile extends BasicTile {
                 } else {
                     mKeyguardLock.disableKeyguard();
                 }
-                updateResources();
+                refreshState();
             }
         } catch (Throwable t) {
-            log("Error toggling lock screen state: " + t.getMessage());
+            log(getKey() + ": Error toggling lock screen state: ");
+            XposedBridge.log(t);
         }
+    }
+
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
+        if (mLockScreenEnabled) {
+            mState.label = mGbContext.getString(R.string.quick_settings_lock_screen_on);
+            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_lock_screen_on);
+        } else {
+            mState.label = mGbContext.getString(R.string.quick_settings_lock_screen_off);
+            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_lock_screen_off);
+        }
+
+        mState.applyTo(state);
+    }
+
+    @Override
+    public void handleClick() {
+        toggleLockscreenState();
+    }
+
+    @Override
+    public boolean handleLongClick(View view) {
+        startSettingsActivity(Settings.ACTION_SECURITY_SETTINGS);
+        return true;
     }
 }

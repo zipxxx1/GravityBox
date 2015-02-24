@@ -869,10 +869,6 @@ public class ModQuickSettings {
                     mTiles.add(srTile);
                 }
 
-                LockScreenTile lsTile = new LockScreenTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                lsTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(lsTile);
-
                 if (SysUiManagers.QuietHoursManager != null) {
                     QuietHoursTile qhTile = new QuietHoursTile(mContext, mGbContext, mStatusBar, mPanelBar);
                     qhTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
