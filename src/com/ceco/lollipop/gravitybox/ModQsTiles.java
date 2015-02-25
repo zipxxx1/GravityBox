@@ -18,7 +18,7 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModQsTiles {
     public static final String PACKAGE_NAME = "com.android.systemui";
     public static final String TAG = "GB:ModQsTile";
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     public static final String CLASS_TILE_HOST = "com.android.systemui.statusbar.phone.QSTileHost";
 

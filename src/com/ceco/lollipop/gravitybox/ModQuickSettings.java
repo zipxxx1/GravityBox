@@ -859,10 +859,6 @@ public class ModQuickSettings {
                 utTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(utTile);
 
-                MusicTile musicTile = new MusicTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                musicTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(musicTile);
-
                 if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false)) {
                     SmartRadioTile srTile = new SmartRadioTile(mContext, mGbContext, mStatusBar, mPanelBar);
                     srTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
