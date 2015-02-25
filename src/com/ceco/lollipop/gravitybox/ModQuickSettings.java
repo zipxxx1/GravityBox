@@ -833,10 +833,6 @@ public class ModQuickSettings {
                 swTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(swTile);
 
-                QuickRecordTile qrTile = new QuickRecordTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                qrTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(qrTile);
-
                 ScreenshotTile ssTile = new ScreenshotTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 ssTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(ssTile);

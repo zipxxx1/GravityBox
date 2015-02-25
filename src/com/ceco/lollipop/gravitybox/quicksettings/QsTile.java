@@ -34,6 +34,7 @@ public abstract class QsTile implements QsEventListenerGb {
     protected Context mGbContext;
     protected XSharedPreferences mPrefs;
     protected QsTileEventDistributor mEventDistributor;
+    protected boolean mSupportsHideOnChange = true;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -64,6 +65,8 @@ public abstract class QsTile implements QsEventListenerGb {
             return new QuickAppTile(host, key, prefs, eventDistributor, 1);
         else if (key.equals("gb_tile_quickapp2"))
             return new QuickAppTile(host, key, prefs, eventDistributor, 2);
+        else if (key.equals("gb_tile_quickrecord"))
+            return new QuickRecordTile(host, key, prefs, eventDistributor);
 
         return null;
     }

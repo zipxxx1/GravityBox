@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,8 +27,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaRecorder;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+import android.os.ResultReceiver;
 import android.util.Log;
 
 import com.ceco.lollipop.gravitybox.R;
@@ -38,6 +40,7 @@ public class RecordingService extends Service {
 
     public static final String ACTION_RECORDING_START = "gravitybox.intent.action.RECORDING_START";
     public static final String ACTION_RECORDING_STOP = "gravitybox.intent.action.RECORDING_STOP";
+    public static final String ACTION_RECORDING_GET_STATUS = "gravitybox.intent.action.RECORDING_GET_STATUS";
     public static final String ACTION_RECORDING_STATUS_CHANGED = "gravitybox.intent.action.RECORDING_STATUS_CHANGED";
     public static final String EXTRA_RECORDING_STATUS = "recordingStatus";
     public static final String EXTRA_STATUS_MESSAGE = "statusMessage";
@@ -91,6 +94,12 @@ public class RecordingService extends Service {
                 return START_STICKY;
             } else if (intent.getAction().equals(ACTION_RECORDING_STOP)) {
                 stopRecording();
+                return START_STICKY;
+            } else if (intent.getAction().equals(ACTION_RECORDING_GET_STATUS)) {
+                ResultReceiver receiver = intent.getParcelableExtra("receiver");
+                Bundle data = new Bundle();
+                data.putInt(EXTRA_RECORDING_STATUS, mRecordingStatus);
+                receiver.send(0, data);
                 return START_STICKY;
             }
         }
