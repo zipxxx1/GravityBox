@@ -802,12 +802,6 @@ public class ModQuickSettings {
 
                 mTiles = new ArrayList<AQuickSettingsTile>();
                 mAllTileViews.clear();
-
-                if (Utils.hasNfc(mContext)) {
-                    NfcTile nfcTile = new NfcTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    nfcTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                    mTiles.add(nfcTile);
-                }
                 
                 RingerModeTile rmTile = new RingerModeTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 rmTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);

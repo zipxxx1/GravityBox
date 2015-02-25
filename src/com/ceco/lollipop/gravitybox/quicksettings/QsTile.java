@@ -58,6 +58,8 @@ public abstract class QsTile implements QsEventListenerGb {
             return new LockScreenTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_music"))
             return new MusicTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_nfc") && Utils.hasNfc(ctx))
+            return new NfcTile(host, key, prefs, eventDistributor);
 
         return null;
     }
