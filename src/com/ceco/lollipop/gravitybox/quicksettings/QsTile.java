@@ -81,6 +81,8 @@ public abstract class QsTile implements QsEventListenerGb {
             return new SmartRadioTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_stay_awake"))
             return new StayAwakeTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_sync"))
+            return new SyncTile(host, key, prefs, eventDistributor);
 
         return null;
     }
