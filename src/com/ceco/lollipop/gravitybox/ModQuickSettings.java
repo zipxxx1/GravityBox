@@ -820,10 +820,6 @@ public class ModQuickSettings {
                     mTiles.add(torchTile);
                 }
 
-                SleepTile sleepTile = new SleepTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                sleepTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(sleepTile);
-
                 StayAwakeTile swTile = new StayAwakeTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 swTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(swTile);

@@ -74,6 +74,8 @@ public abstract class QsTile implements QsEventListenerGb {
             return new QuietHoursTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_screenshot"))
             return new ScreenshotTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_sleep"))
+            return new SleepTile(host, key, prefs, eventDistributor);
 
         return null;
     }
