@@ -9,6 +9,7 @@ import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.Utils;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListenerGb;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -35,6 +36,7 @@ public abstract class QsTile implements QsEventListenerGb {
     protected XSharedPreferences mPrefs;
     protected QsTileEventDistributor mEventDistributor;
     protected boolean mSupportsHideOnChange = true;
+    protected boolean mEnabled;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -67,6 +69,9 @@ public abstract class QsTile implements QsEventListenerGb {
             return new QuickAppTile(host, key, prefs, eventDistributor, 2);
         else if (key.equals("gb_tile_quickrecord"))
             return new QuickRecordTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_quiet_hours") &&
+                SysUiManagers.QuietHoursManager != null)
+            return new QuietHoursTile(host, key, prefs, eventDistributor);
 
         return null;
     }
@@ -98,7 +103,8 @@ public abstract class QsTile implements QsEventListenerGb {
 
     public void initPreferences() {
         String enabledTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ORDER, null);
-        mState.visible = enabledTiles != null && enabledTiles.contains(mKey);
+        mEnabled = enabledTiles != null && enabledTiles.contains(mKey);
+        mState.visible = mEnabled;
     }
 
     public Object getTile() {
@@ -149,7 +155,8 @@ public abstract class QsTile implements QsEventListenerGb {
         if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_PREFS)) {
                 String enabledTiles = intent.getStringExtra(GravityBoxSettings.EXTRA_QS_PREFS);
-                mState.visible = enabledTiles != null && enabledTiles.contains(mKey);
+                mEnabled = enabledTiles != null && enabledTiles.contains(mKey);
+                mState.visible = mEnabled;
             }
         }
     }

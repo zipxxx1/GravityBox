@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,93 +22,47 @@ import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.managers.StatusbarQuietHoursManager.QuietHoursListener;
 
-import android.content.Context;
+import de.robv.android.xposed.XSharedPreferences;
 import android.content.Intent;
 import android.view.View;
 
-public class QuietHoursTile extends BasicTile implements QuietHoursListener {
+public class QuietHoursTile extends QsTile implements QuietHoursListener {
 
     private QuietHours mQh;
 
-    public QuietHoursTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
-        super(context, gbContext, statusBar, panelBar);
-
-        mOnClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleState();
-            }
-        };
-
-        mOnLongClick = new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (mQh != null) {
-                    if (mQh.mode != QuietHours.Mode.AUTO) {
-                        SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.AUTO);
-                    } else {
-                        Intent i = new Intent();
-                        i.setClassName(GravityBox.PACKAGE_NAME, QuietHoursActivity.class.getName());
-                        startActivity(i);
-                    }
-                }
-                return true;
-            }
-        };
-
-        mQh = SysUiManagers.QuietHoursManager.getQuietHours();
+    public QuietHoursTile(Object host, String key, XSharedPreferences prefs,
+            QsTileEventDistributor eventDistributor) throws Throwable {
+        super(host, key, prefs, eventDistributor);
     }
 
     @Override
-    protected int onGetLayoutId() {
-        return R.layout.quick_settings_tile_quiet_hours;
-    }
-
-    @Override
-    protected void onTilePostCreate() {
-        super.onTilePostCreate();
-        SysUiManagers.QuietHoursManager.registerListener(this);
+    public void setListening(boolean listening) {
+        if (listening) {
+            mQh = SysUiManagers.QuietHoursManager.getQuietHours();
+            if (shouldShow()) {
+                SysUiManagers.QuietHoursManager.registerListener(this);
+                if (DEBUG) log(getKey() + ": QuietHours listener registered");
+            }
+        } else {
+            SysUiManagers.QuietHoursManager.unregisterListener(this);
+            if (DEBUG) log(getKey() + ": QuietHours listener unregistered");
+        }
     }
 
     @Override
     public void onQuietHoursChanged() {
         mQh = SysUiManagers.QuietHoursManager.getQuietHours();
-        updateResources();
+        refreshState();
     }
 
     @Override
     public void onTimeTick() {
-        updateResources();
+        refreshState();
     }
 
-    @Override
-    protected synchronized void updateTile() {
-        if (mQh == null) return;
-
-        if (mQh.uncLocked || !mQh.enabled) {
-            mTile.setVisibility(View.GONE);
-            return;
-        } else {
-            mTile.setVisibility(View.VISIBLE);
-        }
-
-        switch (mQh.mode) {
-            case ON: 
-                mLabel = mGbContext.getString(R.string.quick_settings_quiet_hours_on);
-                mDrawableId = R.drawable.ic_qs_quiet_hours_on;
-                break;
-            case OFF:
-                mLabel = mGbContext.getString(R.string.quick_settings_quiet_hours_off);
-                mDrawableId = R.drawable.ic_qs_quiet_hours_off;
-                break;
-            case AUTO:
-                mLabel = mGbContext.getString(R.string.quick_settings_quiet_hours_auto);
-                mDrawableId = mQh.quietHoursActive() ?
-                        R.drawable.ic_qs_quiet_hours_auto_on : R.drawable.ic_qs_quiet_hours_auto_off;
-                break;
-        }
-
-        super.updateTile();
+    private boolean shouldShow() {
+        return (mEnabled && mQh != null &&
+                !mQh.uncLocked && mQh.enabled);
     }
 
     private void toggleState() {
@@ -126,5 +80,49 @@ public class QuietHoursTile extends BasicTile implements QuietHoursListener {
                 SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.ON);
                 break;
         }
+    }
+
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
+        if (mQh == null) return;
+
+        switch (mQh.mode) {
+            case ON: 
+                mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_on);
+                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_on);
+                break;
+            case OFF:
+                mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_off);
+                mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_off);
+                break;
+            case AUTO:
+                mState.label = mGbContext.getString(R.string.quick_settings_quiet_hours_auto);
+                mState.icon = mQh.quietHoursActive() ?
+                        mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_on) : 
+                            mGbContext.getDrawable(R.drawable.ic_qs_quiet_hours_auto_off);
+                break;
+        }
+        mState.visible = shouldShow();
+
+        mState.applyTo(state);
+    }
+
+    @Override
+    public void handleClick() {
+        toggleState();
+    }
+
+    @Override
+    public boolean handleLongClick(View view) {
+        if (mQh != null) {
+            if (mQh.mode != QuietHours.Mode.AUTO) {
+                SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.AUTO);
+            } else {
+                Intent i = new Intent();
+                i.setClassName(GravityBox.PACKAGE_NAME, QuietHoursActivity.class.getName());
+                startSettingsActivity(i);
+            }
+        }
+        return true;
     }
 }

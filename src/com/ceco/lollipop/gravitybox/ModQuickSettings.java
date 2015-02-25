@@ -847,12 +847,6 @@ public class ModQuickSettings {
                     mTiles.add(srTile);
                 }
 
-                if (SysUiManagers.QuietHoursManager != null) {
-                    QuietHoursTile qhTile = new QuietHoursTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    qhTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                    mTiles.add(qhTile);
-                }
-
                 if (Utils.hasCompass(mContext)) {
                     CompassTile cTile = new CompassTile(mContext, mGbContext, mStatusBar, mPanelBar);
                     cTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
