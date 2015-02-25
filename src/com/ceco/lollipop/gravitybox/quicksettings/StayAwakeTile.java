@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +27,6 @@ import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,10 +35,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
 
-public class StayAwakeTile extends BasicTile {
-    private static final String TAG = "GB:StayAwakeTile";
-    private static final boolean DEBUG = false;
-
+public class StayAwakeTile extends QsTile {
     private static final int NEVER_SLEEP = Integer.MAX_VALUE;
     private static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
 
@@ -59,10 +55,6 @@ public class StayAwakeTile extends BasicTile {
     private int mPreviousTimeoutIndex;
     private int mLongestTimeoutIndex;
 
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
-
     private static class ScreenTimeout {
         final int mMillis;
         final int mLabelResId;
@@ -75,76 +67,43 @@ public class StayAwakeTile extends BasicTile {
         }
     }
 
-    public StayAwakeTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
-        super(context, gbContext, statusBar, panelBar);
+    public StayAwakeTile(Object host, String key, XSharedPreferences prefs,
+            QsTileEventDistributor eventDistributor) throws Throwable {
+        super(host, key, prefs, eventDistributor);
 
-        mDrawableId = R.drawable.ic_qs_stayawake_on;
+        mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_stayawake_on);
+        mSettingsObserver = new SettingsObserver(new Handler());
 
-        mOnClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleStayAwake();
-            }
-        };
-
-        mOnLongClick = new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (mLongestTimeoutIndex < 0)
-                    return false;
-                if (Settings.System.getInt(mContext.getContentResolver(),
-                        Settings.System.SCREEN_OFF_TIMEOUT,
-                            FALLBACK_SCREEN_TIMEOUT_VALUE) == SCREEN_TIMEOUT[mLongestTimeoutIndex].mMillis) {
-                    toggleStayAwake(mPreviousTimeoutIndex);
-                } else {
-                    mPreviousTimeoutIndex = mCurrentTimeoutIndex == -1 ?
-                            getIndexFromValue(FALLBACK_SCREEN_TIMEOUT_VALUE) : mCurrentTimeoutIndex;
-                    toggleStayAwake(mLongestTimeoutIndex);
-                }
-                return true;
-            }
-        };
-
-        mCurrentTimeoutIndex = getIndexFromValue(Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE));
-
+        getCurrentState();
         mPreviousTimeoutIndex = mCurrentTimeoutIndex == -1 ||
                 SCREEN_TIMEOUT[mCurrentTimeoutIndex].mMillis == SCREEN_TIMEOUT[mLongestTimeoutIndex].mMillis ?
                         getIndexFromValue(FALLBACK_SCREEN_TIMEOUT_VALUE) : mCurrentTimeoutIndex;
+    }
 
-        if (DEBUG) log("mCurrentTimeoutIndex = " + mCurrentTimeoutIndex +
-                "; mPreviousTimeoutIndex = " + mPreviousTimeoutIndex);
+    private void getCurrentState() {
+        mCurrentTimeoutIndex = getIndexFromValue(Settings.System.getInt(mContext.getContentResolver(), 
+                Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE));
+        if (DEBUG) log(getKey() + ": getCurrentState: mCurrentTimeoutIndex=" + mCurrentTimeoutIndex +
+                "; mPreviousTimeoutIndex=" + mPreviousTimeoutIndex);
     }
 
     @Override
-    protected int onGetLayoutId() {
-        return R.layout.quick_settings_tile_stay_awake;
-    }
-
-    @Override
-    protected void onTilePostCreate() {
-        mSettingsObserver = new SettingsObserver(new Handler());
-        mSettingsObserver.observe();
-
-        super.onTilePostCreate();
-    }
-
-    @Override
-    protected synchronized void updateTile() {
-        if (mCurrentTimeoutIndex == -1) {
-            mLabel = String.format("%ds", TimeUnit.MILLISECONDS.toSeconds(
-                    Settings.System.getInt(mContext.getContentResolver(), 
-                            Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE)));;
+    public void setListening(boolean listening) {
+        if (listening && mEnabled) {
+            getCurrentState();
+            mSettingsObserver.observe();
+            if (DEBUG) log(getKey() + ": observer registered");
         } else {
-            mLabel = mGbContext.getString(SCREEN_TIMEOUT[mCurrentTimeoutIndex].mLabelResId);
+            mSettingsObserver.unobserve();
+            if (DEBUG) log(getKey() + ": observer unregistered");
         }
-
-        super.updateTile();
     }
 
     @Override
-    public void onPreferenceInitialize(XSharedPreferences prefs) {
-        Set<String> smodes = prefs.getStringSet(
+    public void initPreferences() {
+        super.initPreferences();
+
+        Set<String> smodes = mPrefs.getStringSet(
                 GravityBoxSettings.PREF_STAY_AWAKE_TILE_MODE,
                 new HashSet<String>(Arrays.asList(new String[] { "0", "1", "2", "3", "4", "5", "6", "7" })));
         List<String> lmodes = new ArrayList<String>(smodes);
@@ -153,24 +112,20 @@ public class StayAwakeTile extends BasicTile {
         for (int i = 0; i < lmodes.size(); i++) {
             modes[i] = Integer.valueOf(lmodes.get(i));
         }
-        if (DEBUG) log("onPreferenceInitialize: modes=" + modes);
+        if (DEBUG) log(getKey() + ": initPreferences: modes=" + modes);
         updateSettings(modes);
-
-        super.onPreferenceInitialize(prefs);
     }
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
-        if (DEBUG) log("Received broadcast: " + intent.toString());
+        super.onBroadcastReceived(context, intent);
 
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)
                 && intent.hasExtra(GravityBoxSettings.EXTRA_SA_MODE)) {
             int[] modes = intent.getIntArrayExtra(GravityBoxSettings.EXTRA_SA_MODE);
-            if (DEBUG) log("onBroadcastReceived: modes=" + modes);
+            if (DEBUG) log(getKey() + ": onBroadcastReceived: modes=" + modes);
             updateSettings(modes);
         }
-
-        super.onBroadcastReceived(context, intent);
     }
 
     private void updateSettings(int[] modes) {
@@ -219,7 +174,7 @@ public class StayAwakeTile extends BasicTile {
             }
         } while(!SCREEN_TIMEOUT[mCurrentTimeoutIndex].mEnabled &&
                     startIndex != mCurrentTimeoutIndex);
-        if (DEBUG) log("mCurrentTimeoutIndex = " + mCurrentTimeoutIndex);
+        if (DEBUG) log(getKey() + ": mCurrentTimeoutIndex = " + mCurrentTimeoutIndex);
 
         if (startIndex != mCurrentTimeoutIndex) {
             Settings.System.putInt(mContext.getContentResolver(),
@@ -240,8 +195,47 @@ public class StayAwakeTile extends BasicTile {
         return -1;
     }
 
-    class SettingsObserver extends ContentObserver {
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
+        if (mCurrentTimeoutIndex == -1) {
+            mState.label = String.format("%ds", TimeUnit.MILLISECONDS.toSeconds(
+                    Settings.System.getInt(mContext.getContentResolver(), 
+                            Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE)));;
+        } else {
+            mState.label = mGbContext.getString(SCREEN_TIMEOUT[mCurrentTimeoutIndex].mLabelResId);
+        }
 
+        mState.applyTo(state);
+    }
+
+    @Override
+    public void handleClick() {
+        toggleStayAwake();
+    }
+
+    @Override
+    public boolean handleLongClick(View view) {
+        if (mLongestTimeoutIndex < 0)
+            return false;
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREEN_OFF_TIMEOUT,
+                    FALLBACK_SCREEN_TIMEOUT_VALUE) == SCREEN_TIMEOUT[mLongestTimeoutIndex].mMillis) {
+            toggleStayAwake(mPreviousTimeoutIndex);
+        } else {
+            mPreviousTimeoutIndex = mCurrentTimeoutIndex == -1 ?
+                    getIndexFromValue(FALLBACK_SCREEN_TIMEOUT_VALUE) : mCurrentTimeoutIndex;
+            toggleStayAwake(mLongestTimeoutIndex);
+        }
+        return true;
+    }
+
+    @Override
+    public void handleDestroy() {
+        super.handleDestroy();
+        mSettingsObserver = null;
+    }
+
+    class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);
         }
@@ -253,13 +247,15 @@ public class StayAwakeTile extends BasicTile {
                     false, this);
         }
 
+        void unobserve() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.unregisterContentObserver(this);
+        }
+
         @Override
         public void onChange(boolean selfChange) {
-            mCurrentTimeoutIndex = getIndexFromValue(
-                    Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE));
-            if (DEBUG) log("SettingsObserver onChange; mCurrentTimeoutIndex = " + mCurrentTimeoutIndex);
-            updateResources();
+            getCurrentState();
+            refreshState();
         }
     }
 }
