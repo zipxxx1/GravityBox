@@ -42,7 +42,6 @@ import com.ceco.lollipop.gravitybox.quicksettings.NfcTile;
 import com.ceco.lollipop.gravitybox.quicksettings.QuickAppTile;
 import com.ceco.lollipop.gravitybox.quicksettings.QuickRecordTile;
 import com.ceco.lollipop.gravitybox.quicksettings.QuietHoursTile;
-import com.ceco.lollipop.gravitybox.quicksettings.RingerModeTile;
 import com.ceco.lollipop.gravitybox.quicksettings.ScreenshotTile;
 import com.ceco.lollipop.gravitybox.quicksettings.SleepTile;
 import com.ceco.lollipop.gravitybox.quicksettings.SmartRadioTile;
@@ -802,10 +801,6 @@ public class ModQuickSettings {
 
                 mTiles = new ArrayList<AQuickSettingsTile>();
                 mAllTileViews.clear();
-                
-                RingerModeTile rmTile = new RingerModeTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                rmTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(rmTile);
 
                 VolumeTile volTile = new VolumeTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 volTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
