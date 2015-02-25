@@ -60,6 +60,10 @@ public abstract class QsTile implements QsEventListenerGb {
             return new MusicTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_nfc") && Utils.hasNfc(ctx))
             return new NfcTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_quickapp"))
+            return new QuickAppTile(host, key, prefs, eventDistributor, 1);
+        else if (key.equals("gb_tile_quickapp2"))
+            return new QuickAppTile(host, key, prefs, eventDistributor, 2);
 
         return null;
     }

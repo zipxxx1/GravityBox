@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +27,6 @@ import com.ceco.lollipop.gravitybox.preference.AppPickerPreference;
 import com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.app.Dialog;
 import android.content.Context;
@@ -35,6 +34,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -49,13 +49,8 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
-public class QuickAppTile extends BasicTile {
-    private static final String TAG = "GB:QuickAppTile";
-    private static final boolean DEBUG = false;
-
+public class QuickAppTile extends QsTile {
     private static int[] TILEVIEW_ID = new int[] { R.id.quickapp_tileview, R.id.quickapp_tileview_2 };
-    private static int[] LAYOUT_ID = new int[] { 
-        R.layout.quick_settings_tile_quick_app, R.layout.quick_settings_tile_quick_app_2 };
 
     private String KEY_QUICKAPP_DEFAULT = GravityBoxSettings.PREF_KEY_QUICKAPP_DEFAULT;
     private String KEY_QUICKAPP_SLOT1 = GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT1;
@@ -71,10 +66,6 @@ public class QuickAppTile extends BasicTile {
     private Handler mHandler;
     private int mId = 1;
 
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
-
     private final class AppInfo {
         private String mAppName;
         private Drawable mAppIcon;
@@ -82,9 +73,11 @@ public class QuickAppTile extends BasicTile {
         private String mValue;
         private int mResId;
         private Intent mIntent;
+        private Resources mResources;
 
         public AppInfo(int resId) {
             mResId = resId;
+            mResources = mGbContext.getResources();
         }
 
         public int getResId() {
@@ -137,10 +130,10 @@ public class QuickAppTile extends BasicTile {
 
                 Bitmap appIcon = null;
                 final int iconResId = mIntent.getStringExtra("iconResName") != null ?
-                        mGbResources.getIdentifier(mIntent.getStringExtra("iconResName"),
+                        mResources.getIdentifier(mIntent.getStringExtra("iconResName"),
                         "drawable", mGbContext.getPackageName()) : 0;
                 if (iconResId != 0) {
-                    appIcon = Utils.drawableToBitmap(mGbResources.getDrawable(iconResId));
+                    appIcon = Utils.drawableToBitmap(mResources.getDrawable(iconResId));
                 } else {
                     final String appIconPath = mIntent.getStringExtra("icon");
                     if (appIconPath != null) {
@@ -173,12 +166,12 @@ public class QuickAppTile extends BasicTile {
                     scaledIcon = Bitmap.createScaledBitmap(appIcon, sizePxSmall, sizePxSmall, true);
                     mAppIconSmall = new BitmapDrawable(mResources, scaledIcon);
                 }
-                if (DEBUG) log("AppInfo initialized for: " + getAppName());
+                if (DEBUG) log(getKey() + ": AppInfo initialized for: " + getAppName());
             } catch (NameNotFoundException e) {
-                log("App not found: " + mIntent);
+                log(getKey() + ": App not found: " + mIntent);
                 reset();
             } catch (Exception e) {
-                log("Unexpected error: " + e.getMessage());
+                log(getKey() + ": Unexpected error: " + e.getMessage());
                 reset();
             }
         }
@@ -195,14 +188,45 @@ public class QuickAppTile extends BasicTile {
         }
     };
 
-    public QuickAppTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
-        this(context, gbContext, statusBar, panelBar, 1);
+    View.OnClickListener mOnSlotClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mHandler.removeCallbacks(mDismissDialogRunnable);
+            if (mDialog != null && mDialog.isShowing()) {
+                mDialog.dismiss();
+                mDialog = null;
+            }
+
+            AppInfo aiProcessing = null;
+            try {
+                for(AppInfo ai : mAppSlots) {
+                    aiProcessing = ai;
+                    if (v.getId() == ai.getResId()) {
+                        startActivity(ai.getIntent());
+                        return;
+                    }
+                }
+            } catch (Exception e) {
+                log(getKey() + ": Unable to start activity: " + e.getMessage());
+                if (aiProcessing != null) {
+                    aiProcessing.initAppInfo(null);
+                }
+            }
+        }
+    };
+
+    
+    public QuickAppTile(Object host, String key, XSharedPreferences prefs,
+            QsTileEventDistributor eventDistributor) throws Throwable {
+        this(host, key, prefs, eventDistributor, 1);
     }
 
-    public QuickAppTile(Context context, Context gbContext, Object statusBar, Object panelBar, int id) {
-        super(context, gbContext, statusBar, panelBar);
+    public QuickAppTile(Object host, String key, XSharedPreferences prefs,
+            QsTileEventDistributor eventDistributor, int id) throws Throwable {
+        super(host, key, prefs, eventDistributor);
 
         mHandler = new Handler();
+        mPm = mContext.getPackageManager();
 
         mId = id;
         if (mId > 1) {
@@ -214,110 +238,24 @@ public class QuickAppTile extends BasicTile {
             ACTION_PREF_QUICKAPP_CHANGED += "_" + mId;
         }
 
-        mPm = context.getPackageManager();
         mMainApp = new AppInfo(TILEVIEW_ID[mId-1]);
         mAppSlots = new ArrayList<AppInfo>();
         mAppSlots.add(new AppInfo(R.id.quickapp1));
         mAppSlots.add(new AppInfo(R.id.quickapp2));
         mAppSlots.add(new AppInfo(R.id.quickapp3));
         mAppSlots.add(new AppInfo(R.id.quickapp4));
-
-        mOnClick = new View.OnClickListener() {
-            
-            @Override
-            public void onClick(View v) {
-                mHandler.removeCallbacks(mDismissDialogRunnable);
-                if (mDialog != null && mDialog.isShowing()) {
-                    mDialog.dismiss();
-                    mDialog = null;
-                }
-
-                AppInfo aiProcessing = null;
-                try {
-                    for(AppInfo ai : mAppSlots) {
-                        aiProcessing = ai;
-                        if (v.getId() == ai.getResId()) {
-                            startActivity(ai.getIntent());
-                            return;
-                        }
-                    }
-
-                    aiProcessing = null;
-                    startActivity(mMainApp.getIntent());
-                } catch (Exception e) {
-                    log("Unable to start activity: " + e.getMessage());
-                    if (aiProcessing != null) {
-                        aiProcessing.initAppInfo(null);
-                    }
-                }
-            }
-        };
-
-        mOnLongClick = new View.OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(View v) {
-                LayoutInflater inflater = LayoutInflater.from(mGbContext);
-                View appv = inflater.inflate(R.layout.quick_settings_app_dialog, null);
-                int count = 0;
-                AppInfo lastAppInfo = null;
-                for (AppInfo ai : mAppSlots) {
-                    TextView tv = (TextView) appv.findViewById(ai.getResId());
-                    if (ai.getValue() == null) {
-                        tv.setVisibility(View.GONE);
-                        continue;
-                    }
-
-                    tv.setText(ai.getAppName());
-                    tv.setTextSize(1, 10);
-                    tv.setMaxLines(2);
-                    tv.setEllipsize(TruncateAt.END);
-                    tv.setCompoundDrawablesWithIntrinsicBounds(null, ai.getAppIcon(), null, null);
-                    tv.setClickable(true);
-                    tv.setOnClickListener(mOnClick);
-                    count++;
-                    lastAppInfo = ai;
-                }
-
-                if (count == 1) {
-                    try {
-                        startActivity(lastAppInfo.getIntent());
-                    } catch (Throwable t) {
-                        log("Unable to start activity: " + t.getMessage());
-                    }
-                } else if (count > 1) {
-                    mDialog = new Dialog(mContext);
-                    mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    mDialog.setContentView(appv);
-                    mDialog.setCanceledOnTouchOutside(true);
-                    mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL);
-                    int pf = XposedHelpers.getIntField(mDialog.getWindow().getAttributes(), "privateFlags");
-                    pf |= 0x00000010;
-                    XposedHelpers.setIntField(mDialog.getWindow().getAttributes(), "privateFlags", pf);
-                    mDialog.getWindow().clearFlags(LayoutParams.FLAG_DIM_BEHIND);
-                    mDialog.show();
-                    mHandler.removeCallbacks(mDismissDialogRunnable);
-                    mHandler.postDelayed(mDismissDialogRunnable, 4000);
-                }
-                return true;
-            }
-        };
+        updateMainApp(mPrefs.getString(KEY_QUICKAPP_DEFAULT, null));
+        updateSubApp(0, mPrefs.getString(KEY_QUICKAPP_SLOT1, null));
+        updateSubApp(1, mPrefs.getString(KEY_QUICKAPP_SLOT2, null));
+        updateSubApp(2, mPrefs.getString(KEY_QUICKAPP_SLOT3, null));
+        updateSubApp(3, mPrefs.getString(KEY_QUICKAPP_SLOT4, null));
     }
 
-    @Override
-    protected int onGetLayoutId() {
-        return LAYOUT_ID[mId-1];
-    }
-
-    @Override
-    protected synchronized void updateTile() {
-        mLabel = mMainApp.getAppName();
-        mTextView.setText(mLabel);
-        mImageView.setImageDrawable(mMainApp.getAppIconSmall());
-    }
-
-    @Override
-    protected void startActivity(Intent intent) {
+    private void startActivity(Intent intent) {
+        if (intent == null) {
+            if (DEBUG) log(getKey() + ": startActivity called with null intent");
+            return;
+        }
         // if intent is a GB action of broadcast type, handle it directly here
         if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
             Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
@@ -325,23 +263,14 @@ public class QuickAppTile extends BasicTile {
             mContext.sendBroadcast(newIntent);
         // otherwise let super class handle it
         } else {
-            super.startActivity(intent);
+            startSettingsActivity(intent);
         }
-    }
-
-    @Override
-    protected void onPreferenceInitialize(XSharedPreferences prefs) {
-        updateMainApp(prefs.getString(KEY_QUICKAPP_DEFAULT, null));
-        updateSubApp(0, prefs.getString(KEY_QUICKAPP_SLOT1, null));
-        updateSubApp(1, prefs.getString(KEY_QUICKAPP_SLOT2, null));
-        updateSubApp(2, prefs.getString(KEY_QUICKAPP_SLOT3, null));
-        updateSubApp(3, prefs.getString(KEY_QUICKAPP_SLOT4, null));
     }
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         super.onBroadcastReceived(context, intent);
-        if (DEBUG) log("onBroadcastReceived: " + intent.toString());
+        if (DEBUG) log(getKey() + ": onBroadcastReceived: " + intent.toString());
 
         if (intent.getAction().equals(ACTION_PREF_QUICKAPP_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QUICKAPP_DEFAULT)) {
@@ -359,8 +288,6 @@ public class QuickAppTile extends BasicTile {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QUICKAPP_SLOT4)) {
                 updateSubApp(3, intent.getStringExtra(GravityBoxSettings.EXTRA_QUICKAPP_SLOT4));
             }
-
-            updateResources();
         }
     }
 
@@ -376,5 +303,68 @@ public class QuickAppTile extends BasicTile {
         if (ai.getValue() == null || !ai.getValue().equals(value)) {
             ai.initAppInfo(value);
         }
+    }
+
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
+        mState.label = mMainApp.getAppName();
+        mState.icon = mMainApp.getAppIconSmall();
+        mState.applyTo(state);
+    }
+
+    @Override
+    public void handleClick() {
+        try {
+            startActivity(mMainApp.getIntent());
+        } catch (Exception e) {
+            log(getKey() + ": Unable to start activity: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean handleLongClick(View view) {
+        LayoutInflater inflater = LayoutInflater.from(mGbContext);
+        View appv = inflater.inflate(R.layout.quick_settings_app_dialog, null);
+        int count = 0;
+        AppInfo lastAppInfo = null;
+        for (AppInfo ai : mAppSlots) {
+            TextView tv = (TextView) appv.findViewById(ai.getResId());
+            if (ai.getValue() == null) {
+                tv.setVisibility(View.GONE);
+                continue;
+            }
+
+            tv.setText(ai.getAppName());
+            tv.setTextSize(1, 10);
+            tv.setMaxLines(2);
+            tv.setEllipsize(TruncateAt.END);
+            tv.setCompoundDrawablesWithIntrinsicBounds(null, ai.getAppIcon(), null, null);
+            tv.setClickable(true);
+            tv.setOnClickListener(mOnSlotClick);
+            count++;
+            lastAppInfo = ai;
+        }
+
+        if (count == 1) {
+            try {
+                startActivity(lastAppInfo.getIntent());
+            } catch (Throwable t) {
+                log(getKey() + ": Unable to start activity: " + t.getMessage());
+            }
+        } else if (count > 1) {
+            mDialog = new Dialog(mContext, android.R.style.Theme_Material_Dialog_NoActionBar);
+            mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mDialog.setContentView(appv);
+            mDialog.setCanceledOnTouchOutside(true);
+            mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL);
+            int pf = XposedHelpers.getIntField(mDialog.getWindow().getAttributes(), "privateFlags");
+            pf |= 0x00000010;
+            XposedHelpers.setIntField(mDialog.getWindow().getAttributes(), "privateFlags", pf);
+            mDialog.getWindow().clearFlags(LayoutParams.FLAG_DIM_BEHIND);
+            mDialog.show();
+            mHandler.removeCallbacks(mDismissDialogRunnable);
+            mHandler.postDelayed(mDismissDialogRunnable, 4000);
+        }
+        return true;
     }
 }
