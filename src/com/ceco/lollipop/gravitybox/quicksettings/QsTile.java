@@ -76,6 +76,9 @@ public abstract class QsTile implements QsEventListenerGb {
             return new ScreenshotTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_sleep"))
             return new SleepTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_smart_radio") && prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false))
+            return new SmartRadioTile(host, key, prefs, eventDistributor);
 
         return null;
     }

@@ -828,12 +828,6 @@ public class ModQuickSettings {
                 utTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(utTile);
 
-                if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false)) {
-                    SmartRadioTile srTile = new SmartRadioTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    srTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                    mTiles.add(srTile);
-                }
-
                 if (Utils.hasCompass(mContext)) {
                     CompassTile cTile = new CompassTile(mContext, mGbContext, mStatusBar, mPanelBar);
                     cTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);

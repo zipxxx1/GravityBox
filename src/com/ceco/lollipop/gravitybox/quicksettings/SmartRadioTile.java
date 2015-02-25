@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,63 +18,79 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 import com.ceco.lollipop.gravitybox.ModSmartRadio;
 import com.ceco.lollipop.gravitybox.R;
 
+import de.robv.android.xposed.XSharedPreferences;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
 
-public class SmartRadioTile extends BasicTile {
+public class SmartRadioTile extends QsTile {
 
     private boolean mSmartRadioEnabled;
     private ModSmartRadio.State mSmartRadioState;
     private SettingsObserver mSettingsObserver;
 
-    public SmartRadioTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
-        super(context, gbContext, statusBar, panelBar);
+    public SmartRadioTile(Object host, String key, XSharedPreferences prefs,
+            QsTileEventDistributor eventDistributor) throws Throwable {
+        super(host, key, prefs, eventDistributor);
 
-        mOnClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ModSmartRadio.ACTION_TOGGLE_SMART_RADIO);
-                mContext.sendBroadcast(i);
-            }
-        };
-    }
-
-    @Override
-    protected int onGetLayoutId() {
-        return R.layout.quick_settings_tile_smart_radio;
-    }
-
-    @Override
-    protected void onTilePostCreate() {
         mSettingsObserver = new SettingsObserver(new Handler());
-        mSettingsObserver.observe();
-
-        super.onTilePostCreate();
     }
 
     @Override
-    protected synchronized void updateTile() {
+    public void setListening(boolean listening) {
+        if (listening && mEnabled) {
+            getCurrentState();
+            mSettingsObserver.observe();
+            if (DEBUG) log(getKey() + ": observer registered");
+        } else {
+            mSettingsObserver.unobserve();
+            if (DEBUG) log(getKey() + ": observer unregistered");
+        }
+    }
+
+    private void getCurrentState() {
         mSmartRadioEnabled = Settings.System.getInt(mContext.getContentResolver(),
                 ModSmartRadio.SETTING_SMART_RADIO_ENABLED, 1) == 1;
         String state = Settings.System.getString(mContext.getContentResolver(), 
                 ModSmartRadio.SETTING_SMART_RADIO_STATE);
         mSmartRadioState = ModSmartRadio.State.valueOf(state == null ? "UNKNOWN" : state);
+        if (DEBUG) log(getKey() + ": getCurrentState: mSmartRadioEnabled=" + mSmartRadioEnabled +
+                "; mSmartRadioState=" + mSmartRadioState);
+    }
 
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
         if (mSmartRadioEnabled) {
-            mLabel = mGbContext.getString(R.string.quick_settings_smart_radio_on);
-            mDrawableId = mSmartRadioState == ModSmartRadio.State.POWER_SAVING ?
-                    R.drawable.ic_qs_smart_radio_on : R.drawable.ic_qs_smart_radio_on_normal;
+            mState.label = mGbContext.getString(R.string.quick_settings_smart_radio_on);
+            mState.icon = mSmartRadioState == ModSmartRadio.State.POWER_SAVING ?
+                    mGbContext.getDrawable(R.drawable.ic_qs_smart_radio_on) : 
+                        mGbContext.getDrawable(R.drawable.ic_qs_smart_radio_on_normal);
         } else {
-            mLabel = mGbContext.getString(R.string.quick_settings_smart_radio_off);
-            mDrawableId = R.drawable.ic_qs_smart_radio_off;
+            mState.label = mGbContext.getString(R.string.quick_settings_smart_radio_off);
+            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_smart_radio_off);
         }
 
-        super.updateTile();
+        mState.applyTo(state);
+    }
+
+    @Override
+    public void handleClick() {
+        Intent i = new Intent(ModSmartRadio.ACTION_TOGGLE_SMART_RADIO);
+        mContext.sendBroadcast(i);
+    }
+
+    @Override
+    public boolean handleLongClick(View view) {
+        return false;
+    }
+
+    @Override
+    public void handleDestroy() {
+        super.handleDestroy();
+        mSettingsObserver = null;
     }
 
     class SettingsObserver extends ContentObserver {
@@ -90,9 +106,16 @@ public class SmartRadioTile extends BasicTile {
                    ModSmartRadio.SETTING_SMART_RADIO_STATE), false, this);
         }
 
+        public void unobserve() {
+            ContentResolver cr = mContext.getContentResolver();
+            cr.unregisterContentObserver(this);
+        }
+
         @Override 
         public void onChange(boolean selfChange) {
-            updateResources();
+            getCurrentState();
+            refreshState();
+            if (DEBUG) log(getKey() + ": refreshState called");
         }
-    } 
+    }
 }
