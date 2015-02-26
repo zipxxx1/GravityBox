@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2014 The CyanogenMod Project
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 The CyanogenMod Project
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,93 +18,120 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import com.ceco.lollipop.gravitybox.R;
 
+import de.robv.android.xposed.XSharedPreferences;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Handler;
-import android.os.Message;
-import android.view.Surface;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 
-public class CompassTile extends BasicTile implements SensorEventListener {
-
+public class CompassTile extends QsTile implements SensorEventListener {
     private final static float ALPHA = 0.97f;
-    private final static int MSG_UPDATE_COMPASS = 1;
-    private final static int COMPASS_TILE_UPDATE_INTERVAL = 100;
 
     private boolean mActive = false;
-    private float mDegree = 0f;
-    private float mCurrentAnimationDegree = 0f;
-    private WindowManager mWindowManager;
+    private Float mNewDegree;
+
     private SensorManager mSensorManager;
     private Sensor mAccelerationSensor;
     private Sensor mGeomagneticFieldSensor;
+
     private float[] mAcceleration;
     private float[] mGeomagnetic;
 
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == MSG_UPDATE_COMPASS) {
-                updateCompassTile();
-            }
-        }
-    };
+    private ImageView mImage;
+    private boolean mListeningSensors;
 
-    public CompassTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
-        super(context, gbContext, statusBar, panelBar);
+    public CompassTile(Object host, String key, XSharedPreferences prefs,
+            QsTileEventDistributor eventDistributor) throws Throwable {
+        super(host, key, prefs, eventDistributor);
 
-        mOnClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mActive = !mActive;
-                updateResources();
-            }
-        };
-
-        mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         mAccelerationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mGeomagneticFieldSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        mSupportsHideOnChange = false;
     }
 
     @Override
-    protected int onGetLayoutId() {
-        return R.layout.quick_settings_tile_compass;
+    public void handleDestroy() {
+        super.handleDestroy();
+        setListeningSensors(false);
+        mSensorManager = null;
+        mImage = null;
     }
 
     @Override
-    protected synchronized void updateTile() {
-        if (mActive) {
-            mDrawableId = R.drawable.ic_qs_compass_on;
-            mLabel = mGbContext.getString(R.string.quick_settings_compass_init);
+    public void onCreateTileView(View tileView) throws Throwable {
+        super.onCreateTileView(tileView);
 
-            // Register listeners
+        mImage = (ImageView) tileView.findViewById(android.R.id.icon);
+    }
+
+    @Override
+    public void handleClick() {
+        mActive = !mActive;
+        refreshState();
+        setListeningSensors(mActive);
+    }
+
+    @Override
+    public boolean handleLongClick(View view) {
+        return false;
+    }
+
+    private void setListeningSensors(boolean listening) {
+        if (listening == mListeningSensors) return;
+        mListeningSensors = listening;
+        if (mListeningSensors) {
             mSensorManager.registerListener(
                     this, mAccelerationSensor, SensorManager.SENSOR_DELAY_GAME);
             mSensorManager.registerListener(
                     this, mGeomagneticFieldSensor, SensorManager.SENSOR_DELAY_GAME);
         } else {
-            mDrawableId = R.drawable.ic_qs_compass_off;
-            mLabel = mGbContext.getString(R.string.quick_settings_compass_off);
-
-            // Reset rotation of the ImageView
-            mCurrentAnimationDegree = 0;
-            mImageView.setAnimation(null);
-            mImageView.setRotation(0);
-
-            // Remove listeners
             mSensorManager.unregisterListener(this);
-            mHandler.removeMessages(MSG_UPDATE_COMPASS);
+        }
+    }
+
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
+        if (mActive) {
+            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_compass_on);
+            if (mNewDegree != null) {
+                mState.label = formatValueWithCardinalDirection(mNewDegree);
+
+                float target = 360 - mNewDegree;
+                float relative = target - mImage.getRotation();
+                if (relative > 180) relative -= 360;
+
+                mImage.setRotation(mImage.getRotation() + relative / 2);
+            } else {
+                mState.label = mGbContext.getString(R.string.quick_settings_compass_init);
+                mImage.setRotation(0);
+            }
+        } else {
+            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_compass_off);
+            mState.label = mGbContext.getString(R.string.quick_settings_compass_off);
+            mImage.setRotation(0);
         }
 
-        super.updateTile();
+        mState.applyTo(state);
+    }
+
+    @Override
+    public void setListening(boolean listening) {
+        if (!listening) {
+            setListeningSensors(false);
+            mActive = false;
+        }
+    }
+
+    private String formatValueWithCardinalDirection(float degree) {
+        int cardinalDirectionIndex = (int) (Math.floor(((degree - 22.5) % 360) / 45) + 1) % 8;
+        String[] cardinalDirections = mGbContext.getResources().getStringArray(
+                R.array.cardinal_directions);
+
+        return mGbContext.getString(R.string.quick_settings_compass_value, degree,
+                cardinalDirections[cardinalDirectionIndex]);
     }
 
     @Override
@@ -127,7 +154,7 @@ public class CompassTile extends BasicTile implements SensorEventListener {
             values[i] = ALPHA * values[i] + (1 - ALPHA) * event.values[i];
         }
 
-        if (!mActive || mAcceleration == null || mGeomagnetic == null) {
+        if (!mActive || !mListeningSensors || mAcceleration == null || mGeomagnetic == null) {
             // Nothing to do at this moment
             return;
         }
@@ -144,63 +171,14 @@ public class CompassTile extends BasicTile implements SensorEventListener {
         SensorManager.getOrientation(R, orientation);
 
         // Convert azimuth to degrees
-        float newDegree = (float) Math.toDegrees(orientation[0]);
-        newDegree = (newDegree + 360) % 360;
-        if (mDegree != newDegree && !mHandler.hasMessages(MSG_UPDATE_COMPASS)) {
-            mHandler.sendEmptyMessageDelayed(MSG_UPDATE_COMPASS, COMPASS_TILE_UPDATE_INTERVAL);
-        }
+        mNewDegree = Float.valueOf((float) Math.toDegrees(orientation[0]));
+        mNewDegree = (mNewDegree + 360) % 360;
 
-        mDegree = newDegree;
+        refreshState();
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) { }
-
-    private void updateCompassTile() {
-        // Set rotation in degrees as tile title
-        mTextView.setText(formatValueWithCardinalDirection(mDegree));
-
-        // Make arrow always point to north
-        float animationDegrees = getBaseDegree() - mDegree;
-
-        // Use the shortest animation path between last and new angle
-        if (animationDegrees - mCurrentAnimationDegree > 180) {
-            animationDegrees -= 360f;
-        } else if (animationDegrees - mCurrentAnimationDegree < -180) {
-            animationDegrees += 360f;
-        }
-
-        // Create a rotation animation
-        RotateAnimation rotateAnimation = new RotateAnimation(mCurrentAnimationDegree,
-                animationDegrees, Animation.RELATIVE_TO_SELF,
-                0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-
-        // Set animation properties
-        float duration = (Math.abs(animationDegrees - mCurrentAnimationDegree) % 360) * 2;
-        rotateAnimation.setDuration((int) duration);
-        rotateAnimation.setFillAfter(true);
-
-        // Start the animation
-        mImageView.startAnimation(rotateAnimation);
-        mCurrentAnimationDegree = animationDegrees;
-    }
-
-    private float getBaseDegree() {
-        switch (mWindowManager.getDefaultDisplay().getRotation()) {
-            default:
-            case Surface.ROTATION_0: return 360f;
-            case Surface.ROTATION_90: return 270f;
-            case Surface.ROTATION_180: return 180f;
-            case Surface.ROTATION_270: return 90f;
-        }
-    }
-
-    private String formatValueWithCardinalDirection(float degree) {
-        int cardinalDirectionIndex = (int) (Math.floor(((degree - 22.5) % 360) / 45) + 1) % 8;
-        String[] cardinalDirections = mGbResources.getStringArray(
-                R.array.cardinal_directions);
-
-        return mGbContext.getString(R.string.quick_settings_compass_value, degree,
-                cardinalDirections[cardinalDirectionIndex]);
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // noop
     }
 }

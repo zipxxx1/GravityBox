@@ -87,6 +87,8 @@ public abstract class QsTile implements QsEventListenerGb {
             return new TorchTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_volume"))
             return new VolumeTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_compass") && Utils.hasCompass(ctx))
+            return new CompassTile(host, key, prefs, eventDistributor);
 
         return null;
     }

@@ -806,12 +806,6 @@ public class ModQuickSettings {
                 wifiApTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(wifiApTile);
 
-                if (Utils.hasCompass(mContext)) {
-                    CompassTile cTile = new CompassTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    cTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                    mTiles.add(cTile);
-                }
-
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {
                     mBroadcastSubReceivers.add(t);
