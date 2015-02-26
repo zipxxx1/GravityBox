@@ -85,6 +85,8 @@ public abstract class QsTile implements QsEventListenerGb {
             return new SyncTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_torch") && Utils.hasFlash(ctx))
             return new TorchTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_volume"))
+            return new VolumeTile(host, key, prefs, eventDistributor);
 
         return null;
     }

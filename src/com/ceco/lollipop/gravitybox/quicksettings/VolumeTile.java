@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,42 +17,36 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import com.ceco.lollipop.gravitybox.R;
 
-import de.robv.android.xposed.XposedHelpers;
-
+import de.robv.android.xposed.XSharedPreferences;
 import android.content.Context;
 import android.media.AudioManager;
 import android.view.View;
 
-public class VolumeTile extends BasicTile {
+public class VolumeTile extends QsTile {
 
-    public VolumeTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
-        super(context, gbContext, statusBar, panelBar);
+    public VolumeTile(Object host, String key, XSharedPreferences prefs,
+            QsTileEventDistributor eventDistributor) throws Throwable {
+        super(host, key, prefs, eventDistributor);
 
-        mOnClick = new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
-                AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-                am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
-            }
-        };
-
-        mOnLongClick = new View.OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(View v) {
-                startActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
-                return true;
-            }
-        };
-
-        mDrawableId = R.drawable.ic_qs_volume;
-        mLabel = mGbContext.getString(R.string.qs_tile_volume);
+        mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_volume);
+        mState.label = mGbContext.getString(R.string.qs_tile_volume);
     }
 
     @Override
-    protected int onGetLayoutId() {
-        return R.layout.quick_settings_tile_volume;
+    public void handleUpdateState(Object state, Object arg) {
+        mState.applyTo(state);
+    }
+
+    @Override
+    public void handleClick() {
+        collapsePanels();
+        AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
+    }
+
+    @Override
+    public boolean handleLongClick(View view) {
+        startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
+        return true;
     }
 }

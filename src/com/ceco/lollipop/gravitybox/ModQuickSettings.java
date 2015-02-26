@@ -802,10 +802,6 @@ public class ModQuickSettings {
                 mTiles = new ArrayList<AQuickSettingsTile>();
                 mAllTileViews.clear();
 
-                VolumeTile volTile = new VolumeTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                volTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(volTile);
-
                 WifiApTile wifiApTile = new WifiApTile(mContext, mGbContext, mStatusBar, mPanelBar, mWifiManager);
                 wifiApTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(wifiApTile);
