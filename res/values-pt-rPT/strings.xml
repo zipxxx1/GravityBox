@@ -1357,9 +1357,6 @@
     <!-- Navbar custom key: alternate icon -->
     <string name="pref_navbar_custom_key_icon_title">Usar ícone alternativo</string>
 
-    <!-- QS: swipe to Quick Settings -->
-    <string name="pref_qs_swipe_enable_title">Deslizar para definições rápidas</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">Ignorar disponibilidade de dados móveis</string>
     <string name="pref_smart_radio_mda_ignore_summary">Comuta para o modo normal mesmo quando a ligação de dados móveis está indisponível</string>

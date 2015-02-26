@@ -1364,9 +1364,6 @@
     <!-- Navbar custom key: alternate icon -->
     <string name="pref_navbar_custom_key_icon_title">使用另一款圖示</string>
 
-    <!-- QS: swipe to Quick Settings -->
-    <string name="pref_qs_swipe_enable_title">滑動到快速設定頁</string>
-
     <!-- Smart Radio: ignore mobile data availability -->
     <string name="pref_smart_radio_mda_ignore_title">忽略流動數據可用性</string>
     <string name="pref_smart_radio_mda_ignore_summary">即使無法使用流動數據，亦會恢復正常模式</string>
