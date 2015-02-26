@@ -1843,4 +1843,20 @@
     <string name="pref_battery_bar_centered_title">Wycentrowany</string>
     <string name="pref_battery_bar_color_charging_title">Kolor ładowania</string>
 
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Tryb</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animowany</string>
+    <string name="pref_statusbar_download_progress_centered_title">Wycentrowany</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Grubość</string>
+    <string name="pref_statusbar_download_progress_margin_title">Margines krawędzi</string>
+
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">Akcja pojedynczego kliknięcia MENU</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">Akcja pojedynczego kliknięcia BACK</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">Akcja podwójnego przyciśnięcia klawisza ostatnich aplikacji</string>
+
 </resources>
