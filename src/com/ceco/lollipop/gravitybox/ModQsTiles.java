@@ -2,6 +2,8 @@ package com.ceco.lollipop.gravitybox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -9,6 +11,7 @@ import java.util.Map.Entry;
 import com.ceco.lollipop.gravitybox.quicksettings.AospTile;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTile;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor;
+import com.ceco.lollipop.gravitybox.quicksettings.TileOrderActivity;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -62,19 +65,38 @@ public class ModQsTiles {
             XposedHelpers.findAndHookMethod(classTileHost, "recreateTiles", new XC_MethodHook() {
                 @SuppressWarnings("unchecked")
                 @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mEventDistributor != null) {
+                        Map<String, Object> tileMap = (Map<String, Object>)
+                                XposedHelpers.getObjectField(param.thisObject, "mTiles");
+                        for (Entry<String,Object> entry : tileMap.entrySet()) {
+                            XposedHelpers.callMethod(entry.getValue(), "destroy");
+                        }
+                        tileMap.clear();
+                    }
+                    param.setObjectExtra("callback", XposedHelpers.getObjectField(
+                           param.thisObject, "mCallback"));
+                    XposedHelpers.setObjectField(param.thisObject, "mCallback", (Object)null);
+                }
+                @SuppressWarnings("unchecked")
+                @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mEventDistributor == null) {
-                        mEventDistributor = new QsTileEventDistributor(param.thisObject);
+                        mEventDistributor = new QsTileEventDistributor(param.thisObject, prefs);
                         if (DEBUG) log("Tile event distributor created");
                     }
 
                     Map<String, Object> tileMap = (Map<String, Object>)
                             XposedHelpers.getObjectField(param.thisObject, "mTiles");
+                    Map<String, Object> gbTileMap = new HashMap<String,Object>();
 
                     // prepare AOSP tile wrappers
                     for (Entry<String,Object> entry : tileMap.entrySet()) {
-                        AospTile.create(param.thisObject, entry.getValue(), 
+                        AospTile aospTile = AospTile.create(param.thisObject, entry.getValue(), 
                                 entry.getKey(), prefs, mEventDistributor);
+                        if (aospTile != null) {
+                            gbTileMap.put(aospTile.getKey(), aospTile);
+                        }
                     }
 
                     // prepare GB tiles
@@ -82,12 +104,55 @@ public class ModQsTiles {
                         QsTile tile = QsTile.create(param.thisObject, key, prefs,
                                 mEventDistributor);
                         if (tile != null) {
-                            tileMap.put(key, tile.getTile());
+                            gbTileMap.put(key, tile);
                         }
                     }
 
-                    Object cb = XposedHelpers.getObjectField(param.thisObject, "mCallback");
+                    // sort tiles
+                    LinkedHashMap<String, Object> orderedMap = new LinkedHashMap<String,Object>();
+                    String[] orderedKeys = prefs.getString(
+                            TileOrderActivity.PREF_KEY_TILE_ORDER, "").split(",");
+                    for (String key : orderedKeys) {
+                         for (Entry<String, Object> entry : gbTileMap.entrySet()) {
+                             if (entry.getValue() instanceof AospTile) {
+                                 AospTile t = (AospTile) entry.getValue();
+                                 if (key.equals(t.getKey())) {
+                                     orderedMap.put(t.getAospKey(), tileMap.get(t.getAospKey()));
+                                     tileMap.remove(t.getAospKey());
+                                     if (DEBUG) log("orderedMap: added " + t.getKey());
+                                     break;
+                                 }
+                             } else {
+                                 QsTile t = (QsTile) entry.getValue();
+                                 if (key.equals(t.getKey())) {
+                                     orderedMap.put(key, t.getTile());
+                                     gbTileMap.remove(key);
+                                     if (DEBUG) log("orderedMap: added " + key);
+                                     break;
+                                 }
+                             }
+                         }
+                    }
+
+                    // add left-overs
+                    for (Entry<String,Object> entry : tileMap.entrySet()) {
+                        orderedMap.put(entry.getKey(), entry.getValue());
+                        if (DEBUG) log("orderedMap: added disabled or unknown AOSP tile: " + entry.getKey());
+                    }
+                    for (Entry<String,Object> entry : gbTileMap.entrySet()) {
+                        if (entry.getValue() instanceof QsTile) {
+                            orderedMap.put(entry.getKey(), ((QsTile)entry.getValue()).getTile());
+                            if (DEBUG) log("orderedMap: added disabled GB tile: " + entry.getKey());
+                        }
+                    }
+
+                    // put all tiles into host tile map
+                    tileMap.clear();
+                    tileMap.putAll(orderedMap);
+
+                    Object cb = param.getObjectExtra("callback");
                     if (cb != null) {
+                        XposedHelpers.setObjectField(param.thisObject, "mCallback", cb);
                         XposedHelpers.callMethod(cb, "onTilesChanged");
                     }
                     if (DEBUG) log("Tiles created");

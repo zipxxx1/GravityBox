@@ -9,6 +9,7 @@ import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -27,6 +28,7 @@ public abstract class AospTile implements QsEventListener {
     protected XSharedPreferences mPrefs;
     protected Context mContext;
     protected boolean mVisible;
+    protected Unhook mHandleUpdateStateHook;
 
     public static AospTile create(Object host, Object tile, String aospKey, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -73,7 +75,7 @@ public abstract class AospTile implements QsEventListener {
     @Override
     public abstract String getKey();
     protected abstract String getClassName();
-    protected abstract String getAospKey();
+    public abstract String getAospKey();
     public abstract boolean handleLongClick(View view);
 
     public void initPreferences() {
@@ -88,6 +90,7 @@ public abstract class AospTile implements QsEventListener {
         if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_PREFS)) {
                 String enabledTiles = intent.getStringExtra(GravityBoxSettings.EXTRA_QS_PREFS);
+                if (DEBUG) log("enabledTiles=" + enabledTiles);
                 mVisible = enabledTiles != null && enabledTiles.contains(getKey());
             }
         }
@@ -101,7 +104,16 @@ public abstract class AospTile implements QsEventListener {
     @Override
     public void handleDestroy() {
         if (DEBUG) log(getKey() + ": handleDestroy called");
+        if (mHandleUpdateStateHook != null) {
+            mHandleUpdateStateHook.unhook();
+            mHandleUpdateStateHook = null;
+        }
         mEventDistributor.unregisterListener(this);
+        mEventDistributor = null;
+        mTile = null;
+        mHost = null;
+        mPrefs = null;
+        mContext = null;
     }
 
     @Override
@@ -121,7 +133,8 @@ public abstract class AospTile implements QsEventListener {
             mContext = (Context) XposedHelpers.callMethod(mHost, "getContext");
             ClassLoader cl = mContext.getClassLoader();
 
-            XposedHelpers.findAndHookMethod(getClassName(), cl, "handleUpdateState",
+            mHandleUpdateStateHook = XposedHelpers.findAndHookMethod(
+                    getClassName(), cl,"handleUpdateState",
                     QsTile.CLASS_TILE_STATE, Object.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {

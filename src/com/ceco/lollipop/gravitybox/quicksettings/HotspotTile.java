@@ -22,7 +22,7 @@ public class HotspotTile extends AospTile {
     }
 
     @Override
-    protected String getAospKey() {
+    public String getAospKey() {
         return AOSP_KEY;
     }
 

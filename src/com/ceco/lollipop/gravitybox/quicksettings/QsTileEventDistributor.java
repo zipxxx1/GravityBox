@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
@@ -41,10 +42,12 @@ public class QsTileEventDistributor {
 
     private Object mHost;
     private Context mContext;
+    private XSharedPreferences mPrefs;
     private Map<String,QsEventListener> mListeners;
 
-    public QsTileEventDistributor(Object host) {
+    public QsTileEventDistributor(Object host, XSharedPreferences prefs) {
         mHost = host;
+        mPrefs = prefs;
         mListeners = new LinkedHashMap<String,QsEventListener>();
 
         createHooks();
@@ -54,13 +57,18 @@ public class QsTileEventDistributor {
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            try {
-                for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
-                    l.getValue().onBroadcastReceived(context, intent);
+            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED) &&
+                    intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED)) {
+                recreateTiles();
+            } else {
+                try {
+                    for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
+                        l.getValue().onBroadcastReceived(context, intent);
+                    }
+                } catch (Throwable t) {
+                    log("Error notifying listeners of new broadcast: ");
+                    XposedBridge.log(t);
                 }
-            } catch (Throwable t) {
-                log("Error notifying listeners of new broadcast: ");
-                XposedBridge.log(t);
             }
         }
     };
@@ -72,6 +80,15 @@ public class QsTileEventDistributor {
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_2);
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+    }
+
+    private void recreateTiles() {
+        try {
+            mPrefs.reload();
+            XposedHelpers.callMethod(mHost, "recreateTiles");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 
     private void createHooks() {

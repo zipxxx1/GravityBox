@@ -44,6 +44,7 @@ import android.widget.TextView;
 
 public class TileOrderActivity extends ListActivity {
     public static final String PREF_KEY_TILE_ORDER = "pref_qs_tile_order";
+    public static final String EXTRA_QS_ORDER_CHANGED = "qsTileOrderChanged";
 
     private ListView mTileList;
     private TileAdapter mTileAdapter;
@@ -169,7 +170,7 @@ public class TileOrderActivity extends ListActivity {
         final String value = Utils.join(newList, ",");
         mPrefs.edit().putString(PREF_KEY_TILE_ORDER, value).commit();
         Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
-        intent.putExtra(GravityBoxSettings.EXTRA_QS_PREFS, value);
+        intent.putExtra(EXTRA_QS_ORDER_CHANGED, true);
         mContext.sendBroadcast(intent);
     }
 

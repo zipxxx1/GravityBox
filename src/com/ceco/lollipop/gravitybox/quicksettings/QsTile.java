@@ -163,6 +163,13 @@ public abstract class QsTile implements QsEventListenerGb {
     public void handleDestroy() {
         if (DEBUG) log(mKey + ": handleDestroy called");
         mEventDistributor.unregisterListener(this);
+        mEventDistributor = null;
+        mHost = null;
+        mTile = null;
+        mState = null;
+        mContext = null;
+        mGbContext = null;
+        mPrefs = null;
     }
 
     @Override

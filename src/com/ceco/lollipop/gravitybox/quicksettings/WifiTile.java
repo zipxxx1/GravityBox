@@ -22,7 +22,7 @@ public class WifiTile extends AospTile {
     }
 
     @Override
-    protected String getAospKey() {
+    public String getAospKey() {
         return AOSP_KEY;
     }
 
