@@ -891,10 +891,6 @@
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Εφέ θολώματος</string>
 
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Απενεργοποίηση εκτεταμένων πλακιδίων</string>
-    <string name="pref_qs_tile_span_disable_summary">Απενεργοποιεί την επέκταση των πλακιδίων χρήστη, φωτεινότητας και ρυθμίσεων στον οριζόντιο προσανατολισμό</string>
-
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Επιβολή υπερχείλισης πλήκτρου μενού</string>
     <string name="pref_force_overflow_menu_button_summary">Απαιτείται επανεκκίνηση</string>

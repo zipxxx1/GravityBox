@@ -734,9 +734,6 @@
     <string name="pref_vol_swap_keys_summary">画面を回転した時音量キーを入れ替えます。</string>
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">ぼかし効果</string>
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">タイルのスペースを無効化</string>
-    <string name="pref_qs_tile_span_disable_summary">横画面でのユーザー、画面の明るさと設定タイルのスペースを無くします。</string>
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">メニューボタン表示を強制</string>
     <string name="pref_force_overflow_menu_button_summary">再起動すると反映されます。</string>

@@ -901,10 +901,6 @@
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Effetto sfocato</string>
 
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Disabilita espansione caselle</string>
-    <string name="pref_qs_tile_span_disable_summary">Non permette alle caselle Profilo Utente, Luminosità, Impostazioni di ingrandirsi in modalità orizzontale</string>
-
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Visualizza tasto menù overflow</string>
     <string name="pref_force_overflow_menu_button_summary">Visualizza il tasto con tre punti con funzione menù nelle applicazioni (richiede riavvio)</string>

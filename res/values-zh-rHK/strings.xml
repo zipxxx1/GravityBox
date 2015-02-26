@@ -890,10 +890,6 @@
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">模糊效果</string>
 
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">停用瓷貼跨轉</string>
-    <string name="pref_qs_tile_span_disable_summary">停用以下瓷貼在螢幕橫向時的跨轉功能：使用者個人檔案、亮度、設定</string>
-
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">強制啟用三點選單鍵</string>
     <string name="pref_force_overflow_menu_button_summary">需要重新啟動</string>

@@ -880,10 +880,6 @@
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efekt rozmycia</string>
 
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Wyłącz rozciąganie kafelków</string>
-    <string name="pref_qs_tile_span_disable_summary">Wyłącza rozciąganie kafelków użytkownika, jasności i ustawień dla poziomej orientacji ekranu</string>
-
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Wymuś przycisk Overflow</string>
     <string name="pref_force_overflow_menu_button_summary">Wymusza wyświetlanie przycisku z trzema kropkami w menu aplikacji (wymagany restart)</string>

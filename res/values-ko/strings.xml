@@ -692,9 +692,6 @@
 
     <string name="pref_lockscreen_bg_blur_effect_title">흐림 효과</string>
 
-    <string name="pref_qs_tile_span_disable_title">타일 스패닝 비활성화</string>
-    <string name="pref_qs_tile_span_disable_summary">사용자, 밝기, 설정 타일이 가로 화면에서 스패닝되는 현상을 없앱니다.</string>
-
     <string name="pref_force_overflow_menu_button_title">강제로 오버플로 메뉴 버튼 보이기</string>
     <string name="pref_force_overflow_menu_button_summary">재시작 필요</string>
 

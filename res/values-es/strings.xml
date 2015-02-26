@@ -899,10 +899,6 @@
     
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efecto de desenfoque</string>
-  
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Desactivar espaciado de casillas</string>
-    <string name="pref_qs_tile_span_disable_summary">Desactiva el espaciado de las casillas de usuario, brillo y ajustes en modo paisaje</string>
 
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Forzar desbordamiento del botón menú</string>

@@ -901,10 +901,6 @@
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Effet de floutage</string>
 
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Désactiver l\'élargissement de touche</string>
-    <string name="pref_qs_tile_span_disable_summary">Désactive l\'élargissement des touches utilisateur, luminosité, et paramètres en orientation paysage</string>
-
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Forcer le bouton menu de débordement</string>
     <string name="pref_force_overflow_menu_button_summary">Nécessite un redémarrage</string>

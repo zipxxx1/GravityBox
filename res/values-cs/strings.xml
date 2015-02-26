@@ -872,10 +872,6 @@
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efekt rozostření</string>
 
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Vypnout roztažení dlaždic</string>
-    <string name="pref_qs_tile_span_disable_summary">Vypne roztahování dlaždic kontaktu, jasu a nastavení v režimu na šířku</string>
-
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Vynucené menu tlačítko</string>
     <string name="pref_force_overflow_menu_button_summary">Vynutí zobrazení menu tlačítka v aplikacích (vyžaduje restart)</string>

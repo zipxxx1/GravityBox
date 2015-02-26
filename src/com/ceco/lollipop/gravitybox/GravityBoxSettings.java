@@ -575,14 +575,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NETWORK_MODE_TILE_CDMA = "pref_network_mode_tile_cdma";
     public static final String PREF_KEY_RINGER_MODE_TILE_MODE = "pref_qs_ringer_mode";
     public static final String PREF_STAY_AWAKE_TILE_MODE = "pref_qs_stay_awake";
-    public static final String PREF_KEY_QS_TILE_SPAN_DISABLE = "pref_qs_tile_span_disable";
     public static final String EXTRA_NMT_MODE = "networkModeTileMode";
     public static final String EXTRA_NMT_2G3G_MODE = "networkModeTile2G3GMode";
     public static final String EXTRA_NMT_LTE = "networkModeTileLte";
     public static final String EXTRA_NMT_CDMA = "networkModeTileCdma";
     public static final String EXTRA_RMT_MODE = "ringerModeTileMode";
     public static final String EXTRA_SA_MODE = "stayAwakeTileMode";
-    public static final String EXTRA_QS_TILE_SPAN_DISABLE = "qsTileSpanDisable";
 
     public static final String PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS = "pref_display_allow_all_rotations";
     public static final String ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED = 
@@ -2877,10 +2875,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     sAImodes[i] = Integer.valueOf(sALmodes.get(i));
                 }
                 intent.putExtra(EXTRA_SA_MODE, sAImodes);
-            } else if (key.equals(PREF_KEY_QS_TILE_SPAN_DISABLE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_QS_TILE_SPAN_DISABLE,
-                        prefs.getBoolean(PREF_KEY_QS_TILE_SPAN_DISABLE, false));
             } else if (key.equals(PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS)) {
                 intent.setAction(ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED);
                 intent.putExtra(EXTRA_ALLOW_ALL_ROTATIONS, 

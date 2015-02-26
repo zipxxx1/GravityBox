@@ -906,10 +906,6 @@
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Blur effect</string>
 
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Disable tile spanning</string>
-    <string name="pref_qs_tile_span_disable_summary">Disables spanning of user, brightness and settings tiles in landscape</string>
-
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Force overflow menu button</string>
     <string name="pref_force_overflow_menu_button_summary">Requires reboot</string>

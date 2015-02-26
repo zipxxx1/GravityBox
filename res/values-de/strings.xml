@@ -907,10 +907,6 @@
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Hintergrund weichzeichnen</string>
 
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Symbolvergrößerung deaktiveren</string>
-    <string name="pref_qs_tile_span_disable_summary">Vergrößern der Schnelleinstellungen im Querformat verhindern (Gilt für Benutzerprofil, Helligkeit und Systemeinstellungen</string>
-
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Overflow-Menü immer anzeigen</string>
     <string name="pref_force_overflow_menu_button_summary">Neustart erforderlich</string>

@@ -877,10 +877,6 @@
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efeito borrado</string>
 
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Desativar reajuste de painéis</string>
-    <string name="pref_qs_tile_span_disable_summary">Permite desativar o redimensionamento dos painéis de Perfil de usuários, Brilho e Configurações em modo paisagem</string>
-
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Forçar botão de menu Overflow</string>
     <string name="pref_force_overflow_menu_button_summary">Necessário reiniciar</string>

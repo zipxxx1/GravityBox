@@ -888,10 +888,6 @@
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">Efek blur</string>
 
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">Matikan tile rambang</string>
-    <string name="pref_qs_tile_span_disable_summary">Matikan tile rambang, pemilik, kecerahan dan tetapan ketika mod lanskap</string>
-
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Paksa butang menu (3titik)</string>
     <string name="pref_force_overflow_menu_button_summary">Perlukan reboot</string>

@@ -903,10 +903,6 @@
 
     <!-- Lockscreen: custom background blur effect -->
     <string name="pref_lockscreen_bg_blur_effect_title">模糊效果</string>
-    
-    <!-- Tiles: Disable tile spanning -->
-    <string name="pref_qs_tile_span_disable_title">禁用磁贴扩充</string>
-    <string name="pref_qs_tile_span_disable_summary">横向时禁用磁贴扩充亮度和设置</string>
 
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">强制弹出菜单按钮</string>
