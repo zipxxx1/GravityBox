@@ -197,6 +197,7 @@ public class StayAwakeTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.visible = true;
         if (mCurrentTimeoutIndex == -1) {
             mState.label = String.format("%ds", TimeUnit.MILLISECONDS.toSeconds(
                     Settings.System.getInt(mContext.getContentResolver(), 
@@ -205,7 +206,7 @@ public class StayAwakeTile extends QsTile {
             mState.label = mGbContext.getString(SCREEN_TIMEOUT[mCurrentTimeoutIndex].mLabelResId);
         }
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

@@ -168,7 +168,7 @@ public class QuickRecordTile extends QsTile {
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mState.visible) {
+        if (listening && mEnabled) {
             registerRecordingStatusReceiver();
             getCurrentState();
         } else {
@@ -250,6 +250,7 @@ public class QuickRecordTile extends QsTile {
             }
         }
 
+        mState.visible = true;
         switch (mRecordingState) {
             case STATE_PLAYING:
                 mState.label = res.getString(R.string.quick_settings_qr_playing);
@@ -274,7 +275,7 @@ public class QuickRecordTile extends QsTile {
                 break;
         }
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

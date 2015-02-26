@@ -63,6 +63,7 @@ public class SmartRadioTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.visible = true;
         if (mSmartRadioEnabled) {
             mState.label = mGbContext.getString(R.string.quick_settings_smart_radio_on);
             mState.icon = mSmartRadioState == ModSmartRadio.State.POWER_SAVING ?
@@ -73,7 +74,7 @@ public class SmartRadioTile extends QsTile {
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_smart_radio_off);
         }
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

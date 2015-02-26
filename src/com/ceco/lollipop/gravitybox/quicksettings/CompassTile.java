@@ -94,6 +94,7 @@ public class CompassTile extends QsTile implements SensorEventListener {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.visible = true;
         if (mActive) {
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_compass_on);
             if (mNewDegree != null) {
@@ -114,7 +115,7 @@ public class CompassTile extends QsTile implements SensorEventListener {
             mImage.setRotation(0);
         }
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

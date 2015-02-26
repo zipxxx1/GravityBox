@@ -76,7 +76,7 @@ public class NfcTile extends QsTile {
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mState.visible) {
+        if (listening && mEnabled) {
             registerNfcReceiver();
         } else {
             unregisterNfcReceiver();
@@ -122,6 +122,7 @@ public class NfcTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.visible = true;
         switch (mNfcState) {
         case STATE_ON:
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_nfc_on);
@@ -138,7 +139,7 @@ public class NfcTile extends QsTile {
             mState.label = "----";
         }
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

@@ -87,7 +87,7 @@ public class GpsTile extends QsTile {
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mState.visible) {
+        if (listening && mEnabled) {
             registerLocationManagerReceiver();
         } else {
             unregisterLocationManagerReceiver();
@@ -96,6 +96,7 @@ public class GpsTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.visible = true;
         if (mGpsEnabled) {
             mState.label = mGpsFixed ? mGbContext.getString(R.string.qs_tile_gps_locked) :
                     mGbContext.getString(R.string.qs_tile_gps_enabled);
@@ -106,7 +107,7 @@ public class GpsTile extends QsTile {
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_gps_disable);
         }
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @SuppressWarnings("deprecation")

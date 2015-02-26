@@ -71,7 +71,7 @@ public class LocationTileSlimkat extends QsTile {
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mState.visible) {
+        if (listening && mEnabled) {
             registerLocationManagerReceiver();
         } else {
             unregisterLocationManagerReceiver();
@@ -146,6 +146,7 @@ public class LocationTileSlimkat extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.visible = true;
         switch (mLocationMode) {
             case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
                 mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_location_on_gps);
@@ -163,7 +164,7 @@ public class LocationTileSlimkat extends QsTile {
         mState.label = mLocationEnabled ? mGbContext.getString(R.string.quick_settings_location_on) :
                          mGbContext.getString(R.string.quick_settings_location_off);
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

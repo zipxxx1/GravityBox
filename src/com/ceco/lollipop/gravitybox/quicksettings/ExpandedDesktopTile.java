@@ -87,7 +87,7 @@ public class ExpandedDesktopTile extends QsTile {
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mState.visible) {
+        if (listening && mEnabled) {
             mExpanded = (Settings.Global.getInt(mContext.getContentResolver(),
                     ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0) == 1)
                     && (mMode > 0);
@@ -100,6 +100,7 @@ public class ExpandedDesktopTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.visible = true;
         if (mExpanded) {
             mState.label = mGbContext.getString(R.string.quick_settings_expanded_desktop_expanded);
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_expanded_desktop_on);
@@ -110,7 +111,7 @@ public class ExpandedDesktopTile extends QsTile {
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_expanded_desktop_off);
         }
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

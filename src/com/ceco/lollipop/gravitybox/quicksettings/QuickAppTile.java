@@ -256,9 +256,13 @@ public class QuickAppTile extends QsTile {
         }
         // if intent is a GB action of broadcast type, handle it directly here
         if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
-            Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
-            newIntent.putExtras(intent);
-            mContext.sendBroadcast(newIntent);
+            String action = intent.getStringExtra(ShortcutActivity.EXTRA_ACTION);
+            if (ShortcutActivity.isActionSafe(action) || 
+                    !mEventDistributor.isKeyguardShowingAndSecured()) {
+                Intent newIntent = new Intent(action);
+                newIntent.putExtras(intent);
+                mContext.sendBroadcast(newIntent);
+            }
         // otherwise let super class handle it
         } else {
             startSettingsActivity(intent);
@@ -305,9 +309,10 @@ public class QuickAppTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.visible = true;
         mState.label = mMainApp.getAppName();
         mState.icon = mMainApp.getAppIconSmall();
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

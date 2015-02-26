@@ -177,7 +177,7 @@ public class NetworkModeTile extends QsTile {
     @Override
     public void setListening(boolean listening) {
         if (DEBUG) log(getKey() + ": setListening(" + listening + ")");
-        if (listening && mState.visible) {
+        if (listening && mEnabled) {
             ContentResolver cr = mContext.getContentResolver();
             mNetworkType = Settings.Global.getInt(cr, 
                     PhoneWrapper.PREFERRED_NETWORK_MODE, mDefaultNetworkType);
@@ -190,6 +190,7 @@ public class NetworkModeTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
+        mState.visible = true;
         switch (mNetworkType) {
         case PhoneWrapper.NT_WCDMA_PREFERRED:
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_3g2g_on);
@@ -219,7 +220,7 @@ public class NetworkModeTile extends QsTile {
             break;
         }
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

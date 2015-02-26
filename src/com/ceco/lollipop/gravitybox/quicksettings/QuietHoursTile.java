@@ -39,7 +39,7 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
     public void setListening(boolean listening) {
         if (listening) {
             mQh = SysUiManagers.QuietHoursManager.getQuietHours();
-            if (shouldShow()) {
+            if (mEnabled && shouldShow()) {
                 SysUiManagers.QuietHoursManager.registerListener(this);
                 if (DEBUG) log(getKey() + ": QuietHours listener registered");
             }
@@ -61,7 +61,7 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
     }
 
     private boolean shouldShow() {
-        return (mEnabled && mQh != null &&
+        return (mQh != null &&
                 !mQh.uncLocked && mQh.enabled);
     }
 
@@ -104,7 +104,7 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
         }
         mState.visible = shouldShow();
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

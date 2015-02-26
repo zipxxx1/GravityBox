@@ -66,7 +66,7 @@ public class MusicTile extends QsTile {
 
     @Override
     public void setListening(boolean listening) {
-        if (listening && mState.visible) {
+        if (listening && mEnabled) {
             prepareRemoteController();
         } else {
             unprepareRemoteController();
@@ -87,6 +87,7 @@ public class MusicTile extends QsTile {
 //                background.setColorFilter(null);
 //            }
 //        }
+        mState.visible = true;
         if (mActive) {
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_media_pause);
             mState.label = mMetadata.trackTitle != null && mMusicTileMode > 1
@@ -96,7 +97,7 @@ public class MusicTile extends QsTile {
             mState.label = mGbContext.getString(R.string.quick_settings_music_play);
         }
 
-        mState.applyTo(state);
+        super.handleUpdateState(state, arg);
     }
 
     @Override

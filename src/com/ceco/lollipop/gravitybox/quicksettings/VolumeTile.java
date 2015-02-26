@@ -34,7 +34,8 @@ public class VolumeTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.applyTo(state);
+        mState.visible = true;
+        super.handleUpdateState(state, arg);
     }
 
     @Override

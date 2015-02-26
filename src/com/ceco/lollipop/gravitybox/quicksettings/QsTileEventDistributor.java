@@ -21,6 +21,9 @@ public class QsTileEventDistributor {
     private static final String TAG = "GB:QsTileEventDistributor";
     private static final boolean DEBUG = ModQsTiles.DEBUG;
 
+    private static final String CLASS_KG_TOUCH_DELEGATE = 
+            "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
+
     public interface QsEventListener {
         String getKey();
         void handleUpdateState(Object state, Object arg);
@@ -44,6 +47,7 @@ public class QsTileEventDistributor {
     private Context mContext;
     private XSharedPreferences mPrefs;
     private Map<String,QsEventListener> mListeners;
+    private Object mKeyguardDelegate;
 
     public QsTileEventDistributor(Object host, XSharedPreferences prefs) {
         mHost = host;
@@ -207,5 +211,40 @@ public class QsTileEventDistributor {
         if (mListeners.containsKey(key)) {
             mListeners.remove(key);
         }
+    }
+
+    private Object getKeyguardDelegate() {
+        if (mKeyguardDelegate != null) return mKeyguardDelegate;
+        try {
+            mKeyguardDelegate = XposedHelpers.callStaticMethod(
+                    XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, mContext.getClassLoader()),
+                    "getInstance", mContext);
+            return mKeyguardDelegate;
+        } catch (Throwable t) {
+            log("Error getting Keyguard delegate: " + t.getMessage());
+            return null;
+        }
+    }
+
+    protected final boolean isKeyguardShowing() {
+        try {
+            return (boolean) XposedHelpers.callMethod(getKeyguardDelegate(), "isShowingAndNotOccluded");
+        } catch (Throwable t) {
+            log("Error in isKeyguardShowing: " + t.getMessage());
+            return false;
+        }
+    }
+
+    protected final boolean isKeyguardSecured() {
+        try {
+            return (boolean) XposedHelpers.callMethod(getKeyguardDelegate(), "isSecure");
+        } catch (Throwable t) {
+            log("Error in isKeyguardSecured: " + t.getMessage());
+            return false;
+        }
+    }
+
+    protected final boolean isKeyguardShowingAndSecured() {
+        return (isKeyguardShowing() && isKeyguardSecured());
     }
 }

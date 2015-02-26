@@ -114,14 +114,17 @@ public abstract class QsTile implements QsEventListenerGb {
         mEventDistributor.registerListener(this);
     }
 
-    public abstract void handleUpdateState(Object state, Object arg);
+    public void handleUpdateState(Object state, Object arg) {
+        mState.visible &= mEnabled;
+        mState.applyTo(state);
+    }
+
     public abstract void handleClick();
     public abstract boolean handleLongClick(View view);
 
     public void initPreferences() {
         String enabledTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ORDER, null);
         mEnabled = enabledTiles != null && enabledTiles.contains(mKey);
-        mState.visible = mEnabled;
     }
 
     public Object getTile() {
@@ -180,7 +183,6 @@ public abstract class QsTile implements QsEventListenerGb {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_PREFS)) {
                 String enabledTiles = intent.getStringExtra(GravityBoxSettings.EXTRA_QS_PREFS);
                 mEnabled = enabledTiles != null && enabledTiles.contains(mKey);
-                mState.visible = mEnabled;
             }
         }
     }
