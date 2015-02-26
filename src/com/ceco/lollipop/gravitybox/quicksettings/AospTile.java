@@ -27,7 +27,7 @@ public abstract class AospTile implements QsEventListener {
     protected QsTileEventDistributor mEventDistributor;
     protected XSharedPreferences mPrefs;
     protected Context mContext;
-    protected boolean mVisible;
+    protected boolean mEnabled;
     protected Unhook mHandleUpdateStateHook;
 
     public static AospTile create(Object host, Object tile, String aospKey, XSharedPreferences prefs,
@@ -80,7 +80,7 @@ public abstract class AospTile implements QsEventListener {
 
     public void initPreferences() {
         String enabledTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ORDER, null);
-        mVisible = enabledTiles != null && enabledTiles.contains(getKey());
+        mEnabled = enabledTiles != null && enabledTiles.contains(getKey());
     }
 
     @Override
@@ -91,14 +91,14 @@ public abstract class AospTile implements QsEventListener {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_PREFS)) {
                 String enabledTiles = intent.getStringExtra(GravityBoxSettings.EXTRA_QS_PREFS);
                 if (DEBUG) log("enabledTiles=" + enabledTiles);
-                mVisible = enabledTiles != null && enabledTiles.contains(getKey());
+                mEnabled = enabledTiles != null && enabledTiles.contains(getKey());
             }
         }
     }
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        XposedHelpers.setBooleanField(state, "visible", mVisible);
+        XposedHelpers.setBooleanField(state, "visible", mEnabled);
     }
 
     @Override
