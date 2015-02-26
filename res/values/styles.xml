@@ -45,21 +45,6 @@
     <style name="AppBaseThemeDark" parent="android:Theme.Material" />
     <style name="AppThemeDark" parent="AppBaseThemeDark" />
 
-    <!-- QS text appearance -->
-    <style name="TextAppearance" />
-    <style name="TextAppearance.QuickSettings" />
-
-    <style name="TextAppearance.QuickSettings.TileView">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">#CCCCCC</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:paddingStart">6dp</item>
-        <item name="android:paddingEnd">6dp</item>
-        <item name="android:maxLines">2</item>
-        <item name="android:ellipsize">end</item>
-    </style>
-
     <!-- AppLauncher labels -->
     <style name="AppLauncherTextView">
         <item name="android:gravity">center</item>

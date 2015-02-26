@@ -50,8 +50,6 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
 public class QuickAppTile extends QsTile {
-    private static int[] TILEVIEW_ID = new int[] { R.id.quickapp_tileview, R.id.quickapp_tileview_2 };
-
     private String KEY_QUICKAPP_DEFAULT = GravityBoxSettings.PREF_KEY_QUICKAPP_DEFAULT;
     private String KEY_QUICKAPP_SLOT1 = GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT1;
     private String KEY_QUICKAPP_SLOT2 = GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT2;
@@ -238,7 +236,7 @@ public class QuickAppTile extends QsTile {
             ACTION_PREF_QUICKAPP_CHANGED += "_" + mId;
         }
 
-        mMainApp = new AppInfo(TILEVIEW_ID[mId-1]);
+        mMainApp = new AppInfo(mId);
         mAppSlots = new ArrayList<AppInfo>();
         mAppSlots.add(new AppInfo(R.id.quickapp1));
         mAppSlots.add(new AppInfo(R.id.quickapp2));
