@@ -52,8 +52,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sync açık</string>
     <string name="quick_settings_sync_off">Sync kapalı</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP açık</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP kapalı</string>
     <string name="quick_settings_torch_on">Fener açık</string>
     <string name="quick_settings_torch_off">Fener kapalı</string>
     <string name="quick_settings_torch_off_notif">Kapatmak için dokunun</string>

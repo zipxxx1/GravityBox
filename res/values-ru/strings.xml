@@ -54,8 +54,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Синхр. вкл.</string>
     <string name="quick_settings_sync_off">Синхр. выкл.</string>
-    <string name="quick_settings_wifi_ap_on">ТД Wi-Fi вкл.</string>
-    <string name="quick_settings_wifi_ap_off">ТД Wi-Fi выкл.</string>
     <string name="quick_settings_torch_on">Фонарик вкл.</string>
     <string name="quick_settings_torch_off">Фонарик выкл</string>
     <string name="quick_settings_torch_off_notif">Нажмите для выключения</string>

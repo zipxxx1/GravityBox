@@ -37,8 +37,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sinc. ativada</string>
     <string name="quick_settings_sync_off">Sinc. desativada</string>
-    <string name="quick_settings_wifi_ap_on">PA Wi-Fi ativado</string>
-    <string name="quick_settings_wifi_ap_off">PA Wi-Fi desativado</string>
     <string name="quick_settings_torch_on">Lanterna ligada</string>
     <string name="quick_settings_torch_off">Lanterna desligada</string>
     <string name="quick_settings_torch_off_notif">Tocar para desligar</string>

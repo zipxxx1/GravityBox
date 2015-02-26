@@ -52,8 +52,6 @@
         <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sync On</string>
     <string name="quick_settings_sync_off">Sync Off</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP On</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP Off</string>
     <string name="quick_settings_torch_on">Torcia Accesa</string>
     <string name="quick_settings_torch_off">Torcia Spenta</string>
     <string name="quick_settings_torch_off_notif">Tocca per spegnere</string>

@@ -37,8 +37,6 @@
 	 <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Synch on</string>
     <string name="quick_settings_sync_off">Synch off</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP on</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP off</string>
     <string name="quick_settings_torch_on">Světlo zap</string>
     <string name="quick_settings_torch_off">Světlo vyp</string>
     <string name="quick_settings_torch_off_notif">Dotykem vypněte světlo</string>

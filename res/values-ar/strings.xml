@@ -53,8 +53,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">تشغيل المزامنة</string>
     <string name="quick_settings_sync_off">اطفاء المزامنة</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP on</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP off</string>
     <string name="quick_settings_torch_on">تشغيل الكشاف</string>
     <string name="quick_settings_torch_off">اطفاء الكشاف</string>
     <string name="quick_settings_torch_off_notif">المس للاطفاء</string>

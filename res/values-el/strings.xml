@@ -58,8 +58,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Συγχρονισμος Ενεργος</string>
     <string name="quick_settings_sync_off">Συγχρονισμος Ανενεργος</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP Ενεργο</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP Ανενεργο</string>
     <string name="quick_settings_torch_on">Φακος Ενεργος</string>
     <string name="quick_settings_torch_off">Φακος Ανενεργος</string>
     <string name="quick_settings_torch_off_notif">Αγγιξτε για απενεργοποιηση</string>

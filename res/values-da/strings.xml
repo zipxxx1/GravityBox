@@ -36,8 +36,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Synkronisering til</string>
     <string name="quick_settings_sync_off">Synkronisering fra</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP til</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP fra</string>
     <string name="quick_settings_torch_on">Lygte tændt</string>
     <string name="quick_settings_torch_off">Lygte slukket</string>
     <string name="quick_settings_torch_off_notif">Tryk for at slukke</string>

@@ -51,7 +51,6 @@ import com.ceco.lollipop.gravitybox.quicksettings.TileOrderActivity;
 import com.ceco.lollipop.gravitybox.quicksettings.TorchTile;
 import com.ceco.lollipop.gravitybox.quicksettings.UsbTetherTile;
 import com.ceco.lollipop.gravitybox.quicksettings.VolumeTile;
-import com.ceco.lollipop.gravitybox.quicksettings.WifiApTile;
 import com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity;
 
 import android.animation.Animator;
@@ -801,10 +800,6 @@ public class ModQuickSettings {
 
                 mTiles = new ArrayList<AQuickSettingsTile>();
                 mAllTileViews.clear();
-
-                WifiApTile wifiApTile = new WifiApTile(mContext, mGbContext, mStatusBar, mPanelBar, mWifiManager);
-                wifiApTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(wifiApTile);
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {

@@ -37,8 +37,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Włączono Synchronizację</string>
     <string name="quick_settings_sync_off">Wyłączono Synchronizację</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP Włączony</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP Wyłączony</string>
     <string name="quick_settings_torch_on">Latarka Włączona</string>
     <string name="quick_settings_torch_off">Latarka Wyłączona</string>
     <string name="quick_settings_torch_off_notif">Dotknij aby Wyłączyć</string>

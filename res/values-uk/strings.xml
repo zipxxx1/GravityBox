@@ -26,8 +26,6 @@
     <string name="caller_fullscreen_photo_title">Фото того, хто телефонує на весь екран</string>
     <string name="quick_settings_sync_on">Синхрон. увімк.</string>
     <string name="quick_settings_sync_off">Синхрон. вимк.</string>
-    <string name="quick_settings_wifi_ap_on">ТД Wi-Fi увімк.</string>
-    <string name="quick_settings_wifi_ap_off">ТД Wi-Fi вимк.</string>
     <string name="quick_settings_torch_on">Ліхтарик увімк.</string>
     <string name="quick_settings_torch_off">Ліхтарик вимк.</string>
     <string name="quick_settings_torch_off_notif">Натисніть для вимкнення</string>

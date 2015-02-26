@@ -52,8 +52,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Synchr. aan</string>
     <string name="quick_settings_sync_off">Synchr. uit</string>
-    <string name="quick_settings_wifi_ap_on">Hotspot aa</string>
-    <string name="quick_settings_wifi_ap_off">Hotspot uit</string>
     <string name="quick_settings_torch_on">Zaklamp aan</string>
     <string name="quick_settings_torch_off">Zaklamp uit</string>
     <string name="quick_settings_torch_off_notif">Raak aan om uit te zetten</string>

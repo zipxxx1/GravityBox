@@ -52,8 +52,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">同步處理 開啟</string>
     <string name="quick_settings_sync_off">同步處理 關閉</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi 行動熱點 開啟</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi 行動熱點 關閉</string>
     <string name="quick_settings_torch_on">手電筒 開啟</string>
     <string name="quick_settings_torch_off">手電筒 關閉</string>
     <string name="quick_settings_torch_off_notif">輕觸以關閉手電筒</string>

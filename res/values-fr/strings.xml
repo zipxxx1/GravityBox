@@ -52,8 +52,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Synchro On</string>
     <string name="quick_settings_sync_off">Synchro Off</string>
-    <string name="quick_settings_wifi_ap_on">Hotspot On</string>
-    <string name="quick_settings_wifi_ap_off">Hotspot Off</string>
     <string name="quick_settings_torch_on">Torche On</string>
     <string name="quick_settings_torch_off">Torche Off</string>
     <string name="quick_settings_torch_off_notif">Toucher pour Éteindre</string>

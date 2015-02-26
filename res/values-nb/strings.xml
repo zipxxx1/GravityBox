@@ -52,8 +52,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Synkronisering På</string>
     <string name="quick_settings_sync_off">Synkronisering Av</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP På</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP Av</string>
     <string name="quick_settings_torch_on">Lommelykt På</string>
     <string name="quick_settings_torch_off">Lommelykt Av</string>
     <string name="quick_settings_torch_off_notif">Trykk for å slå av</string>

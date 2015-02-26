@@ -54,8 +54,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">同步已开启</string>
     <string name="quick_settings_sync_off">同步已关闭</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP已开启</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP已关闭</string>
     <string name="quick_settings_torch_on">手电筒已开启</string>
     <string name="quick_settings_torch_off">手电筒已关闭</string>
     <string name="quick_settings_torch_off_notif">按下以关闭</string>

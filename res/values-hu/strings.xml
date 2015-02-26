@@ -52,8 +52,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Szinkronizáció be</string>
     <string name="quick_settings_sync_off">Szinkronizáció ki</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi hozzáférési pont be</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi hozzáférési pont ki</string>
     <string name="quick_settings_torch_on">Zseblámpa be</string>
     <string name="quick_settings_torch_off">Zseblámpa ki</string>
     <string name="quick_settings_torch_off_notif">Érintse meg a kikapcsoláshoz</string>

@@ -52,8 +52,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sincronización activada</string>
     <string name="quick_settings_sync_off">Sincronización</string>
-    <string name="quick_settings_wifi_ap_on">Punto de acceso Wi-Fi activado</string>
-    <string name="quick_settings_wifi_ap_off">Punto de acceso Wi-Fi</string>
     <string name="quick_settings_torch_on">Linterna activada</string>
     <string name="quick_settings_torch_off">Linterna</string>
     <string name="quick_settings_torch_off_notif">Toca para desactivar</string>

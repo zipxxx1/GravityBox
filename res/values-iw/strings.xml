@@ -52,8 +52,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">סינכרון מופעל</string>
     <string name="quick_settings_sync_off">סינכרון כבוי</string>
-    <string name="quick_settings_wifi_ap_on">נקודה חמה של Wi-Fi מופעלת</string>
-    <string name="quick_settings_wifi_ap_off">נקודה חמה של Wi-Fi כבויה</string>
     <string name="quick_settings_torch_on">פנס מופעל</string>
     <string name="quick_settings_torch_off">פנס כבוי</string>
     <string name="quick_settings_torch_off_notif">גע על מנת להפעיל</string>

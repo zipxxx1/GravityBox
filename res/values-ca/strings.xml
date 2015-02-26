@@ -36,8 +36,6 @@
  <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sincronització activada</string>
     <string name="quick_settings_sync_off">Sincronització desactivada</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi AP activat</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi AP desactivat</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Configuració de l\'aplicació calaix"</string>

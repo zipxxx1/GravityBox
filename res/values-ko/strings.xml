@@ -34,8 +34,6 @@
 
     <string name="quick_settings_sync_on">동기화 활성화</string>
     <string name="quick_settings_sync_off">동기화 비활성화</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi 핫스팟 활성화</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi 핫스팟 비활성화</string>
     <string name="quick_settings_torch_on">손전등이 켜짐</string>
     <string name="quick_settings_torch_off">손전등이 꺼짐</string>
     <string name="quick_settings_torch_off_notif">터치하여 손전등을 끕니다.</string>

@@ -42,8 +42,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">同期オン</string>
     <string name="quick_settings_sync_off">同期オフ</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi APオン</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi APオフ</string>
     <string name="quick_settings_torch_on">トーチオン</string>
     <string name="quick_settings_torch_off">トーチオフ</string>
     <string name="quick_settings_torch_off_notif">タッチでオフにする</string>

@@ -52,8 +52,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Hidupkan Sync</string>
     <string name="quick_settings_sync_off">Matikan sync</string>
-    <string name="quick_settings_wifi_ap_on">Hidupkan hotspot</string>
-    <string name="quick_settings_wifi_ap_off">Matikan hotspot</string>
     <string name="quick_settings_torch_on">Hidupkan lampu</string>
     <string name="quick_settings_torch_off">Matikan lampu</string>
     <string name="quick_settings_torch_off_notif">sentuh untuk tutup</string>
