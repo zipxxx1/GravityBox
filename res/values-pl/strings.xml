@@ -1656,4 +1656,71 @@
     <string name="pref_battery_bar_centered_title">Wycentrowany</string>
     <string name="pref_battery_bar_color_charging_title">Kolor ładowania</string>
 
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Tryb</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animowany</string>
+    <string name="pref_statusbar_download_progress_centered_title">Wycentrowany</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Grubość</string>
+    <string name="pref_statusbar_download_progress_margin_title">Margines krawędzi</string>
+
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">Akcja pojedynczego kliknięcia MENU</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">Akcja pojedynczego kliknięcia BACK</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">Akcja podwójnego przyciśnięcia klawisza ostatnich aplikacji</string>
+
+    <!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">Domyślny</string>
+
+    <!-- Tri state pref -->
+    <string name="state_default">Domyślny</string>
+    <string name="state_enabled">Włączony</string>
+    <string name="state_disabled">Wyłączony</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">Standardowy z procentami</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">Pokaż na pasku stanu</string>
+    <string name="battery_percent_text_statusbar_summary">Pokazuje tekstowy procentowy wskaźnik baterii na standardowym pasku stanu (gdy telefon jest odblokowany)</string>
+    <string name="battery_percent_text_keyguard_title">Tryb blokady ekranu</string>
+    <string name="battery_percent_text_keyguard_summary">Określa zachowanie tekstowego procentowego wskaźnika na pasku stanu ekranu blokady</string>
+    <string name="keyguard_percent_text_default">Domyślnie (podczas ładowania)</string>
+    <string name="keyguard_percent_text_show_always">Zawsze pokazuj</string>
+    <string name="keyguard_percent_text_hide">Ukryj</string>
+    <string name="battery_percent_text_header_hide_title">Ukryj w nagłówku paska stanu</string>
+    <string name="battery_percent_text_size_default">Domyślny</string>
+
+    <!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">Pasek informacyjny</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Aktywuje pasek informacyjny i powiązane z nim funkcje (wymaga restartu)</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">Użyj dużych ikon</string>
+    <string name="pref_navbar_larger_icons_summary">Wymaga ponownego uruchomienia</string>
+
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">Pozwól na miękki restart</string>
+    <string name="pref_reboot_allow_softreboot_summary">Należy pamiętać, że miękki restart może powodować 
+        nieoczekiwane problemy ze stabilnością lub szybszym rozładowaniem baterii. Najlepszym rozwiązaniem jest używanie normalnego restartu.</string>
+
+    <!-- Recents panel search bar -->
+    <string name="pref_recents_searchbar_title">Widoczność paska wyszukiwania</string>
+    <string name="recents_searchbar_default">Domyślna</string>
+    <string name="recents_searchbar_hide_keep_space">Ukryj i rezerwuj miejsce</string>
+    <string name="recents_searchbar_hide_remove_space">Ukryj i zwolnij miejsce</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">UWAGA</string>
+    <string name="gb_new_package_dialog_message_lollipop">Znaleziono zainstalowany GravityBox dla systemu KitKat. 
+        Aby używać nowej wersji, starsza musi zostać odinstalowana. Naciśnij przycisk OK, aby rozpocząć proces deinstalacji.
+        Po deinstalacji nie zapomnij, aby aktywować nowy moduł w Xposed i NATYCHMIAST URUCHOMIĆ PONOWNIE.</string>
+
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">Kopia zapasowa wykonana w starszej wersji Androida nie może być przywrócona 
+         ze względu na znaczne różnice systemów. Zalecane jest skonfigurowanie Gravitybox od podstaw.</string>
+
 </resources>
