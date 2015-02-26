@@ -1200,12 +1200,6 @@
     <string name="pref_cat_qs_tile_settings_summary">Contains tile specific settings</string>
     <string name="pref_cat_qs_nm_tile_settings_title">Network mode tile settings</string>
 
-    <!-- QS Tiles: Alarm tile settings -->
-    <string name="pref_cat_qs_alarm_tile_settings_title">Alarm tile settings</string>
-    <string name="pref_qs_alarm_singletap_app_title">Single-tap app</string>
-    <string name="alarm_singletap_app_default">Default app</string>
-    <string name="pref_qs_alarm_longpress_app_title">Long-press app</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Ultimate notification control</string>
     <string name="pref_led_control_summary">Allows controlling notification lights, sounds and vibrations on per-app basis</string>

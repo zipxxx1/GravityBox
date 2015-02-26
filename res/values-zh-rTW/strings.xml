@@ -1194,12 +1194,6 @@
     <string name="pref_cat_qs_tile_settings_summary">包含某些瓷貼的特定設定</string>
     <string name="pref_cat_qs_nm_tile_settings_title">網路模式瓷貼設定</string>
 
-    <!-- QS Tiles: Alarm tile settings -->
-    <string name="pref_cat_qs_alarm_tile_settings_title">鬧鐘瓷貼設定</string>
-    <string name="pref_qs_alarm_singletap_app_title">單擊應用程式</string>
-    <string name="alarm_singletap_app_default">預設應用程式</string>
-    <string name="pref_qs_alarm_longpress_app_title">長按應用程式</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">通知控制</string>
     <string name="pref_led_control_summary">允許控制每一個應用程式的通知燈、音效與震動設定</string>

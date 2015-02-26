@@ -1201,12 +1201,6 @@
     <string name="pref_cat_qs_tile_settings_summary">Csempe specifikus beállításokat tartalmaz</string>
     <string name="pref_cat_qs_nm_tile_settings_title">Hálózati mód csempe beállítások</string>
 
-    <!-- QS Tiles: Alarm tile settings -->
-    <string name="pref_cat_qs_alarm_tile_settings_title">Ébresztés csempe beállítások</string>
-    <string name="pref_qs_alarm_singletap_app_title">Egyszeri érintés alkalmazása</string>
-    <string name="alarm_singletap_app_default">Alapértelmezett alkalmazás</string>
-    <string name="pref_qs_alarm_longpress_app_title">Hosszú érintés alkalmazása</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Értesítés vezérlés</string>
     <string name="pref_led_control_summary">Lehetővé teszi az értesítési fények, hangok és rezgések alkalmazásonkénti szabályozását</string>

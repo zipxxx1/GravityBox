@@ -156,24 +156,6 @@
                 android:dependency="pref_qs_management_enable">
 
                 <PreferenceScreen
-                    android:key="pref_cat_qs_alarm_tile_settings"
-                    android:title="@string/pref_cat_qs_alarm_tile_settings_title">
-
-                    <com.ceco.lollipop.gravitybox.preference.AppPickerPreference
-                        android:key="pref_qs_alarm_singletap_app"
-                        android:title="@string/pref_qs_alarm_singletap_app_title"
-                        android:summary="@string/alarm_singletap_app_default"
-                        iconPickerEnabled="false" />
-
-                    <com.ceco.lollipop.gravitybox.preference.AppPickerPreference
-                        android:key="pref_qs_alarm_longpress_app"
-                        android:title="@string/pref_qs_alarm_longpress_app_title"
-                        android:summary="@string/app_picker_none"
-                        iconPickerEnabled="false" />
-
-                </PreferenceScreen>
-
-                <PreferenceScreen
                     android:key="pref_cat_quick_app_tile"
                     android:title="@string/pref_cat_quickapp_tile_title">
 

@@ -1159,12 +1159,6 @@
     <string name="pref_cat_qs_tile_settings_summary">Özel kare ayarlarını içerir</string>
     <string name="pref_cat_qs_nm_tile_settings_title">Ağ modu karesi ayarları</string>
 
-    <!-- QS Tiles: Alarm tile settings -->
-    <string name="pref_cat_qs_alarm_tile_settings_title">Alarm karesi ayarları</string>
-    <string name="pref_qs_alarm_singletap_app_title">Tek dokunuş uyg.sı</string>
-    <string name="alarm_singletap_app_default">Varsayılan uygulama</string>
-    <string name="pref_qs_alarm_longpress_app_title">Uzun basma uyg.sı</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Güçlü bildirim kontrolü</string>
     <string name="pref_led_control_summary">Allows controlling notification lights, sounds and vibrations on per-app basis</string>

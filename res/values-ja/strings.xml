@@ -992,11 +992,6 @@
     <string name="pref_cat_qs_tile_settings_title">タイル個別設定</string>
     <string name="pref_cat_qs_tile_settings_summary">タイル別の設定をします。</string>
     <string name="pref_cat_qs_nm_tile_settings_title">ネットワークモードタイル設定</string>
-    <!-- QS Tiles: Alarm tile settings -->
-    <string name="pref_cat_qs_alarm_tile_settings_title">アラームタイル設定</string>
-    <string name="pref_qs_alarm_singletap_app_title">タップで起動するアプリ</string>
-    <string name="alarm_singletap_app_default">デフォルトのアプリ</string>
-    <string name="pref_qs_alarm_longpress_app_title">長押しで起動するアプリ</string>
     <!-- Led control -->
     <string name="pref_led_control_title">通知コントロール</string>
     <string name="pref_led_control_summary">通知LEDや通知音、バイブをアプリごとに管理します。</string>

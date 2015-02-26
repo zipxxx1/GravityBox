@@ -1179,12 +1179,6 @@
     <string name="pref_cat_qs_tile_settings_summary">Obsahuje nastavení specifické pro jednotlivé dlaždice</string>
     <string name="pref_cat_qs_nm_tile_settings_title">Nastavení dlaždice Typ sítě</string>
 
-    <!-- QS Tiles: Alarm tile settings -->
-    <string name="pref_cat_qs_alarm_tile_settings_title">Nastavení dlaždice Budík</string>
-    <string name="pref_qs_alarm_singletap_app_title">Aplikace na ťuknutí</string>
-    <string name="alarm_singletap_app_default">Výchozí</string>
-    <string name="pref_qs_alarm_longpress_app_title">Aplikace na dlouhé podržení</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Nastavení oznámení</string>
     <string name="pref_led_control_summary">Umožňuje nastavení LED, zvuků a vibrací oznámení pro každou aplikaci samostatně</string>

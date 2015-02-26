@@ -1181,12 +1181,6 @@
     <string name="pref_cat_qs_tile_settings_summary">Zawiera specyficzne ustawienia kafelka</string>
     <string name="pref_cat_qs_nm_tile_settings_title">Ustawienia kefelka Trybu Sieci</string>
 
-    <!-- QS Tiles: Alarm tile settings -->
-    <string name="pref_cat_qs_alarm_tile_settings_title">Ustawienia kefelka Alarmu</string>
-    <string name="pref_qs_alarm_singletap_app_title">Apl. pojedynczego kliknięcia</string>
-    <string name="alarm_singletap_app_default">Domyślna aplikacja</string>
-    <string name="pref_qs_alarm_longpress_app_title">Apl. długiego naciśnięcia</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Nadrzędne ustawienia powiadomień</string>
     <string name="pref_led_control_summary">Pozwalają na kontrolowanie powiadomień LED, dźwięków i wibracji dla poszczególnych aplikacji</string>

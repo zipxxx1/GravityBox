@@ -576,8 +576,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_RINGER_MODE_TILE_MODE = "pref_qs_ringer_mode";
     public static final String PREF_STAY_AWAKE_TILE_MODE = "pref_qs_stay_awake";
     public static final String PREF_KEY_QS_TILE_SPAN_DISABLE = "pref_qs_tile_span_disable";
-    public static final String PREF_KEY_QS_ALARM_SINGLETAP_APP = "pref_qs_alarm_singletap_app";
-    public static final String PREF_KEY_QS_ALARM_LONGPRESS_APP = "pref_qs_alarm_longpress_app";
     public static final String EXTRA_NMT_MODE = "networkModeTileMode";
     public static final String EXTRA_NMT_2G3G_MODE = "networkModeTile2G3GMode";
     public static final String EXTRA_NMT_LTE = "networkModeTileLte";
@@ -585,8 +583,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_RMT_MODE = "ringerModeTileMode";
     public static final String EXTRA_SA_MODE = "stayAwakeTileMode";
     public static final String EXTRA_QS_TILE_SPAN_DISABLE = "qsTileSpanDisable";
-    public static final String EXTRA_QS_ALARM_SINGLETAP_APP = "qsAlarmSingletapApp";
-    public static final String EXTRA_QS_ALARM_LONGPRESS_APP = "qsAlarmLongpressApp";
 
     public static final String PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS = "pref_display_allow_all_rotations";
     public static final String ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED = 
@@ -2885,14 +2881,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_TILE_SPAN_DISABLE,
                         prefs.getBoolean(PREF_KEY_QS_TILE_SPAN_DISABLE, false));
-            } else if (key.equals(PREF_KEY_QS_ALARM_SINGLETAP_APP)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_QS_ALARM_SINGLETAP_APP,
-                        prefs.getString(PREF_KEY_QS_ALARM_SINGLETAP_APP, null));
-            } else if (key.equals(PREF_KEY_QS_ALARM_LONGPRESS_APP)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_QS_ALARM_LONGPRESS_APP,
-                        prefs.getString(PREF_KEY_QS_ALARM_LONGPRESS_APP, null));
             } else if (key.equals(PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS)) {
                 intent.setAction(ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED);
                 intent.putExtra(EXTRA_ALLOW_ALL_ROTATIONS, 

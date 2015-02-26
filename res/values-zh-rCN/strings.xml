@@ -1209,12 +1209,6 @@
     <string name="pref_cat_qs_tile_settings_summary">磁贴包含特定设置</string>
     <string name="pref_cat_qs_nm_tile_settings_title">网络模式磁贴设置</string>
 
-    <!-- QS Tiles: Alarm tile settings -->
-    <string name="pref_cat_qs_alarm_tile_settings_title">闹钟磁贴设置</string>
-    <string name="pref_qs_alarm_singletap_app_title">单击应用</string>
-    <string name="alarm_singletap_app_default">默认应用</string>
-    <string name="pref_qs_alarm_longpress_app_title">长按应用</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">终极通知控制</string>
     <string name="pref_led_control_summary">允许控制通知指示灯在每个应用程序的基础上控制声音和振动</string>

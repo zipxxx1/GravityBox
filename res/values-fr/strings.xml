@@ -1206,12 +1206,6 @@
     <string name="pref_cat_qs_tile_settings_summary">Regroupe les paramètres spécifiques aux touches</string>
     <string name="pref_cat_qs_nm_tile_settings_title">Paramètres de la touche Mode Réseau</string>
 
-    <!-- QS Tiles: Alarm tile settings -->
-    <string name="pref_cat_qs_alarm_tile_settings_title">Paramètres de la touche Alarme</string>
-    <string name="pref_qs_alarm_singletap_app_title">Appli simple appui</string>
-    <string name="alarm_singletap_app_default">Appli par défaut</string>
-    <string name="pref_qs_alarm_longpress_app_title">Appli appui long</string>
-
     <!-- Led control -->
     <string name="pref_led_control_title">Contrôle ultime de notification</string>
     <string name="pref_led_control_summary">Permet de contrôler les lumières, sons et vibrations de notification application par application</string>
