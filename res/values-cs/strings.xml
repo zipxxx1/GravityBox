@@ -1413,14 +1413,6 @@
     <string name="clock_date_format_4">MMM d</string>
     <string name="clock_date_format_5">d</string>
 
-    <!-- Battery tile settings -->
-    <string name="pref_cat_qs_battery_tile_settings_title">Nastavení dlaždice Stav baterie</string>
-    <string name="pref_qs_battery_extended_title">Rozšířený stav baterie</string>
-    <string name="pref_qs_battery_extended_summary">Vyžaduje restart</string>
-    <string name="pref_qs_battery_temp_unit_title">Jednotka teploty</string>
-    <string name="celsius">Celzius</string>
-    <string name="fahrenheit">Fahrenheit</string>
-
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">Akce sluchátek</string>
     <string name="pref_headset_action_plug_title">Po připojení sluchátek</string>

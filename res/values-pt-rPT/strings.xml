@@ -1420,14 +1420,6 @@
     <string name="clock_date_format_4">Formato da data: MMM d</string>
     <string name="clock_date_format_5">Formato da data: d</string>
 
-    <!-- Battery tile settings -->
-    <string name="pref_cat_qs_battery_tile_settings_title">Definiçoes do painel Bateria</string>
-    <string name="pref_qs_battery_extended_title">Painel avançado</string>
-    <string name="pref_qs_battery_extended_summary">Permite mostar percentagem, percentagem e tensão da bateria no painel (necessário reiniciar)</string>
-    <string name="pref_qs_battery_temp_unit_title">Unidade de temperatura</string>
-    <string name="celsius">Celsius</string>
-    <string name="fahrenheit">Fahrenheit</string>
-
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">Ações associadas ao auricular</string>
     <string name="pref_headset_action_plug_title">Quando o auricular for ligado</string>

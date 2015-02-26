@@ -1449,14 +1449,6 @@
     <string name="clock_date_format_3">日期格式: d MMM</string>
     <string name="clock_date_format_4">日期格式: MMM d</string>
     <string name="clock_date_format_5">日期格式: d</string>
-    
-    <!-- Battery tile settings -->
-    <string name="pref_cat_qs_battery_tile_settings_title">电池磁贴设置</string>
-    <string name="pref_qs_battery_extended_title">扩展电池磁贴</string>
-    <string name="pref_qs_battery_extended_summary">需要重新启动</string>
-    <string name="pref_qs_battery_temp_unit_title">温度单位</string>
-    <string name="celsius">摄氏度</string>
-    <string name="fahrenheit">华氏度</string>
 
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">耳机动作</string>

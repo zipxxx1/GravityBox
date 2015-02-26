@@ -1187,13 +1187,6 @@
     <string name="clock_date_format_3">日付形式: d MMM</string>
     <string name="clock_date_format_4">日付形式: MMM d</string>
     <string name="clock_date_format_5">日付形式: d</string>
-    <!-- Battery tile settings -->
-    <string name="pref_cat_qs_battery_tile_settings_title">バッテリータイル設定</string>
-    <string name="pref_qs_battery_extended_title">拡張バッテリータイル</string>
-    <string name="pref_qs_battery_extended_summary">有効化したら再起動してください。</string>
-    <string name="pref_qs_battery_temp_unit_title">温度の単位</string>
-    <string name="celsius">摂氏 (&#8451;)</string>
-    <string name="fahrenheit">華氏 (&#8457;)</string>
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">ヘッドセットアクション</string>
     <string name="pref_headset_action_plug_title">ヘッドセット接続時</string>

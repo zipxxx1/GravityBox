@@ -1427,14 +1427,6 @@
     <string name="clock_date_format_4">日期格式：MMM d</string>
     <string name="clock_date_format_5">日期格式：d</string>
 
-    <!-- Battery tile settings -->
-    <string name="pref_cat_qs_battery_tile_settings_title">電池狀態瓷貼設定</string>
-    <string name="pref_qs_battery_extended_title">在電池狀態瓷貼中顯示詳細資訊</string>
-    <string name="pref_qs_battery_extended_summary">需要重新啟動</string>
-    <string name="pref_qs_battery_temp_unit_title">溫度單位</string>
-    <string name="celsius">攝氏</string>
-    <string name="fahrenheit">華氏</string>
-
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">插拔耳機觸發的動作</string>
     <string name="pref_headset_action_plug_title">當插入耳機時</string>

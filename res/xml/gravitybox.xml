@@ -156,26 +156,6 @@
                 android:dependency="pref_qs_management_enable">
 
                 <PreferenceScreen
-                    android:key="pref_cat_qs_battery_tile_settings"
-                    android:title="@string/pref_cat_qs_battery_tile_settings_title">
-
-                    <CheckBoxPreference 
-                        android:key="pref_qs_battery_extended"
-                        android:title="@string/pref_qs_battery_extended_title"
-                        android:summary="@string/pref_qs_battery_extended_summary"
-                        android:defaultValue="false" />
-
-                    <ListPreference
-                        android:key="pref_qs_battery_temp_unit" 
-                        android:title="@string/pref_qs_battery_temp_unit_title"
-                        android:entries="@array/temperature_unit_entries"
-                        android:entryValues="@array/temperature_unit_values"
-                        android:defaultValue="C"
-                        android:dependency="pref_qs_battery_extended" />
-
-                </PreferenceScreen>
-
-                <PreferenceScreen
                     android:key="pref_cat_qs_alarm_tile_settings"
                     android:title="@string/pref_cat_qs_alarm_tile_settings_title">
 

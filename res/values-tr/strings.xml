@@ -1393,14 +1393,6 @@
     <string name="clock_date_format_4">Tarih formatı : AAA g</string>
     <string name="clock_date_format_5">Tarih formatı: g</string>
 
-    <!-- Battery tile settings -->
-    <string name="pref_cat_qs_battery_tile_settings_title">Pil karesi ayarları</string>
-    <string name="pref_qs_battery_extended_title">Genişletilmiş pil karesi</string>
-    <string name="pref_qs_battery_extended_summary">Yeniden başlatma gerekir</string>
-    <string name="pref_qs_battery_temp_unit_title">Sıcaklık Birimi</string>
-    <string name="celsius">Celsius</string>
-    <string name="fahrenheit">Fahrenayt</string>
-
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">Kulaklık eylemleri</string>
     <string name="pref_headset_action_plug_title">Kulaklık takıldığında</string>

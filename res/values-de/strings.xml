@@ -1443,14 +1443,6 @@
     <string name="clock_date_format_4">Datumsformat: MMM t</string>
     <string name="clock_date_format_5">Datumsformat: t</string>
 
-    <!-- Battery tile settings -->
-    <string name="pref_cat_qs_battery_tile_settings_title">Einstellungen des Akku-Symbols</string>
-    <string name="pref_qs_battery_extended_title">Erweiterter Symboltitel</string>
-    <string name="pref_qs_battery_extended_summary">Neustart erforderlich</string>
-    <string name="pref_qs_battery_temp_unit_title">Temperatureinheit</string>
-    <string name="celsius">Celsius</string>
-    <string name="fahrenheit">Fahrenheit</string>
-
     <!-- Headset plug/unplug actions -->
     <string name="pref_cat_headset_actions_title">Kopfhöreraktionen</string>
     <string name="pref_headset_action_plug_title">Kopfhörer verbunden</string>
