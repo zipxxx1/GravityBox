@@ -810,10 +810,6 @@ public class ModQuickSettings {
                 wifiApTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(wifiApTile);
 
-                UsbTetherTile utTile = new UsbTetherTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                utTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                mTiles.add(utTile);
-
                 if (Utils.hasCompass(mContext)) {
                     CompassTile cTile = new CompassTile(mContext, mGbContext, mStatusBar, mPanelBar);
                     cTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);

@@ -121,7 +121,7 @@
         <item>@string/qs_tile_expanded_desktop</item>
         <item>@string/qs_tile_screenshot</item>
         <item>@string/qs_tile_gravitybox</item>
-        <item>@string/qs_tile_usb_tethering</item>
+        <!-- item>@string/qs_tile_usb_tethering</item -->
         <item>@string/qs_tile_music</item>
         <item>@string/qs_tile_lock_screen</item>
         <item>@string/lc_quiet_hours</item>
@@ -162,7 +162,7 @@
         <item>gb_tile_expanded_desktop</item>
         <item>gb_tile_screenshot</item>
         <item>gb_tile_gravitybox</item>
-        <item>gb_tile_usb_tether</item>
+        <!-- item>gb_tile_usb_tether</item -->
         <item>gb_tile_music</item>
         <item>gb_tile_lock_screen</item>
         <item>gb_tile_quiet_hours</item>
