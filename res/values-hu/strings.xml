@@ -498,10 +498,6 @@
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Összes elforgatás engedélyezése</string>
 
-    <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">Alapértelmezett csempe viselkedés felülírása</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Felcseréli az érintés/hosszú érintés viselkedését és változtatás utáni elrejtés funkciót ad a kiválasztott csempéknél (újraindítás szükséges)</string>
-
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Hálózati üzemmód csempe SIM kártya hely</string>
     <string name="pref_qs_network_mode_sim_slot_summary">Meghatározza a SIM kártya helyet, amire a hálózati üzemmód csempe vonatkozik (%s)</string>

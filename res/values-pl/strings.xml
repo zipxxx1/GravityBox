@@ -481,10 +481,6 @@
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Zezwalaj na pełen obrót</string>
 
-    <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">Zmień domyślne zachowanie kafelków</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Zamienia akcje krótkiego i długiego naciśnięcia oraz dodaje wsparcie \'Ukryj po zmianie\' dla wybranych kafelków (wymagany restart)</string>
-
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Gniazdo SIM dla Kafelka trybu sieci</string>
     <string name="pref_qs_network_mode_sim_slot_summary">Definiuje gniazdo SIM którego dotyczy kafelek trybu sieci (%s)</string>

@@ -412,9 +412,6 @@
     <string name="nm_tile_mode3">2G/3G/(LTE)</string>
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">画面の向きの自由化</string>
-    <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">標準タイルアクションを上書き</string>
-    <string name="pref_qs_tile_behaviour_override_summary">選択したタイルのタッチ/長押しアクションを変更します。(要再起動)</string>
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">ネットワークモードタイルのSIMスロット</string>
     <string name="pref_qs_network_mode_sim_slot_summary">ネットワークモードタイルでどのSIMスロットに対して適用するか設定します。(%s)</string>

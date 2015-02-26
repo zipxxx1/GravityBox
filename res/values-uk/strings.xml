@@ -288,8 +288,6 @@
     <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
     <string name="nm_tile_mode3">2G/3G/(LTE)</string>
     <string name="pref_display_allow_all_rotations_title">Дозволити всі повороти</string>
-    <string name="pref_qs_tile_behaviour_override_title">Замінити стандартну поведінку тайлів</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Замінює поведінка торкання/довгого торкання для обраних тайлів (необхідне перезавантаження)</string>
     <string name="pref_qs_network_mode_sim_slot_title">Слот SIM для тайла Режим мережі</string>
     <string name="pref_qs_network_mode_sim_slot_summary">Визначає слот, для якого працює тайл Режим мережі ( %s)</string>
     <string name="sim_slot1">SIM-слот 1</string>

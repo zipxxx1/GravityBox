@@ -495,10 +495,6 @@
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允許畫面可以全方位旋轉</string>
 
-    <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">更改系統預設瓷貼動作</string>
-    <string name="pref_qs_tile_behaviour_override_summary">為指定的瓷貼新增 點擊後隱藏 功能及把系統預設的輕觸/長按動作互換</string>
-
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">網路模式瓷貼 SIM 卡槽</string>
     <string name="pref_qs_network_mode_sim_slot_summary">指定 [網路模式] 瓷貼設定的目標 SIM 卡槽 (%s)</string>

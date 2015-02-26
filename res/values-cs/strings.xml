@@ -474,10 +474,6 @@
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Povolit všechny rotace</string>
 
-    <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">Změnit standardní chování dlaždic</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Přehodí akce na dotek/dlouhý dotek a přidá podporu \'Zavřít po změně\' pro zvolené dlaždice (vyžaduje restart)</string>
-
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">SIM slot pro typ mobilní sítě</string>
     <string name="pref_qs_network_mode_sim_slot_summary">Definuje SIM slot, na který se vztahuje dlaždice změny režimu mobilní sítě (%s)</string>

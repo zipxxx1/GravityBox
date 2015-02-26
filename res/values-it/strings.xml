@@ -498,10 +498,6 @@
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Abilita tutte le rotazioni</string>
 
-    <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">Ignora funzionamento standard</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Inverte il funzionamento pressione/pressione prolungata delle caselle Quicksetting (richiede riavvio)</string>
-
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">SIM modalità rete</string>
     <string name="pref_qs_network_mode_sim_slot_summary">Definisce a quale SIM applicare le impostazioni (%s)</string>

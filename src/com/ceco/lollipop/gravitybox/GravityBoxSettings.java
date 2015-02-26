@@ -595,8 +595,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             "gravitybox.intent.action.DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED";
     public static final String EXTRA_ALLOW_ALL_ROTATIONS = "allowAllRotations";
 
-    public static final String PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE = "pref_qs_tile_behaviour_override";
-
     public static final String PREF_KEY_QS_NETWORK_MODE_SIM_SLOT = "pref_qs_network_mode_sim_slot";
     public static final String ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED =
             "gravitybox.intent.action.QS_NETWORK_MODE_SIM_SLOT_CHANGED";
@@ -821,7 +819,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_BRIGHTNESS_MASTER_SWITCH,
             PREF_KEY_NAVBAR_OVERRIDE,
             PREF_KEY_NAVBAR_ENABLE,
-            PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE,
             PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
             PREF_KEY_QUICK_SETTINGS_ENABLE,
             PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY,
@@ -1176,7 +1173,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefNetworkModeTile2G3GMode;
         private CheckBoxPreference mPrefNetworkModeTileLte;
         private CheckBoxPreference mPrefNetworkModeTileCdma;
-        private MultiSelectListPreference mPrefQsTileBehaviourOverride;
         private ListPreference mPrefQsNetworkModeSimSlot;
         private ListPreference mPrefSbSignalColorMode;
         private CheckBoxPreference mPrefUnplugTurnsOnScreen;
@@ -1459,8 +1455,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNetworkModeTile2G3GMode = (ListPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_2G3G_MODE);
             mPrefNetworkModeTileLte = (CheckBoxPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_LTE);
             mPrefNetworkModeTileCdma = (CheckBoxPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_CDMA);
-            mPrefQsTileBehaviourOverride = 
-                    (MultiSelectListPreference) findPreference(PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE);
             mPrefQsNetworkModeSimSlot = (ListPreference) findPreference(PREF_KEY_QS_NETWORK_MODE_SIM_SLOT);
             mPrefQsTileOrder = (Preference) findPreference(PREF_KEY_QUICK_SETTINGS_TILE_ORDER);
             mPrefQsTileLabelStyle = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE);
@@ -1775,38 +1769,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mQuickSettings.setEntries(qsEntries.toArray(new CharSequence[qsEntries.size()]));
             mQuickSettings.setEntryValues(qsEntryValues.toArray(new CharSequence[qsEntryValues.size()]));
             TileOrderActivity.updateTileList(mPrefs);
-
-            // Remove overriden tiles based on device type
-            List<CharSequence> qsoEntries = new ArrayList<CharSequence>(Arrays.asList(
-                    mPrefQsTileBehaviourOverride.getEntries()));
-            List<CharSequence> qsoEntryValues = new ArrayList<CharSequence>(Arrays.asList(
-                    mPrefQsTileBehaviourOverride.getEntryValues()));
-            Set<String> qsoPrefs = mPrefs.getStringSet(PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE, null);
-            if (Utils.isMtkDevice()) {
-                qsoEntries.remove(getString(R.string.qs_tile_wifi));
-                qsoEntries.remove(getString(R.string.qs_tile_data_usage));
-                qsoEntries.remove(getString(R.string.qs_tile_autorotation));
-                qsoEntries.remove(getString(R.string.qs_tile_airplane_mode));
-                qsoEntries.remove(getString(R.string.qs_tile_bluetooth));
-                qsoEntries.remove(getString(R.string.qs_tile_gps));
-                qsoEntryValues.remove("wifi_textview");
-                qsoEntryValues.remove("rssi_textview");
-                qsoEntryValues.remove("auto_rotate_textview");
-                qsoEntryValues.remove("airplane_mode_textview");
-                qsoEntryValues.remove("bluetooth_textview");
-                qsoEntryValues.remove("gps_textview");
-                if (qsoPrefs != null) {
-                    if (qsoPrefs.contains("wifi_textview")) qsoPrefs.remove("wifi_textview");
-                    if (qsoPrefs.contains("rssi_textview")) qsoPrefs.remove("rssi_textview");
-                    if (qsoPrefs.contains("auto_rotate_textview")) qsoPrefs.remove("auto_rotate_textview");
-                    if (qsoPrefs.contains("airplane_mode_textview")) qsoPrefs.remove("airplane_mode_textview");
-                    if (qsoPrefs.contains("bluetooth_textview")) qsoPrefs.remove("bluetooth_textview");
-                    if (qsoPrefs.contains("gps_textview")) qsoPrefs.remove("gps_textview");
-                }
-            }
-            mPrefs.edit().putStringSet(PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE, qsoPrefs).commit();
-            mPrefQsTileBehaviourOverride.setEntries(qsoEntries.toArray(new CharSequence[qsoEntries.size()]));
-            mPrefQsTileBehaviourOverride.setEntryValues(qsoEntryValues.toArray(new CharSequence[qsoEntryValues.size()]));
 
             // Remove actions for HW keys based on device features
             mPrefHwKeyMenuLongpress.setEntries(R.array.hwkey_action_entries);

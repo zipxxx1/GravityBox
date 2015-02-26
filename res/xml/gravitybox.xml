@@ -155,14 +155,6 @@
                 android:summary="@string/pref_cat_qs_tile_settings_summary"
                 android:dependency="pref_qs_management_enable">
 
-                <MultiSelectListPreference 
-                    android:key="pref_qs_tile_behaviour_override"
-                    android:title="@string/pref_qs_tile_behaviour_override_title"
-                    android:summary="@string/pref_qs_tile_behaviour_override_summary"
-                    android:entries="@array/qs_tile_override_entries"
-                    android:entryValues="@array/qs_tile_override_values"
-                    android:defaultValue="@array/empty_array" />
-
                 <PreferenceScreen
                     android:key="pref_cat_qs_battery_tile_settings"
                     android:title="@string/pref_cat_qs_battery_tile_settings_title">

@@ -501,10 +501,6 @@
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允许所有旋转方向</string>
 
-    <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">覆盖默认磁贴行为</string>
-    <string name="pref_qs_tile_behaviour_override_summary">交换单击/长按行为，并增加\'更改时隐藏\'选定磁贴的支持（需要重新启动）</string>
-
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">网络模式磁贴SIM卡插槽</string>
     <string name="pref_qs_network_mode_sim_slot_summary">定义网络模式磁贴对应的SIM卡插槽（%s）</string>

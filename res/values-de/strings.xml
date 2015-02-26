@@ -508,10 +508,6 @@
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Alle Bildschirmausrichtungen zulassen</string>
 
-    <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">Standardverhalten überschreiben</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Aktion beim Drücken/Gedrückthalten einiger Schnelleinstellungen austauschen (Neustart erforderlich)</string>
-
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Netzmodus-SIM-Steckplatz</string>
     <string name="pref_qs_network_mode_sim_slot_summary">SIM-Karte wählen, auf die die Schnelleinstellung zum Netzmodus angewandt wird (%s)</string>
