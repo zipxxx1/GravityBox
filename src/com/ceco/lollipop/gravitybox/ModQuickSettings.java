@@ -810,12 +810,6 @@ public class ModQuickSettings {
                 wifiApTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(wifiApTile);
 
-                if (Utils.hasFlash(mContext)) {
-                    TorchTile torchTile = new TorchTile(mContext, mGbContext, mStatusBar, mPanelBar);
-                    torchTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
-                    mTiles.add(torchTile);
-                }
-
                 UsbTetherTile utTile = new UsbTetherTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 utTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(utTile);

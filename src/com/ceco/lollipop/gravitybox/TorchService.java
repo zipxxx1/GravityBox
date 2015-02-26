@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,9 +25,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.os.ResultReceiver;
 import android.os.PowerManager.WakeLock;
 
 import com.ceco.lollipop.gravitybox.R;
@@ -37,6 +39,7 @@ public class TorchService extends Service {
 
     public static final String ACTION_TOGGLE_TORCH = "gravitybox.intent.action.TOGGLE_TORCH";
     public static final String ACTION_TORCH_STATUS_CHANGED = "gravitybox.intent.action.TORCH_STATUS_CHANGED";
+    public static final String ACTION_TORCH_GET_STATUS = "gravitybox.intent.action.TORCH_GET_STATUS";
     public static final String EXTRA_TORCH_STATUS = "torchStatus";
     public static final int TORCH_STATUS_OFF = 0;
     public static final int TORCH_STATUS_ON = 1;
@@ -80,14 +83,22 @@ public class TorchService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent != null && ACTION_TOGGLE_TORCH.equals(intent.getAction())) {
-            toggleTorch();
-            return START_REDELIVER_INTENT;
-        } else {
-            stopSelf();
-            return START_NOT_STICKY;
+        if (intent != null && intent.getAction() != null) {
+            if (ACTION_TOGGLE_TORCH.equals(intent.getAction())) {
+                toggleTorch();
+                return START_REDELIVER_INTENT;
+            }
+            if (ACTION_TORCH_GET_STATUS.equals(intent.getAction())) {
+                ResultReceiver receiver = intent.getParcelableExtra("receiver");
+                Bundle data = new Bundle();
+                data.putInt(EXTRA_TORCH_STATUS, mTorchStatus);
+                receiver.send(0, data);
+                return START_STICKY;
+            }
         }
-        
+
+        stopSelf();
+        return START_NOT_STICKY;
     }
 
     private synchronized void toggleTorch() {
