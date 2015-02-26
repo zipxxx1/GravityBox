@@ -38,20 +38,11 @@
         <!-- left icon, used for the grabber -->
         <ImageView android:id="@+id/grabber"
             android:src="@drawable/ic_grabber"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-        <!-- icon representing the galaxy s widget button -->
-        <ImageView android:id="@+id/icon"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop = "true"
-            android:layout_alignParentBottom = "true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dip" />
 
         <!-- The height is set to half the height of the parent, which is 64 dip -->
         <TextView android:id="@+id/name"
@@ -61,11 +52,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop = "true"
             android:layout_alignParentBottom = "true"
-            android:layout_toRightOf="@id/grabber"
-            android:layout_toLeftOf="@id/icon"
+            android:layout_toEndOf="@id/grabber"
             android:ellipsize="marquee"
             android:gravity="center_vertical"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceListItem" />
 
     </RelativeLayout>
 

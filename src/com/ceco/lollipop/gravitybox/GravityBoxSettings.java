@@ -1165,7 +1165,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefSbSignalColorMode;
         private CheckBoxPreference mPrefUnplugTurnsOnScreen;
         private MultiSelectListPreference mPrefCallVibrations;
-        private Preference mPrefQsTileOrder;
         private ListPreference mPrefQsTileLabelStyle;
         private ListPreference mPrefSbClockDate;
         private ListPreference mPrefSbClockDow;
@@ -1442,7 +1441,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNetworkModeTileLte = (CheckBoxPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_LTE);
             mPrefNetworkModeTileCdma = (CheckBoxPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_CDMA);
             mPrefQsNetworkModeSimSlot = (ListPreference) findPreference(PREF_KEY_QS_NETWORK_MODE_SIM_SLOT);
-            mPrefQsTileOrder = (Preference) findPreference(PREF_KEY_QUICK_SETTINGS_TILE_ORDER);
             mPrefQsTileLabelStyle = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE);
 
             mPrefSbClockDate = (ListPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_DATE);
@@ -3175,8 +3173,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     }
                 }
                 getActivity().recreate();
-            } else if (pref == mPrefQsTileOrder) {
-                intent = new Intent(getActivity(), TileOrderActivity.class);
             } else if (pref == mPrefPieColorReset) {
                 final Resources res = getResources();
                 final int bgColor = res.getColor(R.color.pie_background_color);
