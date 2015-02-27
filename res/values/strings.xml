@@ -87,7 +87,7 @@
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Statusbar QuickSettings tiles</string>
-    <string name="quick_settings_summary">Allows to show or hide QuickSettings tiles in statusbar</string>
+    <string name="quick_settings_summary">Allows to show or hide tiles in statusbar</string>
     <string name="qs_tile_airplane_mode">Airplane Mode</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
@@ -532,7 +532,7 @@
 
     <!-- QuickSettings tile order -->
     <string name="pref_qs_tile_order_title">Tile reordering</string>
-    <string name="pref_qs_tile_order_summary">Allows reordering of QuickSettings tiles</string>
+    <string name="pref_qs_tile_order_summary">Allows reordering of tiles</string>
 
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Ongoing notification blocker</string>
@@ -780,7 +780,8 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Hide on change</string>
-    <string name="pref_qs_hide_on_change_summary">Collapses statusbar automatically on tile single-tap. Applies to GravityBox tiles and overriden stock tiles.</string>
+    <string name="pref_qs_hide_on_change_summary">Collapses statusbar automatically on tile single-tap. 
+        Applies to simple 2-state tiles.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Power menu</string>
