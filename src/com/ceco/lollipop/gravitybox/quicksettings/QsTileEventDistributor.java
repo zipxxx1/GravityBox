@@ -1,12 +1,15 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
 
@@ -57,12 +60,14 @@ public class QsTileEventDistributor {
     private Context mContext;
     private XSharedPreferences mPrefs;
     private Map<String,QsEventListener> mListeners;
+    private List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private Object mKeyguardDelegate;
 
     public QsTileEventDistributor(Object host, XSharedPreferences prefs) {
         mHost = host;
         mPrefs = prefs;
         mListeners = new LinkedHashMap<String,QsEventListener>();
+        mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
 
         createHooks();
         prepareBroadcastReceiver();
@@ -100,6 +105,9 @@ public class QsTileEventDistributor {
                     for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
                         l.getValue().onHideOnChangeChanged(hideOnChange);
                     }
+                }
+                for (BroadcastSubReceiver receiver : mBroadcastSubReceivers) {
+                    receiver.onBroadcastReceived(context, intent);
                 }
             } else {
                 try {
@@ -258,6 +266,24 @@ public class QsTileEventDistributor {
         final String key = listener.getKey();
         if (mListeners.containsKey(key)) {
             mListeners.remove(key);
+        }
+    }
+
+    public synchronized void registerBroadcastSubReceiver(BroadcastSubReceiver receiver) {
+        if (receiver == null) 
+            throw new IllegalArgumentException("registerBroadcastSubReceiver: receiver cannot be null");
+
+        if (!mBroadcastSubReceivers.contains(receiver)) {
+            mBroadcastSubReceivers.add(receiver);
+        }
+    }
+
+    public synchronized void unregisterBroadcastSubReceiver(BroadcastSubReceiver receiver) {
+        if (receiver == null)
+            throw new IllegalArgumentException("unregisterBroadcastSubReceiver: receiver cannot be null");
+
+        if (mBroadcastSubReceivers.contains(receiver)) {
+            mBroadcastSubReceivers.remove(receiver);
         }
     }
 
