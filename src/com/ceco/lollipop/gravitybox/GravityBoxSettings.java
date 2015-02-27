@@ -2249,7 +2249,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 //            }
 
             if (key == null || key.equals(PREF_KEY_QUICK_PULLDOWN)) {
-                mPrefQuickPulldownSize.setEnabled(!"0".equals(mPrefQuickPulldown.getValue()));
+                mPrefQuickPulldownSize.setEnabled(!"0".equals(mPrefQuickPulldown.getValue()) &&
+                        mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, false));
             }
 
             if (key == null || key.equals(PREF_KEY_SCREENRECORD_SIZE)) {
