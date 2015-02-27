@@ -90,12 +90,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         if (resparam.packageName.equals(ModSettings.PACKAGE_NAME)) {
             ModSettings.initPackageResources(prefs, resparam);
         }
-
-// TODO: rework for Lollipop
-//        if (!Utils.hasLenovoVibeUI() &&
-//                resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
-//            ModQuickSettings.initResources(prefs, resparam);
-//        }
     }
 
     @Override
@@ -151,13 +145,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         if (ModDialer.PACKAGE_NAMES.contains(lpparam.packageName)) {
             ModDialer.init(prefs, lpparam.classLoader, lpparam.packageName);
         }
-
-// TODO: rework for Lollipop
-//        if (!Utils.hasLenovoVibeUI() &&
-//                lpparam.packageName.equals(ModQuickSettings.PACKAGE_NAME) &&
-//                prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, true)) {
-//            ModQuickSettings.init(prefs, lpparam.classLoader);
-//        }
 
         if (lpparam.packageName.equals(ModQsTiles.PACKAGE_NAME)) {
             ModQsTiles.init(prefs, lpparam.classLoader);
