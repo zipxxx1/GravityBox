@@ -89,6 +89,7 @@ import net.margaritov.preference.colorpicker.ColorPickerPreference;
 public class GravityBoxSettings extends Activity implements GravityBoxResultReceiver.Receiver {
     public static final String PREF_KEY_QUICK_SETTINGS_ENABLE = "pref_qs_management_enable";
     public static final String PREF_KEY_QUICK_SETTINGS = "pref_quick_settings3";
+    public static final String PREF_KEY_QUICK_SETTINGS_SECURED_TILES = "pref_qs_secured_tiles";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_ORDER = "pref_qs_tile_order";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE = "pref_qs_tile_label_style";
@@ -497,6 +498,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String ACTION_PREF_QUICKSETTINGS_CHANGED = "gravitybox.intent.action.QUICKSETTINGS_CHANGED";
     public static final String EXTRA_QS_PREFS = "qsPrefs";
+    public static final String EXTRA_QS_SECURED_TILES = "qsSecuredTiles";
     public static final String EXTRA_QS_COLS = "qsCols";
     public static final String EXTRA_QS_AUTOSWITCH = "qsAutoSwitch";
     public static final String EXTRA_QUICK_PULLDOWN = "quickPulldown";
@@ -1053,6 +1055,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SharedPreferences mPrefs;
         private AlertDialog mDialog;
         private MultiSelectListPreference mQuickSettings;
+        private MultiSelectListPreference mQsSecuredTiles;
         private PreferenceScreen mPrefCatAbout;
         private Preference mPrefAboutGb;
         private Preference mPrefAboutGplus;
@@ -1260,6 +1263,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefBatteryPercentCharging = (ListPreference) findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING);
             mLowBatteryWarning = (ListPreference) findPreference(PREF_KEY_LOW_BATTERY_WARNING_POLICY);
             mQuickSettings = (MultiSelectListPreference) findPreference(PREF_KEY_QUICK_SETTINGS);
+            mQsSecuredTiles = (MultiSelectListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_SECURED_TILES);
 
             mPrefCatAbout = (PreferenceScreen) findPreference(PREF_CAT_KEY_ABOUT);
             mPrefAboutGb = (Preference) findPreference(PREF_KEY_ABOUT_GRAVITYBOX);
@@ -1664,7 +1668,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mQuickSettings.getEntries()));
             List<CharSequence> qsEntryValues = new ArrayList<CharSequence>(Arrays.asList(
                     mQuickSettings.getEntryValues()));
+            List<CharSequence> qsSecEntries = new ArrayList<CharSequence>(Arrays.asList(
+                    mQsSecuredTiles.getEntries()));
+            List<CharSequence> qsSecEntryValues = new ArrayList<CharSequence>(Arrays.asList(
+                    mQsSecuredTiles.getEntryValues()));
             Set<String> qsPrefs = mPrefs.getStringSet(PREF_KEY_QUICK_SETTINGS, null);
+            Set<String> qsSecPrefs = mPrefs.getStringSet(PREF_KEY_QUICK_SETTINGS_SECURED_TILES, null);
             if (!Utils.hasFlash(getActivity())) {
                 qsEntries.remove(getString(R.string.qs_tile_torch_gb));
                 qsEntryValues.remove("gb_tile_torch");
@@ -1678,33 +1687,61 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.hasGPS(getActivity())) {
                 qsEntries.remove(getString(R.string.qs_tile_gps));
                 qsEntryValues.remove("aosp_tile_location");
+                qsSecEntries.remove(getString(R.string.qs_tile_gps));
+                qsSecEntryValues.remove("aosp_tile_location");
                 qsEntries.remove(getString(R.string.qs_tile_gps_alt));
                 qsEntryValues.remove("gb_tile_gps_alt");
+                qsSecEntries.remove(getString(R.string.qs_tile_gps_alt));
+                qsSecEntryValues.remove("gb_tile_gps_alt");
                 qsEntries.remove(getString(R.string.qs_tile_gps_slimkat));
                 qsEntryValues.remove("gb_tile_gps_slimkat");
+                qsSecEntries.remove(getString(R.string.qs_tile_gps_slimkat));
+                qsSecEntryValues.remove("gb_tile_gps_slimkat");
                 if (qsPrefs != null) {
                     if (qsPrefs.contains("aosp_tile_location")) qsPrefs.remove("aosp_tile_location");
                     if (qsPrefs.contains("gb_tile_gps_alt")) qsPrefs.remove("gb_tile_gps_alt");
                     if (qsPrefs.contains("gb_tile_gps_slimkat")) qsPrefs.remove("gb_tile_gps_slimkat");
                 }
+                if (qsSecPrefs != null) {
+                    if (qsSecPrefs.contains("aosp_tile_location")) qsSecPrefs.remove("aosp_tile_location");
+                    if (qsSecPrefs.contains("gb_tile_gps_alt")) qsSecPrefs.remove("gb_tile_gps_alt");
+                    if (qsSecPrefs.contains("gb_tile_gps_slimkat")) qsSecPrefs.remove("gb_tile_gps_slimkat");
+                }
             }
             if (Utils.isWifiOnly(getActivity())) {
                 qsEntries.remove(getString(R.string.qs_tile_data_usage));
                 qsEntryValues.remove("aosp_tile_cell");
+                qsSecEntries.remove(getString(R.string.qs_tile_data_usage));
+                qsSecEntryValues.remove("aosp_tile_cell");
                 qsEntries.remove(getString(R.string.qs_tile_data_usage_2));
                 qsEntryValues.remove("aosp_tile_cell2");
+                qsSecEntries.remove(getString(R.string.qs_tile_data_usage_2));
+                qsSecEntryValues.remove("aosp_tile_cell2");
                 qsEntries.remove(getString(R.string.qs_tile_network_mode));
                 qsEntryValues.remove("gb_tile_network_mode");
+                qsSecEntries.remove(getString(R.string.qs_tile_network_mode));
+                qsSecEntryValues.remove("gb_tile_network_mode");
                 qsEntries.remove(getString(R.string.qs_tile_smart_radio));
                 qsEntryValues.remove("gb_tile_smart_radio");
+                qsSecEntries.remove(getString(R.string.qs_tile_smart_radio));
+                qsSecEntryValues.remove("gb_tile_smart_radio");
                 qsEntries.remove(getString(R.string.qs_tile_mobile_data));
                 qsEntryValues.remove("mtk_tile_mobile_data");
+                qsSecEntries.remove(getString(R.string.qs_tile_mobile_data));
+                qsSecEntryValues.remove("mtk_tile_mobile_data");
                 if (qsPrefs != null) {
                     if (qsPrefs.contains("aosp_tile_cell")) qsPrefs.remove("aosp_tile_cell");
                     if (qsPrefs.contains("aosp_tile_cell2")) qsPrefs.remove("aosp_tile_cell2");
                     if (qsPrefs.contains("gb_tile_network_mode")) qsPrefs.remove("gb_tile_network_mode");
                     if (qsPrefs.contains("gb_tile_smart_radio")) qsPrefs.remove("gb_tile_smart_radio");
                     if (qsPrefs.contains("mtk_tile_mobile_data")) qsPrefs.remove("mtk_tile_mobile_data");
+                }
+                if (qsSecPrefs != null) {
+                    if (qsSecPrefs.contains("aosp_tile_cell")) qsSecPrefs.remove("aosp_tile_cell");
+                    if (qsSecPrefs.contains("aosp_tile_cell2")) qsSecPrefs.remove("aosp_tile_cell2");
+                    if (qsSecPrefs.contains("gb_tile_network_mode")) qsSecPrefs.remove("gb_tile_network_mode");
+                    if (qsSecPrefs.contains("gb_tile_smart_radio")) qsSecPrefs.remove("gb_tile_smart_radio");
+                    if (qsSecPrefs.contains("mtk_tile_mobile_data")) qsSecPrefs.remove("mtk_tile_mobile_data");
                 }
             }
             if (!Utils.hasNfc(getActivity())) {
@@ -1731,25 +1768,39 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!sSystemProperties.hasMsimSupport) {
                 qsEntries.remove(getString(R.string.qs_tile_data_usage_2));
                 qsEntryValues.remove("aosp_tile_cell2");
+                qsSecEntries.remove(getString(R.string.qs_tile_data_usage_2));
+                qsSecEntryValues.remove("aosp_tile_cell2");
                 if (qsPrefs != null && qsPrefs.contains("aosp_tile_cell2")) {
                     qsPrefs.remove("aosp_tile_cell2");
+                }
+                if (qsSecPrefs != null && qsSecPrefs.contains("aosp_tile_cell2")) {
+                    qsSecPrefs.remove("aosp_tile_cell2");
                 }
             }
             if (!Utils.isMtkDevice()) {
                 qsEntries.remove(getString(R.string.qs_tile_mobile_data));
+                qsSecEntries.remove(getString(R.string.qs_tile_mobile_data));
                 qsEntries.remove(getString(R.string.qs_tile_audio_profile));
                 qsEntryValues.remove("mtk_tile_mobile_data");
+                qsSecEntryValues.remove("mtk_tile_mobile_data");
                 qsEntryValues.remove("mtk_tile_audio_profile");
                 if (qsPrefs != null) {
                     if (qsPrefs.contains("mtk_tile_mobile_data")) qsPrefs.remove("mtk_tile_mobile_data");
                     if (qsPrefs.contains("mtk_tile_audio_profile")) qsPrefs.remove("mtk_tile_audio_profile");
                 }
+                if (qsSecPrefs != null) {
+                    if (qsSecPrefs.contains("mtk_tile_mobile_data")) qsSecPrefs.remove("mtk_tile_mobile_data");
+                    if (qsSecPrefs.contains("mtk_tile_audio_profile")) qsSecPrefs.remove("mtk_tile_audio_profile");
+                }
             }
 
             // and update saved prefs in case it was previously checked in previous versions
             mPrefs.edit().putStringSet(PREF_KEY_QUICK_SETTINGS, qsPrefs).commit();
+            mPrefs.edit().putStringSet(PREF_KEY_QUICK_SETTINGS_SECURED_TILES, qsSecPrefs).commit();
             mQuickSettings.setEntries(qsEntries.toArray(new CharSequence[qsEntries.size()]));
             mQuickSettings.setEntryValues(qsEntryValues.toArray(new CharSequence[qsEntryValues.size()]));
+            mQsSecuredTiles.setEntries(qsSecEntries.toArray(new CharSequence[qsSecEntries.size()]));
+            mQsSecuredTiles.setEntryValues(qsSecEntryValues.toArray(new CharSequence[qsSecEntryValues.size()]));
             TileOrderActivity.updateTileList(mPrefs);
 
             // Remove actions for HW keys based on device features
@@ -2362,6 +2413,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_PREFS, TileOrderActivity.updateTileList(prefs));
+            } else if (key.equals(PREF_KEY_QUICK_SETTINGS_SECURED_TILES)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QS_SECURED_TILES, prefs.getStringSet(
+                        key, new HashSet<String>()).toArray(new String[0]));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_COLS, Integer.valueOf(

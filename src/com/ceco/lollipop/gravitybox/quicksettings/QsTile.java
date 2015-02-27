@@ -1,5 +1,8 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -9,6 +12,7 @@ import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.Utils;
+import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListenerGb;
 
@@ -37,6 +41,8 @@ public abstract class QsTile implements QsEventListenerGb {
     protected QsTileEventDistributor mEventDistributor;
     protected boolean mSupportsHideOnChange = true;
     protected boolean mEnabled;
+    protected boolean mSecured;
+    protected int mStatusBarState;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -120,8 +126,27 @@ public abstract class QsTile implements QsEventListenerGb {
         if (DEBUG) log(getKey() + ": onEnabledChanged(" + enabled + ")");
     }
 
+    @Override
+    public void onSecuredChanged(boolean secured) {
+        mSecured = secured;
+        if (DEBUG) log(getKey() + ": onSecuredChanged(" + secured + ")");
+    }
+
+    @Override
+    public void onStatusBarStateChanged(int state) {
+        final int oldState = mStatusBarState;
+        mStatusBarState = state;
+        if (mSecured && mStatusBarState != oldState &&
+                mStatusBarState != StatusBarState.SHADE) {
+            refreshState();
+        }
+        if (DEBUG) log(getKey() + ": onStatusBarStateChanged(" + state + ")");
+    }
+
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible &= mEnabled;
+        mState.visible &= mEnabled && 
+                (!mSecured || !(mStatusBarState != StatusBarState.SHADE &&
+                    mEventDistributor.isKeyguardSecured()));
         mState.applyTo(state);
     }
 
@@ -131,6 +156,10 @@ public abstract class QsTile implements QsEventListenerGb {
     public void initPreferences() {
         String enabledTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ORDER, null);
         mEnabled = enabledTiles != null && enabledTiles.contains(mKey);
+
+        Set<String> securedTiles = mPrefs.getStringSet(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_SECURED_TILES,
+                new HashSet<String>());
+        mSecured = securedTiles.contains(mKey);
     }
 
     public Object getTile() {

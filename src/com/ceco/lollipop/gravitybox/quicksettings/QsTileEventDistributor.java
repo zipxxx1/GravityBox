@@ -1,8 +1,11 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
@@ -23,7 +26,9 @@ public class QsTileEventDistributor {
 
     private static final String CLASS_KG_TOUCH_DELEGATE = 
             "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
-
+    private static final String CLASS_STATUSBAR_WM = 
+            "com.android.systemui.statusbar.phone.StatusBarWindowManager";
+    
     public interface QsEventListener {
         String getKey();
         void handleUpdateState(Object state, Object arg);
@@ -31,6 +36,8 @@ public class QsTileEventDistributor {
         void onCreateTileView(View tileView) throws Throwable;
         void onBroadcastReceived(Context context, Intent intent);
         void onEnabledChanged(boolean enabled);
+        void onSecuredChanged(boolean secured);
+        void onStatusBarStateChanged(int state);
     }
 
     public interface QsEventListenerGb extends QsEventListener {
@@ -69,6 +76,14 @@ public class QsTileEventDistributor {
                     if (enabledTiles == null) enabledTiles = "";
                     for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
                         l.getValue().onEnabledChanged(enabledTiles.contains(l.getKey()));
+                    }
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_SECURED_TILES)) {
+                    Set<String> securedTiles = new HashSet<String>(Arrays.asList(
+                            intent.getStringArrayExtra(
+                            GravityBoxSettings.EXTRA_QS_SECURED_TILES)));
+                    for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
+                        l.getValue().onSecuredChanged(securedTiles.contains(l.getKey()));
                     }
                 }
                 if (intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED)) {
@@ -195,6 +210,17 @@ public class QsTileEventDistributor {
                             .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
                     if (l != null) {
                         l.handleDestroy();
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR_WM, cl, "setStatusBarState",
+                    int.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    int newState = (int) param.args[0];
+                    for (Entry<String,QsEventListener> entry : mListeners.entrySet()) {
+                        entry.getValue().onStatusBarStateChanged(newState);
                     }
                 }
             });

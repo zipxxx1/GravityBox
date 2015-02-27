@@ -149,6 +149,15 @@
                 android:defaultValue="@array/qs_tile_default_values"
                 android:dependency="pref_qs_management_enable" />
 
+            <MultiSelectListPreference 
+                android:key="pref_qs_secured_tiles"
+                android:title="@string/pref_qs_secured_tiles_title"
+                android:summary="@string/pref_qs_secured_tiles_summary"
+                android:entries="@array/qs_tile_secured_entries"
+                android:entryValues="@array/qs_tile_secured_values"
+                android:defaultValue="@array/empty_array"
+                android:dependency="pref_qs_management_enable" />
+
             <PreferenceScreen 
                 android:key="pref_cat_qs_tile_settings"
                 android:title="@string/pref_cat_qs_tile_settings_title"

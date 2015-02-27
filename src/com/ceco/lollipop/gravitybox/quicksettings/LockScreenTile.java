@@ -60,8 +60,19 @@ public class LockScreenTile extends QsTile {
     }
 
     @Override
+    public void initPreferences() {
+        super.initPreferences();
+        mSecured = true;
+    }
+
+    @Override
+    public void onSecuredChanged(boolean secured) {
+        // ignore as this tile is always secured
+    }
+
+    @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible = !mEventDistributor.isKeyguardShowingAndSecured();
+        mState.visible = true;
         if (mLockScreenEnabled) {
             mState.label = mGbContext.getString(R.string.quick_settings_lock_screen_on);
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_lock_screen_on);

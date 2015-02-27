@@ -1,11 +1,15 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
+import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -29,6 +33,8 @@ public abstract class AospTile implements QsEventListener {
     protected Context mContext;
     protected boolean mEnabled;
     protected Unhook mHandleUpdateStateHook;
+    protected boolean mSecured;
+    protected int mStatusBarState;
 
     public static AospTile create(Object host, Object tile, String aospKey, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -81,6 +87,10 @@ public abstract class AospTile implements QsEventListener {
     public void initPreferences() {
         String enabledTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ORDER, null);
         mEnabled = enabledTiles != null && enabledTiles.contains(getKey());
+
+        Set<String> securedTiles = mPrefs.getStringSet(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_SECURED_TILES,
+                new HashSet<String>());
+        mSecured = securedTiles.contains(getKey());
     }
 
     @Override
@@ -90,12 +100,32 @@ public abstract class AospTile implements QsEventListener {
     }
 
     @Override
+    public void onSecuredChanged(boolean secured) {
+        mSecured = secured;
+        if (DEBUG) log(getKey() + ": onSecuredChanged(" + secured + ")");
+    }
+
+    @Override
+    public void onStatusBarStateChanged(int state) {
+        final int oldState = mStatusBarState;
+        mStatusBarState = state;
+        if (mSecured && mStatusBarState != oldState &&
+                mStatusBarState != StatusBarState.SHADE) {
+            refreshState();
+        }
+        if (DEBUG) log(getKey() + ": onStatusBarStateChanged(" + state + ")");
+    }
+
+    @Override
     public void onBroadcastReceived(Context context, Intent intent) {
     }
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        XposedHelpers.setBooleanField(state, "visible", mEnabled);
+        final boolean visible = mEnabled &&
+                (!mSecured || !(mStatusBarState != StatusBarState.SHADE &&
+                    mEventDistributor.isKeyguardSecured()));
+        XposedHelpers.setBooleanField(state, "visible", visible);
     }
 
     @Override
@@ -139,6 +169,16 @@ public abstract class AospTile implements QsEventListener {
                 }
             });
         } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    public void refreshState() {
+        try {
+            XposedHelpers.callMethod(mTile, "refreshState");
+            if (DEBUG) log(getKey() + ": refreshState called");
+        } catch (Throwable t) {
+            log("Error refreshing tile state: ");
             XposedBridge.log(t);
         }
     }
