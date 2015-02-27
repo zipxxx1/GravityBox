@@ -1104,7 +1104,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ColorPickerPreference mPrefSbDaColor;
         private PreferenceScreen mPrefCatStatusbar;
         private PreferenceScreen mPrefCatStatusbarQs;
-        private ListPreference mPrefAutoSwitchQs;
+        //private ListPreference mPrefAutoSwitchQs;
         private ListPreference mPrefQuickPulldown;
         private SeekBarPreference mPrefQuickPulldownSize;
         private PreferenceScreen mPrefCatNotifDrawerStyle;
@@ -1355,7 +1355,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatQsTileSettings = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_TILE_SETTINGS);
             mPrefCatQsNmTileSettings = (PreferenceScreen) findPreference(PREF_CAT_KEY_QS_NM_TILE_SETTINGS);
             mPrefCatStatusbarColors = (PreferenceScreen) findPreference(PREF_CAT_KEY_STATUSBAR_COLORS);
-            mPrefAutoSwitchQs = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
+            //mPrefAutoSwitchQs = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_AUTOSWITCH);
             mPrefQuickPulldown = (ListPreference) findPreference(PREF_KEY_QUICK_PULLDOWN);
             mPrefQuickPulldownSize = (SeekBarPreference) findPreference(PREF_KEY_QUICK_PULLDOWN_SIZE);
 
@@ -1563,7 +1563,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
-                mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
+                //mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
                 mPrefCatStatusbarQs.removePreference(mPrefQuickPulldown);
                 mPrefCatStatusbarQs.removePreference(mPrefQuickPulldownSize);
             }
