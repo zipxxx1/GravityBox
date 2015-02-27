@@ -23,8 +23,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.Formatter;
@@ -174,10 +176,13 @@ public class ModClearAllRecents {
 
                     // create and inject new ImageView and set onClick listener to handle action
                     mRecentsClearButton = new ImageView(vg.getContext());
-                    mRecentsClearButton.setImageDrawable(mGbContext.getResources().getDrawable(
+                    int icResId = res.getIdentifier("ic_dismiss_all", "drawable", PACKAGE_NAME);
+                    mRecentsClearButton.setImageDrawable(icResId != 0 ?
+                            res.getDrawable(icResId) : mGbContext.getResources().getDrawable(
                             R.drawable.ic_recent_clear));
-                    mRecentsClearButton.setBackground(mGbContext.getResources().getDrawable(
-                            R.drawable.image_view_button_bg)); 
+                    mRecentsClearButton.setBackground(new RippleDrawable(
+                            new ColorStateList(new int[][] { new int[]{} }, 
+                                    new int[] { 0xffffffff }), null, null));
                     FrameLayout.LayoutParams lParams = new FrameLayout.LayoutParams(
                             mClearAllRecentsSizePx, mClearAllRecentsSizePx);
                     mRecentsClearButton.setLayoutParams(lParams);
