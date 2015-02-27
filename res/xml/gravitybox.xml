@@ -329,6 +329,7 @@
                 android:dependency="pref_qs_management_enable" />
             -->
 
+            <!--
             <ListPreference
                 android:key="pref_qs_tile_label_style" 
                 android:title="@string/pref_qs_tile_label_style_title" 
@@ -336,6 +337,7 @@
                 android:entryValues="@array/tile_label_style_values"
                 android:defaultValue="ALLCAPS"
                 android:dependency="pref_qs_management_enable" />
+            -->
 
             <CheckBoxPreference 
                 android:key="pref_qs_hide_on_change"

@@ -1168,7 +1168,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefSbSignalColorMode;
         private CheckBoxPreference mPrefUnplugTurnsOnScreen;
         private MultiSelectListPreference mPrefCallVibrations;
-        private ListPreference mPrefQsTileLabelStyle;
+        //private ListPreference mPrefQsTileLabelStyle;
         private ListPreference mPrefSbClockDate;
         private ListPreference mPrefSbClockDow;
         private SeekBarPreference mPrefSbClockDowSize;
@@ -1445,7 +1445,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNetworkModeTileLte = (CheckBoxPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_LTE);
             mPrefNetworkModeTileCdma = (CheckBoxPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_CDMA);
             mPrefQsNetworkModeSimSlot = (ListPreference) findPreference(PREF_KEY_QS_NETWORK_MODE_SIM_SLOT);
-            mPrefQsTileLabelStyle = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE);
+            //mPrefQsTileLabelStyle = (ListPreference) findPreference(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE);
 
             mPrefSbClockDate = (ListPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_DATE);
             mPrefSbClockDow = (ListPreference) findPreference(PREF_KEY_STATUSBAR_CLOCK_DOW);
@@ -2242,9 +2242,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefPieLongpressDelay.setSummary(mPrefPieLongpressDelay.getEntry());
             }
 
-            if (key == null || key.equals(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE)) {
-                mPrefQsTileLabelStyle.setSummary(mPrefQsTileLabelStyle.getEntry());
-            }
+//            if (key == null || key.equals(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE)) {
+//                mPrefQsTileLabelStyle.setSummary(mPrefQsTileLabelStyle.getEntry());
+//            }
 
             if (key == null || key.equals(PREF_KEY_QUICK_PULLDOWN)) {
                 mPrefQuickPulldownSize.setEnabled(!"0".equals(mPrefQuickPulldown.getValue()));
