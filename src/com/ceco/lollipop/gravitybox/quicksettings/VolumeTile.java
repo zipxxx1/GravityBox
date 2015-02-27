@@ -39,10 +39,17 @@ public class VolumeTile extends QsTile {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        // we collapse panels ourselves
+        return false;
+    }
+
+    @Override
     public void handleClick() {
         collapsePanels();
         AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
         am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
+        super.handleClick();
     }
 
     @Override

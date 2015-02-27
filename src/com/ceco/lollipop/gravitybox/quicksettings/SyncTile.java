@@ -101,6 +101,7 @@ public class SyncTile extends QsTile {
     @Override
     public void handleClick() {
         toggleState();
+        super.handleClick();
     }
 
     @Override

@@ -65,6 +65,11 @@ public class MusicTile extends QsTile {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        return false;
+    }
+
+    @Override
     public void setListening(boolean listening) {
         if (listening && mEnabled) {
             prepareRemoteController();
@@ -103,6 +108,7 @@ public class MusicTile extends QsTile {
     @Override
     public void handleClick() {
         sendMediaButtonClick(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+        super.handleClick();
     }
 
     @Override

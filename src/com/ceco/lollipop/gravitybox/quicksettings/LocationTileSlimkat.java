@@ -170,6 +170,7 @@ public class LocationTileSlimkat extends QsTile {
     @Override
     public void handleClick() {
         setLocationEnabled(!mLocationEnabled);
+        super.handleClick();
     }
 
     @Override

@@ -57,7 +57,6 @@ public class QuickRecordTile extends QsTile {
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, prefs, eventDistributor);
 
-        mSupportsHideOnChange = false;
         mHandler = new Handler();
 
         mCurrentStateReceiver = new GravityBoxResultReceiver(mHandler);
@@ -279,6 +278,11 @@ public class QuickRecordTile extends QsTile {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        return false;
+    }
+
+    @Override
     public void handleClick() {
         if (mAudioFileName == null) {
             mRecordingState = STATE_NO_RECORDING;
@@ -303,6 +307,7 @@ public class QuickRecordTile extends QsTile {
                 stopPlaying();
                 break;
         }
+        super.handleClick();
     }
 
     @Override

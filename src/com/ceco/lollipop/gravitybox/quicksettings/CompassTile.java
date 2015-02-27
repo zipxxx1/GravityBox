@@ -68,10 +68,16 @@ public class CompassTile extends QsTile implements SensorEventListener {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        return false;
+    }
+
+    @Override
     public void handleClick() {
         mActive = !mActive;
         refreshState();
         setListeningSensors(mActive);
+        super.handleClick();
     }
 
     @Override

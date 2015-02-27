@@ -52,6 +52,7 @@ public class SleepTile extends QsTile {
             log(getKey() + ": Error calling PowerManager goToSleep(): ");
             XposedBridge.log(t);
         }
+        super.handleClick();
     }
 
     @Override

@@ -81,6 +81,7 @@ public class SmartRadioTile extends QsTile {
     public void handleClick() {
         Intent i = new Intent(ModSmartRadio.ACTION_TOGGLE_SMART_RADIO);
         mContext.sendBroadcast(i);
+        super.handleClick();
     }
 
     @Override

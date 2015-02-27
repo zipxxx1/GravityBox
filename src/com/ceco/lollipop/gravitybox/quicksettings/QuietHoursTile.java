@@ -110,6 +110,7 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
     @Override
     public void handleClick() {
         toggleState();
+        super.handleClick();
     }
 
     @Override

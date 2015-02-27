@@ -210,8 +210,14 @@ public class StayAwakeTile extends QsTile {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        return false;
+    }
+
+    @Override
     public void handleClick() {
         toggleStayAwake();
+        super.handleClick();
     }
 
     @Override

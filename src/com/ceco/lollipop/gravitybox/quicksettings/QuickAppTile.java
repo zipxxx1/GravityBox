@@ -316,12 +316,19 @@ public class QuickAppTile extends QsTile {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        // starting activity collapses panel anyway
+        return false;
+    }
+
+    @Override
     public void handleClick() {
         try {
             startActivity(mMainApp.getIntent());
         } catch (Exception e) {
             log(getKey() + ": Unable to start activity: " + e.getMessage());
         }
+        super.handleClick();
     }
 
     @Override

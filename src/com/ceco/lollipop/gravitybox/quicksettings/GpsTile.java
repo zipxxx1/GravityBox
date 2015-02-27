@@ -115,6 +115,7 @@ public class GpsTile extends QsTile {
     public void handleClick() {
         Settings.Secure.setLocationProviderEnabled(
                 mContext.getContentResolver(), LocationManager.GPS_PROVIDER, !mGpsEnabled);
+        super.handleClick();
     }
 
     @Override

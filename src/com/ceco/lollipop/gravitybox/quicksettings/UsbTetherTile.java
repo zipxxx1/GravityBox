@@ -157,6 +157,7 @@ public class UsbTetherTile extends QsTile {
         if (mUsbConnected) {
             setUsbTethering(!mUsbTethered);
         }
+        super.handleClick();
     }
 
     @Override

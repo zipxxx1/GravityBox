@@ -31,17 +31,19 @@ public class QsTileEventDistributor {
     
     public interface QsEventListener {
         String getKey();
-        void handleUpdateState(Object state, Object arg);
         void handleDestroy();
         void onCreateTileView(View tileView) throws Throwable;
         void onBroadcastReceived(Context context, Intent intent);
         void onEnabledChanged(boolean enabled);
         void onSecuredChanged(boolean secured);
         void onStatusBarStateChanged(int state);
+        boolean supportsHideOnChange();
+        void onHideOnChangeChanged(boolean hideOnChange);
     }
 
     public interface QsEventListenerGb extends QsEventListener {
         boolean supportsDualTargets();
+        void handleUpdateState(Object state, Object arg);
         void handleClick();
         void handleSecondaryClick();
         void setListening(boolean listening);
@@ -92,6 +94,13 @@ public class QsTileEventDistributor {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_NORMALIZED)) {
                     recreateTiles();
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
+                    boolean hideOnChange = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
+                    for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
+                        l.getValue().onHideOnChangeChanged(hideOnChange);
+                    }
+                }
             } else {
                 try {
                     for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
@@ -135,8 +144,8 @@ public class QsTileEventDistributor {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
                             .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
-                    if (l != null) {
-                        l.handleUpdateState(param.args[0], param.args[1]);
+                    if (l != null && (l instanceof QsEventListenerGb)) {
+                        ((QsEventListenerGb)l).handleUpdateState(param.args[0], param.args[1]);
                         param.setResult(null);
                     }
                 }

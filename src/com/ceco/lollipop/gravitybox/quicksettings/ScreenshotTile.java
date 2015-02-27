@@ -40,10 +40,17 @@ public class ScreenshotTile extends QsTile {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        // we collapse panels ourselves
+        return false;
+    }
+
+    @Override
     public void handleClick() {
         collapsePanels();
         Intent intent = new Intent(ModHwKeys.ACTION_SCREENSHOT);
         mContext.sendBroadcast(intent);
+        super.handleClick();
     }
 
     @Override

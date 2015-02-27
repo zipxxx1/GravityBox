@@ -39,10 +39,10 @@ public abstract class QsTile implements QsEventListenerGb {
     protected Context mGbContext;
     protected XSharedPreferences mPrefs;
     protected QsTileEventDistributor mEventDistributor;
-    protected boolean mSupportsHideOnChange = true;
     protected boolean mEnabled;
     protected boolean mSecured;
     protected int mStatusBarState;
+    protected boolean mHideOnChange;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -150,7 +150,6 @@ public abstract class QsTile implements QsEventListenerGb {
         mState.applyTo(state);
     }
 
-    public abstract void handleClick();
     public abstract boolean handleLongClick(View view);
 
     public void initPreferences() {
@@ -174,6 +173,23 @@ public abstract class QsTile implements QsEventListenerGb {
     @Override
     public boolean supportsDualTargets() {
         return false;
+    }
+
+    @Override
+    public boolean supportsHideOnChange() {
+        return true;
+    }
+
+    @Override
+    public void onHideOnChangeChanged(boolean hideOnChange) {
+        mHideOnChange = hideOnChange;
+    }
+
+    @Override
+    public void handleClick() {
+        if (mHideOnChange && supportsHideOnChange()) {
+            collapsePanels();
+        }
     }
 
     @Override

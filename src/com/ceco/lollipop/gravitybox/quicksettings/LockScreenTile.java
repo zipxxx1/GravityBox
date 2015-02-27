@@ -87,6 +87,7 @@ public class LockScreenTile extends QsTile {
     @Override
     public void handleClick() {
         toggleLockscreenState();
+        super.handleClick();
     }
 
     @Override

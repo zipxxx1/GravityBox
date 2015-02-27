@@ -128,6 +128,7 @@ public class ExpandedDesktopTile extends QsTile {
                 }
             }, 800);
         }
+        super.handleClick();
     }
 
     @Override

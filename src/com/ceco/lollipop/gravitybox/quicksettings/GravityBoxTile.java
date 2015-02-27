@@ -40,10 +40,17 @@ public class GravityBoxTile extends QsTile {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        // starting activity collapses panel anyway
+        return false;
+    }
+
+    @Override
     public void handleClick() {
         Intent i = new Intent();
         i.setClassName(GravityBox.PACKAGE_NAME, GravityBoxSettings.class.getName());
         startSettingsActivity(i);
+        super.handleClick();
     }
 
     @Override

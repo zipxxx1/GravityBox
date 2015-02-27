@@ -33,9 +33,11 @@ public abstract class AospTile implements QsEventListener {
     protected Context mContext;
     protected boolean mEnabled;
     protected Unhook mHandleUpdateStateHook;
+    protected Unhook mHandleClickHook;
     protected boolean mSecured;
     protected int mStatusBarState;
     protected boolean mNormalized;
+    protected boolean mHideOnChange;
 
     public static AospTile create(Object host, Object tile, String aospKey, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -94,6 +96,7 @@ public abstract class AospTile implements QsEventListener {
         mSecured = securedTiles.contains(getKey());
 
         mNormalized = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_NORMALIZE, false);
+        mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
     }
 
     @Override
@@ -123,21 +126,33 @@ public abstract class AospTile implements QsEventListener {
     public void onBroadcastReceived(Context context, Intent intent) {
     }
 
-    @Override
-    public void handleUpdateState(Object state, Object arg) {
+    protected void handleUpdateState(Object state, Object arg) {
         final boolean visible = mEnabled &&
                 (!mSecured || !(mStatusBarState != StatusBarState.SHADE &&
                     mEventDistributor.isKeyguardSecured()));
         XposedHelpers.setBooleanField(state, "visible", visible);
     }
 
+    protected void onClick() {
+        if (mHideOnChange && supportsHideOnChange()) {
+            collapsePanels();
+        }
+    }
+
+    @Override
+    public boolean supportsHideOnChange() {
+        return true;
+    }
+
+    @Override
+    public void onHideOnChangeChanged(boolean hideOnChange) {
+        mHideOnChange = hideOnChange;
+    }
+
     @Override
     public void handleDestroy() {
         if (DEBUG) log(getKey() + ": handleDestroy called");
-        if (mHandleUpdateStateHook != null) {
-            mHandleUpdateStateHook.unhook();
-            mHandleUpdateStateHook = null;
-        }
+        destroyHooks();
         mEventDistributor.unregisterListener(this);
         mEventDistributor = null;
         mTile = null;
@@ -171,8 +186,27 @@ public abstract class AospTile implements QsEventListener {
                     handleUpdateState(param.args[0], param.args[1]);
                 }
             });
+
+            mHandleClickHook = XposedHelpers.findAndHookMethod(
+                    getClassName(), cl, "handleClick", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    onClick();
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private void destroyHooks() {
+        if (mHandleUpdateStateHook != null) {
+            mHandleUpdateStateHook.unhook();
+            mHandleUpdateStateHook = null;
+        }
+        if (mHandleClickHook != null) {
+            mHandleClickHook.unhook();
+            mHandleClickHook = null;
         }
     }
 
@@ -197,5 +231,14 @@ public abstract class AospTile implements QsEventListener {
 
     public void startSettingsActivity(String action) {
         startSettingsActivity(new Intent(action));
+    }
+
+    public void collapsePanels() {
+        try {
+            XposedHelpers.callMethod(mHost, "collapsePanels");
+        } catch (Throwable t) {
+            log("Error in collapsePanels: ");
+            XposedBridge.log(t);
+        }
     }
 }

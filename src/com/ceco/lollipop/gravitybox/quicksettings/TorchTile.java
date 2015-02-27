@@ -123,6 +123,7 @@ public class TorchTile extends QsTile {
     @Override
     public void handleClick() {
         toggleState();
+        super.handleClick();
     }
 
     @Override

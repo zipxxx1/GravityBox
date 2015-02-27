@@ -224,6 +224,11 @@ public class NetworkModeTile extends QsTile {
     }
 
     @Override
+    public boolean supportsHideOnChange() {
+        return false;
+    }
+
+    @Override
     public void handleClick() {
         Intent i = new Intent(PhoneWrapper.ACTION_CHANGE_NETWORK_TYPE);
         switch (mNetworkType) {
@@ -264,6 +269,7 @@ public class NetworkModeTile extends QsTile {
         if (i.hasExtra(PhoneWrapper.EXTRA_NETWORK_TYPE)) {
             mContext.sendBroadcast(i);
         }
+        super.handleClick();
     }
 
     @Override

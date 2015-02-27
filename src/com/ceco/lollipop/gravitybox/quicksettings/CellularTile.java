@@ -31,4 +31,8 @@ public class CellularTile extends AospTile {
         return false;
     }
 
+    @Override
+    public boolean supportsHideOnChange() {
+        return false;
+    }
 }
