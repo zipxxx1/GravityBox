@@ -159,6 +159,8 @@ public abstract class QsTile implements QsEventListenerGb {
         Set<String> securedTiles = mPrefs.getStringSet(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_SECURED_TILES,
                 new HashSet<String>());
         mSecured = securedTiles.contains(mKey);
+
+        mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
     }
 
     public Object getTile() {
