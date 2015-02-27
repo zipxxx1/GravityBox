@@ -1803,7 +1803,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mQuickSettings.setEntryValues(qsEntryValues.toArray(new CharSequence[qsEntryValues.size()]));
             mQsSecuredTiles.setEntries(qsSecEntries.toArray(new CharSequence[qsSecEntries.size()]));
             mQsSecuredTiles.setEntryValues(qsSecEntryValues.toArray(new CharSequence[qsSecEntryValues.size()]));
-            TileOrderActivity.updateTileList(mPrefs);
+            TileOrderActivity.updateTileList(getResources(), mPrefs);
 
             // Remove actions for HW keys based on device features
             mPrefHwKeyMenuLongpress.setEntries(R.array.hwkey_action_entries);
@@ -2415,7 +2415,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         prefs.getInt(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING_COLOR, Color.GREEN));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_QS_PREFS, TileOrderActivity.updateTileList(prefs));
+                intent.putExtra(EXTRA_QS_PREFS, TileOrderActivity.updateTileList(getResources(), prefs));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_SECURED_TILES)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_SECURED_TILES, prefs.getStringSet(

@@ -38,7 +38,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -90,7 +89,7 @@ public class TileOrderActivity extends ListActivity {
     @Override
     public void onStart() {
         super.onStart();
-        updateTileList(mPrefs);
+        updateTileList(getResources(), mPrefs);
     }
 
     @Override
@@ -131,11 +130,12 @@ public class TileOrderActivity extends ListActivity {
         }
     };
 
-    public static String updateTileList(SharedPreferences prefs) {
+    public static String updateTileList(Resources resources, SharedPreferences prefs) {
         List<String> activeTileList = new ArrayList<String>(
                 prefs.getStringSet(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS, 
                         new HashSet<String>()));
-        String tiles = prefs.getString(PREF_KEY_TILE_ORDER, "");
+        String tiles = prefs.getString(PREF_KEY_TILE_ORDER,
+                Utils.join(resources.getStringArray(R.array.qs_tile_default_values), ","));
         List<String> orderedTileList = 
                 new ArrayList<String>(Arrays.asList(tiles.split(",")));
  
