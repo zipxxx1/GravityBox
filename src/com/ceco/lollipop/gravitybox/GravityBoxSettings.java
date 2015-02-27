@@ -90,6 +90,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICK_SETTINGS_ENABLE = "pref_qs_management_enable";
     public static final String PREF_KEY_QUICK_SETTINGS = "pref_quick_settings3";
     public static final String PREF_KEY_QUICK_SETTINGS_SECURED_TILES = "pref_qs_secured_tiles";
+    public static final String PREF_KEY_QUICK_SETTINGS_NORMALIZE = "pref_qs_normalize";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_ORDER = "pref_qs_tile_order";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE = "pref_qs_tile_label_style";
@@ -499,6 +500,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_QUICKSETTINGS_CHANGED = "gravitybox.intent.action.QUICKSETTINGS_CHANGED";
     public static final String EXTRA_QS_PREFS = "qsPrefs";
     public static final String EXTRA_QS_SECURED_TILES = "qsSecuredTiles";
+    public static final String EXTRA_QS_NORMALIZED = "qsNormalized";
     public static final String EXTRA_QS_COLS = "qsCols";
     public static final String EXTRA_QS_AUTOSWITCH = "qsAutoSwitch";
     public static final String EXTRA_QUICK_PULLDOWN = "quickPulldown";
@@ -2417,6 +2419,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_SECURED_TILES, prefs.getStringSet(
                         key, new HashSet<String>()).toArray(new String[0]));
+            } else if (key.equals(PREF_KEY_QUICK_SETTINGS_NORMALIZE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QS_NORMALIZED, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_COLS, Integer.valueOf(

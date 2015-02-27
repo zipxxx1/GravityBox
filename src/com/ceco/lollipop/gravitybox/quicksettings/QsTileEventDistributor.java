@@ -89,6 +89,9 @@ public class QsTileEventDistributor {
                 if (intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED)) {
                     recreateTiles();
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_NORMALIZED)) {
+                    recreateTiles();
+                }
             } else {
                 try {
                     for (Entry<String,QsEventListener> l : mListeners.entrySet()) {

@@ -35,6 +35,7 @@ public abstract class AospTile implements QsEventListener {
     protected Unhook mHandleUpdateStateHook;
     protected boolean mSecured;
     protected int mStatusBarState;
+    protected boolean mNormalized;
 
     public static AospTile create(Object host, Object tile, String aospKey, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -91,6 +92,8 @@ public abstract class AospTile implements QsEventListener {
         Set<String> securedTiles = mPrefs.getStringSet(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_SECURED_TILES,
                 new HashSet<String>());
         mSecured = securedTiles.contains(getKey());
+
+        mNormalized = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_NORMALIZE, false);
     }
 
     @Override
@@ -181,5 +184,18 @@ public abstract class AospTile implements QsEventListener {
             log("Error refreshing tile state: ");
             XposedBridge.log(t);
         }
+    }
+
+    public void startSettingsActivity(Intent intent) {
+        try {
+            XposedHelpers.callMethod(mHost, "startSettingsActivity", intent);
+        } catch (Throwable t) {
+            log("Error in startSettingsActivity: ");
+            XposedBridge.log(t);
+        }
+    }
+
+    public void startSettingsActivity(String action) {
+        startSettingsActivity(new Intent(action));
     }
 }

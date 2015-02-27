@@ -1742,4 +1742,9 @@
     <string name="pref_qs_secured_tiles_title">Secured tiles</string>
     <string name="pref_qs_secured_tiles_summary">Hides selected tiles in secured lock screen</string>
 
+    <!-- QS: Normalize dual tiles -->
+    <string name="pref_qs_normalize_title">Normalize dual tiles</string>
+    <string name="pref_qs_normalize_summary">Makes WiFi and Bluetooth tiles normal. 
+        Their label-press action will be converted to long-press action</string>
+
 </resources>
