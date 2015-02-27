@@ -138,7 +138,7 @@
                 android:key="pref_qs_management_enable"
                 android:title="@string/pref_masterswitch_title"
                 android:summary="@string/pref_qs_management_enable_summary"
-                android:defaultValue="true" />
+                android:defaultValue="false" />
 
             <MultiSelectListPreference 
                 android:key="pref_quick_settings3"
