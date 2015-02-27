@@ -84,16 +84,13 @@ public abstract class AospTile implements QsEventListener {
     }
 
     @Override
+    public void onEnabledChanged(boolean enabled) {
+        mEnabled = enabled;
+        if (DEBUG) log(getKey() + ": onEnabledChanged(" + enabled + ")");
+    }
+
+    @Override
     public void onBroadcastReceived(Context context, Intent intent) {
-        if (DEBUG) log(getKey() + ": onBrodcastReceived: " + intent);
-        final String action = intent.getAction();
-        if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_PREFS)) {
-                String enabledTiles = intent.getStringExtra(GravityBoxSettings.EXTRA_QS_PREFS);
-                if (DEBUG) log("enabledTiles=" + enabledTiles);
-                mEnabled = enabledTiles != null && enabledTiles.contains(getKey());
-            }
-        }
     }
 
     @Override

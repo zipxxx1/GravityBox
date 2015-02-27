@@ -114,6 +114,12 @@ public abstract class QsTile implements QsEventListenerGb {
         mEventDistributor.registerListener(this);
     }
 
+    @Override
+    public void onEnabledChanged(boolean enabled) {
+        mEnabled = enabled;
+        if (DEBUG) log(getKey() + ": onEnabledChanged(" + enabled + ")");
+    }
+
     public void handleUpdateState(Object state, Object arg) {
         mState.visible &= mEnabled;
         mState.applyTo(state);
@@ -177,14 +183,6 @@ public abstract class QsTile implements QsEventListenerGb {
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
-        if (DEBUG) log(mKey + ": onBrodcastReceived: " + intent);
-        final String action = intent.getAction();
-        if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_PREFS)) {
-                String enabledTiles = intent.getStringExtra(GravityBoxSettings.EXTRA_QS_PREFS);
-                mEnabled = enabledTiles != null && enabledTiles.contains(mKey);
-            }
-        }
     }
 
     public void refreshState() {

@@ -30,6 +30,7 @@ public class QsTileEventDistributor {
         void handleDestroy();
         void onCreateTileView(View tileView) throws Throwable;
         void onBroadcastReceived(Context context, Intent intent);
+        void onEnabledChanged(boolean enabled);
     }
 
     public interface QsEventListenerGb extends QsEventListener {
@@ -61,9 +62,18 @@ public class QsTileEventDistributor {
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED) &&
-                    intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED)) {
-                recreateTiles();
+            final String action = intent.getAction();
+            if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_PREFS)) {
+                    String enabledTiles = intent.getStringExtra(GravityBoxSettings.EXTRA_QS_PREFS);
+                    if (enabledTiles == null) enabledTiles = "";
+                    for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
+                        l.getValue().onEnabledChanged(enabledTiles.contains(l.getKey()));
+                    }
+                }
+                if (intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED)) {
+                    recreateTiles();
+                }
             } else {
                 try {
                     for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
