@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -40,7 +40,6 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModExpandedDesktop {
     private static final String TAG = "GB:ModExpandedDesktop";
     private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.internal.policy.impl.PhoneWindowManager";
-    private static final String CLASS_PWM_PARTIAL_DISPLAY = "com.android.internal.policy.impl.PhoneWindowManagerWithPartialDisplay";
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
     private static final String CLASS_POLICY_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
@@ -227,12 +226,6 @@ public class ModExpandedDesktop {
     }
 
     public static void initZygote(final XSharedPreferences prefs) {
-        try {
-            XposedHelpers.findClass(CLASS_PWM_PARTIAL_DISPLAY, null);
-            log("disabled on unsupported Motorola device having phone window manager with partial display");
-            return;
-        } catch (Throwable t) { /* OK */ }
-
         try {
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
 
@@ -996,7 +989,11 @@ public class ModExpandedDesktop {
     }
 
     private static boolean isKeyguardShowing() {
-        return (Boolean) XposedHelpers.callMethod(mPhoneWindowManager, "isStatusBarKeyguard") && 
+        try {
+            return (Boolean) XposedHelpers.callMethod(mPhoneWindowManager, "isStatusBarKeyguard") && 
                 !getBool("mHideLockScreen");
+        } catch (Throwable t) {
+            return false;
+        }
     }
 }
