@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -109,74 +109,9 @@ public class ShortcutActivity extends ListActivity {
             mInvokedFromGb = intent.hasExtra("gravitybox");
             mAllowUnlockAction = intent.getBooleanExtra(EXTRA_ALLOW_UNLOCK_ACTION, false);
             return;
-        } else if (intent.getAction().equals(ACTION_LAUNCH_ACTION) &&
-                intent.hasExtra(EXTRA_ACTION)) {
-            launchAction(intent);
-            finish();
-            return;
         } else {
             finish();
             return;
-        }
-    }
-    
-    private void launchAction(Intent intent) {
-        final String action = intent.getStringExtra(EXTRA_ACTION);
-
-        if (action.equals(ShowPowerMenuShortcut.ACTION)) {
-            ShowPowerMenuShortcut.launchAction(mContext, intent);
-        } else if (action.equals(ExpandNotificationsShortcut.ACTION)) {
-            ExpandNotificationsShortcut.launchAction(mContext, intent);
-        } else if (action.equals(ExpandedDesktopShortcut.ACTION)) {
-            ExpandedDesktopShortcut.launchAction(mContext, intent);
-        } else if (action.equals(ScreenshotShortcut.ACTION)) {
-            ScreenshotShortcut.launchAction(mContext, intent);
-        } else if (action.equals(ScreenrecordShortcut.ACTION)) {
-            ScreenrecordShortcut.launchAction(mContext, intent);
-        } else if (action.equals(TorchShortcut.ACTION)) {
-            TorchShortcut.launchAction(mContext, intent);
-        } else if (action.equals(NetworkModeShortcut.ACTION)) {
-            NetworkModeShortcut.launchAction(mContext, intent);
-        } else if (action.equals(RecentAppsShortcut.ACTION)) {
-            RecentAppsShortcut.launchAction(mContext, intent);
-        } else if (action.equals(AppLauncherShortcut.ACTION)) {
-            AppLauncherShortcut.launchAction(mContext, intent);
-        } else if (action.equals(RotationLockShortcut.ACTION)) {
-            RotationLockShortcut.launchAction(mContext, intent);
-        } else if (action.equals(SleepShortcut.ACTION)) {
-            SleepShortcut.launchAction(mContext, intent);
-        } else if (action.equals(MobileDataShortcut.ACTION)) {
-            MobileDataShortcut.launchAction(mContext, intent);
-        } else if (action.equals(WifiShortcut.ACTION)) {
-            WifiShortcut.launchAction(mContext, intent);
-        } else if (action.equals(BluetoothShortcut.ACTION)) {
-            BluetoothShortcut.launchAction(mContext, intent);
-        } else if (action.equals(WifiApShortcut.ACTION)) {
-            WifiApShortcut.launchAction(mContext, intent);
-        } else if (action.equals(LocationModeShortcut.ACTION)) {
-            LocationModeShortcut.launchAction(mContext, intent);
-        } else if (action.equals(NfcShortcut.ACTION)) {
-            NfcShortcut.launchAction(mContext, intent);
-        } else if (action.equals(GoogleNowShortcut.ACTION)) {
-            GoogleNowShortcut.launchAction(mContext, intent);
-        } else if (action.equals(VolumePanelShortcut.ACTION)) {
-            VolumePanelShortcut.launchAction(mContext, intent);
-        } else if (action.equals(LauncherDrawerShortcut.ACTION)) {
-            LauncherDrawerShortcut.launchAction(mContext, intent);
-        } else if (action.equals(SmartRadioShortcut.ACTION)) {
-            SmartRadioShortcut.launchAction(mContext, intent);
-        } else if (action.equals(QuietHoursShortcut.ACTION)) {
-            QuietHoursShortcut.launchAction(mContext, intent);
-        } else if (action.equals(AirplaneModeShortcut.ACTION)) {
-            AirplaneModeShortcut.launchAction(mContext, intent);
-        } else if (action.equals(RingerModeShortcut.ACTION)) {
-            RingerModeShortcut.launchAction(mContext, intent);
-        } else if (action.equals(SyncShortcut.ACTION)) {
-            SyncShortcut.launchAction(mContext, intent);
-        } else if (action.equals(ClearNotificationsShortcut.ACTION)) {
-            ClearNotificationsShortcut.launchAction(mContext, intent);
-        } else if (action.equals(AutoBrightnessShortcut.ACTION)) {
-            AutoBrightnessShortcut.launchAction(mContext, intent);
         }
     }
 

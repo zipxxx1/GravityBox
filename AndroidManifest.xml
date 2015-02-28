@@ -88,6 +88,19 @@
         </activity>
 
         <activity
+            android:name="com.ceco.lollipop.gravitybox.shortcuts.LaunchActivity"
+            android:label="@string/shortcut_activity_title"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+                <action android:name="gravitybox.intent.action.LAUNCH_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name="com.ceco.lollipop.gravitybox.ledcontrol.LedMainActivity"
             android:label="@string/pref_led_control_title" >
         </activity>
