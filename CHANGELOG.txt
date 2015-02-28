@@ -1,3 +1,26 @@
+Changelog 5.0.1alpha - 28/02/2015
+--------------------------------------
+- QuickSettings management is back!
+--- with additional security related enhancements
+- Navigation bar:
+--- fixed SystemUI FC on sw600dp (tablet) devices (thanks to defim for testing)
+--- improved layout of navbar during cursor control keys
+- Recents:
+--- fixed clear all button positioning during vertical navbar
+--- changed clear all button icon and added ripple effect
+- GB Actions: fixed app window popping up when action launched from 3rd party app
+--- requires reassigning actions in 3rd party apps
+- Fixed bootloop on incompatible devices such as Moto X 2014 (thanks to bongostl for testing)
+- Use proper default value for battery warning policy option
+- Fixed strange errors sporadically showing in xposed log (thanks to defim for hints)
+- Launcher tweaks: adjusted for Google App 4.2.16
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated German translations (thanks to Minty123)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Slovak and Czech translations
+
 Changelog 5.0.0alpha - 22/02/2015
 --------------------------------------
 - Initial alpha release for Lollipop
