@@ -19,6 +19,7 @@ Changelog 5.0.1alpha - 28/02/2015
 - Updated Portuguese (BR) translations (thanks to wyghor)
 - Updated German translations (thanks to Minty123)
 - Updated Polish translations (thanks to xtrem007)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
 - Updated Slovak and Czech translations
 
 Changelog 5.0.0alpha - 22/02/2015
