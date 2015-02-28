@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -81,6 +81,7 @@ public class ModLauncher {
         CLASS_DYNAMIC_GRID.put("sg", new DynamicGrid("Ez", "BB", "BC"));
         CLASS_DYNAMIC_GRID.put("ur", new DynamicGrid("Gi", "Dg", "Dh"));
         CLASS_DYNAMIC_GRID.put("wd", new DynamicGrid("Fe", "Ce", "Cf"));
+        CLASS_DYNAMIC_GRID.put("com.android.launcher3.cn", new DynamicGrid("KA", "Hz", "HA"));
 
         METHOD_SHOW_ALL_APPS = new ArrayList<ShowAllApps>();
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("onClickAllAppsButton",
@@ -121,7 +122,7 @@ public class ModLauncher {
                 if (DEBUG) log("Probably found DynamicGrid class as: " + className);
                 dynamicGrid.clazz = cls;
             } catch (Throwable t) { 
-                if (DEBUG) XposedBridge.log(t);
+                if (DEBUG) log("search for dynamic grid " + className + ": " + t.getMessage());
                 continue; 
             }
 
