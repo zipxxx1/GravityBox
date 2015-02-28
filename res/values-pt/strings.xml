@@ -1697,4 +1697,12 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">As definições guardadas em uma versão antiga do Android não podem ser restauradas 
         devido a diversas diferenças do sistema, sendo altamente recomendável configurar o GravityBox</string>
+        
+    <!-- QS: Secured tiles -->
+    <string name="pref_qs_secured_tiles_title">Painéis seguros</string>
+    <string name="pref_qs_secured_tiles_summary">Permite ocultar os painéis selecionados na tela de bloqueio com método seguro ativado</string>
+
+    <!-- QS: Normalize dual tiles -->
+    <string name="pref_qs_normalize_title">Normalizar painéis</string>
+    <string name="pref_qs_normalize_summary">Permite transformar os painéis WiFi e Bluetooth em painéis normais (manter o painel pressionado será o mesmo que carregar no seu texto)</string>
 </resources>
