@@ -24,7 +24,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.view.Surface;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 public class CompassTile extends QsTile implements SensorEventListener {
@@ -36,6 +38,7 @@ public class CompassTile extends QsTile implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor mAccelerationSensor;
     private Sensor mGeomagneticFieldSensor;
+    private WindowManager mWindowManager;
 
     private float[] mAcceleration;
     private float[] mGeomagnetic;
@@ -50,6 +53,7 @@ public class CompassTile extends QsTile implements SensorEventListener {
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         mAccelerationSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mGeomagneticFieldSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
     }
 
     @Override
@@ -106,7 +110,7 @@ public class CompassTile extends QsTile implements SensorEventListener {
             if (mNewDegree != null) {
                 mState.label = formatValueWithCardinalDirection(mNewDegree);
 
-                float target = 360 - mNewDegree;
+                float target = getBaseDegree() - mNewDegree;
                 float relative = target - mImage.getRotation();
                 if (relative > 180) relative -= 360;
 
@@ -129,6 +133,16 @@ public class CompassTile extends QsTile implements SensorEventListener {
         if (!listening) {
             setListeningSensors(false);
             mActive = false;
+        }
+    }
+
+    private float getBaseDegree() {
+        switch (mWindowManager.getDefaultDisplay().getRotation()) {
+            default:
+            case Surface.ROTATION_0: return 360f;
+            case Surface.ROTATION_90: return 270f;
+            case Surface.ROTATION_180: return 180f;
+            case Surface.ROTATION_270: return 90f;
         }
     }
 
