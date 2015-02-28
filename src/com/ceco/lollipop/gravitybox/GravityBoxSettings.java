@@ -91,7 +91,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICK_SETTINGS = "pref_quick_settings3";
     public static final String PREF_KEY_QUICK_SETTINGS_SECURED_TILES = "pref_qs_secured_tiles";
     public static final String PREF_KEY_QUICK_SETTINGS_NORMALIZE = "pref_qs_normalize";
-    public static final String PREF_KEY_QUICK_SETTINGS_TILE_ORDER = "pref_qs_tile_order";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE = "pref_qs_tile_label_style";
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE = "pref_qs_hide_on_change";

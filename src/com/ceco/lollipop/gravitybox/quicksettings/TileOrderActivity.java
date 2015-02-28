@@ -42,7 +42,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class TileOrderActivity extends ListActivity {
-    public static final String PREF_KEY_TILE_ORDER = "pref_qs_tile_order";
+    public static final String PREF_KEY_TILE_ORDER = "pref_qs_tile_order2";
     public static final String EXTRA_QS_ORDER_CHANGED = "qsTileOrderChanged";
 
     private ListView mTileList;
