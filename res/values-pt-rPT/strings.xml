@@ -83,7 +83,8 @@
     <string name="qs_tile_autorotation">Rodar ecrã automaticamente</string>
     <string name="qs_tile_sync">Sincronização</string>
     <string name="qs_tile_wifi_ap">Ponto de Acesso Wi-Fi</string>
-    <string name="qs_tile_torch_gb">Lanterna</string>
+    <string name="qs_tile_torch_aosp">Lanterna (padrão)</string>
+    <string name="qs_tile_torch_gb">Lanterna (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Hibernar</string>
     <string name="qs_tile_quickrecord">Gravação rápida</string>
@@ -96,6 +97,7 @@
     <string name="qs_tile_music">Música</string>
     <string name="qs_tile_smart_radio">Rádio inteligente</string>
     <string name="qs_tile_lock_screen">Bloqueio de ecrã</string>
+    <string name="qs_tile_inversion">Inversão</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Escolher cor</string>
@@ -759,8 +761,8 @@
     <string name="pref_reboot_confirm_required_title">Solicitar confirmação para reiniciar</string>
 
     <!-- Tiles: Hide on change -->
-    <string name="pref_qs_hide_on_change_title">Ocultar ao tocar</string>
-    <string name="pref_qs_hide_on_change_summary">Permite ocultar a barra de status automaticamente assim que tocar num painel (aplicável aos painéis adicionados pelo GravityBox bem como aos painéis padrão substituídos)</string>
+    <string name="pref_qs_hide_on_change_title">Ocultar ao comutar</string>
+    <string name="pref_qs_hide_on_change_summary">Permite ocultar a barra de status automaticamente assim que tocar num painel (aplicável aos painéis simples com apenas dois estados)</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menu Desligar</string>
@@ -1704,5 +1706,13 @@
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">As definições guardadas numa versão antiga do Android não podem ser restauradas 
         devido a diversas diferenças do sistema operativo, sendo altamente recomendável configurar o GravityBox de raíz</string>
+
+    <!-- QS: Secured tiles -->
+    <string name="pref_qs_secured_tiles_title">Painéis seguros</string>
+    <string name="pref_qs_secured_tiles_summary">Permite ocultar os painéis selecionados no ecrã de bloqueio com método seguro ativado</string>
+
+    <!-- QS: Normalize dual tiles -->
+    <string name="pref_qs_normalize_title">Normalizar painéis duais</string>
+    <string name="pref_qs_normalize_summary">Permite transformar os painéis WiFi e Bluetooth em painéis normais (manter o painel pressionado será o mesmo que carregar no seu texto)</string>
 
 </resources>
