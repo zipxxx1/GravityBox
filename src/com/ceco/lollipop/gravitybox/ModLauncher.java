@@ -90,6 +90,9 @@ public class ModLauncher {
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
                 new Object[] { boolean.class, "tk", boolean.class },
                 new Object[] { false, "xJ", false } ));
+        METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
+                new Object[] { boolean.class, "com.android.launcher3.q", boolean.class },
+                new Object[] { false, "Dc", false } ));
     }
 
     private static void log(String message) {
