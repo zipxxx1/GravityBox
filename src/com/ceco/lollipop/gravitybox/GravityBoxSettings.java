@@ -91,7 +91,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICK_SETTINGS = "pref_quick_settings3";
     public static final String PREF_KEY_QUICK_SETTINGS_SECURED_TILES = "pref_qs_secured_tiles";
     public static final String PREF_KEY_QUICK_SETTINGS_NORMALIZE = "pref_qs_normalize";
-    public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row";
+    public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row2";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE = "pref_qs_tile_label_style";
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE = "pref_qs_hide_on_change";
     public static final String PREF_KEY_QUICK_SETTINGS_AUTOSWITCH = "pref_auto_switch_qs2";
@@ -2418,7 +2418,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_COLS, Integer.valueOf(
-                        prefs.getString(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "3")));
+                        prefs.getString(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0")));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_TILE_LABEL_STYLE,

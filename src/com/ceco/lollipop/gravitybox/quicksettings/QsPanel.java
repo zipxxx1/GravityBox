@@ -41,6 +41,7 @@ public class QsPanel implements BroadcastSubReceiver {
     private XSharedPreferences mPrefs;
     private boolean mNormalized;
     private ViewGroup mQsPanel;
+    private int mNumColumns;
 
     public QsPanel(Context context, XSharedPreferences prefs, 
             QsTileEventDistributor eventDistributor) {
@@ -55,7 +56,9 @@ public class QsPanel implements BroadcastSubReceiver {
 
     private void initPreferences() {
         mNormalized = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_NORMALIZE, false);
-        if (DEBUG) log("initPreferences: mNormalized=" + mNormalized);
+        mNumColumns = Integer.valueOf(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0"));
+        if (DEBUG) log("initPreferences: mNormalized=" + mNormalized + "; mNumColumns=" + mNumColumns);
     }
 
     private void updateResources() {
@@ -76,6 +79,11 @@ public class QsPanel implements BroadcastSubReceiver {
                 updateResources();
                 if (DEBUG) log("onBroadcastReceived: mNormalized=" + mNormalized);
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS)) {
+                mNumColumns = intent.getIntExtra(GravityBoxSettings.EXTRA_QS_COLS, 0);
+                updateResources();
+                if (DEBUG) log("onBroadcastReceived: mNumColumns=" + mNumColumns);
+            }
         } 
     }
 
@@ -90,13 +98,22 @@ public class QsPanel implements BroadcastSubReceiver {
                     if (mQsPanel == null) {
                         mQsPanel = (ViewGroup) param.thisObject;
                     }
+                    boolean shouldInvalidate = false;
                     if (mNormalized) {
                         XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight",
                                 XposedHelpers.getIntField(mQsPanel, "mCellHeight"));
                         XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth",
                                 XposedHelpers.getIntField(mQsPanel, "mCellWidth"));
-                        mQsPanel.postInvalidate();
+                        shouldInvalidate = true;
                         if (DEBUG) log("updateResources: Updated first row dimensions due to normalized tiles");
+                    }
+                    if (mNumColumns != 0) {
+                        XposedHelpers.setIntField(mQsPanel, "mColumns", mNumColumns);
+                        shouldInvalidate = true;
+                        if (DEBUG) log("updateResources: Updated number of columns per row");
+                    }
+                    if (shouldInvalidate) {
+                        mQsPanel.postInvalidate();
                     }
                 }
             });

@@ -318,16 +318,14 @@
                     android:targetClass="com.ceco.lollipop.gravitybox.quicksettings.TileOrderActivity" />
             </PreferenceScreen>
 
-            <!--
             <ListPreference
-                android:key="pref_qs_tiles_per_row" 
+                android:key="pref_qs_tiles_per_row2" 
                 android:title="@string/pref_qs_tiles_per_row_title"
                 android:summary="@string/pref_qs_tiles_per_row_summary" 
                 android:entries="@array/qs_tiles_per_row_entries"
                 android:entryValues="@array/qs_tiles_per_row_values"
-                android:defaultValue="3"
+                android:defaultValue="0"
                 android:dependency="pref_qs_management_enable" />
-            -->
 
             <!--
             <ListPreference
