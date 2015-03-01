@@ -28,6 +28,8 @@
     <string name="vol_music_controls_summary">Changer de pistes audio par un appui long sur ces touches (écran éteint)</string>
 
     <string name="low_battery_warning_policy_title">Avertissement de batterie faible</string>
+    <string name="low_battery_warning_default">Par défaut</string>
+    <string name="low_battery_warning_nonintrusive">Non-intrusif</string>
     <string name="low_battery_warning_off">Aucun</string>
 
     <string name="reboot_required">Le changement sera pris en compte après redémarrage</string>
@@ -85,7 +87,7 @@
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Touches des paramètres rapides</string>
-    <string name="quick_settings_summary">Permet d\'afficher ou masquer les touches de paramètres rapides depuis la barre d\'état</string>
+    <string name="quick_settings_summary">Permet d\'afficher ou masquer les touches depuis la barre d\'état</string>
     <string name="qs_tile_airplane_mode">Mode Avion</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
@@ -94,11 +96,13 @@
     <string name="qs_tile_gps_alt">GPS (Style CM)</string>
     <string name="qs_tile_mobile_data">Connexion de Données</string>
     <string name="qs_tile_network_mode">Mode Réseau</string>
+    <string name="qs_tile_data_usage">Cellulaire</string>
     <string name="qs_tile_data_usage">Consommation de Données</string>
     <string name="qs_tile_autorotation">Rotation Automatique</string>
     <string name="qs_tile_sync">Synchronisation</string>
     <string name="qs_tile_wifi_ap">Hotspot Wi-Fi</string>
-    <string name="qs_tile_torch_gb">Torche</string>
+    <string name="qs_tile_torch_gb">Torche (par défaut)</string>
+    <string name="qs_tile_torch_gb">Torche (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Veille</string>
     <string name="qs_tile_quickrecord">Enregistrement Rapide</string>
@@ -111,6 +115,7 @@
     <string name="qs_tile_music">Musique</string>
     <string name="qs_tile_smart_radio">Ondes Radio Intelligentes</string>
     <string name="qs_tile_lock_screen">Écran de Déverrouillage</string>
+    <string name="qs_tile_inversion">Inversion</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -195,10 +200,11 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotation écran de déverrouillage</string>
+    <string name="pref_lockscreen_rotation_summary">Redémarrage nécessaire</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Activation touche menu</string>
-    <string name="pref_lockscreen_menu_key_summary">Permet d\'utiliser la touche menu pour un déverrouillage rapide à partir de l\'écran de déverrouillage (redémarrage nécessaire)</string>
+    <string name="pref_lockscreen_menu_key_summary">Permet d\'utiliser la touche matérielle menu pour déverrouiller (redémarrage nécessaire)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Centrer l\'horloge</string>
@@ -476,7 +482,7 @@
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Activer le contrôle de la luminosité</string>
-    <string name="pref_statusbar_brightness_summary">Ajuste la luminosité en glissant le doigt sur la barre d\'état (la luminosité automatique doit être désactivée !)</string>
+    <string name="pref_statusbar_brightness_summary">Ajuste la luminosité en glissant le doigt sur la barre d\'état</string>
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Téléphonie</string>
@@ -527,7 +533,7 @@
 
     <!-- QuickSettings tile order -->
     <string name="pref_qs_tile_order_title">Réordonnancement des touches</string>
-    <string name="pref_qs_tile_order_summary">Permet le réordonnancement des touches de paramètres rapides</string>
+    <string name="pref_qs_tile_order_summary">Permet le réordonnancement des touches</string>
 
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Blocage des notifications en cours</string>
@@ -775,7 +781,8 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Masquer après changement</string>
-    <string name="pref_qs_hide_on_change_summary">Réduit automatiquement la barre d\'état par appui simple sur la touche. S\'applique aux touches de GravityBox et celles par défaut qui ont été modifiées</string>
+    <string name="pref_qs_hide_on_change_summary">Réduit automatiquement la barre d\'état par appui simple sur la touche.
+        S\'applique aux touches simples à double état.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menu d\'extinction</string>
@@ -1343,6 +1350,12 @@
     <string name="increasing_ring_enable">Activer</string>
     <string name="increasing_ring_min_volume_title">Volume début de sonnerie</string>
     <string name="increasing_ring_volume_notice">Remarque:\nComme le volume de début est supérieur au volume de la sonnerie, celle-ci sera jouée au volume défini initialement</string>
+    <string name="increasing_ring_ramp_up_duration_title">Durée de l\'augmentation du volume</string>
+    <string name="increasing_ring_interval_1">10 secondes</string>
+    <string name="increasing_ring_interval_2">15 secondes</string>
+    <string name="increasing_ring_interval_3">20 secondes</string>
+    <string name="increasing_ring_interval_4">25 secondes</string>
+    <string name="increasing_ring_interval_5">30 secondes</string>
 
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
@@ -1453,8 +1466,8 @@
 
     <!-- Statusbar: notification heads up category -->
     <string name="pref_cat_notif_heads_up_title">Notifications flottantes</string>
-    <string name="pref_heads_up_master_switch_summary">Active la fonction standard AOSP de notification flottante 
-        Si activée, des options additionnelles par application seront accessibles depuis le Contrôle ultime de notification (redémarrage nécessaire)</string>
+    <string name="pref_heads_up_master_switch_summary">Active la fonction étendue de notification flottante 
+        Si activée, des options additionnelles par application sont accessibles depuis le Contrôle ultime de notification (redémarrage nécessaire)</string>
     <string name="pref_heads_up_timeout_title">Temporisation</string>
     <string name="pref_heads_up_timeout_summary">Pour programmer la durée d\'affichage de la fenêtre de notification 0 = permanent</string>
 
@@ -1470,7 +1483,7 @@
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Affichage à distance</string>
+    <string name="qs_tile_remote_display">Caster l\'écran</string>
 
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
@@ -1490,7 +1503,7 @@
     <string name="pref_unc_as_headsup_timeout_summary">Pour règler le délai de visibilité des notifications flottantes. 0 = jusqu\'à ouverture</string>
 
     <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">Consommation de données 2</string>
+    <string name="qs_tile_data_usage_2">Cellulaire 2</string>
 
     <!-- MSIM Signal Cluster: auto-hide signal icons -->
     <string name="pref_signal_icon_autohide_title">Masquer les icônes de signal</string>
@@ -1674,5 +1687,65 @@
 
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Touche Appli Récentes : action sur double appui</string>
+
+    <!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">Par défaut</string>
+
+    <!-- Tri state pref -->
+    <string name="state_default">Par défaut</string>
+    <string name="state_enabled">Activé</string>
+    <string name="state_disabled">Désactivé</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">Batterie par défaut avec pourcentage</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">Afficher dans la barre d\'état</string>
+    <string name="battery_percent_text_statusbar_summary">Affiche le pourcentage de batterie au format texte dans la barre d\'état standard (lorsque l\'appareil est déverrouillé)</string>
+    <string name="battery_percent_text_keyguard_title">Mode verrou</string>
+    <string name="battery_percent_text_keyguard_summary">Spécifie le comportement du texte (pourcentage) la barre d\'état de l\'écran de déverouillage</string>
+    <string name="keyguard_percent_text_default">Par défaut (pendant le rechargement)</string>
+    <string name="keyguard_percent_text_show_always">Toujours afficher</string>
+    <string name="keyguard_percent_text_hide">Masquer</string>
+    <string name="battery_percent_text_header_hide_title">Masquer dans l\'entête de la barre d\'état</string>
+    <string name="battery_percent_text_size_default">Par défaut</string>
+    
+    <!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">Téléscripteur de notification</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Active le téléscripteur de notification et ses fonctionnalités associées (redémarrage nécessaire)</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">Utiliser des icônes plus grandes</string>
+    <string name="pref_navbar_larger_icons_summary">Redémarrage nécessaire</string>
+ 
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">Autoriser le redémarrage logiciel</string>
+    <string name="pref_reboot_allow_softreboot_summary">Remarquez que le redémarrage logiciel peut occasionner 
+        une consommation de batterie inattendue ou des problèmes d\'instabilité. Le meilleur usage est de toujours redémarrer normalement.</string>
+
+    <!-- Recents panel search bar -->
+    <string name="pref_recents_searchbar_title">Visibilité de la barre de recherche</string>
+    <string name="recents_searchbar_default">Par défaut</string>
+    <string name="recents_searchbar_hide_keep_space">Masquer et garder l\'espace</string>
+    <string name="recents_searchbar_hide_remove_space">Masquer et supprimer l\'espace</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">ATTENTION</string>
+    <string name="gb_new_package_dialog_message_lollipop">Une installation de GravityBox pour KitKat a été détectée. 
+        Avant de pouvoir utiliser la nouvelle version, l\'ancienne doit être désintallée. Appuyez sur OK pour commencer le processus de désinstallation.
+        Après la désinstallation, n\'oubliez pas d\'activer le nouveau module dans Xposed Installer et REDÉMARREZ IMMÉDIATEMENT.</string>
+
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">Le Backup réalisé dans l\'ancienne version d\'Android ne peut pas être restauré à cause 
+        de différences trop importantes du système d'exploitation. Il est grandement recommandé de reconfigurer GravityBox à partir de zéro.</string>
+
+    <!-- QS: Secured tiles -->
+    <string name="pref_qs_secured_tiles_title">Touches sécurisées</string>
+    <string name="pref_qs_secured_tiles_summary">Masque les touches sélectionnées dans l\'écran de déverrouillage sécurisé</string>
+
+    <!-- QS: Normalize dual tiles -->
+    <string name="pref_qs_normalize_title">Normaliser les touches à double action</string>
+    <string name="pref_qs_normalize_summary">Rend normales les touches WiFi et Bluetooth. 
+        L\'action d\'un appui simple sera convertie en action d\'un appui long</string>
 
 </resources>
