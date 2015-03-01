@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import android.content.Context;
 
 import com.ceco.lollipop.gravitybox.quicksettings.AospTile;
+import com.ceco.lollipop.gravitybox.quicksettings.QsPanel;
 import com.ceco.lollipop.gravitybox.quicksettings.QsQuickPulldownHandler;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTile;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor;
@@ -59,6 +60,7 @@ public class ModQsTiles {
 
     private static QsTileEventDistributor mEventDistributor;
     private static QsQuickPulldownHandler mQuickPulldownHandler;
+    private static QsPanel mQsPanel;
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
@@ -161,10 +163,12 @@ public class ModQsTiles {
                     }
                     if (DEBUG) log("Tiles created");
 
+                    Context context = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
                     if (mQuickPulldownHandler == null) {
-                        mQuickPulldownHandler = new QsQuickPulldownHandler(
-                                (Context) XposedHelpers.callMethod(param.thisObject, "getContext"),
-                                prefs, mEventDistributor);
+                        mQuickPulldownHandler = new QsQuickPulldownHandler(context, prefs, mEventDistributor);
+                    }
+                    if (mQsPanel == null) {
+                        mQsPanel = new QsPanel(context, prefs, mEventDistributor);
                     }
                 }
             });

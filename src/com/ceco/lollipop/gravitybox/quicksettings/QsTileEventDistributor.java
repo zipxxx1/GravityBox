@@ -32,8 +32,6 @@ public class QsTileEventDistributor {
             "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_STATUSBAR_WM = 
             "com.android.systemui.statusbar.phone.StatusBarWindowManager";
-    private static final String CLASS_QS_PANEL = 
-            "com.android.systemui.qs.QSPanel";
 
     public interface QsEventListener {
         String getKey();
@@ -65,8 +63,6 @@ public class QsTileEventDistributor {
     private Map<String,QsEventListener> mListeners;
     private List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private Object mKeyguardDelegate;
-    private ViewGroup mQsPanel;
-    private boolean mNormalized;
 
     public QsTileEventDistributor(Object host, XSharedPreferences prefs) {
         mHost = host;
@@ -74,7 +70,6 @@ public class QsTileEventDistributor {
         mListeners = new LinkedHashMap<String,QsEventListener>();
         mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
 
-        initPreferences();
         createHooks();
         prepareBroadcastReceiver();
     }
@@ -103,9 +98,7 @@ public class QsTileEventDistributor {
                     recreateTiles();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_NORMALIZED)) {
-                    mNormalized = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_NORMALIZED, false);
                     recreateTiles();
-                    updateResources();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
                     boolean hideOnChange = intent.getBooleanExtra(
@@ -130,10 +123,6 @@ public class QsTileEventDistributor {
         }
     };
 
-    private void initPreferences() {
-        mNormalized = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_NORMALIZE, false);
-    }
-
     private void prepareBroadcastReceiver() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
@@ -147,16 +136,6 @@ public class QsTileEventDistributor {
         try {
             mPrefs.reload();
             XposedHelpers.callMethod(mHost, "recreateTiles");
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    private void updateResources() {
-        try {
-            if (mQsPanel != null) {
-                XposedHelpers.callMethod(mQsPanel, "updateResources");
-            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -263,24 +242,6 @@ public class QsTileEventDistributor {
                     int newState = (int) param.args[0];
                     for (Entry<String,QsEventListener> entry : mListeners.entrySet()) {
                         entry.getValue().onStatusBarStateChanged(newState);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_QS_PANEL, cl, "updateResources",
-                    new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mQsPanel == null) {
-                        mQsPanel = (ViewGroup) param.thisObject;
-                    }
-                    if (mNormalized) {
-                        XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight",
-                                XposedHelpers.getIntField(mQsPanel, "mCellHeight"));
-                        XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth",
-                                XposedHelpers.getIntField(mQsPanel, "mCellWidth"));
-                        mQsPanel.postInvalidate();
-                        if (DEBUG) log("updateResources: Updated first row dimensions due to normalized tiles");
                     }
                 }
             });
