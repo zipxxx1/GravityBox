@@ -81,6 +81,7 @@ public class ModLauncher {
         CLASS_DYNAMIC_GRID.put("sg", new DynamicGrid("Ez", "BB", "BC"));
         CLASS_DYNAMIC_GRID.put("ur", new DynamicGrid("Gi", "Dg", "Dh"));
         CLASS_DYNAMIC_GRID.put("wd", new DynamicGrid("Fe", "Ce", "Cf"));
+        CLASS_DYNAMIC_GRID.put("com.android.launcher3.cn", new DynamicGrid("KA", "Hz", "HA"));
 
         METHOD_SHOW_ALL_APPS = new ArrayList<ShowAllApps>();
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("onClickAllAppsButton",
@@ -89,6 +90,9 @@ public class ModLauncher {
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
                 new Object[] { boolean.class, "tk", boolean.class },
                 new Object[] { false, "xJ", false } ));
+        METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
+                new Object[] { boolean.class, "com.android.launcher3.q", boolean.class },
+                new Object[] { false, "Dc", false } ));
     }
 
     private static void log(String message) {
@@ -121,7 +125,7 @@ public class ModLauncher {
                 if (DEBUG) log("Probably found DynamicGrid class as: " + className);
                 dynamicGrid.clazz = cls;
             } catch (Throwable t) { 
-                if (DEBUG) XposedBridge.log(t);
+                if (DEBUG) log("search for dynamic grid " + className + ": " + t.getMessage());
                 continue; 
             }
 
