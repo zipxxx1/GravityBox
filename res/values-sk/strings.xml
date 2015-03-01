@@ -236,7 +236,7 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Počet dlaždíc na riadok</string>
-    <string name="pref_qs_tiles_per_row_summary">Definuje počet dlaždíc rýchlych nastavení zobrazených na 1 riadok. Veľkosť dlaždíc bude upravená podľa potreby. Aplikovateľné na portrét režim.</string>
+    <string name="pref_qs_tiles_per_row_summary">Definuje počet dlaždíc zobrazených na 1 riadok</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Zobraziť deň v týždni</string>
