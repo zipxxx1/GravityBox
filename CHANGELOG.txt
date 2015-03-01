@@ -1,3 +1,13 @@
+Changelog 3.5.5 - 01/03/2015
+--------------------------------------
+- Launcher tweaks: adjusted for Google App 4.2.16
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional,HK) translations (thanks to momomok, mingtsay)
+- Updated Portuguese (BR) translations (thanks to KingKaminari)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Polish translations (thanks to xtrem007)
+
 Changelog 3.5.4 - 14/02/2015
 --------------------------------------
 - Smarter identification of MediaTek devices
