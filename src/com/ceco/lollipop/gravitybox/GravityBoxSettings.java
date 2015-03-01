@@ -1560,13 +1560,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 getPreferenceScreen().removePreference(mPrefCatMtkFixes);
             }
 
-            // Remove Phone specific preferences on Tablet devices
-            if (sSystemProperties.isTablet) {
-                //mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
-                mPrefCatStatusbarQs.removePreference(mPrefQuickPulldown);
-                mPrefCatStatusbarQs.removePreference(mPrefQuickPulldownSize);
-            }
-
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {
                 mPrefCatHwKeyOthers.removePreference(mPrefHwKeyLockscreenTorch);
