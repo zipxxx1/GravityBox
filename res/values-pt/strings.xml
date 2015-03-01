@@ -1656,31 +1656,32 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="state_disabled">Desativado</string>
 
     <!-- Battery style: Stock battery with percentage -->
-    <string name="battery_style_stock_percent">Indicador de bateria padrão com percentagem</string>
+    <string name="battery_style_stock_percent">Indicador de bateria padrão com porcentagem</string>
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">Mostrar na barra de status</string>
-    <string name="battery_percent_text_statusbar_summary">Permite mostrar o texto com a percentagem de bateria na barra de status (quando o dispositivo estiver desbloqueado)</string>
+    <string name="battery_percent_text_statusbar_summary">Permite mostrar o texto com a porcentagem de bateria na barra de status (quando o dispositivo estiver desbloqueado)</string>
     <string name="battery_percent_text_keyguard_title">Modo de bloqueio</string>
-    <string name="battery_percent_text_keyguard_summary">Permite configurar o texto da percentagem na barra de status da tela de bloqueio</string>
-    <string name="keyguard_percent_text_default">Predefinido (durante carga)</string>
-    <string name="keyguard_percent_text_show_always">Mostrar sempre</string>
+    <string name="battery_percent_text_keyguard_summary">Permite configurar o texto da porcentagem na barra de status da tela de bloqueio</string>
+    <string name="keyguard_percent_text_default">Padrão (enquanto estiver carregando)</string>
+    <string name="keyguard_percent_text_show_always">Sempre mostrar</string>
     <string name="keyguard_percent_text_hide">Ocultar</string>
     <string name="battery_percent_text_header_hide_title">Ocultar no cabeçalho da barra de status</string>
-    <string name="battery_percent_text_size_default">Predefinido</string>
+    <string name="battery_percent_text_size_default">Padrão</string>
 
     <!-- Notification ticker -->
     <string name="pref_cat_statusbar_ticker_title">Aviso de notificações</string>
     <string name="pref_statusbar_ticker_master_switch_summary">Permite ativar o aviso de notificações e as funções relacionadas (necessário reiniciar)</string>
 
     <!-- Navigation bar: use larger icons -->
-    <string name="pref_navbar_larger_icons_title">Utilizar ícones grandes</string>
+    <string name="pref_navbar_larger_icons_title">Usar ícones grandes</string>
     <string name="pref_navbar_larger_icons_summary">Necessário reiniciar</string>
 
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Permitir reinício rápido</string>
-    <string name="pref_reboot_allow_softreboot_summary">Nota: reinício rápido pode causar problemas de instabilidade ou 
-        consumo de bateria inesperado, sendo recomendável utilizar o modo normal</string>
+    <string name="pref_reboot_allow_softreboot_summary">Nota: o reinício rápido pode causar consumo de bateria
+        inesperado ou problemas de estabilidade. É recomendado sempre usar o reinício normal.
+    </string>
 
     <!-- Recents panel search bar -->
     <string name="pref_recents_searchbar_title">Visibilidade da barra de pesquisa</string>
@@ -1690,13 +1691,15 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATENÇÃO</string>
-    <string name="gb_new_package_dialog_message_lollipop">Foi detetada uma instalação obsoleta do GravityBox, sendo necessário proceder à sua desinstalação 
-        antes de poder comerçar a usar a nova versão. Pressione OK para iniciar o processo. Após a desinstalação deverá garantir que o módulo se encontra
-        ativado no Xposed Installer e reiniciar o dispositivo de imediato.</string>
+    <string name="gb_new_package_dialog_message_lollipop">GravityBox para KitKat encontrado.
+        Antes que a nova versão possa ser usada, a antiga precisa ser desinstalada. Pressione OK para começar o processo de desinstalação.
+        Depois de desinstalar, não se esqueça de ativar o novo módulo no instalador do Xposed e REINICIE IMEDIATAMENTE.
+    </string>
 
     <!-- Restore settings: warn if old backup exists -->
-    <string name="settings_restore_backup_obsolete">As definições guardadas em uma versão antiga do Android não podem ser restauradas 
-        devido a diversas diferenças do sistema, sendo altamente recomendável configurar o GravityBox</string>
+    <string name="settings_restore_backup_obsolete">As configurações salvas em uma versão antiga do GravityBox não podem ser
+        restauradas devido a extensas diferenças de sistema. É altamente recomendado configurar o GravityBox do zero.
+    </string>
         
     <!-- QS: Secured tiles -->
     <string name="pref_qs_secured_tiles_title">Painéis seguros</string>
@@ -1704,5 +1707,7 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
 
     <!-- QS: Normalize dual tiles -->
     <string name="pref_qs_normalize_title">Normalizar painéis</string>
-    <string name="pref_qs_normalize_summary">Permite transformar os painéis WiFi e Bluetooth em painéis normais (manter o painel pressionado será o mesmo que carregar no seu texto)</string>
+    <string name="pref_qs_normalize_summary">Transforma os painéis Wi-Fi e Bluetooth em painéis normais.
+        A ação de tocar no seu texto terá o mesmo efeito que tocar e segurar no painel.
+    </string>
 </resources>
