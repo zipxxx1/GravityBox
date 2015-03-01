@@ -100,7 +100,8 @@
     <string name="qs_tile_autorotation">Автоповорот</string>
     <string name="qs_tile_sync">Синхронизация</string>
     <string name="qs_tile_wifi_ap">ТД Wi-Fi</string>
-    <string name="qs_tile_torch_gb">Фонарик</string>
+    <string name="qs_tile_torch_aosp">Фонарик (сток)</string>
+    <string name="qs_tile_torch_gb">Фонарик (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Сон</string>
     <string name="qs_tile_quickrecord">Быстрая запись</string>
@@ -113,6 +114,7 @@
     <string name="qs_tile_music">Музыка</string>
     <string name="qs_tile_smart_radio">Умное радио</string>
     <string name="qs_tile_lock_screen">Экран блокировки</string>
+    <string name="qs_tile_inversion">Инверсия</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбор цвета</string>
@@ -778,7 +780,8 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Скрыть после изменения</string>
-    <string name="pref_qs_hide_on_change_summary">Скрытие строки состояния по одиночному нажатию на плитке. Применимо к плиткам GravityBox и изменённым системным.</string>
+    <string name="pref_qs_hide_on_change_summary">Скрытие строки состояния по одиночному нажатию на плитке. 
+        Применимо к простым плиткам с 2 состояниями.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Меню выключения</string>
@@ -1734,5 +1737,14 @@
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">Резервная копия, выполненная в старой версии Андроид, не может быть восстановлена из-за 
         значимых различий  ОС. Настоятельно рекомендуется настройка GravityBox с нуля.</string>
+
+    <!-- QS: Secured tiles -->
+    <string name="pref_qs_secured_tiles_title">Защищённые плитки</string>
+    <string name="pref_qs_secured_tiles_summary">Скрытие избранных плиток на защищённом экране блокировки</string>
+
+    <!-- QS: Normalize dual tiles -->
+    <string name="pref_qs_normalize_title">Нормализация двойных плиток</string>
+    <string name="pref_qs_normalize_summary">Переключение плиток WiFi и Bluetooth в обычный режим. 
+        Действие нажатия на ярлыке будет преобразовано в действие по удержанию нажатия</string>
 
 </resources>
