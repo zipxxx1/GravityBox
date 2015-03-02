@@ -173,8 +173,7 @@ public abstract class BaseTile implements QsEventListener {
     public void onStatusBarStateChanged(int state) {
         final int oldState = mStatusBarState;
         mStatusBarState = state;
-        if (mSecured && mStatusBarState != oldState &&
-                mStatusBarState != StatusBarState.SHADE) {
+        if (mSecured && mStatusBarState != oldState) {
             refreshState();
         }
         if (DEBUG) log(mKey + ": onStatusBarStateChanged(" + state + ")");
