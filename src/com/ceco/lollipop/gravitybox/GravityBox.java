@@ -28,7 +28,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     public static final String PACKAGE_NAME = GravityBox.class.getPackage().getName();
     public static String MODULE_PATH = null;
     private static XSharedPreferences prefs;
-    private static boolean androidInitialized;
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
@@ -96,8 +95,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
 
-        if (lpparam.packageName.equals("android") && !androidInitialized) {
-            androidInitialized = true;
+        if (lpparam.packageName.equals("android")) {
             PermissionGranter.initAndroid(lpparam.classLoader);
             ModLowBatteryWarning.initAndroid(prefs, lpparam.classLoader);
             ModDisplay.initAndroid(prefs, lpparam.classLoader);
