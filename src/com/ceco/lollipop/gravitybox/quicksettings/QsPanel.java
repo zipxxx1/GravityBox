@@ -87,6 +87,17 @@ public class QsPanel implements BroadcastSubReceiver {
         } 
     }
 
+    public static float getScalingFactor(int numColumns) {
+        switch (numColumns) {
+            default:
+            case 0: return 1f;
+            case 3: return 1f;
+            case 4: return 0.85f;
+            case 5: return 0.75f;
+            case 6: return 0.65f;
+        }
+    }
+
     private void createHooks() {
         try {
             ClassLoader cl = mContext.getClassLoader();
@@ -98,7 +109,23 @@ public class QsPanel implements BroadcastSubReceiver {
                     if (mQsPanel == null) {
                         mQsPanel = (ViewGroup) param.thisObject;
                     }
+                    final float factor = getScalingFactor(mNumColumns);
                     boolean shouldInvalidate = false;
+                    if (factor != 1f) {
+                        int ch = XposedHelpers.getIntField(mQsPanel, "mCellHeight");
+                        XposedHelpers.setIntField(mQsPanel, "mCellHeight", Math.round(ch*factor));
+                        int cw = XposedHelpers.getIntField(mQsPanel, "mCellWidth");
+                        XposedHelpers.setIntField(mQsPanel, "mCellWidth", Math.round(cw*factor));
+                        int lch = XposedHelpers.getIntField(mQsPanel, "mLargeCellHeight");
+                        XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight", Math.round(lch*factor));
+                        int lcw = XposedHelpers.getIntField(mQsPanel, "mLargeCellWidth");
+                        XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth", Math.round(lcw*factor));
+                        int dualTileUnderlap = XposedHelpers.getIntField(mQsPanel, "mDualTileUnderlap");
+                        XposedHelpers.setIntField(mQsPanel, "mDualTileUnderlap",
+                                Math.round(dualTileUnderlap*factor));
+                        if (DEBUG) log("updateResources: scaling applied with factor=" + factor);
+                        shouldInvalidate = true;
+                    }
                     if (mNormalized) {
                         XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight",
                                 XposedHelpers.getIntField(mQsPanel, "mCellHeight"));

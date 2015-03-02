@@ -5,7 +5,10 @@ import java.util.Set;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.TextView;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
@@ -38,6 +41,8 @@ public abstract class AospTile implements QsEventListener {
     protected int mStatusBarState;
     protected boolean mNormalized;
     protected boolean mHideOnChange;
+    protected int mNumColumns;
+    protected float mScalingFactor = 1f;
 
     public static AospTile create(Object host, Object tile, String aospKey, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -170,6 +175,63 @@ public abstract class AospTile implements QsEventListener {
                 return handleLongClick(v);
             }
         });
+        XposedHelpers.setAdditionalInstanceField(tileView, QsTile.TILE_KEY_NAME, getKey());
+
+        mScalingFactor = QsPanel.getScalingFactor(Integer.valueOf(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0")));
+        if (mScalingFactor != 1f) {
+            int iconSizePx = XposedHelpers.getIntField(tileView, "mIconSizePx");
+            XposedHelpers.setIntField(tileView, "mIconSizePx", Math.round(iconSizePx*mScalingFactor));
+            int tileSpacingPx = XposedHelpers.getIntField(tileView, "mTileSpacingPx");
+            XposedHelpers.setIntField(tileView, "mTileSpacingPx", Math.round(tileSpacingPx*mScalingFactor));
+            int tilePaddingBelowIconPx = XposedHelpers.getIntField(tileView, "mTilePaddingBelowIconPx");
+            XposedHelpers.setIntField(tileView, "mTilePaddingBelowIconPx",
+                    Math.round(tilePaddingBelowIconPx*mScalingFactor));
+            int dualTileVerticalPaddingPx = XposedHelpers.getIntField(tileView, "mDualTileVerticalPaddingPx");
+            XposedHelpers.setIntField(tileView, "mDualTileVerticalPaddingPx", 
+                    Math.round(dualTileVerticalPaddingPx*mScalingFactor));
+    
+            updateLabelLayout(tileView);
+            updatePaddingTop(tileView);
+        }
+    }
+
+    @Override
+    public void onViewConfigurationChanged(View tileView, Configuration config) {
+        if (mScalingFactor != 1f) {
+            updateLabelLayout(tileView);
+            updatePaddingTop(tileView);
+            tileView.requestLayout();
+        }
+    }
+
+    @Override
+    public void onRecreateLabel(View tileView) {
+        if (mScalingFactor != 1f) {
+            updateLabelLayout(tileView);
+            tileView.requestLayout();
+        }
+    }
+
+    private void updatePaddingTop(View tileView) {
+        int tilePaddingTopPx = XposedHelpers.getIntField(tileView, "mTilePaddingTopPx");
+        XposedHelpers.setIntField(tileView, "mTilePaddingTopPx",
+                Math.round(tilePaddingTopPx*mScalingFactor));
+    }
+
+    private void updateLabelLayout(View tileView) {
+        TextView label = (TextView) XposedHelpers.getObjectField(tileView, "mLabel");
+        if (label != null) {
+            label.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    label.getTextSize()*mScalingFactor);
+        }
+        Object dualLabel = XposedHelpers.getObjectField(tileView, "mDualLabel");
+        if (dualLabel != null) {
+            TextView first = (TextView) XposedHelpers.getObjectField(dualLabel, "mFirstLine");
+            first.setTextSize(TypedValue.COMPLEX_UNIT_PX, first.getTextSize()*mScalingFactor);
+            TextView second = (TextView) XposedHelpers.getObjectField(dualLabel, "mSecondLine");
+            second.setTextSize(TypedValue.COMPLEX_UNIT_PX, second.getTextSize()*mScalingFactor);
+        }
     }
 
     private void createHooks() {

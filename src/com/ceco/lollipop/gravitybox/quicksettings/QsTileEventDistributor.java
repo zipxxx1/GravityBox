@@ -17,8 +17,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.view.View;
-import android.view.ViewGroup;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -32,6 +32,8 @@ public class QsTileEventDistributor {
             "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_STATUSBAR_WM = 
             "com.android.systemui.statusbar.phone.StatusBarWindowManager";
+    private static final String CLASS_TILE_VIEW = 
+            "com.android.systemui.qs.QSTileView";
 
     public interface QsEventListener {
         String getKey();
@@ -43,6 +45,8 @@ public class QsTileEventDistributor {
         void onStatusBarStateChanged(int state);
         boolean supportsHideOnChange();
         void onHideOnChangeChanged(boolean hideOnChange);
+        void onViewConfigurationChanged(View tileView, Configuration config);
+        void onRecreateLabel(View tileView);
     }
 
     public interface QsEventListenerGb extends QsEventListener {
@@ -98,6 +102,9 @@ public class QsTileEventDistributor {
                     recreateTiles();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_NORMALIZED)) {
+                    recreateTiles();
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS)) {
                     recreateTiles();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
@@ -242,6 +249,31 @@ public class QsTileEventDistributor {
                     int newState = (int) param.args[0];
                     for (Entry<String,QsEventListener> entry : mListeners.entrySet()) {
                         entry.getValue().onStatusBarStateChanged(newState);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_TILE_VIEW, cl, "onConfigurationChanged",
+                    Configuration.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        l.onViewConfigurationChanged((View)param.thisObject,
+                                (Configuration)param.args[0]);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_TILE_VIEW, cl, "recreateLabel",
+                    new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        l.onRecreateLabel((View)param.thisObject);
                     }
                 }
             });
