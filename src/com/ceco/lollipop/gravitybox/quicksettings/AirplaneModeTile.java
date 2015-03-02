@@ -8,12 +8,7 @@ public class AirplaneModeTile extends AospTile {
 
     protected AirplaneModeTile(Object host, Object tile, XSharedPreferences prefs, 
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, tile, prefs, eventDistributor);
-    }
-
-    @Override
-    public String getKey() {
-        return "aosp_tile_airplane_mode";
+        super(host, "aosp_tile_airplane_mode", tile, prefs, eventDistributor);
     }
 
     @Override

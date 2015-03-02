@@ -8,12 +8,7 @@ public class HotspotTile extends AospTile {
 
     protected HotspotTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, tile, prefs, eventDistributor);
-    }
-
-    @Override
-    public String getKey() {
-        return "aosp_tile_hotspot";
+        super(host, "aosp_tile_hotspot", tile, prefs, eventDistributor);
     }
 
     @Override

@@ -8,12 +8,7 @@ public class CastTile extends AospTile {
 
     protected CastTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, tile, prefs, eventDistributor);
-    }
-
-    @Override
-    public String getKey() {
-        return "aosp_tile_cast";
+        super(host, "aosp_tile_cast", tile, prefs, eventDistributor);
     }
 
     @Override

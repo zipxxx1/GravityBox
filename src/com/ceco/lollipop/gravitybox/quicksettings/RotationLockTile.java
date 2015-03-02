@@ -8,12 +8,7 @@ public class RotationLockTile extends AospTile {
 
     protected RotationLockTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, tile, prefs, eventDistributor);
-    }
-
-    @Override
-    public String getKey() {
-        return "aosp_tile_rotation";
+        super(host, "aosp_tile_rotation", tile, prefs, eventDistributor);
     }
 
     @Override

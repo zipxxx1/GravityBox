@@ -37,6 +37,7 @@ public class QsTileEventDistributor {
 
     public interface QsEventListener {
         String getKey();
+        Object getTile();
         void handleDestroy();
         void onCreateTileView(View tileView) throws Throwable;
         void onBroadcastReceived(Context context, Intent intent);
@@ -47,13 +48,8 @@ public class QsTileEventDistributor {
         void onHideOnChangeChanged(boolean hideOnChange);
         void onViewConfigurationChanged(View tileView, Configuration config);
         void onRecreateLabel(View tileView);
-    }
-
-    public interface QsEventListenerGb extends QsEventListener {
-        boolean supportsDualTargets();
-        void handleUpdateState(Object state, Object arg);
         void handleClick();
-        void handleSecondaryClick();
+        void handleUpdateState(Object state, Object arg);
         void setListening(boolean listening);
     }
 
@@ -159,22 +155,10 @@ public class QsTileEventDistributor {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
-                    if (l != null && (l instanceof QsEventListenerGb)) {
-                        ((QsEventListenerGb)l).handleUpdateState(param.args[0], param.args[1]);
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        l.handleUpdateState(param.args[0], param.args[1]);
                         param.setResult(null);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "supportsDualTargets",
-                    new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
-                    if (l != null && (l instanceof QsEventListenerGb)) {
-                        param.setResult(((QsEventListenerGb)l).supportsDualTargets());
                     }
                 }
             });
@@ -184,22 +168,9 @@ public class QsTileEventDistributor {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
                     if (l != null) {
-                        ((QsEventListenerGb)l).handleClick();
-                        param.setResult(null);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "handleSecondaryClick",
-                    new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
-                    if (l != null && (l instanceof QsEventListenerGb)) {
-                        ((QsEventListenerGb)l).handleSecondaryClick();
+                        l.handleClick();
                         param.setResult(null);
                     }
                 }
@@ -210,9 +181,9 @@ public class QsTileEventDistributor {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
                     if (l != null) {
-                        ((QsEventListenerGb)l).setListening((boolean)param.args[0]);
+                        l.setListening((boolean)param.args[0]);
                         param.setResult(null);
                     }
                 }
@@ -223,7 +194,7 @@ public class QsTileEventDistributor {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
                     if (l != null) {
                         l.onCreateTileView((View)param.getResult());
                     }
@@ -235,7 +206,7 @@ public class QsTileEventDistributor {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
                     if (l != null) {
                         l.handleDestroy();
                     }
@@ -258,7 +229,7 @@ public class QsTileEventDistributor {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
                     if (l != null) {
                         l.onViewConfigurationChanged((View)param.thisObject,
                                 (Configuration)param.args[0]);
@@ -271,7 +242,7 @@ public class QsTileEventDistributor {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, QsTile.TILE_KEY_NAME));
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
                     if (l != null) {
                         l.onRecreateLabel((View)param.thisObject);
                     }

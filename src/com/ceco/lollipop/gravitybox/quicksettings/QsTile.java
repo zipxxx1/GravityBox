@@ -1,56 +1,21 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
-import android.util.TypedValue;
-import android.view.View;
-import android.widget.TextView;
 
-import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
-import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
-import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListenerGb;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public abstract class QsTile implements QsEventListenerGb {
-    protected static String TAG = "GB:QsTile";
-
-    protected static final boolean DEBUG = ModQsTiles.DEBUG;
-    public static final String TILE_KEY_NAME = "gbTileKey";
+public abstract class QsTile extends BaseTile {
     public static final String DUMMY_INTENT = "intent(dummy)";
     public static final String CLASS_INTENT_TILE = "com.android.systemui.qs.tiles.IntentTile";
-    public static final String CLASS_BASE_TILE = "com.android.systemui.qs.QSTile";
-    public static final String CLASS_TILE_STATE = "com.android.systemui.qs.QSTile.State";
-    public static final String CLASS_TILE_VIEW = "com.android.systemui.qs.QSTileView";
 
-    protected Object mHost;
-    protected Object mTile;
-    protected String mKey;
     protected State mState;
-    protected Context mContext;
-    protected Context mGbContext;
-    protected XSharedPreferences mPrefs;
-    protected QsTileEventDistributor mEventDistributor;
-    protected boolean mEnabled;
-    protected boolean mSecured;
-    protected int mStatusBarState;
-    protected boolean mHideOnChange;
-    protected float mScalingFactor = 1f;
-
-    protected static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
 
     public static QsTile create(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -105,48 +70,17 @@ public abstract class QsTile implements QsEventListenerGb {
 
     protected QsTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        mHost = host;
-        mKey = key;
-        mPrefs = prefs;
-        mEventDistributor = eventDistributor;
-        mState = new State();
+        super(host, key, prefs, eventDistributor);
 
-        mContext = (Context) XposedHelpers.callMethod(mHost, "getContext");
-        mGbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME,
-                Context.CONTEXT_IGNORE_SECURITY);
+        mState = new State();
 
         mTile = XposedHelpers.callStaticMethod(XposedHelpers.findClass(
                 CLASS_INTENT_TILE, mContext.getClassLoader()),
                 "create", mHost, DUMMY_INTENT);
-        XposedHelpers.setAdditionalInstanceField(mTile, TILE_KEY_NAME, key);
-
-        initPreferences();
-        mEventDistributor.registerListener(this);
+        XposedHelpers.setAdditionalInstanceField(mTile, TILE_KEY_NAME, mKey);
     }
 
     @Override
-    public void onEnabledChanged(boolean enabled) {
-        mEnabled = enabled;
-        if (DEBUG) log(getKey() + ": onEnabledChanged(" + enabled + ")");
-    }
-
-    @Override
-    public void onSecuredChanged(boolean secured) {
-        mSecured = secured;
-        if (DEBUG) log(getKey() + ": onSecuredChanged(" + secured + ")");
-    }
-
-    @Override
-    public void onStatusBarStateChanged(int state) {
-        final int oldState = mStatusBarState;
-        mStatusBarState = state;
-        if (mSecured && mStatusBarState != oldState &&
-                mStatusBarState != StatusBarState.SHADE) {
-            refreshState();
-        }
-        if (DEBUG) log(getKey() + ": onStatusBarStateChanged(" + state + ")");
-    }
-
     public void handleUpdateState(Object state, Object arg) {
         mState.visible &= mEnabled && 
                 (!mSecured || !(mStatusBarState != StatusBarState.SHADE &&
@@ -154,175 +88,11 @@ public abstract class QsTile implements QsEventListenerGb {
         mState.applyTo(state);
     }
 
-    public abstract boolean handleLongClick(View view);
-
-    public void initPreferences() {
-        String enabledTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ORDER, null);
-        mEnabled = enabledTiles != null && enabledTiles.contains(mKey);
-
-        Set<String> securedTiles = mPrefs.getStringSet(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_SECURED_TILES,
-                new HashSet<String>());
-        mSecured = securedTiles.contains(mKey);
-
-        mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
-    }
-
-    public Object getTile() {
-        return mTile;
-    }
-
-    @Override
-    public String getKey() {
-        return mKey;
-    }
-
-    @Override
-    public boolean supportsDualTargets() {
-        return false;
-    }
-
-    @Override
-    public boolean supportsHideOnChange() {
-        return true;
-    }
-
-    @Override
-    public void onHideOnChangeChanged(boolean hideOnChange) {
-        mHideOnChange = hideOnChange;
-    }
-
-    @Override
-    public void handleClick() {
-        if (mHideOnChange && supportsHideOnChange()) {
-            collapsePanels();
-        }
-    }
-
-    @Override
-    public void handleSecondaryClick() {
-        // optional
-    }
-
-    @Override
-    public void setListening(boolean listening) {
-        // optional
-    }
-
-    @Override
-    public void onCreateTileView(View tileView) throws Throwable {
-        tileView.setLongClickable(true);
-        tileView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return handleLongClick(v);
-            }
-        });
-        XposedHelpers.setAdditionalInstanceField(tileView, QsTile.TILE_KEY_NAME, mKey);
-
-        mScalingFactor = QsPanel.getScalingFactor(Integer.valueOf(mPrefs.getString(
-                GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0")));
-        if (mScalingFactor != 1f) {
-            int iconSizePx = XposedHelpers.getIntField(tileView, "mIconSizePx");
-            XposedHelpers.setIntField(tileView, "mIconSizePx", Math.round(iconSizePx*mScalingFactor));
-            int tileSpacingPx = XposedHelpers.getIntField(tileView, "mTileSpacingPx");
-            XposedHelpers.setIntField(tileView, "mTileSpacingPx", Math.round(tileSpacingPx*mScalingFactor));
-            int tilePaddingBelowIconPx = XposedHelpers.getIntField(tileView, "mTilePaddingBelowIconPx");
-            XposedHelpers.setIntField(tileView, "mTilePaddingBelowIconPx",
-                    Math.round(tilePaddingBelowIconPx*mScalingFactor));
-            int dualTileVerticalPaddingPx = XposedHelpers.getIntField(tileView, "mDualTileVerticalPaddingPx");
-            XposedHelpers.setIntField(tileView, "mDualTileVerticalPaddingPx", 
-                    Math.round(dualTileVerticalPaddingPx*mScalingFactor));
-    
-            updateLabelLayout(tileView);
-            updatePaddingTop(tileView);
-        }
-    }
-
-    @Override
-    public void onViewConfigurationChanged(View tileView, Configuration config) {
-        if (mScalingFactor != 1f) {
-            updateLabelLayout(tileView);
-            updatePaddingTop(tileView);
-            tileView.requestLayout();
-        }
-    }
-
-    @Override
-    public void onRecreateLabel(View tileView) {
-        if (mScalingFactor != 1f) {
-            updateLabelLayout(tileView);
-            tileView.requestLayout();
-        }
-    }
-
-    private void updatePaddingTop(View tileView) {
-        int tilePaddingTopPx = XposedHelpers.getIntField(tileView, "mTilePaddingTopPx");
-        XposedHelpers.setIntField(tileView, "mTilePaddingTopPx",
-                Math.round(tilePaddingTopPx*mScalingFactor));
-    }
-
-    private void updateLabelLayout(View tileView) {
-        TextView label = (TextView) XposedHelpers.getObjectField(tileView, "mLabel");
-        if (label != null) {
-            label.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                    label.getTextSize()*mScalingFactor);
-        }
-        Object dualLabel = XposedHelpers.getObjectField(tileView, "mDualLabel");
-        if (dualLabel != null) {
-            TextView first = (TextView) XposedHelpers.getObjectField(dualLabel, "mFirstLine");
-            first.setTextSize(TypedValue.COMPLEX_UNIT_PX, first.getTextSize()*mScalingFactor);
-            TextView second = (TextView) XposedHelpers.getObjectField(dualLabel, "mSecondLine");
-            second.setTextSize(TypedValue.COMPLEX_UNIT_PX, second.getTextSize()*mScalingFactor);
-        }
-    }
-
     @Override
     public void handleDestroy() {
-        if (DEBUG) log(mKey + ": handleDestroy called");
-        mEventDistributor.unregisterListener(this);
-        mEventDistributor = null;
-        mHost = null;
-        mTile = null;
+        super.handleDestroy();
         mState = null;
-        mContext = null;
-        mGbContext = null;
-        mPrefs = null;
-    }
-
-    @Override
-    public void onBroadcastReceived(Context context, Intent intent) {
-    }
-
-    public void refreshState() {
-        try {
-            XposedHelpers.callMethod(mTile, "refreshState");
-            if (DEBUG) log(mKey + ": refreshState called");
-        } catch (Throwable t) {
-            log("Error refreshing tile state: ");
-            XposedBridge.log(t);
-        }
-    }
-
-    public void startSettingsActivity(Intent intent) {
-        try {
-            XposedHelpers.callMethod(mHost, "startSettingsActivity", intent);
-        } catch (Throwable t) {
-            log("Error in startSettingsActivity: ");
-            XposedBridge.log(t);
-        }
-    }
-
-    public void startSettingsActivity(String action) {
-        startSettingsActivity(new Intent(action));
-    }
-
-    public void collapsePanels() {
-        try {
-            XposedHelpers.callMethod(mHost, "collapsePanels");
-        } catch (Throwable t) {
-            log("Error in collapsePanels: ");
-            XposedBridge.log(t);
-        }
+        if (DEBUG) log(mKey + ": handleDestroy called");
     }
 
     public static class State {

@@ -15,14 +15,9 @@ public class CellularTile extends AospTile {
 
     protected CellularTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, tile, prefs, eventDistributor);
+        super(host, "aosp_tile_cell", tile, prefs, eventDistributor);
 
         createHooks();
-    }
-
-    @Override
-    public String getKey() {
-        return "aosp_tile_cell";
     }
 
     @Override

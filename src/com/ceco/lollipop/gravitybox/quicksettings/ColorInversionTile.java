@@ -8,12 +8,7 @@ public class ColorInversionTile extends AospTile {
 
     protected ColorInversionTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, tile, prefs, eventDistributor);
-    }
-
-    @Override
-    public String getKey() {
-        return "aosp_tile_inversion";
+        super(host, "aosp_tile_inversion", tile, prefs, eventDistributor);
     }
 
     @Override

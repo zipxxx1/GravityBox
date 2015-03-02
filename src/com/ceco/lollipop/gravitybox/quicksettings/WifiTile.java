@@ -17,14 +17,9 @@ public class WifiTile extends AospTile {
 
     protected WifiTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, tile, prefs, eventDistributor);
+        super(host, "aosp_tile_wifi", tile, prefs, eventDistributor);
 
         createHooks();
-    }
-
-    @Override
-    public String getKey() {
-        return "aosp_tile_wifi";
     }
 
     @Override

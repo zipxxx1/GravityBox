@@ -8,12 +8,7 @@ public class LocationTile extends AospTile {
 
     protected LocationTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, tile, prefs, eventDistributor);
-    }
-
-    @Override
-    public String getKey() {
-        return "aosp_tile_location";
+        super(host, "aosp_tile_location", tile, prefs, eventDistributor);
     }
 
     @Override
