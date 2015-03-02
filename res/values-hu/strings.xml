@@ -831,6 +831,7 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Akkumulátor százalék szövege</string>
+    <string name="battery_percent_text_show_title">Százalékos szöveg mutatása</string>
     <string name="battery_percent_text_size_title">Akkumulátor százalék szöveg mérete</string>
     <string name="battery_percent_text_size_larger">Nagyobb</string>
     <string name="battery_percent_text_size_normal">Normál</string>
@@ -1828,5 +1829,42 @@
     <!-- Unlock ring targets: custom unlock ring -->
     <string name="pref_lockscreen_ring_custom_unlock_title">Egyéni feloldó célpont</string>
     <string name="pref_lockscreen_ring_custom_unlock_summary">Lehetővé teszi a feloldó célppont manuális beállítását. Győződj meg róla, hogy legalább egy feloldó célpont beállításra került egy GravityBox feloldó művelethez vagy valamelyik alkalmazás indításához.</string>
+
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Wi-Fi prioritás</string>
+    <string name="pref_wifi_priority_summary">Wi-Fi hálózatok prioritásának a meghatározása</string>
+
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">Töltöttségi sáv</string>
+    <string name="pref_battery_bar_show_title">Töltöttségi sáv mutatása</string>
+    <string name="pref_battery_bar_position_title">Pozíció</string>
+    <string name="bbar_position_top">Állapotsáv felső szélén</string>
+    <string name="bbar_position_bottom">Állapotsáv alsó szélén</string>
+    <string name="pref_battery_bar_margin_title">Szegély margó</string>
+    <string name="pref_battery_bar_thickness_title">Vastagság</string>
+    <string name="pref_battery_bar_charge_anim_title">Töltés animáció</string>
+    <string name="pref_battery_bar_dynacolor_title">Dinamikus szín</string>
+    <string name="pref_battery_bar_dynacolor_summary">Szín meghatározása automatikusan az aktuális akku töltöttségi szint alapján</string>
+    <string name="pref_battery_bar_color_title">Szín</string>
+    <string name="pref_battery_bar_color_low_title">Alacsony akkuszint színe</string>
+    <string name="pref_battery_bar_color_critical_title">Kritikus akkuszint színe</string>
+    <string name="pref_battery_bar_centered_title">Középre igazítva</string>
+    <string name="pref_battery_bar_color_charging_title">Töltés színe</string>
+
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Üzemmód</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animált</string>
+    <string name="pref_statusbar_download_progress_centered_title">Középre igazítva</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Vastagság</string>
+    <string name="pref_statusbar_download_progress_margin_title">Szegély margó</string>
+
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">Menu gomb egyszeri érintés művelete</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">Vissza gomb egyszeri érintés művelete</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">Nemrég használt alkalmazások gomb dupla érintés művelete</string>
 
 </resources>
