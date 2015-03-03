@@ -326,6 +326,7 @@ public class ModStatusBar {
             mStatusBarView.addView(bbView);
             mBroadcastSubReceivers.add(bbView);
             mDownloadProgressView.registerListener(bbView);
+            mStateChangeListeners.add(bbView);
 
             mIconArea = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mSystemIconArea");
             mSbContents = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStatusBarContents");

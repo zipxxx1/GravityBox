@@ -16,6 +16,8 @@
 
 package com.ceco.lollipop.gravitybox;
 
+import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
+import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarStateChangedListener;
 import com.ceco.lollipop.gravitybox.StatusbarDownloadProgressView.Mode;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
@@ -41,7 +43,8 @@ import android.widget.FrameLayout;
 public class BatteryBarView extends View implements IconManagerListener, 
                                                     BroadcastSubReceiver,
                                                     BatteryStatusListener,
-                                                    StatusbarDownloadProgressView.ProgressStateListener {
+                                                    StatusbarDownloadProgressView.ProgressStateListener,
+                                                    StatusBarStateChangedListener {
     private static final String TAG = "GB:BatteryBarView";
     private static final boolean DEBUG = false;
 
@@ -64,6 +67,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     private ObjectAnimator mChargingAnimator;
     private boolean mHiddenByProgressBar;
     private boolean mCentered;
+    private int mStatusBarState;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -209,9 +213,10 @@ public class BatteryBarView extends View implements IconManagerListener,
     private void updatePosition() {
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) getLayoutParams();
         lp.height = mHeightPx;
-        lp.gravity = mPosition == Position.TOP ? Gravity.TOP : Gravity.BOTTOM;
-        lp.setMargins(0, mPosition == Position.TOP ? mMarginPx : 0,
-                        0, mPosition == Position.BOTTOM ? mMarginPx : 0);
+        lp.gravity = (mStatusBarState != StatusBarState.SHADE || mPosition == Position.TOP) ? 
+                Gravity.TOP : Gravity.BOTTOM;
+        lp.setMargins(0, lp.gravity == Gravity.TOP ? mMarginPx : 0,
+                        0, lp.gravity == Gravity.BOTTOM ? mMarginPx : 0);
         setLayoutParams(lp);
     }
 
@@ -236,6 +241,14 @@ public class BatteryBarView extends View implements IconManagerListener,
         if (mHiddenByProgressBar) {
             mHiddenByProgressBar = false;
             update();
+        }
+    }
+
+    @Override
+    public void onStatusBarStateChanged(int oldState, int newState) {
+        if (mStatusBarState != newState) {
+            mStatusBarState = newState;
+            updatePosition();
         }
     }
 
