@@ -1084,7 +1084,8 @@ public class ModStatusBar {
     private static void updateTrafficMeterPosition() {
         removeTrafficMeterView();
 
-        if (mTrafficMeterMode != TrafficMeterMode.OFF && mTrafficMeter != null) {
+        if (mTrafficMeterMode != TrafficMeterMode.OFF && mTrafficMeter != null &&
+                (mStatusBarState == StatusBarState.SHADE || mTrafficMeter.isAllowedInLockscreen())) {
             final int position = mStatusBarState == StatusBarState.SHADE ?
                     mTrafficMeter.getTrafficMeterPosition() :
                         GravityBoxSettings.DT_POSITION_AUTO;

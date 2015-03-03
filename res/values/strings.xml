@@ -1744,4 +1744,8 @@
     <string name="tile_order_info">The first check box enables/disables tile, the second checkbox 
         specifies whether tile should be visible in secured lock screen.</string>
 
+    <!-- Traffic meter: show in lock screen -->
+    <string name="pref_data_traffic_lockscreen_title">Show in lock screen</string>
+    <string name="pref_data_traffic_lockscreen_summary">Always shows centered in lock screen</string>
+
 </resources>

@@ -61,6 +61,7 @@ public abstract class TrafficMeterAbstract extends TextView
     protected boolean mMobileDataConnected;
     protected boolean mShowOnlyForMobileData;
     protected boolean mIsTrackingProgress;
+    protected boolean mAllowInLockscreen;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -131,6 +132,9 @@ public abstract class TrafficMeterAbstract extends TextView
                     GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_ACTIVE_MOBILE_ONLY, false);
         }
 
+        mAllowInLockscreen = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_LOCKSCREEN, true);
+
         onInitialize(prefs);
     }
 
@@ -197,6 +201,10 @@ public abstract class TrafficMeterAbstract extends TextView
         return mPosition;
     }
 
+    public boolean isAllowedInLockscreen() {
+        return mAllowInLockscreen;
+    }
+
     @Override
     public void onScreenStateChanged(int screenState) {
         mIsScreenOn = screenState == View.SCREEN_STATE_ON;
@@ -224,6 +232,10 @@ public abstract class TrafficMeterAbstract extends TextView
             if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_ACTIVE_MOBILE_ONLY)) {
                 mShowOnlyForMobileData = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_DT_ACTIVE_MOBILE_ONLY, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_LOCKSCREEN)) {
+                mAllowInLockscreen = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_DT_LOCKSCREEN, false);
             }
 
             onPreferenceChanged(intent);

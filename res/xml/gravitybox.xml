@@ -857,6 +857,12 @@
                 android:entryValues="@array/data_traffic_position_values"
                 android:defaultValue="0" />
 
+            <CheckBoxPreference 
+                android:key="pref_data_traffic_lockscreen"
+                android:title="@string/pref_data_traffic_lockscreen_title"
+                android:summary="@string/pref_data_traffic_lockscreen_summary"
+                android:defaultValue="true" />
+
             <ListPreference
                 android:key="pref_data_traffic_size"
                 android:title="@string/pref_data_traffic_size_title" 

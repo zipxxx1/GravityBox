@@ -600,6 +600,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_DATA_TRAFFIC_ACTIVE_MOBILE_ONLY = "pref_data_traffic_active_mobile_only";
     public static final String PREF_KEY_DATA_TRAFFIC_DISPLAY_MODE = "pref_data_traffic_display_mode";
     public static final String PREF_KEY_DATA_TRAFFIC_POSITION = "pref_data_traffic_position";
+    public static final String PREF_KEY_DATA_TRAFFIC_LOCKSCREEN = "pref_data_traffic_lockscreen";
     public static final int DT_POSITION_AUTO = 0;
     public static final int DT_POSITION_LEFT = 1;
     public static final int DT_POSITION_RIGHT = 2;
@@ -615,6 +616,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_DT_ACTIVE_MOBILE_ONLY = "dtActiveMobileOnly";
     public static final String EXTRA_DT_DISPLAY_MODE = "dtDisplayMode";
     public static final String EXTRA_DT_POSITION = "dtPosition";
+    public static final String EXTRA_DT_LOCKSCREEN = "dtLockscreen";
     public static final String EXTRA_DT_SIZE = "dtSize";
     public static final String EXTRA_DT_INACTIVITY_MODE = "dtInactivityMode";
     public static final String EXTRA_DT_OMNI_MODE = "dtOmniMode";
@@ -1169,6 +1171,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefSbClockDowSize;
         private PreferenceScreen mPrefCatDataTraffic;
         private ListPreference mPrefDataTrafficPosition;
+        private CheckBoxPreference mPrefDataTrafficLs;
         private ListPreference mPrefDataTrafficSize;
         private ListPreference mPrefDataTrafficMode;
         private ListPreference mPrefDataTrafficInactivityMode;
@@ -1446,6 +1449,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCatDataTraffic = (PreferenceScreen) findPreference(PREF_CAT_KEY_DATA_TRAFFIC);
             mPrefDataTrafficPosition = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_POSITION);
+            mPrefDataTrafficLs = (CheckBoxPreference) findPreference(PREF_KEY_DATA_TRAFFIC_LOCKSCREEN);
             mPrefDataTrafficSize = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_SIZE);
             mPrefDataTrafficMode = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_MODE);
             mPrefDataTrafficInactivityMode = (ListPreference) findPreference(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE);
@@ -2104,6 +2108,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_MODE)) {
                 mPrefDataTrafficMode.setSummary(mPrefDataTrafficMode.getEntry());
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficPosition);
+                mPrefCatDataTraffic.removePreference(mPrefDataTrafficLs);
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficSize);
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficInactivityMode);
                 mPrefCatDataTraffic.removePreference(mPrefDataTrafficOmniMode);
@@ -2119,6 +2124,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     }
                     mPrefCatDataTraffic.addPreference(mPrefDataTrafficDisplayMode);
                     mPrefCatDataTraffic.addPreference(mPrefDataTrafficPosition);
+                    mPrefCatDataTraffic.addPreference(mPrefDataTrafficLs);
                     mPrefCatDataTraffic.addPreference(mPrefDataTrafficSize);
                 }
                 if (mode.equals("SIMPLE")) {
@@ -2792,6 +2798,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
                 intent.putExtra(EXTRA_DT_POSITION, Integer.valueOf(
                         prefs.getString(PREF_KEY_DATA_TRAFFIC_POSITION, "0")));
+            } else if (key.equals(PREF_KEY_DATA_TRAFFIC_LOCKSCREEN)) {
+                intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
+                intent.putExtra(EXTRA_DT_LOCKSCREEN, prefs.getBoolean(key, true));
             } else if (key.equals(PREF_KEY_DATA_TRAFFIC_SIZE)) {
                 intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
                 intent.putExtra(EXTRA_DT_SIZE, Integer.valueOf(
