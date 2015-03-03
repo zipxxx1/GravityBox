@@ -320,6 +320,7 @@ public class ModStatusBar {
             mDownloadProgressView = new StatusbarDownloadProgressView(mContext, mPrefs);
             mStatusBarView.addView(mDownloadProgressView);
             mBroadcastSubReceivers.add(mDownloadProgressView);
+            mStateChangeListeners.add(mDownloadProgressView);
 
             // inject battery bar view
             BatteryBarView bbView = new BatteryBarView(mContext, mPrefs);

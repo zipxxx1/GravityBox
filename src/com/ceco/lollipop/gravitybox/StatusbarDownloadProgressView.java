@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
+import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarStateChangedListener;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
@@ -44,7 +46,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.RemoteViews;
 
-public class StatusbarDownloadProgressView extends View implements IconManagerListener, BroadcastSubReceiver {
+public class StatusbarDownloadProgressView extends View implements 
+                                            IconManagerListener, 
+                                            BroadcastSubReceiver,
+                                            StatusBarStateChangedListener {
     private static final String TAG = "GB:StatusbarDownloadProgressView";
     private static final boolean DEBUG = false;
 
@@ -86,6 +91,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
     private boolean mCentered;
     private int mHeightPx;
     private int mEdgeMarginPx;
+    private int mStatusBarState;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -352,10 +358,10 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         if (mMode == Mode.OFF) return;
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) getLayoutParams();
         lp.height = mHeightPx;
-        lp.gravity = mMode == Mode.TOP ? (Gravity.TOP | Gravity.START) :
-            (Gravity.BOTTOM | Gravity.START);
-        lp.setMargins(0, mMode == Mode.TOP ? mEdgeMarginPx : 0,
-                      0, mMode == Mode.BOTTOM ? mEdgeMarginPx : 0);
+        lp.gravity = (mStatusBarState != StatusBarState.SHADE ||  mMode == Mode.TOP) ?
+                (Gravity.TOP | Gravity.START) : (Gravity.BOTTOM | Gravity.START);
+        lp.setMargins(0, lp.gravity == Gravity.TOP ? mEdgeMarginPx : 0,
+                      0, lp.gravity == Gravity.BOTTOM ? mEdgeMarginPx : 0);
         setLayoutParams(lp);
     }
 
@@ -367,6 +373,14 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
         }
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
             setAlpha(colorInfo.alphaSignalCluster);
+        }
+    }
+
+    @Override
+    public void onStatusBarStateChanged(int oldState, int newState) {
+        if (mStatusBarState != newState) {
+            mStatusBarState = newState;
+            updatePosition();
         }
     }
 
