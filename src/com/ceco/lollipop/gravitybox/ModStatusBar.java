@@ -87,6 +87,7 @@ public class ModStatusBar {
     private static final String CLASS_STATUSBAR_WM = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
     private static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
     private static final boolean DEBUG = false;
+    private static final boolean DEBUG_LAYOUT = false;
 
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
     private static final int BRIGHTNESS_CONTROL_LONG_PRESS_TIMEOUT = 750; // ms
@@ -116,6 +117,7 @@ public class ModStatusBar {
 
     private static ViewGroup mIconArea;
     private static LinearLayout mLayoutCenter;
+    private static LinearLayout mLayoutCenterKg;
     private static StatusbarClock mClock;
     private static Object mPhoneStatusBar;
     private static ViewGroup mStatusBarView;
@@ -142,6 +144,7 @@ public class ModStatusBar {
     private static XSharedPreferences mPrefs;
     private static StatusbarDownloadProgressView mDownloadProgressView;
     private static TickerPolicy mTickerPolicy;
+    private static int mStatusBarState;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -292,13 +295,24 @@ public class ModStatusBar {
         try {
             Resources res = mContext.getResources();
 
-            // inject new center layout container
+            // inject new center layout container into base status bar
             mLayoutCenter = new LinearLayout(mContext);
-            mLayoutCenter.setLayoutParams(new LinearLayout.LayoutParams(
+            mLayoutCenter.setLayoutParams(new LayoutParams(
                             LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             mLayoutCenter.setGravity(Gravity.CENTER);
+            mLayoutCenter.setVisibility(View.GONE);
+            if (DEBUG_LAYOUT) mLayoutCenter.setBackgroundColor(0x4dff0000);
             mStatusBarView.addView(mLayoutCenter);
-            if (DEBUG) log("mLayoutCenter injected");
+
+            // inject new center layout container into keyguard status bar
+            mLayoutCenterKg = new LinearLayout(mContext);
+            mLayoutCenterKg.setLayoutParams(new LayoutParams(
+                            LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            mLayoutCenterKg.setVisibility(View.GONE);
+            if (DEBUG_LAYOUT) mLayoutCenterKg.setBackgroundColor(0x4d0000ff);
+            ((ViewGroup) XposedHelpers.getObjectField(
+                    mPhoneStatusBar, "mKeyguardStatusBar")).addView(mLayoutCenterKg);
+            if (DEBUG) log("mLayoutCenterKg injected");
 
             // inject download progress view
             mDownloadProgressView = new StatusbarDownloadProgressView(mContext, mPrefs);
@@ -596,7 +610,7 @@ public class ModStatusBar {
 
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mLayoutCenter == null) return;
+                    if (mLayoutCenter == null || mStatusBarState != StatusBarState.SHADE) return;
 
                     mLayoutCenter.setVisibility(View.GONE);
                     Animation anim = (Animation) XposedHelpers.callMethod(
@@ -609,7 +623,7 @@ public class ModStatusBar {
 
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mLayoutCenter == null) return;
+                    if (mLayoutCenter == null || mStatusBarState != StatusBarState.SHADE) return;
 
                     mLayoutCenter.setVisibility(View.VISIBLE);
                     Animation anim = (Animation) XposedHelpers.callMethod(
@@ -622,7 +636,7 @@ public class ModStatusBar {
 
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mLayoutCenter == null) return;
+                    if (mLayoutCenter == null || mStatusBarState != StatusBarState.SHADE) return;
 
                     mLayoutCenter.setVisibility(View.VISIBLE);
                     Animation anim = (Animation) XposedHelpers.callMethod(
@@ -910,14 +924,19 @@ public class ModStatusBar {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         Object currentState = XposedHelpers.getObjectField(param.thisObject, "mCurrentState");
                         int oldState = (Integer) XposedHelpers.getIntField(currentState, "statusBarState");
-                        int newState = (Integer) param.args[0];
-                        if (DEBUG) log("setStatusBarState: oldState="+oldState+"; newState="+newState);
+                        mStatusBarState = (Integer) param.args[0];
+                        if (DEBUG) log("setStatusBarState: oldState="+oldState+"; newState="+mStatusBarState);
                         for (StatusBarStateChangedListener listener : mStateChangeListeners) {
-                            listener.onStatusBarStateChanged(oldState, newState);
+                            listener.onStatusBarStateChanged(oldState, mStatusBarState);
                         }
-                        // don't show centered clock in keyguard mode
-                        if (mClock != null && mClockCentered) {
-                            mClock.setClockVisibility(newState == StatusBarState.SHADE);
+                        // switch centered layout based on status bar state
+                        if (mLayoutCenter != null) {
+                            mLayoutCenter.setVisibility(mStatusBarState == StatusBarState.SHADE ?
+                                    View.VISIBLE : View.GONE);
+                        }
+                        if (mLayoutCenterKg != null) {
+                            mLayoutCenterKg.setVisibility(mStatusBarState != StatusBarState.SHADE ?
+                                    View.VISIBLE : View.GONE);
                         }
                     }
                 });
