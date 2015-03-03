@@ -331,6 +331,8 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             enabled.setChecked(tileInfo.enabled);
             enabledLocked.setChecked(!tileInfo.secured);
             enabledLocked.setEnabled(tileInfo.enabled);
+            enabledLocked.setVisibility(tileInfo.key.equals("gb_tile_lock_screen") ?
+                    View.INVISIBLE : View.VISIBLE);
 
             return itemView;
         }
