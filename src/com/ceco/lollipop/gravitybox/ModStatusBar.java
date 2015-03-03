@@ -919,8 +919,6 @@ public class ModStatusBar {
                         if (mClock != null && mClockCentered) {
                             mClock.setClockVisibility(newState == StatusBarState.SHADE);
                         }
-                        // update traffic meter position
-                        updateTrafficMeterPosition(newState);
                     }
                 });
             } catch (Throwable t) {
@@ -1058,19 +1056,12 @@ public class ModStatusBar {
     }
 
     private static void updateTrafficMeterPosition() {
-        updateTrafficMeterPosition(StatusBarState.SHADE);
-    }
-
-    private static void updateTrafficMeterPosition(int state) {
         removeTrafficMeterView();
 
         if (mTrafficMeterMode != TrafficMeterMode.OFF && mTrafficMeter != null) {
-            final int position = state == StatusBarState.SHADE ?
-                    mTrafficMeter.getTrafficMeterPosition() :
-                        GravityBoxSettings.DT_POSITION_AUTO;
-            switch(position) {
+            switch(mTrafficMeter.getTrafficMeterPosition()) {
                 case GravityBoxSettings.DT_POSITION_AUTO:
-                    if (mClockCentered && state == StatusBarState.SHADE) {
+                    if (mClockCentered) {
                         if (mClockInSbContents && mSbContents != null) {
                             mSbContents.addView(mTrafficMeter);
                         } else if (mIconArea != null) {
@@ -1093,9 +1084,6 @@ public class ModStatusBar {
                     }
                     break;
             }
-            mTrafficMeter.setGravity(state == StatusBarState.SHADE ?
-                    Gravity.END | Gravity.CENTER_VERTICAL :
-                        Gravity.CENTER | Gravity.BOTTOM);
         }
 
         if (mIconMergerView != null) {
