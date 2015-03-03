@@ -303,11 +303,13 @@ public class ModStatusBar {
             mLayoutCenter.setVisibility(View.GONE);
             if (DEBUG_LAYOUT) mLayoutCenter.setBackgroundColor(0x4dff0000);
             mStatusBarView.addView(mLayoutCenter);
+            if (DEBUG) log("mLayoutCenter injected");
 
             // inject new center layout container into keyguard status bar
             mLayoutCenterKg = new LinearLayout(mContext);
             mLayoutCenterKg.setLayoutParams(new LayoutParams(
                             LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            mLayoutCenterKg.setGravity(Gravity.CENTER);
             mLayoutCenterKg.setVisibility(View.GONE);
             if (DEBUG_LAYOUT) mLayoutCenterKg.setBackgroundColor(0x4d0000ff);
             ((ViewGroup) XposedHelpers.getObjectField(
@@ -938,6 +940,8 @@ public class ModStatusBar {
                             mLayoutCenterKg.setVisibility(mStatusBarState != StatusBarState.SHADE ?
                                     View.VISIBLE : View.GONE);
                         }
+                        // update traffic meter position
+                        updateTrafficMeterPosition();
                     }
                 });
             } catch (Throwable t) {
@@ -1068,6 +1072,9 @@ public class ModStatusBar {
             if (mLayoutCenter != null) {
                 mLayoutCenter.removeView(mTrafficMeter);
             }
+            if (mLayoutCenterKg != null) {
+                mLayoutCenterKg.removeView(mTrafficMeter);
+            }
             if (mIconArea != null) {
                 mIconArea.removeView(mTrafficMeter);
             }
@@ -1078,16 +1085,23 @@ public class ModStatusBar {
         removeTrafficMeterView();
 
         if (mTrafficMeterMode != TrafficMeterMode.OFF && mTrafficMeter != null) {
-            switch(mTrafficMeter.getTrafficMeterPosition()) {
+            final int position = mStatusBarState == StatusBarState.SHADE ?
+                    mTrafficMeter.getTrafficMeterPosition() :
+                        GravityBoxSettings.DT_POSITION_AUTO;
+            switch(position) {
                 case GravityBoxSettings.DT_POSITION_AUTO:
-                    if (mClockCentered) {
-                        if (mClockInSbContents && mSbContents != null) {
-                            mSbContents.addView(mTrafficMeter);
-                        } else if (mIconArea != null) {
-                            mIconArea.addView(mTrafficMeter, 0);
+                    if (mStatusBarState == StatusBarState.SHADE) {
+                        if (mClockCentered) {
+                            if (mClockInSbContents && mSbContents != null) {
+                                mSbContents.addView(mTrafficMeter);
+                            } else if (mIconArea != null) {
+                                mIconArea.addView(mTrafficMeter, 0);
+                            }
+                        } else if (mLayoutCenter != null) {
+                            mLayoutCenter.addView(mTrafficMeter);
                         }
-                    } else if (mLayoutCenter != null) {
-                        mLayoutCenter.addView(mTrafficMeter);
+                    } else if (mLayoutCenterKg != null) {
+                        mLayoutCenterKg.addView(mTrafficMeter);
                     }
                     break;
                 case GravityBoxSettings.DT_POSITION_LEFT:
