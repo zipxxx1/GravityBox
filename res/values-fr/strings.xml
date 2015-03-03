@@ -530,10 +530,6 @@
     <string name="call_vibration_waiting">À la mise en attente</string>
     <string name="call_vibration_periodic">Toutes les 45e secondes lors d\'un appel sortant</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Réordonnancement des touches</string>
-    <string name="pref_qs_tile_order_summary">Permet le réordonnancement des touches</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Blocage des notifications en cours</string>
     <string name="pref_ongoing_notifications_summary">Permet de bloquer les notifications en cours sélectionnées</string>
@@ -1737,10 +1733,6 @@
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">Le Backup réalisé dans l\'ancienne version d\'Android ne peut pas être restauré à cause 
         de différences trop importantes du système d\'exploitation. Il est grandement recommandé de reconfigurer GravityBox à partir de zéro.</string>
-
-    <!-- QS: Secured tiles -->
-    <string name="pref_qs_secured_tiles_title">Touches sécurisées</string>
-    <string name="pref_qs_secured_tiles_summary">Masque les touches sélectionnées dans l\'écran de déverrouillage sécurisé</string>
 
     <!-- QS: Normalize dual tiles -->
     <string name="pref_qs_normalize_title">Normaliser les touches à double action</string>

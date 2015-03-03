@@ -58,6 +58,22 @@
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceListItem" />
 
+        <CheckBox android:id="@+id/chkEnableLocked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            style="?android:attr/checkboxStyle" />
+
+        <CheckBox android:id="@+id/chkEnable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/chkEnableLocked"
+            android:layout_marginEnd="12dp"
+            style="?android:attr/checkboxStyle" />
+
     </RelativeLayout>
 
 </LinearLayout>

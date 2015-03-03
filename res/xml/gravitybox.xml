@@ -140,23 +140,15 @@
                 android:summary="@string/pref_qs_management_enable_summary"
                 android:defaultValue="false" />
 
-            <MultiSelectListPreference 
-                android:key="pref_quick_settings3"
+            <PreferenceScreen
+                android:key="pref_qs_tile_order2"
                 android:title="@string/quick_settings_title"
                 android:summary="@string/quick_settings_summary"
-                android:entries="@array/qs_tile_entries"
-                android:entryValues="@array/qs_tile_values"
-                android:defaultValue="@array/qs_tile_default_values"
-                android:dependency="pref_qs_management_enable" />
-
-            <MultiSelectListPreference 
-                android:key="pref_qs_secured_tiles"
-                android:title="@string/pref_qs_secured_tiles_title"
-                android:summary="@string/pref_qs_secured_tiles_summary"
-                android:entries="@array/qs_tile_secured_entries"
-                android:entryValues="@array/qs_tile_secured_values"
-                android:defaultValue="@array/empty_array"
-                android:dependency="pref_qs_management_enable" />
+                android:dependency="pref_qs_management_enable" >
+                <intent
+                    android:targetPackage="com.ceco.lollipop.gravitybox"
+                    android:targetClass="com.ceco.lollipop.gravitybox.quicksettings.TileOrderActivity" />
+            </PreferenceScreen>
 
             <PreferenceScreen 
                 android:key="pref_cat_qs_tile_settings"
@@ -306,16 +298,6 @@
                     android:entryValues="@array/stay_awake_values"
                     android:defaultValue="@array/stay_awake_values" />
 
-            </PreferenceScreen>
-
-            <PreferenceScreen
-                android:key="pref_qs_tile_order2"
-                android:title="@string/pref_qs_tile_order_title"
-                android:summary="@string/pref_qs_tile_order_summary"
-                android:dependency="pref_qs_management_enable" >
-                <intent
-                    android:targetPackage="com.ceco.lollipop.gravitybox"
-                    android:targetClass="com.ceco.lollipop.gravitybox.quicksettings.TileOrderActivity" />
             </PreferenceScreen>
 
             <ListPreference

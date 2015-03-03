@@ -530,10 +530,6 @@
     <string name="call_vibration_waiting">On call waiting</string>
     <string name="call_vibration_periodic">Every 45th second during outgoing call</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Tile reordering</string>
-    <string name="pref_qs_tile_order_summary">Allows reordering of tiles</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Ongoing notification blocker</string>
     <string name="pref_ongoing_notifications_summary">Allows blocking of selected ongoing notifications</string>
@@ -1739,13 +1735,13 @@
     <string name="settings_restore_backup_obsolete">Backup made in older version of Android cannot be restored due 
         to extensive OS differences. It is highly recommended to configure GravityBox from scratch.</string>
 
-    <!-- QS: Secured tiles -->
-    <string name="pref_qs_secured_tiles_title">Secured tiles</string>
-    <string name="pref_qs_secured_tiles_summary">Hides selected tiles in secured lock screen</string>
-
     <!-- QS: Normalize dual tiles -->
     <string name="pref_qs_normalize_title">Normalize dual tiles</string>
     <string name="pref_qs_normalize_summary">Makes WiFi and Bluetooth tiles normal. 
         Their label-press action will be converted to long-press action</string>
+
+    <!-- QS: tile order info -->
+    <string name="tile_order_info">The first check box enables/disables tile, the second checkbox 
+        specifies whether tile should be visible in secured lock screen.</string>
 
 </resources>

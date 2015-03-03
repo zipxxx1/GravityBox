@@ -489,10 +489,6 @@
     <string name="call_vibration_waiting">Çağrı bekletildiğinde</string>
     <string name="call_vibration_periodic">Giden çağrı süresince her 45 saniyede</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Kareleri yeniden sırala</string>
-    <string name="pref_qs_tile_order_summary">HızlıAyar karelerini yeniden sırala</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Giden bildirim engelleyici</string>
     <string name="pref_ongoing_notifications_summary">Seçili giden bildirimleri engelle</string>

@@ -515,10 +515,6 @@
     <string name="call_vibration_waiting">Κατά την αναμονή κλήσης</string>
     <string name="call_vibration_periodic">Κάθε 45 δευτερόλεπτα κατά τη διάρκεια εξερχόμενης κλήσης</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Αναδιάταξη πλακιδίων</string>
-    <string name="pref_qs_tile_order_summary">Επιτρέπει την αναδιάταξη των QuickSettings πλακιδίων</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Φραγή ειδοποιήσεων σε εξέλιξη</string>
     <string name="pref_ongoing_notifications_summary">Επιτρέπει την φραγή επιλεγμένων ειδοποιήσεων σε εξέλιξη</string>

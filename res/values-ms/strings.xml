@@ -512,10 +512,6 @@
     <string name="call_vibration_waiting">Ketika menunggu panggilan</string>
     <string name="call_vibration_periodic">Setiap 45 saat ketika panggilan dibuat</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Susunan tile</string>
-    <string name="pref_qs_tile_order_summary">Benarkan penyusunan tile</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Halang notifikasi keluar</string>
     <string name="pref_ongoing_notifications_summary">Halang notifikasi keluar yang tertentu sahaja</string>

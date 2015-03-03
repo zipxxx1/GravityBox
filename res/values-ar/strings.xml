@@ -491,10 +491,6 @@
     <string name="call_vibration_waiting">عند انتظار المكالمة</string>
     <string name="call_vibration_periodic">كل 45 ثانية أثناء المكالمات الصادرة</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">اعادة ترتيب الأيقونات</string>
-    <string name="pref_qs_tile_order_summary">يسمح باعادة ترتيب أيقونات الاعدادات السريعة</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">حجب الاشعارات</string>
     <string name="pref_ongoing_notifications_summary">يسمح بحجب الإشعارات الواردة</string>

@@ -501,10 +501,6 @@
     <string name="call_vibration_waiting">Quando uma chamada está em espera</string>
     <string name="call_vibration_periodic">A cada 45 segundos durante chamadas realizadas</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Reordenar blocos</string>
-    <string name="pref_qs_tile_order_summary">Permite reordenar os blocos das configurações rápidas</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Bloqueador de notificações</string>
     <string name="pref_ongoing_notifications_summary">Permite o bloqueio das notificações selecionadas</string>
@@ -1700,10 +1696,6 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="settings_restore_backup_obsolete">As configurações salvas em uma versão antiga do GravityBox não podem ser
         restauradas devido a extensas diferenças de sistema. É altamente recomendado configurar o GravityBox do zero.
     </string>
-        
-    <!-- QS: Secured tiles -->
-    <string name="pref_qs_secured_tiles_title">Painéis seguros</string>
-    <string name="pref_qs_secured_tiles_summary">Permite ocultar os painéis selecionados na tela de bloqueio com método seguro ativado</string>
 
     <!-- QS: Normalize dual tiles -->
     <string name="pref_qs_normalize_title">Normalizar painéis</string>

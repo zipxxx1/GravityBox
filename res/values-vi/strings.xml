@@ -490,8 +490,4 @@
     <string name="call_vibration_waiting">Khi chờ cuộc gọi</string>
     <string name="call_vibration_periodic">Sau mỗi 45 giây khi gọi</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Tiêu đề ghi</string>
-    <string name="pref_qs_tile_order_summary">Cho phép gán tiêu đề ghi âm trong quicksetting</string>
-
 </resources>

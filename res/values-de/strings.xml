@@ -535,10 +535,6 @@
     <string name="call_vibration_waiting">Anruf wartend</string>
     <string name="call_vibration_periodic">Alle 45 Sekunden bei ausgehendem Anruf</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Anordnung ändern</string>
-    <string name="pref_qs_tile_order_summary">Schnelleinstellungen neu anordnen</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Dauerhafte Benachrichtigungen blockieren</string>
     <string name="pref_ongoing_notifications_summary">Dauerhafte Benachrichtigungen selektiv blockieren</string>

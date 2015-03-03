@@ -79,12 +79,11 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     protected void initPreferences() {
-        String enabledTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ORDER, null);
+        String enabledTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ENABLED, null);
         mEnabled = enabledTiles != null && enabledTiles.contains(mKey);
 
-        Set<String> securedTiles = mPrefs.getStringSet(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_SECURED_TILES,
-                new HashSet<String>());
-        mSecured = securedTiles.contains(mKey);
+        String securedTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_SECURED, null);
+        mSecured = securedTiles != null && securedTiles.contains(mKey);
 
         mNormalized = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_NORMALIZE, false);
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
@@ -156,18 +155,6 @@ public abstract class BaseTile implements QsEventListener {
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) { }
-
-    @Override
-    public void onEnabledChanged(boolean enabled) {
-        mEnabled = enabled;
-        if (DEBUG) log(mKey + ": onEnabledChanged(" + enabled + ")");
-    }
-
-    @Override
-    public void onSecuredChanged(boolean secured) {
-        mSecured = secured;
-        if (DEBUG) log(mKey + ": onSecuredChanged(" + secured + ")");
-    }
 
     @Override
     public void onStatusBarStateChanged(int state) {

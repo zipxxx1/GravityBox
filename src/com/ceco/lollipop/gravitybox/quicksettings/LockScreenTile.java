@@ -66,11 +66,6 @@ public class LockScreenTile extends QsTile {
     }
 
     @Override
-    public void onSecuredChanged(boolean secured) {
-        // ignore as this tile is always secured
-    }
-
-    @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.visible = true;
         if (mLockScreenEnabled) {

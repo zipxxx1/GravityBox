@@ -393,9 +393,6 @@
     <string name="call_vibration_waiting">전화 연결을 기다리고 있을 때</string>
     <string name="call_vibration_periodic">45초마다 진동</string>
 
-    <string name="pref_qs_tile_order_title">타일 순서 정렬</string>
-    <string name="pref_qs_tile_order_summary">퀵세팅 타일의 순서를 정렬합니다.</string>
-
     <string name="pref_ongoing_notifications_title">진행 중인 알림 보이지 않기</string>
     <string name="pref_ongoing_notifications_summary">\'진행 중\'으로 표시되는 알림을 보이지 않게 설정할 수 있습니다.</string>
     <string name="ongoing_notif_info">The list will get populated automatically for every ongoing notification that occurs.

@@ -528,10 +528,6 @@
     <string name="call_vibration_waiting">通话等待震动</string>
     <string name="call_vibration_periodic">通话期间每45秒振动一次</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">磁贴重新排序</string>
-    <string name="pref_qs_tile_order_summary">允许将快速设置磁贴重新排序</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">应用通知拦截器</string>
     <string name="pref_ongoing_notifications_summary">允许拦截选定应用的通知</string>

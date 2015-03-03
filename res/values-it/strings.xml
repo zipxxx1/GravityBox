@@ -525,10 +525,6 @@
     <string name="call_vibration_waiting">Su chiamata in attesa</string>
     <string name="call_vibration_periodic">Ogni 45 secondi durante una chiamata effettuata</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Disposizione caselle</string>
-    <string name="pref_qs_tile_order_summary">Consente di riordinare le caselle Quicksetting</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Blocca notifiche in corso</string>
     <string name="pref_ongoing_notifications_summary">Consente di bloccare le notifiche selezionate</string>

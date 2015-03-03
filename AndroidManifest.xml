@@ -72,7 +72,7 @@
 
         <activity
             android:name="com.ceco.lollipop.gravitybox.quicksettings.TileOrderActivity"
-            android:label="@string/pref_qs_tile_order_title" >
+            android:label="@string/quick_settings_title" >
         </activity>
 
         <activity

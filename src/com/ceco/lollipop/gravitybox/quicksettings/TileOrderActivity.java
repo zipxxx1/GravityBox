@@ -17,9 +17,7 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +25,7 @@ import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.TouchInterceptor;
 import com.ceco.lollipop.gravitybox.Utils;
+import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -38,12 +37,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class TileOrderActivity extends ListActivity {
-    public static final String PREF_KEY_TILE_ORDER = "pref_qs_tile_order2";
+public class TileOrderActivity extends ListActivity implements View.OnClickListener {
+    private static final String PREF_KEY_TILE_ORDER = "pref_qs_tile_order3";
+    public static final String PREF_KEY_TILE_ENABLED = "pref_qs_tile_enabled";
+    public static final String PREF_KEY_TILE_SECURED = "pref_qs_tile_secured";
     public static final String EXTRA_QS_ORDER_CHANGED = "qsTileOrderChanged";
+    private static final String INFO_DISMISSED = "pref_qs_info_dismissed";
 
     private ListView mTileList;
     private TileAdapter mTileAdapter;
@@ -51,28 +55,53 @@ public class TileOrderActivity extends ListActivity {
     private Resources mResources;
     private SharedPreferences mPrefs;
     private Map<String, String> mTileTexts;
-    private boolean mDarkTheme;
+    private List<TileInfo> mOrderedTileList;
+    private Button mBtnSave;
+    private Button mBtnCancel;
+    private Button mBtnInfoOk;
+
+    static class TileInfo {
+        String key;
+        String name;
+        boolean enabled;
+        boolean secured;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
         if (file.exists()) {
             setTheme(R.style.AppThemeDark);
-            mDarkTheme = true;
         }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_tile_list_activity);
 
-        mContext = getApplicationContext();
+        mContext = this;
         mResources = mContext.getResources();
         final String prefsName = mContext.getPackageName() + "_preferences";
         mPrefs = mContext.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
 
+        mBtnSave = (Button) findViewById(R.id.btnSave);
+        mBtnSave.setOnClickListener(this);
+        mBtnCancel = (Button) findViewById(R.id.btnCancel);
+        mBtnCancel.setOnClickListener(this);
+
+        final View info = findViewById(R.id.info);
+        info.setVisibility(mPrefs.getBoolean(INFO_DISMISSED, false) ?
+                View.GONE : View.VISIBLE);
+        mBtnInfoOk = (Button) findViewById(R.id.btnInfoOk);
+        mBtnInfoOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPrefs.edit().putBoolean(INFO_DISMISSED, true).commit();
+                info.setVisibility(View.GONE);
+            }
+        });
+
         mTileList = getListView();
         ((TouchInterceptor) mTileList).setDropListener(mDropListener);
         mTileAdapter = new TileAdapter(mContext);
-        setListAdapter(mTileAdapter);
 
         String[] allTileKeys = mResources.getStringArray(R.array.qs_tile_values);
         String[] allTileNames = mResources.getStringArray(R.array.qs_tile_entries);
@@ -82,20 +111,91 @@ public class TileOrderActivity extends ListActivity {
         }
 
         if (mPrefs.getString(PREF_KEY_TILE_ORDER, null) == null) {
-            mPrefs.edit().putString(PREF_KEY_TILE_ORDER, Utils.join(allTileKeys, ",")).commit();
+            createDefaultTileList();
+        } else {
+            updateDefaultTileList();
+        }
+    }
+
+    private void createDefaultTileList() {
+        String[] tileKeys = mResources.getStringArray(R.array.qs_tile_values);
+        String newList = "";
+
+        for (String key : tileKeys) {
+            if (key.equals("gb_tile_torch") && !Utils.hasFlash(mContext))
+                continue;
+            if (key.equals("gb_tile_gps_alt") && !Utils.hasGPS(mContext))
+                continue;
+            if ((key.equals("aosp_tile_cell") || key.equals("aosp_tile_cell2") ||
+                    key.equals("gb_tile_network_mode") || key.equals("gb_tile_smart_radio") ||
+                    key.equals("mtk_tile_mobile_data")) && Utils.isWifiOnly(mContext))
+                continue;
+            if (key.equals("gb_tile_nfc") && !Utils.hasNfc(mContext))
+                continue;
+            if (key.equals("gb_tile_quiet_hours") && LedSettings.isUncLocked(mContext))
+                continue;
+            if (key.equals("gb_tile_compass") && !Utils.hasCompass(mContext))
+                continue;
+            if (key.equals("aosp_tile_cell2") && GravityBoxSettings.sSystemProperties != null &&
+                    !GravityBoxSettings.sSystemProperties.hasMsimSupport)
+                continue;
+            if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")) &&
+                    !Utils.isMtkDevice())
+                continue;
+            if (!newList.isEmpty()) newList += ",";
+            newList += key;
+        }
+
+        mPrefs.edit().putString(PREF_KEY_TILE_ORDER, newList).commit();
+        mPrefs.edit().putString(PREF_KEY_TILE_ENABLED,Utils.join(mResources.getStringArray(
+                R.array.qs_tile_default_values), ",")).commit();
+    }
+
+    private void updateDefaultTileList() {
+        String list = mPrefs.getString(PREF_KEY_TILE_ORDER, "");
+        String enabledList = mPrefs.getString(PREF_KEY_TILE_ENABLED, "");
+        boolean listChanged = false;
+        boolean enabledListChanged = false;
+        if (LedSettings.isUncLocked(mContext)) {
+            if (list.contains("gb_tile_quiet_hours")) {
+                list = list.replace(",gb_tile_quiet_hours", "");
+                list = list.replace("gb_tile_quiet_hours,", "");
+                listChanged = true;
+            }
+            if (enabledList.contains("gb_tile_quiet_hours")) {
+                enabledList = enabledList.replace(",gb_tile_quiet_hours", "");
+                enabledList = enabledList.replace("gb_tile_quiet_hours,", "");
+                enabledListChanged = true;
+            }
+        } else if (!list.contains("gb_tile_quiet_hours")) {
+            list += ",gb_tile_quiet_hours";
+            listChanged = true;
+        }
+        if (listChanged) {
+            mPrefs.edit().putString(PREF_KEY_TILE_ORDER, list).commit();
+        }
+        if (enabledListChanged) {
+            mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, enabledList).commit();
         }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        updateTileList(getResources(), mPrefs);
+        mOrderedTileList = getOrderedTileList();
+        setListAdapter(mTileAdapter);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        setListAdapter(null);
+        mOrderedTileList = null;
     }
 
     @Override
     public void onDestroy() {
         ((TouchInterceptor) mTileList).setDropListener(null);
-        setListAdapter(null);
         super.onDestroy();
     }
 
@@ -103,74 +203,73 @@ public class TileOrderActivity extends ListActivity {
     public void onResume() {
         super.onResume();
         // reload our tiles and invalidate the views for redraw
-        mTileAdapter.reloadTiles();
         mTileList.invalidateViews();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mBtnSave) {
+            saveOrderedTileList();
+            finish();
+        } else if (v == mBtnCancel) {
+            finish();
+        }
     }
 
     private TouchInterceptor.DropListener mDropListener = new TouchInterceptor.DropListener() {
         public void drop(int from, int to) {
-            // get the current tile list
-            List<String> tiles = getOrderedTileList();
-
             // move the tile
-            if (from < tiles.size()) {
-                String tile = tiles.remove(from);
-
-                if (to <= tiles.size()) {
-                    tiles.add(to, tile);
-
-                    // save our tiles
-                    setCurrentTileKeys(tiles);
-
-                    // tell our adapter/listview to reload
-                    mTileAdapter.reloadTiles();
+            if (from < mOrderedTileList.size()) {
+                TileInfo tile = mOrderedTileList.remove(from);
+                if (to <= mOrderedTileList.size()) {
+                    mOrderedTileList.add(to, tile);
                     mTileList.invalidateViews();
                 }
             }
         }
     };
 
-    public static String updateTileList(Resources resources, SharedPreferences prefs) {
-        List<String> activeTileList = new ArrayList<String>(
-                prefs.getStringSet(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS, 
-                        new HashSet<String>()));
-        String tiles = prefs.getString(PREF_KEY_TILE_ORDER,
-                Utils.join(resources.getStringArray(R.array.qs_tile_default_values), ","));
-        List<String> orderedTileList = 
-                new ArrayList<String>(Arrays.asList(tiles.split(",")));
- 
-        // remove those missing in active tile list
-        for (int i = orderedTileList.size() - 1; i >= 0; i--) {
-            if (!activeTileList.contains(orderedTileList.get(i))) {
-                orderedTileList.remove(i);
-            }
+    private List<TileInfo> getOrderedTileList() {
+        String[] orderedTiles = mPrefs.getString(PREF_KEY_TILE_ORDER, "").split(",");
+        String enabledTiles = mPrefs.getString(PREF_KEY_TILE_ENABLED, "");
+        String securedTiles = mPrefs.getString(PREF_KEY_TILE_SECURED, "");
+
+        List<TileInfo> tiles = new ArrayList<TileInfo>();
+        for (int i = 0; i < orderedTiles.length; i++) {
+            TileInfo ti = new TileInfo();
+            ti.key = orderedTiles[i];
+            ti.name = mTileTexts.get(ti.key);
+            ti.enabled = enabledTiles.contains(ti.key);
+            ti.secured = securedTiles.contains(ti.key);
+            tiles.add(ti);
         }
 
-        // add those missing in ordered tile list
-        for (int i = 0; i < activeTileList.size(); i++) {
-            if (!orderedTileList.contains(activeTileList.get(i))) {
-                orderedTileList.add(activeTileList.get(i));
-            }
-        }
-
-        // save new ordered tile list
-        String[] newList = new String[orderedTileList.size()];
-        newList = orderedTileList.toArray(newList);
-        final String value = Utils.join(newList, ",");
-        prefs.edit().putString(PREF_KEY_TILE_ORDER, value).commit();
-        return value;
-    } 
-
-    private List<String> getOrderedTileList() {
-        String tiles = mPrefs.getString(PREF_KEY_TILE_ORDER, "");
-        return new ArrayList<String>(Arrays.asList(tiles.split(",")));
+        return tiles;
     }
 
-    private void setCurrentTileKeys(List<String> list) {
-        String[] newList = new String[list.size()];
-        newList = list.toArray(newList);
-        final String value = Utils.join(newList, ",");
-        mPrefs.edit().putString(PREF_KEY_TILE_ORDER, value).commit();
+    private void saveOrderedTileList() {
+        String newOrderedList = "";
+        String newEnabledList = "";
+        String newSecuredList = "";
+
+        for (TileInfo ti : mOrderedTileList) {
+            if (!newOrderedList.isEmpty()) newOrderedList += ",";
+            newOrderedList += ti.key;
+
+            if (ti.enabled) {
+                if (!newEnabledList.isEmpty()) newEnabledList += ",";
+                newEnabledList += ti.key;
+            }
+
+            if (ti.secured) {
+                if (!newSecuredList.isEmpty()) newSecuredList += ",";
+                newSecuredList += ti.key;
+            }
+        }
+
+        mPrefs.edit().putString(PREF_KEY_TILE_ORDER, newOrderedList).commit();
+        mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, newEnabledList).commit();
+        mPrefs.edit().putString(PREF_KEY_TILE_SECURED, newSecuredList).commit();
         Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
         intent.putExtra(EXTRA_QS_ORDER_CHANGED, true);
         mContext.sendBroadcast(intent);
@@ -179,25 +278,18 @@ public class TileOrderActivity extends ListActivity {
     private class TileAdapter extends BaseAdapter {
         private Context mContext;
         private LayoutInflater mInflater;
-        private List<String> mTiles;
 
         public TileAdapter(Context c) {
             mContext = c;
             mInflater = LayoutInflater.from(mContext);
-
-            reloadTiles();
-        }
-
-        public void reloadTiles() {
-            mTiles = getOrderedTileList();
         }
 
         public int getCount() {
-            return mTiles.size();
+            return mOrderedTileList.size();
         }
 
         public Object getItem(int position) {
-            return mTiles.get(position);
+            return mOrderedTileList.get(position);
         }
 
         public long getItemId(int position) {
@@ -205,23 +297,42 @@ public class TileOrderActivity extends ListActivity {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            final View v;
+            final View itemView;
+            final TileInfo tileInfo = mOrderedTileList.get(position);
+
             if (convertView == null) {
-                v = mInflater.inflate(R.layout.order_tile_list_item, null);
+                itemView = mInflater.inflate(R.layout.order_tile_list_item, null);
+                final CheckBox enabled = (CheckBox) itemView.findViewById(R.id.chkEnable);
+                final CheckBox enabledLocked = (CheckBox) itemView.findViewById(R.id.chkEnableLocked);
+                enabled.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TileInfo ti = (TileInfo) itemView.getTag();
+                        ti.enabled = ((CheckBox)v).isChecked();
+                        enabledLocked.setEnabled(ti.enabled);
+                    }
+                });
+                enabledLocked.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TileInfo ti = (TileInfo) itemView.getTag();
+                        ti.secured = !((CheckBox)v).isChecked();
+                    }
+                });
             } else {
-                v = convertView;
+                itemView = convertView;
             }
 
-            String tileKey = mTiles.get(position);
+            itemView.setTag(tileInfo);
+            final TextView name = (TextView) itemView.findViewById(R.id.name);
+            final CheckBox enabled = (CheckBox) itemView.findViewById(R.id.chkEnable);
+            final CheckBox enabledLocked = (CheckBox) itemView.findViewById(R.id.chkEnableLocked);
+            name.setText(tileInfo.name);
+            enabled.setChecked(tileInfo.enabled);
+            enabledLocked.setChecked(!tileInfo.secured);
+            enabledLocked.setEnabled(tileInfo.enabled);
 
-            final TextView name = (TextView) v.findViewById(R.id.name);
-            if (!mDarkTheme) {
-                name.setTextAppearance(mContext, android.R.style.TextAppearance_Material_Medium_Inverse);
-            }
-
-            name.setText(mTileTexts.get(tileKey));
-
-            return v;
+            return itemView;
         }
     }
 }

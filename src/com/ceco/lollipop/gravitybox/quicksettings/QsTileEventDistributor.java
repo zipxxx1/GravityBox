@@ -1,13 +1,10 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
@@ -41,8 +38,6 @@ public class QsTileEventDistributor {
         void handleDestroy();
         void onCreateTileView(View tileView) throws Throwable;
         void onBroadcastReceived(Context context, Intent intent);
-        void onEnabledChanged(boolean enabled);
-        void onSecuredChanged(boolean secured);
         void onStatusBarStateChanged(int state);
         boolean supportsHideOnChange();
         void onHideOnChangeChanged(boolean hideOnChange);
@@ -79,21 +74,6 @@ public class QsTileEventDistributor {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_PREFS)) {
-                    String enabledTiles = intent.getStringExtra(GravityBoxSettings.EXTRA_QS_PREFS);
-                    if (enabledTiles == null) enabledTiles = "";
-                    for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
-                        l.getValue().onEnabledChanged(enabledTiles.contains(l.getKey()));
-                    }
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_SECURED_TILES)) {
-                    Set<String> securedTiles = new HashSet<String>(Arrays.asList(
-                            intent.getStringArrayExtra(
-                            GravityBoxSettings.EXTRA_QS_SECURED_TILES)));
-                    for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
-                        l.getValue().onSecuredChanged(securedTiles.contains(l.getKey()));
-                    }
-                }
                 if (intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED)) {
                     recreateTiles();
                 }

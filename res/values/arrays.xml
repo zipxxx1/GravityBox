@@ -184,36 +184,6 @@
         <item>aosp_tile_hotspot</item>
     </string-array>
 
-    <string-array name="qs_tile_secured_entries" translatable="false">
-        <item>@string/qs_tile_wifi</item>
-        <item>@string/qs_tile_bluetooth</item>
-        <item>@string/qs_tile_data_usage</item>
-        <item>@string/qs_tile_data_usage_2</item>
-        <item>@string/qs_tile_airplane_mode</item>
-        <item>@string/qs_tile_gps</item>
-        <item>@string/qs_tile_wifi_ap</item>
-        <item>@string/qs_tile_gps_slimkat</item>
-        <item>@string/qs_tile_gps_alt</item>
-        <item>@string/qs_tile_network_mode</item>
-        <item>@string/qs_tile_smart_radio</item>
-        <item>@string/qs_tile_mobile_data</item>
-    </string-array>
-
-    <string-array name="qs_tile_secured_values" translatable="false">
-        <item>aosp_tile_wifi</item>
-        <item>aosp_tile_bluetooth</item>
-        <item>aosp_tile_cell</item>
-        <item>aosp_tile_cell2</item>
-        <item>aosp_tile_airplane_mode</item>
-        <item>aosp_tile_location</item>
-        <item>aosp_tile_hotspot</item>
-        <item>gb_tile_gps_slimkat</item>
-        <item>gb_tile_gps_alt</item>
-        <item>gb_tile_network_mode</item>
-        <item>gb_tile_smart_radio</item>
-        <item>mtk_tile_mobile_data</item>
-    </string-array>
-
     <string-array name="lockscreen_bg_entries" translatable="false">
         <item>@string/lockscreen_bg_default</item>
         <item>@string/lockscreen_bg_color</item>

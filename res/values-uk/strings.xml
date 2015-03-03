@@ -305,8 +305,6 @@
     <string name="call_vibration_disconnected">Наприкінці дзвінка</string>
     <string name="call_vibration_waiting">При очікуванні дзвінка</string>
     <string name="call_vibration_periodic">Кожні 45 секунд при вихідному</string>
-    <string name="pref_qs_tile_order_title">Сортування тайлів</string>
-    <string name="pref_qs_tile_order_summary">Дозволяє сортувати тайли</string>
     <string name="pref_ongoing_notifications_title">Блокування повідомлень</string>
     <string name="pref_ongoing_notifications_summary">Дозволяє блокувати вибрані повідомлення</string>
     <string name="ongoing_notif_info">Список формується автоматично при появі повідомлення. Ви можете вирішити пізніше, яке сповіщення блокувати. Використовуйте з обережністю.</string>

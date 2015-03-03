@@ -495,10 +495,6 @@
     <string name="call_vibration_waiting">Ketika panggilan menunggu</string>
     <string name="call_vibration_periodic">Setiap 45 detik dalam panggilan keluar</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Atur ulang kotak-kotak</string>
-    <string name="pref_qs_tile_order_summary">Membolehkan anda untuk mengatur ulang urutan kotak-kotak QuickSettings</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Blokir notifikasi yang sedang berjalan</string>
     <string name="pref_ongoing_notifications_summary">Membolehkan anda untuk memblokir notifikasi yang dipilih</string>

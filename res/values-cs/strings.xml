@@ -503,10 +503,6 @@
     <string name="call_vibration_waiting">Při čekajícím hovoru</string>
     <string name="call_vibration_periodic">Každou 45. sekundu v minutě při odchozím hovoru</string>
 
-    <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Uspořádání dlaždic</string>
-    <string name="pref_qs_tile_order_summary">Umožňuje uspořádat dlaždice podle potřeby</string>
-
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Blokátor probíhajících notifikací</string>
     <string name="pref_ongoing_notifications_summary">Umožňuje blokování vybraných probíhajících notifikací</string>
@@ -1702,10 +1698,6 @@
     <string name="settings_restore_backup_obsolete">Zálohu provedenou v předešlé verzi Android nelze obnovit 
         kvůli rozsáhlým odlišnostem v systému a souvisejících nastaveních GravityBox. 
         Důrazně se doporučuje nakonfigurovat GravityBox ručně.</string>
-
-    <!-- QS: Secured tiles -->
-    <string name="pref_qs_secured_tiles_title">Zabezpečené dlaždice</string>
-    <string name="pref_qs_secured_tiles_summary">Skryje zvolené dlaždice na zabezpečené obrazovce uzamčení</string>
 
     <!-- QS: Normalize dual tiles -->
     <string name="pref_qs_normalize_title">Normalizovat duální dlaždice</string>
