@@ -68,6 +68,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     private boolean mHiddenByProgressBar;
     private boolean mCentered;
     private int mStatusBarState;
+    private Mode mTrackingProgressMode;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -220,6 +221,13 @@ public class BatteryBarView extends View implements IconManagerListener,
         setLayoutParams(lp);
     }
 
+    private boolean checkIfHiddenByProgressBar() {
+        return mTrackingProgressMode != Mode.OFF &&
+                (mStatusBarState != StatusBarState.SHADE ||
+                (mTrackingProgressMode == Mode.TOP && mPosition == Position.TOP) ||
+                (mTrackingProgressMode == Mode.BOTTOM && mPosition == Position.BOTTOM));
+    }
+
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
@@ -229,15 +237,16 @@ public class BatteryBarView extends View implements IconManagerListener,
 
     @Override
     public void onProgressTrackingStarted(boolean isBluetooth, Mode mode) {
-        if ((mode == Mode.TOP && mPosition == Position.TOP) ||
-                (mode == Mode.BOTTOM && mPosition == Position.BOTTOM)) {
-            mHiddenByProgressBar = true;
+        mTrackingProgressMode = mode;
+        mHiddenByProgressBar = checkIfHiddenByProgressBar();
+        if (mHiddenByProgressBar) {
             update();
         }
     }
 
     @Override
     public void onProgressTrackingStopped() {
+        mTrackingProgressMode = Mode.OFF;
         if (mHiddenByProgressBar) {
             mHiddenByProgressBar = false;
             update();
@@ -249,6 +258,11 @@ public class BatteryBarView extends View implements IconManagerListener,
         if (mStatusBarState != newState) {
             mStatusBarState = newState;
             updatePosition();
+            final boolean wasHidden = mHiddenByProgressBar;
+            mHiddenByProgressBar = checkIfHiddenByProgressBar();
+            if (wasHidden != mHiddenByProgressBar) {
+                update();
+            }
         }
     }
 
