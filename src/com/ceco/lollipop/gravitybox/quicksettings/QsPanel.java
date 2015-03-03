@@ -17,6 +17,7 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
@@ -42,6 +43,8 @@ public class QsPanel implements BroadcastSubReceiver {
     private boolean mNormalized;
     private ViewGroup mQsPanel;
     private int mNumColumns;
+    private View mBrightnessSlider;
+    private boolean mHideBrightness;
 
     public QsPanel(Context context, XSharedPreferences prefs, 
             QsTileEventDistributor eventDistributor) {
@@ -58,7 +61,9 @@ public class QsPanel implements BroadcastSubReceiver {
         mNormalized = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_NORMALIZE, false);
         mNumColumns = Integer.valueOf(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0"));
-        if (DEBUG) log("initPreferences: mNormalized=" + mNormalized + "; mNumColumns=" + mNumColumns);
+        mHideBrightness = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS, false);
+        if (DEBUG) log("initPreferences: mNormalized=" + mNormalized + "; mNumColumns=" + mNumColumns +
+                "; mHideBrightness=" + mHideBrightness);
     }
 
     private void updateResources() {
@@ -84,6 +89,12 @@ public class QsPanel implements BroadcastSubReceiver {
                 updateResources();
                 if (DEBUG) log("onBroadcastReceived: mNumColumns=" + mNumColumns);
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_BRIGHTNESS)) {
+                mHideBrightness = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_QS_HIDE_BRIGHTNESS, false);
+                updateResources();
+                if (DEBUG) log("onBroadcastReceived: mHideBrightness=" + mHideBrightness);
+            }
         } 
     }
 
@@ -98,6 +109,18 @@ public class QsPanel implements BroadcastSubReceiver {
         }
     }
 
+    private View getBrightnessSlider() {
+        if (mBrightnessSlider != null) return mBrightnessSlider;
+
+        ViewGroup bv = (ViewGroup)XposedHelpers.getObjectField(mQsPanel, "mBrightnessView");
+        int resId = mQsPanel.getResources().getIdentifier("brightness_slider", "id",
+                mQsPanel.getContext().getPackageName());
+        if (resId != 0) {
+            mBrightnessSlider = bv.findViewById(resId);
+        }
+        return mBrightnessSlider;
+    }
+
     private void createHooks() {
         try {
             ClassLoader cl = mContext.getClassLoader();
@@ -109,23 +132,42 @@ public class QsPanel implements BroadcastSubReceiver {
                     if (mQsPanel == null) {
                         mQsPanel = (ViewGroup) param.thisObject;
                     }
-                    final float factor = getScalingFactor(mNumColumns);
+
                     boolean shouldInvalidate = false;
-                    if (factor != 1f) {
-                        int ch = XposedHelpers.getIntField(mQsPanel, "mCellHeight");
-                        XposedHelpers.setIntField(mQsPanel, "mCellHeight", Math.round(ch*factor));
-                        int cw = XposedHelpers.getIntField(mQsPanel, "mCellWidth");
-                        XposedHelpers.setIntField(mQsPanel, "mCellWidth", Math.round(cw*factor));
-                        int lch = XposedHelpers.getIntField(mQsPanel, "mLargeCellHeight");
-                        XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight", Math.round(lch*factor));
-                        int lcw = XposedHelpers.getIntField(mQsPanel, "mLargeCellWidth");
-                        XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth", Math.round(lcw*factor));
-                        int dualTileUnderlap = XposedHelpers.getIntField(mQsPanel, "mDualTileUnderlap");
-                        XposedHelpers.setIntField(mQsPanel, "mDualTileUnderlap",
-                                Math.round(dualTileUnderlap*factor));
-                        if (DEBUG) log("updateResources: scaling applied with factor=" + factor);
-                        shouldInvalidate = true;
+
+                    // brighntess slider
+                    View bs = getBrightnessSlider();
+                    if (bs != null) {
+                        final int vis = mHideBrightness ? View.GONE : View.VISIBLE; 
+                        if (bs.getVisibility() != vis) {
+                            bs.setVisibility(vis);
+                            shouldInvalidate = true;
+                        }
                     }
+
+                    // tiles per row
+                    if (mNumColumns != 0) {
+                        shouldInvalidate = true;
+                        XposedHelpers.setIntField(mQsPanel, "mColumns", mNumColumns);
+                        if (DEBUG) log("updateResources: Updated number of columns per row");
+                        final float factor = getScalingFactor(mNumColumns);
+                        if (factor != 1f) {
+                            int ch = XposedHelpers.getIntField(mQsPanel, "mCellHeight");
+                            XposedHelpers.setIntField(mQsPanel, "mCellHeight", Math.round(ch*factor));
+                            int cw = XposedHelpers.getIntField(mQsPanel, "mCellWidth");
+                            XposedHelpers.setIntField(mQsPanel, "mCellWidth", Math.round(cw*factor));
+                            int lch = XposedHelpers.getIntField(mQsPanel, "mLargeCellHeight");
+                            XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight", Math.round(lch*factor));
+                            int lcw = XposedHelpers.getIntField(mQsPanel, "mLargeCellWidth");
+                            XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth", Math.round(lcw*factor));
+                            int dualTileUnderlap = XposedHelpers.getIntField(mQsPanel, "mDualTileUnderlap");
+                            XposedHelpers.setIntField(mQsPanel, "mDualTileUnderlap",
+                                    Math.round(dualTileUnderlap*factor));
+                            if (DEBUG) log("updateResources: scaling applied with factor=" + factor);
+                        }
+                    }
+
+                    // normalize dual tiles
                     if (mNormalized) {
                         XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight",
                                 XposedHelpers.getIntField(mQsPanel, "mCellHeight"));
@@ -134,11 +176,8 @@ public class QsPanel implements BroadcastSubReceiver {
                         shouldInvalidate = true;
                         if (DEBUG) log("updateResources: Updated first row dimensions due to normalized tiles");
                     }
-                    if (mNumColumns != 0) {
-                        XposedHelpers.setIntField(mQsPanel, "mColumns", mNumColumns);
-                        shouldInvalidate = true;
-                        if (DEBUG) log("updateResources: Updated number of columns per row");
-                    }
+
+                    // invalidate if changes made
                     if (shouldInvalidate) {
                         mQsPanel.postInvalidate();
                     }
