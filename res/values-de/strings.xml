@@ -54,8 +54,6 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sync an</string>
     <string name="quick_settings_sync_off">Sync aus</string>
-    <string name="quick_settings_wifi_ap_on">Hotspot an</string>
-    <string name="quick_settings_wifi_ap_off">Hotspot aus</string>
     <string name="quick_settings_torch_on">Lampe an</string>
     <string name="quick_settings_torch_off">Lampe aus</string>
     <string name="quick_settings_torch_off_notif">Drücken, um Lampe auszuschalten</string>
