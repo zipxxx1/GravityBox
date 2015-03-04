@@ -154,7 +154,14 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     @Override
-    public void onBroadcastReceived(Context context, Intent intent) { }
+    public void onBroadcastReceived(Context context, Intent intent) { 
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
+                mHideOnChange = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
+            }
+        }
+    }
 
     @Override
     public void onStatusBarStateChanged(int state) {
@@ -169,11 +176,6 @@ public abstract class BaseTile implements QsEventListener {
     @Override
     public boolean supportsHideOnChange() {
         return true;
-    }
-
-    @Override
-    public void onHideOnChangeChanged(boolean hideOnChange) {
-        mHideOnChange = hideOnChange;
     }
 
     @Override

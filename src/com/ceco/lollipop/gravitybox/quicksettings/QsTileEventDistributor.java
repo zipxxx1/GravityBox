@@ -40,7 +40,6 @@ public class QsTileEventDistributor {
         void onBroadcastReceived(Context context, Intent intent);
         void onStatusBarStateChanged(int state);
         boolean supportsHideOnChange();
-        void onHideOnChangeChanged(boolean hideOnChange);
         void onViewConfigurationChanged(View tileView, Configuration config);
         void onRecreateLabel(View tileView);
         void handleClick();
@@ -74,34 +73,18 @@ public class QsTileEventDistributor {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
-                if (intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED)) {
+                if (intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED) ||
+                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_NORMALIZED) ||
+                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS)) {
                     recreateTiles();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_NORMALIZED)) {
-                    recreateTiles();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS)) {
-                    recreateTiles();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
-                    boolean hideOnChange = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
-                    for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
-                        l.getValue().onHideOnChangeChanged(hideOnChange);
-                    }
+                } else {
+                    notifyTilesOfBroadcast(context, intent);
                 }
                 for (BroadcastSubReceiver receiver : mBroadcastSubReceivers) {
                     receiver.onBroadcastReceived(context, intent);
                 }
             } else {
-                try {
-                    for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
-                        l.getValue().onBroadcastReceived(context, intent);
-                    }
-                } catch (Throwable t) {
-                    log("Error notifying listeners of new broadcast: ");
-                    XposedBridge.log(t);
-                }
+                notifyTilesOfBroadcast(context, intent);
             }
         }
     };
@@ -113,6 +96,17 @@ public class QsTileEventDistributor {
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_2);
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+    }
+
+    private void notifyTilesOfBroadcast(Context context, Intent intent) {
+        try {
+            for (Entry<String,QsEventListener> l : mListeners.entrySet()) {
+                l.getValue().onBroadcastReceived(context, intent);
+            }
+        } catch (Throwable t) {
+            log("Error notifying listeners of new broadcast: ");
+            XposedBridge.log(t);
+        }        
     }
 
     private void recreateTiles() {
