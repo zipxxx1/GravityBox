@@ -95,7 +95,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
 
-        if (lpparam.packageName.equals("android")) {
+        if (lpparam.packageName.equals("android") &&
+                lpparam.processName.equals("android")) {
             PermissionGranter.initAndroid(lpparam.classLoader);
             ModLowBatteryWarning.initAndroid(prefs, lpparam.classLoader);
             ModDisplay.initAndroid(prefs, lpparam.classLoader);
