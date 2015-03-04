@@ -74,7 +74,7 @@
     <string name="quick_settings_quiet_hours_auto">お休みモード自動</string>
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">ステータスバークイック設定タイル</string>
-    <string name="quick_settings_summary">ステータスバーにクイック設定タイルを表示するかどうか選択します。</string>
+    <string name="quick_settings_summary">ステータスバーにタイルを表示するかどうか選択します。</string>
     <string name="qs_tile_airplane_mode">機内モード</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
@@ -83,11 +83,12 @@
     <string name="qs_tile_gps_alt">GPS (CMスタイル)</string>
     <string name="qs_tile_mobile_data">モバイルデータ</string>
     <string name="qs_tile_network_mode">ネットワークモード</string>
-    <string name="qs_tile_data_usage">データ使用</string>
+    <string name="qs_tile_data_usage">モバイルデータ</string>
     <string name="qs_tile_autorotation">画面の自動回転</string>
     <string name="qs_tile_sync">自動同期</string>
-    <string name="qs_tile_wifi_ap">Wi-Fiアクセスポイント</string>
-    <string name="qs_tile_torch_gb">トーチ</string>
+    <string name="qs_tile_wifi_ap">ホットスポット</string>
+    <string name="qs_tile_torch_aosp">ライト (標準)</string>
+    <string name="qs_tile_torch_gb">ライト (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">スリープ</string>
     <string name="qs_tile_quickrecord">クイック録音</string>
@@ -100,6 +101,7 @@
     <string name="qs_tile_music">音楽</string>
     <string name="qs_tile_smart_radio">スマートネットワーク</string>
     <string name="qs_tile_lock_screen">ロック画面</string>
+    <string name="qs_tile_inversion">反転</string>
     <!-- Color Picker -->
     <string name="dialog_color_picker">カラーピッカー</string>
     <string name="press_color_to_apply">色を押すと適用します。</string>
@@ -218,7 +220,7 @@
     <string name="reboot_soft">ソフトリブート</string>
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">行毎のタイル数</string>
-    <string name="pref_qs_tiles_per_row_summary">行毎に表示するタイル数を設定します。タイルはタイル数に合わせてリサイズされ、縦画面にのみ適用されます。</string>
+    <string name="pref_qs_tiles_per_row_summary">行毎に表示するタイル数を設定します。</string>
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">曜日を表示</string>
     <!-- Expandable volume panel -->
@@ -637,7 +639,8 @@
     <string name="pref_reboot_confirm_required_title">再起動の確認をする</string>
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">変更時に閉じる</string>
-    <string name="pref_qs_hide_on_change_summary">タイルをタップした時自動的にステータスバーを閉じます。GravityBoxで追加したタイルにのみ適用されます。</string>
+    <string name="pref_qs_hide_on_change_summary">タイルをタップした時自動的にステータスバーを閉じます。
+        二つの状態があるタイルに適用されます。</string>
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">電源メニュー</string>
     <string name="pref_cat_power_other_title">その他</string>
@@ -1208,7 +1211,7 @@
     <string name="lc_active_screen_mode_nothing">画面点灯のみ</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
     <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">リモートディスプレイ</string>
+    <string name="qs_tile_remote_display">画面のキャスト</string>
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
     <string name="pref_unc_default_settings_summary">個別設定が有効でない全てのアプリに対する標準設定を管理します。</string>
@@ -1224,7 +1227,7 @@
     <string name="pref_unc_as_headsup_timeout_title">Heads upタイムアウト</string>
     <string name="pref_unc_as_headsup_timeout_summary">Heads up通知ウインドウを表示する時間を指定します。 0 = アンロックされるまで表示</string>
     <!-- QS: support for MSIM -->
-    <string name="qs_tile_data_usage_2">データ使用量2</string>
+    <string name="qs_tile_data_usage_2">モバイルデータ2</string>
     <!-- MSIM Signal Cluster: auto-hide signal icons -->
     <string name="pref_signal_icon_autohide_title">電波アイコンを自動的に隠す</string>
     <string name="pref_signal_icon_autohide_summary">SIMカードが挿入されていないときに電波アイコンを非表示にします。(要再起動)</string>
@@ -1413,4 +1416,16 @@
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">古いバージョンで作成されたバックアップはリストアできません。
 最初からGravityboxを設定し直すことをおすすめします。</string>
+    <!-- QS: Normalize dual tiles -->
+    <string name="pref_qs_normalize_title">デュアルタイルを正常化する</string>
+    <string name="pref_qs_normalize_summary">Wi-FiとBluetoothタイルを正常にします。
+        ラベルタップアクションが長押しアクションになります。</string>
+    <!-- QS: tile order info -->
+    <string name="tile_order_info">最初のチェックボックスでタイルが有効化/無効化され、
+        二つ目のチェックボックスでロック画面でタイルを表示するかどうか選べます。</string>
+    <!-- Traffic meter: show in lock screen -->
+    <string name="pref_data_traffic_lockscreen_title">ロック画面で表示</string>
+    <string name="pref_data_traffic_lockscreen_summary">ロック画面で常に中央に表示</string>
+    <!-- QS: Hide brightness slider -->
+    <string name="pref_qs_hide_brightness_title">明るさスライダーを隠す</string>
 </resources>
