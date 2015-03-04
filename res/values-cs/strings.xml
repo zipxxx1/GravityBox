@@ -1704,4 +1704,15 @@
     <string name="pref_qs_normalize_summary">Konvertuje WiFi a Bluetooth duální dlaždice na klasické. 
         Jejich standardní akce kliknutí popisu bude přístupná na dlouhé podržení.</string>
 
+    <!-- QS: tile order info -->
+    <string name="tile_order_info">První políčko slouží k aktivaci / deaktivaci dlaždice, druhé definuje 
+        zda má být dlaždice viditelná v rámci zabezpečené obrazovky uzamčení</string>
+
+    <!-- Traffic meter: show in lock screen -->
+    <string name="pref_data_traffic_lockscreen_title">Na obrazovce uzamčení</string>
+    <string name="pref_data_traffic_lockscreen_summary">Je možné zobrazení pouze na střed</string>
+
+    <!-- QS: Hide brightness slider -->
+    <string name="pref_qs_hide_brightness_title">Skrýt nastavení jasu</string>
+
 </resources>
