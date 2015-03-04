@@ -1,3 +1,22 @@
+Changelog 5.0.2alpha - 04/03/2015
+--------------------------------------
+- QuickSettings management:
+--- reworked UI for choosing/ordering/securing tiles (requires reconfig)
+--- added option for tiles per row with automatic tile size scaling
+--- added option for hiding brightness slider
+--- enabled quick pulldown on tablet devices
+--- fixed first row layout when tiles are normalized
+--- fixed secured tiles sometimes not showing after unlocking
+- Data traffic monitor
+--- fixed layout in lock screen
+--- added option for showing in lock screen
+- Battery bar: forced top edge in lock screen
+- Progress bar: forced top edge in lock screen
+- Updated Portuguese (BR) translations (thanks to wyghor, KingKaminari)
+- Updated Russian translations (thanks to gaich)
+- Updated French translations (thanks to ch-vox)
+- Updated Slovak and Czech translations
+
 Changelog 5.0.1alpha - 28/02/2015
 --------------------------------------
 - QuickSettings management is back!
