@@ -879,6 +879,7 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Akkumulátor százalék szövege</string>
+    <string name="battery_percent_text_show_title">Százalékos szöveg mutatása</string>
     <string name="battery_percent_text_size_title">Akkumulátor százalék szöveg mérete</string>
     <string name="battery_percent_text_size_larger">Nagyobb</string>
     <string name="battery_percent_text_size_normal">Normál</string>
@@ -1404,7 +1405,7 @@
 
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktív Képernyő</string>
-    <string name="lc_active_screen_info">Az Aktív Képernyő funkció minden alkalommal automatikusan bekapcsolja a kijelzőt új értesítés érkezésekor. Csak abban az esetben aktiválódik, ha a képernyő nincs eltakarva (pl. ha a készülék nincs zsebben). Opcionálisan lenyitja az értesítések panelt az aktuális zárképernyő biztonsági házirend és felhasználói beállításoktól függően. Ne feledje, hogy az Aktív Képernyő működéséhez a zárképernyőt engedélyeznie kell.\nA lenti kapcsoló a főkapcsoló. Engedélyezés után további, alkalmazásonkénti konfiguráció lehetséges.</string>
+    <string name="lc_active_screen_info">Az Aktív Képernyő funkció minden alkalommal automatikusan bekapcsolja a kijelzőt új értesítés érkezésekor. Opcionálisan kiterjeszti az értesítések panelt vagy lebegő felugró értesítést mutat az aktuális zárképernyő biztonsági házirendtől és felhasználói beállításoktól függően. Ne feledje, hogy az Aktív Képernyő működéséhez a zárképernyőt engedélyeznie kell.\nA lenti kapcsoló a főkapcsoló. Engedélyezés után további, alkalmazásonkénti konfiguráció lehetséges.</string>
     <string name="lc_active_screen_switch_title">Aktív Képernyő engedélyezése</string>
     <string name="lc_expand_notification_panel_title">Értesítési panel lenyitása</string>
     <string name="lc_expand_notification_panel_summary">Automatikusan lenyitja az értesítési panelt a képernyő bekapcsolásakor (ha az aktuális zárképernyő biztonsági házirend által engedélyezett)</string>
@@ -1496,7 +1497,7 @@
     <string name="battery_style_circle_dashed_percent">Szaggatott kör akkumulátor százalékkal</string>
 
     <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Köszönöm a támogatást. A prémium funkciók a GravityBox újraindítása után kerülnek feloldásra. Győződjön meg arról, hogy a GravityBox Feloldó (Unlocker) legalább 120 percig telepítve van.</string>
+    <string name="premium_unlocked_message">Köszönöm a támogatást. A prémium funkciók a rendszer újraindítása után kerülnek feloldásra. A feloldó (unlocker) visszatérítési határidő lejárta utáni eltávolítása esetén a Gravitybox prémium funkciói feloldott állapotban maradnak.</string>
     <string name="pref_about_get_unlocker_title">Feloldó beszerzése</string>
     <string name="pref_about_get_unlocker_summary">Nincs PayPal fiókja? Csak érintsen ide a GravityBox prémium funkciók feloldójának a Play Áruházból való beszerzéséhez.</string>
 
@@ -1569,7 +1570,7 @@
     <string name="pref_screenshot_delete_title">Képernyőkép törlés engedélyezése</string>
     
   	<!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title"> Android L navigációs gomb ikonok engedélyezése</string>
+    <string name="pref_navbar_android_l_icons_enable_title">Lollipop ikonok használata</string>
     <string name="pref_navbar_android_l_icons_enable_summary">Lecseréli a gyári navigációs ikonokat az Android L-ből származóakra (újraindítás szükséges)</string>
 
     <!-- Key actions: custom action -->
@@ -1620,7 +1621,8 @@
 
     <!-- Status bar: show download progress -->
     <string name="pref_statusbar_download_progress_title">Folyamatjelző sáv</string>
-    <string name="pref_statusbar_download_progress_summary">A folyamatjelző sávot az állapotsávban mutatja Android gyári letöltő menedzser és bluetooth adatátvitel esetén, valamint további alkalmazásoknál, melyekhez folyamatjelző sáv figyelés van beállítva az Értesítés vezérlés menüben.</string>    <string name="sb_download_progress_off">Letiltva</string>
+    <string name="pref_statusbar_download_progress_summary">A folyamatjelző sávot az állapotsávban mutatja Android gyári letöltő menedzser és bluetooth adatátvitel esetén, valamint további alkalmazásoknál, melyekhez folyamatjelző sáv figyelés van beállítva az Értesítés vezérlés menüben.</string>
+    <string name="sb_download_progress_off">Letiltva</string>
     <string name="sb_download_progress_top">Felső szélen</string>
     <string name="sb_download_progress_bottom">Alsó szélen</string>
 
@@ -1709,5 +1711,26 @@
     <!-- Unlock ring targets: custom unlock ring -->
     <string name="pref_lockscreen_ring_custom_unlock_title">Egyéni feloldó célpont</string>
     <string name="pref_lockscreen_ring_custom_unlock_summary">Lehetővé teszi a feloldó célppont manuális beállítását. Győződj meg róla, hogy legalább egy feloldó célpont beállításra került egy GravityBox feloldó művelethez vagy valamelyik alkalmazás indításához.</string>
+
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Wi-Fi prioritás</string>
+    <string name="pref_wifi_priority_summary">Wi-Fi hálózatok prioritásának a meghatározása</string>
+
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">Töltöttségi sáv</string>
+    <string name="pref_battery_bar_show_title">Töltöttségi sáv mutatása</string>
+    <string name="pref_battery_bar_position_title">Pozíció</string>
+    <string name="bbar_position_top">Állapotsáv felső szélén</string>
+    <string name="bbar_position_bottom">Állapotsáv alsó szélén</string>
+    <string name="pref_battery_bar_margin_title">Szegély margó</string>
+    <string name="pref_battery_bar_thickness_title">Vastagság</string>
+    <string name="pref_battery_bar_charge_anim_title">Töltés animáció</string>
+    <string name="pref_battery_bar_dynacolor_title">Dinamikus szín</string>
+    <string name="pref_battery_bar_dynacolor_summary">Szín meghatározása automatikusan az aktuális akku töltöttségi szint alapján</string>
+    <string name="pref_battery_bar_color_title">Szín</string>
+    <string name="pref_battery_bar_color_low_title">Alacsony akkuszint színe</string>
+    <string name="pref_battery_bar_color_critical_title">Kritikus akkuszint színe</string>
+    <string name="pref_battery_bar_centered_title">Középre igazítva</string>
+    <string name="pref_battery_bar_color_charging_title">Töltés színe</string>
 
 </resources>
