@@ -28,6 +28,8 @@
     <string name="vol_music_controls_summary">Kikapcsolt képernyőnél a hangerő gombok hosszú megnyomásával átugorhatjuk az aktuális számot</string>
 
     <string name="low_battery_warning_policy_title">Alacsony akkumulátorszint figyelmeztetés</string>
+    <string name="low_battery_warning_default">Alapértelmezett</string>
+    <string name="low_battery_warning_nonintrusive">Nem tolakodó</string>
     <string name="low_battery_warning_off">Kikapcsolva</string>
 
     <string name="reboot_required">A változtatás csak újraindítás után lesz alkalmazva</string>
@@ -85,7 +87,7 @@
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Állapotsáv Gyorsbeállítások csempéi</string>
-    <string name="quick_settings_summary">Lehetővé teszi a Gyorsbeállítások csempék elrejtését/mutatását az állapotsávon</string>
+    <string name="quick_settings_summary">Lehetővé teszi csempék elrejtését vagy mutatását az állapotsávon</string>
     <string name="qs_tile_airplane_mode">Repülőgép üzemmód</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
@@ -97,8 +99,9 @@
     <string name="qs_tile_data_usage">Adat használat</string>
     <string name="qs_tile_autorotation">Automatikus elforgatás</string>
     <string name="qs_tile_sync">Szinkronizáció</string>
-    <string name="qs_tile_wifi_ap">Wi-Fi hozzáférési pont</string>
-    <string name="qs_tile_torch_gb">Zseblámpa</string>
+    <string name="qs_tile_wifi_ap">Internet-hozzáférési pont</string>
+    <string name="qs_tile_torch_aosp">Zseblámpa (Gyári)</string>
+    <string name="qs_tile_torch_gb">Zseblámpa (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Alvás</string>
     <string name="qs_tile_quickrecord">Gyors Felvétel</string>
@@ -111,7 +114,8 @@
     <string name="qs_tile_music">Zene</string>
     <string name="qs_tile_smart_radio">Okos rádiókapcsolat</string>
     <string name="qs_tile_lock_screen">Zárképernyő</string>
-
+	<string name="qs_tile_inversion">Inverzió</string>
+	
     <!-- Color Picker -->
     <string name="dialog_color_picker">Szín választó</string>
     <string name="press_color_to_apply">Nyomjon a színre a beállításhoz</string>
@@ -125,7 +129,7 @@
     <!-- About -->
     <string name="pref_cat_about_title">A programról</string>
     <string name="about_gb_summary">Fejlesztette C3C076@XDA. Érintse meg a hivatalos fórum meglátogatásához.</string>
-    <string name="about_xposed_title">Xposed framework</string>
+    <string name="about_xposed_title">Xposed keretrendszer</string>
     <string name="about_xposed_summary">Fejlesztette rovo89@XDA. Érintse meg a hivatalos fórum meglátogatásához.</string>
     <string name="about_donate_title">Felajánlás</string>
     <string name="about_donate_summary">Érintse meg a program fejlesztésének PayPal-en keresztüli adományozással történő támogatásához</string>
@@ -195,10 +199,11 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Zárképernyő elforgatás engedélyezése</string>
-
+    <string name="pref_lockscreen_rotation_summary">Újraindítás szükséges</string>
+    
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Menü gomb engedélyezése</string>
-    <string name="pref_lockscreen_menu_key_summary">Lehetővé teszi a menü gombbal történő gyors feloldást a Zárképernyőn (újraindítás szükséges)</string>
+    <string name="pref_lockscreen_menu_key_summary">Lehetővé teszi a készülék feloldását hardveres menü gomb használatával (újraindítás szükséges)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Óra középen</string>
@@ -251,7 +256,8 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Csempék egy sorban</string>
-    <string name="pref_qs_tiles_per_row_summary">Meghatározza, hogy mennyi Gyorsbeállítások csempe jelenjen meg soronként, melyek ennek megfelelően kerülnek átméretezésre (telefon esetében álló tájolás módra vonatkozik, tablet esetén bármely tájolási irányra).</string>
+    <string name="pref_qs_tiles_per_row_summary">A soronként megjelenítendő csempék számát határozza meg</string>
+
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">A hét napjának mutatása</string>
@@ -347,7 +353,7 @@
 
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Sötét téma használata</string>
-    <string name="pref_gb_theme_dark_summary">Átkapcsolja a Gravitybox felhasználói felületét, hogy a sötét témát használja a világos helyett</string>
+    <string name="pref_gb_theme_dark_summary">Átkapcsolja a Gravitybox felhasználói felületét sötét téma használatára</string>
 
     <!-- Clear all recents positions -->
     <string name="recent_clear_off">Kikapcsolva</string>
@@ -770,7 +776,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Elrejtés változtatás után</string>
-    <string name="pref_qs_hide_on_change_summary">Automatikusan összecsukja az állapotsávot csempe egyszeri érintésre. GravityBox és felülírt gyári csempékre vonatkozik.</string>
+    <string name="pref_qs_hide_on_change_summary">Automatikusan összecsukja az állapotsávot csempe egyszeri érintésre. Két állapottal bíró csempékre vonatkozik.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Kikapcsoló menü</string>
@@ -1327,7 +1333,13 @@
     <string name="increasing_ring_enable">Engedélyezve</string>
     <string name="increasing_ring_min_volume_title">Csengés kezdő hangerő</string>
     <string name="increasing_ring_volume_notice">Megjegyzés:\nHa a kezdő hangerő magasabb értékre kerül beállításra, mint a csengés hangerő, a csengőhang a csengés hangerőn kerül lejátszásra</string>
-
+    <string name="increasing_ring_ramp_up_duration_title">Időtartam fokozása</string>
+    <string name="increasing_ring_interval_1">10 másodperc</string>
+    <string name="increasing_ring_interval_2">15 másodperc</string>
+    <string name="increasing_ring_interval_3">20 másodperc</string>
+    <string name="increasing_ring_interval_4">25 másodperc</string>
+    <string name="increasing_ring_interval_5">30 másodperc</string>
+    
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
 
@@ -1383,6 +1395,7 @@
     <string name="qs_tile_compass">Iránytű</string>
     <string name="quick_settings_compass_off">Iránytű kikapcsolva</string>
     <string name="quick_settings_compass_init">Inicializálás&#8230;</string>
+    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
 
     <!-- Cardinal directions -->
     <string name="cd_north">É</string>
@@ -1434,7 +1447,7 @@
 
     <!-- Statusbar: notification heads up category -->
     <string name="pref_cat_notif_heads_up_title">Értesítések lebegő felugró ablakban</string>
-    <string name="pref_heads_up_master_switch_summary">Aktiválja a szabvány AOSP heads up funkciót: értesítés lebegő, a képernyő tetején felugorva megjelenő ablakban. Amikor engedélyezve van, további alkalmazásonkénti opció válik elérhetővé az Értesítés vezérlésben. (újraindítás szükséges)</string>
+    <string name="pref_heads_up_master_switch_summary">Aktiválja a kiterjesztett heads up funkciót: értesítés lebegő, a képernyő tetején felugorva megjelenő ablakban. Amikor engedélyezve van, további alkalmazásonkénti opció válik elérhetővé az Értesítés vezérlésben. (újraindítás szükséges)</string>
     <string name="pref_heads_up_timeout_title">Időtúllépés</string>
     <string name="pref_heads_up_timeout_summary">Mennyi ideig mutassa az értesítési ablakot. 0 = folyamatosan.</string>
 
@@ -1450,7 +1463,7 @@
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
-    <string name="qs_tile_remote_display">Távoli kijelző</string>
+    <string name="qs_tile_remote_display">Képernyőtartalom tükrözése</string>
 
     <!-- UNC: main screen -->
     <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
@@ -1545,7 +1558,7 @@
     <!-- Status bar: disable notification ticker -->
     <string name="pref_statusbar_ticker_policy_title">Értesítés kijelzés házirend</string>
     <string name="sb_ticker_policy_default">Alapértelmezett</string>
-    <string name="sb_ticker_policy_disabled">Mindig letilva</string>
+    <string name="sb_ticker_policy_disabled">Mindig letiltva</string>
     
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">SIM címke elrejtése</string>
@@ -1610,5 +1623,103 @@
     <string name="dt_display_mode_always">Mindig (ha rendelkezésre áll hálózati kapcsolat)</string>
     <string name="dt_display_mode_dm">Csak az Android Letöltéskezelő esetén</string>
     <string name="dt_display_mode_pt">Amikor a folyamatjelző sáv az értesítési sávban jelenik meg</string>
+
+	<!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Wi-Fi prioritás</string>
+    <string name="pref_wifi_priority_summary">Wi-Fi hálózatok prioritásának a meghatározása</string>
+
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">Töltöttségi sáv</string>
+    <string name="pref_battery_bar_show_title">Töltöttségi sáv mutatása</string>
+    <string name="pref_battery_bar_position_title">Pozíció</string>
+    <string name="bbar_position_top">Állapotsáv felső szélén</string>
+    <string name="bbar_position_bottom">Állapotsáv alsó szélén</string>
+    <string name="pref_battery_bar_margin_title">Szegély margó</string>
+    <string name="pref_battery_bar_thickness_title">Vastagság</string>
+    <string name="pref_battery_bar_charge_anim_title">Töltés animáció</string>
+    <string name="pref_battery_bar_dynacolor_title">Dinamikus szín</string>
+    <string name="pref_battery_bar_dynacolor_summary">Szín meghatározása automatikusan az aktuális akku töltöttségi szint alapján</string>
+    <string name="pref_battery_bar_color_title">Szín</string>
+    <string name="pref_battery_bar_color_low_title">Alacsony akkuszint színe</string>
+    <string name="pref_battery_bar_color_critical_title">Kritikus akkuszint színe</string>
+    <string name="pref_battery_bar_centered_title">Középre igazítva</string>
+    <string name="pref_battery_bar_color_charging_title">Töltés színe</string>
+
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Üzemmód</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animált</string>
+    <string name="pref_statusbar_download_progress_centered_title">Középre igazítva</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Vastagság</string>
+    <string name="pref_statusbar_download_progress_margin_title">Szegély margó</string>
+
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">Menü gomb egyszeri érintés művelete</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">Vissza gomb egyszeri érintés művelete</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">Nemrég használtak gomb dupla érintés művelete</string>
+
+	<!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">Alapértelmezett</string>
+
+    <!-- Tri state pref -->
+    <string name="state_default">Alapértelmezett</string>
+    <string name="state_enabled">Engedélyezve</string>
+    <string name="state_disabled">Letiltva</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">Gyári akku kijelzés százalékkal</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">Megjelenítés az állapotsávon</string>
+    <string name="battery_percent_text_statusbar_summary">Megjeleníti az akkumulátor százalék szövegét a szabványos állapotsávon (a készülék feloldott állapotában)</string>
+    <string name="battery_percent_text_keyguard_title">Billentyűzár mód</string>
+    <string name="battery_percent_text_keyguard_summary">Meghatározza a százalék szöveg megjelenését az állapotsávon zárképernyőnél</string>
+    <string name="keyguard_percent_text_default">Alapértelmezett (töltés közben)</string>
+    <string name="keyguard_percent_text_show_always">Mindig mutat</string>
+    <string name="keyguard_percent_text_hide">Elrejt</string>
+    <string name="battery_percent_text_header_hide_title">Elrejtés az állapotsáv fejlécen</string>
+    <string name="battery_percent_text_size_default">Alapértelmezett</string>
+
+    <!-- Notification ticker -->
+    <string name="pref_cat_statusbar_ticker_title">Értesítés betekintés</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Engedélyezi az értesítés betekintést (notification ticker) és a hozzá tartozó funkciókat (újraindítás szükséges)</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">Nagyobb ikonok használata</string>
+    <string name="pref_navbar_larger_icons_summary">Újraindítás szükséges</string>
+
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">Gyors újraindítás engedélyezése</string>
+    <string name="pref_reboot_allow_softreboot_summary">Ne feledd, hogy a gyors újraindítás nem várt akku fogyasztást és instabilitási problémákat okozhat. Tapasztalat szerint jobb, ha mindig normál újraindítást alkalmazol.</string>
+
+    <!-- Recents panel search bar -->
+    <string name="pref_recents_searchbar_title">Kereső sáv láthatósága</string>
+    <string name="recents_searchbar_default">Alapértelmezett</string>
+    <string name="recents_searchbar_hide_keep_space">Elrejtés, a hely megtartásával</string>
+    <string name="recents_searchbar_hide_remove_space">Elrejtés, a hely eltávolításával</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">FIGYELEM</string>
+    <string name="gb_new_package_dialog_message_lollipop">GravityBox KitKat verzió van telepítve. Az új verzió használata előtt a régi verziót el kell távolítani. Az eltávolítási folyamat megkezdéséhez nyomd meg az OK gombot. Az eltávolítás után ne felejtsd el aktiválni az új modult az Xposed Telepítőben, majd RÖGTÖN INDÍTSD ÚJRA a készüléked.</string>
+
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">Korábbi verziójú Android rendszerben történt mentés nem állítható vissza az operációs rendszerbeli különbségek miatt. Nagyon ajánlott a Gravitybox teljes körű újrakonfigurálása.</string>
+
+    <!-- QS: Normalize dual tiles -->
+    <string name="pref_qs_normalize_title">Dupla csempék normalizálása</string>
+    <string name="pref_qs_normalize_summary">A WiFi és Bluetooth csempéket normál csempékre változtatja. A csempe címkéken való érintési művelet átalakításra kerül hosszú érintési műveletre</string>
+
+    <!-- QS: tile order info -->
+    <string name="tile_order_info">Az első jelölőnégyzet engedélyezi/letiltja a csempét, a második jelölőnégyzet a csempe zárolt zárképernyőn való láthatóságát határozza meg.</string>
+
+    <!-- Traffic meter: show in lock screen -->
+    <string name="pref_data_traffic_lockscreen_title">Megjelenítés zárképernyőn</string>
+    <string name="pref_data_traffic_lockscreen_summary">Zárképernyőnél mindig középen jelenik meg</string>
+
+    <!-- QS: Hide brightness slider -->
+    <string name="pref_qs_hide_brightness_title">Fényerő csúszka elrejtése</string>
 
 </resources>
