@@ -256,7 +256,7 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Touches par rangée</string>
-    <string name="pref_qs_tiles_per_row_summary">Définit le nombre de touches de paramètres rapides à afficher par rangée. Les touches seront redimensionnées en conséquence (s\'applique en mode portrait pour les téléphone et dans n\'importe quelle orientation pour les tablettes)</string>
+    <string name="pref_qs_tiles_per_row_summary">Définit le nombre de touches à afficher par rangée</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Afficher le jour de la semaine</string>
@@ -1667,6 +1667,7 @@
     <string name="pref_battery_bar_color_critical_title">Couleur pour batterie critique</string>
     <string name="pref_battery_bar_centered_title">Centrée</string>
     <string name="pref_battery_bar_color_charging_title">Couleur en chargement</string>
+
     <!-- Status bar: progress bar -->
     <string name="pref_statusbar_download_progress_mode_title">Mode</string>
     <string name="pref_statusbar_download_progress_animated_title">Animé</string>
@@ -1738,5 +1739,16 @@
     <string name="pref_qs_normalize_title">Normaliser les touches à double action</string>
     <string name="pref_qs_normalize_summary">Rend normales les touches WiFi et Bluetooth. 
         L\'action d\'un appui simple sera convertie en action d\'un appui long</string>
+
+    <!-- QS: tile order info -->
+    <string name="tile_order_info">La première coche active/désactive la touche, la seconde coche
+        spécifie si la touche doit être visible dans l\'écran de déverrouillage sécurisé</string>
+
+    <!-- Traffic meter: show in lock screen -->
+    <string name="pref_data_traffic_lockscreen_title">Afficher dans l\'écran de déverrouillage</string>
+    <string name="pref_data_traffic_lockscreen_summary">Toujours aligner au centre dans l\'écran de déverrouillage</string>
+
+    <!-- QS: Hide brightness slider -->
+    <string name="pref_qs_hide_brightness_title">Masquer le curseur de luminosité</string>
 
 </resources>
