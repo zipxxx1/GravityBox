@@ -300,7 +300,6 @@ public class ModStatusBar {
             mLayoutCenter.setLayoutParams(new LayoutParams(
                             LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             mLayoutCenter.setGravity(Gravity.CENTER);
-            mLayoutCenter.setVisibility(View.GONE);
             if (DEBUG_LAYOUT) mLayoutCenter.setBackgroundColor(0x4dff0000);
             mStatusBarView.addView(mLayoutCenter);
             if (DEBUG) log("mLayoutCenter injected");
