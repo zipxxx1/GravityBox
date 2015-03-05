@@ -100,7 +100,8 @@
     <string name="qs_tile_autorotation">自动旋转</string>
     <string name="qs_tile_sync">同步</string>
     <string name="qs_tile_wifi_ap">Wi-Fi接入点</string>
-    <string name="qs_tile_torch_gb">手电筒</string>
+	<string name="qs_tile_torch_aosp">手电筒(原厂)</string>
+    <string name="qs_tile_torch_gb">手电筒(GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">睡眠</string>
     <string name="qs_tile_quickrecord">快速录音</string>
@@ -113,6 +114,7 @@
     <string name="qs_tile_music">音乐</string>
     <string name="qs_tile_smart_radio">智能网络</string>
     <string name="qs_tile_lock_screen">锁屏</string>
+	<string name="qs_tile_inversion">反转</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">颜色选择器</string>
@@ -774,7 +776,8 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">更改时隐藏</string>
-    <string name="pref_qs_hide_on_change_summary">单击磁贴后自动收起快速设置，适用于GravityBox磁贴和被覆盖的原厂磁贴</string>
+    <string name="pref_qs_hide_on_change_summary">在状态栏上单击自动折叠
+		适用于简单的两行磁贴</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">电源键菜单</string>
@@ -1731,5 +1734,21 @@
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">由于系统差异
 旧版本的备份不能恢复,强烈建议从头开始配置gravitybox</string>
+
+	<!-- QS: Normalize dual tiles -->
+    <string name="pref_qs_normalize_title">标准化双磁砖</string>
+    <string name="pref_qs_normalize_summary">让WiFi和蓝牙瓷砖正常化
+        它们的标签单击动作将被转换为长按动作</string>
+
+    <!-- QS: tile order info -->
+    <string name="tile_order_info">第一个复选框启用/禁用瓷砖,第二个复选框 
+        指定瓷砖能否在锁屏中可见</string>
+
+    <!-- Traffic meter: show in lock screen -->
+    <string name="pref_data_traffic_lockscreen_title">在锁屏显示</string>
+    <string name="pref_data_traffic_lockscreen_summary">允许在锁屏中显示</string>
+
+    <!-- QS: Hide brightness slider -->
+    <string name="pref_qs_hide_brightness_title">隐藏亮度滑块</string>
 
 </resources>
