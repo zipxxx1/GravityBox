@@ -1693,7 +1693,7 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     </string>
 
     <!-- Restore settings: warn if old backup exists -->
-    <string name="settings_restore_backup_obsolete">As configurações salvas em uma versão antiga do GravityBox não podem ser
+    <string name="settings_restore_backup_obsolete">As configurações salvas em uma versão antiga do Android não podem ser
         restauradas devido a extensas diferenças de sistema. É altamente recomendado configurar o GravityBox do zero.
     </string>
 
