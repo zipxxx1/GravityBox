@@ -15,6 +15,9 @@
 
 package com.ceco.lollipop.gravitybox;
 
+import java.util.HashSet;
+import java.util.Iterator;
+
 import android.util.ArraySet;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -40,6 +43,43 @@ public class PermissionGranter {
         XposedBridge.log(TAG + ": " + message);
     }
 
+    private static class Either<L extends HashSet,R extends ArraySet> implements Iterable<String> {
+        private final L left;
+        private final R right;
+        private Either(L l, R r) { left = l; right = r; }
+        public Either<L,R> left(L left) {
+            return new Either<L,R>(left, null);
+        }
+        public Either<L,R> right(R right) {
+            return new Either<L,R>(null, right);
+        }
+        public L left() { return left; }
+        public R right() { return right; }
+        public boolean hasLeft() { return left != null; }
+        public boolean hasRight() { return right != null; }
+
+        public <T> boolean contains(T p) {
+            return (left == null) ? right.contains(p) : left.contains(p);
+        }
+
+        public <T> void add(T p) {
+            if (left == null) right.add(p); else left.add(p);
+        }
+
+        public Iterator<String> iterator() {
+            return (left == null) ? right.iterator() : left.iterator();
+        }
+    }
+
+    private static Either<HashSet<String>,ArraySet<String>> getGrantedPerms(Object extras) {
+        final Object o = XposedHelpers.getObjectField(extras, "grantedPermissions");
+        if (o instanceof ArraySet) {
+            return new Either<HashSet<String>,ArraySet<String>>(null, (ArraySet<String>) o);
+        } else {
+            return new Either<HashSet<String>,ArraySet<String>>((HashSet<String>) o, null);
+        }
+    }
+
     public static void initAndroid(final ClassLoader classLoader) {
         try {
             final Class<?> pmServiceClass = XposedHelpers.findClass(CLASS_PACKAGE_MANAGER_SERVICE, classLoader);
@@ -54,8 +94,8 @@ public class PermissionGranter {
                     // GravityBox
                     if (GravityBox.PACKAGE_NAME.equals(pkgName)) {
                         final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
-                        final ArraySet<String> grantedPerms =
-                                (ArraySet<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
+                        final Either<HashSet<String>,ArraySet<String>> grantedPerms =
+                                getGrantedPerms(extras);
                         final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
                         final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
 
@@ -123,8 +163,8 @@ public class PermissionGranter {
                     if (!Utils.hasLenovoVibeUI() && pkgName.equals("com.android.systemui")) {
                         final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
                         final Object sharedUser = XposedHelpers.getObjectField(extras, "sharedUser");
-                        final ArraySet<String> grantedPerms =
-                                (ArraySet<String>) XposedHelpers.getObjectField(sharedUser, "grantedPermissions");
+                        final Either<HashSet<String>,ArraySet<String>> grantedPerms =
+                                getGrantedPerms(extras);
                         final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
                         final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
 
@@ -158,8 +198,8 @@ public class PermissionGranter {
                     // Dialer
                     if (pkgName.equals("com.google.android.dialer") || pkgName.equals("com.android.dialer")) {
                         final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
-                        final ArraySet<String> grantedPerms =
-                                (ArraySet<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
+                        final Either<HashSet<String>,ArraySet<String>> grantedPerms =
+                                getGrantedPerms(extras);
                         final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
                         final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
 
