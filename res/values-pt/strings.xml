@@ -1693,7 +1693,7 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     </string>
 
     <!-- Restore settings: warn if old backup exists -->
-    <string name="settings_restore_backup_obsolete">As configurações salvas em uma versão antiga do GravityBox não podem ser
+    <string name="settings_restore_backup_obsolete">As configurações salvas em uma versão antiga do Android não podem ser
         restauradas devido a extensas diferenças de sistema. É altamente recomendado configurar o GravityBox do zero.
     </string>
 
@@ -1702,4 +1702,16 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="pref_qs_normalize_summary">Transforma os painéis Wi-Fi e Bluetooth em painéis normais.
         A ação de tocar no seu texto terá o mesmo efeito que tocar e segurar no painel.
     </string>
+    
+    <!-- QS: tile order info -->
+    <string name="tile_order_info">A primeira checkbox ativa/desativa o painel, a segunda checkbox 
+        determina se o painel deve ser mostrado na tela de bloqueio protegida.</string>
+        
+    <!-- Traffic meter: show in lock screen -->
+    <string name="pref_data_traffic_lockscreen_title">Exibir na tela de bloqueio</string>
+    <string name="pref_data_traffic_lockscreen_summary">Sempre exiber centralizado na tela de bloqueio</string>
+
+    <!-- QS: Hide brightness slider -->
+    <string name="pref_qs_hide_brightness_title">Ocultar brilho, controle deslizante</string>    
+
 </resources>
