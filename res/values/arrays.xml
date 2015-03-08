@@ -107,7 +107,7 @@
         <item>@string/qs_tile_nfc</item>
         <item>@string/qs_tile_gps_slimkat</item>
         <item>@string/qs_tile_gps_alt</item>
-        <!-- item>@string/qs_tile_ringer_mode</item -->
+        <item>@string/qs_tile_ringer_mode</item>
         <item>@string/qs_tile_volume</item>
         <item>@string/qs_tile_network_mode</item>
         <item>@string/qs_tile_smart_radio</item>
@@ -148,7 +148,7 @@
         <item>gb_tile_nfc</item>
         <item>gb_tile_gps_slimkat</item>
         <item>gb_tile_gps_alt</item>
-        <!-- item>gb_tile_ringer_mode</item -->
+        <item>gb_tile_ringer_mode</item>
         <item>gb_tile_volume</item>
         <item>gb_tile_network_mode</item>
         <item>gb_tile_smart_radio</item>
