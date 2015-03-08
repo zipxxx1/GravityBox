@@ -74,10 +74,6 @@ public class RingerModeTile extends QsTile {
 
         mState.label = mGbContext.getString(R.string.qs_tile_ringer_mode);
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-        if (Utils.hasVibrator(mContext)) {
-            mHasVibrator = true;
-            mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-        }
 
         mSettingsObserver = new SettingsObserver(new Handler());
     }
@@ -130,6 +126,11 @@ public class RingerModeTile extends QsTile {
 
     @Override
     public void initPreferences() {
+        if (Utils.hasVibrator(mContext)) {
+            mHasVibrator = true;
+            mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+        }
+
         Set<String> smodes = mPrefs.getStringSet(
                 GravityBoxSettings.PREF_KEY_RINGER_MODE_TILE_MODE,
                 new HashSet<String>(Arrays.asList(new String[] { "0", "1", "2", "3" })));
