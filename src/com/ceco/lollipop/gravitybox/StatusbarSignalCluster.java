@@ -272,14 +272,25 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     protected void createHooks() {
         try {
-            XposedHelpers.findAndHookMethod(mView.getClass(), "apply", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mView != param.thisObject) return;
+            if (!Utils.isMotoXtDevice()) {
+                XposedHelpers.findAndHookMethod(mView.getClass(), "apply", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mView != param.thisObject) return;
 
-                    apply();
-                }
-            });
+                        apply();
+                    }
+                });
+            } else {
+                XposedHelpers.findAndHookMethod(mView.getClass(), "apply", int.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mView != param.thisObject) return;
+
+                        apply();
+                    }
+                });
+            }
         } catch (Throwable t) {
             log("Error hooking apply() method: " + t.getMessage());
         }
@@ -383,7 +394,11 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected void update() {
         if (mView != null) {
             try {
-                XposedHelpers.callMethod(mView, "apply");
+                if (!Utils.isMotoXtDevice()) {
+                    XposedHelpers.callMethod(mView, "apply");
+                } else {
+                    XposedHelpers.callMethod(mView, "apply", 0);
+                }
             } catch (Throwable t) {
                 logAndMute("invokeApply", t);
             }
