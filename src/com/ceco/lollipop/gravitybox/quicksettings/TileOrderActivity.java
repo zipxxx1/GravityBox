@@ -122,28 +122,10 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         String newList = "";
 
         for (String key : tileKeys) {
-            if (key.equals("gb_tile_torch") && !Utils.hasFlash(mContext))
-                continue;
-            if (key.equals("gb_tile_gps_alt") && !Utils.hasGPS(mContext))
-                continue;
-            if ((key.equals("aosp_tile_cell") || key.equals("aosp_tile_cell2") ||
-                    key.equals("gb_tile_network_mode") || key.equals("gb_tile_smart_radio") ||
-                    key.equals("mtk_tile_mobile_data")) && Utils.isWifiOnly(mContext))
-                continue;
-            if (key.equals("gb_tile_nfc") && !Utils.hasNfc(mContext))
-                continue;
-            if (key.equals("gb_tile_quiet_hours") && LedSettings.isUncLocked(mContext))
-                continue;
-            if (key.equals("gb_tile_compass") && !Utils.hasCompass(mContext))
-                continue;
-            if (key.equals("aosp_tile_cell2") && GravityBoxSettings.sSystemProperties != null &&
-                    !GravityBoxSettings.sSystemProperties.hasMsimSupport)
-                continue;
-            if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")) &&
-                    !Utils.isMtkDevice())
-                continue;
-            if (!newList.isEmpty()) newList += ",";
-            newList += key;
+            if (supportedTile(key)) {
+                if (!newList.isEmpty()) newList += ",";
+                newList += key;
+            }
         }
 
         mPrefs.edit().putString(PREF_KEY_TILE_ORDER, newList).commit();
@@ -158,27 +140,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         boolean enabledListChanged = false;
         String[] tileKeys = mResources.getStringArray(R.array.qs_tile_values);
         for (String key : tileKeys) {
-            if (key.equals("gb_tile_torch") && !Utils.hasFlash(mContext))
-                continue;
-            if (key.equals("gb_tile_gps_alt") && !Utils.hasGPS(mContext))
-                continue;
-            if ((key.equals("aosp_tile_cell") || key.equals("aosp_tile_cell2") ||
-                    key.equals("gb_tile_network_mode") || key.equals("gb_tile_smart_radio") ||
-                    key.equals("mtk_tile_mobile_data")) && Utils.isWifiOnly(mContext))
-                continue;
-            if (key.equals("gb_tile_nfc") && !Utils.hasNfc(mContext))
-                continue;
-            if (key.equals("gb_tile_quiet_hours") && LedSettings.isUncLocked(mContext))
-                continue;
-            if (key.equals("gb_tile_compass") && !Utils.hasCompass(mContext))
-                continue;
-            if (key.equals("aosp_tile_cell2") && GravityBoxSettings.sSystemProperties != null &&
-                    !GravityBoxSettings.sSystemProperties.hasMsimSupport)
-                continue;
-            if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")) &&
-                    !Utils.isMtkDevice())
-                continue;
-            if (!list.contains(key)) {
+            if (!list.contains(key) && supportedTile(key)) {
                 if (!list.isEmpty()) list += ",";
                 list += key;
                 listChanged = true;
@@ -205,6 +167,31 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         if (enabledListChanged) {
             mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, enabledList).commit();
         }
+    }
+
+    private boolean supportedTile(String key) {
+        if (key.equals("gb_tile_torch") && !Utils.hasFlash(mContext))
+            return false;
+        if (key.equals("gb_tile_gps_alt") && !Utils.hasGPS(mContext))
+            return false;
+        if ((key.equals("aosp_tile_cell") || key.equals("aosp_tile_cell2") ||
+                key.equals("gb_tile_network_mode") || key.equals("gb_tile_smart_radio") ||
+                key.equals("mtk_tile_mobile_data")) && Utils.isWifiOnly(mContext))
+            return false;
+        if (key.equals("gb_tile_nfc") && !Utils.hasNfc(mContext))
+            return false;
+        if (key.equals("gb_tile_quiet_hours") && LedSettings.isUncLocked(mContext))
+            return false;
+        if (key.equals("gb_tile_compass") && !Utils.hasCompass(mContext))
+            return false;
+        if (key.equals("aosp_tile_cell2") && GravityBoxSettings.sSystemProperties != null &&
+                !GravityBoxSettings.sSystemProperties.hasMsimSupport)
+            return false;
+        if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")) &&
+                !Utils.isMtkDevice())
+            return false;
+
+        return true;
     }
 
     @Override
