@@ -27,7 +27,6 @@ import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -75,15 +74,19 @@ public class RingerModeTile extends QsTile {
 
         mState.label = mGbContext.getString(R.string.qs_tile_ringer_mode);
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        if (Utils.hasVibrator(mContext)) {
+            mHasVibrator = true;
+            mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+        }
+
         mSettingsObserver = new SettingsObserver(new Handler());
-        mSettingsObserver.observe();
     }
 
     @Override
     public void handleDestroy() {
-        mSettingsObserver.unobserve();
         mSettingsObserver = null;
         mAudioManager = null;
+        mVibrator = null;
         super.handleDestroy();
     }
 
@@ -104,7 +107,6 @@ public class RingerModeTile extends QsTile {
         mState.visible = true;
 
         // The icon will change depending on index
-        findCurrentState();
         mState.icon = mGbContext.getDrawable(RINGERS[mRingerIndex].mDrawable);
 
         super.handleUpdateState(state, arg);
@@ -114,14 +116,10 @@ public class RingerModeTile extends QsTile {
     public void setListening(boolean listening) {
         if (DEBUG) log(getKey() + ": setListening(" + listening + ")");
         if (listening && mEnabled) {
-            mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-            mHasVibrator = mVibrator.hasVibrator();
             registerReceiver();
             findCurrentState();
         } else {
             unregisterReceiver();
-            mHasVibrator = false;
-            mVibrator = null;
         }
     }
 
@@ -166,6 +164,7 @@ public class RingerModeTile extends QsTile {
             IntentFilter intentFilter = new IntentFilter(
                     AudioManager.RINGER_MODE_CHANGED_ACTION);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+            mSettingsObserver.observe();
             mIsReceiving = true;
             if (DEBUG) log(getKey() + ": receiver registered");
         }
@@ -174,6 +173,7 @@ public class RingerModeTile extends QsTile {
     private void unregisterReceiver() {
         if (mIsReceiving) {
             mContext.unregisterReceiver(mBroadcastReceiver);
+            mSettingsObserver.unobserve();
             mIsReceiving = false;
             if (DEBUG) log(getKey() + ": receiver unregistered");
         }
@@ -190,7 +190,7 @@ public class RingerModeTile extends QsTile {
             for (int i=0; i<modes.length; i++) {
                 int index = modes[i];
                 Ringer r = index < RINGERS.length ? RINGERS[index] : null;
-                if (r != null && (Utils.hasVibrator(mContext) || !r.mVibrateWhenRinging)) {
+                if (r != null && (mHasVibrator || !r.mVibrateWhenRinging)) {
                     r.mEnabled = true;
                 }
             }
@@ -288,6 +288,7 @@ public class RingerModeTile extends QsTile {
                 mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
             }
 
+            findCurrentState();
             refreshState();
             if (DEBUG) log(getKey() + ": SettingsObserver onChange()");
         }
