@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,9 +28,11 @@ import com.ceco.lollipop.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.os.Handler;
@@ -38,12 +40,9 @@ import android.os.Vibrator;
 import android.provider.Settings;
 import android.view.View;
 
-public class RingerModeTile extends BasicTile {
-    private static final String TAG = "GB:RingerModeTile";
-    private static final boolean DEBUG = false;
-
+public class RingerModeTile extends QsTile {
     public static final String SETTING_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
-    public static final String SETTING_MODE_RINGER = "mode_ringer";
+    public static final String SETTING_ZEN_MODE = "zen_mode";
 
     // Define the available ringer modes
     private static final Ringer[] RINGERS = new Ringer[] {
@@ -53,71 +52,87 @@ public class RingerModeTile extends BasicTile {
         new Ringer(AudioManager.RINGER_MODE_NORMAL, true, R.drawable.ic_qs_ring_vibrate_on)
     };
 
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(AudioManager.RINGER_MODE_CHANGED_ACTION)) {
+                findCurrentState();
+                refreshState();
+            }
+        }
+    };
+
+    private boolean mIsReceiving;
     private int mRingerIndex;
     private AudioManager mAudioManager;
     private boolean mHasVibrator;
     private Vibrator mVibrator;
     private SettingsObserver mSettingsObserver;
 
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
+    public RingerModeTile(Object host, String key, XSharedPreferences prefs,
+            QsTileEventDistributor eventDistributor) throws Throwable {
+        super(host, key, prefs, eventDistributor);
 
-    public RingerModeTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
-        super(context, gbContext, statusBar, panelBar);
-
+        mState.label = mGbContext.getString(R.string.qs_tile_ringer_mode);
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-        mHasVibrator = Utils.hasVibrator(mContext);
-        if (mHasVibrator) {
-            mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-        }
-
-        mOnClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleState();
-            }
-        };
-
-        mOnLongClick = new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                startActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
-                return true;
-            }
-        };
+        mSettingsObserver = new SettingsObserver(new Handler());
+        mSettingsObserver.observe();
     }
 
     @Override
-    protected int onGetLayoutId() {
-        return R.layout.quick_settings_tile_ringer_mode;
+    public void handleDestroy() {
+        mSettingsObserver.unobserve();
+        mSettingsObserver = null;
+        mAudioManager = null;
+        super.handleDestroy();
     }
 
     @Override
-    protected void onTilePostCreate() {
-        if (mHasVibrator) {
-            mSettingsObserver = new SettingsObserver(new Handler());
-            mSettingsObserver.observe();
-        }
-
-        super.onTilePostCreate();
+    public void handleClick() {
+        toggleState();
+        super.handleClick();
     }
 
     @Override
-    protected synchronized void updateTile() {
-        // The title does not change
-        mLabel = mGbContext.getString(R.string.qs_tile_ringer_mode);
+    public boolean handleLongClick(View view) {
+        startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
+        return true;
+    }
+
+    @Override
+    public void handleUpdateState(Object state, Object arg) {
+        mState.visible = true;
 
         // The icon will change depending on index
         findCurrentState();
-        mDrawableId = RINGERS[mRingerIndex].mDrawable;
+        mState.icon = mGbContext.getDrawable(RINGERS[mRingerIndex].mDrawable);
 
-        super.updateTile();
+        super.handleUpdateState(state, arg);
     }
 
     @Override
-    public void onPreferenceInitialize(XSharedPreferences prefs) {
-        Set<String> smodes = prefs.getStringSet(
+    public void setListening(boolean listening) {
+        if (DEBUG) log(getKey() + ": setListening(" + listening + ")");
+        if (listening && mEnabled) {
+            mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+            mHasVibrator = mVibrator.hasVibrator();
+            registerReceiver();
+            findCurrentState();
+        } else {
+            unregisterReceiver();
+            mHasVibrator = false;
+            mVibrator = null;
+        }
+    }
+
+    @Override
+    public boolean supportsHideOnChange() {
+        return false;
+    }
+
+    @Override
+    public void initPreferences() {
+        Set<String> smodes = mPrefs.getStringSet(
                 GravityBoxSettings.PREF_KEY_RINGER_MODE_TILE_MODE,
                 new HashSet<String>(Arrays.asList(new String[] { "0", "1", "2", "3" })));
         List<String> lmodes = new ArrayList<String>(smodes);
@@ -126,26 +141,42 @@ public class RingerModeTile extends BasicTile {
         for (int i=0; i<lmodes.size(); i++) {
             modes[i] = Integer.valueOf(lmodes.get(i));
         }
-        if (DEBUG) log("onPreferenceInitialize: modes=" + modes);
+        if (DEBUG) log(getKey() + ": onPreferenceInitialize: modes=" + Arrays.toString(modes));
         updateSettings(modes);
 
-        super.onPreferenceInitialize(prefs);
+        super.initPreferences();
     }
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
-        if (DEBUG) log("Received broadcast: " + intent.toString());
+        if (DEBUG) log(getKey() + ": received broadcast: " + intent.toString());
 
-        if (intent.getAction().equals(AudioManager.RINGER_MODE_CHANGED_ACTION)) {
-            updateResources();
-        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)
                 && intent.hasExtra(GravityBoxSettings.EXTRA_RMT_MODE)) {
             int[] modes = intent.getIntArrayExtra(GravityBoxSettings.EXTRA_RMT_MODE);
-            if (DEBUG) log("onBroadcastReceived: modes=" + modes);
+            if (DEBUG) log(getKey() + ": onBroadcastReceived: modes=" + Arrays.toString(modes));
             updateSettings(modes);
         }
 
         super.onBroadcastReceived(context, intent);
+    }
+
+    private void registerReceiver() {
+        if (!mIsReceiving) {
+            IntentFilter intentFilter = new IntentFilter(
+                    AudioManager.RINGER_MODE_CHANGED_ACTION);
+            mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+            mIsReceiving = true;
+            if (DEBUG) log(getKey() + ": receiver registered");
+        }
+    }
+
+    private void unregisterReceiver() {
+        if (mIsReceiving) {
+            mContext.unregisterReceiver(mBroadcastReceiver);
+            mIsReceiving = false;
+            if (DEBUG) log(getKey() + ": receiver unregistered");
+        }
     }
 
     private void updateSettings(int[] modes) {
@@ -159,7 +190,7 @@ public class RingerModeTile extends BasicTile {
             for (int i=0; i<modes.length; i++) {
                 int index = modes[i];
                 Ringer r = index < RINGERS.length ? RINGERS[index] : null;
-                if (r != null && (mHasVibrator || !r.mVibrateWhenRinging)) {
+                if (r != null && (Utils.hasVibrator(mContext) || !r.mVibrateWhenRinging)) {
                     r.mEnabled = true;
                 }
             }
@@ -180,48 +211,56 @@ public class RingerModeTile extends BasicTile {
 
         // toggle only if new ringer index found
         if (mRingerIndex != startIndex) {
-            if (DEBUG) log("Switching to ringerIndex: " + mRingerIndex);
+            if (DEBUG) log(getKey() + ": Switching to ringerIndex: " + mRingerIndex);
             Ringer r = RINGERS[mRingerIndex];
     
             // If we are setting a vibrating state, vibrate to indicate it
-            if (r.mVibrateWhenRinging && mVibrator != null) {
+            if (r.mVibrateWhenRinging && mHasVibrator) {
                 mVibrator.vibrate(150);
             }
     
             // Set the desired state
-            if (r.mRingerMode != AudioManager.RINGER_MODE_SILENT) {
-                ContentResolver resolver = mContext.getContentResolver();
-                Settings.System.putInt(resolver, SETTING_VIBRATE_WHEN_RINGING,
-                        r.mVibrateWhenRinging ? 1 : 0);
-            }
+            ContentResolver resolver = mContext.getContentResolver();
+            Settings.System.putInt(resolver, SETTING_VIBRATE_WHEN_RINGING,
+                    r.mVibrateWhenRinging ? 1 : 0);
+            Settings.Global.putInt(resolver, SETTING_ZEN_MODE,
+                    (r.mRingerMode == AudioManager.RINGER_MODE_SILENT) ? 1 : 0);
             mAudioManager.setRingerMode(r.mRingerMode);
         } else if (DEBUG) {
-            log("No suitable ringer mode for toggling found");
+            log(getKey() + ": No suitable ringer mode for toggling found");
         }
     }
 
     private void findCurrentState() {
-        boolean vibrateWhenRinging = Settings.System.getInt(mContext.getContentResolver(),
-                SETTING_VIBRATE_WHEN_RINGING, 0) == 1;
+        ContentResolver cr = mContext.getContentResolver();
+        boolean vibrateWhenRinging = Settings.System.getInt(cr, SETTING_VIBRATE_WHEN_RINGING, 0) == 1;
+        boolean zenMode = Settings.Global.getInt(cr, SETTING_ZEN_MODE, 0) != 0;
         int ringerMode = mAudioManager.getRingerMode();
 
         mRingerIndex = 0;
 
-        for (int i = 0; i < RINGERS.length; i++) {
-            Ringer r = RINGERS[i];
-            if (ringerMode == r.mRingerMode && 
-                ((ringerMode == AudioManager.RINGER_MODE_SILENT || 
-                        ringerMode == AudioManager.RINGER_MODE_VIBRATE) ||
-                        (r.mVibrateWhenRinging == vibrateWhenRinging))) {
-                mRingerIndex = i;
-                if (DEBUG) log("Current ringerIndex=" + mRingerIndex);
-                break;
+        if (!zenMode) {
+            for (int i = 0; i < RINGERS.length; i++) {
+                Ringer r = RINGERS[i];
+                if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_SILENT)) {
+                    mRingerIndex = i;
+                    break;
+                }
+                if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_VIBRATE)) {
+                    mRingerIndex = i;
+                    break;
+                }
+                if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_NORMAL) &&
+                        (r.mVibrateWhenRinging == vibrateWhenRinging)) {
+                    mRingerIndex = i;
+                    break;
+                }
             }
         }
+        if (DEBUG) log(getKey() + ": Current ringerIndex=" + mRingerIndex + ", ringerMode=" + ringerMode);
     }
 
     private class SettingsObserver extends ContentObserver {
-
         public SettingsObserver(Handler handler) {
             super(handler);
         }
@@ -230,12 +269,27 @@ public class RingerModeTile extends BasicTile {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(Settings.System.getUriFor(
                         SETTING_VIBRATE_WHEN_RINGING), false, this);
+            resolver.registerContentObserver(Settings.Global.getUriFor(
+                        SETTING_ZEN_MODE), false, this);
+        }
+
+        void unobserve() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.unregisterContentObserver(this);
         }
 
         @Override
         public void onChange(boolean selfChange) {
-            if (DEBUG) log("SettingsObserver onChange()");
-            updateResources();
+            ContentResolver resolver = mContext.getContentResolver();
+            boolean zenMode = Settings.Global.getInt(resolver, SETTING_ZEN_MODE, 0) == 1;
+            int ringerMode = mAudioManager.getRingerMode();
+
+            if (zenMode && (ringerMode != AudioManager.RINGER_MODE_SILENT)) {
+                mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+            }
+
+            refreshState();
+            if (DEBUG) log(getKey() + ": SettingsObserver onChange()");
         }
     }
 

@@ -15,7 +15,7 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import java.util.HashSet;
+import java.util.Set;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -54,8 +54,8 @@ public class PermissionGranter {
                     // GravityBox
                     if (GravityBox.PACKAGE_NAME.equals(pkgName)) {
                         final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
-                        final HashSet<String> grantedPerms = 
-                                (HashSet<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
+                        final Set<String> grantedPerms =
+                                (Set<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
                         final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
                         final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
 
@@ -123,8 +123,8 @@ public class PermissionGranter {
                     if (!Utils.hasLenovoVibeUI() && pkgName.equals("com.android.systemui")) {
                         final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
                         final Object sharedUser = XposedHelpers.getObjectField(extras, "sharedUser");
-                        final HashSet<String> grantedPerms = 
-                                (HashSet<String>) XposedHelpers.getObjectField(sharedUser, "grantedPermissions");
+                        final Set<String> grantedPerms =
+                                (Set<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
                         final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
                         final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
 
@@ -153,13 +153,20 @@ public class PermissionGranter {
 
                             if (DEBUG) log(pkgName + ": Permission added: " + pCns);
                         }
+
+                        if (DEBUG) {
+                            log("List of permissions: ");
+                            for (String perm : grantedPerms) {
+                                log(pkgName + ": " + perm);
+                            }
+                        }
                     }
 
                     // Dialer
                     if (pkgName.equals("com.google.android.dialer") || pkgName.equals("com.android.dialer")) {
                         final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
-                        final HashSet<String> grantedPerms = 
-                                (HashSet<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
+                        final Set<String> grantedPerms =
+                                (Set<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
                         final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
                         final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
 
@@ -174,6 +181,13 @@ public class PermissionGranter {
                                     "appendInts", gpGids, bpGids);
 
                             if (DEBUG) log(pkgName + ": Permission added: " + perm);
+                        }
+
+                        if (DEBUG) {
+                            log("List of permissions: ");
+                            for (String perm : grantedPerms) {
+                                log(pkgName + ": " + perm);
+                            }
                         }
                     }
                 }

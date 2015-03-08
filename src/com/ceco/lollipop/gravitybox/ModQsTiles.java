@@ -33,7 +33,7 @@ public class ModQsTiles {
             "gb_tile_nfc",
             "gb_tile_gps_slimkat",
             "gb_tile_gps_alt",
-            //"gb_tile_ringer_mode",
+            "gb_tile_ringer_mode",
             "gb_tile_volume",
             "gb_tile_network_mode",
             "gb_tile_smart_radio",
