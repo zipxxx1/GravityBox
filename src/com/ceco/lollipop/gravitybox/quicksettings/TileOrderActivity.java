@@ -156,6 +156,34 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         String enabledList = mPrefs.getString(PREF_KEY_TILE_ENABLED, "");
         boolean listChanged = false;
         boolean enabledListChanged = false;
+        String[] tileKeys = mResources.getStringArray(R.array.qs_tile_values);
+        for (String key : tileKeys) {
+            if (key.equals("gb_tile_torch") && !Utils.hasFlash(mContext))
+                continue;
+            if (key.equals("gb_tile_gps_alt") && !Utils.hasGPS(mContext))
+                continue;
+            if ((key.equals("aosp_tile_cell") || key.equals("aosp_tile_cell2") ||
+                    key.equals("gb_tile_network_mode") || key.equals("gb_tile_smart_radio") ||
+                    key.equals("mtk_tile_mobile_data")) && Utils.isWifiOnly(mContext))
+                continue;
+            if (key.equals("gb_tile_nfc") && !Utils.hasNfc(mContext))
+                continue;
+            if (key.equals("gb_tile_quiet_hours") && LedSettings.isUncLocked(mContext))
+                continue;
+            if (key.equals("gb_tile_compass") && !Utils.hasCompass(mContext))
+                continue;
+            if (key.equals("aosp_tile_cell2") && GravityBoxSettings.sSystemProperties != null &&
+                    !GravityBoxSettings.sSystemProperties.hasMsimSupport)
+                continue;
+            if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")) &&
+                    !Utils.isMtkDevice())
+                continue;
+            if (!list.contains(key)) {
+                if (!list.isEmpty()) list += ",";
+                list += key;
+                listChanged = true;
+            }
+        }
         if (LedSettings.isUncLocked(mContext)) {
             if (list.contains("gb_tile_quiet_hours")) {
                 list = list.replace(",gb_tile_quiet_hours", "");
