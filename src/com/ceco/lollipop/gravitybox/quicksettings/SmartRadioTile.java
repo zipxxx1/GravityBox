@@ -15,6 +15,7 @@
 
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModSmartRadio;
 import com.ceco.lollipop.gravitybox.R;
 
@@ -63,7 +64,7 @@ public class SmartRadioTile extends QsTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible = true;
+        mState.visible = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false);
         if (mSmartRadioEnabled) {
             mState.label = mGbContext.getString(R.string.quick_settings_smart_radio_on);
             mState.icon = mSmartRadioState == ModSmartRadio.State.POWER_SAVING ?

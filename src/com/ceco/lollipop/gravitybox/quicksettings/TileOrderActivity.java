@@ -140,26 +140,24 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         boolean enabledListChanged = false;
         String[] tileKeys = mResources.getStringArray(R.array.qs_tile_values);
         for (String key : tileKeys) {
-            if (!list.contains(key) && supportedTile(key)) {
-                if (!list.isEmpty()) list += ",";
-                list += key;
-                listChanged = true;
+            if (supportedTile(key)) {
+                if (!list.contains(key)) {
+                    if (!list.isEmpty()) list += ",";
+                    list += key;
+                    listChanged = true;
+                }
+            } else {
+                if (list.contains(key)) {
+                    list = list.replace("," + key, "");
+                    list = list.replace(key + ",", "");
+                    listChanged = true;
+                }
+                if (enabledList.contains(key)) {
+                    enabledList = enabledList.replace("," + key, "");
+                    enabledList = enabledList.replace(key + ",", "");
+                    enabledListChanged = true;
+                }
             }
-        }
-        if (LedSettings.isUncLocked(mContext)) {
-            if (list.contains("gb_tile_quiet_hours")) {
-                list = list.replace(",gb_tile_quiet_hours", "");
-                list = list.replace("gb_tile_quiet_hours,", "");
-                listChanged = true;
-            }
-            if (enabledList.contains("gb_tile_quiet_hours")) {
-                enabledList = enabledList.replace(",gb_tile_quiet_hours", "");
-                enabledList = enabledList.replace("gb_tile_quiet_hours,", "");
-                enabledListChanged = true;
-            }
-        } else if (!list.contains("gb_tile_quiet_hours")) {
-            list += ",gb_tile_quiet_hours";
-            listChanged = true;
         }
         if (listChanged) {
             mPrefs.edit().putString(PREF_KEY_TILE_ORDER, list).commit();
@@ -189,6 +187,9 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             return false;
         if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")) &&
                 !Utils.isMtkDevice())
+            return false;
+        if (key.equals("gb_tile_smart_radio") && !mPrefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false))
             return false;
 
         return true;
