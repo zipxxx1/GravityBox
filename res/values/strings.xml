@@ -713,7 +713,7 @@
 
     <!-- Ringer tile modes -->
     <string name="pref_qs_ringer_mode_title">Ringer mode tile mode</string>
-    <string name="ringer_mode_silent">Silent</string>
+    <string name="ringer_mode_silent">Priority</string>
     <string name="ringer_mode_vibrate">Vibrate</string>
     <string name="ringer_mode_sound">Sound</string>
     <string name="ringer_mode_sound_vibrate">Sound and vibrate</string>

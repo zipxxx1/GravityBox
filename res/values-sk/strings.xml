@@ -684,7 +684,7 @@
 
     <!-- Ringer tile modes -->
     <string name="pref_qs_ringer_mode_title">Nastavenia dlaždice Režimu zvonenia</string>
-    <string name="ringer_mode_silent">Tichý</string>
+    <string name="ringer_mode_silent">Prioritné</string>
     <string name="ringer_mode_vibrate">Vibrovať</string>
     <string name="ringer_mode_sound">Zvoniť</string>
     <string name="ringer_mode_sound_vibrate">Zvoniť a vibrovať</string>
