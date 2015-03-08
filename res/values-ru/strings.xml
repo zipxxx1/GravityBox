@@ -1739,4 +1739,15 @@
     <string name="pref_qs_normalize_summary">Переключение плиток WiFi и Bluetooth в обычный режим. 
         Действие нажатия на ярлыке будет преобразовано в действие по удержанию нажатия</string>
 
+    <!-- QS: tile order info -->
+    <string name="tile_order_info">Первый чекбокс включает/отключает плитку, второй чекбокс 
+        устанавливает отображение на защищённом экране блокировки.</string>
+
+    <!-- Traffic meter: show in lock screen -->
+    <string name="pref_data_traffic_lockscreen_title">Показывать на экр. блокировки</string>
+    <string name="pref_data_traffic_lockscreen_summary">Всегда по центру на экр. блокировки</string>
+
+    <!-- QS: Hide brightness slider -->
+    <string name="pref_qs_hide_brightness_title">Скрыть слайдер яркости</string>
+
 </resources>
