@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,11 +30,9 @@ public class PermissionGranter {
 
     private static final String PERM_ACCESS_SURFACE_FLINGER = "android.permission.ACCESS_SURFACE_FLINGER";
     private static final String PERM_WRITE_SETTINGS = "android.permission.WRITE_SETTINGS";
-    private static final String PERM_CAMERA = "android.permission.CAMERA";
     private static final String PERM_CHANGE_NETWORK_STATE = "android.permission.CHANGE_NETWORK_STATE";
     private static final String PERM_MODIFY_AUDIO_SETTINGS = "android.permission.MODIFY_AUDIO_SETTINGS";
     private static final String PERM_CAPTURE_AUDIO_OUTPUT = "android.permission.CAPTURE_AUDIO_OUTPUT";
-    private static final String PERM_READ_DREAM_STATE = "android.permission.READ_DREAM_STATE";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -128,19 +126,6 @@ public class PermissionGranter {
                         final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
                         final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
 
-                        // Add android.permission.CAMERA needed by camera tile
-                        if (!grantedPerms.contains(PERM_CAMERA)) {
-                            final Object pCamera = XposedHelpers.callMethod(permissions, "get",
-                                    PERM_CAMERA);
-                            grantedPerms.add(PERM_CAMERA);
-                            int[] gpGids = (int[]) XposedHelpers.getObjectField(sharedUser, "gids");
-                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCamera, "gids");
-                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
-                                    "appendInts", gpGids, bpGids);
-
-                            if (DEBUG) log(pkgName + ": Permission added: " + pCamera);
-                        }
-
                         // Add android.permission.CHANGE_NETWORK_STATE needed by Usb Tethering Tile
                         if (!grantedPerms.contains(PERM_CHANGE_NETWORK_STATE)) {
                             final Object pCns = XposedHelpers.callMethod(permissions, "get",
@@ -152,35 +137,6 @@ public class PermissionGranter {
                                     "appendInts", gpGids, bpGids);
 
                             if (DEBUG) log(pkgName + ": Permission added: " + pCns);
-                        }
-
-                        if (DEBUG) {
-                            log("List of permissions: ");
-                            for (String perm : grantedPerms) {
-                                log(pkgName + ": " + perm);
-                            }
-                        }
-                    }
-
-                    // Dialer
-                    if (pkgName.equals("com.google.android.dialer") || pkgName.equals("com.android.dialer")) {
-                        final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
-                        final Set<String> grantedPerms =
-                                (Set<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
-                        final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
-                        final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
-
-                        // Add android.permission.READ_DREAM_STATE needed by non-intrusive call feature
-                        if (!grantedPerms.contains(PERM_READ_DREAM_STATE)) {
-                            final Object perm = XposedHelpers.callMethod(permissions, "get",
-                                    PERM_READ_DREAM_STATE);
-                            grantedPerms.add(PERM_READ_DREAM_STATE);
-                            int[] gpGids = (int[]) XposedHelpers.getObjectField(extras, "gids");
-                            int[] bpGids = (int[]) XposedHelpers.getObjectField(perm, "gids");
-                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
-                                    "appendInts", gpGids, bpGids);
-
-                            if (DEBUG) log(pkgName + ": Permission added: " + perm);
                         }
 
                         if (DEBUG) {
