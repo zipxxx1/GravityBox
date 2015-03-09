@@ -1,3 +1,10 @@
+Changelog 3.5.4 - 09/03/2015
+--------------------------------------
+- Launcher tweaks: adjusted for Google App 4.2.16
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+
 Changelog 3.5.3 - 29/01/2015
 --------------------------------------
 - Fixed notification panel clock actions on Android 4.1
