@@ -355,7 +355,7 @@ public class ModLedControl {
                 // vibration
                 if (qhActiveIncludingVibe) {
                     n.defaults &= ~Notification.DEFAULT_VIBRATE;
-                    n.vibrate = new long[] {0};
+                    n.vibrate = null;
                 } else if (ls.getEnabled() && !(isOngoing && !ls.getOngoing())) {
                     if (ls.getVibrateOverride() && ls.getVibratePattern() != null) {
                         n.defaults &= ~Notification.DEFAULT_VIBRATE;
@@ -381,7 +381,7 @@ public class ModLedControl {
                                 n.defaults &= ~Notification.DEFAULT_SOUND;
                                 n.defaults &= ~Notification.DEFAULT_VIBRATE;
                                 n.sound = null;
-                                n.vibrate = new long[] {0};
+                                n.vibrate = null;
                                 n.flags &= ~Notification.FLAG_ONLY_ALERT_ONCE;
                             } else {
                                 mNotifTimestamps.put(pkgName, System.currentTimeMillis());
