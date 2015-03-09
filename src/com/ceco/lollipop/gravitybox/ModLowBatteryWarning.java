@@ -147,7 +147,7 @@ public class ModLowBatteryWarning {
             }
 
             Class<?> classPowerWarnings = findClass(CLASS_POWER_WARNINGS, classLoader);
-            findAndHookMethod(classPowerWarnings, "showLowBatteryWarning", boolean.class, new XC_MethodHook() {
+            findAndHookMethod(classPowerWarnings, "updateNotification", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     prefs.reload();
@@ -158,10 +158,10 @@ public class ModLowBatteryWarning {
                         case DEFAULT:
                             return;
                         case NONINTRUSIVE:
-                            param.args[0] = false;
-                            break;
+                            XposedHelpers.setBooleanField(param.thisObject, "mPlaySound", false);
+                            return;
                         case OFF:
-                            param.setResult(null);
+                            XposedHelpers.setBooleanField(param.thisObject, "mWarning", false);
                             return;
                     }
                 }
