@@ -124,6 +124,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             "gravitybox.intent.action.BATTERY_SOUND_CHANGED";
     public static final String EXTRA_BATTERY_SOUND_TYPE = "batterySoundType";
     public static final String EXTRA_BATTERY_SOUND_URI = "batterySoundUri";
+    public static final String ACTION_PREF_LOW_BATTERY_WARNING_POLICY_CHANGED = 
+            "gravitybox.intent.action.LOW_BATTERY_WARNING_POLICY_CHANGED";
+    public static final String EXTRA_LOW_BATTERY_WARNING_POLICY = "lowBatteryWarningPolicy";
 
     public static final String PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS = "pref_disable_data_network_type_icons";
     public static final String ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED = "gravitybox.intent.action.DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED";
@@ -2872,6 +2875,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_BATTERY_SOUND_TYPE, BatteryInfoManager.SOUND_UNPLUGGED);
                 intent.putExtra(EXTRA_BATTERY_SOUND_URI,
                         prefs.getString(PREF_KEY_CHARGER_UNPLUGGED_SOUND, ""));
+            } else if (key.equals(PREF_KEY_LOW_BATTERY_WARNING_POLICY)) {
+                intent.setAction(ACTION_PREF_LOW_BATTERY_WARNING_POLICY_CHANGED);
+                intent.putExtra(EXTRA_LOW_BATTERY_WARNING_POLICY, prefs.getString(key, "DEFAULT"));
             } else if (key.equals(PREF_KEY_TRANS_VERIFICATION)) {
                 String transId = prefs.getString(key, null);
                 if (transId != null && !transId.trim().isEmpty()) {

@@ -17,12 +17,15 @@ package com.ceco.lollipop.gravitybox;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
+
+import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.LowBatteryWarningPolicy;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -129,7 +132,6 @@ public class ModLowBatteryWarning {
     }
 
     // SystemUI package
-    public enum LowBatteryWarningMode { DEFAULT, NONINTRUSIVE, OFF };
 
     static void init(final XSharedPreferences prefs, ClassLoader classLoader) {
         try {
@@ -150,11 +152,12 @@ public class ModLowBatteryWarning {
             findAndHookMethod(classPowerWarnings, "updateNotification", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    prefs.reload();
-                    LowBatteryWarningMode mode = LowBatteryWarningMode.valueOf(
-                            prefs.getString(GravityBoxSettings.PREF_KEY_LOW_BATTERY_WARNING_POLICY, "DEFAULT"));
-                    if (DEBUG) log("showLowBatteryWarning called; mode = " + mode);
-                    switch (mode) {
+                    if (SysUiManagers.BatteryInfoManager == null) return;
+
+                    LowBatteryWarningPolicy policy = SysUiManagers.BatteryInfoManager
+                            .getLowBatteryWarningPolicy();
+                    if (DEBUG) log("showLowBatteryWarning called; policy=" + policy);
+                    switch (policy) {
                         case DEFAULT:
                             return;
                         case NONINTRUSIVE:

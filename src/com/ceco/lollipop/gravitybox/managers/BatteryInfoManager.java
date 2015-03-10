@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -40,10 +40,13 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     private Context mContext;
     private Uri[] mSounds;
     private TelephonyManager mTelephonyManager;
+    private LowBatteryWarningPolicy mLowBatteryWarningPolicy;
 
     public static final int SOUND_CHARGED = 0;
     public static final int SOUND_PLUGGED = 1;
     public static final int SOUND_UNPLUGGED = 2;
+
+    public enum LowBatteryWarningPolicy { DEFAULT, NONINTRUSIVE, OFF };
 
     public class BatteryData {
         public boolean charging;
@@ -77,6 +80,9 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
                 prefs.getString(GravityBoxSettings.PREF_KEY_CHARGER_PLUGGED_SOUND, ""));
         setSound(BatteryInfoManager.SOUND_UNPLUGGED,
                 prefs.getString(GravityBoxSettings.PREF_KEY_CHARGER_UNPLUGGED_SOUND, ""));
+
+        mLowBatteryWarningPolicy = LowBatteryWarningPolicy.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_LOW_BATTERY_WARNING_POLICY, "DEFAULT"));
     }
 
     public void registerListener(BatteryStatusListener listener) {
@@ -147,6 +153,10 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         return mBatteryData;
     }
 
+    public LowBatteryWarningPolicy getLowBatteryWarningPolicy() {
+        return mLowBatteryWarningPolicy;
+    }
+
     public void setSound(int type, String uri) {
         if (type < 0 || type > (mSounds.length-1)) return;
 
@@ -196,11 +206,16 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
-        if (intent.getAction().equals(Intent.ACTION_BATTERY_CHANGED)) {
+        final String action = intent.getAction();
+        if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
             updateBatteryInfo(intent);
-        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED)) {
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED)) {
             setSound(intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1),
                     intent.getStringExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_LOW_BATTERY_WARNING_POLICY_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_LOW_BATTERY_WARNING_POLICY)) {
+            mLowBatteryWarningPolicy = LowBatteryWarningPolicy.valueOf(intent.getStringExtra(
+                    GravityBoxSettings.EXTRA_LOW_BATTERY_WARNING_POLICY));
         }
     }
 }
