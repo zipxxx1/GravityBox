@@ -66,6 +66,8 @@ public abstract class QsTile extends BaseTile {
             return new VolumeTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_compass") && Utils.hasCompass(ctx))
             return new CompassTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_usb_tether"))
+            return new UsbTetherTile(host, key, prefs, eventDistributor);
 
         return null;
     }

@@ -47,7 +47,7 @@ public class ModQsTiles {
             "gb_tile_expanded_desktop",
             "gb_tile_screenshot",
             "gb_tile_gravitybox",
-            //"gb_tile_usb_tether",
+            "gb_tile_usb_tether",
             "gb_tile_music",
             "gb_tile_lock_screen",
             "gb_tile_quiet_hours",
