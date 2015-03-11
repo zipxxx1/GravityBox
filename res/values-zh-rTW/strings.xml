@@ -424,8 +424,8 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">狀態列時鐘</string>
     <string name="pref_cat_notif_panel_clock_title">通知面板時鐘</string>
-    <string name="pref_clock_link_title">點擊時鐘時執行的應用程式</string>
-    <string name="pref_clock_link_summary">啟動此功能後，點擊通知面板的時鐘將執行指定的應用程式而非預設的 [日期與時間] 設定</string>
+    <string name="pref_clock_link_title">點選時鐘時執行的應用程式</string>
+    <string name="pref_clock_link_summary">啟動此功能後，點選通知面板的時鐘將執行指定的應用程式而非預設的 [日期與時間] 設定</string>
     <string name="pref_clock_longpress_link_title">長按時鐘時執行的應用程式</string>
 
     <!-- GravityBox settings startup handling -->
@@ -502,7 +502,7 @@
     <string name="sim_slot2">SIM 卡槽 2</string>
 
     <!-- Intelligent pie -->
-    <string name="pie_controls_disabled">從不</string>
+    <string name="pie_controls_disabled">永不</string>
     <string name="pie_controls_enabled_always">總是</string>
     <string name="pie_controls_enabled_expanded">當全螢幕模式開啟時</string>
     <string name="pie_controls_enabled_expanded_navbar">當全螢幕模式隱藏導航列時</string>
@@ -523,13 +523,13 @@
     <string name="call_vibration_periodic">通話期間每 45 秒</string>
 
     <!-- Ongoing notifications -->
-    <string name="pref_ongoing_notifications_title">封鎖運行中的程式通知</string>
-    <string name="pref_ongoing_notifications_summary">允許封鎖指定的運行中的通知</string>
-    <string name="ongoing_notif_info">以下清單會記錄每個曾出現的運行中的通知。
-        然後，您可以決定是否封鎖運行中的通知下一次出現。請謹慎使用。</string>
+    <string name="pref_ongoing_notifications_title">封鎖執行中的程式通知</string>
+    <string name="pref_ongoing_notifications_summary">允許封鎖指定的執行中的通知</string>
+    <string name="ongoing_notif_info">以下清單會記錄每個曾出現的執行中的通知。
+        然後，您可以決定是否封鎖執行中的通知下一次出現。請謹慎使用。</string>
     <string name="ongoing_notif_reset_list">重設清單</string>
     <string name="ongoing_notif_reset_alert">您確定要重設清單嗎? 
-        這會清除當前清單中被封鎖的通知，所有已被封鎖的通知將會在稍後重新出現。</string>
+        這會清除目前清單中被封鎖的通知，所有已被封鎖的通知將會在稍後重新出現。</string>
     <string name="ongoing_notif_list_empty"> (清單是空的) </string>
 
     <!-- Quick unlock -->
@@ -759,7 +759,7 @@
     <string name="pref_reboot_confirm_required_title">在重新啟動前先進行確認</string>
 
     <!-- Tiles: Hide on change -->
-    <string name="pref_qs_hide_on_change_title">點擊後隱藏</string>
+    <string name="pref_qs_hide_on_change_title">點選後隱藏</string>
     <string name="pref_qs_hide_on_change_summary">單擊瓷貼後，快速設定面板會自動收合。適用於 GravityBox 包含的瓷貼與已更改系統預設動作的原生瓷貼。</string>
 
     <!-- Power tweaks categories -->
@@ -969,15 +969,15 @@
 
     <!-- Web service client strings -->
     <string name="wsc_hash_creation_failed">產生應用程式特定的散列碼時發生錯誤</string>
-    <string name="wsc_parse_response_error">剖析從 Web 服務獲得的資料時發生錯誤</string>
-    <string name="wsc_hash_invalid">由於散列碼不符， Web 服務拒絕通信。這通常發生在以下情況：
+    <string name="wsc_parse_response_error">剖析從 Web 服務取得的資料時發生錯誤</string>
+    <string name="wsc_hash_invalid">由於散列碼不符， Web 服務拒絕通訊。這通常發生在以下情況：
       您運行非官方版本的 GravityBox 或 GravityBox APK 檔已經被第三方修改。</string>
     <string name="wsc_please_wait">請稍後&#8230;</string>
-    <string name="wsc_error">與 Web 服務通信錯誤： %s</string>
+    <string name="wsc_error">與 Web 服務通訊錯誤： %s</string>
     <string name="wsc_task_cancelled">Web 服務動作取消</string>
 
     <!-- Transaction verification -->
-    <string name="wsc_trans_parse_response_error">剖析從 Web 服務獲得的交易資料時發生錯誤</string>
+    <string name="wsc_trans_parse_response_error">剖析從 Web 服務取得的交易資料時發生錯誤</string>
     <string name="wsc_trans_valid">交易 ID 驗證成功。進階功能將於 GravityBox 重新啟動後被解鎖。</string>
     <string name="wsc_trans_invalid">無法找到指定的交易 ID 記錄</string>
     <string name="wsc_trans_violation">指定的交易 ID 已經註冊過很多次。請聯絡 GravityBox 開發者來解決。</string>
@@ -1167,8 +1167,8 @@
     <!-- Omni data traffic monitor -->
     <string name="pref_data_traffic_omni_mode_title">監控模式</string>
     <string name="dt_omni_mode_in">下載</string>
-    <string name="dt_omni_mode_out">上載</string>
-    <string name="dt_omni_mode_in_out">下載與上載</string>
+    <string name="dt_omni_mode_out">上傳</string>
+    <string name="dt_omni_mode_in_out">下載與上傳</string>
     <string name="byte_per_sec_abbr">B/s</string>
     <string name="bit_per_sec_abbr">b/s</string>
     <string name="kilo_abbr">k</string>
@@ -1424,7 +1424,7 @@
 	否則當使用時永遠靜音</string>
 
     <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">在完成擷取螢幕截圖後的通知顯示刪除按鈕</string>
+    <string name="pref_screenshot_delete_title">在完成截取螢幕截圖後的通知顯示刪除按鈕</string>
 
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">浮動通知</string>
@@ -1502,7 +1502,7 @@
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">使用此應用程式選擇圖片</string>
     <string name="imgpick_choose_error">選擇圖片時發生錯誤</string>
-    <string name="imgpick_crop_error">裁剪圖片時發生錯誤</string>
+    <string name="imgpick_crop_error">裁切圖片時發生錯誤</string>
 
     <!-- Proximity wake -->
     <string name="pref_power_proximity_wake_title">距離感應器喚醒</string>
@@ -1520,7 +1520,7 @@
     <string name="headsup_snooze_app">已套用延後通知計時器至 %s</string>
     <string name="pref_heads_up_snooze_reset_title">重設延後通知計時器</string>
     <string name="pref_heads_up_snooze_timer_title">預設延後通知計時器</string>
-    <string name="pref_heads_up_snooze_timer_summary">設定當您點擊延後通知按鈕時自動套用的計時器長度
+    <string name="pref_heads_up_snooze_timer_summary">設定當您點選延後通知按鈕時自動套用的計時器長度
 	(長按延後通知按鈕亦可自設延後通知計時器長度)</string>
     <string name="headsup_snooze_timer_set">已套用預設延後通知計時器至 %s</string>
 
@@ -1579,7 +1579,7 @@
     <string name="shortcut_auto_brightness">開關自動亮度</string>
 
     <!-- Messaging -->
-    <string name="pref_cat_phone_messaging_title">信息</string>
+    <string name="pref_cat_phone_messaging_title">資訊</string>
 
     <!-- Compatibility warning -->
     <string name="compat_warning_title">警告</string>
@@ -1588,16 +1588,16 @@
     <string name="compat_warning_ok_stage2">我真的明白相關風險了!</string>
 
     <!-- UNC Active screen: Pocket mode -->
-    <string name="pref_unc_as_pocket_mode_title">袋中模式</string>
+    <string name="pref_unc_as_pocket_mode_title">口袋模式</string>
     <string name="pref_unc_as_pocket_mode_summary">當距離感應器被覆蓋時 (例如當裝置被放在口袋中) 不會喚醒螢幕</string>
     <string name="pref_unc_as_pocket_mode_summary_overriden">本選項會被 [電源選項] > [距離感應器喚醒] 選項覆寫</string>
 
     <!-- Navbar: Left handed mode -->
     <string name="pref_navbar_left_handed_title">左手模式</string>
-    <string name="pref_navbar_left_handed_summary">請注意! 此乃實驗性功能! 當裝置橫置時把垂直導航列置於左方 (需要重新啟動)</string>
+    <string name="pref_navbar_left_handed_summary">請注意! 這是實驗性功能! 當裝置橫置時把垂直導航列置於左方 (需要重新啟動)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">隱藏啟動器圖示</string>
-    <string name="pref_hide_launcher_icon_summary">可能需要重新啟動啟動器方能生效</string>
+    <string name="pref_hide_launcher_icon_summary">可能需要重新啟動啟動器才能生效</string>
 
 </resources>
