@@ -401,11 +401,11 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
 
         switch(mColorInfo.signalIconMode) {
             case SI_MODE_STOCK:
-                cd = getCachedDrawable(key);
+                cd = getCachedDrawable(key+"_"+index);
                 if (cd != null) return cd;
                 Drawable d = mSystemUiRes.getDrawable(resId).mutate();
                 d = applyColorFilter(index, d);
-                setCachedDrawable(key, d);
+                setCachedDrawable(key+"_"+index, d);
                 return d;
 
             case SI_MODE_DISABLED:

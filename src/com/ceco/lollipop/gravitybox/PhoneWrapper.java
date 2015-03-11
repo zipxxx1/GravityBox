@@ -228,29 +228,4 @@ public class PhoneWrapper {
         if (DEBUG) log("hasMsimSupport: " + mHasMsimSupport);
         return mHasMsimSupport;
     }
-
-    public static int getMsimPreferredDataSubscription() {
-        try {
-            Object mtm = XposedHelpers.callStaticMethod(
-                    XposedHelpers.findClass("android.telephony.MSimTelephonyManager", null),
-                        "getDefault");
-            return (Integer) XposedHelpers.callMethod(mtm, "getPreferredDataSubscription");
-        } catch (Throwable t) {
-            return 0;
-        }
-    }
-
-    public static boolean isMsimCardInserted(int slot) {
-        try {
-            Object mtm = XposedHelpers.callStaticMethod(
-                    XposedHelpers.findClass("android.telephony.MSimTelephonyManager", null),
-                        "getDefault");
-            int phoneCount = (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount");
-            return ((phoneCount > slot) &&
-                    (Boolean) XposedHelpers.callMethod(mtm, "hasIccCard", slot));
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-            return false;
-        }
-    }
 }

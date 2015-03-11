@@ -732,8 +732,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_HSA_STATE = "headsetState"; // 1 = plugged, 0 = unplugged
     public static final String EXTRA_HSA_URI = "headsetActionUri";
 
-    public static final String PREF_KEY_SIGNAL_ICON_AUTOHIDE = "pref_signal_icon_autohide2";
-
     public static final String PREF_KEY_POWER_PROXIMITY_WAKE = "pref_power_proximity_wake";
     public static final String PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL = "pref_power_proximity_wake_ignore_call";
     public static final String ACTION_PREF_POWER_CHANGED = "gravitybox.intent.action.POWER_CHANGED";
@@ -829,7 +827,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_FORCE_LTR_DIRECTION,
             PREF_KEY_HEADS_UP_MASTER_SWITCH,
             PREF_KEY_NAVBAR_LARGER_ICONS,
-            PREF_KEY_SIGNAL_ICON_AUTOHIDE,
             PREF_KEY_MTK_FIX_DEV_OPTS,
             PREF_KEY_MTK_FIX_TTS_SETTINGS,
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
@@ -1234,7 +1231,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefScLteStyle;
         private ListPreference mPrefSbBtVisibility;
         private AppPickerPreference mPrefCustomApp;
-        private CheckBoxPreference mPrefSignalIconAutohide;
         private PreferenceScreen mPrefCatMtkFixes;
         private ListPreference mPrefChargingLed;
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
@@ -1528,7 +1524,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefScreenrecordSize = (ListPreference) findPreference(PREF_KEY_SCREENRECORD_SIZE);
 
             mPrefCatSignalCluster = (PreferenceScreen) findPreference(PREF_CAT_KEY_SIGNAL_CLUSTER);
-            mPrefSignalIconAutohide = (CheckBoxPreference) findPreference(PREF_KEY_SIGNAL_ICON_AUTOHIDE);
             mPrefScHideSimLabels = (CheckBoxPreference) findPreference(PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS);
 
             mPrefLedControl = findPreference(PREF_LED_CONTROL);
@@ -1641,7 +1636,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             // Remove MSIM preferences for non-MSIM devices
             if (!sSystemProperties.hasMsimSupport) {
-                mPrefCatSignalCluster.removePreference(mPrefSignalIconAutohide);
                 mPrefCatSignalCluster.removePreference(mPrefScHideSimLabels);
                 mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
             } else {

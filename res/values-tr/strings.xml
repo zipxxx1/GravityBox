@@ -1438,10 +1438,6 @@
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Veri Kullanımı 2</string>
 
-    <!-- MSIM Signal Cluster: auto-hide signal icons -->
-    <string name="pref_signal_icon_autohide_title">Sinyal ikonlarını oto. gizle</string>
-    <string name="pref_signal_icon_autohide_summary">SIM kart takılmadığında sinyal ikonunu otomatik gizler</string>
-
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Şarj cihazı çıkarıldı sesi</string>
 

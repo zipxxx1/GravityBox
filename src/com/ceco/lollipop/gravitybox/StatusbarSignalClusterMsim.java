@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -34,12 +34,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
-    protected static String[] sMobileViewNames = new String[] { "mMobileStrengthView", "mMobileStrengthView2" };
-    protected static String[] sMobileTypeViewNames = new String[] { "mMobileTypeView", "mMobileTypeView2" };
-
     protected Object mNetworkControllerCallback2;
     protected SignalActivity[] mMobileActivity;
-    protected boolean mSignalIconAutohide;
     protected boolean mHideSimLabels;
 
     public StatusbarSignalClusterMsim(ContainerType containerType, LinearLayout view) {
@@ -49,24 +45,14 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     @Override
     protected void initPreferences() {
         super.initPreferences();
-        mSignalIconAutohide = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_ICON_AUTOHIDE, false);
         mHideSimLabels = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS, false);
     }
 
     @Override
     protected void createHooks() {
         try {
-            XposedHelpers.findAndHookMethod(mView.getClass(), "applySubscription", 
+            XposedHelpers.findAndHookMethod(mView.getClass(), "apply", 
                     int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mView != param.thisObject) return;
-                    if (mSignalIconAutohide) {
-                        int simSlot = (Integer) param.args[0];
-                        ((boolean[])XposedHelpers.getObjectField(mView, "mMobileVisible"))[simSlot] =
-                                PhoneWrapper.isMsimCardInserted(simSlot);
-                    }
-                }
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mView != param.thisObject) return;
@@ -81,7 +67,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                             if (mView != param.thisObject) return;
 
-                            View v = (View) XposedHelpers.getObjectField(mView, "mWifiStrengthView");
+                            View v = (View) XposedHelpers.getObjectField(mView, "mWifiSignalView");
                             if (v != null && v.getParent() instanceof FrameLayout) {
                                 mWifiActivity = new SignalActivity((FrameLayout)v.getParent(), SignalType.WIFI);
                                 if (DEBUG) log("onAttachedToWindow: mWifiActivity created");
@@ -90,14 +76,14 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                             if (mMobileActivity == null) {
                                 mMobileActivity = new SignalActivity[2];
                             }
-                            v = (View) XposedHelpers.getObjectField(mView, "mMobileStrengthView");
+                            v = (View) ((View[])XposedHelpers.getObjectField(mView, "mMobileSignalView"))[0];
                             if (v != null && v.getParent() instanceof FrameLayout) {
                                 mMobileActivity[0] = new SignalActivity((FrameLayout)v.getParent(), SignalType.MOBILE,
                                         Gravity.BOTTOM | Gravity.END);
                                 if (DEBUG) log("onAttachedToWindow: mMobileActivity created");
                             }
 
-                            v = (View) XposedHelpers.getObjectField(mView, "mMobileStrengthView2");
+                            v = (View) ((View[])XposedHelpers.getObjectField(mView, "mMobileSignalView"))[1];
                             if (v != null && v.getParent() instanceof FrameLayout) {
                                 mMobileActivity[1] = new SignalActivity((FrameLayout)v.getParent(), SignalType.MOBILE,
                                         Gravity.BOTTOM | Gravity.END);
@@ -132,14 +118,14 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected void setNetworkController(Object networkController) {
         final ClassLoader classLoader = mView.getClass().getClassLoader();
         final Class<?> networkCtrlCbClass = XposedHelpers.findClass(
-                "com.android.systemui.statusbar.policy.MSimNetworkController.MSimNetworkSignalChangedCallback", 
+                "com.android.systemui.statusbar.policy.NetworkController.NetworkSignalChangedCallback", 
                 classLoader);
         mNetworkControllerCallback = Proxy.newProxyInstance(classLoader, 
-                new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallbackMsim(networkController));
+                new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallbackMsim());
         XposedHelpers.callMethod(networkController, "addNetworkSignalChangedCallback",
                 mNetworkControllerCallback, 0);
         mNetworkControllerCallback2 = Proxy.newProxyInstance(classLoader, 
-                new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallbackMsim(networkController));
+                new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallbackMsim());
         XposedHelpers.callMethod(networkController, "addNetworkSignalChangedCallback",
                 mNetworkControllerCallback2, 1);
         if (DEBUG) log("setNetworkController: callback registered");
@@ -147,7 +133,25 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
 
     @Override
     protected void apply(int simSlot) {
-        super.apply(simSlot);
+        try {
+            boolean doApply = true;
+            if (mFldWifiGroup != null) {
+                doApply = mFldWifiGroup.get(mView) != null;
+            }
+            if (doApply) {
+                if (mIconManager != null && mIconManager.isColoringEnabled()) {
+                    updateWiFiIcon();
+                    if (!XposedHelpers.getBooleanField(mView, "mIsAirplaneModeEnabled")) {
+                        updateMobileIcon(simSlot);
+                    }
+                    if (DEBUG) log("Signal icon colors updated");
+                }
+                updateAirplaneModeIcon();
+            }
+        } catch (Throwable t) {
+            logAndMute("apply", t);
+        }
+
         if (mHideSimLabels) {
             hideSimLabel(simSlot);
         }
@@ -157,8 +161,8 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected void update() {
         if (mView != null) {
             try {
-                XposedHelpers.callMethod(mView, "applySubscription", 0);
-                XposedHelpers.callMethod(mView, "applySubscription", 1);
+                XposedHelpers.callMethod(mView, "apply", 0);
+                XposedHelpers.callMethod(mView, "apply", 1);
             } catch (Throwable t) {
                 logAndMute("invokeApply", t);
             }
@@ -172,14 +176,16 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
             if (DEBUG) log("Mobile visible for slot " + simSlot + ": " + mobileVisible);
             if (mobileVisible && mIconManager != null &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
-                ImageView mobile = (ImageView) XposedHelpers.getObjectField(mView, sMobileViewNames[simSlot]);
+                ImageView mobile = (ImageView) ((ImageView[])XposedHelpers.getObjectField(
+                        mView, "mMobileSignalView"))[simSlot];
                 if (mobile != null) {
-                    int resId = ((int[])XposedHelpers.getObjectField(mView, "mMobileStrengthIconId"))[simSlot];
+                    int resId = ((int[])XposedHelpers.getObjectField(mView, "mMobileSignalIconId"))[simSlot];
                     Drawable d = mIconManager.getMobileIcon(simSlot, resId, true);
                     if (d != null) mobile.setImageDrawable(d);
                 }
                 if (mIconManager.isMobileIconChangeAllowed()) {
-                    ImageView mobileType = (ImageView) XposedHelpers.getObjectField(mView, sMobileTypeViewNames[simSlot]);
+                    ImageView mobileType = (ImageView) ((ImageView[])XposedHelpers.getObjectField(
+                            mView, "mMobileTypeView"))[simSlot];
                     if (mobileType != null) {
                         try {
                             int resId = ((int[])XposedHelpers.getObjectField(mView, "mMobileTypeIconId"))[simSlot];
@@ -199,8 +205,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
 
     private void hideSimLabel(int simSlot) {
         try {
-            String fieldName = simSlot == 0 ? "mMobileSlotLabelView" : "mMobileSlotLabelView2";
-            View simLabel = (View) XposedHelpers.getObjectField(mView, fieldName);
+            View simLabel = (View) ((View[])XposedHelpers.getObjectField(mView, "mMobilePhoneView"))[simSlot];
             if (simLabel != null) {
                 simLabel.setVisibility(View.GONE);
             }
@@ -214,9 +219,9 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         try {
             if (XposedHelpers.getBooleanField(mView, "mWifiVisible") && mIconManager != null &&
                     mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
-                ImageView wifiIcon = (ImageView) XposedHelpers.getObjectField(mView, "mWifiStrengthView");
+                ImageView wifiIcon = (ImageView) XposedHelpers.getObjectField(mView, "mWifiSignalView");
                 if (wifiIcon != null) {
-                    int resId = XposedHelpers.getIntField(mView, "mWifiStrengthIconId");
+                    int resId = XposedHelpers.getIntField(mView, "mWifiSignalIconId");
                     Drawable d = mIconManager.getWifiIcon(resId);
                     if (d != null) wifiIcon.setImageDrawable(d);
                 }
@@ -242,35 +247,36 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     }
 
     protected class NetworkControllerCallbackMsim implements InvocationHandler {
-        private Object mController;
-
-        public NetworkControllerCallbackMsim(Object controller) {
-            mController = controller;
-        }
-
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) {
             String methodName = method.getName();
+
             try {
                 if (methodName.equals("onWifiSignalChanged")) {
+                    if (DEBUG) {
+                        log("WiFi enabled: " + args[0]);
+                        log("WiFi activity in: " + (Boolean)args[4]);
+                        log("WiFi activity out: " + (Boolean)args[5]);
+                    }
                     if (mWifiActivity != null) {
-                        mWifiActivity.update((Boolean)args[0], 
-                                (Boolean)args[3], (Boolean)args[4]);
+                        mWifiActivity.update((Boolean)args[0],
+                                (Boolean)args[4], (Boolean)args[5]);
                     }
                 } else if (methodName.equals("onMobileDataSignalChanged")) {
-                    if (mMobileActivity != null) {
-                        int slot = PhoneWrapper.getMsimPreferredDataSubscription();
-                        boolean in = ((boolean[]) XposedHelpers.getObjectField(mController, "mMSimDataActivityIn"))[slot];
-                        boolean out = ((boolean[]) XposedHelpers.getObjectField(mController, "mMSimDataActivityOut"))[slot];
-                        if (DEBUG) log("NetworkControllerCallbackMsim: onMobileDataSignalChanged " + 
-                                slot + "; enabled:" + args[0] + "; in:" + in + "; out:" + out);
-                        if (mMobileActivity[slot] != null) {
-                            mMobileActivity[slot].update((Boolean)args[0], in, out);
-                        }
+                    if (DEBUG) {
+                        log("Mobile SIM slot: " + args[22]);
+                        log("Mobile data enabled: " + args[0]);
+                        log("Mobile data activity in: " + (Boolean)args[7]);
+                        log("Mobile data activity out: " + (Boolean)args[8]);
+                    }
+                    int simSlot = (int) args[22];
+                    if (mMobileActivity != null && mMobileActivity[simSlot] != null) {
+                        mMobileActivity[simSlot].update((Boolean)args[0], 
+                                (Boolean)args[7], (Boolean)args[8]);
                     }
                 }
             } catch (Throwable t) {
-                logAndMute("NetworkControllerCallbackMsim", t);
+                logAndMute("NetworkControllerCallback", t);
             }
 
             return null;

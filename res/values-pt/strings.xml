@@ -1462,10 +1462,6 @@
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Utilização de dados 2</string>
 
-    <!-- MSIM Signal Cluster: auto-hide signal icons -->
-    <string name="pref_signal_icon_autohide_title">Ocultar barras de sinal</string>
-    <string name="pref_signal_icon_autohide_summary">Ocultar automaticamente as barras de sinal do cartão SIM quando este não está inserido (necessário reiniciar)</string>
-
     <!-- Heads Up: Transparency level -->
     <string name="pref_heads_up_alpha_title">Nível de transparência</string>
 
