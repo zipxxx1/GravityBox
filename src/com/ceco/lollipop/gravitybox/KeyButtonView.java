@@ -24,7 +24,6 @@ import android.content.Context;
 import android.hardware.input.InputManager;
 import android.media.AudioManager;
 import android.os.SystemClock;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.InputDevice;
@@ -62,11 +61,16 @@ public class KeyButtonView extends ImageView {
         public void run() {
             if (isPressed()) {
                 if (mCode != 0) {
-                    sendEvent(KeyEvent.ACTION_DOWN, KeyEvent.FLAG_LONG_PRESS);
-                    sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
                     if (mCode == KeyEvent.KEYCODE_DPAD_LEFT || mCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                        sendEvent(KeyEvent.ACTION_UP, KeyEvent.FLAG_SOFT_KEYBOARD |
+                                KeyEvent.FLAG_KEEP_TOUCH_MODE, System.currentTimeMillis(), false);
+                        sendEvent(KeyEvent.ACTION_DOWN, KeyEvent.FLAG_SOFT_KEYBOARD |
+                                KeyEvent.FLAG_KEEP_TOUCH_MODE, System.currentTimeMillis(), false);
                         removeCallbacks(mCheckLongPress);
                         postDelayed(mCheckLongPress, ViewConfiguration.getKeyRepeatDelay());
+                    } else {
+                        sendEvent(KeyEvent.ACTION_DOWN, KeyEvent.FLAG_LONG_PRESS);
+                        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_LONG_CLICKED);
                     }
                 } else {
                     mLongPressConsumed = performLongClick();
@@ -139,7 +143,10 @@ public class KeyButtonView extends ImageView {
                 //Log.d("KeyButtonView", "press");
                 mDownTime = SystemClock.uptimeMillis();
                 setPressed(true);
-                if (mCode != 0) {
+                if (mCode == KeyEvent.KEYCODE_DPAD_LEFT || mCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                    sendEvent(KeyEvent.ACTION_DOWN, KeyEvent.FLAG_SOFT_KEYBOARD
+                            | KeyEvent.FLAG_KEEP_TOUCH_MODE, mDownTime, false);
+                } else if (mCode != 0) {
                     sendEvent(KeyEvent.ACTION_DOWN, 0, mDownTime);
                 } else {
                     // Provide the same haptic feedback that the system offers for virtual keys.
@@ -203,12 +210,18 @@ public class KeyButtonView extends ImageView {
         sendEvent(action, flags, SystemClock.uptimeMillis());
     }
 
-    void sendEvent(int action, int flags, long when) {
+    public void sendEvent(int action, int flags, long when) {
+        sendEvent(action, flags, when, true);
+    }
+
+    void sendEvent(int action, int flags, long when, boolean applyDefaultFlags) {
         try {
             final int repeatCount = (flags & KeyEvent.FLAG_LONG_PRESS) != 0 ? 1 : 0;
+            if (applyDefaultFlags) {
+                flags |= KeyEvent.FLAG_FROM_SYSTEM | KeyEvent.FLAG_VIRTUAL_HARD_KEY;
+            }
             final KeyEvent ev = new KeyEvent(mDownTime, when, action, mCode, repeatCount,
-                    0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0,
-                    flags | KeyEvent.FLAG_FROM_SYSTEM | KeyEvent.FLAG_VIRTUAL_HARD_KEY,
+                    0, KeyCharacterMap.VIRTUAL_KEYBOARD, 0, flags,
                     InputDevice.SOURCE_KEYBOARD);
             final Object inputManager = XposedHelpers.callStaticMethod(InputManager.class, "getInstance");
             XposedHelpers.callMethod(inputManager, "injectInputEvent", ev, 0);
