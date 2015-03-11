@@ -96,18 +96,14 @@ public class PhoneWrapper {
     };
 
     private static Class<?> getPhoneFactoryClass() {
-        if (hasMsimSupport()) {
-            return XposedHelpers.findClass("com.codeaurora.telephony.msim.MSimPhoneFactory", null);
-        } else {
-            return XposedHelpers.findClass("com.android.internal.telephony.PhoneFactory", null);
-        }
+        return XposedHelpers.findClass("com.android.internal.telephony.PhoneFactory", null);
     }
 
     private static String getMakePhoneMethodName() {
         if (Utils.hasGeminiSupport()) {
             return "makeDefaultPhones";
         } else if (hasMsimSupport()) {
-            return "makeMultiSimDefaultPhone";
+            return "makeDefaultPhones";
         } else {
             return "makeDefaultPhone";
         }
@@ -220,11 +216,12 @@ public class PhoneWrapper {
 
         try {
             Object mtm = XposedHelpers.callStaticMethod(
-                    XposedHelpers.findClass("android.telephony.MSimTelephonyManager", null),
+                    XposedHelpers.findClass("android.telephony.TelephonyManager", null),
                         "getDefault");
             mHasMsimSupport = (Boolean) XposedHelpers.callMethod(mtm, "isMultiSimEnabled") &&
                     (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount") > 1;
         } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
             mHasMsimSupport = false;
         }
 
