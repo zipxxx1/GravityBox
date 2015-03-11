@@ -10,13 +10,17 @@ import android.view.View;
 
 public class CellularTile extends AospTile {
     public static final String AOSP_KEY = "cell";
+    public static final String MSIM_KEY1 = "cell1";
+    public static final String MSIM_KEY2 = "cell2";
 
+    private String mAospKey;
     private Unhook mCreateTileViewHook;
 
-    protected CellularTile(Object host, Object tile, XSharedPreferences prefs,
+    protected CellularTile(Object host, String aospKey, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, "aosp_tile_cell", tile, prefs, eventDistributor);
+        super(host, key, tile, prefs, eventDistributor);
 
+        mAospKey = aospKey;
         createHooks();
     }
 
@@ -27,7 +31,7 @@ public class CellularTile extends AospTile {
 
     @Override
     public String getAospKey() {
-        return AOSP_KEY;
+        return mAospKey;
     }
 
     @Override
@@ -52,7 +56,10 @@ public class CellularTile extends AospTile {
                     "createTileView", Context.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    onCreateTileView((View)param.getResult());
+                    if (mKey.equals(XposedHelpers.getAdditionalInstanceField(
+                            param.thisObject, BaseTile.TILE_KEY_NAME))) {
+                        onCreateTileView((View)param.getResult());
+                    }
                 }
             });
         } catch (Throwable t) {

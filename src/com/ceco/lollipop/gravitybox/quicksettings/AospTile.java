@@ -23,7 +23,11 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
         else if (CastTile.AOSP_KEY.equals(aospKey))
             return new CastTile(host, tile, prefs, eventDistributor);
         else if (CellularTile.AOSP_KEY.equals(aospKey))
-            return new CellularTile(host, tile, prefs, eventDistributor);
+            return new CellularTile(host, aospKey, "aosp_tile_cell", tile, prefs, eventDistributor);
+        else if (CellularTile.MSIM_KEY1.equals(aospKey))
+            return new CellularTile(host, aospKey, "aosp_tile_cell", tile, prefs, eventDistributor);
+        else if (CellularTile.MSIM_KEY2.equals(aospKey))
+            return new CellularTile(host, aospKey, "aosp_tile_2cell", tile, prefs, eventDistributor);
         else if (ColorInversionTile.AOSP_KEY.equals(aospKey))
             return new ColorInversionTile(host, tile, prefs, eventDistributor);
         else if (FlashlightTile.AOSP_KEY.equals(aospKey))
@@ -79,7 +83,10 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
                     BaseTile.CLASS_TILE_STATE, Object.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    handleUpdateState(param.args[0], param.args[1]);
+                    if (mKey.equals(XposedHelpers.getAdditionalInstanceField(
+                            param.thisObject, BaseTile.TILE_KEY_NAME))) {
+                        handleUpdateState(param.args[0], param.args[1]);
+                    }
                 }
             });
 
@@ -87,7 +94,10 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
                     getClassName(), cl, "handleClick", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    handleClick();
+                    if (mKey.equals(XposedHelpers.getAdditionalInstanceField(
+                            param.thisObject, BaseTile.TILE_KEY_NAME))) {
+                        handleClick();
+                    }
                 }
             });
         } catch (Throwable t) {

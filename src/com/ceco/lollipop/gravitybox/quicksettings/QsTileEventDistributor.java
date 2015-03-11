@@ -95,6 +95,7 @@ public class QsTileEventDistributor {
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_2);
+        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
     }
 

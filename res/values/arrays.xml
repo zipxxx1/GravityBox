@@ -137,7 +137,7 @@
         <item>aosp_tile_bluetooth</item>
         <item>aosp_tile_inversion</item>
         <item>aosp_tile_cell</item>
-        <item>aosp_tile_cell2</item>
+        <item>aosp_tile_2cell</item>
         <item>aosp_tile_airplane_mode</item>
         <item>aosp_tile_rotation</item>
         <item>aosp_tile_torch</item>

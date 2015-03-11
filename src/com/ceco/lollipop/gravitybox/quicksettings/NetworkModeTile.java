@@ -37,7 +37,6 @@ public class NetworkModeTile extends QsTile {
     private boolean mUseCdma;
     private boolean mIsMsim;
     private int mSimSlot;
-    //private TextView mSimSlotTextView;
     private int m2G3GMode;
     private SettingsObserver mObserver;
 
@@ -108,7 +107,6 @@ public class NetworkModeTile extends QsTile {
                 log(getKey() + ": Invalid value for SIM Slot preference: " + nfe.getMessage());
             }
             if (DEBUG) log(getKey() + ": mSimSlot = " + mSimSlot);
-            //mSimSlotTextView.setText(String.valueOf(mSimSlot+1));
         }
     }
 
@@ -137,7 +135,7 @@ public class NetworkModeTile extends QsTile {
             mSimSlot = intent.getIntExtra(GravityBoxSettings.EXTRA_SIM_SLOT, 0);
             if (DEBUG) log(getKey() + ": received ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED broadcast: " +
                                 "mSimSlot = " + mSimSlot);
-            //mSimSlotTextView.setText(String.valueOf(mSimSlot+1));
+            refreshState();
         }
     }
 
@@ -218,6 +216,11 @@ public class NetworkModeTile extends QsTile {
                         "mNetworkType = " + mNetworkType);
             }
             break;
+        }
+
+        if (mIsMsim) {
+            mState.label = mGbContext.getString(R.string.qs_tile_network_mode) + " (" +
+                    String.valueOf(mSimSlot+1) + ")";
         }
 
         super.handleUpdateState(state, arg);
