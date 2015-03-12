@@ -142,7 +142,7 @@ public class ModStatusBar {
     private static View mIconMergerView;
     private static String mClockLongpressLink;
     private static XSharedPreferences mPrefs;
-    private static StatusbarDownloadProgressView mDownloadProgressView;
+    private static ProgressBarController mProgressBarCtrl;
     private static TickerPolicy mTickerPolicy;
     private static int mStatusBarState;
 
@@ -314,12 +314,6 @@ public class ModStatusBar {
             ((ViewGroup) XposedHelpers.getObjectField(
                     mPhoneStatusBar, "mKeyguardStatusBar")).addView(mLayoutCenterKg);
             if (DEBUG) log("mLayoutCenterKg injected");
-
-            // inject download progress view
-            mDownloadProgressView = new StatusbarDownloadProgressView(mContext, mPrefs);
-            mStatusBarView.addView(mDownloadProgressView);
-            mBroadcastSubReceivers.add(mDownloadProgressView);
-            mStateChangeListeners.add(mDownloadProgressView);
 
             mIconArea = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mSystemIconArea");
             mSbContents = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStatusBarContents");
@@ -500,8 +494,31 @@ public class ModStatusBar {
             if (container != null) {
                 BatteryBarView bbView = new BatteryBarView(containerType, container, mPrefs);
                 mBroadcastSubReceivers.add(bbView);
-                mDownloadProgressView.registerListener(bbView);
+                mProgressBarCtrl.registerListener(bbView);
                 mStateChangeListeners.add(bbView);
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void prepareProgressBar(ContainerType containerType) {
+        try {
+            ViewGroup container = null;
+            switch (containerType) {
+                case STATUSBAR:
+                    container = (ViewGroup) mStatusBarView;
+                    break;
+                case KEYGUARD:
+                    container = (ViewGroup) XposedHelpers.getObjectField(
+                            mPhoneStatusBar, "mKeyguardStatusBar");
+                    break;
+                default: break;
+            }
+            if (container != null) {
+                ProgressBarView pbView = new ProgressBarView(containerType, container, mPrefs);
+                mProgressBarCtrl.registerListener(pbView);
+                mStateChangeListeners.add(pbView);
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -571,6 +588,8 @@ public class ModStatusBar {
                     mAnimPushUpOut = res.getIdentifier("push_up_out", "anim", "android");
                     mAnimPushDownIn = res.getIdentifier("push_down_in", "anim", "android");
                     mAnimFadeIn = res.getIdentifier("fade_in", "anim", "android");
+                    mProgressBarCtrl = new ProgressBarController(mPrefs);
+                    mBroadcastSubReceivers.add(mProgressBarCtrl);
 
                     prepareLayout();
                     prepareHeaderTimeView();
@@ -586,6 +605,8 @@ public class ModStatusBar {
                     prepareQuietHoursIcon(ContainerType.KEYGUARD);
                     prepareBatteryBar(ContainerType.STATUSBAR);
                     prepareBatteryBar(ContainerType.KEYGUARD);
+                    prepareProgressBar(ContainerType.STATUSBAR);
+                    prepareProgressBar(ContainerType.KEYGUARD);
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED);
@@ -735,8 +756,8 @@ public class ModStatusBar {
                 }
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mDownloadProgressView != null) {
-                        mDownloadProgressView.onNotificationAdded((StatusBarNotification)param.args[0]);
+                    if (mProgressBarCtrl != null) {
+                        mProgressBarCtrl.onNotificationAdded((StatusBarNotification)param.args[0]);
                     }
                 }
             });
@@ -745,8 +766,8 @@ public class ModStatusBar {
                     StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mDownloadProgressView != null) {
-                        mDownloadProgressView.onNotificationUpdated((StatusBarNotification)param.args[0]);
+                    if (mProgressBarCtrl != null) {
+                        mProgressBarCtrl.onNotificationUpdated((StatusBarNotification)param.args[0]);
                     }
                 }
             });
@@ -755,8 +776,8 @@ public class ModStatusBar {
                     String.class, RankingMap.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mDownloadProgressView != null) {
-                        mDownloadProgressView.onNotificationRemoved((StatusBarNotification)param.getResult());
+                    if (mProgressBarCtrl != null) {
+                        mProgressBarCtrl.onNotificationRemoved((StatusBarNotification)param.getResult());
                     }
                 }
             });
@@ -1064,8 +1085,8 @@ public class ModStatusBar {
             if (SysUiManagers.IconManager != null) {
                 SysUiManagers.IconManager.unregisterListener(mTrafficMeter);
             }
-            if (mDownloadProgressView != null) {
-                mDownloadProgressView.unregisterListener(mTrafficMeter);
+            if (mProgressBarCtrl != null) {
+                mProgressBarCtrl.unregisterListener(mTrafficMeter);
             }
             mTrafficMeter = null;
         }
@@ -1077,8 +1098,8 @@ public class ModStatusBar {
             if (SysUiManagers.IconManager != null) {
                 SysUiManagers.IconManager.registerListener(mTrafficMeter);
             }
-            if (mDownloadProgressView != null) {
-                mDownloadProgressView.registerListener(mTrafficMeter);
+            if (mProgressBarCtrl != null) {
+                mProgressBarCtrl.registerListener(mTrafficMeter);
             }
             mBroadcastSubReceivers.add(mTrafficMeter);
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,38 +20,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
-import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarStateChangedListener;
-import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
-import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
-import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
-import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.IconManagerListener;
-
-import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.service.notification.StatusBarNotification;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.View;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.FrameLayout;
 import android.widget.RemoteViews;
+import de.robv.android.xposed.XSharedPreferences;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 
-public class StatusbarDownloadProgressView extends View implements 
-                                            IconManagerListener, 
-                                            BroadcastSubReceiver,
-                                            StatusBarStateChangedListener {
-    private static final String TAG = "GB:StatusbarDownloadProgressView";
+public class ProgressBarController implements BroadcastSubReceiver {
+    private static final String TAG = "GB:ProgressBarController";
     private static final boolean DEBUG = false;
+
+    private static void log(String message) {
+        XposedBridge.log(TAG + ": " + message);
+    }
 
     public static final List<String> SUPPORTED_PACKAGES = new ArrayList<String>(Arrays.asList(
             "com.android.providers.downloads",
@@ -59,14 +45,15 @@ public class StatusbarDownloadProgressView extends View implements
             "com.mediatek.bluetooth"
     ));
 
-    private static final int ANIM_DURATION = 400;
-
     public interface ProgressStateListener {
         void onProgressTrackingStarted(boolean isBluetooth, Mode mode);
+        void onProgressUpdated(ProgressInfo pInfo);
         void onProgressTrackingStopped();
+        void onModeChanged(Mode mode);
+        void onPreferencesChanged(Intent intent);
     }
 
-    class ProgressInfo {
+    public class ProgressInfo {
         boolean hasProgressBar;
         int progress;
         int max;
@@ -83,70 +70,14 @@ public class StatusbarDownloadProgressView extends View implements
     }
 
     public enum Mode { OFF, TOP, BOTTOM };
-    private Mode mMode;
+
     private String mId;
     private List<ProgressStateListener> mListeners;
-    private boolean mAnimated;
-    private ObjectAnimator mAnimator;
-    private boolean mCentered;
-    private int mHeightPx;
-    private int mEdgeMarginPx;
-    private int mStatusBarState;
+    private Mode mMode;
 
-    private static void log(String message) {
-        XposedBridge.log(TAG + ": " + message);
-    }
-
-    public StatusbarDownloadProgressView(Context context, XSharedPreferences prefs) {
-        super(context);
-
-        mMode = Mode.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"));
-        mAnimated = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED, true);
-        mCentered = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED, false);
-        mHeightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS, 1),
-                context.getResources().getDisplayMetrics());
-        mEdgeMarginPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                prefs.getInt(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN, 0),
-                context.getResources().getDisplayMetrics());
-
+    public ProgressBarController(XSharedPreferences prefs) {
         mListeners = new ArrayList<ProgressStateListener>();
-
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT, mHeightPx);
-        setLayoutParams(lp);
-        setScaleX(0f);
-        setBackgroundColor(Color.WHITE);
-        setVisibility(View.GONE);
-        updatePosition();
-
-        mAnimator = new ObjectAnimator();
-        mAnimator.setTarget(this);
-        mAnimator.setInterpolator(new DecelerateInterpolator());
-        mAnimator.setDuration(ANIM_DURATION);
-        mAnimator.setRepeatCount(0);
-    }
-
-    @Override
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        if (SysUiManagers.IconManager != null) {
-            SysUiManagers.IconManager.registerListener(this);
-        }
-    }
-
-    @Override
-    public void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        if (SysUiManagers.IconManager != null) {
-            SysUiManagers.IconManager.unregisterListener(this);
-        }
-    }
-
-    @Override
-    public void onSizeChanged(int w, int h, int oldw, int oldh) {
-        if (DEBUG) log("w=" + w + "; h=" + h);
-        setPivotX(mCentered ? w/2f : 0f);
+        mMode = Mode.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS, "OFF"));
     }
 
     public void registerListener(ProgressStateListener listener) {
@@ -175,6 +106,14 @@ public class StatusbarDownloadProgressView extends View implements
         }
     }
 
+    private void notifyProgressUpdated(ProgressInfo pInfo) {
+        synchronized (mListeners) {
+            for (ProgressStateListener l : mListeners) {
+                l.onProgressUpdated(pInfo);
+            }
+        }
+    }
+
     private void notifyProgressStopped() {
         synchronized (mListeners) {
             for (ProgressStateListener l : mListeners) {
@@ -183,9 +122,20 @@ public class StatusbarDownloadProgressView extends View implements
         }
     }
 
-    private void stopTracking() {
-        mId = null;
-        updateProgress(null);
+    private void notifyModeChanged() {
+        synchronized (mListeners) {
+            for (ProgressStateListener l : mListeners) {
+                l.onModeChanged(mMode);
+            }
+        }
+    }
+
+    private void notifyPreferencesChanged(Intent intent) {
+        synchronized (mListeners) {
+            for (ProgressStateListener l : mListeners) {
+                l.onPreferencesChanged(intent);
+            }
+        }
     }
 
     public void onNotificationAdded(StatusBarNotification statusBarNotif) {
@@ -204,9 +154,8 @@ public class StatusbarDownloadProgressView extends View implements
         mId = getIdentifier(statusBarNotif);
         if (mId != null) {
             if (DEBUG) log("starting progress for " + mId);
+            startTracking();
             updateProgress(statusBarNotif);
-            notifyProgressStarted(mId.startsWith(SUPPORTED_PACKAGES.get(1)) ||
-                    mId.startsWith(SUPPORTED_PACKAGES.get(2)));
         }
     }
 
@@ -271,38 +220,22 @@ public class StatusbarDownloadProgressView extends View implements
         return null;
     }
 
+    private void startTracking() {
+        notifyProgressStarted(mId.startsWith(SUPPORTED_PACKAGES.get(1)) ||
+                mId.startsWith(SUPPORTED_PACKAGES.get(2)));
+    }
+
     private void updateProgress(StatusBarNotification statusBarNotif) {
         if (statusBarNotif != null) {
-            float newScaleX = getProgressInfo(statusBarNotif.getNotification()).getFraction();
-            if (DEBUG) log("updateProgress: newScaleX=" + newScaleX);
-            setVisibility(View.VISIBLE);
-            if (mAnimated) {
-                animateScaleXTo(newScaleX);
-            } else {
-                setScaleX(newScaleX);
-            }
-        } else {
-            if (mAnimator.isStarted()) {
-                mAnimator.end();
-            }
-            postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    setScaleX(0f);
-                    setVisibility(View.GONE);
-                    notifyProgressStopped();
-                }
-            }, 500);
+            ProgressInfo pInfo = getProgressInfo(statusBarNotif.getNotification());
+            if (DEBUG) log("updateProgress: newScaleX=" + pInfo.getFraction());
+            notifyProgressUpdated(pInfo);
         }
     }
 
-    private void animateScaleXTo(float newScaleX) {
-        if (mAnimator.isStarted()) {
-            mAnimator.cancel();
-        }
-        mAnimator.setValues(PropertyValuesHolder.ofFloat("scaleX", getScaleX(), newScaleX));
-        mAnimator.start();
-        if (DEBUG) log("Animating to new scaleX: " + newScaleX);
+    private void stopTracking() {
+        mId = null;
+        notifyProgressStopped();
     }
 
     private ProgressInfo getProgressInfo(Notification n) {
@@ -354,68 +287,18 @@ public class StatusbarDownloadProgressView extends View implements
         return pInfo;
     }
 
-    private void updatePosition() {
-        if (mMode == Mode.OFF) return;
-        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) getLayoutParams();
-        lp.height = mHeightPx;
-        lp.gravity = (mStatusBarState != StatusBarState.SHADE ||  mMode == Mode.TOP) ?
-                (Gravity.TOP | Gravity.START) : (Gravity.BOTTOM | Gravity.START);
-        lp.setMargins(0, lp.gravity == Gravity.TOP ? mEdgeMarginPx : 0,
-                      0, lp.gravity == Gravity.BOTTOM ? mEdgeMarginPx : 0);
-        setLayoutParams(lp);
-    }
-
-    @Override
-    public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
-        if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
-            setBackgroundColor(colorInfo.coloringEnabled ?
-                    colorInfo.iconColor[0] : Color.WHITE);
-        }
-        if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
-            setAlpha(colorInfo.alphaSignalCluster);
-        }
-    }
-
-    @Override
-    public void onStatusBarStateChanged(int oldState, int newState) {
-        if (mStatusBarState != newState) {
-            mStatusBarState = newState;
-            updatePosition();
-        }
-    }
-
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED)) {
                 mMode = Mode.valueOf(intent.getStringExtra(
                         GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ENABLED));
+                notifyModeChanged();
                 if (mMode == Mode.OFF) {
                     stopTracking();
-                } else {
-                    updatePosition();
                 }
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED)) {
-                mAnimated = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED, true);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED)) {
-                mCentered = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_CENTERED, false);
-                setPivotX(mCentered ? getWidth()/2f : 0f);
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS)) {
-                mHeightPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                        intent.getIntExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS, 1),
-                        getResources().getDisplayMetrics());
-                updatePosition();
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN)) {
-                mEdgeMarginPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                        intent.getIntExtra(GravityBoxSettings.EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN, 0),
-                        getResources().getDisplayMetrics());
-                updatePosition();
+            } else {
+                notifyPreferencesChanged(intent);
             }
         }
     }

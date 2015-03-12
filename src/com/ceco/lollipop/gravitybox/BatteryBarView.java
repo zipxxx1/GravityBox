@@ -19,7 +19,8 @@ package com.ceco.lollipop.gravitybox;
 import com.ceco.lollipop.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarStateChangedListener;
-import com.ceco.lollipop.gravitybox.StatusbarDownloadProgressView.Mode;
+import com.ceco.lollipop.gravitybox.ProgressBarController.Mode;
+import com.ceco.lollipop.gravitybox.ProgressBarController.ProgressInfo;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryData;
@@ -47,7 +48,7 @@ import android.widget.RelativeLayout;
 public class BatteryBarView extends View implements IconManagerListener, 
                                                     BroadcastSubReceiver,
                                                     BatteryStatusListener,
-                                                    StatusbarDownloadProgressView.ProgressStateListener,
+                                                    ProgressBarController.ProgressStateListener,
                                                     StatusBarStateChangedListener {
     private static final String TAG = "GB:BatteryBarView";
     private static final boolean DEBUG = false;
@@ -258,12 +259,7 @@ public class BatteryBarView extends View implements IconManagerListener,
 
     @Override
     public void onProgressTrackingStarted(boolean isBluetooth, Mode mode) {
-        mHiddenByProgressBar = 
-                ((mode == Mode.TOP && mPosition == Position.TOP) ||
-                 (mode == Mode.BOTTOM && mPosition == Position.BOTTOM));
-        if (mHiddenByProgressBar) {
-            update();
-        }
+        onModeChanged(mode);
     }
 
     @Override
@@ -272,6 +268,14 @@ public class BatteryBarView extends View implements IconManagerListener,
             mHiddenByProgressBar = false;
             update();
         }
+    }
+
+    @Override
+    public void onModeChanged(Mode mode) {
+        mHiddenByProgressBar = 
+                ((mode == Mode.TOP && mPosition == Position.TOP) ||
+                 (mode == Mode.BOTTOM && mPosition == Position.BOTTOM));
+        update();
     }
 
     @Override
@@ -342,4 +346,10 @@ public class BatteryBarView extends View implements IconManagerListener,
             }
         }
     }
+
+    @Override
+    public void onProgressUpdated(ProgressInfo pInfo) { }
+
+    @Override
+    public void onPreferencesChanged(Intent intent) { }
 }

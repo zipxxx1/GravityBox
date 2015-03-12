@@ -17,8 +17,8 @@ package com.ceco.lollipop.gravitybox.ledcontrol;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
+import com.ceco.lollipop.gravitybox.ProgressBarController;
 import com.ceco.lollipop.gravitybox.R;
-import com.ceco.lollipop.gravitybox.StatusbarDownloadProgressView;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
@@ -176,7 +176,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             mHeadsUpTimeoutPref.setValue(ledSettings.getHeadsUpTimeout());
             mHeadsUpTimeoutPref.setEnabled(ledSettings.getHeadsUpMode() != HeadsUpMode.OFF);
         }
-        if (StatusbarDownloadProgressView.SUPPORTED_PACKAGES.contains(ledSettings.getPackageName())) {
+        if (ProgressBarController.SUPPORTED_PACKAGES.contains(ledSettings.getPackageName())) {
             mOtherCat.removePreference(mProgressTrackingPref);
         } else {
             mProgressTrackingPref.setChecked(ledSettings.getProgressTracking());

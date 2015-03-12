@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package com.ceco.lollipop.gravitybox;
 
+import com.ceco.lollipop.gravitybox.ProgressBarController.Mode;
+import com.ceco.lollipop.gravitybox.ProgressBarController.ProgressInfo;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.IconManagerListener;
@@ -39,7 +41,7 @@ import de.robv.android.xposed.XposedBridge;
 
 public abstract class TrafficMeterAbstract extends TextView 
                         implements BroadcastSubReceiver, IconManagerListener,
-                                   StatusbarDownloadProgressView.ProgressStateListener {
+                                   ProgressBarController.ProgressStateListener {
     protected static final String PACKAGE_NAME = "com.android.systemui";
     protected static final String TAG = "GB:NetworkTraffic";
     protected static final boolean DEBUG = false;
@@ -281,7 +283,7 @@ public abstract class TrafficMeterAbstract extends TextView
 
     @Override
     public void onProgressTrackingStarted(boolean isBluetooth,
-            StatusbarDownloadProgressView.Mode mode) {
+            ProgressBarController.Mode mode) {
         mIsTrackingProgress = !isBluetooth;
         if (mDisplayMode == DisplayMode.PROGRESS_TRACKING) {
             updateState();
@@ -295,6 +297,15 @@ public abstract class TrafficMeterAbstract extends TextView
             updateState();
         }
     }
+
+    @Override
+    public void onProgressUpdated(ProgressInfo pInfo) { }
+
+    @Override
+    public void onModeChanged(Mode mode) { }
+
+    @Override
+    public void onPreferencesChanged(Intent intent) { }
 
     protected abstract void onInitialize(XSharedPreferences prefs);
     protected abstract void onPreferenceChanged(Intent intent);
