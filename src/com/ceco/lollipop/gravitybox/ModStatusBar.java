@@ -321,13 +321,6 @@ public class ModStatusBar {
             mBroadcastSubReceivers.add(mDownloadProgressView);
             mStateChangeListeners.add(mDownloadProgressView);
 
-            // inject battery bar view
-            BatteryBarView bbView = new BatteryBarView(mContext, mPrefs);
-            mStatusBarView.addView(bbView);
-            mBroadcastSubReceivers.add(bbView);
-            mDownloadProgressView.registerListener(bbView);
-            mStateChangeListeners.add(bbView);
-
             mIconArea = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mSystemIconArea");
             mSbContents = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStatusBarContents");
 
@@ -491,6 +484,30 @@ public class ModStatusBar {
         }
     }
 
+    private static void prepareBatteryBar(ContainerType containerType) {
+        try {
+            ViewGroup container = null;
+            switch (containerType) {
+                case STATUSBAR:
+                    container = (ViewGroup) mStatusBarView;
+                    break;
+                case KEYGUARD:
+                    container = (ViewGroup) XposedHelpers.getObjectField(
+                            mPhoneStatusBar, "mKeyguardStatusBar");
+                    break;
+                default: break;
+            }
+            if (container != null) {
+                BatteryBarView bbView = new BatteryBarView(containerType, container, mPrefs);
+                mBroadcastSubReceivers.add(bbView);
+                mDownloadProgressView.registerListener(bbView);
+                mStateChangeListeners.add(bbView);
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
@@ -567,6 +584,8 @@ public class ModStatusBar {
                     prepareBatteryStyle(ContainerType.KEYGUARD);
                     prepareQuietHoursIcon(ContainerType.STATUSBAR);
                     prepareQuietHoursIcon(ContainerType.KEYGUARD);
+                    prepareBatteryBar(ContainerType.STATUSBAR);
+                    prepareBatteryBar(ContainerType.KEYGUARD);
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED);

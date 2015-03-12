@@ -16,6 +16,7 @@
 
 package com.ceco.lollipop.gravitybox;
 
+import com.ceco.lollipop.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarStateChangedListener;
 import com.ceco.lollipop.gravitybox.StatusbarDownloadProgressView.Mode;
@@ -35,10 +36,13 @@ import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 public class BatteryBarView extends View implements IconManagerListener, 
                                                     BroadcastSubReceiver,
@@ -68,14 +72,16 @@ public class BatteryBarView extends View implements IconManagerListener,
     private boolean mHiddenByProgressBar;
     private boolean mCentered;
     private int mStatusBarState;
-    private Mode mTrackingProgressMode;
+    private ContainerType mContainerType;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public BatteryBarView(Context context, XSharedPreferences prefs) {
-        super(context);
+    public BatteryBarView(ContainerType containerType, ViewGroup container, XSharedPreferences prefs) {
+        super(container.getContext());
+
+        mContainerType = containerType;
 
         mEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_BAR_SHOW, false);
         mPosition = Position.valueOf(prefs.getString(
@@ -94,9 +100,8 @@ public class BatteryBarView extends View implements IconManagerListener,
         mColorCharging = prefs.getInt(GravityBoxSettings.PREF_KEY_BATTERY_BAR_COLOR_CHARGING, Color.GREEN);
         mCentered = prefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_BAR_CENTERED, false);
 
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT, mHeightPx);
-        setLayoutParams(lp);
+        container.addView(this);
+
         setScaleX(0f);
         setVisibility(View.GONE);
         updatePosition();
@@ -152,7 +157,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     }
 
     private void update() {
-        if (mEnabled && !mHiddenByProgressBar) {
+        if (mEnabled && !mHiddenByProgressBar && isValidStatusBarState()) {
             setVisibility(View.VISIBLE);
             if (mDynaColor) {
                 int cappedLevel = Math.min(Math.max(mLevel, 15), 90);
@@ -212,20 +217,36 @@ public class BatteryBarView extends View implements IconManagerListener,
     }
 
     private void updatePosition() {
-        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) getLayoutParams();
-        lp.height = mHeightPx;
-        lp.gravity = (mStatusBarState != StatusBarState.SHADE || mPosition == Position.TOP) ? 
+        MarginLayoutParams lp = null;
+        if (mContainerType == ContainerType.STATUSBAR) {
+            lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                    mHeightPx);
+            ((FrameLayout.LayoutParams)lp).gravity = mPosition == Position.TOP ? 
                 Gravity.TOP : Gravity.BOTTOM;
-        lp.setMargins(0, lp.gravity == Gravity.TOP ? mMarginPx : 0,
-                        0, lp.gravity == Gravity.BOTTOM ? mMarginPx : 0);
-        setLayoutParams(lp);
+        } else if (mContainerType == ContainerType.KEYGUARD) {
+            lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                    mHeightPx);
+            if (mPosition == Position.TOP) {
+                ((RelativeLayout.LayoutParams)lp).addRule(RelativeLayout.ALIGN_PARENT_TOP,
+                        RelativeLayout.TRUE);
+            } else {
+                ((RelativeLayout.LayoutParams)lp).addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,
+                        RelativeLayout.TRUE);
+            }
+        }
+
+        if (lp != null) {
+            lp.setMargins(0, mPosition == Position.TOP ? mMarginPx : 0,
+                        0, mPosition == Position.BOTTOM ? mMarginPx : 0);
+            setLayoutParams(lp);
+        }
     }
 
-    private boolean checkIfHiddenByProgressBar() {
-        return mTrackingProgressMode != Mode.OFF &&
-                (mStatusBarState != StatusBarState.SHADE ||
-                (mTrackingProgressMode == Mode.TOP && mPosition == Position.TOP) ||
-                (mTrackingProgressMode == Mode.BOTTOM && mPosition == Position.BOTTOM));
+    private boolean isValidStatusBarState() {
+        return ((mContainerType == ContainerType.STATUSBAR &&
+                    mStatusBarState == StatusBarState.SHADE) ||
+                (mContainerType == ContainerType.KEYGUARD &&
+                    mStatusBarState == StatusBarState.KEYGUARD));
     }
 
     @Override
@@ -237,8 +258,9 @@ public class BatteryBarView extends View implements IconManagerListener,
 
     @Override
     public void onProgressTrackingStarted(boolean isBluetooth, Mode mode) {
-        mTrackingProgressMode = mode;
-        mHiddenByProgressBar = checkIfHiddenByProgressBar();
+        mHiddenByProgressBar = 
+                ((mode == Mode.TOP && mPosition == Position.TOP) ||
+                 (mode == Mode.BOTTOM && mPosition == Position.BOTTOM));
         if (mHiddenByProgressBar) {
             update();
         }
@@ -246,7 +268,6 @@ public class BatteryBarView extends View implements IconManagerListener,
 
     @Override
     public void onProgressTrackingStopped() {
-        mTrackingProgressMode = Mode.OFF;
         if (mHiddenByProgressBar) {
             mHiddenByProgressBar = false;
             update();
@@ -257,12 +278,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     public void onStatusBarStateChanged(int oldState, int newState) {
         if (mStatusBarState != newState) {
             mStatusBarState = newState;
-            updatePosition();
-            final boolean wasHidden = mHiddenByProgressBar;
-            mHiddenByProgressBar = checkIfHiddenByProgressBar();
-            if (wasHidden != mHiddenByProgressBar) {
-                update();
-            }
+            update();
         }
     }
 
