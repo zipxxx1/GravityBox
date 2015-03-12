@@ -713,7 +713,7 @@
 
     <!-- Ringer tile modes -->
     <string name="pref_qs_ringer_mode_title">Настройки режима звонка"</string>
-    <string name="ringer_mode_silent">Беззвучный</string>
+    <string name="ringer_mode_silent">Важные</string>
     <string name="ringer_mode_vibrate">Вибрация</string>
     <string name="ringer_mode_sound">Звук</string>
     <string name="ringer_mode_sound_vibrate">Звук и вибрация</string>
