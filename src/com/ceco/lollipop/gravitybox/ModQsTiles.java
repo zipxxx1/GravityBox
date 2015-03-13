@@ -95,6 +95,7 @@ public class ModQsTiles {
                     Map<String, Object> tileMap = (Map<String, Object>)
                             XposedHelpers.getObjectField(param.thisObject, "mTiles");
                     Map<String, Object> gbTileMap = new HashMap<String,Object>();
+                    Context context = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
 
                     // prepare AOSP tile wrappers
                     for (Entry<String,Object> entry : tileMap.entrySet()) {
@@ -117,7 +118,8 @@ public class ModQsTiles {
                     // sort tiles
                     LinkedHashMap<String, Object> orderedMap = new LinkedHashMap<String,Object>();
                     String[] orderedKeys = prefs.getString(
-                            TileOrderActivity.PREF_KEY_TILE_ENABLED, "").split(",");
+                            TileOrderActivity.PREF_KEY_TILE_ENABLED,
+                            TileOrderActivity.getDefaultTileList(context)).split(",");
                     for (String key : orderedKeys) {
                          for (Entry<String, Object> entry : gbTileMap.entrySet()) {
                              if (entry.getValue() instanceof AospTile) {
@@ -163,7 +165,6 @@ public class ModQsTiles {
                     }
                     if (DEBUG) log("Tiles created");
 
-                    Context context = (Context) XposedHelpers.callMethod(param.thisObject, "getContext");
                     if (mQuickPulldownHandler == null) {
                         mQuickPulldownHandler = new QsQuickPulldownHandler(context, prefs, mEventDistributor);
                     }

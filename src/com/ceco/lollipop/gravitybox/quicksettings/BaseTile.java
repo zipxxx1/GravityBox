@@ -15,8 +15,9 @@
 
 package com.ceco.lollipop.gravitybox.quicksettings;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +29,6 @@ import android.widget.TextView;
 import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
-import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -79,11 +79,14 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     protected void initPreferences() {
-        String enabledTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ENABLED, null);
-        mEnabled = enabledTiles != null && enabledTiles.contains(mKey);
+        List<String> enabledTiles = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ENABLED,
+                        TileOrderActivity.getDefaultTileList(mContext)).split(",")));
+        mEnabled = enabledTiles.contains(mKey);
 
-        String securedTiles = mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_SECURED, null);
-        mSecured = securedTiles != null && securedTiles.contains(mKey);
+        List<String> securedTiles = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_SECURED, "").split(",")));
+        mSecured = securedTiles.contains(mKey);
 
         mNormalized = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_NORMALIZE, false);
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);

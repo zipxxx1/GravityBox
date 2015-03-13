@@ -17,10 +17,12 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.TouchInterceptor;
@@ -117,6 +119,19 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         }
     }
 
+    public static String getDefaultTileList(Context context) {
+        try {
+            Context gbContext = context.createPackageContext(
+                    GravityBox.PACKAGE_NAME,
+                    Context.CONTEXT_IGNORE_SECURITY);
+            return Utils.join(gbContext.getResources().getStringArray(
+                    R.array.qs_tile_default_values), ",");
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return "";
+        }
+    }
+
     private void createDefaultTileList() {
         String[] tileKeys = mResources.getStringArray(R.array.qs_tile_values);
         String newList = "";
@@ -134,47 +149,46 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     }
 
     private void updateDefaultTileList() {
-        String list = mPrefs.getString(PREF_KEY_TILE_ORDER, "");
-        String enabledList = mPrefs.getString(PREF_KEY_TILE_ENABLED, "");
+        List<String> list = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(PREF_KEY_TILE_ORDER, "").split(",")));
+        List<String> enabledList = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
         boolean listChanged = false;
         boolean enabledListChanged = false;
         String[] tileKeys = mResources.getStringArray(R.array.qs_tile_values);
         for (String key : tileKeys) {
             if (supportedTile(key)) {
                 if (!list.contains(key)) {
-                    if (!list.isEmpty()) list += ",";
-                    list += key;
+                    list.add(key);
                     listChanged = true;
                 }
             } else {
                 if (list.contains(key)) {
-                    list = list.replace("," + key, "");
-                    list = list.replace(key + ",", "");
+                    list.remove(key);
                     listChanged = true;
                 }
                 if (enabledList.contains(key)) {
-                    enabledList = enabledList.replace("," + key, "");
-                    enabledList = enabledList.replace(key + ",", "");
+                    enabledList.remove(key);
                     enabledListChanged = true;
                 }
             }
         }
         // forcibly remove old cell2 tile
         if (list.contains("aosp_tile_cell2")) {
-            list = list.replace(",aosp_tile_cell2", "");
-            list = list.replace("aosp_tile_cell2,", "");
+            list.remove("aosp_tile_cell2");
             listChanged = true;
         }
         if (enabledList.contains("aosp_tile_cell2")) {
-            enabledList = enabledList.replace(",aosp_tile_cell2", "");
-            enabledList = enabledList.replace("aosp_tile_cell2,", "");
+            enabledList.remove("aosp_tile_cell2");
             enabledListChanged = true;
         }
         if (listChanged) {
-            mPrefs.edit().putString(PREF_KEY_TILE_ORDER, list).commit();
+            mPrefs.edit().putString(PREF_KEY_TILE_ORDER, Utils.join(
+                    list.toArray(new String[list.size()]), ",")).commit();
         }
         if (enabledListChanged) {
-            mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, enabledList).commit();
+            mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, Utils.join(
+                    enabledList.toArray(new String[enabledList.size()]), ",")).commit();
         }
     }
 
@@ -258,8 +272,10 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
 
     private List<TileInfo> getOrderedTileList() {
         String[] orderedTiles = mPrefs.getString(PREF_KEY_TILE_ORDER, "").split(",");
-        String enabledTiles = mPrefs.getString(PREF_KEY_TILE_ENABLED, "");
-        String securedTiles = mPrefs.getString(PREF_KEY_TILE_SECURED, "");
+        List<String> enabledTiles = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
+        List<String> securedTiles = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(PREF_KEY_TILE_SECURED, "").split(",")));
 
         List<TileInfo> tiles = new ArrayList<TileInfo>();
         for (int i = 0; i < orderedTiles.length; i++) {
