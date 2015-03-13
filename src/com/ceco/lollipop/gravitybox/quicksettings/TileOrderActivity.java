@@ -173,15 +173,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
                 }
             }
         }
-        // forcibly remove old cell2 tile
-        if (list.contains("aosp_tile_cell2")) {
-            list.remove("aosp_tile_cell2");
-            listChanged = true;
-        }
-        if (enabledList.contains("aosp_tile_cell2")) {
-            enabledList.remove("aosp_tile_cell2");
-            enabledListChanged = true;
-        }
         if (listChanged) {
             mPrefs.edit().putString(PREF_KEY_TILE_ORDER, Utils.join(
                     list.toArray(new String[list.size()]), ",")).commit();
@@ -197,7 +188,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             return false;
         if (key.equals("gb_tile_gps_alt") && !Utils.hasGPS(mContext))
             return false;
-        if ((key.equals("aosp_tile_cell") || key.equals("aosp_tile_2cell") ||
+        if ((key.equals("aosp_tile_cell") || key.equals("aosp_tile_cell2") ||
                 key.equals("gb_tile_network_mode") || key.equals("gb_tile_smart_radio") ||
                 key.equals("mtk_tile_mobile_data")) && Utils.isWifiOnly(mContext))
             return false;
@@ -207,7 +198,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             return false;
         if (key.equals("gb_tile_compass") && !Utils.hasCompass(mContext))
             return false;
-        if (key.equals("aosp_tile_2cell") && GravityBoxSettings.sSystemProperties != null &&
+        if (key.equals("aosp_tile_cell2") && GravityBoxSettings.sSystemProperties != null &&
                 !GravityBoxSettings.sSystemProperties.hasMsimSupport)
             return false;
         if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")) &&

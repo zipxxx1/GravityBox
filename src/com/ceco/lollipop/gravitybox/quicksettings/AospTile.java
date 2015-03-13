@@ -27,7 +27,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
         else if (CellularTile.MSIM_KEY1.equals(aospKey))
             return new CellularTile(host, aospKey, "aosp_tile_cell", tile, prefs, eventDistributor);
         else if (CellularTile.MSIM_KEY2.equals(aospKey))
-            return new CellularTile(host, aospKey, "aosp_tile_2cell", tile, prefs, eventDistributor);
+            return new CellularTile(host, aospKey, "aosp_tile_cell2", tile, prefs, eventDistributor);
         else if (ColorInversionTile.AOSP_KEY.equals(aospKey))
             return new ColorInversionTile(host, tile, prefs, eventDistributor);
         else if (FlashlightTile.AOSP_KEY.equals(aospKey))
