@@ -58,6 +58,7 @@ public class LedListAdapter extends ArrayAdapter<LedListItem>
     static class ViewHolder {
         ImageView appIconView;
         TextView appNameView;
+        TextView pkgNameView;
         TextView appDescView;
         LedColorView colorView;
         CheckBox enabledView;
@@ -77,6 +78,7 @@ public class LedListAdapter extends ArrayAdapter<LedListItem>
             holder = new ViewHolder();
             holder.appIconView = (ImageView) row.findViewById(R.id.led_app_icon);
             holder.appNameView = (TextView) row.findViewById(R.id.led_app_name);
+            holder.pkgNameView = (TextView) row.findViewById(R.id.led_pkg_name);
             holder.appDescView = (TextView) row.findViewById(R.id.led_app_desc);
             holder.colorView = (LedColorView) row.findViewById(R.id.led_color);
             holder.enabledView = (CheckBox) row.findViewById(R.id.led_checkbox);
@@ -99,6 +101,10 @@ public class LedListAdapter extends ArrayAdapter<LedListItem>
         LedListItem item = mFilteredData.get(position);
         holder.appIconView.setImageDrawable(item.getAppIcon());
         holder.appNameView.setText(item.getAppName());
+        holder.pkgNameView.setText(item.getAppInfo().packageName);
+        holder.pkgNameView.setVisibility(item.getAppName() != null &&
+                item.getAppName().equals(item.getAppInfo().packageName) ?
+                        View.GONE : View.VISIBLE);
         holder.appDescView.setText(item.getAppDesc());
         holder.colorView.setColor(item.getLedSettings().getColor());
         holder.colorView.setVisibility(item.isEnabled() && 
