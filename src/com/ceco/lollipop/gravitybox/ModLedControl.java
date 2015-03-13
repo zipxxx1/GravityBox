@@ -32,7 +32,6 @@ import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -62,7 +61,6 @@ import de.robv.android.xposed.XposedHelpers;
 public class ModLedControl {
     private static final String TAG = "GB:ModLedControl";
     public static final boolean DEBUG = false;
-    private static final String CLASS_USER_HANDLE = "android.os.UserHandle";
     private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.notification.NotificationManagerService";
     private static final String CLASS_STATUSBAR_MGR_SERVICE = "com.android.server.statusbar.StatusBarManagerService";
     private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
@@ -70,9 +68,7 @@ public class ModLedControl {
     private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData.Entry";
     private static final String CLASS_HEADSUP_NOTIF_VIEW = "com.android.systemui.statusbar.policy.HeadsUpNotificationView";
-    private static final String PACKAGE_NAME_PHONE = "com.android.server.telecom";
     public static final String PACKAGE_NAME_SYSTEMUI = "com.android.systemui";
-    private static final int MISSED_CALL_NOTIF_ID = 1;
 
     private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
     private static final String NOTIF_EXTRA_HEADS_UP_TIMEOUT = "gbHeadsUpTimeout";
@@ -86,7 +82,6 @@ public class ModLedControl {
 
     private static XSharedPreferences mPrefs;
     private static XSharedPreferences mQhPrefs;
-    private static Notification mNotifOnNextScreenOff;
     private static Context mContext;
     private static PowerManager mPm;
     private static SensorManager mSm;
@@ -98,23 +93,6 @@ public class ModLedControl {
     private static boolean mUserPresent;
     private static Object mNotifManagerService;
     private static boolean mProximityWakeUpEnabled;
-
-    private static BroadcastReceiver mScreenOffReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (mNotifOnNextScreenOff != null) {
-                try {
-                    NotificationManager nm = 
-                        (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                    nm.notify(MISSED_CALL_NOTIF_ID, mNotifOnNextScreenOff);
-                } catch (Throwable t) {
-                    XposedBridge.log(t);
-                }
-                mNotifOnNextScreenOff = null;
-            }
-            context.unregisterReceiver(this);
-        }
-    };
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -184,40 +162,6 @@ public class ModLedControl {
         mProximityWakeUpEnabled = mainPrefs.getBoolean(GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false);
 
         try {
-            XposedHelpers.findAndHookMethod(NotificationManager.class, "notify",
-                    String.class, int.class, Notification.class, notifyHookPkg);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-
-        try {
-            XposedHelpers.findAndHookMethod(NotificationManager.class, "notifyAsUser",
-                    String.class, int.class, Notification.class, CLASS_USER_HANDLE, notifyHookPkg);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-
-        try {
-            XposedHelpers.findAndHookMethod(NotificationManager.class, "cancel",
-                    String.class, int.class, cancelHook);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-
-        try {
-            XposedHelpers.findAndHookMethod(NotificationManager.class, "cancelAsUser",
-                    String.class, int.class, CLASS_USER_HANDLE, cancelHook);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-
-        try {
-            XposedHelpers.findAndHookMethod(NotificationManager.class, "cancelAll", cancelHook);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-
-        try {
             final Class<?> nmsClass = XposedHelpers.findClass(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader);
             XposedBridge.hookAllConstructors(nmsClass, new XC_MethodHook() {
                 @Override
@@ -262,22 +206,6 @@ public class ModLedControl {
         }
     }
 
-    private static XC_MethodHook notifyHookPkg = new XC_MethodHook() {
-        @Override
-        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-            // Phone missed calls: fix AOSP bug preventing LED from working for missed calls
-            final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-            final String pkgName = context.getPackageName();
-            if (DEBUG) log("notifyHookPkg: " + pkgName);
-            if (mNotifOnNextScreenOff == null && pkgName.equals(PACKAGE_NAME_PHONE) && 
-                    (Integer)param.args[1] == MISSED_CALL_NOTIF_ID) {
-                mNotifOnNextScreenOff = (Notification) param.args[2];
-                context.registerReceiver(mScreenOffReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
-                if (DEBUG) log("Scheduled missed call notification for next screen off");
-                return;
-            }
-        }
-    };
 
     private static XC_MethodHook notifyHook = new XC_MethodHook() {
         @Override
@@ -451,25 +379,6 @@ public class ModLedControl {
                     if (DEBUG) log("Performing active screen using proximity sensor");
                 } else {
                     performActiveScreen();
-                }
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
-        }
-    };
-
-    private static XC_MethodHook cancelHook = new XC_MethodHook() {
-        @Override
-        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-            try {
-                final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                final String pkgName = context.getPackageName();
-                final boolean isMissedCallNotifOrAll = pkgName.equals(PACKAGE_NAME_PHONE) &&
-                        (param.args.length == 0 || (Integer) param.args[1] == MISSED_CALL_NOTIF_ID);
-                if (isMissedCallNotifOrAll && mNotifOnNextScreenOff != null) {
-                    mNotifOnNextScreenOff = null;
-                    context.unregisterReceiver(mScreenOffReceiver);
-                    if (DEBUG) log("Pending missed call notification canceled");
                 }
             } catch (Throwable t) {
                 XposedBridge.log(t);
