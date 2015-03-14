@@ -1,3 +1,38 @@
+Changelog 5.0.3alpha - 14/03/2015
+--------------------------------------
+- Improved support for Motorola Moto G Dual SIM:
+--- QS: adjusted network mode tile (allows changing SIM slot on long-press)
+--- QS: adjusted handling and reordering of cellular tiles
+--- QS: proper adjustment of signal tile size for tiles per row option 
+--- Signal cluster adjustments, including icon coloring (NOTE: cell signal doesn't support data activity indicators) 
+--- fixed Smart radio 
+--- all other misc Multi SIM related adjustments
+- Quick settings:
+--- revived Ringer Mode Tile (silent==priority) (thanks to romracer)
+--- revived USB Tethering Tile
+--- fixed other misc issues in tile management (thanks to romracer)
+- BatteryBar: improved behavior in lock screen status bar (now allows bottom position)
+- ProgressBar: improved behavior in lock screen status bar (now allows bottom position)
+- Phone:
+--- added workaround for missed calls notification LED
+--- added 5s ramp-up duration for ascending ringtone
+- Ultimate notification control:
+--- fixed issues causing unexpected heads up and notification icon "jumping"
+--- show package names in app descriptions for better identification of packages having the same app name
+- Power: improved option for low battery warning policy
+- Navigation bar: improved handling of cursor control keys
+- Recents: added option for using alternate icon for clear all button
+- Fixed unexpected disappearing of centered clock and centered traffic monitor
+- Other misc Motorola specific fixes (thanks to romracer)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated French translations (thanks to ch-vox)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Portuguese (BR) translations (thanks to wyghor, KingKaminari)
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Traditional) translations (thanks to PeterDaveHello)
+- Updated Malay translations (thanks to zamzameir)
+
 Changelog 5.0.2alpha - 04/03/2015
 --------------------------------------
 - QuickSettings management:
