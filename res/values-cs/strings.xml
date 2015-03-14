@@ -1315,6 +1315,7 @@
     <string name="increasing_ring_min_volume_title">Počáteční hlasitost vyzvánění</string>
     <string name="increasing_ring_volume_notice">Poznámka:\nPočáteční úroveň hlasitosti je větší než hlasitost vyzvánění.</string>
     <string name="increasing_ring_ramp_up_duration_title">Doba zvyšování</string>
+    <string name="increasing_ring_interval_0">5 sekund</string>
     <string name="increasing_ring_interval_1">10 sekund</string>
     <string name="increasing_ring_interval_2">15 sekund</string>
     <string name="increasing_ring_interval_3">20 sekund</string>

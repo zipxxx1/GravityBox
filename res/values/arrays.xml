@@ -945,6 +945,7 @@
     </string-array>
 
     <string-array name="increasing_ring_ramp_up_duration_entries" translatable="false">
+        <item>@string/increasing_ring_interval_0</item>
         <item>@string/increasing_ring_interval_1</item>
         <item>@string/increasing_ring_interval_2</item>
         <item>@string/increasing_ring_interval_3</item>
@@ -953,6 +954,7 @@
     </string-array>
 
     <integer-array name="increasing_ring_ramp_up_duration_values" translatable="false">
+        <item>5</item>
         <item>10</item>
         <item>15</item>
         <item>20</item>
