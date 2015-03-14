@@ -25,11 +25,11 @@
     <string name="battery_style_none">Tiada</string>
 
     <string name="vol_music_controls_title">Butang volume melangkau track lagu</string>
-    <string name="vol_music_controls_summary">langkau track dengan menekan lama butang volume ketika screen off</string>
+    <string name="vol_music_controls_summary">Langkau track dengan menekan lama butang volume ketika screen off</string>
 
     <string name="low_battery_warning_policy_title">Amaran bateri rendah</string>
-    <string name="low_battery_warning_default">asal</string>
-    <string name="low_battery_warning_nonintrusive">tiada gangguan</string>
+    <string name="low_battery_warning_default">Asal</string>
+    <string name="low_battery_warning_nonintrusive">Tiada gangguan</string>
     <string name="low_battery_warning_off">Tiada</string>
 
     <string name="reboot_required">Perubahan akan berlaku selepas reboot</string>
@@ -56,7 +56,7 @@
     <string name="quick_settings_sync_off">Matikan sync</string>
     <string name="quick_settings_torch_on">Hidupkan lampu</string>
     <string name="quick_settings_torch_off">Matikan lampu</string>
-    <string name="quick_settings_torch_off_notif">sentuh untuk tutup</string>
+    <string name="quick_settings_torch_off_notif">Sentuh untuk tutup</string>
     <string name="quick_settings_qr_playing">Dimainkan&#8230;</string>
     <string name="quick_settings_qr_recording">Direkod&#8230;</string>
     <string name="quick_settings_qr_recorded">Telah direkod</string>
@@ -118,7 +118,7 @@
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Pemilih warna</string>
-    <string name="press_color_to_apply">tekan warna untuk set</string>
+    <string name="press_color_to_apply">Tekan warna untuk set</string>
 
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Modifikasi statusbar</string>
@@ -148,7 +148,7 @@
     <string name="dual_sim_ringer_summary">Lancarkan app yg membenarkan utk set ringtone dan bunyi notifikasi berbeza mengikut SIM</string>
 
     <!--  Lockscreen tweaks -->
-    <string name="pref_cat_lockscreen_title">modifikasi skrin kekunci</string>
+    <string name="pref_cat_lockscreen_title">Modifikasi skrin kekunci</string>
     <string name="pref_cat_lockscreen_summary">Mengandungi pelbagai modifikasi skrin kekunci</string>
     <string name="pref_cat_lockscreen_background_title">Latarbelakang skrinkunci</string>
     <string name="pref_lockscreen_background_title">Gaya latarbelakang</string>
@@ -165,7 +165,7 @@
     <string name="pref_cat_lockscreen_other_title">Lain-lain</string>
 
     <!--  Power tweaks category -->
-    <string name="pref_cat_power_title">modifikasi butang hidup</string>
+    <string name="pref_cat_power_title">Modifikasi butang hidup</string>
     <string name="pref_cat_power_summary">Mengandungi pelbagai modifikasi butang hidup</string>
 
     <!--  Low battery LED flashing -->
@@ -173,11 +173,11 @@
     <string name="pref_flashing_led_disable_summary">Matikan kelipan ketika bateri rendah ketika tidak dicas</string>
 
     <!-- Display tweaks category -->
-    <string name="pref_cat_display_title">modifikasi paparan</string>
+    <string name="pref_cat_display_title">Modifikasi paparan</string>
     <string name="pref_cat_display_summary">Mengandungi pelbagai modifikasi paparan</string>
 
     <!-- Minimum brightness level -->
-    <string name="pref_brightness_min_title">tahap kecerahan minimum</string>
+    <string name="pref_brightness_min_title">Tahap kecerahan minimum</string>
     <string name="pref_brightness_min_summary">Benarkan tahap kecerahan minimum. Hanya untuk kecerahan manual. (perlukan reboot)</string>
 
     <!--  Autobrightness levels -->
@@ -193,8 +193,8 @@
     <string name="pref_ab_number_not_ascending">Nilai rendah tidak boleh lebih dari yang tinggi</string>
     <string name="pref_ab_number_not_descending">Nilai rendah tidak boleh rendah dari nilai yang paling rendah</string>
     <string name="pref_ab_values_set">Nilai untuk %s telah ditetapkan</string>
-    <string name="pref_ab_config_saved">konfigurasi kecerahan auto yang baru telah disimpan</string>
-    <string name="pref_ab_config_cancelled">konfigurasi kecerahan auto yang baru tidak disimpan</string>
+    <string name="pref_ab_config_saved">Konfigurasi kecerahan auto yang baru telah disimpan</string>
+    <string name="pref_ab_config_cancelled">Konfigurasi kecerahan auto yang baru tidak disimpan</string>
     <string name="pref_ab_button_set">Tetapkan</string>
 
     <!-- Lockscreen rotation -->
@@ -209,7 +209,7 @@
     <string name="pref_statusbar_center_clock_title">Jam di tengah</string>
 
     <!-- Media tweaks category -->
-    <string name="pref_cat_media_title">modifikasi media</string>
+    <string name="pref_cat_media_title">Modifikasi media</string>
     <string name="pref_cat_media_summary">Mengandungi pelbagai modifikasi media dan audio dalam sistem</string>
 
     <!-- More music volume steps -->
@@ -218,7 +218,7 @@
 
     <!-- Safe headset media volume -->
     <string name="pref_safe_media_volume_title">Tahap nada yang selamat untuk earfon</string>
-    <string name="pref_safe_media_volume_summary">hidupkan atau matikan tahap nada yang selamat untuk earfon</string>
+    <string name="pref_safe_media_volume_summary">Hidupkan atau matikan tahap nada yang selamat untuk earfon</string>
 
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Aksi untuk butang navigasi</string>
@@ -241,7 +241,7 @@
     <string name="no_previous_app_found">Tiada applikasi sebelum dijumpai</string>
 
     <!--  Phone tweaks category -->
-    <string name="pref_cat_phone_title">modifikasi telefon</string>
+    <string name="pref_cat_phone_title">Modifikasi telefon</string>
     <string name="pref_cat_phone_summary">Mengandungi pelbagai modifikasi telefon</string>
 
     <!-- Flip action while ringing -->
@@ -457,14 +457,14 @@
     <string name="screenshot">Tangkap skrin</string>
 
     <!-- HW Key Action: Show menu -->
-    <string name="hwkey_action_menu">STunjukkan menu</string>
+    <string name="hwkey_action_menu">Tunjukkan menu</string>
 
     <!-- HW Key Action: Expanded desktop -->
     <string name="hwkey_action_expanded_desktop">Butang skrin penuh</string>
     <string name="hwkey_action_expanded_desktop_disabled">Skrin penuh tidak aktif!</string>
 
     <!-- Navigation bar tweaks category -->
-    <string name="pref_cat_navigation_bar_title">modifikasi bar navigasi</string>
+    <string name="pref_cat_navigation_bar_title">Modifikasi bar navigasi</string>
     <string name="pref_cat_navigation_bar_summary">Mengandungi pelbagai modifikasi bar navigasi</string>
     <string name="pref_navbar_override_summary">Butang modifikasi bar navigasi(perlukan reboot)</string>
     <string name="pref_navbar_enable_title">Benarkan bar navigasi</string>
@@ -688,7 +688,7 @@
     <string name="pref_network_mode_tile_lte_title">Benarkan rangkaian LTE</string>
 
     <!-- HW Keys Navigation Bar warning -->
-    <string name="hwkey_navbar_warning">DEmi untuk membenarkan aksi keatas bar navigasi, adalah perlu
+    <string name="hwkey_navbar_warning">Demi untuk membenarkan aksi keatas bar navigasi, adalah perlu
         untuk tukar tetapan asal bar navigasi di modifikasi bar navigasi</string>
 
     <!-- Lockscreen Torch -->
@@ -709,7 +709,7 @@
     <string name="pref_navbar_swap_keys_title">Tukar butang kembali dengan butang aplikasi sebelum</string>
 
     <!-- Volume panel timeout -->
-    <string name="pref_volume_panel_timeout_title">masa tamat panel nada</string>
+    <string name="pref_volume_panel_timeout_title">Masa tamat panel nada</string>
 
     <!-- Ringer tile modes -->
     <string name="pref_qs_ringer_mode_title">Mod tile deringan</string>
@@ -735,7 +735,7 @@
     <string name="pref_dialer_show_dialpad_summary">Tunjuk pad nombor automatik ketika ingin membuat panggilan</string>
 
     <!-- Launcher tweaks -->
-    <string name="pref_cat_launcher_tweaks_title">modifikasi pelancar</string>
+    <string name="pref_cat_launcher_tweaks_title">Modifikasi pelancar</string>
     <string name="pref_cat_launcher_tweaks_summary">Hanya untuk pelancar asal dan GEL sahaja</string>
     <string name="pref_cat_launcher_desktop_grid_title">Grid desktop</string>
     <string name="pref_launcher_desktop_grid_info_title">Nilai selain asal boleh merosakkan widget\' layout. gunakan sebaiknya. pelancar perlu di restart</string>
@@ -1207,7 +1207,7 @@
     <!-- Led control -->
     <string name="pref_led_control_title">Kawalan notifikasi terhebat</string>
     <string name="pref_led_control_summary">Benarkan kawal LED, bunyi, gegaran mengikut aplikasi</string>
-    <string name="lc_please_wait">Sila tunggu&#8230;</string>
+    <string name="lc_please_wait">Sila tunggu</string>
     <string name="lc_disabled">Kawalan notifikasi dimatikan</string>
     <string name="pref_lc_led_color_title">Warna LED</string>
     <string name="pref_lc_led_time_on_title">Durasi LED menyala</string>
@@ -1407,7 +1407,7 @@
     <!-- QS: Compass tile -->
     <string name="qs_tile_compass">Compass</string>
     <string name="quick_settings_compass_off">Compass dimatikan</string>
-    <string name="quick_settings_compass_init">Memeriksa&#8230&#8230;</string>
+    <string name="quick_settings_compass_init">Memeriksa#8230;</string>
     <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
 
     <!-- Cardinal directions -->
@@ -1641,7 +1641,7 @@
     <string name="pref_data_traffic_display_mode_title">Mod paparan</string>
     <string name="dt_display_mode_always">Sentiasa (Jika ada data aktif)</string>
     <string name="dt_display_mode_dm">Untuk muat turun sahaja</string>
-    <string name="dt_display_mode_pt">ketika status bar ditunjukkan</string>
+    <string name="dt_display_mode_pt">Ketika status bar ditunjukkan</string>
 
     <!-- Wi-Fi priority -->
     <string name="pref_wifi_priority_title">Keutamaan Wi-Fi</string>
@@ -1728,7 +1728,7 @@
         Selepas buang, jangan lupa utk aktifkan modul di dalam xposed dan REBOOT SEGERA.</string>
 
     <!-- Restore settings: warn if old backup exists -->
-    <string name="settings_restore_backup_obsolete">pemasangan backup dalam versi android lama tidak dapat dilakukan 
+    <string name="settings_restore_backup_obsolete">Pemasangan backup dalam versi android lama tidak dapat dilakukan 
         kerana perbezaan tahap android. Anda dinasihatkan guna dan set dari awal.</string>
 
     <!-- QS: Normalize dual tiles -->
