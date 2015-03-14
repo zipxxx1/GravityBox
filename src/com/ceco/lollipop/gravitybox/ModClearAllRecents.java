@@ -68,6 +68,7 @@ public class ModClearAllRecents {
     private static SearchBarState mSearchBarState;
     private static SearchBarState mSearchBarStatePrev;
     private static Integer mSearchBarOriginalHeight;
+    private static boolean mClearAllUseAltIcon;
 
     // RAM bar
     private static TextView mBackgroundProcessText;
@@ -120,6 +121,11 @@ public class ModClearAllRecents {
                     mSearchBarState = SearchBarState.valueOf(intent.getStringExtra(
                             GravityBoxSettings.EXTRA_RECENTS_SEARCH_BAR));
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_RECENTS_CLEAR_ALL_ICON_ALT)) {
+                    mClearAllUseAltIcon = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_RECENTS_CLEAR_ALL_ICON_ALT, false);
+                    updateButtonImage();
+                }
             }
             if (intent.getAction().equals(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_SINGLETAP)) {
                 clearAll();
@@ -138,6 +144,7 @@ public class ModClearAllRecents {
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
             mSearchBarState = SearchBarState.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_RECENTS_SEARCH_BAR, "DEFAULT"));
+            mClearAllUseAltIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL_ICON_ALT, false);
             mSearchBarStatePrev = mSearchBarState;
             mMemInfoReader = new MemInfoReader();
 
@@ -176,10 +183,7 @@ public class ModClearAllRecents {
 
                     // create and inject new ImageView and set onClick listener to handle action
                     mRecentsClearButton = new ImageView(vg.getContext());
-                    int icResId = res.getIdentifier("ic_dismiss_all", "drawable", PACKAGE_NAME);
-                    mRecentsClearButton.setImageDrawable(icResId != 0 ?
-                            res.getDrawable(icResId) : mGbContext.getResources().getDrawable(
-                            R.drawable.ic_recent_clear));
+                    updateButtonImage();
                     mRecentsClearButton.setBackground(new RippleDrawable(
                             new ColorStateList(new int[][] { new int[]{} }, 
                                     new int[] { 0xffffffff }), null, null));
@@ -327,6 +331,20 @@ public class ModClearAllRecents {
     private static void setRecentsClearAll(Boolean show, Context context) {
         ModNavigationBar.setRecentAlt(show);
         ModPieControls.setRecentAlt(show);
+    }
+
+    private static void updateButtonImage() {
+        if (mRecentsClearButton == null) return;
+        try {
+            Resources res = mRecentsClearButton.getResources();
+            int icResId = mClearAllUseAltIcon ? 0 :
+                res.getIdentifier("ic_dismiss_all", "drawable", PACKAGE_NAME);
+            mRecentsClearButton.setImageDrawable(icResId != 0 ?
+                    res.getDrawable(icResId) : mGbContext.getResources().getDrawable(
+                            R.drawable.ic_recent_clear));
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 
     private static void updateButtonLayout() {

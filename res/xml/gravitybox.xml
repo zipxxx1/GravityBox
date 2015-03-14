@@ -2115,6 +2115,11 @@
                 android:entryValues="@array/recents_clear_values"
                 android:defaultValue="0" />
 
+            <CheckBoxPreference
+                android:key="pref_recents_clear_all_icon_alt"
+                android:title="@string/pref_navbar_custom_key_icon_title"
+                android:defaultValue="false" />
+
             <ListPreference 
                 android:key="pref_rambar"
                 android:title="@string/pref_rambar_title"
