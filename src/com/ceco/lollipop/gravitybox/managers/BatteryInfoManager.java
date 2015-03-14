@@ -81,8 +81,12 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         setSound(BatteryInfoManager.SOUND_UNPLUGGED,
                 prefs.getString(GravityBoxSettings.PREF_KEY_CHARGER_UNPLUGGED_SOUND, ""));
 
-        mLowBatteryWarningPolicy = LowBatteryWarningPolicy.valueOf(prefs.getString(
+        try {
+            mLowBatteryWarningPolicy = LowBatteryWarningPolicy.valueOf(prefs.getString(
                 GravityBoxSettings.PREF_KEY_LOW_BATTERY_WARNING_POLICY, "DEFAULT"));
+        } catch (Throwable t) {
+            mLowBatteryWarningPolicy = LowBatteryWarningPolicy.DEFAULT;
+        }
     }
 
     public void registerListener(BatteryStatusListener listener) {
