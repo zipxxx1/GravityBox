@@ -29,8 +29,6 @@ public class QsTileEventDistributor {
             "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_STATUSBAR_WM = 
             "com.android.systemui.statusbar.phone.StatusBarWindowManager";
-    private static final String CLASS_TILE_VIEW = 
-            "com.android.systemui.qs.QSTileView";
 
     public interface QsEventListener {
         String getKey();
@@ -199,7 +197,7 @@ public class QsTileEventDistributor {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_TILE_VIEW, cl, "onConfigurationChanged",
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "onConfigurationChanged",
                     Configuration.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -212,7 +210,7 @@ public class QsTileEventDistributor {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_TILE_VIEW, cl, "recreateLabel",
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "recreateLabel",
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {

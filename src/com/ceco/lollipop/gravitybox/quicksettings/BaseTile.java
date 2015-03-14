@@ -24,11 +24,13 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
+import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -43,6 +45,7 @@ public abstract class BaseTile implements QsEventListener {
     public static final String CLASS_BASE_TILE = "com.android.systemui.qs.QSTile";
     public static final String CLASS_TILE_STATE = "com.android.systemui.qs.QSTile.State";
     public static final String CLASS_TILE_VIEW = "com.android.systemui.qs.QSTileView";
+    public static final String CLASS_SIGNAL_TILE_VIEW = "com.android.systemui.qs.SignalTileView";
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -60,7 +63,6 @@ public abstract class BaseTile implements QsEventListener {
     protected int mStatusBarState;
     protected boolean mNormalized;
     protected boolean mHideOnChange;
-    protected int mNumColumns;
     protected float mScalingFactor = 1f;
 
     public BaseTile(Object host, String key, XSharedPreferences prefs,
@@ -153,6 +155,11 @@ public abstract class BaseTile implements QsEventListener {
     
             updateLabelLayout(tileView);
             updatePaddingTop(tileView);
+
+            if (tileView.getClass().getName().equals(CLASS_SIGNAL_TILE_VIEW) &&
+                    Utils.isMotoXtDevice()) {
+                updateMotoXtSignalIconLayout(tileView);
+            }
         }
     }
 
@@ -217,6 +224,18 @@ public abstract class BaseTile implements QsEventListener {
             TextView second = (TextView) XposedHelpers.getObjectField(dualLabel, "mSecondLine");
             second.setTextSize(TypedValue.COMPLEX_UNIT_PX, second.getTextSize()*mScalingFactor);
         }
+    }
+
+    private void updateMotoXtSignalIconLayout(View tileView) {
+        try {
+            View icon = (View) XposedHelpers.getObjectField(tileView,
+                    "mSignalImageView");
+            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams)
+                    icon.getLayoutParams();
+            lp.width = Math.round(lp.width * mScalingFactor);
+            lp.height = Math.round(lp.height * mScalingFactor);
+            icon.setLayoutParams(lp);
+        } catch (Throwable t) { /* ignore */ }
     }
 
     public void refreshState() {
