@@ -76,18 +76,18 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                             if (mMobileActivity == null) {
                                 mMobileActivity = new SignalActivity[2];
                             }
-                            v = (View) ((View[])XposedHelpers.getObjectField(mView, "mMobileSignalView"))[0];
-                            if (v != null && v.getParent() instanceof FrameLayout) {
-                                mMobileActivity[0] = new SignalActivity((FrameLayout)v.getParent(), SignalType.MOBILE,
-                                        Gravity.BOTTOM | Gravity.END);
-                                if (DEBUG) log("onAttachedToWindow: mMobileActivity created");
-                            }
 
-                            v = (View) ((View[])XposedHelpers.getObjectField(mView, "mMobileSignalView"))[1];
-                            if (v != null && v.getParent() instanceof FrameLayout) {
-                                mMobileActivity[1] = new SignalActivity((FrameLayout)v.getParent(), SignalType.MOBILE,
-                                        Gravity.BOTTOM | Gravity.END);
-                                if (DEBUG) log("onAttachedToWindow: mMobileActivity2 created");
+                            Object mtm = XposedHelpers.callStaticMethod(
+                                    XposedHelpers.findClass("android.telephony.TelephonyManager", null),
+                                        "getDefault");
+                            int j = (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount");
+                            for (int i=0; i < j; i++) {
+                                v = (View) ((View[])XposedHelpers.getObjectField(mView, "mMobileSignalView"))[i];
+                                if (v != null && v.getParent() instanceof FrameLayout) {
+                                    mMobileActivity[i] = new SignalActivity((FrameLayout)v.getParent(), SignalType.MOBILE,
+                                            Gravity.BOTTOM | Gravity.END);
+                                    if (DEBUG) log("onAttachedToWindow: mMobileActivity" + i + " created");
+                                }
                             }
                         }
                     });
@@ -99,7 +99,9 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
 
                             mWifiActivity = null;
                             if (mMobileActivity != null) {
-                                mMobileActivity[0] = mMobileActivity[1] = null;
+                                for (int i=0; i < mMobileActivity.length; i++) {
+                                    mMobileActivity[i] = null;
+                                }
                             }
                             if (DEBUG) log("onDetachedFromWindow: signal activities destoyed");
                         }
@@ -120,14 +122,15 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         final Class<?> networkCtrlCbClass = XposedHelpers.findClass(
                 "com.android.systemui.statusbar.policy.NetworkController.NetworkSignalChangedCallback", 
                 classLoader);
-        mNetworkControllerCallback = Proxy.newProxyInstance(classLoader, 
-                new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallbackMsim());
-        XposedHelpers.callMethod(networkController, "addNetworkSignalChangedCallback",
-                mNetworkControllerCallback, 0);
-        mNetworkControllerCallback2 = Proxy.newProxyInstance(classLoader, 
-                new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallbackMsim());
-        XposedHelpers.callMethod(networkController, "addNetworkSignalChangedCallback",
-                mNetworkControllerCallback2, 1);
+        final Object mtm = XposedHelpers.callStaticMethod(
+                XposedHelpers.findClass("android.telephony.TelephonyManager", null),
+                    "getDefault");
+        final int j = (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount");
+        for (int i=0; i < j; i++) {
+            XposedHelpers.callMethod(networkController, "addNetworkSignalChangedCallback",
+                    Proxy.newProxyInstance(classLoader, new Class<?>[] { networkCtrlCbClass },
+                        new NetworkControllerCallbackMsim()), i);
+        }
         if (DEBUG) log("setNetworkController: callback registered");
     }
 
@@ -161,8 +164,13 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected void update() {
         if (mView != null) {
             try {
-                XposedHelpers.callMethod(mView, "apply", 0);
-                XposedHelpers.callMethod(mView, "apply", 1);
+                Object mtm = XposedHelpers.callStaticMethod(
+                        XposedHelpers.findClass("android.telephony.TelephonyManager", null),
+                            "getDefault");
+                int j = (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount");
+                for (int i=0; i < j; i++) {
+                    XposedHelpers.callMethod(mView, "apply", i);
+                }
             } catch (Throwable t) {
                 logAndMute("invokeApply", t);
             }
@@ -237,11 +245,10 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
 
         if ((flags & StatusBarIconManager.FLAG_DATA_ACTIVITY_COLOR_CHANGED) != 0 &&
                     mDataActivityEnabled && mMobileActivity != null) {
-            if (mMobileActivity[0] != null) {
-                mMobileActivity[0].updateDataActivityColor();
-            }
-            if (mMobileActivity[1] != null) {
-                mMobileActivity[1].updateDataActivityColor();
+            if (mMobileActivity != null) {
+                for (int i=0; i < mMobileActivity.length; i++) {
+                    mMobileActivity[i].updateDataActivityColor();
+                }
             }
         }
     }
