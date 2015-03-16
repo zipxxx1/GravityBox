@@ -247,7 +247,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                     mDataActivityEnabled && mMobileActivity != null) {
             if (mMobileActivity != null) {
                 for (int i=0; i < mMobileActivity.length; i++) {
-                    mMobileActivity[i].updateDataActivityColor();
+                    if (mMobileActivity[i] != null) mMobileActivity[i].updateDataActivityColor();
                 }
             }
         }
