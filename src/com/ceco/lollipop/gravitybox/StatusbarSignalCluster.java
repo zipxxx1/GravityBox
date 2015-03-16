@@ -222,6 +222,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         sPrefs = prefs;
         if (PhoneWrapper.hasMsimSupport()) {
             return new StatusbarSignalClusterMsim(containerType, view);
+        } else if (Utils.isMotoXtDevice()) {
+            return new StatusbarSignalClusterMsim(containerType, view);
         } else if (Utils.isMtkDevice()) {
             return new StatusbarSignalClusterMtk(containerType, view);
         } else {
