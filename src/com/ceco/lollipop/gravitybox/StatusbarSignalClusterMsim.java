@@ -77,11 +77,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                                 mMobileActivity = new SignalActivity[2];
                             }
 
-                            Object mtm = XposedHelpers.callStaticMethod(
-                                    XposedHelpers.findClass("android.telephony.TelephonyManager", null),
-                                        "getDefault");
-                            int j = (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount");
-                            for (int i=0; i < j; i++) {
+                            for (int i=0; i < PhoneWrapper.getPhoneCount(); i++) {
                                 v = (View) ((View[])XposedHelpers.getObjectField(mView, "mMobileSignalView"))[i];
                                 if (v != null && v.getParent() instanceof FrameLayout) {
                                     mMobileActivity[i] = new SignalActivity((FrameLayout)v.getParent(), SignalType.MOBILE,
@@ -122,11 +118,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         final Class<?> networkCtrlCbClass = XposedHelpers.findClass(
                 "com.android.systemui.statusbar.policy.NetworkController.NetworkSignalChangedCallback", 
                 classLoader);
-        final Object mtm = XposedHelpers.callStaticMethod(
-                XposedHelpers.findClass("android.telephony.TelephonyManager", null),
-                    "getDefault");
-        final int j = (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount");
-        for (int i=0; i < j; i++) {
+        for (int i=0; i < PhoneWrapper.getPhoneCount(); i++) {
             XposedHelpers.callMethod(networkController, "addNetworkSignalChangedCallback",
                     Proxy.newProxyInstance(classLoader, new Class<?>[] { networkCtrlCbClass },
                         new NetworkControllerCallbackMsim()), i);
@@ -164,11 +156,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected void update() {
         if (mView != null) {
             try {
-                Object mtm = XposedHelpers.callStaticMethod(
-                        XposedHelpers.findClass("android.telephony.TelephonyManager", null),
-                            "getDefault");
-                int j = (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount");
-                for (int i=0; i < j; i++) {
+                for (int i=0; i < PhoneWrapper.getPhoneCount(); i++) {
                     XposedHelpers.callMethod(mView, "apply", i);
                 }
             } catch (Throwable t) {
