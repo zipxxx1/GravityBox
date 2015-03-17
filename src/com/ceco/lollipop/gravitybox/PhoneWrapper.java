@@ -53,6 +53,7 @@ public class PhoneWrapper {
     private static Class<?> mSystemProperties;
     private static Context mContext;
     private static int mSimSlot;
+    private static int mPhoneCount = -1;
     private static Boolean mHasMsimSupport = null;
 
     private static void log(String msg) {
@@ -97,6 +98,10 @@ public class PhoneWrapper {
 
     private static Class<?> getPhoneFactoryClass() {
         return XposedHelpers.findClass("com.android.internal.telephony.PhoneFactory", null);
+    }
+
+    private static Class<?> getTelephonyManagerClass() {
+        return XposedHelpers.findClass("android.telephony.TelephonyManager", null);
     }
 
     private static String getMakePhoneMethodName() {
@@ -211,19 +216,31 @@ public class PhoneWrapper {
                 networkType < NT_MODE_UNKNOWN);
     }
 
+    public static int getPhoneCount() {
+        if (mPhoneCount != -1) return mPhoneCount;
+
+        try {
+            Object mtm = XposedHelpers.callStaticMethod(getTelephonyManagerClass(), "getDefault");
+            mPhoneCount = (int) XposedHelpers.callMethod(mtm, "getPhoneCount");
+        } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
+            mPhoneCount = -1;
+        }
+
+        if (DEBUG) log("getPhoneCount: " + mPhoneCount);
+        return mPhoneCount;
+    }
+
     public static boolean hasMsimSupport() {
         if (mHasMsimSupport != null) return mHasMsimSupport;
 
         try {
-            Object mtm = XposedHelpers.callStaticMethod(
-                    XposedHelpers.findClass("android.telephony.TelephonyManager", null),
-                        "getDefault");
+            Object mtm = XposedHelpers.callStaticMethod(getTelephonyManagerClass(), "getDefault");
             mHasMsimSupport = (Boolean) XposedHelpers.callMethod(mtm, "isMultiSimEnabled") &&
-                    (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount") > 1;
+                    getPhoneCount() > 1;
             if (DEBUG) log("isMultiSimEnabled: " +
                     (Boolean) XposedHelpers.callMethod(mtm, "isMultiSimEnabled"));
-            if (DEBUG) log("getPhoneCount: " +
-                    (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount"));
+            if (DEBUG) log("getPhoneCount: " + getPhoneCount());
         } catch (Throwable t) {
             if (DEBUG) XposedBridge.log(t);
             mHasMsimSupport = false;
