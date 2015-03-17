@@ -34,7 +34,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
-    protected Object mNetworkControllerCallback2;
     protected SignalActivity[] mMobileActivity;
     protected boolean mHideSimLabels;
 

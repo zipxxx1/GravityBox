@@ -91,20 +91,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     }
 
-    public static String getClassName(ClassLoader classLoader) {
-        if (PhoneWrapper.hasMsimSupport()) {
-            return "com.android.systemui.statusbar.MSimSignalClusterView";
-        } else if (Utils.hasGeminiSupport()) {
-            try {
-                XposedHelpers.findClass("com.android.systemui.statusbar.SignalClusterViewGemini", 
-                        classLoader);
-                return "com.android.systemui.statusbar.SignalClusterViewGemini";
-            } catch(Throwable t) { }
-        }
-
-        return "com.android.systemui.statusbar.SignalClusterView";
-    }
-
     // Signal activity
     enum SignalType { WIFI, MOBILE };
     class SignalActivity {
