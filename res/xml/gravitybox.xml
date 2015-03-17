@@ -413,6 +413,12 @@
                 android:summary="@string/pref_signal_cluster_hide_sim_labels_summary"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference 
+                android:key="pref_signal_cluster_narrow"
+                android:title="@string/pref_signal_cluster_narrow_title"
+                android:summary="@string/pref_signal_cluster_narrow_summary"
+                android:defaultValue="false" />
+
         </PreferenceScreen>
 
         <PreferenceScreen 

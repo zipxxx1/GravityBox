@@ -651,6 +651,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_CLUSTER_HPLUS = "pref_signal_cluster_hplus";
     public static final String PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE = "pref_signal_cluster_lte_style";
     public static final String PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS = "pref_signal_cluster_hide_sim_labels";
+    public static final String PREF_KEY_SIGNAL_CLUSTER_NARROW = "pref_signal_cluster_narrow";
 
     // TODO: Navbar ring targets
 //    public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
@@ -832,6 +833,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_MTK_FIX_DEV_OPTS,
             PREF_KEY_MTK_FIX_TTS_SETTINGS,
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
+            PREF_KEY_SIGNAL_CLUSTER_NARROW,
             PREF_KEY_NAVBAR_LEFT_HANDED,
             PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH
     ));
@@ -1238,6 +1240,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
         private ListPreference mPrefSbTickerPolicy;
         private CheckBoxPreference mPrefScHideSimLabels;
+        private CheckBoxPreference mPrefScNarrow;
         private ListPreference mPrefQrQuality;
         private SeekBarPreference mPrefSrAdaptiveDelay;
         private ListPreference mPrefBbarPosition;
@@ -1527,6 +1530,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCatSignalCluster = (PreferenceScreen) findPreference(PREF_CAT_KEY_SIGNAL_CLUSTER);
             mPrefScHideSimLabels = (CheckBoxPreference) findPreference(PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS);
+            mPrefScNarrow = (CheckBoxPreference) findPreference(PREF_KEY_SIGNAL_CLUSTER_NARROW);
 
             mPrefLedControl = findPreference(PREF_LED_CONTROL);
 
@@ -1639,6 +1643,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Remove MSIM preferences for non-MSIM devices
             if (!sSystemProperties.hasMsimSupport) {
                 mPrefCatSignalCluster.removePreference(mPrefScHideSimLabels);
+                mPrefCatSignalCluster.removePreference(mPrefScNarrow);
                 mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
             } else {
                 // TODO: carrier texts for MSIM devices

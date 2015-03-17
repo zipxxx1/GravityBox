@@ -1748,4 +1748,8 @@
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Hide brightness slider</string>
 
+    <!-- SignalCluster: reduce icon spacing -->
+    <string name="pref_signal_cluster_narrow_title">Reduce icon spacing</string>
+    <string name="pref_signal_cluster_narrow_summary">Reduces signal icon spacing (requires reboot)</string>
+
 </resources>

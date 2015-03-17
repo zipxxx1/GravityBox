@@ -24,18 +24,26 @@ import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
 
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
+    protected final String MOBILE_ICON_SPACERS[] = new String[] { "mSpacerView_Phone_1a",
+            "mSpacerView_Phone_1b", "mSpacerView_Phone_2a", "mSpacerView_Phone_2b" };
+
     protected SignalActivity[] mMobileActivity;
     protected boolean mHideSimLabels;
+    protected boolean mNarrowIcons;
+    protected int mIconSpacingPx;
 
     public StatusbarSignalClusterMsim(ContainerType containerType, LinearLayout view) {
         super(containerType, view);
@@ -45,6 +53,9 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected void initPreferences() {
         super.initPreferences();
         mHideSimLabels = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS, false);
+        mNarrowIcons = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_NARROW, false);
+        mIconSpacingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2,
+                mView.getResources().getDisplayMetrics()));
     }
 
     @Override
@@ -149,6 +160,10 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         if (mHideSimLabels) {
             hideSimLabel(simSlot);
         }
+
+        if (mNarrowIcons) {
+            reduceMobileIconSpacing();
+        }
     }
 
     @Override
@@ -206,6 +221,20 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
             }
         } catch (Throwable t) {
             logAndMute("hideSimLabel", t);
+        }
+    }
+
+    private void reduceMobileIconSpacing() {
+        for (String spacer : MOBILE_ICON_SPACERS) {
+            try {
+                View v = (View) XposedHelpers.getObjectField(mView, spacer);
+                if (v == null) continue;
+                ViewGroup.LayoutParams lp = v.getLayoutParams();
+                lp.width = mIconSpacingPx;
+                v.setLayoutParams(lp);
+            } catch (Throwable t) {
+                if (DEBUG) XposedBridge.log(t);
+            }
         }
     }
 
