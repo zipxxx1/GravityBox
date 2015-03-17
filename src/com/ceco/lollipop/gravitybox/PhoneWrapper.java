@@ -220,6 +220,10 @@ public class PhoneWrapper {
                         "getDefault");
             mHasMsimSupport = (Boolean) XposedHelpers.callMethod(mtm, "isMultiSimEnabled") &&
                     (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount") > 1;
+            if (DEBUG) log("isMultiSimEnabled: " +
+                    (Boolean) XposedHelpers.callMethod(mtm, "isMultiSimEnabled"));
+            if (DEBUG) log("getPhoneCount: " +
+                    (Integer) XposedHelpers.callMethod(mtm, "getPhoneCount"));
         } catch (Throwable t) {
             if (DEBUG) XposedBridge.log(t);
             mHasMsimSupport = false;
