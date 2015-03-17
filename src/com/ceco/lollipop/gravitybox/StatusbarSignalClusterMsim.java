@@ -175,7 +175,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                         mView, "mMobileSignalView"))[simSlot];
                 if (mobile != null) {
                     int resId = ((int[])XposedHelpers.getObjectField(mView, "mMobileSignalIconId"))[simSlot];
-                    Drawable d = mIconManager.getMobileIcon(simSlot, resId, true);
+                    Drawable d = mIconManager.getMobileIcon(simSlot, resId);
                     if (d != null) mobile.setImageDrawable(d);
                 }
                 if (mIconManager.isMobileIconChangeAllowed()) {

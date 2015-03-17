@@ -426,7 +426,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 ImageView mobile = (ImageView) mFldMobileView.get(mView);
                 if (mobile != null) {
                     int resId = XposedHelpers.getIntField(mView, "mMobileStrengthId");
-                    Drawable d = mIconManager.getMobileIcon(resId, true);
+                    Drawable d = mIconManager.getMobileIcon(resId);
                     if (d != null) mobile.setImageDrawable(d);
                 }
                 if (mIconManager.isMobileIconChangeAllowed()) {

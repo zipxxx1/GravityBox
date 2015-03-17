@@ -380,15 +380,12 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         }
     }
 
-    public Drawable getMobileIcon(int index, int resId, boolean fullyConnected) {
+    public Drawable getMobileIcon(int index, int resId) {
         Drawable cd;
         String key;
 
         try {
             key = mSystemUiRes.getResourceEntryName(resId);
-            if (!fullyConnected && key.endsWith("_fully")) {
-                key = key.substring(0, key.length() - "_fully".length());
-            }
         } catch (Resources.NotFoundException nfe) {
             return null;
         }
@@ -414,8 +411,8 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         }
     }
 
-    public Drawable getMobileIcon(int resId, boolean fullyConnected) {
-        return getMobileIcon(0, resId, fullyConnected);
+    public Drawable getMobileIcon(int resId) {
+        return getMobileIcon(0, resId);
     }
 
     public boolean isMobileIconChangeAllowed(int index) {

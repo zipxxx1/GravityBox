@@ -196,7 +196,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                             int resId = (Integer) XposedHelpers.callMethod(Utils.hasGeminiSupport() ? 
                                     mMobileIconIds[slot][0] : XposedHelpers.getObjectField(mView, "mMobileStrengthId"),
                                     "getIconId");
-                            Drawable d = mIconManager.getMobileIcon(slot, resId, true);
+                            Drawable d = mIconManager.getMobileIcon(slot, resId);
                             if (d != null) mMobile[slot].setImageDrawable(d);
                         }
                         if (mIconManager.isMobileIconChangeAllowed(slot)) {
