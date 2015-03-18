@@ -497,6 +497,8 @@ public class ModPowerMenu {
                 return true;
             } else if (methodName.equals("showConditional")) {
                 return true;
+            } else if (methodName.equals("getLabelForAccessibility")) {
+                return null;
             } else {
                 log("RebootAction: Unhandled invocation method: " + methodName);
                 return null;
@@ -589,6 +591,8 @@ public class ModPowerMenu {
                 return true;
             } else if (methodName.equals("showConditional")) {
                 return true;
+            } else if (methodName.equals("getLabelForAccessibility")) {
+                return null;
             } else {
                 log("ExpandedDesktopAction: Unhandled invocation method: " + methodName);
                 return null;
@@ -642,6 +646,8 @@ public class ModPowerMenu {
                 return true;
             } else if (methodName.equals("showConditional")) {
                 return true;
+            } else if (methodName.equals("getLabelForAccessibility")) {
+                return null;
             } else {
                 log("ScreenshotAction: Unhandled invocation method: " + methodName);
                 return null;
@@ -705,6 +711,8 @@ public class ModPowerMenu {
                 return true;
             } else if (methodName.equals("showConditional")) {
                 return true;
+            } else if (methodName.equals("getLabelForAccessibility")) {
+                return null;
             } else {
                 log("ScreenrecordAction: Unhandled invocation method: " + methodName);
                 return null;
