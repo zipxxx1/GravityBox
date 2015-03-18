@@ -15,6 +15,8 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import java.lang.reflect.Method;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,6 +96,10 @@ public class ModExpandedDesktop {
     private static int mAnimDockRightEnter;
     private static int mAnimDockLeftExit;
     private static int mAnimDockLeftEnter;
+    private static Method mUpdateSystemBarsLw = null;
+    private static Method mUpdateSystemUiVisibilityLw = null;
+    private static Method mCanHideNavigationBar = null;
+    private static Method mAreTranslucentBarsAllowed = null;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -229,6 +235,27 @@ public class ModExpandedDesktop {
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
             final Class<?> classImmersiveModeConfirm = XposedHelpers.findClass(CLASS_IMMERSIVE_MODE_CONFIRM, null);
 
+            if (mCanHideNavigationBar == null) {
+                mCanHideNavigationBar = classPhoneWindowManager.getDeclaredMethod(
+                        "canHideNavigationBar");
+                mCanHideNavigationBar.setAccessible(true);
+            }
+            if (mAreTranslucentBarsAllowed == null) {
+                mAreTranslucentBarsAllowed = classPhoneWindowManager.getDeclaredMethod(
+                        "areTranslucentBarsAllowed");
+                mAreTranslucentBarsAllowed.setAccessible(true);
+            }
+            if (mUpdateSystemUiVisibilityLw == null) {
+                mUpdateSystemUiVisibilityLw = classPhoneWindowManager.getDeclaredMethod(
+                        "updateSystemUiVisibilityLw");
+                mUpdateSystemUiVisibilityLw.setAccessible(true);
+            }
+            if (mUpdateSystemBarsLw == null) {
+                mUpdateSystemBarsLw = classPhoneWindowManager.getDeclaredMethod("updateSystemBarsLw",
+                        XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null), int.class, int.class);
+                mUpdateSystemBarsLw.setAccessible(true);
+            }
+
             mNavbarOverride = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false);
             if (mNavbarOverride) {
                 mNavbarHeightScaleFactor = 
@@ -305,7 +332,7 @@ public class ModExpandedDesktop {
                         if ((fl & (WmLp.FLAG_LAYOUT_IN_SCREEN | WmLp.FLAG_LAYOUT_INSET_DECOR))
                                 == (WmLp.FLAG_LAYOUT_IN_SCREEN | WmLp.FLAG_LAYOUT_INSET_DECOR)) {
                             int availRight, availBottom;
-                            if ((Boolean) XposedHelpers.callMethod(param.thisObject, "canHideNavigationBar") &&
+                            if ((Boolean) mCanHideNavigationBar.invoke(param.thisObject) &&
                                     (systemUiVisibility & View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION) != 0) {
                                 availRight = getInt("mUnrestrictedScreenLeft") + getInt("mUnrestrictedScreenWidth");
                                 availBottom = getInt("mUnrestrictedScreenTop") + getInt("mUnrestrictedScreenHeight");
@@ -446,7 +473,7 @@ public class ModExpandedDesktop {
                             boolean navAllowedHidden = immersive || immersiveSticky;
                             navTranslucent &= !immersiveSticky || 
                                     mExpandedDesktopMode == GravityBoxSettings.ED_IMMERSIVE_STATUSBAR;  // transient trumps translucent
-                            navTranslucent &= (Boolean) XposedHelpers.callMethod(param.thisObject, "areTranslucentBarsAllowed");
+                            navTranslucent &= (Boolean) mAreTranslucentBarsAllowed.invoke(param.thisObject);
 
                             // When the navigation bar isn't visible, we put up a fake
                             // input window to catch all touch events.  This way we can
@@ -469,7 +496,7 @@ public class ModExpandedDesktop {
                             // For purposes of positioning and showing the nav bar, if we have
                             // decided that it can't be hidden (because of the screen aspect ratio),
                             // then take that into account.
-                            navVisible |= !(Boolean) XposedHelpers.callMethod(param.thisObject, "canHideNavigationBar");
+                            navVisible |= !(Boolean) mCanHideNavigationBar.invoke(param.thisObject);
 
                             boolean updateSysUiVisibility = false;
                             Object navBar = getObj("mNavigationBar");
@@ -620,7 +647,7 @@ public class ModExpandedDesktop {
 
                                 boolean statusBarTransient = (sysui & ViewConst.STATUS_BAR_TRANSIENT) != 0;
                                 boolean statusBarTranslucent = (sysui & ViewConst.STATUS_BAR_TRANSLUCENT) != 0;
-                                statusBarTranslucent &= (Boolean) XposedHelpers.callMethod(param.thisObject, "areTranslucentBarsAllowed");
+                                statusBarTranslucent &= (Boolean) mAreTranslucentBarsAllowed.invoke(param.thisObject);
 
                                 // If the status bar is hidden, we don't want to cause
                                 // windows behind it to scroll.
@@ -664,7 +691,7 @@ public class ModExpandedDesktop {
                                 }
                             }
                             if (updateSysUiVisibility) {
-                                XposedHelpers.callMethod(param.thisObject, "updateSystemUiVisibilityLw");
+                                mUpdateSystemUiVisibilityLw.invoke(param.thisObject);
                             }
                         }
                         return null;
@@ -801,7 +828,7 @@ public class ModExpandedDesktop {
                         } else {
                             mClearedBecauseOfForceShow = false;
                         }
-                        int visibility = (Integer) XposedHelpers.callMethod(param.thisObject, "updateSystemBarsLw",
+                        int visibility = (Integer) mUpdateSystemBarsLw.invoke(param.thisObject,
                                 win, getInt("mLastSystemUiFlags"), tmpVisibility);
                         final int diff = visibility ^ getInt("mLastSystemUiFlags");
                         final boolean needsMenu = (Boolean) XposedHelpers.callMethod(win, "getNeedsMenuLw",
