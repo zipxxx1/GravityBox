@@ -1606,9 +1606,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 if (!sSystemProperties.hasMsimSupport) {
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                 }
-                if (Utils.isMotoXtDevice()) {
-                    mPrefCatStatusbarColors.removePreference(mPrefSbSignalColorMode);
-                }
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
                 //mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
             } else {

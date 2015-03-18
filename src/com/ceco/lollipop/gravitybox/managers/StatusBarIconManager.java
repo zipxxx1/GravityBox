@@ -237,9 +237,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
 
     public void setSignalIconMode(int mode) {
         // always force stock icon mode for Moto devices
-        if (Utils.isMotoXtDevice()) {
-            mode = SI_MODE_STOCK;
-        }
         if (mColorInfo.signalIconMode != mode) {
             mColorInfo.signalIconMode = mode;
             clearCache();
