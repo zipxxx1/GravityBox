@@ -37,7 +37,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
-    protected final String MOBILE_ICON_SPACERS[] = new String[] { "mSpacerView_Phone_1a",
+    protected static final String[] MOBILE_ICON_SPACERS = new String[] { "mSpacerView_Phone_1a",
             "mSpacerView_Phone_1b", "mSpacerView_Phone_2a", "mSpacerView_Phone_2b" };
 
     protected SignalActivity[] mMobileActivity;
