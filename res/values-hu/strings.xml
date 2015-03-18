@@ -713,7 +713,7 @@
 
     <!-- Ringer tile modes -->
     <string name="pref_qs_ringer_mode_title">Csengés üzemmód csempe beállítások</string>
-    <string name="ringer_mode_silent">Néma</string>
+    <string name="ringer_mode_silent">Prioritás</string>
     <string name="ringer_mode_vibrate">Rezgés</string>
     <string name="ringer_mode_sound">Csengés</string>
     <string name="ringer_mode_sound_vibrate">Csengés és rezgés</string>
@@ -1334,6 +1334,7 @@
     <string name="increasing_ring_min_volume_title">Csengés kezdő hangerő</string>
     <string name="increasing_ring_volume_notice">Megjegyzés:\nHa a kezdő hangerő magasabb értékre kerül beállításra, mint a csengés hangerő, a csengőhang a csengés hangerőn kerül lejátszásra</string>
     <string name="increasing_ring_ramp_up_duration_title">Időtartam fokozása</string>
+    <string name="increasing_ring_interval_0">5 másodperc</string>
     <string name="increasing_ring_interval_1">10 másodperc</string>
     <string name="increasing_ring_interval_2">15 másodperc</string>
     <string name="increasing_ring_interval_3">20 másodperc</string>
