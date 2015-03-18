@@ -84,7 +84,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
                             }
 
                             if (mMobileActivity == null) {
-                                mMobileActivity = new SignalActivity[2];
+                                mMobileActivity = new SignalActivity[PhoneWrapper.getPhoneCount()];
                             }
 
                             for (int i=0; i < PhoneWrapper.getPhoneCount(); i++) {
@@ -261,10 +261,8 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
 
         if ((flags & StatusBarIconManager.FLAG_DATA_ACTIVITY_COLOR_CHANGED) != 0 &&
                     mDataActivityEnabled && mMobileActivity != null) {
-            if (mMobileActivity != null) {
-                for (int i=0; i < mMobileActivity.length; i++) {
-                    if (mMobileActivity[i] != null) mMobileActivity[i].updateDataActivityColor();
-                }
+            for (int i=0; i < mMobileActivity.length; i++) {
+                if (mMobileActivity[i] != null) mMobileActivity[i].updateDataActivityColor();
             }
         }
     }
