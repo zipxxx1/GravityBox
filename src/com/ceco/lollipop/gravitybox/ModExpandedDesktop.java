@@ -101,6 +101,8 @@ public class ModExpandedDesktop {
     private static Method mUpdateSystemUiVisibilityLw = null;
     private static Method mCanHideNavigationBar = null;
     private static Method mAreTranslucentBarsAllowed = null;
+    private static Method mIsStatusBarKeyguard = null;
+    private static Method mGetStatusBarService = null;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -248,6 +250,16 @@ public class ModExpandedDesktop {
                 mUpdateSystemUiVisibilityLw = classPhoneWindowManager.getDeclaredMethod(
                         "updateSystemUiVisibilityLw");
                 mUpdateSystemUiVisibilityLw.setAccessible(true);
+            }
+            if (mIsStatusBarKeyguard == null) {
+                mIsStatusBarKeyguard = classPhoneWindowManager.getDeclaredMethod(
+                        "isStatusBarKeyguard");
+                mIsStatusBarKeyguard.setAccessible(true);
+            }
+            if (mGetStatusBarService == null) {
+                mGetStatusBarService = classPhoneWindowManager.getDeclaredMethod(
+                        "getStatusBarService");
+                mGetStatusBarService.setAccessible(true);
             }
             if (mUpdateSystemBarsLw == null) {
                 mUpdateSystemBarsLw = classPhoneWindowManager.getDeclaredMethod("updateSystemBarsLw",
@@ -867,7 +879,7 @@ public class ModExpandedDesktop {
                             @Override
                             public void run() {
                                 try {
-                                    Object statusbar = XposedHelpers.callMethod(param.thisObject, "getStatusBarService");
+                                    Object statusbar = mGetStatusBarService.invoke(param.thisObject);
                                     if (statusbar != null) {
                                         XposedHelpers.callMethod(statusbar, "setSystemUiVisibility", visibility2, 0xffffffff);
                                         XposedHelpers.callMethod(statusbar, "topAppWindowChanged", needsMenu);
@@ -1016,7 +1028,7 @@ public class ModExpandedDesktop {
 
     private static boolean isKeyguardShowing() {
         try {
-            return (Boolean) XposedHelpers.callMethod(mPhoneWindowManager, "isStatusBarKeyguard") && 
+            return (Boolean) mIsStatusBarKeyguard.invoke(mPhoneWindowManager) &&
                 !getBool("mHideLockScreen");
         } catch (Throwable t) {
             return false;
