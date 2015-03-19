@@ -97,12 +97,12 @@ public class ModExpandedDesktop {
     private static int mAnimDockRightEnter;
     private static int mAnimDockLeftExit;
     private static int mAnimDockLeftEnter;
+    private static Method mAreTranslucentBarsAllowed = null;
+    private static Method mCanHideNavigationBar = null;
+    private static Method mIsStatusBarKeyguard = null;
+    private static Method mRequestTransientBars = null;
     private static Method mUpdateSystemBarsLw = null;
     private static Method mUpdateSystemUiVisibilityLw = null;
-    private static Method mCanHideNavigationBar = null;
-    private static Method mAreTranslucentBarsAllowed = null;
-    private static Method mIsStatusBarKeyguard = null;
-    private static Method mGetStatusBarService = null;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -233,39 +233,47 @@ public class ModExpandedDesktop {
         }
     }
 
-    public static void initZygote(final XSharedPreferences prefs) {
+    private static void initReflections(Class<?> classPhoneWindowManager) {
         try {
-            final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
-            if (mCanHideNavigationBar == null) {
-                mCanHideNavigationBar = classPhoneWindowManager.getDeclaredMethod(
-                        "canHideNavigationBar");
-                mCanHideNavigationBar.setAccessible(true);
-            }
             if (mAreTranslucentBarsAllowed == null) {
                 mAreTranslucentBarsAllowed = classPhoneWindowManager.getDeclaredMethod(
                         "areTranslucentBarsAllowed");
                 mAreTranslucentBarsAllowed.setAccessible(true);
             }
-            if (mUpdateSystemUiVisibilityLw == null) {
-                mUpdateSystemUiVisibilityLw = classPhoneWindowManager.getDeclaredMethod(
-                        "updateSystemUiVisibilityLw");
-                mUpdateSystemUiVisibilityLw.setAccessible(true);
+            if (mCanHideNavigationBar == null) {
+                mCanHideNavigationBar = classPhoneWindowManager.getDeclaredMethod(
+                        "canHideNavigationBar");
+                mCanHideNavigationBar.setAccessible(true);
             }
             if (mIsStatusBarKeyguard == null) {
                 mIsStatusBarKeyguard = classPhoneWindowManager.getDeclaredMethod(
                         "isStatusBarKeyguard");
                 mIsStatusBarKeyguard.setAccessible(true);
             }
-            if (mGetStatusBarService == null) {
-                mGetStatusBarService = classPhoneWindowManager.getDeclaredMethod(
-                        "getStatusBarService");
-                mGetStatusBarService.setAccessible(true);
+            if (mRequestTransientBars == null) {
+                mRequestTransientBars = classPhoneWindowManager.getDeclaredMethod("requestTransientBars",
+                        XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null));
+                mRequestTransientBars.setAccessible(true);
             }
             if (mUpdateSystemBarsLw == null) {
                 mUpdateSystemBarsLw = classPhoneWindowManager.getDeclaredMethod("updateSystemBarsLw",
                         XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null), int.class, int.class);
                 mUpdateSystemBarsLw.setAccessible(true);
             }
+            if (mUpdateSystemUiVisibilityLw == null) {
+                mUpdateSystemUiVisibilityLw = classPhoneWindowManager.getDeclaredMethod(
+                        "updateSystemUiVisibilityLw");
+                mUpdateSystemUiVisibilityLw.setAccessible(true);
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    public static void initZygote(final XSharedPreferences prefs) {
+        try {
+            final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
+            initReflections(classPhoneWindowManager);
 
             mNavbarOverride = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false);
             if (mNavbarOverride) {
@@ -879,7 +887,7 @@ public class ModExpandedDesktop {
                             @Override
                             public void run() {
                                 try {
-                                    Object statusbar = mGetStatusBarService.invoke(param.thisObject);
+                                    Object statusbar = XposedHelpers.callMethod(param.thisObject, "getStatusBarService");
                                     if (statusbar != null) {
                                         XposedHelpers.callMethod(statusbar, "setSystemUiVisibility", visibility2, 0xffffffff);
                                         XposedHelpers.callMethod(statusbar, "topAppWindowChanged", needsMenu);
@@ -941,7 +949,7 @@ public class ModExpandedDesktop {
                                             "SWIPE_TIMEOUT_MS")) {
                                 Object navBar = getObj("mNavigationBar");
                                 if (navBar != null && !getBool("mNavigationBarOnBottom")) {
-                                    XposedHelpers.callMethod(mPhoneWindowManager, "requestTransientBars", navBar);
+                                    mRequestTransientBars.invoke(mPhoneWindowManager, navBar);
                                 }
                             }
                         }
