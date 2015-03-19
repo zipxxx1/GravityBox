@@ -15,6 +15,8 @@
 
 package com.ceco.kitkat.gravitybox;
 
+import java.lang.reflect.Method;
+
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -150,7 +152,9 @@ public class ModHwKeys {
     private static boolean mCustomKeyPressed = false;
     private static long[] mVkVibePattern;
     private static long[] mVkVibePatternDefault;
-    private static String[] mHeadsetUri = new String[2]; // index 0 = unplugged, index 1 = plugged
+    private static String[] mHeadsetUri = new String[2]; // index 0 = unplugged, index 1 = plugged 
+    private static Method mLaunchAssistAction = null;
+    private static Method mLaunchAssistLongPressAction = null;
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui",
@@ -388,6 +392,23 @@ public class ModHwKeys {
         }
     };
 
+    private static void initReflections(Class<?> classPhoneWindowManager) {
+        try {
+            if (mLaunchAssistAction == null) {
+                mLaunchAssistAction = classPhoneWindowManager.getDeclaredMethod(
+                        "launchAssistAction");
+                mLaunchAssistAction.setAccessible(true);
+            }
+            if (mLaunchAssistLongPressAction == null) {
+                mLaunchAssistLongPressAction = classPhoneWindowManager.getDeclaredMethod(
+                        "launchAssistLongPressAction");
+                mLaunchAssistLongPressAction.setAccessible(true);
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
     public static void initZygote(final XSharedPreferences prefs) {
         try {
             mPrefs = prefs;
@@ -486,6 +507,7 @@ public class ModHwKeys {
             mHeadsetUri[1] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_PLUG, null);
 
             final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
+            initReflections(classPhoneWindowManager);
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "init",
                 Context.class, CLASS_IWINDOW_MANAGER, CLASS_WINDOW_MANAGER_FUNCS, phoneWindowManagerInitHook);
@@ -1202,7 +1224,7 @@ public class ModHwKeys {
 
     private static void launchSearchActivity() {
         try {
-            XposedHelpers.callMethod(mPhoneWindowManager, "launchAssistAction");
+            mLaunchAssistAction.invoke(mPhoneWindowManager);
         } catch (Exception e) {
             XposedBridge.log(e);
         }
@@ -1210,7 +1232,7 @@ public class ModHwKeys {
 
     private static void launchVoiceSearchActivity() {
         try {
-            XposedHelpers.callMethod(mPhoneWindowManager, "launchAssistLongPressAction");
+            mLaunchAssistLongPressAction.invoke(mPhoneWindowManager);
         } catch (Exception e) {
             XposedBridge.log(e);
         }
