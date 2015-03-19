@@ -713,7 +713,7 @@
  
     <!-- Ringer tile modes -->
     <string name="pref_qs_ringer_mode_title">Touche mode de sonnerie</string>
-    <string name="ringer_mode_silent">Silencieux</string>
+    <string name="ringer_mode_silent">Priorité</string>
     <string name="ringer_mode_vibrate">Vibreur</string>
     <string name="ringer_mode_sound">Sonnerie</string>
     <string name="ringer_mode_sound_vibrate">Sonnerie et vibreur</string>
@@ -1346,6 +1346,7 @@
     <string name="increasing_ring_min_volume_title">Volume début de sonnerie</string>
     <string name="increasing_ring_volume_notice">Remarque:\nComme le volume de début est supérieur au volume de la sonnerie, celle-ci sera jouée au volume défini initialement</string>
     <string name="increasing_ring_ramp_up_duration_title">Durée de l\'augmentation du volume</string>
+    <string name="increasing_ring_interval_0">5 secondes</string>
     <string name="increasing_ring_interval_1">10 secondes</string>
     <string name="increasing_ring_interval_2">15 secondes</string>
     <string name="increasing_ring_interval_3">20 secondes</string>
@@ -1746,5 +1747,9 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Masquer le curseur de luminosité</string>
+
+    <!-- SignalCluster: reduce icon spacing -->
+    <string name="pref_signal_cluster_narrow_title">Réduire espace entre icônes</string>
+    <string name="pref_signal_cluster_narrow_summary">Réduit l\'espacement entre les icônes de signal (redémarrage nécessaire)</string>
 
 </resources>
