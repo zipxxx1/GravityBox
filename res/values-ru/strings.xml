@@ -1346,6 +1346,7 @@
     <string name="increasing_ring_min_volume_title">Начальная громкость</string>
     <string name="increasing_ring_volume_notice">Примечание:\nесли значение начальной громкости превышает громкость звонка, мелодия будет воспроизводиться на уровне громкости звонка.</string>
     <string name="increasing_ring_ramp_up_duration_title">Длительность нарастания</string>
+    <string name="increasing_ring_interval_0">5 с</string>
     <string name="increasing_ring_interval_1">10 c</string>
     <string name="increasing_ring_interval_2">15 c</string>
     <string name="increasing_ring_interval_3">20 c</string>
@@ -1745,5 +1746,9 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Скрыть слайдер яркости</string>
+
+    <!-- SignalCluster: reduce icon spacing -->
+    <string name="pref_signal_cluster_narrow_title">Сжатие значка</string>
+    <string name="pref_signal_cluster_narrow_summary">Уменьшение пробелов в значке сигнала (необходима перезагрузка)</string>
 
 </resources>
