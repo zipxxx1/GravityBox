@@ -96,10 +96,11 @@ public class ModExpandedDesktop {
     private static int mAnimDockRightEnter;
     private static int mAnimDockLeftExit;
     private static int mAnimDockLeftEnter;
+    private static Method mAreTranslucentBarsAllowed = null;
+    private static Method mCanHideNavigationBar = null;
+    private static Method mRequestTransientBars = null;
     private static Method mUpdateSystemBarsLw = null;
     private static Method mUpdateSystemUiVisibilityLw = null;
-    private static Method mCanHideNavigationBar = null;
-    private static Method mAreTranslucentBarsAllowed = null;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -230,31 +231,43 @@ public class ModExpandedDesktop {
         }
     }
 
-    public static void initZygote(final XSharedPreferences prefs) {
+    private static void initReflections(Class<?> classPhoneWindowManager) {
         try {
-            final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
-            final Class<?> classImmersiveModeConfirm = XposedHelpers.findClass(CLASS_IMMERSIVE_MODE_CONFIRM, null);
-
-            if (mCanHideNavigationBar == null) {
-                mCanHideNavigationBar = classPhoneWindowManager.getDeclaredMethod(
-                        "canHideNavigationBar");
-                mCanHideNavigationBar.setAccessible(true);
-            }
             if (mAreTranslucentBarsAllowed == null) {
                 mAreTranslucentBarsAllowed = classPhoneWindowManager.getDeclaredMethod(
                         "areTranslucentBarsAllowed");
                 mAreTranslucentBarsAllowed.setAccessible(true);
             }
-            if (mUpdateSystemUiVisibilityLw == null) {
-                mUpdateSystemUiVisibilityLw = classPhoneWindowManager.getDeclaredMethod(
-                        "updateSystemUiVisibilityLw");
-                mUpdateSystemUiVisibilityLw.setAccessible(true);
+            if (mCanHideNavigationBar == null) {
+                mCanHideNavigationBar = classPhoneWindowManager.getDeclaredMethod(
+                        "canHideNavigationBar");
+                mCanHideNavigationBar.setAccessible(true);
+            }
+            if (mRequestTransientBars == null) {
+                mRequestTransientBars = classPhoneWindowManager.getDeclaredMethod("requestTransientBars",
+                        XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null));
+                mRequestTransientBars.setAccessible(true);
             }
             if (mUpdateSystemBarsLw == null) {
                 mUpdateSystemBarsLw = classPhoneWindowManager.getDeclaredMethod("updateSystemBarsLw",
                         XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null), int.class, int.class);
                 mUpdateSystemBarsLw.setAccessible(true);
             }
+            if (mUpdateSystemUiVisibilityLw == null) {
+                mUpdateSystemUiVisibilityLw = classPhoneWindowManager.getDeclaredMethod(
+                        "updateSystemUiVisibilityLw");
+                mUpdateSystemUiVisibilityLw.setAccessible(true);
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    public static void initZygote(final XSharedPreferences prefs) {
+        try {
+            final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
+            final Class<?> classImmersiveModeConfirm = XposedHelpers.findClass(CLASS_IMMERSIVE_MODE_CONFIRM, null);
+            initReflections(classPhoneWindowManager);
 
             mNavbarOverride = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false);
             if (mNavbarOverride) {
@@ -934,7 +947,7 @@ public class ModExpandedDesktop {
                                             "SWIPE_TIMEOUT_MS")) {
                                 Object navBar = getObj("mNavigationBar");
                                 if (navBar != null && !getBool("mNavigationBarOnBottom")) {
-                                    XposedHelpers.callMethod(mPhoneWindowManager, "requestTransientBars", navBar);
+                                    mRequestTransientBars.invoke(mPhoneWindowManager, navBar);
                                 }
                             }
                         }
