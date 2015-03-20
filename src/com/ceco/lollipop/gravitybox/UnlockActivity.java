@@ -1,4 +1,6 @@
 package com.ceco.lollipop.gravitybox;
+import java.io.File;
+
 import com.ceco.lollipop.gravitybox.R;
 
 import android.app.Activity;
@@ -25,13 +27,14 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
     private Handler mHandler;
     private Dialog mAlertDialog;
     private ProgressDialog mProgressDialog;
+    private int mDlgThemeId;
 
     private Runnable mGetSystemPropertiesTimeout = new Runnable() {
         @Override
         public void run() {
             dismissProgressDialog();
             AlertDialog.Builder builder = new AlertDialog.Builder(
-                    new ContextThemeWrapper(UnlockActivity.this, android.R.style.Theme_Material_Dialog))
+                    new ContextThemeWrapper(UnlockActivity.this, mDlgThemeId))
                 .setTitle(R.string.app_name)
                 .setMessage(R.string.gb_startup_error)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -48,6 +51,9 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        File file = new File(getFilesDir() + "/" + GravityBoxSettings.FILE_THEME_DARK_FLAG);
+        mDlgThemeId = file.exists() ? android.R.style.Theme_Material_Dialog :
+            android.R.style.Theme_Material_Light_Dialog;
         super.onCreate(savedInstanceState);
 
         mHandler = new Handler();
@@ -58,7 +64,7 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
         intent.putExtra("receiver", mReceiver);
         intent.putExtra("settings_uuid", SettingsManager.getInstance(this).getOrCreateUuid());
         mProgressDialog = new ProgressDialog(
-                new ContextThemeWrapper(UnlockActivity.this, android.R.style.Theme_Material_Dialog));
+                new ContextThemeWrapper(UnlockActivity.this, mDlgThemeId));
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setTitle(R.string.app_name);
         mProgressDialog.setMessage(getString(R.string.gb_startup_progress));
@@ -96,7 +102,7 @@ public class UnlockActivity extends Activity implements GravityBoxResultReceiver
                     SettingsManager.getInstance(this).getOrCreateUuid());
             sendBroadcast(intent);
             AlertDialog.Builder builder = new AlertDialog.Builder(
-                    new ContextThemeWrapper(UnlockActivity.this, android.R.style.Theme_Material_Dialog))
+                    new ContextThemeWrapper(UnlockActivity.this, mDlgThemeId))
                 .setTitle(R.string.app_name)
                 .setMessage(R.string.premium_unlocked_message)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
