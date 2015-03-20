@@ -18,9 +18,7 @@ package com.ceco.gm2.gravitybox;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -39,7 +37,7 @@ public class ModLauncher {
     public static final String PACKAGE_NAMES = "com.google.android.googlequicksearchbox";
     private static final String TAG = "GB:ModLauncher";
 
-    private static final Map<String, DynamicGrid> CLASS_DYNAMIC_GRID; 
+    private static final List<DynamicGrid> CLASS_DYNAMIC_GRID; 
     private static final List<ShowAllApps> METHOD_SHOW_ALL_APPS;
     private static final String CLASS_LAUNCHER = "com.android.launcher3.Launcher";
     private static final String CLASS_APP_WIDGET_HOST_VIEW = "android.appwidget.AppWidgetHostView";
@@ -49,10 +47,12 @@ public class ModLauncher {
 
     private static final class DynamicGrid {
         Class<?> clazz;
+        String className;
         String fProfile;
         String fNumRows;
         String fNumCols;
-        public DynamicGrid(String fp, String fnr, String fnc) {
+        public DynamicGrid(String cN, String fp, String fnr, String fnc) {
+            className = cN;
             fProfile = fp;
             fNumRows = fnr;
             fNumCols = fnc;
@@ -71,15 +71,15 @@ public class ModLauncher {
     }
 
     static {
-        CLASS_DYNAMIC_GRID = new HashMap<String, DynamicGrid>();
-        CLASS_DYNAMIC_GRID.put("com.android.launcher3.DynamicGrid",
-                new DynamicGrid("mProfile", "numRows", "numColumns"));
-        CLASS_DYNAMIC_GRID.put("nw", new DynamicGrid("Bq", "yx", "yy"));
-        CLASS_DYNAMIC_GRID.put("rf", new DynamicGrid("DU", "AW", "AX"));
-        CLASS_DYNAMIC_GRID.put("sg", new DynamicGrid("Ez", "BB", "BC"));
-        CLASS_DYNAMIC_GRID.put("ur", new DynamicGrid("Gi", "Dg", "Dh"));
-        CLASS_DYNAMIC_GRID.put("wd", new DynamicGrid("Fe", "Ce", "Cf"));
-        CLASS_DYNAMIC_GRID.put("com.android.launcher3.cn", new DynamicGrid("KA", "Hz", "HA"));
+        CLASS_DYNAMIC_GRID = new ArrayList<DynamicGrid>();
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.DynamicGrid", "mProfile", "numRows", "numColumns"));
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("nw", "Bq", "yx", "yy"));
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("rf", "DU", "AW", "AX"));
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("sg", "Ez", "BB", "BC"));
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("ur", "Gi", "Dg", "Dh"));
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("wd", "Fe", "Ce", "Cf"));
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.cn", "KA", "Hz", "HA"));
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.cn", "Kz", "Hy", "Hz"));
 
         METHOD_SHOW_ALL_APPS = new ArrayList<ShowAllApps>();
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("onClickAllAppsButton",
@@ -91,6 +91,9 @@ public class ModLauncher {
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
                 new Object[] { boolean.class, "com.android.launcher3.q", boolean.class },
                 new Object[] { false, "Dc", false } ));
+        METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
+                new Object[] { boolean.class, "com.android.launcher3.q", boolean.class },
+                new Object[] { false, "Db", false } ));
     }
 
     private static boolean mShouldShowAppDrawer;
@@ -114,16 +117,23 @@ public class ModLauncher {
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         boolean dynamicGridFound = false;
-        for (String className : CLASS_DYNAMIC_GRID.keySet()) {
-            final DynamicGrid dynamicGrid;
+        for (DynamicGrid dg : CLASS_DYNAMIC_GRID) {
+            final DynamicGrid dynamicGrid = dg;
             try {
-                Class<?> cls = XposedHelpers.findClass(className, classLoader);
-                dynamicGrid = CLASS_DYNAMIC_GRID.get(className);
-                Field profile = cls.getDeclaredField(dynamicGrid.fProfile);
-                if (DEBUG) log("Probably found DynamicGrid class as: " + className);
-                dynamicGrid.clazz = cls;
+                Class<?> cls = XposedHelpers.findClass(dg.className, classLoader);
+                Field profile = cls.getDeclaredField(dg.fProfile);
+                Class<?> profileClass = profile.getType();
+                Field numRows = profileClass.getDeclaredField(dg.fNumRows);
+                if (!numRows.getType().isAssignableFrom(float.class))
+                    throw new Exception("numRows doesn't seem to be of float type");
+                Field numCols = profileClass.getDeclaredField(dg.fNumCols);
+                if (!numCols.getType().isAssignableFrom(float.class))
+                    throw new Exception("numCols doesn't seem to be of float type");
+                if (DEBUG) log("Probably found DynamicGrid class as: " + dg.className +
+                        "; numRows=" + dg.fNumRows + "; numCols=" + dg.fNumCols);
+                dg.clazz = cls;
             } catch (Throwable t) { 
-                if (DEBUG) log("search for dynamic grid " + className + ": " + t.getMessage());
+                if (DEBUG) log("search for dynamic grid " + dg.className + ": " + t.getMessage());
                 continue; 
             }
 
@@ -213,9 +223,12 @@ public class ModLauncher {
                                                     (String) sapm.paramTypes[i], classLoader);
                                             }
                                             if (sapm.paramValues[i] instanceof String) {
-                                                sapm.paramValues[i] = XposedHelpers.getStaticObjectField(
-                                                    (Class<?>) sapm.paramTypes[i],
-                                                    (String) sapm.paramValues[i]);
+                                                Object type = XposedHelpers.getStaticObjectField(
+                                                        (Class<?>) sapm.paramTypes[i],
+                                                        (String) sapm.paramValues[i]);
+                                                if (!"Applications".equals(type.toString()))
+                                                    continue;
+                                                sapm.paramValues[i] = type;
                                             }
                                         }
                                         Class<?> clazz = param.thisObject.getClass();
@@ -228,6 +241,7 @@ public class ModLauncher {
                                         }
                                         mShowAllAppsParams = sapm.paramValues;
                                         mShowAllAppsMethod.invoke(param.thisObject, mShowAllAppsParams);
+                                        break;
                                     } catch (Throwable t) {
                                         if (DEBUG) log("Method name " + sapm.methodName + 
                                                 " not found: " + t.getMessage());
