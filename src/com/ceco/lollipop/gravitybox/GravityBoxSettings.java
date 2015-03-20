@@ -537,6 +537,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE = "pref_navbar_height_landscape";
     public static final String PREF_KEY_NAVBAR_WIDTH = "pref_navbar_width";
     public static final String PREF_KEY_NAVBAR_MENUKEY = "pref_navbar_menukey";
+    public static final String PREF_KEY_NAVBAR_HIDE_IME = "pref_navbar_hide_ime";
     public static final String PREF_CAT_KEY_NAVBAR_CUSTOM_KEY = "pref_cat_navbar_custom_key";
     public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE = "pref_navbar_custom_key_enable";
     public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP = "pref_navbar_custom_key_singletap";
@@ -556,6 +557,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_HEIGHT_LANDSCAPE = "navbarHeightLandscape";
     public static final String EXTRA_NAVBAR_WIDTH = "navbarWidth";
     public static final String EXTRA_NAVBAR_MENUKEY = "navbarMenukey";
+    public static final String EXTRA_NAVBAR_HIDE_IME = "navbarHideIme";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_ENABLE = "navbarCustomKeyEnable";
     public static final String EXTRA_NAVBAR_COLOR_ENABLE = "navbarColorEnable";
     public static final String EXTRA_NAVBAR_KEY_COLOR = "navbarKeyColor";
@@ -2659,6 +2661,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_NAVBAR_MENUKEY)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_MENUKEY, prefs.getBoolean(PREF_KEY_NAVBAR_MENUKEY, false));
+            } else if (key.equals(PREF_KEY_NAVBAR_HIDE_IME)) {
+                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
+                intent.putExtra(EXTRA_NAVBAR_HIDE_IME, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 boolean enable = prefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false);

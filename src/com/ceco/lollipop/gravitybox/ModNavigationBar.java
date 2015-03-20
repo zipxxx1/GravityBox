@@ -85,6 +85,7 @@ public class ModNavigationBar {
     private static boolean mNavbarRingDisabled;
     private static boolean mNavbarLeftHanded;
     private static boolean mUseLargerIcons;
+    private static boolean mHideImeSwitcher;
 
     // Custom key
     private static boolean mCustomKeyEnabled;
@@ -184,6 +185,10 @@ public class ModNavigationBar {
                     mCustomKeyAltIcon = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON, false);
                     updateCustomKeyIcon();
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HIDE_IME)) {
+                    mHideImeSwitcher = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_NAVBAR_HIDE_IME, false);
                 }
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) && 
@@ -308,6 +313,7 @@ public class ModNavigationBar {
                     GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP, false);
             mNavbarRingDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_NAVBAR_RING_DISABLE, false);
+            mHideImeSwitcher = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_HIDE_IME, false);
 
             // for HTC GPE devices having capacitive keys
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false)) {
@@ -519,6 +525,9 @@ public class ModNavigationBar {
                         if ((Integer) param.args[0] != navigationIconHints || (Boolean)param.args[1]) {
                             setKeyColor();
                         }
+                    }
+                    if (mHideImeSwitcher) {
+                        hideImeSwitcher();
                     }
                     setDpadKeyVisibility();
 
@@ -883,6 +892,20 @@ public class ModNavigationBar {
             log("Error setting menu key visibility");
         }
         
+    }
+
+    private static void hideImeSwitcher() {
+        try {
+            int imeSwitcherResId = mResources.getIdentifier("ime_switcher", "id", PACKAGE_NAME);
+            for (int i = 0; i <= 1; i++) {
+                View v = mNavbarViewInfo[i].navButtons.findViewById(imeSwitcherResId);
+                if (v != null) {
+                    v.setVisibility(View.GONE);
+                }
+            }
+        } catch (Throwable t) {
+            log("Error hiding IME switcher: " + t.getMessage());
+        }
     }
 
     public static void setRecentAlt(boolean recentAlt) {

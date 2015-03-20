@@ -1025,6 +1025,11 @@
                 android:defaultValue="false" />
 
             <CheckBoxPreference 
+                android:key="pref_navbar_hide_ime"
+                android:title="@string/pref_navbar_hide_ime_title"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference 
                 android:key="pref_navbar_swap_keys"
                 android:title="@string/pref_navbar_swap_keys_title"
                 android:defaultValue="false" />
