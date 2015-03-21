@@ -654,6 +654,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE = "pref_signal_cluster_lte_style";
     public static final String PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS = "pref_signal_cluster_hide_sim_labels";
     public static final String PREF_KEY_SIGNAL_CLUSTER_NARROW = "pref_signal_cluster_narrow";
+    public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
+    public static final String EXTRA_SC_NARROW = "scNarrow";
 
     // TODO: Navbar ring targets
 //    public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
@@ -835,7 +837,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_MTK_FIX_DEV_OPTS,
             PREF_KEY_MTK_FIX_TTS_SETTINGS,
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
-            PREF_KEY_SIGNAL_CLUSTER_NARROW,
             PREF_KEY_NAVBAR_LEFT_HANDED,
             PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH
     ));
@@ -3016,6 +3017,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_RECENTS_SEARCH_BAR)) {
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
                 intent.putExtra(EXTRA_RECENTS_SEARCH_BAR, prefs.getString(key, "DEFAULT"));
+            } else if (key.equals(PREF_KEY_SIGNAL_CLUSTER_NARROW)) {
+                intent.setAction(ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
+                intent.putExtra(EXTRA_SC_NARROW, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

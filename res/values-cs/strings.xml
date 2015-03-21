@@ -1714,7 +1714,7 @@
 
     <!-- SignalCluster: reduce icon spacing -->
     <string name="pref_signal_cluster_narrow_title">Zmenšit rozestupy ikon</string>
-    <string name="pref_signal_cluster_narrow_summary">Zmenší rozestupy ikon mobilního signálu (vyžaduje restart)</string>
+    <string name="pref_signal_cluster_narrow_summary">Zmenší rozestupy ikon mobilního signálu</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Skrýt přepínač klávesnice</string>

@@ -18,6 +18,8 @@ package com.ceco.lollipop.gravitybox;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.ceco.lollipop.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
@@ -26,6 +28,8 @@ import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
@@ -44,6 +48,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected boolean mHideSimLabels;
     protected boolean mNarrowIcons;
     protected int mIconSpacingPx;
+    protected Map<String, Integer> mIconSpacingDef;
 
     public StatusbarSignalClusterMsim(ContainerType containerType, LinearLayout view) {
         super(containerType, view);
@@ -54,8 +59,20 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         super.initPreferences();
         mHideSimLabels = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS, false);
         mNarrowIcons = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_NARROW, false);
-        mIconSpacingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2,
-                mView.getResources().getDisplayMetrics()));
+        mIconSpacingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1,
+                mResources.getDisplayMetrics()));
+    }
+
+    @Override
+    public void onBroadcastReceived(Context context, Intent intent) { 
+        super.onBroadcastReceived(context, intent);
+
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_SIGNAL_CLUSTER_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SC_NARROW)) {
+                mNarrowIcons = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SC_NARROW, false);
+                updateMobileIconSpacing();
+            }
+        }
     }
 
     @Override
@@ -161,8 +178,11 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
             hideSimLabel(simSlot);
         }
 
-        if (mNarrowIcons) {
-            reduceMobileIconSpacing();
+        if (mIconSpacingDef == null && mView.isAttachedToWindow()) {
+            mIconSpacingDef = new HashMap<String, Integer>(MOBILE_ICON_SPACERS.length);
+            if (mNarrowIcons) {
+                updateMobileIconSpacing();
+            }
         }
     }
 
@@ -224,13 +244,17 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
         }
     }
 
-    private void reduceMobileIconSpacing() {
+    private void updateMobileIconSpacing() {
         for (String spacer : MOBILE_ICON_SPACERS) {
             try {
                 View v = (View) XposedHelpers.getObjectField(mView, spacer);
                 if (v == null) continue;
                 ViewGroup.LayoutParams lp = v.getLayoutParams();
-                lp.width = mIconSpacingPx;
+                if (mIconSpacingDef.get(spacer) == null) {
+                    mIconSpacingDef.put(spacer, lp.width);
+                }
+                lp.width = mNarrowIcons ? mIconSpacingPx :
+                    mIconSpacingDef.get(spacer);
                 v.setLayoutParams(lp);
             } catch (Throwable t) {
                 if (DEBUG) XposedBridge.log(t);

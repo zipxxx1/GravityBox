@@ -1750,7 +1750,7 @@
 
     <!-- SignalCluster: reduce icon spacing -->
     <string name="pref_signal_cluster_narrow_title">Reduce icon spacing</string>
-    <string name="pref_signal_cluster_narrow_summary">Reduces signal icon spacing (requires reboot)</string>
+    <string name="pref_signal_cluster_narrow_summary">Reduces signal icon spacing</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Hide IME switcher</string>
