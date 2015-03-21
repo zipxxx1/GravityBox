@@ -1,3 +1,19 @@
+Changelog 5.0.4alpha - 21/03/2015
+--------------------------------------
+- Additional Motorola compatibility improvements (thanks to romracer)
+--- fixed expanded desktop on Moto X and similar devices having PhoneWindowManagerWithPartialDisplay
+--- fixed and improved signal cluster related tweaks
+--- fixed Search/Voice search navigation key/GravityBox actions
+- Signal cluster: added option for reducing signal icon spacing on Motorola Multi-SIM devices
+- Lockscreen tweaks: brought back custom background options
+- Navbar: added option for hiding IME switcher
+- Launcher tweaks: adjusted for compatibility with Google App 4.3.10
+- Changed premium unlock info dialog to use Material theme (thanks to pyler)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Russian translations (thanks to gaich)
+- Updated French translations (thanks to ch-vox)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 5.0.3alpha - 14/03/2015
 --------------------------------------
 - Improved support for Motorola Moto G Dual SIM:
