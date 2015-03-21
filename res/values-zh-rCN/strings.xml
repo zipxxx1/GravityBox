@@ -1750,7 +1750,7 @@
 	
 	<!-- SignalCluster: reduce icon spacing -->
     <string name="pref_signal_cluster_narrow_title">减少图标间距</string>
-    <string name="pref_signal_cluster_narrow_summary">减少信号图标间距（需要重新启动）</string>
+    <string name="pref_signal_cluster_narrow_summary">减少信号图标间距</string>
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">隐藏输入法切换器</string>
