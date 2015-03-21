@@ -1716,4 +1716,11 @@
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Skryť nastavenie jasu</string>
 
+    <!-- SignalCluster: reduce icon spacing -->
+    <string name="pref_signal_cluster_narrow_title">Zmenšiť rozostupy ikon</string>
+    <string name="pref_signal_cluster_narrow_summary">Zmenší rozostupy ikon mobilného signálu (vyžaduje reštart)</string>
+
+    <!-- Navigation bar: hide IME switcher -->
+    <string name="pref_navbar_hide_ime_title">Skryť prepínač klávesnice</string>
+
 </resources>
