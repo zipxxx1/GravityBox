@@ -1345,6 +1345,7 @@
     <string name="increasing_ring_enable">启用</string>
     <string name="increasing_ring_min_volume_title">开始振铃音量</string>
     <string name="increasing_ring_volume_notice">注意：由于设置音量比铃声音量大，将使用铃声音量播放</string>
+	<string name="increasing_ring_ramp_up_duration_title">过渡时间</string>
 	<string name="increasing_ring_interval_1">10秒</string>
     <string name="increasing_ring_interval_2">15秒</string>
     <string name="increasing_ring_interval_3">20秒</string>
@@ -1519,7 +1520,7 @@
 
     <!-- MTK Fix speech settings -->
     <string name="pref_mtk_fix_tts_settings_title">修复语音设置</string>
-    <string name="pref_mtk_fix_tts_settings_summary">在语言&amp;输入设置解锁语音搜索和文字转语音（需要重新启动） Unlocks voice search and text-to-speech settings in Language&amp;Input (requires reboot)</string>
+    <string name="pref_mtk_fix_tts_settings_summary">在语言&amp;输入设置解锁语音搜索和文字转语音（需要重新启动）</string>
     
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">使用选择的图像</string>
@@ -1746,5 +1747,12 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">隐藏亮度滑块</string>
+	
+	<!-- SignalCluster: reduce icon spacing -->
+    <string name="pref_signal_cluster_narrow_title">减少图标间距</string>
+    <string name="pref_signal_cluster_narrow_summary">减少信号图标间距（需要重新启动）</string>
+
+    <!-- Navigation bar: hide IME switcher -->
+    <string name="pref_navbar_hide_ime_title">隐藏输入法切换器</string>
 
 </resources>
