@@ -1749,6 +1749,6 @@
 
     <!-- SignalCluster: reduce icon spacing -->
     <string name="pref_signal_cluster_narrow_title">Сжатие значка</string>
-    <string name="pref_signal_cluster_narrow_summary">Уменьшение пробелов в значке сигнала (необходима перезагрузка)</string>
+    <string name="pref_signal_cluster_narrow_summary">Уменьшение пробелов в значке сигнала</string>
 
 </resources>

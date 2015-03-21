@@ -1750,6 +1750,6 @@
 
     <!-- SignalCluster: reduce icon spacing -->
     <string name="pref_signal_cluster_narrow_title">Réduire espace entre icônes</string>
-    <string name="pref_signal_cluster_narrow_summary">Réduit l\'espacement entre les icônes de signal (redémarrage nécessaire)</string>
+    <string name="pref_signal_cluster_narrow_summary">Réduit l\'espacement entre les icônes de signal</string>
 
 </resources>
