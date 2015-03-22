@@ -1690,4 +1690,27 @@
     <string name="settings_restore_backup_obsolete">Kopia zapasowa wykonana w starszej wersji Androida nie może być przywrócona 
          ze względu na znaczne różnice systemów. Zalecane jest skonfigurowanie Gravitybox od podstaw.</string>
 
+    <!-- QS: Normalize dual tiles -->
+    <string name="pref_qs_normalize_title">Normalizuj podwójne kafelki</string>
+    <string name="pref_qs_normalize_summary">Normalizuje kafelki WiFi i Bluetooth.
+        Akcja kliknięcia na etykietę zostanie zamieniona na akcję długiego naciśnięcia.</string>
+
+    <!-- QS: tile order info -->
+    <string name="tile_order_info">Pierwsze pole wyboru włącza/wyłącza kafelek, drugie pole wyboru
+        określa, czy kafelkek powinien być widoczny na ekranie blokady.</string>
+
+    <!-- Traffic meter: show in lock screen -->
+    <string name="pref_data_traffic_lockscreen_title">Pokaż na ekranie blokady</string>
+    <string name="pref_data_traffic_lockscreen_summary">Zawsze pokazuj wycentrowany na ekranie blokady</string>
+
+    <!-- QS: Hide brightness slider -->
+    <string name="pref_qs_hide_brightness_title">Ukryj suwak jasności</string>
+
+    <!-- SignalCluster: reduce icon spacing -->
+    <string name="pref_signal_cluster_narrow_title">Zmniejsz odstęp icon</string>
+    <string name="pref_signal_cluster_narrow_summary">Zmniejsza odstęp ikon sygnału</string>
+
+    <!-- Navigation bar: hide IME switcher -->
+    <string name="pref_navbar_hide_ime_title">Ukryj przełącznik klawiatury</string>
+
 </resources>
