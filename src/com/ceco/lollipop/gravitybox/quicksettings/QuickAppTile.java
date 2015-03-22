@@ -377,4 +377,17 @@ public class QuickAppTile extends QsTile {
         }
         return true;
     }
+
+    @Override
+    public void handleDestroy() {
+        super.handleDestroy();
+        mMainApp = null;
+        if (mAppSlots != null) {
+            mAppSlots.clear();
+            mAppSlots = null;
+        }
+        mPm = null;
+        mDialog = null;
+        mHandler = null;
+    }
 }

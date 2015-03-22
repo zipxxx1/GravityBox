@@ -61,6 +61,9 @@ public class CompassTile extends QsTile implements SensorEventListener {
         super.handleDestroy();
         setListeningSensors(false);
         mSensorManager = null;
+        mAccelerationSensor = null;
+        mGeomagneticFieldSensor = null;
+        mWindowManager = null;
         mImage = null;
     }
 

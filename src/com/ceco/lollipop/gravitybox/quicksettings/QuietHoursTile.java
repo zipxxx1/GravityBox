@@ -126,4 +126,10 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
         }
         return true;
     }
+
+    @Override
+    public void handleDestroy() {
+        super.handleDestroy();
+        mQh = null;
+    }
 }

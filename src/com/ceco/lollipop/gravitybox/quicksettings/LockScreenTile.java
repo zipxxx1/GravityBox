@@ -90,4 +90,13 @@ public class LockScreenTile extends QsTile {
         startSettingsActivity(Settings.ACTION_SECURITY_SETTINGS);
         return true;
     }
+
+    @Override
+    public void handleDestroy() {
+        super.handleDestroy();
+        if (mKeyguardLock != null) {
+            mKeyguardLock.reenableKeyguard();
+            mKeyguardLock = null;
+        }
+    }
 }

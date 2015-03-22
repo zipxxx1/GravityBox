@@ -140,5 +140,6 @@ public class ExpandedDesktopTile extends QsTile {
     public void handleDestroy() {
         super.handleDestroy();
         mSettingsObserver = null;
+        mHandler = null;
     }
 }

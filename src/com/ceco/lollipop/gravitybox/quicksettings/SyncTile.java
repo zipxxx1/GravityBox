@@ -114,6 +114,8 @@ public class SyncTile extends QsTile {
     public void handleDestroy() {
         super.handleDestroy();
         mHandler = null;
+        mReceiver = null;
+        mSyncHandle = null;
     }
 
     private SyncStatusObserver mSyncObserver = new SyncStatusObserver() {

@@ -94,6 +94,7 @@ public class SmartRadioTile extends QsTile {
     public void handleDestroy() {
         super.handleDestroy();
         mSettingsObserver = null;
+        mSmartRadioState = null;
     }
 
     class SettingsObserver extends ContentObserver {
