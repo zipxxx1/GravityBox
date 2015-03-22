@@ -28,6 +28,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaMetadata;
 import android.text.Editable;
@@ -147,30 +148,43 @@ public class ModLockscreen {
                         return;
                     }
 
-                    // opacity
-                    backDropBack.clearColorFilter();
-                    final int alpha = (int) ((1 - mPrefs.getInt(
-                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 100) / 100f) * 255);
-                    final int overlayColor = Color.argb(alpha, 0, 0, 0);
-                    backDropBack.setColorFilter(overlayColor, PorterDuff.Mode.SRC_OVER);
+                    boolean hasArtwork = false;
+                    MediaMetadata mm = (MediaMetadata) XposedHelpers.getObjectField(
+                            mPhoneStatusBar, "mMediaMetadata");
+                    if (mm != null) {
+                        hasArtwork = mm.getBitmap(MediaMetadata.METADATA_KEY_ART) != null ||
+                                mm.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART) != null;
+                    }
+                    if (DEBUG) log("updateMediaMetaData: hasArtwork=" + hasArtwork);
 
                     // custom background
-                    if (mCustomBg != null) {
-                        boolean hasArtwork = false;
-                        MediaMetadata mm = (MediaMetadata) XposedHelpers.getObjectField(
-                                mPhoneStatusBar, "mMediaMetadata");
-                        if (mm != null) {
-                            hasArtwork = mm.getBitmap(MediaMetadata.METADATA_KEY_ART) != null ||
-                                    mm.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART) != null;
+                    if (!hasArtwork && mCustomBg != null) {
+                        backDrop.animate().cancel();
+                        backDropBack.animate().cancel();
+                        backDropBack.setImageBitmap(mCustomBg);
+                        if ((Boolean) XposedHelpers.getBooleanField(
+                                mPhoneStatusBar, "mScrimSrcModeEnabled")) {
+                            PorterDuffXfermode xferMode = (PorterDuffXfermode) XposedHelpers
+                                    .getObjectField(mPhoneStatusBar, "mSrcXferMode");
+                            XposedHelpers.callMethod(backDropBack.getDrawable().mutate(),
+                                    "setXfermode", xferMode);
                         }
-                        if (DEBUG) log("updateMediaMetaData: hasArtwork=" + hasArtwork);
+                        backDrop.setVisibility(View.VISIBLE);
+                        backDrop.animate().alpha(1f);
+                        if (DEBUG) log("updateMediaMetaData: showing custom background");
+                    }
 
-                        if (!hasArtwork) {
-                            backDrop.animate().cancel();
-                            backDropBack.setImageBitmap(mCustomBg);
-                            backDrop.setVisibility(View.VISIBLE);
-                            backDrop.animate().alpha(1f);
-                            if (DEBUG) log("updateMediaMetaData: showing custom background");
+                    // opacity
+                    if (hasArtwork || mCustomBg != null) {
+                        backDropBack.getDrawable().clearColorFilter();
+                        final int opacity = mPrefs.getInt(
+                                GravityBoxSettings.PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY, 100);
+                        if (opacity != 100) {
+                            final int alpha = (int) ((1 - opacity / 100f) * 255);
+                            final int overlayColor = Color.argb(alpha, 0, 0, 0);
+                            backDropBack.getDrawable().mutate()
+                                .setColorFilter(overlayColor, PorterDuff.Mode.SRC_OVER);
+                            if (DEBUG) log("updateMediaMetaData: opacity set");
                         }
                     }
                 }
