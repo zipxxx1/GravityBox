@@ -76,7 +76,7 @@ public class ModQsTiles {
                         Map<String, Object> tileMap = (Map<String, Object>)
                                 XposedHelpers.getObjectField(param.thisObject, "mTiles");
                         for (Entry<String,Object> entry : tileMap.entrySet()) {
-                            XposedHelpers.callMethod(entry.getValue(), "destroy");
+                            XposedHelpers.callMethod(entry.getValue(), "handleDestroy");
                         }
                         tileMap.clear();
                     }
