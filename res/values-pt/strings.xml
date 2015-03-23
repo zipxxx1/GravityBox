@@ -1708,6 +1708,13 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="pref_data_traffic_lockscreen_summary">Sempre exiber centralizado na tela de bloqueio</string>
 
     <!-- QS: Hide brightness slider -->
-    <string name="pref_qs_hide_brightness_title">Ocultar brilho, controle deslizante</string>    
+    <string name="pref_qs_hide_brightness_title">Ocultar brilho, controle deslizante</string>  
+    
+    <!-- SignalCluster: reduce icon spacing -->
+    <string name="pref_signal_cluster_narrow_title">Reduzir espaçamento de ícone</string>
+    <string name="pref_signal_cluster_narrow_summary">Reduzir espaçamento do ícone sinal</string>
+
+    <!-- Navigation bar: hide IME switcher -->
+    <string name="pref_navbar_hide_ime_title">Ocultar opção IME</string>
 
 </resources>
