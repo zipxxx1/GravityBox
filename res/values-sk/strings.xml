@@ -201,7 +201,7 @@
 
     <!-- Safe headset media volume -->
     <string name="pref_safe_media_volume_title">Bezpečná hlasitosť pre headset</string>
-    <string name="pref_safe_media_volume_summary">Aktivuje alebo deaktivuje bezpečnú hlasitosť pre headset</string>
+    <string name="pref_safe_media_volume_summary">Aktivuje alebo deaktivuje bezpečnú hlasitosť pre headset (vyžaduje reštart)</string>
 
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Akcie tlačidiel</string>

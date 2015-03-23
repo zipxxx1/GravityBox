@@ -1765,11 +1765,13 @@
             android:summary="@string/pref_vol_swap_keys_summary"
             android:defaultValue="false" />
 
-        <CheckBoxPreference 
-            android:key="pref_safe_media_volume"
+        <ListPreference 
+            android:key="pref_safe_media_volume2"
             android:title="@string/pref_safe_media_volume_title"
             android:summary="@string/pref_safe_media_volume_summary"
-            android:defaultValue="false" />
+            android:entries="@array/tri_state_entries"
+            android:entryValues="@array/tri_state_values"
+            android:defaultValue="DEFAULT" />
 
         <!--
         <CheckBoxPreference 

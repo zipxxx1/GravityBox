@@ -69,6 +69,16 @@ public class SystemWideResources {
                         "android", "integer", "config_screenBrightnessDim", screenDim);
                 if (DEBUG) log("Screen dim level set to: " + screenDim);
             }
+
+            // Safe media volume
+            Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_SAFE_MEDIA_VOLUME, "DEFAULT"));
+            if (DEBUG) log(GravityBoxSettings.PREF_KEY_SAFE_MEDIA_VOLUME + ": " + triState);
+            if (triState != Utils.TriState.DEFAULT) {
+                XResources.setSystemWideReplacement("android", "bool", "config_safe_media_volume_enabled",
+                        triState == Utils.TriState.ENABLED);
+                if (DEBUG) log("config_safe_media_volume_enabled: " + (triState == Utils.TriState.ENABLED));
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

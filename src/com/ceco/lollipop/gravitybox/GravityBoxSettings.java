@@ -277,7 +277,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_VOL_MUSIC_CONTROLS = "pref_vol_music_controls";
     public static final String PREF_KEY_MUSIC_VOLUME_STEPS = "pref_music_volume_steps";
     public static final String PREF_KEY_VOL_FORCE_MUSIC_CONTROL = "pref_vol_force_music_control";
-    public static final String PREF_KEY_SAFE_MEDIA_VOLUME = "pref_safe_media_volume";
+    public static final String PREF_KEY_SAFE_MEDIA_VOLUME = "pref_safe_media_volume2";
     public static final String PREF_KEY_VOL_SWAP_KEYS = "pref_vol_swap_keys";
     public static final String PREF_KEY_VOLUME_PANEL_EXPANDABLE = "pref_volume_panel_expandable";
     public static final String PREF_KEY_VOLUME_PANEL_FULLY_EXPANDABLE = "pref_volume_panel_expand_fully";
@@ -522,9 +522,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_CLOCK_LINK = "clockLink";
     public static final String EXTRA_CLOCK_LONGPRESS_LINK = "clockLongpressLink";
     public static final String EXTRA_ALARM_HIDE = "alarmHide";
-
-    public static final String ACTION_PREF_SAFE_MEDIA_VOLUME_CHANGED = "gravitybox.intent.action.SAFE_MEDIA_VOLUME_CHANGED";
-    public static final String EXTRA_SAFE_MEDIA_VOLUME_ENABLED = "enabled";
 
     public static final String PREF_CAT_KEY_NAVBAR_KEYS = "pref_cat_navbar_keys";
     public static final String PREF_CAT_KEY_NAVBAR_RING = "pref_cat_navbar_ring";
@@ -838,7 +835,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_MTK_FIX_TTS_SETTINGS,
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
             PREF_KEY_NAVBAR_LEFT_HANDED,
-            PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH
+            PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH,
+            PREF_KEY_SAFE_MEDIA_VOLUME
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -1155,7 +1153,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatBrightness;
         private ListPreference mPrefTranclucentDecor;
         private PreferenceScreen mPrefCatMedia;
-        private CheckBoxPreference mPrefSafeMediaVolume;
         private ListPreference mPrefExpandedDesktop;
         private PreferenceCategory mPrefCatNavbarKeys;
         private PreferenceCategory mPrefCatNavbarRing;
@@ -1416,7 +1413,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatBrightness = (PreferenceScreen) findPreference(PREF_CAT_KEY_BRIGHTNESS);
             mPrefUnplugTurnsOnScreen = (CheckBoxPreference) findPreference(PREF_KEY_UNPLUG_TURNS_ON_SCREEN);
             mPrefCatMedia = (PreferenceScreen) findPreference(PREF_CAT_KEY_MEDIA);
-            mPrefSafeMediaVolume = (CheckBoxPreference) findPreference(PREF_KEY_SAFE_MEDIA_VOLUME);
             mPrefMusicVolumeSteps = (CheckBoxPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS);
             //mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
             //mPrefVolumePanelExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_EXPANDABLE);
@@ -2373,10 +2369,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_VOL_SWAP_KEYS_CHANGED);
                 intent.putExtra(EXTRA_VOL_SWAP_KEYS,
                         prefs.getBoolean(PREF_KEY_VOL_SWAP_KEYS, false));
-            } else if (key.equals(PREF_KEY_SAFE_MEDIA_VOLUME)) {
-                intent.setAction(ACTION_PREF_SAFE_MEDIA_VOLUME_CHANGED);
-                intent.putExtra(EXTRA_SAFE_MEDIA_VOLUME_ENABLED,
-                        prefs.getBoolean(PREF_KEY_SAFE_MEDIA_VOLUME, false));
             } else if (key.equals(PREF_KEY_HWKEY_MENU_SINGLETAP)) {
                 intent.setAction(ACTION_PREF_HWKEY_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_KEY, key);
