@@ -32,7 +32,6 @@ public class SystemWideResources {
     public static void initResources(final XSharedPreferences prefs) {
         try {
             Resources systemRes = XResources.getSystem();
-            Utils.TriState triState;
 
             int translucentDecor = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_TRANSLUCENT_DECOR, "0"));
             if (translucentDecor != 0) {
@@ -69,16 +68,6 @@ public class SystemWideResources {
                 XResources.setSystemWideReplacement(
                         "android", "integer", "config_screenBrightnessDim", screenDim);
                 if (DEBUG) log("Screen dim level set to: " + screenDim);
-            }
-
-            // Lockscreen: disable menu key in lock screen
-            triState = Utils.TriState.valueOf(prefs.getString(
-                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, "DEFAULT"));
-            if (DEBUG) log(GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY + ": " + triState);
-            if (triState != Utils.TriState.DEFAULT) {
-                XResources.setSystemWideReplacement("android", "bool", "config_disableMenuKeyInLockScreen",
-                        triState == Utils.TriState.DISABLED);
-                if (DEBUG) log("config_disableMenuKeyInLockScreen: " + (triState == Utils.TriState.DISABLED));
             }
         } catch (Throwable t) {
             XposedBridge.log(t);

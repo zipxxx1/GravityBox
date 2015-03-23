@@ -41,6 +41,7 @@ import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModLockscreen {
     private static final String CLASS_PATH = "com.android.keyguard";
@@ -92,6 +93,22 @@ public class ModLockscreen {
             }
         }
     };
+
+    public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
+        try {
+            // Lockscreen: disable menu key in lock screen
+            Utils.TriState triState = Utils.TriState.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, "DEFAULT"));
+            if (DEBUG) log(GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY + ": " + triState);
+            if (triState != Utils.TriState.DEFAULT) {
+                resparam.res.setReplacement(PACKAGE_NAME, "bool", "config_disableMenuKeyInLockScreen",
+                        triState == Utils.TriState.DISABLED);
+                if (DEBUG) log("config_disableMenuKeyInLockScreen: " + (triState == Utils.TriState.DISABLED));
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
