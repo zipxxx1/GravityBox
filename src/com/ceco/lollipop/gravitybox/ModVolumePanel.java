@@ -34,17 +34,13 @@ public class ModVolumePanel {
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String CLASS_VOLUME_PANEL = "com.android.systemui.volume.VolumePanel";
     private static final String CLASS_STREAM_CONTROL = "com.android.systemui.volume.VolumePanel$StreamControl";
-    private static final String CLASS_AUDIO_SERVICE = "android.media.AudioService";
     private static final boolean DEBUG = false;
 
-    private static final int STREAM_RING = 2;
-    private static final int STREAM_NOTIFICATION = 5;
     private static final int MSG_TIMEOUT = 5;
 
     private static final int TRANSLUCENT_TO_OPAQUE_DURATION = 400;
 
     private static Object mVolumePanel;
-    private static boolean mVolumesLinked;
     private static Unhook mViewGroupAddViewHook;
     private static boolean mVolumeAdjustMuted;
     private static boolean mVolumeAdjustVibrateMuted;
@@ -97,16 +93,6 @@ public class ModVolumePanel {
                     mOpaqueOnInteraction = intent.getBooleanExtra(GravityBoxSettings.EXTRA_OPAQUE_ON_INTERACTION, true);
                     mShouldRunDropTranslucentAnimation = mOpaqueOnInteraction && mPanelAlpha < 255;
                 }
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
-                mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
-                if (DEBUG) log("mVolumesLinked set to: " + mVolumesLinked);
-//                if (mVolumePanel != null) {
-//                    try {
-//                        updateStreamVolumeAlias();
-//                    } catch (Throwable t) {
-//                        XposedBridge.log(t);
-//                    }
-//                }
             } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
                 mQhPrefs.reload();
                 mQuietHours = new QuietHours(mQhPrefs);
@@ -114,23 +100,6 @@ public class ModVolumePanel {
         }
         
     };
-
-    public static void initZygote(final XSharedPreferences prefs) {
-//        try {
-//            final Class<?> classAudioService = XposedHelpers.findClass(CLASS_AUDIO_SERVICE, null);
-//            XposedHelpers.findAndHookMethod(classAudioService, "updateStreamVolumeAlias",
-//                    boolean.class, new XC_MethodHook() {
-//                @Override
-//                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-//                    if (DEBUG) log("AudioService.updateStreamVolumeAlias() called");
-//                    mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
-//                    updateStreamVolumeAlias(param.thisObject);
-//                }
-//            });
-//        } catch (Throwable t) {
-//            XposedBridge.log(t);
-//        }
-    }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
@@ -146,7 +115,6 @@ public class ModVolumePanel {
             mExpandable = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_EXPANDABLE, false);
             mExpandFully = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_FULLY_EXPANDABLE, false);
             mAutoExpand = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_AUTOEXPAND, false);
-            mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
 
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
 
@@ -171,7 +139,6 @@ public class ModVolumePanel {
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
-                    //intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
                     intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     context.registerReceiver(mBrodcastReceiver, intentFilter);
 
@@ -284,25 +251,6 @@ public class ModVolumePanel {
 //                    }
 //                }
 //            }
-//        }
-//    }
-
-//    private static void updateStreamVolumeAlias(Object audioService) {
-//        if (audioService == null) {
-//            if (DEBUG) log("updateStreamVolumeAlias: AudioService is null");
-//            return;
-//        }
-//
-//        try {
-//            final boolean shouldLink  = mVolumesLinked && 
-//                    (Boolean) XposedHelpers.callMethod(audioService, "isPlatformVoice");
-//            int[] streamVolumeAlias = (int[]) XposedHelpers.getObjectField(audioService, "mStreamVolumeAlias");
-//            streamVolumeAlias[STREAM_NOTIFICATION] = shouldLink ? STREAM_RING : STREAM_NOTIFICATION;
-//            XposedHelpers.setObjectField(audioService, "mStreamVolumeAlias", streamVolumeAlias);
-//            if (DEBUG) log("AudioService mStreamVolumeAlias updated, STREAM_NOTIFICATION set to: " + 
-//                    streamVolumeAlias[STREAM_NOTIFICATION]);
-//        } catch (Throwable t) {
-//            XposedBridge.log(t);
 //        }
 //    }
 

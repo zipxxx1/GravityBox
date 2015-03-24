@@ -42,6 +42,8 @@ public class ModAudio {
     private static boolean mSwapVolumeKeys;
     private static HandleChangeVolume mHandleChangeVolume;
     private static XSharedPreferences mQhPrefs;
+    private static boolean mVolumesLinked;
+    private static Object mAudioService;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -59,6 +61,10 @@ public class ModAudio {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_VOL_SWAP_KEYS_CHANGED)) {
                 mSwapVolumeKeys = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_SWAP_KEYS, false);
                 if (DEBUG) log("Swap volume keys set to: " + mSwapVolumeKeys);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
+                mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
+                if (DEBUG) log("mVolumesLinked set to: " + mVolumesLinked);
+                updateStreamVolumeAlias();
             }
         }
     };
@@ -71,6 +77,7 @@ public class ModAudio {
             mQhPrefs.makeWorldReadable();
 
             mSwapVolumeKeys = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_SWAP_KEYS, false);
+            mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
 
             XposedBridge.hookAllConstructors(classAudioService, new XC_MethodHook() {
                 @Override
@@ -84,7 +91,8 @@ public class ModAudio {
                 }
 
                 @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {    
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    mAudioService = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     if (context != null) {
                         mHandleChangeVolume = new HandleChangeVolume(context);
@@ -96,6 +104,7 @@ public class ModAudio {
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED);
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_SWAP_KEYS_CHANGED);
+                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                         if (DEBUG) log("AudioService constructed. Broadcast receiver registered");
                     }
@@ -161,7 +170,35 @@ public class ModAudio {
                     }
                 } 
             });
+
+            XposedHelpers.findAndHookMethod(classAudioService, "updateStreamVolumeAlias",
+                    boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if ((Boolean) XposedHelpers.callMethod(param.thisObject, "isPlatformVoice")) {
+                        int[] streamVolumeAlias = (int[]) XposedHelpers.getObjectField(param.thisObject, "mStreamVolumeAlias");
+                        streamVolumeAlias[AudioManager.STREAM_NOTIFICATION] = mVolumesLinked ? 
+                                AudioManager.STREAM_RING : AudioManager.STREAM_NOTIFICATION;
+                        XposedHelpers.setObjectField(param.thisObject, "mStreamVolumeAlias", streamVolumeAlias);
+                        if (DEBUG) log("AudioService mStreamVolumeAlias updated, STREAM_NOTIFICATION set to: " + 
+                                streamVolumeAlias[AudioManager.STREAM_NOTIFICATION]);
+                    }
+                }
+            });
         } catch(Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void updateStreamVolumeAlias() {
+        if (mAudioService == null) {
+            if (DEBUG) log("updateStreamVolumeAlias: AudioService is null");
+            return;
+        }
+
+        try {
+            XposedHelpers.callMethod(mAudioService, "updateStreamVolumeAlias", true);
+        } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }

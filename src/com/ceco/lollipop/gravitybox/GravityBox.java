@@ -64,7 +64,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModAudio.initZygote(prefs);
         ModHwKeys.initZygote(prefs);
         ModExpandedDesktop.initZygote(prefs);
-        ModVolumePanel.initZygote(prefs);
         ModTelephony.initZygote(prefs);
 
         // MTK
@@ -114,9 +113,9 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             SystemPropertyProvider.init(prefs, lpparam.classLoader);
         }
 
-//        if (lpparam.packageName.equals(ModAudioSettings.PACKAGE_NAME)) {
-//            ModAudioSettings.init(prefs, lpparam.classLoader);
-//        }
+        if (lpparam.packageName.equals(ModAudioSettings.PACKAGE_NAME)) {
+            ModAudioSettings.init(prefs, lpparam.classLoader);
+        }
 
         // MTK Specific
         if (Utils.isMtkDevice()) {

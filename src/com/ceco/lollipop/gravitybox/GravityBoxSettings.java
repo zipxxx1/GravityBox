@@ -1187,7 +1187,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefDataTrafficOmniAutohideTh;
         private CheckBoxPreference mPrefDataTrafficActiveMobileOnly;
         private ListPreference mPrefDataTrafficDisplayMode;
-        //private CheckBoxPreference mPrefLinkVolumes;
+        private CheckBoxPreference mPrefLinkVolumes;
         //private CheckBoxPreference mPrefVolumePanelExpandable;
         //private CheckBoxPreference mPrefVolumePanelFullyExpandable;
         //private CheckBoxPreference mPrefVolumePanelAutoexpand;
@@ -1414,7 +1414,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefUnplugTurnsOnScreen = (CheckBoxPreference) findPreference(PREF_KEY_UNPLUG_TURNS_ON_SCREEN);
             mPrefCatMedia = (PreferenceScreen) findPreference(PREF_CAT_KEY_MEDIA);
             mPrefMusicVolumeSteps = (CheckBoxPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS);
-            //mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
+            mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
             //mPrefVolumePanelExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_EXPANDABLE);
             //mPrefVolumePanelFullyExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_FULLY_EXPANDABLE);
             //mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
@@ -1574,7 +1574,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (!Utils.hasTelephonySupport(getActivity())) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
-                //mPrefCatMedia.removePreference(mPrefLinkVolumes);
+                mPrefCatMedia.removePreference(mPrefLinkVolumes);
             }
             if (!Utils.isAppInstalled(getActivity(), APP_MESSAGING) && mPrefCatPhoneMessaging != null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
