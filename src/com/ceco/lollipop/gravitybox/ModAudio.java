@@ -143,15 +143,13 @@ public class ModAudio {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mVolForceMusicControl &&
                             (Integer) param.args[0] == AudioManager.USE_DEFAULT_STREAM_TYPE) {
-                        final boolean voiceCapable = (Boolean) XposedHelpers.callMethod(
-                                param.thisObject, "isPlatformVoice");
                         final boolean isInComm = (Boolean) XposedHelpers.callMethod(
                                 param.thisObject, "isInCommunication");
                         final boolean activeMusic = (Boolean) XposedHelpers.callMethod(
                                 param.thisObject, "isAfMusicActiveRecently",
                                 DEFAULT_STREAM_TYPE_OVERRIDE_DELAY_MS);
 
-                        if (voiceCapable && !isInComm && !activeMusic) {
+                        if (!isInComm && !activeMusic) {
                             param.setResult(STREAM_MUSIC);
                             if (DEBUG) log("getActiveStreamType: Forcing music stream");
                         }
