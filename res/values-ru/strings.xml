@@ -218,7 +218,7 @@
 
     <!-- Safe headset media volume -->
     <string name="pref_safe_media_volume_title">Безопасная громкость</string>
-    <string name="pref_safe_media_volume_summary">Включение или выключение функции безопасной громкости звука в наушниках</string>
+    <string name="pref_safe_media_volume_summary">Включение или выключение функции безопасной громкости звука в наушниках (необходима перезагрузка)</string>
 
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Кнопки навигации</string>
@@ -1750,5 +1750,21 @@
     <!-- SignalCluster: reduce icon spacing -->
     <string name="pref_signal_cluster_narrow_title">Сжатие значка</string>
     <string name="pref_signal_cluster_narrow_summary">Уменьшение пробелов в значке сигнала</string>
+
+    <!-- Navigation bar: hide IME switcher -->
+    <string name="pref_navbar_hide_ime_title">Скрыть переключатель IME</string>
+
+    <!-- Lockscreen: direct unlock -->
+    <string name="pref_lockscreen_direct_unlock_title">Быстрая разблокировка</string>
+    <string name="pref_lockscreen_direct_unlock_summary">Отображение разблокировки непосредственно при включении экрана</string>
+
+    <!-- UNC: Notification visibility -->
+    <string name="pref_lc_notif_visibility_title">Видимость</string>
+    <string name="pref_lc_notif_visibility_summary">Видимость уведомлений на защищённом экране блокировки. 
+        Применяется, если активно \"Скрывать личное содержание\" на экране блокировки</string>
+    <string name="lc_notif_visibility_default">По умолчанию</string>
+    <string name="lc_notif_visibility_public">Общее</string>
+    <string name="lc_notif_visibility_private">Частное (личное)</string>
+    <string name="lc_notif_visibility_secret">Тайное (скрыто)</string>
 
 </resources>
