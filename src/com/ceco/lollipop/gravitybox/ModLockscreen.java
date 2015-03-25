@@ -55,6 +55,7 @@ public class ModLockscreen {
     private static final String CLASS_LOCK_PATTERN_VIEW = "com.android.internal.widget.LockPatternView";
     private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
     private static final String CLASS_SB_WINDOW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
+    private static final String CLASS_KG_VIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
@@ -66,6 +67,7 @@ public class ModLockscreen {
     private static Bitmap mCustomBg;
     private static QuietHours mQuietHours;
     private static Object mPhoneStatusBar;
+    private static boolean mShowBouncerOnNextReset;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -299,6 +301,33 @@ public class ModLockscreen {
                     if (mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.SCREEN_LOCK)) {
                         XposedHelpers.setBooleanField(param.thisObject, "mSuppressNextLockSound", false);
                         param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_KG_VIEW_MANAGER, classLoader, "onScreenTurnedOff",
+                    new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    Object bouncer = XposedHelpers.getObjectField(param.thisObject, "mBouncer");
+                    mShowBouncerOnNextReset = prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK, false) &&
+                                (Boolean) XposedHelpers.callMethod(bouncer, "isSecure");
+                    if (DEBUG) log("mShowBouncerOnNextReset=" + mShowBouncerOnNextReset);
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_KG_VIEW_MANAGER, classLoader, "showBouncerOrKeyguard",
+                    new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mShowBouncerOnNextReset) {
+                        mShowBouncerOnNextReset = false;
+                        Object bouncer = XposedHelpers.getObjectField(param.thisObject, "mBouncer");
+                        if (!(Boolean) XposedHelpers.callMethod(bouncer, "needsFullscreenBouncer")) {
+                            XposedHelpers.callMethod(bouncer, "show");
+                            if (DEBUG) log("show bouncer called");
+                        }
                     }
                 }
             });

@@ -1755,4 +1755,8 @@
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Hide IME switcher</string>
 
+    <!-- Lockscreen: direct unlock -->
+    <string name="pref_lockscreen_direct_unlock_title">Direct unlock</string>
+    <string name="pref_lockscreen_direct_unlock_summary">Shows security challenge directly when screen turns on</string>
+
 </resources>

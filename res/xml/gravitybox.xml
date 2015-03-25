@@ -109,6 +109,12 @@
                 android:summary="@string/pref_lockscreen_quick_unlock_summary"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference 
+                android:key="pref_lockscreen_direct_unlock"
+                android:title="@string/pref_lockscreen_direct_unlock_title"
+                android:summary="@string/pref_lockscreen_direct_unlock_summary"
+                android:defaultValue="false" />
+
             <EditTextPreference 
                 android:key="pref_lockscreen_carrier_text"
                 android:title="@string/pref_lockscreen_carrier_text_title"
