@@ -22,6 +22,7 @@ import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
+import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.Visibility;
 import com.ceco.lollipop.gravitybox.preference.SeekBarPreference;
 
 import android.app.Activity;
@@ -67,6 +68,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_HEADS_UP_TIMEOUT = "pref_lc_headsup_timeout";
     private static final String PREF_CAT_KEY_OTHER = "pref_cat_lc_other";
     private static final String PREF_KEY_PROGRESS_TRACKING = "pref_lc_progress_tracking";
+    private static final String PREF_KEY_VISIBILITY = "pref_lc_notif_visibility";
 
     private static final int REQ_PICK_SOUND = 101;
 
@@ -95,6 +97,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private SeekBarPreference mHeadsUpTimeoutPref;
     private PreferenceCategory mOtherCat;
     private CheckBoxPreference mProgressTrackingPref;
+    private ListPreference mVisibilityPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -129,6 +132,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mHeadsUpTimeoutPref = (SeekBarPreference) findPreference(PREF_KEY_HEADS_UP_TIMEOUT);
         mOtherCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_OTHER);
         mProgressTrackingPref = (CheckBoxPreference) findPreference(PREF_KEY_PROGRESS_TRACKING);
+        mVisibilityPref = (ListPreference) findPreference(PREF_KEY_VISIBILITY);
+        mVisibilityPref.setOnPreferenceChangeListener(this);
     }
 
     protected void initialize(LedSettings ledSettings) {
@@ -181,6 +186,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         } else {
             mProgressTrackingPref.setChecked(ledSettings.getProgressTracking());
         }
+        mVisibilityPref.setValue(ledSettings.getVisibility().toString());
+        mVisibilityPref.setSummary(String.format("%s (%s)",
+                getString(R.string.pref_lc_notif_visibility_summary),
+                mVisibilityPref.getEntry()));
     }
 
     private void updateSoundPrefSummary() {
@@ -283,6 +292,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         return mProgressTrackingPref.isChecked();
     }
 
+    protected Visibility getVisibility() {
+        return Visibility.valueOf(mVisibilityPref.getValue());
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen prefScreen, Preference pref) {
         if (pref == mNotifSoundPref) {
@@ -332,6 +345,11 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         } else if (preference == mActiveScreenModePref) {
             mActiveScreenModePref.setValue((String)newValue);
             mActiveScreenModePref.setSummary(mActiveScreenModePref.getEntry());
+        } else if (preference == mVisibilityPref) {
+            mVisibilityPref.setValue((String)newValue);
+            mVisibilityPref.setSummary(String.format("%s (%s)",
+                    getString(R.string.pref_lc_notif_visibility_summary),
+                    mVisibilityPref.getEntry()));
         }
         return true;
     }

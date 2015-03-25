@@ -28,6 +28,7 @@ import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
+import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.Visibility;
 
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
@@ -348,6 +349,10 @@ public class ModLedControl {
                                     (float)(100 - mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA,
                                             0)) / 100f);
                         }
+                    }
+                    // visibility
+                    if (ls.getVisibility() != Visibility.DEFAULT) {
+                        n.visibility = ls.getVisibility().getValue();
                     }
                 }
 

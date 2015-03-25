@@ -22,6 +22,7 @@ import com.ceco.lollipop.gravitybox.adapters.IBaseListAdapterItem;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
+import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.Visibility;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -105,6 +106,10 @@ public class LedListItem implements IBaseListAdapterItem {
                     mLedSettings.getQhIgnore()) {
                 buf += "; " + mContext.getString(R.string.pref_lc_qh_ignore_title);
             }
+            if (mLedSettings.getVisibility() != Visibility.DEFAULT) {
+                buf += "; " + mContext.getString(R.string.pref_lc_notif_visibility_title) +
+                        ": " + getVisibilityTitle(mLedSettings.getVisibility());
+            }
             if (mLedSettings.getOngoing()) {
                 buf += "; " + mContext.getString(R.string.lc_item_summary_ongoing);
             }
@@ -135,6 +140,21 @@ public class LedListItem implements IBaseListAdapterItem {
                 return mContext.getString(R.string.lc_heads_up_immersive);
             case OFF:
                 return mContext.getString(R.string.lc_heads_up_off);
+            default:
+                return "N/A";
+        }
+    }
+
+    private String getVisibilityTitle(Visibility vis) {
+        switch (vis) {
+            case DEFAULT:
+                return mContext.getString(R.string.lc_notif_visibility_default);
+            case PUBLIC: 
+                return mContext.getString(R.string.lc_notif_visibility_public);
+            case PRIVATE:
+                return mContext.getString(R.string.lc_notif_visibility_private);
+            case SECRET:
+                return mContext.getString(R.string.lc_notif_visibility_secret);
             default:
                 return "N/A";
         }

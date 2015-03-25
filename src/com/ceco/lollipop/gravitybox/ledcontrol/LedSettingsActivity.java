@@ -22,6 +22,7 @@ import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModHwKeys;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
+import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.Visibility;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -165,6 +166,9 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
                         Toast.LENGTH_SHORT).show();
             }
         }
+        if (mPrefsFragment.getVisibility() != Visibility.DEFAULT) {
+            n.visibility = mPrefsFragment.getVisibility().getValue();
+        }
         n.extras.putBoolean("gbIgnoreNotification", true);
         Intent intent = new Intent(ModHwKeys.ACTION_SLEEP);
         sendBroadcast(intent);
@@ -199,6 +203,7 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
         mLedSettings.setHeadsUpDnd(mPrefsFragment.getHeadsUpDnd());
         mLedSettings.setHeadsUpTimeout(mPrefsFragment.getHeadsUpTimeout());
         mLedSettings.setProgressTracking(mPrefsFragment.getProgressTracking());
+        mLedSettings.setVisibility(mPrefsFragment.getVisibility());
         mLedSettings.serialize();
         Intent intent = new Intent();
         intent.putExtra(EXTRA_PACKAGE_NAME, mLedSettings.getPackageName());

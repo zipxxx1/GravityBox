@@ -20,6 +20,7 @@ import java.util.Set;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +41,17 @@ public class LedSettings {
     public enum LedMode { ORIGINAL, OVERRIDE, OFF };
     public enum HeadsUpMode { DEFAULT, ALWAYS, IMMERSIVE, OFF };
     public enum ActiveScreenMode { DISABLED, DO_NOTHING, HEADS_UP };
+    public enum Visibility {
+        DEFAULT(-2),
+        PRIVATE(Notification.VISIBILITY_PRIVATE),
+        PUBLIC(Notification.VISIBILITY_PUBLIC),
+        SECRET(Notification.VISIBILITY_SECRET);
+        private int mValue;
+        Visibility(int value) {
+            mValue = value;
+        }
+        public int getValue() { return mValue; }
+    }
 
     private Context mContext;
     private String mPackageName;
@@ -64,6 +76,7 @@ public class LedSettings {
     private boolean mHeadsUpDnd;
     private int mHeadsUpTimeout;
     private boolean mProgressTracking;
+    private Visibility mVisibility;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -138,6 +151,8 @@ public class LedSettings {
                 ls.setHeadsUpTimeout(Integer.valueOf(data[1]));
             } else if (data[0].equals("progressTracking")) {
                 ls.setProgressTracking(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("visibility")) {
+                ls.setVisibility(data[1]);
             }
         }
         return ls;
@@ -167,6 +182,7 @@ public class LedSettings {
         mHeadsUpDnd = false;
         mHeadsUpTimeout = 5;
         mProgressTracking = false;
+        mVisibility = Visibility.DEFAULT;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -356,6 +372,18 @@ public class LedSettings {
         mProgressTracking = tracking;
     }
 
+    protected void setVisibility(Visibility visibility) {
+        mVisibility = visibility;
+    }
+
+    protected void setVisibility(String visibility) {
+        try {
+            setVisibility(Visibility.valueOf(visibility));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -444,6 +472,10 @@ public class LedSettings {
         return mProgressTracking;
     }
 
+    public Visibility getVisibility() {
+        return mVisibility;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -473,6 +505,7 @@ public class LedSettings {
             dataSet.add("headsUpDnd:" + mHeadsUpDnd);
             dataSet.add("headsUpTimeout:" + mHeadsUpTimeout);
             dataSet.add("progressTracking:" + mProgressTracking);
+            dataSet.add("visibility:" + mVisibility.toString());
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();
