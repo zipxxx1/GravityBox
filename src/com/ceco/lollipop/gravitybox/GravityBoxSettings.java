@@ -796,6 +796,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_BBAR_CENTERED = "batteryBarCentered";
     public static final String EXTRA_BBAR_COLOR_CHARGING = "batteryBarColorCharging";
 
+    public static final String PREF_CAT_KEY_CELL_TILE = "pref_cat_qs_cell_tile";
+    public static final String PREF_KEY_CELL_TILE_DATA_OFF_ICON = "pref_cell_tile_data_off_icon";
+    public static final String EXTRA_CELL_TILE_DATA_OFF_ICON = "cellTileDataOffIcon";
+
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
     public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
@@ -1247,6 +1251,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefSrAdaptiveDelay;
         private ListPreference mPrefBbarPosition;
         private ListPreference mPrefSbdpMode;
+        private PreferenceScreen mPrefCatCellTile;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1556,6 +1561,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefSbdpMode = (ListPreference) findPreference(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS);
 
+            mPrefCatCellTile = (PreferenceScreen) findPreference(PREF_CAT_KEY_CELL_TILE);
+
             // MTK fixes
             mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
             if (!Utils.isMtkDevice()) {
@@ -1589,6 +1596,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (Utils.isWifiOnly(getActivity())) {
                 // Remove preferences that don't apply to wifi-only devices
                 getPreferenceScreen().removePreference(mPrefCatPhone);
+                mPrefCatQsTileSettings.removePreference(mPrefCatCellTile);
                 mPrefCatQsTileSettings.removePreference(mPrefCatQsNmTileSettings);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
@@ -3014,6 +3022,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_SIGNAL_CLUSTER_NARROW)) {
                 intent.setAction(ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
                 intent.putExtra(EXTRA_SC_NARROW, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_CELL_TILE_DATA_OFF_ICON)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_CELL_TILE_DATA_OFF_ICON, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

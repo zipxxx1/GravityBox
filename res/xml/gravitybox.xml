@@ -161,6 +161,18 @@
                 android:dependency="pref_qs_management_enable">
 
                 <PreferenceScreen
+                    android:key="pref_cat_qs_cell_tile"
+                    android:title="@string/pref_cat_qs_cell_tile_title">
+
+                    <CheckBoxPreference 
+                        android:key="pref_cell_tile_data_off_icon"
+                        android:title="@string/pref_cell_tile_data_off_icon_title"
+                        android:summary="@string/pref_cell_tile_data_off_icon_summary"
+                        android:defaultValue="false" />
+
+                </PreferenceScreen>
+
+                <PreferenceScreen
                     android:key="pref_cat_quick_app_tile"
                     android:title="@string/pref_cat_quickapp_tile_title">
 

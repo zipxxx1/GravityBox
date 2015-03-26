@@ -1768,4 +1768,11 @@
     <string name="lc_notif_visibility_private">Private (sensitive)</string>
     <string name="lc_notif_visibility_secret">Secret (hidden)</string>
 
+    <!-- Cellular tile settings -->
+    <string name="pref_cat_qs_cell_tile_title">Cellular tile settings</string>
+
+    <!-- Cellular tile: data off icon -->
+    <string name="pref_cell_tile_data_off_icon_title">Data off icon</string>
+    <string name="pref_cell_tile_data_off_icon_summary">Shows icon when mobile data is disabled</string>
+
 </resources>
