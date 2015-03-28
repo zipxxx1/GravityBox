@@ -1,3 +1,24 @@
+Changelog 5.0.5alpha - 28/03/2015
+--------------------------------------
+- Lockscreen tweaks:
+--- added option for direct unlock (shows security challenge directly when screen turns on)
+--- fixed custom background graphics glitches during transition animations
+--- fixed menu key unlock option (devices with hardware menu key)
+- Quick settings:
+--- Cellular tile: added option to show icon when mobile data disabled (SIM slot 1 tile only on Moto Dual SIM)
+--- Cellular tile: toggle mobile data on/off on tile long-press (SIM slot 1 tile only on Moto Dual SIM)
+--- fixed SystemUI crash when switching users
+- Media tweaks:
+--- brought back option for unlinking ringer and notification volumes 
+--- fixed force media volume control on non-voice devices (such as tablets)
+--- fixed and simplified safe headset media option (requires reboot)
+- Ultimate notification control:
+--- added option for controlling notification visibility in secured lockscreen
+- Updated Polish translations (thanks to xtrem007)
+- Updated Portuguese (BR) translations (thanks to wyghor)
+- Updated Russian translations (thanks to gaich)
+- Minor fixes in Greek translations (thanks to thdervenis)
+
 Changelog 5.0.4alpha - 21/03/2015
 --------------------------------------
 - Additional Motorola compatibility improvements (thanks to romracer)
