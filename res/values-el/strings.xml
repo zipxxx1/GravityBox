@@ -87,7 +87,7 @@
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
-    <string name="qs_tile_gps_alt">GPS (CM style)</string>
+    <string name="qs_tile_gps_alt">GPS (Στυλ CM)</string>
     <string name="qs_tile_mobile_data">Δεδομένα</string>
     <string name="qs_tile_network_mode">Λειτουργία δικτύου</string>
     <string name="qs_tile_data_usage">Χρήση δεδομένων</string>
@@ -431,7 +431,7 @@
     <string name="expanded_desktop_disabled">Απενεργοποιημένη</string>
     <string name="expanded_desktop_navbar">Απόκρυψη γραμμής πλοήγησης</string>
     <string name="expanded_desktop_immersive_statusbar">Immersive γραμμή κατάστασης</string>
-    <string name="expanded_desktop_immersive_navbar">Immersive γραμμή πλοήγησςr</string>
+    <string name="expanded_desktop_immersive_navbar">Immersive γραμμή πλοήγησης</string>
     <string name="expanded_desktop_both">Απόκρυψη και των δύο</string>
     <string name="expanded_desktop_immersive">Immersive</string>
     <string name="action_expanded_desktop_title">Διευρυμένη οθόνη</string>
@@ -712,7 +712,7 @@
     <string name="screenrecord_toast_processing">Αδυναμία εκ νέου εγγραφής διότι η προηγούμενη επεξεργάζεται ακόμα</string>
     <string name="screenrecord_toast_saved">Η εγγραφή αποθηκεύθηκε ως %s</string>
     <string name="screenrecord_toast_save_error">Αδυναμία αποθήκευσης εγγραφής στο αρχείο εξαγωγής</string>
-    <string name="action_screenrecord">Εγγραφή οθόνησς</string>
+    <string name="action_screenrecord">Εγγραφή οθόνης</string>
     <string name="pref_powermenu_screenrecord_title">Εγγραφή οθόνης στο μενού λειτουργίας</string>
 
     <!-- Show dialpad automatically -->
@@ -1081,5 +1081,7 @@
     <string name="animation_scale7">Κλίμακα κίνησης 10x</string>
     <string name="animation_scale8">Κλίμακα κίνησης .75x</string>
     <string name="animation_scale9">Κλίμακα κίνησης 1.25x</string>
+
+    <string name="delete">Διαγραφή</string>
 
 </resources>
