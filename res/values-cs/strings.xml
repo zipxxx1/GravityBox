@@ -1719,4 +1719,24 @@
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Skrýt přepínač klávesnice</string>
 
+    <!-- Lockscreen: direct unlock -->
+    <string name="pref_lockscreen_direct_unlock_title">Přímé odemknutí</string>
+    <string name="pref_lockscreen_direct_unlock_summary">Vyzve k odemknutí ihned po zapnutí obrazovky</string>
+
+    <!-- UNC: Notification visibility -->
+    <string name="pref_lc_notif_visibility_title">Viditelnost</string>
+    <string name="pref_lc_notif_visibility_summary">Definuje viditelnost oznámení na zabezpečené obrazovce uzamčení. 
+        Platí v případě použití režimu \"Skrýt citlivý obsah oznámení\"</string>
+    <string name="lc_notif_visibility_default">Původní nastavení</string>
+    <string name="lc_notif_visibility_public">Zobrazit úplný obsah</string>
+    <string name="lc_notif_visibility_private">Skrýt citlivý obsah</string>
+    <string name="lc_notif_visibility_secret">Skrýt oznámení</string>
+
+    <!-- Cellular tile settings -->
+    <string name="pref_cat_qs_cell_tile_title">Nastavení dlaždice mobilního signálu</string>
+
+    <!-- Cellular tile: data off icon -->
+    <string name="pref_cell_tile_data_off_icon_title">Ikona vypnutých dat</string>
+    <string name="pref_cell_tile_data_off_icon_summary">Zobrazí ikonu v případě, že jsou mobilní data vypnuté</string>
+
 </resources>
