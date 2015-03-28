@@ -173,7 +173,7 @@ public class ModDisplay {
     
             if (color != null) {
                 Object ls = XposedHelpers.getSurroundingThis(mLight);
-                int np = XposedHelpers.getIntField(ls, "mNativePointer");
+                long np = XposedHelpers.getLongField(ls, "mNativePointer");
                 XposedHelpers.callMethod(ls, "setLight_native",
                         np, LIGHT_ID_BUTTONS, color, 0, 0, 0, 0);
             }
@@ -206,7 +206,7 @@ public class ModDisplay {
             if (mLight == null) return;
             try {
                 Object ls = XposedHelpers.getSurroundingThis(mLight);
-                int np = XposedHelpers.getIntField(ls, "mNativePointer");
+                long np = XposedHelpers.getLongField(ls, "mNativePointer");
                 if (!mPendingNotif) {
                     mHandler.removeCallbacks(this);
                     mPendingNotifColor = 
