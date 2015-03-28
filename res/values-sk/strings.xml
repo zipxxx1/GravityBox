@@ -403,7 +403,7 @@
 
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Hodiny stavovej lišty</string>
-    <string name="pref_cat_notif_panel_clock_title">Hodiny panelu oznámení</string>
+    <string name="pref_cat_notif_panel_clock_title">Hodiny panelu upozornení</string>
     <string name="pref_clock_link_title">Aplikácia na ťuknutie</string>
     <string name="pref_clock_link_summary">Naviaže hodiny notifikačného panelu na zvolenú aplikáciu namiesto nastavenia dátumu a času</string>
     <string name="pref_clock_longpress_link_title">Aplikácia na dlhé podržanie</string>
@@ -1124,7 +1124,7 @@
 
     <!-- Mute volume adjust vibrate -->
     <string name="pref_volume_adjust_vibrate_mute_title">Vypnúť vibrácie nastavenia hlasitosti</string>
-    <string name="pref_volume_adjust_vibrate_mute_summary">Vypne vibrácie pri zmene režimu hlasitosti vyzváňania/oznámení tlačidlami ovládania hlasitosti</string>
+    <string name="pref_volume_adjust_vibrate_mute_summary">Vypne vibrácie pri zmene režimu hlasitosti vyzváňania tlačidlami ovládania hlasitosti</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Použiť originálny nahrávač</string>
@@ -1176,21 +1176,21 @@
     <string name="pref_cat_qs_nm_tile_settings_title">Nastavenia dlaždice Typ siete</string>
 
     <!-- Led control -->
-    <string name="pref_led_control_title">Nastavenia oznámení</string>
-    <string name="pref_led_control_summary">Umožňuje nastavenia LED, zvukov a vibrácií oznámení pre každú aplikáciu samostatne</string>
+    <string name="pref_led_control_title">Nastavenia upozornení</string>
+    <string name="pref_led_control_summary">Umožňuje nastavenia LED, zvukov a vibrácií upozornení pre každú aplikáciu samostatne</string>
     <string name="lc_please_wait">Prosím čakajte&#8230;</string>
-    <string name="lc_disabled">Nastavenia oznámení vypnuté</string>
+    <string name="lc_disabled">Nastavenia upozornení vypnuté</string>
     <string name="pref_lc_led_color_title">Farba</string>
     <string name="pref_lc_led_time_on_title">Doba zapnutia</string>
     <string name="pref_lc_led_time_off_title">Doba vypnutia</string>
     <string name="pref_lc_ongoing_title">Prebiehajúce</string>
-    <string name="pref_lc_ongoing_summary">Ak povolené, nastavenia budú použité aj pre prebiehajúce oznámenia</string>
+    <string name="pref_lc_ongoing_summary">Ak povolené, nastavenia budú použité aj pre prebiehajúce upozornenia</string>
     <string name="lc_btn_preview">Náhľad</string>
     <string name="lc_btn_save">Uložiť</string>
     <string name="lc_item_summary_on">Zap</string>
     <string name="lc_item_summary_off">Vyp</string>
     <string name="lc_item_summary_ongoing">Prebiehajúce</string>
-    <string name="lc_preview_notif_title">GravityBox nastavenia oznámení</string>
+    <string name="lc_preview_notif_title">GravityBox nastavenia upozornení</string>
     <string name="lc_preview_notif_text">Test pre %s</string>
     <string name="lc_activity_menu_show_all">Zobraziť všetky položky</string>
     <string name="lc_activity_menu_show_active">Zobraziť aktívne položky</string>
@@ -1199,12 +1199,12 @@
     <string name="pref_cat_lc_sounds_title">Zvuky</string>
     <string name="pref_cat_lc_vibrations_title">Vibrácie</string>
     <string name="pref_lc_notif_sound_override_title">Obísť predvolený zvuk</string>
-    <string name="pref_lc_notif_sound_title">Zvuk oznámenia</string>
+    <string name="pref_lc_notif_sound_title">Zvuk upozornenia</string>
     <string name="lc_notif_sound_none">Ticho</string>
     <string name="pref_lc_notif_sound_only_once_title">Upozorniť len raz</string>
-    <string name="pref_lc_notif_sound_only_once_summary">Ak povolené, zvuk a/alebo vibrácie nebudú prehraté ak už oznámenie existuje</string>
+    <string name="pref_lc_notif_sound_only_once_summary">Ak povolené, zvuk a/alebo vibrácie nebudú prehraté ak už upozornenie existuje</string>
     <string name="pref_lc_notif_insistent_title">Neústupné</string>
-    <string name="pref_lc_notif_insistent_summary">Ak povolené, zvuky budú prehrávané opakovane pokiaľ nebude oznámenie zrušené alebo nedôjde k otvoreniu panelu oznámení</string>
+    <string name="pref_lc_notif_insistent_summary">Ak povolené, zvuky budú prehrávané opakovane pokiaľ nebude upozornenie zrušené alebo nedôjde k otvoreniu panelu upozornení</string>
     <string name="pref_lc_vibrate_override_title">Obísť predvolené vibrácie</string>
     <string name="pref_lc_vibrate_pattern_title">Vzorec vibrácie</string>
     <string name="pref_lc_vibrate_pattern_summary">Zoznam čiarkou oddelených hodnôt pre dobu vypnutia/zapnutia vibrátora v milisekundách. Zadajte 0 pre vypnutie vibrácií.</string>
@@ -1238,8 +1238,8 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktívna obrazovka</string>
     <string name="lc_active_screen_info">Funkcia aktívnej obrazovky slúži na automatické zapnutie obrazovky 
-        po obdržaní každého nového oznámenia. Voliteľne dôjde k automatickékmu rozbaleniu 
-        lišty oznámení alebo k zobrazeniu Heads up v závislosti od aktuálnej bezpečnostnej politiky obrazovky uzamknutia. 
+        po obdržaní každého nového upozornenia. Voliteľne dôjde k automatickékmu rozbaleniu 
+        lišty upozornení alebo k zobrazeniu Heads up v závislosti od aktuálnej bezpečnostnej politiky obrazovky uzamknutia. 
         Funkcia aktívnej obrazovky sa uplatní len v prípade, ak je aktivovaná obrazovka uzamknutia.  
         Prepínač nižšie slúži na hlavné zapnutie/vypnutie funkcie. Ak je funkcia zapnutá, ďalšie jej nastavenia 
         budú prístupné na úrovni nastavení jednotlivých aplikácií.</string>
@@ -1249,7 +1249,7 @@
     <string name="lc_quiet_hours">Tiché hodiny</string>
     <string name="pref_lc_qh_enabled_title">Povoliť tiché hodiny</string>
     <string name="pref_lc_qh_enabled_summary">Umlčí zvuky/vibrácie a voliteľne LED 
-        pre všetky oznámenia obdržané v definovanom časovom okne</string>
+        pre všetky upozornenia obdržané v definovanom časovom okne</string>
     <string name="pref_lc_qh_start_title">Začiatok</string>
     <string name="pref_lc_qh_end_title">Koniec</string>
     <string name="pref_lc_qh_mute_led_title">Zakázať LED</string>
@@ -1288,7 +1288,7 @@
     <string name="pref_lc_qh_ignore_title">Ignorovať tiché hodiny</string>
     <string name="pref_lc_qh_ignore_list_title">Pre zadané kľúčové slová</string>
     <string name="pref_lc_qh_ignore_list_summary">Zoznam čiarkou oddelených kľúčových slov, 
-        pre ktoré ignorovať tiché hodiny. Ponechajte prázdne pre všetky oznámenia.</string>
+        pre ktoré ignorovať tiché hodiny. Ponechajte prázdne pre všetky upozornenia.</string>
 
     <!-- GB Actions: Quiet hours shortcut -->
     <string name="shortcut_quiet_hours_toggle">Prepnúť tiché hodiny</string>
@@ -1413,7 +1413,7 @@
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interaktívny režim</string>
-    <string name="pref_lc_qh_interactive_summary">Vždy stlmí oznámenia počas interakcie používateľa so zariadením</string>
+    <string name="pref_lc_qh_interactive_summary">Vždy stlmí upozornenia počas interakcie používateľa so zariadením</string>
 
     <!-- Screenshot delete -->
     <string name="pref_screenshot_delete_title">Povoliť vymazanie screenshot</string>
@@ -1428,7 +1428,7 @@
     <!-- Statusbar: notification heads up category -->
     <string name="pref_cat_notif_heads_up_title">Heads up notifikácie</string>
     <string name="pref_heads_up_master_switch_summary">Aktivuje dodatočné funkcie. 
-        Další nastavení jsou dostupná v rámci nabídky Nastavení oznámení, pro jednotlivé aplikace samostatně. (vyžaduje restart)</string>
+        Ďalšie nastavenia sú dostupné v rámci ponuky Nastavenia upozornení, pre jednotlivé aplikácie samostatne. (vyžaduje reštart)</string>
     <string name="pref_heads_up_timeout_title">Časovač zobrazenia</string>
     <string name="pref_heads_up_timeout_summary">Po akej dobe zavrieť notifikačné okno. 0 = nikdy.</string>
 
@@ -1454,7 +1454,7 @@
     <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
     <string name="pref_unc_active_screen_summary">Spravuje všeobecné nastavenia pre funkciu aktívnej obrazovky</string>
     <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
-    <string name="pref_unc_quiet_hours_summary">Spravuje tiché hodiny oznámení</string>
+    <string name="pref_unc_quiet_hours_summary">Spravuje tiché hodiny upozornení</string>
 
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Vlastná akcia</string>
@@ -1530,13 +1530,13 @@
     <string name="pref_statusbar_download_progress_title">Indikátor progresu</string>
     <string name="pref_statusbar_download_progress_summary">Zobrazí indikátor progresu v stavovej lište
         pre Android manažér prevzatí súborov, bluetooth prenosy a pre všetky aplikácie, ktoré majú povolenú
-        funkciu sledovania progresu v nastaveniach oznámení.</string>
+        funkciu sledovania progresu v nastaveniach upozornení.</string>
     <string name="sb_download_progress_off">Vypnutý</string>
     <string name="sb_download_progress_top">Horná hrana stavovej lišty</string>
     <string name="sb_download_progress_bottom">Spodná hrana stavovej lišty</string>
 
     <!-- Status bar: disable notification ticker -->
-    <string name="pref_statusbar_ticker_policy_title">Náhľad obsahu oznámení</string>
+    <string name="pref_statusbar_ticker_policy_title">Náhľad obsahu upozornení</string>
     <string name="sb_ticker_policy_default">Pôvodný</string>
     <string name="sb_ticker_policy_disabled">Vždy zakázať</string>
 
@@ -1563,7 +1563,7 @@
     <string name="pref_quickrecord_autostop_summary">Zastaví nahrávanie po vypršaní definovanej doby. Nastavenie na 0 vypne túto funkciu.</string>
 
     <!-- Clear notifications shortcut -->
-    <string name="shortcut_clear_notifications">Vymazať oznámenia</string>
+    <string name="shortcut_clear_notifications">Vymazať upozornenia</string>
 
     <!-- Toggle auto brightness shortcut -->
     <string name="shortcut_auto_brightness">Prepnúť automatický jas</string>
@@ -1602,7 +1602,7 @@
     <!-- UNC: Progress bar tracking -->
     <string name="pref_lc_progress_tracking_title">Sledovanie progresu</string>
     <string name="pref_lc_progress_tracking_summary">Zobrazí indikátor progresu v stavovej lište pre prebiehajúce
-        oznámenia, ktoré obsahujú indikátor progresu. Vyžaduje povolenie funkcie Indikátor progresu
+        upozornenia, ktoré obsahujú indikátor progresu. Vyžaduje povolenie funkcie Indikátor progresu
         v nastaveniach stavovej lišty.</string>
 
     <!-- Data traffic monitor: display mode -->
@@ -1671,8 +1671,8 @@
     <string name="battery_percent_text_size_default">Pôvodná</string>
 
     <!-- Notification ticker -->
-    <string name="pref_cat_statusbar_ticker_title">Náhľad oznámení</string>
-    <string name="pref_statusbar_ticker_master_switch_summary">Aktivuje náhľad oznámení (ticker) (vyžaduje reštart)</string>
+    <string name="pref_cat_statusbar_ticker_title">Náhľad upozornení</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Aktivuje náhľad upozornení (ticker) (vyžaduje reštart)</string>
 
     <!-- Navigation bar: use larger icons -->
     <string name="pref_navbar_larger_icons_title">Použiť väčšie ikony</string>
