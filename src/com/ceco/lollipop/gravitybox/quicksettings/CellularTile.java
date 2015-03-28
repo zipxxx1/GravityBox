@@ -2,6 +2,7 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import com.ceco.lollipop.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
+import com.ceco.lollipop.gravitybox.PhoneWrapper;
 import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -12,6 +13,7 @@ import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -57,13 +59,17 @@ public class CellularTile extends AospTile {
 
     private boolean isSignalNull(Object info) {
         try {
-            // TODO: check Moto MSIM
             boolean noSim = XposedHelpers.getBooleanField(info, "noSim");
             boolean enabled = XposedHelpers.getBooleanField(info, "enabled");
             boolean airplane = XposedHelpers.getBooleanField(info, "airplaneModeEnabled");
-            int iconId = XposedHelpers.getIntField(info, "mobileSignalIconId");
+            int iconId = 1;
+            try {
+                iconId = XposedHelpers.getIntField(info, "mobileSignalIconId");
+            } catch (Throwable t1) {
+                iconId = XposedHelpers.getIntField(info, "mobileSimIconId");
+            }
             return (noSim || !enabled || airplane || iconId <= 0);
-        } catch (Throwable t) {
+        } catch (Throwable t2) {
             return false;
         }
     }
@@ -124,6 +130,14 @@ public class CellularTile extends AospTile {
             if (mScalingFactor != 1f) {
                 mDataOffView.setScaleX(mScalingFactor);
                 mDataOffView.setScaleY(mScalingFactor);
+            }
+            if (PhoneWrapper.hasMsimSupport()) {
+                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mDataOffView.getLayoutParams();
+                int marginPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, -4,
+                        mContext.getResources().getDisplayMetrics()));
+                lp.leftMargin = marginPx;
+                lp.topMargin = Math.round(marginPx/2f);
+                mDataOffView.setLayoutParams(lp);
             }
         }
     }
