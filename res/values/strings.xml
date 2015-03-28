@@ -1764,9 +1764,9 @@
     <string name="pref_lc_notif_visibility_summary">Specifies notification visibility in secured lock screen. 
         Applies when \"Hide sensitive notification content\" lock screen policy is active</string>
     <string name="lc_notif_visibility_default">Default</string>
-    <string name="lc_notif_visibility_public">Public</string>
-    <string name="lc_notif_visibility_private">Private (sensitive)</string>
-    <string name="lc_notif_visibility_secret">Secret (hidden)</string>
+    <string name="lc_notif_visibility_public">Show all content</string>
+    <string name="lc_notif_visibility_private">Hide sensitive content</string>
+    <string name="lc_notif_visibility_secret">Hide notification</string>
 
     <!-- Cellular tile settings -->
     <string name="pref_cat_qs_cell_tile_title">Cellular tile settings</string>
