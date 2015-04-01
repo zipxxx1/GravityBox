@@ -1761,10 +1761,17 @@
     <!-- UNC: Notification visibility -->
     <string name="pref_lc_notif_visibility_title">Видимость</string>
     <string name="pref_lc_notif_visibility_summary">Видимость уведомлений на защищённом экране блокировки. 
-        Применяется, если активно \"Скрывать личное содержание\" на экране блокировки</string>
+        Применяется, если активно \"Скрыть частное содержимое\" на экране блокировки</string>
     <string name="lc_notif_visibility_default">По умолчанию</string>
-    <string name="lc_notif_visibility_public">Общее</string>
-    <string name="lc_notif_visibility_private">Частное (личное)</string>
-    <string name="lc_notif_visibility_secret">Тайное (скрыто)</string>
+    <string name="lc_notif_visibility_public">Всё содержимое</string>
+    <string name="lc_notif_visibility_private">Скрыть частное содержимое</string>
+    <string name="lc_notif_visibility_secret">Скрыть уведомление</string>
+
+    <!-- Cellular tile settings -->
+    <string name="pref_cat_qs_cell_tile_title">Настройки плитки моб. сети</string>
+
+    <!-- Cellular tile: data off icon -->
+    <string name="pref_cell_tile_data_off_icon_title">Значок откл. данных</string>
+    <string name="pref_cell_tile_data_off_icon_summary">Отображение значка, если мобильные данные отключены</string>
 
 </resources>
