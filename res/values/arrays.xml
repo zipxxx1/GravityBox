@@ -1143,4 +1143,16 @@
         <item>SECRET</item>
     </string-array>
 
+    <string-array name="direct_unlock_entries" translatable="false">
+        <item>@string/direct_unlock_off</item>
+        <item>@string/direct_unlock_standard</item>
+        <item>@string/direct_unlock_see_through</item>
+    </string-array>
+
+    <string-array name="direct_unlock_values" translatable="false">
+        <item>OFF</item>
+        <item>STANDARD</item>
+        <item>SEE_THROUGH</item>
+    </string-array>
+
 </resources>

@@ -56,9 +56,13 @@ public class ModLockscreen {
     private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
     private static final String CLASS_SB_WINDOW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
     private static final String CLASS_KG_VIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
+    private static final String CLASS_UNLOCK_METHOD_CACHE = "com.android.systemui.statusbar.phone.UnlockMethodCache";
+    private static final String CLASS_KG_SHOW_CB = "com.android.internal.policy.IKeyguardShowCallback";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
+
+    private static enum DirectUnlock { OFF, STANDARD, SEE_THROUGH };
 
     private static XSharedPreferences mPrefs;
     private static XSharedPreferences mQhPrefs;
@@ -67,7 +71,7 @@ public class ModLockscreen {
     private static Bitmap mCustomBg;
     private static QuietHours mQuietHours;
     private static Object mPhoneStatusBar;
-    private static boolean mShowBouncerOnNextReset;
+    private static DirectUnlock mDirectUnlock = DirectUnlock.OFF;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -126,6 +130,7 @@ public class ModLockscreen {
             final Class<?> lockPatternViewClass = XposedHelpers.findClass(CLASS_LOCK_PATTERN_VIEW, classLoader);
             final Class<? extends Enum> displayModeEnum = (Class<? extends Enum>) XposedHelpers.findClass(ENUM_DISPLAY_MODE, classLoader);
             final Class<?> sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader);
+            final Class<?> unlockMethodCacheClass = XposedHelpers.findClass(CLASS_UNLOCK_METHOD_CACHE, classLoader);
 
             XposedHelpers.findAndHookMethod(kgViewMediatorClass, "setup", new XC_MethodHook() {
                 @Override
@@ -309,24 +314,24 @@ public class ModLockscreen {
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    Object bouncer = XposedHelpers.getObjectField(param.thisObject, "mBouncer");
-                    mShowBouncerOnNextReset = prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK, false) &&
-                                (Boolean) XposedHelpers.callMethod(bouncer, "isSecure");
-                    if (DEBUG) log("mShowBouncerOnNextReset=" + mShowBouncerOnNextReset);
+                    mDirectUnlock = DirectUnlock.valueOf(prefs.getString(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK, "OFF"));
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_KG_VIEW_MANAGER, classLoader, "showBouncerOrKeyguard",
-                    new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_KG_VIEW_MANAGER, classLoader, "onScreenTurnedOn",
+                    CLASS_KG_SHOW_CB, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mShowBouncerOnNextReset) {
-                        mShowBouncerOnNextReset = false;
-                        Object bouncer = XposedHelpers.getObjectField(param.thisObject, "mBouncer");
-                        if (!(Boolean) XposedHelpers.callMethod(bouncer, "needsFullscreenBouncer")) {
-                            XposedHelpers.callMethod(bouncer, "show");
-                            if (DEBUG) log("show bouncer called");
+                    if (mDirectUnlock == DirectUnlock.OFF ||
+                        !(Boolean) XposedHelpers.callMethod(param.thisObject, "isSecure")) return;
+
+                    Object umCache = XposedHelpers.getStaticObjectField(unlockMethodCacheClass, "sInstance");
+                    if (!XposedHelpers.getBooleanField(umCache, "mTrustManaged")) {
+                        if (mDirectUnlock == DirectUnlock.SEE_THROUGH) {
+                            XposedHelpers.callMethod(mPhoneStatusBar, "showBouncer");
+                        } else {
+                            XposedHelpers.callMethod(mPhoneStatusBar, "makeExpandedInvisible");
                         }
                     }
                 }
