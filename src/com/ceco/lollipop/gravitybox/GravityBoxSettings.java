@@ -248,6 +248,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_CARRIER2_TEXT = "pref_lockscreen_carrier2_text";
     public static final String ACTION_LOCKSCREEN_SETTINGS_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SETTINGS_CHANGED";
 
+    public static final String PREF_CAT_KEY_LOCKSCREEN_SHORTCUTS = "pref_cat_lockscreen_shortcuts";
+    public static final List<String> PREF_KEY_LOCKSCREEN_SHORTCUT = new ArrayList<String>(Arrays.asList(
+            "pref_lockscreen_shortcut0", "pref_lockscreen_shortcut1", "pref_lockscreen_shortcut2",
+            "pref_lockscreen_shortcut3", "pref_lockscreen_shortcut4", "pref_lockscreen_shortcut5"));
+    public static final String ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SHORTCUT_CHANGED";
+    public static final String EXTRA_LS_SHORTCUT_SLOT = "lockscreenShortcutSlot";
+    public static final String EXTRA_LS_SHORTCUT_VALUE = "lockscreenShortcutValue";
+
     public static final String PREF_CAT_KEY_POWER = "pref_cat_power";
     public static final String PREF_CAT_KEY_POWER_MENU = "pref_cat_power_menu";
     public static final String PREF_CAT_KEY_POWER_OTHER = "pref_cat_power_other";
@@ -1210,6 +1218,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefHwKeyLockscreenTorch;
         private PreferenceCategory mPrefCatHwKeyOthers;
         private PreferenceCategory mPrefCatLsOther;
+        private PreferenceScreen mPrefCatLsShortcuts;
         private ListPreference mPrefLsRotation;
         private PreferenceScreen mPrefCatLauncherTweaks;
         private ListPreference mPrefLauncherDesktopGridRows;
@@ -1493,6 +1502,21 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefCatLsOther = (PreferenceCategory) findPreference(PREF_CAT_KEY_LOCKSCREEN_OTHER);
             mPrefLsRotation = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_ROTATION);
+
+            mPrefCatLsShortcuts = (PreferenceScreen) findPreference(PREF_CAT_KEY_LOCKSCREEN_SHORTCUTS);
+            for (int i = 0; i < PREF_KEY_LOCKSCREEN_SHORTCUT.size(); i++) {
+                AppPickerPreference appPref = new AppPickerPreference(getActivity(), null);
+                appPref.setKey(PREF_KEY_LOCKSCREEN_SHORTCUT.get(i));
+                appPref.setTitle(String.format(
+                        getActivity().getString(R.string.pref_app_launcher_slot_title), i + 1));
+                appPref.setDialogTitle(appPref.getTitle());
+                appPref.setDefaultSummary(getActivity().getString(R.string.app_picker_none));
+                appPref.setSummary(getActivity().getString(R.string.app_picker_none));
+                mPrefCatLsShortcuts.addPreference(appPref);
+                if (mPrefs.getString(appPref.getKey(), null) == null) {
+                    mPrefs.edit().putString(appPref.getKey(), null).commit();
+                }
+            }
 
             mPrefCatLauncherTweaks = (PreferenceScreen) findPreference(PREF_CAT_LAUNCHER_TWEAKS);
             mPrefLauncherDesktopGridRows = (ListPreference) findPreference(PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS);
@@ -3025,6 +3049,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_CELL_TILE_DATA_OFF_ICON)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_CELL_TILE_DATA_OFF_ICON, prefs.getBoolean(key, false));
+            } else if (PREF_KEY_LOCKSCREEN_SHORTCUT.contains(key)) {
+                intent.setAction(ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
+                intent.putExtra(EXTRA_LS_SHORTCUT_SLOT,
+                        PREF_KEY_LOCKSCREEN_SHORTCUT.indexOf(key));
+                intent.putExtra(EXTRA_LS_SHORTCUT_VALUE, prefs.getString(key, null));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

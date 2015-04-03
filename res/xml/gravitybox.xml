@@ -81,6 +81,15 @@
             android:key="pref_cat_lockscreen_other"
             android:title="@string/pref_cat_lockscreen_other_title">
 
+            <PreferenceScreen
+                android:key="pref_cat_lockscreen_shortcuts"
+                android:title="@string/pref_lockscreen_shortcuts_title"
+                android:summary="@string/pref_lockscreen_shortcuts_summary">
+
+                <!-- will be populated at runtime -->
+
+            </PreferenceScreen>
+
             <ListPreference 
                 android:key="pref_lockscreen_rotation2"
                 android:title="@string/pref_lockscreen_rotation_title"

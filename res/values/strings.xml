@@ -1778,4 +1778,8 @@
     <string name="pref_cell_tile_data_off_icon_title">Data off icon</string>
     <string name="pref_cell_tile_data_off_icon_summary">Shows icon when mobile data is disabled</string>
 
+    <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">Shortcuts</string>
+    <string name="pref_lockscreen_shortcuts_summary">Allows defining lock screen shortcuts</string>
+
 </resources>

@@ -34,6 +34,7 @@ import android.media.MediaMetadata;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import de.robv.android.xposed.XC_MethodHook;
@@ -72,6 +73,7 @@ public class ModLockscreen {
     private static QuietHours mQuietHours;
     private static Object mPhoneStatusBar;
     private static DirectUnlock mDirectUnlock = DirectUnlock.OFF;
+    private static LockscreenAppBar mAppBar;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -96,6 +98,11 @@ public class ModLockscreen {
                 mQhPrefs.reload();
                 mQuietHours = new QuietHours(mQhPrefs);
                 if (DEBUG) log("QuietHours settings reloaded");
+            } else if (action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED)) {
+                if (mAppBar != null) {
+                    mAppBar.updateAppSlot(intent.getIntExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_SLOT, 0),
+                            intent.getStringExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_VALUE));
+                }
             }
         }
     };
@@ -145,6 +152,7 @@ public class ModLockscreen {
                     intentFilter.addAction(KeyguardImageService.ACTION_KEYGUARD_IMAGE_UPDATED);
                     intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("Keyguard mediator constructed");
                 }
@@ -332,6 +340,24 @@ public class ModLockscreen {
                             XposedHelpers.callMethod(mPhoneStatusBar, "showBouncer");
                         } else {
                             XposedHelpers.callMethod(mPhoneStatusBar, "makeExpandedInvisible");
+                        }
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR, classLoader,
+                    "makeStatusBarView", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    ViewGroup kgStatusView = (ViewGroup) XposedHelpers.getObjectField(
+                            param.thisObject, "mKeyguardStatusView");
+                    int containerId = kgStatusView.getResources().getIdentifier("keyguard_clock_container",
+                            "id", PACKAGE_NAME);
+                    if (containerId != 0) {
+                        ViewGroup container = (ViewGroup) kgStatusView.findViewById(containerId);
+                        if (container != null) {
+                            mAppBar = new LockscreenAppBar(mContext, mGbContext, container,
+                                    param.thisObject, prefs);
                         }
                     }
                 }
