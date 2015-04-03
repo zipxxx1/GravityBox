@@ -1210,7 +1210,7 @@ public class ModHwKeys {
                             if (uid >= Process.FIRST_APPLICATION_UID && uid <= Process.LAST_APPLICATION_UID  
                                     && appInfo.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&
                                     !mKillIgnoreList.contains(appInfo.processName) &&
-                                    !appInfo.processName.equals(defaultHomePackage)) {
+                                    !appInfo.processName.startsWith(defaultHomePackage)) {
                                 if (appInfo.pkgList != null && appInfo.pkgList.length > 0) {
                                     for (String pkg : appInfo.pkgList) {
                                         if (DEBUG) log("Force stopping: " + pkg);
