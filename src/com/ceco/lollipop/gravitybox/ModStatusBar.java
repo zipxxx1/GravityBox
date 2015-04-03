@@ -591,6 +591,10 @@ public class ModStatusBar {
                     mProgressBarCtrl = new ProgressBarController(mPrefs);
                     mBroadcastSubReceivers.add(mProgressBarCtrl);
 
+                    if (SysUiManagers.AppLauncher != null) {
+                        SysUiManagers.AppLauncher.setStatusBar(mPhoneStatusBar);
+                    }
+
                     prepareLayout();
                     prepareHeaderTimeView();
                     prepareBrightnessControl();

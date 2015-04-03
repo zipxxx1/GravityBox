@@ -23,6 +23,7 @@ import java.util.List;
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
 import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
+import com.ceco.lollipop.gravitybox.LockscreenAppBar;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.preference.AppPickerPreference;
@@ -72,6 +73,8 @@ public class AppLauncher implements BroadcastSubReceiver {
     private List<AppInfo> mAppSlots;
     private View mAppView;
     private XSharedPreferences mPrefs;
+    private Object mStatusBar;
+    private boolean mLaunchFromLockscreen;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -148,8 +151,12 @@ public class AppLauncher implements BroadcastSubReceiver {
             }
         }
         if (intent.getAction().equals(ACTION_SHOW_APP_LAUCNHER)) {
-            showDialog();
+            showDialog(intent.getBooleanExtra(LockscreenAppBar.EXTRA_FROM_LOCKSCREEN, false));
         }
+    }
+
+    public void setStatusBar(Object statusBar) {
+        mStatusBar = statusBar;
     }
 
     public boolean dismissDialog() {
@@ -163,10 +170,16 @@ public class AppLauncher implements BroadcastSubReceiver {
     }
 
     public void showDialog() {
+        showDialog(false);
+    }
+
+    private void showDialog(boolean fromLockscreen) {
         try {
             if (dismissDialog()) {
                 return;
             }
+
+            mLaunchFromLockscreen = fromLockscreen;
 
             if (mDialog == null) {
                 for (int i = 0; i < GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.size(); i++) {
@@ -278,15 +291,16 @@ public class AppLauncher implements BroadcastSubReceiver {
             }
         // otherwise start activity dismissing keyguard
         } else {
-            try {
-                Class<?> amnCls = XposedHelpers.findClass("android.app.ActivityManagerNative",
-                        mContext.getClassLoader());
-                Object amn = XposedHelpers.callStaticMethod(amnCls, "getDefault");
-                XposedHelpers.callMethod(amn, "dismissKeyguardOnNextActivity");
-            } catch (Throwable t) { }
-
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            context.startActivity(intent);
+            if (mLaunchFromLockscreen && mStatusBar != null) {
+                try {
+                    XposedHelpers.callMethod(mStatusBar, "postStartSettingsActivity", intent, 0);
+                } catch (Throwable t) {
+                    XposedBridge.log(t);
+                }
+            } else {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(intent);
+            }
         }
     }
 
