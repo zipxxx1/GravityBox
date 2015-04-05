@@ -1757,6 +1757,9 @@
     <!-- Lockscreen: direct unlock -->
     <string name="pref_lockscreen_direct_unlock_title">Быстрая разблокировка</string>
     <string name="pref_lockscreen_direct_unlock_summary">Отображение разблокировки непосредственно при включении экрана</string>
+    <string name="direct_unlock_off">Откл</string>
+    <string name="direct_unlock_standard">Стандартно</string>
+    <string name="direct_unlock_see_through">Прозрачно</string>
 
     <!-- UNC: Notification visibility -->
     <string name="pref_lc_notif_visibility_title">Видимость</string>
@@ -1773,5 +1776,9 @@
     <!-- Cellular tile: data off icon -->
     <string name="pref_cell_tile_data_off_icon_title">Значок откл. данных</string>
     <string name="pref_cell_tile_data_off_icon_summary">Отображение значка, если мобильные данные отключены</string>
+
+    <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">Ярлыки</string>
+    <string name="pref_lockscreen_shortcuts_summary">Назначение ярлыков экрана блокировки</string>
 
 </resources>
