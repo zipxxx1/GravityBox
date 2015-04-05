@@ -1726,6 +1726,9 @@
     <!-- Lockscreen: direct unlock -->
     <string name="pref_lockscreen_direct_unlock_title">Priame odomknutie</string>
     <string name="pref_lockscreen_direct_unlock_summary">Vyzve k odomknutiu ihneď po zapnutí obrazovky</string>
+    <string name="direct_unlock_off">Vypnuté</string>
+    <string name="direct_unlock_standard">Štandardné</string>
+    <string name="direct_unlock_see_through">Priehľadné</string>
 
     <!-- UNC: Notification visibility -->
     <string name="pref_lc_notif_visibility_title">Viditeľnosť</string>
@@ -1742,5 +1745,9 @@
     <!-- Cellular tile: data off icon -->
     <string name="pref_cell_tile_data_off_icon_title">Ikona vypnutých dát</string>
     <string name="pref_cell_tile_data_off_icon_summary">Zobrazí ikonu ak sú mobilné dáta vypnuté</string>
+
+    <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">Skratky</string>
+    <string name="pref_lockscreen_shortcuts_summary">Umožňuje definovať skratky obrazovky uzamknutia</string>
 
 </resources>
