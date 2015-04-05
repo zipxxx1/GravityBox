@@ -1,3 +1,14 @@
+Changelog 5.0.6alpha - 05/04/2015
+--------------------------------------
+- Implemented Lock screen shortcuts
+- Improved tile icons
+- Improved Direct unlock feature:
+--- allows 2 modes: "standard" and "see through"
+--- won't activate in case Smart Lock is currently doing its job
+- Minor Smart Radio improvements
+- Fixed potential SystemUI crash related to Cellular tile data off icon
+- Updated Russian translations (thanks to gaich)
+
 Changelog 5.0.5alpha - 28/03/2015
 --------------------------------------
 - Lockscreen tweaks:
