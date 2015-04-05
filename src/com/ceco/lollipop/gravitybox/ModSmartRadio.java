@@ -19,9 +19,11 @@ import android.app.AlarmManager;
 import android.app.KeyguardManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.ContentObserver;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.TrafficStats;
@@ -317,7 +319,7 @@ public class ModSmartRadio {
         }
     }
 
-    private static class NetworkModeChanger implements Runnable, BroadcastSubReceiver {
+    private static class NetworkModeChanger extends ContentObserver implements Runnable, BroadcastSubReceiver {
         public static final String ACTION_CHANGE_MODE_ALARM = "gravitybox.smartradio.intent.action.CHANGE_MODE_ALARM";
 
         private Context mContext;
@@ -335,9 +337,10 @@ public class ModSmartRadio {
             long txBytes;
         }
 
-        public NetworkModeChanger(Context context) {
+        public NetworkModeChanger(Context context, Handler handler) {
+            super(handler);
             mContext = context;
-            mHandler = new Handler();
+            mHandler = handler;
             mNextNetworkMode = -1;
             mCurrentNetworkMode = -1;
             mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
@@ -345,16 +348,31 @@ public class ModSmartRadio {
 
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GB:SmartRadio");
+
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(
+                    Settings.Global.getUriFor(PhoneWrapper.PREFERRED_NETWORK_MODE), false, this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            ContentResolver cr = mContext.getContentResolver();
+            mCurrentNetworkMode = Settings.Global.getInt(cr, 
+                    PhoneWrapper.PREFERRED_NETWORK_MODE, -1);
+            if (DEBUG) log("NetworkModeChanger: onChange; mCurrentNetworkMode=" + mCurrentNetworkMode);
         }
 
         @Override
         public void run() {
-            if (mContext == null || mNextNetworkMode == -1) return;
-            if (DEBUG) log("NetworkModeChanger: sending intent");
+            if (mContext == null || mNextNetworkMode == mCurrentNetworkMode) {
+                releaseWakeLockIfHeld();
+                return;
+            }
+
+            if (DEBUG) log("NetworkModeChanger: sending intent to change network mode to: " + mNextNetworkMode);
             Intent intent = new Intent(PhoneWrapper.ACTION_CHANGE_NETWORK_TYPE);
             intent.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, mNextNetworkMode);
             mContext.sendBroadcast(intent);
-            mCurrentNetworkMode = mNextNetworkMode;
             releaseWakeLockIfHeld();
         }
 
@@ -362,7 +380,11 @@ public class ModSmartRadio {
             mHandler.removeCallbacks(this);
             releaseWakeLockIfHeld();
             cancelPendingAlarm();
-            if (networkMode == -1 || networkMode == mCurrentNetworkMode) return;
+            if (networkMode == -1) {
+                if (DEBUG) log("NetworkModeChanger: ignoring request to change to undefined mode (-1)");
+                return;
+            }
+
             mNextNetworkMode = networkMode;
             if (mIsScreenOff && mNextNetworkMode == mPowerSavingMode && mScreenOffDelay != 0) {
                 if (DEBUG) log("NetworkModeChanger: scheduling alarm for switching to power saving mode");
@@ -461,7 +483,7 @@ public class ModSmartRadio {
                                 SETTING_SMART_RADIO_ENABLED, 1) == 1;
                         mConnManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
                         mKeyguardManager = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
-                        mNetworkModeChanger = new NetworkModeChanger(mContext);
+                        mNetworkModeChanger = new NetworkModeChanger(mContext, new Handler());
                         Settings.System.putString(mContext.getContentResolver(), 
                                 SETTING_SMART_RADIO_STATE, mCurrentState.toString());
 
