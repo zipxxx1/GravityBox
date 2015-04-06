@@ -1754,5 +1754,32 @@
 
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">隐藏输入法切换器</string>
+	
+	<!-- Lockscreen: direct unlock -->
+    <string name="pref_lockscreen_direct_unlock_title">直接解锁</string>
+    <string name="pref_lockscreen_direct_unlock_summary">当屏幕开启时跳过安全锁直接显示</string>
+    <string name="direct_unlock_off">关闭</string>
+    <string name="direct_unlock_standard">标准</string>
+    <string name="direct_unlock_see_through">See through</string>
+
+    <!-- UNC: Notification visibility -->
+    <string name="pref_lc_notif_visibility_title">可见性</string>
+    <string name="pref_lc_notif_visibility_summary">指定锁屏通知可见性
+        适用于"\隐藏敏感通知内容\"锁屏策略已激活</string>
+    <string name="lc_notif_visibility_default">默认</string>
+    <string name="lc_notif_visibility_public">显示所有内容</string>
+    <string name="lc_notif_visibility_private">隐藏敏感内容</string>
+    <string name="lc_notif_visibility_secret">隐藏通知</string>
+
+    <!-- Cellular tile settings -->
+    <string name="pref_cat_qs_cell_tile_title">Cellular瓷砖设置</string>
+
+    <!-- Cellular tile: data off icon -->
+    <string name="pref_cell_tile_data_off_icon_title">关闭数据图标</string>
+    <string name="pref_cell_tile_data_off_icon_summary">当移动数据禁用时显示图标</string>
+
+    <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">快捷方式</string>
+    <string name="pref_lockscreen_shortcuts_summary">允许定义锁屏快捷方式</string>
 
 </resources>
