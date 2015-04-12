@@ -100,8 +100,14 @@ public class ModLockscreen {
                 if (DEBUG) log("QuietHours settings reloaded");
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED)) {
                 if (mAppBar != null) {
-                    mAppBar.updateAppSlot(intent.getIntExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_SLOT, 0),
+                    if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_SLOT)) {
+                        mAppBar.updateAppSlot(intent.getIntExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_SLOT, 0),
                             intent.getStringExtra(GravityBoxSettings.EXTRA_LS_SHORTCUT_VALUE));
+                    }
+                    if (intent.hasExtra(GravityBoxSettings.EXTRA_LS_SAFE_LAUNCH)) {
+                        mAppBar.setSafeLaunchEnabled(intent.getBooleanExtra(
+                                GravityBoxSettings.EXTRA_LS_SAFE_LAUNCH, false));
+                    }
                 }
             }
         }

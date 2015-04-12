@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,9 @@ public class LockscreenAppBar {
     private List<AppInfo> mAppSlots;
     private ViewGroup mRootView;
     private XSharedPreferences mPrefs;
+    private boolean mSafeLaunchEnabled;
+    private AppInfo mPendingAction;
+    private Handler mHandler;
 
     public LockscreenAppBar(Context ctx, Context gbCtx, ViewGroup container,
             Object statusBar, XSharedPreferences prefs) {
@@ -65,6 +69,7 @@ public class LockscreenAppBar {
         mStatusBar = statusBar;
         mPrefs = prefs;
         mPm = mContext.getPackageManager();
+        mHandler = new Handler();
 
         initAppSlots();
     }
@@ -87,6 +92,10 @@ public class LockscreenAppBar {
                     null), false);
         }
         updateRootViewVisibility();
+    }
+
+    public void setSafeLaunchEnabled(boolean enabled) {
+        mSafeLaunchEnabled = enabled;
     }
 
     public void updateAppSlot(int slot, String value) {
@@ -129,6 +138,16 @@ public class LockscreenAppBar {
             }
         }
     }
+
+    private Runnable pendingActionExpiredRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (mPendingAction != null) {
+                mPendingAction.zoomOut();
+                mPendingAction = null;
+            }
+        }
+    };
 
     private final class AppInfo implements View.OnClickListener {
         private Intent mIntent;
@@ -198,10 +217,46 @@ public class LockscreenAppBar {
             }
         }
 
+        public void zoomIn() {
+            if (mView != null) {
+                mView.animate()
+                    .scaleX(1.2f)
+                    .scaleY(1.2f)
+                    .setDuration(100)
+                    .start();
+            }
+        }
+
+        public void zoomOut() {
+            if (mView != null) {
+                mView.animate()
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .setDuration(100)
+                    .start();
+            }
+        }
+
         @Override
         public void onClick(View v) {
-            if (mIntent != null) {
-                startActivity(mIntent);
+            if (mSafeLaunchEnabled) {
+                mHandler.removeCallbacks(pendingActionExpiredRunnable);
+    
+                if (mPendingAction == this) {
+                    pendingActionExpiredRunnable.run();
+                    if (mIntent != null) {
+                        startActivity(mIntent);
+                    }
+                } else {
+                    pendingActionExpiredRunnable.run();
+                    mPendingAction = this;
+                    zoomIn();
+                    mHandler.postDelayed(pendingActionExpiredRunnable, 1300);
+                }
+            } else {
+                if (mIntent != null) {
+                    startActivity(mIntent);
+                }
             }
         }
     }

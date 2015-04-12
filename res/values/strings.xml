@@ -1782,4 +1782,9 @@
     <string name="pref_lockscreen_shortcuts_title">Shortcuts</string>
     <string name="pref_lockscreen_shortcuts_summary">Allows defining lock screen shortcuts</string>
 
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">Safe launch</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Requires double tap to launch shortcuts 
+        preventing them from being launched accidentally while e.g. device is in the pocket</string>
+
 </resources>

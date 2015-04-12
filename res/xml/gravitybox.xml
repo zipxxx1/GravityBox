@@ -86,6 +86,12 @@
                 android:title="@string/pref_lockscreen_shortcuts_title"
                 android:summary="@string/pref_lockscreen_shortcuts_summary">
 
+                <CheckBoxPreference 
+                    android:key="pref_lockscreen_shortcuts_safe_launch"
+                    android:title="@string/pref_lockscreen_shortcuts_safe_launch_title"
+                    android:summary="@string/pref_lockscreen_shortcuts_safe_launch_summary"
+                    android:defaultValue="false" />
+
                 <!-- will be populated at runtime -->
 
             </PreferenceScreen>
