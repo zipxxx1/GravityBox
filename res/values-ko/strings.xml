@@ -1229,7 +1229,7 @@
     <string name="pref_lockscreen_disable_ecb_title">응급 전화 버튼 비활성화</string>
     <string name="pref_lockscreen_disable_ecb_summary">잠금 화면에서 응급 전화번호를 보여주는 버튼을 비활성화합니다. 이로 인해 일어난 불이익은 사용자가 책임져야 합니다.</string>
 
-    <string name="app_picker_icon_pick_cancelled">목표 앱에 의해 아이콘 선택 실패</string>
+    <string name="app_picker_icon_pick_cancelled">목표 앱에 의해 아이콘 선택 취소</string>
 
     <string name="pref_pie_control_mirrored_keys_title">버튼 자리 전환</string>
 
