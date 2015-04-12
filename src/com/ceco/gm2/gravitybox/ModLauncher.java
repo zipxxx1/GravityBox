@@ -80,6 +80,7 @@ public class ModLauncher {
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("wd", "Fe", "Ce", "Cf"));
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.cn", "KA", "Hz", "HA"));
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.cn", "Kz", "Hy", "Hz"));
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.cn", "KE", "HD", "HE"));
 
         METHOD_SHOW_ALL_APPS = new ArrayList<ShowAllApps>();
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("onClickAllAppsButton",
@@ -94,6 +95,9 @@ public class ModLauncher {
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
                 new Object[] { boolean.class, "com.android.launcher3.q", boolean.class },
                 new Object[] { false, "Db", false } ));
+        METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
+                new Object[] { boolean.class, "com.android.launcher3.q", boolean.class },
+                new Object[] { false, "Dg", false } ));
     }
 
     private static boolean mShouldShowAppDrawer;
