@@ -1390,7 +1390,7 @@
     <string name="pref_signal_cluster_hide_sim_labels_summary">재시작 필요</string>
 
     <string name="pref_heads_up_importance_title">중요도 설정</string>
-    <string name="pref_heads_up_importance_summary">'%s'보다 덜 중요한 알림은 헤드업 알림을 보이지 않습니다.</string>
+    <string name="pref_heads_up_importance_summary">\'%s\'보다 덜 중요한 알림은 헤드업 알림을 보이지 않습니다.</string>
     <string name="headsup_importance_disabled">비활성화</string>
     <string name="headsup_importance_low">낮음</string>
     <string name="headsup_importance_medium">중간</string>
