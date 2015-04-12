@@ -1068,7 +1068,7 @@
 
     <string name="pref_cat_qs_tile_settings_title">퀵세팅 타일 설정</string>
     <string name="pref_cat_qs_tile_settings_summary">퀵세팅의 타일 관련 요소들이 있습니다.</string>
-    <string name="pref_cat_qs_nm_tile_settings_title">네트워크 모드 제목 설정</string>
+    <string name="pref_cat_qs_nm_tile_settings_title">네트워크 모드 타일 설정</string>
 
     <string name="pref_cat_qs_alarm_tile_settings_title">알람 타일 설정</string>
     <string name="pref_qs_alarm_singletap_app_title">한 번 터치할 때의 앱</string>
