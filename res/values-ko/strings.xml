@@ -1068,7 +1068,7 @@
 
     <string name="pref_cat_qs_tile_settings_title">퀵세팅 타일 설정</string>
     <string name="pref_cat_qs_tile_settings_summary">퀵세팅의 타일 관련 요소들이 있습니다.</string>
-    <string name="pref_cat_qs_nm_tile_settings_title">네트워크 모드 제목 설정</string>
+    <string name="pref_cat_qs_nm_tile_settings_title">네트워크 모드 타일 설정</string>
 
     <string name="pref_cat_qs_alarm_tile_settings_title">알람 타일 설정</string>
     <string name="pref_qs_alarm_singletap_app_title">한 번 터치할 때의 앱</string>
@@ -1109,211 +1109,291 @@
     <string name="pref_lc_notif_insistent_summary">활성화하면, 알림이 취소되거나 켜질 때까지 알림 소리를 반복해서 재생합니다.</string>
     <string name="pref_lc_vibrate_override_title">진동 주기 오버라이드</string>
     <string name="pref_lc_vibrate_pattern_title">진동 주기 설정</string>
-    <string name="pref_lc_vibrate_pattern_summary">콤마(,)로 켜짐과 꺼짐을 구분하며, 단위는 밀리세컨드입니다. 0으로 설정하면 비활성화됩니다.</string>
+    <string name="pref_lc_vibrate_pattern_summary">컴마(,)로 켜짐과 꺼짐을 구분하며, 단위는 밀리세컨드입니다. 0으로 설정하면 비활성화됩니다.</string>
     <string name="lc_vibrate_pattern_invalid">잘못된 진동 패턴입니다!</string>
 
-    <string name="pref_data_traffic_omni_autohide_threshold_title">Inactivity threshold</string>
+    <string name="pref_data_traffic_omni_autohide_threshold_title">비활동 지연시간</string>
 
-    <!-- Icon Picker: additional icons -->
     <string name="shortcuts_icon_picker_chrome">Chrome</string>
     <string name="shortcuts_icon_picker_spotify">Spotify</string>
 
-    <!-- Virtual keys vibrate pattern -->
-    <string name="pref_virtual_key_vibrate_pattern_title">Virtual key vibration pattern</string>
-    <string name="pref_virtual_key_vibrate_pattern_summary">Comma separated list of off/on duration pairs in milliseconds. Leave empty for default vibration pattern.</string>
+    <string name="pref_virtual_key_vibrate_pattern_title">가상 버튼 진동 패턴</string>
+    <string name="pref_virtual_key_vibrate_pattern_summary">컴마(,) 표시마다 꺼짐/켜짐의 길이를 지정합니다. 값을 비워두시면 기본값으로 설정됩니다.</string>
 
-    <!-- Lockscreen: show pattern error -->
-    <string name="pref_lockscreen_show_pattern_error_title">Show pattern error</string>
-    <string name="pref_lockscreen_show_pattern_error_summary">Show red trail when wrong pattern is entered</string>
+    <string name="pref_lockscreen_show_pattern_error_title">패턴 오류 표시</string>
+    <string name="pref_lockscreen_show_pattern_error_summary">패턴을 잘못 입력하였을 때 빨간 표시 여부를 정합니다.</string>
 
-    <!-- Premium features: allow trial period -->
-    <string name="trial_info">This feature is in trial mode. If you find it useful you can continue using it after unlocking premium features. 
-        Trial period ends after %d reboots.</string>
+    <string name="trial_info">현재 체험판 모드입니다. 프리미엄으로 업그레이드 하면 제한 없이 사용하실 수 있습니다.
+        체험판 모드 종료까지 %d번의 재부팅 횟수가 남았습니다.</string>
 
-    <!-- Notification control: default settings -->
-    <string name="lc_activity_menu_default_settings">Default settings</string>
-    <string name="pref_lc_default_settings_summary">When on, default settings apply automatically to all applications that have no active explicit settings</string>
-    <string name="lc_defaults_apply">Default settings apply</string>
-    <string name="lc_settings_menu_reset">Reset to defaults</string>
+    <string name="lc_activity_menu_default_settings">기본 설정</string>
+    <string name="pref_lc_default_settings_summary">활성화 하면 특별한 개별 설정이 없는 이상 이 기본 설정으로 값들이 적용됩니다.</string>
+    <string name="lc_defaults_apply">기본 설정 적용</string>
+    <string name="lc_settings_menu_reset">기본값으로 재설정</string>
 
-    <!-- Notification control: Active screen -->
-    <string name="lc_active_screen">Active Screen</string>
-    <string name="lc_active_screen_info">Active Screen feature automatically turns on screen every 
-        time new notification arrives. This will happen only in case screen is not covered 
-        (e.g. when device is not in the pocket). It optionally expands notification panel depending on 
-        the current lock screen security policy and user preference. Be aware that Active Screen requires lock screen
-        to be enabled.\nThe switch below is a master switch. After it\'s enabled, 
-        additional configuration can be done on per-app basis</string>
-    <string name="lc_active_screen_switch_title">Enable Active Screen</string>
-    <string name="lc_expand_notification_panel_title">Expand notification panel</string>
-    <string name="lc_expand_notification_panel_summary">Expands notification panel automatically when screen turns on 
-        (if allowed by current lock screen security policy)</string>
+    <string name="lc_active_screen">화면 자동 켜기</string>
+    <string name="lc_active_screen_info">화면 자동 켜기 기능은 알림이 왔을 때 설정한 간격마다 화면을 켜고 끔을 통해 사용자에게 알림이 왔음을 알려줍니다.\n알림은 잠금 화면 설정과 사용자 설정에 따라 확장될 수 있습니다. 화면 자동 켜기 기능은 화면 잠금 기능이 설정되어야 활성화된다는 것을 알아두세요.\n아래 스위치는 전역 설정 스위치입니다. 스위치를 활성화하면, 
+        추가적인 설정은 개별 설정을 통해 조작 가능합니다.</string>
+    <string name="lc_active_screen_switch_title">화면 자동 켜기 기능 설정</string>
+    <string name="lc_expand_notification_panel_title">알림 패널 자동 확장</string>
+    <string name="lc_expand_notification_panel_summary">화면이 켜지면 알림 패널을 자동으로 확장합니다. 
+        (잠금 화면 설정에서 알림 패널 확장을 허용했을 경우만 작동)</string>
 
-    <!-- Notification control: Quiet hours -->
-    <string name="lc_quiet_hours">Quiet hours</string>
-    <string name="pref_lc_qh_enabled_title">Enable quiet hours</string>
-    <string name="pref_lc_qh_enabled_summary">Mutes sounds/vibrations and optionally LED for 
-        all notifications arriving within defined time range</string>
-    <string name="pref_lc_qh_start_title">Start time</string>
-    <string name="pref_lc_qh_end_title">End time</string>
-    <string name="pref_lc_qh_mute_led_title">Mute lights</string>
+    <string name="lc_quiet_hours">무음 모드</string>
+    <string name="pref_lc_qh_enabled_title">무음 모드 사용</string>
+    <string name="pref_lc_qh_enabled_summary">설정한 시간동안 알림 소리를 음소거하고, LED를 비활성화합니다.</string>
+    <string name="pref_lc_qh_start_title">시작 시간</string>
+    <string name="pref_lc_qh_end_title">종료 시간</string>
+    <string name="pref_lc_qh_mute_led_title">LED 비활성화</string>
 
-    <!-- Notification control: LED mode -->
-    <string name="pref_lc_led_mode_title">LED mode</string>
-    <string name="lc_led_mode_original">Original (from app)</string>
-    <string name="lc_led_mode_override">Override</string>
-    <string name="lc_led_mode_off">Off (no lights)</string>
+    <string name="pref_lc_led_mode_title">LED 모드</string>
+    <string name="lc_led_mode_original">기본 (앱 설정)</string>
+    <string name="lc_led_mode_override">강제 덮어쓰기</string>
+    <string name="lc_led_mode_off">끄기 (LED 비활성화)</string>
 
-    <!-- Notification control: Quiet hours statusbar icon -->
-    <string name="pref_lc_qh_statusbar_icon_title">Status bar icon</string>
-    <string name="pref_lc_qh_statusbar_icon_summary">Shows icon in status bar during quiet hours</string>
+    <string name="pref_lc_qh_statusbar_icon_title">상단바 아이콘</string>
+    <string name="pref_lc_qh_statusbar_icon_summary">무음 모드가 작동하는 동안 상단바의 아이콘을 보입니다.</string>
 
-    <!-- Battey percent text: charging color -->
-    <string name="battery_percent_text_charging_color_title">Charging color</string>
+    <string name="battery_percent_text_charging_color_title">충전 중 LED</string>
 
-    <!-- Notification control: Quiet hours for weekends-->
-    <string name="pref_lc_qh_cat_weekdays_title">Week days</string>
-    <string name="pref_lc_qh_cat_weekend_title">Weekend</string>
+    <string name="pref_lc_qh_cat_weekdays_title">주일</string>
+    <string name="pref_lc_qh_cat_weekend_title">주말</string>
 
-    <!-- Force English locale -->
-    <string name="pref_force_english_locale_title">Force English locale</string>
+    <string name="pref_force_english_locale_title">강제로 영어 사용 (English)</string>
 
-    <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">Volume panel transparency</string>
+    <string name="pref_volume_panel_transparency_title">볼륨 창 투명도</string>
 
-    <!-- UNC Quiet Hours: ignore on per-app basis -->
-    <string name="pref_lc_qh_ignore_title">Ignore Quiet hours</string>
-    <string name="pref_lc_qh_ignore_list_title">For specific keywords</string>
-    <string name="pref_lc_qh_ignore_list_summary">Comma separated list of keywords for which to ignore 
-        Quiet hours. Leave empty for all notifications.</string>
+    <string name="pref_lc_qh_ignore_title">무음 모드 무시</string>
+    <string name="pref_lc_qh_ignore_list_title">특정 단어 설정</string>
+    <string name="pref_lc_qh_ignore_list_summary">특정 단어가 포함된 알림이 도착한 경우에만 무음 모드를 무시합니다. 비워두면 모든 알림이 무음 모드를 무시합니다.</string>
 
-    <!-- GB Actions: Quiet hours shortcut -->
-    <string name="shortcut_quiet_hours_toggle">Toggle Quiet hours</string>
+    <string name="shortcut_quiet_hours_toggle">무음 모드 토글</string>
 
-    <!-- GB Actions: toggle airplane mode -->
-    <string name="shortcut_airplane_mode">Toggle airplane mode</string>
+    <string name="shortcut_airplane_mode">비행기 모드 토글</string>
 
-    <!-- Statusbar BT icon visibility -->
-    <string name="pref_sb_bt_visibility_title">Bluetooth icon visibility</string>
-    <string name="sb_bt_default">When BT enabled (default)</string>
-    <string name="sb_bt_connected">When BT connected</string>
-    <string name="sb_bt_hidden">Hidden</string>
+    <string name="pref_sb_bt_visibility_title">블루투스 아이콘 보이기</string>
+    <string name="sb_bt_default">블루투스가 켜진 경우 (기본값)</string>
+    <string name="sb_bt_connected">블루투스가 연결된 경우에만</string>
+    <string name="sb_bt_hidden">무조건 숨기기</string>
 
-    <!-- Increasing ringtone volume -->
-    <string name="pref_increasing_ring_title">Ascending ringtone</string>
-    <string name="increasing_ring_enable">Enable</string>
-    <string name="increasing_ring_min_volume_title">Ringing start volume</string>
-    <string name="increasing_ring_volume_notice">Notice:\nAs the start volume is set higher than the ringer volume, the ring tone will be played using the ringer volume.</string>
-    <string name="increasing_ring_interval_title">Increase interval</string>
-    <string name="increasing_ring_interval_eachring">On each ring</string>
-    <string name="increasing_ring_interval_half_second">0.5 seconds</string>
-    <string name="increasing_ring_interval_1second">1 second</string>
-    <string name="increasing_ring_interval_2seconds">2 seconds</string>
-    <string name="increasing_ring_interval_3seconds">3 seconds</string>
-    <string name="increasing_ring_interval_5seconds">5 seconds</string>
-    <string name="increasing_ring_interval_10seconds">10 seconds</string>
+    <string name="pref_increasing_ring_title">벨소리 다단계 증가</string>
+    <string name="increasing_ring_enable">활성화</string>
+    <string name="increasing_ring_min_volume_title">벨소리 시작 볼륨 크기</string>
+    <string name="increasing_ring_volume_notice">주의 :\n벨소리의 시작 볼륨 크기가 기본 벨소리 크기보다 높게 설정된 경우, 벨소리는 기본 벨소리 크기만큼의 볼륨으로 재생됩니다.</string>
+    <string name="increasing_ring_interval_title">증가 간격</string>
+    <string name="increasing_ring_interval_eachring">벨소리가 울릴 때마다</string>
+    <string name="increasing_ring_interval_half_second">0.5초</string>
+    <string name="increasing_ring_interval_1second">1초</string>
+    <string name="increasing_ring_interval_2seconds">2초</string>
+    <string name="increasing_ring_interval_3seconds">3초</string>
+    <string name="increasing_ring_interval_5seconds">5초</string>
+    <string name="increasing_ring_interval_10seconds">10초</string>
 
-    <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
 
-    <!-- HW Key Action: In-app search -->
-    <string name="hwkey_action_inapp_search">In-app search</string>
+    <string name="hwkey_action_inapp_search">앱 내에서 검색</string>
 
-    <!-- Misc: Force LTR direction -->
-    <string name="pref_force_ltr_direction_title">Force LTR direction</string>
-    <string name="pref_force_ltr_direction_summary">Forces LTR layout direction for RTL locales (requires reboot)</string>
+    <string name="pref_force_ltr_direction_title">LTR 방향 강제 설정</string>
+    <string name="pref_force_ltr_direction_summary">RTL 방향을 사용하는 언어에서 LTR 방향으로 강제 설정합니다. (재시작 필요)</string>
 
-    <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">Opaque on interaction</string>
-    <string name="pref_volume_panel_opaque_summary">Removes transparency when interacting with volume panel</string>
+    <string name="pref_volume_panel_opaque_title">상호작용 시 불투명화</string>
+    <string name="pref_volume_panel_opaque_summary">볼륨 창에서 상호작용할 때 창을 불투명하게 설정합니다.</string>
+	
+    <string name="shortcut_ringer_mode">벨소리 모드 설정</string>
 
-    <!-- Ringer mode shortcut -->
-    <string name="shortcut_ringer_mode">Set ringer mode</string>
+    <string name="pref_data_traffic_active_mobile_only_title">모바일 데이터일 때만</string>
 
-    <!-- Data traffic monitor: Only for mobile data -->
-    <string name="pref_data_traffic_active_mobile_only_title">Mobile data only</string>
+    <string name="battery_style_circle_dashed">점선 원 배터리</string>
+    <string name="battery_style_circle_dashed_percent">점선 원 배터리 (퍼센트 표시)</string>
 
-    <!-- Dashed circle battery style -->
-    <string name="battery_style_circle_dashed">Dashed circle battery</string>
-    <string name="battery_style_circle_dashed_percent">Dashed circle battery with percentage</string>
+    <string name="premium_unlocked_message">지원해주셔서 감사드립니다! 모든 프리미엄 기능은 재시작 후에 사용 가능합니다.
+        환불 가능 시간이 지난 후 Unlocker를 삭제하여도 GravityBox의 프리미엄 기능은 사용 가능합니다.</string>
+    <string name="pref_about_get_unlocker_title">Unlocker 얻기</string>
+    <string name="pref_about_get_unlocker_summary">PayPal 계정이 없으신가요? 여기를 눌러 플레이 스토어에서 GravityBox 프리미엄 기능 Unlocker를 구매하세요!</string>
 
-    <!-- Premium feature unlock via unlocker app -->
-    <string name="premium_unlocked_message">Thank you for your support. Premium features will be unlocked after GravityBox is restarted. 
-        Make sure to keep GravityBox Unlocker installed for at least 120 minutes.</string>
-    <string name="pref_about_get_unlocker_title">Get unlocker</string>
-    <string name="pref_about_get_unlocker_summary">Don\'t have PayPal? Simply touch here to get GravityBox premium feature unlocker from the Play Store.</string>
+    <string name="pref_navbar_custom_key_icon_title">대체 아이콘 사용</string>
 
-    <!-- Navbar custom key: alternate icon -->
-    <string name="pref_navbar_custom_key_icon_title">Use alternate icon</string>
+    <string name="pref_qs_swipe_enable_title">퀵 세팅으로 스와이프</string>
 
-    <!-- QS: swipe to Quick Settings -->
-    <string name="pref_qs_swipe_enable_title">Swipe to Quick Settings</string>
+    <string name="pref_smart_radio_mda_ignore_title">모바일 데이터 가용성 무시</string>
+    <string name="pref_smart_radio_mda_ignore_summary">모바일 데이터를 사용할 수 없을 경우 기본 통신망 모드로 전환합니다.</string>
 
-    <!-- Smart Radio: ignore mobile data availability -->
-    <string name="pref_smart_radio_mda_ignore_title">Ignore mobile data availability</string>
-    <string name="pref_smart_radio_mda_ignore_summary">Switches to normal mode even if mobile data is currently unavailable</string>
+    <string name="shortcut_sync">동기화 토글</string>
 
-    <!-- GB Actions: Toggle sync -->
-    <string name="shortcut_sync">Toggle sync</string>
+    <string name="pref_lc_notif_sound_only_once_timeout_title">시간 간격 내에</string>
 
-    <!-- UNC: timeout for Alert only once -->
-    <string name="pref_lc_notif_sound_only_once_timeout_title">Within time interval</string>
+    <string name="pref_statusbar_clock_date_title">날짜 표시</string>
 
-    <!-- Statusbar clock: show date -->
-    <string name="pref_statusbar_clock_date_title">Show date</string>
+    <string name="delete">삭제</string>
 
-    <!-- Delete -->
-    <string name="delete">Delete</string>
+    <string name="pref_lockscreen_disable_ecb_title">응급 전화 버튼 비활성화</string>
+    <string name="pref_lockscreen_disable_ecb_summary">잠금 화면에서 응급 전화번호를 보여주는 버튼을 비활성화합니다. 이로 인해 일어난 불이익은 사용자가 책임져야 합니다.</string>
 
-    <!-- Lockscreen: disable emergency call button -->
-    <string name="pref_lockscreen_disable_ecb_title">Disable emergency call button</string>
-    <string name="pref_lockscreen_disable_ecb_summary">USE AT YOUR OWN RISK!!!!</string>
+    <string name="app_picker_icon_pick_cancelled">목표 앱에 의해 아이콘 선택 취소</string>
 
-    <!-- AppPicker: icon pick cancelled -->
-    <string name="app_picker_icon_pick_cancelled">Icon pick cancelled by target app</string>
+    <string name="pref_pie_control_mirrored_keys_title">버튼 자리 전환</string>
 
-    <!-- Pie: mirrored keys -->
-    <string name="pref_pie_control_mirrored_keys_title">Mirrored keys</string>
+    <string name="pref_pie_control_center_trigger_title">화면 가운데 트리거</string>
+    <string name="pref_pie_control_center_trigger_summary">화면 가운데에서 가장자리로 스와이프하여 Pie 컨트롤을 활성화합니다.</string>
 
-    <!-- Pie: center trigger -->
-    <string name="pref_pie_control_center_trigger_title">Center trigger</string>
-    <string name="pref_pie_control_center_trigger_summary">Triggers pie only when swiping from center of the screen edge</string>
+    <string name="clock_date_disabled">비활성화</string>
+    <string name="clock_date_localized">지역에 따라 설정</string>
+    <string name="clock_date_format_1">dd/MM (일/월)</string>
+    <string name="clock_date_format_2">MM/dd (월/일)</string>
+    <string name="clock_date_format_3">d MMM (일 월(영어식))</string>
+    <string name="clock_date_format_4">MMM d (월(영어식) 일)</string>
+    <string name="clock_date_format_5">d (일)</string>
 
-    <!-- Statusbar clock: date format options -->
-    <string name="clock_date_disabled">Disabled</string>
-    <string name="clock_date_localized">Date format based on locale</string>
-    <string name="clock_date_format_1">Date format: dd/MM</string>
-    <string name="clock_date_format_2">Date format: MM/dd</string>
-    <string name="clock_date_format_3">Date format: d MMM</string>
-    <string name="clock_date_format_4">Date format: MMM d</string>
-    <string name="clock_date_format_5">Date format: d</string>
+    <string name="pref_cat_qs_battery_tile_settings_title">배터리 타일 설정</string>
+    <string name="pref_qs_battery_extended_title">확장된 배터리 타일</string>
+    <string name="pref_qs_battery_extended_summary">재시작 필요</string>
+    <string name="pref_qs_battery_temp_unit_title">온도 단위</string>
+    <string name="celsius">섭씨</string>
+    <string name="fahrenheit">화씨</string>
 
-    <!-- Battery tile settings -->
-    <string name="pref_cat_qs_battery_tile_settings_title">Battery tile settings</string>
-    <string name="pref_qs_battery_extended_title">Extended battery tile</string>
-    <string name="pref_qs_battery_extended_summary">Requires reboot</string>
-    <string name="pref_qs_battery_temp_unit_title">Temperature unit</string>
-    <string name="celsius">Celsius</string>
-    <string name="fahrenheit">Fahrenheit</string>
+    <string name="pref_cat_headset_actions_title">헤드셋 연결 행동</string>
+    <string name="pref_headset_action_plug_title">헤드셋 연결 시</string>
+    <string name="pref_headset_action_unplug_title">헤드셋 분리 시</string>
 
-    <!-- Headset plug/unplug actions -->
-    <string name="pref_cat_headset_actions_title">Headset actions</string>
-    <string name="pref_headset_action_plug_title">On headset plugged</string>
-    <string name="pref_headset_action_unplug_title">On headset unplugged</string>
+    <string name="pref_lc_qh_mute_vibe_title">진동 끄기</string>
 
-    <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Mute vibrations</string>
+    <string name="pref_lc_qh_interactive_title">상호작용 모드</string>
+    <string name="pref_lc_qh_interactive_summary">알림이 사용자와 상호작용해도 알림 유지  
+        (개별 앱 설정 무시 규칙을 따름)</string>
 
-    <!-- Quiet Hours: interactive mode -->
-    <string name="pref_lc_qh_interactive_title">Interactive mode</string>
-    <string name="pref_lc_qh_interactive_summary">Always keeps notifications quiet during user interaction 
-        (respecting per app ignore rules)</string>
+    <string name="pref_screenshot_delete_title">스크린샷 삭제 버튼 활성화</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">Enable screenshot delete</string>
+    <string name="pref_navbar_android_l_icons_enable_title">Lollipop 아이콘 사용</string>
+    <string name="pref_navbar_android_l_icons_enable_summary">기존 네비게이션 바의 아이콘들을 Android Lollipop 스타일로 바꿉니다. (재시작 필요)</string>
 
-    <!-- Navbar keys: enable Android L icons -->
-    <string name="pref_navbar_android_l_icons_enable_title">Enable Android L navigation key icons</string>
-    <string name="pref_navbar_android_l_icons_enable_summary">Replaces stock navigation key icons by those coming from Android L (requires reboot)</string>
+    <string name="hwkey_action_custom">사용자 액션</string>
 
+    <string name="pref_unc_default_settings_title">@string/lc_activity_menu_default_settings</string>
+    <string name="pref_unc_default_settings_summary">개별 앱 설정이 없는 항목에 사용될 기본 설정을 관리합니다.</string>
+    <string name="pref_unc_perapp_settings_title">개별 앱 설정</string>
+    <string name="pref_unc_perapp_settings_summary">기본 설정을 덮어쓸 개별 앱 설정을 관리합니다.</string>
+    <string name="pref_unc_active_screen_title">@string/lc_active_screen</string>
+    <string name="pref_unc_active_screen_summary">화면 자동 켜기 기능의 기본 설정을 관리합니다.</string>
+    <string name="pref_unc_quiet_hours_title">@string/lc_quiet_hours</string>
+    <string name="pref_unc_quiet_hours_summary">알림 무음 모드 기능의 기본 설정을 관리합니다.</string>
+
+    <string name="pref_charger_unplugged_sound_title">충전기 분리 소리</string>
+
+    <string name="imgpick_dialog_title">이미지 선택...</string>
+    <string name="imgpick_choose_error">이미지 선택 오류!</string>
+    <string name="imgpick_crop_error">이미지 자르기 오류!</string>
+    <string name="imgpick_create_temp_dir_error">임시 폴더 만들기 오류!</string>
+
+    <string name="pref_power_proximity_wake_title">근접 센서로 화면 켜기</string>
+    <string name="pref_power_proximity_wake_summary">화면을 켜기 위해 근접 센서를 사용할 것인지 설정합니다.</string>
+
+    <string name="pref_charging_led_title">배터리 충전 LED</string>
+    <string name="charging_led_default">기본값</string>
+    <string name="charging_led_emulated">에뮬레이트됨</string>
+    <string name="charging_led_disabled">비활성화</string>
+
+    <string name="pref_lc_qh_weekdays_title">주일 설정</string>
+
+    <string name="pref_lc_qh_mute_system_sounds_title">시스템 소리 음소거</string>
+    <string name="system_sound_dialpad">다이얼패드 효과음</string>
+    <string name="system_sound_touch">터치 효과음</string>
+    <string name="system_sound_screen_lock">화면 잠금 효과음</string>
+    <string name="system_sound_volume_adjust">볼륨 설정 효과음</string>
+    <string name="system_sound_charger">GravityBox 충전 효과음</string>
+
+    <string name="pref_power_proximity_wake_ignore_call_title">전화 수신 시 비활성화</string>
+
+    <string name="pref_statusbar_download_progress_title">진행 바</string>
+    <string name="pref_statusbar_download_progress_summary">Android 다운로드 매니저, 블루투스 파일 전송 및 알림 개별 설정에서 진행률 트래킹을 활성화한 앱에 대해서 다운로드 진행률을 진행 바에 표시합니다.</string>
+    <string name="sb_download_progress_off">비활성화</string>
+    <string name="sb_download_progress_top">상단 가장자리</string>
+    <string name="sb_download_progress_bottom">하단 가장자리</string>
+
+    <string name="pref_statusbar_bgcolor_switch_title">상단바 배경 색깔 전환 사용 (재시작 필요)</string>
+
+    <string name="pref_patch_master_key_title">마스터 키 취약점 패치</string>
+    <string name="pref_patch_fake_id_title">가짜 ID 취약점 패치</string>
+    <string name="pref_patch_common_summary">재시작 필요</string>
+
+    <string name="pref_statusbar_ticker_policy_title">알림 티커 규칙 설정</string>
+    <string name="sb_ticker_policy_default">기본값</string>
+    <string name="sb_ticker_policy_locked">잠금 화면에서 티커 비활성화</string>
+    <string name="sb_ticker_policy_secured">보안 잠금 화면에서 티커 비활성화</string>
+    <string name="sb_ticker_policy_disabled">항상 비활성화</string>
+
+    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G 모드</string>
+    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA 선호 (3G/2G)</string>
+    <string name="nmt_2g3g_mode_auto">GSM/WCDMA 자동 (2G/3G)</string>
+
+    <string name="pref_powermenu_expanded_desktop_title">전원 메뉴에 화면 확장 모드 추가</string>
+    <string name="pref_powermenu_expanded_desktop_summary">꼭 화면 확장 모드를 끌 수 있는 다른 방법을 마련해두세요!</string>
+
+    <string name="pref_cat_quickrecord_tile_title">QuickRecord 타일 설정</string>
+    <string name="pref_quickrecord_quality_title">오디오 품질</string>
+    <string name="qr_audio_quality_low">낮음 (16kHz)</string>
+    <string name="qr_audio_quality_medium">중간 (22kHz)</string>
+    <string name="qr_audio_quality_high">높음 (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">녹화 자동 멈춤</string>
+    <string name="pref_quickrecord_autostop_summary">지정한 시간만큼만 녹화하도록 설정합니다. 0으로 설정하면 비활성화됩니다.</string>
+
+    <string name="shortcut_clear_notifications">알림 비우기</string>
+
+    <string name="shortcut_auto_brightness">자동 밝기 토글</string>
+
+    <string name="pref_signal_cluster_lollipop_icons_title">Lollipop 스타일 신호 표시 아이콘 사용</string>
+    <string name="pref_signal_cluster_lollipop_icons_summary">재시작 필요</string>
+
+    <string name="compat_warning_title">경고 !!</string>
+    <string name="compat_warning_message">수정되지 않은 Android 기기(구글 넥서스 등)와 롬(AOSP) 혹은 구글 플레이 에디션 기기에서만 사용하세요!\n\n터치위즈, 센스, 엑스페리아 등 많이 수정된 롬이나 커스텀롬 등에선 지원하지 않거나 예상치 못한 결과를 가져올 수 있습니다.\n\n그래도 진행하시겠다면, 모든 불이익은 사용자가 책임져야 하고 지원을 받을 수 없다는 점을 꼭 알아두세요. 호환성 강화 모드에 대해 자세히 알고자 하면, <a href="http://forum.xda-developers.com/showthread.php?t=2316070">이 XDA-Developers 스레드를 읽어보세요</a>.</string>
+    <string name="compat_warning_ok_stage1">잘 알겠습니다.</string>
+    <string name="compat_warning_ok_stage2">정말로 잘 알겠습니다!</string>
+
+    <string name="pref_lc_active_screen_mode_title">화면 자동 켜기 모드</string>
+    <string name="lc_active_screen_mode_disabled">비활성화</string>
+    <string name="lc_active_screen_mode_nothing">화면만 켜기</string>
+    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
+
+    <string name="pref_unc_as_pocket_mode_title">주머니 모드</string>
+    <string name="pref_unc_as_pocket_mode_summary">근접 센서가 사방으로 둘러쌓여 있을 때 화면을 켜지 않습니다. (기기를 주머니에다가 넣을 때 등)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">전원 설정의 근접 센서로 화면 켜기 기능에 의해 값이 덮어씌여졌습니다.</string>
+
+    <string name="pref_hide_launcher_icon_title">앱 런처 아이콘 숨기기</string>
+    <string name="pref_hide_launcher_icon_summary">홈 런처 앱을 재시작해야 할 수도 있습니다.</string>
+
+    <string name="navbar_l_icon_style_disabled">비활성화</string>
+    <string name="navbar_l_icon_style_original">오리지널 Lollipop 스타일</string>
+    <string name="navbar_l_icon_style_large">더 큰 Lollipop 스타일</string>
+
+    <string name="pref_smart_radio_adaptive_delay_title">적응형 지연시간</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">현재 모바일 데이터 트래픽이 설정한 값보다 더 큰 경우 기존 지연시간을 조금 더 연장합니다. (0으로 설정하면 비활성화)</string>
+
+    <string name="pref_lc_progress_tracking_title">진행률 트래킹</string>
+    <string name="pref_lc_progress_tracking_summary">진행 중인 알림에 진행 바가 있으면 그 값을 추적하여 상단바의 진행 바에다가 값을 적용합니다. 상단바 설정 내의 진행 바 설정을 활성화하여야 합니다.</string>
+
+    <string name="pref_data_traffic_display_mode_title">표시 모드</string>
+    <string name="dt_display_mode_always">항상 (네트워크 연결이 활성화 될 때)</string>
+    <string name="dt_display_mode_pt">상단바에서 진행 바가 표시되고 있을 때</string>
+
+    <string name="pref_lockscreen_ring_custom_unlock_title">잠금 해제 고리 설정</string>
+    <string name="pref_lockscreen_ring_custom_unlock_summary">잠금 해제 목표를 사용자가 설정할 수 있습니다.
+        최소한 하나는 GravityBox의 잠금 해제 액션이나 외부 앱으로 설정해주세요.</string>
+
+    <string name="pref_wifi_priority_title">Wi-Fi 연결 선호도</string>
+    <string name="pref_wifi_priority_summary">Wi-Fi 네트워크를 연결할 때 선호하는 순서를 설정합니다.</string>
+
+    <string name="pref_cat_battery_bar_title">배터리 바</string>
+    <string name="pref_battery_bar_show_title">배터리 바 표시</string>
+    <string name="pref_battery_bar_position_title">위치</string>
+    <string name="bbar_position_top">상단 가장자리</string>
+    <string name="bbar_position_bottom">하단 가장자리</string>
+    <string name="pref_battery_bar_margin_title">가장자리 여유공간</string>
+    <string name="pref_battery_bar_thickness_title">두께</string>
+    <string name="pref_battery_bar_charge_anim_title">충전 애니메이션</string>
+    <string name="pref_battery_bar_dynacolor_title">유동적 색깔</string>
+    <string name="pref_battery_bar_dynacolor_summary">배터리 레벨에 따라 배터리 바의 색깔이 유동적으로 바뀝니다.</string>
+    <string name="pref_battery_bar_color_title">색깔</string>
+    <string name="pref_battery_bar_color_low_title">배터리 레벨이 낮을 때 색깔</string>
+    <string name="pref_battery_bar_color_critical_title">배터리 레벨이 심각하게 낮을 때 색깔</string>
+    <string name="pref_battery_bar_centered_title">가운데 정렬</string>
+    <string name="pref_battery_bar_color_charging_title">충전 색깔</string>
 </resources>
