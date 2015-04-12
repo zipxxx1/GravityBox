@@ -5,18 +5,15 @@
     <string name="battery_style_stock">순정 배터리 아이콘</string>
     <string name="battery_style_circle">원형 배터리</string>
     <string name="battery_style_circle_percent">원형 배터리 (퍼센트 표시)</string>
-    <string name="battery_style_kitkat">KitKat 배터리</string>
-    <string name="battery_style_kitkat_percent">KitKat 배터리 (퍼센트 표시)</string>
     <string name="battery_style_none">없음</string>
 
     <string name="vol_music_controls_title">볼륨 키로 트랙 건너뛰기</string>
     <string name="vol_music_controls_summary">화면이 꺼져 있을 때 볼륨 키를 길게 눌러서 현재 재생되는 트랙을 건너 뛰기</string>
 
     <string name="low_battery_warning_policy_title">배터리 부족 경고 알림</string>
-    <string name="low_battery_warning_full">팝업 창과 소리로 알림</string>
-    <string name="low_battery_warning_popup">팝업 창으로만 알림</string>
-    <string name="low_battery_warning_sound">소리로만 알림</string>
-    <string name="low_battery_warning_off">알리지 않음</string>
+    <string name="low_battery_warning_default">기본</string>
+    <string name="low_battery_warning_nonintrusive">사용자를 방해하지 않는 선에서</string>
+    <string name="low_battery_warning_off">끄기</string>
 
     <string name="reboot_required">변경된 사항은 재시작 후에 적용됩니다.</string>
 
@@ -39,8 +36,6 @@
 
     <string name="quick_settings_sync_on">동기화 활성화</string>
     <string name="quick_settings_sync_off">동기화 비활성화</string>
-    <string name="quick_settings_wifi_ap_on">Wi-Fi 핫스팟 활성화</string>
-    <string name="quick_settings_wifi_ap_off">Wi-Fi 핫스팟 비활성화</string>
     <string name="quick_settings_torch_on">손전등이 켜짐</string>
     <string name="quick_settings_torch_off">손전등이 꺼짐</string>
     <string name="quick_settings_torch_off_notif">터치하여 손전등을 끕니다.</string>
@@ -57,12 +52,24 @@
     <string name="quick_settings_nfc_on">NFC 활성화</string>
     <string name="quick_settings_nfc_off">NFC 비활성화</string>
     <string name="quick_settings_camera_error_connect">카메라에 연결할 수 없습니다!</string>
+    <string name="quick_settings_usb_tether_off">연결 해제됨</string>
+    <string name="quick_settings_usb_tether_connected">테더링 끄기</string>
+    <string name="quick_settings_usb_tether_on">테더링</string>
+    <string name="quick_settings_music_play">재생</string>
+    <string name="quick_settings_music_pause">일시 중지</string>
+    <string name="quick_settings_smart_radio_on">스마트 라디오 활성화</string>
+    <string name="quick_settings_smart_radio_off">스마트 라디오 비활성화</string>
+    <string name="quick_settings_lock_screen_on">잠금화면 활성화</string>
+    <string name="quick_settings_lock_screen_off">잠금화면 비활성화</string>
+    <string name="quick_settings_location_on">위치</string>
+    <string name="quick_settings_location_off">위치 비활성화</string>
+    <string name="quick_settings_quiet_hours_off">무음 모드 비활성화</string>
+    <string name="quick_settings_quiet_hours_on">무음 모드 활성화</string>
+    <string name="quick_settings_quiet_hours_auto">자동 무음 모드</string>
 
     <string name="quick_settings_title">상단바 퀵세팅 타일</string>
     <string name="quick_settings_summary">상단바에서 퀵세팅 타일들을 활성화하거나 비활성화합니다.</string>
-    <string name="qs_tile_user_profile">사용자 프로파일</string>
     <string name="qs_tile_airplane_mode">비행기 모드</string>
-    <string name="qs_tile_battery">배터리 상태</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">위치</string>
@@ -70,26 +77,26 @@
     <string name="qs_tile_mobile_data">모바일 데이터</string>
     <string name="qs_tile_network_mode">네트워크 모드</string>
     <string name="qs_tile_data_usage">데이터 사용 상태</string>
-    <string name="qs_tile_brightness">밝기</string>
     <string name="qs_tile_autorotation">자동 회전</string>
     <string name="qs_tile_sync">동기화</string>
     <string name="qs_tile_wifi_ap">Wi-Fi 핫스팟</string>
-    <string name="qs_tile_torch">손전등</string>
+    <string name="qs_tile_torch_aosp">손전등 (순정)</string>
+    <string name="qs_tile_torch_gb">손전등 (GravityBox)</string>
     <string name="qs_tile_sleep">화면 잠금 (Lock)</string>
     <string name="qs_tile_quickrecord">빠른 녹음</string>
-    <string name="qs_tile_settings">설정</string>
     <string name="qs_tile_volume">음량</string>
     <string name="qs_tile_expanded_desktop">화면 확장</string>
     <string name="qs_tile_stay_awake">화면 꺼짐</string>
     <string name="qs_tile_screenshot">스크린샷</string>
     <string name="qs_tile_nfc">NFC</string>
-    <string name="qs_tile_camera">카메라</string>
+    <string name="qs_tile_usb_tethering">USB 테더링</string>
+    <string name="qs_tile_music">뮤직</string>
+    <string name="qs_tile_smart_radio">스마트 라디오</string>
+    <string name="qs_tile_lock_screen">잠금 화면</string>
+    <string name="qs_tile_inversion">반전</string>
 
     <string name="dialog_color_picker">색깔 선택</string>
     <string name="press_color_to_apply">색깔을 눌러서 적용합니다.</string>
-
-    <string name="statusbar_bgcolor_title">상단바 배경 색깔</string>
-    <string name="statusbar_bgcolor_summary">상단바 배경 색깔을 변경합니다.</string>
 
     <string name="pref_cat_statusbar_title">상단바 트윅</string>
     <string name="pref_cat_statusbar_summary">상단바의 기능들과 외형을 변경할 수 있습니다.</string>
@@ -106,8 +113,6 @@
     <string name="reboot_confirm">%s이(가) 곧 재시작됩니다.</string>
     <string name="reboot_confirm_recovery">%s이(가) 곧 리커버리로 재시작됩니다.</string>
     <string name="reboot_confirm_bootloader">%s이(가) 곧 부트로더로 재시작됩니다.</string>
-
-    <string name="crt_off_effect_title">화면 꺼짐 효과</string>
 
     <string name="engineering_mode_title">엔지니어링 모드</string>
     <string name="engineering_mode_summary">엔지니어링 모드 애플리케이션을 실행합니다.</string>
@@ -129,9 +134,7 @@
     <string name="lockscreen_background_result_successful">배경 화면 변경 성공!</string>
     <string name="lockscreen_background_result_not_successful">배경 화면 변경 실패</string>
     <string name="pref_cat_lockscreen_other_title">기타</string>
-    <string name="pref_lockscreen_maximize_widgets_title">위젯 확대</string>
-    <string name="pref_lockscreen_maximize_widgets_summary">잠금 화면의 위젯들이 기본적으로 확대되도록 설정합니다.</string>
-
+    
     <string name="pref_cat_power_title">전원 설정</string>
     <string name="pref_cat_power_summary">전원 관련 설정이 있습니다.</string>
 
@@ -160,8 +163,9 @@
     <string name="pref_ab_config_cancelled">새로운 자동 밝기 설정을 저장하지 못했습니다.</string>
     <string name="pref_ab_button_set">설정</string>
 
-    <string name="pref_lockscreen_rotation_title">잠금 화면 회전</string>
-
+    <string name="pref_lockscreen_rotation_title">잠금 화면 회전 사용</string>
+    <string name="pref_lockscreen_rotation_summary">재시작 필요</string>
+    
     <string name="pref_lockscreen_menu_key_title">잠금 화면에서 메뉴 키 사용</string>
     <string name="pref_lockscreen_menu_key_summary">잠금 화면에서 메뉴 키를 길게 눌러서 잠금을 더 빨리 해제할 수 있습니다. (재시작 필요)</string>
 
@@ -205,9 +209,6 @@
     <string name="phone_flip_action_dismiss">전화 거절</string>
 
     <string name="reboot_soft">빠른 재시작</string>
-
-    <string name="pref_holo_bg_solid_black_title">단색 배경화면</string>
-    <string name="pref_holo_bg_solid_black_summary">Holo 테마를 사용하는 애플리케이션의 배경화면을 단색으로 변경합니다. (재시작 필요)</string>
 
     <string name="pref_qs_tiles_per_row_title">한 줄당 표시할 타일</string>
     <string name="pref_qs_tiles_per_row_summary">한 줄당 표시될 퀵세팅 타일의 갯수를 선택합니다. (태블릿을 제외한 기기에서는 세로 화면만 적용.)</string>
@@ -254,9 +255,6 @@
     <string name="pref_notif_image_portrait_title">세로 화면 이미지 설정</string>
     <string name="pref_notif_image_landscape_title">가로 화면 이미지 설정</string>
     <string name="pref_notif_background_alpha_title">배경화면 투명도</string>
-    <string name="pref_notif_color_mode_title">배경화면 모드</string>
-    <string name="color_fill_overlay">오버레이</string>
-    <string name="color_fill_underlay">언더레이</string>
 
     <string name="pref_disable_roaming_indicators_title">로밍 아이콘 비활성화</string>
     <string name="pref_disable_roaming_indicators_summary">비활성화를 하면 로밍 중 상단바에 뜨는 R 아이콘을 제거합니다. 주의해서 사용하세요.</string>
@@ -285,14 +283,11 @@
     <string name="pref_button_backlight_notifications_title">버튼 백라이트 알림</string>
     <string name="pref_button_backlight_notifications_summary">실험적인 기능입니다! 이 기능은 LED가 없는 기기나 LED가 고장난 기기에서 사용하시면 좋습니다. 그러나 배터리를 많이 소비합니다.</string>
 
-    <string name="pref_holo_bg_dither_title">Holo 테마 배경 디더</string>
-    <string name="pref_holo_bg_dither_summary">기본적인 Holo 테마의 배경화면을 디더(Dither) 처리한 배경화면으로 교체합니다. (재시작 필요)</string>
-
     <string name="pref_hwkeys_disable_title">하드웨어 키 비활성화</string>
     <string name="pref_hwkeys_disable_summary">Pie 컨트롤이 활성화 되있을 때 하드웨어 키를 무력화합니다.</string>
 
-    <string name="pref_gb_theme_dark_title">Holo Dark 테마 사용</string>
-    <string name="pref_gb_theme_dark_summary">GravityBox의 UI 테마를 Holo Light을 대신하여 Holo Dark를 사용합니다. (AMOLED 기기에 적합)</string>
+    <string name="pref_gb_theme_dark_title">Dark 테마 사용</string>
+    <string name="pref_gb_theme_dark_summary">GravityBox의 UI 테마를 Light을 대신하여 Dark를 사용합니다. (AMOLED 기기에 적합)</string>
 
     <string name="recent_clear_off">사용 안함</string>
     <string name="recent_clear_top_left">상단 왼쪽</string>
@@ -386,12 +381,6 @@
 
     <string name="pref_powermenu_screenshot_title">전원 옵션에서 스크린샷 표시</string>
 
-    <string name="pref_cat_lockscreen_ring_settings_title">잠금 해제 고리 설정</string>
-    <string name="pref_lockscreen_ring_targets_enable_summary">GB에서 잠금 해제 고리 옵션 담당하기</string>
-    <string name="pref_lockscreen_ring_targets_app_title">바로가기 타겟 %s</string>
-    <string name="pref_lockscreen_ring_vertical_offset_title">잠금 해제 고리 세로 오프셋</string>
-    <string name="pref_lockscreen_ring_horizontal_offset_title">잠금 해제 고리 가로 오프셋</string>
-
     <string name="pref_statusbar_brightness_title">밝기 컨트롤 사용</string>
     <string name="pref_statusbar_brightness_summary">상단바를 슬라이드하면 밝기가 조절됩니다. (자동 밝기 조절이 비활성화 되어야함)</string>
 
@@ -404,9 +393,6 @@
     <string name="nm_tile_mode3">2G/3G/(LTE)</string>
 
     <string name="pref_display_allow_all_rotations_title">모든 방향 회전 허용</string>
-
-    <string name="pref_qs_tile_behaviour_override_title">GB에서 타일 행동 담당하기</string>
-    <string name="pref_qs_tile_behaviour_override_summary">타일의 행동을 담당합니다. (클릭이나 길게 누르기 등) (재시작 필요)</string>
 
     <string name="pref_qs_network_mode_sim_slot_title">네트워크 모드 타일 SIM 슬롯</string>
     <string name="pref_qs_network_mode_sim_slot_summary">네트워크 모드를 적용시킬 SIM들의 슬롯을 설정합니다. (%s)</string>
@@ -430,9 +416,6 @@
     <string name="call_vibration_waiting">전화 연결을 기다리고 있을 때</string>
     <string name="call_vibration_periodic">45초마다 진동</string>
 
-    <string name="pref_qs_tile_order_title">타일 순서 정렬</string>
-    <string name="pref_qs_tile_order_summary">퀵세팅 타일의 순서를 정렬합니다.</string>
-
     <string name="pref_ongoing_notifications_title">진행 중인 알림 보이지 않기</string>
     <string name="pref_ongoing_notifications_summary">\'진행 중\'으로 표시되는 알림을 보이지 않게 설정할 수 있습니다.</string>
     <string name="ongoing_notif_info">The list will get populated automatically for every ongoing notification that occurs.
@@ -450,11 +433,6 @@
     <string name="clock_dow_lowercase">소문자</string>
     <string name="clock_dow_uppercase">대문자</string>
 
-    <string name="pref_statusbar_lock_policy_title">상단바 잠금 정책</string>
-    <string name="sbl_policy_default">기본</string>
-    <string name="sbl_policy_unlocked">잠금 화면의 보안 옵션이 선택되어있지 않으면 잠그지 않음</string>
-    <string name="sbl_policy_locked">잠금</string>
-
     <string name="pref_cat_data_traffic_title">데이터 트래픽 모니터</string>
     <string name="pref_data_traffic_position_title">위치</string>
     <string name="dt_position_auto">자동 (시계의 위치에 따라 정해짐)</string>
@@ -469,9 +447,6 @@
     <string name="megabyte_abbr">MB</string>
     <string name="second_abbr">s</string>
 
-    <string name="pref_lockscreen_widget_limit_disable_title">위젯 제한 비활성화</string>
-    <string name="pref_lockscreen_widget_limit_disable_summary">잠금 화면에 놓을 수 있는 위젯의 제한을 없앱니다.</string>
-
     <!-- [CHAR LIMIT=10] -->
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> 남음</string>
     <!-- [CHAR LIMIT=10] -->
@@ -483,9 +458,6 @@
 
     <string name="hwkey_recents_singletap_dialog_title">최근 앱 목록 키 터치 액션</string>
     <string name="hwkey_recents_longpress_dialog_title">최근 앱 목록 키 길게 누를 때 액션</string>
-
-    <string name="pref_lockscreen_battery_arc_title">배터리 상태 표시</string>
-    <string name="pref_lockscreen_battery_arc_summary">잠금 해제 고리에다가 배터리 잔량을 표시합니다.</string>
 
     <string name="hwkey_action_torch">손전등 전환</string>
 
@@ -504,7 +476,6 @@
     <string name="pref_hwkey_doubletap_disable_title">두 번 터치 비활성화</string>
 
     <string name="pref_statusbar_signal_color_mode_title">신호 표시기 색깔 모드</string>
-    <string name="signal_color_mode_gb">GravityBox 아이콘 사용</string>
     <string name="signal_color_mode_stock">순정 아이콘 사용</string>
     <string name="signal_color_mode_disabled">색깔 적용 안함</string>
 
@@ -545,7 +516,6 @@
     <string name="pref_navbar_color_enable_summary">활성화 및 비활성화하려면 재시작이 필요 할 수 있습니다.</string>
     <string name="pref_navbar_key_color_title">네비게이션 키 색깔</string>
     <string name="pref_navbar_key_glow_color_title">네비게이션 키 터치 색깔</string>
-    <string name="pref_navbar_bg_color_title">네비게이션 바 배경색</string>
 
     <string name="pref_tm_mode_title">투명도 설정</string>
     <string name="pref_tm_mode_summary">재시작 필요</string>
@@ -561,8 +531,8 @@
 
     <string name="pref_status_icon_style_title">상단바 아이콘 스타일</string>
     <string name="pref_status_icon_style_summary">상단바의 주요 아이콘들의 스타일을 바꿉니다.</string>
-    <string name="icon_style_jb">젤리빈 (JellyBean)</string>
-    <string name="icon_style_kk">킷캣 (KitKat)</string>
+    <string name="icon_style_jb">JellyBean</string>
+    <string name="icon_style_kk">Lollipop</string>
 
     <string name="hwkey_back_doubletap_dialog_title">뒤로 가기 키 두 번 터치 액션</string>
 
@@ -579,18 +549,9 @@
     <string name="hwkey_navbar_warning">In order to enable actions support for navigation bar, it is necessary 
         to override system defaults in Navigation bar tweaks menu</string>
 
-    <string name="gb_new_package_dialog">이전 버전의 GravityBox가 설치된 것으로 확인되었습니다.
-        새로운 버전의 GravityBox를 사용하려면 이전 버전의 GravityBox를 제거해야 합니다.
-        GravityBox는 이전 버전의 설정을 불러들여서 적용합니다. 패키지 제거 창이 뜨면 이전 버전의 GravityBox는 제거해 주세요.
-		제거 후, Xposed Installer의 모듈 목록에서 GravityBox를 활성화하고,
-        시스템에 이상이 생기면 Xposed Installer에서 빠른 재시작을 시행해 주세요.</string>
-    <string name="gb_new_package_settings_transfer_ok">GravityBox 설정 전환 성공!</string>
-    <string name="gb_new_package_settings_transfer_failed">설정 전환 실패</string>
-
     <string name="pref_hwkey_lockscreen_torch_title">잠금 화면 손전등</string>
     <string name="hwkey_ls_torch_disabled">비활성화</string>
     <string name="hwkey_ls_torch_home_longpress">홈 키를 길게 눌렀을 때</string>
-    <string name="hwkey_ls_torch_voldown_longpress">볼륨 하 버튼을 길게 눌렀을 때</string>
 
     <string name="pref_qs_management_enable_summary">GB에서 퀵세팅 설정을 담당하기 (재시작 필요)</string>
 
@@ -600,9 +561,6 @@
     <string name="app_picker_shortcut_cancelled">타겟 앱에 의해 바로가기 생성 취소</string>
 
     <string name="pref_navbar_swap_keys_title">Back 키 &amp; Recent 키 자리 변경</string>
-
-    <string name="pref_lockscreen_ring_torch_title">손전등 활성화</string>
-    <string name="pref_lockscreen_ring_torch_summary">잠금 해제 고리를 길게 누르면 손전등이 활성화 됩니다.</string>
 
     <string name="pref_volume_panel_timeout_title">음량 조절 패널 타임아웃</string>
 
@@ -626,10 +584,6 @@
     <string name="pref_dialer_show_dialpad_title">다이얼패드 보이기</string>
     <string name="pref_dialer_show_dialpad_summary">전화 앱을 실행하면 다이얼패드를 바로 보여지게 합니다.</string>
 
-    <string name="screen_off_effect_default">시스템 기본값</string>
-    <string name="screen_off_effect_crt">CRT</string>
-    <string name="screen_off_effect_fade">페이드</string>
-
     <string name="pref_cat_launcher_tweaks_title">홈 런처 트윅</string>
     <string name="pref_cat_launcher_tweaks_summary">순정 AOSP 런처와 Google Now 런처의 설정을 수정합니다.</string>
     <string name="pref_cat_launcher_desktop_grid_title">바탕화면 격자</string>
@@ -639,10 +593,6 @@
     <string name="desktop_grid_default">기본값</string>
 
     <string name="hwkey_action_screen_recording">화면 녹화 토글</string>
-
-    <string name="fullscreen_caller_disabled">비활성화</string>
-    <string name="fullscreen_caller_partial">조금 확대</string>
-    <string name="fullscreen_caller_full">모두 확대</string>
 
     <string name="battery_percent_text_title">배터리 잔량 표시</string>
     <string name="battery_percent_text_size_title">배터리 잔량 표시기 크기</string>
@@ -684,8 +634,6 @@
     <string name="pref_navbar_custom_key_enable_title">사용자 키 활성화</string>
 
     <string name="pref_cat_signal_cluster_title">신호 클러스터 설정</string>
-    <string name="pref_signal_cluster_connection_state_title">연결 상태 표시</string>
-    <string name="pref_signal_cluster_connection_state_summary">모바일 데이터와 Wi-Fi 연결 상태를 표시합니다. (재시작 필요)</string>
     <string name="pref_signal_cluster_data_activity_title">데이터 활동 표시</string>
     <string name="pref_signal_cluster_data_activity_summary">모바일 데이터와 Wi-Fi의 데이터 활동 상태를 표시합니다. (재시작 필요)</string>
 
@@ -697,7 +645,6 @@
 
     <string name="hwkey_action_show_power_menu">전원 옵션 보이기</string>
     <string name="hwkey_action_expand_notifications">잠금 패널 확장</string>
-    <string name="hwkey_action_expand_quicksettings">퀵세팅 패널 확장</string>
 
     <string name="pref_cat_navbar_ring_targets_title">네비게이션 고리 바로가기</string>
     <string name="pref_navbar_ring_targets_enable_summary">GB에서 네비게이션 고리의 바로가기를 담당합니다. (재시작 필요)</string>
@@ -745,11 +692,6 @@
     <string name="bpt_charging_static">고정</string>
     <string name="bpt_charging_animated">애니메이션</string>
 
-    <string name="pref_lockscreen_sb_clock_title">상단바 시계 숨기기</string>
-    <string name="lockscreen_sb_clock_hide_on_widget">시계 관련 위젯이 존재하는 경우 숨기기</string>
-    <string name="lockscreen_sb_clock_always_hide">항상 숨기기</string>
-    <string name="lockscreen_sb_clock_always_show">항상 보이기</string>
-
     <string name="pref_cat_quickapp_tile_2_title">앱 바로가기 타일 2 세팅</string>
     <string name="qs_tile_quickapp_2">앱 바로가기 2</string>
 
@@ -770,20 +712,11 @@
 
     <string name="pref_lockscreen_bg_blur_effect_title">흐림 효과</string>
 
-    <string name="pref_qs_tile_span_disable_title">타일 스패닝 비활성화</string>
-    <string name="pref_qs_tile_span_disable_summary">사용자, 밝기, 설정 타일이 가로 화면에서 스패닝되는 현상을 없앱니다.</string>
-
     <string name="pref_force_overflow_menu_button_title">강제로 오버플로 메뉴 버튼 보이기</string>
     <string name="pref_force_overflow_menu_button_summary">재시작 필요</string>
 
-    <string name="pref_navbar_always_on_bottom_title">항상 하단에 배치</string>
-    <string name="pref_navbar_always_on_bottom_summary">네비게이션 바가 항상 하단에 배치되도록 설정합니다. (재시작 필요)</string>
-
     <string name="pref_navbar_custom_key_swap_title">메뉴 키와 전환</string>
     
-    <string name="pref_phone_nonintrusive_incoming_call_title">간섭 없는 수신 전화</string>
-    <string name="pref_phone_nonintrusive_incoming_call_summary">전화가 수신될 때 백그라운드에서 울리도록 합니다. 즉, 사용자가 무언가를 하고 있을 때에는 전화 수락 여부 창이 뜨지 않고, 알림으로만 전화 수신을 알립니다.</string>
-
     <string name="smart_radio_action_undefined">지정되지 않음</string>
     <string name="pref_cat_smart_radio_title">스마트 라디오</string>
     <string name="pref_smart_radio_enable_summary">Wi-Fi 및 모바일 데이터의 상태에 따라 통신망의 종류를 변경해줍니다.</string>
@@ -818,10 +751,6 @@
     <string name="pref_pulse_notification_delay_title">알림 딜레이 펄스</string>
     <string name="pref_pulse_notification_delay_summary">재시작 필요</string>
 
-    <string name="pref_clear_recents_mode_title">최근 앱 목록 지우기 행동</string>
-    <string name="pref_clear_recents_mode_0">짧게 누르면 전체를, 길게 누르면 현재 앱을 제외한 전체를 지우기</string>
-    <string name="pref_clear_recents_mode_1">짧게 누르면 현재 앱을 제외한 전체를, 길게 누르면 전체를 지우기</string>
-    
     <string name="pref_powermenu_disable_on_lockscreen_title">잠금 화면에서의 전원 옵션 비활성화</string>
 
     <string name="overflow_menu_default">시스템 기본값</string>
@@ -933,13 +862,6 @@
     <string name="shortcuts_icon_picker_twitter">트위터</string>
     <string name="shortcuts_icon_picker_unlock">잠금 해제</string>
 
-    <string name="pref_lockscreen_slide_before_unlock_title">잠금 해제 전 슬라이드</string>
-    <string name="pref_lockscreen_slide_before_unlock_summary">보안 잠금이 되있을 때 보안을 해제한 후 슬라이드하여 완벽하게 잠금을 해제합니다.</string>
-
-    <string name="pref_cat_lockscreen_widgets_title">위젯</string>
-    <string name="pref_cat_lockscreen_sliding_challenge_title">잠금 해제 고리</string>
-    <string name="pref_cat_lockscreen_statusbar_title">상단바</string>
-
     <string name="qs_auto_switch_disabled">비활성화됨</string>
     <string name="qs_auto_switch_mode1">알림이 없을 때</string>
     <string name="qs_auto_switch_mode2">지울 수 있는 알림이 없을 때</string>
@@ -947,9 +869,6 @@
     <string name="pref_notif_expand_all_title">모든 알림 확장</string>
     <string name="pref_notif_expand_all_summary">모든 알람들을 확장할 수 있으면 기본적으로 확장시킵니다.</string>
     
-    <string name="pref_statusbar_dt2s_title">두 번 터치하여 잠금</string>
-    <string name="pref_statusbar_dt2s_summary">상단바를 두 번 터치하여 화면을 끕니다.</string>
-
     <string name="animation_scale0">애니메이션 없음</string>
     <string name="animation_scale1">애니메이션 0.25 배속</string>
     <string name="animation_scale2">애니메이션 0.5 배속</string>
@@ -965,8 +884,6 @@
     <string name="tile_label_style_normal">기본</string>
     <string name="tile_label_style_allcaps">모두 대문자</string>
     <string name="tile_label_style_hidden">숨기기</string>
-
-    <string name="hwkey_action_brightness_dialog">밝기 대화창 보이기</string>
 
     <string name="pref_navbar_ring_haptic_feedback_title">햅틱 피드백</string>
     <string name="navring_haptic_feedback_default">기본 값</string>
@@ -1000,14 +917,11 @@
     <string name="shortcuts_icon_picker_tapatalk">Tapatalk</string>
     <string name="shortcuts_icon_picker_whatsapp">WhatsApp</string>
 
-    <string name="pref_lockscreen_ring_dt2s_title">두 번 터치하여 잠금</string>
-    <string name="pref_lockscreen_ring_dt2s_summary">잠금 해제 고리를 두 번 터치하면 화면이 꺼집니다.</string>
-
     <string name="pref_charger_plugged_sound_title">충전기 연결 소리</string>
 
     <string name="shortcut_smart_radio_toggle">스마트 라디오 전환</string>
 	
-	<string name="pref_masterswitch_title">마스터 스위치</string>
+    <string name="pref_masterswitch_title">마스터 스위치</string>
 
     <string name="pref_volume_adjust_vibrate_mute_title">볼륨 조절 시 진동 비활성화</string>
     <string name="pref_volume_adjust_vibrate_mute_summary">알림 / 벨소리를 조절할 때 피드백되는 진동을 비활성화 합니다.</string>
