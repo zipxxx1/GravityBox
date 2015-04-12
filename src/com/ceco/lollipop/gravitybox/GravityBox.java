@@ -31,6 +31,12 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
+        if (Build.VERSION.SDK_INT > 21) {
+            XposedBridge.log("GravityBox is not compatible with unofficial version of Xposed Framework for "
+                    + "Android " + Build.VERSION.RELEASE);
+            return;
+        }
+
         MODULE_PATH = startupParam.modulePath;
         prefs = new XSharedPreferences(PACKAGE_NAME);
         prefs.makeWorldReadable();
@@ -76,6 +82,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
     @Override
     public void handleInitPackageResources(InitPackageResourcesParam resparam) throws Throwable {
+        if (Build.VERSION.SDK_INT > 21) return;
 
         if (resparam.packageName.equals(ModNavigationBar.PACKAGE_NAME) &&
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false)) {
@@ -97,6 +104,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
     @Override
     public void handleLoadPackage(LoadPackageParam lpparam) throws Throwable {
+        if (Build.VERSION.SDK_INT > 21) return;
 
         if (lpparam.packageName.equals("android") &&
                 lpparam.processName.equals("android")) {
