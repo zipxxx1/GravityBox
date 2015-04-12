@@ -1109,7 +1109,7 @@
     <string name="pref_lc_notif_insistent_summary">활성화하면, 알림이 취소되거나 켜질 때까지 알림 소리를 반복해서 재생합니다.</string>
     <string name="pref_lc_vibrate_override_title">진동 주기 오버라이드</string>
     <string name="pref_lc_vibrate_pattern_title">진동 주기 설정</string>
-    <string name="pref_lc_vibrate_pattern_summary">콤마(,)로 켜짐과 꺼짐을 구분하며, 단위는 밀리세컨드입니다. 0으로 설정하면 비활성화됩니다.</string>
+    <string name="pref_lc_vibrate_pattern_summary">컴마(,)로 켜짐과 꺼짐을 구분하며, 단위는 밀리세컨드입니다. 0으로 설정하면 비활성화됩니다.</string>
     <string name="lc_vibrate_pattern_invalid">잘못된 진동 패턴입니다!</string>
 
     <string name="pref_data_traffic_omni_autohide_threshold_title">비활동 지연시간</string>
@@ -1118,7 +1118,7 @@
     <string name="shortcuts_icon_picker_spotify">Spotify</string>
 
     <string name="pref_virtual_key_vibrate_pattern_title">가상 버튼 진동 패턴</string>
-    <string name="pref_virtual_key_vibrate_pattern_summary">쉼표(,) 표시마다 꺼짐/켜짐의 길이를 지정합니다. 값을 비워두시면 기본값으로 설정됩니다.</string>
+    <string name="pref_virtual_key_vibrate_pattern_summary">컴마(,) 표시마다 꺼짐/켜짐의 길이를 지정합니다. 값을 비워두시면 기본값으로 설정됩니다.</string>
 
     <string name="pref_lockscreen_show_pattern_error_title">패턴 오류 표시</string>
     <string name="pref_lockscreen_show_pattern_error_summary">패턴을 잘못 입력하였을 때 빨간 표시 여부를 정합니다.</string>
