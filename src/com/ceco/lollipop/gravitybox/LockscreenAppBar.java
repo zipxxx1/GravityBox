@@ -70,6 +70,8 @@ public class LockscreenAppBar {
         mPrefs = prefs;
         mPm = mContext.getPackageManager();
         mHandler = new Handler();
+        mSafeLaunchEnabled = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_LOCKSCREEN_SHORTCUT_SAFE_LAUNCH, false);
 
         initAppSlots();
     }
