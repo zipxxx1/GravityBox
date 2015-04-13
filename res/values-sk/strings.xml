@@ -1750,4 +1750,14 @@
     <string name="pref_lockscreen_shortcuts_title">Skratky</string>
     <string name="pref_lockscreen_shortcuts_summary">Umožňuje definovať skratky obrazovky uzamknutia</string>
 
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">Bezpečné spustenie</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Vyžaduje dvojúrovňovú aktiváciu 
+        za účelom eliminácie neželaného spustenia (napríklad keď je zariadenie vo vrecku)</string>
+
+    <!-- Lockscreen Smart unlock -->
+    <string name="pref_lockscreen_smart_unlock_title">Smart Unlock</string>
+    <string name="pref_lockscreen_smart_unlock_summary">Odomkne automaticky v prípade ak Smart Lock politika 
+        vyhodnotí aktuálne podmienky ako dôveryhodné</string>
+
 </resources>
