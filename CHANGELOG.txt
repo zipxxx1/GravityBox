@@ -1,3 +1,9 @@
+Changelog 3.5.5 - 13/04/2015
+--------------------------------------
+- Launcher tweaks: adjusted for Google App 4.3.10
+- Launcher tweaks: adjusted for Google App 4.4.10
+- Updated Korean translations (thanks to SDKoongchi)
+
 Changelog 3.5.4 - 09/03/2015
 --------------------------------------
 - Launcher tweaks: adjusted for Google App 4.2.16
