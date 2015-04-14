@@ -1781,5 +1781,15 @@
     <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">快捷方式</string>
     <string name="pref_lockscreen_shortcuts_summary">允许定义锁屏快捷方式</string>
+    
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">安全启动</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">需要双击启动快捷键 
+        防止它们被意外启动,例如设备是在口袋</string>
+
+    <!-- Lockscreen Smart unlock -->
+    <string name="pref_lockscreen_smart_unlock_title">智能解锁</string>
+    <string name="pref_lockscreen_smart_unlock_summary">当智能锁策略检测条件值得信任时自动解锁</string>
+
 
 </resources>
