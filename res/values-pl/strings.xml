@@ -1713,4 +1713,41 @@
     <!-- Navigation bar: hide IME switcher -->
     <string name="pref_navbar_hide_ime_title">Ukryj przełącznik klawiatury</string>
 
+    <!-- Lockscreen: direct unlock -->
+    <string name="pref_lockscreen_direct_unlock_title">Bezpośrednie odblokowanie</string>
+    <string name="pref_lockscreen_direct_unlock_summary">Pokazuje monity zabezpieczeń bezpośrednio po włączeniu ekranu</string>
+    <string name="direct_unlock_off">Wyłączone</string>
+    <string name="direct_unlock_standard">Standardowo</string>
+    <string name="direct_unlock_see_through">Transparentnie</string>
+
+    <!-- UNC: Notification visibility -->
+    <string name="pref_lc_notif_visibility_title">Widoczność</string>
+    <string name="pref_lc_notif_visibility_summary">Określa widoczność powiadomienia na ekranie blokady.
+        Ma zastosowanie gdy uaktywniono \"Ukryj wrażliwe treści\"</string>
+    <string name="lc_notif_visibility_default">Domyślnie</string>
+    <string name="lc_notif_visibility_public">Pokaż wszystkie treści</string>
+    <string name="lc_notif_visibility_private">Ukryj wrażliwe treści</string>
+    <string name="lc_notif_visibility_secret">Ukryj powiadomienie</string>
+
+    <!-- Cellular tile settings -->
+    <string name="pref_cat_qs_cell_tile_title">Ustawienia kafelka sieci komórkowej</string>
+
+    <!-- Cellular tile: data off icon -->
+    <string name="pref_cell_tile_data_off_icon_title">Ikona wyłączonej transmisji danych</string>
+    <string name="pref_cell_tile_data_off_icon_summary">Pokazuje ikonę gdy transmisja danych jest wyłączona</string>
+
+    <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">Skróty</string>
+    <string name="pref_lockscreen_shortcuts_summary">Umożliwia definiowanie skrótów ekranu blokady</string>
+
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">Bezpieczny start</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Wymaga podwójnego kliknięcia aby uruchomić skróty, 
+        co zapobiega ich przypadkowemu uruchomieniu np gdy urządzenie jest w kieszeni</string>
+
+    <!-- Lockscreen Smart unlock -->
+    <string name="pref_lockscreen_smart_unlock_title">Inteligentne odblokowanie</string>
+    <string name="pref_lockscreen_smart_unlock_summary">Odblokowuje automatycznie, gdy polityka inteligentnego blokowania 
+        wykryje zaufane warunki</string>
+
 </resources>
