@@ -29,6 +29,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -196,6 +197,19 @@ public class ModClearAllRecents {
                         @Override
                         public void onClick(View v) {
                            clearAll();
+                        }
+                    });
+                    mRecentsClearButton.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            try {
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
+                                v.getContext().startActivity(intent);
+                                return true;
+                            } catch (Throwable t) {
+                                log("Error launching appplication settings: " + t.getMessage());
+                                return false;
+                            }
                         }
                     });
                     vg.addView(mRecentsClearButton);
