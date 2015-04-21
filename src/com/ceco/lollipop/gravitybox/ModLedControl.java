@@ -69,11 +69,13 @@ public class ModLedControl {
     private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData.Entry";
     private static final String CLASS_HEADSUP_NOTIF_VIEW = "com.android.systemui.statusbar.policy.HeadsUpNotificationView";
+    private static final String CLASS_NOTIFICATION_RECORD = "com.android.server.notification.NotificationRecord";
     public static final String PACKAGE_NAME_SYSTEMUI = "com.android.systemui";
 
     private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
     private static final String NOTIF_EXTRA_HEADS_UP_TIMEOUT = "gbHeadsUpTimeout";
     private static final String NOTIF_EXTRA_HEADS_UP_ALPHA = "gbHeadsUpAlpha";
+    private static final String NOTIF_EXTRA_ACTIVE_SCREEN = "gbActiveScreen";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE = "gbActiveScreenPocketMode";
     public static final String NOTIF_EXTRA_PROGRESS_TRACKING = "gbProgressTracking";
@@ -191,6 +193,9 @@ public class ModLedControl {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
+                    "applyZenModeLocked", CLASS_NOTIFICATION_RECORD, applyZenModeHook);
 
             XposedHelpers.findAndHookMethod(CLASS_STATUSBAR_MGR_SERVICE, classLoader, "onPanelRevealed", 
                     new XC_MethodHook() {
@@ -338,17 +343,9 @@ public class ModLedControl {
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
                             !qhActiveIncludingActiveScreen && !isOngoing && mPm != null && mKm.isKeyguardLocked()) {
+                        n.extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN, true);
                         n.extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
                                 ls.getActiveScreenMode().toString());
-                        n.extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE, !mProximityWakeUpEnabled &&
-                                mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true));
-                        if (ls.getActiveScreenMode() == ActiveScreenMode.HEADS_UP) {
-                            n.extras.putInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT,
-                                    mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT, 10));
-                            n.extras.putFloat(NOTIF_EXTRA_HEADS_UP_ALPHA,
-                                    (float)(100 - mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA,
-                                            0)) / 100f);
-                        }
                     }
                     // visibility
                     if (ls.getVisibility() != Visibility.DEFAULT) {
@@ -361,21 +358,44 @@ public class ModLedControl {
                 XposedBridge.log(t);
             }
         }
+    };
 
+    private static XC_MethodHook applyZenModeHook = new XC_MethodHook() {
         @SuppressWarnings("deprecation")
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             try {
-                Notification n = (Notification) param.args[4];
-                if (!n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) || !(mPm != null && 
-                        !mPm.isScreenOn() && mKm.isKeyguardLocked()))
+                Notification n = (Notification) XposedHelpers.callMethod(param.args[0], "getNotification");
+                if (!n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN) ||
+                        !n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) ||
+                        !(mPm != null && !mPm.isScreenOn() && mKm.isKeyguardLocked())) {
+                    n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN);
                     return;
+                }
+                n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN);
 
+                // check if intercepted by Zen
+                if (!mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false) &&
+                        (boolean) XposedHelpers.callMethod(param.args[0], "isIntercepted")) {
+                    if (DEBUG) log("Active screen: intercepted by Zen - ignoring");
+                    n.extras.remove(NOTIF_EXTRA_ACTIVE_SCREEN_MODE);
+                    return;
+                }
+
+                // set additional params
                 final ActiveScreenMode asMode = ActiveScreenMode.valueOf(
                         n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE));
-                final String pkgName = (String) param.args[0];
-                if (DEBUG) log("Performing Active Screen for " + pkgName + " with mode " +
-                        asMode.toString());
+                n.extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE, !mProximityWakeUpEnabled &&
+                        mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true));
+                if (asMode == ActiveScreenMode.HEADS_UP) {
+                    n.extras.putInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT,
+                            mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT, 10));
+                    n.extras.putFloat(NOTIF_EXTRA_HEADS_UP_ALPHA,
+                            (float)(100 - mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA,
+                                    0)) / 100f);
+                }
+
+                if (DEBUG) log("Performing Active Screen with mode " + asMode.toString());
 
                 mOnPanelRevealedBlocked = true;
                 if (mSm != null && mProxSensor != null &&
@@ -411,9 +431,6 @@ public class ModLedControl {
     }
 
     private static void performActiveScreen() {
-        if (mOnPanelRevealedBlocked) {
-            mContext.sendBroadcast(new Intent(ModHwKeys.ACTION_EXPAND_NOTIFICATIONS));
-        }
         long ident = Binder.clearCallingIdentity();
         try {
             XposedHelpers.callMethod(mPm, "wakeUp", SystemClock.uptimeMillis());
