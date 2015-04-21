@@ -1781,4 +1781,14 @@
     <string name="pref_lockscreen_shortcuts_title">Ярлыки</string>
     <string name="pref_lockscreen_shortcuts_summary">Назначение ярлыков экрана блокировки</string>
 
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">Безопасный запуск</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Необходимость двойного нажатия для запуска ярлыков 
+        для предотвращения случайного запуска, например, когда устройство в кармане</string>
+
+    <!-- Lockscreen Smart unlock -->
+    <string name="pref_lockscreen_smart_unlock_title">Умная разблокировка</string>
+    <string name="pref_lockscreen_smart_unlock_summary">Автоматическая разблокировка при обнаружении текущей политикой
+        блокировки обозначенных условий</string>
+
 </resources>
