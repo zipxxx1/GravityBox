@@ -38,15 +38,13 @@ public class LedListItem implements IBaseListAdapterItem {
     private String mAppName;
     private Drawable mAppIcon;
     private LedSettings mLedSettings;
+    private PackageManager mPkgManager;
 
     protected LedListItem(Context context, ApplicationInfo appInfo) {
         mContext = context;
         mAppInfo = appInfo;
-        PackageManager pm = mContext.getPackageManager();
-        mAppName = (String) mAppInfo.loadLabel(pm);
-        try {
-            mAppIcon = mAppInfo.loadIcon(pm);
-        } catch (Throwable t) { /* wtf? */ t.printStackTrace(); }
+        mPkgManager = mContext.getPackageManager();
+        mAppName = (String) mAppInfo.loadLabel(mPkgManager);
         mLedSettings = LedSettings.deserialize(mContext, appInfo.packageName);
     }
 
@@ -161,6 +159,15 @@ public class LedListItem implements IBaseListAdapterItem {
     }
 
     protected Drawable getAppIcon() {
+        if (mAppIcon == null) {
+            try {
+                mAppIcon = mAppInfo.loadIcon(mPkgManager);
+            } catch (Throwable t) {
+                t.printStackTrace(); 
+                System.gc(); 
+            }
+        }
+
         return mAppIcon;
     }
 
