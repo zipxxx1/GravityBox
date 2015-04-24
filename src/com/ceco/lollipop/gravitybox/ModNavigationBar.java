@@ -497,20 +497,27 @@ public class ModNavigationBar {
             XposedHelpers.findAndHookMethod(navbarViewClass, "getIcons", Resources.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    mRecentIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentIcon");
-                    mRecentLandIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentLandIcon");
+                    if (mGbContext == null) return;
 
-                    if (mGbContext != null) {
-                        final Resources gbRes = mGbContext.getResources();
+                    final Resources gbRes = mGbContext.getResources();
+                    try {
+                        mRecentIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentIcon");
+                        mRecentLandIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentLandIcon");
                         mRecentAltIcon = gbRes.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_recent_clear: R.drawable.ic_sysbar_recent_clear_lollipop );
                         mRecentAltLandIcon = gbRes.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_recent_clear_land : R.drawable.ic_sysbar_recent_clear_land_lollipop);
+                    } catch (Throwable t) {
+                        log("getIcons: system does not seem to have standard AOSP recents key? (" + t.getMessage() + ")");
+                    }
 
+                    try {
                         XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon",
-                                    gbRes.getDrawable(mUseLargerIcons ?
-                                            R.drawable.ic_sysbar_back_ime_land_large :
-                                                R.drawable.ic_sysbar_back_ime_land));
+                                gbRes.getDrawable(mUseLargerIcons ?
+                                        R.drawable.ic_sysbar_back_ime_land_large :
+                                            R.drawable.ic_sysbar_back_ime_land));
+                    } catch (Throwable t) {
+                        log("getIcons: system does not seem to have standard AOSP IME back key? (" + t.getMessage() + ")");
                     }
                 }
             });
@@ -934,7 +941,7 @@ public class ModNavigationBar {
     };
 
     private static void updateRecentAltButton() {
-        if (mRecentBtn != null) {
+        if (mRecentBtn != null && mRecentIcon != null && mRecentLandIcon != null) {
             if (mRecentAlt) {
                 mRecentBtn.setImageDrawable(mNavbarVertical ? mRecentAltLandIcon : mRecentAltIcon);
             } else {
