@@ -152,16 +152,6 @@ public class Utils {
         boolean isXperiaDevice = Build.MANUFACTURER.equalsIgnoreCase("sony")
                 && !isMtkDevice() && !isGpeDevice();
 
-        if (isXperiaDevice) {
-            // doublecheck - hacky workaround to determine whether device is running GPE ROM
-            try {
-                XposedHelpers.findMethodExact("com.android.internal.widget.multiwaveview.GlowPadView",
-                        null, "showTargets", boolean.class, int.class);
-            } catch (Throwable t) {
-                isXperiaDevice = false;
-            }
-        }
-
         return (mIsXperiaDevice = isXperiaDevice);
     }
 
