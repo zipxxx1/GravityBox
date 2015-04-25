@@ -29,6 +29,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.PowerManager;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -86,6 +87,7 @@ public class ModNavigationBar {
     private static boolean mNavbarLeftHanded;
     private static boolean mUseLargerIcons;
     private static boolean mHideImeSwitcher;
+    private static PowerManager mPm;
 
     // Custom key
     private static boolean mCustomKeyEnabled;
@@ -736,6 +738,21 @@ public class ModNavigationBar {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mNavbarColorsEnabled) {
                         ((Paint)param.getResult()).setColor(mKeyGlowColor);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_KEY_BUTTON_VIEW, classLoader,
+                    "sendEvent", int.class, int.class, long.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mPm == null) {
+                        mPm = (PowerManager) ((View) param.thisObject).getContext()
+                            .getSystemService(Context.POWER_SERVICE);
+                    }
+                    if (mPm != null && !mPm.isInteractive()) {
+                        if (DEBUG) log("key button sendEvent: ignoring since not interactive");
+                        param.setResult(null);
                     }
                 }
             });
