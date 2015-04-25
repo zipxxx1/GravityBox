@@ -839,6 +839,8 @@ public class ModNavigationBar {
             final boolean visible = mCustomKeyEnabled &&
                     !((disabledFlags & STATUS_BAR_DISABLE_RECENT) != 0);
             for (int i = 0; i <= 1; i++) {
+                if (mNavbarViewInfo[i] == null) continue;
+
                 // swap / unswap with menu key if necessary
                 if ((!mCustomKeyEnabled || !mCustomKeySwapEnabled) && 
                         mNavbarViewInfo[i].menuCustomSwapped) {
@@ -881,6 +883,8 @@ public class ModNavigationBar {
             int menuResId = mResources.getIdentifier("menu", "id", PACKAGE_NAME);
             int imeSwitcherResId = mResources.getIdentifier("ime_switcher", "id", PACKAGE_NAME);
             for (int i = 0; i <= 1; i++) {
+                if (mNavbarViewInfo[i] == null) continue;
+
                 boolean isImeSwitcherVisible = false;
                 View v = null;
                 if (imeSwitcherResId != 0) {
@@ -896,7 +900,7 @@ public class ModNavigationBar {
                 }
             }
         } catch (Throwable t) {
-            log("Error setting menu key visibility");
+            log("Error setting menu key visibility:" + t.getMessage());
         }
         
     }
