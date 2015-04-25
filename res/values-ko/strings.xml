@@ -1021,7 +1021,6 @@
     <string name="lc_active_screen_info">화면 자동 켜기 기능은 알림이 왔을 때 설정한 간격마다 화면을 켜고 끔을 통해 사용자에게 알림이 왔음을 알려줍니다.\n알림은 잠금 화면 설정과 사용자 설정에 따라 확장될 수 있습니다. 화면 자동 켜기 기능은 화면 잠금 기능이 설정되어야 활성화된다는 것을 알아두세요.\n아래 스위치는 전역 설정 스위치입니다. 스위치를 활성화하면, 
         추가적인 설정은 개별 설정을 통해 조작 가능합니다.</string>
     <string name="lc_active_screen_switch_title">화면 자동 켜기 기능 설정</string>
-    <string name="lc_expand_notification_panel_title">알림 패널 자동 확장</string>
 
     <string name="lc_quiet_hours">무음 모드</string>
     <string name="pref_lc_qh_enabled_title">무음 모드 사용</string>
@@ -1167,7 +1166,6 @@
     <string name="pref_cat_notif_heads_up_title">알림 헤드업 표시</string>
     <string name="pref_heads_up_master_switch_summary">AOSP 알림 헤드업 기능을 사용합니다.
         활성화하면, 개별 알림 설정에서 조작 가능한 설정이 더 추가됩니다. (재시작 필요)</string>
-    <string name="pref_heads_up_one_finger_title">한 손으로 확장</string>
     <string name="pref_heads_up_timeout_title">타임아웃</string>
     <string name="pref_heads_up_timeout_summary">얼마동안 헤드업 창이 뜨는지 설정합니다. 0은 항상 뜨도록 설정합니다.</string>
 
@@ -1178,7 +1176,6 @@
     <string name="pref_lc_active_screen_mode_title">화면 자동 켜기 모드</string>
     <string name="lc_active_screen_mode_disabled">비활성화</string>
     <string name="lc_active_screen_mode_nothing">화면만 켜기</string>
-    <string name="lc_active_screen_mode_expand">@string/lc_expand_notification_panel_title</string>
     <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <string name="qs_tile_remote_display">원격 화면 미러링</string>
@@ -1235,9 +1232,6 @@
         스누즈 아이콘을 길게 눌러서 타이머를 수동으로 설정해도 됩니다.</string>
     <string name="headsup_snooze_timer_set">%s 앱에 대한 기본 스누즈 타이머</string>
 
-    <string name="pref_recents_translucent_bars_title">투명한 상단바와 네비게이션 바</string>
-    <string name="pref_recents_translucent_bars_summary">최근 사용한 앱 패널에서 상단바와 네비게이션 바의 배경색을 투명하게 설정합니다.</string>
-
     <string name="pref_lc_qh_weekdays_title">주일 설정</string>
 
     <string name="pref_lc_qh_mute_system_sounds_title">시스템 소리 음소거</string>
@@ -1268,9 +1262,6 @@
 
     <string name="pref_powermenu_expanded_desktop_title">전원 메뉴에 화면 확장 모드 추가</string>
     <string name="pref_powermenu_expanded_desktop_summary">꼭 화면 확장 모드를 끌 수 있는 다른 방법을 마련해두세요!</string>
-
-    <string name="pref_lc_headsup_ignore_update_title">알림 업데이트 무시</string>
-    <string name="pref_lc_headsup_ignore_update_summary">이미 있는 알림의 내용이 업데이트되어도 헤드업 알림을 표시하지 않습니다.</string>
 
     <string name="pref_cat_quickrecord_tile_title">QuickRecord 타일 설정</string>
     <string name="pref_quickrecord_quality_title">오디오 품질</string>
