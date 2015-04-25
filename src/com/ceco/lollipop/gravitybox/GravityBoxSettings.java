@@ -1670,7 +1670,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // TODO: H+ indicator
             // Remove Moto XT preferences
             //if (Utils.isMotoXtDevice()) {
-                mPrefCatSignalCluster.removePreference(findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS));
+            Preference hPlusPref = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
+            if (hPlusPref != null) {
+                mPrefCatSignalCluster.removePreference(hPlusPref);
+            }
             //}
 
             // Remove MSIM preferences for non-MSIM devices

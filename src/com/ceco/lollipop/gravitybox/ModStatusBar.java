@@ -1038,7 +1038,7 @@ public class ModStatusBar {
             });
         }
         catch (Throwable t) {
-            XposedBridge.log(t);
+            if (DEBUG) XposedBridge.log(t);
         }
     }
 
