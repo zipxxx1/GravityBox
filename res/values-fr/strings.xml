@@ -218,7 +218,7 @@
 
     <!-- Safe headset media volume -->
     <string name="pref_safe_media_volume_title">Volume d\'écoute sécurisé</string>
-    <string name="pref_safe_media_volume_summary">Active ou désactive la limitation du volume sonore dans les écouteurs mains-libres</string>
+    <string name="pref_safe_media_volume_summary">Active ou désactive la limitation du volume sonore dans les écouteurs mains-libres (redémarrage nécessaire)</string>
 
      <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Actions touches de navigation</string>
@@ -713,7 +713,7 @@
  
     <!-- Ringer tile modes -->
     <string name="pref_qs_ringer_mode_title">Touche mode de sonnerie</string>
-    <string name="ringer_mode_silent">Priorité</string>
+    <string name="ringer_mode_silent">Prioritaire</string>
     <string name="ringer_mode_vibrate">Vibreur</string>
     <string name="ringer_mode_sound">Sonnerie</string>
     <string name="ringer_mode_sound_vibrate">Sonnerie et vibreur</string>
@@ -1751,5 +1751,45 @@
     <!-- SignalCluster: reduce icon spacing -->
     <string name="pref_signal_cluster_narrow_title">Réduire espace entre icônes</string>
     <string name="pref_signal_cluster_narrow_summary">Réduit l\'espacement entre les icônes de signal</string>
+
+    <!-- Navigation bar: hide IME switcher -->
+    <string name="pref_navbar_hide_ime_title">Masquer le bouton IME (choix du clavier)</string>
+
+    <!-- Lockscreen: direct unlock -->
+    <string name="pref_lockscreen_direct_unlock_title">Déverrouillage direct</string>
+    <string name="pref_lockscreen_direct_unlock_summary">Affiche le système de déverrouillage directement lorsque l\'écran s\'allume</string>
+    <string name="direct_unlock_off">Off</string>
+    <string name="direct_unlock_standard">Standard</string>
+    <string name="direct_unlock_see_through">Voir au travers</string>
+
+    <!-- UNC: Notification visibility -->
+    <string name="pref_lc_notif_visibility_title">Visibilité</string>
+    <string name="pref_lc_notif_visibility_summary">Spécifie la visibilité des notifications dans l\'écran de déverrouillage sécurisé. 
+        Valable lorsque la politique de verrouillage d\'écran \"Masquer les notifications au contenu sensible\" est active</string>
+    <string name="lc_notif_visibility_default">Par défaut</string>
+    <string name="lc_notif_visibility_public">Afficher tout le contenu</string>
+    <string name="lc_notif_visibility_private">Masquer le contenu sensible</string>
+    <string name="lc_notif_visibility_secret">Masquer les notifications</string>
+
+    <!-- Cellular tile settings -->
+    <string name="pref_cat_qs_cell_tile_title">Paramètres touche cellulaire</string>
+
+    <!-- Cellular tile: data off icon -->
+    <string name="pref_cell_tile_data_off_icon_title">Icône données désactivées</string>
+    <string name="pref_cell_tile_data_off_icon_summary">Affiche une icône lorsque les données mobiles sont désactivées</string>
+
+    <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">Raccourcis</string>
+    <string name="pref_lockscreen_shortcuts_summary">Permet de définir les raccourcis de l\'écran de déverrouillage</string>
+
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">Lancement sécurisé</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Nécessite de taper deux fois sur les raccourcis 
+        pour éviter qu\'ils soient lancés accidentellement lorsque l\'appareil est dans la poche par exemple</string>
+
+    <!-- Lockscreen Smart unlock -->
+    <string name="pref_lockscreen_smart_unlock_title">Déverrouillage intelligent</string>
+    <string name="pref_lockscreen_smart_unlock_summary">Déverrouillage automatique lorsque la politique de verrouillage intelligent 
+        détecte les conditions requises</string>
 
 </resources>
