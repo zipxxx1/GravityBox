@@ -139,8 +139,9 @@ public class WifiPriorityActivity extends ListActivity {
         }
 
         private void reloadNetworks() {
-            List<WifiConfiguration> networks = mWifiManager.getConfiguredNetworks();
             mNetworks = new ArrayList<WifiNetwork>();
+            List<WifiConfiguration> networks = mWifiManager.getConfiguredNetworks();
+            if (networks == null) return;
 
             // Sort network list by priority (or by network id if the priority is the same)
             Collections.sort(networks, new Comparator<WifiConfiguration>() {
