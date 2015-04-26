@@ -1756,4 +1756,7 @@
     <string name="pref_lockscreen_smart_unlock_summary">Odemkne automaticky v případě pokud Smart Lock politika 
         vyhodnotí aktuální podmínky jako důvěryhodné</string>
 
+    <!--  WiFi trusted networks -->
+    <string name="wifi_trusted_info">Důvěryhodná síť pro Smart Lock</string>
+
 </resources>

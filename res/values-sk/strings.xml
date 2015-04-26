@@ -1760,4 +1760,7 @@
     <string name="pref_lockscreen_smart_unlock_summary">Odomkne automaticky v prípade ak Smart Lock politika 
         vyhodnotí aktuálne podmienky ako dôveryhodné</string>
 
+    <!--  WiFi trusted networks -->
+    <string name="wifi_trusted_info">Dôveryhodná sieť pre Smart Lock</string>
+
 </resources>
