@@ -914,6 +914,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         public boolean uuidRegistered;
         public int uncTrialCountdown;
         public boolean hasMsimSupport;
+        public int xposedBridgeVersion;
 
         public SystemProperties(Bundle data) {
             if (data.containsKey("hasGeminiSupport")) {
@@ -939,6 +940,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (data.containsKey("hasMsimSupport")) {
                 hasMsimSupport = data.getBoolean("hasMsimSupport");
+            }
+            if (data.containsKey("xposedBridgeVersion")) {
+                xposedBridgeVersion = data.getInt("xposedBridgeVersion");
             }
         }
     }
@@ -1667,14 +1671,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatNotifDrawerStyle.removePreference(mPrefNotifExpandAll);
             }
 
-            // TODO: H+ indicator
             // Remove Moto XT preferences
-            //if (Utils.isMotoXtDevice()) {
-            Preference hPlusPref = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
-            if (hPlusPref != null) {
-                mPrefCatSignalCluster.removePreference(hPlusPref);
+            if (Utils.isMotoXtDevice() || sSystemProperties.xposedBridgeVersion < 64) {
+                Preference hPlusPref = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
+                if (hPlusPref != null) {
+                    mPrefCatSignalCluster.removePreference(hPlusPref);
+                }
             }
-            //}
 
             // Remove MSIM preferences for non-MSIM devices
             if (!sSystemProperties.hasMsimSupport) {

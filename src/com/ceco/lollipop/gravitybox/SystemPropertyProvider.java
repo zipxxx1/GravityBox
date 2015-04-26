@@ -121,6 +121,7 @@ public class SystemPropertyProvider {
                                     data.putInt("uncTrialCountdown", Settings.System.getInt(cr,
                                             SETTING_UNC_TRIAL_COUNTDOWN, 50));
                                     data.putBoolean("hasMsimSupport", PhoneWrapper.hasMsimSupport());
+                                    data.putInt("xposedBridgeVersion", XposedBridge.XPOSED_BRIDGE_VERSION);
                                     if (DEBUG) {
                                         log("hasGeminiSupport: " + data.getBoolean("hasGeminiSupport"));
                                         log("isTablet: " + data.getBoolean("isTablet"));
@@ -130,6 +131,7 @@ public class SystemPropertyProvider {
                                         log("uuidRegistered: " + data.getBoolean("uuidRegistered"));
                                         log("uncTrialCountdown: " + data.getInt("uncTrialCountdown"));
                                         log("hasMsimSupport: " + data.getBoolean("hasMsimSupport"));
+                                        log("xposedBridgeVersion: " + data.getInt("xposedBridgeVersion"));
                                     }
                                     receiver.send(RESULT_SYSTEM_PROPERTIES, data);
                                 } else if (intent.getAction().equals(ACTION_REGISTER_UUID) && 
