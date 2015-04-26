@@ -1,3 +1,19 @@
+Changelog 5.0.8 - 26/04/2015
+--------------------------------------
+- Misc tweaks / WiFi priority: implemented trusted WiFi networks for Smart Lock
+- Signal cluster: brought back option for H+ indicator (Nexus/AOSP only, requires XposedBridge v64+)
+- Recents: launch Apps Settings on clear all button long-press
+- Navigation bar: fixed recents key disappearing on Xperia devices
+- Key actions: fixed "Go to sleep" action turning on screen after it was turned off
+- Ultimate notification control:
+--- Active Screen: respect priority/none ringer settings
+--- fixed crash in per-app settings when large number of apps installed
+- Fixed GB Settings crash on MediaTek devices (doesn't mean MTK is now supported)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Russian translations (thanks to gaich)
+- Updated French translations (thanks to ch-vox)
+
 Changelog 5.0.7 - 13/04/2015
 --------------------------------------
 - Lockscreen tweaks:
