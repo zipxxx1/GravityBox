@@ -1792,4 +1792,7 @@
     <string name="pref_lockscreen_smart_unlock_summary">Unlocks automatically when current smart lock policy 
         detects trusted conditions</string>
 
+    <!--  WiFi trusted networks -->
+    <string name="wifi_trusted_info">Trusted for Smart Lock</string>
+
 </resources>

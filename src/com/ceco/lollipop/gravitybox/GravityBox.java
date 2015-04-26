@@ -115,6 +115,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModViewConfig.initAndroid(prefs, lpparam.classLoader);
             ModPower.initAndroid(prefs, lpparam.classLoader);
             ModLedControl.initAndroid(prefs, lpparam.classLoader);
+            ModTrustManager.initAndroid(prefs, lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {

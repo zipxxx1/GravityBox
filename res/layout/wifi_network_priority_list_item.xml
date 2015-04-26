@@ -42,20 +42,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <!-- The height is set to half the height of the parent, which is 64 dip -->
-        <TextView android:id="@+id/name"
+        <LinearLayout 
             android:layout_width="wrap_content"
-            android:paddingLeft="9dip"
-            android:paddingRight="9dip"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_alignParentTop = "true"
             android:layout_alignParentBottom = "true"
             android:layout_toEndOf="@id/grabber"
-            android:layout_toStartOf="@id/icon"
-            android:ellipsize="marquee"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceListItem" />
+            android:gravity="center_vertical">
+
+            <!-- The height is set to half the height of the parent, which is 64 dip -->
+            <TextView android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="9dip"
+                android:paddingRight="9dip"
+                android:ellipsize="marquee"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+            <TextView android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="9dip"
+                android:paddingRight="9dip"
+                android:ellipsize="marquee"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/wifi_trusted_info" />
+
+        </LinearLayout>
+
+        <CheckBox android:id="@+id/chkTrusted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
+            style="?android:attr/checkboxStyle" />
 
     </RelativeLayout>
 
