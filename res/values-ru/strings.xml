@@ -1789,6 +1789,9 @@
     <!-- Lockscreen Smart unlock -->
     <string name="pref_lockscreen_smart_unlock_title">Умная разблокировка</string>
     <string name="pref_lockscreen_smart_unlock_summary">Автоматическая разблокировка при обнаружении текущей политикой
-        блокировки обозначенных условий</string>
+        блокировки доверенных условий</string>
+
+    <!--  WiFi trusted networks -->
+    <string name="wifi_trusted_info">Доверенно для умной блокировки</string>
 
 </resources>
