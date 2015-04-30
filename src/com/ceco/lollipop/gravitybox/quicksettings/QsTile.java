@@ -68,6 +68,8 @@ public abstract class QsTile extends BaseTile {
             return new CompassTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_usb_tether"))
             return new UsbTetherTile(host, key, prefs, eventDistributor);
+        else if (key.equals("gb_tile_battery"))
+            return new BatteryTile(host, key, prefs, eventDistributor);
 
         return null;
     }

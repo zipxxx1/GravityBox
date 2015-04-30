@@ -164,6 +164,11 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     @Override
+    public View onCreateIcon() {
+        return null;
+    }
+
+    @Override
     public void onBroadcastReceived(Context context, Intent intent) { 
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {

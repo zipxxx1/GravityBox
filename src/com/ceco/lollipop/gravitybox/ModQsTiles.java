@@ -30,6 +30,7 @@ public class ModQsTiles {
     public static final String CLASS_TILE_HOST = "com.android.systemui.statusbar.phone.QSTileHost";
 
     public static final List<String> GB_TILE_KEYS = new ArrayList<String>(Arrays.asList(
+            "gb_tile_battery",
             "gb_tile_nfc",
             "gb_tile_gps_slimkat",
             "gb_tile_gps_alt",

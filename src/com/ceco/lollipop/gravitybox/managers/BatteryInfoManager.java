@@ -25,6 +25,7 @@ import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -32,6 +33,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.BatteryManager;
+import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 
 public class BatteryInfoManager implements BroadcastSubReceiver {
@@ -41,6 +43,7 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     private Uri[] mSounds;
     private TelephonyManager mTelephonyManager;
     private LowBatteryWarningPolicy mLowBatteryWarningPolicy;
+    private PowerManager mPowerManager;
 
     public static final int SOUND_CHARGED = 0;
     public static final int SOUND_PLUGGED = 1;
@@ -48,12 +51,17 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
 
     public enum LowBatteryWarningPolicy { DEFAULT, NONINTRUSIVE, OFF };
 
+    public static final String ACTION_POWER_SAVE_MODE_CHANGING = 
+            "android.os.action.POWER_SAVE_MODE_CHANGING";
+    public static final String EXTRA_POWER_SAVE_MODE = "mode";
+
     public class BatteryData {
         public boolean charging;
         public int level;
         public int powerSource;
         public int temperature;
         public int voltage;
+        public boolean isPowerSaving;
 
         public float getTempCelsius() {
             return ((float)temperature/10f);
@@ -61,6 +69,26 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
 
         public float getTempFahrenheit() {
             return (((float)temperature/10f)*(9f/5f)+32);
+        }
+
+        public BatteryData clone() {
+            BatteryData bd = new BatteryData();
+            bd.charging = this.charging;
+            bd.level = this.level;
+            bd.powerSource = this.powerSource;
+            bd.temperature = this.temperature;
+            bd.voltage = this.voltage;
+            bd.isPowerSaving = this.isPowerSaving;
+            return bd;
+        }
+
+        public String toString() {
+            return "charging="+this.charging+"; level="+this.level+
+                    "; powerSource="+this.powerSource+
+                    "; temperature="+this.temperature+
+                    "; voltage="+this.voltage+
+                    "; isPowerSaving="+this.isPowerSaving;
+                    
         }
     }
 
@@ -73,6 +101,8 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         mBatteryData = new BatteryData();
         mListeners = new ArrayList<BatteryStatusListener>();
         mSounds = new Uri[3];
+        mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        mBatteryData.isPowerSaving = mPowerManager.isPowerSaveMode();
 
         setSound(BatteryInfoManager.SOUND_CHARGED,
                 prefs.getString(GravityBoxSettings.PREF_KEY_BATTERY_CHARGED_SOUND, ""));
@@ -111,12 +141,12 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
     private void notifyListeners() {
         synchronized(mListeners) {
             for (BatteryStatusListener listener : mListeners) {
-                listener.onBatteryStatusChanged(mBatteryData);
+                listener.onBatteryStatusChanged(mBatteryData.clone());
             }
         }
     }
 
-    public void updateBatteryInfo(Intent intent) {
+    private void updateBatteryInfo(Intent intent) {
         if (intent == null) return;
 
         int newLevel = (int)(100f
@@ -151,6 +181,25 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
 
             notifyListeners();
         }
+    }
+
+    private void updatePowerSavingInfo(boolean enabled) {
+        if (mBatteryData.isPowerSaving != enabled) {
+            mBatteryData.isPowerSaving = enabled;
+            notifyListeners();
+        }
+    }
+
+    public void setPowerSaving(boolean enabled) {
+        try {
+            XposedHelpers.callMethod(mPowerManager, "setPowerSaveMode", enabled);
+        } catch (Throwable t) {
+            XposedBridge.log("Error setting power saving mode: " + t.getMessage());
+        }
+    }
+
+    public void togglePowerSaving() {
+        setPowerSaving(!mPowerManager.isPowerSaveMode());
     }
 
     public BatteryData getCurrentBatteryData() {
@@ -213,6 +262,8 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
         final String action = intent.getAction();
         if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
             updateBatteryInfo(intent);
+        } else if (action.equals(ACTION_POWER_SAVE_MODE_CHANGING)) {
+            updatePowerSavingInfo(intent.getBooleanExtra(EXTRA_POWER_SAVE_MODE, false));
         } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_SOUND_CHANGED)) {
             setSound(intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_TYPE, -1),
                     intent.getStringExtra(GravityBoxSettings.EXTRA_BATTERY_SOUND_URI));

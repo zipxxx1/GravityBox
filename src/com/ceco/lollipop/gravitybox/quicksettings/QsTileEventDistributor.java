@@ -46,6 +46,7 @@ public class QsTileEventDistributor {
         void handleUpdateState(Object state, Object arg);
         void setListening(boolean listening);
         void onSecureMethodChanged();
+        View onCreateIcon();
     }
 
     private static void log(String message) {
@@ -59,6 +60,7 @@ public class QsTileEventDistributor {
     private List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private Object mKeyguardDelegate;
     private Object mUnlockMethodCache;
+    private String mCreateTileViewTileKey;
 
     public QsTileEventDistributor(Object host, XSharedPreferences prefs) {
         mHost = host;
@@ -169,12 +171,17 @@ public class QsTileEventDistributor {
             XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "createTileView",
                     Context.class, new XC_MethodHook() {
                 @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    mCreateTileViewTileKey = (String) XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME);
+                }
+                @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    final QsEventListener l = mListeners.get(mCreateTileViewTileKey);
                     if (l != null) {
                         l.onCreateTileView((View)param.getResult());
                     }
+                    mCreateTileViewTileKey = null;
                 }
             });
 
@@ -233,6 +240,20 @@ public class QsTileEventDistributor {
                     if (isKeyguardShowingAndSecured()) {
                         for (Entry<String,QsEventListener> entry : mListeners.entrySet()) {
                             entry.getValue().onSecureMethodChanged();
+                        }
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "createIcon",
+                    new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(mCreateTileViewTileKey);
+                    if (l != null) {
+                        View icon = l.onCreateIcon();
+                        if (icon != null) {
+                            param.setResult(icon);
                         }
                     }
                 }

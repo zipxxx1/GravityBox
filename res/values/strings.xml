@@ -115,6 +115,7 @@
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Lock screen</string>
     <string name="qs_tile_inversion">Inversion</string>
+    <string name="qs_tile_battery">Battery</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
