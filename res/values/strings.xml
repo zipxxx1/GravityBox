@@ -1796,4 +1796,14 @@
     <!--  WiFi trusted networks -->
     <string name="wifi_trusted_info">Trusted for Smart Lock</string>
 
+    <!-- QS: Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_title">Battery tile settings</string>
+    <string name="pref_battery_tile_percentage_title">Show percentage</string>
+    <string name="pref_battery_tile_saver_indicate_title">Battery saver indication</string>
+    <string name="pref_battery_tile_saver_indicate_summary">Uses the same color as system bars 
+        to indicate that battery saver mode is active</string>
+    <string name="pref_battery_tile_temp_unit_title">Temperature unit</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
 </resources>

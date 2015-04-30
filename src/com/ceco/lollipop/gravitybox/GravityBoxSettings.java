@@ -811,6 +811,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_CELL_TILE_DATA_OFF_ICON = "pref_cell_tile_data_off_icon";
     public static final String EXTRA_CELL_TILE_DATA_OFF_ICON = "cellTileDataOffIcon";
 
+    public static final String PREF_CAT_KEY_BATTERY_TILE = "pref_cat_qs_battery_tile";
+    public static final String PREF_KEY_BATTERY_TILE_PERCENTAGE = "pref_battery_tile_percentage";
+    public static final String PREF_KEY_BATTERY_TILE_SAVER_INDICATE = "pref_battery_tile_saver_indicate";
+    public static final String PREF_KEY_BATTERY_TILE_TEMP_UNIT = "pref_battery_tile_temp_unit";
+    public static final String EXTRA_BATTERY_TILE_PERCENTAGE = "batteryTilePercentage";
+    public static final String EXTRA_BATTERY_TILE_SAVER_INDICATE = "batteryTileSaverIndicate";
+    public static final String EXTRA_BATTERY_TILE_TEMP_UNIT = "batteryTileTempUnit";
+
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
     public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
@@ -1269,6 +1277,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefBbarPosition;
         private ListPreference mPrefSbdpMode;
         private PreferenceScreen mPrefCatCellTile;
+        private ListPreference mPrefBatteryTileTempUnit;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1594,6 +1603,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefSbdpMode = (ListPreference) findPreference(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS);
 
             mPrefCatCellTile = (PreferenceScreen) findPreference(PREF_CAT_KEY_CELL_TILE);
+
+            mPrefBatteryTileTempUnit = (ListPreference) findPreference(PREF_KEY_BATTERY_TILE_TEMP_UNIT); 
 
             // MTK fixes
             mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
@@ -2219,6 +2230,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS)) {
                 mPrefSbdpMode.setSummary(mPrefSbdpMode.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_BATTERY_TILE_TEMP_UNIT)) {
+                mPrefBatteryTileTempUnit.setSummary(mPrefBatteryTileTempUnit.getEntry());
             }
 
             for (String caKey : customAppKeys) {
@@ -3067,6 +3082,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_LOCKSCREEN_SHORTCUT_SAFE_LAUNCH)) {
                 intent.setAction(ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
                 intent.putExtra(EXTRA_LS_SAFE_LAUNCH, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_BATTERY_TILE_PERCENTAGE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_TILE_PERCENTAGE, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_BATTERY_TILE_SAVER_INDICATE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_TILE_SAVER_INDICATE, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_BATTERY_TILE_TEMP_UNIT)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_TILE_TEMP_UNIT, prefs.getString(key, "C"));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

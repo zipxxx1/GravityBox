@@ -15,6 +15,7 @@
 
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryData;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryStatusListener;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
@@ -41,6 +42,9 @@ public class BatteryTile extends QsTile {
     private boolean mIsReceiving;
     private BatteryData mBatteryData;
     private BatteryView mBatteryView;
+    private boolean mShowPercentage;
+    private boolean mSaverIndicate;
+    private String mTempUnit;
 
     public BatteryTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -76,6 +80,35 @@ public class BatteryTile extends QsTile {
     }
 
     @Override
+    protected void initPreferences() {
+        super.initPreferences();
+
+        mShowPercentage = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TILE_PERCENTAGE, false);
+        mSaverIndicate = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TILE_SAVER_INDICATE, false);
+        mTempUnit = mPrefs.getString(GravityBoxSettings.PREF_KEY_BATTERY_TILE_TEMP_UNIT, "C");
+    }
+
+    @Override
+    public void onBroadcastReceived(Context context, Intent intent) {
+        super.onBroadcastReceived(context, intent);
+
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_TILE_PERCENTAGE)) {
+                mShowPercentage = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_TILE_PERCENTAGE, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_TILE_SAVER_INDICATE)) {
+                mSaverIndicate = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_TILE_SAVER_INDICATE, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_TILE_TEMP_UNIT)) {
+                mTempUnit = intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_TILE_TEMP_UNIT);
+            }
+        }
+    }
+
+    @Override
     public View onCreateIcon() {
         mBatteryView = new BatteryView(mContext);
         return mBatteryView;
@@ -97,8 +130,10 @@ public class BatteryTile extends QsTile {
             if (DEBUG) log(getKey() + ": handleUpdateState: battery data is null");
         } else {
             mState.visible = true;
+            float temp = mTempUnit.equals("C") ? 
+                    mBatteryData.getTempCelsius() : mBatteryData.getTempFahrenheit();
             mState.label = String.format("%.1f\u00b0%s, %dmV",
-                    mBatteryData.getTempCelsius(), "C", mBatteryData.voltage);
+                    temp, mTempUnit, mBatteryData.voltage);
         }
         if (mBatteryView != null) {
             mBatteryView.postInvalidate();
@@ -144,7 +179,6 @@ public class BatteryTile extends QsTile {
         private int[] mColors;
         private Integer mBatterySaverColor;
 
-        private boolean mShowPercent = true;
         private Paint mFramePaint, mBatteryPaint, mWarningTextPaint, mTextPaint, mBoltPaint;
         private int mButtonHeight;
         private float mTextHeight, mWarningTextHeight;
@@ -307,13 +341,14 @@ public class BatteryTile extends QsTile {
             mFrame.bottom -= SUBPIXEL;
 
             // first, draw the battery shape
-            mFramePaint.setColor(mBatteryData.isPowerSaving ? getBatterySaverColor() : COLORS[COLORS.length-1]);
+            mFramePaint.setColor(mSaverIndicate && mBatteryData.isPowerSaving ? 
+                    getBatterySaverColor() : COLORS[COLORS.length-1]);
             mFramePaint.setAlpha(102);
             c.drawRect(mFrame, mFramePaint);
 
             // fill 'er up
             final int color = mBatteryData.charging ? 
-                    mChargeColor : mBatteryData.isPowerSaving ?
+                    mChargeColor : mSaverIndicate && mBatteryData.isPowerSaving ?
                             getBatterySaverColor() : getColorForLevel(mBatteryData.level);
             mBatteryPaint.setColor(color);
 
@@ -360,7 +395,7 @@ public class BatteryTile extends QsTile {
                 final float x = mWidth * 0.5f;
                 final float y = (mHeight + mWarningTextHeight) * 0.48f;
                 c.drawText(mWarningString, x, y, mWarningTextPaint);
-            } else if (mShowPercent && !(mBatteryData.level == 100 && !SHOW_100_PERCENT)) {
+            } else if (mShowPercentage && !(mBatteryData.level == 100 && !SHOW_100_PERCENT)) {
                 mTextPaint.setTextSize(height *
                         (SINGLE_DIGIT_PERCENT ? 0.75f
                                 : (mBatteryData.level == 100 ? 0.38f : 0.5f)));
