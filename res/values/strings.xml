@@ -1811,4 +1811,8 @@
     <string name="pref_battery_saver_indication_disable_summary">Disables orange color of system bars 
         when battery saver is active</string>
 
+    <!-- Signal cluster: Disable exclamation marks -->
+    <string name="pref_signal_cluster_dem_title">Disable exclamation marks</string>
+    <string name="pref_signal_cluster_dem_summary">Requires reboot</string>
+
 </resources>

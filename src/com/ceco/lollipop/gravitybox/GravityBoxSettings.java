@@ -667,6 +667,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE = "pref_signal_cluster_lte_style";
     public static final String PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS = "pref_signal_cluster_hide_sim_labels";
     public static final String PREF_KEY_SIGNAL_CLUSTER_NARROW = "pref_signal_cluster_narrow";
+    public static final String PREF_KEY_SIGNAL_CLUSTER_DEM = "pref_signal_cluster_dem";
     public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
     public static final String EXTRA_SC_NARROW = "scNarrow";
 
@@ -864,7 +865,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
             PREF_KEY_NAVBAR_LEFT_HANDED,
             PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH,
-            PREF_KEY_SAFE_MEDIA_VOLUME
+            PREF_KEY_SAFE_MEDIA_VOLUME,
+            PREF_KEY_SIGNAL_CLUSTER_DEM
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(

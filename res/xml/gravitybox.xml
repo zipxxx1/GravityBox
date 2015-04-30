@@ -462,6 +462,12 @@
                 android:entryValues="@array/sc_lte_style_values"
                 android:defaultValue="DEFAULT" />
 
+            <CheckBoxPreference 
+                android:key="pref_signal_cluster_dem"
+                android:title="@string/pref_signal_cluster_dem_title"
+                android:summary="@string/pref_signal_cluster_dem_summary"
+                android:defaultValue="false" />
+
             <!-- this pref is hidden, but we keep it for potential future use -->
             <net.margaritov.preference.colorpicker.ColorPickerPreference 
                 android:key="pref_signal_cluster_data_activity_color_secondary"

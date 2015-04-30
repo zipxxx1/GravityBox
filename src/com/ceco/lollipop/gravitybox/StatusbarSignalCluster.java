@@ -348,6 +348,59 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     }
 
+    public static void disableSignalExclamationMarks(ClassLoader cl) {
+        final String CLASS_WIFI_ICONS = "com.android.systemui.statusbar.policy.WifiIcons";
+        final String CLASS_TELEPHONY_ICONS = "com.android.systemui.statusbar.policy.TelephonyIcons";
+        Class<?> clsWifiIcons = null;
+        Class<?> clsTelephonyIcons = null;
+        final String[] wifiFields = new String[] {
+                "WIFI_SIGNAL_STRENGTH", "WIFI_SIGNAL_STRENGTH_NARROW", "WIFI_SIGNAL_STRENGTH_WIDE"
+        };
+        final String[] mobileFields = new String[] {
+                "TELEPHONY_SIGNAL_STRENGTH", "TELEPHONY_SIGNAL_STRENGTH_ROAMING", 
+                "DATA_SIGNAL_STRENGTH", "SB_TELEPHONY_SIGNAL_STRENGTH_4_BAR_NARROW",
+                "SB_TELEPHONY_SIGNAL_STRENGTH_4_BAR_SEPARATED_NARROW", "SB_TELEPHONY_SIGNAL_STRENGTH_4_BAR_SEPARATED_WIDE",
+                "SB_TELEPHONY_SIGNAL_STRENGTH_4_BAR_WIDE", "SB_TELEPHONY_SIGNAL_STRENGTH_5_BAR_NARROW",
+                "SB_TELEPHONY_SIGNAL_STRENGTH_5_BAR_SEPARATED_NARROW", "SB_TELEPHONY_SIGNAL_STRENGTH_5_BAR_SEPARATED_WIDE",
+                "SB_TELEPHONY_SIGNAL_STRENGTH_5_BAR_WIDE", "SB_TELEPHONY_SIGNAL_STRENGTH_6_BAR_NARROW",
+                "SB_TELEPHONY_SIGNAL_STRENGTH_6_BAR_SEPARATED_NARROW", "SB_TELEPHONY_SIGNAL_STRENGTH_6_BAR_SEPARATED_WIDE",
+                "SB_TELEPHONY_SIGNAL_STRENGTH_6_BAR_WIDE"
+        };
+
+        // Get classes
+        try {
+            clsWifiIcons = XposedHelpers.findClass(CLASS_WIFI_ICONS, cl);
+        } catch (Throwable t) { }
+
+        try {
+            clsTelephonyIcons = XposedHelpers.findClass(CLASS_TELEPHONY_ICONS, cl);
+        } catch (Throwable t) { }
+
+        // WiFi
+        for (String field : wifiFields) {
+            try {
+                int[][] wifiIcons = (int[][]) XposedHelpers.getStaticObjectField(clsWifiIcons, field);
+                for (int i = 0; i < wifiIcons[1].length; i++) {
+                    wifiIcons[0][i] = wifiIcons[1][i];
+                }
+            } catch (Throwable t) {
+                //log("disableSignalExclamationMarks: field=" + field + ": " + t.getMessage()); 
+            }
+        }
+
+        // Mobile
+        for (String field : mobileFields) {
+            try {
+                int[][] telephonyIcons = (int[][]) XposedHelpers.getStaticObjectField(clsTelephonyIcons, field);
+                for (int i = 0; i < telephonyIcons[1].length; i++) {
+                    telephonyIcons[0][i] = telephonyIcons[1][i];
+                }
+            } catch (Throwable t) {
+                //log("disableSignalExclamationMarks: field=" + field + ": " + t.getMessage());
+            }
+        }
+    }
+
     @Override
     public void onBroadcastReceived(Context context, Intent intent) { }
 

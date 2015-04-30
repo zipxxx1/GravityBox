@@ -566,6 +566,10 @@ public class ModStatusBar {
             mBatterySaverIndicationDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
 
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DEM, false)) {
+                StatusbarSignalCluster.disableSignalExclamationMarks(classLoader);
+            }
+
             XposedBridge.hookAllConstructors(phoneStatusBarPolicyClass, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
