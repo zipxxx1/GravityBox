@@ -29,6 +29,8 @@ public class QsTileEventDistributor {
             "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_STATUSBAR_WM = 
             "com.android.systemui.statusbar.phone.StatusBarWindowManager";
+    private static final String CLASS_UNLOCK_METHOD_CACHE = 
+            "com.android.systemui.statusbar.phone.UnlockMethodCache";
 
     public interface QsEventListener {
         String getKey();
@@ -43,6 +45,7 @@ public class QsTileEventDistributor {
         void handleClick();
         void handleUpdateState(Object state, Object arg);
         void setListening(boolean listening);
+        void onSecureMethodChanged();
     }
 
     private static void log(String message) {
@@ -55,6 +58,7 @@ public class QsTileEventDistributor {
     private Map<String,QsEventListener> mListeners;
     private List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private Object mKeyguardDelegate;
+    private Object mUnlockMethodCache;
 
     public QsTileEventDistributor(Object host, XSharedPreferences prefs) {
         mHost = host;
@@ -221,6 +225,18 @@ public class QsTileEventDistributor {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(CLASS_UNLOCK_METHOD_CACHE, cl, "notifyListeners",
+                    boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (isKeyguardShowingAndSecured()) {
+                        for (Entry<String,QsEventListener> entry : mListeners.entrySet()) {
+                            entry.getValue().onSecureMethodChanged();
+                        }
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -277,6 +293,19 @@ public class QsTileEventDistributor {
         }
     }
 
+    private Object getUnlockMethodCache() {
+        if (mUnlockMethodCache != null) return mUnlockMethodCache;
+        try {
+            mUnlockMethodCache = XposedHelpers.callStaticMethod(
+                    XposedHelpers.findClass(CLASS_UNLOCK_METHOD_CACHE, mContext.getClassLoader()),
+                    "getInstance", mContext);
+            return mUnlockMethodCache;
+        } catch (Throwable t) {
+            log("Error getting unlock method cache: " + t.getMessage());
+            return null;
+        }
+    }
+
     protected final boolean isKeyguardShowing() {
         try {
             return (boolean) XposedHelpers.callMethod(getKeyguardDelegate(), "isShowingAndNotOccluded");
@@ -292,6 +321,17 @@ public class QsTileEventDistributor {
         } catch (Throwable t) {
             log("Error in isKeyguardSecured: " + t.getMessage());
             return false;
+        }
+    }
+
+    protected final boolean isKeyguardSecuredAndLocked() {
+        try {
+            boolean trustManaged = XposedHelpers.getBooleanField(getUnlockMethodCache(), "mTrustManaged");
+            boolean methodInsecure = XposedHelpers.getBooleanField(getUnlockMethodCache(), "mMethodInsecure");
+            return (isKeyguardSecured() && !(trustManaged && methodInsecure));
+        } catch (Throwable t) {
+            log("Error in isKeyguardSecuredAndLocked: " + t.getMessage());
+            return isKeyguardSecured();
         }
     }
 

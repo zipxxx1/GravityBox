@@ -184,6 +184,11 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     @Override
+    public void onSecureMethodChanged() {
+        refreshState();
+    }
+
+    @Override
     public boolean supportsHideOnChange() {
         return true;
     }
