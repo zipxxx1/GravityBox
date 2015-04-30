@@ -86,6 +86,7 @@ public class ModStatusBar {
     private static final String CLASS_SAVE_IMG_TASK = "com.android.systemui.screenshot.SaveImageInBackgroundTask";
     private static final String CLASS_STATUSBAR_WM = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
     private static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
+    private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
 
@@ -145,6 +146,7 @@ public class ModStatusBar {
     private static ProgressBarController mProgressBarCtrl;
     private static TickerPolicy mTickerPolicy;
     private static int mStatusBarState;
+    private static boolean mBatterySaverIndicationDisabled;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -245,6 +247,11 @@ public class ModStatusBar {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED)) {
                 mTickerPolicy = TickerPolicy.valueOf(intent.getStringExtra(
                         GravityBoxSettings.EXTRA_STATUSBAR_TICKER_POLICY));
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED)) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE)) {
+                    mBatterySaverIndicationDisabled = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE, false);
+                }
             }
         }
     };
@@ -556,6 +563,8 @@ public class ModStatusBar {
             mNotifExpandAll = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NOTIF_EXPAND_ALL, false);
             mTickerPolicy = TickerPolicy.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_STATUSBAR_TICKER_POLICY, "DEFAULT"));
+            mBatterySaverIndicationDisabled = prefs.getBoolean(
+                    GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
 
             XposedBridge.hookAllConstructors(phoneStatusBarPolicyClass, new XC_MethodHook() {
                 @Override
@@ -631,6 +640,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_BACKGROUND_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SIGNAL_CLUSTER_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED);
                     if (Utils.isMtkDevice()) {
                         intentFilter.addAction(BatteryStyleController.ACTION_MTK_BATTERY_PERCENTAGE_SWITCH);
                     }
@@ -1003,6 +1013,21 @@ public class ModStatusBar {
                                 new NotificationWallpaper((FrameLayout) param.thisObject, prefs);
                         mStateChangeListeners.add(nw);
                         mBroadcastSubReceivers.add(nw);
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+
+            // suppress battery saver indication
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_BAR_TRANSITIONS, classLoader, "transitionTo",
+                        int.class, boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mBatterySaverIndicationDisabled && (int) param.args[0] == 5) {
+                            param.setResult(null);
+                        }
                     }
                 });
             } catch (Throwable t) {

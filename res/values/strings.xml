@@ -1806,4 +1806,9 @@
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
 
+    <!-- Power: Disable battery saver indication -->
+    <string name="pref_battery_saver_indication_disable_title">Disable battery saver indication</string>
+    <string name="pref_battery_saver_indication_disable_summary">Disables orange color of system bars 
+        when battery saver is active</string>
+
 </resources>
