@@ -235,38 +235,51 @@ public class ModExpandedDesktop {
 
     private static void initReflections(Class<?> classPhoneWindowManager) {
         try {
-            if (mAreTranslucentBarsAllowed == null) {
-                mAreTranslucentBarsAllowed = classPhoneWindowManager.getDeclaredMethod(
-                        "areTranslucentBarsAllowed");
-                mAreTranslucentBarsAllowed.setAccessible(true);
-            }
-            if (mCanHideNavigationBar == null) {
-                mCanHideNavigationBar = classPhoneWindowManager.getDeclaredMethod(
-                        "canHideNavigationBar");
-                mCanHideNavigationBar.setAccessible(true);
-            }
-            if (mIsStatusBarKeyguard == null) {
-                mIsStatusBarKeyguard = classPhoneWindowManager.getDeclaredMethod(
-                        "isStatusBarKeyguard");
-                mIsStatusBarKeyguard.setAccessible(true);
-            }
-            if (mRequestTransientBars == null) {
-                mRequestTransientBars = classPhoneWindowManager.getDeclaredMethod("requestTransientBars",
-                        XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null));
-                mRequestTransientBars.setAccessible(true);
-            }
-            if (mUpdateSystemBarsLw == null) {
-                mUpdateSystemBarsLw = classPhoneWindowManager.getDeclaredMethod("updateSystemBarsLw",
-                        XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null), int.class, int.class);
-                mUpdateSystemBarsLw.setAccessible(true);
-            }
-            if (mUpdateSystemUiVisibilityLw == null) {
-                mUpdateSystemUiVisibilityLw = classPhoneWindowManager.getDeclaredMethod(
-                        "updateSystemUiVisibilityLw");
-                mUpdateSystemUiVisibilityLw.setAccessible(true);
-            }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
+            mAreTranslucentBarsAllowed = classPhoneWindowManager.getDeclaredMethod(
+                    "areTranslucentBarsAllowed");
+            mAreTranslucentBarsAllowed.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find areTranslucentBarsAllowed method");
+        }
+
+        try {
+            mCanHideNavigationBar = classPhoneWindowManager.getDeclaredMethod(
+                    "canHideNavigationBar");
+            mCanHideNavigationBar.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find canHideNavigationBar method");
+        }
+
+        try {
+            mIsStatusBarKeyguard = classPhoneWindowManager.getDeclaredMethod(
+                    "isStatusBarKeyguard");
+            mIsStatusBarKeyguard.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find isStatusBarKeyguard method");
+        }
+
+        try {
+            mRequestTransientBars = classPhoneWindowManager.getDeclaredMethod("requestTransientBars",
+                    XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null));
+            mRequestTransientBars.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find requestTransientBars method");
+        }
+
+        try {
+            mUpdateSystemBarsLw = classPhoneWindowManager.getDeclaredMethod("updateSystemBarsLw",
+                    XposedHelpers.findClass(CLASS_POLICY_WINDOW_STATE, null), int.class, int.class);
+            mUpdateSystemBarsLw.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find updateSystemBarsLw method");
+        }
+
+        try {
+            mUpdateSystemUiVisibilityLw = classPhoneWindowManager.getDeclaredMethod(
+                    "updateSystemUiVisibilityLw");
+            mUpdateSystemUiVisibilityLw.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            log("could not find updateSystemUiVisibilityLw method");
         }
     }
 
