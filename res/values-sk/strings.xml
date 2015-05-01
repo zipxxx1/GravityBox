@@ -99,6 +99,7 @@
     <string name="qs_tile_smart_radio">Smart Radio</string>
     <string name="qs_tile_lock_screen">Obrazovka uzamknutia</string>
     <string name="qs_tile_inversion">Inverzia farieb</string>
+    <string name="qs_tile_battery">Batéria</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Výber farby</string>
@@ -1762,5 +1763,24 @@
 
     <!--  WiFi trusted networks -->
     <string name="wifi_trusted_info">Dôveryhodná sieť pre Smart Lock</string>
+
+    <!-- QS: Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_title">Nastavenia dlaždice batérie</string>
+    <string name="pref_battery_tile_percentage_title">Zobraziť percentá</string>
+    <string name="pref_battery_tile_saver_indicate_title">Indikácia úsporného režimu</string>
+    <string name="pref_battery_tile_saver_indicate_summary">Pre indikáciu úsporného režimu bude použitá 
+        tá istá farba, akou sú vyfarbené systémové lišty (štandardne oranžová)</string>
+    <string name="pref_battery_tile_temp_unit_title">Jednotka teploty</string>
+    <string name="celsius">Celzius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <!-- Power: Disable battery saver indication -->
+    <string name="pref_battery_saver_indication_disable_title">Vypnúť indikáciu úsporného režimu</string>
+    <string name="pref_battery_saver_indication_disable_summary">Zruší vyfarbenie systémových líšt 
+        počas úsporného režimu</string>
+
+    <!-- Signal cluster: Disable exclamation marks -->
+    <string name="pref_signal_cluster_dem_title">Vypnúť výkričníky</string>
+    <string name="pref_signal_cluster_dem_summary">Vyžaduje reštart</string>
 
 </resources>
