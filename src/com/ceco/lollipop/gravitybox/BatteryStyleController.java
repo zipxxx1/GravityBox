@@ -149,7 +149,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     mStockBattery.getView().setVisibility(View.VISIBLE);
                     mStockBattery.setShowPercentage(mBatteryStyle == 
                             GravityBoxSettings.BATTERY_STYLE_STOCK_PERCENT);
-                    
                 } else {
                     mStockBattery.getView().setVisibility(View.GONE);
                 }
@@ -192,7 +191,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     }
 
     private void createHooks() {
-        if (Utils.isMtkDevice() && mContainerType == ContainerType.STATUSBAR) {
+        if (mContainerType == ContainerType.STATUSBAR) {
             try {
                 Class<?> batteryControllerClass = XposedHelpers.findClass(CLASS_BATTERY_CONTROLLER,
                         mContext.getClassLoader());
