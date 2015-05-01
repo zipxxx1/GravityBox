@@ -197,16 +197,18 @@ public class ModLedControl {
             XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
                     "applyZenModeLocked", CLASS_NOTIFICATION_RECORD, applyZenModeHook);
 
-            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR_MGR_SERVICE, classLoader, "onPanelRevealed", 
-                    new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mOnPanelRevealedBlocked) {
-                        param.setResult(null);
-                        if (DEBUG) log("onPanelRevealed blocked");
+            if (!Utils.isXperiaDevice()) {
+                XposedHelpers.findAndHookMethod(CLASS_STATUSBAR_MGR_SERVICE, classLoader, "onPanelRevealed", 
+                        new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mOnPanelRevealedBlocked) {
+                            param.setResult(null);
+                            if (DEBUG) log("onPanelRevealed blocked");
+                        }
                     }
-                }
-            });
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
