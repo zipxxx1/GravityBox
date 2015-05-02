@@ -115,6 +115,7 @@
     <string name="qs_tile_smart_radio">Умное радио</string>
     <string name="qs_tile_lock_screen">Экран блокировки</string>
     <string name="qs_tile_inversion">Инверсия</string>
+    <string name="qs_tile_battery">Батарея</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбор цвета</string>
@@ -1793,5 +1794,24 @@
 
     <!--  WiFi trusted networks -->
     <string name="wifi_trusted_info">Доверенно для умной блокировки</string>
+
+    <!-- QS: Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_title">Параметры плитки батареи</string>
+    <string name="pref_battery_tile_percentage_title">Показать проценты</string>
+    <string name="pref_battery_tile_saver_indicate_title">Индикация энергосбережения</string>
+    <string name="pref_battery_tile_saver_indicate_summary">Используются цвета системных полос 
+        для индикации активности режима энергосбережения</string>
+    <string name="pref_battery_tile_temp_unit_title">Единицы температуры</string>
+    <string name="celsius">Цельсий</string>
+    <string name="fahrenheit">Фаренгейт</string>
+
+    <!-- Power: Disable battery saver indication -->
+    <string name="pref_battery_saver_indication_disable_title">Отключить индикацию энергосбережения</string>
+    <string name="pref_battery_saver_indication_disable_summary">Отключение оранжевого цвета системных полос 
+        при активности энергосбережения</string>
+
+    <!-- Signal cluster: Disable exclamation marks -->
+    <string name="pref_signal_cluster_dem_title">Отключить восклицательные знаки</string>
+    <string name="pref_signal_cluster_dem_summary">Необходима перезагрузка</string>
 
 </resources>
