@@ -1,3 +1,20 @@
+Changelog 5.0.9 - 02/05/2015
+--------------------------------------
+- Quick Settings:
+--- allow secured tiles in lock screen when it's insecured by Smart Lock
+--- added Battery tile:
+------ with icon showing current battery level
+------ with text showing current temperature and voltage
+------ single-press toggles battery saver mode
+------ long-press opens Battery Settings
+------ configurable in Tile specific settings menu
+- Power tweaks: added option for disabling battery saver indication (orange bars)
+- Signal Cluster: added option for disabling exclamation marks in status bar signal icons
+- Potential improvement of battery style handling on unsupported devices
+- Reduced some error logging on Xperia devices 
+- Launcher tweaks: adjusted for Google App 4.5.12 and 4.5.13
+- Updated Russian translations (thanks to gaich)
+
 Changelog 5.0.8 - 26/04/2015
 --------------------------------------
 - Misc tweaks / WiFi priority: implemented trusted WiFi networks for Smart Lock
