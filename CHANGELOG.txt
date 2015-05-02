@@ -1,3 +1,8 @@
+Changelog 3.5.8 - 02/05/2015
+--------------------------------------
+- Launcher tweaks: adjusted for compatibility with Google App 4.5.12 and 4.5.13
+- Ultimate notification control: fixed crash in per-app settings when large number of apps installed
+
 Changelog 3.5.7 - 14/03/2015
 --------------------------------------
 - Launcher tweaks: adjusted for compatibility with Google App 4.4.10
