@@ -3070,7 +3070,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_RECENTS_MARGIN_TOP, prefs.getInt(key, 77));
             } else if (key.equals(PREF_KEY_RECENTS_CLEAR_MARGIN_BOTTOM)) {
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
-                intent.putExtra(EXTRA_RECENTS_MARGIN_TOP, prefs.getInt(key, 50));
+                intent.putExtra(EXTRA_RECENTS_MARGIN_BOTTOM, prefs.getInt(key, 50));
             } else if (key.equals(PREF_KEY_RECENTS_SEARCH_BAR)) {
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
                 intent.putExtra(EXTRA_RECENTS_SEARCH_BAR, prefs.getString(key, "DEFAULT"));
