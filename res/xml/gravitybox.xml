@@ -205,6 +205,12 @@
                         android:entryValues="@array/temperature_unit_values"
                         android:defaultValue="C" />
 
+                    <CheckBoxPreference 
+                        android:key="pref_battery_tile_swap_actions"
+                        android:title="@string/pref_battery_tile_swap_actions_title"
+                        android:summary="@string/pref_battery_tile_swap_actions_summary"
+                        android:defaultValue="false" />
+
                 </PreferenceScreen>
 
                 <PreferenceScreen

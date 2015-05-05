@@ -1805,6 +1805,8 @@
     <string name="pref_battery_tile_temp_unit_title">Temperature unit</string>
     <string name="celsius">Celsius</string>
     <string name="fahrenheit">Fahrenheit</string>
+    <string name="pref_battery_tile_swap_actions_title">Swap actions</string>
+    <string name="pref_battery_tile_swap_actions_summary">Swaps single-press/long-press actions</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Disable battery saver indication</string>

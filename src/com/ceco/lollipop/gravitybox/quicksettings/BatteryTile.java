@@ -45,6 +45,7 @@ public class BatteryTile extends QsTile {
     private boolean mShowPercentage;
     private boolean mSaverIndicate;
     private String mTempUnit;
+    private boolean mSwapActions;
 
     public BatteryTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -86,6 +87,7 @@ public class BatteryTile extends QsTile {
         mShowPercentage = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TILE_PERCENTAGE, false);
         mSaverIndicate = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TILE_SAVER_INDICATE, false);
         mTempUnit = mPrefs.getString(GravityBoxSettings.PREF_KEY_BATTERY_TILE_TEMP_UNIT, "C");
+        mSwapActions = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TILE_SWAP_ACTIONS, false);
     }
 
     @Override
@@ -104,6 +106,10 @@ public class BatteryTile extends QsTile {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_TILE_TEMP_UNIT)) {
                 mTempUnit = intent.getStringExtra(
                         GravityBoxSettings.EXTRA_BATTERY_TILE_TEMP_UNIT);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_TILE_SWAP_ACTIONS)) {
+                mSwapActions = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_TILE_SWAP_ACTIONS, false);
             }
         }
     }
@@ -143,16 +149,28 @@ public class BatteryTile extends QsTile {
 
     @Override
     public void handleClick() {
-        if (SysUiManagers.BatteryInfoManager != null) {
-            SysUiManagers.BatteryInfoManager.togglePowerSaving();
+        if (mSwapActions) {
+            startSettingsActivity(Intent.ACTION_POWER_USAGE_SUMMARY);
+        } else {
+            togglePowerSaving();
         }
         super.handleClick();
     }
 
     @Override
     public boolean handleLongClick(View view) {
-        startSettingsActivity(Intent.ACTION_POWER_USAGE_SUMMARY);
+        if (mSwapActions) {
+            togglePowerSaving();
+        } else {
+            startSettingsActivity(Intent.ACTION_POWER_USAGE_SUMMARY);
+        }
         return true;
+    }
+
+    private void togglePowerSaving() {
+        if (SysUiManagers.BatteryInfoManager != null) {
+            SysUiManagers.BatteryInfoManager.togglePowerSaving();
+        }
     }
 
     @Override

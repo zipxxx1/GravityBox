@@ -820,9 +820,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_BATTERY_TILE_PERCENTAGE = "pref_battery_tile_percentage";
     public static final String PREF_KEY_BATTERY_TILE_SAVER_INDICATE = "pref_battery_tile_saver_indicate";
     public static final String PREF_KEY_BATTERY_TILE_TEMP_UNIT = "pref_battery_tile_temp_unit";
+    public static final String PREF_KEY_BATTERY_TILE_SWAP_ACTIONS = "pref_battery_tile_swap_actions";
     public static final String EXTRA_BATTERY_TILE_PERCENTAGE = "batteryTilePercentage";
     public static final String EXTRA_BATTERY_TILE_SAVER_INDICATE = "batteryTileSaverIndicate";
     public static final String EXTRA_BATTERY_TILE_TEMP_UNIT = "batteryTileTempUnit";
+    public static final String EXTRA_BATTERY_TILE_SWAP_ACTIONS = "batteryTileSwapActions";
 
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
@@ -3097,6 +3099,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_BATTERY_TILE_TEMP_UNIT)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_TILE_TEMP_UNIT, prefs.getString(key, "C"));
+            } else if (key.equals(PREF_KEY_BATTERY_TILE_SWAP_ACTIONS)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_TILE_SWAP_ACTIONS, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE)) {
                 intent.setAction(ACTION_BATTERY_SAVER_CHANGED);
                 intent.putExtra(EXTRA_BS_INDICATION_DISABLE, prefs.getBoolean(key, false));
