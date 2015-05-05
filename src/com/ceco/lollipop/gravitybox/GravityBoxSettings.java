@@ -301,7 +301,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE = "pref_volume_adjust_vibrate_mute";
     public static final String PREF_KEY_VOLUME_PANEL_TIMEOUT = "pref_volume_panel_timeout";
     public static final String ACTION_PREF_VOLUME_PANEL_MODE_CHANGED = "gravitybox.intent.action.VOLUME_PANEL_MODE_CHANGED";
-    public static final String EXTRA_EXPANDABLE = "expandable";
     public static final String EXTRA_AUTOEXPAND = "autoExpand";
     public static final String EXTRA_MUTED = "muted";
     public static final String EXTRA_VIBRATE_MUTED = "vibrate_muted";
@@ -862,7 +861,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_NAVBAR_LEFT_HANDED,
             PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH,
             PREF_KEY_SAFE_MEDIA_VOLUME,
-            PREF_KEY_SIGNAL_CLUSTER_DEM
+            PREF_KEY_SIGNAL_CLUSTER_DEM,
+            PREF_KEY_VOLUME_PANEL_EXPANDABLE
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -1220,9 +1220,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefDataTrafficActiveMobileOnly;
         private ListPreference mPrefDataTrafficDisplayMode;
         private CheckBoxPreference mPrefLinkVolumes;
-        //private CheckBoxPreference mPrefVolumePanelExpandable;
-        //private CheckBoxPreference mPrefVolumePanelFullyExpandable;
-        //private CheckBoxPreference mPrefVolumePanelAutoexpand;
+        private CheckBoxPreference mPrefVolumePanelExpandable;
+        private CheckBoxPreference mPrefVolumePanelAutoexpand;
         private ListPreference mPrefVolumePanelTimeout;
         private CheckBoxPreference mPrefHomeDoubletapDisable;
         private PreferenceScreen mPrefCatAppLauncher;
@@ -1450,9 +1449,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatMedia = (PreferenceScreen) findPreference(PREF_CAT_KEY_MEDIA);
             mPrefMusicVolumeSteps = (CheckBoxPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS);
             mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
-            //mPrefVolumePanelExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_EXPANDABLE);
-            //mPrefVolumePanelFullyExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_FULLY_EXPANDABLE);
-            //mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
+            mPrefVolumePanelExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_EXPANDABLE);
+            mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
             mPrefVolumePanelTimeout = (ListPreference) findPreference(PREF_KEY_VOLUME_PANEL_TIMEOUT);
             mPrefTranclucentDecor =  (ListPreference) findPreference(PREF_KEY_TRANSLUCENT_DECOR);
 
@@ -2031,10 +2029,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefDataTrafficSize.setSummary(mPrefDataTrafficSize.getEntry());
             }
 
-//            if (key == null || key.equals(PREF_KEY_VOLUME_PANEL_EXPANDABLE)) {
-//                mPrefVolumePanelAutoexpand.setEnabled(mPrefVolumePanelExpandable.isChecked());
-//                mPrefVolumePanelFullyExpandable.setEnabled(mPrefVolumePanelExpandable.isChecked());
-//            }
+            if (key == null || key.equals(PREF_KEY_VOLUME_PANEL_EXPANDABLE)) {
+                mPrefVolumePanelAutoexpand.setEnabled(mPrefVolumePanelExpandable.isChecked());
+            }
 
             if (key == null || key.equals(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE)) {
                 mPrefSbSignalColorMode.setSummary(mPrefSbSignalColorMode.getEntry());
@@ -2509,10 +2506,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_TORCH, Integer.valueOf(
                         prefs.getString(PREF_KEY_HWKEY_LOCKSCREEN_TORCH, "0")));
-            } else if (key.equals(PREF_KEY_VOLUME_PANEL_EXPANDABLE)) {
-                intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
-                intent.putExtra(EXTRA_EXPANDABLE,
-                        prefs.getBoolean(PREF_KEY_VOLUME_PANEL_EXPANDABLE, false));
             } else if (key.equals(PREF_KEY_VOLUME_PANEL_AUTOEXPAND)) {
                 intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
                 intent.putExtra(EXTRA_AUTOEXPAND, 

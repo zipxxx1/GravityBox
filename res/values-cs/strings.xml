@@ -243,7 +243,7 @@
 
     <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">Rozšiřitelné nastavení hlasitosti</string>
-    <string name="pref_volume_panel_expandable_summary">Umožňuje rozšířit panel nastavení hlasitosti, ve kterém je možné nastavit hlasitosti zvlášť pro každý zvukový tok</string>
+    <string name="pref_volume_panel_expandable_summary">Umožňuje rozšířit panel nastavení hlasitosti, ve kterém je možné nastavit hlasitosti zvlášť pro každý zvukový tok (vyžaduje restart)</string>
 
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Spojit hlasitost vyzvánění a notifikací</string>

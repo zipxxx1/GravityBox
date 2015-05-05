@@ -1856,7 +1856,6 @@
             android:entryValues="@array/tri_state_values"
             android:defaultValue="DEFAULT" />
 
-        <!--
         <CheckBoxPreference 
             android:key="pref_volume_panel_expandable"
             android:title="@string/pref_volume_panel_expandable_title"
@@ -1867,7 +1866,6 @@
             android:defaultValue="false"
             android:key="pref_volume_panel_autoexpand"
             android:title="@string/pref_volume_panel_autoexpand_title" />
-        -->
 
         <CheckBoxPreference 
             android:key="pref_link_volumes"

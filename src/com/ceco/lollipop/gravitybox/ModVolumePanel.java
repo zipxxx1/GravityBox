@@ -22,17 +22,29 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
+import android.content.res.XModuleResources;
+import android.content.res.XResources;
+import android.media.AudioManager;
 import android.os.Handler;
+import android.os.Message;
+import android.util.SparseArray;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ImageView.ScaleType;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModVolumePanel {
     private static final String TAG = "GB:ModVolumePanel";
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String CLASS_VOLUME_PANEL = "com.android.systemui.volume.VolumePanel";
-    private static final String CLASS_STREAM_CONTROL = "com.android.systemui.volume.VolumePanel$StreamControl";
     private static final boolean DEBUG = false;
 
     private static final int MSG_TIMEOUT = 5;
@@ -43,9 +55,13 @@ public class ModVolumePanel {
     private static boolean mExpandable;
     private static boolean mAutoExpand;
     private static int mTimeout;
-    //private static View mPanel;
     private static XSharedPreferences mQhPrefs;
     private static QuietHours mQuietHours;
+    private static boolean mVolumesLinked;
+    private static boolean mPanelExpanded;
+    private static LinearLayout mSliderPanel;
+    private static Context mGbContext;
+    private static int mIconRingerAudibleId;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -56,10 +72,6 @@ public class ModVolumePanel {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_VOLUME_PANEL_MODE_CHANGED)) {
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_EXPANDABLE)) {
-                    mExpandable = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_EXPANDABLE, false);
-                }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_AUTOEXPAND)) {
                     mAutoExpand = intent.getBooleanExtra(GravityBoxSettings.EXTRA_AUTOEXPAND, false);
                 }
@@ -72,6 +84,8 @@ public class ModVolumePanel {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_TIMEOUT)) {
                     mTimeout = intent.getIntExtra(GravityBoxSettings.EXTRA_TIMEOUT, 0);
                 }
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
+                mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
             } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
                 mQhPrefs.reload();
                 mQuietHours = new QuietHours(mQhPrefs);
@@ -79,6 +93,15 @@ public class ModVolumePanel {
         }
         
     };
+
+    public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
+        XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
+
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_EXPANDABLE, false)) {
+            mIconRingerAudibleId = XResources.getFakeResId(modRes, R.drawable.ic_ringer_audible);
+            resparam.res.setReplacement(mIconRingerAudibleId, modRes.fwd(R.drawable.ic_ringer_audible));    
+        }
+    }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
@@ -91,6 +114,7 @@ public class ModVolumePanel {
             mVolumeAdjustVibrateMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE, false);
             mExpandable = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_EXPANDABLE, false);
             mAutoExpand = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_AUTOEXPAND, false);
+            mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
 
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
 
@@ -98,6 +122,7 @@ public class ModVolumePanel {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mVolumePanel = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(mVolumePanel, "mContext");
+                    mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
                     if (DEBUG) log("VolumePanel constructed; mVolumePanel set");
 
                     mTimeout = 0;
@@ -108,38 +133,22 @@ public class ModVolumePanel {
                         log("Invalid value for PREF_KEY_VOLUME_PANEL_TIMEOUT preference");
                     }
 
-//                    Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(classVolumePanel, "STREAMS");
-//                    XposedHelpers.setBooleanField(streams[1], "show", 
-//                            (Boolean) XposedHelpers.getBooleanField(param.thisObject, "mVoiceCapable"));
-//                    XposedHelpers.setBooleanField(streams[5], "show", true);
+                    if (mExpandable) {
+                        Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(classVolumePanel, "STREAMS");
+                        XposedHelpers.setBooleanField(streams[1], "show", true);
+                        XposedHelpers.setIntField(streams[1], "iconRes", mIconRingerAudibleId);
+                        XposedHelpers.setBooleanField(streams[2], "show", true);
+                        XposedHelpers.setBooleanField(streams[5], "show", true);
+                        replaceSliderPanel();
+                    }
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
                     intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
                     context.registerReceiver(mBrodcastReceiver, intentFilter);
-
-                    //mPanel = (View) XposedHelpers.getObjectField(param.thisObject, "mPanel");
                 }
             });
-
-//            XposedHelpers.findAndHookMethod(classVolumePanel, "createSliders", new XC_MethodHook() {
-//                @Override
-//                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-//                    final boolean voiceCapableOrig = XposedHelpers.getBooleanField(param.thisObject, "mVoiceCapable");
-//                    if (DEBUG) log("createSliders: original mVoiceCapable = " + voiceCapableOrig);
-//                    XposedHelpers.setAdditionalInstanceField(param.thisObject, "mGbVoiceCapableOrig", voiceCapableOrig);
-//                    XposedHelpers.setBooleanField(param.thisObject, "mVoiceCapable", false);
-//                }
-//                @Override
-//                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-//                    final Boolean voiceCapableOrig =  (Boolean)XposedHelpers.getAdditionalInstanceField(
-//                            param.thisObject, "mGbVoiceCapableOrig");
-//                    if (voiceCapableOrig != null) {
-//                        if (DEBUG) log("createSliders: restoring original mVoiceCapable");
-//                        XposedHelpers.setBooleanField(param.thisObject, "mVoiceCapable", voiceCapableOrig);
-//                    }
-//                }
-//            });
 
             XposedHelpers.findAndHookMethod(classVolumePanel, "onPlaySound",
                     int.class, int.class, new XC_MethodHook() {
@@ -172,30 +181,207 @@ public class ModVolumePanel {
                     }
                 }
             });
+
+            if (mExpandable) {
+                XposedHelpers.findAndHookMethod(classVolumePanel, "createSliders", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        createSliders();
+                    }
+                });
+    
+                XposedHelpers.findAndHookMethod(classVolumePanel, "reorderSliders", int.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mPanelExpanded) {
+                            param.setResult(null);
+                        }
+                    }
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mAutoExpand && !mPanelExpanded) {
+                            expandVolumePanel();
+                        }
+                    }
+                });
+    
+                XposedHelpers.findAndHookMethod(classVolumePanel, "handleMessage", Message.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        Message msg = (Message) param.args[0];
+                        if (msg.what == MSG_TIMEOUT && mPanelExpanded) {
+                            collapseVolumePanel();
+                        }
+                    }
+                });
+    
+                XposedHelpers.findAndHookMethod(classVolumePanel, "isNotificationOrRing", int.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (XposedHelpers.getBooleanField(mVolumePanel, "mVoiceCapable")) {
+                            int streamType = (int) param.args[0];
+                            boolean result = streamType == AudioManager.STREAM_RING ||
+                                    (mVolumesLinked && streamType == AudioManager.STREAM_NOTIFICATION);
+                            param.setResult(result);
+                        }
+                    }
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-//    private static void hideNotificationSliderIfLinked() {
-//        if (mVolumePanel != null &&
-//                mVolumesLinked && 
-//                XposedHelpers.getBooleanField(mVolumePanel, "mVoiceCapable")) {
-//            @SuppressWarnings("unchecked")
-//            Map<Integer, Object> streamControls = 
-//                    (Map<Integer, Object>) XposedHelpers.getObjectField(mVolumePanel, "mStreamControls");
-//            if (streamControls == null) return;
-//    
-//            for (Object o : streamControls.values()) {
-//                if ((Integer) XposedHelpers.getIntField(o, "streamType") == STREAM_NOTIFICATION) {
-//                    View v = (View) XposedHelpers.getObjectField(o, "group");
-//                    if (v != null) {
-//                        v.setVisibility(View.GONE);
-//                        if (DEBUG) log("Notification volume slider hidden");
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//    }
+    private static void replaceSliderPanel() {
+        try {
+            ViewGroup originalPanel = (ViewGroup) XposedHelpers.getObjectField(mVolumePanel, "mSliderPanel");
+            mSliderPanel = new LinearLayout(originalPanel.getContext());
+            mSliderPanel.setId(originalPanel.getId());
+            mSliderPanel.setOrientation(LinearLayout.VERTICAL);
+            mSliderPanel.setBackground(originalPanel.getBackground());
+            mSliderPanel.setPadding(originalPanel.getPaddingLeft(), originalPanel.getPaddingTop(),
+                    originalPanel.getPaddingRight(), originalPanel.getPaddingBottom());
+            mSliderPanel.setClipChildren(false);
+            mSliderPanel.setLayoutParams(originalPanel.getLayoutParams());
+            ViewGroup parent = (ViewGroup) originalPanel.getParent();
+            int position = parent.indexOfChild(originalPanel);
+            parent.removeView(originalPanel);
+            parent.addView(mSliderPanel, position);
+            XposedHelpers.setObjectField(mVolumePanel, "mSliderPanel", mSliderPanel);
+            if (DEBUG) log("Slider panel replaced with linear layout");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void createSliders() {
+        try {
+            SparseArray<?> streamControls = (SparseArray<?>) XposedHelpers.getObjectField(
+                    mVolumePanel, "mStreamControls");
+            final int count = streamControls.size();
+            for (int i = 0; i < count; i++) {
+                Object sc = streamControls.valueAt(i);
+                ViewGroup group = (ViewGroup) XposedHelpers.getObjectField(sc, "group");
+                group.addView(createButton(group.getContext()));
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static ImageView createButton(Context context) {
+        Resources res = context.getResources();
+        int sizePx = Math.round(TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 48, res.getDisplayMetrics()));
+        int bgResId = res.getIdentifier("btn_borderless_rect", "drawable", PACKAGE_NAME);
+        ImageView v = new ImageView(context);
+        v.setScaleType(ScaleType.CENTER);
+        v.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_expand_slider_panel));
+        if (bgResId != 0) {
+            v.setBackgroundResource(bgResId);
+        }
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(sizePx, sizePx);
+        v.setLayoutParams(lp);
+        v.setClickable(true);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expandVolumePanel();
+            }
+        });
+        return v;
+    }
+
+    private static boolean isValidExpandedPanelControl(int streamType) {
+        try {
+            boolean voiceCapable = XposedHelpers.getBooleanField(mVolumePanel, "mVoiceCapable");
+            int activeStreamType = XposedHelpers.getIntField(mVolumePanel, "mActiveStreamType");
+            switch (streamType) {
+                case AudioManager.STREAM_NOTIFICATION:
+                    if (voiceCapable && mVolumesLinked) {
+                        return false;
+                    }
+                case AudioManager.STREAM_RING:
+                    if (!voiceCapable) {
+                        return false;
+                    }
+                case AudioManager.STREAM_MUSIC:
+                case AudioManager.STREAM_ALARM:
+                    if (streamType != activeStreamType) {
+                        return true;
+                    }
+                    return false;
+                default:
+                    return false;
+            }
+        }
+        catch (Throwable t) {
+            XposedBridge.log(t);
+            return false;
+        }
+    }
+
+    private static void expandVolumePanel() {
+        try {
+            mPanelExpanded = true;
+            Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(
+                    mVolumePanel.getClass(), "STREAMS");
+            SparseArray<?> streamControls = (SparseArray<?>) XposedHelpers.getObjectField(
+                    mVolumePanel, "mStreamControls");
+            int activeStreamType = XposedHelpers.getIntField(mVolumePanel, "mActiveStreamType");
+    
+            for (int i = 0; i < streams.length; i++) {
+                final int streamType = XposedHelpers.getIntField(streams[i], "streamType");
+                if (isValidExpandedPanelControl(streamType)) {
+                    Object control = streamControls.get(streamType);
+                    if (control != null && streamType != activeStreamType) {
+                        ViewGroup group = (ViewGroup) XposedHelpers.getObjectField(control, "group");
+                        mSliderPanel.addView(group);
+                        group.setVisibility(View.VISIBLE);
+                        group.getChildAt(group.getChildCount()-1).setVisibility(View.GONE);
+                        XposedHelpers.callMethod(mVolumePanel, "updateSlider", control);
+                        if (DEBUG) log("showing slider for stream type " + streamType);
+                    }
+                }
+            }
+
+            Object activeSc = streamControls.get(activeStreamType);
+            if (activeSc != null) {
+                ViewGroup activeGroup = (ViewGroup) XposedHelpers.getObjectField(
+                    activeSc, "group");
+                activeGroup.getChildAt(activeGroup.getChildCount()-1).setVisibility(View.GONE);
+            }
+
+            XposedHelpers.callMethod(mVolumePanel, "resetTimeout");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void collapseVolumePanel() {
+        try {
+            mPanelExpanded = false;
+            Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(
+                    mVolumePanel.getClass(), "STREAMS");
+            SparseArray<?> streamControls = (SparseArray<?>) XposedHelpers.getObjectField(
+                    mVolumePanel, "mStreamControls");
+            int activeStreamType = XposedHelpers.getIntField(mVolumePanel, "mActiveStreamType");
+
+            for (int i = 0; i < streams.length; i++) {
+                final int streamType = XposedHelpers.getIntField(streams[i], "streamType");
+                if (isValidExpandedPanelControl(streamType)) {
+                    Object control = streamControls.get(streamType);
+                    if (control != null && streamType != activeStreamType) {
+                        ViewGroup group = (ViewGroup) XposedHelpers.getObjectField(control, "group");
+                        group.setVisibility(View.GONE);
+                        group.getChildAt(group.getChildCount()-1).setVisibility(View.VISIBLE);
+                        XposedHelpers.callMethod(mVolumePanel, "updateSlider", control);
+                        if (DEBUG) log("hiding slider for stream type " + streamType);
+                    }
+                }
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
 }

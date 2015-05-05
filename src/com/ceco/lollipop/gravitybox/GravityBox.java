@@ -100,6 +100,10 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         if (resparam.packageName.equals(ModLockscreen.PACKAGE_NAME)) {
             ModLockscreen.initResources(prefs, resparam);
         }
+
+        if (resparam.packageName.equals(ModVolumePanel.PACKAGE_NAME)) {
+            ModVolumePanel.initResources(prefs, resparam);
+        }
     }
 
     @Override
