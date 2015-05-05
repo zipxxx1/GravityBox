@@ -218,9 +218,6 @@
     <string name="pref_volume_panel_expandable_title">볼륨 패널 확장</string>
     <string name="pref_volume_panel_expandable_summary">스트림마다 음량을 설정할 수 있도록 볼륨 패널을 확장 가능하게 만듭니다.</string>
 
-    <string name="pref_volume_panel_expandable_fully_title">볼륨 패널을 전체적으로 확장</string>
-    <string name="pref_volume_panel_expandable_fully_summary">모든 스트림을 표시할 수 있도록 볼륨 패널을 수정합니다.</string>
-
     <string name="pref_link_volumes_title">벨소리와 알림음 음량 연결</string>
     <string name="pref_link_volumes_summary">비활성화 시에는 벨소리와 알림음이 각각 따로 음량을 설정할 수 있도록 만듭니다.</string>
 

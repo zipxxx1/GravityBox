@@ -247,10 +247,6 @@
     <string name="pref_volume_panel_expandable_title">תפריט עוצמת שמע מורחב</string>
     <string name="pref_volume_panel_expandable_summary">מאפשר הצגת תפריט עוצמת שמע מורחב עם התאמה אישית של שמע עבור רכיבי מדיה שונים</string>
 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">תפריט עוצמת שמע בהרחבה מלאה</string>
-    <string name="pref_volume_panel_expandable_fully_summary">מאפשר לתפריט עוצמת שמע לתפוס את כל המרחב הזמין</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">הצמד עוצמות שמע של צילצולים &amp; התראות</string>
     <string name="pref_link_volumes_summary">כאשר אפשרות זו מבוטלת, ניתן לקבוע עוצמת שמע עבור צילצולים והתראות בנפרד</string>

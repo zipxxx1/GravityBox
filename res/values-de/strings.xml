@@ -265,10 +265,6 @@
     <string name="pref_volume_panel_expandable_title">Erweiterte Lautstärkeanzeige</string>
     <string name="pref_volume_panel_expandable_summary">Mehrere Quellen in der Lautstärkeanzeige darstellen</string>
 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">Lautstärkeanzeige vollständig erweitern</string>
-    <string name="pref_volume_panel_expandable_fully_summary">Lautstärkeanzeige so weit wie möglich ausbreiten</string>    
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Anruf- &amp; Benachrichtigungslautstärke verknüpfen</string>
     <string name="pref_link_volumes_summary">Lautstärke für Anrufe und Benachrichtigungen gemeinsam oder getrennt einstellen</string>

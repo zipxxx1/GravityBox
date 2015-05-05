@@ -254,10 +254,6 @@
     <string name="pref_volume_panel_expandable_title">Uitgebreid volume paneel</string>
     <string name="pref_volume_panel_expandable_summary">Schakelt uitgebreid volume paneel in met mogelijkheid om volumes voor verschillende streams in te stellen</string>
 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">Volledig uitbreidbaar volume paneel</string>
-    <string name="pref_volume_panel_expandable_fully_summary">Laat het volume paneel toe om alle beschikbare ruimte in te nemen</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Link beltoon &amp; meldings volumes</string>
     <string name="pref_link_volumes_summary">Indien uitgeschakeld kunnen volumes voor beltoon en meldingen apart ingesteld worden</string>

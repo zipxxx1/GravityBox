@@ -155,8 +155,6 @@
     <string name="pref_qs_tiles_per_row_title">Іконок в ряд</string>
     <string name="pref_qs_tiles_per_row_summary">Визначає, як багато іконок швидких налаштувань буде показано в одному ряду. Розміри зміняться відповідно. Застосовується до портретному режиму.</string>
     <string name="pref_statusbar_clock_dow_title">Відображати день тижня</string>
-    <string name="pref_volume_panel_expandable_fully_title">Повністю розширена панель гучності</string>
-    <string name="pref_volume_panel_expandable_fully_summary">Дозволяє панелі гучності займати весь простір</string>
     <string name="pref_volume_panel_expandable_title">Розширювана звукова панель</string>
     <string name="pref_volume_panel_expandable_summary">Включає розширювану звукову панель, на якій можна міняти звук для різних потоків</string>
     <string name="pref_link_volumes_title">"Зв'язати гучність рінгтона і повідомлень"</string>

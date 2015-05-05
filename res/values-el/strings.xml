@@ -254,10 +254,6 @@
     <string name="pref_volume_panel_expandable_title">Επεκτάσιμο πεδίο έντασης ήχου</string>
     <string name="pref_volume_panel_expandable_summary">Ενεργοποιεί το επεκτάσιμο πεδίο έντασης ήχου με τη δυνατότητα τον ορισμό εντάσεων για διαφορετικά streams</string>
 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">Πλήρως επεκτάσιμο πεδίο έντασης ήχου</string>
-    <string name="pref_volume_panel_expandable_fully_summary">Επιτρέπει στο πεδίο έντασης ήχου να πιάσει όλο τον χώρο που του δίδεται</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Ένωση εντάσεων Κουδουνίσματος &amp; ειδοποιήσεων</string>
     <string name="pref_link_volumes_summary">Όταν είναι απενεργοποιημένο, οι εντάσεις των ήχων κλήσης και ειδοποιήσεων μπορούν να οριστούν ανεξάρτητα</string>

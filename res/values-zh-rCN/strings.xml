@@ -264,10 +264,6 @@
     <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">可扩展音量面板</string>
     <string name="pref_volume_panel_expandable_summary">启用此选项使您可以调整不同的媒体音量</string>
-        
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">完整的可扩展音量面板</string>
-    <string name="pref_volume_panel_expandable_fully_summary">允许音量面板占用所有提供的空间</string>
 
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">合并铃声音量与通知音量</string>

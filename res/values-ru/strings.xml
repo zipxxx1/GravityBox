@@ -266,10 +266,6 @@
     <string name="pref_volume_panel_expandable_title">Расширяемая панель</string>
     <string name="pref_volume_panel_expandable_summary">Включение расширяемой панели громкости, на которой можно менять уровни для разных потоков</string>
 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">Полное расширение</string>
-    <string name="pref_volume_panel_expandable_fully_summary">Расширение панели громкости на всё доступное пространство</string>
-    
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Связать громкость</string>
     <string name="pref_link_volumes_summary">Когда отключено, громкость уведомлений и рингтона можно задавать независимо</string>

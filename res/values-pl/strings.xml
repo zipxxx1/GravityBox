@@ -243,10 +243,6 @@
     <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">Rozszerzony panel głośności</string>
     <string name="pref_volume_panel_expandable_summary">Uaktywnia rozszerzony panel głośności z możliwością ustawienia głośności dla różnych źródeł</string>
- 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">W pełni rozszerzalny panel głośności</string>
-    <string name="pref_volume_panel_expandable_fully_summary">Pozwala by panel głośności zajął całe przewidziane miejsce</string>
 
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Połączone ust. głośności dzwonka i powiadomień</string>

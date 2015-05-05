@@ -260,10 +260,6 @@
     <string name="pref_volume_panel_expandable_title">Panel de volumen expandible</string>
     <string name="pref_volume_panel_expandable_summary">Activa el panel expandible de volumen que permite controlar el volumen multimedia, del sistema y alarmas.</string>
 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">Panel expandible de volumen completo</string>
-    <string name="pref_volume_panel_expandable_fully_summary">El panel ocupará todo el espacio libre posible</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Enlazar vol. del tono de llamada con notificaciones</string>
     <string name="pref_link_volumes_summary">Cuando se desactiva, el volumen del tono de llamada se configura independientemente del de las notificaciones</string>

@@ -266,10 +266,6 @@
     <string name="pref_volume_panel_expandable_title">Bővített hangerő panel</string>
     <string name="pref_volume_panel_expandable_summary">Engedélyezi a bővített hangerő panelt a különböző hangfolyamokhoz tartozó értékek külön beállítási lehetőségével</string>
 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">Teljes bővített hangerő panel</string>
-    <string name="pref_volume_panel_expandable_fully_summary">Lehetővé teszi, hogy a hangerő panel a teljes rendelkezésre álló helyet kitöltse</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Csengőhang és figyelmeztető hangok értékei</string>
     <string name="pref_link_volumes_summary">Amikor ki van kapcsolva, a csengőhang és a figyelmeztető hangok értékei egymástól függetlenül állíthatóak</string>

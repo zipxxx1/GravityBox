@@ -237,10 +237,6 @@
     <string name="pref_volume_panel_expandable_title">Panel volume yang bisa dibuka</string>
     <string name="pref_volume_panel_expandable_summary">Menghidupkan panel volume yang bisa dibuka dengan kemampuan untuk men-set volume-volume dengan alur yang berbeda</string>
 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">Panel volume yang bisa dibuka secara penuh</string>
-    <string name="pref_volume_panel_expandable_fully_summary">Membolehkan panel volume untuk menggunakan seluruh tempat yang disediakan</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Gabungkan alur ringtone &amp; notifikasi</string>
     <string name="pref_link_volumes_summary">Ketika dimatikan, alur volume untuk ringtone dan notifikasi bisa di set secara independen</string>

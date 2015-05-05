@@ -247,10 +247,6 @@
     <string name="pref_volume_panel_expandable_title">Painel de volume expandido</string>
     <string name="pref_volume_panel_expandable_summary">Ativa painel de volume expandido com possibilidade de controlar o volume de diferentes fontes</string>
 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">Painel totalmente expandido</string>
-    <string name="pref_volume_panel_expandable_fully_summary">Quando ativado, o painel de volume ocupa todo o espaço disponível no ecrã</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Volumes de toque e notificações interligados</string>
     <string name="pref_link_volumes_summary">Quando desativado, os volumes de toque e notificações podem ser controlados de forma independente</string>

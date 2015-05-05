@@ -243,10 +243,6 @@
     <string name="pref_volume_panel_expandable_title">Painel de volume expansível</string>
     <string name="pref_volume_panel_expandable_summary">Habilita o painel de volume expansível com a habilidade de definir volumes para diferentes fluxos</string>
 
-    <!-- Fully expandable volume panel -->
-    <string name="pref_volume_panel_expandable_fully_title">Painel de volume totalmente expansível</string>
-    <string name="pref_volume_panel_expandable_fully_summary">Permite ao painel de volume usar todo o espaço disponível</string>
-    
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Unir volumes de ringtone e de notificações</string>
     <string name="pref_link_volumes_summary">Quando desabilitado, os volumes para ringtone e notificações são definidos individualmente</string>

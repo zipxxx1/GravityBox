@@ -45,7 +45,6 @@ public class ModVolumePanel {
     private static boolean mVolumeAdjustMuted;
     private static boolean mVolumeAdjustVibrateMuted;
     private static boolean mExpandable;
-    private static boolean mExpandFully;
     private static boolean mAutoExpand;
     private static int mTimeout;
     private static int mPanelAlpha = 255;
@@ -68,10 +67,6 @@ public class ModVolumePanel {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_EXPANDABLE)) {
                     mExpandable = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_EXPANDABLE, false);
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_EXPANDABLE_FULLY)) {
-                    mExpandFully = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_EXPANDABLE_FULLY, false);
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_AUTOEXPAND)) {
                     mAutoExpand = intent.getBooleanExtra(GravityBoxSettings.EXTRA_AUTOEXPAND, false);
@@ -113,7 +108,6 @@ public class ModVolumePanel {
             mPanelAlpha = Utils.alphaPercentToInt(prefs.getInt(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TRANSPARENCY, 0));
             mOpaqueOnInteraction = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_OPAQUE_ON_INTERACTION, true);
             mExpandable = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_EXPANDABLE, false);
-            mExpandFully = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_FULLY_EXPANDABLE, false);
             mAutoExpand = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_AUTOEXPAND, false);
 
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
