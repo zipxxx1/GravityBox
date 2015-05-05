@@ -1301,9 +1301,6 @@
 
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">强制英语</string>
-    
-    <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">音量面板透明度</string>
 
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
     <string name="pref_lockscreen_carrier2_text_title">定制第二运营商文字</string>
@@ -1358,10 +1355,6 @@
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">强制从左到右方向</string>
     <string name="pref_force_ltr_direction_summary">对于从右到左的语言环境布局强制使用从左到右方向（需要重新启动）</string>
-    
-    <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">交换时不透明</string>
-    <string name="pref_volume_panel_opaque_summary">当音量面板进行交换时会移除透明度</string>
 
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">设置铃声模式</string>

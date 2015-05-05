@@ -1044,8 +1044,6 @@
 
     <string name="pref_force_english_locale_title">강제로 영어 사용 (English)</string>
 
-    <string name="pref_volume_panel_transparency_title">볼륨 창 투명도</string>
-
     <string name="pref_lockscreen_carrier2_text_title">2번째 통신사 이름 설정</string>
 
     <string name="pref_lc_qh_ignore_title">무음 모드 무시</string>
@@ -1088,9 +1086,6 @@
     <string name="pref_force_ltr_direction_title">LTR 방향 강제 설정</string>
     <string name="pref_force_ltr_direction_summary">RTL 방향을 사용하는 언어에서 LTR 방향으로 강제 설정합니다. (재시작 필요)</string>
 
-    <string name="pref_volume_panel_opaque_title">상호작용 시 불투명화</string>
-    <string name="pref_volume_panel_opaque_summary">볼륨 창에서 상호작용할 때 창을 불투명하게 설정합니다.</string>
-	
     <string name="shortcut_ringer_mode">벨소리 모드 설정</string>
 
     <string name="pref_data_traffic_active_mobile_only_title">모바일 데이터일 때만</string>

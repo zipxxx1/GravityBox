@@ -1292,9 +1292,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Englisch erzwingen</string>
 
-     <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">Transparenz der Lautstärkeanzeige</string>
-
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
     <string name="pref_lockscreen_carrier2_text_title">Eigener Zweitprovider-Text</string>
 
@@ -1346,10 +1343,6 @@
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">LTR-Ausrichtung erzwingen</string>
     <string name="pref_force_ltr_direction_summary">LTR-Ausrichtung für RTL-Sprachen erzwingen (Neustart erforderlich)</string>
-
-    <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">Undurchsichtig bei Interaktion</string>
-    <string name="pref_volume_panel_opaque_summary">Transparenz bei Interaktion mit der Lautstärkeanzeige entfernen</string>
 
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">Klingelmodus wählen</string>

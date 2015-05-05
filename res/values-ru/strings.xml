@@ -1303,9 +1303,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Английский принудительно</string>
 
-    <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">Прозрачность панели громкости</string>
-
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
     <string name="pref_lockscreen_carrier2_text_title">Доп. текст для оператора</string>
 
@@ -1359,10 +1356,6 @@
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">Слева направо принудительно</string>
     <string name="pref_force_ltr_direction_summary">Принудительная установка написания слева направо для языков с письмом справа налево (необходима перезагрузка)</string>
-
-   <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">Непрозрачная при использовании</string>
-    <string name="pref_volume_panel_opaque_summary">Отключение прозрачности при использовании панели громкости</string>
 
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">Установка режима звонка</string>

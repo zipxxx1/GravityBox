@@ -1254,9 +1254,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">İngilizce diline zorla</string>
 
-    <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">Ses paneli saydamlığı</string>
-
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
     <string name="pref_lockscreen_carrier2_text_title">Özel ikinci operatör yazısı</string>
 
@@ -1303,10 +1300,6 @@
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">Force LTR direction</string>
     <string name="pref_force_ltr_direction_summary">Forces LTR layout direction for RTL locales (requires reboot)</string>
-
-    <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">Etkileşimde saydamlığı kaldır</string>
-    <string name="pref_volume_panel_opaque_summary">Ses paneli ile etkileşime geçildiğinde saydamlık kalkar</string>
 
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">Zil sesi modunu ayarla</string>

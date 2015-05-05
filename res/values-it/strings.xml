@@ -1295,10 +1295,7 @@
 
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Imposta Gravitybox in inglese</string>
-    
-    <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">Trasparenza pannello volume</string>
-    
+
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
     <string name="pref_lockscreen_carrier2_text_title">Testo operatore personalizzato sim2</string>
 
@@ -1345,10 +1342,6 @@
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">Forza direzione LTR</string>
     <string name="pref_force_ltr_direction_summary">Forza dislocazione a sinistra per le lingue con dislocazione a destra (richiede riavvio)</string>
-
-    <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">Rendi opaco in interazione</string>
-    <string name="pref_volume_panel_opaque_summary">Rimuove la trasparenza quando si interagisce con il pannello volume</string>
 
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">Imposta modalità suoneria</string>

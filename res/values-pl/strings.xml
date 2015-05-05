@@ -1269,9 +1269,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Wymuś język angielski</string>
 
-    <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">Przezroczystość panelu głośności</string>
-
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
     <string name="pref_lockscreen_carrier2_text_title">Własny tekst drugiego operatora</string>
 
@@ -1317,10 +1314,6 @@
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">Wymuś kierunek od Lewej do Prawej</string>
     <string name="pref_force_ltr_direction_summary">Wymusza kierunek tekstu od Lewej do Prawej dla języków z zapisem od Prawej do Lewej (wymagany restart)</string>
-
-    <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">Nieprzezroczysty przy interakcji</string>
-    <string name="pref_volume_panel_opaque_summary">Usuwa przezroczystość panelu głośności podczas interakcji</string>
 
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">Ustaw tryb dzwonka</string>

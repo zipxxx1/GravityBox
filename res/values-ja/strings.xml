@@ -1074,8 +1074,6 @@
     <string name="pref_disable_data_network_type_icons_summary">電波強度表示の上にある3Gアイコンなどを無効化します。</string>
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">GBを英語表示にする</string>
-    <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">音量パネルの透過度</string>
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
     <string name="pref_lockscreen_carrier2_text_title">カスタム第二キャリアラベル</string>
     <!-- UNC Quiet Hours: ignore on per-app basis -->
@@ -1118,9 +1116,6 @@
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">LTRレイアウト方向を強制</string>
     <string name="pref_force_ltr_direction_summary">RTL言語でLTRレイアウト方向を使うようにします。(要再起動)</string>
-    <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">操作時の不透明効果</string>
-    <string name="pref_volume_panel_opaque_summary">音量パネル操作時の透過を削除します。</string>
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">着信音モードの変更</string>
     <!-- Data traffic monitor: Only for mobile data -->

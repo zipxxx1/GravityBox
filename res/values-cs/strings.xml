@@ -1272,9 +1272,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Anglická lokalizace</string>
 
-    <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">Průhlednost panelu hlasitosti</string>
-
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
     <string name="pref_lockscreen_carrier2_text_title">Vlastní text operátora 2</string>
 
@@ -1325,10 +1322,6 @@
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">Vynutit LTR rozložení</string>
     <string name="pref_force_ltr_direction_summary">Vynutí rozložení LTR pro všechny jazyky (vyžaduje restart)</string>
-
-    <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">Neprůhledné při interakci</string>
-    <string name="pref_volume_panel_opaque_summary">Odstraní neprůhlednost při interakci s panelem nastavení hlasitosti</string>
 
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">Nastavit režim vyzvánění</string>

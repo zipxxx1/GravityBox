@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -38,20 +37,13 @@ public class ModVolumePanel {
 
     private static final int MSG_TIMEOUT = 5;
 
-    private static final int TRANSLUCENT_TO_OPAQUE_DURATION = 400;
-
     private static Object mVolumePanel;
-    private static Unhook mViewGroupAddViewHook;
     private static boolean mVolumeAdjustMuted;
     private static boolean mVolumeAdjustVibrateMuted;
     private static boolean mExpandable;
     private static boolean mAutoExpand;
     private static int mTimeout;
-    private static int mPanelAlpha = 255;
-    private static boolean mShouldRunDropTranslucentAnimation = false;
-    private static boolean mRunningDropTranslucentAnimation = false;
     //private static View mPanel;
-    private static boolean mOpaqueOnInteraction;
     private static XSharedPreferences mQhPrefs;
     private static QuietHours mQuietHours;
 
@@ -80,14 +72,6 @@ public class ModVolumePanel {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_TIMEOUT)) {
                     mTimeout = intent.getIntExtra(GravityBoxSettings.EXTRA_TIMEOUT, 0);
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_TRANSPARENCY)) {
-                    mPanelAlpha = Utils.alphaPercentToInt(intent.getIntExtra(GravityBoxSettings.EXTRA_TRANSPARENCY, 0));
-                    //applyTranslucentWindow();
-                }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_OPAQUE_ON_INTERACTION)) {
-                    mOpaqueOnInteraction = intent.getBooleanExtra(GravityBoxSettings.EXTRA_OPAQUE_ON_INTERACTION, true);
-                    mShouldRunDropTranslucentAnimation = mOpaqueOnInteraction && mPanelAlpha < 255;
-                }
             } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
                 mQhPrefs.reload();
                 mQuietHours = new QuietHours(mQhPrefs);
@@ -105,8 +89,6 @@ public class ModVolumePanel {
 
             mVolumeAdjustMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_MUTE, false);
             mVolumeAdjustVibrateMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE, false);
-            mPanelAlpha = Utils.alphaPercentToInt(prefs.getInt(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TRANSPARENCY, 0));
-            mOpaqueOnInteraction = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_OPAQUE_ON_INTERACTION, true);
             mExpandable = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_EXPANDABLE, false);
             mAutoExpand = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_AUTOEXPAND, false);
 
@@ -137,7 +119,6 @@ public class ModVolumePanel {
                     context.registerReceiver(mBrodcastReceiver, intentFilter);
 
                     //mPanel = (View) XposedHelpers.getObjectField(param.thisObject, "mPanel");
-                    //applyTranslucentWindow();
                 }
             });
 
@@ -191,36 +172,6 @@ public class ModVolumePanel {
                     }
                 }
             });
-
-//            XposedHelpers.findAndHookMethod(classVolumePanel, "handleMessage", Message.class, new XC_MethodHook() {
-//                @Override
-//                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-//                    if (param.args[0] != null && ((Message)param.args[0]).what == MSG_TIMEOUT) {
-//                        Dialog d = (Dialog) XposedHelpers.getObjectField(param.thisObject, "mDialog");
-//                        if (d.isShowing()) {
-//                            applyTranslucentWindow();
-//                        }
-//                    }
-//                }
-//            });
-
-//            XposedHelpers.findAndHookMethod(OnSeekBarChangeListener.class, "onStartTrackingTouch", SeekBar.class, new XC_MethodHook() {
-//                @Override
-//                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-//                    if (mShouldRunDropTranslucentAnimation) {
-//                        startRemoveTranslucentAnimation();
-//                    }
-//                }
-//            });
-//
-//            XposedHelpers.findAndHookMethod(classVolumePanel, "onClick", View.class, new XC_MethodHook() {
-//                @Override
-//                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-//                    if (mShouldRunDropTranslucentAnimation) {
-//                        startRemoveTranslucentAnimation();
-//                    }
-//                }
-//            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -246,41 +197,5 @@ public class ModVolumePanel {
 //                }
 //            }
 //        }
-//    }
-
-//    private static void applyTranslucentWindow() {
-//        if (mPanel == null || mRunningDropTranslucentAnimation) return;
-//
-//        if (mPanel.getBackground() != null) {
-//            mPanel.getBackground().setAlpha(mPanelAlpha);
-//            mShouldRunDropTranslucentAnimation = mOpaqueOnInteraction && mPanelAlpha < 255;
-//        }
-//    }
-//
-//    private static void startRemoveTranslucentAnimation() {
-//        if (mRunningDropTranslucentAnimation || mPanel == null) return;
-//        mRunningDropTranslucentAnimation = true;
-//
-//        Animator panelAlpha = ObjectAnimator.ofInt(
-//                mPanel.getBackground(), "alpha", mPanel.getBackground().getAlpha(), 255);
-//        panelAlpha.setInterpolator(new AccelerateInterpolator());
-//        panelAlpha.addListener(new AnimatorListener() {
-//            @Override
-//            public void onAnimationStart(Animator animation) {}
-//
-//            @Override
-//            public void onAnimationRepeat(Animator animation) {}
-//
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                mRunningDropTranslucentAnimation = false;
-//                mShouldRunDropTranslucentAnimation = false;
-//            }
-//
-//            @Override
-//            public void onAnimationCancel(Animator animation) {}
-//        });
-//        panelAlpha.setDuration(TRANSLUCENT_TO_OPAQUE_DURATION);
-//        panelAlpha.start();
 //    }
 }

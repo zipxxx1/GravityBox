@@ -1302,9 +1302,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Paksa bahasa English</string>
 
-    <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">Kejernihan panel nada</string>
-
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
     <string name="pref_lockscreen_carrier2_text_title">Teks carrier tersendiri</string>
 
@@ -1357,10 +1354,6 @@
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">Paksa arah LTR</string>
     <string name="pref_force_ltr_direction_summary">Paksa arah LTR untuk RTL locales (perlukan reboot)</string>
-
-    <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">Opaque pada interaksi</string>
-    <string name="pref_volume_panel_opaque_summary">Buang kejernihan apabila panel nada aktif</string>
 
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">Set mod bunyi</string>

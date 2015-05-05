@@ -1272,9 +1272,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Forçar idioma Inglês</string>
 
-    <!-- VolumePanel transparency -->
-    <string name="pref_volume_panel_transparency_title">Transparência do painel de volume</string>
-
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
     <string name="pref_lockscreen_carrier2_text_title">Nome da operadora secundária personalizado</string>
 
@@ -1321,10 +1318,6 @@
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">Forçar direção LTR</string>
     <string name="pref_force_ltr_direction_summary">Permite forçar a apresentação da grafia da esquerda para a direita (LTR) em idiomas grafados da direita para a esquerda (RTL) (necessário reiniciar)</string>
-
-    <!-- Volume panel transparency: opaque on interaction -->
-    <string name="pref_volume_panel_opaque_title">Opaco durante interação</string>
-    <string name="pref_volume_panel_opaque_summary">Permite remover a transparência durante a interação com o painel de volume</string>
 
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">Definir Modo de Toque</string>
