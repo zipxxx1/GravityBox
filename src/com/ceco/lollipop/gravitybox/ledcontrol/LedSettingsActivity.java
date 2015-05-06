@@ -204,6 +204,7 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
         mLedSettings.setHeadsUpTimeout(mPrefsFragment.getHeadsUpTimeout());
         mLedSettings.setProgressTracking(mPrefsFragment.getProgressTracking());
         mLedSettings.setVisibility(mPrefsFragment.getVisibility());
+        mLedSettings.setPriorityMode(mPrefsFragment.getPriorityMode());
         mLedSettings.serialize();
         Intent intent = new Intent();
         intent.putExtra(EXTRA_PACKAGE_NAME, mLedSettings.getPackageName());

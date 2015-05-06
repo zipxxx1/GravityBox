@@ -77,6 +77,7 @@ public class LedSettings {
     private int mHeadsUpTimeout;
     private boolean mProgressTracking;
     private Visibility mVisibility;
+    private boolean mPriorityMode;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -153,6 +154,8 @@ public class LedSettings {
                 ls.setProgressTracking(Boolean.valueOf(data[1]));
             } else if (data[0].equals("visibility")) {
                 ls.setVisibility(data[1]);
+            } else if (data[0].equals("priorityMode")) {
+                ls.setPriorityMode(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -183,6 +186,7 @@ public class LedSettings {
         mHeadsUpTimeout = 5;
         mProgressTracking = false;
         mVisibility = Visibility.DEFAULT;
+        mPriorityMode = false;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -384,6 +388,10 @@ public class LedSettings {
         }
     }
 
+    protected void setPriorityMode(boolean enabled) {
+        mPriorityMode = enabled;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -476,6 +484,10 @@ public class LedSettings {
         return mVisibility;
     }
 
+    public boolean getPriorityMode() {
+        return mPriorityMode;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -506,6 +518,7 @@ public class LedSettings {
             dataSet.add("headsUpTimeout:" + mHeadsUpTimeout);
             dataSet.add("progressTracking:" + mProgressTracking);
             dataSet.add("visibility:" + mVisibility.toString());
+            dataSet.add("priorityMode:" + mPriorityMode);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

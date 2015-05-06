@@ -1806,4 +1806,8 @@
     <string name="pref_signal_cluster_dem_title">Disable exclamation marks</string>
     <string name="pref_signal_cluster_dem_summary">Requires reboot</string>
 
+    <!-- UNC: LED priority mode -->
+    <string name="pref_lc_led_priority_mode_title">Priority mode</string>
+    <string name="pref_lc_led_priority_mode_summary">Allows LED during priority and silent ringer modes</string>
+
 </resources>

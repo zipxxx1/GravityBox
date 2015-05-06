@@ -69,6 +69,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_CAT_KEY_OTHER = "pref_cat_lc_other";
     private static final String PREF_KEY_PROGRESS_TRACKING = "pref_lc_progress_tracking";
     private static final String PREF_KEY_VISIBILITY = "pref_lc_notif_visibility";
+    private static final String PREF_KEY_PRIORITY_MODE = "pref_lc_led_priority_mode";
 
     private static final int REQ_PICK_SOUND = 101;
 
@@ -98,6 +99,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private PreferenceCategory mOtherCat;
     private CheckBoxPreference mProgressTrackingPref;
     private ListPreference mVisibilityPref;
+    private CheckBoxPreference mPriorityModePref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -134,6 +136,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mProgressTrackingPref = (CheckBoxPreference) findPreference(PREF_KEY_PROGRESS_TRACKING);
         mVisibilityPref = (ListPreference) findPreference(PREF_KEY_VISIBILITY);
         mVisibilityPref.setOnPreferenceChangeListener(this);
+        mPriorityModePref = (CheckBoxPreference) findPreference(PREF_KEY_PRIORITY_MODE);
     }
 
     protected void initialize(LedSettings ledSettings) {
@@ -190,6 +193,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mVisibilityPref.setSummary(String.format("%s (%s)",
                 getString(R.string.pref_lc_notif_visibility_summary),
                 mVisibilityPref.getEntry()));
+        mPriorityModePref.setChecked(ledSettings.getPriorityMode());
     }
 
     private void updateSoundPrefSummary() {
@@ -294,6 +298,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected Visibility getVisibility() {
         return Visibility.valueOf(mVisibilityPref.getValue());
+    }
+
+    protected boolean getPriorityMode() {
+        return mPriorityModePref.isChecked();
     }
 
     @Override

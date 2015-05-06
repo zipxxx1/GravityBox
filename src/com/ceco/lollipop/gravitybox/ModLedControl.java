@@ -79,6 +79,7 @@ public class ModLedControl {
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE = "gbActiveScreenPocketMode";
     public static final String NOTIF_EXTRA_PROGRESS_TRACKING = "gbProgressTracking";
+    private static final String NOTIF_EXTRA_PRIORITY_MODE = "gbPriorityMode";
     private static final int MSG_HIDE_HEADS_UP = 1029;
 
     public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
@@ -200,6 +201,9 @@ public class ModLedControl {
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
                     "updateLightsLocked", updateLightsLockedHook);
+
+            XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
+                    "buzzBeepBlinkLocked", CLASS_NOTIFICATION_RECORD, buzzBeepBlinkLockedHook);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -344,6 +348,8 @@ public class ModLedControl {
                     if (ls.getVisibility() != Visibility.DEFAULT) {
                         n.visibility = ls.getVisibility().getValue();
                     }
+                    // priority mode
+                    n.extras.putBoolean(NOTIF_EXTRA_PRIORITY_MODE, ls.getPriorityMode());
                 }
 
                 if (DEBUG) log("Notification info: defaults=" + n.defaults + "; flags=" + n.flags);
@@ -413,6 +419,37 @@ public class ModLedControl {
                 } catch (Throwable t) {
                     XposedBridge.log(t);
                 }
+            }
+        }
+    };
+
+    private static XC_MethodHook buzzBeepBlinkLockedHook = new XC_MethodHook() {
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+            try {
+                Notification n = (Notification) XposedHelpers.callMethod(param.args[0], "getNotification");
+                if ((n.flags & Notification.FLAG_SHOW_LIGHTS) == 0 ||
+                        !n.extras.getBoolean(NOTIF_EXTRA_PRIORITY_MODE, false)) return;
+
+                int score = XposedHelpers.getIntField(param.args[0], "score");
+                int interruptionThreshold = XposedHelpers.getStaticIntField(
+                        param.thisObject.getClass(), "SCORE_INTERRUPTION_THRESHOLD");
+                boolean wasIntercepted = (boolean) XposedHelpers.callMethod(param.args[0], "isIntercepted");
+                if (score >= interruptionThreshold && wasIntercepted) {
+                    if (DEBUG) log("buzzBeepBlinkLocked: forcing LED for priority mode notification");
+                    ((List<String>) XposedHelpers.getObjectField(param.thisObject, "mLights"))
+                        .add((String) XposedHelpers.callMethod(param.args[0], "getKey"));
+                    XposedHelpers.callMethod(param.thisObject, "updateLightsLocked");
+                    if (XposedHelpers.getBooleanField(param.thisObject, "mUseAttentionLight")) {
+                        XposedHelpers.callMethod(XposedHelpers.getObjectField(
+                                param.thisObject, "mAttentionLight"), "pulse");
+                    }
+                    ((Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler"))
+                        .post((Runnable) XposedHelpers.getObjectField(param.thisObject, "mBuzzBeepBlinked"));
+                }
+            } catch (Throwable t) {
+                XposedBridge.log(t);
             }
         }
     };
