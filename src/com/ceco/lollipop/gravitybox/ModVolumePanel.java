@@ -226,6 +226,15 @@ public class ModVolumePanel {
                         }
                     }
                 });
+
+                XposedHelpers.findAndHookMethod(classVolumePanel, "setZenPanelVisible", boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (mPanelExpanded && XposedHelpers.getBooleanField(param.thisObject, "mZenModeAvailable")) {
+                            param.args[0] = true;
+                        }
+                    }
+                });
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -353,6 +362,7 @@ public class ModVolumePanel {
             }
 
             XposedHelpers.callMethod(mVolumePanel, "resetTimeout");
+            XposedHelpers.callMethod(mVolumePanel, "updateZenPanelVisible");
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
