@@ -114,7 +114,8 @@
     <string name="qs_tile_music">音乐</string>
     <string name="qs_tile_smart_radio">智能网络</string>
     <string name="qs_tile_lock_screen">锁屏</string>
-	<string name="qs_tile_inversion">反转</string>
+    <string name="qs_tile_inversion">反转</string>
+    <string name="qs_tile_battery">电量</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">颜色选择器</string>
@@ -1722,7 +1723,7 @@
 旧版本的备份不能恢复,强烈建议从头开始配置gravitybox</string>
 
 	<!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">标准化双磁砖</string>
+    <string name="pref_qs_normalize_title">标准化双瓷砖</string>
     <string name="pref_qs_normalize_summary">让WiFi和蓝牙瓷砖正常化
         它们的标签单击动作将被转换为长按动作</string>
 
@@ -1779,6 +1780,34 @@
     <!-- Lockscreen Smart unlock -->
     <string name="pref_lockscreen_smart_unlock_title">智能解锁</string>
     <string name="pref_lockscreen_smart_unlock_summary">当智能锁策略检测条件值得信任时自动解锁</string>
+    
+    
+        <!--  WiFi trusted networks -->
+    <string name="wifi_trusted_info">信任的智能锁</string>
 
+    <!-- QS: Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_title">电池瓷砖设置</string>
+    <string name="pref_battery_tile_percentage_title">显示比例</string>
+    <string name="pref_battery_tile_saver_indicate_title">省电指示器</string>
+    <string name="pref_battery_tile_saver_indicate_summary">使用相同的系统栏颜色
+        以表示省电模式已激活</string>
+    <string name="pref_battery_tile_temp_unit_title">温度单位</string>
+    <string name="celsius">摄氏</string>
+    <string name="fahrenheit">华氏</string>
+    <string name="pref_battery_tile_swap_actions_title">交换动作</string>
+    <string name="pref_battery_tile_swap_actions_summary">交换单击/长按操作</string>
+
+    <!-- Power: Disable battery saver indication -->
+    <string name="pref_battery_saver_indication_disable_title">禁用省电指示器</string>
+    <string name="pref_battery_saver_indication_disable_summary">当省电模式已激活
+        禁用系统栏橙色</string>
+
+    <!-- Signal cluster: Disable exclamation marks -->
+    <string name="pref_signal_cluster_dem_title">关闭惊叹号</string>
+    <string name="pref_signal_cluster_dem_summary">需要重新启动</string>
+
+    <!-- UNC: LED priority mode -->
+    <string name="pref_lc_led_priority_mode_title">优先模式</string>
+    <string name="pref_lc_led_priority_mode_summary">无声振铃模式中允许LED优先级</string>
 
 </resources>
