@@ -95,6 +95,7 @@ public class ModLedControl {
     private static boolean mUserPresent;
     private static Object mNotifManagerService;
     private static boolean mProximityWakeUpEnabled;
+    private static boolean mScreenOnDueToActiveScreen;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -137,8 +138,10 @@ public class ModLedControl {
             } else if (action.equals(Intent.ACTION_USER_PRESENT)) {
                 if (DEBUG) log("User present");
                 mUserPresent = true;
+                mScreenOnDueToActiveScreen = false;
             } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 mUserPresent = false;
+                mScreenOnDueToActiveScreen = false;
             } else if (action.equals(ACTION_CLEAR_NOTIFICATIONS)) {
                 clearNotifications();
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
@@ -194,6 +197,9 @@ public class ModLedControl {
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
                     "applyZenModeLocked", CLASS_NOTIFICATION_RECORD, applyZenModeHook);
+
+            XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
+                    "updateLightsLocked", updateLightsLockedHook);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -397,6 +403,20 @@ public class ModLedControl {
         }
     };
 
+    private static XC_MethodHook updateLightsLockedHook = new XC_MethodHook() {
+        @Override
+        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+            if (mScreenOnDueToActiveScreen) {
+                try {
+                    XposedHelpers.setBooleanField(param.thisObject, "mScreenOn", false);
+                    if (DEBUG) log("updateLightsLocked: Screen on due to active screen - pretending it's off");
+                } catch (Throwable t) {
+                    XposedBridge.log(t);
+                }
+            }
+        }
+    };
+
     private static void toggleActiveScreenFeature(boolean enable) {
         try {
             if (enable && mContext != null) {
@@ -420,6 +440,7 @@ public class ModLedControl {
         long ident = Binder.clearCallingIdentity();
         try {
             XposedHelpers.callMethod(mPm, "wakeUp", SystemClock.uptimeMillis());
+            mScreenOnDueToActiveScreen = true;
         } finally {
             Binder.restoreCallingIdentity(ident);
         }
