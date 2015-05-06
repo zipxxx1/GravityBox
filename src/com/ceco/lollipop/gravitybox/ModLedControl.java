@@ -90,7 +90,6 @@ public class ModLedControl {
     private static SensorManager mSm;
     private static KeyguardManager mKm;
     private static Sensor mProxSensor;
-    private static boolean mOnPanelRevealedBlocked;
     private static QuietHours mQuietHours;
     private static Map<String, Long> mNotifTimestamps = new HashMap<String, Long>();
     private static boolean mUserPresent;
@@ -138,7 +137,6 @@ public class ModLedControl {
             } else if (action.equals(Intent.ACTION_USER_PRESENT)) {
                 if (DEBUG) log("User present");
                 mUserPresent = true;
-                mOnPanelRevealedBlocked = false;
             } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 mUserPresent = false;
             } else if (action.equals(ACTION_CLEAR_NOTIFICATIONS)) {
@@ -196,19 +194,6 @@ public class ModLedControl {
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
                     "applyZenModeLocked", CLASS_NOTIFICATION_RECORD, applyZenModeHook);
-
-            if (!Utils.isXperiaDevice()) {
-                XposedHelpers.findAndHookMethod(CLASS_STATUSBAR_MGR_SERVICE, classLoader, "onPanelRevealed", 
-                        new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                        if (mOnPanelRevealedBlocked) {
-                            param.setResult(null);
-                            if (DEBUG) log("onPanelRevealed blocked");
-                        }
-                    }
-                });
-            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -399,7 +384,6 @@ public class ModLedControl {
 
                 if (DEBUG) log("Performing Active Screen with mode " + asMode.toString());
 
-                mOnPanelRevealedBlocked = true;
                 if (mSm != null && mProxSensor != null &&
                         n.extras.getBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE)) {
                     mSm.registerListener(mProxSensorEventListener, mProxSensor, SensorManager.SENSOR_DELAY_FASTEST);
