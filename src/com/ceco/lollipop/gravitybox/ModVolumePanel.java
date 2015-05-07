@@ -62,6 +62,7 @@ public class ModVolumePanel {
     private static LinearLayout mSliderPanel;
     private static Context mGbContext;
     private static int mIconRingerAudibleId;
+    private static int mIconRingerAudibleIdOrig;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -86,6 +87,9 @@ public class ModVolumePanel {
                 }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
                 mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
+                if (mExpandable) {
+                    updateRingerIcon();
+                }
             } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
                 mQhPrefs.reload();
                 mQuietHours = new QuietHours(mQhPrefs);
@@ -97,9 +101,11 @@ public class ModVolumePanel {
     public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
         XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
 
-        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_EXPANDABLE, false)) {
+        mIconRingerAudibleId = 0;
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_EXPANDABLE, false) &&
+                XposedBridge.XPOSED_BRIDGE_VERSION >= 64) {
             mIconRingerAudibleId = XResources.getFakeResId(modRes, R.drawable.ic_ringer_audible);
-            resparam.res.setReplacement(mIconRingerAudibleId, modRes.fwd(R.drawable.ic_ringer_audible));    
+            resparam.res.setReplacement(mIconRingerAudibleId, modRes.fwd(R.drawable.ic_ringer_audible));
         }
     }
 
@@ -136,10 +142,11 @@ public class ModVolumePanel {
                     if (mExpandable) {
                         Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(classVolumePanel, "STREAMS");
                         XposedHelpers.setBooleanField(streams[1], "show", true);
-                        XposedHelpers.setIntField(streams[1], "iconRes", mIconRingerAudibleId);
+                        mIconRingerAudibleIdOrig = XposedHelpers.getIntField(streams[1], "iconRes");
                         XposedHelpers.setBooleanField(streams[2], "show", true);
                         XposedHelpers.setBooleanField(streams[5], "show", true);
                         replaceSliderPanel();
+                        updateRingerIcon();
                     }
 
                     IntentFilter intentFilter = new IntentFilter();
@@ -388,6 +395,26 @@ public class ModVolumePanel {
                         XposedHelpers.callMethod(mVolumePanel, "updateSlider", control);
                         if (DEBUG) log("hiding slider for stream type " + streamType);
                     }
+                }
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void updateRingerIcon() {
+        if (mIconRingerAudibleId == 0) return;
+        try {
+            int iconResId = mVolumesLinked ? mIconRingerAudibleIdOrig : mIconRingerAudibleId;
+            Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(
+                    mVolumePanel.getClass(), "STREAMS");
+            XposedHelpers.setIntField(streams[1], "iconRes", iconResId);
+            SparseArray<?> streamControls = (SparseArray<?>) XposedHelpers.getObjectField(
+                    mVolumePanel, "mStreamControls");
+            if (streamControls != null) {
+                Object sc = streamControls.get(AudioManager.STREAM_RING);
+                if (sc != null) {
+                    XposedHelpers.setIntField(sc, "iconRes", iconResId);
                 }
             }
         } catch (Throwable t) {
