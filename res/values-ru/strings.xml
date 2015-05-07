@@ -264,7 +264,7 @@
     
      <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">Расширяемая панель</string>
-    <string name="pref_volume_panel_expandable_summary">Включение расширяемой панели громкости, на которой можно менять уровни для разных потоков</string>
+    <string name="pref_volume_panel_expandable_summary">Включение расширяемой панели громкости, на которой можно менять уровни для разных потоков (необходима перезагрузка)</string>
 
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Связать громкость</string>
@@ -1793,6 +1793,8 @@
     <string name="pref_battery_tile_temp_unit_title">Единицы температуры</string>
     <string name="celsius">Цельсий</string>
     <string name="fahrenheit">Фаренгейт</string>
+    <string name="pref_battery_tile_swap_actions_title">Смена действий</string>
+    <string name="pref_battery_tile_swap_actions_summary">Смена действий на нажатие/длительное нажатие</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Отключить индикацию энергосбережения</string>
@@ -1802,5 +1804,9 @@
     <!-- Signal cluster: Disable exclamation marks -->
     <string name="pref_signal_cluster_dem_title">Отключить восклицательные знаки</string>
     <string name="pref_signal_cluster_dem_summary">Необходима перезагрузка</string>
+
+    <!-- UNC: LED priority mode -->
+    <string name="pref_lc_led_priority_mode_title">Режим приоритета</string>
+    <string name="pref_lc_led_priority_mode_summary">Разрешение индикации во время режимов приоритета и без звука</string>
 
 </resources>
