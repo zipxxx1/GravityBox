@@ -36,6 +36,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,6 +57,8 @@ public class ModClearAllRecents {
     public static final String CLASS_RECENT_ACTIVITY = "com.android.systemui.recents.RecentsActivity";
     public static final String CLASS_SWIPE_HELPER = "com.android.systemui.recents.views.SwipeHelper";
     public static final String CLASS_TASK_STACK_VIEW = "com.android.systemui.recents.views.TaskStackView";
+    public static final String CLASS_VIEW_ANIMATION = "com.android.systemui.recents.views.ViewAnimation";
+    public static final String CLASS_TASK_VIEW_EXIT_CONTEXT = CLASS_VIEW_ANIMATION + ".TaskViewExitContext";
     private static final boolean DEBUG = false;
 
     private static enum SearchBarState { DEFAULT, HIDE_KEEP_SPACE, HIDE_REMOVE_SPACE }
@@ -70,6 +73,8 @@ public class ModClearAllRecents {
     private static SearchBarState mSearchBarStatePrev;
     private static Integer mSearchBarOriginalHeight;
     private static boolean mClearAllUseAltIcon;
+    private static Interpolator mExitAnimInterpolator;
+    private static int mExitAnimDuration;
 
     // RAM bar
     private static TextView mBackgroundProcessText;
@@ -330,8 +335,47 @@ public class ModClearAllRecents {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(CLASS_RECENT_VIEW, classLoader, "startExitToHomeAnimation",
+                    CLASS_TASK_VIEW_EXIT_CONTEXT, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mRecentsClearButton != null &&
+                            mRecentsClearButton.getVisibility() == View.VISIBLE) {
+                        performExitAnimation(mRecentsClearButton);
+                    }
+                    if (mRamUsageBar != null && mRamUsageBar.getVisibility() == View.VISIBLE) {
+                        performExitAnimation(mRamUsageBar);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static void performExitAnimation(final View view) {
+        try {
+            if (mExitAnimInterpolator == null) {
+                Object config = XposedHelpers.getObjectField(mRecentsView, "mConfig");
+                mExitAnimInterpolator = (Interpolator) XposedHelpers.getObjectField(
+                        config, "fastOutSlowInInterpolator");
+                mExitAnimDuration = XposedHelpers.getIntField(config, "taskViewRemoveAnimDuration");
+            }
+            view.animate()
+            .alpha(0f)
+            .setInterpolator(mExitAnimInterpolator)
+            .setDuration(mExitAnimDuration)
+            .withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    view.setVisibility(View.GONE);
+                    view.setAlpha(1f);
+                }
+            })
+            .start();
+        } catch (Throwable t) {
+            // don't need to be loud about it
         }
     }
 
