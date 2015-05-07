@@ -208,15 +208,9 @@ public abstract class TrafficMeterAbstract extends TextView
     }
 
     @Override
-    public void onScreenStateChanged(int screenState) {
-        mIsScreenOn = screenState == View.SCREEN_STATE_ON;
-        updateState();
-        super.onScreenStateChanged(screenState);
-    }
-
-    @Override
     public void onBroadcastReceived(Context context, Intent intent) {
-        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED)) {
+        String action = intent.getAction();
+        if (action.equals(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_MODE)) {
                 return;
             }
@@ -241,6 +235,10 @@ public abstract class TrafficMeterAbstract extends TextView
             }
 
             onPreferenceChanged(intent);
+            updateState();
+        } else if (action.equals(Intent.ACTION_SCREEN_ON) ||
+                action.equals(Intent.ACTION_SCREEN_OFF)) {
+            mIsScreenOn = action.equals(Intent.ACTION_SCREEN_ON);
             updateState();
         }
     }
