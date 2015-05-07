@@ -1401,4 +1401,36 @@
 
     <string name="pref_lockscreen_shortcuts_title">바로가기</string>
     <string name="pref_lockscreen_shortcuts_summary">잠금 화면의 바로가기를 설정할 수 있습니다.</string>
+   
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">안전하게 실행</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">기기가 주머니에 있을 때와 같이 잘못된 터치로 인해 
+        바로가기가 실행되지 않도록 더블 터치하여 실행하도록 설정합니다.</string>
+
+    <string name="pref_lockscreen_smart_unlock_title">스마트 잠금해제</string>
+    <string name="pref_lockscreen_smart_unlock_summary">현재 스마트 잠금 정책이 신뢰가 가는 조건에 
+        있을 때 자동으로 잠금을 해제합니다.</string>
+
+    <string name="wifi_trusted_info">스마트 잠금에 신뢰</string>
+
+    <string name="pref_cat_qs_battery_tile_title">배터리 타일 설정</string>
+    <string name="pref_battery_tile_percentage_title">배터리량 퍼센트 표시</string>
+    <string name="pref_battery_tile_saver_indicate_title">배터리 절약 기능 표시</string>
+    <string name="pref_battery_tile_saver_indicate_summary">배터리 절약이 활성화되어 있을 때 시스템 바의 
+        색깔을 타일 배경색깔로도 적용합니다.</string>
+    <string name="pref_battery_tile_temp_unit_title">온도 단위</string>
+    <string name="celsius">섭씨</string>
+    <string name="fahrenheit">화씨</string>
+    <string name="pref_battery_tile_swap_actions_title">액션 바꾸기</string>
+    <string name="pref_battery_tile_swap_actions_summary">한 번 터치/길게 터치 시의 액션을 서로 바꿉니다.</string>
+
+    <string name="pref_battery_saver_indication_disable_title">배터리 절약 기능 표시 비활성화</string>
+    <string name="pref_battery_saver_indication_disable_summary">배터리 절약 기능이 실행되었을 때 시스템 바의 
+        배경 색깔을 바꾸지 않습니다.</string>
+
+    <string name="pref_signal_cluster_dem_title">경고(느낌표) 표시 비활성화</string>
+    <string name="pref_signal_cluster_dem_summary">재시작이 필요합니다.</string>
+
+    <string name="pref_lc_led_priority_mode_title">우선 모드</string>
+    <string name="pref_lc_led_priority_mode_summary">우선 모드 및 음소거 모드에서도 LED를 허용합니다.</string>
+
 </resources>
