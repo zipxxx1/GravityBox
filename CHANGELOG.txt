@@ -1,3 +1,21 @@
+Changelog 5.0.10 - 08/05/2015
+--------------------------------------
+- Media tweaks: implemented expandable volume panel
+- Battery tile: added option for swapping single-press/long-press actions
+- Ultimate notification control:
+--- added option to allow LED during priority/silent ringer modes (default and per-app)
+--- improved LED handling during Active Screen
+- Recents panel:
+--- perform fade-out animation on clear all button and RAM bar
+--- fixed bug in clear all button bottom margin option handling
+- Lockscreen shortcuts: don't cut off icons during Safe Launch zoom-in
+- Traffic meter: fixed disappearing on devices with Ambient Display feature
+- brought back materialized icon of screenshot delete action (requires XposedBridge v64+)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Russian translations (thanks to gaich)
+- Updated Korean translations (thanks to SDKoongchi)
+
 Changelog 5.0.9 - 02/05/2015
 --------------------------------------
 - Quick Settings:
