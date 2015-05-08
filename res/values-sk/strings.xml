@@ -1762,6 +1762,8 @@
     <string name="pref_battery_tile_temp_unit_title">Jednotka teploty</string>
     <string name="celsius">Celzius</string>
     <string name="fahrenheit">Fahrenheit</string>
+    <string name="pref_battery_tile_swap_actions_title">Prehodiť akcie</string>
+    <string name="pref_battery_tile_swap_actions_summary">Prehodí akcie na stlačenie a dlhé podržanie</string>
 
     <!-- Power: Disable battery saver indication -->
     <string name="pref_battery_saver_indication_disable_title">Vypnúť indikáciu úsporného režimu</string>
@@ -1771,5 +1773,9 @@
     <!-- Signal cluster: Disable exclamation marks -->
     <string name="pref_signal_cluster_dem_title">Vypnúť výkričníky</string>
     <string name="pref_signal_cluster_dem_summary">Vyžaduje reštart</string>
+
+    <!-- UNC: LED priority mode -->
+    <string name="pref_lc_led_priority_mode_title">Prioritný režim</string>
+    <string name="pref_lc_led_priority_mode_summary">Povolí LED počas prioritného alebo tichého režimu vyzváňania</string>
 
 </resources>
