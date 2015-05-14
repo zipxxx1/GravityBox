@@ -75,6 +75,7 @@ public class ModClearAllRecents {
     private static boolean mClearAllUseAltIcon;
     private static Interpolator mExitAnimInterpolator;
     private static int mExitAnimDuration;
+    private static Activity mRecentsActivity;
 
     // RAM bar
     private static TextView mBackgroundProcessText;
@@ -143,7 +144,7 @@ public class ModClearAllRecents {
         try {
             Class<?> recentActivityClass = XposedHelpers.findClass(CLASS_RECENT_ACTIVITY, classLoader);
 
-            mButtonGravity = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL, "53"));
+            mButtonGravity = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL, "0"));
             mRamBarGravity = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_RAMBAR, "0"));
             mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false) &&
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
@@ -157,13 +158,13 @@ public class ModClearAllRecents {
             XposedHelpers.findAndHookMethod(recentActivityClass, "onCreate", Bundle.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    Activity activity = (Activity) param.thisObject;
-                    mGbContext = activity.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+                    mRecentsActivity = (Activity) param.thisObject;
+                    mGbContext = mRecentsActivity.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
                     mHandler = new Handler();
-                    mAm = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
+                    mAm = (ActivityManager) mRecentsActivity.getSystemService(Context.ACTIVITY_SERVICE);
                     mRecentsView = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mRecentsView");
 
-                    final Resources res = activity.getResources();
+                    final Resources res = mRecentsActivity.getResources();
 
                     mMarginTopPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
                             prefs.getInt(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_MARGIN_TOP, 77), 
@@ -184,7 +185,7 @@ public class ModClearAllRecents {
                     mRamUsageBarHorizontalMargin = (int) TypedValue.applyDimension(
                             TypedValue.COMPLEX_UNIT_DIP, 10, res.getDisplayMetrics());
 
-                    FrameLayout vg = (FrameLayout) activity.getWindow().getDecorView()
+                    FrameLayout vg = (FrameLayout) mRecentsActivity.getWindow().getDecorView()
                             .findViewById(android.R.id.content);
 
                     // create and inject new ImageView and set onClick listener to handle action
@@ -202,6 +203,7 @@ public class ModClearAllRecents {
                         @Override
                         public void onClick(View v) {
                            clearAll();
+                           updateRamBarMemoryUsage();
                         }
                     });
                     mRecentsClearButton.setOnLongClickListener(new View.OnLongClickListener() {
@@ -244,7 +246,7 @@ public class ModClearAllRecents {
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_RECENTS_CHANGED);
                     intentFilter.addAction(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_SINGLETAP);
-                    activity.registerReceiver(mBroadcastReceiver, intentFilter);
+                    mRecentsActivity.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("Recents panel view constructed");
                 }
             });
@@ -256,9 +258,11 @@ public class ModClearAllRecents {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(recentActivityClass, "onResume", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(Activity.class, "onResume", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (param.thisObject != mRecentsActivity) return;
+
                     Object config = XposedHelpers.getObjectField(param.thisObject, "mConfig");
                     boolean hasTasks = !XposedHelpers.getBooleanField(config, "launchedWithNoRecentTasks");
                     if (mRecentsClearButton != null) {
@@ -391,15 +395,12 @@ public class ModClearAllRecents {
         ModPieControls.setRecentAlt(show);
     }
 
+    @SuppressWarnings("deprecation")
     private static void updateButtonImage() {
         if (mRecentsClearButton == null) return;
         try {
-            Resources res = mRecentsClearButton.getResources();
-            int icResId = mClearAllUseAltIcon ? 0 :
-                res.getIdentifier("ic_dismiss_all", "drawable", PACKAGE_NAME);
-            mRecentsClearButton.setImageDrawable(icResId != 0 ?
-                    res.getDrawable(icResId) : mGbContext.getResources().getDrawable(
-                            R.drawable.ic_recent_clear));
+            int icResId = mClearAllUseAltIcon ? R.drawable.ic_recent_clear : R.drawable.ic_dismiss_all;
+            mRecentsClearButton.setImageDrawable(mGbContext.getResources().getDrawable(icResId));
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
