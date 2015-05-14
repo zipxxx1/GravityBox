@@ -16,7 +16,6 @@
 package com.ceco.lollipop.gravitybox;
 
 import java.lang.reflect.Method;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.Surface;
@@ -344,62 +344,13 @@ public class ModExpandedDesktop {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "getContentInsetHintLw",
-                    WindowManager.LayoutParams.class, Rect.class, new XC_MethodReplacement() {
-                @Override
-                protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (DEBUG_LAYOUT) log("getContentInsetHintLw");
-                    try {
-                        if (!isImmersiveModeActive()) {
-                            return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                        }
-
-                        WindowManager.LayoutParams attrs = (WindowManager.LayoutParams) param.args[0];
-                        Rect contentInset = (Rect) param.args[1];
-                        final int fl = updateWindowManagerVisibilityFlagsForExpandedDesktop(attrs.flags);
-                        final int systemUiVisibility = updateSystemUiVisibilityFlagsForExpandedDesktop(attrs.systemUiVisibility|
-                                XposedHelpers.getIntField(attrs, "subtreeSystemUiVisibility"));
-
-                        if ((fl & (WmLp.FLAG_LAYOUT_IN_SCREEN | WmLp.FLAG_LAYOUT_INSET_DECOR))
-                                == (WmLp.FLAG_LAYOUT_IN_SCREEN | WmLp.FLAG_LAYOUT_INSET_DECOR)) {
-                            int availRight, availBottom;
-                            if ((Boolean) mCanHideNavigationBar.invoke(param.thisObject) &&
-                                    (systemUiVisibility & View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION) != 0) {
-                                availRight = getInt("mUnrestrictedScreenLeft") + getInt("mUnrestrictedScreenWidth");
-                                availBottom = getInt("mUnrestrictedScreenTop") + getInt("mUnrestrictedScreenHeight");
-                            } else {
-                                availRight = getInt("mRestrictedScreenLeft") + getInt("mRestrictedScreenWidth");
-                                availBottom = getInt("mRestrictedScreenTop") + getInt("mRestrictedScreenHeight");
-                            }
-                            if ((systemUiVisibility & View.SYSTEM_UI_FLAG_LAYOUT_STABLE) != 0) {
-                                if ((fl & WmLp.FLAG_FULLSCREEN) != 0) {
-                                    contentInset.set(getInt("mStableFullscreenLeft"), getInt("mStableFullscreenTop"),
-                                            availRight - getInt("mStableFullscreenRight"),
-                                            availBottom - getInt("mStableFullscreenBottom"));
-                                } else {
-                                    contentInset.set(getInt("mStableLeft"), getInt("mStableTop"),
-                                            availRight - getInt("mStableRight"), availBottom - getInt("mStableBottom"));
-                                }
-                            } else if ((fl & WmLp.FLAG_FULLSCREEN) != 0 || (fl & WmLp.FLAG_LAYOUT_IN_OVERSCAN) != 0) {
-                                contentInset.setEmpty();
-                            } else if ((systemUiVisibility & (View.SYSTEM_UI_FLAG_FULLSCREEN
-                                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)) == 0) {
-                                contentInset.set(getInt("mCurLeft"), getInt("mCurTop"),
-                                        availRight - getInt("mCurRight"), availBottom - getInt("mCurBottom"));
-                            } else {
-                                contentInset.set(getInt("mCurLeft"), getInt("mCurTop"),
-                                        availRight - getInt("mCurRight"), availBottom - getInt("mCurBottom"));
-                            }
-                            return null;
-                        }
-                        contentInset.setEmpty();
-                        return null;
-                    } catch(Throwable t) {
-                        logAndMute(param.method.getName(), t);
-                        return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                    }
-                }
-            });
+            if (Build.VERSION.SDK_INT < 22) {
+                XposedHelpers.findAndHookMethod(classPhoneWindowManager, "getContentInsetHintLw",
+                    WindowManager.LayoutParams.class, Rect.class, getInsetHintReplacement);
+            } else {
+                XposedHelpers.findAndHookMethod(classPhoneWindowManager, "getInsetHintLw",
+                    WindowManager.LayoutParams.class, Rect.class, Rect.class, getInsetHintReplacement);
+            }
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "beginLayoutLw",
                     boolean.class, int.class, int.class, int.class, new XC_MethodReplacement() {
@@ -829,7 +780,7 @@ public class ModExpandedDesktop {
 
                         // If there is no window focused, there will be nobody to handle the events
                         // anyway, so just hang on in whatever state we're in until things settle down.
-                        Object win = getObj("mFocusedWindow") != null ? 
+                        final Object win = getObj("mFocusedWindow") != null ? 
                                 getObj("mFocusedWindow") : getObj("mTopFullscreenOpaqueWindowState");
                         if (win == null) {
                             return 0;
@@ -902,7 +853,12 @@ public class ModExpandedDesktop {
                                 try {
                                     Object statusbar = XposedHelpers.callMethod(param.thisObject, "getStatusBarService");
                                     if (statusbar != null) {
-                                        XposedHelpers.callMethod(statusbar, "setSystemUiVisibility", visibility2, 0xffffffff);
+                                        if (Build.VERSION.SDK_INT < 22) {
+                                            XposedHelpers.callMethod(statusbar, "setSystemUiVisibility", visibility2, 0xffffffff);
+                                        } else {
+                                            XposedHelpers.callMethod(statusbar, "setSystemUiVisibility",
+                                                    visibility2, 0xffffffff, win.toString());
+                                        }
                                         XposedHelpers.callMethod(statusbar, "topAppWindowChanged", needsMenu);
                                     }
                                 } catch (Throwable t) {
@@ -973,6 +929,78 @@ public class ModExpandedDesktop {
             XposedBridge.log(t);
         }
     }
+
+    // hooks
+    private static XC_MethodReplacement getInsetHintReplacement = new XC_MethodReplacement() {
+        @Override
+        protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
+            if (DEBUG_LAYOUT) log("getContentInsetHintLw");
+            try {
+                if (!isImmersiveModeActive()) {
+                    return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+                }
+
+                WindowManager.LayoutParams attrs = (WindowManager.LayoutParams) param.args[0];
+                Rect contentInset = (Rect) param.args[1];
+                Rect stableInset = null;
+                if (Build.VERSION.SDK_INT >= 22) {
+                    stableInset = (Rect) param.args[2];
+                }
+
+                final int fl = updateWindowManagerVisibilityFlagsForExpandedDesktop(attrs.flags);
+                final int systemUiVisibility = updateSystemUiVisibilityFlagsForExpandedDesktop(attrs.systemUiVisibility|
+                        XposedHelpers.getIntField(attrs, "subtreeSystemUiVisibility"));
+
+                if ((fl & (WmLp.FLAG_LAYOUT_IN_SCREEN | WmLp.FLAG_LAYOUT_INSET_DECOR))
+                        == (WmLp.FLAG_LAYOUT_IN_SCREEN | WmLp.FLAG_LAYOUT_INSET_DECOR)) {
+                    int availRight, availBottom;
+                    if ((Boolean) mCanHideNavigationBar.invoke(param.thisObject) &&
+                            (systemUiVisibility & View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION) != 0) {
+                        availRight = getInt("mUnrestrictedScreenLeft") + getInt("mUnrestrictedScreenWidth");
+                        availBottom = getInt("mUnrestrictedScreenTop") + getInt("mUnrestrictedScreenHeight");
+                    } else {
+                        availRight = getInt("mRestrictedScreenLeft") + getInt("mRestrictedScreenWidth");
+                        availBottom = getInt("mRestrictedScreenTop") + getInt("mRestrictedScreenHeight");
+                    }
+                    if ((systemUiVisibility & View.SYSTEM_UI_FLAG_LAYOUT_STABLE) != 0) {
+                        if ((fl & WmLp.FLAG_FULLSCREEN) != 0) {
+                            contentInset.set(getInt("mStableFullscreenLeft"), getInt("mStableFullscreenTop"),
+                                    availRight - getInt("mStableFullscreenRight"),
+                                    availBottom - getInt("mStableFullscreenBottom"));
+                        } else {
+                            contentInset.set(getInt("mStableLeft"), getInt("mStableTop"),
+                                    availRight - getInt("mStableRight"), availBottom - getInt("mStableBottom"));
+                        }
+                    } else if ((fl & WmLp.FLAG_FULLSCREEN) != 0 || (fl & WmLp.FLAG_LAYOUT_IN_OVERSCAN) != 0) {
+                        contentInset.setEmpty();
+                    } else if ((systemUiVisibility & (View.SYSTEM_UI_FLAG_FULLSCREEN
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)) == 0) {
+                        contentInset.set(getInt("mCurLeft"), getInt("mCurTop"),
+                                availRight - getInt("mCurRight"), availBottom - getInt("mCurBottom"));
+                    } else {
+                        contentInset.set(getInt("mCurLeft"), getInt("mCurTop"),
+                                availRight - getInt("mCurRight"), availBottom - getInt("mCurBottom"));
+                    }
+
+                    if (stableInset != null) {
+                        stableInset.set(getInt("mStableLeft"), getInt("mStableTop"),
+                                availRight - getInt("mStableRight"),
+                                availBottom - getInt("mStableBottom"));
+                    }
+
+                    return null;
+                }
+                contentInset.setEmpty();
+                if (stableInset != null) {
+                    stableInset.setEmpty();
+                }
+                return null;
+            } catch(Throwable t) {
+                logAndMute(param.method.getName(), t);
+                return XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
+            }
+        }
+    };
 
     // helpers
     private static int getInt(String field) {
