@@ -21,8 +21,8 @@
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:maxSdkVersion="21"
-        android:targetSdkVersion="21" />
+        android:maxSdkVersion="22"
+        android:targetSdkVersion="22" />
 
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
