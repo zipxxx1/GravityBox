@@ -26,6 +26,7 @@ import android.content.res.Resources;
 import android.content.res.XModuleResources;
 import android.content.res.XResources;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.SparseArray;
@@ -279,6 +280,13 @@ public class ModVolumePanel {
                 Object sc = streamControls.valueAt(i);
                 ViewGroup group = (ViewGroup) XposedHelpers.getObjectField(sc, "group");
                 group.addView(createButton(group.getContext()));
+                // disable secondary icon on SDK 22+
+                if (Build.VERSION.SDK_INT >= 22) {
+                    ((View) XposedHelpers.getObjectField(sc, "divider"))
+                        .setVisibility(View.GONE);
+                    ((View) XposedHelpers.getObjectField(sc, "secondaryIcon"))
+                        .setVisibility(View.GONE);
+                }
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -355,7 +363,11 @@ public class ModVolumePanel {
                         mSliderPanel.addView(group);
                         group.setVisibility(View.VISIBLE);
                         group.getChildAt(group.getChildCount()-1).setVisibility(View.GONE);
-                        XposedHelpers.callMethod(mVolumePanel, "updateSlider", control);
+                        if (Build.VERSION.SDK_INT < 22) {
+                            XposedHelpers.callMethod(mVolumePanel, "updateSlider", control);
+                        } else {
+                            XposedHelpers.callMethod(mVolumePanel, "updateSlider", control, false);
+                        }
                         if (DEBUG) log("showing slider for stream type " + streamType);
                     }
                 }
@@ -392,7 +404,11 @@ public class ModVolumePanel {
                         ViewGroup group = (ViewGroup) XposedHelpers.getObjectField(control, "group");
                         group.setVisibility(View.GONE);
                         group.getChildAt(group.getChildCount()-1).setVisibility(View.VISIBLE);
-                        XposedHelpers.callMethod(mVolumePanel, "updateSlider", control);
+                        if (Build.VERSION.SDK_INT < 22) {
+                            XposedHelpers.callMethod(mVolumePanel, "updateSlider", control);
+                        } else {
+                            XposedHelpers.callMethod(mVolumePanel, "updateSlider", control, false);
+                        }
                         if (DEBUG) log("hiding slider for stream type " + streamType);
                     }
                 }
