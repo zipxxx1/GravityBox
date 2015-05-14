@@ -82,6 +82,7 @@ public class ModLockscreen {
     private static boolean mSmartUnlock;
     private static boolean mIsScreenOn;
     private static DismissKeyguardHandler mDismissKeyguardHandler;
+    private static boolean mIsSecure;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -345,6 +346,7 @@ public class ModLockscreen {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mIsScreenOn = false;
+                    mIsSecure = (Boolean) XposedHelpers.callMethod(param.thisObject, "isSecure");
                     mDirectUnlock = DirectUnlock.valueOf(prefs.getString(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK, "OFF"));
                     mSmartUnlock = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SMART_UNLOCK, false);
@@ -359,11 +361,15 @@ public class ModLockscreen {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mIsScreenOn = true;
+                    if (!mIsSecure) {
+                        if (DEBUG) log("onScreenTurnedOn: noop as keyguard is not secured");
+                        return;
+                    }
+
                     Object umCache = XposedHelpers.getStaticObjectField(unlockMethodCacheClass, "sInstance");
                     boolean trustManaged = XposedHelpers.getBooleanField(umCache, "mTrustManaged");
                     if (!trustManaged) {
-                        if (mDirectUnlock != DirectUnlock.OFF &&
-                                (Boolean) XposedHelpers.callMethod(param.thisObject, "isSecure")) {
+                        if (mDirectUnlock != DirectUnlock.OFF) {
                             if (mDirectUnlock == DirectUnlock.SEE_THROUGH) {
                                 XposedHelpers.callMethod(mPhoneStatusBar, "showBouncer");
                             } else {
@@ -388,7 +394,7 @@ public class ModLockscreen {
             XC_MethodHook umcNotifyListenersHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!mIsScreenOn || !mSmartUnlock) return;
+                    if (!mIsScreenOn || !mIsSecure || !mSmartUnlock) return;
 
                     boolean trustManaged = XposedHelpers.getBooleanField(param.thisObject, "mTrustManaged");
                     boolean insecure = XposedHelpers.getBooleanField(param.thisObject, getUmcInsecureFieldName());
