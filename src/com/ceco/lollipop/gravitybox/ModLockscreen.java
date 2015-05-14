@@ -31,6 +31,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaMetadata;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
@@ -120,6 +121,13 @@ public class ModLockscreen {
         }
     };
 
+    public static String getUmcInsecureFieldName() {
+        switch (Build.VERSION.SDK_INT) {
+            case 22: return "mCurrentlyInsecure";
+            default: return "mMethodInsecure";
+        }
+    }
+
     public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
         try {
             // Lockscreen: disable menu key in lock screen
@@ -152,7 +160,8 @@ public class ModLockscreen {
             final Class<?> sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader);
             final Class<?> unlockMethodCacheClass = XposedHelpers.findClass(CLASS_UNLOCK_METHOD_CACHE, classLoader);
 
-            XposedHelpers.findAndHookMethod(kgViewMediatorClass, "setup", new XC_MethodHook() {
+            String setupMethodName = Build.VERSION.SDK_INT >= 22 ? "setupLocked" : "setup";
+            XposedHelpers.findAndHookMethod(kgViewMediatorClass, setupMethodName, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
@@ -363,7 +372,7 @@ public class ModLockscreen {
                         }
                     } else {
                         if (mSmartUnlock) {
-                            boolean insecure = XposedHelpers.getBooleanField(umCache, "mMethodInsecure");
+                            boolean insecure = XposedHelpers.getBooleanField(umCache, getUmcInsecureFieldName());
                             if (insecure) {
                                 // previous state is insecure so we rather wait a second as smart lock can still
                                 // decide to make it secure after a while. Seems to be necessary only for
@@ -376,14 +385,13 @@ public class ModLockscreen {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(unlockMethodCacheClass, "notifyListeners",
-                    boolean.class, new XC_MethodHook() {
+            XC_MethodHook umcNotifyListenersHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if (!mIsScreenOn || !mSmartUnlock) return;
 
                     boolean trustManaged = XposedHelpers.getBooleanField(param.thisObject, "mTrustManaged");
-                    boolean insecure = XposedHelpers.getBooleanField(param.thisObject, "mMethodInsecure");
+                    boolean insecure = XposedHelpers.getBooleanField(param.thisObject, getUmcInsecureFieldName());
                     if (DEBUG) log("updateMethodSecure: trustManaged=" + trustManaged +
                             "; insecure=" + insecure);
                     if (trustManaged && insecure) {
@@ -397,7 +405,14 @@ public class ModLockscreen {
                         if (DEBUG) log("updateMethodSecure: pending keyguard dismiss cancelled");
                     }
                 }
-            });
+            };
+            if (Build.VERSION.SDK_INT < 22) {
+                XposedHelpers.findAndHookMethod(unlockMethodCacheClass, "notifyListeners",
+                    boolean.class, umcNotifyListenersHook);
+            } else {
+                XposedHelpers.findAndHookMethod(unlockMethodCacheClass, "notifyListeners",
+                    umcNotifyListenersHook);
+            }
 
             XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR, classLoader,
                     "makeStatusBarView", new XC_MethodHook() {
