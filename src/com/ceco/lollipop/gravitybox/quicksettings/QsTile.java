@@ -2,6 +2,7 @@ package com.ceco.lollipop.gravitybox.quicksettings;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.Utils;
@@ -9,11 +10,14 @@ import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public abstract class QsTile extends BaseTile {
     public static final String DUMMY_INTENT = "intent(dummy)";
     public static final String CLASS_INTENT_TILE = "com.android.systemui.qs.tiles.IntentTile";
+
+    private static Class<?> sResourceIconClass;
 
     protected State mState;
 
@@ -78,12 +82,16 @@ public abstract class QsTile extends BaseTile {
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, prefs, eventDistributor);
 
-        mState = new State();
+        mState = new State(mKey, mEventDistributor.isResourceIconHooked());
 
         mTile = XposedHelpers.callStaticMethod(XposedHelpers.findClass(
                 CLASS_INTENT_TILE, mContext.getClassLoader()),
                 "create", mHost, DUMMY_INTENT);
         XposedHelpers.setAdditionalInstanceField(mTile, TILE_KEY_NAME, mKey);
+
+        if (Build.VERSION.SDK_INT >= 22 && sResourceIconClass == null) {
+            sResourceIconClass = getResourceIconClass(mContext.getClassLoader());
+        }
     }
 
     @Override
@@ -95,10 +103,25 @@ public abstract class QsTile extends BaseTile {
     }
 
     @Override
+    public Drawable getResourceIconDrawable() {
+        return mState.icon;
+    }
+
+    @Override
     public void handleDestroy() {
         super.handleDestroy();
         mState = null;
         if (DEBUG) log(mKey + ": handleDestroy called");
+    }
+
+    private static Class<?> getResourceIconClass(ClassLoader cl) {
+        try {
+            return XposedHelpers.findClass(CLASS_BASE_TILE+".ResourceIcon", cl);
+        } catch (Throwable t) {
+            log("Error getting resource icon class:");
+            XposedBridge.log(t);
+            return null;
+        }
     }
 
     public static class State {
@@ -107,11 +130,37 @@ public abstract class QsTile extends BaseTile {
         public String label;
         public boolean autoMirrorDrawable = true;
 
+        private String mKey;
+        private boolean mAllowCustomResourceIcon;
+
+        public State(String key, boolean resourceIconHooked) {
+            mKey = key;
+            mAllowCustomResourceIcon = resourceIconHooked;
+        }
+
         public void applyTo(Object state) {
             XposedHelpers.setBooleanField(state, "visible", visible);
-            XposedHelpers.setObjectField(state, "icon", icon);
+            XposedHelpers.setObjectField(state, "icon",
+                    Build.VERSION.SDK_INT >= 22 ? getResourceIcon() : icon);
             XposedHelpers.setObjectField(state, "label", label);
             XposedHelpers.setBooleanField(state, "autoMirrorDrawable", autoMirrorDrawable);
+        }
+
+        private Object getResourceIcon() {
+            if (sResourceIconClass == null || icon == null ||
+                    !mAllowCustomResourceIcon) return null;
+
+            try {
+                Object resourceIcon = XposedHelpers.callStaticMethod(
+                        sResourceIconClass, "get", icon.hashCode());
+                XposedHelpers.setAdditionalInstanceField(resourceIcon, TILE_KEY_NAME, mKey);
+                if (DEBUG) log("getting resource icon for " + mKey);
+                return resourceIcon;
+            } catch (Throwable t) {
+                log("Error creating resource icon:");
+                XposedBridge.log(t);
+                return null;
+            }
         }
     }
 }

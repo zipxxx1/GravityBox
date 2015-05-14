@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
+import com.ceco.lollipop.gravitybox.ModLockscreen;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
 
 import android.content.BroadcastReceiver;
@@ -15,6 +16,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -47,6 +50,7 @@ public class QsTileEventDistributor {
         void setListening(boolean listening);
         void onSecureMethodChanged();
         View onCreateIcon();
+        Drawable getResourceIconDrawable();
     }
 
     private static void log(String message) {
@@ -61,6 +65,7 @@ public class QsTileEventDistributor {
     private Object mKeyguardDelegate;
     private Object mUnlockMethodCache;
     private String mCreateTileViewTileKey;
+    private boolean mResourceIconHooked;
 
     public QsTileEventDistributor(Object host, XSharedPreferences prefs) {
         mHost = host;
@@ -233,8 +238,7 @@ public class QsTileEventDistributor {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_UNLOCK_METHOD_CACHE, cl, "notifyListeners",
-                    boolean.class, new XC_MethodHook() {
+            XC_MethodHook umcNotifyListenersHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (isKeyguardShowingAndSecured()) {
@@ -243,7 +247,14 @@ public class QsTileEventDistributor {
                         }
                     }
                 }
-            });
+            };
+            if (Build.VERSION.SDK_INT < 22) {
+                XposedHelpers.findAndHookMethod(CLASS_UNLOCK_METHOD_CACHE, cl, "notifyListeners",
+                    boolean.class, umcNotifyListenersHook);
+            } else {
+                XposedHelpers.findAndHookMethod(CLASS_UNLOCK_METHOD_CACHE, cl, "notifyListeners",
+                    umcNotifyListenersHook);
+            }
 
             XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "createIcon",
                     new XC_MethodHook() {
@@ -258,6 +269,21 @@ public class QsTileEventDistributor {
                     }
                 }
             });
+
+            if (Build.VERSION.SDK_INT >= 22) {
+                XposedHelpers.findAndHookMethod(BaseTile.CLASS_RESOURCE_ICON, cl, "getDrawable",
+                        Context.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        final QsEventListener l = mListeners.get(XposedHelpers
+                                .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                        if (l instanceof QsTile) {
+                            param.setResult(l.getResourceIconDrawable());
+                        }
+                    }
+                });
+                mResourceIconHooked = true;
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -348,7 +374,8 @@ public class QsTileEventDistributor {
     protected final boolean isKeyguardSecuredAndLocked() {
         try {
             boolean trustManaged = XposedHelpers.getBooleanField(getUnlockMethodCache(), "mTrustManaged");
-            boolean methodInsecure = XposedHelpers.getBooleanField(getUnlockMethodCache(), "mMethodInsecure");
+            boolean methodInsecure = XposedHelpers.getBooleanField(getUnlockMethodCache(),
+                    ModLockscreen.getUmcInsecureFieldName());
             return (isKeyguardSecured() && !(trustManaged && methodInsecure));
         } catch (Throwable t) {
             log("Error in isKeyguardSecuredAndLocked: " + t.getMessage());
@@ -358,5 +385,9 @@ public class QsTileEventDistributor {
 
     protected final boolean isKeyguardShowingAndSecured() {
         return (isKeyguardShowing() && isKeyguardSecured());
+    }
+
+    protected final boolean isResourceIconHooked() {
+        return mResourceIconHooked;
     }
 }

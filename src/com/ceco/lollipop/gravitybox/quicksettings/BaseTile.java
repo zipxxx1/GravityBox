@@ -22,6 +22,7 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -46,6 +47,7 @@ public abstract class BaseTile implements QsEventListener {
     public static final String CLASS_TILE_STATE = "com.android.systemui.qs.QSTile.State";
     public static final String CLASS_TILE_VIEW = "com.android.systemui.qs.QSTileView";
     public static final String CLASS_SIGNAL_TILE_VIEW = "com.android.systemui.qs.SignalTileView";
+    public static final String CLASS_RESOURCE_ICON = CLASS_BASE_TILE + ".ResourceIcon";
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -165,6 +167,11 @@ public abstract class BaseTile implements QsEventListener {
 
     @Override
     public View onCreateIcon() {
+        return null;
+    }
+
+    @Override
+    public Drawable getResourceIconDrawable() {
         return null;
     }
 
