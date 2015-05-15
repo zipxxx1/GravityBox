@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 
 public class SysUiManagers {
     private static final String TAG = "GB:SysUiManagers";
@@ -35,11 +36,14 @@ public class SysUiManagers {
             XposedBridge.log(t);
         }
 
-        try {
-            IconManager = new StatusBarIconManager(context, prefs);
-        } catch (Throwable t) {
-            log("Error creating IconManager: ");
-            XposedBridge.log(t);
+        // TODO: SDK 22+
+        if (Build.VERSION.SDK_INT < 22) {
+            try {
+                IconManager = new StatusBarIconManager(context, prefs);
+            } catch (Throwable t) {
+                log("Error creating IconManager: ");
+                XposedBridge.log(t);
+            }
         }
 
         try {

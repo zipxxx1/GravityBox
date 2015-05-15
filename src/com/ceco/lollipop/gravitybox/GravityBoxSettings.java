@@ -1788,6 +1788,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS);
                 if (p != null) mPrefCatSignalCluster.removePreference(p);
                 mPrefCatSignalCluster.removePreference(mPrefScNarrow);
+                mPrefCatStatusbar.removePreference(mPrefCatStatusbarColors);
             }
 
             setDefaultValues();
