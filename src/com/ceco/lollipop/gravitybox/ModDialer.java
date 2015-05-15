@@ -35,6 +35,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Vibrator;
@@ -65,9 +66,9 @@ public class ModDialer {
     private static final String CLASS_DIALPAD_FRAGMENT = "com.android.dialer.dialpad.DialpadFragment";
     private static final boolean DEBUG = false;
 
-    private static final int CALL_STATE_ACTIVE = 2;
-    private static final int CALL_STATE_INCOMING = 3;
-    private static final int CALL_STATE_WAITING = 4;
+    private static final int CALL_STATE_ACTIVE = Build.VERSION.SDK_INT >= 22 ? 3 : 2;
+    private static final int CALL_STATE_INCOMING = Build.VERSION.SDK_INT >= 22 ? 4 : 3;
+    private static final int CALL_STATE_WAITING = Build.VERSION.SDK_INT >= 22 ? 5 : 4;
 
     private static XSharedPreferences mPrefsPhone;
     private static int mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
