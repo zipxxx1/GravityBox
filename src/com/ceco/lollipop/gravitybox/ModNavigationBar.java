@@ -29,6 +29,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.PowerManager;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -391,7 +392,7 @@ public class ModNavigationBar {
                         for(View v : rotatedViews) {
                             if (backButtonResId != 0) { 
                                 ImageView backButton = (ImageView) v.findViewById(backButtonResId);
-                                if (backButton != null) {
+                                if (backButton != null && Build.VERSION.SDK_INT < 22) {
                                     backButton.setScaleType(ScaleType.FIT_CENTER);
                                 }
                             }
@@ -419,14 +420,16 @@ public class ModNavigationBar {
                     vRot = (ViewGroup) ((ViewGroup) param.thisObject).findViewById(
                             mResources.getIdentifier("rot0", "id", PACKAGE_NAME));
                     if (vRot != null) {
+                        ScaleType scaleType = Build.VERSION.SDK_INT >= 22 ?
+                                ScaleType.CENTER : ScaleType.FIT_CENTER;
                         KeyButtonView appKey = new KeyButtonView(context);
-                        appKey.setScaleType(ScaleType.FIT_CENTER);
+                        appKey.setScaleType(scaleType);
                         appKey.setClickable(true);
                         appKey.setImageDrawable(gbRes.getDrawable(getCustomKeyIconId()));
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
-                        dpadLeft.setScaleType(ScaleType.FIT_CENTER);
+                        dpadLeft.setScaleType(scaleType);
                         dpadLeft.setClickable(true);
                         dpadLeft.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_ime_left :
@@ -435,7 +438,7 @@ public class ModNavigationBar {
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
-                        dpadRight.setScaleType(ScaleType.FIT_CENTER);
+                        dpadRight.setScaleType(scaleType);
                         dpadRight.setClickable(true);
                         dpadRight.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_ime_right :
@@ -858,6 +861,24 @@ public class ModNavigationBar {
             for (int i = 0; i <= 1; i++) {
                 if (mNavbarViewInfo[i] == null) continue;
 
+                if (mNavbarViewInfo[i].visible != visible) {
+                    if (mNavbarViewInfo[i].originalView != null) {
+                        mNavbarViewInfo[i].navButtons.removeViewAt(mNavbarViewInfo[i].customKeyPosition);
+                        mNavbarViewInfo[i].navButtons.addView(visible ?
+                                mNavbarViewInfo[i].customKey : mNavbarViewInfo[i].originalView,
+                                mNavbarViewInfo[i].customKeyPosition);
+                    } else {
+                        if (visible) {
+                            mNavbarViewInfo[i].navButtons.addView(mNavbarViewInfo[i].customKey,
+                                    mNavbarViewInfo[i].customKeyPosition);
+                        } else {
+                            mNavbarViewInfo[i].navButtons.removeView(mNavbarViewInfo[i].customKey);
+                        }
+                    }
+                    mNavbarViewInfo[i].visible = visible;
+                    if (DEBUG) log("setAppKeyVisibility: visible=" + visible);
+                }
+
                 // swap / unswap with menu key if necessary
                 if ((!mCustomKeyEnabled || !mCustomKeySwapEnabled) && 
                         mNavbarViewInfo[i].menuCustomSwapped) {
@@ -866,25 +887,6 @@ public class ModNavigationBar {
                         !mNavbarViewInfo[i].menuCustomSwapped) {
                     swapMenuAndCustom(mNavbarViewInfo[i]);
                 }
-
-                if (mNavbarViewInfo[i].visible == visible) continue;
-
-                if (mNavbarViewInfo[i].originalView != null) {
-                    mNavbarViewInfo[i].navButtons.removeViewAt(mNavbarViewInfo[i].customKeyPosition);
-                    mNavbarViewInfo[i].navButtons.addView(visible ?
-                            mNavbarViewInfo[i].customKey : mNavbarViewInfo[i].originalView,
-                            mNavbarViewInfo[i].customKeyPosition);
-                } else {
-                    if (visible) {
-                        mNavbarViewInfo[i].navButtons.addView(mNavbarViewInfo[i].customKey,
-                                mNavbarViewInfo[i].customKeyPosition);
-                    } else {
-                        mNavbarViewInfo[i].navButtons.removeView(mNavbarViewInfo[i].customKey);
-                    }
-                }
-                mNavbarViewInfo[i].visible = visible;
-                mNavbarViewInfo[i].navButtons.requestLayout();
-                if (DEBUG) log("setAppKeyVisibility: visible=" + visible);
             }
         } catch (Throwable t) {
             log("Error setting app key visibility: " + t.getMessage());
@@ -1152,6 +1154,7 @@ public class ModNavigationBar {
             }
             nvi.customKeyPosition = menuPos;
             nvi.menuCustomSwapped = !nvi.menuCustomSwapped;
+            if (DEBUG) log("swapMenuAndCustom: swapped=" + nvi.menuCustomSwapped);
         }
         catch (Throwable t) {
             log("Error swapping menu and custom key: " + t.getMessage());
