@@ -27,7 +27,6 @@ import android.content.SyncStatusObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.View;
 
 public class SyncTile extends QsTile {
     private Handler mHandler;
@@ -105,7 +104,7 @@ public class SyncTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         startSettingsActivity(Settings.ACTION_SYNC_SETTINGS);
         return true;
     }

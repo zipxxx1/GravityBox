@@ -23,7 +23,6 @@ import android.app.KeyguardManager;
 import android.app.KeyguardManager.KeyguardLock;
 import android.content.Context;
 import android.provider.Settings;
-import android.view.View;
 
 @SuppressWarnings("deprecation")
 public class LockScreenTile extends QsTile {
@@ -86,7 +85,7 @@ public class LockScreenTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         startSettingsActivity(Settings.ACTION_SECURITY_SETTINGS);
         return true;
     }

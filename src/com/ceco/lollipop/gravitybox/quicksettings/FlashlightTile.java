@@ -1,7 +1,6 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
 import de.robv.android.xposed.XSharedPreferences;
-import android.view.View;
 
 public class FlashlightTile extends AospTile {
     public static final String AOSP_KEY = "flashlight";
@@ -20,10 +19,4 @@ public class FlashlightTile extends AospTile {
     public String getAospKey() {
         return AOSP_KEY;
     }
-
-    @Override
-    public boolean handleLongClick(View view) {
-        return false;
-    }
-
 }

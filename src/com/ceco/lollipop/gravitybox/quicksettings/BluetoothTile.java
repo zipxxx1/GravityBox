@@ -6,7 +6,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 import android.provider.Settings;
-import android.view.View;
 
 public class BluetoothTile extends AospTile {
     public static final String AOSP_KEY = "bt";
@@ -31,9 +30,8 @@ public class BluetoothTile extends AospTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         if (mNormalized) {
-            view.setPressed(false);
             startSettingsActivity(Settings.ACTION_BLUETOOTH_SETTINGS);
             return true;
         }

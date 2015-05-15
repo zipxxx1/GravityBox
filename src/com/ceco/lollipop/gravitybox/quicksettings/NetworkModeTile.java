@@ -22,7 +22,6 @@ import com.ceco.lollipop.gravitybox.R;
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
 
 public class NetworkModeTile extends QsTile {
     private int mNetworkType;
@@ -263,7 +262,7 @@ public class NetworkModeTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         if (mIsMsim) {
             Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
             intent.putExtra(GravityBoxSettings.EXTRA_SIM_SLOT, mSimSlot == 0 ? 1 : 0);

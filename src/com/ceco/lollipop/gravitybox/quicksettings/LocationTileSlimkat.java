@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.provider.Settings;
-import android.view.View;
 
 import com.ceco.lollipop.gravitybox.R;
 
@@ -174,7 +173,7 @@ public class LocationTileSlimkat extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         if (mLocationEnabled) {
             switchLocationMode(mLocationMode);
         }

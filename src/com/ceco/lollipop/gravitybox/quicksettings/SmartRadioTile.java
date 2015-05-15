@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.View;
 
 public class SmartRadioTile extends QsTile {
 
@@ -83,11 +82,6 @@ public class SmartRadioTile extends QsTile {
         Intent i = new Intent(ModSmartRadio.ACTION_TOGGLE_SMART_RADIO);
         mContext.sendBroadcast(i);
         super.handleClick();
-    }
-
-    @Override
-    public boolean handleLongClick(View view) {
-        return false;
     }
 
     @Override

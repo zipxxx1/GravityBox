@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -103,7 +104,11 @@ public abstract class BaseTile implements QsEventListener {
         }
     }
 
-    public abstract boolean handleLongClick(View view);
+    @Override
+    public boolean handleLongClick() {
+        return false;
+    }
+
     public abstract void handleUpdateState(Object state, Object arg);
 
     @Override
@@ -132,13 +137,16 @@ public abstract class BaseTile implements QsEventListener {
 
     @Override
     public void onCreateTileView(View tileView) throws Throwable {
-        tileView.setLongClickable(true);
-        tileView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return handleLongClick(v);
-            }
-        });
+        if (Build.VERSION.SDK_INT < 22) {
+            tileView.setLongClickable(true);
+            tileView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return handleLongClick();
+                }
+            });
+        }
+
         XposedHelpers.setAdditionalInstanceField(tileView, TILE_KEY_NAME, mKey);
 
         mScalingFactor = QsPanel.getScalingFactor(Integer.valueOf(mPrefs.getString(

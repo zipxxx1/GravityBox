@@ -165,15 +165,21 @@ public class CellularTile extends AospTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         if (!isPrimary()) return false;
-
-        view.setPressed(false);
 
         // change icon visibility immediately for fast feedback
         final boolean visible = mDataOffView.getVisibility() == View.VISIBLE;
-        mDataOffView.setVisibility(!visible && canShowDataOffIcon() ? 
-                View.VISIBLE : View.GONE);
+        final boolean shouldShow = !visible && canShowDataOffIcon();
+        mDataOffView.post(new Runnable() {
+            @Override
+            public void run() {
+                if (mDataOffView != null) {
+                    mDataOffView.setVisibility(shouldShow ? 
+                            View.VISIBLE : View.GONE);
+                }
+            }
+        });
 
         // toggle mobile data
         Intent intent = new Intent(ConnectivityServiceWrapper.ACTION_TOGGLE_MOBILE_DATA);

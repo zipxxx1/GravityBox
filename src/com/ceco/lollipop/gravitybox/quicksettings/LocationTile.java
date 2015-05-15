@@ -1,7 +1,6 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
 import de.robv.android.xposed.XSharedPreferences;
-import android.view.View;
 
 public class LocationTile extends AospTile {
     public static final String AOSP_KEY = "location";
@@ -20,10 +19,4 @@ public class LocationTile extends AospTile {
     public String getAospKey() {
         return AOSP_KEY;
     }
-
-    @Override
-    public boolean handleLongClick(View view) {
-        return false;
-    }
-
 }

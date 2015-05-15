@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 
 public class TorchTile extends QsTile {
     private int mTorchStatus = TorchService.TORCH_STATUS_OFF;
@@ -124,11 +123,6 @@ public class TorchTile extends QsTile {
     public void handleClick() {
         toggleState();
         super.handleClick();
-    }
-
-    @Override
-    public boolean handleLongClick(View view) {
-        return false;
     }
 
     @Override

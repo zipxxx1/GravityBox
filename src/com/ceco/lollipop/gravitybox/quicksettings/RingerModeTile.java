@@ -37,7 +37,6 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.provider.Settings;
-import android.view.View;
 
 public class RingerModeTile extends QsTile {
     public static final String SETTING_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
@@ -93,7 +92,7 @@ public class RingerModeTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
         return true;
     }

@@ -20,7 +20,6 @@ import com.ceco.lollipop.gravitybox.R;
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.Context;
 import android.media.AudioManager;
-import android.view.View;
 
 public class VolumeTile extends QsTile {
 
@@ -53,7 +52,7 @@ public class VolumeTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
         return true;
     }

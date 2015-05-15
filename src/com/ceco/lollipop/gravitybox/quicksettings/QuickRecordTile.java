@@ -35,7 +35,6 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 
 public class QuickRecordTile extends QsTile {
     private static final int STATE_IDLE = 0;
@@ -311,7 +310,7 @@ public class QuickRecordTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         switch (mRecordingState) {
             case STATE_NO_RECORDING:
             case STATE_IDLE:

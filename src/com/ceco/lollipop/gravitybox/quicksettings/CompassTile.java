@@ -87,11 +87,6 @@ public class CompassTile extends QsTile implements SensorEventListener {
         super.handleClick();
     }
 
-    @Override
-    public boolean handleLongClick(View view) {
-        return false;
-    }
-
     private void setListeningSensors(boolean listening) {
         if (listening == mListeningSensors) return;
         mListeningSensors = listening;

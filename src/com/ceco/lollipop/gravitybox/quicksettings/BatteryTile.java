@@ -158,7 +158,7 @@ public class BatteryTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         if (mSwapActions) {
             togglePowerSaving();
         } else {

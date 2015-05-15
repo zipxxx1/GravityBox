@@ -21,7 +21,6 @@ import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.Intent;
-import android.view.View;
 
 public class GravityBoxTile extends QsTile {
 
@@ -54,7 +53,7 @@ public class GravityBoxTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         Intent i = new Intent();
         i.setClassName(GravityBox.PACKAGE_NAME, TileOrderActivity.class.getName());
         startSettingsActivity(i);

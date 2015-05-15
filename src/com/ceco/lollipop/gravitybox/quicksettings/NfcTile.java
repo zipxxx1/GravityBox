@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
-import android.view.View;
 
 public class NfcTile extends QsTile {
     private static NfcAdapter sNfcAdapter;
@@ -149,7 +148,7 @@ public class NfcTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         startSettingsActivity(Settings.ACTION_NFC_SETTINGS);
         return true;
     }

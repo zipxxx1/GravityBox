@@ -26,7 +26,6 @@ import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.View;
 
 public class ExpandedDesktopTile extends QsTile {
     private int mMode;
@@ -129,11 +128,6 @@ public class ExpandedDesktopTile extends QsTile {
             }, 800);
         }
         super.handleClick();
-    }
-
-    @Override
-    public boolean handleLongClick(View view) {
-        return false;
     }
 
     @Override

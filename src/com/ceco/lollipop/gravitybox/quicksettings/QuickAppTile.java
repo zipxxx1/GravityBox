@@ -332,7 +332,7 @@ public class QuickAppTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         LayoutInflater inflater = LayoutInflater.from(mGbContext);
         View appv = inflater.inflate(R.layout.quick_settings_app_dialog, null);
         int count = 0;

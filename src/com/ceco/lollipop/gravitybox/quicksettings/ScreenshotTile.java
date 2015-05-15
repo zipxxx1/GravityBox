@@ -21,7 +21,6 @@ import com.ceco.lollipop.gravitybox.ScreenRecordingService;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.Intent;
-import android.view.View;
 
 public class ScreenshotTile extends QsTile {
 
@@ -54,7 +53,7 @@ public class ScreenshotTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         collapsePanels();
         try {
             Intent intent = new Intent(mGbContext, ScreenRecordingService.class);

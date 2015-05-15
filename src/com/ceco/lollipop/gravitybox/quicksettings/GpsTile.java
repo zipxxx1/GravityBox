@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.provider.Settings;
-import android.view.View;
 
 public class GpsTile extends QsTile {
     public static final String GPS_ENABLED_CHANGE_ACTION = "android.location.GPS_ENABLED_CHANGE";
@@ -119,7 +118,7 @@ public class GpsTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         startSettingsActivity(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         return true;
     }

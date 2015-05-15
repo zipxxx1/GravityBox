@@ -29,7 +29,6 @@ import android.media.MediaMetadataRetriever;
 import android.media.RemoteControlClient;
 import android.media.RemoteController;
 import android.view.KeyEvent;
-import android.view.View;
 
 @SuppressWarnings("deprecation")
 public class MusicTile extends QsTile {
@@ -112,7 +111,7 @@ public class MusicTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         sendMediaButtonClick(KeyEvent.KEYCODE_MEDIA_NEXT);
         return true;
     }

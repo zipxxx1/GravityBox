@@ -45,6 +45,7 @@ public class QsTileEventDistributor {
         void onViewConfigurationChanged(View tileView, Configuration config);
         void onRecreateLabel(View tileView);
         void handleClick();
+        boolean handleLongClick();
         void handleUpdateState(Object state, Object arg);
         void setListening(boolean listening);
         void onSecureMethodChanged();
@@ -271,6 +272,21 @@ public class QsTileEventDistributor {
             });
 
             if (Build.VERSION.SDK_INT >= 22) {
+                XC_MethodHook longClickHook = new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        final QsEventListener l = mListeners.get(XposedHelpers
+                                .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                        if (l != null && l.handleLongClick()) {
+                            param.setResult(null);
+                        }
+                    }
+                };
+                XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl,
+                        "handleLongClick", longClickHook);
+                XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl,
+                        "handleLongClick", longClickHook);
+
                 XposedHelpers.findAndHookMethod(BaseTile.CLASS_RESOURCE_ICON, cl, "getDrawable",
                         Context.class, new XC_MethodHook() {
                     @Override

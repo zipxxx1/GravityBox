@@ -24,7 +24,6 @@ import com.ceco.lollipop.gravitybox.managers.StatusbarQuietHoursManager.QuietHou
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.Intent;
-import android.view.View;
 
 public class QuietHoursTile extends QsTile implements QuietHoursListener {
 
@@ -114,7 +113,7 @@ public class QuietHoursTile extends QsTile implements QuietHoursListener {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         if (mQh != null) {
             if (mQh.mode != QuietHours.Mode.AUTO) {
                 SysUiManagers.QuietHoursManager.setMode(QuietHours.Mode.AUTO);

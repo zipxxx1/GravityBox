@@ -33,9 +33,8 @@ public class WifiTile extends AospTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         if (mNormalized) {
-            view.setPressed(false);
             startSettingsActivity(Settings.ACTION_WIFI_SETTINGS);
             return true;
         }

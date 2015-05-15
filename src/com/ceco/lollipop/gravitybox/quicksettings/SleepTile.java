@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 import android.os.SystemClock;
-import android.view.View;
 
 public class SleepTile extends QsTile {
 
@@ -56,7 +55,7 @@ public class SleepTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         Intent intent = new Intent(ModHwKeys.ACTION_SHOW_POWER_MENU);
         mContext.sendBroadcast(intent);
         collapsePanels();

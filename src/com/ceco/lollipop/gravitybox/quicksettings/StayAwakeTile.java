@@ -33,7 +33,6 @@ import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.View;
 
 public class StayAwakeTile extends QsTile {
     private static final int NEVER_SLEEP = Integer.MAX_VALUE;
@@ -221,7 +220,7 @@ public class StayAwakeTile extends QsTile {
     }
 
     @Override
-    public boolean handleLongClick(View view) {
+    public boolean handleLongClick() {
         if (mLongestTimeoutIndex < 0)
             return false;
         if (Settings.System.getInt(mContext.getContentResolver(),
