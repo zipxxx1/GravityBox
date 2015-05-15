@@ -20,12 +20,8 @@ import com.ceco.lollipop.gravitybox.PhoneWrapper;
 import com.ceco.lollipop.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.database.ContentObserver;
-import android.os.Handler;
-import android.provider.Settings;
 import android.view.View;
 
 public class NetworkModeTile extends QsTile {
@@ -36,35 +32,10 @@ public class NetworkModeTile extends QsTile {
     private boolean mAllowLte;
     private boolean mUseCdma;
     private boolean mIsMsim;
-    private int mSimSlot;
+    private int mSimSlot = 0;
     private int m2G3GMode;
-    private SettingsObserver mObserver;
-
-    private class SettingsObserver extends ContentObserver {
-        public SettingsObserver(Handler handler) {
-            super(handler);
-        }
-
-        public void observe() {
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(
-                    Settings.Global.getUriFor(PhoneWrapper.PREFERRED_NETWORK_MODE), false, this);
-        }
-
-        public void unobserve() {
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            ContentResolver cr = mContext.getContentResolver();
-            mNetworkType = Settings.Global.getInt(cr, 
-                    PhoneWrapper.PREFERRED_NETWORK_MODE, m2G3GMode);
-            if (DEBUG) log(getKey() + ": SettingsObserver onChange; mNetworkType = " + mNetworkType);
-            refreshState();
-        }
-    }
+    private boolean mIsReceiving;
+    private boolean mInitialState;
 
     public NetworkModeTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -73,8 +44,7 @@ public class NetworkModeTile extends QsTile {
         mState.label = mGbContext.getString(R.string.qs_tile_network_mode);
         mDefaultNetworkType = PhoneWrapper.getDefaultNetworkType();
         mIsMsim = PhoneWrapper.hasMsimSupport();
-
-        mObserver = new SettingsObserver(new Handler());
+        mInitialState = true;
     }
 
     @Override
@@ -130,12 +100,25 @@ public class NetworkModeTile extends QsTile {
             }
         }
 
+        if (intent.getAction().equals(PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED)) {
+            String tag = intent.getStringExtra(PhoneWrapper.EXTRA_RECEIVER_TAG);
+            if (tag == null || tag.equals(TAG)) {
+                int phoneId = intent.getIntExtra(PhoneWrapper.EXTRA_PHONE_ID, 0);
+                if (phoneId == mSimSlot) {
+                    mNetworkType = intent.getIntExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, m2G3GMode);
+                    if (DEBUG) log(getKey() + ": ACTION_NETWORK_TYPE_CHANGED: mNetworkType = " + mNetworkType);
+                    if (mIsReceiving) {
+                        refreshState();
+                    }
+                }
+            }
+        }
+
         if (mIsMsim && intent.getAction().equals(
                 GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED)) {
             mSimSlot = intent.getIntExtra(GravityBoxSettings.EXTRA_SIM_SLOT, 0);
             if (DEBUG) log(getKey() + ": received ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED broadcast: " +
                                 "mSimSlot = " + mSimSlot);
-            refreshState();
         }
     }
 
@@ -176,13 +159,17 @@ public class NetworkModeTile extends QsTile {
     public void setListening(boolean listening) {
         if (DEBUG) log(getKey() + ": setListening(" + listening + ")");
         if (listening && mEnabled) {
-            ContentResolver cr = mContext.getContentResolver();
-            mNetworkType = Settings.Global.getInt(cr, 
-                    PhoneWrapper.PREFERRED_NETWORK_MODE, mDefaultNetworkType);
             if (DEBUG) log(getKey() + ": mNetworkType=" + mNetworkType + "; mDefaultNetworkType=" + mDefaultNetworkType);
-            mObserver.observe();
+            mIsReceiving = true;
+            if (mInitialState) {
+                mInitialState = false;
+                Intent intent = new Intent(PhoneWrapper.ACTION_GET_CURRENT_NETWORK_TYPE);
+                intent.putExtra(PhoneWrapper.EXTRA_PHONE_ID, mSimSlot);
+                intent.putExtra(PhoneWrapper.EXTRA_RECEIVER_TAG, TAG);
+                mContext.sendBroadcast(intent);
+            }
         } else {
-            mObserver.unobserve();
+            mIsReceiving = false;
         }
     }
 
@@ -292,6 +279,5 @@ public class NetworkModeTile extends QsTile {
     @Override
     public void handleDestroy() {
         super.handleDestroy();
-        mObserver = null;
     }
 }

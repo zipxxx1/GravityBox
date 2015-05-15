@@ -19,6 +19,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Message;
 import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
@@ -44,15 +45,20 @@ public class PhoneWrapper {
     public static final int NT_LTE_WCDMA = 12;
     public static final int NT_MODE_UNKNOWN = 13;
 
-    public static final String PREFERRED_NETWORK_MODE = "preferred_network_mode";
+    private static final String PREFERRED_NETWORK_MODE = "preferred_network_mode";
 
     public static final String ACTION_CHANGE_NETWORK_TYPE = "gravitybox.intent.action.CHANGE_NETWORK_TYPE";
+    public static final String ACTION_NETWORK_TYPE_CHANGED = "gravitybox.intent.action.NETWORK_TYPE_CHANGED";
+    public static final String ACTION_GET_CURRENT_NETWORK_TYPE = "gravitybox.intent.action.GET_CURRENT_NETWORK_TYPE";
     public static final String EXTRA_NETWORK_TYPE = "networkType";
+    public static final String EXTRA_PHONE_ID = "phoneId";
+    public static final String EXTRA_RECEIVER_TAG = "receiverTag";
 
     private static Class<?> mClsPhoneFactory;
+    private static Class<?> mPhoneBaseClass;
     private static Class<?> mSystemProperties;
     private static Context mContext;
-    private static int mSimSlot;
+    private static int mSimSlot = 0;
     private static int mPhoneCount = -1;
     private static Boolean mHasMsimSupport = null;
 
@@ -90,14 +96,22 @@ public class PhoneWrapper {
                 mSimSlot = intent.getIntExtra(GravityBoxSettings.EXTRA_SIM_SLOT, 0);
                 if (DEBUG) log("received ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED broadcast: " +
                                     "mSimSlot = " + mSimSlot);
-                setPreferredNetworkType(Settings.Global.getInt(mContext.getContentResolver(), 
-                        PREFERRED_NETWORK_MODE, getDefaultNetworkType()));
+                setPreferredNetworkType(getCurrentNetworkType(mSimSlot));
+            }
+            if (intent.getAction().equals(ACTION_GET_CURRENT_NETWORK_TYPE)) {
+                int simSlot = intent.getIntExtra(EXTRA_PHONE_ID, mSimSlot);
+                broadcastCurrentNetworkType(simSlot, getCurrentNetworkType(simSlot),
+                        intent.getStringExtra(EXTRA_RECEIVER_TAG));
             }
         }
     };
 
     private static Class<?> getPhoneFactoryClass() {
         return XposedHelpers.findClass("com.android.internal.telephony.PhoneFactory", null);
+    }
+
+    private static Class<?> getPhoneBaseClass() {
+        return XposedHelpers.findClass("com.android.internal.telephony.PhoneBase", null);
     }
 
     private static Class<?> getTelephonyManagerClass() {
@@ -129,6 +143,7 @@ public class PhoneWrapper {
 
         try {
             mClsPhoneFactory = getPhoneFactoryClass();
+            mPhoneBaseClass = getPhoneBaseClass();
             mSystemProperties = XposedHelpers.findClass("android.os.SystemProperties", null);
 
             mSimSlot = 0;
@@ -147,6 +162,17 @@ public class PhoneWrapper {
                     mContext = (Context) param.args[0];
                     if (DEBUG) log("PhoneFactory makeDefaultPhones - phone wrapper initialized");
                     onInitialize();
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(mPhoneBaseClass, "setPreferredNetworkType",
+                    int.class, Message.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    int phoneId = XposedHelpers.getIntField(param.thisObject, "mPhoneId");
+                    if (DEBUG) log("setPreferredNetworkType: networkType=" + param.args[0] +
+                            "; phoneId=" + phoneId);
+                    broadcastCurrentNetworkType(phoneId, (int)param.args[0], null);
                 }
             });
 
@@ -169,6 +195,7 @@ public class PhoneWrapper {
         if (mContext != null) {
             IntentFilter intentFilter = new IntentFilter(ACTION_CHANGE_NETWORK_TYPE);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
+            intentFilter.addAction(ACTION_GET_CURRENT_NETWORK_TYPE);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
         }
     }
@@ -187,7 +214,13 @@ public class PhoneWrapper {
                 XposedHelpers.callMethod(defPhone, "setPreferredNetworkTypeGemini", 
                         paramArgs, networkType, null, mSimSlot);
             } else {
-                Settings.Global.putInt(mContext.getContentResolver(), PREFERRED_NETWORK_MODE, networkType);
+                if (Build.VERSION.SDK_INT < 22) {
+                    Settings.Global.putInt(mContext.getContentResolver(), PREFERRED_NETWORK_MODE, networkType);
+                } else {
+                    int subId = (int) XposedHelpers.callMethod(defPhone, "getSubId");
+                    Settings.Global.putInt(mContext.getContentResolver(),
+                            PREFERRED_NETWORK_MODE + subId, networkType);
+                }
                 Class<?>[] paramArgs = new Class<?>[2];
                 paramArgs[0] = int.class;
                 paramArgs[1] = Message.class;
@@ -208,6 +241,44 @@ public class PhoneWrapper {
         } catch (Throwable t) {
             XposedBridge.log(t);
             return NT_WCDMA_PREFERRED;
+        }
+    }
+
+    private static int getCurrentNetworkType(int phoneId) {
+        try {
+            int networkType = getDefaultNetworkType();
+            if (Build.VERSION.SDK_INT < 22) {
+                networkType = Settings.Global.getInt(mContext.getContentResolver(),
+                        PREFERRED_NETWORK_MODE, NT_WCDMA_PREFERRED);
+            } else {
+                Object[] phones = (Object[])XposedHelpers.callStaticMethod(mClsPhoneFactory, "getPhones");
+                if (phoneId < phones.length) {
+                    int subId = (int) XposedHelpers.callMethod(phones[phoneId], "getSubId");
+                    if (DEBUG) log("getCurrentNetworkType: calculating network type for subId=" + subId);
+                    networkType = (int) XposedHelpers.callStaticMethod(mClsPhoneFactory,
+                            "calculatePreferredNetworkType", mContext, subId);
+                }
+            }
+            if (DEBUG) log("getCurrentNetworkType: phoneId=" + phoneId +
+                    "; networkType=" + getNetworkModeNameFromValue(networkType));
+            return networkType;
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return NT_WCDMA_PREFERRED;
+        }
+    }
+
+    private static void broadcastCurrentNetworkType(int phoneId, int networkType, String receiverTag) {
+        try {
+            Intent intent = new Intent(ACTION_NETWORK_TYPE_CHANGED);
+            intent.putExtra(EXTRA_PHONE_ID, phoneId);
+            intent.putExtra(EXTRA_NETWORK_TYPE, networkType);
+            if (receiverTag != null) {
+                intent.putExtra(EXTRA_RECEIVER_TAG, receiverTag);
+            }
+            mContext.sendBroadcast(intent);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
     }
 

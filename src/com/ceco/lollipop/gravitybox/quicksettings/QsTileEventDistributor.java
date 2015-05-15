@@ -10,6 +10,7 @@ import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModLockscreen;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
+import com.ceco.lollipop.gravitybox.PhoneWrapper;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -103,6 +104,7 @@ public class QsTileEventDistributor {
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_2);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QS_NETWORK_MODE_SIM_SLOT_CHANGED);
+        intentFilter.addAction(PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED);
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
     }
 

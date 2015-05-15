@@ -19,11 +19,9 @@ import android.app.AlarmManager;
 import android.app.KeyguardManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.ContentObserver;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.TrafficStats;
@@ -319,7 +317,7 @@ public class ModSmartRadio {
         }
     }
 
-    private static class NetworkModeChanger extends ContentObserver implements Runnable, BroadcastSubReceiver {
+    private static class NetworkModeChanger implements Runnable, BroadcastSubReceiver {
         public static final String ACTION_CHANGE_MODE_ALARM = "gravitybox.smartradio.intent.action.CHANGE_MODE_ALARM";
 
         private Context mContext;
@@ -338,7 +336,6 @@ public class ModSmartRadio {
         }
 
         public NetworkModeChanger(Context context, Handler handler) {
-            super(handler);
             mContext = context;
             mHandler = handler;
             mNextNetworkMode = -1;
@@ -348,18 +345,6 @@ public class ModSmartRadio {
 
             PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
             mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GB:SmartRadio");
-
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(
-                    Settings.Global.getUriFor(PhoneWrapper.PREFERRED_NETWORK_MODE), false, this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            ContentResolver cr = mContext.getContentResolver();
-            mCurrentNetworkMode = Settings.Global.getInt(cr, 
-                    PhoneWrapper.PREFERRED_NETWORK_MODE, -1);
-            if (DEBUG) log("NetworkModeChanger: onChange; mCurrentNetworkMode=" + mCurrentNetworkMode);
         }
 
         @Override
@@ -454,6 +439,12 @@ public class ModSmartRadio {
                 } else {
                     run();
                 }
+            } else if (intent.getAction().equals(PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED)) {
+                String tag = intent.getStringExtra(PhoneWrapper.EXTRA_RECEIVER_TAG);
+                if (tag == null) {
+                    mCurrentNetworkMode = intent.getIntExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, 0);
+                    if (DEBUG) log("NetworkModeChanger: onChange; mCurrentNetworkMode=" + mCurrentNetworkMode);
+                }
             }
         }
     }
@@ -496,6 +487,7 @@ public class ModSmartRadio {
                         intentFilter.addAction(NetworkModeChanger.ACTION_CHANGE_MODE_ALARM);
                         intentFilter.addAction(ACTION_TOGGLE_SMART_RADIO);
                         intentFilter.addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
+                        intentFilter.addAction(PhoneWrapper.ACTION_NETWORK_TYPE_CHANGED);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
                 }
