@@ -62,7 +62,7 @@ public class QsTileEventDistributor {
     private XSharedPreferences mPrefs;
     private Map<String,QsEventListener> mListeners;
     private List<BroadcastSubReceiver> mBroadcastSubReceivers;
-    private Object mKeyguardDelegate;
+    private Object mKeyguardMonitor;
     private Object mUnlockMethodCache;
     private String mCreateTileViewTileKey;
     private boolean mResourceIconHooked;
@@ -327,13 +327,11 @@ public class QsTileEventDistributor {
         }
     }
 
-    private Object getKeyguardDelegate() {
-        if (mKeyguardDelegate != null) return mKeyguardDelegate;
+    private Object getKeyguardMonitor() {
+        if (mKeyguardMonitor != null) return mKeyguardMonitor;
         try {
-            mKeyguardDelegate = XposedHelpers.callStaticMethod(
-                    XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, mContext.getClassLoader()),
-                    "getInstance", mContext);
-            return mKeyguardDelegate;
+            mKeyguardMonitor = XposedHelpers.callMethod(mHost, "getKeyguardMonitor");
+            return mKeyguardMonitor;
         } catch (Throwable t) {
             log("Error getting Keyguard delegate: " + t.getMessage());
             return null;
@@ -355,7 +353,7 @@ public class QsTileEventDistributor {
 
     protected final boolean isKeyguardShowing() {
         try {
-            return (boolean) XposedHelpers.callMethod(getKeyguardDelegate(), "isShowingAndNotOccluded");
+            return (boolean) XposedHelpers.callMethod(getKeyguardMonitor(), "isShowing");
         } catch (Throwable t) {
             log("Error in isKeyguardShowing: " + t.getMessage());
             return false;
@@ -364,7 +362,7 @@ public class QsTileEventDistributor {
 
     protected final boolean isKeyguardSecured() {
         try {
-            return (boolean) XposedHelpers.callMethod(getKeyguardDelegate(), "isSecure");
+            return (boolean) XposedHelpers.callMethod(getKeyguardMonitor(), "isSecure");
         } catch (Throwable t) {
             log("Error in isKeyguardSecured: " + t.getMessage());
             return false;
