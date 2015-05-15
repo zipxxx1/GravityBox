@@ -5,6 +5,7 @@ import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.MotionEvent;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -63,9 +64,18 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
         }
     }
 
+    private String getQsExpandFieldName() {
+        switch (Build.VERSION.SDK_INT) {
+            case 21: return "mTwoFingerQsExpand";
+            default: return "mQsExpandImmediate";
+        }
+    }
+
     private void createHooks() {
         try {
             ClassLoader cl = mContext.getClassLoader();
+
+            final String qsExpandFieldName = getQsExpandFieldName();
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIF_PANEL, cl,
                     "onTouchEvent", MotionEvent.class, new XC_MethodHook() {
@@ -75,8 +85,8 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                     if (mMode == MODE_OFF ||
                         XposedHelpers.getBooleanField(o, "mBlockTouches") ||
                         XposedHelpers.getBooleanField(o, "mOnlyAffordanceInThisMotion") ||
-                        XposedHelpers.getBooleanField(o, "mTwoFingerQsExpand") ||
-                        (!XposedHelpers.getBooleanField(o, "mTwoFingerQsExpand") && 
+                        XposedHelpers.getBooleanField(o, qsExpandFieldName) ||
+                        (!XposedHelpers.getBooleanField(o, qsExpandFieldName) && 
                                 XposedHelpers.getBooleanField(o, "mQsTracking") &&
                                 !XposedHelpers.getBooleanField(o, "mConflictingQsExpansionGesture"))) {
                         return;
@@ -88,7 +98,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                             && event.getY(event.getActionIndex()) < 
                                 XposedHelpers.getIntField(o, "mStatusBarMinHeight");
                     if (oneFingerQsOverride) {
-                        XposedHelpers.setBooleanField(o, "mTwoFingerQsExpand", true);
+                        XposedHelpers.setBooleanField(o, qsExpandFieldName, true);
                         XposedHelpers.callMethod(o, "requestPanelHeightUpdate");
                         XposedHelpers.callMethod(o, "setListening", true);
                     }
