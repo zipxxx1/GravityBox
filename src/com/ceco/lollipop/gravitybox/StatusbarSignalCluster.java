@@ -41,6 +41,7 @@ import android.content.res.Resources;
 import android.content.res.XModuleResources;
 import android.content.res.XResources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.view.Gravity;
 import android.view.View;
@@ -177,7 +178,9 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
         XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
 
+        // TODO: SDK 22+
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
+                Build.VERSION.SDK_INT < 22 &&
                 !Utils.isMotoXtDevice() && !Utils.isMtkDevice()) {
 
             sQsHpResId = XResources.getFakeResId(modRes, R.drawable.ic_qs_signal_hp);

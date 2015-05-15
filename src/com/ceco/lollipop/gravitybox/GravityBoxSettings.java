@@ -42,6 +42,7 @@ import com.ceco.lollipop.gravitybox.webserviceclient.WebServiceClient.WebService
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -1775,6 +1776,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefPieMenuLongpress.setEntryValues(actionEntryValues);
             mPrefPieAppLongpress.setEntries(actionEntries);
             mPrefPieAppLongpress.setEntryValues(actionEntryValues);
+
+            // TODO: SDK 22+
+            if (Build.VERSION.SDK_INT >= 22) {
+                Preference p = null;
+                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
+                mPrefCatSignalCluster.removePreference(mPrefSbDaColor);
+                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
+                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
+                mPrefCatSignalCluster.removePreference(mPrefScNarrow);
+            }
 
             setDefaultValues();
             maybeShowCompatWarningDialog();

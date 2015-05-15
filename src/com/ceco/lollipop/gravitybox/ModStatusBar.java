@@ -49,6 +49,7 @@ import android.database.ContentObserver;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.UserHandle;
@@ -411,6 +412,9 @@ public class ModStatusBar {
     }
 
     private static void prepareSignalCluster(ContainerType containerType) {
+        // TODO: SDK 22+
+        if (Build.VERSION.SDK_INT >= 22) return;
+
         try {
             Resources res = mContext.getResources();
             int scResId = res.getIdentifier("signal_cluster", "id", PACKAGE_NAME);
