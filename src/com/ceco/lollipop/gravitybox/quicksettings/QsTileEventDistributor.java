@@ -28,8 +28,6 @@ public class QsTileEventDistributor {
     private static final String TAG = "GB:QsTileEventDistributor";
     private static final boolean DEBUG = ModQsTiles.DEBUG;
 
-    private static final String CLASS_KG_TOUCH_DELEGATE = 
-            "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_STATUSBAR_WM = 
             "com.android.systemui.statusbar.phone.StatusBarWindowManager";
     private static final String CLASS_UNLOCK_METHOD_CACHE = 

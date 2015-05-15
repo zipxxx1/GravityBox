@@ -32,7 +32,6 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import android.app.ActivityOptions;
 import android.app.AlarmManager;
-import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -1337,44 +1336,28 @@ public class ModStatusBar {
             if (searchPanelView != null) {
                 XposedHelpers.callMethod(searchPanelView, "startAssistActivity");
             } else if (mContext != null) {
-                boolean isKeyguardShowing = false;
+                SearchManager sm = (SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE);
+                Intent intent = (Intent) XposedHelpers.callMethod(sm, "getAssistIntent", mContext, true, -2);
+                if (intent == null) return;
+
                 try {
-                    KeyguardManager km = (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
-                    isKeyguardShowing = km.isKeyguardLocked();
+                    Class<?> amnCls = XposedHelpers.findClass("android.app.ActivityManagerNative",
+                            mContext.getClassLoader());
+                    Object amn = XposedHelpers.callStaticMethod(amnCls, "getDefault");
+                    XposedHelpers.callMethod(amn, "dismissKeyguardOnNextActivity");
                 } catch (Throwable t) { }
 
-                if (isKeyguardShowing) {
-                    // Have keyguard show the bouncer and launch the activity if the user succeeds.
-                    Class<?> kgtDelCls = XposedHelpers.findClass(
-                            "com.android.systemui.statusbar.phone.KeyguardTouchDelegate",
-                            mContext.getClassLoader());
-                    Object kgtDel = XposedHelpers.callStaticMethod(kgtDelCls, "getInstance", mContext);
-                    XposedHelpers.callMethod(kgtDel, "showAssistant");
-                } else {
-                    // Otherwise, keyguard isn't showing so launch it from here.
-                    SearchManager sm = (SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE);
-                    Intent intent = (Intent) XposedHelpers.callMethod(sm, "getAssistIntent", mContext, true, -2);
-                    if (intent == null) return;
-
-                    try {
-                        Class<?> amnCls = XposedHelpers.findClass("android.app.ActivityManagerNative",
-                                mContext.getClassLoader());
-                        Object amn = XposedHelpers.callStaticMethod(amnCls, "getDefault");
-                        XposedHelpers.callMethod(amn, "dismissKeyguardOnNextActivity");
-                    } catch (Throwable t) { }
-
-                    try {
-                        Resources res = mContext.getResources();
-                        int animEnter = res.getIdentifier("search_launch_enter", "anim", PACKAGE_NAME);
-                        int animExit = res.getIdentifier("search_launch_exit", "anim", PACKAGE_NAME);
-                        ActivityOptions opts = ActivityOptions.makeCustomAnimation(mContext, animEnter, animExit);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        Constructor<?> uhConst = XposedHelpers.findConstructorExact(UserHandle.class, int.class);
-                        UserHandle uh = (UserHandle) uhConst.newInstance(-2);
-                        XposedHelpers.callMethod(mContext, "startActivityAsUser", intent, opts.toBundle(), uh);
-                    } catch (ActivityNotFoundException e) {
-                        log("Activity not found for " + intent.getAction());
-                    }
+                try {
+                    Resources res = mContext.getResources();
+                    int animEnter = res.getIdentifier("search_launch_enter", "anim", PACKAGE_NAME);
+                    int animExit = res.getIdentifier("search_launch_exit", "anim", PACKAGE_NAME);
+                    ActivityOptions opts = ActivityOptions.makeCustomAnimation(mContext, animEnter, animExit);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Constructor<?> uhConst = XposedHelpers.findConstructorExact(UserHandle.class, int.class);
+                    UserHandle uh = (UserHandle) uhConst.newInstance(-2);
+                    XposedHelpers.callMethod(mContext, "startActivityAsUser", intent, opts.toBundle(), uh);
+                } catch (ActivityNotFoundException e) {
+                    log("Activity not found for " + intent.getAction());
                 }
             }
         } catch (Throwable t) {

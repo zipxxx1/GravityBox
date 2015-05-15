@@ -43,6 +43,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.SystemClock;
@@ -692,18 +693,34 @@ public class ModLedControl {
         }
     }
 
+    private static boolean keyguardAllowsHeadsUp(Context context) {
+        boolean isShowingAndNotOccluded;
+        boolean isInputRestricted;
+        if (Build.VERSION.SDK_INT < 22) {
+            Object kgTouchDelegate = XposedHelpers.callStaticMethod(
+                    XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, context.getClassLoader()),
+                    "getInstance", context);
+            isShowingAndNotOccluded = (boolean) XposedHelpers.callMethod(
+                    kgTouchDelegate, "isShowingAndNotOccluded");
+            isInputRestricted = (boolean) XposedHelpers.callMethod(
+                    kgTouchDelegate, "isInputRestricted");
+        } else {
+            Object kgViewManager = XposedHelpers.getObjectField(mStatusBar, "mStatusBarKeyguardViewManager");
+            isShowingAndNotOccluded = ((boolean)XposedHelpers.callMethod(kgViewManager, "isShowing") &&
+                    !(boolean)XposedHelpers.callMethod(kgViewManager, "isOccluded"));
+            isInputRestricted = (boolean)XposedHelpers.callMethod(kgViewManager, "isInputRestricted");
+        }
+        return (!isShowingAndNotOccluded && !isInputRestricted);
+    }
+
     @SuppressWarnings("deprecation")
     private static boolean isHeadsUpAllowed(StatusBarNotification sbn, Context context) {
         if (context == null) return false;
 
-        Object kgTouchDelegate = XposedHelpers.callStaticMethod(
-                XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, context.getClassLoader()),
-                "getInstance", context);
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         Notification n = sbn.getNotification();
         return (pm.isScreenOn() &&
-                !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isShowingAndNotOccluded") &&
-                !(Boolean) XposedHelpers.callMethod(kgTouchDelegate, "isInputRestricted") &&
+                keyguardAllowsHeadsUp(context) &&
                 (!sbn.isOngoing() || n.fullScreenIntent != null || (n.extras.getInt("headsup", 0) != 0)));
     }
 
