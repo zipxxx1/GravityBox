@@ -124,8 +124,8 @@ public class ModLockscreen {
 
     public static String getUmcInsecureFieldName() {
         switch (Build.VERSION.SDK_INT) {
-            case 22: return "mCurrentlyInsecure";
-            default: return "mMethodInsecure";
+            case 21: return "mMethodInsecure";
+            default: return "mCurrentlyInsecure";
         }
     }
 
