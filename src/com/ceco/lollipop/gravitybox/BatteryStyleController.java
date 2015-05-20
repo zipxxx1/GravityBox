@@ -16,6 +16,7 @@
 package com.ceco.lollipop.gravitybox;
 
 import com.ceco.lollipop.gravitybox.ModStatusBar.ContainerType;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import android.content.Intent;
 import android.content.Context;
@@ -96,6 +97,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private void initLayout() {
         final String[] batteryPercentTextIds = new String[] { "battery_level", "percentage", "battery_text" };
         Resources res = mContext.getResources();
+        Resources gbRes = SysUiManagers.GbContext.getResources();
 
         // inject percent text if it doesn't exist
         for (String bptId : batteryPercentTextIds) {
@@ -114,7 +116,11 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             percentTextView.setLayoutParams(lParams);
-            percentTextView.setPadding(6, 0, 0, 0);
+            percentTextView.setPadding(
+                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
+                    0,
+                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_right),
+                    0);
             percentTextView.setTextColor(Color.WHITE);
             percentTextView.setVisibility(View.GONE);
             mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs);
@@ -128,7 +134,11 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lParams.gravity = Gravity.CENTER_VERTICAL;
         mCircleBattery.setLayoutParams(lParams);
-        mCircleBattery.setPadding(8, 0, 0, 0);
+        mCircleBattery.setPadding(
+                gbRes.getDimensionPixelSize(R.dimen.cirecle_battery_padding_left),
+                0,
+                gbRes.getDimensionPixelSize(R.dimen.cirecle_battery_padding_right),
+                0);
         mCircleBattery.setVisibility(View.GONE);
         mSystemIcons.addView(mCircleBattery);
         if (DEBUG) log("CmCircleBattery injected");
