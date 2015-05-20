@@ -390,7 +390,6 @@ public class ModStatusBar {
             Class<?> powerManagerClass = XposedHelpers.findClass(CLASS_POWER_MANAGER,
                     mContext.getClassLoader());
             Resources res = mContext.getResources();
-            mScreenWidth = (float) res.getDisplayMetrics().widthPixels;
             mMinBrightness = res.getInteger(res.getIdentifier(
                     "config_screenBrightnessSettingMinimum", "integer", "android"));
             mPeekHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 84,
@@ -1297,6 +1296,7 @@ public class ModStatusBar {
                     mInitialTouchX = x;
                     mInitialTouchY = y;
                     mJustPeeked = true;
+                    mScreenWidth = (float) mContext.getResources().getDisplayMetrics().widthPixels;
                     handler.removeCallbacks(mLongPressBrightnessChange);
                     handler.postDelayed(mLongPressBrightnessChange,
                             BRIGHTNESS_CONTROL_LONG_PRESS_TIMEOUT);
