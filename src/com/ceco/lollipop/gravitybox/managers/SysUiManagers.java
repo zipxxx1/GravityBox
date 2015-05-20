@@ -1,5 +1,6 @@
 package com.ceco.lollipop.gravitybox.managers;
 
+import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
 
@@ -18,6 +19,7 @@ public class SysUiManagers {
     public static StatusBarIconManager IconManager;
     public static StatusbarQuietHoursManager QuietHoursManager;
     public static AppLauncher AppLauncher;
+    public static Context GbContext;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -57,6 +59,14 @@ public class SysUiManagers {
             AppLauncher = new AppLauncher(context, prefs);
         } catch (Throwable t) {
             log("Error creating AppLauncher: ");
+            XposedBridge.log(t);
+        }
+
+        try {
+            GbContext = context.createPackageContext(GravityBox.PACKAGE_NAME,
+                    Context.CONTEXT_IGNORE_SECURITY);
+        } catch (Throwable t) {
+            log("Error creating GB context: ");
             XposedBridge.log(t);
         }
 
