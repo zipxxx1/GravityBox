@@ -1733,4 +1733,42 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="pref_lockscreen_shortcuts_title">Atalhos</string>
     <string name="pref_lockscreen_shortcuts_summary">Permite definir atalhos na tela de bloqueio</string>
 
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">Safe Launch</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Exige um toque duplo para iniciar os atalhos, 
+        prevenindo que os mesmos sejam iniciados acidentalmente quando, ex. o dispositivo está no bolso</string>
+
+    <!-- Lockscreen Smart unlock -->
+    <string name="pref_lockscreen_smart_unlock_title">Desbloqueio inteligente</string>
+    <string name="pref_lockscreen_smart_unlock_summary">Desbloqueia automaticamente quando a política atual do Smart Lock
+        detecta condições confiáveis</string>
+
+    <!--  WiFi trusted networks -->
+    <string name="wifi_trusted_info">Confiável para Smart Lock</string>
+
+    <!-- QS: Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_title">Configs. bloco de bateria</string>
+    <string name="pref_battery_tile_percentage_title">Exibir porcentagem</string>
+    <string name="pref_battery_tile_saver_indicate_title">Indicador de economia de bateria</string>
+    <string name="pref_battery_tile_saver_indicate_summary">Usa a mesma cor que as barras de sistema para indicar
+    que o modo de economia de bateria está ativo</string>
+    <string name="pref_battery_tile_temp_unit_title">Unidade de temperatura</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="pref_battery_tile_swap_actions_title">Inverter ações</string>
+    <string name="pref_battery_tile_swap_actions_summary">Inverte as acçoes de toque simples / toque longo</string>
+
+    <!-- Power: Disable battery saver indication -->
+    <string name="pref_battery_saver_indication_disable_title">Desativar indicação de economia de bateria</string>
+    <string name="pref_battery_saver_indication_disable_summary">Desativa a cor laranja das barras de sistema
+    quando o modo de economia de bateria está ativo</string>
+
+    <!-- Signal cluster: Disable exclamation marks -->
+    <string name="pref_signal_cluster_dem_title">Desativar exclamações</string>
+    <string name="pref_signal_cluster_dem_summary">Necessário reiniciar</string>
+
+    <!-- UNC: LED priority mode -->
+    <string name="pref_lc_led_priority_mode_title">Modo prioridade</string>
+    <string name="pref_lc_led_priority_mode_summary">Permite o LED durante os modos silencioso e prioridade</string>
+
 </resources>
