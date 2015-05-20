@@ -16,8 +16,8 @@
 <resources>
 
     <!-- Statusbar Battery -->
-    <dimen name="cirecle_battery_padding_left">0dp</dimen>
-    <dimen name="cirecle_battery_padding_right">0dp</dimen>
+    <dimen name="circle_battery_padding_left">0dp</dimen>
+    <dimen name="circle_battery_padding_right">0dp</dimen>
     <dimen name="percent_text_padding_left">0dp</dimen>
     <dimen name="percent_text_padding_right">4dp</dimen>
 

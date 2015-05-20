@@ -47,8 +47,8 @@
     <dimen name="caller_id_photo_height">320dp</dimen>
 
     <!-- Statusbar Battery -->
-    <dimen name="cirecle_battery_padding_left">2.67dp</dimen>
-    <dimen name="cirecle_battery_padding_right">0dp</dimen>
+    <dimen name="circle_battery_padding_left">2.67dp</dimen>
+    <dimen name="circle_battery_padding_right">0dp</dimen>
     <dimen name="percent_text_padding_left">2dp</dimen>
     <dimen name="percent_text_padding_right">0dp</dimen>
 
