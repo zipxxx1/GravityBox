@@ -109,13 +109,8 @@ public class AppLauncher implements BroadcastSubReceiver {
         mContext = context;
         mResources = mContext.getResources();
         mPrefs = prefs;
-        try {
-            mGbContext = mContext.createPackageContext(
-                    GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
-            mGbResources = mGbContext.getResources();
-        } catch (NameNotFoundException e) {
-            log("Error creating GB context: " + e.getMessage());
-        }
+        mGbContext = SysUiManagers.GbContext;
+        mGbResources = mGbContext.getResources();
         mHandler = new Handler();
         mPm = mContext.getPackageManager();
 

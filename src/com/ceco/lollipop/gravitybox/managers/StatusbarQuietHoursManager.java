@@ -119,8 +119,7 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
 
     public void setMode(QuietHours.Mode mode) {
         try {
-            Context gbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME,
-                    Context.CONTEXT_IGNORE_SECURITY);
+            Context gbContext = SysUiManagers.GbContext;
             Intent intent = new Intent(gbContext, GravityBoxService.class);
             intent.setAction(QuietHoursActivity.ACTION_SET_QUIET_HOURS_MODE);
             intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE, mode.toString());

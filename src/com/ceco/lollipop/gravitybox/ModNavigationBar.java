@@ -41,6 +41,7 @@ import android.widget.LinearLayout;
 import android.widget.ImageView.ScaleType;
 
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -335,8 +336,7 @@ public class ModNavigationBar {
 
                     mResources = context.getResources();
 
-                    mGbContext = context.createPackageContext(
-                            GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+                    mGbContext = SysUiManagers.GbContext;
                     final Resources res = mGbContext.getResources();
                     mNavbarColorsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_COLOR_ENABLE, false);
                     mKeyDefaultColor = res.getColor(R.color.navbar_key_color);

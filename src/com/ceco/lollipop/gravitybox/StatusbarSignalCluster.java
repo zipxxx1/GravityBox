@@ -225,12 +225,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         mView = view;
         mIconManager = SysUiManagers.IconManager;
         mResources = mView.getResources();
-        try {
-            mGbResources = mView.getContext().createPackageContext(
-                    GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY).getResources();
-        } catch (NameNotFoundException e) {
-            XposedBridge.log(e);
-        }
+        mGbResources = SysUiManagers.GbContext.getResources();
 
         mFldWifiGroup = resolveField("mWifiGroup", "mWifiViewGroup");
         mFldMobileGroup = resolveField("mMobileGroup", "mMobileViewGroup");

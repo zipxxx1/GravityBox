@@ -44,6 +44,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -159,7 +160,7 @@ public class ModClearAllRecents {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mRecentsActivity = (Activity) param.thisObject;
-                    mGbContext = mRecentsActivity.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+                    mGbContext = SysUiManagers.GbContext;
                     mHandler = new Handler();
                     mAm = (ActivityManager) mRecentsActivity.getSystemService(Context.ACTIVITY_SERVICE);
                     mRecentsView = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mRecentsView");

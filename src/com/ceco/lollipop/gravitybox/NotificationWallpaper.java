@@ -20,6 +20,7 @@ import java.io.File;
 
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarStateChangedListener;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -63,7 +64,7 @@ class NotificationWallpaper implements BroadcastSubReceiver,
         mContext = mNotificationPanelView.getContext();
         mBackupBg = mNotificationPanelView.getBackground();
 
-        Context gbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+        Context gbContext = SysUiManagers.GbContext;
         mNotifBgImagePathPortrait = gbContext.getFilesDir() + "/notifwallpaper";
         mNotifBgImagePathLandscape = gbContext.getFilesDir() + "/notifwallpaper_landscape";
 

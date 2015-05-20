@@ -89,8 +89,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     protected StatusBarIconManager(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
         mSystemUiRes = mContext.getResources();
-        Context gbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME,
-                Context.CONTEXT_IGNORE_SECURITY);
+        Context gbContext = SysUiManagers.GbContext;
         mGbResources = gbContext.getResources();
         mAllowMobileIconChange = new boolean[] { true, true };
 

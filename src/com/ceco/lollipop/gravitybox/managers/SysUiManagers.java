@@ -32,6 +32,14 @@ public class SysUiManagers {
             throw new IllegalArgumentException("Prefs cannot be null");
 
         try {
+            GbContext = context.createPackageContext(GravityBox.PACKAGE_NAME,
+                    Context.CONTEXT_IGNORE_SECURITY);
+        } catch (Throwable t) {
+            log("Error creating GB context: ");
+            XposedBridge.log(t);
+        }
+
+        try {
             BatteryInfoManager = new BatteryInfoManager(context, prefs);
         } catch (Throwable t) {
             log("Error creating BatteryInfoManager: ");
@@ -59,14 +67,6 @@ public class SysUiManagers {
             AppLauncher = new AppLauncher(context, prefs);
         } catch (Throwable t) {
             log("Error creating AppLauncher: ");
-            XposedBridge.log(t);
-        }
-
-        try {
-            GbContext = context.createPackageContext(GravityBox.PACKAGE_NAME,
-                    Context.CONTEXT_IGNORE_SECURITY);
-        } catch (Throwable t) {
-            log("Error creating GB context: ");
             XposedBridge.log(t);
         }
 

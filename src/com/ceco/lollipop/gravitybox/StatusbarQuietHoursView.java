@@ -56,12 +56,8 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
 
         mQuietHours = SysUiManagers.QuietHoursManager.getQuietHours();
 
-        try {
-            Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
-            setImageDrawable(gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours));
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
+        Context gbContext = SysUiManagers.GbContext;
+        setImageDrawable(gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours));
 
         updateVisibility();
     }

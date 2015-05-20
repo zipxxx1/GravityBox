@@ -33,6 +33,7 @@ import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.Utils;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -76,8 +77,7 @@ public abstract class BaseTile implements QsEventListener {
         mEventDistributor = eventDistributor;
 
         mContext = (Context) XposedHelpers.callMethod(mHost, "getContext");
-        mGbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME,
-                Context.CONTEXT_IGNORE_SECURITY);
+        mGbContext = SysUiManagers.GbContext;
 
         mEventDistributor.registerListener(this);
         initPreferences();
@@ -86,7 +86,7 @@ public abstract class BaseTile implements QsEventListener {
     protected void initPreferences() {
         List<String> enabledTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ENABLED,
-                        TileOrderActivity.getDefaultTileList(mContext)).split(",")));
+                        TileOrderActivity.getDefaultTileList(mGbContext)).split(",")));
         mEnabled = enabledTiles.contains(mKey);
 
         List<String> securedTiles = new ArrayList<String>(Arrays.asList(

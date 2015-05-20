@@ -18,6 +18,7 @@ package com.ceco.lollipop.gravitybox;
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -166,7 +167,7 @@ public class ModLockscreen {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    mGbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+                    mGbContext = SysUiManagers.GbContext;
 
                     prepareCustomBackground();
 

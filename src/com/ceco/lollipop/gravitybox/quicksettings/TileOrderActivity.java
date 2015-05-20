@@ -119,11 +119,8 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         }
     }
 
-    public static String getDefaultTileList(Context context) {
+    public static String getDefaultTileList(Context gbContext) {
         try {
-            Context gbContext = context.createPackageContext(
-                    GravityBox.PACKAGE_NAME,
-                    Context.CONTEXT_IGNORE_SECURITY);
             return Utils.join(gbContext.getResources().getStringArray(
                     R.array.qs_tile_default_values), ",");
         } catch (Throwable t) {

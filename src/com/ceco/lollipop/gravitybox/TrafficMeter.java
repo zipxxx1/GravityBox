@@ -33,6 +33,7 @@ import java.io.FileReader;
 import java.io.File;
 
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
 
@@ -64,16 +65,11 @@ public class TrafficMeter extends TrafficMeterAbstract {
     @Override
     protected void onInitialize(XSharedPreferences prefs) {
         mCanReadFromFile = canReadFromFile();
-        try {
-            Context gbContext = getContext().createPackageContext(
-                    GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
-            mB = gbContext.getString(R.string.byte_abbr);
-            mKB = gbContext.getString(R.string.kilobyte_abbr);
-            mMB = gbContext.getString(R.string.megabyte_abbr);
-            mS = gbContext.getString(R.string.second_abbr);
-        } catch (Exception e) {
-            log(e.getMessage());
-        }
+        Context gbContext = SysUiManagers.GbContext;
+        mB = gbContext.getString(R.string.byte_abbr);
+        mKB = gbContext.getString(R.string.kilobyte_abbr);
+        mMB = gbContext.getString(R.string.megabyte_abbr);
+        mS = gbContext.getString(R.string.second_abbr);
 
         try {
             int inactivityMode = Integer.valueOf(prefs.getString(
