@@ -33,6 +33,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
+import android.os.IBinder;
 import android.os.Vibrator;
 import android.renderscript.Allocation;
 import android.renderscript.Allocation.MipmapControl;
@@ -476,10 +477,20 @@ public class Utils {
 
     public static void performSoftReboot() {
         try {
-            SystemProp.set("ctl.restart", "surfaceflinger");
-            SystemProp.set("ctl.restart", "zygote");
+            Class<?> classSm = XposedHelpers.findClass("android.os.ServiceManager", null);
+            Class<?> classIpm = XposedHelpers.findClass("android.os.IPowerManager.Stub", null);
+            IBinder b = (IBinder) XposedHelpers.callStaticMethod(
+                    classSm, "getService", Context.POWER_SERVICE);
+            Object ipm = XposedHelpers.callStaticMethod(classIpm, "asInterface", b);
+            XposedHelpers.callMethod(ipm, "crash", "Hot reboot");
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            try {
+                SystemProp.set("ctl.restart", "surfaceflinger");
+                SystemProp.set("ctl.restart", "zygote");
+            } catch (Throwable t2) {
+                XposedBridge.log(t);
+                XposedBridge.log(t2);
+            }
         }
     }
 
