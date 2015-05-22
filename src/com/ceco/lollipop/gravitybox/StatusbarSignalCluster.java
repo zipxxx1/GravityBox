@@ -114,6 +114,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                         FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
                 lp.gravity = gravity;
                 activityView.setLayoutParams(lp);
+                activityView.setTag("gbDataActivity");
                 container.addView(activityView);
                 if (type == SignalType.WIFI) {
                     imageDataIn = mGbResources.getDrawable(R.drawable.stat_sys_wifi_in);
@@ -272,16 +273,35 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                             mWifiActivity = new SignalActivity(wifiGroup, SignalType.WIFI);
                             if (DEBUG) log("onAttachedToWindow: mWifiActivity created");
                         }
-    
-                        ViewGroup mobileGroup = (ViewGroup) mFldMobileGroup.get(param.thisObject);
-                        if (mobileGroup != null) {
-                            mMobileActivity = new SignalActivity(mobileGroup, SignalType.MOBILE,
-                                    Gravity.BOTTOM | Gravity.END);
-                            if (DEBUG) log("onAttachedToWindow: mMobileActivity created");
+
+                        if (Build.VERSION.SDK_INT < 22) {
+                            ViewGroup mobileGroup = (ViewGroup) mFldMobileGroup.get(param.thisObject);
+                            if (mobileGroup != null) {
+                                mMobileActivity = new SignalActivity(mobileGroup, SignalType.MOBILE,
+                                        Gravity.BOTTOM | Gravity.END);
+                                if (DEBUG) log("onAttachedToWindow: mMobileActivity created");
+                            }
                         }
                     }
                 });
-    
+
+                if (Build.VERSION.SDK_INT >= 22) {
+                    XposedHelpers.findAndHookMethod(mView.getClass(), "getOrInflateState", int.class, new XC_MethodHook() {
+                        @SuppressWarnings("unchecked")
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (mView != param.thisObject || mMobileActivity != null) return;
+
+                            List<Object> phoneStates = (List<Object>) XposedHelpers.getObjectField(
+                                    param.thisObject, "mPhoneStates");
+                            ViewGroup mobileGroup = (ViewGroup) XposedHelpers.getObjectField(
+                                phoneStates.get(0), "mMobileGroup");
+                            mMobileActivity = new SignalActivity(mobileGroup, SignalType.MOBILE,
+                                Gravity.BOTTOM | Gravity.END);
+                        }
+                    });
+                }
+
                 XposedHelpers.findAndHookMethod(mView.getClass(), "onDetachedFromWindow", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -497,6 +517,9 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 }
             } else if (child instanceof ImageView) {
                 ImageView iv = (ImageView) child;
+                if ("gbDataActivity".equals(iv.getTag())) {
+                    continue;
+                }
                 if (mIconManager.isColoringEnabled() && mIconManager.getSignalIconMode() !=
                         StatusBarIconManager.SI_MODE_DISABLED) {
                     int color = ((vg.getId() == mobileComboResId  && isSecondaryMobileGroup) ||

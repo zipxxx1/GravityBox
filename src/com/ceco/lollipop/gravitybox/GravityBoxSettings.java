@@ -1777,14 +1777,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefPieAppLongpress.setEntries(actionEntries);
             mPrefPieAppLongpress.setEntryValues(actionEntryValues);
 
-            // TODO: SDK 22+
-            if (Build.VERSION.SDK_INT >= 22) {
-                Preference p = null;
-                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY);
-                if (p != null) mPrefCatSignalCluster.removePreference(p);
-                mPrefCatSignalCluster.removePreference(mPrefSbDaColor);
-            }
-
             setDefaultValues();
             maybeShowCompatWarningDialog();
         }
