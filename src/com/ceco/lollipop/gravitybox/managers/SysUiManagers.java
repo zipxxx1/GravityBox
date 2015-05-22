@@ -46,14 +46,11 @@ public class SysUiManagers {
             XposedBridge.log(t);
         }
 
-        // TODO: SDK 22+
-        if (Build.VERSION.SDK_INT < 22) {
-            try {
-                IconManager = new StatusBarIconManager(context, prefs);
-            } catch (Throwable t) {
-                log("Error creating IconManager: ");
-                XposedBridge.log(t);
-            }
+        try {
+            IconManager = new StatusBarIconManager(context, prefs);
+        } catch (Throwable t) {
+            log("Error creating IconManager: ");
+            XposedBridge.log(t);
         }
 
         try {

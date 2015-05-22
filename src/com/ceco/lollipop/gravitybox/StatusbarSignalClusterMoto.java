@@ -30,17 +30,14 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
+public class StatusbarSignalClusterMoto extends StatusbarSignalCluster {
     protected static final String[] MOBILE_ICON_SPACERS = new String[] { "mSpacerView_Phone_1a",
             "mSpacerView_Phone_1b", "mSpacerView_Phone_2a", "mSpacerView_Phone_2b" };
 
@@ -50,7 +47,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected int mIconSpacingPx;
     protected Map<String, Integer> mIconSpacingDef;
 
-    public StatusbarSignalClusterMsim(ContainerType containerType, LinearLayout view) {
+    public StatusbarSignalClusterMoto(ContainerType containerType, LinearLayout view) {
         super(containerType, view);
     }
 
@@ -155,24 +152,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
 
     @Override
     protected void apply(int simSlot) {
-        try {
-            boolean doApply = true;
-            if (mFldWifiGroup != null) {
-                doApply = mFldWifiGroup.get(mView) != null;
-            }
-            if (doApply) {
-                if (mIconManager != null && mIconManager.isColoringEnabled()) {
-                    updateWiFiIcon();
-                    if (!XposedHelpers.getBooleanField(mView, "mIsAirplaneModeEnabled")) {
-                        updateMobileIcon(simSlot);
-                    }
-                    if (DEBUG) log("Signal icon colors updated");
-                }
-                updateAirplaneModeIcon();
-            }
-        } catch (Throwable t) {
-            logAndMute("apply", t);
-        }
+        super.apply();
 
         if (mHideSimLabels) {
             hideSimLabel(simSlot);
@@ -196,40 +176,6 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
             } catch (Throwable t) {
                 logAndMute("invokeApply", t);
             }
-        }
-    }
-
-    @Override
-    protected void updateMobileIcon(int simSlot) {
-        try {
-            boolean mobileVisible = ((boolean[])XposedHelpers.getObjectField(mView, "mMobileVisible"))[simSlot];
-            if (DEBUG) log("Mobile visible for slot " + simSlot + ": " + mobileVisible);
-            if (mobileVisible && mIconManager != null &&
-                    mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
-                ImageView mobile = (ImageView) ((ImageView[])XposedHelpers.getObjectField(
-                        mView, "mMobileSignalView"))[simSlot];
-                if (mobile != null) {
-                    int resId = ((int[])XposedHelpers.getObjectField(mView, "mMobileSignalIconId"))[simSlot];
-                    Drawable d = mIconManager.getMobileIcon(simSlot, resId);
-                    if (d != null) mobile.setImageDrawable(d);
-                }
-                if (mIconManager.isMobileIconChangeAllowed()) {
-                    ImageView mobileType = (ImageView) ((ImageView[])XposedHelpers.getObjectField(
-                            mView, "mMobileTypeView"))[simSlot];
-                    if (mobileType != null) {
-                        try {
-                            int resId = ((int[])XposedHelpers.getObjectField(mView, "mMobileTypeIconId"))[simSlot];
-                            Drawable d = mResources.getDrawable(resId).mutate();
-                            d = mIconManager.applyColorFilter(simSlot, d);
-                            mobileType.setImageDrawable(d);
-                        } catch (Resources.NotFoundException e) { 
-                            mobileType.setImageDrawable(null);
-                        }
-                    }
-                }
-            }
-        } catch (Throwable t) {
-            logAndMute("updateMobileIcon", t);
         }
     }
 
@@ -259,23 +205,6 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
             } catch (Throwable t) {
                 if (DEBUG) XposedBridge.log(t);
             }
-        }
-    }
-
-    @Override
-    protected void updateWiFiIcon() {
-        try {
-            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") && mIconManager != null &&
-                    mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
-                ImageView wifiIcon = (ImageView) XposedHelpers.getObjectField(mView, "mWifiSignalView");
-                if (wifiIcon != null) {
-                    int resId = XposedHelpers.getIntField(mView, "mWifiSignalIconId");
-                    Drawable d = mIconManager.getWifiIcon(resId);
-                    if (d != null) wifiIcon.setImageDrawable(d);
-                }
-            }
-        } catch (Throwable t) {
-            logAndMute("updateWiFiIcon", t);
         }
     }
 

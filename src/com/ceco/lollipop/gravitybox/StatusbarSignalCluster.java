@@ -36,10 +36,10 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.XModuleResources;
 import android.content.res.XResources;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.telephony.TelephonyManager;
@@ -69,10 +69,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected Resources mGbResources;
     protected Field mFldWifiGroup;
     private Field mFldMobileGroup;
-    private Field mFldMobileView;
-    private Field mFldMobileTypeView;
-    private Field mFldWifiView;
-    private Field mFldAirplaneView;
     private List<String> mErrorsLogged = new ArrayList<String>();
 
     // Data activity
@@ -209,10 +205,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     public static StatusbarSignalCluster create(ContainerType containerType,
             LinearLayout view, XSharedPreferences prefs) {
         sPrefs = prefs;
-        if (PhoneWrapper.hasMsimSupport()) {
-            return new StatusbarSignalClusterMsim(containerType, view);
-        } else if (Utils.isMotoXtDevice()) {
-            return new StatusbarSignalClusterMsim(containerType, view);
+        if (Utils.isMotoXtDevice()) {
+            return new StatusbarSignalClusterMoto(containerType, view);
         } else if (Utils.isMtkDevice()) {
             return new StatusbarSignalClusterMtk(containerType, view);
         } else {
@@ -229,10 +223,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
         mFldWifiGroup = resolveField("mWifiGroup", "mWifiViewGroup");
         mFldMobileGroup = resolveField("mMobileGroup", "mMobileViewGroup");
-        mFldMobileView = resolveField("mMobile", "mMobileStrengthView");
-        mFldMobileTypeView = resolveField("mMobileType", "mMobileTypeView");
-        mFldWifiView = resolveField("mWifi", "mWifiStrengthView");
-        mFldAirplaneView = resolveField("mAirplane", "mAirplaneView");
 
         initPreferences();
         createHooks();
@@ -435,84 +425,55 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     protected void apply(int simSlot) {
         try {
-            boolean doApply = true;
-            if (mFldWifiGroup != null) {
-                doApply = mFldWifiGroup.get(mView) != null;
-            }
-            if (doApply) {
-                if (mIconManager != null && mIconManager.isColoringEnabled()) {
-                    updateWiFiIcon();
-                    if (!XposedHelpers.getBooleanField(mView, "mIsAirplaneMode")) {
-                        updateMobileIcon(simSlot);
-                    }
-                    if (DEBUG) log("Signal icon colors updated");
-                }
-                updateAirplaneModeIcon();
-            }
+            updateIconColorRecursive(mView, true);
         } catch (Throwable t) {
             logAndMute("apply", t);
         }
     }
 
-    protected void updateWiFiIcon() {
-        try {
-            if (XposedHelpers.getBooleanField(mView, "mWifiVisible") && mIconManager != null &&
-                    mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
-                ImageView wifiIcon = (ImageView) mFldWifiView.get(mView);
-                if (wifiIcon != null) {
-                    int resId = XposedHelpers.getIntField(mView, "mWifiStrengthId");
-                    Drawable d = mIconManager.getWifiIcon(resId);
-                    if (d != null) wifiIcon.setImageDrawable(d);
-                }
-            }
-        } catch (Throwable t) {
-            logAndMute("updateWiFiIcon", t);
-        }
-    }
+    protected boolean isSecondaryMobileGroup;
+    protected int mobileComboResId = -1;
+    protected int mobileCombo2ResId = -1;
+    protected void updateIconColorRecursive(ViewGroup vg, boolean init) {
+        if (mIconManager == null) return;
 
-    protected void updateMobileIcon(int simSlot) {
-        try {
-            if (XposedHelpers.getBooleanField(mView, "mMobileVisible") && mIconManager != null &&
-                    mIconManager.getSignalIconMode() != StatusBarIconManager.SI_MODE_DISABLED) {
-                ImageView mobile = (ImageView) mFldMobileView.get(mView);
-                if (mobile != null) {
-                    int resId = XposedHelpers.getIntField(mView, "mMobileStrengthId");
-                    Drawable d = mIconManager.getMobileIcon(resId);
-                    if (d != null) mobile.setImageDrawable(d);
-                }
-                if (mIconManager.isMobileIconChangeAllowed()) {
-                    ImageView mobileType = (ImageView) mFldMobileTypeView.get(mView);
-                    if (mobileType != null) {
-                        try {
-                            int resId = XposedHelpers.getIntField(mView, "mMobileTypeId");
-                            Drawable d = mResources.getDrawable(resId).mutate();
-                            d = mIconManager.applyColorFilter(d);
-                            mobileType.setImageDrawable(d);
-                        } catch (Resources.NotFoundException e) { 
-                            mobileType.setImageDrawable(null);
-                        }
-                    }
-                }
+        if (init) {
+            if (DEBUG) log("updateIconColorRecursive for " + mContainerType);
+            isSecondaryMobileGroup = false;
+            if (mobileComboResId == -1) {
+                mobileComboResId = mResources.getIdentifier("mobile_combo", "id",
+                        ModStatusBar.PACKAGE_NAME);
             }
-        } catch (Throwable t) {
-            logAndMute("updateMobileIcon", t);
+            // Moto
+            if (mobileCombo2ResId == -1) {
+                mobileCombo2ResId = mResources.getIdentifier("mobile_combo_2", "id",
+                        ModStatusBar.PACKAGE_NAME);
+            }
         }
-    }
 
-    protected void updateAirplaneModeIcon() {
-        try {
-            ImageView airplaneModeIcon = (ImageView) mFldAirplaneView.get(mView);
-            if (airplaneModeIcon != null) {
-                Drawable d = airplaneModeIcon.getDrawable();
-                if (mIconManager != null && mIconManager.isColoringEnabled()) {
-                    d = mIconManager.applyColorFilter(d);
-                } else if (d != null) {
-                    d.setColorFilter(null);
+        int count = vg.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View child = vg.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                updateIconColorRecursive((ViewGroup) child, false);
+                if (child.getId() == mobileComboResId) {
+                    // for Multi SIM:
+                    // we just passed the first mobile combo so treat any other 
+                    // that comes next as secondary to make sure to apply secondary icon color
+                    isSecondaryMobileGroup = true;
                 }
-                airplaneModeIcon.setImageDrawable(d);
+            } else if (child instanceof ImageView) {
+                ImageView iv = (ImageView) child;
+                if (mIconManager.isColoringEnabled() && mIconManager.getSignalIconMode() !=
+                        StatusBarIconManager.SI_MODE_DISABLED) {
+                    int color = ((vg.getId() == mobileComboResId  && isSecondaryMobileGroup) ||
+                                    vg.getId() == mobileCombo2ResId) ?
+                            mIconManager.getIconColor(1) : mIconManager.getIconColor(0);
+                    iv.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+                } else {
+                    iv.clearColorFilter();
+                }
             }
-        } catch (Throwable t) {
-            logAndMute("updateAirplaneModeIcon", t);
         }
     }
 

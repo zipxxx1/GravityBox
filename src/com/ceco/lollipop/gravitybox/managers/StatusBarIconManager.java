@@ -23,10 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
-import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
-import com.ceco.lollipop.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -61,7 +59,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     private Resources mSystemUiRes;
     private Map<String, Integer[]> mBasicIconIds;
     private Map<String, SoftReference<Drawable>> mIconCache;
-    private boolean[] mAllowMobileIconChange;
     private ColorInfo mColorInfo;
     private List<IconManagerListener> mListeners;
 
@@ -91,7 +88,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mSystemUiRes = mContext.getResources();
         Context gbContext = SysUiManagers.GbContext;
         mGbResources = gbContext.getResources();
-        mAllowMobileIconChange = new boolean[] { true, true };
 
         Map<String, Integer[]> basicIconMap = new HashMap<String, Integer[]>();
         basicIconMap.put("stat_sys_data_bluetooth", new Integer[] 
@@ -235,7 +231,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     }
 
     public void setSignalIconMode(int mode) {
-        // always force stock icon mode for Moto devices
         if (mColorInfo.signalIconMode != mode) {
             mColorInfo.signalIconMode = mode;
             clearCache();
@@ -349,74 +344,6 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     private void setCachedDrawable(String key, Drawable d) {
         mIconCache.put(key, new SoftReference<Drawable>(d));
         if (DEBUG) log("setCachedDrawable('" + key + "') - storing to cache");
-    }
-
-    public Drawable getWifiIcon(int resId) {
-        Drawable cd;
-        String key;
-
-        try {
-            key = mSystemUiRes.getResourceEntryName(resId);
-        } catch (Resources.NotFoundException nfe) {
-            return null;
-        }
-
-        switch(mColorInfo.signalIconMode) {
-            case SI_MODE_STOCK:
-                cd = getCachedDrawable(key);
-                if (cd != null) return cd;
-                Drawable d = mSystemUiRes.getDrawable(resId).mutate();
-                d = applyColorFilter(d);
-                setCachedDrawable(key, d);
-                return d;
-
-            case SI_MODE_DISABLED:
-            default:
-                return null;
-        }
-    }
-
-    public Drawable getMobileIcon(int index, int resId) {
-        Drawable cd;
-        String key;
-
-        try {
-            key = mSystemUiRes.getResourceEntryName(resId);
-        } catch (Resources.NotFoundException nfe) {
-            return null;
-        }
-
-        mAllowMobileIconChange[index] = !Utils.isMtkDevice() ||
-                key.contains("blue") || key.contains("orange");
-        if (!mAllowMobileIconChange[index]) {
-            return null;
-        }
-
-        switch(mColorInfo.signalIconMode) {
-            case SI_MODE_STOCK:
-                cd = getCachedDrawable(key+"_"+index);
-                if (cd != null) return cd;
-                Drawable d = mSystemUiRes.getDrawable(resId).mutate();
-                d = applyColorFilter(index, d);
-                setCachedDrawable(key+"_"+index, d);
-                return d;
-
-            case SI_MODE_DISABLED:
-            default:
-                return null;
-        }
-    }
-
-    public Drawable getMobileIcon(int resId) {
-        return getMobileIcon(0, resId);
-    }
-
-    public boolean isMobileIconChangeAllowed(int index) {
-        return mAllowMobileIconChange[index];
-    }
-
-    public boolean isMobileIconChangeAllowed() {
-        return isMobileIconChangeAllowed(0);
     }
 
     public Drawable getBasicIcon(int resId) {
