@@ -15,6 +15,7 @@
 
 package com.ceco.lollipop.gravitybox;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -43,6 +44,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.telephony.TelephonyManager;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -174,9 +176,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
         XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
 
-        // TODO: SDK 22+
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                Build.VERSION.SDK_INT < 22 &&
                 !Utils.isMotoXtDevice() && !Utils.isMtkDevice()) {
 
             sQsHpResId = XResources.getFakeResId(modRes, R.drawable.ic_qs_signal_hp);
@@ -300,36 +300,69 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
                 !Utils.isMotoXtDevice()) {
             try {
-                final Class<?> networkCtrlClass = XposedHelpers.findClass(
-                        "com.android.systemui.statusbar.policy.NetworkControllerImpl", 
-                        mView.getContext().getClassLoader());
-                XposedHelpers.findAndHookMethod(networkCtrlClass, "updateDataNetType", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        if (DEBUG) log("NetworkController: updateDataNetType");
-                        if (!(XposedHelpers.getBooleanField(param.thisObject, "mIsWimaxEnabled") &&
-                                XposedHelpers.getBooleanField(param.thisObject, "mWimaxConnected")) &&
-                                XposedHelpers.getIntField(param.thisObject, "mDataNetType") ==
-                                    TelephonyManager.NETWORK_TYPE_HSPAP) {
-                            int inetCondition = XposedHelpers.getIntField(param.thisObject, "mInetCondition");
-                            XposedHelpers.setObjectField(param.thisObject, "mDataIconList", DATA_HP[inetCondition]);
-                            boolean isCdmaEri = (Boolean) XposedHelpers.callMethod(param.thisObject, "isCdma") &&
-                                    (Boolean) XposedHelpers.callMethod(param.thisObject, "isCdmaEri");
-                            boolean isRoaming = ((TelephonyManager) XposedHelpers.getObjectField(
-                                    param.thisObject, "mPhone")).isNetworkRoaming();
-                            if (!isCdmaEri && !isRoaming) {
-                                XposedHelpers.setIntField(param.thisObject, "mDataTypeIconId", sSbHpResId);
-                                XposedHelpers.setIntField(param.thisObject, "mQSDataTypeIconId",
-                                        QS_DATA_HP[inetCondition]);
-                                if (DEBUG) {
-                                    log("H+ inet condition: " + inetCondition);
-                                    log("H+ data type: " + sSbHpResId);
-                                    log("H+ QS data type: " + QS_DATA_HP[inetCondition]);
+                if (Build.VERSION.SDK_INT >= 22) {
+                    final Class<?> mobileNetworkCtrlClass = XposedHelpers.findClass(
+                            "com.android.systemui.statusbar.policy.NetworkControllerImpl.MobileSignalController", 
+                            mView.getContext().getClassLoader());
+                    XposedHelpers.findAndHookMethod(mobileNetworkCtrlClass, "mapIconSets", new XC_MethodHook() {
+                        @SuppressWarnings("unchecked")
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            SparseArray<Object> iconSet = (SparseArray<Object>) XposedHelpers.getObjectField(
+                                    param.thisObject, "mNetworkToIconLookup");
+                            Object hGroup = iconSet.get(TelephonyManager.NETWORK_TYPE_HSPAP);
+                            Constructor<?> c = hGroup.getClass().getConstructor(
+                                    String.class, int[][].class, int[][].class, int[].class,
+                                    int.class, int.class, int.class, int.class, 
+                                    int.class, int.class, int.class, boolean.class, int[].class);
+                            Object hPlusGroup = c.newInstance("HP",
+                                   XposedHelpers.getObjectField(hGroup, "mSbIcons"),
+                                   XposedHelpers.getObjectField(hGroup, "mQsIcons"),
+                                   XposedHelpers.getObjectField(hGroup, "mContentDesc"),
+                                   XposedHelpers.getIntField(hGroup, "mSbNullState"),
+                                   XposedHelpers.getIntField(hGroup, "mQsNullState"),
+                                   XposedHelpers.getIntField(hGroup, "mSbDiscState"),
+                                   XposedHelpers.getIntField(hGroup, "mQsDiscState"),
+                                   XposedHelpers.getIntField(hGroup, "mDiscContentDesc"),
+                                   XposedHelpers.getIntField(hGroup, "mDataContentDescription"),
+                                   sSbHpResId,
+                                   XposedHelpers.getBooleanField(hGroup, "mIsWide"),
+                                   new int[] { sQsHpResId, sQsHpResId });
+                            iconSet.put(TelephonyManager.NETWORK_TYPE_HSPAP, hPlusGroup);
+                        }
+                    });
+                } else {
+                    final Class<?> networkCtrlClass = XposedHelpers.findClass(
+                            "com.android.systemui.statusbar.policy.NetworkControllerImpl", 
+                            mView.getContext().getClassLoader());
+                    XposedHelpers.findAndHookMethod(networkCtrlClass, "updateDataNetType", new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (DEBUG) log("NetworkController: updateDataNetType");
+                            if (!(XposedHelpers.getBooleanField(param.thisObject, "mIsWimaxEnabled") &&
+                                    XposedHelpers.getBooleanField(param.thisObject, "mWimaxConnected")) &&
+                                    XposedHelpers.getIntField(param.thisObject, "mDataNetType") ==
+                                        TelephonyManager.NETWORK_TYPE_HSPAP) {
+                                int inetCondition = XposedHelpers.getIntField(param.thisObject, "mInetCondition");
+                                XposedHelpers.setObjectField(param.thisObject, "mDataIconList", DATA_HP[inetCondition]);
+                                boolean isCdmaEri = (Boolean) XposedHelpers.callMethod(param.thisObject, "isCdma") &&
+                                        (Boolean) XposedHelpers.callMethod(param.thisObject, "isCdmaEri");
+                                boolean isRoaming = ((TelephonyManager) XposedHelpers.getObjectField(
+                                        param.thisObject, "mPhone")).isNetworkRoaming();
+                                if (!isCdmaEri && !isRoaming) {
+                                    XposedHelpers.setIntField(param.thisObject, "mDataTypeIconId", sSbHpResId);
+                                    XposedHelpers.setIntField(param.thisObject, "mQSDataTypeIconId",
+                                            QS_DATA_HP[inetCondition]);
+                                    if (DEBUG) {
+                                        log("H+ inet condition: " + inetCondition);
+                                        log("H+ data type: " + sSbHpResId);
+                                        log("H+ QS data type: " + QS_DATA_HP[inetCondition]);
+                                    }
                                 }
                             }
                         }
-                    }
-                });
+                    });
+                }
             } catch (Throwable t) {
                 logAndMute("updateDataNetType", t);
             }

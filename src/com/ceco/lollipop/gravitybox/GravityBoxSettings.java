@@ -1783,11 +1783,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY);
                 if (p != null) mPrefCatSignalCluster.removePreference(p);
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColor);
-                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
-                if (p != null) mPrefCatSignalCluster.removePreference(p);
-                p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS);
-                if (p != null) mPrefCatSignalCluster.removePreference(p);
-                mPrefCatSignalCluster.removePreference(mPrefScNarrow);
             }
 
             setDefaultValues();
