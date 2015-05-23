@@ -432,9 +432,11 @@ public class ModStatusBar {
                 LinearLayout view = (LinearLayout) container.findViewById(scResId);
                 if (view != null) {
                     StatusbarSignalCluster sc = StatusbarSignalCluster.create(containerType, view, mPrefs);
-                    sc.setNetworkController(XposedHelpers.getObjectField(
-                            mPhoneStatusBar, "mNetworkController"));
                     mBroadcastSubReceivers.add(sc);
+                    if (sc.supportsDataActivityIndicators()) {
+                        sc.setNetworkController(XposedHelpers.getObjectField(
+                                mPhoneStatusBar, "mNetworkController"));
+                    }
                     if (DEBUG) log("SignalClusterView constructed for: " + containerType);
                 }
             } else if (DEBUG) {

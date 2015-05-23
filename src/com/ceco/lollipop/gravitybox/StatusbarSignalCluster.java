@@ -450,6 +450,10 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
     }
 
+    protected boolean supportsDataActivityIndicators() {
+        return mDataActivityEnabled;
+    }
+
     protected void setNetworkController(Object networkController) {
         final ClassLoader classLoader = mView.getClass().getClassLoader();
         final Class<?> networkCtrlCbClass = XposedHelpers.findClass(
