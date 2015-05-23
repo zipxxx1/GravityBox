@@ -754,8 +754,11 @@ public class ModNavigationBar {
                             .getSystemService(Context.POWER_SERVICE);
                     }
                     if (mPm != null && !mPm.isInteractive()) {
-                        if (DEBUG) log("key button sendEvent: ignoring since not interactive");
-                        param.setResult(null);
+                        int keyCode = XposedHelpers.getIntField(param.thisObject, "mCode");
+                        if (keyCode != KeyEvent.KEYCODE_HOME) {
+                            if (DEBUG) log("key button sendEvent: ignoring since not interactive");
+                            param.setResult(null);
+                        }
                     }
                 }
             });
