@@ -150,10 +150,7 @@ public class StatusbarSignalClusterMoto extends StatusbarSignalCluster {
         if (DEBUG) log("setNetworkController: callback registered");
     }
 
-    @Override
     protected void apply(int simSlot) {
-        super.apply();
-
         if (mHideSimLabels) {
             hideSimLabel(simSlot);
         }
@@ -162,19 +159,6 @@ public class StatusbarSignalClusterMoto extends StatusbarSignalCluster {
             mIconSpacingDef = new HashMap<String, Integer>(MOBILE_ICON_SPACERS.length);
             if (mNarrowIcons) {
                 updateMobileIconSpacing();
-            }
-        }
-    }
-
-    @Override
-    protected void update() {
-        if (mView != null) {
-            try {
-                for (int i=0; i < PhoneWrapper.getPhoneCount(); i++) {
-                    XposedHelpers.callMethod(mView, "apply", i);
-                }
-            } catch (Throwable t) {
-                logAndMute("invokeApply", t);
             }
         }
     }

@@ -45,16 +45,6 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
                 GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
     }
 
-    @Override
-    protected void apply(int simSlot) {
-        try {
-            super.apply();
-            updateRoamingIndicator();
-        } catch (Throwable t) {
-            logAndMute("apply", t);
-        }
-    }
-
     protected void updateRoamingIndicator() {
         try {
             if (mRoamingIndicatorsDisabled) {

@@ -248,17 +248,28 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     protected void createHooks() {
-        try {
-            XposedHelpers.findAndHookMethod(mView.getClass(), "apply", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mView != param.thisObject) return;
+        if (Build.VERSION.SDK_INT >= 22) {
+            try {
+                XposedHelpers.findAndHookMethod(mView.getClass(), "getOrInflateState", int.class, new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mView != param.thisObject) return;
 
-                    apply();
-                }
-            });
-        } catch (Throwable t) {
-            log("Error hooking apply() method: " + t.getMessage());
+                        if (mDataActivityEnabled && mMobileActivity == null) {
+                            List<Object> phoneStates = (List<Object>) XposedHelpers.getObjectField(
+                                    param.thisObject, "mPhoneStates");
+                            ViewGroup mobileGroup = (ViewGroup) XposedHelpers.getObjectField(
+                                phoneStates.get(0), "mMobileGroup");
+                            mMobileActivity = new SignalActivity(mobileGroup, SignalType.MOBILE,
+                                Gravity.BOTTOM | Gravity.END);
+                        }
+                        update();
+                    }
+                });
+            } catch (Throwable t) {
+                log("Error hooking getOrInflateState: " + t.getMessage());
+            }
         }
 
         if (mDataActivityEnabled) {
@@ -284,23 +295,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                         }
                     }
                 });
-
-                if (Build.VERSION.SDK_INT >= 22) {
-                    XposedHelpers.findAndHookMethod(mView.getClass(), "getOrInflateState", int.class, new XC_MethodHook() {
-                        @SuppressWarnings("unchecked")
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            if (mView != param.thisObject || mMobileActivity != null) return;
-
-                            List<Object> phoneStates = (List<Object>) XposedHelpers.getObjectField(
-                                    param.thisObject, "mPhoneStates");
-                            ViewGroup mobileGroup = (ViewGroup) XposedHelpers.getObjectField(
-                                phoneStates.get(0), "mMobileGroup");
-                            mMobileActivity = new SignalActivity(mobileGroup, SignalType.MOBILE,
-                                Gravity.BOTTOM | Gravity.END);
-                        }
-                    });
-                }
 
                 XposedHelpers.findAndHookMethod(mView.getClass(), "onDetachedFromWindow", new XC_MethodHook() {
                     @Override
@@ -469,56 +463,29 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected void update() {
         if (mView != null) {
             try {
-                XposedHelpers.callMethod(mView, "apply");
+                updateIconColorRecursive(mView);
             } catch (Throwable t) {
-                logAndMute("invokeApply", t);
+                logAndMute("update", t);
             }
-        }
-    }
-
-    protected void apply() {
-        apply(0);
-    }
-
-    protected void apply(int simSlot) {
-        try {
-            updateIconColorRecursive(mView, true);
-        } catch (Throwable t) {
-            logAndMute("apply", t);
         }
     }
 
     protected boolean isSecondaryMobileGroup;
-    protected int mobileComboResId = -1;
-    protected int mobileCombo2ResId = -1;
-    protected void updateIconColorRecursive(ViewGroup vg, boolean init) {
+    protected void updateIconColorRecursive(ViewGroup vg) {
         if (mIconManager == null) return;
-
-        if (init) {
-            if (DEBUG) log("updateIconColorRecursive for " + mContainerType);
-            isSecondaryMobileGroup = false;
-            if (mobileComboResId == -1) {
-                mobileComboResId = mResources.getIdentifier("mobile_combo", "id",
-                        ModStatusBar.PACKAGE_NAME);
-            }
-            // Moto
-            if (mobileCombo2ResId == -1) {
-                mobileCombo2ResId = mResources.getIdentifier("mobile_combo_2", "id",
-                        ModStatusBar.PACKAGE_NAME);
-            }
-        }
 
         int count = vg.getChildCount();
         for (int i = 0; i < count; i++) {
             View child = vg.getChildAt(i);
             if (child instanceof ViewGroup) {
-                updateIconColorRecursive((ViewGroup) child, false);
-                if (child.getId() == mobileComboResId) {
-                    // for Multi SIM:
-                    // we just passed the first mobile combo so treat any other 
-                    // that comes next as secondary to make sure to apply secondary icon color
-                    isSecondaryMobileGroup = true;
+                isSecondaryMobileGroup = false;
+                if (child.getId() != View.NO_ID) { 
+                    String resName = mResources.getResourceEntryName(child.getId());
+                    if (resName.startsWith("mobile_combo")) {
+                        isSecondaryMobileGroup = !resName.equals("mobile_combo");
+                    }
                 }
+                updateIconColorRecursive((ViewGroup) child);
             } else if (child instanceof ImageView) {
                 ImageView iv = (ImageView) child;
                 if ("gbDataActivity".equals(iv.getTag())) {
@@ -526,8 +493,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 }
                 if (mIconManager.isColoringEnabled() && mIconManager.getSignalIconMode() !=
                         StatusBarIconManager.SI_MODE_DISABLED) {
-                    int color = ((vg.getId() == mobileComboResId  && isSecondaryMobileGroup) ||
-                                    vg.getId() == mobileCombo2ResId) ?
+                    int color = isSecondaryMobileGroup ?
                             mIconManager.getIconColor(1) : mIconManager.getIconColor(0);
                     iv.setColorFilter(color, PorterDuff.Mode.SRC_IN);
                 } else {
