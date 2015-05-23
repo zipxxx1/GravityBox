@@ -463,6 +463,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected void update() {
         if (mView != null) {
             try {
+                isSecondaryMobileGroup = false;
                 updateIconColorRecursive(mView);
             } catch (Throwable t) {
                 logAndMute("update", t);
@@ -478,7 +479,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         for (int i = 0; i < count; i++) {
             View child = vg.getChildAt(i);
             if (child instanceof ViewGroup) {
-                isSecondaryMobileGroup = false;
                 if (child.getId() != View.NO_ID) { 
                     String resName = mResources.getResourceEntryName(child.getId());
                     if (resName.startsWith("mobile_combo")) {
