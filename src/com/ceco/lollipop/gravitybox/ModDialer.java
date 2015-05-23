@@ -269,8 +269,10 @@ public class ModDialer {
                     if (param.args[1] != null) {
                         final Fragment frag = (Fragment) param.thisObject;
                         final Resources res = frag.getResources();
-                        Drawable picUnknown = res.getDrawable(res.getIdentifier("img_no_image", "drawable",
-                                        res.getResourcePackageName(frag.getId())));
+                        String resName = Build.VERSION.SDK_INT >= 22 ?
+                                "img_no_image_automirrored" : "img_no_image";
+                        Drawable picUnknown = res.getDrawable(res.getIdentifier(resName, "drawable",
+                                        res.getResourcePackageName(frag.getId())), null);
                         shouldShowUnknownPhoto = ((Drawable)param.args[1]).getConstantState().equals(
                                                     picUnknown.getConstantState());
                     }
@@ -284,9 +286,8 @@ public class ModDialer {
                         if (f.exists() && f.canRead()) {
                             Bitmap b = BitmapFactory.decodeFile(path);
                             if (b != null) {
-                                iv.setImageDrawable(new BitmapDrawable(context.getResources(), b));
+                                param.args[1] = new BitmapDrawable(context.getResources(), b);
                                 if (DEBUG) log("Unknow caller photo set");
-                                param.setResult(null);
                             }
                         }
                     }
