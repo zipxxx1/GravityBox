@@ -106,10 +106,10 @@ public class ScreenRecordingService extends Service {
                 // choose screenrecord binary and prepare command
                 List<String> command = new ArrayList<String>();
                 command.add(getBinaryPath());
-                if (!mUseStockBinary && 
-                        mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENRECORD_MICROPHONE, true)) {
-                    command.add("--microphone");
-                }
+//                if (!mUseStockBinary && 
+//                        mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENRECORD_MICROPHONE, true)) {
+//                    command.add("--microphone");
+//                }
                 String prefVal = mPrefs.getString(GravityBoxSettings.PREF_KEY_SCREENRECORD_SIZE, "default");
                 if (!prefVal.equals("default")) {
                     command.add("--size"); command.add(prefVal);

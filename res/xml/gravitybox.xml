@@ -2123,8 +2123,7 @@
             android:title="@string/pref_screenrecord_use_stock_title"
             android:summary="@string/pref_screenrecord_use_stock_summary"
             android:defaultValue="true"
-            android:disableDependentsState="true"
-            android:enabled="false" />
+            android:disableDependentsState="true" />
 
         <ListPreference
             android:key="pref_screenrecord_size"
@@ -2147,7 +2146,7 @@
             android:key="pref_screenrecord_timelimit"
             android:title="@string/pref_screenrecord_timelimit_title"
             minimum="1"
-            maximum="30"
+            maximum="60"
             interval="1"
             monitorBoxEnabled="true"
             monitorBoxUnit="m" 
@@ -2160,12 +2159,14 @@
             android:summary="@string/pref_screenrecord_rotate_summary"
             android:defaultValue="false" />
 
+        <!--
         <CheckBoxPreference 
             android:key="pref_screenrecord_microphone"
             android:title="@string/pref_screenrecord_microphone_title"
             android:summary="@string/pref_screenrecord_microphone_summary"
             android:defaultValue="true"
             android:dependency="pref_screenrecord_use_stock" />
+        -->
 
     </PreferenceScreen>
 
