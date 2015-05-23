@@ -1,3 +1,19 @@
+Changelog 5.1.1 - 23/05/2015
+--------------------------------------
+- Signal cluster tweaks adjusted for LP 5.1 (untested on Motorola devices)
+- Status bar icon coloring adjusted for LP 5.1
+- Fixed Circle battery and Percent text paddings on LP 5.1
+- Fixed status bar brightness control not using proper screen width in landscape orientation
+- Fixed home soft key not responding after screen on; when Go to sleep action mapped to long-press
+- Fixed soft reboot causing app reoptimization
+- Optimized GB context handling within SystemUI process
+- Screen record: added custom binary
+--- allows recording time up to 1 hour
+--- supports ARM and ARM64 only
+--- DOES NOT support audio recording
+- Launcher tweaks: adjusted for compatibility with Google App 4.6.10
+- Updated Portuguese (BR) translations (thanks to KingKaminari)
+
 Changelog 5.1.0 - 16/05/2015
 --------------------------------------
 - Adjusted for Lollipop 5.1 compatibility
