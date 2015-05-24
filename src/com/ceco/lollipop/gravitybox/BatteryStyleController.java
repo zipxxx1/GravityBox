@@ -66,7 +66,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    public BatteryStyleController(ContainerType containerType, ViewGroup container, XSharedPreferences prefs) {
+    public BatteryStyleController(ContainerType containerType, ViewGroup container, XSharedPreferences prefs) throws Throwable {
         mContainerType = containerType;
         mContainer = container;
         mContext = container.getContext();
@@ -94,10 +94,10 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                         SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1 : false;
     }
 
-    private void initLayout() {
+    private void initLayout() throws Throwable {
         final String[] batteryPercentTextIds = new String[] { "battery_level", "percentage", "battery_text" };
         Resources res = mContext.getResources();
-        Resources gbRes = SysUiManagers.GbContext.getResources();
+        Resources gbRes = SysUiManagers.getGbContext(mContext).getResources();
 
         // inject percent text if it doesn't exist
         for (String bptId : batteryPercentTextIds) {

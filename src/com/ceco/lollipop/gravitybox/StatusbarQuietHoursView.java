@@ -38,7 +38,7 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
     private ViewGroup mContainer;
     private QuietHours mQuietHours;
 
-    public StatusbarQuietHoursView(ContainerType containerType, ViewGroup container, Context context) {
+    public StatusbarQuietHoursView(ContainerType containerType, ViewGroup container, Context context) throws Throwable {
         super(context);
 
         mContainer = container;
@@ -56,7 +56,7 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
 
         mQuietHours = SysUiManagers.QuietHoursManager.getQuietHours();
 
-        Context gbContext = SysUiManagers.GbContext;
+        Context gbContext = SysUiManagers.getGbContext(context);
         setImageDrawable(gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours));
 
         updateVisibility();

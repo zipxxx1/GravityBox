@@ -86,7 +86,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     protected StatusBarIconManager(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
         mSystemUiRes = mContext.getResources();
-        Context gbContext = SysUiManagers.GbContext;
+        Context gbContext = SysUiManagers.getGbContext(mContext);
         mGbResources = gbContext.getResources();
 
         Map<String, Integer[]> basicIconMap = new HashMap<String, Integer[]>();

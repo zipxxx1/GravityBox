@@ -110,7 +110,7 @@ public abstract class TrafficMeterAbstract extends TextView
         }
     }
 
-    public void initialize(XSharedPreferences prefs) {
+    public void initialize(XSharedPreferences prefs) throws Throwable {
         prefs.reload();
         try {
             mSize = Integer.valueOf(prefs.getString(
@@ -305,7 +305,7 @@ public abstract class TrafficMeterAbstract extends TextView
     @Override
     public void onPreferencesChanged(Intent intent) { }
 
-    protected abstract void onInitialize(XSharedPreferences prefs);
+    protected abstract void onInitialize(XSharedPreferences prefs) throws Throwable;
     protected abstract void onPreferenceChanged(Intent intent);
     protected abstract void startTrafficUpdates();
     protected abstract void stopTrafficUpdates();

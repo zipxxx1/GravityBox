@@ -336,7 +336,7 @@ public class ModNavigationBar {
 
                     mResources = context.getResources();
 
-                    mGbContext = SysUiManagers.GbContext;
+                    mGbContext = SysUiManagers.getGbContext(context);
                     final Resources res = mGbContext.getResources();
                     mNavbarColorsEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_COLOR_ENABLE, false);
                     mKeyDefaultColor = res.getColor(R.color.navbar_key_color);

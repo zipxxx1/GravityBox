@@ -49,7 +49,6 @@ import android.database.ContentObserver;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.UserHandle;
@@ -1120,7 +1119,7 @@ public class ModStatusBar {
         mClockCentered = center;
     }
 
-    private static void setTrafficMeterMode(TrafficMeterMode mode) {
+    private static void setTrafficMeterMode(TrafficMeterMode mode) throws Throwable {
         if (mTrafficMeterMode == mode) return;
 
         mTrafficMeterMode = mode;

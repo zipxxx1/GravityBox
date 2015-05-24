@@ -167,7 +167,7 @@ public class ModLockscreen {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    mGbContext = SysUiManagers.GbContext;
+                    mGbContext = SysUiManagers.getGbContext(mContext);
 
                     prepareCustomBackground();
 

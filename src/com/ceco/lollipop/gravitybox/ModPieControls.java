@@ -322,7 +322,7 @@ public class ModPieControls {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (DEBUG) log("BaseStatusBar starting...");
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    mGbContext = SysUiManagers.GbContext;
+                    mGbContext = SysUiManagers.getGbContext(mContext);
                     mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
                     mPieController = new PieController(mContext, mGbContext, prefs);
 

@@ -121,7 +121,8 @@ public class ModQsTiles {
                     LinkedHashMap<String, Object> orderedMap = new LinkedHashMap<String,Object>();
                     String[] orderedKeys = prefs.getString(
                             TileOrderActivity.PREF_KEY_TILE_ENABLED,
-                            TileOrderActivity.getDefaultTileList(SysUiManagers.GbContext)).split(",");
+                            TileOrderActivity.getDefaultTileList(
+                                    SysUiManagers.getGbContext(context))).split(",");
                     for (String key : orderedKeys) {
                          for (Entry<String, Object> entry : gbTileMap.entrySet()) {
                              if (entry.getValue() instanceof AospTile) {

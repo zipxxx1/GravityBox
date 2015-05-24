@@ -10,7 +10,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 
 public class SysUiManagers {
     private static final String TAG = "GB:SysUiManagers";
@@ -19,7 +18,8 @@ public class SysUiManagers {
     public static StatusBarIconManager IconManager;
     public static StatusbarQuietHoursManager QuietHoursManager;
     public static AppLauncher AppLauncher;
-    public static Context GbContext;
+
+    private static Context sGbContext;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -30,14 +30,6 @@ public class SysUiManagers {
             throw new IllegalArgumentException("Context cannot be null");
         if (prefs == null)
             throw new IllegalArgumentException("Prefs cannot be null");
-
-        try {
-            GbContext = context.createPackageContext(GravityBox.PACKAGE_NAME,
-                    Context.CONTEXT_IGNORE_SECURITY);
-        } catch (Throwable t) {
-            log("Error creating GB context: ");
-            XposedBridge.log(t);
-        }
 
         try {
             BatteryInfoManager = new BatteryInfoManager(context, prefs);
@@ -88,6 +80,14 @@ public class SysUiManagers {
         intentFilter.addAction(com.ceco.lollipop.gravitybox.managers.AppLauncher.ACTION_SHOW_APP_LAUCNHER);
 
         context.registerReceiver(sBroadcastReceiver, intentFilter);
+    }
+
+    public static synchronized Context getGbContext(Context context) throws Throwable {
+        if (sGbContext == null) {
+            sGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME,
+                    Context.CONTEXT_IGNORE_SECURITY);
+        }
+        return sGbContext;
     }
 
     private static BroadcastReceiver sBroadcastReceiver = new BroadcastReceiver() {

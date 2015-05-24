@@ -204,7 +204,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     public static StatusbarSignalCluster create(ContainerType containerType,
-            LinearLayout view, XSharedPreferences prefs) {
+            LinearLayout view, XSharedPreferences prefs) throws Throwable {
         sPrefs = prefs;
         if (Utils.isMotoXtDevice()) {
             return new StatusbarSignalClusterMoto(containerType, view);
@@ -215,12 +215,12 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     }
 
-    public StatusbarSignalCluster(ContainerType containerType, LinearLayout view) {
+    public StatusbarSignalCluster(ContainerType containerType, LinearLayout view) throws Throwable {
         mContainerType = containerType;
         mView = view;
         mIconManager = SysUiManagers.IconManager;
         mResources = mView.getResources();
-        mGbResources = SysUiManagers.GbContext.getResources();
+        mGbResources = SysUiManagers.getGbContext(mView.getContext()).getResources();
 
         mFldWifiGroup = resolveField("mWifiGroup", "mWifiViewGroup");
         mFldMobileGroup = resolveField("mMobileGroup", "mMobileViewGroup");

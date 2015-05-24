@@ -59,12 +59,12 @@ class NotificationWallpaper implements BroadcastSubReceiver,
         
     }
 
-    public NotificationWallpaper(FrameLayout container, XSharedPreferences prefs) throws NameNotFoundException {
+    public NotificationWallpaper(FrameLayout container, XSharedPreferences prefs) throws Throwable {
         mNotificationPanelView = container;
         mContext = mNotificationPanelView.getContext();
         mBackupBg = mNotificationPanelView.getBackground();
 
-        Context gbContext = SysUiManagers.GbContext;
+        Context gbContext = SysUiManagers.getGbContext(mContext);
         mNotifBgImagePathPortrait = gbContext.getFilesDir() + "/notifwallpaper";
         mNotifBgImagePathLandscape = gbContext.getFilesDir() + "/notifwallpaper_landscape";
 

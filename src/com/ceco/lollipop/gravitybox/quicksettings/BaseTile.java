@@ -29,7 +29,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.Utils;
@@ -77,7 +76,7 @@ public abstract class BaseTile implements QsEventListener {
         mEventDistributor = eventDistributor;
 
         mContext = (Context) XposedHelpers.callMethod(mHost, "getContext");
-        mGbContext = SysUiManagers.GbContext;
+        mGbContext = SysUiManagers.getGbContext(mContext);
 
         mEventDistributor.registerListener(this);
         initPreferences();

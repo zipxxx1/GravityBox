@@ -754,7 +754,7 @@ public class ModLedControl {
     }
 
     private static ImageButton createSnoozeButton(final Context context) throws Throwable {
-        final Context gbContext = SysUiManagers.GbContext;
+        final Context gbContext = SysUiManagers.getGbContext(context);
         mHeadsUpSnoozeDlg = new HeadsUpSnoozeDialog(context, gbContext, mHeadsUpSnoozeTimerSetListener);
         mHeadsUpSnoozeMap = new HashMap<String, Long>();
         mHeadsUpSnoozeMap.put("[ALL]", 0l);

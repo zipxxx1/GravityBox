@@ -14,7 +14,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     protected boolean mDisableDataNetworkTypeIcons;
     protected static ImageView[] mMobileRoam = null;
 
-    public StatusbarSignalClusterMtk(ContainerType containerType, LinearLayout view) {
+    public StatusbarSignalClusterMtk(ContainerType containerType, LinearLayout view) throws Throwable {
         super(containerType, view);
     }
 

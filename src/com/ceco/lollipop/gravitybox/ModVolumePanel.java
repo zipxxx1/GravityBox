@@ -130,7 +130,7 @@ public class ModVolumePanel {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mVolumePanel = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(mVolumePanel, "mContext");
-                    mGbContext = SysUiManagers.GbContext;
+                    mGbContext = SysUiManagers.getGbContext(context);
                     if (DEBUG) log("VolumePanel constructed; mVolumePanel set");
 
                     mTimeout = 0;

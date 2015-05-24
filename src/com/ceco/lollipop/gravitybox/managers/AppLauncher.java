@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
-import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.LockscreenAppBar;
 import com.ceco.lollipop.gravitybox.R;
@@ -105,11 +104,11 @@ public class AppLauncher implements BroadcastSubReceiver {
         }
     };
 
-    public AppLauncher(Context context, XSharedPreferences prefs) {
+    public AppLauncher(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
         mResources = mContext.getResources();
         mPrefs = prefs;
-        mGbContext = SysUiManagers.GbContext;
+        mGbContext = SysUiManagers.getGbContext(mContext);
         mGbResources = mGbContext.getResources();
         mHandler = new Handler();
         mPm = mContext.getPackageManager();

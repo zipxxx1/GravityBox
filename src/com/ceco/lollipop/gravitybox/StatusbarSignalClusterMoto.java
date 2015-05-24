@@ -47,7 +47,7 @@ public class StatusbarSignalClusterMoto extends StatusbarSignalCluster {
     protected int mIconSpacingPx;
     protected Map<String, Integer> mIconSpacingDef;
 
-    public StatusbarSignalClusterMoto(ContainerType containerType, LinearLayout view) {
+    public StatusbarSignalClusterMoto(ContainerType containerType, LinearLayout view) throws Throwable {
         super(containerType, view);
     }
 
