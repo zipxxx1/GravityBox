@@ -316,12 +316,14 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
         Tracker.sDistance = mGbResources.getDimensionPixelSize(R.dimen.pie_trigger_distance);
 
         mBackIcon = res.getDrawable(context.getResources().getIdentifier(
-                "ic_sysbar_back", "drawable", PACKAGE_NAME));
+                "ic_sysbar_back", "drawable", PACKAGE_NAME), null).mutate();
         mBackAltIcon = res.getDrawable(context.getResources().getIdentifier(
-                "ic_sysbar_back_ime", "drawable", PACKAGE_NAME));
-        mRecentIcon = res.getDrawable(res.getIdentifier("ic_sysbar_recent", "drawable", PACKAGE_NAME));
+                "ic_sysbar_back_ime", "drawable", PACKAGE_NAME), null).mutate();
+        mRecentIcon = res.getDrawable(res.getIdentifier(
+                "ic_sysbar_recent", "drawable", PACKAGE_NAME), null).mutate();
         mRecentAltIcon = mGbResources.getDrawable(mUseLargerIcons ?
-                R.drawable.ic_sysbar_recent_clear: R.drawable.ic_sysbar_recent_clear_lollipop);
+                R.drawable.ic_sysbar_recent_clear: 
+                    R.drawable.ic_sysbar_recent_clear_lollipop, null).mutate();
 
         try {
             mBaseStatusBarClass = XposedHelpers.findClass(CLASS_BASE_STATUSBAR, mContext.getClassLoader());
