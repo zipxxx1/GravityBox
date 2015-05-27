@@ -16,6 +16,7 @@
 
 package com.ceco.lollipop.gravitybox;
 
+import com.ceco.lollipop.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryData;
@@ -34,7 +35,6 @@ import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
-import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
@@ -51,12 +51,14 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     private boolean mAttached;      // whether or not attached to a window
     private boolean mIsCharging;    // whether or not device is currently charging
     private int     mLevel;         // current battery level
+    private boolean mIsPowerSaving; // whether power saving mode is on
     private int     mAnimOffset;    // current level of charging animation
     private boolean mIsAnimating;   // stores charge-animation status to reliably remove callbacks
     private int     mDockLevel;     // current dock battery level
     private boolean mDockIsCharging;// whether or not dock battery is currently charging
     private boolean mIsDocked = false;      // whether or not dock battery is connected
     private boolean mPercentage;    // whether to show percentage
+    private BatteryStyleController mController;
 
     private int     mCircleSize;    // draw size of circle. read rather complicated from
                                     // another status bar icon, so it fits the icon size
@@ -95,6 +97,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     public void onBatteryStatusChanged(BatteryData batteryData) {
         mLevel = batteryData.level;
         mIsCharging = batteryData.charging;
+        mIsPowerSaving = batteryData.isPowerSaving;
 
         if (mAttached) {
             LayoutParams l = getLayoutParams();
@@ -109,17 +112,10 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     /***
      * Start of CircleBattery implementation
      */
-    public CmCircleBattery(Context context) {
-        this(context, null);
-    }
+    public CmCircleBattery(Context context, BatteryStyleController controller) {
+        super(context);
 
-    public CmCircleBattery(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public CmCircleBattery(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-
+        mController = controller;
         mHandler = new Handler();
 
         // initialize and setup all paint variables
@@ -137,10 +133,13 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
 
         mPaintFont.setColor(Color.WHITE);
         mPaintSystem.setColor(mPaintFont.getColor());
-        // could not find the darker definition anywhere in resources
-        // do not want to use static 0x404040 color value. would break theming.
         mPaintGray.setColor(res.getColor(android.R.color.darker_gray));
-        mPaintRed.setColor(res.getColor(android.R.color.holo_red_light));
+
+        // try to use battery saver color; fall back to red in case of problems
+        int resId = res.getIdentifier("battery_saver_mode_color", "color",
+                ModStatusBar.PACKAGE_NAME);
+        mPaintRed.setColor(resId != 0 ? res.getColor(resId) :
+                res.getColor(android.R.color.holo_red_light));
 
         // font needs some extra settings
         mPaintFont.setTextAlign(Align.CENTER);
@@ -218,7 +217,11 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     }
 
     private void drawCircle(Canvas canvas, int level, int animOffset, float textX, RectF drawRect) {
-        final Paint usePaint = level <= 14 ? mPaintRed : mPaintSystem;
+        final Paint usePaint = level <= 15 && 
+                (!mIsPowerSaving ||
+                 mController.getContainerType() != ContainerType.STATUSBAR ||
+                 mController.isBatterySaverIndicationDisabled()) ? 
+                         mPaintRed : mPaintSystem;
         usePaint.setAntiAlias(true);
         usePaint.setPathEffect(mPathEffect);
 

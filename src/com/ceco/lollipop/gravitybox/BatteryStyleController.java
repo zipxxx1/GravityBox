@@ -61,6 +61,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private StatusbarBatteryPercentage mPercentText;
     private CmCircleBattery mCircleBattery;
     private StatusbarBattery mStockBattery;
+    private boolean mBatterySaverIndicationDisabled;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -92,6 +93,8 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         mMtkPercentTextEnabled = Utils.isMtkDevice() ?
                 Settings.Secure.getInt(mContext.getContentResolver(), 
                         SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1 : false;
+        mBatterySaverIndicationDisabled = prefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
     }
 
     private void initLayout() throws Throwable {
@@ -129,7 +132,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         }
 
         // inject circle battery view
-        mCircleBattery = new CmCircleBattery(mContext);
+        mCircleBattery = new CmCircleBattery(mContext, this);
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lParams.gravity = Gravity.CENTER_VERTICAL;
@@ -259,14 +262,22 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         }
     }
 
+    public boolean isBatterySaverIndicationDisabled() {
+        return mBatterySaverIndicationDisabled;
+    }
+
+    public ContainerType getContainerType() {
+        return mContainerType;
+    }
+
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         String action = intent.getAction();
         if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED) &&
                 intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE)) {
-                    mBatteryStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE, 1);
-                    if (DEBUG) log("mBatteryStyle changed to: " + mBatteryStyle);
-                    updateBatteryStyle();
+            mBatteryStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE, 1);
+            if (DEBUG) log("mBatteryStyle changed to: " + mBatteryStyle);
+            updateBatteryStyle();
         } else if (action.equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR)) {
                 mBatteryPercentTextEnabledSb = intent.getBooleanExtra(
@@ -312,6 +323,15 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             mMtkPercentTextEnabled = intent.getIntExtra(EXTRA_MTK_BATTERY_PERCENTAGE_STATE, 0) == 1;
             if (DEBUG) log("mMtkPercentText changed to: " + mMtkPercentTextEnabled);
             updateBatteryStyle();
+        } else if (action.equals(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE)) {
+                mBatterySaverIndicationDisabled = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE, false);
+                if (mCircleBattery != null && mCircleBattery.isAttachedToWindow()
+                        && mContainerType == ContainerType.STATUSBAR) {
+                    mCircleBattery.postInvalidate();
+                }
+            }
         }
     }
 }
