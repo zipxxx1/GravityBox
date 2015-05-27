@@ -31,6 +31,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.PowerManager;
+import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -143,6 +144,7 @@ public class ModNavigationBar {
         boolean visible;
         boolean menuCustomSwapped;
         ViewGroup menuImeGroup;
+        SparseArray<ScaleType> originalScaleType = new SparseArray<ScaleType>();
     }
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -435,7 +437,7 @@ public class ModNavigationBar {
                     vRot = (ViewGroup) ((ViewGroup) param.thisObject).findViewById(
                             mResources.getIdentifier("rot0", "id", PACKAGE_NAME));
                     if (vRot != null) {
-                        ScaleType scaleType = getIconScaleType(0);
+                        ScaleType scaleType = getIconScaleType(0, View.NO_ID);
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setScaleType(scaleType);
                         appKey.setClickable(true);
@@ -469,7 +471,7 @@ public class ModNavigationBar {
                     vRot = (ViewGroup) ((ViewGroup) param.thisObject).findViewById(
                             mResources.getIdentifier("rot90", "id", PACKAGE_NAME));
                     if (vRot != null) {
-                        ScaleType scaleType = getIconScaleType(1);
+                        ScaleType scaleType = getIconScaleType(1, View.NO_ID);
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setScaleType(scaleType);
                         appKey.setClickable(true);
@@ -1337,16 +1339,18 @@ public class ModNavigationBar {
         }
     }
 
-    private static ScaleType getIconScaleType(int index) {
+    private static ScaleType getIconScaleType(int index, int keyId) {
         if (Build.VERSION.SDK_INT < 22 || mUseLargerIcons) {
             return ScaleType.FIT_CENTER;
         } else {
+            ScaleType origScaleType = mNavbarViewInfo[index] == null ? ScaleType.CENTER :
+                    mNavbarViewInfo[index].originalScaleType.get(keyId, ScaleType.CENTER);
             if (index == 0) {
-                return (mNavbarHeight < 75 ? ScaleType.CENTER_INSIDE : ScaleType.CENTER);
+                return (mNavbarHeight < 75 ? ScaleType.CENTER_INSIDE : origScaleType);
             } else {
                 boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
-                return (mNavbarWidth < 75 || !hasVerticalNavbar ? ScaleType.CENTER_INSIDE :
-                    ScaleType.CENTER);
+                return (mNavbarWidth < 75 && hasVerticalNavbar ? ScaleType.CENTER_INSIDE :
+                    origScaleType);
             }
         }
     }
@@ -1356,14 +1360,19 @@ public class ModNavigationBar {
 
         try {
             for (int i = 0; i < mNavbarViewInfo.length; i++) {
-                ScaleType scaleType = getIconScaleType(i);
                 ViewGroup navButtons = mNavbarViewInfo[i].navButtons;
                 int childCount = navButtons.getChildCount();
                 for (int j = 0; j < childCount; j++) {
                     View child = navButtons.getChildAt(j);
                     if (child.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW) ||
                             child instanceof KeyButtonView) {
-                        ((ImageView)child).setScaleType(scaleType);
+                        ImageView iv = (ImageView) child;
+                        if (iv.getId() != View.NO_ID &&
+                                mNavbarViewInfo[i].originalScaleType.get(iv.getId()) == null) {
+                            mNavbarViewInfo[i].originalScaleType.put(iv.getId(),
+                                    iv.getScaleType());
+                        }
+                        iv.setScaleType(getIconScaleType(i, iv.getId()));
                     }
                 }
             }
