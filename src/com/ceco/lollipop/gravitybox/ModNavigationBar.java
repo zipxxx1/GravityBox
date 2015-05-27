@@ -91,6 +91,10 @@ public class ModNavigationBar {
     private static boolean mHideImeSwitcher;
     private static PowerManager mPm;
 
+    // Navbar dimensions
+    private static int mNavbarHeight;
+    private static int mNavbarWidth;
+
     // Custom key
     private static boolean mCustomKeyEnabled;
     private static Resources mResources;
@@ -193,6 +197,14 @@ public class ModNavigationBar {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HIDE_IME)) {
                     mHideImeSwitcher = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_NAVBAR_HIDE_IME, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
+                    mNavbarHeight = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT, 100);
+                    updateIconScaleType();
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH)) {
+                    mNavbarWidth = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100);
+                    updateIconScaleType();
                 }
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) && 
@@ -319,6 +331,9 @@ public class ModNavigationBar {
                     GravityBoxSettings.PREF_KEY_NAVBAR_RING_DISABLE, false);
             mHideImeSwitcher = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_HIDE_IME, false);
 
+            mNavbarHeight = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT, 100);
+            mNavbarWidth = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_WIDTH, 100);
+
             // for HTC GPE devices having capacitive keys
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false)) {
                 try {
@@ -420,12 +435,11 @@ public class ModNavigationBar {
                     vRot = (ViewGroup) ((ViewGroup) param.thisObject).findViewById(
                             mResources.getIdentifier("rot0", "id", PACKAGE_NAME));
                     if (vRot != null) {
-                        ScaleType scaleType = Build.VERSION.SDK_INT >= 22 ?
-                                ScaleType.CENTER : ScaleType.FIT_CENTER;
+                        ScaleType scaleType = getIconScaleType(0);
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setScaleType(scaleType);
                         appKey.setClickable(true);
-                        appKey.setImageDrawable(gbRes.getDrawable(getCustomKeyIconId()));
+                        appKey.setImageDrawable(gbRes.getDrawable(getCustomKeyIconId(), null));
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
@@ -433,7 +447,7 @@ public class ModNavigationBar {
                         dpadLeft.setClickable(true);
                         dpadLeft.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_ime_left :
-                                        R.drawable.ic_sysbar_ime_left_lollipop));
+                                        R.drawable.ic_sysbar_ime_left_lollipop, null));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
@@ -442,7 +456,7 @@ public class ModNavigationBar {
                         dpadRight.setClickable(true);
                         dpadRight.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
                                 R.drawable.ic_sysbar_ime_right :
-                                        R.drawable.ic_sysbar_ime_right_lollipop));
+                                        R.drawable.ic_sysbar_ime_right_lollipop, null));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -455,24 +469,28 @@ public class ModNavigationBar {
                     vRot = (ViewGroup) ((ViewGroup) param.thisObject).findViewById(
                             mResources.getIdentifier("rot90", "id", PACKAGE_NAME));
                     if (vRot != null) {
+                        ScaleType scaleType = getIconScaleType(1);
                         KeyButtonView appKey = new KeyButtonView(context);
+                        appKey.setScaleType(scaleType);
                         appKey.setClickable(true);
-                        appKey.setImageDrawable(gbRes.getDrawable(getCustomKeyIconId()));
+                        appKey.setImageDrawable(gbRes.getDrawable(getCustomKeyIconId(), null));
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
+                        dpadLeft.setScaleType(scaleType);
                         dpadLeft.setClickable(true);
                         dpadLeft.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
                                             R.drawable.ic_sysbar_ime_left :
-                                                R.drawable.ic_sysbar_ime_left_lollipop));
+                                                R.drawable.ic_sysbar_ime_left_lollipop, null));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
+                        dpadRight.setScaleType(scaleType);
                         dpadRight.setClickable(true);
                         dpadRight.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
                                             R.drawable.ic_sysbar_ime_right :
-                                                R.drawable.ic_sysbar_ime_right_lollipop));
+                                                R.drawable.ic_sysbar_ime_right_lollipop, null));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -487,6 +505,8 @@ public class ModNavigationBar {
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_SWAP_KEYS, false)) {
                         swapBackAndRecents();
                     }
+
+                    updateIconScaleType();
                 }
             });
 
@@ -509,18 +529,21 @@ public class ModNavigationBar {
                         mRecentIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentIcon");
                         mRecentLandIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentLandIcon");
                         mRecentAltIcon = gbRes.getDrawable(mUseLargerIcons ?
-                                R.drawable.ic_sysbar_recent_clear: R.drawable.ic_sysbar_recent_clear_lollipop );
+                                R.drawable.ic_sysbar_recent_clear: R.drawable.ic_sysbar_recent_clear_lollipop, null);
                         mRecentAltLandIcon = gbRes.getDrawable(mUseLargerIcons ?
-                                R.drawable.ic_sysbar_recent_clear_land : R.drawable.ic_sysbar_recent_clear_land_lollipop);
+                                R.drawable.ic_sysbar_recent_clear_land : R.drawable.ic_sysbar_recent_clear_land_lollipop, null);
                     } catch (Throwable t) {
                         log("getIcons: system does not seem to have standard AOSP recents key? (" + t.getMessage() + ")");
                     }
 
                     try {
-                        XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon",
-                                gbRes.getDrawable(mUseLargerIcons ?
-                                        R.drawable.ic_sysbar_back_ime_land_large :
-                                            R.drawable.ic_sysbar_back_ime_land));
+                        Drawable backIcon = mUseLargerIcons ? gbRes.getDrawable(
+                                R.drawable.ic_sysbar_back_ime_land_large, null) :
+                                    Build.VERSION.SDK_INT >= 22 ? null :
+                                        gbRes.getDrawable(R.drawable.ic_sysbar_back_ime_land, null);
+                        if (backIcon != null) {
+                            XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon", backIcon);
+                        }
                     } catch (Throwable t) {
                         log("getIcons: system does not seem to have standard AOSP IME back key? (" + t.getMessage() + ")");
                     }
@@ -1297,7 +1320,7 @@ public class ModNavigationBar {
         try {
             Resources res = mGbContext.getResources();
             for (NavbarViewInfo nvi : mNavbarViewInfo) {
-                nvi.customKey.setImageDrawable(res.getDrawable(getCustomKeyIconId()));
+                nvi.customKey.setImageDrawable(res.getDrawable(getCustomKeyIconId(), null));
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -1311,6 +1334,41 @@ public class ModNavigationBar {
         } else {
             return mCustomKeyAltIcon ?
                     R.drawable.ic_sysbar_apps2_lollipop : R.drawable.ic_sysbar_apps_lollipop;
+        }
+    }
+
+    private static ScaleType getIconScaleType(int index) {
+        if (Build.VERSION.SDK_INT < 22 || mUseLargerIcons) {
+            return ScaleType.FIT_CENTER;
+        } else {
+            if (index == 0) {
+                return (mNavbarHeight < 75 ? ScaleType.CENTER_INSIDE : ScaleType.CENTER);
+            } else {
+                boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
+                return (mNavbarWidth < 75 || !hasVerticalNavbar ? ScaleType.CENTER_INSIDE :
+                    ScaleType.CENTER);
+            }
+        }
+    }
+
+    private static void updateIconScaleType() {
+        if (Build.VERSION.SDK_INT < 22) return;
+
+        try {
+            for (int i = 0; i < mNavbarViewInfo.length; i++) {
+                ScaleType scaleType = getIconScaleType(i);
+                ViewGroup navButtons = mNavbarViewInfo[i].navButtons;
+                int childCount = navButtons.getChildCount();
+                for (int j = 0; j < childCount; j++) {
+                    View child = navButtons.getChildAt(j);
+                    if (child.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW) ||
+                            child instanceof KeyButtonView) {
+                        ((ImageView)child).setScaleType(scaleType);
+                    }
+                }
+            }
+        } catch (Throwable t) {
+            
         }
     }
 }
