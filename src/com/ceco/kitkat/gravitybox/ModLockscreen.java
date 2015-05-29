@@ -208,7 +208,7 @@ public class ModLockscreen {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+                    mGbContext = Utils.getGbContext(context);
                     mHandler = new Handler();
                     mDoubletapGesture = new GestureDetector(context, 
                             new GestureDetector.SimpleOnGestureListener() {

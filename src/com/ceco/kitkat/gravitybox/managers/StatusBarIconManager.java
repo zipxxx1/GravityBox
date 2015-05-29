@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.ceco.kitkat.gravitybox.BroadcastSubReceiver;
-import com.ceco.kitkat.gravitybox.GravityBox;
 import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.R;
 import com.ceco.kitkat.gravitybox.Utils;
@@ -92,9 +91,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     protected StatusBarIconManager(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
         mSystemUiRes = mContext.getResources();
-        Context gbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME,
-                Context.CONTEXT_IGNORE_SECURITY);
-        mGbResources = gbContext.getResources();
+        mGbResources = Utils.getGbContext(mContext).getResources();
         mAllowMobileIconChange = new boolean[] { true, true };
 
         Map<String, Integer> tmpMap = new HashMap<String, Integer>();

@@ -21,7 +21,6 @@ import com.ceco.kitkat.gravitybox.managers.StatusBarIconManager.IconManagerListe
 import com.ceco.kitkat.gravitybox.managers.StatusbarQuietHoursManager.QuietHoursListener;
 import com.ceco.kitkat.gravitybox.managers.SysUiManagers;
 
-import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
@@ -34,7 +33,7 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
 
     private QuietHours mQuietHours;
 
-    public StatusbarQuietHoursView(Context context) {
+    public StatusbarQuietHoursView(Context context) throws Throwable {
         super(context);
 
         Resources res = context.getResources();
@@ -48,12 +47,8 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
 
         mQuietHours = SysUiManagers.QuietHoursManager.getQuietHours();
 
-        try {
-            Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
-            setImageDrawable(gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours));
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
+        Context gbContext = Utils.getGbContext(context);
+        setImageDrawable(gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours));
 
         updateVisibility();
     }

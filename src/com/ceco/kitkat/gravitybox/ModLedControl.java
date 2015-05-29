@@ -954,7 +954,7 @@ public class ModLedControl {
 
     private static ImageButton addSnoozeButton(ViewGroup vg) throws Throwable {
         final Context context = vg.getContext();
-        final Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+        final Context gbContext = Utils.getGbContext(context);
         mHeadsUpSnoozeDlg = new HeadsUpSnoozeDialog(context, gbContext, mHeadsUpSnoozeTimerSetListener);
         mHeadsUpSnoozeMap = new HashMap<String, Long>();
         mHeadsUpSnoozeMap.put("[ALL]", 0l);

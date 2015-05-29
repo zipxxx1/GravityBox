@@ -76,7 +76,6 @@ import android.media.MediaRouter;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.provider.AlarmClock;
-import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -821,7 +820,7 @@ public class ModQuickSettings {
 
             mQuickSettings = param.thisObject;
             mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-            mGbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+            mGbContext = Utils.getGbContext(mContext);
             mContainerView = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mContainerView");
             mWifiManager = new WifiManagerWrapper(mContext);
 

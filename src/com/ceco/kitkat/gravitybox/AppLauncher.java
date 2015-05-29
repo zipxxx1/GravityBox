@@ -113,17 +113,12 @@ public class AppLauncher {
         }
     };
 
-    public AppLauncher(Context context, XSharedPreferences prefs) {
+    public AppLauncher(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
         mResources = mContext.getResources();
         mPrefs = prefs;
-        try {
-            mGbContext = mContext.createPackageContext(
-                    GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
-            mGbResources = mGbContext.getResources();
-        } catch (NameNotFoundException e) {
-            log("Error creating GB context: " + e.getMessage());
-        }
+        mGbContext = Utils.getGbContext(mContext);
+        mGbResources = mGbContext.getResources();
         mHandler = new Handler();
         mPm = mContext.getPackageManager();
 

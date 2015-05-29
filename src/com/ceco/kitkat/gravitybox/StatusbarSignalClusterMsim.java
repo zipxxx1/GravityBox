@@ -41,7 +41,7 @@ public class StatusbarSignalClusterMsim extends StatusbarSignalCluster {
     protected boolean mSignalIconAutohide;
     protected boolean mHideSimLabels;
 
-    public StatusbarSignalClusterMsim(LinearLayout view) {
+    public StatusbarSignalClusterMsim(LinearLayout view) throws Throwable {
         super(view);
     }
 

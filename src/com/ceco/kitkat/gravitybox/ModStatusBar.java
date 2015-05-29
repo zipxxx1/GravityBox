@@ -959,7 +959,7 @@ public class ModStatusBar {
                         Intent deleteIntent = new Intent(ACTION_DELETE_SCREENSHOT);
                         deleteIntent.putExtra(SCREENSHOT_URI, uri.toString());
                         Context context = (Context) XposedHelpers.getObjectField(result, "context");
-                        Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+                        Context gbContext = Utils.getGbContext(context);
                         builder.addAction(mDeleteIconId, gbContext.getString(R.string.delete),
                                 PendingIntent.getBroadcast(context, 0, deleteIntent,
                                         PendingIntent.FLAG_CANCEL_CURRENT));
@@ -1065,7 +1065,7 @@ public class ModStatusBar {
         mClockCentered = center;
     }
 
-    private static void setTrafficMeterMode(TrafficMeterMode mode) {
+    private static void setTrafficMeterMode(TrafficMeterMode mode) throws Throwable {
         if (mTrafficMeterMode == mode) return;
 
         mTrafficMeterMode = mode;

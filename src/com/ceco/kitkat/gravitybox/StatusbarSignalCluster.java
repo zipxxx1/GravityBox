@@ -37,7 +37,6 @@ import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.XModuleResources;
 import android.content.res.XResources;
@@ -381,7 +380,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     }
 
-    public static StatusbarSignalCluster create(LinearLayout view, XSharedPreferences prefs) {
+    public static StatusbarSignalCluster create(LinearLayout view, XSharedPreferences prefs) throws Throwable {
         sPrefs = prefs;
         if (PhoneWrapper.hasMsimSupport()) {
             return new StatusbarSignalClusterMsim(view);
@@ -392,16 +391,11 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     }
 
-    public StatusbarSignalCluster(LinearLayout view) {
+    public StatusbarSignalCluster(LinearLayout view) throws Throwable {
         mView = view;
         mIconManager = SysUiManagers.IconManager;
         mResources = mView.getResources();
-        try {
-            mGbResources = mView.getContext().createPackageContext(
-                    GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY).getResources();
-        } catch (NameNotFoundException e) {
-            XposedBridge.log(e);
-        }
+        mGbResources = Utils.getGbContext(mView.getContext()).getResources();
 
         mFldWifiGroup = resolveField("mWifiGroup", "mWifiViewGroup");
         mFldMobileGroup = resolveField("mMobileGroup", "mMobileViewGroup");

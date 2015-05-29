@@ -355,7 +355,7 @@ public class ModDialer {
                     if (shouldShowUnknownPhoto) {
                         final ImageView iv = (ImageView) param.args[0];
                         final Context context = iv.getContext();
-                        final Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+                        final Context gbContext = Utils.getGbContext(context);
                         final String path = gbContext.getFilesDir() + "/caller_photo";
                         File f = new File(path);
                         if (f.exists() && f.canRead()) {
