@@ -135,7 +135,7 @@ public class ModClearAllRecents {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mRecentsPanelView = (View) param.thisObject;
                     Context context = mRecentsPanelView.getContext();
-                    mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+                    mGbContext = Utils.getGbContext(context);
                     mHandler = new Handler();
                     mAm = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 

@@ -21,7 +21,6 @@ import com.ceco.gm2.gravitybox.managers.SysUiManagers;
 import com.ceco.gm2.gravitybox.managers.StatusbarQuietHoursManager.QuietHoursListener;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
 
-import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
@@ -36,7 +35,7 @@ public class StatusbarQuietHoursView extends ImageView implements IconManagerLis
     private QuietHours mQuietHours;
     private Drawable[] mDrawables;
 
-    public StatusbarQuietHoursView(Context context) {
+    public StatusbarQuietHoursView(Context context) throws Throwable {
         super(context);
 
         Resources res = context.getResources();
@@ -50,15 +49,11 @@ public class StatusbarQuietHoursView extends ImageView implements IconManagerLis
 
         mQuietHours = SysUiManagers.QuietHoursManager.getQuietHours();
 
-        try {
-            Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
-            mDrawables = new Drawable[3];
-            mDrawables[0] = gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours_jb);
-            mDrawables[1] = gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours_kk);
-            mDrawables[2] = gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours);
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
+        Context gbContext = Utils.getGbContext(context);
+        mDrawables = new Drawable[3];
+        mDrawables[0] = gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours_jb);
+        mDrawables[1] = gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours_kk);
+        mDrawables[2] = gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours);
 
         updateVisibility();
     }

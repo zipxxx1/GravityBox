@@ -183,18 +183,13 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
     }
 
     @Override
-    protected void onInitialize(XSharedPreferences prefs) {
-        try {
-            mGbContext = getContext().createPackageContext(GravityBox.PACKAGE_NAME, 
-                    Context.CONTEXT_IGNORE_SECURITY);
-            SYMBOLS.put("b/s", mGbContext.getString(R.string.bit_per_sec_abbr));
-            SYMBOLS.put("B/s", mGbContext.getString(R.string.byte_per_sec_abbr));
-            SYMBOLS.put("k", mGbContext.getString(R.string.kilo_abbr));
-            SYMBOLS.put("M", mGbContext.getString(R.string.mega_abbr));
-            SYMBOLS.put("G", mGbContext.getString(R.string.giga_abbr));
-        } catch (NameNotFoundException e) {
-            XposedBridge.log(e);
-        }
+    protected void onInitialize(XSharedPreferences prefs) throws Throwable {
+        mGbContext = Utils.getGbContext(getContext());
+        SYMBOLS.put("b/s", mGbContext.getString(R.string.bit_per_sec_abbr));
+        SYMBOLS.put("B/s", mGbContext.getString(R.string.byte_per_sec_abbr));
+        SYMBOLS.put("k", mGbContext.getString(R.string.kilo_abbr));
+        SYMBOLS.put("M", mGbContext.getString(R.string.mega_abbr));
+        SYMBOLS.put("G", mGbContext.getString(R.string.giga_abbr));
 
         mMode = Mode.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_OMNI_MODE, "IN_OUT"));
         mShowIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_OMNI_SHOW_ICON, true);

@@ -94,7 +94,7 @@ public class GlowPadHelper {
 
         try {
             if (mGbResources == null) {
-                mGbResources = context.createPackageContext(GravityBox.PACKAGE_NAME, 0).getResources();
+                mGbResources = Utils.getGbContext(context).getResources();
             }
             final String key = app + "_" + bgStyle.toString();
             if (mAppInfoCache.containsKey(key)) {
@@ -226,7 +226,7 @@ public class GlowPadHelper {
 
         try {
             if (mGbResources == null) {
-                mGbResources = context.createPackageContext(GravityBox.PACKAGE_NAME, 0).getResources();
+                mGbResources = Utils.getGbContext(context).getResources();
             }
 
             Paint paint = new Paint();

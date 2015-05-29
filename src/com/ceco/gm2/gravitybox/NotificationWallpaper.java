@@ -23,7 +23,6 @@ import de.robv.android.xposed.XposedBridge;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -61,13 +60,13 @@ class NotificationWallpaper extends FrameLayout implements BroadcastSubReceiver 
         mContext = mNotificationPanelView.getContext();
 
         try {
-            Context gbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME, 0);
+            Context gbContext = Utils.getGbContext(mContext);
             mNotifBgImagePathPortrait = gbContext.getFilesDir() + "/notifwallpaper";
             mNotifBgImagePathLandscape = gbContext.getFilesDir() + "/notifwallpaper_landscape";
-        } catch (NameNotFoundException e) {
+        } catch (Throwable t) {
             mNotifBgImagePathPortrait = "";
             mNotifBgImagePathLandscape = "";
-            XposedBridge.log(e);
+            XposedBridge.log(t);
         }
 
         mBgType = GravityBoxSettings.NOTIF_BG_DEFAULT;

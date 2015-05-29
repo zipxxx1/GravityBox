@@ -18,7 +18,6 @@ package com.ceco.gm2.gravitybox;
 import java.io.File;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -148,8 +147,7 @@ public class ModCallCard {
                             "picture_unknown", "drawable", PACKAGE_NAME);
 
                     if (resId == (Integer) param.args[1]) {
-                        Context gbContext = context.createPackageContext(GravityBox.PACKAGE_NAME, 0);
-                        final String path = gbContext.getFilesDir() + "/caller_photo";
+                        final String path = Utils.getGbContext(context).getFilesDir() + "/caller_photo";
                         File f = new File(path);
                         if (f.exists()) {
                             Bitmap b = BitmapFactory.decodeFile(path);

@@ -60,18 +60,13 @@ public class TrafficMeter extends TrafficMeterAbstract {
     }
 
     @Override
-    protected void onInitialize(XSharedPreferences prefs) {
+    protected void onInitialize(XSharedPreferences prefs) throws Throwable {
         mCanReadFromFile = canReadFromFile();
-        try {
-            Context gbContext = getContext().createPackageContext(
-                    GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
-            mB = gbContext.getString(R.string.byte_abbr);
-            mKB = gbContext.getString(R.string.kilobyte_abbr);
-            mMB = gbContext.getString(R.string.megabyte_abbr);
-            mS = gbContext.getString(R.string.second_abbr);
-        } catch (Exception e) {
-            log(e.getMessage());
-        }
+        Context gbContext = Utils.getGbContext(getContext());
+        mB = gbContext.getString(R.string.byte_abbr);
+        mKB = gbContext.getString(R.string.kilobyte_abbr);
+        mMB = gbContext.getString(R.string.megabyte_abbr);
+        mS = gbContext.getString(R.string.second_abbr);
 
         try {
             int inactivityMode = Integer.valueOf(prefs.getString(

@@ -656,7 +656,7 @@ public class ModQuickSettings {
 
             mQuickSettings = param.thisObject;
             mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-            mGbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+            mGbContext = Utils.getGbContext(mContext);
             mContainerView = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mContainerView");
             mWifiManager = new WifiManagerWrapper(mContext);
 
@@ -1456,6 +1456,7 @@ public class ModQuickSettings {
         try {
             XposedHelpers.findAndHookMethod(classQsModel, "addBatteryTile",
                     CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                @SuppressLint("NewApi")
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     final View tile = (View) param.args[0];
@@ -1468,8 +1469,10 @@ public class ModQuickSettings {
                             if (batteryImg != null) {
                                 ViewGroup tileContent = (ViewGroup) ((ViewGroup) tile).getChildAt(0);
                                 KitKatBattery kkb = new KitKatBattery(tile.getContext());
-                                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                                        (LinearLayout.LayoutParams) batteryImg.getLayoutParams());
+                                LinearLayout.LayoutParams lp = Build.VERSION.SDK_INT >= 19 ?
+                                        new LinearLayout.LayoutParams(
+                                        (LinearLayout.LayoutParams) batteryImg.getLayoutParams()) :
+                                            (LinearLayout.LayoutParams) batteryImg.getLayoutParams();
                                 kkb.setId(imgResId);
                                 kkb.setLayoutParams(lp);
                                 kkb.setPadding(batteryImg.getPaddingLeft(), batteryImg.getPaddingTop(), 
