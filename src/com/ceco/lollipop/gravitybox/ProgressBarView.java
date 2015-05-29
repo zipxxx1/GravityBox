@@ -142,11 +142,16 @@ public class ProgressBarView extends View implements
 
     @Override
     public void onProgressTrackingStopped() {
-        if (mAnimator.isStarted()) {
-            mAnimator.end();
-        }
-        setScaleX(0f);
-        setVisibility(View.GONE);
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mAnimator.isStarted()) {
+                    mAnimator.end();
+                }
+                setScaleX(0f);
+                setVisibility(View.GONE);
+            }
+        }, ANIM_DURATION + 100);
     }
 
     @Override
