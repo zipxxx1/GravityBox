@@ -81,8 +81,8 @@ public class ModAudioSettings {
                     if (DEBUG) log("initVolumePreference for notification stream");
 
                     // change icon of ringer volume preference
-                    Context gbctx = ((Context) XposedHelpers.getObjectField(param.thisObject, "mContext"))
-                            .createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+                    Context gbctx = Utils.getGbContext((Context) XposedHelpers.getObjectField(
+                            param.thisObject, "mContext"));
                     mRingerIcon = gbctx.getDrawable(R.drawable.ic_audio_ring);
                     Preference p = (Preference) XposedHelpers.getObjectField(
                             param.thisObject, "mRingOrNotificationPreference");

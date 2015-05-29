@@ -220,7 +220,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         mView = view;
         mIconManager = SysUiManagers.IconManager;
         mResources = mView.getResources();
-        mGbResources = SysUiManagers.getGbContext(mView.getContext()).getResources();
+        mGbResources = Utils.getGbContext(mView.getContext()).getResources();
 
         mFldWifiGroup = resolveField("mWifiGroup", "mWifiViewGroup");
         mFldMobileGroup = resolveField("mMobileGroup", "mMobileViewGroup");

@@ -108,7 +108,7 @@ public class AppLauncher implements BroadcastSubReceiver {
         mContext = context;
         mResources = mContext.getResources();
         mPrefs = prefs;
-        mGbContext = SysUiManagers.getGbContext(mContext);
+        mGbContext = Utils.getGbContext(mContext);
         mGbResources = mGbContext.getResources();
         mHandler = new Handler();
         mPm = mContext.getPackageManager();

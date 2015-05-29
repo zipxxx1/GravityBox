@@ -40,7 +40,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.ceco.lollipop.gravitybox.R;
-import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.pie.PieController;
 import com.ceco.lollipop.gravitybox.pie.PieLayout;
 import com.ceco.lollipop.gravitybox.pie.PieController.Position;
@@ -322,7 +321,7 @@ public class ModPieControls {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (DEBUG) log("BaseStatusBar starting...");
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    mGbContext = SysUiManagers.getGbContext(mContext);
+                    mGbContext = Utils.getGbContext(mContext);
                     mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
                     mPieController = new PieController(mContext, mGbContext, prefs);
 

@@ -23,7 +23,6 @@ import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 import com.ceco.lollipop.gravitybox.managers.StatusbarQuietHoursManager.QuietHoursListener;
 
-import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
@@ -56,7 +55,7 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
 
         mQuietHours = SysUiManagers.QuietHoursManager.getQuietHours();
 
-        Context gbContext = SysUiManagers.getGbContext(context);
+        Context gbContext = Utils.getGbContext(context);
         setImageDrawable(gbContext.getResources().getDrawable(R.drawable.stat_sys_quiet_hours));
 
         updateVisibility();

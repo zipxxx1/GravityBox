@@ -29,7 +29,6 @@ import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.Visibility;
-import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
@@ -754,7 +753,7 @@ public class ModLedControl {
     }
 
     private static ImageButton createSnoozeButton(final Context context) throws Throwable {
-        final Context gbContext = SysUiManagers.getGbContext(context);
+        final Context gbContext = Utils.getGbContext(context);
         mHeadsUpSnoozeDlg = new HeadsUpSnoozeDialog(context, gbContext, mHeadsUpSnoozeTimerSetListener);
         mHeadsUpSnoozeMap = new HashMap<String, Long>();
         mHeadsUpSnoozeMap.put("[ALL]", 0l);

@@ -868,7 +868,7 @@ public class ModHwKeys {
         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
             mPhoneWindowManager = param.thisObject;
             mContext = (Context) XposedHelpers.getObjectField(mPhoneWindowManager, "mContext");
-            mGbContext = mContext.createPackageContext(GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+            mGbContext = Utils.getGbContext(mContext);
             XposedHelpers.setIntField(mPhoneWindowManager, "mAllowAllRotations", 
                     mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS, false) ? 1 : 0);
 

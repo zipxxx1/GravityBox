@@ -109,10 +109,8 @@ public class ModPowerMenu {
                @Override
                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                    mContext = (Context) param.args[0];
-                   Context gbContext = mContext.createPackageContext(
-                           GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
                    Resources res = mContext.getResources();
-                   Resources gbRes = gbContext.getResources();
+                   Resources gbRes = Utils.getGbContext(mContext).getResources();
                    gbRes.updateConfiguration(res.getConfiguration(), res.getDisplayMetrics());
 
                    int rebootStrId = res.getIdentifier("factorytest_reboot", "string", PACKAGE_NAME);
@@ -663,8 +661,7 @@ public class ModPowerMenu {
 
         private void takeScreenrecord() {
             try {
-                Context gbContext = mContext.createPackageContext(
-                        GravityBox.PACKAGE_NAME, Context.CONTEXT_IGNORE_SECURITY);
+                Context gbContext = Utils.getGbContext(mContext);
                 Intent intent = new Intent(gbContext, ScreenRecordingService.class);
                 intent.setAction(ScreenRecordingService.ACTION_SCREEN_RECORDING_START);
                 gbContext.startService(intent);

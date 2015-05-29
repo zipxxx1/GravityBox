@@ -10,7 +10,6 @@ import java.util.Map.Entry;
 
 import android.content.Context;
 
-import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.quicksettings.AospTile;
 import com.ceco.lollipop.gravitybox.quicksettings.QsPanel;
 import com.ceco.lollipop.gravitybox.quicksettings.QsQuickPulldownHandler;
@@ -122,7 +121,7 @@ public class ModQsTiles {
                     String[] orderedKeys = prefs.getString(
                             TileOrderActivity.PREF_KEY_TILE_ENABLED,
                             TileOrderActivity.getDefaultTileList(
-                                    SysUiManagers.getGbContext(context))).split(",");
+                                    Utils.getGbContext(context))).split(",");
                     for (String key : orderedKeys) {
                          for (Entry<String, Object> entry : gbTileMap.entrySet()) {
                              if (entry.getValue() instanceof AospTile) {

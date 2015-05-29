@@ -20,6 +20,7 @@ import java.util.List;
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
 import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxService;
+import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
 
@@ -119,7 +120,7 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
 
     public void setMode(QuietHours.Mode mode) {
         try {
-            Context gbContext = SysUiManagers.getGbContext(mContext);
+            Context gbContext = Utils.getGbContext(mContext);
             Intent intent = new Intent(gbContext, GravityBoxService.class);
             intent.setAction(QuietHoursActivity.ACTION_SET_QUIET_HOURS_MODE);
             intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE, mode.toString());

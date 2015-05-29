@@ -19,8 +19,6 @@ public class SysUiManagers {
     public static StatusbarQuietHoursManager QuietHoursManager;
     public static AppLauncher AppLauncher;
 
-    private static Context sGbContext;
-
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
@@ -80,14 +78,6 @@ public class SysUiManagers {
         intentFilter.addAction(com.ceco.lollipop.gravitybox.managers.AppLauncher.ACTION_SHOW_APP_LAUCNHER);
 
         context.registerReceiver(sBroadcastReceiver, intentFilter);
-    }
-
-    public static synchronized Context getGbContext(Context context) throws Throwable {
-        if (sGbContext == null) {
-            sGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME,
-                    Context.CONTEXT_IGNORE_SECURITY);
-        }
-        return sGbContext;
     }
 
     private static BroadcastReceiver sBroadcastReceiver = new BroadcastReceiver() {

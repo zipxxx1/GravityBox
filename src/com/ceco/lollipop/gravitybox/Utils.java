@@ -88,8 +88,19 @@ public class Utils {
     private static Boolean mHasCompass;
     private static Boolean mHasProximitySensor = null;
 
+    // GB Context
+    private static Context mGbContext;
+
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
+    }
+
+    public static synchronized Context getGbContext(Context context) throws Throwable {
+        if (mGbContext == null) {
+            mGbContext = context.createPackageContext(GravityBox.PACKAGE_NAME,
+                    Context.CONTEXT_IGNORE_SECURITY);
+        }
+        return mGbContext;
     }
 
     private static int getScreenType(Context con) {

@@ -24,7 +24,6 @@ import java.util.Map;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager;
 import com.ceco.lollipop.gravitybox.managers.StatusBarIconManager.ColorInfo;
-import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.Context;
@@ -184,7 +183,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
 
     @Override
     protected void onInitialize(XSharedPreferences prefs) throws Throwable {
-        mGbContext = SysUiManagers.getGbContext(getContext());
+        mGbContext = Utils.getGbContext(getContext());
         SYMBOLS.put("b/s", mGbContext.getString(R.string.bit_per_sec_abbr));
         SYMBOLS.put("B/s", mGbContext.getString(R.string.byte_per_sec_abbr));
         SYMBOLS.put("k", mGbContext.getString(R.string.kilo_abbr));

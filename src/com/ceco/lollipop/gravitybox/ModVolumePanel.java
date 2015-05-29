@@ -17,7 +17,6 @@ package com.ceco.lollipop.gravitybox;
 
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
-import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -130,7 +129,7 @@ public class ModVolumePanel {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mVolumePanel = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(mVolumePanel, "mContext");
-                    mGbContext = SysUiManagers.getGbContext(context);
+                    mGbContext = Utils.getGbContext(context);
                     if (DEBUG) log("VolumePanel constructed; mVolumePanel set");
 
                     mTimeout = 0;

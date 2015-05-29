@@ -25,6 +25,7 @@ import java.util.Map;
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -86,7 +87,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     protected StatusBarIconManager(Context context, XSharedPreferences prefs) throws Throwable {
         mContext = context;
         mSystemUiRes = mContext.getResources();
-        Context gbContext = SysUiManagers.getGbContext(mContext);
+        Context gbContext = Utils.getGbContext(mContext);
         mGbResources = gbContext.getResources();
 
         Map<String, Integer[]> basicIconMap = new HashMap<String, Integer[]>();

@@ -16,7 +16,6 @@
 package com.ceco.lollipop.gravitybox;
 
 import com.ceco.lollipop.gravitybox.ModStatusBar.ContainerType;
-import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import android.content.Intent;
 import android.content.Context;
@@ -100,7 +99,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
     private void initLayout() throws Throwable {
         final String[] batteryPercentTextIds = new String[] { "battery_level", "percentage", "battery_text" };
         Resources res = mContext.getResources();
-        Resources gbRes = SysUiManagers.getGbContext(mContext).getResources();
+        Resources gbRes = Utils.getGbContext(mContext).getResources();
 
         // inject percent text if it doesn't exist
         for (String bptId : batteryPercentTextIds) {
