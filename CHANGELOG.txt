@@ -1,3 +1,8 @@
+Changelog 3.5.7 - 30/05/2015
+--------------------------------------
+- Launcher tweaks: adjusted for compatibility with Google App 4.6.10
+- Optimized GB context handling to save some system resources
+
 Changelog 3.5.6 - 02/05/2015
 --------------------------------------
 - Launcher tweaks: adjusted for compatibility with Google App 4.5.12 and 4.5.13
