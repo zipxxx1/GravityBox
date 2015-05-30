@@ -137,7 +137,6 @@ public class ModStatusBar {
     private static int mDeleteIconId;
     private static StatusbarDownloadProgressView mDownloadProgressView;
     private static TickerPolicy mTickerPolicy;
-    private static List<String> mErrorsLogged = new ArrayList<String>();
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -155,13 +154,6 @@ public class ModStatusBar {
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
-    }
-
-    private static void logAndMute(String key, Throwable t) {
-        if (!mErrorsLogged.contains(key)) {
-            XposedBridge.log(t);
-            mErrorsLogged.add(key);
-        }
     }
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -1026,7 +1018,7 @@ public class ModStatusBar {
             });
         }
         catch (Throwable t) {
-            logAndMute("initMtkPlugin", t);
+            if (DEBUG) XposedBridge.log(t);
         }
     }
 
