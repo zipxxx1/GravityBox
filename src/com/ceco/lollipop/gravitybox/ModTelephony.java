@@ -19,6 +19,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
@@ -32,6 +33,7 @@ public class ModTelephony {
             "com.android.internal.telephony.gsm.GsmServiceStateTracker";
     private static final String CLASS_SERVICE_STATE = "android.telephony.ServiceState";
     private static final String CLASS_SERVICE_STATE_EXT = "com.mediatek.op.telephony.ServiceStateExt";
+    private static final String CLASS_PHONE_BASE = "com.android.internal.telephony.PhoneBase";
     private static final boolean DEBUG = false;
 
     private static void log(String msg) {
@@ -90,25 +92,72 @@ public class ModTelephony {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if (!mNationalRoamingEnabled) return;
 
-                        String simNumeric = Utils.SystemProp.get("gsm.sim.operator.numeric", "");
-                        String operatorNumeric = (String) XposedHelpers.callMethod(
-                                param.args[0], "getOperatorNumeric");
-
-                        boolean equalsMcc = false;
-                        try {
-                            equalsMcc = simNumeric.substring(0, 3).equals(operatorNumeric.substring(0, 3));
-                            if (DEBUG) log("isOperatorConsideredNonRoaming: simNumeric=" + simNumeric +
-                                    "; operatorNumeric=" + operatorNumeric + "; equalsMcc=" + equalsMcc);
-                        } catch (Exception e) { }
-
                         boolean result = (Boolean) param.getResult();
-                        result = result || equalsMcc;
+                        result = result || equalsMcc(param.args[0], result);
+                        if (DEBUG) log("isOperatorConsideredNonRoaming: " + result);
                         param.setResult(result);
                     }
                 });
+
+                XposedHelpers.findAndHookMethod(classGsmServiceStateTracker, "isOperatorConsideredRoaming",
+                        CLASS_SERVICE_STATE, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (!mNationalRoamingEnabled) return;
+
+                        boolean result = (boolean) param.getResult();
+                        result = result && !equalsMcc(param.args[0], result);
+                        if (DEBUG) log("isOperatorConsideredRoaming: " + result);
+                        param.setResult(result);
+                    }
+                });
+
+                if (Build.VERSION.SDK_INT >= 22) {
+                    XposedHelpers.findAndHookMethod(CLASS_PHONE_BASE, null,
+                            "isMccMncMarkedAsRoaming", String.class, new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            if (!mNationalRoamingEnabled) return;
+
+                            boolean result = (boolean) param.getResult();
+                            result = result && !equalsMcc((String)param.args[0], result);
+                            if (DEBUG) log("isMccMncMarkedAsRoaming: " + result);
+                            param.setResult(result);
+                        }
+                    });
+                }
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static boolean equalsMcc(Object serviceState, boolean defaultRetVal) {
+        try {
+            String operatorNumeric = (String) XposedHelpers.callMethod(
+                    serviceState, "getOperatorNumeric");
+            return equalsMcc(operatorNumeric, defaultRetVal);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return defaultRetVal;
+        }
+    }
+
+    private static boolean equalsMcc(String operatorNumeric, boolean defaultRetVal) {
+        try {
+            String simNumeric = Utils.SystemProp.get("gsm.sim.operator.numeric", "");
+
+            boolean equalsMcc = defaultRetVal;
+            try {
+                equalsMcc = simNumeric.substring(0, 3).equals(operatorNumeric.substring(0, 3));
+                if (DEBUG) log("equalsMcc: simNumeric=" + simNumeric +
+                        "; operatorNumeric=" + operatorNumeric + "; equalsMcc=" + equalsMcc);
+            } catch (Exception e) { }
+
+            return equalsMcc;
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return defaultRetVal;
         }
     }
 }
