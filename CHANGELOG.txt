@@ -1,3 +1,17 @@
+Changelog 5.1.2 - 30/05/2015
+--------------------------------------
+- Navigation bar:
+--- fixed drop shadow missing on navbar key icons
+--- apply key icon scaling when navbar size gets smaller than icon size
+- Do not apply low battery color to circle battery when battery saver orange bars are showing
+- Small improvements to status bar progress bar
+- Updated screenshot delete icon
+- Recents: improved clear all button to clear all tasks at once
+- Expanded desktop: try to respect custom ROM specific navbar dimensions when GB's navbar tweaks disabled
+--- should fix hidden navbar appearing on some custom ROMs
+- Phone tweaks: attempt to fix option for national data roaming
+- Fixed potential SystemUI crash occurring on some (unsupported) devices
+
 Changelog 5.1.1 - 23/05/2015
 --------------------------------------
 - Signal cluster tweaks adjusted for LP 5.1 (untested on Motorola devices)
