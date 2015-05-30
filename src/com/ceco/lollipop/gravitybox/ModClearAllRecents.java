@@ -514,8 +514,7 @@ public class ModClearAllRecents {
             for (int i = 0; i < childCount; i++) {
                 final View child = mRecentsView.getChildAt(i);
                 if (child.getClass().getName().equals(CLASS_TASK_STACK_VIEW)) {
-                    Object stack = XposedHelpers.getObjectField(child, "mStack");
-                    clearStack(child, stack);
+                    clearStack((ViewGroup)child);
                 }
             }
         } catch (Throwable t) {
@@ -523,16 +522,27 @@ public class ModClearAllRecents {
         }
     }
 
-    private static final void clearStack(final Object stackView, Object stack) {
+    private static final void clearStack(final ViewGroup stackView) {
+        Object stack = XposedHelpers.getObjectField(stackView, "mStack");
         final ArrayList<?> tasks = (ArrayList<?>) XposedHelpers.callMethod(stack, "getTasks");
         final int count = tasks.size();
+        int numCleared = 0;
         for (int i = 0; i < count; i++) {
             Object task = tasks.get(i);
             final Object taskView = XposedHelpers.callMethod(stackView,
                     "getChildViewForTask", task);
             if (taskView != null) {
                 XposedHelpers.callMethod(taskView, "dismissTask");
+                numCleared++;
             }
+        }
+        if (numCleared < count) {
+            stackView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    clearStack(stackView);
+                }
+            }, 400);
         }
     }
 }
