@@ -278,16 +278,16 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
                 setScaleX(newScaleX);
             }
         } else {
-            if (mAnimator.isStarted()) {
-                mAnimator.end();
-            }
             postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    if (mAnimator.isStarted()) {
+                        mAnimator.end();
+                    }
                     setScaleX(0f);
                     setVisibility(View.GONE);
                 }
-            }, 500);
+            }, ANIM_DURATION + 100);
         }
     }
 
