@@ -24,6 +24,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Rect;
 import android.os.Build;
@@ -80,6 +81,15 @@ public class ModExpandedDesktop {
         static final int PRIVATE_FLAG_KEYGUARD = 0x00000400;
     }
 
+    private static class NavbarDimensions {
+        int wPort, hPort, hLand;
+        NavbarDimensions(int wp, int hp, int hl) {
+            wPort = wp;
+            hPort = hp;
+            hLand = hl;
+        }
+    }
+
     private static Context mContext;
     private static Object mPhoneWindowManager;
     private static SettingsObserver mSettingsObserver;
@@ -103,6 +113,7 @@ public class ModExpandedDesktop {
     private static Method mRequestTransientBars = null;
     private static Method mUpdateSystemBarsLw = null;
     private static Method mUpdateSystemUiVisibilityLw = null;
+    private static NavbarDimensions mNavbarDimensions;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -150,16 +161,18 @@ public class ModExpandedDesktop {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT)) {
                     mNavbarHeightScaleFactor = 
                             (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT, 100) / 100f;
+                    updateNavbarDimensions();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_HEIGHT_LANDSCAPE)) {
                     mNavbarHeightLandscapeScaleFactor = (float)intent.getIntExtra(
                                     GravityBoxSettings.EXTRA_NAVBAR_HEIGHT_LANDSCAPE,  100) / 100f;
+                    updateNavbarDimensions();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH)) {
                     mNavbarWidthScaleFactor = 
                             (float)intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_WIDTH, 100) / 100f;
+                    updateNavbarDimensions();
                 }
-                updateSettings();
             }
         }
     };
@@ -200,34 +213,41 @@ public class ModExpandedDesktop {
                         = navigationBarHeightForRotation[upsideDownRotation]
                         = navigationBarHeightForRotation[landscapeRotation]
                         = navigationBarHeightForRotation[seascapeRotation] = 0;
-            } else {
-                final int resWidthId = mContext.getResources().getIdentifier(
-                        "navigation_bar_width", "dimen", "android");
-                final int resHeightId = mContext.getResources().getIdentifier(
-                        "navigation_bar_height", "dimen", "android");
-                final int resHeightLandscapeId = mContext.getResources().getIdentifier(
-                        "navigation_bar_height_landscape", "dimen", "android");
-
+            } else if (mNavbarDimensions != null) {
                 navigationBarHeightForRotation[portraitRotation] =
                 navigationBarHeightForRotation[upsideDownRotation] =
-                    (int) (mContext.getResources().getDimensionPixelSize(resHeightId)
-                    * mNavbarHeightScaleFactor);
+                        mNavbarDimensions.hPort;
                 navigationBarHeightForRotation[landscapeRotation] =
                 navigationBarHeightForRotation[seascapeRotation] =
-                    (int) (mContext.getResources().getDimensionPixelSize(resHeightLandscapeId)
-                    * mNavbarHeightLandscapeScaleFactor);
+                        mNavbarDimensions.hLand;
 
                 navigationBarWidthForRotation[portraitRotation] =
                 navigationBarWidthForRotation[upsideDownRotation] =
                 navigationBarWidthForRotation[landscapeRotation] =
                 navigationBarWidthForRotation[seascapeRotation] =
-                    (int) (mContext.getResources().getDimensionPixelSize(resWidthId)
-                    * mNavbarWidthScaleFactor);
+                        mNavbarDimensions.wPort;
             }
-            XposedHelpers.setObjectField(mPhoneWindowManager, "mNavigationBarWidthForRotation", navigationBarWidthForRotation);
-            XposedHelpers.setObjectField(mPhoneWindowManager, "mNavigationBarHeightForRotation", navigationBarHeightForRotation);
 
             XposedHelpers.callMethod(mPhoneWindowManager, "updateRotation", false);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void updateNavbarDimensions() {
+        try {
+            Resources res = mContext.getResources();
+            int resWidthId = res.getIdentifier(
+                    "navigation_bar_width", "dimen", "android");
+            int resHeightId = res.getIdentifier(
+                    "navigation_bar_height", "dimen", "android");
+            int resHeightLandscapeId = res.getIdentifier(
+                    "navigation_bar_height_landscape", "dimen", "android");
+            mNavbarDimensions = new NavbarDimensions(
+                    (int) (res.getDimensionPixelSize(resWidthId) * mNavbarWidthScaleFactor),
+                    (int) (res.getDimensionPixelSize(resHeightId) * mNavbarHeightScaleFactor),
+                    (int) (res.getDimensionPixelSize(resHeightLandscapeId) *mNavbarHeightLandscapeScaleFactor));
+            updateSettings();
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -337,12 +357,37 @@ public class ModExpandedDesktop {
                                 (Handler) XposedHelpers.getObjectField(param.thisObject, "mHandler"));
                         mSettingsObserver.observe();
 
+                        if (mNavbarOverride) {
+                            updateNavbarDimensions();
+                        }
+
                         if (DEBUG) log("Phone window manager initialized");
                     } catch (Throwable t) {
                         XposedBridge.log(t);
                     }
                 }
             });
+
+            if (!mNavbarOverride) {
+                XposedBridge.hookAllMethods(classPhoneWindowManager, "setInitialDisplaySize", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        int[] navigationBarWidthForRotation = (int[]) XposedHelpers.getObjectField(
+                                param.thisObject, "mNavigationBarWidthForRotation");
+                        int[] navigationBarHeightForRotation = (int[]) XposedHelpers.getObjectField(
+                                param.thisObject, "mNavigationBarHeightForRotation");
+                        int portraitRotation = XposedHelpers.getIntField(param.thisObject, "mPortraitRotation");
+                        int landscapeRotation = XposedHelpers.getIntField(param.thisObject, "mLandscapeRotation");
+                        if (navigationBarWidthForRotation != null &&
+                                navigationBarHeightForRotation != null) {
+                            mNavbarDimensions = new NavbarDimensions(
+                                navigationBarWidthForRotation[portraitRotation],
+                                navigationBarHeightForRotation[portraitRotation],
+                                navigationBarHeightForRotation[landscapeRotation]);
+                        }
+                    }
+                });
+            }
 
             if (Build.VERSION.SDK_INT < 22) {
                 XposedHelpers.findAndHookMethod(classPhoneWindowManager, "getContentInsetHintLw",
