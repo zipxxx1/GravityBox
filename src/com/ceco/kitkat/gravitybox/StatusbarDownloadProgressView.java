@@ -367,7 +367,7 @@ public class StatusbarDownloadProgressView extends View implements IconManagerLi
                     colorInfo.iconColor[0] : Color.WHITE);
         }
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
-            setAlpha(colorInfo.alphaSignalCluster);
+            setAlpha(colorInfo.alphaTextAndBattery);
         }
     }
 
