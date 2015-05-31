@@ -115,6 +115,7 @@
     <string name="qs_tile_smart_radio">Ondes Radio Intelligentes</string>
     <string name="qs_tile_lock_screen">Écran de Déverrouillage</string>
     <string name="qs_tile_inversion">Inversion</string>
+    <string name="qs_tile_battery">Batterie</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -263,7 +264,7 @@
 
     <!-- Expandable volume panel -->
     <string name="pref_volume_panel_expandable_title">Panneau de volume extensible</string>
-    <string name="pref_volume_panel_expandable_summary">Active le panneau de volume extensible avec la possibilité de régler les volumes pour différents flux sonores</string>
+    <string name="pref_volume_panel_expandable_summary">Active le panneau de volume extensible avec la possibilité de régler les volumes pour différents flux sonores (redémarrage nécessaire)</string>
 
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Volumes sonnerie &amp; notifications liés</string>
@@ -1685,7 +1686,7 @@
     <string name="battery_percent_text_statusbar_title">Afficher dans la barre d\'état</string>
     <string name="battery_percent_text_statusbar_summary">Affiche le pourcentage de batterie au format texte dans la barre d\'état standard (lorsque l\'appareil est déverrouillé)</string>
     <string name="battery_percent_text_keyguard_title">Mode verrou</string>
-    <string name="battery_percent_text_keyguard_summary">Spécifie le comportement du texte (pourcentage) la barre d\'état de l\'écran de déverouillage</string>
+    <string name="battery_percent_text_keyguard_summary">Spécifie le comportement du texte (pourcentage) la barre d\'état de l\'écran de déverrouillage</string>
     <string name="keyguard_percent_text_default">Par défaut (pendant le rechargement)</string>
     <string name="keyguard_percent_text_show_always">Toujours afficher</string>
     <string name="keyguard_percent_text_hide">Masquer</string>
@@ -1780,5 +1781,33 @@
     <string name="pref_lockscreen_smart_unlock_title">Déverrouillage intelligent</string>
     <string name="pref_lockscreen_smart_unlock_summary">Déverrouillage automatique lorsque la politique de verrouillage intelligent 
         détecte les conditions requises</string>
+
+    <!--  WiFi trusted networks -->
+    <string name="wifi_trusted_info">Approuvé pour le Verrouillage Intelligent</string>
+
+    <!-- QS: Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_title">Paramètres touche batterie</string>
+    <string name="pref_battery_tile_percentage_title">Afficher le pourcentage</string>
+    <string name="pref_battery_tile_saver_indicate_title">Indication économiseur de batterie</string>
+    <string name="pref_battery_tile_saver_indicate_summary">Utilise la même couleur que les barres système
+        pour indiquer que le mode économiseur de batterie est actif</string>
+    <string name="pref_battery_tile_temp_unit_title">Unité de température</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="pref_battery_tile_swap_actions_title">Inverser les actions</string>
+    <string name="pref_battery_tile_swap_actions_summary">Inverse les actions par appui simple/long</string>
+
+    <!-- Power: Disable battery saver indication -->
+    <string name="pref_battery_saver_indication_disable_title">Désactiver l\'indication d\'économiseur de batterie</string>
+    <string name="pref_battery_saver_indication_disable_summary">Désactive la couleur orange des barres système
+        lorsque l\'économiseur de batterie est actif</string>
+
+    <!-- Signal cluster: Disable exclamation marks -->
+    <string name="pref_signal_cluster_dem_title">Désactiver les points d\'exclamation</string>
+    <string name="pref_signal_cluster_dem_summary">Redémarrage nécessaire</string>
+
+    <!-- UNC: LED priority mode -->
+    <string name="pref_lc_led_priority_mode_title">Mode prioritaire</string>
+    <string name="pref_lc_led_priority_mode_summary">Active la LED pour les modes prioritaires et silencieux</string>
 
 </resources>
