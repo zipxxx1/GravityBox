@@ -78,6 +78,7 @@ public class LedSettings {
     private boolean mProgressTracking;
     private Visibility mVisibility;
     private boolean mPriorityMode;
+    private boolean mSoundToVibrateDisabled;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -156,6 +157,8 @@ public class LedSettings {
                 ls.setVisibility(data[1]);
             } else if (data[0].equals("priorityMode")) {
                 ls.setPriorityMode(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("soundToVibrateDisabled")) {
+                ls.setSoundToVibrateDisabled(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -187,6 +190,7 @@ public class LedSettings {
         mProgressTracking = false;
         mVisibility = Visibility.DEFAULT;
         mPriorityMode = false;
+        mSoundToVibrateDisabled = false;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -388,6 +392,10 @@ public class LedSettings {
         }
     }
 
+    protected void setSoundToVibrateDisabled(boolean disabled) {
+        mSoundToVibrateDisabled = disabled;
+    }
+
     protected void setPriorityMode(boolean enabled) {
         mPriorityMode = enabled;
     }
@@ -488,6 +496,10 @@ public class LedSettings {
         return mPriorityMode;
     }
 
+    public boolean getSoundToVibrateDisabled() {
+        return mSoundToVibrateDisabled;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -519,6 +531,7 @@ public class LedSettings {
             dataSet.add("progressTracking:" + mProgressTracking);
             dataSet.add("visibility:" + mVisibility.toString());
             dataSet.add("priorityMode:" + mPriorityMode);
+            dataSet.add("soundToVibrateDisabled:" + mSoundToVibrateDisabled);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

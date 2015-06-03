@@ -133,6 +133,13 @@
             android:defaultValue="0,250,250,250"
             android:dependency="pref_lc_vibrate_override" />
 
+        <CheckBoxPreference
+            android:key="pref_lc_sound_vibrate"
+            android:title="@string/pref_lc_sound_vibrate_title"
+            android:summary="@string/pref_lc_sound_vibrate_summary"
+            android:defaultValue="false"
+            android:persistent="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

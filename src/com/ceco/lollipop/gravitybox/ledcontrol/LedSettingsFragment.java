@@ -70,6 +70,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_PROGRESS_TRACKING = "pref_lc_progress_tracking";
     private static final String PREF_KEY_VISIBILITY = "pref_lc_notif_visibility";
     private static final String PREF_KEY_PRIORITY_MODE = "pref_lc_led_priority_mode";
+    private static final String PREF_KEY_DISABLE_SOUND_TO_VIBRATE = "pref_lc_sound_vibrate";
 
     private static final int REQ_PICK_SOUND = 101;
 
@@ -100,6 +101,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private CheckBoxPreference mProgressTrackingPref;
     private ListPreference mVisibilityPref;
     private CheckBoxPreference mPriorityModePref;
+    private CheckBoxPreference mDisableSoundToVibratePref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -137,6 +139,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mVisibilityPref = (ListPreference) findPreference(PREF_KEY_VISIBILITY);
         mVisibilityPref.setOnPreferenceChangeListener(this);
         mPriorityModePref = (CheckBoxPreference) findPreference(PREF_KEY_PRIORITY_MODE);
+        mDisableSoundToVibratePref = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_SOUND_TO_VIBRATE);
     }
 
     protected void initialize(LedSettings ledSettings) {
@@ -194,6 +197,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
                 getString(R.string.pref_lc_notif_visibility_summary),
                 mVisibilityPref.getEntry()));
         mPriorityModePref.setChecked(ledSettings.getPriorityMode());
+        mDisableSoundToVibratePref.setChecked(ledSettings.getSoundToVibrateDisabled());
     }
 
     private void updateSoundPrefSummary() {
@@ -302,6 +306,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected boolean getPriorityMode() {
         return mPriorityModePref.isChecked();
+    }
+
+    protected boolean getSoundToVibrateDisabled() {
+        return mDisableSoundToVibratePref.isChecked();
     }
 
     @Override

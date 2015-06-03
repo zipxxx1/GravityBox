@@ -1810,4 +1810,9 @@
     <string name="pref_lc_led_priority_mode_title">Priority mode</string>
     <string name="pref_lc_led_priority_mode_summary">Allows LED during priority and silent ringer modes</string>
 
+    <!-- UNC: Disable sound to vibrate conversion -->
+    <string name="pref_lc_sound_vibrate_title">Disable sound to vibration conversion</string>
+    <string name="pref_lc_sound_vibrate_summary">Prevents notifications having vibrations turned off from
+        being forced to vibrate during vibrate-only ringer mode</string>
+
 </resources>
