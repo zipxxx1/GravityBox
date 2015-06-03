@@ -67,6 +67,7 @@ public class LedSettings {
     private boolean mHeadsUpIgnoreUpdate;
     private int mHeadsUpTimeout;
     private boolean mProgressTracking;
+    private boolean mSoundToVibrateDisabled;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -145,6 +146,8 @@ public class LedSettings {
                 ls.setHeadsUpTimeout(Integer.valueOf(data[1]));
             } else if (data[0].equals("progressTracking")) {
                 ls.setProgressTracking(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("soundToVibrateDisabled")) {
+                ls.setSoundToVibrateDisabled(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -176,6 +179,7 @@ public class LedSettings {
         mHeadsUpIgnoreUpdate = false;
         mHeadsUpTimeout = 5;
         mProgressTracking = false;
+        mSoundToVibrateDisabled = false;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -373,6 +377,10 @@ public class LedSettings {
         mProgressTracking = tracking;
     }
 
+    protected void setSoundToVibrateDisabled(boolean disabled) {
+        mSoundToVibrateDisabled = disabled;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -469,6 +477,10 @@ public class LedSettings {
         return mProgressTracking;
     }
 
+    public boolean getSoundToVibrateDisabled() {
+        return mSoundToVibrateDisabled;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -500,6 +512,7 @@ public class LedSettings {
             dataSet.add("headsUpIgnoreUpdate:" + mHeadsUpIgnoreUpdate);
             dataSet.add("headsUpTimeout:" + mHeadsUpTimeout);
             dataSet.add("progressTracking:" + mProgressTracking);
+            dataSet.add("soundToVibrateDisabled:" + mSoundToVibrateDisabled);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();
