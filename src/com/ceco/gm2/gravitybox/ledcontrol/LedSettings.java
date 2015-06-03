@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 
 public class LedSettings {
 
@@ -58,6 +59,7 @@ public class LedSettings {
     private boolean mQhIgnore;
     private String mQhIgnoreList;
     private boolean mProgressTracking;
+    private boolean mSoundToVibrateDisabled;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -126,6 +128,8 @@ public class LedSettings {
                 ls.setQhIgnoreList(data[1]);
             } else if (data[0].equals("progressTracking")) {
                 ls.setProgressTracking(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("soundToVibrateDisabled")) {
+                ls.setSoundToVibrateDisabled(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -152,6 +156,7 @@ public class LedSettings {
         mQhIgnore = false;
         mQhIgnoreList = null;
         mProgressTracking = false;
+        mSoundToVibrateDisabled = false;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -309,6 +314,12 @@ public class LedSettings {
         mProgressTracking = tracking;
     }
 
+    protected void setSoundToVibrateDisabled(boolean disabled) {
+        // always false on SDK < 17
+        mSoundToVibrateDisabled = Build.VERSION.SDK_INT < 17 ?
+                false : disabled;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -385,6 +396,10 @@ public class LedSettings {
         return mProgressTracking;
     }
 
+    public boolean getSoundToVibrateDisabled() {
+        return mSoundToVibrateDisabled;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -411,6 +426,7 @@ public class LedSettings {
                 dataSet.add("qhIgnoreList:" + mQhIgnoreList);
             }
             dataSet.add("progressTracking:" + mProgressTracking);
+            dataSet.add("soundToVibrateDisabled:" + mSoundToVibrateDisabled);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

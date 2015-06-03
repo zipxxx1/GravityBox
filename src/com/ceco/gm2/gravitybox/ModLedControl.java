@@ -37,6 +37,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
@@ -76,6 +77,7 @@ public class ModLedControl {
     private static boolean mUserPresent;
     private static Object mNotifManagerService;
     private static boolean mProximityWakeUpEnabled;
+    private static AudioManager mAudioManager;
 
     private static SensorEventListener mProxSensorEventListener = new SensorEventListener() {
         @Override
@@ -348,7 +350,8 @@ public class ModLedControl {
                 }
 
                 // sound
-                if (qhActive) {
+                if (qhActive || (ls.getEnabled() && 
+                        ls.getSoundToVibrateDisabled() && isRingerModeVibrate())) {
                     n.defaults &= ~Notification.DEFAULT_SOUND;
                     n.sound = null;
                     n.flags &= ~Notification.FLAG_INSISTENT;
@@ -428,6 +431,18 @@ public class ModLedControl {
             }
         }
     };
+
+    private static boolean isRingerModeVibrate() {
+        try {
+            if (mAudioManager == null) {
+                mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+            }
+            return (mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return false;
+        }
+    }
 
     private static void toggleActiveScreenFeature(boolean enable) {
         try {

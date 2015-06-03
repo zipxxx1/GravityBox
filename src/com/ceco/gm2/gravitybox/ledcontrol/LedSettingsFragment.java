@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -61,6 +62,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_QH_IGNORE_LIST = "pref_lc_qh_ignore_list";
     private static final String PREF_CAT_KEY_OTHER = "pref_cat_lc_other";
     private static final String PREF_KEY_PROGRESS_TRACKING = "pref_lc_progress_tracking";
+    private static final String PREF_CAT_KEY_VIBRATIONS = "pref_cat_lc_vibrations";
+    private static final String PREF_KEY_DISABLE_SOUND_TO_VIBRATE = "pref_lc_sound_vibrate";
 
     private static final int REQ_PICK_SOUND = 101;
 
@@ -85,6 +88,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private EditTextPreference mQhIgnoreListPref;
     private PreferenceCategory mOtherCat;
     private CheckBoxPreference mProgressTrackingPref;
+    private PreferenceCategory mVibrationsCat;
+    private CheckBoxPreference mDisableSoundToVibratePref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -114,6 +119,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mQhIgnoreListPref = (EditTextPreference) findPreference(PREF_KEY_QH_IGNORE_LIST);
         mOtherCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_OTHER);
         mProgressTrackingPref = (CheckBoxPreference) findPreference(PREF_KEY_PROGRESS_TRACKING);
+        mVibrationsCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_VIBRATIONS);
+        mDisableSoundToVibratePref = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_SOUND_TO_VIBRATE);
     }
 
     protected void initialize(LedSettings ledSettings) {
@@ -155,6 +162,11 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             mOtherCat.removePreference(mProgressTrackingPref);
         } else {
             mProgressTrackingPref.setChecked(ledSettings.getProgressTracking());
+        }
+        if (Build.VERSION.SDK_INT < 17) {
+            mVibrationsCat.removePreference(mDisableSoundToVibratePref);
+        } else {
+            mDisableSoundToVibratePref.setChecked(ledSettings.getSoundToVibrateDisabled());
         }
     }
 
@@ -244,6 +256,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected boolean getProgressTracking() {
         return mProgressTrackingPref.isChecked();
+    }
+
+    protected boolean getSoundToVibrateDisabled() {
+        return mDisableSoundToVibratePref.isChecked();
     }
 
     @Override
