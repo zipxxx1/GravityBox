@@ -310,14 +310,17 @@ public class ModLedControl {
                     }
                     if (ls.getSoundOnlyOnce()) {
                         if (ls.getSoundOnlyOnceTimeout() > 0) {
-                            if (mNotifTimestamps.containsKey(pkgName) &&
-                                    (System.currentTimeMillis() - mNotifTimestamps.get(pkgName) < 
-                                            ls.getSoundOnlyOnceTimeout())) {
-                                n.defaults &= ~Notification.DEFAULT_SOUND;
-                                n.defaults &= ~Notification.DEFAULT_VIBRATE;
-                                n.sound = null;
-                                n.vibrate = null;
-                                n.flags &= ~Notification.FLAG_ONLY_ALERT_ONCE;
+                            if (mNotifTimestamps.containsKey(pkgName)) {
+                                long delta = System.currentTimeMillis() - mNotifTimestamps.get(pkgName);
+                                if (delta > 500 &&  delta < ls.getSoundOnlyOnceTimeout()) {
+                                    n.defaults &= ~Notification.DEFAULT_SOUND;
+                                    n.defaults &= ~Notification.DEFAULT_VIBRATE;
+                                    n.sound = null;
+                                    n.vibrate = null;
+                                    n.flags &= ~Notification.FLAG_ONLY_ALERT_ONCE;
+                                } else {
+                                    mNotifTimestamps.put(pkgName, System.currentTimeMillis());
+                                }
                             } else {
                                 mNotifTimestamps.put(pkgName, System.currentTimeMillis());
                             }
