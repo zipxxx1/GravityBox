@@ -59,6 +59,7 @@ public class QuietHours {
     public Mode mode;
     public boolean interactive;
     Set<String> weekDays;
+    public boolean disableHapticFeedback;
 
     public QuietHours(SharedPreferences prefs) {
         uncLocked = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false);
@@ -76,6 +77,7 @@ public class QuietHours {
         interactive = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_INTERACTIVE, false);
         weekDays = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_WEEKDAYS,
                 new HashSet<String>(Arrays.asList("2","3","4","5","6")));
+        disableHapticFeedback = prefs.getBoolean(QuietHoursActivity.PREF_KEY_DISABLE_HAPTIC_FEEDBACK, false);
     }
 
     public boolean quietHoursActive(LedSettings ls, Notification n, boolean userPresent) {
