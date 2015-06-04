@@ -150,6 +150,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int VOL_KEY_CURSOR_CONTROL_ON_REVERSE = 2;
 
     public static final String PREF_KEY_RECENTS_CLEAR_ALL = "pref_recents_clear_all2";
+    public static final String PREF_KEY_RECENTS_CLEAR_ALL_VISIBLE = "pref_recents_clear_all_visible";
     public static final String PREF_KEY_RECENTS_CLEAR_ALL_ICON_ALT = "pref_recents_clear_all_icon_alt";
     public static final String PREF_KEY_RAMBAR = "pref_rambar";
     public static final String PREF_KEY_RECENTS_CLEAR_MARGIN_TOP = "pref_recent_clear_margin_top";
@@ -163,6 +164,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int RECENT_CLEAR_NAVIGATION_BAR = 1;
     public static final String ACTION_PREF_RECENTS_CHANGED = "gravitybox.intent.action.RECENTS_CHANGED";
     public static final String EXTRA_RECENTS_CLEAR_ALL = "recentsClearAll";
+    public static final String EXTRA_RECENTS_CLEAR_ALL_VISIBLE = "recentsClearAllVisible";
     public static final String EXTRA_RECENTS_CLEAR_ALL_ICON_ALT = "recentsClearAllIconAlt";
     public static final String EXTRA_RECENTS_RAMBAR = "recentsRambar";
     public static final String EXTRA_RECENTS_MARGIN_TOP = "recentsMarginTop";
@@ -3036,6 +3038,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
                 intent.putExtra(EXTRA_RECENTS_CLEAR_ALL, 
                         Integer.valueOf(prefs.getString(key, "0")));
+            } else if (key.equals(PREF_KEY_RECENTS_CLEAR_ALL_VISIBLE)) {
+                intent.setAction(ACTION_PREF_RECENTS_CHANGED);
+                intent.putExtra(EXTRA_RECENTS_CLEAR_ALL_VISIBLE, prefs.getBoolean(key, false)); 
             } else if (key.equals(PREF_KEY_RECENTS_CLEAR_ALL_ICON_ALT)) {
                 intent.setAction(ACTION_PREF_RECENTS_CHANGED);
                 intent.putExtra(EXTRA_RECENTS_CLEAR_ALL_ICON_ALT, prefs.getBoolean(key, false));

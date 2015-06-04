@@ -1818,4 +1818,7 @@
     <!-- UNC: QuietHours: disable haptic feedback -->
     <string name="pref_lc_qh_disable_haptic_feedback_title">Disable haptic feedback</string>
 
+    <!-- Recents: clear visible only -->
+    <string name="pref_recents_clear_all_visible_title">Clear visible only</string>
+
 </resources>

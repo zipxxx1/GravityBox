@@ -76,6 +76,7 @@ public class ModClearAllRecents {
     private static Interpolator mExitAnimInterpolator;
     private static int mExitAnimDuration;
     private static Activity mRecentsActivity;
+    private static boolean mClearVisible;
 
     // RAM bar
     private static TextView mBackgroundProcessText;
@@ -133,6 +134,10 @@ public class ModClearAllRecents {
                             GravityBoxSettings.EXTRA_RECENTS_CLEAR_ALL_ICON_ALT, false);
                     updateButtonImage();
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_RECENTS_CLEAR_ALL_VISIBLE)) {
+                    mClearVisible = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_RECENTS_CLEAR_ALL_VISIBLE, false);
+                }
             }
             if (intent.getAction().equals(ModHwKeys.ACTION_RECENTS_CLEAR_ALL_SINGLETAP)) {
                 clearAll();
@@ -152,6 +157,7 @@ public class ModClearAllRecents {
             mSearchBarState = SearchBarState.valueOf(prefs.getString(
                     GravityBoxSettings.PREF_KEY_RECENTS_SEARCH_BAR, "DEFAULT"));
             mClearAllUseAltIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL_ICON_ALT, false);
+            mClearVisible = prefs.getBoolean(GravityBoxSettings.PREF_KEY_RECENTS_CLEAR_ALL_VISIBLE, false);
             mSearchBarStatePrev = mSearchBarState;
             mMemInfoReader = new MemInfoReader();
 
@@ -537,7 +543,7 @@ public class ModClearAllRecents {
                     "getChildViewForTask", task);
             if (taskView != null) {
                 XposedHelpers.callMethod(taskView, "dismissTask");
-            } else {
+            } else if (!mClearVisible) {
                 XposedHelpers.callMethod(stack, "removeTask", task);
             }
         }
