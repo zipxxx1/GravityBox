@@ -202,8 +202,12 @@ public class ModClearAllRecents {
                     mRecentsClearButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                           clearAll();
-                           updateRamBarMemoryUsage();
+                           mHandler.postDelayed(new Runnable() {
+                               @Override
+                               public void run() {
+                                   clearAll();
+                               }
+                           }, 100);
                         }
                     });
                     mRecentsClearButton.setOnLongClickListener(new View.OnLongClickListener() {
@@ -506,7 +510,7 @@ public class ModClearAllRecents {
         }
     };
 
-    private static final void clearAll() {
+    private static synchronized final void clearAll() {
         if (mRecentsView == null) return;
 
         try {
@@ -517,6 +521,7 @@ public class ModClearAllRecents {
                     clearStack((ViewGroup)child);
                 }
             }
+            updateRamBarMemoryUsage();
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -526,23 +531,15 @@ public class ModClearAllRecents {
         Object stack = XposedHelpers.getObjectField(stackView, "mStack");
         final ArrayList<?> tasks = (ArrayList<?>) XposedHelpers.callMethod(stack, "getTasks");
         final int count = tasks.size();
-        int numCleared = 0;
-        for (int i = 0; i < count; i++) {
+        for (int i = (count-1); i >= 0; i--) {
             Object task = tasks.get(i);
             final Object taskView = XposedHelpers.callMethod(stackView,
                     "getChildViewForTask", task);
             if (taskView != null) {
                 XposedHelpers.callMethod(taskView, "dismissTask");
-                numCleared++;
+            } else {
+                XposedHelpers.callMethod(stack, "removeTask", task);
             }
-        }
-        if (numCleared < count) {
-            stackView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    clearStack(stackView);
-                }
-            }, 400);
         }
     }
 }
