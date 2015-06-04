@@ -1899,4 +1899,7 @@
     <string name="pref_lc_sound_vibrate_summary">Prevents notifications having vibrations turned off from
         being forced to vibrate during vibrate-only ringer mode</string>
 
+    <!-- UNC: QuietHours: disable haptic feedback -->
+    <string name="pref_lc_qh_disable_haptic_feedback_title">Disable haptic feedback</string>
+
 </resources>
