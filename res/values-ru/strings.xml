@@ -1809,4 +1809,15 @@
     <string name="pref_lc_led_priority_mode_title">Режим приоритета</string>
     <string name="pref_lc_led_priority_mode_summary">Разрешение индикации во время режимов приоритета и без звука</string>
 
+    <!-- UNC: Disable sound to vibrate conversion -->
+    <string name="pref_lc_sound_vibrate_title">Откл конверсию звука в вибрацию</string>
+    <string name="pref_lc_sound_vibrate_summary">Предотвращение вибрации уведомлений с ранее отключенной
+        вибрацией при выборе режиме звонка \"Только вибрация\"</string>
+
+    <!-- UNC: QuietHours: disable haptic feedback -->
+    <string name="pref_lc_qh_disable_haptic_feedback_title">Откл виброотклик</string>
+
+    <!-- Recents: clear visible only -->
+    <string name="pref_recents_clear_all_visible_title">Очистить только видимые</string>
+
 </resources>
