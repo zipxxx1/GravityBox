@@ -1002,22 +1002,27 @@ public class ModStatusBar {
                     "android.content.Context", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    mStatusBarPlugin = XposedHelpers.getStaticObjectField(pluginFactoryClass, "mStatusBarPlugin");
+                    try {
+                        mStatusBarPlugin = XposedHelpers.getStaticObjectField(pluginFactoryClass, "mStatusBarPlugin");
+                    } catch (Throwable t) { if (DEBUG) XposedBridge.log(t); }
 
-                    if (mGetDataNetworkTypeIconGeminiHook == null) {
-                        mGetDataNetworkTypeIconGeminiHook = XposedHelpers.findAndHookMethod(mStatusBarPlugin.getClass(),
-                                "getDataNetworkTypeIconGemini", CLASS_NETWORKTYPE, int.class, new XC_MethodHook() {
-                            @Override
-                            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                if (mDisableDataNetworkTypeIcons)
-                                    param.setResult(Utils.hasLenovoCustomUI() ? 0 : -1);
-                            }
-                        });
+                    if (mGetDataNetworkTypeIconGeminiHook == null && mStatusBarPlugin != null) {
+                        try {
+                            mGetDataNetworkTypeIconGeminiHook = XposedHelpers.findAndHookMethod(mStatusBarPlugin.getClass(),
+                                    "getDataNetworkTypeIconGemini", CLASS_NETWORKTYPE, int.class, new XC_MethodHook() {
+                                @Override
+                                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                                    if (mDisableDataNetworkTypeIcons)
+                                        param.setResult(Utils.hasLenovoCustomUI() ? 0 : -1);
+                                }
+                            });
+                        } catch (Throwable t) {
+                            if (DEBUG) XposedBridge.log(t);
+                        }
                     }
                 }
             });
-        }
-        catch (Throwable t) {
+        } catch (Throwable t) {
             if (DEBUG) XposedBridge.log(t);
         }
     }
