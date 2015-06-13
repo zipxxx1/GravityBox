@@ -1,3 +1,11 @@
+Changelog 3.5.10 - 13/06/2015
+--------------------------------------
+- Ultimate notification control:
+--- added option for disabling sound to vibration conversion (4.2+)
+--- QuietHours: added option for disabling haptic feedback
+- Muted MTK status bar plugin related errors flooding xposed log on some MTK devices
+- Updated Russian translations (thanks to gaich)
+
 Changelog 3.5.9 - 30/05/2015
 --------------------------------------
 - Launcher tweaks: adjusted for compatibility with Google App 4.6.10
