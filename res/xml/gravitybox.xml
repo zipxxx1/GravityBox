@@ -138,6 +138,11 @@
                 android:summary="@string/pref_lockscreen_smart_unlock_summary"
                 android:defaultValue="false" />
 
+            <CheckBoxPreference 
+                android:key="pref_lockscreen_dt2s"
+                android:title="@string/pref_lockscreen_dt2s_title"
+                android:defaultValue="false" />
+
             <EditTextPreference 
                 android:key="pref_lockscreen_carrier_text"
                 android:title="@string/pref_lockscreen_carrier_text_title"

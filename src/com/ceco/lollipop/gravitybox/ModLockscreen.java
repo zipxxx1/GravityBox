@@ -36,6 +36,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -83,6 +85,7 @@ public class ModLockscreen {
     private static boolean mIsScreenOn;
     private static DismissKeyguardHandler mDismissKeyguardHandler;
     private static boolean mIsSecure;
+    private static GestureDetector mGestureDetector;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -169,6 +172,7 @@ public class ModLockscreen {
                     mGbContext = Utils.getGbContext(mContext);
 
                     prepareCustomBackground();
+                    prepareGestureDetector();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
@@ -437,6 +441,20 @@ public class ModLockscreen {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_NOTIF_PANEL_VIEW, classLoader,
+                    "onTouchEvent", MotionEvent.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_D2TS, false) &&
+                            mGestureDetector != null &&
+                            (int) XposedHelpers.callMethod(
+                                XposedHelpers.getObjectField(param.thisObject, "mStatusBar"),
+                                "getBarState") == StatusBarState.KEYGUARD) {
+                        mGestureDetector.onTouchEvent((MotionEvent) param.args[0]);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -547,6 +565,22 @@ public class ModLockscreen {
             XposedHelpers.setObjectField(thisObject, "mPatternDisplayMode", mPatternDisplayMode);
             mInStealthMode = false;
             mPatternDisplayMode = null;
+        }
+    }
+
+    private static void prepareGestureDetector() {
+        try {
+            mGestureDetector = new GestureDetector(mContext, 
+                    new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    Intent intent = new Intent(ModHwKeys.ACTION_SLEEP);
+                    mContext.sendBroadcast(intent);
+                    return true;
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
     }
 }
