@@ -56,6 +56,7 @@ import android.provider.Settings;
 import android.service.notification.StatusBarNotification;
 import android.service.notification.NotificationListenerService.RankingMap;
 import android.util.TypedValue;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
@@ -73,6 +74,7 @@ public class ModStatusBar {
     private static final String TAG = "GB:ModStatusBar";
     private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     public static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
+    private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
     private static final String CLASS_TICKER = "com.android.systemui.statusbar.phone.PhoneStatusBar$MyTicker";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
@@ -151,6 +153,8 @@ public class ModStatusBar {
     private static int mStatusBarState;
     private static boolean mBatterySaverIndicationDisabled;
     private static boolean mDisablePeek;
+    private static GestureDetector mGestureDetector;
+    private static boolean mDt2sEnabled;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -214,6 +218,9 @@ public class ModStatusBar {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_DISABLE_PEEK)) {
                     mDisablePeek = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_DISABLE_PEEK, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_DT2S)) {
+                    mDt2sEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_DT2S, false);
                 }
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED)) {
@@ -548,6 +555,22 @@ public class ModStatusBar {
         }
     }
 
+    private static void prepareGestureDetector() {
+        try {
+            mGestureDetector = new GestureDetector(mContext, 
+                    new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    Intent intent = new Intent(ModHwKeys.ACTION_SLEEP);
+                    mContext.sendBroadcast(intent);
+                    return true;
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
@@ -582,6 +605,7 @@ public class ModStatusBar {
             mBatterySaverIndicationDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
             mDisablePeek = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DISABLE_PEEK, false);
+            mDt2sEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DT2S, false);
 
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DEM, false)) {
                 StatusbarSignalCluster.disableSignalExclamationMarks(classLoader);
@@ -641,6 +665,7 @@ public class ModStatusBar {
                     prepareBatteryBar(ContainerType.KEYGUARD);
                     prepareProgressBar(ContainerType.STATUSBAR);
                     prepareProgressBar(ContainerType.KEYGUARD);
+                    prepareGestureDetector();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED);
@@ -1064,6 +1089,21 @@ public class ModStatusBar {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if (mDisablePeek) {
                             param.setResult(null);
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+
+            // DT2S
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR_VIEW, classLoader,
+                        "onTouchEvent", MotionEvent.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mDt2sEnabled && mDisablePeek && mGestureDetector != null) {
+                            mGestureDetector.onTouchEvent((MotionEvent)param.args[0]);
                         }
                     }
                 });
