@@ -1824,4 +1824,8 @@
     <!-- Lockscreen: doubletap to sleep -->
     <string name="pref_lockscreen_dt2s_title">Double-tap to sleep</string>
 
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_disable_peek_title">Disable peek</string>
+    <string name="pref_statusbar_disable_peek_summary">Won\'t expand status bar on single-touch</string>
+
 </resources>

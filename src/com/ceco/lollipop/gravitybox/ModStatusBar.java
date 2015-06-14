@@ -86,6 +86,7 @@ public class ModStatusBar {
     private static final String CLASS_ICON_MERGER = "com.android.systemui.statusbar.phone.IconMerger";
     private static final String CLASS_SAVE_IMG_TASK = "com.android.systemui.screenshot.SaveImageInBackgroundTask";
     private static final String CLASS_STATUSBAR_WM = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
+    private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
     public static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
     private static final boolean DEBUG = false;
@@ -149,6 +150,7 @@ public class ModStatusBar {
     private static TickerPolicy mTickerPolicy;
     private static int mStatusBarState;
     private static boolean mBatterySaverIndicationDisabled;
+    private static boolean mDisablePeek;
 
     // Brightness control
     private static boolean mBrightnessControlEnabled;
@@ -202,12 +204,16 @@ public class ModStatusBar {
                     && intent.hasExtra(GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED)) {
                 mDisableDataNetworkTypeIcons = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED, false);
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED)
-                    && intent.hasExtra(GravityBoxSettings.EXTRA_SB_BRIGHTNESS)) {
-                mBrightnessControlEnabled = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_SB_BRIGHTNESS, false);
-                if (mSettingsObserver != null) {
-                    mSettingsObserver.update();
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED)) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_BRIGHTNESS)) {
+                    mBrightnessControlEnabled = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_SB_BRIGHTNESS, false);
+                    if (mSettingsObserver != null) {
+                        mSettingsObserver.update();
+                    }
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_DISABLE_PEEK)) {
+                    mDisablePeek = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SB_DISABLE_PEEK, false);
                 }
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED)) {
@@ -575,6 +581,7 @@ public class ModStatusBar {
                     GravityBoxSettings.PREF_KEY_STATUSBAR_TICKER_POLICY, "DEFAULT"));
             mBatterySaverIndicationDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
+            mDisablePeek = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DISABLE_PEEK, false);
 
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DEM, false)) {
                 StatusbarSignalCluster.disableSignalExclamationMarks(classLoader);
@@ -637,7 +644,7 @@ public class ModStatusBar {
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_CLOCK_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BRIGHTNESS_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED);
@@ -1041,6 +1048,21 @@ public class ModStatusBar {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if (mBatterySaverIndicationDisabled && (int) param.args[0] == 5) {
+                            param.setResult(null);
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+
+            // Disable peek
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
+                        "schedulePeek", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mDisablePeek) {
                             param.setResult(null);
                         }
                     }

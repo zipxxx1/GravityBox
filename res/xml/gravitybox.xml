@@ -1054,6 +1054,12 @@
             android:defaultValue="false" />
 
         <CheckBoxPreference 
+            android:key="pref_statusbar_disable_peek"
+            android:title="@string/pref_statusbar_disable_peek_title"
+            android:summary="@string/pref_statusbar_disable_peek_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference 
             android:key="pref_disable_data_network_type_icons"
             android:title="@string/pref_disable_data_network_type_icons_title"
             android:summary="@string/pref_disable_data_network_type_icons_summary"
