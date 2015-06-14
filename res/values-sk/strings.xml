@@ -1778,4 +1778,26 @@
     <string name="pref_lc_led_priority_mode_title">Prioritný režim</string>
     <string name="pref_lc_led_priority_mode_summary">Povolí LED počas prioritného alebo tichého režimu vyzváňania</string>
 
+    <!-- UNC: Disable sound to vibrate conversion -->
+    <string name="pref_lc_sound_vibrate_title">Vypnúť konverziu zvuku na vibrácie</string>
+    <string name="pref_lc_sound_vibrate_summary">Zabráni oznámeniam, ktoré majú vibrácie vypnuté, vibrovať
+        v režime vypnutého zvonenia</string>
+
+    <!-- UNC: QuietHours: disable haptic feedback -->
+    <string name="pref_lc_qh_disable_haptic_feedback_title">Vypnúť hmatovú odozvu</string>
+
+    <!-- Recents: clear visible only -->
+    <string name="pref_recents_clear_all_visible_title">Len viditeľné</string>
+
+    <!-- Lockscreen: doubletap to sleep -->
+    <string name="pref_lockscreen_dt2s_title">Uspať dvojitým ťuknutím</string>
+
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_disable_peek_title">Vypnúť náhľad</string>
+    <string name="pref_statusbar_disable_peek_summary">Nerozbalí stavový riadok na jednoduché ťuknutie</string>
+
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_dt2s_title">Uspať dvojitým ťuknutím</string>
+    <string name="pref_statusbar_dt2s_summary">Vyžaduje vypnutý náhľad</string>
+
 </resources>
