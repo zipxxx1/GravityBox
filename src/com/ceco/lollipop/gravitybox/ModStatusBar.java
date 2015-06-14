@@ -23,6 +23,7 @@ import java.util.List;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
+import com.ceco.lollipop.gravitybox.quicksettings.QsQuickPulldownHandler;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -1089,6 +1090,16 @@ public class ModStatusBar {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if (mDisablePeek) {
                             param.setResult(null);
+                        }
+                    }
+                });
+                XposedHelpers.findAndHookMethod(CLASS_PANEL_VIEW, classLoader,
+                        "instantExpand", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mDisablePeek) {
+                            XposedHelpers.setBooleanField(param.thisObject,
+                                    QsQuickPulldownHandler.getQsExpandFieldName(), false);
                         }
                     }
                 });

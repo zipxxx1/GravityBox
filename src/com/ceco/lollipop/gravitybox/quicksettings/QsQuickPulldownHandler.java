@@ -64,7 +64,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
         }
     }
 
-    private String getQsExpandFieldName() {
+    public static String getQsExpandFieldName() {
         switch (Build.VERSION.SDK_INT) {
             case 21: return "mTwoFingerQsExpand";
             default: return "mQsExpandImmediate";
