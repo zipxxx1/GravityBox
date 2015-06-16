@@ -1809,5 +1809,27 @@
     <!-- UNC: LED priority mode -->
     <string name="pref_lc_led_priority_mode_title">优先模式</string>
     <string name="pref_lc_led_priority_mode_summary">无声振铃模式中允许LED优先级</string>
+    
+    <!-- UNC: Disable sound to vibrate conversion -->
+    <string name="pref_lc_sound_vibrate_title">禁用转换声音时振动</string>
+    <string name="pref_lc_sound_vibrate_summary">通知关闭时防止振动,只在铃声模式时才振动</string>
+    
+
+    <!-- UNC: QuietHours: disable haptic feedback -->
+    <string name="pref_lc_qh_disable_haptic_feedback_title">关闭触摸反馈</string>
+
+    <!-- Recents: clear visible only -->
+    <string name="pref_recents_clear_all_visible_title">仅清除可见</string>
+
+    <!-- Lockscreen: doubletap to sleep -->
+    <string name="pref_lockscreen_dt2s_title">双击睡眠</string>
+
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_disable_peek_title">禁止偷看</string>
+    <string name="pref_statusbar_disable_peek_summary">单击触摸时不会扩大状态栏</string>
+
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_dt2s_title">双击睡眠</string>
+    <string name="pref_statusbar_dt2s_summary">需要禁用偷看</string>
 
 </resources>
