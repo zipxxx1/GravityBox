@@ -1820,4 +1820,15 @@
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Очистить только видимые</string>
 
+    <!-- Lockscreen: doubletap to sleep -->
+    <string name="pref_lockscreen_dt2s_title">Дв. нажатие для сна</string>
+
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_disable_peek_title">Откл просмотр</string>
+    <string name="pref_statusbar_disable_peek_summary">Строка состояния не будет раскрываться при одиночном нажатии</string>
+
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_dt2s_title">Дв. нажатие для сна</string>
+    <string name="pref_statusbar_dt2s_summary">Необходимо отключение просмотра</string>
+
 </resources>
