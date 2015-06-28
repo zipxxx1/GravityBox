@@ -1727,4 +1727,12 @@
     <string name="pref_battery_bar_centered_title">Wycentrowany</string>
     <string name="pref_battery_bar_color_charging_title">Kolor ładowania</string>
 
+    <!-- UNC: Disable sound to vibrate conversion -->
+    <string name="pref_lc_sound_vibrate_title">Wyłącz konwersję dźwięku na wibracje</string>
+    <string name="pref_lc_sound_vibrate_summary">Zapobiega wibracjom dla powiadomień które mają wyłączony tryb wibracji
+        gdy tryb dzwonka jest ustawiony na same wibracje</string>
+
+    <!-- UNC: QuietHours: disable haptic feedback -->
+    <string name="pref_lc_qh_disable_haptic_feedback_title">Wyłącz wibracje przy dotknięciu</string>
+
 </resources>
