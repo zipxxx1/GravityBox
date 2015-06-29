@@ -1739,4 +1739,54 @@
     <string name="pref_lockscreen_smart_unlock_summary">Odblokowuje automatycznie, gdy polityka inteligentnego blokowania 
         wykryje zaufane warunki</string>
 
+    <!--  WiFi trusted networks -->
+    <string name="wifi_trusted_info">Zaufana sieć dla Inteligentnej Blokady</string>
+
+    <!-- QS: Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_title">Ustawienia kafelka Baterii</string>
+    <string name="pref_battery_tile_percentage_title">Pokaż procenty</string>
+    <string name="pref_battery_tile_saver_indicate_title">Sygnalizacja oszczędzania baterii</string>
+    <string name="pref_battery_tile_saver_indicate_summary">Wykorzystuje ten sam kolor jak dla pasków systemowych 
+        aby wskazać, że tryb oszczędzania baterii jest aktywny</string>
+    <string name="pref_battery_tile_temp_unit_title">Jednostka temperatury</string>
+    <string name="celsius">Celsjusz</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="pref_battery_tile_swap_actions_title">Zamiana akcji</string>
+    <string name="pref_battery_tile_swap_actions_summary">Zamienia akcje pojedynczego kliknięcia/długiego naciśnięcia</string>
+
+    <!-- Power: Disable battery saver indication -->
+    <string name="pref_battery_saver_indication_disable_title">Wyłącz wskaźnik oszczędzania baterii</string>
+    <string name="pref_battery_saver_indication_disable_summary">Wyłącza pomarańczowy kolor pasków systemowych 
+        gdy tryb oszczędzania baterii jest aktywny</string>
+
+    <!-- Signal cluster: Disable exclamation marks -->
+    <string name="pref_signal_cluster_dem_title">Wyłącz symbole wykrzykników</string>
+    <string name="pref_signal_cluster_dem_summary">Wymaga ponownego uruchomienia</string>
+
+    <!-- UNC: LED priority mode -->
+    <string name="pref_lc_led_priority_mode_title">Tryb priorytetowy</string>
+    <string name="pref_lc_led_priority_mode_summary">Dozwolona LED w trybach priorytetu i wyciszenia dzwonka</string>
+
+    <!-- UNC: Disable sound to vibrate conversion -->
+    <string name="pref_lc_sound_vibrate_title">Wyłącz konwersję dźwięku na wibracje</string>
+    <string name="pref_lc_sound_vibrate_summary">Zapobiega wibracjom dla powiadomień które mają wyłączony tryb wibracji
+        gdy tryb dzwonka jest ustawiony na same wibracje</string>
+
+    <!-- UNC: QuietHours: disable haptic feedback -->
+    <string name="pref_lc_qh_disable_haptic_feedback_title">Wyłącz wibracje przy dotknięciu</string>
+
+    <!-- Recents: clear visible only -->
+    <string name="pref_recents_clear_all_visible_title">Tylko wyraźnie widoczny</string>
+
+    <!-- Lockscreen: doubletap to sleep -->
+    <string name="pref_lockscreen_dt2s_title">Uśpienie podwójnym kliknięciem</string>
+
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_disable_peek_title">Wyłącz podgląd</string>
+    <string name="pref_statusbar_disable_peek_summary">Nie będzie poszerzany pasek stanu przy pojedynczym dotknięciu</string>
+
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_dt2s_title">Uśpienie podwójnym kliknięciem</string>
+    <string name="pref_statusbar_dt2s_summary">Wymaga wyłączenia podglądu</string>
+
 </resources>
