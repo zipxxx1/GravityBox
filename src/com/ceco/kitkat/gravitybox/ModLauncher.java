@@ -85,6 +85,7 @@ public class ModLauncher {
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.cn", "KE", "HD", "HE"));
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.co", "KK", "HJ", "HK"));
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.co", "KV", "HU", "HV"));
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.bf", "KU", "HT", "HU"));
 
         METHOD_SHOW_ALL_APPS = new ArrayList<ShowAllApps>();
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("onClickAllAppsButton",
@@ -108,6 +109,9 @@ public class ModLauncher {
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
                 new Object[] { boolean.class, "com.android.launcher3.s", boolean.class },
                 new Object[] { false, "Dx", false } ));
+        METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
+                new Object[] { boolean.class, "com.android.launcher3.h", boolean.class },
+                new Object[] { false, "Dw", false } ));
     }
 
     private static void log(String message) {
