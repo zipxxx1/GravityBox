@@ -123,6 +123,11 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     @Override
+    public boolean handleSecondaryClick() {
+        return false;
+    }
+
+    @Override
     public void handleDestroy() {
         mEventDistributor.unregisterListener(this);
         mEventDistributor = null;

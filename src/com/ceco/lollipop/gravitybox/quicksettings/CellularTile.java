@@ -30,6 +30,10 @@ public class CellularTile extends AospTile {
     private boolean mDataTypeIconVisible;
     private boolean mIsSignalNull;
     private boolean mDataOffIconEnabled;
+    private Unhook mSupportsDualTargetsHook;
+    private Unhook mHandleClickHook;
+    private boolean mClickHookBlocked;
+    private boolean mDualMode;
 
     protected CellularTile(Object host, String aospKey, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -86,12 +90,18 @@ public class CellularTile extends AospTile {
         return (mDataOffIconEnabled && !mIsSignalNull && !mDataTypeIconVisible);
     }
 
+    private boolean isDualModeEnabled() {
+        return (mDualMode && !mNormalized && isPrimary());
+    }
+
     @Override
     protected void initPreferences() {
         super.initPreferences();
 
         mDataOffIconEnabled = mPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_CELL_TILE_DATA_OFF_ICON, false);
+        mDualMode = mPrefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_CELL_TILE_DUAL_MODE, false);
     }
 
     @Override
@@ -188,6 +198,20 @@ public class CellularTile extends AospTile {
     }
 
     @Override
+    public boolean handleSecondaryClick() {
+        if (!isDualModeEnabled()) return false;
+
+        try {
+            mClickHookBlocked = true;
+            XposedHelpers.callMethod(mTile, "handleClick");
+            return true;
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return false;
+        }
+    }
+
+    @Override
     public boolean supportsHideOnChange() {
         return false;
     }
@@ -212,6 +236,32 @@ public class CellularTile extends AospTile {
                     }
                 }
             });
+
+            mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, 
+                    mContext.getClassLoader(), "supportsDualTargets", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mKey.equals(XposedHelpers.getAdditionalInstanceField(
+                                param.thisObject, BaseTile.TILE_KEY_NAME))) {
+                        param.setResult(isDualModeEnabled());
+                    }
+                }
+            });
+
+            mHandleClickHook = XposedHelpers.findAndHookMethod(getClassName(), mContext.getClassLoader(),
+                    "handleClick", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mClickHookBlocked) {
+                        mClickHookBlocked = false;
+                        return;
+                    }
+                    if (isDualModeEnabled()) {
+                        handleLongClick();
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -221,6 +271,14 @@ public class CellularTile extends AospTile {
         if (mCreateTileViewHook != null) {
             mCreateTileViewHook.unhook();
             mCreateTileViewHook = null;
+        }
+        if (mSupportsDualTargetsHook != null) {
+            mSupportsDualTargetsHook.unhook();
+            mSupportsDualTargetsHook = null;
+        }
+        if (mHandleClickHook != null) {
+            mHandleClickHook.unhook();
+            mHandleClickHook = null;
         }
     }
 }
