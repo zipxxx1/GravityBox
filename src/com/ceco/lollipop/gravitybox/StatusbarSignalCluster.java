@@ -504,7 +504,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
     protected void setNetworkController(Object networkController) {
         final ClassLoader classLoader = mView.getClass().getClassLoader();
-        final Class<?> networkCtrlCbClass = (Utils.isMotoXtDevice() && Build.VERSION.SDK_INT >= 22) ?
+        final Class<?> networkCtrlCbClass = Utils.isMotoXtDevice() ?
                 XposedHelpers.findClass(
                 "com.android.systemui.statusbar.policy.MotorolaNetworkController.NetworkSignalChangedCallback", 
                 classLoader) :
