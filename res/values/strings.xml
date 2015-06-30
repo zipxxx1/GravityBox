@@ -1832,4 +1832,8 @@
     <string name="pref_statusbar_dt2s_title">Double-tap to sleep</string>
     <string name="pref_statusbar_dt2s_summary">Requires peek to be disabled</string>
 
+    <!-- Cellular tile: Dual mode -->
+    <string name="pref_cell_tile_dual_mode_title">Dual mode</string>
+    <string name="pref_cell_tile_dual_mode_summary">Allows similar behavior as WiFi and Bluetooth tile</string>
+
 </resources>

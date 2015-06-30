@@ -51,6 +51,7 @@ public class QsTileEventDistributor {
         void onSecureMethodChanged();
         View onCreateIcon();
         Drawable getResourceIconDrawable();
+        boolean handleSecondaryClick();
     }
 
     private static void log(String message) {
@@ -84,7 +85,8 @@ public class QsTileEventDistributor {
             if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
                 if (intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED) ||
                         intent.hasExtra(GravityBoxSettings.EXTRA_QS_NORMALIZED) ||
-                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS)) {
+                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS) ||
+                        intent.hasExtra(GravityBoxSettings.EXTRA_CELL_TILE_DUAL_MODE)) {
                     recreateTiles();
                 } else {
                     notifyTilesOfBroadcast(context, intent);
@@ -199,6 +201,18 @@ public class QsTileEventDistributor {
                             .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
                     if (l != null) {
                         l.handleDestroy();
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "handleSecondaryClick",
+                    new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l != null && l.handleSecondaryClick()) {
+                        param.setResult(null);
                     }
                 }
             });

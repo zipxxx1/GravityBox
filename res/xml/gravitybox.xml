@@ -228,6 +228,12 @@
                         android:summary="@string/pref_cell_tile_data_off_icon_summary"
                         android:defaultValue="false" />
 
+                    <CheckBoxPreference 
+                        android:key="pref_cell_tile_dual_mode"
+                        android:title="@string/pref_cell_tile_dual_mode_title"
+                        android:summary="@string/pref_cell_tile_dual_mode_summary"
+                        android:defaultValue="false" />
+
                 </PreferenceScreen>
 
                 <PreferenceScreen
