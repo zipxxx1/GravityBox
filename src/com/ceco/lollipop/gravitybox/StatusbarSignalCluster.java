@@ -206,7 +206,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     public static StatusbarSignalCluster create(ContainerType containerType,
             LinearLayout view, XSharedPreferences prefs) throws Throwable {
         sPrefs = prefs;
-        if (Utils.isMotoXtDevice()) {
+        if (Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22) {
             return new StatusbarSignalClusterMoto(containerType, view);
         } else if (Utils.isMtkDevice()) {
             return new StatusbarSignalClusterMtk(containerType, view);
