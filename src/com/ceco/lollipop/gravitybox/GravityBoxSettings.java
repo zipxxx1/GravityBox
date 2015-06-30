@@ -1692,7 +1692,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             // Remove Moto XT preferences
-            if (Utils.isMotoXtDevice() || sSystemProperties.xposedBridgeVersion < 64) {
+            if ((Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22) || sSystemProperties.xposedBridgeVersion < 64) {
                 Preference hPlusPref = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
                 if (hPlusPref != null) {
                     mPrefCatSignalCluster.removePreference(hPlusPref);
