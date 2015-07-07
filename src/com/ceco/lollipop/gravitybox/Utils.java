@@ -170,9 +170,11 @@ public class Utils {
     public static boolean isMotoXtDevice() {
         if (mIsMotoXtDevice != null) return mIsMotoXtDevice;
 
+        String model = Build.MODEL.toLowerCase();
         mIsMotoXtDevice = Build.MANUFACTURER.equalsIgnoreCase("motorola") &&
-                (Build.MODEL.toLowerCase().startsWith("xt") ||
-                 Build.MODEL.toLowerCase().contains("razr")) &&
+                (model.startsWith("xt") ||
+                 model.contains("razr") ||
+                 model.contains("moto")) &&
                  !isGpeDevice();
         return mIsMotoXtDevice;
     }
