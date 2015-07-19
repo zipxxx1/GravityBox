@@ -1867,4 +1867,11 @@
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Nemrég használt alkalmazások gomb dupla érintés művelete</string>
 
+    <!-- UNC: Disable sound to vibrate conversion -->
+    <string name="pref_lc_sound_vibrate_title">Hang rezgésre átalakítás tiltása</string>
+    <string name="pref_lc_sound_vibrate_summary">Megakadályozza azon értesítések rezgő visszajelzését, amelyeknél a rezgés le van tiltva, de az Android ezt mégis kényszerítetten használja a csak rezgésre beállított csengés üzemmód alatti értesítési hang rezgésre konvertálása miatt.</string>
+
+    <!-- UNC: QuietHours: disable haptic feedback -->
+    <string name="pref_lc_qh_disable_haptic_feedback_title">Rezgő visszajelzés letiltása</string>
+
 </resources>
