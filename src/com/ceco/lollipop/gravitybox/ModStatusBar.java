@@ -79,12 +79,6 @@ public class ModStatusBar {
     private static final String CLASS_TICKER = "com.android.systemui.statusbar.phone.PhoneStatusBar$MyTicker";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
-    private static final String CLASS_PLUGINFACTORY = Utils.hasLenovoVibeUI() ?
-            "com.android.systemui.lenovo.ext.PluginFactory" :
-            "com.mediatek.systemui.ext.PluginFactory";
-    private static final String CLASS_NETWORKTYPE = Utils.hasLenovoVibeUI() ?
-            "com.android.systemui.lenovo.ext.NetworkType" :
-            "com.mediatek.systemui.ext.NetworkType";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
     private static final String CLASS_ICON_MERGER = "com.android.systemui.statusbar.phone.IconMerger";
     private static final String CLASS_SAVE_IMG_TASK = "com.android.systemui.screenshot.SaveImageInBackgroundTask";
@@ -141,9 +135,6 @@ public class ModStatusBar {
     private static TrafficMeterMode mTrafficMeterMode = TrafficMeterMode.OFF;
     private static ViewGroup mSbContents;
     private static boolean mClockInSbContents = false;
-    private static boolean mDisableDataNetworkTypeIcons = false;
-    private static Object mStatusBarPlugin;
-    private static Object mGetDataNetworkTypeIconGeminiHook;
     private static boolean mNotifExpandAll;
     private static View mIconMergerView;
     private static String mClockLongpressLink;
@@ -205,10 +196,6 @@ public class ModStatusBar {
                         XposedHelpers.callMethod(mPhoneStatusBarPolicy, "updateAlarm");
                     }
                 }
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED)
-                    && intent.hasExtra(GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED)) {
-                mDisableDataNetworkTypeIcons = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED, false);
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_SB_BRIGHTNESS)) {
                     mBrightnessControlEnabled = intent.getBooleanExtra(
@@ -673,7 +660,6 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_ONGOING_NOTIFICATIONS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_DATA_TRAFFIC_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED);
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BT_VISIBILITY_CHANGED);
@@ -1124,34 +1110,6 @@ public class ModStatusBar {
         }
         catch (Throwable t) {
             XposedBridge.log(t);
-        }
-    }
-
-    public static void initMtkPlugin(final XSharedPreferences prefs, final ClassLoader classLoader) {
-        try {
-            final Class<?> pluginFactoryClass = XposedHelpers.findClass(CLASS_PLUGINFACTORY, classLoader);
-
-            XposedHelpers.findAndHookMethod(pluginFactoryClass, "getStatusBarPlugin",
-                    "android.content.Context", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    mStatusBarPlugin = XposedHelpers.getStaticObjectField(pluginFactoryClass, "mStatusBarPlugin");
-
-                    if (mGetDataNetworkTypeIconGeminiHook == null) {
-                        mGetDataNetworkTypeIconGeminiHook = XposedHelpers.findAndHookMethod(mStatusBarPlugin.getClass(),
-                                "getDataNetworkTypeIconGemini", CLASS_NETWORKTYPE, int.class, new XC_MethodHook() {
-                            @Override
-                            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                                if (mDisableDataNetworkTypeIcons)
-                                    param.setResult(Utils.hasLenovoCustomUI() ? 0 : -1);
-                            }
-                        });
-                    }
-                }
-            });
-        }
-        catch (Throwable t) {
-            if (DEBUG) XposedBridge.log(t);
         }
     }
 

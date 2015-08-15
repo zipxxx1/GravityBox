@@ -1285,10 +1285,6 @@
     <string name="pref_lc_qh_cat_weekdays_title">Hétköznapok</string>
     <string name="pref_lc_qh_cat_weekend_title">Hétvége</string>
 
-    <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">Adattevékenység típus kijelzők letiltása</string>
-    <string name="pref_disable_data_network_type_icons_summary">Lehetővé teszi a jelszint ikonok melletti 3G/G kijelzők letiltását</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Angol lokalizáció kényszerítése</string>
 

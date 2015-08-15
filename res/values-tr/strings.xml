@@ -1247,10 +1247,6 @@
     <string name="pref_lc_qh_cat_weekdays_title">Hafta içi</string>
     <string name="pref_lc_qh_cat_weekend_title">Haftasonu</string>
 
-    <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">Disable data network type indicators</string>
-    <string name="pref_disable_data_network_type_icons_summary">Allows to disable 3G/G indicators next to signal bars</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">İngilizce diline zorla</string>
 

@@ -1295,10 +1295,6 @@
     <!-- Notification control: Quiet hours for weekends-->
     <string name="pref_lc_qh_cat_weekdays_title">本周</string>
     <string name="pref_lc_qh_cat_weekend_title">周末</string>
-    
-    <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">禁用网络数据类型指示器</string>
-    <string name="pref_disable_data_network_type_icons_summary">允许禁用信号条旁边的3G/G指示器</string>
 
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">强制英语</string>

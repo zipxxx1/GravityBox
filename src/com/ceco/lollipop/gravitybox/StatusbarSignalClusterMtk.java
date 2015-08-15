@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
     protected boolean mRoamingIndicatorsDisabled;
-    protected boolean mDisableDataNetworkTypeIcons;
     protected static ImageView[] mMobileRoam = null;
 
     public StatusbarSignalClusterMtk(ContainerType containerType, LinearLayout view) throws Throwable {
@@ -26,11 +25,6 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
             mRoamingIndicatorsDisabled = intent.getBooleanExtra(
                     GravityBoxSettings.EXTRA_INDICATORS_DISABLED, false);
             update();
-        } else if(intent.getAction().equals(GravityBoxSettings.ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED)
-                && intent.hasExtra(GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED)) {
-            mDisableDataNetworkTypeIcons = intent.getBooleanExtra(
-                    GravityBoxSettings.EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED, false);
-            update();
         }
     }
 
@@ -41,8 +35,6 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
         mRoamingIndicatorsDisabled = sPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_DISABLE_ROAMING_INDICATORS, false);
         mDataActivityEnabled = false;
-        mDisableDataNetworkTypeIcons = sPrefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false);
     }
 
     protected void updateRoamingIndicator() {

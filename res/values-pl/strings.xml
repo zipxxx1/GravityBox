@@ -1262,10 +1262,6 @@
     <string name="pref_lc_qh_cat_weekdays_title">Dni tygodnia</string>
     <string name="pref_lc_qh_cat_weekend_title">Weekend</string>
 
-    <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">Wyłącz wskaźniki typu sieci</string>
-    <string name="pref_disable_data_network_type_icons_summary">Pozwala wyłączyć wskaźniki 3G/G obok słupków poziomu sygnału</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Wymuś język angielski</string>
 

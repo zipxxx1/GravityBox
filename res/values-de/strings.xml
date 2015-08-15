@@ -1285,10 +1285,6 @@
     <string name="pref_lc_qh_cat_weekdays_title">Werktage</string>
     <string name="pref_lc_qh_cat_weekend_title">Wochenende</string>
 
-   <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">Indikatoren für Netzwerktyp deaktivieren</string>
-    <string name="pref_disable_data_network_type_icons_summary">3G/G Indikatoren neben dem Signalbalken ausblenden</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Englisch erzwingen</string>
 

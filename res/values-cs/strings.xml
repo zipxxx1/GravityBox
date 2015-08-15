@@ -1265,10 +1265,6 @@
     <string name="pref_lc_qh_cat_weekdays_title">Pracovní dny</string>
     <string name="pref_lc_qh_cat_weekend_title">Víkend</string>
 
-    <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">Vypnout indikátory datových síťí</string>
-    <string name="pref_disable_data_network_type_icons_summary">Umožňuje vypnout dodatečné 3G/G indikátory datových sítí</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Anglická lokalizace</string>
 

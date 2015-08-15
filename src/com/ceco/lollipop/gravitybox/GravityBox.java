@@ -125,10 +125,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         // MTK Specific
         if (Utils.isMtkDevice()) {
-            if (Utils.hasGeminiSupport()
-                    && lpparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
-                ModStatusBar.initMtkPlugin(prefs, lpparam.classLoader);
-            }
             if (lpparam.packageName.equals(MtkFixDevOptions.PACKAGE_NAME) &&
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_MTK_FIX_DEV_OPTS, false)) {
                 MtkFixDevOptions.init(prefs, lpparam.classLoader);

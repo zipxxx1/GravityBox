@@ -129,9 +129,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             "gravitybox.intent.action.LOW_BATTERY_WARNING_POLICY_CHANGED";
     public static final String EXTRA_LOW_BATTERY_WARNING_POLICY = "lowBatteryWarningPolicy";
 
-    public static final String PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS = "pref_disable_data_network_type_icons";
-    public static final String ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED = "gravitybox.intent.action.DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED";
-    public static final String EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED = "dataNetworkTypeIconsDisabled";
     public static final String PREF_KEY_DISABLE_ROAMING_INDICATORS = "pref_disable_roaming_indicators";
     public static final String ACTION_DISABLE_ROAMING_INDICATORS_CHANGED = "gravitybox.intent.action.DISABLE_ROAMING_INDICATORS_CHANGED";
     public static final String EXTRA_INDICATORS_DISABLED = "indicatorsDisabled";
@@ -1158,7 +1155,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefNotifAlpha;
         private Preference mPrefNotifImagePortrait;
         private Preference mPrefNotifImageLandscape;
-        private CheckBoxPreference mPrefDisableDataNetworkTypeIcons;
         private CheckBoxPreference mPrefNotifExpandAll;
         private CheckBoxPreference mPrefDisableRoamingIndicators;
         private ListPreference mPrefButtonBacklightMode;
@@ -1411,7 +1407,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefNotifExpandAll = (CheckBoxPreference) findPreference(PREF_KEY_NOTIF_EXPAND_ALL);
             mPrefNotifAlpha = (SeekBarPreference) findPreference(PREF_KEY_NOTIF_BACKGROUND_ALPHA);
 
-            mPrefDisableDataNetworkTypeIcons = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS);
             mPrefDisableRoamingIndicators = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_ROAMING_INDICATORS);
             mPrefButtonBacklightMode = (ListPreference) findPreference(PREF_KEY_BUTTON_BACKLIGHT_MODE);
             mPrefButtonBacklightNotif = (CheckBoxPreference) findPreference(PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS);
@@ -1663,7 +1658,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             // Remove MTK specific preferences for non-MTK devices
             if (!Utils.isMtkDevice()) {
-                mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 if (!sSystemProperties.hasMsimSupport) {
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
@@ -1679,7 +1673,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatLsOther.removePreference(mPrefLsRotation);
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {
-                    mPrefCatStatusbar.removePreference(mPrefDisableDataNetworkTypeIcons);
                     mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                     //mPrefCatLsOther.removePreference(mPrefLockscreenCarrier2Text);
@@ -2545,10 +2538,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_NOTIF_BACKGROUND_ALPHA)) {
                 intent.setAction(ACTION_NOTIF_BACKGROUND_CHANGED);
                 intent.putExtra(EXTRA_BG_ALPHA, prefs.getInt(PREF_KEY_NOTIF_BACKGROUND_ALPHA, 0));
-            } else if (key.equals(PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS)) {
-                intent.setAction(ACTION_DISABLE_DATA_NETWORK_TYPE_ICONS_CHANGED);
-                intent.putExtra(EXTRA_DATA_NETWORK_TYPE_ICONS_DISABLED,
-                        prefs.getBoolean(PREF_KEY_DISABLE_DATA_NETWORK_TYPE_ICONS, false));
             } else if (key.equals(PREF_KEY_NOTIF_EXPAND_ALL)) {
                 intent.setAction(ACTION_NOTIF_EXPAND_ALL_CHANGED);
                 intent.putExtra(EXTRA_NOTIF_EXPAND_ALL,

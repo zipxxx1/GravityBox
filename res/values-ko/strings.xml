@@ -1039,9 +1039,6 @@
     <string name="pref_lc_qh_cat_weekdays_title">주일</string>
     <string name="pref_lc_qh_cat_weekend_title">주말</string>
 
-    <string name="pref_disable_data_network_type_icons_title">데이터 통신망 종류 아이콘 비활성화</string>
-    <string name="pref_disable_data_network_type_icons_summary">신호바 아이콘 옆의 데이터 통신망 종류 아이콘을 비활성화합니다.</string>
-
     <string name="pref_force_english_locale_title">강제로 영어 사용 (English)</string>
 
     <string name="pref_lockscreen_carrier2_text_title">2번째 통신사 이름 설정</string>

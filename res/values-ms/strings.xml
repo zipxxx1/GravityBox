@@ -1295,10 +1295,6 @@
     <string name="pref_lc_qh_cat_weekdays_title">Hari biasa</string>
     <string name="pref_lc_qh_cat_weekend_title">Hari minggu</string>
 
-    <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">Matikan penunjuk data</string>
-    <string name="pref_disable_data_network_type_icons_summary">Benarkan utk matikan 3G/G di sebelah signal</string>
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Paksa bahasa English</string>
 

@@ -1286,9 +1286,6 @@
     <string name="pref_lc_qh_cat_weekdays_title">Días entre semana</string>
     <string name="pref_lc_qh_cat_weekend_title">Fin de semana</string>
     
-    <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">Desactivar indicadores de tipo de red de datos</string>
-    <string name="pref_disable_data_network_type_icons_summary">Permite desactivar los indicadores 3G/G al lado de las barras de señal</string>
 
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Forzar idioma a inglés</string>

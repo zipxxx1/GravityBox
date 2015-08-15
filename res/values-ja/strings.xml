@@ -1069,9 +1069,6 @@
     <!-- Notification control: Quiet hours for weekends-->
     <string name="pref_lc_qh_cat_weekdays_title">平日</string>
     <string name="pref_lc_qh_cat_weekend_title">週末</string>
-    <!-- Disable data network type icons -->
-    <string name="pref_disable_data_network_type_icons_title">ネットワークタイプアイコンを無効化</string>
-    <string name="pref_disable_data_network_type_icons_summary">電波強度表示の上にある3Gアイコンなどを無効化します。</string>
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">GBを英語表示にする</string>
     <!-- Lockscreen: secondary custom carrier text (MTK only) -->
