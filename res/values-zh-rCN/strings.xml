@@ -1831,5 +1831,9 @@
     <!-- Status bar: disable peek -->
     <string name="pref_statusbar_dt2s_title">双击睡眠</string>
     <string name="pref_statusbar_dt2s_summary">需要禁用偷看</string>
+	
+	<!-- Cellular tile: Dual mode -->
+    <string name="pref_cell_tile_dual_mode_title">双模式</string>
+    <string name="pref_cell_tile_dual_mode_summary">WiFi和蓝牙瓷砖等允许类似的行为</string>
 
 </resources>
