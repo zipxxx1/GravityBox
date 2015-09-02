@@ -249,7 +249,7 @@ public class ProgressBarController implements BroadcastSubReceiver {
 
         try {
             @SuppressWarnings("unchecked")
-            ArrayList<Parcelable> actions = (ArrayList<Parcelable>) 
+            List<Parcelable> actions = (List<Parcelable>) 
                 XposedHelpers.getObjectField(views, "mActions");
             if (actions == null) return pInfo;
 
