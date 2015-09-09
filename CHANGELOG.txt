@@ -1,3 +1,12 @@
+Changelog 5.1.5 - 09/09/2015
+--------------------------------------
+- Launcher tweaks: adjusted for Google App 5.2.33
+- Improved Motorola device identification
+- Fixed statusbar Progress Bar not working on some Motorola devices
+- Removed obsolete "MediaTek statusbar plugin" related features causing xposed log flooding
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 5.1.4 - 05/07/2015
 --------------------------------------
 - Signal cluster tweaks improvements for Moto devices running LP 5.1 (thanks to romracer)
