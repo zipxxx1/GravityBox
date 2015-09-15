@@ -82,6 +82,7 @@ public class ModNavigationBar {
     private static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
 
     public enum LollipopIconStyle { DISABLED, ORIGINAL, LARGE };
+    public enum CursorControl { DISABLED, STYLE1, STYLE2 };
 
     private static XSharedPreferences mPrefs;
     private static boolean mAlwaysShowMenukey;
@@ -95,7 +96,7 @@ public class ModNavigationBar {
     private static ModHwKeys.HwKeyAction mRecentsDoubletapAction = new ModHwKeys.HwKeyAction(0, null);
     private static int mHomeLongpressAction = 0;
     private static boolean mHwKeysEnabled;
-    private static boolean mCursorControlEnabled;
+    private static CursorControl mCursorControl;
     private static boolean mDpadKeysVisible;
     private static boolean mAlwaysOnBottom;
     private static boolean mNavbarVertical;
@@ -195,8 +196,9 @@ public class ModNavigationBar {
                     setKeyColor();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CURSOR_CONTROL)) {
-                    mCursorControlEnabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_CURSOR_CONTROL, false);
+                    mCursorControl = CursorControl.valueOf(intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_NAVBAR_CURSOR_CONTROL));
+                    updateDpadKeyIcon();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_SWAP)) {
                     mCustomKeySwapEnabled = intent.getBooleanExtra(
@@ -398,8 +400,8 @@ public class ModNavigationBar {
             mCustomKeyEnabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false);
             mHwKeysEnabled = !prefs.getBoolean(GravityBoxSettings.PREF_KEY_HWKEYS_DISABLE, false);
-            mCursorControlEnabled = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_NAVBAR_CURSOR_CONTROL, false);
+            mCursorControl = CursorControl.valueOf(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_NAVBAR_CURSOR_CONTROL, "DISABLED"));
             mAlwaysOnBottom = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_NAVBAR_ALWAYS_ON_BOTTOM, false);
             mCustomKeySwapEnabled = prefs.getBoolean(
@@ -526,20 +528,12 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(ScaleType.FIT_CENTER);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(
-                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
-                                        R.drawable.ic_sysbar_ime_left_lollipop :
-                                            R.drawable.ic_sysbar_ime_left));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(ScaleType.FIT_CENTER);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(
-                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
-                                        R.drawable.ic_sysbar_ime_right_lollipop :
-                                            R.drawable.ic_sysbar_ime_right));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -559,19 +553,11 @@ public class ModNavigationBar {
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(
-                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
-                                        R.drawable.ic_sysbar_ime_left_lollipop :
-                                            R.drawable.ic_sysbar_ime_left));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(
-                                mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
-                                        R.drawable.ic_sysbar_ime_right_lollipop :
-                                            R.drawable.ic_sysbar_ime_right));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -583,6 +569,7 @@ public class ModNavigationBar {
                     updateRecentsKeyCode();
                     updateHomeKeyLongpressSupport();
                     setNavbarBgColor();
+                    updateDpadKeyIcon();
 
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_SWAP_KEYS, false)) {
                         swapBackAndRecents();
@@ -1089,7 +1076,7 @@ public class ModNavigationBar {
     }
 
     private static void setDpadKeyVisibility() {
-        if (!mCursorControlEnabled) return;
+        if (mCursorControl == CursorControl.DISABLED) return;
         try {
             final int iconHints = XposedHelpers.getIntField(mNavigationBarView, "mNavigationIconHints");
             final int disabledFlags = XposedHelpers.getIntField(mNavigationBarView, "mDisabledFlags");
@@ -1414,6 +1401,24 @@ public class ModNavigationBar {
         } else {
             return mCustomKeyAltIcon ?
                     R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps;
+        }
+    }
+
+    private static void updateDpadKeyIcon() {
+        try {
+            Resources res = mGbContext.getResources();
+            for (NavbarViewInfo nvi : mNavbarViewInfo) {
+                nvi.dpadLeft.setImageDrawable(mCursorControl == CursorControl.DISABLED ?
+                        null : mCursorControl == CursorControl.STYLE1 ?
+                                res.getDrawable(R.drawable.ic_sysbar_ime_left_lollipop) :
+                                    res.getDrawable(R.drawable.ic_sysbar_ime_left));
+                nvi.dpadRight.setImageDrawable(mCursorControl == CursorControl.DISABLED ?
+                        null : mCursorControl == CursorControl.STYLE1 ?
+                                res.getDrawable(R.drawable.ic_sysbar_ime_right_lollipop) :
+                                    res.getDrawable(R.drawable.ic_sysbar_ime_right));
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
     }
 }

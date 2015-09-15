@@ -1278,11 +1278,13 @@
                 android:title="@string/pref_navbar_swap_keys_title"
                 android:defaultValue="false" />
 
-            <CheckBoxPreference 
-                android:key="pref_navbar_cursor_control"
+            <ListPreference 
+                android:key="pref_navbar_cursor_control2"
                 android:title="@string/pref_navbar_cursor_control_title"
                 android:summary="@string/pref_navbar_cursor_control_summary"
-                android:defaultValue="false" />
+                android:entries="@array/navbar_cursor_control_entries"
+                android:entryValues="@array/navbar_cursor_control_values"
+                android:defaultValue="DISABLED" />
 
             <PreferenceScreen 
                 android:key="pref_cat_navbar_custom_key"

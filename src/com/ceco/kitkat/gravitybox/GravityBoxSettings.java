@@ -575,7 +575,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP = "pref_navbar_custom_key_swap";
     public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_ICON = "pref_navbar_custom_key_icon";
     public static final String PREF_KEY_NAVBAR_SWAP_KEYS = "pref_navbar_swap_keys";
-    public static final String PREF_KEY_NAVBAR_CURSOR_CONTROL = "pref_navbar_cursor_control";
+    public static final String PREF_KEY_NAVBAR_CURSOR_CONTROL = "pref_navbar_cursor_control2";
     public static final String PREF_KEY_NAVBAR_COLOR_ENABLE = "pref_navbar_color_enable";
     public static final String PREF_KEY_NAVBAR_KEY_COLOR = "pref_navbar_key_color";
     public static final String PREF_KEY_NAVBAR_KEY_GLOW_COLOR = "pref_navbar_key_glow_color";
@@ -3087,7 +3087,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_NAVBAR_CURSOR_CONTROL)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_CURSOR_CONTROL,
-                        prefs.getBoolean(PREF_KEY_NAVBAR_CURSOR_CONTROL, false));
+                        prefs.getString(PREF_KEY_NAVBAR_CURSOR_CONTROL, "DISABLED"));
             } else if (key.equals(PREF_KEY_NAVBAR_RING_DISABLE)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_RING_DISABLE,
