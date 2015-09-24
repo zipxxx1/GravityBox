@@ -1824,7 +1824,7 @@
     <string name="pref_statusbar_disable_peek_title">Désactiver peek</string>
     <string name="pref_statusbar_disable_peek_summary">La barre d\'état ne se déroulera plus sur un appui simple</string>
 
-    <!-- Status bar: disable peek -->
+    <!-- Status bar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">Double appui pour mettre en veille</string>
     <string name="pref_statusbar_dt2s_summary">Nécessite que peek soit désactivé</string>
 
