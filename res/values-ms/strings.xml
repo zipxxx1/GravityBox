@@ -1730,5 +1730,103 @@
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Sembunyi butang kecerahan</string>
+	
+	<!-- SignalCluster: reduce icon spacing -->
+    <string name="pref_signal_cluster_narrow_title">Kurangkan jarak ikon</string>
+    <string name="pref_signal_cluster_narrow_summary">Kurangkan jarak ikon signal</string>
+
+    <!-- Navigation bar: hide IME switcher -->
+    <string name="pref_navbar_hide_ime_title">Sembunyi penukar IME</string>
+
+    <!-- Lockscreen: direct unlock -->
+    <string name="pref_lockscreen_direct_unlock_title">Buka terus</string>
+    <string name="pref_lockscreen_direct_unlock_summary">Tunjukkan kawalan keselamatan ketika buka kunci</string>
+    <string name="direct_unlock_off">Matikan</string>
+    <string name="direct_unlock_standard">Biasa</string>
+    <string name="direct_unlock_see_through">Tembus</string>
+
+    <!-- UNC: Notification visibility -->
+    <string name="pref_lc_notif_visibility_title">Penampakan</string>
+    <string name="pref_lc_notif_visibility_summary">Khaskan penampakan notifikasi pada skrin kunci. 
+        hanya apabila \"sembunyi notifikasi sensitif\" polisi skrin kunci aktif</string>
+    <string name="lc_notif_visibility_default">Tetapan asal</string>
+    <string name="lc_notif_visibility_public">Tunjukkan semua kandungan</string>
+    <string name="lc_notif_visibility_private">Sembunyi kandungan sensitif</string>
+    <string name="lc_notif_visibility_secret">Sembunyi notifikasi</string>
+
+    <!-- Cellular tile settings -->
+    <string name="pref_cat_qs_cell_tile_title">Tetapan tile selular</string>
+
+    <!-- Cellular tile: data off icon -->
+    <string name="pref_cell_tile_data_off_icon_title">Ikon data tidak aktif</string>
+    <string name="pref_cell_tile_data_off_icon_summary">Tunjukkan ikon ketika paket data tidak aktif</string>
+
+    <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">Jalan pintas</string>
+    <string name="pref_lockscreen_shortcuts_summary">Benarkan jalan pintas untuk skrin kunci</string>
+
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">Lancaran selamat</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Perlukan dua kali sentuh untuk aktifkan jalan pintas 
+        untuk mengelakkan teraktif ketika dalam poket</string>
+
+    <!-- Lockscreen Smart unlock -->
+    <string name="pref_lockscreen_smart_unlock_title">Buka bijak</string>
+    <string name="pref_lockscreen_smart_unlock_summary">Buka automatik jika polisi
+        mengesan keadaan yg boleh dipercayai</string>
+
+    <!--  WiFi trusted networks -->
+    <string name="wifi_trusted_info">Kepercayaan buka bijak</string>
+
+    <!-- QS: Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_title">Tetapan tile bateri</string>
+    <string name="pref_battery_tile_percentage_title">Tunjukkan peratusan</string>
+    <string name="pref_battery_tile_saver_indicate_title">Penunjuk penjimat bateri</string>
+    <string name="pref_battery_tile_saver_indicate_summary">Gunakan kamus asal
+        untuk menujukkan penjimat bateri aktif</string>
+    <string name="pref_battery_tile_temp_unit_title">Unit suhu</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="pref_battery_tile_swap_actions_title">Aksi tukar</string>
+    <string name="pref_battery_tile_swap_actions_summary">Tukar sekali tekan/tekan lama</string>
+
+    <!-- Power: Disable battery saver indication -->
+    <string name="pref_battery_saver_indication_disable_title">Matikan penunjuk penjimat bateri</string>
+    <string name="pref_battery_saver_indication_disable_summary">Matikan warna oren 
+        ketika penunjuk penjimat bateri aktif</string>
+
+    <!-- Signal cluster: Disable exclamation marks -->
+    <string name="pref_signal_cluster_dem_title">Hapuskan tanda seru</string>
+    <string name="pref_signal_cluster_dem_summary">Perlukan reboot</string>
+
+    <!-- UNC: LED priority mode -->
+    <string name="pref_lc_led_priority_mode_title">Mod keutamaan</string>
+    <string name="pref_lc_led_priority_mode_summary">Benarkan LED mod keutamaan dan mod senyap</string>
+
+    <!-- UNC: Disable sound to vibrate conversion -->
+    <string name="pref_lc_sound_vibrate_title">Tukar mod senyap kepada mod getaran</string>
+    <string name="pref_lc_sound_vibrate_summary">Halang notifikasi daripada senyap dari getaran
+        paksa getran ketikan mod getaran sahaja</string>
+
+    <!-- UNC: QuietHours: disable haptic feedback -->
+    <string name="pref_lc_qh_disable_haptic_feedback_title">Matikan getaran</string>
+
+    <!-- Recents: clear visible only -->
+    <string name="pref_recents_clear_all_visible_title">Hapuskan yang jelas sahaja</string>
+
+    <!-- Lockscreen: doubletap to sleep -->
+    <string name="pref_lockscreen_dt2s_title">Sentuh 2 kali untuk matikan</string>
+
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_disable_peek_title">Matikan peek</string>
+    <string name="pref_statusbar_disable_peek_summary">Tidak akan kembangkan bar status pada satu kali sentuh</string>
+
+    <!-- Status bar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">Sentuh 2 kali untuk matikan</string>
+    <string name="pref_statusbar_dt2s_summary">Perlukan peek untuk tidak aktif</string>
+
+    <!-- Cellular tile: Dual mode -->
+    <string name="pref_cell_tile_dual_mode_title">Mod berkembar</string>
+    <string name="pref_cell_tile_dual_mode_summary">Benarkan perlakuan sama seperti tile wifi dan bluetooth</string>
 
 </resources>
