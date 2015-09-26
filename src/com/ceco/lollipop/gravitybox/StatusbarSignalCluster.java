@@ -79,6 +79,11 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected SignalActivity mWifiActivity;
     protected SignalActivity mMobileActivity;
 
+    // Battery padding
+    protected Integer mBatteryPaddingOriginal;
+    protected int mBatteryStyle;
+    protected boolean mPercentTextSb;
+
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
@@ -491,11 +496,30 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     @Override
-    public void onBroadcastReceived(Context context, Intent intent) { }
+    public void onBroadcastReceived(Context context, Intent intent) {
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED) &&
+                intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE)) {
+            mBatteryStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE, 1);
+            updateBatteryPadding();
+        }
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR)) {
+                mPercentTextSb = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, false);
+                updateBatteryPadding();
+            }
+        }
+    }
 
     protected void initPreferences() { 
         mDataActivityEnabled = mContainerType != ContainerType.HEADER && 
                 sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY, false);
+
+        mBatteryStyle = Integer.valueOf(sPrefs.getString(
+                GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
+        mPercentTextSb = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false);
+
+        updateBatteryPadding();
     }
 
     protected boolean supportsDataActivityIndicators() {
@@ -558,6 +582,24 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     iv.clearColorFilter();
                 }
             }
+        }
+    }
+
+    protected void updateBatteryPadding() {
+        try {
+            if (mBatteryPaddingOriginal == null) {
+                mBatteryPaddingOriginal = XposedHelpers.getIntField(mView, "mEndPadding");
+            }
+            int padding = mBatteryPaddingOriginal;
+            if (mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_NONE) {
+                if ((mContainerType == ContainerType.STATUSBAR && !mPercentTextSb) ||
+                        (mContainerType == ContainerType.KEYGUARD)) {
+                    padding = Math.round((float)mBatteryPaddingOriginal / 4f);
+                }
+            }
+            XposedHelpers.setIntField(mView, "mEndPadding", padding);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
     }
 
