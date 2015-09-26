@@ -84,6 +84,8 @@ public class ModPieControls {
     private static int mPieTriggerSize;
     private static int mExpandedDesktopMode;
     private static boolean mCenterTrigger;
+    private static boolean mTrigindEnabled;
+    private static int mTrigindColor;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -168,6 +170,15 @@ public class ModPieControls {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_CENTER_TRIGGER)) {
                     mCenterTrigger = intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_CENTER_TRIGGER, false);
+                    attachPie();
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND)) {
+                    mTrigindEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND, false);
+                    attachPie();
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND_COLOR)) {
+                    mTrigindColor = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_TRIGIND_COLOR,
+                            mGbContext.getResources().getColor(R.color.pie_trigind_color));
                     attachPie();
                 }
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
@@ -306,6 +317,7 @@ public class ModPieControls {
             mPieSize = prefs.getInt(GravityBoxSettings.PREF_KEY_PIE_CONTROL_SIZE, 1000);
             mPieTriggerSize = prefs.getInt(GravityBoxSettings.PREF_KEY_PIE_CONTROL_TRIGGER_SIZE, 5);
             mCenterTrigger = prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_CENTER_TRIGGER, false);
+            mTrigindEnabled = prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_TRIGIND, false);
 
             mExpandedDesktopMode = GravityBoxSettings.ED_DISABLED;
             try {
@@ -334,6 +346,8 @@ public class ModPieControls {
                     }
                     mPieController.setCustomKeyMode(customKeyMode);
                     mPieController.setMirroredKeys(prefs.getBoolean(GravityBoxSettings.PREF_KEY_PIE_MIRRORED_KEYS, false));
+                    mTrigindColor = prefs.getInt(GravityBoxSettings.PREF_KEY_PIE_TRIGIND_COLOR,
+                            mGbContext.getResources().getColor(R.color.pie_trigind_color));
 
                     mPieController.attachTo(param.thisObject);
 
@@ -496,20 +510,27 @@ public class ModPieControls {
                 trigger.setTag(mPieController.buildTracker(g));
                 trigger.setOnTouchListener(mPieTriggerOnTouchHandler);
 
-                if (DEBUG) {
-                    trigger.setVisibility(View.VISIBLE);
-                    trigger.setBackgroundColor(0x77ff0000);
-                    log("addPieTrigger on " + g.INDEX
-                            + " with position: " + g + " : " + trigger.toString());
-                }
+                if (DEBUG) log("addPieTrigger on " + g.INDEX
+                        + " with position: " + g + " : " + trigger.toString());
                 mWindowManager.addView(trigger, getPieTriggerLayoutParams(g));
                 mPieTrigger[g.INDEX] = trigger;
+                updateTriggerIndicator(trigger);
             } else if (trigger != null && (mPieTriggerSlots & g.FLAG) == 0) {
                 mWindowManager.removeView(trigger);
                 mPieTrigger[g.INDEX] = null;
             } else if (trigger != null) {
                 mWindowManager.updateViewLayout(trigger, getPieTriggerLayoutParams(g));
+                updateTriggerIndicator(trigger);
             }
+        }
+    }
+
+    private static void updateTriggerIndicator(View trigger) {
+        if (mCenterTrigger && mTrigindEnabled) {
+            trigger.setVisibility(View.VISIBLE);
+            trigger.setBackgroundColor(mTrigindColor);
+        } else {
+            trigger.setVisibility(View.GONE);
         }
     }
 

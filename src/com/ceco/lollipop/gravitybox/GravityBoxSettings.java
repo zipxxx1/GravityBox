@@ -434,6 +434,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_PIE_LONGPRESS_DELAY = "pref_pie_longpress_delay";
     public static final String PREF_KEY_PIE_MIRRORED_KEYS = "pref_pie_control_mirrored_keys";
     public static final String PREF_KEY_PIE_CENTER_TRIGGER = "pref_pie_control_center_trigger";
+    public static final String PREF_KEY_PIE_TRIGIND = "pref_pie_control_trigind";
+    public static final String PREF_KEY_PIE_TRIGIND_COLOR = "pref_pie_control_trigind_color";
     public static final int PIE_CUSTOM_KEY_OFF = 0;
     public static final int PIE_CUSTOM_KEY_SEARCH = 1;
     public static final int PIE_CUSTOM_KEY_APP_LAUNCHER = 2;
@@ -454,6 +456,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_PIE_LONGPRESS_DELAY = "pieLongpressDelay";
     public static final String EXTRA_PIE_MIRRORED_KEYS = "pieMirroredKeys";
     public static final String EXTRA_PIE_CENTER_TRIGGER = "pieCenterTrigger";
+    public static final String EXTRA_PIE_TRIGIND = "pieTrigind";
+    public static final String EXTRA_PIE_TRIGIND_COLOR = "pieTrigindColor";
 
     public static final String PREF_KEY_BUTTON_BACKLIGHT_MODE = "pref_button_backlight_mode";
     public static final String PREF_KEY_BUTTON_BACKLIGHT_NOTIFICATIONS = "pref_button_backlight_notifications";
@@ -3092,6 +3096,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE)) {
                 intent.setAction(ACTION_BATTERY_SAVER_CHANGED);
                 intent.putExtra(EXTRA_BS_INDICATION_DISABLE, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_PIE_TRIGIND)) {
+                intent.setAction(ACTION_PREF_PIE_CHANGED);
+                intent.putExtra(EXTRA_PIE_TRIGIND, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_PIE_TRIGIND_COLOR)) {
+                intent.setAction(ACTION_PREF_PIE_CHANGED);
+                intent.putExtra(EXTRA_PIE_TRIGIND_COLOR, prefs.getInt(key, 
+                        getResources().getColor(R.color.pie_trigind_color)));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

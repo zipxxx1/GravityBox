@@ -1333,6 +1333,19 @@
             android:summary="@string/pref_pie_control_center_trigger_summary"
             android:defaultValue="false" />
 
+        <CheckBoxPreference 
+            android:key="pref_pie_control_trigind"
+            android:title="@string/pref_pie_control_trigind_title"
+            android:defaultValue="false"
+            android:dependency="pref_pie_control_center_trigger" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference 
+            android:key="pref_pie_control_trigind_color"
+            android:title="@string/pref_pie_control_trigind_color_title"
+            android:defaultValue="@color/pie_trigind_color"
+            alphaSlider="true"
+            android:dependency="pref_pie_control_trigind" />
+
         <com.ceco.lollipop.gravitybox.preference.SeekBarPreference
                 android:key="pref_pie_control_trigger_size"
                 android:title="@string/pie_control_trigger_size_title"
