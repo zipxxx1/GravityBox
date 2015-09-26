@@ -1354,11 +1354,30 @@ public class ModNavigationBar {
         }
     }
 
+    private static int[] getIconPaddingPx(int index) {
+        int[] p = new int[] { 0, 0, 0, 0 };
+        if (mUseLargerIcons) return p;
+
+        int paddingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5,
+                mResources.getDisplayMetrics()));
+        boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
+        if (index == 0 && mNavbarHeight < 75) {
+            p[1] = paddingPx;
+            p[3] = paddingPx;
+        }
+        if (index == 1 && hasVerticalNavbar && mNavbarWidth < 75) {
+            p[0] = paddingPx;
+            p[2] = paddingPx;
+        }
+        return p;
+    }
+
     private static void updateIconScaleType() {
         if (Build.VERSION.SDK_INT < 22) return;
 
         try {
             for (int i = 0; i < mNavbarViewInfo.length; i++) {
+                int [] paddingPx = getIconPaddingPx(i);
                 ViewGroup navButtons = mNavbarViewInfo[i].navButtons;
                 int childCount = navButtons.getChildCount();
                 for (int j = 0; j < childCount; j++) {
@@ -1372,7 +1391,17 @@ public class ModNavigationBar {
                                     iv.getScaleType());
                         }
                         iv.setScaleType(getIconScaleType(i, iv.getId()));
+                        iv.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
                     }
+                }
+                // do this explicitly for custom key
+                ImageView key = mNavbarViewInfo[i].customKey;
+                key.setScaleType(getIconScaleType(i, key.getId()));
+                key.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
+                // also adjust IME group padding
+                if (mNavbarViewInfo[i].menuImeGroup != null) {
+                    mNavbarViewInfo[i].menuImeGroup.setPadding(
+                            paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
                 }
             }
         } catch (Throwable t) {
