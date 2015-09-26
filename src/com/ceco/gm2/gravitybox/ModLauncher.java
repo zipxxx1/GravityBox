@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -51,11 +52,16 @@ public class ModLauncher {
         String fProfile;
         String fNumRows;
         String fNumCols;
+        String invariantProfile;
         public DynamicGrid(String cN, String fp, String fnr, String fnc) {
+            this(cN, fp, fnr, fnc, null);
+        }
+        public DynamicGrid(String cN, String fp, String fnr, String fnc, String invDp) {
             className = cN;
             fProfile = fp;
             fNumRows = fnr;
             fNumCols = fnc;
+            invariantProfile = invDp;
         }
     }
 
@@ -63,10 +69,15 @@ public class ModLauncher {
         String methodName;
         Object[] paramTypes;
         Object[] paramValues;
+        String fLauncherCallbacks;
         public ShowAllApps(String mName, Object[] pTypes, Object[] pValues) {
+            this(mName, pTypes, pValues, null);
+        }
+        public ShowAllApps(String mName, Object[] pTypes, Object[] pValues, String flc) {
             methodName = mName;
             paramTypes = pTypes;
             paramValues = pValues;
+            fLauncherCallbacks = flc;
         }
     }
 
@@ -85,6 +96,7 @@ public class ModLauncher {
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.co", "KV", "HU", "HV"));
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.bf", "KU", "HT", "HU"));
         CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.bf", "Mf", "Je", "Jf"));
+        CLASS_DYNAMIC_GRID.add(new DynamicGrid("com.android.launcher3.Launcher", "mDeviceProfile", "numRows", "numColumns", "com.android.launcher3.InvariantDeviceProfile"));
 
         METHOD_SHOW_ALL_APPS = new ArrayList<ShowAllApps>();
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("onClickAllAppsButton",
@@ -114,12 +126,17 @@ public class ModLauncher {
         METHOD_SHOW_ALL_APPS.add(new ShowAllApps("a",
                 new Object[] { boolean.class, "com.android.launcher3.h", boolean.class },
                 new Object[] { false, "EH", false } ));
+        METHOD_SHOW_ALL_APPS.add(new ShowAllApps("onClickAllAppsButton",
+                new Object[] { View.class },
+                new Object[] { "mAllAppsButton" },
+                "mLauncherCallbacks"));
     }
 
     private static boolean mShouldShowAppDrawer;
     private static boolean mReceiverRegistered;
     private static Method mShowAllAppsMethod;
     private static Object[] mShowAllAppsParams;
+    private static Object mShowAllAppsObject;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -136,22 +153,24 @@ public class ModLauncher {
     }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        prefs.reload();
         boolean dynamicGridFound = false;
         for (DynamicGrid dg : CLASS_DYNAMIC_GRID) {
             final DynamicGrid dynamicGrid = dg;
             try {
-                Class<?> cls = XposedHelpers.findClass(dg.className, classLoader);
-                Field profile = cls.getDeclaredField(dg.fProfile);
-                Class<?> profileClass = profile.getType();
+                Class<?> cls = XposedHelpers.findClass(dg.className, classLoader); 
+                Class<?> profileClass = dg.invariantProfile != null ? 
+                        XposedHelpers.findClass(dg.invariantProfile, classLoader) :
+                            cls.getDeclaredField(dg.fProfile).getType();
                 Field numRows = profileClass.getDeclaredField(dg.fNumRows);
-                if (!numRows.getType().isAssignableFrom(float.class))
-                    throw new Exception("numRows doesn't seem to be of float type");
+                if (!numRows.getType().isAssignableFrom(dg.invariantProfile != null ? int.class : float.class))
+                    throw new Exception("numRows doesn't seem to be of expected type");
                 Field numCols = profileClass.getDeclaredField(dg.fNumCols);
-                if (!numCols.getType().isAssignableFrom(float.class))
-                    throw new Exception("numCols doesn't seem to be of float type");
+                if (!numCols.getType().isAssignableFrom(dg.invariantProfile != null ? int.class : float.class))
+                    throw new Exception("numCols doesn't seem to be of expected type");
                 if (DEBUG) log("Probably found DynamicGrid class as: " + dg.className +
                         "; numRows=" + dg.fNumRows + "; numCols=" + dg.fNumCols);
-                dg.clazz = cls;
+                dg.clazz = dg.invariantProfile != null ? profileClass : cls;
             } catch (Throwable t) { 
                 if (DEBUG) log("search for dynamic grid " + dg.className + ": " + t.getMessage());
                 continue; 
@@ -162,8 +181,8 @@ public class ModLauncher {
                 XposedBridge.hookAllConstructors(dynamicGrid.clazz, new XC_MethodHook() { 
                     @Override
                     protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                        prefs.reload();
-                        Object profile = XposedHelpers.getObjectField(param.thisObject, dynamicGrid.fProfile);
+                        Object profile = dynamicGrid.invariantProfile != null ? param.thisObject : 
+                            XposedHelpers.getObjectField(param.thisObject, dynamicGrid.fProfile); 
                         if (profile != null) {
                             final int rows = Integer.valueOf(prefs.getString(
                                     GravityBoxSettings.PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS, "0"));
@@ -233,7 +252,7 @@ public class ModLauncher {
                         if (mShouldShowAppDrawer) {
                             mShouldShowAppDrawer = false;
                             if (mShowAllAppsMethod != null) {
-                                mShowAllAppsMethod.invoke(param.thisObject, mShowAllAppsParams);
+                                mShowAllAppsMethod.invoke(mShowAllAppsObject, mShowAllAppsParams);
                             } else {
                                 for (ShowAllApps sapm : METHOD_SHOW_ALL_APPS) {
                                     try {
@@ -243,24 +262,37 @@ public class ModLauncher {
                                                     (String) sapm.paramTypes[i], classLoader);
                                             }
                                             if (sapm.paramValues[i] instanceof String) {
-                                                Object type = XposedHelpers.getStaticObjectField(
-                                                        (Class<?>) sapm.paramTypes[i],
-                                                        (String) sapm.paramValues[i]);
-                                                if (!"Applications".equals(type.toString()))
-                                                    continue;
-                                                sapm.paramValues[i] = type;
+                                                if (sapm.fLauncherCallbacks != null) {
+                                                    sapm.paramValues[i] = XposedHelpers.getObjectField(
+                                                            param.thisObject, (String) sapm.paramValues[i]);
+                                                } else {
+                                                    Object type = XposedHelpers.getStaticObjectField(
+                                                            (Class<?>) sapm.paramTypes[i],
+                                                            (String) sapm.paramValues[i]);
+                                                    if (!"Applications".equals(type.toString()))
+                                                        continue;
+                                                    sapm.paramValues[i] = type;
+                                                }
                                             }
                                         }
-                                        Class<?> clazz = param.thisObject.getClass();
-                                        if (clazz.getName().equals(CLASS_LAUNCHER)) {
+                                        Object o = sapm.fLauncherCallbacks == null ? param.thisObject :
+                                            XposedHelpers.getObjectField(param.thisObject, sapm.fLauncherCallbacks);
+                                        Class<?> clazz = o.getClass();
+                                        if (clazz.getName().equals(CLASS_LAUNCHER) || sapm.fLauncherCallbacks != null) {
                                             mShowAllAppsMethod = XposedHelpers.findMethodExact(clazz,
                                                     sapm.methodName, sapm.paramTypes);
                                         } else if (clazz.getSuperclass().getName().equals(CLASS_LAUNCHER)) {
                                             mShowAllAppsMethod = XposedHelpers.findMethodExact(clazz.getSuperclass(),
                                                     sapm.methodName, sapm.paramTypes);
                                         }
+                                        mShowAllAppsObject = o;
                                         mShowAllAppsParams = sapm.paramValues;
-                                        mShowAllAppsMethod.invoke(param.thisObject, mShowAllAppsParams);
+                                        mShowAllAppsMethod.invoke(mShowAllAppsObject, mShowAllAppsParams);
+                                        if (sapm.fLauncherCallbacks != null) {
+                                            Toast.makeText((Activity) param.thisObject,
+                                                    "Such action might not be supported in this Launcher version",
+                                                        Toast.LENGTH_LONG).show();
+                                        }
                                         break;
                                     } catch (Throwable t) {
                                         if (DEBUG) log("Method name " + sapm.methodName + 
