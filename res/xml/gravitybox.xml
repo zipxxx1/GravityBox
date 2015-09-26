@@ -148,11 +148,6 @@
                 android:title="@string/pref_lockscreen_carrier_text_title"
                 android:defaultValue="" />
 
-            <EditTextPreference 
-                android:key="pref_lockscreen_carrier2_text"
-                android:title="@string/pref_lockscreen_carrier2_text_title"
-                android:defaultValue="" />
-
         </PreferenceCategory>
 
     </PreferenceScreen>

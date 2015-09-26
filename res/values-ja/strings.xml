@@ -1071,8 +1071,6 @@
     <string name="pref_lc_qh_cat_weekend_title">週末</string>
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">GBを英語表示にする</string>
-    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">カスタム第二キャリアラベル</string>
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">お休みモードを無視</string>
     <string name="pref_lc_qh_ignore_list_title">キーワード設定</string>

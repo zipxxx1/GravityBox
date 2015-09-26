@@ -1268,9 +1268,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Anglická lokalizace</string>
 
-    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">Vlastní text operátora 2</string>
-
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">Ignorovat tiché hodiny</string>
     <string name="pref_lc_qh_ignore_list_title">Pro zadaná klíčová slova</string>

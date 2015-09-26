@@ -1299,9 +1299,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Английский принудительно</string>
 
-    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">Доп. текст для оператора</string>
-
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">Игноририровать тихий час</string>
     <string name="pref_lc_qh_ignore_list_title">По ключевым словам</string>

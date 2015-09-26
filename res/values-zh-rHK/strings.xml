@@ -1282,9 +1282,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">強制使用英語介面</string>
 
-    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">自訂第二電訊商標題文字</string>
-
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">忽略勿擾模式設定</string>
     <string name="pref_lc_qh_ignore_list_title">指定關鍵字</string>

@@ -1292,9 +1292,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Imposta Gravitybox in inglese</string>
 
-    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">Testo operatore personalizzato sim2</string>
-
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">Ignora ore notturne</string>
     <string name="pref_lc_qh_ignore_list_title">Lista keyword</string>

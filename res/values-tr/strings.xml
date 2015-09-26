@@ -1250,9 +1250,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">İngilizce diline zorla</string>
 
-    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">Özel ikinci operatör yazısı</string>
-
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">Ignore Quiet hours</string>
     <string name="pref_lc_qh_ignore_list_title">For specific keywords</string>

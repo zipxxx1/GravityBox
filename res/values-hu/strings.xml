@@ -1288,9 +1288,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Angol lokalizáció kényszerítése</string>
 
-    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">Egyéni másodlagos szolgáltatónév</string>
-
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">Csendes Időszak figyelmen kívül hagyása</string>
     <string name="pref_lc_qh_ignore_list_title">Meghatározott kulcsszavaknál</string>

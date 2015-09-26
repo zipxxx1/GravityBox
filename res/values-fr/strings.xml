@@ -1299,9 +1299,6 @@
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Forcer la localisation en anglais</string>
 
-    <!-- Lockscreen: secondary custom carrier text (MTK only) -->
-    <string name="pref_lockscreen_carrier2_text_title">Personnaliser le texte du nom d\'opérateur secondaire</string>
-
     <!-- UNC Quiet Hours: ignore on per-app basis -->
     <string name="pref_lc_qh_ignore_title">Ignorer les Heures silencieuses</string>
     <string name="pref_lc_qh_ignore_list_title">Pour les mots-clés spécifiés</string>

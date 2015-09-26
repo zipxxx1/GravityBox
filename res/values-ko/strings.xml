@@ -1041,8 +1041,6 @@
 
     <string name="pref_force_english_locale_title">강제로 영어 사용 (English)</string>
 
-    <string name="pref_lockscreen_carrier2_text_title">2번째 통신사 이름 설정</string>
-
     <string name="pref_lc_qh_ignore_title">무음 모드 무시</string>
     <string name="pref_lc_qh_ignore_list_title">특정 단어 설정</string>
     <string name="pref_lc_qh_ignore_list_summary">특정 단어가 포함된 알림이 도착한 경우에만 무음 모드를 무시합니다. 비워두면 모든 알림이 무음 모드를 무시합니다.</string>

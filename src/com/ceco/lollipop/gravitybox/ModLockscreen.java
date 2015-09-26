@@ -64,6 +64,8 @@ public class ModLockscreen {
     private static final String CLASS_KG_VIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
     private static final String CLASS_UNLOCK_METHOD_CACHE = "com.android.systemui.statusbar.phone.UnlockMethodCache";
     private static final String CLASS_KG_SHOW_CB = "com.android.internal.policy.IKeyguardShowCallback";
+    private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
+    private static final String CLASS_ICC_STATE = "com.android.internal.telephony.IccCardConstants.State";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
@@ -86,6 +88,7 @@ public class ModLockscreen {
     private static DismissKeyguardHandler mDismissKeyguardHandler;
     private static boolean mIsSecure;
     private static GestureDetector mGestureDetector;
+    private static TextView mCarrierTextView;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -357,6 +360,7 @@ public class ModLockscreen {
                     if (mSmartUnlock && mDismissKeyguardHandler == null) {
                         mDismissKeyguardHandler = new DismissKeyguardHandler(param.thisObject);
                     }
+                    updateCarrierText();
                 }
             });
 
@@ -455,6 +459,29 @@ public class ModLockscreen {
                     }
                 }
             });
+
+            XC_MethodHook carrierTextHook = new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    String text = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, "");
+                    if (mCarrierTextView == null) {
+                        mCarrierTextView = (TextView) param.thisObject;
+                    } 
+                    if (text.isEmpty()) {
+                        return;
+                    } else {
+                        mCarrierTextView.setText(text.trim().isEmpty() ? "" : text);
+                        param.setResult(null);
+                    }
+                }
+            };
+            if (Build.VERSION.SDK_INT < 22) {
+                XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT, classLoader, "updateCarrierText",
+                    CLASS_ICC_STATE, CharSequence.class, CharSequence.class, carrierTextHook);
+            } else {
+                XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT, classLoader, "updateCarrierText",
+                        carrierTextHook);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -579,6 +606,22 @@ public class ModLockscreen {
                     return true;
                 }
             });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void updateCarrierText() {
+        if (mCarrierTextView == null) return;
+        try {
+            if (Build.VERSION.SDK_INT < 22) {
+                XposedHelpers.callMethod(mCarrierTextView, "updateCarrierText",
+                        XposedHelpers.getObjectField(mCarrierTextView, "mSimState"),
+                        XposedHelpers.getObjectField(mCarrierTextView, "mPlmn"),
+                        XposedHelpers.getObjectField(mCarrierTextView, "mSpn"));
+            } else {
+                XposedHelpers.callMethod(mCarrierTextView, "updateCarrierText");
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
