@@ -46,7 +46,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
     private static DecimalFormat decimalFormat = new DecimalFormat("##0.#");
     private static final Map<String,String> SYMBOLS;
     static {
-        decimalFormat.setMaximumIntegerDigits(3);
+        decimalFormat.setMaximumIntegerDigits(4);
         decimalFormat.setMaximumFractionDigits(1);
 
         SYMBOLS = new HashMap<String,String>();
