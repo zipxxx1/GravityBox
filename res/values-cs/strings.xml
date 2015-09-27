@@ -259,6 +259,7 @@
     <string name="quick_pulldown_off">Vypnuto</string>
     <string name="quick_pulldown_right">Pravý okraj</string>
     <string name="quick_pulldown_left">Levý okraj</string>
+    <string name="quick_pulldown_both">Levý i pravý okraj</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Barvy stavového řádku</string>
@@ -1501,6 +1502,7 @@
     <string name="system_sound_screen_lock">Zvuk uzamčení obrazovky</string>
     <string name="system_sound_volume_adjust">Zvuk nastavení hlasitosti</string>
     <string name="system_sound_charger">GravityBox zvuky napájení</string>
+    <string name="system_sound_ringer">Zvuk vyzvánění</string>
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorovat pro příchozí hovory</string>
@@ -1780,8 +1782,23 @@
     <string name="pref_statusbar_disable_peek_title">Vypnout náhled</string>
     <string name="pref_statusbar_disable_peek_summary">Nerozbalí stavový řádek na jednoduché ťuknutí</string>
 
-    <!-- Status bar: disable peek -->
+    <!-- Status bar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">Uspat dvojitým klepnutím</string>
     <string name="pref_statusbar_dt2s_summary">Vyžaduje vypnutý náhled</string>
 
+    <!-- Cellular tile: Dual mode -->
+    <string name="pref_cell_tile_dual_mode_title">Duální režim</string>
+    <string name="pref_cell_tile_dual_mode_summary">Umožňuje podobné chování jako WiFi a Bluetooth dlaždice</string>
+
+    <!-- Pie trigger indicator -->
+    <string name="pref_pie_control_trigind_title">Indikátor aktivátoru</string>
+    <string name="pref_pie_control_trigind_color_title">Barva indikátoru aktivátoru</string>
+
+    <!-- WiFi tile settings -->
+    <string name="pref_cat_qs_wifi_tile_title">Nastavení WiFi dlaždice</string>
+    <string name="pref_wifi_tile_dual_mode_title">Duální režim</string>
+
+    <!-- Bluetooth tile settings -->
+    <string name="pref_cat_qs_bt_tile_title">Nastavení BlueTooth dlaždice</string>
+    <string name="pref_bt_tile_dual_mode_title">Duální režim</string>
 </resources>

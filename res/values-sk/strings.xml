@@ -260,6 +260,7 @@
     <string name="quick_pulldown_off">Vypnuté</string>
     <string name="quick_pulldown_right">Pravý okraj</string>
     <string name="quick_pulldown_left">Ľavý okraj</string>
+    <string name="quick_pulldown_both">Ľavý aj pravý okraj</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Farby stavového riadku</string>
@@ -1505,6 +1506,7 @@
     <string name="system_sound_screen_lock">Zvuk uzamknutia obrazovky</string>
     <string name="system_sound_volume_adjust">Zvuk nastavenia hlasitosti</string>
     <string name="system_sound_charger">GravityBox zvuky napájania</string>
+    <string name="system_sound_ringer">Zvuk vyzváňania</string>
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorovať pre prichádzajúce hovory</string>
@@ -1791,5 +1793,17 @@
     <!-- Cellular tile: Dual mode -->
     <string name="pref_cell_tile_dual_mode_title">Duálny režim</string>
     <string name="pref_cell_tile_dual_mode_summary">Umožňuje podobné správanie ako WiFi a Bluetooth dlaždice</string>
+
+    <!-- Pie trigger indicator -->
+    <string name="pref_pie_control_trigind_title">Indikátor aktivátora</string>
+    <string name="pref_pie_control_trigind_color_title">Farba indikátoru aktivátora</string>
+
+    <!-- WiFi tile settings -->
+    <string name="pref_cat_qs_wifi_tile_title">Nastavenia WiFi dlaždice</string>
+    <string name="pref_wifi_tile_dual_mode_title">Duálny režim</string>
+
+    <!-- Bluetooth tile settings -->
+    <string name="pref_cat_qs_bt_tile_title">Nastavenia BlueTooth dlaždice</string>
+    <string name="pref_bt_tile_dual_mode_title">Duálny režim</string>
 
 </resources>
