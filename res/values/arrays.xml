@@ -1016,6 +1016,7 @@
     </string-array>
 
     <string-array name="system_sound_entries" translatable="false">
+        <item>@string/system_sound_ringer</item>
         <item>@string/system_sound_dialpad</item>
         <item>@string/system_sound_touch</item>
         <item>@string/system_sound_screen_lock</item>
@@ -1024,6 +1025,7 @@
     </string-array>
 
     <string-array name="system_sound_values" translatable="false">
+        <item>ringer</item>
         <item>dialpad</item>
         <item>touch</item>
         <item>screen_lock</item>
