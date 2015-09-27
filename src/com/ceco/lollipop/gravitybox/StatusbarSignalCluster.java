@@ -586,6 +586,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     protected void updateBatteryPadding() {
+        if (Build.VERSION.SDK_INT < 22) return;
+
         try {
             if (mBatteryPaddingOriginal == null) {
                 mBatteryPaddingOriginal = XposedHelpers.getIntField(mView, "mEndPadding");
