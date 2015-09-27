@@ -91,7 +91,7 @@ public class CellularTile extends AospTile {
     }
 
     private boolean isDualModeEnabled() {
-        return (mDualMode && !mNormalized && isPrimary());
+        return (mDualMode && isPrimary());
     }
 
     @Override

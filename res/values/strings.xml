@@ -1715,11 +1715,6 @@
     <string name="settings_restore_backup_obsolete">Backup made in older version of Android cannot be restored due 
         to extensive OS differences. It is highly recommended to configure GravityBox from scratch.</string>
 
-    <!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">Normalize dual tiles</string>
-    <string name="pref_qs_normalize_summary">Makes WiFi and Bluetooth tiles normal. 
-        Their label-press action will be converted to long-press action</string>
-
     <!-- QS: tile order info -->
     <string name="tile_order_info">The first check box enables/disables tile, the second checkbox 
         specifies whether tile should be visible in secured lock screen.</string>
@@ -1832,5 +1827,13 @@
     <!-- Pie trigger indicator -->
     <string name="pref_pie_control_trigind_title">Trigger indicator</string>
     <string name="pref_pie_control_trigind_color_title">Trigger indicator color</string>
+
+    <!-- WiFi tile settings -->
+    <string name="pref_cat_qs_wifi_tile_title">WiFi tile settings</string>
+    <string name="pref_wifi_tile_dual_mode_title">Dual mode</string>
+
+    <!-- Bluetooth tile settings -->
+    <string name="pref_cat_qs_bt_tile_title">BlueTooth tile settings</string>
+    <string name="pref_bt_tile_dual_mode_title">Dual mode</string>
 
 </resources>

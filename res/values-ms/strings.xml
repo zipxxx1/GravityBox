@@ -1712,11 +1712,6 @@
     <string name="settings_restore_backup_obsolete">Pemasangan backup dalam versi android lama tidak dapat dilakukan 
         kerana perbezaan tahap android. Anda dinasihatkan guna dan set dari awal.</string>
 
-    <!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">Biasakan tile dual</string>
-    <string name="pref_qs_normalize_summary">Kembalikan tile wifi dan bluetooth kepeada asal. 
-        Tetapan akan kembali kepada tekan lama untuk ke menu utama</string>
-
     <!-- QS: tile order info -->
     <string name="tile_order_info">Kotak cek pertama aktif/tile dimatikan, kotak cek kedua 
         memastikan samada tile perlu dipapar atau tidak di skrin kekunci.</string>

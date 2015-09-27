@@ -89,7 +89,6 @@ import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class GravityBoxSettings extends Activity implements GravityBoxResultReceiver.Receiver {
     public static final String PREF_KEY_QUICK_SETTINGS_ENABLE = "pref_qs_management_enable";
-    public static final String PREF_KEY_QUICK_SETTINGS_NORMALIZE = "pref_qs_normalize";
     public static final String PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW = "pref_qs_tiles_per_row2";
     public static final String PREF_KEY_QUICK_SETTINGS_TILE_LABEL_STYLE = "pref_qs_tile_label_style";
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE = "pref_qs_hide_on_change";
@@ -514,7 +513,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_SB_SIGNAL_COLOR_MODE = "signalColorMode";
 
     public static final String ACTION_PREF_QUICKSETTINGS_CHANGED = "gravitybox.intent.action.QUICKSETTINGS_CHANGED";
-    public static final String EXTRA_QS_NORMALIZED = "qsNormalized";
     public static final String EXTRA_QS_COLS = "qsCols";
     public static final String EXTRA_QS_AUTOSWITCH = "qsAutoSwitch";
     public static final String EXTRA_QUICK_PULLDOWN = "quickPulldown";
@@ -812,6 +810,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_BBAR_COLOR_CRITICAL = "batteryBarColorCritical";
     public static final String EXTRA_BBAR_CENTERED = "batteryBarCentered";
     public static final String EXTRA_BBAR_COLOR_CHARGING = "batteryBarColorCharging";
+
+    public static final String PREF_KEY_WIFI_TILE_DUAL_MODE = "pref_wifi_tile_dual_mode";
+    public static final String EXTRA_WIFI_TILE_DUAL_MODE = "wifiTileDualMode";
+
+    public static final String PREF_KEY_BT_TILE_DUAL_MODE = "pref_bt_tile_dual_mode";
+    public static final String EXTRA_BT_TILE_DUAL_MODE = "btTileDualMode";
 
     public static final String PREF_CAT_KEY_CELL_TILE = "pref_cat_qs_cell_tile";
     public static final String PREF_KEY_CELL_TILE_DATA_OFF_ICON = "pref_cell_tile_data_off_icon";
@@ -2306,9 +2310,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_CHARGING_COLOR,
                         prefs.getInt(PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING_COLOR, Color.GREEN));
-            } else if (key.equals(PREF_KEY_QUICK_SETTINGS_NORMALIZE)) {
-                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
-                intent.putExtra(EXTRA_QS_NORMALIZED, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_COLS, Integer.valueOf(
@@ -3079,6 +3080,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_TRIGIND_COLOR, prefs.getInt(key, 
                         getResources().getColor(R.color.pie_trigind_color)));
+            } else if (key.equals(PREF_KEY_WIFI_TILE_DUAL_MODE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_WIFI_TILE_DUAL_MODE, prefs.getBoolean(key, true));
+            } else if (key.equals(PREF_KEY_BT_TILE_DUAL_MODE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_BT_TILE_DUAL_MODE, prefs.getBoolean(key, true));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

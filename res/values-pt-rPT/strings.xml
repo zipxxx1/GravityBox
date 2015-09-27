@@ -1681,8 +1681,4 @@
     <string name="settings_restore_backup_obsolete">As definições guardadas numa versão antiga do Android não podem ser restauradas 
         devido a diversas diferenças do sistema operativo, sendo altamente recomendável configurar o GravityBox de raíz</string>
 
-    <!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">Normalizar painéis duais</string>
-    <string name="pref_qs_normalize_summary">Permite transformar os painéis WiFi e Bluetooth em painéis normais (manter o painel pressionado será o mesmo que carregar no seu texto)</string>
-
 </resources>

@@ -63,7 +63,6 @@ public abstract class BaseTile implements QsEventListener {
     protected boolean mEnabled;
     protected boolean mSecured;
     protected int mStatusBarState;
-    protected boolean mNormalized;
     protected boolean mHideOnChange;
     protected float mScalingFactor = 1f;
 
@@ -91,7 +90,6 @@ public abstract class BaseTile implements QsEventListener {
                 mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_SECURED, "").split(",")));
         mSecured = securedTiles.contains(mKey);
 
-        mNormalized = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_NORMALIZE, false);
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
     }
 

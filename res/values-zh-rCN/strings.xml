@@ -1715,11 +1715,6 @@
     <string name="settings_restore_backup_obsolete">由于系统差异
 旧版本的备份不能恢复,强烈建议从头开始配置gravitybox</string>
 
-	<!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">标准化双瓷砖</string>
-    <string name="pref_qs_normalize_summary">让WiFi和蓝牙瓷砖正常化
-        它们的标签单击动作将被转换为长按动作</string>
-
     <!-- QS: tile order info -->
     <string name="tile_order_info">第一个复选框启用/禁用瓷砖,第二个复选框 
         指定瓷砖能否在锁屏中可见</string>

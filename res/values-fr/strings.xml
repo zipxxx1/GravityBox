@@ -1715,11 +1715,6 @@
     <string name="settings_restore_backup_obsolete">Le Backup réalisé dans l\'ancienne version d\'Android ne peut pas être restauré à cause 
         de différences trop importantes du système d\'exploitation. Il est grandement recommandé de reconfigurer GravityBox à partir de zéro.</string>
 
-    <!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">Normaliser les touches à double action</string>
-    <string name="pref_qs_normalize_summary">Rend normales les touches WiFi et Bluetooth. 
-        L\'action d\'un appui simple sera convertie en action d\'un appui long</string>
-
     <!-- QS: tile order info -->
     <string name="tile_order_info">La première coche active/désactive la touche, la seconde coche
         spécifie si la touche doit être visible dans l\'écran de déverrouillage sécurisé</string>

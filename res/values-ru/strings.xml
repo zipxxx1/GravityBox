@@ -1714,11 +1714,6 @@
     <string name="settings_restore_backup_obsolete">Резервная копия, выполненная в старой версии Андроид, не может быть восстановлена из-за 
         значимых различий  ОС. Настоятельно рекомендуется настройка GravityBox с нуля.</string>
 
-    <!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">Нормализация двойных плиток</string>
-    <string name="pref_qs_normalize_summary">Переключение плиток WiFi и Bluetooth в обычный режим. 
-        Действие нажатия на ярлыке будет преобразовано в действие по удержанию нажатия</string>
-
     <!-- QS: tile order info -->
     <string name="tile_order_info">Первый чекбокс включает/отключает плитку, второй чекбокс 
         устанавливает отображение на защищённом экране блокировки.</string>

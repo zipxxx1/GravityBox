@@ -1679,11 +1679,6 @@
         kvůli rozsáhlým odlišnostem v systému a souvisejících nastaveních GravityBox. 
         Důrazně se doporučuje nakonfigurovat GravityBox ručně.</string>
 
-    <!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">Normalizovat duální dlaždice</string>
-    <string name="pref_qs_normalize_summary">Konvertuje WiFi a Bluetooth duální dlaždice na klasické. 
-        Jejich standardní akce kliknutí popisu bude přístupná na dlouhé podržení.</string>
-
     <!-- QS: tile order info -->
     <string name="tile_order_info">První políčko slouží k aktivaci / deaktivaci dlaždice, druhé definuje 
         zda má být dlaždice viditelná v rámci zabezpečené obrazovky uzamčení</string>

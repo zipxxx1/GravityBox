@@ -1672,11 +1672,6 @@
     <string name="settings_restore_backup_obsolete">Kopia zapasowa wykonana w starszej wersji Androida nie może być przywrócona 
          ze względu na znaczne różnice systemów. Zalecane jest skonfigurowanie Gravitybox od podstaw.</string>
 
-    <!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">Normalizuj podwójne kafelki</string>
-    <string name="pref_qs_normalize_summary">Normalizuje kafelki WiFi i Bluetooth.
-        Akcja kliknięcia na etykietę zostanie zamieniona na akcję długiego naciśnięcia.</string>
-
     <!-- QS: tile order info -->
     <string name="tile_order_info">Pierwsze pole wyboru włącza/wyłącza kafelek, drugie pole wyboru
         określa, czy kafelkek powinien być widoczny na ekranie blokady.</string>

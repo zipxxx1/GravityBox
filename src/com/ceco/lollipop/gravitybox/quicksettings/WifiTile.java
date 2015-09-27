@@ -1,5 +1,7 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import com.ceco.lollipop.gravitybox.GravityBoxSettings;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -13,12 +15,21 @@ public class WifiTile extends AospTile {
 
     private Unhook mCreateTileViewHook;
     private Unhook mSupportsDualTargetsHook;
+    private boolean mDualMode;
 
     protected WifiTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, "aosp_tile_wifi", tile, prefs, eventDistributor);
 
         createHooks();
+    }
+
+    @Override
+    protected void initPreferences() {
+        super.initPreferences();
+
+        mDualMode = mPrefs.getBoolean(
+                GravityBoxSettings.PREF_KEY_WIFI_TILE_DUAL_MODE, true);
     }
 
     @Override
@@ -33,7 +44,7 @@ public class WifiTile extends AospTile {
 
     @Override
     public boolean handleLongClick() {
-        if (mNormalized) {
+        if (!mDualMode) {
             XposedHelpers.callMethod(mTile, "handleSecondaryClick");
             return true;
         }
@@ -62,7 +73,7 @@ public class WifiTile extends AospTile {
                     mContext.getClassLoader(), "supportsDualTargets", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mNormalized) param.setResult(false);
+                    param.setResult(mDualMode);
                 }
             });
         } catch (Throwable t) {

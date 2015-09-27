@@ -1400,10 +1400,6 @@
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">古いバージョンで作成されたバックアップはリストアできません。
 最初からGravityboxを設定し直すことをおすすめします。</string>
-    <!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">デュアルタイルを正常化する</string>
-    <string name="pref_qs_normalize_summary">Wi-FiとBluetoothタイルを正常にします。
-        ラベルタップアクションが長押しアクションになります。</string>
     <!-- QS: tile order info -->
     <string name="tile_order_info">最初のチェックボックスでタイルが有効化/無効化され、
         二つ目のチェックボックスでロック画面でタイルを表示するかどうか選べます。</string>

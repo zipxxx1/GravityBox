@@ -1359,10 +1359,6 @@
 
     <string name="settings_restore_backup_obsolete">이전 Android 버전에서 만든 백업은 OS의 구조가 바뀜에 따라 사용할 수 없게 되었습니다. GravityBox를 처음부터 다시 설정하는 것을 권장합니다.</string>
 
-    <string name="pref_qs_normalize_title">2개 타일의 행 안정화</string>
-    <string name="pref_qs_normalize_summary">Wi-Fi 타일과 블루투스 타일을 안정화시킵니다. 
-        원래 타일 이름을 눌러 실행되는 행동은 길게 눌러서 실행되게끔 변경되었습니다.</string>
-
     <string name="tile_order_info">첫 번째 체크박스는 사용 여부, 두 번째 체크박스는 보안으로 잠겨진 잠금 화면에서의 사용 가능 여부를 말합니다.</string>
 
     <string name="pref_data_traffic_lockscreen_title">잠금 화면에서 보이기</string>

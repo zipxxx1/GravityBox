@@ -1687,10 +1687,6 @@
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">Korábbi verziójú Android rendszerben történt mentés nem állítható vissza az operációs rendszerbeli különbségek miatt. Nagyon ajánlott a Gravitybox teljes körű újrakonfigurálása.</string>
 
-    <!-- QS: Normalize dual tiles -->
-    <string name="pref_qs_normalize_title">Dupla csempék normalizálása</string>
-    <string name="pref_qs_normalize_summary">A WiFi és Bluetooth csempéket normál csempékre változtatja. A csempe címkéken való érintési művelet átalakításra kerül hosszú érintési műveletre</string>
-
     <!-- QS: tile order info -->
     <string name="tile_order_info">Az első jelölőnégyzet engedélyezi/letiltja a csempét, a második jelölőnégyzet a csempe zárolt zárképernyőn való láthatóságát határozza meg.</string>
 
