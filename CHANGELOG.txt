@@ -1,3 +1,27 @@
+Changelog 5.2.0 - 27/09/2015
+--------------------------------------
+- QuickSettings management:
+--- Allow control of Dual mode individually for WiFi and BT tiles:
+------- replaces "Normalize dual tiles" feature
+------- note that dual tiles can't coexist with non-dual tiles within the same row (AOSP design restriction)
+--- Cellular: adjusted behavior to be consistent with WiFi and BT tiles:
+------- toggle mobile data on single-press, show data usage pane on long-press (non-dual)/label-press (dual)
+--- WiFi: show detail pane instead of WiFi settings on long-press (when tile is non-dual) (LP5.1 only)
+--- Bluetooth: show detail pane instead of BT settings on long-press (when tile is non-dual) (LP5.1 only)
+--- Quick Pulldown: added option to allow both sides (left and right) at the same time
+- Lockscreen: revived option for custom carrier text
+- Media tweaks: added slider for choosing custom music volume steps (from 5 up to 50)
+- UNC QuietHours: added option to allow muting Phone ringer during quiet hours (within "Mute system sounds")
+- Navigation bar: improved icon scaling for dimensions less than 75%  (LP5.1 only)
+- SignalCluster: reduce right-side spacing when battery indicator is hidden (LP5.1 only)
+- Pie: added option to show trigger indicator when trigger is centered
+- Launcher tweaks: adjusted for compatibility with Google App 5.23.19
+--- action for opening launcher app drawer is not supported anymore :/
+- TrafficMeterOmni: fixed incorrect formatting of values from interval <1000;1023>
+- Added Belarusian translations (thanks to kyrsant2008)
+- Updated French translations (thanks to ch-vox)
+- Updated Slovak and Czech translations
+
 Changelog 5.1.5 - 09/09/2015
 --------------------------------------
 - Launcher tweaks: adjusted for Google App 5.2.33
