@@ -40,7 +40,6 @@ public class ModAudio {
     private static final boolean DEBUG = false;
 
     private static final int STREAM_MUSIC = 3;
-    private static final int VOLUME_STEPS = 30;
     private static final int DEFAULT_STREAM_TYPE_OVERRIDE_DELAY_MS = 5000;
 
     private static boolean mSafeMediaVolumeEnabled;
@@ -85,7 +84,7 @@ public class ModAudio {
 
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS, false)
                     && Utils.shouldAllowMoreVolumeSteps()) {
-                initMusicStream();
+                initMusicStream(prefs);
             }
 
             XposedBridge.hookAllConstructors(classAudioService, new XC_MethodHook() {
@@ -208,21 +207,21 @@ public class ModAudio {
         }
     }
 
-    private static void initMusicStream() {
+    private static void initMusicStream(final XSharedPreferences prefs) {
         try {
             final Class<?> classRemotePlaybackState = XposedHelpers.findClass(
                     CLASS_REMOTE_PLAYBACK_STATE, null);
             final Class<?> classVolumeStreamState = XposedHelpers.findClass(
                     CLASS_VOLUME_STREAM_STATE, null);
             final Class<?> classAudioSystem = XposedHelpers.findClass(CLASS_AUDIO_SYSTEM, null);
+            final int volSteps = prefs.getInt(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS_VALUE, 30);
 
             XposedBridge.hookAllConstructors(classRemotePlaybackState, new XC_MethodHook() {
-
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    param.args[1] = VOLUME_STEPS;
-                    param.args[2] = VOLUME_STEPS;
-                    if (DEBUG) log("RemotePlaybackState constructed. Music stream volume steps set to " + VOLUME_STEPS);
+                    param.args[1] = volSteps;
+                    param.args[2] = volSteps;
+                    if (DEBUG) log("RemotePlaybackState constructed. Music stream volume steps set to " + volSteps);
                 }
             });
 
@@ -231,11 +230,11 @@ public class ModAudio {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     int streamType = XposedHelpers.getIntField(param.thisObject, "mStreamType");
                     if (streamType == STREAM_MUSIC) {
-                        XposedHelpers.setIntField(param.thisObject, "mIndexMax", (VOLUME_STEPS*10));
+                        XposedHelpers.setIntField(param.thisObject, "mIndexMax", (volSteps*10));
                         XposedHelpers.callStaticMethod(
-                                classAudioSystem, "initStreamVolume", STREAM_MUSIC, 0, VOLUME_STEPS);
+                                classAudioSystem, "initStreamVolume", STREAM_MUSIC, 0, volSteps);
                         XposedHelpers.callMethod(param.thisObject, "readSettings");
-                        if (DEBUG) log("Volume for music stream initialized with steps set to " + VOLUME_STEPS);
+                        if (DEBUG) log("Volume for music stream initialized with steps set to " + volSteps);
                     }
                 }
             });
