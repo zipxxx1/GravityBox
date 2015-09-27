@@ -5,7 +5,6 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
-import android.provider.Settings;
 
 public class BluetoothTile extends AospTile {
     public static final String AOSP_KEY = "bt";
@@ -32,7 +31,7 @@ public class BluetoothTile extends AospTile {
     @Override
     public boolean handleLongClick() {
         if (mNormalized) {
-            startSettingsActivity(Settings.ACTION_BLUETOOTH_SETTINGS);
+            XposedHelpers.callMethod(mTile, "handleSecondaryClick");
             return true;
         }
         return false;
