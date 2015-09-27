@@ -527,10 +527,9 @@ public class ModPieControls {
 
     private static void updateTriggerIndicator(View trigger) {
         if (mCenterTrigger && mTrigindEnabled) {
-            trigger.setVisibility(View.VISIBLE);
             trigger.setBackgroundColor(mTrigindColor);
         } else {
-            trigger.setVisibility(View.GONE);
+            trigger.setBackgroundColor(0);
         }
     }
 
