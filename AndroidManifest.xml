@@ -16,8 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ceco.lollipop.gravitybox"
-    android:versionCode="521"
-    android:versionName="5.2.0" >
+    android:versionCode="522"
+    android:versionName="5.2.0_rev1" >
 
     <uses-sdk
         android:minSdkVersion="21"
