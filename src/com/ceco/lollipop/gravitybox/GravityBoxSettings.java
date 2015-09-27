@@ -291,6 +291,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_MEDIA = "pref_cat_media";
     public static final String PREF_KEY_VOL_MUSIC_CONTROLS = "pref_vol_music_controls";
     public static final String PREF_KEY_MUSIC_VOLUME_STEPS = "pref_music_volume_steps";
+    public static final String PREF_KEY_MUSIC_VOLUME_STEPS_VALUE = "pref_music_volume_steps_value";
     public static final String PREF_KEY_VOL_FORCE_MUSIC_CONTROL = "pref_vol_force_music_control";
     public static final String PREF_KEY_SAFE_MEDIA_VOLUME = "pref_safe_media_volume2";
     public static final String PREF_KEY_VOL_SWAP_KEYS = "pref_vol_swap_keys";
@@ -850,6 +851,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_MENU_KEY,
             PREF_KEY_LOCKSCREEN_ROTATION,
             PREF_KEY_MUSIC_VOLUME_STEPS,
+            PREF_KEY_MUSIC_VOLUME_STEPS_VALUE,
             PREF_KEY_TRANSLUCENT_DECOR,
             PREF_KEY_SCREEN_DIM_LEVEL,
             PREF_KEY_BRIGHTNESS_MASTER_SWITCH,
@@ -1204,6 +1206,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceCategory mPrefCatNavbarDimen;
         private CheckBoxPreference mPrefNavbarEnable;
         private CheckBoxPreference mPrefMusicVolumeSteps;
+        private SeekBarPreference mPrefMusicVolumeStepsValue;
         private PreferenceCategory mPrefCatPhoneTelephony;
         private PreferenceCategory mPrefCatPhoneMessaging;
         private PreferenceCategory mPrefCatPhoneMobileData;
@@ -1457,6 +1460,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefUnplugTurnsOnScreen = (CheckBoxPreference) findPreference(PREF_KEY_UNPLUG_TURNS_ON_SCREEN);
             mPrefCatMedia = (PreferenceScreen) findPreference(PREF_CAT_KEY_MEDIA);
             mPrefMusicVolumeSteps = (CheckBoxPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS);
+            mPrefMusicVolumeStepsValue = (SeekBarPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS_VALUE);
             mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
             mPrefVolumePanelExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_EXPANDABLE);
             mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
@@ -1705,6 +1709,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (!Utils.shouldAllowMoreVolumeSteps()) {
                 mPrefs.edit().putBoolean(PREF_KEY_MUSIC_VOLUME_STEPS, false).commit();
                 mPrefCatMedia.removePreference(mPrefMusicVolumeSteps);
+                mPrefCatMedia.removePreference(mPrefMusicVolumeStepsValue);
             }
 
             // Remove actions for HW keys based on device features

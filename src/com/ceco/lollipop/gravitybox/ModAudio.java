@@ -35,7 +35,6 @@ public class ModAudio {
     private static final boolean DEBUG = false;
 
     private static final int STREAM_MUSIC = 3;
-    private static final int VOLUME_STEPS = 30;
     private static final int DEFAULT_STREAM_TYPE_OVERRIDE_DELAY_MS = 5000;
 
     private static boolean mVolForceMusicControl;
@@ -85,8 +84,9 @@ public class ModAudio {
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS, false)) {
                         int[] maxStreamVolume = (int[])
                                 XposedHelpers.getStaticObjectField(classAudioService, "MAX_STREAM_VOLUME");
-                        maxStreamVolume[STREAM_MUSIC] = VOLUME_STEPS;
-                        if (DEBUG) log("MAX_STREAM_VOLUME for music stream set to " + VOLUME_STEPS);
+                        maxStreamVolume[STREAM_MUSIC] = prefs.getInt(
+                                GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS_VALUE, 30);
+                        if (DEBUG) log("MAX_STREAM_VOLUME for music stream set to " + maxStreamVolume[STREAM_MUSIC]);
                     }
                 }
 
