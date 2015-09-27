@@ -19,7 +19,8 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
     private static final int MODE_OFF = 0;
     private static final int MODE_RIGHT = 1;
     private static final int MODE_LEFT = 2;
-    
+    private static final int MODE_BOTH = 3;
+
     private static final String CLASS_NOTIF_PANEL = 
             "com.android.systemui.statusbar.phone.NotificationPanelView";
 
@@ -117,7 +118,8 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
         final int w = (int) XposedHelpers.callMethod(o, "getMeasuredWidth");
         float region = (w * (mSizePercent/100f));
         final boolean showQsOverride = mMode == MODE_RIGHT ? 
-                (x > w - region) : (x < region);
+                (x > w - region) : mMode == MODE_LEFT ? (x < region) :
+                    (x > w - region) || (x < region);
 
         if (XposedHelpers.getBooleanField(o, "mQsExpanded")) {
             Object scv = XposedHelpers.getObjectField(o, "mScrollView");
