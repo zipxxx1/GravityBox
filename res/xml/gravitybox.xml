@@ -2063,6 +2063,16 @@
             android:summary="@string/pref_music_volume_steps_summary"
             android:defaultValue="false" />
 
+        <com.ceco.kitkat.gravitybox.preference.SeekBarPreference
+            android:key="pref_music_volume_steps_value"
+            minimum="5"
+            maximum="50"
+            interval="1"
+            monitorBoxEnabled="true"
+            monitorBoxUnit="" 
+            android:defaultValue="30"
+            android:dependency="pref_music_volume_steps" />
+
         <CheckBoxPreference 
             android:key="pref_vol_force_music_control"
             android:title="@string/pref_vol_force_music_control_title"
