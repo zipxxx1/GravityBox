@@ -6,7 +6,6 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.content.Context;
-import android.provider.Settings;
 import android.view.View;
 
 public class WifiTile extends AospTile {
@@ -35,7 +34,7 @@ public class WifiTile extends AospTile {
     @Override
     public boolean handleLongClick() {
         if (mNormalized) {
-            startSettingsActivity(Settings.ACTION_WIFI_SETTINGS);
+            XposedHelpers.callMethod(mTile, "handleSecondaryClick");
             return true;
         }
         return false;
