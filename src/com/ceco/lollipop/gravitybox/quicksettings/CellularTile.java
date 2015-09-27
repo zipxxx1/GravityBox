@@ -174,9 +174,11 @@ public class CellularTile extends AospTile {
         }
     }
 
-    @Override
-    public boolean handleLongClick() {
-        if (!isPrimary()) return false;
+    private void toggleMobileData() {
+        if (!isPrimary()) {
+            showDetail();
+            return;
+        }
 
         // change icon visibility immediately for fast feedback
         final boolean visible = mDataOffView.getVisibility() == View.VISIBLE;
@@ -194,13 +196,19 @@ public class CellularTile extends AospTile {
         // toggle mobile data
         Intent intent = new Intent(ConnectivityServiceWrapper.ACTION_TOGGLE_MOBILE_DATA);
         mContext.sendBroadcast(intent);
-        return true;
+    }
+
+    @Override
+    public boolean handleLongClick() {
+        return (isDualModeEnabled() ? false : showDetail());
     }
 
     @Override
     public boolean handleSecondaryClick() {
-        if (!isDualModeEnabled()) return false;
+        return (isDualModeEnabled() ? showDetail() : false);
+    }
 
+    private boolean showDetail() {
         try {
             mClickHookBlocked = true;
             XposedHelpers.callMethod(mTile, "handleClick");
@@ -254,10 +262,8 @@ public class CellularTile extends AospTile {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mClickHookBlocked) {
                         mClickHookBlocked = false;
-                        return;
-                    }
-                    if (isDualModeEnabled()) {
-                        handleLongClick();
+                    } else {
+                        toggleMobileData();
                         param.setResult(null);
                     }
                 }
