@@ -615,10 +615,11 @@ public class ModLockscreen {
         if (mCarrierTextView == null) return;
         try {
             if (Build.VERSION.SDK_INT < 22) {
+                Object callback = XposedHelpers.getObjectField(mCarrierTextView, "mCallback");
                 XposedHelpers.callMethod(mCarrierTextView, "updateCarrierText",
-                        XposedHelpers.getObjectField(mCarrierTextView, "mSimState"),
-                        XposedHelpers.getObjectField(mCarrierTextView, "mPlmn"),
-                        XposedHelpers.getObjectField(mCarrierTextView, "mSpn"));
+                        XposedHelpers.getObjectField(callback, "mSimState"),
+                        XposedHelpers.getObjectField(callback, "mPlmn"),
+                        XposedHelpers.getObjectField(callback, "mSpn"));
             } else {
                 XposedHelpers.callMethod(mCarrierTextView, "updateCarrierText");
             }
