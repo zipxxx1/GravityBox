@@ -15,6 +15,10 @@
 
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -22,6 +26,7 @@ import android.view.ViewGroup;
 
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
+import com.ceco.lollipop.gravitybox.Utils;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -64,7 +69,7 @@ public class QsPanel implements BroadcastSubReceiver {
                 "; mHideBrightness=" + mHideBrightness);
     }
 
-    private void updateResources() {
+    public void updateResources() {
         try {
             if (mQsPanel != null) {
                 XposedHelpers.callMethod(mQsPanel, "updateResources");
@@ -114,6 +119,31 @@ public class QsPanel implements BroadcastSubReceiver {
         return mBrightnessSlider;
     }
 
+    private int getDualTileCount() {
+        int count = 0;
+        List<String> enabledTiles = new ArrayList<>();
+        try {
+            enabledTiles.addAll(Arrays.asList(
+                    mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ENABLED,
+                    TileOrderActivity.getDefaultTileList(
+                            Utils.getGbContext(mContext))).split(",")));
+        } catch (Throwable t) { /* ignore */ }
+
+        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_CELL_TILE_DUAL_MODE, false) &&
+                    enabledTiles.contains(CellularTile.KEY)) {
+            count++;
+        }
+        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_WIFI_TILE_DUAL_MODE, true) &&
+                    enabledTiles.contains(WifiTile.KEY)) {
+            count++;
+        }
+        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BT_TILE_DUAL_MODE, true) &&
+                    enabledTiles.contains(BluetoothTile.KEY)) {
+            count++;
+        }
+        return count;
+    }
+
     private void createHooks() {
         try {
             ClassLoader cl = mContext.getClassLoader();
@@ -149,13 +179,32 @@ public class QsPanel implements BroadcastSubReceiver {
                             XposedHelpers.setIntField(mQsPanel, "mCellHeight", Math.round(ch*factor));
                             int cw = XposedHelpers.getIntField(mQsPanel, "mCellWidth");
                             XposedHelpers.setIntField(mQsPanel, "mCellWidth", Math.round(cw*factor));
-                            XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight", Math.round(ch*factor));
-                            XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth", Math.round(cw*factor));
+                            int lch = XposedHelpers.getIntField(mQsPanel, "mLargeCellHeight");
+                            XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight", Math.round(lch*factor));
+                            int lcw = XposedHelpers.getIntField(mQsPanel, "mLargeCellWidth");
+                            XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth", Math.round(lcw*factor));
                             int dualTileUnderlap = XposedHelpers.getIntField(mQsPanel, "mDualTileUnderlap");
                             XposedHelpers.setIntField(mQsPanel, "mDualTileUnderlap",
                                     Math.round(dualTileUnderlap*factor));
                             if (DEBUG) log("updateResources: scaling applied with factor=" + factor);
                         }
+                    }
+
+                    final int dualTileCount = getDualTileCount();
+                    // reduce size of the first row if there aren't any dual tiles
+                    if (dualTileCount == 0) {
+                        XposedHelpers.setIntField(mQsPanel, "mLargeCellHeight",
+                                XposedHelpers.getIntField(mQsPanel, "mCellHeight"));
+                        XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth",
+                                XposedHelpers.getIntField(mQsPanel, "mCellWidth"));
+                        shouldInvalidate = true;
+                        if (DEBUG) log("updateResources: Updated first row dimensions: all tiles non-dual");
+                    // apply additional width reduction to nicely fit 3 dual tiles in one row
+                    } else if (dualTileCount > 2 && mNumColumns < 5) {
+                        int lcw = XposedHelpers.getIntField(mQsPanel, "mLargeCellWidth");
+                        XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth", Math.round(lcw*0.75f));
+                        shouldInvalidate = true;
+                        if (DEBUG) log("updateResources: Applied additional reduction to dual tile width");
                     }
 
                     // invalidate if changes made

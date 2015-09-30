@@ -10,13 +10,14 @@ import de.robv.android.xposed.XC_MethodHook.Unhook;
 
 public class BluetoothTile extends AospTile {
     public static final String AOSP_KEY = "bt";
+    public static final String KEY = "aosp_tile_bluetooth";
 
     private Unhook mSupportsDualTargetsHook;
     private boolean mDualMode;
 
     protected BluetoothTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, "aosp_tile_bluetooth", tile, prefs, eventDistributor);
+        super(host, KEY, tile, prefs, eventDistributor);
 
         createHooks();
     }

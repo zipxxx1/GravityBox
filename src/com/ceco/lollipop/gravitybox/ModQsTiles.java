@@ -173,6 +173,7 @@ public class ModQsTiles {
                     if (mQsPanel == null) {
                         mQsPanel = new QsPanel(context, prefs, mEventDistributor);
                     }
+                    mQsPanel.updateResources();
                 }
             });
         } catch (Throwable t) {

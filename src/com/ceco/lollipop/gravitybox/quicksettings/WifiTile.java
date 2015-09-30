@@ -12,6 +12,7 @@ import android.view.View;
 
 public class WifiTile extends AospTile {
     public static final String AOSP_KEY = "wifi";
+    public static final String KEY = "aosp_tile_wifi";
 
     private Unhook mCreateTileViewHook;
     private Unhook mSupportsDualTargetsHook;
@@ -19,7 +20,7 @@ public class WifiTile extends AospTile {
 
     protected WifiTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
-        super(host, "aosp_tile_wifi", tile, prefs, eventDistributor);
+        super(host, KEY, tile, prefs, eventDistributor);
 
         createHooks();
     }
