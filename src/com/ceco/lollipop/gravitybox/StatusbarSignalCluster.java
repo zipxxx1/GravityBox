@@ -631,24 +631,40 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
             try {
                 if (methodName.equals("onWifiSignalChanged")) {
+                    int enabledIdx = 0;
+                    int inIdx = 3;
+                    int outIdx = 4;
+                    if (Utils.isMotoXtDevice() && args.length == 10) {
+                        enabledIdx = 1;
+                        inIdx = 5;
+                        outIdx = 6;
+                    }
                     if (DEBUG) {
-                        log("WiFi enabled: " + args[0]);
-                        log("WiFi activity in: " + (Boolean)args[3]);
-                        log("WiFi activity out: " + (Boolean)args[4]);
+                        log("WiFi enabled: " + args[enabledIdx]);
+                        log("WiFi activity in: " + (Boolean)args[inIdx]);
+                        log("WiFi activity out: " + (Boolean)args[outIdx]);
                     }
                     if (mWifiActivity != null) {
-                        mWifiActivity.update((Boolean)args[0],
-                                (Boolean)args[3], (Boolean)args[4]);
+                        mWifiActivity.update((Boolean)args[enabledIdx],
+                                (Boolean)args[inIdx], (Boolean)args[outIdx]);
                     }
                 } else if (methodName.equals("onMobileDataSignalChanged")) {
+                    int enabledIdx = 0;
+                    int inIdx = 3;
+                    int outIdx = 4;
+                    if (Utils.isMotoXtDevice() && args.length == 24) {
+                        enabledIdx = 1;
+                        inIdx = 7;
+                        outIdx = 8;
+                    }
                     if (DEBUG) {
-                        log("Mobile data enabled: " + args[0]);
-                        log("Mobile data activity in: " + (Boolean)args[4]);
-                        log("Mobile data activity out: " + (Boolean)args[5]);
+                        log("Mobile data enabled: " + args[enabledIdx]);
+                        log("Mobile data activity in: " + (Boolean)args[inIdx]);
+                        log("Mobile data activity out: " + (Boolean)args[outIdx]);
                     }
                     if (mMobileActivity != null) {
-                        mMobileActivity.update((Boolean)args[0], 
-                                (Boolean)args[4], (Boolean)args[5]);
+                        mMobileActivity.update((Boolean)args[enabledIdx], 
+                                (Boolean)args[inIdx], (Boolean)args[outIdx]);
                     }
                 }
             } catch (Throwable t) {
