@@ -440,6 +440,10 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     public static void disableSignalExclamationMarks(ClassLoader cl) {
+        if (Utils.isFalconAsiaDs() && Build.VERSION.SDK_INT >= 22) {
+            return;
+        }
+
         final String CLASS_WIFI_ICONS = Utils.isMotoXtDevice() ?
                 "com.android.systemui.statusbar.policy.MotorolaWifiIcons" :
                 "com.android.systemui.statusbar.policy.WifiIcons";

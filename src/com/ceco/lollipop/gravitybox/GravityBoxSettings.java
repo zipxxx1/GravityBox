@@ -1697,11 +1697,21 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
             }
 
+            if (Utils.isFalconAsiaDs() && Build.VERSION.SDK_INT >=22) {
+                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DEM);
+                if (p != null) {
+                    mPrefCatSignalCluster.removePreference(p);
+                }
+            }
+
             // Remove MSIM preferences for non-MSIM devices
             if (!sSystemProperties.hasMsimSupport) {
                 mPrefCatSignalCluster.removePreference(mPrefScHideSimLabels);
                 mPrefCatSignalCluster.removePreference(mPrefScNarrow);
                 mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
+            } else if (Build.VERSION.SDK_INT >= 22) {
+                mPrefCatSignalCluster.removePreference(mPrefScHideSimLabels);
+                mPrefCatSignalCluster.removePreference(mPrefScNarrow);                
             }
 
             // Features not relevant for KitKat but keep them for potential future use
