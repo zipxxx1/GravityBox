@@ -70,6 +70,7 @@ public class Utils {
     private static Boolean mIsMtkDevice = null;
     private static Boolean mIsXperiaDevice = null;
     private static Boolean mIsMotoXtDevice = null;
+    private static Boolean mIsFalconAsiaDs = null;
     private static Boolean mIsGpeDevice = null;
     private static Boolean mIsExynosDevice = null;
     private static Boolean mHasLenovoCustomUI = null;
@@ -177,6 +178,13 @@ public class Utils {
                  model.contains("moto")) &&
                  !isGpeDevice();
         return mIsMotoXtDevice;
+    }
+
+    public static boolean isFalconAsiaDs() {
+        if (mIsFalconAsiaDs != null) return mIsFalconAsiaDs;
+
+        mIsFalconAsiaDs = isMotoXtDevice() && "falcon_asia_ds".equals(Build.PRODUCT);
+        return mIsFalconAsiaDs;
     }
 
     public static boolean isGpeDevice() {

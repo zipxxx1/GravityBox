@@ -317,7 +317,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
 
         if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                !(Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22)) {
+                !(Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22) &&
+                !Utils.isFalconAsiaDs()) {
             try {
                 if (Build.VERSION.SDK_INT >= 22) {
                     final Class<?> mobileNetworkCtrlClass = Utils.isMotoXtDevice() ?
