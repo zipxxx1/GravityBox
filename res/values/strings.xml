@@ -715,6 +715,7 @@
     <string name="ringer_mode_vibrate">Vibrate</string>
     <string name="ringer_mode_sound">Sound</string>
     <string name="ringer_mode_sound_vibrate">Sound and vibrate</string>
+    <string name="ringer_mode_none">None</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Screen is being recorded</string>

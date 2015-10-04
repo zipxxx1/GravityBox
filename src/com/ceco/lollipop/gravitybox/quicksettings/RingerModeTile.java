@@ -41,13 +41,17 @@ import android.provider.Settings;
 public class RingerModeTile extends QsTile {
     public static final String SETTING_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
     public static final String SETTING_ZEN_MODE = "zen_mode";
+    public static final int ZEN_MODE_OFF = 0;
+    public static final int ZEN_MODE_IMPORTANT = 1;
+    public static final int ZEN_MODE_NONE = 2;
 
     // Define the available ringer modes
     private static final Ringer[] RINGERS = new Ringer[] {
-        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.drawable.ic_qs_ring_off),
-        new Ringer(AudioManager.RINGER_MODE_VIBRATE, true, R.drawable.ic_qs_vibrate_on),
-        new Ringer(AudioManager.RINGER_MODE_NORMAL, false, R.drawable.ic_qs_ring_on),
-        new Ringer(AudioManager.RINGER_MODE_NORMAL, true, R.drawable.ic_qs_ring_vibrate_on)
+        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.drawable.ic_qs_ring_off, ZEN_MODE_IMPORTANT),
+        new Ringer(AudioManager.RINGER_MODE_VIBRATE, true, R.drawable.ic_qs_vibrate_on, ZEN_MODE_OFF),
+        new Ringer(AudioManager.RINGER_MODE_NORMAL, false, R.drawable.ic_qs_ring_on, ZEN_MODE_OFF),
+        new Ringer(AudioManager.RINGER_MODE_NORMAL, true, R.drawable.ic_qs_ring_vibrate_on, ZEN_MODE_OFF),
+        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.drawable.ic_qs_ring_none, ZEN_MODE_NONE)
     };
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -132,7 +136,7 @@ public class RingerModeTile extends QsTile {
 
         Set<String> smodes = mPrefs.getStringSet(
                 GravityBoxSettings.PREF_KEY_RINGER_MODE_TILE_MODE,
-                new HashSet<String>(Arrays.asList(new String[] { "0", "1", "2", "3" })));
+                new HashSet<String>(Arrays.asList(new String[] { "0", "1", "2", "3", "4" })));
         List<String> lmodes = new ArrayList<String>(smodes);
         Collections.sort(lmodes);
         int modes[] = new int[lmodes.size()];
@@ -223,8 +227,7 @@ public class RingerModeTile extends QsTile {
             ContentResolver resolver = mContext.getContentResolver();
             Settings.System.putInt(resolver, SETTING_VIBRATE_WHEN_RINGING,
                     r.mVibrateWhenRinging ? 1 : 0);
-            Settings.Global.putInt(resolver, SETTING_ZEN_MODE,
-                    (r.mRingerMode == AudioManager.RINGER_MODE_SILENT) ? 1 : 0);
+            Settings.Global.putInt(resolver, SETTING_ZEN_MODE, r.mZenMode);
             mAudioManager.setRingerMode(r.mRingerMode);
         } else if (DEBUG) {
             log(getKey() + ": No suitable ringer mode for toggling found");
@@ -234,27 +237,26 @@ public class RingerModeTile extends QsTile {
     private void findCurrentState() {
         ContentResolver cr = mContext.getContentResolver();
         boolean vibrateWhenRinging = Settings.System.getInt(cr, SETTING_VIBRATE_WHEN_RINGING, 0) == 1;
-        boolean zenMode = Settings.Global.getInt(cr, SETTING_ZEN_MODE, 0) != 0;
+        int zenMode = Settings.Global.getInt(cr, SETTING_ZEN_MODE, ZEN_MODE_OFF);
         int ringerMode = mAudioManager.getRingerMode();
 
         mRingerIndex = 0;
 
-        if (!zenMode) {
-            for (int i = 0; i < RINGERS.length; i++) {
-                Ringer r = RINGERS[i];
-                if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_SILENT)) {
-                    mRingerIndex = i;
-                    break;
-                }
-                if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_VIBRATE)) {
-                    mRingerIndex = i;
-                    break;
-                }
-                if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_NORMAL) &&
-                        (r.mVibrateWhenRinging == vibrateWhenRinging)) {
-                    mRingerIndex = i;
-                    break;
-                }
+        for (int i = 0; i < RINGERS.length; i++) {
+            Ringer r = RINGERS[i];
+            if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_SILENT) &&
+                    (zenMode == r.mZenMode)) {
+                mRingerIndex = i;
+                break;
+            }
+            if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_VIBRATE)) {
+                mRingerIndex = i;
+                break;
+            }
+            if ((ringerMode == r.mRingerMode) && (ringerMode == AudioManager.RINGER_MODE_NORMAL) &&
+                    (r.mVibrateWhenRinging == vibrateWhenRinging)) {
+                mRingerIndex = i;
+                break;
             }
         }
         if (DEBUG) log(getKey() + ": Current ringerIndex=" + mRingerIndex + ", ringerMode=" + ringerMode);
@@ -281,10 +283,10 @@ public class RingerModeTile extends QsTile {
         @Override
         public void onChange(boolean selfChange) {
             ContentResolver resolver = mContext.getContentResolver();
-            boolean zenMode = Settings.Global.getInt(resolver, SETTING_ZEN_MODE, 0) == 1;
+            int zenMode = Settings.Global.getInt(resolver, SETTING_ZEN_MODE, ZEN_MODE_OFF);
             int ringerMode = mAudioManager.getRingerMode();
 
-            if (zenMode && (ringerMode != AudioManager.RINGER_MODE_SILENT)) {
+            if (zenMode != ZEN_MODE_OFF && (ringerMode != AudioManager.RINGER_MODE_SILENT)) {
                 mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
             }
 
@@ -298,12 +300,14 @@ public class RingerModeTile extends QsTile {
         final boolean mVibrateWhenRinging;
         final int mRingerMode;
         final int mDrawable;
-        boolean mEnabled;
+        final int mZenMode;
+        boolean mEnabled; 
 
-        Ringer(int ringerMode, boolean vibrateWhenRinging, int drawable) {
+        Ringer(int ringerMode, boolean vibrateWhenRinging, int drawable, int zenMode) {
             mVibrateWhenRinging = vibrateWhenRinging;
             mRingerMode = ringerMode;
             mDrawable = drawable;
+            mZenMode = zenMode;
             mEnabled = false;
         }
     }
