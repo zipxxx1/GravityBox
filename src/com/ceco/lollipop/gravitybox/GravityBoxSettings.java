@@ -1714,6 +1714,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatSignalCluster.removePreference(mPrefScNarrow);                
             }
 
+            // Remove Xperia preferences
+            if (Utils.isXperiaDevice()) {
+                mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
+            }
+
             // Features not relevant for KitKat but keep them for potential future use
             mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
 

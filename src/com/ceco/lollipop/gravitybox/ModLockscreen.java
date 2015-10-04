@@ -460,27 +460,29 @@ public class ModLockscreen {
                 }
             });
 
-            XC_MethodHook carrierTextHook = new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    String text = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, "");
-                    if (mCarrierTextView == null) {
-                        mCarrierTextView = (TextView) param.thisObject;
-                    } 
-                    if (text.isEmpty()) {
-                        return;
-                    } else {
-                        mCarrierTextView.setText(text.trim().isEmpty() ? "" : text);
-                        param.setResult(null);
+            if (!Utils.isXperiaDevice()) {
+                XC_MethodHook carrierTextHook = new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                        String text = mPrefs.getString(GravityBoxSettings.PREF_KEY_LOCKSCREEN_CARRIER_TEXT, "");
+                        if (mCarrierTextView == null) {
+                            mCarrierTextView = (TextView) param.thisObject;
+                        } 
+                        if (text.isEmpty()) {
+                            return;
+                        } else {
+                            mCarrierTextView.setText(text.trim().isEmpty() ? "" : text);
+                            param.setResult(null);
+                        }
                     }
+                };
+                if (Build.VERSION.SDK_INT < 22) {
+                    XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT, classLoader, "updateCarrierText",
+                        CLASS_ICC_STATE, CharSequence.class, CharSequence.class, carrierTextHook);
+                } else {
+                    XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT, classLoader, "updateCarrierText",
+                            carrierTextHook);
                 }
-            };
-            if (Build.VERSION.SDK_INT < 22) {
-                XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT, classLoader, "updateCarrierText",
-                    CLASS_ICC_STATE, CharSequence.class, CharSequence.class, carrierTextHook);
-            } else {
-                XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT, classLoader, "updateCarrierText",
-                        carrierTextHook);
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
