@@ -2803,7 +2803,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_RINGER_MODE_TILE_MODE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 Set<String> modes = prefs.getStringSet(PREF_KEY_RINGER_MODE_TILE_MODE,
-                        new HashSet<String>(Arrays.asList(new String[] { "0", "1", "2", "3" })));
+                        new HashSet<String>(Arrays.asList(new String[] { "0", "1", "2", "3", "4" })));
                 List<String> lmodes = new ArrayList<String>(modes);
                 Collections.sort(lmodes);
                 int[] imodes = new int[lmodes.size()];
