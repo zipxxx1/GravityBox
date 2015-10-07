@@ -180,9 +180,8 @@ public class NetworkModeTile extends QsTile {
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_3g2g_on);
             break;
         case PhoneWrapper.NT_GSM_WCDMA_AUTO:
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_2g3g_on);
-            break;
         case PhoneWrapper.NT_CDMA_EVDO:
+        case PhoneWrapper.NT_GLOBAL:
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_2g3g_on);
             break;
         case PhoneWrapper.NT_WCDMA_ONLY:
@@ -224,6 +223,7 @@ public class NetworkModeTile extends QsTile {
             case PhoneWrapper.NT_WCDMA_PREFERRED:
             case PhoneWrapper.NT_GSM_WCDMA_AUTO:
             case PhoneWrapper.NT_CDMA_EVDO:
+            case PhoneWrapper.NT_GLOBAL:
                 i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, 
                         mAllowLte ? getPreferredLteMode() : 
                             mUseCdma ? PhoneWrapper.NT_CDMA_ONLY : PhoneWrapper.NT_GSM_ONLY);
