@@ -1,3 +1,15 @@
+Changelog 5.2.1 - 07/10/2015
+--------------------------------------
+- Signal Cluster:
+--- fixed data activity indicators on Moto G Dual SIM 5.1 (falcon_asia_ds)
+--- removed obsolete/unsupported features for Moto G Dual SIM 5.1 (falcon_asia_ds)
+--- removed automatic padding adjustment on Xperia devices (unsupported)
+- Quick Settings:
+--- RingerMode tile: added "None" ringer mode (in tile specific settings)
+--- NetworkMode tile: added support for GSM/WCDMA/CDMA Auto mode (e.g. Verizon)
+- Lockscreen: removed custom carrier text feature on Xperia devices (unsupported)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 5.2.0 - 27/09/2015
 --------------------------------------
 - QuickSettings management:
