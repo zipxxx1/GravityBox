@@ -1667,15 +1667,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
             } else {
-                int prefCount = mPrefCatSignalCluster.getPreferenceCount();
-                for (int i = prefCount-1; i >= 0 ; i--) {
-                    Preference p = mPrefCatSignalCluster.getPreference(i);
-                    mPrefCatSignalCluster.removePreference(p);
+                Preference hPlusPref = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
+                if (hPlusPref != null) {
+                    mPrefCatSignalCluster.removePreference(hPlusPref);
                 }
                 mPrefCatLsOther.removePreference(mPrefLsRotation);
+                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DEM);
+                if (p != null) {
+                    mPrefCatSignalCluster.removePreference(p);
+                }
                 // Remove Gemini specific preferences for non-Gemini MTK devices
                 if (!sSystemProperties.hasGeminiSupport) {
                     mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
+                }
+                if (!sSystemProperties.hasGeminiSupport && !sSystemProperties.hasMsimSupport) {
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                 }
             }

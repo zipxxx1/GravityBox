@@ -213,7 +213,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         sPrefs = prefs;
         if (Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22) {
             return new StatusbarSignalClusterMoto(containerType, view);
-        } else if (Utils.isMtkDevice()) {
+        } else if (Utils.isMtkDevice() && Build.VERSION.SDK_INT < 22) {
             return new StatusbarSignalClusterMtk(containerType, view);
         } else {
             return new StatusbarSignalCluster(containerType, view);
@@ -266,7 +266,14 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                                     param.thisObject, "mPhoneStates");
                             ViewGroup mobileGroup = (ViewGroup) XposedHelpers.getObjectField(
                                 phoneStates.get(0), "mMobileGroup");
-                            mMobileActivity = new SignalActivity(mobileGroup, SignalType.MOBILE,
+                            View nestedGroup = null;
+                            int resId = mResources.getIdentifier("mobile_combo", "id",
+                                    ModStatusBar.PACKAGE_NAME);
+                            if (resId != 0) {
+                                nestedGroup = mobileGroup.findViewById(resId);
+                            }
+                            mMobileActivity = new SignalActivity((nestedGroup instanceof ViewGroup) ?
+                                    (ViewGroup) nestedGroup : mobileGroup, SignalType.MOBILE,
                                 Gravity.BOTTOM | Gravity.END);
                         }
                         update();
@@ -318,7 +325,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
         if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
                 !(Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22) &&
-                !Utils.isFalconAsiaDs()) {
+                !Utils.isFalconAsiaDs() && !Utils.isMtkDevice()) {
             try {
                 if (Build.VERSION.SDK_INT >= 22) {
                     final Class<?> mobileNetworkCtrlClass = Utils.isMotoXtDevice() ?
@@ -440,7 +447,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     public static void disableSignalExclamationMarks(ClassLoader cl) {
-        if (Utils.isFalconAsiaDs() && Build.VERSION.SDK_INT >= 22) {
+        if ((Utils.isFalconAsiaDs() && Build.VERSION.SDK_INT >= 22) ||
+                Utils.isMtkDevice()) {
             return;
         }
 
@@ -550,7 +558,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected void update() {
         if (mView != null) {
             try {
-                isSecondaryMobileGroup = false;
+                mobileGroupIdx = 0;
                 updateIconColorRecursive(mView);
             } catch (Throwable t) {
                 logAndMute("update", t);
@@ -558,7 +566,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
     }
 
-    protected boolean isSecondaryMobileGroup;
+    protected int mobileGroupIdx;
     protected void updateIconColorRecursive(ViewGroup vg) {
         if (mIconManager == null) return;
 
@@ -569,7 +577,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 if (child.getId() != View.NO_ID) { 
                     String resName = mResources.getResourceEntryName(child.getId());
                     if (resName.startsWith("mobile_combo")) {
-                        isSecondaryMobileGroup = !resName.equals("mobile_combo");
+                        mobileGroupIdx++;
                     }
                 }
                 updateIconColorRecursive((ViewGroup) child);
@@ -580,7 +588,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 }
                 if (mIconManager.isColoringEnabled() && mIconManager.getSignalIconMode() !=
                         StatusBarIconManager.SI_MODE_DISABLED) {
-                    int color = isSecondaryMobileGroup ?
+                    int color = mobileGroupIdx > 1 ?
                             mIconManager.getIconColor(1) : mIconManager.getIconColor(0);
                     iv.setColorFilter(color, PorterDuff.Mode.SRC_IN);
                 } else {
