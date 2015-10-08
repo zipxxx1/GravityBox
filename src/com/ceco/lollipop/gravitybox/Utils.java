@@ -231,7 +231,8 @@ public class Utils {
     public static boolean hasGeminiSupport() {
         if (mHasGeminiSupport != null) return mHasGeminiSupport;
 
-        mHasGeminiSupport = SystemProp.getBoolean("ro.mediatek.gemini_support", false);
+        mHasGeminiSupport = SystemProp.getBoolean("ro.mediatek.gemini_support", false) &&
+                Build.VERSION.SDK_INT < 22;
         return mHasGeminiSupport;
     }
 
