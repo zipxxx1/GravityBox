@@ -515,6 +515,13 @@
                 android:summary="@string/pref_signal_cluster_narrow_summary"
                 android:defaultValue="false" />
 
+            <!-- MTK Only -->
+            <CheckBoxPreference 
+                android:key="pref_signal_cluster_dnti"
+                android:title="@string/pref_signal_cluster_dnti_title"
+                android:summary="@string/pref_signal_cluster_dnti_summary"
+                android:defaultValue="false" />
+
         </PreferenceScreen>
 
         <PreferenceScreen 

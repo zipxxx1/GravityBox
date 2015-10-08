@@ -1842,4 +1842,8 @@
     <!-- MTK tiles: HotKnot -->
     <string name="qs_tile_hotknot">HotKnot</string>
 
+    <!-- MTK: disable network type indicators -->
+    <string name="pref_signal_cluster_dnti_title">Disable network type indicators</string>
+    <string name="pref_signal_cluster_dnti_summary">Requires reboot</string>
+
 </resources>

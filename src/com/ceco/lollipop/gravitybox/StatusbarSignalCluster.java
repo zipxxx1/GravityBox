@@ -72,6 +72,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     protected Field mFldWifiGroup;
     private Field mFldMobileGroup;
     private List<String> mErrorsLogged = new ArrayList<String>();
+    protected boolean mNetworkTypeIndicatorsDisabled;
 
     // Data activity
     protected boolean mDataActivityEnabled;
@@ -276,6 +277,22 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                                     (ViewGroup) nestedGroup : mobileGroup, SignalType.MOBILE,
                                 Gravity.BOTTOM | Gravity.END);
                         }
+
+                        if (mNetworkTypeIndicatorsDisabled) {
+                            List<Object> phoneStates = (List<Object>) XposedHelpers.getObjectField(
+                                    param.thisObject, "mPhoneStates");
+                            int resId = mResources.getIdentifier("network_type", "id",
+                                    ModStatusBar.PACKAGE_NAME);
+                            for (Object state : phoneStates) {
+                                ViewGroup mobileGroup = (ViewGroup) XposedHelpers.getObjectField(
+                                        state, "mMobileGroup");
+                                View networkType = resId != 0 ? mobileGroup.findViewById(resId) : null;
+                                if (networkType != null) {
+                                    mobileGroup.removeView(networkType);
+                                }
+                            }
+                        }
+
                         update();
                     }
                 });
@@ -531,6 +548,9 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         mBatteryStyle = Integer.valueOf(sPrefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
         mPercentTextSb = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false);
+
+        mNetworkTypeIndicatorsDisabled = Utils.isMtkDevice() &&
+                sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DNTI, false);
 
         updateBatteryPadding();
     }

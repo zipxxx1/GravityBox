@@ -668,6 +668,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS = "pref_signal_cluster_hide_sim_labels";
     public static final String PREF_KEY_SIGNAL_CLUSTER_NARROW = "pref_signal_cluster_narrow";
     public static final String PREF_KEY_SIGNAL_CLUSTER_DEM = "pref_signal_cluster_dem";
+    public static final String PREF_KEY_SIGNAL_CLUSTER_DNTI = "pref_signal_cluster_dnti";
     public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
     public static final String EXTRA_SC_NARROW = "scNarrow";
 
@@ -878,7 +879,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH,
             PREF_KEY_SAFE_MEDIA_VOLUME,
             PREF_KEY_SIGNAL_CLUSTER_DEM,
-            PREF_KEY_VOLUME_PANEL_EXPANDABLE
+            PREF_KEY_VOLUME_PANEL_EXPANDABLE,
+            PREF_KEY_SIGNAL_CLUSTER_DNTI
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -1666,6 +1668,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
                 }
                 mPrefCatSignalCluster.removePreference(mPrefSbDaColorSecondary);
+                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DNTI);
+                if (p != null) {
+                    mPrefCatSignalCluster.removePreference(p);
+                }
             } else {
                 Preference hPlusPref = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
                 if (hPlusPref != null) {
@@ -1682,6 +1688,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
                 if (!sSystemProperties.hasGeminiSupport && !sSystemProperties.hasMsimSupport) {
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
+                }
+                // SDK 22+ only
+                if (Build.VERSION.SDK_INT < 22) {
+                    p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DNTI);
+                    if (p != null) {
+                        mPrefCatSignalCluster.removePreference(p);
+                    }
                 }
             }
 

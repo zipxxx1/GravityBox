@@ -35,6 +35,7 @@ public class StatusbarSignalClusterMtk extends StatusbarSignalCluster {
         mRoamingIndicatorsDisabled = sPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_DISABLE_ROAMING_INDICATORS, false);
         mDataActivityEnabled = false;
+        mNetworkTypeIndicatorsDisabled = false;
     }
 
     protected void updateRoamingIndicator() {
