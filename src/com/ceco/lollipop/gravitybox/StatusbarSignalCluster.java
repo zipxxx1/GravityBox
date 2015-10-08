@@ -655,8 +655,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                     }
                 } else if (methodName.equals("onMobileDataSignalChanged")) {
                     int enabledIdx = 0;
-                    int inIdx = 3;
-                    int outIdx = 4;
+                    int inIdx = 4;
+                    int outIdx = 5;
                     if (Utils.isMotoXtDevice() && args.length == 24) {
                         enabledIdx = 1;
                         inIdx = 7;
