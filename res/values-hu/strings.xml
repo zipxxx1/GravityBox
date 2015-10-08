@@ -281,6 +281,7 @@
     <string name="quick_pulldown_off">Kikapcsolva</string>
     <string name="quick_pulldown_right">Jobb</string>
     <string name="quick_pulldown_left">Bal</string>
+    <string name="quick_pulldown_both">Mindkettő</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Állapotsáv színek</string>
@@ -714,6 +715,7 @@
     <string name="ringer_mode_vibrate">Rezgés</string>
     <string name="ringer_mode_sound">Csengés</string>
     <string name="ringer_mode_sound_vibrate">Csengés és rezgés</string>
+    <string name="ringer_mode_none">Nincs</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">A képernyő videórögzítésre kerül</string>
@@ -1523,6 +1525,7 @@
     <string name="system_sound_screen_lock">Képernyőzár hangja</string>
     <string name="system_sound_volume_adjust">Hangerő szabályozás hangja</string>
     <string name="system_sound_charger">GravityBox töltési hangjai</string>
+    <string name="system_sound_ringer">Telefon csengés</string>
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Figyelmen kívül hagy beérkező híváskor</string>
@@ -1781,12 +1784,27 @@
     <string name="pref_statusbar_disable_peek_title">Értesítés betekintés (peek) letiltása</string>
     <string name="pref_statusbar_disable_peek_summary">Nem fogja kiterjeszteni az állapotsávot egyszeri érintésre</string>
 
-    <!-- Status bar: disable peek -->
+    <!-- Status bar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">Dupla érintésre alvás</string>
     <string name="pref_statusbar_dt2s_summary">Értesítés betekintés (peek) funkció letiltása szükséges</string>
 
     <!-- Cellular tile: Dual mode -->
     <string name="pref_cell_tile_dual_mode_title">Duál mód</string>
     <string name="pref_cell_tile_dual_mode_summary">WiFi és Bluetooth csempékhez hasonló viselkedést tesz lehetővé</string>
+    
+    <!-- Pie trigger indicator -->
+    <string name="pref_pie_control_trigind_title">Kioldógomb kijelző</string>
+    <string name="pref_pie_control_trigind_color_title">Kioldógomb kijelző színe</string>
+
+    <!-- WiFi tile settings -->
+    <string name="pref_cat_qs_wifi_tile_title">WiFi csempe beállítások</string>
+    <string name="pref_wifi_tile_dual_mode_title">Duál mód</string>
+
+    <!-- Bluetooth tile settings -->
+    <string name="pref_cat_qs_bt_tile_title">BlueTooth csempe beállítások</string>
+    <string name="pref_bt_tile_dual_mode_title">Duál mód</string>
+
+    <!-- MTK tiles: HotKnot -->
+    <string name="qs_tile_hotknot">HotKnot</string>
 
 </resources>
