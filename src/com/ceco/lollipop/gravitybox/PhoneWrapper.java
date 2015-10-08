@@ -177,17 +177,6 @@ public class PhoneWrapper {
                     broadcastCurrentNetworkType(phoneId, (int)param.args[0], null);
                 }
             });
-
-            if (Utils.isMtkDevice()) {
-                XposedHelpers.findAndHookMethod("com.android.internal.telephony.uicc.UiccController", 
-                        null, "setNotification", int.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (DEBUG) log("UiccController.setNotification(" + param.args[0] + ")");
-                        param.setResult(null);
-                    }
-                });
-            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
