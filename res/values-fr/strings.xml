@@ -280,6 +280,7 @@
     <string name="quick_pulldown_off">Désactivé</string>
     <string name="quick_pulldown_right">Droit</string>
     <string name="quick_pulldown_left">Gauche</string>
+    <string name="quick_pulldown_both">Les deux</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Couleurs barre d\'état</string>
@@ -1540,6 +1541,7 @@
     <string name="system_sound_screen_lock">Son écran de déverrouillage</string>
     <string name="system_sound_volume_adjust">Son à l\'ajustement du volume</string>
     <string name="system_sound_charger">Sons de GravityBox au chargement</string>
+    <string name="system_sound_ringer">Sonnerie du téléphone</string>
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorer lors d\'un appel entrant</string>
@@ -1823,5 +1825,17 @@
     <!-- Cellular tile: Dual mode -->
     <string name="pref_cell_tile_dual_mode_title">Mode double</string>
     <string name="pref_cell_tile_dual_mode_summary">Active un comportement similaire aux touches Wifi et Bluetooth</string>
+
+    <!-- Pie trigger indicator -->
+    <string name="pref_pie_control_trigind_title">Indicateur de déclencheur</string>
+    <string name="pref_pie_control_trigind_color_title">Couleur de l\'indicateur de déclencheur</string>
+
+    <!-- WiFi tile settings -->
+    <string name="pref_cat_qs_wifi_tile_title">Paramètres de la touche Wifi</string>
+    <string name="pref_wifi_tile_dual_mode_title">Mode double</string>
+
+    <!-- Bluetooth tile settings -->
+    <string name="pref_cat_qs_bt_tile_title">Paramètres de la touche Bluetooth</string>
+    <string name="pref_bt_tile_dual_mode_title">Mode double</string>
 
 </resources>
