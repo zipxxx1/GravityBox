@@ -1839,4 +1839,7 @@
     <string name="pref_cat_qs_bt_tile_title">BlueTooth tile settings</string>
     <string name="pref_bt_tile_dual_mode_title">Dual mode</string>
 
+    <!-- MTK tiles: HotKnot -->
+    <string name="qs_tile_hotknot">HotKnot</string>
+
 </resources>

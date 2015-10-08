@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.TouchInterceptor;
@@ -195,10 +194,12 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             return false;
         if (key.equals("gb_tile_compass") && !Utils.hasCompass(mContext))
             return false;
-        if (key.equals("aosp_tile_cell2") && GravityBoxSettings.sSystemProperties != null &&
-                !GravityBoxSettings.sSystemProperties.hasMsimSupport)
+        if (key.equals("aosp_tile_cell2") && (!Utils.isMotoXtDevice() || 
+                (GravityBoxSettings.sSystemProperties != null &&
+                !GravityBoxSettings.sSystemProperties.hasMsimSupport)))
             return false;
-        if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")) &&
+        if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")
+                || key.equals("mtk_tile_hotknot")) &&
                 !Utils.isMtkDevice())
             return false;
         if (key.equals("gb_tile_smart_radio") && !mPrefs.getBoolean(

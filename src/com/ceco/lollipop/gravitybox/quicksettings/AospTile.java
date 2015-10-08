@@ -40,6 +40,12 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new RotationLockTile(host, tile, prefs, eventDistributor);
         else if (WifiTile.AOSP_KEY.equals(aospKey))
             return new WifiTile(host, tile, prefs, eventDistributor);
+        else if (MtkAudioProfileTile.AOSP_KEY.equals(aospKey))
+            return new MtkAudioProfileTile(host, tile, prefs, eventDistributor);
+        else if (MtkMobileDataTile.AOSP_KEY.equals(aospKey))
+            return new MtkMobileDataTile(host, tile, prefs, eventDistributor);
+        else if (MtkHotKnotTile.AOSP_KEY.equals(aospKey))
+            return new MtkHotKnotTile(host, tile, prefs, eventDistributor);
 
         return null;
     }
