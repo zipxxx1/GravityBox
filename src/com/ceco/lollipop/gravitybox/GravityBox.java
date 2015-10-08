@@ -31,6 +31,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
     @Override
     public void initZygote(StartupParam startupParam) throws Throwable {
+        if (!startupParam.startsSystemServer) return;
+
         MODULE_PATH = startupParam.modulePath;
         prefs = new XSharedPreferences(PACKAGE_NAME);
         prefs.makeWorldReadable();
