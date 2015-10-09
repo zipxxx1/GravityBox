@@ -1621,11 +1621,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefBatteryTileTempUnit = (ListPreference) findPreference(PREF_KEY_BATTERY_TILE_TEMP_UNIT); 
 
-            // MTK fixes
+            // MTK fixes (deprecated)
             mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
-            if (!Utils.isMtkDevice()) {
+            //if (!Utils.isMtkDevice()) {
                 getPreferenceScreen().removePreference(mPrefCatMtkFixes);
-            }
+            //}
 
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {
