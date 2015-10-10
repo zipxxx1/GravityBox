@@ -200,12 +200,10 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             if (DEBUG) log("H+ icon resources initialized");
         }
 
-        if (!Utils.isMtkDevice()) {
-            String lteStyle = prefs.getString(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE, "DEFAULT");
-            if (!lteStyle.equals("DEFAULT")) {
-                resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "bool", "config_show4GForLTE",
-                        lteStyle.equals("4G"));
-            }
+        String lteStyle = prefs.getString(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE, "DEFAULT");
+        if (!lteStyle.equals("DEFAULT")) {
+            resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "bool", "config_show4GForLTE",
+                    lteStyle.equals("4G"));
         }
     }
 
