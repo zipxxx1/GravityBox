@@ -1846,4 +1846,8 @@
     <string name="pref_signal_cluster_dnti_title">Disable network type indicators</string>
     <string name="pref_signal_cluster_dnti_summary">Requires reboot</string>
 
+    <!-- Signal cluster: Disable "No SIM" icon -->
+    <string name="pref_signal_cluster_nosim_title">Disable \"No SIM\" icon</string>
+    <string name="pref_signal_cluster_nosim_summary">Requires reboot</string>
+
 </resources>

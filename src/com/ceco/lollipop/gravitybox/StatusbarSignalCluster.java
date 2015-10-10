@@ -299,6 +299,27 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             } catch (Throwable t) {
                 log("Error hooking getOrInflateState: " + t.getMessage());
             }
+
+            if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_NOSIM, false) &&
+                    !Utils.isMotoXtDevice()) {
+                try {
+                    int noSimsResId = mResources.getIdentifier("no_sims", "id", ModStatusBar.PACKAGE_NAME);
+                    if (noSimsResId != 0) {
+                        View v = mView.findViewById(noSimsResId);
+                        if (v != null) v.setVisibility(View.GONE);
+                    }
+                    XposedHelpers.setBooleanField(mView, "mNoSimsVisible", false);
+                    XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
+                            boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            param.args[0] = false;
+                        }
+                    });
+                } catch (Throwable t) {
+                    log("Error hooking setNoSims: " + t.getMessage());
+                }
+            }
         }
 
         if (mDataActivityEnabled) {
