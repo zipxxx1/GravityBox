@@ -715,6 +715,7 @@
     <string name="ringer_mode_vibrate">Vibreur</string>
     <string name="ringer_mode_sound">Sonnerie</string>
     <string name="ringer_mode_sound_vibrate">Sonnerie et vibreur</string>
+    <string name="ringer_mode_none">Aucun</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">L\'écran est en cours d\'enregistrement</string>
@@ -1837,5 +1838,16 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Paramètres de la touche Bluetooth</string>
     <string name="pref_bt_tile_dual_mode_title">Mode double</string>
+
+    <!-- MTK tiles: HotKnot -->
+    <string name="qs_tile_hotknot">HotKnot</string>
+
+    <!-- MTK: disable network type indicators -->
+    <string name="pref_signal_cluster_dnti_title">Désactiver les indicateurs du type de réseau</string>
+    <string name="pref_signal_cluster_dnti_summary">Nécessite de redémarrer</string>
+
+    <!-- Signal cluster: Disable "No SIM" icon -->
+    <string name="pref_signal_cluster_nosim_title">Désactiver l\'icône \"Aucune SIM\"</string>
+    <string name="pref_signal_cluster_nosim_summary">Nécessite de redémarrer</string>
 
 </resources>
