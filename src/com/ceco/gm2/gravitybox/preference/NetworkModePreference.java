@@ -98,6 +98,7 @@ public class NetworkModePreference extends DialogPreference implements OnItemCli
         list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_cdma_evdo, PhoneWrapper.NT_CDMA_EVDO));
         list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_cdma, PhoneWrapper.NT_CDMA_ONLY));
         list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_evdo, PhoneWrapper.NT_EVDO_ONLY));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_2g3g, PhoneWrapper.NT_GLOBAL));
         list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_lte_cdma, PhoneWrapper.NT_LTE_CDMA_EVDO));
         list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_lte_gsm, PhoneWrapper.NT_LTE_GSM_WCDMA));
         list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_lte_global, PhoneWrapper.NT_LTE_CMDA_EVDO_GSM_WCDMA));

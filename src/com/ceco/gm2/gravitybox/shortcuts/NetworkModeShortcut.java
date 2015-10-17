@@ -79,6 +79,8 @@ public class NetworkModeShortcut extends AShortcut {
                 PhoneWrapper.NT_CDMA_ONLY));
         list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_evdo, 
                 PhoneWrapper.NT_EVDO_ONLY));
+        list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_2g3g,
+                PhoneWrapper.NT_GLOBAL));
         list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_lte_cdma, 
                 PhoneWrapper.NT_LTE_CDMA_EVDO));
         list.add(new NetworkModeItem(R.drawable.shortcut_network_mode_lte_gsm, 
