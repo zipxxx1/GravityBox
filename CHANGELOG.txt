@@ -1,3 +1,10 @@
+Changelog 3.5.13 - 17/10/2015
+--------------------------------------
+- LocationTile: don't collapse QS panel on location mode change
+- NetworkMode tile: added support for GSM/WCDMA/CDMA Auto mode (e.g. Verizon)
+- Launcher tweaks: adjusted for compatibility with Google App 5.23 & 5.4
+- UNC QuietHours: added option for muting Phone ringer during quiet hours (within "Mute system sounds")
+
 Changelog 3.5.12 - 15/09/2015
 --------------------------------------
 - Navbar tweaks: changed cursor control option to allow choosing icon style
