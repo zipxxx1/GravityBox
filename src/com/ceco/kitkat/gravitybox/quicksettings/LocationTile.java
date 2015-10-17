@@ -22,12 +22,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
-import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
 
 import com.ceco.kitkat.gravitybox.GravityBoxSettings;
-import com.ceco.kitkat.gravitybox.ModQuickSettings;
 import com.ceco.kitkat.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -165,32 +163,7 @@ public class LocationTile extends BasicTile {
         int locationMode = getLocationMode();
         boolean locationEnabled = isLocationEnabled();
 
-        if (!ModQuickSettings.hasDisableLocationConsent) {
-            Runnable collapsePanels = collapsePanels(mLocationMode, locationMode, mLocationEnabled, locationEnabled);
-            Handler handler = new Handler();
-            handler.post(collapsePanels);
-        }
- 
         mLocationMode = locationMode;
         mLocationEnabled = locationEnabled;
-    }
-
-    private Runnable collapsePanels(final int locationModeOld, final int locationModeNew, 
-            final boolean locationEnabledOld, final boolean locationEnabledNew) {
-        Runnable collapsePanelsRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if ((locationModeOld == Settings.Secure.LOCATION_MODE_SENSORS_ONLY 
-                            && locationModeNew == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY)
-                        || (!locationEnabledOld && locationEnabledNew
-                            && (locationModeNew == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY
-                            || locationModeNew == Settings.Secure.LOCATION_MODE_BATTERY_SAVING))) {
-                   Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-                   mContext.sendBroadcast(closeDialog);
-                }
-            }
-        };
-
-        return collapsePanelsRunnable;
     }
 }

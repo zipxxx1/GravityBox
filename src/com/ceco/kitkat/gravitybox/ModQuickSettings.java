@@ -15,8 +15,6 @@
 
 package com.ceco.kitkat.gravitybox;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -96,7 +94,6 @@ import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResou
 public class ModQuickSettings {
     private static final String TAG = "GB:ModQuickSettings";
     public static final String PACKAGE_NAME = "com.android.systemui";
-    public static final String DISABLE_LOCATION_CONSENT_PACKAGE_NAME = "com.mohammadag.disablelocationconsent";
     private static final String CLASS_QUICK_SETTINGS = "com.android.systemui.statusbar.phone.QuickSettings";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_PANEL_BAR = "com.android.systemui.statusbar.phone.PanelBar";
@@ -157,8 +154,6 @@ public class ModQuickSettings {
     private static Map<String, View> mAllTileViews;
 
     private static List<BroadcastSubReceiver> mBroadcastSubReceivers;
-
-    public static boolean hasDisableLocationConsent = false;
 
     static {
         mCustomGbTileKeys = new ArrayList<Integer>(Arrays.asList(
@@ -789,24 +784,6 @@ public class ModQuickSettings {
                     }
                 }
             });
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
-
-    public static void initDisableLocationConsent(final XSharedPreferences prefs) {
-        try {
-            if (DEBUG) log("initDisableLocationConsent");
-
-            BufferedReader apks = new BufferedReader(new FileReader(XposedBridge.BASE_DIR + "conf/modules.list"));
-            String apk;
-            while ((apk = apks.readLine()) != null) {
-                if (apk.contains(DISABLE_LOCATION_CONSENT_PACKAGE_NAME)) {
-                    hasDisableLocationConsent = true;
-                    if (DEBUG) log("hasDisableLocationConsent");
-                }
-            }
-            apks.close();
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -1704,11 +1681,8 @@ public class ModQuickSettings {
                                             mQuickSettings, "mLocationController");
                                     final boolean newState = !(Boolean)XposedHelpers.callMethod(
                                             locCtrl, "isLocationEnabled");
-                                    if ((Boolean)XposedHelpers.callMethod(locCtrl, "setLocationEnabled", newState)
-                                            && newState && !hasDisableLocationConsent) {
-                                        Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-                                        mContext.sendBroadcast(closeDialog);
-                                    } else if (mHideOnChange && mStatusBar != null) {
+                                    XposedHelpers.callMethod(locCtrl, "setLocationEnabled", newState);
+                                    if (mHideOnChange && mStatusBar != null) {
                                         XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
                                     }
                                 }
