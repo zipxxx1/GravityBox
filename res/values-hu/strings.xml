@@ -1723,6 +1723,7 @@
     <string name="system_sound_screen_lock">Képernyőzár hangja</string>
     <string name="system_sound_volume_adjust">Hangerő szabályozás hangja</string>
     <string name="system_sound_charger">GravityBox töltési hangjai</string>
+    <string name="system_sound_ringer">Telefon csengés</string>
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Figyelmen kívül hagy beérkező híváskor</string>

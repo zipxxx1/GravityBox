@@ -1740,6 +1740,7 @@
     <string name="system_sound_screen_lock">Звук блокировки экрана</string>
     <string name="system_sound_volume_adjust">Звук настройки громкости</string>
     <string name="system_sound_charger">Звуки зарядки GravityBox</string>
+    <string name="system_sound_ringer">Звонок телефона</string>
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Игнорировать для входящего</string>
