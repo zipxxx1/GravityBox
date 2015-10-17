@@ -15,6 +15,7 @@
  */
 package com.ceco.gm2.gravitybox;
 
+import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
 import com.ceco.gm2.gravitybox.preference.IncreasingRingPreference;
 import com.ceco.gm2.gravitybox.preference.IncreasingRingPreference.ConfigStore;
 
@@ -68,6 +69,8 @@ public class ModRinger {
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
+            final XSharedPreferences qhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
+            qhPrefs.makeWorldReadable();
             final Class<?> clsRinger = XposedHelpers.findClass(CLASS_RINGER, classLoader);
 
             mRingerConfig = new ConfigStore(prefs.getString(
@@ -91,6 +94,12 @@ public class ModRinger {
             XposedHelpers.findAndHookMethod(clsRinger, "ring", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    qhPrefs.reload();
+                    QuietHours qh = new QuietHours(qhPrefs);
+                    if (qh.isSystemSoundMuted(QuietHours.SystemSound.RINGER)) {
+                        param.setResult(null);
+                        return;
+                    }
                     if (!mRingerConfig.enabled) return;
 
                     if (mHandler == null) {

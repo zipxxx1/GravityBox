@@ -44,6 +44,7 @@ public class QuietHours {
         public static final String SCREEN_LOCK = "screen_lock";
         public static final String VOLUME_ADJUST = "volume_adjust";
         public static final String CHARGER = "charger";
+        public static final String RINGER = "ringer";
     }
 
     public boolean uncLocked;

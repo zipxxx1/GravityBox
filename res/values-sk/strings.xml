@@ -1568,6 +1568,7 @@
     <string name="system_sound_screen_lock">Zvuk uzamknutia obrazovky</string>
     <string name="system_sound_volume_adjust">Zvuk nastavenia hlasitosti</string>
     <string name="system_sound_charger">GravityBox zvuky napájania</string>
+    <string name="system_sound_ringer">Zvuk vyzváňania</string>
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorovať pre prichádzajúce hovory</string>

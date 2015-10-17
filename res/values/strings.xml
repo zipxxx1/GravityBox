@@ -1629,6 +1629,7 @@
     <string name="system_sound_screen_lock">Screen lock sound</string>
     <string name="system_sound_volume_adjust">Volume adjust sound</string>
     <string name="system_sound_charger">GravityBox charger sounds</string>
+    <string name="system_sound_ringer">Phone ringer</string>
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignore for incoming call</string>
