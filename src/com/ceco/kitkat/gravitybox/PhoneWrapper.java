@@ -37,6 +37,7 @@ public class PhoneWrapper {
     public static final int NT_CDMA_EVDO = 4;                   // CDMA/EVDO Auto (2g/3g)
     public static final int NT_CDMA_ONLY = 5;                   // CDMA Only (2G)
     public static final int NT_EVDO_ONLY = 6;                   // Evdo Only (3G)
+    public static final int NT_GLOBAL = 7;                      // GSM/WCDMA/CDMA Auto (2g/3g)
     public static final int NT_LTE_CDMA_EVDO = 8; 
     public static final int NT_LTE_GSM_WCDMA = 9;
     public static final int NT_LTE_CMDA_EVDO_GSM_WCDMA = 10;
@@ -68,6 +69,7 @@ public class PhoneWrapper {
             case NT_CDMA_EVDO: return "CDMA/EvDo Auto";
             case NT_CDMA_ONLY: return "CDMA";
             case NT_EVDO_ONLY: return "EvDo";
+            case NT_GLOBAL: return "GSM/WCDMA/CDMA Auto (2G/3G)";
             case NT_LTE_CDMA_EVDO: return "LTE (CDMA)";
             case NT_LTE_GSM_WCDMA: return "LTE (GSM)";
             case NT_LTE_CMDA_EVDO_GSM_WCDMA: return "LTE (Global)";
