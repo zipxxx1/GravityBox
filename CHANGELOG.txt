@@ -1,3 +1,11 @@
+Changelog 3.6.0 - 18/10/2015
+--------------------------------------
+- NetworkMode tile: added support for GSM/WCDMA/CDMA Auto mode (e.g. Verizon)
+- Navbar tweaks: changed cursor control option to allow choosing icon style
+- UNC QuietHours: added option for muting Phone ringer during quiet hours (within "Mute system sounds")
+- Launcher tweaks: adjusted for Google App 5.2.33 & 5.23
+- Updated Hungarian translations (thanks to benjoe1)
+
 Changelog 3.5.9 - 05/07/2015
 --------------------------------------
 - Launcher tweaks: adjusted for compatibility with Google App 4.8.10
