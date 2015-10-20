@@ -715,6 +715,7 @@
     <string name="ringer_mode_vibrate">Вибрация</string>
     <string name="ringer_mode_sound">Звук</string>
     <string name="ringer_mode_sound_vibrate">Звук и вибрация</string>
+    <string name="ringer_mode_none">Ничего</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Экран записывается</string>
@@ -1836,5 +1837,16 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Параметры плитки BlueTooth</string>
     <string name="pref_bt_tile_dual_mode_title">Двойной режим</string>
+
+    <!-- MTK tiles: HotKnot -->
+    <string name="qs_tile_hotknot">HotKnot</string>
+
+    <!-- MTK: disable network type indicators -->
+    <string name="pref_signal_cluster_dnti_title">Отключение индикаторов типа сети</string>
+    <string name="pref_signal_cluster_dnti_summary">Необходима перезагрузка</string>
+
+    <!-- Signal cluster: Disable "No SIM" icon -->
+    <string name="pref_signal_cluster_nosim_title">Отключение значка \"Нет SIM\"</string>
+    <string name="pref_signal_cluster_nosim_summary">Необходима перезагрузка</string>
 
 </resources>
