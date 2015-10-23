@@ -536,6 +536,8 @@ public class ModDisplay {
 
         if (DEBUG) log("updateAutobrightnessConfig called");
         Resources res = mContext.getResources();
+        boolean mtkVirtualValuesSupport = false;
+        boolean mtkVirtualValues = false;
 
         int screenBrightnessDim = res.getInteger(res.getIdentifier(
                 "config_screenBrightnessDim", "integer", "android"));
@@ -559,8 +561,27 @@ public class ModDisplay {
             if (DEBUG) log("updateAutobrightnessConfig: lux=" + Utils.intArrayToString(lux) + 
                     "; brightnessAdj=" + Utils.intArrayToString(brightnessAdj));
 
-            Object autoBrightnessSpline = XposedHelpers.callMethod(
-                    mDisplayPowerController, "createAutoBrightnessSpline", lux, brightnessAdj);
+            if (Utils.isMtkDevice()) {
+                try {
+                    mtkVirtualValues = (boolean)XposedHelpers.getStaticBooleanField(
+                            mDisplayPowerController.getClass(), "MTK_ULTRA_DIMMING_SUPPORT");
+                    int resId = res.getIdentifier("config_screenBrightnessVirtualValues",
+                            "bool", "android");
+                    if (resId != 0) {
+                        mtkVirtualValues &= res.getBoolean(resId);
+                    }
+                    mtkVirtualValuesSupport = true;
+                    if (DEBUG) log("MTK brightness virtual values: " + mtkVirtualValues);
+                } catch (Throwable t) { 
+                    if (DEBUG) log("Couldn't detect MTK virtual values feature");
+                }
+            }
+
+            Object autoBrightnessSpline = mtkVirtualValuesSupport ? XposedHelpers.callMethod(
+                    mDisplayPowerController, "createAutoBrightnessSpline",
+                        lux, brightnessAdj, mtkVirtualValues) :
+                            XposedHelpers.callMethod(mDisplayPowerController,
+                                    "createAutoBrightnessSpline", lux, brightnessAdj);
             if (autoBrightnessSpline != null) {
                 Object abrCtrl = XposedHelpers.getObjectField(mDisplayPowerController,
                         "mAutomaticBrightnessController");
@@ -576,7 +597,10 @@ public class ModDisplay {
             }
         }
 
-        int screenBrightnessRangeMinimum = (Integer) XposedHelpers.callMethod(
+        int screenBrightnessRangeMinimum = mtkVirtualValuesSupport ?
+                (Integer) XposedHelpers.callMethod(mDisplayPowerController, "clampAbsoluteBrightness",
+                        screenBrightnessMinimum, mtkVirtualValues) :
+                (Integer) XposedHelpers.callMethod(
                 mDisplayPowerController, "clampAbsoluteBrightness", screenBrightnessMinimum);
         XposedHelpers.setIntField(mDisplayPowerController, "mScreenBrightnessRangeMinimum",
                 screenBrightnessRangeMinimum);

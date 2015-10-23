@@ -1802,4 +1802,13 @@
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Nastavení BlueTooth dlaždice</string>
     <string name="pref_bt_tile_dual_mode_title">Duální režim</string>
+
+    <!-- MTK: disable network type indicators -->
+    <string name="pref_signal_cluster_dnti_title">Skrýt indikátor typu sítě</string>
+    <string name="pref_signal_cluster_dnti_summary">Vyžaduje restart</string>
+
+    <!-- Signal cluster: Disable "No SIM" icon -->
+    <string name="pref_signal_cluster_nosim_title">Skrýt ikonu nevložené SIM</string>
+    <string name="pref_signal_cluster_nosim_summary">Vyžaduje restart</string>
+
 </resources>

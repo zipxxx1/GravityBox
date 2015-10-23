@@ -26,6 +26,7 @@ import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -64,6 +65,7 @@ public class ModClearAllRecents {
     private static enum SearchBarState { DEFAULT, HIDE_KEEP_SPACE, HIDE_REMOVE_SPACE }
 
     private static ImageView mRecentsClearButton;
+    private static Drawable mRecentsClearButtonStockIcon;
     private static int mButtonGravity;
     private static int mMarginTopPx;
     private static int mMarginBottomPx;
@@ -195,16 +197,29 @@ public class ModClearAllRecents {
                             .findViewById(android.R.id.content);
 
                     // create and inject new ImageView and set onClick listener to handle action
-                    mRecentsClearButton = new ImageView(vg.getContext());
-                    updateButtonImage();
+                    // check for existing first (Zopo)
+                    int resId = res.getIdentifier("funui_clear_task", "id", PACKAGE_NAME);
+                    if (resId != 0) {
+                        View v = vg.findViewById(resId);
+                        if (v instanceof ImageView) {
+                            mRecentsClearButton = (ImageView) v;
+                            mRecentsClearButtonStockIcon = mRecentsClearButton.getDrawable();
+                            if (DEBUG) log("Using existing clear all button");
+                        }
+                    }
+                    if (mRecentsClearButton == null) {
+                        mRecentsClearButton = new ImageView(vg.getContext());
+                        FrameLayout.LayoutParams lParams = new FrameLayout.LayoutParams(
+                                mClearAllRecentsSizePx, mClearAllRecentsSizePx);
+                        mRecentsClearButton.setLayoutParams(lParams);
+                        mRecentsClearButton.setScaleType(ScaleType.CENTER);
+                        mRecentsClearButton.setClickable(true);
+                        vg.addView(mRecentsClearButton);
+                        if (DEBUG) log("clearAllButton ImageView injected");
+                    }
                     mRecentsClearButton.setBackground(new RippleDrawable(
                             new ColorStateList(new int[][] { new int[]{} }, 
                                     new int[] { 0xffffffff }), null, null));
-                    FrameLayout.LayoutParams lParams = new FrameLayout.LayoutParams(
-                            mClearAllRecentsSizePx, mClearAllRecentsSizePx);
-                    mRecentsClearButton.setLayoutParams(lParams);
-                    mRecentsClearButton.setScaleType(ScaleType.CENTER);
-                    mRecentsClearButton.setClickable(true);
                     mRecentsClearButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -229,10 +244,9 @@ public class ModClearAllRecents {
                             }
                         }
                     });
-                    vg.addView(mRecentsClearButton);
                     mRecentsClearButton.setVisibility(View.GONE);
+                    updateButtonImage();
                     updateButtonLayout();
-                    if (DEBUG) log("clearAllButton ImageView injected");
 
                     // create and inject RAM bar
                     mRamUsageBar = new LinearColorBar(vg.getContext(), null);
@@ -409,8 +423,14 @@ public class ModClearAllRecents {
     private static void updateButtonImage() {
         if (mRecentsClearButton == null) return;
         try {
-            int icResId = mClearAllUseAltIcon ? R.drawable.ic_recent_clear : R.drawable.ic_dismiss_all;
-            mRecentsClearButton.setImageDrawable(mGbContext.getResources().getDrawable(icResId));
+            if (mRecentsClearButtonStockIcon != null) {
+                Drawable d = mClearAllUseAltIcon ? mGbContext.getResources().getDrawable(
+                        R.drawable.ic_recent_clear) : mRecentsClearButtonStockIcon;
+                mRecentsClearButton.setImageDrawable(d);
+            } else {
+                int icResId = mClearAllUseAltIcon ? R.drawable.ic_recent_clear : R.drawable.ic_dismiss_all;
+                mRecentsClearButton.setImageDrawable(mGbContext.getResources().getDrawable(icResId));
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

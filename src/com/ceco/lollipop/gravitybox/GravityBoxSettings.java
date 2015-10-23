@@ -669,6 +669,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_CLUSTER_NARROW = "pref_signal_cluster_narrow";
     public static final String PREF_KEY_SIGNAL_CLUSTER_DEM = "pref_signal_cluster_dem";
     public static final String PREF_KEY_SIGNAL_CLUSTER_DNTI = "pref_signal_cluster_dnti";
+    public static final String PREF_KEY_SIGNAL_CLUSTER_NOSIM = "pref_signal_cluster_nosim";
     public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
     public static final String EXTRA_SC_NARROW = "scNarrow";
 
@@ -880,7 +881,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SAFE_MEDIA_VOLUME,
             PREF_KEY_SIGNAL_CLUSTER_DEM,
             PREF_KEY_VOLUME_PANEL_EXPANDABLE,
-            PREF_KEY_SIGNAL_CLUSTER_DNTI
+            PREF_KEY_SIGNAL_CLUSTER_DNTI,
+            PREF_KEY_SIGNAL_CLUSTER_NOSIM
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -1621,11 +1623,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefBatteryTileTempUnit = (ListPreference) findPreference(PREF_KEY_BATTERY_TILE_TEMP_UNIT); 
 
-            // MTK fixes
+            // MTK fixes (deprecated)
             mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
-            if (!Utils.isMtkDevice()) {
+            //if (!Utils.isMtkDevice()) {
                 getPreferenceScreen().removePreference(mPrefCatMtkFixes);
-            }
+            //}
 
             // Filter preferences according to feature availability 
             if (!Utils.hasFlash(getActivity())) {
@@ -1659,7 +1661,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatQsNmTileSettings.removePreference(mPrefQsNetworkModeSimSlot);
                 mPrefCatPowerOther.removePreference(mPrefProximityWakeIgnoreCall);
-           }
+            }
+
+            // SDK22+ only
+            if (Build.VERSION.SDK_INT < 22) {
+                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_NOSIM);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
+            }
+
+            // Xposed Bridge 65+ only
+            if (sSystemProperties.xposedBridgeVersion < 64) {
+                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
+            }
 
             // Remove MTK specific preferences for non-MTK devices
             if (!Utils.isMtkDevice()) {
@@ -1706,19 +1720,22 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
 
             // Remove Moto XT preferences
-            if ((Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22) ||
-                    Utils.isFalconAsiaDs() ||
-                    sSystemProperties.xposedBridgeVersion < 64) {
-                Preference hPlusPref = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
-                if (hPlusPref != null) {
-                    mPrefCatSignalCluster.removePreference(hPlusPref);
+            if (Utils.isMotoXtDevice()) {
+                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_NOSIM);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
+                if (Build.VERSION.SDK_INT < 22) {
+                    p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
+                    if (p != null) mPrefCatSignalCluster.removePreference(p);
                 }
             }
 
-            if (Utils.isFalconAsiaDs() && Build.VERSION.SDK_INT >=22) {
-                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DEM);
-                if (p != null) {
-                    mPrefCatSignalCluster.removePreference(p);
+            // Remove Moto G DS (falcon_asia_ds) preferences
+            if (Utils.isFalconAsiaDs()) {
+                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_HPLUS);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
+                if (Build.VERSION.SDK_INT >=22) {
+                    p = findPreference(PREF_KEY_SIGNAL_CLUSTER_DEM);
+                    if (p != null) mPrefCatSignalCluster.removePreference(p);
                 }
             }
 
@@ -1735,6 +1752,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             // Remove Xperia preferences
             if (Utils.isXperiaDevice()) {
                 mPrefCatLsOther.removePreference(mPrefLockscreenCarrierText);
+                Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_NOSIM);
+                if (p != null) mPrefCatSignalCluster.removePreference(p);
             }
 
             // Features not relevant for KitKat but keep them for potential future use

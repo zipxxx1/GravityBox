@@ -200,12 +200,10 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             if (DEBUG) log("H+ icon resources initialized");
         }
 
-        if (!Utils.isMtkDevice()) {
-            String lteStyle = prefs.getString(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE, "DEFAULT");
-            if (!lteStyle.equals("DEFAULT")) {
-                resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "bool", "config_show4GForLTE",
-                        lteStyle.equals("4G"));
-            }
+        String lteStyle = prefs.getString(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_LTE_STYLE, "DEFAULT");
+        if (!lteStyle.equals("DEFAULT")) {
+            resparam.res.setReplacement(ModStatusBar.PACKAGE_NAME, "bool", "config_show4GForLTE",
+                    lteStyle.equals("4G"));
         }
     }
 
@@ -254,7 +252,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     protected void createHooks() {
-        if (Build.VERSION.SDK_INT >= 22) {
+        if (Build.VERSION.SDK_INT >= 22 && !Utils.isXperiaDevice()) {
             try {
                 XposedHelpers.findAndHookMethod(mView.getClass(), "getOrInflateState", int.class, new XC_MethodHook() {
                     @SuppressWarnings("unchecked")
@@ -298,6 +296,27 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 });
             } catch (Throwable t) {
                 log("Error hooking getOrInflateState: " + t.getMessage());
+            }
+
+            if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_NOSIM, false) &&
+                    !Utils.isMotoXtDevice()) {
+                try {
+                    int noSimsResId = mResources.getIdentifier("no_sims", "id", ModStatusBar.PACKAGE_NAME);
+                    if (noSimsResId != 0) {
+                        View v = mView.findViewById(noSimsResId);
+                        if (v != null) v.setVisibility(View.GONE);
+                    }
+                    XposedHelpers.setBooleanField(mView, "mNoSimsVisible", false);
+                    XposedHelpers.findAndHookMethod(mView.getClass(), "setNoSims",
+                            boolean.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            param.args[0] = false;
+                        }
+                    });
+                } catch (Throwable t) {
+                    log("Error hooking setNoSims: " + t.getMessage());
+                }
             }
         }
 
