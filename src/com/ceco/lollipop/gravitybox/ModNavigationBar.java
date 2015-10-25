@@ -1373,7 +1373,7 @@ public class ModNavigationBar {
     }
 
     private static void updateIconScaleType() {
-        if (Build.VERSION.SDK_INT < 22) return;
+        if (Build.VERSION.SDK_INT < 22 || Utils.isXperiaDevice()) return;
 
         try {
             for (int i = 0; i < mNavbarViewInfo.length; i++) {
