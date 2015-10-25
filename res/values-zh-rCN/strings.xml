@@ -1409,9 +1409,8 @@
     <string name="lc_active_screen_info">每收到新的通知激活屏幕功能将会自动开启屏幕
         出现这种情况仅在屏幕不是盖住的（例如：当设备没有在口袋）
         它可以选择扩展面板的通知根据当前锁屏的安全策略和用户偏好
-        请注意，激活屏幕，需要启用锁屏
-        下面此开关是总开关
-        启用后，额外的配置可以在每个应用程序的基础上进行</string>
+        请注意,激活屏幕,需要启用锁屏
+        下面此开关是总开关.启用后额外的配置可以在每个应用程序的基础上进行</string>
     <string name="lc_active_screen_switch_title">启用激活屏幕</string>
     <string name="lc_expand_notification_panel_title">展开通知面板</string>
 
@@ -1742,14 +1741,16 @@
     <string name="system_sound_screen_lock">锁屏音效</string>
     <string name="system_sound_volume_adjust">音量调节音效</string>
     <string name="system_sound_charger">GravityBox充电音效</string>
+	<string name="system_sound_ringer">手机铃声</string>
     
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">忽略来电</string>
     
     <!-- Status bar: show download progress -->
     <string name="pref_statusbar_download_progress_title">下载进度条</string>
-    <string name="pref_statusbar_download_progress_summary">当使用安卓标准下载管理器时在状态栏显示进度条</string>
-
+    <string name="pref_statusbar_download_progress_summary">在状态栏显示进度条
+        当使用标准的Android下载管理器,蓝牙传输等其它应用
+        需要在最终通知控制启用进度条跟踪</string>
     <string name="sb_download_progress_off">禁用</string>
     <string name="sb_download_progress_top">顶部</string>
     <string name="sb_download_progress_bottom">底部</string>
