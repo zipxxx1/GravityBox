@@ -192,7 +192,8 @@ public class Utils {
 
         String productName = Build.PRODUCT.toLowerCase();
         mIsGpeDevice = Build.DEVICE.toLowerCase().contains("gpe") || productName.contains("google")
-                || productName.contains("ged") || productName.contains("gpe");
+                || productName.contains("ged") || productName.contains("gpe") ||
+                productName.contains("aosp");
         return mIsGpeDevice;
     }
 
