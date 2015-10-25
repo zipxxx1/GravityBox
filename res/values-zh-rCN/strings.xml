@@ -280,6 +280,7 @@
     <string name="quick_pulldown_off">关闭</string>
     <string name="quick_pulldown_right">右侧</string>
     <string name="quick_pulldown_left">左侧</string>
+	<string name="quick_pulldown_both">两者</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">状态栏颜色</string>
@@ -710,10 +711,11 @@
 
     <!-- Ringer tile modes -->
     <string name="pref_qs_ringer_mode_title">铃声模式</string>
-    <string name="ringer_mode_silent">无声</string>
+    <string name="ringer_mode_silent">优先级</string>
     <string name="ringer_mode_vibrate">振动</string>
     <string name="ringer_mode_sound">声音</string>
     <string name="ringer_mode_sound_vibrate">声音和振动</string>
+	<string name="ringer_mode_none">无声</string>
     
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">屏幕录制已开始</string>
@@ -1333,6 +1335,7 @@
     <string name="increasing_ring_min_volume_title">开始振铃音量</string>
     <string name="increasing_ring_volume_notice">注意：由于设置音量比铃声音量大，将使用铃声音量播放</string>
 	<string name="increasing_ring_ramp_up_duration_title">过渡时间</string>
+	<string name="increasing_ring_interval_0">5秒</string>
 	<string name="increasing_ring_interval_1">10秒</string>
     <string name="increasing_ring_interval_2">15秒</string>
     <string name="increasing_ring_interval_3">20秒</string>
@@ -1540,6 +1543,7 @@
     <string name="system_sound_screen_lock">锁屏音效</string>
     <string name="system_sound_volume_adjust">音量调节音效</string>
     <string name="system_sound_charger">GravityBox充电音效</string>
+	<string name="system_sound_ringer">手机铃声</string>
     
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">忽略来电</string>
@@ -1770,7 +1774,7 @@
     <string name="pref_lockscreen_smart_unlock_summary">当智能锁策略检测条件值得信任时自动解锁</string>
     
     
-        <!--  WiFi trusted networks -->
+    <!--  WiFi trusted networks -->
     <string name="wifi_trusted_info">信任的智能锁</string>
 
     <!-- QS: Battery tile settings -->
@@ -1816,12 +1820,35 @@
     <string name="pref_statusbar_disable_peek_title">禁止偷看</string>
     <string name="pref_statusbar_disable_peek_summary">单击触摸时不会扩大状态栏</string>
 
-    <!-- Status bar: disable peek -->
+    <!-- Status bar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">双击睡眠</string>
     <string name="pref_statusbar_dt2s_summary">需要禁用偷看</string>
 	
 	<!-- Cellular tile: Dual mode -->
     <string name="pref_cell_tile_dual_mode_title">双模式</string>
     <string name="pref_cell_tile_dual_mode_summary">WiFi和蓝牙瓷砖等允许类似的行为</string>
+	
+	<!-- Pie trigger indicator -->
+    <string name="pref_pie_control_trigind_title">触发指示器</string>
+    <string name="pref_pie_control_trigind_color_title">触发指示器颜色</string>
+
+    <!-- WiFi tile settings -->
+    <string name="pref_cat_qs_wifi_tile_title">WiFi瓷砖设置</string>
+    <string name="pref_wifi_tile_dual_mode_title">双模式</string>
+
+    <!-- Bluetooth tile settings -->
+    <string name="pref_cat_qs_bt_tile_title">蓝牙瓷砖设置</string>
+    <string name="pref_bt_tile_dual_mode_title">双模式</string>
+
+    <!-- MTK tiles: HotKnot -->
+    <string name="qs_tile_hotknot">HotKnot</string>
+
+    <!-- MTK: disable network type indicators -->
+    <string name="pref_signal_cluster_dnti_title">禁用网络类型指示器</string>
+    <string name="pref_signal_cluster_dnti_summary">需要重新启动</string>
+
+    <!-- Signal cluster: Disable "No SIM" icon -->
+    <string name="pref_signal_cluster_nosim_title">关闭\"无SIM\"图标</string>
+    <string name="pref_signal_cluster_nosim_summary">需要重新启动</string>
 
 </resources>
