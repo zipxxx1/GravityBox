@@ -1,3 +1,11 @@
+Changelog 5.3.1 - 25/10/2015
+--------------------------------------
+- Recents: fixed clear all button disappearing bug
+- Navbar: don't scale soft keys during navbar size changes on Xperia devices
+- Improved identification of Moto devices running AOSP ROM
+- Updated French translations (thanks to ch-vox)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 5.3.0 - 10/10/2015
 --------------------------------------
 - Adjusted for compatibility with Zopo Speed 7 MediaTek device running LP5.1
