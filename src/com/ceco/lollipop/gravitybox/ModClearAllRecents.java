@@ -198,6 +198,7 @@ public class ModClearAllRecents {
 
                     // create and inject new ImageView and set onClick listener to handle action
                     // check for existing first (Zopo)
+                    mRecentsClearButton = null;
                     int resId = res.getIdentifier("funui_clear_task", "id", PACKAGE_NAME);
                     if (resId != 0) {
                         View v = vg.findViewById(resId);
