@@ -1675,10 +1675,6 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
         restauradas devido a extensas diferenças de sistema. É altamente recomendado configurar o GravityBox do zero.
     </string>
 
-    <!-- QS: tile order info -->
-    <string name="tile_order_info">A primeira checkbox ativa/desativa o painel, a segunda checkbox 
-        determina se o painel deve ser mostrado na tela de bloqueio protegida.</string>
-        
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">Exibir na tela de bloqueio</string>
     <string name="pref_data_traffic_lockscreen_summary">Sempre exibir centralizado na tela de bloqueio</string>

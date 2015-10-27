@@ -1359,8 +1359,6 @@
 
     <string name="settings_restore_backup_obsolete">이전 Android 버전에서 만든 백업은 OS의 구조가 바뀜에 따라 사용할 수 없게 되었습니다. GravityBox를 처음부터 다시 설정하는 것을 권장합니다.</string>
 
-    <string name="tile_order_info">첫 번째 체크박스는 사용 여부, 두 번째 체크박스는 보안으로 잠겨진 잠금 화면에서의 사용 가능 여부를 말합니다.</string>
-
     <string name="pref_data_traffic_lockscreen_title">잠금 화면에서 보이기</string>
     <string name="pref_data_traffic_lockscreen_summary">잠금 화면 가운데에서 항상 보여집니다.</string>
 

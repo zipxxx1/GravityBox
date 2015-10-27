@@ -35,20 +35,24 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
 
 public class TileOrderActivity extends ListActivity implements View.OnClickListener {
     private static final String PREF_KEY_TILE_ORDER = "pref_qs_tile_order3";
     public static final String PREF_KEY_TILE_ENABLED = "pref_qs_tile_enabled";
+    public static final String PREF_KEY_TILE_LOCKED = "pref_qs_tile_locked";
     public static final String PREF_KEY_TILE_SECURED = "pref_qs_tile_secured";
     public static final String EXTRA_QS_ORDER_CHANGED = "qsTileOrderChanged";
-    private static final String INFO_DISMISSED = "pref_qs_info_dismissed";
 
     private ListView mTileList;
     private TileAdapter mTileAdapter;
@@ -59,13 +63,44 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     private List<TileInfo> mOrderedTileList;
     private Button mBtnSave;
     private Button mBtnCancel;
-    private Button mBtnInfoOk;
 
     static class TileInfo {
         String key;
         String name;
         boolean enabled;
+        boolean locked;
         boolean secured;
+        private PopupMenu menu;
+        void showMenu(final ListView listView, final View anchorView) {
+            menu = new PopupMenu(listView.getContext(), anchorView);
+            menu.inflate(R.menu.tile_menu);
+            menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch(item.getItemId()) {
+                        case R.id.tile_locked:
+                            locked = !locked;
+                            if (locked) secured = true;
+                            break;
+                        case R.id.tile_secured:
+                            secured = !secured;
+                            break;
+                    }
+                    updateMenu();
+                    listView.invalidateViews();
+                    return true;
+                }
+            });
+            updateMenu();
+            menu.show();
+        }
+        private void updateMenu() {
+            MenuItem miLocked = menu.getMenu().getItem(0);
+            MenuItem miSecured = menu.getMenu().getItem(1);
+            miLocked.setChecked(!locked);
+            miSecured.setChecked(!secured && !"gb_tile_lock_screen".equals(key));
+            miSecured.setEnabled(!locked && !"gb_tile_lock_screen".equals(key));
+        }
     }
 
     @Override
@@ -87,18 +122,6 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         mBtnSave.setOnClickListener(this);
         mBtnCancel = (Button) findViewById(R.id.btnCancel);
         mBtnCancel.setOnClickListener(this);
-
-        final View info = findViewById(R.id.info);
-        info.setVisibility(mPrefs.getBoolean(INFO_DISMISSED, false) ?
-                View.GONE : View.VISIBLE);
-        mBtnInfoOk = (Button) findViewById(R.id.btnInfoOk);
-        mBtnInfoOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPrefs.edit().putBoolean(INFO_DISMISSED, true).commit();
-                info.setVisibility(View.GONE);
-            }
-        });
 
         mTileList = getListView();
         ((TouchInterceptor) mTileList).setDropListener(mDropListener);
@@ -263,6 +286,8 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         String[] orderedTiles = mPrefs.getString(PREF_KEY_TILE_ORDER, "").split(",");
         List<String> enabledTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_ENABLED, "").split(",")));
+        List<String> lockedTiles = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(PREF_KEY_TILE_LOCKED, "").split(",")));
         List<String> securedTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_SECURED, "").split(",")));
 
@@ -272,6 +297,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             ti.key = orderedTiles[i];
             ti.name = mTileTexts.get(ti.key);
             ti.enabled = enabledTiles.contains(ti.key);
+            ti.locked = lockedTiles.contains(ti.key);
             ti.secured = securedTiles.contains(ti.key);
             tiles.add(ti);
         }
@@ -282,11 +308,17 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     private void saveOrderedTileList() {
         String newOrderedList = "";
         String newEnabledList = "";
+        String newLockedList = "";
         String newSecuredList = "";
 
         for (TileInfo ti : mOrderedTileList) {
             if (!newOrderedList.isEmpty()) newOrderedList += ",";
             newOrderedList += ti.key;
+
+            if (ti.locked) {
+                if (!newLockedList.isEmpty()) newLockedList += ",";
+                newLockedList += ti.key;
+            }
 
             if (ti.enabled) {
                 if (!newEnabledList.isEmpty()) newEnabledList += ",";
@@ -301,6 +333,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
 
         mPrefs.edit().putString(PREF_KEY_TILE_ORDER, newOrderedList).commit();
         mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, newEnabledList).commit();
+        mPrefs.edit().putString(PREF_KEY_TILE_LOCKED, newLockedList).commit();
         mPrefs.edit().putString(PREF_KEY_TILE_SECURED, newSecuredList).commit();
         Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
         intent.putExtra(EXTRA_QS_ORDER_CHANGED, true);
@@ -335,20 +368,21 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             if (convertView == null) {
                 itemView = mInflater.inflate(R.layout.order_tile_list_item, null);
                 final CheckBox enabled = (CheckBox) itemView.findViewById(R.id.chkEnable);
-                final CheckBox enabledLocked = (CheckBox) itemView.findViewById(R.id.chkEnableLocked);
+                final ImageView menu = (ImageView) itemView.findViewById(R.id.menu);
                 enabled.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         TileInfo ti = (TileInfo) itemView.getTag();
                         ti.enabled = ((CheckBox)v).isChecked();
-                        enabledLocked.setEnabled(ti.enabled);
+                        menu.setEnabled(ti.enabled);
+                        mTileList.invalidateViews();
                     }
                 });
-                enabledLocked.setOnClickListener(new View.OnClickListener() {
+                menu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         TileInfo ti = (TileInfo) itemView.getTag();
-                        ti.secured = !((CheckBox)v).isChecked();
+                        ti.showMenu(mTileList, menu);
                     }
                 });
             } else {
@@ -357,14 +391,20 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
 
             itemView.setTag(tileInfo);
             final TextView name = (TextView) itemView.findViewById(R.id.name);
+            final TextView info = (TextView) itemView.findViewById(R.id.info);
             final CheckBox enabled = (CheckBox) itemView.findViewById(R.id.chkEnable);
-            final CheckBox enabledLocked = (CheckBox) itemView.findViewById(R.id.chkEnableLocked);
+            final ImageView menu = (ImageView) itemView.findViewById(R.id.menu);
             name.setText(tileInfo.name);
+            if (tileInfo.enabled) {
+                info.setText(tileInfo.locked ? getText(R.string.tile_hidden_locked) :
+                    tileInfo.secured ? getText(R.string.tile_hidden_secured) : null);
+            } else {
+                info.setText(null);
+            }
+            info.setVisibility(info.getText() == null || info.getText().length() == 0 ?
+                    View.GONE : View.VISIBLE);
             enabled.setChecked(tileInfo.enabled);
-            enabledLocked.setChecked(!tileInfo.secured);
-            enabledLocked.setEnabled(tileInfo.enabled);
-            enabledLocked.setVisibility(tileInfo.key.equals("gb_tile_lock_screen") ?
-                    View.INVISIBLE : View.VISIBLE);
+            menu.setVisibility(tileInfo.enabled ? View.VISIBLE : View.INVISIBLE);
 
             return itemView;
         }

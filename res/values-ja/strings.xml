@@ -1400,9 +1400,6 @@
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">古いバージョンで作成されたバックアップはリストアできません。
 最初からGravityboxを設定し直すことをおすすめします。</string>
-    <!-- QS: tile order info -->
-    <string name="tile_order_info">最初のチェックボックスでタイルが有効化/無効化され、
-        二つ目のチェックボックスでロック画面でタイルを表示するかどうか選べます。</string>
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">ロック画面で表示</string>
     <string name="pref_data_traffic_lockscreen_summary">ロック画面で常に中央に表示</string>

@@ -1713,10 +1713,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="settings_restore_backup_obsolete">Рэзервовая копія, выкананая ў старой версіі Андроід, не можа быць адноўлена з-за 
 значных адрозненняў АС. Настойліва рэкамендуецца налада GravityBox з нуля.</string>
 
-    <!-- QS: tile order info -->
-    <string name="tile_order_info">Першы чэкбокс улучае/адключае плітку, другі чэкбокс 
-усталёўвае адлюстраванне на абароненым экране блакавання.</string>
-
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">Паказваць на экране блакавання</string>
     <string name="pref_data_traffic_lockscreen_summary">Заўсёды па цэнтры на экране блакавання</string>

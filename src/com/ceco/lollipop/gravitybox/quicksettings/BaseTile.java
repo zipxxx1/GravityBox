@@ -61,6 +61,7 @@ public abstract class BaseTile implements QsEventListener {
     protected Context mContext;
     protected Context mGbContext;
     protected boolean mEnabled;
+    protected boolean mLocked;
     protected boolean mSecured;
     protected int mStatusBarState;
     protected boolean mHideOnChange;
@@ -85,6 +86,10 @@ public abstract class BaseTile implements QsEventListener {
                 mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ENABLED,
                         TileOrderActivity.getDefaultTileList(mGbContext)).split(",")));
         mEnabled = enabledTiles.contains(mKey);
+
+        List<String> lockedTiles = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_LOCKED, "").split(",")));
+        mLocked = lockedTiles.contains(mKey);
 
         List<String> securedTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_SECURED, "").split(",")));
@@ -198,7 +203,7 @@ public abstract class BaseTile implements QsEventListener {
     public void onStatusBarStateChanged(int state) {
         final int oldState = mStatusBarState;
         mStatusBarState = state;
-        if (mSecured && mStatusBarState != oldState) {
+        if ((mLocked || mSecured) && mStatusBarState != oldState) {
             refreshState();
         }
         if (DEBUG) log(mKey + ": onStatusBarStateChanged(" + state + ")");

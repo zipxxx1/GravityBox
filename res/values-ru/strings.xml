@@ -1717,10 +1717,6 @@
     <string name="settings_restore_backup_obsolete">Резервная копия, выполненная в старой версии Андроид, не может быть восстановлена из-за 
         значимых различий  ОС. Настоятельно рекомендуется настройка GravityBox с нуля.</string>
 
-    <!-- QS: tile order info -->
-    <string name="tile_order_info">Первый чекбокс включает/отключает плитку, второй чекбокс 
-        устанавливает отображение на защищённом экране блокировки.</string>
-
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">Показывать на экр. блокировки</string>
     <string name="pref_data_traffic_lockscreen_summary">Всегда по центру на экр. блокировки</string>

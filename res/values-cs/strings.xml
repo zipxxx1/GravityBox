@@ -1682,10 +1682,6 @@
         kvůli rozsáhlým odlišnostem v systému a souvisejících nastaveních GravityBox. 
         Důrazně se doporučuje nakonfigurovat GravityBox ručně.</string>
 
-    <!-- QS: tile order info -->
-    <string name="tile_order_info">První políčko slouží k aktivaci / deaktivaci dlaždice, druhé definuje 
-        zda má být dlaždice viditelná v rámci zabezpečené obrazovky uzamčení</string>
-
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">Na obrazovce uzamčení</string>
     <string name="pref_data_traffic_lockscreen_summary">Je možné zobrazení pouze na střed</string>

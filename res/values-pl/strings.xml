@@ -1672,10 +1672,6 @@
     <string name="settings_restore_backup_obsolete">Kopia zapasowa wykonana w starszej wersji Androida nie może być przywrócona 
          ze względu na znaczne różnice systemów. Zalecane jest skonfigurowanie Gravitybox od podstaw.</string>
 
-    <!-- QS: tile order info -->
-    <string name="tile_order_info">Pierwsze pole wyboru włącza/wyłącza kafelek, drugie pole wyboru
-        określa, czy kafelkek powinien być widoczny na ekranie blokady.</string>
-
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">Pokaż na ekranie blokady</string>
     <string name="pref_data_traffic_lockscreen_summary">Zawsze pokazuj wycentrowany na ekranie blokady</string>

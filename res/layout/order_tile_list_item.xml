@@ -2,7 +2,7 @@
 <!--
 /*
 ** Copyright 2008, The Android Open Source Project
-** Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+** Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -44,35 +44,56 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <!-- The height is set to half the height of the parent, which is 64 dip -->
-        <TextView android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:paddingLeft="9dip"
-            android:paddingRight="9dip"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop = "true"
-            android:layout_alignParentBottom = "true"
-            android:layout_toEndOf="@id/grabber"
-            android:ellipsize="marquee"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceListItem" />
-
-        <CheckBox android:id="@+id/chkEnableLocked"
+        <ImageView android:id="@+id/menu"
+            android:src="@drawable/ic_menu"
+            android:background="@drawable/ripple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
-            style="?android:attr/checkboxStyle" />
-
+            android:clickable="true" />
+                
         <CheckBox android:id="@+id/chkEnable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/chkEnableLocked"
+            android:layout_toStartOf="@id/menu"
             android:layout_marginEnd="12dp"
             style="?android:attr/checkboxStyle" />
+
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop = "true"
+            android:layout_alignParentBottom = "true"
+            android:layout_toEndOf="@id/grabber"
+            android:layout_toStartOf="@id/chkEnable"
+            android:gravity="center_vertical">
+
+            <!-- The height is set to half the height of the parent, which is 64 dip -->
+            <TextView android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:paddingLeft="9dip"
+                android:paddingRight="9dip"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceListItem" />
+
+            <TextView android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="9dip"
+                android:paddingRight="9dip"
+                android:gravity="center_vertical"
+                android:singleLine="false"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/wifi_trusted_info" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

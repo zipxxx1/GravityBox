@@ -1718,10 +1718,6 @@
     <string name="settings_restore_backup_obsolete">Backup made in older version of Android cannot be restored due 
         to extensive OS differences. It is highly recommended to configure GravityBox from scratch.</string>
 
-    <!-- QS: tile order info -->
-    <string name="tile_order_info">The first check box enables/disables tile, the second checkbox 
-        specifies whether tile should be visible in secured lock screen.</string>
-
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">Show in lock screen</string>
     <string name="pref_data_traffic_lockscreen_summary">Always shows centered in lock screen</string>
@@ -1849,5 +1845,11 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Disable \"No SIM\" icon</string>
     <string name="pref_signal_cluster_nosim_summary">Requires reboot</string>
+
+    <!-- QS: tile options menu -->
+    <string name="menu_tile_locked">Show when locked</string>
+    <string name="menu_tile_secured">Show when secured</string>
+    <string name="tile_hidden_locked">Hidden from lock screen</string>
+    <string name="tile_hidden_secured">Hidden from secured lock screen</string>
 
 </resources>

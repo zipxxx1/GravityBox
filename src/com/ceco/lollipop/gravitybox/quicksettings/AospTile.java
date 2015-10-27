@@ -67,6 +67,8 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         final boolean visible = mEnabled &&
+                (!mLocked || !(mStatusBarState != StatusBarState.SHADE &&
+                    mEventDistributor.isKeyguardShowing())) &&
                 (!mSecured || !(mStatusBarState != StatusBarState.SHADE &&
                     mEventDistributor.isKeyguardSecuredAndLocked()));
         XposedHelpers.setBooleanField(state, "visible", visible);

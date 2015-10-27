@@ -96,7 +96,9 @@ public abstract class QsTile extends BaseTile {
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
-        mState.visible &= mEnabled && 
+        mState.visible &= mEnabled &&
+                (!mLocked || !(mStatusBarState != StatusBarState.SHADE &&
+                    mEventDistributor.isKeyguardShowing())) &&
                 (!mSecured || !(mStatusBarState != StatusBarState.SHADE &&
                     mEventDistributor.isKeyguardSecuredAndLocked()));
         mState.applyTo(state);

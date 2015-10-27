@@ -1719,10 +1719,6 @@
     <string name="settings_restore_backup_obsolete">由于系统差异
 旧版本的备份不能恢复,强烈建议从头开始配置gravitybox</string>
 
-    <!-- QS: tile order info -->
-    <string name="tile_order_info">第一个复选框启用/禁用瓷砖,第二个复选框 
-        指定瓷砖能否在锁屏中可见</string>
-
     <!-- Traffic meter: show in lock screen -->
     <string name="pref_data_traffic_lockscreen_title">在锁屏显示</string>
     <string name="pref_data_traffic_lockscreen_summary">允许在锁屏中显示</string>

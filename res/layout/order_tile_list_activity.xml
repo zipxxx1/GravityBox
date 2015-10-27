@@ -21,32 +21,6 @@
     android:orientation="vertical"
     android:gravity="center_vertical" >
 
-    <LinearLayout
-        android:id="@+id/info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="6dp"
-        style="?android:attr/buttonBarStyle">
-
-        <TextView 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="6dp"
-            android:gravity="center"
-            android:text="@string/tile_order_info"
-            style="?android:attr/textAppearanceSmall" />
-
-        <Button
-            android:id="@+id/btnInfoOk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@android:string/ok"
-            style="?android:attr/buttonBarButtonStyle" />
-
-    </LinearLayout>
-
     <com.ceco.lollipop.gravitybox.TouchInterceptor
         android:id="@android:id/list"
         android:layout_width="match_parent"
