@@ -1373,7 +1373,7 @@ public class ModNavigationBar {
     }
 
     private static void updateIconScaleType() {
-        if (Build.VERSION.SDK_INT < 22 || Utils.isXperiaDevice()) return;
+        if (Build.VERSION.SDK_INT < 22) return;
 
         try {
             for (int i = 0; i < mNavbarViewInfo.length; i++) {
@@ -1391,17 +1391,21 @@ public class ModNavigationBar {
                                     iv.getScaleType());
                         }
                         iv.setScaleType(getIconScaleType(i, iv.getId()));
-                        iv.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
+                        if (!Utils.isXperiaDevice()) {
+                            iv.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
+                        }
                     }
                 }
                 // do this explicitly for custom key
                 ImageView key = mNavbarViewInfo[i].customKey;
                 key.setScaleType(getIconScaleType(i, key.getId()));
-                key.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
-                // also adjust IME group padding
-                if (mNavbarViewInfo[i].menuImeGroup != null) {
-                    mNavbarViewInfo[i].menuImeGroup.setPadding(
-                            paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
+                if (!Utils.isXperiaDevice()) {
+                    key.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
+                    // also adjust IME group padding
+                    if (mNavbarViewInfo[i].menuImeGroup != null) {
+                        mNavbarViewInfo[i].menuImeGroup.setPadding(
+                                paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
+                    }
                 }
             }
         } catch (Throwable t) {
