@@ -1813,8 +1813,4 @@
     <string name="pref_statusbar_dt2s_title">Sentuh 2 kali untuk matikan</string>
     <string name="pref_statusbar_dt2s_summary">Perlukan peek untuk tidak aktif</string>
 
-    <!-- Cellular tile: Dual mode -->
-    <string name="pref_cell_tile_dual_mode_title">Mod berkembar</string>
-    <string name="pref_cell_tile_dual_mode_summary">Benarkan perlakuan sama seperti tile wifi dan bluetooth</string>
-
 </resources>

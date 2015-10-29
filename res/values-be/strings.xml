@@ -1814,8 +1814,4 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="pref_statusbar_dt2s_title">Падвойны націск для сну</string>
     <string name="pref_statusbar_dt2s_summary">Неабходна адключэнне прагляду</string>
 
-    <!-- Cellular tile: Dual mode -->
-    <string name="pref_cell_tile_dual_mode_title">Падвойны рэжым</string>
-    <string name="pref_cell_tile_dual_mode_summary">Улучэнне рэжыму як у плітак WiFi і Bluetooth</string>
-
 </resources>

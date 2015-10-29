@@ -1,7 +1,5 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
-import com.ceco.lollipop.gravitybox.GravityBoxSettings;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -13,21 +11,12 @@ public class BluetoothTile extends AospTile {
     public static final String KEY = "aosp_tile_bluetooth";
 
     private Unhook mSupportsDualTargetsHook;
-    private boolean mDualMode;
 
     protected BluetoothTile(Object host, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, KEY, tile, prefs, eventDistributor);
 
         createHooks();
-    }
-
-    @Override
-    protected void initPreferences() {
-        super.initPreferences();
-
-        mDualMode = mPrefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_BT_TILE_DUAL_MODE, true);
     }
 
     @Override

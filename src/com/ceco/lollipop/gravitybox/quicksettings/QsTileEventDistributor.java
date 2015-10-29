@@ -84,10 +84,7 @@ public class QsTileEventDistributor {
             final String action = intent.getAction();
             if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
                 if (intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED) ||
-                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS) ||
-                        intent.hasExtra(GravityBoxSettings.EXTRA_CELL_TILE_DUAL_MODE) ||
-                        intent.hasExtra(GravityBoxSettings.EXTRA_WIFI_TILE_DUAL_MODE) ||
-                        intent.hasExtra(GravityBoxSettings.EXTRA_BT_TILE_DUAL_MODE)) {
+                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS)) {
                     recreateTiles();
                 } else {
                     notifyTilesOfBroadcast(context, intent);

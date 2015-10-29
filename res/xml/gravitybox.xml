@@ -183,27 +183,17 @@
                 android:summary="@string/pref_cat_qs_tile_settings_summary"
                 android:dependency="pref_qs_management_enable">
 
-                <PreferenceScreen
+                <!-- PreferenceScreen
                     android:key="pref_cat_qs_wifi_tile"
                     android:title="@string/pref_cat_qs_wifi_tile_title">
 
-                    <CheckBoxPreference 
-                        android:key="pref_wifi_tile_dual_mode"
-                        android:title="@string/pref_wifi_tile_dual_mode_title"
-                        android:defaultValue="true" />
+                </PreferenceScreen -->
 
-                </PreferenceScreen>
-
-                <PreferenceScreen
+                <!-- PreferenceScreen
                     android:key="pref_cat_qs_bt_tile"
                     android:title="@string/pref_cat_qs_bt_tile_title">
 
-                    <CheckBoxPreference 
-                        android:key="pref_bt_tile_dual_mode"
-                        android:title="@string/pref_bt_tile_dual_mode_title"
-                        android:defaultValue="true" />
-
-                </PreferenceScreen>
+                </PreferenceScreen -->
 
                 <PreferenceScreen
                     android:key="pref_cat_qs_battery_tile"
@@ -243,12 +233,6 @@
                         android:key="pref_cell_tile_data_off_icon"
                         android:title="@string/pref_cell_tile_data_off_icon_title"
                         android:summary="@string/pref_cell_tile_data_off_icon_summary"
-                        android:defaultValue="false" />
-
-                    <CheckBoxPreference 
-                        android:key="pref_cell_tile_dual_mode"
-                        android:title="@string/pref_cell_tile_dual_mode_title"
-                        android:summary="@string/pref_cell_tile_dual_mode_summary"
                         android:defaultValue="false" />
 
                 </PreferenceScreen>

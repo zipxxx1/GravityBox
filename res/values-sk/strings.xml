@@ -1787,21 +1787,15 @@
     <string name="pref_statusbar_dt2s_title">Uspať dvojitým ťuknutím</string>
     <string name="pref_statusbar_dt2s_summary">Vyžaduje vypnutý náhľad</string>
 
-    <!-- Cellular tile: Dual mode -->
-    <string name="pref_cell_tile_dual_mode_title">Duálny režim</string>
-    <string name="pref_cell_tile_dual_mode_summary">Umožňuje podobné správanie ako WiFi a Bluetooth dlaždice</string>
-
     <!-- Pie trigger indicator -->
     <string name="pref_pie_control_trigind_title">Indikátor aktivátora</string>
     <string name="pref_pie_control_trigind_color_title">Farba indikátoru aktivátora</string>
 
     <!-- WiFi tile settings -->
     <string name="pref_cat_qs_wifi_tile_title">Nastavenia WiFi dlaždice</string>
-    <string name="pref_wifi_tile_dual_mode_title">Duálny režim</string>
 
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">Nastavenia BlueTooth dlaždice</string>
-    <string name="pref_bt_tile_dual_mode_title">Duálny režim</string>
 
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Skryť indikátor typu siete</string>
@@ -1810,5 +1804,8 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Skryť ikonu nevloženej SIM</string>
     <string name="pref_signal_cluster_nosim_summary">Vyžaduje reštart</string>
+
+    <!-- QS: tile options menu -->
+    <string name="menu_tile_dual">Duálny režim</string>
 
 </resources>

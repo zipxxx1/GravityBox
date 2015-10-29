@@ -1819,22 +1819,16 @@
     <!-- Status bar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">双击睡眠</string>
     <string name="pref_statusbar_dt2s_summary">需要禁用偷看</string>
-	
-	<!-- Cellular tile: Dual mode -->
-    <string name="pref_cell_tile_dual_mode_title">双模式</string>
-    <string name="pref_cell_tile_dual_mode_summary">WiFi和蓝牙瓷砖等允许类似的行为</string>
-	
+
 	<!-- Pie trigger indicator -->
     <string name="pref_pie_control_trigind_title">触发指示器</string>
     <string name="pref_pie_control_trigind_color_title">触发指示器颜色</string>
 
     <!-- WiFi tile settings -->
     <string name="pref_cat_qs_wifi_tile_title">WiFi瓷砖设置</string>
-    <string name="pref_wifi_tile_dual_mode_title">双模式</string>
 
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">蓝牙瓷砖设置</string>
-    <string name="pref_bt_tile_dual_mode_title">双模式</string>
 
     <!-- MTK tiles: HotKnot -->
     <string name="qs_tile_hotknot">HotKnot</string>
@@ -1846,5 +1840,8 @@
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">关闭\"无SIM\"图标</string>
     <string name="pref_signal_cluster_nosim_summary">需要重新启动</string>
+
+    <!-- QS: tile options menu -->
+    <string name="menu_tile_dual">双模式</string>
 
 </resources>

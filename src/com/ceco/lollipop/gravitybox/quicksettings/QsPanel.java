@@ -121,26 +121,23 @@ public class QsPanel implements BroadcastSubReceiver {
 
     private int getDualTileCount() {
         int count = 0;
+        List<String> dualTiles = new ArrayList<>();
         List<String> enabledTiles = new ArrayList<>();
         try {
+            dualTiles.addAll(Arrays.asList(
+                    mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_DUAL,
+                            "aosp_tile_wifi,aosp_tile_bluetooth").split(",")));
             enabledTiles.addAll(Arrays.asList(
                     mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ENABLED,
                     TileOrderActivity.getDefaultTileList(
                             Utils.getGbContext(mContext))).split(",")));
         } catch (Throwable t) { /* ignore */ }
 
-        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_CELL_TILE_DUAL_MODE, false) &&
-                    enabledTiles.contains(CellularTile.KEY)) {
-            count++;
+        for (String tileKey : enabledTiles) {
+            if (dualTiles.contains(tileKey))
+                count++;
         }
-        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_WIFI_TILE_DUAL_MODE, true) &&
-                    enabledTiles.contains(WifiTile.KEY)) {
-            count++;
-        }
-        if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BT_TILE_DUAL_MODE, true) &&
-                    enabledTiles.contains(BluetoothTile.KEY)) {
-            count++;
-        }
+
         return count;
     }
 

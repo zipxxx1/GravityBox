@@ -1819,21 +1819,15 @@
     <string name="pref_statusbar_dt2s_title">Double-tap to sleep</string>
     <string name="pref_statusbar_dt2s_summary">Requires peek to be disabled</string>
 
-    <!-- Cellular tile: Dual mode -->
-    <string name="pref_cell_tile_dual_mode_title">Dual mode</string>
-    <string name="pref_cell_tile_dual_mode_summary">Allows similar behavior as WiFi and Bluetooth tile</string>
-
     <!-- Pie trigger indicator -->
     <string name="pref_pie_control_trigind_title">Trigger indicator</string>
     <string name="pref_pie_control_trigind_color_title">Trigger indicator color</string>
 
     <!-- WiFi tile settings -->
     <string name="pref_cat_qs_wifi_tile_title">WiFi tile settings</string>
-    <string name="pref_wifi_tile_dual_mode_title">Dual mode</string>
 
     <!-- Bluetooth tile settings -->
     <string name="pref_cat_qs_bt_tile_title">BlueTooth tile settings</string>
-    <string name="pref_bt_tile_dual_mode_title">Dual mode</string>
 
     <!-- MTK tiles: HotKnot -->
     <string name="qs_tile_hotknot">HotKnot</string>
@@ -1847,6 +1841,7 @@
     <string name="pref_signal_cluster_nosim_summary">Requires reboot</string>
 
     <!-- QS: tile options menu -->
+    <string name="menu_tile_dual">Dual mode</string>
     <string name="menu_tile_locked">Show when locked</string>
     <string name="menu_tile_secured">Show when secured</string>
     <string name="tile_hidden_locked">Hidden from lock screen</string>

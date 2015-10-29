@@ -35,7 +35,6 @@ public class CellularTile extends AospTile {
     private Unhook mSupportsDualTargetsHook;
     private Unhook mHandleClickHook;
     private boolean mClickHookBlocked;
-    private boolean mDualMode;
 
     protected CellularTile(Object host, String aospKey, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -102,8 +101,6 @@ public class CellularTile extends AospTile {
 
         mDataOffIconEnabled = mPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_CELL_TILE_DATA_OFF_ICON, false);
-        mDualMode = mPrefs.getBoolean(
-                GravityBoxSettings.PREF_KEY_CELL_TILE_DUAL_MODE, false);
     }
 
     @Override

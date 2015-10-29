@@ -63,6 +63,7 @@ public abstract class BaseTile implements QsEventListener {
     protected boolean mEnabled;
     protected boolean mLocked;
     protected boolean mSecured;
+    protected boolean mDualMode;
     protected int mStatusBarState;
     protected boolean mHideOnChange;
     protected float mScalingFactor = 1f;
@@ -94,6 +95,11 @@ public abstract class BaseTile implements QsEventListener {
         List<String> securedTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_SECURED, "").split(",")));
         mSecured = securedTiles.contains(mKey);
+
+        List<String> dualTiles = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_DUAL,
+                        "aosp_tile_wifi,aosp_tile_bluetooth").split(",")));
+        mDualMode = dualTiles.contains(mKey);
 
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
     }

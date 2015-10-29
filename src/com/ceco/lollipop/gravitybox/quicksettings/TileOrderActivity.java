@@ -35,6 +35,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     public static final String PREF_KEY_TILE_ENABLED = "pref_qs_tile_enabled";
     public static final String PREF_KEY_TILE_LOCKED = "pref_qs_tile_locked";
     public static final String PREF_KEY_TILE_SECURED = "pref_qs_tile_secured";
+    public static final String PREF_KEY_TILE_DUAL = "pref_qs_tile_dual";
     public static final String EXTRA_QS_ORDER_CHANGED = "qsTileOrderChanged";
 
     private ListView mTileList;
@@ -70,14 +72,17 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         boolean enabled;
         boolean locked;
         boolean secured;
-        private PopupMenu menu;
+        boolean dual;
         void showMenu(final ListView listView, final View anchorView) {
-            menu = new PopupMenu(listView.getContext(), anchorView);
+            final PopupMenu menu = new PopupMenu(listView.getContext(), anchorView);
             menu.inflate(R.menu.tile_menu);
             menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
                     switch(item.getItemId()) {
+                        case R.id.tile_dual:
+                            dual = !dual;
+                            break;
                         case R.id.tile_locked:
                             locked = !locked;
                             if (locked) secured = true;
@@ -86,20 +91,30 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
                             secured = !secured;
                             break;
                     }
-                    updateMenu();
+                    updateMenu(menu.getMenu());
                     listView.invalidateViews();
                     return true;
                 }
             });
-            updateMenu();
+            updateMenu(menu.getMenu());
             menu.show();
         }
-        private void updateMenu() {
-            MenuItem miLocked = menu.getMenu().getItem(0);
-            MenuItem miSecured = menu.getMenu().getItem(1);
+        private void updateMenu(Menu menu) {
+            if (supportsDualMode()) {
+                menu.findItem(R.id.tile_dual).setChecked(dual);
+            } else {
+                menu.removeItem(R.id.tile_dual);
+            }
+            MenuItem miLocked = menu.findItem(R.id.tile_locked);
+            MenuItem miSecured = menu.findItem(R.id.tile_secured);
             miLocked.setChecked(!locked);
             miSecured.setChecked(!secured && !"gb_tile_lock_screen".equals(key));
             miSecured.setEnabled(!locked && !"gb_tile_lock_screen".equals(key));
+        }
+        private boolean supportsDualMode() {
+            return "aosp_tile_cell".equals(key) ||
+                    "aosp_tile_wifi".equals(key) ||
+                    "aosp_tile_bluetooth".equals(key);
         }
     }
 
@@ -290,6 +305,9 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
                 mPrefs.getString(PREF_KEY_TILE_LOCKED, "").split(",")));
         List<String> securedTiles = new ArrayList<String>(Arrays.asList(
                 mPrefs.getString(PREF_KEY_TILE_SECURED, "").split(",")));
+        List<String> dualTiles = new ArrayList<String>(Arrays.asList(
+                mPrefs.getString(PREF_KEY_TILE_DUAL,
+                        "aosp_tile_wifi,aosp_tile_bluetooth").split(",")));
 
         List<TileInfo> tiles = new ArrayList<TileInfo>();
         for (int i = 0; i < orderedTiles.length; i++) {
@@ -299,6 +317,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
             ti.enabled = enabledTiles.contains(ti.key);
             ti.locked = lockedTiles.contains(ti.key);
             ti.secured = securedTiles.contains(ti.key);
+            ti.dual = dualTiles.contains(ti.key);
             tiles.add(ti);
         }
 
@@ -310,6 +329,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         String newEnabledList = "";
         String newLockedList = "";
         String newSecuredList = "";
+        String newDualList = "";
 
         for (TileInfo ti : mOrderedTileList) {
             if (!newOrderedList.isEmpty()) newOrderedList += ",";
@@ -329,12 +349,18 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
                 if (!newSecuredList.isEmpty()) newSecuredList += ",";
                 newSecuredList += ti.key;
             }
+
+            if (ti.dual) {
+                if (!newDualList.isEmpty()) newDualList += ",";
+                newDualList += ti.key;
+            }
         }
 
         mPrefs.edit().putString(PREF_KEY_TILE_ORDER, newOrderedList).commit();
         mPrefs.edit().putString(PREF_KEY_TILE_ENABLED, newEnabledList).commit();
         mPrefs.edit().putString(PREF_KEY_TILE_LOCKED, newLockedList).commit();
         mPrefs.edit().putString(PREF_KEY_TILE_SECURED, newSecuredList).commit();
+        mPrefs.edit().putString(PREF_KEY_TILE_DUAL, newDualList).commit();
         Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
         intent.putExtra(EXTRA_QS_ORDER_CHANGED, true);
         mContext.sendBroadcast(intent);
