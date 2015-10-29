@@ -1843,6 +1843,7 @@
     <!-- QS: tile options menu -->
     <string name="menu_tile_dual">Dual mode</string>
     <string name="menu_tile_locked">Show when locked</string>
+    <string name="menu_tile_locked_only">Only when locked</string>
     <string name="menu_tile_secured">Show when secured</string>
     <string name="tile_hidden_locked">Hidden from lock screen</string>
     <string name="tile_hidden_secured">Hidden from secured lock screen</string>

@@ -20,6 +20,9 @@
     <item android:id="@+id/tile_locked"
           android:title="@string/menu_tile_locked"
           android:checkable="true" />
+    <item android:id="@+id/tile_locked_only"
+          android:title="@string/menu_tile_locked_only"
+          android:checkable="true" />
     <item android:id="@+id/tile_secured"
           android:title="@string/menu_tile_secured"
           android:checkable="true" />
