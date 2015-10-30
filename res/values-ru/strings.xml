@@ -1841,5 +1841,10 @@
 
     <!-- QS: tile options menu -->
     <string name="menu_tile_dual">Двойной режим</string>
+    <string name="menu_tile_locked">На заблок.экране</string>
+    <string name="menu_tile_locked_only">Только на заблок.экране</string>
+    <string name="menu_tile_secured">На защищ.экране</string>
+    <string name="tile_hidden_locked">Скрыть с экр.блокировки</string>
+    <string name="tile_hidden_secured">Скрыть с защищенного экрана</string>
 
 </resources>
