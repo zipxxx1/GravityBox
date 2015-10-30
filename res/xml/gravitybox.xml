@@ -1199,38 +1199,21 @@
                 android:defaultValue="false"
                 android:disableDependentsState="true" />
 
-            <!-- 
             <PreferenceScreen 
                 android:key="pref_cat_navbar_ring_targets"
                 android:title="@string/pref_cat_navbar_ring_targets_title"
                 android:dependency="pref_navbar_ring_disable" >
 
-                <SwitchPreference 
-                    android:key="pref_navbar_ring_targets_enable"
-                    android:title="@string/pref_masterswitch_title"
-                    android:summary="@string/pref_navbar_ring_targets_enable_summary"
-                    android:defaultValue="false" />
-
-                Ring target prefs will be generated dynamically at runtime
+                <!-- Ring target prefs will be generated dynamically at runtime -->
 
                 <ListPreference
                     android:key="pref_navbar_ring_targets_bg_style"
                     android:title="@string/pref_navbar_ring_targets_bg_style_title"
                     android:entries="@array/nrt_bg_style_entries"
                     android:entryValues="@array/nrt_bg_style_values"
-                    android:defaultValue="NONE"
-                    android:dependency="pref_navbar_ring_targets_enable" />
-
-                <ListPreference
-                    android:key="pref_navbar_ring_haptic_feedback"
-                    android:title="@string/pref_navbar_ring_haptic_feedback_title"
-                    android:entries="@array/navring_haptic_feedback_entries"
-                    android:entryValues="@array/navring_haptic_feedback_values"
-                    android:defaultValue="DEFAULT"
-                    android:dependency="pref_navbar_ring_targets_enable" />
+                    android:defaultValue="NONE" />
 
             </PreferenceScreen>
-            -->
 
         </PreferenceCategory>
 

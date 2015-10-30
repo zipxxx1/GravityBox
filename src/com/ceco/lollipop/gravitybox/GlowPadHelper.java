@@ -156,7 +156,7 @@ public class GlowPadHelper {
         }
     }
 
-    private static Bitmap createStyledBitmap(Bitmap bitmap, int sizePx, BgStyle bgStyle) {
+    public static Bitmap createStyledBitmap(Bitmap bitmap, int sizePx, BgStyle bgStyle) {
         bitmap = Bitmap.createScaledBitmap(bitmap, sizePx, sizePx, true);
 
         switch (bgStyle) {

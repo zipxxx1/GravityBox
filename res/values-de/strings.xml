@@ -809,7 +809,6 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Anwendungen des Navigationsringes</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Navigationsring um weitere Anwendungen erweitern (Neustart erforderlich)</string>
     <string name="pref_navbar_ring_target_title">Anwendung %d</string>
 
     <!-- Shortcut activity title -->
@@ -1094,12 +1093,6 @@
     <string name="tile_label_style_normal">Normal</string>
     <string name="tile_label_style_allcaps">Großbuchstaben</string>
     <string name="tile_label_style_hidden">Versteckt</string>
-
-    <!-- Navbar ring: Haptic feedback -->
-    <string name="pref_navbar_ring_haptic_feedback_title">Haptisches Feedback</string>
-    <string name="navring_haptic_feedback_default">Standard</string>
-    <string name="navring_haptic_feedback_enabled">An</string>
-    <string name="navring_haptic_feedback_disabled">Aus</string>
 
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Größe des Aktivierungsbereichs</string>

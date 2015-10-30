@@ -785,7 +785,6 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Zkratky prstence navigační lišty</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Hlavní vypínač pro zkratky prstence navigační lišty (vyžaduje restart)</string>
     <string name="pref_navbar_ring_target_title">Aplikace pro zkratku %d</string>
 
     <!-- Shortcut activity title -->
@@ -1070,12 +1069,6 @@
     <string name="tile_label_style_normal">Normální</string>
     <string name="tile_label_style_allcaps">Velká písmena</string>
     <string name="tile_label_style_hidden">Skrýt</string>
-
-    <!-- Navbar ring: Haptic feedback -->
-    <string name="pref_navbar_ring_haptic_feedback_title">Hmatová odezva</string>
-    <string name="navring_haptic_feedback_default">Původní</string>
-    <string name="navring_haptic_feedback_enabled">Zapnuta</string>
-    <string name="navring_haptic_feedback_disabled">Vypnuta</string>
 
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Šířka aktivního okraje</string>

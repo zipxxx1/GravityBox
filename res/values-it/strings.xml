@@ -805,7 +805,6 @@
  
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Anello barra di navigazione</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Attiva pulsanti sull\'anello della barra di navigazione (richiede riavvio)</string>
     <string name="pref_navbar_ring_target_title">Destinazione per pulsante %d</string>
  
     <!-- Shortcut activity title -->
@@ -1094,12 +1093,6 @@
     <string name="tile_label_style_allcaps">Tutto maiuscolo</string>
     <string name="tile_label_style_hidden">Nascosto</string>
 
-    <!-- Navbar ring: Haptic feedback -->
-    <string name="pref_navbar_ring_haptic_feedback_title">Feedback tattile</string>
-    <string name="navring_haptic_feedback_default">Predefinito</string>
-    <string name="navring_haptic_feedback_enabled">Abilitato</string>
-    <string name="navring_haptic_feedback_disabled">Disabilitato</string>
-    
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Dimensione bordo visualizzazione rapida</string>
     

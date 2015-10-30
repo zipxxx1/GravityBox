@@ -794,7 +794,6 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">導航環目標</string>
-    <string name="pref_navbar_ring_targets_enable_summary">導航環目標選項主開關 (需要重新啟動) </string>
     <string name="pref_navbar_ring_target_title">導航環目標 %d</string>
 
     <!-- Shortcut activity title -->
@@ -1081,12 +1080,6 @@
     <string name="tile_label_style_normal">正常</string>
     <string name="tile_label_style_allcaps">大寫字母</string>
     <string name="tile_label_style_hidden">隱藏</string>
-
-    <!-- Navbar ring: Haptic feedback -->
-    <string name="pref_navbar_ring_haptic_feedback_title">觸控反饋</string>
-    <string name="navring_haptic_feedback_default">預設</string>
-    <string name="navring_haptic_feedback_enabled">啟用</string>
-    <string name="navring_haptic_feedback_disabled">停用</string>
 
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">快速下拉大小</string>

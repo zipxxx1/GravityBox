@@ -1361,36 +1361,28 @@ public class ModStatusBar {
 
     private static void startSearchAssist() {
         try {
-            Object searchPanelView = null;
-            if (mPhoneStatusBar != null) {
-                searchPanelView = XposedHelpers.getObjectField(mPhoneStatusBar, "mSearchPanelView");
-            }
-            if (searchPanelView != null) {
-                XposedHelpers.callMethod(searchPanelView, "startAssistActivity");
-            } else if (mContext != null) {
-                SearchManager sm = (SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE);
-                Intent intent = (Intent) XposedHelpers.callMethod(sm, "getAssistIntent", mContext, true, -2);
-                if (intent == null) return;
+            SearchManager sm = (SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE);
+            Intent intent = (Intent) XposedHelpers.callMethod(sm, "getAssistIntent", mContext, true, -2);
+            if (intent == null) return;
 
-                try {
-                    Class<?> amnCls = XposedHelpers.findClass("android.app.ActivityManagerNative",
-                            mContext.getClassLoader());
-                    Object amn = XposedHelpers.callStaticMethod(amnCls, "getDefault");
-                    XposedHelpers.callMethod(amn, "dismissKeyguardOnNextActivity");
-                } catch (Throwable t) { }
+            try {
+                Class<?> amnCls = XposedHelpers.findClass("android.app.ActivityManagerNative",
+                        mContext.getClassLoader());
+                Object amn = XposedHelpers.callStaticMethod(amnCls, "getDefault");
+                XposedHelpers.callMethod(amn, "dismissKeyguardOnNextActivity");
+            } catch (Throwable t) { }
 
-                try {
-                    Resources res = mContext.getResources();
-                    int animEnter = res.getIdentifier("search_launch_enter", "anim", PACKAGE_NAME);
-                    int animExit = res.getIdentifier("search_launch_exit", "anim", PACKAGE_NAME);
-                    ActivityOptions opts = ActivityOptions.makeCustomAnimation(mContext, animEnter, animExit);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Constructor<?> uhConst = XposedHelpers.findConstructorExact(UserHandle.class, int.class);
-                    UserHandle uh = (UserHandle) uhConst.newInstance(-2);
-                    XposedHelpers.callMethod(mContext, "startActivityAsUser", intent, opts.toBundle(), uh);
-                } catch (ActivityNotFoundException e) {
-                    log("Activity not found for " + intent.getAction());
-                }
+            try {
+                Resources res = mContext.getResources();
+                int animEnter = res.getIdentifier("search_launch_enter", "anim", PACKAGE_NAME);
+                int animExit = res.getIdentifier("search_launch_exit", "anim", PACKAGE_NAME);
+                ActivityOptions opts = ActivityOptions.makeCustomAnimation(mContext, animEnter, animExit);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Constructor<?> uhConst = XposedHelpers.findConstructorExact(UserHandle.class, int.class);
+                UserHandle uh = (UserHandle) uhConst.newInstance(-2);
+                XposedHelpers.callMethod(mContext, "startActivityAsUser", intent, opts.toBundle(), uh);
+            } catch (ActivityNotFoundException e) {
+                log("Activity not found for " + intent.getAction());
             }
         } catch (Throwable t) {
             XposedBridge.log(t);

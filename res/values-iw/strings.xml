@@ -781,7 +781,6 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">קיצורי דרך של טבעת ביטול נעילה</string>
-    <string name="pref_navbar_ring_targets_enable_summary">מפסק ראשי עבור קיצור דרך של טבעת ביטול נעילה (דורש איתחול)</string>
     <string name="pref_navbar_ring_target_title">קיצור דרך טבעת %d</string>
 
     <!-- Shortcut activity title -->

@@ -1,6 +1,5 @@
 package com.ceco.lollipop.gravitybox.managers;
 
-import com.ceco.lollipop.gravitybox.GravityBox;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
 

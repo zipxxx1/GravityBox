@@ -788,7 +788,6 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Alvos do anel de navegação</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Definição dos alvos do anel de navegação (necessário reiniciar)</string>
     <string name="pref_navbar_ring_target_title">Alvo número %d</string>
 
     <!-- Shortcut activity title -->
@@ -1076,12 +1075,6 @@
     <string name="tile_label_style_normal">Normal</string>
     <string name="tile_label_style_allcaps">Tudo em maiúsculas</string>
     <string name="tile_label_style_hidden">Oculto</string>
-
-    <!-- Navbar ring: Haptic feedback -->
-    <string name="pref_navbar_ring_haptic_feedback_title">Reconhecimento tátil</string>
-    <string name="navring_haptic_feedback_default">Padrão</string>
-    <string name="navring_haptic_feedback_enabled">Ativado</string>
-    <string name="navring_haptic_feedback_disabled">Desativado</string>
 
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Àrea de acesso rápido</string>

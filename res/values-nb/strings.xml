@@ -798,7 +798,6 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Navigation ring targets</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Toggles navigation ring targets (requires reboot)</string>
     <string name="pref_navbar_ring_target_title">Ring target %d</string>
 
     <!-- Shortcut activity title -->
@@ -1086,12 +1085,6 @@
     <string name="tile_label_style_normal">Normal</string>
     <string name="tile_label_style_allcaps">All capitals</string>
     <string name="tile_label_style_hidden">Hidden</string>
-
-    <!-- Navbar ring: Haptic feedback -->
-    <string name="pref_navbar_ring_haptic_feedback_title">Haptic feedback</string>
-    <string name="navring_haptic_feedback_default">Default</string>
-    <string name="navring_haptic_feedback_enabled">Enabled</string>
-    <string name="navring_haptic_feedback_disabled">Disabled</string>
 
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Quick pulldown size</string>

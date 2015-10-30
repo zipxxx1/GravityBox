@@ -795,7 +795,6 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Στόχοι δακτυλίου πλοήγησης</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Διαχείριση στόχων δακτυλίου πλοήγησης (απαιτείται επανεκκίνηση)</string>
     <string name="pref_navbar_ring_target_title">Στόχος δακτυλίου %d</string>
 
     <!-- Shortcut activity title -->

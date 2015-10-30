@@ -673,19 +673,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
     public static final String EXTRA_SC_NARROW = "scNarrow";
 
-    // TODO: Navbar ring targets
-//    public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
-//    public static final String PREF_KEY_NAVBAR_RING_TARGETS_ENABLE = "pref_navbar_ring_targets_enable";
-//    public static final List<String> PREF_KEY_NAVBAR_RING_TARGET = new ArrayList<String>(Arrays.asList(
-//            "pref_navbar_ring_target0", "pref_navbar_ring_target1", "pref_navbar_ring_target2",
-//            "pref_navbar_ring_target3", "pref_navbar_ring_target4"));
-//    public static final String PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE = "pref_navbar_ring_targets_bg_style";
-//    public static final String PREF_KEY_NAVBAR_RING_HAPTIC_FEEDBACK = "pref_navbar_ring_haptic_feedback";
-//    public static final String ACTION_PREF_NAVBAR_RING_TARGET_CHANGED = "gravitybox.intent.action.NAVBAR_RING_TARGET_CHANGED";
-//    public static final String EXTRA_RING_TARGET_INDEX = "ringTargetIndex";
-//    public static final String EXTRA_RING_TARGET_APP = "ringTargetApp";
-//    public static final String EXTRA_RING_TARGET_BG_STYLE = "ringTargetBgStyle";
-//    public static final String EXTRA_RING_HAPTIC_FEEDBACK = "ringHapticFeedback";
+    public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
+    public static final List<String> PREF_KEY_NAVBAR_RING_TARGET = new ArrayList<String>(Arrays.asList(
+            "pref_navbar_ring_target0"));
+    public static final String PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE = "pref_navbar_ring_targets_bg_style";
+    public static final String ACTION_PREF_NAVBAR_RING_TARGET_CHANGED = "gravitybox.intent.action.NAVBAR_RING_TARGET_CHANGED";
+    public static final String EXTRA_RING_TARGET_INDEX = "ringTargetIndex";
+    public static final String EXTRA_RING_TARGET_APP = "ringTargetApp";
+    public static final String EXTRA_RING_TARGET_BG_STYLE = "ringTargetBgStyle";
 
     public static final String PREF_KEY_NAVBAR_LARGER_ICONS = "pref_navbar_larger_icons";
 
@@ -854,8 +849,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
             PREF_KEY_QUICK_SETTINGS_ENABLE,
             PREF_KEY_SIGNAL_CLUSTER_DATA_ACTIVITY,
-            // TODO: Navbar ring targets
-//            PREF_KEY_NAVBAR_RING_TARGETS_ENABLE,
             PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON,
             PREF_KEY_SMART_RADIO_ENABLE,
             PREF_KEY_PULSE_NOTIFICATION_DELAY,
@@ -1256,12 +1249,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefNavbarCustomKeySingletap;
         private ListPreference mPrefNavbarCustomKeyLongpress;
         private ListPreference mPrefNavbarCustomKeyDoubletap;
-        // TODO; Navbar ring targets
-        //private PreferenceScreen mPrefCatNavbarRingTargets;
-        //private SwitchPreference mPrefNavbarRingTargetsEnable;
-        //private AppPickerPreference[] mPrefNavbarRingTarget;
-        //private ListPreference mPrefNavbarRingTargetsBgStyle;
-        //private ListPreference mPrefNavbarRingHapticFeedback;
+        private PreferenceScreen mPrefCatNavbarRingTargets;
+        private AppPickerPreference[] mPrefNavbarRingTarget;
+        private ListPreference mPrefNavbarRingTargetsBgStyle;
         private SeekBarPreference mPrefPulseNotificationDelay;
         private PreferenceCategory mPrefCatMiscOther;
         private SeekBarPreference mPrefTorchAutoOff;
@@ -1550,26 +1540,23 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefVolumeRockerWake = (ListPreference) findPreference(PREF_KEY_VOLUME_ROCKER_WAKE);
 
-            // TODO: Navbar ring targets
-//            mPrefCatNavbarRingTargets = (PreferenceScreen) findPreference(PREF_CAT_KEY_NAVBAR_RING_TARGETS);
-//            mPrefNavbarRingTargetsEnable = (SwitchPreference) findPreference(PREF_KEY_NAVBAR_RING_TARGETS_ENABLE);
-//            mPrefNavbarRingTargetsBgStyle = (ListPreference) findPreference(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE);
-//            mPrefNavbarRingHapticFeedback = (ListPreference) findPreference(PREF_KEY_NAVBAR_RING_HAPTIC_FEEDBACK);
-//            mPrefNavbarRingTarget = new AppPickerPreference[PREF_KEY_NAVBAR_RING_TARGET.size()];
-//            for (int i = 0; i < mPrefNavbarRingTarget.length; i++) {
-//                AppPickerPreference appPref = new AppPickerPreference(getActivity(), null);
-//                appPref.setKey(PREF_KEY_NAVBAR_RING_TARGET.get(i));
-//                appPref.setTitle(String.format(
-//                        getActivity().getString(R.string.pref_navbar_ring_target_title), i + 1));
-//                appPref.setDialogTitle(appPref.getTitle());
-//                appPref.setDefaultSummary(getActivity().getString(R.string.app_picker_none));
-//                appPref.setSummary(getActivity().getString(R.string.app_picker_none));
-//                mPrefNavbarRingTarget[i] = appPref;
-//                mPrefCatNavbarRingTargets.addPreference(mPrefNavbarRingTarget[i]);
-//                if (mPrefs.getString(appPref.getKey(), null) == null) {
-//                    mPrefs.edit().putString(appPref.getKey(), null).commit();
-//                }
-//            }
+            mPrefCatNavbarRingTargets = (PreferenceScreen) findPreference(PREF_CAT_KEY_NAVBAR_RING_TARGETS);
+            mPrefNavbarRingTargetsBgStyle = (ListPreference) findPreference(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE);
+            mPrefNavbarRingTarget = new AppPickerPreference[PREF_KEY_NAVBAR_RING_TARGET.size()];
+            for (int i = 0; i < mPrefNavbarRingTarget.length; i++) {
+                AppPickerPreference appPref = new AppPickerPreference(getActivity(), null);
+                appPref.setKey(PREF_KEY_NAVBAR_RING_TARGET.get(i));
+                appPref.setTitle(String.format(
+                        getActivity().getString(R.string.pref_navbar_ring_target_title), i + 1));
+                appPref.setDialogTitle(appPref.getTitle());
+                appPref.setDefaultSummary(getActivity().getString(R.string.state_default));
+                appPref.setSummary(getActivity().getString(R.string.state_default));
+                mPrefNavbarRingTarget[i] = appPref;
+                mPrefCatNavbarRingTargets.addPreference(mPrefNavbarRingTarget[i]);
+                if (mPrefs.getString(appPref.getKey(), null) == null) {
+                    mPrefs.edit().putString(appPref.getKey(), null).commit();
+                }
+            }
 
             mPrefPulseNotificationDelay = (SeekBarPreference) findPreference(PREF_KEY_PULSE_NOTIFICATION_DELAY);
 
@@ -2126,21 +2113,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefDataTrafficInactivityMode.setSummary(mPrefDataTrafficInactivityMode.getEntry());
             }
 
-            // TODO: Navbar ring targets
-//            if (key == null || key.equals(PREF_KEY_NAVBAR_RING_TARGETS_ENABLE)) {
-//                final boolean enabled = mPrefNavbarRingTargetsEnable.isChecked();
-//                for (int i = 0; i < mPrefNavbarRingTarget.length; i++) {
-//                    mPrefNavbarRingTarget[i].setEnabled(enabled);
-//                }
-//            }
-//
-//            if (key == null || key.equals(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE)) {
-//                mPrefNavbarRingTargetsBgStyle.setSummary(mPrefNavbarRingTargetsBgStyle.getEntry());
-//            }
-//
-//            if (key == null || key.equals(PREF_KEY_NAVBAR_RING_HAPTIC_FEEDBACK)) {
-//                mPrefNavbarRingHapticFeedback.setSummary(mPrefNavbarRingHapticFeedback.getEntry());
-//            }
+            if (key == null || key.equals(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE)) {
+                mPrefNavbarRingTargetsBgStyle.setSummary(mPrefNavbarRingTargetsBgStyle.getEntry());
+            }
 
             if (key == null || key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE)) {
                 mPrefBatteryPercentSize.setSummary(mPrefBatteryPercentSize.getEntry());
@@ -2773,20 +2748,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_RING_DISABLE,
                         prefs.getBoolean(PREF_KEY_NAVBAR_RING_DISABLE, false));
-                // TODO: Navbar ring targets
-//            } else if (PREF_KEY_NAVBAR_RING_TARGET.contains(key)) {
-//                intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
-//                intent.putExtra(EXTRA_RING_TARGET_INDEX,
-//                        PREF_KEY_NAVBAR_RING_TARGET.indexOf(key));
-//                intent.putExtra(EXTRA_RING_TARGET_APP, prefs.getString(key, null));
-//            } else if (key.equals(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE)) {
-//                intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
-//                intent.putExtra(EXTRA_RING_TARGET_BG_STYLE,
-//                        prefs.getString(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE, "NONE"));
-//            } else if (key.equals(PREF_KEY_NAVBAR_RING_HAPTIC_FEEDBACK)) {
-//                intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
-//                intent.putExtra(EXTRA_RING_HAPTIC_FEEDBACK,
-//                        prefs.getString(PREF_KEY_NAVBAR_RING_HAPTIC_FEEDBACK, "DEFAULT"));
+            } else if (PREF_KEY_NAVBAR_RING_TARGET.contains(key)) {
+                intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
+                intent.putExtra(EXTRA_RING_TARGET_INDEX,
+                        PREF_KEY_NAVBAR_RING_TARGET.indexOf(key));
+                intent.putExtra(EXTRA_RING_TARGET_APP, prefs.getString(key, null));
+            } else if (key.equals(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE)) {
+                intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
+                intent.putExtra(EXTRA_RING_TARGET_BG_STYLE,
+                        prefs.getString(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE, "NONE"));
             } else if (key.equals(PREF_KEY_NAVBAR_COLOR_ENABLE)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_COLOR_ENABLE,

@@ -784,7 +784,6 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Cele pierścienia nawigacji</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Przełącza cele pierścienia nawigacji (wymagany restart)</string>
     <string name="pref_navbar_ring_target_title">Cel pierścienia %d</string>
 
     <!-- Shortcut activity title -->
@@ -1069,12 +1068,6 @@
     <string name="tile_label_style_normal">Normalny</string>
     <string name="tile_label_style_allcaps">Tylko kapitaliki</string>
     <string name="tile_label_style_hidden">Ukryty</string>
-
-    <!-- Navbar ring: Haptic feedback -->
-    <string name="pref_navbar_ring_haptic_feedback_title">Wibracje przy dotknięciu</string>
-    <string name="navring_haptic_feedback_default">Domyślne</string>
-    <string name="navring_haptic_feedback_enabled">Włączone</string>
-    <string name="navring_haptic_feedback_disabled">Wyłączone</string>
 
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Rozmiar aktywnego obszaru</string>

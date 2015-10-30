@@ -17,6 +17,7 @@ package com.ceco.lollipop.gravitybox.managers;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ import com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
@@ -47,6 +49,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -265,7 +268,7 @@ public class AppLauncher implements BroadcastSubReceiver {
         }
     };
 
-    private void startActivity(Context context, Intent intent) {
+    public void startActivity(Context context, Intent intent, ActivityOptions opts) throws Exception {
         // if intent is a GB action of broadcast type, handle it directly here
         if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
             boolean isLaunchBlocked = false;
@@ -293,9 +296,19 @@ public class AppLauncher implements BroadcastSubReceiver {
                 }
             } else {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                context.startActivity(intent);
+                Constructor<?> uhConst = XposedHelpers.findConstructorExact(UserHandle.class, int.class);
+                UserHandle uh = (UserHandle) uhConst.newInstance(-2);
+                if (opts != null) {
+                    XposedHelpers.callMethod(context, "startActivityAsUser", intent, opts.toBundle(), uh);
+                } else {
+                    XposedHelpers.callMethod(context, "startActivityAsUser", intent, uh);
+                }
             }
         }
+    }
+
+    public void startActivity(Context context, Intent intent) throws Exception {
+        startActivity(context, intent, null);
     }
 
     private void updateAppSlot(int slot, String value) {
@@ -305,7 +318,11 @@ public class AppLauncher implements BroadcastSubReceiver {
         }
     }
 
-    private final class AppInfo {
+    public AppInfo createAppInfo() {
+        return new AppInfo(0);
+    }
+
+    public final class AppInfo {
         private String mAppName;
         private Drawable mAppIcon;
         private String mValue;
@@ -328,6 +345,14 @@ public class AppLauncher implements BroadcastSubReceiver {
         public Drawable getAppIcon() {
             return (mAppIcon == null ? 
                     mResources.getDrawable(android.R.drawable.ic_menu_help) : mAppIcon);
+        }
+
+        public void setAppIcon(Drawable d) {
+            mAppIcon = d;
+        }
+
+        public void setAppIcon(Bitmap b) {
+            mAppIcon = new BitmapDrawable(mResources, b);
         }
 
         public String getValue() {

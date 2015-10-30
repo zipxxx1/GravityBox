@@ -811,7 +811,6 @@
 
     <!-- Navigation bar ring targets -->
     <string name="pref_cat_navbar_ring_targets_title">Target gelung navigasi</string>
-    <string name="pref_navbar_ring_targets_enable_summary">Butang target gelung navigasi (perlukan reboot)</string>
     <string name="pref_navbar_ring_target_title">Target gelung %d</string>
 
     <!-- Shortcut activity title -->
@@ -1099,12 +1098,6 @@
     <string name="tile_label_style_normal">Biasa</string>
     <string name="tile_label_style_allcaps">Semua huruf besar</string>
     <string name="tile_label_style_hidden">Tersembunyi</string>
-
-    <!-- Navbar ring: Haptic feedback -->
-    <string name="pref_navbar_ring_haptic_feedback_title">Gegaran</string>
-    <string name="navring_haptic_feedback_default">Tetapan asal</string>
-    <string name="navring_haptic_feedback_enabled">Aktifkan</string>
-    <string name="navring_haptic_feedback_disabled">Matikan</string>
 
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">Size turun cepat</string>

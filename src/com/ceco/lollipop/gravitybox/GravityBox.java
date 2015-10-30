@@ -182,6 +182,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         if (lpparam.packageName.equals(ModNavigationBar.PACKAGE_NAME)
                 && prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false)) {
             ModNavigationBar.init(prefs, lpparam.classLoader);
+            ModSearchPanel.init(prefs, lpparam.classLoader);
         }
 
         if (!Utils.hasLenovoVibeUI() &&
