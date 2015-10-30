@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.util.TypedValue;
 import android.view.View;
@@ -40,6 +41,7 @@ public class ModSearchPanel {
     private static final boolean DEBUG = false;
 
     private static final String CLASS_SEARCH_PANEL_VIEW = "com.android.systemui.SearchPanelView";
+    private static final String CLASS_SEARCH_PANEL_VIEW_CIRCLE = "com.android.systemui.SearchPanelCircleView";
     private static final int FLAG_EXCLUDE_SEARCH_PANEL = 1 << 0;
 
     private static void log(String message) {
@@ -49,6 +51,7 @@ public class ModSearchPanel {
     private static Context mContext;
     private static AppInfo mTargetAppInfo;
     private static BgStyle mTargetBgStyle;
+    private static boolean mNavbarLeftHanded;
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -69,6 +72,9 @@ public class ModSearchPanel {
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
+            mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
+                    prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LEFT_HANDED, false);
+
             XposedBridge.hookAllConstructors(XposedHelpers.findClass(CLASS_SEARCH_PANEL_VIEW, classLoader),
                     new XC_MethodHook() {
                 @Override
@@ -127,6 +133,25 @@ public class ModSearchPanel {
                     param.setResult(null);
                 }
             });
+
+            if (mNavbarLeftHanded) {
+                XposedHelpers.findAndHookMethod(CLASS_SEARCH_PANEL_VIEW_CIRCLE, classLoader,
+                        "updateCircleRect", Rect.class, float.class, boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (XposedHelpers.getBooleanField(param.thisObject, "mHorizontal")) {
+                            float circleSize = XposedHelpers.getFloatField(param.thisObject,
+                                    (boolean) param.args[2] ? "mCircleMinSize" : "mCircleSize");
+                            int baseMargin = XposedHelpers.getIntField(param.thisObject, "mBaseMargin");
+                            float offset = (float) param.args[1];
+                            int left = (int) (-(circleSize / 2) + baseMargin + offset);
+                            Rect rect = (Rect) param.args[0];
+                            rect.set(left, rect.top, (int) (left + circleSize), rect.bottom);
+                            if (DEBUG) log("SearchPanelCircleView rect: " + rect);
+                        }
+                    }
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
