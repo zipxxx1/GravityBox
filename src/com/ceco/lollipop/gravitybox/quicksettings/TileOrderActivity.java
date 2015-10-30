@@ -447,7 +447,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
                     tileInfo.secured ? getText(R.string.tile_hidden_secured) : "").toString();
                 if (tileInfo.lockedOnly) {
                     if (!txt.isEmpty()) txt += "; ";
-                    txt += getText(R.string.menu_tile_locked_only);
+                    txt += getText(R.string.tile_shown_locked_only);
                 }
                 info.setText(txt);
             } else {
