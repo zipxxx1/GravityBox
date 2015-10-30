@@ -405,7 +405,6 @@
                 android:defaultValue="false"
                 android:dependency="pref_qs_management_enable" />
 
-            <!--
             <ListPreference 
                 android:key="pref_auto_switch_qs2"
                 android:title="@string/pref_auto_switch_qs_title"
@@ -414,8 +413,7 @@
                 android:entryValues="@array/qs_auto_switch_values"
                 android:defaultValue="0"
                 android:dependency="pref_qs_management_enable" />
-            -->
-    
+
             <ListPreference
                 android:key="pref_quick_pulldown" 
                 android:title="@string/pref_quick_pulldown_title"

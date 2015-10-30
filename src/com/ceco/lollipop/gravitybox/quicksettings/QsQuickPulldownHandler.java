@@ -1,5 +1,7 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import java.util.List;
+
 import com.ceco.lollipop.gravitybox.BroadcastSubReceiver;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 
@@ -21,6 +23,10 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
     private static final int MODE_LEFT = 2;
     private static final int MODE_BOTH = 3;
 
+    private static final int MODE_AUTO_OFF = 0;
+    private static final int MODE_AUTO_NONE = 1;
+    private static final int MODE_AUTO_ONGOING = 2;
+
     private static final String CLASS_NOTIF_PANEL = 
             "com.android.systemui.statusbar.phone.NotificationPanelView";
 
@@ -31,7 +37,9 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
     private Context mContext;
     private XSharedPreferences mPrefs;
     private int mMode;
+    private int mModeAuto;
     private int mSizePercent;
+    private Object mNotificationData;
 
     public QsQuickPulldownHandler(Context context, XSharedPreferences prefs, 
             QsTileEventDistributor eventDistributor) {
@@ -48,7 +56,10 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
         mMode = Integer.valueOf(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_QUICK_PULLDOWN, "0"));
         mSizePercent = mPrefs.getInt(GravityBoxSettings.PREF_KEY_QUICK_PULLDOWN_SIZE, 15);
-        if (DEBUG) log("initPreferences: mode=" + mMode + "; size%=" + mSizePercent);
+        mModeAuto = Integer.valueOf(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, "0"));
+        if (DEBUG) log("initPreferences: mode=" + mMode + "; size%=" + mSizePercent +
+                "; modeAuto=" + mModeAuto);
     }
 
     @Override
@@ -61,6 +72,10 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QUICK_PULLDOWN_SIZE)) {
                 mSizePercent = intent.getIntExtra(GravityBoxSettings.EXTRA_QUICK_PULLDOWN_SIZE, 15);
                 if (DEBUG) log("onBroadcastReceived: size%=" + mSizePercent);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_AUTOSWITCH)) {
+                mModeAuto = intent.getIntExtra(GravityBoxSettings.EXTRA_QS_AUTOSWITCH, MODE_AUTO_OFF);
+                if (DEBUG) log("onBroadcastReceived: modeAuto=" + mModeAuto);
             }
         }
     }
@@ -83,7 +98,7 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final Object o = param.thisObject;
-                    if (mMode == MODE_OFF ||
+                    if ((mMode == MODE_OFF && mModeAuto == MODE_AUTO_OFF) ||
                         XposedHelpers.getBooleanField(o, "mBlockTouches") ||
                         XposedHelpers.getBooleanField(o, "mOnlyAffordanceInThisMotion") ||
                         XposedHelpers.getBooleanField(o, qsExpandFieldName) ||
@@ -115,11 +130,22 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
             return false;
         }
 
-        final int w = (int) XposedHelpers.callMethod(o, "getMeasuredWidth");
-        float region = (w * (mSizePercent/100f));
-        final boolean showQsOverride = mMode == MODE_RIGHT ? 
-                (x > w - region) : mMode == MODE_LEFT ? (x < region) :
-                    (x > w - region) || (x < region);
+        boolean showQsOverride = false;
+
+        // quick
+        if (mMode != MODE_OFF) {
+            final int w = (int) XposedHelpers.callMethod(o, "getMeasuredWidth");
+            float region = (w * (mSizePercent/100f));
+            showQsOverride |= (mMode == MODE_RIGHT) ? 
+                    (x > w - region) : (mMode == MODE_LEFT) ? (x < region) :
+                        (x > w - region) || (x < region);
+        }
+
+        // auto
+        if (mModeAuto != MODE_AUTO_OFF && !showQsOverride) {
+            showQsOverride |= (mModeAuto == MODE_AUTO_NONE) ?
+                    !hasNotifications(o) : !hasClearableNotifications(o);
+        }
 
         if (XposedHelpers.getBooleanField(o, "mQsExpanded")) {
             Object scv = XposedHelpers.getObjectField(o, "mScrollView");
@@ -127,6 +153,33 @@ public class QsQuickPulldownHandler implements BroadcastSubReceiver {
                     (boolean)XposedHelpers.callMethod(o, "isInQsArea", x, y);
         } else {
             return showQsOverride;
+        }
+    }
+
+    private boolean hasNotifications(Object o) {
+        try {
+            if (mNotificationData == null) {
+                mNotificationData = XposedHelpers.getObjectField(
+                        XposedHelpers.getObjectField(o, "mStatusBar"), "mNotificationData");
+            }
+            List<?> list = (List<?>)XposedHelpers.callMethod(mNotificationData, "getActiveNotifications");
+            return list.size() > 0;
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return true;
+        }
+    }
+
+    private boolean hasClearableNotifications(Object o) {
+        try {
+            if (mNotificationData == null) {
+                mNotificationData = XposedHelpers.getObjectField(
+                        XposedHelpers.getObjectField(o, "mStatusBar"), "mNotificationData");
+            }
+            return (boolean)XposedHelpers.callMethod(mNotificationData, "hasActiveClearableNotifications");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return true;
         }
     }
 }
