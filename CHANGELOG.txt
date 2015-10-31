@@ -1,3 +1,20 @@
+Changelog 5.3.2 - 31/10/2015
+--------------------------------------
+- QuickSettings management:
+--- Added per-tile popup-menu containing extended tile visibility options:
+------ show in lock screen / only in lock screen
+------ show in secured lock screen
+------ dual mode option moved to tile popup menu (for WiFi/BT/Cellular tiles)
+--- Revived Auto-switch feature based on notification existence (AKA smart pulldown)
+- Navbar tweaks:
+--- Implemented ring target customization
+------ only one ring target available due to LP's navbar ring limitations
+--- Fixed missing cursor control keys haptic feedback
+--- Fixed cursor control keys dismissing keyboard when reaching end of text
+- Lockscreen: added Direct unlock policy based on notification existence
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 5.3.1 - 25/10/2015
 --------------------------------------
 - Recents: fixed clear all button disappearing bug
