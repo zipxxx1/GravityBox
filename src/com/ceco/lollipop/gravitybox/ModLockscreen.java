@@ -68,6 +68,7 @@ public class ModLockscreen {
     private static final String CLASS_KG_SHOW_CB = "com.android.internal.policy.IKeyguardShowCallback";
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
     private static final String CLASS_ICC_STATE = "com.android.internal.telephony.IccCardConstants.State";
+    private static final String CLASS_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
@@ -497,18 +498,24 @@ public class ModLockscreen {
 
     private static boolean canTriggerDirectUnlock() {
         if (mDirectUnlock == DirectUnlock.OFF) return false;
+        if (mDirectUnlockPolicy == DirectUnlockPolicy.DEFAULT) return true;
 
         try {
-            Object notifData = XposedHelpers.getObjectField(mPhoneStatusBar, "mNotificationData");
-            if (mDirectUnlockPolicy == DirectUnlockPolicy.NOTIF_NONE) {
-                List<?> list = (List<?>)XposedHelpers.callMethod(notifData, "getActiveNotifications");
-                return (list.size() == 0);
-            } else if (mDirectUnlockPolicy == DirectUnlockPolicy.NOTIF_ONGOING) {
-                return !(boolean)XposedHelpers.callMethod(
-                            notifData, "hasActiveClearableNotifications");
-            } else {
-                return true;
+            ViewGroup stack = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStackScroller");
+            int childCount = stack.getChildCount();
+            int notifCount = 0;
+            int notifClearableCount = 0;
+            for (int i=0; i<childCount; i++) {
+                View v = stack.getChildAt(i);
+                if (!v.getClass().getName().equals(CLASS_NOTIF_ROW))
+                    continue;
+                notifCount++;
+                if ((boolean) XposedHelpers.callMethod(v, "isClearable")) {
+                    notifClearableCount++;
+                }
             }
+            return (mDirectUnlockPolicy == DirectUnlockPolicy.NOTIF_NONE) ?
+                    notifCount == 0 : notifClearableCount == 0;
         } catch (Throwable t) {
             XposedBridge.log(t);
             return true;
