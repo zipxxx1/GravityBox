@@ -1796,5 +1796,14 @@
 
     <!-- QS: tile options menu -->
     <string name="menu_tile_dual">Duální režim</string>
+    <string name="menu_tile_locked">Zobrazit během uzamčení</string>
+    <string name="menu_tile_locked_only">Pouze během uzamčení</string>
+    <string name="menu_tile_secured">Zobrazit během zabezpečení</string>
+    <string name="tile_hidden_locked">Nezobrazí se během uzamčení</string>
+    <string name="tile_hidden_secured">Nezobrazí se během zabezpečení</string>
+    <string name="tile_shown_locked_only">Zobrazí se pouze během uzamčení</string>
+
+    <!-- Lockscreen: Direct unlock policy -->
+    <string name="pref_lockscreen_direct_unlock_policy_title">Režim přímého odemknutí</string>
 
 </resources>
