@@ -1153,6 +1153,18 @@
         <item>SEE_THROUGH</item>
     </string-array>
 
+    <string-array name="direct_unlock_policy_entries" translatable="false">
+        <item>@string/state_default</item>
+        <item>@string/qs_auto_switch_mode1</item>
+        <item>@string/qs_auto_switch_mode2</item>
+    </string-array>
+
+    <string-array name="direct_unlock_policy_values" translatable="false">
+        <item>DEFAULT</item>
+        <item>NOTIF_NONE</item>
+        <item>NOTIF_ONGOING</item>
+    </string-array>
+
     <string-array name="temperature_unit_entries" translatable="false">
         <item>@string/celsius</item>
         <item>@string/fahrenheit</item>

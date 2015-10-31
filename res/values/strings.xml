@@ -1842,4 +1842,7 @@
     <string name="tile_hidden_secured">Hidden from secured lock screen</string>
     <string name="tile_shown_locked_only">Shows only in lock screen</string>
 
+    <!-- Lockscreen: Direct unlock policy -->
+    <string name="pref_lockscreen_direct_unlock_policy_title">Direct unlock policy</string>
+
 </resources>

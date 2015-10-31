@@ -243,6 +243,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_MENU_KEY = "pref_lockscreen_menu_key2";
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
     public static final String PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK = "pref_lockscreen_direct_unlock2";
+    public static final String PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY = "pref_lockscreen_direct_unlock_policy";
     public static final String PREF_KEY_LOCKSCREEN_SMART_UNLOCK = "pref_lockscreen_smart_unlock";
     public static final String PREF_KEY_LOCKSCREEN_D2TS = "pref_lockscreen_dt2s";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
@@ -907,6 +908,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY,
             PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
             PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK,
+            PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY,
             PREF_KEY_LOCKSCREEN_SMART_UNLOCK,
             PREF_KEY_LOCKSCREEN_D2TS,
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
@@ -2247,6 +2249,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_BATTERY_TILE_TEMP_UNIT)) {
                 mPrefBatteryTileTempUnit.setSummary(mPrefBatteryTileTempUnit.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK) ||
+                    key.equals(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY)) {
+                ListPreference du = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK);
+                ListPreference dup = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY);
+                dup.setEnabled(!"OFF".equals(du.getValue()));
+                dup.setSummary(dup.getEntry());
             }
 
             for (String caKey : customAppKeys) {
