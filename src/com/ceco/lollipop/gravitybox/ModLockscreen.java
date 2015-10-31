@@ -15,8 +15,6 @@
 
 package com.ceco.lollipop.gravitybox;
 
-import java.util.List;
-
 import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
@@ -507,7 +505,8 @@ public class ModLockscreen {
             int notifClearableCount = 0;
             for (int i=0; i<childCount; i++) {
                 View v = stack.getChildAt(i);
-                if (!v.getClass().getName().equals(CLASS_NOTIF_ROW))
+                if (v.getVisibility() != View.VISIBLE ||
+                        !v.getClass().getName().equals(CLASS_NOTIF_ROW))
                     continue;
                 notifCount++;
                 if ((boolean) XposedHelpers.callMethod(v, "isClearable")) {
