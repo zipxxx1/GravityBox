@@ -627,7 +627,7 @@
     <string name="pref_pie_color_reset_title">Сбросить цвета</string>
 
     <!-- Custom unknown caller photo -->
-    <string name="pref_caller_unknown_photo_enable_title">Изображ.на контакт без фото</string>
+    <string name="pref_caller_unknown_photo_enable_title">Изображ. на контакт без фото</string>
     <string name="pref_caller_unknown_photo_title">Задать изображение</string>
     <string name="caller_unknown_photo_result_successful">Изображение изменено</string>
     <string name="caller_unkown_photo_result_not_successful">Изображение не изменено</string>
@@ -888,7 +888,7 @@
     <string name="pref_cat_misc_other_title">Другие настройки</string>
 
     <!-- Disable fullscreen keyboard -->
-    <string name="pref_ime_fullscreen_disable_title">Без клавиатуры на полн.экр.</string>
+    <string name="pref_ime_fullscreen_disable_title">Откл клавиатуру на полн.экране</string>
 
     <!-- Torch auto-off -->
     <string name="pref_torch_auto_off_title">Автоотключение фонарика</string>
@@ -1206,7 +1206,7 @@
     <string name="pref_lc_led_time_off_title">Длит.откл индикации</string>
     <string name="pref_lc_ongoing_title">Текущие</string>
     <string name="pref_lc_ongoing_summary">Применимо также к текущим оповещениям, если включено</string>
-    <string name="lc_btn_preview">Предпросмотр</string>
+    <string name="lc_btn_preview">Просмотр</string>
     <string name="lc_btn_save">Сохранить</string>
     <string name="lc_item_summary_on">Вкл</string>
     <string name="lc_item_summary_off">Откл</string>
@@ -1782,7 +1782,7 @@
         при активности энергосбережения</string>
 
     <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Отключить восклицательные знаки</string>
+    <string name="pref_signal_cluster_dem_title">Отключить восклиц. знаки</string>
     <string name="pref_signal_cluster_dem_summary">Необходима перезагрузка</string>
 
     <!-- UNC: LED priority mode -->
@@ -1829,15 +1829,19 @@
     <string name="pref_signal_cluster_dnti_summary">Необходима перезагрузка</string>
 
     <!-- Signal cluster: Disable "No SIM" icon -->
-    <string name="pref_signal_cluster_nosim_title">Отключение значка \"Нет SIM\"</string>
+    <string name="pref_signal_cluster_nosim_title">Отключить значок \"Нет SIM\"</string>
     <string name="pref_signal_cluster_nosim_summary">Необходима перезагрузка</string>
 
     <!-- QS: tile options menu -->
     <string name="menu_tile_dual">Двойной режим</string>
-    <string name="menu_tile_locked">На заблок.экране</string>
-    <string name="menu_tile_locked_only">Только на заблок.экране</string>
-    <string name="menu_tile_secured">На защищ.экране</string>
-    <string name="tile_hidden_locked">Скрыть с экр.блокировки</string>
-    <string name="tile_hidden_secured">Скрыть с защищенного экрана</string>
+    <string name="menu_tile_locked">На экр. блокировки</string>
+    <string name="menu_tile_locked_only">Только на экр. блокировки</string>
+    <string name="menu_tile_secured">На защищ. экране блокировки</string>
+    <string name="tile_hidden_locked">Скрыто с экрана блокировки</string>
+    <string name="tile_hidden_secured">Скрыто с защищенного экрана</string>
+    <string name="tile_shown_locked_only">Отображается только на экране блокировки</string>
+
+    <!-- Lockscreen: Direct unlock policy -->
+    <string name="pref_lockscreen_direct_unlock_policy_title">Политика прямой разблокировки</string>
 
 </resources>
