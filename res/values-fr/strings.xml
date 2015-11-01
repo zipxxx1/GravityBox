@@ -1550,7 +1550,7 @@
     <string name="sb_download_progress_bottom">Bord inférieur</string>
 
     <!-- Status bar: disable notification ticker -->
-    <string name="pref_statusbar_ticker_policy_title">Décision pour le bandeau de notification</string>
+    <string name="pref_statusbar_ticker_policy_title">Principe du bandeau de notification</string>
     <string name="sb_ticker_policy_default">Par défaut</string>
     <string name="sb_ticker_policy_disabled">Toujours désactivé</string>
 
@@ -1735,7 +1735,7 @@
     <!-- UNC: Notification visibility -->
     <string name="pref_lc_notif_visibility_title">Visibilité</string>
     <string name="pref_lc_notif_visibility_summary">Spécifie la visibilité des notifications dans l\'écran de déverrouillage sécurisé. 
-        Valable lorsque la politique de verrouillage d\'écran \"Masquer les notifications au contenu sensible\" est active</string>
+        Valable lorsque la valeur de verrouillage d\'écran \"Masquer les notifications au contenu sensible\" est active</string>
     <string name="lc_notif_visibility_default">Par défaut</string>
     <string name="lc_notif_visibility_public">Afficher tout le contenu</string>
     <string name="lc_notif_visibility_private">Masquer le contenu sensible</string>
@@ -1759,7 +1759,7 @@
 
     <!-- Lockscreen Smart unlock -->
     <string name="pref_lockscreen_smart_unlock_title">Déverrouillage intelligent</string>
-    <string name="pref_lockscreen_smart_unlock_summary">Déverrouillage automatique lorsque la politique de verrouillage intelligent 
+    <string name="pref_lockscreen_smart_unlock_summary">Déverrouillage automatique lorsque le principe de verrouillage intelligent 
         détecte les conditions requises</string>
 
     <!--  WiFi trusted networks -->
@@ -1835,5 +1835,14 @@
 
     <!-- QS: tile options menu -->
     <string name="menu_tile_dual">Mode double</string>
+    <string name="menu_tile_locked">Afficher sur l\'écran de déverrouillage</string>
+    <string name="menu_tile_locked_only">Seulement sur l\'écran de déverrouillage</string>
+    <string name="menu_tile_secured">Afficher sur l\'écran de déverrouillage sécurisé</string>
+    <string name="tile_hidden_locked">Masqué de l\'écran de déverrouillage</string>
+    <string name="tile_hidden_secured">Masqué de l\'écran de déverrouillage sécurisé</string>
+    <string name="tile_shown_locked_only">Afficher seuleument sur l\'écran de déverrouillage</string>
+
+    <!-- Lockscreen: Direct unlock policy -->
+    <string name="pref_lockscreen_direct_unlock_policy_title">Principe de déverrouillage direct</string>
 
 </resources>
