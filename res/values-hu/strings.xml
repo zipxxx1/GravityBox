@@ -18,11 +18,11 @@
 
     <string name="app_name">GravityBox [LP]</string>
 
-    <string name="battery_style_title">Akkumulátor kijelző stílusa</string>  
-    <string name="battery_style_stock">Gyári akkumulátor kijelző</string>
-    <string name="battery_style_circle">Kör akkumulátor kijelző</string>
-    <string name="battery_style_circle_percent">Kör akkumulátor kijelző százalékkal</string>
-    <string name="battery_style_none">Semmilyen, nincs akkumulátor kijelzés</string>
+    <string name="battery_style_title">Akkumulátor állaptjelző stílusa</string>  
+    <string name="battery_style_stock">Gyári akkumulátor ikon</string>
+    <string name="battery_style_circle">Kör akkumulátor ikon</string>
+    <string name="battery_style_circle_percent">Kör akkumulátor ikon százalékkal</string>
+    <string name="battery_style_none">Semmilyen, nincs akkumulátor ikon</string>
 
     <string name="vol_music_controls_title">Hangerő gombok átugorják a számot</string>
     <string name="vol_music_controls_summary">Kikapcsolt képernyőnél a hangerő gombok hosszú megnyomásával átugorhatjuk az aktuális számot</string>
@@ -1659,8 +1659,8 @@
     <string name="battery_percent_text_size_default">Alapértelmezett</string>
 
     <!-- Notification ticker -->
-    <string name="pref_cat_statusbar_ticker_title">Értesítés betekintés</string>
-    <string name="pref_statusbar_ticker_master_switch_summary">Engedélyezi az értesítés betekintést (notification ticker) és a hozzá tartozó funkciókat (újraindítás szükséges)</string>
+    <string name="pref_cat_statusbar_ticker_title">Értesítés állapotsávi felirat</string>
+    <string name="pref_statusbar_ticker_master_switch_summary">Engedélyezi az értesítés szövegébe való állapotsávi betekintést (notification ticker) és a hozzá tartozó funkciókat (újraindítás szükséges)</string>
 
     <!-- Navigation bar: use larger icons -->
     <string name="pref_navbar_larger_icons_title">Nagyobb ikonok használata</string>
@@ -1791,7 +1791,24 @@
     <!-- MTK tiles: HotKnot -->
     <string name="qs_tile_hotknot">HotKnot</string>
 
+    <!-- MTK: disable network type indicators -->
+    <string name="pref_signal_cluster_dnti_title">Hálózat típusa jelzőikonok letiltása</string>
+    <string name="pref_signal_cluster_dnti_summary">Újraindítás szükséges</string>
+
+    <!-- Signal cluster: Disable "No SIM" icon -->
+    <string name="pref_signal_cluster_nosim_title">\"Nincs SIM kártya\" ikon letiltása</string>
+    <string name="pref_signal_cluster_nosim_summary">Újraindítás szükséges</string>
+    
     <!-- QS: tile options menu -->
     <string name="menu_tile_dual">Duál mód</string>
+    <string name="menu_tile_locked">Megjelenítés zárképernyőn</string>
+    <string name="menu_tile_locked_only">Csak zárképernyőn</string>
+    <string name="menu_tile_secured">Megjelenítés zárolt zárképernyőn</string>
+    <string name="tile_hidden_locked">Elrejtés zárképernyőnél</string>
+    <string name="tile_hidden_secured">Elrejtés zárolt zárképernyőnél</string>
+    <string name="tile_shown_locked_only">Megjelenítés csak zárképernyőn</string>
+    
+    <!-- Lockscreen: Direct unlock policy -->
+    <string name="pref_lockscreen_direct_unlock_policy_title">Direkt feloldási házirend</string>
 
 </resources>
