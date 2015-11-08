@@ -472,6 +472,7 @@ public class ModNavigationBar {
                     int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    setDpadKeyVisibility();
                     setCustomKeyVisibility();
                     setMenuKeyVisibility();
                 }
