@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,30 +15,20 @@
 
 package com.ceco.lollipop.gravitybox.webserviceclient;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.ceco.lollipop.gravitybox.R;
@@ -101,6 +91,7 @@ public class WebServiceClient<T extends WebServiceResult> extends AsyncTask<Requ
     protected T doInBackground(RequestParams... params) {
         T result = mListener.obtainWebServiceResultInstance();
         result.setAction(params[0].getAction());
+        HttpURLConnection con = null;
 
         if (mHash == null) {
             result.setStatus(WebServiceResult.ResultStatus.ERROR);
@@ -108,52 +99,64 @@ public class WebServiceClient<T extends WebServiceResult> extends AsyncTask<Requ
             return result;
         }
 
+        params[0].addParam("hash", mHash);
+        if (Build.SERIAL != null) {
+            params[0].addParam("serial", Build.SERIAL);
+        }
+
         try {
-            params[0].addParam("hash", mHash);
-            if (Build.SERIAL != null) {
-                params[0].addParam("serial", Build.SERIAL);
-            }
-            HttpParams httpParams = new BasicHttpParams();
-            HttpConnectionParams.setConnectionTimeout(httpParams, CONNECTION_TIMEOUT);
-            HttpConnectionParams.setSoTimeout(httpParams, SOCKET_TIMEOUT);
-
-            SchemeRegistry registry = new SchemeRegistry();
             URL url = new URL(params[0].getUrl());
-            int port = url.getPort();
-            registry.register(new Scheme("http", new PlainSocketFactory(), (port == -1) ? 80 : port));
+            con = (HttpURLConnection) url.openConnection();
+            con.setConnectTimeout(CONNECTION_TIMEOUT);
+            con.setReadTimeout(SOCKET_TIMEOUT);
+            con.setRequestMethod("POST");
+            con.setDoInput(true);
+            con.setDoOutput(true);
 
-            ThreadSafeClientConnManager cm = new ThreadSafeClientConnManager(httpParams, registry);
-            DefaultHttpClient httpClient = new DefaultHttpClient(cm, httpParams);
-
-            HttpPost httpPost = new HttpPost(params[0].getUrl());
-            httpPost.setEntity(new UrlEncodedFormEntity(params[0].getParams())); 
-            HttpResponse httpResponse = httpClient.execute(httpPost); 
-            HttpEntity httpEntity = httpResponse.getEntity(); 
-            String json = EntityUtils.toString(httpEntity, HTTP.UTF_8);
-            result.setData(new JSONObject(json));
-        } catch (UnsupportedEncodingException e) { 
-            result.setStatus(ResultStatus.ERROR);
-            result.setMessage(String.format(mContext.getString(R.string.wsc_error), e.getMessage()));
-            e.printStackTrace();
-        } catch (ClientProtocolException e) { 
-            result.setStatus(ResultStatus.ERROR);
-            result.setMessage(String.format(mContext.getString(R.string.wsc_error), e.getMessage()));
-            e.printStackTrace();
-        } catch (IOException e) { 
-            result.setStatus(ResultStatus.ERROR);
-            result.setMessage(String.format(mContext.getString(R.string.wsc_error), e.getMessage()));
-            e.printStackTrace();
-        } catch (JSONException e) {
-            result.setStatus(ResultStatus.ERROR);
-            result.setMessage(String.format(mContext.getString(R.string.wsc_error), e.getMessage()));
-            e.printStackTrace();
+            stringToStream(params[0].getEncodedQuery(), con.getOutputStream());
+            if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                result.setData(new JSONObject(streamToString(con.getInputStream())));
+            } else {
+                result.setStatus(ResultStatus.ERROR);
+                result.setMessage(String.format(mContext.getString(R.string.wsc_error),
+                        con.getResponseMessage()));
+            }
         } catch (Exception e) {
             result.setStatus(ResultStatus.ERROR);
             result.setMessage(String.format(mContext.getString(R.string.wsc_error), e.getMessage()));
             e.printStackTrace();
+        } finally {
+            if (con != null) con.disconnect();
         }
 
         return result;
+    }
+
+    private void stringToStream(String value, OutputStream os) throws IOException {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            writer.write(value);
+        } finally {
+            if (writer != null) writer.close();
+            if (os != null) os.close();
+        }
+    }
+
+    private String streamToString(InputStream is) throws IOException {
+        BufferedReader reader = null;
+        StringBuilder sb = new StringBuilder();
+        try {
+            reader = new BufferedReader(new InputStreamReader(is));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+        } finally {
+            if (reader != null) reader.close();
+            if (is != null) is.close();
+        }
+        return sb.toString();
     }
 
     @Override

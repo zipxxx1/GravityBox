@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,27 +15,26 @@
 
 package com.ceco.lollipop.gravitybox.webserviceclient;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.ceco.lollipop.gravitybox.R;
 
 import android.content.Context;
+import android.net.Uri;
 
 public class RequestParams {
 
     private Context mContext;
     private String mUrl;
     private String mAction;
-    private List<NameValuePair> mParams;
+    private Map<String,String> mParams;
 
     public RequestParams(Context context) {
         mContext = context;
         mUrl = mContext.getString(R.string.url_web_service);
-        mParams = new ArrayList<NameValuePair>();
+        mParams = new HashMap<>();
     }
 
     public String getUrl() {
@@ -48,14 +47,22 @@ public class RequestParams {
 
     public void setAction(String action) {
         mAction = action;
-        mParams.add(new BasicNameValuePair("action", mAction));
+        mParams.put("action", mAction);
     }
 
-    public List<NameValuePair> getParams() {
+    public Map<String,String> getParams() {
         return mParams;
     }
 
     public void addParam(String key, String value) {
-        mParams.add(new BasicNameValuePair(key, value));
+        mParams.put(key, value);
+    }
+
+    public String getEncodedQuery() {
+        Uri.Builder builder = new Uri.Builder();
+        for (Entry<String,String> param : mParams.entrySet()) {
+            builder.appendQueryParameter(param.getKey(), param.getValue());
+        }
+        return builder.build().getEncodedQuery();
     }
 }
