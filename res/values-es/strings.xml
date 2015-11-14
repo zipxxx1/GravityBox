@@ -1086,6 +1086,8 @@
     <string name="animation_scale7">Escala de animación 10x</string>
     <string name="animation_scale8">Escala de animación .75x</string>
     <string name="animation_scale9">Escala de animación 1.25x</string>
+    <string name="animation_scale10">Escala de animación .35x</string>
+    <string name="animation_scale11">Escala de animación .4x</string>
  
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Estilo de título de casilla</string>

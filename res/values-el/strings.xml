@@ -1076,6 +1076,8 @@
     <string name="animation_scale7">Κλίμακα κίνησης 10x</string>
     <string name="animation_scale8">Κλίμακα κίνησης .75x</string>
     <string name="animation_scale9">Κλίμακα κίνησης 1.25x</string>
+    <string name="animation_scale10">Κλίμακα κίνησης .35x</string>
+    <string name="animation_scale11">Κλίμακα κίνησης .4x</string>
 
     <string name="delete">Διαγραφή</string>
 

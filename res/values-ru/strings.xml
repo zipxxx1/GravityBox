@@ -1095,6 +1095,8 @@
     <string name="animation_scale7">Масштаб 10x</string>
     <string name="animation_scale8">Масштаб .75x</string>
     <string name="animation_scale9">Масштаб 1.25x</string>
+    <string name="animation_scale10">Масштаб .35x</string>
+    <string name="animation_scale11">Масштаб .4x</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Стиль ярлыков плиток</string>
