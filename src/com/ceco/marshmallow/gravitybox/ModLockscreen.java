@@ -63,7 +63,6 @@ public class ModLockscreen {
     private static final String CLASS_SB_WINDOW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
     private static final String CLASS_KG_VIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
     private static final String CLASS_UNLOCK_METHOD_CACHE = "com.android.systemui.statusbar.phone.UnlockMethodCache";
-    private static final String CLASS_KG_SHOW_CB = "com.android.internal.policy.IKeyguardShowCallback";
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
     private static final String CLASS_ICC_STATE = "com.android.internal.telephony.IccCardConstants.State";
     private static final String CLASS_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
@@ -370,7 +369,7 @@ public class ModLockscreen {
             });
 
             XposedHelpers.findAndHookMethod(CLASS_KG_VIEW_MANAGER, classLoader, "onScreenTurnedOn",
-                    CLASS_KG_SHOW_CB, new XC_MethodHook() {
+                    new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mIsScreenOn = true;

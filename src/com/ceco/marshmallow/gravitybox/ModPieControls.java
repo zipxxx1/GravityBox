@@ -373,12 +373,12 @@ public class ModPieControls {
             });
 
             XposedHelpers.findAndHookMethod(phoneStatusBarClass, "disable", 
-                    int.class, boolean.class, new XC_MethodHook() {
+                    int.class, int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mPieController == null) return;
 
-                    final int old = XposedHelpers.getIntField(param.thisObject, "mDisabled");
+                    final int old = XposedHelpers.getIntField(param.thisObject, "mDisabled1");
                     final int state = (Integer) param.args[0];
                     final int diff = state ^ old;
                     if ((diff & (STATUS_BAR_DISABLE_HOME

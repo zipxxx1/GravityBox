@@ -59,7 +59,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -78,6 +77,8 @@ public class ModStatusBar {
     private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
     public static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
+    private static final String CLASS_SBI_CTRL = "com.android.systemui.statusbar.phone.StatusBarIconController";
+    private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData$Entry";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
 
@@ -292,8 +293,10 @@ public class ModStatusBar {
                     mPhoneStatusBar, "mKeyguardStatusBar")).addView(mLayoutCenterKg);
             if (DEBUG) log("mLayoutCenterKg injected");
 
-            mIconArea = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mSystemIconArea");
-            mSbContents = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStatusBarContents");
+            Object icCtrl = XposedHelpers.getObjectField(mPhoneStatusBar, "mIconController");
+            mIconArea = (ViewGroup) XposedHelpers.getObjectField(icCtrl, "mSystemIconArea");
+            mSbContents = (ViewGroup) ((ViewGroup) mStatusBarView)
+                    .findViewById(res.getIdentifier("status_bar_contents", "id", PACKAGE_NAME));
 
             if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH, true)) {
                 // find statusbar clock
@@ -533,10 +536,7 @@ public class ModStatusBar {
             }
             final Class<?> statusBarWmClass = XposedHelpers.findClass(CLASS_STATUSBAR_WM, classLoader);
             final Class<?> notifPanelViewClass = XposedHelpers.findClass(CLASS_NOTIF_PANEL_VIEW, classLoader);
-
-            final Class<?>[] loadAnimParamArgs = new Class<?>[2];
-            loadAnimParamArgs[0] = int.class;
-            loadAnimParamArgs[1] = Animation.AnimationListener.class;
+            final Class<?> sbiCtrlClass = XposedHelpers.findClass(CLASS_SBI_CTRL, classLoader);
 
             mAlarmHide = prefs.getBoolean(GravityBoxSettings.PREF_KEY_ALARM_ICON_HIDE, false);
             mClockLink = prefs.getString(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_LINK, null);
@@ -639,7 +639,7 @@ public class ModStatusBar {
             });
 
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_CLOCK_MASTER_SWITCH, true)) {
-                XposedHelpers.findAndHookMethod(phoneStatusBarClass, "showClock", boolean.class, new XC_MethodHook() {
+                XposedHelpers.findAndHookMethod(sbiCtrlClass, "setClockVisibility", boolean.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         if (mClock != null) {
@@ -681,7 +681,7 @@ public class ModStatusBar {
             });
 
             XposedHelpers.findAndHookMethod(phoneStatusBarClass, "addNotification", 
-                    StatusBarNotification.class, RankingMap.class, new XC_MethodHook() {
+                    StatusBarNotification.class, RankingMap.class, CLASS_NOTIF_DATA_ENTRY, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final StatusBarNotification notif = (StatusBarNotification) param.args[0];

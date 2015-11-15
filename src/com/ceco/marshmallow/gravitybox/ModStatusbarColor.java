@@ -167,7 +167,8 @@ public class ModStatusbarColor {
     private static void updateStatusIcons(String statusIcons) {
         if (mPhoneStatusBar == null) return;
         try {
-            ViewGroup vg = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, statusIcons);
+            Object icCtrl = XposedHelpers.getObjectField(mPhoneStatusBar, "mIconController");
+            ViewGroup vg = (ViewGroup) XposedHelpers.getObjectField(icCtrl, statusIcons);
             final int childCount = vg.getChildCount();
             for (int i = 0; i < childCount; i++) {
                 if (!vg.getChildAt(i).getClass().getName().equals(CLASS_STATUSBAR_ICON_VIEW)) {
