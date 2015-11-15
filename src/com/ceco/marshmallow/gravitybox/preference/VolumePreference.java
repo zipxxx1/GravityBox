@@ -266,8 +266,9 @@ public class VolumePreference extends SeekBarDialogPreference implements View.On
             mOriginalStreamVolume = mAudioManager.getStreamVolume(mStreamType);
             seekBar.setProgress(mOriginalStreamVolume);
             seekBar.setOnSeekBarChangeListener(this);
+            // TODO: removed in MM, find different approach
             mContext.getContentResolver().registerContentObserver(
-                    System.getUriFor(System.VOLUME_SETTINGS[mStreamType]),
+                    System.getUriFor("volume_ring"),
                     false, mVolumeObserver);
             if (defaultUri == null) {
                 if (mStreamType == AudioManager.STREAM_RING) {
