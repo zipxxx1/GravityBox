@@ -354,17 +354,6 @@ public class ModClearAllRecents {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_RECENT_ACTIVITY, classLoader,
-                    "addSearchBarAppWidgetView", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mSearchBarState != SearchBarState.DEFAULT) {
-                        if (DEBUG) log("addSearchBarAppWidgetView ignored");
-                        param.setResult(null);
-                    }
-                }
-            });
-
             XposedHelpers.findAndHookMethod(CLASS_RECENT_VIEW, classLoader, "startExitToHomeAnimation",
                     CLASS_TASK_VIEW_EXIT_CONTEXT, new XC_MethodHook() {
                 @Override
