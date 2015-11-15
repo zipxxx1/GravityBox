@@ -1428,9 +1428,6 @@
     <string name="pref_lc_qh_interactive_summary">Always keeps notifications quiet during user interaction 
         (respecting per app ignore rules)</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">Enable screenshot delete</string>
-
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Heads up mode</string>
     <string name="lc_heads_up_default">Default</string>

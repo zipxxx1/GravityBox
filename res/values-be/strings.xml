@@ -1424,9 +1424,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="pref_lc_qh_interactive_summary">Ціхая гадзіна заўсёды ўжываецца да паведамленняў падчас дзеянняў карыстальніка 
 (з выкананнем налад ігнаравання па дадатках)</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">уключана выдаленне здымка экрана</string>
-
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Рэжым "Усплывання" (Heads up)</string>
     <string name="lc_heads_up_default">Па змаўчанні</string>

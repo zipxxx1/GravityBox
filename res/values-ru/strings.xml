@@ -1427,9 +1427,6 @@
     <string name="pref_lc_qh_interactive_summary">Тихий час всегда применяется к уведомлениям во время действий пользователя 
         (с соблюдением настроек игнорирования по приложениям)</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">Вкл удаление снимка экрана</string>
-
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Режим Всплытие (Heads up)</string>
     <string name="lc_heads_up_default">По умолчанию</string>

@@ -1389,9 +1389,6 @@
     <string name="pref_lc_qh_interactive_title">Interaktivní režim</string>
     <string name="pref_lc_qh_interactive_summary">Vždy ztlumí oznámení během interakce uživatele se zařízením</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">Povolit vymazání screenshot</string>
-
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Heads up režim</string>
     <string name="lc_heads_up_default">Výchozí</string>

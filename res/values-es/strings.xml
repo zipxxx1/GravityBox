@@ -1409,9 +1409,6 @@
     <string name="pref_lc_qh_interactive_title">Modo interactivo</string>
     <string name="pref_lc_qh_interactive_summary">Siempre silencia las notificaciones durante la interacción del usuario (respetando las reglas de cada app para evitarlo)</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">Habilitar borrar captura de pantalla</string>
-    
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Modo Heads up</string>
     <string name="lc_heads_up_default">Predeterminado</string>

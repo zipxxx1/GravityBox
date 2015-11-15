@@ -20,7 +20,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.TrafficMeterAbstract.TrafficMeterMode;
 import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 import com.ceco.marshmallow.gravitybox.quicksettings.QsQuickPulldownHandler;
@@ -34,8 +33,6 @@ import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResou
 import android.app.ActivityOptions;
 import android.app.AlarmManager;
 import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -44,11 +41,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.content.res.XModuleResources;
-import android.content.res.XResources;
 import android.database.ContentObserver;
 import android.graphics.Paint;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
@@ -81,7 +75,6 @@ public class ModStatusBar {
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
     private static final String CLASS_ICON_MERGER = "com.android.systemui.statusbar.phone.IconMerger";
-    private static final String CLASS_SAVE_IMG_TASK = "com.android.systemui.screenshot.SaveImageInBackgroundTask";
     private static final String CLASS_STATUSBAR_WM = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
     private static final String CLASS_PANEL_VIEW = "com.android.systemui.statusbar.phone.PanelView";
     public static final String CLASS_NOTIF_PANEL_VIEW = "com.android.systemui.statusbar.phone.NotificationPanelView";
@@ -98,11 +91,6 @@ public class ModStatusBar {
 
     public static final String ACTION_START_SEARCH_ASSIST = "gravitybox.intent.action.START_SEARCH_ASSIST";
 
-    private static final String ACTION_DELETE_SCREENSHOT = "com.android.systemui.DELETE_SCREENSHOT";
-    private static final String SCREENSHOT_URI = "com.android.systemui.SCREENSHOT_URI";
-    private static final int SCREENSHOT_NOTIFICATION_ID = 789;
-
-    private static enum TickerPolicy { DEFAULT, DISABLED };
     public static enum ContainerType { STATUSBAR, HEADER, KEYGUARD };
 
     public static class StatusBarState {
@@ -140,7 +128,6 @@ public class ModStatusBar {
     private static String mClockLongpressLink;
     private static XSharedPreferences mPrefs;
     private static ProgressBarController mProgressBarCtrl;
-    private static int mDeleteIconId;
     private static int mStatusBarState;
     private static boolean mBatterySaverIndicationDisabled;
     private static boolean mDisablePeek;
@@ -238,14 +225,6 @@ public class ModStatusBar {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL)) {
                 mNotifExpandAll = intent.getBooleanExtra(GravityBoxSettings.EXTRA_NOTIF_EXPAND_ALL, false);
-            } else if (intent.getAction().equals(ACTION_DELETE_SCREENSHOT)) {
-                Uri screenshotUri = Uri.parse(intent.getStringExtra(SCREENSHOT_URI));
-                if (screenshotUri != null) {
-                    mContext.getContentResolver().delete(screenshotUri, null, null);
-                }
-                NotificationManager notificationManager =
-                        (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.cancel(SCREENSHOT_NOTIFICATION_ID);
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE)) {
                     mBatterySaverIndicationDisabled = intent.getBooleanExtra(
@@ -288,14 +267,6 @@ public class ModStatusBar {
     public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
         try {
             StatusbarSignalCluster.initResources(prefs, resparam);
-
-            mDeleteIconId = android.R.drawable.ic_delete;
-            if (XposedBridge.XPOSED_BRIDGE_VERSION >= 64) {
-                XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
-                mDeleteIconId = XResources.getFakeResId(modRes, R.drawable.ic_menu_delete);
-                resparam.res.setReplacement(mDeleteIconId, modRes.fwd(R.drawable.ic_menu_delete));
-            }
-
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -654,7 +625,6 @@ public class ModStatusBar {
                     intentFilter.addAction(ACTION_START_SEARCH_ASSIST);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BT_VISIBILITY_CHANGED);
-                    intentFilter.addAction(ACTION_DELETE_SCREENSHOT);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_BAR_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED);
@@ -945,40 +915,6 @@ public class ModStatusBar {
 
             // Status bar Bluetooth icon policy
             mBroadcastSubReceivers.add(new StatusbarBluetoothIcon(classLoader, prefs));
-
-            // Delete action for screenshot notification
-            try {
-                XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_SAVE_IMG_TASK, classLoader),
-                        "doInBackground", new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Object result = param.getResult();
-                        if (result == null || (Integer) XposedHelpers.getIntField(result, "result") != 0)
-                            return;
-
-                        Notification.Builder builder = (Notification.Builder)
-                                XposedHelpers.getObjectField(param.thisObject, "mNotificationBuilder");
-                        if (XposedHelpers.getAdditionalInstanceField(builder, "gbDeleteActionAdded") != null)
-                            return;
-
-                        prefs.reload();
-                        if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_SCREENSHOT_DELETE, false))
-                            return;
-
-                        Uri uri = (Uri) XposedHelpers.getObjectField(result, "imageUri");
-                        Intent deleteIntent = new Intent(ACTION_DELETE_SCREENSHOT);
-                        deleteIntent.putExtra(SCREENSHOT_URI, uri.toString());
-                        Context context = (Context) XposedHelpers.getObjectField(result, "context");
-                        builder.addAction(mDeleteIconId, Utils.getGbContext(context).getString(R.string.delete),
-                                PendingIntent.getBroadcast(context, 0, deleteIntent,
-                                        PendingIntent.FLAG_CANCEL_CURRENT));
-
-                        XposedHelpers.setAdditionalInstanceField(builder, "gbDeleteActionAdded", true);
-                    }
-                });
-            } catch (Throwable t) {
-                XposedBridge.log(t);
-            }
 
             // status bar state change handling
             try {

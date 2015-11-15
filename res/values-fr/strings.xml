@@ -1428,9 +1428,6 @@
     <string name="pref_lc_qh_interactive_summary">Les notifications resteront silencieuses durant une interaction de l\'utilisateur 
         (en respectant les règles d\'exclusion par application)</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">Activer la suppression de capture d\'écran</string>
-
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Notifications flottantes</string>
     <string name="lc_heads_up_default">Par défaut</string>

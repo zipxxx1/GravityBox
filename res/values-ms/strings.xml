@@ -1423,9 +1423,6 @@
     <string name="pref_lc_qh_interactive_summary">Sentiasa pastikan notifikasi dalam keadaan senyap 
         (hormati aplikasi tertentu)</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">Aktifkan butang padam screenshot</string>
-
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Mod Heads up</string>
     <string name="lc_heads_up_default">Asal</string>

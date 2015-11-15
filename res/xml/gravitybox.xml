@@ -2309,11 +2309,6 @@
                 android:summary="@string/pref_force_ltr_direction_summary"
                 android:defaultValue="false" />
 
-            <CheckBoxPreference
-                android:key="pref_screenshot_delete"
-                android:title="@string/pref_screenshot_delete_title"
-                android:defaultValue="false" />
-
         </PreferenceCategory>
 
     </PreferenceScreen>

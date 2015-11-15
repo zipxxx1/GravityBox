@@ -708,7 +708,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_TORCH_AUTO_OFF = "pref_torch_auto_off";
     public static final String PREF_KEY_FORCE_OVERFLOW_MENU_BUTTON = "pref_force_overflow_menu_button2";
     public static final String PREF_KEY_FORCE_LTR_DIRECTION = "pref_force_ltr_direction";
-    public static final String PREF_KEY_SCREENSHOT_DELETE = "pref_screenshot_delete";
 
     public static final String PREF_CAT_KEY_MISC_OTHER = "pref_cat_misc_other";
     public static final String PREF_KEY_PULSE_NOTIFICATION_DELAY = "pref_pulse_notification_delay2";

@@ -1398,9 +1398,6 @@
     <string name="pref_lc_qh_interactive_summary">除非個別應用程式忽略勿擾模式設定，
 	否則當使用時永遠靜音</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">在完成截取螢幕截圖後的通知顯示刪除按鈕</string>
-
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">浮動通知</string>
     <string name="lc_heads_up_default">系統預設</string>

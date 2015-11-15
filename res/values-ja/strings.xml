@@ -1168,8 +1168,6 @@
     <string name="pref_lc_qh_interactive_title">操作時に静かにさせる</string>
     <string name="pref_lc_qh_interactive_summary">操作時は常に通知を静かにさせるようにします。
         (アプリ別設定を優先します)</string>
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">スクリーンショットの通知に削除ボタンを追加</string>
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Heads upモード</string>
     <string name="lc_heads_up_default">デフォルト</string>

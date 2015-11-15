@@ -1383,9 +1383,6 @@
     <string name="pref_lc_qh_interactive_summary">Zawsze wyciszaj powiadomienia podczas interakcji użytkownika 
         (respektując zasady ignorowania dla danej aplikacji)</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">Włącz usuwanie zrzutu ekranu</string>
-
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Tryb Heads up</string>
     <string name="lc_heads_up_default">Domyślny</string>

@@ -1136,8 +1136,6 @@
     <string name="pref_lc_qh_interactive_summary">알림이 사용자와 상호작용해도 알림 유지  
         (개별 앱 설정 무시 규칙을 따름)</string>
 
-    <string name="pref_screenshot_delete_title">스크린샷 삭제 버튼 활성화</string>
-
     <string name="pref_lc_headsup_mode_title">헤드업 모드</string>
     <string name="lc_heads_up_default">기본 설정</string>
     <string name="lc_heads_up_always">항상</string>

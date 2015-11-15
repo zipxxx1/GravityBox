@@ -1387,9 +1387,6 @@
     <string name="pref_lc_qh_interactive_summary">Manter sempre notificações silenciosas durante interação com o usuário 
         (respeitando o modo ignorar definido por aplicativo)</string>
 
-    <!-- Screenshot delete -->
-    <string name="pref_screenshot_delete_title">Ativar opção de apagar captura da tela</string>
-
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Modo Heads up</string>
     <string name="lc_heads_up_default">Predefinido</string>
