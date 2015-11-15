@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [LP]</string>
+    <string name="app_name">GravityBox [MM]</string>
 
     <string name="battery_style_title">Štýl indikátora batérie</string>	
     <string name="battery_style_stock">Základný</string>
@@ -637,7 +637,7 @@
     <string name="pref_status_icon_style_title">Štýl stavových ikon</string>
     <string name="pref_status_icon_style_summary">Platí pre stavové ikony ako ikona vypnutého zvonenia, vibrovania, budíka, atď.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Lollipop</string>
+    <string name="icon_style_kk">Marshmallow</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Dvojité ťuknutie na Späť</string>
@@ -706,7 +706,7 @@
 
     <!-- Launcher tweaks -->
     <string name="pref_cat_launcher_tweaks_title">Nastavenia spúšťača</string>
-    <string name="pref_cat_launcher_tweaks_summary">Vzťahuje sa na štandardný KitKat spúšťač alebo Google Now spúšťač</string>
+    <string name="pref_cat_launcher_tweaks_summary">Vzťahuje sa na štandardný Android spúšťač alebo Google Now spúšťač</string>
     <string name="pref_cat_launcher_desktop_grid_title">Mriežka plochy</string>
     <string name="pref_launcher_desktop_grid_info_title">Použitie iných ako východzích hodnôt môže spôsobiť narušenie vzhľadu miniaplikácií. Zmeny vyžadujú reštart spúšťača.</string>
     <string name="pref_launcher_desktop_grid_rows_title">Počet riadkov</string>
@@ -1670,7 +1670,7 @@
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">POZOR</string>
-    <string name="gb_new_package_dialog_message_lollipop">Bola nájdená predošlá verzia GravityBox pre KitKat. 
+    <string name="gb_new_package_dialog_message">Bola nájdená predošlá verzia GravityBox pre Lollipop. 
         Pred použitím novej verzie, je potrebné odinštalovať predošlú verziu. Slačte OK pre spustenie procesu odinštalácie. 
         Po odinštalovaní, aktivujte novú verziu v Xposed inštalátore a reštartuje zariadenie.</string>
 

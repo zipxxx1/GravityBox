@@ -529,7 +529,7 @@
     <string name="pref_status_icon_style_title">상단바 아이콘 스타일</string>
     <string name="pref_status_icon_style_summary">상단바의 주요 아이콘들의 스타일을 바꿉니다.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Lollipop</string>
+    <string name="icon_style_kk">Marshmallow</string>
 
     <string name="hwkey_back_doubletap_dialog_title">뒤로 가기 키 두 번 터치 액션</string>
 
@@ -918,7 +918,7 @@
     <string name="pref_volume_adjust_vibrate_mute_summary">알림 / 벨소리를 조절할 때 피드백되는 진동을 비활성화 합니다.</string>
 
     <string name="pref_screenrecord_use_stock_title">순정 바이너리 사용</string>
-    <string name="pref_screenrecord_use_stock_summary">활성화하면, 화면 녹화 시 Lollipop 순정 바이너리를 사용하여 녹화합니다.  
+    <string name="pref_screenrecord_use_stock_summary">활성화하면, 화면 녹화 시 Marshmallow 순정 바이너리를 사용하여 녹화합니다.  
         대체 바이너리가 문제를 일으킬 때 사용하세요. 순정 바이너리는 오디오를 녹화할 수 없고, 3분 이상 녹화가 불가능합니다.</string>
 
     <string name="pref_sb_clock_masterswitch_summary">상단바 시계 설정 활성화 여부 (재시작 필요)</string>
@@ -1347,7 +1347,7 @@
     <string name="recents_searchbar_hide_remove_space">숨기고 공간 제거</string>
 
     <string name="gb_new_package_dialog_title">주의 !!</string>
-    <string name="gb_new_package_dialog_message_lollipop">KitKat용 GravityBox가 설치되어 있는 것 같습니다.
+    <string name="gb_new_package_dialog_message">Lollipop용 GravityBox가 설치되어 있는 것 같습니다.
         새 버전을 사용하기 위해서는 구 버전을 지우셔야 합니다. 확인을 누르면 구 버전의 GravityBox를 지웁니다.
         제거 후, Xposed 설치기에서 새 모듈을 활성화하고 즉시 재시작해 주세요.</string>
 

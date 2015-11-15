@@ -16,7 +16,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [LP]</string>
+    <string name="app_name">GravityBox [MM]</string>
 
     <string name="battery_style_title">Стиль батареи</string>
     <string name="battery_style_stock">Стоковая батарея</string>
@@ -666,7 +666,7 @@
     <string name="pref_status_icon_style_title">Стиль значков стр.состояния</string>
     <string name="pref_status_icon_style_summary">Применяется ко всем значкам строки состояния: беззвучный, вибрация, будильник и т.д.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Lollipop</string>
+    <string name="icon_style_kk">Marshmallow</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Двойное нажатие Назад</string>
@@ -1702,7 +1702,7 @@
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ВНИМАНИЕ</string>
-    <string name="gb_new_package_dialog_message_lollipop">Обнаружен установленный GravityBox для KitKat. 
+    <string name="gb_new_package_dialog_message">Обнаружен установленный GravityBox для Lollipop. 
         Перед использованием новой версии необходимо удалить старую. Нажмите OK для запуска процесса удаления.
         После удаления не забудьте активировать новый модуль в Xposed Installer и СРАЗУ ЖЕ ПЕРЕЗАГРУЗИТЬСЯ.</string>
 

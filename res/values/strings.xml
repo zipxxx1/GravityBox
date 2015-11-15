@@ -16,7 +16,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [LP]</string>
+    <string name="app_name">GravityBox [MM]</string>
 
     <string name="battery_style_title">Battery indicator style</string>	
     <string name="battery_style_stock">Stock battery indicator</string>
@@ -666,7 +666,7 @@
     <string name="pref_status_icon_style_title">Status icon style</string>
     <string name="pref_status_icon_style_summary">Applies to status icons like silent, vibrate, alarm, etc.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Lollipop</string>
+    <string name="icon_style_kk">Marshmallow</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Back key double-tap action</string>
@@ -1703,7 +1703,7 @@
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATTENTION</string>
-    <string name="gb_new_package_dialog_message_lollipop">GravityBox for KitKat found installed. 
+    <string name="gb_new_package_dialog_message">GravityBox for Lollipop found installed. 
         Before new version can be used, old one has to be uninstalled. Press OK to start uninstallation process.
         After uninstallation, do not forget to activate new module in Xposed Installer and REBOOT IMMEDIATELLY.</string>
 

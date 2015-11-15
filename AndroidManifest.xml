@@ -15,7 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ceco.lollipop.gravitybox"
+    package="com.ceco.marshmallow.gravitybox"
     android:versionCode="532"
     android:versionName="5.3.2" >
 
@@ -44,14 +44,14 @@
         android:protectionLevel="signature" />
 
     <application
-        android:name="com.ceco.lollipop.gravitybox.GravityBoxApplication"
+        android:name="com.ceco.marshmallow.gravitybox.GravityBoxApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:supportsRtl="true" >
         <activity
-            android:name="com.ceco.lollipop.gravitybox.GravityBoxSettings"
+            android:name="com.ceco.marshmallow.gravitybox.GravityBoxSettings"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,10 +60,10 @@
         </activity>
 
         <activity-alias
-            android:name="com.ceco.lollipop.gravitybox.GravityBoxSettingsAlias"
+            android:name="com.ceco.marshmallow.gravitybox.GravityBoxSettingsAlias"
             android:label="@string/app_name"
             android:enabled="true"
-            android:targetActivity="com.ceco.lollipop.gravitybox.GravityBoxSettings" >
+            android:targetActivity="com.ceco.marshmallow.gravitybox.GravityBoxSettings" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -71,12 +71,12 @@
         </activity-alias>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.quicksettings.TileOrderActivity"
+            android:name="com.ceco.marshmallow.gravitybox.quicksettings.TileOrderActivity"
             android:label="@string/quick_settings_title" >
         </activity>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity"
+            android:name="com.ceco.marshmallow.gravitybox.shortcuts.ShortcutActivity"
             android:label="@string/shortcut_activity_title"
             android:launchMode="singleTop"
             android:excludeFromRecents="true"
@@ -88,7 +88,7 @@
         </activity>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.shortcuts.LaunchActivity"
+            android:name="com.ceco.marshmallow.gravitybox.shortcuts.LaunchActivity"
             android:label="@string/shortcut_activity_title"
             android:launchMode="singleTop"
             android:excludeFromRecents="true"
@@ -101,31 +101,31 @@
         </activity>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.ledcontrol.LedMainActivity"
+            android:name="com.ceco.marshmallow.gravitybox.ledcontrol.LedMainActivity"
             android:label="@string/pref_led_control_title" >
         </activity>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.ledcontrol.LedControlActivity"
+            android:name="com.ceco.marshmallow.gravitybox.ledcontrol.LedControlActivity"
             android:label="@string/pref_unc_perapp_settings_title" >
         </activity>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.ledcontrol.LedSettingsActivity" >
+            android:name="com.ceco.marshmallow.gravitybox.ledcontrol.LedSettingsActivity" >
         </activity>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.ledcontrol.ActiveScreenActivity"
+            android:name="com.ceco.marshmallow.gravitybox.ledcontrol.ActiveScreenActivity"
             android:label="@string/lc_active_screen" >
         </activity>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity"
+            android:name="com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity"
             android:label="@string/lc_quiet_hours" >
         </activity>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.UnlockActivity"
+            android:name="com.ceco.marshmallow.gravitybox.UnlockActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false"
             android:noHistory="true"
@@ -135,18 +135,18 @@
         </activity>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.PickImageActivity"
+            android:name="com.ceco.marshmallow.gravitybox.PickImageActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false"
             android:excludeFromRecents="true">
         </activity>
 
         <activity
-            android:name="com.ceco.lollipop.gravitybox.WifiPriorityActivity"
+            android:name="com.ceco.marshmallow.gravitybox.WifiPriorityActivity"
             android:label="@string/pref_wifi_priority_title" >
         </activity>
 
-        <service android:name="com.ceco.lollipop.gravitybox.GravityBoxService">
+        <service android:name="com.ceco.marshmallow.gravitybox.GravityBoxService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.TOGGLE_SYNC" />
                 <action android:name="gravitybox.intent.action.GET_SYNC_STATUS" />
@@ -154,29 +154,29 @@
             </intent-filter>
         </service>
 
-        <service android:name="com.ceco.lollipop.gravitybox.TorchService">
+        <service android:name="com.ceco.marshmallow.gravitybox.TorchService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.TOGGLE_TORCH" />
             </intent-filter>
         </service>
 
-        <service android:name="com.ceco.lollipop.gravitybox.RecordingService">
+        <service android:name="com.ceco.marshmallow.gravitybox.RecordingService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.RECORDING_START" />
                 <action android:name="gravitybox.intent.action.RECORDING_STOP" />
             </intent-filter>
         </service>
 
-        <service android:name="com.ceco.lollipop.gravitybox.ScreenRecordingService">
+        <service android:name="com.ceco.marshmallow.gravitybox.ScreenRecordingService">
             <intent-filter>
                 <action android:name="gravitybox.intent.action.TOGGLE_SCREEN_RECORDING" />
             </intent-filter>
         </service>
 
-        <service android:name="com.ceco.lollipop.gravitybox.KeyguardImageService" />
+        <service android:name="com.ceco.marshmallow.gravitybox.KeyguardImageService" />
 
         <receiver 
-            android:name="com.ceco.lollipop.gravitybox.BootCompletedReceiver"
+            android:name="com.ceco.marshmallow.gravitybox.BootCompletedReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -185,7 +185,7 @@
         </receiver>
 
         <receiver 
-            android:name="com.ceco.lollipop.gravitybox.UnlockActivity$UnlockReceiver"
+            android:name="com.ceco.marshmallow.gravitybox.UnlockActivity$UnlockReceiver"
             android:enabled="true"
             android:exported="true"
             android:permission="gravitybox.permission.UNLOCK">
@@ -195,7 +195,7 @@
         </receiver>
 
         <receiver 
-            android:name="com.ceco.lollipop.gravitybox.UnlockActivity$PkgManagerReceiver"
+            android:name="com.ceco.marshmallow.gravitybox.UnlockActivity$PkgManagerReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -210,7 +210,7 @@
             android:value="true" />
         <meta-data
             android:name="xposedminversion"
-            android:value="42+" />
+            android:value="77+" />
         <meta-data
             android:name="xposeddescription"
             android:value="GravityBox by C3C076@XDA" />

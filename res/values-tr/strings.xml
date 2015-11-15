@@ -16,7 +16,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [LP]</string>
+    <string name="app_name">GravityBox [MM]</string>
 
     <string name="battery_style_title">Pil göstergesi stili</string>
     <string name="battery_style_stock">Stok pil göstergesi</string>
@@ -620,7 +620,7 @@
     <string name="pref_status_icon_style_title">Durum çubuğu ikonları stili</string>
     <string name="pref_status_icon_style_summary">Sessiz, titreşim, alarm gibi durum simgelerine uygulanır.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Lollipop</string>
+    <string name="icon_style_kk">Marshmallow</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Geri tuşu iki kez basma hareketi</string>

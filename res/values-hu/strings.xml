@@ -16,7 +16,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [LP]</string>
+    <string name="app_name">GravityBox [MM]</string>
 
     <string name="battery_style_title">Akkumulátor állaptjelző stílusa</string>  
     <string name="battery_style_stock">Gyári akkumulátor ikon</string>
@@ -667,7 +667,7 @@
     <string name="pref_status_icon_style_title">Állapot ikon stílus</string>
     <string name="pref_status_icon_style_summary">Állapot ikonokra vonatkozik, mint néma, rezgés, ébresztés, stb.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Lollipop</string>
+    <string name="icon_style_kk">Marshmallow</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Vissza gomb dupla érintés művelete</string>
@@ -1678,7 +1678,7 @@
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">FIGYELEM</string>
-    <string name="gb_new_package_dialog_message_lollipop">GravityBox KitKat verzió van telepítve. Az új verzió használata előtt a régi verziót el kell távolítani. Az eltávolítási folyamat megkezdéséhez nyomd meg az OK gombot. Az eltávolítás után ne felejtsd el aktiválni az új modult az Xposed Telepítőben, majd RÖGTÖN INDÍTSD ÚJRA a készüléked.</string>
+    <string name="gb_new_package_dialog_message">GravityBox Lollipop verzió van telepítve. Az új verzió használata előtt a régi verziót el kell távolítani. Az eltávolítási folyamat megkezdéséhez nyomd meg az OK gombot. Az eltávolítás után ne felejtsd el aktiválni az új modult az Xposed Telepítőben, majd RÖGTÖN INDÍTSD ÚJRA a készüléked.</string>
 
     <!-- Restore settings: warn if old backup exists -->
     <string name="settings_restore_backup_obsolete">Korábbi verziójú Android rendszerben történt mentés nem állítható vissza az operációs rendszerbeli különbségek miatt. Nagyon ajánlott a Gravitybox teljes körű újrakonfigurálása.</string>

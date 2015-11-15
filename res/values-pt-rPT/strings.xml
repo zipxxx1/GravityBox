@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [LP]</string>
+    <string name="app_name">GravityBox [MM]</string>
 
     <string name="battery_style_title">Estilo do indicador de bateria</string>
     <string name="battery_style_stock">Indicador de bateria padrão</string>
@@ -646,7 +646,7 @@
     <string name="pref_status_icon_style_title">Estilo dos indicadores</string>
     <string name="pref_status_icon_style_summary">Aplicável aos indicadores de silêncio, vibração, alarme, etc.</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Lollipop</string>
+    <string name="icon_style_kk">Marshmallow</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">Ação após dupla pressão da tecla Atrás</string>
@@ -1666,7 +1666,7 @@
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">ATENÇÃO</string>
-    <string name="gb_new_package_dialog_message_lollipop">Foi detetada uma instalação obsoleta do GravityBox, sendo necessário proceder à sua desinstalação 
+    <string name="gb_new_package_dialog_message">Foi detetada uma instalação obsoleta do GravityBox, sendo necessário proceder à sua desinstalação 
         antes de poder comerçar a usar a nova versão. Pressione OK para iniciar o processo. Após a desinstalação deverá garantir que o módulo se encontra
         ativado no Xposed Installer e reiniciar o dispositivo de imediato.</string>
 

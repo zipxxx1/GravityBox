@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GravityBox [LP]</string>
+    <string name="app_name">GravityBox [MM]</string>
     <string name="battery_style_title">Вид індикатора заряду</string>
     <string name="battery_style_stock">Стоковий індикатор</string>
     <string name="battery_style_circle">Круглий індикатор</string>

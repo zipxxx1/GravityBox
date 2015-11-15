@@ -16,7 +16,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox[LP]</string>
+    <string name="app_name">GravityBox[MM]</string>
 
     <string name="battery_style_title">电量图标风格</string>        
     <string name="battery_style_stock">原厂电量图标</string>
@@ -666,7 +666,7 @@
     <string name="pref_status_icon_style_title">状态栏图标风格</string>
     <string name="pref_status_icon_style_summary">适用于无声、振动、闹钟等状态图标</string>
     <string name="icon_style_jb">JellyBean</string>
-    <string name="icon_style_kk">Lollipop</string>
+    <string name="icon_style_kk">Marshmallow</string>
 
     <!-- HW Key Actions: Back double-tap -->
     <string name="hwkey_back_doubletap_dialog_title">双击返回键行为</string>
@@ -1704,7 +1704,7 @@
 
     <!-- Old GB to new GB one-time dialog -->
     <string name="gb_new_package_dialog_title">注意</string>
-    <string name="gb_new_package_dialog_message_lollipop">发现GravityBox已安装KitKat版本
+    <string name="gb_new_package_dialog_message">发现GravityBox已安装Lollipop版本
 在新版本可以使用之前必须卸载旧的,按确认开始卸载
 卸载后,不要忘记在Xposed安装器中激活新模块并重新启动</string>
 
