@@ -98,7 +98,7 @@ public class ModPower {
             });
 
             XposedHelpers.findAndHookMethod(pmServiceClass, "wakeUpInternal",
-                    long.class, int.class, new XC_MethodHook() {
+                    long.class, String.class, int.class, String.class, int.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (!shouldRunProximityCheck()) return;

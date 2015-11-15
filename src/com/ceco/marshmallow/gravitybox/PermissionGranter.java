@@ -15,7 +15,7 @@
 
 package com.ceco.marshmallow.gravitybox;
 
-import java.util.Set;
+import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -27,12 +27,7 @@ public class PermissionGranter {
 
     private static final String CLASS_PACKAGE_MANAGER_SERVICE = "com.android.server.pm.PackageManagerService";
     private static final String CLASS_PACKAGE_PARSER_PACKAGE = "android.content.pm.PackageParser.Package";
-
     private static final String PERM_ACCESS_SURFACE_FLINGER = "android.permission.ACCESS_SURFACE_FLINGER";
-    private static final String PERM_WRITE_SETTINGS = "android.permission.WRITE_SETTINGS";
-    private static final String PERM_CHANGE_NETWORK_STATE = "android.permission.CHANGE_NETWORK_STATE";
-    private static final String PERM_MODIFY_AUDIO_SETTINGS = "android.permission.MODIFY_AUDIO_SETTINGS";
-    private static final String PERM_CAPTURE_AUDIO_OUTPUT = "android.permission.CAPTURE_AUDIO_OUTPUT";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -52,96 +47,23 @@ public class PermissionGranter {
                     // GravityBox
                     if (GravityBox.PACKAGE_NAME.equals(pkgName)) {
                         final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
-                        final Set<String> grantedPerms =
-                                (Set<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
+                        final Object ps = XposedHelpers.callMethod(extras, "getPermissionsState");
+                        final List<String> grantedPerms =
+                                (List<String>) XposedHelpers.getObjectField(param.args[0], "requestedPermissions");
                         final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
                         final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
 
                         // Add android.permission.ACCESS_SURFACE_FLINGER needed by screen recorder
-                        if (!grantedPerms.contains(PERM_ACCESS_SURFACE_FLINGER)) {
+                        if (!(boolean)XposedHelpers.callMethod(ps,"hasInstallPermission", PERM_ACCESS_SURFACE_FLINGER)) {
                             final Object pAccessSurfaceFlinger = XposedHelpers.callMethod(permissions, "get",
                                     PERM_ACCESS_SURFACE_FLINGER);
-                            grantedPerms.add(PERM_ACCESS_SURFACE_FLINGER);
-                            int[] gpGids = (int[]) XposedHelpers.getObjectField(extras, "gids");
-                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pAccessSurfaceFlinger, "gids");
-                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
-                                    "appendInts", gpGids, bpGids);
-
-                            if (DEBUG) log("Permission added: " + pAccessSurfaceFlinger);
-                        }
-
-                        // Add android.permission.WRITE_SETTINGS needed by screen recorder (toggle Show Touches on/off)
-                        if (!grantedPerms.contains(PERM_WRITE_SETTINGS)) {
-                            final Object pWriteSettings = XposedHelpers.callMethod(permissions, "get",
-                                    PERM_WRITE_SETTINGS);
-                            grantedPerms.add(PERM_WRITE_SETTINGS);
-                            int[] gpGids = (int[]) XposedHelpers.getObjectField(extras, "gids");
-                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pWriteSettings, "gids");
-                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
-                                    "appendInts", gpGids, bpGids);
-
-                            if (DEBUG) log(pkgName + ": Permission added: " + pWriteSettings);
-                        }
-
-                        // Add android.permission.MODIFY_AUDIO_SETTINGS needed by screen recorder
-                        if (!grantedPerms.contains(PERM_MODIFY_AUDIO_SETTINGS)) {
-                            final Object pAccessAudioSettings = XposedHelpers.callMethod(permissions, "get",
-                                    PERM_MODIFY_AUDIO_SETTINGS);
-                            grantedPerms.add(PERM_MODIFY_AUDIO_SETTINGS);
-                            int[] gpGids = (int[]) XposedHelpers.getObjectField(extras, "gids");
-                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pAccessAudioSettings, "gids");
-                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
-                                    "appendInts", gpGids, bpGids);
-
-                            if (DEBUG) log(pkgName + ": Permission added: " + pAccessAudioSettings);
-                        }
-
-                        // Add android.permission.CAPTURE_AUDIO_OUTPUT needed by screen recorder
-                        if (!grantedPerms.contains(PERM_CAPTURE_AUDIO_OUTPUT)) {
-                            final Object pCaptureAudioOutput = XposedHelpers.callMethod(permissions, "get",
-                                    PERM_CAPTURE_AUDIO_OUTPUT);
-                            grantedPerms.add(PERM_CAPTURE_AUDIO_OUTPUT);
-                            int[] gpGids = (int[]) XposedHelpers.getObjectField(extras, "gids");
-                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCaptureAudioOutput, "gids");
-                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
-                                    "appendInts", gpGids, bpGids);
-
-                            if (DEBUG) log(pkgName + ": Permission added: " + pCaptureAudioOutput);
+                            int ret = (int) XposedHelpers.callMethod(ps, "grantInstallPermission", pAccessSurfaceFlinger);
+                            if (DEBUG) log("Permission added: " + pAccessSurfaceFlinger + "; ret=" + ret);
                         }
 
                         if (DEBUG) {
                             log("List of permissions: ");
-                            for (String perm : grantedPerms) {
-                                log(pkgName + ": " + perm);
-                            }
-                        }
-                    }
-
-                    // SystemUI
-                    if (!Utils.hasLenovoVibeUI() && pkgName.equals("com.android.systemui")) {
-                        final Object extras = XposedHelpers.getObjectField(param.args[0], "mExtras");
-                        final Object sharedUser = XposedHelpers.getObjectField(extras, "sharedUser");
-                        final Set<String> grantedPerms =
-                                (Set<String>) XposedHelpers.getObjectField(extras, "grantedPermissions");
-                        final Object settings = XposedHelpers.getObjectField(param.thisObject, "mSettings");
-                        final Object permissions = XposedHelpers.getObjectField(settings, "mPermissions");
-
-                        // Add android.permission.CHANGE_NETWORK_STATE needed by Usb Tethering Tile
-                        if (!grantedPerms.contains(PERM_CHANGE_NETWORK_STATE)) {
-                            final Object pCns = XposedHelpers.callMethod(permissions, "get",
-                                    PERM_CHANGE_NETWORK_STATE);
-                            grantedPerms.add(PERM_CHANGE_NETWORK_STATE);
-                            int[] gpGids = (int[]) XposedHelpers.getObjectField(sharedUser, "gids");
-                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCns, "gids");
-                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
-                                    "appendInts", gpGids, bpGids);
-
-                            if (DEBUG) log(pkgName + ": Permission added: " + pCns);
-                        }
-
-                        if (DEBUG) {
-                            log("List of permissions: ");
-                            for (String perm : grantedPerms) {
+                            for (Object perm : grantedPerms) {
                                 log(pkgName + ": " + perm);
                             }
                         }

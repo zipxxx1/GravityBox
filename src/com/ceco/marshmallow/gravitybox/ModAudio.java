@@ -31,7 +31,7 @@ import de.robv.android.xposed.XposedHelpers;
 
 public class ModAudio {
     private static final String TAG = "GB:ModAudio";
-    private static final String CLASS_AUDIO_SERVICE = "android.media.AudioService";
+    private static final String CLASS_AUDIO_SERVICE = "com.android.server.audio.AudioService";
     private static final boolean DEBUG = false;
 
     private static final int STREAM_MUSIC = 3;
@@ -68,9 +68,9 @@ public class ModAudio {
         }
     };
 
-    public static void initZygote(final XSharedPreferences prefs) {
+    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
-            final Class<?> classAudioService = XposedHelpers.findClass(CLASS_AUDIO_SERVICE, null);
+            final Class<?> classAudioService = XposedHelpers.findClass(CLASS_AUDIO_SERVICE, classLoader);
 
             mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
             mQhPrefs.makeWorldReadable();
@@ -170,7 +170,7 @@ public class ModAudio {
             });
 
             XposedHelpers.findAndHookMethod(classAudioService, "updateStreamVolumeAlias",
-                    boolean.class, new XC_MethodHook() {
+                    boolean.class, String.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if ((Boolean) XposedHelpers.callMethod(param.thisObject, "isPlatformVoice")) {
@@ -195,7 +195,7 @@ public class ModAudio {
         }
 
         try {
-            XposedHelpers.callMethod(mAudioService, "updateStreamVolumeAlias", true);
+            XposedHelpers.callMethod(mAudioService, "updateStreamVolumeAlias", true, "AudioService");
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

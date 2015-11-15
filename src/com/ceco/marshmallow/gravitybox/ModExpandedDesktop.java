@@ -42,11 +42,12 @@ import de.robv.android.xposed.XposedHelpers;
 
 public class ModExpandedDesktop {
     private static final String TAG = "GB:ModExpandedDesktop";
-    private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.internal.policy.impl.PhoneWindowManager";
+    private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.server.policy.PhoneWindowManager";
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
     private static final String CLASS_POLICY_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
-    private static final String CLASS_SYSTEM_GESTURE = "com.android.internal.policy.impl.SystemGesturesPointerEventListener";
+    private static final String CLASS_SYSTEM_GESTURE = "com.android.server.policy.SystemGesturesPointerEventListener";
+    private static final String CLASS_SCREEN_SHAPE_HELPER = "com.android.internal.util.ScreenShapeHelper";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
@@ -70,14 +71,10 @@ public class ModExpandedDesktop {
     }
 
     private static class WmLp {
-        static final int FIRST_SYSTEM_WINDOW = 2000;
         static final int FLAG_FULLSCREEN = WindowManager.LayoutParams.FLAG_FULLSCREEN;
         static final int FLAG_LAYOUT_IN_SCREEN = WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
         static final int FLAG_LAYOUT_INSET_DECOR = WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
         static final int FLAG_LAYOUT_IN_OVERSCAN = 0x02000000;
-        static final int TYPE_HIDDEN_NAV_CONSUMER = FIRST_SYSTEM_WINDOW+22;
-        static final int TYPE_KEYGUARD = WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG;
-        static final int TYPE_STATUS_BAR = WindowManager.LayoutParams.TYPE_STATUS_BAR;
         static final int PRIVATE_FLAG_KEYGUARD = 0x00000400;
     }
 
@@ -114,6 +111,7 @@ public class ModExpandedDesktop {
     private static Method mUpdateSystemBarsLw = null;
     private static Method mUpdateSystemUiVisibilityLw = null;
     private static NavbarDimensions mNavbarDimensions;
+    private static Class<?> mClsScreenShapeHelper;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -303,9 +301,10 @@ public class ModExpandedDesktop {
         }
     }
 
-    public static void initZygote(final XSharedPreferences prefs) {
+    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
-            final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
+            final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
+            mClsScreenShapeHelper = XposedHelpers.findClass(CLASS_SCREEN_SHAPE_HELPER, classLoader);
             initReflections(classPhoneWindowManager);
 
             mNavbarOverride = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false);
@@ -389,13 +388,9 @@ public class ModExpandedDesktop {
                 });
             }
 
-            if (Build.VERSION.SDK_INT < 22) {
-                XposedHelpers.findAndHookMethod(classPhoneWindowManager, "getContentInsetHintLw",
-                    WindowManager.LayoutParams.class, Rect.class, getInsetHintReplacement);
-            } else {
-                XposedHelpers.findAndHookMethod(classPhoneWindowManager, "getInsetHintLw",
-                    WindowManager.LayoutParams.class, Rect.class, Rect.class, getInsetHintReplacement);
-            }
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "getInsetHintLw",
+                    WindowManager.LayoutParams.class, int.class,
+                    Rect.class, Rect.class, Rect.class, getInsetHintReplacement);
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "beginLayoutLw",
                     boolean.class, int.class, int.class, int.class, new XC_MethodReplacement() {
@@ -514,17 +509,15 @@ public class ModExpandedDesktop {
                             // detect when the user presses anywhere to bring back the nav
                             // bar and ensure the application doesn't see the event.
                             if (navVisible || navAllowedHidden) {
-                                if (getObj("mHideNavFakeWindow") != null) {
-                                    XposedHelpers.callMethod(getObj("mHideNavFakeWindow"), "dismiss");
-                                    setObj("mHideNavFakeWindow", null);
+                                if (getObj("mInputConsumer") != null) {
+                                    XposedHelpers.callMethod(getObj("mInputConsumer"), "dismiss");
+                                    setObj("mInputConsumer", null);
                                 }
-                            } else if (getObj("mHideNavFakeWindow") == null) {
+                            } else if (getObj("mInputConsumer") == null) {
                                 Object wmF = getObj("mWindowManagerFuncs");
                                 Handler h = (Handler) getObj("mHandler");
-                                setObj("mHideNavFakeWindow", XposedHelpers.callMethod(wmF, "addFakeWindow",
-                                        h.getLooper(), getObj("mHideNavInputEventReceiverFactory"),
-                                        "hidden nav", WmLp.TYPE_HIDDEN_NAV_CONSUMER, 0,
-                                        0, false, false, true));
+                                setObj("mInputConsumer", XposedHelpers.callMethod(wmF, "addInputConsumer",
+                                        h.getLooper(), getObj("mHideNavInputEventReceiverFactory")));
                             }
 
                             // For purposes of positioning and showing the nav bar, if we have
@@ -649,7 +642,7 @@ public class ModExpandedDesktop {
                                 setInt("mStatusBarLayer", (Integer)XposedHelpers.callMethod(navBar, "getSurfaceLayer"));
                                 // And compute the final frame.
                                 Object nf = getObj("mTmpNavigationFrame");
-                                XposedHelpers.callMethod(navBar, "computeFrameLw", nf, nf, nf, nf, nf, dcf, nf);
+                                XposedHelpers.callMethod(navBar, "computeFrameLw", nf, nf, nf, nf, nf, dcf, nf, nf);
                                 if (DEBUG_LAYOUT) log("mNavigationBar frame: " + nf);
                                 if ((Boolean)XposedHelpers.callMethod(navBarCtrl, "checkHiddenLw")) {
                                     updateSysUiVisibility = true;
@@ -675,7 +668,7 @@ public class ModExpandedDesktop {
                                 setInt("mStatusBarLayer", (Integer)XposedHelpers.callMethod(statusBar, "getSurfaceLayer"));
 
                                 // Let the status bar determine its size.
-                                XposedHelpers.callMethod(statusBar, "computeFrameLw", pf, df, vf, vf, vf, dcf, vf);
+                                XposedHelpers.callMethod(statusBar, "computeFrameLw", pf, df, vf, vf, vf, dcf, vf, vf);
 
                                 // For layout, the status bar is always at the top with our fixed height.
                                 setInt("mStableTop", getInt("mUnrestrictedScreenTop") + getInt("mStatusBarHeight"));
@@ -986,15 +979,32 @@ public class ModExpandedDesktop {
                 }
 
                 WindowManager.LayoutParams attrs = (WindowManager.LayoutParams) param.args[0];
-                Rect contentInset = (Rect) param.args[1];
-                Rect stableInset = null;
-                if (Build.VERSION.SDK_INT >= 22) {
-                    stableInset = (Rect) param.args[2];
-                }
+                final int displayRotation = (int) param.args[1];
+                Rect contentInset = (Rect) param.args[2];
+                Rect stableInset = (Rect) param.args[3];
+                Rect outOutsets = (Rect) param.args[4];
 
                 final int fl = updateWindowManagerVisibilityFlagsForExpandedDesktop(attrs.flags);
                 final int systemUiVisibility = updateSystemUiVisibilityFlagsForExpandedDesktop(attrs.systemUiVisibility|
                         XposedHelpers.getIntField(attrs, "subtreeSystemUiVisibility"));
+
+                final boolean useOutsets = outOutsets != null && (boolean) XposedHelpers.callMethod(
+                        param.thisObject, "shouldUseOutsets", attrs, fl);
+                if (useOutsets) {
+                    int outset = (int) XposedHelpers.callStaticMethod(mClsScreenShapeHelper,
+                            "getWindowOutsetBottomPx", mContext.getResources());
+                    if (outset > 0) {
+                        if (displayRotation == Surface.ROTATION_0) {
+                            outOutsets.bottom += outset;
+                        } else if (displayRotation == Surface.ROTATION_90) {
+                            outOutsets.right += outset;
+                        } else if (displayRotation == Surface.ROTATION_180) {
+                            outOutsets.top += outset;
+                        } else if (displayRotation == Surface.ROTATION_270) {
+                            outOutsets.left += outset;
+                        }
+                    }
+                }
 
                 if ((fl & (WmLp.FLAG_LAYOUT_IN_SCREEN | WmLp.FLAG_LAYOUT_INSET_DECOR))
                         == (WmLp.FLAG_LAYOUT_IN_SCREEN | WmLp.FLAG_LAYOUT_INSET_DECOR)) {

@@ -70,7 +70,7 @@ import de.robv.android.xposed.callbacks.XCallback;
 
 public class ModHwKeys {
     private static final String TAG = "GB:ModHwKeys";
-    private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.internal.policy.impl.PhoneWindowManager";
+    private static final String CLASS_PHONE_WINDOW_MANAGER = "com.android.server.policy.PhoneWindowManager";
     private static final String CLASS_WINDOW_STATE = "android.view.WindowManagerPolicy$WindowState";
     private static final String CLASS_WINDOW_MANAGER_FUNCS = "android.view.WindowManagerPolicy.WindowManagerFuncs";
     private static final String CLASS_IWINDOW_MANAGER = "android.view.IWindowManager";
@@ -386,7 +386,7 @@ public class ModHwKeys {
         try {
             if (mLaunchAssistAction == null) {
                 mLaunchAssistAction = classPhoneWindowManager.getDeclaredMethod(
-                        "launchAssistAction");
+                        "launchAssistAction", String.class, int.class);
                 mLaunchAssistAction.setAccessible(true);
             }
             if (mLaunchAssistLongPressAction == null) {
@@ -399,7 +399,7 @@ public class ModHwKeys {
         }
     }
 
-    public static void initZygote(final XSharedPreferences prefs) {
+    public static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
 
@@ -496,7 +496,7 @@ public class ModHwKeys {
             mHeadsetUri[0] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_UNPLUG, null);
             mHeadsetUri[1] = prefs.getString(GravityBoxSettings.PREF_KEY_HEADSET_ACTION_PLUG, null);
 
-            final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, null);
+            final Class<?> classPhoneWindowManager = XposedHelpers.findClass(CLASS_PHONE_WINDOW_MANAGER, classLoader);
             initReflections(classPhoneWindowManager);
 
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, "init",
@@ -800,8 +800,8 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "handleLongPressOnHome", new XC_MethodReplacement() {
-
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "handleLongPressOnHome",
+                    int.class, new XC_MethodReplacement() {
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
                     if (getActionFor(HwKeyTrigger.HOME_LONGPRESS).actionId == 
@@ -1166,7 +1166,7 @@ public class ModHwKeys {
 
     private static void launchSearchActivity() {
         try {
-            mLaunchAssistAction.invoke(mPhoneWindowManager);
+            mLaunchAssistAction.invoke(mPhoneWindowManager, (String)null, 0);
         } catch (Exception e) {
             XposedBridge.log(e);
         }

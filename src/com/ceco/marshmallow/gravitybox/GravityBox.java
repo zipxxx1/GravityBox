@@ -60,12 +60,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         SystemWideResources.initResources(prefs);
 
         // Common
-        ModVolumeKeySkipTrack.init(prefs);
         ModInputMethod.initZygote(prefs);
         PhoneWrapper.initZygote(prefs);
-        ModAudio.initZygote(prefs);
-        ModHwKeys.initZygote(prefs);
-        ModExpandedDesktop.initZygote(prefs);
         ModTelephony.initZygote(prefs);
 
         // MTK (deprecated)
@@ -106,6 +102,10 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         if (lpparam.packageName.equals("android") &&
                 lpparam.processName.equals("android")) {
+            ModVolumeKeySkipTrack.initAndroid(prefs, lpparam.classLoader);
+            ModHwKeys.initAndroid(prefs, lpparam.classLoader);
+            ModExpandedDesktop.initAndroid(prefs, lpparam.classLoader);
+            ModAudio.initAndroid(prefs, lpparam.classLoader);
             PermissionGranter.initAndroid(lpparam.classLoader);
             ModLowBatteryWarning.initAndroid(prefs, lpparam.classLoader);
             ModDisplay.initAndroid(prefs, lpparam.classLoader);
@@ -114,6 +114,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModPower.initAndroid(prefs, lpparam.classLoader);
             ModLedControl.initAndroid(prefs, lpparam.classLoader);
             ModTrustManager.initAndroid(prefs, lpparam.classLoader);
+            ModPowerMenu.initAndroid(prefs, lpparam.classLoader);
         }
 
         if (lpparam.packageName.equals(SystemPropertyProvider.PACKAGE_NAME)) {
@@ -144,10 +145,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         if (lpparam.packageName.equals(ModClearAllRecents.PACKAGE_NAME)) {
             ModClearAllRecents.init(prefs, lpparam.classLoader);
-        }
-
-        if (lpparam.packageName.equals(ModPowerMenu.PACKAGE_NAME)) {
-            ModPowerMenu.init(prefs, lpparam.classLoader);
         }
 
         if (ModDialer.PACKAGE_NAMES.contains(lpparam.packageName)) {

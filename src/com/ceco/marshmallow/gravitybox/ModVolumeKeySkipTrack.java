@@ -45,13 +45,13 @@ public class ModVolumeKeySkipTrack {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    static void init(final XSharedPreferences prefs) {
+    static void initAndroid(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             if (DEBUG) log("init");
 
             updatePreference(prefs);
 
-            Class<?> classPhoneWindowManager = findClass("com.android.internal.policy.impl.PhoneWindowManager", null);
+            Class<?> classPhoneWindowManager = findClass("com.android.server.policy.PhoneWindowManager", classLoader);
             XposedBridge.hookAllConstructors(classPhoneWindowManager, handleConstructPhoneWindowManager);
 
             // take advantage of screenTurnedOff method for refreshing state of allowSkipTrack preference
