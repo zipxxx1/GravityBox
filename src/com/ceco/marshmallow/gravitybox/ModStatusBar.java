@@ -70,7 +70,6 @@ public class ModStatusBar {
     private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     public static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_PHONE_STATUSBAR_VIEW = "com.android.systemui.statusbar.phone.PhoneStatusBarView";
-    private static final String CLASS_TICKER = "com.android.systemui.statusbar.phone.PhoneStatusBar$MyTicker";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
     private static final String CLASS_EXPANDABLE_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
@@ -110,9 +109,6 @@ public class ModStatusBar {
     private static Object mPhoneStatusBar;
     private static ViewGroup mStatusBarView;
     private static Context mContext;
-    private static int mAnimPushUpOut;
-    private static int mAnimPushDownIn;
-    private static int mAnimFadeIn;
     private static boolean mClockCentered = false;
     private static String mClockLink;
     private static boolean mAlarmHide = false;
@@ -529,8 +525,6 @@ public class ModStatusBar {
 
             final Class<?> phoneStatusBarClass =
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
-            final Class<?> tickerClass =
-                    XposedHelpers.findClass(CLASS_TICKER, classLoader);
             final Class<?> phoneStatusBarPolicyClass = 
                     XposedHelpers.findClass(CLASS_PHONE_STATUSBAR_POLICY, classLoader);
             Class<?> expandableNotifRowClass = null;
@@ -588,10 +582,6 @@ public class ModStatusBar {
                     mPhoneStatusBar = param.thisObject;
                     mStatusBarView = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStatusBarView");
                     mContext = (Context) XposedHelpers.getObjectField(mPhoneStatusBar, "mContext");
-                    Resources res = mContext.getResources();
-                    mAnimPushUpOut = res.getIdentifier("push_up_out", "anim", "android");
-                    mAnimPushDownIn = res.getIdentifier("push_down_in", "anim", "android");
-                    mAnimFadeIn = res.getIdentifier("fade_in", "anim", "android");
                     mProgressBarCtrl = new ProgressBarController(mPrefs);
                     mBroadcastSubReceivers.add(mProgressBarCtrl);
 
@@ -658,45 +648,6 @@ public class ModStatusBar {
                     }
                 });
             }
-
-            XposedHelpers.findAndHookMethod(tickerClass, "tickerStarting", new XC_MethodHook() {
-
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mLayoutCenter == null || mStatusBarState != StatusBarState.SHADE) return;
-
-                    mLayoutCenter.setVisibility(View.GONE);
-                    Animation anim = (Animation) XposedHelpers.callMethod(
-                            mPhoneStatusBar, "loadAnim", loadAnimParamArgs, mAnimPushUpOut, null);
-                    mLayoutCenter.startAnimation(anim);
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(tickerClass, "tickerDone", new XC_MethodHook() {
-
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mLayoutCenter == null || mStatusBarState != StatusBarState.SHADE) return;
-
-                    mLayoutCenter.setVisibility(View.VISIBLE);
-                    Animation anim = (Animation) XposedHelpers.callMethod(
-                            mPhoneStatusBar, "loadAnim", loadAnimParamArgs, mAnimPushDownIn, null);
-                    mLayoutCenter.startAnimation(anim);
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(tickerClass, "tickerHalting", new XC_MethodHook() {
-
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mLayoutCenter == null || mStatusBarState != StatusBarState.SHADE) return;
-
-                    mLayoutCenter.setVisibility(View.VISIBLE);
-                    Animation anim = (Animation) XposedHelpers.callMethod(
-                            mPhoneStatusBar, "loadAnim", loadAnimParamArgs, mAnimFadeIn, null);
-                    mLayoutCenter.startAnimation(anim);
-                }
-            });
 
             XposedHelpers.findAndHookMethod(phoneStatusBarClass, 
                     "interceptTouchEvent", MotionEvent.class, new XC_MethodHook() {
