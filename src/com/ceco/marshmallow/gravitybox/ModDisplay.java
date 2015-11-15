@@ -53,7 +53,6 @@ public class ModDisplay {
     private static final String TAG = "GB:ModDisplay";
     private static final String CLASS_DISPLAY_POWER_CONTROLLER = "com.android.server.display.DisplayPowerController";
     private static final String CLASS_LIGHT_SERVICE_LIGHT = "com.android.server.lights.LightsService$LightImpl";
-    private static final String CLASS_LIGHT_SERVICE = "com.android.server.lights.LightsService";
     private static final String CLASS_DISPLAY_POWER_REQUEST = "android.hardware.display.DisplayManagerInternal.DisplayPowerRequest";
     private static final String CLASS_DISPLAY_MANAGER_GLOBAL = "android.hardware.display.DisplayManagerGlobal";
     private static final boolean DEBUG = false;
@@ -238,7 +237,6 @@ public class ModDisplay {
             final Class<?> classDisplayPowerController =
                     XposedHelpers.findClass(CLASS_DISPLAY_POWER_CONTROLLER, classLoader);
             final Class<?> classLight = XposedHelpers.findClass(CLASS_LIGHT_SERVICE_LIGHT, classLoader);
-            final Class<?> classLightService = XposedHelpers.findClass(CLASS_LIGHT_SERVICE, classLoader);
 
             final boolean brightnessSettingsEnabled = 
                     prefs.getBoolean(GravityBoxSettings.PREF_KEY_BRIGHTNESS_MASTER_SWITCH, false);
@@ -292,25 +290,13 @@ public class ModDisplay {
                         intentFilter.addAction(ACTION_SET_AUTOBRIGHTNESS_CONFIG);
                     }
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LOCKSCREEN_BG_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BUTTON_BACKLIGHT_CHANGED);
+                    intentFilter.addAction(Intent.ACTION_SCREEN_ON);
+                    intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED);
+                    intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
                     mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("DisplayPowerController constructed");
-                }
-            });
-
-            XposedBridge.hookAllConstructors(classLightService, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    if (context != null) {
-                        IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BUTTON_BACKLIGHT_CHANGED);
-                        intentFilter.addAction(Intent.ACTION_SCREEN_ON);
-                        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-                        intentFilter.addAction(GravityBoxSettings.ACTION_BATTERY_LED_CHANGED);
-                        intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-                        context.registerReceiver(mBroadcastReceiver, intentFilter);
-                        if (DEBUG) log("LightsService constructed. Broadcast receiver registered.");
-                    }
                 }
             });
 
