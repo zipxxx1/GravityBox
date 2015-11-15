@@ -96,10 +96,8 @@ public class ModAudio {
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     if (context != null) {
                         mHandleChangeVolume = new HandleChangeVolume(context);
-                        XposedHelpers.findAndHookMethod(classAudioService, "adjustMasterVolume", 
-                                int.class, int.class, String.class, mHandleChangeVolume);
                         XposedHelpers.findAndHookMethod(classAudioService, "adjustSuggestedStreamVolume", 
-                                int.class, int.class, int.class, String.class, mHandleChangeVolume);
+                                int.class, int.class, int.class, String.class, String.class, mHandleChangeVolume);
 
                         IntentFilter intentFilter = new IntentFilter();
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED);
