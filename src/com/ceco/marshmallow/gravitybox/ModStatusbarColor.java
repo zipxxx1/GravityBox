@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -120,10 +121,11 @@ public class ModStatusbarColor {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (SysUiManagers.IconManager != null && SysUiManagers.IconManager.isColoringEnabled()) {
                         final String iconPackage = 
-                                (String) XposedHelpers.getObjectField(param.args[0], "iconPackage");
+                                (String) XposedHelpers.getObjectField(param.args[0], "pkg");
                         if (DEBUG) log("statusbarIconView.getIcon: iconPackage=" + iconPackage);
                         if (iconPackage == null || iconPackage.equals(PACKAGE_NAME)) {
-                            final int iconId = XposedHelpers.getIntField(param.args[0], "iconId");
+                            final Icon icon = (Icon) XposedHelpers.getObjectField(param.args[0], "icon");
+                            final int iconId = (int) XposedHelpers.callMethod(icon, "getResId");
                             Drawable d = SysUiManagers.IconManager.getBasicIcon(iconId);
                             if (d != null) {
                                 param.setResult(d);
@@ -178,9 +180,10 @@ public class ModStatusbarColor {
                 final Object sbIcon = XposedHelpers.getObjectField(v, "mIcon");
                 if (sbIcon != null) {
                     final String iconPackage =
-                            (String) XposedHelpers.getObjectField(sbIcon, "iconPackage");
+                            (String) XposedHelpers.getObjectField(sbIcon, "pkg");
                     if (iconPackage == null || iconPackage.equals(PACKAGE_NAME)) {
-                        final int resId = XposedHelpers.getIntField(sbIcon, "iconId");
+                        final Icon icon = (Icon) XposedHelpers.getObjectField(sbIcon, "icon");
+                        final int resId = (int) XposedHelpers.callMethod(icon, "getResId");
                         Drawable d = null;
                         if (SysUiManagers.IconManager != null) {
                             d = SysUiManagers.IconManager.getBasicIcon(resId);
