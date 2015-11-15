@@ -1544,11 +1544,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="sb_download_progress_top">Верхні край</string>
     <string name="sb_download_progress_bottom">Ніжні край</string>
 
-    <!-- Status bar: disable notification ticker -->
-    <string name="pref_statusbar_ticker_policy_title">Радок паведамленняў</string>
-    <string name="sb_ticker_policy_default">Па змаўчанні</string>
-    <string name="sb_ticker_policy_disabled">Адключана заўсёды</string>
-
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">Схаваць цэтлікі SIM</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Патрэбна перазагрузка</string>
@@ -1676,10 +1671,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="keyguard_percent_text_hide">Схаваць</string>
     <string name="battery_percent_text_header_hide_title">Схаваць у радку стану</string>
     <string name="battery_percent_text_size_default">Па змаўчанні</string>
-
-    <!-- Notification ticker -->
-    <string name="pref_cat_statusbar_ticker_title">Радок паведамленняў</string>
-    <string name="pref_statusbar_ticker_master_switch_summary">Улучэнне радка паведамленняў і злучаных з ёй функцый (патрэбна перазагрузка)</string>
 
     <!-- Navigation bar: use larger icons -->
     <string name="pref_navbar_larger_icons_title">Павялічаныя значкі</string>

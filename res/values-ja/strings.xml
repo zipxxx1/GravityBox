@@ -1263,10 +1263,6 @@
     <string name="sb_download_progress_off">無効</string>
     <string name="sb_download_progress_top">上端に表示</string>
     <string name="sb_download_progress_bottom">下端に表示</string>
-    <!-- Status bar: disable notification ticker -->
-    <string name="pref_statusbar_ticker_policy_title">通知ティッカーの表示方式</string>
-    <string name="sb_ticker_policy_default">デフォルト</string>
-    <string name="sb_ticker_policy_disabled">常に無効化</string>
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">SIMラベルを隠す</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">変更後は再起動してください。</string>
@@ -1371,9 +1367,6 @@
     <string name="keyguard_percent_text_hide">非表示</string>
     <string name="battery_percent_text_header_hide_title">ステータスバーヘッダでは非表示</string>
     <string name="battery_percent_text_size_default">デフォルト</string>
-    <!-- Notification ticker -->
-    <string name="pref_cat_statusbar_ticker_title">通知ティッカー</string>
-    <string name="pref_statusbar_ticker_master_switch_summary">通知ティッカーとそれに関連した機能を有効にします。(要再起動)</string>
     <!-- Navigation bar: use larger icons -->
     <string name="pref_navbar_larger_icons_title">大きめのアイコンを使う</string>
     <string name="pref_navbar_larger_icons_summary">再起動が必要です。</string>

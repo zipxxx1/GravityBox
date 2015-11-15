@@ -141,7 +141,6 @@ public class ModStatusBar {
     private static XSharedPreferences mPrefs;
     private static ProgressBarController mProgressBarCtrl;
     private static int mDeleteIconId;
-    private static TickerPolicy mTickerPolicy;
     private static int mStatusBarState;
     private static boolean mBatterySaverIndicationDisabled;
     private static boolean mDisablePeek;
@@ -247,9 +246,6 @@ public class ModStatusBar {
                 NotificationManager notificationManager =
                         (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.cancel(SCREENSHOT_NOTIFICATION_ID);
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED)) {
-                mTickerPolicy = TickerPolicy.valueOf(intent.getStringExtra(
-                        GravityBoxSettings.EXTRA_STATUSBAR_TICKER_POLICY));
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_BATTERY_SAVER_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_BS_INDICATION_DISABLE)) {
                     mBatterySaverIndicationDisabled = intent.getBooleanExtra(
@@ -300,9 +296,6 @@ public class ModStatusBar {
                 resparam.res.setReplacement(mDeleteIconId, modRes.fwd(R.drawable.ic_menu_delete));
             }
 
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH, false)) {
-                resparam.res.setReplacement(PACKAGE_NAME, "bool", "enable_ticker", true);
-            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -588,8 +581,6 @@ public class ModStatusBar {
                     GravityBoxSettings.PREF_KEY_STATUSBAR_BRIGHTNESS, false);
             mOngoingNotif = prefs.getString(GravityBoxSettings.PREF_KEY_ONGOING_NOTIFICATIONS, "");
             mNotifExpandAll = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NOTIF_EXPAND_ALL, false);
-            mTickerPolicy = TickerPolicy.valueOf(prefs.getString(
-                    GravityBoxSettings.PREF_KEY_STATUSBAR_TICKER_POLICY, "DEFAULT"));
             mBatterySaverIndicationDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_BATTERY_SAVER_INDICATION_DISABLE, false);
             mDisablePeek = prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_DISABLE_PEEK, false);
@@ -665,7 +656,6 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BT_VISIBILITY_CHANGED);
                     intentFilter.addAction(ACTION_DELETE_SCREENSHOT);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_BAR_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
@@ -988,24 +978,6 @@ public class ModStatusBar {
                 });
             } catch (Throwable t) {
                 XposedBridge.log(t);
-            }
-
-            // notification ticker policy
-            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH, false)) {
-                try {
-                    XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "tick",
-                            StatusBarNotification.class, boolean.class, new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            switch (mTickerPolicy) {
-                                case DEFAULT: return;
-                                case DISABLED: param.setResult(null); return;
-                            }
-                        }
-                    });
-                } catch (Throwable t) {
-                    XposedBridge.log(t);
-                }
             }
 
             // status bar state change handling

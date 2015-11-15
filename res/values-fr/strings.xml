@@ -1549,11 +1549,6 @@
     <string name="sb_download_progress_top">Bord supérieur</string>
     <string name="sb_download_progress_bottom">Bord inférieur</string>
 
-    <!-- Status bar: disable notification ticker -->
-    <string name="pref_statusbar_ticker_policy_title">Principe du bandeau de notification</string>
-    <string name="sb_ticker_policy_default">Par défaut</string>
-    <string name="sb_ticker_policy_disabled">Toujours désactivé</string>
-
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">Masquer les marques de SIM</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Redémarrage nécessaire</string>
@@ -1681,10 +1676,6 @@
     <string name="keyguard_percent_text_hide">Masquer</string>
     <string name="battery_percent_text_header_hide_title">Masquer dans l\'entête de la barre d\'état</string>
     <string name="battery_percent_text_size_default">Par défaut</string>
-    
-    <!-- Notification ticker -->
-    <string name="pref_cat_statusbar_ticker_title">Téléscripteur de notification</string>
-    <string name="pref_statusbar_ticker_master_switch_summary">Active le téléscripteur de notification et ses fonctionnalités associées (redémarrage nécessaire)</string>
 
     <!-- Navigation bar: use larger icons -->
     <string name="pref_navbar_larger_icons_title">Utiliser des icônes plus grandes</string>

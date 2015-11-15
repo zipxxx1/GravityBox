@@ -1543,11 +1543,6 @@
     <string name="sb_download_progress_top">Paling atas</string>
     <string name="sb_download_progress_bottom">Paling bawah</string>
 
-    <!-- Status bar: disable notification ticker -->
-    <string name="pref_statusbar_ticker_policy_title">polisi paparan notifikasi</string>
-    <string name="sb_ticker_policy_default">Tetapan asal</string>
-    <string name="sb_ticker_policy_disabled">Sentiasa dimatikan</string>
-
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">Sembunyi label SIM</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Perlukan reboot</string>
@@ -1675,10 +1670,6 @@
     <string name="keyguard_percent_text_hide">Sembunyi</string>
     <string name="battery_percent_text_header_hide_title">Sembunyi di kepala status bar</string>
     <string name="battery_percent_text_size_default">Asal</string>
-
-    <!-- Notification ticker -->
-    <string name="pref_cat_statusbar_ticker_title">Penunjuk notifikasi</string>
-    <string name="pref_statusbar_ticker_master_switch_summary">Aktifkan penunjuk notifikasi(perlukan reboot)</string>
 
     <!-- Navigation bar: use larger icons -->
     <string name="pref_navbar_larger_icons_title">Guna ikon lebih besar</string>

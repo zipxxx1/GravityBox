@@ -769,11 +769,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_THICKNESS = "sbDownloadProgressThickness";
     public static final String EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN = "sbDownloadProgressMargin";
 
-    public static final String PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH = "pref_statusbar_ticker_master_switch";
-    public static final String PREF_KEY_STATUSBAR_TICKER_POLICY = "pref_statusbar_ticker_policy";
-    public static final String ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED = "gravitybox.intent.action.STATUSBAR_TICKER_POLICY_CHANGED";
-    public static final String EXTRA_STATUSBAR_TICKER_POLICY = "sbTickerPolicy";
-
     public static final String PREF_KEY_QUICKRECORD_QUALITY = "pref_quickrecord_quality";
     public static final String PREF_KEY_QUICKRECORD_AUTOSTOP = "pref_quickrecord_autostop";
     public static final String EXTRA_QR_QUALITY = "quickRecordQuality";
@@ -863,7 +858,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_MTK_FIX_TTS_SETTINGS,
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
             PREF_KEY_NAVBAR_LEFT_HANDED,
-            PREF_KEY_STATUSBAR_TICKER_MASTER_SWITCH,
             PREF_KEY_SAFE_MEDIA_VOLUME,
             PREF_KEY_SIGNAL_CLUSTER_DEM,
             PREF_KEY_VOLUME_PANEL_EXPANDABLE,
@@ -1273,7 +1267,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatMtkFixes;
         private ListPreference mPrefChargingLed;
         private CheckBoxPreference mPrefProximityWakeIgnoreCall;
-        private ListPreference mPrefSbTickerPolicy;
         private CheckBoxPreference mPrefScHideSimLabels;
         private CheckBoxPreference mPrefScNarrow;
         private ListPreference mPrefQrQuality;
@@ -1589,8 +1582,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             getPreferenceScreen().removePreference(mPrefCustomApp);
 
             mPrefChargingLed = (ListPreference) findPreference(PREF_KEY_CHARGING_LED);
-            mPrefProximityWakeIgnoreCall = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL);
-            mPrefSbTickerPolicy = (ListPreference) findPreference(PREF_KEY_STATUSBAR_TICKER_POLICY); 
+            mPrefProximityWakeIgnoreCall = (CheckBoxPreference) findPreference(PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL); 
 
             mPrefQrQuality = (ListPreference) findPreference(PREF_KEY_QUICKRECORD_QUALITY);
 
@@ -2222,10 +2214,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_CHARGING_LED)) {
                 mPrefChargingLed.setSummary(mPrefChargingLed.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_STATUSBAR_TICKER_POLICY)) {
-                mPrefSbTickerPolicy.setSummary(mPrefSbTickerPolicy.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_QUICKRECORD_QUALITY)) {
@@ -2992,9 +2980,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN)) {
                 intent.setAction(ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                 intent.putExtra(EXTRA_STATUSBAR_DOWNLOAD_PROGRESS_MARGIN, prefs.getInt(key, 0));
-            } else if (key.equals(PREF_KEY_STATUSBAR_TICKER_POLICY)) {
-                intent.setAction(ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
-                intent.putExtra(EXTRA_STATUSBAR_TICKER_POLICY, prefs.getString(key, "DEFAULT"));
             } else if (lockscreenKeys.contains(key)) {
                 intent.setAction(ACTION_LOCKSCREEN_SETTINGS_CHANGED);
             } else if (headsUpKeys.contains(key)) {

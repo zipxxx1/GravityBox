@@ -1530,11 +1530,6 @@
     <string name="sb_download_progress_top">Oberkante</string>
     <string name="sb_download_progress_bottom">Unterkante</string>
 
- <!-- Status bar: disable notification ticker -->
-    <string name="pref_statusbar_ticker_policy_title">Einstellungen für Benachrichtigungsticker</string>
-    <string name="sb_ticker_policy_default">Standard</string>
-    <string name="sb_ticker_policy_disabled">Immer deaktiviert</string>
-
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">SIM-Titel verbergen</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Neustart erforderlich</string>
@@ -1658,10 +1653,6 @@
     <string name="keyguard_percent_text_hide">Verbergen</string>
     <string name="battery_percent_text_header_hide_title">In Statusleiste verbergen</string>
     <string name="battery_percent_text_size_default">Standard</string>
-
-    <!-- Notification ticker -->
-    <string name="pref_cat_statusbar_ticker_title">Benachrichtigungsticker</string>
-    <string name="pref_statusbar_ticker_master_switch_summary">Benachrichtigungsticker und dessen Einstellungen aktivieren (Neustart erforderlich)</string>
 
     <!-- Navigation bar: use larger icons -->
     <string name="pref_navbar_larger_icons_title">Große Symbole benutzen</string>

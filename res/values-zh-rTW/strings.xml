@@ -1516,11 +1516,6 @@
     <string name="sb_download_progress_top">上沿</string>
     <string name="sb_download_progress_bottom">下沿</string>
 
-    <!-- Status bar: disable notification ticker -->
-    <string name="pref_statusbar_ticker_policy_title">停用狀態列的通知預覽</string>
-    <string name="sb_ticker_policy_default">系統預設值</string>
-    <string name="sb_ticker_policy_disabled">永遠停用</string>
-
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">隱藏訊號條 SIM 卡提示</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">需要重新啟動</string>
