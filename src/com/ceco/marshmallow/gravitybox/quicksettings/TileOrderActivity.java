@@ -229,6 +229,9 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     }
 
     private boolean supportedTile(String key) {
+        // TODO: LockscreenTile: find out if even possible
+        if (key.equals("gb_tile_lock_screen"))
+            return false;
         if (key.equals("gb_tile_torch") && !Utils.hasFlash(mContext))
             return false;
         if (key.equals("gb_tile_gps_alt") && !Utils.hasGPS(mContext))
