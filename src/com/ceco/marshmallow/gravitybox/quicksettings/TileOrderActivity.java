@@ -229,6 +229,9 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
     }
 
     private boolean supportedTile(String key) {
+        // TODO: Music Tile
+        if (key.equals("gb_tile_music"))
+            return false;
         // TODO: LockscreenTile: find out if even possible
         if (key.equals("gb_tile_lock_screen"))
             return false;
