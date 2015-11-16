@@ -40,8 +40,9 @@ public abstract class QsTile extends BaseTile {
 //            return new LockScreenTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_music"))
             return new MusicTile(host, key, prefs, eventDistributor);
-        else if (key.equals("gb_tile_nfc") && Utils.hasNfc(ctx))
-            return new NfcTile(host, key, prefs, eventDistributor);
+// TODO: NFC tile
+//        else if (key.equals("gb_tile_nfc") && Utils.hasNfc(ctx))
+//            return new NfcTile(host, key, prefs, eventDistributor);
         else if (key.equals("gb_tile_quickapp"))
             return new QuickAppTile(host, key, prefs, eventDistributor, 1);
         else if (key.equals("gb_tile_quickapp2"))

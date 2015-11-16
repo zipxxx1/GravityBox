@@ -240,7 +240,8 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
                 key.equals("gb_tile_network_mode") || key.equals("gb_tile_smart_radio") ||
                 key.equals("mtk_tile_mobile_data")) && Utils.isWifiOnly(mContext))
             return false;
-        if (key.equals("gb_tile_nfc") && !Utils.hasNfc(mContext))
+        // TODO: NFC Tile
+        if (key.equals("gb_tile_nfc")) // && !Utils.hasNfc(mContext))
             return false;
         if (key.equals("gb_tile_quiet_hours") && LedSettings.isUncLocked(mContext))
             return false;
