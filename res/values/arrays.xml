@@ -686,16 +686,12 @@
     </string-array>
 
     <string-array name="ringer_mode_entries" translatable="false">
-        <item>@string/ringer_mode_none</item>
-        <item>@string/ringer_mode_silent</item>
         <item>@string/ringer_mode_vibrate</item>
         <item>@string/ringer_mode_sound</item>
         <item>@string/ringer_mode_sound_vibrate</item>
     </string-array>
 
     <string-array name="ringer_mode_values" translatable="false">
-        <item>4</item>
-        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
