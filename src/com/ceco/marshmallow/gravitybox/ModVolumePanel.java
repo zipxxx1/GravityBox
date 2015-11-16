@@ -19,7 +19,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
 import android.widget.ImageButton;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -32,8 +31,6 @@ public class ModVolumePanel {
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String CLASS_VOLUME_PANEL = "com.android.systemui.volume.VolumeDialog";
     private static final boolean DEBUG = false;
-
-    private static final int MSG_TIMEOUT = 5;
 
     private static Object mVolumePanel;
     private static boolean mVolumeAdjustVibrateMuted;
@@ -135,14 +132,14 @@ public class ModVolumePanel {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classVolumePanel, "resetTimeout", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(classVolumePanel, "computeTimeoutH", new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mTimeout != 0) {
-                        Handler h = (Handler) param.thisObject;
-                        h.removeMessages(MSG_TIMEOUT);
-                        h.sendMessageDelayed(h.obtainMessage(MSG_TIMEOUT), mTimeout);
-                        param.setResult(null);
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    // there are different timeouts based on different conditions
+                    // modify only standard ones
+                    int timeout = (int)param.getResult();
+                    if (mTimeout != 0 && (timeout == 3000 || timeout == 5000)) {
+                        param.setResult(mTimeout);
                     }
                 }
             });
