@@ -291,7 +291,7 @@ public abstract class BaseTile implements QsEventListener {
 
     public void startSettingsActivity(Intent intent) {
         try {
-            XposedHelpers.callMethod(mHost, "startSettingsActivity", intent);
+            XposedHelpers.callMethod(mHost, "startActivityDismissingKeyguard", intent);
         } catch (Throwable t) {
             log("Error in startSettingsActivity: ");
             XposedBridge.log(t);

@@ -135,7 +135,7 @@ public class LockscreenAppBar {
         // otherwise start activity dismissing keyguard
         } else {
             try {
-                XposedHelpers.callMethod(mStatusBar, "postStartSettingsActivity", intent, 0);
+                XposedHelpers.callMethod(mStatusBar, "postStartActivityDismissingKeyguard", intent, 0);
             } catch (Throwable t) {
                 XposedBridge.log(t);
             }

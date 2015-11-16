@@ -290,7 +290,7 @@ public class AppLauncher implements BroadcastSubReceiver {
         } else {
             if (mLaunchFromLockscreen && mStatusBar != null) {
                 try {
-                    XposedHelpers.callMethod(mStatusBar, "postStartSettingsActivity", intent, 0);
+                    XposedHelpers.callMethod(mStatusBar, "postStartActivityDismissingKeyguard", intent, 0);
                 } catch (Throwable t) {
                     XposedBridge.log(t);
                 }
