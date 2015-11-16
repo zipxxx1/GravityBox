@@ -574,7 +574,7 @@
     <string name="hwkey_action_torch">Zseblámpa ki-bekapcsolása</string>
 
     <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Automatikus bővített panel</string>
+    <string name="pref_volume_panel_autoexpand_title">Autom. bővített hangerő panel</string>
 
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Menü gomb</string>
