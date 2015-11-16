@@ -65,13 +65,13 @@ public class ModLedControl {
     private static final String TAG = "GB:ModLedControl";
     public static final boolean DEBUG = false;
     private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.notification.NotificationManagerService";
-    private static final String CLASS_STATUSBAR_MGR_SERVICE = "com.android.server.statusbar.StatusBarManagerService";
     private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData.Entry";
     private static final String CLASS_HEADSUP_NOTIF_VIEW = "com.android.systemui.statusbar.policy.HeadsUpNotificationView";
     private static final String CLASS_NOTIFICATION_RECORD = "com.android.server.notification.NotificationRecord";
+    private static final String CLASS_HEADS_UP_MANAGER_ENTRY = "com.android.systemui.statusbar.policy.HeadsUpManager.HeadsUpEntry";
     public static final String PACKAGE_NAME_SYSTEMUI = "com.android.systemui";
 
     private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
@@ -576,17 +576,17 @@ public class ModLedControl {
             });
 
             XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "shouldInterrupt",
-                    StatusBarNotification.class, new XC_MethodHook() {
+                    CLASS_NOTIF_DATA_ENTRY, StatusBarNotification.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     // disable heads up if notification is for different user in multi-user environment
                     if (!(Boolean)XposedHelpers.callMethod(param.thisObject, "isNotificationForCurrentProfiles",
-                            param.args[0])) {
+                            param.args[1])) {
                         if (DEBUG) log("HeadsUp: Notification is not for current user");
                         return;
                     }
 
-                    StatusBarNotification sbn = (StatusBarNotification) param.args[0];
+                    StatusBarNotification sbn = (StatusBarNotification) param.args[1];
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     Notification n = sbn.getNotification();
                     int statusBarWindowState = XposedHelpers.getIntField(param.thisObject, "mStatusBarWindowState");
@@ -646,20 +646,28 @@ public class ModLedControl {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "resetHeadsUpDecayTimer",
+            XposedHelpers.findAndHookMethod(CLASS_HEADS_UP_MANAGER_ENTRY, classLoader, "updateEntry",
                     new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    Object headsUpView = XposedHelpers.getObjectField(param.thisObject, "mHeadsUpNotificationView");
-                    Object headsUp = XposedHelpers.getObjectField(headsUpView, "mHeadsUp");
-                    if (headsUp == null) return;
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    Object huMgr = XposedHelpers.getSurroundingThis(param.thisObject);
+                    Object entry = XposedHelpers.getObjectField(param.thisObject, "entry");
+                    if (entry == null ||
+                            (boolean)XposedHelpers.callMethod(huMgr, "hasFullScreenIntent", entry)) 
+                        return;
+
+                    XposedHelpers.callMethod(param.thisObject, "removeAutoRemovalCallbacks");
                     StatusBarNotification sbNotif = (StatusBarNotification)
-                            XposedHelpers.getObjectField(headsUp, "notification");
+                            XposedHelpers.getObjectField(entry, "notification");
                     Notification n = sbNotif.getNotification();
                     int timeout = n.extras.containsKey(NOTIF_EXTRA_HEADS_UP_TIMEOUT) ?
                             n.extras.getInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT) * 1000 :
                                 mSysUiPrefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_TIMEOUT, 5) * 1000;
-                    XposedHelpers.setIntField(param.thisObject, "mHeadsUpNotificationDecay", timeout);
+                    if (timeout > 0) {
+                        Handler H = (Handler) XposedHelpers.getObjectField(huMgr, "mHandler");
+                        H.postDelayed((Runnable)XposedHelpers.getObjectField(
+                                param.thisObject, "mRemoveHeadsUpRunnable"), timeout);
+                    }
                 }
             });
 
