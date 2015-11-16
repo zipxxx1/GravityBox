@@ -388,6 +388,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                                     int[].class, int[].class, int[].class, int[].class,
                                     int[].class, int.class, int[].class, int[].class, int[].class,
                                     int[].class, int[].class);
+                            c.setAccessible(true);
                             Object hPlusGroup = c.newInstance("HP",
                                     XposedHelpers.getObjectField(hGroup, "mSbIcons"),
                                     XposedHelpers.getObjectField(hGroup, "mQsIcons"),
@@ -425,7 +426,8 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                             Constructor<?> c = hGroup.getClass().getConstructor(
                                     String.class, int[][].class, int[][].class, int[].class,
                                     int.class, int.class, int.class, int.class,
-                                    int.class, int.class, int.class, boolean.class, int[].class);
+                                    int.class, int.class, int.class, boolean.class, int.class);
+                            c.setAccessible(true);
                             Object hPlusGroup = c.newInstance("HP",
                                     XposedHelpers.getObjectField(hGroup, "mSbIcons"),
                                     XposedHelpers.getObjectField(hGroup, "mQsIcons"),
@@ -438,7 +440,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                                     XposedHelpers.getIntField(hGroup, "mDataContentDescription"),
                                     sSbHpResId,
                                     XposedHelpers.getBooleanField(hGroup, "mIsWide"),
-                                    new int[] { sQsHpResId, sQsHpResId });
+                                    sQsHpResId);
                             iconSet.put(TelephonyManager.NETWORK_TYPE_HSPAP, hPlusGroup);
                         }
                     }
