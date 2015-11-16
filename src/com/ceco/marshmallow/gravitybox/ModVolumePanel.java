@@ -30,6 +30,7 @@ public class ModVolumePanel {
     private static final String TAG = "GB:ModVolumePanel";
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String CLASS_VOLUME_PANEL = "com.android.systemui.volume.VolumeDialog";
+    private static final String CLASS_VOLUME_PANEL_CTRL = "com.android.systemui.volume.VolumeDialogController";
     private static final boolean DEBUG = false;
 
     private static Object mVolumePanel;
@@ -144,7 +145,7 @@ public class ModVolumePanel {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classVolumePanel, "onVibrate", new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(CLASS_VOLUME_PANEL_CTRL, classLoader, "vibrate", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mVolumeAdjustVibrateMuted) {
