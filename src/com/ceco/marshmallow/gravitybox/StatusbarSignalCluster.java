@@ -252,9 +252,9 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     protected void createHooks() {
-        if (Build.VERSION.SDK_INT >= 22 && !Utils.isXperiaDevice()) {
+        if (!Utils.isXperiaDevice()) {
             try {
-                XposedHelpers.findAndHookMethod(mView.getClass(), "getOrInflateState", int.class, new XC_MethodHook() {
+                XposedHelpers.findAndHookMethod(mView.getClass(), "inflatePhoneState", int.class, new XC_MethodHook() {
                     @SuppressWarnings("unchecked")
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -363,119 +363,86 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                 !(Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22) &&
                 !Utils.isFalconAsiaDs() && !Utils.isMtkDevice()) {
             try {
-                if (Build.VERSION.SDK_INT >= 22) {
-                    final Class<?> mobileNetworkCtrlClass = Utils.isMotoXtDevice() ?
-                            XposedHelpers.findClass(
-                            "com.android.systemui.statusbar.policy.MotorolaNetworkControllerImpl.MotorolaMobileSignalController", 
-                            mView.getContext().getClassLoader()) :
-                            XposedHelpers.findClass(
-                            "com.android.systemui.statusbar.policy.NetworkControllerImpl.MobileSignalController", 
-                            mView.getContext().getClassLoader());
+                final Class<?> mobileNetworkCtrlClass = Utils.isMotoXtDevice() ?
+                        XposedHelpers.findClass(
+                        "com.android.systemui.statusbar.policy.MotorolaMobileSignalController", 
+                        mView.getContext().getClassLoader()) :
+                        XposedHelpers.findClass(
+                        "com.android.systemui.statusbar.policy.MobileSignalController", 
+                        mView.getContext().getClassLoader());
 
-                    XposedHelpers.findAndHookMethod(mobileNetworkCtrlClass, "mapIconSets", new XC_MethodHook() {
-                        @SuppressWarnings("unchecked")
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            SparseArray<Object> iconSet = (SparseArray<Object>) XposedHelpers.getObjectField(
-                                    param.thisObject, "mNetworkToIconLookup");
-                            Object hGroup = iconSet.get(TelephonyManager.NETWORK_TYPE_HSPAP);
-                            if (Utils.isMotoXtDevice()) {
-                                Constructor<?> c = hGroup.getClass().getConstructor(
-                                        String.class, int[][].class, int[][].class, int[].class,
-                                        int.class, int.class, int.class, int.class,
-                                        int.class, int.class, int.class, boolean.class, int[].class,
-                                        int[][].class, int[][].class, boolean.class, boolean.class,
-                                        int[].class, int[].class, int[].class, int[].class,
-                                        int[].class, int[].class, int[].class, int[].class,
-                                        int[].class, int.class, int[].class, int[].class, int[].class,
-                                        int[].class, int[].class);
-                                Object hPlusGroup = c.newInstance("HP",
-                                        XposedHelpers.getObjectField(hGroup, "mSbIcons"),
-                                        XposedHelpers.getObjectField(hGroup, "mQsIcons"),
-                                        XposedHelpers.getObjectField(hGroup, "mContentDesc"),
-                                        XposedHelpers.getIntField(hGroup, "mSbNullState"),
-                                        XposedHelpers.getIntField(hGroup, "mQsNullState"),
-                                        XposedHelpers.getIntField(hGroup, "mSbDiscState"),
-                                        XposedHelpers.getIntField(hGroup, "mQsDiscState"),
-                                        XposedHelpers.getIntField(hGroup, "mDiscContentDesc"),
-                                        XposedHelpers.getIntField(hGroup, "mDataContentDescription"),
-                                        sSbHpResId,
-                                        XposedHelpers.getBooleanField(hGroup, "mIsWide"),
-                                        new int[] { sQsHpResId, sQsHpResId },
-                                        XposedHelpers.getObjectField(hGroup, "mMotoSBActivityAOSPLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoQSActivityAOSPLookup"),
-                                        XposedHelpers.getBooleanField(hGroup, "mIsMotoUI"),
-                                        XposedHelpers.getBooleanField(hGroup, "mIsMotoTwoCell"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoSimDescriptionLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoSBSimLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoQSSimLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoSignalDescriptionLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoSBSignalLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoQSSignalLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoRoamingDescriptionLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoSBRoamingLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoQSRoamingLookup"),
-                                        XposedHelpers.getIntField(hGroup, "mMotoDataTypeDescription"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoSBDataTypeLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoQSDataTypeLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoActivityDescriptionLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoSBActivityLookup"),
-                                        XposedHelpers.getObjectField(hGroup, "mMotoQSActivityLookup"));
-                                iconSet.put(TelephonyManager.NETWORK_TYPE_HSPAP, hPlusGroup);
-                            } else {
-                                Constructor<?> c = hGroup.getClass().getConstructor(
-                                        String.class, int[][].class, int[][].class, int[].class,
-                                        int.class, int.class, int.class, int.class,
-                                        int.class, int.class, int.class, boolean.class, int[].class);
-                                Object hPlusGroup = c.newInstance("HP",
-                                        XposedHelpers.getObjectField(hGroup, "mSbIcons"),
-                                        XposedHelpers.getObjectField(hGroup, "mQsIcons"),
-                                        XposedHelpers.getObjectField(hGroup, "mContentDesc"),
-                                        XposedHelpers.getIntField(hGroup, "mSbNullState"),
-                                        XposedHelpers.getIntField(hGroup, "mQsNullState"),
-                                        XposedHelpers.getIntField(hGroup, "mSbDiscState"),
-                                        XposedHelpers.getIntField(hGroup, "mQsDiscState"),
-                                        XposedHelpers.getIntField(hGroup, "mDiscContentDesc"),
-                                        XposedHelpers.getIntField(hGroup, "mDataContentDescription"),
-                                        sSbHpResId,
-                                        XposedHelpers.getBooleanField(hGroup, "mIsWide"),
-                                        new int[] { sQsHpResId, sQsHpResId });
-                                iconSet.put(TelephonyManager.NETWORK_TYPE_HSPAP, hPlusGroup);
-                            }
+                XposedHelpers.findAndHookMethod(mobileNetworkCtrlClass, "mapIconSets", new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        SparseArray<Object> iconSet = (SparseArray<Object>) XposedHelpers.getObjectField(
+                                param.thisObject, "mNetworkToIconLookup");
+                        Object hGroup = iconSet.get(TelephonyManager.NETWORK_TYPE_HSPAP);
+                        if (Utils.isMotoXtDevice()) {
+                            Constructor<?> c = hGroup.getClass().getConstructor(
+                                    String.class, int[][].class, int[][].class, int[].class,
+                                    int.class, int.class, int.class, int.class,
+                                    int.class, int.class, int.class, boolean.class, int[].class,
+                                    int[][].class, int[][].class, boolean.class, boolean.class,
+                                    int[].class, int[].class, int[].class, int[].class,
+                                    int[].class, int[].class, int[].class, int[].class,
+                                    int[].class, int.class, int[].class, int[].class, int[].class,
+                                    int[].class, int[].class);
+                            Object hPlusGroup = c.newInstance("HP",
+                                    XposedHelpers.getObjectField(hGroup, "mSbIcons"),
+                                    XposedHelpers.getObjectField(hGroup, "mQsIcons"),
+                                    XposedHelpers.getObjectField(hGroup, "mContentDesc"),
+                                    XposedHelpers.getIntField(hGroup, "mSbNullState"),
+                                    XposedHelpers.getIntField(hGroup, "mQsNullState"),
+                                    XposedHelpers.getIntField(hGroup, "mSbDiscState"),
+                                    XposedHelpers.getIntField(hGroup, "mQsDiscState"),
+                                    XposedHelpers.getIntField(hGroup, "mDiscContentDesc"),
+                                    XposedHelpers.getIntField(hGroup, "mDataContentDescription"),
+                                    sSbHpResId,
+                                    XposedHelpers.getBooleanField(hGroup, "mIsWide"),
+                                    new int[] { sQsHpResId, sQsHpResId },
+                                    XposedHelpers.getObjectField(hGroup, "mMotoSBActivityAOSPLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoQSActivityAOSPLookup"),
+                                    XposedHelpers.getBooleanField(hGroup, "mIsMotoUI"),
+                                    XposedHelpers.getBooleanField(hGroup, "mIsMotoTwoCell"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoSimDescriptionLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoSBSimLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoQSSimLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoSignalDescriptionLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoSBSignalLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoQSSignalLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoRoamingDescriptionLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoSBRoamingLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoQSRoamingLookup"),
+                                    XposedHelpers.getIntField(hGroup, "mMotoDataTypeDescription"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoSBDataTypeLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoQSDataTypeLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoActivityDescriptionLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoSBActivityLookup"),
+                                    XposedHelpers.getObjectField(hGroup, "mMotoQSActivityLookup"));
+                            iconSet.put(TelephonyManager.NETWORK_TYPE_HSPAP, hPlusGroup);
+                        } else {
+                            Constructor<?> c = hGroup.getClass().getConstructor(
+                                    String.class, int[][].class, int[][].class, int[].class,
+                                    int.class, int.class, int.class, int.class,
+                                    int.class, int.class, int.class, boolean.class, int[].class);
+                            Object hPlusGroup = c.newInstance("HP",
+                                    XposedHelpers.getObjectField(hGroup, "mSbIcons"),
+                                    XposedHelpers.getObjectField(hGroup, "mQsIcons"),
+                                    XposedHelpers.getObjectField(hGroup, "mContentDesc"),
+                                    XposedHelpers.getIntField(hGroup, "mSbNullState"),
+                                    XposedHelpers.getIntField(hGroup, "mQsNullState"),
+                                    XposedHelpers.getIntField(hGroup, "mSbDiscState"),
+                                    XposedHelpers.getIntField(hGroup, "mQsDiscState"),
+                                    XposedHelpers.getIntField(hGroup, "mDiscContentDesc"),
+                                    XposedHelpers.getIntField(hGroup, "mDataContentDescription"),
+                                    sSbHpResId,
+                                    XposedHelpers.getBooleanField(hGroup, "mIsWide"),
+                                    new int[] { sQsHpResId, sQsHpResId });
+                            iconSet.put(TelephonyManager.NETWORK_TYPE_HSPAP, hPlusGroup);
                         }
-                    });
-                } else {
-                    final Class<?> networkCtrlClass = XposedHelpers.findClass(
-                            "com.android.systemui.statusbar.policy.NetworkControllerImpl", 
-                            mView.getContext().getClassLoader());
-                    XposedHelpers.findAndHookMethod(networkCtrlClass, "updateDataNetType", new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            if (DEBUG) log("NetworkController: updateDataNetType");
-                            if (!(XposedHelpers.getBooleanField(param.thisObject, "mIsWimaxEnabled") &&
-                                    XposedHelpers.getBooleanField(param.thisObject, "mWimaxConnected")) &&
-                                    XposedHelpers.getIntField(param.thisObject, "mDataNetType") ==
-                                        TelephonyManager.NETWORK_TYPE_HSPAP) {
-                                int inetCondition = XposedHelpers.getIntField(param.thisObject, "mInetCondition");
-                                XposedHelpers.setObjectField(param.thisObject, "mDataIconList", DATA_HP[inetCondition]);
-                                boolean isCdmaEri = (Boolean) XposedHelpers.callMethod(param.thisObject, "isCdma") &&
-                                        (Boolean) XposedHelpers.callMethod(param.thisObject, "isCdmaEri");
-                                boolean isRoaming = ((TelephonyManager) XposedHelpers.getObjectField(
-                                        param.thisObject, "mPhone")).isNetworkRoaming();
-                                if (!isCdmaEri && !isRoaming) {
-                                    XposedHelpers.setIntField(param.thisObject, "mDataTypeIconId", sSbHpResId);
-                                    XposedHelpers.setIntField(param.thisObject, "mQSDataTypeIconId",
-                                            QS_DATA_HP[inetCondition]);
-                                    if (DEBUG) {
-                                        log("H+ inet condition: " + inetCondition);
-                                        log("H+ data type: " + sSbHpResId);
-                                        log("H+ QS data type: " + QS_DATA_HP[inetCondition]);
-                                    }
-                                }
-                            }
-                        }
-                    });
-                }
+                    }
+                });
             } catch (Throwable t) {
                 logAndMute("updateDataNetType", t);
             }
@@ -582,14 +549,14 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         final ClassLoader classLoader = mView.getClass().getClassLoader();
         final Class<?> networkCtrlCbClass = Utils.isMotoXtDevice() ?
                 XposedHelpers.findClass(
-                "com.android.systemui.statusbar.policy.MotorolaNetworkController.NetworkSignalChangedCallback", 
+                "com.android.systemui.statusbar.policy.MotorolaNetworkController.SignalCallback", 
                 classLoader) :
                 XposedHelpers.findClass(
-                "com.android.systemui.statusbar.policy.NetworkController.NetworkSignalChangedCallback", 
+                "com.android.systemui.statusbar.policy.NetworkController.SignalCallback", 
                 classLoader);
         mNetworkControllerCallback = Proxy.newProxyInstance(classLoader, 
                 new Class<?>[] { networkCtrlCbClass }, new NetworkControllerCallback());
-            XposedHelpers.callMethod(networkController, "addNetworkSignalChangedCallback",
+            XposedHelpers.callMethod(networkController, "addSignalCallback",
                     mNetworkControllerCallback);
         if (DEBUG) log("setNetworkController: callback registered");
     }
@@ -682,7 +649,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             String methodName = method.getName();
 
             try {
-                if (methodName.equals("onWifiSignalChanged")) {
+                if (methodName.equals("setWifiIndicators")) {
                     int enabledIdx = 0;
                     int inIdx = 3;
                     int outIdx = 4;
@@ -700,22 +667,22 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                         mWifiActivity.update((Boolean)args[enabledIdx],
                                 (Boolean)args[inIdx], (Boolean)args[outIdx]);
                     }
-                } else if (methodName.equals("onMobileDataSignalChanged")) {
-                    int enabledIdx = 0;
+                } else if (methodName.equals("setMobileDataIndicators")) {
+                    //int enabledIdx = 0;
                     int inIdx = 4;
                     int outIdx = 5;
                     if (Utils.isMotoXtDevice() && args.length == 24) {
-                        enabledIdx = 1;
+                        //enabledIdx = 1;
                         inIdx = 7;
                         outIdx = 8;
                     }
                     if (DEBUG) {
-                        log("Mobile data enabled: " + args[enabledIdx]);
+                        //log("Mobile data enabled: " + args[enabledIdx]);
                         log("Mobile data activity in: " + (Boolean)args[inIdx]);
                         log("Mobile data activity out: " + (Boolean)args[outIdx]);
                     }
                     if (mMobileActivity != null) {
-                        mMobileActivity.update((Boolean)args[enabledIdx], 
+                        mMobileActivity.update(true, 
                                 (Boolean)args[inIdx], (Boolean)args[outIdx]);
                     }
                 }
