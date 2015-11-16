@@ -544,7 +544,7 @@
     <string name="hwkey_action_torch">Zapnúť/vypnúť svetlo</string>
 
     <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Rozšíriť automaticky</string>
+    <string name="pref_volume_panel_autoexpand_title">Rozšíriť panel hlasitosti automaticky</string>
 
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Tlačidlo Menu</string>

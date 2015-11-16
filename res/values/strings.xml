@@ -573,7 +573,7 @@
     <string name="hwkey_action_torch">Toggle torch</string>
 
     <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Expand automatically</string>
+    <string name="pref_volume_panel_autoexpand_title">Volume panel auto-expand</string>
 
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Menu key</string>

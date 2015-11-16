@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
+import android.widget.ImageButton;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -120,6 +121,17 @@ public class ModVolumePanel {
                     // TODO: volume linking
                     //intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
                     context.registerReceiver(mBrodcastReceiver, intentFilter);
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classVolumePanel, "showH", int.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mAutoExpand && !XposedHelpers.getBooleanField(param.thisObject, "mExpanded")) {
+                        ImageButton expandBtn = (ImageButton) XposedHelpers.getObjectField(
+                                param.thisObject, "mExpandButton");
+                        expandBtn.performClick();
+                    }
                 }
             });
 
