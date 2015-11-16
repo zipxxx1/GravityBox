@@ -1732,10 +1732,6 @@
     <string name="pref_signal_cluster_dem_title">Felkiáltójelek letiltása</string>
     <string name="pref_signal_cluster_dem_summary">Újraindítás szükséges</string>
 
-    <!-- UNC: LED priority mode -->
-    <string name="pref_lc_led_priority_mode_title">Prioritás mód</string>
-    <string name="pref_lc_led_priority_mode_summary">Engedélyezi az értesítési LED-et a prioritást élvező és a néma csengési módoknál</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Hang rezgésre átalakítás tiltása</string>
     <string name="pref_lc_sound_vibrate_summary">Megakadályozza azon értesítések rezgő visszajelzését, amelyeknél a rezgés le van tiltva, de az Android ezt mégis kényszerítetten használja a csak rezgésre beállított csengés üzemmód alatti értesítési hang rezgésre konvertálása miatt.</string>

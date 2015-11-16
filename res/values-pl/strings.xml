@@ -1719,10 +1719,6 @@
     <string name="pref_signal_cluster_dem_title">Wyłącz symbole wykrzykników</string>
     <string name="pref_signal_cluster_dem_summary">Wymaga ponownego uruchomienia</string>
 
-    <!-- UNC: LED priority mode -->
-    <string name="pref_lc_led_priority_mode_title">Tryb priorytetowy</string>
-    <string name="pref_lc_led_priority_mode_summary">Dozwolona LED w trybach priorytetu i wyciszenia dzwonka</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Wyłącz konwersję dźwięku na wibracje</string>
     <string name="pref_lc_sound_vibrate_summary">Zapobiega wibracjom dla powiadomień które mają wyłączony tryb wibracji

@@ -1766,10 +1766,6 @@
     <string name="pref_signal_cluster_dem_title">关闭惊叹号</string>
     <string name="pref_signal_cluster_dem_summary">需要重新启动</string>
 
-    <!-- UNC: LED priority mode -->
-    <string name="pref_lc_led_priority_mode_title">优先模式</string>
-    <string name="pref_lc_led_priority_mode_summary">无声振铃模式中允许LED优先级</string>
-    
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">禁用转换声音时振动</string>
     <string name="pref_lc_sound_vibrate_summary">通知关闭时防止振动,只在铃声模式时才振动</string>

@@ -1722,8 +1722,4 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
     <string name="pref_signal_cluster_dem_title">Desativar exclamações</string>
     <string name="pref_signal_cluster_dem_summary">Necessário reiniciar</string>
 
-    <!-- UNC: LED priority mode -->
-    <string name="pref_lc_led_priority_mode_title">Modo prioridade</string>
-    <string name="pref_lc_led_priority_mode_summary">Permite o LED durante os modos silencioso e prioridade</string>
-
 </resources>

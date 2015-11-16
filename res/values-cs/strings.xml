@@ -1729,10 +1729,6 @@
     <string name="pref_signal_cluster_dem_title">Vypnout vykřičníky</string>
     <string name="pref_signal_cluster_dem_summary">Vyžaduje restart</string>
 
-    <!-- UNC: LED priority mode -->
-    <string name="pref_lc_led_priority_mode_title">Prioritní režim</string>
-    <string name="pref_lc_led_priority_mode_summary">Povolí LED během prioritního nebo tichého režimu vyzvánění</string>
-
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Vypnout konverzi zvuku na vibrace</string>
     <string name="pref_lc_sound_vibrate_summary">Zabrání oznámením, které mají vibrace vypnuté, vibrovat

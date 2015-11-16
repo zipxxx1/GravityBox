@@ -1397,7 +1397,4 @@
     <string name="pref_signal_cluster_dem_title">경고(느낌표) 표시 비활성화</string>
     <string name="pref_signal_cluster_dem_summary">재시작이 필요합니다.</string>
 
-    <string name="pref_lc_led_priority_mode_title">우선 모드</string>
-    <string name="pref_lc_led_priority_mode_summary">우선 모드 및 음소거 모드에서도 LED를 허용합니다.</string>
-
 </resources>
