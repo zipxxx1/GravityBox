@@ -304,7 +304,7 @@ public class BatteryTile extends QsTile {
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             final Resources res = getResources();
             int width = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    15, res.getDisplayMetrics()) * mScalingFactor);
+                    13, res.getDisplayMetrics()) * mScalingFactor);
             setMeasuredDimension(width, MeasureSpec.getSize(heightMeasureSpec));
         }
 
