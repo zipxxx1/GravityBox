@@ -647,6 +647,14 @@ public class ModStatusBar {
                         }
                     }
                 });
+                XposedHelpers.findAndHookMethod(sbiCtrlClass, "applyIconTint", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mClock != null) {
+                            mClock.refreshColor();
+                        }
+                    }
+                });
             }
 
             XposedHelpers.findAndHookMethod(phoneStatusBarClass, 

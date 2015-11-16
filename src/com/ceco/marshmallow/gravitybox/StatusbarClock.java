@@ -21,6 +21,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager;
+import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
@@ -111,6 +112,19 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
         setClockVisibility(true);
     }
 
+    public void updateColor(int color) {
+        if (mClock != null) {
+            mClock.setTextColor(color);
+        }
+    }
+
+    public void refreshColor() {
+        if (SysUiManagers.IconManager != null &&
+                SysUiManagers.IconManager.isColoringEnabled()) {
+            updateColor(SysUiManagers.IconManager.getIconColor());
+        }
+    }
+
     private void hookGetSmallTime() {
         try {
             XposedHelpers.findAndHookMethod(mClock.getClass(), "getSmallTime", new XC_MethodHook() {
@@ -191,9 +205,9 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         if (mClock != null && (flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
             if (colorInfo.coloringEnabled) {
-                mClock.setTextColor(colorInfo.iconColor[0]);
+                updateColor(colorInfo.iconColor[0]);
             } else {
-                mClock.setTextColor(mDefaultClockColor);
+                updateColor(mDefaultClockColor);
             }
         }
     }

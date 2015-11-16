@@ -15,6 +15,7 @@
 
 package com.ceco.marshmallow.gravitybox;
 
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
@@ -41,6 +42,7 @@ public class StatusbarBattery implements IconManagerListener {
 
     public StatusbarBattery(View batteryView) {
         mBattery = batteryView;
+        createHooks();
         try {
             final int[] colors = (int[]) XposedHelpers.getObjectField(mBattery, "mColors");
             mDefaultColor = colors[colors.length-1];
@@ -53,6 +55,23 @@ public class StatusbarBattery implements IconManagerListener {
         }
         if (SysUiManagers.IconManager != null) {
             SysUiManagers.IconManager.registerListener(this);
+        }
+    }
+
+    private void createHooks() {
+        try {
+            XposedHelpers.findAndHookMethod(mBattery.getClass(), "getFillColor",
+                    float.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (SysUiManagers.IconManager != null &&
+                            SysUiManagers.IconManager.isColoringEnabled()) {
+                        param.setResult(SysUiManagers.IconManager.getIconColor());
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
         }
     }
 
@@ -69,6 +88,7 @@ public class StatusbarBattery implements IconManagerListener {
                 framePaint.setColor(frameColor);
                 framePaint.setAlpha(mFrameAlpha);
                 XposedHelpers.setIntField(mBattery, "mChargeColor", chargeColor);
+                XposedHelpers.setIntField(mBattery, "mIconTint", mainColor);
             } catch (Throwable t) {
                 log("Error setting colors: " + t.getMessage());
             }
