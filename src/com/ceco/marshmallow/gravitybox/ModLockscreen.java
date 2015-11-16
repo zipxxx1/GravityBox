@@ -549,8 +549,8 @@ public class ModLockscreen {
             final Object lockPatternUtils = XposedHelpers.getObjectField(securityView, "mLockPatternUtils");
 
             if (callback != null && lockPatternUtils != null && entry.length() > 3 && 
-                    (Boolean) XposedHelpers.callMethod(lockPatternUtils, "checkPassword", entry)) {
-                XposedHelpers.callMethod(callback, "reportUnlockAttempt", true);
+                    (Boolean) XposedHelpers.callMethod(lockPatternUtils, "checkPassword", entry, 0)) {
+                XposedHelpers.callMethod(callback, "reportUnlockAttempt", true, 0);
                 XposedHelpers.callMethod(callback, "dismiss", true);
             }
         } catch (Throwable t) {
