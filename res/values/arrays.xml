@@ -103,6 +103,7 @@
         <item>@string/qs_tile_gps</item>
         <item>@string/qs_tile_remote_display</item>
         <item>@string/qs_tile_wifi_ap</item>
+        <item>@string/qs_tile_dnd</item>
         <!-- GB -->
         <item>@string/qs_tile_battery</item>
         <item>@string/qs_tile_nfc</item>
@@ -146,6 +147,7 @@
         <item>aosp_tile_location</item>
         <item>aosp_tile_cast</item>
         <item>aosp_tile_hotspot</item>
+        <item>aosp_tile_dnd</item>
         <!-- GB -->
         <item>gb_tile_battery</item>
         <item>gb_tile_nfc</item>
@@ -186,6 +188,7 @@
         <item>aosp_tile_location</item>
         <item>aosp_tile_cast</item>
         <item>aosp_tile_hotspot</item>
+        <item>aosp_tile_dnd</item>
     </string-array>
 
     <string-array name="lockscreen_bg_entries" translatable="false">

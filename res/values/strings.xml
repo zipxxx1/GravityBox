@@ -116,6 +116,7 @@
     <string name="qs_tile_lock_screen">Lock screen</string>
     <string name="qs_tile_inversion">Inversion</string>
     <string name="qs_tile_battery">Battery</string>
+    <string name="qs_tile_dnd">Do not disturb</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>

@@ -99,6 +99,7 @@
     <string name="qs_tile_lock_screen">Obrazovka uzamčení</string>
     <string name="qs_tile_inversion">Inverze barev</string>
     <string name="qs_tile_battery">Baterie</string>
+    <string name="qs_tile_dnd">Nerušit</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Výběr barvy</string>
