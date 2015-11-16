@@ -42,21 +42,17 @@ public class QsPanel implements BroadcastSubReceiver {
         XposedBridge.log(TAG + ": " + message);
     }
 
-    private Context mContext;
     private XSharedPreferences mPrefs;
     private ViewGroup mQsPanel;
     private int mNumColumns;
     private View mBrightnessSlider;
     private boolean mHideBrightness;
 
-    public QsPanel(Context context, XSharedPreferences prefs, 
-            QsTileEventDistributor eventDistributor) {
-        mContext = context;
+    public QsPanel(XSharedPreferences prefs, ClassLoader classLoader) {
         mPrefs = prefs;
-        eventDistributor.registerBroadcastSubReceiver(this);
 
         initPreferences();
-        createHooks();
+        createHooks(classLoader);
         if (DEBUG) log("QsPanel wrapper created");
     }
 
@@ -68,6 +64,10 @@ public class QsPanel implements BroadcastSubReceiver {
                 "; mHideBrightness=" + mHideBrightness);
     }
 
+    public void setEventDistributor(QsTileEventDistributor eventDistributor) {
+        eventDistributor.registerBroadcastSubReceiver(this);   
+    }
+    
     public void updateResources() {
         try {
             if (mQsPanel != null) {
@@ -129,7 +129,7 @@ public class QsPanel implements BroadcastSubReceiver {
             enabledTiles.addAll(Arrays.asList(
                     mPrefs.getString(TileOrderActivity.PREF_KEY_TILE_ENABLED,
                     TileOrderActivity.getDefaultTileList(
-                            Utils.getGbContext(mContext))).split(",")));
+                            Utils.getGbContext(mQsPanel.getContext()))).split(",")));
         } catch (Throwable t) { /* ignore */ }
 
         for (String tileKey : enabledTiles) {
@@ -140,18 +140,17 @@ public class QsPanel implements BroadcastSubReceiver {
         return count;
     }
 
-    private void createHooks() {
+    private void createHooks(final ClassLoader classLoader) {
         try {
-            ClassLoader cl = mContext.getClassLoader();
+            Class<?> classQsPanel = XposedHelpers.findClass(CLASS_QS_PANEL, classLoader);
 
-            XposedHelpers.findAndHookMethod(CLASS_QS_PANEL, cl, "updateResources",
+            XposedHelpers.findAndHookMethod(classQsPanel, "updateResources",
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mQsPanel == null) {
                         mQsPanel = (ViewGroup) param.thisObject;
                     }
-
                     boolean shouldInvalidate = false;
 
                     // brighntess slider

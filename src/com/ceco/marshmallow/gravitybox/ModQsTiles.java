@@ -27,6 +27,7 @@ public class ModQsTiles {
     public static final boolean DEBUG = false;
 
     public static final String CLASS_TILE_HOST = "com.android.systemui.statusbar.phone.QSTileHost";
+    public static final String TILES_SETTING = "sysui_qs_tiles";
 
     public static final List<String> GB_TILE_KEYS = new ArrayList<String>(Arrays.asList(
             "gb_tile_battery",
@@ -67,11 +68,15 @@ public class ModQsTiles {
             if (DEBUG) log("init");
 
             Class<?> classTileHost = XposedHelpers.findClass(CLASS_TILE_HOST, classLoader);
-
-            XposedHelpers.findAndHookMethod(classTileHost, "recreateTiles", new XC_MethodHook() {
+            mQsPanel = new QsPanel(prefs, classLoader);
+            
+            XposedHelpers.findAndHookMethod(classTileHost, "onTuningChanged",
+                    String.class, String.class, new XC_MethodHook() {
                 @SuppressWarnings("unchecked")
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!TILES_SETTING.equals(param.args[0])) return;
+
                     if (mEventDistributor != null) {
                         Map<String, Object> tileMap = (Map<String, Object>)
                                 XposedHelpers.getObjectField(param.thisObject, "mTiles");
@@ -79,16 +84,17 @@ public class ModQsTiles {
                             XposedHelpers.callMethod(entry.getValue(), "handleDestroy");
                         }
                         tileMap.clear();
+                        ((List<?>)XposedHelpers.getObjectField(param.thisObject, "mTileSpecs")).clear();
                     }
-                    param.setObjectExtra("callback", XposedHelpers.getObjectField(
-                           param.thisObject, "mCallback"));
-                    XposedHelpers.setObjectField(param.thisObject, "mCallback", (Object)null);
                 }
                 @SuppressWarnings("unchecked")
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (!TILES_SETTING.equals(param.args[0])) return;
+
                     if (mEventDistributor == null) {
                         mEventDistributor = new QsTileEventDistributor(param.thisObject, prefs);
+                        mQsPanel.setEventDistributor(mEventDistributor);
                         if (DEBUG) log("Tile event distributor created");
                     }
 
@@ -159,18 +165,15 @@ public class ModQsTiles {
                     tileMap.clear();
                     tileMap.putAll(orderedMap);
 
-                    Object cb = param.getObjectExtra("callback");
+                    Object cb = XposedHelpers.getObjectField(param.thisObject, "mCallback");
                     if (cb != null) {
-                        XposedHelpers.setObjectField(param.thisObject, "mCallback", cb);
                         XposedHelpers.callMethod(cb, "onTilesChanged");
                     }
+
                     if (DEBUG) log("Tiles created");
 
                     if (mQuickPulldownHandler == null) {
                         mQuickPulldownHandler = new QsQuickPulldownHandler(context, prefs, mEventDistributor);
-                    }
-                    if (mQsPanel == null) {
-                        mQsPanel = new QsPanel(context, prefs, mEventDistributor);
                     }
                     mQsPanel.updateResources();
                 }

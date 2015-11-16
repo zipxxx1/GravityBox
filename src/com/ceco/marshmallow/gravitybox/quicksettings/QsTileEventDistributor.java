@@ -123,7 +123,7 @@ public class QsTileEventDistributor {
     private void recreateTiles() {
         try {
             mPrefs.reload();
-            XposedHelpers.callMethod(mHost, "recreateTiles");
+            XposedHelpers.callMethod(mHost, "onTuningChanged", ModQsTiles.TILES_SETTING, (String)null);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
