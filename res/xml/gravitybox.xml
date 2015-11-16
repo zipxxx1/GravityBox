@@ -1877,11 +1877,12 @@
             android:key="pref_volume_panel_autoexpand"
             android:title="@string/pref_volume_panel_autoexpand_title" />
 
+        <!-- TODO: volume linking
         <CheckBoxPreference 
             android:key="pref_link_volumes"
             android:title="@string/pref_link_volumes_title"
             android:summary="@string/pref_link_volumes_summary"
-            android:defaultValue="true" />
+            android:defaultValue="true" /> -->
 
         <CheckBoxPreference 
             android:key="pref_volume_adjust_vibrate_mute"

@@ -15,17 +15,11 @@
 
 package com.ceco.marshmallow.gravitybox;
 
-import com.ceco.marshmallow.gravitybox.R;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.XModuleResources;
-import android.content.res.XResources;
-import android.media.AudioManager;
 import android.os.Handler;
-import android.util.SparseArray;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -35,7 +29,7 @@ import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResou
 public class ModVolumePanel {
     private static final String TAG = "GB:ModVolumePanel";
     public static final String PACKAGE_NAME = "com.android.systemui";
-    private static final String CLASS_VOLUME_PANEL = "com.android.systemui.volume.VolumePanel";
+    private static final String CLASS_VOLUME_PANEL = "com.android.systemui.volume.VolumeDialog";
     private static final boolean DEBUG = false;
 
     private static final int MSG_TIMEOUT = 5;
@@ -44,10 +38,11 @@ public class ModVolumePanel {
     private static boolean mVolumeAdjustVibrateMuted;
     private static boolean mAutoExpand;
     private static int mTimeout;
-    private static boolean mVolumesLinked;
     private static Context mGbContext;
-    private static int mIconRingerAudibleId;
-    private static int mIconRingerAudibleIdOrig;
+    // TODO: volume linking
+    //private static boolean mVolumesLinked;
+    //private static int mIconRingerAudibleId;
+    //private static int mIconRingerAudibleIdOrig;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -67,20 +62,23 @@ public class ModVolumePanel {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_TIMEOUT)) {
                     mTimeout = intent.getIntExtra(GravityBoxSettings.EXTRA_TIMEOUT, 0);
                 }
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
-                mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
-                updateRingerIcon();
             }
+            // TODO: volume linking
+//            else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
+//                mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
+//                updateRingerIcon();
+//            }
         }
         
     };
 
     public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
-        XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
-
-        mIconRingerAudibleId = 0;
-        mIconRingerAudibleId = XResources.getFakeResId(modRes, R.drawable.ic_ringer_audible);
-        resparam.res.setReplacement(mIconRingerAudibleId, modRes.fwd(R.drawable.ic_ringer_audible));
+        // TODO: volume linking
+//        XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
+//
+//        mIconRingerAudibleId = 0;
+//        mIconRingerAudibleId = XResources.getFakeResId(modRes, R.drawable.ic_ringer_audible);
+//        resparam.res.setReplacement(mIconRingerAudibleId, modRes.fwd(R.drawable.ic_ringer_audible));
     }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
@@ -89,7 +87,8 @@ public class ModVolumePanel {
 
             mVolumeAdjustVibrateMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE, false);
             mAutoExpand = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_AUTOEXPAND, false);
-            mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
+            // TODO: volume linking
+            //mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
 
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
 
@@ -108,16 +107,18 @@ public class ModVolumePanel {
                         log("Invalid value for PREF_KEY_VOLUME_PANEL_TIMEOUT preference");
                     }
 
-                    Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(classVolumePanel, "STREAMS");
-                    XposedHelpers.setBooleanField(streams[1], "show", true);
-                    mIconRingerAudibleIdOrig = XposedHelpers.getIntField(streams[1], "iconRes");
-                    XposedHelpers.setBooleanField(streams[2], "show", true);
-                    XposedHelpers.setBooleanField(streams[5], "show", true);
-                    updateRingerIcon();
+                    // TODO: volume linking
+//                    Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(classVolumePanel, "STREAMS");
+//                    XposedHelpers.setBooleanField(streams[1], "show", true);
+//                    mIconRingerAudibleIdOrig = XposedHelpers.getIntField(streams[1], "iconRes");
+//                    XposedHelpers.setBooleanField(streams[2], "show", true);
+//                    XposedHelpers.setBooleanField(streams[5], "show", true);
+//                    updateRingerIcon();
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
+                    // TODO: volume linking
+                    //intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
                     context.registerReceiver(mBrodcastReceiver, intentFilter);
                 }
             });
@@ -142,40 +143,42 @@ public class ModVolumePanel {
                     }
                 }
             });
-      
-            XposedHelpers.findAndHookMethod(classVolumePanel, "isNotificationOrRing", int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (XposedHelpers.getBooleanField(mVolumePanel, "mVoiceCapable")) {
-                        int streamType = (int) param.args[0];
-                        boolean result = streamType == AudioManager.STREAM_RING ||
-                                (mVolumesLinked && streamType == AudioManager.STREAM_NOTIFICATION);
-                        param.setResult(result);
-                    }
-                }
-            });
+
+            // TODO: volume linking
+//            XposedHelpers.findAndHookMethod(classVolumePanel, "isNotificationOrRing", int.class, new XC_MethodHook() {
+//                @Override
+//                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+//                    if (XposedHelpers.getBooleanField(mVolumePanel, "mVoiceCapable")) {
+//                        int streamType = (int) param.args[0];
+//                        boolean result = streamType == AudioManager.STREAM_RING ||
+//                                (mVolumesLinked && streamType == AudioManager.STREAM_NOTIFICATION);
+//                        param.setResult(result);
+//                    }
+//                }
+//            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    private static void updateRingerIcon() {
-        if (mIconRingerAudibleId == 0) return;
-        try {
-            int iconResId = mVolumesLinked ? mIconRingerAudibleIdOrig : mIconRingerAudibleId;
-            Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(
-                    mVolumePanel.getClass(), "STREAMS");
-            XposedHelpers.setIntField(streams[1], "iconRes", iconResId);
-            SparseArray<?> streamControls = (SparseArray<?>) XposedHelpers.getObjectField(
-                    mVolumePanel, "mStreamControls");
-            if (streamControls != null) {
-                Object sc = streamControls.get(AudioManager.STREAM_RING);
-                if (sc != null) {
-                    XposedHelpers.setIntField(sc, "iconRes", iconResId);
-                }
-            }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
+    // TODO: volume linking
+//    private static void updateRingerIcon() {
+//        if (mIconRingerAudibleId == 0) return;
+//        try {
+//            int iconResId = mVolumesLinked ? mIconRingerAudibleIdOrig : mIconRingerAudibleId;
+//            Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(
+//                    mVolumePanel.getClass(), "STREAMS");
+//            XposedHelpers.setIntField(streams[1], "iconRes", iconResId);
+//            SparseArray<?> streamControls = (SparseArray<?>) XposedHelpers.getObjectField(
+//                    mVolumePanel, "mStreamControls");
+//            if (streamControls != null) {
+//                Object sc = streamControls.get(AudioManager.STREAM_RING);
+//                if (sc != null) {
+//                    XposedHelpers.setIntField(sc, "iconRes", iconResId);
+//                }
+//            }
+//        } catch (Throwable t) {
+//            XposedBridge.log(t);
+//        }
+//    }
 }

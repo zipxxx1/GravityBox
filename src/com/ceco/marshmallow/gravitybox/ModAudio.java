@@ -41,7 +41,8 @@ public class ModAudio {
     private static boolean mSwapVolumeKeys;
     private static HandleChangeVolume mHandleChangeVolume;
     private static XSharedPreferences mQhPrefs;
-    private static boolean mVolumesLinked;
+    // TODO: volume linking
+    //private static boolean mVolumesLinked;
     private static Object mAudioService;
 
     private static void log(String message) {
@@ -60,11 +61,13 @@ public class ModAudio {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_VOL_SWAP_KEYS_CHANGED)) {
                 mSwapVolumeKeys = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_SWAP_KEYS, false);
                 if (DEBUG) log("Swap volume keys set to: " + mSwapVolumeKeys);
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
-                mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
-                if (DEBUG) log("mVolumesLinked set to: " + mVolumesLinked);
-                updateStreamVolumeAlias();
             }
+            // TODO: volume linking
+//            else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
+//                mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
+//                if (DEBUG) log("mVolumesLinked set to: " + mVolumesLinked);
+//                updateStreamVolumeAlias();
+//            }
         }
     };
 
@@ -76,7 +79,8 @@ public class ModAudio {
             mQhPrefs.makeWorldReadable();
 
             mSwapVolumeKeys = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_SWAP_KEYS, false);
-            mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
+            // TODO: volume linking
+            //mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
 
             XposedBridge.hookAllConstructors(classAudioService, new XC_MethodHook() {
                 @Override
@@ -167,37 +171,39 @@ public class ModAudio {
                 } 
             });
 
-            XposedHelpers.findAndHookMethod(classAudioService, "updateStreamVolumeAlias",
-                    boolean.class, String.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if ((Boolean) XposedHelpers.callMethod(param.thisObject, "isPlatformVoice")) {
-                        int[] streamVolumeAlias = (int[]) XposedHelpers.getObjectField(param.thisObject, "mStreamVolumeAlias");
-                        streamVolumeAlias[AudioManager.STREAM_NOTIFICATION] = mVolumesLinked ? 
-                                AudioManager.STREAM_RING : AudioManager.STREAM_NOTIFICATION;
-                        XposedHelpers.setObjectField(param.thisObject, "mStreamVolumeAlias", streamVolumeAlias);
-                        if (DEBUG) log("AudioService mStreamVolumeAlias updated, STREAM_NOTIFICATION set to: " + 
-                                streamVolumeAlias[AudioManager.STREAM_NOTIFICATION]);
-                    }
-                }
-            });
+            // TODO: volume linking
+//            XposedHelpers.findAndHookMethod(classAudioService, "updateStreamVolumeAlias",
+//                    boolean.class, String.class, new XC_MethodHook() {
+//                @Override
+//                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+//                    if ((Boolean) XposedHelpers.callMethod(param.thisObject, "isPlatformVoice")) {
+//                        int[] streamVolumeAlias = (int[]) XposedHelpers.getObjectField(param.thisObject, "mStreamVolumeAlias");
+//                        streamVolumeAlias[AudioManager.STREAM_NOTIFICATION] = mVolumesLinked ? 
+//                                AudioManager.STREAM_RING : AudioManager.STREAM_NOTIFICATION;
+//                        XposedHelpers.setObjectField(param.thisObject, "mStreamVolumeAlias", streamVolumeAlias);
+//                        if (DEBUG) log("AudioService mStreamVolumeAlias updated, STREAM_NOTIFICATION set to: " + 
+//                                streamVolumeAlias[AudioManager.STREAM_NOTIFICATION]);
+//                    }
+//                }
+//            });
         } catch(Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    private static void updateStreamVolumeAlias() {
-        if (mAudioService == null) {
-            if (DEBUG) log("updateStreamVolumeAlias: AudioService is null");
-            return;
-        }
-
-        try {
-            XposedHelpers.callMethod(mAudioService, "updateStreamVolumeAlias", true, "AudioService");
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
+    // TODO: volume linking
+//    private static void updateStreamVolumeAlias() {
+//        if (mAudioService == null) {
+//            if (DEBUG) log("updateStreamVolumeAlias: AudioService is null");
+//            return;
+//        }
+//
+//        try {
+//            XposedHelpers.callMethod(mAudioService, "updateStreamVolumeAlias", true, "AudioService");
+//        } catch (Throwable t) {
+//            XposedBridge.log(t);
+//        }
+//    }
 
     private static class HandleChangeVolume extends XC_MethodHook {
         private WindowManager mWm;
