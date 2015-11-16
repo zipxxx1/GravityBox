@@ -985,13 +985,11 @@
     <string-array name="lc_active_screen_mode_entries" translatable="false">
         <item>@string/lc_active_screen_mode_disabled</item>
         <item>@string/lc_active_screen_mode_nothing</item>
-        <item>@string/lc_active_screen_mode_headsup</item>
     </string-array>
 
     <string-array name="lc_active_screen_mode_values" translatable="false">
         <item>DISABLED</item>
         <item>DO_NOTHING</item>
-        <item>HEADS_UP</item>
     </string-array>
 
     <string-array name="charging_led_entries" translatable="false">

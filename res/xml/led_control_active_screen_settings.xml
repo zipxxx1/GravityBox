@@ -33,6 +33,7 @@
         android:defaultValue="false"
         android:dependency="activeScreenEnabled" />
 
+    <!--
     <com.ceco.marshmallow.gravitybox.preference.SeekBarPreference
         android:key="pref_unc_as_headsup_timeout"
         android:title="@string/pref_unc_as_headsup_timeout_title"
@@ -55,5 +56,6 @@
         monitorBoxUnit="%"
         android:defaultValue="0"
         android:dependency="activeScreenEnabled" />
+    -->
 
 </PreferenceScreen>

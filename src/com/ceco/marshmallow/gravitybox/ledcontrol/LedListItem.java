@@ -121,8 +121,8 @@ public class LedListItem implements IBaseListAdapterItem {
                 return mContext.getString(R.string.lc_active_screen_mode_disabled);
             case DO_NOTHING: 
                 return mContext.getString(R.string.lc_active_screen_mode_nothing);
-            case HEADS_UP:
-                return mContext.getString(R.string.lc_active_screen_mode_headsup);
+//            case HEADS_UP:
+//                return mContext.getString(R.string.lc_active_screen_mode_headsup);
             default:
                 return "N/A";
         }

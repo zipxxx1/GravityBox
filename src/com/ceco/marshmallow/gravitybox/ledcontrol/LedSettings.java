@@ -30,8 +30,8 @@ public class LedSettings {
 
     public static final String PREF_KEY_LOCKED = "uncLocked";
     public static final String PREF_KEY_ACTIVE_SCREEN_ENABLED = "activeScreenEnabled";
-    public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT = "pref_unc_as_headsup_timeout";
-    public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA = "pref_unc_as_headsup_alpha";
+    //public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT = "pref_unc_as_headsup_timeout";
+    //public static final String PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA = "pref_unc_as_headsup_alpha";
     public static final String PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS = "pref_unc_as_ignore_quiet_hours";
     public static final String PREF_KEY_ACTIVE_SCREEN_POCKET_MODE = "pref_unc_as_pocket_mode";
 
@@ -40,7 +40,7 @@ public class LedSettings {
 
     public enum LedMode { ORIGINAL, OVERRIDE, OFF };
     public enum HeadsUpMode { DEFAULT, ALWAYS, IMMERSIVE, OFF };
-    public enum ActiveScreenMode { DISABLED, DO_NOTHING, HEADS_UP };
+    public enum ActiveScreenMode { DISABLED, DO_NOTHING };
     public enum Visibility {
         DEFAULT(-2),
         PRIVATE(Notification.VISIBILITY_PRIVATE),
@@ -138,6 +138,7 @@ public class LedSettings {
             } else if (data[0].equals("vibratePattern")) {
                 ls.setVibratePatternFromString(data[1]);
             } else if (data[0].equals("activeScreenMode")) {
+                if ("HEADS_UP".equals(data[1])) data[1] = "DO_NOTHING";
                 ls.setActiveScreenMode(ActiveScreenMode.valueOf(data[1]));
             } else if (data[0].equals("ledMode")) {
                 ls.setLedMode(LedMode.valueOf(data[1]));

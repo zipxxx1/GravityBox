@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ceco.marshmallow.gravitybox.R;
-import com.ceco.marshmallow.gravitybox.HeadsUpSnoozeDialog.HeadsUpSnoozeTimerSetListener;
 import com.ceco.marshmallow.gravitybox.ledcontrol.LedSettings;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
@@ -44,18 +42,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.os.Binder;
-import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.service.notification.StatusBarNotification;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.Toast;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -67,22 +57,18 @@ public class ModLedControl {
     private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.notification.NotificationManagerService";
     private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
-    private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
     private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData.Entry";
-    private static final String CLASS_HEADSUP_NOTIF_VIEW = "com.android.systemui.statusbar.policy.HeadsUpNotificationView";
     private static final String CLASS_NOTIFICATION_RECORD = "com.android.server.notification.NotificationRecord";
     private static final String CLASS_HEADS_UP_MANAGER_ENTRY = "com.android.systemui.statusbar.policy.HeadsUpManager.HeadsUpEntry";
     public static final String PACKAGE_NAME_SYSTEMUI = "com.android.systemui";
 
     private static final String NOTIF_EXTRA_HEADS_UP_MODE = "gbHeadsUpMode";
     private static final String NOTIF_EXTRA_HEADS_UP_TIMEOUT = "gbHeadsUpTimeout";
-    private static final String NOTIF_EXTRA_HEADS_UP_ALPHA = "gbHeadsUpAlpha";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN = "gbActiveScreen";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_MODE = "gbActiveScreenMode";
     private static final String NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE = "gbActiveScreenPocketMode";
     public static final String NOTIF_EXTRA_PROGRESS_TRACKING = "gbProgressTracking";
     private static final String NOTIF_EXTRA_PRIORITY_MODE = "gbPriorityMode";
-    private static final int MSG_HIDE_HEADS_UP = 1029;
 
     public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
 
@@ -393,13 +379,6 @@ public class ModLedControl {
                         n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE));
                 n.extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN_POCKET_MODE, !mProximityWakeUpEnabled &&
                         mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE, true));
-                if (asMode == ActiveScreenMode.HEADS_UP) {
-                    n.extras.putInt(NOTIF_EXTRA_HEADS_UP_TIMEOUT,
-                            mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT, 10));
-                    n.extras.putFloat(NOTIF_EXTRA_HEADS_UP_ALPHA,
-                            (float)(100 - mPrefs.getInt(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA,
-                                    0)) / 100f);
-                }
 
                 if (DEBUG) log("Performing Active Screen with mode " + asMode.toString());
 
@@ -517,34 +496,12 @@ public class ModLedControl {
 
     // SystemUI package
     private static Object mStatusBar;
-    private static HeadsUpParams mHeadsUpParams;
-    private static HeadsUpSnoozeDialog mHeadsUpSnoozeDlg;
-    private static ImageButton mHeadsUpSnoozeBtn;
-    private static Map<String, Long> mHeadsUpSnoozeMap;
     private static XSharedPreferences mSysUiPrefs;
-
-    static class HeadsUpParams {
-        float alpha;
-    }
 
     private static BroadcastReceiver mSystemUiBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
-                try {
-                    View headsUpView = (View) XposedHelpers.getObjectField(
-                            mStatusBar, "mHeadsUpNotificationView");
-                    Object huNotifEntry = XposedHelpers.callMethod(headsUpView, "getEntry");
-                    if (huNotifEntry != null) {
-                        Handler h = (Handler) XposedHelpers.getObjectField(mStatusBar, "mHandler");
-                        h.sendEmptyMessage(MSG_HIDE_HEADS_UP);
-                    }
-                } catch (Throwable t) {
-                    XposedBridge.log(t);
-                }
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_HEADS_UP_SNOOZE_RESET)) {
-                resetHeadsUpSnoozeTimers();
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_HEADS_UP_SETTINGS_CHANGED)) {
+            if (intent.getAction().equals(GravityBoxSettings.ACTION_HEADS_UP_SETTINGS_CHANGED)) {
                 mSysUiPrefs.reload();
             }
         }
@@ -553,25 +510,15 @@ public class ModLedControl {
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mSysUiPrefs = prefs;
-            mHeadsUpParams = new HeadsUpParams();
-            mHeadsUpParams.alpha = (float)(100f - mSysUiPrefs.getInt(
-                    GravityBoxSettings.PREF_KEY_HEADS_UP_ALPHA, 0)) / 100f;
 
             XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "start", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!(Boolean)XposedHelpers.getBooleanField(param.thisObject, "mUseHeadsUp")) {
-                        XposedHelpers.setBooleanField(param.thisObject, "mUseHeadsUp", true);
-                        XposedHelpers.callMethod(param.thisObject, "addHeadsUpView");
-                    }
                     mStatusBar = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(mStatusBar, "mContext");
                     IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(Intent.ACTION_USER_PRESENT);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_HEADS_UP_SNOOZE_RESET);
                     intentFilter.addAction(GravityBoxSettings.ACTION_HEADS_UP_SETTINGS_CHANGED);
                     context.registerReceiver(mSystemUiBroadcastReceiver, intentFilter);
-                    mHeadsUpSnoozeBtn = createSnoozeButton(context);
                 }
             });
 
@@ -590,23 +537,11 @@ public class ModLedControl {
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     Notification n = sbn.getNotification();
                     int statusBarWindowState = XposedHelpers.getIntField(param.thisObject, "mStatusBarWindowState");
-                    String pkgName = sbn.getPackageName();
 
                     boolean showHeadsUp = false;
 
-                    // no heads up if snoozing
-                    if (mSysUiPrefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_SNOOZE, false) &&
-                            isHeadsUpSnoozing(pkgName)) {
-                        if (DEBUG) log("Heads up currently snoozing for " + pkgName);
-                        showHeadsUp = false; 
-                    // show if active screen heads up mode set
-                    } else if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE) &&
-                            ActiveScreenMode.valueOf(n.extras.getString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE)) ==
-                                ActiveScreenMode.HEADS_UP) {
-                        if (DEBUG) log("Showing active screen heads up");
-                        showHeadsUp = true;
                     // no heads up if app with DND enabled is in the foreground
-                    } else if (shouldNotDisturb(context)) {
+                    if (shouldNotDisturb(context)) {
                         if (DEBUG) log("shouldInterrupt: NO due to DND app in the foreground");
                         showHeadsUp = false;
                     // disable when panels are disabled
@@ -637,11 +572,6 @@ public class ModLedControl {
                         }
                     }
 
-                    if (showHeadsUp) {
-                        mHeadsUpParams.alpha = n.extras.getFloat(NOTIF_EXTRA_HEADS_UP_ALPHA,
-                                (float)(100 - mSysUiPrefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_ALPHA, 0)) / 100f);
-                    }
-
                     param.setResult(showHeadsUp);
                 }
             });
@@ -670,50 +600,6 @@ public class ModLedControl {
                     }
                 }
             });
-
-            XposedHelpers.findAndHookMethod(CLASS_HEADSUP_NOTIF_VIEW, classLoader,
-                    "showNotification", CLASS_NOTIF_DATA_ENTRY, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    // alpha
-                    ViewGroup contentHolder = (ViewGroup) XposedHelpers.getObjectField(param.thisObject, "mContentHolder");
-                    contentHolder.setAlpha(mHeadsUpParams.alpha);
-                    Object swipeHelper = XposedHelpers.getObjectField(param.thisObject, "mSwipeHelper");
-                    XposedHelpers.callMethod(swipeHelper, "setMaxSwipeProgress", mHeadsUpParams.alpha);
-                    // snooze button
-                    StatusBarNotification sbNotif = (StatusBarNotification)
-                            XposedHelpers.getObjectField(param.args[0], "notification");
-                    if (mHeadsUpSnoozeBtn != null) {
-                        if (mSysUiPrefs.getBoolean(GravityBoxSettings.PREF_KEY_HEADS_UP_SNOOZE, false)) {
-                            contentHolder.addView(mHeadsUpSnoozeBtn);
-                            mHeadsUpSnoozeDlg.setPackageName(sbNotif.getPackageName());
-                            mHeadsUpSnoozeBtn.setVisibility(View.VISIBLE);
-                            if (DEBUG) log("Showing snooze button ");
-                        } else {
-                            mHeadsUpSnoozeBtn.setVisibility(View.GONE);
-                            resetHeadsUpSnoozeTimers();
-                        }
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "notifyHeadsUpScreenOn", 
-                    boolean.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    View headsUpView = (View) XposedHelpers.getObjectField(
-                            param.thisObject, "mHeadsUpNotificationView");
-                    Object huNotifEntry = XposedHelpers.callMethod(headsUpView, "getEntry");
-                    if (huNotifEntry != null) {
-                        StatusBarNotification sbNotif = (StatusBarNotification)
-                                XposedHelpers.getObjectField(huNotifEntry, "notification");
-                        Notification n = sbNotif.getNotification();
-                        if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE)) {
-                            param.setResult(null);
-                        }
-                    }
-                }
-            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -722,30 +608,19 @@ public class ModLedControl {
     private static boolean keyguardAllowsHeadsUp(Context context) {
         boolean isShowingAndNotOccluded;
         boolean isInputRestricted;
-        if (Build.VERSION.SDK_INT < 22) {
-            Object kgTouchDelegate = XposedHelpers.callStaticMethod(
-                    XposedHelpers.findClass(CLASS_KG_TOUCH_DELEGATE, context.getClassLoader()),
-                    "getInstance", context);
-            isShowingAndNotOccluded = (boolean) XposedHelpers.callMethod(
-                    kgTouchDelegate, "isShowingAndNotOccluded");
-            isInputRestricted = (boolean) XposedHelpers.callMethod(
-                    kgTouchDelegate, "isInputRestricted");
-        } else {
-            Object kgViewManager = XposedHelpers.getObjectField(mStatusBar, "mStatusBarKeyguardViewManager");
-            isShowingAndNotOccluded = ((boolean)XposedHelpers.callMethod(kgViewManager, "isShowing") &&
-                    !(boolean)XposedHelpers.callMethod(kgViewManager, "isOccluded"));
-            isInputRestricted = (boolean)XposedHelpers.callMethod(kgViewManager, "isInputRestricted");
-        }
+        Object kgViewManager = XposedHelpers.getObjectField(mStatusBar, "mStatusBarKeyguardViewManager");
+        isShowingAndNotOccluded = ((boolean)XposedHelpers.callMethod(kgViewManager, "isShowing") &&
+                !(boolean)XposedHelpers.callMethod(kgViewManager, "isOccluded"));
+        isInputRestricted = (boolean)XposedHelpers.callMethod(kgViewManager, "isInputRestricted");
         return (!isShowingAndNotOccluded && !isInputRestricted);
     }
 
-    @SuppressWarnings("deprecation")
     private static boolean isHeadsUpAllowed(StatusBarNotification sbn, Context context) {
         if (context == null) return false;
 
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         Notification n = sbn.getNotification();
-        return (pm.isScreenOn() &&
+        return (pm.isInteractive() &&
                 keyguardAllowsHeadsUp(context) &&
                 (!sbn.isOngoing() || n.fullScreenIntent != null || (n.extras.getInt("headsup", 0) != 0)));
     }
@@ -775,78 +650,6 @@ public class ModLedControl {
             return (ls.getEnabled() && ls.getHeadsUpDnd());
         } else {
             return false;
-        }
-    }
-
-    private static ImageButton createSnoozeButton(final Context context) throws Throwable {
-        final Context gbContext = Utils.getGbContext(context);
-        mHeadsUpSnoozeDlg = new HeadsUpSnoozeDialog(context, gbContext, mHeadsUpSnoozeTimerSetListener);
-        mHeadsUpSnoozeMap = new HashMap<String, Long>();
-        mHeadsUpSnoozeMap.put("[ALL]", 0l);
-
-        ImageButton imgButton = new ImageButton(context);
-        int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40,
-                context.getResources().getDisplayMetrics());
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(sizePx, sizePx, 
-                Gravity.BOTTOM | Gravity.END);
-        imgButton.setLayoutParams(lp);
-        imgButton.setImageDrawable(gbContext.getResources().getDrawable(R.drawable.ic_heads_up_snooze));
-        imgButton.setHapticFeedbackEnabled(true);
-        imgButton.setVisibility(View.GONE);
-        imgButton.setElevation(30);
-        imgButton.setAlpha(0.5f);
-        imgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String pkgName = mHeadsUpSnoozeDlg.getPackageName();
-                if (pkgName != null) {
-                    long millis = mSysUiPrefs.getInt(GravityBoxSettings.PREF_KEY_HEADS_UP_SNOOZE_TIMER, 60) * 60000;
-                    mHeadsUpSnoozeTimerSetListener.onHeadsUpSnoozeTimerSet(pkgName, millis);
-                    Toast.makeText(context, String.format(gbContext.getString(R.string.headsup_snooze_timer_set),
-                            mHeadsUpSnoozeDlg.getAppName()), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        imgButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                mHeadsUpSnoozeDlg.show();
-                return true;
-            }
-        });
-        if (DEBUG) log("Snooze button created");
-        return imgButton;
-    }
-
-    private static HeadsUpSnoozeTimerSetListener mHeadsUpSnoozeTimerSetListener = 
-            new HeadsUpSnoozeTimerSetListener() {
-        @Override
-        public void onHeadsUpSnoozeTimerSet(String pkgName, long millis) {
-            synchronized (mHeadsUpSnoozeMap) {
-                if (DEBUG) log("onHeadsUpSnoozeTimerSet: pkgName:"+pkgName+"; millis:"+millis);
-                String key = pkgName == null ? "[ALL]" : pkgName;
-                mHeadsUpSnoozeMap.put(key, System.currentTimeMillis()+millis);
-            }
-        }
-    };
-
-    private static boolean isHeadsUpSnoozing(String pkgName) {
-        if (mHeadsUpSnoozeMap == null) return false;
-        synchronized (mHeadsUpSnoozeMap) {
-            final long currentTime = System.currentTimeMillis();
-            final long pkgSnoozeUntil = mHeadsUpSnoozeMap.containsKey(pkgName) ?
-                    mHeadsUpSnoozeMap.get(pkgName) : 0;
-            final long allSnoozeUntil = mHeadsUpSnoozeMap.get("[ALL]");
-            return (pkgSnoozeUntil > currentTime || allSnoozeUntil > currentTime);
-        }
-    }
-
-    private static void resetHeadsUpSnoozeTimers() {
-        if (mHeadsUpSnoozeMap == null) return;
-        synchronized (mHeadsUpSnoozeMap) {
-            for (Map.Entry<String, Long> entry : mHeadsUpSnoozeMap.entrySet()) {
-                entry.setValue(0l);
-            }
         }
     }
 }

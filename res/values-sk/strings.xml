@@ -1223,9 +1223,7 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktívna obrazovka</string>
     <string name="lc_active_screen_info">Funkcia aktívnej obrazovky slúži na automatické zapnutie obrazovky 
-        po obdržaní každého nového upozornenia. Voliteľne dôjde k automatickékmu rozbaleniu 
-        lišty upozornení alebo k zobrazeniu Heads up v závislosti od aktuálnej bezpečnostnej politiky obrazovky uzamknutia. 
-        Funkcia aktívnej obrazovky sa uplatní len v prípade, ak je aktivovaná obrazovka uzamknutia.  
+        po obdržaní každého nového upozornenia. Funkcia aktívnej obrazovky sa uplatní len v prípade, ak je aktivovaná obrazovka uzamknutia.  
         Prepínač nižšie slúži na hlavné zapnutie/vypnutie funkcie. Ak je funkcia zapnutá, ďalšie jej nastavenia 
         budú prístupné na úrovni nastavení jednotlivých aplikácií.</string>
     <string name="lc_active_screen_switch_title">Povoliť aktívnu obrazovku</string>

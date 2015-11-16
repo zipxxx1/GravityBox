@@ -1252,8 +1252,7 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Active Screen</string>
     <string name="lc_active_screen_info">Active Screen feature automatically turns on screen every 
-        time new notification arrives. It optionally expands notification panel or shows heads up depending on 
-        the current lock screen security policy and user preference. Be aware that Active Screen requires lock screen
+        time new notification arrives. Be aware that Active Screen requires lock screen
         to be enabled.\nThe switch below is a master switch. After it\'s enabled, 
         additional configuration can be done on per-app basis</string>
     <string name="lc_active_screen_switch_title">Enable Active Screen</string>

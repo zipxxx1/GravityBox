@@ -735,11 +735,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_HEADS_UP_MASTER_SWITCH = "pref_heads_up_master_switch";
     public static final String PREF_KEY_HEADS_UP_TIMEOUT = "pref_heads_up_timeout";
-    public static final String PREF_KEY_HEADS_UP_ALPHA = "pref_heads_up_alpha";
-    public static final String PREF_KEY_HEADS_UP_SNOOZE = "pref_heads_up_snooze";
-    public static final String PREF_KEY_HEADS_UP_SNOOZE_RESET = "pref_heads_up_snooze_reset";
-    public static final String ACTION_HEADS_UP_SNOOZE_RESET = "gravitybox.intent.action.HEADS_UP_SNOOZE_RESET";
-    public static final String PREF_KEY_HEADS_UP_SNOOZE_TIMER = "pref_heads_up_snooze_timer";
+    //public static final String PREF_KEY_HEADS_UP_ALPHA = "pref_heads_up_alpha";
+    //public static final String PREF_KEY_HEADS_UP_SNOOZE = "pref_heads_up_snooze";
+    //public static final String PREF_KEY_HEADS_UP_SNOOZE_RESET = "pref_heads_up_snooze_reset";
+    //public static final String ACTION_HEADS_UP_SNOOZE_RESET = "gravitybox.intent.action.HEADS_UP_SNOOZE_RESET";
+    //public static final String PREF_KEY_HEADS_UP_SNOOZE_TIMER = "pref_heads_up_snooze_timer";
     public static final String ACTION_HEADS_UP_SETTINGS_CHANGED = "gravitybox.intent.action.HEADS_UP_SETTINGS_CHANGED";
 
     public static final String PREF_KEY_HEADSET_ACTION_PLUG = "pref_headset_action_plug";
@@ -906,10 +906,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     ));
 
     private static final List<String> headsUpKeys = new ArrayList<String>(Arrays.asList(
-            PREF_KEY_HEADS_UP_TIMEOUT,
-            PREF_KEY_HEADS_UP_ALPHA,
-            PREF_KEY_HEADS_UP_SNOOZE,
-            PREF_KEY_HEADS_UP_SNOOZE_TIMER
+            PREF_KEY_HEADS_UP_TIMEOUT
+//            PREF_KEY_HEADS_UP_ALPHA,
+//            PREF_KEY_HEADS_UP_SNOOZE,
+//            PREF_KEY_HEADS_UP_SNOOZE_TIMER
     ));
 
     public static final class SystemProperties {
@@ -3254,11 +3254,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent = new Intent(getActivity(), LedMainActivity.class);
                 intent.putExtra(LedMainActivity.EXTRA_UUID_REGISTERED, sSystemProperties.uuidRegistered);
                 intent.putExtra(LedMainActivity.EXTRA_TRIAL_COUNTDOWN, sSystemProperties.uncTrialCountdown);
-            } else if (PREF_KEY_HEADS_UP_SNOOZE_RESET.equals(pref.getKey())) {
-                intent = new Intent(ACTION_HEADS_UP_SNOOZE_RESET);
-                getActivity().sendBroadcast(intent);
-                return true;
             }
+
+//            else if (PREF_KEY_HEADS_UP_SNOOZE_RESET.equals(pref.getKey())) {
+//                intent = new Intent(ACTION_HEADS_UP_SNOOZE_RESET);
+//                getActivity().sendBroadcast(intent);
+//                return true;
+//            }
 
             if (intent != null) {
                 try {
