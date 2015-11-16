@@ -108,6 +108,7 @@ public class ModStatusBar {
     private static LinearLayout mLayoutCenterKg;
     private static StatusbarClock mClock;
     private static Object mPhoneStatusBar;
+    private static Object mHeader;
     private static ViewGroup mStatusBarView;
     private static Context mContext;
     private static boolean mClockCentered = false;
@@ -580,6 +581,7 @@ public class ModStatusBar {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     mPhoneStatusBar = param.thisObject;
+                    mHeader = XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
                     mStatusBarView = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStatusBarView");
                     mContext = (Context) XposedHelpers.getObjectField(mPhoneStatusBar, "mContext");
                     mProgressBarCtrl = new ProgressBarController(mPrefs);
@@ -664,7 +666,7 @@ public class ModStatusBar {
                     if (!mBrightnessControlEnabled) return;
 
                     brightnessControl((MotionEvent) param.args[0]);
-                    if ((XposedHelpers.getIntField(param.thisObject, "mDisabled")
+                    if ((XposedHelpers.getIntField(param.thisObject, "mDisabled1")
                             & STATUS_BAR_DISABLE_EXPAND) != 0) {
                         param.setResult(true);
                     }
@@ -1183,7 +1185,7 @@ public class ModStatusBar {
             final int y = (int) event.getRawY();
             Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneStatusBar, "mHandler");
             int statusBarHeaderHeight = 
-                    XposedHelpers.getIntField(mPhoneStatusBar, "mStatusBarHeaderHeight");
+                    XposedHelpers.getIntField(mHeader, "mCollapsedHeight");
     
             if (action == MotionEvent.ACTION_DOWN) {
                 if (y < statusBarHeaderHeight) {
