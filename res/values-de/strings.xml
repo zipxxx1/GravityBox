@@ -514,10 +514,6 @@
     <string name="pref_unplug_turns_on_screen_title">Kabelverbindung aktiviert Bildschirm</string>
     <string name="pref_unplug_turns_on_screen_summary">Bildschirm aktivieren, sobald der USB-Port am Gerät verbunden oder getrennt wird (Neustart erforderlich)</string>
 
-    <!-- Mute volume adjust sound -->
-    <string name="pref_volume_adjust_mute_title">Signalton bei Lautstärkeänderung stummschalten</string>
-    <string name="pref_volume_adjust_mute_summary">Signaltöne bei der Benutzung der Lautstärketasten deaktivieren</string>
-
     <!-- Call vibrations -->
     <string name="pref_call_vibrations_title">Anrufvibration festlegen</string>
     <string name="call_vibration_connected">Anruf verbunden</string>
@@ -1509,7 +1505,6 @@
     <string name="system_sound_dialpad">Wähltastentöne</string>
     <string name="system_sound_touch">Töne bei Berührung</string>
     <string name="system_sound_screen_lock">Ton bei Bildschirmsperre</string>
-    <string name="system_sound_volume_adjust">Ton bei Lautstärkeänderung</string>
     <string name="system_sound_charger">GravityBox-Ladetöne</string>
 
     <!-- Proximty wake: ignore for incoming call -->

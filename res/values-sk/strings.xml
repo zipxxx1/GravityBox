@@ -489,10 +489,6 @@
     <string name="pref_unplug_turns_on_screen_title">Odpojenie napájania zapne obrazovku</string>
     <string name="pref_unplug_turns_on_screen_summary">Ak aktívne, obrazovka sa zapne automaticky po pripojení/odpojení usb kábla (vyžaduje reštart)</string>
 
-    <!-- Mute volume adjust sound -->
-    <string name="pref_volume_adjust_mute_title">Vypnúť zvuky nastavenia hlasitosti</string>
-    <string name="pref_volume_adjust_mute_summary">Vypne zvuky, ktoré sa prehrávajú počas zmeny hlasitosti tlačidlami pre nastavenie hlasitosti</string>
-
     <!-- Call vibrations -->
     <string name="pref_call_vibrations_title">Vibrácie volania</string>
     <string name="call_vibration_connected">Pri nadviazaní hovoru</string>
@@ -1491,7 +1487,6 @@
     <string name="system_sound_dialpad">Zvuky číselníku</string>
     <string name="system_sound_touch">Zvuky dotyku</string>
     <string name="system_sound_screen_lock">Zvuk uzamknutia obrazovky</string>
-    <string name="system_sound_volume_adjust">Zvuk nastavenia hlasitosti</string>
     <string name="system_sound_charger">GravityBox zvuky napájania</string>
     <string name="system_sound_ringer">Zvuk vyzváňania</string>
 

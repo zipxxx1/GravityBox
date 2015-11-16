@@ -482,10 +482,6 @@
     <string name="pref_unplug_turns_on_screen_title">Desplugar liga a tela</string>
     <string name="pref_unplug_turns_on_screen_summary">Se habilitado, a tela vai ligar quando você plugar/desplugar o cabo USB/carregador/qualquer outra coisa (necessário reiniciar)</string>
 
-    <!-- Mute volume adjust sound -->
-    <string name="pref_volume_adjust_mute_title">Silenciar o som de ajuste de volume</string>
-    <string name="pref_volume_adjust_mute_summary">Desabilita o som tocado ao ajustar o volume usando as teclas de volume</string>
-
     <!-- Call vibrations -->
     <string name="pref_call_vibrations_title">Vibração de chamada</string>
     <string name="call_vibration_connected">Quando a chamada for conectada</string>
@@ -1484,7 +1480,6 @@
     <string name="system_sound_dialpad">Sons de tecla</string>
     <string name="system_sound_touch">Sons de toque</string>
     <string name="system_sound_screen_lock">Som da tela de bloqueio</string>
-    <string name="system_sound_volume_adjust">Som do ajuste de volume</string>
     <string name="system_sound_charger">Sons do GravityBox ao (des)conectar carregador</string>
 
     <!-- Proximty wake: ignore for incoming call -->

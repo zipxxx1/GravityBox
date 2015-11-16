@@ -496,10 +496,6 @@
     <string name="pref_unplug_turns_on_screen_title">Η αποσύνδεση ενεργοποιεί την οθόνη</string>
     <string name="pref_unplug_turns_on_screen_summary">Όταν είναι ενεργοποιημένο, η οθόνη θα ξυπνά όταν συνδέετε/αποσυνδέετε usb/φορτιστή/οτιδήποτε (απαιτείται επανεκκίνηση)</string>
 
-    <!-- Mute volume adjust sound -->
-    <string name="pref_volume_adjust_mute_title">Σίγαση ήχου κατά τη ρύθμιση έντασης</string>
-    <string name="pref_volume_adjust_mute_summary">Απενεργοποιεί τον ήχο όταν ρυθμίζεται η ένταση με τα πλήκτρα έντασης</string>
-
     <!-- Call vibrations -->
     <string name="pref_call_vibrations_title">Δόνηση κλήσεων</string>
     <string name="call_vibration_connected">Κατά την έναρξη της κλήσης</string>

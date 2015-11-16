@@ -401,9 +401,6 @@
     <string name="pref_unplug_turns_on_screen_title">충전기 분리 시 화면 켜기</string>
     <string name="pref_unplug_turns_on_screen_summary">배터리 충전 중 충전기를 분리할 때 화면을 켭니다. (재시작 필요)</string>
 
-    <string name="pref_volume_adjust_mute_title">음소거 소리</string>
-    <string name="pref_volume_adjust_mute_summary">볼륨 키로 소리를 음소거 할 때 나오는 소리를 활성화합니다.</string>
-
     <string name="pref_call_vibrations_title">통화 중 진동</string>
     <string name="call_vibration_connected">전화가 연결 될 때</string>
     <string name="call_vibration_disconnected">전화가 연결 해제 될 때</string>
@@ -1214,7 +1211,6 @@
     <string name="system_sound_dialpad">다이얼패드 효과음</string>
     <string name="system_sound_touch">터치 효과음</string>
     <string name="system_sound_screen_lock">화면 잠금 효과음</string>
-    <string name="system_sound_volume_adjust">볼륨 설정 효과음</string>
     <string name="system_sound_charger">GravityBox 충전 효과음</string>
 
     <string name="pref_power_proximity_wake_ignore_call_title">전화 수신 시 비활성화</string>

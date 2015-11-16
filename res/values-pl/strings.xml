@@ -488,10 +488,6 @@
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">Włącz ekran przy podłączaniu</string>
     <string name="pref_unplug_turns_on_screen_summary">Gdy włączone, ekranie zostanie podświetlony w momencie podłączania/odłączania ładowarki lub urządzeń USB (wymagany restart)</string>
-
-    <!-- Mute volume adjust sound -->
-    <string name="pref_volume_adjust_mute_title">Wycisz dźwięk regulacji głośności</string>
-    <string name="pref_volume_adjust_mute_summary">Wyłącza dźwięk odtwarzany podczas regulacji głośności za pomocą klawiszy głośności</string>
  
     <!-- Call vibrations -->
     <string name="pref_call_vibrations_title">Wibracje przy połączeniu</string>
@@ -1481,7 +1477,6 @@
     <string name="system_sound_dialpad">Dźwięki wybierania numeru</string>
     <string name="system_sound_touch">Dźwięki przy dotknięciu</string>
     <string name="system_sound_screen_lock">Dźwięki blokady ekranu</string>
-    <string name="system_sound_volume_adjust">Dźwięki regulacji głośności</string>
     <string name="system_sound_charger">Dźwięki GravityBox ładowarki</string>
 
     <!-- Proximty wake: ignore for incoming call -->

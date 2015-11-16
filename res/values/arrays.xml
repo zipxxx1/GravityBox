@@ -1012,7 +1012,6 @@
         <item>@string/system_sound_dialpad</item>
         <item>@string/system_sound_touch</item>
         <item>@string/system_sound_screen_lock</item>
-        <item>@string/system_sound_volume_adjust</item>
         <item>@string/system_sound_charger</item>
     </string-array>
 
@@ -1021,7 +1020,6 @@
         <item>dialpad</item>
         <item>touch</item>
         <item>screen_lock</item>
-        <item>volume_adjust</item>
         <item>charger</item>
     </string-array>
 

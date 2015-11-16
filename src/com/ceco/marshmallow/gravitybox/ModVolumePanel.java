@@ -16,8 +16,6 @@
 package com.ceco.marshmallow.gravitybox;
 
 import com.ceco.marshmallow.gravitybox.R;
-import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
-import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -43,12 +41,9 @@ public class ModVolumePanel {
     private static final int MSG_TIMEOUT = 5;
 
     private static Object mVolumePanel;
-    private static boolean mVolumeAdjustMuted;
     private static boolean mVolumeAdjustVibrateMuted;
     private static boolean mAutoExpand;
     private static int mTimeout;
-    private static XSharedPreferences mQhPrefs;
-    private static QuietHours mQuietHours;
     private static boolean mVolumesLinked;
     private static Context mGbContext;
     private static int mIconRingerAudibleId;
@@ -66,9 +61,6 @@ public class ModVolumePanel {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_AUTOEXPAND)) {
                     mAutoExpand = intent.getBooleanExtra(GravityBoxSettings.EXTRA_AUTOEXPAND, false);
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_MUTED)) {
-                    mVolumeAdjustMuted = intent.getBooleanExtra(GravityBoxSettings.EXTRA_MUTED, false);
-                }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_VIBRATE_MUTED)) {
                     mVolumeAdjustVibrateMuted = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VIBRATE_MUTED, false);
                 }
@@ -78,9 +70,6 @@ public class ModVolumePanel {
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
                 mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
                 updateRingerIcon();
-            } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
-                mQhPrefs.reload();
-                mQuietHours = new QuietHours(mQhPrefs);
             }
         }
         
@@ -98,10 +87,6 @@ public class ModVolumePanel {
         try {
             final Class<?> classVolumePanel = XposedHelpers.findClass(CLASS_VOLUME_PANEL, classLoader);
 
-            mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
-            mQuietHours = new QuietHours(mQhPrefs);
-
-            mVolumeAdjustMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_MUTE, false);
             mVolumeAdjustVibrateMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE, false);
             mAutoExpand = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_AUTOEXPAND, false);
             mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
@@ -132,20 +117,8 @@ public class ModVolumePanel {
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
-                    intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
                     context.registerReceiver(mBrodcastReceiver, intentFilter);
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(classVolumePanel, "onPlaySound",
-                    int.class, int.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mVolumeAdjustMuted || 
-                            mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.VOLUME_ADJUST)) {
-                        param.setResult(null);
-                    }
                 }
             });
 
