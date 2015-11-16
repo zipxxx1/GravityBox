@@ -231,10 +231,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Haftanın gününü göster</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">Genişletilebilir ses paneli</string>
-    <string name="pref_volume_panel_expandable_summary">Farklı sesler için genişletilebilir ses panelini etkinleştirir</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Zil sesi ve bildirimleri birleştir</string>
     <string name="pref_link_volumes_summary">Devre dışı bırakıldığında, zil sesi ve bildirimler için sesler ayrı ayrı ayarlanabilir</string>

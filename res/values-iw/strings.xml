@@ -243,10 +243,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">הצג יום בשבוע</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">תפריט עוצמת שמע מורחב</string>
-    <string name="pref_volume_panel_expandable_summary">מאפשר הצגת תפריט עוצמת שמע מורחב עם התאמה אישית של שמע עבור רכיבי מדיה שונים</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">הצמד עוצמות שמע של צילצולים &amp; התראות</string>
     <string name="pref_link_volumes_summary">כאשר אפשרות זו מבוטלת, ניתן לקבוע עוצמת שמע עבור צילצולים והתראות בנפרד</string>

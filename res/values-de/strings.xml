@@ -261,10 +261,6 @@
     <!-- Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Wochentag anzeigen</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">Erweiterte Lautstärkeanzeige</string>
-    <string name="pref_volume_panel_expandable_summary">Mehrere Quellen in der Lautstärkeanzeige darstellen</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Anruf- &amp; Benachrichtigungslautstärke verknüpfen</string>
     <string name="pref_link_volumes_summary">Lautstärke für Anrufe und Benachrichtigungen gemeinsam oder getrennt einstellen</string>

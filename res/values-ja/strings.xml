@@ -223,9 +223,6 @@
     <string name="pref_qs_tiles_per_row_summary">行毎に表示するタイル数を設定します。</string>
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">曜日を表示</string>
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">音量パネルを展開可能にする</string>
-    <string name="pref_volume_panel_expandable_summary">音量パネルを展開して様々な音量を調整できるようにします。</string>
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">着信音と通知音の音量をリンクする</string>
     <string name="pref_link_volumes_summary">無効にすると着信音と通知音の音量を別々に設定できます。</string>

@@ -262,10 +262,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Afficher le jour de la semaine</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">Panneau de volume extensible</string>
-    <string name="pref_volume_panel_expandable_summary">Active le panneau de volume extensible avec la possibilité de régler les volumes pour différents flux sonores (redémarrage nécessaire)</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Volumes sonnerie &amp; notifications liés</string>
     <string name="pref_link_volumes_summary">Si désactivé, les volumes de la sonnerie et des notifications peuvent être réglés indépendamment</string>

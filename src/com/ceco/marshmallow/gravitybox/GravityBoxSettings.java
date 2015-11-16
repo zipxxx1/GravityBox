@@ -296,7 +296,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_VOL_FORCE_MUSIC_CONTROL = "pref_vol_force_music_control";
     public static final String PREF_KEY_SAFE_MEDIA_VOLUME = "pref_safe_media_volume2";
     public static final String PREF_KEY_VOL_SWAP_KEYS = "pref_vol_swap_keys";
-    public static final String PREF_KEY_VOLUME_PANEL_EXPANDABLE = "pref_volume_panel_expandable";
     public static final String PREF_KEY_VOLUME_PANEL_AUTOEXPAND = "pref_volume_panel_autoexpand";
     public static final String PREF_KEY_VOLUME_ADJUST_MUTE = "pref_volume_adjust_mute";
     public static final String PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE = "pref_volume_adjust_vibrate_mute";
@@ -859,7 +858,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_NAVBAR_LEFT_HANDED,
             PREF_KEY_SAFE_MEDIA_VOLUME,
             PREF_KEY_SIGNAL_CLUSTER_DEM,
-            PREF_KEY_VOLUME_PANEL_EXPANDABLE,
             PREF_KEY_SIGNAL_CLUSTER_DNTI,
             PREF_KEY_SIGNAL_CLUSTER_NOSIM
     ));
@@ -1219,7 +1217,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private CheckBoxPreference mPrefDataTrafficActiveMobileOnly;
         private ListPreference mPrefDataTrafficDisplayMode;
         private CheckBoxPreference mPrefLinkVolumes;
-        private CheckBoxPreference mPrefVolumePanelExpandable;
         private CheckBoxPreference mPrefVolumePanelAutoexpand;
         private ListPreference mPrefVolumePanelTimeout;
         private CheckBoxPreference mPrefHomeDoubletapDisable;
@@ -1442,7 +1439,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefMusicVolumeSteps = (CheckBoxPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS);
             mPrefMusicVolumeStepsValue = (SeekBarPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS_VALUE);
             mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
-            mPrefVolumePanelExpandable = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_EXPANDABLE);
             mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
             mPrefVolumePanelTimeout = (ListPreference) findPreference(PREF_KEY_VOLUME_PANEL_TIMEOUT);
             mPrefTranclucentDecor =  (ListPreference) findPreference(PREF_KEY_TRANSLUCENT_DECOR);
@@ -2056,10 +2052,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_SIZE)) {
                 mPrefDataTrafficSize.setSummary(mPrefDataTrafficSize.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_VOLUME_PANEL_EXPANDABLE)) {
-                mPrefVolumePanelAutoexpand.setEnabled(mPrefVolumePanelExpandable.isChecked());
             }
 
             if (key == null || key.equals(PREF_KEY_STATUSBAR_SIGNAL_COLOR_MODE)) {

@@ -262,10 +262,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Адлюстроўваць дзень тыдня</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">Пашыраймая гукавая панэль</string>
-    <string name="pref_volume_panel_expandable_summary">Улучэнне пашыраймай панэлі гучнасці, на якой можна змяняць узроўні для розных струменяў (патрэбна перазагрузка)</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Звязаць гучнасць</string>
     <string name="pref_link_volumes_summary">Калі адключана, гучнасць паведамленняў і рынгтону можна задаваць незалежна</string>

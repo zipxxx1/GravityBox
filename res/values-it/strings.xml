@@ -256,10 +256,6 @@
     <!-- Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Mostra giorno della settimana</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">Pannello volumi espandibile</string>
-    <string name="pref_volume_panel_expandable_summary">Abilita pannello volumi espandibile con possibilità di modifiche differenziate</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Collega volumi suoneria &amp; notifiche</string>
     <string name="pref_link_volumes_summary">Se disattivato, i volumi di suoneria e notifiche possono essere impostati in modo indipendente</string>

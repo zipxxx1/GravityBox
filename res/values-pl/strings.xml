@@ -240,10 +240,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Pokaż dzień tygodnia</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">Rozszerzony panel głośności</string>
-    <string name="pref_volume_panel_expandable_summary">Uaktywnia rozszerzony panel głośności z możliwością ustawienia głośności dla różnych źródeł</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Połączone ust. głośności dzwonka i powiadomień</string>
     <string name="pref_link_volumes_summary">Po wyłączeniu głośność dzwonka i powiadomień można ustawiać niezależnie</string>

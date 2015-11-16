@@ -262,10 +262,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">显示星期(周X)</string>
     
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">可扩展音量面板</string>
-    <string name="pref_volume_panel_expandable_summary">启用此选项使您可以调整不同的媒体音量</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">合并铃声音量与通知音量</string>
     <string name="pref_link_volumes_summary">禁用后铃声音量与通知音量将可以分别调整</string>

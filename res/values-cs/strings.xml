@@ -241,10 +241,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Zobrazit den v týdnu</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">Rozšiřitelné nastavení hlasitosti</string>
-    <string name="pref_volume_panel_expandable_summary">Umožňuje rozšířit panel nastavení hlasitosti, ve kterém je možné nastavit hlasitosti zvlášť pro každý zvukový tok (vyžaduje restart)</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Spojit hlasitost vyzvánění a notifikací</string>
     <string name="pref_link_volumes_summary">Pokud je vypnuto, umožňuje nastavit úrovně hlasitosti zvlášť pro vyzvánění a notifikace</string>

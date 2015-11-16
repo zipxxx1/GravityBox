@@ -233,10 +233,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">عرض اليوم</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">توسيع لوحة الصوت</string>
-    <string name="pref_volume_panel_expandable_summary">امكانية ضبط حجم الصوت لنغمة الرنين والموسيقى والمنبه والاشعارات</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">ربط الاشعارات بنغمة الرنين</string>
     <string name="pref_link_volumes_summary">عند التعطيل بإمكانك ضبط حجم الصوت لكل منهما على حدة</string>

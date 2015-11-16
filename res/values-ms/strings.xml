@@ -261,10 +261,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Tunjukkan hari dalam seminggu</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">Panel nada boleh dipanjangkan</string>
-    <string name="pref_volume_panel_expandable_summary">Benarkan panel volume yang advance</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Sambung ringtone &amp; nada notifikasi</string>
     <string name="pref_link_volumes_summary">Bila dimatikan,nada ringtone dan notifikasi boleh di set berasingan</string>

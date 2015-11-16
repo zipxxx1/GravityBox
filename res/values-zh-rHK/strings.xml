@@ -256,10 +256,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">在狀態列顯示當天是星期幾</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">可擴展音量面板</string>
-    <string name="pref_volume_panel_expandable_summary">啟用此選項使您可以調整不同串流的音量</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">將鈴聲音量與通知音量連結</string>
     <string name="pref_link_volumes_summary">當停用時，您可以分別調整鈴聲音量與通知音量</string>

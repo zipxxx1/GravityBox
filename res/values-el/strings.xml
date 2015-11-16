@@ -250,10 +250,6 @@
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Εμφάνιση ημέρας</string>
 
-    <!-- Expandable volume panel -->
-    <string name="pref_volume_panel_expandable_title">Επεκτάσιμο πεδίο έντασης ήχου</string>
-    <string name="pref_volume_panel_expandable_summary">Ενεργοποιεί το επεκτάσιμο πεδίο έντασης ήχου με τη δυνατότητα τον ορισμό εντάσεων για διαφορετικά streams</string>
-
     <!-- Link ringtone & notifications volumes -->
     <string name="pref_link_volumes_title">Ένωση εντάσεων Κουδουνίσματος &amp; ειδοποιήσεων</string>
     <string name="pref_link_volumes_summary">Όταν είναι απενεργοποιημένο, οι εντάσεις των ήχων κλήσης και ειδοποιήσεων μπορούν να οριστούν ανεξάρτητα</string>
