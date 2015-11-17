@@ -184,6 +184,10 @@ public class ModLauncher {
                         Object profile = dynamicGrid.invariantProfile != null ? param.thisObject : 
                             XposedHelpers.getObjectField(param.thisObject, dynamicGrid.fProfile); 
                         if (profile != null) {
+                            final int defRows = XposedHelpers.getIntField(profile,
+                                    dynamicGrid.fNumRows);
+                            final int defCols = XposedHelpers.getIntField(profile,
+                                    dynamicGrid.fNumCols);
                             final int rows = Integer.valueOf(prefs.getString(
                                     GravityBoxSettings.PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS, "0"));
                             if (rows != 0) {
@@ -195,6 +199,17 @@ public class ModLauncher {
                             if (cols != 0) {
                                 XposedHelpers.setIntField(profile, dynamicGrid.fNumCols, cols);
                                 if (DEBUG) log("Launcher cols set to: " + cols);
+                            }
+                            if (dynamicGrid.invariantProfile != null && (cols != 0 || rows != 0)) {
+                                float ratio1 = rows == 0 ? 1 : (float)defRows / (float)rows;
+                                float ratio2 = cols == 0 ? 1 : (float)defCols / (float)cols;
+                                float ratio = Math.min(ratio1, ratio2);
+                                if (ratio < 1f) {
+                                    float iconSize = XposedHelpers.getFloatField(profile, "iconSize");
+                                    XposedHelpers.setFloatField(profile, "iconSize", iconSize*ratio);
+                                    float iconTextSize = XposedHelpers.getFloatField(profile, "iconTextSize");
+                                    XposedHelpers.setFloatField(profile, "iconTextSize", iconTextSize*ratio);
+                                }
                             }
                         }
                     }
