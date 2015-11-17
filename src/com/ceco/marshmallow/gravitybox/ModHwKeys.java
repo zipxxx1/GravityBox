@@ -41,6 +41,8 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.media.AudioManager;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -48,6 +50,7 @@ import android.os.Messenger;
 import android.os.PowerManager;
 import android.os.Process;
 import android.os.RemoteException;
+import android.os.ResultReceiver;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.view.HapticFeedbackConstants;
@@ -102,6 +105,8 @@ public class ModHwKeys {
     public static final String EXTRA_RINGER_MODE = "ringerMode";
     public static final String ACTION_TOGGLE_SHOW_TOUCHES = "gravitybox.intent.action.TOGGLE_SHOW_TOUCHES";
     public static final String EXTRA_SHOW_TOUCHES = "showTouches";
+    public static final String ACTION_UPDATE_WIFI_CONFIG = "gravitybox.intent.action.UPDATE_WIFI_CONFIG";
+    public static final String EXTRA_WIFI_CONFIG_LIST = "wifiConfigList";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
     public static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
@@ -382,6 +387,12 @@ public class ModHwKeys {
                 toggleAutoBrightness();
             } else if (action.equals(ACTION_TOGGLE_SHOW_TOUCHES)) {
                 toggleShowTouches(intent.getIntExtra(EXTRA_SHOW_TOUCHES, -1)); 
+            } else if (action.equals(ACTION_UPDATE_WIFI_CONFIG) &&
+                    intent.hasExtra(EXTRA_WIFI_CONFIG_LIST) &&
+                    intent.hasExtra("receiver")) {
+                ArrayList<WifiConfiguration> wcl =
+                        intent.getParcelableArrayListExtra(EXTRA_WIFI_CONFIG_LIST);
+                updateWifiConfig(wcl, (ResultReceiver)intent.getParcelableExtra("receiver"));
             }
         }
     };
@@ -911,6 +922,7 @@ public class ModHwKeys {
             intentFilter.addAction(Intent.ACTION_HEADSET_PLUG);
             intentFilter.addAction(ACTION_TOGGLE_AUTO_BRIGHTNESS);
             intentFilter.addAction(ACTION_TOGGLE_SHOW_TOUCHES);
+            intentFilter.addAction(ACTION_UPDATE_WIFI_CONFIG);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -1725,6 +1737,21 @@ public class ModHwKeys {
             }
             Settings.System.putInt(mContext.getContentResolver(),
                     SETTING_SHOW_TOUCHES, showTouches);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void updateWifiConfig(ArrayList<WifiConfiguration> configList, ResultReceiver receiver) {
+        try {
+            WifiManager wm = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+            for (WifiConfiguration c : configList) {
+                wm.updateNetwork(c);
+            }
+            wm.saveConfiguration();
+            if (receiver != null) {
+                receiver.send(0, null);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

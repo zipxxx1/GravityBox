@@ -24,6 +24,7 @@ import android.content.SharedPreferences;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class WifiPriorityActivity extends ListActivity {
+public class WifiPriorityActivity extends ListActivity implements GravityBoxResultReceiver.Receiver {
 
     public static final String PREF_KEY_WIFI_TRUSTED = "pref_wifi_trusted";
     public static final String ACTION_WIFI_TRUSTED_CHANGED = "gravitybox.intent.action.WIFI_TRUSTED_CHANGED";
@@ -59,20 +60,19 @@ public class WifiPriorityActivity extends ListActivity {
 
             // Set the new priorities of the networks
             int cc = networks.size();
+            ArrayList<WifiConfiguration> configList = new ArrayList<>();
             for (int i = 0; i < cc; i++) {
                 WifiNetwork network = networks.get(i);
                 network.config.priority = cc - i;
-
-                // Update the priority
-                mWifiManager.updateNetwork(network.config);
+                configList.add(network.config);
             }
 
-            // Now, save all the Wi-Fi configuration with its new priorities
-            mWifiManager.saveConfiguration();
-
-            // Reload the networks
-            mAdapter.reloadNetworks();
             mNetworksListView.invalidateViews();
+
+            Intent intent = new Intent(ModHwKeys.ACTION_UPDATE_WIFI_CONFIG);
+            intent.putParcelableArrayListExtra(ModHwKeys.EXTRA_WIFI_CONFIG_LIST, configList);
+            intent.putExtra("receiver", mReceiver);
+            WifiPriorityActivity.this.sendBroadcast(intent);
         }
     };
 
@@ -80,6 +80,7 @@ public class WifiPriorityActivity extends ListActivity {
     private TouchInterceptor mNetworksListView;
     private WifiPriorityAdapter mAdapter;
     private SharedPreferences mPrefs;
+    private GravityBoxResultReceiver mReceiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,9 @@ public class WifiPriorityActivity extends ListActivity {
         mNetworksListView.setDropListener(mDropListener);
         mAdapter = new WifiPriorityAdapter(this, mWifiManager);
         setListAdapter(mAdapter);
+
+        mReceiver = new GravityBoxResultReceiver(new Handler());
+        mReceiver.setReceiver(this);
     }
 
     @Override
@@ -113,6 +117,13 @@ public class WifiPriorityActivity extends ListActivity {
     public void onResume() {
         super.onResume();
 
+        // Reload the networks
+        mAdapter.reloadNetworks();
+        mNetworksListView.invalidateViews();
+    }
+
+    @Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
         // Reload the networks
         mAdapter.reloadNetworks();
         mNetworksListView.invalidateViews();
