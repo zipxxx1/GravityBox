@@ -119,7 +119,7 @@ public class ModAudio {
 
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS, false)) {
                 XposedHelpers.findAndHookMethod(classAudioService, "onConfigureSafeVolume",
-                        boolean.class, new XC_MethodHook() {
+                        boolean.class, String.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         param.setObjectExtra("gbCurSafeMediaVolIndex",
