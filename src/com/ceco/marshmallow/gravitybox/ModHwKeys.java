@@ -62,7 +62,6 @@ import com.ceco.marshmallow.gravitybox.shortcuts.RingerModeShortcut;
 import com.ceco.marshmallow.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -543,6 +542,7 @@ public class ModHwKeys {
                     if (keyCode == KeyEvent.KEYCODE_HOME) {
                         if (!down) {
                             handler.removeCallbacks(mLockscreenTorchRunnable);
+                            handler.removeCallbacks(mHomeLongPress);
                             if (mIsHomeLongPressed) {
                                 mIsHomeLongPressed = false;
                                 param.setResult(0);
@@ -555,19 +555,22 @@ public class ModHwKeys {
                                param.setResult(0);
                                return;
                            }
-                        } else if (keyguardOn) {
+                        } else {
                             if (event.getRepeatCount() == 0) {
                                 mIsHomeLongPressed = false;
-                                if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
+                                if (keyguardOn && mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
                                     handler.postDelayed(mLockscreenTorchRunnable, 
                                             getLongpressTimeoutForAction(GravityBoxSettings.HWKEY_ACTION_TORCH));
+                                } else if (getActionFor(HwKeyTrigger.HOME_LONGPRESS).actionId != 0) {
+                                    handler.postDelayed(mHomeLongPress, ViewConfiguration.getLongPressTimeout());
                                 }
                             } else {
-                                if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) {
+                                if ((keyguardOn && mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_HOME_LONGPRESS) ||
+                                        getActionFor(HwKeyTrigger.HOME_LONGPRESS).actionId != 0) {
                                     param.setResult(0);
                                 }
-                                return;
                             }
+                            return;
                         }
                     }
 
@@ -800,23 +803,6 @@ public class ModHwKeys {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "handleLongPressOnHome",
-                    int.class, new XC_MethodReplacement() {
-                @Override
-                protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (getActionFor(HwKeyTrigger.HOME_LONGPRESS).actionId == 
-                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                        XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
-                        return null;
-                    }
-
-                    XposedHelpers.setBooleanField(param.thisObject, "mHomeConsumed", true);
-                    performAction(HwKeyTrigger.HOME_LONGPRESS);
-
-                    return null;
-                }
-            });
-
             XposedHelpers.findAndHookMethod(classPhoneWindowManager, 
                     "isWakeKeyWhenScreenOff", int.class, new XC_MethodHook() {
 
@@ -1046,6 +1032,15 @@ public class ModHwKeys {
                 mIsHomeLongPressed = true;
             }
             toggleTorch();
+        }
+    };
+
+    private static Runnable mHomeLongPress = new Runnable() {
+        @Override
+        public void run() {
+            if (DEBUG) log("mHomeLongPress runnable launched");
+            mIsHomeLongPressed = true;
+            performAction(HwKeyTrigger.HOME_LONGPRESS);
         }
     };
 

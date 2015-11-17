@@ -60,6 +60,7 @@ public class ModNavigationBar {
     private static final String CLASS_NAVBAR_TRANSITIONS = 
             "com.android.systemui.statusbar.phone.NavigationBarTransitions";
     private static final String CLASS_DEADZONE = "com.android.systemui.statusbar.policy.DeadZone";
+    private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
 
     private static final int MODE_OPAQUE = 0;
     private static final int MODE_LIGHTS_OUT = 3;
@@ -219,7 +220,6 @@ public class ModNavigationBar {
                     GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS.equals(intent.getStringExtra(
                             GravityBoxSettings.EXTRA_HWKEY_KEY))) {
                 mHomeLongpressAction = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_VALUE, 0);
-                updateHomeKeyLongpressSupport();
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED) && 
                     intent.hasExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE)) {
                 mHwKeysEnabled = !intent.getBooleanExtra(GravityBoxSettings.EXTRA_PIE_HWKEYS_DISABLE, false);
@@ -449,7 +449,6 @@ public class ModNavigationBar {
                     }
 
                     updateRecentsKeyCode();
-                    updateHomeKeyLongpressSupport();
 
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_SWAP_KEYS, false)) {
                         swapBackAndRecents();
@@ -609,6 +608,16 @@ public class ModNavigationBar {
                             if (DEBUG) log("key button sendEvent: ignoring since not interactive");
                             param.setResult(null);
                         }
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader,
+                    "shouldDisableNavbarGestures", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mHomeLongpressAction != 0) {
+                        param.setResult(true);
                     }
                 }
             });
@@ -901,21 +910,6 @@ public class ModNavigationBar {
                 mRecentsLongpressAction.actionId != 0 ||
                 mRecentsDoubletapAction.actionId != 0 ||
                 !mHwKeysEnabled);
-    }
-
-    private static void updateHomeKeyLongpressSupport() {
-        if (mHomeKeys == null) return;
-
-        try {
-            for (HomeKeyInfo hkInfo : mHomeKeys) {
-                if (hkInfo.homeKey != null) {
-                    XposedHelpers.setBooleanField(hkInfo.homeKey, "mSupportsLongpress",
-                            mHomeLongpressAction == 0 ? hkInfo.supportsLongPressDefault : true);
-                }
-            }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
     }
 
     private static void setKeyColor() {
