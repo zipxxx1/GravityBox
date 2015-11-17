@@ -42,7 +42,6 @@ import com.ceco.marshmallow.gravitybox.webserviceclient.WebServiceClient.WebServ
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -63,6 +62,7 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.Manifest.permission;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -1744,7 +1744,48 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefPieAppLongpress.setEntryValues(actionEntryValues);
 
             setDefaultValues();
-            maybeShowCompatWarningDialog();
+            checkPermissions();
+        }
+
+        private void checkPermissions() {
+            String[] perms = new String[] { permission.CAMERA, permission.READ_EXTERNAL_STORAGE,
+                    permission.WRITE_EXTERNAL_STORAGE, permission.RECORD_AUDIO };
+
+            List<String> reqPerms = new ArrayList<>();
+            for (String perm : perms) {
+                if (getActivity().checkSelfPermission(perm) != PackageManager.PERMISSION_GRANTED) {
+                    reqPerms.add(perm);
+                }
+            }
+            if (!reqPerms.isEmpty()) {
+                requestPermissions(reqPerms.toArray(new String[]{}), 0);
+            } else {
+                maybeShowCompatWarningDialog();
+            }
+        }
+
+        @Override
+        public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+            boolean showWarning = false;
+            for (int res : grantResults) {
+                showWarning = res != PackageManager.PERMISSION_GRANTED;
+            }
+            if (showWarning) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.important)
+                .setMessage(R.string.permission_denied_msg)
+                .setPositiveButton(android.R.string.ok, null)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        maybeShowCompatWarningDialog();
+                    }
+                });
+                mDialog = builder.create();
+                mDialog.show();
+            } else {
+                maybeShowCompatWarningDialog();
+            }
         }
 
         @Override

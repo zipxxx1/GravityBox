@@ -1803,4 +1803,8 @@
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Direct unlock policy</string>
 
+    <!-- Permission denial message -->
+    <string name="permission_denied_msg">You have decided to deny some of the permissions.
+        Note that this will prevent related features from functioning.</string>
+
 </resources>
