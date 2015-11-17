@@ -146,9 +146,7 @@ public class ModDialer {
 
     private static void silenceRinger() {
         try {
-            Object ta = XposedHelpers.callStaticMethod(mClassTelecomAdapter, "getInstance");
-            Context ctx = (Context) XposedHelpers.getObjectField(ta, "mContext");
-            TelecomManager tm = (TelecomManager) ctx.getSystemService(Context.TELECOM_SERVICE);
+            TelecomManager tm = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
             XposedHelpers.callMethod(tm, "silenceRinger");
         } catch(Throwable t) {
             XposedBridge.log(t);
@@ -234,7 +232,7 @@ public class ModDialer {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(classAnswerFragment, "showAnswerUi", boolean.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(classAnswerFragment, "onShowAnswerUi", boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (!(Boolean) param.args[0]) return;
@@ -305,18 +303,15 @@ public class ModDialer {
                     refreshPhonePrefs();
                     if (!prefs.getBoolean(GravityBoxSettings.PREF_KEY_DIALER_SHOW_DIALPAD, false)) return;
 
-                    Object dpFrag = XposedHelpers.getObjectField(param.thisObject, "mDialpadFragment");
-                    if (dpFrag != null) {
-                        final String realClassName = param.thisObject.getClass().getName();
-                        if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY)) {
-                            XposedHelpers.callMethod(param.thisObject, "showDialpadFragment", false);
-                            if (DEBUG) log("showDialpadFragment() called within " + realClassName);
-                        } else if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY_GOOGLE)) {
-                            final Class<?> superc = param.thisObject.getClass().getSuperclass();
-                            Method m = XposedHelpers.findMethodExact(superc, "showDialpadFragment", boolean.class);
-                            m.invoke(param.thisObject, false);
-                            if (DEBUG) log("showDialpadFragment() called within " + realClassName);
-                        }
+                    final String realClassName = param.thisObject.getClass().getName();
+                    if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY)) {
+                        XposedHelpers.callMethod(param.thisObject, "showDialpadFragment", false);
+                        if (DEBUG) log("showDialpadFragment() called within " + realClassName);
+                    } else if (realClassName.equals(CLASS_DIALTACTS_ACTIVITY_GOOGLE)) {
+                        final Class<?> superc = param.thisObject.getClass().getSuperclass();
+                        Method m = XposedHelpers.findMethodExact(superc, "showDialpadFragment", boolean.class);
+                        m.invoke(param.thisObject, false);
+                        if (DEBUG) log("showDialpadFragment() called within " + realClassName);
                     }
                 }
             });
