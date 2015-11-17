@@ -129,7 +129,7 @@ public class CellularTile extends AospTile {
     public void onCreateTileView(View tileView) throws Throwable {
         super.onCreateTileView(tileView);
 
-        if (isPrimary()) {
+        if (isPrimary() && hasField(tileView, "mIconFrame")) {
             mDataOffView = new ImageView(mContext);
             mDataOffView.setImageDrawable(mGbContext.getDrawable(R.drawable.ic_mobile_data_off));
             mDataOffView.setVisibility(View.GONE);
@@ -151,11 +151,20 @@ public class CellularTile extends AospTile {
         }
     }
 
+    private boolean hasField(Object o, String fieldName) {
+        try {
+            XposedHelpers.findField(o.getClass(), fieldName);
+            return true;
+        } catch (NoSuchFieldError e) {
+            return false;
+        }
+    }
+
     @Override
     public void handleUpdateState(Object state, Object arg) {
         super.handleUpdateState(state, arg);
 
-        if (isPrimary()) {
+        if (isPrimary() && mDataOffView != null) {
             mDataTypeIconVisible = isDataTypeIconVisible(state);
             mIsSignalNull = isSignalNull(arg);
             if ((Boolean) XposedHelpers.getBooleanField(state, "visible")) {
@@ -179,18 +188,20 @@ public class CellularTile extends AospTile {
             return;
         }
 
-        // change icon visibility immediately for fast feedback
-        final boolean visible = mDataOffView.getVisibility() == View.VISIBLE;
-        final boolean shouldShow = !visible && canShowDataOffIcon();
-        mDataOffView.post(new Runnable() {
-            @Override
-            public void run() {
-                if (mDataOffView != null) {
-                    mDataOffView.setVisibility(shouldShow ? 
-                            View.VISIBLE : View.GONE);
+        if (mDataOffView != null) {
+            // change icon visibility immediately for fast feedback
+            final boolean visible = mDataOffView.getVisibility() == View.VISIBLE;
+            final boolean shouldShow = !visible && canShowDataOffIcon();
+            mDataOffView.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (mDataOffView != null) {
+                        mDataOffView.setVisibility(shouldShow ? 
+                                View.VISIBLE : View.GONE);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // toggle mobile data
         Intent intent = new Intent(ConnectivityServiceWrapper.ACTION_TOGGLE_MOBILE_DATA);
