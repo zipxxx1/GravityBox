@@ -29,6 +29,7 @@ public class SettingsManager {
     private static final String BACKUP_OK_FLAG_OBSOLETE = BACKUP_PATH + "/.backup_ok";
     private static final String BACKUP_OK_FLAG = BACKUP_PATH + "/.backup_ok_lp";
     private static final String BACKUP_NO_MEDIA = BACKUP_PATH + "/.nomedia";
+    private static final String LP_PREFERENCES = "com.ceco.lollipop.gravitybox_preferences.xml";
 
     private static Context mContext;
     private static SettingsManager mInstance;
@@ -177,6 +178,9 @@ public class SettingsManager {
         };
         for (String prefsFileName : prefsFileNames) {
             File prefsFile = new File(BACKUP_PATH + "/" + prefsFileName);
+            // try LP preferences if no MM prefs file exists
+            if (prefsFileName.equals(prefsFileNames[0]) && !prefsFile.exists())
+                prefsFile = new File(BACKUP_PATH + "/" + LP_PREFERENCES);
             if (prefsFile.exists()) {
                 File prefsDestFile = new File(mContext.getFilesDir() + "/../shared_prefs/" + prefsFileName);
                 try {
