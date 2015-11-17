@@ -1535,7 +1535,7 @@
   <!-- Compatibility warning -->
     <string name="compat_warning_title">WARNUNG</string>
     <string name="compat_warning_message">NUR FÜR DIE BENUTZUNG AUF UNVERÄNDERTEN ANDROID-VERSIONEN ODER GOOGLE-PLAY EDITIONEN GEEIGNET!\n\n
-        Betriebssysteme wie Touchwiz, Sense, Xperia, sowie Custom ROMs werden nicht unterstützt und können zu unerwarteten Fehlern führen.\n\nWenn Sie fortfahren, bestätigen Sie, dass Sie auf eigene Gefahr handeln und keine Unterstützung erhalten können. Für mehr Information zur Kompatibilität besuchen Sie <a href="http://forum.xda-developers.com/showthread.php?t=3037566">den Support-Thread auf XDA</a>.</string>
+        Betriebssysteme wie Touchwiz, Sense, Xperia, sowie Custom ROMs werden nicht unterstützt und können zu unerwarteten Fehlern führen.\n\nWenn Sie fortfahren, bestätigen Sie, dass Sie auf eigene Gefahr handeln und keine Unterstützung erhalten können. Für mehr Information zur Kompatibilität besuchen Sie <a href="http://forum.xda-developers.com/showthread.php?t=3251148">den Support-Thread auf XDA</a>.</string>
     <string name="compat_warning_ok_stage1">Ok. Ich habe verstanden.</string>
     <string name="compat_warning_ok_stage2">Ich habe es WIRKLICH verstanden!</string>
 

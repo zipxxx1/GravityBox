@@ -1534,7 +1534,7 @@
     
     <!-- Compatibility warning -->
     <string name="compat_warning_title">FIGYELMEZTETÉS</string>
-    <string name="compat_warning_message">CSAK MÓDOSÍTÁS NÉLKÜLI VAGY GOOGLE PLAY EDITION ESZKÖZÖKRE!\n\nMinden más módosított gyártói ROM-on való használat, úgymint Touchwiz, Sense, Xperia és minden más egyedi ROM nem támogatott, és nem várt problémákat okozhat.\n\nHa mégis folytatod, akkor meg kell erősítened, hogy ezt saját felelősségedre teszed, mindenféle támogatás reménye nélkül. További, részletes kompatibilitási információhoz nézd meg ezt: <a href="http://forum.xda-developers.com/showthread.php?t=3037566">szoftver támogatási oldal az XDA-n</a>.</string>
+    <string name="compat_warning_message">CSAK MÓDOSÍTÁS NÉLKÜLI VAGY GOOGLE PLAY EDITION ESZKÖZÖKRE!\n\nMinden más módosított gyártói ROM-on való használat, úgymint Touchwiz, Sense, Xperia és minden más egyedi ROM nem támogatott, és nem várt problémákat okozhat.\n\nHa mégis folytatod, akkor meg kell erősítened, hogy ezt saját felelősségedre teszed, mindenféle támogatás reménye nélkül. További, részletes kompatibilitási információhoz nézd meg ezt: <a href="http://forum.xda-developers.com/showthread.php?t=3251148">szoftver támogatási oldal az XDA-n</a>.</string>
     <string name="compat_warning_ok_stage1">OK. Értettem.</string>
     <string name="compat_warning_ok_stage2">TÉNYLEG értettem!</string>
 

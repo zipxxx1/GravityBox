@@ -1510,7 +1510,7 @@
     <string name="compat_warning_message">TYLKO DO STOSOWANIA NA NIEZMODYFIKOWANEJ WERSJI ANDROIDA LUB URZĄDZENIACH GOOGLE PLAY EDITION!\n\nStosowanie na modyfikowanych systemach
         takich jak TouchWiz, Sense, Xperia lub każdej innej niestandardowej wersji ROM,  może przynieść nieoczekiwane rezultaty.\n\nJeśli zdecydujesz się kontynuować
         pomimo faktu, że urządzenie nie jest oficjalnie obsługiwane, robisz to na własne ryzyko i bez gwarancji jakiegokolwiek wsparcia. Więcej informacji na temat zgodności
-        można znaleźć w <a href="http://forum.xda-developers.com/showthread.php?t=3037566">wątku wsparcia z XDA</a>.</string>
+        można znaleźć w <a href="http://forum.xda-developers.com/showthread.php?t=3251148">wątku wsparcia z XDA</a>.</string>
     <string name="compat_warning_ok_stage1">Rozumiem</string>
     <string name="compat_warning_ok_stage2">Naprawdę rozumiem!</string>
 

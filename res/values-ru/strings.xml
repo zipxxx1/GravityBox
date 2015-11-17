@@ -1555,7 +1555,7 @@
     <string name="compat_warning_message">ДЛЯ ИСПОЛЬЗОВАНИЯ ТОЛЬКО НА УСТРОЙСТВАХ С НЕМОДИФИЦИРОВАННОЙ ОС АНДРОИД ИЛИ GOOGLE PLAY EDITION!\n\nИспользование на других сильно изменённых
         прошивках, таких как Touchwiz, Sense, Xperia, а также на любых кастомных прошивках, не поддерживается и может привести к непредсказуемым результатам.\n\nЕсли Вы принимаете это условие,
         подтвердите, что всё, что Вы делаете, Вы делаете на свой страх и риск без ожидания какой-либо поддержки. Для более детальной информации о совместимости,
-        см. <a href="http://forum.xda-developers.com/showthread.php?t=3037566">форум поддержки на XDA</a>.</string>
+        см. <a href="http://forum.xda-developers.com/showthread.php?t=3251148">форум поддержки на XDA</a>.</string>
     <string name="compat_warning_ok_stage1">OK. Я понял.</string>
     <string name="compat_warning_ok_stage2">Я ДЕЙСТВИТЕЛЬНО понял!</string>
     
