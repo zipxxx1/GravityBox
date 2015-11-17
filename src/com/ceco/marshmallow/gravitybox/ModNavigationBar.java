@@ -354,12 +354,6 @@ public class ModNavigationBar {
                         mHomeKeys = new HomeKeyInfo[rotatedViews.length];
                         int index = 0;
                         for(View v : rotatedViews) {
-                            if (backButtonResId != 0) { 
-                                ImageView backButton = (ImageView) v.findViewById(backButtonResId);
-                                if (backButton != null && Build.VERSION.SDK_INT < 22) {
-                                    backButton.setScaleType(ScaleType.FIT_CENTER);
-                                }
-                            }
                             if (recentAppsResId != 0) {
                                 ImageView recentAppsButton = (ImageView) v.findViewById(recentAppsResId);
                                 mRecentsKeys[index] = recentAppsButton;
@@ -487,9 +481,7 @@ public class ModNavigationBar {
 
                     try {
                         Drawable backIcon = mUseLargerIcons ? gbRes.getDrawable(
-                                R.drawable.ic_sysbar_back_ime_land_large, null) :
-                                    Build.VERSION.SDK_INT >= 22 ? null :
-                                        gbRes.getDrawable(R.drawable.ic_sysbar_back_ime_land, null);
+                                R.drawable.ic_sysbar_back_ime_land_large, null) : null;
                         if (backIcon != null) {
                             XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon", backIcon);
                         }
@@ -1030,7 +1022,7 @@ public class ModNavigationBar {
     }
 
     private static ScaleType getIconScaleType(int index, int keyId) {
-        if (Build.VERSION.SDK_INT < 22 || mUseLargerIcons) {
+        if (mUseLargerIcons) {
             return ScaleType.FIT_CENTER;
         } else {
             ScaleType origScaleType = mNavbarViewInfo[index] == null ? ScaleType.CENTER :
@@ -1064,8 +1056,6 @@ public class ModNavigationBar {
     }
 
     private static void updateIconScaleType() {
-        if (Build.VERSION.SDK_INT < 22) return;
-
         try {
             for (int i = 0; i < mNavbarViewInfo.length; i++) {
                 int [] paddingPx = getIconPaddingPx(i);

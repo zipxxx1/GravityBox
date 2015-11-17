@@ -112,20 +112,18 @@ public class ModTelephony {
                     }
                 });
 
-                if (Build.VERSION.SDK_INT >= 22) {
-                    XposedHelpers.findAndHookMethod(CLASS_PHONE_BASE, null,
-                            "isMccMncMarkedAsRoaming", String.class, new XC_MethodHook() {
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                            if (!mNationalRoamingEnabled) return;
+                XposedHelpers.findAndHookMethod(CLASS_PHONE_BASE, null,
+                        "isMccMncMarkedAsRoaming", String.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (!mNationalRoamingEnabled) return;
 
-                            boolean result = (boolean) param.getResult();
-                            result = result && !equalsMcc((String)param.args[0], result);
-                            if (DEBUG) log("isMccMncMarkedAsRoaming: " + result);
-                            param.setResult(result);
-                        }
-                    });
-                }
+                        boolean result = (boolean) param.getResult();
+                        result = result && !equalsMcc((String)param.args[0], result);
+                        if (DEBUG) log("isMccMncMarkedAsRoaming: " + result);
+                        param.setResult(result);
+                    }
+                });
             }
         } catch (Throwable t) {
             XposedBridge.log(t);

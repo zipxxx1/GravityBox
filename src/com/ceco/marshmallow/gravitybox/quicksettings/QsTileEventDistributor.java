@@ -261,13 +261,8 @@ public class QsTileEventDistributor {
                     }
                 }
             };
-            if (Build.VERSION.SDK_INT < 22) {
-                XposedHelpers.findAndHookMethod(CLASS_UNLOCK_METHOD_CACHE, cl, "notifyListeners",
-                    boolean.class, umcNotifyListenersHook);
-            } else {
-                XposedHelpers.findAndHookMethod(CLASS_UNLOCK_METHOD_CACHE, cl, "notifyListeners",
-                    umcNotifyListenersHook);
-            }
+            XposedHelpers.findAndHookMethod(CLASS_UNLOCK_METHOD_CACHE, cl, "notifyListeners",
+                umcNotifyListenersHook);
 
             XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "createIcon",
                     new XC_MethodHook() {
@@ -283,35 +278,33 @@ public class QsTileEventDistributor {
                 }
             });
 
-            if (Build.VERSION.SDK_INT >= 22) {
-                XC_MethodHook longClickHook = new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        final QsEventListener l = mListeners.get(XposedHelpers
-                                .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                        if (l != null && l.handleLongClick()) {
-                            param.setResult(null);
-                        }
+            XC_MethodHook longClickHook = new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l != null && l.handleLongClick()) {
+                        param.setResult(null);
                     }
-                };
-                XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl,
-                        "handleLongClick", longClickHook);
-                XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl,
-                        "handleLongClick", longClickHook);
+                }
+            };
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_INTENT_TILE, cl,
+                    "handleLongClick", longClickHook);
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl,
+                    "handleLongClick", longClickHook);
 
-                XposedHelpers.findAndHookMethod(BaseTile.CLASS_RESOURCE_ICON, cl, "getDrawable",
-                        Context.class, new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        final QsEventListener l = mListeners.get(XposedHelpers
-                                .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                        if (l instanceof QsTile) {
-                            param.setResult(l.getResourceIconDrawable());
-                        }
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_RESOURCE_ICON, cl, "getDrawable",
+                    Context.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l instanceof QsTile) {
+                        param.setResult(l.getResourceIconDrawable());
                     }
-                });
-                mResourceIconHooked = true;
-            }
+                }
+            });
+            mResourceIconHooked = true;
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

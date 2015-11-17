@@ -891,12 +891,8 @@ public class ModExpandedDesktop {
                                 try {
                                     Object statusbar = XposedHelpers.callMethod(param.thisObject, "getStatusBarService");
                                     if (statusbar != null) {
-                                        if (Build.VERSION.SDK_INT < 22) {
-                                            XposedHelpers.callMethod(statusbar, "setSystemUiVisibility", visibility2, 0xffffffff);
-                                        } else {
-                                            XposedHelpers.callMethod(statusbar, "setSystemUiVisibility",
-                                                    visibility2, 0xffffffff, win.toString());
-                                        }
+                                        XposedHelpers.callMethod(statusbar, "setSystemUiVisibility",
+                                                visibility2, 0xffffffff, win.toString());
                                         XposedHelpers.callMethod(statusbar, "topAppWindowChanged", needsMenu);
                                     }
                                 } catch (Throwable t) {

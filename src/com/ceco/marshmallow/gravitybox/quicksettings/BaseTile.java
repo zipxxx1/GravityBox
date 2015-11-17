@@ -153,16 +153,6 @@ public abstract class BaseTile implements QsEventListener {
 
     @Override
     public void onCreateTileView(View tileView) throws Throwable {
-        if (Build.VERSION.SDK_INT < 22) {
-            tileView.setLongClickable(true);
-            tileView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    return handleLongClick();
-                }
-            });
-        }
-
         XposedHelpers.setAdditionalInstanceField(tileView, TILE_KEY_NAME, mKey);
 
         mScalingFactor = QsPanel.getScalingFactor(Integer.valueOf(mPrefs.getString(

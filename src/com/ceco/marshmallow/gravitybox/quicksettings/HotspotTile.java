@@ -43,17 +43,15 @@ public class HotspotTile extends AospTile {
 
     private void createHooks() {
         try {
-            if (Build.VERSION.SDK_INT >= 22) {
-                mLongClickHook = XposedHelpers.findAndHookMethod(getClassName(), 
-                        mContext.getClassLoader(), "handleLongClick", new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        if (handleLongClick()) {
-                            param.setResult(null);
-                        }
+            mLongClickHook = XposedHelpers.findAndHookMethod(getClassName(), 
+                    mContext.getClassLoader(), "handleLongClick", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (handleLongClick()) {
+                        param.setResult(null);
                     }
-                });
-            }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

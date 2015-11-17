@@ -91,7 +91,7 @@ public abstract class QsTile extends BaseTile {
                 "create", mHost, DUMMY_INTENT);
         XposedHelpers.setAdditionalInstanceField(mTile, TILE_KEY_NAME, mKey);
 
-        if (Build.VERSION.SDK_INT >= 22 && sResourceIconClass == null) {
+        if (sResourceIconClass == null) {
             sResourceIconClass = getResourceIconClass(mContext.getClassLoader());
         }
     }
@@ -146,8 +146,7 @@ public abstract class QsTile extends BaseTile {
 
         public void applyTo(Object state) {
             XposedHelpers.setBooleanField(state, "visible", visible);
-            XposedHelpers.setObjectField(state, "icon",
-                    Build.VERSION.SDK_INT >= 22 ? getResourceIcon() : icon);
+            XposedHelpers.setObjectField(state, "icon", getResourceIcon());
             XposedHelpers.setObjectField(state, "label", label);
             XposedHelpers.setBooleanField(state, "autoMirrorDrawable", autoMirrorDrawable);
         }

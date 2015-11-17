@@ -205,13 +205,9 @@ public class PhoneWrapper {
                 XposedHelpers.callMethod(defPhone, "setPreferredNetworkTypeGemini", 
                         paramArgs, networkType, null, mSimSlot);
             } else {
-                if (Build.VERSION.SDK_INT < 22) {
-                    Settings.Global.putInt(mContext.getContentResolver(), PREFERRED_NETWORK_MODE, networkType);
-                } else {
-                    int subId = (int) XposedHelpers.callMethod(defPhone, "getSubId");
-                    Settings.Global.putInt(mContext.getContentResolver(),
-                            PREFERRED_NETWORK_MODE + subId, networkType);
-                }
+                int subId = (int) XposedHelpers.callMethod(defPhone, "getSubId");
+                Settings.Global.putInt(mContext.getContentResolver(),
+                        PREFERRED_NETWORK_MODE + subId, networkType);
                 Class<?>[] paramArgs = new Class<?>[2];
                 paramArgs[0] = int.class;
                 paramArgs[1] = Message.class;
@@ -238,17 +234,12 @@ public class PhoneWrapper {
     private static int getCurrentNetworkType(int phoneId) {
         try {
             int networkType = getDefaultNetworkType();
-            if (Build.VERSION.SDK_INT < 22) {
-                networkType = Settings.Global.getInt(mContext.getContentResolver(),
-                        PREFERRED_NETWORK_MODE, NT_WCDMA_PREFERRED);
-            } else {
-                Object[] phones = (Object[])XposedHelpers.callStaticMethod(mClsPhoneFactory, "getPhones");
-                if (phoneId < phones.length) {
-                    int subId = (int) XposedHelpers.callMethod(phones[phoneId], "getSubId");
-                    if (DEBUG) log("getCurrentNetworkType: calculating network type for subId=" + subId);
-                    networkType = (int) XposedHelpers.callStaticMethod(mClsPhoneFactory,
-                            "calculatePreferredNetworkType", mContext, subId);
-                }
+            Object[] phones = (Object[])XposedHelpers.callStaticMethod(mClsPhoneFactory, "getPhones");
+            if (phoneId < phones.length) {
+                int subId = (int) XposedHelpers.callMethod(phones[phoneId], "getSubId");
+                if (DEBUG) log("getCurrentNetworkType: calculating network type for subId=" + subId);
+                networkType = (int) XposedHelpers.callStaticMethod(mClsPhoneFactory,
+                        "calculatePreferredNetworkType", mContext, subId);
             }
             if (DEBUG) log("getCurrentNetworkType: phoneId=" + phoneId +
                     "; networkType=" + getNetworkModeNameFromValue(networkType));

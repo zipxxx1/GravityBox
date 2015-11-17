@@ -184,7 +184,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
 
         if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                !(Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22) && !Utils.isMtkDevice()) {
+                !Utils.isMtkDevice()) {
 
             sQsHpResId = XResources.getFakeResId(modRes, R.drawable.ic_qs_signal_hp);
             sSbHpResId = XResources.getFakeResId(modRes, R.drawable.stat_sys_data_fully_connected_hp);
@@ -210,13 +210,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     public static StatusbarSignalCluster create(ContainerType containerType,
             LinearLayout view, XSharedPreferences prefs) throws Throwable {
         sPrefs = prefs;
-        if (Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22) {
-            return new StatusbarSignalClusterMoto(containerType, view);
-        } else if (Utils.isMtkDevice() && Build.VERSION.SDK_INT < 22) {
-            return new StatusbarSignalClusterMtk(containerType, view);
-        } else {
-            return new StatusbarSignalCluster(containerType, view);
-        }
+        return new StatusbarSignalCluster(containerType, view);
     }
 
     public StatusbarSignalCluster(ContainerType containerType, LinearLayout view) throws Throwable {
@@ -332,15 +326,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
                             mWifiActivity = new SignalActivity(wifiGroup, SignalType.WIFI);
                             if (DEBUG) log("onAttachedToWindow: mWifiActivity created");
                         }
-
-                        if (Build.VERSION.SDK_INT < 22) {
-                            ViewGroup mobileGroup = (ViewGroup) mFldMobileGroup.get(param.thisObject);
-                            if (mobileGroup != null) {
-                                mMobileActivity = new SignalActivity(mobileGroup, SignalType.MOBILE,
-                                        Gravity.BOTTOM | Gravity.END);
-                                if (DEBUG) log("onAttachedToWindow: mMobileActivity created");
-                            }
-                        }
                     }
                 });
 
@@ -360,7 +345,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         }
 
         if (sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_HPLUS, false) &&
-                !(Utils.isMotoXtDevice() && Build.VERSION.SDK_INT < 22) &&
                 !Utils.isFalconAsiaDs() && !Utils.isMtkDevice()) {
             try {
                 final Class<?> mobileNetworkCtrlClass = Utils.isMotoXtDevice() ?
@@ -452,8 +436,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     public static void disableSignalExclamationMarks(ClassLoader cl) {
-        if ((Utils.isFalconAsiaDs() && Build.VERSION.SDK_INT >= 22) ||
-                Utils.isMtkDevice()) {
+        if (Utils.isFalconAsiaDs() || Utils.isMtkDevice()) {
             return;
         }
 
@@ -607,7 +590,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     }
 
     protected void updateBatteryPadding() {
-        if (Build.VERSION.SDK_INT < 22 || Utils.isXperiaDevice()) return;
+        if (Utils.isXperiaDevice()) return;
 
         try {
             if (mBatteryPaddingOriginal == null) {

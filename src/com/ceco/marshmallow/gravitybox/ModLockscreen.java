@@ -168,7 +168,7 @@ public class ModLockscreen {
             final Class<?> sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader);
             final Class<?> unlockMethodCacheClass = XposedHelpers.findClass(CLASS_UNLOCK_METHOD_CACHE, classLoader);
 
-            String setupMethodName = Build.VERSION.SDK_INT >= 22 ? "setupLocked" : "setup";
+            String setupMethodName = "setupLocked";
             XposedHelpers.findAndHookMethod(kgViewMediatorClass, setupMethodName, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
@@ -343,7 +343,6 @@ public class ModLockscreen {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.SCREEN_LOCK)) {
-                        XposedHelpers.setBooleanField(param.thisObject, "mSuppressNextLockSound", false);
                         param.setResult(null);
                     }
                 }
@@ -423,13 +422,8 @@ public class ModLockscreen {
                     }
                 }
             };
-            if (Build.VERSION.SDK_INT < 22) {
-                XposedHelpers.findAndHookMethod(unlockMethodCacheClass, "notifyListeners",
-                    boolean.class, umcNotifyListenersHook);
-            } else {
-                XposedHelpers.findAndHookMethod(unlockMethodCacheClass, "notifyListeners",
-                    umcNotifyListenersHook);
-            }
+            XposedHelpers.findAndHookMethod(unlockMethodCacheClass, "notifyListeners",
+                umcNotifyListenersHook);
 
             XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR, classLoader,
                     "makeStatusBarView", new XC_MethodHook() {
@@ -479,13 +473,8 @@ public class ModLockscreen {
                         }
                     }
                 };
-                if (Build.VERSION.SDK_INT < 22) {
-                    XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT, classLoader, "updateCarrierText",
-                        CLASS_ICC_STATE, CharSequence.class, CharSequence.class, carrierTextHook);
-                } else {
-                    XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT, classLoader, "updateCarrierText",
-                            carrierTextHook);
-                }
+                XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT, classLoader, "updateCarrierText",
+                        carrierTextHook);
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -646,15 +635,7 @@ public class ModLockscreen {
     private static void updateCarrierText() {
         if (mCarrierTextView == null) return;
         try {
-            if (Build.VERSION.SDK_INT < 22) {
-                Object callback = XposedHelpers.getObjectField(mCarrierTextView, "mCallback");
-                XposedHelpers.callMethod(mCarrierTextView, "updateCarrierText",
-                        XposedHelpers.getObjectField(callback, "mSimState"),
-                        XposedHelpers.getObjectField(callback, "mPlmn"),
-                        XposedHelpers.getObjectField(callback, "mSpn"));
-            } else {
-                XposedHelpers.callMethod(mCarrierTextView, "updateCarrierText");
-            }
+            XposedHelpers.callMethod(mCarrierTextView, "updateCarrierText");
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

@@ -66,9 +66,9 @@ public class ModDialer {
     private static final String CLASS_DIALPAD_FRAGMENT = "com.android.dialer.dialpad.DialpadFragment";
     private static final boolean DEBUG = false;
 
-    private static final int CALL_STATE_ACTIVE = Build.VERSION.SDK_INT >= 22 ? 3 : 2;
-    private static final int CALL_STATE_INCOMING = Build.VERSION.SDK_INT >= 22 ? 4 : 3;
-    private static final int CALL_STATE_WAITING = Build.VERSION.SDK_INT >= 22 ? 5 : 4;
+    private static final int CALL_STATE_ACTIVE = 3;
+    private static final int CALL_STATE_INCOMING = 4;
+    private static final int CALL_STATE_WAITING = 5;
 
     private static XSharedPreferences mPrefsPhone;
     private static int mFlipAction = GravityBoxSettings.PHONE_FLIP_ACTION_NONE;
@@ -267,8 +267,7 @@ public class ModDialer {
                     if (param.args[1] != null) {
                         final Fragment frag = (Fragment) param.thisObject;
                         final Resources res = frag.getResources();
-                        String resName = Build.VERSION.SDK_INT >= 22 ?
-                                "img_no_image_automirrored" : "img_no_image";
+                        String resName = "img_no_image_automirrored";
                         Drawable picUnknown = res.getDrawable(res.getIdentifier(resName, "drawable",
                                         res.getResourcePackageName(frag.getId())), null);
                         shouldShowUnknownPhoto = ((Drawable)param.args[1]).getConstantState().equals(
