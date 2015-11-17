@@ -795,10 +795,6 @@
     <string name="hwkey_action_show_power_menu">Visualizza menù spegnimento</string>
     <string name="hwkey_action_expand_notifications">Espandi barra notifiche</string>
  
-    <!-- Navigation bar ring targets -->
-    <string name="pref_cat_navbar_ring_targets_title">Anello barra di navigazione</string>
-    <string name="pref_navbar_ring_target_title">Destinazione per pulsante %d</string>
- 
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">Azioni GravityBox</string>
  
@@ -826,13 +822,6 @@
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">NFC on/off</string>
-
-    <!-- Navigation bar ring targets background style -->
-    <string name="pref_navbar_ring_targets_bg_style_title">Stile sfondo pulsanti anello</string>
-    <string name="nrt_bg_style_none">Nessuno</string>
-    <string name="nrt_bg_style_light">Chiaro</string>
-    <string name="nrt_bg_style_dark">Scuro</string>
-    <string name="nrt_bg_style_black">Nero</string>
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Attiva e personalizza il Pie control</string>
@@ -1144,12 +1133,6 @@
 
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">Dimensione AM/PM</string>
-
-    <!-- Navigation bar ring category -->
-    <string name="pref_cat_navbar_ring_title">Anello barra di navigazione</string>
-
-    <!-- Navbar ring: option to disable -->
-    <string name="pref_navbar_ring_disable_title">Disabilita anello</string>
 
     <!-- Data traffic monitor style -->
     <string name="pref_data_traffic_mode_title">Stile contatore dati</string>

@@ -535,7 +535,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_ALARM_HIDE = "alarmHide";
 
     public static final String PREF_CAT_KEY_NAVBAR_KEYS = "pref_cat_navbar_keys";
-    public static final String PREF_CAT_KEY_NAVBAR_RING = "pref_cat_navbar_ring";
     public static final String PREF_CAT_KEY_NAVBAR_COLOR = "pref_cat_navbar_color";
     public static final String PREF_CAT_KEY_NAVBAR_DIMEN = "pref_cat_navbar_dimen";
     public static final String PREF_KEY_NAVBAR_OVERRIDE = "pref_navbar_override";
@@ -558,7 +557,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NAVBAR_COLOR_ENABLE = "pref_navbar_color_enable";
     public static final String PREF_KEY_NAVBAR_KEY_COLOR = "pref_navbar_key_color";
     public static final String PREF_KEY_NAVBAR_KEY_GLOW_COLOR = "pref_navbar_key_glow_color";
-    public static final String PREF_KEY_NAVBAR_RING_DISABLE = "pref_navbar_ring_disable";
     public static final String ACTION_PREF_NAVBAR_CHANGED = "gravitybox.intent.action.ACTION_NAVBAR_CHANGED";
     public static final String ACTION_PREF_NAVBAR_SWAP_KEYS = "gravitybox.intent.action.ACTION_NAVBAR_SWAP_KEYS";
     public static final String EXTRA_NAVBAR_HEIGHT = "navbarHeight";
@@ -573,7 +571,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_CURSOR_CONTROL = "navbarCursorControl";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_SWAP = "navbarCustomKeySwap";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_ICON = "navbarCustomKeyIcon";
-    public static final String EXTRA_NAVBAR_RING_DISABLE = "navbarRingDisable";
 
     public static final String PREF_KEY_STATUSBAR_BRIGHTNESS = "pref_statusbar_brightness";
     public static final String PREF_KEY_STATUSBAR_DISABLE_PEEK = "pref_statusbar_disable_peek";
@@ -671,15 +668,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_SIGNAL_CLUSTER_NOSIM = "pref_signal_cluster_nosim";
     public static final String ACTION_PREF_SIGNAL_CLUSTER_CHANGED = "gravitybox.intent.action.SIGNAL_CLUSTER_CHANGED";
     public static final String EXTRA_SC_NARROW = "scNarrow";
-
-    public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
-    public static final List<String> PREF_KEY_NAVBAR_RING_TARGET = new ArrayList<String>(Arrays.asList(
-            "pref_navbar_ring_target0"));
-    public static final String PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE = "pref_navbar_ring_targets_bg_style";
-    public static final String ACTION_PREF_NAVBAR_RING_TARGET_CHANGED = "gravitybox.intent.action.NAVBAR_RING_TARGET_CHANGED";
-    public static final String EXTRA_RING_TARGET_INDEX = "ringTargetIndex";
-    public static final String EXTRA_RING_TARGET_APP = "ringTargetApp";
-    public static final String EXTRA_RING_TARGET_BG_STYLE = "ringTargetBgStyle";
 
     public static final String PREF_KEY_NAVBAR_LARGER_ICONS = "pref_navbar_larger_icons";
 
@@ -1182,7 +1170,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceScreen mPrefCatMedia;
         private ListPreference mPrefExpandedDesktop;
         private PreferenceCategory mPrefCatNavbarKeys;
-        private PreferenceCategory mPrefCatNavbarRing;
         private PreferenceCategory mPrefCatNavbarColor;
         private PreferenceCategory mPrefCatNavbarDimen;
         private CheckBoxPreference mPrefNavbarEnable;
@@ -1241,9 +1228,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefNavbarCustomKeySingletap;
         private ListPreference mPrefNavbarCustomKeyLongpress;
         private ListPreference mPrefNavbarCustomKeyDoubletap;
-        private PreferenceScreen mPrefCatNavbarRingTargets;
-        private AppPickerPreference[] mPrefNavbarRingTarget;
-        private ListPreference mPrefNavbarRingTargetsBgStyle;
         private SeekBarPreference mPrefPulseNotificationDelay;
         private PreferenceCategory mPrefCatMiscOther;
         private SeekBarPreference mPrefTorchAutoOff;
@@ -1447,7 +1431,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefExpandedDesktop = (ListPreference) findPreference(PREF_KEY_EXPANDED_DESKTOP);
 
             mPrefCatNavbarKeys = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_KEYS);
-            mPrefCatNavbarRing = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_RING);
             mPrefCatNavbarColor = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_COLOR);
             mPrefCatNavbarDimen = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_DIMEN);
             mPrefNavbarEnable = (CheckBoxPreference) findPreference(PREF_KEY_NAVBAR_ENABLE);
@@ -1530,24 +1513,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefLauncherDesktopGridCols = (ListPreference) findPreference(PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS);
 
             mPrefVolumeRockerWake = (ListPreference) findPreference(PREF_KEY_VOLUME_ROCKER_WAKE);
-
-            mPrefCatNavbarRingTargets = (PreferenceScreen) findPreference(PREF_CAT_KEY_NAVBAR_RING_TARGETS);
-            mPrefNavbarRingTargetsBgStyle = (ListPreference) findPreference(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE);
-            mPrefNavbarRingTarget = new AppPickerPreference[PREF_KEY_NAVBAR_RING_TARGET.size()];
-            for (int i = 0; i < mPrefNavbarRingTarget.length; i++) {
-                AppPickerPreference appPref = new AppPickerPreference(getActivity(), null);
-                appPref.setKey(PREF_KEY_NAVBAR_RING_TARGET.get(i));
-                appPref.setTitle(String.format(
-                        getActivity().getString(R.string.pref_navbar_ring_target_title), i + 1));
-                appPref.setDialogTitle(appPref.getTitle());
-                appPref.setDefaultSummary(getActivity().getString(R.string.state_default));
-                appPref.setSummary(getActivity().getString(R.string.state_default));
-                mPrefNavbarRingTarget[i] = appPref;
-                mPrefCatNavbarRingTargets.addPreference(mPrefNavbarRingTarget[i]);
-                if (mPrefs.getString(appPref.getKey(), null) == null) {
-                    mPrefs.edit().putString(appPref.getKey(), null).commit();
-                }
-            }
 
             mPrefPulseNotificationDelay = (SeekBarPreference) findPreference(PREF_KEY_PULSE_NOTIFICATION_DELAY);
 
@@ -2005,7 +1970,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 final boolean override = mPrefs.getBoolean(PREF_KEY_NAVBAR_OVERRIDE, false);
                 mPrefNavbarEnable.setEnabled(override);
                 mPrefCatNavbarKeys.setEnabled(override && mPrefNavbarEnable.isChecked());
-                mPrefCatNavbarRing.setEnabled(override && mPrefNavbarEnable.isChecked());
                 mPrefCatNavbarColor.setEnabled(override && mPrefNavbarEnable.isChecked());
                 mPrefCatNavbarDimen.setEnabled(override && mPrefNavbarEnable.isChecked());
             }
@@ -2098,10 +2062,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE)) {
                 mPrefDataTrafficInactivityMode.setSummary(mPrefDataTrafficInactivityMode.getEntry());
-            }
-
-            if (key == null || key.equals(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE)) {
-                mPrefNavbarRingTargetsBgStyle.setSummary(mPrefNavbarRingTargetsBgStyle.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_SIZE)) {
@@ -2733,19 +2693,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_CURSOR_CONTROL,
                         prefs.getBoolean(PREF_KEY_NAVBAR_CURSOR_CONTROL, false));
-            } else if (key.equals(PREF_KEY_NAVBAR_RING_DISABLE)) {
-                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_RING_DISABLE,
-                        prefs.getBoolean(PREF_KEY_NAVBAR_RING_DISABLE, false));
-            } else if (PREF_KEY_NAVBAR_RING_TARGET.contains(key)) {
-                intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
-                intent.putExtra(EXTRA_RING_TARGET_INDEX,
-                        PREF_KEY_NAVBAR_RING_TARGET.indexOf(key));
-                intent.putExtra(EXTRA_RING_TARGET_APP, prefs.getString(key, null));
-            } else if (key.equals(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE)) {
-                intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
-                intent.putExtra(EXTRA_RING_TARGET_BG_STYLE,
-                        prefs.getString(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE, "NONE"));
             } else if (key.equals(PREF_KEY_NAVBAR_COLOR_ENABLE)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_COLOR_ENABLE,

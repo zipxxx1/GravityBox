@@ -778,10 +778,6 @@
     <string name="hwkey_action_show_power_menu">Mostrar Menu Desligar</string>
     <string name="hwkey_action_expand_notifications">Expandir painel de notificações</string>
 
-    <!-- Navigation bar ring targets -->
-    <string name="pref_cat_navbar_ring_targets_title">Alvos do anel de navegação</string>
-    <string name="pref_navbar_ring_target_title">Alvo número %d</string>
-
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">Ações GravityBox</string>
 
@@ -809,13 +805,6 @@
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">Comutar NFC</string>
-
-    <!-- Navigation bar ring targets background style -->
-    <string name="pref_navbar_ring_targets_bg_style_title">Estilo do fundo do alvo</string>
-    <string name="nrt_bg_style_none">Nenhum</string>
-    <string name="nrt_bg_style_light">Claro</string>
-    <string name="nrt_bg_style_dark">Escuro</string>
-    <string name="nrt_bg_style_black">Preto</string>
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contém várias definições relacionadas com os controlos Pie</string>
@@ -1127,12 +1116,6 @@
 
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">Tamanho da letra AM/PM</string>
-
-    <!-- Navigation bar ring category -->
-    <string name="pref_cat_navbar_ring_title">Anel da barra de navegação</string>
-
-    <!-- Navbar ring: option to disable -->
-    <string name="pref_navbar_ring_disable_title">Desativar anel de navegação</string>
 
     <!-- Data traffic monitor style -->
     <string name="pref_data_traffic_mode_title">Estilo da monitorização</string>

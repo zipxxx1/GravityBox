@@ -776,10 +776,6 @@
     <string name="hwkey_action_show_power_menu">Zobrazit nabídku napájení</string>
     <string name="hwkey_action_expand_notifications">Zobrazit panel upozornění</string>
 
-    <!-- Navigation bar ring targets -->
-    <string name="pref_cat_navbar_ring_targets_title">Zkratky prstence navigační lišty</string>
-    <string name="pref_navbar_ring_target_title">Aplikace pro zkratku %d</string>
-
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">GravityBox Akce</string>
 
@@ -807,13 +803,6 @@
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">Přepnout NFC</string>
-
-    <!-- Navigation bar ring targets background style -->
-    <string name="pref_navbar_ring_targets_bg_style_title">Styl pozadí zkratky</string>
-    <string name="nrt_bg_style_none">Žádný</string>
-    <string name="nrt_bg_style_light">Světlý</string>
-    <string name="nrt_bg_style_dark">Tmavý</string>
-    <string name="nrt_bg_style_black">Černý</string>
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Obsahuje nastavení týkající se koláče</string>
@@ -1123,12 +1112,6 @@
 
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">Velikost AM/PM</string>
-
-    <!-- Navigation bar ring category -->
-    <string name="pref_cat_navbar_ring_title">Prstenec navigační lišty</string>
-
-    <!-- Navbar ring: option to disable -->
-    <string name="pref_navbar_ring_disable_title">Vypnout prstenec</string>
 
     <!-- Data traffic monitor style -->
     <string name="pref_data_traffic_mode_title">Styl monitoru datového toku</string>

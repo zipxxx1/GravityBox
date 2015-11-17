@@ -799,10 +799,6 @@
     <string name="hwkey_action_show_power_menu">Ausschaltmenü anzeigen</string>
     <string name="hwkey_action_expand_notifications">Benachrichtigungsleiste ausklappen</string>
 
-    <!-- Navigation bar ring targets -->
-    <string name="pref_cat_navbar_ring_targets_title">Anwendungen des Navigationsringes</string>
-    <string name="pref_navbar_ring_target_title">Anwendung %d</string>
-
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">GravityBox-Aktionen</string>
 
@@ -830,13 +826,6 @@
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">NFC an/aus</string>
-
-    <!-- Navigation bar ring targets background style -->
-    <string name="pref_navbar_ring_targets_bg_style_title">Hintergrund der App-Symbole</string>
-    <string name="nrt_bg_style_none">Keiner</string>
-    <string name="nrt_bg_style_light">Hell</string>
-    <string name="nrt_bg_style_dark">Dunkel</string>
-    <string name="nrt_bg_style_black">Schwarz</string>
 
     <!-- Pie category summary -->
     <string name="pie_control_summary"></string>
@@ -1141,12 +1130,6 @@
 
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">Größe von AM/PM</string>
-
-    <!-- Navigation bar ring category -->
-    <string name="pref_cat_navbar_ring_title">Navigationsring</string>
-
-    <!-- Navbar ring: option to disable -->
-    <string name="pref_navbar_ring_disable_title">Navigationsring deaktivieren</string>
 
     <!-- Data traffic monitor style -->
     <string name="pref_data_traffic_mode_title">Stil der Datenverbrauchsanzeige</string>

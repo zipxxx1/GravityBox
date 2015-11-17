@@ -658,9 +658,6 @@
     <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
     <string name="hwkey_action_show_power_menu">電源メニューを表示</string>
     <string name="hwkey_action_expand_notifications">通知領域を開く</string>
-    <!-- Navigation bar ring targets -->
-    <string name="pref_cat_navbar_ring_targets_title">ナビリングのターゲット</string>
-    <string name="pref_navbar_ring_target_title">リングターゲット %d</string>
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">GravityBoxアクション</string>
     <!-- Network mode shortcut -->
@@ -681,12 +678,6 @@
     <string name="location_mode_off">位置情報オフ</string>
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">NFCトグル</string>
-    <!-- Navigation bar ring targets background style -->
-    <string name="pref_navbar_ring_targets_bg_style_title">ターゲット背景スタイル</string>
-    <string name="nrt_bg_style_none">なし</string>
-    <string name="nrt_bg_style_light">明るめ</string>
-    <string name="nrt_bg_style_dark">暗め</string>
-    <string name="nrt_bg_style_black">黒</string>
     <!-- Pie category summary -->
     <string name="pie_control_summary">パイ関連の設定を変更します。</string>
     <!-- Shortcut for Google Now -->
@@ -946,10 +937,6 @@
     <string name="pref_sb_clock_dow_size_title">曜日のサイズ</string>
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">午前/午後のサイズ</string>
-    <!-- Navigation bar ring category -->
-    <string name="pref_cat_navbar_ring_title">ナビバーリング</string>
-    <!-- Navbar ring: option to disable -->
-    <string name="pref_navbar_ring_disable_title">ナビバーリングの無効化</string>
     <!-- Data traffic monitor style -->
     <string name="pref_data_traffic_mode_title">データ通信量モニターのスタイル</string>
     <string name="dt_mode_off">無効</string>

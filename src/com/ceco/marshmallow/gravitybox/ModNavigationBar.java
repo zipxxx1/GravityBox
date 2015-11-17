@@ -59,7 +59,6 @@ public class ModNavigationBar {
     private static final String CLASS_KEY_BUTTON_RIPPLE = "com.android.systemui.statusbar.policy.KeyButtonRipple";
     private static final String CLASS_NAVBAR_TRANSITIONS = 
             "com.android.systemui.statusbar.phone.NavigationBarTransitions";
-    private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_DEADZONE = "com.android.systemui.statusbar.policy.DeadZone";
 
     private static final int MODE_OPAQUE = 0;
@@ -81,7 +80,6 @@ public class ModNavigationBar {
     private static boolean mCursorControlEnabled;
     private static boolean mDpadKeysVisible;
     private static boolean mNavbarVertical;
-    private static boolean mNavbarRingDisabled;
     private static boolean mNavbarLeftHanded;
     private static boolean mUseLargerIcons;
     private static boolean mHideImeSwitcher;
@@ -173,10 +171,6 @@ public class ModNavigationBar {
                             GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_SWAP, false);
                     setCustomKeyVisibility();
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_RING_DISABLE)) {
-                    mNavbarRingDisabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_RING_DISABLE, false);
-                }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON)) {
                     mCustomKeyAltIcon = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON, false);
@@ -265,7 +259,6 @@ public class ModNavigationBar {
         try {
             final Class<?> navbarViewClass = XposedHelpers.findClass(CLASS_NAVBAR_VIEW, classLoader);
             final Class<?> navbarTransitionsClass = XposedHelpers.findClass(CLASS_NAVBAR_TRANSITIONS, classLoader);
-            final Class<?> phoneStatusbarClass = XposedHelpers.findClass(CLASS_PHONE_STATUSBAR, classLoader);
 
             mAlwaysShowMenukey = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_MENUKEY, false);
             mNavbarLeftHanded = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false) &&
@@ -294,8 +287,6 @@ public class ModNavigationBar {
                     GravityBoxSettings.PREF_KEY_NAVBAR_CURSOR_CONTROL, false);
             mCustomKeySwapEnabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP, false);
-            mNavbarRingDisabled = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_NAVBAR_RING_DISABLE, false);
             mHideImeSwitcher = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_HIDE_IME, false);
 
             mNavbarHeight = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_HEIGHT, 100);
@@ -556,15 +547,6 @@ public class ModNavigationBar {
                                 mNavbarViewInfo[i].dpadRight.setQuiescentAlpha(alpha, animate);
                             }
                         }
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(phoneStatusbarClass, "shouldDisableNavbarGestures", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mNavbarRingDisabled) {
-                        param.setResult(true);
                     }
                 }
             });

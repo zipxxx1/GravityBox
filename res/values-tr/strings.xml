@@ -756,10 +756,6 @@
     <string name="hwkey_action_show_power_menu">Güç menüsünü aç</string>
     <string name="hwkey_action_expand_notifications">Bildirim panelini aç</string>
 
-    <!-- Navigation bar ring targets -->
-    <string name="pref_cat_navbar_ring_targets_title">Gezinme halkası hedefleri</string>
-    <string name="pref_navbar_ring_target_title">Halka hedefi %d</string>
-
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">GravityBox Eylemleri</string>
 
@@ -787,13 +783,6 @@
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">NFC</string>
-
-    <!-- Navigation bar ring targets background style -->
-    <string name="pref_navbar_ring_targets_bg_style_title">Hedef arkaplanı stili</string>
-    <string name="nrt_bg_style_none">Hiçbiri</string>
-    <string name="nrt_bg_style_light">Beyaz</string>
-    <string name="nrt_bg_style_dark">Kapalı Siyah</string>
-    <string name="nrt_bg_style_black">Siyah</string>
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Pie ayarlarını içerir</string>
@@ -1101,12 +1090,6 @@
 
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">AM/PM boyutu</string>
-
-    <!-- Navigation bar ring category -->
-    <string name="pref_cat_navbar_ring_title">Gezinme çubuğu halkası</string>
-
-    <!-- Navbar ring: option to disable -->
-    <string name="pref_navbar_ring_disable_title">Gez. çubuğu halkasını kapat</string>
 
     <!-- Data traffic monitor style -->
     <string name="pref_data_traffic_mode_title">Veri trafiği monitörü stili</string>

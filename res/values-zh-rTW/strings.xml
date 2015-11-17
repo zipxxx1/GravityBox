@@ -784,10 +784,6 @@
     <string name="hwkey_action_show_power_menu">顯示電源選單</string>
     <string name="hwkey_action_expand_notifications">展開通知面板</string>
 
-    <!-- Navigation bar ring targets -->
-    <string name="pref_cat_navbar_ring_targets_title">導航環目標</string>
-    <string name="pref_navbar_ring_target_title">導航環目標 %d</string>
-
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">GravityBox 動作</string>
 
@@ -815,13 +811,6 @@
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">開關 NFC</string>
-
-    <!-- Navigation bar ring targets background style -->
-    <string name="pref_navbar_ring_targets_bg_style_title">目標背景風格</string>
-    <string name="nrt_bg_style_none">無</string>
-    <string name="nrt_bg_style_light">亮</string>
-    <string name="nrt_bg_style_dark">暗</string>
-    <string name="nrt_bg_style_black">黑色</string>
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">包含 Pie 控制的相關設定</string>
@@ -1132,12 +1121,6 @@
 
     <!-- Clock: AM/PM size -->
     <string name="pref_sb_clock_ampm_size_title">上午/下午 大小</string>
-
-    <!-- Navigation bar ring category -->
-    <string name="pref_cat_navbar_ring_title">導航環</string>
-
-    <!-- Navbar ring: option to disable -->
-    <string name="pref_navbar_ring_disable_title">停用導航環</string>
 
     <!-- Data traffic monitor style -->
     <string name="pref_data_traffic_mode_title">資料流量速度監控器風格</string>

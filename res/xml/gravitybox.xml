@@ -1178,34 +1178,6 @@
 
         </PreferenceCategory>
 
-        <PreferenceCategory 
-            android:key="pref_cat_navbar_ring"
-            android:title="@string/pref_cat_navbar_ring_title">
-
-            <CheckBoxPreference 
-                android:key="pref_navbar_ring_disable"
-                android:title="@string/pref_navbar_ring_disable_title"
-                android:defaultValue="false"
-                android:disableDependentsState="true" />
-
-            <PreferenceScreen 
-                android:key="pref_cat_navbar_ring_targets"
-                android:title="@string/pref_cat_navbar_ring_targets_title"
-                android:dependency="pref_navbar_ring_disable" >
-
-                <!-- Ring target prefs will be generated dynamically at runtime -->
-
-                <ListPreference
-                    android:key="pref_navbar_ring_targets_bg_style"
-                    android:title="@string/pref_navbar_ring_targets_bg_style_title"
-                    android:entries="@array/nrt_bg_style_entries"
-                    android:entryValues="@array/nrt_bg_style_values"
-                    android:defaultValue="NONE" />
-
-            </PreferenceScreen>
-
-        </PreferenceCategory>
-
         <PreferenceCategory
             android:key="pref_cat_navbar_color"
             android:title="@string/pref_cat_navbar_color_title">
