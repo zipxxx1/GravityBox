@@ -100,11 +100,14 @@ public class ModHwKeys {
     public static final String ACTION_INAPP_SEARCH = "gravitybox.intent.action.INAPP_SEARCH";
     public static final String ACTION_SET_RINGER_MODE = "gravitybox.intent.action.SET_RINGER_MODE";
     public static final String EXTRA_RINGER_MODE = "ringerMode";
+    public static final String ACTION_TOGGLE_SHOW_TOUCHES = "gravitybox.intent.action.TOGGLE_SHOW_TOUCHES";
+    public static final String EXTRA_SHOW_TOUCHES = "showTouches";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
     public static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
 
     public static final String SETTING_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
+    public static final String SETTING_SHOW_TOUCHES = "show_touches";
 
     private static Object mPhoneWindowManager;
     private static Context mContext;
@@ -377,6 +380,8 @@ public class ModHwKeys {
                 }
             } else if (action.equals(ACTION_TOGGLE_AUTO_BRIGHTNESS)) {
                 toggleAutoBrightness();
+            } else if (action.equals(ACTION_TOGGLE_SHOW_TOUCHES)) {
+                toggleShowTouches(intent.getIntExtra(EXTRA_SHOW_TOUCHES, -1)); 
             }
         }
     };
@@ -905,6 +910,7 @@ public class ModHwKeys {
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED);
             intentFilter.addAction(Intent.ACTION_HEADSET_PLUG);
             intentFilter.addAction(ACTION_TOGGLE_AUTO_BRIGHTNESS);
+            intentFilter.addAction(ACTION_TOGGLE_SHOW_TOUCHES);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -1706,6 +1712,19 @@ public class ModHwKeys {
                     brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL ?
                             Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC :
                                 Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static void toggleShowTouches(int showTouches) {
+        try {
+            if (showTouches == -1) {
+                showTouches = 1 - Settings.System.getInt(mContext.getContentResolver(),
+                    SETTING_SHOW_TOUCHES);
+            }
+            Settings.System.putInt(mContext.getContentResolver(),
+                    SETTING_SHOW_TOUCHES, showTouches);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

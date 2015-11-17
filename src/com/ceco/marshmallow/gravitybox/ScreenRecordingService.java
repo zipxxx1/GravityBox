@@ -38,6 +38,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Icon;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -70,7 +71,6 @@ public class ScreenRecordingService extends Service {
     private static final int SCREENRECORD_NOTIFICATION_ID = 3;
     private static final int MSG_TASK_ENDED = 1;
     private static final int MSG_TASK_ERROR = 2;
-    private static final String SETTING_SHOW_TOUCHES = "show_touches";
     private static final String TMP_PATH = Environment.getExternalStorageDirectory() + "/__tmp_screenrecord.mp4";
 
     public static final String ACTION_SCREEN_RECORDING_START = "gravitybox.intent.action.SCREEN_RECORDING_START";
@@ -233,10 +233,12 @@ public class ScreenRecordingService extends Service {
             PendingIntent.FLAG_UPDATE_CURRENT);
 
         builder
-            .addAction(R.drawable.ic_media_stop,
-                getString(R.string.screenrecord_notif_stop), stopPendIntent)
-            .addAction(R.drawable.ic_text_dot,
-                getString(R.string.screenrecord_notif_pointer), pointerPendIntent);
+            .addAction(new Notification.Action.Builder(
+                    Icon.createWithResource(this, R.drawable.ic_media_stop),
+                    getString(R.string.screenrecord_notif_stop), stopPendIntent).build())
+            .addAction(new Notification.Action.Builder(
+                    Icon.createWithResource(this, R.drawable.ic_text_dot),
+                    getString(R.string.screenrecord_notif_pointer), pointerPendIntent).build());
 
         mRecordingNotif = builder.build();
     }
@@ -302,20 +304,13 @@ public class ScreenRecordingService extends Service {
     }
 
     private void toggleShowTouches() {
-        try {
-            final int showTouches = Settings.System.getInt(getContentResolver(), SETTING_SHOW_TOUCHES);
-            Settings.System.putInt(getContentResolver(), SETTING_SHOW_TOUCHES, 1 - showTouches);
-        } catch (Throwable t) {
-            Log.e(TAG, "Error toggling SHOW_TOUCHES: " + t.getMessage());
-        }
+        sendBroadcast(new Intent(ModHwKeys.ACTION_TOGGLE_SHOW_TOUCHES));
     }
 
     private void resetShowTouches() {
-        try {
-            Settings.System.putInt(getContentResolver(), SETTING_SHOW_TOUCHES, mShowTouchesDefault);
-        } catch (Throwable t) {
-            Log.e(TAG, "Error disabling SHOW_TOUCHES: " + t.getMessage());
-        }
+        Intent intent = new Intent(ModHwKeys.ACTION_TOGGLE_SHOW_TOUCHES);
+        intent.putExtra(ModHwKeys.EXTRA_SHOW_TOUCHES, mShowTouchesDefault);
+        sendBroadcast(intent);
     }
 
     private void toggleScreenrecord() {
@@ -363,7 +358,8 @@ public class ScreenRecordingService extends Service {
         }
 
         try {
-            mShowTouchesDefault = Settings.System.getInt(getContentResolver(), SETTING_SHOW_TOUCHES);
+            mShowTouchesDefault = Settings.System.getInt(getContentResolver(),
+                    ModHwKeys.SETTING_SHOW_TOUCHES);
             if (mShowTouchesDefault == 0) {
                 toggleShowTouches();
             }
