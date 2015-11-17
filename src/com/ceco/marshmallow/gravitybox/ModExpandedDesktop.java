@@ -939,7 +939,7 @@ public class ModExpandedDesktop {
                     }
                 });
 
-                XposedHelpers.findAndHookMethod(CLASS_SYSTEM_GESTURE, null, "detectSwipe",
+                XposedHelpers.findAndHookMethod(CLASS_SYSTEM_GESTURE, classLoader, "detectSwipe",
                         int.class, long.class, float.class, float.class, new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
