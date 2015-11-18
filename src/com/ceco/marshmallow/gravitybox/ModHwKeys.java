@@ -1376,12 +1376,7 @@ public class ModHwKeys {
                             mContext.sendBroadcast(newIntent);
                         // otherwise start activity (dismissing keyguard if necessary)
                         } else {
-                            try {
-                                Class<?> amnCls = XposedHelpers.findClass("android.app.ActivityManagerNative",
-                                        mContext.getClassLoader());
-                                Object amn = XposedHelpers.callStaticMethod(amnCls, "getDefault");
-                                XposedHelpers.callMethod(amn, "dismissKeyguardOnNextActivity");
-                            } catch (Throwable t) { }
+                            dismissKeyguard();
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             mContext.startActivity(intent);
                         }
@@ -1393,6 +1388,14 @@ public class ModHwKeys {
                 }
             }
         );
+    }
+
+    private static void dismissKeyguard() {
+        try {
+            XposedHelpers.callMethod(mPhoneWindowManager, "dismissKeyguardLw");
+        } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
+        }
     }
 
     private static void injectKey(final int keyCode) {
