@@ -53,6 +53,7 @@ import android.widget.ImageView;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModHwKeys;
 import com.ceco.marshmallow.gravitybox.ModPieControls;
+import com.ceco.marshmallow.gravitybox.ModStatusBar;
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 import com.ceco.marshmallow.gravitybox.pie.PieItem;
@@ -652,21 +653,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
     }
 
     private void launchAssistAction() {
-        SearchManager sm = (SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE);
-        Intent intent = (Intent) XposedHelpers.callMethod(sm, "getAssistIntent", mContext, true);
-        Resources res = mContext.getResources();
-
-        if (intent != null) {
-            try {
-                ActivityOptions opts = ActivityOptions.makeCustomAnimation(mContext,
-                        res.getIdentifier("search_launch_enter", "anim", PACKAGE_NAME),
-                        res.getIdentifier("search_launch_exit", "anim", PACKAGE_NAME));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent, opts.toBundle());
-            } catch (ActivityNotFoundException ignored) {
-                // fall through
-            }
-        }
+        ModStatusBar.startSearchAssist();
     }
 
     private void showAppLauncher() {

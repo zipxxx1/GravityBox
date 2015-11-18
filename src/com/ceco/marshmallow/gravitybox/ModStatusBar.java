@@ -15,7 +15,6 @@
 
 package com.ceco.marshmallow.gravitybox;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +29,8 @@ import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
-import android.app.ActivityOptions;
 import android.app.AlarmManager;
 import android.app.Notification;
-import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -44,9 +41,9 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Paint;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.StatusBarNotification;
 import android.service.notification.NotificationListenerService.RankingMap;
@@ -1228,31 +1225,11 @@ public class ModStatusBar {
         }
     }
 
-    private static void startSearchAssist() {
+    public static void startSearchAssist() {
         try {
-            SearchManager sm = (SearchManager) mContext.getSystemService(Context.SEARCH_SERVICE);
-            Intent intent = (Intent) XposedHelpers.callMethod(sm, "getAssistIntent", mContext, true, -2);
-            if (intent == null) return;
-
-            try {
-                Class<?> amnCls = XposedHelpers.findClass("android.app.ActivityManagerNative",
-                        mContext.getClassLoader());
-                Object amn = XposedHelpers.callStaticMethod(amnCls, "getDefault");
-                XposedHelpers.callMethod(amn, "dismissKeyguardOnNextActivity");
-            } catch (Throwable t) { }
-
-            try {
-                Resources res = mContext.getResources();
-                int animEnter = res.getIdentifier("search_launch_enter", "anim", PACKAGE_NAME);
-                int animExit = res.getIdentifier("search_launch_exit", "anim", PACKAGE_NAME);
-                ActivityOptions opts = ActivityOptions.makeCustomAnimation(mContext, animEnter, animExit);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                Constructor<?> uhConst = XposedHelpers.findConstructorExact(UserHandle.class, int.class);
-                UserHandle uh = (UserHandle) uhConst.newInstance(-2);
-                XposedHelpers.callMethod(mContext, "startActivityAsUser", intent, opts.toBundle(), uh);
-            } catch (ActivityNotFoundException e) {
-                log("Activity not found for " + intent.getAction());
-            }
+            Object assistManager = XposedHelpers.getObjectField(mPhoneStatusBar, "mAssistManager");
+            XposedHelpers.callMethod(assistManager, "startAssist", new Bundle());
+            XposedHelpers.callMethod(mPhoneStatusBar, "awakenDreams");
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
