@@ -34,6 +34,7 @@ import android.media.MediaMetadata;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -554,8 +555,17 @@ public class ModLockscreen {
                     final int code = (int)XposedHelpers.callMethod(response, "getResponseCode");
                     if (code == 0) {
                         final Object callback = XposedHelpers.getObjectField(securityView, "mCallback");
-                        XposedHelpers.callMethod(callback, "reportUnlockAttempt", true, userId);
-                        XposedHelpers.callMethod(callback, "dismiss", true);
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    XposedHelpers.callMethod(callback, "reportUnlockAttempt", true, userId);
+                                    XposedHelpers.callMethod(callback, "dismiss", true);
+                                } catch (Throwable t) {
+                                    log("Error dimissing keyguard: " + t.getMessage());
+                                }
+                            }
+                        });
                     }
                 } catch (Throwable t) {
                     XposedBridge.log(t);;
