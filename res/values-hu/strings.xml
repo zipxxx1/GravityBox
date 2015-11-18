@@ -116,6 +116,7 @@
     <string name="qs_tile_lock_screen">Zárképernyő</string>
     <string name="qs_tile_inversion">Inverzió</string>
     <string name="qs_tile_battery">Akkumulátor</string>
+    <string name="qs_tile_dnd">Ne zavarj</string>
 	
     <!-- Color Picker -->
     <string name="dialog_color_picker">Szín választó</string>
@@ -1227,7 +1228,7 @@
 
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Aktív Képernyő</string>
-    <string name="lc_active_screen_info">Az Aktív Képernyő funkció minden alkalommal automatikusan bekapcsolja a kijelzőt új értesítés érkezésekor. Opcionálisan kiterjeszti az értesítések panelt vagy lebegő felugró értesítést mutat az aktuális zárképernyő biztonsági házirendtől és felhasználói beállításoktól függően. Ne feledje, hogy az Aktív Képernyő működéséhez a zárképernyőt engedélyeznie kell.\nA lenti kapcsoló a főkapcsoló. Engedélyezés után további, alkalmazásonkénti konfiguráció lehetséges.</string>
+    <string name="lc_active_screen_info">Az Aktív Képernyő funkció minden alkalommal automatikusan bekapcsolja a kijelzőt új értesítés érkezésekor. Ne feledd, hogy az Aktív Képernyő működéséhez a zárképernyőt engedélyeznie kell.\nA lenti kapcsoló a főkapcsoló. Engedélyezés után további, alkalmazásonkénti konfiguráció lehetséges.</string>
     <string name="lc_active_screen_switch_title">Aktív Képernyő engedélyezése</string>
 
     <!-- Notification control: Quiet hours -->
@@ -1768,5 +1769,8 @@
     
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Direkt feloldási házirend</string>
+    
+    <!-- Permission denial message -->
+    <string name="permission_denied_msg">Úgy döntöttél, hogy megtagadsz néhány engedélyt. Ne feledd, hogy ez megakadályozza a kapcsolódó funkciók működését.</string>
 
 </resources>
