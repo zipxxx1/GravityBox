@@ -1502,6 +1502,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 appPref.setDialogTitle(appPref.getTitle());
                 appPref.setDefaultSummary(getActivity().getString(R.string.app_picker_none));
                 appPref.setSummary(getActivity().getString(R.string.app_picker_none));
+                appPref.setAllowUnlockAction(true);
                 mPrefCatLsShortcuts.addPreference(appPref);
                 if (mPrefs.getString(appPref.getKey(), null) == null) {
                     mPrefs.edit().putString(appPref.getKey(), null).commit();
