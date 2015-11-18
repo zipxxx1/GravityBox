@@ -31,6 +31,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaMetadata;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -64,7 +65,7 @@ public class ModLockscreen {
     private static final String CLASS_KG_VIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
     private static final String CLASS_UNLOCK_METHOD_CACHE = "com.android.systemui.statusbar.phone.UnlockMethodCache";
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
-    private static final String CLASS_ICC_STATE = "com.android.internal.telephony.IccCardConstants.State";
+    private static final String CLASS_KG_UPDATE_MONITOR = CLASS_PATH + ".KeyguardUpdateMonitor";
     private static final String CLASS_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
 
     private static final boolean DEBUG = false;
@@ -91,6 +92,7 @@ public class ModLockscreen {
     private static boolean mIsSecure;
     private static GestureDetector mGestureDetector;
     private static TextView mCarrierTextView;
+    private static Class<?> mKgUpdateMonitorClass;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -167,6 +169,7 @@ public class ModLockscreen {
             final Class<? extends Enum> displayModeEnum = (Class<? extends Enum>) XposedHelpers.findClass(ENUM_DISPLAY_MODE, classLoader);
             final Class<?> sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader);
             final Class<?> unlockMethodCacheClass = XposedHelpers.findClass(CLASS_UNLOCK_METHOD_CACHE, classLoader);
+            mKgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, classLoader); 
 
             String setupMethodName = "setupLocked";
             XposedHelpers.findAndHookMethod(kgViewMediatorClass, setupMethodName, new XC_MethodHook() {
@@ -285,6 +288,7 @@ public class ModLockscreen {
                             (TextView) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
                     if (passwordEntry == null) return;
 
+                    mOldEntryLen = 0;
                     passwordEntry.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void afterTextChanged(Editable s) {
@@ -305,7 +309,8 @@ public class ModLockscreen {
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) return;
                     final View passwordEntry = 
                             (View) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
-                    if (passwordEntry != null) { 
+                    if (passwordEntry != null) {
+                        mOldEntryLen = 0;
                         XposedHelpers.setAdditionalInstanceField(passwordEntry, "gbPINView",
                                 param.thisObject);
                     }
@@ -531,18 +536,40 @@ public class ModLockscreen {
         }
     };
 
-    private static void doQuickUnlock(Object securityView, String entry) {
-        try {
-            final Object callback = XposedHelpers.getObjectField(securityView, "mCallback");
-            final Object lockPatternUtils = XposedHelpers.getObjectField(securityView, "mLockPatternUtils");
-
-            if (callback != null && lockPatternUtils != null && entry.length() > 3 && 
-                    (Boolean) XposedHelpers.callMethod(lockPatternUtils, "checkPassword", entry, 0)) {
-                XposedHelpers.callMethod(callback, "reportUnlockAttempt", true, 0);
-                XposedHelpers.callMethod(callback, "dismiss", true);
+    private static int mOldEntryLen = 0;
+    private static void doQuickUnlock(final Object securityView, final String entry) {
+        if (entry.length() < 4 || entry.length() > 6) return;
+        if (entry.length() < mOldEntryLen) {
+            mOldEntryLen = entry.length();
+            return;
+        }
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final Object lockPatternUtils = XposedHelpers.getObjectField(securityView, "mLockPatternUtils");
+                    final Object lockSettings = XposedHelpers.callMethod(lockPatternUtils, "getLockSettings");
+                    final int userId = getCurrentUserId();
+                    final Object response = XposedHelpers.callMethod(lockSettings, "checkPassword", entry, userId);
+                    final int code = (int)XposedHelpers.callMethod(response, "getResponseCode");
+                    if (code == 0) {
+                        final Object callback = XposedHelpers.getObjectField(securityView, "mCallback");
+                        XposedHelpers.callMethod(callback, "reportUnlockAttempt", true, userId);
+                        XposedHelpers.callMethod(callback, "dismiss", true);
+                    }
+                } catch (Throwable t) {
+                    XposedBridge.log(t);;
+                }
             }
+        });
+    }
+
+    private static int getCurrentUserId() {
+        try {
+            return (int)XposedHelpers.callStaticMethod(mKgUpdateMonitorClass, "getCurrentUser");
         } catch (Throwable t) {
-            XposedBridge.log(t);;
+            log("Error getting current user ID: " + t.getMessage());
+            return 0;
         }
     }
 
