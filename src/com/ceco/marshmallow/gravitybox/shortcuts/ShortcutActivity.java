@@ -41,12 +41,14 @@ public class ShortcutActivity extends ListActivity {
     public static final String EXTRA_ACTION = "action";
     public static final String EXTRA_ACTION_TYPE = "actionType";
     public static final String EXTRA_ALLOW_UNLOCK_ACTION = "allowUnlockAction";
+    public static final String EXTRA_LAUNCHES_FROM_LOCKSCREEN = "launchesFromLockscreen";
 
     private Context mContext;
     private IconListAdapter mListAdapter;
     private Button mBtnCancel;
     private boolean mInvokedFromGb;
     private boolean mAllowUnlockAction;
+    private boolean mLaunchesFromLockscreen;
 
     private static List<String> UNSAFE_ACTIONS = new ArrayList<String>(Arrays.asList(
             NetworkModeShortcut.ACTION,
@@ -108,6 +110,7 @@ public class ShortcutActivity extends ListActivity {
             });
             mInvokedFromGb = intent.hasExtra("gravitybox");
             mAllowUnlockAction = intent.getBooleanExtra(EXTRA_ALLOW_UNLOCK_ACTION, false);
+            mLaunchesFromLockscreen = intent.getBooleanExtra(EXTRA_LAUNCHES_FROM_LOCKSCREEN, false);
             return;
         } else {
             finish();
@@ -132,7 +135,9 @@ public class ShortcutActivity extends ListActivity {
             list.add(new UnlockShortcut(mContext));
         }
         list.add(new ShowPowerMenuShortcut(mContext));
-        list.add(new ExpandNotificationsShortcut(mContext));
+        if (!mLaunchesFromLockscreen) {
+            list.add(new ExpandNotificationsShortcut(mContext));
+        }
         list.add(new ClearNotificationsShortcut(mContext));
         list.add(new ExpandedDesktopShortcut(mContext));
         list.add(new GoogleNowShortcut(mContext));
@@ -162,12 +167,14 @@ public class ShortcutActivity extends ListActivity {
         list.add(new RingerModeShortcut(mContext));
         list.add(new AutoBrightnessShortcut(mContext));
         list.add(new RecentAppsShortcut(mContext));
-        if (mInvokedFromGb) {
+        if (mInvokedFromGb && !mLaunchesFromLockscreen) {
             list.add(new KillAppShortcut(mContext));
             list.add(new SwitchAppShortcut(mContext));
         }
         list.add(new AppLauncherShortcut(mContext));
-        list.add(new LauncherDrawerShortcut(mContext));
+        if (!mLaunchesFromLockscreen) {
+            list.add(new LauncherDrawerShortcut(mContext));
+        }
         list.add(new RotationLockShortcut(mContext));
         list.add(new SleepShortcut(mContext));
         if (!LedSettings.isUncLocked(mContext)) {
