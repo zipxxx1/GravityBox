@@ -113,6 +113,7 @@ public class AppPickerPreference extends DialogPreference
     private boolean mNullItemEnabled = true;
     private String mValue;
     private boolean mAllowUnlockAction;
+    private boolean mLaunchesFromLockscreen;
 
     private static LruCache<String, BitmapDrawable> sAppIconCache;
     static {
@@ -296,6 +297,10 @@ public class AppPickerPreference extends DialogPreference
 
     public void setAllowUnlockAction(boolean allow) {
         mAllowUnlockAction = allow;
+    }
+
+    public void setLaunchesFromLockscreen(boolean value) {
+        mLaunchesFromLockscreen = value;
     }
 
     @Override
@@ -682,6 +687,9 @@ public class AppPickerPreference extends DialogPreference
                 mCreateShortcutIntent.putExtra("gravitybox", true);
                 if (mAllowUnlockAction) {
                     mCreateShortcutIntent.putExtra(ShortcutActivity.EXTRA_ALLOW_UNLOCK_ACTION, true);
+                }
+                if (mLaunchesFromLockscreen) {
+                    mCreateShortcutIntent.putExtra(ShortcutActivity.EXTRA_LAUNCHES_FROM_LOCKSCREEN, true);
                 }
             }
         }
