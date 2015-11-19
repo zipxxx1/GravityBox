@@ -46,6 +46,11 @@ public class GoogleNowShortcut extends AShortcut {
     }
 
     @Override
+    protected String getActionType() {
+        return null;
+    }
+
+    @Override
     protected String getShortcutName() {
         return getText();
     }
