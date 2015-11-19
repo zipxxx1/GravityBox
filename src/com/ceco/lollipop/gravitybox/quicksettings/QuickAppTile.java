@@ -258,7 +258,7 @@ public class QuickAppTile extends QsTile {
         if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
             String action = intent.getStringExtra(ShortcutActivity.EXTRA_ACTION);
             if (ShortcutActivity.isActionSafe(action) || 
-                    !mEventDistributor.isKeyguardShowingAndSecured()) {
+                    !mEventDistributor.isKeyguardShowingAndLocked()) {
                 Intent newIntent = new Intent(action);
                 newIntent.putExtras(intent);
                 mContext.sendBroadcast(newIntent);
