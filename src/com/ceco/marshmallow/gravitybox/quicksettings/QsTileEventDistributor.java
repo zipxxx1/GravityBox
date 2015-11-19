@@ -406,6 +406,10 @@ public class QsTileEventDistributor {
         return (isKeyguardShowing() && isKeyguardSecured());
     }
 
+    protected final boolean isKeyguardShowingAndLocked() {
+        return isKeyguardShowing() && isKeyguardSecuredAndLocked();
+    }
+
     protected final boolean isResourceIconHooked() {
         return mResourceIconHooked;
     }
