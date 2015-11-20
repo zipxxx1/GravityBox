@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.preference.AppPickerPreference;
 import com.ceco.lollipop.gravitybox.shortcuts.ShortcutActivity;
 
@@ -124,9 +125,17 @@ public class LockscreenAppBar {
     private void startActivity(Intent intent) {
         // if intent is a GB action of broadcast type, handle it directly here
         if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
-            Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
-            newIntent.putExtras(intent);
-            mContext.sendBroadcast(newIntent);
+            boolean isLaunchBlocked = SysUiManagers.KeyguardMonitor.isShowing() &&
+                    SysUiManagers.KeyguardMonitor.isLocked() &&
+                    !ShortcutActivity.isActionSafe(intent.getStringExtra(
+                            ShortcutActivity.EXTRA_ACTION));
+            if (DEBUG) log("isLaunchBlocked: " + isLaunchBlocked);
+
+            if (!isLaunchBlocked) {
+                Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+                newIntent.putExtras(intent);
+                mContext.sendBroadcast(newIntent);
+            }
         // otherwise start activity dismissing keyguard
         } else {
             try {
