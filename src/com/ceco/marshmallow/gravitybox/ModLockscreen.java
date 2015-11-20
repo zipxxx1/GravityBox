@@ -18,6 +18,8 @@ package com.ceco.marshmallow.gravitybox;
 import com.ceco.marshmallow.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.marshmallow.gravitybox.managers.KeyguardStateMonitor;
+import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -64,9 +66,7 @@ public class ModLockscreen {
     private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
     private static final String CLASS_SB_WINDOW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarWindowManager";
     private static final String CLASS_KG_VIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
-    private static final String CLASS_UNLOCK_METHOD_CACHE = "com.android.systemui.statusbar.phone.UnlockMethodCache";
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
-    private static final String CLASS_KG_UPDATE_MONITOR = CLASS_PATH + ".KeyguardUpdateMonitor";
     private static final String CLASS_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
 
     private static final boolean DEBUG = false;
@@ -88,12 +88,10 @@ public class ModLockscreen {
     private static DirectUnlockPolicy mDirectUnlockPolicy = DirectUnlockPolicy.DEFAULT;
     private static LockscreenAppBar mAppBar;
     private static boolean mSmartUnlock;
-    private static boolean mIsScreenOn;
     private static DismissKeyguardHandler mDismissKeyguardHandler;
-    private static boolean mIsSecure;
     private static GestureDetector mGestureDetector;
     private static TextView mCarrierTextView;
-    private static Class<?> mKgUpdateMonitorClass;
+    private static KeyguardStateMonitor mKgMonitor;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -168,9 +166,7 @@ public class ModLockscreen {
             final Class<?> kgViewMediatorClass = XposedHelpers.findClass(CLASS_KGVIEW_MEDIATOR, classLoader);
             final Class<?> lockPatternViewClass = XposedHelpers.findClass(CLASS_LOCK_PATTERN_VIEW, classLoader);
             final Class<? extends Enum> displayModeEnum = (Class<? extends Enum>) XposedHelpers.findClass(ENUM_DISPLAY_MODE, classLoader);
-            final Class<?> sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader);
-            final Class<?> unlockMethodCacheClass = XposedHelpers.findClass(CLASS_UNLOCK_METHOD_CACHE, classLoader);
-            mKgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, classLoader); 
+            final Class<?> sbWindowManagerClass = XposedHelpers.findClass(CLASS_SB_WINDOW_MANAGER, classLoader); 
 
             String setupMethodName = "setupLocked";
             XposedHelpers.findAndHookMethod(kgViewMediatorClass, setupMethodName, new XC_MethodHook() {
@@ -178,6 +174,8 @@ public class ModLockscreen {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     mGbContext = Utils.getGbContext(mContext);
+                    mKgMonitor = SysUiManagers.KeyguardMonitor;
+                    mKgMonitor.setMediator(param.thisObject);
 
                     prepareCustomBackground();
                     prepareGestureDetector();
@@ -358,15 +356,14 @@ public class ModLockscreen {
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    mIsScreenOn = false;
-                    mIsSecure = (Boolean) XposedHelpers.callMethod(param.thisObject, "isSecure");
+                    mKgMonitor.unregisterListener(mKgStateListener);
                     mDirectUnlock = DirectUnlock.valueOf(prefs.getString(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK, "OFF"));
                     mDirectUnlockPolicy = DirectUnlockPolicy.valueOf(prefs.getString(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY, "DEFAULT"));
                     mSmartUnlock = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SMART_UNLOCK, false);
                     if (mSmartUnlock && mDismissKeyguardHandler == null) {
-                        mDismissKeyguardHandler = new DismissKeyguardHandler(param.thisObject);
+                        mDismissKeyguardHandler = new DismissKeyguardHandler();
                     }
                     updateCarrierText();
                 }
@@ -376,15 +373,12 @@ public class ModLockscreen {
                     new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    mIsScreenOn = true;
-                    if (!mIsSecure) {
+                    if (!mKgMonitor.isSecured()) {
                         if (DEBUG) log("onScreenTurnedOn: noop as keyguard is not secured");
                         return;
                     }
 
-                    Object umCache = XposedHelpers.getStaticObjectField(unlockMethodCacheClass, "sInstance");
-                    boolean trustManaged = XposedHelpers.getBooleanField(umCache, "mTrustManaged");
-                    if (!trustManaged) {
+                    if (!mKgMonitor.isTrustManaged()) {
                         if (canTriggerDirectUnlock()) {
                             if (mDirectUnlock == DirectUnlock.SEE_THROUGH) {
                                 XposedHelpers.callMethod(mPhoneStatusBar, "showBouncer");
@@ -392,44 +386,18 @@ public class ModLockscreen {
                                 XposedHelpers.callMethod(mPhoneStatusBar, "makeExpandedInvisible");
                             }
                         }
-                    } else {
-                        if (mSmartUnlock) {
-                            boolean insecure = XposedHelpers.getBooleanField(umCache, getUmcInsecureFieldName());
-                            if (insecure) {
-                                // previous state is insecure so we rather wait a second as smart lock can still
-                                // decide to make it secure after a while. Seems to be necessary only for
-                                // on-body detection. Other smart lock methods seem to always start with secured state
-                                if (DEBUG) log("onScreenTurnedOn: Scheduling Keyguard dismiss");
-                                mDismissKeyguardHandler.sendEmptyMessageDelayed(MSG_DISMISS_KEYGUARD, 1000);
-                            }
+                    } else if (mSmartUnlock) {
+                        mKgMonitor.registerListener(mKgStateListener);
+                        if (!mKgMonitor.isLocked()) {
+                            // previous state is insecure so we rather wait a second as smart lock can still
+                            // decide to make it secure after a while. Seems to be necessary only for
+                            // on-body detection. Other smart lock methods seem to always start with secured state
+                            if (DEBUG) log("onScreenTurnedOn: Scheduling Keyguard dismiss");
+                            mDismissKeyguardHandler.sendEmptyMessageDelayed(MSG_DISMISS_KEYGUARD, 1000);
                         }
                     }
                 }
             });
-
-            XC_MethodHook umcNotifyListenersHook = new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!mIsScreenOn || !mIsSecure || !mSmartUnlock) return;
-
-                    boolean trustManaged = XposedHelpers.getBooleanField(param.thisObject, "mTrustManaged");
-                    boolean insecure = XposedHelpers.getBooleanField(param.thisObject, getUmcInsecureFieldName());
-                    if (DEBUG) log("updateMethodSecure: trustManaged=" + trustManaged +
-                            "; insecure=" + insecure);
-                    if (trustManaged && insecure) {
-                        // either let already queued message to be handled or handle new one immediately
-                        if (!mDismissKeyguardHandler.hasMessages(MSG_DISMISS_KEYGUARD)) {
-                            mDismissKeyguardHandler.sendEmptyMessage(MSG_DISMISS_KEYGUARD);
-                        }
-                    } else if (mDismissKeyguardHandler.hasMessages(MSG_DISMISS_KEYGUARD)) {
-                        // smart lock decided to make it secure so remove any pending dismiss keyguard messages
-                        mDismissKeyguardHandler.removeMessages(MSG_DISMISS_KEYGUARD);
-                        if (DEBUG) log("updateMethodSecure: pending keyguard dismiss cancelled");
-                    }
-                }
-            };
-            XposedHelpers.findAndHookMethod(unlockMethodCacheClass, "notifyListeners",
-                umcNotifyListenersHook);
 
             XposedHelpers.findAndHookMethod(ModStatusBar.CLASS_PHONE_STATUSBAR, classLoader,
                     "makeStatusBarView", new XC_MethodHook() {
@@ -487,6 +455,29 @@ public class ModLockscreen {
         }
     } 
 
+    private static KeyguardStateMonitor.Listener mKgStateListener = new KeyguardStateMonitor.Listener() {
+        @Override
+        public void onKeyguardStateChanged() {
+            final boolean trustManaged = mKgMonitor.isTrustManaged();
+            final boolean insecure = !mKgMonitor.isLocked();
+            if (DEBUG) log("updateMethodSecure: trustManaged=" + trustManaged +
+                    "; insecure=" + insecure);
+            if (trustManaged && insecure) {
+                // either let already queued message to be handled or handle new one immediately
+                if (!mDismissKeyguardHandler.hasMessages(MSG_DISMISS_KEYGUARD)) {
+                    mDismissKeyguardHandler.sendEmptyMessage(MSG_DISMISS_KEYGUARD);
+                }
+            } else if (mDismissKeyguardHandler.hasMessages(MSG_DISMISS_KEYGUARD)) {
+                // smart lock decided to make it secure so remove any pending dismiss keyguard messages
+                mDismissKeyguardHandler.removeMessages(MSG_DISMISS_KEYGUARD);
+                if (DEBUG) log("updateMethodSecure: pending keyguard dismiss cancelled");
+            }
+            if (mKgMonitor.isShowing()) {
+                mKgMonitor.unregisterListener(this);
+            }
+        }
+    };
+
     private static boolean canTriggerDirectUnlock() {
         if (mDirectUnlock == DirectUnlock.OFF) return false;
         if (mDirectUnlockPolicy == DirectUnlockPolicy.DEFAULT) return true;
@@ -515,24 +506,14 @@ public class ModLockscreen {
     }
 
     private static class DismissKeyguardHandler extends Handler {
-        private Object mKeyguardViewManager;
-
-        public DismissKeyguardHandler(Object keyGuardViewManager) {
+        public DismissKeyguardHandler() {
             super();
-            mKeyguardViewManager = keyGuardViewManager;
         }
 
         @Override
         public void handleMessage(Message msg) { 
             if (msg.what == MSG_DISMISS_KEYGUARD) {
-                try {
-                    if (XposedHelpers.getBooleanField(mKeyguardViewManager, "mShowing")) {
-                        XposedHelpers.callMethod(mKeyguardViewManager, "dismiss");
-                        if (DEBUG) log("mDismissKeyguardHandler: Keyguard dismissed");
-                    }
-                } catch (Throwable t) {
-                    XposedBridge.log(t);
-                }
+                mKgMonitor.dismissKeyguard();
             }
         }
     };
@@ -550,7 +531,7 @@ public class ModLockscreen {
                 try {
                     final Object lockPatternUtils = XposedHelpers.getObjectField(securityView, "mLockPatternUtils");
                     final Object lockSettings = XposedHelpers.callMethod(lockPatternUtils, "getLockSettings");
-                    final int userId = getCurrentUserId();
+                    final int userId = mKgMonitor.getCurrentUserId();
                     final Object response = XposedHelpers.callMethod(lockSettings, "checkPassword", entry, userId);
                     final int code = (int)XposedHelpers.callMethod(response, "getResponseCode");
                     if (code == 0) {
@@ -572,15 +553,6 @@ public class ModLockscreen {
                 }
             }
         });
-    }
-
-    private static int getCurrentUserId() {
-        try {
-            return (int)XposedHelpers.callStaticMethod(mKgUpdateMonitorClass, "getCurrentUser");
-        } catch (Throwable t) {
-            log("Error getting current user ID: " + t.getMessage());
-            return 0;
-        }
     }
 
     private static synchronized void prepareCustomBackground() {

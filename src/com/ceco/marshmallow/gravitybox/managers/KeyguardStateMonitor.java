@@ -43,11 +43,16 @@ public class KeyguardStateMonitor {
     private boolean mIsTrustManaged;
     private Object mMonitor;
     private Object mUpdateMonitor;
+    private Object mMediator;
     private List<Listener> mListeners = new ArrayList<>();
 
     protected KeyguardStateMonitor(Context context) {
         mContext = context;
         createHooks();
+    }
+
+    public void setMediator(Object mediator) {
+        mMediator = mediator;
     }
 
     private void createHooks() {
@@ -141,5 +146,15 @@ public class KeyguardStateMonitor {
 
     public boolean isTrustManaged() {
         return mIsTrustManaged;
+    }
+
+    public void dismissKeyguard() {
+        if (mMediator != null) {
+            try {
+                XposedHelpers.callMethod(mMediator, "dismiss");
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+        }
     }
 }
