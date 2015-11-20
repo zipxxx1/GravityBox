@@ -43,8 +43,6 @@ public class LockscreenAppBar {
     private static final String TAG = "GB:LockscreenAppBar";
     private static final boolean DEBUG = false;
 
-    public static final String EXTRA_FROM_LOCKSCREEN = "fromLockscreen";
-
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
@@ -124,8 +122,6 @@ public class LockscreenAppBar {
     }
 
     private void startActivity(Intent intent) {
-        // we are launching from lock screen
-        intent.putExtra(EXTRA_FROM_LOCKSCREEN, true);
         // if intent is a GB action of broadcast type, handle it directly here
         if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
             Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
