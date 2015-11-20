@@ -18,6 +18,7 @@ public class SysUiManagers {
     public static StatusBarIconManager IconManager;
     public static StatusbarQuietHoursManager QuietHoursManager;
     public static AppLauncher AppLauncher;
+    public static KeyguardStateMonitor KeyguardMonitor;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -54,6 +55,13 @@ public class SysUiManagers {
             AppLauncher = new AppLauncher(context, prefs);
         } catch (Throwable t) {
             log("Error creating AppLauncher: ");
+            XposedBridge.log(t);
+        }
+
+        try {
+            KeyguardMonitor = new KeyguardStateMonitor(context);
+        } catch (Throwable t) {
+            log("Error creating KeyguardMonitor: ");
             XposedBridge.log(t);
         }
 

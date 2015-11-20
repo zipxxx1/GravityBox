@@ -8,9 +8,10 @@ import java.util.Map.Entry;
 
 import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
-import com.ceco.marshmallow.gravitybox.ModLockscreen;
 import com.ceco.marshmallow.gravitybox.ModQsTiles;
 import com.ceco.marshmallow.gravitybox.PhoneWrapper;
+import com.ceco.marshmallow.gravitybox.managers.KeyguardStateMonitor;
+import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -18,21 +19,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.View;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
-public class QsTileEventDistributor {
+public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
     private static final String TAG = "GB:QsTileEventDistributor";
     private static final boolean DEBUG = ModQsTiles.DEBUG;
-
-    private static final String CLASS_STATUSBAR_WM = 
-            "com.android.systemui.statusbar.phone.StatusBarWindowManager";
-    private static final String CLASS_UNLOCK_METHOD_CACHE = 
-            "com.android.systemui.statusbar.phone.UnlockMethodCache";
 
     public interface QsEventListener {
         String getKey();
@@ -40,7 +35,7 @@ public class QsTileEventDistributor {
         void handleDestroy();
         void onCreateTileView(View tileView) throws Throwable;
         void onBroadcastReceived(Context context, Intent intent);
-        void onStatusBarStateChanged(int state);
+        void onKeyguardStateChanged();
         boolean supportsHideOnChange();
         void onViewConfigurationChanged(View tileView, Configuration config);
         void onRecreateLabel(View tileView);
@@ -48,7 +43,6 @@ public class QsTileEventDistributor {
         boolean handleLongClick();
         void handleUpdateState(Object state, Object arg);
         void setListening(boolean listening);
-        void onSecureMethodChanged();
         View onCreateIcon();
         Drawable getResourceIconDrawable();
         boolean handleSecondaryClick();
@@ -63,8 +57,6 @@ public class QsTileEventDistributor {
     private XSharedPreferences mPrefs;
     private Map<String,QsEventListener> mListeners;
     private List<BroadcastSubReceiver> mBroadcastSubReceivers;
-    private Object mKeyguardMonitor;
-    private Object mUnlockMethodCache;
     private String mCreateTileViewTileKey;
     private boolean mResourceIconHooked;
 
@@ -73,6 +65,7 @@ public class QsTileEventDistributor {
         mPrefs = prefs;
         mListeners = new LinkedHashMap<String,QsEventListener>();
         mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
+        SysUiManagers.KeyguardMonitor.registerListener(this);
 
         createHooks();
         prepareBroadcastReceiver();
@@ -215,17 +208,6 @@ public class QsTileEventDistributor {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(CLASS_STATUSBAR_WM, cl, "setStatusBarState",
-                    int.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    int newState = (int) param.args[0];
-                    for (Entry<String,QsEventListener> entry : mListeners.entrySet()) {
-                        entry.getValue().onStatusBarStateChanged(newState);
-                    }
-                }
-            });
-
             XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "onConfigurationChanged",
                     Configuration.class, new XC_MethodHook() {
                 @Override
@@ -250,19 +232,6 @@ public class QsTileEventDistributor {
                     }
                 }
             });
-
-            XC_MethodHook umcNotifyListenersHook = new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    if (isKeyguardShowingAndSecured()) {
-                        for (Entry<String,QsEventListener> entry : mListeners.entrySet()) {
-                            entry.getValue().onSecureMethodChanged();
-                        }
-                    }
-                }
-            };
-            XposedHelpers.findAndHookMethod(CLASS_UNLOCK_METHOD_CACHE, cl, "notifyListeners",
-                umcNotifyListenersHook);
 
             XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "createIcon",
                     new XC_MethodHook() {
@@ -348,69 +317,14 @@ public class QsTileEventDistributor {
         }
     }
 
-    private Object getKeyguardMonitor() {
-        if (mKeyguardMonitor != null) return mKeyguardMonitor;
-        try {
-            mKeyguardMonitor = XposedHelpers.callMethod(mHost, "getKeyguardMonitor");
-            return mKeyguardMonitor;
-        } catch (Throwable t) {
-            log("Error getting Keyguard delegate: " + t.getMessage());
-            return null;
-        }
-    }
-
-    private Object getUnlockMethodCache() {
-        if (mUnlockMethodCache != null) return mUnlockMethodCache;
-        try {
-            mUnlockMethodCache = XposedHelpers.callStaticMethod(
-                    XposedHelpers.findClass(CLASS_UNLOCK_METHOD_CACHE, mContext.getClassLoader()),
-                    "getInstance", mContext);
-            return mUnlockMethodCache;
-        } catch (Throwable t) {
-            log("Error getting unlock method cache: " + t.getMessage());
-            return null;
-        }
-    }
-
-    protected final boolean isKeyguardShowing() {
-        try {
-            return (boolean) XposedHelpers.callMethod(getKeyguardMonitor(), "isShowing");
-        } catch (Throwable t) {
-            log("Error in isKeyguardShowing: " + t.getMessage());
-            return false;
-        }
-    }
-
-    protected final boolean isKeyguardSecured() {
-        try {
-            return (boolean) XposedHelpers.callMethod(getKeyguardMonitor(), "isSecure");
-        } catch (Throwable t) {
-            log("Error in isKeyguardSecured: " + t.getMessage());
-            return false;
-        }
-    }
-
-    protected final boolean isKeyguardSecuredAndLocked() {
-        try {
-            boolean trustManaged = XposedHelpers.getBooleanField(getUnlockMethodCache(), "mTrustManaged");
-            boolean methodInsecure = XposedHelpers.getBooleanField(getUnlockMethodCache(),
-                    ModLockscreen.getUmcInsecureFieldName());
-            return (isKeyguardSecured() && !(trustManaged && methodInsecure));
-        } catch (Throwable t) {
-            log("Error in isKeyguardSecuredAndLocked: " + t.getMessage());
-            return isKeyguardSecured();
-        }
-    }
-
-    protected final boolean isKeyguardShowingAndSecured() {
-        return (isKeyguardShowing() && isKeyguardSecured());
-    }
-
-    protected final boolean isKeyguardShowingAndLocked() {
-        return isKeyguardShowing() && isKeyguardSecuredAndLocked();
-    }
-
     protected final boolean isResourceIconHooked() {
         return mResourceIconHooked;
+    }
+
+    @Override
+    public void onKeyguardStateChanged() {
+        for (Entry<String,QsEventListener> entry : mListeners.entrySet()) {
+            entry.getValue().onKeyguardStateChanged();
+        }
     }
 }

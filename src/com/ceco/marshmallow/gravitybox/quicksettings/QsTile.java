@@ -2,12 +2,10 @@ package com.ceco.marshmallow.gravitybox.quicksettings;
 
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.Utils;
-import com.ceco.marshmallow.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -99,9 +97,9 @@ public abstract class QsTile extends BaseTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.visible &= mEnabled &&
-                (!mLocked || !mEventDistributor.isKeyguardShowing()) &&
-                (!mLockedOnly || mEventDistributor.isKeyguardShowing()) &&
-                (!mSecured || !mEventDistributor.isKeyguardShowingAndLocked());
+                (!mLocked || !mKgMonitor.isShowing()) &&
+                (!mLockedOnly || mKgMonitor.isShowing()) &&
+                (!mSecured || !(mKgMonitor.isShowing() && mKgMonitor.isLocked()));
         mState.applyTo(state);
     }
 

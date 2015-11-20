@@ -22,13 +22,14 @@ import java.util.List;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModQsTiles;
 import com.ceco.marshmallow.gravitybox.Utils;
+import com.ceco.marshmallow.gravitybox.managers.KeyguardStateMonitor;
+import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 import com.ceco.marshmallow.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -64,9 +65,9 @@ public abstract class BaseTile implements QsEventListener {
     protected boolean mLockedOnly;
     protected boolean mSecured;
     protected boolean mDualMode;
-    protected int mStatusBarState;
     protected boolean mHideOnChange;
     protected float mScalingFactor = 1f;
+    protected KeyguardStateMonitor mKgMonitor;
 
     public BaseTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -74,6 +75,7 @@ public abstract class BaseTile implements QsEventListener {
         mKey = key;
         mPrefs = prefs;
         mEventDistributor = eventDistributor;
+        mKgMonitor = SysUiManagers.KeyguardMonitor;
 
         mContext = (Context) XposedHelpers.callMethod(mHost, "getContext");
         mGbContext = Utils.getGbContext(mContext);
@@ -149,6 +151,7 @@ public abstract class BaseTile implements QsEventListener {
         mPrefs = null;
         mContext = null;
         mGbContext = null;
+        mKgMonitor = null;
     }
 
     @Override
@@ -200,18 +203,10 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     @Override
-    public void onStatusBarStateChanged(int state) {
-        final int oldState = mStatusBarState;
-        mStatusBarState = state;
-        if ((mLocked || mLockedOnly || mSecured) && mStatusBarState != oldState) {
+    public void onKeyguardStateChanged() {
+        if (mLocked || mLockedOnly || mSecured) {
             refreshState();
         }
-        if (DEBUG) log(mKey + ": onStatusBarStateChanged(" + state + ")");
-    }
-
-    @Override
-    public void onSecureMethodChanged() {
-        refreshState();
     }
 
     @Override
