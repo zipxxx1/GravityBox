@@ -23,7 +23,6 @@ import java.util.List;
 
 import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
-import com.ceco.marshmallow.gravitybox.LockscreenAppBar;
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.preference.AppPickerPreference;
@@ -34,7 +33,6 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.app.ActivityOptions;
 import android.app.Dialog;
-import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -76,7 +74,6 @@ public class AppLauncher implements BroadcastSubReceiver {
     private View mAppView;
     private XSharedPreferences mPrefs;
     private Object mStatusBar;
-    private boolean mLaunchFromLockscreen;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -148,7 +145,7 @@ public class AppLauncher implements BroadcastSubReceiver {
             }
         }
         if (intent.getAction().equals(ACTION_SHOW_APP_LAUCNHER)) {
-            showDialog(intent.getBooleanExtra(LockscreenAppBar.EXTRA_FROM_LOCKSCREEN, false));
+            showDialog();
         }
     }
 
@@ -167,16 +164,10 @@ public class AppLauncher implements BroadcastSubReceiver {
     }
 
     public void showDialog() {
-        showDialog(false);
-    }
-
-    private void showDialog(boolean fromLockscreen) {
         try {
             if (dismissDialog()) {
                 return;
             }
-
-            mLaunchFromLockscreen = fromLockscreen;
 
             if (mDialog == null) {
                 for (int i = 0; i < GravityBoxSettings.PREF_KEY_APP_LAUNCHER_SLOT.size(); i++) {
@@ -271,14 +262,10 @@ public class AppLauncher implements BroadcastSubReceiver {
     public void startActivity(Context context, Intent intent, ActivityOptions opts) throws Exception {
         // if intent is a GB action of broadcast type, handle it directly here
         if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
-            boolean isLaunchBlocked = false;
-            try {
-                KeyguardManager kgManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-                isLaunchBlocked = kgManager != null && 
-                    kgManager.isKeyguardLocked() && kgManager.isKeyguardSecure() &&
+            boolean isLaunchBlocked = SysUiManagers.KeyguardMonitor.isShowing() &&
+                        SysUiManagers.KeyguardMonitor.isLocked() &&
                         !ShortcutActivity.isActionSafe(intent.getStringExtra(
                                 ShortcutActivity.EXTRA_ACTION));
-            } catch (Throwable t) { }
             if (DEBUG) log("isLaunchBlocked: " + isLaunchBlocked);
 
             if (!isLaunchBlocked) {
@@ -288,7 +275,7 @@ public class AppLauncher implements BroadcastSubReceiver {
             }
         // otherwise start activity dismissing keyguard
         } else {
-            if (mLaunchFromLockscreen && mStatusBar != null) {
+            if (SysUiManagers.KeyguardMonitor.isShowing() && mStatusBar != null) {
                 try {
                     XposedHelpers.callMethod(mStatusBar, "postStartActivityDismissingKeyguard", intent, 0);
                 } catch (Throwable t) {
