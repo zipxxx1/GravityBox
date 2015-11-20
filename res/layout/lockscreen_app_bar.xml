@@ -23,7 +23,8 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:paddingTop="3dp"
-    android:paddingBottom="3dp">
+    android:paddingBottom="3dp"
+    android:animateLayoutChanges="true">
 
     <ImageView
         android:id="@+id/quickapp1"
