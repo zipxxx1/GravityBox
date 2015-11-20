@@ -199,7 +199,9 @@ public class AppLauncher implements BroadcastSubReceiver {
             TextView lastVisible = null;
             for (AppInfo ai : mAppSlots) {
                 TextView tv = (TextView) mAppView.findViewById(ai.getResId());
-                if (ai.getValue() == null) {
+                if (ai.getValue() == null || (ai.isUnsafeAction() &&
+                        SysUiManagers.KeyguardMonitor.isShowing() &&
+                        SysUiManagers.KeyguardMonitor.isLocked())) {
                     tv.setVisibility(View.GONE);
                     continue;
                 }
@@ -352,6 +354,12 @@ public class AppLauncher implements BroadcastSubReceiver {
 
         public String getPackageName() {
             return mPkgName;
+        }
+
+        public boolean isUnsafeAction() {
+            return (mIntent != null &&
+                    !ShortcutActivity.isActionSafe(mIntent.getStringExtra(
+                            ShortcutActivity.EXTRA_ACTION)));
         }
 
         private void reset() {
