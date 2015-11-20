@@ -52,7 +52,6 @@ public class ShortcutActivity extends ListActivity {
 
     private static List<String> UNSAFE_ACTIONS = new ArrayList<String>(Arrays.asList(
             NetworkModeShortcut.ACTION,
-            RecentAppsShortcut.ACTION,
             MobileDataShortcut.ACTION,
             WifiShortcut.ACTION,
             BluetoothShortcut.ACTION,
