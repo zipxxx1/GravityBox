@@ -15,36 +15,37 @@
 
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import com.ceco.marshmallow.gravitybox.ConnectivityServiceWrapper;
+import com.ceco.marshmallow.gravitybox.GravityBoxResultReceiver;
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.GravityBoxResultReceiver.Receiver;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedHelpers;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.nfc.NfcAdapter;
+import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 
 public class NfcTile extends QsTile {
-    private static NfcAdapter sNfcAdapter;
-    private static final int NFC_ADAPTER_UNKNOWN = -100;
-    private static final int STATE_OFF = 1;
-    private static final int STATE_TURNING_ON = 2;
-    private static final int STATE_ON = 3;
-    private static final int STATE_TURNING_OFF = 4;
     private static final String ACTION_ADAPTER_STATE_CHANGED = 
             "android.nfc.action.ADAPTER_STATE_CHANGED";
+    private static final String EXTRA_STATE = "android.nfc.extra.ADAPTER_STATE";
 
-    private int mNfcState = NFC_ADAPTER_UNKNOWN;
+    private Handler mHandler;
+    private GravityBoxResultReceiver mReceiver;
+    private int mNfcState = ConnectivityServiceWrapper.NFC_STATE_UNKNOWN;
     private boolean mIsReceiving;
 
     private BroadcastReceiver mStateChangeReceiver = new BroadcastReceiver() {
         @Override
-        public void onReceive(Context arg0, Intent arg1) {
-            final int oldNfcState = mNfcState;
-            getNfcState();
-            if (mNfcState != oldNfcState) {
+        public void onReceive(Context context, Intent intent) {
+            int newState = intent.getIntExtra(EXTRA_STATE,
+                    ConnectivityServiceWrapper.NFC_STATE_UNKNOWN);
+            if (mNfcState != newState) {
+                mNfcState = newState;
                 refreshState();
             }
         }
@@ -53,6 +54,21 @@ public class NfcTile extends QsTile {
     public NfcTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, prefs, eventDistributor);
+
+        mHandler = new Handler();
+        mReceiver = new GravityBoxResultReceiver(mHandler);
+        mReceiver.setReceiver(new Receiver() {
+            @Override
+            public void onReceiveResult(int resultCode, Bundle resultData) {
+                if (resultData != null && resultData.containsKey("nfcState")) {
+                    int newState = resultData.getInt("nfcState");
+                    if (mNfcState != newState) {
+                        mNfcState = newState;
+                        refreshState();
+                    }
+                }
+            }
+        });
     }
 
     private void registerNfcReceiver() {
@@ -60,7 +76,7 @@ public class NfcTile extends QsTile {
             IntentFilter intentFilter = new IntentFilter(ACTION_ADAPTER_STATE_CHANGED);
             mContext.registerReceiver(mStateChangeReceiver, intentFilter);
             mIsReceiving = true;
-            mStateChangeReceiver.onReceive(null, null);
+            getNfcState();
             if (DEBUG) log(getKey() + ": registerNfcReceiver");
         }
     }
@@ -83,56 +99,40 @@ public class NfcTile extends QsTile {
     }
 
     protected void toggleState() {
-        getNfcState();
         switch (mNfcState) {
-            case STATE_ON:
-                mNfcState = STATE_TURNING_OFF;
+            case ConnectivityServiceWrapper.NFC_STATE_ON:
+                mNfcState = ConnectivityServiceWrapper.NFC_STATE_TURNING_OFF;
                 refreshState();
-                try {
-                    XposedHelpers.callMethod(sNfcAdapter, "disable");
-                } catch (Throwable t) {
-                    if (DEBUG) log(getKey() + ": Error calling disable() on NFC adapter: " + t.getMessage());
-                }
+                mContext.sendBroadcast(new Intent(ConnectivityServiceWrapper.ACTION_TOGGLE_NFC));
                 break;
-            case STATE_OFF:
-                mNfcState = STATE_TURNING_ON;
+            case ConnectivityServiceWrapper.NFC_STATE_OFF:
+                mNfcState = ConnectivityServiceWrapper.NFC_STATE_TURNING_ON;
                 refreshState();
-                try {
-                    XposedHelpers.callMethod(sNfcAdapter, "enable");
-                } catch (Throwable t) {
-                    if (DEBUG) log(getKey() + ": Error calling enable() on NFC adapter: " + t.getMessage());
-                }
+                mContext.sendBroadcast(new Intent(ConnectivityServiceWrapper.ACTION_TOGGLE_NFC));
                 break;
         }
     }
 
     private void getNfcState() {
-        try {
-            if (sNfcAdapter == null) {
-                sNfcAdapter = (NfcAdapter) XposedHelpers.callStaticMethod(
-                        NfcAdapter.class, "getNfcAdapter", mContext);
-            }
-            mNfcState = (Integer) XposedHelpers.callMethod(sNfcAdapter, "getAdapterState");
-        } catch (Throwable t) {
-            mNfcState = NFC_ADAPTER_UNKNOWN;
-        }
-        if (DEBUG) log(getKey() + ": getNfcState: mNfcState = " + mNfcState);
+        Intent i = new Intent(ConnectivityServiceWrapper.ACTION_GET_NFC_STATE);
+        i.putExtra("receiver", mReceiver);
+        mContext.sendBroadcast(i);
     }
 
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.visible = true;
         switch (mNfcState) {
-        case STATE_ON:
+        case ConnectivityServiceWrapper.NFC_STATE_ON:
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_nfc_on);
             mState.label = mGbContext.getString(R.string.quick_settings_nfc_on);
             break;
-        case STATE_OFF:
+        case ConnectivityServiceWrapper.NFC_STATE_OFF:
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_nfc_off);
             mState.label = mGbContext.getString(R.string.quick_settings_nfc_off);
             break;
-        case STATE_TURNING_ON:
-        case STATE_TURNING_OFF:
+        case ConnectivityServiceWrapper.NFC_STATE_TURNING_ON:
+        case ConnectivityServiceWrapper.NFC_STATE_TURNING_OFF:
         default:
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_nfc_trans);
             mState.label = "----";
@@ -156,6 +156,7 @@ public class NfcTile extends QsTile {
     @Override
     public void handleDestroy() {
         super.handleDestroy();
-        sNfcAdapter = null;
+        mHandler = null;
+        mReceiver = null;
     }
 }

@@ -22,6 +22,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
+import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import de.robv.android.xposed.XC_MethodHook;
@@ -45,14 +47,16 @@ public class ConnectivityServiceWrapper {
     public static final String ACTION_TOGGLE_WIFI_AP = "gravitybox.intent.action.TOGGLE_WIFI_AP";
     public static final String ACTION_SET_LOCATION_MODE = "gravitybox.intent.action.SET_LOCATION_MODE";
     public static final String ACTION_TOGGLE_NFC = "gravitybox.intent.action.TOGGLE_NFC";
+    public static final String ACTION_GET_NFC_STATE = "gravitybox.intent.action.GET_NFC_STATE";
     public static final String EXTRA_LOCATION_MODE = "locationMode";
     public static final String ACTION_TOGGLE_AIRPLANE_MODE = "gravitybox.intent.action.TOGGLE_AIRPLANE_MODE";
     public static final String EXTRA_ENABLED = "enabled";
 
-    private static final int NFC_STATE_OFF = 1;
-    private static final int NFC_STATE_TURNING_ON = 2;
-    private static final int NFC_STATE_ON = 3;
-    private static final int NFC_STATE_TURNING_OFF = 4;
+    public static final int NFC_STATE_OFF = 1;
+    public static final int NFC_STATE_TURNING_ON = 2;
+    public static final int NFC_STATE_ON = 3;
+    public static final int NFC_STATE_TURNING_OFF = 4;
+    public static final int NFC_STATE_UNKNOWN = -100;
 
     private static Context mContext;
     private static Object mConnectivityService;
@@ -85,6 +89,10 @@ public class ConnectivityServiceWrapper {
                         Settings.Secure.LOCATION_MODE_BATTERY_SAVING));
             } else if (intent.getAction().equals(ACTION_TOGGLE_NFC)) {
                 toggleNfc();
+            } else if (intent.getAction().equals(ACTION_GET_NFC_STATE)) {
+                if (intent.hasExtra("receiver")) {
+                    sendNfcState((ResultReceiver)intent.getParcelableExtra("receiver"));
+                }
             } else if (intent.getAction().equals(ACTION_TOGGLE_AIRPLANE_MODE)) {
                 toggleAirplaneMode();
             }
@@ -122,6 +130,7 @@ public class ConnectivityServiceWrapper {
                         intentFilter.addAction(ACTION_TOGGLE_WIFI_AP);
                         intentFilter.addAction(ACTION_SET_LOCATION_MODE);
                         intentFilter.addAction(ACTION_TOGGLE_NFC);
+                        intentFilter.addAction(ACTION_GET_NFC_STATE);
                         intentFilter.addAction(ACTION_TOGGLE_AIRPLANE_MODE);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                     }
@@ -194,11 +203,27 @@ public class ConnectivityServiceWrapper {
         }
     }
 
+    private static void sendNfcState(ResultReceiver receiver) {
+        if (mContext == null || receiver == null) return;
+        int nfcState = NFC_STATE_UNKNOWN;
+        try {
+            NfcAdapter adapter = NfcAdapter.getDefaultAdapter(mContext);
+            if (adapter != null) {
+                nfcState = (Integer) XposedHelpers.callMethod(adapter, "getAdapterState");
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        } finally {
+            Bundle b = new Bundle();
+            b.putInt("nfcState", nfcState);
+            receiver.send(0, b);
+        }
+    }
+
     private static void toggleNfc() {
         if (mContext == null) return;
         try {
-            NfcAdapter adapter = (NfcAdapter) XposedHelpers.callStaticMethod(
-                    NfcAdapter.class, "getNfcAdapter", mContext);
+            NfcAdapter adapter = NfcAdapter.getDefaultAdapter(mContext);
             if (adapter != null) {
                 int nfcState = (Integer) XposedHelpers.callMethod(adapter, "getAdapterState");
                 switch (nfcState) {
