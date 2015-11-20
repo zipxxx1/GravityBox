@@ -31,6 +31,13 @@ public class SysUiManagers {
             throw new IllegalArgumentException("Prefs cannot be null");
 
         try {
+            KeyguardMonitor = new KeyguardStateMonitor(context);
+        } catch (Throwable t) {
+            log("Error creating KeyguardMonitor: ");
+            XposedBridge.log(t);
+        }
+
+        try {
             BatteryInfoManager = new BatteryInfoManager(context, prefs);
         } catch (Throwable t) {
             log("Error creating BatteryInfoManager: ");
@@ -55,13 +62,6 @@ public class SysUiManagers {
             AppLauncher = new AppLauncher(context, prefs);
         } catch (Throwable t) {
             log("Error creating AppLauncher: ");
-            XposedBridge.log(t);
-        }
-
-        try {
-            KeyguardMonitor = new KeyguardStateMonitor(context);
-        } catch (Throwable t) {
-            log("Error creating KeyguardMonitor: ");
             XposedBridge.log(t);
         }
 
