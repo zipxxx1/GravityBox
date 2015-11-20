@@ -17,6 +17,7 @@ package com.ceco.marshmallow.gravitybox.managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -26,6 +27,8 @@ public class KeyguardStateMonitor {
     public static final String TAG="GB:KeyguardStateMonitor";
     public static final String CLASS_KG_MONITOR =
             "com.android.systemui.statusbar.policy.KeyguardMonitor";
+    public static final String CLASS_KG_VIEW_MEDIATOR =
+            "com.android.systemui.keyguard.KeyguardViewMediator";
     private static boolean DEBUG = false;
 
     private static void log(String msg) {
@@ -41,6 +44,7 @@ public class KeyguardStateMonitor {
     private boolean mIsSecured;
     private boolean mIsLocked;
     private boolean mIsTrustManaged;
+    private boolean mIsKeyguardDisabled;
     private Object mMonitor;
     private Object mUpdateMonitor;
     private Object mMediator;
@@ -86,6 +90,17 @@ public class KeyguardStateMonitor {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(CLASS_KG_VIEW_MEDIATOR, cl,
+                    "setKeyguardEnabled", boolean.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mIsKeyguardDisabled && (boolean)param.args[0] &&
+                            !keyguardEnforcedByDevicePolicy()) {
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -94,6 +109,24 @@ public class KeyguardStateMonitor {
     private boolean getIsTrustManaged() {
         return (boolean) XposedHelpers.callMethod(mUpdateMonitor,
                 "getUserTrustIsManaged", getCurrentUserId());
+    }
+
+    public boolean keyguardEnforcedByDevicePolicy() {
+        DevicePolicyManager dpm = (DevicePolicyManager)
+                mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        if (dpm != null) {
+            int passwordQuality = dpm.getPasswordQuality(null);
+            switch (passwordQuality) {
+                case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
+                case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
+                    return true;
+            }
+        }
+        return false;
     }
 
     private void notifyStateChanged() {
@@ -156,5 +189,21 @@ public class KeyguardStateMonitor {
                 XposedBridge.log(t);
             }
         }
+    }
+
+    public void setKeyguardDisabled(boolean disabled) {
+        try {
+            mIsKeyguardDisabled = disabled;
+            XposedHelpers.callMethod(mMediator, "setKeyguardEnabled", !disabled);
+            if (mIsKeyguardDisabled) {
+                XposedHelpers.setBooleanField(mMediator, "mNeedToReshowWhenReenabled", false);
+            }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    public boolean isKeyguardDisabled() {
+        return mIsKeyguardDisabled;
     }
 }

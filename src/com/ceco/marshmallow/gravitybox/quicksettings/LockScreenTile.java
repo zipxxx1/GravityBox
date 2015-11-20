@@ -18,44 +18,18 @@ package com.ceco.marshmallow.gravitybox.quicksettings;
 import com.ceco.marshmallow.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
-import android.app.KeyguardManager;
-import android.app.KeyguardManager.KeyguardLock;
-import android.content.Context;
 import android.provider.Settings;
 
-@SuppressWarnings("deprecation")
 public class LockScreenTile extends QsTile {
-    private boolean mLockScreenEnabled;
-    private KeyguardLock mKeyguardLock;
 
     public LockScreenTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, prefs, eventDistributor);
-
-        mLockScreenEnabled = true;
     }
 
     private void toggleLockscreenState() {
-        try {
-            if (mKeyguardLock == null) {
-                final KeyguardManager kgManager = 
-                        (KeyguardManager) mContext.getSystemService(Context.KEYGUARD_SERVICE);
-                mKeyguardLock = kgManager.newKeyguardLock(getKey());
-            }
-            if (mKeyguardLock != null) {
-                mLockScreenEnabled = !mLockScreenEnabled;
-                if (mLockScreenEnabled) {
-                    mKeyguardLock.reenableKeyguard();
-                } else {
-                    mKeyguardLock.disableKeyguard();
-                }
-                refreshState();
-            }
-        } catch (Throwable t) {
-            log(getKey() + ": Error toggling lock screen state: ");
-            XposedBridge.log(t);
-        }
+        mKgMonitor.setKeyguardDisabled(!mKgMonitor.isKeyguardDisabled());
+        refreshState();
     }
 
     @Override
@@ -67,12 +41,12 @@ public class LockScreenTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.visible = true;
-        if (mLockScreenEnabled) {
-            mState.label = mGbContext.getString(R.string.quick_settings_lock_screen_on);
-            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_lock_screen_on);
-        } else {
+        if (mKgMonitor.isKeyguardDisabled()) {
             mState.label = mGbContext.getString(R.string.quick_settings_lock_screen_off);
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_lock_screen_off);
+        } else {
+            mState.label = mGbContext.getString(R.string.quick_settings_lock_screen_on);
+            mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_lock_screen_on);
         }
 
         super.handleUpdateState(state, arg);
@@ -92,10 +66,9 @@ public class LockScreenTile extends QsTile {
 
     @Override
     public void handleDestroy() {
-        super.handleDestroy();
-        if (mKeyguardLock != null) {
-            mKeyguardLock.reenableKeyguard();
-            mKeyguardLock = null;
+        if (mKgMonitor.isKeyguardDisabled()) {
+            mKgMonitor.setKeyguardDisabled(false);
         }
+        super.handleDestroy();
     }
 }
