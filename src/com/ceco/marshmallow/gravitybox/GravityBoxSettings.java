@@ -303,8 +303,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_AUTOEXPAND = "autoExpand";
     public static final String EXTRA_VIBRATE_MUTED = "vibrate_muted";
     public static final String EXTRA_TIMEOUT = "timeout";
-    // TODO: volume linking
-    //public static final String PREF_KEY_LINK_VOLUMES = "pref_link_volumes";
+    public static final String PREF_KEY_LINK_VOLUMES = "pref_link_volumes";
     public static final String ACTION_PREF_LINK_VOLUMES_CHANGED = "gravitybox.intent.action.LINK_VOLUMES_CHANGED";
     public static final String EXTRA_LINKED = "linked";
     public static final String ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED = 
@@ -1202,8 +1201,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private SeekBarPreference mPrefDataTrafficOmniAutohideTh;
         private CheckBoxPreference mPrefDataTrafficActiveMobileOnly;
         private ListPreference mPrefDataTrafficDisplayMode;
-        // TODO: volume linking
-        //private CheckBoxPreference mPrefLinkVolumes;
+        private CheckBoxPreference mPrefLinkVolumes;
         private CheckBoxPreference mPrefVolumePanelAutoexpand;
         private ListPreference mPrefVolumePanelTimeout;
         private CheckBoxPreference mPrefHomeDoubletapDisable;
@@ -1422,8 +1420,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatMedia = (PreferenceScreen) findPreference(PREF_CAT_KEY_MEDIA);
             mPrefMusicVolumeSteps = (CheckBoxPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS);
             mPrefMusicVolumeStepsValue = (SeekBarPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS_VALUE);
-            // TODO: volume linking
-            //mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
+            mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
             mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
             mPrefVolumePanelTimeout = (ListPreference) findPreference(PREF_KEY_VOLUME_PANEL_TIMEOUT);
             mPrefTranclucentDecor =  (ListPreference) findPreference(PREF_KEY_TRANSLUCENT_DECOR);
@@ -1579,8 +1576,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             }
             if (!Utils.hasTelephonySupport(getActivity())) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneTelephony);
-                // TODO: volume linking
-                //mPrefCatMedia.removePreference(mPrefLinkVolumes);
+                mPrefCatMedia.removePreference(mPrefLinkVolumes);
             }
             if (!Utils.isAppInstalled(getActivity(), APP_MESSAGING) && mPrefCatPhoneMessaging != null) {
                 mPrefCatPhone.removePreference(mPrefCatPhoneMessaging);
@@ -2497,11 +2493,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
                 intent.putExtra(EXTRA_TIMEOUT, Integer.valueOf(
                         prefs.getString(PREF_KEY_VOLUME_PANEL_TIMEOUT, "0")));
-            // TODO: volume linking
-//            } else if (key.equals(PREF_KEY_LINK_VOLUMES)) {
-//                intent.setAction(ACTION_PREF_LINK_VOLUMES_CHANGED);
-//                intent.putExtra(EXTRA_LINKED,
-//                        prefs.getBoolean(PREF_KEY_LINK_VOLUMES, true));
+            } else if (key.equals(PREF_KEY_LINK_VOLUMES)) {
+                intent.setAction(ACTION_PREF_LINK_VOLUMES_CHANGED);
+                intent.putExtra(EXTRA_LINKED,
+                        prefs.getBoolean(PREF_KEY_LINK_VOLUMES, true));
             } else if (key.equals(PREF_KEY_NOTIF_BACKGROUND)) {
                 intent.setAction(ACTION_NOTIF_BACKGROUND_CHANGED);
                 intent.putExtra(EXTRA_BG_TYPE, prefs.getString(

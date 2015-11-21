@@ -15,10 +15,17 @@
 
 package com.ceco.marshmallow.gravitybox;
 
+import java.util.List;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
+import android.content.res.XModuleResources;
+import android.content.res.XResources;
+import android.media.AudioManager;
+import android.view.View;
 import android.widget.ImageButton;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -30,6 +37,7 @@ public class ModVolumePanel {
     private static final String TAG = "GB:ModVolumePanel";
     public static final String PACKAGE_NAME = "com.android.systemui";
     private static final String CLASS_VOLUME_PANEL = "com.android.systemui.volume.VolumeDialog";
+    private static final String CLASS_VOLUME_ROW = CLASS_VOLUME_PANEL + ".VolumeRow";
     private static final String CLASS_VOLUME_PANEL_CTRL = "com.android.systemui.volume.VolumeDialogController";
     private static final boolean DEBUG = false;
 
@@ -37,11 +45,9 @@ public class ModVolumePanel {
     private static boolean mVolumeAdjustVibrateMuted;
     private static boolean mAutoExpand;
     private static int mTimeout;
-    private static Context mGbContext;
-    // TODO: volume linking
-    //private static boolean mVolumesLinked;
-    //private static int mIconRingerAudibleId;
-    //private static int mIconRingerAudibleIdOrig;
+    private static boolean mVolumesLinked;
+    private static int mIconNotifResId;
+    private static int mIconNotifMuteResId;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -62,22 +68,20 @@ public class ModVolumePanel {
                     mTimeout = intent.getIntExtra(GravityBoxSettings.EXTRA_TIMEOUT, 0);
                 }
             }
-            // TODO: volume linking
-//            else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
-//                mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
-//                updateRingerIcon();
-//            }
+            else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED)) {
+                mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
+            }
         }
         
     };
 
     public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
-        // TODO: volume linking
-//        XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
-//
-//        mIconRingerAudibleId = 0;
-//        mIconRingerAudibleId = XResources.getFakeResId(modRes, R.drawable.ic_ringer_audible);
-//        resparam.res.setReplacement(mIconRingerAudibleId, modRes.fwd(R.drawable.ic_ringer_audible));
+        XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
+
+        mIconNotifResId = XResources.getFakeResId(modRes, R.drawable.ic_audio_notification);
+        resparam.res.setReplacement(mIconNotifResId, modRes.fwd(R.drawable.ic_audio_notification));
+        mIconNotifMuteResId = XResources.getFakeResId(modRes, R.drawable.ic_audio_notification_mute);
+        resparam.res.setReplacement(mIconNotifMuteResId, modRes.fwd(R.drawable.ic_audio_notification_mute));
     }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
@@ -86,8 +90,7 @@ public class ModVolumePanel {
 
             mVolumeAdjustVibrateMuted = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE, false);
             mAutoExpand = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_PANEL_AUTOEXPAND, false);
-            // TODO: volume linking
-            //mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
+            mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
 
             XposedBridge.hookAllConstructors(classVolumePanel, new XC_MethodHook() {
 
@@ -95,7 +98,6 @@ public class ModVolumePanel {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mVolumePanel = param.thisObject;
                     Context context = (Context) XposedHelpers.getObjectField(mVolumePanel, "mContext");
-                    mGbContext = Utils.getGbContext(context);
                     if (DEBUG) log("VolumePanel constructed; mVolumePanel set");
 
                     mTimeout = 0;
@@ -106,18 +108,11 @@ public class ModVolumePanel {
                         log("Invalid value for PREF_KEY_VOLUME_PANEL_TIMEOUT preference");
                     }
 
-                    // TODO: volume linking
-//                    Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(classVolumePanel, "STREAMS");
-//                    XposedHelpers.setBooleanField(streams[1], "show", true);
-//                    mIconRingerAudibleIdOrig = XposedHelpers.getIntField(streams[1], "iconRes");
-//                    XposedHelpers.setBooleanField(streams[2], "show", true);
-//                    XposedHelpers.setBooleanField(streams[5], "show", true);
-//                    updateRingerIcon();
+                    prepareNotificationRow(context.getResources());
 
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
-                    // TODO: volume linking
-                    //intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
                     context.registerReceiver(mBrodcastReceiver, intentFilter);
                 }
             });
@@ -154,41 +149,62 @@ public class ModVolumePanel {
                 }
             });
 
-            // TODO: volume linking
-//            XposedHelpers.findAndHookMethod(classVolumePanel, "isNotificationOrRing", int.class, new XC_MethodHook() {
-//                @Override
-//                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-//                    if (XposedHelpers.getBooleanField(mVolumePanel, "mVoiceCapable")) {
-//                        int streamType = (int) param.args[0];
-//                        boolean result = streamType == AudioManager.STREAM_RING ||
-//                                (mVolumesLinked && streamType == AudioManager.STREAM_NOTIFICATION);
-//                        param.setResult(result);
-//                    }
-//                }
-//            });
+            XposedHelpers.findAndHookMethod(classVolumePanel, "isVisibleH",
+                    CLASS_VOLUME_ROW, boolean.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (XposedHelpers.getAdditionalInstanceField(
+                            param.args[0], "gbNotifSlider") != null) {
+                        boolean visible = (boolean) param.getResult();
+                        visible &= !mVolumesLinked;
+                        param.setResult(visible);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classVolumePanel, "updateVolumeRowSliderH",
+                    CLASS_VOLUME_ROW, boolean.class, int.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (!mVolumesLinked && XposedHelpers.getAdditionalInstanceField(
+                            param.args[0], "gbNotifSlider") != null) {
+                        View slider = (View) XposedHelpers.getObjectField(param.args[0], "slider");
+                        slider.setEnabled(isRingerSliderEnabled());
+                        View icon = (View) XposedHelpers.getObjectField(param.args[0], "icon");
+                        icon.setEnabled(slider.isEnabled());
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    // TODO: volume linking
-//    private static void updateRingerIcon() {
-//        if (mIconRingerAudibleId == 0) return;
-//        try {
-//            int iconResId = mVolumesLinked ? mIconRingerAudibleIdOrig : mIconRingerAudibleId;
-//            Object[] streams = (Object[]) XposedHelpers.getStaticObjectField(
-//                    mVolumePanel.getClass(), "STREAMS");
-//            XposedHelpers.setIntField(streams[1], "iconRes", iconResId);
-//            SparseArray<?> streamControls = (SparseArray<?>) XposedHelpers.getObjectField(
-//                    mVolumePanel, "mStreamControls");
-//            if (streamControls != null) {
-//                Object sc = streamControls.get(AudioManager.STREAM_RING);
-//                if (sc != null) {
-//                    XposedHelpers.setIntField(sc, "iconRes", iconResId);
-//                }
-//            }
-//        } catch (Throwable t) {
-//            XposedBridge.log(t);
-//        }
-//    }
+    private static void prepareNotificationRow(Resources res) {
+        try {
+            XposedHelpers.callMethod(mVolumePanel, "addRow",
+                    AudioManager.STREAM_NOTIFICATION,
+                    mIconNotifResId, mIconNotifMuteResId, true);
+            List<?> rows = (List<?>) XposedHelpers.getObjectField(mVolumePanel, "mRows");
+            Object row = rows.get(rows.size()-1);
+            XposedHelpers.setAdditionalInstanceField(row, "gbNotifSlider", true);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static boolean isRingerSliderEnabled() {
+        try {
+            List<?> rows = (List<?>) XposedHelpers.getObjectField(mVolumePanel, "mRows");
+            for (Object row : rows) {
+                if (XposedHelpers.getIntField(row, "stream") == AudioManager.STREAM_RING) {
+                    return ((View)XposedHelpers.getObjectField(row, "slider")).isEnabled();
+                }
+            }
+            return true;
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return true;
+        }
+    }
 }
