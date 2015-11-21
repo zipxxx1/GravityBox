@@ -182,10 +182,15 @@ public class NetworkModeTile extends QsTile {
         case PhoneWrapper.NT_GSM_WCDMA_AUTO:
         case PhoneWrapper.NT_CDMA_EVDO:
         case PhoneWrapper.NT_GLOBAL:
+        case PhoneWrapper.NT_TDSCDMA_GSM:
+        case PhoneWrapper.NT_TDSCDMA_GSM_WCDMA:
+        case PhoneWrapper.NT_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_2g3g_on);
             break;
         case PhoneWrapper.NT_WCDMA_ONLY:
         case PhoneWrapper.NT_EVDO_ONLY:
+        case PhoneWrapper.NT_TDSCDMA_ONLY:
+        case PhoneWrapper.NT_TDSCDMA_WCDMA:
             mState.icon = mGbContext.getDrawable(R.drawable.ic_qs_3g_on);
             break;
         case PhoneWrapper.NT_GSM_ONLY:
@@ -224,12 +229,17 @@ public class NetworkModeTile extends QsTile {
             case PhoneWrapper.NT_GSM_WCDMA_AUTO:
             case PhoneWrapper.NT_CDMA_EVDO:
             case PhoneWrapper.NT_GLOBAL:
+            case PhoneWrapper.NT_TDSCDMA_GSM:
+            case PhoneWrapper.NT_TDSCDMA_GSM_WCDMA:
+            case PhoneWrapper.NT_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
                 i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, 
                         mAllowLte ? getPreferredLteMode() : 
                             mUseCdma ? PhoneWrapper.NT_CDMA_ONLY : PhoneWrapper.NT_GSM_ONLY);
                 break;
             case PhoneWrapper.NT_WCDMA_ONLY:
             case PhoneWrapper.NT_EVDO_ONLY:
+            case PhoneWrapper.NT_TDSCDMA_ONLY:
+            case PhoneWrapper.NT_TDSCDMA_WCDMA:
                 if (!mAllow2g3g) {
                     i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
                             mAllowLte ? getPreferredLteMode() : 

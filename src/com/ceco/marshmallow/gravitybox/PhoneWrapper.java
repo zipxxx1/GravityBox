@@ -19,7 +19,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Message;
 import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
@@ -44,7 +43,19 @@ public class PhoneWrapper {
     public static final int NT_LTE_CMDA_EVDO_GSM_WCDMA = 10;
     public static final int NT_LTE_ONLY = 11;
     public static final int NT_LTE_WCDMA = 12;
-    public static final int NT_MODE_UNKNOWN = 13;
+    public static final int NT_MODE_UNKNOWN = 100;
+
+    // TD-SCDMA
+    public static final int NT_TDSCDMA_ONLY = 13;                       // 3G only
+    public static final int NT_TDSCDMA_WCDMA = 14;                      // 3G only
+    public static final int NT_LTE_TDSCDMA = 15;                        // LTE
+    public static final int NT_TDSCDMA_GSM = 16;                        // 2G/3G
+    public static final int NT_LTE_TDSCDMA_GSM = 17;                    // LTE
+    public static final int NT_TDSCDMA_GSM_WCDMA = 18;                  // 2G/3G
+    public static final int NT_LTE_TDSCDMA_WCDMA = 19;                  // LTE
+    public static final int NT_LTE_TDSCDMA_GSM_WCDMA = 20;              // LTE
+    public static final int NT_TDSCDMA_CDMA_EVDO_GSM_WCDMA = 21;        // 2G/3G
+    public static final int NT_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA = 22;    // LTE
 
     private static final String PREFERRED_NETWORK_MODE = "preferred_network_mode";
 
@@ -266,7 +277,12 @@ public class PhoneWrapper {
 
     public static boolean isLteNetworkType(int networkType) {
         return (networkType >= NT_LTE_CDMA_EVDO &&
-                networkType < NT_MODE_UNKNOWN);
+                networkType <= NT_LTE_WCDMA) ||
+                networkType == NT_LTE_TDSCDMA ||
+                networkType == NT_LTE_TDSCDMA_GSM ||
+                networkType == NT_LTE_TDSCDMA_WCDMA ||
+                networkType == NT_LTE_TDSCDMA_GSM_WCDMA ||
+                networkType == NT_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA;
     }
 
     public static int getPhoneCount() {
