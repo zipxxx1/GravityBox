@@ -226,8 +226,8 @@ public class ModDialer {
                     final View view = ((Fragment)param.thisObject).getView();
                     final boolean fsc = prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false);
-                    if (fsc & view != null && !(Boolean)param.args[0]) {
-                        view.setVisibility(View.GONE);
+                    if (fsc & view != null) {
+                        view.setVisibility(!(Boolean)param.args[0] ? View.GONE : View.VISIBLE);
                     }
                 }
             });
