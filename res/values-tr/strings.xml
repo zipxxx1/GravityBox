@@ -907,7 +907,7 @@
     <string name="pref_settings_restore_title">Ayarları geri yükle</string>
     <string name="settings_backup_failed">Yedekleme başarısız</string>
     <string name="settings_backup_no_prefs">Ayarlar dosyası bulunamadı</string>
-    <string name="settings_backup_success">Yedekleme başarısız</string>
+    <string name="settings_backup_success">Yedekleme başarılı</string>
     <string name="settings_restore_no_backup">Geri yüklenecek yedeklemeniz yok</string>
     <string name="settings_restore_confirm">Şimdiki ayarlarınız yedekteki ile değiştirilecektir. Emin misiniz?</string>
     <string name="settings_restore_failed">Geri yükleme başarısız</string>
