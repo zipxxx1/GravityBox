@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.SparseBooleanArray;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -151,9 +150,9 @@ public class ModTrustManager {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mWifiTrusted.size() == 0) return;
 
-                    SparseBooleanArray authSinceBoot = (SparseBooleanArray) XposedHelpers.getObjectField(
-                            param.thisObject, "mUserHasAuthenticatedSinceBoot");
-                    if (!authSinceBoot.get((int)param.args[0])) {
+                    boolean authenticated = (boolean) XposedHelpers.callMethod(param.thisObject,
+                            "getUserHasAuthenticated", (int)param.args[0]);
+                    if (!authenticated) {
                         if (DEBUG) log("aggregateIsTrustManaged: user not yet authenticated");
                         return;
                     } else {
@@ -169,9 +168,9 @@ public class ModTrustManager {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mWifiManager == null || mWifiTrusted.size() == 0 || !mWifiConnected) return;
 
-                    SparseBooleanArray authSinceBoot = (SparseBooleanArray) XposedHelpers.getObjectField(
-                            param.thisObject, "mUserHasAuthenticatedSinceBoot");
-                    if (!authSinceBoot.get((int)param.args[0])) {
+                    boolean authenticated = (boolean) XposedHelpers.callMethod(param.thisObject,
+                            "getUserHasAuthenticated", (int)param.args[0]);
+                    if (!authenticated) {
                         if (DEBUG) log("aggregateIsTrusted: user not yet authenticated");
                         return;
                     }
