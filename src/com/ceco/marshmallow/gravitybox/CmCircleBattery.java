@@ -134,7 +134,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
 
         mPaintFont.setColor(Color.WHITE);
         mPaintSystem.setColor(mPaintFont.getColor());
-        mPaintGray.setColor(res.getColor(android.R.color.darker_gray));
+        mPaintGray.setColor(0x4DFFFFFF);
 
         // try to use battery saver color; fall back to red in case of problems
         int resId = res.getIdentifier("battery_saver_mode_color", "color",
@@ -160,7 +160,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     public void setStyle(Style style) {
         switch (style) {
             case SOLID:
-                mStrokeWidthFactor = 9.5f;
+                mStrokeWidthFactor = 7.5f;
                 mPathEffect = null;
                 break;
             case DASHED:
@@ -305,7 +305,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         float strokeWidth = mCircleSize / mStrokeWidthFactor;
         mPaintRed.setStrokeWidth(strokeWidth);
         mPaintSystem.setStrokeWidth(strokeWidth);
-        mPaintGray.setStrokeWidth(strokeWidth / 3.5f);
+        mPaintGray.setStrokeWidth(strokeWidth);
 
         // calculate rectangle for drawArc calls
         int pLeft = getPaddingLeft();
