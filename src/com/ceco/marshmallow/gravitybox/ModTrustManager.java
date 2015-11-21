@@ -150,9 +150,7 @@ public class ModTrustManager {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mWifiTrusted.size() == 0) return;
 
-                    boolean authenticated = (boolean) XposedHelpers.callMethod(param.thisObject,
-                            "getUserHasAuthenticated", (int)param.args[0]);
-                    if (!authenticated) {
+                    if (!isTrustAllowedForUser((int)param.args[0])) {
                         if (DEBUG) log("aggregateIsTrustManaged: user not yet authenticated");
                         return;
                     } else {
@@ -168,9 +166,7 @@ public class ModTrustManager {
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (mWifiManager == null || mWifiTrusted.size() == 0 || !mWifiConnected) return;
 
-                    boolean authenticated = (boolean) XposedHelpers.callMethod(param.thisObject,
-                            "getUserHasAuthenticated", (int)param.args[0]);
-                    if (!authenticated) {
+                    if (!isTrustAllowedForUser((int)param.args[0])) {
                         if (DEBUG) log("aggregateIsTrusted: user not yet authenticated");
                         return;
                     }
@@ -184,6 +180,27 @@ public class ModTrustManager {
             });
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static boolean hasStrongAuthTracker() {
+        try {
+            XposedHelpers.findField(mTrustManager.getClass(), "mStrongAuthTracker");
+            return true;
+        } catch (NoSuchFieldError nfe) {
+            return false;
+        }
+    }
+
+    private static boolean isTrustAllowedForUser(int userId) {
+        if (hasStrongAuthTracker()) {
+            Object authTracker = XposedHelpers.getObjectField(
+                    mTrustManager, "mStrongAuthTracker");
+            return (boolean) XposedHelpers.callMethod(authTracker,
+                    "isTrustAllowedForUser", userId);
+        } else {
+            return (boolean) XposedHelpers.callMethod(mTrustManager,
+                    "getUserHasAuthenticated", userId);
         }
     }
 
