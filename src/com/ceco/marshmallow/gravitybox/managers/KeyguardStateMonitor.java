@@ -174,7 +174,7 @@ public class KeyguardStateMonitor {
     }
 
     public boolean isLocked() {
-        return mIsLocked;
+        return (mIsSecured && mIsLocked);
     }
 
     public boolean isTrustManaged() {
