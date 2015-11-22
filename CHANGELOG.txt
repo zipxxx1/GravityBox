@@ -1,3 +1,33 @@
+Changelog 6.0.1 - 22/11/2015
+--------------------------------------
+- Lockscreen:
+--- reworked and optimized Quick Unlock feature (limited to work only with PINs/passwords with up to 6 characters)
+--- Shortcuts: don't allow unsafe GB actions (connectivity/location related) when device locked
+--- Shortcuts: dynamically show/hide unsafe GB actions based on current lock screen security state
+--- Shortcuts: don't offer GB actions which don't make sense in lock screen context (kill app, switch to last app, ...)
+--- Shortcuts: offer GravityBox Unlock action
+--- Shortcuts: dismiss lockscreen for certain GB actions (Google Now, Show recent apps)
+- QuickSettings management:
+--- NFC Tile is back
+--- LockScreen Tile is back
+--- improved security logic
+--- fixed secured tiles showing when lock screen activity is in the foreground (such as Camera)
+--- NetworkModeTile: fixed for devices having TD-SCDMA default network mode preset in build.prop
+- GravityBox Actions: fixed Google Now action
+- Pie: fixed Search key crashing SystemUI
+- AppLauncher: don't show unsafe GB actions (connectivity/location related) when device locked
+- TrustedWifi:
+--- adjusted for compatibility with devices running newer Android 6.0 release (N5X, N6P, ...)
+--- fixed manual re-lock not working when trusted WiFi enabled
+- Media: unlink ring & notification volumes feature is back 
+- PowerMenu: replaced "Factory reset" dialog title when rebooting to recovery
+- Dialer: fixed action buttons invisible during call (when full screen caller photo enabled)
+- Ultimate notification control:
+--- fixed and optimized disabling touch sounds during QuietHours
+--- fixed ActiveScreen
+- Fixed typo in Turkish translations (Backup successful)
+- Updated Hungarian translations (thanks to benjoe1)
+
 Changelog 6.0.0 - 17/11/2015
 --------------------------------------
 - Initial version for Marshmallow
