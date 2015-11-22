@@ -16,6 +16,7 @@
 package com.ceco.marshmallow.gravitybox;
 
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
+import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -41,6 +42,7 @@ public class ModAudio {
     private static boolean mSwapVolumeKeys;
     private static HandleChangeVolume mHandleChangeVolume;
     private static XSharedPreferences mQhPrefs;
+    private static QuietHours mQh;
     private static boolean mVolumesLinked;
     private static Object mAudioService;
 
@@ -65,6 +67,10 @@ public class ModAudio {
                 mVolumesLinked = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LINKED, true);
                 if (DEBUG) log("mVolumesLinked set to: " + mVolumesLinked);
                 updateStreamVolumeAlias();
+            } else if (intent.getAction().equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED) &&
+                    mQhPrefs != null) {
+                mQhPrefs.reload();
+                mQh = new QuietHours(mQhPrefs);
             }
         }
     };
@@ -75,6 +81,7 @@ public class ModAudio {
 
             mQhPrefs = new XSharedPreferences(GravityBox.PACKAGE_NAME, "quiet_hours");
             mQhPrefs.makeWorldReadable();
+            mQh = new QuietHours(mQhPrefs);
 
             mSwapVolumeKeys = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_SWAP_KEYS, false);
             mVolumesLinked = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LINK_VOLUMES, true);
@@ -104,6 +111,7 @@ public class ModAudio {
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED);
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_SWAP_KEYS_CHANGED);
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_LINK_VOLUMES_CHANGED);
+                        intentFilter.addAction(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED);
                         context.registerReceiver(mBroadcastReceiver, intentFilter);
                         if (DEBUG) log("AudioService constructed. Broadcast receiver registered");
                     }
@@ -156,13 +164,11 @@ public class ModAudio {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(AudioManager.class, "querySoundEffectsEnabled",
-                    int.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(classAudioService, "playSoundEffectVolume",
+                    int.class, float.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    mQhPrefs.reload();
-                    QuietHours qh = new QuietHours(mQhPrefs);
-                    if (qh.isSystemSoundMuted(QuietHours.SystemSound.TOUCH)) {
+                    if (mQh.isSystemSoundMuted(QuietHours.SystemSound.TOUCH)) {
                         param.setResult(false);
                     }
                 } 
