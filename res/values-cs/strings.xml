@@ -1765,4 +1765,8 @@
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Režim přímého odemknutí</string>
 
+    <!-- Permission denial message -->
+    <string name="permission_denied_msg">Rozhodli jste se odmítnout některé z oprávnění.
+        Související funkce nebudou fungovat.</string>
+
 </resources>
