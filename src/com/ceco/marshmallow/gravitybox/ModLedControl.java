@@ -179,6 +179,8 @@ public class ModLedControl {
 
                         toggleActiveScreenFeature(!mPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
                                 mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false));
+                        hookNotificationDelegate();
+
                         if (DEBUG) log("Notification manager service initialized");
                     }
                 }
@@ -193,7 +195,6 @@ public class ModLedControl {
             XposedBridge.log(t);
         }
     }
-
 
     private static XC_MethodHook notifyHook = new XC_MethodHook() {
         @Override
@@ -403,6 +404,23 @@ public class ModLedControl {
         }
     };
 
+    private static void hookNotificationDelegate() {
+        try {
+            Object notifDel = XposedHelpers.getObjectField(mNotifManagerService, "mNotificationDelegate");
+            XposedHelpers.findAndHookMethod(notifDel.getClass(), "clearEffects", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mScreenOnDueToActiveScreen) {
+                        if (DEBUG) log("clearEffects: suppressed due to ActiveScreen");
+                        param.setResult(null);
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
     private static boolean isRingerModeVibrate() {
         try {
             if (mAudioManager == null) {
@@ -435,13 +453,18 @@ public class ModLedControl {
     }
 
     private static void performActiveScreen() {
-        long ident = Binder.clearCallingIdentity();
-        try {
-            XposedHelpers.callMethod(mPm, "wakeUp", SystemClock.uptimeMillis());
-            mScreenOnDueToActiveScreen = true;
-        } finally {
-            Binder.restoreCallingIdentity(ident);
-        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                long ident = Binder.clearCallingIdentity();
+                try {
+                    XposedHelpers.callMethod(mPm, "wakeUp", SystemClock.uptimeMillis());
+                    mScreenOnDueToActiveScreen = true;
+                } finally {
+                    Binder.restoreCallingIdentity(ident);
+                }
+            }
+        }, 1000);
     }
 
     private static void clearNotifications() {
