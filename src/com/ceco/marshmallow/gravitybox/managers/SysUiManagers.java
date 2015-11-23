@@ -30,12 +30,7 @@ public class SysUiManagers {
         if (prefs == null)
             throw new IllegalArgumentException("Prefs cannot be null");
 
-        try {
-            KeyguardMonitor = new KeyguardStateMonitor(context);
-        } catch (Throwable t) {
-            log("Error creating KeyguardMonitor: ");
-            XposedBridge.log(t);
-        }
+        createKeyguardMonitor(context);
 
         try {
             BatteryInfoManager = new BatteryInfoManager(context, prefs);
@@ -86,6 +81,16 @@ public class SysUiManagers {
         intentFilter.addAction(com.ceco.marshmallow.gravitybox.managers.AppLauncher.ACTION_SHOW_APP_LAUCNHER);
 
         context.registerReceiver(sBroadcastReceiver, intentFilter);
+    }
+
+    public static void createKeyguardMonitor(Context ctx) {
+        if (KeyguardMonitor != null) return;
+        try {
+            KeyguardMonitor = new KeyguardStateMonitor(ctx);
+        } catch (Throwable t) {
+            log("Error creating KeyguardMonitor: ");
+            XposedBridge.log(t);
+        }
     }
 
     private static BroadcastReceiver sBroadcastReceiver = new BroadcastReceiver() {
