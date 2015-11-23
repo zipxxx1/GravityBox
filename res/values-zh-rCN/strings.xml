@@ -1335,7 +1335,6 @@
     <string name="increasing_ring_interval_4">25秒</string>
     <string name="increasing_ring_interval_5">30秒</string>
 
-
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
 
@@ -1836,5 +1835,14 @@
 
     <!-- QS: tile options menu -->
     <string name="menu_tile_dual">双模式</string>
+    <string name="menu_tile_locked">在锁屏显示</string>
+    <string name="menu_tile_locked_only">仅在锁屏</string>
+    <string name="menu_tile_secured">在安全锁屏显示</string>
+    <string name="tile_hidden_locked">从锁屏隐藏</string>
+    <string name="tile_hidden_secured">从安全锁屏隐藏</string>
+    <string name="tile_shown_locked_only">仅在锁屏时显示</string>
+
+    <!-- Lockscreen: Direct unlock policy -->
+    <string name="pref_lockscreen_direct_unlock_policy_title">直接解锁策略</string>
 
 </resources>
