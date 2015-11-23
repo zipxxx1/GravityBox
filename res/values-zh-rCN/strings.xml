@@ -1794,5 +1794,19 @@
 
     <!-- QS: tile options menu -->
     <string name="menu_tile_dual">双模式</string>
+    <string name="menu_tile_locked">在锁屏显示</string>
+    <string name="menu_tile_locked_only">仅在锁屏</string>
+    <string name="menu_tile_secured">在安全锁屏显示</string>
+    <string name="tile_hidden_locked">从锁屏隐藏</string>
+    <string name="tile_hidden_secured">从安全锁屏隐藏</string>
+    <string name="tile_shown_locked_only">仅在锁屏时显示</string>
+
+    <!-- Lockscreen: Direct unlock policy -->
+    <string name="pref_lockscreen_direct_unlock_policy_title">直接解锁策略</string>
+	
+    <!-- Permission denial message -->
+    <string name="permission_denied_msg">您已经决定拒绝某些权限的设置
+      请注意,这会阻止相关功能无法正常工作</string>
 
 </resources>
+
