@@ -175,6 +175,9 @@ public class ModLockscreen {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     mContext = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     mGbContext = Utils.getGbContext(mContext);
+                    if (SysUiManagers.KeyguardMonitor == null) {
+                        SysUiManagers.createKeyguardMonitor(mContext);
+                    }
                     mKgMonitor = SysUiManagers.KeyguardMonitor;
                     mKgMonitor.setMediator(param.thisObject);
 
