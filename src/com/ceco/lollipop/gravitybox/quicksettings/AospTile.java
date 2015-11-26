@@ -1,6 +1,5 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
-import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -67,9 +66,9 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         final boolean visible = mEnabled &&
-                (!mLocked || !mEventDistributor.isKeyguardShowing()) &&
-                (!mLockedOnly || mEventDistributor.isKeyguardShowing()) &&
-                (!mSecured || !mEventDistributor.isKeyguardShowingAndLocked());
+                (!mLocked || !mKgMonitor.isShowing()) &&
+                (!mLockedOnly || mKgMonitor.isShowing()) &&
+                (!mSecured || !(mKgMonitor.isShowing() && mKgMonitor.isLocked()));
         XposedHelpers.setBooleanField(state, "visible", visible);
     }
 

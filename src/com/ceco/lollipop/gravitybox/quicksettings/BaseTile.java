@@ -32,6 +32,8 @@ import android.widget.TextView;
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.Utils;
+import com.ceco.lollipop.gravitybox.managers.KeyguardStateMonitor;
+import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -65,9 +67,9 @@ public abstract class BaseTile implements QsEventListener {
     protected boolean mLockedOnly;
     protected boolean mSecured;
     protected boolean mDualMode;
-    protected int mStatusBarState;
     protected boolean mHideOnChange;
     protected float mScalingFactor = 1f;
+    protected KeyguardStateMonitor mKgMonitor;
 
     public BaseTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -75,6 +77,7 @@ public abstract class BaseTile implements QsEventListener {
         mKey = key;
         mPrefs = prefs;
         mEventDistributor = eventDistributor;
+        mKgMonitor = SysUiManagers.KeyguardMonitor;
 
         mContext = (Context) XposedHelpers.callMethod(mHost, "getContext");
         mGbContext = Utils.getGbContext(mContext);
@@ -150,6 +153,7 @@ public abstract class BaseTile implements QsEventListener {
         mPrefs = null;
         mContext = null;
         mGbContext = null;
+        mKgMonitor = null;
     }
 
     @Override
@@ -211,18 +215,10 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     @Override
-    public void onStatusBarStateChanged(int state) {
-        final int oldState = mStatusBarState;
-        mStatusBarState = state;
-        if ((mLocked || mLockedOnly || mSecured) && mStatusBarState != oldState) {
+    public void onKeyguardStateChanged() {
+        if (mLocked || mLockedOnly || mSecured) {
             refreshState();
         }
-        if (DEBUG) log(mKey + ": onStatusBarStateChanged(" + state + ")");
-    }
-
-    @Override
-    public void onSecureMethodChanged() {
-        refreshState();
     }
 
     @Override

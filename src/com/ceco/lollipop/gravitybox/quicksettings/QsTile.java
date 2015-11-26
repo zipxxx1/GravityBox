@@ -6,7 +6,6 @@ import android.os.Build;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.Utils;
-import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
 
 import de.robv.android.xposed.XSharedPreferences;
@@ -97,9 +96,9 @@ public abstract class QsTile extends BaseTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.visible &= mEnabled &&
-                (!mLocked || !mEventDistributor.isKeyguardShowing()) &&
-                (!mLockedOnly || mEventDistributor.isKeyguardShowing()) &&
-                (!mSecured || !mEventDistributor.isKeyguardShowingAndLocked());
+                (!mLocked || !mKgMonitor.isShowing()) &&
+                (!mLockedOnly || mKgMonitor.isShowing()) &&
+                (!mSecured || !(mKgMonitor.isShowing() && mKgMonitor.isLocked()));
         mState.applyTo(state);
     }
 

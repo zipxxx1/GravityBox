@@ -17,6 +17,7 @@ public class SysUiManagers {
     public static StatusBarIconManager IconManager;
     public static StatusbarQuietHoursManager QuietHoursManager;
     public static AppLauncher AppLauncher;
+    public static KeyguardStateMonitor KeyguardMonitor;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -27,6 +28,13 @@ public class SysUiManagers {
             throw new IllegalArgumentException("Context cannot be null");
         if (prefs == null)
             throw new IllegalArgumentException("Prefs cannot be null");
+
+        try {
+            KeyguardMonitor = new KeyguardStateMonitor(context);
+        } catch (Throwable t) {
+            log("Error creating KeyguardMonitor: ");
+            XposedBridge.log(t);
+        }
 
         try {
             BatteryInfoManager = new BatteryInfoManager(context, prefs);
