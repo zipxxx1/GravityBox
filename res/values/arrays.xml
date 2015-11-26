@@ -316,6 +316,8 @@
     <string-array name="window_animation_scale_entries" translatable="false">
         <item>@string/animation_scale0</item>
         <item>@string/animation_scale1</item>
+        <item>@string/animation_scale10</item>
+        <item>@string/animation_scale11</item>
         <item>@string/animation_scale2</item>
         <item>@string/animation_scale8</item>
         <item>@string/animation_scale3</item>
@@ -330,6 +332,8 @@
     <string-array name="window_animation_scale_values" translatable="false" >
         <item>0</item>
         <item>.25</item>
+        <item>.35</item>
+        <item>.4</item>
         <item>.5</item>
         <item>.75</item>
         <item>1</item>
@@ -344,6 +348,8 @@
     <string-array name="transition_animation_scale_entries" translatable="false">
         <item>@string/animation_scale0</item>
         <item>@string/animation_scale1</item>
+        <item>@string/animation_scale10</item>
+        <item>@string/animation_scale11</item>
         <item>@string/animation_scale2</item>
         <item>@string/animation_scale8</item>
         <item>@string/animation_scale3</item>
@@ -358,6 +364,8 @@
     <string-array name="transition_animation_scale_values" translatable="false" >
         <item>0</item>
         <item>.25</item>
+        <item>.35</item>
+        <item>.4</item>
         <item>.5</item>
         <item>.75</item>
         <item>1</item>
@@ -372,6 +380,8 @@
     <string-array name="animator_duration_scale_entries">
         <item>@string/animation_scale0</item>
         <item>@string/animation_scale1</item>
+        <item>@string/animation_scale10</item>
+        <item>@string/animation_scale11</item>
         <item>@string/animation_scale2</item>
         <item>@string/animation_scale8</item>
         <item>@string/animation_scale3</item>
@@ -386,6 +396,8 @@
     <string-array name="animator_duration_scale_values" translatable="false" >
         <item>0</item>
         <item>.25</item>
+        <item>.35</item>
+        <item>.4</item>
         <item>.5</item>
         <item>.75</item>
         <item>1</item>

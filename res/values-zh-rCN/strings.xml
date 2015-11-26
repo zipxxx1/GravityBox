@@ -1095,6 +1095,8 @@
     <string name="animation_scale7">动画缩放 10x</string>
     <string name="animation_scale8">动画缩放 .75x</string>
     <string name="animation_scale9">动画缩放 1.25x</string>
+    <string name="animation_scale10">动画缩放 .35x</string>
+    <string name="animation_scale11">动画缩放 .4x</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">磁贴标签文字风格</string>

@@ -1074,6 +1074,8 @@
     <string name="animation_scale7">動畫刻度 10x</string>
     <string name="animation_scale8">動畫刻度 .75x</string>
     <string name="animation_scale9">動畫刻度 1.25x</string>
+    <string name="animation_scale10">動畫刻度 .35x</string>
+    <string name="animation_scale11">動畫刻度 .4x</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">瓷貼標題風格</string>

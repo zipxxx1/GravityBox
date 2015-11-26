@@ -1091,7 +1091,9 @@
     <string name="animation_scale7">Animáció lépték 10x</string>
     <string name="animation_scale8">Animáció lépték .75x</string>
     <string name="animation_scale9">Animáció lépték 1.25x</string>
-    
+    <string name="animation_scale10">Animáció lépték .35x</string>
+    <string name="animation_scale11">Animáció lépték .4x</string>
+
      <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Csempe felirat stílus</string>
     <string name="tile_label_style_normal">Normál</string>
