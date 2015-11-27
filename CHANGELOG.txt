@@ -1,3 +1,27 @@
+
+Changelog 5.3.3 - 27/11/2015
+--------------------------------------
+- Lockscreen shortcuts:
+--- don't allow unsafe GB actions (connectivity/location related) when device locked
+--- dynamically show/hide unsafe GB actions based on current lock screen security state
+--- don't offer GB actions which don't make sense in lock screen context (kill app, switch to last app, ...)
+--- offer GravityBox Unlock action
+--- dismiss lockscreen for certain GB actions (Google Now, Show recent apps)
+- QuickSettings management:
+--- improved security logic
+--- fixed secured tiles showing when lock screen activity is in the foreground (such as Camera)
+- Navbar: fixed custom key sometimes disappearing
+- Changed style of circle battery indicator (thanks to creeve4)
+- AppLauncher: don't show unsafe GB actions (connectivity/location related) when device locked
+- Added 0.35x and 0.4x animation scales (thanks to fonz93)
+- UNC: lowered minimum value for LED off setting to zero (thanks to creeve4)
+- Launcher tweaks: fixed scaling of Launcher icons and labels for the latest Google App versions
+- Added Persian translations (thanks to Masoud.ser)
+- Updated Russian translations (thanks to gaich)
+- Updated French translations (thanks to ch-vox)
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 5.3.2 - 31/10/2015
 --------------------------------------
 - QuickSettings management:
@@ -900,7 +924,7 @@ Changelog 3.1.6 - 13/06/2014
 --------------------------------------
 - Statusbar brightness control revised (thanks to jacknicholson)
 --- Prevent brightness changes after notifications panel has been opened
---- Don't adjust brightness for swipes <45° from vertical.
+--- Don't adjust brightness for swipes <45ï¿½ from vertical.
 - AppPicker preference: added support for choosing custom icons
 --- long-press on preference icon triggers custom icon pick
 --- single-press preserved (shows list of predefined icons)
