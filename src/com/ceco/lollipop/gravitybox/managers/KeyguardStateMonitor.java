@@ -161,8 +161,18 @@ public class KeyguardStateMonitor {
     }
 
     public boolean isShowing() {
-        return mIsShowing;
+        return (mIsShowing || isOccluded());
     }
+
+    public boolean isOccluded() {
+        if (mMediator == null) return false;
+        try {
+            return XposedHelpers.getBooleanField(mMediator, "mOccluded");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return false;
+        }
+     }
 
     public boolean isSecured() {
         if (mLockPatternUtils == null) return false;
