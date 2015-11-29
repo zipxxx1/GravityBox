@@ -116,6 +116,7 @@
     <string name="qs_tile_lock_screen">Экран блокировки</string>
     <string name="qs_tile_inversion">Инверсия</string>
     <string name="qs_tile_battery">Батарея</string>
+    <string name="qs_tile_dnd">Не беспокоить</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбор цвета</string>
@@ -236,7 +237,7 @@
     <string name="pref_hwkey_kill_delay_title">Время удержания для завершения</string>
     <string name="pref_hwkey_kill_delay_summary">Применимо к действию Завершить текущее приложение. Определяет, как долго нужно удерживать нажатие на кнопке, чтобы завершить приложение</string>
     <string name="pref_hwkey_doubletap_speed_title">Скорость двойного нажатия</string>
-    <string name="pref_hwkey_doubletap_speed_summary">Определяет, как быстро нужно нажать на кнопку для срабатывания двойного нажатия.</string>
+    <string name="pref_hwkey_doubletap_speed_summary">Определяет, как быстро нужно нажать на кнопку для срабатывания двойного нажатия</string>
     <string name="app_killed">Приложение %s завершено</string>
     <string name="nothing_to_kill">Нет приложений для завершения</string>
     <string name="no_previous_app_found">Предыдущее приложение не найдено</string>
@@ -257,7 +258,7 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Количество плиток в ряду</string>
-    <string name="pref_qs_tiles_per_row_summary">Установка количества плиток быстрых настроек в одном ряду. Размеры изменятся соответственно (применимо к портретному режиму на телефонах или любому на планшетах)</string>
+    <string name="pref_qs_tiles_per_row_summary">Установка количества плиток быстрых настроек в одном ряду</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Отображать день недели</string>
@@ -342,7 +343,7 @@
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Отключить нав. кнопки</string>
-    <string name="pref_hwkeys_disable_summary">Отключение одиночных нажатий на навигационных кнопках при включенном веерном меню.</string>
+    <string name="pref_hwkeys_disable_summary">Отключение одиночных нажатий на навигационных кнопках при включенном веерном меню</string>
 
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Использовать тёмную тему</string>
@@ -375,7 +376,7 @@
     <!-- GPS Tile (for non-MTK) -->
     <string name="qs_tile_gps_enabled">GPS вкл</string>
     <string name="qs_tile_gps_disabled">GPS выкл</string>
-    <string name="qs_tile_gps_locked">GPS блок</string>
+    <string name="qs_tile_gps_locked">GPS блокирован</string>
 
     <!-- Pie control: always show menu button -->
     <string name="pie_control_menu_title">Показывать кнопку меню</string>
@@ -475,7 +476,7 @@
 
     <!-- Statusbar brightness control -->
     <string name="pref_statusbar_brightness_title">Включить контроль яркости</string>
-    <string name="pref_statusbar_brightness_summary">Настройка яркости перемещением пальца вдоль строки состояния (необходимо, чтобы автоматическая яркость была отключена)</string>
+    <string name="pref_statusbar_brightness_summary">Настройка яркости перемещением пальца вдоль строки состояния</string>
 
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Телефония</string>
@@ -483,7 +484,7 @@
 
     <!-- Messaging: Strip unicode -->
     <string name="pref_mms_unicode_stripping_title">Изменять юникод</string>
-    <string name="pref_mms_unicode_stripping_summary">Конвертация символов юникода в обычные символы. Уменьшает общий размер сообщения.</string>
+    <string name="pref_mms_unicode_stripping_summary">Конвертация символов юникода в обычные символы. Уменьшает общий размер сообщения</string>
     <string name="unicode_stripping_leave_intact">Не изменять символы</string>
     <string name="unicode_stripping_non_encodable">Изменять некодируемые символы</string>
     <string name="unicode_stripping_all">Изменять все символы юникода</string>
@@ -532,7 +533,8 @@
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">Быстрая разблокировка</string>
-    <string name="pref_lockscreen_quick_unlock_summary">Автоматическая разблокировка при вводе верного PIN/пароля.</string>
+    <string name="pref_lockscreen_quick_unlock_summary">Автоматическая разблокировка при вводе верного PIN/пароля.
+        Поддержка до 6 символов</string>
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">Отключено</string>
@@ -559,7 +561,7 @@
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> свободно</string>
     <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
-    <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> использовано</string>
+    <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> использ.</string>
     <string name="pref_rambar_title">Панель памяти в недавних</string>
     <string name="rambar_off">Выключено</string>
     <string name="rambar_top">Сверху</string>
@@ -715,7 +717,7 @@
     <string name="screenrecord_notif_stop">Стоп</string>
     <string name="screenrecord_notif_pointer">Указатель</string>
     <string name="screenrecord_toast_error">Невозможно записать экран</string>
-    <string name="screenrecord_toast_processing">Невозможно начать новую запись, так как идёт обработка пердыдущей</string>
+    <string name="screenrecord_toast_processing">Невозможно начать новую запись, так как идёт обработка предыдущей</string>
     <string name="screenrecord_toast_saved">Запись сохранена как %s</string>
     <string name="screenrecord_toast_save_error">Невозможно сохранить запись в исходный файл</string>
     <string name="action_screenrecord">Запись экрана</string>
@@ -767,7 +769,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Скрыть после изменения</string>
-    <string name="pref_qs_hide_on_change_summary">Скрытие строки состояния по одиночному нажатию на плитке. 
+    <string name="pref_qs_hide_on_change_summary">Скрытие строки состояния по одиночному нажатию на плитке 
         Применимо к простым плиткам с 2 состояниями.</string>
 
     <!-- Power tweaks categories -->
@@ -1203,7 +1205,7 @@
     <string name="pref_lc_notif_insistent_summary">Если включено, аудиосигнал будет повторяться до тех пор, пока уведомление не будет отменено или не будет открыто его диалоговое окно</string>
     <string name="pref_lc_vibrate_override_title">Заменить вибрацию</string>
     <string name="pref_lc_vibrate_pattern_title">Виброотклик</string>
-    <string name="pref_lc_vibrate_pattern_summary">Список разделённых запятыми пар выключения/включения в миллисекундах. Установите 0 для отключения вибрации.</string>
+    <string name="pref_lc_vibrate_pattern_summary">Список разделённых запятыми пар выключения/включения в миллисекундах. Установите 0 для отключения вибрации</string>
     <string name="lc_vibrate_pattern_invalid">Неверный формат виброотклика</string>
 	
     <!-- Omni data traffic monitor inactivity threshold -->
@@ -1222,8 +1224,8 @@
     <string name="pref_lockscreen_show_pattern_error_summary">Отображение красным неправильного ввода графического ключа</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">Функция работает в пробном режиме. Если Вы считаете её полезной, можете продолжать пользоваться ей после регистрации 
-        ID транзакции пожертвования PayPal. Пробный период заканчивается через %d перезагрузок.</string>
+    <string name="trial_info">Функция работает в пробном режиме. Если Вы считаете её полезной, можете продолжать пользоваться ей после разблокировки премиум-функций. 
+        Пробный период заканчивается через %d перезагрузок.</string>
 
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">Умолчания</string>
@@ -1234,10 +1236,9 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Активный экран</string>
     <string name="lc_active_screen_info">Функция активного экрана автоматически включает экран при 
-        получении каждого нового уведомления. При этом, опционально, раскрывается панель уведомлений или отображаются уведомления
-        всплытия (в зависимости от текущей политики безопасности экрана блокировки и настроек пользователя). Имейте в виду, что для работы
-        активного экрана требуется, чтобы экран блокировки был включен.\nФункция активируется переключателем ниже. После включения 
-        возможно выполнить дополнительную конфигурацию по приложениям</string>
+        получении каждого нового уведомления. Имейте в виду, что для работы
+        активного экрана требуется, чтобы экран блокировки был включен.\nФункция активируется переключателем ниже.
+        После включения возможно выполнить дополнительную конфигурацию по приложениям</string>
     <string name="lc_active_screen_switch_title">Включение активного экрана</string>
 
     <!-- Notification control: Quiet hours -->
@@ -1461,7 +1462,7 @@
 
     <!-- MTK specific fixes category -->
     <string name="pref_cat_mtk_fixes_title">Исправления проблем MTK</string>
-    <string name="pref_cat_mtk_fixes_summary">Исправления общих для MediaTek специфических проблем. Используйте только при необходимости.</string>
+    <string name="pref_cat_mtk_fixes_summary">Исправления общих для MediaTek специфических проблем. Используйте только при необходимости</string>
 
     <!-- MTK Advanced Developer Options -->
     <string name="pref_mtk_fix_dev_opts_title">Доп. опции разработчика</string>
@@ -1765,7 +1766,7 @@
     <string name="pref_statusbar_disable_peek_title">Откл просмотр</string>
     <string name="pref_statusbar_disable_peek_summary">Строка состояния не будет раскрываться при одиночном нажатии</string>
 
-    <!-- Status bar: disable peek -->
+    <!-- Status bar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">Дв. нажатие для сна</string>
     <string name="pref_statusbar_dt2s_summary">Необходимо отключение просмотра</string>
 
@@ -1801,5 +1802,9 @@
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Политика прямой разблокировки</string>
+
+    <!-- Permission denial message -->
+    <string name="permission_denied_msg">Вы решили отозвать некоторые разрешения.
+        Имейте в виду, что это отключит функционал соответствующих функций.</string>
 
 </resources>
