@@ -168,7 +168,8 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
             if (mBatteryData.powerSource != newPowerSource) {
                 if (newPowerSource == 0) {
                     playSound(SOUND_UNPLUGGED);
-                } else if (newPowerSource != BatteryManager.BATTERY_PLUGGED_WIRELESS) {
+                } else if (newPowerSource != BatteryManager.BATTERY_PLUGGED_WIRELESS
+                        && mBatteryData.powerSource == 0) {
                     playSound(SOUND_PLUGGED);
                 }
             }
