@@ -116,6 +116,7 @@
     <string name="qs_tile_lock_screen">Écran de Déverrouillage</string>
     <string name="qs_tile_inversion">Inversion</string>
     <string name="qs_tile_battery">Batterie</string>
+    <string name="qs_tile_dnd">Ne pas déranger</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -532,7 +533,8 @@
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">Déverrouillage rapide</string>
-    <string name="pref_lockscreen_quick_unlock_summary">Pour un déverrouillage automatique lorsque le bon code PIN / mot de passe est saisi</string>
+    <string name="pref_lockscreen_quick_unlock_summary">Pour un déverrouillage automatique lorsque le bon code PIN / mot de passe est saisi
+        Supporte jusqu\'à 6 caractères</string>    
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">Désactivé</string>
@@ -573,7 +575,7 @@
     <string name="hwkey_action_torch">Commuter la torche</string>
 
     <!-- Volume panel: Show expanded -->
-    <string name="pref_volume_panel_autoexpand_title">Développer automatiquement</string>
+    <string name="pref_volume_panel_autoexpand_title">Expansion automatique du panneau de volume</string>
 
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">Touche menu</string>
@@ -1234,8 +1236,7 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Écran Actif</string>
     <string name="lc_active_screen_info">L\'option Écran Actif allume automatiquement l\'écran à chaque fois 
-        qu\'une nouvelle notification arrive. Elle peut en option dérouler le panneau de notification ou afficher une fenêtre flottante selon
-        la politique de sécurité de l\'écran de déverrouillage et les préférences utilisateur. Attention, l\'Écran Actif nécessite 
+        qu\'une nouvelle notification arrive. Attention, l\'Écran Actif nécessite 
         que l\'écran de déverrouillage soit actif. L\'interrupteur en-dessous est l\'interrupteur principal. Après qu\'il soit enclenché, 
         la configuration précise par application peut être effectuée</string>
     <string name="lc_active_screen_switch_title">Enclencher l\'Écran Actif</string>
@@ -1802,5 +1803,9 @@
 
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Principe de déverrouillage direct</string>
+
+    <!-- Permission denial message -->
+    <string name="permission_denied_msg">Vous avez décidé de refuser certaines permissions.
+        Notez que cela perturbera certaines fonctionnalités liées</string>
 
 </resources>
