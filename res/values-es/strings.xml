@@ -28,6 +28,8 @@
     <string name="vol_music_controls_summary">Cambiar canción con pulsación larga sobre los botones de volumen con la pantalla apagada</string>
 
     <string name="low_battery_warning_policy_title">Aviso de batería baja</string>
+    <string name="low_battery_warning_default">Predeterminado</string>
+    <string name="low_battery_warning_nonintrusive">No intrusiva</string>
     <string name="low_battery_warning_off">Desactivado</string>
 
     <string name="reboot_required">Los cambios se aplicarán después de reiniciar</string>
@@ -98,7 +100,8 @@
     <string name="qs_tile_autorotation">Rotación automática</string>
     <string name="qs_tile_sync">Sincronización</string>
     <string name="qs_tile_wifi_ap">Punto de acceso Wi-Fi</string>
-    <string name="qs_tile_torch_gb">Linterna</string>
+    <string name="qs_tile_torch_aosp">Linterna (Stock)</string>
+    <string name="qs_tile_torch_gb">Linterna (GravityBox)</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
     <string name="qs_tile_sleep">Apagar pantalla</string>
     <string name="qs_tile_quickrecord">Grabación rápida</string>
@@ -111,6 +114,9 @@
     <string name="qs_tile_music">Música</string>
     <string name="qs_tile_smart_radio">Modo de red inteligente</string>
     <string name="qs_tile_lock_screen">Bloquear pantalla</string>
+    <string name="qs_tile_inversion">Invertir</string>
+    <string name="qs_tile_battery">Batería</string>
+    <string name="qs_tile_dnd">No molestar</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de color</string>
@@ -195,6 +201,7 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotar en pantalla de bloqueo</string>
+    <string name="pref_lockscreen_rotation_summary">Requiere reinicio</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Activar botón menú</string>
@@ -270,6 +277,7 @@
     <string name="quick_pulldown_off">Desactivado</string>
     <string name="quick_pulldown_right">Derecha</string>
     <string name="quick_pulldown_left">Izquierda</string>
+    <string name="quick_pulldown_both">Ambos</string>
 
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Colores de la barra de estado</string>
@@ -435,6 +443,7 @@
     <string name="expanded_desktop_immersive_statusbar">Barra de estado inmersiva</string>
     <string name="expanded_desktop_immersive_navbar">Barra de navegación inmersiva</string>
     <string name="expanded_desktop_both">Ocultar ambas</string>
+    <string name="expanded_desktop_immersive">Immersiva</string>
     <string name="action_expanded_desktop_title">Escritorio expandido</string>
     <string name="action_expanded_desktop_on">El escritorio expandido está ACTIVADO</string>
     <string name="action_expanded_desktop_off">El escritorio expandido está DESACTIVADO</string>
@@ -524,7 +533,8 @@
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">Desbloqueo rápido</string>
-    <string name="pref_lockscreen_quick_unlock_summary">Desbloquear automáticamente al introducir un PIN o contraseña correctos</string>
+    <string name="pref_lockscreen_quick_unlock_summary">Desbloquear automáticamente al introducir un PIN o contraseña correctos.
+        Soporta hasta 6 caracteres.</string>
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">Deshabilitado</string>
@@ -699,6 +709,7 @@
     <string name="ringer_mode_vibrate">Vibrar</string>
     <string name="ringer_mode_sound">Sonar</string>
     <string name="ringer_mode_sound_vibrate">Sonar y vibrar</string>
+    <string name="ringer_mode_none">Ninguno</string>
 	
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Se está grabando la pantalla</string>
@@ -758,7 +769,8 @@
     
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Cerrar al pulsar</string>
-    <string name="pref_qs_hide_on_change_summary">Cierra la barra de estado automáticamente al pulsar en una casilla. Funciona en casillas de GravityBox y casillas predeterminadas modificadas.</string>
+    <string name="pref_qs_hide_on_change_summary">Cierra la barra de estado automáticamente al pulsar en una casilla.
+        Funciona en casillas de GravityBox y casillas predeterminadas modificadas.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menú de apagado</string>
@@ -991,8 +1003,7 @@
     <string name="pref_launcher_resize_widget_title">Redimensionar cualquier widget</string>
     <string name="pref_launcher_resize_widget_summary">Redimensiona cualquier widget a cualquier tamaño en la pantalla de inicio (requiere reiniciar el lanzador)</string>
  
- 
- <!-- Icon picker -->
+    <!-- Icon picker -->
     <string name="icon_picker_choose_icon_title">Elegir icono</string>
     <string name="shortcuts_icon_picker_alarm">Alarma</string>
     <string name="shortcuts_icon_picker_andy">Andy</string>
@@ -1113,6 +1124,9 @@
     <!-- GB Actions: Toggle Smart Radio -->
     <string name="shortcut_smart_radio_toggle">Activar/desactivar modo de red inteligente</string>
 
+    <!-- Master switch title -->
+    <string name="pref_masterswitch_title">Cambiar red automáticamente</string>
+
     <!-- Mute volume adjust vibrate -->
     <string name="pref_volume_adjust_vibrate_mute_title">Desactivar vibración al ajustar volumen</string>
     <string name="pref_volume_adjust_vibrate_mute_summary">Desactiva la vibración al ajustar el volumen de notificación/llamada usando los botones de volumen</string>
@@ -1210,7 +1224,8 @@
     <string name="pref_lockscreen_show_pattern_error_summary">Mostrar rastro rojo al introducir patrón incorrecto</string>
 
     <!-- Premium features: allow trial period -->
-    <string name="trial_info">Esta herramienta es para usuarios premium. Si la encuentras útil, puedes seguir usándola tras desbloquear el modo premium. Esta versión de prueba acaba tras %d reinicios.</string>
+    <string name="trial_info">Esta herramienta es para usuarios premium. Si la encuentras útil, puedes seguir usándola tras desbloquear el modo premium.
+        Esta versión de prueba acaba tras %d reinicios.</string>
 
     <!-- Notification control: default settings -->
     <string name="lc_activity_menu_default_settings">Ajustes predeterminados</string>
@@ -1220,10 +1235,8 @@
     
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">Pantalla activa</string>
-    <string name="lc_active_screen_info">Pantalla activa enciende automáticamente la pantalla cuando
-        hay nuevas notificaciones. Sólo ocurrirá si la pantalla no está tapada 
-        (por ejemplo, al sacar del bolsillo). Opcionalmente expande el panel de notificación o muestra las notificaciones Heads Up dependiendo 
-        de la actual política de bloqueo de pantalla y de la preferencia del usuario. Pantalla activa requiere tener activada la
+    <string name="lc_active_screen_info">Pantalla activa enciende automáticamente la pantalla cuando hay nuevas notificaciones. Sólo ocurrirá si la pantalla no está tapada 
+        (por ejemplo, al sacar del bolsillo). Opcionalmente expande el panel de notificación o muestra las notificaciones Heads Up dependiendo de la actual política de bloqueo de pantalla y de la preferencia del usuario. Pantalla activa requiere tener activada la
         pantalla de bloqueo.\nDebajo está el interruptor principal. Tras activar, 
         se pueden configurar más opciones por app</string>
     <string name="lc_active_screen_switch_title">Activar Pantalla activa</string>
@@ -1254,7 +1267,6 @@
     <string name="pref_lc_qh_cat_weekdays_title">Días entre semana</string>
     <string name="pref_lc_qh_cat_weekend_title">Fin de semana</string>
     
-
     <!-- Force English locale -->
     <string name="pref_force_english_locale_title">Forzar idioma a inglés</string>
 
@@ -1291,6 +1303,13 @@
     <string name="increasing_ring_enable">Activar</string>
     <string name="increasing_ring_min_volume_title">Volumen inicial</string>
     <string name="increasing_ring_volume_notice">Aviso:\nSi el volumen inicial es mayor que el de llamada, el volumen usado será el de este último.</string>
+    <string name="increasing_ring_ramp_up_duration_title">Ramp-up duration</string>
+    <string name="increasing_ring_interval_0">5 segundos</string>
+    <string name="increasing_ring_interval_1">10 segundos</string>
+    <string name="increasing_ring_interval_2">15 segundos</string>
+    <string name="increasing_ring_interval_3">20 segundos</string>
+    <string name="increasing_ring_interval_4">25 segundos</string>
+    <string name="increasing_ring_interval_5">30 segundos</string>
 
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
@@ -1345,6 +1364,7 @@
     <string name="quick_settings_compass_off">Brújula desactivada</string>
     <string name="quick_settings_compass_init">Inicializando&#8230;</string>
 
+
     <!-- Cardinal directions -->
     <string name="cd_north">N</string>
     <string name="cd_north_east">NE</string>
@@ -1356,7 +1376,6 @@
     <string name="cd_north_west">NO</string>
     
     <!-- Pie: mirrored keys -->
-    <!-- cannot find any proper translation -->
     <string name="pref_pie_control_mirrored_keys_title">Mirrored keys</string>
     
     <!-- Pie: center trigger -->
@@ -1382,7 +1401,8 @@
     
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Modo interactivo</string>
-    <string name="pref_lc_qh_interactive_summary">Siempre silencia las notificaciones durante la interacción del usuario (respetando las reglas de cada app para evitarlo)</string>
+    <string name="pref_lc_qh_interactive_summary">Siempre silencia las notificaciones durante la interacción del usuario 
+        (respetando las reglas de cada app para evitarlo)</string>
 
     <!-- UNC: heads up mode -->
     <string name="pref_lc_headsup_mode_title">Modo Heads up</string>
@@ -1400,6 +1420,7 @@
  
      <!-- UNC HeadsUp category + additional options -->
     <string name="pref_cat_lc_heads_up_title">Heads up</string>
+    <string name="pref_lc_headsup_dnd_title">No molestar</string>
     <string name="pref_lc_headsup_dnd_summary">No mostrará notificaciones heads up mientras esta aplicación esté ejecutándose en primer plano</string>
 
     <!-- UNC Active Screen Mode -->
@@ -1448,6 +1469,10 @@
     <string name="pref_mtk_fix_dev_opts_title">Ajustes avanzados para desarrolladores</string>
     <string name="pref_mtk_fix_dev_opts_summary">Desbloquea los ajustes avanzados para desarrolladores (requiere reinicio)</string>
 
+    <!-- MTK Fix speech settings -->
+    <string name="pref_mtk_fix_tts_settings_title">Fijar opciones de voz</string>
+    <string name="pref_mtk_fix_tts_settings_summary">Desbloquea ajustes de búsqueda por voz y texto a voz en idioma&amp;de entrada (requiere reiniciar)</string>
+
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Elegir imagen usando</string>
     <string name="imgpick_choose_error">Error al elegir imagen</string>
@@ -1468,7 +1493,6 @@
     <string name="headsup_snooze_all_apps">Establecer para todas las apps</string>
     <string name="headsup_snooze_app">No molestar durante %s</string>
     <string name="pref_heads_up_snooze_reset_title">Restablecer tiempo de No molestar</string>
-
     <string name="pref_heads_up_snooze_timer_title">Tiempo de No molestar predeterminado</string>
     <string name="pref_heads_up_snooze_timer_summary">Tiempo a establecer automáticamente cuando se pulsa el icono de No molestar en la notificación Heads up. 
         Una pulsación prolongada sobre dicho icono abre el diálogo para cambiar el tiempo.</string>
@@ -1483,6 +1507,7 @@
     <string name="system_sound_touch">Tonos táctiles</string>
     <string name="system_sound_screen_lock">Pantalla de bloqueo</string>
     <string name="system_sound_charger">Sonidos de carga de GB</string>
+    <string name="system_sound_ringer">Tono de llamada</string>
 
     <!-- Proximty wake: ignore for incoming call -->
     <string name="pref_power_proximity_wake_ignore_call_title">Ignorar para llamadas entrantes</string>
@@ -1490,7 +1515,8 @@
     <!-- Status bar: show download progress -->
     <string name="pref_statusbar_download_progress_title">Progreso de descargas</string>
     <string name="pref_statusbar_download_progress_summary">Muestra una barra de progreso en la barra de estado para las descargas realizas 
-    	a través del gestor de descargas estándar de Android</string>
+    	a través del gestor de descargas
+         estándar de Android</string>
     <string name="sb_download_progress_off">Desactivado</string>
     <string name="sb_download_progress_top">Borde superior</string>
     <string name="sb_download_progress_bottom">Borde inferior</string>
@@ -1499,4 +1525,287 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">Ocultar etiquetas de SIM</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Requiere reinicio</string>
  
+    <!-- QS: network mode tile 2g+3g mode -->
+    <string name="pref_network_mode_tile_2g3g_mode_title">Modo 2G+3G</string>
+
+
+
+    <!-- Power menu: expanded desktop in power menu -->
+    <string name="pref_powermenu_expanded_desktop_title">Escritorio expandido en el menú de apagado</string>
+    <string name="pref_powermenu_expanded_desktop_summary">Asegúrese que el método alternativo de escritorio expandido este disponible!!!</string>
+
+    <!-- QuickRecord tile settings -->
+    <string name="pref_cat_quickrecord_tile_title">Ajuste casilla QuickRecord</string>
+    <string name="pref_quickrecord_quality_title">Calidad del audio</string>
+    <string name="qr_audio_quality_low">Baja (16kHz)</string>
+    <string name="qr_audio_quality_medium">Media (22kHz)</string>
+    <string name="qr_audio_quality_high">Alta (44kHz)</string>
+    <string name="pref_quickrecord_autostop_title">Grabación con auto-stop</string>
+    <string name="pref_quickrecord_autostop_summary">Detiene la grabación automáticamente después de un tiempo especificado. Establecer a 0 para desactivar.</string>
+
+    <!-- Clear notifications shortcut -->
+    <string name="shortcut_clear_notifications">Limpiar notificaciones</string>
+
+    <!-- Toggle auto brightness shortcut -->
+    <string name="shortcut_auto_brightness">On/Off brillo automático</string>
+
+    <!-- Messaging -->
+    <string name="pref_cat_phone_messaging_title">Mensajería</string>
+
+    <!-- Compatibility warning -->
+    <string name="compat_warning_title">ADVERTENCIA</string>
+    <string name="compat_warning_message">USAR SÓLO EN DISPOSITIVOS ANDROID PUROS O GOOGLE PLAY EDITIONS!\n\nEl uso en cualquier otra marca con capa de personalización
+        como Touchwiz, Sense, Xperia, o cualquier custom ROM, no está soportado y puede obtener resultados inesperados.\n\nSi procede,
+        será bajo su responsabilidad y riesgo. Para más información,
+        visitar <a href="http://forum.xda-developers.com/showthread.php?t=3251148">el hilo de XDA</a>.</string>
+    <string name="compat_warning_ok_stage1">OK. Entiendo los riesgos.</string>
+    <string name="compat_warning_ok_stage2">Realmente entiendo los riesgos!</string>
+
+    <!-- UNC Active screen: Pocket mode -->
+    <string name="pref_unc_as_pocket_mode_title">Modo bolsillo</string>
+    <string name="pref_unc_as_pocket_mode_summary">No encender la pantalla cuando el dispositivo está cubierto (por ejemplo cuando el dispositivo está en el bolsillo)</string>
+    <string name="pref_unc_as_pocket_mode_summary_overriden">Esta opción actualmente sustituirá la función despertador de proximidad en ajustes de encendido</string>
+
+    <!-- Navbar: Left handed mode -->
+    <string name="pref_navbar_left_handed_title">Modo zurdo</string>
+    <string name="pref_navbar_left_handed_summary">¡EXPERIMENTAL! Coloca la barra de navegación vertical en el lado izquierdo de la pantalla en modo horizontal (requiere reiniciar)</string>
+
+    <!-- Hide launcher icon -->
+    <string name="pref_hide_launcher_icon_title">Ocultar icono del lanzador</string>
+    <string name="pref_hide_launcher_icon_summary">Puede requerir reiniciar lanzador</string>
+
+    <!-- Smart Radio: Adaptive delay for delayed power save -->
+    <string name="pref_smart_radio_adaptive_delay_title">Retardo adaptativo</string>
+    <string name="pref_smart_radio_adaptive_delay_summary">Prolonga automáticamente retraso
+         si el tráfico de datos móviles corriente supera el umbral definido (Ajuste a 0 para deshabilitar)</string>
+
+    <!-- UNC: Progress bar tracking -->
+    <string name="pref_lc_progress_tracking_title">Seguimiento en barra de progreso</string>
+    <string name="pref_lc_progress_tracking_summary">Muestra la barra de progreso en la barra de estado para las notificaciones en curso
+         que contenga la barra de progreso. Requiere característica de barra de progreso en la barra de estado para estar habilitado.</string>
+
+    <!-- Data traffic monitor: display mode -->
+    <string name="pref_data_traffic_display_mode_title">Modo de visualización</string>
+    <string name="dt_display_mode_always">Siempre (cuando hay conexión disponible)</string>
+    <string name="dt_display_mode_dm">Sólo Para Android Manager Download</string>
+    <string name="dt_display_mode_pt">Cuando la barra de progreso en la barra de estado se está mostrand</string>
+
+    <!-- Wi-Fi priority -->
+    <string name="pref_wifi_priority_title">Prioridad Wi-Fi</string>
+    <string name="pref_wifi_priority_summary">Èspecifica la prioridad de las conexiones Wi-Fi</string>
+
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">Barra de batería</string>
+    <string name="pref_battery_bar_show_title">Mostrar barra de batería</string>
+    <string name="pref_battery_bar_position_title">Posición</string>
+    <string name="bbar_position_top">Borde superior</string>
+    <string name="bbar_position_bottom">Borde inferior</string>
+    <string name="pref_battery_bar_margin_title">Margen del borde</string>
+    <string name="pref_battery_bar_thickness_title">Grosor</string>
+    <string name="pref_battery_bar_charge_anim_title">Animación de carga</string>
+    <string name="pref_battery_bar_dynacolor_title">Color dinámico</string>
+    <string name="pref_battery_bar_dynacolor_summary">Determina el color de la batería actual de forma automática</string>
+
+    <string name="pref_battery_bar_color_low_title">Color de batería baja</string>
+    <string name="pref_battery_bar_color_critical_title">Color de batería crítica</string>
+    <string name="pref_battery_bar_centered_title">Centrada</string>
+    <string name="pref_battery_bar_color_charging_title">Color en carga</string>
+
+    <!-- Status bar: progress bar -->
+    <string name="pref_statusbar_download_progress_mode_title">Modo</string>
+    <string name="pref_statusbar_download_progress_animated_title">Animada</string>
+    <string name="pref_statusbar_download_progress_centered_title">Centrada</string>
+    <string name="pref_statusbar_download_progress_thickness_title">Grosor</string>
+    <string name="pref_statusbar_download_progress_margin_title">Margen del borde</string>
+
+    <!-- Key actions: single-tap for menu button -->
+    <string name="hwkey_menu_singletap_dialog_title">Acción al tocar el botón menú</string>
+
+    <!-- Key actions: single-tap for back button -->
+    <string name="hwkey_back_singletap_dialog_title">Acción al tocar la tecla atrás</string>
+
+    <!-- Key actions: double-tap for recents button -->
+    <string name="hwkey_recents_doubletap_dialog_title">Acción al tocar la tecla apps recientes</string>
+
+    <!-- Volume panel: default timeout -->
+    <string name="volume_panel_timeout_default">Predeterminado</string>
+
+    <!-- Tri state pref -->
+    <string name="state_default">Predeterminado</string>
+    <string name="state_enabled">Activado</string>
+    <string name="state_disabled">Desactivado</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">Batería stock con porcentaje</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">Mostrar en la barra de estado</string>
+    <string name="battery_percent_text_statusbar_summary">Mostrar texto de porcentaje de batería en la barra de estado estándar (cuando el dispositivo está bloqueado)</string>
+    <string name="battery_percent_text_keyguard_title">Modo de bloqueo del teclado</string>
+    <string name="battery_percent_text_keyguard_summary">Especifica el comportamiento del porcentaje de texto en la barra de estado de la pantalla de bloqueo</string>
+    <string name="keyguard_percent_text_default">Predeterminado (mientras carga)</string>
+    <string name="keyguard_percent_text_show_always">Mostrar siempre</string>
+    <string name="keyguard_percent_text_hide">Oculto</string>
+    <string name="battery_percent_text_header_hide_title">Oculto en la cabecera de la barra de estado</string>
+    <string name="battery_percent_text_size_default">Predeterminado</string>
+
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">Utilizar iconos grandes</string>
+    <string name="pref_navbar_larger_icons_summary">Requiere reiniciar</string>
+
+    <!-- Power menu: allow soft reboot -->
+    <string name="pref_reboot_allow_softreboot_title">Permitir reinicio por software</string>
+    <string name="pref_reboot_allow_softreboot_summary">Tenga en cuenta que el reinicio por software puede causar
+        descarga de la batería o inestabilidad problemas inesperados. La mejor práctica es utilizar siempre reinicio normal.</string>
+
+    <!-- Recents panel search bar -->
+    <string name="pref_recents_searchbar_title">Visibilidad de la barra de búsqueda</string>
+    <string name="recents_searchbar_default">Predeterminado</string>
+    <string name="recents_searchbar_hide_keep_space">Ocultar y respetar espacio</string>
+    <string name="recents_searchbar_hide_remove_space">Ocultar y eliminar espacio</string>
+
+    <!-- Old GB to new GB one-time dialog -->
+    <string name="gb_new_package_dialog_title">ATENCIÓN</string>
+    <string name="gb_new_package_dialog_message">GravityBox para Lollipop se encuentra instalada.
+         Antes de una nueva versión a utilizar, ha de desinstalar la vieja. Pulse OK para iniciar el proceso de desinstalación.
+         Después de la desinstalación, no se olvide de activar el nuevo módulo en el instalador de Xposed y reiniciar INMEDIATAMENTE.</string>
+
+    <!-- Restore settings: warn if old backup exists -->
+    <string name="settings_restore_backup_obsolete">Copia de seguridad realizada en la versión anterior de Android no se puede restaurar por
+         diferencias en el SO. Es muy recomendable configurar GravityBox desde cero.</string>
+
+    <!-- Traffic meter: show in lock screen -->
+    <string name="pref_data_traffic_lockscreen_title">Mostrar en la pantalla de bloqueo</string>
+    <string name="pref_data_traffic_lockscreen_summary">Siempre mostrar centrado en la pantalla de bloqueo</string>
+
+    <!-- QS: Hide brightness slider -->
+    <string name="pref_qs_hide_brightness_title">Ocultar control deslizante de brillo</string>
+
+    <!-- SignalCluster: reduce icon spacing -->
+    <string name="pref_signal_cluster_narrow_title">Reduces signal icon spacing</string>
+    <string name="pref_signal_cluster_narrow_summary">Reducir la separación del icono de señal</string>
+
+    <!-- Navigation bar: hide IME switcher -->
+    <string name="pref_navbar_hide_ime_title">Ocultar IME switcher</string>
+
+    <!-- Lockscreen: direct unlock -->
+    <string name="pref_lockscreen_direct_unlock_title">Desbloqueo directo</string>
+    <string name="pref_lockscreen_direct_unlock_summary">Muestra reto de seguridad directamente cuando la pantalla se enciende</string>
+
+    <string name="direct_unlock_standard">Estándar</string>
+    <string name="direct_unlock_see_through">Ver a través de</string>
+
+    <!-- UNC: Notification visibility -->
+    <string name="pref_lc_notif_visibility_title">Visibilidad</string>
+    <string name="pref_lc_notif_visibility_summary">Especifica la visibilidad de notificación en la pantalla de bloqueo seguro. 
+        Aplicar cuando \"Ocultar contenido de notificación sensibles\" en la política de bloqueo de pantalla está activo</string>
+    <string name="lc_notif_visibility_default">Predeterminado</string>
+    <string name="lc_notif_visibility_public">Mostrar todo el contenido</string>
+    <string name="lc_notif_visibility_private">Ocultar contenido sensible</string>
+    <string name="lc_notif_visibility_secret">Ocultar notificación</string>
+
+    <!-- Cellular tile settings -->
+    <string name="pref_cat_qs_cell_tile_title">Celda de ajustes del teléfono</string>
+
+    <!-- Cellular tile: data off icon -->
+    <string name="pref_cell_tile_data_off_icon_title">Icono apagar datos</string>
+    <string name="pref_cell_tile_data_off_icon_summary">Mostrar icono cuando los datos están apagados</string>
+
+    <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">Accesos directos</string>
+    <string name="pref_lockscreen_shortcuts_summary">Permite definir los accesos directos de la pantalla de bloqueo</string>
+
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">Lanzamiento segura</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">Requiere doble toque para iniciar accesos directos
+         evitando que sean lanzadas apps accidentalmente mientras, por ejemplo, el dispositivo está en el bolsillo</string>
+
+    <!-- Lockscreen Smart unlock -->
+
+    <string name="pref_lockscreen_smart_unlock_summary">Desbloquea automáticamente cuando la política actual de bloqueo inteligente
+         detecta las condiciones de confianza</string>
+
+    <!--  WiFi trusted networks -->
+    <string name="wifi_trusted_info">Confianza para Smart Lock</string>
+
+    <!-- QS: Battery tile settings -->
+    <string name="pref_cat_qs_battery_tile_title">Celda de batería</string>
+    <string name="pref_battery_tile_percentage_title">Mostrar porcentaje</string>
+    <string name="pref_battery_tile_saver_indicate_title">Indicación de ahorro de batería</string>
+    <string name="pref_battery_tile_saver_indicate_summary">Utiliza el mismo color que las barras del sistema
+         para indicar que la batería de ahorro de modo está activo</string>
+    <string name="pref_battery_tile_temp_unit_title">Unidad de temperatura</string>
+    <string name="celsius">Grados</string>
+
+    <string name="pref_battery_tile_swap_actions_title">Acciones swap</string>
+    <string name="pref_battery_tile_swap_actions_summary">Acciones swap en simple/larga pulsación</string>
+
+    <!-- Power: Disable battery saver indication -->
+    <string name="pref_battery_saver_indication_disable_title">Desactivar indicación de ahorro de batería</string>
+    <string name="pref_battery_saver_indication_disable_summary">Desactivar color naranja de la barra del sistema 
+        cuando el indicador de ahorro de batería está activo</string>
+
+    <!-- Signal cluster: Disable exclamation marks -->
+    <string name="pref_signal_cluster_dem_title">Desactivar signos de exclamación</string>
+    <string name="pref_signal_cluster_dem_summary">Requiere reinicio</string>
+
+    <!-- UNC: Disable sound to vibrate conversion -->
+    <string name="pref_lc_sound_vibrate_title">Desactivar sonido a la conversión de vibraciones</string>
+    <string name="pref_lc_sound_vibrate_summary">Evita las notificaciones que tienen vibraciones 
+         a vibrar sólo durante el modo de timbre</string>
+
+    <!-- UNC: QuietHours: disable haptic feedback -->
+    <string name="pref_lc_qh_disable_haptic_feedback_title">Desactivar retroalimentación háptica</string>
+
+    <!-- Recents: clear visible only -->
+    <string name="pref_recents_clear_all_visible_title">Limpiar solo visibles</string>
+
+    <!-- Lockscreen: doubletap to sleep -->
+    <string name="pref_lockscreen_dt2s_title">Doble toque para apagar pantalla</string>
+
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_disable_peek_title">Desactivar apertura de barra</string>
+    <string name="pref_statusbar_disable_peek_summary">Evitar abrir la barra de estado en una simple pulsación</string>
+
+    <!-- Status bar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">Doble toque para bloquear pantalla</string>
+    <string name="pref_statusbar_dt2s_summary">Requiere apertura de barra estar deshabilitado</string>
+
+    <!-- Pie trigger indicator -->
+    <string name="pref_pie_control_trigind_title">Indicador del disparador</string>
+    <string name="pref_pie_control_trigind_color_title">Color indicador del disparador</string>
+
+    <!-- WiFi tile settings -->
+    <string name="pref_cat_qs_wifi_tile_title">Celda ajustes Wifi</string>
+
+    <!-- Bluetooth tile settings -->
+    <string name="pref_cat_qs_bt_tile_title">Celda ajustes Bluetooth</string>
+
+    <!-- MTK tiles: HotKnot -->
+
+
+    <!-- MTK: disable network type indicators -->
+    <string name="pref_signal_cluster_dnti_title">Desactivar los indicadores de tipo de red</string>
+    <string name="pref_signal_cluster_dnti_summary">Requiere reinicio</string>
+
+    <!-- Signal cluster: Disable "No SIM" icon -->
+    <string name="pref_signal_cluster_nosim_title">Desactivar icino \"No SIM\"</string>
+    <string name="pref_signal_cluster_nosim_summary">Requiere reinicio</string>
+
+    <!-- QS: tile options menu -->
+    <string name="menu_tile_dual">Modo dual</string>
+    <string name="menu_tile_locked">Mostrar en pantalla de bloqueo</string>
+    <string name="menu_tile_locked_only">Sólo en pantalla de bloqueo</string>
+    <string name="menu_tile_secured">Mostrar en la pantalla de bloqueo segura</string>
+    <string name="tile_hidden_locked">Ocultar de la pantalla de bloqueo</string>
+    <string name="tile_hidden_secured">Ocultar de la pantalla de bloqueo segura</string>
+    <string name="tile_shown_locked_only">Mostrar sólo en pantalla de bloqueo</string>
+
+    <!-- Lockscreen: Direct unlock policy -->
+    <string name="pref_lockscreen_direct_unlock_policy_title">Política de desbloqueo directo</string>
+
+    <!-- Permission denial message -->
+    <string name="permission_denied_msg">Usted ha decidido negar algunos de los permisos.
+         Tenga en cuenta que esto evitará que funcionen características relacionadas.</string>
+
 </resources>
