@@ -35,7 +35,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.Vibrator;
@@ -239,7 +238,7 @@ public class ModDialer {
 
                     refreshPhonePrefs();
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_CALLER_FULLSCREEN_PHOTO, false)) { 
-                    final View v = ((Fragment) param.thisObject).getView(); 
+                    final View v = ((Fragment)param.thisObject).getView();
                         v.setBackgroundColor(0);
                         if (Utils.isMtkDevice()) {
                             final View gpView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowpad");
@@ -256,39 +255,44 @@ public class ModDialer {
         try {
             final Class<?> classCallCardFragment = XposedHelpers.findClass(CLASS_CALL_CARD_FRAGMENT, classLoader);
 
-            XposedHelpers.findAndHookMethod(classCallCardFragment, "setDrawableToImageView",
-                    ImageView.class, Drawable.class, new XC_MethodHook() {
+            XC_MethodHook unknownCallerHook = new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (!prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_CALLER_UNKNOWN_PHOTO_ENABLE, false)) return;
 
-                    boolean shouldShowUnknownPhoto = param.args[1] == null;
-                    if (param.args[1] != null) {
-                        final Fragment frag = (Fragment) param.thisObject;
-                        final Resources res = frag.getResources();
+                    int idx = param.args.length-1;
+                    boolean shouldShowUnknownPhoto = param.args[idx] == null;
+                    final Fragment frag = (Fragment) param.thisObject;
+                    final Resources res = frag.getResources();
+                    if (param.args[idx] != null) {
                         String resName = "img_no_image_automirrored";
                         Drawable picUnknown = res.getDrawable(res.getIdentifier(resName, "drawable",
                                         res.getResourcePackageName(frag.getId())), null);
-                        shouldShowUnknownPhoto = ((Drawable)param.args[1]).getConstantState().equals(
+                        shouldShowUnknownPhoto = ((Drawable)param.args[idx]).getConstantState().equals(
                                                     picUnknown.getConstantState());
                     }
 
                     if (shouldShowUnknownPhoto) {
-                        final ImageView iv = (ImageView) param.args[0];
-                        final Context context = iv.getContext();
-                        final String path = Utils.getGbContext(context).getFilesDir() + "/caller_photo";
+                        final String path = Utils.getGbContext(frag.getContext()).getFilesDir() + "/caller_photo";
                         File f = new File(path);
                         if (f.exists() && f.canRead()) {
                             Bitmap b = BitmapFactory.decodeFile(path);
                             if (b != null) {
-                                param.args[1] = new BitmapDrawable(context.getResources(), b);
+                                param.args[idx] = new BitmapDrawable(res, b);
                                 if (DEBUG) log("Unknow caller photo set");
                             }
                         }
                     }
                 }
-            });
+            };
+            try {
+                XposedHelpers.findAndHookMethod(classCallCardFragment, "setDrawableToImageView",
+                        ImageView.class, Drawable.class, unknownCallerHook);
+            } catch (Throwable t) {
+                XposedHelpers.findAndHookMethod(classCallCardFragment, "setDrawableToImageViews",
+                        Drawable.class, unknownCallerHook);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
