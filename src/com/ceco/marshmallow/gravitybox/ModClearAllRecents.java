@@ -322,10 +322,10 @@ public class ModClearAllRecents {
                                     mSearchBarOriginalHeight);
                         }
                     } else if (mSearchBarStatePrev != SearchBarState.DEFAULT && hasTasks) {
-                        if ((Boolean) XposedHelpers.callMethod(mRecentsView, "hasSearchBar")) {
+                        if ((Boolean) XposedHelpers.callMethod(mRecentsView, "hasValidSearchBar")) {
                             XposedHelpers.callMethod(mRecentsView, "setSearchBarVisibility", View.VISIBLE);
                         } else {
-                            XposedHelpers.callMethod(param.thisObject, "addSearchBarAppWidgetView");
+                            XposedHelpers.callMethod(param.thisObject, "refreshSearchWidgetView");
                         }
                         mSearchBarStatePrev = mSearchBarState;
                     }
