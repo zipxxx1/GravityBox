@@ -1,5 +1,6 @@
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import android.provider.Settings;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -33,9 +34,10 @@ public class BluetoothTile extends AospTile {
     public boolean handleLongClick() {
         if (!mDualMode) {
             XposedHelpers.callMethod(mTile, "handleSecondaryClick");
-            return true;
+        } else {
+            startSettingsActivity(Settings.ACTION_BLUETOOTH_SETTINGS);
         }
-        return false;
+        return true;
     }
 
     @Override
