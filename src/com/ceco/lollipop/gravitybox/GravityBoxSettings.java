@@ -813,6 +813,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_CAT_KEY_CELL_TILE = "pref_cat_qs_cell_tile";
     public static final String PREF_KEY_CELL_TILE_DATA_OFF_ICON = "pref_cell_tile_data_off_icon";
     public static final String EXTRA_CELL_TILE_DATA_OFF_ICON = "cellTileDataOffIcon";
+    public static final String PREF_KEY_CELL_TILE_DATA_TOGGLE = "pref_cell_tile_data_toggle";
+    public static final String EXTRA_CELL_TILE_DATA_TOGGLE = "cellTileDataToggle";
 
     public static final String PREF_CAT_KEY_BATTERY_TILE = "pref_cat_qs_battery_tile";
     public static final String PREF_KEY_BATTERY_TILE_PERCENTAGE = "pref_battery_tile_percentage";
@@ -2261,6 +2263,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 dup.setSummary(dup.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_CELL_TILE_DATA_TOGGLE)) {
+                ListPreference p = (ListPreference) findPreference(PREF_KEY_CELL_TILE_DATA_TOGGLE);
+                p.setSummary(p.getEntry());
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -3080,6 +3087,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_CELL_TILE_DATA_OFF_ICON)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_CELL_TILE_DATA_OFF_ICON, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_CELL_TILE_DATA_TOGGLE)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_CELL_TILE_DATA_TOGGLE, prefs.getString(key, "DISABLED"));
             } else if (PREF_KEY_LOCKSCREEN_SHORTCUT.contains(key)) {
                 intent.setAction(ACTION_PREF_LOCKSCREEN_SHORTCUT_CHANGED);
                 intent.putExtra(EXTRA_LS_SHORTCUT_SLOT,

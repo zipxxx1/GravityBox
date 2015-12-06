@@ -1847,4 +1847,10 @@
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Principe de déverrouillage direct</string>
 
+    <!-- Cellular tile Mobile data toggle -->
+    <string name="pref_cell_tile_data_toggle_title">Interrupteur données mobile</string>
+    <string name="tile_data_toggle_disabled">Désactivé</string>
+    <string name="tile_data_toggle_singlepress">Sur appui simple</string>
+    <string name="tile_data_toggle_longpress">Sur appui long</string>
+
 </resources>

@@ -1187,4 +1187,16 @@
         <item>F</item>
     </string-array>
 
+    <string-array name="tile_data_toggle_entries" translatable="false">
+        <item>@string/tile_data_toggle_disabled</item>
+        <item>@string/tile_data_toggle_singlepress</item>
+        <item>@string/tile_data_toggle_longpress</item>
+    </string-array>
+
+    <string-array name="tile_data_toggle_values" translatable="false">
+        <item>DISABLED</item>
+        <item>SINGLEPRESS</item>
+        <item>LONGPRESS</item>
+    </string-array>
+
 </resources>

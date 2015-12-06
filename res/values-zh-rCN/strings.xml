@@ -1847,4 +1847,10 @@
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">直接解锁策略</string>
 
+    <!-- Cellular tile Mobile data toggle -->
+    <string name="pref_cell_tile_data_toggle_title">切换移动数据</string>
+    <string name="tile_data_toggle_disabled">禁用</string>
+    <string name="tile_data_toggle_singlepress">单击打开</string>
+    <string name="tile_data_toggle_longpress">长按打开</string>
+
 </resources>

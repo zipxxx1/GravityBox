@@ -25,6 +25,8 @@ public class CellularTile extends AospTile {
     public static final String KEY = "aosp_tile_cell";
     public static final String KEY2 = "aosp_tile_cell2";
 
+    public static enum DataToggle { DISABLED, SINGLEPRESS, LONGPRESS };
+
     private String mAospKey;
     private Unhook mCreateTileViewHook;
     private ImageView mDataOffView;
@@ -35,6 +37,7 @@ public class CellularTile extends AospTile {
     private Unhook mSupportsDualTargetsHook;
     private Unhook mHandleClickHook;
     private boolean mClickHookBlocked;
+    private DataToggle mDataToggle;
 
     protected CellularTile(Object host, String aospKey, String key, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -101,6 +104,8 @@ public class CellularTile extends AospTile {
 
         mDataOffIconEnabled = mPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_CELL_TILE_DATA_OFF_ICON, false);
+        mDataToggle = DataToggle.valueOf(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_CELL_TILE_DATA_TOGGLE, "DISABLED"));
     }
 
     @Override
@@ -111,6 +116,10 @@ public class CellularTile extends AospTile {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_CELL_TILE_DATA_OFF_ICON)) {
                 mDataOffIconEnabled = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_CELL_TILE_DATA_OFF_ICON, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_CELL_TILE_DATA_TOGGLE)) {
+                mDataToggle = DataToggle.valueOf(intent.getStringExtra(
+                        GravityBoxSettings.EXTRA_CELL_TILE_DATA_TOGGLE));
             }
         }
     }
@@ -199,7 +208,22 @@ public class CellularTile extends AospTile {
 
     @Override
     public boolean handleLongClick() {
-        return (isDualModeEnabled() ? false : showDetail());
+        if (isDualModeEnabled()) {
+            if (mDataToggle == DataToggle.LONGPRESS) {
+                toggleMobileData();
+                return true;
+            }
+            return false;
+        } else {
+            if (mDataToggle == DataToggle.LONGPRESS) {
+                toggleMobileData();
+                return true;
+            } else if (mDataToggle != DataToggle.DISABLED){
+                return showDetail();
+            } else {
+                return false;
+            }
+        }
     }
 
     @Override
@@ -229,6 +253,7 @@ public class CellularTile extends AospTile {
         destroyHooks();
         mTm = null;
         mDataOffView = null;
+        mDataToggle = null;
     }
 
     private void createHooks() {
@@ -262,7 +287,11 @@ public class CellularTile extends AospTile {
                     if (mClickHookBlocked) {
                         mClickHookBlocked = false;
                     } else {
-                        toggleMobileData();
+                        if (mDataToggle == DataToggle.SINGLEPRESS) {
+                            toggleMobileData();
+                        } else if (!isDualModeEnabled()) {
+                            showDetail();
+                        }
                         param.setResult(null);
                     }
                 }
