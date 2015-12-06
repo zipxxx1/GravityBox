@@ -1807,6 +1807,7 @@
     <!-- Permission denial message -->
     <string name="permission_denied_msg">You have decided to deny some of the permissions.
         Note that this will prevent related features from functioning.</string>
+    <string name="permission_denied_hide_title">Don\'t show again</string>
 
     <!-- Cellular tile Mobile data toggle -->
     <string name="pref_cell_tile_data_toggle_title">Mobile data toggle</string>

@@ -1770,11 +1770,18 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             for (int res : grantResults) {
                 showWarning = res != PackageManager.PERMISSION_GRANTED;
             }
+            showWarning &= !mPrefs.getBoolean("permission_denied_hide", false);
             if (showWarning) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.important)
                 .setMessage(R.string.permission_denied_msg)
                 .setPositiveButton(android.R.string.ok, null)
+                .setNegativeButton(R.string.permission_denied_hide_title, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mPrefs.edit().putBoolean("permission_denied_hide", true).commit();
+                    }
+                })
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
