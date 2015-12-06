@@ -242,6 +242,13 @@
                         android:summary="@string/pref_cell_tile_data_off_icon_summary"
                         android:defaultValue="false" />
 
+                    <ListPreference
+                        android:key="pref_cell_tile_data_toggle" 
+                        android:title="@string/pref_cell_tile_data_toggle_title"
+                        android:entries="@array/tile_data_toggle_entries"
+                        android:entryValues="@array/tile_data_toggle_values"
+                        android:defaultValue="DISABLED" />
+
                 </PreferenceScreen>
 
                 <PreferenceScreen

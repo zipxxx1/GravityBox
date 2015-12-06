@@ -1808,4 +1808,10 @@
     <string name="permission_denied_msg">You have decided to deny some of the permissions.
         Note that this will prevent related features from functioning.</string>
 
+    <!-- Cellular tile Mobile data toggle -->
+    <string name="pref_cell_tile_data_toggle_title">Mobile data toggle</string>
+    <string name="tile_data_toggle_disabled">Disabled</string>
+    <string name="tile_data_toggle_singlepress">On single-press</string>
+    <string name="tile_data_toggle_longpress">On long-press</string>
+
 </resources>
