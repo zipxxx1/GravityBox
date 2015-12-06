@@ -30,7 +30,7 @@ public class SysUiManagers {
         if (prefs == null)
             throw new IllegalArgumentException("Prefs cannot be null");
 
-        createKeyguardMonitor(context);
+        createKeyguardMonitor(context, prefs);
 
         try {
             BatteryInfoManager = new BatteryInfoManager(context, prefs);
@@ -80,13 +80,16 @@ public class SysUiManagers {
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_APP_LAUNCHER_CHANGED);
         intentFilter.addAction(com.ceco.marshmallow.gravitybox.managers.AppLauncher.ACTION_SHOW_APP_LAUCNHER);
 
+        // KeyguardStateMonitor
+        intentFilter.addAction(Intent.ACTION_SCREEN_ON);
+        intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
         context.registerReceiver(sBroadcastReceiver, intentFilter);
     }
 
-    public static void createKeyguardMonitor(Context ctx) {
+    public static void createKeyguardMonitor(Context ctx, XSharedPreferences prefs) {
         if (KeyguardMonitor != null) return;
         try {
-            KeyguardMonitor = new KeyguardStateMonitor(ctx);
+            KeyguardMonitor = new KeyguardStateMonitor(ctx, prefs);
         } catch (Throwable t) {
             log("Error creating KeyguardMonitor: ");
             XposedBridge.log(t);
@@ -107,6 +110,9 @@ public class SysUiManagers {
             }
             if (AppLauncher != null) {
                 AppLauncher.onBroadcastReceived(context, intent);
+            }
+            if (KeyguardMonitor != null) {
+                KeyguardMonitor.onBroadcastReceived(context, intent);
             }
         }
     };

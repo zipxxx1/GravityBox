@@ -43,7 +43,7 @@ public class ModPower {
 
     private static final int MSG_WAKE_UP = 100;
     private static final int MSG_UNREGISTER_PROX_SENSOR_LISTENER = 101;
-    private static final int MAX_PROXIMITY_WAIT = 500;
+    public static final int MAX_PROXIMITY_WAIT = 500;
     private static final int MAX_PROXIMITY_TTL = MAX_PROXIMITY_WAIT * 2;
 
     private static Context mContext;
