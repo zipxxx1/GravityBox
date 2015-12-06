@@ -1,5 +1,6 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import android.provider.Settings;
 import de.robv.android.xposed.XSharedPreferences;
 
 public class AirplaneModeTile extends AospTile {
@@ -18,5 +19,11 @@ public class AirplaneModeTile extends AospTile {
     @Override
     public String getAospKey() {
         return AOSP_KEY;
+    }
+
+    @Override
+    public boolean handleLongClick() {
+        startSettingsActivity(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
+        return true;
     }
 }
