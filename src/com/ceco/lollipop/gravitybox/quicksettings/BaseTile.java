@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -112,6 +113,26 @@ public abstract class BaseTile implements QsEventListener {
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
     }
 
+    private View.OnLongClickListener mLongClick = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            return handleLongClick();
+        }
+    };
+
+    @Override
+    public void onDualModeSet(View tileView, boolean enabled) {
+        if (enabled) {
+            View bgView = (View) XposedHelpers.getObjectField(tileView, "mTopBackgroundView");
+            bgView.setLongClickable(true);
+            bgView.setOnLongClickListener(Build.VERSION.SDK_INT >= 22 ?(OnLongClickListener) 
+                    XposedHelpers.getObjectField(tileView, "mLongClick") : mLongClick);
+        } else if (Build.VERSION.SDK_INT < 22) {
+            tileView.setLongClickable(true);
+            tileView.setOnLongClickListener(mLongClick);
+        }
+    }
+
     @Override
     public void handleClick() {
         if (mHideOnChange && supportsHideOnChange()) {
@@ -158,16 +179,6 @@ public abstract class BaseTile implements QsEventListener {
 
     @Override
     public void onCreateTileView(View tileView) throws Throwable {
-        if (Build.VERSION.SDK_INT < 22) {
-            tileView.setLongClickable(true);
-            tileView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    return handleLongClick();
-                }
-            });
-        }
-
         XposedHelpers.setAdditionalInstanceField(tileView, TILE_KEY_NAME, mKey);
 
         mScalingFactor = QsPanel.getScalingFactor(Integer.valueOf(mPrefs.getString(
