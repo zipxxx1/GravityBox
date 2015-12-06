@@ -10,6 +10,7 @@ import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
@@ -26,6 +27,9 @@ public class CellularTile extends AospTile {
     public static final String KEY2 = "aosp_tile_cell2";
 
     public static enum DataToggle { DISABLED, SINGLEPRESS, LONGPRESS };
+
+    private static final Intent CELLULAR_SETTINGS = new Intent().setComponent(new ComponentName(
+            "com.android.phone", "com.android.phone.MobileNetworkSettings"));
 
     private String mAospKey;
     private Unhook mCreateTileViewHook;
@@ -211,19 +215,19 @@ public class CellularTile extends AospTile {
         if (isDualModeEnabled()) {
             if (mDataToggle == DataToggle.LONGPRESS) {
                 toggleMobileData();
-                return true;
+            } else {
+                startSettingsActivity(CELLULAR_SETTINGS);
             }
-            return false;
         } else {
             if (mDataToggle == DataToggle.LONGPRESS) {
                 toggleMobileData();
-                return true;
             } else if (mDataToggle != DataToggle.DISABLED){
                 return showDetail();
             } else {
-                return false;
+                startSettingsActivity(CELLULAR_SETTINGS);
             }
         }
+        return true;
     }
 
     @Override
