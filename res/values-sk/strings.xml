@@ -1771,5 +1771,12 @@
     <!-- Permission denial message -->
     <string name="permission_denied_msg">Rozhodli ste sa odmietnuť niektoré z oprávnení.
         Súvisiace funkcie nebudú fungovať.</string>
+    <string name="permission_denied_hide_title">Už nezobrazovať</string>
+
+    <!-- Cellular tile Mobile data toggle -->
+    <string name="pref_cell_tile_data_toggle_title">Prepínač mobilných dát</string>
+    <string name="tile_data_toggle_disabled">Vypnutý</string>
+    <string name="tile_data_toggle_singlepress">Na ťuknutie</string>
+    <string name="tile_data_toggle_longpress">Na dlhé podržanie</string>
 
 </resources>
