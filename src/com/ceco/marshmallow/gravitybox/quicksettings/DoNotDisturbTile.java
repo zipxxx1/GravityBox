@@ -1,5 +1,6 @@
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import android.provider.Settings;
 import de.robv.android.xposed.XSharedPreferences;
 
 public class DoNotDisturbTile extends AospTile {
@@ -18,5 +19,11 @@ public class DoNotDisturbTile extends AospTile {
     @Override
     public String getAospKey() {
         return AOSP_KEY;
+    }
+
+    @Override
+    public boolean handleLongClick() {
+        startSettingsActivity(Settings.ACTION_SOUND_SETTINGS);
+        return true;
     }
 }
