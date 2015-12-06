@@ -32,6 +32,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import de.robv.android.xposed.XSharedPreferences;
@@ -108,6 +109,15 @@ public abstract class BaseTile implements QsEventListener {
         mDualMode = dualTiles.contains(mKey);
 
         mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
+    }
+
+    @Override
+    public void onDualModeSet(View tileView, boolean enabled) {
+        if (enabled) {
+            View bgView = (View) XposedHelpers.getObjectField(tileView, "mTopBackgroundView");
+            bgView.setOnLongClickListener((OnLongClickListener) 
+                    XposedHelpers.getObjectField(tileView, "mLongClick"));
+        }
     }
 
     @Override
