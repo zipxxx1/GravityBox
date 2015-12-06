@@ -1,5 +1,6 @@
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
+import android.provider.Settings;
 import de.robv.android.xposed.XSharedPreferences;
 
 public class CastTile extends AospTile {
@@ -18,5 +19,11 @@ public class CastTile extends AospTile {
     @Override
     public String getAospKey() {
         return AOSP_KEY;
+    }
+
+    @Override
+    public boolean handleLongClick() {
+        startSettingsActivity(Settings.ACTION_CAST_SETTINGS);
+        return true;
     }
 }
