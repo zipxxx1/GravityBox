@@ -256,10 +256,23 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
     private Runnable mResetFpRunnable = new Runnable() {
         @Override
         public void run() {
+            mFpAuthOnNextScreenOn = false;
+
             try {
-                mFpAuthOnNextScreenOn = false;
                 XposedHelpers.setBooleanField(mUpdateMonitor, "mFingerprintAlreadyAuthenticated", false);
+            } catch (Throwable t) { /* ignore */ }
+
+            try {
                 XposedHelpers.callMethod(mUpdateMonitor, "setFingerprintRunningState", 0);
+            } catch (Throwable t) {
+                try {
+                    XposedHelpers.callMethod(mUpdateMonitor, "setFingerprintRunningDetectionRunning", false);
+                } catch (Throwable t2) {
+                    XposedBridge.log(t2);
+                }
+            }
+
+            try {
                 XposedHelpers.callMethod(mUpdateMonitor, "updateFingerprintListeningState");
             } catch (Throwable t) {
                 XposedBridge.log(t);
