@@ -68,6 +68,7 @@ public class ModLockscreen {
     private static final String CLASS_KG_VIEW_MANAGER = "com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager";
     private static final String CLASS_CARRIER_TEXT = CLASS_PATH + ".CarrierText";
     private static final String CLASS_NOTIF_ROW = "com.android.systemui.statusbar.ExpandableNotificationRow";
+    private static final String CLASS_KG_BOTTOM_AREA_VIEW = "com.android.systemui.statusbar.phone.KeyguardBottomAreaView";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_KIS = false;
@@ -76,6 +77,7 @@ public class ModLockscreen {
 
     private static enum DirectUnlock { OFF, STANDARD, SEE_THROUGH };
     private static enum DirectUnlockPolicy { DEFAULT, NOTIF_NONE, NOTIF_ONGOING };
+    private static enum BottomAction { DEFAULT, PHONE };
 
     private static XSharedPreferences mPrefs;
     private static XSharedPreferences mQhPrefs;
@@ -453,6 +455,18 @@ public class ModLockscreen {
                 XposedHelpers.findAndHookMethod(CLASS_CARRIER_TEXT, classLoader, "updateCarrierText",
                         carrierTextHook);
             }
+
+            XposedHelpers.findAndHookMethod(CLASS_KG_BOTTOM_AREA_VIEW, classLoader,
+                    "canLaunchVoiceAssist", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (BottomAction.valueOf(mPrefs.getString(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION, "DEFAULT")) ==
+                                BottomAction.PHONE) {
+                        param.setResult(false);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

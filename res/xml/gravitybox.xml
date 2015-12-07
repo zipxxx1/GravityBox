@@ -162,6 +162,13 @@
                 android:title="@string/pref_lockscreen_carrier_text_title"
                 android:defaultValue="" />
 
+            <ListPreference 
+                android:key="pref_lockscreen_bleft_action"
+                android:title="@string/pref_lockscreen_bleft_action_title"
+                android:entries="@array/ls_bleft_action_entries"
+                android:entryValues="@array/ls_bleft_action_values"
+                android:defaultValue="DEFAULT" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>

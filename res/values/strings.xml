@@ -1820,4 +1820,9 @@
     <string name="imprint_mode_default">Wake and unlock (default)</string>
     <string name="imprint_mode_wake_only">Wake only</string>
 
+    <!-- Lockscreen: Bottom-left action -->
+    <string name="pref_lockscreen_bleft_action_title">Bottom-left action</string>
+    <string name="ls_bleft_action_default">Default</string>
+    <string name="ls_bleft_action_phone">Phone</string>
+
 </resources>
