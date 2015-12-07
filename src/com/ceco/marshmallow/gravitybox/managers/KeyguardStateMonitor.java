@@ -42,6 +42,8 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
             "com.android.systemui.keyguard.KeyguardViewMediator";
     private static boolean DEBUG = false;
 
+    private static enum ImprintMode { DEFAULT, WAKE_ONLY };
+
     private static void log(String msg) {
         XposedBridge.log(TAG + ": " + msg);
     }
@@ -50,6 +52,7 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
         void onKeyguardStateChanged();
     }
 
+    private XSharedPreferences mPrefs;
     private Context mContext;
     private boolean mIsShowing;
     private boolean mIsSecured;
@@ -63,14 +66,20 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
     private PowerManager mPm;
     private Handler mHandler;
     private boolean mFpAuthOnNextScreenOn;
+    private ImprintMode mImprintMode = ImprintMode.DEFAULT;
     private List<Listener> mListeners = new ArrayList<>();
 
     protected KeyguardStateMonitor(Context context, XSharedPreferences prefs) {
         mContext = context;
+        mPrefs = prefs;
         mPm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mHandler = new Handler();
+
         mProxWakeupEnabled = prefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_POWER_PROXIMITY_WAKE, false);
+        mImprintMode = ImprintMode.valueOf(prefs.getString(
+                GravityBoxSettings.PREF_KEY_LOCKSCREEN_IMPRINT_MODE, "DEFAULT"));
+
         createHooks();
     }
 
@@ -125,11 +134,15 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
                     "handleFingerprintAuthenticated", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (mProxWakeupEnabled &&
+                    if ((mProxWakeupEnabled || mImprintMode == ImprintMode.WAKE_ONLY) &&
                             !XposedHelpers.getBooleanField(param.thisObject, "mDeviceInteractive")) {
-                        mFpAuthOnNextScreenOn = true;
+                        mFpAuthOnNextScreenOn = mProxWakeupEnabled && mImprintMode == ImprintMode.DEFAULT;
                         XposedHelpers.callMethod(mPm, "wakeUp", SystemClock.uptimeMillis());
-                        mHandler.postDelayed(mResetFpRunnable, ModPower.MAX_PROXIMITY_WAIT + 200);
+                        if (mFpAuthOnNextScreenOn) {
+                            mHandler.postDelayed(mResetFpRunnable, ModPower.MAX_PROXIMITY_WAIT + 200);
+                        } else {
+                            mResetFpRunnable.run();
+                        }
                         param.setResult(null);
                     }
                 }
@@ -264,16 +277,21 @@ public class KeyguardStateMonitor implements BroadcastSubReceiver {
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
-        if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+        String action = intent.getAction();
+        if (action.equals(Intent.ACTION_SCREEN_ON)) {
             if (mFpAuthOnNextScreenOn) {
                 mHandler.removeCallbacks(mResetFpRunnable);
                 mFpAuthOnNextScreenOn = false;
                 handleFingerprintAuthenticated();
             }
-        } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
+        } else if (action.equals(GravityBoxSettings.ACTION_PREF_POWER_CHANGED) &&
                     intent.hasExtra(GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE)) {
             mProxWakeupEnabled = intent.getBooleanExtra(
                     GravityBoxSettings.EXTRA_POWER_PROXIMITY_WAKE, false);
+        } else if (action.equals(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED)) {
+            mPrefs.reload();
+            mImprintMode = ImprintMode.valueOf(mPrefs.getString(
+                    GravityBoxSettings.PREF_KEY_LOCKSCREEN_IMPRINT_MODE, "DEFAULT"));
         }
     }
 }

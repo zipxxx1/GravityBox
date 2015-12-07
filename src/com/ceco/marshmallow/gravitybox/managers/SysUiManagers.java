@@ -83,6 +83,8 @@ public class SysUiManagers {
         // KeyguardStateMonitor
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
+        intentFilter.addAction(GravityBoxSettings.ACTION_LOCKSCREEN_SETTINGS_CHANGED);
+
         context.registerReceiver(sBroadcastReceiver, intentFilter);
     }
 

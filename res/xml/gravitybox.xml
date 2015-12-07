@@ -145,6 +145,13 @@
                 android:summary="@string/pref_lockscreen_smart_unlock_summary"
                 android:defaultValue="false" />
 
+            <ListPreference 
+                android:key="pref_lockscreen_imprint_mode"
+                android:title="@string/pref_lockscreen_imprint_mode_title"
+                android:entries="@array/imprint_mode_entries"
+                android:entryValues="@array/imprint_mode_values"
+                android:defaultValue="DEFAULT" />
+
             <CheckBoxPreference 
                 android:key="pref_lockscreen_dt2s"
                 android:title="@string/pref_lockscreen_dt2s_title"
