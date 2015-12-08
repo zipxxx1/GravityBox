@@ -1,3 +1,27 @@
+Changelog 6.0.2 - 08/12/2015
+--------------------------------------
+- Lockscreen:
+--- added "Imprint mode" feature - allows changing default fingerprint behavior (Wake and unlock / Wake only)
+--- added option for changing bottom-left action (currently supports: default or phone) 
+- QuickSettings management:
+--- added long-press support to dual mode tiles
+--- Cellular tile: added option for defining mobile data toggle behavior
+--- Cellular tile: open cellular network settings on long-press (depends on how mobile data toggle behavior is set)
+--- WiFi tile: open WiFi settings on long-press during dual mode
+--- BlueTooth tile: open BT settings on long-press during dual mode
+--- Added long-press actions to other non-dual stock tiles (Airplane, Cast, DoNotDisturb, Location)
+- Power: improved proximity wake-up feature in combination with fingerprint sensor:
+--- won't unlock in case screen stays off due to prox. sensor being covered
+--- speed up: reduced unlock latency when using prox. wake-up in combination with fingerprint sensor
+- GB Settings: added "Don't show again" button to permission warning dialog
+- Changed style of circle battery (thanks to creeve4)
+- Phone: unknown caller photo adjusted for Dialer 2.3 (thanks to romracer)
+- Charger sounds: fixed plugged/unplugged sounds being played at the same time on some devices
+- Recents: fixed search bar related errors showing in xposed log
+- Updated Spanish translations (thanks to choldimir)
+- Updated Russian translations (thanks to gaich)
+- Updated French translations (thanks to ch-vox)
+
 Changelog 6.0.1 - 22/11/2015
 --------------------------------------
 - Lockscreen:
