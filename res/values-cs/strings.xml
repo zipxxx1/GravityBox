@@ -1776,4 +1776,14 @@
     <string name="tile_data_toggle_singlepress">Na ťuknutí</string>
     <string name="tile_data_toggle_longpress">Na dlouhé podržení</string>
 
+    <!-- Lockscreen: Imprint mode -->
+    <string name="pref_lockscreen_imprint_mode_title">Imprint režim</string>
+    <string name="imprint_mode_default">Vzbudit a odemknout (původní)</string>
+    <string name="imprint_mode_wake_only">Jen vzbudit</string>
+
+    <!-- Lockscreen: Bottom-left action -->
+    <string name="pref_lockscreen_bleft_action_title">Levá-dolní akce</string>
+    <string name="ls_bleft_action_default">Původní</string>
+    <string name="ls_bleft_action_phone">Telefon</string>
+
 </resources>
