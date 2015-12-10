@@ -1807,5 +1807,22 @@
     <!-- Permission denial message -->
     <string name="permission_denied_msg">Vous avez décidé de refuser certaines permissions.
         Notez que cela perturbera certaines fonctionnalités liées</string>
+    <string name="permission_denied_hide_title">Ne plus afficher</string>
+
+    <!-- Cellular tile Mobile data toggle -->
+    <string name="pref_cell_tile_data_toggle_title">Interrupteur données mobile</string>
+    <string name="tile_data_toggle_disabled">Désactivé</string>
+    <string name="tile_data_toggle_singlepress">Sur appui simple</string>
+    <string name="tile_data_toggle_longpress">Sur appui long</string>
+
+    <!-- Lockscreen: Imprint mode -->
+    <string name="pref_lockscreen_imprint_mode_title">Mode empreinte digitale</string>
+    <string name="imprint_mode_default">Réveiller et déverrouiller (par défaut)</string>
+    <string name="imprint_mode_wake_only">Seulement réveiller</string>
+
+    <!-- Lockscreen: Bottom-left action -->
+    <string name="pref_lockscreen_bleft_action_title">Action en bas à gauche</string>
+    <string name="ls_bleft_action_default">Par défaut</string>
+    <string name="ls_bleft_action_phone">Téléphone</string>
 
 </resources>
