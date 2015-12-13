@@ -664,7 +664,7 @@
 
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">Kiểu biểu tượng trạng thái</string>
-    <string name="pref_status_icon_style_summary">Áp dụng cho biểu tượng trạng thái như im lặng, rung, báo thức, v.v...</string>
+    <string name="pref_status_icon_style_summary">Áp dụng cho biểu tượng trạng thái như im lặng, rung, báo thức, v.v&#8230;</string>
     <string name="icon_style_jb">JellyBean</string>
     <string name="icon_style_kk">Lollipop</string>
 
@@ -919,7 +919,7 @@
     <string name="pref_smart_radio_screen_off_summary">Kích hoạt c.độ tiết kiệm pin khi màn hình tắt bất kể nếu dữ liệu di động bật hay tắt</string>
     <string name="pref_smart_radio_ignore_locked_title">Bỏ qua khi khóa</string>
     <string name="pref_smart_radio_ignore_locked_summary">Khi màn hình sáng, c.độ tiết kiệm pin sẽ không được kích hoạt lại đến khi khóa phím được mở</string>
-    <string name="pref_smart_radio_mode_change_delay_title">Độ trễ chuyển chế độ mạng/string>
+    <string name="pref_smart_radio_mode_change_delay_title">Độ trễ chuyển chế độ mạng</string>
     <string name="pref_smart_radio_mode_change_delay_summary">Độ trễ khi chuyển chế độ mạng được tính bằng giây</string>
 
     <!-- Lockscreen: custom carrier text -->
@@ -1389,7 +1389,6 @@
     <string name="qs_tile_compass">La bàn</string>
     <string name="quick_settings_compass_off">La bàn Tắt</string>
     <string name="quick_settings_compass_init">Đang khởi tạo&#8230;</string>
-    <string name="quick_settings_compass_value" translatable="false">%1$.0f\u00b0 %2$s</string>
 
     <!-- Cardinal directions -->
     <string name="cd_north">N</string>
