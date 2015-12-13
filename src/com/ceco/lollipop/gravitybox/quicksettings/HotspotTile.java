@@ -1,5 +1,7 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Build;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -9,6 +11,9 @@ import de.robv.android.xposed.XC_MethodHook.Unhook;
 
 public class HotspotTile extends AospTile {
     public static final String AOSP_KEY = "hotspot";
+
+    private static final Intent TETHER_SETTINGS = new Intent().setComponent(new ComponentName(
+            "com.android.settings", "com.android.settings.TetherSettings"));
 
     private Unhook mLongClickHook;
 
@@ -31,7 +36,7 @@ public class HotspotTile extends AospTile {
 
     @Override
     public boolean handleLongClick() {
-        // noop
+        startSettingsActivity(TETHER_SETTINGS);
         return true;
     }
 
