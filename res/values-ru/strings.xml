@@ -1805,6 +1805,23 @@
 
     <!-- Permission denial message -->
     <string name="permission_denied_msg">Вы решили отозвать некоторые разрешения.
-        Имейте в виду, что это отключит функционал соответствующих функций.</string>
+        Имейте в виду, что это отключит работу соответствующих функций.</string>
+    <string name="permission_denied_hide_title">Больше не показывать</string>
+
+    <!-- Cellular tile Mobile data toggle -->
+    <string name="pref_cell_tile_data_toggle_title">Переключение моб. данных</string>
+    <string name="tile_data_toggle_disabled">Отключено</string>
+    <string name="tile_data_toggle_singlepress">Одно нажатие</string>
+    <string name="tile_data_toggle_longpress">Удержание нажатия</string>
+
+    <!-- Lockscreen: Imprint mode -->
+    <string name="pref_lockscreen_imprint_mode_title">Режим отпечатка</string>
+    <string name="imprint_mode_default">Пробуждение и разблокировка (по умолчанию)</string>
+    <string name="imprint_mode_wake_only">Только пробуждение</string>
+
+    <!-- Lockscreen: Bottom-left action -->
+    <string name="pref_lockscreen_bleft_action_title">Действие кнопки слева</string>
+    <string name="ls_bleft_action_default">По умолчанию</string>
+    <string name="ls_bleft_action_phone">Телефон</string>
 
 </resources>
