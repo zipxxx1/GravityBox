@@ -299,7 +299,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
             initSizeMeasureIconHeight();
         }
 
-        mPaintFont.setTextSize(mCircleSize / 1.8f);
+        mPaintFont.setTextSize(mCircleSize / 1.9f);
 
         float strokeWidth = mCircleSize / mStrokeWidthFactor;
         mPaintRed.setStrokeWidth(strokeWidth);
