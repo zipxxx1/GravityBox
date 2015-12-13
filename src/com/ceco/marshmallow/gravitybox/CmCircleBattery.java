@@ -300,7 +300,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
             initSizeMeasureIconHeight();
         }
 
-        mPaintFont.setTextSize(mCircleSize / 1.8f);
+        mPaintFont.setTextSize(mCircleSize / 2.0f);
 
         float strokeWidth = mCircleSize / mStrokeWidthFactor;
         mPaintRed.setStrokeWidth(strokeWidth);
@@ -321,7 +321,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         mTextLeftX = mCircleSize / 2.0f + getPaddingLeft();
         mTextRightX = mTextLeftX + off;
         // the +1 at end of formular balances out rounding issues. works out on all resolutions
-        mTextY = mCircleSize / 2.0f + (bounds.bottom - bounds.top) / 2.0f - strokeWidth / 2.0f + 1;
+        mTextY = mCircleSize / 2.0f + (bounds.bottom - bounds.top) / 1.9f - strokeWidth / 1.9f + 1;
 
         // force new measurement for wrap-content xml tag
         measure(0, 0);
