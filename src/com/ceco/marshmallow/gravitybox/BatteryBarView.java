@@ -68,6 +68,7 @@ public class BatteryBarView extends View implements IconManagerListener,
     private int mColorLow;
     private int mColorCritical;
     private int mColorCharging;
+    private int mTintColor = Color.WHITE;
     private int mLevel;
     private boolean mCharging;
     private ObjectAnimator mChargingAnimator;
@@ -166,7 +167,7 @@ public class BatteryBarView extends View implements IconManagerListener,
                 float hue = (cappedLevel - 15) * 1.6f;
                 setBackgroundColor(Color.HSVToColor(0xff, new float[]{ hue, 1.f, 1.f }));
             } else {
-                int color = mColor;
+                int color = (mColor == Color.WHITE ? mTintColor : mColor);
                 if (mCharging) {
                     color = mColorCharging;
                 } else if (mLevel <= 5) {
@@ -255,6 +256,10 @@ public class BatteryBarView extends View implements IconManagerListener,
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
             setAlpha(colorInfo.alphaTextAndBattery);
+        }
+        if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+            mTintColor = colorInfo.iconTint;
+            update();
         }
     }
 

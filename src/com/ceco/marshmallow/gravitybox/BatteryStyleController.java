@@ -108,7 +108,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             if (bptResId != 0) {
                 View v = mContainer.findViewById(bptResId);
                 if (v != null && v instanceof TextView) {
-                    mPercentText = new StatusbarBatteryPercentage((TextView) v, mPrefs);
+                    mPercentText = new StatusbarBatteryPercentage((TextView) v, mPrefs, this);
                     if (DEBUG) log("Battery percent text found as: " + bptId);
                     break;
                 }
@@ -126,7 +126,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                     0);
             percentTextView.setTextColor(Color.WHITE);
             percentTextView.setVisibility(View.GONE);
-            mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs);
+            mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
             mSystemIcons.addView(mPercentText.getView(), mSystemIcons.getChildCount()-1);
             if (DEBUG) log("Battery percent text injected");
         }

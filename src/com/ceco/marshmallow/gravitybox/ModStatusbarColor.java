@@ -48,6 +48,7 @@ public class ModStatusbarColor {
     private static final String CLASS_STATUSBAR_ICON_VIEW = "com.android.systemui.statusbar.StatusBarIconView";
     private static final String CLASS_STATUSBAR_ICON = "com.android.internal.statusbar.StatusBarIcon";
     private static final String CLASS_SB_TRANSITIONS = "com.android.systemui.statusbar.phone.PhoneStatusBarTransitions";
+    private static final String CLASS_SB_ICON_CTRL = "com.android.systemui.statusbar.phone.StatusBarIconController";
     private static final boolean DEBUG = false;
 
     public static final String ACTION_PHONE_STATUSBAR_VIEW_MADE = "gravitybox.intent.action.PHONE_STATUSBAR_VIEW_MADE";
@@ -146,6 +147,16 @@ public class ModStatusbarColor {
                         final float textAndBatteryAlpha = (Float) XposedHelpers.callMethod(
                                 param.thisObject, "getBatteryClockAlpha", (Integer) param.args[0]);
                         SysUiManagers.IconManager.setIconAlpha(signalClusterAlpha, textAndBatteryAlpha);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_SB_ICON_CTRL, classLoader, "applyIconTint", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (SysUiManagers.IconManager != null) {
+                        SysUiManagers.IconManager.setIconTint(
+                                XposedHelpers.getIntField(param.thisObject, "mIconTint"));
                     }
                 }
             });

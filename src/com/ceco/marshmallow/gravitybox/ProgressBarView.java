@@ -212,6 +212,8 @@ public class ProgressBarView extends View implements
         if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
             setBackgroundColor(colorInfo.coloringEnabled ?
                     colorInfo.iconColor[0] : Color.WHITE);
+        } else if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+            setBackgroundColor(colorInfo.iconTint);
         }
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
             setAlpha(colorInfo.alphaTextAndBattery);

@@ -19,6 +19,7 @@ import de.robv.android.xposed.XSharedPreferences;
 
 import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager;
 import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
+import com.ceco.marshmallow.gravitybox.ModStatusBar.ContainerType;
 import com.ceco.marshmallow.gravitybox.managers.BatteryInfoManager.BatteryData;
 import com.ceco.marshmallow.gravitybox.managers.BatteryInfoManager.BatteryStatusListener;
 import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager.ColorInfo;
@@ -44,13 +45,16 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
     private ValueAnimator mChargeAnim;
     private int mChargingStyle;
     private int mChargingColor;
+    private BatteryStyleController mController;
 
     public static final int CHARGING_STYLE_NONE = 0;
     public static final int CHARGING_STYLE_STATIC = 1;
     public static final int CHARGING_STYLE_ANIMATED = 2;
 
-    public StatusbarBatteryPercentage(TextView view, XSharedPreferences prefs) {
+    public StatusbarBatteryPercentage(TextView view, XSharedPreferences prefs,
+            BatteryStyleController controller) {
         mPercentage = view;
+        mController = controller;
         mDefaultColor = mIconColor = mPercentage.getCurrentTextColor();
 
         try {
@@ -204,7 +208,11 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
             } else {
                 setTextColor(mDefaultColor);
             }
-        } else if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
+        } else if (mController.getContainerType() == ContainerType.STATUSBAR &&
+                (flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+            setTextColor(colorInfo.iconTint);
+        }
+        if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
             mPercentage.setAlpha(colorInfo.alphaTextAndBattery);
         }
     }

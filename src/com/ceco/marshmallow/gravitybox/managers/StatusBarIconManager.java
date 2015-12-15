@@ -53,7 +53,8 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
     public static final int FLAG_DATA_ACTIVITY_COLOR_CHANGED = 1 << 4;
     public static final int FLAG_ICON_STYLE_CHANGED = 1 << 5;
     public static final int FLAG_ICON_ALPHA_CHANGED = 1 << 6;
-    private static final int FLAG_ALL = 0x7F;
+    public static final int FLAG_ICON_TINT_CHANGED = 1 << 7;
+    private static final int FLAG_ALL = 0xFF;
 
     private Context mContext;
     private Resources mGbResources;
@@ -78,6 +79,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         public int iconStyle;
         public float alphaSignalCluster;
         public float alphaTextAndBattery;
+        public int iconTint;
     }
 
     private static void log(String message) {
@@ -158,6 +160,7 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
         mColorInfo.iconStyle = LOLLIPOP;
         mColorInfo.alphaSignalCluster = 1;
         mColorInfo.alphaTextAndBattery = 1;
+        mColorInfo.iconTint = Color.WHITE;
     }
 
     @Override
@@ -299,6 +302,14 @@ public class StatusBarIconManager implements BroadcastSubReceiver {
             mColorInfo.alphaSignalCluster = alphaSignalCluster;
             mColorInfo.alphaTextAndBattery = alphaTextAndBattery;
             notifyListeners(FLAG_ICON_ALPHA_CHANGED);
+        }
+    }
+
+    public void setIconTint(int iconTint) {
+        if (mColorInfo.coloringEnabled) return;
+        if (mColorInfo.iconTint != iconTint) {
+            mColorInfo.iconTint = iconTint;
+            notifyListeners(FLAG_ICON_TINT_CHANGED);
         }
     }
 

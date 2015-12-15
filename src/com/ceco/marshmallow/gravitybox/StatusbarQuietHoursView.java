@@ -24,8 +24,8 @@ import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager.IconManager
 import com.ceco.marshmallow.gravitybox.managers.StatusbarQuietHoursManager.QuietHoursListener;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.graphics.PorterDuff;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,11 +93,10 @@ public class StatusbarQuietHoursView extends ImageView implements  IconManagerLi
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
-            if (colorInfo.coloringEnabled) {
-                setColorFilter(colorInfo.iconColor[0], PorterDuff.Mode.SRC_IN);
-            } else {
-                clearColorFilter();
-            }
+            setImageTintList(ColorStateList.valueOf(colorInfo.coloringEnabled ?
+                    colorInfo.iconColor[0] : colorInfo.defaultIconColor));
+        } else if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+            setImageTintList(ColorStateList.valueOf(colorInfo.iconTint));
         }
         if ((flags & StatusBarIconManager.FLAG_ICON_ALPHA_CHANGED) != 0) {
             setAlpha(colorInfo.alphaSignalCluster);

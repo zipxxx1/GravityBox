@@ -28,8 +28,8 @@ import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.TrafficStats;
 import android.os.Handler;
@@ -68,7 +68,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
     private int MB = KB * KB;
     private int GB = MB * KB;
     private Mode mMode;
-    private Integer mIconColor;
+    private int mIconColor;
     private boolean mShowIcon;
     private boolean mAutoHide;
     private int mAutoHideThreshold;
@@ -250,30 +250,35 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
         Drawable d = null;
         if (mShowIcon) {
             if (mMode == Mode.IN_OUT) {
-                d = res.getDrawable(R.drawable.stat_sys_network_traffic_updown).mutate();
+                d = res.getDrawable(R.drawable.stat_sys_network_traffic_updown, null).mutate();
             } else if (mMode == Mode.OUT) {
-                d = res.getDrawable(R.drawable.stat_sys_network_traffic_up).mutate();
+                d = res.getDrawable(R.drawable.stat_sys_network_traffic_up, null).mutate();
             } else if (mMode == Mode.IN) {
-                d = res.getDrawable(R.drawable.stat_sys_network_traffic_down).mutate();
+                d = res.getDrawable(R.drawable.stat_sys_network_traffic_down, null).mutate();
             };
-            if (d != null && mIconColor != null) {
-                d.setColorFilter(mIconColor, PorterDuff.Mode.SRC_IN);
-            }
         }
 
         setCompoundDrawablesWithIntrinsicBounds(null, null, d, null);
+        updateTrafficDrawableColor();
 
         LinearLayout.LayoutParams lParams = (LinearLayout.LayoutParams) getLayoutParams();
         lParams.setMarginEnd(mShowIcon ? 0 : mMargin);
         setLayoutParams(lParams);
     }
 
+    private void updateTrafficDrawableColor() {
+        setCompoundDrawableTintList(ColorStateList.valueOf(mIconColor));
+    }
+
     @Override
     public void onIconManagerStatusChanged(int flags, ColorInfo colorInfo) {
         super.onIconManagerStatusChanged(flags, colorInfo);
         if ((flags & StatusBarIconManager.FLAG_ICON_COLOR_CHANGED) != 0) {
-            mIconColor = colorInfo.coloringEnabled ? colorInfo.iconColor[0] : null;
-            updateTrafficDrawable();
+            mIconColor = colorInfo.coloringEnabled ? colorInfo.iconColor[0] : colorInfo.defaultIconColor;
+            updateTrafficDrawableColor();
+        } else if ((flags & StatusBarIconManager.FLAG_ICON_TINT_CHANGED) != 0) {
+            mIconColor = colorInfo.iconTint;
+            updateTrafficDrawableColor();
         }
     }
 }
