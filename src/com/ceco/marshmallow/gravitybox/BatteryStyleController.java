@@ -102,35 +102,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         Resources res = mContext.getResources();
         Resources gbRes = Utils.getGbContext(mContext).getResources();
 
-        // inject percent text if it doesn't exist
-        for (String bptId : batteryPercentTextIds) {
-            final int bptResId = res.getIdentifier(bptId, "id", PACKAGE_NAME);
-            if (bptResId != 0) {
-                View v = mContainer.findViewById(bptResId);
-                if (v != null && v instanceof TextView) {
-                    mPercentText = new StatusbarBatteryPercentage((TextView) v, mPrefs, this);
-                    if (DEBUG) log("Battery percent text found as: " + bptId);
-                    break;
-                }
-            }
-        }
-        if (mPercentText == null) {
-            TextView percentTextView = new TextView(mContext);
-            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            percentTextView.setLayoutParams(lParams);
-            percentTextView.setPadding(
-                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
-                    0,
-                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_right),
-                    0);
-            percentTextView.setTextColor(Color.WHITE);
-            percentTextView.setVisibility(View.GONE);
-            mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
-            mSystemIcons.addView(mPercentText.getView(), mSystemIcons.getChildCount()-1);
-            if (DEBUG) log("Battery percent text injected");
-        }
-
         // inject circle battery view
         mCircleBattery = new CmCircleBattery(mContext, this);
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
@@ -145,6 +116,35 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         mCircleBattery.setVisibility(View.GONE);
         mSystemIcons.addView(mCircleBattery);
         if (DEBUG) log("CmCircleBattery injected");
+
+        // inject percent text if it doesn't exist
+        for (String bptId : batteryPercentTextIds) {
+            final int bptResId = res.getIdentifier(bptId, "id", PACKAGE_NAME);
+            if (bptResId != 0) {
+                View v = mContainer.findViewById(bptResId);
+                if (v != null && v instanceof TextView) {
+                    mPercentText = new StatusbarBatteryPercentage((TextView) v, mPrefs, this);
+                    if (DEBUG) log("Battery percent text found as: " + bptId);
+                    break;
+                }
+            }
+        }
+        if (mPercentText == null) {
+            TextView percentTextView = new TextView(mContext);
+            lParams = new LinearLayout.LayoutParams(
+                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            percentTextView.setLayoutParams(lParams);
+            percentTextView.setPadding(
+                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
+                    0,
+                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_right),
+                    0);
+            percentTextView.setTextColor(Color.WHITE);
+            percentTextView.setVisibility(View.GONE);
+            mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs, this);
+            mSystemIcons.addView(mPercentText.getView());
+            if (DEBUG) log("Battery percent text injected");
+        }
 
         // find battery
         View stockBatteryView = mSystemIcons.findViewById(
