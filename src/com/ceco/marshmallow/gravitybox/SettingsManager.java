@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.UUID;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.widget.Toast;
 import com.ceco.marshmallow.gravitybox.R;
@@ -284,5 +285,19 @@ public class SettingsManager {
         String prefsName = mContext.getPackageName() + "_preferences";
         SharedPreferences prefs = mContext.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
         prefs.edit().putLong("gb_unlocker_tstamp", ms).commit();
+    }
+
+    public void fixFolderPermissionsAsync() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                mContext.getFilesDir().setExecutable(true, false);
+                mContext.getFilesDir().setReadable(true, false);
+                File sharedPrefsFolder = new File(mContext.getFilesDir().getAbsolutePath()
+                        + "/../shared_prefs");
+                sharedPrefsFolder.setExecutable(true, false);
+                sharedPrefsFolder.setReadable(true, false);
+            }
+        });
     }
 }

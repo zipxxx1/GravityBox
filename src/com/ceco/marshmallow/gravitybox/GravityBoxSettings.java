@@ -981,6 +981,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
         super.onCreate(savedInstanceState);
 
+        // fix folder permissions
+        SettingsManager.getInstance(this).fixFolderPermissionsAsync();
+        
         // refuse to run if there's GB with old package name still installed
         // prompt to uninstall previous package and finish
         if (Utils.isAppInstalled(this, "com.ceco.lollipop.gravitybox")) {
