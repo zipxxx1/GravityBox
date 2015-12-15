@@ -83,7 +83,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
     // Battery padding
     protected Integer mBatteryPaddingOriginal;
     protected int mBatteryStyle;
-    protected boolean mPercentTextSb;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -551,13 +550,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             mBatteryStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_STYLE, 1);
             updateBatteryPadding();
         }
-        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED)) {
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR)) {
-                mPercentTextSb = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, false);
-                updateBatteryPadding();
-            }
-        }
     }
 
     protected void initPreferences() { 
@@ -566,7 +558,6 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
         mBatteryStyle = Integer.valueOf(sPrefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
-        mPercentTextSb = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false);
 
         mNetworkTypeIndicatorsDisabled = Utils.isMtkDevice() &&
                 sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DNTI, false);
@@ -646,7 +637,7 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
             }
             int padding = mBatteryPaddingOriginal;
             if (mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_NONE) {
-                if ((mContainerType == ContainerType.STATUSBAR && !mPercentTextSb) ||
+                if ((mContainerType == ContainerType.STATUSBAR) ||
                         (mContainerType == ContainerType.KEYGUARD)) {
                     padding = Math.round((float)mBatteryPaddingOriginal / 4f);
                 }

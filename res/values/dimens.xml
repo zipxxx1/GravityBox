@@ -49,7 +49,7 @@
     <!-- Statusbar Battery -->
     <dimen name="circle_battery_padding_left">2.67dp</dimen>
     <dimen name="circle_battery_padding_right">0dp</dimen>
-    <dimen name="percent_text_padding_left">2dp</dimen>
+    <dimen name="percent_text_padding_left">4dp</dimen>
     <dimen name="percent_text_padding_right">0dp</dimen>
 
     <!-- QS DetailListAdapter -->
