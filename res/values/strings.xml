@@ -533,8 +533,7 @@
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">Quick unlock</string>
-    <string name="pref_lockscreen_quick_unlock_summary">Unlock automatically when the correct PIN/password is entered.
-        Supports up to 6 characters.</string>
+    <string name="pref_lockscreen_quick_unlock_summary">Unlock automatically when the correct PIN/password is entered</string>
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">Disabled</string>
@@ -1824,5 +1823,9 @@
     <string name="pref_lockscreen_bleft_action_title">Bottom-left action</string>
     <string name="ls_bleft_action_default">Default</string>
     <string name="ls_bleft_action_phone">Phone</string>
+
+    <!-- Lockscreen: Quick unlock PIN length -->
+    <string name="pref_lockscreen_pin_length_title">PIN length</string>
+    <string name="pref_lockscreen_pin_length_summary">Quick unlock needs to know the exact length of your PIN to work reliably</string>
 
 </resources>

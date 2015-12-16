@@ -292,7 +292,6 @@ public class ModLockscreen {
                             (TextView) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
                     if (passwordEntry == null) return;
 
-                    mOldEntryLen = 0;
                     passwordEntry.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void afterTextChanged(Editable s) {
@@ -314,7 +313,6 @@ public class ModLockscreen {
                     final View passwordEntry = 
                             (View) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
                     if (passwordEntry != null) {
-                        mOldEntryLen = 0;
                         XposedHelpers.setAdditionalInstanceField(passwordEntry, "gbPINView",
                                 param.thisObject);
                     }
@@ -535,13 +533,10 @@ public class ModLockscreen {
         }
     };
 
-    private static int mOldEntryLen = 0;
     private static void doQuickUnlock(final Object securityView, final String entry) {
-        if (entry.length() < 4 || entry.length() > 6) return;
-        if (entry.length() < mOldEntryLen) {
-            mOldEntryLen = entry.length();
-            return;
-        }
+        if (entry.length() != mPrefs.getInt(
+                GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_LENGTH, 4)) return;
+
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {

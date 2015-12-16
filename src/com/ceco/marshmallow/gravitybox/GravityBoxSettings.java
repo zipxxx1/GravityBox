@@ -242,6 +242,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR = "pref_lockscreen_show_pattern_error";
     public static final String PREF_KEY_LOCKSCREEN_MENU_KEY = "pref_lockscreen_menu_key2";
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
+    public static final String PREF_KEY_LOCKSCREEN_PIN_LENGTH = "pref_lockscreen_pin_length";
     public static final String PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK = "pref_lockscreen_direct_unlock2";
     public static final String PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY = "pref_lockscreen_direct_unlock_policy";
     public static final String PREF_KEY_LOCKSCREEN_SMART_UNLOCK = "pref_lockscreen_smart_unlock";
@@ -888,6 +889,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_BACKGROUND_BLUR_INTENSITY,
             PREF_KEY_LOCKSCREEN_BACKGROUND_OPACITY,
             PREF_KEY_LOCKSCREEN_QUICK_UNLOCK,
+            PREF_KEY_LOCKSCREEN_PIN_LENGTH,
             PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK,
             PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY,
             PREF_KEY_LOCKSCREEN_SMART_UNLOCK,

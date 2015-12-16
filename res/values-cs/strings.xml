@@ -509,8 +509,7 @@
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">Rychlé odemknutí</string>
-    <string name="pref_lockscreen_quick_unlock_summary">Odemknout automaticky po zadání správného PIN/hesla, bez potřeby stisku ENTER
-        Podporuje maximálně 6 znaků</string>
+    <string name="pref_lockscreen_quick_unlock_summary">Odemknout automaticky po zadání správného PIN/hesla, bez potřeby stisku ENTER</string>
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">Vypnuto</string>

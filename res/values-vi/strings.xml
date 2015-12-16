@@ -533,8 +533,7 @@
 
     <!-- Quick unlock -->
     <string name="pref_lockscreen_quick_unlock_title">Mở khóa nhanh</string>
-    <string name="pref_lockscreen_quick_unlock_summary">Tự động mở khóa khi nhập đúng mật khẩu.
-        Hỗ trợ lên tới 6 ký tự.</string>
+    <string name="pref_lockscreen_quick_unlock_summary">Tự động mở khóa khi nhập đúng mật khẩu</string>
 
     <!-- Clock Day Of Week style -->
     <string name="clock_dow_disabled">Tắt</string>

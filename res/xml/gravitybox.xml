@@ -124,6 +124,18 @@
                 android:summary="@string/pref_lockscreen_quick_unlock_summary"
                 android:defaultValue="false" />
 
+            <com.ceco.marshmallow.gravitybox.preference.SeekBarPreference
+                android:key="pref_lockscreen_pin_length"
+                android:title="@string/pref_lockscreen_pin_length_title"
+                android:summary="@string/pref_lockscreen_pin_length_summary"
+                minimum="4"
+                maximum="20"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="" 
+                android:defaultValue="4"
+                android:dependency="pref_lockscreen_quick_unlock" />
+
             <ListPreference 
                 android:key="pref_lockscreen_direct_unlock2"
                 android:title="@string/pref_lockscreen_direct_unlock_title"
