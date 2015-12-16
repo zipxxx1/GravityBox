@@ -16,7 +16,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">GravityBox [LP] - Trần Thành Đạt</string>
+    <string name="app_name">GravityBox [LP]</string>
 
     <string name="battery_style_title">Kiểu pin</string>
     <string name="battery_style_stock">Pin gốc</string>
@@ -175,7 +175,7 @@
 
     <!-- Display tweaks category -->
     <string name="pref_cat_display_title">Tinh chỉnh hiển thị</string>
-    <string name="pref_cat_display_summary">Bao gồm nhiều tinh chỉnh hiển thị (HTHH)</string>
+    <string name="pref_cat_display_summary">Bao gồm nhiều tinh chỉnh hiển thị</string>
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">Độ sáng tối thiểu</string>
@@ -466,7 +466,7 @@
     <string name="pref_cat_navigation_bar_summary">Bao gồm các tinh chỉnh thanh điều hướng</string>
     <string name="pref_navbar_override_summary">Toggles tinh chỉnh thanh điều hướng (yêu cầu khởi động lại)</string>
     <string name="pref_navbar_enable_title">Kích hoạt thanh điều hướng</string>
-    <string name="pref_navbar_enable_summary">Yêu cầu khởi động lại (Trần Thành Đạt)</string>
+    <string name="pref_navbar_enable_summary">Yêu cầu khởi động lại</string>
     <string name="pref_navbar_height_title">Chiều cao thanh điều hướng</string>
     <string name="pref_navbar_height_summary">Áp dụng cho thanh điều hướng ngang và dọc</string>
     <string name="pref_navbar_height_landscape_summary">Áp dụng cho thanh điều hướng ngang và dọc</string>
@@ -650,7 +650,7 @@
 
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Chế độ quản lý trong suốt</string>
-    <string name="pref_tm_mode_summary">Yêu cầu khởi động lại (Trần Thành Đạt)</string>
+    <string name="pref_tm_mode_summary">Yêu cầu khởi động lại</string>
     <string name="tm_mode_disabled">Tắt</string>
     <string name="tm_mode_statusbar">Thanh trạng thái</string>
     <string name="tm_mode_navbar">Thanh điều hướng</string>
@@ -719,7 +719,7 @@
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Đang quay phim màn hình</string>
-    <string name="screenrecord_notif_title">Trần Thành Đạt</string>
+    <string name="screenrecord_notif_title">Đang quay</string>
     <string name="screenrecord_notif_stop">Dừng</string>
     <string name="screenrecord_notif_pointer">Vị trí chạm</string>
     <string name="screenrecord_toast_error">Không thể quay phim màn hình</string>
@@ -903,7 +903,7 @@
 
     <!-- Force overflow menu button -->
     <string name="pref_force_overflow_menu_button_title">Buộc tràn nút menu</string>
-    <string name="pref_force_overflow_menu_button_summary">Yêu cầu khởi động lại (Trần Thành Đạt)</string>
+    <string name="pref_force_overflow_menu_button_summary">Yêu cầu khởi động lại</string>
 
     <!-- Navbar custom key: swap with menu key -->
     <string name="pref_navbar_custom_key_swap_title">Định hướng cùng phím Menu</string>
@@ -947,7 +947,7 @@
 
     <!-- Pulse notification delay -->
     <string name="pref_pulse_notification_delay_title">Độ trễ đẩy thông báo</string>
-    <string name="pref_pulse_notification_delay_summary">Yêu cầu khởi động lại (Trần Thành Đạt)</string>
+    <string name="pref_pulse_notification_delay_summary">Yêu cầu khởi động lại</string>
 
     <!-- Powe menu: disable on lockscreen -->
     <string name="pref_powermenu_disable_on_lockscreen_title">Tắt menu phím nguồn tại MH khóa</string>
@@ -1201,7 +1201,7 @@
     <!-- Led control -->
     <string name="pref_led_control_title">Điều khiển thông báo mở rộng</string>
     <string name="pref_led_control_summary">Cho phép kiểm soát thông báo đèn, âm báo và rung của mỗi ứng dụng</string>
-    <string name="lc_please_wait">Trần Thanh Đạt&#8230;</string>
+    <string name="lc_please_wait">Vui lòng chờ&#8230;</string>
     <string name="lc_disabled">Tắt điều khiển thông báo</string>
     <string name="pref_lc_led_color_title">Màu LED</string>
     <string name="pref_lc_led_time_on_title">Thời gian LED sáng</string>
@@ -1307,7 +1307,7 @@
 
     <!-- Signal cluster: H+ indicator -->
     <string name="pref_signal_cluster_hplus_title">Hiển thị H+</string>
-    <string name="pref_signal_cluster_hplus_summary">Cần khởi động lại (Trần Thành Đạt)</string>
+    <string name="pref_signal_cluster_hplus_summary">Cần khởi động lại</string>
 
     <!-- Signal cluster: LTE/4G indicator style -->
     <string name="pref_signal_cluster_lte_style_title">Kiểu hiển thị LTE</string>
@@ -1557,7 +1557,7 @@
 
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">Ẩn biểu tượng SIM</string>
-    <string name="pref_signal_cluster_hide_sim_labels_summary">Cần khởi động lại (Trần Thành Đạt)</string>
+    <string name="pref_signal_cluster_hide_sim_labels_summary">Cần khởi động lại</string>
 
     <!-- QS: network mode tile 2g+3g mode -->
     <string name="pref_network_mode_tile_2g3g_mode_title">Chế độ 2G+3G</string>
@@ -1689,7 +1689,7 @@
 
     <!-- Navigation bar: use larger icons -->
     <string name="pref_navbar_larger_icons_title">Dùng biểu tượng lớn hơn</string>
-    <string name="pref_navbar_larger_icons_summary">Cần khởi động lại (Trần Thành Đạt)</string>
+    <string name="pref_navbar_larger_icons_summary">Cần khởi động lại</string>
 
     <!-- Power menu: allow soft reboot -->
     <string name="pref_reboot_allow_softreboot_title">Cho phép khởi động lại nhanh</string>
@@ -1785,7 +1785,7 @@
 
     <!-- Signal cluster: Disable exclamation marks -->
     <string name="pref_signal_cluster_dem_title">Ẩn dấu chấm than</string>
-    <string name="pref_signal_cluster_dem_summary">Cần khởi động lại (Trần Thành Đạt)</string>
+    <string name="pref_signal_cluster_dem_summary">Cần khởi động lại</string>
 
     <!-- UNC: LED priority mode -->
     <string name="pref_lc_led_priority_mode_title">Chế độ ưu tiên</string>
@@ -1828,11 +1828,11 @@
 
     <!-- MTK: disable network type indicators -->
     <string name="pref_signal_cluster_dnti_title">Tắt chỉ thị loại mạng</string>
-    <string name="pref_signal_cluster_dnti_summary">Cần khởi động lại (HTHH)</string>
+    <string name="pref_signal_cluster_dnti_summary">Cần khởi động lại</string>
 
     <!-- Signal cluster: Disable "No SIM" icon -->
     <string name="pref_signal_cluster_nosim_title">Ẩn biểu tượng không có sim</string>
-    <string name="pref_signal_cluster_nosim_summary">Cần khởi động lại (Trần Thành Đạt)</string>
+    <string name="pref_signal_cluster_nosim_summary">Cần khởi động lại</string>
 
     <!-- QS: tile options menu -->
     <string name="menu_tile_dual">Chế độ song song</string>
