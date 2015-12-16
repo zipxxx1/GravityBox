@@ -1828,4 +1828,10 @@
     <string name="pref_lockscreen_pin_length_title">PIN length</string>
     <string name="pref_lockscreen_pin_length_summary">Quick unlock needs to know the exact length of your PIN to work reliably</string>
 
+    <!-- Power: Camera vibration pattern -->
+    <string name="pref_power_camera_vibrate_pattern_title">Camera vibration pattern</string>
+    <string name="pref_power_camera_vibrate_pattern_summary">Defines vibration pattern in form of comma separated list of 
+        off/on duration pairs in milliseconds for camera launched from power key.
+        Leave empty for default. Set to 0 to disable vibration.</string>
+
 </resources>

@@ -740,9 +740,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_POWER_PROXIMITY_WAKE = "pref_power_proximity_wake";
     public static final String PREF_KEY_POWER_PROXIMITY_WAKE_IGNORE_CALL = "pref_power_proximity_wake_ignore_call";
+    public static final String PREF_KEY_POWER_CAMERA_VP = "pref_power_camera_vibrate_pattern";
     public static final String ACTION_PREF_POWER_CHANGED = "gravitybox.intent.action.POWER_CHANGED";
     public static final String EXTRA_POWER_PROXIMITY_WAKE = "powerProximityWake";
     public static final String EXTRA_POWER_PROXIMITY_WAKE_IGNORE_CALL = "powerProximityWakeIgnoreCall";
+    public static final String EXTRA_POWER_CAMERA_VP = "powerCameraVibratePattern";
 
     public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS = "pref_statusbar_download_progress";
     public static final String PREF_KEY_STATUSBAR_DOWNLOAD_PROGRESS_ANIMATED = "pref_statusbar_download_progress_animated";
@@ -1264,6 +1266,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefSbdpMode;
         private PreferenceScreen mPrefCatCellTile;
         private ListPreference mPrefBatteryTileTempUnit;
+        private EditTextPreference mPrefPowerCameraVp;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1566,6 +1569,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatCellTile = (PreferenceScreen) findPreference(PREF_CAT_KEY_CELL_TILE);
 
             mPrefBatteryTileTempUnit = (ListPreference) findPreference(PREF_KEY_BATTERY_TILE_TEMP_UNIT); 
+
+            mPrefPowerCameraVp = (EditTextPreference) findPreference(PREF_KEY_POWER_CAMERA_VP);
 
             // MTK fixes (deprecated)
             mPrefCatMtkFixes = (PreferenceScreen) findPreference(PREF_CAT_KEY_MTK_FIXES);
@@ -3080,6 +3085,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_TRIGIND_COLOR, prefs.getInt(key, 
                         getResources().getColor(R.color.pie_trigind_color)));
+            } else if (key.equals(PREF_KEY_POWER_CAMERA_VP)) {
+                intent.setAction(ACTION_PREF_POWER_CHANGED);
+                intent.putExtra(EXTRA_POWER_CAMERA_VP, prefs.getString(key, null));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();
@@ -3102,7 +3110,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
         @Override
         public boolean onPreferenceChange(Preference pref, Object newValue) {
-            if (pref == mPrefVkVibratePattern) {
+            if (pref == mPrefVkVibratePattern || pref == mPrefPowerCameraVp) {
                 if (newValue == null || ((String)newValue).isEmpty()) return true;
                 try {
                     Utils.csvToLongArray((String)newValue);

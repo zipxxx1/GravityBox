@@ -1571,6 +1571,11 @@
                 android:defaultValue="false"
                 android:dependency="pref_power_proximity_wake" />
 
+            <EditTextPreference
+                android:key="pref_power_camera_vibrate_pattern"
+                android:title="@string/pref_power_camera_vibrate_pattern_title"
+                android:summary="@string/pref_power_camera_vibrate_pattern_summary" />
+
         </PreferenceCategory>
 
     </PreferenceScreen>
