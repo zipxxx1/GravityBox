@@ -1046,7 +1046,7 @@ public class ModStatusBar {
             mLayoutCenter.addView(mClock.getClock());
             if (DEBUG) log("Clock set to center position");
         } else {
-            mClock.getClock().setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+            mClock.getClock().setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
             mClock.getClock().setLayoutParams(new LinearLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
             mClock.resetOriginalPaddingLeft();
