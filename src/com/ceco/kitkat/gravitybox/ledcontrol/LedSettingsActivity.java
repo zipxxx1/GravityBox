@@ -21,6 +21,7 @@ import java.util.Locale;
 import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.ModHwKeys;
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.Utils;
 import com.ceco.kitkat.gravitybox.ledcontrol.LedSettings.LedMode;
 
 import android.app.Activity;
@@ -135,7 +136,8 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
             .setContentTitle(getString(R.string.lc_preview_notif_title))
             .setContentText(String.format(Locale.getDefault(),
                     getString(R.string.lc_preview_notif_text), getTitle()))
-            .setSmallIcon(R.drawable.ic_launcher);
+            .setSmallIcon(R.drawable.ic_notif_gravitybox)
+            .setLargeIcon(Utils.drawableToBitmap(getResources().getDrawable(R.drawable.ic_launcher)));
         final Notification n = builder.build();
         if (mPrefsFragment.getLedMode() == LedMode.OFF) {
             n.defaults &= ~Notification.DEFAULT_LIGHTS;
