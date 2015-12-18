@@ -16,7 +16,7 @@
 package com.ceco.marshmallow.gravitybox;
 
 import java.util.ArrayList;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
@@ -457,6 +457,7 @@ public class ModClearAllRecents {
         if (DEBUG) log("Clear all recents button layout updated");
     }
 
+    @SuppressLint("RtlHardcoded")
     private static void updateRamBarLayout() {
         if (mRamUsageBar == null || mRamBarGravity == 0) return;
 

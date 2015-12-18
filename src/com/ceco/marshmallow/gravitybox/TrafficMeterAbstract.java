@@ -89,9 +89,9 @@ public abstract class TrafficMeterAbstract extends TextView
         lParams.setMarginStart(mMargin);
         lParams.setMarginEnd(mMargin);
         setLayoutParams(lParams);
-        setTextAppearance(context, context.getResources().getIdentifier(
+        setTextAppearance(context.getResources().getIdentifier(
                 "TextAppearance.StatusBar.Clock", "style", PACKAGE_NAME));
-        setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+        setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
 
         if (!Utils.isWifiOnly(getContext())) {
             mPhone = (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
