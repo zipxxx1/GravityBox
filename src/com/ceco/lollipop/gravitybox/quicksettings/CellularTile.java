@@ -176,8 +176,10 @@ public class CellularTile extends AospTile {
                     @Override
                     public void run() {
                         if (mDataOffView != null) {
-                            mDataOffView.setVisibility(shouldShow ?
+                            try {
+                                mDataOffView.setVisibility(shouldShow ?
                                     View.VISIBLE : View.GONE);
+                            } catch (Throwable t) { /* ignore */ }
                         }
                     }
                 });
