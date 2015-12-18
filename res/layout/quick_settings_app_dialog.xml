@@ -18,40 +18,35 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingTop="10dp" 
-    android:paddingLeft="10dp"
-    android:paddingBottom="10dp">
+    android:paddingTop="5dp" 
+    android:paddingBottom="5dp">
 
-    <TextView 
+    <TextView
+        style="@style/QuickAppTileTextView"
         android:id="@+id/quickapp1"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal"
-        android:paddingRight="10dp" />
+        android:layout_gravity="center" />
 
-    <TextView 
+    <TextView
+        style="@style/QuickAppTileTextView"
         android:id="@+id/quickapp2"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal"
-        android:paddingRight="10dp" />
+        android:layout_gravity="center" />
 
-    <TextView 
+    <TextView
+        style="@style/QuickAppTileTextView" 
         android:id="@+id/quickapp3"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal"
-        android:paddingRight="10dp" />
+        android:layout_gravity="center" />
 
-    <TextView 
+    <TextView
+        style="@style/QuickAppTileTextView" 
         android:id="@+id/quickapp4"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal"
-        android:paddingRight="10dp" />
+        android:layout_gravity="center" />
 
 </LinearLayout>

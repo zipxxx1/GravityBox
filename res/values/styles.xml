@@ -56,4 +56,15 @@
         <item name="android:padding">4dp</item>
     </style>
 
+    <!-- QuickApp tile dialog -->
+    <style name="QuickAppTileTextView">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">11dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:background">@drawable/ripple</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
 </resources>
