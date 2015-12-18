@@ -19,7 +19,7 @@ package com.ceco.lollipop.gravitybox.pie;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
@@ -136,6 +136,7 @@ public class PieController implements PieLayout.OnSnapListener, PieItem.PieOnCli
      * Defines the positions in which pie controls may appear. This enumeration is used to store
      * an index, a flag and the android gravity for each position.
      */
+    @SuppressLint("RtlHardcoded")
     public enum Position {
         LEFT(0, 0, android.view.Gravity.LEFT),
         BOTTOM(1, 1, android.view.Gravity.BOTTOM),
