@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import com.ceco.marshmallow.gravitybox.ModLedControl;
@@ -91,10 +92,11 @@ public class QuietHours {
                 String[] keywords = ls.getQhIgnoreList().trim().split(",");
                 boolean ignore = false;
                 for (String kw : keywords) {
-                    kw = kw.toLowerCase();
-                    ignore |= n.tickerText != null && n.tickerText.toString().toLowerCase().contains(kw);
+                    kw = kw.toLowerCase(Locale.getDefault());
+                    ignore |= n.tickerText != null && n.tickerText.toString()
+                            .toLowerCase(Locale.getDefault()).contains(kw);
                     for (String notifText : notifTexts) {
-                        ignore |= notifText.toLowerCase().contains(kw);
+                        ignore |= notifText.toLowerCase(Locale.getDefault()).contains(kw);
                     }
                 }
                 if (ModLedControl.DEBUG) ModLedControl.log("QH ignore list contains keyword?: " + ignore);

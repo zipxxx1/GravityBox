@@ -166,13 +166,13 @@ public class PieSysInfo extends PieSliceContainer implements ValueAnimator.Anima
     }
 
     private void updateData() {
-        mDateText = DateFormat.getMediumDateFormat(mContext).format(new Date()).toUpperCase();
+        mDateText = DateFormat.getMediumDateFormat(mContext).format(new Date()).toUpperCase(Locale.getDefault());
         mNetworkState = mController.getOperatorState();
         if (mNetworkState != null) {
-            mNetworkState = mNetworkState.toUpperCase();
+            mNetworkState = mNetworkState.toUpperCase(Locale.getDefault());
         }
-        mWifiSsid = getWifiSsid().toUpperCase();
-        mBatteryLevelReadable = mController.getBatteryLevel().toUpperCase();
+        mWifiSsid = getWifiSsid().toUpperCase(Locale.getDefault());
+        mBatteryLevelReadable = mController.getBatteryLevel().toUpperCase(Locale.getDefault());
     }
 
     private String getWifiSsid() {
