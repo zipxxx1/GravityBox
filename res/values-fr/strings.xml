@@ -1824,4 +1824,14 @@
     <string name="ls_bleft_action_default">Par défaut</string>
     <string name="ls_bleft_action_phone">Téléphone</string>
 
+    <!-- Lockscreen: Quick unlock PIN length -->
+    <string name="pref_lockscreen_pin_length_title">Longueur du code PIN</string>
+    <string name="pref_lockscreen_pin_length_summary">Il est nécessaire que le déverrouillage rapide connaisse la longueur exacte de votre code PIN pour fonctionner avec fiabilité</string>
+
+    <!-- Power: Camera vibration pattern -->
+    <string name="pref_power_camera_vibrate_pattern_title">Contrôle des vibrations de l\'appareil photo</string>
+    <string name="pref_power_camera_vibrate_pattern_summary">Définit la séquence des vibrations sous la forme d\'une liste de valeurs paires de durées On/Off en millisecondes
+        séparées par des virgules valable lorsque l\'appareil photo est lancé depuis la touche Power.
+        Laisser vide par une valeur par défaut. Mettre 0 pour désactiver les vibrations</string>
+
 </resources>
