@@ -14,6 +14,8 @@
  */
 package com.ceco.lollipop.gravitybox.preference;
 
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
@@ -99,7 +101,7 @@ public class TimePreference extends DialogPreference {
         } else {
             int hours = (int) (mValue / 60);
             int minutes = mValue - hours*60;
-            return (String.format("%02d:%02d", hours, minutes));
+            return (String.format(Locale.getDefault(), "%02d:%02d", hours, minutes));
         }
     }
 }

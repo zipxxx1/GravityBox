@@ -157,7 +157,7 @@ public class Utils {
     public static boolean isMtkDevice() {
         if (mIsMtkDevice != null) return mIsMtkDevice;
 
-        mIsMtkDevice = Build.HARDWARE.toLowerCase().matches("^mt[68][1-9][1-9][1-9]$") &&
+        mIsMtkDevice = Build.HARDWARE.toLowerCase(Locale.US).matches("^mt[68][1-9][1-9][1-9]$") &&
                 !isMotoXtDevice();
         return mIsMtkDevice;
     }
@@ -174,7 +174,7 @@ public class Utils {
     public static boolean isMotoXtDevice() {
         if (mIsMotoXtDevice != null) return mIsMotoXtDevice;
 
-        String model = Build.MODEL.toLowerCase();
+        String model = Build.MODEL.toLowerCase(Locale.US);
         mIsMotoXtDevice = Build.MANUFACTURER.equalsIgnoreCase("motorola") &&
                 (model.startsWith("xt") ||
                  model.contains("razr") ||
@@ -193,8 +193,8 @@ public class Utils {
     public static boolean isGpeDevice() {
         if (mIsGpeDevice != null) return mIsGpeDevice;
 
-        String productName = Build.PRODUCT.toLowerCase();
-        mIsGpeDevice = Build.DEVICE.toLowerCase().contains("gpe") || productName.contains("google")
+        String productName = Build.PRODUCT.toLowerCase(Locale.US);
+        mIsGpeDevice = Build.DEVICE.toLowerCase(Locale.US).contains("gpe") || productName.contains("google")
                 || productName.contains("ged") || productName.contains("gpe") ||
                 productName.contains("aosp");
         return mIsGpeDevice;
@@ -203,7 +203,7 @@ public class Utils {
     public static boolean isExynosDevice() {
         if (mIsExynosDevice != null) return mIsExynosDevice;
 
-        mIsExynosDevice = Build.HARDWARE.toLowerCase().contains("smdk");
+        mIsExynosDevice = Build.HARDWARE.toLowerCase(Locale.US).contains("smdk");
         return mIsExynosDevice;
     }
 
