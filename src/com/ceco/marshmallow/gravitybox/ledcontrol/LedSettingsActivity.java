@@ -29,6 +29,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -136,7 +137,8 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
             .setContentTitle(getString(R.string.lc_preview_notif_title))
             .setContentText(String.format(Locale.getDefault(),
                     getString(R.string.lc_preview_notif_text), getTitle()))
-            .setSmallIcon(R.drawable.ic_launcher);
+            .setSmallIcon(R.drawable.ic_notif_gravitybox)
+            .setLargeIcon(Icon.createWithResource(this, R.drawable.ic_launcher));
         final Notification n = builder.build();
         if (mPrefsFragment.getLedMode() == LedMode.OFF) {
             n.defaults &= ~Notification.DEFAULT_LIGHTS;
