@@ -1,3 +1,20 @@
+Changelog 6.0.3 - 20/12/2015
+--------------------------------------
+- Fixed GB settings not sticking on some devices
+- Added support for auto-color inversion of GB status bar elements on white status bar (doesn't apply when icon coloring is turned on)
+- Lockscreen: improved Quick unlock feature (requires user to specify PIN length)
+- Power: added option for defining vibrate pattern when launching Camera by pressing power key twice
+- Circle battery: improved percent text size and position (thanks to creeve4)
+- Moved battery percent text to the right of battery icon for consistency with header and keyguard
+- Improved support for RTL locales
+- Cleaned up unused resources
+- Other small adjustments (see commit history in project's github)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated French translations (thanks to ch-vox)
+- Updated Russian translations (thanks to gaich)
+- Updated Vietnamese translations (thanks to TranDatDT)
+- Updated Ukrainian translations (thanks to burunduk)
+
 Changelog 6.0.2 - 08/12/2015
 --------------------------------------
 - Lockscreen:
