@@ -66,10 +66,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normál</string>
     <string name="quick_settings_expanded_desktop_expanded">Kiterjesztett</string>
     <string name="quick_settings_stay_awake_on">Ébrentartás bekapcsolva</string>
-    <string name="quick_settings_stay_awake_off">Ébrentartás kikapcsolva</string>
     <string name="quick_settings_nfc_on">NFC bekapcsolva</string>
     <string name="quick_settings_nfc_off">NFC kikapcsolva</string>
-    <string name="quick_settings_camera_error_connect">Nem lehetséges a kamerához való csatlakozás</string>
     <string name="quick_settings_usb_tether_off">Szétkapcsolva</string>
     <string name="quick_settings_usb_tether_connected">Megosztás kikapcsolva</string>
     <string name="quick_settings_usb_tether_on">Megosztás</string>
@@ -642,14 +640,6 @@
     <string name="pref_navbar_key_color_title">Navigációs gomb színe</string>
     <string name="pref_navbar_key_glow_color_title">Aktív navigációs gomb színe</string>
 
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Átlátszóság menedzser mód</string>
-    <string name="pref_tm_mode_summary">Újraindítás szükséges</string>
-    <string name="tm_mode_disabled">Letiltva</string>
-    <string name="tm_mode_statusbar">Állapotsáv</string>
-    <string name="tm_mode_navbar">Navigációs sáv</string>
-    <string name="tm_mode_full">Mindkettő</string>
-
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Másodlagos SIM jelerősség színe</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Felülírja a gyári sárga jelerősség ikonszínt</string>
@@ -708,7 +698,6 @@
     <string name="ringer_mode_vibrate">Rezgés</string>
     <string name="ringer_mode_sound">Csengés</string>
     <string name="ringer_mode_sound_vibrate">Csengés és rezgés</string>
-    <string name="ringer_mode_none">Nincs</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">A képernyő videórögzítésre kerül</string>
@@ -1411,7 +1400,6 @@
     <string name="pref_lc_active_screen_mode_title">Aktív Képernyő mód</string>
     <string name="lc_active_screen_mode_disabled">Letiltva</string>
     <string name="lc_active_screen_mode_nothing">Csak bekapcsolt képernyőnél</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Képernyőtartalom tükrözése</string>
@@ -1429,15 +1417,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Egyéni művelet</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Lebegő felugró ablak Időtúllépés</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Mennyi ideig mutassa az értesítési ablakot. 0 = amíg a feloldás aktív.</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Adathasználat 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Átlátszóság szint</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Töltő lecsatlakoztatás hang</string>
@@ -1471,15 +1452,6 @@
     <string name="charging_led_default">Alapértelmezett</string>
     <string name="charging_led_emulated">Emulált</string>
     <string name="charging_led_disabled">Letiltva</string>
-
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Szundi gomb engedélyezése</string>
-    <string name="headsup_snooze_all_apps">Beállítás minden alkalmazáshoz</string>
-    <string name="headsup_snooze_app">Beállítja a Lebegő felugró ablak szundi időzítőjét %s-re</string>
-    <string name="pref_heads_up_snooze_reset_title">Szundi időzítő visszaállítása</string>
-    <string name="pref_heads_up_snooze_timer_title">Alapértelmezett szundi időzítő</string>
-    <string name="pref_heads_up_snooze_timer_summary">Az időzítő automatikusan beállításra kerül a lebegő felugró ablak szundi gombjára történő kattintással. Hosszú érintéssel a gombra kattintva az egyéni időzítő panel kerül megnyitásra.</string>
-    <string name="headsup_snooze_timer_set">Lebegő felugró ablak szundi időzítő beállítva %s-ra</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Hétköznapok beállítása (munkanapok)</string>

@@ -66,10 +66,8 @@
     <string name="quick_settings_expanded_desktop_normal">Нормальний</string>
     <string name="quick_settings_expanded_desktop_expanded">Розширений</string>
     <string name="quick_settings_stay_awake_on">Не засинати увімк.</string>
-    <string name="quick_settings_stay_awake_off">Не засинати вимк.</string>
     <string name="quick_settings_nfc_on">Увімк. NFC</string>
     <string name="quick_settings_nfc_off">Вимк. NFC</string>
-    <string name="quick_settings_camera_error_connect">Не вдалося з\'єднатися з камерою</string>
     <string name="quick_settings_usb_tether_off">Від\'єднано</string>
     <string name="quick_settings_usb_tether_connected">Роздача вимк.</string>
     <string name="quick_settings_usb_tether_on">Роздача</string>
@@ -641,14 +639,6 @@
     <string name="pref_navbar_key_color_title">Колір кнопок навігації</string>
     <string name="pref_navbar_key_glow_color_title">Колір тіні кнопок навігації</string>
 
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Режим налаштування прозорості</string>
-    <string name="pref_tm_mode_summary">Необхідне перезавантаження</string>
-    <string name="tm_mode_disabled">Вимкнено</string>
-    <string name="tm_mode_statusbar">Панель стану</string>
-    <string name="tm_mode_navbar">Панель навігації</string>
-    <string name="tm_mode_full">Обидва</string>
-
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Колір другої SIM</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Зміна стандартного помаранчевого значка</string>
@@ -708,7 +698,6 @@
     <string name="ringer_mode_vibrate">Вібрація</string>
     <string name="ringer_mode_sound">Звук</string>
     <string name="ringer_mode_sound_vibrate">Звук та вібрація</string>
-    <string name="ringer_mode_none">Відсутній</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Екран записується</string>
@@ -1426,7 +1415,6 @@
     <string name="pref_lc_active_screen_mode_title">Режим активного екрану</string>
     <string name="lc_active_screen_mode_disabled">Вимкнено</string>
     <string name="lc_active_screen_mode_nothing">Лише включення екрану</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Трансляція</string>
@@ -1444,15 +1432,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Користувацька дія</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Затримка зринання</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Час показу вікна, яке зринає. Нуль - до розблокування.</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Стільник 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Рівень прозорості</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Звук при від\'єднані ЗП</string>
@@ -1486,16 +1467,6 @@
     <string name="charging_led_default">Типово</string>
     <string name="charging_led_emulated">Емуляція</string>
     <string name="charging_led_disabled">Вимкнено</string>
-
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Увімкнути кнопку переносу</string>
-    <string name="headsup_snooze_all_apps">Для всіх додатків</string>
-    <string name="headsup_snooze_app">Встановити зринання таймеру переносу для %s</string>
-    <string name="pref_heads_up_snooze_reset_title">Скидання таймерів переносу</string>
-    <string name="pref_heads_up_snooze_timer_title">Типовий таймер переносу</string>
-    <string name="pref_heads_up_snooze_timer_summary">Таймер, який автоматично встановлюється при натисканні на значок переносу зринання. Утримання на значку відкриває діалог встановлення таймеру.</string>
-
-    <string name="headsup_snooze_timer_set">Таймер переносу, що зринає, встановлено на %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Встановлення буднів</string>

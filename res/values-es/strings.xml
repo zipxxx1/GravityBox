@@ -66,10 +66,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Expandido</string>
     <string name="quick_settings_stay_awake_on">Permanecer despierto</string>
-    <string name="quick_settings_stay_awake_off">No permanecer despierto</string>
     <string name="quick_settings_nfc_on">NFC activado</string>
     <string name="quick_settings_nfc_off">NFC</string>
-    <string name="quick_settings_camera_error_connect">Imposible conectar con la cámara</string>
     <string name="quick_settings_usb_tether_off">Desconectado</string>
     <string name="quick_settings_usb_tether_connected">Tethering</string>
     <string name="quick_settings_usb_tether_on">Tethering activado</string>
@@ -641,14 +639,6 @@
     <string name="pref_navbar_key_color_title">Color de botón de navegación</string>
     <string name="pref_navbar_key_glow_color_title">Color del brillo del botón de navegación</string>
 
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Modo de gestor de transparencia</string>
-    <string name="pref_tm_mode_summary">Requiere reinicio</string>
-    <string name="tm_mode_disabled">Deshabilitado</string>
-    <string name="tm_mode_statusbar">Barra de estado</string>
-    <string name="tm_mode_navbar">Barra de navegación</string>
-    <string name="tm_mode_full">Ambas</string>
-
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Color de señal secundaria</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Sobreescribe el icono de señal anaranjado predeterminado</string>
@@ -708,8 +698,7 @@
     <string name="ringer_mode_vibrate">Vibrar</string>
     <string name="ringer_mode_sound">Sonar</string>
     <string name="ringer_mode_sound_vibrate">Sonar y vibrar</string>
-    <string name="ringer_mode_none">Ninguno</string>
-	
+
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Se está grabando la pantalla</string>
     <string name="screenrecord_notif_title">Grabando pantalla</string>
@@ -1426,8 +1415,7 @@
     <string name="pref_lc_active_screen_mode_title">Modo Pantalla Activa</string>
     <string name="lc_active_screen_mode_disabled">Desactivado</string>
     <string name="lc_active_screen_mode_nothing">Solo encender pantalla</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
-    
+
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Pantalla remota</string>
     
@@ -1443,16 +1431,9 @@
     
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Acción personalizada</string>
-    
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Ocultar notificación Heads up tras&#8230;</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Cuánto tiempo mostrar la ventana de notificación. 0 = hasta desbloquear.</string>
 
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Uso de datos 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Nivel de transparencia</string>
     
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Sonido al desconectar cargador</string>
@@ -1486,16 +1467,6 @@
     <string name="charging_led_default">Predeterminado</string>
     <string name="charging_led_emulated">Emulado</string>
     <string name="charging_led_disabled">Desactivado</string>
-    
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Activar botón No molestar</string>
-    <string name="headsup_snooze_all_apps">Establecer para todas las apps</string>
-    <string name="headsup_snooze_app">No molestar durante %s</string>
-    <string name="pref_heads_up_snooze_reset_title">Restablecer tiempo de No molestar</string>
-    <string name="pref_heads_up_snooze_timer_title">Tiempo de No molestar predeterminado</string>
-    <string name="pref_heads_up_snooze_timer_summary">Tiempo a establecer automáticamente cuando se pulsa el icono de No molestar en la notificación Heads up. 
-        Una pulsación prolongada sobre dicho icono abre el diálogo para cambiar el tiempo.</string>
-    <string name="headsup_snooze_timer_set">El tiempo predeterminado de No molestar en Heads up es de %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Establecer días entre semana</string>

@@ -66,10 +66,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Dipanjangkan</string>
     <string name="quick_settings_stay_awake_on">Hidupkan screen tanpa had masa</string>
-    <string name="quick_settings_stay_awake_off">Matikan screen tanpa had masa</string>
     <string name="quick_settings_nfc_on">Hidupkan NFC</string>
     <string name="quick_settings_nfc_off">Matikan NFC</string>
-    <string name="quick_settings_camera_error_connect">Tidak dapat disambung ke kamera</string>
     <string name="quick_settings_usb_tether_off">Diputuskan</string>
     <string name="quick_settings_usb_tether_connected">Tutup sambungan USB</string>
     <string name="quick_settings_usb_tether_on">Sambungan USB</string>
@@ -637,14 +635,6 @@
     <string name="pref_navbar_color_enable_summary">Mungkin perlukan reboot setelah dinyah aktif</string>
     <string name="pref_navbar_key_color_title">Warna bar navigasi</string>
     <string name="pref_navbar_key_glow_color_title">Warna glow untuk bar navigasi</string>
-
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Mod pengurus transparent</string>
-    <string name="pref_tm_mode_summary">Perlukan reboot</string>
-    <string name="tm_mode_disabled">Matikan</string>
-    <string name="tm_mode_statusbar">Bar status</string>
-    <string name="tm_mode_navbar">Bar navigasi</string>
-    <string name="tm_mode_full">Keduanya</string>
 
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Warna signal kedua</string>
@@ -1421,7 +1411,6 @@
     <string name="pref_lc_active_screen_mode_title">Mod skrin aktif</string>
     <string name="lc_active_screen_mode_disabled">Dimatikan</string>
     <string name="lc_active_screen_mode_nothing">Hidupkan skrin sahaja</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Cast skrin</string>
@@ -1439,15 +1428,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Aksi tertentu</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Jangka masa Heads up</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Jangka masa heads up berapa lama. 0 = sehingga di unlock.</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Sim 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Tahap kejernihan</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Bunyi ketika charger dicabut</string>
@@ -1481,16 +1463,6 @@
     <string name="charging_led_default">Tetapan asal</string>
     <string name="charging_led_emulated">Berkelip</string>
     <string name="charging_led_disabled">Dimatikan</string>
-
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Aktifkan butang snooze</string>
-    <string name="headsup_snooze_all_apps">Set untuk semua aplikasi</string>
-    <string name="headsup_snooze_app">Set jangka masa heads up snooze untuk %s</string>
-    <string name="pref_heads_up_snooze_reset_title">Tetapan jangka masa snooze tertentu</string>
-    <string name="pref_heads_up_snooze_timer_title">Tetapan jangka masa snooze asal</string>
-    <string name="pref_heads_up_snooze_timer_summary">Jangka masa akan diset apabila ikon di klik. 
-        Tekan lama untuk paparkan dialog.</string>
-    <string name="headsup_snooze_timer_set">Tetapan jangka masa heads up asal diset untuk %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Set hari biasa</string>

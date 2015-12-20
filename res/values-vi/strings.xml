@@ -66,10 +66,8 @@
     <string name="quick_settings_expanded_desktop_normal">Bình thường</string>
     <string name="quick_settings_expanded_desktop_expanded">Mở rộng</string>
     <string name="quick_settings_stay_awake_on">ĐT luôn thức Bật</string>
-    <string name="quick_settings_stay_awake_off">ĐT luôn thức tắt</string>
     <string name="quick_settings_nfc_on">NFC Bật</string>
     <string name="quick_settings_nfc_off">NFC Tắt</string>
-    <string name="quick_settings_camera_error_connect">Không thể kết nối với máy ảnh</string>
     <string name="quick_settings_usb_tether_off">Ngắt kết nối</string>
     <string name="quick_settings_usb_tether_connected">Chế độ moderm Tắt</string>
     <string name="quick_settings_usb_tether_on">Chế độ moderm Bật</string>
@@ -641,14 +639,6 @@
     <string name="pref_navbar_key_color_title">Màu phím điều hướng</string>
     <string name="pref_navbar_key_glow_color_title">Màu phím điều hướng khi được bấm</string>
 
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Chế độ quản lý trong suốt</string>
-    <string name="pref_tm_mode_summary">Yêu cầu khởi động lại</string>
-    <string name="tm_mode_disabled">Tắt</string>
-    <string name="tm_mode_statusbar">Thanh trạng thái</string>
-    <string name="tm_mode_navbar">Thanh điều hướng</string>
-    <string name="tm_mode_full">Cả hai</string>
-
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Màu cột sóng thứ hai</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Bỏ qua biểu tượng cột sóng gốc màu cam</string>
@@ -708,7 +698,6 @@
     <string name="ringer_mode_vibrate">Rung</string>
     <string name="ringer_mode_sound">Chuông</string>
     <string name="ringer_mode_sound_vibrate">Chuông và rung</string>
-    <string name="ringer_mode_none">Không có</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Đang quay phim màn hình</string>
@@ -1425,7 +1414,6 @@
     <string name="pref_lc_active_screen_mode_title">Chế độ Màn hình linh động</string>
     <string name="lc_active_screen_mode_disabled">Tắt</string>
     <string name="lc_active_screen_mode_nothing">Chỉ bật sáng màn hình</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Truyền màn hình</string>
@@ -1443,15 +1431,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Hành động cá nhân</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Thời gian chờ Heads up</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Trong bao lâu để hiện cửa sổ heads up. 0 = cho đến khi được mở khóa.</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Ô 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Đọ trong suốt</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Âm báo rút sạc</string>
@@ -1485,16 +1466,6 @@
     <string name="charging_led_default">Mặc định</string>
     <string name="charging_led_emulated">Đổi màu liên tục</string>
     <string name="charging_led_disabled">Tắt</string>
-
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Bật nút báo lại</string>
-    <string name="headsup_snooze_all_apps">Đặt cho mọi ứng dụng</string>
-    <string name="headsup_snooze_app">Đặt thời gian báo lại heads up cho %s</string>
-    <string name="pref_heads_up_snooze_reset_title">Đặt lại thời gian báo lại</string>
-    <string name="pref_heads_up_snooze_timer_title">Thời gian báo lại mặc định</string>
-    <string name="pref_heads_up_snooze_timer_summary">Thời gian sẽ được đặt tự động khi bấm vào biểu tượng báo lại heads up. 
-        Giữ vào biểu tượng báo lại heads up để mở hộp thoại chỉnh thời gian.</string>
-    <string name="headsup_snooze_timer_set">Thời gian báo lại heads up mặc định đặt cho %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Đặt các ngày trong tuần</string>

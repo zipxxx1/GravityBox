@@ -64,10 +64,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Utvidet</string>
     <string name="quick_settings_stay_awake_on">Forbli Våken På</string>
-    <string name="quick_settings_stay_awake_off">Forbli Våken Av</string>
     <string name="quick_settings_nfc_on">NFC På</string>
     <string name="quick_settings_nfc_off">NFC Av</string>
-    <string name="quick_settings_camera_error_connect">Kan ikke koble til kamera</string>
     <string name="quick_settings_usb_tether_off">Frakoblet</string>
     <string name="quick_settings_usb_tether_connected">USB Deling Av</string>
     <string name="quick_settings_usb_tether_on">USB Deling</string>
@@ -625,14 +623,6 @@
     <string name="pref_navbar_color_enable_summary">May require reboot after disabling</string>
     <string name="pref_navbar_key_color_title">Navigation key color</string>
     <string name="pref_navbar_key_glow_color_title">Navigation key glow color</string>
-
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Transparency manager mode</string>
-    <string name="pref_tm_mode_summary">Requires reboot</string>
-    <string name="tm_mode_disabled">Disabled</string>
-    <string name="tm_mode_statusbar">Statusbar</string>
-    <string name="tm_mode_navbar">Navigation bar</string>
-    <string name="tm_mode_full">Both</string>
 
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Secondary signal color</string>

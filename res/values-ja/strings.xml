@@ -54,10 +54,8 @@
     <string name="quick_settings_expanded_desktop_normal">通常</string>
     <string name="quick_settings_expanded_desktop_expanded">展開中</string>
     <string name="quick_settings_stay_awake_on">常時点灯オン</string>
-    <string name="quick_settings_stay_awake_off">常時点灯オフ</string>
     <string name="quick_settings_nfc_on">NFCオン</string>
     <string name="quick_settings_nfc_off">NFCオフ</string>
-    <string name="quick_settings_camera_error_connect">カメラ接続不可</string>
     <string name="quick_settings_usb_tether_off">未接続</string>
     <string name="quick_settings_usb_tether_connected">テザリングオフ</string>
     <string name="quick_settings_usb_tether_on">テザリング</string>
@@ -528,13 +526,6 @@
     <string name="pref_navbar_color_enable_summary">無効化後は再起動してください。</string>
     <string name="pref_navbar_key_color_title">ナビキーの色</string>
     <string name="pref_navbar_key_glow_color_title">ナビキーのグロー色</string>
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">透過処理モード</string>
-    <string name="pref_tm_mode_summary">変更後は再起動してください。</string>
-    <string name="tm_mode_disabled">無効</string>
-    <string name="tm_mode_statusbar">ステータスバー</string>
-    <string name="tm_mode_navbar">ナビバー</string>
-    <string name="tm_mode_full">両方</string>
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">セカンダリ電波アイコン色</string>
     <string name="pref_statusbar_icon_color_secondary_summary">オレンジの電波アイコンを上書きします。</string>
@@ -1169,7 +1160,6 @@
     <string name="pref_lc_active_screen_mode_title">アクティブスクリーンモード</string>
     <string name="lc_active_screen_mode_disabled">無効</string>
     <string name="lc_active_screen_mode_nothing">画面点灯のみ</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">画面のキャスト</string>
     <!-- UNC: main screen -->
@@ -1183,13 +1173,8 @@
     <string name="pref_unc_quiet_hours_summary">通知のお休みモードの設定を管理します。</string>
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">カスタムアクション</string>
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Heads upタイムアウト</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Heads up通知ウインドウを表示する時間を指定します。 0 = アンロックされるまで表示</string>
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">モバイルデータ2</string>
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">透過度</string>
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">電源接続解除時のサウンド</string>
     <!-- MTK tiles: Audio profile -->
@@ -1215,15 +1200,6 @@
     <string name="charging_led_default">デフォルト</string>
     <string name="charging_led_emulated">エミュレート</string>
     <string name="charging_led_disabled">無効</string>
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">スヌーズボタンの有効化</string>
-    <string name="headsup_snooze_all_apps">全てのアプリにセット</string>
-    <string name="headsup_snooze_app">%sにHeads upスヌーズタイマーをセット</string>
-    <string name="pref_heads_up_snooze_reset_title">スヌーズタイマーをリセット</string>
-    <string name="pref_heads_up_snooze_timer_title">デフォルトのスヌーズタイマー</string>
-    <string name="pref_heads_up_snooze_timer_summary">Heads upスヌーズアイコンをタップしたときに自動的にセットするスヌーズタイマーを設定します。
-        Heads upスヌーズアイコンを長押しするとカスタムタイマーダイアログが表示されます。</string>
-    <string name="headsup_snooze_timer_set">デフォルトのHeads upスヌーズタイマーを%sにセットしました</string>
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">週日のセット</string>
     <!-- QuietHours: mute system sounds -->

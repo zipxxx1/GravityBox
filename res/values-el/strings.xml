@@ -70,10 +70,8 @@
     <string name="quick_settings_expanded_desktop_normal">Κλασικο</string>
     <string name="quick_settings_expanded_desktop_expanded">Διευρυμενο</string>
     <string name="quick_settings_stay_awake_on">Επαγρυπνηση ενεργη</string>
-    <string name="quick_settings_stay_awake_off">Επαγρυπνηση ανενεργη</string>
     <string name="quick_settings_nfc_on">NFC Ενεργο</string>
     <string name="quick_settings_nfc_off">NFC ανενεργό</string>
-    <string name="quick_settings_camera_error_connect">Αδυναμία σύνδεσης με κάμερα</string>
     <string name="quick_settings_usb_tether_off">Αποσυνδεθηκε</string>
     <string name="quick_settings_usb_tether_connected">Tethering ανεργο</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
@@ -622,14 +620,6 @@
     <string name="pref_navbar_color_enable_summary">Μπορεί να χρειαστεί επανεκκίνηση μετά από απενεργοποίηση</string>
     <string name="pref_navbar_key_color_title">Χρώμα πλήκτρου πλοήγησης</string>
     <string name="pref_navbar_key_glow_color_title">Χρώμα λάμψης πλήκτρου πλοήγησης</string>
-
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Διαχείριση διαφάνειας</string>
-    <string name="pref_tm_mode_summary">Απαιτείται επανεκκίνηση</string>
-    <string name="tm_mode_disabled">Απενεργοποιημένο</string>
-    <string name="tm_mode_statusbar">Γραμμή κατάστασης</string>
-    <string name="tm_mode_navbar">Γραμμή πλοήγησης</string>
-    <string name="tm_mode_full">Και τα δύο</string>
 
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Χρώμα δευτερεύοντος σήματος</string>

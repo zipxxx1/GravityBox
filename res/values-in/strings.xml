@@ -603,14 +603,6 @@
     <string name="pref_navbar_key_color_title">Warna tombol navigasi</string>
     <string name="pref_navbar_key_glow_color_title">Warna tombol navigasi ketika menyala</string>
 
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Mode pengelola transparansi</string>
-    <string name="pref_tm_mode_summary">Membutuhkan restart</string>
-    <string name="tm_mode_disabled">Dimatikan</string>
-    <string name="tm_mode_statusbar">Statusbar</string>
-    <string name="tm_mode_navbar">Navbar</string>
-    <string name="tm_mode_full">Keduanya</string>
-
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Warna sinyal kedua</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Merubah warna sinyal oranye</string>

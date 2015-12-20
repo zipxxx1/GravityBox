@@ -49,10 +49,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Expandido</string>
     <string name="quick_settings_stay_awake_on">Manter ligado</string>
-    <string name="quick_settings_stay_awake_off">Não manter ligado</string>
     <string name="quick_settings_nfc_on">NFC ativado</string>
     <string name="quick_settings_nfc_off">NFC desativado</string>
-    <string name="quick_settings_camera_error_connect">Não foi possível conectar-se à câmera</string>
     <string name="quick_settings_usb_tether_off">Desligado</string>
     <string name="quick_settings_usb_tether_connected">Tethering USB desativado</string>
     <string name="quick_settings_usb_tether_on">Tethering USB ativado</string>
@@ -608,14 +606,6 @@
     <string name="pref_navbar_color_enable_summary">Pode ser necessário reiniciar após desabilitar</string>
     <string name="pref_navbar_key_color_title">Cor da tecla de navegação</string>
     <string name="pref_navbar_key_glow_color_title">Cor crescente da tecla de navegação</string>
-
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Modo de configuração de transparências</string>
-    <string name="pref_tm_mode_summary">Necessário reiniciar</string>
-    <string name="tm_mode_disabled">Desabilitado</string>
-    <string name="tm_mode_statusbar">Barra de status</string>
-    <string name="tm_mode_navbar">Barra de navegação</string>
-    <string name="tm_mode_full">Ambos</string>
 
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Cor do ícone de sinal secundário</string>
@@ -1384,7 +1374,6 @@
     <string name="pref_lc_active_screen_mode_title">Modo Tela ativo</string>
     <string name="lc_active_screen_mode_disabled">Desativado</string>
     <string name="lc_active_screen_mode_nothing">Somente ligar a tela</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Tela remota</string>
@@ -1402,15 +1391,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Ação personalizada</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Tempo limite das notificações flutuantes</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Permite definir por quanto tempo deverá ser mostrada a notificação (0 = até desbloquear)</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Utilização de dados 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Nível de transparência</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Som ao desconectar carregador</string>
@@ -1444,16 +1426,6 @@
     <string name="charging_led_default">Padrão</string>
     <string name="charging_led_emulated">Através de simulação</string>
     <string name="charging_led_disabled">Desativada</string>
-
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Ativar possibilidade de adiar</string>
-    <string name="headsup_snooze_all_apps">Ativar em todos os aplicativos</string>
-    <string name="headsup_snooze_app">Definir temporizador para adiamento de %s</string>
-    <string name="pref_heads_up_snooze_reset_title">Limpar temporizadores</string>
-    <string name="pref_heads_up_snooze_timer_title">Temporizador padrão</string>
-    <string name="pref_heads_up_snooze_timer_summary">Permite definir o temporizador padrão aplicar automaticamente ao carregar para adiar a notificação. 
-        Ao manter pressionado o botão de adiamento é possível escolher um temporizador customizado.</string>
-    <string name="headsup_snooze_timer_set">Temporizador padrão das notificações definido por %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Definir dias da semana</string>

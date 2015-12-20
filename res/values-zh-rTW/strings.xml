@@ -64,10 +64,8 @@
     <string name="quick_settings_expanded_desktop_normal">正常</string>
     <string name="quick_settings_expanded_desktop_expanded">擴展</string>
     <string name="quick_settings_stay_awake_on">保持螢幕長亮 開啟</string>
-    <string name="quick_settings_stay_awake_off">保持螢幕長亮 關閉</string>
     <string name="quick_settings_nfc_on">NFC 開啟</string>
     <string name="quick_settings_nfc_off">NFC 關閉</string>
-    <string name="quick_settings_camera_error_connect">無法連結至相機</string>
     <string name="quick_settings_usb_tether_off">中斷連結</string>
     <string name="quick_settings_usb_tether_connected">USB 網絡共用 關閉</string>
     <string name="quick_settings_usb_tether_on">USB 網絡共用 開啟</string>
@@ -625,14 +623,6 @@
     <string name="pref_navbar_key_color_title">導航列按鍵顏色</string>
     <string name="pref_navbar_key_glow_color_title">導航列光暈顏色</string>
 
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">透明度管理器模式</string>
-    <string name="pref_tm_mode_summary">需要重新啟動裝置才能生效</string>
-    <string name="tm_mode_disabled">停用</string>
-    <string name="tm_mode_statusbar">狀態列</string>
-    <string name="tm_mode_navbar">導航列</string>
-    <string name="tm_mode_full">兩者</string>
-    
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">第二訊號顏色</string>
     <string name="pref_statusbar_icon_color_secondary_summary">覆蓋預設橘色訊號圖示</string>
@@ -1396,7 +1386,6 @@
     <string name="pref_lc_active_screen_mode_title">主動螢幕喚醒模式</string>
     <string name="lc_active_screen_mode_disabled">停用</string>
     <string name="lc_active_screen_mode_nothing">只喚醒螢幕</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">遠端顯示</string>
@@ -1414,15 +1403,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">其他選項</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">浮動通知逾時</string>
-    <string name="pref_unc_as_headsup_timeout_summary">設定浮動通知的顯示時間。設為 0 時，浮動通知會一直顯示直至手機屏幕鎖定被解除</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">數據用量 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">透明度設定</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">充電器拔除音效</string>
@@ -1456,16 +1438,6 @@
     <string name="charging_led_default">系統預設值</string>
     <string name="charging_led_emulated">強制模擬</string>
     <string name="charging_led_disabled">停用</string>
-
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">啟用延後通知計時器</string>
-    <string name="headsup_snooze_all_apps">套用至所有通知</string>
-    <string name="headsup_snooze_app">已套用延後通知計時器至 %s</string>
-    <string name="pref_heads_up_snooze_reset_title">重設延後通知計時器</string>
-    <string name="pref_heads_up_snooze_timer_title">預設延後通知計時器</string>
-    <string name="pref_heads_up_snooze_timer_summary">設定當您點選延後通知按鈕時自動套用的計時器長度
-	(長按延後通知按鈕亦可自設延後通知計時器長度)</string>
-    <string name="headsup_snooze_timer_set">已套用預設延後通知計時器至 %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">設定週日</string>

@@ -49,10 +49,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normální plocha</string>
     <string name="quick_settings_expanded_desktop_expanded">Rozšířená plocha</string>
     <string name="quick_settings_stay_awake_on">Bdění zap</string>
-    <string name="quick_settings_stay_awake_off">Bdění vyp</string>
     <string name="quick_settings_nfc_on">NFC zap</string>
     <string name="quick_settings_nfc_off">NFC vyp</string>
-    <string name="quick_settings_camera_error_connect">Nelze spustit fotoaparát</string>
     <string name="quick_settings_usb_tether_off">Odpojeno</string>
     <string name="quick_settings_usb_tether_connected">Sdílení vyp</string>
     <string name="quick_settings_usb_tether_on">Sdílení zap</string>
@@ -613,14 +611,6 @@
     <string name="pref_navbar_key_color_title">Barva tlačítek</string>
     <string name="pref_navbar_key_glow_color_title">Efekt tlačítek</string>
 
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Režim průhlednosti</string>
-    <string name="pref_tm_mode_summary">Vyžaduje restart</string>
-    <string name="tm_mode_disabled">Vypnutý</string>
-    <string name="tm_mode_statusbar">Stavový řádek</string>
-    <string name="tm_mode_navbar">Navigační lišta</string>
-    <string name="tm_mode_full">Stavový řádek i navigační lišta</string>
-
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Barva sekundárního signálu</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Nahradí původní oranžovou verzi ikony signálu</string>
@@ -680,7 +670,6 @@
     <string name="ringer_mode_vibrate">Vibrovat</string>
     <string name="ringer_mode_sound">Vyzvánět</string>
     <string name="ringer_mode_sound_vibrate">Vyzvánět a vibrovat</string>
-    <string name="ringer_mode_none">Žádné</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Probíhá záznam obrazovky</string>
@@ -1387,7 +1376,6 @@
     <string name="pref_lc_active_screen_mode_title">Režim aktivní obrazovky</string>
     <string name="lc_active_screen_mode_disabled">Vypnutá</string>
     <string name="lc_active_screen_mode_nothing">Jen zapnout obrazovku</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Vzdálená obrazovka</string>
@@ -1405,15 +1393,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Vlastní akce</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Heads up časovač</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Po jaké době zavřít notifikační okno. 0 = po odemknutí zařízení.</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Mobilní signál 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Úroveň průhlednosti</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Zvuk odpojení napájení</string>
@@ -1447,16 +1428,6 @@
     <string name="charging_led_default">Původní</string>
     <string name="charging_led_emulated">Emulovaný</string>
     <string name="charging_led_disabled">Vypnutý</string>
-
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Povolit tlačítko dřímání</string>
-    <string name="headsup_snooze_all_apps">Pro všechny aplikace</string>
-    <string name="headsup_snooze_app">Nastavit heads up dřímání pro %s</string>
-    <string name="pref_heads_up_snooze_reset_title">Nulovat časovače dřímání</string>
-    <string name="pref_heads_up_snooze_timer_title">Výchozí časovač dřímání</string>
-    <string name="pref_heads_up_snooze_timer_summary">Časovač, který se automaticky nastaví po stisknutí tlačítka dřímání. 
-        Dlouhé stisknutí tlačítka dřímání zobrazí dialog pro manuální zadání časovače.</string>
-    <string name="headsup_snooze_timer_set">Heads up výchozí časovač dřímání nastaven pro %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Nastavit pracovní dny</string>

@@ -661,38 +661,6 @@
                 android:defaultValue="5"
                 android:dependency="pref_heads_up_master_switch" />
 
-            <!--
-            <CheckBoxPreference
-                android:key="pref_heads_up_snooze"
-                android:title="@string/pref_heads_up_snooze_title"
-                android:defaultValue="false"
-                android:dependency="pref_heads_up_master_switch" />
-
-            <com.ceco.marshmallow.gravitybox.preference.TimePreference
-                android:key="pref_heads_up_snooze_timer"
-                android:title="@string/pref_heads_up_snooze_timer_title"
-                android:summary="@string/pref_heads_up_snooze_timer_summary"
-                timerMode="true"
-                android:defaultValue="60"
-                android:dependency="pref_heads_up_snooze" />
-
-            <Preference
-                android:key="pref_heads_up_snooze_reset"
-                android:title="@string/pref_heads_up_snooze_reset_title"
-                android:dependency="pref_heads_up_snooze" />
-
-            <com.ceco.marshmallow.gravitybox.preference.SeekBarPreference
-                android:key="pref_heads_up_alpha"
-                android:title="@string/pref_heads_up_alpha_title"
-                minimum="0"
-                maximum="80"
-                interval="1"
-                monitorBoxEnabled="true"
-                monitorBoxUnit="%"
-                android:defaultValue="0"
-                android:dependency="pref_heads_up_master_switch" />
-            -->
-
         </PreferenceScreen>
 
         <PreferenceScreen

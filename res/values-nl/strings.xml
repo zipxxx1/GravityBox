@@ -64,10 +64,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normaal</string>
     <string name="quick_settings_expanded_desktop_expanded">Uitgebreid</string>
     <string name="quick_settings_stay_awake_on">Wakker Blijven aan</string>
-    <string name="quick_settings_stay_awake_off">Wakker Blijven uit</string>
     <string name="quick_settings_nfc_on">NFC Aan</string>
     <string name="quick_settings_nfc_off">NFC Uit</string>
-    <string name="quick_settings_camera_error_connect">Kan niet met camera verbinden</string>
     <string name="quick_settings_usb_tether_off">Niet verbonden</string>
     <string name="quick_settings_usb_tether_connected">Tethering Uit</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
@@ -626,14 +624,6 @@
     <string name="pref_navbar_color_enable_summary">May require reboot after disabling</string>
     <string name="pref_navbar_key_color_title">Navigation key color</string>
     <string name="pref_navbar_key_glow_color_title">Navigation key glow color</string>
-
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Transparency manager mode</string>
-    <string name="pref_tm_mode_summary">Requires reboot</string>
-    <string name="tm_mode_disabled">Disabled</string>
-    <string name="tm_mode_statusbar">Statusbar</string>
-    <string name="tm_mode_navbar">Navigation bar</string>
-    <string name="tm_mode_full">Both</string>
 
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Secondary signal color</string>

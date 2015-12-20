@@ -66,10 +66,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Expanded</string>
     <string name="quick_settings_stay_awake_on">Stay Awake On</string>
-    <string name="quick_settings_stay_awake_off">Stay Awake Off</string>
     <string name="quick_settings_nfc_on">NFC On</string>
     <string name="quick_settings_nfc_off">NFC Off</string>
-    <string name="quick_settings_camera_error_connect">Can\'t connect to camera</string>
     <string name="quick_settings_usb_tether_off">Disconnected</string>
     <string name="quick_settings_usb_tether_connected">Tethering Off</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
@@ -641,14 +639,6 @@
     <string name="pref_navbar_key_color_title">Navigation key color</string>
     <string name="pref_navbar_key_glow_color_title">Navigation key glow color</string>
 
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Transparency manager mode</string>
-    <string name="pref_tm_mode_summary">Requires reboot</string>
-    <string name="tm_mode_disabled">Disabled</string>
-    <string name="tm_mode_statusbar">Statusbar</string>
-    <string name="tm_mode_navbar">Navigation bar</string>
-    <string name="tm_mode_full">Both</string>
-
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Secondary signal color</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Overrides stock orange signal icon</string>
@@ -708,7 +698,6 @@
     <string name="ringer_mode_vibrate">Vibrate</string>
     <string name="ringer_mode_sound">Sound</string>
     <string name="ringer_mode_sound_vibrate">Sound and vibrate</string>
-    <string name="ringer_mode_none">None</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Screen is being recorded</string>
@@ -1426,7 +1415,6 @@
     <string name="pref_lc_active_screen_mode_title">Active Screen mode</string>
     <string name="lc_active_screen_mode_disabled">Disabled</string>
     <string name="lc_active_screen_mode_nothing">Turn screen on only</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Cast screen</string>
@@ -1444,15 +1432,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Custom action</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Heads up timeout</string>
-    <string name="pref_unc_as_headsup_timeout_summary">For how long to show heads up window. 0 = until unlocked.</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Cellular 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Transparency level</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Charger unplugged sound</string>
@@ -1486,16 +1467,6 @@
     <string name="charging_led_default">Default</string>
     <string name="charging_led_emulated">Emulated</string>
     <string name="charging_led_disabled">Disabled</string>
-
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Enable snooze button</string>
-    <string name="headsup_snooze_all_apps">Set for all apps</string>
-    <string name="headsup_snooze_app">Set heads up snooze timer for %s</string>
-    <string name="pref_heads_up_snooze_reset_title">Reset snooze timers</string>
-    <string name="pref_heads_up_snooze_timer_title">Default snooze timer</string>
-    <string name="pref_heads_up_snooze_timer_summary">Timer to be set automatically when heads up snooze icon is clicked. 
-        Long-press on heads up snooze icon opens custom timer dialog.</string>
-    <string name="headsup_snooze_timer_set">Heads up default snooze timer set for %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Set week days</string>

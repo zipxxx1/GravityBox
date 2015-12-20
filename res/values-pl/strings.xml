@@ -49,10 +49,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normalny</string>
     <string name="quick_settings_expanded_desktop_expanded">Rozszerzony</string>
     <string name="quick_settings_stay_awake_on">Blokowanie uśpienia Włączone</string>
-    <string name="quick_settings_stay_awake_off">Blokowanie uśpienia Wyłączone</string>
     <string name="quick_settings_nfc_on">NFC Włączone</string>
     <string name="quick_settings_nfc_off">NFC Wyłączone</string>
-    <string name="quick_settings_camera_error_connect">Nie można połączyć się z aparatem</string>
     <string name="quick_settings_usb_tether_off">Rozłączony</string>
     <string name="quick_settings_usb_tether_connected">Tethering Wyłączony</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
@@ -612,14 +610,6 @@
     <string name="pref_navbar_color_enable_summary">Może wymagać ponownego uruchomienia po wyłączeniu</string>
     <string name="pref_navbar_key_color_title">Kolor klawisza nawigacyjnego</string>
     <string name="pref_navbar_key_glow_color_title">Poświata klawisza nawigacyjnego</string>
-
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Tryb przezroczystości</string>
-    <string name="pref_tm_mode_summary">Wymaga ponownego uruchomienia</string>
-    <string name="tm_mode_disabled">Wyłączony</string>
-    <string name="tm_mode_statusbar">Pasek statusu</string>
-    <string name="tm_mode_navbar">Pasek nawigacyjny</string>
-    <string name="tm_mode_full">Obydwa</string>
 
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Kolor drugiego wsk. sygnału</string>
@@ -1381,7 +1371,6 @@
     <string name="pref_lc_active_screen_mode_title">Tryb aktywnego ekranu</string>
     <string name="lc_active_screen_mode_disabled">Wyłączony</string>
     <string name="lc_active_screen_mode_nothing">Tylko włącz ekran</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Zdalny Wyświetlacz</string>
@@ -1399,15 +1388,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Własna akcja</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Limit czasu Heads up</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Określa jak długo pokazywać okno Heads up. 0 = do odblokowania.</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Użycie Danych 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Poziom przezroczystości</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Dźwięk odłączenia ładowarki</string>
@@ -1441,16 +1423,6 @@
     <string name="charging_led_default">Domyślny</string>
     <string name="charging_led_emulated">Emulowany</string>
     <string name="charging_led_disabled">Wyłączony</string>
-
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Włącz przycisk drzemki</string>
-    <string name="headsup_snooze_all_apps">Ustaw dla wszystkich aplikacji</string>
-    <string name="headsup_snooze_app">Ustaw drzemkę heads up dla %s</string>
-    <string name="pref_heads_up_snooze_reset_title">Wyzeruj liczniki czasu drzemki</string>
-    <string name="pref_heads_up_snooze_timer_title">Domyślny czas drzemki</string>
-    <string name="pref_heads_up_snooze_timer_summary">Czas drzemki, który zostanie ustawiony automatycznie po kliknięciu ikony heads up drzemki.
-        Długie naciśnięcie ikony drzemki otwiera okno dialogowe ustawień licznika czasu.</string>
-    <string name="headsup_snooze_timer_set">Domyślny czas drzemki ustawiony na %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Ustaw dni tygodnia</string>

@@ -64,10 +64,8 @@
     <string name="quick_settings_expanded_desktop_normal">רגיל</string>
     <string name="quick_settings_expanded_desktop_expanded">מורחב</string>
     <string name="quick_settings_stay_awake_on">מצב ערנות מופעל</string>
-    <string name="quick_settings_stay_awake_off">מצב ערנות כבוי</string>
     <string name="quick_settings_nfc_on">קישורית NFC מופעלת</string>
     <string name="quick_settings_nfc_off">קישורית NFC כבויה</string>
-    <string name="quick_settings_camera_error_connect">לא ניתן להתחבר למצלמה</string>
     <string name="quick_settings_usb_tether_off">מנותק</string>
     <string name="quick_settings_usb_tether_connected">קשירה חמה כבויה</string>
     <string name="quick_settings_usb_tether_on">קשירה חמה</string>
@@ -608,14 +606,6 @@
     <string name="pref_navbar_color_enable_summary">ייתכן ויהיה צורך באיתחול המכשיר לאחר ביטול</string>
     <string name="pref_navbar_key_color_title">צבע מקשי הניווט</string>
     <string name="pref_navbar_key_glow_color_title">צבע זוהר של מקשי הניווט</string>
-
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">מצב ניהול שקיפויות</string>
-    <string name="pref_tm_mode_summary">דורש איתחול</string>
-    <string name="tm_mode_disabled">מבוטל</string>
-    <string name="tm_mode_statusbar">שורת מצב</string>
-    <string name="tm_mode_navbar">שורת ניווט</string>
-    <string name="tm_mode_full">שניהם</string>
 
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">צבע משני של אות רשת לנייד</string>

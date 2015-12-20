@@ -66,10 +66,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Étendu</string>
     <string name="quick_settings_stay_awake_on">Rester Allumé On</string>
-    <string name="quick_settings_stay_awake_off">Rester Allumé Off</string>
     <string name="quick_settings_nfc_on">NFC On</string>
     <string name="quick_settings_nfc_off">NFC Off</string>
-    <string name="quick_settings_camera_error_connect">Pas de connexion à l\'appareil</string>
     <string name="quick_settings_usb_tether_off">Déconnecté</string>
     <string name="quick_settings_usb_tether_connected">Partage de Connexion Off</string>
     <string name="quick_settings_usb_tether_on">Partage de Connexion</string>
@@ -641,14 +639,6 @@
     <string name="pref_navbar_key_color_title">Couleur touche de navigation</string>
     <string name="pref_navbar_key_glow_color_title">Couleur brillance touche de navigation</string>
 
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Mode de gestion de la transparence</string>
-    <string name="pref_tm_mode_summary">Nécessite un redémarrage</string>
-    <string name="tm_mode_disabled">Désactivé</string>
-    <string name="tm_mode_statusbar">Barre d\'état</string>
-    <string name="tm_mode_navbar">Barre de navigation</string>
-    <string name="tm_mode_full">Les deux</string>
-
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Couleur signal secondaire</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Remplace l\'icône orange par défaut du signal</string>
@@ -708,7 +698,6 @@
     <string name="ringer_mode_vibrate">Vibreur</string>
     <string name="ringer_mode_sound">Sonnerie</string>
     <string name="ringer_mode_sound_vibrate">Sonnerie et vibreur</string>
-    <string name="ringer_mode_none">Aucun</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">L\'écran est en cours d\'enregistrement</string>
@@ -1426,7 +1415,6 @@
     <string name="pref_lc_active_screen_mode_title">Mode écran actif</string>
     <string name="lc_active_screen_mode_disabled">Désactivé</string>
     <string name="lc_active_screen_mode_nothing">Seulement allumer l\'écran</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Caster l\'écran</string>
@@ -1444,15 +1432,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Action personnalisée</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Temporisation des notifications flottantes</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Pour règler le délai de visibilité des notifications flottantes. 0 = jusqu\'à ouverture</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Cellulaire 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Niveau de transparence</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Son à la déconnexion du chargeur</string>
@@ -1486,16 +1467,6 @@
     <string name="charging_led_default">Par défaut</string>
     <string name="charging_led_emulated">Émulée</string>
     <string name="charging_led_disabled">Désactivée</string>
-
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Active le bouton d\'arrêt momentané</string>
-    <string name="headsup_snooze_all_apps">Pour toutes les applications</string>
-    <string name="headsup_snooze_app">Arrêt momentané des notifications flottantes durant %s</string>
-    <string name="pref_heads_up_snooze_reset_title">Réinitialiser les durées d\'arrêt momentané</string>
-    <string name="pref_heads_up_snooze_timer_title">Durée par défaut de l\'arrêt momentané</string>
-    <string name="pref_heads_up_snooze_timer_summary">Durée automatiquement appliquée après avoir cliqué sur l\icône de l\'arrêt momentané des notifications flottantes 
-        Un appui long sur l\'icône de l\'arrêt momentané des notifications flottantes donne accès à une boîte de dialogue pour une durée personnalisable</string>
-    <string name="headsup_snooze_timer_set">Durée par défaut de l\'arrêt momentané des notifications flottantes réglée à %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Choisir les jours de la semaine</string>

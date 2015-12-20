@@ -48,10 +48,8 @@
     <string name="quick_settings_expanded_desktop_normal">기본</string>
     <string name="quick_settings_expanded_desktop_expanded">확장됨</string>
     <string name="quick_settings_stay_awake_on">화면 꺼짐 비활성화</string>
-    <string name="quick_settings_stay_awake_off">화면 꺼짐 활성화</string>
     <string name="quick_settings_nfc_on">NFC 활성화</string>
     <string name="quick_settings_nfc_off">NFC 비활성화</string>
-    <string name="quick_settings_camera_error_connect">카메라에 연결할 수 없습니다!</string>
     <string name="quick_settings_usb_tether_off">연결 해제됨</string>
     <string name="quick_settings_usb_tether_connected">테더링 끄기</string>
     <string name="quick_settings_usb_tether_on">테더링</string>
@@ -507,13 +505,6 @@
     <string name="pref_navbar_color_enable_summary">활성화 및 비활성화하려면 재시작이 필요 할 수 있습니다.</string>
     <string name="pref_navbar_key_color_title">네비게이션 키 색깔</string>
     <string name="pref_navbar_key_glow_color_title">네비게이션 키 터치 색깔</string>
-
-    <string name="pref_tm_mode_title">투명도 설정</string>
-    <string name="pref_tm_mode_summary">재시작 필요</string>
-    <string name="tm_mode_disabled">사용하지 않음</string>
-    <string name="tm_mode_statusbar">상단바</string>
-    <string name="tm_mode_navbar">네비게이션 바</string>
-    <string name="tm_mode_full">둘 다 (상단바 및 네비게이션 바)</string>
 
     <string name="pref_statusbar_icon_color_secondary_title">2차 신호 표시기 색깔</string>
     <string name="pref_statusbar_icon_color_secondary_summary">순정 오렌지 색깔 대신 사용자 색깔로 덮어씁니다.</string>
@@ -1136,7 +1127,6 @@
     <string name="pref_lc_active_screen_mode_title">화면 자동 켜기 모드</string>
     <string name="lc_active_screen_mode_disabled">비활성화</string>
     <string name="lc_active_screen_mode_nothing">화면만 켜기</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <string name="qs_tile_remote_display">원격 화면 미러링</string>
 
@@ -1151,12 +1141,7 @@
 
     <string name="hwkey_action_custom">사용자 액션</string>
 
-    <string name="pref_unc_as_headsup_timeout_title">헤드업 알림 타임아웃</string>
-    <string name="pref_unc_as_headsup_timeout_summary">헤드업 알림 창이 얼마나 지속되는지 설정합니다. 0은 화면 잠금시까지 유지하도록 설정합니다.</string>
-
     <string name="qs_tile_data_usage_2">셀룰러 2</string>
-
-    <string name="pref_heads_up_alpha_title">창 투명도</string>
 
     <string name="pref_charger_unplugged_sound_title">충전기 분리 소리</string>
 
@@ -1182,15 +1167,6 @@
     <string name="charging_led_default">기본값</string>
     <string name="charging_led_emulated">에뮬레이트됨</string>
     <string name="charging_led_disabled">비활성화</string>
-
-    <string name="pref_heads_up_snooze_title">스누즈 버튼 활성화</string>
-    <string name="headsup_snooze_all_apps">모든 앱에 설정</string>
-    <string name="headsup_snooze_app">%s 앱에 대한 스누즈 타이머 설정</string>
-    <string name="pref_heads_up_snooze_reset_title">스누즈 타이머 재설정</string>
-    <string name="pref_heads_up_snooze_timer_title">기본 스누즈 타이머</string>
-    <string name="pref_heads_up_snooze_timer_summary">헤드업 알림 창의 스누즈 아이콘을 누르면 타이머가 자동으로 설정됩니다. 
-        스누즈 아이콘을 길게 눌러서 타이머를 수동으로 설정해도 됩니다.</string>
-    <string name="headsup_snooze_timer_set">%s 앱에 대한 기본 스누즈 타이머</string>
 
     <string name="pref_lc_qh_weekdays_title">주일 설정</string>
 

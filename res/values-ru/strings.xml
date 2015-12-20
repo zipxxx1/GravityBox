@@ -66,10 +66,8 @@
     <string name="quick_settings_expanded_desktop_normal">Нормальный</string>
     <string name="quick_settings_expanded_desktop_expanded">Расширенный</string>
     <string name="quick_settings_stay_awake_on">Бодрствование вкл.</string>
-    <string name="quick_settings_stay_awake_off">Бодрствование выкл.</string>
     <string name="quick_settings_nfc_on">NFC вкл</string>
     <string name="quick_settings_nfc_off">NFC выкл</string>
-    <string name="quick_settings_camera_error_connect">Не удалось подключиться к камере</string>
     <string name="quick_settings_usb_tether_off">Отключено</string>
     <string name="quick_settings_usb_tether_connected">Раздача выкл</string>
     <string name="quick_settings_usb_tether_on">Раздача</string>
@@ -641,14 +639,6 @@
     <string name="pref_navbar_key_color_title">Цвет кнопок навигации</string>
     <string name="pref_navbar_key_glow_color_title">Цвет тени кнопок навигации</string>
 
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Режим настройки прозрачности</string>
-    <string name="pref_tm_mode_summary">Необходима перезагрузка</string>
-    <string name="tm_mode_disabled">Отключено</string>
-    <string name="tm_mode_statusbar">Строка состояния</string>
-    <string name="tm_mode_navbar">Панель навигации</string>
-    <string name="tm_mode_full">Обе</string>
-
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Цвет второго сигнала</string>
     <string name="pref_statusbar_icon_color_secondary_summary">Замена стандартного оранжевого цвета значка</string>
@@ -708,7 +698,6 @@
     <string name="ringer_mode_vibrate">Вибрация</string>
     <string name="ringer_mode_sound">Звук</string>
     <string name="ringer_mode_sound_vibrate">Звук и вибрация</string>
-    <string name="ringer_mode_none">Ничего</string>
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Экран записывается</string>
@@ -1425,7 +1414,6 @@
     <string name="pref_lc_active_screen_mode_title">Режим активного экрана</string>
     <string name="lc_active_screen_mode_disabled">Отключен</string>
     <string name="lc_active_screen_mode_nothing">Только включение экрана</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
 
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Трансляция</string>
@@ -1443,16 +1431,9 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Пользовательское действие</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Задержка всплытия</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Время отображения окна всплытия. 0 = до разблокировки.</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Мобильные данные 2</string>
 
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Прозрачность</string>
-   
    <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Звук при отключении ЗУ</string>
 
@@ -1485,16 +1466,6 @@
     <string name="charging_led_default">По умолчанию</string>
     <string name="charging_led_emulated">Эмуляция</string>
     <string name="charging_led_disabled">Отключено</string>
-    
-    <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Вкл кнопку переноса</string>
-    <string name="headsup_snooze_all_apps">Для всех приложений</string>
-    <string name="headsup_snooze_app">Установить таймер переноса на %s</string>
-    <string name="pref_heads_up_snooze_reset_title">Сброс таймеров переноса</string>
-    <string name="pref_heads_up_snooze_timer_title">Таймер переноса по умолчанию</string>
-    <string name="pref_heads_up_snooze_timer_summary">Таймер, автоматически устанавливаемый при нажатии на значок переноса всплытия. 
-        Удержание нажатия на значке открывает диалог установки своего таймера.</string>
-    <string name="headsup_snooze_timer_set">Таймер переноса по умолчанию установлен на %s</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Установка будней</string>

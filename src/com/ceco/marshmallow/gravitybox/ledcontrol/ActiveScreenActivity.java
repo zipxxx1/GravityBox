@@ -60,13 +60,6 @@ public class ActiveScreenActivity extends Activity {
             mPrefPocketMode = (CheckBoxPreference) findPreference(
                     LedSettings.PREF_KEY_ACTIVE_SCREEN_POCKET_MODE);
 
-//            if (!LedSettings.isHeadsUpEnabled(getActivity())) {
-//                getPreferenceScreen().removePreference(
-//                        findPreference(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_TIMEOUT));
-//                getPreferenceScreen().removePreference(
-//                        findPreference(LedSettings.PREF_KEY_ACTIVE_SCREEN_HEADSUP_ALPHA));
-//            }
-
             if (LedSettings.isProximityWakeUpEnabled(getActivity())) {
                 mPrefPocketMode.setSummary(R.string.pref_unc_as_pocket_mode_summary_overriden);
                 mPrefPocketMode.setEnabled(false);

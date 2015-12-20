@@ -66,10 +66,8 @@
     <string name="quick_settings_expanded_desktop_normal">Normal</string>
     <string name="quick_settings_expanded_desktop_expanded">Erweitert</string>
     <string name="quick_settings_stay_awake_on">Wachbleiben an</string>
-    <string name="quick_settings_stay_awake_off">Wachbleiben aus</string>
     <string name="quick_settings_nfc_on">NFC an</string>
     <string name="quick_settings_nfc_off">NFC aus</string>
-    <string name="quick_settings_camera_error_connect">Kamera nicht verbunden</string>
     <string name="quick_settings_usb_tether_off">Nicht verbunden</string>
     <string name="quick_settings_usb_tether_connected">Tethering aus</string>
     <string name="quick_settings_usb_tether_on">Tethering</string>
@@ -637,14 +635,6 @@
     <string name="pref_navbar_color_enable_summary">Kann einen Neustart erfordern</string>
     <string name="pref_navbar_key_color_title">Farbe der Navigationstasten</string>
     <string name="pref_navbar_key_glow_color_title">Leuchtfarbe der Tasten</string>
-
-    <!-- Transparency manager mode -->
-    <string name="pref_tm_mode_title">Transparenzverwaltung</string>
-    <string name="pref_tm_mode_summary">Neustart erforderlich</string>
-    <string name="tm_mode_disabled">Deaktiviert</string>
-    <string name="tm_mode_statusbar">Benachrichtigungsleiste</string>
-    <string name="tm_mode_navbar">Navigationsleiste</string>
-    <string name="tm_mode_full">Beide</string>
 
     <!-- Secondary signal icon color for MTK Dual SIMs -->
     <string name="pref_statusbar_icon_color_secondary_title">Sekundäre Signalfarbe</string>
@@ -1409,8 +1399,7 @@
     <string name="pref_lc_active_screen_mode_title">Aktiv-Bildschirm</string>
     <string name="lc_active_screen_mode_disabled">Aus</string>
     <string name="lc_active_screen_mode_nothing">Nur Bildschirm anschalten</string>
-    <string name="lc_active_screen_mode_headsup">@string/pref_cat_lc_heads_up_title</string>
-    
+
     <!-- QS: Remote display tile -->
     <string name="qs_tile_remote_display">Bildschirmübertragung</string>
 
@@ -1427,15 +1416,8 @@
     <!-- Key actions: custom action -->
     <string name="hwkey_action_custom">Benutzerdefinierte Aktion</string>
 
-    <!-- UNC Active Screen: heads up timeout -->
-    <string name="pref_unc_as_headsup_timeout_title">Heads-Up Timeout</string>
-    <string name="pref_unc_as_headsup_timeout_summary">Anzeigedauer des Heads-Up Fensters. 0 = bis Entsperren.</string>
-
     <!-- QS: support for MSIM -->
     <string name="qs_tile_data_usage_2">Datenverkehr 2</string>
-
-    <!-- Heads Up: Transparency level -->
-    <string name="pref_heads_up_alpha_title">Transparenzstufe</string>
 
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Ton bei Trennen vom Ladegerät</string>
@@ -1469,16 +1451,6 @@
     <string name="charging_led_default">Standard</string>
     <string name="charging_led_emulated">Emuliert</string>
     <string name="charging_led_disabled">Deaktiviert</string>
-    
-     <!-- Heads up snooze timer -->
-    <string name="pref_heads_up_snooze_title">Schlummertaste aktivieren</string>
-    <string name="headsup_snooze_all_apps">Für alle Apps</string>
-    <string name="headsup_snooze_app">Heads Up Schlummerzeit auf %s stellen</string>
-    <string name="pref_heads_up_snooze_reset_title">Schlummerzeit zurücksetzen</string>
-    <string name="pref_heads_up_snooze_timer_title">Standard Schlummerzeit</string>
-    <string name="pref_heads_up_snooze_timer_summary">Timer automatisch starten wenn Heads Up Schlummertaste angetippt wird. 
-       Schlummertaste gedrückt halten um Timer-Dialog zu öffnen.</string>
-    <string name="headsup_snooze_timer_set">Standarddauer für Heads Up Schlummern auf %s gesetzt</string>
 
     <!-- Quiet hours week days -->
     <string name="pref_lc_qh_weekdays_title">Wochentage einstellen</string>
