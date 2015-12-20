@@ -1759,4 +1759,16 @@
     <string name="ls_bleft_action_default">Pôvodná</string>
     <string name="ls_bleft_action_phone">Telefón</string>
 
+    <!-- Lockscreen: Quick unlock PIN length -->
+    <string name="pref_lockscreen_pin_length_title">Dĺžka PIN</string>
+    <string name="pref_lockscreen_pin_length_summary">Rýchle odomknutie potrebuje vedieť presnú dĺžku PIN
+        pre spoľahlivé fungovanie</string>
+
+    <!-- Power: Camera vibration pattern -->
+    <string name="pref_power_camera_vibrate_pattern_title">Vzorec vibrácie fotoaparátu</string>
+    <string name="pref_power_camera_vibrate_pattern_summary">Definuje vzorez vibrácie počas spustenia
+        fotoaparátu tlačidlom napájania. Hodnota vo forme čiarkou oddelených párov dĺžky vypnutia/zapnutia
+        vibrácie v milisekundách. 
+        Ponechajte prázdne pre pôvodnú vibráciu. Zadajte 0 pre vypnutie vibrácie.</string>
+
 </resources>
