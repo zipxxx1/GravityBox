@@ -114,6 +114,7 @@
     <string name="qs_tile_lock_screen">锁屏</string>
     <string name="qs_tile_inversion">反转</string>
     <string name="qs_tile_battery">电量</string>
+	<string name="qs_tile_dnd">请勿打扰</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">颜色选择器</string>
@@ -1223,9 +1224,8 @@
     <!-- Notification control: Active screen -->
     <string name="lc_active_screen">激活屏幕</string>
     <string name="lc_active_screen_info">每收到新的通知激活屏幕功能将会自动开启屏幕
-        出现这种情况仅在屏幕不是盖住的（例如：当设备没有在口袋）
+        请注意,激活屏幕需要启用锁屏
         它可以选择扩展面板的通知根据当前锁屏的安全策略和用户偏好
-        请注意，激活屏幕，需要启用锁屏
         下面此开关是总开关，启用后额外的配置可以在每个应用程序的基础上进行</string>
     <string name="lc_active_screen_switch_title">启用激活屏幕</string>
 
@@ -1298,7 +1298,6 @@
     <string name="increasing_ring_interval_3">20秒</string>
     <string name="increasing_ring_interval_4">25秒</string>
     <string name="increasing_ring_interval_5">30秒</string>
-
 
     <!-- Icon picker: Snapchat icon -->
     <string name="shortcuts_icon_picker_snapchat">Snapchat</string>
@@ -1795,5 +1794,15 @@
     <string name="pref_lockscreen_bleft_action_title">左下动作</string>
     <string name="ls_bleft_action_default">默认</string>
     <string name="ls_bleft_action_phone">手机</string>
+	
+	<!-- Lockscreen: Quick unlock PIN length -->
+    <string name="pref_lockscreen_pin_length_title">PIN长度</string>
+    <string name="pref_lockscreen_pin_length_summary">快速解锁需要知道您的PIN长度才能可靠地工作</string>
+
+    <!-- Power: Camera vibration pattern -->
+    <string name="pref_power_camera_vibrate_pattern_title">相机振动模式</string>
+    <string name="pref_power_camera_vibrate_pattern_summary">用逗号分隔列表的形式定义振动模式
+        电源键关闭/开启(毫秒)启动相机持续时间
+		留空为默认,设置为0禁用振动</string>
 
 </resources>
