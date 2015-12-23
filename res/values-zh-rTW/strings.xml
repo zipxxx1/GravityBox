@@ -1508,5 +1508,48 @@
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">隱藏啟動器圖示</string>
     <string name="pref_hide_launcher_icon_summary">可能需要重新啟動啟動器才能生效</string>
+    
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">在狀態列顯示</string>
+    <string name="battery_percent_text_statusbar_summary">在標准狀態列顯示電量百分比文字(當裝置解鎖時)</string>
+    <string name="battery_percent_text_keyguard_title">鍵盤鎖模式</string>
+    <string name="battery_percent_text_keyguard_summary">在鎖定畫面上指定狀態列百分比文字行為</string>
+    <string name="keyguard_percent_text_default">預設(當充電時)</string>
+    <string name="keyguard_percent_text_show_always">允許顯示</string>
+    <string name="keyguard_percent_text_hide">隱藏</string>
+    <string name="battery_percent_text_header_hide_title">隱藏狀態列標題</string>
+    <string name="battery_percent_text_size_default">預設</string>
+    
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_disable_peek_title">停用輕觸狀態列</string>
+    <string name="pref_statusbar_disable_peek_summary">單擊觸摸時不會擴大狀態列</string>
+   
+    <!-- Status bar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">雙擊睡眠</string>
+    <string name="pref_statusbar_dt2s_summary">需要停用輕觸狀態列</string>
+    
+       <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">快捷方式</string>
+    <string name="pref_lockscreen_shortcuts_summary">允許定義鎖定畫面快捷方式</string>
+    
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">安全啟動</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">需要雙擊啟動快捷鍵 
+        防止它們被意外啟動,例如裝置放在口袋中時</string>
+        
+    <!-- Lockscreen rotation -->
+    <string name="pref_lockscreen_rotation_summary">需要重新啟動</string>
+   
+    <!-- Lockscreen: Bottom-left action -->
+    <string name="pref_lockscreen_bleft_action_title">左下動作</string>
+    <string name="ls_bleft_action_default">預設</string>
+    <string name="ls_bleft_action_phone">電話</string>
+    
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">使用大圖標</string>
+    <string name="pref_navbar_larger_icons_summary">需要重新啟動</string>
+
+    <!-- Navigation bar: hide IME switcher -->
+    <string name="pref_navbar_hide_ime_title">隱藏輸入法切換器</string>
 
 </resources>
