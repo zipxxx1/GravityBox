@@ -32,8 +32,8 @@
 
   <string name="reboot_required">Verandering zal na een herstart worden toegepast</string>
 
-    <string name="poweroff_advanced_title">Geavanceerde herstart menu</string>
-    <string name="poweroff_advanced_summary">Maakt geavanceerde herstart menu met opties om te herstarten naar recovery</string>
+    <string name="poweroff_advanced_title">Geavanceerd herstartmenu</string>
+    <string name="poweroff_advanced_summary">Maakt geavanceerd herstartmenu met opties om te herstarten naar recovery</string>
     <string name="poweroff_recovery">Recovery</string>
     <string name="poweroff_bootloader">Bootloader</string>
 
@@ -126,8 +126,8 @@
 
     <!-- Reboot confirmation -->
     <string name="reboot_confirm">Uw %s zal herstarten.</string>
-    <string name="reboot_confirm_recovery">Uw %s zal herstarten in recovery.</string>
-    <string name="reboot_confirm_bootloader">Uw %s zal herstarten in bootloader.</string>
+    <string name="reboot_confirm_recovery">Uw %s zal herstarten in recoverymodus</string>
+    <string name="reboot_confirm_bootloader">Uw %s zal herstarten in bootloadermodus</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Ingenieursmodus</string>
@@ -394,7 +394,7 @@
     <string name="pref_screen_dim_level_summary">Amount of brightness for dim state - when screen is about to be turned off (requires reboot)</string>
 
     <!-- Device type -->
-    <string name="device_phone">phone</string>
+    <string name="device_phone">telefoon</string>
     <string name="device_tablet">tablet</string>
 
     <!-- Brightness preference category -->
