@@ -142,9 +142,9 @@
     <string name="about_donate_summary">Raak aan om ontwikkeling te ondersteunen via PayPal</string>
 
     <!-- Reboot confirmation -->
-    <string name="reboot_confirm">Uw telefoon zal herstarten.</string>
-    <string name="reboot_confirm_recovery">Uw telefoon zal herstarten in recoverymodus</string>
-    <string name="reboot_confirm_bootloader">Uw telefoon zal herstarten in bootloadermodus</string>
+    <string name="reboot_confirm">Uw %s zal herstarten.</string>
+    <string name="reboot_confirm_recovery">Uw %s zal herstarten in recoverymodus</string>
+    <string name="reboot_confirm_bootloader">Uw %s zal herstarten in bootloadermodus</string>
 
     <!-- CRT effect screen off animation -->
     <string name="crt_off_effect_title">CRT scherm uit effect</string>
@@ -431,7 +431,7 @@
     <string name="pref_screen_dim_level_summary">Amount of brightness for dim state - when screen is about to be turned off (requires reboot)</string>
 
     <!-- Device type -->
-    <string name="device_phone">phone</string>
+    <string name="device_phone">telefoon</string>
     <string name="device_tablet">tablet</string>
 
     <!-- Brightness preference category -->
