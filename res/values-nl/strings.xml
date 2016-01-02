@@ -44,8 +44,8 @@
     <string name="sim_disable_notifications">Meldingen uitschakelen</string>
     <string name="sim_disable_notifications_summary">\"SIM niet geplaatst\" meldingen uitgeschakeld</string>
 
-    <string name="poweroff_advanced_title">Geavanceerd herstart menu</string>
-    <string name="poweroff_advanced_summary">Maakt geavanceerd herstart menu met opties om te herstarten naar recovery</string>
+    <string name="poweroff_advanced_title">Geavanceerd herstartmenu</string>
+    <string name="poweroff_advanced_summary">Maakt geavanceerd herstartmenu met opties om te herstarten naar recovery</string>
     <string name="poweroff_recovery">Recovery</string>
     <string name="poweroff_bootloader">Bootloader</string>
 
@@ -157,9 +157,9 @@
     <string name="about_donate_summary">Geef me een donatie als je denkt dat deze app het waard is! Overweeg ook een donatie aan rovo89 voor zijn excellent Xposed framework.</string>
 
     <!-- Reboot confirmation -->
-    <string name="reboot_confirm">Uw %s wil herstarten.</string>
-    <string name="reboot_confirm_recovery">Uw %s wil herstarten in recovery.</string>
-    <string name="reboot_confirm_bootloader">Uw %s wil herstarten in bootloader.</string>
+    <string name="reboot_confirm">Uw %s zal herstarten.</string>
+    <string name="reboot_confirm_recovery">Uw %s zal herstarten in recoverymodus</string>
+    <string name="reboot_confirm_bootloader">Uw %s zal herstarten in bootloadermodus</string>
 
     <!-- Engineering mode shortcut -->
     <string name="engineering_mode_title">Ingenieur modus</string>
