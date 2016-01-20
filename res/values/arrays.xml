@@ -1178,4 +1178,28 @@
         <item>PHONE</item>
     </string-array>
 
+    <string-array name="dnd_tile_em_entries" translatable="false">
+        <item>@string/dnd_tile_em_priority</item>
+        <item>@string/dnd_tile_em_alarms</item>
+        <item>@string/dnd_tile_em_silence</item>
+    </string-array>
+
+    <string-array name="dnd_tile_em_values" translatable="false">
+        <item>1</item>
+        <item>3</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="dnd_tile_dm_entries" translatable="false">
+        <item>@string/dnd_tile_dm_manual</item>
+        <item>@string/dnd_tile_dm_alarm</item>
+        <item>@string/dnd_tile_dm_custom</item>
+    </string-array>
+
+    <string-array name="dnd_tile_dm_values" translatable="false">
+        <item>MANUAL</item>
+        <item>ALARM</item>
+        <item>CUSTOM</item>
+    </string-array>
+
 </resources>
