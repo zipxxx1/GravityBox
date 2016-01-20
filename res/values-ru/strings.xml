@@ -1804,4 +1804,19 @@
         выключения/включения в миллисекундах для камеры, запущенной кнопкой питания.
         Оставьте пустым для настроек по умолчанию. Установите 0 для отключения вибрации.</string>
 
+    <!-- DND tile settings -->
+    <string name="pref_cat_qs_dnd_tile_title">Параметры плитки Не беспокоить</string>
+    <string name="pref_dnd_tile_quick_mode_title">Вкл быстрый режим</string>
+    <string name="pref_dnd_tile_quick_mode_summary">Переключение между выбранными режимами Не беспокоить одиночным нажатием на плитке</string>
+    <string name="pref_dnd_tile_enabled_modes_title">Включенные режимы</string>
+    <string name="pref_dnd_tile_enabled_modes_summary">Режимы Не беспокоить, между которыми производится переключение</string>
+    <string name="dnd_tile_em_priority">Только важные</string>
+    <string name="dnd_tile_em_alarms">Только будильники</string>
+    <string name="dnd_tile_em_silence">Полностью без звука</string>
+    <string name="pref_dnd_tile_duration_mode_title">Установленная длительность</string>
+    <string name="dnd_tile_dm_manual">До отключения вручную</string>
+    <string name="dnd_tile_dm_alarm">До следующего будильника</string>
+    <string name="dnd_tile_dm_custom">Пользовательская</string>
+    <string name="pref_dnd_tile_duration_title">Установить пользовательскую длительность</string>
+
 </resources>
