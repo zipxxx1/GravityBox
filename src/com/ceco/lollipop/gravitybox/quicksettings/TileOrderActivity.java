@@ -125,7 +125,8 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         private boolean supportsDualMode() {
             return "aosp_tile_cell".equals(key) ||
                     "aosp_tile_wifi".equals(key) ||
-                    "aosp_tile_bluetooth".equals(key);
+                    "aosp_tile_bluetooth".equals(key) ||
+                    "gb_tile_gps_slimkat".equals(key);
         }
     }
 

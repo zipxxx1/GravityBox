@@ -134,6 +134,11 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     @Override
+    public boolean supportsDualTargets() {
+        return mDualMode;
+    }
+
+    @Override
     public void handleClick() {
         if (mHideOnChange && supportsHideOnChange()) {
             collapsePanels();

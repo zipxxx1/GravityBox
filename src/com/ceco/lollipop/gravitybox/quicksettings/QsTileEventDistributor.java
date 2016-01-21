@@ -49,6 +49,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         boolean handleSecondaryClick();
         void onDualModeSet(View tileView, boolean enabled);
         Object getDetailAdapter();
+        boolean supportsDualTargets();
     }
 
     private static void log(String message) {
@@ -222,6 +223,18 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                             .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
                     if (l != null && l.handleSecondaryClick()) {
                         param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "supportsDualTargets",
+                    new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        param.setResult(l.supportsDualTargets());
                     }
                 }
             });

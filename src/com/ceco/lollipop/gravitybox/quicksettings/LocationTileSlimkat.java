@@ -221,19 +221,33 @@ public class LocationTileSlimkat extends QsTile {
 
     @Override
     public void handleClick() {
-        showDetail(true);
+        if (supportsDualTargets()) {
+            setLocationEnabled(!isLocationEnabled());
+        } else {
+            showDetail(true);
+        }
         super.handleClick();
     }
 
     @Override
     public boolean handleLongClick() {
-        setLocationEnabled(!isLocationEnabled());
+        if (supportsDualTargets()) {
+            startSettingsActivity(LOCATION_SETTINGS_INTENT);
+        } else {
+            setLocationEnabled(!isLocationEnabled());
+        }
         return true;
     }
 
     @Override
     public boolean supportsHideOnChange() {
-        return false;
+        return supportsDualTargets();
+    }
+
+    @Override
+    public boolean handleSecondaryClick() {
+        showDetail(true);
+        return true;
     }
 
     @Override
