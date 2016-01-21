@@ -50,4 +50,7 @@
     <dimen name="percent_text_padding_left">4dp</dimen>
     <dimen name="percent_text_padding_right">0dp</dimen>
 
+    <!-- QS DetailListAdapter -->
+    <dimen name="qs_detail_empty_text_size">14sp</dimen>
+
 </resources>
