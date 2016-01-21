@@ -39,7 +39,6 @@ public class CellularTile extends AospTile {
     private boolean mIsSignalNull;
     private boolean mDataOffIconEnabled;
     private Unhook mSupportsDualTargetsHook;
-    private Unhook mHandleClickHook;
     private boolean mClickHookBlocked;
     private DataToggle mDataToggle;
 
@@ -224,6 +223,22 @@ public class CellularTile extends AospTile {
     }
 
     @Override
+    protected boolean onBeforeHandleClick() {
+        if (mClickHookBlocked) {
+            mClickHookBlocked = false;
+            return false;
+        }
+
+        if (mDataToggle == DataToggle.SINGLEPRESS) {
+            toggleMobileData();
+        } else if (!isDualModeEnabled()) {
+            showDetail();
+        }
+ 
+        return true;
+    }
+
+    @Override
     public boolean handleLongClick() {
         if (isDualModeEnabled()) {
             if (mDataToggle == DataToggle.LONGPRESS) {
@@ -296,23 +311,6 @@ public class CellularTile extends AospTile {
                     }
                 }
             });
-
-            mHandleClickHook = XposedHelpers.findAndHookMethod(getClassName(), mContext.getClassLoader(),
-                    "handleClick", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (mClickHookBlocked) {
-                        mClickHookBlocked = false;
-                    } else {
-                        if (mDataToggle == DataToggle.SINGLEPRESS) {
-                            toggleMobileData();
-                        } else if (!isDualModeEnabled()) {
-                            showDetail();
-                        }
-                        param.setResult(null);
-                    }
-                }
-            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -326,10 +324,6 @@ public class CellularTile extends AospTile {
         if (mSupportsDualTargetsHook != null) {
             mSupportsDualTargetsHook.unhook();
             mSupportsDualTargetsHook = null;
-        }
-        if (mHandleClickHook != null) {
-            mHandleClickHook.unhook();
-            mHandleClickHook = null;
         }
     }
 }
