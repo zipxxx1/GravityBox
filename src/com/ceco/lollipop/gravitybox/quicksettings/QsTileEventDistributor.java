@@ -48,6 +48,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         Drawable getResourceIconDrawable();
         boolean handleSecondaryClick();
         void onDualModeSet(View tileView, boolean enabled);
+        Object getDetailAdapter();
     }
 
     private static void log(String message) {
@@ -183,6 +184,21 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                         l.onCreateTileView((View)param.getResult());
                     }
                     mCreateTileViewTileKey = null;
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "getDetailAdapter",
+                    new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        Object detailAdapter = l.getDetailAdapter();
+                        if (detailAdapter != null) {
+                            param.setResult(detailAdapter);
+                        }
+                    }
                 }
             });
 

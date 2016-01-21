@@ -166,6 +166,11 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     @Override
+    public Object getDetailAdapter() {
+        return null;
+    }
+
+    @Override
     public void handleDestroy() {
         mEventDistributor.unregisterListener(this);
         mEventDistributor = null;
@@ -324,6 +329,15 @@ public abstract class BaseTile implements QsEventListener {
             XposedHelpers.callMethod(mTile, "showDetail", show);
         } catch (Throwable t) {
             log("Error in showDetail: ");
+            XposedBridge.log(t);
+        }
+    }
+
+    public void fireToggleStateChanged(boolean state) {
+        try {
+            XposedHelpers.callMethod(mTile, "fireToggleStateChanged", state);
+        } catch (Throwable t) {
+            log("Error in fireToggleStateChanged: ");
             XposedBridge.log(t);
         }
     }
