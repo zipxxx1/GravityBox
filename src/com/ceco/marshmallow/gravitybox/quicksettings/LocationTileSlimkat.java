@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModStatusBar;
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.Utils;
@@ -60,6 +61,7 @@ public class LocationTileSlimkat extends QsTile {
     private int mLastActiveMode;
     private Object mDetailAdapter;
     private List<Integer> mLocationList = new ArrayList<Integer>();
+    private boolean mQuickMode;
 
     public LocationTileSlimkat(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -69,6 +71,24 @@ public class LocationTileSlimkat extends QsTile {
         if(mLastActiveMode == Settings.Secure.LOCATION_MODE_OFF) {
             mLastActiveMode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
         }
+    }
+
+    @Override
+    public void initPreferences() {
+        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCATION_TILE_QUICK_MODE, false);
+
+        super.initPreferences();
+    }
+
+    @Override
+    public void onBroadcastReceived(Context context, Intent intent) {
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_LOCATION_TILE_QUICK_MODE)) {
+                mQuickMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_LOCATION_TILE_QUICK_MODE, false);
+            }
+        }
+
+        super.onBroadcastReceived(context, intent);
     }
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -140,6 +160,24 @@ public class LocationTileSlimkat extends QsTile {
                     mode, currentUserId);
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private void switchLocationMode() {
+        int currentMode = getLocationMode();
+        switch (currentMode) {
+            case Settings.Secure.LOCATION_MODE_OFF:
+                setLocationMode(Settings.Secure.LOCATION_MODE_BATTERY_SAVING);
+                break;
+            case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
+                setLocationMode(Settings.Secure.LOCATION_MODE_SENSORS_ONLY);
+                break;
+            case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
+                setLocationMode(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
+                break;
+            case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
+                setLocationMode(Settings.Secure.LOCATION_MODE_OFF);
+                break;
         }
     }
 
@@ -221,7 +259,9 @@ public class LocationTileSlimkat extends QsTile {
 
     @Override
     public void handleClick() {
-        if (supportsDualTargets()) {
+        if (mQuickMode) {
+            switchLocationMode();
+        } else if (supportsDualTargets()) {
             setLocationEnabled(!isLocationEnabled());
         } else {
             showDetail(true);
@@ -233,6 +273,8 @@ public class LocationTileSlimkat extends QsTile {
     public boolean handleLongClick() {
         if (supportsDualTargets()) {
             startSettingsActivity(LOCATION_SETTINGS_INTENT);
+        } else if (mQuickMode) {
+            showDetail(true);
         } else {
             setLocationEnabled(!isLocationEnabled());
         }
