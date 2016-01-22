@@ -252,6 +252,18 @@
                 </PreferenceScreen>
 
                 <PreferenceScreen
+                    android:key="pref_cat_qs_location_tile"
+                    android:title="@string/pref_cat_qs_location_tile_title">
+
+                    <CheckBoxPreference 
+                        android:key="pref_location_tile_quick_mode"
+                        android:title="@string/pref_tile_quick_mode_title"
+                        android:summary="@string/pref_location_tile_quick_mode_summary"
+                        android:defaultValue="false" />
+
+                </PreferenceScreen>
+
+                <PreferenceScreen
                     android:key="pref_cat_quick_app_tile"
                     android:title="@string/pref_cat_quickapp_tile_title">
 

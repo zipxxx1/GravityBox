@@ -1857,4 +1857,11 @@
     <string name="pref_qs_enable_detail_view_title">Enable detail view</string>
     <string name="pref_qs_enable_detail_view_summary">Enables detail view for WiFi and Bluetooth tiles on Android 5.0 (experimental)</string>
 
+    <!-- QS: common quick mode option -->
+    <string name="pref_tile_quick_mode_title">Enable quick mode</string>
+
+    <!-- Location tile (Slimkat) settings -->
+    <string name="pref_cat_qs_location_tile_title">Location tile (SlimKat) settings</string>
+    <string name="pref_location_tile_quick_mode_summary">Allows cycling through location modes on tile single-press</string>
+
 </resources>
