@@ -493,12 +493,6 @@
     <string name="unicode_stripping_non_encodable">Nem kódolható karakterek figyelmen kívül hagyása</string>
     <string name="unicode_stripping_all">Az összes unicode karakter figyelmen kívül hagyása</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Hálózati üzemmód csempe típusa</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Összes elforgatás engedélyezése</string>
 
@@ -683,9 +677,6 @@
     <string name="pref_about_gplus_title">Google+ közösség</string>
     <string name="pref_about_gplus_summary">Érintse meg a GravityBox Google+ közösségi oldalának megnyitásához</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">LTE hálózati mód engedélyezése</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">A Navigációs sávval kapcsolatos műveletek működéséhez a Navigációs sáv beállítások menüben a rendszerbeállítások felülírása szükséges</string>
 
@@ -798,9 +789,6 @@
     <string name="pref_cat_signal_cluster_title">Jelszint csoport beállítások</string>
     <string name="pref_signal_cluster_data_activity_title">Adat aktivitás engedélyezése</string>
     <string name="pref_signal_cluster_data_activity_summary">Kijelzi az adatforgalom aktivitást a mobil és WiFi ikonokon (újraindítás szükséges)</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">CDMA hálózati módok használata</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Automata elforgatás ki-bekapcsolása</string>
@@ -1540,11 +1528,6 @@
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">SIM címke elrejtése</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Újraindítás szükséges</string>
-
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G mód</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferált (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Kiterjesztett asztal a kikapcsoló menüben</string>

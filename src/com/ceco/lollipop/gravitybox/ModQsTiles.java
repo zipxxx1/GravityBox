@@ -17,10 +17,12 @@ import com.ceco.lollipop.gravitybox.quicksettings.QsTile;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor;
 import com.ceco.lollipop.gravitybox.quicksettings.TileOrderActivity;
 
+import android.content.res.XModuleResources;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModQsTiles {
     public static final String PACKAGE_NAME = "com.android.systemui";
@@ -55,6 +57,10 @@ public class ModQsTiles {
             "gb_tile_compass"
     ));
 
+    public static class RES_IDS {
+        public static int NM_TITLE;
+    }
+
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
     }
@@ -62,6 +68,11 @@ public class ModQsTiles {
     private static QsTileEventDistributor mEventDistributor;
     private static QsQuickPulldownHandler mQuickPulldownHandler;
     private static QsPanel mQsPanel;
+
+    public static void initResources(final InitPackageResourcesParam resparam) {
+        XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
+        RES_IDS.NM_TITLE = resparam.res.addResource(modRes, R.string.qs_tile_network_mode);
+    }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {

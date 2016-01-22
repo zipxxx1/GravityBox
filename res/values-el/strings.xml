@@ -475,12 +475,6 @@
     <string name="unicode_stripping_non_encodable">Strip non-encodable χαρακτήρες</string>
     <string name="unicode_stripping_all">Strip όλους τους χαρακτήρες unicode</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Λειτ. πλακιδίου κιν. δικτύου</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Επιτρέψτε όλες τις περιστροφές</string>
 
@@ -665,9 +659,6 @@
     <string name="pref_about_gplus_title">Κοινότητα Google+</string>
     <string name="pref_about_gplus_summary">Αγγίξτε για την GravityBox Google+ κοινότητα</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Επιτρέψτε τη λειτουργία του δικτύου LTE</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Για να ενεργοποιήσετε τις ενέργιες για την γραμμή πλοήγησης, πρέπει να 
         παρακάμψετε τις προεπιλογές συστήματος στο μενού της Γραμμής Κατάστασης</string>
@@ -780,9 +771,6 @@
     <string name="pref_cat_signal_cluster_title">Εικονίδιο σήματος</string>
     <string name="pref_signal_cluster_data_activity_title">Μεταφορά δεδομένων</string>
     <string name="pref_signal_cluster_data_activity_summary">Εμφανίζει την μεταφορά δεδομένων στα εικονίδια κινητής και WiFi (απαιτείται επανεκκίνηση)</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Χρήση CDMA δικτύων</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Εναλλαγή αυτόμ. περιστροφής</string>
