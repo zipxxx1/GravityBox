@@ -1064,7 +1064,6 @@
     <string name="pref_quick_pulldown_size_title">Quick pulldown size</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Stay awake tile mode</string>
     <string name="stay_awake_15s">15s</string>
     <string name="stay_awake_30s">30s</string>
     <string name="stay_awake_1m">1m</string>
@@ -1838,9 +1837,14 @@
     <string name="pref_nm_tile_enabled_modes_summary">Defines which network modes tile should support</string>
     <string name="pref_nm_tile_quick_mode_summary">Allows cycling through selected network modes on tile single-press</string>
 
-    <!-- Ringerm mode tile settings -->
+    <!-- Ringer mode tile settings -->
     <string name="pref_cat_qs_rm_tile_title">Ringer mode tile settings</string>
     <string name="pref_rm_tile_enabled_modes_summary">Sets which ringer modes to cycle through</string>
     <string name="pref_rm_tile_quick_mode_summary">Allows cycling through selected ringer modes on tile single-press</string>
+
+    <!-- Stay awake tile settings -->
+    <string name="pref_cat_qs_sa_tile_title">Stay awake tile settings</string>
+    <string name="pref_sa_tile_enabled_modes_summary">Defines which screen timeouts tile should support</string>
+    <string name="pref_sa_tile_quick_mode_summary">Allows cycling through selected screen timeouts on tile single-press</string>
 
 </resources>

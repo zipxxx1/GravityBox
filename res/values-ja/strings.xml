@@ -873,7 +873,6 @@
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">クイックプルダウンのサイズ</string>
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">常時点灯タイルのモード</string>
     <string name="stay_awake_15s">15秒</string>
     <string name="stay_awake_30s">30秒</string>
     <string name="stay_awake_1m">1分</string>

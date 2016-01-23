@@ -1063,7 +1063,6 @@
     <string name="pref_quick_pulldown_size_title">Розмір зони відтягування</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Режими бадьорості</string>
     <string name="stay_awake_15s">15 с</string>
     <string name="stay_awake_30s">30 с</string>
     <string name="stay_awake_1m">1 хв</string>
