@@ -1086,7 +1086,6 @@
     <string name="pref_quick_pulldown_size_title">Área para desplegar ajustes rápidos</string>
  
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Modos de casilla \'Mantener despierto\'</string>
     <string name="stay_awake_15s">15s</string>
     <string name="stay_awake_30s">30s</string>
     <string name="stay_awake_1m">1m</string>

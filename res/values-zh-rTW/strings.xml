@@ -1077,7 +1077,6 @@
     <string name="pref_quick_pulldown_size_title">快速下拉大小</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">螢幕逾時瓷貼模式</string>
     <string name="stay_awake_15s">15秒</string>
     <string name="stay_awake_30s">30秒</string>
     <string name="stay_awake_1m">1分鐘</string>

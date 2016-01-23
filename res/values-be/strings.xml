@@ -1093,7 +1093,6 @@
     <string name="pref_quick_pulldown_size_title">Памер зоны выцягвання</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Рэжымы няспання</string>
     <string name="stay_awake_15s">15с.</string>
     <string name="stay_awake_30s">30с.</string>
     <string name="stay_awake_1m">1хв.</string>

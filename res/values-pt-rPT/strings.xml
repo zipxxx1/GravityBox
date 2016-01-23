@@ -1069,7 +1069,6 @@
     <string name="pref_quick_pulldown_size_title">Àrea de acesso rápido</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Modo do painel Manter ligado</string>
     <string name="stay_awake_15s">15s</string>
     <string name="stay_awake_30s">30s</string>
     <string name="stay_awake_1m">1m</string>

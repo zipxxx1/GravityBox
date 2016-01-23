@@ -397,12 +397,25 @@
 
                 </PreferenceScreen>
 
-                <MultiSelectListPreference 
-                    android:key="pref_qs_stay_awake"
-                    android:title="@string/pref_qs_stay_awake_title"
-                    android:entries="@array/stay_awake_entries"
-                    android:entryValues="@array/stay_awake_values"
-                    android:defaultValue="@array/stay_awake_values" />
+                <PreferenceScreen 
+                    android:key="pref_cat_qs_sa_tile"
+                    android:title="@string/pref_cat_qs_sa_tile_title">
+
+                    <MultiSelectListPreference 
+                        android:key="pref_qs_stay_awake"
+                        android:title="@string/pref_tile_enabled_modes_title"
+                        android:summary="@string/pref_sa_tile_enabled_modes_summary"
+                        android:entries="@array/stay_awake_entries"
+                        android:entryValues="@array/stay_awake_values"
+                        android:defaultValue="@array/stay_awake_values" />
+
+                    <CheckBoxPreference 
+                        android:key="pref_sa_tile_quick_mode"
+                        android:title="@string/pref_tile_quick_mode_title"
+                        android:summary="@string/pref_sa_tile_quick_mode_summary"
+                        android:defaultValue="false" />
+
+                </PreferenceScreen>
 
             </PreferenceScreen>
 
