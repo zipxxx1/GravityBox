@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,10 +23,12 @@ import java.util.List;
 import java.util.Set;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
+import com.ceco.lollipop.gravitybox.ModQsTiles;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.Utils;
 
 import de.robv.android.xposed.XSharedPreferences;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -37,6 +39,14 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.provider.Settings;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
+import android.widget.ListView;
 
 public class RingerModeTile extends QsTile {
     public static final String SETTING_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
@@ -47,11 +57,16 @@ public class RingerModeTile extends QsTile {
 
     // Define the available ringer modes
     private static final Ringer[] RINGERS = new Ringer[] {
-        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.drawable.ic_qs_ring_off, ZEN_MODE_IMPORTANT),
-        new Ringer(AudioManager.RINGER_MODE_VIBRATE, true, R.drawable.ic_qs_vibrate_on, ZEN_MODE_OFF),
-        new Ringer(AudioManager.RINGER_MODE_NORMAL, false, R.drawable.ic_qs_ring_on, ZEN_MODE_OFF),
-        new Ringer(AudioManager.RINGER_MODE_NORMAL, true, R.drawable.ic_qs_ring_vibrate_on, ZEN_MODE_OFF),
-        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.drawable.ic_qs_ring_none, ZEN_MODE_NONE)
+        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.string.ringer_mode_silent,
+                R.drawable.ic_qs_ring_off, ZEN_MODE_IMPORTANT),
+        new Ringer(AudioManager.RINGER_MODE_VIBRATE, true, R.string.ringer_mode_vibrate,
+                R.drawable.ic_qs_vibrate_on, ZEN_MODE_OFF),
+        new Ringer(AudioManager.RINGER_MODE_NORMAL, false, R.string.ringer_mode_sound,
+                R.drawable.ic_qs_ring_on, ZEN_MODE_OFF),
+        new Ringer(AudioManager.RINGER_MODE_NORMAL, true, R.string.ringer_mode_sound_vibrate,
+                R.drawable.ic_qs_ring_vibrate_on, ZEN_MODE_OFF),
+        new Ringer(AudioManager.RINGER_MODE_SILENT, false, R.string.ringer_mode_none,
+                R.drawable.ic_qs_ring_none, ZEN_MODE_NONE),
     };
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -70,6 +85,9 @@ public class RingerModeTile extends QsTile {
     private boolean mHasVibrator;
     private Vibrator mVibrator;
     private SettingsObserver mSettingsObserver;
+    private List<Ringer> mModeList = new ArrayList<>();
+    private Object mDetailAdapter;
+    private boolean mQuickMode;
 
     public RingerModeTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -86,18 +104,29 @@ public class RingerModeTile extends QsTile {
         mSettingsObserver = null;
         mAudioManager = null;
         mVibrator = null;
+        mModeList.clear();
+        mModeList = null;
+        mDetailAdapter = null;
         super.handleDestroy();
     }
 
     @Override
     public void handleClick() {
-        toggleState();
+        if (mQuickMode) {
+            toggleState();
+        } else {
+            showDetail(true);
+        }
         super.handleClick();
     }
 
     @Override
     public boolean handleLongClick() {
-        startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
+        if (mQuickMode) {
+            showDetail(true);
+        } else {
+            startSettingsActivity(android.provider.Settings.ACTION_SOUND_SETTINGS);
+        }
         return true;
     }
 
@@ -146,6 +175,8 @@ public class RingerModeTile extends QsTile {
         if (DEBUG) log(getKey() + ": onPreferenceInitialize: modes=" + Arrays.toString(modes));
         updateSettings(modes);
 
+        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_RINGER_MODE_TILE_QUICK_MODE, false);
+
         super.initPreferences();
     }
 
@@ -153,11 +184,15 @@ public class RingerModeTile extends QsTile {
     public void onBroadcastReceived(Context context, Intent intent) {
         if (DEBUG) log(getKey() + ": received broadcast: " + intent.toString());
 
-        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)
-                && intent.hasExtra(GravityBoxSettings.EXTRA_RMT_MODE)) {
-            int[] modes = intent.getIntArrayExtra(GravityBoxSettings.EXTRA_RMT_MODE);
-            if (DEBUG) log(getKey() + ": onBroadcastReceived: modes=" + Arrays.toString(modes));
-            updateSettings(modes);
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_RMT_MODE)) {
+                int[] modes = intent.getIntArrayExtra(GravityBoxSettings.EXTRA_RMT_MODE);
+                if (DEBUG) log(getKey() + ": onBroadcastReceived: modes=" + Arrays.toString(modes));
+                updateSettings(modes);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_RMT_QUICK_MODE)) {
+                mQuickMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_RMT_QUICK_MODE, false);
+            }
         }
 
         super.onBroadcastReceived(context, intent);
@@ -201,6 +236,22 @@ public class RingerModeTile extends QsTile {
         }
     }
 
+    private void setRingerMode(int mode, boolean vibrate, int zenMode) {
+        // If we are setting a vibrating state, vibrate to indicate it
+        if (vibrate && mHasVibrator) {
+            mVibrator.vibrate(150);
+        }
+
+        ContentResolver resolver = mContext.getContentResolver();
+        Settings.System.putInt(resolver, SETTING_VIBRATE_WHEN_RINGING,
+                vibrate ? 1 : 0);
+        Settings.Global.putInt(resolver, SETTING_ZEN_MODE, zenMode);
+
+        if (mAudioManager.getRingerMode() != mode) {
+            mAudioManager.setRingerMode(mode);
+        }
+    }
+
     private void toggleState() {
         // search for next suitable mode
         // loop will break as soon as new suitable index is found
@@ -217,18 +268,9 @@ public class RingerModeTile extends QsTile {
         if (mRingerIndex != startIndex) {
             if (DEBUG) log(getKey() + ": Switching to ringerIndex: " + mRingerIndex);
             Ringer r = RINGERS[mRingerIndex];
-    
-            // If we are setting a vibrating state, vibrate to indicate it
-            if (r.mVibrateWhenRinging && mHasVibrator) {
-                mVibrator.vibrate(150);
-            }
-    
+
             // Set the desired state
-            ContentResolver resolver = mContext.getContentResolver();
-            Settings.System.putInt(resolver, SETTING_VIBRATE_WHEN_RINGING,
-                    r.mVibrateWhenRinging ? 1 : 0);
-            Settings.Global.putInt(resolver, SETTING_ZEN_MODE, r.mZenMode);
-            mAudioManager.setRingerMode(r.mRingerMode);
+            setRingerMode(r.mRingerMode, r.mVibrateWhenRinging, r.mZenMode);
         } else if (DEBUG) {
             log(getKey() + ": No suitable ringer mode for toggling found");
         }
@@ -299,16 +341,117 @@ public class RingerModeTile extends QsTile {
     private static class Ringer {
         final boolean mVibrateWhenRinging;
         final int mRingerMode;
+        final int mLabel;
         final int mDrawable;
         final int mZenMode;
         boolean mEnabled; 
 
-        Ringer(int ringerMode, boolean vibrateWhenRinging, int drawable, int zenMode) {
+        Ringer(int ringerMode, boolean vibrateWhenRinging, int label, int drawable, int zenMode) {
             mVibrateWhenRinging = vibrateWhenRinging;
             mRingerMode = ringerMode;
+            mLabel = label;
             mDrawable = drawable;
             mZenMode = zenMode;
             mEnabled = false;
+        }
+    }
+
+    @Override
+    public Object getDetailAdapter() {
+        if (mDetailAdapter == null) {
+            mDetailAdapter = QsDetailAdapterProxy.createProxy(
+                    mContext.getClassLoader(), new ModeDetailAdapter());
+        }
+        return mDetailAdapter;
+    }
+
+    private class ModeAdapter extends ArrayAdapter<Ringer> {
+        public ModeAdapter(Context context) {
+            super(context, android.R.layout.simple_list_item_single_choice, mModeList);
+        }
+
+        @SuppressLint("ViewHolder")
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            CheckedTextView label = (CheckedTextView) inflater.inflate(
+                    android.R.layout.simple_list_item_single_choice, parent, false);
+            Ringer r = getItem(position);
+            label.setText(mGbContext.getString(r.mLabel));
+            return label;
+        }
+    }
+
+    private class ModeDetailAdapter implements QsDetailAdapterProxy.Callback, AdapterView.OnItemClickListener {
+
+        private ModeAdapter mAdapter;
+        private QsDetailItemsList mDetails;
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Ringer r = (Ringer) parent.getItemAtPosition(position);
+            setRingerMode(r.mRingerMode, r.mVibrateWhenRinging, r.mZenMode);
+        }
+
+        @Override
+        public int getTitle() {
+            return ModQsTiles.RES_IDS.RM_TITLE;
+        }
+
+        @Override
+        public Boolean getToggleState() {
+            return null;
+        }
+
+        @Override
+        public View createDetailView(Context context, View convertView, ViewGroup parent) throws Throwable {
+            if (mDetails == null) {
+                mDetails = QsDetailItemsList.create(context, parent);
+                mDetails.setEmptyState(0, null);
+                mAdapter = new ModeAdapter(context);
+                mDetails.setAdapter(mAdapter);
+    
+                final ListView list = mDetails.getListView();
+                list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+                list.setOnItemClickListener(this);
+            }
+
+            rebuildModeList();
+
+            return mDetails.getView();
+        }
+
+        @Override
+        public Intent getSettingsIntent() { 
+            return new Intent(android.provider.Settings.ACTION_SOUND_SETTINGS);
+        }
+
+        @Override
+        public void setToggleState(boolean state) {
+            // noop
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return 0;
+        }
+
+        private void rebuildModeList() {
+            mModeList.clear();
+            Ringer current = RINGERS[mRingerIndex];
+            Ringer selected = null;
+            for (Ringer r : RINGERS) {
+                if (r.mEnabled) {
+                    mModeList.add(r);
+                    if (r == current) {
+                        selected = r;
+                    }
+                }
+            }
+            if (selected != null) {
+                mDetails.getListView().setItemChecked(mAdapter.getPosition(selected), true);
+            }
+            mAdapter.notifyDataSetChanged();
         }
     }
 }

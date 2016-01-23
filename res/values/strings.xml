@@ -701,7 +701,6 @@
     <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Ringer mode tile mode</string>
     <string name="ringer_mode_silent">Priority</string>
     <string name="ringer_mode_vibrate">Vibrate</string>
     <string name="ringer_mode_sound">Sound</string>
@@ -1842,6 +1841,7 @@
 
     <!-- QS: common quick mode option -->
     <string name="pref_tile_quick_mode_title">Enable quick mode</string>
+    <string name="pref_tile_enabled_modes_title">Enabled modes</string>
 
     <!-- Location tile (Slimkat) settings -->
     <string name="pref_cat_qs_location_tile_title">Location tile (SlimKat) settings</string>
@@ -1864,8 +1864,12 @@
     <string name="network_mode_unknown">Unknown</string>
 
     <!-- Network mode tile settings -->
-    <string name="pref_nm_tile_enabled_modes_title">Enabled modes</string>
     <string name="pref_nm_tile_enabled_modes_summary">Defines which network modes tile should support</string>
     <string name="pref_nm_tile_quick_mode_summary">Allows cycling through selected network modes on tile single-press</string>
+
+    <!-- Ringerm mode tile settings -->
+    <string name="pref_cat_qs_rm_tile_title">Ringer mode tile settings</string>
+    <string name="pref_rm_tile_enabled_modes_summary">Sets which ringer modes to cycle through</string>
+    <string name="pref_rm_tile_quick_mode_summary">Allows cycling through selected ringer modes on tile single-press</string>
 
 </resources>

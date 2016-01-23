@@ -655,7 +655,6 @@
     <string name="pref_volume_panel_timeout_title">Ses paneli zaman aşımı</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Zil sesi modu karesi modu</string>
     <string name="ringer_mode_silent">Sessiz</string>
     <string name="ringer_mode_vibrate">Titreşim</string>
     <string name="ringer_mode_sound">Ses</string>

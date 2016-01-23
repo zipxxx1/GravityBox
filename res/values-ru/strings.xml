@@ -701,7 +701,6 @@
     <string name="pref_volume_panel_timeout_title">Задержка панели громкости</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Настройки режима звонка"</string>
     <string name="ringer_mode_silent">Важные</string>
     <string name="ringer_mode_vibrate">Вибрация</string>
     <string name="ringer_mode_sound">Звук</string>

@@ -700,7 +700,6 @@
     <string name="pref_volume_panel_timeout_title">Затримка панелі гучності</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Плитка режиму дзвінка</string>
     <string name="ringer_mode_silent">Важливі</string>
     <string name="ringer_mode_vibrate">Вібрація</string>
     <string name="ringer_mode_sound">Звук</string>
