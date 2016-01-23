@@ -350,15 +350,17 @@ public class LocationTileSlimkat extends QsTile {
 
         @Override
         public View createDetailView(Context context, View convertView, ViewGroup parent) throws Throwable {
-            mDetails = QsDetailItemsList.create(context, parent);
-            mDetails.setEmptyState(R.drawable.ic_qs_location_off,
-                    getModeLabel(Settings.Secure.LOCATION_MODE_OFF));
-            mAdapter = new AdvancedLocationAdapter(context);
-            mDetails.setAdapter(mAdapter);
-
-            final ListView list = mDetails.getListView();
-            list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-            list.setOnItemClickListener(this);
+            if (mDetails == null) {
+                mDetails = QsDetailItemsList.create(context, parent);
+                mDetails.setEmptyState(R.drawable.ic_qs_location_off,
+                        getModeLabel(Settings.Secure.LOCATION_MODE_OFF));
+                mAdapter = new AdvancedLocationAdapter(context);
+                mDetails.setAdapter(mAdapter);
+    
+                final ListView list = mDetails.getListView();
+                list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+                list.setOnItemClickListener(this);
+            }
 
             return mDetails.getView();
         }

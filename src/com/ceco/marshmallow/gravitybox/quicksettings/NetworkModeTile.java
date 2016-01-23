@@ -345,6 +345,7 @@ public class NetworkModeTile extends QsTile {
 
         @Override
         public Boolean getToggleState() {
+            rebuildModeList();
             return null;
         }
 
@@ -360,8 +361,6 @@ public class NetworkModeTile extends QsTile {
                 list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
                 list.setOnItemClickListener(this);
             }
-
-            rebuildModeList();
 
             return mDetails.getView();
         }
