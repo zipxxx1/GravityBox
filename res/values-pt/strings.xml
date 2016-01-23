@@ -652,7 +652,6 @@
     <string name="pref_volume_panel_timeout_title">Tempo-limite do painel de volumes</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Modo da tile de toque</string>
     <string name="ringer_mode_silent">Silencioso</string>
     <string name="ringer_mode_vibrate">Vibrar</string>
     <string name="ringer_mode_sound">Som</string>

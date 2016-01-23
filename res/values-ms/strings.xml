@@ -681,7 +681,6 @@
     <string name="pref_volume_panel_timeout_title">Masa tamat panel nada</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Mod tile deringan</string>
     <string name="ringer_mode_silent">Senyap</string>
     <string name="ringer_mode_vibrate">Getar sahaja</string>
     <string name="ringer_mode_sound">Bunyi sahaja</string>

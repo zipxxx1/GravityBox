@@ -658,7 +658,6 @@
     <string name="pref_volume_panel_timeout_title">Časovač panela hlasitosti</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Nastavenia dlaždice Režimu zvonenia</string>
     <string name="ringer_mode_silent">Prioritné</string>
     <string name="ringer_mode_vibrate">Vibrovať</string>
     <string name="ringer_mode_sound">Zvoniť</string>

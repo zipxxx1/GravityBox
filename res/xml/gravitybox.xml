@@ -289,7 +289,7 @@
 
                     <MultiSelectListPreference 
                         android:key="pref_dnd_tile_enabled_modes"
-                        android:title="@string/pref_dnd_tile_enabled_modes_title"
+                        android:title="@string/pref_tile_enabled_modes_title"
                         android:summary="@string/pref_dnd_tile_enabled_modes_summary"
                         android:entries="@array/dnd_tile_em_entries"
                         android:entryValues="@array/dnd_tile_em_values"
@@ -417,7 +417,7 @@
 
                     <MultiSelectListPreference 
                         android:key="pref_nm_tile_enabled_modes"
-                        android:title="@string/pref_nm_tile_enabled_modes_title"
+                        android:title="@string/pref_tile_enabled_modes_title"
                         android:summary="@string/pref_nm_tile_enabled_modes_summary"
                         android:entries="@array/network_mode_entries"
                         android:entryValues="@array/network_mode_values"
@@ -439,12 +439,25 @@
 
                 </PreferenceScreen>
 
-                <MultiSelectListPreference 
-                    android:key="pref_qs_ringer_mode2"
-                    android:title="@string/pref_qs_ringer_mode_title"
-                    android:entries="@array/ringer_mode_entries"
-                    android:entryValues="@array/ringer_mode_values"
-                    android:defaultValue="@array/ringer_mode_values" />
+                <PreferenceScreen 
+                    android:key="pref_cat_qs_rm_tile"
+                    android:title="@string/pref_cat_qs_rm_tile_title">
+
+                    <MultiSelectListPreference 
+                        android:key="pref_qs_ringer_mode2"
+                        android:title="@string/pref_tile_enabled_modes_title"
+                        android:summary="@string/pref_rm_tile_enabled_modes_summary"
+                        android:entries="@array/ringer_mode_entries"
+                        android:entryValues="@array/ringer_mode_values"
+                        android:defaultValue="@array/ringer_mode_values" />
+
+                    <CheckBoxPreference 
+                        android:key="pref_rm_tile_quick_mode"
+                        android:title="@string/pref_tile_quick_mode_title"
+                        android:summary="@string/pref_rm_tile_quick_mode_summary"
+                        android:defaultValue="false" />
+
+                </PreferenceScreen>
 
                 <MultiSelectListPreference 
                     android:key="pref_qs_stay_awake"

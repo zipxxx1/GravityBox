@@ -652,7 +652,6 @@
     <string name="pref_volume_panel_timeout_title">פסק זמן של תפריט עוצמת השמע</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">מצב צילצול של אריח צליל</string>
     <string name="ringer_mode_silent">שקט</string>
     <string name="ringer_mode_vibrate">רטט</string>
     <string name="ringer_mode_sound">צליל</string>

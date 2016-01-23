@@ -684,7 +684,6 @@
     <string name="pref_volume_panel_timeout_title">Ocultar panel de volumen tras</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Modos de la casilla de modo de sonido</string>
     <string name="ringer_mode_silent">Silencio</string>
     <string name="ringer_mode_vibrate">Vibrar</string>
     <string name="ringer_mode_sound">Sonar</string>

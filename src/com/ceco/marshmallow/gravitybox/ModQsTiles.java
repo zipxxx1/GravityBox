@@ -59,6 +59,7 @@ public class ModQsTiles {
 
     public static class RES_IDS {
         public static int NM_TITLE;
+        public static int RM_TITLE;
     }
 
     private static void log(String message) {
@@ -72,6 +73,7 @@ public class ModQsTiles {
     public static void initResources(final InitPackageResourcesParam resparam) {
         XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
         RES_IDS.NM_TITLE = resparam.res.addResource(modRes, R.string.qs_tile_network_mode);
+        RES_IDS.RM_TITLE = resparam.res.addResource(modRes, R.string.qs_tile_ringer_mode);
     }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {

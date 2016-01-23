@@ -668,7 +668,6 @@
     <string name="pref_volume_panel_timeout_title">音量面板逾時時間</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">響鈴模式瓷貼模式</string>
     <string name="ringer_mode_silent">靜音</string>
     <string name="ringer_mode_vibrate">震動</string>
     <string name="ringer_mode_sound">響鈴</string>

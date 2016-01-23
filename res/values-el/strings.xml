@@ -666,7 +666,6 @@
     <string name="pref_volume_panel_timeout_title">Χρονικό όριο πεδίου έντασης</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Τύπος πλακιδίου κουδουνίσματος</string>
     <string name="ringer_mode_silent">Σιωπηλό</string>
     <string name="ringer_mode_vibrate">Δόνηση</string>
     <string name="ringer_mode_sound">Ήχος</string>
