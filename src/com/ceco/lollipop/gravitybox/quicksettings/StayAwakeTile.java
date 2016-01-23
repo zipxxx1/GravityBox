@@ -330,8 +330,6 @@ public class StayAwakeTile extends QsTile {
                 list.setOnItemClickListener(this);
             }
 
-            rebuildModeList();
-
             return mDetails.getView();
         }
 
