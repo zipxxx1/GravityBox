@@ -343,6 +343,9 @@ public class StayAwakeTile extends QsTile {
             setScreenOffTimeout(state ? NEVER_SLEEP : mPreviousTimeout);
             rebuildModeList();
             fireToggleStateChanged(state);
+            if (state) {
+                showDetail(false);
+            }
         }
 
         @Override
