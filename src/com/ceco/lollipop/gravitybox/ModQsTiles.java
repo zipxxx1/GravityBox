@@ -68,6 +68,7 @@ public class ModQsTiles {
             if (DEBUG) log("init");
 
             Class<?> classTileHost = XposedHelpers.findClass(CLASS_TILE_HOST, classLoader);
+            mQsPanel = new QsPanel(prefs, classLoader);
 
             XposedHelpers.findAndHookMethod(classTileHost, "recreateTiles", new XC_MethodHook() {
                 @SuppressWarnings("unchecked")
@@ -90,6 +91,7 @@ public class ModQsTiles {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mEventDistributor == null) {
                         mEventDistributor = new QsTileEventDistributor(param.thisObject, prefs);
+                        mQsPanel.setEventDistributor(mEventDistributor);
                         if (DEBUG) log("Tile event distributor created");
                     }
 
@@ -169,9 +171,6 @@ public class ModQsTiles {
 
                     if (mQuickPulldownHandler == null) {
                         mQuickPulldownHandler = new QsQuickPulldownHandler(context, prefs, mEventDistributor);
-                    }
-                    if (mQsPanel == null) {
-                        mQsPanel = new QsPanel(context, prefs, mEventDistributor);
                     }
                     mQsPanel.updateResources();
                 }
