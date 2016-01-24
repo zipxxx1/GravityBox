@@ -1,3 +1,26 @@
+Changelog 6.0.4 - 24/01/2016
+--------------------------------------
+- QuickSettings management:
+--- Implemeted generic "detail view" support which brings new possibilities
+--- Location tile (SlimKat): redesigned to support detail view, quick mode and dual mode
+--- NetworkMode tile: redesigned for simplicity and flexibility:
+------ allows user to freely choose network modes of interest tile should support
+------ supports all currently available network modes
+------ supports detail view and quick mode
+------ label indicates current network mode
+--- RingerMode tile: extended to support detail view and quick mode
+--- StayAwake tile: extended to support detail view and quick mode
+--- Do not disturb tile: extended to support quick mode
+--- Hint: use "Tile specific settings" category within QS management to configure new behavior of tiles above
+--- HotSpot tile: open tether settings on long-press
+- Fixed Now on tap (Search) action not working when navbar disabled
+- Updated Chinese (Traditional) translation (thanks to npes87184)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Small fixes in Dutch translations (thanks to Gijs Timmers)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Russian translations (thanks to gaich)
+- Updated French translations (thanks to ch-vox)
+
 Changelog 6.0.3 - 20/12/2015
 --------------------------------------
 - Fixed GB settings not sticking on some devices
