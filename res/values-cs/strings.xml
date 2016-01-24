@@ -1750,4 +1750,39 @@
         vibrace v milisekundách. 
         Ponechte prázdné pro původní vibraci. Zadejte 0 pro vypnutí vibrace.</string>
 
+    <!-- QS: common quick mode option -->
+    <string name="pref_tile_quick_mode_title">Rychlý režim</string>
+    <string name="pref_tile_enabled_modes_title">Podporované typy</string>
+
+    <!-- DND tile settings -->
+    <string name="pref_cat_qs_dnd_tile_title">Nastavení dlaždice Nerušit</string>
+    <string name="pref_dnd_tile_quick_mode_summary">Umožňuje přepínat mezi typy nerušení jednoduchým ťuknutím na dlaždici</string>
+    <string name="pref_dnd_tile_enabled_modes_summary">Definuje, mezi kterými typy nerušení přepínat</string>
+    <string name="dnd_tile_em_priority">Pouze prioritní</string>
+    <string name="dnd_tile_em_alarms">Pouze budíky</string>
+    <string name="dnd_tile_em_silence">Úplné ticho</string>
+    <string name="pref_dnd_tile_duration_mode_title">Přednastavená doba trvání</string>
+    <string name="dnd_tile_dm_manual">Dokud nevypnete</string>
+    <string name="dnd_tile_dm_alarm">Do následujícího budíku</string>
+    <string name="dnd_tile_dm_custom">Vlastní</string>
+    <string name="pref_dnd_tile_duration_title">Nastavit vlastní dobu trvání</string>
+
+    <!-- Location tile (Slimkat) settings -->
+    <string name="pref_cat_qs_location_tile_title">Nastavení dlaždice Poloha (SlimKat)</string>
+    <string name="pref_location_tile_quick_mode_summary">Umožňuje přepínat mezi typy sledování polohy jednoduchým ťuknutím na dlaždici</string>
+
+    <!-- Network mode tile settings -->
+    <string name="pref_nm_tile_enabled_modes_summary">Definuje, které typy sítě dlaždice podporuje</string>
+    <string name="pref_nm_tile_quick_mode_summary">Umožňuje přepínat mezi typy sítě pouhým ťuknutím na dlaždici</string>
+
+    <!-- Ringer mode tile settings -->
+    <string name="pref_cat_qs_rm_tile_title">Nastavení dlaždice Režim vyzvánění</string>
+    <string name="pref_rm_tile_enabled_modes_summary">Definuje, které typy vyzvánění dlaždice podporuje</string>
+    <string name="pref_rm_tile_quick_mode_summary">Umožňuje přepínat mezi typy vyzvánění pouhým ťuknutím na dlaždici</string>
+
+    <!-- Stay awake tile settings -->
+    <string name="pref_cat_qs_sa_tile_title">Nastavení dlaždice Bdění</string>
+    <string name="pref_sa_tile_enabled_modes_summary">Definuje, které typy časovače vypnutí obrazovky dlaždice podporuje</string>
+    <string name="pref_sa_tile_quick_mode_summary">Umožňuje přepínat mezi typy časovače vypnutí obrazovky jednoduchým ťuknutím na dlaždici</string>
+
 </resources>
