@@ -1796,4 +1796,26 @@
     <string name="tile_data_toggle_singlepress">Na ťuknutí</string>
     <string name="tile_data_toggle_longpress">Na dlouhé podržení</string>
 
+    <!-- QS: common quick mode option -->
+    <string name="pref_tile_quick_mode_title">Rychlý režim</string>
+    <string name="pref_tile_enabled_modes_title">Podporované typy</string>
+
+    <!-- Location tile (Slimkat) settings -->
+    <string name="pref_cat_qs_location_tile_title">Nastavení dlaždice Poloha (SlimKat)</string>
+    <string name="pref_location_tile_quick_mode_summary">Umožňuje přepínat mezi typy sledování polohy jednoduchým ťuknutím na dlaždici</string>
+
+    <!-- Network mode tile settings -->
+    <string name="pref_nm_tile_enabled_modes_summary">Definuje, které typy sítě dlaždice podporuje</string>
+    <string name="pref_nm_tile_quick_mode_summary">Umožňuje přepínat mezi typy sítě pouhým ťuknutím na dlaždici</string>
+
+    <!-- Ringer mode tile settings -->
+    <string name="pref_cat_qs_rm_tile_title">Nastavení dlaždice Režim vyzvánění</string>
+    <string name="pref_rm_tile_enabled_modes_summary">Definuje, které typy vyzvánění dlaždice podporuje</string>
+    <string name="pref_rm_tile_quick_mode_summary">Umožňuje přepínat mezi typy vyzvánění pouhým ťuknutím na dlaždici</string>
+
+    <!-- Stay awake tile settings -->
+    <string name="pref_cat_qs_sa_tile_title">Nastavení dlaždice Bdění</string>
+    <string name="pref_sa_tile_enabled_modes_summary">Definuje, které typy časovače vypnutí obrazovky dlaždice podporuje</string>
+    <string name="pref_sa_tile_quick_mode_summary">Umožňuje přepínat mezi typy časovače vypnutí obrazovky jednoduchým ťuknutím na dlaždici</string>
+
 </resources>
