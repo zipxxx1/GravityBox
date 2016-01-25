@@ -1,3 +1,28 @@
+Changelog 5.3.5 - 25/01/2016
+--------------------------------------
+- QuickSettings management:
+--- Implemeted generic "detail view" support which brings new possibilities
+--- Added option for enabling detail view for WiFi and BT tiles on Android 5.0 (experimental)
+--- Location tile (SlimKat): redesigned to support detail view, quick mode and dual mode
+--- NetworkMode tile: redesigned for simplicity and flexibility:
+------ allows user to freely choose network modes of interest tile should support
+------ supports all currently available network modes
+------ supports detail view and quick mode
+------ label indicates current network mode
+--- RingerMode tile: extended to support detail view and quick mode
+--- StayAwake tile: extended to support detail view and quick mode
+--- Hint: use "Tile specific settings" category within QS management to configure new behavior of tiles above
+--- Fixed tiles per row not working right after reboot on some devices
+- Circle battery: improved percent text size and position (thanks to creeve4)
+- Moved battery percent text to the right of battery icon for consistency with header and keyguard
+- Improved support for RTL locales
+- Cleaned up unused resources
+- Other small adjustments (see commit history in project's github)
+- Updated Russian translations (thanks to gaich)
+- Updated Vietnamese translations (thanks to TranDatDT)
+- Updated Ukrainian translations (thanks to burunduk)
+- Small fixes in Dutch translations (thanks to Gijs Timmers)
+
 Changelog 5.3.4 - 13/12/2015
 --------------------------------------
 - QuickSettings management:
