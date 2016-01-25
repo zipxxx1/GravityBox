@@ -195,9 +195,12 @@ public class QsPanel implements BroadcastSubReceiver {
                         shouldInvalidate = true;
                         if (DEBUG) log("updateResources: Updated first row dimensions: all tiles non-dual");
                     // apply additional width reduction to nicely fit 3 dual tiles in one row
-                    } else if (dualTileCount > 2 && mNumColumns < 5) {
+                    } else {
+                        float factor = (dualTileCount > 3 && mNumColumns < 6) ? 0.65f :
+                            (dualTileCount > 3 && mNumColumns <= 6) ||
+                            (dualTileCount > 2 && mNumColumns < 5) ? 0.75f : 1f;
                         int lcw = XposedHelpers.getIntField(mQsPanel, "mLargeCellWidth");
-                        XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth", Math.round(lcw*0.75f));
+                        XposedHelpers.setIntField(mQsPanel, "mLargeCellWidth", Math.round(lcw*factor));
                         shouldInvalidate = true;
                         if (DEBUG) log("updateResources: Applied additional reduction to dual tile width");
                     }
