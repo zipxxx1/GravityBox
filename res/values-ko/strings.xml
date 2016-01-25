@@ -1184,7 +1184,7 @@
     <string name="pref_mtk_fix_tts_settings_title">말하기 설정 패치</string>
     <string name="pref_mtk_fix_tts_settings_summary">언어 및 입력 설정의 TTS나 말하기 설정의 문제점들을 패치합니다. (재시작 필요)</string>
 
-    <string name="imgpick_dialog_title">이미지 선택...</string>
+    <string name="imgpick_dialog_title">이미지 선택&#8230;</string>
     <string name="imgpick_choose_error">이미지 선택 오류!</string>
     <string name="imgpick_crop_error">이미지 자르기 오류!</string>
 
