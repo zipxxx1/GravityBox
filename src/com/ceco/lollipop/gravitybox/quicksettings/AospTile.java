@@ -63,6 +63,12 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
     protected abstract String getClassName();
     public abstract String getAospKey();
 
+    // Tiles can override click functionality
+    // When true is returned, original click handler will be suppressed
+    protected boolean onBeforeHandleClick() {
+        return false;
+    }
+
     @Override
     public void handleUpdateState(Object state, Object arg) {
         final boolean visible = mEnabled &&
@@ -98,6 +104,12 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
 
             mHandleClickHook = XposedHelpers.findAndHookMethod(
                     getClassName(), cl, "handleClick", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (onBeforeHandleClick()) {
+                        param.setResult(null);
+                    }
+                }
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mKey.equals(XposedHelpers.getAdditionalInstanceField(
