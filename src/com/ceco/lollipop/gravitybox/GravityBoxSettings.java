@@ -96,6 +96,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_QUICK_PULLDOWN = "pref_quick_pulldown";
     public static final String PREF_KEY_QUICK_PULLDOWN_SIZE = "pref_quick_pulldown_size";
     public static final String PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS = "pref_qs_hide_brightness";
+    public static final String PREF_KEY_QS_ENABLE_DETAIL_VIEW = "pref_qs_enable_detail_view";
     public static final int QUICK_PULLDOWN_OFF = 0;
     public static final int QUICK_PULLDOWN_RIGHT = 1;
     public static final int QUICK_PULLDOWN_LEFT = 2;
@@ -523,6 +524,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_QS_HIDE_ON_CHANGE = "qsHideOnChange";
     public static final String EXTRA_QS_TILE_LABEL_STYLE = "qsTileLabelStyle";
     public static final String EXTRA_QS_HIDE_BRIGHTNESS = "qsHideBrightness";
+    public static final String EXTRA_QS_ENABLE_DETAIL_VIEW = "qsEnableDetailView";
 
     public static final String ACTION_PREF_CLOCK_CHANGED = "gravitybox.intent.action.CENTER_CLOCK_CHANGED";
     public static final String EXTRA_CENTER_CLOCK = "centerClock";
@@ -1652,6 +1654,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (Build.VERSION.SDK_INT < 22) {
                 Preference p = findPreference(PREF_KEY_SIGNAL_CLUSTER_NOSIM);
                 if (p != null) mPrefCatSignalCluster.removePreference(p);
+            }
+
+            // SDK21 only
+            if (Build.VERSION.SDK_INT > 21) {
+                Preference p = findPreference(PREF_KEY_QS_ENABLE_DETAIL_VIEW);
+                if (p != null) mPrefCatStatusbarQs.removePreference(p);
             }
 
             // Xposed Bridge 65+ only
@@ -3120,6 +3128,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_PIE_CHANGED);
                 intent.putExtra(EXTRA_PIE_TRIGIND_COLOR, prefs.getInt(key, 
                         getResources().getColor(R.color.pie_trigind_color)));
+            } else if (key.equals(PREF_KEY_QS_ENABLE_DETAIL_VIEW)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_QS_ENABLE_DETAIL_VIEW, prefs.getBoolean(key, false));
             }
             if (intent.getAction() != null) {
                 mPrefs.edit().commit();

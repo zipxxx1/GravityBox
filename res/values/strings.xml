@@ -1853,4 +1853,8 @@
     <string name="tile_data_toggle_singlepress">On single-press</string>
     <string name="tile_data_toggle_longpress">On long-press</string>
 
+    <!-- QS: Enable detail view (SDK21) -->
+    <string name="pref_qs_enable_detail_view_title">Enable detail view</string>
+    <string name="pref_qs_enable_detail_view_summary">Enables detail view for WiFi and Bluetooth tiles on Android 5.0 (experimental)</string>
+
 </resources>

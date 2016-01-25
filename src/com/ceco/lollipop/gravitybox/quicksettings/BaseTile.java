@@ -318,4 +318,13 @@ public abstract class BaseTile implements QsEventListener {
             XposedBridge.log(t);
         }
     }
+
+    public void showDetail(boolean show) {
+        try {
+            XposedHelpers.callMethod(mTile, "showDetail", show);
+        } catch (Throwable t) {
+            log("Error in showDetail: ");
+            XposedBridge.log(t);
+        }
+    }
 }
