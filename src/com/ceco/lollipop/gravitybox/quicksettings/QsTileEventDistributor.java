@@ -227,17 +227,22 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "supportsDualTargets",
-                    new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                    if (l != null) {
-                        param.setResult(l.supportsDualTargets());
+            // this seems to be unsupported on custom ROMs. Log one line and continue.
+            try {
+                XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "supportsDualTargets",
+                        new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        final QsEventListener l = mListeners.get(XposedHelpers
+                                .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                        if (l != null) {
+                            param.setResult(l.supportsDualTargets());
+                        }
                     }
-                }
-            });
+                });
+            } catch (Throwable t) {
+                log("QS: Your system does not seem to support standard AOSP dual mode");
+            }
 
             XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "onConfigurationChanged",
                     Configuration.class, new XC_MethodHook() {

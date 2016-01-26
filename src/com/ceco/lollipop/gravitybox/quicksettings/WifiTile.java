@@ -96,9 +96,9 @@ public class WifiTile extends AospTile {
     }
 
     private void createHooks() {
-        try {
             final ClassLoader cl = mContext.getClassLoader();
 
+        try {
             mCreateTileViewHook = XposedHelpers.findAndHookMethod(getClassName(), 
                     cl, "createTileView", Context.class, new XC_MethodHook() {
                 @Override
@@ -106,7 +106,11 @@ public class WifiTile extends AospTile {
                     onCreateTileView((View)param.getResult());
                 }
             });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
 
+        try {
             mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(getClassName(), 
                     cl, "supportsDualTargets", new XC_MethodHook() {
                 @Override
@@ -114,7 +118,11 @@ public class WifiTile extends AospTile {
                     param.setResult(mDualMode);
                 }
             });
+        } catch (Throwable t) {
+            log(getKey() + ": Your system does not seem to support standard AOSP dual mode");
+        }
 
+        try {
             if (Build.VERSION.SDK_INT == 21) {
                 mHandleSecondaryClickHook = XposedHelpers.findAndHookMethod(getClassName(),
                         cl, "handleSecondaryClick", new XC_MethodHook() {
