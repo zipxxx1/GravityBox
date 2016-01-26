@@ -380,11 +380,6 @@ public class LocationTileSlimkat extends QsTile {
             }
         }
 
-        @Override
-        public int getMetricsCategory() {
-            return 122;
-        }
-
         private void rebuildLocationList(boolean populate) {
             mLocationList.clear();
             if (populate) {
