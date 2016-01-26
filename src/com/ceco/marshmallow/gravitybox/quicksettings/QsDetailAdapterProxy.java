@@ -38,7 +38,6 @@ public class QsDetailAdapterProxy implements InvocationHandler {
         View createDetailView(Context context, View convertView, ViewGroup parent) throws Throwable;
         Intent getSettingsIntent();
         void setToggleState(boolean state);
-        int getMetricsCategory();
     }
 
     private Callback mCallback;
@@ -70,7 +69,7 @@ public class QsDetailAdapterProxy implements InvocationHandler {
             mCallback.setToggleState((boolean)args[0]);
             return null;
         } else if (method.getName().equals("getMetricsCategory")) {
-            return mCallback.getMetricsCategory();
+            return 111;
         } else if (method.getName().equals("createDetailView")) {
             return mCallback.createDetailView((Context)args[0], (View)args[1], (ViewGroup)args[2]);
         } else {

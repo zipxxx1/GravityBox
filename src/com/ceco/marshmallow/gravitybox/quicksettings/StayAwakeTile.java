@@ -348,11 +348,6 @@ public class StayAwakeTile extends QsTile {
             }
         }
 
-        @Override
-        public int getMetricsCategory() {
-            return 0;
-        }
-
         private void rebuildModeList() {
             mDetails.getListView().clearChoices();
             mModeList.clear();

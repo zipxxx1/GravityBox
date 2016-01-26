@@ -47,6 +47,7 @@ public class BluetoothTile extends AospTile {
     }
 
     private void createHooks() {
+        // this seems to be unsupported on some custom ROMs. Log one line and continue.
         try {
             mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(getClassName(), 
                     mContext.getClassLoader(), "supportsDualTargets", new XC_MethodHook() {
@@ -56,7 +57,7 @@ public class BluetoothTile extends AospTile {
                 }
             });
         } catch (Throwable t) {
-            XposedBridge.log(t);
+            log(getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
         }
     }
 

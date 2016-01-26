@@ -429,11 +429,6 @@ public class RingerModeTile extends QsTile {
             // noop
         }
 
-        @Override
-        public int getMetricsCategory() {
-            return 0;
-        }
-
         private void rebuildModeList() {
             mModeList.clear();
             Ringer current = RINGERS[mRingerIndex];
