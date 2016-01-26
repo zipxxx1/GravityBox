@@ -367,11 +367,6 @@ public class NetworkModeTile extends QsTile {
             // noop
         }
 
-        @Override
-        public int getMetricsCategory() {
-            return 0;
-        }
-
         private void rebuildModeList() {
             mModeList.clear();
             NetworkMode selected = null;
