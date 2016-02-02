@@ -1793,5 +1793,53 @@
     
     <!-- Lockscreen: Direct unlock policy -->
     <string name="pref_lockscreen_direct_unlock_policy_title">Direkt feloldási házirend</string>
+    
+    <!-- Cellular tile Mobile data toggle -->
+    <string name="pref_cell_tile_data_toggle_title">Mobil adatátvitel ki-bekapcsolása</string>
+    <string name="tile_data_toggle_disabled">Letiltva</string>
+    <string name="tile_data_toggle_singlepress">Egyszeri érintésre</string>
+    <string name="tile_data_toggle_longpress">Hosszú érintésre</string>
+
+    <!-- QS: Enable detail view (SDK21) -->
+    <string name="pref_qs_enable_detail_view_title">Részletes nézet engedélyezése</string>
+    <string name="pref_qs_enable_detail_view_summary">Engedélyezi a részletes nézetet a WiFi és Bluetooth csempéknek Android 5.0 rendszeren (kísérleti)</string>
+
+    <!-- QS: common quick mode option -->
+    <string name="pref_tile_quick_mode_title">Gyors mód engedélyezése</string>
+    <string name="pref_tile_enabled_modes_title">Engedélyezett módok</string>
+
+    <!-- Location tile (Slimkat) settings -->
+    <string name="pref_cat_qs_location_tile_title">Helyzetmeghatározás (SlimKat) csempe beállítások</string>
+    <string name="pref_location_tile_quick_mode_summary">Lehetővé teszi a helyzetmeghatározás módok közötti váltást a csempe egyszeri érintésére.</string>
+
+    <!-- Cellular network modes -->
+    <string name="network_mode_0">GSM/WCDMA preferált (3G/2G)</string>
+    <string name="network_mode_1">Csak GSM (2G)</string>
+    <string name="network_mode_2">Csak WCDMA (3G)</string>
+    <string name="network_mode_3">GSM/WCDMA auto (2G/3G)</string>
+    <string name="network_mode_4">CDMA/EvDo auto (2G/3G)</string>
+    <string name="network_mode_5">Csak CDMA (2G)</string>
+    <string name="network_mode_6">Csak EvDo (3G)</string>
+    <string name="network_mode_7">Global (2G/3G)</string>
+    <string name="network_mode_8">LTE CDMA (4G/2G/3G)</string>
+    <string name="network_mode_9">LTE GSM (4G/2G/3G)</string>
+    <string name="network_mode_10">LTE Global (4G/2G/3G)</string>
+    <string name="network_mode_11">Csak LTE (4G)</string>
+    <string name="network_mode_12">LTE/WCDMA (4G/3G)</string>
+    <string name="network_mode_unknown">Ismeretlen</string>
+
+    <!-- Network mode tile settings -->
+    <string name="pref_nm_tile_enabled_modes_summary">Meghatározza, hogy milyen hálózati üzemmód csempék legyenek támogatva</string>
+    <string name="pref_nm_tile_quick_mode_summary">Lehetővé teszi a kiválasztott hálózati üzemmódok közötti váltást a csempe egyszeri érintésére.</string>
+
+    <!-- Ringer mode tile settings -->
+    <string name="pref_cat_qs_rm_tile_title">Csengés üzemmód csempe beállítások</string>
+    <string name="pref_rm_tile_enabled_modes_summary">Meghatározza, hogy milyen csengés üzemmód csempék legyenek támogatva</string>
+    <string name="pref_rm_tile_quick_mode_summary">Lehetővé teszi a kiválasztott csengés üzemmódok közötti váltást a csempe egyszeri érintésére.</string>
+
+    <!-- Stay awake tile settings -->
+    <string name="pref_cat_qs_sa_tile_title">Ébrentartás csempe beállítások</string>
+    <string name="pref_sa_tile_enabled_modes_summary">Meghatározza, hogy milyen képernyő időtúllépési csempék legyenek támogatva</string>
+    <string name="pref_sa_tile_quick_mode_summary">Lehetővé teszi a kiválasztott képernyő időtúllépések közötti váltást a csempe egyszeri érintésére.</string>
 
 </resources>
