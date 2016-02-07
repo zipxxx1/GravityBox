@@ -331,7 +331,10 @@ public abstract class TrafficMeterAbstract extends TextView
     }
 
     private static boolean isCountedInterface(String iface) {
-        return (iface != null && !iface.equals("lo") && !iface.startsWith("tun"));
+        return (iface != null &&
+                !iface.equals("ifname") &&
+                !iface.equals("lo") &&
+                !iface.startsWith("tun"));
     }
 
     private static long tryParseLong(String obj) {
@@ -348,28 +351,19 @@ public abstract class TrafficMeterAbstract extends TextView
         BufferedReader in = null;
         long[] bytes = new long[] { 0, 0 };
         try {
-            FileReader fr = new FileReader("/proc/net/dev");
+            FileReader fr = new FileReader("/proc/net/xt_qtaguid/iface_stat_fmt");
             in = new BufferedReader(fr);
             while ((line = in.readLine()) != null) {
-                // assumes iface : params[] line format 
-                if (!line.contains(":"))
-                    continue;
-
-                segs = line.trim().split(":");
-                if (!isCountedInterface(segs[0]))
-                    continue;
-
-                if (DEBUG) log("iface:" + segs[0] + "; segs:" + segs[1]);
-                // there can be more whitechars between params
-                segs = segs[1].trim().split("\\s+");
-                // assumes fixed length of params (will fall back to TrafficStats if different)
-                if (segs.length != 16)
+                segs = line.split(" ");
+                if (segs.length < 4)
                     throw new UnsupportedOperationException("Unsupported length of net params");
 
-                bytes[0] += tryParseLong(segs[0]);
-                bytes[1] += tryParseLong(segs[8]);
+                if (isCountedInterface(segs[0])) {
+                    if (DEBUG) log("iface:"+segs[0]+"; RX="+segs[1]+"; TX="+segs[3]);
+                    bytes[0] += tryParseLong(segs[1]);
+                    bytes[1] += tryParseLong(segs[3]);
+                }
             }
-            in.close();
         } catch (Throwable t) {
             if (DEBUG) XposedBridge.log(t);
             // fallback to TrafficStats
