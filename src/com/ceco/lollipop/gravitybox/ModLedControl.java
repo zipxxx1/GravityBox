@@ -65,7 +65,7 @@ public class ModLedControl {
     private static final String TAG = "GB:ModLedControl";
     public static final boolean DEBUG = false;
     private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.notification.NotificationManagerService";
-    private static final String CLASS_STATUSBAR_MGR_SERVICE = "com.android.server.statusbar.StatusBarManagerService";
+    private static final String CLASS_VIBRATOR_SERVICE = "com.android.server.VibratorService";
     private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
@@ -207,6 +207,10 @@ public class ModLedControl {
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
                     "buzzBeepBlinkLocked", CLASS_NOTIFICATION_RECORD, buzzBeepBlinkLockedHook);
+
+            XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_VIBRATOR_SERVICE, classLoader),
+                    "startVibrationLocked", startVibrationHook);
+
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -457,6 +461,16 @@ public class ModLedControl {
                 }
             } catch (Throwable t) {
                 XposedBridge.log(t);
+            }
+        }
+    };
+
+    private static XC_MethodHook startVibrationHook = new XC_MethodHook() {
+        @Override
+        protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+            if (mQuietHours.quietHoursActive() && mQuietHours.muteSystemVibe) {
+                if (DEBUG) log("startVibrationLocked: system level vibration suppressed");
+                param.setResult(null);
             }
         }
     };

@@ -1773,9 +1773,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <string name="pref_lc_sound_vibrate_summary">Прадухіленне вібрацыі паведамленняў з раней адключанай
 вібрацыяй пры выбары рэжыме тэлефанавання \"Толькі вібрацыя\"</string>
 
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Адключыць вібра водгук</string>
-
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Ачысціць толькі бачныя</string>
 

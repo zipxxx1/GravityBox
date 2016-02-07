@@ -1777,10 +1777,6 @@
     <string name="pref_lc_sound_vibrate_title">Перетворення звуку у вібрацію</string>
     <string name="pref_lc_sound_vibrate_summary">Запобігання вібрації сповіщень з раніше вимкнутою вібрацією при виборі режиму дзвінка «Лише вібрація»</string>
 
-
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Вимк тактильний відгук</string>
-
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Очистити лише видиме</string>
 

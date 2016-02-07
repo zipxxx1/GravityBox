@@ -1409,7 +1409,9 @@
     <string name="pref_headset_action_unplug_title">On headset unplugged</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Mute vibrations</string>
+    <string name="pref_lc_qh_mute_vibe_title">Mute notification vibrations</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Turns off notification vibrations on this device and
+        any paired Android Wear device</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interactive mode</string>
@@ -1778,8 +1780,12 @@
     <string name="pref_lc_sound_vibrate_summary">Prevents notifications having vibrations turned off from
         being forced to vibrate during vibrate-only ringer mode</string>
 
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Disable haptic feedback</string>
+    <!-- UNC: QuietHours: mute system level vibrations -->
+    <string name="pref_lc_qh_mute_system_vibe_title">Mute device vibrations</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Turns off ALL vibrations at system level,
+        including notification vibrations on THIS device. Notifications on paired Android Wear device can
+        still vibrate in case notification vibrations are enabled.
+    </string>
 
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Clear visible only</string>

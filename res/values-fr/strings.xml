@@ -1778,9 +1778,6 @@
     <string name="pref_lc_sound_vibrate_summary">Evite aux notifications dont les vibrations sont désactivées
         d\'être contraintes à vibrer dans le mode de sonnerie vibrer uniquement</string>
 
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Désactiver le retour haptique</string>
-
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Effacer les tâches visibles uniquement</string>
 
