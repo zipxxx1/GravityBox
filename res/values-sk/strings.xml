@@ -1557,7 +1557,9 @@
     <string name="pref_headset_action_unplug_title">Po odpojení slúchadiel</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Zakázať vibrácie</string>
+    <string name="pref_lc_qh_mute_vibe_title">Zakázať vibrácie oznámení</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Vypne vibrácia oznámení na tomto zariadení a 
+          tiež na spárovanom Android Wear zariadení</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interaktívny režim</string>
@@ -1847,5 +1849,11 @@
 
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Dvojité ťuknutie na tlačidlo zoznamu aplikácíí</string>
+
+    <!-- UNC: QuietHours: mute system level vibrations -->
+    <string name="pref_lc_qh_mute_system_vibe_title">Zakázať vibrácie zariadenia</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Vypne VŠETKY vibrácie, vrátane vibrácií oznámení na TOMTO zariadení. 
+        Oznámenia na spárovanom Android Wear zariadení budú naďalej vibrovať v prípade, ak sú povolené vibrácie oznámení.
+    </string>
 
 </resources>

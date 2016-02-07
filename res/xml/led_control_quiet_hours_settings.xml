@@ -30,12 +30,14 @@
     <CheckBoxPreference
         android:key="pref_lc_qh_mute_vibe"
         android:title="@string/pref_lc_qh_mute_vibe_title"
+        android:summary="@string/pref_lc_qh_mute_vibe_summary"
         android:defaultValue="true"
         android:dependency="pref_lc_qh_enabled" />
 
     <CheckBoxPreference
-        android:key="pref_lc_qh_disable_haptic_feedback"
-        android:title="@string/pref_lc_qh_disable_haptic_feedback_title"
+        android:key="pref_lc_qh_mute_system_vibe"
+        android:title="@string/pref_lc_qh_mute_system_vibe_title"
+        android:summary="@string/pref_lc_qh_mute_system_vibe_summary"
         android:defaultValue="false"
         android:dependency="pref_lc_qh_enabled" />
 

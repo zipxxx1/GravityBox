@@ -1535,9 +1535,6 @@
     <string name="pref_headset_action_plug_title">Kulaklık takıldığında</string>
     <string name="pref_headset_action_unplug_title">Kulaklık çıkarıldığında</string>
 
-    <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Titreşimleri kapat</string>
-
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interactive mode</string>
     <string name="pref_lc_qh_interactive_summary">Always keeps notifications quiet during user interaction 
