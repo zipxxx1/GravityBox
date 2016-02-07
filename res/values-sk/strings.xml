@@ -1675,9 +1675,6 @@
     <string name="pref_lc_sound_vibrate_summary">Zabráni oznámeniam, ktoré majú vibrácie vypnuté, vibrovať
         v režime vypnutého zvonenia</string>
 
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Vypnúť hmatovú odozvu</string>
-
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Len viditeľné</string>
 

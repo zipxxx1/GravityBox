@@ -1705,9 +1705,6 @@
     <string name="pref_lc_sound_vibrate_summary">通知关闭时防止振动,只在铃声模式时才振动</string>
     
 
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">关闭触摸反馈</string>
-
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">仅清除可见</string>
 

@@ -1660,9 +1660,6 @@
     <string name="pref_lc_sound_vibrate_summary">Zapobiega wibracjom dla powiadomień które mają wyłączony tryb wibracji
         gdy tryb dzwonka jest ustawiony na same wibracje</string>
 
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Wyłącz wibracje przy dotknięciu</string>
-
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Tylko wyraźnie widoczny</string>
 

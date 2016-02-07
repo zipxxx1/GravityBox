@@ -1705,9 +1705,6 @@
     <string name="pref_lc_sound_vibrate_summary">Evita las notificaciones que tienen vibraciones 
          a vibrar sólo durante el modo de timbre</string>
 
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Desactivar retroalimentación háptica</string>
-
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Limpiar solo visibles</string>
 

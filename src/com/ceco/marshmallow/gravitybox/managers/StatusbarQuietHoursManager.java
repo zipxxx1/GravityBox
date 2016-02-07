@@ -26,24 +26,18 @@ import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
 
 public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
 
     private static final Object lock = new Object();
     private static StatusbarQuietHoursManager sManager;
 
-    private static final String HAPTIC_FEEDBACK_ENABLED = "haptic_feedback_enabled";
-    private static final String HAPTIC_FEEDBACK_BACKUP = "gb_haptic_feedback_backup";
-
     private Context mContext;
     private XSharedPreferences mPrefs;
     private QuietHours mQuietHours;
     private List<QuietHoursListener> mListeners;
-    private boolean mWasQhActive;
 
     public interface QuietHoursListener {
         public void onQuietHoursChanged();
@@ -64,7 +58,6 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
         mListeners = new ArrayList<QuietHoursListener>();
 
         refreshState();
-        updateHapticFeedbackPolicy(true);
     }
 
     @Override
@@ -74,11 +67,9 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
                 action.equals(Intent.ACTION_TIME_CHANGED) ||
                 action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
             notifyTimeTick();
-            updateHapticFeedbackPolicy(false);
         } else if (action.equals(QuietHoursActivity.ACTION_QUIET_HOURS_CHANGED)) {
             refreshState();
             notifyQuietHoursChange();
-            updateHapticFeedbackPolicy(true);
         }
     }
 
@@ -120,25 +111,6 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
     private void notifyQuietHoursChange() {
         for (QuietHoursListener l : mListeners) {
             l.onQuietHoursChanged();
-        }
-    }
-
-    private void updateHapticFeedbackPolicy(boolean forceUpdate) {
-        final boolean qhActive = mQuietHours.quietHoursActive();
-        if (qhActive == mWasQhActive && !forceUpdate) return;
-        mWasQhActive = qhActive;
-
-        ContentResolver cr = mContext.getContentResolver();
-        int backup = Settings.System.getInt(cr, HAPTIC_FEEDBACK_BACKUP, -1);
-        if (qhActive && mQuietHours.disableHapticFeedback) {
-            if (backup == -1) {
-                Settings.System.putInt(cr, HAPTIC_FEEDBACK_BACKUP,
-                    Settings.System.getInt(cr, HAPTIC_FEEDBACK_ENABLED, 1));
-            }
-            Settings.System.putInt(cr, HAPTIC_FEEDBACK_ENABLED, 0);
-        } else if (backup != -1) {
-            Settings.System.putInt(cr, HAPTIC_FEEDBACK_ENABLED, backup);
-            Settings.System.putInt(cr, HAPTIC_FEEDBACK_BACKUP, -1);
         }
     }
 
