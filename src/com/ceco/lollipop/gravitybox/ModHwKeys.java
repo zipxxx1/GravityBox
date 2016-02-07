@@ -151,6 +151,7 @@ public class ModHwKeys {
     private static String[] mHeadsetUri = new String[2]; // index 0 = unplugged, index 1 = plugged 
     private static Method mLaunchAssistAction = null;
     private static Method mLaunchAssistLongPressAction = null;
+    private static ActivityManager mAm;
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui",
@@ -540,7 +541,7 @@ public class ModHwKeys {
                         return;
                     }
 
-                    if (keyCode == KeyEvent.KEYCODE_HOME) {
+                    if (keyCode == KeyEvent.KEYCODE_HOME && !isTaskLocked()) {
                         if (!down) {
                             handler.removeCallbacks(mLockscreenTorchRunnable);
                             if (mIsHomeLongPressed) {
@@ -571,7 +572,7 @@ public class ModHwKeys {
                         }
                     }
 
-                    if (keyCode == KeyEvent.KEYCODE_SOFT_LEFT) {
+                    if (keyCode == KeyEvent.KEYCODE_SOFT_LEFT && !isTaskLocked()) {
                         if (!down) {
                             mCustomKeyPressed = false;
                             if (!mIsCustomKeyLongPressed && 
@@ -633,7 +634,7 @@ public class ModHwKeys {
                             "; isInjected=" + (((Integer)param.args[2] & 0x01000000) != 0) +
                             "; fromSystem=" + isFromSystem);
 
-                    if (keyCode == KeyEvent.KEYCODE_MENU && isFromSystem &&
+                    if (keyCode == KeyEvent.KEYCODE_MENU && isFromSystem && !isTaskLocked() &&
                         (hasAction(HwKey.MENU) || !areHwKeysEnabled())) {
 
                         if (!down) {
@@ -684,7 +685,7 @@ public class ModHwKeys {
                         return;
                     }
 
-                    if (keyCode == KeyEvent.KEYCODE_BACK && isFromSystem &&
+                    if (keyCode == KeyEvent.KEYCODE_BACK && isFromSystem && !isTaskLocked() &&
                         (hasAction(HwKey.BACK) || !areHwKeysEnabled())) {
     
                         if (!down) {
@@ -735,7 +736,7 @@ public class ModHwKeys {
                         return;
                     }
 
-                    if (keyCode == KeyEvent.KEYCODE_APP_SWITCH && isFromSystem &&
+                    if (keyCode == KeyEvent.KEYCODE_APP_SWITCH && isFromSystem && !isTaskLocked() &&
                         (hasAction(HwKey.RECENTS) || !areHwKeysEnabled())) {
     
                         if (!down) {
@@ -805,7 +806,7 @@ public class ModHwKeys {
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
                     if (getActionFor(HwKeyTrigger.HOME_LONGPRESS).actionId == 
-                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                            GravityBoxSettings.HWKEY_ACTION_DEFAULT && !isTaskLocked()) {
                         XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                         return null;
                     }
@@ -851,7 +852,7 @@ public class ModHwKeys {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (getActionFor(HwKeyTrigger.HOME_DOUBLETAP).actionId != 
-                            GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                            GravityBoxSettings.HWKEY_ACTION_DEFAULT && !isTaskLocked()) {
                         XposedHelpers.setBooleanField(param.thisObject, "mHomeConsumed", true);
                         performAction(HwKeyTrigger.HOME_DOUBLETAP);
                         param.setResult(null);
@@ -1199,7 +1200,7 @@ public class ModHwKeys {
                             defaultHomePackage = res.activityInfo.packageName;
                         }
 
-                        ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+                        ActivityManager am = getActivityManager();
                         List<RunningAppProcessInfo> apps = am.getRunningAppProcesses();
 
                         String targetKilled = null;
@@ -1263,8 +1264,7 @@ public class ModHwKeys {
                     int looper = 1;
                     String packageName;
                     final Intent intent = new Intent(Intent.ACTION_MAIN);
-                    final ActivityManager am = (ActivityManager) mContext
-                            .getSystemService(Context.ACTIVITY_SERVICE);
+                    final ActivityManager am = getActivityManager();
                     String defaultHomePackage = "com.android.launcher";
                     intent.addCategory(Intent.CATEGORY_HOME);
                     final ResolveInfo res = mContext.getPackageManager().resolveActivity(intent, 0);
@@ -1717,5 +1717,16 @@ public class ModHwKeys {
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
+    }
+
+    private static ActivityManager getActivityManager() {
+        if (mAm == null) {
+            mAm = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        }
+        return mAm;
+    }
+
+    private static boolean isTaskLocked() {
+        return getActivityManager().isInLockTaskMode();
     }
 }
