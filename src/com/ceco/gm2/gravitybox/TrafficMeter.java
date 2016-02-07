@@ -19,7 +19,6 @@ package com.ceco.gm2.gravitybox;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.TrafficStats;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.TypedValue;
@@ -27,10 +26,6 @@ import android.view.View;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
 
 import de.robv.android.xposed.XSharedPreferences;
 
@@ -40,7 +35,6 @@ public class TrafficMeter extends TrafficMeterAbstract {
     public static final int INACTIVITY_MODE_SUMMARY = 2;
 
     boolean mTrafficMeterHide;
-    boolean mCanReadFromFile;
     int mTrafficMeterSummaryTime;
     long mTotalRxBytes;
     long mLastUpdateTime;
@@ -61,7 +55,6 @@ public class TrafficMeter extends TrafficMeterAbstract {
 
     @Override
     protected void onInitialize(XSharedPreferences prefs) throws Throwable {
-        mCanReadFromFile = canReadFromFile();
         Context gbContext = Utils.getGbContext(getContext());
         mB = gbContext.getString(R.string.byte_abbr);
         mKB = gbContext.getString(R.string.kilobyte_abbr);
@@ -92,7 +85,7 @@ public class TrafficMeter extends TrafficMeterAbstract {
 
     @Override
     protected void startTrafficUpdates() {
-        mTotalRxBytes = getTotalReceivedBytes();
+        mTotalRxBytes = getTotalRxTxBytes()[0];
         mLastUpdateTime = SystemClock.elapsedRealtime();
         mTrafficBurstStartTime = Long.MIN_VALUE;
 
@@ -141,11 +134,11 @@ public class TrafficMeter extends TrafficMeterAbstract {
                 return;
             }
 
-            long currentRxBytes = mCanReadFromFile ? getTotalReceivedBytes() : TrafficStats.getTotalRxBytes();
+            long currentRxBytes = getTotalRxTxBytes()[0];
             long newBytes = currentRxBytes - mTotalRxBytes;
 
             boolean disconnected = false;
-            if (mCanReadFromFile && newBytes < 0) {
+            if (canReadFromFile() && newBytes < 0) {
                 // It's impossible to get a speed under 0
                 currentRxBytes = 0;
                 newBytes = 0;
@@ -153,7 +146,9 @@ public class TrafficMeter extends TrafficMeterAbstract {
             }
 
             if (mTrafficMeterHide && newBytes == 0) {
-                long trafficBurstBytes = (mCanReadFromFile && disconnected) ? mTotalRxBytes - mTrafficBurstStartBytes : currentRxBytes - mTrafficBurstStartBytes;
+                long trafficBurstBytes = (canReadFromFile() && disconnected) ?
+                        mTotalRxBytes - mTrafficBurstStartBytes : 
+                            currentRxBytes - mTrafficBurstStartBytes;
 
                 if (trafficBurstBytes != 0 && mTrafficMeterSummaryTime != 0) {
                     setText(formatTraffic(trafficBurstBytes, false));
@@ -188,50 +183,12 @@ public class TrafficMeter extends TrafficMeterAbstract {
                 }
             }
 
-            mTotalRxBytes = (mCanReadFromFile && disconnected) ? mTotalRxBytes : currentRxBytes;
+            mTotalRxBytes = (canReadFromFile() && disconnected) ? 
+                    mTotalRxBytes : currentRxBytes;
             mLastUpdateTime = SystemClock.elapsedRealtime();
             getHandler().postDelayed(mRunnable, mInterval);
         }
     };
-
-    private boolean canReadFromFile() {
-        return new File("/proc/net/dev").exists();
-    }
-
-    private long getTotalReceivedBytes() {
-        String line;
-        String[] segs;
-        long received = 0;
-        int i;
-        long tmp = 0;
-        boolean isNum;
-        try {
-            FileReader fr = new FileReader("/proc/net/dev");
-            BufferedReader in = new BufferedReader(fr);
-            while ((line = in.readLine()) != null) {
-                line = line.trim();
-                if (line.contains(":") && !line.startsWith("lo")) {
-                    segs = line.split(":")[1].split(" ");
-                    for (i = 0; i < segs.length; i++) {
-                        isNum = true;
-                        try {
-                            tmp = Long.parseLong(segs[i]);
-                        } catch (Exception e) {
-                            isNum = false;
-                        }
-                        if (isNum == true) {
-                            received = received + tmp;
-                            break;
-                        }
-                    }
-                }
-            }
-            in.close();
-        } catch (IOException e) {
-            return -1;
-        }
-        return received;
-    }
 
     private void setInactivityMode(int mode) {
         switch (mode) {

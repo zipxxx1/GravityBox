@@ -32,7 +32,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.net.TrafficStats;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -60,8 +59,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
 
     private enum Mode { IN, OUT, IN_OUT };
 
-    private long totalRxBytes;
-    private long totalTxBytes;
+    private long[] totalRxTxBytes = new long[] { 0, 0 };
     private long lastUpdateTime;
     private int txtSizeSingle;
     private int txtSizeMulti;
@@ -92,10 +90,9 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
             lastUpdateTime = SystemClock.elapsedRealtime();
 
             // Calculate the data rate from the change in total bytes and time
-            long newTotalRxBytes = TrafficStats.getTotalRxBytes();
-            long newTotalTxBytes = TrafficStats.getTotalTxBytes();
-            long rxData = newTotalRxBytes - totalRxBytes;
-            long txData = newTotalTxBytes - totalTxBytes;
+            long[] newTotalRxTxBytes = getTotalRxTxBytes();
+            long rxData = newTotalRxTxBytes[0] - totalRxTxBytes[0];
+            long txData = newTotalRxTxBytes[1] - totalRxTxBytes[1];
 
             if (shouldHide(rxData, txData, timeDelta)) {
                 setText("");
@@ -140,8 +137,8 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
             }
 
             // Post delayed message to refresh in ~1000ms
-            totalRxBytes = newTotalRxBytes;
-            totalTxBytes = newTotalTxBytes;
+            totalRxTxBytes[0] = newTotalRxTxBytes[0];
+            totalRxTxBytes[1] = newTotalRxTxBytes[1];
             clearHandlerCallbacks();
             mTrafficHandler.postDelayed(mRunnable, mInterval);
         }
@@ -227,7 +224,7 @@ public class TrafficMeterOmni extends TrafficMeterAbstract {
 
     @Override
     protected void startTrafficUpdates() {
-        totalRxBytes = TrafficStats.getTotalRxBytes();
+        totalRxTxBytes = getTotalRxTxBytes();
         lastUpdateTime = SystemClock.elapsedRealtime();
         mTrafficHandler.sendEmptyMessage(1);
         updateTrafficDrawable();
