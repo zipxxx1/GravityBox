@@ -19,6 +19,7 @@ import com.ceco.lollipop.gravitybox.ModStatusBar.ContainerType;
 
 import android.content.Intent;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.provider.Settings;
@@ -252,6 +253,20 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                         if (DEBUG) log(mContainerType + ": onBatteryLevelChanged");
                         if (mPercentText != null) {
                             mPercentText.update();
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
+            try {
+                XposedHelpers.findAndHookMethod(mContainer.getClass(), "onConfigurationChanged",
+                        Configuration.class, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mPercentText != null) {
+                            mPercentText.setTextSize(Integer.valueOf(mPrefs.getString(
+                                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
                         }
                     }
                 });
