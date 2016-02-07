@@ -55,6 +55,7 @@ public class ModLedControl {
     public static final boolean DEBUG = false;
     private static final String CLASS_NOTIFICATION_MANAGER_SERVICE = "com.android.server.NotificationManagerService";
     private static final String CLASS_STATUSBAR_MGR_SERVICE = "com.android.server.StatusBarManagerService";
+    private static final String CLASS_VIBRATOR_SERVICE = "com.android.server.VibratorService";
     private static final String PACKAGE_NAME_GRAVITYBOX = "com.ceco.gm2.gravitybox";
 
     public static final String NOTIF_EXTRAS = "gbExtras";
@@ -240,6 +241,17 @@ public class ModLedControl {
                     p.writeBundle((Bundle) XposedHelpers.getAdditionalInstanceField(
                             param.thisObject, NOTIF_EXTRAS));
                     if (DEBUG) log("Notification to parcel: gbExtras written");
+                }
+            });
+
+            XposedBridge.hookAllMethods(XposedHelpers.findClass(CLASS_VIBRATOR_SERVICE, null),
+                    "startVibrationLocked", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mQuietHours.quietHoursActive() && mQuietHours.muteSystemVibe) {
+                        if (DEBUG) log("startVibrationLocked: system level vibration suppressed");
+                        param.setResult(null);
+                    }
                 }
             });
         } catch (Throwable t) {

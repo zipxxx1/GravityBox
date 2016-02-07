@@ -1533,9 +1533,6 @@
     <string name="pref_headset_action_plug_title">Przy podłączeniu słuchawek</string>
     <string name="pref_headset_action_unplug_title">Przy odłączeniu słuchawek</string>
 
-    <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Wycisz wibracje</string>
-
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Tryb interaktywny</string>
     <string name="pref_lc_qh_interactive_summary">Zawsze wyciszaj powiadomienia podczas interakcji użytkownika 
@@ -1714,8 +1711,5 @@
     <string name="pref_lc_sound_vibrate_title">Wyłącz konwersję dźwięku na wibracje</string>
     <string name="pref_lc_sound_vibrate_summary">Zapobiega wibracjom dla powiadomień które mają wyłączony tryb wibracji
         gdy tryb dzwonka jest ustawiony na same wibracje</string>
-
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Wyłącz wibracje przy dotknięciu</string>
 
 </resources>

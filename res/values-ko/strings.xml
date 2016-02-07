@@ -1246,8 +1246,6 @@
     <string name="pref_headset_action_plug_title">헤드셋 연결 시</string>
     <string name="pref_headset_action_unplug_title">헤드셋 분리 시</string>
 
-    <string name="pref_lc_qh_mute_vibe_title">진동 끄기</string>
-
     <string name="pref_lc_qh_interactive_title">상호작용 모드</string>
     <string name="pref_lc_qh_interactive_summary">알림이 사용자와 상호작용해도 알림 유지  
         (개별 앱 설정 무시 규칙을 따름)</string>

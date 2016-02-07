@@ -1545,9 +1545,6 @@
     <string name="pref_headset_action_plug_title">Quando o auricular for ligado</string>
     <string name="pref_headset_action_unplug_title">Quando o auricular for desligado</string>
 
-    <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Desativar vibração</string>
-
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Modo interativo</string>
     <string name="pref_lc_qh_interactive_summary">Manter sempre notificações silenciosas durante interação com o utilizador 

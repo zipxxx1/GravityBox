@@ -1560,9 +1560,6 @@
     <string name="pref_headset_action_plug_title">Під\'єднання гарнітури</string>
     <string name="pref_headset_action_unplug_title">Від\'єднання гарнітури</string>
 
-    <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Приглушення вібрації</string>
-
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Інтерактивний режим</string>
     <string name="pref_lc_qh_interactive_summary">Тиха година завжди застосовується до сповіщень під час дій користувача (з виконанням налаштувань ігнорування по додатках)</string>
@@ -1742,9 +1739,5 @@
     <!-- UNC: Disable sound to vibrate conversion -->
     <string name="pref_lc_sound_vibrate_title">Перетворення звуку у вібрацію</string>
     <string name="pref_lc_sound_vibrate_summary">Запобігання вібрації сповіщень з раніше вимкнутою вібрацією при виборі режиму дзвінка «Лише вібрація»</string>
-
-
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Вимк тактильний відгук</string>
 
 </resources>
