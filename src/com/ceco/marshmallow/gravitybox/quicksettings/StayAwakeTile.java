@@ -56,6 +56,7 @@ public class StayAwakeTile extends QsTile {
         new ScreenTimeout(300000, R.string.stay_awake_5m),
         new ScreenTimeout(600000, R.string.stay_awake_10m),
         new ScreenTimeout(1800000, R.string.stay_awake_30m),
+        new ScreenTimeout(NEVER_SLEEP, R.string.stay_awake_on),
     };
 
     private SettingsObserver mSettingsObserver;
@@ -144,7 +145,7 @@ public class StayAwakeTile extends QsTile {
 
     private void updateSettings(int[] modes) {
         for (ScreenTimeout s : SCREEN_TIMEOUT) {
-            s.mEnabled = false;
+            s.mEnabled = (s.mMillis == NEVER_SLEEP);
         }
         for (int i=0; i<modes.length; i++) {
             int index = modes[i];
@@ -156,7 +157,7 @@ public class StayAwakeTile extends QsTile {
     }
 
     private void setScreenOffTimeout(int millis) {
-        if (millis == NEVER_SLEEP) {
+        if (millis == NEVER_SLEEP && mCurrentTimeout != NEVER_SLEEP) {
             mPreviousTimeout = mCurrentTimeout;
         }
         mCurrentTimeout = millis;
@@ -165,11 +166,6 @@ public class StayAwakeTile extends QsTile {
     }
 
     private void toggleStayAwake() {
-        if (mCurrentTimeout == NEVER_SLEEP) {
-            setScreenOffTimeout(mPreviousTimeout);
-            return;
-        }
-
         int currentIndex = getIndexFromValue(mCurrentTimeout);
         if (currentIndex == -1) currentIndex = SCREEN_TIMEOUT.length-1;
         final int startIndex = currentIndex;
@@ -227,10 +223,10 @@ public class StayAwakeTile extends QsTile {
 
     @Override
     public boolean handleLongClick() {
-        if (mQuickMode) {
-            showDetail(true);
+        if (mCurrentTimeout == NEVER_SLEEP) {
+            setScreenOffTimeout(mPreviousTimeout);
         } else {
-            startSettingsActivity(android.provider.Settings.ACTION_DISPLAY_SETTINGS);
+            setScreenOffTimeout(NEVER_SLEEP);
         }
         return true;
     }
@@ -313,15 +309,14 @@ public class StayAwakeTile extends QsTile {
         @Override
         public Boolean getToggleState() {
             rebuildModeList();
-            return (mCurrentTimeout == NEVER_SLEEP);
+            return null;
         }
 
         @Override
         public View createDetailView(Context context, View convertView, ViewGroup parent) throws Throwable {
             if (mDetails == null) {
                 mDetails = QsDetailItemsList.create(context, parent);
-                mDetails.setEmptyState(R.drawable.ic_qs_stayawake_on,
-                        mGbContext.getString(R.string.stay_awake_on));
+                mDetails.setEmptyState(0, null);
                 mAdapter = new ModeAdapter(context);
                 mDetails.setAdapter(mAdapter);
     
@@ -340,32 +335,25 @@ public class StayAwakeTile extends QsTile {
 
         @Override
         public void setToggleState(boolean state) {
-            setScreenOffTimeout(state ? NEVER_SLEEP : mPreviousTimeout);
-            rebuildModeList();
-            fireToggleStateChanged(state);
-            if (state) {
-                showDetail(false);
-            }
+            // noop
         }
 
         private void rebuildModeList() {
             mDetails.getListView().clearChoices();
             mModeList.clear();
-            if (mCurrentTimeout != NEVER_SLEEP) {
-                int index = getIndexFromValue(mCurrentTimeout);
-                ScreenTimeout current = index >= 0 ? SCREEN_TIMEOUT[index] : null;
-                ScreenTimeout selected = null;
-                for (ScreenTimeout st : SCREEN_TIMEOUT) {
-                    if (st.mEnabled) {
-                        mModeList.add(st);
-                        if (st == current) {
-                            selected = st;
-                        }
+            int index = getIndexFromValue(mCurrentTimeout);
+            ScreenTimeout current = index >= 0 ? SCREEN_TIMEOUT[index] : null;
+            ScreenTimeout selected = null;
+            for (ScreenTimeout st : SCREEN_TIMEOUT) {
+                if (st.mEnabled) {
+                    mModeList.add(st);
+                    if (st == current) {
+                        selected = st;
                     }
                 }
-                if (selected != null) {
-                    mDetails.getListView().setItemChecked(mAdapter.getPosition(selected), true);
-                }
+            }
+            if (selected != null) {
+                mDetails.getListView().setItemChecked(mAdapter.getPosition(selected), true);
             }
             mAdapter.notifyDataSetChanged();
         }
