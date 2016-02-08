@@ -45,6 +45,8 @@ public class CompassTile extends QsTile implements SensorEventListener {
 
     private ImageView mImage;
     private boolean mListeningSensors;
+    private int mCount;
+    private boolean mUpdatePending;
 
     public CompassTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -91,6 +93,8 @@ public class CompassTile extends QsTile implements SensorEventListener {
         if (listening == mListeningSensors) return;
         mListeningSensors = listening;
         if (mListeningSensors) {
+            mCount = 10;
+            mUpdatePending = false;
             mSensorManager.registerListener(
                     this, mAccelerationSensor, SensorManager.SENSOR_DELAY_GAME);
             mSensorManager.registerListener(
@@ -123,6 +127,8 @@ public class CompassTile extends QsTile implements SensorEventListener {
             mImage.setRotation(0);
         }
 
+        mUpdatePending = false;
+        
         super.handleUpdateState(state, arg);
     }
 
@@ -173,11 +179,17 @@ public class CompassTile extends QsTile implements SensorEventListener {
             values[i] = ALPHA * values[i] + (1 - ALPHA) * event.values[i];
         }
 
-        if (!mActive || !mListeningSensors || mAcceleration == null || mGeomagnetic == null) {
+        if (!mActive || !mListeningSensors || mUpdatePending ||
+                mAcceleration == null || mGeomagnetic == null) {
             // Nothing to do at this moment
             return;
         }
 
+        if (mCount++ <= 10) {
+            return;
+        }
+
+        mCount = 0;
         float R[] = new float[9];
         float I[] = new float[9];
         if (!SensorManager.getRotationMatrix(R, I, mAcceleration, mGeomagnetic)) {
@@ -193,6 +205,7 @@ public class CompassTile extends QsTile implements SensorEventListener {
         mNewDegree = Float.valueOf((float) Math.toDegrees(orientation[0]));
         mNewDegree = (mNewDegree + 360) % 360;
 
+        mUpdatePending = true;
         refreshState();
     }
 
