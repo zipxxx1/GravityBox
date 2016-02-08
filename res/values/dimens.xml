@@ -43,8 +43,8 @@
     <dimen name="expanded_height">128dip</dimen>
 
     <!-- Caller picture dimensions -->
-    <dimen name="caller_id_photo_width">180dp</dimen>
-    <dimen name="caller_id_photo_height">320dp</dimen>
+    <dimen name="caller_id_photo_width">360dp</dimen>
+    <dimen name="caller_id_photo_height">360dp</dimen>
 
     <!-- Statusbar Battery -->
     <dimen name="circle_battery_padding_left">2.67dp</dimen>
