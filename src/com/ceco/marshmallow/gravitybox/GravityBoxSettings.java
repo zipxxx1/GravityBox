@@ -246,6 +246,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK = "pref_lockscreen_direct_unlock2";
     public static final String PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY = "pref_lockscreen_direct_unlock_policy";
     public static final String PREF_KEY_LOCKSCREEN_SMART_UNLOCK = "pref_lockscreen_smart_unlock";
+    public static final String PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY = "pref_lockscreen_smart_unlock_policy";
     public static final String PREF_KEY_LOCKSCREEN_IMPRINT_MODE = "pref_lockscreen_imprint_mode";
     public static final String PREF_KEY_LOCKSCREEN_D2TS = "pref_lockscreen_dt2s";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
@@ -903,6 +904,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK,
             PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY,
             PREF_KEY_LOCKSCREEN_SMART_UNLOCK,
+            PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY,
             PREF_KEY_LOCKSCREEN_IMPRINT_MODE,
             PREF_KEY_LOCKSCREEN_D2TS,
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
@@ -2227,6 +2229,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 ListPreference dup = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY);
                 dup.setEnabled(!"OFF".equals(du.getValue()));
                 dup.setSummary(dup.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY)) {
+                ListPreference sup = (ListPreference) findPreference(PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY);
+                sup.setSummary(sup.getEntry());
             }
 
             if (key == null || key.equals(PREF_KEY_CELL_TILE_DATA_TOGGLE)) {

@@ -158,6 +158,14 @@
                 android:defaultValue="false" />
 
             <ListPreference 
+                android:key="pref_lockscreen_smart_unlock_policy"
+                android:title="@string/pref_lockscreen_smart_unlock_policy_title"
+                android:entries="@array/direct_unlock_policy_entries"
+                android:entryValues="@array/direct_unlock_policy_values"
+                android:defaultValue="DEFAULT"
+                android:dependency="pref_lockscreen_smart_unlock" />
+
+            <ListPreference 
                 android:key="pref_lockscreen_imprint_mode"
                 android:title="@string/pref_lockscreen_imprint_mode_title"
                 android:entries="@array/imprint_mode_entries"

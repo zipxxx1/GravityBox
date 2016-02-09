@@ -1853,4 +1853,7 @@
     <string name="pref_sa_tile_enabled_modes_summary">Defines which screen timeouts tile should support</string>
     <string name="pref_sa_tile_quick_mode_summary">Allows cycling through selected screen timeouts on tile single-press</string>
 
+    <!-- Lockscreen: Smart unlock policy -->
+    <string name="pref_lockscreen_smart_unlock_policy_title">Smart unlock policy</string>
+
 </resources>
