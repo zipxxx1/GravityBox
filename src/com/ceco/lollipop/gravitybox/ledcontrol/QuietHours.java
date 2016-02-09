@@ -191,7 +191,7 @@ public class QuietHours {
         try {
             // Get the mActions member of the given RemoteViews object.
             @SuppressWarnings("unchecked")
-            ArrayList<Parcelable> actions = (ArrayList<Parcelable>) 
+            List<Parcelable> actions = (List<Parcelable>) 
                 XposedHelpers.getObjectField(views, "mActions");
             if (actions == null) return texts;
 
