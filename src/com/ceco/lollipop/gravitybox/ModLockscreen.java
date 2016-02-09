@@ -75,7 +75,7 @@ public class ModLockscreen {
     private static int MSG_DISMISS_KEYGUARD = 1;
 
     private static enum DirectUnlock { OFF, STANDARD, SEE_THROUGH };
-    private static enum DirectUnlockPolicy { DEFAULT, NOTIF_NONE, NOTIF_ONGOING };
+    private static enum UnlockPolicy { DEFAULT, NOTIF_NONE, NOTIF_ONGOING };
 
     private static XSharedPreferences mPrefs;
     private static XSharedPreferences mQhPrefs;
@@ -85,9 +85,10 @@ public class ModLockscreen {
     private static QuietHours mQuietHours;
     private static Object mPhoneStatusBar;
     private static DirectUnlock mDirectUnlock = DirectUnlock.OFF;
-    private static DirectUnlockPolicy mDirectUnlockPolicy = DirectUnlockPolicy.DEFAULT;
+    private static UnlockPolicy mDirectUnlockPolicy = UnlockPolicy.DEFAULT;
     private static LockscreenAppBar mAppBar;
     private static boolean mSmartUnlock;
+    private static UnlockPolicy mSmartUnlockPolicy;
     private static DismissKeyguardHandler mDismissKeyguardHandler;
     private static GestureDetector mGestureDetector;
     private static TextView mCarrierTextView;
@@ -362,9 +363,11 @@ public class ModLockscreen {
                     mKgMonitor.unregisterListener(mKgStateListener);
                     mDirectUnlock = DirectUnlock.valueOf(prefs.getString(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK, "OFF"));
-                    mDirectUnlockPolicy = DirectUnlockPolicy.valueOf(prefs.getString(
+                    mDirectUnlockPolicy = UnlockPolicy.valueOf(prefs.getString(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_DIRECT_UNLOCK_POLICY, "DEFAULT"));
                     mSmartUnlock = prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_SMART_UNLOCK, false);
+                    mSmartUnlockPolicy = UnlockPolicy.valueOf(prefs.getString(
+                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY, "DEFAULT"));
                     if (mSmartUnlock && mDismissKeyguardHandler == null) {
                         mDismissKeyguardHandler = new DismissKeyguardHandler();
                     }
@@ -389,7 +392,7 @@ public class ModLockscreen {
                                 XposedHelpers.callMethod(mPhoneStatusBar, "makeExpandedInvisible");
                             }
                         }
-                    } else if (mSmartUnlock) {
+                    } else if (canTriggerSmartUnlock()) {
                         mKgMonitor.registerListener(mKgStateListener);
                         if (!mKgMonitor.isLocked()) {
                             // previous state is insecure so we rather wait a second as smart lock can still
@@ -487,8 +490,16 @@ public class ModLockscreen {
     };
 
     private static boolean canTriggerDirectUnlock() {
-        if (mDirectUnlock == DirectUnlock.OFF) return false;
-        if (mDirectUnlockPolicy == DirectUnlockPolicy.DEFAULT) return true;
+        return (mDirectUnlock != DirectUnlock.OFF &&
+                    canTriggerUnlock(mDirectUnlockPolicy));
+    }
+
+    private static boolean canTriggerSmartUnlock() {
+        return (mSmartUnlock && canTriggerUnlock(mSmartUnlockPolicy));
+    }
+
+    private static boolean canTriggerUnlock(UnlockPolicy policy) {
+        if (policy == UnlockPolicy.DEFAULT) return true;
 
         try {
             ViewGroup stack = (ViewGroup) XposedHelpers.getObjectField(mPhoneStatusBar, "mStackScroller");
@@ -505,7 +516,7 @@ public class ModLockscreen {
                     notifClearableCount++;
                 }
             }
-            return (mDirectUnlockPolicy == DirectUnlockPolicy.NOTIF_NONE) ?
+            return (policy == UnlockPolicy.NOTIF_NONE) ?
                     notifCount == 0 : notifClearableCount == 0;
         } catch (Throwable t) {
             XposedBridge.log(t);

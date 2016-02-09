@@ -1844,4 +1844,7 @@
     <string name="pref_sa_tile_enabled_modes_summary">Meghatározza, hogy milyen képernyő időtúllépési csempék legyenek támogatva</string>
     <string name="pref_sa_tile_quick_mode_summary">Lehetővé teszi a kiválasztott képernyő időtúllépések közötti váltást a csempe egyszeri érintésére.</string>
 
+    <!-- Lockscreen: Smart unlock policy -->
+    <string name="pref_lockscreen_smart_unlock_policy_title">Okos feloldási házirend</string>
+
 </resources>
