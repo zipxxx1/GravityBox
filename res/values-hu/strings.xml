@@ -1358,7 +1358,8 @@
     <string name="pref_headset_action_unplug_title">Fejhallgató lecsatlakoztatásakor</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Rezgések némítása</string>
+    <string name="pref_lc_qh_mute_vibe_title">Értesítés rezgések némítása</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Kikapcsolja az értesítések rezgő visszajelzéseit ezen a készüléken és bármely párosított Android Wear eszközön</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interaktív mód</string>
@@ -1673,6 +1674,10 @@
     <string name="pref_lc_sound_vibrate_title">Hang rezgésre átalakítás tiltása</string>
     <string name="pref_lc_sound_vibrate_summary">Megakadályozza azon értesítések rezgő visszajelzését, amelyeknél a rezgés le van tiltva, de az Android ezt mégis kényszerítetten használja a csak rezgésre beállított csengés üzemmód alatti értesítési hang rezgésre konvertálása miatt.</string>
 
+    <!-- UNC: QuietHours: mute system level vibrations -->
+    <string name="pref_lc_qh_mute_system_vibe_title">Eszköz rezgések némítása</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Kikapcsolja az ÖSSZES rezgő visszajelzést rendszer szinten, az értesítések rezgéseit is beleértve EZEN az eszközön. A párosított Android Wear eszköz értesítés rezgései működni fognak, amennyiben engedélyez van a funkció.</string>
+
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Csak a láthatóak kiürítése</string>
 
@@ -1808,5 +1813,8 @@
     <string name="pref_cat_qs_sa_tile_title">Ébrentartás csempe beállítások</string>
     <string name="pref_sa_tile_enabled_modes_summary">Meghatározza, hogy milyen képernyő időtúllépési csempék legyenek támogatva</string>
     <string name="pref_sa_tile_quick_mode_summary">Lehetővé teszi a kiválasztott képernyő időtúllépések közötti váltást a csempe egyszeri érintésére.</string>
+    
+    <!-- Lockscreen: Smart unlock policy -->
+    <string name="pref_lockscreen_smart_unlock_policy_title">Okos feloldási házirend</string>
     
 </resources>
