@@ -1372,7 +1372,9 @@
     <string name="pref_headset_action_unplug_title">Po odpojení sluchátek</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Zakázat vibrace</string>
+    <string name="pref_lc_qh_mute_vibe_title">Zakázat vibrace oznámení</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Vypne vibrace oznámení na tomto zařízení a 
+         také na spárovaném Android Wear zařízení</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interaktivní režim</string>
@@ -1814,5 +1816,14 @@
     <string name="pref_cat_qs_sa_tile_title">Nastavení dlaždice Bdění</string>
     <string name="pref_sa_tile_enabled_modes_summary">Definuje, které typy časovače vypnutí obrazovky dlaždice podporuje</string>
     <string name="pref_sa_tile_quick_mode_summary">Umožňuje přepínat mezi typy časovače vypnutí obrazovky jednoduchým ťuknutím na dlaždici</string>
+
+    <!-- UNC: QuietHours: mute system level vibrations -->
+    <string name="pref_lc_qh_mute_system_vibe_title">Zakázat vibrace zařízení</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Vypne VŠECHNY vibrace, včetně vibrací oznámení na TOMTO zařízení. 
+         Oznámení na spárovaném Android Wear zařízení budou nadále vibrovat v případě, že jsou povoleny vibrace oznámení.
+    </string>
+
+    <!-- Lockscreen: Smart unlock policy -->
+    <string name="pref_lockscreen_smart_unlock_policy_title">Režim funkce Smart Unlock</string>
 
 </resources>
