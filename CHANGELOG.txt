@@ -1,3 +1,22 @@
+Changelog 5.3.6 - 13/02/2016
+--------------------------------------
+- QuickSettings management:
+--- optimized Compass tile to avoid QS panel lockups
+--- changed behavior of StayAwake tile
+- QuietHours: added option for disabling device vibrations
+--- replaces "Disable haptic feedback" option
+--- turns off ALL vibrations on a device, including those coming from 3rd party apps
+--- allows notifications to vibrate during QH on paired Android Wear (in case option for muting notification vibrations is disabled)
+- Lockscreen: added option for defining Smart unlock policy (analogic to Direct unlock policy)
+- Phone: adjusted cropping in unknown caller photo chooser to match in-call screen photo dimensions
+- Key actions: don't allow actions while current foreground app is pinned
+- TrafficMeter: exclude traffic from loopback and TUN (VPN) interfaces (thanks to dantmnf)
+- Navbar: fixed recents doubletap action not surviving reboot
+- BatteryPercent: fixed text size reverting to default
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Hungarian translations (thanks to benjoe1)
+
 Changelog 5.3.5 - 25/01/2016
 --------------------------------------
 - QuickSettings management:
