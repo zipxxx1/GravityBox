@@ -1408,7 +1408,9 @@
     <string name="pref_headset_action_unplug_title">Отключение гарнитуры</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Откл вибрации</string>
+    <string name="pref_lc_qh_mute_vibe_title">Откл вибрацию уведомлений</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Отключение вибрации уведомлений на этом устройстве
+        и на сопряженном устройстве Android Wear</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Интерактивный режим</string>
@@ -1777,7 +1779,14 @@
     <string name="pref_lc_sound_vibrate_summary">Предотвращение вибрации уведомлений с ранее отключенной
         вибрацией при выборе режиме звонка \"Только вибрация\"</string>
 
-    <!-- Recents: clear visible only -->
+    <!-- UNC: QuietHours: mute system level vibrations -->
+    <string name="pref_lc_qh_mute_system_vibe_title">Откл вибрацию на устройстве</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Отключение ВСЕХ вибраций на системном уровне,
+       включаю вибрацию уведомлений на ДАННОМ устройстве. Вибрации на сопряженном устройстве Android Wear
+       могут работать, если вибрация включена.
+    </string>
+	
+	<!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Очистить только видимые</string>
 
     <!-- Lockscreen: doubletap to sleep -->
@@ -1787,7 +1796,7 @@
     <string name="pref_statusbar_disable_peek_title">Откл просмотр</string>
     <string name="pref_statusbar_disable_peek_summary">Строка состояния не будет раскрываться при одиночном нажатии</string>
 
-    <!-- Status bar: disable peek -->
+    <!-- Status bar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">Дв. нажатие для сна</string>
     <string name="pref_statusbar_dt2s_summary">Необходимо отключение просмотра</string>
 
@@ -1830,7 +1839,7 @@
     <string name="tile_data_toggle_singlepress">Одно нажатие</string>
     <string name="tile_data_toggle_longpress">Удержание нажатия</string>
 
-<!-- QS: Enable detail view (SDK21) -->
+    <!-- QS: Enable detail view (SDK21) -->
     <string name="pref_qs_enable_detail_view_title">Включить подробности</string>
     <string name="pref_qs_enable_detail_view_summary">Включение детального просмотра для плиток WiFi и Bluetooth на Андроид 5.0 (эксперимент)</string>
 
@@ -1871,5 +1880,8 @@
     <string name="pref_cat_qs_sa_tile_title">Настройки плитки бодрствования</string>
     <string name="pref_sa_tile_enabled_modes_summary">Определение режимов задержки отключения экрана, которые должна поддерживать плитка</string>
     <string name="pref_sa_tile_quick_mode_summary">Опция переключения режимов задержки отключения экрана при нажатии на плитку</string>
+
+    <!-- Lockscreen: Smart unlock policy -->
+    <string name="pref_lockscreen_smart_unlock_policy_title">Политика умной разблокировки</string>
 
 </resources>
