@@ -1,3 +1,24 @@
+Changelog 3.5.14 - 17/02/2016
+--------------------------------------
+- NetworkMode tile: redesigned for simplicity and flexibility:
+--- allows user to freely choose network modes of interest tile should support
+--- supports all currently available network modes
+--- label indicates current network mode
+- QuietHours: added option for disabling device vibrations
+--- replaces "Disable haptic feedback" option
+--- turns off ALL vibrations on a device, including those coming from 3rd party apps
+--- allows notifications to vibrate during QH on paired Android Wear (in case option for muting notification vibrations is disabled)
+- TrafficMeter: exclude traffic from loopback and TUN (VPN) interfaces (thanks to dantmnf)
+- TrafficMeterOmni: fixed incorrect formatting of values from interval <1000;1023>
+- Navbar: fixed recents doubletap action not surviving reboot
+- Launcher tweaks: fixed scaling of Launcher icons and labels for the latest Google App versions
+- Charger sounds: fixed plugged/unplugged sounds being played at the same time on some devices
+- Improved support for RTL locales
+- Other small adjustments (see commit history in project's github)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Ukrainian translations (thanks to burunduk)
+- Small fixes in Dutch translations (thanks to Gijs Timmers)
+
 Changelog 3.5.13 - 17/10/2015
 --------------------------------------
 - LocationTile: don't collapse QS panel on location mode change
