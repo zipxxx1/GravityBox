@@ -437,31 +437,13 @@
                     android:key="pref_cat_qs_nm_tile_settings"
                     android:title="@string/pref_cat_qs_nm_tile_settings_title">
 
-                    <ListPreference
-                        android:key="pref_network_mode_tile_mode" 
-                        android:title="@string/pref_network_mode_tile_mode_title"
-                        android:entries="@array/network_mode_tile_mode_entries"
-                        android:entryValues="@array/network_mode_tile_mode_values"
-                        android:defaultValue="0" />
-
-                    <ListPreference
-                        android:key="pref_network_mode_tile_2g3g_mode" 
-                        android:title="@string/pref_network_mode_tile_2g3g_mode_title"
-                        android:entries="@array/nmt_2g3g_mode_entries"
-                        android:entryValues="@array/nmt_2g3g_mode_values"
-                        android:defaultValue="0"
-                        android:dependency="pref_network_mode_tile_cdma" />
-
-                    <CheckBoxPreference 
-                        android:key="pref_network_mode_tile_lte"
-                        android:title="@string/pref_network_mode_tile_lte_title"
-                        android:defaultValue="false" />
-
-                    <CheckBoxPreference 
-                        android:key="pref_network_mode_tile_cdma"
-                        android:title="@string/pref_network_mode_tile_cdma_title"
-                        android:defaultValue="false"
-                        android:disableDependentsState="true" />
+                    <MultiSelectListPreference 
+                        android:key="pref_nm_tile_enabled_modes"
+                        android:title="@string/pref_nm_tile_enabled_modes_title"
+                        android:summary="@string/pref_nm_tile_enabled_modes_summary"
+                        android:entries="@array/network_mode_entries"
+                        android:entryValues="@array/network_mode_values"
+                        android:defaultValue="@array/network_mode_values_default" />
 
                     <ListPreference
                         android:key="pref_qs_network_mode_sim_slot" 

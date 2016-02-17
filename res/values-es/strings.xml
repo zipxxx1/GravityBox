@@ -528,12 +528,6 @@
     <string name="unicode_stripping_non_encodable">Quitar caracteres no codificables</string>
     <string name="unicode_stripping_all">Quita todos los caracteres unicode</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Alternación de modos de red</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Permitir todas las rotaciones</string>
 
@@ -743,9 +737,6 @@
     <string name="pref_about_gplus_title">Comunidad en Google+</string>
     <string name="pref_about_gplus_summary">Toca para visitar la comunidad en Google+ de GravityBox</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Permitir modo de red LTE</string>
-	
 	<!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Para habilitar el soporte de acciones en la barra de navegación, es necesario 
         sobreescribir los ajustes predeterminados desde el menú de ajustes de la barra de navegación</string>
@@ -884,10 +875,7 @@
     <string name="pref_signal_cluster_connection_state_summary">Indica el estado de conexión (parcial o completo) en los iconos de señal y WiFi (requiere reinicio)</string>
     <string name="pref_signal_cluster_data_activity_title">Activar indicadores de actividad de datos</string>
     <string name="pref_signal_cluster_data_activity_summary">Indica la actividad de datos en los iconos de señal y WiFi (requiere reinicio)</string>
- 
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Usar modos de red CDMA</string>
-    
+
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Alternar rotación automática</string>
     <string name="hwkey_action_auto_rotation_enabled">Rotación automática activada</string>

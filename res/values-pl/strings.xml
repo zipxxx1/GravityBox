@@ -506,12 +506,6 @@
     <string name="pref_cat_phone_telephony_title">Telefon</string>
     <string name="pref_cat_phone_mobile_data_title">Dane mobilne</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Kafelek trybu sieci</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <string name="pref_mms_unicode_stripping_title">Konwersja znaków Unicode</string>
     <string name="pref_mms_unicode_stripping_summary">Zamienia znaki Unicode na zwykłe. Zmniejsza ogólny rozmiar wiadomości.</string>
     <string name="unicode_stripping_leave_intact">Nie zmieniaj kodowania</string>
@@ -723,9 +717,6 @@
     <string name="pref_about_gplus_title">Społeczność Google+</string>
     <string name="pref_about_gplus_summary">Kliknij aby odwiedzić społeczność GravityBox na Google+</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Zezwalaj na tryb sieci LTE</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Aby włączyć obsługę akcji dla paska nawigacyjnego, konieczne jest zastąpienie domyślnych ustawień systemowych w menu Poprawek paska nawigacyjnego</string>
 
@@ -860,9 +851,6 @@
     <string name="pref_signal_cluster_data_activity_title">Wskaźniki transmisji danych</string>
     <string name="pref_signal_cluster_data_activity_summary">Pokazuje aktywność transmisji danych przy wskaźnikach połączenia komórkowego i WiFi (wymagany restart)</string>
 
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Użyj trybów sieci CDMA</string>
-    
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Przełącz auto-obracanie</string>
     <string name="hwkey_action_auto_rotation_enabled">Auto-obracanie włączone</string>
@@ -1738,11 +1726,6 @@
     <string name="headsup_importance_low">Niski</string>
     <string name="headsup_importance_medium">Średni</string>
     <string name="headsup_importance_high">Wysoki</string>
-
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">Tryb 2G+3G</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA preferowane (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA automatycznie (2G/3G)</string>
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Rozszerzony pulpit w menu zasilania</string>

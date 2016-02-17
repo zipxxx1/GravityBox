@@ -15,6 +15,13 @@
 
 package com.ceco.kitkat.gravitybox.quicksettings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.ceco.kitkat.gravitybox.GravityBoxSettings;
 import com.ceco.kitkat.gravitybox.PhoneWrapper;
 import com.ceco.kitkat.gravitybox.R;
@@ -34,16 +41,38 @@ public class NetworkModeTile extends BasicTile {
     private static final String TAG = "GB:NetworkModeTile";
     private static final boolean DEBUG = false;
 
+    private static class NetworkMode {
+        int value;
+        boolean enabled;
+        int labelRes;
+        int iconRes;
+        NetworkMode(int v, int l, int i) {
+            value = v;
+            labelRes = l;
+            iconRes = i;
+        }
+    }
+
+    private static NetworkMode[] MODES = new NetworkMode[] {
+            new NetworkMode(0, R.string.network_mode_0, R.drawable.ic_qs_3g2g_on),
+            new NetworkMode(1, R.string.network_mode_1, R.drawable.ic_qs_2g_on),
+            new NetworkMode(2, R.string.network_mode_2, R.drawable.ic_qs_3g_on),
+            new NetworkMode(3, R.string.network_mode_3, R.drawable.ic_qs_2g3g_on),
+            new NetworkMode(4, R.string.network_mode_4, R.drawable.ic_qs_2g3g_on),
+            new NetworkMode(5, R.string.network_mode_5, R.drawable.ic_qs_2g_on),
+            new NetworkMode(6, R.string.network_mode_6, R.drawable.ic_qs_3g_on),
+            new NetworkMode(7, R.string.network_mode_7, R.drawable.ic_qs_2g3g_on),
+            new NetworkMode(8, R.string.network_mode_8, R.drawable.ic_qs_lte),
+            new NetworkMode(9, R.string.network_mode_9, R.drawable.ic_qs_lte),
+            new NetworkMode(10, R.string.network_mode_10, R.drawable.ic_qs_lte),
+            new NetworkMode(11, R.string.network_mode_11, R.drawable.ic_qs_lte),
+            new NetworkMode(12, R.string.network_mode_12, R.drawable.ic_qs_lte)
+    };
+
     private int mNetworkType;
-    private int mDefaultNetworkType;
-    private boolean mAllow3gOnly;
-    private boolean mAllow2g3g;
-    private boolean mAllowLte;
-    private boolean mUseCdma;
     private boolean mIsMsim;
     private int mSimSlot;
     private TextView mSimSlotTextView;
-    private int m2G3GMode;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -65,7 +94,7 @@ public class NetworkModeTile extends BasicTile {
         public void onChange(boolean selfChange) {
             ContentResolver cr = mContext.getContentResolver();
             mNetworkType = Settings.Global.getInt(cr, 
-                    PhoneWrapper.PREFERRED_NETWORK_MODE, m2G3GMode);
+                    PhoneWrapper.PREFERRED_NETWORK_MODE, PhoneWrapper.getDefaultNetworkType());
 
             if (DEBUG) log("SettingsObserver onChange; mNetworkType = " + mNetworkType);
 
@@ -79,44 +108,17 @@ public class NetworkModeTile extends BasicTile {
         mOnClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PhoneWrapper.ACTION_CHANGE_NETWORK_TYPE);
-                switch (mNetworkType) {
-                    case PhoneWrapper.NT_WCDMA_PREFERRED:
-                    case PhoneWrapper.NT_GSM_WCDMA_AUTO:
-                    case PhoneWrapper.NT_CDMA_EVDO:
-                    case PhoneWrapper.NT_GLOBAL:
-                        i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, 
-                                mAllowLte ? getPreferredLteMode() : 
-                                    mUseCdma ? PhoneWrapper.NT_CDMA_ONLY : PhoneWrapper.NT_GSM_ONLY);
-                        break;
-                    case PhoneWrapper.NT_WCDMA_ONLY:
-                    case PhoneWrapper.NT_EVDO_ONLY:
-                        if (!mAllow2g3g) {
-                            i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                    mAllowLte ? getPreferredLteMode() : 
-                                        mUseCdma ? PhoneWrapper.NT_CDMA_ONLY : PhoneWrapper.NT_GSM_ONLY);
-                        } else {
-                            i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, mUseCdma ?
-                                    PhoneWrapper.NT_CDMA_EVDO : m2G3GMode);
-                        }
-                        break;
-                    case PhoneWrapper.NT_GSM_ONLY:
-                    case PhoneWrapper.NT_CDMA_ONLY:
-                        i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, mAllow3gOnly ?
-                                    mUseCdma ? PhoneWrapper.NT_EVDO_ONLY : PhoneWrapper.NT_WCDMA_ONLY : 
-                                        mUseCdma ? PhoneWrapper.NT_CDMA_EVDO : m2G3GMode);
-                        break;
-                    default:
-                        if (PhoneWrapper.isLteNetworkType(mNetworkType)) {
-                            i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, 
-                                    mUseCdma ? PhoneWrapper.NT_CDMA_ONLY : PhoneWrapper.NT_GSM_ONLY);
-                        } else {
-                            log("onClick: Unknown or unsupported network type: mNetworkType = " + mNetworkType);
-                        }
-                        break;
-                }
-                if (i.hasExtra(PhoneWrapper.EXTRA_NETWORK_TYPE)) {
-                    mContext.sendBroadcast(i);
+                int currentIndex = findIndexForMode(mNetworkType);
+                final int startIndex = currentIndex;
+                do {
+                    if (++currentIndex >= MODES.length) {
+                        currentIndex = 0;
+                    }
+                } while(!MODES[currentIndex].enabled &&
+                        currentIndex != startIndex);
+
+                if (currentIndex != startIndex) {
+                    setNetworkMode(MODES[currentIndex].value);
                 }
             }
         };
@@ -137,12 +139,10 @@ public class NetworkModeTile extends BasicTile {
             }
         };
 
-        mLabel = mGbResources.getString(R.string.qs_tile_network_mode);
-        mDefaultNetworkType = PhoneWrapper.getDefaultNetworkType();
         ContentResolver cr = mContext.getContentResolver();
         mNetworkType = Settings.Global.getInt(cr, 
-                PhoneWrapper.PREFERRED_NETWORK_MODE, mDefaultNetworkType);
-        if (DEBUG) log("mNetworkType=" + mNetworkType + "; mDefaultNetworkType=" + mDefaultNetworkType);
+                PhoneWrapper.PREFERRED_NETWORK_MODE, PhoneWrapper.getDefaultNetworkType());
+        if (DEBUG) log("mNetworkType=" + mNetworkType);
 
         mIsMsim = PhoneWrapper.hasMsimSupport();
     }
@@ -171,23 +171,17 @@ public class NetworkModeTile extends BasicTile {
 
     @Override
     protected void onPreferenceInitialize(XSharedPreferences prefs) {
-        int value = 0;
-        int nm2G3GValue = PhoneWrapper.NT_WCDMA_PREFERRED;
-        try {
-            value = Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_NETWORK_MODE_TILE_MODE, "0"));
-        } catch (NumberFormatException nfe) {
-            log("onPreferenceInitialize: invalid value for network mode preference");
+        Set<String> smodes = prefs.getStringSet(
+                GravityBoxSettings.PREF_KEY_NM_TILE_ENABLED_MODES,
+                new HashSet<String>(Arrays.asList(new String[] { "0", "1", "2", "10" })));
+        List<String> lmodes = new ArrayList<String>(smodes);
+        Collections.sort(lmodes);
+        int modes[] = new int[lmodes.size()];
+        for (int i=0; i<lmodes.size(); i++) {
+            modes[i] = Integer.valueOf(lmodes.get(i));
         }
-        try {
-            nm2G3GValue = Integer.valueOf(prefs.getString(
-                    GravityBoxSettings.PREF_KEY_NETWORK_MODE_TILE_2G3G_MODE,
-                    String.valueOf(PhoneWrapper.NT_WCDMA_PREFERRED)));
-        } catch (NumberFormatException nfe) {
-            log("onPreferenceInitialize: invalid value for 2G+3G mode preference");
-        }
-        updateFlags(value, nm2G3GValue, 
-                prefs.getBoolean(GravityBoxSettings.PREF_KEY_NETWORK_MODE_TILE_LTE, false),
-                prefs.getBoolean(GravityBoxSettings.PREF_KEY_NETWORK_MODE_TILE_CDMA, false));
+        if (DEBUG) log("onPreferenceInitialize: modes=" + Arrays.toString(modes));
+        setEnabledModes(modes);
 
         if (mIsMsim) {
             try {
@@ -206,18 +200,10 @@ public class NetworkModeTile extends BasicTile {
         super.onBroadcastReceived(context, intent);
 
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) { 
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_NMT_MODE)) {
-                updateGsmFlags(intent.getIntExtra(GravityBoxSettings.EXTRA_NMT_MODE, 0));
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_NMT_LTE)) {
-                updateLteFlags(intent.getBooleanExtra(GravityBoxSettings.EXTRA_NMT_LTE, false));
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_NMT_CDMA)) {
-                updateCdmaFlags(intent.getBooleanExtra(GravityBoxSettings.EXTRA_NMT_CDMA, false));
-            }
-            if (intent.hasExtra(GravityBoxSettings.EXTRA_NMT_2G3G_MODE)) {
-                update2G3GMode(intent.getIntExtra(GravityBoxSettings.EXTRA_NMT_2G3G_MODE,
-                        PhoneWrapper.NT_WCDMA_PREFERRED));
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NM_TILE_ENABLED_MODES)) {
+                int[] modes = intent.getIntArrayExtra(GravityBoxSettings.EXTRA_NM_TILE_ENABLED_MODES);
+                if (DEBUG) log("onBroadcastReceived: modes=" + Arrays.toString(modes));
+                setEnabledModes(modes);
             }
         }
 
@@ -230,69 +216,60 @@ public class NetworkModeTile extends BasicTile {
         }
     }
 
-    private void updateGsmFlags(int nmMode) {
-        mAllow3gOnly = (nmMode == 0) || (nmMode == 2);
-        mAllow2g3g = (nmMode < 2);
-        if (DEBUG) log("updateGsmFlags: mAllow3gOnly=" + mAllow3gOnly + "; mAllow2g3g=" + mAllow2g3g);
+    private void setEnabledModes(int[] modes) {
+        // disable all first
+        for (NetworkMode nm : MODES) {
+            nm.enabled = false;
+        }
+
+        // enable only those present in the list
+        if (modes != null && modes.length > 0) {
+            for (int i=0; i<modes.length; i++) {
+                NetworkMode nm = findNetworkMode(modes[i]);
+                if (nm != null) {
+                    nm.enabled = true;
+                }
+            }
+        }
     }
 
-    private void update2G3GMode(int nm2G3GMode) {
-        m2G3GMode = nm2G3GMode;
-        if (DEBUG) log("update2G3GMode: m2G3GMode=" + m2G3GMode);
+    private int findIndexForMode(int mode) {
+        for (int i = 0; i < MODES.length; i++) {
+            if (MODES[i].value == mode)
+                return i;
+        }
+        return -1;
     }
 
-    private void updateLteFlags(boolean allowLte) {
-        mAllowLte = allowLte;
-        if (DEBUG) log("updateLteFlags: mAllowLte=" + mAllowLte);
+    private NetworkMode findNetworkMode(int mode) {
+        int index = findIndexForMode(mode);
+        return index >= 0 && index < MODES.length ? MODES[index] : null;
     }
 
-    private void updateCdmaFlags(boolean useCdma) {
-        mUseCdma = useCdma;
-        if (DEBUG) log("updateCdmaFlags: mUseCdma=" + mUseCdma);
-    }
-
-    private void updateFlags(int nmMode, int nm2G3GMode, boolean allowLte, boolean useCdma) {
-        updateGsmFlags(nmMode);
-        update2G3GMode(nm2G3GMode);
-        updateLteFlags(allowLte);
-        updateCdmaFlags(useCdma);
+    private void setNetworkMode(int mode) {
+        Intent i = new Intent(PhoneWrapper.ACTION_CHANGE_NETWORK_TYPE);
+        i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, mode);
+        mContext.sendBroadcast(i);
     }
 
     @Override
     protected synchronized void updateTile() {
-
-        switch (mNetworkType) {
-            case PhoneWrapper.NT_WCDMA_PREFERRED:
-                mDrawableId = R.drawable.ic_qs_3g2g_on;
-                break;
-            case PhoneWrapper.NT_GSM_WCDMA_AUTO:
-            case PhoneWrapper.NT_CDMA_EVDO:
-            case PhoneWrapper.NT_GLOBAL:
-                mDrawableId = R.drawable.ic_qs_2g3g_on;
-                break;
-            case PhoneWrapper.NT_WCDMA_ONLY:
-            case PhoneWrapper.NT_EVDO_ONLY:
-                mDrawableId = R.drawable.ic_qs_3g_on;
-                break;
-            case PhoneWrapper.NT_GSM_ONLY:
-            case PhoneWrapper.NT_CDMA_ONLY:
-                mDrawableId = R.drawable.ic_qs_2g_on;
-                break;
-            default:
-                if (PhoneWrapper.isLteNetworkType(mNetworkType)) {
-                    mDrawableId = R.drawable.ic_qs_lte;
-                } else {
-                    mDrawableId = R.drawable.ic_qs_unexpected_network;
-                    log("updateTile: Unknown or unsupported network type: mNetworkType = " + mNetworkType);
-                }
-                break;
+        NetworkMode nm = findNetworkMode(mNetworkType);
+        if (nm != null) {
+            mLabel = stripLabel(mGbContext.getString(nm.labelRes));
+            mDrawableId = nm.iconRes;
+        } else {
+            mLabel = mGbContext.getString(R.string.network_mode_unknown);
+            mDrawableId = R.drawable.ic_qs_unexpected_network;
         }
 
         super.updateTile();
     }
 
-    private int getPreferredLteMode() {
-        return (PhoneWrapper.isLteNetworkType(mDefaultNetworkType) ?
-                        mDefaultNetworkType : PhoneWrapper.NT_LTE_CMDA_EVDO_GSM_WCDMA);
+    private String stripLabel(String label) {
+        if (label == null) return null;
+
+        int index = label.lastIndexOf("(");
+        return index > 0 ? label.substring(0, index-1) : label;
     }
 }

@@ -529,12 +529,6 @@
     <string name="unicode_stripping_non_encodable">转换不可编码字符</string>
     <string name="unicode_stripping_all">转换所有Unicode字符</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">网络模式</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允许所有旋转方向</string>
 
@@ -744,9 +738,6 @@
     <string name="pref_about_gplus_title">Google+ 社交</string>
     <string name="pref_about_gplus_summary">点击这里进入GravityBox的Google+社交</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">允许LTE网络模式</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">为了使实体按键操作支持，这需要覆盖系统默认实体按键中的调整菜单</string>
     
@@ -887,9 +878,6 @@
     <string name="pref_signal_cluster_data_activity_title">启用数据活动</string>
     <string name="pref_signal_cluster_data_activity_summary">在移动和WiFi图标上显示数据活动（需要重新启动）</string>
 
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">使用CDMA网络模式</string>
-    
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">切换自动旋转</string>
     <string name="hwkey_action_auto_rotation_enabled">自动旋转已启用</string>
@@ -1774,11 +1762,6 @@
     <string name="headsup_importance_low">低</string>
     <string name="headsup_importance_medium">中</string>
     <string name="headsup_importance_high">高</string>
-    
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G模式</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA 优先(3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA 自动(2G/3G)</string>
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">在电源键菜单显示扩展桌面按钮</string>

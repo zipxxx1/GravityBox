@@ -524,12 +524,6 @@
     <string name="unicode_stripping_non_encodable">Strip non-encodable characters</string>
     <string name="unicode_stripping_all">Strip all unicode characters</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Netzmodus anpassen</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Alle Bildschirmausrichtungen erlauben</string>
 
@@ -735,9 +729,6 @@
     <string name="pref_about_gplus_title">Google+ Community</string>
     <string name="pref_about_gplus_summary">Berühren um die Community von GravityBox auf Google+ zu besuchen</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">LTE Netzmodus erlauben</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Um Aktionen in der Statusleiste zu erlauben ist es nötig die Standardeinstellungen im Navigationsleisten-Menü anzupassen</string>
 
@@ -872,9 +863,6 @@
     <string name="pref_signal_cluster_connection_state_summary">Zeigt an ob Netzwerk teilweise/vollständig verbunden ist (erfordert Neustart)</string>
     <string name="pref_signal_cluster_data_activity_title">Datenaktivität anzeigen</string>
     <string name="pref_signal_cluster_data_activity_summary">Zeigt an wenn Daten über ein Netzwerk gesendet werden (erfordert Neustart)</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">CDMA Netzmodus verwenden</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Autorotation an-/ausschalten</string>

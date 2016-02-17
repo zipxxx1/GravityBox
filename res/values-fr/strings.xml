@@ -529,12 +529,6 @@
     <string name="unicode_stripping_non_encodable">Alléger les caractères non-encodables</string>
     <string name="unicode_stripping_all">Alléger tous les caractères unicode</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Modalités touche mode réseau</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Permettre toutes les rotations</string>
 
@@ -743,10 +737,7 @@
     <!-- Google Plus -->
     <string name="pref_about_gplus_title">Communauté Google+</string>
     <string name="pref_about_gplus_summary">Touchez pour accéder à la communauté GravityBox sur Google+</string>
- 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Permettre le mode réseau LTE</string>
- 
+
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Pour permettre d\'activer le support des actions de la barre de navigation, il est nécessaire
         de remplacer les paramètres système par défaut dans le menu Modifications barre de navigation</string>
@@ -886,9 +877,6 @@
     <string name="pref_signal_cluster_connection_state_summary">Indique si l\'état de la connexion est partiel ou complet sur les icônes mobile et Wifi (redémarrage nécessaire)</string>
     <string name="pref_signal_cluster_data_activity_title">Activer l\'activité de données</string>
     <string name="pref_signal_cluster_data_activity_summary">Indique l\'activité des échanges de données sur les icônes mobile et Wifi (redémarrage nécessaire)</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Utiliser les modes réseau CDMA</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Interrupteur rotation auto</string>
@@ -1774,11 +1762,6 @@
     <string name="headsup_importance_low">Faible</string>
     <string name="headsup_importance_medium">Moyen</string>
     <string name="headsup_importance_high">Haut</string>
-
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">Mode 2G+3G</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Privilégié (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Bureau étendu dans le menu d\'extinction</string>

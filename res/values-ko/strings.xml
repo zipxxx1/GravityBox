@@ -398,11 +398,6 @@
     <string name="pref_cat_phone_telephony_title">전화</string>
     <string name="pref_cat_phone_mobile_data_title">모바일 데이터</string>
 
-    <string name="pref_network_mode_tile_mode_title">네트워크 모드 타일 설정</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <string name="pref_display_allow_all_rotations_title">모든 방향 회전 허용</string>
 
     <string name="pref_qs_tile_behaviour_override_title">GB에서 타일 행동 담당하기</string>
@@ -574,8 +569,6 @@
     <string name="pref_about_gplus_title">Google+ 커뮤니티</string>
     <string name="pref_about_gplus_summary">GravityBox Google+ 커뮤니티에 접속하려면 터치하세요.</string>
 
-    <string name="pref_network_mode_tile_lte_title">LTE 네트워크 모드 활성화</string>
-
     <string name="hwkey_navbar_warning">In order to enable actions support for navigation bar, it is necessary 
         to override system defaults in Navigation bar tweaks menu</string>
 
@@ -688,8 +681,6 @@
     <string name="pref_signal_cluster_connection_state_summary">모바일 데이터와 Wi-Fi 연결 상태를 표시합니다. (재시작 필요)</string>
     <string name="pref_signal_cluster_data_activity_title">데이터 활동 표시</string>
     <string name="pref_signal_cluster_data_activity_summary">모바일 데이터와 Wi-Fi의 데이터 활동 상태를 표시합니다. (재시작 필요)</string>
-
-    <string name="pref_network_mode_tile_cdma_title">CDMA 네트워크 모드 사용</string>
 
     <string name="hwkey_action_auto_rotation">자동 회전</string>
     <string name="hwkey_action_auto_rotation_enabled">자동 회전 활성화</string>
@@ -1395,10 +1386,6 @@
     <string name="headsup_importance_low">낮음</string>
     <string name="headsup_importance_medium">중간</string>
     <string name="headsup_importance_high">높음</string>
-
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G 모드</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA 선호 (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA 자동 (2G/3G)</string>
 
     <string name="pref_powermenu_expanded_desktop_title">전원 메뉴에 화면 확장 모드 추가</string>
     <string name="pref_powermenu_expanded_desktop_summary">꼭 화면 확장 모드를 끌 수 있는 다른 방법을 마련해두세요!</string>
