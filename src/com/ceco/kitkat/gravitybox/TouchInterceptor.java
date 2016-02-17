@@ -20,7 +20,6 @@ package com.ceco.kitkat.gravitybox;
 import com.ceco.kitkat.gravitybox.R;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
@@ -85,7 +84,9 @@ public class TouchInterceptor extends ListView {
                     View dragger = item.findViewById(R.id.grabber);
                     Rect r = mTempRect;
                     dragger.getDrawingRect(r);
-                    if (shouldStartDragging(x, r.width())) {
+                    // The dragger icon itself is quite small, so pretend the
+                    // touch area is bigger
+                    if (x < r.right * 2) {
                         // Fix x position while dragging
                         int[] itemPos = new int[2];
                         item.getLocationOnScreen(itemPos);
@@ -110,16 +111,6 @@ public class TouchInterceptor extends ListView {
             }
         }
         return super.onInterceptTouchEvent(ev);
-    }
-
-    private boolean shouldStartDragging(int x, int draggerWidth) {
-        Configuration c = getResources().getConfiguration();
-        switch (c.getLayoutDirection()) {
-            case View.LAYOUT_DIRECTION_RTL:
-                return (x >= (getWidth() - draggerWidth));
-            default:
-                return (x <= draggerWidth);
-        }
     }
 
     /*
@@ -313,7 +304,7 @@ public class TouchInterceptor extends ListView {
         stopDragging();
 
         mWindowParams = new WindowManager.LayoutParams();
-        mWindowParams.gravity = Gravity.TOP | Gravity.START;
+        mWindowParams.gravity = Gravity.TOP | Gravity.LEFT;
         mWindowParams.x = x;
         mWindowParams.y = y - mDragPoint + mCoordOffset;
 
