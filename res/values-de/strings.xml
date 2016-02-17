@@ -585,12 +585,6 @@
     <string name="pref_sbcolor_follow_stock_battery_title">Follow stock battery color</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Makes statusbar clock, percentage and circle battery use the color of stock battery icon. Applies when icon coloring is off.</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Netzmodus anpassen</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Alle Bildschirmausrichtungen erlauben</string>
 
@@ -806,9 +800,6 @@
     <string name="pref_about_gplus_title">Google+ Community</string>
     <string name="pref_about_gplus_summary">Berühren um die Community von GravityBox auf Google+ zu besuchen</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">LTE Netzmodus erlauben</string>
-
     <!-- Disable data network type icons -->
     <string name="pref_disable_data_network_type_icons_title">Indikatoren für Netzwerktyp deaktiveren</string>
     <string name="pref_disable_data_network_type_icons_summary">Erlaubt das Deaktivieren der 3G/G Indikatoren bei den Signalbalken</string>
@@ -910,9 +901,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Zusatztaste</string>
     <string name="pref_navbar_custom_key_enable_title">Zusätzliche Taste aktivieren</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">CDMA Netzmodus verwenden</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Autorotation an-/ausschalten</string>

@@ -568,12 +568,6 @@
     <string name="pref_sbcolor_follow_stock_battery_title">Seguir as cores padrões da bateria</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Fazer o relógio, a porcentagem, e o círculo da bateria na barra de status usar a cor do ícone de bateria padrão. Aplicável quando a coloração de ícones está desativada.</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Modo de rede modo de bloco</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Permitir todas as rotações</string>
 
@@ -795,9 +789,6 @@
     <string name="pref_about_gplus_title">Comunidade no Google+</string>
     <string name="pref_about_gplus_summary">Toque para visitar a comunidade do GravityBox no Google+</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Permitir modo de rede LTE</string>
-
     <!-- Disable data network type icons -->
     <string name="pref_disable_data_network_type_icons_title">Desabilitar os indicadores de dados do tipo de rede</string>
     <string name="pref_disable_data_network_type_icons_summary">Permite desabilitar os indicadores 3G/G próximos a barra de sinal</string>
@@ -904,9 +895,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Configuração de tecla personalizada</string>
     <string name="pref_navbar_custom_key_enable_title">Habilitar tecla personalizada</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Usar modo de rede CDMA</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Alternar rotação automática</string>
@@ -1625,11 +1613,6 @@
     <string name="sb_ticker_policy_locked">Desativar na tela de bloqueio</string>
     <string name="sb_ticker_policy_secured">Desativar na tela de bloqueio com segurança</string>
     <string name="sb_ticker_policy_disabled">Sempre desativar</string>
-    
-     <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">Modo 2G+3G</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferêncial (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Automático (2G/3G)</string>
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Ambiente de trabalho expandido no Menu Desligar</string>

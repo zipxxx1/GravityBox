@@ -562,9 +562,6 @@
     <string name="pref_sbcolor_follow_stock_battery_title">Kopírovať farbu stock batérie</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Nastaví farbu hodín, percent batérie a kruhového indikátora podľa farby stock batérie (v prípade ak je vypnuté vlastné vyfarbovanie)</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Režim dlaždice typu mobilnej siete</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Povoliť všetky rotácie</string>
 
@@ -786,9 +783,6 @@
     <string name="pref_about_gplus_title">Google+ komunita</string>
     <string name="pref_about_gplus_summary">Dotykom otvoríte GravityBox Google+ komunitu</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Povoliť LTE typ siete</string>
-
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Ovládanie LED svetla na obrazovke uzamknutia</string>
     <string name="hwkey_ls_torch_disabled">Vypnuté</string>
@@ -888,9 +882,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Voliteľné tlačidlo</string>
     <string name="pref_navbar_custom_key_enable_title">Povoliť voliteľné tlačidlo</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Použiť CDMA režimy siete</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Prepnúť auto rotáciu</string>
@@ -1594,11 +1585,6 @@
     <string name="pref_patch_fake_id_title">Záplata Fake ID zraniteľnosti</string>
     <string name="pref_patch_common_summary">Vyžaduje reštart</string>
 
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G režim</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA preferované (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA automaticky (2G/3G)</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Rozšírená plocha v menu napájania</string>
     <string name="pref_powermenu_expanded_desktop_summary">Uistite sa, že existuje alternatívna metóda vypnutia rozšírenej plochy!!!</string>
@@ -1693,5 +1679,9 @@
     <string name="pref_battery_bar_color_critical_title">Farba kritickej úrovne</string>
     <string name="pref_battery_bar_centered_title">Vycentrovaný</string>
     <string name="pref_battery_bar_color_charging_title">Farba nabíjania</string>
+
+    <!-- Network mode tile settings -->
+    <string name="pref_nm_tile_enabled_modes_title">Podporované typy</string>
+    <string name="pref_nm_tile_enabled_modes_summary">Definuje, ktoré typy siete dlaždica podporuje</string>
 
 </resources>

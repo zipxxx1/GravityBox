@@ -587,12 +587,6 @@
     <string name="pref_sbcolor_follow_stock_battery_title">按照預設電池顏色</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">當圖示自訂顏色停用時讓狀態列上的時鐘，電量百分比與圓形電池顯示預設電池顏色.</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">網路模式的瓷貼模式</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允許螢幕可以所有角度的旋轉</string>
 
@@ -814,9 +808,6 @@
     <string name="pref_about_gplus_title">Google+ 社群</string>
     <string name="pref_about_gplus_summary">輕觸這裡來拜訪 GravityBox 位在 Google+ 的社群</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">允許 LTE 網路模式</string>
-
     <!-- Disable data network type icons -->
     <string name="pref_disable_data_network_type_icons_title">停用網路類型指示</string>
     <string name="pref_disable_data_network_type_icons_summary">允許在訊號欄停用 3G/G 指示</string>
@@ -923,9 +914,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">自訂按鍵設定</string>
     <string name="pref_navbar_custom_key_enable_title">啟用自訂按鍵</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">使用 CDMA 網路模式</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">切換自動旋轉</string>

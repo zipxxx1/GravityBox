@@ -588,12 +588,6 @@
     <string name="pref_sbcolor_follow_stock_battery_title">Колір стокової батареї</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Колір годинника панелі стану, відсотків, круглої батареї буде взято з кольору стокової батареї. Працює при вимкненому зміну кольорів значків.</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Плитка «Режим мережі»</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Дозволити всі повороти</string>
 
@@ -816,9 +810,6 @@
     <string name="pref_about_gplus_title">Спільнота Google+</string>
     <string name="pref_about_gplus_summary">Торкніться для переходу до спільноти Google+</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Розширити режим LTE</string>
-
     <!-- Disable data network type icons -->
     <string name="pref_disable_data_network_type_icons_title">Вимкнути індикатори типу мережі</string>
     <string name="pref_disable_data_network_type_icons_summary">Дозволяє вимкнути індикатори 3G/G поруч з драбинкою сигналу</string>
@@ -927,9 +918,6 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Користувацька кнопка</string>
     <string name="pref_navbar_custom_key_enable_title">Увімкнути користув. кнопку</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Режими мережі CDMA</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Увімкнути авто-поворот</string>
@@ -1657,11 +1645,6 @@
     <string name="sb_ticker_policy_locked">Вимкнено на екр. блокування</string>
     <string name="sb_ticker_policy_secured">Вимкнено на захищеному екрані блокування</string>
     <string name="sb_ticker_policy_disabled">Завжди вимкнено</string>
-
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">Режим 2G+3G</string>
-    <string name="nmt_2g3g_mode_wcdma">Переважно GSM/WCDMA (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA авто (2G/3G)</string>
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Розширений стіл в меню вимкнення</string>

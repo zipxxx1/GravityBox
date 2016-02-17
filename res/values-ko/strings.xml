@@ -464,11 +464,6 @@
     <string name="pref_sbcolor_follow_stock_battery_title">순정 배터리 아이콘 색깔 사용</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">상단바 시계, 배터리 잔량, 둥근 배터리의 색깔이 순정 배터리 아이콘의 색깔을 따릅니다.</string>
 
-    <string name="pref_network_mode_tile_mode_title">네트워크 모드 타일 설정</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <string name="pref_display_allow_all_rotations_title">모든 방향 회전 허용</string>
 
     <string name="pref_qs_tile_behaviour_override_title">GB에서 타일 행동 담당하기</string>
@@ -650,8 +645,6 @@
     <string name="pref_about_gplus_title">Google+ 커뮤니티</string>
     <string name="pref_about_gplus_summary">GravityBox Google+ 커뮤니티에 접속하려면 터치하세요.</string>
 
-    <string name="pref_network_mode_tile_lte_title">LTE 네트워크 모드 활성화</string>
-
     <string name="pref_disable_data_network_type_icons_title">데이터 네트워크 종류 아이콘 비활성화</string>
     <string name="pref_disable_data_network_type_icons_summary">신호 표시기 아이콘 주변에 있는 3G/G/4G 아이콘을 비활성화합니다.</string>
 
@@ -737,8 +730,6 @@
 
     <string name="pref_cat_navbar_custom_key_title">사용자 키 설정</string>
     <string name="pref_navbar_custom_key_enable_title">사용자 키 활성화</string>
-
-    <string name="pref_network_mode_tile_cdma_title">CDMA 네트워크 모드 사용</string>
 
     <string name="hwkey_action_auto_rotation">자동 회전</string>
     <string name="hwkey_action_auto_rotation_enabled">자동 회전 활성화</string>
@@ -1320,10 +1311,6 @@
     <string name="sb_ticker_policy_locked">잠금 화면에서 티커 비활성화</string>
     <string name="sb_ticker_policy_secured">보안 잠금 화면에서 티커 비활성화</string>
     <string name="sb_ticker_policy_disabled">항상 비활성화</string>
-
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G 모드</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA 선호 (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA 자동 (2G/3G)</string>
 
     <string name="pref_powermenu_expanded_desktop_title">전원 메뉴에 화면 확장 모드 추가</string>
     <string name="pref_powermenu_expanded_desktop_summary">꼭 화면 확장 모드를 끌 수 있는 다른 방법을 마련해두세요!</string>

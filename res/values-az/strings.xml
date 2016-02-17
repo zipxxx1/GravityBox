@@ -383,10 +383,6 @@
     <string name="pref_mobile_data_slow2g_disable_summary">CəldAyarlarda SİM 2G rejimi aktiv olan zaman zəif sürət xəbərdarlıqlarını söndür</string>
     <string name="pref_sbcolor_follow_stock_battery_title">Batareya rəngi ilə eyni rəng et</string>
     <string name="pref_sbcolor_follow_stock_battery_summary">Status paneli saatı, faizi və dairəvi batareyadakı rəngləri orijinal batareya ikonu rəngi ilə eyni rəng edir. İkon rəngləndirmə bağlı olanda tətbiq edilir</string>
-    <string name="pref_network_mode_tile_mode_title">Şəbəkə rejimi xana nizamlamaları</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
     <string name="pref_display_allow_all_rotations_title">Bütün istiqamətlərə icazə ver</string>
     <string name="pref_qs_tile_behaviour_override_title">Varsayılan xanaları ləğv et</string>
     <string name="pref_qs_tile_behaviour_override_summary">Seçilmiş xanaların bas/uzun-bas funksiyalarını ləğv edir (yenidən başlatma tələb edir)</string>
@@ -524,7 +520,6 @@
     <string name="pref_recent_clear_margin_bottom_title">Aşağı boşluq nizamlaması</string>
     <string name="pref_about_gplus_title">Google+ şəbəkəsi</string>
     <string name="pref_about_gplus_summary">GravityBox Google+ səhifəsini ziyarət etmək üçün toxun</string>
-    <string name="pref_network_mode_tile_lte_title">LTE şəbəkə rejimini aktiv et</string>
     <string name="pref_disable_data_network_type_icons_title">Data istifadəsi indiktorlarını söndür</string>
     <string name="pref_disable_data_network_type_icons_summary">Siqnal panelinin yanındakı 3G/G indikatorlarını deaktiv edir</string>
     <string name="hwkey_navbar_warning">Naviqasiya panelini aktiv etmək üçün Naviqasiya paneli təkmilləşdirmələrində sistem ayarlarını sıfırlayın </string>
@@ -589,7 +584,6 @@
     <string name="inactivity_mode_summary">Xülasəni göstər və passiv rejimdə gizlət</string>
     <string name="pref_cat_navbar_custom_key_title">Özəl düymə nizamlamaları</string>
     <string name="pref_navbar_custom_key_enable_title">Özəl düyməni aktiv et</string>
-    <string name="pref_network_mode_tile_cdma_title">CDMA şəbəkə rejimi</string>
     <string name="hwkey_action_auto_rotation">Avtofırlanma</string>
     <string name="hwkey_action_auto_rotation_enabled">Avtofırlanma aktivdir</string>
     <string name="hwkey_action_auto_rotation_disabled">Avtofırlanma deaktivdir</string>
@@ -1027,9 +1021,6 @@ Funksiya aşağıdaki çevirici ilə aktivləşir. Aktiv etdikdən sonra tətbiq
     <string name="sb_ticker_policy_locked">Kilid ekranında gizlət</string>
     <string name="sb_ticker_policy_secured">Bağlı kilid ekranında gizlət</string>
     <string name="sb_ticker_policy_disabled">Həmişə gizlət</string>
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G rejimi</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA üstünlüyü (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Avtomatik (2G/3G)</string>
     <string name="pref_powermenu_expanded_desktop_title">Genişlənmiş masaüstü</string>
     <string name="pref_powermenu_expanded_desktop_summary">Genişlənmiş masaüstünü söndürməyin alternativ metodu olduğundan əmin olun!!!</string>
     <string name="pref_cat_quickrecord_tile_title">CəldQeydetmə xana ayarları</string>
