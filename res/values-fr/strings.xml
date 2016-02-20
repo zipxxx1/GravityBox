@@ -1371,7 +1371,9 @@
     <string name="pref_headset_action_unplug_title">Au débranchement du kit piéton</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Stopper les vibrations</string>
+    <string name="pref_lc_qh_mute_vibe_title">Supprimer les vibrations de notification</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Arrête les vibrations de notification sur cet appareil et
+        tout appareil Android Wear apairé</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Mode interactif</string>
@@ -1705,6 +1707,13 @@
     <string name="pref_lc_sound_vibrate_summary">Evite aux notifications dont les vibrations sont désactivées
         d\'être contraintes à vibrer dans le mode de sonnerie vibrer uniquement</string>
 
+    <!-- UNC: QuietHours: mute system level vibrations -->
+    <string name="pref_lc_qh_mute_system_vibe_title">Arrêter les vibrations sur cet appareil</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Arrête TOUTES les vibrations au niveau système,
+        en incluant les vibrations de notification sur CET appareil. Les notifications sur un appareil Android Wear apairé peuvent
+        toujours vibrer dans le cas où les notifications seraient actives
+    </string>
+
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Effacer les tâches visibles uniquement</string>
 
@@ -1843,5 +1852,8 @@
     <string name="pref_cat_qs_sa_tile_title">Paramètres de la touche Rester éveiller</string>
     <string name="pref_sa_tile_enabled_modes_summary">Définit quelles durées avant la mise en veille de l\'écran la touche doit supporter</string>
     <string name="pref_sa_tile_quick_mode_summary">Permet d\'alterner par simple appui entre les durées avant mise en veille sélectionnées</string>
+
+    <!-- Lockscreen: Smart unlock policy -->
+    <string name="pref_lockscreen_smart_unlock_policy_title">Politique de déverrouillage intelligent</string>
 
 </resources>
