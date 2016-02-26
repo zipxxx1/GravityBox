@@ -47,6 +47,8 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         Drawable getResourceIconDrawable();
         boolean handleSecondaryClick();
         void onDualModeSet(View tileView, boolean enabled);
+        Object getDetailAdapter();
+        boolean supportsDualTargets();
     }
 
     private static void log(String message) {
@@ -59,7 +61,6 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
     private Map<String,QsEventListener> mListeners;
     private List<BroadcastSubReceiver> mBroadcastSubReceivers;
     private String mCreateTileViewTileKey;
-    private boolean mResourceIconHooked;
 
     public QsTileEventDistributor(Object host, XSharedPreferences prefs) {
         mHost = host;
@@ -168,6 +169,18 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
+            XposedHelpers.findAndHookMethod(BaseTile.CLASS_RESOURCE_ICON, cl, "getDrawable",
+                    Context.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l instanceof QsTile) {
+                        param.setResult(l.getResourceIconDrawable());
+                    }
+                }
+            });
+
             XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "createTileView",
                     Context.class, new XC_MethodHook() {
                 @Override
@@ -182,6 +195,21 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                         l.onCreateTileView((View)param.getResult());
                     }
                     mCreateTileViewTileKey = null;
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "getDetailAdapter",
+                    new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        Object detailAdapter = l.getDetailAdapter();
+                        if (detailAdapter != null) {
+                            param.setResult(detailAdapter);
+                        }
+                    }
                 }
             });
 
@@ -208,6 +236,27 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                     }
                 }
             });
+
+            // this seems to be unsupported on some custom ROMs. Log one line and continue.
+            XC_MethodHook dtHook = new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final QsEventListener l = mListeners.get(XposedHelpers
+                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
+                    if (l != null) {
+                        param.setResult(l.supportsDualTargets());
+                    }
+                }
+            };
+            try {
+                XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "supportsDualTargets", dtHook);
+            } catch (Throwable t) {
+                try {
+                    XposedHelpers.findAndHookMethod(QsTile.CLASS_BASE_TILE, cl, "hasDualTargetsDetails", dtHook);
+                } catch (Throwable t2) {
+                    log("Your system does not seem to support standard AOSP tile dual mode");
+                }
+            }
 
             XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "onConfigurationChanged",
                     Configuration.class, new XC_MethodHook() {
@@ -248,8 +297,7 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "setDual",
-                    boolean.class, new XC_MethodHook() {
+            XC_MethodHook sdHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final QsEventListener l = mListeners.get(XposedHelpers
@@ -258,7 +306,18 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                         l.onDualModeSet((View)param.thisObject, (boolean)param.args[0]);
                     }
                 }
-            });
+            };
+            try {
+                XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "setDual",
+                        boolean.class, sdHook);
+            } catch (Throwable t) {
+                try {
+                    XposedHelpers.findAndHookMethod(BaseTile.CLASS_TILE_VIEW, cl, "setDual",
+                            boolean.class, boolean.class, sdHook);
+                } catch (Throwable t2) {
+                    log("Your system does not seem to support standard AOSP tile dual mode");
+                }
+            }
 
             XC_MethodHook longClickHook = new XC_MethodHook() {
                 @Override
@@ -274,19 +333,6 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
                     "handleLongClick", longClickHook);
             XposedHelpers.findAndHookMethod(BaseTile.CLASS_BASE_TILE, cl,
                     "handleLongClick", longClickHook);
-
-            XposedHelpers.findAndHookMethod(BaseTile.CLASS_RESOURCE_ICON, cl, "getDrawable",
-                    Context.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    final QsEventListener l = mListeners.get(XposedHelpers
-                            .getAdditionalInstanceField(param.thisObject, BaseTile.TILE_KEY_NAME));
-                    if (l instanceof QsTile) {
-                        param.setResult(l.getResourceIconDrawable());
-                    }
-                }
-            });
-            mResourceIconHooked = true;
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -328,10 +374,6 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
         if (mBroadcastSubReceivers.contains(receiver)) {
             mBroadcastSubReceivers.remove(receiver);
         }
-    }
-
-    protected final boolean isResourceIconHooked() {
-        return mResourceIconHooked;
     }
 
     @Override

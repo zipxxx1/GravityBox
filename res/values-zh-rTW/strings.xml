@@ -479,9 +479,6 @@
     <string name="unicode_stripping_non_encodable">去除非可編碼字符</string>
     <string name="unicode_stripping_all">去除所有 unicode 字符</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">網路模式瓷貼模式</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允許畫面可以全方位旋轉</string>
 
@@ -647,9 +644,6 @@
     <string name="pref_about_gplus_title">Google+ 社群</string>
     <string name="pref_about_gplus_summary">輕觸這裡來拜訪 GravityBox 的 Google+ 社群</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">允許 LTE 網路模式</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">為了能夠支援導航列動作控制，在導航列選項中覆蓋系統預設值是必須的</string>
 
@@ -674,7 +668,6 @@
     <string name="pref_volume_panel_timeout_title">音量面板逾時時間</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">響鈴模式瓷貼模式</string>
     <string name="ringer_mode_silent">靜音</string>
     <string name="ringer_mode_vibrate">震動</string>
     <string name="ringer_mode_sound">響鈴</string>
@@ -761,9 +754,6 @@
     <string name="pref_cat_signal_cluster_title">訊號指示符設定</string>
     <string name="pref_signal_cluster_data_activity_title">啟用資料傳輸活動</string>
     <string name="pref_signal_cluster_data_activity_summary">在行動數據及 Wi-Fi 圖示上顯示資料傳輸活動 (需要重新啟動) </string>
-
-  <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">使用 CDMA 網路模式</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">開關自動旋轉</string>
@@ -1056,7 +1046,6 @@
     <string name="pref_quick_pulldown_size_title">快速下拉大小</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">螢幕逾時瓷貼模式</string>
     <string name="stay_awake_15s">15秒</string>
     <string name="stay_awake_30s">30秒</string>
     <string name="stay_awake_1m">1分鐘</string>
@@ -1463,11 +1452,6 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">隱藏訊號條 SIM 卡提示</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">需要重新啟動</string>
 
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G 模式</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA 優先 (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA 自動 (2G/3G)</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">電源選單顯示 [全螢幕模式] 選項</string>
     <string name="pref_powermenu_expanded_desktop_summary">請先確認已設定其他可以關閉 [全螢幕模式] 的方法，然後才停用本選項!</string>
@@ -1508,5 +1492,48 @@
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">隱藏啟動器圖示</string>
     <string name="pref_hide_launcher_icon_summary">可能需要重新啟動啟動器才能生效</string>
+    
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_statusbar_title">在狀態列顯示</string>
+    <string name="battery_percent_text_statusbar_summary">在標准狀態列顯示電量百分比文字(當裝置解鎖時)</string>
+    <string name="battery_percent_text_keyguard_title">鍵盤鎖模式</string>
+    <string name="battery_percent_text_keyguard_summary">在鎖定畫面上指定狀態列百分比文字行為</string>
+    <string name="keyguard_percent_text_default">預設(當充電時)</string>
+    <string name="keyguard_percent_text_show_always">允許顯示</string>
+    <string name="keyguard_percent_text_hide">隱藏</string>
+    <string name="battery_percent_text_header_hide_title">隱藏狀態列標題</string>
+    <string name="battery_percent_text_size_default">預設</string>
+    
+    <!-- Status bar: disable peek -->
+    <string name="pref_statusbar_disable_peek_title">停用輕觸狀態列</string>
+    <string name="pref_statusbar_disable_peek_summary">單擊觸摸時不會擴大狀態列</string>
+   
+    <!-- Status bar: Double-tap to sleep -->
+    <string name="pref_statusbar_dt2s_title">雙擊睡眠</string>
+    <string name="pref_statusbar_dt2s_summary">需要停用輕觸狀態列</string>
+    
+       <!-- Lockscreen: app shortcuts -->
+    <string name="pref_lockscreen_shortcuts_title">快捷方式</string>
+    <string name="pref_lockscreen_shortcuts_summary">允許定義鎖定畫面快捷方式</string>
+    
+    <!-- Lockscreen: app shortcuts safe launch -->
+    <string name="pref_lockscreen_shortcuts_safe_launch_title">安全啟動</string>
+    <string name="pref_lockscreen_shortcuts_safe_launch_summary">需要雙擊啟動快捷鍵 
+        防止它們被意外啟動,例如裝置放在口袋中時</string>
+        
+    <!-- Lockscreen rotation -->
+    <string name="pref_lockscreen_rotation_summary">需要重新啟動</string>
+   
+    <!-- Lockscreen: Bottom-left action -->
+    <string name="pref_lockscreen_bleft_action_title">左下動作</string>
+    <string name="ls_bleft_action_default">預設</string>
+    <string name="ls_bleft_action_phone">電話</string>
+    
+    <!-- Navigation bar: use larger icons -->
+    <string name="pref_navbar_larger_icons_title">使用大圖標</string>
+    <string name="pref_navbar_larger_icons_summary">需要重新啟動</string>
+
+    <!-- Navigation bar: hide IME switcher -->
+    <string name="pref_navbar_hide_ime_title">隱藏輸入法切換器</string>
 
 </resources>

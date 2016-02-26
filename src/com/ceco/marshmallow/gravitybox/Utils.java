@@ -18,6 +18,7 @@ package com.ceco.marshmallow.gravitybox;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -34,6 +35,7 @@ import android.hardware.SensorManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.UserHandle;
 import android.os.Vibrator;
 import android.renderscript.Allocation;
 import android.renderscript.Allocation.MipmapControl;
@@ -50,6 +52,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -554,6 +557,20 @@ public class Utils {
         percentAlpha = Math.min(Math.max(percentAlpha, 0), 100);
         float alpha = (float)percentAlpha / 100f;
         return (alpha == 0 ? 255 : (int)(1-alpha * 255));
+    }
+
+    public static int getCurrentUser() {
+        try {
+            return (int) XposedHelpers.callStaticMethod(ActivityManager.class, "getCurrentUser");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return 0;
+        }
+    }
+
+    public static UserHandle getUserHandle(int userId) throws Exception {
+        Constructor<?> uhConst = XposedHelpers.findConstructorExact(UserHandle.class, int.class);
+        return (UserHandle) uhConst.newInstance(userId);
     }
 
     static class SystemProp extends Utils {

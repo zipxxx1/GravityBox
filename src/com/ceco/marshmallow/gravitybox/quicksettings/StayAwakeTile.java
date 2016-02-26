@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,15 +24,25 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
+import com.ceco.marshmallow.gravitybox.ModQsTiles;
 import com.ceco.marshmallow.gravitybox.R;
 
 import de.robv.android.xposed.XSharedPreferences;
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
+import android.widget.ListView;
 
 public class StayAwakeTile extends QsTile {
     private static final int NEVER_SLEEP = Integer.MAX_VALUE;
@@ -46,13 +56,15 @@ public class StayAwakeTile extends QsTile {
         new ScreenTimeout(300000, R.string.stay_awake_5m),
         new ScreenTimeout(600000, R.string.stay_awake_10m),
         new ScreenTimeout(1800000, R.string.stay_awake_30m),
-        new ScreenTimeout(NEVER_SLEEP, R.string.quick_settings_stay_awake_on),
+        new ScreenTimeout(NEVER_SLEEP, R.string.stay_awake_on),
     };
 
     private SettingsObserver mSettingsObserver;
-    private int mCurrentTimeoutIndex;
-    private int mPreviousTimeoutIndex;
-    private int mLongestTimeoutIndex;
+    private int mCurrentTimeout;
+    private int mPreviousTimeout;
+    private List<ScreenTimeout> mModeList = new ArrayList<>();
+    private Object mDetailAdapter;
+    private boolean mQuickMode;
 
     private static class ScreenTimeout {
         final int mMillis;
@@ -74,16 +86,14 @@ public class StayAwakeTile extends QsTile {
         mSettingsObserver = new SettingsObserver(new Handler());
 
         getCurrentState();
-        mPreviousTimeoutIndex = mCurrentTimeoutIndex == -1 ||
-                SCREEN_TIMEOUT[mCurrentTimeoutIndex].mMillis == SCREEN_TIMEOUT[mLongestTimeoutIndex].mMillis ?
-                        getIndexFromValue(FALLBACK_SCREEN_TIMEOUT_VALUE) : mCurrentTimeoutIndex;
+        mPreviousTimeout = mCurrentTimeout == NEVER_SLEEP ?
+                FALLBACK_SCREEN_TIMEOUT_VALUE : mCurrentTimeout;
     }
 
     private void getCurrentState() {
-        mCurrentTimeoutIndex = getIndexFromValue(Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE));
-        if (DEBUG) log(getKey() + ": getCurrentState: mCurrentTimeoutIndex=" + mCurrentTimeoutIndex +
-                "; mPreviousTimeoutIndex=" + mPreviousTimeoutIndex);
+        mCurrentTimeout = Settings.System.getInt(mContext.getContentResolver(), 
+                Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
+        if (DEBUG) log(getKey() + ": getCurrentState: mCurrentTimeout=" + mCurrentTimeout);
     }
 
     @Override
@@ -113,75 +123,62 @@ public class StayAwakeTile extends QsTile {
         }
         if (DEBUG) log(getKey() + ": initPreferences: modes=" + modes);
         updateSettings(modes);
+
+        mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE, false);
     }
 
     @Override
     public void onBroadcastReceived(Context context, Intent intent) {
         super.onBroadcastReceived(context, intent);
 
-        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)
-                && intent.hasExtra(GravityBoxSettings.EXTRA_SA_MODE)) {
-            int[] modes = intent.getIntArrayExtra(GravityBoxSettings.EXTRA_SA_MODE);
-            if (DEBUG) log(getKey() + ": onBroadcastReceived: modes=" + modes);
-            updateSettings(modes);
+        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SA_MODE)) {
+                int[] modes = intent.getIntArrayExtra(GravityBoxSettings.EXTRA_SA_MODE);
+                if (DEBUG) log(getKey() + ": onBroadcastReceived: modes=" + modes);
+                updateSettings(modes);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SA_QUICK_MODE)) {
+                mQuickMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SA_QUICK_MODE, false);
+            }
         }
     }
 
     private void updateSettings(int[] modes) {
         for (ScreenTimeout s : SCREEN_TIMEOUT) {
-            s.mEnabled = false;
+            s.mEnabled = (s.mMillis == NEVER_SLEEP);
         }
-        if (modes != null && modes.length > 0) {
-            for (int i=0; i<modes.length; i++) {
-                int index = modes[i];
-                ScreenTimeout s = index < SCREEN_TIMEOUT.length ? SCREEN_TIMEOUT[index] : null;
-                if (s != null) {
-                    s.mEnabled = true;
-                    mLongestTimeoutIndex = index;
-                }
+        for (int i=0; i<modes.length; i++) {
+            int index = modes[i];
+            ScreenTimeout s = index < SCREEN_TIMEOUT.length ? SCREEN_TIMEOUT[index] : null;
+            if (s != null) {
+                s.mEnabled = true;
             }
-        } else {
-            mCurrentTimeoutIndex = getIndexFromValue(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE));
-            mLongestTimeoutIndex = -1;
         }
+    }
+
+    private void setScreenOffTimeout(int millis) {
+        if (millis == NEVER_SLEEP && mCurrentTimeout != NEVER_SLEEP) {
+            mPreviousTimeout = mCurrentTimeout;
+        }
+        mCurrentTimeout = millis;
+        Settings.System.putInt(mContext.getContentResolver(),
+                Settings.System.SCREEN_OFF_TIMEOUT, mCurrentTimeout);
     }
 
     private void toggleStayAwake() {
-        toggleStayAwake(-1);
-    }
-
-    private void toggleStayAwake(int index) {
-        if (mLongestTimeoutIndex < 0)
-            return;
-        final int startIndex = mCurrentTimeoutIndex;
-        int i = 0;
+        int currentIndex = getIndexFromValue(mCurrentTimeout);
+        if (currentIndex == -1) currentIndex = SCREEN_TIMEOUT.length-1;
+        final int startIndex = currentIndex;
         do {
-            if (index != -1) {
-                if (index == mLongestTimeoutIndex) {
-                    mCurrentTimeoutIndex = mLongestTimeoutIndex;
-                } else if (SCREEN_TIMEOUT[index].mEnabled) {
-                    mCurrentTimeoutIndex = index;
-                } else {
-                    mCurrentTimeoutIndex = i++;
-                    index = i;
-                }
-            } else {
-                if (++mCurrentTimeoutIndex >= SCREEN_TIMEOUT.length) {
-                    mCurrentTimeoutIndex = 0;
-                }
+            if (++currentIndex >= SCREEN_TIMEOUT.length) {
+                currentIndex = 0;
             }
-        } while(!SCREEN_TIMEOUT[mCurrentTimeoutIndex].mEnabled &&
-                    startIndex != mCurrentTimeoutIndex);
-        if (DEBUG) log(getKey() + ": mCurrentTimeoutIndex = " + mCurrentTimeoutIndex);
+        } while(!SCREEN_TIMEOUT[currentIndex].mEnabled &&
+                    startIndex != currentIndex);
+        if (DEBUG) log(getKey() + ": mCurrentTimeoutIndex = " + currentIndex);
 
-        if (startIndex != mCurrentTimeoutIndex) {
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.SCREEN_OFF_TIMEOUT,
-                        SCREEN_TIMEOUT[mCurrentTimeoutIndex].mMillis);
-        } else {
-            mCurrentTimeoutIndex = getIndexFromValue(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE));
+        if (startIndex != currentIndex) {
+            setScreenOffTimeout(SCREEN_TIMEOUT[currentIndex].mMillis);
         }
     }
 
@@ -197,12 +194,13 @@ public class StayAwakeTile extends QsTile {
     @Override
     public void handleUpdateState(Object state, Object arg) {
         mState.visible = true;
-        if (mCurrentTimeoutIndex == -1) {
-            mState.label = String.format("%ds", TimeUnit.MILLISECONDS.toSeconds(
-                    Settings.System.getInt(mContext.getContentResolver(), 
-                            Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE)));;
+        int currentIndex = getIndexFromValue(mCurrentTimeout);
+        if (currentIndex == -1) {
+            mState.label = mCurrentTimeout == NEVER_SLEEP ?
+                    mGbContext.getString(R.string.stay_awake_on) :
+                    String.format("%ds", TimeUnit.MILLISECONDS.toSeconds(mCurrentTimeout));
         } else {
-            mState.label = mGbContext.getString(SCREEN_TIMEOUT[mCurrentTimeoutIndex].mLabelResId);
+            mState.label = mGbContext.getString(SCREEN_TIMEOUT[currentIndex].mLabelResId);
         }
 
         super.handleUpdateState(state, arg);
@@ -215,22 +213,20 @@ public class StayAwakeTile extends QsTile {
 
     @Override
     public void handleClick() {
-        toggleStayAwake();
+        if (mQuickMode) {
+            toggleStayAwake();
+        } else {
+            showDetail(true);
+        }
         super.handleClick();
     }
 
     @Override
     public boolean handleLongClick() {
-        if (mLongestTimeoutIndex < 0)
-            return false;
-        if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_OFF_TIMEOUT,
-                    FALLBACK_SCREEN_TIMEOUT_VALUE) == SCREEN_TIMEOUT[mLongestTimeoutIndex].mMillis) {
-            toggleStayAwake(mPreviousTimeoutIndex);
+        if (mCurrentTimeout == NEVER_SLEEP) {
+            setScreenOffTimeout(mPreviousTimeout);
         } else {
-            mPreviousTimeoutIndex = mCurrentTimeoutIndex == -1 ?
-                    getIndexFromValue(FALLBACK_SCREEN_TIMEOUT_VALUE) : mCurrentTimeoutIndex;
-            toggleStayAwake(mLongestTimeoutIndex);
+            setScreenOffTimeout(NEVER_SLEEP);
         }
         return true;
     }
@@ -239,6 +235,9 @@ public class StayAwakeTile extends QsTile {
     public void handleDestroy() {
         super.handleDestroy();
         mSettingsObserver = null;
+        mModeList.clear();
+        mModeList = null;
+        mDetailAdapter = null;
     }
 
     class SettingsObserver extends ContentObserver {
@@ -262,6 +261,101 @@ public class StayAwakeTile extends QsTile {
         public void onChange(boolean selfChange) {
             getCurrentState();
             refreshState();
+        }
+    }
+
+    @Override
+    public Object getDetailAdapter() {
+        if (mDetailAdapter == null) {
+            mDetailAdapter = QsDetailAdapterProxy.createProxy(
+                    mContext.getClassLoader(), new ModeDetailAdapter());
+        }
+        return mDetailAdapter;
+    }
+
+    private class ModeAdapter extends ArrayAdapter<ScreenTimeout> {
+        public ModeAdapter(Context context) {
+            super(context, android.R.layout.simple_list_item_single_choice, mModeList);
+        }
+
+        @SuppressLint("ViewHolder")
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            CheckedTextView label = (CheckedTextView) inflater.inflate(
+                    android.R.layout.simple_list_item_single_choice, parent, false);
+            ScreenTimeout st = getItem(position);
+            label.setText(mGbContext.getString(st.mLabelResId));
+            return label;
+        }
+    }
+
+    private class ModeDetailAdapter implements QsDetailAdapterProxy.Callback, AdapterView.OnItemClickListener {
+
+        private ModeAdapter mAdapter;
+        private QsDetailItemsList mDetails;
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            ScreenTimeout st = (ScreenTimeout) parent.getItemAtPosition(position);
+            setScreenOffTimeout(st.mMillis);
+        }
+
+        @Override
+        public int getTitle() {
+            return ModQsTiles.RES_IDS.SA_TITLE;
+        }
+
+        @Override
+        public Boolean getToggleState() {
+            rebuildModeList();
+            return null;
+        }
+
+        @Override
+        public View createDetailView(Context context, View convertView, ViewGroup parent) throws Throwable {
+            if (mDetails == null) {
+                mDetails = QsDetailItemsList.create(context, parent);
+                mDetails.setEmptyState(0, null);
+                mAdapter = new ModeAdapter(context);
+                mDetails.setAdapter(mAdapter);
+    
+                final ListView list = mDetails.getListView();
+                list.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+                list.setOnItemClickListener(this);
+            }
+
+            return mDetails.getView();
+        }
+
+        @Override
+        public Intent getSettingsIntent() { 
+            return new Intent(android.provider.Settings.ACTION_DISPLAY_SETTINGS);
+        }
+
+        @Override
+        public void setToggleState(boolean state) {
+            // noop
+        }
+
+        private void rebuildModeList() {
+            mDetails.getListView().clearChoices();
+            mModeList.clear();
+            int index = getIndexFromValue(mCurrentTimeout);
+            ScreenTimeout current = index >= 0 ? SCREEN_TIMEOUT[index] : null;
+            ScreenTimeout selected = null;
+            for (ScreenTimeout st : SCREEN_TIMEOUT) {
+                if (st.mEnabled) {
+                    mModeList.add(st);
+                    if (st == current) {
+                        selected = st;
+                    }
+                }
+            }
+            if (selected != null) {
+                mDetails.getListView().setItemChecked(mAdapter.getPosition(selected), true);
+            }
+            mAdapter.notifyDataSetChanged();
         }
     }
 }

@@ -503,18 +503,6 @@
         <item>all</item>
     </string-array>
 
-    <string-array name="network_mode_tile_mode_entries" translatable="false">
-        <item>@string/nm_tile_mode1</item>
-        <item>@string/nm_tile_mode2</item>
-        <item>@string/nm_tile_mode3</item>
-    </string-array>
-
-    <string-array name="network_mode_tile_mode_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
     <string-array name="network_mode_sim_slot_entries" translatable="false">
         <item>@string/sim_slot1</item>
         <item>@string/sim_slot2</item>
@@ -875,7 +863,6 @@
         <item>@string/stay_awake_5m</item>
         <item>@string/stay_awake_10m</item>
         <item>@string/stay_awake_30m</item>
-        <item>@string/stay_awake_on</item>
     </string-array>
 
     <string-array name="stay_awake_values" translatable="false">
@@ -886,7 +873,6 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
-        <item>7</item>
     </string-array>
 
     <string-array name="lc_led_mode_entries" translatable="false">
@@ -1016,16 +1002,6 @@
         <item>OFF</item>
         <item>TOP</item>
         <item>BOTTOM</item>
-    </string-array>
-
-    <string-array name="nmt_2g3g_mode_entries" translatable="false">
-        <item>@string/nmt_2g3g_mode_wcdma</item>
-        <item>@string/nmt_2g3g_mode_auto</item>
-    </string-array>
-
-    <string-array name="nmt_2g3g_mode_values" translatable="false">
-        <item>0</item>
-        <item>3</item>
     </string-array>
 
     <string-array name="qr_audio_quality_entries" translatable="false">
@@ -1176,6 +1152,89 @@
     <string-array name="ls_bleft_action_values" translatable="false">
         <item>DEFAULT</item>
         <item>PHONE</item>
+    </string-array>
+
+    <string-array name="dnd_tile_em_entries" translatable="false">
+        <item>@string/dnd_tile_em_priority</item>
+        <item>@string/dnd_tile_em_alarms</item>
+        <item>@string/dnd_tile_em_silence</item>
+    </string-array>
+
+    <string-array name="dnd_tile_em_values" translatable="false">
+        <item>1</item>
+        <item>3</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="dnd_tile_dm_entries" translatable="false">
+        <item>@string/dnd_tile_dm_manual</item>
+        <item>@string/dnd_tile_dm_alarm</item>
+        <item>@string/dnd_tile_dm_custom</item>
+    </string-array>
+
+    <string-array name="dnd_tile_dm_values" translatable="false">
+        <item>MANUAL</item>
+        <item>ALARM</item>
+        <item>CUSTOM</item>
+    </string-array>
+
+    <string-array name="network_mode_entries" translatable="false">
+        <item>@string/network_mode_0</item>
+        <item>@string/network_mode_1</item>
+        <item>@string/network_mode_2</item>
+        <item>@string/network_mode_3</item>
+        <item>@string/network_mode_4</item>
+        <item>@string/network_mode_5</item>
+        <item>@string/network_mode_6</item>
+        <item>@string/network_mode_7</item>
+        <item>@string/network_mode_8</item>
+        <item>@string/network_mode_9</item>
+        <item>@string/network_mode_10</item>
+        <item>@string/network_mode_11</item>
+        <item>@string/network_mode_12</item>
+        <item>@string/network_mode_13</item>
+        <item>@string/network_mode_14</item>
+        <item>@string/network_mode_15</item>
+        <item>@string/network_mode_16</item>
+        <item>@string/network_mode_17</item>
+        <item>@string/network_mode_18</item>
+        <item>@string/network_mode_19</item>
+        <item>@string/network_mode_20</item>
+        <item>@string/network_mode_21</item>
+        <item>@string/network_mode_22</item>
+    </string-array>
+
+    <string-array name="network_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+    </string-array>
+
+    <string-array name="network_mode_values_default" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>10</item>
     </string-array>
 
 </resources>

@@ -479,9 +479,6 @@
     <string name="unicode_stripping_non_encodable">去除非可編碼字符</string>
     <string name="unicode_stripping_all">去除所有 unicode 字符</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">網路模式瓷貼模式</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">允許畫面可以全方位旋轉</string>
 
@@ -647,9 +644,6 @@
     <string name="pref_about_gplus_title">Google+ 社群</string>
     <string name="pref_about_gplus_summary">輕觸這裡來拜訪 GravityBox 的 Google+ 社群</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">允許 LTE 網路模式</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">為了能夠支援導航列動作控制，在導航列選項中覆蓋系統預設值是必須的</string>
 
@@ -674,7 +668,6 @@
     <string name="pref_volume_panel_timeout_title">音量面板逾時時間</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">響鈴模式瓷貼模式</string>
     <string name="ringer_mode_silent">靜音</string>
     <string name="ringer_mode_vibrate">震動</string>
     <string name="ringer_mode_sound">響鈴</string>
@@ -761,9 +754,6 @@
     <string name="pref_cat_signal_cluster_title">訊號指示符設定</string>
     <string name="pref_signal_cluster_data_activity_title">啟用數據傳輸活動</string>
     <string name="pref_signal_cluster_data_activity_summary">在流動數據及 Wi-Fi 圖示上顯示數據傳輸活動 (需要重新啟動) </string>
-
-  <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">使用 CDMA 網路模式</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">開關自動旋轉</string>
@@ -1056,7 +1046,6 @@
     <string name="pref_quick_pulldown_size_title">快速下拉大小</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">螢幕逾時瓷貼模式</string>
     <string name="stay_awake_15s">15秒</string>
     <string name="stay_awake_30s">30秒</string>
     <string name="stay_awake_1m">1分鐘</string>
@@ -1462,11 +1451,6 @@
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">隱藏訊號條 SIM 卡提示</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">需要重新啟動</string>
-
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G 模式</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA 優先 (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA 自動 (2G/3G)</string>
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">電源選單顯示 [全螢幕模式] 選項</string>

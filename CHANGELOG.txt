@@ -1,3 +1,46 @@
+Changelog 6.0.5 - 09/02/2016
+--------------------------------------
+- QuickSettings management:
+--- optimized Compass tile to avoid QS panel lockups
+--- changed behavior of StayAwake tile
+--- maybe improved compatibility with devices running system derived from CM (untested, without guarantee and support)
+- QuietHours: added option for disabling device vibrations
+--- replaces "Disable haptic feedback" option
+--- turns off ALL vibrations on a device, including those coming from 3rd party apps
+--- allows notifications to vibrate during QH on paired Android Wear (in case option for muting notification vibrations is disabled)
+- Lockscreen: added option for defining Smart unlock policy (analogic to Direct unlock policy)
+- Phone: adjusted cropping in unknown caller photo chooser to match in-call screen photo dimensions
+- Key actions: don't allow actions while current foreground app is pinned
+- TrafficMeter: exclude traffic from loopback and TUN (VPN) interfaces (thanks to dantmnf)
+- Navbar: fixed recents doubletap action not surviving reboot
+- BatteryPercent: fixed text size reverting to default
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Hungarian translations (thanks to benjoe1)
+
+Changelog 6.0.4 - 24/01/2016
+--------------------------------------
+- QuickSettings management:
+--- Implemeted generic "detail view" support which brings new possibilities
+--- Location tile (SlimKat): redesigned to support detail view, quick mode and dual mode
+--- NetworkMode tile: redesigned for simplicity and flexibility:
+------ allows user to freely choose network modes of interest tile should support
+------ supports all currently available network modes
+------ supports detail view and quick mode
+------ label indicates current network mode
+--- RingerMode tile: extended to support detail view and quick mode
+--- StayAwake tile: extended to support detail view and quick mode
+--- Do not disturb tile: extended to support quick mode
+--- Hint: use "Tile specific settings" category within QS management to configure new behavior of tiles above
+--- HotSpot tile: open tether settings on long-press
+- Fixed Now on tap (Search) action not working when navbar disabled
+- Updated Chinese (Traditional) translation (thanks to npes87184)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Small fixes in Dutch translations (thanks to Gijs Timmers)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Russian translations (thanks to gaich)
+- Updated French translations (thanks to ch-vox)
+
 Changelog 6.0.3 - 20/12/2015
 --------------------------------------
 - Fixed GB settings not sticking on some devices
@@ -975,7 +1018,7 @@ Changelog 3.1.6 - 13/06/2014
 --------------------------------------
 - Statusbar brightness control revised (thanks to jacknicholson)
 --- Prevent brightness changes after notifications panel has been opened
---- Don't adjust brightness for swipes <45° from vertical.
+--- Don't adjust brightness for swipes <45ï¿½ from vertical.
 - AppPicker preference: added support for choosing custom icons
 --- long-press on preference icon triggers custom icon pick
 --- single-press preserved (shows list of predefined icons)

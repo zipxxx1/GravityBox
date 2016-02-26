@@ -59,7 +59,7 @@ public class QuietHours {
     public Mode mode;
     public boolean interactive;
     Set<String> weekDays;
-    public boolean disableHapticFeedback;
+    public boolean muteSystemVibe;
 
     public QuietHours(SharedPreferences prefs) {
         uncLocked = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_LOCKED, false);
@@ -77,7 +77,7 @@ public class QuietHours {
         interactive = prefs.getBoolean(QuietHoursActivity.PREF_KEY_QH_INTERACTIVE, false);
         weekDays = prefs.getStringSet(QuietHoursActivity.PREF_KEY_QH_WEEKDAYS,
                 new HashSet<String>(Arrays.asList("2","3","4","5","6")));
-        disableHapticFeedback = prefs.getBoolean(QuietHoursActivity.PREF_KEY_DISABLE_HAPTIC_FEEDBACK, false);
+        muteSystemVibe = prefs.getBoolean(QuietHoursActivity.PREF_KEY_MUTE_SYSTEM_VIBE, false);
     }
 
     public boolean quietHoursActive(LedSettings ls, Notification n, boolean userPresent) {
@@ -189,7 +189,7 @@ public class QuietHours {
         try {
             // Get the mActions member of the given RemoteViews object.
             @SuppressWarnings("unchecked")
-            ArrayList<Parcelable> actions = (ArrayList<Parcelable>) 
+            List<Parcelable> actions = (List<Parcelable>) 
                 XposedHelpers.getObjectField(views, "mActions");
             if (actions == null) return texts;
 

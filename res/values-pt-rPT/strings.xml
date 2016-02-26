@@ -466,12 +466,6 @@
     <string name="unicode_stripping_non_encodable">Remover caracteres não encriptáveis</string>
     <string name="unicode_stripping_all">Remover todos os caracteres unicode</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Modo do painel Modo de Rede</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(4G)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(4G)</string>
-    <string name="nm_tile_mode3">2G/3G/(4G)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Permitir todas as orientações</string>
 
@@ -644,9 +638,6 @@
     <string name="pref_about_gplus_title">Comunidade Google+</string>
     <string name="pref_about_gplus_summary">Carregue para visitar a comunidade GravityBox no Google+</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Permitir modo de rede 4G (LTE)</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Para ativar ações relacionadas com a barra de navegação, é necessário 
         ignorar predefinições de sistema no menu de ajustes da mesma</string>
@@ -672,7 +663,6 @@
     <string name="pref_volume_panel_timeout_title">Temporização do painel de volume</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Modo do painel Modo de Toque</string>
     <string name="ringer_mode_silent">Silêncio</string>
     <string name="ringer_mode_vibrate">Vibrar</string>
     <string name="ringer_mode_sound">Tocar</string>
@@ -755,9 +745,6 @@
     <string name="pref_cat_signal_cluster_title">Definições do agregador de sinal</string>
     <string name="pref_signal_cluster_data_activity_title">Ativar atividade de dados</string>
     <string name="pref_signal_cluster_data_activity_summary">Permite exibir a atividade de dados nos indicadores de dados moóvel e Wi-Fi (necessário reiniciar)</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Utilizar modos de rede CDMA</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Comutar rotação automática</string>
@@ -1051,7 +1038,6 @@
     <string name="pref_quick_pulldown_size_title">Àrea de acesso rápido</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Modo do painel Manter ligado</string>
     <string name="stay_awake_15s">15s</string>
     <string name="stay_awake_30s">30s</string>
     <string name="stay_awake_1m">1m</string>
@@ -1458,11 +1444,6 @@
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">Ocultar etiquetas dos cartões SIM</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Necessário reiniciar</string>
-
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">Modo 2G+3G</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferêncial (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Automático (2G/3G)</string>
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Ambiente de trabalho expandido no Menu Desligar</string>

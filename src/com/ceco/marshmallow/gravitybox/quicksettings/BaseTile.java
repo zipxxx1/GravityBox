@@ -121,6 +121,11 @@ public abstract class BaseTile implements QsEventListener {
     }
 
     @Override
+    public boolean supportsDualTargets() {
+        return mDualMode;
+    }
+
+    @Override
     public void handleClick() {
         if (mHideOnChange && supportsHideOnChange()) {
             collapsePanels();
@@ -150,6 +155,11 @@ public abstract class BaseTile implements QsEventListener {
     @Override
     public boolean handleSecondaryClick() {
         return false;
+    }
+
+    @Override
+    public Object getDetailAdapter() {
+        return null;
     }
 
     @Override
@@ -302,6 +312,24 @@ public abstract class BaseTile implements QsEventListener {
             XposedHelpers.callMethod(mHost, "collapsePanels");
         } catch (Throwable t) {
             log("Error in collapsePanels: ");
+            XposedBridge.log(t);
+        }
+    }
+
+    public void showDetail(boolean show) {
+        try {
+            XposedHelpers.callMethod(mTile, "showDetail", show);
+        } catch (Throwable t) {
+            log("Error in showDetail: ");
+            XposedBridge.log(t);
+        }
+    }
+
+    public void fireToggleStateChanged(boolean state) {
+        try {
+            XposedHelpers.callMethod(mTile, "fireToggleStateChanged", state);
+        } catch (Throwable t) {
+            log("Error in fireToggleStateChanged: ");
             XposedBridge.log(t);
         }
     }

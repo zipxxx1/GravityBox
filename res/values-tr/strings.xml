@@ -449,12 +449,6 @@
     <string name="unicode_stripping_non_encodable">Çevrilmeyen karakterleri çıkar</string>
     <string name="unicode_stripping_all">Tüm unicode karakterleri çıkar</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Ağ modları</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Tüm yönlere izin ver</string>
 
@@ -620,9 +614,6 @@
     <string name="pref_about_gplus_title">Google+ topluluğu</string>
     <string name="pref_about_gplus_summary">GravityBox Google+ topluluğunu ziyaret etmek için dokunun</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">LTE ağ moduna izin ver</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">In order to enable actions support for navigation bar, it is necessary 
         to override system defaults in Navigation bar tweaks menu</string>
@@ -648,7 +639,6 @@
     <string name="pref_volume_panel_timeout_title">Ses paneli zaman aşımı</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Zil sesi modu karesi modu</string>
     <string name="ringer_mode_silent">Sessiz</string>
     <string name="ringer_mode_vibrate">Titreşim</string>
     <string name="ringer_mode_sound">Ses</string>
@@ -735,9 +725,6 @@
     <string name="pref_cat_signal_cluster_title">Sinyal kümesi ayarları</string>
     <string name="pref_signal_cluster_data_activity_title">Veri aktivitesini aç</string>
     <string name="pref_signal_cluster_data_activity_summary">Indicates data activity on mobile and WiFi icons (requires reboot)</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">CDMA ağ modlarını kullan</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Oto. Döndürme</string>
@@ -1028,7 +1015,6 @@
     <string name="pref_quick_pulldown_size_title">Quick pulldown size</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Uyanık kal karesi modu</string>
     <string name="stay_awake_15s">15sn</string>
     <string name="stay_awake_30s">30sn</string>
     <string name="stay_awake_1m">1dk</string>

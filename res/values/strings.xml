@@ -487,12 +487,6 @@
     <string name="unicode_stripping_non_encodable">Strip non-encodable characters</string>
     <string name="unicode_stripping_all">Strip all unicode characters</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Network mode tile mode</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Allow all rotations</string>
 
@@ -665,9 +659,6 @@
     <string name="pref_about_gplus_title">Google+ community</string>
     <string name="pref_about_gplus_summary">Touch to visit GravityBox Google+ community</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Allow LTE network mode</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">In order to enable actions support for navigation bar, it is necessary 
         to override system defaults in Navigation bar tweaks menu</string>
@@ -693,7 +684,6 @@
     <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Ringer mode tile mode</string>
     <string name="ringer_mode_silent">Priority</string>
     <string name="ringer_mode_vibrate">Vibrate</string>
     <string name="ringer_mode_sound">Sound</string>
@@ -781,9 +771,6 @@
     <string name="pref_cat_signal_cluster_title">Signal cluster settings</string>
     <string name="pref_signal_cluster_data_activity_title">Enable data activity</string>
     <string name="pref_signal_cluster_data_activity_summary">Indicates data activity on mobile and WiFi icons (requires reboot)</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Use CDMA network modes</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Toggle auto rotation</string>
@@ -1077,7 +1064,6 @@
     <string name="pref_quick_pulldown_size_title">Quick pulldown size</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Stay awake tile mode</string>
     <string name="stay_awake_15s">15s</string>
     <string name="stay_awake_30s">30s</string>
     <string name="stay_awake_1m">1m</string>
@@ -1385,7 +1371,9 @@
     <string name="pref_headset_action_unplug_title">On headset unplugged</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Mute vibrations</string>
+    <string name="pref_lc_qh_mute_vibe_title">Mute notification vibrations</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Turns off notification vibrations on this device and
+        any paired Android Wear device</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interactive mode</string>
@@ -1494,11 +1482,6 @@
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">Hide SIM labels</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Requires reboot</string>
-
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G mode</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA Preferred (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA Auto (2G/3G)</string>
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Expanded desktop in power menu</string>
@@ -1724,8 +1707,12 @@
     <string name="pref_lc_sound_vibrate_summary">Prevents notifications having vibrations turned off from
         being forced to vibrate during vibrate-only ringer mode</string>
 
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Disable haptic feedback</string>
+    <!-- UNC: QuietHours: mute system level vibrations -->
+    <string name="pref_lc_qh_mute_system_vibe_title">Mute device vibrations</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Turns off ALL vibrations at system level,
+        including notification vibrations on THIS device. Notifications on paired Android Wear device can
+        still vibrate in case notification vibrations are enabled.
+    </string>
 
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Clear visible only</string>
@@ -1804,5 +1791,69 @@
     <string name="pref_power_camera_vibrate_pattern_summary">Defines vibration pattern in form of comma separated list of 
         off/on duration pairs in milliseconds for camera launched from power key.
         Leave empty for default. Set to 0 to disable vibration.</string>
+
+    <!-- QS: common quick mode option -->
+    <string name="pref_tile_quick_mode_title">Enable quick mode</string>
+    <string name="pref_tile_enabled_modes_title">Enabled modes</string>
+
+    <!-- DND tile settings -->
+    <string name="pref_cat_qs_dnd_tile_title">Do not disturb tile settings</string>
+    <string name="pref_dnd_tile_quick_mode_summary">Allows cycling through chosen do not diturb modes on tile single-press</string>
+    <string name="pref_dnd_tile_enabled_modes_summary">Sets which do not disturb modes to cycle through</string>
+    <string name="dnd_tile_em_priority">Priority only</string>
+    <string name="dnd_tile_em_alarms">Alarms only</string>
+    <string name="dnd_tile_em_silence">Total silence</string>
+    <string name="pref_dnd_tile_duration_mode_title">Predefined duration</string>
+    <string name="dnd_tile_dm_manual">Until manually turned off</string>
+    <string name="dnd_tile_dm_alarm">Until next alarm</string>
+    <string name="dnd_tile_dm_custom">Custom</string>
+    <string name="pref_dnd_tile_duration_title">Set custom duration</string>
+
+    <!-- Location tile (Slimkat) settings -->
+    <string name="pref_cat_qs_location_tile_title">Location tile (SlimKat) settings</string>
+    <string name="pref_location_tile_quick_mode_summary">Allows cycling through location modes on tile single-press</string>
+
+    <!-- Cellular network modes -->
+    <string name="network_mode_0">GSM/WCDMA preferred (3G/2G)</string>
+    <string name="network_mode_1">GSM only (2G)</string>
+    <string name="network_mode_2">WCDMA only (3G)</string>
+    <string name="network_mode_3">GSM/WCDMA auto (2G/3G)</string>
+    <string name="network_mode_4">CDMA/EvDo auto (2G/3G)</string>
+    <string name="network_mode_5">CDMA only (2G)</string>
+    <string name="network_mode_6">EvDo only (3G)</string>
+    <string name="network_mode_7">Global (2G/3G)</string>
+    <string name="network_mode_8">LTE CDMA (4G/2G/3G)</string>
+    <string name="network_mode_9">LTE GSM (4G/2G/3G)</string>
+    <string name="network_mode_10">LTE Global (4G/2G/3G)</string>
+    <string name="network_mode_11">LTE only (4G)</string>
+    <string name="network_mode_12">LTE/WCDMA (4G/3G)</string>
+    <string name="network_mode_13">TD-SCDMA only (3G)</string>
+    <string name="network_mode_14">TD-SCDMA/WCDMA (3G)</string>
+    <string name="network_mode_15">TD-SCDMA/LTE (4G/3G)</string>
+    <string name="network_mode_16">TD-SCDMA/GSM (2G/3G)</string>
+    <string name="network_mode_17">TD-SCDMA/LTE/GSM (4G/2G/3G)</string>
+    <string name="network_mode_18">TD-SCDMA/WCDMA/GSM (2G/3G)</string>
+    <string name="network_mode_19">TD-SCDMA/LTE/WCDMA (4G/3G)</string>
+    <string name="network_mode_20">TD-SCDMA/LTE/GSM/WCDMA (4G/2G/3G)</string>
+    <string name="network_mode_21">TD-SCDMA Global (2G/3G)</string>
+    <string name="network_mode_22">TD-SCDMA LTE Global (4G/2G/3G)</string>
+    <string name="network_mode_unknown">Unknown</string>
+
+    <!-- Network mode tile settings -->
+    <string name="pref_nm_tile_enabled_modes_summary">Defines which network modes tile should support</string>
+    <string name="pref_nm_tile_quick_mode_summary">Allows cycling through selected network modes on tile single-press</string>
+
+    <!-- Ringer mode tile settings -->
+    <string name="pref_cat_qs_rm_tile_title">Ringer mode tile settings</string>
+    <string name="pref_rm_tile_enabled_modes_summary">Defines which ringer modes tile should support</string>
+    <string name="pref_rm_tile_quick_mode_summary">Allows cycling through selected ringer modes on tile single-press</string>
+
+    <!-- Stay awake tile settings -->
+    <string name="pref_cat_qs_sa_tile_title">Stay awake tile settings</string>
+    <string name="pref_sa_tile_enabled_modes_summary">Defines which screen timeouts tile should support</string>
+    <string name="pref_sa_tile_quick_mode_summary">Allows cycling through selected screen timeouts on tile single-press</string>
+
+    <!-- Lockscreen: Smart unlock policy -->
+    <string name="pref_lockscreen_smart_unlock_policy_title">Smart unlock policy</string>
 
 </resources>

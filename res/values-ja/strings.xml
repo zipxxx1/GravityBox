@@ -399,11 +399,6 @@
     <string name="unicode_stripping_leave_intact">そのままにする</string>
     <string name="unicode_stripping_non_encodable">エンコードできない文字を変換</string>
     <string name="unicode_stripping_all">全てのUnicode文字を変換</string>
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">ネットワークモードのタイル</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">画面の向きの自由化</string>
     <!-- QuickSettings: SIM Slot for network mode tile -->
@@ -546,8 +541,6 @@
     <!-- Google Plus -->
     <string name="pref_about_gplus_title">Google+コミュニティ</string>
     <string name="pref_about_gplus_summary">タップでGravityBoxのGoogle+コミュニティを開きます。</string>
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">LTEモードを使用</string>
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">ナビバーのアクションを有効化するには
         ナビバー設定でシステムの初期値を上書きしないといけません。</string>
@@ -567,7 +560,6 @@
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">音量パネルを非表示にするまでの時間</string>
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">着信音モードタイル</string>
     <string name="ringer_mode_silent">サイレント</string>
     <string name="ringer_mode_vibrate">マナーモード</string>
     <string name="ringer_mode_sound">通常</string>
@@ -640,8 +632,6 @@
     <string name="pref_cat_signal_cluster_title">電波アイコン設定</string>
     <string name="pref_signal_cluster_data_activity_title">通信アイコンの表示</string>
     <string name="pref_signal_cluster_data_activity_summary">データ通信とWi-Fiアイコンに通信アイコンを表示します。(要再起動)</string>
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">CDMA方式を使用</string>
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">自動回転トグル</string>
     <string name="hwkey_action_auto_rotation_enabled">自動回転オン</string>
@@ -883,7 +873,6 @@
     <!-- Quick pull down size -->
     <string name="pref_quick_pulldown_size_title">クイックプルダウンのサイズ</string>
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">常時点灯タイルのモード</string>
     <string name="stay_awake_15s">15秒</string>
     <string name="stay_awake_30s">30秒</string>
     <string name="stay_awake_1m">1分</string>
@@ -1220,10 +1209,6 @@
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">SIMラベルを隠す</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">変更後は再起動してください。</string>
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G モード</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA 優先 (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA 自動 (2G/3G)</string>
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">電源メニューの拡張デスクトップ</string>
     <string name="pref_powermenu_expanded_desktop_summary">まず拡張デスクトップを無効に出来る他の方法があるか確認してください!!!</string>

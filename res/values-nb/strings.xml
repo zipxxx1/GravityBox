@@ -472,12 +472,6 @@
     <string name="pref_cat_phone_telephony_title">Telephony</string>
     <string name="pref_cat_phone_mobile_data_title">Mobile data</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Network mode tile mode</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Allow all rotations</string>
 
@@ -650,9 +644,6 @@
     <string name="pref_about_gplus_title">Google+ community</string>
     <string name="pref_about_gplus_summary">Touch to visit GravityBox Google+ community</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Allow LTE network mode</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">In order to enable actions support for navigation bar, it is necessary 
         to override system defaults in Navigation bar tweaks menu</string>
@@ -678,7 +669,6 @@
     <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Ringer mode tile mode</string>
     <string name="ringer_mode_silent">Stille</string>
     <string name="ringer_mode_vibrate">Vibrasjon</string>
     <string name="ringer_mode_sound">Lys</string>
@@ -765,9 +755,6 @@
     <string name="pref_cat_signal_cluster_title">Signal cluster settings</string>
     <string name="pref_signal_cluster_data_activity_title">Enable data activity</string>
     <string name="pref_signal_cluster_data_activity_summary">Indicates data activity on mobile and WiFi icons (requires reboot)</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Use CDMA network modes</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Toggle auto rotation</string>
@@ -1061,7 +1048,6 @@
     <string name="pref_quick_pulldown_size_title">Quick pulldown size</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Stay awake tile mode</string>
     <string name="stay_awake_15s">15s</string>
     <string name="stay_awake_30s">30s</string>
     <string name="stay_awake_1m">1m</string>

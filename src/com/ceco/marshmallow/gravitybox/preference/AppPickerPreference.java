@@ -223,6 +223,7 @@ public class AppPickerPreference extends DialogPreference
             list.add(item);
         }
         sIconPickerAdapter = new IconListAdapter(mContext, list);
+        sIconPickerAdapter.setAutoTintIcons(true);
         icons.recycle();
     }
 

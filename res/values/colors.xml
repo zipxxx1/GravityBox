@@ -34,4 +34,8 @@
     <color name="navbar_key_color">#e8ffffff</color>
     <color name="navbar_key_glow_color">#33ffffff</color>
 
+    <!-- QS DetailListAdapter -->
+    <color name="qs_subhead">#99FFFFFF</color>
+    <color name="qs_text">#FFFFFFFF</color>
+
 </resources>

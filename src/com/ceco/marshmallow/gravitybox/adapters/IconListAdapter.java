@@ -21,6 +21,10 @@ import java.util.List;
 import com.ceco.marshmallow.gravitybox.adapters.BaseListAdapterFilter.IBaseListAdapterFilterable;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +37,7 @@ public class IconListAdapter extends ArrayAdapter<IIconListAdapterItem>
     private List<IIconListAdapterItem> mData = null;
     private List<IIconListAdapterItem> mFilteredData = null;
     private android.widget.Filter mFilter;
+    private boolean mAutoTintIcons;
 
     public IconListAdapter(Context context, List<IIconListAdapterItem> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
@@ -68,7 +73,8 @@ public class IconListAdapter extends ArrayAdapter<IIconListAdapterItem>
 
         holder.text.setText(item.getText());
         holder.text.setCompoundDrawablesWithIntrinsicBounds(
-                item.getIconLeft(), null, item.getIconRight(), null);
+                getTintedDrawable(item.getIconLeft()), null,
+                getTintedDrawable(item.getIconRight()), null);
 
         return row;
     }
@@ -100,5 +106,24 @@ public class IconListAdapter extends ArrayAdapter<IIconListAdapterItem>
             IIconListAdapterItem item = mFilteredData.get(i);
             add(item);
         }
+    }
+
+    public void setAutoTintIcons(boolean autoTint) {
+        mAutoTintIcons = autoTint;
+    }
+
+    private Drawable getTintedDrawable(Drawable icon) {
+        if (icon == null || !mAutoTintIcons) return icon;
+
+        TypedValue val = new TypedValue();
+        int[] attribute = new int[] { android.R.attr.colorAccent };
+        TypedArray array = mContext.obtainStyledAttributes(val.resourceId, attribute);
+        int color = array.getColor(0, Color.WHITE);
+        array.recycle();
+
+        Drawable d = icon.mutate();
+        d.setTint(color);
+
+        return d;
     }
 }

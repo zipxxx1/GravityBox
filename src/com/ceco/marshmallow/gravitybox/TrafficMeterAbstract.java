@@ -22,12 +22,18 @@ import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager;
 import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager.ColorInfo;
 import com.ceco.marshmallow.gravitybox.managers.StatusBarIconManager.IconManagerListener;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.TrafficStats;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.TypedValue;
@@ -64,6 +70,7 @@ public abstract class TrafficMeterAbstract extends TextView
     protected boolean mShowOnlyForMobileData;
     protected boolean mIsTrackingProgress;
     protected boolean mAllowInLockscreen;
+    private Boolean mCanReadFromFile;
 
     protected static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -312,4 +319,66 @@ public abstract class TrafficMeterAbstract extends TextView
     protected abstract void onPreferenceChanged(Intent intent);
     protected abstract void startTrafficUpdates();
     protected abstract void stopTrafficUpdates();
+
+    protected boolean canReadFromFile() {
+        if (mCanReadFromFile == null) {
+            File f = new File("/proc/net/dev");
+            mCanReadFromFile = (f.exists() && f.canRead());
+        }
+        return mCanReadFromFile;
+    }
+
+    protected long[] getTotalRxTxBytes() {
+        return (canReadFromFile() ? getTotalRxTxBytesFromFile() :
+            getTotalRxTxBytesFromStats());
+    }
+
+    private static boolean isCountedInterface(String iface) {
+        return (iface != null &&
+                !iface.equals("ifname") &&
+                !iface.equals("lo") &&
+                !iface.startsWith("tun"));
+    }
+
+    private static long tryParseLong(String obj) {
+        try {
+            return Long.parseLong(obj);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private static long[] getTotalRxTxBytesFromFile() {
+        String line;
+        String[] segs;
+        BufferedReader in = null;
+        long[] bytes = new long[] { 0, 0 };
+        try {
+            FileReader fr = new FileReader("/proc/net/xt_qtaguid/iface_stat_fmt");
+            in = new BufferedReader(fr);
+            while ((line = in.readLine()) != null) {
+                segs = line.split(" ");
+                if (segs.length < 4)
+                    throw new UnsupportedOperationException("Unsupported length of net params");
+
+                if (isCountedInterface(segs[0])) {
+                    if (DEBUG) log("iface:"+segs[0]+"; RX="+segs[1]+"; TX="+segs[3]);
+                    bytes[0] += tryParseLong(segs[1]);
+                    bytes[1] += tryParseLong(segs[3]);
+                }
+            }
+        } catch (Throwable t) {
+            if (DEBUG) XposedBridge.log(t);
+            // fallback to TrafficStats
+            bytes = getTotalRxTxBytesFromStats();
+        } finally {
+            if (in != null) try { in.close(); } catch(IOException e) {};
+        }
+        return bytes;
+    }
+
+    private static long[] getTotalRxTxBytesFromStats() {
+        return new long[] { TrafficStats.getTotalRxBytes(),
+                TrafficStats.getTotalTxBytes() };
+    }
 }

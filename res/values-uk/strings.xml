@@ -34,8 +34,8 @@
 
     <string name="reboot_required">Зміни набудуть чинності після перезавантаження</string>
 
-    <string name="poweroff_advanced_title">Розширене меню перезавантаження</string>
-    <string name="poweroff_advanced_summary">Включає розширене меню перезавантаження з можливістю перезавантаження у режим відновлення</string>
+    <string name="poweroff_advanced_title">Розширене меню вимикання</string>
+    <string name="poweroff_advanced_summary">Включає розширене меню вимикання з можливістю перезавантаження у режим відновлення</string>
     <string name="poweroff_recovery">Відновлення</string>
     <string name="poweroff_bootloader">Завантажувач</string>
 
@@ -49,7 +49,7 @@
 
     <string name="important">Важливо</string>
 
-    <string name="caller_fullscreen_photo_title">Фото того, хто телефонує на весь екран</string>
+    <string name="caller_fullscreen_photo_title">Фото абонента на весь екран</string>
 
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Синхронізація увімкнена</string>
@@ -77,20 +77,20 @@
     <string name="quick_settings_smart_radio_off">Роз.радіо вимк</string>
     <string name="quick_settings_lock_screen_on">Екр.блокування увімк</string>
     <string name="quick_settings_lock_screen_off">Екр.блокування вимк</string>
-    <string name="quick_settings_location_on">Позиціонування</string>
-    <string name="quick_settings_location_off">Позиціонування вимк</string>
+    <string name="quick_settings_location_on">Позиціювання</string>
+    <string name="quick_settings_location_off">Позиціювання вимк</string>
     <string name="quick_settings_quiet_hours_off">Тиха година вимк</string>
     <string name="quick_settings_quiet_hours_on">Тиха година увімк</string>
     <string name="quick_settings_quiet_hours_auto">Тиха година авто</string>
 
     <!--  QuickSettings settings -->
-    <string name="quick_settings_title">Плитки швидких налаштувань панелі статусу</string>
+    <string name="quick_settings_title">Плитки швидких налаштувань</string>
     <string name="quick_settings_summary">Дозволяє вмикати/вимикати плитки в панелі статусу</string>
     <string name="qs_tile_airplane_mode">Режим польоту</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
-    <string name="qs_tile_gps">Позиціонування</string>
-    <string name="qs_tile_gps_slimkat">Позиціонування (в стилі SlimKat)</string>
+    <string name="qs_tile_gps">Позиціювання</string>
+    <string name="qs_tile_gps_slimkat">Позиціювання (в стилі SlimKat)</string>
     <string name="qs_tile_gps_alt">GPS (CM стиль)</string>
     <string name="qs_tile_mobile_data">Мобільні дані</string>
     <string name="qs_tile_network_mode">Режим мережі</string>
@@ -178,7 +178,7 @@
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">Мінімальний рівень яскравості</string>
-    <string name="pref_brightness_min_summary">Дозволяє встановити мінімальний рівень яскравості. Застосовується до ручного налаштуванні яскравості. (необхідне перезавантаження)</string>
+    <string name="pref_brightness_min_summary">Дозволяє встановити мінімальний рівень яскравості. Застосовується до ручного налаштуванні яскравості.\n(необхідне перезавантаження)</string>
 
     <!--  Autobrightness levels -->
     <string name="pref_ab_title">Рівні авто-яскравості</string>
@@ -203,7 +203,7 @@
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Включити кнопку меню</string>
-    <string name="pref_lockscreen_menu_key_summary">Дозволяє розблокувати пристрій кнопкою «Меню» (необхідне перезавантаження)</string>
+    <string name="pref_lockscreen_menu_key_summary">Дозволяє розблокувати пристрій кнопкою «Меню»\n(необхідне перезавантаження)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Годинник в центрі</string>
@@ -214,11 +214,11 @@
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">Більше рівнів гучності для музики</string>
-    <string name="pref_music_volume_steps_summary">Додає більше кроків для зміни гучності музики (необхідне перезавантаження)</string>
+    <string name="pref_music_volume_steps_summary">Додає більше кроків для зміни гучності музики\n(необхідне перезавантаження)</string>
 
     <!-- Safe headset media volume -->
     <string name="pref_safe_media_volume_title">Безпечна гучність у навушниках</string>
-    <string name="pref_safe_media_volume_summary">Дозволяє включити або виключити функцію безпечно гучності в навушниках (необхідне перезавантаження)</string>
+    <string name="pref_safe_media_volume_summary">Дозволяє включити або виключити функцію безпечно гучності в навушниках\n(необхідне перезавантаження)</string>
 
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">Дії кнопок навігації</string>
@@ -246,13 +246,13 @@
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">Переворот під час дзвінку</string>
-    <string name="pref_phone_flip_summary">Дозволяє задати дію при перевертанні телефону під час вхідного дзвінку</string>
+    <string name="pref_phone_flip_summary">Дозволяє задати дію при перевертанні телефону під час вхідного дзвінку\n</string>
     <string name="phone_flip_action_none">Нічого не робити</string>
     <string name="phone_flip_action_mute">Приглушити звук</string>
     <string name="phone_flip_action_dismiss">Скинути дзвінок</string>
 
     <!-- Soft reboot -->
-    <string name="reboot_soft">Програмне перезавантаження</string>
+    <string name="reboot_soft">М\'яке перезавантаження</string>
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Плиток в рядку</string>
@@ -262,7 +262,7 @@
     <string name="pref_statusbar_clock_dow_title">Показувати день тижня</string>
 
     <!-- Link ringtone & notifications volumes -->
-    <string name="pref_link_volumes_title">Зв\'язати гучність виклику та повідомлень</string>
+    <string name="pref_link_volumes_title">Зв\'язати виклик та повідомлення</string>
     <string name="pref_link_volumes_summary">Коли вимкнено, гучність повідомлень і виклику можна задавати незалежно</string>
 
     <!-- Auto-switch QuickSettings -->
@@ -274,7 +274,7 @@
     <string name="pref_quick_pulldown_summary">За край панелі статусу можна витягнути швидкі налаштування</string>
     <string name="quick_pulldown_off">Вимкнено</string>
     <string name="quick_pulldown_right">Праворуч</string>
-    <string name="quick_pulldown_left">Зліва</string>
+    <string name="quick_pulldown_left">Ліворуч</string>
     <string name="quick_pulldown_both">З обох</string>
 
     <!-- Statusbar colors category -->
@@ -336,7 +336,7 @@
     <string name="button_backlight_mode_default">Стандартний</string>
     <string name="button_backlight_mode_disable">Вимкнути підсвічування</string>
     <string name="button_backlight_mode_always_on">Включати завжди, коли включений екран</string>
-    <string name="pref_button_backlight_notifications_title">Сповіщення підсвічуванням клавіш</string>
+    <string name="pref_button_backlight_notifications_title">Сповіщення на клавішах</string>
     <string name="pref_button_backlight_notifications_summary">ЕКСПЕРИМЕНТАЛЬНО! Блимати підсвічуванням клавіш при сповіщеннях. Використовувати тільки у разі відсутності світлодіодного індикатора. Може призвести до підсиленого споживання батареї.</string>
 
     <!-- Disable navigation keys for pie -->
@@ -360,7 +360,7 @@
 
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Пошук</string>
-    <string name="app_picker_none">(Ні)</string>
+    <string name="app_picker_none">(Немає)</string>
 
     <!-- QuickApp tile settings -->
     <string name="qs_tile_quickapp">Швидкий запуск</string>
@@ -377,7 +377,7 @@
     <string name="qs_tile_gps_locked">GPS заблок.</string>
 
     <!-- Pie control: always show menu button -->
-    <string name="pie_control_menu_title">Завжди показувати кнопку «Меню»</string>
+    <string name="pie_control_menu_title">Показувати кнопку «Меню»</string>
 
     <!-- Ringer mode tile (for non-MTK) -->
     <string name="qs_tile_ringer_mode">Режим дзвінка</string>
@@ -399,7 +399,7 @@
 
     <!-- Screen dim level -->
     <string name="pref_screen_dim_level_title">Рівень загасання підсвічування</string>
-    <string name="pref_screen_dim_level_summary">Яскравість для приглушеного підсвічування - коли екран майже вимкнувся (необхідне перезавантаження)</string>
+    <string name="pref_screen_dim_level_summary">Яскравість для приглушеного підсвічування - коли екран майже вимкнувся\n(необхідне перезавантаження)</string>
 
     <!-- Device type -->
     <string name="device_phone">Телефон</string>
@@ -407,7 +407,7 @@
 
     <!-- Brightness preference category -->
     <string name="pref_cat_brightness_title">Налаштування яскравості</string>
-    <string name="pref_brightness_master_switch_summary">Включити тільки у випадку, якщо пристрій використовує стандартний механізм Android для регулювання яскравості. Залиште вимкненим, якщо є проблеми, якось пов\'язані з яскравістю. (необхідне перезавантаження)</string>
+    <string name="pref_brightness_master_switch_summary">Включити тільки у випадку, якщо пристрій використовує стандартний механізм Android для регулювання яскравості. Залиште вимкненим, якщо є проблеми, якось пов\'язані з яскравістю.\n(необхідне перезавантаження)</string>
 
     <!-- HW Key Action: Recent apps -->
     <string name="hwkey_action_recent_apps">Показати нещодавні додатки</string>
@@ -422,7 +422,7 @@
     <!-- Notification panel clock -->
     <string name="pref_cat_statusbar_clock_title">Годинник в панелі стану</string>
     <string name="pref_cat_notif_panel_clock_title">Годинник в панелі сповіщень</string>
-    <string name="pref_clock_link_title">Додаток-годинник для панелі повідомлень</string>
+    <string name="pref_clock_link_title">Додаток-годинник</string>
     <string name="pref_clock_link_summary">Пов\'язує годинник на панелі стану з обраним додатком замість налаштувань дати та часу</string>
     <string name="pref_clock_longpress_link_title">Утримання на годиннику</string>
 
@@ -440,7 +440,7 @@
     <string name="expanded_desktop_navbar">Приховати панель навігації</string>
     <string name="expanded_desktop_immersive_statusbar">Занурення панелі стану</string>
     <string name="expanded_desktop_immersive_navbar">Занурення панелі навігації</string>
-    <string name="expanded_desktop_both">Напів занурення</string>
+    <string name="expanded_desktop_both">Напівзанурення</string>
     <string name="expanded_desktop_immersive">Занурення</string>
     <string name="action_expanded_desktop_title">Розширений стіл</string>
     <string name="action_expanded_desktop_on">Розширений стіл УВІМКНУТО</string>
@@ -459,7 +459,7 @@
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">Налаштування панелі навігації</string>
     <string name="pref_cat_navigation_bar_summary">Містить різні налаштування панелі навігації</string>
-    <string name="pref_navbar_override_summary">Дозволяє включити всі налаштування панелі навігації (необхідне перезавантаження)</string>
+    <string name="pref_navbar_override_summary">Дозволяє включити всі налаштування панелі навігації\n(необхідне перезавантаження)</string>
     <string name="pref_navbar_enable_title">Включити панель навігації</string>
     <string name="pref_navbar_enable_summary">Необхідне перезавантаження</string>
     <string name="pref_navbar_height_title">Висота панелі навігації</string>
@@ -487,12 +487,6 @@
     <string name="unicode_stripping_non_encodable">Змінювати некодовані символи</string>
     <string name="unicode_stripping_all">Змінювати всі символи Unicode</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Плитка «Режим мережі»</string>
-    <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
-    <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
-    <string name="nm_tile_mode3">2G/3G/(LTE)</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Дозволити всі повороти</string>
 
@@ -509,8 +503,8 @@
     <string name="pie_controls_enabled_expanded_navbar">Коли розширений дисплей без панелі навігації</string>
 
     <!-- Unplug turns on screen -->
-    <string name="pref_unplug_turns_on_screen_title">Увімк. екран при підключенні</string>
-    <string name="pref_unplug_turns_on_screen_summary">Якщо увімкнено, екран буде включаться при під\'єднанні/від\'єднанні USB/зарядки/навушників (необхідне перезавантаження)</string>
+    <string name="pref_unplug_turns_on_screen_title">Вмикати екран при підключенні</string>
+    <string name="pref_unplug_turns_on_screen_summary">Якщо увімкнено, екран буде включаться при під\'єднанні/від\'єднанні USB/зарядки/навушників\n(необхідне перезавантаження)</string>
 
     <!-- Call vibrations -->
     <string name="pref_call_vibrations_title">Вібрація під час дзвінку</string>
@@ -543,7 +537,7 @@
     <string name="pref_cat_data_traffic_title">Монітор трафіку даних</string>
     <string name="pref_data_traffic_position_title">Позиція</string>
     <string name="dt_position_auto">Автоматично (у центрі або праворуч залежно від позиції годинника)</string>
-    <string name="dt_position_left">Зліва</string>
+    <string name="dt_position_left">Ліворуч</string>
     <string name="dt_position_right">Праворуч</string>
     <string name="pref_data_traffic_size_title">Розмір</string>
     <string name="dt_size_normal">Звичайний</string>
@@ -551,8 +545,8 @@
     <string name="dt_size_smallest">Дуже маленький</string>
     <string name="byte_abbr">Б</string>
     <string name="kilobyte_abbr">КБ</string>
-    <string name="megabyte_abbr">Мегабайт</string>
-    <string name="second_abbr">з</string>
+    <string name="megabyte_abbr">МБ</string>
+    <string name="second_abbr">с</string>
 
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
@@ -603,7 +597,7 @@
     <string name="hwkey_action_app_launcher">Показати запуск додатків</string>
 
     <!-- Pie custom key -->
-    <string name="pref_pie_control_custom_key_title">Показати призначену для користувача кнопку</string>
+    <string name="pref_pie_control_custom_key_title">Показати користувацьку кнопку</string>
     <string name="pie_custom_key_off">Вимкнено</string>
     <string name="pie_custom_key_search">Пошук</string>
     <string name="pie_custom_key_app_launcher">Запуск додатків</string>
@@ -618,7 +612,7 @@
     <string name="pref_pie_color_reset_title">Скинути кольори</string>
 
     <!-- Custom unknown caller photo -->
-    <string name="pref_caller_unknown_photo_enable_title">Включити фото невідомого абонента</string>
+    <string name="pref_caller_unknown_photo_enable_title">Фото для невідомого абонента</string>
     <string name="pref_caller_unknown_photo_title">Задати фото для невідомого</string>
     <string name="caller_unknown_photo_result_successful">Фото змінено</string>
     <string name="caller_unkown_photo_result_not_successful">Фото не змінено</string>
@@ -634,7 +628,7 @@
     <string name="pref_cat_navbar_dimen_title">Розміри</string>
 
     <!-- Navigation bar colors -->
-    <string name="pref_navbar_color_enable_title">Включити кольори панелі навігації</string>
+    <string name="pref_navbar_color_enable_title">Включити кольори панелі</string>
     <string name="pref_navbar_color_enable_summary">Може знадобитися перезавантаження</string>
     <string name="pref_navbar_key_color_title">Колір кнопок навігації</string>
     <string name="pref_navbar_key_glow_color_title">Колір тіні кнопок навігації</string>
@@ -665,12 +659,9 @@
     <string name="pref_about_gplus_title">Спільнота Google+</string>
     <string name="pref_about_gplus_summary">Торкніться для переходу до спільноти Google+</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Розширити режим LTE</string>
-
     <!-- HW Keys Navigation Bar warning -->
-    <string name="hwkey_navbar_warning">При включенні підтримки дії для панелі навігації необхідно переписати типові налаштування в меню налаштування панелі навігації</string>
-
+    <string name="hwkey_navbar_warning">При включенні підтримки дії для панелі навігації необхідно переписати типові налаштування 
+в меню налаштування панелі навігації</string>
 
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Ліхтарик на екрані блокування</string>
@@ -678,7 +669,7 @@
     <string name="hwkey_ls_torch_home_longpress">При утриманні «Додому»</string>
 
     <!-- QuickSettings management master switch -->
-    <string name="pref_qs_management_enable_summary">Увімкнення швидких налаштувань (необхідне перезавантаження)</string>
+    <string name="pref_qs_management_enable_summary">Увімкнення швидких налаштувань\n(необхідне перезавантаження)</string>
 
     <!-- AppPickerPreference: shortcut support -->
     <string name="app_picker_applications">Додатки</string>
@@ -693,7 +684,6 @@
     <string name="pref_volume_panel_timeout_title">Затримка панелі гучності</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Налаштування режиму дзвінка</string>
     <string name="ringer_mode_silent">Важливі</string>
     <string name="ringer_mode_vibrate">Вібрація</string>
     <string name="ringer_mode_sound">Звук</string>
@@ -701,15 +691,15 @@
 
     <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">Екран записується</string>
-    <string name="screenrecord_notif_title">Запис екрана</string>
+    <string name="screenrecord_notif_title">Запис екрану</string>
     <string name="screenrecord_notif_stop">Стоп</string>
     <string name="screenrecord_notif_pointer">Вказівник</string>
     <string name="screenrecord_toast_error">Не можливо записати екран</string>
-    <string name="screenrecord_toast_processing">Неможливо почати новий запис, так як триває обробка попередньої</string>
+    <string name="screenrecord_toast_processing">Неможливо почати новий запис, оскільки триває обробка попередньої</string>
     <string name="screenrecord_toast_saved">Запис збережено як %s</string>
     <string name="screenrecord_toast_save_error">Неможливо зберегти запис у вихідний файл</string>
-    <string name="action_screenrecord">Запис екрана</string>
-    <string name="pref_powermenu_screenrecord_title">Запис екрана в меню вимикання</string>
+    <string name="action_screenrecord">Запис екрану</string>
+    <string name="pref_powermenu_screenrecord_title">Запис екрану в меню вимикання</string>
 
     <!-- Show dialpad automatically -->
     <string name="pref_dialer_show_dialpad_title">Показати панель набору</string>
@@ -765,7 +755,7 @@
     <string name="pref_cat_power_other_title">Інше</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">Розшир.на екр.блокування</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">Розширити на екр.блокування</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">Неактивний режим</string>
@@ -779,11 +769,8 @@
 
     <!-- Signal cluster settings -->
     <string name="pref_cat_signal_cluster_title">Налаштування сигналу</string>
-    <string name="pref_signal_cluster_data_activity_title">Увімк активність даних</string>
-    <string name="pref_signal_cluster_data_activity_summary">Показ активності даних в значках мобільного сигналу та Wi-Fi (необхідне перезавантаження)</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Режими мережі CDMA</string>
+    <string name="pref_signal_cluster_data_activity_title">Увімкнути активність даних</string>
+    <string name="pref_signal_cluster_data_activity_summary">Показ активності даних в значках мобільного сигналу та Wi-Fi\n(необхідне перезавантаження)</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Увімкнути авто-поворот</string>
@@ -813,7 +800,7 @@
     <string name="shortcut_wifi_ap">Увімкнення ТД Wi-Fi</string>
 
     <!-- Location mode shortcut -->
-    <string name="shortcut_location_mode">Налаштування позиціонування</string>
+    <string name="shortcut_location_mode">Налаштування позиціювання</string>
     <string name="location_mode_high_accuracy">Висока точність</string>
     <string name="location_mode_battery_saving">Економія батареї</string>
     <string name="location_mode_device_only">Лише пристрій</string>
@@ -859,11 +846,11 @@
     <string name="pref_cat_misc_other_title">Інші налаштування</string>
 
     <!-- Disable fullscreen keyboard -->
-    <string name="pref_ime_fullscreen_disable_title">Вимкнути повноекранну клавіатуру</string>
+    <string name="pref_ime_fullscreen_disable_title">Вимк повноекранну клавіатуру</string>
 
     <!-- Torch auto-off -->
-    <string name="pref_torch_auto_off_title">Автоматичне вимкнення ліхтарика</string>
-    <string name="pref_torch_auto_off_summary">Вимикання ліхтарика через заданий проміжок часу. Встановіть нуль для деактивації функції (не рекомендується)</string>
+    <string name="pref_torch_auto_off_title">Авто-вимкнення ліхтаря</string>
+    <string name="pref_torch_auto_off_summary">Автоматичне вимикання ліхтаря через заданий проміжок часу. Встановіть нуль для деактивації функції (не рекомендується)</string>
 
     <!-- Swap volume keys when the screen is rotated -->
     <string name="pref_vol_swap_keys_title">Поміняти кнопки гучності</string>
@@ -882,8 +869,8 @@
     <!-- Smart Radio -->
     <string name="smart_radio_action_undefined">Не визначено</string>
     <string name="pref_cat_smart_radio_title">Розумне радіо</string>
-    <string name="pref_smart_radio_enable_summary">Автоматичне перемикання радіо-модуля на встановлений користувачем економічний чи звичайний режим, в залежності від передачі мобільних даних та стану з\'єднання Wi-Fi (необхідне перезавантаження)</string>
-
+    <string name="pref_smart_radio_enable_summary">Автоматичне перемикання радіо-модуля на встановлений користувачем економічний чи звичайний режим, 
+        в залежності від передачі мобільних даних та стану з\'єднання Wi-Fi\n(необхідне перезавантаження)</string>
     <string name="pref_smart_radio_normal_mode_title">Звичайний режим мережі</string>
     <string name="pref_smart_radio_power_saving_mode_title">Економний режим мережі</string>
     <string name="pref_smart_radio_screen_off_title">Коли екран вимкнено</string>
@@ -921,7 +908,7 @@
     <string name="pref_pulse_notification_delay_summary">Необхідне перезавантаження</string>
 
     <!-- Power menu: disable on lockscreen -->
-    <string name="pref_powermenu_disable_on_lockscreen_title">Вимк на екрані блокування</string>
+    <string name="pref_powermenu_disable_on_lockscreen_title">Вимкнути на екрані блокування</string>
 
     <!-- Extended force overflow menu button option -->
     <string name="overflow_menu_default">Типово</string>
@@ -939,8 +926,8 @@
 
     <!-- Smart radio: independent delay for screen off power save event -->
     <string name="pref_smart_radio_screen_off_delay_title">Затримка економ. режиму</string>
-    <string name="pref_smart_radio_screen_off_delay_summary">Затримка перемикання в економний режим при вимиканні екрану. Змінює типову затримку зміни режиму, якщо не дорівнює нулю.</string>
-
+    <string name="pref_smart_radio_screen_off_delay_summary">Затримка перемикання в економний режим при вимиканні екрану. 
+        Змінює типову затримку зміни режиму, якщо не дорівнює нулю.</string>
 
     <!-- Backup and restore settings -->
     <string name="pref_settings_backup_title">Резервне копіювання</string>
@@ -974,7 +961,7 @@
     <string name="wsc_trans_required_summary">Ця можливість доступна в розширеній версії та потребує розблокування</string>
 
     <!-- Pie: disable system info -->
-    <string name="pref_pie_sysinfo_disable_title">Вимкнути системну інф.</string>
+    <string name="pref_pie_sysinfo_disable_title">Вимкнути системну інформацію</string>
 
     <!-- Pie: long press delay -->
     <string name="pref_pie_longpress_delay_title">Затримка утримання</string>
@@ -1077,7 +1064,6 @@
     <string name="pref_quick_pulldown_size_title">Розмір зони відтягування</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Режими бадьорості</string>
     <string name="stay_awake_15s">15 с</string>
     <string name="stay_awake_30s">30 с</string>
     <string name="stay_awake_1m">1 хв</string>
@@ -1085,7 +1071,7 @@
     <string name="stay_awake_5m">5 хв</string>
     <string name="stay_awake_10m">10 хв</string>
     <string name="stay_awake_30m">30 хв</string>
-    <string name="stay_awake_on">Бадьор.увімк</string>
+    <string name="stay_awake_on">Постійно</string>
 
     <!-- Screen recording options -->
     <string name="pref_cat_screenrecord_options_title">Запис екрану</string>
@@ -1116,16 +1102,16 @@
     <string name="pref_masterswitch_title">Увімкнути</string>
 
     <!-- Mute volume adjust vibrate -->
-    <string name="pref_volume_adjust_vibrate_mute_title">Приглушити вібро при регулюванні</string>
+    <string name="pref_volume_adjust_vibrate_mute_title">Приглушити вібро</string>
     <string name="pref_volume_adjust_vibrate_mute_summary">Приглушення вібрації при регулювання гучності сповіщень/дзвінків кнопками гучності</string>
 
     <!-- ScreenRecord: use stock binary -->
     <string name="pref_screenrecord_use_stock_title">Стоковий бінарний файл</string>
-    <string name="pref_screenrecord_use_stock_summary">Якщо увімкнуто, для запису екрана буде використано стоковий бінарний фал. Активуйте при проблемах із альтернативним бінарним файлом. Майте на увазі, що стоковий файл не підтримує аудіо та тривалість запису більше 3-х хвилин.</string>
-
+    <string name="pref_screenrecord_use_stock_summary">Якщо увімкнуто, для запису екрана буде використано стоковий бінарний фал. 
+        Активуйте при проблемах з альтернативним бінарним файлом. Майте на увазі, що стоковий файл не підтримує аудіо та тривалість запису більше 3-х хвилин.</string>
 
     <!-- Clock settings master switch -->
-    <string name="pref_sb_clock_masterswitch_summary">Увімкнення налаштувань годинників в панелі стану (необхідне перезавантаження)</string>
+    <string name="pref_sb_clock_masterswitch_summary">Увімкнення налаштувань годинників в панелі стану\n(необхідне перезавантаження)</string>
 
     <!-- Clock: day of week size -->
     <string name="pref_sb_clock_dow_size_title">Розмір дня тижня</string>
@@ -1307,7 +1293,7 @@
 
     <!-- Misc: Force LTR direction -->
     <string name="pref_force_ltr_direction_title">Примусово зліва-на-право</string>
-    <string name="pref_force_ltr_direction_summary">Примусове встановлення написання зліва-на-право для мов з письмом зправа-на-ліво (необхідне перезавантаження)</string>
+    <string name="pref_force_ltr_direction_summary">Примусове встановлення написання зліва-на-право для мов з письмом з права-на-ліво\n(необхідне перезавантаження)</string>
 
     <!-- Ringer mode shortcut -->
     <string name="shortcut_ringer_mode">Встановити режим дзвінку</string>
@@ -1401,7 +1387,7 @@
 
     <!-- Statusbar: notification heads up category -->
     <string name="pref_cat_notif_heads_up_title">Сповіщення режиму зринання</string>
-    <string name="pref_heads_up_master_switch_summary">Активація розширеної функції Зринання. Якщо увімкнуто, будуть доступні параметри для додатків керування сповіщеннями. (необхідне перезавантаження)</string>
+    <string name="pref_heads_up_master_switch_summary">Активація розширеної функції Зринання. Якщо увімкнуто, будуть доступні параметри для додатків керування сповіщеннями.\n(необхідне перезавантаження)</string>
 
     <string name="pref_heads_up_timeout_title">Затримка</string>
     <string name="pref_heads_up_timeout_summary">Час показу вікна сповіщення. Нуль - постійно.</string>
@@ -1447,11 +1433,11 @@
 
     <!-- MTK Advanced Developer Options -->
     <string name="pref_mtk_fix_dev_opts_title">Розширені параметри для розробника</string>
-    <string name="pref_mtk_fix_dev_opts_summary">Розблокування додаткових параметрів розробника (необхідне перезавантаження)</string>
+    <string name="pref_mtk_fix_dev_opts_summary">Розблокування додаткових параметрів розробника\n(необхідне перезавантаження)</string>
 
     <!-- MTK Fix speech settings -->
     <string name="pref_mtk_fix_tts_settings_title">Виправлення голосових налаштувань</string>
-    <string name="pref_mtk_fix_tts_settings_summary">Розблокує голосовий пошук і розпізнавання мови в налаштуваннях «Мова і введення» (необхідне перезавантаження)</string>
+    <string name="pref_mtk_fix_tts_settings_summary">Розблокує голосовий пошук і розпізнавання мови в налаштуваннях «Мова і введення»\n(необхідне перезавантаження)</string>
 
     <!-- ImagePicker -->
     <string name="imgpick_dialog_title">Вибір зображення через</string>
@@ -1495,23 +1481,18 @@
     <string name="pref_signal_cluster_hide_sim_labels_title">Приховати SIM мітки</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Необхідне перезавантаження</string>
 
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">Режим 2G+3G</string>
-    <string name="nmt_2g3g_mode_wcdma">Переважно GSM/WCDMA (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA авто (2G/3G)</string>
-
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Розширений стіл в меню вимкнення</string>
     <string name="pref_powermenu_expanded_desktop_summary">Переконайтеся, що доступний альтернативний метод вимикання розширеного робочого столу!!!</string>
 
     <!-- QuickRecord tile settings -->
-    <string name="pref_cat_quickrecord_tile_title">Налаштування плитки швидкого запису</string>
+    <string name="pref_cat_quickrecord_tile_title">Плитка швидкого запису</string>
     <string name="pref_quickrecord_quality_title">Якість аудіо</string>
     <string name="qr_audio_quality_low">Низька (16 кГц)</string>
     <string name="qr_audio_quality_medium">Середня (22 кГц)</string>
     <string name="qr_audio_quality_high">Висока (44 кГц)</string>
     <string name="pref_quickrecord_autostop_title">Автоматична зупинка запису</string>
-    <string name="pref_quickrecord_autostop_summary">Автоматична зупинка запису через вказаний проміжок часу. Нуль - для вимикання функції.</string>
+    <string name="pref_quickrecord_autostop_summary">Автоматична зупинка запису через вказаний проміжок часу.\nНуль - для вимикання цієї функції.</string>
 
     <!-- Clear notifications shortcut -->
     <string name="shortcut_clear_notifications">Очистити сповіщення</string>
@@ -1538,7 +1519,7 @@
 
     <!-- Navbar: Left handed mode -->
     <string name="pref_navbar_left_handed_title">Режим для лівші</string>
-    <string name="pref_navbar_left_handed_summary">Експеримент! Розміщення вертикальної навігаційної панелі по лівій стороні екрану в ландшафтному режимі (необхідне перезавантаження)</string>
+    <string name="pref_navbar_left_handed_summary">Експеримент! Розміщення вертикальної навігаційної панелі по лівій стороні екрану в ландшафтному режимі\n(необхідне перезавантаження)</string>
 
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">Приховати значок з меню</string>
@@ -1624,7 +1605,7 @@
     <string name="pref_navbar_larger_icons_summary">Необхідне перезавантаження</string>
 
     <!-- Power menu: allow soft reboot -->
-    <string name="pref_reboot_allow_softreboot_title">Дозволити м\'яке перезавантаження</string>
+    <string name="pref_reboot_allow_softreboot_title">М\'яке перезавантаження</string>
     <string name="pref_reboot_allow_softreboot_summary">Майте на увазі, що м\'яке перезавантаження може викликати підвищене споживання батареї чи нестабільність. Краще використовувати звичайне перезавантаження.</string>
 
 
@@ -1645,8 +1626,8 @@
 
 
     <!-- Traffic meter: show in lock screen -->
-    <string name="pref_data_traffic_lockscreen_title">Показувати на екр. блокування</string>
-    <string name="pref_data_traffic_lockscreen_summary">Завжди по центру екр. блокування</string>
+    <string name="pref_data_traffic_lockscreen_title">Показувати на екрані блокування</string>
+    <string name="pref_data_traffic_lockscreen_summary">Завжди по центру екрану блокування</string>
 
     <!-- QS: Hide brightness slider -->
     <string name="pref_qs_hide_brightness_title">Приховати повзунок яскравості</string>
@@ -1660,8 +1641,8 @@
 
     <!-- Lockscreen: direct unlock -->
     <string name="pref_lockscreen_direct_unlock_title">Пряме розблокування</string>
-    <string name="pref_lockscreen_direct_unlock_summary">Показ розблокування одразу при увімкнені екрану</string>
-    <string name="direct_unlock_off">Вимк</string>
+    <string name="pref_lockscreen_direct_unlock_summary">Показ розблокування одразу при вмиканні екрану</string>
+    <string name="direct_unlock_off">Вимкнуто</string>
     <string name="direct_unlock_standard">Стандарт</string>
     <string name="direct_unlock_see_through">Прозоро</string>
 
@@ -1678,7 +1659,7 @@
     <string name="pref_cat_qs_cell_tile_title">Плитка стільника</string>
 
     <!-- Cellular tile: data off icon -->
-    <string name="pref_cell_tile_data_off_icon_title">Значок вимк даних</string>
+    <string name="pref_cell_tile_data_off_icon_title">Значок вимкнених даних</string>
     <string name="pref_cell_tile_data_off_icon_summary">Показ значку, якщо мобільні мережі вимкнено</string>
 
     <!-- Lockscreen: app shortcuts -->
@@ -1716,16 +1697,12 @@
 
 
     <!-- Signal cluster: Disable exclamation marks -->
-    <string name="pref_signal_cluster_dem_title">Відключити знаки оклику</string>
+    <string name="pref_signal_cluster_dem_title">Прибрати знаки оклику</string>
     <string name="pref_signal_cluster_dem_summary">Необхідне перезавантаження</string>
 
     <!-- UNC: Disable sound to vibrate conversion -->
-    <string name="pref_lc_sound_vibrate_title">Вимкнути перетворення звуку в вібрацію</string>
+    <string name="pref_lc_sound_vibrate_title">Перетворення звуку у вібрацію</string>
     <string name="pref_lc_sound_vibrate_summary">Запобігання вібрації сповіщень з раніше вимкнутою вібрацією при виборі режиму дзвінка «Лише вібрація»</string>
-
-
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Вимк тактильний відгук</string>
 
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Очистити лише видиме</string>
@@ -1734,7 +1711,7 @@
     <string name="pref_lockscreen_dt2s_title">Подвійний дотик для сну</string>
 
     <!-- Status bar: disable peek -->
-    <string name="pref_statusbar_disable_peek_title">Вимк перегляд</string>
+    <string name="pref_statusbar_disable_peek_title">Вимкнути перегляд</string>
     <string name="pref_statusbar_disable_peek_summary">Панель стану не буде розкриватися від одиничного дотику</string>
 
     <!-- Status bar: Double-tap to sleep -->
@@ -1798,5 +1775,72 @@
     <!-- Lockscreen: Quick unlock PIN length -->
     <string name="pref_lockscreen_pin_length_title">Довжина PIN</string>
     <string name="pref_lockscreen_pin_length_summary">Для надійної роботи швидкого розблокування потрібно знати точну довжину вашого PIN</string>
+
+    <!-- Power: Camera vibration pattern -->
+    <string name="pref_power_camera_vibrate_pattern_title">Шаблон вібрації камери</string>
+    <string name="pref_power_camera_vibrate_pattern_summary">Перелік, який розділено комами, 
+        пар вимкнення/увімкнення в мілісекундах для камери, яку запустили кнопкою живлення.
+        Лишіть порожнім для типового значення. Встановіть нуль для вимкнення вібрації.</string>
+
+    <!-- QS: common quick mode option -->
+    <string name="pref_tile_quick_mode_title">Увімкнути щвидкий режим</string>
+    <string name="pref_tile_enabled_modes_title">Увімкнути режими</string>
+
+    <!-- DND tile settings -->
+    <string name="pref_cat_qs_dnd_tile_title">Налаштування плитки «Не турбувати»</string>
+    <string name="pref_dnd_tile_quick_mode_summary">Дозволяє циклічно перемикати режими при одиничному дотику по плитці</string>
+    <string name="pref_dnd_tile_enabled_modes_summary">Встановити доступні режими «Не турбувати» для перемикання</string>
+    <string name="dnd_tile_em_priority">Лише пріоритетні</string>
+    <string name="dnd_tile_em_alarms">Лише будильник</string>
+    <string name="dnd_tile_em_silence">Повна тиша</string>
+    <string name="pref_dnd_tile_duration_mode_title">Попередньо встановлена тривалість</string>
+    <string name="dnd_tile_dm_manual">Доки не вимкнути вручну</string>
+    <string name="dnd_tile_dm_alarm">До наступного будильнику</string>
+    <string name="dnd_tile_dm_custom">Інше</string>
+    <string name="pref_dnd_tile_duration_title">Встановити іншу тривалість</string>
+
+    <!-- Location tile (Slimkat) settings -->
+    <string name="pref_cat_qs_location_tile_title">Налаштування плитки позиціювання (SlimKat)</string>
+    <string name="pref_location_tile_quick_mode_summary">Дозволяє циклічно перемикати режими позиціювання при одиничному дотику по плитці</string>
+
+    <!-- Cellular network modes -->
+    <string name="network_mode_0">Переважно GSM/WCDMA (3G/2G)</string>
+    <string name="network_mode_1">Лише GSM (2G)</string>
+    <string name="network_mode_2">Лише WCDMA (3G)</string>
+    <string name="network_mode_3">Авто GSM/WCDMA (2G/3G)</string>
+    <string name="network_mode_4">Авто CDMA/EvDo (2G/3G)</string>
+    <string name="network_mode_5">Лише CDMA (2G)</string>
+    <string name="network_mode_6">Лише EvDo (3G)</string>
+    <string name="network_mode_7">Global (2G/3G)</string>
+    <string name="network_mode_8">LTE CDMA (4G/2G/3G)</string>
+    <string name="network_mode_9">LTE GSM (4G/2G/3G)</string>
+    <string name="network_mode_10">LTE Global (4G/2G/3G)</string>
+    <string name="network_mode_11">Лише LTE (4G)</string>
+    <string name="network_mode_12">LTE/WCDMA (4G/3G)</string>
+    <string name="network_mode_13">Лише TD-SCDMA (3G)</string>
+    <string name="network_mode_14">TD-SCDMA/WCDMA (3G)</string>
+    <string name="network_mode_15">TD-SCDMA/LTE (4G/3G)</string>
+    <string name="network_mode_16">TD-SCDMA/GSM (2G/3G)</string>
+    <string name="network_mode_17">TD-SCDMA/LTE/GSM (4G/2G/3G)</string>
+    <string name="network_mode_18">TD-SCDMA/WCDMA/GSM (2G/3G)</string>
+    <string name="network_mode_19">TD-SCDMA/LTE/WCDMA (4G/3G)</string>
+    <string name="network_mode_20">TD-SCDMA/LTE/GSM/WCDMA (4G/2G/3G)</string>
+    <string name="network_mode_21">TD-SCDMA Global (2G/3G)</string>
+    <string name="network_mode_22">TD-SCDMA LTE Global (4G/2G/3G)</string>
+    <string name="network_mode_unknown">Невідомо</string>
+
+    <!-- Network mode tile settings -->
+    <string name="pref_nm_tile_enabled_modes_summary">Визначити режими, які підтримувати при перемиканні</string>
+    <string name="pref_nm_tile_quick_mode_summary">Дозволяє циклічно перемикати вибрані режими мережі при одиничному дотику по плитці</string>
+
+    <!-- Ringer mode tile settings -->
+    <string name="pref_cat_qs_rm_tile_title">Налаштування плитки «Режим дзвінка»</string>
+    <string name="pref_rm_tile_enabled_modes_summary">Визначає доступні режими дзвінка</string>
+    <string name="pref_rm_tile_quick_mode_summary">Дозволяє циклічно перемикати обрані режими дзвінку при одиничному дотику по плитці</string>
+
+    <!-- Stay awake tile settings -->
+    <string name="pref_cat_qs_sa_tile_title">Налаштування плитки «Не засинати»</string>
+    <string name="pref_sa_tile_enabled_modes_summary">Визначає доступні часові затримки</string>
+    <string name="pref_sa_tile_quick_mode_summary">Дозволяє циклічно змінювати затримку при одиничному дотику по плитці</string>
 
 </resources>

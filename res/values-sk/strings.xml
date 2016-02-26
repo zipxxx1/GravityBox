@@ -466,9 +466,6 @@
     <string name="unicode_stripping_non_encodable">Konverzia nekódovateľných znakov</string>
     <string name="unicode_stripping_all">Konverzia všetkých znakov</string>
 
-    <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Režim dlaždice typu mobilnej siete</string>
-
     <!-- Display: allow all rotations -->
     <string name="pref_display_allow_all_rotations_title">Povoliť všetky rotácie</string>
 
@@ -636,9 +633,6 @@
     <string name="pref_about_gplus_title">Google+ komunita</string>
     <string name="pref_about_gplus_summary">Dotykom otvoríte GravityBox Google+ komunitu</string>
 
-    <!-- Network mode tile: Allow LTE network mode -->
-    <string name="pref_network_mode_tile_lte_title">Povoliť LTE typ siete</string>
-
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">V prípade potreby použitia akcií pre softvérové tlačidlá navigačnej lišty je 
         potrebné zapnúť \'Obísť systémové nastavenia\' v menu Nastavenia navigačnej lišty</string>
@@ -664,7 +658,6 @@
     <string name="pref_volume_panel_timeout_title">Časovač panela hlasitosti</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Nastavenia dlaždice Režimu zvonenia</string>
     <string name="ringer_mode_silent">Prioritné</string>
     <string name="ringer_mode_vibrate">Vibrovať</string>
     <string name="ringer_mode_sound">Zvoniť</string>
@@ -751,9 +744,6 @@
     <string name="pref_cat_signal_cluster_title">Nastavenia ikon signálu</string>
     <string name="pref_signal_cluster_data_activity_title">Indikátory dátového prenosu</string>
     <string name="pref_signal_cluster_data_activity_summary">Indikácia dátového prenosu v ikonách mobilných dát a WiFi (vyžaduje reštart)</string>
-
-    <!-- Network mode tile: CDMA support -->
-    <string name="pref_network_mode_tile_cdma_title">Použiť CDMA režimy siete</string>
 
     <!--  HW Key Action: Toggle auto rotation -->
     <string name="hwkey_action_auto_rotation">Prepnúť auto rotáciu</string>
@@ -1047,7 +1037,6 @@
     <string name="pref_quick_pulldown_size_title">Šírka aktívneho okraja</string>
 
     <!-- Stay Awake Tile modes -->
-    <string name="pref_qs_stay_awake_title">Nastavenia dlaždice Bdenie</string>
     <string name="stay_awake_15s">15s</string>
     <string name="stay_awake_30s">30s</string>
     <string name="stay_awake_1m">1m</string>
@@ -1350,7 +1339,9 @@
     <string name="pref_headset_action_unplug_title">Po odpojení slúchadiel</string>
 
     <!-- Quiet Hours: mute vibrations -->
-    <string name="pref_lc_qh_mute_vibe_title">Zakázať vibrácie</string>
+    <string name="pref_lc_qh_mute_vibe_title">Zakázať vibrácie oznámení</string>
+    <string name="pref_lc_qh_mute_vibe_summary">Vypne vibrácia oznámení na tomto zariadení a 
+        tiež na spárovanom Android Wear zariadení</string>
 
     <!-- Quiet Hours: interactive mode -->
     <string name="pref_lc_qh_interactive_title">Interaktívny režim</string>
@@ -1458,11 +1449,6 @@
     <!-- MSIM signal cluster: Hide SIM labels -->
     <string name="pref_signal_cluster_hide_sim_labels_title">Skryť SIM identifikátory</string>
     <string name="pref_signal_cluster_hide_sim_labels_summary">Vyžaduje reštart</string>
-
-    <!-- QS: network mode tile 2g+3g mode -->
-    <string name="pref_network_mode_tile_2g3g_mode_title">2G+3G režim</string>
-    <string name="nmt_2g3g_mode_wcdma">GSM/WCDMA preferované (3G/2G)</string>
-    <string name="nmt_2g3g_mode_auto">GSM/WCDMA automaticky (2G/3G)</string>
 
     <!-- Power menu: expanded desktop in power menu -->
     <string name="pref_powermenu_expanded_desktop_title">Rozšírená plocha v menu napájania</string>
@@ -1691,9 +1677,6 @@
     <string name="pref_lc_sound_vibrate_summary">Zabráni oznámeniam, ktoré majú vibrácie vypnuté, vibrovať
         v režime vypnutého zvonenia</string>
 
-    <!-- UNC: QuietHours: disable haptic feedback -->
-    <string name="pref_lc_qh_disable_haptic_feedback_title">Vypnúť hmatovú odozvu</string>
-
     <!-- Recents: clear visible only -->
     <string name="pref_recents_clear_all_visible_title">Len viditeľné</string>
 
@@ -1770,5 +1753,49 @@
         fotoaparátu tlačidlom napájania. Hodnota vo forme čiarkou oddelených párov dĺžky vypnutia/zapnutia
         vibrácie v milisekundách. 
         Ponechajte prázdne pre pôvodnú vibráciu. Zadajte 0 pre vypnutie vibrácie.</string>
+
+    <!-- QS: common quick mode option -->
+    <string name="pref_tile_quick_mode_title">Rýchly režim</string>
+    <string name="pref_tile_enabled_modes_title">Podporované typy</string>
+
+    <!-- DND tile settings -->
+    <string name="pref_cat_qs_dnd_tile_title">Nastavenia dlaždice Nerušiť</string>
+    <string name="pref_dnd_tile_quick_mode_summary">Umožňuje prepínať medzi typmi nerušenia jednoduchým ťuknutím na dlaždicu</string>
+    <string name="pref_dnd_tile_enabled_modes_summary">Definuje, medzi ktorými typmi nerušenia prepínať</string>
+    <string name="dnd_tile_em_priority">Iba prioritné</string>
+    <string name="dnd_tile_em_alarms">Iba budíky</string>
+    <string name="dnd_tile_em_silence">Úplné ticho</string>
+    <string name="pref_dnd_tile_duration_mode_title">Prednastavená doba trvania</string>
+    <string name="dnd_tile_dm_manual">Dokým nevypnete</string>
+    <string name="dnd_tile_dm_alarm">Do nasledujúceho budíka</string>
+    <string name="dnd_tile_dm_custom">Vlastná</string>
+    <string name="pref_dnd_tile_duration_title">Nastaviť vlastnú dobu trvania</string>
+
+    <!-- Location tile (Slimkat) settings -->
+    <string name="pref_cat_qs_location_tile_title">Nastavenia dlaždice Poloha (SlimKat)</string>
+    <string name="pref_location_tile_quick_mode_summary">Umožňuje prepínať medzi typmi sledovania polohy jednoduchým ťuknutím na dlaždicu</string>
+
+    <!-- Network mode tile settings -->
+    <string name="pref_nm_tile_enabled_modes_summary">Definuje, ktoré typy siete dlaždica podporuje</string>
+    <string name="pref_nm_tile_quick_mode_summary">Umožňuje prepínať medzi typmi siete jednoduchým ťuknutím na dlaždicu</string>
+
+    <!-- Ringer mode tile settings -->
+    <string name="pref_cat_qs_rm_tile_title">Nastavenia dlaždice Režim zvonenia</string>
+    <string name="pref_rm_tile_enabled_modes_summary">Definuje, ktoré typy zvonenia dlaždica podporuje</string>
+    <string name="pref_rm_tile_quick_mode_summary">Umožňuje prepínať medzi typmi zvonenia jednoduchým ťuknutím na dlaždicu</string>
+
+    <!-- Stay awake tile settings -->
+    <string name="pref_cat_qs_sa_tile_title">Nastavenia dlaždice Bdenie</string>
+    <string name="pref_sa_tile_enabled_modes_summary">Definuje, ktoré typy časovača vypnutia obrazovky dlaždica podporuje</string>
+    <string name="pref_sa_tile_quick_mode_summary">Umožňuje prepínať medzi typmi časovača vypnutia obrazovky jednoduchým ťuknutím na dlaždicu</string>
+
+    <!-- UNC: QuietHours: mute system level vibrations -->
+    <string name="pref_lc_qh_mute_system_vibe_title">Zakázať vibrácie zariadenia</string>
+    <string name="pref_lc_qh_mute_system_vibe_summary">Vypne VŠETKY vibrácie, vrátane vibrácií oznámení na TOMTO zariadení. 
+        Oznámenia na spárovanom Android Wear zariadení budú naďalej vibrovať v prípade, ak sú povolené vibrácie oznámení.
+    </string>
+
+    <!-- Lockscreen: Smart unlock policy -->
+    <string name="pref_lockscreen_smart_unlock_policy_title">Režim funkcie Smart Unlock</string>
 
 </resources>

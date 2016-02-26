@@ -80,7 +80,7 @@ public abstract class QsTile extends BaseTile {
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, key, prefs, eventDistributor);
 
-        mState = new State(mKey, mEventDistributor.isResourceIconHooked());
+        mState = new State(mKey);
 
         mTile = XposedHelpers.callStaticMethod(XposedHelpers.findClass(
                 CLASS_INTENT_TILE, mContext.getClassLoader()),
@@ -130,11 +130,9 @@ public abstract class QsTile extends BaseTile {
         public boolean autoMirrorDrawable = true;
 
         private String mKey;
-        private boolean mAllowCustomResourceIcon;
 
-        public State(String key, boolean resourceIconHooked) {
+        public State(String key) {
             mKey = key;
-            mAllowCustomResourceIcon = resourceIconHooked;
         }
 
         public void applyTo(Object state) {
@@ -145,8 +143,8 @@ public abstract class QsTile extends BaseTile {
         }
 
         private Object getResourceIcon() {
-            if (sResourceIconClass == null || icon == null ||
-                    !mAllowCustomResourceIcon) return null;
+            if (sResourceIconClass == null || icon == null)
+                return null;
 
             try {
                 Object resourceIcon = XposedHelpers.callStaticMethod(

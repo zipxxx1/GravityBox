@@ -272,6 +272,9 @@ public class ModNavigationBar {
                 mRecentsLongpressAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS, "0")),
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_LONGPRESS+"_custom", null));
+                mRecentsDoubletapAction = new ModHwKeys.HwKeyAction(Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP, "0")),
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_RECENTS_DOUBLETAP+"_custom", null));
                 mRecentsSingletapActionBck.actionId = mRecentsSingletapAction.actionId;
                 mRecentsSingletapActionBck.customApp = mRecentsSingletapAction.customApp;
                 mHomeLongpressAction = Integer.valueOf(

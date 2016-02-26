@@ -50,7 +50,7 @@ public class QuietHoursActivity extends Activity {
     public static final String PREF_KEY_QH_MODE = "pref_lc_qh_mode";
     public static final String PREF_KEY_QH_INTERACTIVE = "pref_lc_qh_interactive";
     public static final String PREF_KEY_QH_WEEKDAYS = "pref_lc_qh_weekdays";
-    public static final String PREF_KEY_DISABLE_HAPTIC_FEEDBACK = "pref_lc_qh_disable_haptic_feedback";
+    public static final String PREF_KEY_MUTE_SYSTEM_VIBE = "pref_lc_qh_mute_system_vibe";
 
     public static final String ACTION_QUIET_HOURS_CHANGED = 
             "gravitybox.intent.action.QUIET_HOURS_CHANGED";

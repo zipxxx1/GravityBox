@@ -77,6 +77,7 @@ public class ModStatusBar {
     private static final String CLASS_BAR_TRANSITIONS = "com.android.systemui.statusbar.phone.BarTransitions";
     private static final String CLASS_SBI_CTRL = "com.android.systemui.statusbar.phone.StatusBarIconController";
     private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData$Entry";
+    private static final String CLASS_ASSIST_MANAGER = "com.android.systemui.assist.AssistManager";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_LAYOUT = false;
 
@@ -1000,6 +1001,26 @@ public class ModStatusBar {
                 });
             } catch (Throwable t) {
                 // ignore as some earlier 6.0 releases lack that functionality
+            }
+
+            // Search assist SystemUI crash workaround for disabled navbar
+            try {
+                XposedHelpers.findAndHookMethod(CLASS_ASSIST_MANAGER, classLoader,
+                        "startAssist", Bundle.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        Object orbView = XposedHelpers.getObjectField(param.thisObject, "mView");
+                        if (orbView == null) {
+                            XposedHelpers.callMethod(param.thisObject, "updateAssistInfo");
+                            if (XposedHelpers.getObjectField(param.thisObject, "mAssistComponent") != null) {
+                                XposedHelpers.callMethod(param.thisObject, "startAssistInternal", param.args[0]);
+                                param.setResult(null);
+                            }
+                        }
+                    }
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
             }
         }
         catch (Throwable t) {

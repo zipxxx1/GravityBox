@@ -95,6 +95,11 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         if (resparam.packageName.equals(ModVolumePanel.PACKAGE_NAME)) {
             ModVolumePanel.initResources(prefs, resparam);
         }
+
+        if (resparam.packageName.equals(ModQsTiles.PACKAGE_NAME) &&
+                prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, false)) {
+            ModQsTiles.initResources(resparam);
+        }
     }
 
     @Override

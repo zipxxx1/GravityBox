@@ -60,16 +60,27 @@ public class WifiTile extends AospTile {
                     onCreateTileView((View)param.getResult());
                 }
             });
-
-            mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(getClassName(), 
-                    mContext.getClassLoader(), "supportsDualTargets", new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    param.setResult(mDualMode);
-                }
-            });
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+
+        // this seems to be unsupported on some custom ROMs. Log one line and continue.
+        XC_MethodHook dtHook = new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                param.setResult(mDualMode);
+            }
+        };
+        try {
+            mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(getClassName(), 
+                    mContext.getClassLoader(), "supportsDualTargets", dtHook);
+        } catch (Throwable t) {
+            try {
+                mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(getClassName(), 
+                        mContext.getClassLoader(), "hasDualTargetsDetails", dtHook);
+            } catch (Throwable t2) {
+                log(getKey() + ": Your system does not seem to support standard AOSP tile dual mode");
+            }
         }
     }
 

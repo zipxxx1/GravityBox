@@ -67,4 +67,18 @@
         <item name="android:padding">4dp</item>
     </style>
 
+    <!-- QS DetailListAdapter -->
+    <style name="TextAppearance" />
+
+    <style name="TextAppearance.QS">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/qs_text</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextAppearance.QS.DetailEmpty">
+        <item name="android:textSize">@dimen/qs_detail_empty_text_size</item>
+        <item name="android:textColor">@color/qs_subhead</item>
+    </style>
+
 </resources>
