@@ -35,6 +35,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.format.DateFormat;
 import android.text.style.RelativeSizeSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -151,7 +152,11 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                                 && !DateFormat.is24HourFormat(mClock.getContext()) 
                                 && amPmIndex == -1) {
                         // insert AM/PM if missing
-                        clockText += " " + amPm;
+                        if(Locale.getDefault().equals(Locale.TAIWAN) || Locale.getDefault().equals(Locale.CHINA)) {
+                            clockText = amPm + " " + clockText;
+                        } else {
+                            clockText += " " + amPm;
+                        }
                         amPmIndex = clockText.indexOf(amPm);
                         if (DEBUG) log("AM/PM added. New clockText: '" + clockText + "'; New AM/PM index: " + amPmIndex);
                     }
@@ -172,14 +177,22 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                     }
                     clockText = dow + clockText;
                     SpannableStringBuilder sb = new SpannableStringBuilder(clockText);
-                    sb.setSpan(new RelativeSizeSpan(mDowSize), 0, dow.length() + date.length(), 
+                    sb.setSpan(new RelativeSizeSpan(mDowSize), 0, dow.length() + date.length(),
                             Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
                     if (amPmIndex > -1) {
-                        int offset = Character.isWhitespace(clockText.charAt(dow.length() + date.length() + amPmIndex - 1)) ?
-                                1 : 0;
-                        sb.setSpan(new RelativeSizeSpan(mAmPmSize), dow.length() + date.length() + amPmIndex - offset, 
-                                dow.length() + date.length() + amPmIndex + amPm.length(), 
-                                Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                        if(Locale.getDefault().equals(Locale.TAIWAN) || Locale.getDefault().equals(Locale.CHINA)) {
+                            int offset = Character.isWhitespace(clockText.charAt(dow.length() + date.length() + amPmIndex)) ?
+                                    1 : 0;
+                            sb.setSpan(new RelativeSizeSpan(mAmPmSize), dow.length() + date.length() + amPmIndex,
+                                    dow.length() + date.length() + amPmIndex + amPm.length(),
+                                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                        } else {
+                            int offset = Character.isWhitespace(clockText.charAt(dow.length() + date.length() + amPmIndex - 1)) ?
+                                    1 : 0;
+                            sb.setSpan(new RelativeSizeSpan(mAmPmSize), dow.length() + date.length() + amPmIndex - offset,
+                                    dow.length() + date.length() + amPmIndex + amPm.length(),
+                                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                        }
                     }
                     if (DEBUG) log("Final clockText: '" + sb + "'");
                     param.setResult(sb);
