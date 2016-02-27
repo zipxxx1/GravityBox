@@ -181,8 +181,6 @@ public class StatusbarClock implements IconManagerListener, BroadcastSubReceiver
                             Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
                     if (amPmIndex > -1) {
                         if(Locale.getDefault().equals(Locale.TAIWAN) || Locale.getDefault().equals(Locale.CHINA)) {
-                            int offset = Character.isWhitespace(clockText.charAt(dow.length() + date.length() + amPmIndex)) ?
-                                    1 : 0;
                             sb.setSpan(new RelativeSizeSpan(mAmPmSize), dow.length() + date.length() + amPmIndex,
                                     dow.length() + date.length() + amPmIndex + amPm.length(),
                                     Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
