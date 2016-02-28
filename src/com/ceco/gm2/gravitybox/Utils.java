@@ -90,7 +90,7 @@ public class Utils {
                 "mt6577",
                 "mt8377",
                 // Quad-core SoC
-                "mt6582",
+                "mt6582", "lot1",
                 "mt6589",
                 "mt8389",
                 // Octa-core SoC
