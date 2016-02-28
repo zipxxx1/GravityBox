@@ -144,6 +144,7 @@ public class ModLockscreen {
     private static boolean mArcEnabled;
     private static View mGlowPadView;
     private static Class<? extends View> mGlowPadViewClass;
+    private static boolean mGlowPadViewMissingLogged;
     private static boolean mGlowPadHooked;
     private static boolean mIsUserPresent;
 
@@ -347,9 +348,8 @@ public class ModLockscreen {
 
                     final Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     final Resources res = context.getResources();
-                    mGlowPadView = (View) XposedHelpers.getObjectField(param.thisObject, "mGlowPadView");
-                    mGlowPadViewClass = mGlowPadView.getClass();
-                    if (!mGlowPadHooked) {
+                    tryToGetGlowpadViewFrom(param.thisObject);
+                    if (mGlowPadView != null && !mGlowPadHooked) {
                         try {
                             XposedHelpers.findAndHookMethod(mGlowPadViewClass, "showTargets",
                                     boolean.class, glowPadViewShowTargetsHook);
@@ -386,26 +386,28 @@ public class ModLockscreen {
                     }
 
                     // apply custom bottom/right margin to shift unlock ring upwards/left
-                    try {
-                        final FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mGlowPadView.getLayoutParams();
-                        final int bottomMarginOffsetPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
-                                mPrefs.getInt(GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_VERTICAL_OFFSET, 0),
-                                res.getDisplayMetrics());
-                        final int rightMarginOffsetPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
-                                mPrefs.getInt(GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_HORIZONTAL_OFFSET, 0),
-                                res.getDisplayMetrics());
-                        lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin - rightMarginOffsetPx, 
-                                lp.bottomMargin - bottomMarginOffsetPx);
-                        mGlowPadView.setLayoutParams(lp);
-                    } catch (Throwable t) {
-                        log("Lockscreen targets: error while trying to modify GlowPadView layout" + t.getMessage());
+                    if (mGlowPadView != null) {
+                        try {
+                            final FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mGlowPadView.getLayoutParams();
+                            final int bottomMarginOffsetPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
+                                    mPrefs.getInt(GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_VERTICAL_OFFSET, 0),
+                                    res.getDisplayMetrics());
+                            final int rightMarginOffsetPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
+                                    mPrefs.getInt(GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_HORIZONTAL_OFFSET, 0),
+                                    res.getDisplayMetrics());
+                            lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin - rightMarginOffsetPx, 
+                                    lp.bottomMargin - bottomMarginOffsetPx);
+                            mGlowPadView.setLayoutParams(lp);
+                        } catch (Throwable t) {
+                            log("Lockscreen targets: error while trying to modify GlowPadView layout" + t.getMessage());
+                        }
                     }
 
                     mTorchEnabled = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_RING_TORCH, false);
 
                     mArcEnabled = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_BATTERY_ARC, false);
                     // prepare Battery Arc
-                    if (mArcEnabled) {
+                    if (mArcEnabled && mGlowPadView != null) {
                         mArcVisible = true;
                         if (mHandleDrawable == null) {
                             mHandleDrawable = new HandleDrawable(
@@ -425,7 +427,7 @@ public class ModLockscreen {
                     }
 
                     // finish if lockscreen targets disabled
-                    if (!mPrefs.getBoolean(
+                    if (mGlowPadView == null || !mPrefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_ENABLE, false)) return;
 
                     final boolean customUnlock = mPrefs.getBoolean(
@@ -508,7 +510,7 @@ public class ModLockscreen {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     if (DEBUG) log("GlowPadView.OnTriggerListener; index=" + ((Integer) param.args[1]));
-                    if (!mPrefs.getBoolean(
+                    if (mGlowPadView == null || !mPrefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_ENABLE, false)) return;
 
                     final int index = (Integer) param.args[1];
@@ -883,6 +885,18 @@ public class ModLockscreen {
             });
         } catch (Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static void tryToGetGlowpadViewFrom(Object obj) {
+        try {
+            mGlowPadView = (View) XposedHelpers.getObjectField(obj, "mGlowPadView");
+            mGlowPadViewClass = mGlowPadView.getClass();
+        } catch (Throwable t) {
+            if (!mGlowPadViewMissingLogged) {
+                log("Lock screen does not seem to support AOSP ring (GlowPadView)");
+                mGlowPadViewMissingLogged = true;
+            }
         }
     }
 
