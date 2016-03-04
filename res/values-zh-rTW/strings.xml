@@ -536,6 +536,23 @@
     <string name="dt_size_smaller">較小</string>
     <string name="dt_size_smallest">最小</string>
 
+    <!-- Battery bar -->
+    <string name="pref_cat_battery_bar_title">電量列</string>
+    <string name="pref_battery_bar_show_title">顯示電量列</string>
+    <string name="pref_battery_bar_position_title">位置</string>
+    <string name="bbar_position_top">頂部邊緣</string>
+    <string name="bbar_position_bottom">底部邊緣</string>
+    <string name="pref_battery_bar_margin_title">邊緣空白</string>
+    <string name="pref_battery_bar_thickness_title">厚度</string>
+    <string name="pref_battery_bar_charge_anim_title">充電動畫</string>
+    <string name="pref_battery_bar_dynacolor_title">動態顏色</string>
+    <string name="pref_battery_bar_dynacolor_summary">從當前電池電量自動確定顏色</string>
+    <string name="pref_battery_bar_color_title">顏色</string>
+    <string name="pref_battery_bar_color_low_title">低電量顏色</string>
+    <string name="pref_battery_bar_color_critical_title">危急電量顏色</string>
+    <string name="pref_battery_bar_centered_title">居中</string>
+    <string name="pref_battery_bar_color_charging_title">充電顏色</string>
+
     <!--  RAM Bar -->
     <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
     <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> 可用</string>
@@ -545,7 +562,7 @@
     <string name="rambar_off">關閉</string>
     <string name="rambar_top">頂部</string>
     <string name="rambar_bottom">底部</string>
-    
+
     <!-- HW Key actions for recents button -->
     <string name="hwkey_recents_singletap_dialog_title">多工鍵單擊動作</string>
     <string name="hwkey_recents_longpress_dialog_title">多工鍵長按動作</string>
@@ -555,7 +572,7 @@
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">自動展開音量面板</string>
-    
+
     <!-- HW Key Actions: Preference screen arrangement -->
     <string name="pref_cat_hwkey_menu_title">選單鍵</string>
     <string name="pref_cat_hwkey_home_title">Home 鍵</string>
@@ -613,7 +630,7 @@
     <string name="pref_cat_navbar_keys_title">導航列按鍵</string>
     <string name="pref_cat_navbar_color_title">顏色</string>
     <string name="pref_cat_navbar_dimen_title">尺寸</string>
- 
+
     <!-- Navigation bar colors -->
     <string name="pref_navbar_color_enable_title">啟用導航列顏色</string>
     <string name="pref_navbar_color_enable_summary">停用後可能需要重新啟動</string>
@@ -625,7 +642,7 @@
     <string name="pref_statusbar_icon_color_secondary_summary">覆蓋預設橘色訊號圖示</string>
     <string name="pref_statusbar_data_activity_color_secondary_title">第二資料傳輸活動顏色</string>
     <string name="pref_statusbar_data_activity_color_secondary_summary">設定第二資料傳輸指示符顏色</string>
- 
+
     <!-- Status icon style -->
     <string name="pref_status_icon_style_title">狀態列圖示風格</string>
     <string name="pref_status_icon_style_summary">套用於無聲、震動、鬧鐘等狀態列圖示。</string>
@@ -636,7 +653,7 @@
     <!-- HW Key Actions: Home and Back actions -->
     <string name="hwkey_action_home">前往啟動器</string>
     <string name="hwkey_action_back">返回</string>
-    
+
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">調整底部邊距</string>
 
@@ -660,7 +677,7 @@
     <string name="app_picker_shortcuts">捷徑</string>
     <string name="app_picker_shortcut_null_intent">由於該應用程式不支援捷徑，無法建立對應的捷徑</string>
     <string name="app_picker_shortcut_cancelled">已經取消建立捷徑</string>
- 
+
     <!-- Navigation bar: swap back and recents key -->
     <string name="pref_navbar_swap_keys_title">互換返回鍵與多工鍵位置</string>
 
@@ -673,7 +690,7 @@
     <string name="ringer_mode_sound">響鈴</string>
     <string name="ringer_mode_sound_vibrate">響鈴與震動</string>
 
-	<!-- Screen recording -->
+    <!-- Screen recording -->
     <string name="screenrecord_notif_ticker">螢幕正被錄製</string>
     <string name="screenrecord_notif_title">正在錄製螢幕中</string>
     <string name="screenrecord_notif_stop">停止</string>
@@ -698,8 +715,17 @@
     <string name="pref_launcher_desktop_grid_cols_title">列數</string>
     <string name="desktop_grid_default">預設</string>
 
+    <!-- QS: Hide brightness slider -->
+    <string name="pref_qs_hide_brightness_title">隱藏亮度調整列</string>
+
     <!-- HW Key Acctions: toggle screen recording -->
     <string name="hwkey_action_screen_recording">開關螢幕錄製</string>
+
+    <!-- Battery style: Stock battery with percentage -->
+    <string name="battery_style_stock_percent">含百分比的預設電量指示器</string>
+
+    <!-- Lockscreen: doubletap to sleep -->
+    <string name="pref_lockscreen_dt2s_title">雙擊睡眠</string>
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">電池電量百分比文字</string>
@@ -719,14 +745,14 @@
     <!-- Cursor control in navigation bar -->
     <string name="pref_navbar_cursor_control_title">鍵盤游標控制鍵</string>
     <string name="pref_navbar_cursor_control_summary">當使用鍵盤時，在導航列上顯示鍵盤游標控制鍵</string>
-    
+
     <!-- Volume rocker wake -->
     <string name="pref_volume_rocker_wake_title">音量鍵喚醒</string>
     <string name="volume_rocker_wake_default">系統預設</string>
     <string name="volume_rocker_wake_enabled">啟用</string>
     <string name="volume_rocker_wake_disabled">停用</string>
 
-   <!-- Advanced reboot menu: require confirmation -->
+    <!-- Advanced reboot menu: require confirmation -->
     <string name="pref_reboot_confirm_required_title">在重新啟動前先進行確認</string>
 
     <!-- Tiles: Hide on change -->
@@ -737,7 +763,7 @@
     <string name="pref_cat_power_menu_title">電源選單</string>
     <string name="pref_cat_power_other_title">其他</string>
 
-     <!-- Advanced reboot menu: Allow on lockscreen -->
+    <!-- Advanced reboot menu: Allow on lockscreen -->
     <string name="pref_reboot_allow_on_lockscreen_title">允許在鎖定畫面的電源選單進行重新啟動</string>
 
     <!-- Data traffic monitor enhancements -->
@@ -767,7 +793,7 @@
     <!-- Shortcut activity title -->
     <string name="shortcut_activity_title">GravityBox 動作</string>
 
-     <!-- Network mode shortcut -->
+    <!-- Network mode shortcut -->
     <string name="shortcut_network_mode">切換網路模式</string>
 
     <!-- Toggle mobile data shortcut -->
@@ -960,7 +986,7 @@
     <string name="pref_launcher_resize_widget_title">調整任何小工具</string>
     <string name="pref_launcher_resize_widget_summary">調整主畫面上的任何小工具至任何大小  (需要重新啟動啟動器) </string>
 
-   <!-- Icon picker -->
+    <!-- Icon picker -->
     <string name="icon_picker_choose_icon_title">選擇圖示</string>
     <string name="shortcuts_icon_picker_alarm">鬧鐘</string>
     <string name="shortcuts_icon_picker_andy">Andy</string>
@@ -1492,7 +1518,7 @@
     <!-- Hide launcher icon -->
     <string name="pref_hide_launcher_icon_title">隱藏啟動器圖示</string>
     <string name="pref_hide_launcher_icon_summary">可能需要重新啟動啟動器才能生效</string>
-    
+
     <!-- Battery percent text -->
     <string name="battery_percent_text_statusbar_title">在狀態列顯示</string>
     <string name="battery_percent_text_statusbar_summary">在標准狀態列顯示電量百分比文字(當裝置解鎖時)</string>
@@ -1503,32 +1529,32 @@
     <string name="keyguard_percent_text_hide">隱藏</string>
     <string name="battery_percent_text_header_hide_title">隱藏狀態列標題</string>
     <string name="battery_percent_text_size_default">預設</string>
-    
+
     <!-- Status bar: disable peek -->
     <string name="pref_statusbar_disable_peek_title">停用輕觸狀態列</string>
     <string name="pref_statusbar_disable_peek_summary">單擊觸摸時不會擴大狀態列</string>
-   
+
     <!-- Status bar: Double-tap to sleep -->
     <string name="pref_statusbar_dt2s_title">雙擊睡眠</string>
     <string name="pref_statusbar_dt2s_summary">需要停用輕觸狀態列</string>
-    
-       <!-- Lockscreen: app shortcuts -->
+
+    <!-- Lockscreen: app shortcuts -->
     <string name="pref_lockscreen_shortcuts_title">快捷方式</string>
     <string name="pref_lockscreen_shortcuts_summary">允許定義鎖定畫面快捷方式</string>
-    
+
     <!-- Lockscreen: app shortcuts safe launch -->
     <string name="pref_lockscreen_shortcuts_safe_launch_title">安全啟動</string>
     <string name="pref_lockscreen_shortcuts_safe_launch_summary">需要雙擊啟動快捷鍵 
         防止它們被意外啟動,例如裝置放在口袋中時</string>
-        
+
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_summary">需要重新啟動</string>
-   
+
     <!-- Lockscreen: Bottom-left action -->
     <string name="pref_lockscreen_bleft_action_title">左下動作</string>
     <string name="ls_bleft_action_default">預設</string>
     <string name="ls_bleft_action_phone">電話</string>
-    
+
     <!-- Navigation bar: use larger icons -->
     <string name="pref_navbar_larger_icons_title">使用大圖標</string>
     <string name="pref_navbar_larger_icons_summary">需要重新啟動</string>
