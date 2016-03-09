@@ -51,6 +51,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.service.notification.StatusBarNotification;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
@@ -72,7 +73,6 @@ public class ModStatusBar {
     private static final String CLASS_TICKER = "com.android.systemui.statusbar.phone.PhoneStatusBar$MyTicker";
     private static final String CLASS_PHONE_STATUSBAR_POLICY = "com.android.systemui.statusbar.phone.PhoneStatusBarPolicy";
     private static final String CLASS_POWER_MANAGER = "android.os.PowerManager";
-    private static final String CLASS_STATUSBAR_NOTIF = "android.service.notification.StatusBarNotification";
     private static final String CLASS_PLUGINFACTORY = Utils.hasLenovoVibeUI() ?
             "com.android.systemui.lenovo.ext.PluginFactory" :
             "com.mediatek.systemui.ext.PluginFactory";
@@ -636,18 +636,18 @@ public class ModStatusBar {
             });
 
             XposedHelpers.findAndHookMethod(phoneStatusBarClass, "addNotification", 
-                    IBinder.class, CLASS_STATUSBAR_NOTIF, new XC_MethodHook() {
+                    IBinder.class, StatusBarNotification.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    final Object notif = param.args[1];
-                    final String pkg = (String) XposedHelpers.getObjectField(notif, "pkg");
-                    final boolean ongoing = (Boolean) XposedHelpers.callMethod(notif, "isOngoing");
-                    final int id = (Integer) XposedHelpers.getIntField(notif, "id");
-                    final Notification n = (Notification) XposedHelpers.getObjectField(notif, "notification");
+                    final StatusBarNotification notif = (StatusBarNotification) param.args[1];
+                    final String pkg = notif.getPackageName();
+                    final boolean clearable = notif.isClearable();
+                    final int id = notif.getId();
+                    final Notification n = notif.getNotification();
                     if (DEBUG) log ("addNotificationViews: pkg=" + pkg + "; id=" + id + 
-                                    "; iconId=" + n.icon + "; ongoing=" + ongoing);
+                                    "; iconId=" + n.icon + "; clearable=" + clearable);
 
-                    if (!ongoing) return;
+                    if (clearable) return;
 
                     // store if new
                     final String notifData = pkg + "," + n.icon;
@@ -679,7 +679,7 @@ public class ModStatusBar {
             });
 
             XposedHelpers.findAndHookMethod(CLASS_BASE_STATUSBAR, classLoader, "updateNotification", 
-                    IBinder.class, CLASS_STATUSBAR_NOTIF, new XC_MethodHook() {
+                    IBinder.class, StatusBarNotification.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mDownloadProgressView != null) {
@@ -966,7 +966,7 @@ public class ModStatusBar {
             // notification ticker policy
             try {
                 XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "tick",
-                        IBinder.class, CLASS_STATUSBAR_NOTIF, boolean.class, new XC_MethodHook() {
+                        IBinder.class, StatusBarNotification.class, boolean.class, new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         switch (mTickerPolicy) {
