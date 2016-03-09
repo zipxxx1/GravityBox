@@ -775,13 +775,13 @@ public class ModStatusBar {
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     final StatusBarNotification notif = (StatusBarNotification) param.args[0];
                     final String pkg = notif.getPackageName();
-                    final boolean ongoing = notif.isOngoing();
+                    final boolean clearable = notif.isClearable();
                     final int id = notif.getId();
                     final Notification n = notif.getNotification();
                     if (DEBUG) log ("addNotificationViews: pkg=" + pkg + "; id=" + id + 
-                                    "; iconId=" + n.icon + "; ongoing=" + ongoing);
+                                    "; iconId=" + n.icon + "; clearable=" + clearable);
 
-                    if (!ongoing) return;
+                    if (clearable) return;
 
                     // store if new
                     final String notifData = pkg + "," + n.icon;
