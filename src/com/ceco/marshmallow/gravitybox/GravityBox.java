@@ -75,11 +75,6 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
     @Override
     public void handleInitPackageResources(InitPackageResourcesParam resparam) throws Throwable {
 
-        if (resparam.packageName.equals(ModNavigationBar.PACKAGE_NAME) &&
-                prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false)) {
-            ModNavigationBar.initResources(prefs, resparam);
-        }
-
         if (resparam.packageName.equals(ModStatusBar.PACKAGE_NAME)) {
             ModStatusBar.initResources(prefs, resparam);
         }

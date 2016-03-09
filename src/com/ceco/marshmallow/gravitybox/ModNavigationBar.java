@@ -16,19 +16,15 @@
 package com.ceco.marshmallow.gravitybox;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.content.res.XModuleResources;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.PowerManager;
 import android.util.SparseArray;
 import android.util.TypedValue;
@@ -47,7 +43,6 @@ import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 
 public class ModNavigationBar {
     public static final String PACKAGE_NAME = "com.android.systemui";
@@ -230,31 +225,6 @@ public class ModNavigationBar {
         }
     };
 
-    public static void initResources(final XSharedPreferences prefs, final InitPackageResourcesParam resparam) {
-        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_LARGER_ICONS, false)) {
-            Map<String, Integer> ic_map = new HashMap<String, Integer>();
-            XModuleResources modRes = XModuleResources.createInstance(GravityBox.MODULE_PATH, resparam.res);
-
-            ic_map.put("ic_sysbar_back_ime", R.drawable.ic_sysbar_back_ime_large);
-            ic_map.put("ic_sysbar_back", R.drawable.ic_sysbar_back_large);
-            ic_map.put("ic_sysbar_back_land", R.drawable.ic_sysbar_back_land_large);
-            ic_map.put("ic_sysbar_menu", R.drawable.ic_sysbar_menu_large);
-            ic_map.put("ic_sysbar_menu_land", R.drawable.ic_sysbar_menu_land_large);
-            ic_map.put("ic_sysbar_recent", R.drawable.ic_sysbar_recent_large);
-            ic_map.put("ic_sysbar_recent_land", R.drawable.ic_sysbar_recent_land_large);
-            ic_map.put("ic_sysbar_home", R.drawable.ic_sysbar_home_large);
-            ic_map.put("ic_sysbar_home_land", R.drawable.ic_sysbar_home_land_large);
-            for (String key : ic_map.keySet()) {
-                try {
-                    resparam.res.setReplacement(PACKAGE_NAME, "drawable", key,
-                            modRes.fwd(ic_map.get(key)));
-                } catch (Throwable t) {
-                    log("Drawable not found: " + key);
-                }
-            }
-        }
-    }
-
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             final Class<?> navbarViewClass = XposedHelpers.findClass(CLASS_NAVBAR_VIEW, classLoader);
@@ -346,7 +316,6 @@ public class ModNavigationBar {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final Context context = ((View) param.thisObject).getContext();
                     final Resources gbRes = mGbContext.getResources();
-                    final int backButtonResId = mResources.getIdentifier("back", "id", PACKAGE_NAME);
                     final int recentAppsResId = mResources.getIdentifier("recent_apps", "id", PACKAGE_NAME);
                     final int homeButtonResId = mResources.getIdentifier("home", "id", PACKAGE_NAME);
                     final View[] rotatedViews = 
@@ -391,18 +360,14 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(scaleType);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
-                                R.drawable.ic_sysbar_ime_left :
-                                        R.drawable.ic_sysbar_ime_left_lollipop, null));
+                        dpadLeft.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_left, null));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(scaleType);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
-                                R.drawable.ic_sysbar_ime_right :
-                                        R.drawable.ic_sysbar_ime_right_lollipop, null));
+                        dpadRight.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_right, null));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -425,18 +390,14 @@ public class ModNavigationBar {
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(scaleType);
                         dpadLeft.setClickable(true);
-                        dpadLeft.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
-                                            R.drawable.ic_sysbar_ime_left :
-                                                R.drawable.ic_sysbar_ime_left_lollipop, null));
+                        dpadLeft.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_left, null));
                         dpadLeft.setVisibility(View.GONE);
                         dpadLeft.setKeyCode(KeyEvent.KEYCODE_DPAD_LEFT);
 
                         KeyButtonView dpadRight = new KeyButtonView(context);
                         dpadRight.setScaleType(scaleType);
                         dpadRight.setClickable(true);
-                        dpadRight.setImageDrawable(gbRes.getDrawable(mUseLargerIcons ?
-                                            R.drawable.ic_sysbar_ime_right :
-                                                R.drawable.ic_sysbar_ime_right_lollipop, null));
+                        dpadRight.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_ime_right, null));
                         dpadRight.setVisibility(View.GONE);
                         dpadRight.setKeyCode(KeyEvent.KEYCODE_DPAD_RIGHT);
 
@@ -474,22 +435,10 @@ public class ModNavigationBar {
                     try {
                         mRecentIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentIcon");
                         mRecentLandIcon = (Drawable) XposedHelpers.getObjectField(param.thisObject, "mRecentLandIcon");
-                        mRecentAltIcon = gbRes.getDrawable(mUseLargerIcons ?
-                                R.drawable.ic_sysbar_recent_clear: R.drawable.ic_sysbar_recent_clear_lollipop, null);
-                        mRecentAltLandIcon = gbRes.getDrawable(mUseLargerIcons ?
-                                R.drawable.ic_sysbar_recent_clear_land : R.drawable.ic_sysbar_recent_clear_land_lollipop, null);
+                        mRecentAltIcon = gbRes.getDrawable(R.drawable.ic_sysbar_recent_clear, null);
+                        mRecentAltLandIcon = gbRes.getDrawable(R.drawable.ic_sysbar_recent_clear, null);
                     } catch (Throwable t) {
                         log("getIcons: system does not seem to have standard AOSP recents key? (" + t.getMessage() + ")");
-                    }
-
-                    try {
-                        Drawable backIcon = mUseLargerIcons ? gbRes.getDrawable(
-                                R.drawable.ic_sysbar_back_ime_land_large, null) : null;
-                        if (backIcon != null) {
-                            XposedHelpers.setObjectField(param.thisObject, "mBackAltLandIcon", backIcon);
-                        }
-                    } catch (Throwable t) {
-                        log("getIcons: system does not seem to have standard AOSP IME back key? (" + t.getMessage() + ")");
                     }
                 }
             });
@@ -1015,13 +964,8 @@ public class ModNavigationBar {
     }
 
     private static int getCustomKeyIconId() {
-        if (mUseLargerIcons) {
-            return mCustomKeyAltIcon ?
-                    R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps;
-        } else {
-            return mCustomKeyAltIcon ?
-                    R.drawable.ic_sysbar_apps2_lollipop : R.drawable.ic_sysbar_apps_lollipop;
-        }
+        return mCustomKeyAltIcon ?
+                R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps;
     }
 
     private static ScaleType getIconScaleType(int index, int keyId) {
@@ -1042,18 +986,21 @@ public class ModNavigationBar {
 
     private static int[] getIconPaddingPx(int index) {
         int[] p = new int[] { 0, 0, 0, 0 };
-        if (mUseLargerIcons) return p;
 
         int paddingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5,
                 mResources.getDisplayMetrics()));
-        boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
-        if (index == 0 && mNavbarHeight < 75) {
-            p[1] = paddingPx;
-            p[3] = paddingPx;
-        }
-        if (index == 1 && hasVerticalNavbar && mNavbarWidth < 75) {
-            p[0] = paddingPx;
-            p[2] = paddingPx;
+        if (mUseLargerIcons) {
+            p[0] = p[1] = p[2] = p[3] = paddingPx;
+        } else {
+            boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
+            if (index == 0 && mNavbarHeight < 75) {
+                p[1] = paddingPx;
+                p[3] = paddingPx;
+            }
+            if (index == 1 && hasVerticalNavbar && mNavbarWidth < 75) {
+                p[0] = paddingPx;
+                p[2] = paddingPx;
+            }
         }
         return p;
     }
@@ -1077,6 +1024,22 @@ public class ModNavigationBar {
                         iv.setScaleType(getIconScaleType(i, iv.getId()));
                         if (!Utils.isXperiaDevice()) {
                             iv.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
+                        }
+                    }
+                }
+                // menu/ime group
+                if (mNavbarViewInfo[i].menuImeGroup != null && mUseLargerIcons) {
+                    childCount = mNavbarViewInfo[i].menuImeGroup.getChildCount();
+                    for (int j = 0; j < childCount; j++) {
+                        View child = mNavbarViewInfo[i].menuImeGroup.getChildAt(j);
+                        if (child.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW)) {
+                            ImageView iv = (ImageView) child;
+                            if (iv.getId() != View.NO_ID &&
+                                    mNavbarViewInfo[i].originalScaleType.get(iv.getId()) == null) {
+                                mNavbarViewInfo[i].originalScaleType.put(iv.getId(),
+                                        iv.getScaleType());
+                            }
+                            iv.setScaleType(getIconScaleType(i, iv.getId()));
                         }
                     }
                 }
