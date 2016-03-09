@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
@@ -40,6 +41,7 @@ public class ModVolumeKeySkipTrack {
     private static boolean mIsLongPress = false;
     private static boolean allowSkipTrack;
     private static AudioManager mAudioManager;
+    private static PowerManager mPowerManager;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -72,14 +74,8 @@ public class ModVolumeKeySkipTrack {
     private static XC_MethodHook handleInterceptKeyBeforeQueueing = new XC_MethodHook() {
         @Override
         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-            final boolean isScreenOn = XposedHelpers.getBooleanField(param.thisObject, "mScreenOnFully");
-            if (!isScreenOn && allowSkipTrack) { 
-                if (mAudioManager == null) {
-                    Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
-                    if (context != null) {
-                        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-                    }
-                }
+            initManagers((Context) XposedHelpers.getObjectField(param.thisObject, "mContext"));
+            if (!mPowerManager.isInteractive() && allowSkipTrack) { 
                 final KeyEvent event = (KeyEvent) param.args[0];
                 final int keyCode = event.getKeyCode();
                 if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP)
@@ -143,6 +139,15 @@ public class ModVolumeKeySkipTrack {
             setAdditionalInstanceField(param.thisObject, "mVolumeDownLongPress", mVolumeDownLongPress);
         }
     };
+
+    private static void initManagers(Context ctx) {
+        if (mAudioManager == null) {
+            mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
+        }
+        if (mPowerManager == null) {
+            mPowerManager = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
+        }
+    }
 
     private static void sendMediaButtonEvent(Object phoneWindowManager, int code) {
         long eventtime = SystemClock.uptimeMillis();
