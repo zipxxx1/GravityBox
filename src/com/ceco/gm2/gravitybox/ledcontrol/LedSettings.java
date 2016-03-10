@@ -48,6 +48,7 @@ public class LedSettings {
     private int mColor;
     private boolean mSoundOverride;
     private Uri mSoundUri;
+    private boolean mSoundReplace;
     private boolean mSoundOnlyOnce;
     private long mSoundOnlyOnceTimeout;
     private boolean mInsistent;
@@ -133,6 +134,8 @@ public class LedSettings {
                 ls.setSoundToVibrateDisabled(Boolean.valueOf(data[1]));
             } else if (data[0].equals("vibrateReplace")) {
                 ls.setVibrateReplace(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("soundReplace")) {
+                ls.setSoundReplace(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -148,6 +151,7 @@ public class LedSettings {
         mColor = 0xffffffff;
         mSoundOverride = false;
         mSoundUri = null;
+        mSoundReplace = true;
         mSoundOnlyOnce = false;
         mSoundOnlyOnceTimeout = 0;
         mInsistent = false;
@@ -260,6 +264,10 @@ public class LedSettings {
         mSoundUri = soundUri;
     }
 
+    protected void setSoundReplace(boolean replace) {
+        mSoundReplace = replace;
+    }
+
     protected void setSoundOnlyOnce(boolean onlyOnce) {
         mSoundOnlyOnce = onlyOnce;
     }
@@ -360,6 +368,10 @@ public class LedSettings {
         return mSoundUri;
     }
 
+    public boolean getSoundReplace() {
+        return mSoundReplace;
+    }
+
     public boolean getSoundOnlyOnce() {
         return mSoundOnlyOnce;
     }
@@ -440,6 +452,7 @@ public class LedSettings {
             dataSet.add("progressTracking:" + mProgressTracking);
             dataSet.add("soundToVibrateDisabled:" + mSoundToVibrateDisabled);
             dataSet.add("vibrateReplace:" + mVibrateReplace);
+            dataSet.add("soundReplace:" + mSoundReplace);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

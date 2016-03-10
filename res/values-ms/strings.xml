@@ -1290,4 +1290,8 @@
     <string name="pref_lc_vibrate_replace_title">Gantikan getaran asal</string>
     <string name="pref_lc_vibrate_replace_summary">Gantikan jika notifikasi asal mempunyai getaran</string>
 
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">Gantikan bunyi asal</string>
+    <string name="pref_lc_sound_replace_summary">Gantikan jika notifikasi asal mempunyai bunyi</string>
+
 </resources>

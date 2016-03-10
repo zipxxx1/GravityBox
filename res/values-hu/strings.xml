@@ -1756,4 +1756,8 @@
     <string name="pref_lc_vibrate_replace_title">Eredeti rezgés lecserélése</string>
     <string name="pref_lc_vibrate_replace_summary">Csak arra az esetre vonatkozik, ha az eredeti üzenetnek is van rezgése</string>
 
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">Eredeti hang lecserélése</string>
+    <string name="pref_lc_sound_replace_summary">Csak arra az esetre vonatkozik, ha az eredeti üzenetnek is van hangja</string>
+
 </resources>
