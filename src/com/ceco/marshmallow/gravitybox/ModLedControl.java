@@ -293,7 +293,9 @@ public class ModLedControl {
                     n.sound = null;
                     n.flags &= ~Notification.FLAG_INSISTENT;
                 } else {
-                    if (ls.getSoundOverride()) {
+                    if (ls.getSoundOverride() &&
+                        ((n.defaults & Notification.DEFAULT_SOUND) != 0 ||
+                          n.sound != null || !ls.getSoundReplace())) {
                         n.defaults &= ~Notification.DEFAULT_SOUND;
                         n.sound = ls.getSoundUri();
                     }
