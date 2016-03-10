@@ -295,7 +295,9 @@ public class ModLedControl {
                     n.defaults &= ~Notification.DEFAULT_VIBRATE;
                     n.vibrate = null;
                 } else if (ls.getEnabled() && !(isOngoing && !ls.getOngoing())) {
-                    if (ls.getVibrateOverride() && ls.getVibratePattern() != null) {
+                    if (ls.getVibrateOverride() && ls.getVibratePattern() != null &&
+                            ((n.defaults & Notification.DEFAULT_VIBRATE) != 0 || 
+                             n.vibrate != null || !ls.getVibrateReplace())) {
                         n.defaults &= ~Notification.DEFAULT_VIBRATE;
                         n.vibrate = ls.getVibratePattern();
                     }

@@ -1891,4 +1891,8 @@
     <string name="battery_percent_text_position_right">Right of battery icon</string>
     <string name="battery_percent_text_position_left">Left of battery icon</string>
 
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Replace original vibration</string>
+    <string name="pref_lc_vibrate_replace_summary">Applies overriden vibration only in case original notification has vibration</string>
+
 </resources>

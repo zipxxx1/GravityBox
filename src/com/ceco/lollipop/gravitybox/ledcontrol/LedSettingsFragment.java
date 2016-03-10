@@ -55,6 +55,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_NOTIF_INSISTENT = "pref_lc_notif_insistent";
     private static final String PREF_KEY_VIBRATE_OVERRIDE = "pref_lc_vibrate_override";
     private static final String PREF_KEY_VIBRATE_PATTERN = "pref_lc_vibrate_pattern";
+    private static final String PREF_KEY_VIBRATE_REPLACE = "pref_lc_vibrate_replace";
     private static final String PREF_KEY_DEFAULT_SETTINGS = "pref_lc_default_settings";
     private static final String PREF_CAT_KEY_ACTIVE_SCREEN = "pref_cat_lc_active_screen";
     private static final String PREF_KEY_ACTIVE_SCREEN_MODE = "pref_lc_active_screen_mode";
@@ -86,6 +87,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private CheckBoxPreference mNotifInsistentPref;
     private CheckBoxPreference mVibratePatternOverridePref;
     private EditTextPreference mVibratePatternPref;
+    private CheckBoxPreference mVibrateReplacePref;
     private SwitchPreference mDefaultSettingsPref;
     private PreferenceCategory mActiveScreenCat;
     private ListPreference mActiveScreenModePref;
@@ -120,6 +122,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mVibratePatternOverridePref = (CheckBoxPreference) findPreference(PREF_KEY_VIBRATE_OVERRIDE);
         mVibratePatternPref = (EditTextPreference) findPreference(PREF_KEY_VIBRATE_PATTERN);
         mVibratePatternPref.setOnPreferenceChangeListener(this);
+        mVibrateReplacePref = (CheckBoxPreference) findPreference(PREF_KEY_VIBRATE_REPLACE);
         mDefaultSettingsPref = (SwitchPreference) findPreference(PREF_KEY_DEFAULT_SETTINGS);
         mActiveScreenCat = (PreferenceCategory) findPreference(PREF_CAT_KEY_ACTIVE_SCREEN);
         mActiveScreenModePref = (ListPreference) findPreference(PREF_KEY_ACTIVE_SCREEN_MODE);
@@ -156,6 +159,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         if (ledSettings.getVibratePatternAsString() != null) {
             mVibratePatternPref.setText(ledSettings.getVibratePatternAsString());
         }
+        mVibrateReplacePref.setChecked(ledSettings.getVibrateReplace());
         updateSoundPrefSummary();
         if (ledSettings.getPackageName().equals("default")) {
             mDefaultSettingsPref.setChecked(ledSettings.getEnabled());
@@ -262,6 +266,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected String getVibratePatternAsString() {
         return mVibratePatternPref.getText();
+    }
+
+    protected boolean getVibrateReplace() {
+        return mVibrateReplacePref.isChecked();
     }
 
     protected boolean getDefaultSettingsEnabled() {
