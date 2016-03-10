@@ -1862,4 +1862,9 @@
     <string name="battery_percent_text_position_right">Right of battery icon</string>
     <string name="battery_percent_text_position_left">Left of battery icon</string>
 
+    <!-- Disable Imprint vibrations -->
+    <string name="pref_imprint_vibe_disable_title">Disable Imprint vibrations</string>
+    <string name="imprint_vibe_disable_success">On successful authentication</string>
+    <string name="imprint_vibe_disable_error">On authentication error</string>
+
 </resources>

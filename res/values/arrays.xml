@@ -1247,4 +1247,14 @@
         <item>LEFT</item>
     </string-array>
 
+    <string-array name="imprint_vibe_disable_entries" translatable="false">
+        <item>@string/imprint_vibe_disable_success</item>
+        <item>@string/imprint_vibe_disable_error</item>
+    </string-array>
+
+    <string-array name="imprint_vibe_disable_values" translatable="false">
+        <item>SUCCESS</item>
+        <item>ERROR</item>
+    </string-array>
+
 </resources>

@@ -249,6 +249,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_SMART_UNLOCK = "pref_lockscreen_smart_unlock";
     public static final String PREF_KEY_LOCKSCREEN_SMART_UNLOCK_POLICY = "pref_lockscreen_smart_unlock_policy";
     public static final String PREF_KEY_LOCKSCREEN_IMPRINT_MODE = "pref_lockscreen_imprint_mode";
+    public static final String PREF_KEY_IMPRINT_VIBE_DISABLE = "pref_imprint_vibe_disable";
     public static final String PREF_KEY_LOCKSCREEN_D2TS = "pref_lockscreen_dt2s";
     public static final String PREF_KEY_LOCKSCREEN_CARRIER_TEXT = "pref_lockscreen_carrier_text";
     public static final String PREF_KEY_LOCKSCREEN_BLEFT_ACTION = "pref_lockscreen_bleft_action";
@@ -911,7 +912,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_D2TS,
             PREF_KEY_LOCKSCREEN_CARRIER_TEXT,
             PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR,
-            PREF_KEY_LOCKSCREEN_BLEFT_ACTION
+            PREF_KEY_LOCKSCREEN_BLEFT_ACTION,
+            PREF_KEY_IMPRINT_VIBE_DISABLE
     ));
 
     private static final List<String> headsUpKeys = new ArrayList<String>(Arrays.asList(
@@ -2258,6 +2260,18 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 p.setSummary(p.getEntry());
                 Preference dp = findPreference(PREF_KEY_DND_TILE_DURATION);
                 dp.setEnabled(p.isEnabled() && "CUSTOM".equals(p.getValue()));
+            }
+
+            if (key == null || key.equals(PREF_KEY_IMPRINT_VIBE_DISABLE)) {
+                MultiSelectListPreference p = (MultiSelectListPreference) findPreference(PREF_KEY_IMPRINT_VIBE_DISABLE);
+                String summary = "";
+                Set<String> values = p.getValues() == null ? new HashSet<String>() : p.getValues();
+                if (values.contains("SUCCESS")) summary += getString(R.string.imprint_vibe_disable_success);
+                if (values.contains("ERROR")) {
+                    if (!summary.isEmpty()) summary += ", ";
+                    summary += getString(R.string.imprint_vibe_disable_error);
+                }
+                p.setSummary(summary);
             }
 
             for (String caKey : customAppKeys) {
