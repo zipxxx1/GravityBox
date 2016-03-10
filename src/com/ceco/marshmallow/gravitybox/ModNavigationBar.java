@@ -987,11 +987,13 @@ public class ModNavigationBar {
     private static int[] getIconPaddingPx(int index) {
         int[] p = new int[] { 0, 0, 0, 0 };
 
-        int paddingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5,
-                mResources.getDisplayMetrics()));
         if (mUseLargerIcons) {
+            int paddingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 7.5f,
+                    mResources.getDisplayMetrics()));
             p[0] = p[1] = p[2] = p[3] = paddingPx;
         } else {
+            int paddingPx = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5,
+                    mResources.getDisplayMetrics()));
             boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
             if (index == 0 && mNavbarHeight < 75) {
                 p[1] = paddingPx;
