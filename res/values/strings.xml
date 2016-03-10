@@ -1867,4 +1867,8 @@
     <string name="imprint_vibe_disable_success">On successful authentication</string>
     <string name="imprint_vibe_disable_error">On authentication error</string>
 
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Replace original vibration</string>
+    <string name="pref_lc_vibrate_replace_summary">Applies overriden vibration only in case original notification has vibration</string>
+
 </resources>
