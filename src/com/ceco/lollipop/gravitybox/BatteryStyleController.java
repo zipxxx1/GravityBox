@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.Build;
 import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
@@ -151,6 +152,25 @@ public class BatteryStyleController implements BroadcastSubReceiver {
                 res.getIdentifier("battery", "id", PACKAGE_NAME));
         if (stockBatteryView != null) {
             mStockBattery = new StatusbarBattery(stockBatteryView);
+        }
+
+        // reposition percent text
+        if (!Utils.isMtkDevice() &&
+                mContainerType == ContainerType.STATUSBAR && "RIGHT".equals(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"))) {
+            View v = mPercentText.getView();
+            v.setPadding(
+                    gbRes.getDimensionPixelSize(Build.VERSION.SDK_INT > 21 ?
+                            R.dimen.percent_text_padding_right :
+                                R.dimen.percent_text_padding_left),
+                    0,
+                    gbRes.getDimensionPixelSize(Build.VERSION.SDK_INT > 21 ?
+                            R.dimen.percent_text_padding_left :
+                                R.dimen.percent_text_padding_right),
+                    0);
+            ViewGroup vg = (ViewGroup) v.getParent();
+            vg.removeView(v);
+            vg.addView(v);
         }
     }
 

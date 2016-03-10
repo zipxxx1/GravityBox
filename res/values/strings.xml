@@ -1885,4 +1885,10 @@
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Smart unlock policy</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Position in status bar</string>
+    <string name="pref_battery_percent_text_position_summary">Requires reboot</string>
+    <string name="battery_percent_text_position_right">Right of battery icon</string>
+    <string name="battery_percent_text_position_left">Left of battery icon</string>
+
 </resources>

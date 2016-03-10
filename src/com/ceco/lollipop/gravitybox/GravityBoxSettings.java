@@ -102,7 +102,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int QUICK_PULLDOWN_LEFT = 2;
 
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
+    public static final String PREF_CAT_KEY_BATTERY_PERCENT_TEXT_SETTINGS = "pref_cat_battery_percent_text";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR = "pref_battery_percent_text_statusbar";
+    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_POSITION = "pref_battery_percent_text_position";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_HEADER_HIDE = "pref_battery_percent_text_header_hide";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_KEYGUARD = "pref_battery_percent_text_keyguard";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_SIZE = "pref_battery_percent_text_size";
@@ -877,7 +879,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_SIGNAL_CLUSTER_DEM,
             PREF_KEY_VOLUME_PANEL_EXPANDABLE,
             PREF_KEY_SIGNAL_CLUSTER_DNTI,
-            PREF_KEY_SIGNAL_CLUSTER_NOSIM
+            PREF_KEY_SIGNAL_CLUSTER_NOSIM,
+            PREF_KEY_BATTERY_PERCENT_TEXT_POSITION
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(
@@ -1693,6 +1696,13 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 }
                 if (!sSystemProperties.hasGeminiSupport && !sSystemProperties.hasMsimSupport) {
                     mPrefCatStatusbarColors.removePreference(mPrefSbIconColorSecondary);
+                }
+                // Remove battery percent position
+                p = findPreference(PREF_KEY_BATTERY_PERCENT_TEXT_POSITION);
+                if (p != null) {
+                    PreferenceScreen pc = (PreferenceScreen) findPreference(
+                            PREF_CAT_KEY_BATTERY_PERCENT_TEXT_SETTINGS);
+                    if (pc != null) pc.removePreference(p);
                 }
                 // SDK 22+ only
                 if (Build.VERSION.SDK_INT < 22) {
