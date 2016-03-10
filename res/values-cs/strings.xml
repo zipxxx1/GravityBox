@@ -1856,4 +1856,8 @@
     <string name="battery_percent_text_position_right">Napravo od ikony baterie</string>
     <string name="battery_percent_text_position_left">Nalevo od ikony baterie</string>
 
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Nahradit původní vibrace</string>
+    <string name="pref_lc_vibrate_replace_summary">Aplikuje vibrace pouze v případě, že původní oznámení má vibrace</string>
+
 </resources>

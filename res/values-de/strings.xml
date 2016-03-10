@@ -1648,4 +1648,8 @@
     <string name="battery_percent_text_position_right">Rechts vom Batteriesymbol</string>
     <string name="battery_percent_text_position_left">Links vom Batteriesymbol</string>
 
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Originale Vibration ersetzen</string>
+    <string name="pref_lc_vibrate_replace_summary">Überschriebene Vibration wird nur genutzt, falls die ursprüngliche Benachrichtigung Vibration hatte</string>
+
 </resources>

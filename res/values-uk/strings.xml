@@ -1917,4 +1917,8 @@
     <string name="battery_percent_text_position_right">Праворуч від значка батареї</string>
     <string name="battery_percent_text_position_left">Ліворуч від значка батареї</string>
 
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Замінити оригінальну вібрацію</string>
+    <string name="pref_lc_vibrate_replace_summary">Застосовується лише тоді, коли вібрація присутня у сповіщенні</string>
+
 </resources>

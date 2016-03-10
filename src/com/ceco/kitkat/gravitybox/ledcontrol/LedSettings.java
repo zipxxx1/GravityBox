@@ -55,6 +55,7 @@ public class LedSettings {
     private long mSoundOnlyOnceTimeout;
     private boolean mInsistent;
     private boolean mVibrateOverride;
+    private boolean mVibrateReplace;
     private String mVibratePatternStr;
     private long[] mVibratePattern;
     private ActiveScreenMode mActiveScreenMode;
@@ -148,6 +149,8 @@ public class LedSettings {
                 ls.setProgressTracking(Boolean.valueOf(data[1]));
             } else if (data[0].equals("soundToVibrateDisabled")) {
                 ls.setSoundToVibrateDisabled(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("vibrateReplace")) {
+                ls.setVibrateReplace(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -169,6 +172,7 @@ public class LedSettings {
         mVibrateOverride = false;
         mVibratePatternStr = null;
         mVibratePattern = null;
+        mVibrateReplace = true;
         mActiveScreenMode = ActiveScreenMode.DISABLED;
         mLedMode = LedMode.OVERRIDE;
         mQhIgnore = false;
@@ -329,6 +333,10 @@ public class LedSettings {
         }
     }
 
+    protected void setVibrateReplace(boolean replace) {
+        mVibrateReplace = replace;
+    }
+
     protected void setActiveScreenMode(ActiveScreenMode mode) {
         mActiveScreenMode = mode;
     }
@@ -437,6 +445,10 @@ public class LedSettings {
         return mVibratePattern;
     }
 
+    public boolean getVibrateReplace() {
+        return mVibrateReplace;
+    }
+
     public ActiveScreenMode getActiveScreenMode() {
         return mActiveScreenMode;
     }
@@ -513,6 +525,7 @@ public class LedSettings {
             dataSet.add("headsUpTimeout:" + mHeadsUpTimeout);
             dataSet.add("progressTracking:" + mProgressTracking);
             dataSet.add("soundToVibrateDisabled:" + mSoundToVibrateDisabled);
+            dataSet.add("vibrateReplace:" + mVibrateReplace);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();
