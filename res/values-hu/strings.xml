@@ -1746,4 +1746,10 @@
     <string name="pref_nm_tile_enabled_modes_title">Engedélyezett üzemmódok</string>
     <string name="pref_nm_tile_enabled_modes_summary">Meghatározza, hogy mely hálózati üzemmód csempék támogatottak</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Pozíció az állapotsávon</string>
+    <string name="pref_battery_percent_text_position_summary">Újraindítás szükséges</string>
+    <string name="battery_percent_text_position_right">Akkumulátor ikontól jobbra</string>
+    <string name="battery_percent_text_position_left">Akkumulátor ikontól balra</string>
+
 </resources>

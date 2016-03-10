@@ -1773,4 +1773,10 @@
     <string name="pref_nm_tile_enabled_modes_title">Включенные режимы</string>
     <string name="pref_nm_tile_enabled_modes_summary">Определение сетевых режимов, которые должна поддерживать плитка</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Положение в строке состояния</string>
+    <string name="pref_battery_percent_text_position_summary">Необходима перезагрузка</string>
+    <string name="battery_percent_text_position_right">Справа от значка батареи</string>
+    <string name="battery_percent_text_position_left">Слева от значка батареи</string>
+
 </resources>

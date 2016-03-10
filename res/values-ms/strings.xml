@@ -1280,4 +1280,10 @@
     <string name="pref_lockscreen_show_pattern_error_title">Tunjuk kesalahan pattern</string>
     <string name="pref_lockscreen_show_pattern_error_summary">Tunjuk jejak kesalahan dalam garisan merah</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Kedudukan di bar status</string>
+    <string name="pref_battery_percent_text_position_summary">Perlukan reboot</string>
+    <string name="battery_percent_text_position_right">Di kanan ikon bateri</string>
+    <string name="battery_percent_text_position_left">Di kiri ikon bateri</string>
+
 </resources>

@@ -232,6 +232,14 @@ public class ModBatteryStyle {
                 ModStatusbarColor.setBattery(mStockBattery);
             }
 
+            // reposition percent text
+            if ("RIGHT".equals(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"))) {
+                View v = mPercentText.getView();
+                vg.removeView(v);
+                vg.addView(v);
+            }
+
             updateBatteryStyle();
 
             Class<?> batteryControllerClass = XposedHelpers.findClass(CLASS_BATTERY_CONTROLLER,

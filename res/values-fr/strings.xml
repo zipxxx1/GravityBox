@@ -1703,4 +1703,10 @@
     <string name="pref_battery_bar_color_low_title">Couleur pour batterie faible</string>
     <string name="pref_battery_bar_color_critical_title">Couleur pour batterie critique</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Position dans la barre d\'état</string>
+    <string name="pref_battery_percent_text_position_summary">Nécessite de redémarrer</string>
+    <string name="battery_percent_text_position_right">A droite de l\'icône batterie</string>
+    <string name="battery_percent_text_position_left">A gauche de l\'icône batterie</string>
+
 </resources>

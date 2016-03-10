@@ -1773,4 +1773,10 @@
     <string name="pref_nm_tile_enabled_modes_title">Enabled modes</string>
     <string name="pref_nm_tile_enabled_modes_summary">Defines which network modes tile should support</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Position in status bar</string>
+    <string name="pref_battery_percent_text_position_summary">Requires reboot</string>
+    <string name="battery_percent_text_position_right">Right of battery icon</string>
+    <string name="battery_percent_text_position_left">Left of battery icon</string>
+
 </resources>
