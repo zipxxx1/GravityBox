@@ -1642,4 +1642,10 @@
     <!-- Charger unplugged sound -->
     <string name="pref_charger_unplugged_sound_title">Ladegerät getrennt Ton</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Position in der Statusleiste</string>
+    <string name="pref_battery_percent_text_position_summary">Benötigt Neustart</string>
+    <string name="battery_percent_text_position_right">Rechts vom Batteriesymbol</string>
+    <string name="battery_percent_text_position_left">Links vom Batteriesymbol</string>
+
 </resources>

@@ -107,6 +107,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_BATTERY_STYLE = "pref_battery_style";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT = "pref_battery_percent_text";
+    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_POSITION = "pref_battery_percent_text_position";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_SIZE = "pref_battery_percent_text_size";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STYLE = "pref_battery_percent_text_style";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING = "battery_percent_text_charging";
@@ -898,7 +899,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_MTK_FIX_TTS_SETTINGS,
             PREF_KEY_SIGNAL_CLUSTER_HIDE_SIM_LABELS,
             PREF_KEY_SIGNAL_CLUSTER_LOLLIPOP_ICONS,
-            PREF_KEY_NAVBAR_LEFT_HANDED
+            PREF_KEY_NAVBAR_LEFT_HANDED,
+            PREF_KEY_BATTERY_PERCENT_TEXT_POSITION
     ));
 
     private static final List<String> customAppKeys = new ArrayList<String>(Arrays.asList(

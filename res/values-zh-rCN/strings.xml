@@ -1912,4 +1912,10 @@
     <string name="pref_nm_tile_enabled_modes_title">启用模式</string>
     <string name="pref_nm_tile_enabled_modes_summary">在瓷砖中定义支持哪些网络模式</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">状态栏位置</string>
+    <string name="pref_battery_percent_text_position_summary">需要重新启动</string>
+    <string name="battery_percent_text_position_right">电池图标在右侧</string>
+    <string name="battery_percent_text_position_left">电池图标在左侧</string>
+
 </resources>

@@ -833,6 +833,14 @@
                     android:title="@string/battery_percent_text_show_title"
                     android:defaultValue="false" />
 
+                <ListPreference 
+                    android:key="pref_battery_percent_text_position"
+                    android:title="@string/pref_battery_percent_text_position_title"
+                    android:summary="@string/pref_battery_percent_text_position_summary"
+                    android:entries="@array/battery_percent_text_position_entries"
+                    android:entryValues="@array/battery_percent_text_position_values"
+                    android:defaultValue="RIGHT" />
+
                 <ListPreference
                     android:key="pref_battery_percent_text_size"
                     android:title="@string/battery_percent_text_size_title" 

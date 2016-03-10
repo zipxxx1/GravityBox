@@ -1850,4 +1850,10 @@
          Oznámení na spárovaném Android Wear zařízení budou nadále vibrovat v případě, že jsou povoleny vibrace oznámení.
     </string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Poloha ve stavové liště</string>
+    <string name="pref_battery_percent_text_position_summary">Vyžaduje restart</string>
+    <string name="battery_percent_text_position_right">Napravo od ikony baterie</string>
+    <string name="battery_percent_text_position_left">Nalevo od ikony baterie</string>
+
 </resources>

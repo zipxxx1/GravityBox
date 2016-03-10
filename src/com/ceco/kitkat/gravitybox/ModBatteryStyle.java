@@ -205,6 +205,14 @@ public class ModBatteryStyle {
                 }
             }
 
+            // reposition percent text
+            if ("RIGHT".equals(prefs.getString(
+                    GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"))) {
+                View v = mPercentText.getView();
+                vg.removeView(v);
+                vg.addView(v);
+            }
+
             updateBatteryStyle();
 
             if (Utils.isMtkDevice()) {

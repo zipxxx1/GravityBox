@@ -1911,4 +1911,10 @@
     <string name="pref_nm_tile_enabled_modes_title">Увімкнути режими</string>
     <string name="pref_nm_tile_enabled_modes_summary">Визначити режими, які підтримувати при перемиканні</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Позиція в панелі статусу</string>
+    <string name="pref_battery_percent_text_position_summary">Необхідне перезавантаження</string>
+    <string name="battery_percent_text_position_right">Праворуч від значка батареї</string>
+    <string name="battery_percent_text_position_left">Ліворуч від значка батареї</string>
+
 </resources>
