@@ -506,7 +506,9 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
         if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR)) {
                 mPercentTextSb = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, false);
+                        GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STATUSBAR, false) &&
+                        "LEFT".equals(sPrefs.getString(GravityBoxSettings
+                                .PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"));
                 updateBatteryPadding();
             }
         }
@@ -518,7 +520,9 @@ public class StatusbarSignalCluster implements BroadcastSubReceiver, IconManager
 
         mBatteryStyle = Integer.valueOf(sPrefs.getString(
                 GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
-        mPercentTextSb = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false);
+
+        mPercentTextSb = sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STATUSBAR, false) &&
+                "LEFT".equals(sPrefs.getString(GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"));
 
         mNetworkTypeIndicatorsDisabled = Utils.isMtkDevice() &&
                 sPrefs.getBoolean(GravityBoxSettings.PREF_KEY_SIGNAL_CLUSTER_DNTI, false);

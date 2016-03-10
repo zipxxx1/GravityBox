@@ -1237,4 +1237,14 @@
         <item>10</item>
     </string-array>
 
+    <string-array name="battery_percent_text_position_entries" translatable="false">
+        <item>@string/battery_percent_text_position_right</item>
+        <item>@string/battery_percent_text_position_left</item>
+    </string-array>
+
+    <string-array name="battery_percent_text_position_values" translatable="false">
+        <item>RIGHT</item>
+        <item>LEFT</item>
+    </string-array>
+
 </resources>

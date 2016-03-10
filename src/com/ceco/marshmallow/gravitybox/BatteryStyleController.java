@@ -153,6 +153,20 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         if (stockBatteryView != null) {
             mStockBattery = new StatusbarBattery(stockBatteryView);
         }
+
+        // reposition percent text
+        if (mContainerType == ContainerType.STATUSBAR && "RIGHT".equals(mPrefs.getString(
+                GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_POSITION, "RIGHT"))) {
+            View v = mPercentText.getView();
+            v.setPadding(
+                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_right),
+                    0,
+                    gbRes.getDimensionPixelSize(R.dimen.percent_text_padding_left),
+                    0);
+            ViewGroup vg = (ViewGroup) v.getParent();
+            vg.removeView(v);
+            vg.addView(v);
+        }
     }
 
     private void updateBatteryStyle() {
