@@ -1709,4 +1709,8 @@
     <string name="battery_percent_text_position_right">A droite de l\'icône batterie</string>
     <string name="battery_percent_text_position_left">A gauche de l\'icône batterie</string>
 
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Remplace la vibration originale</string>
+    <string name="pref_lc_vibrate_replace_summary">Applique une vibration redéfinie seulement dans le cas où la vibration est active pour la notification originale</string>
+
 </resources>

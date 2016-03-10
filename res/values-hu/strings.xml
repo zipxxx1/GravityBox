@@ -1752,4 +1752,8 @@
     <string name="battery_percent_text_position_right">Akkumulátor ikontól jobbra</string>
     <string name="battery_percent_text_position_left">Akkumulátor ikontól balra</string>
 
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Eredeti rezgés lecserélése</string>
+    <string name="pref_lc_vibrate_replace_summary">Csak arra az esetre vonatkozik, ha az eredeti üzenetnek is van rezgése</string>
+
 </resources>

@@ -1286,4 +1286,8 @@
     <string name="battery_percent_text_position_right">Di kanan ikon bateri</string>
     <string name="battery_percent_text_position_left">Di kiri ikon bateri</string>
 
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Gantikan getaran asal</string>
+    <string name="pref_lc_vibrate_replace_summary">Gantikan jika notifikasi asal mempunyai getaran</string>
+
 </resources>

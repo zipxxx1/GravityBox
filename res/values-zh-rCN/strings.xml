@@ -1779,4 +1779,8 @@
     <string name="battery_percent_text_position_right">电池图标在右侧</string>
     <string name="battery_percent_text_position_left">电池图标在左侧</string>
 
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">更换原来的振动</string>
+    <string name="pref_lc_vibrate_replace_summary">仅适用于覆盖原始通知振动以防振动</string>
+
 </resources>
