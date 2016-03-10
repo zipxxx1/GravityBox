@@ -49,6 +49,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_ONGOING = "pref_lc_ongoing";
     private static final String PREF_KEY_NOTIF_SOUND_OVERRIDE = "pref_lc_notif_sound_override";
     private static final String PREF_KEY_NOTIF_SOUND = "pref_lc_notif_sound";
+    private static final String PREF_KEY_NOTIF_SOUND_REPLACE = "pref_lc_sound_replace";
     private static final String PREF_KEY_NOTIF_SOUND_ONLY_ONCE = "pref_lc_notif_sound_only_once";
     private static final String PREF_KEY_NOTIF_SOUND_ONLY_ONCE_TIMEOUT = "pref_lc_notif_sound_only_once_timeout";
     private static final String PREF_KEY_NOTIF_INSISTENT = "pref_lc_notif_insistent";
@@ -81,6 +82,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private Preference mNotifSoundPref;
     private CheckBoxPreference mNotifSoundOverridePref;
     private Uri mSoundUri;
+    private CheckBoxPreference mSoundReplacePref;
     private CheckBoxPreference mNotifSoundOnlyOncePref;
     private SeekBarPreference mNotifSoundOnlyOnceTimeoutPref;
     private CheckBoxPreference mNotifInsistentPref;
@@ -115,6 +117,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mOngoingPref = (CheckBoxPreference) findPreference(PREF_KEY_ONGOING);
         mNotifSoundOverridePref = (CheckBoxPreference) findPreference(PREF_KEY_NOTIF_SOUND_OVERRIDE);
         mNotifSoundPref = findPreference(PREF_KEY_NOTIF_SOUND);
+        mSoundReplacePref = (CheckBoxPreference) findPreference(PREF_KEY_NOTIF_SOUND_REPLACE);
         mNotifSoundOnlyOncePref = (CheckBoxPreference) findPreference(PREF_KEY_NOTIF_SOUND_ONLY_ONCE);
         mNotifSoundOnlyOnceTimeoutPref = (SeekBarPreference) findPreference(PREF_KEY_NOTIF_SOUND_ONLY_ONCE_TIMEOUT);
         mNotifInsistentPref = (CheckBoxPreference) findPreference(PREF_KEY_NOTIF_INSISTENT);
@@ -150,6 +153,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mOngoingPref.setChecked(ledSettings.getOngoing());
         mNotifSoundOverridePref.setChecked(ledSettings.getSoundOverride());
         mSoundUri = ledSettings.getSoundUri();
+        mSoundReplacePref.setChecked(ledSettings.getSoundReplace());
         mNotifSoundOnlyOncePref.setChecked(ledSettings.getSoundOnlyOnce());
         mNotifSoundOnlyOnceTimeoutPref.setValue((int)(ledSettings.getSoundOnlyOnceTimeout() / 1000));
         mNotifInsistentPref.setChecked(ledSettings.getInsistent());
@@ -244,6 +248,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected Uri getSoundUri() {
         return mSoundUri;
+    }
+
+    protected boolean getSoundReplace() {
+        return mSoundReplacePref.isChecked();
     }
 
     protected boolean getSoundOnlyOnce() {

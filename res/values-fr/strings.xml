@@ -1884,4 +1884,8 @@
     <string name="pref_lc_vibrate_replace_title">Remplace la vibration originale</string>
     <string name="pref_lc_vibrate_replace_summary">Applique une vibration redéfinie seulement dans le cas où la vibration est active pour la notification originale</string>
 
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">Remplace le son original</string>
+    <string name="pref_lc_sound_replace_summary">Applique un son redéfini seulement dans le cas où le son est actif pour la notification originale</string>
+
 </resources>

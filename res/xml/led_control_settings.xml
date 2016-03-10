@@ -81,6 +81,14 @@
             android:dependency="pref_lc_notif_sound_override" />
 
         <CheckBoxPreference
+            android:key="pref_lc_sound_replace"
+            android:title="@string/pref_lc_sound_replace_title"
+            android:summary="@string/pref_lc_sound_replace_summary"
+            android:defaultValue="true"
+            android:persistent="false"
+            android:dependency="pref_lc_notif_sound_override" />
+
+        <CheckBoxPreference
             android:key="pref_lc_notif_sound_only_once"
             android:title="@string/pref_lc_notif_sound_only_once_title"
             android:summary="@string/pref_lc_notif_sound_only_once_summary"

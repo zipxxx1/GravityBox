@@ -1866,4 +1866,8 @@
     <string name="pref_lc_vibrate_replace_title">Nahradiť pôvodné vibrácie</string>
     <string name="pref_lc_vibrate_replace_summary">Aplikuje vibrácie len v prípade, ak pôvodné oznámenie má vibrácie</string>
 
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">Nahradiť pôvodný zvuk</string>
+    <string name="pref_lc_sound_replace_summary">Aplikuje zvuk len v prípade, ak pôvodné oznámenie má zvuk</string>
+
 </resources>

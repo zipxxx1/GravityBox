@@ -1922,4 +1922,8 @@
     <string name="pref_lc_vibrate_replace_title">Заменить оригинальную вибрацию</string>
     <string name="pref_lc_vibrate_replace_summary">Применение замены вибрации только если вибрация присутствует в оригинальном уведомлении</string>
 
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">Заменить оригинальный звук</string>
+    <string name="pref_lc_sound_replace_summary">Применение замены звука только если звук присутствует в оригинальном уведомлении</string>
+
 </resources>

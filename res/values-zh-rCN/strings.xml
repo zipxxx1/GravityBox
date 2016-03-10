@@ -1922,4 +1922,8 @@
     <string name="pref_lc_vibrate_replace_title">更换原来的振动</string>
     <string name="pref_lc_vibrate_replace_summary">仅适用于覆盖原始通知振动以防振动</string>
 
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">替换原来的声音</string>
+    <string name="pref_lc_sound_replace_summary">仅适用于通知声音覆盖原有声音的情况下</string>
+
 </resources>
