@@ -16,6 +16,7 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
+import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryData;
 import com.ceco.lollipop.gravitybox.managers.BatteryInfoManager.BatteryStatusListener;
 import com.ceco.lollipop.gravitybox.managers.SysUiManagers;
@@ -46,6 +47,8 @@ public class BatteryTile extends QsTile {
     private boolean mSaverIndicate;
     private String mTempUnit;
     private boolean mSwapActions;
+    private boolean mShowTemp;
+    private boolean mShowVoltage;
 
     public BatteryTile(Object host, String key, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
@@ -88,6 +91,8 @@ public class BatteryTile extends QsTile {
         mSaverIndicate = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TILE_SAVER_INDICATE, false);
         mTempUnit = mPrefs.getString(GravityBoxSettings.PREF_KEY_BATTERY_TILE_TEMP_UNIT, "C");
         mSwapActions = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TILE_SWAP_ACTIONS, false);
+        mShowTemp = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TILE_TEMP, true);
+        mShowVoltage = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_BATTERY_TILE_VOLTAGE, true);
     }
 
     @Override
@@ -110,6 +115,14 @@ public class BatteryTile extends QsTile {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_TILE_SWAP_ACTIONS)) {
                 mSwapActions = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_BATTERY_TILE_SWAP_ACTIONS, false);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_TILE_TEMP)) {
+                mShowTemp = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_TILE_TEMP, true);
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_TILE_VOLTAGE)) {
+                mShowVoltage = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_BATTERY_TILE_VOLTAGE, true);
             }
         }
     }
@@ -136,10 +149,26 @@ public class BatteryTile extends QsTile {
             if (DEBUG) log(getKey() + ": handleUpdateState: battery data is null");
         } else {
             mState.visible = true;
-            float temp = mTempUnit.equals("C") ? 
-                    mBatteryData.getTempCelsius() : mBatteryData.getTempFahrenheit();
-            mState.label = String.format("%.1f\u00b0%s, %dmV",
-                    temp, mTempUnit, mBatteryData.voltage);
+            mState.label = "";
+            if (mShowTemp && mShowVoltage) {
+                mState.label = String.format("%.1f\u00b0%s, %dmV",
+                        mBatteryData.getTemp(mTempUnit), mTempUnit, mBatteryData.voltage);
+            } else if (mShowTemp) {
+                mState.label = String.format("%.1f\u00b0%s",
+                        mBatteryData.getTemp(mTempUnit), mTempUnit);
+            } else if (mShowVoltage) {
+                mState.label = String.format("%dmV", mBatteryData.voltage);
+            }
+            if (mBatteryData.charging && mShowPercentage) {
+                if (mState.label.isEmpty()) {
+                    mState.label = String.format("%d%%", mBatteryData.level);
+                } else {
+                    mState.label = String.format("%d%%, %s", mBatteryData.level, mState.label);
+                }
+            }
+            if (mState.label.isEmpty()) {
+                mState.label = mGbContext.getString(R.string.qs_tile_battery);
+            }
         }
         if (mBatteryView != null) {
             mBatteryView.postInvalidate();
