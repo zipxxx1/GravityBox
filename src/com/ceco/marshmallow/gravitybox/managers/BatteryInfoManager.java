@@ -71,6 +71,15 @@ public class BatteryInfoManager implements BroadcastSubReceiver {
             return (((float)temperature/10f)*(9f/5f)+32);
         }
 
+        public float getTemp(String unit) {
+            if ("C".equals(unit))
+                return getTempCelsius();
+            else if ("F".equals(unit))
+                return getTempFahrenheit();
+            else
+                return 0f; 
+        }
+
         public BatteryData clone() {
             BatteryData bd = new BatteryData();
             bd.charging = this.charging;

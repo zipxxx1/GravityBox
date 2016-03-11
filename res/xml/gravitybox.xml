@@ -253,17 +253,28 @@
                         android:defaultValue="false" />
 
                     <CheckBoxPreference 
-                        android:key="pref_battery_tile_saver_indicate"
-                        android:title="@string/pref_battery_tile_saver_indicate_title"
-                        android:summary="@string/pref_battery_tile_saver_indicate_summary"
-                        android:defaultValue="false" />
+                        android:key="pref_battery_tile_temp"
+                        android:title="@string/pref_battery_tile_temp_title"
+                        android:defaultValue="true" />
 
                     <ListPreference
                         android:key="pref_battery_tile_temp_unit" 
                         android:title="@string/pref_battery_tile_temp_unit_title"
                         android:entries="@array/temperature_unit_entries"
                         android:entryValues="@array/temperature_unit_values"
-                        android:defaultValue="C" />
+                        android:defaultValue="C"
+                        android:dependency="pref_battery_tile_temp" />
+
+                    <CheckBoxPreference 
+                        android:key="pref_battery_tile_voltage"
+                        android:title="@string/pref_battery_tile_voltage_title"
+                        android:defaultValue="true" />
+
+                    <CheckBoxPreference 
+                        android:key="pref_battery_tile_saver_indicate"
+                        android:title="@string/pref_battery_tile_saver_indicate_title"
+                        android:summary="@string/pref_battery_tile_saver_indicate_summary"
+                        android:defaultValue="false" />
 
                     <CheckBoxPreference 
                         android:key="pref_battery_tile_swap_actions"

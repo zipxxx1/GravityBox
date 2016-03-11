@@ -1875,4 +1875,8 @@
     <string name="pref_lc_sound_replace_title">Replace original sound</string>
     <string name="pref_lc_sound_replace_summary">Applies overriden sound only in case original notification has sound</string>
 
+    <!-- Battery tile options -->
+    <string name="pref_battery_tile_temp_title">Show temperature</string>
+    <string name="pref_battery_tile_voltage_title">Show voltage</string>
+
 </resources>
