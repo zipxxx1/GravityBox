@@ -192,7 +192,8 @@ public abstract class BaseTile implements QsEventListener {
         XposedHelpers.setAdditionalInstanceField(tileView, TILE_KEY_NAME, mKey);
 
         mScalingFactor = QsPanel.getScalingFactor(Integer.valueOf(mPrefs.getString(
-                GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0")));
+                GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0")),
+                mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0));
         if (mScalingFactor != 1f) {
             int iconSizePx = XposedHelpers.getIntField(tileView, "mIconSizePx");
             XposedHelpers.setIntField(tileView, "mIconSizePx", Math.round(iconSizePx*mScalingFactor));

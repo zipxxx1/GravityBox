@@ -81,7 +81,8 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
             final String action = intent.getAction();
             if (action.equals(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED)) {
                 if (intent.hasExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED) ||
-                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS)) {
+                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_COLS) ||
+                        intent.hasExtra(GravityBoxSettings.EXTRA_QS_SCALE_CORRECTION)) {
                     recreateTiles();
                 } else {
                     notifyTilesOfBroadcast(context, intent);

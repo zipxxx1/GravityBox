@@ -46,6 +46,7 @@ public class QsPanel implements BroadcastSubReceiver {
     private XSharedPreferences mPrefs;
     private ViewGroup mQsPanel;
     private int mNumColumns;
+    private int mScaleCorrection;
     private View mBrightnessSlider;
     private boolean mHideBrightness;
 
@@ -60,6 +61,7 @@ public class QsPanel implements BroadcastSubReceiver {
     private void initPreferences() {
         mNumColumns = Integer.valueOf(mPrefs.getString(
                 GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_TILES_PER_ROW, "0"));
+        mScaleCorrection = mPrefs.getInt(GravityBoxSettings.PREF_KEY_QS_SCALE_CORRECTION, 0);
         mHideBrightness = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_BRIGHTNESS, false);
         if (DEBUG) log("initPreferences: mNumColumns=" + mNumColumns +
                 "; mHideBrightness=" + mHideBrightness);
@@ -87,6 +89,11 @@ public class QsPanel implements BroadcastSubReceiver {
                 updateResources();
                 if (DEBUG) log("onBroadcastReceived: mNumColumns=" + mNumColumns);
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_SCALE_CORRECTION)) {
+                mScaleCorrection = intent.getIntExtra(GravityBoxSettings.EXTRA_QS_SCALE_CORRECTION, 0);
+                updateResources();
+                if (DEBUG) log("onBroadcastReceived: mScaleCorrection=" + mScaleCorrection);
+            }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_BRIGHTNESS)) {
                 mHideBrightness = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_QS_HIDE_BRIGHTNESS, false);
@@ -96,14 +103,15 @@ public class QsPanel implements BroadcastSubReceiver {
         } 
     }
 
-    public static float getScalingFactor(int numColumns) {
+    public static float getScalingFactor(int numColumns, int correctionPercent) {
+        float correction = (float)correctionPercent / 100f;
         switch (numColumns) {
             default:
-            case 0: return 1f;
-            case 3: return 1f;
-            case 4: return 0.85f;
-            case 5: return 0.75f;
-            case 6: return 0.65f;
+            case 0: return 1f + correction;
+            case 3: return 1f + correction;
+            case 4: return 0.85f + correction;
+            case 5: return 0.75f + correction;
+            case 6: return 0.65f + correction;
         }
     }
 
@@ -168,7 +176,7 @@ public class QsPanel implements BroadcastSubReceiver {
                         shouldInvalidate = true;
                         XposedHelpers.setIntField(mQsPanel, "mColumns", mNumColumns);
                         if (DEBUG) log("updateResources: Updated number of columns per row");
-                        final float factor = getScalingFactor(mNumColumns);
+                        final float factor = getScalingFactor(mNumColumns, mScaleCorrection);
                         if (factor != 1f) {
                             int ch = XposedHelpers.getIntField(mQsPanel, "mCellHeight");
                             XposedHelpers.setIntField(mQsPanel, "mCellHeight", Math.round(ch*factor));

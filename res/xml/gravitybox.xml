@@ -447,6 +447,16 @@
                 android:defaultValue="0"
                 android:dependency="pref_qs_management_enable" />
 
+            <com.ceco.lollipop.gravitybox.preference.SeekBarPreference
+                android:key="pref_qs_scale_correction"
+                android:title="@string/pref_qs_scale_correction_title"
+                minimum="-30"
+                maximum="30"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="%" 
+                android:defaultValue="0" />
+
             <!--
             <ListPreference
                 android:key="pref_qs_tile_label_style" 
