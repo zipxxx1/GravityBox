@@ -102,21 +102,6 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         Resources res = mContext.getResources();
         Resources gbRes = Utils.getGbContext(mContext).getResources();
 
-        // inject circle battery view
-        mCircleBattery = new CmCircleBattery(mContext, this);
-        LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        lParams.gravity = Gravity.CENTER_VERTICAL;
-        mCircleBattery.setLayoutParams(lParams);
-        mCircleBattery.setPadding(
-                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left),
-                0,
-                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right),
-                0);
-        mCircleBattery.setVisibility(View.GONE);
-        mSystemIcons.addView(mCircleBattery);
-        if (DEBUG) log("CmCircleBattery injected");
-
         // inject percent text if it doesn't exist
         for (String bptId : batteryPercentTextIds) {
             final int bptResId = res.getIdentifier(bptId, "id", PACKAGE_NAME);
@@ -131,7 +116,7 @@ public class BatteryStyleController implements BroadcastSubReceiver {
         }
         if (mPercentText == null) {
             TextView percentTextView = new TextView(mContext);
-            lParams = new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             percentTextView.setLayoutParams(lParams);
             percentTextView.setPadding(
@@ -142,9 +127,24 @@ public class BatteryStyleController implements BroadcastSubReceiver {
             percentTextView.setTextColor(Color.WHITE);
             percentTextView.setVisibility(View.GONE);
             mPercentText = new StatusbarBatteryPercentage(percentTextView, mPrefs);
-            mSystemIcons.addView(mPercentText.getView());
+            mSystemIcons.addView(mPercentText.getView(), mSystemIcons.getChildCount()-1);
             if (DEBUG) log("Battery percent text injected");
         }
+
+        // inject circle battery view
+        mCircleBattery = new CmCircleBattery(mContext, this);
+        LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
+                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        lParams.gravity = Gravity.CENTER_VERTICAL;
+        mCircleBattery.setLayoutParams(lParams);
+        mCircleBattery.setPadding(
+                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_left),
+                0,
+                gbRes.getDimensionPixelSize(R.dimen.circle_battery_padding_right),
+                0);
+        mCircleBattery.setVisibility(View.GONE);
+        mSystemIcons.addView(mCircleBattery);
+        if (DEBUG) log("CmCircleBattery injected");
 
         // find battery
         View stockBatteryView = mSystemIcons.findViewById(
