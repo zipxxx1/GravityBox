@@ -1832,4 +1832,25 @@
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Režim funkcie Smart Unlock</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Poloha v stavovej lište</string>
+    <string name="pref_battery_percent_text_position_summary">Vyžaduje reštart</string>
+    <string name="battery_percent_text_position_right">Napravo od ikony batérie</string>
+    <string name="battery_percent_text_position_left">Naľavo od ikony batérie</string>
+
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Nahradiť pôvodné vibrácie</string>
+    <string name="pref_lc_vibrate_replace_summary">Aplikuje vibrácie len v prípade, ak pôvodné oznámenie má vibrácie</string>
+
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">Nahradiť pôvodný zvuk</string>
+    <string name="pref_lc_sound_replace_summary">Aplikuje zvuk len v prípade, ak pôvodné oznámenie má zvuk</string>
+
+    <!-- Battery tile options -->
+    <string name="pref_battery_tile_temp_title">Zobraziť teplotu</string>
+    <string name="pref_battery_tile_voltage_title">Zobraziť napätie</string>
+
+    <!-- QS: Scale correction -->
+    <string name="pref_qs_scale_correction_title">Korekcia škály</string>
+
 </resources>
