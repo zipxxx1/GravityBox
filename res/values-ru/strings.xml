@@ -1855,4 +1855,30 @@
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Политика умной разблокировки</string>
 
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Положение в строке состояния</string>
+    <string name="pref_battery_percent_text_position_summary">Необходима перезагрузка</string>
+    <string name="battery_percent_text_position_right">Справа от значка батареи</string>
+    <string name="battery_percent_text_position_left">Слева от значка батареи</string>
+
+    <!-- Disable Imprint vibrations -->
+    <string name="pref_imprint_vibe_disable_title">Откл вибрацию отпечатка</string>
+    <string name="imprint_vibe_disable_success">При успешной аутентификации</string>
+    <string name="imprint_vibe_disable_error">При ошибке аутентификации</string>
+
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Заменить оригинальную вибрацию</string>
+    <string name="pref_lc_vibrate_replace_summary">Применение замены вибрации только если вибрация присутствует в оригинальном уведомлении</string>
+
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">Заменить оригинальный звук</string>
+    <string name="pref_lc_sound_replace_summary">Применение замены звука только если звук присутствует в оригинальном уведомлении</string>
+
+    <!-- Battery tile options -->
+    <string name="pref_battery_tile_temp_title">Показать температуру</string>
+    <string name="pref_battery_tile_voltage_title">Показать напряжение</string>
+
+    <!-- QS: Scale correction -->
+    <string name="pref_qs_scale_correction_title">Коррекция масштаба</string>
+
 </resources>
