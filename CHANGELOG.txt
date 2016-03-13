@@ -1,3 +1,22 @@
+Changelog 5.3.7 - 13/03/2016
+--------------------------------------
+- Quick settings management:
+--- BatteryTile: made temperature and voltage optional
+--- Added option for Scale correction:
+----- allows fine-tuning of tile size by applying correction factor to automatic scaling factor that's based on tiles per row option
+- Media tweaks: allow volume keys skip track during ambient display
+- Statusbar tweaks:
+--- Battery: added option for battery percent text position in status bar
+--- Clock: put AM/PM in front of clock for Chinese locales (thanks to npes87184)
+--- Ongoing notification blocker: include non-clearable notifications in general
+- Ultimate notification control:
+--- added options for Replace mode of overriden vibration/sound (turned on by default)
+----- applies overriden vibration/sound only in case original notification has vibration/sound
+----- prevents low priority notifications from vibrating/playing overriden sound 
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Ukrainian translations (thanks to burunduk)
+
 Changelog 5.3.6 - 13/02/2016
 --------------------------------------
 - QuickSettings management:
