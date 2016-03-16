@@ -1882,4 +1882,7 @@
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Scale correction</string>
 
+    <!-- MTK tiles: Timeout -->
+    <string name="qs_tile_timeout">Timeout</string>
+
 </resources>
