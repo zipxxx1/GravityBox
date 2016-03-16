@@ -28,11 +28,6 @@ public class BluetoothTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.android.systemui.qs.tiles.BluetoothTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }
@@ -90,7 +85,7 @@ public class BluetoothTile extends AospTile {
 
         // this seems to be unsupported on custom ROMs. Log one line and continue.
         try {
-            mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(getClassName(), 
+            mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                     cl, "supportsDualTargets", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -103,7 +98,7 @@ public class BluetoothTile extends AospTile {
 
         try {
             if (Build.VERSION.SDK_INT == 21) {
-                mHandleSecondaryClickHook = XposedHelpers.findAndHookMethod(getClassName(),
+                mHandleSecondaryClickHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(),
                         cl, "handleSecondaryClick", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

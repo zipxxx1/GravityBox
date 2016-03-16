@@ -12,11 +12,6 @@ public class AirplaneModeTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.android.systemui.qs.tiles.AirplaneModeTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }

@@ -33,11 +33,6 @@ public class WifiTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.android.systemui.qs.tiles.WifiTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }
@@ -99,7 +94,7 @@ public class WifiTile extends AospTile {
             final ClassLoader cl = mContext.getClassLoader();
 
         try {
-            mCreateTileViewHook = XposedHelpers.findAndHookMethod(getClassName(), 
+            mCreateTileViewHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                     cl, "createTileView", Context.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -111,7 +106,7 @@ public class WifiTile extends AospTile {
         }
 
         try {
-            mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(getClassName(), 
+            mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                     cl, "supportsDualTargets", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -124,7 +119,7 @@ public class WifiTile extends AospTile {
 
         try {
             if (Build.VERSION.SDK_INT == 21) {
-                mHandleSecondaryClickHook = XposedHelpers.findAndHookMethod(getClassName(),
+                mHandleSecondaryClickHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(),
                         cl, "handleSecondaryClick", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

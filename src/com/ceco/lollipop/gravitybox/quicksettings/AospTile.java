@@ -60,7 +60,6 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
         if (DEBUG) log(mKey + ": aosp tile wrapper created");
     }
 
-    protected abstract String getClassName();
     public abstract String getAospKey();
 
     // Tiles can override click functionality
@@ -91,7 +90,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             ClassLoader cl = mContext.getClassLoader();
 
             mHandleUpdateStateHook = XposedHelpers.findAndHookMethod(
-                    getClassName(), cl,"handleUpdateState",
+                    mTile.getClass().getName(), cl,"handleUpdateState",
                     BaseTile.CLASS_TILE_STATE, Object.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -103,7 +102,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             });
 
             mHandleClickHook = XposedHelpers.findAndHookMethod(
-                    getClassName(), cl, "handleClick", new XC_MethodHook() {
+                    mTile.getClass().getName(), cl, "handleClick", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (onBeforeHandleClick()) {

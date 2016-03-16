@@ -12,11 +12,6 @@ public class LocationTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.android.systemui.qs.tiles.LocationTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }

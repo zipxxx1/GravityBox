@@ -25,11 +25,6 @@ public class HotspotTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.android.systemui.qs.tiles.HotspotTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }
@@ -49,7 +44,7 @@ public class HotspotTile extends AospTile {
     private void createHooks() {
         try {
             if (Build.VERSION.SDK_INT >= 22) {
-                mLongClickHook = XposedHelpers.findAndHookMethod(getClassName(), 
+                mLongClickHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                         mContext.getClassLoader(), "handleLongClick", new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

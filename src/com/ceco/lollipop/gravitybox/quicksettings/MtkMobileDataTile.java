@@ -25,11 +25,6 @@ public class MtkMobileDataTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.mediatek.systemui.qs.tiles.MobileDataTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }
