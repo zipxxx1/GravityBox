@@ -131,6 +131,7 @@
         <item>@string/qs_tile_mobile_data</item>
         <item>@string/qs_tile_audio_profile</item>
         <item>@string/qs_tile_hotknot</item>
+        <item>@string/qs_tile_timeout</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
@@ -174,6 +175,7 @@
         <item>mtk_tile_mobile_data</item>
         <item>mtk_tile_audio_profile</item>
         <item>mtk_tile_hotknot</item>
+        <item>mtk_tile_timeout</item>
     </string-array>
 
     <string-array name="qs_tile_default_values" translatable="false">

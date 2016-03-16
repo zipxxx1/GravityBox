@@ -249,7 +249,7 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
                 !GravityBoxSettings.sSystemProperties.hasMsimSupport)))
             return false;
         if ((key.equals("mtk_tile_mobile_data") || key.equals("mtk_tile_audio_profile")
-                || key.equals("mtk_tile_hotknot")) &&
+                || key.equals("mtk_tile_hotknot") || key.equals("mtk_tile_timeout")) &&
                 !Utils.isMtkDevice())
             return false;
         if (key.equals("gb_tile_smart_radio") && !mPrefs.getBoolean(

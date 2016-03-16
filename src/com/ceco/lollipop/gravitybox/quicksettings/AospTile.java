@@ -45,6 +45,8 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new MtkMobileDataTile(host, tile, prefs, eventDistributor);
         else if (MtkHotKnotTile.AOSP_KEY.equals(aospKey))
             return new MtkHotKnotTile(host, tile, prefs, eventDistributor);
+        else if (MtkTimeoutTile.AOSP_KEY.equals(aospKey))
+            return new MtkTimeoutTile(host, tile, prefs, eventDistributor);
 
         return null;
     }
