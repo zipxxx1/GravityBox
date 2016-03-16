@@ -25,11 +25,6 @@ public class MtkHotKnotTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.mediatek.systemui.qs.tiles.HotKnotTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }

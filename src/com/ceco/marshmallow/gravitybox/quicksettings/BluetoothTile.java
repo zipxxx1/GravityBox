@@ -20,11 +20,6 @@ public class BluetoothTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.android.systemui.qs.tiles.BluetoothTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }
@@ -54,11 +49,11 @@ public class BluetoothTile extends AospTile {
             }
         };
         try {
-            mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(getClassName(), 
+            mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                     mContext.getClassLoader(), "supportsDualTargets", dtHook);
         } catch (Throwable t) {
             try {
-                mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(getClassName(), 
+                mSupportsDualTargetsHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                         mContext.getClassLoader(), "hasDualTargetsDetails", dtHook);
             } catch (Throwable t2) {
                 log(getKey() + ": Your system does not seem to support standard AOSP tile dual mode");

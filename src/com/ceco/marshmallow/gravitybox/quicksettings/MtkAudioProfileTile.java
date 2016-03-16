@@ -25,11 +25,6 @@ public class MtkAudioProfileTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.mediatek.systemui.qs.tiles.AudioProfileTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }

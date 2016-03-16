@@ -1,7 +1,5 @@
 package com.ceco.marshmallow.gravitybox.quicksettings;
 
-import android.os.Build;
-
 import de.robv.android.xposed.XC_MethodHook.Unhook;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -18,11 +16,6 @@ public class ColorInversionTile extends AospTile {
         super(host, "aosp_tile_inversion", tile, prefs, eventDistributor);
 
         createHooks();
-    }
-
-    @Override
-    protected String getClassName() {
-        return "com.android.systemui.qs.tiles.ColorInversionTile";
     }
 
     @Override
@@ -44,7 +37,7 @@ public class ColorInversionTile extends AospTile {
 
     private void createHooks() {
         try {
-            mLongClickHook = XposedHelpers.findAndHookMethod(getClassName(), 
+            mLongClickHook = XposedHelpers.findAndHookMethod(mTile.getClass().getName(), 
                     mContext.getClassLoader(), "handleLongClick", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

@@ -128,11 +128,6 @@ public class CellularTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.android.systemui.qs.tiles.CellularTile";
-    }
-
-    @Override
     public String getAospKey() {
         return mAospKey;
     }
@@ -290,7 +285,8 @@ public class CellularTile extends AospTile {
 
     private void createHooks() {
         try {
-            mCreateTileViewHook = XposedHelpers.findAndHookMethod(getClassName(), mContext.getClassLoader(),
+            mCreateTileViewHook = XposedHelpers.findAndHookMethod(
+                    mTile.getClass().getName(), mContext.getClassLoader(),
                     "createTileView", Context.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {

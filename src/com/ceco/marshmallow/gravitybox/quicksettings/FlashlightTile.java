@@ -11,11 +11,6 @@ public class FlashlightTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.android.systemui.qs.tiles.FlashlightTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }

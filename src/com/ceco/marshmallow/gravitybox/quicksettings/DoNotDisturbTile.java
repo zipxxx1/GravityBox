@@ -73,11 +73,6 @@ public class DoNotDisturbTile extends AospTile {
     }
 
     @Override
-    protected String getClassName() {
-        return "com.android.systemui.qs.tiles.DndTile";
-    }
-
-    @Override
     public String getAospKey() {
         return AOSP_KEY;
     }
