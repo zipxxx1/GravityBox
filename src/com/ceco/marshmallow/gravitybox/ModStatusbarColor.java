@@ -214,7 +214,8 @@ public class ModStatusbarColor {
         if (mPhoneStatusBar == null || SysUiManagers.IconManager == null) return;
         try {
             Object header = XposedHelpers.getObjectField(mPhoneStatusBar, "mHeader");
-            ImageButton settingsButton = (ImageButton) XposedHelpers.getObjectField(header, "mSettingsButton");
+            ImageView settingsButton = (ImageView) XposedHelpers.getObjectField(
+                    header, Utils.isSamsungRom() ? "mSettingButton" : "mSettingsButton");
             if (SysUiManagers.IconManager.isColoringEnabled()) {
                 settingsButton.setColorFilter(SysUiManagers.IconManager.getIconColor(),
                         PorterDuff.Mode.SRC_IN);

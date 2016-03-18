@@ -79,6 +79,7 @@ public class Utils {
     private static Boolean mHasLenovoCustomUI = null;
     private static Boolean mHasLenovoVibeUI = null;
     private static Boolean mIsLenovoROW = null;
+    private static Boolean mIsSamsumgRom = null;
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     
@@ -230,6 +231,13 @@ public class Utils {
         mIsLenovoROW = hasLenovoCustomUI() &&
                 SystemProp.get("ro.product.device").toUpperCase(Locale.US).endsWith("_ROW");
         return mIsLenovoROW;
+    }
+
+    public static boolean isSamsungRom() {
+        if (mIsSamsumgRom != null) return mIsSamsumgRom;
+
+        mIsSamsumgRom = (new File("/system/framework/twframework.jar").isFile());
+        return mIsSamsumgRom;
     }
 
     public static boolean hasGeminiSupport() {
