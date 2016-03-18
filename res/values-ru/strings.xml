@@ -1916,4 +1916,9 @@
     <string name="lc_notif_visibility_ls_persistent">Скрыть постоянные уведомления</string>
     <string name="lc_notif_visibility_ls_all">Скрыть все уведомления</string>
 
+    <!-- UNC: Hide persistent notifications -->
+    <string name="pref_lc_notif_hide_persistent_title">Скрыть постоянные уведомления</string>
+    <string name="pref_lc_notif_hide_persistent_summary">Скрытие всех текущих и других неочищаемых 
+        уведомлений данного приложения</string>
+
 </resources>

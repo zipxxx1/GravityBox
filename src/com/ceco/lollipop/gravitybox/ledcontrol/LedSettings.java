@@ -83,6 +83,7 @@ public class LedSettings {
     private boolean mPriorityMode;
     private VisibilityLs mVisibilityLs;
     private boolean mSoundToVibrateDisabled;
+    private boolean mHidePersistent;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -169,6 +170,8 @@ public class LedSettings {
                 ls.setVibrateReplace(Boolean.valueOf(data[1]));
             } else if (data[0].equals("soundReplace")) {
                 ls.setSoundReplace(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("hidePersistent")) {
+                ls.setHidePersistent(Boolean.valueOf(data[1]));
             }
         }
         return ls;
@@ -204,6 +207,7 @@ public class LedSettings {
         mPriorityMode = false;
         mVisibilityLs = VisibilityLs.DEFAULT;
         mSoundToVibrateDisabled = false;
+        mHidePersistent = false;
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -433,6 +437,10 @@ public class LedSettings {
         mPriorityMode = enabled;
     }
 
+    protected void setHidePersistent(boolean hide) {
+        mHidePersistent = hide;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -545,6 +553,10 @@ public class LedSettings {
         return mSoundToVibrateDisabled;
     }
 
+    public boolean getHidePersistent() {
+        return mHidePersistent;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -580,6 +592,7 @@ public class LedSettings {
             dataSet.add("soundToVibrateDisabled:" + mSoundToVibrateDisabled);
             dataSet.add("vibrateReplace:" + mVibrateReplace);
             dataSet.add("soundReplace:" + mSoundReplace);
+            dataSet.add("hidePersistent:" + mHidePersistent);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();

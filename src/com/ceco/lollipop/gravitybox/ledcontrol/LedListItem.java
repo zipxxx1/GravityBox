@@ -113,6 +113,9 @@ public class LedListItem implements IBaseListAdapterItem {
                 buf += "; " + mContext.getString(R.string.pref_lc_notif_visibility_ls_title) +
                         ": " + getVisibilityLsTitle(mLedSettings.getVisibilityLs());
             }
+            if (mLedSettings.getHidePersistent()) {
+                buf += "; " + mContext.getString(R.string.pref_lc_notif_hide_persistent_title);
+            }
             if (mLedSettings.getOngoing()) {
                 buf += "; " + mContext.getString(R.string.lc_item_summary_ongoing);
             }

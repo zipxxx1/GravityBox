@@ -87,6 +87,7 @@ public class ModLedControl {
     private static final String NOTIF_EXTRA_PRIORITY_MODE = "gbPriorityMode";
     private static final int MSG_HIDE_HEADS_UP = 1029;
     public static final String NOTIF_EXTRA_VISIBILITY_LS = "gbVisibilityLs";
+    public static final String NOTIF_EXTRA_HIDE_PERSISTENT = "gbHidePersistent";
 
     public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
 
@@ -253,6 +254,7 @@ public class ModLedControl {
 
                 n.extras.putBoolean(NOTIF_EXTRA_PROGRESS_TRACKING, ls.getProgressTracking());
                 n.extras.putString(NOTIF_EXTRA_VISIBILITY_LS, ls.getVisibilityLs().toString());
+                n.extras.putBoolean(NOTIF_EXTRA_HIDE_PERSISTENT, ls.getHidePersistent());
 
                 boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
                         (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);
@@ -735,9 +737,17 @@ public class ModLedControl {
                     StatusBarNotification.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    StatusBarNotification sbn = (StatusBarNotification)param.args[0];
+                    Notification n = sbn.getNotification();
+
+                    // whether to hide persistent everywhere
+                    if (!sbn.isClearable() && n.extras.getBoolean(NOTIF_EXTRA_HIDE_PERSISTENT)) {
+                        param.setResult(true);
+                        return;
+                    }
+
+                    // whether to hide during keyguard
                     if (ModStatusBar.getStatusBarState() != StatusBarState.SHADE) {
-                        StatusBarNotification sbn = (StatusBarNotification)param.args[0];
-                        Notification n = sbn.getNotification();
                         VisibilityLs vls = n.extras.containsKey(NOTIF_EXTRA_VISIBILITY_LS) ?
                                 VisibilityLs.valueOf(n.extras.getString(NOTIF_EXTRA_VISIBILITY_LS)) :
                                     VisibilityLs.DEFAULT;

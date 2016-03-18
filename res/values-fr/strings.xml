@@ -1839,4 +1839,9 @@
     <string name="lc_notif_visibility_ls_persistent">Masquer les notifications persistantes</string>
     <string name="lc_notif_visibility_ls_all">Masquer toutes les notifications</string>
 
+    <!-- UNC: Hide persistent notifications -->
+    <string name="pref_lc_notif_hide_persistent_title">Masquer les notifications persistantes</string>
+    <string name="pref_lc_notif_hide_persistent_summary">Cache toutes les notifications entrantes et non-effaçables
+        provenant de cette application</string>
+
 </resources>
