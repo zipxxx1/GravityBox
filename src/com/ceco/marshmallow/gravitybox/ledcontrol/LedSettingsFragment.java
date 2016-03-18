@@ -74,6 +74,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_VISIBILITY = "pref_lc_notif_visibility";
     private static final String PREF_KEY_VISIBILITY_LS = "pref_lc_notif_visibility_ls";
     private static final String PREF_KEY_DISABLE_SOUND_TO_VIBRATE = "pref_lc_sound_vibrate";
+    private static final String PREF_KEY_HIDE_PERSISTENT = "pref_lc_notif_hide_persistent";
 
     private static final int REQ_PICK_SOUND = 101;
 
@@ -107,6 +108,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private ListPreference mVisibilityPref;
     private ListPreference mVisibilityLsPref;
     private CheckBoxPreference mDisableSoundToVibratePref;
+    private CheckBoxPreference mHidePersistentPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -148,6 +150,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mVisibilityLsPref = (ListPreference) findPreference(PREF_KEY_VISIBILITY_LS);
         mVisibilityLsPref.setOnPreferenceChangeListener(this);
         mDisableSoundToVibratePref = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_SOUND_TO_VIBRATE);
+        mHidePersistentPref = (CheckBoxPreference) findPreference(PREF_KEY_HIDE_PERSISTENT);
     }
 
     protected void initialize(LedSettings ledSettings) {
@@ -209,6 +212,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mVisibilityLsPref.setValue(ledSettings.getVisibilityLs().toString());
         mVisibilityLsPref.setSummary(mVisibilityLsPref.getEntry());
         mDisableSoundToVibratePref.setChecked(ledSettings.getSoundToVibrateDisabled());
+        mHidePersistentPref.setChecked(ledSettings.getHidePersistent());
     }
 
     private void updateSoundPrefSummary() {
@@ -329,6 +333,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
 
     protected boolean getSoundToVibrateDisabled() {
         return mDisableSoundToVibratePref.isChecked();
+    }
+
+    protected boolean getHidePersistent() {
+        return mHidePersistentPref.isChecked();
     }
 
     @Override

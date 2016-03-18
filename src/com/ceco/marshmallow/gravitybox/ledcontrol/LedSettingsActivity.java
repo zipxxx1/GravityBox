@@ -210,6 +210,7 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
         mLedSettings.setSoundToVibrateDisabled(mPrefsFragment.getSoundToVibrateDisabled());
         mLedSettings.setVibrateReplace(mPrefsFragment.getVibrateReplace());
         mLedSettings.setSoundReplace(mPrefsFragment.getSoundReplace());
+        mLedSettings.setHidePersistent(mPrefsFragment.getHidePersistent());
         mLedSettings.serialize();
         Intent intent = new Intent();
         intent.putExtra(EXTRA_PACKAGE_NAME, mLedSettings.getPackageName());

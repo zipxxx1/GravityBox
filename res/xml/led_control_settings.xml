@@ -239,6 +239,13 @@
             android:defaultValue="DEFAULT"
             android:persistent="false" />
 
+        <CheckBoxPreference
+            android:key="pref_lc_notif_hide_persistent"
+            android:title="@string/pref_lc_notif_hide_persistent_title"
+            android:summary="@string/pref_lc_notif_hide_persistent_summary"
+            android:defaultValue="false"
+            android:persistent="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory 

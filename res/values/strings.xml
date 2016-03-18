@@ -1893,4 +1893,9 @@
     <string name="lc_notif_visibility_ls_persistent">Hide persistent notifications</string>
     <string name="lc_notif_visibility_ls_all">Hide all notifications</string>
 
+    <!-- UNC: Hide persistent notifications -->
+    <string name="pref_lc_notif_hide_persistent_title">Hide persistent notifications</string>
+    <string name="pref_lc_notif_hide_persistent_summary">Hides all ongoing and other non-clearable notifications 
+        coming from this app</string>
+
 </resources>
