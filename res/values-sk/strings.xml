@@ -1689,9 +1689,10 @@
     <string name="direct_unlock_see_through">Priehľadné</string>
 
     <!-- UNC: Notification visibility -->
-    <string name="pref_lc_notif_visibility_title">Viditeľnosť</string>
-    <string name="pref_lc_notif_visibility_summary">Definuje viditeľnosť upozornení na zabezpečenej obrazovke uzamknutia. 
-        Platí v prípade použitia režimu \"Skryť citlivý obsah upozornení\"</string>
+    <string name="pref_cat_lc_visibility_title">Viditeľnosť</string>
+    <string name="pref_lc_notif_visibility_title">Viditeľnosť obsahu</string>
+    <string name="pref_lc_notif_visibility_summary">Definuje viditeľnosť obsahu upozornení na zabezpečenej obrazovke uzamknutia. 
+        Platí len v prípade použitia režimu \"Skryť citlivý obsah upozornení\"</string>
     <string name="lc_notif_visibility_default">Pôvodné nastavenie</string>
     <string name="lc_notif_visibility_public">Zobraziť úplný obsah</string>
     <string name="lc_notif_visibility_private">Skryť citlivý obsah</string>
@@ -1852,5 +1853,12 @@
 
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Korekcia škály</string>
+
+    <!-- UNC: Notification lock screen visibility -->
+    <string name="pref_lc_notif_visibility_ls_title">Viditeľnosť na obrazovke uzamknutia</string>
+    <string name="lc_notif_visibility_ls_default">Pôvodná</string>
+    <string name="lc_notif_visibility_ls_clearable">Skryť vymazateľné oznámenia</string>
+    <string name="lc_notif_visibility_ls_persistent">Skryť nevymazateľné oznámenia</string>
+    <string name="lc_notif_visibility_ls_all">Skryť všetky oznámenia</string>
 
 </resources>

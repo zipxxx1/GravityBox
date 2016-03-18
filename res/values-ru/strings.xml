@@ -1717,9 +1717,10 @@
     <string name="direct_unlock_see_through">Прозрачно</string>
 
     <!-- UNC: Notification visibility -->
-    <string name="pref_lc_notif_visibility_title">Видимость</string>
-    <string name="pref_lc_notif_visibility_summary">Видимость уведомлений на защищённом экране блокировки. 
-        Применяется, если активно \"Скрыть частное содержимое\" на экране блокировки</string>
+    <string name="pref_cat_lc_visibility_title">Видимость</string>
+    <string name="pref_lc_notif_visibility_title">Видимость содержимого</string>
+    <string name="pref_lc_notif_visibility_summary">Видимость содержимого уведомлений на защищённом экране блокировки. 
+         Применяется только если активно \"Скрыть частное содержимое\" на экране блокировки</string>
     <string name="lc_notif_visibility_default">По умолчанию</string>
     <string name="lc_notif_visibility_public">Всё содержимое</string>
     <string name="lc_notif_visibility_private">Скрыть частное содержимое</string>
@@ -1907,5 +1908,12 @@
 
     <!-- MTK tiles: Timeout -->
     <string name="qs_tile_timeout">Задержка</string>
+
+    <!-- UNC: Notification lock screen visibility -->
+    <string name="pref_lc_notif_visibility_ls_title">Видимость на экр. блокировки</string>
+    <string name="lc_notif_visibility_ls_default">По умолчанию</string>
+    <string name="lc_notif_visibility_ls_clearable">Скрыть очищаемые уведомления</string>
+    <string name="lc_notif_visibility_ls_persistent">Скрыть постоянные уведомления</string>
+    <string name="lc_notif_visibility_ls_all">Скрыть все уведомления</string>
 
 </resources>

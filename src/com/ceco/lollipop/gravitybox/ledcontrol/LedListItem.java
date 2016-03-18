@@ -23,6 +23,7 @@ import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.Visibility;
+import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.VisibilityLs;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -108,6 +109,10 @@ public class LedListItem implements IBaseListAdapterItem {
                 buf += "; " + mContext.getString(R.string.pref_lc_notif_visibility_title) +
                         ": " + getVisibilityTitle(mLedSettings.getVisibility());
             }
+            if (mLedSettings.getVisibilityLs() != VisibilityLs.DEFAULT) {
+                buf += "; " + mContext.getString(R.string.pref_lc_notif_visibility_ls_title) +
+                        ": " + getVisibilityLsTitle(mLedSettings.getVisibilityLs());
+            }
             if (mLedSettings.getOngoing()) {
                 buf += "; " + mContext.getString(R.string.lc_item_summary_ongoing);
             }
@@ -153,6 +158,21 @@ public class LedListItem implements IBaseListAdapterItem {
                 return mContext.getString(R.string.lc_notif_visibility_private);
             case SECRET:
                 return mContext.getString(R.string.lc_notif_visibility_secret);
+            default:
+                return "N/A";
+        }
+    }
+
+    private String getVisibilityLsTitle(VisibilityLs vis) {
+        switch (vis) {
+            case DEFAULT:
+                return mContext.getString(R.string.lc_notif_visibility_ls_default);
+            case CLEARABLE: 
+                return mContext.getString(R.string.lc_notif_visibility_ls_clearable);
+            case PERSISTENT:
+                return mContext.getString(R.string.lc_notif_visibility_ls_persistent);
+            case ALL:
+                return mContext.getString(R.string.lc_notif_visibility_ls_all);
             default:
                 return "N/A";
         }

@@ -22,6 +22,7 @@ import java.util.Map;
 
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.HeadsUpSnoozeDialog.HeadsUpSnoozeTimerSetListener;
+import com.ceco.lollipop.gravitybox.ModStatusBar.StatusBarState;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHours;
 import com.ceco.lollipop.gravitybox.ledcontrol.QuietHoursActivity;
@@ -29,6 +30,7 @@ import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.Visibility;
+import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.VisibilityLs;
 
 import android.app.ActivityManager;
 import android.app.KeyguardManager;
@@ -69,6 +71,7 @@ public class ModLedControl {
     private static final String CLASS_BASE_STATUSBAR = "com.android.systemui.statusbar.BaseStatusBar";
     private static final String CLASS_PHONE_STATUSBAR = "com.android.systemui.statusbar.phone.PhoneStatusBar";
     private static final String CLASS_KG_TOUCH_DELEGATE = "com.android.systemui.statusbar.phone.KeyguardTouchDelegate";
+    private static final String CLASS_NOTIF_DATA = "com.android.systemui.statusbar.NotificationData";
     private static final String CLASS_NOTIF_DATA_ENTRY = "com.android.systemui.statusbar.NotificationData.Entry";
     private static final String CLASS_HEADSUP_NOTIF_VIEW = "com.android.systemui.statusbar.policy.HeadsUpNotificationView";
     private static final String CLASS_NOTIFICATION_RECORD = "com.android.server.notification.NotificationRecord";
@@ -83,6 +86,7 @@ public class ModLedControl {
     public static final String NOTIF_EXTRA_PROGRESS_TRACKING = "gbProgressTracking";
     private static final String NOTIF_EXTRA_PRIORITY_MODE = "gbPriorityMode";
     private static final int MSG_HIDE_HEADS_UP = 1029;
+    public static final String NOTIF_EXTRA_VISIBILITY_LS = "gbVisibilityLs";
 
     public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
 
@@ -246,7 +250,9 @@ public class ModLedControl {
                 final boolean qhActiveIncludingVibe = qhActive && mQuietHours.muteVibe;
                 final boolean qhActiveIncludingActiveScreen = qhActive &&
                         !mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_IGNORE_QUIET_HOURS, false);
+
                 n.extras.putBoolean(NOTIF_EXTRA_PROGRESS_TRACKING, ls.getProgressTracking());
+                n.extras.putString(NOTIF_EXTRA_VISIBILITY_LS, ls.getVisibilityLs().toString());
 
                 boolean isOngoing = ((n.flags & Notification.FLAG_ONGOING_EVENT) != 0 || 
                         (n.flags & Notification.FLAG_FOREGROUND_SERVICE) != 0);
@@ -720,6 +726,33 @@ public class ModLedControl {
                         Notification n = sbNotif.getNotification();
                         if (n.extras.containsKey(NOTIF_EXTRA_ACTIVE_SCREEN_MODE)) {
                             param.setResult(null);
+                        }
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(CLASS_NOTIF_DATA, classLoader, "shouldFilterOut",
+                    StatusBarNotification.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (ModStatusBar.getStatusBarState() != StatusBarState.SHADE) {
+                        StatusBarNotification sbn = (StatusBarNotification)param.args[0];
+                        Notification n = sbn.getNotification();
+                        VisibilityLs vls = n.extras.containsKey(NOTIF_EXTRA_VISIBILITY_LS) ?
+                                VisibilityLs.valueOf(n.extras.getString(NOTIF_EXTRA_VISIBILITY_LS)) :
+                                    VisibilityLs.DEFAULT;
+                        switch (vls) {
+                            case CLEARABLE:
+                                param.setResult(sbn.isClearable());
+                                break;
+                            case PERSISTENT:
+                                param.setResult(!sbn.isClearable());
+                                break;
+                            case ALL:
+                                param.setResult(true);
+                                break;
+                            case DEFAULT:
+                            default: return;
                         }
                     }
                 }

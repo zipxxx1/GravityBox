@@ -52,6 +52,7 @@ public class LedSettings {
         }
         public int getValue() { return mValue; }
     }
+    public enum VisibilityLs { DEFAULT, CLEARABLE, PERSISTENT, ALL };
 
     private Context mContext;
     private String mPackageName;
@@ -80,6 +81,7 @@ public class LedSettings {
     private boolean mProgressTracking;
     private Visibility mVisibility;
     private boolean mPriorityMode;
+    private VisibilityLs mVisibilityLs;
     private boolean mSoundToVibrateDisabled;
 
     protected static LedSettings deserialize(Context context, String packageName) {
@@ -159,6 +161,8 @@ public class LedSettings {
                 ls.setVisibility(data[1]);
             } else if (data[0].equals("priorityMode")) {
                 ls.setPriorityMode(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("visibilityLs")) {
+                ls.setVisibilityLs(data[1]);
             } else if (data[0].equals("soundToVibrateDisabled")) {
                 ls.setSoundToVibrateDisabled(Boolean.valueOf(data[1]));
             } else if (data[0].equals("vibrateReplace")) {
@@ -198,6 +202,7 @@ public class LedSettings {
         mProgressTracking = false;
         mVisibility = Visibility.DEFAULT;
         mPriorityMode = false;
+        mVisibilityLs = VisibilityLs.DEFAULT;
         mSoundToVibrateDisabled = false;
     }
 
@@ -408,6 +413,18 @@ public class LedSettings {
         }
     }
 
+    protected void setVisibilityLs(VisibilityLs visibilityLs) {
+        mVisibilityLs = visibilityLs;
+    }
+
+    protected void setVisibilityLs(String visibilityLs) {
+        try {
+            setVisibilityLs(VisibilityLs.valueOf(visibilityLs));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     protected void setSoundToVibrateDisabled(boolean disabled) {
         mSoundToVibrateDisabled = disabled;
     }
@@ -520,6 +537,10 @@ public class LedSettings {
         return mPriorityMode;
     }
 
+    public VisibilityLs getVisibilityLs() {
+        return mVisibilityLs;
+    }
+
     public boolean getSoundToVibrateDisabled() {
         return mSoundToVibrateDisabled;
     }
@@ -555,6 +576,7 @@ public class LedSettings {
             dataSet.add("progressTracking:" + mProgressTracking);
             dataSet.add("visibility:" + mVisibility.toString());
             dataSet.add("priorityMode:" + mPriorityMode);
+            dataSet.add("visibilityLs:" + mVisibilityLs.toString());
             dataSet.add("soundToVibrateDisabled:" + mSoundToVibrateDisabled);
             dataSet.add("vibrateReplace:" + mVibrateReplace);
             dataSet.add("soundReplace:" + mSoundReplace);

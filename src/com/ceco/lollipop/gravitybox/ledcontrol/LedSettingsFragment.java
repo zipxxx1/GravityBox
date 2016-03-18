@@ -23,6 +23,7 @@ import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.ActiveScreenMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.HeadsUpMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.Visibility;
+import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.VisibilityLs;
 import com.ceco.lollipop.gravitybox.preference.SeekBarPreference;
 
 import android.app.Activity;
@@ -72,6 +73,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private static final String PREF_KEY_PROGRESS_TRACKING = "pref_lc_progress_tracking";
     private static final String PREF_KEY_VISIBILITY = "pref_lc_notif_visibility";
     private static final String PREF_KEY_PRIORITY_MODE = "pref_lc_led_priority_mode";
+    private static final String PREF_KEY_VISIBILITY_LS = "pref_lc_notif_visibility_ls";
     private static final String PREF_KEY_DISABLE_SOUND_TO_VIBRATE = "pref_lc_sound_vibrate";
 
     private static final int REQ_PICK_SOUND = 101;
@@ -105,6 +107,7 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
     private CheckBoxPreference mProgressTrackingPref;
     private ListPreference mVisibilityPref;
     private CheckBoxPreference mPriorityModePref;
+    private ListPreference mVisibilityLsPref;
     private CheckBoxPreference mDisableSoundToVibratePref;
 
     @Override
@@ -145,6 +148,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         mVisibilityPref = (ListPreference) findPreference(PREF_KEY_VISIBILITY);
         mVisibilityPref.setOnPreferenceChangeListener(this);
         mPriorityModePref = (CheckBoxPreference) findPreference(PREF_KEY_PRIORITY_MODE);
+        mVisibilityLsPref = (ListPreference) findPreference(PREF_KEY_VISIBILITY_LS);
+        mVisibilityLsPref.setOnPreferenceChangeListener(this);
         mDisableSoundToVibratePref = (CheckBoxPreference) findPreference(PREF_KEY_DISABLE_SOUND_TO_VIBRATE);
     }
 
@@ -205,6 +210,8 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
                 getString(R.string.pref_lc_notif_visibility_summary),
                 mVisibilityPref.getEntry()));
         mPriorityModePref.setChecked(ledSettings.getPriorityMode());
+        mVisibilityLsPref.setValue(ledSettings.getVisibilityLs().toString());
+        mVisibilityLsPref.setSummary(mVisibilityLsPref.getEntry());
         mDisableSoundToVibratePref.setChecked(ledSettings.getSoundToVibrateDisabled());
     }
 
@@ -324,6 +331,10 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
         return mPriorityModePref.isChecked();
     }
 
+    protected VisibilityLs getVisibilityLs() {
+        return VisibilityLs.valueOf(mVisibilityLsPref.getValue());
+    }
+
     protected boolean getSoundToVibrateDisabled() {
         return mDisableSoundToVibratePref.isChecked();
     }
@@ -382,6 +393,9 @@ public class LedSettingsFragment extends PreferenceFragment implements OnPrefere
             mVisibilityPref.setSummary(String.format("%s (%s)",
                     getString(R.string.pref_lc_notif_visibility_summary),
                     mVisibilityPref.getEntry()));
+        } else if (preference == mVisibilityLsPref) {
+            mVisibilityLsPref.setValue((String)newValue);
+            mVisibilityLsPref.setSummary(mVisibilityLsPref.getEntry());
         }
         return true;
     }

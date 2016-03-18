@@ -1716,9 +1716,10 @@
     <string name="direct_unlock_see_through">Voir au travers</string>
 
     <!-- UNC: Notification visibility -->
-    <string name="pref_lc_notif_visibility_title">Visibilité</string>
-    <string name="pref_lc_notif_visibility_summary">Spécifie la visibilité des notifications dans l\'écran de déverrouillage sécurisé. 
-        Valable lorsque la valeur de verrouillage d\'écran \"Masquer les notifications au contenu sensible\" est active</string>
+    <string name="pref_cat_lc_visibility_title">Visibilité</string>
+    <string name="pref_lc_notif_visibility_title">Visibité du contenu</string>
+    <string name="pref_lc_notif_visibility_summary">Spécifie la visibilité du contenu des notifications dans l\'écran de déverrouillage sécurisé.  
+         Valable uniquement lorsque la valeur de verrouillage d\'écran \"Masquer les notifications au contenu sensible\" est active</string>
     <string name="lc_notif_visibility_default">Par défaut</string>
     <string name="lc_notif_visibility_public">Afficher tout le contenu</string>
     <string name="lc_notif_visibility_private">Masquer le contenu sensible</string>
@@ -1830,5 +1831,12 @@
     <string name="tile_data_toggle_disabled">Désactivé</string>
     <string name="tile_data_toggle_singlepress">Sur appui simple</string>
     <string name="tile_data_toggle_longpress">Sur appui long</string>
+
+    <!-- UNC: Notification lock screen visibility -->
+    <string name="pref_lc_notif_visibility_ls_title">Visibilité de l\'écran de déverrouillage</string>
+    <string name="lc_notif_visibility_ls_default">Par défaut</string>
+    <string name="lc_notif_visibility_ls_clearable">Masquer les notifications effaçables</string>
+    <string name="lc_notif_visibility_ls_persistent">Masquer les notifications persistantes</string>
+    <string name="lc_notif_visibility_ls_all">Masquer toutes les notifications</string>
 
 </resources>
