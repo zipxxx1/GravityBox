@@ -1259,4 +1259,18 @@
         <item>ERROR</item>
     </string-array>
 
+    <string-array name="lc_notif_visibility_ls_entries" translatable="false">
+        <item>@string/lc_notif_visibility_ls_default</item>
+        <item>@string/lc_notif_visibility_ls_clearable</item>
+        <item>@string/lc_notif_visibility_ls_persistent</item>
+        <item>@string/lc_notif_visibility_ls_all</item>
+    </string-array>
+
+    <string-array name="lc_notif_visibility_ls_values" translatable="false">
+        <item>DEFAULT</item>
+        <item>CLEARABLE</item>
+        <item>PERSISTENT</item>
+        <item>ALL</item>
+    </string-array>
+
 </resources>

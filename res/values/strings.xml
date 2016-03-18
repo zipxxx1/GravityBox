@@ -1649,9 +1649,10 @@
     <string name="direct_unlock_see_through">See through</string>
 
     <!-- UNC: Notification visibility -->
-    <string name="pref_lc_notif_visibility_title">Visibility</string>
-    <string name="pref_lc_notif_visibility_summary">Specifies notification visibility in secured lock screen. 
-        Applies when \"Hide sensitive notification content\" lock screen policy is active</string>
+    <string name="pref_cat_lc_visibility_title">Visibility</string>
+    <string name="pref_lc_notif_visibility_title">Content visibility</string>
+    <string name="pref_lc_notif_visibility_summary">Specifies notification content visibility in secured lock screen. 
+        Applies only when \"Hide sensitive notification content\" lock screen policy is active</string>
     <string name="lc_notif_visibility_default">Default</string>
     <string name="lc_notif_visibility_public">Show all content</string>
     <string name="lc_notif_visibility_private">Hide sensitive content</string>
@@ -1884,5 +1885,12 @@
 
     <!-- MTK tiles: Timeout -->
     <string name="qs_tile_timeout">Timeout</string>
+
+    <!-- UNC: Notification lock screen visibility -->
+    <string name="pref_lc_notif_visibility_ls_title">Lock screen visibility</string>
+    <string name="lc_notif_visibility_ls_default">Default</string>
+    <string name="lc_notif_visibility_ls_clearable">Hide clearable notifications</string>
+    <string name="lc_notif_visibility_ls_persistent">Hide persistent notifications</string>
+    <string name="lc_notif_visibility_ls_all">Hide all notifications</string>
 
 </resources>

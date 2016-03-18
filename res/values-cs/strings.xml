@@ -1614,9 +1614,10 @@
     <string name="direct_unlock_see_through">Průhledné</string>
 
     <!-- UNC: Notification visibility -->
-    <string name="pref_lc_notif_visibility_title">Viditelnost</string>
-    <string name="pref_lc_notif_visibility_summary">Definuje viditelnost oznámení na zabezpečené obrazovce uzamčení. 
-        Platí v případě použití režimu \"Skrýt citlivý obsah oznámení\"</string>
+    <string name="pref_cat_lc_visibility_title">Viditelnost</string>
+    <string name="pref_lc_notif_visibility_title">Viditelnost obsahu</string>
+    <string name="pref_lc_notif_visibility_summary">Definuje viditelnost obsahu oznámení na zabezpečené obrazovce uzamčení. 
+        Platí pouze v případě použití režimu \"Skrýt citlivý obsah oznámení\"</string>
     <string name="lc_notif_visibility_default">Původní nastavení</string>
     <string name="lc_notif_visibility_public">Zobrazit úplný obsah</string>
     <string name="lc_notif_visibility_private">Skrýt citlivý obsah</string>

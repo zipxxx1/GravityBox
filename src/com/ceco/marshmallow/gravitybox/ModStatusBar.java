@@ -273,6 +273,10 @@ public class ModStatusBar {
         }
     }
 
+    public static int getStatusBarState() {
+        return mStatusBarState;
+    }
+
     private static void prepareLayout() {
         try {
             Resources res = mContext.getResources();

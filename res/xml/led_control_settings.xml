@@ -219,8 +219,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory 
-        android:key="pref_cat_lc_other"
-        android:title="@string/pref_cat_lc_other_title">
+        android:key="pref_cat_lc_visibility"
+        android:title="@string/pref_cat_lc_visibility_title">
 
         <ListPreference
             android:key="pref_lc_notif_visibility"
@@ -230,6 +230,20 @@
             android:entryValues="@array/lc_notif_visibility_values"
             android:defaultValue="DEFAULT"
             android:persistent="false" />
+
+        <ListPreference
+            android:key="pref_lc_notif_visibility_ls"
+            android:title="@string/pref_lc_notif_visibility_ls_title"
+            android:entries="@array/lc_notif_visibility_ls_entries"
+            android:entryValues="@array/lc_notif_visibility_ls_values"
+            android:defaultValue="DEFAULT"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory 
+        android:key="pref_cat_lc_other"
+        android:title="@string/pref_cat_lc_other_title">
 
         <CheckBoxPreference
             android:key="pref_lc_progress_tracking"
