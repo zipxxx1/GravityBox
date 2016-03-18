@@ -192,17 +192,17 @@ public class ModLedControl {
                         intentFilter.addAction(GravityBoxSettings.ACTION_PREF_POWER_CHANGED);
                         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
-                        Object service = XposedHelpers.getObjectField(param.thisObject, "mService");
-                        XposedHelpers.findAndHookMethod(service.getClass(),
-                                "enqueueNotificationWithTag", String.class, String.class, String.class, 
-                                int.class, Notification.class, int[].class, int.class, notifyHook);
-
                         toggleActiveScreenFeature(!mPrefs.getBoolean(LedSettings.PREF_KEY_LOCKED, false) && 
                                 mPrefs.getBoolean(LedSettings.PREF_KEY_ACTIVE_SCREEN_ENABLED, false));
                         if (DEBUG) log("Notification manager service initialized");
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
+                    "enqueueNotificationInternal", String.class, String.class,
+                    int.class, int.class, String.class, 
+                    int.class, Notification.class, int[].class, int.class, notifyHook);
 
             XposedHelpers.findAndHookMethod(CLASS_NOTIFICATION_MANAGER_SERVICE, classLoader,
                     "applyZenModeLocked", CLASS_NOTIFICATION_RECORD, applyZenModeHook);
@@ -231,7 +231,7 @@ public class ModLedControl {
                     return;
                 }
 
-                Notification n = (Notification) param.args[4];
+                Notification n = (Notification) param.args[6];
                 if (n.extras.containsKey("gbIgnoreNotification")) return;
 
                 final String pkgName = (String) param.args[0];
@@ -265,7 +265,7 @@ public class ModLedControl {
                         ArrayList<?> notifList = (ArrayList<?>) XposedHelpers.getObjectField(param.thisObject, "mNotificationList");
                         synchronized (notifList) {
                             int index = (Integer) XposedHelpers.callMethod(param.thisObject, "indexOfNotificationLocked",
-                                    param.args[0], param.args[2], param.args[3], param.args[6]);
+                                    param.args[0], param.args[4], param.args[5], param.args[8]);
                             if (index >= 0) {
                                 Object oldNotif = notifList.get(index);
                                 if (oldNotif != null) {
@@ -275,7 +275,10 @@ public class ModLedControl {
                                 }
                             }
                         }
-                    } catch (Throwable t) { /* yet another vendor messing with the internals... */ }
+                    } catch (Throwable t) { 
+                        /* yet another vendor messing with the internals... */
+                        if (DEBUG) XposedBridge.log(t);
+                    }
                 }
 
                 if (isOngoing && !ls.getOngoing() && !qhActive) {
