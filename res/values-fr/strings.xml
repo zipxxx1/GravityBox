@@ -1649,9 +1649,10 @@
     <string name="direct_unlock_see_through">Voir au travers</string>
 
     <!-- UNC: Notification visibility -->
-    <string name="pref_lc_notif_visibility_title">Visibilité</string>
-    <string name="pref_lc_notif_visibility_summary">Spécifie la visibilité des notifications dans l\'écran de déverrouillage sécurisé. 
-        Valable lorsque la valeur de verrouillage d\'écran \"Masquer les notifications au contenu sensible\" est active</string>
+    <string name="pref_cat_lc_visibility_title">Visibilité</string>
+    <string name="pref_lc_notif_visibility_title">Visibité du contenu</string>
+    <string name="pref_lc_notif_visibility_summary">Spécifie la visibilité du contenu des notifications dans l\'écran de déverrouillage sécurisé. 
+        Valable uniquement lorsque la valeur de verrouillage d\'écran \"Masquer les notifications au contenu sensible\" est active</string>
     <string name="lc_notif_visibility_default">Par défaut</string>
     <string name="lc_notif_visibility_public">Afficher tout le contenu</string>
     <string name="lc_notif_visibility_private">Masquer le contenu sensible</string>
@@ -1855,5 +1856,46 @@
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Politique de déverrouillage intelligent</string>
+
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Position dans la barre d\'état</string>
+    <string name="pref_battery_percent_text_position_summary">Nécessite de redémarrer</string>
+    <string name="battery_percent_text_position_right">A droite de l\'icône batterie</string>
+    <string name="battery_percent_text_position_left">A gauche de l\'icône batterie</string>
+
+    <!-- Disable Imprint vibrations -->
+    <string name="pref_imprint_vibe_disable_title">Désactive les vibrations empreinte digitale</string>
+    <string name="imprint_vibe_disable_success">Si authentification réussie</string>
+    <string name="imprint_vibe_disable_error">Si erreur d\'authentification</string>
+
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Remplace la vibration originale</string>
+    <string name="pref_lc_vibrate_replace_summary">Applique une vibration redéfinie seulement dans le cas où la vibration est active pour la notification originale</string>
+
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">Remplace le son original</string>
+    <string name="pref_lc_sound_replace_summary">Applique un son redéfini seulement dans le cas où le son est actif pour la notification originale</string>
+
+    <!-- Battery tile options -->
+    <string name="pref_battery_tile_temp_title">Affiche la température</string>
+    <string name="pref_battery_tile_voltage_title">Affiche la tension</string>
+
+    <!-- QS: Scale correction -->
+    <string name="pref_qs_scale_correction_title">Correction à l\'échelle</string>
+
+    <!-- MTK tiles: Timeout -->
+    <string name="qs_tile_timeout">Pause</string>
+
+    <!-- UNC: Notification lock screen visibility -->
+    <string name="pref_lc_notif_visibility_ls_title">Visibilité de l\'écran de déverrouillage</string>
+    <string name="lc_notif_visibility_ls_default">Par défaut</string>
+    <string name="lc_notif_visibility_ls_clearable">Masquer les notifications effaçables</string>
+    <string name="lc_notif_visibility_ls_persistent">Masquer les notifications persistantes</string>
+    <string name="lc_notif_visibility_ls_all">Masquer toutes les notifications</string>
+
+    <!-- UNC: Hide persistent notifications -->
+    <string name="pref_lc_notif_hide_persistent_title">Masquer les notifications persistantes</string>
+    <string name="pref_lc_notif_hide_persistent_summary">Cache toutes les notifications entrantes et non-effaçables
+        provenant de cette application</string>
 
 </resources>
