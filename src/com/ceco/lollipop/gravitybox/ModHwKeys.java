@@ -1385,7 +1385,7 @@ public class ModHwKeys {
         }
     }
 
-    private static void injectKey(final int keyCode) {
+    public static void injectKey(final int keyCode) {
         Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
         if (handler == null) return;
 
