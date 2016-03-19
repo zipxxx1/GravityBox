@@ -20,10 +20,12 @@ import java.util.Locale;
 
 import com.ceco.lollipop.gravitybox.GravityBoxSettings;
 import com.ceco.lollipop.gravitybox.ModHwKeys;
+import com.ceco.lollipop.gravitybox.ModLedControl;
 import com.ceco.lollipop.gravitybox.R;
 import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.LedMode;
 import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.Visibility;
+import com.ceco.lollipop.gravitybox.ledcontrol.LedSettings.VisibilityLs;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -170,6 +172,10 @@ public class LedSettingsActivity extends Activity implements OnClickListener {
         }
         if (mPrefsFragment.getVisibility() != Visibility.DEFAULT) {
             n.visibility = mPrefsFragment.getVisibility().getValue();
+        }
+        if (mPrefsFragment.getVisibilityLs() != VisibilityLs.DEFAULT) {
+            n.extras.putString(ModLedControl.NOTIF_EXTRA_VISIBILITY_LS,
+                    mPrefsFragment.getVisibilityLs().toString());
         }
         n.extras.putBoolean("gbIgnoreNotification", true);
         Intent intent = new Intent(ModHwKeys.ACTION_SLEEP);
