@@ -1820,4 +1820,19 @@
     <!-- QS: Scale correction -->
     <string name="pref_qs_scale_correction_title">Korekce škály</string>
 
+    <!-- MTK tiles: Timeout -->
+    <string name="qs_tile_timeout">Časový limit</string>
+
+    <!-- UNC: Notification lock screen visibility -->
+    <string name="pref_lc_notif_visibility_ls_title">Viditelnost na obrazovce uzamčení</string>
+    <string name="lc_notif_visibility_ls_default">Původní</string>
+    <string name="lc_notif_visibility_ls_clearable">Skrýt vymazatelné oznámení</string>
+    <string name="lc_notif_visibility_ls_persistent">Skrýt nesmazatelné oznámení</string>
+    <string name="lc_notif_visibility_ls_all">Skrýt všechny oznámení</string>
+
+    <!-- UNC: Hide persistent notifications -->
+    <string name="pref_lc_notif_hide_persistent_title">Skrýt nesmazatelné oznámení</string>
+    <string name="pref_lc_notif_hide_persistent_summary">Skryje všechny probíhající a jiné nesmazatelné 
+         oznámení z této aplikace</string>
+
 </resources>
