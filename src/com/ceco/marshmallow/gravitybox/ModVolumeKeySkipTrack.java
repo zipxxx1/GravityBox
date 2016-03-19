@@ -74,32 +74,27 @@ public class ModVolumeKeySkipTrack {
     private static XC_MethodHook handleInterceptKeyBeforeQueueing = new XC_MethodHook() {
         @Override
         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-            initManagers((Context) XposedHelpers.getObjectField(param.thisObject, "mContext"));
-            if (!mPowerManager.isInteractive() && allowSkipTrack) { 
-                final KeyEvent event = (KeyEvent) param.args[0];
-                final int keyCode = event.getKeyCode();
-                if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP)
-                        && mAudioManager != null && mAudioManager.isMusicActive()) {
-                    if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                        mIsLongPress = false;
-                        handleVolumeLongPress(param.thisObject, keyCode);
-                        param.setResult(0);
-                        return;
-                    } else {
-                        handleVolumeLongPressAbort(param.thisObject);
-                        if (mIsLongPress) {
-                            param.setResult(0);
-                            return;
-                        }
+            if (!allowSkipTrack) return;
 
-                        // send an additional "key down" because the first one was eaten
-                        // the "key up" is what we are just processing
-                        Object[] newArgs = new Object[2];
-                        newArgs[0] = new KeyEvent(KeyEvent.ACTION_DOWN, keyCode);
-                        newArgs[1] = param.args[1];
-                        XposedBridge.invokeOriginalMethod(param.method, param.thisObject, newArgs);
+            final KeyEvent event = (KeyEvent) param.args[0];
+            final int keyCode = event.getKeyCode();
+            initManagers((Context) XposedHelpers.getObjectField(param.thisObject, "mContext"));
+            if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ||
+                    keyCode == KeyEvent.KEYCODE_VOLUME_UP) &&
+                    (event.getFlags() & KeyEvent.FLAG_FROM_SYSTEM) != 0 &&
+                    !mPowerManager.isInteractive() &&
+                    mAudioManager != null && mAudioManager.isMusicActive()) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    mIsLongPress = false;
+                    handleVolumeLongPress(param.thisObject, keyCode);
+                } else {
+                    handleVolumeLongPressAbort(param.thisObject);
+                    if (!mIsLongPress) {
+                        ModHwKeys.injectKey(keyCode);
                     }
                 }
+                param.setResult(0);
+                return;
             }
         }
     };
