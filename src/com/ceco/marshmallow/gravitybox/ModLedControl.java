@@ -526,6 +526,47 @@ public class ModLedControl {
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
+            XposedHelpers.findAndHookMethod(CLASS_NOTIF_DATA, classLoader, "shouldFilterOut",
+                    StatusBarNotification.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    StatusBarNotification sbn = (StatusBarNotification)param.args[0];
+                    Notification n = sbn.getNotification();
+
+                    // whether to hide persistent everywhere
+                    if (!sbn.isClearable() && n.extras.getBoolean(NOTIF_EXTRA_HIDE_PERSISTENT)) {
+                        param.setResult(true);
+                        return;
+                    }
+
+                    // whether to hide during keyguard
+                    if (ModStatusBar.getStatusBarState() != StatusBarState.SHADE) {
+                        VisibilityLs vls = n.extras.containsKey(NOTIF_EXTRA_VISIBILITY_LS) ?
+                                VisibilityLs.valueOf(n.extras.getString(NOTIF_EXTRA_VISIBILITY_LS)) :
+                                    VisibilityLs.DEFAULT;
+                        switch (vls) {
+                            case CLEARABLE:
+                                param.setResult(sbn.isClearable());
+                                break;
+                            case PERSISTENT:
+                                param.setResult(!sbn.isClearable());
+                                break;
+                            case ALL:
+                                param.setResult(true);
+                                break;
+                            case DEFAULT:
+                            default: return;
+                        }
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    public static void initHeadsUp(final XSharedPreferences prefs, final ClassLoader classLoader) {
+        try {
             mSysUiPrefs = prefs;
 
             XposedHelpers.findAndHookMethod(CLASS_PHONE_STATUSBAR, classLoader, "start", new XC_MethodHook() {
@@ -614,41 +655,6 @@ public class ModLedControl {
                         Handler H = (Handler) XposedHelpers.getObjectField(huMgr, "mHandler");
                         H.postDelayed((Runnable)XposedHelpers.getObjectField(
                                 param.thisObject, "mRemoveHeadsUpRunnable"), timeout);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(CLASS_NOTIF_DATA, classLoader, "shouldFilterOut",
-                    StatusBarNotification.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    StatusBarNotification sbn = (StatusBarNotification)param.args[0];
-                    Notification n = sbn.getNotification();
-
-                    // whether to hide persistent everywhere
-                    if (!sbn.isClearable() && n.extras.getBoolean(NOTIF_EXTRA_HIDE_PERSISTENT)) {
-                        param.setResult(true);
-                        return;
-                    }
-
-                    // whether to hide during keyguard
-                    if (ModStatusBar.getStatusBarState() != StatusBarState.SHADE) {
-                        VisibilityLs vls = n.extras.containsKey(NOTIF_EXTRA_VISIBILITY_LS) ?
-                                VisibilityLs.valueOf(n.extras.getString(NOTIF_EXTRA_VISIBILITY_LS)) :
-                                    VisibilityLs.DEFAULT;
-                        switch (vls) {
-                            case CLEARABLE:
-                                param.setResult(sbn.isClearable());
-                                break;
-                            case PERSISTENT:
-                                param.setResult(!sbn.isClearable());
-                                break;
-                            case ALL:
-                                param.setResult(true);
-                                break;
-                            case DEFAULT:
-                            default: return;
-                        }
                     }
                 }
             });
