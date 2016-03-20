@@ -1084,6 +1084,7 @@
     <string name="animation_scale9">Animation à l\'échelle 1.25x</string>
     <string name="animation_scale10">Animation à l\'échelle .35x</string>
     <string name="animation_scale11">Animation à l\'échelle .4x</string>
+    <string name="animation_scale12">Animation à l\'échelle .3x</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Style du nom de la touche</string>

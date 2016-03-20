@@ -1051,6 +1051,7 @@
     <string name="animation_scale9">Skala animacji 1.25x</string>
     <string name="animation_scale10">Skala animacji .35x</string>
     <string name="animation_scale11">Skala animacji .4x</string>
+    <string name="animation_scale12">Skala animacji .3x</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Styl etykiety kafelka</string>

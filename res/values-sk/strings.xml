@@ -1057,6 +1057,7 @@
     <string name="animation_scale9">Mierka animácie 1.25x</string>
     <string name="animation_scale10">Mierka animácie .35x</string>
     <string name="animation_scale11">Mierka animácie .4x</string>
+    <string name="animation_scale12">Mierka animácie .3x</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Štýl textu dlaždice</string>
