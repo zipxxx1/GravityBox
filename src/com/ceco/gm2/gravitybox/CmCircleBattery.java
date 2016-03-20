@@ -25,10 +25,7 @@ import com.ceco.gm2.gravitybox.managers.StatusBarIconManager.IconManagerListener
 import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
@@ -37,12 +34,10 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 public class CmCircleBattery extends ImageView implements IconManagerListener, BatteryStatusListener {
     private static final String TAG = "GB:CircleBattery";
-    private static final String PACKAGE_NAME = "com.android.systemui";
     private static final boolean DEBUG = false;
 
     public enum Style { SOLID, DASHED };
@@ -57,17 +52,14 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     private boolean mIsAnimating;   // stores charge-animation status to reliably remove callbacks
     private int     mDockLevel;     // current dock battery level
     private boolean mDockIsCharging;// whether or not dock battery is currently charging
-    private boolean mIsDocked = false;      // whether or not dock battery is connected
     private boolean mPercentage;    // whether to show percentage
 
     private int     mCircleSize;    // draw size of circle. read rather complicated from
                                     // another status bar icon, so it fits the icon size
                                     // no matter the dps and resolution
     private RectF   mRectLeft;      // contains the precalculated rect used in drawArc(), derived from mCircleSize
-    private RectF   mRectRight;     // contains the precalculated rect used in drawArc() for dock battery
     private Float   mTextLeftX;     // precalculated x position for drawText() to appear centered
     private Float   mTextY;         // precalculated y position for drawText() to appear vertical-centered
-    private Float   mTextRightX;    // precalculated x position for dock battery drawText()
 
     // quiet a lot of paint variables. helps to move cpu-usage from actual drawing to initialization
     private Paint   mPaintFont;
@@ -97,13 +89,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     public void onBatteryStatusChanged(BatteryData batteryData) {
         mLevel = batteryData.level;
         mIsCharging = batteryData.charging;
-
         if (mAttached) {
-            LayoutParams l = getLayoutParams();
-            l.width = mCircleSize + getPaddingLeft()
-                    + (mIsDocked ? mCircleSize + getPaddingLeft() : 0);
-            setLayoutParams(l);
-
             invalidate();
         }
     }
@@ -128,25 +114,34 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         // stroke width is later set in initSizeBasedStuff()
         Resources res = getResources();
 
-        mPaintFont = new Paint();
-        mPaintFont.setAntiAlias(true);
+        mPaintFont = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaintFont.setDither(true);
         mPaintFont.setStyle(Paint.Style.STROKE);
-
-        mPaintGray = new Paint(mPaintFont);
-        mPaintSystem = new Paint(mPaintFont);
-        mPaintRed = new Paint(mPaintFont);
-
-        mPaintFont.setColor(res.getColor(android.R.color.holo_blue_dark));
-        mPaintSystem.setColor(res.getColor(android.R.color.holo_blue_dark));
-        // could not find the darker definition anywhere in resources
-        // do not want to use static 0x404040 color value. would break theming.
-        mPaintGray.setColor(res.getColor(android.R.color.darker_gray));
-        mPaintRed.setColor(res.getColor(android.R.color.holo_red_light));
-
-        // font needs some extra settings
         mPaintFont.setTextAlign(Align.CENTER);
         mPaintFont.setFakeBoldText(true);
+        mPaintFont.setColor(res.getColor(android.R.color.holo_blue_dark));
+
+        mPaintGray = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaintGray.setStrokeCap(Paint.Cap.BUTT);
+        mPaintGray.setDither(true);
+        mPaintGray.setStrokeWidth(0);
+        mPaintGray.setStyle(Paint.Style.STROKE);
+        mPaintGray.setColor(0x4DFFFFFF);
+
+        mPaintSystem = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaintSystem.setStrokeCap(Paint.Cap.BUTT);
+        mPaintSystem.setDither(true);
+        mPaintSystem.setStrokeWidth(0);
+        mPaintSystem.setStyle(Paint.Style.STROKE);
+        mPaintSystem.setColor(mPaintFont.getColor());
+
+        mPaintRed = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaintRed.setStrokeCap(Paint.Cap.BUTT);
+        mPaintRed.setDither(true);
+        mPaintRed.setStrokeWidth(0);
+        mPaintRed.setStyle(Paint.Style.STROKE);
+        mPaintRed.setColor(res.getColor(android.R.color.holo_red_light));
+
         mPercentage = false;
 
         setStyle(Style.SOLID);
@@ -162,7 +157,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     public void setStyle(Style style) {
         switch (style) {
             case SOLID:
-                mStrokeWidthFactor = 9.5f;
+                mStrokeWidthFactor = 7.5f;
                 mPathEffect = null;
                 break;
             case DASHED:
@@ -203,8 +198,12 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
             initSizeMeasureIconHeight();
         }
 
-        setMeasuredDimension(mCircleSize + getPaddingLeft()
-                + (mIsDocked ? mCircleSize + getPaddingLeft() : 0), mCircleSize);
+        setMeasuredDimension(mCircleSize + getPaddingLeft(), mCircleSize);
+    }
+
+    @Override
+    public void onSizeChanged(int w, int h, int oldw, int oldh) {
+        initSizeBasedStuff();
     }
 
     private void drawCircle(Canvas canvas, int level, int animOffset, float textX, RectF drawRect) {
@@ -241,12 +240,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
 
         updateChargeAnim();
 
-        if (mIsDocked) {
-            drawCircle(canvas, mDockLevel, (mDockIsCharging ? mAnimOffset : 0), mTextLeftX, mRectLeft);
-            drawCircle(canvas, mLevel, (mIsCharging ? mAnimOffset : 0), mTextRightX, mRectRight);
-        } else {
-            drawCircle(canvas, mLevel, (mIsCharging ? mAnimOffset : 0), mTextLeftX, mRectLeft);
-        }
+        drawCircle(canvas, mLevel, (mIsCharging ? mAnimOffset : 0), mTextLeftX, mRectLeft);
     }
 
     /***
@@ -286,28 +280,25 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
             initSizeMeasureIconHeight();
         }
 
-        mPaintFont.setTextSize(mCircleSize / 1.8f);
+        mPaintFont.setTextSize(mCircleSize / 2.0f);
 
         float strokeWidth = mCircleSize / mStrokeWidthFactor;
         mPaintRed.setStrokeWidth(strokeWidth);
         mPaintSystem.setStrokeWidth(strokeWidth);
-        mPaintGray.setStrokeWidth(strokeWidth / 3.5f);
+        mPaintGray.setStrokeWidth(strokeWidth);
 
         // calculate rectangle for drawArc calls
         int pLeft = getPaddingLeft();
         mRectLeft = new RectF(pLeft + strokeWidth / 2.0f, 0 + strokeWidth / 2.0f, mCircleSize
                 - strokeWidth / 2.0f + pLeft, mCircleSize - strokeWidth / 2.0f);
-        int off = pLeft + mCircleSize;
-        mRectRight = new RectF(mRectLeft.left + off, mRectLeft.top, mRectLeft.right + off,
-                mRectLeft.bottom);
 
         // calculate Y position for text
         Rect bounds = new Rect();
         mPaintFont.getTextBounds("99", 0, "99".length(), bounds);
         mTextLeftX = mCircleSize / 2.0f + getPaddingLeft();
-        mTextRightX = mTextLeftX + off;
-        // the +1 at end of formular balances out rounding issues. works out on all resolutions
-        mTextY = mCircleSize / 2.0f + (bounds.bottom - bounds.top) / 2.0f - strokeWidth / 2.0f + 1;
+        // the +1dp at end of formular balances out rounding issues. works out on all resolutions
+        mTextY = mCircleSize / 2.0f + (bounds.bottom - bounds.top) / 2.0f - strokeWidth / 2.0f +
+                getResources().getDisplayMetrics().density;
 
         // force new measurement for wrap-content xml tag
         measure(0, 0);
@@ -322,27 +313,10 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
      */
     private void initSizeMeasureIconHeight() {
         final Resources res = getResources();
-        final int minSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                15, res.getDisplayMetrics());
-        try {
-            final int batteryIconId = 
-                    res.getIdentifier("stat_sys_battery_100", "drawable", PACKAGE_NAME);
-            final Bitmap measure = BitmapFactory.decodeResource(res, batteryIconId);
-            final int x = measure.getWidth() / 2;
-            mCircleSize = 0;
-            for (int y = 0; y < measure.getHeight(); y++) {
-                int alpha = Color.alpha(measure.getPixel(x, y));
-                if (alpha > 5) {
-                    mCircleSize++;
-                }
-            }
-            if (mCircleSize < minSize) {
-                mCircleSize = minSize;
-            }
-        } catch (Throwable t) {
-            log("Error determining Circle Battery size from battery icon: " + t.getMessage());
-            mCircleSize = minSize;
-        }
+        mCircleSize = Math.round(TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 16,
+                res.getDisplayMetrics()));
+        mCircleSize = Math.round(mCircleSize / 2f) * 2;
         if (DEBUG) log("mCircleSize = " + mCircleSize + "px");
     }
 
