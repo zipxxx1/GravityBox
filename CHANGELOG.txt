@@ -1,3 +1,18 @@
+Changelog 6.0.7 - 19/03/2016
+--------------------------------------
+- QuickSettings management: added support for MediaTek Timeout tile
+- Ultimate notification control:
+--- added option for controlling notification visibility in lock screen
+--- added option for hiding persistent notifications (similar to Ongoing notification blocker but on per-app basis)
+--- fixed system/service notifications not being processed by notification control
+- Media: fixed volume controls not working when skip track feature is enabled together with Ambient Display feature
+- Improved layout of circle battery 
+- Fixed some Samsung Touchwiz incompatibilities (thanks to wanam)
+- Updated Russian translations (thanks to gaich)
+- Updated German translations (thanks to F43nd1r)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated French translations (thanks to ch-vox)
+
 Changelog 6.0.6 - 12/03/2016
 --------------------------------------
 - Lockscreen: added option for disabling Imprint vibrations
