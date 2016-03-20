@@ -1,3 +1,18 @@
+Changelog 5.3.8 - 20/03/2016
+--------------------------------------
+- QuickSettings management:
+--- added support for MediaTek Timeout tile
+--- fixed Data connection tile support on MediaTek devices running Android 5.0 (thanks cruplezone for testing)
+- Ultimate notification control:
+--- added option for controlling notification visibility in lock screen
+--- added option for hiding persistent notifications (similar to Ongoing notification blocker but on per-app basis)
+--- fixed system/service notifications not being processed by notification control
+- Media: fixed volume controls not working when skip track feature is enabled together with Ambient Display feature
+- Improved layout of circle battery 
+- Updated Russian translations (thanks to gaich)
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated French translations (thanks to ch-vox)
+
 Changelog 5.3.7 - 13/03/2016
 --------------------------------------
 - Quick settings management:
