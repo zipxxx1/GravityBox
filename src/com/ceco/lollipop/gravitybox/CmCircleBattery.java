@@ -36,7 +36,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.util.TypedValue;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 public class CmCircleBattery extends ImageView implements IconManagerListener, BatteryStatusListener {
@@ -56,7 +55,6 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
     private boolean mIsAnimating;   // stores charge-animation status to reliably remove callbacks
     private int     mDockLevel;     // current dock battery level
     private boolean mDockIsCharging;// whether or not dock battery is currently charging
-    private boolean mIsDocked = false;      // whether or not dock battery is connected
     private boolean mPercentage;    // whether to show percentage
     private BatteryStyleController mController;
 
@@ -64,10 +62,8 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
                                     // another status bar icon, so it fits the icon size
                                     // no matter the dps and resolution
     private RectF   mRectLeft;      // contains the precalculated rect used in drawArc(), derived from mCircleSize
-    private RectF   mRectRight;     // contains the precalculated rect used in drawArc() for dock battery
     private Float   mTextLeftX;     // precalculated x position for drawText() to appear centered
     private Float   mTextY;         // precalculated y position for drawText() to appear vertical-centered
-    private Float   mTextRightX;    // precalculated x position for dock battery drawText()
 
     // quiet a lot of paint variables. helps to move cpu-usage from actual drawing to initialization
     private Paint   mPaintFont;
@@ -98,15 +94,6 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         mLevel = batteryData.level;
         mIsCharging = batteryData.charging;
         mIsPowerSaving = batteryData.isPowerSaving;
-
-        if (mAttached) {
-            LayoutParams l = getLayoutParams();
-            l.width = mCircleSize + getPaddingLeft()
-                    + (mIsDocked ? mCircleSize + getPaddingLeft() : 0);
-            setLayoutParams(l);
-
-            invalidate();
-        }
     }
 
     /***
@@ -122,28 +109,38 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         // stroke width is later set in initSizeBasedStuff()
         Resources res = getResources();
 
-        mPaintFont = new Paint();
-        mPaintFont.setAntiAlias(true);
+        mPaintFont = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaintFont.setDither(true);
         mPaintFont.setStyle(Paint.Style.STROKE);
-
-        mPaintGray = new Paint(mPaintFont);
-        mPaintSystem = new Paint(mPaintFont);
-        mPaintRed = new Paint(mPaintFont);
-
+        mPaintFont.setTextAlign(Align.CENTER);
+        mPaintFont.setFakeBoldText(true);
         mPaintFont.setColor(Color.WHITE);
-        mPaintSystem.setColor(mPaintFont.getColor());
+
+        mPaintGray = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaintGray.setStrokeCap(Paint.Cap.BUTT);
+        mPaintGray.setDither(true);
+        mPaintGray.setStrokeWidth(0);
+        mPaintGray.setStyle(Paint.Style.STROKE);
         mPaintGray.setColor(0x4DFFFFFF);
 
+        mPaintSystem = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaintSystem.setStrokeCap(Paint.Cap.BUTT);
+        mPaintSystem.setDither(true);
+        mPaintSystem.setStrokeWidth(0);
+        mPaintSystem.setStyle(Paint.Style.STROKE);
+        mPaintSystem.setColor(mPaintFont.getColor());
+
+        mPaintRed = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaintRed.setStrokeCap(Paint.Cap.BUTT);
+        mPaintRed.setDither(true);
+        mPaintRed.setStrokeWidth(0);
+        mPaintRed.setStyle(Paint.Style.STROKE);
         // try to use battery saver color; fall back to red in case of problems
         int resId = res.getIdentifier("battery_saver_mode_color", "color",
                 ModStatusBar.PACKAGE_NAME);
         mPaintRed.setColor(resId != 0 ? res.getColor(resId) :
                 res.getColor(android.R.color.holo_red_light));
 
-        // font needs some extra settings
-        mPaintFont.setTextAlign(Align.CENTER);
-        mPaintFont.setFakeBoldText(true);
         mPercentage = false;
 
         setStyle(Style.SOLID);
@@ -212,8 +209,12 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
             initSizeMeasureIconHeight();
         }
 
-        setMeasuredDimension(mCircleSize + getPaddingLeft()
-                + (mIsDocked ? mCircleSize + getPaddingLeft() : 0), mCircleSize);
+        setMeasuredDimension(mCircleSize + getPaddingLeft(), mCircleSize);
+    }
+
+    @Override
+    public void onSizeChanged(int w, int h, int oldw, int oldh) {
+        initSizeBasedStuff();
     }
 
     private void drawCircle(Canvas canvas, int level, int animOffset, float textX, RectF drawRect) {
@@ -254,12 +255,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
 
         updateChargeAnim();
 
-        if (mIsDocked) {
-            drawCircle(canvas, mDockLevel, (mDockIsCharging ? mAnimOffset : 0), mTextLeftX, mRectLeft);
-            drawCircle(canvas, mLevel, (mIsCharging ? mAnimOffset : 0), mTextRightX, mRectRight);
-        } else {
-            drawCircle(canvas, mLevel, (mIsCharging ? mAnimOffset : 0), mTextLeftX, mRectLeft);
-        }
+        drawCircle(canvas, mLevel, (mIsCharging ? mAnimOffset : 0), mTextLeftX, mRectLeft);
     }
 
     /***
@@ -310,17 +306,14 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         int pLeft = getPaddingLeft();
         mRectLeft = new RectF(pLeft + strokeWidth / 2.0f, 0 + strokeWidth / 2.0f, mCircleSize
                 - strokeWidth / 2.0f + pLeft, mCircleSize - strokeWidth / 2.0f);
-        int off = pLeft + mCircleSize;
-        mRectRight = new RectF(mRectLeft.left + off, mRectLeft.top, mRectLeft.right + off,
-                mRectLeft.bottom);
 
         // calculate Y position for text
         Rect bounds = new Rect();
         mPaintFont.getTextBounds("99", 0, "99".length(), bounds);
         mTextLeftX = mCircleSize / 2.0f + getPaddingLeft();
-        mTextRightX = mTextLeftX + off;
-        // the +1 at end of formular balances out rounding issues. works out on all resolutions
-        mTextY = mCircleSize / 2.0f + (bounds.bottom - bounds.top) / 1.9f - strokeWidth / 1.9f + 1;
+        // the +1dp at end of formular balances out rounding issues. works out on all resolutions
+        mTextY = mCircleSize / 2.0f + (bounds.bottom - bounds.top) / 2.0f - strokeWidth / 2.0f +
+                getResources().getDisplayMetrics().density;
 
         // force new measurement for wrap-content xml tag
         measure(0, 0);
@@ -333,6 +326,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         final Resources res = getResources();
         mCircleSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 17, res.getDisplayMetrics());
+        mCircleSize = Math.round(mCircleSize / 2f) * 2;
         if (DEBUG) log("mCircleSize = " + mCircleSize + "px");
     }
 
