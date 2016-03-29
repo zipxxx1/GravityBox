@@ -1646,9 +1646,10 @@
     <string name="pref_lockscreen_direct_unlock_summary">当屏幕开启时跳过安全锁直接显示</string>
     <string name="direct_unlock_off">关闭</string>
     <string name="direct_unlock_standard">标准</string>
-    <string name="direct_unlock_see_through">See through</string>
+    <string name="direct_unlock_see_through">看透</string>
 
     <!-- UNC: Notification visibility -->
+	<string name="pref_cat_lc_visibility_title">可见度</string>
     <string name="pref_lc_notif_visibility_title">可见性</string>
     <string name="pref_lc_notif_visibility_summary">指定锁屏通知可见性
         适用于"\隐藏敏感通知内容\"锁屏策略已激活</string>
@@ -1658,7 +1659,7 @@
     <string name="lc_notif_visibility_secret">隐藏通知</string>
 
     <!-- Cellular tile settings -->
-    <string name="pref_cat_qs_cell_tile_title">Cellular瓷砖设置</string>
+    <string name="pref_cat_qs_cell_tile_title">蜂窝瓷砖设置</string>
 
     <!-- Cellular tile: data off icon -->
     <string name="pref_cell_tile_data_off_icon_title">关闭数据图标</string>
@@ -1855,5 +1856,46 @@
     
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">智能锁策略</string>
+	
+	<!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">状态栏位置</string>
+    <string name="pref_battery_percent_text_position_summary">需要重新启动</string>
+    <string name="battery_percent_text_position_right">电池图标在右侧</string>
+    <string name="battery_percent_text_position_left">电池图标在左侧</string>
+
+    <!-- Disable Imprint vibrations -->
+    <string name="pref_imprint_vibe_disable_title">禁用印记震动</string>
+    <string name="imprint_vibe_disable_success">在成功认证</string>
+    <string name="imprint_vibe_disable_error">在验证错误</string>
+
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">更换原来的振动</string>
+    <string name="pref_lc_vibrate_replace_summary">仅适用于覆盖原始通知振动以防振动</string>
+
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">替换原来的声音</string>
+    <string name="pref_lc_sound_replace_summary">仅适用于通知声音覆盖原有声音的情况下</string>
+
+    <!-- Battery tile options -->
+    <string name="pref_battery_tile_temp_title">显示温度</string>
+    <string name="pref_battery_tile_voltage_title">显示电压</string>
+
+    <!-- QS: Scale correction -->
+    <string name="pref_qs_scale_correction_title">修正角度</string>
+
+    <!-- MTK tiles: Timeout -->
+    <string name="qs_tile_timeout">超时</string>
+
+    <!-- UNC: Notification lock screen visibility -->
+    <string name="pref_lc_notif_visibility_ls_title">锁定屏幕可见性</string>
+    <string name="lc_notif_visibility_ls_default">默认</string>
+    <string name="lc_notif_visibility_ls_clearable">隐藏清除的通知</string>
+    <string name="lc_notif_visibility_ls_persistent">隐藏持续的通知</string>
+    <string name="lc_notif_visibility_ls_all">隐藏所有通知</string>
+
+    <!-- UNC: Hide persistent notifications -->
+    <string name="pref_lc_notif_hide_persistent_title">隐藏持续的通知</string>
+    <string name="pref_lc_notif_hide_persistent_summary">从这个程序来隐藏所有正在进行的和其它非可清除的通知</string>
+	
 
 </resources>
