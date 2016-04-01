@@ -1265,6 +1265,17 @@
 
             </PreferenceScreen>
 
+            <com.ceco.lollipop.gravitybox.preference.SeekBarPreference
+                android:key="pref_navbar_autofade_keys"
+                android:title="@string/pref_navbar_autofade_keys_title"
+                android:summary="@string/pref_navbar_autofade_keys_summary"
+                minimum="0"
+                maximum="10"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="s"
+                android:defaultValue="0" />
+
             <CheckBoxPreference
                 android:key="pref_navbar_larger_icons"
                 android:title="@string/pref_navbar_larger_icons_title"
