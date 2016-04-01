@@ -237,8 +237,8 @@ public class ModNavigationBar {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_KEYS)) {
                     mAutofadeTimeoutMs = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_KEYS, 0) * 1000;
+                    mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
                     if (mAutofadeTimeoutMs == 0) {
-                        mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
                         setBarMode(mBarModeOriginal);
                     } else {
                         mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
@@ -671,7 +671,7 @@ public class ModNavigationBar {
                     }
                     if (mAutofadeTimeoutMs > 0 &&
                             SystemClock.uptimeMillis() - mLastTouchMs >= mAutofadeTimeoutMs &&
-                            mBarModeOriginal != MODE_LIGHTS_OUT) {
+                            barMode != MODE_LIGHTS_OUT) {
                         param.args[0] = MODE_LIGHTS_OUT;
                     }
                 }
