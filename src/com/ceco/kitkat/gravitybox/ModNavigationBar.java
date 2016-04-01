@@ -31,6 +31,9 @@ import android.content.res.Resources;
 import android.content.res.XModuleResources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
@@ -77,6 +80,7 @@ public class ModNavigationBar {
 
     private static final int MODE_OPAQUE = 0;
     private static final int MODE_LIGHTS_OUT = 3;
+    private static final int MSG_LIGHTS_OUT = 1;
 
     private static final int NAVIGATION_HINT_BACK_ALT = 1 << 0;
     private static final int STATUS_BAR_DISABLE_RECENT = 0x01000000;
@@ -105,6 +109,10 @@ public class ModNavigationBar {
     private static KeyguardManager mKeyguard;
     private static boolean mNavbarLeftHanded;
     private static LollipopIconStyle mLollipopIconStyle;
+    private static long mLastTouchMs;
+    private static int mBarModeOriginal;
+    private static int mAutofadeTimeoutMs;
+    private static BarModeHandler mBarModeHandler;
 
     // Custom key
     private static boolean mCustomKeyEnabled;
@@ -226,6 +234,15 @@ public class ModNavigationBar {
                     mCustomKeyAltIcon = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON, false);
                     updateCustomKeyIcon();
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_KEYS)) {
+                    mAutofadeTimeoutMs = intent.getIntExtra(GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_KEYS, 0) * 1000;
+                    if (mAutofadeTimeoutMs == 0) {
+                        mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
+                        setBarMode(mBarModeOriginal);
+                    } else {
+                        mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
+                    }
                 }
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) && 
@@ -366,6 +383,7 @@ public class ModNavigationBar {
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
             mPrefs = prefs;
+            mBarModeHandler = new BarModeHandler();
 
             final Class<?> navbarViewClass = XposedHelpers.findClass(CLASS_NAVBAR_VIEW, classLoader);
             final Class<?> navbarTransitionsClass = XposedHelpers.findClass(CLASS_NAVBAR_TRANSITIONS, classLoader);
@@ -413,6 +431,7 @@ public class ModNavigationBar {
                     GravityBoxSettings.PREF_KEY_NAVBAR_RING_DISABLE, false);
             mCameraKeyDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_NAVBAR_CAMERA_KEY_DISABLE, false);
+            mAutofadeTimeoutMs = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_KEYS, 0) * 1000;
 
             // for HTC GPE devices having capacitive keys
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false)) {
@@ -645,6 +664,18 @@ public class ModNavigationBar {
             XposedHelpers.findAndHookMethod(navbarTransitionsClass, "applyMode",
                     int.class, boolean.class, boolean.class, new XC_MethodHook() {
                 @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    int barMode = (int)param.args[0];
+                    if (barMode != MODE_LIGHTS_OUT) {
+                        mBarModeOriginal = barMode;
+                    }
+                    if (mAutofadeTimeoutMs > 0 &&
+                            SystemClock.uptimeMillis() - mLastTouchMs >= mAutofadeTimeoutMs &&
+                            mBarModeOriginal != MODE_LIGHTS_OUT) {
+                        param.args[0] = MODE_LIGHTS_OUT;
+                    }
+                }
+                @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final int mode = (Integer) param.args[0];
                     final boolean animate = (Boolean) param.args[1];
@@ -830,6 +861,25 @@ public class ModNavigationBar {
                     }
                 });
             }
+
+            XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
+                    "onInterceptTouchEvent", MotionEvent.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mAutofadeTimeoutMs == 0) return;
+
+                    int action = ((MotionEvent)param.args[0]).getAction();
+                    if (action == MotionEvent.ACTION_DOWN) {
+                        mLastTouchMs = SystemClock.uptimeMillis();
+                        if (mBarModeHandler.hasMessages(MSG_LIGHTS_OUT)) {
+                            mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
+                        } else {
+                            setBarMode(mBarModeOriginal);
+                        }
+                        mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
+                    }
+                }
+            });
         } catch(Throwable t) {
             XposedBridge.log(t);
         }
@@ -881,6 +931,22 @@ public class ModNavigationBar {
                 }
                 v.setLayoutParams(mlp);
             }
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+    }
+
+    private static class BarModeHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            setBarMode(msg.what);
+        }
+    };
+
+    private static void setBarMode(int mode) {
+        try {
+            Object bt = XposedHelpers.callMethod(mNavigationBarView, "getBarTransitions");
+            XposedHelpers.callMethod(bt, "applyMode", mode, true, true);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

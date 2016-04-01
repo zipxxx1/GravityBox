@@ -1870,4 +1870,11 @@
     <string name="pref_lc_sound_replace_title">Nahradiť pôvodný zvuk</string>
     <string name="pref_lc_sound_replace_summary">Aplikuje zvuk len v prípade, ak pôvodné oznámenie má zvuk</string>
 
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">Automatické stmavenie tlačidiel</string>
+    <string name="pref_navbar_autofade_keys_summary">Stmaví tlačidlá po vypršaní nastaveného času. Nastavte na 0 pre vypnutie funkcie.</string>
+    <string name="pref_navbar_autofade_show_keys_title">Zobraziť tlačidlá pri</string>
+    <string name="autofade_show_keys_navbar">Dotyku navigačnej lišty</string>
+    <string name="autofade_show_keys_screen">Dotyku obrazovky</string>
+
 </resources>

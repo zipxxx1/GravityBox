@@ -1926,4 +1926,11 @@
     <string name="pref_lc_sound_replace_title">Заменить оригинальный звук</string>
     <string name="pref_lc_sound_replace_summary">Применение замены звука только если звук присутствует в оригинальном уведомлении</string>
 
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">Автоисчезновение кнопок</string>
+    <string name="pref_navbar_autofade_keys_summary">Кнопки автоматически исчезают после истечения установленной задержки. Введите для 0 отключения.</string>
+    <string name="pref_navbar_autofade_show_keys_title">Включение показа кнопок</string>
+    <string name="autofade_show_keys_navbar">Касание нав. панели</string>
+    <string name="autofade_show_keys_screen">Касание экрана</string>
+
 </resources>

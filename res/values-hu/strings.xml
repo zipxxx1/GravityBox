@@ -1894,4 +1894,11 @@
     <string name="pref_lc_sound_replace_title">Eredeti hang lecserélése</string>
     <string name="pref_lc_sound_replace_summary">Csak arra az esetre vonatkozik, ha az eredeti üzenetnek is van hangja</string>
 
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">Gombok auto-úsztatása</string>
+    <string name="pref_navbar_autofade_keys_summary">Gombok automatikus úsztatása meghatározott időkorlát lejárata után. Letiltáshoz állíts be 0-t.</string>
+    <string name="pref_navbar_autofade_show_keys_title">Gombok mutatása bekapcsolva</string>
+    <string name="autofade_show_keys_navbar">Navigációs sáv érintésre</string>
+    <string name="autofade_show_keys_screen">Képernyő érintésre</string>
+
 </resources>

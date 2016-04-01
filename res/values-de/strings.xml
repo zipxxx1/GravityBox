@@ -1656,4 +1656,11 @@
     <string name="pref_lc_sound_replace_title">Originalen Ton ersetzen</string>
     <string name="pref_lc_sound_replace_summary">Überschriebener Ton wird nur genutzt, falls die ursprüngliche Benachrichtigung Ton hatte</string>
 
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">Ausblenden der Tasten</string>
+    <string name="pref_navbar_autofade_keys_summary">Blendet die Tasten automatisch entprechend des Timeouts aus. Zum Deaktivieren auf 0 setzen.</string>
+    <string name="pref_navbar_autofade_show_keys_title">Anzeige der Tasten bei</string>
+    <string name="autofade_show_keys_navbar">Berühren der Navigationsleiste</string>
+    <string name="autofade_show_keys_screen">Berühren des Bildschirms</string>
+
 </resources>
