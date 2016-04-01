@@ -94,6 +94,9 @@ public class CmCircleBattery extends ImageView implements IconManagerListener, B
         mLevel = batteryData.level;
         mIsCharging = batteryData.charging;
         mIsPowerSaving = batteryData.isPowerSaving;
+        if (mAttached) {
+            invalidate();
+        }
     }
 
     /***
