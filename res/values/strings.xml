@@ -1898,4 +1898,8 @@
     <string name="pref_lc_notif_hide_persistent_summary">Hides all ongoing and other non-clearable notifications 
         coming from this app</string>
 
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">Auto-fade keys</string>
+    <string name="pref_navbar_autofade_keys_summary">Fades keys automatically after timeout expires. Seto to 0 to disable.</string>
+
 </resources>
