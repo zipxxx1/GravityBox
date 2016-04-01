@@ -1069,6 +1069,7 @@
     <string name="animation_scale9">Animation scale 1.25x</string>
     <string name="animation_scale10">Animation scale .35x</string>
     <string name="animation_scale11">Animation scale .4x</string>
+    <string name="animation_scale12">Animation scale .3x</string>
 
     <!-- QS Tiles: Tile label style -->
     <string name="pref_qs_tile_label_style_title">Tile label style</string>
