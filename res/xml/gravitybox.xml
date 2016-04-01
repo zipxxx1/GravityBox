@@ -1180,6 +1180,17 @@
                 android:entryValues="@array/navbar_l_icon_style_values"
                 android:defaultValue="DISABLED" />
 
+            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+                android:key="pref_navbar_autofade_keys"
+                android:title="@string/pref_navbar_autofade_keys_title"
+                android:summary="@string/pref_navbar_autofade_keys_summary"
+                minimum="0"
+                maximum="10"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="s"
+                android:defaultValue="0" />
+
         </PreferenceCategory>
 
         <PreferenceCategory 

@@ -1294,4 +1294,8 @@
     <string name="pref_lc_sound_replace_title">Gantikan bunyi asal</string>
     <string name="pref_lc_sound_replace_summary">Gantikan jika notifikasi asal mempunyai bunyi</string>
 
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">Kekunci auto pudar</string>
+    <string name="pref_navbar_autofade_keys_summary">Pudar kekunci secara automatik selepas tamat masa tamat. Set 0 untuk tidak aktif</string>
+
 </resources>

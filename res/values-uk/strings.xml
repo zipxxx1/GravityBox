@@ -1787,4 +1787,11 @@
     <string name="pref_lc_sound_replace_title">Замінити оригінальний звук</string>
     <string name="pref_lc_sound_replace_summary">Застосовується лише тоді, коли звук присутній у сповіщенні</string>
 
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">Приховувати кнопки</string>
+    <string name="pref_navbar_autofade_keys_summary">Кнопки автоматично зникають через вказаний час. Встановіть 0 для вимкнення.</string>
+    <string name="pref_navbar_autofade_show_keys_title">Показувати кнопки на</string>
+    <string name="autofade_show_keys_navbar">Сенсорній навігаційній панелі</string>
+    <string name="autofade_show_keys_screen">Сенсорному екрані</string>
+
 </resources>
