@@ -503,6 +503,12 @@
                         android:summary="@string/pref_sa_tile_quick_mode_summary"
                         android:defaultValue="false" />
 
+                    <CheckBoxPreference 
+                        android:key="pref_sa_tile_auto_reset"
+                        android:title="@string/pref_sa_tile_auto_reset_title"
+                        android:summary="@string/pref_sa_tile_auto_reset_summary"
+                        android:defaultValue="false" />
+
                 </PreferenceScreen>
 
             </PreferenceScreen>

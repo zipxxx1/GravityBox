@@ -597,10 +597,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_RINGER_MODE_TILE_QUICK_MODE = "pref_rm_tile_quick_mode";
     public static final String PREF_STAY_AWAKE_TILE_MODE = "pref_qs_stay_awake";
     public static final String PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE = "pref_sa_tile_quick_mode";
+    public static final String PREF_KEY_STAY_AWAKE_TILE_AUTO_RESET = "pref_sa_tile_auto_reset";
     public static final String EXTRA_RMT_MODE = "ringerModeTileMode";
     public static final String EXTRA_RMT_QUICK_MODE = "ringerModeTileQuickMode";
     public static final String EXTRA_SA_MODE = "stayAwakeTileMode";
     public static final String EXTRA_SA_QUICK_MODE = "stayAwakeTileQuickMode";
+    public static final String EXTRA_SA_AUTO_RESET = "stayAwakeTileAutoReset";
 
     public static final String PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS = "pref_display_allow_all_rotations";
     public static final String ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED = 
@@ -3156,6 +3158,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_SA_QUICK_MODE, prefs.getBoolean(key, false));
+            } else if (key.equals(PREF_KEY_STAY_AWAKE_TILE_AUTO_RESET)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_SA_AUTO_RESET, prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_QS_SCALE_CORRECTION)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_QS_SCALE_CORRECTION, prefs.getInt(key, 0));
