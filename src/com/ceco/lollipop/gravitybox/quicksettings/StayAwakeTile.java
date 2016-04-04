@@ -62,9 +62,11 @@ public class StayAwakeTile extends QsTile {
     private SettingsObserver mSettingsObserver;
     private int mCurrentTimeout;
     private int mPreviousTimeout;
+    private int mDefaultTimeout;
     private List<ScreenTimeout> mModeList = new ArrayList<>();
     private Object mDetailAdapter;
     private boolean mQuickMode;
+    private boolean mAutoReset;
 
     private static class ScreenTimeout {
         final int mMillis;
@@ -99,7 +101,13 @@ public class StayAwakeTile extends QsTile {
     @Override
     public void setListening(boolean listening) {
         if (listening && mEnabled) {
+            final int prevTimeout = mCurrentTimeout;
             getCurrentState();
+            // this means user most likely changed screen timeout in Android Display settings
+            // so we better reset our stored default value if non-zero
+            if (prevTimeout != mCurrentTimeout && mDefaultTimeout > 0) {
+                mDefaultTimeout = mCurrentTimeout;
+            }
             mSettingsObserver.observe();
             if (DEBUG) log(getKey() + ": observer registered");
         } else {
@@ -125,6 +133,7 @@ public class StayAwakeTile extends QsTile {
         updateSettings(modes);
 
         mQuickMode = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_QUICK_MODE, false);
+        mAutoReset = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_STAY_AWAKE_TILE_AUTO_RESET, false);
     }
 
     @Override
@@ -140,6 +149,15 @@ public class StayAwakeTile extends QsTile {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_SA_QUICK_MODE)) {
                 mQuickMode = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SA_QUICK_MODE, false);
             }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_SA_AUTO_RESET)) {
+                mAutoReset = intent.getBooleanExtra(GravityBoxSettings.EXTRA_SA_AUTO_RESET, false);
+            }
+        } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+            if (mAutoReset && mDefaultTimeout > 0) {
+                setScreenOffTimeout(mDefaultTimeout);
+            }
+            mDefaultTimeout = 0;
+            if (DEBUG) log(getKey() + ": screen turned off");
         }
     }
 
@@ -159,6 +177,11 @@ public class StayAwakeTile extends QsTile {
     private void setScreenOffTimeout(int millis) {
         if (millis == NEVER_SLEEP && mCurrentTimeout != NEVER_SLEEP) {
             mPreviousTimeout = mCurrentTimeout;
+        }
+        if (mAutoReset && mDefaultTimeout == 0) {
+            mDefaultTimeout = mCurrentTimeout == NEVER_SLEEP ?
+                    FALLBACK_SCREEN_TIMEOUT_VALUE : mCurrentTimeout;
+            if (DEBUG) log(getKey() + ": mDefaultTimeout=" + mDefaultTimeout);
         }
         mCurrentTimeout = millis;
         Settings.System.putInt(mContext.getContentResolver(),

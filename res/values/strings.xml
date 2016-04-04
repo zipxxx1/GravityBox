@@ -1927,4 +1927,8 @@
     <string name="pref_navbar_autofade_keys_title">Auto-fade keys</string>
     <string name="pref_navbar_autofade_keys_summary">Fades keys automatically after timeout expires. Seto to 0 to disable.</string>
 
+    <!-- QS: StayAwake tile Auto-reset -->
+    <string name="pref_sa_tile_auto_reset_title">Auto-reset</string>
+    <string name="pref_sa_tile_auto_reset_summary">Sets default screen timeout automatically when screen turns off</string>
+
 </resources>
