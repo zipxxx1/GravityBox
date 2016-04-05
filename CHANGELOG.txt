@@ -1,3 +1,14 @@
+Changelog 6.0.8 - 05/04/2016
+--------------------------------------
+- CircleBattery: fixed refreshing issue
+- Navbar: added option for auto-fading soft keys
+- Lockscreen: added option for PIN scrambling
+- StayAwake tile: added option for auto-reset of screen timeout when screen turns off
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Malaysian translations (thanks to zamzameir)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 6.0.7 - 19/03/2016
 --------------------------------------
 - QuickSettings management: added support for MediaTek Timeout tile
