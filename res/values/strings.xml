@@ -1906,4 +1906,8 @@
     <string name="pref_sa_tile_auto_reset_title">Auto-reset</string>
     <string name="pref_sa_tile_auto_reset_summary">Sets default screen timeout automatically when screen turns off</string>
 
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">PIN scramble</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Scrambles PIN when unlocking device</string>
+
 </resources>

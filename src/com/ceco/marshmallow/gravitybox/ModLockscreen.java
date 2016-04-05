@@ -95,6 +95,7 @@ public class ModLockscreen {
     private static GestureDetector mGestureDetector;
     private static TextView mCarrierTextView;
     private static KeyguardStateMonitor mKgMonitor;
+    private static LockscreenPinScrambler mPinScrambler;
 
     private static boolean mInStealthMode;
     private static Object mPatternDisplayMode; 
@@ -471,6 +472,25 @@ public class ModLockscreen {
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION, "DEFAULT")) ==
                                 BottomAction.PHONE) {
                         param.setResult(false);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(kgPINViewClass, "onFinishInflate", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false)) {
+                        mPinScrambler = new LockscreenPinScrambler((ViewGroup)param.thisObject);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(kgPINViewClass, "resetState", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false) &&
+                            mPinScrambler != null) {
+                        mPinScrambler.scramble();
                     }
                 }
             });
