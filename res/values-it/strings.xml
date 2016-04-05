@@ -1666,4 +1666,8 @@
     <string name="dt_display_mode_always">Sempre (quando è disponibile una connessione dati)</string>
     <string name="dt_display_mode_pt">Quando viene mostrata una barra di avanzamento nella barra di stato</string>
 
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">Tastierino PIN casuale</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Mescola casualmente i numeri del tastierino di inserimento del PIN.</string>
+
 </resources>

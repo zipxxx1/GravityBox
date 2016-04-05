@@ -1794,4 +1794,8 @@
     <string name="autofade_show_keys_navbar">Касание нав. панели</string>
     <string name="autofade_show_keys_screen">Касание экрана</string>
 
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">Перемешивание цифр PIN</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Изменение расположения цифр для набора PIN-кода при разблокировке устройства</string>
+
 </resources>

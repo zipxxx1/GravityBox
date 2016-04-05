@@ -1767,4 +1767,8 @@
     <string name="autofade_show_keys_navbar">Navigációs sáv érintésre</string>
     <string name="autofade_show_keys_screen">Képernyő érintésre</string>
 
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">PIN összekeverés</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Összekeveri a PIN számokat az eszköz feloldásakor</string>
+
 </resources>

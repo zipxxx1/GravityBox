@@ -1711,4 +1711,8 @@
     <string name="autofade_show_keys_navbar">Doteku navigační lišty</string>
     <string name="autofade_show_keys_screen">Doteku obrazovky</string>
 
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">Šifrování PIN</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Přehází PIN tlačítka při každém odemknutí zařízení</string>
+
 </resources>

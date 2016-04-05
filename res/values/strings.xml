@@ -1791,4 +1791,8 @@
     <string name="pref_navbar_autofade_keys_title">Auto-fade keys</string>
     <string name="pref_navbar_autofade_keys_summary">Fades keys automatically after timeout expires. Set to 0 to disable.</string>
 
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">PIN scramble</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Scrambles PIN when unlocking device</string>
+
 </resources>
