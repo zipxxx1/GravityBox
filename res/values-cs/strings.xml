@@ -1835,4 +1835,16 @@
     <string name="pref_lc_notif_hide_persistent_summary">Skryje všechny probíhající a jiné nesmazatelné 
          oznámení z této aplikace</string>
 
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">Automatické ztmavení tlačítek</string>
+    <string name="pref_navbar_autofade_keys_summary">Ztmaví tlačítka po vypršení nastaveného času. Nastavte na 0 pro vypnutí funkce.</string>
+
+    <!-- QS: StayAwake tile Auto-reset -->
+    <string name="pref_sa_tile_auto_reset_title">Automatický reset</string>
+    <string name="pref_sa_tile_auto_reset_summary">Nastaví výchozí časovač obrazovky po vypnutí obrazovky</string>
+
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">Šifrování PIN</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Přehází PIN tlačítka při každém odemknutí zařízení</string>
+
 </resources>
