@@ -1932,4 +1932,8 @@
     <string name="autofade_show_keys_navbar">Сенсорній навігаційній панелі</string>
     <string name="autofade_show_keys_screen">Сенсорному екрані</string>
 
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">Рандомізувати PIN</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Рандомізує положення кнопок PIN при розблокуванні пристрою</string>
+
 </resources>

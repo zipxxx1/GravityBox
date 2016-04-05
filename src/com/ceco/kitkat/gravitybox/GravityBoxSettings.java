@@ -260,6 +260,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_STATUSBAR_LOCK_POLICY_CHANGED = "gravitybox.intent.action.STATUSBAR_LOCK_POLICY_CHANGED";
     public static final String EXTRA_STATUSBAR_LOCK_POLICY = "statusbarLockPolicy";
     public static final String PREF_KEY_LOCKSCREEN_DISABLE_ECB = "pref_lockscreen_disable_ecb";
+    public static final String PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE = "pref_lockscreen_pin_sramble";
     public static final String ACTION_LOCKSCREEN_SETTINGS_CHANGED = "gravitybox.intent.action.LOCKSCREEN_SETTINGS_CHANGED";
 
     public static final String PREF_CAT_KEY_POWER = "pref_cat_power";
@@ -965,7 +966,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_LOCKSCREEN_ROTATION,
             PREF_KEY_LOCKSCREEN_RING_DT2S,
             PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS,
-            PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR
+            PREF_KEY_LOCKSCREEN_SHOW_PATTERN_ERROR,
+            PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE
     ));
 
     private static final List<String> headsUpKeys = new ArrayList<String>(Arrays.asList(

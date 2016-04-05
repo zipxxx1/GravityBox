@@ -94,6 +94,7 @@ public class ModLockscreen {
     private static final String ENUM_DISPLAY_MODE = "com.android.internal.widget.LockPatternView.DisplayMode";
     private static final String CLASS_LOCK_PATTERN_UTILS = "com.android.internal.widget.LockPatternUtils";
     private static final String CLASS_KG_UTILS = CLASS_PATH + ".KeyguardUtils";
+    private static final String CLASS_KG_PIN_VIEW = CLASS_PATH + ".KeyguardPINView";
 
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
@@ -134,6 +135,7 @@ public class ModLockscreen {
     private static Object mKgViewManagerHost;
     private static String mCarrierText[];
     private static QuietHours mQuietHours;
+    private static LockscreenPinScrambler mPinScrambler;
 
     // Battery Arc
     private static HandleDrawable mHandleDrawable;
@@ -203,6 +205,7 @@ public class ModLockscreen {
                     (Class<? extends Enum>) XposedHelpers.findClass(ENUM_SECURITY_MODE, classLoader);
             final Class<?> lockPatternViewClass = XposedHelpers.findClass(CLASS_LOCK_PATTERN_VIEW, classLoader);
             final Class<? extends Enum> displayModeEnum = (Class<? extends Enum>) XposedHelpers.findClass(ENUM_DISPLAY_MODE, classLoader);
+            final Class<?> kgPINViewClass = XposedHelpers.findClass(CLASS_KG_PIN_VIEW, classLoader);
 
             XposedBridge.hookAllConstructors(kgViewMediatorClass, new XC_MethodHook() {
                 @Override
@@ -863,6 +866,25 @@ public class ModLockscreen {
                     if (mQuietHours.isSystemSoundMuted(QuietHours.SystemSound.SCREEN_LOCK)) {
                         XposedHelpers.setBooleanField(param.thisObject, "mSuppressNextLockSound", false);
                         param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(kgPINViewClass, "onFinishInflate", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false)) {
+                        mPinScrambler = new LockscreenPinScrambler((ViewGroup)param.thisObject);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(kgPINViewClass, "resetState", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false) &&
+                            mPinScrambler != null) {
+                        mPinScrambler.scramble();
                     }
                 }
             });

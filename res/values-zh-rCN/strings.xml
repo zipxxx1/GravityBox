@@ -1933,4 +1933,8 @@
     <string name="autofade_show_keys_navbar">触摸虚拟按键</string>
     <string name="autofade_show_keys_screen">触摸屏幕</string>
 
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">打乱PIN码</string>
+    <string name="pref_lockscreen_pin_sramble_summary">解锁设备时打乱PIN码</string>
+
 </resources>
