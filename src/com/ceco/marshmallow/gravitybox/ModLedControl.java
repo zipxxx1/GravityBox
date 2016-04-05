@@ -350,7 +350,10 @@ public class ModLedControl {
                     }
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
-                            !qhActiveIncludingActiveScreen && !isOngoing && mPm != null && mKm.isKeyguardLocked()) {
+                            ls.getVisibilityLs() != VisibilityLs.CLEARABLE &&
+                            ls.getVisibilityLs() != VisibilityLs.ALL &&
+                            !qhActiveIncludingActiveScreen && !isOngoing &&
+                            mPm != null && mKm.isKeyguardLocked()) {
                         n.extras.putBoolean(NOTIF_EXTRA_ACTIVE_SCREEN, true);
                         n.extras.putString(NOTIF_EXTRA_ACTIVE_SCREEN_MODE,
                                 ls.getActiveScreenMode().toString());
