@@ -1,3 +1,13 @@
+Changelog 5.4.0 - 06/04/2016
+--------------------------------------
+- CircleBattery: fixed refreshing issue
+- Navbar: added option for auto-fading soft keys
+- Lockscreen: added option for PIN scrambling
+- StayAwake tile: added option for auto-reset of screen timeout when screen turns off
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 5.3.8 - 20/03/2016
 --------------------------------------
 - QuickSettings management:
