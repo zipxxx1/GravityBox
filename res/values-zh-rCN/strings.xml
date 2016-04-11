@@ -1886,8 +1886,8 @@
     
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">智能锁策略</string>
-	
-	<!-- BatteryPercentText position -->
+    
+    <!-- BatteryPercentText position -->
     <string name="pref_battery_percent_text_position_title">状态栏位置</string>
     <string name="pref_battery_percent_text_position_summary">需要重新启动</string>
     <string name="battery_percent_text_position_right">电池图标在右侧</string>
@@ -1921,6 +1921,18 @@
     <!-- UNC: Hide persistent notifications -->
     <string name="pref_lc_notif_hide_persistent_title">隐藏持续的通知</string>
     <string name="pref_lc_notif_hide_persistent_summary">从这个程序来隐藏所有正在进行的和其它非可清除的通知</string>
-	
+    
+    
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">自动渐变按键</string>
+    <string name="pref_navbar_autofade_keys_summary">自动渐变按键超时,设置为0禁用</string>
 
+    <!-- QS: StayAwake tile Auto-reset -->
+    <string name="pref_sa_tile_auto_reset_title">自动复位</string>
+    <string name="pref_sa_tile_auto_reset_summary">屏幕自动关闭设置默认屏幕超时</string>
+
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">打乱PIN码</string>
+    <string name="pref_lockscreen_pin_sramble_summary">解锁设备时打乱PIN码</string>
+	
 </resources>
