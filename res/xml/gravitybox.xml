@@ -1340,6 +1340,13 @@
                 monitorBoxUnit="s"
                 android:defaultValue="0" />
 
+            <ListPreference 
+                android:key="pref_navbar_autofade_show_keys"
+                android:title="@string/pref_navbar_autofade_show_keys_title"
+                android:entries="@array/autofade_show_keys_entries"
+                android:entryValues="@array/autofade_show_keys_values"
+                android:defaultValue="NAVBAR" />
+
             <ListPreference
                 android:key="pref_navbar_android_l_icon_style"
                 android:title="@string/pref_navbar_android_l_icons_enable_title"

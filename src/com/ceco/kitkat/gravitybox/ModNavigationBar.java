@@ -113,6 +113,7 @@ public class ModNavigationBar {
     private static int mBarModeOriginal;
     private static int mAutofadeTimeoutMs;
     private static BarModeHandler mBarModeHandler;
+    private static String mAutofadeShowKeysPolicy;
 
     // Custom key
     private static boolean mCustomKeyEnabled;
@@ -243,6 +244,10 @@ public class ModNavigationBar {
                     } else {
                         mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
                     }
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_SHOW_KEYS)) {
+                    mAutofadeShowKeysPolicy = intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_SHOW_KEYS);
                 }
             } else if (intent.getAction().equals(
                     GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED) && 
@@ -432,6 +437,7 @@ public class ModNavigationBar {
             mCameraKeyDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_NAVBAR_CAMERA_KEY_DISABLE, false);
             mAutofadeTimeoutMs = prefs.getInt(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_KEYS, 0) * 1000;
+            mAutofadeShowKeysPolicy = prefs.getString(GravityBoxSettings.PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS, "NAVBAR");
 
             // for HTC GPE devices having capacitive keys
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_ENABLE, false)) {
@@ -862,14 +868,15 @@ public class ModNavigationBar {
                 });
             }
 
-            XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
-                    "onInterceptTouchEvent", MotionEvent.class, new XC_MethodHook() {
+            XC_MethodHook touchEventHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     if (mAutofadeTimeoutMs == 0) return;
 
                     int action = ((MotionEvent)param.args[0]).getAction();
-                    if (action == MotionEvent.ACTION_DOWN) {
+                    if (action == MotionEvent.ACTION_DOWN ||
+                            (action == MotionEvent.ACTION_OUTSIDE &&
+                                 "SCREEN".equals(mAutofadeShowKeysPolicy))) {
                         mLastTouchMs = SystemClock.uptimeMillis();
                         if (mBarModeHandler.hasMessages(MSG_LIGHTS_OUT)) {
                             mBarModeHandler.removeMessages(MSG_LIGHTS_OUT);
@@ -879,7 +886,11 @@ public class ModNavigationBar {
                         mBarModeHandler.sendEmptyMessageDelayed(MSG_LIGHTS_OUT, mAutofadeTimeoutMs);
                     }
                 }
-            });
+            };
+            XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
+                    "onInterceptTouchEvent", MotionEvent.class, touchEventHook);
+            XposedHelpers.findAndHookMethod(CLASS_NAVBAR_VIEW, classLoader,
+                    "onTouchEvent", MotionEvent.class, touchEventHook);
         } catch(Throwable t) {
             XposedBridge.log(t);
         }
