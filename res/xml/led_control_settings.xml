@@ -26,6 +26,16 @@
         android:key="pref_cat_lc_lights"
         android:title="@string/pref_cat_lc_lights_title">
 
+        <MultiSelectListPreference 
+            android:key="pref_lc_led_dnd"
+            android:title="@string/pref_lc_led_dnd_title"
+            android:summary="@string/pref_lc_led_dnd_summary"
+            android:dialogTitle="@string/pref_lc_led_dnd_dialog_title"
+            android:entries="@array/dnd_tile_em_entries"
+            android:entryValues="@array/dnd_tile_em_values"
+            android:defaultValue="@array/empty_array"
+            android:persistent="false" />
+
         <ListPreference
             android:key="pref_lc_led_mode"
             android:title="@string/pref_lc_led_mode_title"

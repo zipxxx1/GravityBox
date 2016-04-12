@@ -81,6 +81,7 @@ public class LedSettings {
     private VisibilityLs mVisibilityLs;
     private boolean mSoundToVibrateDisabled;
     private boolean mHidePersistent;
+    private String mLedDnd;
 
     protected static LedSettings deserialize(Context context, String packageName) {
         try {
@@ -168,6 +169,8 @@ public class LedSettings {
                 ls.setSoundReplace(Boolean.valueOf(data[1]));
             } else if (data[0].equals("hidePersistent")) {
                 ls.setHidePersistent(Boolean.valueOf(data[1]));
+            } else if (data[0].equals("ledDnd")) {
+                ls.setLedDnd(data[1]);
             }
         }
         return ls;
@@ -203,6 +206,7 @@ public class LedSettings {
         mVisibilityLs = VisibilityLs.DEFAULT;
         mSoundToVibrateDisabled = false;
         mHidePersistent = false;
+        mLedDnd = "";
     }
 
     protected static LedSettings getDefault(Context context) {
@@ -432,6 +436,10 @@ public class LedSettings {
         mHidePersistent = hide;
     }
 
+    protected void setLedDnd(String value) {
+        mLedDnd = value;
+    }
+
     public String getPackageName() {
         return mPackageName;
     }
@@ -544,6 +552,10 @@ public class LedSettings {
         return mHidePersistent;
     }
 
+    public String getLedDnd() {
+        return mLedDnd;
+    }
+
     protected void serialize() {
         try {
             Set<String> dataSet = new HashSet<String>();
@@ -579,6 +591,7 @@ public class LedSettings {
             dataSet.add("vibrateReplace:" + mVibrateReplace);
             dataSet.add("soundReplace:" + mSoundReplace);
             dataSet.add("hidePersistent:" + mHidePersistent);
+            dataSet.add("ledDnd:" + mLedDnd);
             SharedPreferences prefs = mContext.getSharedPreferences(
                     "ledcontrol", Context.MODE_WORLD_READABLE);
             prefs.edit().putStringSet(mPackageName, dataSet).commit();
