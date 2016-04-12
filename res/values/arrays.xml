@@ -1246,4 +1246,14 @@
         <item>ALL</item>
     </string-array>
 
+    <string-array name="dnd_entries" translatable="false">
+        <item>@string/dnd_priority_interruptions</item>
+        <item>@string/dnd_no_interruptions</item>
+    </string-array>
+
+    <string-array name="dnd_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

@@ -16,6 +16,7 @@
 package com.ceco.lollipop.gravitybox;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.service.notification.StatusBarNotification;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -88,6 +90,8 @@ public class ModLedControl {
     private static final int MSG_HIDE_HEADS_UP = 1029;
     public static final String NOTIF_EXTRA_VISIBILITY_LS = "gbVisibilityLs";
     public static final String NOTIF_EXTRA_HIDE_PERSISTENT = "gbHidePersistent";
+
+    private  static final String SETTING_ZEN_MODE = "zen_mode";
 
     public static final String ACTION_CLEAR_NOTIFICATIONS = "gravitybox.intent.action.CLEAR_NOTIFICATIONS";
 
@@ -290,8 +294,9 @@ public class ModLedControl {
 
                 // lights
                 if (qhActiveIncludingLed || 
-                        (ls.getEnabled() && ls.getLedMode() == LedMode.OFF &&
-                            !(isOngoing && !ls.getOngoing()))) {
+                        (ls.getEnabled() && !(isOngoing && !ls.getOngoing()) &&
+                            (ls.getLedMode() == LedMode.OFF ||
+                             currentZenModeDisallowsLed(ls.getLedDnd())))) {
                     n.defaults &= ~Notification.DEFAULT_LIGHTS;
                     n.flags &= ~Notification.FLAG_SHOW_LIGHTS;
                 } else if (ls.getEnabled() && ls.getLedMode() == LedMode.OVERRIDE &&
@@ -501,6 +506,21 @@ public class ModLedControl {
                 mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
             }
             return (mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+            return false;
+        }
+    }
+
+    private static boolean currentZenModeDisallowsLed(String dnd) {
+        if (dnd == null || dnd.isEmpty())
+            return false;
+
+        try {
+            int zenMode = Settings.Global.getInt(mContext.getContentResolver(),
+                    SETTING_ZEN_MODE, 0);
+            List<String> dndList = Arrays.asList(dnd.split(","));
+            return dndList.contains(Integer.toString(zenMode));
         } catch (Throwable t) {
             XposedBridge.log(t);
             return false;
