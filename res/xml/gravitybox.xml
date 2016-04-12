@@ -1288,6 +1288,13 @@
                 monitorBoxUnit="s"
                 android:defaultValue="0" />
 
+            <ListPreference 
+                android:key="pref_navbar_autofade_show_keys"
+                android:title="@string/pref_navbar_autofade_show_keys_title"
+                android:entries="@array/autofade_show_keys_entries"
+                android:entryValues="@array/autofade_show_keys_values"
+                android:defaultValue="NAVBAR" />
+
             <CheckBoxPreference
                 android:key="pref_navbar_larger_icons"
                 android:title="@string/pref_navbar_larger_icons_title"

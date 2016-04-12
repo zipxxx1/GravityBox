@@ -1256,4 +1256,14 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="autofade_show_keys_entries" translatable="false">
+        <item>@string/autofade_show_keys_navbar</item>
+        <item>@string/autofade_show_keys_screen</item>
+    </string-array>
+
+    <string-array name="autofade_show_keys_values" translatable="false">
+        <item>NAVBAR</item>
+        <item>SCREEN</item>
+    </string-array>
+
 </resources>

@@ -570,6 +570,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NAVBAR_KEY_GLOW_COLOR = "pref_navbar_key_glow_color";
     public static final String PREF_KEY_NAVBAR_RING_DISABLE = "pref_navbar_ring_disable";
     public static final String PREF_KEY_NAVBAR_AUTOFADE_KEYS = "pref_navbar_autofade_keys";
+    public static final String PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS = "pref_navbar_autofade_show_keys";
     public static final String ACTION_PREF_NAVBAR_CHANGED = "gravitybox.intent.action.ACTION_NAVBAR_CHANGED";
     public static final String ACTION_PREF_NAVBAR_SWAP_KEYS = "gravitybox.intent.action.ACTION_NAVBAR_SWAP_KEYS";
     public static final String EXTRA_NAVBAR_HEIGHT = "navbarHeight";
@@ -586,6 +587,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_ICON = "navbarCustomKeyIcon";
     public static final String EXTRA_NAVBAR_RING_DISABLE = "navbarRingDisable";
     public static final String EXTRA_NAVBAR_AUTOFADE_KEYS = "navbarAutofadeKeys";
+    public static final String EXTRA_NAVBAR_AUTOFADE_SHOW_KEYS = "navbarAutofadeShowKeys";
 
     public static final String PREF_KEY_STATUSBAR_BRIGHTNESS = "pref_statusbar_brightness";
     public static final String PREF_KEY_STATUSBAR_DISABLE_PEEK = "pref_statusbar_disable_peek";
@@ -2293,6 +2295,16 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 p.setSummary(p.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_NAVBAR_AUTOFADE_KEYS)) {
+                Preference p = findPreference(PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS);
+                if (p != null) p.setEnabled(mPrefs.getInt(PREF_KEY_NAVBAR_AUTOFADE_KEYS, 0) != 0);
+            }
+
+            if (key == null || key.equals(PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS)) {
+                ListPreference p = (ListPreference) findPreference(PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS);
+                p.setSummary(p.getEntry());
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -2808,6 +2820,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_NAVBAR_AUTOFADE_KEYS)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_AUTOFADE_KEYS, prefs.getInt(key, 0));
+            } else if (key.equals(PREF_KEY_NAVBAR_AUTOFADE_SHOW_KEYS)) {
+                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
+                intent.putExtra(EXTRA_NAVBAR_AUTOFADE_SHOW_KEYS, prefs.getString(key, "NAVBAR"));
             } else if (key.equals(PREF_KEY_NAVBAR_KEY_COLOR)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_KEY_COLOR,
