@@ -310,13 +310,26 @@ public class ModLockscreen {
             XposedHelpers.findAndHookMethod(kgPINViewClass, "onFinishInflate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (!mPrefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) return;
-                    final View passwordEntry = 
-                            (View) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
-                    if (passwordEntry != null) {
-                        XposedHelpers.setAdditionalInstanceField(passwordEntry, "gbPINView",
-                                param.thisObject);
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false)) {
+                        mPinScrambler = new LockscreenPinScrambler((ViewGroup)param.thisObject);
+                    }
+                    if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) {
+                        final View passwordEntry = 
+                                (View) XposedHelpers.getObjectField(param.thisObject, "mPasswordEntry");
+                        if (passwordEntry != null) {
+                            XposedHelpers.setAdditionalInstanceField(passwordEntry, "gbPINView",
+                                    param.thisObject);
+                        }
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(kgPINViewClass, "resetState", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false) &&
+                            mPinScrambler != null) {
+                        mPinScrambler.scramble();
                     }
                 }
             });
@@ -472,25 +485,6 @@ public class ModLockscreen {
                             GravityBoxSettings.PREF_KEY_LOCKSCREEN_BLEFT_ACTION, "DEFAULT")) ==
                                 BottomAction.PHONE) {
                         param.setResult(false);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgPINViewClass, "onFinishInflate", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false)) {
-                        mPinScrambler = new LockscreenPinScrambler((ViewGroup)param.thisObject);
-                    }
-                }
-            });
-
-            XposedHelpers.findAndHookMethod(kgPINViewClass, "resetState", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false) &&
-                            mPinScrambler != null) {
-                        mPinScrambler.scramble();
                     }
                 }
             });
