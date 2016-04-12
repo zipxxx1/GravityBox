@@ -158,7 +158,8 @@ public class ModHwKeys {
     private static String[] mHeadsetUri = new String[2]; // index 0 = unplugged, index 1 = plugged 
     private static Method mLaunchAssistAction = null;
     private static Method mLaunchAssistLongPressAction = null;
-    private static ActivityManager mAm;
+    private static ActivityManager mActivityManager;
+    private static AudioManager mAudioManager;
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui",
@@ -543,7 +544,8 @@ public class ModHwKeys {
 
                     if (!mVolumeRockerWake.equals("default") && 
                             (keyCode == KeyEvent.KEYCODE_VOLUME_UP ||
-                                    keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)) {
+                                    keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) &&
+                            !getAudioManager().isMusicActive()) {
                         int policyFlags = (Integer) param.args[1];
                         if (mVolumeRockerWake.equals("enabled")) {
                             policyFlags |= FLAG_WAKE;
@@ -828,7 +830,8 @@ public class ModHwKeys {
                     int keyCode = (Integer) param.args[0];
                     if (!mVolumeRockerWake.equals("default") && 
                             (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ||
-                             keyCode == KeyEvent.KEYCODE_VOLUME_UP)) {
+                             keyCode == KeyEvent.KEYCODE_VOLUME_UP) &&
+                            !getAudioManager().isMusicActive()) {
                         param.setResult(mVolumeRockerWake.equals("enabled") ? true : false);
                     }
                 }
@@ -1761,10 +1764,17 @@ public class ModHwKeys {
     }
 
     private static ActivityManager getActivityManager() {
-        if (mAm == null) {
-            mAm = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        if (mActivityManager == null) {
+            mActivityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
         }
-        return mAm;
+        return mActivityManager;
+    }
+
+    private static AudioManager getAudioManager() {
+        if (mAudioManager == null) {
+            mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        }
+        return mAudioManager;
     }
 
     private static boolean isTaskLocked() {
