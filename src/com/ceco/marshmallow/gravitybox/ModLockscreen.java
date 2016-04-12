@@ -312,6 +312,9 @@ public class ModLockscreen {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false)) {
                         mPinScrambler = new LockscreenPinScrambler((ViewGroup)param.thisObject);
+                        if (Utils.isXperiaDevice()) {
+                            mPinScrambler.scramble();
+                        }
                     }
                     if (mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_QUICK_UNLOCK, false)) {
                         final View passwordEntry = 
@@ -324,15 +327,17 @@ public class ModLockscreen {
                 }
             });
 
-            XposedHelpers.findAndHookMethod(kgPINViewClass, "resetState", new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false) &&
-                            mPinScrambler != null) {
-                        mPinScrambler.scramble();
+            if (!Utils.isXperiaDevice()) {
+                XposedHelpers.findAndHookMethod(kgPINViewClass, "resetState", new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_PIN_SCRAMBLE, false) &&
+                                mPinScrambler != null) {
+                            mPinScrambler.scramble();
+                        }
                     }
-                }
-            });
+                });
+            }
 
             XposedHelpers.findAndHookMethod(kgPasswordTextViewClass, "append", char.class, new XC_MethodHook() {
                 @Override
