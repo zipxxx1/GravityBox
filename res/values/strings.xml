@@ -1901,6 +1901,9 @@
     <!-- Navbar: Auto-fade keys -->
     <string name="pref_navbar_autofade_keys_title">Auto-fade keys</string>
     <string name="pref_navbar_autofade_keys_summary">Fades keys automatically after timeout expires. Set to 0 to disable.</string>
+    <string name="pref_navbar_autofade_show_keys_title">Show keys on</string>
+    <string name="autofade_show_keys_navbar">Navigation bar touch</string>
+    <string name="autofade_show_keys_screen">Screen touch</string>
 
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Auto-reset</string>
