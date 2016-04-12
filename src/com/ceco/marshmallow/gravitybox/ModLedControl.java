@@ -355,6 +355,7 @@ public class ModLedControl {
                     }
                     // active screen mode
                     if (ls.getActiveScreenMode() != ActiveScreenMode.DISABLED && 
+                            n.priority > Notification.PRIORITY_MIN &&
                             ls.getVisibilityLs() != VisibilityLs.CLEARABLE &&
                             ls.getVisibilityLs() != VisibilityLs.ALL &&
                             !qhActiveIncludingActiveScreen && !isOngoing &&
