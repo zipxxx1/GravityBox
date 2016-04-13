@@ -1806,4 +1806,8 @@
     <string name="airplane_mode_on">打开飞行模式</string>
     <string name="airplane_mode_off">关闭飞行模式</string>
 
+    <!-- Autobrightness mode shortcut -->
+    <string name="autobrightness_on">打开自动亮度</string>
+    <string name="autobrightness_off">关闭自动亮度</string>
+
 </resources>

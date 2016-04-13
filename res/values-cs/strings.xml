@@ -1723,4 +1723,8 @@
     <string name="airplane_mode_on">Zapnutí režimu v letadle</string>
     <string name="airplane_mode_off">Vypnutí režimu v letadle</string>
 
+    <!-- Autobrightness mode shortcut -->
+    <string name="autobrightness_on">Zapnutí automatického jasu</string>
+    <string name="autobrightness_off">Vypnutí automatického jasu</string>
+
 </resources>

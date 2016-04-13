@@ -370,7 +370,7 @@ public class ModHwKeys {
                     launchCustomApp(mHeadsetUri[state]);
                 }
             } else if (action.equals(ACTION_TOGGLE_AUTO_BRIGHTNESS)) {
-                toggleAutoBrightness();
+                changeAutoBrightnessState(intent);
             }
         }
     };
@@ -1731,15 +1731,24 @@ public class ModHwKeys {
         }
     }
 
-    private static void toggleAutoBrightness() {
+    private static void changeAutoBrightnessState(Intent intent) {
         try {
-            int brightnessMode = Settings.System.getInt(mContext.getContentResolver(),
+            int mode;
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                mode = intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false) ?
+                        Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC :
+                            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
+            } else {
+                int currentMmode = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.SCREEN_BRIGHTNESS_MODE, 0);
+                mode = currentMmode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL ?
+                        Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC :
+                            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
+            }
             Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.SCREEN_BRIGHTNESS_MODE,
-                    brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL ?
-                            Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC :
-                                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                    Settings.System.SCREEN_BRIGHTNESS_MODE, mode);
+            Utils.postToast(mContext, mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC ?
+                    R.string.autobrightness_on : R.string.autobrightness_off);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

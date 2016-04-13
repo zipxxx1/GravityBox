@@ -1806,4 +1806,8 @@
     <string name="airplane_mode_on">Режим «в літаку» увімкнено</string>
     <string name="airplane_mode_off">Режим «в літаку» вимкнено</string>
 
+    <!-- Autobrightness mode shortcut -->
+    <string name="autobrightness_on">Авто-яскравість увімкнено</string>
+    <string name="autobrightness_off">Авто-яскравість вимкнено</string>
+
 </resources>
