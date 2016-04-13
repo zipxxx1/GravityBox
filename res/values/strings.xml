@@ -1918,4 +1918,10 @@
     <string name="pref_lc_led_dnd_summary">Suppresses LED for chosen Do not disturb modes</string>
     <string name="pref_lc_led_dnd_dialog_title">Choose for which Do not disturb modes to keep LED off</string>
 
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">WiFi on</string>
+    <string name="wifi_off">WiFi off</string>
+    <string name="wifi_enabled">WiFi enabled</string>
+    <string name="wifi_disabled">WiFi disabled</string>
+
 </resources>
