@@ -1936,4 +1936,8 @@
     <string name="pref_lockscreen_pin_sramble_title">Рандомізувати PIN</string>
     <string name="pref_lockscreen_pin_sramble_summary">Рандомізує положення кнопок PIN при розблокуванні пристрою</string>
 
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">WiFi увімкнено</string>
+    <string name="wifi_off">WiFi вимкнено</string>
+
 </resources>

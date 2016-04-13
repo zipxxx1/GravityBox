@@ -1937,4 +1937,8 @@
     <string name="pref_lockscreen_pin_sramble_title">Перемешивание цифр PIN</string>
     <string name="pref_lockscreen_pin_sramble_summary">Изменение расположения цифр для набора PIN-кода при разблокировке устройства</string>
 
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">WiFi вкл</string>
+    <string name="wifi_off">WiFi выкл</string>
+
 </resources>

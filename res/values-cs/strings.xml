@@ -1875,4 +1875,8 @@
     <string name="pref_lockscreen_pin_sramble_title">Šifrování PIN</string>
     <string name="pref_lockscreen_pin_sramble_summary">Přehází PIN tlačítka při každém odemknutí zařízení</string>
 
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">Zapnutí WiFi</string>
+    <string name="wifi_off">Vypnutí WiFi</string>
+
 </resources>

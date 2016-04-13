@@ -1667,4 +1667,8 @@
     <string name="pref_lockscreen_pin_sramble_title">Zufälliges Layout des PIN-Eingabefeldes</string>
     <string name="pref_lockscreen_pin_sramble_summary">Das Layout des PIN-Eingabefeldes wird beim Entsperren des Geräts in zufälliger Reihenfolge dargestellt</string>
 
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">WiFi ein</string>
+    <string name="wifi_off">WiFi aus</string>
+
 </resources>
