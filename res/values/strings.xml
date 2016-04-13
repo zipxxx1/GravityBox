@@ -1941,4 +1941,8 @@
     <string name="wifi_on">WiFi on</string>
     <string name="wifi_off">WiFi off</string>
 
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">Airplane mode on</string>
+    <string name="airplane_mode_off">Airplane mode off</string>
+
 </resources>

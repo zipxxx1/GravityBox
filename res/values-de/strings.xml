@@ -1671,4 +1671,8 @@
     <string name="wifi_on">WiFi ein</string>
     <string name="wifi_off">WiFi aus</string>
 
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">Flugmodus ein</string>
+    <string name="airplane_mode_off">Flugmodus aus</string>
+
 </resources>

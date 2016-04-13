@@ -1941,4 +1941,8 @@
     <string name="wifi_on">打开WiFi</string>
     <string name="wifi_off">关闭WiFi</string>
 
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">打开飞行模式</string>
+    <string name="airplane_mode_off">关闭飞行模式</string>
+
 </resources>

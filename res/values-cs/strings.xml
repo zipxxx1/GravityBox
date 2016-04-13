@@ -1879,4 +1879,8 @@
     <string name="wifi_on">Zapnutí WiFi</string>
     <string name="wifi_off">Vypnutí WiFi</string>
 
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">Zapnutí režimu v letadle</string>
+    <string name="airplane_mode_off">Vypnutí režimu v letadle</string>
+
 </resources>

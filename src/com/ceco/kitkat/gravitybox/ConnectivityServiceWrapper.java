@@ -86,7 +86,7 @@ public class ConnectivityServiceWrapper {
             } else if (intent.getAction().equals(ACTION_TOGGLE_NFC)) {
                 toggleNfc();
             } else if (intent.getAction().equals(ACTION_TOGGLE_AIRPLANE_MODE)) {
-                toggleAirplaneMode();
+                changeAirplaneModeState(intent);
             }
         }
     };
@@ -224,18 +224,24 @@ public class ConnectivityServiceWrapper {
         if (mConnectivityService == null) return;
         try {
             XposedHelpers.callMethod(mConnectivityService, "setAirplaneMode", enabled);
+            Utils.postToast(mContext, enabled ? R.string.airplane_mode_on :
+                R.string.airplane_mode_off);
             if (DEBUG) log("setAirplaneModeEnabled called");
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    private static void toggleAirplaneMode() {
+    private static void changeAirplaneModeState(Intent intent) {
         if (mContext == null) return;
         try {
-            ContentResolver cr = mContext.getContentResolver();
-            final boolean enabled = Settings.Global.getInt(cr, Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
-            setAirplaneModeEnabled(!enabled);
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                setAirplaneModeEnabled(intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false));
+            } else {
+                ContentResolver cr = mContext.getContentResolver();
+                final boolean enabled = Settings.Global.getInt(cr, Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
+                setAirplaneModeEnabled(!enabled);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
