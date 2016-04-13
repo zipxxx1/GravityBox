@@ -143,8 +143,8 @@ public class WifiManagerWrapper {
                 }
                 mWifiManager.setWifiEnabled(enable);
                 if (showToast) {
-                    Utils.postToast(mContext, enable ? R.string.wifi_enabled :
-                        R.string.wifi_disabled);
+                    Utils.postToast(mContext, enable ? R.string.wifi_on :
+                        R.string.wifi_off);
                 }
             }
         }.execute();

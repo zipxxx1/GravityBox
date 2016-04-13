@@ -1739,7 +1739,7 @@ public class ModHwKeys {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.SCREEN_BRIGHTNESS_MODE, mode);
             Utils.postToast(mContext, mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC ?
-                    R.string.autobrightness_enabled : R.string.autobrightness_disabled);
+                    R.string.autobrightness_on : R.string.autobrightness_off);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

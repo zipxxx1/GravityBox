@@ -253,8 +253,8 @@ public class ConnectivityServiceWrapper {
         if (mConnectivityService == null) return;
         try {
             XposedHelpers.callMethod(mConnectivityService, "setAirplaneMode", enabled);
-            Utils.postToast(mContext, enabled ? R.string.airplane_mode_enabled :
-                R.string.airplane_mode_disabled);
+            Utils.postToast(mContext, enabled ? R.string.airplane_mode_on :
+                R.string.airplane_mode_off);
             if (DEBUG) log("setAirplaneModeEnabled called");
         } catch (Throwable t) {
             XposedBridge.log(t);
