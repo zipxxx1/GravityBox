@@ -1893,4 +1893,8 @@
     <string name="autobrightness_on">Zapnutie automatického jasu</string>
     <string name="autobrightness_off">Vypnutie automatického jasu</string>
 
+    <!-- Bluetooth shortcut -->
+    <string name="bluetooth_on">Zapnutie Bluetooth</string>
+    <string name="bluetooth_off">Vypnutie Bluetooth</string>
+
 </resources>

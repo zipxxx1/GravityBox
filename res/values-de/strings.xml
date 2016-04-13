@@ -1679,4 +1679,8 @@
     <string name="autobrightness_on">Auto brightness on</string>
     <string name="autobrightness_off">Auto brightness off</string>
 
+    <!-- Bluetooth shortcut -->
+    <string name="bluetooth_on">Bluetooth ein</string>
+    <string name="bluetooth_off">Bluetooth aus</string>
+
 </resources>

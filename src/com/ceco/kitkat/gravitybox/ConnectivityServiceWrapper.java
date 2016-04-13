@@ -76,7 +76,7 @@ public class ConnectivityServiceWrapper {
             } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI)) {
                 changeWifiState(intent);
             } else if (intent.getAction().equals(ACTION_TOGGLE_BLUETOOTH)) {
-                toggleBluetooth();
+                changeBluetoothState(intent);
             } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI_AP)) {
                 toggleWiFiAp();
             } else if (intent.getAction().equals(ACTION_SET_LOCATION_MODE) &&
@@ -174,14 +174,28 @@ public class ConnectivityServiceWrapper {
         }
     }
 
-    private static void toggleBluetooth() {
+    private static void changeBluetoothState(Intent intent) {
         try {
             BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-            if (btAdapter.isEnabled()) {
-                btAdapter.disable();
+            int labelResId;
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                if (intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false)) {
+                    btAdapter.enable();
+                    labelResId = R.string.bluetooth_on;
+                } else {
+                    btAdapter.disable();
+                    labelResId = R.string.bluetooth_off;
+                }
             } else {
-                btAdapter.enable();
+                if (btAdapter.isEnabled()) {
+                    labelResId = R.string.bluetooth_off;
+                    btAdapter.disable();
+                } else {
+                    btAdapter.enable();
+                    labelResId = R.string.bluetooth_on;
+                }
             }
+            Utils.postToast(mContext, labelResId);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
