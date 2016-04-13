@@ -1810,4 +1810,8 @@
     <string name="autobrightness_on">Автояркость вкл</string>
     <string name="autobrightness_off">Автояркость выкл</string>
 
+    <!-- Bluetooth shortcut -->
+    <string name="bluetooth_on">Bluetooth вкл</string>
+    <string name="bluetooth_off">Bluetooth выкл</string>
+
 </resources>

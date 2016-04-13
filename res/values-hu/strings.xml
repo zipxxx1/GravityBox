@@ -1783,4 +1783,8 @@
     <string name="autobrightness_on">Automatikus fényerő be</string>
     <string name="autobrightness_off">Automatikus fényerő ki</string>
 
+    <!-- Bluetooth shortcut -->
+    <string name="bluetooth_on">Bluetooth be</string>
+    <string name="bluetooth_off">Bluetooth ki</string>
+
 </resources>

@@ -1810,4 +1810,8 @@
     <string name="autobrightness_on">打开自动亮度</string>
     <string name="autobrightness_off">关闭自动亮度</string>
 
+    <!-- Bluetooth shortcut -->
+    <string name="bluetooth_on">打开蓝牙</string>
+    <string name="bluetooth_off">关闭蓝牙</string>
+
 </resources>
