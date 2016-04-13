@@ -1775,4 +1775,8 @@
     <string name="wifi_on">WiFi be</string>
     <string name="wifi_off">WiFi ki</string>
 
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">Repülőgép üzemmód be</string>
+    <string name="airplane_mode_off">Repülőgép üzemmód ki</string>
+
 </resources>

@@ -1802,4 +1802,8 @@
     <string name="wifi_on">WiFi вкл</string>
     <string name="wifi_off">WiFi выкл</string>
 
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">Режим полета вкл</string>
+    <string name="airplane_mode_off">Режим полета выкл</string>
+
 </resources>

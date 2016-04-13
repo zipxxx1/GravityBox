@@ -57,6 +57,7 @@ import android.widget.Toast;
 
 import com.ceco.gm2.gravitybox.R;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.gm2.gravitybox.shortcuts.AShortcut;
 import com.ceco.gm2.gravitybox.shortcuts.RingerModeShortcut;
 import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 
@@ -351,7 +352,7 @@ public class ModHwKeys {
             } else if (action.equals(ACTION_TOGGLE_QUIET_HOURS)) {
                 toggleQuietHours(intent.getStringExtra(QuietHoursActivity.EXTRA_QH_MODE));
             } else if (action.equals(ACTION_TOGGLE_AIRPLANE_MODE)) {
-                toggleAirplaneMode();
+                changeAirplaneModeState(intent);
             } else if (action.equals(ACTION_INAPP_SEARCH)) {
                 injectKey(KeyEvent.KEYCODE_SEARCH);
             } else if (action.equals(ACTION_SET_RINGER_MODE)) {
@@ -1672,14 +1673,21 @@ public class ModHwKeys {
     }
 
     @SuppressLint("NewApi")
-    private static void toggleAirplaneMode() {
+    private static void changeAirplaneModeState(Intent intent) {
         try {
             ContentResolver cr = mContext.getContentResolver();
-            boolean enabled = Settings.Global.getInt(cr, Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
-            Settings.Global.putInt(cr, Settings.Global.AIRPLANE_MODE_ON, enabled ? 0 : 1);
-            Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-            intent.putExtra("state", !enabled);
-            mContext.sendBroadcast(intent);
+            boolean enable;
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                enable = intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false);
+            } else {
+                enable = Settings.Global.getInt(cr, Settings.Global.AIRPLANE_MODE_ON, 0) == 0;
+            }
+            Settings.Global.putInt(cr, Settings.Global.AIRPLANE_MODE_ON, enable ? 1 : 0);
+            Intent i = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+            i.putExtra("state", enable);
+            mContext.sendBroadcast(i);
+            Utils.postToast(mContext, enable ? R.string.airplane_mode_on :
+                R.string.airplane_mode_off);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
