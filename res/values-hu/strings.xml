@@ -1771,4 +1771,8 @@
     <string name="pref_lockscreen_pin_sramble_title">PIN összekeverés</string>
     <string name="pref_lockscreen_pin_sramble_summary">Összekeveri a PIN számokat az eszköz feloldásakor</string>
 
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">WiFi be</string>
+    <string name="wifi_off">WiFi ki</string>
+
 </resources>

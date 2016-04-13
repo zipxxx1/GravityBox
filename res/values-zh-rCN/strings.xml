@@ -1798,4 +1798,8 @@
     <string name="pref_lockscreen_pin_sramble_title">打乱PIN码</string>
     <string name="pref_lockscreen_pin_sramble_summary">解锁设备时打乱PIN码</string>
 
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">打开WiFi</string>
+    <string name="wifi_off">关闭WiFi</string>
+
 </resources>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,6 +30,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Vibrator;
 import android.renderscript.Allocation;
 import android.renderscript.Allocation.MipmapControl;
@@ -39,6 +41,7 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -507,6 +510,20 @@ public class Utils {
         percentAlpha = Math.min(Math.max(percentAlpha, 0), 100);
         float alpha = (float)percentAlpha / 100f;
         return (alpha == 0 ? 255 : (int)(1-alpha * 255));
+    }
+
+    public static void postToast(final Context ctx, final int msgResId) {
+        try {
+            final String msg = Utils.getGbContext(ctx).getString(msgResId);
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log("Error showing toast: " + t.getMessage());
+        }
     }
 
     static class SystemProp extends Utils {

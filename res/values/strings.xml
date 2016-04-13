@@ -1798,4 +1798,8 @@
     <string name="pref_lockscreen_pin_sramble_title">PIN scramble</string>
     <string name="pref_lockscreen_pin_sramble_summary">Scrambles PIN when unlocking device</string>
 
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">WiFi on</string>
+    <string name="wifi_off">WiFi off</string>
+
 </resources>

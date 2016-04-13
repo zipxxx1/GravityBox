@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -124,15 +124,10 @@ public class WifiManagerWrapper {
     }
 
     public void setWifiEnabled(boolean enable) {
-        if (mWifiStateChangeListener != null) {
-            mWifiStateChangeListener.onWifiStateChanging(enable);
-        }
-        mWifiManager.setWifiEnabled(enable);
+        setWifiEnabled(enable, false);
     }
 
-    public void toggleWifiEnabled() {
-        final boolean enable = 
-                (getWifiState() != WifiManagerWrapper.WIFI_STATE_ENABLED);
+    public void setWifiEnabled(final boolean enable, final boolean showToast) {
         new AsyncTask<Void,Void,Void>() {
             @Override
             protected Void doInBackground(Void... args) {
@@ -145,9 +140,22 @@ public class WifiManagerWrapper {
             }
             @Override
             protected void onPostExecute(Void args) {
-                setWifiEnabled(enable);
+                if (mWifiStateChangeListener != null) {
+                    mWifiStateChangeListener.onWifiStateChanging(enable);
+                }
+                mWifiManager.setWifiEnabled(enable);
+                if (showToast) {
+                    Utils.postToast(mContext, enable ? R.string.wifi_on :
+                        R.string.wifi_off);
+                }
             }
         }.execute();
+    }
+
+    public void toggleWifiEnabled() {
+        final boolean enable = 
+                (getWifiState() != WifiManagerWrapper.WIFI_STATE_ENABLED);
+        setWifiEnabled(enable, true);
     }
 
     public boolean isWifiApEnabled() {
