@@ -1924,4 +1924,10 @@
     <string name="wifi_enabled">WiFi enabled</string>
     <string name="wifi_disabled">WiFi disabled</string>
 
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">Airplane mode on</string>
+    <string name="airplane_mode_off">Airplane mode off</string>
+    <string name="airplane_mode_enabled">Airplane mode enabled</string>
+    <string name="airplane_mode_disabled">Airplane mode disabled</string>
+
 </resources>
