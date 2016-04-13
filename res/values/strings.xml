@@ -1945,4 +1945,8 @@
     <string name="dnd_priority_interruptions">Priority interruptions</string>
     <string name="dnd_no_interruptions">No interruptions</string>
 
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">WiFi on</string>
+    <string name="wifi_off">WiFi off</string>
+
 </resources>

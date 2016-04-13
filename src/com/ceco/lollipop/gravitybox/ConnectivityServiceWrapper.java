@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+* Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,6 +14,8 @@
  */
 
 package com.ceco.lollipop.gravitybox;
+
+import com.ceco.lollipop.gravitybox.shortcuts.AShortcut;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -74,7 +76,7 @@ public class ConnectivityServiceWrapper {
             } else if (intent.getAction().equals(ACTION_TOGGLE_MOBILE_DATA)) {
                 toggleMobileData();
             } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI)) {
-                toggleWiFi();
+                changeWifiState(intent);
             } else if (intent.getAction().equals(ACTION_TOGGLE_BLUETOOTH)) {
                 toggleBluetooth();
             } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI_AP)) {
@@ -153,10 +155,15 @@ public class ConnectivityServiceWrapper {
         }
     }
 
-    private static void toggleWiFi() {
+    private static void changeWifiState(Intent intent) {
         if (mWifiManager == null) return;
         try {
-            mWifiManager.toggleWifiEnabled();
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                mWifiManager.setWifiEnabled(intent.getBooleanExtra(
+                        AShortcut.EXTRA_ENABLE, false), true);
+            } else {
+                mWifiManager.toggleWifiEnabled();
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
