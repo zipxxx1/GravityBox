@@ -1952,4 +1952,8 @@
     <string name="bluetooth_on">Bluetooth увімкнено</string>
     <string name="bluetooth_off">Bluetooth вимкнено</string>
 
+    <!-- Expanded desktop shortcut -->
+    <string name="expanded_desktop_on">Розширений стіл увімкнено</string>
+    <string name="expanded_desktop_off">Розширений стіл вимкнено</string>
+
 </resources>

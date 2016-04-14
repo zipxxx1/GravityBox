@@ -1897,4 +1897,8 @@
     <string name="bluetooth_on">Zapnutie Bluetooth</string>
     <string name="bluetooth_off">Vypnutie Bluetooth</string>
 
+    <!-- Expanded desktop shortcut -->
+    <string name="expanded_desktop_on">Zapnutie rozšírenej plochy</string>
+    <string name="expanded_desktop_off">Vypnutie rozšírenej plochy</string>
+
 </resources>

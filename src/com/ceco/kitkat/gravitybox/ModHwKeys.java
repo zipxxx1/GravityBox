@@ -119,7 +119,6 @@ public class ModHwKeys {
     private static String mStrNoPrevApp;
     private static String mStrCustomAppNone;
     private static String mStrCustomAppMissing;
-    private static String mStrExpandedDesktopDisabled;
     private static String mStrAutoRotationEnabled;
     private static String mStrAutoRotationDisabled;
     private static boolean mIsMenuLongPressed = false;
@@ -327,7 +326,7 @@ public class ModHwKeys {
                 mExpandedDesktopMode = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
             } else if (action.equals(ACTION_TOGGLE_EXPANDED_DESKTOP) && mPhoneWindowManager != null) {
-                toggleExpandedDesktop(value);
+                changeExpandedDesktopState(intent);
             } else if (action.equals(ScreenRecordingService.ACTION_TOGGLE_SCREEN_RECORDING)) {
                 toggleScreenRecording();
             } else if (action.equals(ACTION_EXPAND_NOTIFICATIONS) && mPhoneWindowManager != null) {
@@ -926,7 +925,6 @@ public class ModHwKeys {
             mStrNoPrevApp = res.getString(R.string.no_previous_app_found);
             mStrCustomAppNone = res.getString(R.string.hwkey_action_custom_app_none);
             mStrCustomAppMissing = res.getString(R.string.hwkey_action_custom_app_missing);
-            mStrExpandedDesktopDisabled = res.getString(R.string.hwkey_action_expanded_desktop_disabled);
             mStrAutoRotationEnabled = res.getString(R.string.hwkey_action_auto_rotation_enabled);
             mStrAutoRotationDisabled =  res.getString(R.string.hwkey_action_auto_rotation_disabled);
 
@@ -1466,45 +1464,30 @@ public class ModHwKeys {
     }
 
     private static void toggleExpandedDesktop() {
-        toggleExpandedDesktop(GravityBoxSettings.HWKEY_ACTION_DEFAULT);
+        changeExpandedDesktopState(new Intent());
     }
 
-    private static void toggleExpandedDesktop(final int value) {
-        Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
-        if (handler == null) return;
-
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final ContentResolver resolver = mContext.getContentResolver();
-                    final int edMode = Integer.valueOf(mPrefs.getString(
-                            GravityBoxSettings.PREF_KEY_EXPANDED_DESKTOP, "0"));
-                    if (edMode == GravityBoxSettings.ED_DISABLED) {
-                        Toast.makeText(mContext, mStrExpandedDesktopDisabled, Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (value == GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
-                            final int edState = Settings.Global.getInt(resolver,
-                                    ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0);
-                            Settings.Global.putInt(resolver, 
-                                    ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
-                                    (edState == 1) ? 0 : 1);
-                        } else {
-                            // action = "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP"
-                            // extra = "hwKeyValue:0" (ED toggle)
-                            // extra = "hwKeyValue:1" (ED on)
-                            // extra = "hwKeyValue:-1" (ED off), (any value not 0 or 1),
-                            // no extra = (ED toggle, like GB shortcut)
-                            Settings.Global.putInt(resolver, 
-                                    ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE,
-                                        (value == 1) ? 0 : 1);
-                        }
-                    }
-                } catch (Throwable t) {
-                        XposedBridge.log(t);
-                }
+    private static void changeExpandedDesktopState(Intent intent) {
+        try {
+            if (mExpandedDesktopMode == GravityBoxSettings.ED_DISABLED) {
+                Utils.postToast(mContext, R.string.hwkey_action_expanded_desktop_disabled);
+                return;
             }
-        });
+
+            final ContentResolver resolver = mContext.getContentResolver();
+            int state;
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                state = intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false) ? 1 : 0;
+            } else {
+                final int currentState = Settings.Global.getInt(resolver,
+                        ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, 0);
+                state = currentState == 0 ? 1 : 0;
+            }
+            Settings.Global.putInt(resolver, 
+                    ModExpandedDesktop.SETTING_EXPANDED_DESKTOP_STATE, state);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 
     private static void toggleTorch() {

@@ -1683,4 +1683,8 @@
     <string name="bluetooth_on">Bluetooth ein</string>
     <string name="bluetooth_off">Bluetooth aus</string>
 
+    <!-- Expanded desktop shortcut -->
+    <string name="expanded_desktop_on">Erweiterter Desktop ein</string>
+    <string name="expanded_desktop_off">Erweiterter Desktop aus</string>
+
 </resources>
