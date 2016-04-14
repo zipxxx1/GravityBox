@@ -90,7 +90,7 @@ public class ConnectivityServiceWrapper {
                 setLocationMode(intent.getIntExtra(EXTRA_LOCATION_MODE,
                         Settings.Secure.LOCATION_MODE_BATTERY_SAVING));
             } else if (intent.getAction().equals(ACTION_TOGGLE_NFC)) {
-                toggleNfc();
+                changeNfcState(intent);
             } else if (intent.getAction().equals(ACTION_GET_NFC_STATE)) {
                 if (intent.hasExtra("receiver")) {
                     sendNfcState((ResultReceiver)intent.getParcelableExtra("receiver"));
@@ -248,23 +248,30 @@ public class ConnectivityServiceWrapper {
         }
     }
 
-    private static void toggleNfc() {
+    private static void changeNfcState(Intent intent) {
         if (mContext == null) return;
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(mContext);
+        if (adapter == null) return;
+
         try {
-            NfcAdapter adapter = NfcAdapter.getDefaultAdapter(mContext);
-            if (adapter != null) {
+            boolean enable = false;
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                enable = intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false);
+            } else {
                 int nfcState = (Integer) XposedHelpers.callMethod(adapter, "getAdapterState");
                 switch (nfcState) {
                     case NFC_STATE_TURNING_ON:
                     case NFC_STATE_ON:
-                        XposedHelpers.callMethod(adapter, "disable");
+                        enable = false;
                         break;
                     case NFC_STATE_TURNING_OFF:
                     case NFC_STATE_OFF:
-                        XposedHelpers.callMethod(adapter, "enable");
+                        enable = true;
                         break;
                 }
             }
+            XposedHelpers.callMethod(adapter, enable ? "enable" : "disable");
+            Utils.postToast(mContext, enable ? R.string.nfc_on : R.string.nfc_off);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
