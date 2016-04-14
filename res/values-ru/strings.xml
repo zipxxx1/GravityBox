@@ -1970,4 +1970,8 @@
     <string name="quiet_hours_off">Тихий час выкл</string>
     <string name="quiet_hours_auto">Тихий час авто</string>
 
+    <!-- Auto rotation shortcut -->
+    <string name="auto_rotation_on">Автоповорот вкл</string>
+    <string name="auto_rotation_off">Автоповорот выкл</string>
+
 </resources>

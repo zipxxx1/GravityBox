@@ -1938,4 +1938,8 @@
     <string name="quiet_hours_off">Csendes időszak ki</string>
     <string name="quiet_hours_auto">Automatikus Csendes időszak</string>
 
+    <!-- Auto rotation shortcut -->
+    <string name="auto_rotation_on">Automatikus elforgatás be</string>
+    <string name="auto_rotation_off">Automatikus elforgatás ki</string>
+
 </resources>

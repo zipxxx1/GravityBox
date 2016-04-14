@@ -1969,4 +1969,8 @@
     <string name="quiet_hours_off">Тихі години вимкнено</string>
     <string name="quiet_hours_auto">Тихі години автоматично</string>
 
+    <!-- Auto rotation shortcut -->
+    <string name="auto_rotation_on">Авто-поворот увімкнено</string>
+    <string name="auto_rotation_off">Авто-поворот вимкнено</string>
+
 </resources>
