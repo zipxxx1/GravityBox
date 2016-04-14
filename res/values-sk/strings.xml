@@ -1901,4 +1901,8 @@
     <string name="expanded_desktop_on">Zapnutie rozšírenej plochy</string>
     <string name="expanded_desktop_off">Vypnutie rozšírenej plochy</string>
 
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">Zapnutie mobilných dát</string>
+    <string name="mobile_data_off">Vypnutie mobilných dát</string>
+
 </resources>

@@ -1956,4 +1956,8 @@
     <string name="expanded_desktop_on">Розширений стіл увімкнено</string>
     <string name="expanded_desktop_off">Розширений стіл вимкнено</string>
 
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">Мобільні дані увімкнено</string>
+    <string name="mobile_data_off">Мобільні дані вимкнено</string>
+
 </resources>

@@ -72,7 +72,7 @@ public class ConnectivityServiceWrapper {
                 final boolean enabled = intent.getBooleanExtra(EXTRA_ENABLED, false);
                 setMobileDataEnabled(enabled);
             } else if (intent.getAction().equals(ACTION_TOGGLE_MOBILE_DATA)) {
-                toggleMobileData();
+                changeMobileDataState(intent);
             } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI)) {
                 changeWifiState(intent);
             } else if (intent.getAction().equals(ACTION_TOGGLE_BLUETOOTH)) {
@@ -140,12 +140,19 @@ public class ConnectivityServiceWrapper {
         }
     }
 
-    private static void toggleMobileData() {
+    private static void changeMobileDataState(Intent intent) {
         if (mConnectivityService == null) return;
         try {
-            final boolean enabled = 
-                    (Boolean) XposedHelpers.callMethod(mConnectivityService, "getMobileDataEnabled");
-            setMobileDataEnabled(!enabled);
+            boolean enabled;
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                enabled = intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false);
+            } else {
+                enabled = !(Boolean) XposedHelpers.callMethod(
+                        mConnectivityService, "getMobileDataEnabled");
+            }
+            setMobileDataEnabled(enabled);
+            Utils.postToast(mContext, enabled ? R.string.mobile_data_on :
+                R.string.mobile_data_off);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

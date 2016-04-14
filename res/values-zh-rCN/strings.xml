@@ -1957,4 +1957,8 @@
     <string name="expanded_desktop_on">打开扩展桌面</string>
     <string name="expanded_desktop_off">关闭扩展桌面</string>
 
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">打开移动数据</string>
+    <string name="mobile_data_off">关闭移动数据</string>
+
 </resources>

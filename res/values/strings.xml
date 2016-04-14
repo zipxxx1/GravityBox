@@ -1957,4 +1957,8 @@
     <string name="expanded_desktop_on">Expanded desktop on</string>
     <string name="expanded_desktop_off">Expanded desktop off</string>
 
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">Mobile data on</string>
+    <string name="mobile_data_off">Mobile data off</string>
+
 </resources>
