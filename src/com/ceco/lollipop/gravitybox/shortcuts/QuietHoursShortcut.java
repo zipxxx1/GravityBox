@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -60,7 +60,23 @@ public class QuietHoursShortcut extends AMultiShortcut {
         final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShortcutItem(mContext, R.string.shortcut_quiet_hours_toggle, 
                 R.drawable.shortcut_quiet_hours, null));
-        list.add(new ShortcutItem(mContext, R.string.quick_settings_quiet_hours_auto, 
+        list.add(new ShortcutItem(mContext, R.string.quiet_hours_on, 
+                R.drawable.shortcut_quiet_hours_enable, new ExtraDelegate() {
+                    @Override
+                    public void addExtraTo(Intent intent) {
+                        intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
+                                QuietHours.Mode.ON.toString());
+                    }
+                }));
+        list.add(new ShortcutItem(mContext, R.string.quiet_hours_off, 
+                R.drawable.shortcut_quiet_hours_disable, new ExtraDelegate() {
+                    @Override
+                    public void addExtraTo(Intent intent) {
+                        intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
+                                QuietHours.Mode.OFF.toString());
+                    }
+                }));
+        list.add(new ShortcutItem(mContext, R.string.quiet_hours_auto, 
                 R.drawable.shortcut_quiet_hours_auto, new ExtraDelegate() {
                     @Override
                     public void addExtraTo(Intent intent) {
