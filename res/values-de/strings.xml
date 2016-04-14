@@ -1712,4 +1712,8 @@
     <string name="sync_on">Sync ein</string>
     <string name="sync_off">Sync aus</string>
 
+    <!-- Hotspot shortcut -->
+    <string name="hotspot_on">Hotspot ein</string>
+    <string name="hotspot_off">Hotspot aus</string>
+
 </resources>

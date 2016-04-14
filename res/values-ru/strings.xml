@@ -1982,4 +1982,8 @@
     <string name="sync_on">Синх. вкл</string>
     <string name="sync_off">Синх. выкл</string>
 
+    <!-- Hotspot shortcut -->
+    <string name="hotspot_on">Точка доступа вкл</string>
+    <string name="hotspot_off">Точка доступа выкл</string>
+
 </resources>

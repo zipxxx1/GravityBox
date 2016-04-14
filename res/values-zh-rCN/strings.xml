@@ -1982,4 +1982,8 @@
     <string name="sync_on">打开同步</string>
     <string name="sync_off">关闭同步</string>
 
+    <!-- Hotspot shortcut -->
+    <string name="hotspot_on">打开热点</string>
+    <string name="hotspot_off">关闭热点</string>
+
 </resources>

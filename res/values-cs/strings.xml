@@ -1920,4 +1920,8 @@
     <string name="sync_on">Zapnutí synchronizace</string>
     <string name="sync_off">Vypnutí synchronizace</string>
 
+    <!-- Hotspot shortcut -->
+    <string name="hotspot_on">Zapnutí WiFi AP</string>
+    <string name="hotspot_off">Vypnutí WiFi AP</string>
+
 </resources>
