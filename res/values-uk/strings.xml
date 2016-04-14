@@ -1977,4 +1977,8 @@
     <string name="smart_radio_on">Розумне радіо увімкнено</string>
     <string name="smart_radio_off">Розумне радіо вимкнено</string>
 
+    <!-- Sync shortcut -->
+    <string name="sync_on">Синхронізацію увімкнено</string>
+    <string name="sync_off">Синхронізацію вимкнено</string>
+
 </resources>

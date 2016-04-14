@@ -1922,4 +1922,8 @@
     <string name="smart_radio_on">Zapnutie Smart Radio</string>
     <string name="smart_radio_off">Vypnutie Smart Radio</string>
 
+    <!-- Sync shortcut -->
+    <string name="sync_on">Zapnutie synchronizácie</string>
+    <string name="sync_off">Vypnutie synchronizácie</string>
+
 </resources>

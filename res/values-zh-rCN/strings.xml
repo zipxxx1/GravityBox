@@ -1978,4 +1978,8 @@
     <string name="smart_radio_on">打开智能网络</string>
     <string name="smart_radio_off">关闭智能网络</string>
 
+    <!-- Sync shortcut -->
+    <string name="sync_on">打开同步</string>
+    <string name="sync_off">关闭同步</string>
+
 </resources>

@@ -373,7 +373,7 @@ public class ModHwKeys {
             } else if (action.equals(ACTION_SET_RINGER_MODE)) {
                 setRingerMode(intent.getIntExtra(EXTRA_RINGER_MODE, RingerModeShortcut.MODE_RING_VIBRATE));
             } else if (action.equals(GravityBoxService.ACTION_TOGGLE_SYNC)) {
-                toggleSync();
+                changeSyncState(intent);
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED)) {
                 int state = intent.getIntExtra(GravityBoxSettings.EXTRA_HSA_STATE, 0);
                 if (state == 0 || state == 1) {
@@ -1758,10 +1758,14 @@ public class ModHwKeys {
         }
     }
 
-    private static void toggleSync() {
+    private static void changeSyncState(Intent intent) {
         try {
             Intent si = new Intent(mGbContext, GravityBoxService.class);
             si.setAction(GravityBoxService.ACTION_TOGGLE_SYNC);
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                si.putExtra(AShortcut.EXTRA_ENABLE, intent.getBooleanExtra(
+                        AShortcut.EXTRA_ENABLE, false));
+            }
             si.putExtra(GravityBoxService.EXTRA_SYNC_SHOW_TOAST, true);
             mGbContext.startService(si);
         } catch (Throwable t) {
