@@ -1974,4 +1974,8 @@
     <string name="auto_rotation_on">打开自动旋转</string>
     <string name="auto_rotation_off">关闭自动旋转</string>
 
+    <!-- Smart radio shortcut -->
+    <string name="smart_radio_on">打开智能网络</string>
+    <string name="smart_radio_off">关闭智能网络</string>
+
 </resources>

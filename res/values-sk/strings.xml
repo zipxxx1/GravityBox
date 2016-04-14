@@ -1918,4 +1918,8 @@
     <string name="auto_rotation_on">Zapnutie auto rotácie</string>
     <string name="auto_rotation_off">Vypnutie auto rotácie</string>
 
+    <!-- Smart radio shortcut -->
+    <string name="smart_radio_on">Zapnutie Smart Radio</string>
+    <string name="smart_radio_off">Vypnutie Smart Radio</string>
+
 </resources>

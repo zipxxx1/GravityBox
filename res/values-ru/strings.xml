@@ -1974,4 +1974,8 @@
     <string name="auto_rotation_on">Автоповорот вкл</string>
     <string name="auto_rotation_off">Автоповорот выкл</string>
 
+    <!-- Smart radio shortcut -->
+    <string name="smart_radio_on">Умное радио вкл</string>
+    <string name="smart_radio_off">Умное радио выкл</string>
+
 </resources>
