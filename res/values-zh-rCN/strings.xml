@@ -1822,4 +1822,8 @@
     <string name="mobile_data_on">打开移动数据</string>
     <string name="mobile_data_off">关闭移动数据</string>
 
+    <!-- NGC shortcut -->
+    <string name="nfc_on">打开NFC</string>
+    <string name="nfc_off">关闭NFC</string>
+
 </resources>

@@ -1739,4 +1739,8 @@
     <string name="mobile_data_on">Zapnutí mobilních dat</string>
     <string name="mobile_data_off">Vypnutí mobilních dat</string>
 
+    <!-- NGC shortcut -->
+    <string name="nfc_on">Zapnutí NFC</string>
+    <string name="nfc_off">Vypnutí NFC</string>
+
 </resources>
