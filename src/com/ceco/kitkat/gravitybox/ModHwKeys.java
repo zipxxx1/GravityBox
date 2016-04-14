@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -369,7 +369,7 @@ public class ModHwKeys {
                 setVirtualKeyVibePattern(intent.getStringExtra(
                         GravityBoxSettings.EXTRA_VK_VIBRATE_PATTERN));
             } else if (action.equals(ACTION_TOGGLE_QUIET_HOURS)) {
-                toggleQuietHours(intent.getStringExtra(QuietHoursActivity.EXTRA_QH_MODE));
+                changeQuietHoursState(intent);
             } else if (action.equals(ACTION_INAPP_SEARCH)) {
                 injectKey(KeyEvent.KEYCODE_SEARCH);
             } else if (action.equals(ACTION_SET_RINGER_MODE)) {
@@ -1721,14 +1721,15 @@ public class ModHwKeys {
         }
     }
 
-    private static void toggleQuietHours(String mode) {
+    private static void changeQuietHoursState(Intent intent) {
         try {
-            Intent intent = new Intent(mGbContext, GravityBoxService.class);
-            intent.setAction(QuietHoursActivity.ACTION_SET_QUIET_HOURS_MODE);
-            if (mode != null) {
-                intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE, mode);
+            Intent qhi = new Intent(mGbContext, GravityBoxService.class);
+            qhi.setAction(QuietHoursActivity.ACTION_SET_QUIET_HOURS_MODE);
+            if (intent.hasExtra(QuietHoursActivity.EXTRA_QH_MODE)) {
+                qhi.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
+                        intent.getStringExtra(QuietHoursActivity.EXTRA_QH_MODE));
             }
-            mGbContext.startService(intent);
+            mGbContext.startService(qhi);
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

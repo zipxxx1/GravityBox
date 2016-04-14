@@ -1903,4 +1903,9 @@
     <string name="nfc_on">Zapnutí NFC</string>
     <string name="nfc_off">Vypnutí NFC</string>
 
+    <!-- Quiet hours shortcut -->
+    <string name="quiet_hours_on">Zapnutí tichých hodin</string>
+    <string name="quiet_hours_off">Vypnutí tichých hodin</string>
+    <string name="quiet_hours_auto">Automatické tiché hodiny</string>
+
 </resources>

@@ -1965,4 +1965,9 @@
     <string name="nfc_on">NFC on</string>
     <string name="nfc_off">NFC off</string>
 
+    <!-- Quiet hours shortcut -->
+    <string name="quiet_hours_on">Quiet hours on</string>
+    <string name="quiet_hours_off">Quiet hours off</string>
+    <string name="quiet_hours_auto">Quiet hours auto</string>
+
 </resources>

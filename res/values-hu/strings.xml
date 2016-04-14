@@ -1933,4 +1933,9 @@
     <string name="nfc_on">NFC be</string>
     <string name="nfc_off">NFC ki</string>
 
+    <!-- Quiet hours shortcut -->
+    <string name="quiet_hours_on">Csendes időszak be</string>
+    <string name="quiet_hours_off">Csendes időszak ki</string>
+    <string name="quiet_hours_auto">Automatikus Csendes időszak</string>
+
 </resources>
