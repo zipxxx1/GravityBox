@@ -1787,4 +1787,8 @@
     <string name="bluetooth_on">Bluetooth be</string>
     <string name="bluetooth_off">Bluetooth ki</string>
 
+    <!-- Expanded desktop shortcut -->
+    <string name="expanded_desktop_on">Kiterjesztett asztal be</string>
+    <string name="expanded_desktop_off">Kiterjesztett asztal ki</string>
+
 </resources>

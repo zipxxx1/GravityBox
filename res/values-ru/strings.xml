@@ -1814,4 +1814,8 @@
     <string name="bluetooth_on">Bluetooth вкл</string>
     <string name="bluetooth_off">Bluetooth выкл</string>
 
+    <!-- Expanded desktop shortcut -->
+    <string name="expanded_desktop_on">Расш. раб. стол вкл</string>
+    <string name="expanded_desktop_off">Расш. раб. стол выкл</string>
+
 </resources>
