@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,6 +16,7 @@
 package com.ceco.marshmallow.gravitybox;
 
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
 
 import android.app.IntentService;
@@ -47,15 +48,9 @@ public class GravityBoxService extends IntentService {
             final boolean newState = !ContentResolver.getMasterSyncAutomatically();
             ContentResolver.setMasterSyncAutomatically(newState);
             if (intent.getBooleanExtra(EXTRA_SYNC_SHOW_TOAST, false)) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), newState ? 
-                                R.string.quick_settings_sync_on :
-                                    R.string.quick_settings_sync_off, 
-                                    Toast.LENGTH_SHORT).show();
-                    }
-                });
+                showToast(newState ? 
+                        R.string.quick_settings_sync_on :
+                            R.string.quick_settings_sync_off);
             }
         } else if (intent.getAction().equals(ACTION_GET_SYNC_STATUS)) {
             boolean syncStatus = ContentResolver.getMasterSyncAutomatically();
@@ -64,8 +59,21 @@ public class GravityBoxService extends IntentService {
             data.putBoolean(KEY_SYNC_STATUS, syncStatus);
             receiver.send(RESULT_SYNC_STATUS, data);
         } else if (intent.getAction().equals(QuietHoursActivity.ACTION_SET_QUIET_HOURS_MODE)) {
-            QuietHoursActivity.setQuietHoursMode(this, intent.getStringExtra(
+            QuietHours.Mode qhMode = QuietHoursActivity.setQuietHoursMode(this, intent.getStringExtra(
                     QuietHoursActivity.EXTRA_QH_MODE));
+            if (qhMode != null) {
+                showToast(QuietHoursActivity.getToastResIdFromMode(qhMode));
+            }
         }
+    }
+
+    private void showToast(final int messageResId) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), messageResId, 
+                            Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
