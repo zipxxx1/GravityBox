@@ -1735,4 +1735,8 @@
     <string name="expanded_desktop_on">Zapnutí rozšířené plochy</string>
     <string name="expanded_desktop_off">Vypnutí rozšířené plochy</string>
 
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">Zapnutí mobilních dat</string>
+    <string name="mobile_data_off">Vypnutí mobilních dat</string>
+
 </resources>

@@ -1791,4 +1791,8 @@
     <string name="expanded_desktop_on">Kiterjesztett asztal be</string>
     <string name="expanded_desktop_off">Kiterjesztett asztal ki</string>
 
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">Mobil adatátvitel be</string>
+    <string name="mobile_data_off">Mobil adatátvitel ki</string>
+
 </resources>

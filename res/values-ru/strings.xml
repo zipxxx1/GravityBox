@@ -1818,4 +1818,8 @@
     <string name="expanded_desktop_on">Расш. раб. стол вкл</string>
     <string name="expanded_desktop_off">Расш. раб. стол выкл</string>
 
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">Моб. интернет вкл</string>
+    <string name="mobile_data_off">Моб. интернет выкл</string>
+
 </resources>
