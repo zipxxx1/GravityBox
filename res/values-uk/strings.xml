@@ -1843,4 +1843,8 @@
     <string name="sync_on">Синхронізацію увімкнено</string>
     <string name="sync_off">Синхронізацію вимкнено</string>
 
+    <!-- Hotspot shortcut -->
+    <string name="hotspot_on">Точку доступу увімкнено</string>
+    <string name="hotspot_off">Точку доступу вимкнено</string>
+
 </resources>

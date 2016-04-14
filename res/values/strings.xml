@@ -950,7 +950,7 @@
     <string name="shortcut_bluetooth">Toggle Bluetooth</string>
 
     <!-- Toggle WiFi AP shortcut -->
-    <string name="shortcut_wifi_ap">Toggle WiFi AP</string>
+    <string name="shortcut_wifi_ap">Toggle hotspot</string>
 
     <!-- Toggle NFC shortcut -->
     <string name="shortcut_nfc">Toggle NFC</string>
@@ -1842,5 +1842,9 @@
     <!-- Sync shortcut -->
     <string name="sync_on">Sync on</string>
     <string name="sync_off">Sync off</string>
+
+    <!-- Hotspot shortcut -->
+    <string name="hotspot_on">Hotspot on</string>
+    <string name="hotspot_off">Hotspot off</string>
 
 </resources>
