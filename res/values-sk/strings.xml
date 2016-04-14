@@ -1750,4 +1750,8 @@
     <string name="quiet_hours_off">Vypnutie tichých hodín</string>
     <string name="quiet_hours_auto">Automatické tiché hodiny</string>
 
+    <!-- Auto rotation shortcut -->
+    <string name="auto_rotation_on">Zapnutie auto rotácie</string>
+    <string name="auto_rotation_off">Vypnutie auto rotácie</string>
+
 </resources>

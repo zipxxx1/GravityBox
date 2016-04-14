@@ -1831,4 +1831,8 @@
     <string name="quiet_hours_off">关闭静音时段</string>
     <string name="quiet_hours_auto">自动静音时段</string>
 
+    <!-- Auto rotation shortcut -->
+    <string name="auto_rotation_on">打开自动旋转</string>
+    <string name="auto_rotation_off">关闭自动旋转</string>
+
 </resources>

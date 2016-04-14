@@ -1609,4 +1609,8 @@
     <string name="quiet_hours_off">Ruhestunden aus</string>
     <string name="quiet_hours_auto">Ruhestunden auto</string>
 
+    <!-- Auto rotation shortcut -->
+    <string name="auto_rotation_on">Autorotation ein</string>
+    <string name="auto_rotation_off">Autorotation aus</string>
+
 </resources>
