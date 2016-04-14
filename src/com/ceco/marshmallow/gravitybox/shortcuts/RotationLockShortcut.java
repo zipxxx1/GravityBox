@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,15 +15,18 @@
 
 package com.ceco.marshmallow.gravitybox.shortcuts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ceco.marshmallow.gravitybox.ModHwKeys;
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.adapters.IIconListAdapterItem;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
 
-public class RotationLockShortcut extends AShortcut {
+public class RotationLockShortcut extends AMultiShortcut {
     protected static final String ACTION =  ModHwKeys.ACTION_TOGGLE_ROTATION_LOCK;
 
     public RotationLockShortcut(Context context) {
@@ -37,7 +40,7 @@ public class RotationLockShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_rotation_lock);
+        return mResources.getDrawable(R.drawable.shortcut_rotation_lock, null);
     }
 
     @Override
@@ -51,12 +54,32 @@ public class RotationLockShortcut extends AShortcut {
     }
 
     @Override
-    protected ShortcutIconResource getIconResource() {
-        return ShortcutIconResource.fromContext(mContext, R.drawable.shortcut_rotation_lock);
+    protected List<IIconListAdapterItem> getShortcutList() {
+        final List<IIconListAdapterItem> list = new ArrayList<>();
+        list.add(new ShortcutItem(mContext, R.string.hwkey_action_auto_rotation,
+                R.drawable.shortcut_rotation_lock, null));
+        list.add(new ShortcutItem(mContext, R.string.auto_rotation_on,
+                R.drawable.shortcut_rotation_lock_enable, new ExtraDelegate() {
+                @Override
+                public void addExtraTo(Intent intent) {
+                    intent.putExtra(EXTRA_ENABLE, true);
+                }
+        }));
+        list.add(new ShortcutItem(mContext, R.string.auto_rotation_off,
+                R.drawable.shortcut_rotation_lock_disable, new ExtraDelegate() {
+                @Override
+                public void addExtraTo(Intent intent) {
+                    intent.putExtra(EXTRA_ENABLE, false);
+                }
+        }));
+        return list;
     }
 
     public static void launchAction(final Context context, Intent intent) {
         Intent launchIntent = new Intent(ACTION);
+        if (intent.hasExtra(EXTRA_ENABLE)) {
+            launchIntent.putExtra(EXTRA_ENABLE, intent.getBooleanExtra(EXTRA_ENABLE, false));
+        }
         context.sendBroadcast(launchIntent);
     }
 }

@@ -123,8 +123,6 @@ public class ModHwKeys {
     private static String mStrNoPrevApp;
     private static String mStrCustomAppNone;
     private static String mStrCustomAppMissing;
-    private static String mStrAutoRotationEnabled;
-    private static String mStrAutoRotationDisabled;
     private static boolean mIsMenuLongPressed = false;
     private static boolean mIsMenuDoubleTap = false;
     private static boolean mWasMenuDoubleTap = false;
@@ -341,7 +339,7 @@ public class ModHwKeys {
             } else if (action.equals(ACTION_SHOW_RECENT_APPS)) {
                 toggleRecentApps();
             } else if (action.equals(ACTION_TOGGLE_ROTATION_LOCK)) {
-                toggleAutoRotation();
+                changeAutoRotationState(intent);
             } else if (action.equals(ACTION_SLEEP)) {
                 goToSleep();
             } else if (action.equals(ACTION_MEDIA_CONTROL) && intent.hasExtra(EXTRA_MEDIA_CONTROL)) {
@@ -884,8 +882,6 @@ public class ModHwKeys {
             mStrNoPrevApp = res.getString(R.string.no_previous_app_found);
             mStrCustomAppNone = res.getString(R.string.hwkey_action_custom_app_none);
             mStrCustomAppMissing = res.getString(R.string.hwkey_action_custom_app_missing);
-            mStrAutoRotationEnabled = res.getString(R.string.hwkey_action_auto_rotation_enabled);
-            mStrAutoRotationDisabled =  res.getString(R.string.hwkey_action_auto_rotation_disabled);
 
             mVkVibePatternDefault = (long[]) XposedHelpers.getObjectField(
                     mPhoneWindowManager, "mVirtualKeyVibePattern");
@@ -1480,23 +1476,23 @@ public class ModHwKeys {
     }
 
     private static void toggleAutoRotation() {
+        changeAutoRotationState(new Intent());
+    }
+
+    private static void changeAutoRotationState(Intent intent) {
         try {
-            Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    final Class<?> rlPolicyClass = XposedHelpers.findClass(
-                            "com.android.internal.view.RotationPolicy", null);
-                    final boolean locked = (Boolean) XposedHelpers.callStaticMethod(
-                            rlPolicyClass, "isRotationLocked", mContext);
-                    XposedHelpers.callStaticMethod(rlPolicyClass, "setRotationLock", mContext, !locked);
-                    if (locked) {
-                        Toast.makeText(mContext, mStrAutoRotationEnabled, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(mContext, mStrAutoRotationDisabled, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            final Class<?> rlPolicyClass = XposedHelpers.findClass(
+                    "com.android.internal.view.RotationPolicy", null);
+            final boolean locked;
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                locked = !intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false);
+            } else {
+                locked = !(Boolean) XposedHelpers.callStaticMethod(
+                    rlPolicyClass, "isRotationLocked", mContext);
+            }
+            XposedHelpers.callStaticMethod(rlPolicyClass, "setRotationLock", mContext, locked);
+            Utils.postToast(mContext, locked ? R.string.hwkey_action_auto_rotation_disabled :
+                R.string.hwkey_action_auto_rotation_enabled);
         } catch (Throwable t) {
             log("Error toggling auto rotation: " + t.getMessage());
         }
