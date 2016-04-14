@@ -1959,4 +1959,8 @@
     <string name="smart_radio_on">Smart radio on</string>
     <string name="smart_radio_off">Smart radio off</string>
 
+    <!-- Sync shortcut -->
+    <string name="sync_on">Sync on</string>
+    <string name="sync_off">Sync off</string>
+
 </resources>
