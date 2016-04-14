@@ -1969,4 +1969,8 @@
     <string name="mobile_data_on">Mobile data on</string>
     <string name="mobile_data_off">Mobile data off</string>
 
+    <!-- NGC shortcut -->
+    <string name="nfc_on">NFC on</string>
+    <string name="nfc_off">NFC off</string>
+
 </resources>
