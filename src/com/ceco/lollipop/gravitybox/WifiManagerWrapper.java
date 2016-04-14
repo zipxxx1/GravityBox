@@ -161,6 +161,10 @@ public class WifiManagerWrapper {
     }
 
     public void setWifiApEnabled(boolean enable) {
+        setWifiApEnabled(enable, false);
+    }
+
+    public void setWifiApEnabled(boolean enable, boolean showToast) {
         try {
             final ContentResolver cr = mContext.getContentResolver();
 
@@ -175,6 +179,11 @@ public class WifiManagerWrapper {
             paramArgs[0] = WifiConfiguration.class;
             paramArgs[1] = boolean.class;
             XposedHelpers.callMethod(mWifiManager, "setWifiApEnabled", paramArgs, null, enable);
+
+            if (showToast) {
+                Utils.postToast(mContext, enable ? R.string.hotspot_on :
+                    R.string.hotspot_off);
+            }
 
             if (!enable) {
                 int wifiSavedState = 0;
@@ -196,9 +205,9 @@ public class WifiManagerWrapper {
     public void toggleWifiApEnabled() {
         final int wifiApState = getWifiApState();
         if (wifiApState == WIFI_AP_STATE_ENABLED) {
-            setWifiApEnabled(false);
+            setWifiApEnabled(false, true);
         } else if (wifiApState == WIFI_AP_STATE_DISABLED) {
-            setWifiApEnabled(true);
+            setWifiApEnabled(true, true);
         }
     }
 }

@@ -80,7 +80,7 @@ public class ConnectivityServiceWrapper {
             } else if (intent.getAction().equals(ACTION_TOGGLE_BLUETOOTH)) {
                 changeBluetoothState(intent);
             } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI_AP)) {
-                toggleWiFiAp();
+                changeWiFiApState(intent);
             } else if (intent.getAction().equals(ACTION_SET_LOCATION_MODE) &&
                     intent.hasExtra(EXTRA_LOCATION_MODE)) {
                 setLocationMode(intent.getIntExtra(EXTRA_LOCATION_MODE,
@@ -176,10 +176,15 @@ public class ConnectivityServiceWrapper {
         }
     }
 
-    private static void toggleWiFiAp() {
+    private static void changeWiFiApState(Intent intent) {
         if (mWifiManager == null) return;
         try {
-            mWifiManager.toggleWifiApEnabled();
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                mWifiManager.setWifiApEnabled(intent.getBooleanExtra(
+                        AShortcut.EXTRA_ENABLE, false), true);
+            } else {
+                mWifiManager.toggleWifiApEnabled();
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
