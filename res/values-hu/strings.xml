@@ -1929,4 +1929,8 @@
     <string name="mobile_data_on">Mobil adatátvitel be</string>
     <string name="mobile_data_off">Mobil adatátvitel ki</string>
 
+    <!-- NGC shortcut -->
+    <string name="nfc_on">NFC be</string>
+    <string name="nfc_off">NFC ki</string>
+
 </resources>

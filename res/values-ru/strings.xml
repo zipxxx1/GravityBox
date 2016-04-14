@@ -1961,4 +1961,8 @@
     <string name="mobile_data_on">Моб. интернет вкл</string>
     <string name="mobile_data_off">Моб. интернет выкл</string>
 
+    <!-- NGC shortcut -->
+    <string name="nfc_on">NFC вкл</string>
+    <string name="nfc_off">NFC выкл</string>
+
 </resources>

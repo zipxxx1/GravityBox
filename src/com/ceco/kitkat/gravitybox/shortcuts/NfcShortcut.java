@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,15 +15,18 @@
 
 package com.ceco.kitkat.gravitybox.shortcuts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ceco.kitkat.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.kitkat.gravitybox.R;
+import com.ceco.kitkat.gravitybox.adapters.IIconListAdapterItem;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
 
-public class NfcShortcut extends AShortcut {
+public class NfcShortcut extends AMultiShortcut {
     protected static final String ACTION =  ConnectivityServiceWrapper.ACTION_TOGGLE_NFC;
 
     public NfcShortcut(Context context) {
@@ -51,12 +54,32 @@ public class NfcShortcut extends AShortcut {
     }
 
     @Override
-    protected ShortcutIconResource getIconResource() {
-        return ShortcutIconResource.fromContext(mContext, R.drawable.shortcut_nfc);
+    protected List<IIconListAdapterItem> getShortcutList() {
+        final List<IIconListAdapterItem> list = new ArrayList<>();
+        list.add(new ShortcutItem(mContext, R.string.shortcut_nfc,
+                R.drawable.shortcut_nfc, null));
+        list.add(new ShortcutItem(mContext, R.string.nfc_on,
+                R.drawable.shortcut_nfc_enable, new ExtraDelegate() {
+                @Override
+                public void addExtraTo(Intent intent) {
+                    intent.putExtra(EXTRA_ENABLE, true);
+                }
+        }));
+        list.add(new ShortcutItem(mContext, R.string.nfc_off,
+                R.drawable.shortcut_nfc_disable, new ExtraDelegate() {
+                @Override
+                public void addExtraTo(Intent intent) {
+                    intent.putExtra(EXTRA_ENABLE, false);
+                }
+        }));
+        return list;
     }
 
     public static void launchAction(final Context context, Intent intent) {
         Intent launchIntent = new Intent(ACTION);
+        if (intent.hasExtra(EXTRA_ENABLE)) {
+            launchIntent.putExtra(EXTRA_ENABLE, intent.getBooleanExtra(EXTRA_ENABLE, false));
+        }
         context.sendBroadcast(launchIntent);
     }
 }
