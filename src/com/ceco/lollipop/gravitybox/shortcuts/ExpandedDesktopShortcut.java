@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,15 +15,18 @@
 
 package com.ceco.lollipop.gravitybox.shortcuts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ceco.lollipop.gravitybox.ModHwKeys;
 import com.ceco.lollipop.gravitybox.R;
+import com.ceco.lollipop.gravitybox.adapters.IIconListAdapterItem;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
 
-public class ExpandedDesktopShortcut extends AShortcut {
+public class ExpandedDesktopShortcut extends AMultiShortcut {
     protected static final String ACTION =  ModHwKeys.ACTION_TOGGLE_EXPANDED_DESKTOP;
 
     public ExpandedDesktopShortcut(Context context) {
@@ -37,7 +40,7 @@ public class ExpandedDesktopShortcut extends AShortcut {
 
     @Override
     public Drawable getIconLeft() {
-        return mResources.getDrawable(R.drawable.shortcut_expanded_desktop);
+        return mResources.getDrawable(R.drawable.shortcut_expanded_desktop, null);
     }
 
     @Override
@@ -51,12 +54,32 @@ public class ExpandedDesktopShortcut extends AShortcut {
     }
 
     @Override
-    protected ShortcutIconResource getIconResource() {
-        return ShortcutIconResource.fromContext(mContext, R.drawable.shortcut_expanded_desktop);
+    protected List<IIconListAdapterItem> getShortcutList() {
+        final List<IIconListAdapterItem> list = new ArrayList<>();
+        list.add(new ShortcutItem(mContext, R.string.hwkey_action_expanded_desktop,
+                R.drawable.shortcut_expanded_desktop, null));
+        list.add(new ShortcutItem(mContext, R.string.expanded_desktop_on,
+                R.drawable.shortcut_expanded_desktop_enable, new ExtraDelegate() {
+                @Override
+                public void addExtraTo(Intent intent) {
+                    intent.putExtra(EXTRA_ENABLE, true);
+                }
+        }));
+        list.add(new ShortcutItem(mContext, R.string.expanded_desktop_off,
+                R.drawable.shortcut_expanded_desktop_disable, new ExtraDelegate() {
+                @Override
+                public void addExtraTo(Intent intent) {
+                    intent.putExtra(EXTRA_ENABLE, false);
+                }
+        }));
+        return list;
     }
 
     public static void launchAction(Context context, Intent intent) {
         Intent launchIntent = new Intent(ACTION);
+        if (intent.hasExtra(EXTRA_ENABLE)) {
+            launchIntent.putExtra(EXTRA_ENABLE, intent.getBooleanExtra(EXTRA_ENABLE, false));
+        }
         context.sendBroadcast(launchIntent);
     }
 }
