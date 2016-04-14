@@ -1835,4 +1835,8 @@
     <string name="auto_rotation_on">Auto rotation on</string>
     <string name="auto_rotation_off">Auto rotation off</string>
 
+    <!-- Smart radio shortcut -->
+    <string name="smart_radio_on">Smart radio on</string>
+    <string name="smart_radio_off">Smart radio off</string>
+
 </resources>

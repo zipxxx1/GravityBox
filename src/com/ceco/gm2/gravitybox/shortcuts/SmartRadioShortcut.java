@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,15 +15,18 @@
 
 package com.ceco.gm2.gravitybox.shortcuts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ceco.gm2.gravitybox.ModSmartRadio;
 import com.ceco.gm2.gravitybox.R;
+import com.ceco.gm2.gravitybox.adapters.IIconListAdapterItem;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
 
-public class SmartRadioShortcut extends AShortcut {
+public class SmartRadioShortcut extends AMultiShortcut {
     protected static final String ACTION =  ModSmartRadio.ACTION_TOGGLE_SMART_RADIO;
 
     public SmartRadioShortcut(Context context) {
@@ -51,12 +54,32 @@ public class SmartRadioShortcut extends AShortcut {
     }
 
     @Override
-    protected ShortcutIconResource getIconResource() {
-        return ShortcutIconResource.fromContext(mContext, R.drawable.shortcut_smart_radio);
+    protected List<IIconListAdapterItem> getShortcutList() {
+        final List<IIconListAdapterItem> list = new ArrayList<>();
+        list.add(new ShortcutItem(mContext, R.string.shortcut_smart_radio_toggle,
+                R.drawable.shortcut_smart_radio, null));
+        list.add(new ShortcutItem(mContext, R.string.smart_radio_on,
+                R.drawable.shortcut_smart_radio_enable, new ExtraDelegate() {
+                @Override
+                public void addExtraTo(Intent intent) {
+                    intent.putExtra(EXTRA_ENABLE, true);
+                }
+        }));
+        list.add(new ShortcutItem(mContext, R.string.smart_radio_off,
+                R.drawable.shortcut_smart_radio_disable, new ExtraDelegate() {
+                @Override
+                public void addExtraTo(Intent intent) {
+                    intent.putExtra(EXTRA_ENABLE, false);
+                }
+        }));
+        return list;
     }
 
     public static void launchAction(final Context context, Intent intent) {
         Intent launchIntent = new Intent(ACTION);
+        if (intent.hasExtra(EXTRA_ENABLE)) {
+            launchIntent.putExtra(EXTRA_ENABLE, intent.getBooleanExtra(EXTRA_ENABLE, false));
+        }
         context.sendBroadcast(launchIntent);
     }
 }

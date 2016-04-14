@@ -15,6 +15,8 @@
 
 package com.ceco.gm2.gravitybox;
 
+import com.ceco.gm2.gravitybox.shortcuts.AShortcut;
+
 import android.app.AlarmManager;
 import android.app.KeyguardManager;
 import android.app.PendingIntent;
@@ -143,7 +145,7 @@ public class ModSmartRadio {
                     switchToState(State.NORMAL);
                 }
             } else if (intent.getAction().equals(ACTION_TOGGLE_SMART_RADIO)) {
-                toggleSmartRadio();
+                changeSmartRadioState(intent);
             } else if (intent.getAction().equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
                 final boolean wasPhoneBusy = !mIsPhoneIdle;
                 mIsPhoneIdle = TelephonyManager.EXTRA_STATE_IDLE.equals(
@@ -305,9 +307,13 @@ public class ModSmartRadio {
         }
     }
 
-    private static void toggleSmartRadio() {
+    private static void changeSmartRadioState(Intent intent) {
         try {
-            mSmartRadioEnabled = !mSmartRadioEnabled;
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                mSmartRadioEnabled = intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false);
+            } else {
+                mSmartRadioEnabled = !mSmartRadioEnabled;
+            }
             Settings.System.putInt(mContext.getContentResolver(),
                     SETTING_SMART_RADIO_ENABLED, mSmartRadioEnabled ? 1 : 0);
             if (mSmartRadioEnabled) {
@@ -317,6 +323,8 @@ public class ModSmartRadio {
                     switchToState(State.POWER_SAVING);
                 }
             }
+            Utils.postToast(mContext, mSmartRadioEnabled ? R.string.smart_radio_on :
+                R.string.smart_radio_off);
             if (DEBUG) log("mSmartRadioEnabled=" + mSmartRadioEnabled);
         } catch (Throwable t) {
             XposedBridge.log(t);

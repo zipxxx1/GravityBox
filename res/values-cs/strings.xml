@@ -1752,4 +1752,8 @@
     <string name="auto_rotation_on">Zapnutí auto rotace</string>
     <string name="auto_rotation_off">Vypnutí auto rotace</string>
 
+    <!-- Smart radio shortcut -->
+    <string name="smart_radio_on">Zapnutí Smart Radio</string>
+    <string name="smart_radio_off">Vypnutí Smart Radio</string>
+
 </resources>

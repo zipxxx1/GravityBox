@@ -1808,4 +1808,8 @@
     <string name="auto_rotation_on">Automatikus elforgatás be</string>
     <string name="auto_rotation_off">Automatikus elforgatás ki</string>
 
+    <!-- Smart radio shortcut -->
+    <string name="smart_radio_on">Okos rádiókapcsolat be</string>
+    <string name="smart_radio_off">Okos rádiókapcsolat ki</string>
+
 </resources>
