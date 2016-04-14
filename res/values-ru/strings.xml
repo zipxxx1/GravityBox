@@ -1839,4 +1839,8 @@
     <string name="smart_radio_on">Умное радио вкл</string>
     <string name="smart_radio_off">Умное радио выкл</string>
 
+    <!-- Sync shortcut -->
+    <string name="sync_on">Синх. вкл</string>
+    <string name="sync_off">Синх. выкл</string>
+
 </resources>

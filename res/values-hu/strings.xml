@@ -1812,4 +1812,8 @@
     <string name="smart_radio_on">Okos rádiókapcsolat be</string>
     <string name="smart_radio_off">Okos rádiókapcsolat ki</string>
 
+    <!-- Sync shortcut -->
+    <string name="sync_on">Szinkronizáció be</string>
+    <string name="sync_off">Szinkronizáció ki</string>
+
 </resources>

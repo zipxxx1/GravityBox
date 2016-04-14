@@ -1617,4 +1617,8 @@
     <string name="smart_radio_on">Netzautomatik ein</string>
     <string name="smart_radio_off">Netzautomatik aus</string>
 
+    <!-- Sync shortcut -->
+    <string name="sync_on">Sync ein</string>
+    <string name="sync_off">Sync aus</string>
+
 </resources>

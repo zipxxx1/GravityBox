@@ -17,6 +17,7 @@ package com.ceco.gm2.gravitybox;
 
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHours;
 import com.ceco.gm2.gravitybox.ledcontrol.QuietHoursActivity;
+import com.ceco.gm2.gravitybox.shortcuts.AShortcut;
 
 import android.app.IntentService;
 import android.content.ContentResolver;
@@ -44,7 +45,12 @@ public class GravityBoxService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent.getAction().equals(ACTION_TOGGLE_SYNC)) {
-            final boolean newState = !ContentResolver.getMasterSyncAutomatically();
+            final boolean newState;
+            if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
+                newState = intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false);
+            } else {
+                newState = !ContentResolver.getMasterSyncAutomatically();
+            }
             ContentResolver.setMasterSyncAutomatically(newState);
             if (intent.getBooleanExtra(EXTRA_SYNC_SHOW_TOAST, false)) {
                 showToast(newState ? 
