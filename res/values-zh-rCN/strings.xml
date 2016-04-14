@@ -1826,4 +1826,9 @@
     <string name="nfc_on">打开NFC</string>
     <string name="nfc_off">关闭NFC</string>
 
+    <!-- Quiet hours shortcut -->
+    <string name="quiet_hours_on">打开静音时段</string>
+    <string name="quiet_hours_off">关闭静音时段</string>
+    <string name="quiet_hours_auto">自动静音时段</string>
+
 </resources>

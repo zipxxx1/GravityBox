@@ -1826,4 +1826,9 @@
     <string name="nfc_on">NFC увімкнено</string>
     <string name="nfc_off">NFC вимкнено</string>
 
+    <!-- Quiet hours shortcut -->
+    <string name="quiet_hours_on">Тихі години увімкнено</string>
+    <string name="quiet_hours_off">Тихі години вимкнено</string>
+    <string name="quiet_hours_auto">Тихі години автоматично</string>
+
 </resources>

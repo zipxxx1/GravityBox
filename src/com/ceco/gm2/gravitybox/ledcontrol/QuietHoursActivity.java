@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Peter Gregus for GravityBox Project (C3C076@xda)
+ * Copyright (C) 2016 Peter Gregus for GravityBox Project (C3C076@xda)
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -58,15 +58,15 @@ public class QuietHoursActivity extends Activity {
             "gravitybox.intent.action.SET_QUIET_HOURS_MODE";
     public static final String EXTRA_QH_MODE = "qhMode";
 
-    public static void setQuietHoursMode(Context context, String mode) {
+    public static QuietHours.Mode setQuietHoursMode(final Context context, String mode) {
         try {
             SharedPreferences prefs = context.getSharedPreferences("quiet_hours", Context.MODE_WORLD_READABLE);
             QuietHours qh = new QuietHours(prefs);
             if (qh.uncLocked || !qh.enabled) {
-                return;
+                return null;
             }
 
-            QuietHours.Mode qhMode;
+            final QuietHours.Mode qhMode;
             if (mode != null) {
                 qhMode = QuietHours.Mode.valueOf(mode);
             } else {
@@ -87,8 +87,19 @@ public class QuietHoursActivity extends Activity {
             prefs.edit().putString(QuietHoursActivity.PREF_KEY_QH_MODE, qhMode.toString()).commit();
             Intent intent = new Intent(ACTION_QUIET_HOURS_CHANGED);
             context.sendBroadcast(intent);
+            return qhMode;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static int getToastResIdFromMode(QuietHours.Mode mode) {
+        switch (mode) {
+            case ON: return R.string.quiet_hours_on;
+            case OFF: return R.string.quiet_hours_off;
+            case AUTO: return R.string.quiet_hours_auto;
+            default: return 0;
         }
     }
 

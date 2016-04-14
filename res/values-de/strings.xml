@@ -1604,4 +1604,9 @@
     <string name="nfc_on">NFC ein</string>
     <string name="nfc_off">NFC aus</string>
 
+    <!-- Quiet hours shortcut -->
+    <string name="quiet_hours_on">Ruhestunden ein</string>
+    <string name="quiet_hours_off">Ruhestunden aus</string>
+    <string name="quiet_hours_auto">Ruhestunden auto</string>
+
 </resources>
