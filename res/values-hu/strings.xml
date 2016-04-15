@@ -1954,4 +1954,7 @@
     <string name="hotspot_on">Hotspot be</string>
     <string name="hotspot_off">Hotspot ki</string>
 
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">Rezgés ikon elrejtése</string>
+
 </resources>

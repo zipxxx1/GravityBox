@@ -534,7 +534,7 @@ public class ModStatusBar {
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_CARRIER2_TEXT_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_EXPAND_ALL_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DT2S_CHANGED);
-                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_BT_VISIBILITY_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SYSTEM_ICON_CHANGED);
                     intentFilter.addAction(ACTION_DELETE_SCREENSHOT);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_DOWNLOAD_PROGRESS_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_TICKER_POLICY_CHANGED);
@@ -926,7 +926,7 @@ public class ModStatusBar {
             }
 
             // Status bar Bluetooth icon policy
-            mBroadcastSubReceivers.add(new StatusbarBluetoothIcon(classLoader, prefs));
+            mBroadcastSubReceivers.add(new SystemIconController(classLoader, prefs));
 
             // Delete action for screenshot notification
             try {

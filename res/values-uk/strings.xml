@@ -1985,4 +1985,7 @@
     <string name="hotspot_on">Точку доступу увімкнено</string>
     <string name="hotspot_off">Точку доступу вимкнено</string>
 
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">Приховати піктограму вібрації</string>
+
 </resources>

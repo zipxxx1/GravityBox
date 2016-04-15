@@ -1930,4 +1930,7 @@
     <string name="hotspot_on">Zapnutie WiFi AP</string>
     <string name="hotspot_off">Vypnutie WiFi AP</string>
 
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">Skryť ikonu režimu vibrácie</string>
+
 </resources>
