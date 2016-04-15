@@ -1149,6 +1149,11 @@
             android:entryValues="@array/sb_bt_values"
             android:defaultValue="DEFAULT" />
 
+        <CheckBoxPreference 
+            android:key="pref_sb_hide_vibrate_icon"
+            android:title="@string/pref_sb_hide_vibrate_icon_title"
+            android:defaultValue="false" />
+
         <com.ceco.lollipop.gravitybox.preference.OngoingNotifPreference
             android:key="pref_ongoing_notifications"
             android:title="@string/pref_ongoing_notifications_title"

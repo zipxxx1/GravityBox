@@ -1994,4 +1994,7 @@
     <string name="hotspot_on">Hotspot on</string>
     <string name="hotspot_off">Hotspot off</string>
 
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">Hide vibrate icon</string>
+
 </resources>
