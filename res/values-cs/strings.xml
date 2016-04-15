@@ -1764,4 +1764,7 @@
     <string name="hotspot_on">Zapnutí WiFi AP</string>
     <string name="hotspot_off">Vypnutí WiFi AP</string>
 
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">Skrýt ikonu režimu vibrace</string>
+
 </resources>

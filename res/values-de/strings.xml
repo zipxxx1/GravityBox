@@ -1625,4 +1625,7 @@
     <string name="hotspot_on">Hotspot ein</string>
     <string name="hotspot_off">Hotspot aus</string>
 
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">Verstecke Vibrationssymbol</string>
+
 </resources>

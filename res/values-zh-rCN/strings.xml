@@ -1847,4 +1847,7 @@
     <string name="hotspot_on">打开热点</string>
     <string name="hotspot_off">关闭热点</string>
 
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">隐藏振动图标</string>
+
 </resources>

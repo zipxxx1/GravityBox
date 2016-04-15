@@ -1847,4 +1847,7 @@
     <string name="hotspot_on">Точка доступа вкл</string>
     <string name="hotspot_off">Точка доступа выкл</string>
 
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">Скрыть значок вибрации</string>
+
 </resources>
