@@ -1,3 +1,20 @@
+Changelog 6.1.0 - 17/04/2016
+--------------------------------------
+- GB Actions extended:
+--- most of the toggle actions now have explicit on/off shortcuts available
+--- makes things easier for Tasker users
+--- provides feedback in form of toast when action gets executed
+- Statusbar: added option for hiding vibrate icon 
+- Navbar: added option for auto-fade show keys policy
+- Ultimate notification control:
+--- Added option for suppressing notification light based on system's native Do not disturb mode
+--- ActiveScreen: don't perform for low priority notifications
+- Key actions: suppress volume key wake while music is playing
+- Fixed double-tap lock screen to sleep issue on Xperia devices introduced in 6.0.8
+- Updated Malaysian translations (thanks to zamzameir)
+- Updated Russian translations (thanks to gaich)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+
 Changelog 6.0.8 - 05/04/2016
 --------------------------------------
 - CircleBattery: fixed refreshing issue
