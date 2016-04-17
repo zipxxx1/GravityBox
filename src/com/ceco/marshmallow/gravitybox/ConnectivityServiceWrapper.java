@@ -164,8 +164,10 @@ public class ConnectivityServiceWrapper {
                         mTelephonyManager, "getDataEnabled");
             }
             setMobileDataEnabled(enabled);
-            Utils.postToast(mContext, enabled ? R.string.mobile_data_on :
-                R.string.mobile_data_off);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, true)) {
+                Utils.postToast(mContext, enabled ? R.string.mobile_data_on :
+                    R.string.mobile_data_off);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -276,7 +278,9 @@ public class ConnectivityServiceWrapper {
                 }
             }
             XposedHelpers.callMethod(adapter, enable ? "enable" : "disable");
-            Utils.postToast(mContext, enable ? R.string.nfc_on : R.string.nfc_off);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, true)) {
+                Utils.postToast(mContext, enable ? R.string.nfc_on : R.string.nfc_off);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

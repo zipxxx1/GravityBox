@@ -19,6 +19,7 @@ import com.ceco.marshmallow.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.marshmallow.gravitybox.GravityBoxResultReceiver;
 import com.ceco.marshmallow.gravitybox.R;
 import com.ceco.marshmallow.gravitybox.GravityBoxResultReceiver.Receiver;
+import com.ceco.marshmallow.gravitybox.shortcuts.AShortcut;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.BroadcastReceiver;
@@ -99,16 +100,18 @@ public class NfcTile extends QsTile {
     }
 
     protected void toggleState() {
+        Intent intent = new Intent(ConnectivityServiceWrapper.ACTION_TOGGLE_NFC);
+        intent.putExtra(AShortcut.EXTRA_SHOW_TOAST, false);
         switch (mNfcState) {
             case ConnectivityServiceWrapper.NFC_STATE_ON:
                 mNfcState = ConnectivityServiceWrapper.NFC_STATE_TURNING_OFF;
                 refreshState();
-                mContext.sendBroadcast(new Intent(ConnectivityServiceWrapper.ACTION_TOGGLE_NFC));
+                mContext.sendBroadcast(intent);
                 break;
             case ConnectivityServiceWrapper.NFC_STATE_OFF:
                 mNfcState = ConnectivityServiceWrapper.NFC_STATE_TURNING_ON;
                 refreshState();
-                mContext.sendBroadcast(new Intent(ConnectivityServiceWrapper.ACTION_TOGGLE_NFC));
+                mContext.sendBroadcast(intent);
                 break;
         }
     }

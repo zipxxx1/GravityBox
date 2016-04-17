@@ -18,6 +18,7 @@ package com.ceco.marshmallow.gravitybox.quicksettings;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModSmartRadio;
 import com.ceco.marshmallow.gravitybox.R;
+import com.ceco.marshmallow.gravitybox.shortcuts.AShortcut;
 
 import de.robv.android.xposed.XSharedPreferences;
 import android.content.ContentResolver;
@@ -80,6 +81,7 @@ public class SmartRadioTile extends QsTile {
     @Override
     public void handleClick() {
         Intent i = new Intent(ModSmartRadio.ACTION_TOGGLE_SMART_RADIO);
+        i.putExtra(AShortcut.EXTRA_SHOW_TOAST, false);
         mContext.sendBroadcast(i);
         super.handleClick();
     }

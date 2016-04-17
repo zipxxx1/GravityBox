@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 public abstract class AShortcut implements IIconListAdapterItem {
 
     public static final String EXTRA_ENABLE = "enable";
+    public static final String EXTRA_SHOW_TOAST = "showToast";
 
     protected Context mContext;
     protected Resources mResources;

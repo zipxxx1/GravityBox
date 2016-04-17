@@ -67,7 +67,7 @@ public class GravityBoxService extends IntentService {
         } else if (intent.getAction().equals(QuietHoursActivity.ACTION_SET_QUIET_HOURS_MODE)) {
             QuietHours.Mode qhMode = QuietHoursActivity.setQuietHoursMode(this, intent.getStringExtra(
                     QuietHoursActivity.EXTRA_QH_MODE));
-            if (qhMode != null) {
+            if (qhMode != null && intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, true)) {
                 showToast(QuietHoursActivity.getToastResIdFromMode(qhMode));
             }
         }
