@@ -1864,6 +1864,9 @@
     <!-- Navbar: Auto-fade keys -->
     <string name="pref_navbar_autofade_keys_title">Automatické ztmavení tlačítek</string>
     <string name="pref_navbar_autofade_keys_summary">Ztmaví tlačítka po vypršení nastaveného času. Nastavte na 0 pro vypnutí funkce.</string>
+    <string name="pref_navbar_autofade_show_keys_title">Zobrazit tlačítka při</string>
+    <string name="autofade_show_keys_navbar">Doteku navigační lišty</string>
+    <string name="autofade_show_keys_screen">Doteku obrazovky</string>
 
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">Automatický reset</string>
@@ -1872,5 +1875,64 @@
     <!-- Lockscreen: PIN scramble -->
     <string name="pref_lockscreen_pin_sramble_title">Šifrování PIN</string>
     <string name="pref_lockscreen_pin_sramble_summary">Přehází PIN tlačítka při každém odemknutí zařízení</string>
+
+    <!-- UNC: LED DND -->
+    <string name="pref_lc_led_dnd_title">Nerušit</string>
+    <string name="pref_lc_led_dnd_summary">Vypne LED pro vybrané režimy nerušení</string>
+    <string name="pref_lc_led_dnd_dialog_title">Vyberte, pro které režimy nerušení vypnout LED</string>
+    <string name="dnd_priority_interruptions">Prioritní</string>
+    <string name="dnd_no_interruptions">Žádné</string>
+
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">Zapnutí WiFi</string>
+    <string name="wifi_off">Vypnutí WiFi</string>
+
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">Zapnutí režimu v letadle</string>
+    <string name="airplane_mode_off">Vypnutí režimu v letadle</string>
+
+    <!-- Autobrightness mode shortcut -->
+    <string name="autobrightness_on">Zapnutí automatického jasu</string>
+    <string name="autobrightness_off">Vypnutí automatického jasu</string>
+
+    <!-- Bluetooth shortcut -->
+    <string name="bluetooth_on">Zapnutí Bluetooth</string>
+    <string name="bluetooth_off">Vypnutí Bluetooth</string>
+
+    <!-- Expanded desktop shortcut -->
+    <string name="expanded_desktop_on">Zapnutí rozšířené plochy</string>
+    <string name="expanded_desktop_off">Vypnutí rozšířené plochy</string>
+
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">Zapnutí mobilních dat</string>
+    <string name="mobile_data_off">Vypnutí mobilních dat</string>
+
+    <!-- NGC shortcut -->
+    <string name="nfc_on">Zapnutí NFC</string>
+    <string name="nfc_off">Vypnutí NFC</string>
+
+    <!-- Quiet hours shortcut -->
+    <string name="quiet_hours_on">Zapnutí tichých hodin</string>
+    <string name="quiet_hours_off">Vypnutí tichých hodin</string>
+    <string name="quiet_hours_auto">Automatické tiché hodiny</string>
+
+    <!-- Auto rotation shortcut -->
+    <string name="auto_rotation_on">Zapnutí auto rotace</string>
+    <string name="auto_rotation_off">Vypnutí auto rotace</string>
+
+    <!-- Smart radio shortcut -->
+    <string name="smart_radio_on">Zapnutí Smart Radio</string>
+    <string name="smart_radio_off">Vypnutí Smart Radio</string>
+
+    <!-- Sync shortcut -->
+    <string name="sync_on">Zapnutí synchronizace</string>
+    <string name="sync_off">Vypnutí synchronizace</string>
+
+    <!-- Hotspot shortcut -->
+    <string name="hotspot_on">Zapnutí WiFi AP</string>
+    <string name="hotspot_off">Vypnutí WiFi AP</string>
+
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">Skrýt ikonu režimu vibrace</string>
 
 </resources>
