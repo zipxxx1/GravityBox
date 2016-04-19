@@ -26,6 +26,7 @@ import com.ceco.lollipop.gravitybox.adapters.IIconListAdapterItem;
 public abstract class AShortcut implements IIconListAdapterItem {
 
     public static final String EXTRA_ENABLE = "enable";
+    public static final String EXTRA_SHOW_TOAST = "showToast";
 
     protected Context mContext;
     protected Resources mResources;
@@ -62,6 +63,10 @@ public abstract class AShortcut implements IIconListAdapterItem {
 
     protected abstract String getShortcutName();
     protected abstract ShortcutIconResource getIconResource();
+
+    protected boolean supportsToast() {
+        return false;
+    }
 
     protected void createShortcut(CreateShortcutListener listener) {
         Intent launchIntent = new Intent(mContext, LaunchActivity.class);

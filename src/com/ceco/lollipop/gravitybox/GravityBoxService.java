@@ -31,7 +31,6 @@ import android.widget.Toast;
 public class GravityBoxService extends IntentService {
     public static final String ACTION_TOGGLE_SYNC = "gravitybox.intent.action.TOGGLE_SYNC";
     public static final String ACTION_GET_SYNC_STATUS = "gravitybox.intent.action.GET_SYNC_STATUS";
-    public static final String EXTRA_SYNC_SHOW_TOAST = "syncShowToast";
 
     public static final int RESULT_SYNC_STATUS = 0;
     public static final String KEY_SYNC_STATUS = "syncStatus";
@@ -53,7 +52,7 @@ public class GravityBoxService extends IntentService {
                 newState = !ContentResolver.getMasterSyncAutomatically();
             }
             ContentResolver.setMasterSyncAutomatically(newState);
-            if (intent.getBooleanExtra(EXTRA_SYNC_SHOW_TOAST, false)) {
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
                 showToast(newState ? 
                         R.string.quick_settings_sync_on :
                             R.string.quick_settings_sync_off);
@@ -67,7 +66,7 @@ public class GravityBoxService extends IntentService {
         } else if (intent.getAction().equals(QuietHoursActivity.ACTION_SET_QUIET_HOURS_MODE)) {
             QuietHours.Mode qhMode = QuietHoursActivity.setQuietHoursMode(this, intent.getStringExtra(
                     QuietHoursActivity.EXTRA_QH_MODE));
-            if (qhMode != null) {
+            if (qhMode != null && intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
                 showToast(QuietHoursActivity.getToastResIdFromMode(qhMode));
             }
         }

@@ -55,6 +55,11 @@ public class LocationModeShortcut extends AMultiShortcut {
     }
 
     @Override
+    protected boolean supportsToast() {
+        return true;
+    }
+
+    @Override
     public List<IIconListAdapterItem> getShortcutList() {
         final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShortcutItem(mContext, R.string.location_mode_high_accuracy, 
@@ -94,9 +99,7 @@ public class LocationModeShortcut extends AMultiShortcut {
 
     public static void launchAction(final Context context, Intent intent) {
         Intent launchIntent = new Intent(ACTION);
-        launchIntent.putExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
-                intent.getIntExtra(ConnectivityServiceWrapper.EXTRA_LOCATION_MODE,
-                        Settings.Secure.LOCATION_MODE_BATTERY_SAVING));
+        launchIntent.putExtras(intent.getExtras());
         context.sendBroadcast(launchIntent);
     }
 }

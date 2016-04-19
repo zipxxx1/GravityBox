@@ -317,8 +317,10 @@ public class ModSmartRadio {
                     switchToState(State.POWER_SAVING);
                 }
             }
-            Utils.postToast(mContext, mSmartRadioEnabled ? R.string.smart_radio_on :
-                R.string.smart_radio_off);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, mSmartRadioEnabled ? R.string.smart_radio_on :
+                    R.string.smart_radio_off);
+            }
             if (DEBUG) log("mSmartRadioEnabled=" + mSmartRadioEnabled);
         } catch (Throwable t) {
             XposedBridge.log(t);
