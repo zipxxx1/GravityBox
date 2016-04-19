@@ -353,7 +353,7 @@ public class ModHwKeys {
             } else if (action.equals(ACTION_INAPP_SEARCH)) {
                 injectKey(KeyEvent.KEYCODE_SEARCH);
             } else if (action.equals(ACTION_SET_RINGER_MODE)) {
-                setRingerMode(intent.getIntExtra(EXTRA_RINGER_MODE, RingerModeShortcut.MODE_RING_VIBRATE));
+                changeRingerMode(intent);
             } else if (action.equals(GravityBoxService.ACTION_TOGGLE_SYNC)) {
                 changeSyncState(intent);
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_HEADSET_ACTION_CHANGED)) {
@@ -1442,8 +1442,10 @@ public class ModHwKeys {
                     rlPolicyClass, "isRotationLocked", mContext);
             }
             XposedHelpers.callStaticMethod(rlPolicyClass, "setRotationLock", mContext, locked);
-            Utils.postToast(mContext, locked ? R.string.hwkey_action_auto_rotation_disabled :
-                R.string.hwkey_action_auto_rotation_enabled);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, locked ? R.string.hwkey_action_auto_rotation_disabled :
+                    R.string.hwkey_action_auto_rotation_enabled);
+            }
         } catch (Throwable t) {
             log("Error toggling auto rotation: " + t.getMessage());
         }
@@ -1661,6 +1663,8 @@ public class ModHwKeys {
                 qhi.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
                         intent.getStringExtra(QuietHoursActivity.EXTRA_QH_MODE));
             }
+            qhi.putExtra(AShortcut.EXTRA_SHOW_TOAST, 
+                    intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             mGbContext.startService(qhi);
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -1681,34 +1685,44 @@ public class ModHwKeys {
             Intent i = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
             i.putExtra("state", enable);
             mContext.sendBroadcast(i);
-            Utils.postToast(mContext, enable ? R.string.airplane_mode_on :
-                R.string.airplane_mode_off);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, enable ? R.string.airplane_mode_on :
+                    R.string.airplane_mode_off);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    private static void setRingerMode(int mode)
-    {
+    private static void changeRingerMode(Intent intent) {
         try {
+            int mode = intent.getIntExtra(EXTRA_RINGER_MODE, RingerModeShortcut.MODE_RING_VIBRATE);
             AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
             ContentResolver cr = mContext.getContentResolver();
+            int msgResId = 0;
             switch (mode) {
                 case RingerModeShortcut.MODE_RING:
                     am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     Settings.System.putInt(cr, SETTING_VIBRATE_WHEN_RINGING, 0);
+                    msgResId = R.string.ringer_mode_sound;
                     break;
                 case RingerModeShortcut.MODE_RING_VIBRATE:
                     am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                     Settings.System.putInt(cr, SETTING_VIBRATE_WHEN_RINGING, 1);
+                    msgResId = R.string.ringer_mode_sound_vibrate;
                     break;
                 case RingerModeShortcut.MODE_SILENT:
                     am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                    msgResId = R.string.ringer_mode_silent;
                     break;
                 case RingerModeShortcut.MODE_VIBRATE:
                     am.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
                     Settings.System.putInt(cr, SETTING_VIBRATE_WHEN_RINGING, 1);
+                    msgResId = R.string.ringer_mode_vibrate;
                     break;
+            }
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, msgResId);
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -1723,7 +1737,8 @@ public class ModHwKeys {
                 si.putExtra(AShortcut.EXTRA_ENABLE, intent.getBooleanExtra(
                         AShortcut.EXTRA_ENABLE, false));
             }
-            si.putExtra(GravityBoxService.EXTRA_SYNC_SHOW_TOAST, true);
+            si.putExtra(AShortcut.EXTRA_SHOW_TOAST,
+                    intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             mGbContext.startService(si);
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -1746,8 +1761,10 @@ public class ModHwKeys {
             }
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.SCREEN_BRIGHTNESS_MODE, mode);
-            Utils.postToast(mContext, mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC ?
-                    R.string.autobrightness_on : R.string.autobrightness_off);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC ?
+                        R.string.autobrightness_on : R.string.autobrightness_off);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

@@ -144,8 +144,10 @@ public class ConnectivityServiceWrapper {
                         mConnectivityService, "getMobileDataEnabled");
             }
             setMobileDataEnabled(enabled);
-            Utils.postToast(mContext, enabled ? R.string.mobile_data_on :
-                R.string.mobile_data_off);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, enabled ? R.string.mobile_data_on :
+                    R.string.mobile_data_off);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -155,10 +157,12 @@ public class ConnectivityServiceWrapper {
         if (mWifiManager == null) return;
         try {
             if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
-                mWifiManager.setWifiEnabled(intent.getBooleanExtra(
-                        AShortcut.EXTRA_ENABLE, false), true);
+                mWifiManager.setWifiEnabled(
+                        intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false),
+                        intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             } else {
-                mWifiManager.toggleWifiEnabled();
+                mWifiManager.toggleWifiEnabled(
+                        intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -169,10 +173,12 @@ public class ConnectivityServiceWrapper {
         if (mWifiManager == null) return;
         try {
             if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
-                mWifiManager.setWifiApEnabled(intent.getBooleanExtra(
-                        AShortcut.EXTRA_ENABLE, false), true);
+                mWifiManager.setWifiApEnabled(
+                        intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false),
+                        intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             } else {
-                mWifiManager.toggleWifiApEnabled();
+                mWifiManager.toggleWifiApEnabled(
+                        intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -200,7 +206,9 @@ public class ConnectivityServiceWrapper {
                     labelResId = R.string.bluetooth_on;
                 }
             }
-            Utils.postToast(mContext, labelResId);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, labelResId);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -231,7 +239,9 @@ public class ConnectivityServiceWrapper {
                 }
             }
             XposedHelpers.callMethod(adapter, enable ? "enable" : "disable");
-            Utils.postToast(mContext, enable ? R.string.nfc_on : R.string.nfc_off);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, enable ? R.string.nfc_on : R.string.nfc_off);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

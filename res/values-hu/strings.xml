@@ -1823,4 +1823,7 @@
     <!-- Statusbar: Hide vibrate icon -->
     <string name="pref_sb_hide_vibrate_icon_title">Rezgés ikon elrejtése</string>
 
+    <!-- Shortcut: Show toast option -->
+    <string name="shortcut_show_toast">Állapot üzenet mutatása</string>
+
 </resources>

@@ -16,6 +16,7 @@ package com.ceco.gm2.gravitybox.shortcuts;
 
 import java.util.List;
 
+import com.ceco.gm2.gravitybox.R;
 import com.ceco.gm2.gravitybox.adapters.IIconListAdapterItem;
 import com.ceco.gm2.gravitybox.adapters.IconListAdapter;
 
@@ -25,6 +26,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CheckBox;
+import android.widget.ListView;
 
 public abstract class AMultiShortcut extends AShortcut {
 
@@ -45,37 +52,46 @@ public abstract class AMultiShortcut extends AShortcut {
 
     @Override
     protected void createShortcut(final CreateShortcutListener listener) {
-        final List<IIconListAdapterItem> list = getShortcutList();
+        View view = LayoutInflater.from(mContext).inflate(R.layout.multi_shortcut_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
             .setTitle(getText())
-            .setAdapter(new IconListAdapter(mContext, list), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    ShortcutItem item = (ShortcutItem) list.get(which);
-
-                    Intent launchIntent = new Intent(mContext, ShortcutActivity.class);
-                    launchIntent.setAction(ShortcutActivity.ACTION_LAUNCH_ACTION);
-                    launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION, getAction());
-                    launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION_TYPE, getActionType());
-                    launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    item.addExtraTo(launchIntent);
-
-                    Intent intent = new Intent();
-                    intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, launchIntent);
-                    intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, item.getText());
-                    intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, item.getIconResource());
-
-                    AMultiShortcut.this.onShortcutCreated(intent, listener);
-                    dialog.dismiss();
-                }
-            })
+            .setView(view)
             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             });
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
+
+        final CheckBox chkShowToast = (CheckBox) view.findViewById(R.id.chkShowToast);
+        chkShowToast.setVisibility(supportsToast() ? View.VISIBLE : View.GONE);
+        ListView listView = (ListView) view.findViewById(R.id.listview);
+        final List<IIconListAdapterItem> list = getShortcutList();
+        listView.setAdapter(new IconListAdapter(mContext, list));
+        listView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ShortcutItem item = (ShortcutItem) list.get(position);
+
+                Intent launchIntent = new Intent(mContext, ShortcutActivity.class);
+                launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                launchIntent.setAction(ShortcutActivity.ACTION_LAUNCH_ACTION);
+                launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION, getAction());
+                launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION_TYPE, getActionType());
+                launchIntent.putExtra(EXTRA_SHOW_TOAST, (supportsToast() && chkShowToast.isChecked()));
+                item.addExtraTo(launchIntent);
+
+                Intent intent = new Intent();
+                intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, launchIntent);
+                intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, item.getText());
+                intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, item.getIconResource());
+
+                AMultiShortcut.this.onShortcutCreated(intent, listener);
+                dialog.dismiss();
+            }
+        });
+
         dialog.show();
     }
 

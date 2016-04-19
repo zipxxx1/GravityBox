@@ -66,7 +66,7 @@ public class WifiTile extends BasicTile implements WifiStateChangeListener {
             @Override
             public void onClick(View v) {
                 if (!mTurningOn) {
-                    mWifiManager.toggleWifiEnabled();
+                    mWifiManager.toggleWifiEnabled(false);
                 }
             }
         };

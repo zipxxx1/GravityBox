@@ -1850,4 +1850,7 @@
     <!-- Statusbar: Hide vibrate icon -->
     <string name="pref_sb_hide_vibrate_icon_title">Hide vibrate icon</string>
 
+    <!-- Shortcut: Show toast option -->
+    <string name="shortcut_show_toast">Show status message</string>
+
 </resources>
