@@ -85,10 +85,8 @@ public class ConnectivityServiceWrapper {
                 changeBluetoothState(intent);
             } else if (intent.getAction().equals(ACTION_TOGGLE_WIFI_AP)) {
                 changeWiFiApState(intent);
-            } else if (intent.getAction().equals(ACTION_SET_LOCATION_MODE) &&
-                    intent.hasExtra(EXTRA_LOCATION_MODE)) {
-                setLocationMode(intent.getIntExtra(EXTRA_LOCATION_MODE,
-                        Settings.Secure.LOCATION_MODE_BATTERY_SAVING));
+            } else if (intent.getAction().equals(ACTION_SET_LOCATION_MODE)) {
+                setLocationMode(intent);
             } else if (intent.getAction().equals(ACTION_TOGGLE_NFC)) {
                 changeNfcState(intent);
             } else if (intent.getAction().equals(ACTION_GET_NFC_STATE)) {
@@ -164,8 +162,10 @@ public class ConnectivityServiceWrapper {
                         mTelephonyManager, "getDataEnabled");
             }
             setMobileDataEnabled(enabled);
-            Utils.postToast(mContext, enabled ? R.string.mobile_data_on :
-                R.string.mobile_data_off);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, enabled ? R.string.mobile_data_on :
+                    R.string.mobile_data_off);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -175,10 +175,12 @@ public class ConnectivityServiceWrapper {
         if (mWifiManager == null) return;
         try {
             if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
-                mWifiManager.setWifiEnabled(intent.getBooleanExtra(
-                        AShortcut.EXTRA_ENABLE, false), true);
+                mWifiManager.setWifiEnabled(
+                        intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false),
+                        intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             } else {
-                mWifiManager.toggleWifiEnabled();
+                mWifiManager.toggleWifiEnabled(
+                        intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -189,10 +191,12 @@ public class ConnectivityServiceWrapper {
         if (mWifiManager == null) return;
         try {
             if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
-                mWifiManager.setWifiApEnabled(intent.getBooleanExtra(
-                        AShortcut.EXTRA_ENABLE, false), true);
+                mWifiManager.setWifiApEnabled(
+                        intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false),
+                        intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             } else {
-                mWifiManager.toggleWifiApEnabled();
+                mWifiManager.toggleWifiApEnabled(
+                        intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -220,17 +224,32 @@ public class ConnectivityServiceWrapper {
                     labelResId = R.string.bluetooth_on;
                 }
             }
-            Utils.postToast(mContext, labelResId);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, labelResId);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    private static void setLocationMode(int mode) {
-        if (mContext == null) return;
+    private static void setLocationMode(Intent intent) {
+        if (mContext == null || !intent.hasExtra(EXTRA_LOCATION_MODE)) return;
         try {
+            int mode = intent.getIntExtra(EXTRA_LOCATION_MODE,
+                    Settings.Secure.LOCATION_MODE_BATTERY_SAVING);
             Settings.Secure.putInt(mContext.getContentResolver(),
                     Settings.Secure.LOCATION_MODE, mode);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                int msgResId =
+                        mode == Settings.Secure.LOCATION_MODE_BATTERY_SAVING ?
+                                R.string.location_mode_battery_saving :
+                        mode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY ?
+                                R.string.location_mode_high_accuracy :
+                        mode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY ?
+                                R.string.location_mode_device_only :
+                        R.string.location_mode_off;
+                Utils.postToast(mContext, msgResId);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -276,18 +295,22 @@ public class ConnectivityServiceWrapper {
                 }
             }
             XposedHelpers.callMethod(adapter, enable ? "enable" : "disable");
-            Utils.postToast(mContext, enable ? R.string.nfc_on : R.string.nfc_off);
+            if (intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false)) {
+                Utils.postToast(mContext, enable ? R.string.nfc_on : R.string.nfc_off);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    private static void setAirplaneModeEnabled(boolean enabled) {
+    private static void setAirplaneModeEnabled(boolean enabled, boolean showToast) {
         if (mConnectivityService == null) return;
         try {
             XposedHelpers.callMethod(mConnectivityService, "setAirplaneMode", enabled);
-            Utils.postToast(mContext, enabled ? R.string.airplane_mode_on :
-                R.string.airplane_mode_off);
+            if (showToast) {
+                Utils.postToast(mContext, enabled ? R.string.airplane_mode_on :
+                    R.string.airplane_mode_off);
+            }
             if (DEBUG) log("setAirplaneModeEnabled called");
         } catch (Throwable t) {
             XposedBridge.log(t);
@@ -297,13 +320,14 @@ public class ConnectivityServiceWrapper {
     private static void changeAirplaneModeState(Intent intent) {
         if (mContext == null) return;
         try {
+            boolean enable;
             if (intent.hasExtra(AShortcut.EXTRA_ENABLE)) {
-                setAirplaneModeEnabled(intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false));
+                enable = intent.getBooleanExtra(AShortcut.EXTRA_ENABLE, false);
             } else {
                 ContentResolver cr = mContext.getContentResolver();
-                final boolean enabled = Settings.Global.getInt(cr, Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
-                setAirplaneModeEnabled(!enabled);
+                enable = Settings.Global.getInt(cr, Settings.Global.AIRPLANE_MODE_ON, 0) == 0;
             }
+            setAirplaneModeEnabled(enable, intent.getBooleanExtra(AShortcut.EXTRA_SHOW_TOAST, false));
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

@@ -150,10 +150,10 @@ public class WifiManagerWrapper {
         }.execute();
     }
 
-    public void toggleWifiEnabled() {
+    public void toggleWifiEnabled(boolean showToast) {
         final boolean enable = 
                 (getWifiState() != WifiManagerWrapper.WIFI_STATE_ENABLED);
-        setWifiEnabled(enable, true);
+        setWifiEnabled(enable, showToast);
     }
 
     public boolean isWifiApEnabled() {
@@ -202,12 +202,12 @@ public class WifiManagerWrapper {
         }
     }
 
-    public void toggleWifiApEnabled() {
+    public void toggleWifiApEnabled(boolean showToast) {
         final int wifiApState = getWifiApState();
         if (wifiApState == WIFI_AP_STATE_ENABLED) {
-            setWifiApEnabled(false, true);
+            setWifiApEnabled(false, showToast);
         } else if (wifiApState == WIFI_AP_STATE_DISABLED) {
-            setWifiApEnabled(true, true);
+            setWifiApEnabled(true, showToast);
         }
     }
 }

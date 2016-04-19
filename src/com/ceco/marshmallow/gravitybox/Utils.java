@@ -585,6 +585,7 @@ public class Utils {
     }
 
     public static void postToast(final Context ctx, final int msgResId) {
+        if (msgResId == 0) return;
         try {
             final String msg = Utils.getGbContext(ctx).getString(msgResId);
             new Handler(Looper.getMainLooper()).post(new Runnable() {

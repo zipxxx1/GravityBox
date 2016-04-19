@@ -56,6 +56,11 @@ public class QuietHoursShortcut extends AMultiShortcut {
     }
 
     @Override
+    protected boolean supportsToast() {
+        return true;
+    }
+
+    @Override
     protected List<IIconListAdapterItem> getShortcutList() {
         final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShortcutItem(mContext, R.string.shortcut_quiet_hours_toggle, 
@@ -90,10 +95,7 @@ public class QuietHoursShortcut extends AMultiShortcut {
 
     public static void launchAction(final Context context, Intent intent) {
         Intent launchIntent = new Intent(ACTION);
-        if (intent.hasExtra(QuietHoursActivity.EXTRA_QH_MODE)) {
-            launchIntent.putExtra(QuietHoursActivity.EXTRA_QH_MODE,
-                    intent.getStringExtra(QuietHoursActivity.EXTRA_QH_MODE));
-        }
+        launchIntent.putExtras(intent.getExtras());
         context.sendBroadcast(launchIntent);
     }
 }
