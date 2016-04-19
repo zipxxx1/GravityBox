@@ -23,7 +23,6 @@ import com.ceco.marshmallow.gravitybox.GravityBoxService;
 import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHours;
 import com.ceco.marshmallow.gravitybox.ledcontrol.QuietHoursActivity;
-import com.ceco.marshmallow.gravitybox.shortcuts.AShortcut;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
@@ -125,7 +124,6 @@ public class StatusbarQuietHoursManager implements BroadcastSubReceiver {
             Intent intent = new Intent(gbContext, GravityBoxService.class);
             intent.setAction(QuietHoursActivity.ACTION_SET_QUIET_HOURS_MODE);
             intent.putExtra(QuietHoursActivity.EXTRA_QH_MODE, mode.toString());
-            intent.putExtra(AShortcut.EXTRA_SHOW_TOAST, false);
             gbContext.startService(intent);
         } catch (Throwable t) {
             XposedBridge.log(t);

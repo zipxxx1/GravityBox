@@ -4,7 +4,6 @@ import com.ceco.marshmallow.gravitybox.ConnectivityServiceWrapper;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.PhoneWrapper;
 import com.ceco.marshmallow.gravitybox.R;
-import com.ceco.marshmallow.gravitybox.shortcuts.AShortcut;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodHook.Unhook;
@@ -215,7 +214,6 @@ public class CellularTile extends AospTile {
 
         // toggle mobile data
         Intent intent = new Intent(ConnectivityServiceWrapper.ACTION_TOGGLE_MOBILE_DATA);
-        intent.putExtra(AShortcut.EXTRA_SHOW_TOAST, false);
         mContext.sendBroadcast(intent);
     }
 
