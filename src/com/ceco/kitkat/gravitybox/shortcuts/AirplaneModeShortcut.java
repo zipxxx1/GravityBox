@@ -55,6 +55,11 @@ public class AirplaneModeShortcut extends AMultiShortcut {
     }
 
     @Override
+    protected boolean supportsToast() {
+        return true;
+    }
+
+    @Override
     protected List<IIconListAdapterItem> getShortcutList() {
         final List<IIconListAdapterItem> list = new ArrayList<>();
         list.add(new ShortcutItem(mContext, R.string.shortcut_airplane_mode,
@@ -79,9 +84,7 @@ public class AirplaneModeShortcut extends AMultiShortcut {
 
     public static void launchAction(final Context context, Intent intent) {
         Intent launchIntent = new Intent(ACTION);
-        if (intent.hasExtra(EXTRA_ENABLE)) {
-            launchIntent.putExtra(EXTRA_ENABLE, intent.getBooleanExtra(EXTRA_ENABLE, false));
-        }
+        launchIntent.putExtras(intent.getExtras());
         context.sendBroadcast(launchIntent);
     }
 }

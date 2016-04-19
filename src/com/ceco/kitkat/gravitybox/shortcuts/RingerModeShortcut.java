@@ -59,6 +59,11 @@ public class RingerModeShortcut extends AMultiShortcut {
     }
 
     @Override
+    protected boolean supportsToast() {
+        return true;
+    }
+
+    @Override
     protected List<IIconListAdapterItem> getShortcutList() {
         final List<IIconListAdapterItem> list = new ArrayList<IIconListAdapterItem>();
         list.add(new ShortcutItem(mContext, R.string.ringer_mode_sound, 
@@ -95,9 +100,7 @@ public class RingerModeShortcut extends AMultiShortcut {
 
     public static void launchAction(final Context context, Intent intent) {
         Intent launchIntent = new Intent(ACTION);
-        launchIntent.putExtra(ModHwKeys.EXTRA_RINGER_MODE,
-                intent.getIntExtra(ModHwKeys.EXTRA_RINGER_MODE,
-                        MODE_RING_VIBRATE));
+        launchIntent.putExtras(intent.getExtras());
         context.sendBroadcast(launchIntent);
     }
 }

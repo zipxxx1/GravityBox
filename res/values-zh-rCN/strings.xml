@@ -1989,4 +1989,7 @@
     <!-- Statusbar: Hide vibrate icon -->
     <string name="pref_sb_hide_vibrate_icon_title">隐藏振动图标</string>
 
+    <!-- Shortcut: Show toast option -->
+    <string name="shortcut_show_toast">显示状态消息</string>
+
 </resources>

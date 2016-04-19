@@ -1453,7 +1453,7 @@ public class ModQuickSettings {
                             tile.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    mWifiManager.toggleWifiEnabled();
+                                    mWifiManager.toggleWifiEnabled(false);
                                     if (mHideOnChange && mStatusBar != null) {
                                         XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
                                     }

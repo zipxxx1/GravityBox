@@ -1719,4 +1719,7 @@
     <!-- Statusbar: Hide vibrate icon -->
     <string name="pref_sb_hide_vibrate_icon_title">Verstecke Vibrationssymbol</string>
 
+    <!-- Shortcut: Show toast option -->
+    <string name="shortcut_show_toast">Zeige Statusnachricht</string>
+
 </resources>
