@@ -10,22 +10,26 @@ import de.robv.android.xposed.XC_MethodHook.Unhook;
 
 public class HotspotTile extends AospTile {
     public static final String AOSP_KEY = "hotspot";
+    public static final String XPERIA_KEY = "tethering";
 
     private static final Intent TETHER_SETTINGS = new Intent().setComponent(new ComponentName(
             "com.android.settings", "com.android.settings.TetherSettings"));
 
+    private String mAospKey;
     private Unhook mLongClickHook;
 
-    protected HotspotTile(Object host, Object tile, XSharedPreferences prefs,
+    protected HotspotTile(Object host, String aospKey, Object tile, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
         super(host, "aosp_tile_hotspot", tile, prefs, eventDistributor);
+
+        mAospKey = aospKey;
 
         createHooks();
     }
 
     @Override
     public String getAospKey() {
-        return AOSP_KEY;
+        return mAospKey;
     }
 
     @Override

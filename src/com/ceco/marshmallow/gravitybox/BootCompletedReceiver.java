@@ -17,9 +17,12 @@ package com.ceco.marshmallow.gravitybox;
 
 import java.io.File;
 
+import com.ceco.marshmallow.gravitybox.quicksettings.TileOrderActivity;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
@@ -27,6 +30,9 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             prepareAssets(context);
+            if (Utils.isXperiaDevice()) {
+                maybeFixXperiaTiles(context);
+            }
         }
     }
 
@@ -43,6 +49,22 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         }
         if (f.exists()) {
             f.setExecutable(true);
+        }
+    }
+
+    // forces QS management to reinitialize tiles after system is fully booted
+    // for Xperia devices only
+    private void maybeFixXperiaTiles(Context context) {
+        try {
+            final String prefsName = context.getPackageName() + "_preferences";
+            SharedPreferences prefs = context.getSharedPreferences(prefsName, Context.MODE_WORLD_READABLE);
+            if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, false)) {
+                Intent intent = new Intent(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(TileOrderActivity.EXTRA_QS_ORDER_CHANGED, true);
+                context.sendBroadcast(intent);
+            }
+        } catch (Throwable t) {
+            t.printStackTrace();
         }
     }
 }
