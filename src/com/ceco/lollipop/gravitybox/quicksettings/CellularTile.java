@@ -23,6 +23,8 @@ public class CellularTile extends AospTile {
     public static final String AOSP_KEY = "cell";
     public static final String MSIM_KEY1 = "cell1";
     public static final String MSIM_KEY2 = "cell2";
+    public static final String XPERIA_KEY = "datatraffic";
+
     public static final String KEY = "aosp_tile_cell";
     public static final String KEY2 = "aosp_tile_cell2";
 
@@ -56,7 +58,8 @@ public class CellularTile extends AospTile {
 
     private boolean isPrimary() {
         return AOSP_KEY.equals(mAospKey) ||
-                MSIM_KEY1.equals(mAospKey);
+                MSIM_KEY1.equals(mAospKey) ||
+                XPERIA_KEY.equals(mAospKey);
     }
 
     private boolean isDataTypeIconVisible(Object state) {

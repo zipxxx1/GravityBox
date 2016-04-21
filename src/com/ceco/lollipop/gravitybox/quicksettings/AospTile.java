@@ -1,5 +1,6 @@
 package com.ceco.lollipop.gravitybox.quicksettings;
 
+import com.ceco.lollipop.gravitybox.Utils;
 import com.ceco.lollipop.gravitybox.quicksettings.QsTileEventDistributor.QsEventListener;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -27,12 +28,16 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new CellularTile(host, aospKey, CellularTile.KEY, tile, prefs, eventDistributor);
         else if (CellularTile.MSIM_KEY2.equals(aospKey))
             return new CellularTile(host, aospKey, CellularTile.KEY2, tile, prefs, eventDistributor);
+        else if (CellularTile.XPERIA_KEY.equals(aospKey) && Utils.isXperiaDevice())
+            return new CellularTile(host, aospKey, CellularTile.KEY, tile, prefs, eventDistributor);
         else if (ColorInversionTile.AOSP_KEY.equals(aospKey))
             return new ColorInversionTile(host, tile, prefs, eventDistributor);
         else if (FlashlightTile.AOSP_KEY.equals(aospKey))
             return new FlashlightTile(host, tile, prefs, eventDistributor);
         else if (HotspotTile.AOSP_KEY.equals(aospKey))
-            return new HotspotTile(host, tile, prefs, eventDistributor);
+            return new HotspotTile(host, aospKey, tile, prefs, eventDistributor);
+        else if (HotspotTile.XPERIA_KEY.equals(aospKey) && Utils.isXperiaDevice())
+            return new HotspotTile(host, aospKey, tile, prefs, eventDistributor);
         else if (LocationTile.AOSP_KEY.equals(aospKey))
             return new LocationTile(host, tile, prefs, eventDistributor);
         else if (RotationLockTile.AOSP_KEY.equals(aospKey))
