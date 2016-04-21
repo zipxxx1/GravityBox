@@ -1,3 +1,20 @@
+Changelog 5.4.1 - 21/04/2016
+--------------------------------------
+- GB Actions extended:
+--- most of the toggle actions now have explicit on/off shortcuts available
+--- provides feedback in form of toast when action gets executed ("Show status message" checkbox)
+--- makes things easier for Tasker users (hint: use AutoShortcut plugin)
+- Statusbar: added option for hiding vibrate icon 
+- Navbar: added option for auto-fade show keys policy (on screen touch/on navbar touch)
+- Ultimate notification control:
+--- Added option for suppressing notification light based on system's native Do not disturb mode
+--- ActiveScreen: don't perform for low priority notifications
+- Key actions: suppress volume key wake while music is playing
+- Fixed some xperia lock screen tweaks broken in previous version
+- QS: Xperia specific adjustments for potential support of DataTraffic tile (as Cellular tile in GB) to control its visibility and order
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+
 Changelog 5.4.0 - 06/04/2016
 --------------------------------------
 - CircleBattery: fixed refreshing issue
