@@ -1193,16 +1193,31 @@ public class ModNavigationBar {
                         }
                     }
                 }
+                // menu/ime group
+                if (mNavbarViewInfo[i].menuImeGroup != null) {
+                    childCount = mNavbarViewInfo[i].menuImeGroup.getChildCount();
+                    for (int j = 0; j < childCount; j++) {
+                        View child = mNavbarViewInfo[i].menuImeGroup.getChildAt(j);
+                        if (child.getClass().getName().equals(CLASS_KEY_BUTTON_VIEW)) {
+                            ImageView iv = (ImageView) child;
+                            if (iv.getId() != View.NO_ID &&
+                                    mNavbarViewInfo[i].originalScaleType.get(iv.getId()) == null) {
+                                mNavbarViewInfo[i].originalScaleType.put(iv.getId(),
+                                        iv.getScaleType());
+                            }
+                            iv.setScaleType(getIconScaleType(i, iv.getId()));
+                            if (!Utils.isXperiaDevice()) {
+                                iv.setPadding(
+                                     paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
+                            }
+                        }
+                    }
+                }
                 // do this explicitly for custom key
                 ImageView key = mNavbarViewInfo[i].customKey;
                 key.setScaleType(getIconScaleType(i, key.getId()));
                 if (!Utils.isXperiaDevice()) {
                     key.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
-                    // also adjust IME group padding
-                    if (mNavbarViewInfo[i].menuImeGroup != null) {
-                        mNavbarViewInfo[i].menuImeGroup.setPadding(
-                                paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
-                    }
                 }
             }
         } catch (Throwable t) {
