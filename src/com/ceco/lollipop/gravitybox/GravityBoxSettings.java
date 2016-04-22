@@ -375,6 +375,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int HWKEY_KILL_DELAY_DEFAULT = 1000;
     public static final int HWKEY_TORCH_DISABLED = 0;
     public static final int HWKEY_TORCH_HOME_LONGPRESS = 1;
+    public static final int HWKEY_TORCH_POWER_LONGPRESS = 2;
     public static final String ACTION_PREF_HWKEY_CHANGED = "gravitybox.intent.action.HWKEY_CHANGED";
     public static final String ACTION_PREF_HWKEY_DOUBLETAP_SPEED_CHANGED = "gravitybox.intent.action.HWKEY_DOUBLETAP_SPEED_CHANGED";
     public static final String ACTION_PREF_HWKEY_KILL_DELAY_CHANGED = "gravitybox.intent.action.HWKEY_KILL_DELAY_CHANGED";

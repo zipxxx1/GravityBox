@@ -41,6 +41,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -79,6 +80,8 @@ public class ModHwKeys {
 
     private static final int FLAG_WAKE = 0x00000001;
     private static final int FLAG_WAKE_DROPPED = 0x00000002;
+    private static final int MSG_POWER_LONG_PRESS = 14;
+
     public static final String ACTION_SCREENSHOT = "gravitybox.intent.action.SCREENSHOT";
     public static final String ACTION_SHOW_POWER_MENU = "gravitybox.intent.action.SHOW_POWER_MENU";
     public static final String ACTION_TOGGLE_EXPANDED_DESKTOP = 
@@ -151,6 +154,8 @@ public class ModHwKeys {
     private static Method mLaunchAssistLongPressAction = null;
     private static ActivityManager mActivityManager;
     private static AudioManager mAudioManager;
+    private static PowerManager mPowerManager;
+    private static long mPostponeWakeUpOnPowerKeyUpEventTime = 0;
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui",
@@ -860,6 +865,52 @@ public class ModHwKeys {
                     }
                 }
             });
+
+            if (Build.VERSION.SDK_INT > 21) {
+                XposedHelpers.findAndHookMethod(classPhoneWindowManager,
+                        "powerLongPress", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS &&
+                                !getPowerManager().isInteractive()) {
+                            mPostponeWakeUpOnPowerKeyUpEventTime = 0;
+                            toggleTorch();
+                            param.setResult(null);
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(classPhoneWindowManager,
+                        "wakeUpFromPowerKey", long.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS &&
+                                mPostponeWakeUpOnPowerKeyUpEventTime == 0) {
+                            Handler h = (Handler) XposedHelpers.getObjectField(
+                                    param.thisObject, "mHandler");
+                            Message msg = h.obtainMessage(MSG_POWER_LONG_PRESS);
+                            mPostponeWakeUpOnPowerKeyUpEventTime = (long)param.args[0];
+                            h.sendMessageDelayed(msg, ViewConfiguration.getLongPressTimeout());
+                            param.setResult(null);
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(classPhoneWindowManager, "interceptPowerKeyUp",
+                        KeyEvent.class, boolean.class, boolean.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mPostponeWakeUpOnPowerKeyUpEventTime > 0) {
+                            Handler h = (Handler) XposedHelpers.getObjectField(
+                                    param.thisObject, "mHandler");
+                            h.removeMessages(MSG_POWER_LONG_PRESS);
+                            XposedHelpers.callMethod(param.thisObject, "wakeUpFromPowerKey",
+                                    mPostponeWakeUpOnPowerKeyUpEventTime);
+                            mPostponeWakeUpOnPowerKeyUpEventTime = 0;
+                        }
+                    }
+                });
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -1291,8 +1342,7 @@ public class ModHwKeys {
 
     private static void goToSleep() {
         try {
-            PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-            XposedHelpers.callMethod(pm, "goToSleep", SystemClock.uptimeMillis());
+            XposedHelpers.callMethod(getPowerManager(), "goToSleep", SystemClock.uptimeMillis());
         } catch (Exception e) {
             XposedBridge.log(e);
         }
@@ -1744,6 +1794,13 @@ public class ModHwKeys {
             mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
         }
         return mAudioManager;
+    }
+
+    private static PowerManager getPowerManager() {
+        if (mPowerManager == null) {
+            mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        }
+        return mPowerManager;
     }
 
     private static boolean isTaskLocked() {
