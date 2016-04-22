@@ -667,6 +667,7 @@
     <string name="pref_hwkey_lockscreen_torch_title">Lockscreen torch</string>
     <string name="hwkey_ls_torch_disabled">Disabled</string>
     <string name="hwkey_ls_torch_home_longpress">On Home long-press</string>
+    <string name="hwkey_ls_torch_power_longpress">On Power long-press</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Toggles QuickSettings management (requires reboot)</string>

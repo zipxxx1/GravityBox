@@ -158,6 +158,8 @@ public class ModHwKeys {
     private static Method mLaunchAssistLongPressAction = null;
     private static ActivityManager mActivityManager;
     private static AudioManager mAudioManager;
+    private static PowerManager mPowerManager;
+    private static Boolean mSupportLongPressPowerWhenNonInteractiveOrig;
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui",
@@ -303,6 +305,7 @@ public class ModHwKeys {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
                     mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
                             GravityBoxSettings.HWKEY_TORCH_DISABLED);
+                    adjustLongPressPowerWhenNonInteractive();
                     if (DEBUG) log("Lockscreen torch set to: " + mLockscreenTorch);
                 }
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_PIE_CHANGED)) {
@@ -862,6 +865,20 @@ public class ModHwKeys {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager,
+                    "powerLongPress", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS &&
+                            getPowerManager().isInteractive() &&
+                            XposedHelpers.getBooleanField(mPhoneWindowManager,
+                                    "mBeganFromNonInteractive")) {
+                        toggleTorch(true);
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -886,6 +903,7 @@ public class ModHwKeys {
             mVkVibePatternDefault = (long[]) XposedHelpers.getObjectField(
                     mPhoneWindowManager, "mVirtualKeyVibePattern");
             setVirtualKeyVibePattern(mPrefs.getString(GravityBoxSettings.PREF_KEY_VK_VIBRATE_PATTERN, null));
+            adjustLongPressPowerWhenNonInteractive();
 
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_CHANGED);
@@ -1304,8 +1322,7 @@ public class ModHwKeys {
 
     private static void goToSleep() {
         try {
-            PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-            XposedHelpers.callMethod(pm, "goToSleep", SystemClock.uptimeMillis());
+            XposedHelpers.callMethod(getPowerManager(), "goToSleep", SystemClock.uptimeMillis());
         } catch (Exception e) {
             XposedBridge.log(e);
         }
@@ -1448,9 +1465,14 @@ public class ModHwKeys {
     }
 
     private static void toggleTorch() {
+        toggleTorch(false);
+    }
+
+    private static void toggleTorch(boolean goToSleep) {
         try {
             Intent intent = new Intent(mGbContext, TorchService.class);
             intent.setAction(TorchService.ACTION_TOGGLE_TORCH);
+            intent.putExtra(TorchService.EXTRA_GO_TO_SLEEP, goToSleep);
             mGbContext.startService(intent);
         } catch (Throwable t) {
             log("Error toggling Torch: " + t.getMessage());
@@ -1787,8 +1809,31 @@ public class ModHwKeys {
         return mAudioManager;
     }
 
+    private static PowerManager getPowerManager() {
+        if (mPowerManager == null) {
+            mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        }
+        return mPowerManager;
+    }
+
     private static boolean isTaskLocked() {
         return getActivityManager().getLockTaskModeState() !=
                 ActivityManager.LOCK_TASK_MODE_NONE;
+    }
+
+    private static void adjustLongPressPowerWhenNonInteractive() {
+        try {
+            if (mSupportLongPressPowerWhenNonInteractiveOrig == null) {
+                mSupportLongPressPowerWhenNonInteractiveOrig =
+                        XposedHelpers.getBooleanField(mPhoneWindowManager,
+                                "mSupportLongPressPowerWhenNonInteractive");
+            }
+            XposedHelpers.setBooleanField(mPhoneWindowManager,
+                    "mSupportLongPressPowerWhenNonInteractive",
+                    mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS ?
+                            true : mSupportLongPressPowerWhenNonInteractiveOrig);
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 }

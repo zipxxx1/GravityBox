@@ -648,11 +648,13 @@
     <string-array name="hwkey_ls_torch_entries" translatable="false">
         <item>@string/hwkey_ls_torch_disabled</item>
         <item>@string/hwkey_ls_torch_home_longpress</item>
+        <item>@string/hwkey_ls_torch_power_longpress</item>
     </string-array>
 
     <string-array name="hwkey_ls_torch_values" translatable="false">
         <item>0</item>
         <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="volume_panel_timeout_entries" translatable="false">

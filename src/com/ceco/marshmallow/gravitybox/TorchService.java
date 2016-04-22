@@ -41,6 +41,7 @@ public class TorchService extends Service {
     public static final String ACTION_TORCH_STATUS_CHANGED = "gravitybox.intent.action.TORCH_STATUS_CHANGED";
     public static final String ACTION_TORCH_GET_STATUS = "gravitybox.intent.action.TORCH_GET_STATUS";
     public static final String EXTRA_TORCH_STATUS = "torchStatus";
+    public static final String EXTRA_GO_TO_SLEEP = "goToSleep";
     public static final int TORCH_STATUS_OFF = 0;
     public static final int TORCH_STATUS_ON = 1;
     public static final int TORCH_STATUS_ERROR = -1;
@@ -85,7 +86,7 @@ public class TorchService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && intent.getAction() != null) {
             if (ACTION_TOGGLE_TORCH.equals(intent.getAction())) {
-                toggleTorch();
+                toggleTorch(intent.getBooleanExtra(EXTRA_GO_TO_SLEEP, false));
                 return START_REDELIVER_INTENT;
             }
             if (ACTION_TORCH_GET_STATUS.equals(intent.getAction())) {
@@ -101,11 +102,15 @@ public class TorchService extends Service {
         return START_NOT_STICKY;
     }
 
-    private synchronized void toggleTorch() {
+    private synchronized void toggleTorch(boolean goToSleep) {
         if (mTorchStatus != TORCH_STATUS_ON) {
             setTorchOn();
         } else {
             setTorchOff();
+        }
+        if (goToSleep) {
+            Intent intent = new Intent(ModHwKeys.ACTION_SLEEP);
+            sendBroadcast(intent);
         }
     }
 
