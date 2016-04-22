@@ -1109,7 +1109,7 @@ public class ModNavigationBar {
                     }
                 }
                 // menu/ime group
-                if (mNavbarViewInfo[i].menuImeGroup != null && mUseLargerIcons) {
+                if (mNavbarViewInfo[i].menuImeGroup != null) {
                     childCount = mNavbarViewInfo[i].menuImeGroup.getChildCount();
                     for (int j = 0; j < childCount; j++) {
                         View child = mNavbarViewInfo[i].menuImeGroup.getChildAt(j);
@@ -1121,6 +1121,10 @@ public class ModNavigationBar {
                                         iv.getScaleType());
                             }
                             iv.setScaleType(getIconScaleType(i, iv.getId()));
+                            if (!Utils.isXperiaDevice()) {
+                                iv.setPadding(
+                                     paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
+                            }
                         }
                     }
                 }
@@ -1129,11 +1133,6 @@ public class ModNavigationBar {
                 key.setScaleType(getIconScaleType(i, key.getId()));
                 if (!Utils.isXperiaDevice()) {
                     key.setPadding(paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
-                    // also adjust IME group padding
-                    if (mNavbarViewInfo[i].menuImeGroup != null) {
-                        mNavbarViewInfo[i].menuImeGroup.setPadding(
-                                paddingPx[0], paddingPx[1], paddingPx[2], paddingPx[3]);
-                    }
                 }
             }
         } catch (Throwable t) {
