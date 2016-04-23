@@ -1,3 +1,15 @@
+Changelog 6.1.1 - 23/04/2016
+--------------------------------------
+- Key actions: locskcreen torch extended to support power long-press (when screen is off)
+--- screen turning on is by design, will turn off immediately after torch is activated/deactivated
+--- respects proximity wake-up feature
+- GravityBox Actions: made toasts optional (use check box available when creating a shortcut)
+- Navbar: fixed menu key responsiveness for low navbar sizes
+- QuickSettings: some Xperia specific adjustments:
+--- makes GB recognize DataTraffic and Tethering tiles so it can control their visibility and order
+--- forces reinitialization of tiles after device is fully booted
+- Updated Ukrainian translations (thanks to burunduk)
+
 Changelog 6.1.0 - 17/04/2016
 --------------------------------------
 - GB Actions extended:
