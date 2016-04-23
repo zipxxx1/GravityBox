@@ -640,7 +640,8 @@
     <!-- Lockscreen Torch -->
     <string name="pref_hwkey_lockscreen_torch_title">Ovládanie LED svetla na obrazovke uzamknutia</string>
     <string name="hwkey_ls_torch_disabled">Vypnuté</string>
-    <string name="hwkey_ls_torch_home_longpress">Na dlhé podržanie Domov</string>
+    <string name="hwkey_ls_torch_home_longpress">Na dlhé podržanie tlačidla Domov</string>
+    <string name="hwkey_ls_torch_power_longpress">Na dlhé podržanie tlačidla napájania</string>
 
     <!-- QuickSettings management master switch -->
     <string name="pref_qs_management_enable_summary">Hlavný prepínač pre rýchle nastavenia (vyžaduje reštart)</string>
@@ -1911,5 +1912,8 @@
 
     <!-- Statusbar: Hide vibrate icon -->
     <string name="pref_sb_hide_vibrate_icon_title">Skryť ikonu režimu vibrácie</string>
+
+    <!-- Shortcut: Show toast option -->
+    <string name="shortcut_show_toast">Zobraziť správu o stave</string>
 
 </resources>
