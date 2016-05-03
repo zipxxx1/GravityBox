@@ -1926,6 +1926,9 @@
     <!-- Navbar: Auto-fade keys -->
     <string name="pref_navbar_autofade_keys_title">自动渐变按键</string>
     <string name="pref_navbar_autofade_keys_summary">自动渐变按键超时,设置为0禁用</string>
+    <string name="pref_navbar_autofade_show_keys_title">开启显示按键</string>
+    <string name="autofade_show_keys_navbar">触摸虚拟按键</string>
+    <string name="autofade_show_keys_screen">触摸屏幕</string>
 
     <!-- QS: StayAwake tile Auto-reset -->
     <string name="pref_sa_tile_auto_reset_title">自动复位</string>
@@ -1934,5 +1937,67 @@
     <!-- Lockscreen: PIN scramble -->
     <string name="pref_lockscreen_pin_sramble_title">打乱PIN码</string>
     <string name="pref_lockscreen_pin_sramble_summary">解锁设备时打乱PIN码</string>
+	
+    <!-- UNC: LED DND -->
+    <string name="pref_lc_led_dnd_title">请勿打扰</string>
+    <string name="pref_lc_led_dnd_summary">禁止对LED选择请勿打扰模式</string>
+    <string name="pref_lc_led_dnd_dialog_title">选择不打扰模式以保持LED熄灭</string>
+    <string name="dnd_priority_interruptions">优先级中断</string>
+    <string name="dnd_no_interruptions">无中断</string>
+
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">打开WiFi</string>
+    <string name="wifi_off">关闭WiFi</string>
+
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">打开飞行模式</string>
+    <string name="airplane_mode_off">关闭飞行模式</string>
+
+    <!-- Autobrightness mode shortcut -->
+    <string name="autobrightness_on">打开自动亮度</string>
+    <string name="autobrightness_off">关闭自动亮度</string>
+
+    <!-- Bluetooth shortcut -->
+    <string name="bluetooth_on">打开蓝牙</string>
+    <string name="bluetooth_off">关闭蓝牙</string>
+
+    <!-- Expanded desktop shortcut -->
+    <string name="expanded_desktop_on">打开扩展桌面</string>
+    <string name="expanded_desktop_off">关闭扩展桌面</string>
+
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">打开移动数据</string>
+    <string name="mobile_data_off">关闭移动数据</string>
+
+    <!-- NGC shortcut -->
+    <string name="nfc_on">打开NFC</string>
+    <string name="nfc_off">关闭NFC</string>
+
+    <!-- Quiet hours shortcut -->
+    <string name="quiet_hours_on">打开静音时段</string>
+    <string name="quiet_hours_off">关闭静音时段</string>
+    <string name="quiet_hours_auto">自动静音时段</string>
+
+    <!-- Auto rotation shortcut -->
+    <string name="auto_rotation_on">打开自动旋转</string>
+    <string name="auto_rotation_off">关闭自动旋转</string>
+
+    <!-- Smart radio shortcut -->
+    <string name="smart_radio_on">打开智能网络</string>
+    <string name="smart_radio_off">关闭智能网络</string>
+
+    <!-- Sync shortcut -->
+    <string name="sync_on">打开同步</string>
+    <string name="sync_off">关闭同步</string>
+
+    <!-- Hotspot shortcut -->
+    <string name="hotspot_on">打开热点</string>
+    <string name="hotspot_off">关闭热点</string>
+
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">隐藏振动图标</string>
+
+    <!-- Shortcut: Show toast option -->
+    <string name="shortcut_show_toast">显示状态消息</string>
 	
 </resources>
