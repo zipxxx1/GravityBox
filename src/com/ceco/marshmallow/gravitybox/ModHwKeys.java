@@ -160,6 +160,7 @@ public class ModHwKeys {
     private static AudioManager mAudioManager;
     private static PowerManager mPowerManager;
     private static Boolean mSupportLongPressPowerWhenNonInteractiveOrig;
+    private static long mPostponeWakeUpOnPowerKeyUpEventTime = 0;
 
     private static List<String> mKillIgnoreList = new ArrayList<String>(Arrays.asList(
             "com.android.systemui",
@@ -871,11 +872,34 @@ public class ModHwKeys {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS &&
-                            getPowerManager().isInteractive() &&
-                            XposedHelpers.getBooleanField(mPhoneWindowManager,
-                                    "mBeganFromNonInteractive")) {
+                            !getPowerManager().isInteractive()) {
+                        mPostponeWakeUpOnPowerKeyUpEventTime = 0;
                         toggleTorch(true);
                         param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager,
+                    "wakeUpFromPowerKey", long.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mLockscreenTorch == GravityBoxSettings.HWKEY_TORCH_POWER_LONGPRESS &&
+                            mPostponeWakeUpOnPowerKeyUpEventTime == 0) {
+                        mPostponeWakeUpOnPowerKeyUpEventTime = (long)param.args[0];
+                        param.setResult(null);
+                    }
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(classPhoneWindowManager, "interceptPowerKeyUp",
+                    KeyEvent.class, boolean.class, boolean.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mPostponeWakeUpOnPowerKeyUpEventTime > 0) {
+                        XposedHelpers.callMethod(param.thisObject, "wakeUpFromPowerKey",
+                                mPostponeWakeUpOnPowerKeyUpEventTime);
+                        mPostponeWakeUpOnPowerKeyUpEventTime = 0;
                     }
                 }
             });
