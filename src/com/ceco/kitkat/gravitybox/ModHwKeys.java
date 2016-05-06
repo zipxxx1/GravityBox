@@ -1519,7 +1519,9 @@ public class ModHwKeys {
     }
 
     private static void toggleAutoRotation() {
-        changeAutoRotationState(new Intent());
+        Intent intent = new Intent();
+        intent.putExtra(AShortcut.EXTRA_SHOW_TOAST, true);
+        changeAutoRotationState(intent);
     }
 
     private static void changeAutoRotationState(Intent intent) {
