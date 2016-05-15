@@ -90,7 +90,9 @@ public class ModVolumeKeySkipTrack {
                 } else {
                     handleVolumeLongPressAbort(param.thisObject);
                     if (!mIsLongPress) {
-                        ModHwKeys.injectKey(keyCode);
+                        mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+                                keyCode == KeyEvent.KEYCODE_VOLUME_UP ?
+                                AudioManager.ADJUST_RAISE : AudioManager.ADJUST_LOWER, 0);
                     }
                 }
                 param.setResult(0);
