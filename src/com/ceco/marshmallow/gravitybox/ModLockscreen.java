@@ -25,6 +25,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -430,8 +431,15 @@ public class ModLockscreen {
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
                     ViewGroup kgStatusView = (ViewGroup) XposedHelpers.getObjectField(
                             param.thisObject, "mKeyguardStatusView");
-                    int containerId = kgStatusView.getResources().getIdentifier("keyguard_clock_container",
+                    Resources res = kgStatusView.getResources();
+                    // try mtk container first
+                    int containerId = res.getIdentifier("mtk_keyguard_clock_container",
                             "id", PACKAGE_NAME);
+                    if (containerId == 0) {
+                        // fallback to AOSP container
+                        containerId = res.getIdentifier("keyguard_clock_container",
+                                "id", PACKAGE_NAME);
+                    }
                     if (containerId != 0) {
                         ViewGroup container = (ViewGroup) kgStatusView.findViewById(containerId);
                         if (container != null) {
