@@ -59,19 +59,21 @@ public class StatusbarBattery implements IconManagerListener {
     }
 
     private void createHooks() {
-        try {
-            XposedHelpers.findAndHookMethod(mBattery.getClass(), "getFillColor",
-                    float.class, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    if (SysUiManagers.IconManager != null &&
-                            SysUiManagers.IconManager.isColoringEnabled()) {
-                        param.setResult(SysUiManagers.IconManager.getIconColor());
+        if (!Utils.isXperiaDevice()) {
+            try {
+                XposedHelpers.findAndHookMethod(mBattery.getClass(), "getFillColor",
+                        float.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (SysUiManagers.IconManager != null &&
+                                SysUiManagers.IconManager.isColoringEnabled()) {
+                            param.setResult(SysUiManagers.IconManager.getIconColor());
+                        }
                     }
-                }
-            });
-        } catch (Throwable t) {
-            XposedBridge.log(t);
+                });
+            } catch (Throwable t) {
+                XposedBridge.log(t);
+            }
         }
     }
 
