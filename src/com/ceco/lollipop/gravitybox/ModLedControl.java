@@ -607,8 +607,9 @@ public class ModLedControl {
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
         try {
-            XposedHelpers.findAndHookMethod(CLASS_NOTIF_DATA, classLoader, "shouldFilterOut",
-                    StatusBarNotification.class, new XC_MethodHook() {
+            XposedBridge.hookAllMethods(
+                    XposedHelpers.findClass(CLASS_NOTIF_DATA, classLoader),
+                    "shouldFilterOut", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     StatusBarNotification sbn = (StatusBarNotification)param.args[0];
