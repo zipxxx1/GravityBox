@@ -38,7 +38,7 @@
     <string name="poweroff_recovery">Recovery</string>    
     <string name="poweroff_bootloader">Bootloader</string>
 
-    <string name="vol_key_cursor_control_title">Tombol volume mengontol kursor</string>
+    <string name="vol_key_cursor_control_title">Tombol volume mengontrol kursor</string>
     <string name="vol_key_cursor_control_summary">Kontrol kursor menggunakan tombol volume saat mengetik</string>
     <string name="vol_key_cursor_control_off">Dimatikan</string>
     <string name="vol_key_cursor_control_on">Volume atas/bawah menggerakkan kursor ke kiri/kanan</string>
