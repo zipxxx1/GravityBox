@@ -35,8 +35,10 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ImageView.ScaleType;
 
 import com.ceco.marshmallow.gravitybox.R;
@@ -652,10 +654,6 @@ public class ModNavigationBar {
     private static void prepareNavbarViewInfo(ViewGroup navButtons, int index, 
             KeyButtonView appView, KeyButtonView dpadLeft, KeyButtonView dpadRight) {
         try {
-            final int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    40, navButtons.getResources().getDisplayMetrics());
-            if (DEBUG) log("App key view minimum size=" + size);
-
             mNavbarViewInfo[index] = new NavbarViewInfo();
             mNavbarViewInfo[index].navButtons = navButtons;
             mNavbarViewInfo[index].customKey = appView;
@@ -689,46 +687,24 @@ public class ModNavigationBar {
                 }
             }
 
-            // determine app key layout
-            LinearLayout.LayoutParams lp = null;
-            if (mNavbarViewInfo[index].originalView != null) {
-                // determine layout from layout of placeholder view we found
-                ViewGroup.LayoutParams ovlp = mNavbarViewInfo[index].originalView.getLayoutParams();
-                if (DEBUG) log("originalView: lpWidth=" + ovlp.width + "; lpHeight=" + ovlp.height);
-                if (ovlp instanceof LinearLayout.LayoutParams) {
-                    lp = (LinearLayout.LayoutParams) ovlp;
-                } else if (ovlp.width >= 0) {
-                    lp = new LinearLayout.LayoutParams(ovlp.width, LinearLayout.LayoutParams.MATCH_PARENT, 0);
-                } else if (ovlp.height >= 0) {
-                    lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ovlp.height, 0);
-                } else {
-                    log("Weird layout of placeholder view detected");
-                }
-            } else {
-                // determine layout from Back key
-                final int resId = navButtons.getResources().getIdentifier("back", "id", PACKAGE_NAME);
-                if (resId != 0) {
-                    View back = navButtons.findViewById(resId);
-                    if (back != null) {
-                        ViewGroup.LayoutParams blp = back.getLayoutParams();
-                        if (blp.width >= 0) {
-                            lp = new LinearLayout.LayoutParams(blp.width, LinearLayout.LayoutParams.MATCH_PARENT, 0);
-                        } else if (blp.height >= 0) {
-                            lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, blp.height, 0);
-                        } else {
-                            log("Weird layout of back button view detected");
-                        }
-                    } else {
-                        log("Could not find back button view");
-                    }
-                } else {
-                    log("Could not find back button resource ID");
-                }
-            }
-            // worst case scenario (should never happen, but just to make sure)
-            if (lp == null) {
-                lp = new LinearLayout.LayoutParams(size, size, 0);
-            }
+            // determine custom key layout
+            boolean hasVerticalNavbar = mGbContext.getResources().getBoolean(R.bool.hasVerticalNavbar);
+            final int sizeResId = navButtons.getResources().getIdentifier(hasVerticalNavbar ?
+                    "navigation_side_padding" : "navigation_extra_key_width", "dimen", PACKAGE_NAME);
+            final int size = sizeResId == 0 ? 
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                    50, navButtons.getResources().getDisplayMetrics()) :
+                        navButtons.getResources().getDimensionPixelSize(sizeResId);
+            if (DEBUG) log("App key view minimum size=" + size);
+            ViewGroup.LayoutParams lp;
+            int w = (index == 1 && hasVerticalNavbar) ? ViewGroup.LayoutParams.MATCH_PARENT : size;
+            int h = (index == 1 && hasVerticalNavbar) ? size : ViewGroup.LayoutParams.MATCH_PARENT;
+            if (navButtons instanceof RelativeLayout)
+                lp = new RelativeLayout.LayoutParams(w, h);
+            else if (navButtons instanceof FrameLayout)
+                lp = new FrameLayout.LayoutParams(w, h);
+            else
+                lp = new LinearLayout.LayoutParams(w, h, 0);
             if (DEBUG) log("appView: lpWidth=" + lp.width + "; lpHeight=" + lp.height);
             mNavbarViewInfo[index].customKey.setLayoutParams(lp);
             mNavbarViewInfo[index].dpadLeft.setLayoutParams(lp);
