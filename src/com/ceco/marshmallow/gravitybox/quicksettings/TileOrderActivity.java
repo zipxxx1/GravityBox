@@ -258,6 +258,11 @@ public class TileOrderActivity extends ListActivity implements View.OnClickListe
         if (key.equals("gb_tile_smart_radio") && !mPrefs.getBoolean(
                 GravityBoxSettings.PREF_KEY_SMART_RADIO_ENABLE, false))
             return false;
+        if ((key.startsWith("xperia_tile") && !Utils.isXperiaDevice()) ||
+               key.equals("xperia_tile_stamina"))
+            return false;
+        if (key.equals("aosp_tile_hotspot") && Utils.isXperiaDevice())
+            return false;
 
         return true;
     }

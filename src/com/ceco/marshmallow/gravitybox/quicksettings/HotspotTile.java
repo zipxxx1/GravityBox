@@ -10,7 +10,6 @@ import de.robv.android.xposed.XC_MethodHook.Unhook;
 
 public class HotspotTile extends AospTile {
     public static final String AOSP_KEY = "hotspot";
-    public static final String XPERIA_KEY = "tethering";
 
     private static final Intent TETHER_SETTINGS = new Intent().setComponent(new ComponentName(
             "com.android.settings", "com.android.settings.TetherSettings"));

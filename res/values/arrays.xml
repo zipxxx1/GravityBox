@@ -133,6 +133,17 @@
         <item>@string/qs_tile_audio_profile</item>
         <item>@string/qs_tile_hotknot</item>
         <item>@string/qs_tile_timeout</item>
+        <!-- Xperia -->
+        <item>@string/qs_tile_xperia_sync</item>
+        <item>@string/qs_tile_xperia_roaming</item>
+        <item>@string/qs_tile_xperia_nfc</item>
+        <item>@string/qs_tile_xperia_lte</item>
+        <item>@string/qs_tile_xperia_datatraffic</item>
+        <item>@string/qs_tile_xperia_screenmirroring</item>
+        <item>@string/qs_tile_xperia_throw</item>
+        <item>@string/qs_tile_xperia_volte</item>
+        <item>@string/qs_tile_xperia_tethering</item>
+        <item>@string/qs_tile_xperia_detectusbdevice</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
@@ -178,6 +189,17 @@
         <item>mtk_tile_audio_profile</item>
         <item>mtk_tile_hotknot</item>
         <item>mtk_tile_timeout</item>
+        <!-- Xperia -->
+        <item>xperia_tile_sync</item>
+        <item>xperia_tile_roaming</item>
+        <item>xperia_tile_nfc</item>
+        <item>xperia_tile_lte</item>
+        <item>xperia_tile_datatraffic</item>
+        <item>xperia_tile_screenmirroring</item>
+        <item>xperia_tile_throw</item>
+        <item>xperia_tile_volte</item>
+        <item>xperia_tile_tethering</item>
+        <item>xperia_tile_detectusbdevice</item>
     </string-array>
 
     <string-array name="qs_tile_default_values" translatable="false">

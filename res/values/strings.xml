@@ -1974,4 +1974,16 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Show status message</string>
 
+    <!-- Xperia tiles -->
+    <string name="qs_tile_xperia_sync">Xperia Auto-sync data</string>
+    <string name="qs_tile_xperia_roaming">Xperia Data roaming</string>
+    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
+    <string name="qs_tile_xperia_lte">Xperia LTE</string>
+    <string name="qs_tile_xperia_datatraffic">Xperia Mobile data</string>
+    <string name="qs_tile_xperia_screenmirroring">Xperia Screen mirroring</string>
+    <string name="qs_tile_xperia_throw">Xperia Throw</string>
+    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
+    <string name="qs_tile_xperia_tethering">Xperia Tethering</string>
+    <string name="qs_tile_xperia_detectusbdevice">Xperia Detect USB device</string>
+
 </resources>

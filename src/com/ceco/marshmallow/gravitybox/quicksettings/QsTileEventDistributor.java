@@ -10,6 +10,7 @@ import com.ceco.marshmallow.gravitybox.BroadcastSubReceiver;
 import com.ceco.marshmallow.gravitybox.GravityBoxSettings;
 import com.ceco.marshmallow.gravitybox.ModQsTiles;
 import com.ceco.marshmallow.gravitybox.PhoneWrapper;
+import com.ceco.marshmallow.gravitybox.Utils;
 import com.ceco.marshmallow.gravitybox.managers.KeyguardStateMonitor;
 import com.ceco.marshmallow.gravitybox.managers.SysUiManagers;
 
@@ -120,7 +121,13 @@ public class QsTileEventDistributor implements KeyguardStateMonitor.Listener {
     private void recreateTiles() {
         try {
             mPrefs.reload();
-            XposedHelpers.callMethod(mHost, "onTuningChanged", ModQsTiles.TILES_SETTING, (String)null);
+            if (Utils.isXperiaDevice()) {
+                XposedHelpers.setObjectField(mHost, "mQuickSettingsTilesDefault", "");
+                XposedHelpers.callMethod(mHost, "onConfigurationChanged");
+            } else {
+                XposedHelpers.callMethod(mHost, "onTuningChanged",
+                        ModQsTiles.TILES_SETTING, (String)null);
+            }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }

@@ -31,6 +31,7 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
 
     public static AospTile create(Object host, Object tile, String aospKey, XSharedPreferences prefs,
             QsTileEventDistributor eventDistributor) throws Throwable {
+        // AOSP
         if (AirplaneModeTile.AOSP_KEY.equals(aospKey))
             return new AirplaneModeTile(host, tile, prefs, eventDistributor);
         else if (BluetoothTile.AOSP_KEY.equals(aospKey))
@@ -43,15 +44,11 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new CellularTile(host, aospKey, CellularTile.KEY, tile, prefs, eventDistributor);
         else if (CellularTile.MSIM_KEY2.equals(aospKey))
             return new CellularTile(host, aospKey, CellularTile.KEY2, tile, prefs, eventDistributor);
-        else if (CellularTile.XPERIA_KEY.equals(aospKey) && Utils.isXperiaDevice())
-            return new CellularTile(host, aospKey, CellularTile.KEY, tile, prefs, eventDistributor);
         else if (ColorInversionTile.AOSP_KEY.equals(aospKey))
             return new ColorInversionTile(host, tile, prefs, eventDistributor);
         else if (FlashlightTile.AOSP_KEY.equals(aospKey))
             return new FlashlightTile(host, tile, prefs, eventDistributor);
         else if (HotspotTile.AOSP_KEY.equals(aospKey))
-            return new HotspotTile(host, aospKey, tile, prefs, eventDistributor);
-        else if (HotspotTile.XPERIA_KEY.equals(aospKey) && Utils.isXperiaDevice())
             return new HotspotTile(host, aospKey, tile, prefs, eventDistributor);
         else if (LocationTile.AOSP_KEY.equals(aospKey))
             return new LocationTile(host, tile, prefs, eventDistributor);
@@ -61,6 +58,8 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new WifiTile(host, tile, prefs, eventDistributor);
         else if (DoNotDisturbTile.AOSP_KEY.equals(aospKey))
             return new DoNotDisturbTile(host, tile, prefs, eventDistributor);
+
+        // MediaTek
         else if (MtkAudioProfileTile.AOSP_KEY.equals(aospKey))
             return new MtkAudioProfileTile(host, tile, prefs, eventDistributor);
         else if (MtkMobileDataTile.AOSP_KEY.equals(aospKey))
@@ -69,6 +68,12 @@ public abstract class AospTile extends BaseTile implements QsEventListener {
             return new MtkHotKnotTile(host, tile, prefs, eventDistributor);
         else if (MtkTimeoutTile.AOSP_KEY.equals(aospKey))
             return new MtkTimeoutTile(host, tile, prefs, eventDistributor);
+
+        // Xperia
+        if (Utils.isXperiaDevice() &&
+            XperiaTile.XPERIA_KEYS.contains(aospKey)) {
+            return new XperiaTile(host, aospKey, tile, prefs, eventDistributor);
+        }
 
         return null;
     }

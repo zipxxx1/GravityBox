@@ -28,7 +28,9 @@ public class ModQsTiles {
     public static final String TAG = "GB:ModQsTile";
     public static final boolean DEBUG = false;
 
-    public static final String CLASS_TILE_HOST = "com.android.systemui.statusbar.phone.QSTileHost";
+    public static final String CLASS_TILE_HOST = Utils.isXperiaDevice() ?
+            "com.sonymobile.systemui.qs.SomcQSTileHost" :
+            "com.android.systemui.statusbar.phone.QSTileHost";
     public static final String TILES_SETTING = "sysui_qs_tiles";
 
     public static final List<String> GB_TILE_KEYS = new ArrayList<String>(Arrays.asList(
@@ -76,6 +78,10 @@ public class ModQsTiles {
         RES_IDS.NM_TITLE = resparam.res.addResource(modRes, R.string.qs_tile_network_mode);
         RES_IDS.RM_TITLE = resparam.res.addResource(modRes, R.string.qs_tile_ringer_mode);
         RES_IDS.SA_TITLE = resparam.res.addResource(modRes, R.string.qs_tile_stay_awake);
+
+        if (Utils.isXperiaDevice()) {
+            resparam.res.setReplacement(PACKAGE_NAME, "integer", "config_maxToolItems", 60);
+        }
     }
 
     public static void init(final XSharedPreferences prefs, final ClassLoader classLoader) {
