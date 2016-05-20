@@ -24,6 +24,7 @@ import static de.robv.android.xposed.XposedHelpers.setAdditionalInstanceField;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Binder;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.SystemClock;
@@ -42,6 +43,7 @@ public class ModVolumeKeySkipTrack {
     private static boolean allowSkipTrack;
     private static AudioManager mAudioManager;
     private static PowerManager mPowerManager;
+    private static boolean mShoudTriggerWakeUp;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -90,9 +92,13 @@ public class ModVolumeKeySkipTrack {
                 } else {
                     handleVolumeLongPressAbort(param.thisObject);
                     if (!mIsLongPress) {
-                        mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+                        if (mShoudTriggerWakeUp) {
+                            wakeUp();
+                        } else {
+                            mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
                                 keyCode == KeyEvent.KEYCODE_VOLUME_UP ?
                                 AudioManager.ADJUST_RAISE : AudioManager.ADJUST_LOWER, 0);
+                        }
                     }
                 }
                 param.setResult(0);
@@ -187,6 +193,19 @@ public class ModVolumeKeySkipTrack {
     private static void updatePreference(final XSharedPreferences prefs) {
         prefs.reload();
         allowSkipTrack = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_MUSIC_CONTROLS, false);
-        if (DEBUG) log("allowSkipTrack = " + allowSkipTrack);
+        mShoudTriggerWakeUp = "enabled".equals(
+                prefs.getString(GravityBoxSettings.PREF_KEY_VOLUME_ROCKER_WAKE, "default")) &&
+                prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOLUME_ROCKER_WAKE_ALLOW_MUSIC, false);
+        if (DEBUG) log("allowSkipTrack = " + allowSkipTrack + "; " +
+                "mShoudTriggerWakeUp=" + mShoudTriggerWakeUp);
+    }
+
+    private static void wakeUp() {
+        long ident = Binder.clearCallingIdentity();
+        try {
+            XposedHelpers.callMethod(mPowerManager, "wakeUp", SystemClock.uptimeMillis());
+        } finally {
+            Binder.restoreCallingIdentity(ident);
+        }
     }
 }

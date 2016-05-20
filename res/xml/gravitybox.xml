@@ -2220,6 +2220,11 @@
                 android:entryValues="@array/volume_rocker_wake_values"
                 android:defaultValue="default" />
 
+            <CheckBoxPreference
+                android:key="pref_volume_rocker_wake_allow_music"
+                android:title="@string/pref_volume_rocker_wake_allow_music_title"
+                android:defaultValue="false" />
+
         </PreferenceCategory>
 
         <PreferenceCategory

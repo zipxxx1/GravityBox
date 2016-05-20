@@ -137,6 +137,7 @@ public class ModHwKeys {
     private static int mDoubletapSpeed = GravityBoxSettings.HWKEY_DOUBLETAP_SPEED_DEFAULT;
     private static int mKillDelay = GravityBoxSettings.HWKEY_KILL_DELAY_DEFAULT;
     private static String mVolumeRockerWake = "default";
+    private static boolean mVolumeRockerWakeAllowMusic;
     private static boolean mHwKeysEnabled = true;
     private static XSharedPreferences mPrefs;
     private static int mPieMode;
@@ -295,8 +296,15 @@ public class ModHwKeys {
                 mKillDelay = value;
                 if (DEBUG) log("Kill delay set to: " + value);
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED)) {
-                mVolumeRockerWake = intent.getStringExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE);
-                if (DEBUG) log("mVolumeRockerWake set to: " + mVolumeRockerWake);
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE)) {
+                    mVolumeRockerWake = intent.getStringExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE);
+                    if (DEBUG) log("mVolumeRockerWake set to: " + mVolumeRockerWake);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC)) {
+                    mVolumeRockerWakeAllowMusic = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC, false);
+                    if (DEBUG) log("mVolumeRockerWakeAllowMusic set to: " + mVolumeRockerWakeAllowMusic);
+                }
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
                     mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
@@ -481,6 +489,8 @@ public class ModHwKeys {
             mHomeDoubletapDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_HWKEY_HOME_DOUBLETAP_DISABLE, false);
             mVolumeRockerWake = prefs.getString(GravityBoxSettings.PREF_KEY_VOLUME_ROCKER_WAKE, "default");
+            mVolumeRockerWakeAllowMusic = prefs.getBoolean(
+                    GravityBoxSettings.PREF_KEY_VOLUME_ROCKER_WAKE_ALLOW_MUSIC, false);
             mHwKeysEnabled = !prefs.getBoolean(GravityBoxSettings.PREF_KEY_HWKEYS_DISABLE, false);
 
             mPieMode = ModPieControls.PIE_DISABLED;
@@ -532,10 +542,10 @@ public class ModHwKeys {
 
                     if (!mVolumeRockerWake.equals("default") && 
                             (keyCode == KeyEvent.KEYCODE_VOLUME_UP ||
-                                    keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) &&
-                            !getAudioManager().isMusicActive()) {
+                                    keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)) {
                         int policyFlags = (Integer) param.args[1];
-                        if (mVolumeRockerWake.equals("enabled")) {
+                        if (mVolumeRockerWake.equals("enabled") &&
+                            (!getAudioManager().isMusicActive() || mVolumeRockerWakeAllowMusic)) {
                             policyFlags |= FLAG_WAKE;
                             policyFlags |= FLAG_WAKE_DROPPED;
                         } else if (mVolumeRockerWake.equals("disabled")) {
@@ -831,9 +841,10 @@ public class ModHwKeys {
                     int keyCode = (Integer) param.args[0];
                     if (!mVolumeRockerWake.equals("default") && 
                             (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ||
-                             keyCode == KeyEvent.KEYCODE_VOLUME_UP) &&
-                            !getAudioManager().isMusicActive()) {
-                        param.setResult(mVolumeRockerWake.equals("enabled") ? true : false);
+                             keyCode == KeyEvent.KEYCODE_VOLUME_UP)) {
+                        param.setResult(mVolumeRockerWake.equals("enabled") ? 
+                                (!getAudioManager().isMusicActive() || mVolumeRockerWakeAllowMusic) : 
+                                    false);
                     }
                 }
             });

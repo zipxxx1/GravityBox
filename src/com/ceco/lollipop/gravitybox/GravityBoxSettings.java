@@ -347,6 +347,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_HWKEY_KILL_DELAY = "pref_hwkey_kill_delay";
     public static final String PREF_CAT_HWKEY_VOLUME = "pref_cat_hwkey_volume";
     public static final String PREF_KEY_VOLUME_ROCKER_WAKE = "pref_volume_rocker_wake";
+    public static final String PREF_KEY_VOLUME_ROCKER_WAKE_ALLOW_MUSIC = "pref_volume_rocker_wake_allow_music";
     public static final String PREF_KEY_HWKEY_LOCKSCREEN_TORCH = "pref_hwkey_lockscreen_torch";
     public static final String PREF_CAT_KEY_HWKEY_ACTIONS_OTHERS = "pref_cat_hwkey_actions_others";
     public static final String PREF_KEY_VK_VIBRATE_PATTERN = "pref_virtual_key_vibrate_pattern";
@@ -390,6 +391,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_HWKEY_HOME_DOUBLETAP_DISABLE = "hwKeyHomeDoubletapDisable";
     public static final String EXTRA_HWKEY_HOME_LONGPRESS_KG = "hwKeyHomeLongpressKeyguard";
     public static final String EXTRA_VOLUME_ROCKER_WAKE = "volumeRockerWake";
+    public static final String EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC = "volumeRockerWakeAllowMusic";
     public static final String EXTRA_HWKEY_TORCH = "hwKeyTorch";
     public static final String EXTRA_VK_VIBRATE_PATTERN = "virtualKeyVubratePattern";
 
@@ -2137,6 +2139,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_VOLUME_ROCKER_WAKE)) {
                 mPrefVolumeRockerWake.setSummary(mPrefVolumeRockerWake.getEntry());
+                Preference p = findPreference(PREF_KEY_VOLUME_ROCKER_WAKE_ALLOW_MUSIC);
+                p.setEnabled("enabled".equals(mPrefVolumeRockerWake.getValue()));
             }
 
             if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_OMNI_MODE)) {
@@ -2584,6 +2588,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED);
                 intent.putExtra(EXTRA_VOLUME_ROCKER_WAKE,
                         prefs.getString(PREF_KEY_VOLUME_ROCKER_WAKE, "default"));
+            } else if (key.equals(PREF_KEY_VOLUME_ROCKER_WAKE_ALLOW_MUSIC)) {
+                intent.setAction(ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED);
+                intent.putExtra(EXTRA_VOLUME_ROCKER_WAKE_ALLOW_MUSIC,
+                        prefs.getBoolean(key, false));
             } else if (key.equals(PREF_KEY_HWKEY_LOCKSCREEN_TORCH)) {
                 intent.setAction(ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
                 intent.putExtra(EXTRA_HWKEY_TORCH, Integer.valueOf(

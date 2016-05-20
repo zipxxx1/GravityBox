@@ -2011,4 +2011,7 @@
     <string name="custom_image_success">Custom image set</string>
     <string name="custom_image_failure">Setting custom image failed</string>
 
+    <!-- Key actions: allow volume rocker wake when music active -->
+    <string name="pref_volume_rocker_wake_allow_music_title">Allow wake when music active</string>
+
 </resources>
