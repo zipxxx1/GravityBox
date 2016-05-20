@@ -1986,4 +1986,14 @@
     <string name="qs_tile_xperia_tethering">Xperia Tethering</string>
     <string name="qs_tile_xperia_detectusbdevice">Xperia Detect USB device</string>
 
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Icon style</string>
+    <string name="ncki_icon_style1">6-dot</string>
+    <string name="ncki_icon_style2">3-dot</string>
+    <string name="ncki_icon_style3">Transparent</string>
+    <string name="ncki_icon_style4">Custom</string>
+    <string name="pref_navbar_custom_key_image_title">Set custom image</string>
+    <string name="custom_image_success">Custom image set</string>
+    <string name="custom_image_failure">Setting custom image failed</string>
+
 </resources>

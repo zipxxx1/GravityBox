@@ -53,4 +53,8 @@
     <!-- QS DetailListAdapter -->
     <dimen name="qs_detail_empty_text_size">14sp</dimen>
 
+    <!-- Navbar custom key image dimensions -->
+    <dimen name="navbar_custom_key_image_width">20dp</dimen>
+    <dimen name="navbar_custom_key_image_height">22dp</dimen>
+
 </resources>
