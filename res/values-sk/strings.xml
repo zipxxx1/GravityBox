@@ -1772,4 +1772,14 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Zobraziť správu o stave</string>
 
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Štýl ikony</string>
+    <string name="ncki_icon_style1">6 bodov</string>
+    <string name="ncki_icon_style2">3 body</string>
+    <string name="ncki_icon_style3">Priehľadná</string>
+    <string name="ncki_icon_style4">Vlastná</string>
+    <string name="pref_navbar_custom_key_image_title">Nastaviť vlastnú ikonu</string>
+    <string name="custom_image_success">Vlastná ikona nastavená</string>
+    <string name="custom_image_failure">Nastavenie vlastnej ikony zlyhalo</string>
+
 </resources>

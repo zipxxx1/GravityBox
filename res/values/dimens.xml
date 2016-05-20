@@ -50,4 +50,8 @@
     <dimen name="caller_id_photo_width">180dp</dimen>
     <dimen name="caller_id_photo_height">320dp</dimen>
 
+    <!-- Navbar custom key image dimensions -->
+    <dimen name="navbar_custom_key_image_width">47dp</dimen>
+    <dimen name="navbar_custom_key_image_height">48dp</dimen>
+
 </resources>

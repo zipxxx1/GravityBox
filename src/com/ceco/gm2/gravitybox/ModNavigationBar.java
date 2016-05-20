@@ -15,6 +15,7 @@
 
 package com.ceco.gm2.gravitybox;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +29,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.res.XModuleResources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -104,12 +109,13 @@ public class ModNavigationBar {
     private static String mAutofadeShowKeysPolicy;
 
     // Custom key
+    private enum CustomKeyIconStyle { SIX_DOT, THREE_DOT, TRANSPARENT, CUSTOM };
     private static boolean mCustomKeyEnabled;
     private static Resources mResources;
     private static Context mGbContext;
     private static NavbarViewInfo[] mNavbarViewInfo = new NavbarViewInfo[2];
     private static boolean mCustomKeySwapEnabled;
-    private static boolean mCustomKeyAltIcon;
+    private static CustomKeyIconStyle mCustomKeyIconStyle;
 
     // Colors
     private static boolean mNavbarColorsEnabled;
@@ -206,9 +212,9 @@ public class ModNavigationBar {
                     mNavbarRingDisabled = intent.getBooleanExtra(
                             GravityBoxSettings.EXTRA_NAVBAR_RING_DISABLE, false);
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON)) {
-                    mCustomKeyAltIcon = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON, false);
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON_STYLE)) {
+                    mCustomKeyIconStyle = CustomKeyIconStyle.valueOf(intent.getStringExtra(
+                            GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ICON_STYLE));
                     updateCustomKeyIcon();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_AUTOFADE_KEYS)) {
@@ -433,7 +439,8 @@ public class ModNavigationBar {
                     } catch (Throwable t) {
                         log("Error getting resources for recents key. Clear all in navbar support disabled.");
                     }
-                    mCustomKeyAltIcon = prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ICON, false);
+                    mCustomKeyIconStyle = CustomKeyIconStyle.valueOf(prefs.getString(
+                            GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE, "SIX_DOT"));
 
                     mRecentAltIcon = res.getDrawable(mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
                             R.drawable.ic_sysbar_recent_clear_lollipop : R.drawable.ic_sysbar_recent_clear);
@@ -477,7 +484,6 @@ public class ModNavigationBar {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     final Context context = ((View) param.thisObject).getContext();
-                    final Resources gbRes = mGbContext.getResources();
                     final int backButtonResId = mResources.getIdentifier("back", "id", PACKAGE_NAME);
                     final int recentAppsResId = mResources.getIdentifier("recent_apps", "id", PACKAGE_NAME);
                     final int homeButtonResId = mResources.getIdentifier("home", "id", PACKAGE_NAME);
@@ -525,7 +531,7 @@ public class ModNavigationBar {
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setScaleType(ScaleType.FIT_CENTER);
                         appKey.setClickable(true);
-                        appKey.setImageDrawable(gbRes.getDrawable(getCustomKeyIconId()));
+                        appKey.setImageDrawable(getCustomKeyIconDrawable());
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
@@ -551,7 +557,7 @@ public class ModNavigationBar {
                     if (vRot != null) {
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setClickable(true);
-                        appKey.setImageDrawable(gbRes.getDrawable(getCustomKeyIconId()));
+                        appKey.setImageDrawable(getCustomKeyIconDrawable());
                         appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
@@ -1348,22 +1354,38 @@ public class ModNavigationBar {
 
     private static void updateCustomKeyIcon() {
         try {
-            Resources res = mGbContext.getResources();
             for (NavbarViewInfo nvi : mNavbarViewInfo) {
-                nvi.customKey.setImageDrawable(res.getDrawable(getCustomKeyIconId()));
+                nvi.customKey.setImageDrawable(getCustomKeyIconDrawable());
             }
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
     }
 
-    private static int getCustomKeyIconId() {
-        if (mLollipopIconStyle == LollipopIconStyle.ORIGINAL) {
-            return mCustomKeyAltIcon ?
-                    R.drawable.ic_sysbar_apps2_lollipop : R.drawable.ic_sysbar_apps_lollipop;
-        } else {
-            return mCustomKeyAltIcon ?
-                    R.drawable.ic_sysbar_apps2 : R.drawable.ic_sysbar_apps;
+    private static Drawable getCustomKeyIconDrawable() {
+        Resources res = mGbContext.getResources();
+        switch (mCustomKeyIconStyle) {
+            case CUSTOM:
+                File f = new File(mGbContext.getFilesDir() + "/navbar_custom_key_image");
+                if (f.exists() && f.canRead()) {
+                    Bitmap b = BitmapFactory.decodeFile(f.getAbsolutePath());
+                    if (b != null) {
+                        return new BitmapDrawable(mResources, b);
+                    }
+                }
+                // fall through to transparent if custom not available
+            case TRANSPARENT:
+                Drawable d = res.getDrawable(R.drawable.ic_sysbar_apps);
+                Drawable transD = new ColorDrawable(Color.TRANSPARENT);
+                transD.setBounds(0, 0, d.getMinimumWidth(), d.getMinimumHeight());
+                return transD;
+            case THREE_DOT: 
+                return res.getDrawable(mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
+                        R.drawable.ic_sysbar_apps2_lollipop : R.drawable.ic_sysbar_apps2);
+            case SIX_DOT:
+            default:
+                return res.getDrawable(mLollipopIconStyle == LollipopIconStyle.ORIGINAL ?
+                        R.drawable.ic_sysbar_apps_lollipop : R.drawable.ic_sysbar_apps);
         }
     }
 

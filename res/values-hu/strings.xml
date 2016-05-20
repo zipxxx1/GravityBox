@@ -1826,4 +1826,14 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Állapot üzenet mutatása</string>
 
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Ikon stílus</string>
+    <string name="ncki_icon_style1">6-pont</string>
+    <string name="ncki_icon_style2">3-pont</string>
+    <string name="ncki_icon_style3">Átlátszó</string>
+    <string name="ncki_icon_style4">Egyéni</string>
+    <string name="pref_navbar_custom_key_image_title">Egyéni kép beállítása</string>
+    <string name="custom_image_success">Egyéni kép beállítva</string>
+    <string name="custom_image_failure">Nem sikerült beállítani az egyéni képet</string>
+
 </resources>
