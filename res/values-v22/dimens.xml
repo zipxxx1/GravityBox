@@ -21,4 +21,8 @@
     <dimen name="percent_text_padding_left">0dp</dimen>
     <dimen name="percent_text_padding_right">4dp</dimen>
 
+    <!-- Navbar custom key image dimensions -->
+    <dimen name="navbar_custom_key_image_width">20dp</dimen>
+    <dimen name="navbar_custom_key_image_height">22dp</dimen>
+
 </resources>

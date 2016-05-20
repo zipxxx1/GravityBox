@@ -1274,11 +1274,17 @@
                     android:defaultValue="false"
                     android:dependency="pref_navbar_custom_key_enable" />
 
-                <CheckBoxPreference 
-                    android:key="pref_navbar_custom_key_icon"
-                    android:title="@string/pref_navbar_custom_key_icon_title"
-                    android:defaultValue="false"
+                <ListPreference 
+                    android:key="pref_navbar_custom_key_icon_style"
+                    android:title="@string/pref_navbar_custom_key_icon_style_title"
+                    android:entries="@array/ncki_icon_style_entries"
+                    android:entryValues="@array/ncki_icon_style_values"
+                    android:defaultValue="SIX_DOT"
                     android:dependency="pref_navbar_custom_key_enable" />
+
+                <Preference
+                    android:key="pref_navbar_custom_key_image"
+                    android:title="@string/pref_navbar_custom_key_image_title" />
 
             </PreferenceScreen>
 

@@ -17,6 +17,7 @@ package com.ceco.lollipop.gravitybox;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -85,6 +86,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Bitmap.CompressFormat;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class GravityBoxSettings extends Activity implements GravityBoxResultReceiver.Receiver {
@@ -563,7 +565,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS = "pref_navbar_custom_key_longpress";
     public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP = "pref_navbar_custom_key_doubletap";
     public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP = "pref_navbar_custom_key_swap";
-    public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_ICON = "pref_navbar_custom_key_icon";
+    public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE = "pref_navbar_custom_key_icon_style";
+    public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_IMAGE = "pref_navbar_custom_key_image";
     public static final String PREF_KEY_NAVBAR_SWAP_KEYS = "pref_navbar_swap_keys";
     public static final String PREF_KEY_NAVBAR_CURSOR_CONTROL = "pref_navbar_cursor_control";
     public static final String PREF_KEY_NAVBAR_COLOR_ENABLE = "pref_navbar_color_enable";
@@ -585,8 +588,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_KEY_GLOW_COLOR = "navbarKeyGlowColor";
     public static final String EXTRA_NAVBAR_CURSOR_CONTROL = "navbarCursorControl";
     public static final String EXTRA_NAVBAR_CUSTOM_KEY_SWAP = "navbarCustomKeySwap";
-    public static final String EXTRA_NAVBAR_CUSTOM_KEY_ICON = "navbarCustomKeyIcon";
     public static final String EXTRA_NAVBAR_RING_DISABLE = "navbarRingDisable";
+    public static final String EXTRA_NAVBAR_CUSTOM_KEY_ICON_STYLE = "navbarCustomKeyIconStyle";
     public static final String EXTRA_NAVBAR_AUTOFADE_KEYS = "navbarAutofadeKeys";
     public static final String EXTRA_NAVBAR_AUTOFADE_SHOW_KEYS = "navbarAutofadeShowKeys";
 
@@ -2308,6 +2311,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 p.setSummary(p.getEntry());
             }
 
+            if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE) ||
+                    key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE)) {
+                ListPreference p = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE);
+                p.setSummary(p.getEntry());
+                Preference p2 = findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_IMAGE);
+                p2.setEnabled(mPrefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false) &&
+                        "CUSTOM".equals(p.getValue()));
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -2793,10 +2805,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_SWAP,
                         prefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_SWAP, false));
-            } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ICON)) {
+            } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_ICON,
-                        prefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_ICON, false));
+                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_ICON_STYLE,
+                        prefs.getString(PREF_KEY_NAVBAR_CUSTOM_KEY_ICON_STYLE, "SIX_DOT"));
             } else if (key.equals(PREF_KEY_NAVBAR_SWAP_KEYS)) {
                 intent.setAction(ACTION_PREF_NAVBAR_SWAP_KEYS);
             } else if (key.equals(PREF_KEY_NAVBAR_CURSOR_CONTROL)) {
@@ -3367,6 +3379,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent = new Intent(ACTION_HEADS_UP_SNOOZE_RESET);
                 getActivity().sendBroadcast(intent);
                 return true;
+            } else if (PREF_KEY_NAVBAR_CUSTOM_KEY_IMAGE.equals(pref.getKey())) {
+                setNavbarCustomKeyImage();
             }
 
             if (intent != null) {
@@ -3462,6 +3476,36 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             startActivityForResult(intent, REQ_CALLER_PHOTO);
         }
 
+        private void setNavbarCustomKeyImage() {
+            int width = getResources().getDimensionPixelSize(R.dimen.navbar_custom_key_image_width);
+            int height = getResources().getDimensionPixelSize(R.dimen.navbar_custom_key_image_height);
+            pickIcon(width, height, new IconPickHandler() {
+                @Override
+                public void onIconPicked(Bitmap icon) {
+                    try {
+                        File target = new File(getActivity().getFilesDir() + "/navbar_custom_key_image");
+                        FileOutputStream fos = new FileOutputStream(target);
+                        if (icon.compress(CompressFormat.PNG, 100, fos)) {
+                            target.setReadable(true, false);
+                        }
+                        fos.close();
+                        Intent intent = new Intent(ACTION_PREF_NAVBAR_CHANGED);
+                        intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_ICON_STYLE, "CUSTOM");
+                        getActivity().sendBroadcast(intent);
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onIconPickCancelled() {
+                    Toast.makeText(getActivity(), R.string.app_picker_icon_pick_cancelled,
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
         public interface ShortcutHandler {
             Intent getCreateShortcutIntent();
             void onHandleShortcut(Intent intent, String name, Bitmap icon);
@@ -3483,16 +3527,19 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
         private IconPickHandler mIconPickHandler;
         public void pickIcon(int sizePx, IconPickHandler handler) {
+            pickIcon(sizePx, sizePx, handler);
+        }
+        public void pickIcon(int width, int height, IconPickHandler handler) {
             if (handler == null) return;
 
             mIconPickHandler = handler;
 
             Intent intent = new Intent(getActivity(), PickImageActivity.class);
             intent.putExtra(PickImageActivity.EXTRA_CROP, true);
-            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, sizePx);
-            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, sizePx);
-            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, sizePx);
-            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, sizePx);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_X, width);
+            intent.putExtra(PickImageActivity.EXTRA_ASPECT_Y, height);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_X, width);
+            intent.putExtra(PickImageActivity.EXTRA_OUTPUT_Y, height);
             intent.putExtra(PickImageActivity.EXTRA_SCALE, true);
             intent.putExtra(PickImageActivity.EXTRA_SCALE_UP, true);
             startActivityForResult(intent, REQ_ICON_PICK);
