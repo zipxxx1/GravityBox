@@ -1930,4 +1930,14 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Zobrazit stavovou zprávu</string>
 
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Styl ikony</string>
+    <string name="ncki_icon_style1">6 bodů</string>
+    <string name="ncki_icon_style2">3 body</string>
+    <string name="ncki_icon_style3">Průhledná</string>
+    <string name="ncki_icon_style4">Vlastní</string>
+    <string name="pref_navbar_custom_key_image_title">Nastavit vlastní ikonu</string>
+    <string name="custom_image_success">Vlastní ikona nastavena</string>
+    <string name="custom_image_failure">Nastavení vlastní ikony selhalo</string>
+
 </resources>

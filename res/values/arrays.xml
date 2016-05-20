@@ -1288,4 +1288,18 @@
         <item>SCREEN</item>
     </string-array>
 
+    <string-array name="ncki_icon_style_entries" translatable="false">
+        <item>@string/ncki_icon_style1</item>
+        <item>@string/ncki_icon_style2</item>
+        <item>@string/ncki_icon_style3</item>
+        <item>@string/ncki_icon_style4</item>
+    </string-array>
+
+    <string-array name="ncki_icon_style_values" translatable="false">
+        <item>SIX_DOT</item>
+        <item>THREE_DOT</item>
+        <item>TRANSPARENT</item>
+        <item>CUSTOM</item>
+    </string-array>
+
 </resources>

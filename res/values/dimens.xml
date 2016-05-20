@@ -53,4 +53,8 @@
     <!-- Quick Settings tile geometry: icon size -->
     <dimen name="qs_tile_icon_size">32dp</dimen>
 
+    <!-- Navbar custom key image dimensions -->
+    <dimen name="navbar_custom_key_image_width">47dp</dimen>
+    <dimen name="navbar_custom_key_image_height">48dp</dimen>
+
 </resources>

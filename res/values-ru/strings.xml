@@ -1992,4 +1992,14 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Показать сообщение о состоянии</string>
 
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Стиль значка</string>
+    <string name="ncki_icon_style1">6 точек</string>
+    <string name="ncki_icon_style2">3 точки</string>
+    <string name="ncki_icon_style3">Прозрачный</string>
+    <string name="ncki_icon_style4">Пользовательский</string>
+    <string name="pref_navbar_custom_key_image_title">Установить польз. изображение</string>
+    <string name="custom_image_success">Пользовательское установлено</string>
+    <string name="custom_image_failure">Ошибка установки пользовательского</string>
+
 </resources>

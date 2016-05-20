@@ -1992,4 +1992,14 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">显示状态消息</string>
 
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">图标风格</string>
+    <string name="ncki_icon_style1">6-点</string>
+    <string name="ncki_icon_style2">3-点</string>
+    <string name="ncki_icon_style3">透明</string>
+    <string name="ncki_icon_style4">自定义</string>
+    <string name="pref_navbar_custom_key_image_title">设置自定图像</string>
+    <string name="custom_image_success">设置自定义图像</string>
+    <string name="custom_image_failure">设置自定图像失败</string>
+
 </resources>

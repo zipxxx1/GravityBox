@@ -1722,4 +1722,14 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Zeige Statusnachricht</string>
 
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Stil des Symbols</string>
+    <string name="ncki_icon_style1">6 Punkte</string>
+    <string name="ncki_icon_style2">3 Punkte</string>
+    <string name="ncki_icon_style3">Transparent</string>
+    <string name="ncki_icon_style4">Eigenes</string>
+    <string name="pref_navbar_custom_key_image_title">Setze eigenes Bild</string>
+    <string name="custom_image_success">Benutzerdefiniertes Bild gesetzt</string>
+    <string name="custom_image_failure">Setzen des benutzerdefinierten Bildes fehlgeschlagen</string>
+
 </resources>
