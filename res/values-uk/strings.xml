@@ -56,7 +56,6 @@
     <string name="quick_settings_sync_off">Синхронізація вимкнена</string>
     <string name="quick_settings_torch_on">Ліхтарик увімкнений</string>
     <string name="quick_settings_torch_off">Ліхтарик вимкнений</string>
-    <string name="quick_settings_torch_off_notif">Натисніть для вимкнення</string>
     <string name="quick_settings_qr_playing">Відтворення&#8230;</string>
     <string name="quick_settings_qr_recording">Запис&#8230;</string>
     <string name="quick_settings_qr_recorded">Записано</string>

@@ -39,7 +39,6 @@
     <string name="quick_settings_sync_off">Sinc. desativada</string>
     <string name="quick_settings_torch_on">Lanterna ligada</string>
     <string name="quick_settings_torch_off">Lanterna desligada</string>
-    <string name="quick_settings_torch_off_notif">Tocar para desligar</string>
     <string name="quick_settings_qr_playing">A reproduzir&#8230;</string>
     <string name="quick_settings_qr_recording">A gravar&#8230;</string>
     <string name="quick_settings_qr_recorded">Gravado</string>

@@ -56,7 +56,6 @@
     <string name="quick_settings_sync_off">Szinkronizáció ki</string>
     <string name="quick_settings_torch_on">Zseblámpa be</string>
     <string name="quick_settings_torch_off">Zseblámpa ki</string>
-    <string name="quick_settings_torch_off_notif">Érintse meg a kikapcsoláshoz</string>
     <string name="quick_settings_qr_playing">Lejátszás&#8230;</string>
     <string name="quick_settings_qr_recording">Felvétel&#8230;</string>
     <string name="quick_settings_qr_recorded">Felvéve</string>

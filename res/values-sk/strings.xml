@@ -40,7 +40,6 @@
     <string name="quick_settings_sync_off">Synch vyp</string>
     <string name="quick_settings_torch_on">Svetlo zap</string>
     <string name="quick_settings_torch_off">Svetlo vyp</string>
-    <string name="quick_settings_torch_off_notif">Dotykom vypnete svetlo</string>
     <string name="quick_settings_qr_playing">Prehrávam&#8230;</string>
     <string name="quick_settings_qr_recording">Zaznamenávam&#8230;</string>
     <string name="quick_settings_qr_recorded">Zaznamenané</string>

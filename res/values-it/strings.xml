@@ -54,7 +54,6 @@
     <string name="quick_settings_sync_off">Sync Off</string>
     <string name="quick_settings_torch_on">Torcia Accesa</string>
     <string name="quick_settings_torch_off">Torcia Spenta</string>
-    <string name="quick_settings_torch_off_notif">Tocca per spegnere</string>
     <string name="quick_settings_qr_playing">In riproduzione&#8230;</string>
     <string name="quick_settings_qr_recording">Registrazione&#8230;</string>
     <string name="quick_settings_qr_recorded">Registrato</string>

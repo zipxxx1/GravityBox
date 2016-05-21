@@ -54,7 +54,6 @@
     <string name="quick_settings_sync_off">Sync kapalı</string>
     <string name="quick_settings_torch_on">Fener açık</string>
     <string name="quick_settings_torch_off">Fener kapalı</string>
-    <string name="quick_settings_torch_off_notif">Kapatmak için dokunun</string>
     <string name="quick_settings_qr_playing">Çalıyor&#8230;</string>
     <string name="quick_settings_qr_recording">Kaydediyor&#8230;</string>
     <string name="quick_settings_qr_recorded">Kaydedildi</string>

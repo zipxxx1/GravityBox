@@ -1507,7 +1507,6 @@ public class ModHwKeys {
         try {
             Intent intent = new Intent(mGbContext, TorchService.class);
             intent.setAction(TorchService.ACTION_TOGGLE_TORCH);
-            intent.putExtra(TorchService.EXTRA_GO_TO_SLEEP, goToSleep);
             mGbContext.startService(intent);
         } catch (Throwable t) {
             log("Error toggling Torch: " + t.getMessage());

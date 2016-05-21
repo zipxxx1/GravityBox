@@ -60,7 +60,6 @@
     <string name="quick_settings_sync_off">Συγχρονισμος Ανενεργος</string>
     <string name="quick_settings_torch_on">Φακος Ενεργος</string>
     <string name="quick_settings_torch_off">Φακος Ανενεργος</string>
-    <string name="quick_settings_torch_off_notif">Αγγιξτε για απενεργοποιηση</string>
     <string name="quick_settings_qr_playing">Αναπαραγωγη&#8230;</string>
     <string name="quick_settings_qr_recording">Καταγραφη&#8230;</string>
     <string name="quick_settings_qr_recorded">Καταγραφηκε</string>

@@ -56,7 +56,6 @@
     <string name="quick_settings_sync_off">Matikan penyegera</string>
     <string name="quick_settings_torch_on">Hidupkan lampu</string>
     <string name="quick_settings_torch_off">Matikan lampu</string>
-    <string name="quick_settings_torch_off_notif">Sentuh untuk tutup</string>
     <string name="quick_settings_qr_playing">Dimainkan&#8230;</string>
     <string name="quick_settings_qr_recording">Direkod&#8230;</string>
     <string name="quick_settings_qr_recorded">Telah direkod</string>

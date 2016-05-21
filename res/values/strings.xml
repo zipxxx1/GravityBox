@@ -56,7 +56,6 @@
     <string name="quick_settings_sync_off">Sync Off</string>
     <string name="quick_settings_torch_on">Torch On</string>
     <string name="quick_settings_torch_off">Torch Off</string>
-    <string name="quick_settings_torch_off_notif">Touch to turn off</string>
     <string name="quick_settings_qr_playing">Playing&#8230;</string>
     <string name="quick_settings_qr_recording">Recording&#8230;</string>
     <string name="quick_settings_qr_recorded">Recorded</string>
@@ -1998,5 +1997,8 @@
 
     <!-- Key actions: allow volume rocker wake when music active -->
     <string name="pref_volume_rocker_wake_allow_music_title">Allow wake when music active</string>
+
+    <!-- Turn off -->
+    <string name="turn_off">Turn off</string>
 
 </resources>

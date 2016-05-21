@@ -56,7 +56,6 @@
     <string name="quick_settings_sync_off">Đồng bộ Tắt</string>
     <string name="quick_settings_torch_on">Đèn pin Bật</string>
     <string name="quick_settings_torch_off">Đèn pin Tắt</string>
-    <string name="quick_settings_torch_off_notif">Chạm để tắt</string>
     <string name="quick_settings_qr_playing">Đang phát&#8230;</string>
     <string name="quick_settings_qr_recording">Đang ghi âm&#8230;</string>
     <string name="quick_settings_qr_recorded">Đã ghi âm</string>

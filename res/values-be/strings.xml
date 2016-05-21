@@ -56,7 +56,6 @@
     <string name="quick_settings_sync_off">Сінхранізацыя выключана</string>
     <string name="quick_settings_torch_on">Ліхтарык уключаны</string>
     <string name="quick_settings_torch_off">Ліхтарык выключаны</string>
-    <string name="quick_settings_torch_off_notif">Націсніце для вымыкання</string>
     <string name="quick_settings_qr_playing">Прайграванне&#8230;</string>
     <string name="quick_settings_qr_recording">Запіс&#8230;</string>
     <string name="quick_settings_qr_recorded">Запісана</string>

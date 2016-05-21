@@ -38,7 +38,6 @@
     <string name="quick_settings_sync_off">동기화 비활성화</string>
     <string name="quick_settings_torch_on">손전등이 켜짐</string>
     <string name="quick_settings_torch_off">손전등이 꺼짐</string>
-    <string name="quick_settings_torch_off_notif">터치하여 손전등을 끕니다.</string>
     <string name="quick_settings_qr_playing">&#8230; 재생 중</string>
     <string name="quick_settings_qr_recording">&#8230; 녹음 중</string>
     <string name="quick_settings_qr_recorded">녹음 완료</string>

@@ -54,7 +54,6 @@
     <string name="quick_settings_sync_off">Synkronisering Av</string>
     <string name="quick_settings_torch_on">Lommelykt På</string>
     <string name="quick_settings_torch_off">Lommelykt Av</string>
-    <string name="quick_settings_torch_off_notif">Trykk for å slå av</string>
     <string name="quick_settings_qr_playing">Spiller&#8230;</string>
     <string name="quick_settings_qr_recording">Tar opp&#8230;</string>
     <string name="quick_settings_qr_recorded">Opptak ferdig</string>

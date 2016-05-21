@@ -54,7 +54,6 @@
     <string name="quick_settings_sync_off">同步處理 關閉</string>
     <string name="quick_settings_torch_on">手電筒 開啟</string>
     <string name="quick_settings_torch_off">手電筒 關閉</string>
-    <string name="quick_settings_torch_off_notif">輕觸以關閉手電筒</string>
     <string name="quick_settings_qr_playing">播放中&#8230;</string>
     <string name="quick_settings_qr_recording">錄音中&#8230;</string>
     <string name="quick_settings_qr_recorded">已錄音</string>

@@ -54,7 +54,6 @@
     <string name="quick_settings_sync_off">סינכרון כבוי</string>
     <string name="quick_settings_torch_on">פנס מופעל</string>
     <string name="quick_settings_torch_off">פנס כבוי</string>
-    <string name="quick_settings_torch_off_notif">גע על מנת להפעיל</string>
     <string name="quick_settings_qr_playing">מנגן&#8230;</string>
     <string name="quick_settings_qr_recording">מקליט&#8230;</string>
     <string name="quick_settings_qr_recorded">הוקלט</string>

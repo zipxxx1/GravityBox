@@ -56,7 +56,6 @@
     <string name="quick_settings_sync_off">Sync aus</string>
     <string name="quick_settings_torch_on">Lampe an</string>
     <string name="quick_settings_torch_off">Lampe aus</string>
-    <string name="quick_settings_torch_off_notif">Drücken, um Lampe auszuschalten</string>
     <string name="quick_settings_qr_playing">Wiedergabe&#8230;</string>
     <string name="quick_settings_qr_recording">Aufnahme&#8230;</string>
     <string name="quick_settings_qr_recorded">Aufgenommen</string>

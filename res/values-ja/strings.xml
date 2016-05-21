@@ -44,7 +44,6 @@
     <string name="quick_settings_sync_off">同期オフ</string>
     <string name="quick_settings_torch_on">トーチオン</string>
     <string name="quick_settings_torch_off">トーチオフ</string>
-    <string name="quick_settings_torch_off_notif">タッチでオフにする</string>
     <string name="quick_settings_qr_playing">再生中&#8230;</string>
     <string name="quick_settings_qr_recording">録音中&#8230;</string>
     <string name="quick_settings_qr_recorded">録音しました</string>
