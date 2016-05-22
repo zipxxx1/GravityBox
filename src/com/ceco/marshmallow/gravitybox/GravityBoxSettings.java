@@ -1788,7 +1788,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         }
 
         private void checkPermissions() {
-            String[] perms = new String[] { permission.CAMERA, permission.READ_EXTERNAL_STORAGE,
+            String[] perms = new String[] { permission.READ_EXTERNAL_STORAGE,
                     permission.WRITE_EXTERNAL_STORAGE, permission.RECORD_AUDIO };
 
             List<String> reqPerms = new ArrayList<>();
