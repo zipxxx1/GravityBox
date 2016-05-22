@@ -656,6 +656,7 @@
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Časovač panela hlasitosti</string>
+    <string name="pref_volume_panel_timeout_summary">Nastavte 0 pre pôvodný časovač</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_silent">Prioritné</string>
@@ -1911,5 +1912,21 @@
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Zobraziť správu o stave</string>
+
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Štýl ikony</string>
+    <string name="ncki_icon_style1">6 bodov</string>
+    <string name="ncki_icon_style2">3 body</string>
+    <string name="ncki_icon_style3">Priehľadná</string>
+    <string name="ncki_icon_style4">Vlastná</string>
+    <string name="pref_navbar_custom_key_image_title">Nastaviť vlastnú ikonu</string>
+    <string name="custom_image_success">Vlastná ikona nastavená</string>
+    <string name="custom_image_failure">Nastavenie vlastnej ikony zlyhalo</string>
+
+    <!-- Key actions: allow volume rocker wake when music active -->
+    <string name="pref_volume_rocker_wake_allow_music_title">Povoliť prebudenie počas hudby</string>
+
+    <!-- Turn off -->
+    <string name="turn_off">Vypnúť</string>
 
 </resources>
