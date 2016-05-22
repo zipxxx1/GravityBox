@@ -1973,4 +1973,32 @@
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">显示状态消息</string>
     
+    <!-- Xperia tiles -->
+    <string name="qs_tile_xperia_sync">Xperia自动数据同步</string>
+    <string name="qs_tile_xperia_roaming">Xperia数据漫游</string>
+    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
+    <string name="qs_tile_xperia_lte">Xperia LTE</string>
+    <string name="qs_tile_xperia_datatraffic">Xperia移动数据</string>
+    <string name="qs_tile_xperia_screenmirroring">Xperia屏幕镜像</string>
+    <string name="qs_tile_xperia_throw">Xperia屏幕投射</string>
+    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
+    <string name="qs_tile_xperia_tethering">Xperia Tethering</string>
+    <string name="qs_tile_xperia_detectusbdevice">Xperia检测USB设备</string>
+
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">图标风格</string>
+    <string name="ncki_icon_style1">6-点</string>
+    <string name="ncki_icon_style2">3-点</string>
+    <string name="ncki_icon_style3">透明</string>
+    <string name="ncki_icon_style4">自定义</string>
+    <string name="pref_navbar_custom_key_image_title">设置自定图像</string>
+    <string name="custom_image_success">定义图像设置</string>
+    <string name="custom_image_failure">设置自定图像失败</string>
+
+    <!-- Key actions: allow volume rocker wake when music active -->
+    <string name="pref_volume_rocker_wake_allow_music_title">激活的音乐允许唤醒</string>
+
+    <!-- Turn off -->
+    <string name="turn_off">关掉</string>
+    
 </resources>
