@@ -1,3 +1,31 @@
+Changelog 6.1.2 - 22/05/2016
+--------------------------------------
+- Navbar: extended custom key icon style to allow transparent and custom icon
+- Key actions:
+--- keep screen off during power key torch
+--- added option to allow volume rocker wake while music is active
+--- brought back toast for auto-rotation change action
+- Media tweaks:
+--- fixed volume adjust when volume skip track enabled and screen is off
+--- adjusted volume panel timeout option to use slider
+--- apply volume panel timeout even if accessibility feedback is enabled
+- TorchService:
+--- reworked to use Camera2 API thus increased LED response
+--- adjusted to run only in case user actually uses GravityBox Torch feature
+- Xperia specific adjustments:
+--- improved support for Quick Settings tiles:
+------ all tiles are explicitly available in QS management although some of them may
+------ not be supported by particular device (thanks corrupt for testing)
+--- UNC: potential fix for notification Lockscreen visibility feature (untested)
+--- suppressed getFillColor errors appearing in xposed log 
+- Fixed SystemUI crash caused by navbar tweaks on Nvidia Shield
+- Fixed Lockscreen shortcuts on Zopo Speed 7 (and potentially other MediaTek devices)
+- Removed no longer needed permissions: Camera; Change WiFi state
+- Updated Hungarian translations (thanks to benjoe1)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Fixed offensive typo in Indonesian translations (thanks to ja-som)
+
 Changelog 6.1.1 - 23/04/2016
 --------------------------------------
 - Key actions: locskcreen torch extended to support power long-press (when screen is off)
