@@ -102,13 +102,8 @@ public class ModVolumePanel {
                     Context context = (Context) XposedHelpers.getObjectField(mVolumePanel, "mContext");
                     if (DEBUG) log("VolumePanel constructed; mVolumePanel set");
 
-                    mTimeout = 0;
-                    try {
-                        mTimeout = Integer.valueOf(prefs.getString(
-                                GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TIMEOUT, "0"));
-                    } catch (NumberFormatException nfe) {
-                        log("Invalid value for PREF_KEY_VOLUME_PANEL_TIMEOUT preference");
-                    }
+                    mTimeout = prefs.getInt(
+                            GravityBoxSettings.PREF_KEY_VOLUME_PANEL_TIMEOUT, 0);
 
                     prepareNotificationRow(context.getResources());
 
@@ -132,11 +127,8 @@ public class ModVolumePanel {
 
             XposedHelpers.findAndHookMethod(classVolumePanel, "computeTimeoutH", new XC_MethodHook() {
                 @Override
-                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    // there are different timeouts based on different conditions
-                    // modify only standard ones
-                    int timeout = (int)param.getResult();
-                    if (mTimeout != 0 && (timeout == 3000 || timeout == 5000)) {
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mTimeout != 0) {
                         param.setResult(mTimeout);
                     }
                 }

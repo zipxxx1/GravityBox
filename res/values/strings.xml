@@ -682,6 +682,7 @@
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Volume panel timeout</string>
+    <string name="pref_volume_panel_timeout_summary">Leave zero for default timeout</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_silent">Priority</string>
@@ -1579,9 +1580,6 @@
 
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Recents key double-tap action</string>
-
-    <!-- Volume panel: default timeout -->
-    <string name="volume_panel_timeout_default">Default</string>
 
     <!-- Tri state pref -->
     <string name="state_default">Default</string>

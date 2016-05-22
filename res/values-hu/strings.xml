@@ -1557,9 +1557,6 @@
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Nemrég használtak gomb dupla érintés művelete</string>
 
-	<!-- Volume panel: default timeout -->
-    <string name="volume_panel_timeout_default">Alapértelmezett</string>
-
     <!-- Tri state pref -->
     <string name="state_default">Alapértelmezett</string>
     <string name="state_enabled">Engedélyezve</string>

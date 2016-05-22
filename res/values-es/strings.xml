@@ -1577,9 +1577,6 @@
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Acción al tocar la tecla apps recientes</string>
 
-    <!-- Volume panel: default timeout -->
-    <string name="volume_panel_timeout_default">Predeterminado</string>
-
     <!-- Tri state pref -->
     <string name="state_default">Predeterminado</string>
     <string name="state_enabled">Activado</string>

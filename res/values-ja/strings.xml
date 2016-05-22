@@ -1287,8 +1287,6 @@
     <string name="hwkey_back_singletap_dialog_title">バックキータップアクション</string>
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">最近のアプリキーダブルタップアクション</string>
-    <!-- Volume panel: default timeout -->
-    <string name="volume_panel_timeout_default">デフォルト</string>
     <!-- Tri state pref -->
     <string name="state_default">デフォルト</string>
     <string name="state_enabled">有効</string>

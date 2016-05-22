@@ -1579,9 +1579,6 @@
 
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">最近任务键双击动作</string>
-    
-    <!-- Volume panel: default timeout -->
-    <string name="volume_panel_timeout_default">默认</string>
 
     <!-- Tri state pref -->
     <string name="state_default">默认</string>

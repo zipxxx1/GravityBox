@@ -1531,9 +1531,6 @@ se o tráfego de dados móveis atual excede o limite definido (Ajuste para 0 par
 
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Ação de toque simples da tecla de apps recentes</string>
-    
-     <!-- Volume panel: default timeout -->
-    <string name="volume_panel_timeout_default">Predefinido</string>
 
     <!-- Tri state pref -->
     <string name="state_default">Padrão</string>

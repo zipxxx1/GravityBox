@@ -1573,9 +1573,6 @@ ID транзакцыі ахвяравання PayPal. Спробавы перы
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Націск на кнопку "Нядаўнія"</string>
 
-    <!-- Volume panel: default timeout -->
-    <string name="volume_panel_timeout_default">Па змаўчанні</string>
-
     <!-- Tri state pref -->
     <string name="state_default">Па змаўчанні</string>
     <string name="state_enabled">Уключана</string>

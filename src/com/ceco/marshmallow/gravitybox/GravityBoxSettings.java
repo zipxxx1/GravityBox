@@ -308,7 +308,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_VOL_SWAP_KEYS = "pref_vol_swap_keys";
     public static final String PREF_KEY_VOLUME_PANEL_AUTOEXPAND = "pref_volume_panel_autoexpand";
     public static final String PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE = "pref_volume_adjust_vibrate_mute";
-    public static final String PREF_KEY_VOLUME_PANEL_TIMEOUT = "pref_volume_panel_timeout";
+    public static final String PREF_KEY_VOLUME_PANEL_TIMEOUT = "pref_volume_panel_timeout2";
     public static final String ACTION_PREF_VOLUME_PANEL_MODE_CHANGED = "gravitybox.intent.action.VOLUME_PANEL_MODE_CHANGED";
     public static final String EXTRA_AUTOEXPAND = "autoExpand";
     public static final String EXTRA_VIBRATE_MUTED = "vibrate_muted";
@@ -1248,7 +1248,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefDataTrafficDisplayMode;
         private CheckBoxPreference mPrefLinkVolumes;
         private CheckBoxPreference mPrefVolumePanelAutoexpand;
-        private ListPreference mPrefVolumePanelTimeout;
         private CheckBoxPreference mPrefHomeDoubletapDisable;
         private PreferenceScreen mPrefCatAppLauncher;
         private AppPickerPreference[] mPrefAppLauncherSlot;
@@ -1468,7 +1467,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefMusicVolumeStepsValue = (SeekBarPreference) findPreference(PREF_KEY_MUSIC_VOLUME_STEPS_VALUE);
             mPrefLinkVolumes = (CheckBoxPreference) findPreference(PREF_KEY_LINK_VOLUMES);
             mPrefVolumePanelAutoexpand = (CheckBoxPreference) findPreference(PREF_KEY_VOLUME_PANEL_AUTOEXPAND);
-            mPrefVolumePanelTimeout = (ListPreference) findPreference(PREF_KEY_VOLUME_PANEL_TIMEOUT);
             mPrefTranclucentDecor =  (ListPreference) findPreference(PREF_KEY_TRANSLUCENT_DECOR);
 
             mPrefExpandedDesktop = (ListPreference) findPreference(PREF_KEY_EXPANDED_DESKTOP);
@@ -2093,10 +2091,6 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefHwKeyLockscreenTorch.setSummary(mPrefHwKeyLockscreenTorch.getEntry());
             }
 
-            if (key == null || key.equals(PREF_KEY_VOLUME_PANEL_TIMEOUT)) {
-                mPrefVolumePanelTimeout.setSummary(mPrefVolumePanelTimeout.getEntry());
-            }
-
             if (key == null || key.equals(PREF_KEY_TRANSLUCENT_DECOR)) {
                 mPrefTranclucentDecor.setSummary(mPrefTranclucentDecor.getEntry());
             }
@@ -2598,8 +2592,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(EXTRA_VIBRATE_MUTED, prefs.getBoolean(PREF_KEY_VOLUME_ADJUST_VIBRATE_MUTE, false));
             } else if (key.equals(PREF_KEY_VOLUME_PANEL_TIMEOUT)) {
                 intent.setAction(ACTION_PREF_VOLUME_PANEL_MODE_CHANGED);
-                intent.putExtra(EXTRA_TIMEOUT, Integer.valueOf(
-                        prefs.getString(PREF_KEY_VOLUME_PANEL_TIMEOUT, "0")));
+                intent.putExtra(EXTRA_TIMEOUT, prefs.getInt(key, 0));
             } else if (key.equals(PREF_KEY_LINK_VOLUMES)) {
                 intent.setAction(ACTION_PREF_LINK_VOLUMES_CHANGED);
                 intent.putExtra(EXTRA_LINKED,

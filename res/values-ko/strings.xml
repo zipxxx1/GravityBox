@@ -1249,8 +1249,6 @@
 
     <string name="hwkey_recents_doubletap_dialog_title">최근 앱 키 두 번 터치 액션</string>
 
-    <string name="volume_panel_timeout_default">기본</string>
-
     <string name="state_default">기본값</string>
     <string name="state_enabled">활성화</string>
     <string name="state_disabled">비활성화</string>

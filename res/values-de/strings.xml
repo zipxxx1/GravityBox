@@ -1561,9 +1561,6 @@
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Multitask-Taste doppelt antippen</string>
 
-    <!-- Volume panel: default timeout -->
-    <string name="volume_panel_timeout_default">Standard</string>
-
     <!-- Tri state pref -->
     <string name="state_default">Standard</string>
     <string name="state_enabled">Aktiviert</string>

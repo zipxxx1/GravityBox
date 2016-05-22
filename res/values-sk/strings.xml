@@ -1549,9 +1549,6 @@
     <!-- Key actions: double-tap for recents button -->
     <string name="hwkey_recents_doubletap_dialog_title">Dvojité ťuknutie na tlačidlo zoznamu aplikácíí</string>
 
-    <!-- Volume panel: default timeout -->
-    <string name="volume_panel_timeout_default">Pôvodný</string>
-
     <!-- Tri state pref -->
     <string name="state_default">Pôvodné nastavenie</string>
     <string name="state_enabled">Zapnúť</string>
