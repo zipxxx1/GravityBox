@@ -682,6 +682,7 @@
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Hangerő panel időtúllépés</string>
+    <string name="pref_volume_panel_timeout_summary">Hagyd 0 értéken alapértelmezett időtúllépéshez</string>
 
     <!-- Ringer tile modes -->
     <string name="ringer_mode_silent">Prioritást élvező</string>
@@ -1929,5 +1930,33 @@
 
     <!-- Shortcut: Show toast option -->
     <string name="shortcut_show_toast">Állapot üzenet mutatása</string>
+    
+    <!-- Xperia tiles -->
+    <string name="qs_tile_xperia_sync">Xperia Adat auto-szink.</string>
+    <string name="qs_tile_xperia_roaming">Xperia Adat roaming</string>
+    <string name="qs_tile_xperia_nfc">Xperia NFC</string>
+    <string name="qs_tile_xperia_lte">Xperia LTE</string>
+    <string name="qs_tile_xperia_datatraffic">Xperia Mobil adatátvitel</string>
+    <string name="qs_tile_xperia_screenmirroring">Xperia Képernyő tükrözés</string>
+    <string name="qs_tile_xperia_throw">Xperia Throw</string>
+    <string name="qs_tile_xperia_volte">Xperia VoLTE</string>
+    <string name="qs_tile_xperia_tethering">Xperia Megosztás</string>
+    <string name="qs_tile_xperia_detectusbdevice">Xperia USB eszköz keresés</string>
+
+    <!-- Navbar custom key icon style -->
+    <string name="pref_navbar_custom_key_icon_style_title">Ikon stílus</string>
+    <string name="ncki_icon_style1">6-pont</string>
+    <string name="ncki_icon_style2">3-pont</string>
+    <string name="ncki_icon_style3">Átlátszó</string>
+    <string name="ncki_icon_style4">Egyéni</string>
+    <string name="pref_navbar_custom_key_image_title">Egyéni kép beállítása</string>
+    <string name="custom_image_success">Egyéni kép beállítva</string>
+    <string name="custom_image_failure">Nem sikerült beállítani az egyéni képet</string>
+
+    <!-- Key actions: allow volume rocker wake when music active -->
+    <string name="pref_volume_rocker_wake_allow_music_title">Ébresztés engedélyezése aktív zenelejátszáskor</string>
+
+    <!-- Turn off -->
+    <string name="turn_off">Kikapcsol</string>
     
 </resources>
