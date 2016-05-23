@@ -1690,8 +1690,9 @@
     <string name="direct_unlock_see_through">Átlátható - billentyűzár mutatva</string>
 
     <!-- UNC: Notification visibility -->
-    <string name="pref_lc_notif_visibility_title">Láthatóság</string>
-    <string name="pref_lc_notif_visibility_summary">Meghatározza az értesítés láthatóságát zárolt zárképernyőnél. Bekapcsolt "Tartalom érzékeny értesítés elrejtés" zárképernyő házirendre vonatkozik</string>
+    <string name="pref_cat_lc_visibility_title">Láthatóság</string>
+    <string name="pref_lc_notif_visibility_title">Tartalom láthatósága</string>
+    <string name="pref_lc_notif_visibility_summary">Meghatározza az értesítés tartalmának láthatóságát zárolt zárképernyőnél. Bekapcsolt "Tartalom érzékeny értesítés elrejtés" zárképernyő házirendre vonatkozik</string>
     <string name="lc_notif_visibility_default">Alapértelmezett</string>
     <string name="lc_notif_visibility_public">Minden tartalom megjelenítése</string>
     <string name="lc_notif_visibility_private">Érzékeny tartalom elrejtése</string>
@@ -1847,5 +1848,117 @@
 
     <!-- Lockscreen: Smart unlock policy -->
     <string name="pref_lockscreen_smart_unlock_policy_title">Okos feloldási házirend</string>
+    
+    <!-- BatteryPercentText position -->
+    <string name="pref_battery_percent_text_position_title">Pozíció az állapotsávon</string>
+    <string name="pref_battery_percent_text_position_summary">Újraindítás szükséges</string>
+    <string name="battery_percent_text_position_right">Akkumulátor ikontól jobbra</string>
+    <string name="battery_percent_text_position_left">Akkumulátor ikontól balra</string>
+
+    <!-- UNC: Vibrations replace mode -->
+    <string name="pref_lc_vibrate_replace_title">Eredeti rezgés lecserélése</string>
+    <string name="pref_lc_vibrate_replace_summary">Csak arra az esetre vonatkozik, ha az eredeti üzenetnek is van rezgése</string>
+
+    <!-- UNC: Sound replace mode -->
+    <string name="pref_lc_sound_replace_title">Eredeti hang lecserélése</string>
+    <string name="pref_lc_sound_replace_summary">Csak arra az esetre vonatkozik, ha az eredeti üzenetnek is van hangja</string>
+
+    <!-- Battery tile options -->
+    <string name="pref_battery_tile_temp_title">Hőmérséklet mutatása</string>
+    <string name="pref_battery_tile_voltage_title">Feszültségi érték mutatása</string>
+
+    <!-- QS: Scale correction -->
+    <string name="pref_qs_scale_correction_title">Mérték korrekció</string>
+
+    <!-- MTK tiles: Timeout -->
+    <string name="qs_tile_timeout">Időkorlát</string>
+
+    <!-- UNC: Notification lock screen visibility -->
+    <string name="pref_lc_notif_visibility_ls_title">Láthatóság zárképernyőn</string>
+    <string name="lc_notif_visibility_ls_default">Alapértelmezett</string>
+    <string name="lc_notif_visibility_ls_clearable">Törölhető értesítések elrejtése</string>
+    <string name="lc_notif_visibility_ls_persistent">Állandó értesítések elrejtése</string>
+    <string name="lc_notif_visibility_ls_all">Összes értesítés elrejtése</string>
+
+    <!-- UNC: Hide persistent notifications -->
+    <string name="pref_lc_notif_hide_persistent_title">Állandó értesítések elrejtése</string>
+    <string name="pref_lc_notif_hide_persistent_summary">Elrejti az összes folyamatban lévő és egyéb nem törölhető értestéseket, ami ettől az alkalmazástól érkezik</string>
+
+    <!-- Navbar: Auto-fade keys -->
+    <string name="pref_navbar_autofade_keys_title">Gombok auto-úsztatása</string>
+    <string name="pref_navbar_autofade_keys_summary">Gombok automtaikus úsztatása meghatározott időkorlát lejárata után. Letiltáshoz állíts be 0-t.</string>
+    <string name="pref_navbar_autofade_show_keys_title">Gombok mutatása bekapcsolva</string>
+    <string name="autofade_show_keys_navbar">Navigációs sáv érintésre</string>
+    <string name="autofade_show_keys_screen">Képernyő érintésre</string>
+
+    <!-- QS: StayAwake tile Auto-reset -->
+    <string name="pref_sa_tile_auto_reset_title">Auto-visszaállítás</string>
+    <string name="pref_sa_tile_auto_reset_summary">Automatikusan beállítja az alapértelmezett képernyő időkorlátot a képernyő kikapcsolásakor</string>
+
+    <!-- Lockscreen: PIN scramble -->
+    <string name="pref_lockscreen_pin_sramble_title">PIN összekeverés</string>
+    <string name="pref_lockscreen_pin_sramble_summary">Összekeveri a PIN számokat az eszköz feloldásakor</string>
+
+    <!-- UNC: LED DND -->
+    <string name="pref_lc_led_dnd_title">Ne zavarjon</string>
+    <string name="pref_lc_led_dnd_summary">LED kikapcsolása a kiválasztott Ne zavarj üzemmódokban</string>
+    <string name="pref_lc_led_dnd_dialog_title">Válaszd ki, hogy melyik Ne zavarj üzemmód tartsa a LED-et kikacsolva</string>
+    <string name="dnd_priority_interruptions">Prioritás megszakítások</string>
+    <string name="dnd_no_interruptions">Nincsenek megszakítások</string>
+
+    <!-- WiFi shortcut -->
+    <string name="wifi_on">WiFi be</string>
+    <string name="wifi_off">WiFi ki</string>
+
+    <!-- Airplane mode shortcut -->
+    <string name="airplane_mode_on">Repülőgép üzemmód be</string>
+    <string name="airplane_mode_off">Repülőgép üzemmód ki</string>
+
+    <!-- Autobrightness mode shortcut -->
+    <string name="autobrightness_on">Automatikus fényerő be</string>
+    <string name="autobrightness_off">Automatikus fényerő ki</string>
+
+    <!-- Bluetooth shortcut -->
+    <string name="bluetooth_on">Bluetooth be</string>
+    <string name="bluetooth_off">Bluetooth ki</string>
+
+    <!-- Expanded desktop shortcut -->
+    <string name="expanded_desktop_on">Kiterjesztett asztal be</string>
+    <string name="expanded_desktop_off">Kiterjesztett asztal ki</string>
+
+    <!-- Mobile data shortcut -->
+    <string name="mobile_data_on">Mobil adatátvitel be</string>
+    <string name="mobile_data_off">Mobil adatátvitel ki</string>
+
+    <!-- NGC shortcut -->
+    <string name="nfc_on">NFC be</string>
+    <string name="nfc_off">NFC ki</string>
+
+    <!-- Quiet hours shortcut -->
+    <string name="quiet_hours_on">Csendes időszak be</string>
+    <string name="quiet_hours_off">Csendes időszak ki</string>
+    <string name="quiet_hours_auto">Automatikus Csendes időszak</string>
+
+    <!-- Auto rotation shortcut -->
+    <string name="auto_rotation_on">Automatikus elforgatás be</string>
+    <string name="auto_rotation_off">Automatikus elforgatás ki</string>
+
+    <!-- Smart radio shortcut -->
+    <string name="smart_radio_on">Okos rádiókapcsolat be</string>
+    <string name="smart_radio_off">Okos rádiókapcsolat ki</string>
+
+    <!-- Sync shortcut -->
+    <string name="sync_on">Szinkronicázió be</string>
+    <string name="sync_off">Szinkronicázió ki</string>
+
+    <!-- Hotspot shortcut -->
+    <string name="hotspot_on">Hotspot be</string>
+    <string name="hotspot_off">Hotspot ki</string>
+
+    <!-- Statusbar: Hide vibrate icon -->
+    <string name="pref_sb_hide_vibrate_icon_title">Rezgés ikon elrejtése</string>
+
+    <!-- Shortcut: Show toast option -->
+    <string name="shortcut_show_toast">Állapot üzenet mutatása</string>
 
 </resources>
