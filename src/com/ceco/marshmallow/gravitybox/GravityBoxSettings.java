@@ -842,6 +842,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NM_TILE_ENABLED_MODES = "nmTileEnabledModes";
     public static final String EXTRA_NM_TILE_QUICK_MODE = "nmTileQuickMode";
 
+    public static final String PREF_KEY_FORCE_AOSP = "pref_force_aosp";
+
     // MTK fixes
     public static final String PREF_CAT_KEY_MTK_FIXES = "pref_cat_mtk_fixes";
     public static final String PREF_KEY_MTK_FIX_DEV_OPTS = "pref_mtk_fix_dev_opts";
@@ -2311,6 +2313,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                         "CUSTOM".equals(p.getValue()));
             }
 
+            if (key == null || key.equals(PREF_KEY_FORCE_AOSP)) {
+                CheckBoxPreference p = (CheckBoxPreference) findPreference(PREF_KEY_FORCE_AOSP);
+                p.setChecked(Utils.isAospForced());
+            }
+
             for (String caKey : customAppKeys) {
                 ListPreference caPref = (ListPreference) findPreference(caKey);
                 if ((caKey + "_custom").equals(key) && mPrefCustomApp.getValue() != null) {
@@ -3372,6 +3379,20 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.putExtra(LedMainActivity.EXTRA_TRIAL_COUNTDOWN, sSystemProperties.uncTrialCountdown);
             } else if (PREF_KEY_NAVBAR_CUSTOM_KEY_IMAGE.equals(pref.getKey())) {
                 setNavbarCustomKeyImage();
+            } else if (PREF_KEY_FORCE_AOSP.equals(pref.getKey())) {
+                File file = new File(Utils.AOSP_FORCED_FILE_PATH);
+                if (((CheckBoxPreference)pref).isChecked()) {
+                    if (!file.exists()) {
+                        try {
+                            file.createNewFile();
+                            file.setReadable(true, false);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else if (file.exists()) {
+                    file.delete();
+                }
             }
 
 //            else if (PREF_KEY_HEADS_UP_SNOOZE_RESET.equals(pref.getKey())) {

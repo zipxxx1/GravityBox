@@ -66,6 +66,9 @@ public class Utils {
     private static final String TAG = "GB:Utils";
     private static final boolean DEBUG = false;
 
+    public static final String AOSP_FORCED_FILE_PATH = 
+            "/data/data/com.ceco.marshmallow.gravitybox/files/aosp_forced";
+
     // Device types
     private static final int DEVICE_PHONE = 0;
     private static final int DEVICE_HYBRID = 1;
@@ -158,33 +161,41 @@ public class Utils {
 
     public static enum TriState { DEFAULT, ENABLED, DISABLED };
 
+    /**
+     * Pay attention to isAospForced() when called from Zygote!
+     */
     public static boolean isMtkDevice() {
-        if (mIsMtkDevice != null) return mIsMtkDevice;
-
-        mIsMtkDevice = Build.HARDWARE.toLowerCase(Locale.US).matches("^mt[68][1-9][1-9][1-9]$") &&
+        if (mIsMtkDevice == null) {
+            mIsMtkDevice = Build.HARDWARE.toLowerCase(Locale.US).matches("^mt[68][1-9][1-9][1-9]$") &&
                 !isMotoXtDevice();
-        return mIsMtkDevice;
+        }
+        return (mIsMtkDevice && !isAospForced());
     }
 
+    /**
+     * Pay attention to isAospForced() when called from Zygote!
+     */
     public static boolean isXperiaDevice() {
-        if (mIsXperiaDevice != null) return mIsXperiaDevice;
-
-        boolean isXperiaDevice = Build.MANUFACTURER.equalsIgnoreCase("sony")
+        if (mIsXperiaDevice == null) {
+            mIsXperiaDevice = Build.MANUFACTURER.equalsIgnoreCase("sony")
                 && !isMtkDevice() && !isGpeDevice();
-
-        return (mIsXperiaDevice = isXperiaDevice);
+        }
+        return (mIsXperiaDevice && !isAospForced());
     }
 
+    /**
+     * Pay attention to isAospForced() when called from Zygote!
+     */
     public static boolean isMotoXtDevice() {
-        if (mIsMotoXtDevice != null) return mIsMotoXtDevice;
-
-        String model = Build.MODEL.toLowerCase(Locale.US);
-        mIsMotoXtDevice = Build.MANUFACTURER.equalsIgnoreCase("motorola") &&
-                (model.startsWith("xt") ||
-                 model.contains("razr") ||
-                 model.contains("moto")) &&
-                 !isGpeDevice();
-        return mIsMotoXtDevice;
+        if (mIsMotoXtDevice == null) {
+            String model = Build.MODEL.toLowerCase(Locale.US);
+            mIsMotoXtDevice = Build.MANUFACTURER.equalsIgnoreCase("motorola") &&
+                    (model.startsWith("xt") ||
+                     model.contains("razr") ||
+                     model.contains("moto")) &&
+                     !isGpeDevice();
+        }
+        return (mIsMotoXtDevice && !isAospForced());
     }
 
     public static boolean isFalconAsiaDs() {
@@ -202,6 +213,13 @@ public class Utils {
                 || productName.contains("ged") || productName.contains("gpe") ||
                 productName.contains("aosp");
         return mIsGpeDevice;
+    }
+
+    /**
+     * NOTE: Always returns false when called from Zygote!
+     */
+    public static boolean isAospForced() {
+        return (new File(AOSP_FORCED_FILE_PATH).exists());
     }
 
     public static boolean isExynosDevice() {
