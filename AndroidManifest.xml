@@ -16,8 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ceco.marshmallow.gravitybox"
-    android:versionCode="614"
-    android:versionName="6.1.2" >
+    android:versionCode="615"
+    android:versionName="6.1.3" >
 
     <uses-sdk
         android:minSdkVersion="23"
