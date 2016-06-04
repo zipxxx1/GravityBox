@@ -1,3 +1,21 @@
+Changelog 5.4.2 - 04/06/2016
+--------------------------------------
+- Navigation bar tweaks: 
+--- fixed menu key responsiveness for low navbar sizes
+--- extended custom key icon style to allow transparent and custom icon
+- Key actions:
+--- locskcreen torch extended to support power long-press (Android 5.1 only)
+--- added option to allow volume rocker wake while music is active
+--- brought back toast for auto-rotation change action
+- Media tweaks: fixed volume adjust when volume skip track enabled and screen is off
+- Ultimate notification control:
+--- potential fix for notification Lockscreen visibility feature on Xperia devices (untested)
+--- adjusted LED on/off duration limits
+- Updated Ukrainian translations (thanks to burunduk)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Russian translations (thanks to gaich)
+- Updated Hungarian translations (thanks to benjoe1)
+
 Changelog 5.4.1 - 21/04/2016
 --------------------------------------
 - GB Actions extended:
