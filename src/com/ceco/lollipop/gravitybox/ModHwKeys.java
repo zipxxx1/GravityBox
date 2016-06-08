@@ -907,16 +907,18 @@ public class ModHwKeys {
                     }
                 });
 
-                XposedHelpers.findAndHookMethod(classPhoneWindowManager, "interceptPowerKeyUp",
-                        KeyEvent.class, boolean.class, boolean.class, new XC_MethodHook() {
+                XposedBridge.hookAllMethods(classPhoneWindowManager, "interceptPowerKeyUp",
+                        new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         if (mPostponeWakeUpOnPowerKeyUpEventTime > 0) {
                             Handler h = (Handler) XposedHelpers.getObjectField(
                                     param.thisObject, "mHandler");
                             h.removeMessages(MSG_POWER_LONG_PRESS);
-                            XposedHelpers.callMethod(param.thisObject, "wakeUpFromPowerKey",
-                                    mPostponeWakeUpOnPowerKeyUpEventTime);
+                            Method m = classPhoneWindowManager.getDeclaredMethod(
+                                    "wakeUpFromPowerKey", long.class);
+                            m.setAccessible(true);
+                            m.invoke(param.thisObject, mPostponeWakeUpOnPowerKeyUpEventTime);
                             mPostponeWakeUpOnPowerKeyUpEventTime = 0;
                         }
                     }
