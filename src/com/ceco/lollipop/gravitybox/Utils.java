@@ -189,7 +189,7 @@ public class Utils {
     public static boolean isFalconAsiaDs() {
         if (mIsFalconAsiaDs != null) return mIsFalconAsiaDs;
 
-        mIsFalconAsiaDs = isMotoXtDevice() && "falcon_asia_ds".equals(Build.PRODUCT);
+        mIsFalconAsiaDs = isMotoXtDevice() && (Build.PRODUCT.equalsIgnoreCase("falcon_asia_ds") || Build.PRODUCT.equalsIgnoreCase("falcon_retbr_ds"));
         return mIsFalconAsiaDs;
     }
 
